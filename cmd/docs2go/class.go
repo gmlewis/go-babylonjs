@@ -16,6 +16,7 @@ var (
 )
 
 type classes struct {
+	m map[string]*ClassHTML
 }
 
 func (c *classes) walker() filepath.WalkFunc {
@@ -31,15 +32,15 @@ func (c *classes) walker() filepath.WalkFunc {
 
 		filename := filepath.Base(path)
 		if !strings.HasPrefix(filename, "babylon.") {
-			log.Printf("Unknown filename %v, skipping", path)
+			logf("Unknown filename %v, skipping", path)
 			return nil
 		}
 		if strings.HasPrefix(filename, "babylon._") {
-			log.Printf("Skipping private class %v", path)
+			logf("Skipping private class %v", path)
 			return nil
 		}
 
-		log.Printf("\n\nProcessing %v ...", filename)
+		logf("\n\nProcessing %v ...", filename)
 
 		buf, err := ioutil.ReadFile(path)
 		check("ReadFile: %v", err)
@@ -64,8 +65,18 @@ func (c *classes) walker() filepath.WalkFunc {
 			for _, section := range div.Sections {
 				switch t := section.Type(); t {
 				case "tsd-comment":
-					html.Summary = section.Lead.InnerXML
-					html.Description = section.Description.InnerXML
+					lines := strings.Split(section.Lead.InnerXML, "\n")
+					for i, v := range lines {
+						lines[i] = strings.TrimSpace(v)
+					}
+					html.Summary = strings.Join(lines, "\n// ")
+
+					lines = strings.Split(section.Description.InnerXML, "\n")
+					for i, v := range lines {
+						lines[i] = strings.TrimSpace(v)
+					}
+					html.Description = strings.Join(lines, "\n// ")
+
 					html.SeeURL = section.SeeURL.InnerXML
 				case "tsd-hierarchy":
 					for _, v := range section.ListItems {
@@ -80,7 +91,7 @@ func (c *classes) walker() filepath.WalkFunc {
 					}
 				case "tsd-index-group":
 					for _, indexSection := range section.IndexSections {
-						log.Printf("%v: indexSection=%v: %v", t, indexSection.Type(), indexSection.ListItems)
+						logf("%v: indexSection=%v: %v", t, indexSection.Type(), indexSection.ListItems)
 					}
 				case "tsd-member-group": // TODO: Parse this for Constructors, Properties, and Methods
 				case "tsd-is-not-exported": // ignore
@@ -93,13 +104,15 @@ func (c *classes) walker() filepath.WalkFunc {
 			}
 		}
 
-		log.Printf("html.Name=%v", html.Name)
-		log.Printf("html.Summary=%v", html.Summary)
-		log.Printf("html.Description=%v", html.Description)
-		log.Printf("html.SeeURL=%v", html.SeeURL)
-		log.Printf("html.Parents=%v", html.Parents)
-		log.Printf("html.Children=%v", html.Children)
-		log.Printf("html.Implements=%v", html.Implements)
+		logf("html.Name=%v", html.Name)
+		logf("html.Summary=%v", html.Summary)
+		logf("html.Description=%v", html.Description)
+		logf("html.SeeURL=%v", html.SeeURL)
+		logf("html.Parents=%v", html.Parents)
+		logf("html.Children=%v", html.Children)
+		logf("html.Implements=%v", html.Implements)
+
+		c.m[html.Name] = html
 
 		return nil
 	}
