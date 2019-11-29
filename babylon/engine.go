@@ -19,7 +19,7 @@ func EngineFromJSObject(p js.Value) *Engine {
 	return &Engine{ThinEngineFromJSObject(p)}
 }
 
-func (b *Babylon) NewEngine(canvas Canvas, antialias bool) *Engine {
+func (b *Babylon) NewEngine(canvas js.Value, antialias bool) *Engine {
 	p := b.ctx.Get("Engine").New(canvas, antialias)
 	return EngineFromJSObject(p)
 }

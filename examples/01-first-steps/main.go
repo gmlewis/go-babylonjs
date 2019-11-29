@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"math"
 	"syscall/js"
 
@@ -10,7 +11,8 @@ import (
 func main() {
 	window := js.Global().Get("window")
 	doc := js.Global().Get("document")
-	canvas := babylon.Canvas(doc.Call("getElementById", "renderCanvas")) // Get the canvas element
+	canvas := doc.Call("getElementById", "renderCanvas") // Get the canvas element
+	log.Printf("window=%T=%v, doc=%T=%v, canvas=%T=%v", window, window, doc, doc, canvas, canvas)
 
 	b := babylon.New()
 

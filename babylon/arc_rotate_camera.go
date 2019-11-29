@@ -28,5 +28,6 @@ func (b *Babylon) NewArcRotateCamera(name string, alpha , beta,  radius float64,
 }
 
 
-func (a *ArcRotateCamera) AttachControl(canvas Canvas, b bool) {
+func (a *ArcRotateCamera) AttachControl(canvas js.Value, b bool) {
+	a.p.Call("attachControl", canvas, b)
 }
