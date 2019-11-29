@@ -90,11 +90,30 @@ func (c *classes) walker() filepath.WalkFunc {
 						html.Implements = append(html.Implements, v.InnerXML)
 					}
 				case "tsd-index-group":
-					for _, indexSection := range section.IndexSections {
-						logf("%v: indexSection=%v: %v", t, indexSection.Type(), indexSection.ListItems)
+					// for _, indexSection := range section.IndexSections {
+					// 	logf("%v: indexSection=%v: %v", t, indexSection.Type(), indexSection.ListItems)
+					// }
+				case "tsd-member-group": // ignore
+				case "tsd-is-not-exported": // TODO: Parse this for Constructors, Properties, and Methods
+					for _, v := range section.ConstructorsAndMethods {
+						if !strings.Contains(v.Class, "tsd-signature") {
+							continue
+						}
+						switch section.H2.InnerXML {
+						case "Constructors":
+							html.ConstructorNames = append(html.ConstructorNames, v.Name())
+						case "Methods":
+							html.MethodNames = append(html.MethodNames, v.Name())
+						default:
+							log.Fatalf("%v: unknown ConstructorsAndMethods: h2=%v", filename, section.H2)
+						}
 					}
-				case "tsd-member-group": // TODO: Parse this for Constructors, Properties, and Methods
-				case "tsd-is-not-exported": // ignore
+					for _, v := range section.Properties {
+						if !strings.Contains(v.Class, "tsd-signature") {
+							continue
+						}
+						html.PropertyNames = append(html.PropertyNames, v.Name())
+					}
 				case "tsd-is-inherited": // ignore
 				case "tsd-type-parameters": // ignore
 				case "tsd-parent-kind-module": // ignore
@@ -111,6 +130,9 @@ func (c *classes) walker() filepath.WalkFunc {
 		logf("html.Parents=%v", html.Parents)
 		logf("html.Children=%v", html.Children)
 		logf("html.Implements=%v", html.Implements)
+		logf("html.ConstructorNames=%v", html.ConstructorNames)
+		logf("html.MethodNames=%v", html.MethodNames)
+		logf("html.PropertyNames=%v", html.PropertyNames)
 
 		c.m[html.Name] = html
 
@@ -122,13 +144,16 @@ type ClassHTML struct {
 	Title InnerXML `xml:"head>title"`
 	Div   []*Div   `xml:"body>div"`
 
-	Name        string   `xml:"-"`
-	Summary     string   `xml:"-"`
-	Description string   `xml:"-"`
-	SeeURL      string   `xml:"-"`
-	Parents     []string `xml:"-"`
-	Children    []string `xml:"-"`
-	Implements  []string `xml:"-"`
+	Name             string   `xml:"-"`
+	Summary          string   `xml:"-"`
+	Description      string   `xml:"-"`
+	SeeURL           string   `xml:"-"`
+	Parents          []string `xml:"-"`
+	Children         []string `xml:"-"`
+	Implements       []string `xml:"-"`
+	ConstructorNames []string `xml:"-"`
+	MethodNames      []string `xml:"-"`
+	PropertyNames    []string `xml:"-"`
 }
 
 type Div struct {
@@ -155,7 +180,29 @@ type Section struct {
 	Children []InnerXML `xml:"ul>li>ul>li>ul>li>a"`
 
 	// class: tsd-index-group
-	IndexSections []*Section `xml:"section>div>section"`
+	// IndexSections []*Section `xml:"section>div>section"`
+
+	// class: tsd-is-not-exported
+	ConstructorsAndMethods []*Signature `xml:"section>ul>li"`
+	Properties             []*Signature `xml:"section>div"`
+}
+
+type Signature struct {
+	Class    string `xml:"class,attr"`
+	InnerXML string `xml:",innerxml"`
+}
+
+func (s *Signature) Name() string {
+	v := strings.TrimSpace(s.InnerXML)
+	if i := strings.Index(v, "<span"); i >= 0 {
+		v = v[0:i]
+	}
+	v = strings.Replace(v, "<wbr>", "", -1)
+	v = strings.Replace(v, " ", "", -1)
+	if len(v) > 0 {
+		v = strings.ToUpper(v[0:1]) + v[1:]
+	}
+	return v
 }
 
 func (s *Section) Type() string {
