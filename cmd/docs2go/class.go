@@ -39,7 +39,7 @@ func (c *classes) walker() filepath.WalkFunc {
 			return nil
 		}
 
-		log.Printf("Processing %v ...", filename)
+		log.Printf("\n\nProcessing %v ...", filename)
 
 		buf, err := ioutil.ReadFile(path)
 		check("ReadFile: %v", err)
@@ -55,27 +55,34 @@ func (c *classes) walker() filepath.WalkFunc {
 		html := &ClassHTML{}
 		check("xml.Decode: %v", d.Decode(&html))
 
-		log.Printf("html.Title=%v", html.Title.InnerXML)
-
 		for _, div := range html.Div {
 			if div.ID != "wrapper" {
 				continue
 			}
-			log.Printf("html.Div:\nid=%v\nh1=%v", div.ID, div.H1.InnerXML)
+			html.Name = div.H1.InnerXML
 
 			for _, section := range div.Sections {
 				switch t := section.Type(); t {
 				case "tsd-comment":
-					log.Printf("%v: lead=%v\ndescription=%v\nseeURL=%v", t, section.Lead.InnerXML, section.Description.InnerXML, section.SeeURL.InnerXML)
+					html.Summary = section.Lead.InnerXML
+					html.Description = section.Description.InnerXML
+					html.SeeURL = section.SeeURL.InnerXML
 				case "tsd-hierarchy":
-					log.Printf("%v: parent=%v", t, section.ListItems)
+					for _, v := range section.ListItems {
+						html.Parents = append(html.Parents, v.InnerXML)
+					}
+					for _, v := range section.Children {
+						html.Children = append(html.Children, v.InnerXML)
+					}
 				case "Implements":
-					log.Printf("%v: implements=%v", t, section.ListItems)
+					for _, v := range section.ListItems {
+						html.Implements = append(html.Implements, v.InnerXML)
+					}
 				case "tsd-index-group":
 					for _, indexSection := range section.IndexSections {
 						log.Printf("%v: indexSection=%v: %v", t, indexSection.Type(), indexSection.ListItems)
 					}
-				case "tsd-member-group": // ignore
+				case "tsd-member-group": // TODO: Parse this for Constructors, Properties, and Methods
 				case "tsd-is-not-exported": // ignore
 				case "tsd-is-inherited": // ignore
 				case "tsd-type-parameters": // ignore
@@ -86,6 +93,14 @@ func (c *classes) walker() filepath.WalkFunc {
 			}
 		}
 
+		log.Printf("html.Name=%v", html.Name)
+		log.Printf("html.Summary=%v", html.Summary)
+		log.Printf("html.Description=%v", html.Description)
+		log.Printf("html.SeeURL=%v", html.SeeURL)
+		log.Printf("html.Parents=%v", html.Parents)
+		log.Printf("html.Children=%v", html.Children)
+		log.Printf("html.Implements=%v", html.Implements)
+
 		return nil
 	}
 }
@@ -93,17 +108,20 @@ func (c *classes) walker() filepath.WalkFunc {
 type ClassHTML struct {
 	Title InnerXML `xml:"head>title"`
 	Div   []*Div   `xml:"body>div"`
+
+	Name        string   `xml:"-"`
+	Summary     string   `xml:"-"`
+	Description string   `xml:"-"`
+	SeeURL      string   `xml:"-"`
+	Parents     []string `xml:"-"`
+	Children    []string `xml:"-"`
+	Implements  []string `xml:"-"`
 }
 
 type Div struct {
-	ID string   `xml:"id,attr"`
-	H1 InnerXML `xml:"header>div>div>h1"`
-	// Lead        InnerXML `xml:"div>div>div>section>div>div>p"`
-	// Description InnerXML `xml:"div>div>div>section>div>p"`
-	// SeeURL      InnerXML `xml:"div>div>div>section>div>dl>dd>p>a"`
-
+	ID       string     `xml:"id,attr"`
+	H1       InnerXML   `xml:"header>div>div>h1"`
 	Sections []*Section `xml:"div>div>div>section"`
-	// Parent InnerXML `xml:"div>div>div>section>ul>li>a"`
 }
 
 type Section struct {
@@ -119,6 +137,9 @@ type Section struct {
 	// class: tsd-hierarchy
 	// class Implements
 	ListItems []InnerXML `xml:"ul>li>a"`
+
+	// class: tsd-hierarchy
+	Children []InnerXML `xml:"ul>li>ul>li>ul>li>a"`
 
 	// class: tsd-index-group
 	IndexSections []*Section `xml:"section>div>section"`
