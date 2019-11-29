@@ -19,5 +19,3 @@ func New() *Babylon { return &Babylon{ctx: js.Global().Get("BABYLON")} }
 
 // JSObject returns the underlying *js.JavaScript class.
 func (t *Babylon) JSObject() js.Value { return t.ctx }
-
-type Canvas js.Value

@@ -21,10 +21,8 @@ func AbstractSceneFromJSObject(p js.Value) *AbstractScene {
 
 // NewAbstractScene returns a new AbstractScene object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.scene
+// https://doc.babylonjs.com/api/classes/babylon.abstractscene
 func (b *Babylon) NewAbstractScene() *AbstractScene {
 	p := b.ctx.Get("AbstractScene").New()
 	return AbstractSceneFromJSObject(p)
 }
-
-func (s *AbstractScene) Render() {}

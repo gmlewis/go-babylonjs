@@ -1,9 +1,13 @@
 package babylon
 
+import ()
+
+// SphereOpts represents options passed to CreateSphere.
 type SphereOpts struct {
 	Diameter *float64
 }
 
+// CreateSphere calls the JavaScript method of the same name.
 func (b *Babylon) CreateSphere(name string, opts *SphereOpts, scene *Scene) *Mesh {
 	mb := b.ctx.Get("MeshBuilder")
 	params := map[string]interface{}{}
@@ -12,6 +16,6 @@ func (b *Babylon) CreateSphere(name string, opts *SphereOpts, scene *Scene) *Mes
 			params["diameter"] = *opts.Diameter
 		}
 	}
-	p := mb.Call("CreateSphere", name, params, scene)
+	p := mb.Call("CreateSphere", name, params, scene.JSObject())
 	return MeshFromJSObject(p)
 }

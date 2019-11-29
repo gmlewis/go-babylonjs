@@ -1,6 +1,8 @@
 package babylon
 
-import "syscall/js"
+import (
+	"syscall/js"
+)
 
 // Scene represents a babylon.js Scene.
 type Scene struct{ *AbstractScene }
@@ -27,4 +29,7 @@ func (b *Babylon) NewScene(engine *Engine) *Scene {
 	return SceneFromJSObject(p)
 }
 
-func (s *Scene) Render() {}
+// Render calls the JavaScript method of the same name.
+func (s *Scene) Render() {
+	s.p.Call("render")
+}

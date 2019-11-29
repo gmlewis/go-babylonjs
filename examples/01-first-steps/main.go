@@ -1,7 +1,6 @@
 package main
 
 import (
-	"log"
 	"math"
 	"syscall/js"
 
@@ -9,10 +8,8 @@ import (
 )
 
 func main() {
-	window := js.Global().Get("window")
 	doc := js.Global().Get("document")
 	canvas := doc.Call("getElementById", "renderCanvas") // Get the canvas element
-	log.Printf("window=%T=%v, doc=%T=%v, canvas=%T=%v", window, window, doc, doc, canvas, canvas)
 
 	b := babylon.New()
 
@@ -47,11 +44,21 @@ func main() {
 	})
 
 	// Watch for browser/canvas resize events
-	window.Call("addEventListener", "resize", func() { // Get the canvas element
+	window := js.Global().Get("window")
+	cb := js.FuncOf(func(this js.Value, args []js.Value) interface{} {
 		engine.Resize()
+		return nil
 	})
+	// Note that "cb" is never released since it is needed for resizing.
+	window.Call("addEventListener", "resize", cb)
+
+	// prevent program from terminating
+	c := make(chan struct{}, 0)
+	<-c
+
 }
 
+// Float64 returns the pointer to the provided float64.
 func Float64(v float64) *float64 {
 	return &v
 }

@@ -21,7 +21,7 @@ func MeshFromJSObject(p js.Value) *Mesh {
 
 // NewMesh returns a new Mesh object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.node
+// https://doc.babylonjs.com/api/classes/babylon.mesh
 func (b *Babylon) NewMesh(name string, scene *Scene) *Mesh {
 	p := b.ctx.Get("Mesh").New(name, scene.JSObject())
 	return MeshFromJSObject(p)

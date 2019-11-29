@@ -19,13 +19,10 @@ func ThinEngineFromJSObject(p js.Value) *ThinEngine {
 	return &ThinEngine{p: p}
 }
 
-func (b *Babylon) NewThinEngine(canvas Canvas, antialias bool) *ThinEngine {
+// NewThinEngine returns a new ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine
+func (b *Babylon) NewThinEngine(canvas js.Value, antialias bool) *ThinEngine {
 	p := b.ctx.Get("ThinEngine").New(canvas, antialias)
 	return ThinEngineFromJSObject(p)
 }
-
-func (e ThinEngine) RunRenderLoop(f func()) {
-	f()
-}
-
-func (e ThinEngine) Resize() {}

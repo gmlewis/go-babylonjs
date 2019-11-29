@@ -21,7 +21,7 @@ func TransformNodeFromJSObject(p js.Value) *TransformNode {
 
 // NewTransformNode returns a new TransformNode object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.node
+// https://doc.babylonjs.com/api/classes/babylon.transformnode
 func (b *Babylon) NewTransformNode(name string, scene *Scene) *TransformNode {
 	p := b.ctx.Get("TransformNode").New(name, scene.JSObject())
 	return TransformNodeFromJSObject(p)

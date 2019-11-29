@@ -21,7 +21,7 @@ func TargetCameraFromJSObject(p js.Value) *TargetCamera {
 
 // NewTargetCamera returns a new TargetCamera object.
 //
-// https://doc.babylonjs.com/api/classes/babylon.Targetcamera
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera
 func (b *Babylon) NewTargetCamera(name string, position *Vector3, scene *Scene) *TargetCamera {
 	p := b.ctx.Get("TargetCamera").New(name, position.JSObject(), scene.JSObject())
 	return TargetCameraFromJSObject(p)
