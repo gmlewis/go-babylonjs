@@ -1,7 +1,6 @@
 package babylon
 
-import "syscall/js"
-
+/*
 // JSString represents a string pointer for JavaScript.
 type JSString string
 
@@ -57,3 +56,4 @@ func (j *JSValue) JSObject() js.Value {
 	}
 	return js.ValueOf(js.Value(*j))
 }
+*/
