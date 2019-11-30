@@ -39,7 +39,7 @@ func (ba *Babylon) NewDatabase(urlToScene string, callbackManifestChecked func()
 		opts = &NewDatabaseOpts{}
 	}
 
-	p := ba.ctx.Get("Database").New(urlToScene, callbackManifestChecked, opts.DisableManifestCheck)
+	p := ba.ctx.Get("Database").New(urlToScene, callbackManifestChecked, opts.DisableManifestCheck.JSObject())
 	return DatabaseFromJSObject(p)
 }
 

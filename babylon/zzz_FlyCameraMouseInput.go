@@ -39,7 +39,7 @@ func (ba *Babylon) NewFlyCameraMouseInput(opts *NewFlyCameraMouseInputOpts) *Fly
 		opts = &NewFlyCameraMouseInputOpts{}
 	}
 
-	p := ba.ctx.Get("FlyCameraMouseInput").New(opts.TouchEnabled)
+	p := ba.ctx.Get("FlyCameraMouseInput").New(opts.TouchEnabled.JSObject())
 	return FlyCameraMouseInputFromJSObject(p)
 }
 

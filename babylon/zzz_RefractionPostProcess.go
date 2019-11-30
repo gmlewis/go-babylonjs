@@ -43,7 +43,7 @@ func (ba *Babylon) NewRefractionPostProcess(name string, refractionTextureUrl st
 		opts = &NewRefractionPostProcessOpts{}
 	}
 
-	p := ba.ctx.Get("RefractionPostProcess").New(name, refractionTextureUrl, color.JSObject(), depth, colorLevel, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable)
+	p := ba.ctx.Get("RefractionPostProcess").New(name, refractionTextureUrl, color.JSObject(), depth, colorLevel, options, camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject())
 	return RefractionPostProcessFromJSObject(p)
 }
 

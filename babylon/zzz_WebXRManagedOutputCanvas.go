@@ -26,11 +26,11 @@ func WebXRManagedOutputCanvasFromJSObject(p js.Value) *WebXRManagedOutputCanvas 
 
 // NewWebXRManagedOutputCanvasOpts contains optional parameters for NewWebXRManagedOutputCanvas.
 type NewWebXRManagedOutputCanvasOpts struct {
-	Canvas js.Value
+	Canvas *JSValue
 
 	OnStateChangedObservable *Observable
 
-	Configuration js.Value
+	Configuration *JSValue
 }
 
 // NewWebXRManagedOutputCanvas returns a new WebXRManagedOutputCanvas object.
@@ -41,7 +41,7 @@ func (ba *Babylon) NewWebXRManagedOutputCanvas(engine *ThinEngine, opts *NewWebX
 		opts = &NewWebXRManagedOutputCanvasOpts{}
 	}
 
-	p := ba.ctx.Get("WebXRManagedOutputCanvas").New(engine.JSObject(), opts.Canvas, opts.OnStateChangedObservable.JSObject(), opts.Configuration)
+	p := ba.ctx.Get("WebXRManagedOutputCanvas").New(engine.JSObject(), opts.Canvas.JSObject(), opts.OnStateChangedObservable.JSObject(), opts.Configuration.JSObject())
 	return WebXRManagedOutputCanvasFromJSObject(p)
 }
 

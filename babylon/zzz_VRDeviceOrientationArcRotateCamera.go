@@ -41,7 +41,7 @@ func (ba *Babylon) NewVRDeviceOrientationArcRotateCamera(name string, alpha floa
 		opts = &NewVRDeviceOrientationArcRotateCameraOpts{}
 	}
 
-	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(name, alpha, beta, radius, target.JSObject(), scene.JSObject(), opts.CompensateDistortion, opts.VrCameraMetrics.JSObject())
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(name, alpha, beta, radius, target.JSObject(), scene.JSObject(), opts.CompensateDistortion.JSObject(), opts.VrCameraMetrics.JSObject())
 	return VRDeviceOrientationArcRotateCameraFromJSObject(p)
 }
 

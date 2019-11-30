@@ -35,7 +35,7 @@ type NewVideoTextureOpts struct {
 
 	SamplingMode *JSFloat64
 
-	Settings js.Value
+	Settings *JSValue
 }
 
 // NewVideoTexture returns a new VideoTexture object.
@@ -46,7 +46,7 @@ func (ba *Babylon) NewVideoTexture(name string, src string, scene *Scene, opts *
 		opts = &NewVideoTextureOpts{}
 	}
 
-	p := ba.ctx.Get("VideoTexture").New(name, src, scene.JSObject(), opts.GenerateMipMaps, opts.InvertY, opts.SamplingMode, opts.Settings)
+	p := ba.ctx.Get("VideoTexture").New(name, src, scene.JSObject(), opts.GenerateMipMaps.JSObject(), opts.InvertY.JSObject(), opts.SamplingMode.JSObject(), opts.Settings.JSObject())
 	return VideoTextureFromJSObject(p)
 }
 

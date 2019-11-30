@@ -28,7 +28,7 @@ func EngineFromJSObject(p js.Value) *Engine {
 type NewEngineOpts struct {
 	Antialias *JSBool
 
-	Options js.Value
+	Options *JSValue
 
 	AdaptToDeviceRatio *JSBool
 }
@@ -41,7 +41,7 @@ func (ba *Babylon) NewEngine(canvasOrContext js.Value, opts *NewEngineOpts) *Eng
 		opts = &NewEngineOpts{}
 	}
 
-	p := ba.ctx.Get("Engine").New(canvasOrContext, opts.Antialias, opts.Options, opts.AdaptToDeviceRatio)
+	p := ba.ctx.Get("Engine").New(canvasOrContext, opts.Antialias.JSObject(), opts.Options.JSObject(), opts.AdaptToDeviceRatio.JSObject())
 	return EngineFromJSObject(p)
 }
 

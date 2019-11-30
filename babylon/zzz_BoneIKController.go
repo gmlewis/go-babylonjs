@@ -28,7 +28,7 @@ func BoneIKControllerFromJSObject(p js.Value) *BoneIKController {
 
 // NewBoneIKControllerOpts contains optional parameters for NewBoneIKController.
 type NewBoneIKControllerOpts struct {
-	Options js.Value
+	Options *JSValue
 }
 
 // NewBoneIKController returns a new BoneIKController object.
@@ -39,7 +39,7 @@ func (ba *Babylon) NewBoneIKController(mesh *AbstractMesh, bone *Bone, opts *New
 		opts = &NewBoneIKControllerOpts{}
 	}
 
-	p := ba.ctx.Get("BoneIKController").New(mesh.JSObject(), bone.JSObject(), opts.Options)
+	p := ba.ctx.Get("BoneIKController").New(mesh.JSObject(), bone.JSObject(), opts.Options.JSObject())
 	return BoneIKControllerFromJSObject(p)
 }
 

@@ -42,7 +42,7 @@ func (ba *Babylon) NewSphereParticleEmitter(opts *NewSphereParticleEmitterOpts) 
 		opts = &NewSphereParticleEmitterOpts{}
 	}
 
-	p := ba.ctx.Get("SphereParticleEmitter").New(opts.Radius, opts.RadiusRange, opts.DirectionRandomizer)
+	p := ba.ctx.Get("SphereParticleEmitter").New(opts.Radius.JSObject(), opts.RadiusRange.JSObject(), opts.DirectionRandomizer.JSObject())
 	return SphereParticleEmitterFromJSObject(p)
 }
 

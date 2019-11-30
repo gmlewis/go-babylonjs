@@ -41,7 +41,7 @@ func (ba *Babylon) NewElasticEase(opts *NewElasticEaseOpts) *ElasticEase {
 		opts = &NewElasticEaseOpts{}
 	}
 
-	p := ba.ctx.Get("ElasticEase").New(opts.Oscillations, opts.Springiness)
+	p := ba.ctx.Get("ElasticEase").New(opts.Oscillations.JSObject(), opts.Springiness.JSObject())
 	return ElasticEaseFromJSObject(p)
 }
 

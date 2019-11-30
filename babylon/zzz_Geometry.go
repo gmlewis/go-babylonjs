@@ -41,7 +41,7 @@ func (ba *Babylon) NewGeometry(id string, scene *Scene, opts *NewGeometryOpts) *
 		opts = &NewGeometryOpts{}
 	}
 
-	p := ba.ctx.Get("Geometry").New(id, scene.JSObject(), opts.VertexData.JSObject(), opts.Updatable, opts.Mesh.JSObject())
+	p := ba.ctx.Get("Geometry").New(id, scene.JSObject(), opts.VertexData.JSObject(), opts.Updatable.JSObject(), opts.Mesh.JSObject())
 	return GeometryFromJSObject(p)
 }
 

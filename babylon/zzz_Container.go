@@ -39,7 +39,7 @@ func (ba *Babylon) NewContainer(opts *NewContainerOpts) *Container {
 		opts = &NewContainerOpts{}
 	}
 
-	p := ba.ctx.Get("Container").New(opts.Name)
+	p := ba.ctx.Get("Container").New(opts.Name.JSObject())
 	return ContainerFromJSObject(p)
 }
 

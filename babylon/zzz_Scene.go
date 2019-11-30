@@ -28,7 +28,7 @@ func SceneFromJSObject(p js.Value) *Scene {
 
 // NewSceneOpts contains optional parameters for NewScene.
 type NewSceneOpts struct {
-	Options js.Value
+	Options *JSValue
 }
 
 // NewScene returns a new Scene object.
@@ -39,7 +39,7 @@ func (ba *Babylon) NewScene(engine *Engine, opts *NewSceneOpts) *Scene {
 		opts = &NewSceneOpts{}
 	}
 
-	p := ba.ctx.Get("Scene").New(engine.JSObject(), opts.Options)
+	p := ba.ctx.Get("Scene").New(engine.JSObject(), opts.Options.JSObject())
 	return SceneFromJSObject(p)
 }
 

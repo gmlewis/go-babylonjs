@@ -43,7 +43,7 @@ func (ba *Babylon) NewEquiRectangularCubeTexture(url string, scene *Scene, size 
 		opts = &NewEquiRectangularCubeTextureOpts{}
 	}
 
-	p := ba.ctx.Get("EquiRectangularCubeTexture").New(url, scene.JSObject(), size, opts.NoMipmap, opts.GammaSpace, opts.OnLoad, opts.OnError)
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(url, scene.JSObject(), size, opts.NoMipmap.JSObject(), opts.GammaSpace.JSObject(), opts.OnLoad, opts.OnError)
 	return EquiRectangularCubeTextureFromJSObject(p)
 }
 

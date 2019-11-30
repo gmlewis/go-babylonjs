@@ -31,7 +31,7 @@ func SolidParticleSystemFromJSObject(p js.Value) *SolidParticleSystem {
 
 // NewSolidParticleSystemOpts contains optional parameters for NewSolidParticleSystem.
 type NewSolidParticleSystemOpts struct {
-	Options js.Value
+	Options *JSValue
 }
 
 // NewSolidParticleSystem returns a new SolidParticleSystem object.
@@ -42,7 +42,7 @@ func (ba *Babylon) NewSolidParticleSystem(name string, scene *Scene, opts *NewSo
 		opts = &NewSolidParticleSystemOpts{}
 	}
 
-	p := ba.ctx.Get("SolidParticleSystem").New(name, scene.JSObject(), opts.Options)
+	p := ba.ctx.Get("SolidParticleSystem").New(name, scene.JSObject(), opts.Options.JSObject())
 	return SolidParticleSystemFromJSObject(p)
 }
 

@@ -43,7 +43,7 @@ func (ba *Babylon) NewConeParticleEmitter(opts *NewConeParticleEmitterOpts) *Con
 		opts = &NewConeParticleEmitterOpts{}
 	}
 
-	p := ba.ctx.Get("ConeParticleEmitter").New(opts.Radius, opts.Angle, opts.DirectionRandomizer)
+	p := ba.ctx.Get("ConeParticleEmitter").New(opts.Radius.JSObject(), opts.Angle.JSObject(), opts.DirectionRandomizer.JSObject())
 	return ConeParticleEmitterFromJSObject(p)
 }
 

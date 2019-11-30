@@ -27,7 +27,7 @@ func VRExperienceHelperFromJSObject(p js.Value) *VRExperienceHelper {
 
 // NewVRExperienceHelperOpts contains optional parameters for NewVRExperienceHelper.
 type NewVRExperienceHelperOpts struct {
-	WebVROptions js.Value
+	WebVROptions *JSValue
 }
 
 // NewVRExperienceHelper returns a new VRExperienceHelper object.
@@ -38,7 +38,7 @@ func (ba *Babylon) NewVRExperienceHelper(scene *Scene, opts *NewVRExperienceHelp
 		opts = &NewVRExperienceHelperOpts{}
 	}
 
-	p := ba.ctx.Get("VRExperienceHelper").New(scene.JSObject(), opts.WebVROptions)
+	p := ba.ctx.Get("VRExperienceHelper").New(scene.JSObject(), opts.WebVROptions.JSObject())
 	return VRExperienceHelperFromJSObject(p)
 }
 

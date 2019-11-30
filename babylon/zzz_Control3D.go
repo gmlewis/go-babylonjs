@@ -37,7 +37,7 @@ func (ba *Babylon) NewControl3D(opts *NewControl3DOpts) *Control3D {
 		opts = &NewControl3DOpts{}
 	}
 
-	p := ba.ctx.Get("Control3D").New(opts.Name)
+	p := ba.ctx.Get("Control3D").New(opts.Name.JSObject())
 	return Control3DFromJSObject(p)
 }
 

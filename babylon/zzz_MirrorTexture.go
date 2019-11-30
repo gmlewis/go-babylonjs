@@ -48,7 +48,7 @@ func (ba *Babylon) NewMirrorTexture(name string, size float64, scene *Scene, opt
 		opts = &NewMirrorTextureOpts{}
 	}
 
-	p := ba.ctx.Get("MirrorTexture").New(name, size, scene.JSObject(), opts.GenerateMipMaps, opts.Type, opts.SamplingMode, opts.GenerateDepthBuffer)
+	p := ba.ctx.Get("MirrorTexture").New(name, size, scene.JSObject(), opts.GenerateMipMaps.JSObject(), opts.Type.JSObject(), opts.SamplingMode.JSObject(), opts.GenerateDepthBuffer.JSObject())
 	return MirrorTextureFromJSObject(p)
 }
 

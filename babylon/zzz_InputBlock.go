@@ -26,9 +26,9 @@ func InputBlockFromJSObject(p js.Value) *InputBlock {
 
 // NewInputBlockOpts contains optional parameters for NewInputBlock.
 type NewInputBlockOpts struct {
-	Target js.Value
+	Target *JSValue
 
-	Type js.Value
+	Type *JSValue
 }
 
 // NewInputBlock returns a new InputBlock object.
@@ -39,7 +39,7 @@ func (ba *Babylon) NewInputBlock(name string, opts *NewInputBlockOpts) *InputBlo
 		opts = &NewInputBlockOpts{}
 	}
 
-	p := ba.ctx.Get("InputBlock").New(name, opts.Target, opts.Type)
+	p := ba.ctx.Get("InputBlock").New(name, opts.Target.JSObject(), opts.Type.JSObject())
 	return InputBlockFromJSObject(p)
 }
 

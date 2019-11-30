@@ -45,7 +45,7 @@ func (ba *Babylon) NewMesh(name string, opts *NewMeshOpts) *Mesh {
 		opts = &NewMeshOpts{}
 	}
 
-	p := ba.ctx.Get("Mesh").New(name, opts.Scene.JSObject(), opts.Parent.JSObject(), opts.Source.JSObject(), opts.DoNotCloneChildren, opts.ClonePhysicsImpostor)
+	p := ba.ctx.Get("Mesh").New(name, opts.Scene.JSObject(), opts.Parent.JSObject(), opts.Source.JSObject(), opts.DoNotCloneChildren.JSObject(), opts.ClonePhysicsImpostor.JSObject())
 	return MeshFromJSObject(p)
 }
 

@@ -39,7 +39,7 @@ func (ba *Babylon) NewStarfieldProceduralTexture(name string, size float64, scen
 		opts = &NewStarfieldProceduralTextureOpts{}
 	}
 
-	p := ba.ctx.Get("StarfieldProceduralTexture").New(name, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps)
+	p := ba.ctx.Get("StarfieldProceduralTexture").New(name, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps.JSObject())
 	return StarfieldProceduralTextureFromJSObject(p)
 }
 

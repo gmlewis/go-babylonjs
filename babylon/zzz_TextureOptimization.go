@@ -43,7 +43,7 @@ func (ba *Babylon) NewTextureOptimization(opts *NewTextureOptimizationOpts) *Tex
 		opts = &NewTextureOptimizationOpts{}
 	}
 
-	p := ba.ctx.Get("TextureOptimization").New(opts.Priority, opts.MaximumSize, opts.Step)
+	p := ba.ctx.Get("TextureOptimization").New(opts.Priority.JSObject(), opts.MaximumSize.JSObject(), opts.Step.JSObject())
 	return TextureOptimizationFromJSObject(p)
 }
 

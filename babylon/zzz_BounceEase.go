@@ -41,7 +41,7 @@ func (ba *Babylon) NewBounceEase(opts *NewBounceEaseOpts) *BounceEase {
 		opts = &NewBounceEaseOpts{}
 	}
 
-	p := ba.ctx.Get("BounceEase").New(opts.Bounces, opts.Bounciness)
+	p := ba.ctx.Get("BounceEase").New(opts.Bounces.JSObject(), opts.Bounciness.JSObject())
 	return BounceEaseFromJSObject(p)
 }
 

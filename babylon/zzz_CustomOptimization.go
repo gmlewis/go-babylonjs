@@ -39,7 +39,7 @@ func (ba *Babylon) NewCustomOptimization(opts *NewCustomOptimizationOpts) *Custo
 		opts = &NewCustomOptimizationOpts{}
 	}
 
-	p := ba.ctx.Get("CustomOptimization").New(opts.Priority)
+	p := ba.ctx.Get("CustomOptimization").New(opts.Priority.JSObject())
 	return CustomOptimizationFromJSObject(p)
 }
 

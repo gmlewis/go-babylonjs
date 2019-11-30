@@ -39,7 +39,7 @@ func (ba *Babylon) NewWoodProceduralTexture(name string, size float64, scene *Sc
 		opts = &NewWoodProceduralTextureOpts{}
 	}
 
-	p := ba.ctx.Get("WoodProceduralTexture").New(name, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps)
+	p := ba.ctx.Get("WoodProceduralTexture").New(name, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps.JSObject())
 	return WoodProceduralTextureFromJSObject(p)
 }
 

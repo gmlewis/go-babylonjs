@@ -37,7 +37,7 @@ func (ba *Babylon) NewVector3WithInfo(source *Vector3, opts *NewVector3WithInfoO
 		opts = &NewVector3WithInfoOpts{}
 	}
 
-	p := ba.ctx.Get("Vector3WithInfo").New(source.JSObject(), opts.ButtonIndex)
+	p := ba.ctx.Get("Vector3WithInfo").New(source.JSObject(), opts.ButtonIndex.JSObject())
 	return Vector3WithInfoFromJSObject(p)
 }
 

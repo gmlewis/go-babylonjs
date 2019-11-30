@@ -41,7 +41,7 @@ func (ba *Babylon) NewOctree(creationFunc func(), opts *NewOctreeOpts) *Octree {
 		opts = &NewOctreeOpts{}
 	}
 
-	p := ba.ctx.Get("Octree").New(creationFunc, opts.MaxBlockCapacity, opts.MaxDepth)
+	p := ba.ctx.Get("Octree").New(creationFunc, opts.MaxBlockCapacity.JSObject(), opts.MaxDepth.JSObject())
 	return OctreeFromJSObject(p)
 }
 

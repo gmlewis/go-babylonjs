@@ -41,7 +41,7 @@ func (ba *Babylon) NewDepthOfFieldEffect(scene *Scene, depthTexture *RenderTarge
 		opts = &NewDepthOfFieldEffectOpts{}
 	}
 
-	p := ba.ctx.Get("DepthOfFieldEffect").New(scene.JSObject(), depthTexture.JSObject(), opts.BlurLevel.JSObject(), opts.PipelineTextureType, opts.BlockCompilation)
+	p := ba.ctx.Get("DepthOfFieldEffect").New(scene.JSObject(), depthTexture.JSObject(), opts.BlurLevel.JSObject(), opts.PipelineTextureType.JSObject(), opts.BlockCompilation.JSObject())
 	return DepthOfFieldEffectFromJSObject(p)
 }
 

@@ -37,7 +37,7 @@ func (ba *Babylon) NewContainer3D(opts *NewContainer3DOpts) *Container3D {
 		opts = &NewContainer3DOpts{}
 	}
 
-	p := ba.ctx.Get("Container3D").New(opts.Name)
+	p := ba.ctx.Get("Container3D").New(opts.Name.JSObject())
 	return Container3DFromJSObject(p)
 }
 

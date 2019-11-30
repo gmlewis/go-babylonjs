@@ -39,7 +39,7 @@ func (ba *Babylon) NewRoadProceduralTexture(name string, size float64, scene *Sc
 		opts = &NewRoadProceduralTextureOpts{}
 	}
 
-	p := ba.ctx.Get("RoadProceduralTexture").New(name, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps)
+	p := ba.ctx.Get("RoadProceduralTexture").New(name, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps.JSObject())
 	return RoadProceduralTextureFromJSObject(p)
 }
 

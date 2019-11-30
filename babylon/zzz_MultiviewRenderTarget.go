@@ -39,7 +39,7 @@ func (ba *Babylon) NewMultiviewRenderTarget(scene *Scene, opts *NewMultiviewRend
 		opts = &NewMultiviewRenderTargetOpts{}
 	}
 
-	p := ba.ctx.Get("MultiviewRenderTarget").New(scene.JSObject(), opts.Size)
+	p := ba.ctx.Get("MultiviewRenderTarget").New(scene.JSObject(), opts.Size.JSObject())
 	return MultiviewRenderTargetFromJSObject(p)
 }
 

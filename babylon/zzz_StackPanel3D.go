@@ -37,7 +37,7 @@ func (ba *Babylon) NewStackPanel3D(opts *NewStackPanel3DOpts) *StackPanel3D {
 		opts = &NewStackPanel3DOpts{}
 	}
 
-	p := ba.ctx.Get("StackPanel3D").New(opts.IsVertical)
+	p := ba.ctx.Get("StackPanel3D").New(opts.IsVertical.JSObject())
 	return StackPanel3DFromJSObject(p)
 }
 

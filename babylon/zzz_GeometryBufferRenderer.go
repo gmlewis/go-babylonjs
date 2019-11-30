@@ -37,7 +37,7 @@ func (ba *Babylon) NewGeometryBufferRenderer(scene *Scene, opts *NewGeometryBuff
 		opts = &NewGeometryBufferRendererOpts{}
 	}
 
-	p := ba.ctx.Get("GeometryBufferRenderer").New(scene.JSObject(), opts.Ratio)
+	p := ba.ctx.Get("GeometryBufferRenderer").New(scene.JSObject(), opts.Ratio.JSObject())
 	return GeometryBufferRendererFromJSObject(p)
 }
 

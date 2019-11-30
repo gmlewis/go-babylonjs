@@ -45,7 +45,7 @@ func (ba *Babylon) NewPlaneRotationGizmo(planeNormal *Vector3, opts *NewPlaneRot
 		opts = &NewPlaneRotationGizmoOpts{}
 	}
 
-	p := ba.ctx.Get("PlaneRotationGizmo").New(planeNormal.JSObject(), opts.Color.JSObject(), opts.GizmoLayer.JSObject(), opts.Tessellation, opts.Parent.JSObject(), opts.UseEulerRotation)
+	p := ba.ctx.Get("PlaneRotationGizmo").New(planeNormal.JSObject(), opts.Color.JSObject(), opts.GizmoLayer.JSObject(), opts.Tessellation.JSObject(), opts.Parent.JSObject(), opts.UseEulerRotation.JSObject())
 	return PlaneRotationGizmoFromJSObject(p)
 }
 

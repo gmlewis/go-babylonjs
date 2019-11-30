@@ -46,7 +46,7 @@ func (ba *Babylon) NewInterpolateValueAction(triggerOptions interface{}, target 
 		opts = &NewInterpolateValueActionOpts{}
 	}
 
-	p := ba.ctx.Get("InterpolateValueAction").New(triggerOptions, target, propertyPath, value, opts.Duration, opts.Condition.JSObject(), opts.StopOtherAnimations, opts.OnInterpolationDone)
+	p := ba.ctx.Get("InterpolateValueAction").New(triggerOptions, target, propertyPath, value, opts.Duration.JSObject(), opts.Condition.JSObject(), opts.StopOtherAnimations.JSObject(), opts.OnInterpolationDone)
 	return InterpolateValueActionFromJSObject(p)
 }
 

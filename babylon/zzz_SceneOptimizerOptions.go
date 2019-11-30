@@ -41,7 +41,7 @@ func (ba *Babylon) NewSceneOptimizerOptions(opts *NewSceneOptimizerOptionsOpts) 
 		opts = &NewSceneOptimizerOptionsOpts{}
 	}
 
-	p := ba.ctx.Get("SceneOptimizerOptions").New(opts.TargetFrameRate, opts.TrackerDuration)
+	p := ba.ctx.Get("SceneOptimizerOptions").New(opts.TargetFrameRate.JSObject(), opts.TrackerDuration.JSObject())
 	return SceneOptimizerOptionsFromJSObject(p)
 }
 

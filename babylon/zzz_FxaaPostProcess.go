@@ -47,7 +47,7 @@ func (ba *Babylon) NewFxaaPostProcess(name string, options float64, opts *NewFxa
 		opts = &NewFxaaPostProcessOpts{}
 	}
 
-	p := ba.ctx.Get("FxaaPostProcess").New(name, options, opts.Camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable, opts.TextureType)
+	p := ba.ctx.Get("FxaaPostProcess").New(name, options, opts.Camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType.JSObject())
 	return FxaaPostProcessFromJSObject(p)
 }
 

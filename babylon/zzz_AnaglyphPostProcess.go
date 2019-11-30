@@ -41,7 +41,7 @@ func (ba *Babylon) NewAnaglyphPostProcess(name string, options float64, rigCamer
 		opts = &NewAnaglyphPostProcessOpts{}
 	}
 
-	p := ba.ctx.Get("AnaglyphPostProcess").New(name, options, rigCameras.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable)
+	p := ba.ctx.Get("AnaglyphPostProcess").New(name, options, rigCameras.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject())
 	return AnaglyphPostProcessFromJSObject(p)
 }
 

@@ -37,7 +37,7 @@ func (ba *Babylon) NewMultiLine(opts *NewMultiLineOpts) *MultiLine {
 		opts = &NewMultiLineOpts{}
 	}
 
-	p := ba.ctx.Get("MultiLine").New(opts.Name)
+	p := ba.ctx.Get("MultiLine").New(opts.Name.JSObject())
 	return MultiLineFromJSObject(p)
 }
 

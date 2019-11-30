@@ -42,7 +42,7 @@ func (ba *Babylon) NewDepthRenderer(scene *Scene, opts *NewDepthRendererOpts) *D
 		opts = &NewDepthRendererOpts{}
 	}
 
-	p := ba.ctx.Get("DepthRenderer").New(scene.JSObject(), opts.Type, opts.Camera.JSObject(), opts.StoreNonLinearDepth)
+	p := ba.ctx.Get("DepthRenderer").New(scene.JSObject(), opts.Type.JSObject(), opts.Camera.JSObject(), opts.StoreNonLinearDepth.JSObject())
 	return DepthRendererFromJSObject(p)
 }
 

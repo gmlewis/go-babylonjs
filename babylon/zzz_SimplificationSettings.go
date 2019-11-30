@@ -39,7 +39,7 @@ func (ba *Babylon) NewSimplificationSettings(quality float64, distance float64, 
 		opts = &NewSimplificationSettingsOpts{}
 	}
 
-	p := ba.ctx.Get("SimplificationSettings").New(quality, distance, opts.OptimizeMesh)
+	p := ba.ctx.Get("SimplificationSettings").New(quality, distance, opts.OptimizeMesh.JSObject())
 	return SimplificationSettingsFromJSObject(p)
 }
 

@@ -40,7 +40,7 @@ func (ba *Babylon) NewTargetCamera(name string, position *Vector3, scene *Scene,
 		opts = &NewTargetCameraOpts{}
 	}
 
-	p := ba.ctx.Get("TargetCamera").New(name, position.JSObject(), scene.JSObject(), opts.SetActiveOnSceneIfNoneActive)
+	p := ba.ctx.Get("TargetCamera").New(name, position.JSObject(), scene.JSObject(), opts.SetActiveOnSceneIfNoneActive.JSObject())
 	return TargetCameraFromJSObject(p)
 }
 

@@ -45,7 +45,7 @@ func (ba *Babylon) NewExtractHighlightsPostProcess(name string, options float64,
 		opts = &NewExtractHighlightsPostProcessOpts{}
 	}
 
-	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(name, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable, opts.TextureType, opts.BlockCompilation)
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(name, options, camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType.JSObject(), opts.BlockCompilation.JSObject())
 	return ExtractHighlightsPostProcessFromJSObject(p)
 }
 

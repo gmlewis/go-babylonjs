@@ -28,7 +28,7 @@ func PhysicsEngineFromJSObject(p js.Value) *PhysicsEngine {
 
 // NewPhysicsEngineOpts contains optional parameters for NewPhysicsEngine.
 type NewPhysicsEngineOpts struct {
-	_physicsPlugin js.Value
+	_physicsPlugin *JSValue
 }
 
 // NewPhysicsEngine returns a new PhysicsEngine object.
@@ -39,7 +39,7 @@ func (ba *Babylon) NewPhysicsEngine(gravity *Vector3, opts *NewPhysicsEngineOpts
 		opts = &NewPhysicsEngineOpts{}
 	}
 
-	p := ba.ctx.Get("PhysicsEngine").New(gravity.JSObject(), opts._physicsPlugin)
+	p := ba.ctx.Get("PhysicsEngine").New(gravity.JSObject(), opts._physicsPlugin.JSObject())
 	return PhysicsEngineFromJSObject(p)
 }
 

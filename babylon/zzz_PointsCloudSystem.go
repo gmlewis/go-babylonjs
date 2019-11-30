@@ -31,7 +31,7 @@ func PointsCloudSystemFromJSObject(p js.Value) *PointsCloudSystem {
 
 // NewPointsCloudSystemOpts contains optional parameters for NewPointsCloudSystem.
 type NewPointsCloudSystemOpts struct {
-	Options js.Value
+	Options *JSValue
 }
 
 // NewPointsCloudSystem returns a new PointsCloudSystem object.
@@ -42,7 +42,7 @@ func (ba *Babylon) NewPointsCloudSystem(name string, pointSize float64, scene *S
 		opts = &NewPointsCloudSystemOpts{}
 	}
 
-	p := ba.ctx.Get("PointsCloudSystem").New(name, pointSize, scene.JSObject(), opts.Options)
+	p := ba.ctx.Get("PointsCloudSystem").New(name, pointSize, scene.JSObject(), opts.Options.JSObject())
 	return PointsCloudSystemFromJSObject(p)
 }
 

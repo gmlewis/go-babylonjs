@@ -49,7 +49,7 @@ func (ba *Babylon) NewImageProcessingPostProcess(name string, options float64, o
 		opts = &NewImageProcessingPostProcessOpts{}
 	}
 
-	p := ba.ctx.Get("ImageProcessingPostProcess").New(name, options, opts.Camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable, opts.TextureType, opts.ImageProcessingConfiguration.JSObject())
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(name, options, opts.Camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType.JSObject(), opts.ImageProcessingConfiguration.JSObject())
 	return ImageProcessingPostProcessFromJSObject(p)
 }
 

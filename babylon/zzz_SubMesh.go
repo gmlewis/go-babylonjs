@@ -39,7 +39,7 @@ func (ba *Babylon) NewSubMesh(materialIndex float64, verticesStart float64, vert
 		opts = &NewSubMeshOpts{}
 	}
 
-	p := ba.ctx.Get("SubMesh").New(materialIndex, verticesStart, verticesCount, indexStart, indexCount, mesh.JSObject(), opts.RenderingMesh.JSObject(), opts.CreateBoundingBox)
+	p := ba.ctx.Get("SubMesh").New(materialIndex, verticesStart, verticesCount, indexStart, indexCount, mesh.JSObject(), opts.RenderingMesh.JSObject(), opts.CreateBoundingBox.JSObject())
 	return SubMeshFromJSObject(p)
 }
 

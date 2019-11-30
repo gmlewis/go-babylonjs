@@ -41,7 +41,7 @@ func (ba *Babylon) NewDynamicTexture(name string, options interface{}, scene *Sc
 		opts = &NewDynamicTextureOpts{}
 	}
 
-	p := ba.ctx.Get("DynamicTexture").New(name, options, scene.JSObject(), generateMipMaps, opts.SamplingMode, opts.Format)
+	p := ba.ctx.Get("DynamicTexture").New(name, options, scene.JSObject(), generateMipMaps, opts.SamplingMode.JSObject(), opts.Format.JSObject())
 	return DynamicTextureFromJSObject(p)
 }
 

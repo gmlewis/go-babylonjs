@@ -39,7 +39,7 @@ func (ba *Babylon) NewLensFlaresOptimization(opts *NewLensFlaresOptimizationOpts
 		opts = &NewLensFlaresOptimizationOpts{}
 	}
 
-	p := ba.ctx.Get("LensFlaresOptimization").New(opts.Priority)
+	p := ba.ctx.Get("LensFlaresOptimization").New(opts.Priority.JSObject())
 	return LensFlaresOptimizationFromJSObject(p)
 }
 

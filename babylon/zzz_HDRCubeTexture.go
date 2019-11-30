@@ -50,7 +50,7 @@ func (ba *Babylon) NewHDRCubeTexture(url string, scene *Scene, size float64, opt
 		opts = &NewHDRCubeTextureOpts{}
 	}
 
-	p := ba.ctx.Get("HDRCubeTexture").New(url, scene.JSObject(), size, opts.NoMipmap, opts.GenerateHarmonics, opts.GammaSpace, opts.Reserved, opts.OnLoad, opts.OnError)
+	p := ba.ctx.Get("HDRCubeTexture").New(url, scene.JSObject(), size, opts.NoMipmap.JSObject(), opts.GenerateHarmonics.JSObject(), opts.GammaSpace.JSObject(), opts.Reserved.JSObject(), opts.OnLoad, opts.OnError)
 	return HDRCubeTextureFromJSObject(p)
 }
 

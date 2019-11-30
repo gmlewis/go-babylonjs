@@ -41,7 +41,7 @@ func (ba *Babylon) NewCubeTextureAssetTask(name string, url string, opts *NewCub
 		opts = &NewCubeTextureAssetTaskOpts{}
 	}
 
-	p := ba.ctx.Get("CubeTextureAssetTask").New(name, url, opts.Extensions, opts.NoMipmap, opts.Files)
+	p := ba.ctx.Get("CubeTextureAssetTask").New(name, url, opts.Extensions.JSObject(), opts.NoMipmap.JSObject(), opts.Files.JSObject())
 	return CubeTextureAssetTaskFromJSObject(p)
 }
 

@@ -44,7 +44,7 @@ func (ba *Babylon) NewProceduralTexture(name string, size interface{}, fragment 
 		opts = &NewProceduralTextureOpts{}
 	}
 
-	p := ba.ctx.Get("ProceduralTexture").New(name, size, fragment, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps, opts.IsCube)
+	p := ba.ctx.Get("ProceduralTexture").New(name, size, fragment, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps.JSObject(), opts.IsCube.JSObject())
 	return ProceduralTextureFromJSObject(p)
 }
 

@@ -39,7 +39,7 @@ func (ba *Babylon) NewBoneAxesViewer(scene *Scene, bone *Bone, mesh *Mesh, opts 
 		opts = &NewBoneAxesViewerOpts{}
 	}
 
-	p := ba.ctx.Get("BoneAxesViewer").New(scene.JSObject(), bone.JSObject(), mesh.JSObject(), opts.ScaleLines)
+	p := ba.ctx.Get("BoneAxesViewer").New(scene.JSObject(), bone.JSObject(), mesh.JSObject(), opts.ScaleLines.JSObject())
 	return BoneAxesViewerFromJSObject(p)
 }
 

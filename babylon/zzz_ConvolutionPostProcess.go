@@ -45,7 +45,7 @@ func (ba *Babylon) NewConvolutionPostProcess(name string, kernel float64, option
 		opts = &NewConvolutionPostProcessOpts{}
 	}
 
-	p := ba.ctx.Get("ConvolutionPostProcess").New(name, kernel, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable, opts.TextureType)
+	p := ba.ctx.Get("ConvolutionPostProcess").New(name, kernel, options, camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType.JSObject())
 	return ConvolutionPostProcessFromJSObject(p)
 }
 

@@ -39,7 +39,7 @@ func (ba *Babylon) NewPostProcessesOptimization(opts *NewPostProcessesOptimizati
 		opts = &NewPostProcessesOptimizationOpts{}
 	}
 
-	p := ba.ctx.Get("PostProcessesOptimization").New(opts.Priority)
+	p := ba.ctx.Get("PostProcessesOptimization").New(opts.Priority.JSObject())
 	return PostProcessesOptimizationFromJSObject(p)
 }
 

@@ -37,7 +37,7 @@ func (ba *Babylon) NewAbstractButton3D(opts *NewAbstractButton3DOpts) *AbstractB
 		opts = &NewAbstractButton3DOpts{}
 	}
 
-	p := ba.ctx.Get("AbstractButton3D").New(opts.Name)
+	p := ba.ctx.Get("AbstractButton3D").New(opts.Name.JSObject())
 	return AbstractButton3DFromJSObject(p)
 }
 

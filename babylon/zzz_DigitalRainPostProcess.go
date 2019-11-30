@@ -40,7 +40,7 @@ func (ba *Babylon) NewDigitalRainPostProcess(name string, camera *Camera, opts *
 		opts = &NewDigitalRainPostProcessOpts{}
 	}
 
-	p := ba.ctx.Get("DigitalRainPostProcess").New(name, camera.JSObject(), opts.Options)
+	p := ba.ctx.Get("DigitalRainPostProcess").New(name, camera.JSObject(), opts.Options.JSObject())
 	return DigitalRainPostProcessFromJSObject(p)
 }
 

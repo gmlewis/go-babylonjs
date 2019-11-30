@@ -37,7 +37,7 @@ func (ba *Babylon) NewImageScrollBar(opts *NewImageScrollBarOpts) *ImageScrollBa
 		opts = &NewImageScrollBarOpts{}
 	}
 
-	p := ba.ctx.Get("ImageScrollBar").New(opts.Name)
+	p := ba.ctx.Get("ImageScrollBar").New(opts.Name.JSObject())
 	return ImageScrollBarFromJSObject(p)
 }
 

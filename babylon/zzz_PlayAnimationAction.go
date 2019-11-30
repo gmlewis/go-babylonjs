@@ -41,7 +41,7 @@ func (ba *Babylon) NewPlayAnimationAction(triggerOptions interface{}, target int
 		opts = &NewPlayAnimationActionOpts{}
 	}
 
-	p := ba.ctx.Get("PlayAnimationAction").New(triggerOptions, target, from, to, opts.Loop, opts.Condition.JSObject())
+	p := ba.ctx.Get("PlayAnimationAction").New(triggerOptions, target, from, to, opts.Loop.JSObject(), opts.Condition.JSObject())
 	return PlayAnimationActionFromJSObject(p)
 }
 

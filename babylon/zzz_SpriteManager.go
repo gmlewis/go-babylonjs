@@ -45,7 +45,7 @@ func (ba *Babylon) NewSpriteManager(name string, imgUrl string, capacity float64
 		opts = &NewSpriteManagerOpts{}
 	}
 
-	p := ba.ctx.Get("SpriteManager").New(name, imgUrl, capacity, cellSize, scene.JSObject(), opts.Epsilon, opts.SamplingMode, opts.FromPacked, opts.SpriteJSON)
+	p := ba.ctx.Get("SpriteManager").New(name, imgUrl, capacity, cellSize, scene.JSObject(), opts.Epsilon.JSObject(), opts.SamplingMode.JSObject(), opts.FromPacked.JSObject(), opts.SpriteJSON.JSObject())
 	return SpriteManagerFromJSObject(p)
 }
 

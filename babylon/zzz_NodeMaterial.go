@@ -28,7 +28,7 @@ func NodeMaterialFromJSObject(p js.Value) *NodeMaterial {
 type NewNodeMaterialOpts struct {
 	Scene *Scene
 
-	Options js.Value
+	Options *JSValue
 }
 
 // NewNodeMaterial returns a new NodeMaterial object.
@@ -39,7 +39,7 @@ func (ba *Babylon) NewNodeMaterial(name string, opts *NewNodeMaterialOpts) *Node
 		opts = &NewNodeMaterialOpts{}
 	}
 
-	p := ba.ctx.Get("NodeMaterial").New(name, opts.Scene.JSObject(), opts.Options)
+	p := ba.ctx.Get("NodeMaterial").New(name, opts.Scene.JSObject(), opts.Options.JSObject())
 	return NodeMaterialFromJSObject(p)
 }
 

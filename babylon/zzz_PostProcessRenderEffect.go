@@ -40,7 +40,7 @@ func (ba *Babylon) NewPostProcessRenderEffect(engine *Engine, name string, getPo
 		opts = &NewPostProcessRenderEffectOpts{}
 	}
 
-	p := ba.ctx.Get("PostProcessRenderEffect").New(engine.JSObject(), name, getPostProcesses, opts.SingleInstance)
+	p := ba.ctx.Get("PostProcessRenderEffect").New(engine.JSObject(), name, getPostProcesses, opts.SingleInstance.JSObject())
 	return PostProcessRenderEffectFromJSObject(p)
 }
 

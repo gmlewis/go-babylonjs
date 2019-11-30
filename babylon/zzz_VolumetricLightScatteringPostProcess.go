@@ -47,7 +47,7 @@ func (ba *Babylon) NewVolumetricLightScatteringPostProcess(name string, ratio in
 		opts = &NewVolumetricLightScatteringPostProcessOpts{}
 	}
 
-	p := ba.ctx.Get("VolumetricLightScatteringPostProcess").New(name, ratio, camera.JSObject(), opts.Mesh.JSObject(), opts.Samples, opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable, opts.Scene.JSObject())
+	p := ba.ctx.Get("VolumetricLightScatteringPostProcess").New(name, ratio, camera.JSObject(), opts.Mesh.JSObject(), opts.Samples.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.Scene.JSObject())
 	return VolumetricLightScatteringPostProcessFromJSObject(p)
 }
 

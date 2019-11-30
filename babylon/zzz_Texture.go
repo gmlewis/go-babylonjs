@@ -55,7 +55,7 @@ func (ba *Babylon) NewTexture(url string, sceneOrEngine *Scene, opts *NewTexture
 		opts = &NewTextureOpts{}
 	}
 
-	p := ba.ctx.Get("Texture").New(url, sceneOrEngine.JSObject(), opts.NoMipmap, opts.InvertY, opts.SamplingMode, opts.OnLoad, opts.OnError, opts.Buffer, opts.DeleteBuffer, opts.Format, opts.MimeType)
+	p := ba.ctx.Get("Texture").New(url, sceneOrEngine.JSObject(), opts.NoMipmap.JSObject(), opts.InvertY.JSObject(), opts.SamplingMode.JSObject(), opts.OnLoad, opts.OnError, opts.Buffer.JSObject(), opts.DeleteBuffer.JSObject(), opts.Format.JSObject(), opts.MimeType.JSObject())
 	return TextureFromJSObject(p)
 }
 

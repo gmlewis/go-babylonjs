@@ -39,7 +39,7 @@ func (ba *Babylon) NewNormalMapProceduralTexture(name string, size float64, scen
 		opts = &NewNormalMapProceduralTextureOpts{}
 	}
 
-	p := ba.ctx.Get("NormalMapProceduralTexture").New(name, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps)
+	p := ba.ctx.Get("NormalMapProceduralTexture").New(name, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps.JSObject())
 	return NormalMapProceduralTextureFromJSObject(p)
 }
 

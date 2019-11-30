@@ -37,7 +37,7 @@ func (ba *Babylon) NewButton(opts *NewButtonOpts) *Button {
 		opts = &NewButtonOpts{}
 	}
 
-	p := ba.ctx.Get("Button").New(opts.Name)
+	p := ba.ctx.Get("Button").New(opts.Name.JSObject())
 	return ButtonFromJSObject(p)
 }
 

@@ -49,7 +49,7 @@ func (ba *Babylon) NewAnimatable(scene *Scene, target interface{}, opts *NewAnim
 		opts = &NewAnimatableOpts{}
 	}
 
-	p := ba.ctx.Get("Animatable").New(scene.JSObject(), target, opts.FromFrame, opts.ToFrame, opts.LoopAnimation, opts.SpeedRatio, opts.OnAnimationEnd, opts.Animations.JSObject(), opts.OnAnimationLoop)
+	p := ba.ctx.Get("Animatable").New(scene.JSObject(), target, opts.FromFrame.JSObject(), opts.ToFrame.JSObject(), opts.LoopAnimation.JSObject(), opts.SpeedRatio.JSObject(), opts.OnAnimationEnd, opts.Animations.JSObject(), opts.OnAnimationLoop)
 	return AnimatableFromJSObject(p)
 }
 

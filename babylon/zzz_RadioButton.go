@@ -37,7 +37,7 @@ func (ba *Babylon) NewRadioButton(opts *NewRadioButtonOpts) *RadioButton {
 		opts = &NewRadioButtonOpts{}
 	}
 
-	p := ba.ctx.Get("RadioButton").New(opts.Name)
+	p := ba.ctx.Get("RadioButton").New(opts.Name.JSObject())
 	return RadioButtonFromJSObject(p)
 }
 

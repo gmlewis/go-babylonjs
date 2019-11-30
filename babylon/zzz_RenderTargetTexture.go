@@ -57,7 +57,7 @@ func (ba *Babylon) NewRenderTargetTexture(name string, size float64, scene *Scen
 		opts = &NewRenderTargetTextureOpts{}
 	}
 
-	p := ba.ctx.Get("RenderTargetTexture").New(name, size, scene.JSObject(), opts.GenerateMipMaps, opts.DoNotChangeAspectRatio, opts.Type, opts.IsCube, opts.SamplingMode, opts.GenerateDepthBuffer, opts.GenerateStencilBuffer, opts.IsMulti, opts.Format, opts.DelayAllocation)
+	p := ba.ctx.Get("RenderTargetTexture").New(name, size, scene.JSObject(), opts.GenerateMipMaps.JSObject(), opts.DoNotChangeAspectRatio.JSObject(), opts.Type.JSObject(), opts.IsCube.JSObject(), opts.SamplingMode.JSObject(), opts.GenerateDepthBuffer.JSObject(), opts.GenerateStencilBuffer.JSObject(), opts.IsMulti.JSObject(), opts.Format.JSObject(), opts.DelayAllocation.JSObject())
 	return RenderTargetTextureFromJSObject(p)
 }
 

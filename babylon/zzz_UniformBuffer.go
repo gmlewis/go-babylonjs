@@ -42,7 +42,7 @@ func (ba *Babylon) NewUniformBuffer(engine *Engine, opts *NewUniformBufferOpts) 
 		opts = &NewUniformBufferOpts{}
 	}
 
-	p := ba.ctx.Get("UniformBuffer").New(engine.JSObject(), opts.Data, opts.Dynamic)
+	p := ba.ctx.Get("UniformBuffer").New(engine.JSObject(), opts.Data.JSObject(), opts.Dynamic.JSObject())
 	return UniformBufferFromJSObject(p)
 }
 

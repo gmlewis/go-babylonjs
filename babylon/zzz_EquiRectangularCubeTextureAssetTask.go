@@ -39,7 +39,7 @@ func (ba *Babylon) NewEquiRectangularCubeTextureAssetTask(name string, url strin
 		opts = &NewEquiRectangularCubeTextureAssetTaskOpts{}
 	}
 
-	p := ba.ctx.Get("EquiRectangularCubeTextureAssetTask").New(name, url, size, opts.NoMipmap, opts.GammaSpace)
+	p := ba.ctx.Get("EquiRectangularCubeTextureAssetTask").New(name, url, size, opts.NoMipmap.JSObject(), opts.GammaSpace.JSObject())
 	return EquiRectangularCubeTextureAssetTaskFromJSObject(p)
 }
 

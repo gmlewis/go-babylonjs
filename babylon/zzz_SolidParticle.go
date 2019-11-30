@@ -39,7 +39,7 @@ func (ba *Babylon) NewSolidParticle(particleIndex float64, particleId float64, p
 		opts = &NewSolidParticleOpts{}
 	}
 
-	p := ba.ctx.Get("SolidParticle").New(particleIndex, particleId, positionIndex, indiceIndex, model.JSObject(), shapeId, idxInShape, sps.JSObject(), opts.ModelBoundingInfo.JSObject(), opts.MaterialIndex)
+	p := ba.ctx.Get("SolidParticle").New(particleIndex, particleId, positionIndex, indiceIndex, model.JSObject(), shapeId, idxInShape, sps.JSObject(), opts.ModelBoundingInfo.JSObject(), opts.MaterialIndex.JSObject())
 	return SolidParticleFromJSObject(p)
 }
 

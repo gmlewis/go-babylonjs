@@ -42,7 +42,7 @@ func (ba *Babylon) NewArcRotateCamera(name string, alpha float64, beta float64, 
 		opts = &NewArcRotateCameraOpts{}
 	}
 
-	p := ba.ctx.Get("ArcRotateCamera").New(name, alpha, beta, radius, target.JSObject(), scene.JSObject(), opts.SetActiveOnSceneIfNoneActive)
+	p := ba.ctx.Get("ArcRotateCamera").New(name, alpha, beta, radius, target.JSObject(), scene.JSObject(), opts.SetActiveOnSceneIfNoneActive.JSObject())
 	return ArcRotateCameraFromJSObject(p)
 }
 

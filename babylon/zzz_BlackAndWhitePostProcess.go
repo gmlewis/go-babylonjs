@@ -41,7 +41,7 @@ func (ba *Babylon) NewBlackAndWhitePostProcess(name string, options float64, cam
 		opts = &NewBlackAndWhitePostProcessOpts{}
 	}
 
-	p := ba.ctx.Get("BlackAndWhitePostProcess").New(name, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable)
+	p := ba.ctx.Get("BlackAndWhitePostProcess").New(name, options, camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject())
 	return BlackAndWhitePostProcessFromJSObject(p)
 }
 

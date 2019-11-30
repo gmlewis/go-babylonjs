@@ -30,7 +30,7 @@ func ShaderMaterialFromJSObject(p js.Value) *ShaderMaterial {
 
 // NewShaderMaterialOpts contains optional parameters for NewShaderMaterial.
 type NewShaderMaterialOpts struct {
-	Options js.Value
+	Options *JSValue
 }
 
 // NewShaderMaterial returns a new ShaderMaterial object.
@@ -41,7 +41,7 @@ func (ba *Babylon) NewShaderMaterial(name string, scene *Scene, shaderPath inter
 		opts = &NewShaderMaterialOpts{}
 	}
 
-	p := ba.ctx.Get("ShaderMaterial").New(name, scene.JSObject(), shaderPath, opts.Options)
+	p := ba.ctx.Get("ShaderMaterial").New(name, scene.JSObject(), shaderPath, opts.Options.JSObject())
 	return ShaderMaterialFromJSObject(p)
 }
 

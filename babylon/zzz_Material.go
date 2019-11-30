@@ -37,7 +37,7 @@ func (ba *Babylon) NewMaterial(name string, scene *Scene, opts *NewMaterialOpts)
 		opts = &NewMaterialOpts{}
 	}
 
-	p := ba.ctx.Get("Material").New(name, scene.JSObject(), opts.DoNotAdd)
+	p := ba.ctx.Get("Material").New(name, scene.JSObject(), opts.DoNotAdd.JSObject())
 	return MaterialFromJSObject(p)
 }
 

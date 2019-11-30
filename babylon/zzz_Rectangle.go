@@ -37,7 +37,7 @@ func (ba *Babylon) NewRectangle(opts *NewRectangleOpts) *Rectangle {
 		opts = &NewRectangleOpts{}
 	}
 
-	p := ba.ctx.Get("Rectangle").New(opts.Name)
+	p := ba.ctx.Get("Rectangle").New(opts.Name.JSObject())
 	return RectangleFromJSObject(p)
 }
 

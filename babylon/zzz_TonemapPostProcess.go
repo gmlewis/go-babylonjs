@@ -41,7 +41,7 @@ func (ba *Babylon) NewTonemapPostProcess(name string, _operator js.Value, exposu
 		opts = &NewTonemapPostProcessOpts{}
 	}
 
-	p := ba.ctx.Get("TonemapPostProcess").New(name, _operator, exposureAdjustment, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.TextureFormat)
+	p := ba.ctx.Get("TonemapPostProcess").New(name, _operator, exposureAdjustment, camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.TextureFormat.JSObject())
 	return TonemapPostProcessFromJSObject(p)
 }
 

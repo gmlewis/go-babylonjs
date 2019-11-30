@@ -45,7 +45,7 @@ func (ba *Babylon) NewBuffer(engine interface{}, data []float64, updatable bool,
 		opts = &NewBufferOpts{}
 	}
 
-	p := ba.ctx.Get("Buffer").New(engine, data, updatable, opts.Stride, opts.PostponeInternalCreation, opts.Instanced, opts.UseBytes, opts.Divisor)
+	p := ba.ctx.Get("Buffer").New(engine, data, updatable, opts.Stride.JSObject(), opts.PostponeInternalCreation.JSObject(), opts.Instanced.JSObject(), opts.UseBytes.JSObject(), opts.Divisor.JSObject())
 	return BufferFromJSObject(p)
 }
 

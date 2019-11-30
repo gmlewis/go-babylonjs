@@ -42,7 +42,7 @@ func (ba *Babylon) NewHemisphericParticleEmitter(opts *NewHemisphericParticleEmi
 		opts = &NewHemisphericParticleEmitterOpts{}
 	}
 
-	p := ba.ctx.Get("HemisphericParticleEmitter").New(opts.Radius, opts.RadiusRange, opts.DirectionRandomizer)
+	p := ba.ctx.Get("HemisphericParticleEmitter").New(opts.Radius.JSObject(), opts.RadiusRange.JSObject(), opts.DirectionRandomizer.JSObject())
 	return HemisphericParticleEmitterFromJSObject(p)
 }
 

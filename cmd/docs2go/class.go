@@ -231,16 +231,22 @@ func (s *Signature) Name() string {
 type processOverrider func(s *Signature, names []string, optional []bool, types []string) ([]string, []bool, []string)
 
 func processConstructorOverrides(s *Signature, names []string, optional []bool, types []string) ([]string, []bool, []string) {
+	override := true
 	switch s.Name() {
 	case "NewVector2":
 		optional = []bool{false, false}
 	case "NewVector3":
 		optional = []bool{false, false, false}
+	default:
+		override = false
+	}
+	if override {
+		logf("\n\nOVERRIDES: parseParameters[%v]: names(%v)=%v, optional(%v)=%v, types(%v)=%v\n\n", s.Name(), len(names), names, len(optional), optional, len(types), types)
 	}
 	return names, optional, types
 }
 
-func (s *Signature) parseParameters(po processOverrider) {
+func (s *Signature) parseParameters(processOverrides processOverrider) {
 	v := strings.TrimSpace(s.InnerXML)
 	logf("ORIGINAL: '%v'\n\n", v)
 	v = strings.Replace(v, "<wbr>", "", -1)
@@ -331,9 +337,8 @@ func (s *Signature) parseParameters(po processOverrider) {
 		log.Fatalf("badly parsed arguments: \n\nparseParameters[%v]: %v\n%#v\nnames(%v)=%v, optional(%v)=%v, types(%v)=%v\n\n", s.Name(), v, matches, len(names), names, len(optional), optional, len(types), types)
 	}
 
-	if po != nil {
-		names, optional, types = po(s, names, optional, types)
-		logf("\n\nOVERRIDES: parseParameters[%v]: %v\n%#v\nnames(%v)=%v, optional(%v)=%v, types(%v)=%v\n\n", s.Name(), v, matches, len(names), names, len(optional), optional, len(types), types)
+	if processOverrides != nil {
+		names, optional, types = processOverrides(s, names, optional, types)
 	}
 
 	for i, v := range names {
@@ -354,10 +359,13 @@ func (s *Signature) parseParameters(po processOverrider) {
 					paramType = "[]js.Value"
 				case "string":
 					paramType = "JSString"
+					jsName += ".JSObject()"
 				case "float64":
 					paramType = "JSFloat64"
+					jsName += ".JSObject()"
 				case "bool":
 					paramType = "JSBool"
+					jsName += ".JSObject()"
 				case "*DistanceJointData",
 					"*EffectWrapperCreationOptions",
 					"*EngineOptions",
@@ -407,7 +415,8 @@ func (s *Signature) parseParameters(po processOverrider) {
 					"Worker",
 					"null",
 					"object":
-					paramType = "js.Value"
+					paramType = "JSValue"
+					jsName += ".JSObject()"
 				default:
 					jsName += ".JSObject()"
 				}
@@ -498,6 +507,8 @@ func (s *Signature) parseParameters(po processOverrider) {
 			s.JSParams = append(s.JSParams, jsName)
 		}
 	}
+
+	logf("parseParameters[%v]: final params: HasOpts=%v, GoParams=%#v, GoOpts=%#v, JSParams=%#v\n\n", s.Name(), s.HasOpts, s.GoParams, s.GoOpts, s.JSParams)
 }
 
 func (s *Section) Type() string {

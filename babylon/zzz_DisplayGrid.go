@@ -37,7 +37,7 @@ func (ba *Babylon) NewDisplayGrid(opts *NewDisplayGridOpts) *DisplayGrid {
 		opts = &NewDisplayGridOpts{}
 	}
 
-	p := ba.ctx.Get("DisplayGrid").New(opts.Name)
+	p := ba.ctx.Get("DisplayGrid").New(opts.Name.JSObject())
 	return DisplayGridFromJSObject(p)
 }
 

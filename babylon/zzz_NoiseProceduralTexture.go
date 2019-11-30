@@ -43,7 +43,7 @@ func (ba *Babylon) NewNoiseProceduralTexture(name string, opts *NewNoiseProcedur
 		opts = &NewNoiseProceduralTextureOpts{}
 	}
 
-	p := ba.ctx.Get("NoiseProceduralTexture").New(name, opts.Size, opts.Scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps)
+	p := ba.ctx.Get("NoiseProceduralTexture").New(name, opts.Size.JSObject(), opts.Scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps.JSObject())
 	return NoiseProceduralTextureFromJSObject(p)
 }
 

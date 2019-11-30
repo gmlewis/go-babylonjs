@@ -45,7 +45,7 @@ func (ba *Babylon) NewBloomMergePostProcess(name string, originalFromInput *Post
 		opts = &NewBloomMergePostProcessOpts{}
 	}
 
-	p := ba.ctx.Get("BloomMergePostProcess").New(name, originalFromInput.JSObject(), blurred.JSObject(), weight, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable, opts.TextureType, opts.BlockCompilation)
+	p := ba.ctx.Get("BloomMergePostProcess").New(name, originalFromInput.JSObject(), blurred.JSObject(), weight, options, camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType.JSObject(), opts.BlockCompilation.JSObject())
 	return BloomMergePostProcessFromJSObject(p)
 }
 

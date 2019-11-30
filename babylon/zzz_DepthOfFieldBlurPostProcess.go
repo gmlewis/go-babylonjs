@@ -50,7 +50,7 @@ func (ba *Babylon) NewDepthOfFieldBlurPostProcess(name string, scene *Scene, dir
 		opts = &NewDepthOfFieldBlurPostProcessOpts{}
 	}
 
-	p := ba.ctx.Get("DepthOfFieldBlurPostProcess").New(name, scene.JSObject(), direction.JSObject(), kernel, options, camera.JSObject(), circleOfConfusion.JSObject(), opts.ImageToBlur.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable, opts.TextureType, opts.BlockCompilation)
+	p := ba.ctx.Get("DepthOfFieldBlurPostProcess").New(name, scene.JSObject(), direction.JSObject(), kernel, options, camera.JSObject(), circleOfConfusion.JSObject(), opts.ImageToBlur.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType.JSObject(), opts.BlockCompilation.JSObject())
 	return DepthOfFieldBlurPostProcessFromJSObject(p)
 }
 

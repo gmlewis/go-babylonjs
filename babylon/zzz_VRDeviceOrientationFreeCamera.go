@@ -41,7 +41,7 @@ func (ba *Babylon) NewVRDeviceOrientationFreeCamera(name string, position *Vecto
 		opts = &NewVRDeviceOrientationFreeCameraOpts{}
 	}
 
-	p := ba.ctx.Get("VRDeviceOrientationFreeCamera").New(name, position.JSObject(), scene.JSObject(), opts.CompensateDistortion, opts.VrCameraMetrics.JSObject())
+	p := ba.ctx.Get("VRDeviceOrientationFreeCamera").New(name, position.JSObject(), scene.JSObject(), opts.CompensateDistortion.JSObject(), opts.VrCameraMetrics.JSObject())
 	return VRDeviceOrientationFreeCameraFromJSObject(p)
 }
 

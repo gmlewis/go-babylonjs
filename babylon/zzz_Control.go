@@ -39,7 +39,7 @@ func (ba *Babylon) NewControl(opts *NewControlOpts) *Control {
 		opts = &NewControlOpts{}
 	}
 
-	p := ba.ctx.Get("Control").New(opts.Name)
+	p := ba.ctx.Get("Control").New(opts.Name.JSObject())
 	return ControlFromJSObject(p)
 }
 

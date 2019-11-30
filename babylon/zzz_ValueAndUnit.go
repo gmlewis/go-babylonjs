@@ -39,7 +39,7 @@ func (ba *Babylon) NewValueAndUnit(value float64, opts *NewValueAndUnitOpts) *Va
 		opts = &NewValueAndUnitOpts{}
 	}
 
-	p := ba.ctx.Get("ValueAndUnit").New(value, opts.Unit, opts.NegativeValueAllowed)
+	p := ba.ctx.Get("ValueAndUnit").New(value, opts.Unit.JSObject(), opts.NegativeValueAllowed.JSObject())
 	return ValueAndUnitFromJSObject(p)
 }
 

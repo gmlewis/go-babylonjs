@@ -41,7 +41,7 @@ func (ba *Babylon) NewEventState(mask float64, opts *NewEventStateOpts) *EventSt
 		opts = &NewEventStateOpts{}
 	}
 
-	p := ba.ctx.Get("EventState").New(mask, opts.SkipNextObservers, opts.Target, opts.CurrentTarget)
+	p := ba.ctx.Get("EventState").New(mask, opts.SkipNextObservers.JSObject(), opts.Target, opts.CurrentTarget)
 	return EventStateFromJSObject(p)
 }
 

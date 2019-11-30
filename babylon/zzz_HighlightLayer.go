@@ -28,7 +28,7 @@ func HighlightLayerFromJSObject(p js.Value) *HighlightLayer {
 
 // NewHighlightLayerOpts contains optional parameters for NewHighlightLayer.
 type NewHighlightLayerOpts struct {
-	Options js.Value
+	Options *JSValue
 }
 
 // NewHighlightLayer returns a new HighlightLayer object.
@@ -39,7 +39,7 @@ func (ba *Babylon) NewHighlightLayer(name string, scene *Scene, opts *NewHighlig
 		opts = &NewHighlightLayerOpts{}
 	}
 
-	p := ba.ctx.Get("HighlightLayer").New(name, scene.JSObject(), opts.Options)
+	p := ba.ctx.Get("HighlightLayer").New(name, scene.JSObject(), opts.Options.JSObject())
 	return HighlightLayerFromJSObject(p)
 }
 

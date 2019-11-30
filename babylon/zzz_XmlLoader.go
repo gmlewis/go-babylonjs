@@ -26,7 +26,7 @@ func XmlLoaderFromJSObject(p js.Value) *XmlLoader {
 
 // NewXmlLoaderOpts contains optional parameters for NewXmlLoader.
 type NewXmlLoaderOpts struct {
-	ParentClass js.Value
+	ParentClass *JSValue
 }
 
 // NewXmlLoader returns a new XmlLoader object.
@@ -37,7 +37,7 @@ func (ba *Babylon) NewXmlLoader(opts *NewXmlLoaderOpts) *XmlLoader {
 		opts = &NewXmlLoaderOpts{}
 	}
 
-	p := ba.ctx.Get("XmlLoader").New(opts.ParentClass)
+	p := ba.ctx.Get("XmlLoader").New(opts.ParentClass.JSObject())
 	return XmlLoaderFromJSObject(p)
 }
 

@@ -41,7 +41,7 @@ func (ba *Babylon) NewTrailMesh(name string, generator *AbstractMesh, scene *Sce
 		opts = &NewTrailMeshOpts{}
 	}
 
-	p := ba.ctx.Get("TrailMesh").New(name, generator.JSObject(), scene.JSObject(), opts.Diameter, opts.Length, opts.AutoStart)
+	p := ba.ctx.Get("TrailMesh").New(name, generator.JSObject(), scene.JSObject(), opts.Diameter.JSObject(), opts.Length.JSObject(), opts.AutoStart.JSObject())
 	return TrailMeshFromJSObject(p)
 }
 

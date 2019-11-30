@@ -37,7 +37,7 @@ func (ba *Babylon) NewAnimationEvent(frame float64, action func(), opts *NewAnim
 		opts = &NewAnimationEventOpts{}
 	}
 
-	p := ba.ctx.Get("AnimationEvent").New(frame, action, opts.OnlyOnce)
+	p := ba.ctx.Get("AnimationEvent").New(frame, action, opts.OnlyOnce.JSObject())
 	return AnimationEventFromJSObject(p)
 }
 

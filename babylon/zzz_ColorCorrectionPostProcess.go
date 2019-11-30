@@ -46,7 +46,7 @@ func (ba *Babylon) NewColorCorrectionPostProcess(name string, colorTableUrl stri
 		opts = &NewColorCorrectionPostProcessOpts{}
 	}
 
-	p := ba.ctx.Get("ColorCorrectionPostProcess").New(name, colorTableUrl, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable)
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(name, colorTableUrl, options, camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject())
 	return ColorCorrectionPostProcessFromJSObject(p)
 }
 

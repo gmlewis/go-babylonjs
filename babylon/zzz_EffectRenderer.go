@@ -26,7 +26,7 @@ func EffectRendererFromJSObject(p js.Value) *EffectRenderer {
 
 // NewEffectRendererOpts contains optional parameters for NewEffectRenderer.
 type NewEffectRendererOpts struct {
-	Options js.Value
+	Options *JSValue
 }
 
 // NewEffectRenderer returns a new EffectRenderer object.
@@ -37,7 +37,7 @@ func (ba *Babylon) NewEffectRenderer(engine *ThinEngine, opts *NewEffectRenderer
 		opts = &NewEffectRendererOpts{}
 	}
 
-	p := ba.ctx.Get("EffectRenderer").New(engine.JSObject(), opts.Options)
+	p := ba.ctx.Get("EffectRenderer").New(engine.JSObject(), opts.Options.JSObject())
 	return EffectRendererFromJSObject(p)
 }
 

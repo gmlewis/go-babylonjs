@@ -45,7 +45,7 @@ func (ba *Babylon) NewCircleOfConfusionPostProcess(name string, depthTexture *Re
 		opts = &NewCircleOfConfusionPostProcessOpts{}
 	}
 
-	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(name, depthTexture.JSObject(), options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable, opts.TextureType, opts.BlockCompilation)
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(name, depthTexture.JSObject(), options, camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType.JSObject(), opts.BlockCompilation.JSObject())
 	return CircleOfConfusionPostProcessFromJSObject(p)
 }
 

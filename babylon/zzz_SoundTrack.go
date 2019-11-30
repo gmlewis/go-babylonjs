@@ -29,7 +29,7 @@ func SoundTrackFromJSObject(p js.Value) *SoundTrack {
 
 // NewSoundTrackOpts contains optional parameters for NewSoundTrack.
 type NewSoundTrackOpts struct {
-	Options js.Value
+	Options *JSValue
 }
 
 // NewSoundTrack returns a new SoundTrack object.
@@ -40,7 +40,7 @@ func (ba *Babylon) NewSoundTrack(scene *Scene, opts *NewSoundTrackOpts) *SoundTr
 		opts = &NewSoundTrackOpts{}
 	}
 
-	p := ba.ctx.Get("SoundTrack").New(scene.JSObject(), opts.Options)
+	p := ba.ctx.Get("SoundTrack").New(scene.JSObject(), opts.Options.JSObject())
 	return SoundTrackFromJSObject(p)
 }
 

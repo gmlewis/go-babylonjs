@@ -38,7 +38,7 @@ func (ba *Babylon) NewFlyCamera(name string, position *Vector3, scene *Scene, op
 		opts = &NewFlyCameraOpts{}
 	}
 
-	p := ba.ctx.Get("FlyCamera").New(name, position.JSObject(), scene.JSObject(), opts.SetActiveOnSceneIfNoneActive)
+	p := ba.ctx.Get("FlyCamera").New(name, position.JSObject(), scene.JSObject(), opts.SetActiveOnSceneIfNoneActive.JSObject())
 	return FlyCameraFromJSObject(p)
 }
 

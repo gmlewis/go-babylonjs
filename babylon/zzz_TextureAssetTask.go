@@ -41,7 +41,7 @@ func (ba *Babylon) NewTextureAssetTask(name string, url string, opts *NewTexture
 		opts = &NewTextureAssetTaskOpts{}
 	}
 
-	p := ba.ctx.Get("TextureAssetTask").New(name, url, opts.NoMipmap, opts.InvertY, opts.SamplingMode)
+	p := ba.ctx.Get("TextureAssetTask").New(name, url, opts.NoMipmap.JSObject(), opts.InvertY.JSObject(), opts.SamplingMode.JSObject())
 	return TextureAssetTaskFromJSObject(p)
 }
 

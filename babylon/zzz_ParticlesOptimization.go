@@ -39,7 +39,7 @@ func (ba *Babylon) NewParticlesOptimization(opts *NewParticlesOptimizationOpts) 
 		opts = &NewParticlesOptimizationOpts{}
 	}
 
-	p := ba.ctx.Get("ParticlesOptimization").New(opts.Priority)
+	p := ba.ctx.Get("ParticlesOptimization").New(opts.Priority.JSObject())
 	return ParticlesOptimizationFromJSObject(p)
 }
 

@@ -45,7 +45,7 @@ func (ba *Babylon) NewDepthOfFieldMergePostProcess(name string, originalFromInpu
 		opts = &NewDepthOfFieldMergePostProcessOpts{}
 	}
 
-	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(name, originalFromInput.JSObject(), circleOfConfusion.JSObject(), blurSteps, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable, opts.TextureType, opts.BlockCompilation)
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(name, originalFromInput.JSObject(), circleOfConfusion.JSObject(), blurSteps, options, camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType.JSObject(), opts.BlockCompilation.JSObject())
 	return DepthOfFieldMergePostProcessFromJSObject(p)
 }
 

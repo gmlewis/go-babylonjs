@@ -32,7 +32,7 @@ func OceanPostProcessFromJSObject(p js.Value) *OceanPostProcess {
 
 // NewOceanPostProcessOpts contains optional parameters for NewOceanPostProcess.
 type NewOceanPostProcessOpts struct {
-	Options js.Value
+	Options *JSValue
 }
 
 // NewOceanPostProcess returns a new OceanPostProcess object.
@@ -43,7 +43,7 @@ func (ba *Babylon) NewOceanPostProcess(name string, camera *TargetCamera, opts *
 		opts = &NewOceanPostProcessOpts{}
 	}
 
-	p := ba.ctx.Get("OceanPostProcess").New(name, camera.JSObject(), opts.Options)
+	p := ba.ctx.Get("OceanPostProcess").New(name, camera.JSObject(), opts.Options.JSObject())
 	return OceanPostProcessFromJSObject(p)
 }
 

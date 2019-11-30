@@ -41,7 +41,7 @@ func (ba *Babylon) NewEdgesRenderer(source *AbstractMesh, opts *NewEdgesRenderer
 		opts = &NewEdgesRendererOpts{}
 	}
 
-	p := ba.ctx.Get("EdgesRenderer").New(source.JSObject(), opts.Epsilon, opts.CheckVerticesInsteadOfIndices, opts.GenerateEdgesLines)
+	p := ba.ctx.Get("EdgesRenderer").New(source.JSObject(), opts.Epsilon.JSObject(), opts.CheckVerticesInsteadOfIndices.JSObject(), opts.GenerateEdgesLines.JSObject())
 	return EdgesRendererFromJSObject(p)
 }
 

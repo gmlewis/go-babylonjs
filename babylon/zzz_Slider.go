@@ -37,7 +37,7 @@ func (ba *Babylon) NewSlider(opts *NewSliderOpts) *Slider {
 		opts = &NewSliderOpts{}
 	}
 
-	p := ba.ctx.Get("Slider").New(opts.Name)
+	p := ba.ctx.Get("Slider").New(opts.Name.JSObject())
 	return SliderFromJSObject(p)
 }
 

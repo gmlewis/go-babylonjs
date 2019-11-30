@@ -39,7 +39,7 @@ func (ba *Babylon) NewRenderTargetsOptimization(opts *NewRenderTargetsOptimizati
 		opts = &NewRenderTargetsOptimizationOpts{}
 	}
 
-	p := ba.ctx.Get("RenderTargetsOptimization").New(opts.Priority)
+	p := ba.ctx.Get("RenderTargetsOptimization").New(opts.Priority.JSObject())
 	return RenderTargetsOptimizationFromJSObject(p)
 }
 

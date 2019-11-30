@@ -45,7 +45,7 @@ func (ba *Babylon) NewChromaticAberrationPostProcess(name string, screenWidth fl
 		opts = &NewChromaticAberrationPostProcessOpts{}
 	}
 
-	p := ba.ctx.Get("ChromaticAberrationPostProcess").New(name, screenWidth, screenHeight, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable, opts.TextureType, opts.BlockCompilation)
+	p := ba.ctx.Get("ChromaticAberrationPostProcess").New(name, screenWidth, screenHeight, options, camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType.JSObject(), opts.BlockCompilation.JSObject())
 	return ChromaticAberrationPostProcessFromJSObject(p)
 }
 

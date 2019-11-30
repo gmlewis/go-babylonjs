@@ -42,7 +42,7 @@ func (ba *Babylon) NewSphereDirectedParticleEmitter(opts *NewSphereDirectedParti
 		opts = &NewSphereDirectedParticleEmitterOpts{}
 	}
 
-	p := ba.ctx.Get("SphereDirectedParticleEmitter").New(opts.Radius, opts.Direction1.JSObject(), opts.Direction2.JSObject())
+	p := ba.ctx.Get("SphereDirectedParticleEmitter").New(opts.Radius.JSObject(), opts.Direction1.JSObject(), opts.Direction2.JSObject())
 	return SphereDirectedParticleEmitterFromJSObject(p)
 }
 

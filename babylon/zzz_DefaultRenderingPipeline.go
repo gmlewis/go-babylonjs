@@ -46,7 +46,7 @@ func (ba *Babylon) NewDefaultRenderingPipeline(opts *NewDefaultRenderingPipeline
 		opts = &NewDefaultRenderingPipelineOpts{}
 	}
 
-	p := ba.ctx.Get("DefaultRenderingPipeline").New(opts.Name, opts.Hdr, opts.Scene.JSObject(), opts.Cameras.JSObject(), opts.AutomaticBuild)
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(opts.Name.JSObject(), opts.Hdr.JSObject(), opts.Scene.JSObject(), opts.Cameras.JSObject(), opts.AutomaticBuild.JSObject())
 	return DefaultRenderingPipelineFromJSObject(p)
 }
 

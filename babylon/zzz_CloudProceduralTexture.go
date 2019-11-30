@@ -39,7 +39,7 @@ func (ba *Babylon) NewCloudProceduralTexture(name string, size float64, scene *S
 		opts = &NewCloudProceduralTextureOpts{}
 	}
 
-	p := ba.ctx.Get("CloudProceduralTexture").New(name, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps)
+	p := ba.ctx.Get("CloudProceduralTexture").New(name, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps.JSObject())
 	return CloudProceduralTextureFromJSObject(p)
 }
 

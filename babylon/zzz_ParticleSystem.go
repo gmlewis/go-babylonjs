@@ -45,7 +45,7 @@ func (ba *Babylon) NewParticleSystem(name string, capacity float64, scene *Scene
 		opts = &NewParticleSystemOpts{}
 	}
 
-	p := ba.ctx.Get("ParticleSystem").New(name, capacity, scene.JSObject(), opts.CustomEffect.JSObject(), opts.IsAnimationSheetEnabled, opts.Epsilon)
+	p := ba.ctx.Get("ParticleSystem").New(name, capacity, scene.JSObject(), opts.CustomEffect.JSObject(), opts.IsAnimationSheetEnabled.JSObject(), opts.Epsilon.JSObject())
 	return ParticleSystemFromJSObject(p)
 }
 

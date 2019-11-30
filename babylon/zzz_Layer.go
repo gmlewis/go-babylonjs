@@ -42,7 +42,7 @@ func (ba *Babylon) NewLayer(name string, imgUrl string, scene *Scene, opts *NewL
 		opts = &NewLayerOpts{}
 	}
 
-	p := ba.ctx.Get("Layer").New(name, imgUrl, scene.JSObject(), opts.IsBackground, opts.Color.JSObject())
+	p := ba.ctx.Get("Layer").New(name, imgUrl, scene.JSObject(), opts.IsBackground.JSObject(), opts.Color.JSObject())
 	return LayerFromJSObject(p)
 }
 

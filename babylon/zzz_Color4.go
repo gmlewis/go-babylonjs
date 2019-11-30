@@ -43,7 +43,7 @@ func (ba *Babylon) NewColor4(opts *NewColor4Opts) *Color4 {
 		opts = &NewColor4Opts{}
 	}
 
-	p := ba.ctx.Get("Color4").New(opts.R, opts.G, opts.B, opts.A)
+	p := ba.ctx.Get("Color4").New(opts.R.JSObject(), opts.G.JSObject(), opts.B.JSObject(), opts.A.JSObject())
 	return Color4FromJSObject(p)
 }
 

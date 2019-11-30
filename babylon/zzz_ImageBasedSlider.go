@@ -37,7 +37,7 @@ func (ba *Babylon) NewImageBasedSlider(opts *NewImageBasedSliderOpts) *ImageBase
 		opts = &NewImageBasedSliderOpts{}
 	}
 
-	p := ba.ctx.Get("ImageBasedSlider").New(opts.Name)
+	p := ba.ctx.Get("ImageBasedSlider").New(opts.Name.JSObject())
 	return ImageBasedSliderFromJSObject(p)
 }
 

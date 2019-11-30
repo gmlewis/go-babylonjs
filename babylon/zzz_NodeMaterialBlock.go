@@ -26,7 +26,7 @@ func NodeMaterialBlockFromJSObject(p js.Value) *NodeMaterialBlock {
 
 // NewNodeMaterialBlockOpts contains optional parameters for NewNodeMaterialBlock.
 type NewNodeMaterialBlockOpts struct {
-	Target js.Value
+	Target *JSValue
 
 	IsFinalMerger *JSBool
 
@@ -41,7 +41,7 @@ func (ba *Babylon) NewNodeMaterialBlock(name string, opts *NewNodeMaterialBlockO
 		opts = &NewNodeMaterialBlockOpts{}
 	}
 
-	p := ba.ctx.Get("NodeMaterialBlock").New(name, opts.Target, opts.IsFinalMerger, opts.IsInput)
+	p := ba.ctx.Get("NodeMaterialBlock").New(name, opts.Target.JSObject(), opts.IsFinalMerger.JSObject(), opts.IsInput.JSObject())
 	return NodeMaterialBlockFromJSObject(p)
 }
 

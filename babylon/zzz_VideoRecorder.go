@@ -29,7 +29,7 @@ func VideoRecorderFromJSObject(p js.Value) *VideoRecorder {
 
 // NewVideoRecorderOpts contains optional parameters for NewVideoRecorder.
 type NewVideoRecorderOpts struct {
-	Options js.Value
+	Options *JSValue
 }
 
 // NewVideoRecorder returns a new VideoRecorder object.
@@ -40,7 +40,7 @@ func (ba *Babylon) NewVideoRecorder(engine *Engine, opts *NewVideoRecorderOpts) 
 		opts = &NewVideoRecorderOpts{}
 	}
 
-	p := ba.ctx.Get("VideoRecorder").New(engine.JSObject(), opts.Options)
+	p := ba.ctx.Get("VideoRecorder").New(engine.JSObject(), opts.Options.JSObject())
 	return VideoRecorderFromJSObject(p)
 }
 

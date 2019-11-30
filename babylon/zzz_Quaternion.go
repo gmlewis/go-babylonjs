@@ -45,7 +45,7 @@ func (ba *Babylon) NewQuaternion(opts *NewQuaternionOpts) *Quaternion {
 		opts = &NewQuaternionOpts{}
 	}
 
-	p := ba.ctx.Get("Quaternion").New(opts.X, opts.Y, opts.Z, opts.W)
+	p := ba.ctx.Get("Quaternion").New(opts.X.JSObject(), opts.Y.JSObject(), opts.Z.JSObject(), opts.W.JSObject())
 	return QuaternionFromJSObject(p)
 }
 

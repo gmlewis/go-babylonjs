@@ -39,7 +39,7 @@ func (ba *Babylon) NewGrassProceduralTexture(name string, size float64, scene *S
 		opts = &NewGrassProceduralTextureOpts{}
 	}
 
-	p := ba.ctx.Get("GrassProceduralTexture").New(name, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps)
+	p := ba.ctx.Get("GrassProceduralTexture").New(name, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps.JSObject())
 	return GrassProceduralTextureFromJSObject(p)
 }
 

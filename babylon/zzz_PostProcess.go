@@ -52,7 +52,7 @@ func (ba *Babylon) NewPostProcess(name string, fragmentUrl string, parameters st
 		opts = &NewPostProcessOpts{}
 	}
 
-	p := ba.ctx.Get("PostProcess").New(name, fragmentUrl, parameters, samplers, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable, opts.Defines, opts.TextureType, opts.VertexUrl, opts.IndexParameters, opts.BlockCompilation)
+	p := ba.ctx.Get("PostProcess").New(name, fragmentUrl, parameters, samplers, options, camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.Defines.JSObject(), opts.TextureType.JSObject(), opts.VertexUrl.JSObject(), opts.IndexParameters, opts.BlockCompilation.JSObject())
 	return PostProcessFromJSObject(p)
 }
 

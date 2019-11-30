@@ -37,7 +37,7 @@ func (ba *Babylon) NewButton3D(opts *NewButton3DOpts) *Button3D {
 		opts = &NewButton3DOpts{}
 	}
 
-	p := ba.ctx.Get("Button3D").New(opts.Name)
+	p := ba.ctx.Get("Button3D").New(opts.Name.JSObject())
 	return Button3DFromJSObject(p)
 }
 

@@ -46,7 +46,7 @@ func (ba *Babylon) NewCylinderDirectedParticleEmitter(opts *NewCylinderDirectedP
 		opts = &NewCylinderDirectedParticleEmitterOpts{}
 	}
 
-	p := ba.ctx.Get("CylinderDirectedParticleEmitter").New(opts.Radius, opts.Height, opts.RadiusRange, opts.Direction1.JSObject(), opts.Direction2.JSObject())
+	p := ba.ctx.Get("CylinderDirectedParticleEmitter").New(opts.Radius.JSObject(), opts.Height.JSObject(), opts.RadiusRange.JSObject(), opts.Direction1.JSObject(), opts.Direction2.JSObject())
 	return CylinderDirectedParticleEmitterFromJSObject(p)
 }
 

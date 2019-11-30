@@ -37,7 +37,7 @@ func (ba *Babylon) NewEllipse(opts *NewEllipseOpts) *Ellipse {
 		opts = &NewEllipseOpts{}
 	}
 
-	p := ba.ctx.Get("Ellipse").New(opts.Name)
+	p := ba.ctx.Get("Ellipse").New(opts.Name.JSObject())
 	return EllipseFromJSObject(p)
 }
 

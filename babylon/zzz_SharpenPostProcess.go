@@ -46,7 +46,7 @@ func (ba *Babylon) NewSharpenPostProcess(name string, options float64, camera *C
 		opts = &NewSharpenPostProcessOpts{}
 	}
 
-	p := ba.ctx.Get("SharpenPostProcess").New(name, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable, opts.TextureType, opts.BlockCompilation)
+	p := ba.ctx.Get("SharpenPostProcess").New(name, options, camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType.JSObject(), opts.BlockCompilation.JSObject())
 	return SharpenPostProcessFromJSObject(p)
 }
 

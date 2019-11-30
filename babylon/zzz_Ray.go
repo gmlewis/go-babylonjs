@@ -37,7 +37,7 @@ func (ba *Babylon) NewRay(origin *Vector3, direction *Vector3, opts *NewRayOpts)
 		opts = &NewRayOpts{}
 	}
 
-	p := ba.ctx.Get("Ray").New(origin.JSObject(), direction.JSObject(), opts.Length)
+	p := ba.ctx.Get("Ray").New(origin.JSObject(), direction.JSObject(), opts.Length.JSObject())
 	return RayFromJSObject(p)
 }
 

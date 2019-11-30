@@ -41,7 +41,7 @@ func (ba *Babylon) NewSkeletonViewer(skeleton *Skeleton, mesh *AbstractMesh, sce
 		opts = &NewSkeletonViewerOpts{}
 	}
 
-	p := ba.ctx.Get("SkeletonViewer").New(skeleton.JSObject(), mesh.JSObject(), scene.JSObject(), opts.AutoUpdateBonesMatrices, opts.RenderingGroupId)
+	p := ba.ctx.Get("SkeletonViewer").New(skeleton.JSObject(), mesh.JSObject(), scene.JSObject(), opts.AutoUpdateBonesMatrices.JSObject(), opts.RenderingGroupId.JSObject())
 	return SkeletonViewerFromJSObject(p)
 }
 

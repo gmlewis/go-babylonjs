@@ -40,7 +40,7 @@ func (ba *Babylon) NewFreeCamera(name string, position *Vector3, scene *Scene, o
 		opts = &NewFreeCameraOpts{}
 	}
 
-	p := ba.ctx.Get("FreeCamera").New(name, position.JSObject(), scene.JSObject(), opts.SetActiveOnSceneIfNoneActive)
+	p := ba.ctx.Get("FreeCamera").New(name, position.JSObject(), scene.JSObject(), opts.SetActiveOnSceneIfNoneActive.JSObject())
 	return FreeCameraFromJSObject(p)
 }
 

@@ -43,7 +43,7 @@ func (ba *Babylon) NewHardwareScalingOptimization(opts *NewHardwareScalingOptimi
 		opts = &NewHardwareScalingOptimizationOpts{}
 	}
 
-	p := ba.ctx.Get("HardwareScalingOptimization").New(opts.Priority, opts.MaximumScale, opts.Step)
+	p := ba.ctx.Get("HardwareScalingOptimization").New(opts.Priority.JSObject(), opts.MaximumScale.JSObject(), opts.Step.JSObject())
 	return HardwareScalingOptimizationFromJSObject(p)
 }
 

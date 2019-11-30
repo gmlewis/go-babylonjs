@@ -49,7 +49,7 @@ func (ba *Babylon) NewLinesMesh(name string, opts *NewLinesMeshOpts) *LinesMesh 
 		opts = &NewLinesMeshOpts{}
 	}
 
-	p := ba.ctx.Get("LinesMesh").New(name, opts.Scene.JSObject(), opts.Parent.JSObject(), opts.Source.JSObject(), opts.DoNotCloneChildren, opts.UseVertexColor, opts.UseVertexAlpha)
+	p := ba.ctx.Get("LinesMesh").New(name, opts.Scene.JSObject(), opts.Parent.JSObject(), opts.Source.JSObject(), opts.DoNotCloneChildren.JSObject(), opts.UseVertexColor.JSObject(), opts.UseVertexAlpha.JSObject())
 	return LinesMeshFromJSObject(p)
 }
 

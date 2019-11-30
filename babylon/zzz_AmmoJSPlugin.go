@@ -43,7 +43,7 @@ func (ba *Babylon) NewAmmoJSPlugin(opts *NewAmmoJSPluginOpts) *AmmoJSPlugin {
 		opts = &NewAmmoJSPluginOpts{}
 	}
 
-	p := ba.ctx.Get("AmmoJSPlugin").New(opts._useDeltaForWorldStep, opts.AmmoInjection, opts.OverlappingPairCache)
+	p := ba.ctx.Get("AmmoJSPlugin").New(opts._useDeltaForWorldStep.JSObject(), opts.AmmoInjection, opts.OverlappingPairCache)
 	return AmmoJSPluginFromJSObject(p)
 }
 

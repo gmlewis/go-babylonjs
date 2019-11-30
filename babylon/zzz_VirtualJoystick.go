@@ -37,7 +37,7 @@ func (ba *Babylon) NewVirtualJoystick(opts *NewVirtualJoystickOpts) *VirtualJoys
 		opts = &NewVirtualJoystickOpts{}
 	}
 
-	p := ba.ctx.Get("VirtualJoystick").New(opts.LeftJoystick)
+	p := ba.ctx.Get("VirtualJoystick").New(opts.LeftJoystick.JSObject())
 	return VirtualJoystickFromJSObject(p)
 }
 

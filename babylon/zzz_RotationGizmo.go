@@ -41,7 +41,7 @@ func (ba *Babylon) NewRotationGizmo(opts *NewRotationGizmoOpts) *RotationGizmo {
 		opts = &NewRotationGizmoOpts{}
 	}
 
-	p := ba.ctx.Get("RotationGizmo").New(opts.GizmoLayer.JSObject(), opts.Tessellation, opts.UseEulerRotation)
+	p := ba.ctx.Get("RotationGizmo").New(opts.GizmoLayer.JSObject(), opts.Tessellation.JSObject(), opts.UseEulerRotation.JSObject())
 	return RotationGizmoFromJSObject(p)
 }
 

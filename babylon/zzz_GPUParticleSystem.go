@@ -40,7 +40,7 @@ func (ba *Babylon) NewGPUParticleSystem(name string, options js.Value, scene *Sc
 		opts = &NewGPUParticleSystemOpts{}
 	}
 
-	p := ba.ctx.Get("GPUParticleSystem").New(name, options, scene.JSObject(), opts.IsAnimationSheetEnabled)
+	p := ba.ctx.Get("GPUParticleSystem").New(name, options, scene.JSObject(), opts.IsAnimationSheetEnabled.JSObject())
 	return GPUParticleSystemFromJSObject(p)
 }
 

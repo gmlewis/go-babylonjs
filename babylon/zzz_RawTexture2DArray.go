@@ -43,7 +43,7 @@ func (ba *Babylon) NewRawTexture2DArray(data js.Value, width float64, height flo
 		opts = &NewRawTexture2DArrayOpts{}
 	}
 
-	p := ba.ctx.Get("RawTexture2DArray").New(data, width, height, depth, format, scene.JSObject(), opts.GenerateMipMaps, opts.InvertY, opts.SamplingMode, opts.TextureType)
+	p := ba.ctx.Get("RawTexture2DArray").New(data, width, height, depth, format, scene.JSObject(), opts.GenerateMipMaps.JSObject(), opts.InvertY.JSObject(), opts.SamplingMode.JSObject(), opts.TextureType.JSObject())
 	return RawTexture2DArrayFromJSObject(p)
 }
 

@@ -45,7 +45,7 @@ func (ba *Babylon) NewGrainPostProcess(name string, options float64, camera *Cam
 		opts = &NewGrainPostProcessOpts{}
 	}
 
-	p := ba.ctx.Get("GrainPostProcess").New(name, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable, opts.TextureType, opts.BlockCompilation)
+	p := ba.ctx.Get("GrainPostProcess").New(name, options, camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType.JSObject(), opts.BlockCompilation.JSObject())
 	return GrainPostProcessFromJSObject(p)
 }
 

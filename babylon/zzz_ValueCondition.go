@@ -37,7 +37,7 @@ func (ba *Babylon) NewValueCondition(actionManager *ActionManager, target interf
 		opts = &NewValueConditionOpts{}
 	}
 
-	p := ba.ctx.Get("ValueCondition").New(actionManager.JSObject(), target, propertyPath, value, opts.Operator)
+	p := ba.ctx.Get("ValueCondition").New(actionManager.JSObject(), target, propertyPath, value, opts.Operator.JSObject())
 	return ValueConditionFromJSObject(p)
 }
 

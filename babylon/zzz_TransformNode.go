@@ -41,7 +41,7 @@ func (ba *Babylon) NewTransformNode(name string, opts *NewTransformNodeOpts) *Tr
 		opts = &NewTransformNodeOpts{}
 	}
 
-	p := ba.ctx.Get("TransformNode").New(name, opts.Scene.JSObject(), opts.IsPure)
+	p := ba.ctx.Get("TransformNode").New(name, opts.Scene.JSObject(), opts.IsPure.JSObject())
 	return TransformNodeFromJSObject(p)
 }
 

@@ -37,7 +37,7 @@ func (ba *Babylon) NewStackPanel(opts *NewStackPanelOpts) *StackPanel {
 		opts = &NewStackPanelOpts{}
 	}
 
-	p := ba.ctx.Get("StackPanel").New(opts.Name)
+	p := ba.ctx.Get("StackPanel").New(opts.Name.JSObject())
 	return StackPanelFromJSObject(p)
 }
 

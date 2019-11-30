@@ -37,7 +37,7 @@ func (ba *Babylon) NewPerformanceMonitor(opts *NewPerformanceMonitorOpts) *Perfo
 		opts = &NewPerformanceMonitorOpts{}
 	}
 
-	p := ba.ctx.Get("PerformanceMonitor").New(opts.FrameSampleSize)
+	p := ba.ctx.Get("PerformanceMonitor").New(opts.FrameSampleSize.JSObject())
 	return PerformanceMonitorFromJSObject(p)
 }
 

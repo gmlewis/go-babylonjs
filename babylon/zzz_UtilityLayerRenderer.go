@@ -37,7 +37,7 @@ func (ba *Babylon) NewUtilityLayerRenderer(originalScene *Scene, opts *NewUtilit
 		opts = &NewUtilityLayerRendererOpts{}
 	}
 
-	p := ba.ctx.Get("UtilityLayerRenderer").New(originalScene.JSObject(), opts.HandleEvents)
+	p := ba.ctx.Get("UtilityLayerRenderer").New(originalScene.JSObject(), opts.HandleEvents.JSObject())
 	return UtilityLayerRendererFromJSObject(p)
 }
 

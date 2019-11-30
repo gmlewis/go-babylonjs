@@ -37,7 +37,7 @@ func (ba *Babylon) NewAsyncLoop(iterations float64, jsFunc func(), successCallba
 		opts = &NewAsyncLoopOpts{}
 	}
 
-	p := ba.ctx.Get("AsyncLoop").New(iterations, jsFunc, successCallback, opts.Offset)
+	p := ba.ctx.Get("AsyncLoop").New(iterations, jsFunc, successCallback, opts.Offset.JSObject())
 	return AsyncLoopFromJSObject(p)
 }
 

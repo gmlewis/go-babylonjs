@@ -37,7 +37,7 @@ func (ba *Babylon) NewGrid(opts *NewGridOpts) *Grid {
 		opts = &NewGridOpts{}
 	}
 
-	p := ba.ctx.Get("Grid").New(opts.Name)
+	p := ba.ctx.Get("Grid").New(opts.Name.JSObject())
 	return GridFromJSObject(p)
 }
 

@@ -41,7 +41,7 @@ func (ba *Babylon) NewVRDeviceOrientationGamepadCamera(name string, position *Ve
 		opts = &NewVRDeviceOrientationGamepadCameraOpts{}
 	}
 
-	p := ba.ctx.Get("VRDeviceOrientationGamepadCamera").New(name, position.JSObject(), scene.JSObject(), opts.CompensateDistortion, opts.VrCameraMetrics.JSObject())
+	p := ba.ctx.Get("VRDeviceOrientationGamepadCamera").New(name, position.JSObject(), scene.JSObject(), opts.CompensateDistortion.JSObject(), opts.VrCameraMetrics.JSObject())
 	return VRDeviceOrientationGamepadCameraFromJSObject(p)
 }
 

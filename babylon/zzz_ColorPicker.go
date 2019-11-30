@@ -37,7 +37,7 @@ func (ba *Babylon) NewColorPicker(opts *NewColorPickerOpts) *ColorPicker {
 		opts = &NewColorPickerOpts{}
 	}
 
-	p := ba.ctx.Get("ColorPicker").New(opts.Name)
+	p := ba.ctx.Get("ColorPicker").New(opts.Name.JSObject())
 	return ColorPickerFromJSObject(p)
 }
 

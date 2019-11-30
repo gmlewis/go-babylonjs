@@ -39,7 +39,7 @@ func (ba *Babylon) NewSceneOptimization(opts *NewSceneOptimizationOpts) *SceneOp
 		opts = &NewSceneOptimizationOpts{}
 	}
 
-	p := ba.ctx.Get("SceneOptimization").New(opts.Priority)
+	p := ba.ctx.Get("SceneOptimization").New(opts.Priority.JSObject())
 	return SceneOptimizationFromJSObject(p)
 }
 

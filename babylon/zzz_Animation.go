@@ -39,7 +39,7 @@ func (ba *Babylon) NewAnimation(name string, targetProperty string, framePerSeco
 		opts = &NewAnimationOpts{}
 	}
 
-	p := ba.ctx.Get("Animation").New(name, targetProperty, framePerSecond, dataType, opts.LoopMode, opts.EnableBlending)
+	p := ba.ctx.Get("Animation").New(name, targetProperty, framePerSecond, dataType, opts.LoopMode.JSObject(), opts.EnableBlending.JSObject())
 	return AnimationFromJSObject(p)
 }
 

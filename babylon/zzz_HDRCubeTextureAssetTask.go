@@ -43,7 +43,7 @@ func (ba *Babylon) NewHDRCubeTextureAssetTask(name string, url string, size floa
 		opts = &NewHDRCubeTextureAssetTaskOpts{}
 	}
 
-	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(name, url, size, opts.NoMipmap, opts.GenerateHarmonics, opts.GammaSpace, opts.Reserved)
+	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(name, url, size, opts.NoMipmap.JSObject(), opts.GenerateHarmonics.JSObject(), opts.GammaSpace.JSObject(), opts.Reserved.JSObject())
 	return HDRCubeTextureAssetTaskFromJSObject(p)
 }
 

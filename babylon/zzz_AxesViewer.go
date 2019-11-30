@@ -45,7 +45,7 @@ func (ba *Babylon) NewAxesViewer(scene *Scene, opts *NewAxesViewerOpts) *AxesVie
 		opts = &NewAxesViewerOpts{}
 	}
 
-	p := ba.ctx.Get("AxesViewer").New(scene.JSObject(), opts.ScaleLines, opts.RenderingGroupId, opts.XAxis.JSObject(), opts.YAxis.JSObject(), opts.ZAxis.JSObject())
+	p := ba.ctx.Get("AxesViewer").New(scene.JSObject(), opts.ScaleLines.JSObject(), opts.RenderingGroupId.JSObject(), opts.XAxis.JSObject(), opts.YAxis.JSObject(), opts.ZAxis.JSObject())
 	return AxesViewerFromJSObject(p)
 }
 

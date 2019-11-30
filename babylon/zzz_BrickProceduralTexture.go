@@ -39,7 +39,7 @@ func (ba *Babylon) NewBrickProceduralTexture(name string, size float64, scene *S
 		opts = &NewBrickProceduralTextureOpts{}
 	}
 
-	p := ba.ctx.Get("BrickProceduralTexture").New(name, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps)
+	p := ba.ctx.Get("BrickProceduralTexture").New(name, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps.JSObject())
 	return BrickProceduralTextureFromJSObject(p)
 }
 

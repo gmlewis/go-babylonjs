@@ -28,7 +28,7 @@ func GlowLayerFromJSObject(p js.Value) *GlowLayer {
 
 // NewGlowLayerOpts contains optional parameters for NewGlowLayer.
 type NewGlowLayerOpts struct {
-	Options js.Value
+	Options *JSValue
 }
 
 // NewGlowLayer returns a new GlowLayer object.
@@ -39,7 +39,7 @@ func (ba *Babylon) NewGlowLayer(name string, scene *Scene, opts *NewGlowLayerOpt
 		opts = &NewGlowLayerOpts{}
 	}
 
-	p := ba.ctx.Get("GlowLayer").New(name, scene.JSObject(), opts.Options)
+	p := ba.ctx.Get("GlowLayer").New(name, scene.JSObject(), opts.Options.JSObject())
 	return GlowLayerFromJSObject(p)
 }
 

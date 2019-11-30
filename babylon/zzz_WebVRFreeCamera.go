@@ -29,7 +29,7 @@ func WebVRFreeCameraFromJSObject(p js.Value) *WebVRFreeCamera {
 
 // NewWebVRFreeCameraOpts contains optional parameters for NewWebVRFreeCamera.
 type NewWebVRFreeCameraOpts struct {
-	WebVROptions js.Value
+	WebVROptions *JSValue
 }
 
 // NewWebVRFreeCamera returns a new WebVRFreeCamera object.
@@ -40,7 +40,7 @@ func (ba *Babylon) NewWebVRFreeCamera(name string, position *Vector3, scene *Sce
 		opts = &NewWebVRFreeCameraOpts{}
 	}
 
-	p := ba.ctx.Get("WebVRFreeCamera").New(name, position.JSObject(), scene.JSObject(), opts.WebVROptions)
+	p := ba.ctx.Get("WebVRFreeCamera").New(name, position.JSObject(), scene.JSObject(), opts.WebVROptions.JSObject())
 	return WebVRFreeCameraFromJSObject(p)
 }
 

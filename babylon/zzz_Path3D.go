@@ -41,7 +41,7 @@ func (ba *Babylon) NewPath3D(path *Vector3, opts *NewPath3DOpts) *Path3D {
 		opts = &NewPath3DOpts{}
 	}
 
-	p := ba.ctx.Get("Path3D").New(path.JSObject(), opts.FirstNormal.JSObject(), opts.Raw, opts.AlignTangentsWithPath)
+	p := ba.ctx.Get("Path3D").New(path.JSObject(), opts.FirstNormal.JSObject(), opts.Raw.JSObject(), opts.AlignTangentsWithPath.JSObject())
 	return Path3DFromJSObject(p)
 }
 

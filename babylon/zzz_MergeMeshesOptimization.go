@@ -39,7 +39,7 @@ func (ba *Babylon) NewMergeMeshesOptimization(opts *NewMergeMeshesOptimizationOp
 		opts = &NewMergeMeshesOptimizationOpts{}
 	}
 
-	p := ba.ctx.Get("MergeMeshesOptimization").New(opts.Priority)
+	p := ba.ctx.Get("MergeMeshesOptimization").New(opts.Priority.JSObject())
 	return MergeMeshesOptimizationFromJSObject(p)
 }
 

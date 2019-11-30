@@ -37,7 +37,7 @@ func (ba *Babylon) NewCheckbox(opts *NewCheckboxOpts) *Checkbox {
 		opts = &NewCheckboxOpts{}
 	}
 
-	p := ba.ctx.Get("Checkbox").New(opts.Name)
+	p := ba.ctx.Get("Checkbox").New(opts.Name.JSObject())
 	return CheckboxFromJSObject(p)
 }
 

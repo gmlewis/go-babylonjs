@@ -47,7 +47,7 @@ func (ba *Babylon) NewPassCubePostProcess(name string, options float64, opts *Ne
 		opts = &NewPassCubePostProcessOpts{}
 	}
 
-	p := ba.ctx.Get("PassCubePostProcess").New(name, options, opts.Camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable, opts.TextureType, opts.BlockCompilation)
+	p := ba.ctx.Get("PassCubePostProcess").New(name, options, opts.Camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType.JSObject(), opts.BlockCompilation.JSObject())
 	return PassCubePostProcessFromJSObject(p)
 }
 

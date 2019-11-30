@@ -38,7 +38,7 @@ func (ba *Babylon) NewInternalTexture(engine *ThinEngine, source js.Value, opts 
 		opts = &NewInternalTextureOpts{}
 	}
 
-	p := ba.ctx.Get("InternalTexture").New(engine.JSObject(), source, opts.DelayAllocation)
+	p := ba.ctx.Get("InternalTexture").New(engine.JSObject(), source, opts.DelayAllocation.JSObject())
 	return InternalTextureFromJSObject(p)
 }
 

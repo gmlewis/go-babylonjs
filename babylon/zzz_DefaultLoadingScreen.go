@@ -41,7 +41,7 @@ func (ba *Babylon) NewDefaultLoadingScreen(_renderingCanvas js.Value, opts *NewD
 		opts = &NewDefaultLoadingScreenOpts{}
 	}
 
-	p := ba.ctx.Get("DefaultLoadingScreen").New(_renderingCanvas, opts._loadingText, opts._loadingDivBackgroundColor)
+	p := ba.ctx.Get("DefaultLoadingScreen").New(_renderingCanvas, opts._loadingText.JSObject(), opts._loadingDivBackgroundColor.JSObject())
 	return DefaultLoadingScreenFromJSObject(p)
 }
 

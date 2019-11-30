@@ -41,7 +41,7 @@ func (ba *Babylon) NewReflectionProbe(name string, size float64, scene *Scene, o
 		opts = &NewReflectionProbeOpts{}
 	}
 
-	p := ba.ctx.Get("ReflectionProbe").New(name, size, scene.JSObject(), opts.GenerateMipMaps, opts.UseFloat)
+	p := ba.ctx.Get("ReflectionProbe").New(name, size, scene.JSObject(), opts.GenerateMipMaps.JSObject(), opts.UseFloat.JSObject())
 	return ReflectionProbeFromJSObject(p)
 }
 

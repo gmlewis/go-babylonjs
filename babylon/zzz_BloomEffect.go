@@ -39,7 +39,7 @@ func (ba *Babylon) NewBloomEffect(scene *Scene, bloomScale float64, bloomWeight 
 		opts = &NewBloomEffectOpts{}
 	}
 
-	p := ba.ctx.Get("BloomEffect").New(scene.JSObject(), bloomScale, bloomWeight, bloomKernel, opts.PipelineTextureType, opts.BlockCompilation)
+	p := ba.ctx.Get("BloomEffect").New(scene.JSObject(), bloomScale, bloomWeight, bloomKernel, opts.PipelineTextureType.JSObject(), opts.BlockCompilation.JSObject())
 	return BloomEffectFromJSObject(p)
 }
 

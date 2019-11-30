@@ -42,7 +42,7 @@ func (ba *Babylon) NewLensRenderingPipeline(name string, parameters interface{},
 		opts = &NewLensRenderingPipelineOpts{}
 	}
 
-	p := ba.ctx.Get("LensRenderingPipeline").New(name, parameters, scene.JSObject(), opts.Ratio, opts.Cameras.JSObject())
+	p := ba.ctx.Get("LensRenderingPipeline").New(name, parameters, scene.JSObject(), opts.Ratio.JSObject(), opts.Cameras.JSObject())
 	return LensRenderingPipelineFromJSObject(p)
 }
 

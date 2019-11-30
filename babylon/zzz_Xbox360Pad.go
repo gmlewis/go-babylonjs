@@ -37,7 +37,7 @@ func (ba *Babylon) NewXbox360Pad(id string, index float64, gamepad interface{}, 
 		opts = &NewXbox360PadOpts{}
 	}
 
-	p := ba.ctx.Get("Xbox360Pad").New(id, index, gamepad, opts.XboxOne)
+	p := ba.ctx.Get("Xbox360Pad").New(id, index, gamepad, opts.XboxOne.JSObject())
 	return Xbox360PadFromJSObject(p)
 }
 

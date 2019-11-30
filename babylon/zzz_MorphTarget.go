@@ -41,7 +41,7 @@ func (ba *Babylon) NewMorphTarget(name string, opts *NewMorphTargetOpts) *MorphT
 		opts = &NewMorphTargetOpts{}
 	}
 
-	p := ba.ctx.Get("MorphTarget").New(name, opts.Influence, opts.Scene.JSObject())
+	p := ba.ctx.Get("MorphTarget").New(name, opts.Influence.JSObject(), opts.Scene.JSObject())
 	return MorphTargetFromJSObject(p)
 }
 

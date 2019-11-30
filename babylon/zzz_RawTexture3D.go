@@ -43,7 +43,7 @@ func (ba *Babylon) NewRawTexture3D(data js.Value, width float64, height float64,
 		opts = &NewRawTexture3DOpts{}
 	}
 
-	p := ba.ctx.Get("RawTexture3D").New(data, width, height, depth, format, scene.JSObject(), opts.GenerateMipMaps, opts.InvertY, opts.SamplingMode, opts.TextureType)
+	p := ba.ctx.Get("RawTexture3D").New(data, width, height, depth, format, scene.JSObject(), opts.GenerateMipMaps.JSObject(), opts.InvertY.JSObject(), opts.SamplingMode.JSObject(), opts.TextureType.JSObject())
 	return RawTexture3DFromJSObject(p)
 }
 

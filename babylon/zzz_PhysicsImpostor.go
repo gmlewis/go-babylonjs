@@ -28,7 +28,7 @@ func PhysicsImpostorFromJSObject(p js.Value) *PhysicsImpostor {
 
 // NewPhysicsImpostorOpts contains optional parameters for NewPhysicsImpostor.
 type NewPhysicsImpostorOpts struct {
-	_options js.Value
+	_options *JSValue
 
 	_scene *Scene
 }
@@ -41,7 +41,7 @@ func (ba *Babylon) NewPhysicsImpostor(object js.Value, jsType float64, opts *New
 		opts = &NewPhysicsImpostorOpts{}
 	}
 
-	p := ba.ctx.Get("PhysicsImpostor").New(object, jsType, opts._options, opts._scene.JSObject())
+	p := ba.ctx.Get("PhysicsImpostor").New(object, jsType, opts._options.JSObject(), opts._scene.JSObject())
 	return PhysicsImpostorFromJSObject(p)
 }
 

@@ -39,7 +39,7 @@ func (ba *Babylon) NewShadowsOptimization(opts *NewShadowsOptimizationOpts) *Sha
 		opts = &NewShadowsOptimizationOpts{}
 	}
 
-	p := ba.ctx.Get("ShadowsOptimization").New(opts.Priority)
+	p := ba.ctx.Get("ShadowsOptimization").New(opts.Priority.JSObject())
 	return ShadowsOptimizationFromJSObject(p)
 }
 

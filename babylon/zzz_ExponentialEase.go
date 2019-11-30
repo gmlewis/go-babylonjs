@@ -39,7 +39,7 @@ func (ba *Babylon) NewExponentialEase(opts *NewExponentialEaseOpts) *Exponential
 		opts = &NewExponentialEaseOpts{}
 	}
 
-	p := ba.ctx.Get("ExponentialEase").New(opts.Exponent)
+	p := ba.ctx.Get("ExponentialEase").New(opts.Exponent.JSObject())
 	return ExponentialEaseFromJSObject(p)
 }
 

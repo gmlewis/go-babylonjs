@@ -37,7 +37,7 @@ func (ba *Babylon) NewLine(opts *NewLineOpts) *Line {
 		opts = &NewLineOpts{}
 	}
 
-	p := ba.ctx.Get("Line").New(opts.Name)
+	p := ba.ctx.Get("Line").New(opts.Name.JSObject())
 	return LineFromJSObject(p)
 }
 

@@ -28,7 +28,7 @@ func BoneLookControllerFromJSObject(p js.Value) *BoneLookController {
 
 // NewBoneLookControllerOpts contains optional parameters for NewBoneLookController.
 type NewBoneLookControllerOpts struct {
-	Options js.Value
+	Options *JSValue
 }
 
 // NewBoneLookController returns a new BoneLookController object.
@@ -39,7 +39,7 @@ func (ba *Babylon) NewBoneLookController(mesh *AbstractMesh, bone *Bone, target 
 		opts = &NewBoneLookControllerOpts{}
 	}
 
-	p := ba.ctx.Get("BoneLookController").New(mesh.JSObject(), bone.JSObject(), target.JSObject(), opts.Options)
+	p := ba.ctx.Get("BoneLookController").New(mesh.JSObject(), bone.JSObject(), target.JSObject(), opts.Options.JSObject())
 	return BoneLookControllerFromJSObject(p)
 }
 

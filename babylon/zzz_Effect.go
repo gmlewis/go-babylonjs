@@ -32,7 +32,7 @@ type NewEffectOpts struct {
 
 	Defines *JSString
 
-	Fallbacks js.Value
+	Fallbacks *JSValue
 
 	OnCompiled *func()
 
@@ -49,7 +49,7 @@ func (ba *Babylon) NewEffect(baseName interface{}, attributesNamesOrOptions stri
 		opts = &NewEffectOpts{}
 	}
 
-	p := ba.ctx.Get("Effect").New(baseName, attributesNamesOrOptions, uniformsNamesOrEngine, opts.Samplers, opts.Engine.JSObject(), opts.Defines, opts.Fallbacks, opts.OnCompiled, opts.OnError, opts.IndexParameters)
+	p := ba.ctx.Get("Effect").New(baseName, attributesNamesOrOptions, uniformsNamesOrEngine, opts.Samplers.JSObject(), opts.Engine.JSObject(), opts.Defines.JSObject(), opts.Fallbacks.JSObject(), opts.OnCompiled, opts.OnError, opts.IndexParameters)
 	return EffectFromJSObject(p)
 }
 

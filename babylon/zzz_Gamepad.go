@@ -43,7 +43,7 @@ func (ba *Babylon) NewGamepad(id string, index float64, browserGamepad interface
 		opts = &NewGamepadOpts{}
 	}
 
-	p := ba.ctx.Get("Gamepad").New(id, index, browserGamepad, opts.LeftStickX, opts.LeftStickY, opts.RightStickX, opts.RightStickY)
+	p := ba.ctx.Get("Gamepad").New(id, index, browserGamepad, opts.LeftStickX.JSObject(), opts.LeftStickY.JSObject(), opts.RightStickX.JSObject(), opts.RightStickY.JSObject())
 	return GamepadFromJSObject(p)
 }
 

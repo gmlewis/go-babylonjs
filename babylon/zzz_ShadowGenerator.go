@@ -39,7 +39,7 @@ func (ba *Babylon) NewShadowGenerator(mapSize float64, light js.Value, opts *New
 		opts = &NewShadowGeneratorOpts{}
 	}
 
-	p := ba.ctx.Get("ShadowGenerator").New(mapSize, light, opts.UsefulFloatFirst)
+	p := ba.ctx.Get("ShadowGenerator").New(mapSize, light, opts.UsefulFloatFirst.JSObject())
 	return ShadowGeneratorFromJSObject(p)
 }
 

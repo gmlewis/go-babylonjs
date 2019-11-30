@@ -47,7 +47,7 @@ func (ba *Babylon) NewRawCubeTexture(scene *Scene, data js.Value, size float64, 
 		opts = &NewRawCubeTextureOpts{}
 	}
 
-	p := ba.ctx.Get("RawCubeTexture").New(scene.JSObject(), data, size, opts.Format, opts.Type, opts.GenerateMipMaps, opts.InvertY, opts.SamplingMode, opts.Compression)
+	p := ba.ctx.Get("RawCubeTexture").New(scene.JSObject(), data, size, opts.Format.JSObject(), opts.Type.JSObject(), opts.GenerateMipMaps.JSObject(), opts.InvertY.JSObject(), opts.SamplingMode.JSObject(), opts.Compression.JSObject())
 	return RawCubeTextureFromJSObject(p)
 }
 

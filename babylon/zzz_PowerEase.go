@@ -39,7 +39,7 @@ func (ba *Babylon) NewPowerEase(opts *NewPowerEaseOpts) *PowerEase {
 		opts = &NewPowerEaseOpts{}
 	}
 
-	p := ba.ctx.Get("PowerEase").New(opts.Power)
+	p := ba.ctx.Get("PowerEase").New(opts.Power.JSObject())
 	return PowerEaseFromJSObject(p)
 }
 

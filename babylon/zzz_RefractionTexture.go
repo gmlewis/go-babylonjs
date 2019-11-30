@@ -40,7 +40,7 @@ func (ba *Babylon) NewRefractionTexture(name string, size float64, scene *Scene,
 		opts = &NewRefractionTextureOpts{}
 	}
 
-	p := ba.ctx.Get("RefractionTexture").New(name, size, scene.JSObject(), opts.GenerateMipMaps)
+	p := ba.ctx.Get("RefractionTexture").New(name, size, scene.JSObject(), opts.GenerateMipMaps.JSObject())
 	return RefractionTextureFromJSObject(p)
 }
 

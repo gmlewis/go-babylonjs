@@ -29,7 +29,7 @@ func AudioEngineFromJSObject(p js.Value) *AudioEngine {
 
 // NewAudioEngineOpts contains optional parameters for NewAudioEngine.
 type NewAudioEngineOpts struct {
-	HostElement js.Value
+	HostElement *JSValue
 }
 
 // NewAudioEngine returns a new AudioEngine object.
@@ -40,7 +40,7 @@ func (ba *Babylon) NewAudioEngine(opts *NewAudioEngineOpts) *AudioEngine {
 		opts = &NewAudioEngineOpts{}
 	}
 
-	p := ba.ctx.Get("AudioEngine").New(opts.HostElement)
+	p := ba.ctx.Get("AudioEngine").New(opts.HostElement.JSObject())
 	return AudioEngineFromJSObject(p)
 }
 

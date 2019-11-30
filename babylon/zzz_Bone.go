@@ -47,7 +47,7 @@ func (ba *Babylon) NewBone(name string, skeleton *Skeleton, opts *NewBoneOpts) *
 		opts = &NewBoneOpts{}
 	}
 
-	p := ba.ctx.Get("Bone").New(name, skeleton.JSObject(), opts.ParentBone.JSObject(), opts.LocalMatrix.JSObject(), opts.RestPose.JSObject(), opts.BaseMatrix.JSObject(), opts.Index)
+	p := ba.ctx.Get("Bone").New(name, skeleton.JSObject(), opts.ParentBone.JSObject(), opts.LocalMatrix.JSObject(), opts.RestPose.JSObject(), opts.BaseMatrix.JSObject(), opts.Index.JSObject())
 	return BoneFromJSObject(p)
 }
 

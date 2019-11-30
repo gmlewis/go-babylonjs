@@ -43,7 +43,7 @@ func (ba *Babylon) NewSpritePackedManager(name string, imgUrl string, capacity f
 		opts = &NewSpritePackedManagerOpts{}
 	}
 
-	p := ba.ctx.Get("SpritePackedManager").New(name, imgUrl, capacity, scene.JSObject(), opts.SpriteJSON, opts.Epsilon, opts.SamplingMode)
+	p := ba.ctx.Get("SpritePackedManager").New(name, imgUrl, capacity, scene.JSObject(), opts.SpriteJSON.JSObject(), opts.Epsilon.JSObject(), opts.SamplingMode.JSObject())
 	return SpritePackedManagerFromJSObject(p)
 }
 

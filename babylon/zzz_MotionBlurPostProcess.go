@@ -54,7 +54,7 @@ func (ba *Babylon) NewMotionBlurPostProcess(name string, scene *Scene, options f
 		opts = &NewMotionBlurPostProcessOpts{}
 	}
 
-	p := ba.ctx.Get("MotionBlurPostProcess").New(name, scene.JSObject(), options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable, opts.TextureType, opts.BlockCompilation)
+	p := ba.ctx.Get("MotionBlurPostProcess").New(name, scene.JSObject(), options, camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType.JSObject(), opts.BlockCompilation.JSObject())
 	return MotionBlurPostProcessFromJSObject(p)
 }
 

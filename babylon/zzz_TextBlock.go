@@ -39,7 +39,7 @@ func (ba *Babylon) NewTextBlock(opts *NewTextBlockOpts) *TextBlock {
 		opts = &NewTextBlockOpts{}
 	}
 
-	p := ba.ctx.Get("TextBlock").New(opts.Name, opts.Text)
+	p := ba.ctx.Get("TextBlock").New(opts.Name.JSObject(), opts.Text.JSObject())
 	return TextBlockFromJSObject(p)
 }
 

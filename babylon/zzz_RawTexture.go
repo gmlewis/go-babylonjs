@@ -45,7 +45,7 @@ func (ba *Babylon) NewRawTexture(data js.Value, width float64, height float64, f
 		opts = &NewRawTextureOpts{}
 	}
 
-	p := ba.ctx.Get("RawTexture").New(data, width, height, format, scene.JSObject(), opts.GenerateMipMaps, opts.InvertY, opts.SamplingMode, opts.Type)
+	p := ba.ctx.Get("RawTexture").New(data, width, height, format, scene.JSObject(), opts.GenerateMipMaps.JSObject(), opts.InvertY.JSObject(), opts.SamplingMode.JSObject(), opts.Type.JSObject())
 	return RawTextureFromJSObject(p)
 }
 

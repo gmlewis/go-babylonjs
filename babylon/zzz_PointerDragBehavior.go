@@ -26,7 +26,7 @@ func PointerDragBehaviorFromJSObject(p js.Value) *PointerDragBehavior {
 
 // NewPointerDragBehaviorOpts contains optional parameters for NewPointerDragBehavior.
 type NewPointerDragBehaviorOpts struct {
-	Options js.Value
+	Options *JSValue
 }
 
 // NewPointerDragBehavior returns a new PointerDragBehavior object.
@@ -37,7 +37,7 @@ func (ba *Babylon) NewPointerDragBehavior(opts *NewPointerDragBehaviorOpts) *Poi
 		opts = &NewPointerDragBehaviorOpts{}
 	}
 
-	p := ba.ctx.Get("PointerDragBehavior").New(opts.Options)
+	p := ba.ctx.Get("PointerDragBehavior").New(opts.Options.JSObject())
 	return PointerDragBehaviorFromJSObject(p)
 }
 

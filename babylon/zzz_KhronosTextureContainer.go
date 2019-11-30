@@ -40,7 +40,7 @@ func (ba *Babylon) NewKhronosTextureContainer(arrayBuffer interface{}, facesExpe
 		opts = &NewKhronosTextureContainerOpts{}
 	}
 
-	p := ba.ctx.Get("KhronosTextureContainer").New(arrayBuffer, facesExpected, opts.ThreeDExpected, opts.TextureArrayExpected)
+	p := ba.ctx.Get("KhronosTextureContainer").New(arrayBuffer, facesExpected, opts.ThreeDExpected.JSObject(), opts.TextureArrayExpected.JSObject())
 	return KhronosTextureContainerFromJSObject(p)
 }
 

@@ -28,7 +28,7 @@ func ThinEngineFromJSObject(p js.Value) *ThinEngine {
 type NewThinEngineOpts struct {
 	Antialias *JSBool
 
-	Options js.Value
+	Options *JSValue
 
 	AdaptToDeviceRatio *JSBool
 }
@@ -41,7 +41,7 @@ func (ba *Babylon) NewThinEngine(canvasOrContext js.Value, opts *NewThinEngineOp
 		opts = &NewThinEngineOpts{}
 	}
 
-	p := ba.ctx.Get("ThinEngine").New(canvasOrContext, opts.Antialias, opts.Options, opts.AdaptToDeviceRatio)
+	p := ba.ctx.Get("ThinEngine").New(canvasOrContext, opts.Antialias.JSObject(), opts.Options.JSObject(), opts.AdaptToDeviceRatio.JSObject())
 	return ThinEngineFromJSObject(p)
 }
 

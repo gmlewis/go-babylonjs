@@ -39,7 +39,7 @@ func (ba *Babylon) NewInputText(opts *NewInputTextOpts) *InputText {
 		opts = &NewInputTextOpts{}
 	}
 
-	p := ba.ctx.Get("InputText").New(opts.Name, opts.Text)
+	p := ba.ctx.Get("InputText").New(opts.Name.JSObject(), opts.Text.JSObject())
 	return InputTextFromJSObject(p)
 }
 

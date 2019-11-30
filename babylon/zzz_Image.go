@@ -39,7 +39,7 @@ func (ba *Babylon) NewImage(opts *NewImageOpts) *Image {
 		opts = &NewImageOpts{}
 	}
 
-	p := ba.ctx.Get("Image").New(opts.Name, opts.Url)
+	p := ba.ctx.Get("Image").New(opts.Name.JSObject(), opts.Url.JSObject())
 	return ImageFromJSObject(p)
 }
 

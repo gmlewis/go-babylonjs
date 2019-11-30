@@ -45,7 +45,7 @@ func (ba *Babylon) NewBezierCurveEase(opts *NewBezierCurveEaseOpts) *BezierCurve
 		opts = &NewBezierCurveEaseOpts{}
 	}
 
-	p := ba.ctx.Get("BezierCurveEase").New(opts.X1, opts.Y1, opts.X2, opts.Y2)
+	p := ba.ctx.Get("BezierCurveEase").New(opts.X1.JSObject(), opts.Y1.JSObject(), opts.X2.JSObject(), opts.Y2.JSObject())
 	return BezierCurveEaseFromJSObject(p)
 }
 

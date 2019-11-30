@@ -39,7 +39,7 @@ func (ba *Babylon) NewMarbleProceduralTexture(name string, size float64, scene *
 		opts = &NewMarbleProceduralTextureOpts{}
 	}
 
-	p := ba.ctx.Get("MarbleProceduralTexture").New(name, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps)
+	p := ba.ctx.Get("MarbleProceduralTexture").New(name, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps.JSObject())
 	return MarbleProceduralTextureFromJSObject(p)
 }
 

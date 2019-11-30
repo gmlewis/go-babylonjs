@@ -29,7 +29,7 @@ func MultiRenderTargetFromJSObject(p js.Value) *MultiRenderTarget {
 
 // NewMultiRenderTargetOpts contains optional parameters for NewMultiRenderTarget.
 type NewMultiRenderTargetOpts struct {
-	Options js.Value
+	Options *JSValue
 }
 
 // NewMultiRenderTarget returns a new MultiRenderTarget object.
@@ -40,7 +40,7 @@ func (ba *Babylon) NewMultiRenderTarget(name string, size interface{}, count flo
 		opts = &NewMultiRenderTargetOpts{}
 	}
 
-	p := ba.ctx.Get("MultiRenderTarget").New(name, size, count, scene.JSObject(), opts.Options)
+	p := ba.ctx.Get("MultiRenderTarget").New(name, size, count, scene.JSObject(), opts.Options.JSObject())
 	return MultiRenderTargetFromJSObject(p)
 }
 

@@ -41,7 +41,7 @@ func (ba *Babylon) NewDisplayPassPostProcess(name string, options float64, camer
 		opts = &NewDisplayPassPostProcessOpts{}
 	}
 
-	p := ba.ctx.Get("DisplayPassPostProcess").New(name, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable)
+	p := ba.ctx.Get("DisplayPassPostProcess").New(name, options, camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject())
 	return DisplayPassPostProcessFromJSObject(p)
 }
 

@@ -42,7 +42,7 @@ func (ba *Babylon) NewCustomProceduralTexture(name string, texturePath string, s
 		opts = &NewCustomProceduralTextureOpts{}
 	}
 
-	p := ba.ctx.Get("CustomProceduralTexture").New(name, texturePath, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps)
+	p := ba.ctx.Get("CustomProceduralTexture").New(name, texturePath, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps.JSObject())
 	return CustomProceduralTextureFromJSObject(p)
 }
 

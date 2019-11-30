@@ -57,7 +57,7 @@ func (ba *Babylon) NewCubeTexture(rootUrl string, scene *Scene, opts *NewCubeTex
 		opts = &NewCubeTextureOpts{}
 	}
 
-	p := ba.ctx.Get("CubeTexture").New(rootUrl, scene.JSObject(), opts.Extensions, opts.NoMipmap, opts.Files, opts.OnLoad, opts.OnError, opts.Format, opts.Prefiltered, opts.ForcedExtension, opts.CreatePolynomials, opts.LodScale, opts.LodOffset)
+	p := ba.ctx.Get("CubeTexture").New(rootUrl, scene.JSObject(), opts.Extensions.JSObject(), opts.NoMipmap.JSObject(), opts.Files.JSObject(), opts.OnLoad, opts.OnError, opts.Format.JSObject(), opts.Prefiltered.JSObject(), opts.ForcedExtension, opts.CreatePolynomials.JSObject(), opts.LodScale.JSObject(), opts.LodOffset.JSObject())
 	return CubeTextureFromJSObject(p)
 }
 

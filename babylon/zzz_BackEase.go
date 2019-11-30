@@ -39,7 +39,7 @@ func (ba *Babylon) NewBackEase(opts *NewBackEaseOpts) *BackEase {
 		opts = &NewBackEaseOpts{}
 	}
 
-	p := ba.ctx.Get("BackEase").New(opts.Amplitude)
+	p := ba.ctx.Get("BackEase").New(opts.Amplitude.JSObject())
 	return BackEaseFromJSObject(p)
 }
 

@@ -41,7 +41,7 @@ func (ba *Babylon) NewFilterPostProcess(name string, kernelMatrix *Matrix, optio
 		opts = &NewFilterPostProcessOpts{}
 	}
 
-	p := ba.ctx.Get("FilterPostProcess").New(name, kernelMatrix.JSObject(), options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable)
+	p := ba.ctx.Get("FilterPostProcess").New(name, kernelMatrix.JSObject(), options, camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject())
 	return FilterPostProcessFromJSObject(p)
 }
 

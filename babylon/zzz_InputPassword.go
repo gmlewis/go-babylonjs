@@ -39,7 +39,7 @@ func (ba *Babylon) NewInputPassword(opts *NewInputPasswordOpts) *InputPassword {
 		opts = &NewInputPasswordOpts{}
 	}
 
-	p := ba.ctx.Get("InputPassword").New(opts.Name, opts.Text)
+	p := ba.ctx.Get("InputPassword").New(opts.Name.JSObject(), opts.Text.JSObject())
 	return InputPasswordFromJSObject(p)
 }
 

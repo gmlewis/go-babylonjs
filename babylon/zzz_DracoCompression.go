@@ -41,7 +41,7 @@ func (ba *Babylon) NewDracoCompression(opts *NewDracoCompressionOpts) *DracoComp
 		opts = &NewDracoCompressionOpts{}
 	}
 
-	p := ba.ctx.Get("DracoCompression").New(opts.NumWorkers)
+	p := ba.ctx.Get("DracoCompression").New(opts.NumWorkers.JSObject())
 	return DracoCompressionFromJSObject(p)
 }
 

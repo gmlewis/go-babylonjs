@@ -37,7 +37,7 @@ func (ba *Babylon) NewVirtualKeyboard(opts *NewVirtualKeyboardOpts) *VirtualKeyb
 		opts = &NewVirtualKeyboardOpts{}
 	}
 
-	p := ba.ctx.Get("VirtualKeyboard").New(opts.Name)
+	p := ba.ctx.Get("VirtualKeyboard").New(opts.Name.JSObject())
 	return VirtualKeyboardFromJSObject(p)
 }
 

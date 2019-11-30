@@ -27,7 +27,7 @@ func OBJFileLoaderFromJSObject(p js.Value) *OBJFileLoader {
 
 // NewOBJFileLoaderOpts contains optional parameters for NewOBJFileLoader.
 type NewOBJFileLoaderOpts struct {
-	MeshLoadOptions js.Value
+	MeshLoadOptions *JSValue
 }
 
 // NewOBJFileLoader returns a new OBJFileLoader object.
@@ -38,7 +38,7 @@ func (ba *Babylon) NewOBJFileLoader(opts *NewOBJFileLoaderOpts) *OBJFileLoader {
 		opts = &NewOBJFileLoaderOpts{}
 	}
 
-	p := ba.ctx.Get("OBJFileLoader").New(opts.MeshLoadOptions)
+	p := ba.ctx.Get("OBJFileLoader").New(opts.MeshLoadOptions.JSObject())
 	return OBJFileLoaderFromJSObject(p)
 }
 

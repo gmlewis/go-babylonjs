@@ -31,7 +31,7 @@ func SoundFromJSObject(p js.Value) *Sound {
 type NewSoundOpts struct {
 	ReadyToPlayCallback *func()
 
-	Options js.Value
+	Options *JSValue
 }
 
 // NewSound returns a new Sound object.
@@ -42,7 +42,7 @@ func (ba *Babylon) NewSound(name string, urlOrArrayBuffer interface{}, scene *Sc
 		opts = &NewSoundOpts{}
 	}
 
-	p := ba.ctx.Get("Sound").New(name, urlOrArrayBuffer, scene.JSObject(), opts.ReadyToPlayCallback, opts.Options)
+	p := ba.ctx.Get("Sound").New(name, urlOrArrayBuffer, scene.JSObject(), opts.ReadyToPlayCallback, opts.Options.JSObject())
 	return SoundFromJSObject(p)
 }
 

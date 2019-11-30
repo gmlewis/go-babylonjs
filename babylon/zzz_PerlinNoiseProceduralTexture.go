@@ -39,7 +39,7 @@ func (ba *Babylon) NewPerlinNoiseProceduralTexture(name string, size float64, sc
 		opts = &NewPerlinNoiseProceduralTextureOpts{}
 	}
 
-	p := ba.ctx.Get("PerlinNoiseProceduralTexture").New(name, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps)
+	p := ba.ctx.Get("PerlinNoiseProceduralTexture").New(name, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps.JSObject())
 	return PerlinNoiseProceduralTextureFromJSObject(p)
 }
 

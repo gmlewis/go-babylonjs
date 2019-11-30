@@ -39,7 +39,7 @@ func (ba *Babylon) NewFireProceduralTexture(name string, size float64, scene *Sc
 		opts = &NewFireProceduralTextureOpts{}
 	}
 
-	p := ba.ctx.Get("FireProceduralTexture").New(name, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps)
+	p := ba.ctx.Get("FireProceduralTexture").New(name, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps.JSObject())
 	return FireProceduralTextureFromJSObject(p)
 }
 

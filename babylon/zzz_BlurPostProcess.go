@@ -48,7 +48,7 @@ func (ba *Babylon) NewBlurPostProcess(name string, direction *Vector2, kernel fl
 		opts = &NewBlurPostProcessOpts{}
 	}
 
-	p := ba.ctx.Get("BlurPostProcess").New(name, direction.JSObject(), kernel, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable, opts.TextureType, opts.Defines, opts.BlockCompilation)
+	p := ba.ctx.Get("BlurPostProcess").New(name, direction.JSObject(), kernel, options, camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType.JSObject(), opts.Defines.JSObject(), opts.BlockCompilation.JSObject())
 	return BlurPostProcessFromJSObject(p)
 }
 

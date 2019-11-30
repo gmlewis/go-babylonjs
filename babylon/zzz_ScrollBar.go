@@ -37,7 +37,7 @@ func (ba *Babylon) NewScrollBar(opts *NewScrollBarOpts) *ScrollBar {
 		opts = &NewScrollBarOpts{}
 	}
 
-	p := ba.ctx.Get("ScrollBar").New(opts.Name)
+	p := ba.ctx.Get("ScrollBar").New(opts.Name.JSObject())
 	return ScrollBarFromJSObject(p)
 }
 

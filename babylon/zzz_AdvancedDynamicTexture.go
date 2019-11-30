@@ -41,7 +41,7 @@ func (ba *Babylon) NewAdvancedDynamicTexture(name string, width float64, height 
 		opts = &NewAdvancedDynamicTextureOpts{}
 	}
 
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(name, width, height, scene.JSObject(), opts.GenerateMipMaps, opts.SamplingMode)
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(name, width, height, scene.JSObject(), opts.GenerateMipMaps.JSObject(), opts.SamplingMode.JSObject())
 	return AdvancedDynamicTextureFromJSObject(p)
 }
 

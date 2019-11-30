@@ -39,7 +39,7 @@ func (ba *Babylon) NewHolographicButton(opts *NewHolographicButtonOpts) *Hologra
 		opts = &NewHolographicButtonOpts{}
 	}
 
-	p := ba.ctx.Get("HolographicButton").New(opts.Name, opts.ShareMaterials)
+	p := ba.ctx.Get("HolographicButton").New(opts.Name.JSObject(), opts.ShareMaterials.JSObject())
 	return HolographicButtonFromJSObject(p)
 }
 

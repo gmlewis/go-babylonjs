@@ -40,7 +40,7 @@ func (ba *Babylon) NewAsciiArtPostProcess(name string, camera *Camera, opts *New
 		opts = &NewAsciiArtPostProcessOpts{}
 	}
 
-	p := ba.ctx.Get("AsciiArtPostProcess").New(name, camera.JSObject(), opts.Options)
+	p := ba.ctx.Get("AsciiArtPostProcess").New(name, camera.JSObject(), opts.Options.JSObject())
 	return AsciiArtPostProcessFromJSObject(p)
 }
 

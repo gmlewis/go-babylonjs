@@ -39,7 +39,7 @@ func (ba *Babylon) NewScrollViewer(opts *NewScrollViewerOpts) *ScrollViewer {
 		opts = &NewScrollViewerOpts{}
 	}
 
-	p := ba.ctx.Get("ScrollViewer").New(opts.Name, opts.IsImageBased)
+	p := ba.ctx.Get("ScrollViewer").New(opts.Name.JSObject(), opts.IsImageBased.JSObject())
 	return ScrollViewerFromJSObject(p)
 }
 

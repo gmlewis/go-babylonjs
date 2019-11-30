@@ -39,7 +39,7 @@ func (ba *Babylon) NewFreeCameraMouseInput(opts *NewFreeCameraMouseInputOpts) *F
 		opts = &NewFreeCameraMouseInputOpts{}
 	}
 
-	p := ba.ctx.Get("FreeCameraMouseInput").New(opts.TouchEnabled)
+	p := ba.ctx.Get("FreeCameraMouseInput").New(opts.TouchEnabled.JSObject())
 	return FreeCameraMouseInputFromJSObject(p)
 }
 
