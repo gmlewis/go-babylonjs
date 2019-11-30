@@ -27,24 +27,11 @@ func Vector3FromJSObject(p js.Value) *Vector3 {
 	return &Vector3{p: p}
 }
 
-// NewVector3Opts contains optional parameters for NewVector3.
-type NewVector3Opts struct {
-	X *JSFloat64
-
-	Y *JSFloat64
-
-	Z *JSFloat64
-}
-
 // NewVector3 returns a new Vector3 object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector3
-func (ba *Babylon) NewVector3(opts *NewVector3Opts) *Vector3 {
-	if opts == nil {
-		opts = &NewVector3Opts{}
-	}
-
-	p := ba.ctx.Get("Vector3").New(opts.X, opts.Y, opts.Z)
+func (ba *Babylon) NewVector3(x float64, y float64, z float64) *Vector3 {
+	p := ba.ctx.Get("Vector3").New(x, y, z)
 	return Vector3FromJSObject(p)
 }
 

@@ -13,16 +13,16 @@ func main() {
 
 	b := babylon.New()
 
-	engine := b.NewEngine(canvas, true) // Generate the BABYLON 3D engine
+	engine := b.NewEngine(canvas, &babylon.NewEngineOpts{Antialias: babylon.Bool(true)}) // Generate the BABYLON 3D engine
 
 	/******* Add the create scene function ******/
 	createScene := func() *babylon.Scene {
 
 		// Create the scene space
-		scene := b.NewScene(engine)
+		scene := b.NewScene(engine, nil)
 
 		// Add a camera to the scene and attach it to the canvas
-		camera := b.NewArcRotateCamera("Camera", math.Pi/2, math.Pi/2, 2, b.NewVector3(0, 0, 5), scene)
+		camera := b.NewArcRotateCamera("Camera", math.Pi/2, math.Pi/2, 2, b.NewVector3(0, 0, 5), scene, nil)
 		camera.AttachControl(canvas, true)
 
 		// Add lights to the scene

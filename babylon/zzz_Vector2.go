@@ -24,22 +24,11 @@ func Vector2FromJSObject(p js.Value) *Vector2 {
 	return &Vector2{p: p}
 }
 
-// NewVector2Opts contains optional parameters for NewVector2.
-type NewVector2Opts struct {
-	X *JSFloat64
-
-	Y *JSFloat64
-}
-
 // NewVector2 returns a new Vector2 object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector2
-func (ba *Babylon) NewVector2(opts *NewVector2Opts) *Vector2 {
-	if opts == nil {
-		opts = &NewVector2Opts{}
-	}
-
-	p := ba.ctx.Get("Vector2").New(opts.X, opts.Y)
+func (ba *Babylon) NewVector2(x float64, y float64) *Vector2 {
+	p := ba.ctx.Get("Vector2").New(x, y)
 	return Vector2FromJSObject(p)
 }
 

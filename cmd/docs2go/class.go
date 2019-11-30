@@ -116,10 +116,10 @@ func (c *classes) walker() filepath.WalkFunc {
 						}
 						switch section.H2.InnerXML {
 						case "Constructors":
-							v.parseParameters()
+							v.parseParameters(processConstructorOverrides)
 							html.ConstructorNames[v.Name()] = v
 						case "Methods":
-							v.parseParameters()
+							v.parseParameters(nil)
 							html.MethodNames[v.Name()] = v
 						default:
 							log.Fatalf("%v: unknown ConstructorsAndMethods: h2=%v", filename, section.H2)
@@ -129,7 +129,7 @@ func (c *classes) walker() filepath.WalkFunc {
 						if !strings.Contains(v.Class, "tsd-signature") {
 							continue
 						}
-						v.parseParameters()
+						v.parseParameters(nil)
 						html.PropertyNames[v.Name()] = v
 					}
 				case "tsd-type-parameters": // ignore
@@ -228,7 +228,19 @@ func (s *Signature) Name() string {
 	return v
 }
 
-func (s *Signature) parseParameters() {
+type processOverrider func(s *Signature, names []string, optional []bool, types []string) ([]string, []bool, []string)
+
+func processConstructorOverrides(s *Signature, names []string, optional []bool, types []string) ([]string, []bool, []string) {
+	switch s.Name() {
+	case "NewVector2":
+		optional = []bool{false, false}
+	case "NewVector3":
+		optional = []bool{false, false, false}
+	}
+	return names, optional, types
+}
+
+func (s *Signature) parseParameters(po processOverrider) {
 	v := strings.TrimSpace(s.InnerXML)
 	logf("ORIGINAL: '%v'\n\n", v)
 	v = strings.Replace(v, "<wbr>", "", -1)
@@ -313,10 +325,15 @@ func (s *Signature) parseParameters() {
 		logf("names(%v)=%v, optional(%v)=%v, types(%v)=%v", len(names), names, len(optional), optional, len(types), types)
 	}
 
-	logf("\n\nparseParameters: %v\n%#v\nnames(%v)=%v, optional(%v)=%v, types(%v)=%v\n\n", v, matches, len(names), names, len(optional), optional, len(types), types)
+	logf("\n\nparseParameters[%v]: %v\n%#v\nnames(%v)=%v, optional(%v)=%v, types(%v)=%v\n\n", s.Name(), v, matches, len(names), names, len(optional), optional, len(types), types)
 
 	if len(names) != len(optional) || len(names) > len(types) {
-		log.Fatalf("badly parsed arguments: \n\nparseParameters: %v\n%#v\nnames(%v)=%v, optional(%v)=%v, types(%v)=%v\n\n", v, matches, len(names), names, len(optional), optional, len(types), types)
+		log.Fatalf("badly parsed arguments: \n\nparseParameters[%v]: %v\n%#v\nnames(%v)=%v, optional(%v)=%v, types(%v)=%v\n\n", s.Name(), v, matches, len(names), names, len(optional), optional, len(types), types)
+	}
+
+	if po != nil {
+		names, optional, types = po(s, names, optional, types)
+		logf("\n\nOVERRIDES: parseParameters[%v]: %v\n%#v\nnames(%v)=%v, optional(%v)=%v, types(%v)=%v\n\n", s.Name(), v, matches, len(names), names, len(optional), optional, len(types), types)
 	}
 
 	for i, v := range names {
