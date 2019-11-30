@@ -11,7 +11,7 @@ func String(s string) *JSString { v := JSString(s); return &v }
 // JSObject returns the underlying js.Value.
 func (j *JSString) JSObject() js.Value {
 	if j == nil {
-		return js.Null()
+		return js.Undefined()
 	}
 	return js.ValueOf(string(*j))
 }
@@ -25,7 +25,7 @@ func Bool(b bool) *JSBool { v := JSBool(b); return &v }
 // JSObject returns the underlying js.Value.
 func (j *JSBool) JSObject() js.Value {
 	if j == nil {
-		return js.Null()
+		return js.Undefined()
 	}
 	return js.ValueOf(bool(*j))
 }
@@ -39,7 +39,7 @@ func Float64(f float64) *JSFloat64 { v := JSFloat64(f); return &v }
 // JSObject returns the underlying js.Value.
 func (j *JSFloat64) JSObject() js.Value {
 	if j == nil {
-		return js.Null()
+		return js.Undefined()
 	}
 	return js.ValueOf(float64(*j))
 }
@@ -53,7 +53,7 @@ func Value(v js.Value) *JSValue { result := JSValue(v); return &result }
 // JSObject returns the underlying js.Value.
 func (j *JSValue) JSObject() js.Value {
 	if j == nil {
-		return js.Null()
+		return js.Undefined()
 	}
 	return js.ValueOf(js.Value(*j))
 }

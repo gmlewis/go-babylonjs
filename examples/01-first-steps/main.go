@@ -55,7 +55,6 @@ func main() {
 	// prevent program from terminating
 	c := make(chan struct{}, 0)
 	<-c
-
 }
 
 // Float64 returns the pointer to the provided float64.
