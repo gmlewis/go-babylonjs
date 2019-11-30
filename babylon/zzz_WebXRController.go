@@ -8,7 +8,7 @@ import (
 
 // WebXRController represents a babylon.js WebXRController.
 // Represents an XR input
-type WebXRController struct{}
+type WebXRController struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (w *WebXRController) JSObject() js.Value { return w.p }
@@ -24,11 +24,20 @@ func WebXRControllerFromJSObject(p js.Value) *WebXRController {
 	return &WebXRController{p: p}
 }
 
+// NewWebXRControllerOpts contains optional parameters for NewWebXRController.
+type NewWebXRControllerOpts struct {
+	ParentContainer *AbstractMesh
+}
+
 // NewWebXRController returns a new WebXRController object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrcontroller
-func (b *Babylon) NewWebXRController(todo parameters) *WebXRController {
-	p := b.ctx.Get("WebXRController").New(todo)
+func (b *Babylon) NewWebXRController(scene *Scene, inputSource *XRInputSource, opts *NewWebXRControllerOpts) *WebXRController {
+	if opts == nil {
+		opts = &NewWebXRControllerOpts{}
+	}
+
+	p := b.ctx.Get("WebXRController").New(scene.JSObject(), inputSource.JSObject(), opts.ParentContainer.JSObject())
 	return WebXRControllerFromJSObject(p)
 }
 

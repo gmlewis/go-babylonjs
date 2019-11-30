@@ -8,7 +8,6 @@ import (
 
 // DistanceJoint represents a babylon.js DistanceJoint.
 // A class representing a physics distance joint
-
 //
 // See: https://doc.babylonjs.com/how_to/using_the_physics_engine
 type DistanceJoint struct{ *PhysicsJoint }
@@ -30,8 +29,8 @@ func DistanceJointFromJSObject(p js.Value) *DistanceJoint {
 // NewDistanceJoint returns a new DistanceJoint object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.distancejoint
-func (b *Babylon) NewDistanceJoint(todo parameters) *DistanceJoint {
-	p := b.ctx.Get("DistanceJoint").New(todo)
+func (b *Babylon) NewDistanceJoint(jointData js.Value) *DistanceJoint {
+	p := b.ctx.Get("DistanceJoint").New(jointData)
 	return DistanceJointFromJSObject(p)
 }
 

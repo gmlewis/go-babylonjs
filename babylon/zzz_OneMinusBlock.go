@@ -27,8 +27,8 @@ func OneMinusBlockFromJSObject(p js.Value) *OneMinusBlock {
 // NewOneMinusBlock returns a new OneMinusBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oneminusblock
-func (b *Babylon) NewOneMinusBlock(todo parameters) *OneMinusBlock {
-	p := b.ctx.Get("OneMinusBlock").New(todo)
+func (b *Babylon) NewOneMinusBlock(name string) *OneMinusBlock {
+	p := b.ctx.Get("OneMinusBlock").New(name)
 	return OneMinusBlockFromJSObject(p)
 }
 

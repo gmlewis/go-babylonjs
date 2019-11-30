@@ -30,8 +30,8 @@ func PointLightFromJSObject(p js.Value) *PointLight {
 // NewPointLight returns a new PointLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointlight
-func (b *Babylon) NewPointLight(todo parameters) *PointLight {
-	p := b.ctx.Get("PointLight").New(todo)
+func (b *Babylon) NewPointLight(name string, position *Vector3, scene *Scene) *PointLight {
+	p := b.ctx.Get("PointLight").New(name, position.JSObject(), scene.JSObject())
 	return PointLightFromJSObject(p)
 }
 

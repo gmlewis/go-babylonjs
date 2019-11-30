@@ -8,7 +8,7 @@ import (
 
 // BRDFTextureTools represents a babylon.js BRDFTextureTools.
 // Class used to host texture specific utilities
-type BRDFTextureTools struct{}
+type BRDFTextureTools struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (b *BRDFTextureTools) JSObject() js.Value { return b.p }
@@ -22,14 +22,6 @@ func (b *Babylon) BRDFTextureTools() *BRDFTextureTools {
 // BRDFTextureToolsFromJSObject returns a wrapped BRDFTextureTools JavaScript class.
 func BRDFTextureToolsFromJSObject(p js.Value) *BRDFTextureTools {
 	return &BRDFTextureTools{p: p}
-}
-
-// NewBRDFTextureTools returns a new BRDFTextureTools object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.brdftexturetools
-func (b *Babylon) NewBRDFTextureTools(todo parameters) *BRDFTextureTools {
-	p := b.ctx.Get("BRDFTextureTools").New(todo)
-	return BRDFTextureToolsFromJSObject(p)
 }
 
 // TODO: methods

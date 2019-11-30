@@ -27,8 +27,8 @@ func DotBlockFromJSObject(p js.Value) *DotBlock {
 // NewDotBlock returns a new DotBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.dotblock
-func (b *Babylon) NewDotBlock(todo parameters) *DotBlock {
-	p := b.ctx.Get("DotBlock").New(todo)
+func (b *Babylon) NewDotBlock(name string) *DotBlock {
+	p := b.ctx.Get("DotBlock").New(name)
 	return DotBlockFromJSObject(p)
 }
 

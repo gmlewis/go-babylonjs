@@ -8,7 +8,6 @@ import (
 
 // Bone represents a babylon.js Bone.
 // Class used to store bone information
-
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_bones_and_skeletons
 type Bone struct{ *Node }
@@ -27,11 +26,28 @@ func BoneFromJSObject(p js.Value) *Bone {
 	return &Bone{NodeFromJSObject(p)}
 }
 
+// NewBoneOpts contains optional parameters for NewBone.
+type NewBoneOpts struct {
+	ParentBone *Bone
+
+	LocalMatrix *Matrix
+
+	RestPose *Matrix
+
+	BaseMatrix *Matrix
+
+	Index *float64
+}
+
 // NewBone returns a new Bone object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bone
-func (b *Babylon) NewBone(todo parameters) *Bone {
-	p := b.ctx.Get("Bone").New(todo)
+func (b *Babylon) NewBone(name string, skeleton *Skeleton, opts *NewBoneOpts) *Bone {
+	if opts == nil {
+		opts = &NewBoneOpts{}
+	}
+
+	p := b.ctx.Get("Bone").New(name, skeleton.JSObject(), opts.ParentBone.JSObject(), opts.LocalMatrix.JSObject(), opts.RestPose.JSObject(), opts.BaseMatrix.JSObject(), opts.Index)
 	return BoneFromJSObject(p)
 }
 

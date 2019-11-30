@@ -27,8 +27,8 @@ func FresnelBlockFromJSObject(p js.Value) *FresnelBlock {
 // NewFresnelBlock returns a new FresnelBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fresnelblock
-func (b *Babylon) NewFresnelBlock(todo parameters) *FresnelBlock {
-	p := b.ctx.Get("FresnelBlock").New(todo)
+func (b *Babylon) NewFresnelBlock(name string) *FresnelBlock {
+	p := b.ctx.Get("FresnelBlock").New(name)
 	return FresnelBlockFromJSObject(p)
 }
 

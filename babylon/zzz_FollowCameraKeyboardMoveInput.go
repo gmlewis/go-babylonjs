@@ -8,10 +8,9 @@ import (
 
 // FollowCameraKeyboardMoveInput represents a babylon.js FollowCameraKeyboardMoveInput.
 // Manage the keyboard inputs to control the movement of a follow camera.
-
 //
 // See: http://doc.babylonjs.com/how_to/customizing_camera_inputs
-type FollowCameraKeyboardMoveInput struct{}
+type FollowCameraKeyboardMoveInput struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (f *FollowCameraKeyboardMoveInput) JSObject() js.Value { return f.p }
@@ -25,14 +24,6 @@ func (b *Babylon) FollowCameraKeyboardMoveInput() *FollowCameraKeyboardMoveInput
 // FollowCameraKeyboardMoveInputFromJSObject returns a wrapped FollowCameraKeyboardMoveInput JavaScript class.
 func FollowCameraKeyboardMoveInputFromJSObject(p js.Value) *FollowCameraKeyboardMoveInput {
 	return &FollowCameraKeyboardMoveInput{p: p}
-}
-
-// NewFollowCameraKeyboardMoveInput returns a new FollowCameraKeyboardMoveInput object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.followcamerakeyboardmoveinput
-func (b *Babylon) NewFollowCameraKeyboardMoveInput(todo parameters) *FollowCameraKeyboardMoveInput {
-	p := b.ctx.Get("FollowCameraKeyboardMoveInput").New(todo)
-	return FollowCameraKeyboardMoveInputFromJSObject(p)
 }
 
 // TODO: methods

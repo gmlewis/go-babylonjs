@@ -27,8 +27,8 @@ func ReflectionTextureBlockFromJSObject(p js.Value) *ReflectionTextureBlock {
 // NewReflectionTextureBlock returns a new ReflectionTextureBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock
-func (b *Babylon) NewReflectionTextureBlock(todo parameters) *ReflectionTextureBlock {
-	p := b.ctx.Get("ReflectionTextureBlock").New(todo)
+func (b *Babylon) NewReflectionTextureBlock(name string) *ReflectionTextureBlock {
+	p := b.ctx.Get("ReflectionTextureBlock").New(name)
 	return ReflectionTextureBlockFromJSObject(p)
 }
 

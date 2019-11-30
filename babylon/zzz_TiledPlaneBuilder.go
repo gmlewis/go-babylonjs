@@ -8,7 +8,7 @@ import (
 
 // TiledPlaneBuilder represents a babylon.js TiledPlaneBuilder.
 // Class containing static functions to help procedurally build meshes
-type TiledPlaneBuilder struct{}
+type TiledPlaneBuilder struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (t *TiledPlaneBuilder) JSObject() js.Value { return t.p }
@@ -22,14 +22,6 @@ func (b *Babylon) TiledPlaneBuilder() *TiledPlaneBuilder {
 // TiledPlaneBuilderFromJSObject returns a wrapped TiledPlaneBuilder JavaScript class.
 func TiledPlaneBuilderFromJSObject(p js.Value) *TiledPlaneBuilder {
 	return &TiledPlaneBuilder{p: p}
-}
-
-// NewTiledPlaneBuilder returns a new TiledPlaneBuilder object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.tiledplanebuilder
-func (b *Babylon) NewTiledPlaneBuilder(todo parameters) *TiledPlaneBuilder {
-	p := b.ctx.Get("TiledPlaneBuilder").New(todo)
-	return TiledPlaneBuilderFromJSObject(p)
 }
 
 // TODO: methods

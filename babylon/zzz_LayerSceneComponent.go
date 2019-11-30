@@ -9,7 +9,7 @@ import (
 // LayerSceneComponent represents a babylon.js LayerSceneComponent.
 // Defines the layer scene component responsible to manage any layers
 // in a given scene.
-type LayerSceneComponent struct{}
+type LayerSceneComponent struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (l *LayerSceneComponent) JSObject() js.Value { return l.p }
@@ -28,8 +28,8 @@ func LayerSceneComponentFromJSObject(p js.Value) *LayerSceneComponent {
 // NewLayerSceneComponent returns a new LayerSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.layerscenecomponent
-func (b *Babylon) NewLayerSceneComponent(todo parameters) *LayerSceneComponent {
-	p := b.ctx.Get("LayerSceneComponent").New(todo)
+func (b *Babylon) NewLayerSceneComponent(scene *Scene) *LayerSceneComponent {
+	p := b.ctx.Get("LayerSceneComponent").New(scene.JSObject())
 	return LayerSceneComponentFromJSObject(p)
 }
 

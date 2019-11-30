@@ -8,7 +8,7 @@ import (
 
 // PhysicsUpdraftEvent represents a babylon.js PhysicsUpdraftEvent.
 // Represents a physics updraft event
-type PhysicsUpdraftEvent struct{}
+type PhysicsUpdraftEvent struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (p *PhysicsUpdraftEvent) JSObject() js.Value { return p.p }
@@ -27,8 +27,8 @@ func PhysicsUpdraftEventFromJSObject(p js.Value) *PhysicsUpdraftEvent {
 // NewPhysicsUpdraftEvent returns a new PhysicsUpdraftEvent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsupdraftevent
-func (b *Babylon) NewPhysicsUpdraftEvent(todo parameters) *PhysicsUpdraftEvent {
-	p := b.ctx.Get("PhysicsUpdraftEvent").New(todo)
+func (b *Babylon) NewPhysicsUpdraftEvent(_scene *Scene, _origin *Vector3, _options *PhysicsUpdraftEventOptions) *PhysicsUpdraftEvent {
+	p := b.ctx.Get("PhysicsUpdraftEvent").New(_scene.JSObject(), _origin.JSObject(), _options.JSObject())
 	return PhysicsUpdraftEventFromJSObject(p)
 }
 

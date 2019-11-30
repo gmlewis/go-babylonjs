@@ -24,11 +24,22 @@ func NormalMapProceduralTextureFromJSObject(p js.Value) *NormalMapProceduralText
 	return &NormalMapProceduralTexture{ProceduralTextureFromJSObject(p)}
 }
 
+// NewNormalMapProceduralTextureOpts contains optional parameters for NewNormalMapProceduralTexture.
+type NewNormalMapProceduralTextureOpts struct {
+	FallbackTexture *Texture
+
+	GenerateMipMaps *bool
+}
+
 // NewNormalMapProceduralTexture returns a new NormalMapProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.normalmapproceduraltexture
-func (b *Babylon) NewNormalMapProceduralTexture(todo parameters) *NormalMapProceduralTexture {
-	p := b.ctx.Get("NormalMapProceduralTexture").New(todo)
+func (b *Babylon) NewNormalMapProceduralTexture(name string, size float64, scene *Scene, opts *NewNormalMapProceduralTextureOpts) *NormalMapProceduralTexture {
+	if opts == nil {
+		opts = &NewNormalMapProceduralTextureOpts{}
+	}
+
+	p := b.ctx.Get("NormalMapProceduralTexture").New(name, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps.JSObject())
 	return NormalMapProceduralTextureFromJSObject(p)
 }
 

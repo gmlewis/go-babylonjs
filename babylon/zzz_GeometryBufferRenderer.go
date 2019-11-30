@@ -8,7 +8,7 @@ import (
 
 // GeometryBufferRenderer represents a babylon.js GeometryBufferRenderer.
 // This renderer is helpfull to fill one of the render target with a geometry buffer.
-type GeometryBufferRenderer struct{}
+type GeometryBufferRenderer struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (g *GeometryBufferRenderer) JSObject() js.Value { return g.p }
@@ -24,11 +24,20 @@ func GeometryBufferRendererFromJSObject(p js.Value) *GeometryBufferRenderer {
 	return &GeometryBufferRenderer{p: p}
 }
 
+// NewGeometryBufferRendererOpts contains optional parameters for NewGeometryBufferRenderer.
+type NewGeometryBufferRendererOpts struct {
+	Ratio *float64
+}
+
 // NewGeometryBufferRenderer returns a new GeometryBufferRenderer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometrybufferrenderer
-func (b *Babylon) NewGeometryBufferRenderer(todo parameters) *GeometryBufferRenderer {
-	p := b.ctx.Get("GeometryBufferRenderer").New(todo)
+func (b *Babylon) NewGeometryBufferRenderer(scene *Scene, opts *NewGeometryBufferRendererOpts) *GeometryBufferRenderer {
+	if opts == nil {
+		opts = &NewGeometryBufferRendererOpts{}
+	}
+
+	p := b.ctx.Get("GeometryBufferRenderer").New(scene.JSObject(), opts.Ratio)
 	return GeometryBufferRendererFromJSObject(p)
 }
 

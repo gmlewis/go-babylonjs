@@ -31,8 +31,8 @@ func SpotLightFromJSObject(p js.Value) *SpotLight {
 // NewSpotLight returns a new SpotLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spotlight
-func (b *Babylon) NewSpotLight(todo parameters) *SpotLight {
-	p := b.ctx.Get("SpotLight").New(todo)
+func (b *Babylon) NewSpotLight(name string, position *Vector3, direction *Vector3, angle float64, exponent float64, scene *Scene) *SpotLight {
+	p := b.ctx.Get("SpotLight").New(name, position.JSObject(), direction.JSObject(), angle, exponent, scene.JSObject())
 	return SpotLightFromJSObject(p)
 }
 

@@ -1,7 +1,6 @@
 package babylon
 
-import "syscall/js"
-
+/*
 // Mesh represents a babylon.js Mesh.
 type Mesh struct{ *AbstractMesh }
 
@@ -26,3 +25,4 @@ func (b *Babylon) NewMesh(name string, scene *Scene) *Mesh {
 	p := b.ctx.Get("Mesh").New(name, scene.JSObject())
 	return MeshFromJSObject(p)
 }
+*/

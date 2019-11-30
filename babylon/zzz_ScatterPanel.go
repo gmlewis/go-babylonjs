@@ -27,8 +27,8 @@ func ScatterPanelFromJSObject(p js.Value) *ScatterPanel {
 // NewScatterPanel returns a new ScatterPanel object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scatterpanel
-func (b *Babylon) NewScatterPanel(todo parameters) *ScatterPanel {
-	p := b.ctx.Get("ScatterPanel").New(todo)
+func (b *Babylon) NewScatterPanel() *ScatterPanel {
+	p := b.ctx.Get("ScatterPanel").New()
 	return ScatterPanelFromJSObject(p)
 }
 

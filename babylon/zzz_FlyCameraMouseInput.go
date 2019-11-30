@@ -8,10 +8,9 @@ import (
 
 // FlyCameraMouseInput represents a babylon.js FlyCameraMouseInput.
 // Listen to mouse events to control the camera.
-
 //
 // See: http://doc.babylonjs.com/how_to/customizing_camera_inputs
-type FlyCameraMouseInput struct{}
+type FlyCameraMouseInput struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (f *FlyCameraMouseInput) JSObject() js.Value { return f.p }
@@ -27,11 +26,20 @@ func FlyCameraMouseInputFromJSObject(p js.Value) *FlyCameraMouseInput {
 	return &FlyCameraMouseInput{p: p}
 }
 
+// NewFlyCameraMouseInputOpts contains optional parameters for NewFlyCameraMouseInput.
+type NewFlyCameraMouseInputOpts struct {
+	TouchEnabled *bool
+}
+
 // NewFlyCameraMouseInput returns a new FlyCameraMouseInput object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycameramouseinput
-func (b *Babylon) NewFlyCameraMouseInput(todo parameters) *FlyCameraMouseInput {
-	p := b.ctx.Get("FlyCameraMouseInput").New(todo)
+func (b *Babylon) NewFlyCameraMouseInput(opts *NewFlyCameraMouseInputOpts) *FlyCameraMouseInput {
+	if opts == nil {
+		opts = &NewFlyCameraMouseInputOpts{}
+	}
+
+	p := b.ctx.Get("FlyCameraMouseInput").New(opts.TouchEnabled.JSObject())
 	return FlyCameraMouseInputFromJSObject(p)
 }
 

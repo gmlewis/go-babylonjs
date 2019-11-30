@@ -8,7 +8,7 @@ import (
 
 // InstantiationTools represents a babylon.js InstantiationTools.
 // Class used to enable instatition of objects by class name
-type InstantiationTools struct{}
+type InstantiationTools struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (i *InstantiationTools) JSObject() js.Value { return i.p }
@@ -22,14 +22,6 @@ func (b *Babylon) InstantiationTools() *InstantiationTools {
 // InstantiationToolsFromJSObject returns a wrapped InstantiationTools JavaScript class.
 func InstantiationToolsFromJSObject(p js.Value) *InstantiationTools {
 	return &InstantiationTools{p: p}
-}
-
-// NewInstantiationTools returns a new InstantiationTools object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.instantiationtools
-func (b *Babylon) NewInstantiationTools(todo parameters) *InstantiationTools {
-	p := b.ctx.Get("InstantiationTools").New(todo)
-	return InstantiationToolsFromJSObject(p)
 }
 
 // TODO: methods

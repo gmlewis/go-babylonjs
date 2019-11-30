@@ -8,10 +8,9 @@ import (
 
 // PostProcessRenderPipeline represents a babylon.js PostProcessRenderPipeline.
 // PostProcessRenderPipeline
-
 //
 // See: https://doc.babylonjs.com/how_to/how_to_use_postprocessrenderpipeline
-type PostProcessRenderPipeline struct{}
+type PostProcessRenderPipeline struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (p *PostProcessRenderPipeline) JSObject() js.Value { return p.p }
@@ -30,8 +29,8 @@ func PostProcessRenderPipelineFromJSObject(p js.Value) *PostProcessRenderPipelin
 // NewPostProcessRenderPipeline returns a new PostProcessRenderPipeline object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipeline
-func (b *Babylon) NewPostProcessRenderPipeline(todo parameters) *PostProcessRenderPipeline {
-	p := b.ctx.Get("PostProcessRenderPipeline").New(todo)
+func (b *Babylon) NewPostProcessRenderPipeline(engine *Engine, name string) *PostProcessRenderPipeline {
+	p := b.ctx.Get("PostProcessRenderPipeline").New(engine.JSObject(), name)
 	return PostProcessRenderPipelineFromJSObject(p)
 }
 

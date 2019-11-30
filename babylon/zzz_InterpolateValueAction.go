@@ -9,7 +9,6 @@ import (
 // InterpolateValueAction represents a babylon.js InterpolateValueAction.
 // This defines an action responsible to change the value of a property
 // by interpolating between its current value and the newly set one once triggered.
-
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_actions
 type InterpolateValueAction struct{ *Action }
@@ -28,11 +27,26 @@ func InterpolateValueActionFromJSObject(p js.Value) *InterpolateValueAction {
 	return &InterpolateValueAction{ActionFromJSObject(p)}
 }
 
+// NewInterpolateValueActionOpts contains optional parameters for NewInterpolateValueAction.
+type NewInterpolateValueActionOpts struct {
+	Duration *float64
+
+	Condition *Condition
+
+	StopOtherAnimations *bool
+
+	OnInterpolationDone *func()
+}
+
 // NewInterpolateValueAction returns a new InterpolateValueAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.interpolatevalueaction
-func (b *Babylon) NewInterpolateValueAction(todo parameters) *InterpolateValueAction {
-	p := b.ctx.Get("InterpolateValueAction").New(todo)
+func (b *Babylon) NewInterpolateValueAction(triggerOptions interface{}, target interface{}, propertyPath string, value interface{}, opts *NewInterpolateValueActionOpts) *InterpolateValueAction {
+	if opts == nil {
+		opts = &NewInterpolateValueActionOpts{}
+	}
+
+	p := b.ctx.Get("InterpolateValueAction").New(triggerOptions, target, propertyPath, value, opts.Duration, opts.Condition.JSObject(), opts.StopOtherAnimations.JSObject(), opts.OnInterpolationDone)
 	return InterpolateValueActionFromJSObject(p)
 }
 

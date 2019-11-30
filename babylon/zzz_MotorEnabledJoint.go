@@ -8,7 +8,6 @@ import (
 
 // MotorEnabledJoint represents a babylon.js MotorEnabledJoint.
 // Represents a Motor-Enabled Joint
-
 //
 // See: https://doc.babylonjs.com/how_to/using_the_physics_engine
 type MotorEnabledJoint struct{ *PhysicsJoint }
@@ -30,8 +29,8 @@ func MotorEnabledJointFromJSObject(p js.Value) *MotorEnabledJoint {
 // NewMotorEnabledJoint returns a new MotorEnabledJoint object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.motorenabledjoint
-func (b *Babylon) NewMotorEnabledJoint(todo parameters) *MotorEnabledJoint {
-	p := b.ctx.Get("MotorEnabledJoint").New(todo)
+func (b *Babylon) NewMotorEnabledJoint(jsType float64, jointData js.Value) *MotorEnabledJoint {
+	p := b.ctx.Get("MotorEnabledJoint").New(jsType, jointData)
 	return MotorEnabledJointFromJSObject(p)
 }
 

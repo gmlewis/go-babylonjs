@@ -9,7 +9,7 @@ import (
 // InternalTexture represents a babylon.js InternalTexture.
 // Class used to store data associated with WebGL texture data for the engine
 // This class should not be used directly
-type InternalTexture struct{}
+type InternalTexture struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (i *InternalTexture) JSObject() js.Value { return i.p }
@@ -25,11 +25,20 @@ func InternalTextureFromJSObject(p js.Value) *InternalTexture {
 	return &InternalTexture{p: p}
 }
 
+// NewInternalTextureOpts contains optional parameters for NewInternalTexture.
+type NewInternalTextureOpts struct {
+	DelayAllocation *bool
+}
+
 // NewInternalTexture returns a new InternalTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture
-func (b *Babylon) NewInternalTexture(todo parameters) *InternalTexture {
-	p := b.ctx.Get("InternalTexture").New(todo)
+func (b *Babylon) NewInternalTexture(engine *ThinEngine, source js.Value, opts *NewInternalTextureOpts) *InternalTexture {
+	if opts == nil {
+		opts = &NewInternalTextureOpts{}
+	}
+
+	p := b.ctx.Get("InternalTexture").New(engine.JSObject(), source, opts.DelayAllocation.JSObject())
 	return InternalTextureFromJSObject(p)
 }
 

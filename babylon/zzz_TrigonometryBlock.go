@@ -27,8 +27,8 @@ func TrigonometryBlockFromJSObject(p js.Value) *TrigonometryBlock {
 // NewTrigonometryBlock returns a new TrigonometryBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.trigonometryblock
-func (b *Babylon) NewTrigonometryBlock(todo parameters) *TrigonometryBlock {
-	p := b.ctx.Get("TrigonometryBlock").New(todo)
+func (b *Babylon) NewTrigonometryBlock(name string) *TrigonometryBlock {
+	p := b.ctx.Get("TrigonometryBlock").New(name)
 	return TrigonometryBlockFromJSObject(p)
 }
 

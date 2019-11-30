@@ -8,7 +8,6 @@ import (
 
 // DigitalRainFontTexture represents a babylon.js DigitalRainFontTexture.
 // DigitalRainFontTexture is the helper class used to easily create your digital rain font texture.
-
 //
 // It basically takes care rendering the font front the given font size to a texture.
 // This is used later on in the postprocess.
@@ -28,11 +27,20 @@ func DigitalRainFontTextureFromJSObject(p js.Value) *DigitalRainFontTexture {
 	return &DigitalRainFontTexture{BaseTextureFromJSObject(p)}
 }
 
+// NewDigitalRainFontTextureOpts contains optional parameters for NewDigitalRainFontTexture.
+type NewDigitalRainFontTextureOpts struct {
+	Scene *Scene
+}
+
 // NewDigitalRainFontTexture returns a new DigitalRainFontTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainfonttexture
-func (b *Babylon) NewDigitalRainFontTexture(todo parameters) *DigitalRainFontTexture {
-	p := b.ctx.Get("DigitalRainFontTexture").New(todo)
+func (b *Babylon) NewDigitalRainFontTexture(name string, font string, text string, opts *NewDigitalRainFontTextureOpts) *DigitalRainFontTexture {
+	if opts == nil {
+		opts = &NewDigitalRainFontTextureOpts{}
+	}
+
+	p := b.ctx.Get("DigitalRainFontTexture").New(name, font, text, opts.Scene.JSObject())
 	return DigitalRainFontTextureFromJSObject(p)
 }
 

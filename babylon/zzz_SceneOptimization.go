@@ -8,10 +8,9 @@ import (
 
 // SceneOptimization represents a babylon.js SceneOptimization.
 // Defines the root class used to create scene optimization to use with SceneOptimizer
-
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
-type SceneOptimization struct{}
+type SceneOptimization struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (s *SceneOptimization) JSObject() js.Value { return s.p }
@@ -27,11 +26,20 @@ func SceneOptimizationFromJSObject(p js.Value) *SceneOptimization {
 	return &SceneOptimization{p: p}
 }
 
+// NewSceneOptimizationOpts contains optional parameters for NewSceneOptimization.
+type NewSceneOptimizationOpts struct {
+	Priority *float64
+}
+
 // NewSceneOptimization returns a new SceneOptimization object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneoptimization
-func (b *Babylon) NewSceneOptimization(todo parameters) *SceneOptimization {
-	p := b.ctx.Get("SceneOptimization").New(todo)
+func (b *Babylon) NewSceneOptimization(opts *NewSceneOptimizationOpts) *SceneOptimization {
+	if opts == nil {
+		opts = &NewSceneOptimizationOpts{}
+	}
+
+	p := b.ctx.Get("SceneOptimization").New(opts.Priority)
 	return SceneOptimizationFromJSObject(p)
 }
 

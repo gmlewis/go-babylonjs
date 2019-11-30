@@ -24,11 +24,22 @@ func GrassProceduralTextureFromJSObject(p js.Value) *GrassProceduralTexture {
 	return &GrassProceduralTexture{ProceduralTextureFromJSObject(p)}
 }
 
+// NewGrassProceduralTextureOpts contains optional parameters for NewGrassProceduralTexture.
+type NewGrassProceduralTextureOpts struct {
+	FallbackTexture *Texture
+
+	GenerateMipMaps *bool
+}
+
 // NewGrassProceduralTexture returns a new GrassProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture
-func (b *Babylon) NewGrassProceduralTexture(todo parameters) *GrassProceduralTexture {
-	p := b.ctx.Get("GrassProceduralTexture").New(todo)
+func (b *Babylon) NewGrassProceduralTexture(name string, size float64, scene *Scene, opts *NewGrassProceduralTextureOpts) *GrassProceduralTexture {
+	if opts == nil {
+		opts = &NewGrassProceduralTextureOpts{}
+	}
+
+	p := b.ctx.Get("GrassProceduralTexture").New(name, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps.JSObject())
 	return GrassProceduralTextureFromJSObject(p)
 }
 

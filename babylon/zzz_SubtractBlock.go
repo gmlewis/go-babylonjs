@@ -27,8 +27,8 @@ func SubtractBlockFromJSObject(p js.Value) *SubtractBlock {
 // NewSubtractBlock returns a new SubtractBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.subtractblock
-func (b *Babylon) NewSubtractBlock(todo parameters) *SubtractBlock {
-	p := b.ctx.Get("SubtractBlock").New(todo)
+func (b *Babylon) NewSubtractBlock(name string) *SubtractBlock {
+	p := b.ctx.Get("SubtractBlock").New(name)
 	return SubtractBlockFromJSObject(p)
 }
 

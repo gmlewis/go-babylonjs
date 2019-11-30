@@ -10,10 +10,9 @@ import (
 // This represents the base class for particle system in Babylon.
 // Particles are often small sprites used to simulate hard-to-reproduce phenomena like fire, smoke, water, or abstract visual effects like magic glitter and faery dust.
 // Particles can take different shapes while emitted like box, sphere, cone or you can write your custom function.
-
 //
 // See: https://doc.babylonjs.com/babylon101/particles
-type BaseParticleSystem struct{}
+type BaseParticleSystem struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (b *BaseParticleSystem) JSObject() js.Value { return b.p }
@@ -32,8 +31,8 @@ func BaseParticleSystemFromJSObject(p js.Value) *BaseParticleSystem {
 // NewBaseParticleSystem returns a new BaseParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.baseparticlesystem
-func (b *Babylon) NewBaseParticleSystem(todo parameters) *BaseParticleSystem {
-	p := b.ctx.Get("BaseParticleSystem").New(todo)
+func (b *Babylon) NewBaseParticleSystem(name string) *BaseParticleSystem {
+	p := b.ctx.Get("BaseParticleSystem").New(name)
 	return BaseParticleSystemFromJSObject(p)
 }
 

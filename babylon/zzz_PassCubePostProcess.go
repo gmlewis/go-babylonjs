@@ -24,11 +24,30 @@ func PassCubePostProcessFromJSObject(p js.Value) *PassCubePostProcess {
 	return &PassCubePostProcess{PostProcessFromJSObject(p)}
 }
 
+// NewPassCubePostProcessOpts contains optional parameters for NewPassCubePostProcess.
+type NewPassCubePostProcessOpts struct {
+	Camera *Camera
+
+	SamplingMode *float64
+
+	Engine *Engine
+
+	Reusable *bool
+
+	TextureType *float64
+
+	BlockCompilation *bool
+}
+
 // NewPassCubePostProcess returns a new PassCubePostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.passcubepostprocess
-func (b *Babylon) NewPassCubePostProcess(todo parameters) *PassCubePostProcess {
-	p := b.ctx.Get("PassCubePostProcess").New(todo)
+func (b *Babylon) NewPassCubePostProcess(name string, options float64, opts *NewPassCubePostProcessOpts) *PassCubePostProcess {
+	if opts == nil {
+		opts = &NewPassCubePostProcessOpts{}
+	}
+
+	p := b.ctx.Get("PassCubePostProcess").New(name, options, opts.Camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType, opts.BlockCompilation.JSObject())
 	return PassCubePostProcessFromJSObject(p)
 }
 

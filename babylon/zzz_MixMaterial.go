@@ -8,7 +8,7 @@ import (
 
 // MixMaterial represents a babylon.js MixMaterial.
 //
-type MixMaterial struct{}
+type MixMaterial struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (m *MixMaterial) JSObject() js.Value { return m.p }
@@ -27,8 +27,8 @@ func MixMaterialFromJSObject(p js.Value) *MixMaterial {
 // NewMixMaterial returns a new MixMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial
-func (b *Babylon) NewMixMaterial(todo parameters) *MixMaterial {
-	p := b.ctx.Get("MixMaterial").New(todo)
+func (b *Babylon) NewMixMaterial(name string, scene *Scene) *MixMaterial {
+	p := b.ctx.Get("MixMaterial").New(name, scene.JSObject())
 	return MixMaterialFromJSObject(p)
 }
 

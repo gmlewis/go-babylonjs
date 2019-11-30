@@ -27,8 +27,8 @@ func SpherePanelFromJSObject(p js.Value) *SpherePanel {
 // NewSpherePanel returns a new SpherePanel object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spherepanel
-func (b *Babylon) NewSpherePanel(todo parameters) *SpherePanel {
-	p := b.ctx.Get("SpherePanel").New(todo)
+func (b *Babylon) NewSpherePanel() *SpherePanel {
+	p := b.ctx.Get("SpherePanel").New()
 	return SpherePanelFromJSObject(p)
 }
 

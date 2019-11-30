@@ -24,11 +24,22 @@ func BoundingBoxGizmoFromJSObject(p js.Value) *BoundingBoxGizmo {
 	return &BoundingBoxGizmo{GizmoFromJSObject(p)}
 }
 
+// NewBoundingBoxGizmoOpts contains optional parameters for NewBoundingBoxGizmo.
+type NewBoundingBoxGizmoOpts struct {
+	Color *Color3
+
+	GizmoLayer *UtilityLayerRenderer
+}
+
 // NewBoundingBoxGizmo returns a new BoundingBoxGizmo object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo
-func (b *Babylon) NewBoundingBoxGizmo(todo parameters) *BoundingBoxGizmo {
-	p := b.ctx.Get("BoundingBoxGizmo").New(todo)
+func (b *Babylon) NewBoundingBoxGizmo(opts *NewBoundingBoxGizmoOpts) *BoundingBoxGizmo {
+	if opts == nil {
+		opts = &NewBoundingBoxGizmoOpts{}
+	}
+
+	p := b.ctx.Get("BoundingBoxGizmo").New(opts.Color.JSObject(), opts.GizmoLayer.JSObject())
 	return BoundingBoxGizmoFromJSObject(p)
 }
 

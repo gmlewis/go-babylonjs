@@ -8,10 +8,9 @@ import (
 
 // ArcRotateCameraVRDeviceOrientationInput represents a babylon.js ArcRotateCameraVRDeviceOrientationInput.
 // Manage the device orientation inputs (gyroscope) to control an arc rotate camera.
-
 //
 // See: http://doc.babylonjs.com/how_to/customizing_camera_inputs
-type ArcRotateCameraVRDeviceOrientationInput struct{}
+type ArcRotateCameraVRDeviceOrientationInput struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (a *ArcRotateCameraVRDeviceOrientationInput) JSObject() js.Value { return a.p }
@@ -30,8 +29,8 @@ func ArcRotateCameraVRDeviceOrientationInputFromJSObject(p js.Value) *ArcRotateC
 // NewArcRotateCameraVRDeviceOrientationInput returns a new ArcRotateCameraVRDeviceOrientationInput object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecameravrdeviceorientationinput
-func (b *Babylon) NewArcRotateCameraVRDeviceOrientationInput(todo parameters) *ArcRotateCameraVRDeviceOrientationInput {
-	p := b.ctx.Get("ArcRotateCameraVRDeviceOrientationInput").New(todo)
+func (b *Babylon) NewArcRotateCameraVRDeviceOrientationInput() *ArcRotateCameraVRDeviceOrientationInput {
+	p := b.ctx.Get("ArcRotateCameraVRDeviceOrientationInput").New()
 	return ArcRotateCameraVRDeviceOrientationInputFromJSObject(p)
 }
 

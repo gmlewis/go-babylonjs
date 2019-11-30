@@ -8,7 +8,6 @@ import (
 
 // MultiviewRenderTarget represents a babylon.js MultiviewRenderTarget.
 // Renders to multiple views with a single draw call
-
 //
 // See: https://www.khronos.org/registry/webgl/extensions/WEBGL_multiview/
 type MultiviewRenderTarget struct{ *RenderTargetTexture }
@@ -27,11 +26,20 @@ func MultiviewRenderTargetFromJSObject(p js.Value) *MultiviewRenderTarget {
 	return &MultiviewRenderTarget{RenderTargetTextureFromJSObject(p)}
 }
 
+// NewMultiviewRenderTargetOpts contains optional parameters for NewMultiviewRenderTarget.
+type NewMultiviewRenderTargetOpts struct {
+	Size *float64
+}
+
 // NewMultiviewRenderTarget returns a new MultiviewRenderTarget object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget
-func (b *Babylon) NewMultiviewRenderTarget(todo parameters) *MultiviewRenderTarget {
-	p := b.ctx.Get("MultiviewRenderTarget").New(todo)
+func (b *Babylon) NewMultiviewRenderTarget(scene *Scene, opts *NewMultiviewRenderTargetOpts) *MultiviewRenderTarget {
+	if opts == nil {
+		opts = &NewMultiviewRenderTargetOpts{}
+	}
+
+	p := b.ctx.Get("MultiviewRenderTarget").New(scene.JSObject(), opts.Size)
 	return MultiviewRenderTargetFromJSObject(p)
 }
 

@@ -24,11 +24,22 @@ func InputBlockFromJSObject(p js.Value) *InputBlock {
 	return &InputBlock{NodeMaterialBlockFromJSObject(p)}
 }
 
+// NewInputBlockOpts contains optional parameters for NewInputBlock.
+type NewInputBlockOpts struct {
+	Target js.Value
+
+	Type js.Value
+}
+
 // NewInputBlock returns a new InputBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock
-func (b *Babylon) NewInputBlock(todo parameters) *InputBlock {
-	p := b.ctx.Get("InputBlock").New(todo)
+func (b *Babylon) NewInputBlock(name string, opts *NewInputBlockOpts) *InputBlock {
+	if opts == nil {
+		opts = &NewInputBlockOpts{}
+	}
+
+	p := b.ctx.Get("InputBlock").New(name, opts.Target, opts.Type)
 	return InputBlockFromJSObject(p)
 }
 

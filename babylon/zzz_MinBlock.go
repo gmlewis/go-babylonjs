@@ -27,8 +27,8 @@ func MinBlockFromJSObject(p js.Value) *MinBlock {
 // NewMinBlock returns a new MinBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.minblock
-func (b *Babylon) NewMinBlock(todo parameters) *MinBlock {
-	p := b.ctx.Get("MinBlock").New(todo)
+func (b *Babylon) NewMinBlock(name string) *MinBlock {
+	p := b.ctx.Get("MinBlock").New(name)
 	return MinBlockFromJSObject(p)
 }
 

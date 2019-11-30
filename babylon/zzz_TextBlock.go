@@ -24,11 +24,22 @@ func TextBlockFromJSObject(p js.Value) *TextBlock {
 	return &TextBlock{ControlFromJSObject(p)}
 }
 
+// NewTextBlockOpts contains optional parameters for NewTextBlock.
+type NewTextBlockOpts struct {
+	Name *string
+
+	Text *string
+}
+
 // NewTextBlock returns a new TextBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textblock
-func (b *Babylon) NewTextBlock(todo parameters) *TextBlock {
-	p := b.ctx.Get("TextBlock").New(todo)
+func (b *Babylon) NewTextBlock(opts *NewTextBlockOpts) *TextBlock {
+	if opts == nil {
+		opts = &NewTextBlockOpts{}
+	}
+
+	p := b.ctx.Get("TextBlock").New(opts.Name, opts.Text)
 	return TextBlockFromJSObject(p)
 }
 

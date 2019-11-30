@@ -27,8 +27,8 @@ func GenericPadFromJSObject(p js.Value) *GenericPad {
 // NewGenericPad returns a new GenericPad object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.genericpad
-func (b *Babylon) NewGenericPad(todo parameters) *GenericPad {
-	p := b.ctx.Get("GenericPad").New(todo)
+func (b *Babylon) NewGenericPad(id string, index float64, browserGamepad interface{}) *GenericPad {
+	p := b.ctx.Get("GenericPad").New(id, index, browserGamepad)
 	return GenericPadFromJSObject(p)
 }
 

@@ -8,7 +8,6 @@ import (
 
 // ImageProcessingPostProcess represents a babylon.js ImageProcessingPostProcess.
 // ImageProcessingPostProcess
-
 //
 // See: https://doc.babylonjs.com/how_to/how_to_use_postprocesses#imageprocessing
 type ImageProcessingPostProcess struct{ *PostProcess }
@@ -27,11 +26,30 @@ func ImageProcessingPostProcessFromJSObject(p js.Value) *ImageProcessingPostProc
 	return &ImageProcessingPostProcess{PostProcessFromJSObject(p)}
 }
 
+// NewImageProcessingPostProcessOpts contains optional parameters for NewImageProcessingPostProcess.
+type NewImageProcessingPostProcessOpts struct {
+	Camera *Camera
+
+	SamplingMode *float64
+
+	Engine *Engine
+
+	Reusable *bool
+
+	TextureType *float64
+
+	ImageProcessingConfiguration *ImageProcessingConfiguration
+}
+
 // NewImageProcessingPostProcess returns a new ImageProcessingPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess
-func (b *Babylon) NewImageProcessingPostProcess(todo parameters) *ImageProcessingPostProcess {
-	p := b.ctx.Get("ImageProcessingPostProcess").New(todo)
+func (b *Babylon) NewImageProcessingPostProcess(name string, options float64, opts *NewImageProcessingPostProcessOpts) *ImageProcessingPostProcess {
+	if opts == nil {
+		opts = &NewImageProcessingPostProcessOpts{}
+	}
+
+	p := b.ctx.Get("ImageProcessingPostProcess").New(name, options, opts.Camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType, opts.ImageProcessingConfiguration.JSObject())
 	return ImageProcessingPostProcessFromJSObject(p)
 }
 

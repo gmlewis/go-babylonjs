@@ -8,7 +8,7 @@ import (
 
 // SubEmitter represents a babylon.js SubEmitter.
 // Sub emitter class used to emit particles from an existing particle
-type SubEmitter struct{}
+type SubEmitter struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (s *SubEmitter) JSObject() js.Value { return s.p }
@@ -27,8 +27,8 @@ func SubEmitterFromJSObject(p js.Value) *SubEmitter {
 // NewSubEmitter returns a new SubEmitter object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.subemitter
-func (b *Babylon) NewSubEmitter(todo parameters) *SubEmitter {
-	p := b.ctx.Get("SubEmitter").New(todo)
+func (b *Babylon) NewSubEmitter(particleSystem *ParticleSystem) *SubEmitter {
+	p := b.ctx.Get("SubEmitter").New(particleSystem.JSObject())
 	return SubEmitterFromJSObject(p)
 }
 

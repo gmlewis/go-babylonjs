@@ -27,8 +27,8 @@ func AddBlockFromJSObject(p js.Value) *AddBlock {
 // NewAddBlock returns a new AddBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.addblock
-func (b *Babylon) NewAddBlock(todo parameters) *AddBlock {
-	p := b.ctx.Get("AddBlock").New(todo)
+func (b *Babylon) NewAddBlock(name string) *AddBlock {
+	p := b.ctx.Get("AddBlock").New(name)
 	return AddBlockFromJSObject(p)
 }
 

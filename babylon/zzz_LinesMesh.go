@@ -8,7 +8,6 @@ import (
 
 // LinesMesh represents a babylon.js LinesMesh.
 // Line mesh
-
 //
 // See: https://doc.babylonjs.com/babylon101/parametric_shapes
 type LinesMesh struct{ *Mesh }
@@ -27,11 +26,30 @@ func LinesMeshFromJSObject(p js.Value) *LinesMesh {
 	return &LinesMesh{MeshFromJSObject(p)}
 }
 
+// NewLinesMeshOpts contains optional parameters for NewLinesMesh.
+type NewLinesMeshOpts struct {
+	Scene *Scene
+
+	Parent *Node
+
+	Source *LinesMesh
+
+	DoNotCloneChildren *bool
+
+	UseVertexColor *bool
+
+	UseVertexAlpha *bool
+}
+
 // NewLinesMesh returns a new LinesMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh
-func (b *Babylon) NewLinesMesh(todo parameters) *LinesMesh {
-	p := b.ctx.Get("LinesMesh").New(todo)
+func (b *Babylon) NewLinesMesh(name string, opts *NewLinesMeshOpts) *LinesMesh {
+	if opts == nil {
+		opts = &NewLinesMeshOpts{}
+	}
+
+	p := b.ctx.Get("LinesMesh").New(name, opts.Scene.JSObject(), opts.Parent.JSObject(), opts.Source.JSObject(), opts.DoNotCloneChildren.JSObject(), opts.UseVertexColor.JSObject(), opts.UseVertexAlpha.JSObject())
 	return LinesMeshFromJSObject(p)
 }
 

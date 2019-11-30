@@ -8,7 +8,7 @@ import (
 
 // AsyncLoop represents a babylon.js AsyncLoop.
 // An implementation of a loop for asynchronous functions.
-type AsyncLoop struct{}
+type AsyncLoop struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (a *AsyncLoop) JSObject() js.Value { return a.p }
@@ -24,11 +24,20 @@ func AsyncLoopFromJSObject(p js.Value) *AsyncLoop {
 	return &AsyncLoop{p: p}
 }
 
+// NewAsyncLoopOpts contains optional parameters for NewAsyncLoop.
+type NewAsyncLoopOpts struct {
+	Offset *float64
+}
+
 // NewAsyncLoop returns a new AsyncLoop object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.asyncloop
-func (b *Babylon) NewAsyncLoop(todo parameters) *AsyncLoop {
-	p := b.ctx.Get("AsyncLoop").New(todo)
+func (b *Babylon) NewAsyncLoop(iterations float64, jsFunc func(), successCallback func(), opts *NewAsyncLoopOpts) *AsyncLoop {
+	if opts == nil {
+		opts = &NewAsyncLoopOpts{}
+	}
+
+	p := b.ctx.Get("AsyncLoop").New(iterations, jsFunc, successCallback, opts.Offset)
 	return AsyncLoopFromJSObject(p)
 }
 

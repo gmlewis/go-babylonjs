@@ -8,7 +8,6 @@ import (
 
 // WebXRCamera represents a babylon.js WebXRCamera.
 // WebXR Camera which holds the views for the xrSession
-
 //
 // See: https://doc.babylonjs.com/how_to/webxr
 type WebXRCamera struct{ *FreeCamera }
@@ -30,8 +29,8 @@ func WebXRCameraFromJSObject(p js.Value) *WebXRCamera {
 // NewWebXRCamera returns a new WebXRCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrcamera
-func (b *Babylon) NewWebXRCamera(todo parameters) *WebXRCamera {
-	p := b.ctx.Get("WebXRCamera").New(todo)
+func (b *Babylon) NewWebXRCamera(name string, scene *Scene) *WebXRCamera {
+	p := b.ctx.Get("WebXRCamera").New(name, scene.JSObject())
 	return WebXRCameraFromJSObject(p)
 }
 

@@ -9,7 +9,7 @@ import (
 // MultiLinePoint represents a babylon.js MultiLinePoint.
 // Class used to store a point for a MultiLine object.
 // The point can be pure 2D coordinates, a mesh or a control
-type MultiLinePoint struct{}
+type MultiLinePoint struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (m *MultiLinePoint) JSObject() js.Value { return m.p }
@@ -28,8 +28,8 @@ func MultiLinePointFromJSObject(p js.Value) *MultiLinePoint {
 // NewMultiLinePoint returns a new MultiLinePoint object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multilinepoint
-func (b *Babylon) NewMultiLinePoint(todo parameters) *MultiLinePoint {
-	p := b.ctx.Get("MultiLinePoint").New(todo)
+func (b *Babylon) NewMultiLinePoint(multiLine *MultiLine) *MultiLinePoint {
+	p := b.ctx.Get("MultiLinePoint").New(multiLine.JSObject())
 	return MultiLinePointFromJSObject(p)
 }
 

@@ -8,10 +8,9 @@ import (
 
 // PhysicsVortexEventOptions represents a babylon.js PhysicsVortexEventOptions.
 // Options fot the vortex event
-
 //
 // See: https://doc.babylonjs.com/how_to/using_the_physics_engine#further-functionality-of-the-impostor-class
-type PhysicsVortexEventOptions struct{}
+type PhysicsVortexEventOptions struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (p *PhysicsVortexEventOptions) JSObject() js.Value { return p.p }
@@ -25,14 +24,6 @@ func (b *Babylon) PhysicsVortexEventOptions() *PhysicsVortexEventOptions {
 // PhysicsVortexEventOptionsFromJSObject returns a wrapped PhysicsVortexEventOptions JavaScript class.
 func PhysicsVortexEventOptionsFromJSObject(p js.Value) *PhysicsVortexEventOptions {
 	return &PhysicsVortexEventOptions{p: p}
-}
-
-// NewPhysicsVortexEventOptions returns a new PhysicsVortexEventOptions object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.physicsvortexeventoptions
-func (b *Babylon) NewPhysicsVortexEventOptions(todo parameters) *PhysicsVortexEventOptions {
-	p := b.ctx.Get("PhysicsVortexEventOptions").New(todo)
-	return PhysicsVortexEventOptionsFromJSObject(p)
 }
 
 // TODO: methods

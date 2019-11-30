@@ -27,8 +27,8 @@ func TextFileAssetTaskFromJSObject(p js.Value) *TextFileAssetTask {
 // NewTextFileAssetTask returns a new TextFileAssetTask object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textfileassettask
-func (b *Babylon) NewTextFileAssetTask(todo parameters) *TextFileAssetTask {
-	p := b.ctx.Get("TextFileAssetTask").New(todo)
+func (b *Babylon) NewTextFileAssetTask(name string, url string) *TextFileAssetTask {
+	p := b.ctx.Get("TextFileAssetTask").New(name, url)
 	return TextFileAssetTaskFromJSObject(p)
 }
 

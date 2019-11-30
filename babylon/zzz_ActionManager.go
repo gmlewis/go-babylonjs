@@ -9,7 +9,6 @@ import (
 // ActionManager represents a babylon.js ActionManager.
 // Action Manager manages all events to be triggered on a given mesh or the global scene.
 // A single scene can have many Action Managers to handle predefined actions on specific meshes.
-
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_actions
 type ActionManager struct{ *AbstractActionManager }
@@ -31,8 +30,8 @@ func ActionManagerFromJSObject(p js.Value) *ActionManager {
 // NewActionManager returns a new ActionManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager
-func (b *Babylon) NewActionManager(todo parameters) *ActionManager {
-	p := b.ctx.Get("ActionManager").New(todo)
+func (b *Babylon) NewActionManager(scene *Scene) *ActionManager {
+	p := b.ctx.Get("ActionManager").New(scene.JSObject())
 	return ActionManagerFromJSObject(p)
 }
 

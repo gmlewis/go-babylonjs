@@ -24,11 +24,28 @@ func ChromaticAberrationPostProcessFromJSObject(p js.Value) *ChromaticAberration
 	return &ChromaticAberrationPostProcess{PostProcessFromJSObject(p)}
 }
 
+// NewChromaticAberrationPostProcessOpts contains optional parameters for NewChromaticAberrationPostProcess.
+type NewChromaticAberrationPostProcessOpts struct {
+	SamplingMode *float64
+
+	Engine *Engine
+
+	Reusable *bool
+
+	TextureType *float64
+
+	BlockCompilation *bool
+}
+
 // NewChromaticAberrationPostProcess returns a new ChromaticAberrationPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.chromaticaberrationpostprocess
-func (b *Babylon) NewChromaticAberrationPostProcess(todo parameters) *ChromaticAberrationPostProcess {
-	p := b.ctx.Get("ChromaticAberrationPostProcess").New(todo)
+func (b *Babylon) NewChromaticAberrationPostProcess(name string, screenWidth float64, screenHeight float64, options float64, camera *Camera, opts *NewChromaticAberrationPostProcessOpts) *ChromaticAberrationPostProcess {
+	if opts == nil {
+		opts = &NewChromaticAberrationPostProcessOpts{}
+	}
+
+	p := b.ctx.Get("ChromaticAberrationPostProcess").New(name, screenWidth, screenHeight, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType, opts.BlockCompilation.JSObject())
 	return ChromaticAberrationPostProcessFromJSObject(p)
 }
 

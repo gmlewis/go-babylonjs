@@ -8,7 +8,6 @@ import (
 
 // ExecuteCodeAction represents a babylon.js ExecuteCodeAction.
 // This defines an action responsible to run code (external event) once triggered.
-
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_actions
 type ExecuteCodeAction struct{ *Action }
@@ -27,11 +26,20 @@ func ExecuteCodeActionFromJSObject(p js.Value) *ExecuteCodeAction {
 	return &ExecuteCodeAction{ActionFromJSObject(p)}
 }
 
+// NewExecuteCodeActionOpts contains optional parameters for NewExecuteCodeAction.
+type NewExecuteCodeActionOpts struct {
+	Condition *Condition
+}
+
 // NewExecuteCodeAction returns a new ExecuteCodeAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.executecodeaction
-func (b *Babylon) NewExecuteCodeAction(todo parameters) *ExecuteCodeAction {
-	p := b.ctx.Get("ExecuteCodeAction").New(todo)
+func (b *Babylon) NewExecuteCodeAction(triggerOptions interface{}, jsFunc func(), opts *NewExecuteCodeActionOpts) *ExecuteCodeAction {
+	if opts == nil {
+		opts = &NewExecuteCodeActionOpts{}
+	}
+
+	p := b.ctx.Get("ExecuteCodeAction").New(triggerOptions, jsFunc, opts.Condition.JSObject())
 	return ExecuteCodeActionFromJSObject(p)
 }
 

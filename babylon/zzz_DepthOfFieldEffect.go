@@ -24,11 +24,24 @@ func DepthOfFieldEffectFromJSObject(p js.Value) *DepthOfFieldEffect {
 	return &DepthOfFieldEffect{PostProcessRenderEffectFromJSObject(p)}
 }
 
+// NewDepthOfFieldEffectOpts contains optional parameters for NewDepthOfFieldEffect.
+type NewDepthOfFieldEffectOpts struct {
+	BlurLevel *DepthOfFieldEffectBlurLevel
+
+	PipelineTextureType *float64
+
+	BlockCompilation *bool
+}
+
 // NewDepthOfFieldEffect returns a new DepthOfFieldEffect object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthoffieldeffect
-func (b *Babylon) NewDepthOfFieldEffect(todo parameters) *DepthOfFieldEffect {
-	p := b.ctx.Get("DepthOfFieldEffect").New(todo)
+func (b *Babylon) NewDepthOfFieldEffect(scene *Scene, depthTexture *RenderTargetTexture, opts *NewDepthOfFieldEffectOpts) *DepthOfFieldEffect {
+	if opts == nil {
+		opts = &NewDepthOfFieldEffectOpts{}
+	}
+
+	p := b.ctx.Get("DepthOfFieldEffect").New(scene.JSObject(), depthTexture.JSObject(), opts.BlurLevel.JSObject(), opts.PipelineTextureType, opts.BlockCompilation.JSObject())
 	return DepthOfFieldEffectFromJSObject(p)
 }
 

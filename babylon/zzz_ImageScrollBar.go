@@ -24,11 +24,20 @@ func ImageScrollBarFromJSObject(p js.Value) *ImageScrollBar {
 	return &ImageScrollBar{BaseSliderFromJSObject(p)}
 }
 
+// NewImageScrollBarOpts contains optional parameters for NewImageScrollBar.
+type NewImageScrollBarOpts struct {
+	Name *string
+}
+
 // NewImageScrollBar returns a new ImageScrollBar object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imagescrollbar
-func (b *Babylon) NewImageScrollBar(todo parameters) *ImageScrollBar {
-	p := b.ctx.Get("ImageScrollBar").New(todo)
+func (b *Babylon) NewImageScrollBar(opts *NewImageScrollBarOpts) *ImageScrollBar {
+	if opts == nil {
+		opts = &NewImageScrollBarOpts{}
+	}
+
+	p := b.ctx.Get("ImageScrollBar").New(opts.Name)
 	return ImageScrollBarFromJSObject(p)
 }
 

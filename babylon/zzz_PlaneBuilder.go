@@ -8,7 +8,7 @@ import (
 
 // PlaneBuilder represents a babylon.js PlaneBuilder.
 // Class containing static functions to help procedurally build meshes
-type PlaneBuilder struct{}
+type PlaneBuilder struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (p *PlaneBuilder) JSObject() js.Value { return p.p }
@@ -22,14 +22,6 @@ func (b *Babylon) PlaneBuilder() *PlaneBuilder {
 // PlaneBuilderFromJSObject returns a wrapped PlaneBuilder JavaScript class.
 func PlaneBuilderFromJSObject(p js.Value) *PlaneBuilder {
 	return &PlaneBuilder{p: p}
-}
-
-// NewPlaneBuilder returns a new PlaneBuilder object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.planebuilder
-func (b *Babylon) NewPlaneBuilder(todo parameters) *PlaneBuilder {
-	p := b.ctx.Get("PlaneBuilder").New(todo)
-	return PlaneBuilderFromJSObject(p)
 }
 
 // TODO: methods

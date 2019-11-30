@@ -9,7 +9,6 @@ import (
 // FollowCamera represents a babylon.js FollowCamera.
 // A follow camera takes a mesh as a target and follows it as it moves. Both a free camera version followCamera and
 // an arc rotate version arcFollowCamera are available.
-
 //
 // See: http://doc.babylonjs.com/features/cameras#follow-camera
 type FollowCamera struct{ *TargetCamera }
@@ -28,11 +27,20 @@ func FollowCameraFromJSObject(p js.Value) *FollowCamera {
 	return &FollowCamera{TargetCameraFromJSObject(p)}
 }
 
+// NewFollowCameraOpts contains optional parameters for NewFollowCamera.
+type NewFollowCameraOpts struct {
+	LockedTarget *AbstractMesh
+}
+
 // NewFollowCamera returns a new FollowCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamera
-func (b *Babylon) NewFollowCamera(todo parameters) *FollowCamera {
-	p := b.ctx.Get("FollowCamera").New(todo)
+func (b *Babylon) NewFollowCamera(name string, position *Vector3, scene *Scene, opts *NewFollowCameraOpts) *FollowCamera {
+	if opts == nil {
+		opts = &NewFollowCameraOpts{}
+	}
+
+	p := b.ctx.Get("FollowCamera").New(name, position.JSObject(), scene.JSObject(), opts.LockedTarget.JSObject())
 	return FollowCameraFromJSObject(p)
 }
 

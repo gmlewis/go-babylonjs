@@ -27,8 +27,8 @@ func ArcTan2BlockFromJSObject(p js.Value) *ArcTan2Block {
 // NewArcTan2Block returns a new ArcTan2Block object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arctan2block
-func (b *Babylon) NewArcTan2Block(todo parameters) *ArcTan2Block {
-	p := b.ctx.Get("ArcTan2Block").New(todo)
+func (b *Babylon) NewArcTan2Block(name string) *ArcTan2Block {
+	p := b.ctx.Get("ArcTan2Block").New(name)
 	return ArcTan2BlockFromJSObject(p)
 }
 

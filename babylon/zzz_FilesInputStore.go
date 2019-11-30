@@ -9,7 +9,7 @@ import (
 // FilesInputStore represents a babylon.js FilesInputStore.
 // Class used to help managing file picking and drag&amp;#39;n&amp;#39;drop
 // File Storage
-type FilesInputStore struct{}
+type FilesInputStore struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (f *FilesInputStore) JSObject() js.Value { return f.p }
@@ -23,14 +23,6 @@ func (b *Babylon) FilesInputStore() *FilesInputStore {
 // FilesInputStoreFromJSObject returns a wrapped FilesInputStore JavaScript class.
 func FilesInputStoreFromJSObject(p js.Value) *FilesInputStore {
 	return &FilesInputStore{p: p}
-}
-
-// NewFilesInputStore returns a new FilesInputStore object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.filesinputstore
-func (b *Babylon) NewFilesInputStore(todo parameters) *FilesInputStore {
-	p := b.ctx.Get("FilesInputStore").New(todo)
-	return FilesInputStoreFromJSObject(p)
 }
 
 // TODO: methods

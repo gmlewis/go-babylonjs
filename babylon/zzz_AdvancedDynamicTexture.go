@@ -8,7 +8,6 @@ import (
 
 // AdvancedDynamicTexture represents a babylon.js AdvancedDynamicTexture.
 // Class used to create texture to support 2D GUI elements
-
 //
 // See: http://doc.babylonjs.com/how_to/gui
 type AdvancedDynamicTexture struct{ *DynamicTexture }
@@ -27,11 +26,22 @@ func AdvancedDynamicTextureFromJSObject(p js.Value) *AdvancedDynamicTexture {
 	return &AdvancedDynamicTexture{DynamicTextureFromJSObject(p)}
 }
 
+// NewAdvancedDynamicTextureOpts contains optional parameters for NewAdvancedDynamicTexture.
+type NewAdvancedDynamicTextureOpts struct {
+	GenerateMipMaps *bool
+
+	SamplingMode *float64
+}
+
 // NewAdvancedDynamicTexture returns a new AdvancedDynamicTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture
-func (b *Babylon) NewAdvancedDynamicTexture(todo parameters) *AdvancedDynamicTexture {
-	p := b.ctx.Get("AdvancedDynamicTexture").New(todo)
+func (b *Babylon) NewAdvancedDynamicTexture(name string, width float64, height float64, scene *Scene, opts *NewAdvancedDynamicTextureOpts) *AdvancedDynamicTexture {
+	if opts == nil {
+		opts = &NewAdvancedDynamicTextureOpts{}
+	}
+
+	p := b.ctx.Get("AdvancedDynamicTexture").New(name, width, height, scene.JSObject(), opts.GenerateMipMaps.JSObject(), opts.SamplingMode)
 	return AdvancedDynamicTextureFromJSObject(p)
 }
 

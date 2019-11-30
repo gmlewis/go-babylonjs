@@ -8,7 +8,6 @@ import (
 
 // GlowLayer represents a babylon.js GlowLayer.
 // The glow layer Helps adding a glow effect around the emissive parts of a mesh.
-
 //
 // Documentation: &lt;a href=&#34;https://doc.babylonjs.com/how_to/glow_layer&#34;&gt;https://doc.babylonjs.com/how_to/glow_layer&lt;/a&gt;
 type GlowLayer struct{ *EffectLayer }
@@ -27,11 +26,20 @@ func GlowLayerFromJSObject(p js.Value) *GlowLayer {
 	return &GlowLayer{EffectLayerFromJSObject(p)}
 }
 
+// NewGlowLayerOpts contains optional parameters for NewGlowLayer.
+type NewGlowLayerOpts struct {
+	Options js.Value
+}
+
 // NewGlowLayer returns a new GlowLayer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.glowlayer
-func (b *Babylon) NewGlowLayer(todo parameters) *GlowLayer {
-	p := b.ctx.Get("GlowLayer").New(todo)
+func (b *Babylon) NewGlowLayer(name string, scene *Scene, opts *NewGlowLayerOpts) *GlowLayer {
+	if opts == nil {
+		opts = &NewGlowLayerOpts{}
+	}
+
+	p := b.ctx.Get("GlowLayer").New(name, scene.JSObject(), opts.Options)
 	return GlowLayerFromJSObject(p)
 }
 

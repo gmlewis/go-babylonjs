@@ -25,11 +25,20 @@ func NullEngineFromJSObject(p js.Value) *NullEngine {
 	return &NullEngine{EngineFromJSObject(p)}
 }
 
+// NewNullEngineOpts contains optional parameters for NewNullEngine.
+type NewNullEngineOpts struct {
+	Options *NullEngineOptions
+}
+
 // NewNullEngine returns a new NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine
-func (b *Babylon) NewNullEngine(todo parameters) *NullEngine {
-	p := b.ctx.Get("NullEngine").New(todo)
+func (b *Babylon) NewNullEngine(opts *NewNullEngineOpts) *NullEngine {
+	if opts == nil {
+		opts = &NewNullEngineOpts{}
+	}
+
+	p := b.ctx.Get("NullEngine").New(opts.Options.JSObject())
 	return NullEngineFromJSObject(p)
 }
 

@@ -8,7 +8,6 @@ import (
 
 // InstancesBlock represents a babylon.js InstancesBlock.
 // Block used to add support for instances
-
 //
 // See: https://doc.babylonjs.com/how_to/how_to_use_instances
 type InstancesBlock struct{ *NodeMaterialBlock }
@@ -30,8 +29,8 @@ func InstancesBlockFromJSObject(p js.Value) *InstancesBlock {
 // NewInstancesBlock returns a new InstancesBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancesblock
-func (b *Babylon) NewInstancesBlock(todo parameters) *InstancesBlock {
-	p := b.ctx.Get("InstancesBlock").New(todo)
+func (b *Babylon) NewInstancesBlock(name string) *InstancesBlock {
+	p := b.ctx.Get("InstancesBlock").New(name)
 	return InstancesBlockFromJSObject(p)
 }
 

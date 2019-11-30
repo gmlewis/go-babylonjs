@@ -1,7 +1,6 @@
 package babylon
 
-import "syscall/js"
-
+/*
 // AbstractScene represents a babylon.js AbstractScene.
 type AbstractScene struct{ p js.Value }
 
@@ -26,3 +25,4 @@ func (b *Babylon) NewAbstractScene() *AbstractScene {
 	p := b.ctx.Get("AbstractScene").New()
 	return AbstractSceneFromJSObject(p)
 }
+*/

@@ -8,10 +8,9 @@ import (
 
 // ReflectionProbe represents a babylon.js ReflectionProbe.
 // Class used to generate realtime reflection / refraction cube textures
-
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_reflection_probes
-type ReflectionProbe struct{}
+type ReflectionProbe struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (r *ReflectionProbe) JSObject() js.Value { return r.p }
@@ -27,11 +26,22 @@ func ReflectionProbeFromJSObject(p js.Value) *ReflectionProbe {
 	return &ReflectionProbe{p: p}
 }
 
+// NewReflectionProbeOpts contains optional parameters for NewReflectionProbe.
+type NewReflectionProbeOpts struct {
+	GenerateMipMaps *bool
+
+	UseFloat *bool
+}
+
 // NewReflectionProbe returns a new ReflectionProbe object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.reflectionprobe
-func (b *Babylon) NewReflectionProbe(todo parameters) *ReflectionProbe {
-	p := b.ctx.Get("ReflectionProbe").New(todo)
+func (b *Babylon) NewReflectionProbe(name string, size float64, scene *Scene, opts *NewReflectionProbeOpts) *ReflectionProbe {
+	if opts == nil {
+		opts = &NewReflectionProbeOpts{}
+	}
+
+	p := b.ctx.Get("ReflectionProbe").New(name, size, scene.JSObject(), opts.GenerateMipMaps.JSObject(), opts.UseFloat.JSObject())
 	return ReflectionProbeFromJSObject(p)
 }
 

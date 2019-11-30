@@ -8,7 +8,7 @@ import (
 
 // SphericalHarmonics represents a babylon.js SphericalHarmonics.
 // Class representing spherical harmonics coefficients to the 3rd degree
-type SphericalHarmonics struct{}
+type SphericalHarmonics struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (s *SphericalHarmonics) JSObject() js.Value { return s.p }
@@ -22,14 +22,6 @@ func (b *Babylon) SphericalHarmonics() *SphericalHarmonics {
 // SphericalHarmonicsFromJSObject returns a wrapped SphericalHarmonics JavaScript class.
 func SphericalHarmonicsFromJSObject(p js.Value) *SphericalHarmonics {
 	return &SphericalHarmonics{p: p}
-}
-
-// NewSphericalHarmonics returns a new SphericalHarmonics object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.sphericalharmonics
-func (b *Babylon) NewSphericalHarmonics(todo parameters) *SphericalHarmonics {
-	p := b.ctx.Get("SphericalHarmonics").New(todo)
-	return SphericalHarmonicsFromJSObject(p)
 }
 
 // TODO: methods

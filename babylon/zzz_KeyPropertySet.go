@@ -8,7 +8,7 @@ import (
 
 // KeyPropertySet represents a babylon.js KeyPropertySet.
 // Class used to store key control properties
-type KeyPropertySet struct{}
+type KeyPropertySet struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (k *KeyPropertySet) JSObject() js.Value { return k.p }
@@ -22,14 +22,6 @@ func (b *Babylon) KeyPropertySet() *KeyPropertySet {
 // KeyPropertySetFromJSObject returns a wrapped KeyPropertySet JavaScript class.
 func KeyPropertySetFromJSObject(p js.Value) *KeyPropertySet {
 	return &KeyPropertySet{p: p}
-}
-
-// NewKeyPropertySet returns a new KeyPropertySet object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.keypropertyset
-func (b *Babylon) NewKeyPropertySet(todo parameters) *KeyPropertySet {
-	p := b.ctx.Get("KeyPropertySet").New(todo)
-	return KeyPropertySetFromJSObject(p)
 }
 
 // TODO: methods

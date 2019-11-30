@@ -25,11 +25,20 @@ func FlyCameraFromJSObject(p js.Value) *FlyCamera {
 	return &FlyCamera{TargetCameraFromJSObject(p)}
 }
 
+// NewFlyCameraOpts contains optional parameters for NewFlyCamera.
+type NewFlyCameraOpts struct {
+	SetActiveOnSceneIfNoneActive *bool
+}
+
 // NewFlyCamera returns a new FlyCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamera
-func (b *Babylon) NewFlyCamera(todo parameters) *FlyCamera {
-	p := b.ctx.Get("FlyCamera").New(todo)
+func (b *Babylon) NewFlyCamera(name string, position *Vector3, scene *Scene, opts *NewFlyCameraOpts) *FlyCamera {
+	if opts == nil {
+		opts = &NewFlyCameraOpts{}
+	}
+
+	p := b.ctx.Get("FlyCamera").New(name, position.JSObject(), scene.JSObject(), opts.SetActiveOnSceneIfNoneActive.JSObject())
 	return FlyCameraFromJSObject(p)
 }
 

@@ -8,7 +8,7 @@ import (
 
 // PhysicsRadialExplosionEvent represents a babylon.js PhysicsRadialExplosionEvent.
 // Represents a physics radial explosion event
-type PhysicsRadialExplosionEvent struct{}
+type PhysicsRadialExplosionEvent struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (p *PhysicsRadialExplosionEvent) JSObject() js.Value { return p.p }
@@ -27,8 +27,8 @@ func PhysicsRadialExplosionEventFromJSObject(p js.Value) *PhysicsRadialExplosion
 // NewPhysicsRadialExplosionEvent returns a new PhysicsRadialExplosionEvent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsradialexplosionevent
-func (b *Babylon) NewPhysicsRadialExplosionEvent(todo parameters) *PhysicsRadialExplosionEvent {
-	p := b.ctx.Get("PhysicsRadialExplosionEvent").New(todo)
+func (b *Babylon) NewPhysicsRadialExplosionEvent(_scene *Scene, _options *PhysicsRadialExplosionEventOptions) *PhysicsRadialExplosionEvent {
+	p := b.ctx.Get("PhysicsRadialExplosionEvent").New(_scene.JSObject(), _options.JSObject())
 	return PhysicsRadialExplosionEventFromJSObject(p)
 }
 

@@ -8,7 +8,6 @@ import (
 
 // DoNothingAction represents a babylon.js DoNothingAction.
 // This defines an action responsible that does nothing once triggered.
-
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_actions
 type DoNothingAction struct{ *Action }
@@ -27,11 +26,22 @@ func DoNothingActionFromJSObject(p js.Value) *DoNothingAction {
 	return &DoNothingAction{ActionFromJSObject(p)}
 }
 
+// NewDoNothingActionOpts contains optional parameters for NewDoNothingAction.
+type NewDoNothingActionOpts struct {
+	TriggerOptions *interface{}
+
+	Condition *Condition
+}
+
 // NewDoNothingAction returns a new DoNothingAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.donothingaction
-func (b *Babylon) NewDoNothingAction(todo parameters) *DoNothingAction {
-	p := b.ctx.Get("DoNothingAction").New(todo)
+func (b *Babylon) NewDoNothingAction(opts *NewDoNothingActionOpts) *DoNothingAction {
+	if opts == nil {
+		opts = &NewDoNothingActionOpts{}
+	}
+
+	p := b.ctx.Get("DoNothingAction").New(opts.TriggerOptions, opts.Condition.JSObject())
 	return DoNothingActionFromJSObject(p)
 }
 

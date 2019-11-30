@@ -9,7 +9,6 @@ import (
 // TouchCamera represents a babylon.js TouchCamera.
 // This represents a FPS type of camera controlled by touch.
 // This is like a universal camera minus the Gamepad controls.
-
 //
 // See: http://doc.babylonjs.com/features/cameras#universal-camera
 type TouchCamera struct{ *FreeCamera }
@@ -31,8 +30,8 @@ func TouchCameraFromJSObject(p js.Value) *TouchCamera {
 // NewTouchCamera returns a new TouchCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.touchcamera
-func (b *Babylon) NewTouchCamera(todo parameters) *TouchCamera {
-	p := b.ctx.Get("TouchCamera").New(todo)
+func (b *Babylon) NewTouchCamera(name string, position *Vector3, scene *Scene) *TouchCamera {
+	p := b.ctx.Get("TouchCamera").New(name, position.JSObject(), scene.JSObject())
 	return TouchCameraFromJSObject(p)
 }
 

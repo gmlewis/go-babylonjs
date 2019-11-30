@@ -27,8 +27,8 @@ func DesaturateBlockFromJSObject(p js.Value) *DesaturateBlock {
 // NewDesaturateBlock returns a new DesaturateBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.desaturateblock
-func (b *Babylon) NewDesaturateBlock(todo parameters) *DesaturateBlock {
-	p := b.ctx.Get("DesaturateBlock").New(todo)
+func (b *Babylon) NewDesaturateBlock(name string) *DesaturateBlock {
+	p := b.ctx.Get("DesaturateBlock").New(name)
 	return DesaturateBlockFromJSObject(p)
 }
 

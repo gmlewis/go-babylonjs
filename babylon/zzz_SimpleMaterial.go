@@ -8,7 +8,7 @@ import (
 
 // SimpleMaterial represents a babylon.js SimpleMaterial.
 //
-type SimpleMaterial struct{}
+type SimpleMaterial struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (s *SimpleMaterial) JSObject() js.Value { return s.p }
@@ -27,8 +27,8 @@ func SimpleMaterialFromJSObject(p js.Value) *SimpleMaterial {
 // NewSimpleMaterial returns a new SimpleMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.simplematerial
-func (b *Babylon) NewSimpleMaterial(todo parameters) *SimpleMaterial {
-	p := b.ctx.Get("SimpleMaterial").New(todo)
+func (b *Babylon) NewSimpleMaterial(name string, scene *Scene) *SimpleMaterial {
+	p := b.ctx.Get("SimpleMaterial").New(name, scene.JSObject())
 	return SimpleMaterialFromJSObject(p)
 }
 

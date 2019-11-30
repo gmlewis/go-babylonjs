@@ -25,11 +25,24 @@ func SphereDirectedParticleEmitterFromJSObject(p js.Value) *SphereDirectedPartic
 	return &SphereDirectedParticleEmitter{SphereParticleEmitterFromJSObject(p)}
 }
 
+// NewSphereDirectedParticleEmitterOpts contains optional parameters for NewSphereDirectedParticleEmitter.
+type NewSphereDirectedParticleEmitterOpts struct {
+	Radius *float64
+
+	Direction1 *Vector3
+
+	Direction2 *Vector3
+}
+
 // NewSphereDirectedParticleEmitter returns a new SphereDirectedParticleEmitter object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spheredirectedparticleemitter
-func (b *Babylon) NewSphereDirectedParticleEmitter(todo parameters) *SphereDirectedParticleEmitter {
-	p := b.ctx.Get("SphereDirectedParticleEmitter").New(todo)
+func (b *Babylon) NewSphereDirectedParticleEmitter(opts *NewSphereDirectedParticleEmitterOpts) *SphereDirectedParticleEmitter {
+	if opts == nil {
+		opts = &NewSphereDirectedParticleEmitterOpts{}
+	}
+
+	p := b.ctx.Get("SphereDirectedParticleEmitter").New(opts.Radius, opts.Direction1.JSObject(), opts.Direction2.JSObject())
 	return SphereDirectedParticleEmitterFromJSObject(p)
 }
 

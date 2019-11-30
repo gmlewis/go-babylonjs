@@ -8,7 +8,6 @@ import (
 
 // ShadowsOptimization represents a babylon.js ShadowsOptimization.
 // Defines an optimization used to remove shadows
-
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
 type ShadowsOptimization struct{ *SceneOptimization }
@@ -27,11 +26,20 @@ func ShadowsOptimizationFromJSObject(p js.Value) *ShadowsOptimization {
 	return &ShadowsOptimization{SceneOptimizationFromJSObject(p)}
 }
 
+// NewShadowsOptimizationOpts contains optional parameters for NewShadowsOptimization.
+type NewShadowsOptimizationOpts struct {
+	Priority *float64
+}
+
 // NewShadowsOptimization returns a new ShadowsOptimization object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowsoptimization
-func (b *Babylon) NewShadowsOptimization(todo parameters) *ShadowsOptimization {
-	p := b.ctx.Get("ShadowsOptimization").New(todo)
+func (b *Babylon) NewShadowsOptimization(opts *NewShadowsOptimizationOpts) *ShadowsOptimization {
+	if opts == nil {
+		opts = &NewShadowsOptimizationOpts{}
+	}
+
+	p := b.ctx.Get("ShadowsOptimization").New(opts.Priority)
 	return ShadowsOptimizationFromJSObject(p)
 }
 

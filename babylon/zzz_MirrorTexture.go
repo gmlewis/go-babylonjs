@@ -11,7 +11,6 @@ import (
 // It will dynamically be rendered every frame to adapt to the camera point of view.
 // You can then easily use it as a reflectionTexture on a flat surface.
 // In case the surface is not a plane, please consider relying on reflection probes.
-
 //
 // See: https://doc.babylonjs.com/how_to/reflect#mirrors
 type MirrorTexture struct{ *RenderTargetTexture }
@@ -30,11 +29,26 @@ func MirrorTextureFromJSObject(p js.Value) *MirrorTexture {
 	return &MirrorTexture{RenderTargetTextureFromJSObject(p)}
 }
 
+// NewMirrorTextureOpts contains optional parameters for NewMirrorTexture.
+type NewMirrorTextureOpts struct {
+	GenerateMipMaps *bool
+
+	Type *float64
+
+	SamplingMode *float64
+
+	GenerateDepthBuffer *bool
+}
+
 // NewMirrorTexture returns a new MirrorTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture
-func (b *Babylon) NewMirrorTexture(todo parameters) *MirrorTexture {
-	p := b.ctx.Get("MirrorTexture").New(todo)
+func (b *Babylon) NewMirrorTexture(name string, size float64, scene *Scene, opts *NewMirrorTextureOpts) *MirrorTexture {
+	if opts == nil {
+		opts = &NewMirrorTextureOpts{}
+	}
+
+	p := b.ctx.Get("MirrorTexture").New(name, size, scene.JSObject(), opts.GenerateMipMaps.JSObject(), opts.Type, opts.SamplingMode, opts.GenerateDepthBuffer.JSObject())
 	return MirrorTextureFromJSObject(p)
 }
 

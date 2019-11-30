@@ -10,7 +10,7 @@ import (
 // Particle emitter emitting particles from the inside of a cone.
 // It emits the particles alongside the cone volume from the base to the particle.
 // The emission direction might be randomized.
-type ConeParticleEmitter struct{}
+type ConeParticleEmitter struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (c *ConeParticleEmitter) JSObject() js.Value { return c.p }
@@ -26,11 +26,24 @@ func ConeParticleEmitterFromJSObject(p js.Value) *ConeParticleEmitter {
 	return &ConeParticleEmitter{p: p}
 }
 
+// NewConeParticleEmitterOpts contains optional parameters for NewConeParticleEmitter.
+type NewConeParticleEmitterOpts struct {
+	Radius *float64
+
+	Angle *float64
+
+	DirectionRandomizer *float64
+}
+
 // NewConeParticleEmitter returns a new ConeParticleEmitter object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.coneparticleemitter
-func (b *Babylon) NewConeParticleEmitter(todo parameters) *ConeParticleEmitter {
-	p := b.ctx.Get("ConeParticleEmitter").New(todo)
+func (b *Babylon) NewConeParticleEmitter(opts *NewConeParticleEmitterOpts) *ConeParticleEmitter {
+	if opts == nil {
+		opts = &NewConeParticleEmitterOpts{}
+	}
+
+	p := b.ctx.Get("ConeParticleEmitter").New(opts.Radius, opts.Angle, opts.DirectionRandomizer)
 	return ConeParticleEmitterFromJSObject(p)
 }
 

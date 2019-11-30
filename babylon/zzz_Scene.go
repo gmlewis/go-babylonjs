@@ -8,7 +8,6 @@ import (
 
 // Scene represents a babylon.js Scene.
 // Represents a scene to be rendered by the engine.
-
 //
 // See: http://doc.babylonjs.com/features/scene
 type Scene struct{ *AbstractScene }
@@ -27,11 +26,20 @@ func SceneFromJSObject(p js.Value) *Scene {
 	return &Scene{AbstractSceneFromJSObject(p)}
 }
 
+// NewSceneOpts contains optional parameters for NewScene.
+type NewSceneOpts struct {
+	Options *SceneOptions
+}
+
 // NewScene returns a new Scene object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene
-func (b *Babylon) NewScene(todo parameters) *Scene {
-	p := b.ctx.Get("Scene").New(todo)
+func (b *Babylon) NewScene(engine *Engine, opts *NewSceneOpts) *Scene {
+	if opts == nil {
+		opts = &NewSceneOpts{}
+	}
+
+	p := b.ctx.Get("Scene").New(engine.JSObject(), opts.Options.JSObject())
 	return SceneFromJSObject(p)
 }
 

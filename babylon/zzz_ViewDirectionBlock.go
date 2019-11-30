@@ -27,8 +27,8 @@ func ViewDirectionBlockFromJSObject(p js.Value) *ViewDirectionBlock {
 // NewViewDirectionBlock returns a new ViewDirectionBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.viewdirectionblock
-func (b *Babylon) NewViewDirectionBlock(todo parameters) *ViewDirectionBlock {
-	p := b.ctx.Get("ViewDirectionBlock").New(todo)
+func (b *Babylon) NewViewDirectionBlock(name string) *ViewDirectionBlock {
+	p := b.ctx.Get("ViewDirectionBlock").New(name)
 	return ViewDirectionBlockFromJSObject(p)
 }
 

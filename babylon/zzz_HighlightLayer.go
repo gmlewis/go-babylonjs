@@ -8,7 +8,6 @@ import (
 
 // HighlightLayer represents a babylon.js HighlightLayer.
 // The highlight layer Helps adding a glow effect around a mesh.
-
 //
 // !!! THIS REQUIRES AN ACTIVE STENCIL BUFFER ON THE CANVAS !!!
 type HighlightLayer struct{ *EffectLayer }
@@ -27,11 +26,20 @@ func HighlightLayerFromJSObject(p js.Value) *HighlightLayer {
 	return &HighlightLayer{EffectLayerFromJSObject(p)}
 }
 
+// NewHighlightLayerOpts contains optional parameters for NewHighlightLayer.
+type NewHighlightLayerOpts struct {
+	Options js.Value
+}
+
 // NewHighlightLayer returns a new HighlightLayer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightlayer
-func (b *Babylon) NewHighlightLayer(todo parameters) *HighlightLayer {
-	p := b.ctx.Get("HighlightLayer").New(todo)
+func (b *Babylon) NewHighlightLayer(name string, scene *Scene, opts *NewHighlightLayerOpts) *HighlightLayer {
+	if opts == nil {
+		opts = &NewHighlightLayerOpts{}
+	}
+
+	p := b.ctx.Get("HighlightLayer").New(name, scene.JSObject(), opts.Options)
 	return HighlightLayerFromJSObject(p)
 }
 

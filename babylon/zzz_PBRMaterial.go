@@ -8,7 +8,6 @@ import (
 
 // PBRMaterial represents a babylon.js PBRMaterial.
 // The Physically based material of BJS.
-
 //
 // This offers the main features of a standard PBR material.
 // For more information, please refer to the documentation :
@@ -32,8 +31,8 @@ func PBRMaterialFromJSObject(p js.Value) *PBRMaterial {
 // NewPBRMaterial returns a new PBRMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmaterial
-func (b *Babylon) NewPBRMaterial(todo parameters) *PBRMaterial {
-	p := b.ctx.Get("PBRMaterial").New(todo)
+func (b *Babylon) NewPBRMaterial(name string, scene *Scene) *PBRMaterial {
+	p := b.ctx.Get("PBRMaterial").New(name, scene.JSObject())
 	return PBRMaterialFromJSObject(p)
 }
 

@@ -8,7 +8,7 @@ import (
 
 // PoseEnabledControllerHelper represents a babylon.js PoseEnabledControllerHelper.
 // Defines the PoseEnabledControllerHelper object that is used initialize a gamepad as the controller type it is specified as (eg. windows mixed reality controller)
-type PoseEnabledControllerHelper struct{}
+type PoseEnabledControllerHelper struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (p *PoseEnabledControllerHelper) JSObject() js.Value { return p.p }
@@ -22,14 +22,6 @@ func (b *Babylon) PoseEnabledControllerHelper() *PoseEnabledControllerHelper {
 // PoseEnabledControllerHelperFromJSObject returns a wrapped PoseEnabledControllerHelper JavaScript class.
 func PoseEnabledControllerHelperFromJSObject(p js.Value) *PoseEnabledControllerHelper {
 	return &PoseEnabledControllerHelper{p: p}
-}
-
-// NewPoseEnabledControllerHelper returns a new PoseEnabledControllerHelper object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontrollerhelper
-func (b *Babylon) NewPoseEnabledControllerHelper(todo parameters) *PoseEnabledControllerHelper {
-	p := b.ctx.Get("PoseEnabledControllerHelper").New(todo)
-	return PoseEnabledControllerHelperFromJSObject(p)
 }
 
 // TODO: methods

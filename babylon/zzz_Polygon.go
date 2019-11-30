@@ -8,10 +8,9 @@ import (
 
 // Polygon represents a babylon.js Polygon.
 // Polygon
-
 //
 // See: https://doc.babylonjs.com/how_to/parametric_shapes#non-regular-polygon
-type Polygon struct{}
+type Polygon struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (p *Polygon) JSObject() js.Value { return p.p }
@@ -25,14 +24,6 @@ func (b *Babylon) Polygon() *Polygon {
 // PolygonFromJSObject returns a wrapped Polygon JavaScript class.
 func PolygonFromJSObject(p js.Value) *Polygon {
 	return &Polygon{p: p}
-}
-
-// NewPolygon returns a new Polygon object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.polygon
-func (b *Babylon) NewPolygon(todo parameters) *Polygon {
-	p := b.ctx.Get("Polygon").New(todo)
-	return PolygonFromJSObject(p)
 }
 
 // TODO: methods

@@ -8,7 +8,6 @@ import (
 
 // ExponentialEase represents a babylon.js ExponentialEase.
 // Easing function with an exponential shape (see link below).
-
 //
 // See: http://doc.babylonjs.com/babylon101/animations#easing-functions
 type ExponentialEase struct{ *EasingFunction }
@@ -27,11 +26,20 @@ func ExponentialEaseFromJSObject(p js.Value) *ExponentialEase {
 	return &ExponentialEase{EasingFunctionFromJSObject(p)}
 }
 
+// NewExponentialEaseOpts contains optional parameters for NewExponentialEase.
+type NewExponentialEaseOpts struct {
+	Exponent *float64
+}
+
 // NewExponentialEase returns a new ExponentialEase object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.exponentialease
-func (b *Babylon) NewExponentialEase(todo parameters) *ExponentialEase {
-	p := b.ctx.Get("ExponentialEase").New(todo)
+func (b *Babylon) NewExponentialEase(opts *NewExponentialEaseOpts) *ExponentialEase {
+	if opts == nil {
+		opts = &NewExponentialEaseOpts{}
+	}
+
+	p := b.ctx.Get("ExponentialEase").New(opts.Exponent)
 	return ExponentialEaseFromJSObject(p)
 }
 

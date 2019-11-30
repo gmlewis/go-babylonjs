@@ -8,7 +8,7 @@ import (
 
 // RuntimeAnimation represents a babylon.js RuntimeAnimation.
 // Defines a runtime animation
-type RuntimeAnimation struct{}
+type RuntimeAnimation struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (r *RuntimeAnimation) JSObject() js.Value { return r.p }
@@ -27,8 +27,8 @@ func RuntimeAnimationFromJSObject(p js.Value) *RuntimeAnimation {
 // NewRuntimeAnimation returns a new RuntimeAnimation object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.runtimeanimation
-func (b *Babylon) NewRuntimeAnimation(todo parameters) *RuntimeAnimation {
-	p := b.ctx.Get("RuntimeAnimation").New(todo)
+func (b *Babylon) NewRuntimeAnimation(target interface{}, animation *Animation, scene *Scene, host *Animatable) *RuntimeAnimation {
+	p := b.ctx.Get("RuntimeAnimation").New(target, animation.JSObject(), scene.JSObject(), host.JSObject())
 	return RuntimeAnimationFromJSObject(p)
 }
 

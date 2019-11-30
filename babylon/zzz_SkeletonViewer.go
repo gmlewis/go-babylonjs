@@ -8,10 +8,9 @@ import (
 
 // SkeletonViewer represents a babylon.js SkeletonViewer.
 // Class used to render a debug view of a given skeleton
-
 //
 // See: http://www.babylonjs-playground.com/#1BZJVJ#8
-type SkeletonViewer struct{}
+type SkeletonViewer struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (s *SkeletonViewer) JSObject() js.Value { return s.p }
@@ -27,11 +26,22 @@ func SkeletonViewerFromJSObject(p js.Value) *SkeletonViewer {
 	return &SkeletonViewer{p: p}
 }
 
+// NewSkeletonViewerOpts contains optional parameters for NewSkeletonViewer.
+type NewSkeletonViewerOpts struct {
+	AutoUpdateBonesMatrices *bool
+
+	RenderingGroupId *float64
+}
+
 // NewSkeletonViewer returns a new SkeletonViewer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeletonviewer
-func (b *Babylon) NewSkeletonViewer(todo parameters) *SkeletonViewer {
-	p := b.ctx.Get("SkeletonViewer").New(todo)
+func (b *Babylon) NewSkeletonViewer(skeleton *Skeleton, mesh *AbstractMesh, scene *Scene, opts *NewSkeletonViewerOpts) *SkeletonViewer {
+	if opts == nil {
+		opts = &NewSkeletonViewerOpts{}
+	}
+
+	p := b.ctx.Get("SkeletonViewer").New(skeleton.JSObject(), mesh.JSObject(), scene.JSObject(), opts.AutoUpdateBonesMatrices.JSObject(), opts.RenderingGroupId)
 	return SkeletonViewerFromJSObject(p)
 }
 

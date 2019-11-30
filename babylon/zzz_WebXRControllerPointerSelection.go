@@ -8,7 +8,7 @@ import (
 
 // WebXRControllerPointerSelection represents a babylon.js WebXRControllerPointerSelection.
 // Handles pointer input automatically for the pointer of XR controllers
-type WebXRControllerPointerSelection struct{}
+type WebXRControllerPointerSelection struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (w *WebXRControllerPointerSelection) JSObject() js.Value { return w.p }
@@ -27,8 +27,8 @@ func WebXRControllerPointerSelectionFromJSObject(p js.Value) *WebXRControllerPoi
 // NewWebXRControllerPointerSelection returns a new WebXRControllerPointerSelection object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrcontrollerpointerselection
-func (b *Babylon) NewWebXRControllerPointerSelection(todo parameters) *WebXRControllerPointerSelection {
-	p := b.ctx.Get("WebXRControllerPointerSelection").New(todo)
+func (b *Babylon) NewWebXRControllerPointerSelection(input *WebXRInput) *WebXRControllerPointerSelection {
+	p := b.ctx.Get("WebXRControllerPointerSelection").New(input.JSObject())
 	return WebXRControllerPointerSelectionFromJSObject(p)
 }
 

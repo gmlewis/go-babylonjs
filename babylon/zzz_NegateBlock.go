@@ -27,8 +27,8 @@ func NegateBlockFromJSObject(p js.Value) *NegateBlock {
 // NewNegateBlock returns a new NegateBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.negateblock
-func (b *Babylon) NewNegateBlock(todo parameters) *NegateBlock {
-	p := b.ctx.Get("NegateBlock").New(todo)
+func (b *Babylon) NewNegateBlock(name string) *NegateBlock {
+	p := b.ctx.Get("NegateBlock").New(name)
 	return NegateBlockFromJSObject(p)
 }
 

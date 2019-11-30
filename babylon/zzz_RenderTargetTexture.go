@@ -26,11 +26,38 @@ func RenderTargetTextureFromJSObject(p js.Value) *RenderTargetTexture {
 	return &RenderTargetTexture{TextureFromJSObject(p)}
 }
 
+// NewRenderTargetTextureOpts contains optional parameters for NewRenderTargetTexture.
+type NewRenderTargetTextureOpts struct {
+	GenerateMipMaps *bool
+
+	DoNotChangeAspectRatio *bool
+
+	Type *float64
+
+	IsCube *bool
+
+	SamplingMode *float64
+
+	GenerateDepthBuffer *bool
+
+	GenerateStencilBuffer *bool
+
+	IsMulti *bool
+
+	Format *float64
+
+	DelayAllocation *bool
+}
+
 // NewRenderTargetTexture returns a new RenderTargetTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rendertargettexture
-func (b *Babylon) NewRenderTargetTexture(todo parameters) *RenderTargetTexture {
-	p := b.ctx.Get("RenderTargetTexture").New(todo)
+func (b *Babylon) NewRenderTargetTexture(name string, size float64, scene *Scene, opts *NewRenderTargetTextureOpts) *RenderTargetTexture {
+	if opts == nil {
+		opts = &NewRenderTargetTextureOpts{}
+	}
+
+	p := b.ctx.Get("RenderTargetTexture").New(name, size, scene.JSObject(), opts.GenerateMipMaps.JSObject(), opts.DoNotChangeAspectRatio.JSObject(), opts.Type, opts.IsCube.JSObject(), opts.SamplingMode, opts.GenerateDepthBuffer.JSObject(), opts.GenerateStencilBuffer.JSObject(), opts.IsMulti.JSObject(), opts.Format, opts.DelayAllocation.JSObject())
 	return RenderTargetTextureFromJSObject(p)
 }
 

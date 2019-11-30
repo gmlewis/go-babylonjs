@@ -8,7 +8,6 @@ import (
 
 // CombineAction represents a babylon.js CombineAction.
 // This defines an action responsible to trigger several actions once triggered.
-
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_actions
 type CombineAction struct{ *Action }
@@ -27,11 +26,20 @@ func CombineActionFromJSObject(p js.Value) *CombineAction {
 	return &CombineAction{ActionFromJSObject(p)}
 }
 
+// NewCombineActionOpts contains optional parameters for NewCombineAction.
+type NewCombineActionOpts struct {
+	Condition *Condition
+}
+
 // NewCombineAction returns a new CombineAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.combineaction
-func (b *Babylon) NewCombineAction(todo parameters) *CombineAction {
-	p := b.ctx.Get("CombineAction").New(todo)
+func (b *Babylon) NewCombineAction(triggerOptions interface{}, children *Action, opts *NewCombineActionOpts) *CombineAction {
+	if opts == nil {
+		opts = &NewCombineActionOpts{}
+	}
+
+	p := b.ctx.Get("CombineAction").New(triggerOptions, children.JSObject(), opts.Condition.JSObject())
 	return CombineActionFromJSObject(p)
 }
 

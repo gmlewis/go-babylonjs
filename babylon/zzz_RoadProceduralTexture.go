@@ -24,11 +24,22 @@ func RoadProceduralTextureFromJSObject(p js.Value) *RoadProceduralTexture {
 	return &RoadProceduralTexture{ProceduralTextureFromJSObject(p)}
 }
 
+// NewRoadProceduralTextureOpts contains optional parameters for NewRoadProceduralTexture.
+type NewRoadProceduralTextureOpts struct {
+	FallbackTexture *Texture
+
+	GenerateMipMaps *bool
+}
+
 // NewRoadProceduralTexture returns a new RoadProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.roadproceduraltexture
-func (b *Babylon) NewRoadProceduralTexture(todo parameters) *RoadProceduralTexture {
-	p := b.ctx.Get("RoadProceduralTexture").New(todo)
+func (b *Babylon) NewRoadProceduralTexture(name string, size float64, scene *Scene, opts *NewRoadProceduralTextureOpts) *RoadProceduralTexture {
+	if opts == nil {
+		opts = &NewRoadProceduralTextureOpts{}
+	}
+
+	p := b.ctx.Get("RoadProceduralTexture").New(name, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps.JSObject())
 	return RoadProceduralTextureFromJSObject(p)
 }
 

@@ -27,8 +27,8 @@ func PlanePanelFromJSObject(p js.Value) *PlanePanel {
 // NewPlanePanel returns a new PlanePanel object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.planepanel
-func (b *Babylon) NewPlanePanel(todo parameters) *PlanePanel {
-	p := b.ctx.Get("PlanePanel").New(todo)
+func (b *Babylon) NewPlanePanel() *PlanePanel {
+	p := b.ctx.Get("PlanePanel").New()
 	return PlanePanelFromJSObject(p)
 }
 

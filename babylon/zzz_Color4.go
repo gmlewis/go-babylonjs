@@ -8,7 +8,7 @@ import (
 
 // Color4 represents a babylon.js Color4.
 // Class used to hold a RBGA color
-type Color4 struct{}
+type Color4 struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (c *Color4) JSObject() js.Value { return c.p }
@@ -24,11 +24,26 @@ func Color4FromJSObject(p js.Value) *Color4 {
 	return &Color4{p: p}
 }
 
+// NewColor4Opts contains optional parameters for NewColor4.
+type NewColor4Opts struct {
+	R *float64
+
+	G *float64
+
+	B *float64
+
+	A *float64
+}
+
 // NewColor4 returns a new Color4 object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.color4
-func (b *Babylon) NewColor4(todo parameters) *Color4 {
-	p := b.ctx.Get("Color4").New(todo)
+func (b *Babylon) NewColor4(opts *NewColor4Opts) *Color4 {
+	if opts == nil {
+		opts = &NewColor4Opts{}
+	}
+
+	p := b.ctx.Get("Color4").New(opts.R, opts.G, opts.B, opts.A)
 	return Color4FromJSObject(p)
 }
 

@@ -24,11 +24,20 @@ func BaseSliderFromJSObject(p js.Value) *BaseSlider {
 	return &BaseSlider{ControlFromJSObject(p)}
 }
 
+// NewBaseSliderOpts contains optional parameters for NewBaseSlider.
+type NewBaseSliderOpts struct {
+	Name *string
+}
+
 // NewBaseSlider returns a new BaseSlider object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.baseslider
-func (b *Babylon) NewBaseSlider(todo parameters) *BaseSlider {
-	p := b.ctx.Get("BaseSlider").New(todo)
+func (b *Babylon) NewBaseSlider(opts *NewBaseSliderOpts) *BaseSlider {
+	if opts == nil {
+		opts = &NewBaseSliderOpts{}
+	}
+
+	p := b.ctx.Get("BaseSlider").New(opts.Name)
 	return BaseSliderFromJSObject(p)
 }
 

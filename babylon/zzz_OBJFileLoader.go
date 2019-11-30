@@ -9,7 +9,7 @@ import (
 // OBJFileLoader represents a babylon.js OBJFileLoader.
 // OBJ file type loader.
 // This is a babylon scene loader plugin.
-type OBJFileLoader struct{}
+type OBJFileLoader struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (o *OBJFileLoader) JSObject() js.Value { return o.p }
@@ -25,11 +25,20 @@ func OBJFileLoaderFromJSObject(p js.Value) *OBJFileLoader {
 	return &OBJFileLoader{p: p}
 }
 
+// NewOBJFileLoaderOpts contains optional parameters for NewOBJFileLoader.
+type NewOBJFileLoaderOpts struct {
+	MeshLoadOptions *MeshLoadOptions
+}
+
 // NewOBJFileLoader returns a new OBJFileLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.objfileloader
-func (b *Babylon) NewOBJFileLoader(todo parameters) *OBJFileLoader {
-	p := b.ctx.Get("OBJFileLoader").New(todo)
+func (b *Babylon) NewOBJFileLoader(opts *NewOBJFileLoaderOpts) *OBJFileLoader {
+	if opts == nil {
+		opts = &NewOBJFileLoaderOpts{}
+	}
+
+	p := b.ctx.Get("OBJFileLoader").New(opts.MeshLoadOptions.JSObject())
 	return OBJFileLoaderFromJSObject(p)
 }
 

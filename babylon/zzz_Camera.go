@@ -8,7 +8,6 @@ import (
 
 // Camera represents a babylon.js Camera.
 // This is the base class of all the camera used in the application.
-
 //
 // See: http://doc.babylonjs.com/features/cameras
 type Camera struct{ *Node }
@@ -27,11 +26,20 @@ func CameraFromJSObject(p js.Value) *Camera {
 	return &Camera{NodeFromJSObject(p)}
 }
 
+// NewCameraOpts contains optional parameters for NewCamera.
+type NewCameraOpts struct {
+	SetActiveOnSceneIfNoneActive *bool
+}
+
 // NewCamera returns a new Camera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.camera
-func (b *Babylon) NewCamera(todo parameters) *Camera {
-	p := b.ctx.Get("Camera").New(todo)
+func (b *Babylon) NewCamera(name string, position *Vector3, scene *Scene, opts *NewCameraOpts) *Camera {
+	if opts == nil {
+		opts = &NewCameraOpts{}
+	}
+
+	p := b.ctx.Get("Camera").New(name, position.JSObject(), scene.JSObject(), opts.SetActiveOnSceneIfNoneActive.JSObject())
 	return CameraFromJSObject(p)
 }
 

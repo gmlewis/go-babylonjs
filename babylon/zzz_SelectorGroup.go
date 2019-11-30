@@ -9,7 +9,7 @@ import (
 // SelectorGroup represents a babylon.js SelectorGroup.
 // Class used to create a RadioGroup
 // which contains groups of radio buttons
-type SelectorGroup struct{}
+type SelectorGroup struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (s *SelectorGroup) JSObject() js.Value { return s.p }
@@ -28,8 +28,8 @@ func SelectorGroupFromJSObject(p js.Value) *SelectorGroup {
 // NewSelectorGroup returns a new SelectorGroup object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.selectorgroup
-func (b *Babylon) NewSelectorGroup(todo parameters) *SelectorGroup {
-	p := b.ctx.Get("SelectorGroup").New(todo)
+func (b *Babylon) NewSelectorGroup(name string) *SelectorGroup {
+	p := b.ctx.Get("SelectorGroup").New(name)
 	return SelectorGroupFromJSObject(p)
 }
 

@@ -8,7 +8,6 @@ import (
 
 // SineEase represents a babylon.js SineEase.
 // Easing function with a sin shape (see link below).
-
 //
 // See: http://doc.babylonjs.com/babylon101/animations#easing-functions
 type SineEase struct{ *EasingFunction }
@@ -25,14 +24,6 @@ func (b *Babylon) SineEase() *SineEase {
 // SineEaseFromJSObject returns a wrapped SineEase JavaScript class.
 func SineEaseFromJSObject(p js.Value) *SineEase {
 	return &SineEase{EasingFunctionFromJSObject(p)}
-}
-
-// NewSineEase returns a new SineEase object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.sineease
-func (b *Babylon) NewSineEase(todo parameters) *SineEase {
-	p := b.ctx.Get("SineEase").New(todo)
-	return SineEaseFromJSObject(p)
 }
 
 // TODO: methods

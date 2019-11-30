@@ -24,11 +24,30 @@ func VolumetricLightScatteringPostProcessFromJSObject(p js.Value) *VolumetricLig
 	return &VolumetricLightScatteringPostProcess{PostProcessFromJSObject(p)}
 }
 
+// NewVolumetricLightScatteringPostProcessOpts contains optional parameters for NewVolumetricLightScatteringPostProcess.
+type NewVolumetricLightScatteringPostProcessOpts struct {
+	Mesh *Mesh
+
+	Samples *float64
+
+	SamplingMode *float64
+
+	Engine *Engine
+
+	Reusable *bool
+
+	Scene *Scene
+}
+
 // NewVolumetricLightScatteringPostProcess returns a new VolumetricLightScatteringPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumetriclightscatteringpostprocess
-func (b *Babylon) NewVolumetricLightScatteringPostProcess(todo parameters) *VolumetricLightScatteringPostProcess {
-	p := b.ctx.Get("VolumetricLightScatteringPostProcess").New(todo)
+func (b *Babylon) NewVolumetricLightScatteringPostProcess(name string, ratio interface{}, camera *Camera, opts *NewVolumetricLightScatteringPostProcessOpts) *VolumetricLightScatteringPostProcess {
+	if opts == nil {
+		opts = &NewVolumetricLightScatteringPostProcessOpts{}
+	}
+
+	p := b.ctx.Get("VolumetricLightScatteringPostProcess").New(name, ratio, camera.JSObject(), opts.Mesh.JSObject(), opts.Samples, opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.Scene.JSObject())
 	return VolumetricLightScatteringPostProcessFromJSObject(p)
 }
 

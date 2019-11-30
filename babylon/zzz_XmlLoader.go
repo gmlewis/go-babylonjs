@@ -8,7 +8,7 @@ import (
 
 // XmlLoader represents a babylon.js XmlLoader.
 // Class used to load GUI via XML.
-type XmlLoader struct{}
+type XmlLoader struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (x *XmlLoader) JSObject() js.Value { return x.p }
@@ -24,11 +24,20 @@ func XmlLoaderFromJSObject(p js.Value) *XmlLoader {
 	return &XmlLoader{p: p}
 }
 
+// NewXmlLoaderOpts contains optional parameters for NewXmlLoader.
+type NewXmlLoaderOpts struct {
+	ParentClass *null
+}
+
 // NewXmlLoader returns a new XmlLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.xmlloader
-func (b *Babylon) NewXmlLoader(todo parameters) *XmlLoader {
-	p := b.ctx.Get("XmlLoader").New(todo)
+func (b *Babylon) NewXmlLoader(opts *NewXmlLoaderOpts) *XmlLoader {
+	if opts == nil {
+		opts = &NewXmlLoaderOpts{}
+	}
+
+	p := b.ctx.Get("XmlLoader").New(opts.ParentClass.JSObject())
 	return XmlLoaderFromJSObject(p)
 }
 

@@ -24,11 +24,20 @@ func ValueConditionFromJSObject(p js.Value) *ValueCondition {
 	return &ValueCondition{ConditionFromJSObject(p)}
 }
 
+// NewValueConditionOpts contains optional parameters for NewValueCondition.
+type NewValueConditionOpts struct {
+	Operator *float64
+}
+
 // NewValueCondition returns a new ValueCondition object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.valuecondition
-func (b *Babylon) NewValueCondition(todo parameters) *ValueCondition {
-	p := b.ctx.Get("ValueCondition").New(todo)
+func (b *Babylon) NewValueCondition(actionManager *ActionManager, target interface{}, propertyPath string, value interface{}, opts *NewValueConditionOpts) *ValueCondition {
+	if opts == nil {
+		opts = &NewValueConditionOpts{}
+	}
+
+	p := b.ctx.Get("ValueCondition").New(actionManager.JSObject(), target, propertyPath, value, opts.Operator)
 	return ValueConditionFromJSObject(p)
 }
 

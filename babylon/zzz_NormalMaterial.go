@@ -8,7 +8,7 @@ import (
 
 // NormalMaterial represents a babylon.js NormalMaterial.
 //
-type NormalMaterial struct{}
+type NormalMaterial struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (n *NormalMaterial) JSObject() js.Value { return n.p }
@@ -27,8 +27,8 @@ func NormalMaterialFromJSObject(p js.Value) *NormalMaterial {
 // NewNormalMaterial returns a new NormalMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.normalmaterial
-func (b *Babylon) NewNormalMaterial(todo parameters) *NormalMaterial {
-	p := b.ctx.Get("NormalMaterial").New(todo)
+func (b *Babylon) NewNormalMaterial(name string, scene *Scene) *NormalMaterial {
+	p := b.ctx.Get("NormalMaterial").New(name, scene.JSObject())
 	return NormalMaterialFromJSObject(p)
 }
 

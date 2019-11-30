@@ -8,7 +8,6 @@ import (
 
 // SwitchBooleanAction represents a babylon.js SwitchBooleanAction.
 // This defines an action responsible to toggle a boolean once triggered.
-
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_actions
 type SwitchBooleanAction struct{ *Action }
@@ -27,11 +26,20 @@ func SwitchBooleanActionFromJSObject(p js.Value) *SwitchBooleanAction {
 	return &SwitchBooleanAction{ActionFromJSObject(p)}
 }
 
+// NewSwitchBooleanActionOpts contains optional parameters for NewSwitchBooleanAction.
+type NewSwitchBooleanActionOpts struct {
+	Condition *Condition
+}
+
 // NewSwitchBooleanAction returns a new SwitchBooleanAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.switchbooleanaction
-func (b *Babylon) NewSwitchBooleanAction(todo parameters) *SwitchBooleanAction {
-	p := b.ctx.Get("SwitchBooleanAction").New(todo)
+func (b *Babylon) NewSwitchBooleanAction(triggerOptions interface{}, target interface{}, propertyPath string, opts *NewSwitchBooleanActionOpts) *SwitchBooleanAction {
+	if opts == nil {
+		opts = &NewSwitchBooleanActionOpts{}
+	}
+
+	p := b.ctx.Get("SwitchBooleanAction").New(triggerOptions, target, propertyPath, opts.Condition.JSObject())
 	return SwitchBooleanActionFromJSObject(p)
 }
 

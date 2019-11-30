@@ -8,7 +8,7 @@ import (
 
 // AssetsProgressEvent represents a babylon.js AssetsProgressEvent.
 // Class used to share progress information about assets loading
-type AssetsProgressEvent struct{}
+type AssetsProgressEvent struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (a *AssetsProgressEvent) JSObject() js.Value { return a.p }
@@ -27,8 +27,8 @@ func AssetsProgressEventFromJSObject(p js.Value) *AssetsProgressEvent {
 // NewAssetsProgressEvent returns a new AssetsProgressEvent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsprogressevent
-func (b *Babylon) NewAssetsProgressEvent(todo parameters) *AssetsProgressEvent {
-	p := b.ctx.Get("AssetsProgressEvent").New(todo)
+func (b *Babylon) NewAssetsProgressEvent(remainingCount float64, totalCount float64, task *AbstractAssetTask) *AssetsProgressEvent {
+	p := b.ctx.Get("AssetsProgressEvent").New(remainingCount, totalCount, task.JSObject())
 	return AssetsProgressEventFromJSObject(p)
 }
 

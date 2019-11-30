@@ -27,8 +27,8 @@ func ViveControllerFromJSObject(p js.Value) *ViveController {
 // NewViveController returns a new ViveController object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vivecontroller
-func (b *Babylon) NewViveController(todo parameters) *ViveController {
-	p := b.ctx.Get("ViveController").New(todo)
+func (b *Babylon) NewViveController(vrGamepad interface{}) *ViveController {
+	p := b.ctx.Get("ViveController").New(vrGamepad)
 	return ViveControllerFromJSObject(p)
 }
 

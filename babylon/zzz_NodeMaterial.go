@@ -8,7 +8,7 @@ import (
 
 // NodeMaterial represents a babylon.js NodeMaterial.
 // Class used to create a node based material built by assembling shader blocks
-type NodeMaterial struct{}
+type NodeMaterial struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (n *NodeMaterial) JSObject() js.Value { return n.p }
@@ -24,11 +24,22 @@ func NodeMaterialFromJSObject(p js.Value) *NodeMaterial {
 	return &NodeMaterial{p: p}
 }
 
+// NewNodeMaterialOpts contains optional parameters for NewNodeMaterial.
+type NewNodeMaterialOpts struct {
+	Scene *Scene
+
+	Options *INodeMaterialOptions
+}
+
 // NewNodeMaterial returns a new NodeMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial
-func (b *Babylon) NewNodeMaterial(todo parameters) *NodeMaterial {
-	p := b.ctx.Get("NodeMaterial").New(todo)
+func (b *Babylon) NewNodeMaterial(name string, opts *NewNodeMaterialOpts) *NodeMaterial {
+	if opts == nil {
+		opts = &NewNodeMaterialOpts{}
+	}
+
+	p := b.ctx.Get("NodeMaterial").New(name, opts.Scene.JSObject(), opts.Options.JSObject())
 	return NodeMaterialFromJSObject(p)
 }
 

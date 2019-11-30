@@ -25,11 +25,28 @@ func SharpenPostProcessFromJSObject(p js.Value) *SharpenPostProcess {
 	return &SharpenPostProcess{PostProcessFromJSObject(p)}
 }
 
+// NewSharpenPostProcessOpts contains optional parameters for NewSharpenPostProcess.
+type NewSharpenPostProcessOpts struct {
+	SamplingMode *float64
+
+	Engine *Engine
+
+	Reusable *bool
+
+	TextureType *float64
+
+	BlockCompilation *bool
+}
+
 // NewSharpenPostProcess returns a new SharpenPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess
-func (b *Babylon) NewSharpenPostProcess(todo parameters) *SharpenPostProcess {
-	p := b.ctx.Get("SharpenPostProcess").New(todo)
+func (b *Babylon) NewSharpenPostProcess(name string, options float64, camera *Camera, opts *NewSharpenPostProcessOpts) *SharpenPostProcess {
+	if opts == nil {
+		opts = &NewSharpenPostProcessOpts{}
+	}
+
+	p := b.ctx.Get("SharpenPostProcess").New(name, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType, opts.BlockCompilation.JSObject())
 	return SharpenPostProcessFromJSObject(p)
 }
 

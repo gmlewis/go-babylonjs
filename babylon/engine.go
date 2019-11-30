@@ -4,6 +4,7 @@ import (
 	"syscall/js"
 )
 
+/*
 // Engine represents a Babylon Engine.
 type Engine struct{ *ThinEngine }
 
@@ -28,6 +29,7 @@ func (b *Babylon) NewEngine(canvas js.Value, antialias bool) *Engine {
 	p := b.ctx.Get("Engine").New(canvas, antialias)
 	return EngineFromJSObject(p)
 }
+*/
 
 // RunRenderLoop calls the JavaScript method of the same name.
 func (e *Engine) RunRenderLoop(f func()) {

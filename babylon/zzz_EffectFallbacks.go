@@ -9,7 +9,7 @@ import (
 // EffectFallbacks represents a babylon.js EffectFallbacks.
 // EffectFallbacks can be used to add fallbacks (properties to disable) to certain properties when desired to improve performance.
 // (Eg. Start at high quality with reflection and fog, if fps is low, remove reflection, if still low remove fog)
-type EffectFallbacks struct{}
+type EffectFallbacks struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (e *EffectFallbacks) JSObject() js.Value { return e.p }
@@ -23,14 +23,6 @@ func (b *Babylon) EffectFallbacks() *EffectFallbacks {
 // EffectFallbacksFromJSObject returns a wrapped EffectFallbacks JavaScript class.
 func EffectFallbacksFromJSObject(p js.Value) *EffectFallbacks {
 	return &EffectFallbacks{p: p}
-}
-
-// NewEffectFallbacks returns a new EffectFallbacks object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.effectfallbacks
-func (b *Babylon) NewEffectFallbacks(todo parameters) *EffectFallbacks {
-	p := b.ctx.Get("EffectFallbacks").New(todo)
-	return EffectFallbacksFromJSObject(p)
 }
 
 // TODO: methods

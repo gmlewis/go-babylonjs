@@ -8,7 +8,7 @@ import (
 
 // WeightedSound represents a babylon.js WeightedSound.
 // Wraps one or more Sound objects and selects one with random weight for playback.
-type WeightedSound struct{}
+type WeightedSound struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (w *WeightedSound) JSObject() js.Value { return w.p }
@@ -27,8 +27,8 @@ func WeightedSoundFromJSObject(p js.Value) *WeightedSound {
 // NewWeightedSound returns a new WeightedSound object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.weightedsound
-func (b *Babylon) NewWeightedSound(todo parameters) *WeightedSound {
-	p := b.ctx.Get("WeightedSound").New(todo)
+func (b *Babylon) NewWeightedSound(loop bool, sounds *Sound, weights float64) *WeightedSound {
+	p := b.ctx.Get("WeightedSound").New(loop.JSObject(), sounds.JSObject(), weights)
 	return WeightedSoundFromJSObject(p)
 }
 

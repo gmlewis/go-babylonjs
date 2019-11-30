@@ -27,8 +27,8 @@ func ColorSplitterBlockFromJSObject(p js.Value) *ColorSplitterBlock {
 // NewColorSplitterBlock returns a new ColorSplitterBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock
-func (b *Babylon) NewColorSplitterBlock(todo parameters) *ColorSplitterBlock {
-	p := b.ctx.Get("ColorSplitterBlock").New(todo)
+func (b *Babylon) NewColorSplitterBlock(name string) *ColorSplitterBlock {
+	p := b.ctx.Get("ColorSplitterBlock").New(name)
 	return ColorSplitterBlockFromJSObject(p)
 }
 

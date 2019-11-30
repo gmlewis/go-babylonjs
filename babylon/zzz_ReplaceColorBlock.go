@@ -27,8 +27,8 @@ func ReplaceColorBlockFromJSObject(p js.Value) *ReplaceColorBlock {
 // NewReplaceColorBlock returns a new ReplaceColorBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.replacecolorblock
-func (b *Babylon) NewReplaceColorBlock(todo parameters) *ReplaceColorBlock {
-	p := b.ctx.Get("ReplaceColorBlock").New(todo)
+func (b *Babylon) NewReplaceColorBlock(name string) *ReplaceColorBlock {
+	p := b.ctx.Get("ReplaceColorBlock").New(name)
 	return ReplaceColorBlockFromJSObject(p)
 }
 

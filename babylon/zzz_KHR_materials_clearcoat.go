@@ -10,7 +10,7 @@ import (
 // &lt;a href=&#34;https://github.com/KhronosGroup/glTF/pull/1677&#34;&gt;Proposed Specification&lt;/a&gt;
 // &lt;a href=&#34;https://www.babylonjs-playground.com/frame.html#7F7PN6#8&#34;&gt;Playground Sample&lt;/a&gt;
 // !!! Experimental Extension Subject to Changes !!!
-type KHR_materials_clearcoat struct{}
+type KHR_materials_clearcoat struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (k *KHR_materials_clearcoat) JSObject() js.Value { return k.p }
@@ -24,14 +24,6 @@ func (b *Babylon) KHR_materials_clearcoat() *KHR_materials_clearcoat {
 // KHR_materials_clearcoatFromJSObject returns a wrapped KHR_materials_clearcoat JavaScript class.
 func KHR_materials_clearcoatFromJSObject(p js.Value) *KHR_materials_clearcoat {
 	return &KHR_materials_clearcoat{p: p}
-}
-
-// NewKHR_materials_clearcoat returns a new KHR_materials_clearcoat object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.khr_materials_clearcoat
-func (b *Babylon) NewKHR_materials_clearcoat(todo parameters) *KHR_materials_clearcoat {
-	p := b.ctx.Get("KHR_materials_clearcoat").New(todo)
-	return KHR_materials_clearcoatFromJSObject(p)
 }
 
 // TODO: methods

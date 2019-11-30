@@ -11,7 +11,7 @@ import (
 var (
 	apiDir  = flag.String("api", "/home/glenn/src/github.com/BabylonJS/Documentation/public/html/api", "Directory where Babylon.js API docs reside")
 	destDir = flag.String("dest", "/home/glenn/go/src/github.com/gmlewis/go-babylonjs/babylon", "Destination directory for generated Go code")
-	verbose = flag.Bool("v", false, "Print verbose log messages")
+	verbose = flag.String("v", "", "Debug with verbose log messages for this class")
 
 	// blacklist is a list of filenames to skip.
 	blacklist = map[string]bool{}
@@ -36,7 +36,7 @@ func check(fmtStr string, args ...interface{}) {
 }
 
 func logf(fmt string, args ...interface{}) {
-	if *verbose {
+	if *verbose != "" {
 		log.Printf(fmt, args...)
 	}
 }

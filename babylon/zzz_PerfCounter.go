@@ -9,12 +9,11 @@ import (
 // PerfCounter represents a babylon.js PerfCounter.
 // This class is used to track a performance counter which is number based.
 // The user has access to many properties which give statistics of different nature.
-
 //
 // The implementer can track two kinds of Performance Counter: time and count.
 // For time you can optionally call fetchNewFrame() to notify the start of a new frame to monitor, then call beginMonitoring() to start and endMonitoring() to record the lapsed time. endMonitoring takes a newFrame parameter for you to specify if the monitored time should be set for a new frame or accumulated to the current frame being monitored.
 // For count you first have to call fetchNewFrame() to notify the start of a new frame to monitor, then call addCount() how many time required to increment the count value you monitor.
-type PerfCounter struct{}
+type PerfCounter struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (p *PerfCounter) JSObject() js.Value { return p.p }
@@ -33,8 +32,8 @@ func PerfCounterFromJSObject(p js.Value) *PerfCounter {
 // NewPerfCounter returns a new PerfCounter object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.perfcounter
-func (b *Babylon) NewPerfCounter(todo parameters) *PerfCounter {
-	p := b.ctx.Get("PerfCounter").New(todo)
+func (b *Babylon) NewPerfCounter() *PerfCounter {
+	p := b.ctx.Get("PerfCounter").New()
 	return PerfCounterFromJSObject(p)
 }
 

@@ -30,8 +30,8 @@ func VideoDomeFromJSObject(p js.Value) *VideoDome {
 // NewVideoDome returns a new VideoDome object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videodome
-func (b *Babylon) NewVideoDome(todo parameters) *VideoDome {
-	p := b.ctx.Get("VideoDome").New(todo)
+func (b *Babylon) NewVideoDome(name string, urlsOrVideo string, options js.Value, scene *Scene) *VideoDome {
+	p := b.ctx.Get("VideoDome").New(name, urlsOrVideo, options, scene.JSObject())
 	return VideoDomeFromJSObject(p)
 }
 

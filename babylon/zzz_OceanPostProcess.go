@@ -8,7 +8,6 @@ import (
 
 // OceanPostProcess represents a babylon.js OceanPostProcess.
 // OceanPostProcess helps rendering an infinite ocean surface that can reflect and refract environment.
-
 //
 // Simmply add it to your scene and let the nerd that lives in you have fun.
 // Example usage:
@@ -31,11 +30,20 @@ func OceanPostProcessFromJSObject(p js.Value) *OceanPostProcess {
 	return &OceanPostProcess{PostProcessFromJSObject(p)}
 }
 
+// NewOceanPostProcessOpts contains optional parameters for NewOceanPostProcess.
+type NewOceanPostProcessOpts struct {
+	Options *IOceanPostProcessOptions
+}
+
 // NewOceanPostProcess returns a new OceanPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess
-func (b *Babylon) NewOceanPostProcess(todo parameters) *OceanPostProcess {
-	p := b.ctx.Get("OceanPostProcess").New(todo)
+func (b *Babylon) NewOceanPostProcess(name string, camera *TargetCamera, opts *NewOceanPostProcessOpts) *OceanPostProcess {
+	if opts == nil {
+		opts = &NewOceanPostProcessOpts{}
+	}
+
+	p := b.ctx.Get("OceanPostProcess").New(name, camera.JSObject(), opts.Options.JSObject())
 	return OceanPostProcessFromJSObject(p)
 }
 

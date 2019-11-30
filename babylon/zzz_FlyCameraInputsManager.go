@@ -9,7 +9,6 @@ import (
 // FlyCameraInputsManager represents a babylon.js FlyCameraInputsManager.
 // Default Inputs manager for the FlyCamera.
 // It groups all the default supported inputs for ease of use.
-
 //
 // See: http://doc.babylonjs.com/how_to/customizing_camera_inputs
 type FlyCameraInputsManager struct {
@@ -34,8 +33,8 @@ func FlyCameraInputsManagerFromJSObject(p js.Value) *FlyCameraInputsManager {
 // NewFlyCameraInputsManager returns a new FlyCameraInputsManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamerainputsmanager
-func (b *Babylon) NewFlyCameraInputsManager(todo parameters) *FlyCameraInputsManager {
-	p := b.ctx.Get("FlyCameraInputsManager").New(todo)
+func (b *Babylon) NewFlyCameraInputsManager(camera *FlyCamera) *FlyCameraInputsManager {
+	p := b.ctx.Get("FlyCameraInputsManager").New(camera.JSObject())
 	return FlyCameraInputsManagerFromJSObject(p)
 }
 

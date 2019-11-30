@@ -27,8 +27,8 @@ func ColorMergerBlockFromJSObject(p js.Value) *ColorMergerBlock {
 // NewColorMergerBlock returns a new ColorMergerBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colormergerblock
-func (b *Babylon) NewColorMergerBlock(todo parameters) *ColorMergerBlock {
-	p := b.ctx.Get("ColorMergerBlock").New(todo)
+func (b *Babylon) NewColorMergerBlock(name string) *ColorMergerBlock {
+	p := b.ctx.Get("ColorMergerBlock").New(name)
 	return ColorMergerBlockFromJSObject(p)
 }
 

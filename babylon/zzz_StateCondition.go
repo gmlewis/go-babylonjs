@@ -27,8 +27,8 @@ func StateConditionFromJSObject(p js.Value) *StateCondition {
 // NewStateCondition returns a new StateCondition object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.statecondition
-func (b *Babylon) NewStateCondition(todo parameters) *StateCondition {
-	p := b.ctx.Get("StateCondition").New(todo)
+func (b *Babylon) NewStateCondition(actionManager *ActionManager, target interface{}, value string) *StateCondition {
+	p := b.ctx.Get("StateCondition").New(actionManager.JSObject(), target, value)
 	return StateConditionFromJSObject(p)
 }
 

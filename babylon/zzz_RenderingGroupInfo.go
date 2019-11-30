@@ -8,7 +8,7 @@ import (
 
 // RenderingGroupInfo represents a babylon.js RenderingGroupInfo.
 // This class is used by the onRenderingGroupObservable
-type RenderingGroupInfo struct{}
+type RenderingGroupInfo struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (r *RenderingGroupInfo) JSObject() js.Value { return r.p }
@@ -22,14 +22,6 @@ func (b *Babylon) RenderingGroupInfo() *RenderingGroupInfo {
 // RenderingGroupInfoFromJSObject returns a wrapped RenderingGroupInfo JavaScript class.
 func RenderingGroupInfoFromJSObject(p js.Value) *RenderingGroupInfo {
 	return &RenderingGroupInfo{p: p}
-}
-
-// NewRenderingGroupInfo returns a new RenderingGroupInfo object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.renderinggroupinfo
-func (b *Babylon) NewRenderingGroupInfo(todo parameters) *RenderingGroupInfo {
-	p := b.ctx.Get("RenderingGroupInfo").New(todo)
-	return RenderingGroupInfoFromJSObject(p)
 }
 
 // TODO: methods

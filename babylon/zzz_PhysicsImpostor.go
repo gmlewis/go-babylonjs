@@ -8,10 +8,9 @@ import (
 
 // PhysicsImpostor represents a babylon.js PhysicsImpostor.
 // Represents a physics imposter
-
 //
 // See: https://doc.babylonjs.com/how_to/using_the_physics_engine
-type PhysicsImpostor struct{}
+type PhysicsImpostor struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (p *PhysicsImpostor) JSObject() js.Value { return p.p }
@@ -27,11 +26,22 @@ func PhysicsImpostorFromJSObject(p js.Value) *PhysicsImpostor {
 	return &PhysicsImpostor{p: p}
 }
 
+// NewPhysicsImpostorOpts contains optional parameters for NewPhysicsImpostor.
+type NewPhysicsImpostorOpts struct {
+	_options *PhysicsImpostorParameters
+
+	_scene *Scene
+}
+
 // NewPhysicsImpostor returns a new PhysicsImpostor object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostor
-func (b *Babylon) NewPhysicsImpostor(todo parameters) *PhysicsImpostor {
-	p := b.ctx.Get("PhysicsImpostor").New(todo)
+func (b *Babylon) NewPhysicsImpostor(object *IPhysicsEnabledObject, jsType float64, opts *NewPhysicsImpostorOpts) *PhysicsImpostor {
+	if opts == nil {
+		opts = &NewPhysicsImpostorOpts{}
+	}
+
+	p := b.ctx.Get("PhysicsImpostor").New(object.JSObject(), jsType, opts._options.JSObject(), opts._scene.JSObject())
 	return PhysicsImpostorFromJSObject(p)
 }
 

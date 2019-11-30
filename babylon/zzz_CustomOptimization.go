@@ -8,7 +8,6 @@ import (
 
 // CustomOptimization represents a babylon.js CustomOptimization.
 // Defines an optimization based on user defined callback.
-
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
 type CustomOptimization struct{ *SceneOptimization }
@@ -27,11 +26,20 @@ func CustomOptimizationFromJSObject(p js.Value) *CustomOptimization {
 	return &CustomOptimization{SceneOptimizationFromJSObject(p)}
 }
 
+// NewCustomOptimizationOpts contains optional parameters for NewCustomOptimization.
+type NewCustomOptimizationOpts struct {
+	Priority *float64
+}
+
 // NewCustomOptimization returns a new CustomOptimization object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.customoptimization
-func (b *Babylon) NewCustomOptimization(todo parameters) *CustomOptimization {
-	p := b.ctx.Get("CustomOptimization").New(todo)
+func (b *Babylon) NewCustomOptimization(opts *NewCustomOptimizationOpts) *CustomOptimization {
+	if opts == nil {
+		opts = &NewCustomOptimizationOpts{}
+	}
+
+	p := b.ctx.Get("CustomOptimization").New(opts.Priority)
 	return CustomOptimizationFromJSObject(p)
 }
 

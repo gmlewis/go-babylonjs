@@ -24,12 +24,4 @@ func KeepAssetsFromJSObject(p js.Value) *KeepAssets {
 	return &KeepAssets{AbstractSceneFromJSObject(p)}
 }
 
-// NewKeepAssets returns a new KeepAssets object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.keepassets
-func (b *Babylon) NewKeepAssets(todo parameters) *KeepAssets {
-	p := b.ctx.Get("KeepAssets").New(todo)
-	return KeepAssetsFromJSObject(p)
-}
-
 // TODO: methods

@@ -27,8 +27,8 @@ func OculusTouchControllerFromJSObject(p js.Value) *OculusTouchController {
 // NewOculusTouchController returns a new OculusTouchController object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oculustouchcontroller
-func (b *Babylon) NewOculusTouchController(todo parameters) *OculusTouchController {
-	p := b.ctx.Get("OculusTouchController").New(todo)
+func (b *Babylon) NewOculusTouchController(vrGamepad interface{}) *OculusTouchController {
+	p := b.ctx.Get("OculusTouchController").New(vrGamepad)
 	return OculusTouchControllerFromJSObject(p)
 }
 

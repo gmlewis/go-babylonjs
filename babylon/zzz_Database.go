@@ -8,10 +8,9 @@ import (
 
 // Database represents a babylon.js Database.
 // Class used to enable access to IndexedDB
-
 //
 // See: http://doc.babylonjs.com/how_to/caching_resources_in_indexeddb
-type Database struct{}
+type Database struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (d *Database) JSObject() js.Value { return d.p }
@@ -27,11 +26,20 @@ func DatabaseFromJSObject(p js.Value) *Database {
 	return &Database{p: p}
 }
 
+// NewDatabaseOpts contains optional parameters for NewDatabase.
+type NewDatabaseOpts struct {
+	DisableManifestCheck *bool
+}
+
 // NewDatabase returns a new Database object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.database
-func (b *Babylon) NewDatabase(todo parameters) *Database {
-	p := b.ctx.Get("Database").New(todo)
+func (b *Babylon) NewDatabase(urlToScene string, callbackManifestChecked func(), opts *NewDatabaseOpts) *Database {
+	if opts == nil {
+		opts = &NewDatabaseOpts{}
+	}
+
+	p := b.ctx.Get("Database").New(urlToScene, callbackManifestChecked, opts.DisableManifestCheck.JSObject())
 	return DatabaseFromJSObject(p)
 }
 

@@ -8,10 +8,9 @@ import (
 
 // PhysicsUpdraftEventOptions represents a babylon.js PhysicsUpdraftEventOptions.
 // Options fot the updraft event
-
 //
 // See: https://doc.babylonjs.com/how_to/using_the_physics_engine#further-functionality-of-the-impostor-class
-type PhysicsUpdraftEventOptions struct{}
+type PhysicsUpdraftEventOptions struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (p *PhysicsUpdraftEventOptions) JSObject() js.Value { return p.p }
@@ -25,14 +24,6 @@ func (b *Babylon) PhysicsUpdraftEventOptions() *PhysicsUpdraftEventOptions {
 // PhysicsUpdraftEventOptionsFromJSObject returns a wrapped PhysicsUpdraftEventOptions JavaScript class.
 func PhysicsUpdraftEventOptionsFromJSObject(p js.Value) *PhysicsUpdraftEventOptions {
 	return &PhysicsUpdraftEventOptions{p: p}
-}
-
-// NewPhysicsUpdraftEventOptions returns a new PhysicsUpdraftEventOptions object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.physicsupdrafteventoptions
-func (b *Babylon) NewPhysicsUpdraftEventOptions(todo parameters) *PhysicsUpdraftEventOptions {
-	p := b.ctx.Get("PhysicsUpdraftEventOptions").New(todo)
-	return PhysicsUpdraftEventOptionsFromJSObject(p)
 }
 
 // TODO: methods

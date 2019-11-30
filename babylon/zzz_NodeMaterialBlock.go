@@ -8,7 +8,7 @@ import (
 
 // NodeMaterialBlock represents a babylon.js NodeMaterialBlock.
 // Defines a block that can be used inside a node based material
-type NodeMaterialBlock struct{}
+type NodeMaterialBlock struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (n *NodeMaterialBlock) JSObject() js.Value { return n.p }
@@ -24,11 +24,24 @@ func NodeMaterialBlockFromJSObject(p js.Value) *NodeMaterialBlock {
 	return &NodeMaterialBlock{p: p}
 }
 
+// NewNodeMaterialBlockOpts contains optional parameters for NewNodeMaterialBlock.
+type NewNodeMaterialBlockOpts struct {
+	Target js.Value
+
+	IsFinalMerger *bool
+
+	IsInput *bool
+}
+
 // NewNodeMaterialBlock returns a new NodeMaterialBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialblock
-func (b *Babylon) NewNodeMaterialBlock(todo parameters) *NodeMaterialBlock {
-	p := b.ctx.Get("NodeMaterialBlock").New(todo)
+func (b *Babylon) NewNodeMaterialBlock(name string, opts *NewNodeMaterialBlockOpts) *NodeMaterialBlock {
+	if opts == nil {
+		opts = &NewNodeMaterialBlockOpts{}
+	}
+
+	p := b.ctx.Get("NodeMaterialBlock").New(name, opts.Target, opts.IsFinalMerger.JSObject(), opts.IsInput.JSObject())
 	return NodeMaterialBlockFromJSObject(p)
 }
 

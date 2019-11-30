@@ -8,10 +8,9 @@ import (
 
 // WebXRSessionManager represents a babylon.js WebXRSessionManager.
 // Manages an XRSession to work with Babylon&amp;#39;s engine
-
 //
 // See: https://doc.babylonjs.com/how_to/webxr
-type WebXRSessionManager struct{}
+type WebXRSessionManager struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (w *WebXRSessionManager) JSObject() js.Value { return w.p }
@@ -30,8 +29,8 @@ func WebXRSessionManagerFromJSObject(p js.Value) *WebXRSessionManager {
 // NewWebXRSessionManager returns a new WebXRSessionManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrsessionmanager
-func (b *Babylon) NewWebXRSessionManager(todo parameters) *WebXRSessionManager {
-	p := b.ctx.Get("WebXRSessionManager").New(todo)
+func (b *Babylon) NewWebXRSessionManager(scene *Scene) *WebXRSessionManager {
+	p := b.ctx.Get("WebXRSessionManager").New(scene.JSObject())
 	return WebXRSessionManagerFromJSObject(p)
 }
 

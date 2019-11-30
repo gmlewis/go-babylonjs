@@ -8,7 +8,7 @@ import (
 
 // BoxBuilder represents a babylon.js BoxBuilder.
 // Class containing static functions to help procedurally build meshes
-type BoxBuilder struct{}
+type BoxBuilder struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (b *BoxBuilder) JSObject() js.Value { return b.p }
@@ -22,14 +22,6 @@ func (b *Babylon) BoxBuilder() *BoxBuilder {
 // BoxBuilderFromJSObject returns a wrapped BoxBuilder JavaScript class.
 func BoxBuilderFromJSObject(p js.Value) *BoxBuilder {
 	return &BoxBuilder{p: p}
-}
-
-// NewBoxBuilder returns a new BoxBuilder object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.boxbuilder
-func (b *Babylon) NewBoxBuilder(todo parameters) *BoxBuilder {
-	p := b.ctx.Get("BoxBuilder").New(todo)
-	return BoxBuilderFromJSObject(p)
 }
 
 // TODO: methods

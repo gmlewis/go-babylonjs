@@ -9,7 +9,6 @@ import (
 // FreeCamera represents a babylon.js FreeCamera.
 // This represents a free type of camera. It can be useful in First Person Shooter game for instance.
 // Please consider using the new UniversalCamera instead as it adds more functionality like the gamepad.
-
 //
 // See: http://doc.babylonjs.com/features/cameras#universal-camera
 type FreeCamera struct{ *TargetCamera }
@@ -28,11 +27,20 @@ func FreeCameraFromJSObject(p js.Value) *FreeCamera {
 	return &FreeCamera{TargetCameraFromJSObject(p)}
 }
 
+// NewFreeCameraOpts contains optional parameters for NewFreeCamera.
+type NewFreeCameraOpts struct {
+	SetActiveOnSceneIfNoneActive *bool
+}
+
 // NewFreeCamera returns a new FreeCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamera
-func (b *Babylon) NewFreeCamera(todo parameters) *FreeCamera {
-	p := b.ctx.Get("FreeCamera").New(todo)
+func (b *Babylon) NewFreeCamera(name string, position *Vector3, scene *Scene, opts *NewFreeCameraOpts) *FreeCamera {
+	if opts == nil {
+		opts = &NewFreeCameraOpts{}
+	}
+
+	p := b.ctx.Get("FreeCamera").New(name, position.JSObject(), scene.JSObject(), opts.SetActiveOnSceneIfNoneActive.JSObject())
 	return FreeCameraFromJSObject(p)
 }
 

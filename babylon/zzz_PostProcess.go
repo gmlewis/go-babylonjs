@@ -9,7 +9,7 @@ import (
 // PostProcess represents a babylon.js PostProcess.
 // PostProcess can be used to apply a shader to a texture after it has been rendered
 // See &lt;a href=&#34;https://doc.babylonjs.com/how_to/how_to_use_postprocesses&#34;&gt;https://doc.babylonjs.com/how_to/how_to_use_postprocesses&lt;/a&gt;
-type PostProcess struct{}
+type PostProcess struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (p *PostProcess) JSObject() js.Value { return p.p }
@@ -25,11 +25,34 @@ func PostProcessFromJSObject(p js.Value) *PostProcess {
 	return &PostProcess{p: p}
 }
 
+// NewPostProcessOpts contains optional parameters for NewPostProcess.
+type NewPostProcessOpts struct {
+	SamplingMode *float64
+
+	Engine *Engine
+
+	Reusable *bool
+
+	Defines *string
+
+	TextureType *float64
+
+	VertexUrl *string
+
+	IndexParameters *interface{}
+
+	BlockCompilation *bool
+}
+
 // NewPostProcess returns a new PostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess
-func (b *Babylon) NewPostProcess(todo parameters) *PostProcess {
-	p := b.ctx.Get("PostProcess").New(todo)
+func (b *Babylon) NewPostProcess(name string, fragmentUrl string, parameters string, samplers string, options float64, camera *Camera, opts *NewPostProcessOpts) *PostProcess {
+	if opts == nil {
+		opts = &NewPostProcessOpts{}
+	}
+
+	p := b.ctx.Get("PostProcess").New(name, fragmentUrl, parameters, samplers, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.Defines, opts.TextureType, opts.VertexUrl, opts.IndexParameters, opts.BlockCompilation.JSObject())
 	return PostProcessFromJSObject(p)
 }
 

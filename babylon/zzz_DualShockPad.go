@@ -27,8 +27,8 @@ func DualShockPadFromJSObject(p js.Value) *DualShockPad {
 // NewDualShockPad returns a new DualShockPad object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.dualshockpad
-func (b *Babylon) NewDualShockPad(todo parameters) *DualShockPad {
-	p := b.ctx.Get("DualShockPad").New(todo)
+func (b *Babylon) NewDualShockPad(id string, index float64, gamepad interface{}) *DualShockPad {
+	p := b.ctx.Get("DualShockPad").New(id, index, gamepad)
 	return DualShockPadFromJSObject(p)
 }
 

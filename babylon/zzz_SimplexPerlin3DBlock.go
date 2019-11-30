@@ -27,8 +27,8 @@ func SimplexPerlin3DBlockFromJSObject(p js.Value) *SimplexPerlin3DBlock {
 // NewSimplexPerlin3DBlock returns a new SimplexPerlin3DBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.simplexperlin3dblock
-func (b *Babylon) NewSimplexPerlin3DBlock(todo parameters) *SimplexPerlin3DBlock {
-	p := b.ctx.Get("SimplexPerlin3DBlock").New(todo)
+func (b *Babylon) NewSimplexPerlin3DBlock(name string) *SimplexPerlin3DBlock {
+	p := b.ctx.Get("SimplexPerlin3DBlock").New(name)
 	return SimplexPerlin3DBlockFromJSObject(p)
 }
 

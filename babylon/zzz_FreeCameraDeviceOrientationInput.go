@@ -9,10 +9,9 @@ import (
 // FreeCameraDeviceOrientationInput represents a babylon.js FreeCameraDeviceOrientationInput.
 // Takes information about the orientation of the device as reported by the deviceorientation event to orient the camera.
 // Screen rotation is taken into account.
-
 //
 // See: http://doc.babylonjs.com/how_to/customizing_camera_inputs
-type FreeCameraDeviceOrientationInput struct{}
+type FreeCameraDeviceOrientationInput struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (f *FreeCameraDeviceOrientationInput) JSObject() js.Value { return f.p }
@@ -31,8 +30,8 @@ func FreeCameraDeviceOrientationInputFromJSObject(p js.Value) *FreeCameraDeviceO
 // NewFreeCameraDeviceOrientationInput returns a new FreeCameraDeviceOrientationInput object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecameradeviceorientationinput
-func (b *Babylon) NewFreeCameraDeviceOrientationInput(todo parameters) *FreeCameraDeviceOrientationInput {
-	p := b.ctx.Get("FreeCameraDeviceOrientationInput").New(todo)
+func (b *Babylon) NewFreeCameraDeviceOrientationInput() *FreeCameraDeviceOrientationInput {
+	p := b.ctx.Get("FreeCameraDeviceOrientationInput").New()
 	return FreeCameraDeviceOrientationInputFromJSObject(p)
 }
 

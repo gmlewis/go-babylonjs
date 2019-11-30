@@ -8,10 +8,9 @@ import (
 
 // PhysicsHelper represents a babylon.js PhysicsHelper.
 // A helper for physics simulations
-
 //
 // See: https://doc.babylonjs.com/how_to/using_the_physics_engine#further-functionality-of-the-impostor-class
-type PhysicsHelper struct{}
+type PhysicsHelper struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (p *PhysicsHelper) JSObject() js.Value { return p.p }
@@ -30,8 +29,8 @@ func PhysicsHelperFromJSObject(p js.Value) *PhysicsHelper {
 // NewPhysicsHelper returns a new PhysicsHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicshelper
-func (b *Babylon) NewPhysicsHelper(todo parameters) *PhysicsHelper {
-	p := b.ctx.Get("PhysicsHelper").New(todo)
+func (b *Babylon) NewPhysicsHelper(scene *Scene) *PhysicsHelper {
+	p := b.ctx.Get("PhysicsHelper").New(scene.JSObject())
 	return PhysicsHelperFromJSObject(p)
 }
 

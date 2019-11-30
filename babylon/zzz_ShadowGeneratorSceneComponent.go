@@ -9,7 +9,7 @@ import (
 // ShadowGeneratorSceneComponent represents a babylon.js ShadowGeneratorSceneComponent.
 // Defines the shadow generator component responsible to manage any shadow generators
 // in a given scene.
-type ShadowGeneratorSceneComponent struct{}
+type ShadowGeneratorSceneComponent struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (s *ShadowGeneratorSceneComponent) JSObject() js.Value { return s.p }
@@ -28,8 +28,8 @@ func ShadowGeneratorSceneComponentFromJSObject(p js.Value) *ShadowGeneratorScene
 // NewShadowGeneratorSceneComponent returns a new ShadowGeneratorSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgeneratorscenecomponent
-func (b *Babylon) NewShadowGeneratorSceneComponent(todo parameters) *ShadowGeneratorSceneComponent {
-	p := b.ctx.Get("ShadowGeneratorSceneComponent").New(todo)
+func (b *Babylon) NewShadowGeneratorSceneComponent(scene *Scene) *ShadowGeneratorSceneComponent {
+	p := b.ctx.Get("ShadowGeneratorSceneComponent").New(scene.JSObject())
 	return ShadowGeneratorSceneComponentFromJSObject(p)
 }
 

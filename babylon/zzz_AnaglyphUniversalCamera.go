@@ -8,7 +8,6 @@ import (
 
 // AnaglyphUniversalCamera represents a babylon.js AnaglyphUniversalCamera.
 // Camera used to simulate anaglyphic rendering (based on UniversalCamera)
-
 //
 // See: http://doc.babylonjs.com/features/cameras#anaglyph-cameras
 type AnaglyphUniversalCamera struct{ *UniversalCamera }
@@ -30,8 +29,8 @@ func AnaglyphUniversalCameraFromJSObject(p js.Value) *AnaglyphUniversalCamera {
 // NewAnaglyphUniversalCamera returns a new AnaglyphUniversalCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera
-func (b *Babylon) NewAnaglyphUniversalCamera(todo parameters) *AnaglyphUniversalCamera {
-	p := b.ctx.Get("AnaglyphUniversalCamera").New(todo)
+func (b *Babylon) NewAnaglyphUniversalCamera(name string, position *Vector3, interaxialDistance float64, scene *Scene) *AnaglyphUniversalCamera {
+	p := b.ctx.Get("AnaglyphUniversalCamera").New(name, position.JSObject(), interaxialDistance, scene.JSObject())
 	return AnaglyphUniversalCameraFromJSObject(p)
 }
 

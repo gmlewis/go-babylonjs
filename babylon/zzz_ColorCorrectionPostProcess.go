@@ -9,10 +9,8 @@ import (
 // ColorCorrectionPostProcess represents a babylon.js ColorCorrectionPostProcess.
 // This post-process allows the modification of rendered colors by using
 // a &amp;#39;look-up table&amp;#39; (LUT). This effect is also called Color Grading.
-
 //
 // For an example of a color LUT, see here:
-
 //
 // See: http://udn.epicgames.com/Three/ColorGrading.html
 type ColorCorrectionPostProcess struct{ *PostProcess }
@@ -31,11 +29,24 @@ func ColorCorrectionPostProcessFromJSObject(p js.Value) *ColorCorrectionPostProc
 	return &ColorCorrectionPostProcess{PostProcessFromJSObject(p)}
 }
 
+// NewColorCorrectionPostProcessOpts contains optional parameters for NewColorCorrectionPostProcess.
+type NewColorCorrectionPostProcessOpts struct {
+	SamplingMode *float64
+
+	Engine *Engine
+
+	Reusable *bool
+}
+
 // NewColorCorrectionPostProcess returns a new ColorCorrectionPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess
-func (b *Babylon) NewColorCorrectionPostProcess(todo parameters) *ColorCorrectionPostProcess {
-	p := b.ctx.Get("ColorCorrectionPostProcess").New(todo)
+func (b *Babylon) NewColorCorrectionPostProcess(name string, colorTableUrl string, options float64, camera *Camera, opts *NewColorCorrectionPostProcessOpts) *ColorCorrectionPostProcess {
+	if opts == nil {
+		opts = &NewColorCorrectionPostProcessOpts{}
+	}
+
+	p := b.ctx.Get("ColorCorrectionPostProcess").New(name, colorTableUrl, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject())
 	return ColorCorrectionPostProcessFromJSObject(p)
 }
 

@@ -9,10 +9,9 @@ import (
 // VideoRecorder represents a babylon.js VideoRecorder.
 // This can help with recording videos from BabylonJS.
 // This is based on the available WebRTC functionalities of the browser.
-
 //
 // See: http://doc.babylonjs.com/how_to/render_scene_on_a_video
-type VideoRecorder struct{}
+type VideoRecorder struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (v *VideoRecorder) JSObject() js.Value { return v.p }
@@ -28,11 +27,20 @@ func VideoRecorderFromJSObject(p js.Value) *VideoRecorder {
 	return &VideoRecorder{p: p}
 }
 
+// NewVideoRecorderOpts contains optional parameters for NewVideoRecorder.
+type NewVideoRecorderOpts struct {
+	Options *VideoRecorderOptions
+}
+
 // NewVideoRecorder returns a new VideoRecorder object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videorecorder
-func (b *Babylon) NewVideoRecorder(todo parameters) *VideoRecorder {
-	p := b.ctx.Get("VideoRecorder").New(todo)
+func (b *Babylon) NewVideoRecorder(engine *Engine, opts *NewVideoRecorderOpts) *VideoRecorder {
+	if opts == nil {
+		opts = &NewVideoRecorderOpts{}
+	}
+
+	p := b.ctx.Get("VideoRecorder").New(engine.JSObject(), opts.Options.JSObject())
 	return VideoRecorderFromJSObject(p)
 }
 

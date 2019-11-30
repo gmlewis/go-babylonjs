@@ -24,11 +24,24 @@ func FilterPostProcessFromJSObject(p js.Value) *FilterPostProcess {
 	return &FilterPostProcess{PostProcessFromJSObject(p)}
 }
 
+// NewFilterPostProcessOpts contains optional parameters for NewFilterPostProcess.
+type NewFilterPostProcessOpts struct {
+	SamplingMode *float64
+
+	Engine *Engine
+
+	Reusable *bool
+}
+
 // NewFilterPostProcess returns a new FilterPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.filterpostprocess
-func (b *Babylon) NewFilterPostProcess(todo parameters) *FilterPostProcess {
-	p := b.ctx.Get("FilterPostProcess").New(todo)
+func (b *Babylon) NewFilterPostProcess(name string, kernelMatrix *Matrix, options float64, camera *Camera, opts *NewFilterPostProcessOpts) *FilterPostProcess {
+	if opts == nil {
+		opts = &NewFilterPostProcessOpts{}
+	}
+
+	p := b.ctx.Get("FilterPostProcess").New(name, kernelMatrix.JSObject(), options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject())
 	return FilterPostProcessFromJSObject(p)
 }
 

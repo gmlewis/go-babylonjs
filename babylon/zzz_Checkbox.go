@@ -24,11 +24,20 @@ func CheckboxFromJSObject(p js.Value) *Checkbox {
 	return &Checkbox{ControlFromJSObject(p)}
 }
 
+// NewCheckboxOpts contains optional parameters for NewCheckbox.
+type NewCheckboxOpts struct {
+	Name *string
+}
+
 // NewCheckbox returns a new Checkbox object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.checkbox
-func (b *Babylon) NewCheckbox(todo parameters) *Checkbox {
-	p := b.ctx.Get("Checkbox").New(todo)
+func (b *Babylon) NewCheckbox(opts *NewCheckboxOpts) *Checkbox {
+	if opts == nil {
+		opts = &NewCheckboxOpts{}
+	}
+
+	p := b.ctx.Get("Checkbox").New(opts.Name)
 	return CheckboxFromJSObject(p)
 }
 

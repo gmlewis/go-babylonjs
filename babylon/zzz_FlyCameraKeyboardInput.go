@@ -8,10 +8,9 @@ import (
 
 // FlyCameraKeyboardInput represents a babylon.js FlyCameraKeyboardInput.
 // Listen to keyboard events to control the camera.
-
 //
 // See: http://doc.babylonjs.com/how_to/customizing_camera_inputs
-type FlyCameraKeyboardInput struct{}
+type FlyCameraKeyboardInput struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (f *FlyCameraKeyboardInput) JSObject() js.Value { return f.p }
@@ -25,14 +24,6 @@ func (b *Babylon) FlyCameraKeyboardInput() *FlyCameraKeyboardInput {
 // FlyCameraKeyboardInputFromJSObject returns a wrapped FlyCameraKeyboardInput JavaScript class.
 func FlyCameraKeyboardInputFromJSObject(p js.Value) *FlyCameraKeyboardInput {
 	return &FlyCameraKeyboardInput{p: p}
-}
-
-// NewFlyCameraKeyboardInput returns a new FlyCameraKeyboardInput object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.flycamerakeyboardinput
-func (b *Babylon) NewFlyCameraKeyboardInput(todo parameters) *FlyCameraKeyboardInput {
-	p := b.ctx.Get("FlyCameraKeyboardInput").New(todo)
-	return FlyCameraKeyboardInputFromJSObject(p)
 }
 
 // TODO: methods

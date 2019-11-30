@@ -10,7 +10,7 @@ import (
 // Base class of the scene acting as a container for the different elements composing a scene.
 // This class is dynamically extended by the different components of the scene increasing
 // flexibility and reducing coupling
-type AbstractScene struct{}
+type AbstractScene struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (a *AbstractScene) JSObject() js.Value { return a.p }
@@ -24,14 +24,6 @@ func (b *Babylon) AbstractScene() *AbstractScene {
 // AbstractSceneFromJSObject returns a wrapped AbstractScene JavaScript class.
 func AbstractSceneFromJSObject(p js.Value) *AbstractScene {
 	return &AbstractScene{p: p}
-}
-
-// NewAbstractScene returns a new AbstractScene object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.abstractscene
-func (b *Babylon) NewAbstractScene(todo parameters) *AbstractScene {
-	p := b.ctx.Get("AbstractScene").New(todo)
-	return AbstractSceneFromJSObject(p)
 }
 
 // TODO: methods

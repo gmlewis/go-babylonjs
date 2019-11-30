@@ -24,11 +24,20 @@ func ColorPickerFromJSObject(p js.Value) *ColorPicker {
 	return &ColorPicker{ControlFromJSObject(p)}
 }
 
+// NewColorPickerOpts contains optional parameters for NewColorPicker.
+type NewColorPickerOpts struct {
+	Name *string
+}
+
 // NewColorPicker returns a new ColorPicker object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorpicker
-func (b *Babylon) NewColorPicker(todo parameters) *ColorPicker {
-	p := b.ctx.Get("ColorPicker").New(todo)
+func (b *Babylon) NewColorPicker(opts *NewColorPickerOpts) *ColorPicker {
+	if opts == nil {
+		opts = &NewColorPickerOpts{}
+	}
+
+	p := b.ctx.Get("ColorPicker").New(opts.Name)
 	return ColorPickerFromJSObject(p)
 }
 

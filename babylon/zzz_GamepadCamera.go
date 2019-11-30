@@ -9,7 +9,6 @@ import (
 // GamepadCamera represents a babylon.js GamepadCamera.
 // This represents a FPS type of camera. This is only here for back compat purpose.
 // Please use the UniversalCamera instead as both are identical.
-
 //
 // See: http://doc.babylonjs.com/features/cameras#universal-camera
 type GamepadCamera struct{ *UniversalCamera }
@@ -31,8 +30,8 @@ func GamepadCameraFromJSObject(p js.Value) *GamepadCamera {
 // NewGamepadCamera returns a new GamepadCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gamepadcamera
-func (b *Babylon) NewGamepadCamera(todo parameters) *GamepadCamera {
-	p := b.ctx.Get("GamepadCamera").New(todo)
+func (b *Babylon) NewGamepadCamera(name string, position *Vector3, scene *Scene) *GamepadCamera {
+	p := b.ctx.Get("GamepadCamera").New(name, position.JSObject(), scene.JSObject())
 	return GamepadCameraFromJSObject(p)
 }
 

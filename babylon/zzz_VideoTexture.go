@@ -9,7 +9,6 @@ import (
 // VideoTexture represents a babylon.js VideoTexture.
 // If you want to display a video in your scene, this is the special texture for that.
 // This special texture works similar to other textures, with the exception of a few parameters.
-
 //
 // See: https://doc.babylonjs.com/how_to/video_texture
 type VideoTexture struct{ *Texture }
@@ -28,11 +27,26 @@ func VideoTextureFromJSObject(p js.Value) *VideoTexture {
 	return &VideoTexture{TextureFromJSObject(p)}
 }
 
+// NewVideoTextureOpts contains optional parameters for NewVideoTexture.
+type NewVideoTextureOpts struct {
+	GenerateMipMaps *bool
+
+	InvertY *bool
+
+	SamplingMode *float64
+
+	Settings *VideoTextureSettings
+}
+
 // NewVideoTexture returns a new VideoTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videotexture
-func (b *Babylon) NewVideoTexture(todo parameters) *VideoTexture {
-	p := b.ctx.Get("VideoTexture").New(todo)
+func (b *Babylon) NewVideoTexture(name string, src string, scene *Scene, opts *NewVideoTextureOpts) *VideoTexture {
+	if opts == nil {
+		opts = &NewVideoTextureOpts{}
+	}
+
+	p := b.ctx.Get("VideoTexture").New(name, src, scene.JSObject(), opts.GenerateMipMaps.JSObject(), opts.InvertY.JSObject(), opts.SamplingMode, opts.Settings.JSObject())
 	return VideoTextureFromJSObject(p)
 }
 

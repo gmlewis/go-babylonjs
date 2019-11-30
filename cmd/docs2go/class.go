@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"encoding/xml"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
@@ -12,7 +13,9 @@ import (
 )
 
 var (
-	scriptRE = regexp.MustCompile(`<script>.*?</script>`)
+	scriptRE     = regexp.MustCompile(`<script>.*?</script>`)
+	htmlRE       = regexp.MustCompile(`<([^/].*?)>(.*?)</.*?>`)
+	whitespaceRE = regexp.MustCompile(`\s+`)
 )
 
 type classes struct {
@@ -40,6 +43,12 @@ func (c *classes) walker() filepath.WalkFunc {
 			return nil
 		}
 
+		if *verbose != "" {
+			if !strings.Contains(filename, "."+strings.ToLower(*verbose)+".") {
+				return nil
+			}
+		}
+
 		logf("\n\nProcessing %v ...", filename)
 
 		buf, err := ioutil.ReadFile(path)
@@ -53,7 +62,11 @@ func (c *classes) walker() filepath.WalkFunc {
 		d.AutoClose = xml.HTMLAutoClose
 		d.Entity = xml.HTMLEntity
 
-		html := &ClassHTML{}
+		html := &ClassHTML{
+			ConstructorNames: map[string]*Signature{},
+			MethodNames:      map[string]*Signature{},
+			PropertyNames:    map[string]*Signature{},
+		}
 		check("xml.Decode: %v", d.Decode(&html))
 
 		for _, div := range html.Div {
@@ -61,6 +74,9 @@ func (c *classes) walker() filepath.WalkFunc {
 				continue
 			}
 			html.Name = div.H1.InnerXML
+			if i := strings.Index(html.Name, "&lt;"); i >= 0 {
+				html.Name = html.Name[0:i]
+			}
 
 			for _, section := range div.Sections {
 				switch t := section.Type(); t {
@@ -93,17 +109,18 @@ func (c *classes) walker() filepath.WalkFunc {
 					// for _, indexSection := range section.IndexSections {
 					// 	logf("%v: indexSection=%v: %v", t, indexSection.Type(), indexSection.ListItems)
 					// }
-				case "tsd-member-group": // ignore
-				case "tsd-is-not-exported": // TODO: Parse this for Constructors, Properties, and Methods
+				case "tsd-member-group", "tsd-is-not-exported", "tsd-is-inherited": // Parse this for Constructors, Properties, and Methods
 					for _, v := range section.ConstructorsAndMethods {
 						if !strings.Contains(v.Class, "tsd-signature") {
 							continue
 						}
 						switch section.H2.InnerXML {
 						case "Constructors":
-							html.ConstructorNames = append(html.ConstructorNames, v.Name())
+							v.parseParameters()
+							html.ConstructorNames[v.Name()] = v
 						case "Methods":
-							html.MethodNames = append(html.MethodNames, v.Name())
+							v.parseParameters()
+							html.MethodNames[v.Name()] = v
 						default:
 							log.Fatalf("%v: unknown ConstructorsAndMethods: h2=%v", filename, section.H2)
 						}
@@ -112,9 +129,9 @@ func (c *classes) walker() filepath.WalkFunc {
 						if !strings.Contains(v.Class, "tsd-signature") {
 							continue
 						}
-						html.PropertyNames = append(html.PropertyNames, v.Name())
+						v.parseParameters()
+						html.PropertyNames[v.Name()] = v
 					}
-				case "tsd-is-inherited": // ignore
 				case "tsd-type-parameters": // ignore
 				case "tsd-parent-kind-module": // ignore
 				default:
@@ -144,16 +161,16 @@ type ClassHTML struct {
 	Title InnerXML `xml:"head>title"`
 	Div   []*Div   `xml:"body>div"`
 
-	Name             string   `xml:"-"`
-	Summary          string   `xml:"-"`
-	Description      string   `xml:"-"`
-	SeeURL           string   `xml:"-"`
-	Parents          []string `xml:"-"`
-	Children         []string `xml:"-"`
-	Implements       []string `xml:"-"`
-	ConstructorNames []string `xml:"-"`
-	MethodNames      []string `xml:"-"`
-	PropertyNames    []string `xml:"-"`
+	Name             string                `xml:"-"`
+	Summary          string                `xml:"-"`
+	Description      string                `xml:"-"`
+	SeeURL           string                `xml:"-"`
+	Parents          []string              `xml:"-"`
+	Children         []string              `xml:"-"`
+	Implements       []string              `xml:"-"`
+	ConstructorNames map[string]*Signature `xml:"-"`
+	MethodNames      map[string]*Signature `xml:"-"`
+	PropertyNames    map[string]*Signature `xml:"-"`
 }
 
 type Div struct {
@@ -190,6 +207,12 @@ type Section struct {
 type Signature struct {
 	Class    string `xml:"class,attr"`
 	InnerXML string `xml:",innerxml"`
+
+	GoParams []string `xml:"-"`
+	GoOpts   []string `xml:"-"`
+	HasOpts  bool     `xml:"-"`
+
+	JSParams []string `xml:"-"`
 }
 
 func (s *Signature) Name() string {
@@ -203,6 +226,191 @@ func (s *Signature) Name() string {
 		v = strings.ToUpper(v[0:1]) + v[1:]
 	}
 	return v
+}
+
+func (s *Signature) parseParameters() {
+	v := strings.TrimSpace(s.InnerXML)
+	logf("ORIGINAL: '%v'\n\n", v)
+	v = strings.Replace(v, "<wbr>", "", -1)
+	v = strings.Replace(v, "</li>", "", -1)
+	v = strings.Replace(v, "</div>", "", -1)
+	v = whitespaceRE.ReplaceAllString(v, " ")
+	matches := htmlRE.FindAllStringSubmatch(v, -1)
+
+	logf("BEFORE: '%v'\n\n", v)
+	var names []string
+	var optional []bool
+	var types []string
+	var ignoreNextType bool
+	for im, m := range matches {
+		index := strings.Index(v, m[0])
+		if index < 0 {
+			log.Fatalf("parseParameters: programming error: im=%v, i=%v, v=%v", im, index, v)
+		}
+		keyword := v[0:index]
+		v = v[index+len(m[0]):]
+		logf("SEARCHING for '%v'\nm[1]=`%v`\nm[2]=`%v`\nignoreNextType=%v\nAFTER removing '%v': '%v'\n\n", m[0], m[1], m[2], ignoreNextType, keyword, v)
+
+		switch m[1] {
+		case `span class="tsd-signature-symbol"`:
+			keyword = strings.TrimPrefix(keyword, ", ")
+			if keyword != "" {
+				if strings.HasPrefix(m[2], "?") {
+					optional = append(optional, true)
+					names = append(names, keyword)
+				} else if strings.HasPrefix(m[2], ":") {
+					optional = append(optional, false)
+					names = append(names, keyword)
+				}
+			} else {
+				if strings.TrimSpace(m[2]) == "|" { // keep the first type, ignore the rest.
+					ignoreNextType = true
+				}
+			}
+		case `span class="tsd-signature-type"`:
+			if ignoreNextType {
+				ignoreNextType = false
+			} else {
+				switch m[2] {
+				case "Nullable", "DeepImmutable", "Partial": // ignore and pick up next class
+				case "boolean":
+					types = append(types, "bool")
+				case "number":
+					types = append(types, "float64")
+				case "TCamera": // special case
+					types = append(types, "*Camera")
+				default:
+					types = append(types, m[2])
+				}
+			}
+		}
+
+		if strings.HasPrefix(m[1], `a href="`) {
+			if ignoreNextType {
+				ignoreNextType = false
+			} else {
+				if i := len(types); i > 0 && types[i-1] == "Array" {
+					types[i-1] = "[]" + m[2]
+					// } else if i > 0 && types[i-1] == "*Nullable" {
+					// 	types[i-1] = "*" + m[2] // Override last type
+				} else {
+					switch m[2] {
+					case "Nullable", "DeepImmutable", "Partial": // ignore and pick up next class
+					case "DataArray":
+						types = append(types, "[]float64")
+					default:
+						types = append(types, "*"+m[2])
+					}
+				}
+			}
+		}
+		logf("names(%v)=%v, optional(%v)=%v, types(%v)=%v", len(names), names, len(optional), optional, len(types), types)
+	}
+
+	logf("\n\nparseParameters: %v\n%#v\nnames(%v)=%v, optional(%v)=%v, types(%v)=%v\n\n", v, matches, len(names), names, len(optional), optional, len(types), types)
+
+	if len(names) != len(optional) || len(names) > len(types) {
+		log.Fatalf("badly parsed arguments: \n\nparseParameters: %v\n%#v\nnames(%v)=%v, optional(%v)=%v, types(%v)=%v\n\n", v, matches, len(names), names, len(optional), optional, len(types), types)
+	}
+
+	for i, v := range names {
+		paramType := "interface{}" // unknown type
+
+		if optional[i] {
+			name := strings.Title(v)
+			jsName := name
+
+			if i < len(types) {
+				paramType = types[i]
+				switch paramType {
+				case "any":
+					paramType = "interface{}"
+				case "function":
+					paramType = "func()"
+				case "string", "float64":
+				case "*DistanceJointData",
+					"*EffectWrapperCreationOptions",
+					"*EngineOptions",
+					"*IDataBuffer",
+					"*IEffectFallbacks",
+					"*IEffectRendererOptions",
+					"*IEnvironmentHelperOptions",
+					"*IGlowLayerOptions",
+					"*IHighlightLayerOptions",
+					"*IHtmlElementTextureOptions",
+					"*IMultiRenderTargetOptions",
+					"*InternalTextureSource",
+					"*NodeMaterialBlockConnectionPointTypes",
+					"*NodeMaterialBlockTargets",
+					"*PhysicsJointData",
+					"*SpringJointData",
+					"HTMLCanvasElement",
+					"HTMLElement",
+					"HTMLVideoElement",
+					"KeyboardEvent",
+					"WebGLRenderingContext",
+					"object":
+					paramType = "js.Value"
+				default:
+					jsName += ".JSObject()"
+				}
+				if !strings.HasPrefix(paramType, "*") && paramType != "js.Value" {
+					paramType = "*" + paramType
+				}
+			}
+			s.GoOpts = append(s.GoOpts, fmt.Sprintf("%v %v", name, paramType))
+			s.HasOpts = true
+			s.JSParams = append(s.JSParams, "opts."+jsName)
+		} else {
+			name := v
+			switch name {
+			case "type":
+				name = "jsType"
+			case "func":
+				name = "jsFunc"
+			}
+			jsName := name
+			if i < len(types) {
+				paramType = types[i]
+				switch paramType {
+				case "any":
+					paramType = "interface{}"
+				case "function":
+					paramType = "func()"
+				case "string", "float64":
+				case
+					"*DistanceJointData",
+					"*EffectWrapperCreationOptions",
+					"*EngineOptions",
+					"*IDataBuffer",
+					"*IEffectFallbacks",
+					"*IEffectRendererOptions",
+					"*IEnvironmentHelperOptions",
+					"*IGlowLayerOptions",
+					"*IHighlightLayerOptions",
+					"*IHtmlElementTextureOptions",
+					"*IMultiRenderTargetOptions",
+					"*InternalTextureSource",
+					"*NodeMaterialBlockConnectionPointTypes",
+					"*NodeMaterialBlockTargets",
+					"*PhysicsJointData",
+					"*SpringJointData",
+					"ClipboardEvent",
+					"HTMLCanvasElement",
+					"HTMLElement",
+					"HTMLVideoElement",
+					"KeyboardEvent",
+					"WebGLRenderingContext",
+					"object":
+					paramType = "js.Value"
+				default:
+					jsName += ".JSObject()"
+				}
+			}
+			s.GoParams = append(s.GoParams, fmt.Sprintf("%v %v", name, paramType))
+			s.JSParams = append(s.JSParams, jsName)
+		}
+	}
 }
 
 func (s *Section) Type() string {

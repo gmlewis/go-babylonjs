@@ -8,7 +8,7 @@ import (
 
 // NodeMaterialBuildState represents a babylon.js NodeMaterialBuildState.
 // Class used to store node based material build state
-type NodeMaterialBuildState struct{}
+type NodeMaterialBuildState struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (n *NodeMaterialBuildState) JSObject() js.Value { return n.p }
@@ -22,14 +22,6 @@ func (b *Babylon) NodeMaterialBuildState() *NodeMaterialBuildState {
 // NodeMaterialBuildStateFromJSObject returns a wrapped NodeMaterialBuildState JavaScript class.
 func NodeMaterialBuildStateFromJSObject(p js.Value) *NodeMaterialBuildState {
 	return &NodeMaterialBuildState{p: p}
-}
-
-// NewNodeMaterialBuildState returns a new NodeMaterialBuildState object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstate
-func (b *Babylon) NewNodeMaterialBuildState(todo parameters) *NodeMaterialBuildState {
-	p := b.ctx.Get("NodeMaterialBuildState").New(todo)
-	return NodeMaterialBuildStateFromJSObject(p)
 }
 
 // TODO: methods

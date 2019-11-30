@@ -8,7 +8,7 @@ import (
 
 // RGBDTextureTools represents a babylon.js RGBDTextureTools.
 // Class used to host RGBD texture specific utilities
-type RGBDTextureTools struct{}
+type RGBDTextureTools struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (r *RGBDTextureTools) JSObject() js.Value { return r.p }
@@ -22,14 +22,6 @@ func (b *Babylon) RGBDTextureTools() *RGBDTextureTools {
 // RGBDTextureToolsFromJSObject returns a wrapped RGBDTextureTools JavaScript class.
 func RGBDTextureToolsFromJSObject(p js.Value) *RGBDTextureTools {
 	return &RGBDTextureTools{p: p}
-}
-
-// NewRGBDTextureTools returns a new RGBDTextureTools object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.rgbdtexturetools
-func (b *Babylon) NewRGBDTextureTools(todo parameters) *RGBDTextureTools {
-	p := b.ctx.Get("RGBDTextureTools").New(todo)
-	return RGBDTextureToolsFromJSObject(p)
 }
 
 // TODO: methods

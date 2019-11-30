@@ -9,7 +9,7 @@ import (
 // CylinderParticleEmitter represents a babylon.js CylinderParticleEmitter.
 // Particle emitter emitting particles from the inside of a cylinder.
 // It emits the particles alongside the cylinder radius. The emission direction might be randomized.
-type CylinderParticleEmitter struct{}
+type CylinderParticleEmitter struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (c *CylinderParticleEmitter) JSObject() js.Value { return c.p }
@@ -25,11 +25,26 @@ func CylinderParticleEmitterFromJSObject(p js.Value) *CylinderParticleEmitter {
 	return &CylinderParticleEmitter{p: p}
 }
 
+// NewCylinderParticleEmitterOpts contains optional parameters for NewCylinderParticleEmitter.
+type NewCylinderParticleEmitterOpts struct {
+	Radius *float64
+
+	Height *float64
+
+	RadiusRange *float64
+
+	DirectionRandomizer *float64
+}
+
 // NewCylinderParticleEmitter returns a new CylinderParticleEmitter object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cylinderparticleemitter
-func (b *Babylon) NewCylinderParticleEmitter(todo parameters) *CylinderParticleEmitter {
-	p := b.ctx.Get("CylinderParticleEmitter").New(todo)
+func (b *Babylon) NewCylinderParticleEmitter(opts *NewCylinderParticleEmitterOpts) *CylinderParticleEmitter {
+	if opts == nil {
+		opts = &NewCylinderParticleEmitterOpts{}
+	}
+
+	p := b.ctx.Get("CylinderParticleEmitter").New(opts.Radius, opts.Height, opts.RadiusRange, opts.DirectionRandomizer)
 	return CylinderParticleEmitterFromJSObject(p)
 }
 

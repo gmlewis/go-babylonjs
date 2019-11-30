@@ -9,10 +9,9 @@ import (
 // LensFlare represents a babylon.js LensFlare.
 // This represents one of the lens effect in a &lt;code&gt;lensFlareSystem&lt;/code&gt;.
 // It controls one of the indiviual texture used in the effect.
-
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_lens_flares
-type LensFlare struct{}
+type LensFlare struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (l *LensFlare) JSObject() js.Value { return l.p }
@@ -31,8 +30,8 @@ func LensFlareFromJSObject(p js.Value) *LensFlare {
 // NewLensFlare returns a new LensFlare object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensflare
-func (b *Babylon) NewLensFlare(todo parameters) *LensFlare {
-	p := b.ctx.Get("LensFlare").New(todo)
+func (b *Babylon) NewLensFlare(size float64, position float64, color *Color3, imgUrl string, system *LensFlareSystem) *LensFlare {
+	p := b.ctx.Get("LensFlare").New(size, position, color.JSObject(), imgUrl, system.JSObject())
 	return LensFlareFromJSObject(p)
 }
 

@@ -24,11 +24,20 @@ func Xbox360PadFromJSObject(p js.Value) *Xbox360Pad {
 	return &Xbox360Pad{GamepadFromJSObject(p)}
 }
 
+// NewXbox360PadOpts contains optional parameters for NewXbox360Pad.
+type NewXbox360PadOpts struct {
+	XboxOne *bool
+}
+
 // NewXbox360Pad returns a new Xbox360Pad object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.xbox360pad
-func (b *Babylon) NewXbox360Pad(todo parameters) *Xbox360Pad {
-	p := b.ctx.Get("Xbox360Pad").New(todo)
+func (b *Babylon) NewXbox360Pad(id string, index float64, gamepad interface{}, opts *NewXbox360PadOpts) *Xbox360Pad {
+	if opts == nil {
+		opts = &NewXbox360PadOpts{}
+	}
+
+	p := b.ctx.Get("Xbox360Pad").New(id, index, gamepad, opts.XboxOne.JSObject())
 	return Xbox360PadFromJSObject(p)
 }
 

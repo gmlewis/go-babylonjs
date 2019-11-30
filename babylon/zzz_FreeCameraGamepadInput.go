@@ -8,10 +8,9 @@ import (
 
 // FreeCameraGamepadInput represents a babylon.js FreeCameraGamepadInput.
 // Manage the gamepad inputs to control a free camera.
-
 //
 // See: http://doc.babylonjs.com/how_to/customizing_camera_inputs
-type FreeCameraGamepadInput struct{}
+type FreeCameraGamepadInput struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (f *FreeCameraGamepadInput) JSObject() js.Value { return f.p }
@@ -25,14 +24,6 @@ func (b *Babylon) FreeCameraGamepadInput() *FreeCameraGamepadInput {
 // FreeCameraGamepadInputFromJSObject returns a wrapped FreeCameraGamepadInput JavaScript class.
 func FreeCameraGamepadInputFromJSObject(p js.Value) *FreeCameraGamepadInput {
 	return &FreeCameraGamepadInput{p: p}
-}
-
-// NewFreeCameraGamepadInput returns a new FreeCameraGamepadInput object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecameragamepadinput
-func (b *Babylon) NewFreeCameraGamepadInput(todo parameters) *FreeCameraGamepadInput {
-	p := b.ctx.Get("FreeCameraGamepadInput").New(todo)
-	return FreeCameraGamepadInputFromJSObject(p)
 }
 
 // TODO: methods

@@ -8,7 +8,7 @@ import (
 
 // Color3Gradient represents a babylon.js Color3Gradient.
 // Class used to store color 3 gradient
-type Color3Gradient struct{}
+type Color3Gradient struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (c *Color3Gradient) JSObject() js.Value { return c.p }
@@ -22,14 +22,6 @@ func (b *Babylon) Color3Gradient() *Color3Gradient {
 // Color3GradientFromJSObject returns a wrapped Color3Gradient JavaScript class.
 func Color3GradientFromJSObject(p js.Value) *Color3Gradient {
 	return &Color3Gradient{p: p}
-}
-
-// NewColor3Gradient returns a new Color3Gradient object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.color3gradient
-func (b *Babylon) NewColor3Gradient(todo parameters) *Color3Gradient {
-	p := b.ctx.Get("Color3Gradient").New(todo)
-	return Color3GradientFromJSObject(p)
 }
 
 // TODO: methods

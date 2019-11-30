@@ -27,8 +27,8 @@ func NormalBlendBlockFromJSObject(p js.Value) *NormalBlendBlock {
 // NewNormalBlendBlock returns a new NormalBlendBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.normalblendblock
-func (b *Babylon) NewNormalBlendBlock(todo parameters) *NormalBlendBlock {
-	p := b.ctx.Get("NormalBlendBlock").New(todo)
+func (b *Babylon) NewNormalBlendBlock(name string) *NormalBlendBlock {
+	p := b.ctx.Get("NormalBlendBlock").New(name)
 	return NormalBlendBlockFromJSObject(p)
 }
 

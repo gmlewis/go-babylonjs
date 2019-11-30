@@ -27,8 +27,8 @@ func CrossBlockFromJSObject(p js.Value) *CrossBlock {
 // NewCrossBlock returns a new CrossBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.crossblock
-func (b *Babylon) NewCrossBlock(todo parameters) *CrossBlock {
-	p := b.ctx.Get("CrossBlock").New(todo)
+func (b *Babylon) NewCrossBlock(name string) *CrossBlock {
+	p := b.ctx.Get("CrossBlock").New(name)
 	return CrossBlockFromJSObject(p)
 }
 

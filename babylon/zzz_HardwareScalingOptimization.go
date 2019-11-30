@@ -8,7 +8,6 @@ import (
 
 // HardwareScalingOptimization represents a babylon.js HardwareScalingOptimization.
 // Defines an optimization used to increase or decrease the rendering resolution
-
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
 type HardwareScalingOptimization struct{ *SceneOptimization }
@@ -27,11 +26,24 @@ func HardwareScalingOptimizationFromJSObject(p js.Value) *HardwareScalingOptimiz
 	return &HardwareScalingOptimization{SceneOptimizationFromJSObject(p)}
 }
 
+// NewHardwareScalingOptimizationOpts contains optional parameters for NewHardwareScalingOptimization.
+type NewHardwareScalingOptimizationOpts struct {
+	Priority *float64
+
+	MaximumScale *float64
+
+	Step *float64
+}
+
 // NewHardwareScalingOptimization returns a new HardwareScalingOptimization object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hardwarescalingoptimization
-func (b *Babylon) NewHardwareScalingOptimization(todo parameters) *HardwareScalingOptimization {
-	p := b.ctx.Get("HardwareScalingOptimization").New(todo)
+func (b *Babylon) NewHardwareScalingOptimization(opts *NewHardwareScalingOptimizationOpts) *HardwareScalingOptimization {
+	if opts == nil {
+		opts = &NewHardwareScalingOptimizationOpts{}
+	}
+
+	p := b.ctx.Get("HardwareScalingOptimization").New(opts.Priority, opts.MaximumScale, opts.Step)
 	return HardwareScalingOptimizationFromJSObject(p)
 }
 

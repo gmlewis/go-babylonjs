@@ -8,7 +8,7 @@ import (
 
 // SceneLoaderProgressEvent represents a babylon.js SceneLoaderProgressEvent.
 // Class used to represent data loading progression
-type SceneLoaderProgressEvent struct{}
+type SceneLoaderProgressEvent struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (s *SceneLoaderProgressEvent) JSObject() js.Value { return s.p }
@@ -27,8 +27,8 @@ func SceneLoaderProgressEventFromJSObject(p js.Value) *SceneLoaderProgressEvent 
 // NewSceneLoaderProgressEvent returns a new SceneLoaderProgressEvent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloaderprogressevent
-func (b *Babylon) NewSceneLoaderProgressEvent(todo parameters) *SceneLoaderProgressEvent {
-	p := b.ctx.Get("SceneLoaderProgressEvent").New(todo)
+func (b *Babylon) NewSceneLoaderProgressEvent(lengthComputable bool, loaded float64, total float64) *SceneLoaderProgressEvent {
+	p := b.ctx.Get("SceneLoaderProgressEvent").New(lengthComputable.JSObject(), loaded, total)
 	return SceneLoaderProgressEventFromJSObject(p)
 }
 

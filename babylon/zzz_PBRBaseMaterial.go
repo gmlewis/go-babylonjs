@@ -8,12 +8,11 @@ import (
 
 // PBRBaseMaterial represents a babylon.js PBRBaseMaterial.
 // The Physically based material base class of BJS.
-
 //
 // This offers the main features of a standard PBR material.
 // For more information, please refer to the documentation :
 // &lt;a href=&#34;https://doc.babylonjs.com/how_to/physically_based_rendering&#34;&gt;https://doc.babylonjs.com/how_to/physically_based_rendering&lt;/a&gt;
-type PBRBaseMaterial struct{}
+type PBRBaseMaterial struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (p *PBRBaseMaterial) JSObject() js.Value { return p.p }
@@ -32,8 +31,8 @@ func PBRBaseMaterialFromJSObject(p js.Value) *PBRBaseMaterial {
 // NewPBRBaseMaterial returns a new PBRBaseMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial
-func (b *Babylon) NewPBRBaseMaterial(todo parameters) *PBRBaseMaterial {
-	p := b.ctx.Get("PBRBaseMaterial").New(todo)
+func (b *Babylon) NewPBRBaseMaterial(name string, scene *Scene) *PBRBaseMaterial {
+	p := b.ctx.Get("PBRBaseMaterial").New(name, scene.JSObject())
 	return PBRBaseMaterialFromJSObject(p)
 }
 

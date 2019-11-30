@@ -1,7 +1,6 @@
 package babylon
 
-import "syscall/js"
-
+/*
 // PointLight represents a babylon.js PointLight.
 type PointLight struct{ *ShadowLight }
 
@@ -26,3 +25,4 @@ func (b *Babylon) NewPointLight(name string, position *Vector3, scene *Scene) *P
 	p := b.ctx.Get("PointLight").New(name, position.JSObject(), scene.JSObject())
 	return PointLightFromJSObject(p)
 }
+*/

@@ -8,10 +8,9 @@ import (
 
 // AmmoJSPlugin represents a babylon.js AmmoJSPlugin.
 // AmmoJS Physics plugin
-
 //
 // See: https://github.com/kripken/ammo.js/
-type AmmoJSPlugin struct{}
+type AmmoJSPlugin struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (a *AmmoJSPlugin) JSObject() js.Value { return a.p }
@@ -27,11 +26,24 @@ func AmmoJSPluginFromJSObject(p js.Value) *AmmoJSPlugin {
 	return &AmmoJSPlugin{p: p}
 }
 
+// NewAmmoJSPluginOpts contains optional parameters for NewAmmoJSPlugin.
+type NewAmmoJSPluginOpts struct {
+	_useDeltaForWorldStep *bool
+
+	AmmoInjection *interface{}
+
+	OverlappingPairCache *interface{}
+}
+
 // NewAmmoJSPlugin returns a new AmmoJSPlugin object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ammojsplugin
-func (b *Babylon) NewAmmoJSPlugin(todo parameters) *AmmoJSPlugin {
-	p := b.ctx.Get("AmmoJSPlugin").New(todo)
+func (b *Babylon) NewAmmoJSPlugin(opts *NewAmmoJSPluginOpts) *AmmoJSPlugin {
+	if opts == nil {
+		opts = &NewAmmoJSPluginOpts{}
+	}
+
+	p := b.ctx.Get("AmmoJSPlugin").New(opts._useDeltaForWorldStep.JSObject(), opts.AmmoInjection, opts.OverlappingPairCache)
 	return AmmoJSPluginFromJSObject(p)
 }
 

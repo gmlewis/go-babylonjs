@@ -8,10 +8,9 @@ import (
 
 // BouncingBehavior represents a babylon.js BouncingBehavior.
 // Add a bouncing effect to an ArcRotateCamera when reaching a specified minimum and maximum radius
-
 //
 // See: http://doc.babylonjs.com/how_to/camera_behaviors#bouncing-behavior
-type BouncingBehavior struct{}
+type BouncingBehavior struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (b *BouncingBehavior) JSObject() js.Value { return b.p }
@@ -25,14 +24,6 @@ func (b *Babylon) BouncingBehavior() *BouncingBehavior {
 // BouncingBehaviorFromJSObject returns a wrapped BouncingBehavior JavaScript class.
 func BouncingBehaviorFromJSObject(p js.Value) *BouncingBehavior {
 	return &BouncingBehavior{p: p}
-}
-
-// NewBouncingBehavior returns a new BouncingBehavior object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.bouncingbehavior
-func (b *Babylon) NewBouncingBehavior(todo parameters) *BouncingBehavior {
-	p := b.ctx.Get("BouncingBehavior").New(todo)
-	return BouncingBehaviorFromJSObject(p)
 }
 
 // TODO: methods

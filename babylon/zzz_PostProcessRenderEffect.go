@@ -9,10 +9,9 @@ import (
 // PostProcessRenderEffect represents a babylon.js PostProcessRenderEffect.
 // This represents a set of one or more post processes in Babylon.
 // A post process can be used to apply a shader to a texture after it is rendered.
-
 //
 // See: https://doc.babylonjs.com/how_to/how_to_use_postprocessrenderpipeline
-type PostProcessRenderEffect struct{}
+type PostProcessRenderEffect struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (p *PostProcessRenderEffect) JSObject() js.Value { return p.p }
@@ -28,11 +27,20 @@ func PostProcessRenderEffectFromJSObject(p js.Value) *PostProcessRenderEffect {
 	return &PostProcessRenderEffect{p: p}
 }
 
+// NewPostProcessRenderEffectOpts contains optional parameters for NewPostProcessRenderEffect.
+type NewPostProcessRenderEffectOpts struct {
+	SingleInstance *bool
+}
+
 // NewPostProcessRenderEffect returns a new PostProcessRenderEffect object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrendereffect
-func (b *Babylon) NewPostProcessRenderEffect(todo parameters) *PostProcessRenderEffect {
-	p := b.ctx.Get("PostProcessRenderEffect").New(todo)
+func (b *Babylon) NewPostProcessRenderEffect(engine *Engine, name string, getPostProcesses func(), opts *NewPostProcessRenderEffectOpts) *PostProcessRenderEffect {
+	if opts == nil {
+		opts = &NewPostProcessRenderEffectOpts{}
+	}
+
+	p := b.ctx.Get("PostProcessRenderEffect").New(engine.JSObject(), name, getPostProcesses, opts.SingleInstance.JSObject())
 	return PostProcessRenderEffectFromJSObject(p)
 }
 

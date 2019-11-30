@@ -9,10 +9,9 @@ import (
 // LensFlareSystem represents a babylon.js LensFlareSystem.
 // This represents a Lens Flare System or the shiny effect created by the light reflection on the  camera lenses.
 // It is usually composed of several &lt;code&gt;lensFlare&lt;/code&gt;.
-
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_lens_flares
-type LensFlareSystem struct{}
+type LensFlareSystem struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (l *LensFlareSystem) JSObject() js.Value { return l.p }
@@ -31,8 +30,8 @@ func LensFlareSystemFromJSObject(p js.Value) *LensFlareSystem {
 // NewLensFlareSystem returns a new LensFlareSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensflaresystem
-func (b *Babylon) NewLensFlareSystem(todo parameters) *LensFlareSystem {
-	p := b.ctx.Get("LensFlareSystem").New(todo)
+func (b *Babylon) NewLensFlareSystem(name string, emitter interface{}, scene *Scene) *LensFlareSystem {
+	p := b.ctx.Get("LensFlareSystem").New(name, emitter, scene.JSObject())
 	return LensFlareSystemFromJSObject(p)
 }
 

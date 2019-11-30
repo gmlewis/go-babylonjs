@@ -27,8 +27,8 @@ func PoseEnabledControllerFromJSObject(p js.Value) *PoseEnabledController {
 // NewPoseEnabledController returns a new PoseEnabledController object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller
-func (b *Babylon) NewPoseEnabledController(todo parameters) *PoseEnabledController {
-	p := b.ctx.Get("PoseEnabledController").New(todo)
+func (b *Babylon) NewPoseEnabledController(browserGamepad interface{}) *PoseEnabledController {
+	p := b.ctx.Get("PoseEnabledController").New(browserGamepad)
 	return PoseEnabledControllerFromJSObject(p)
 }
 

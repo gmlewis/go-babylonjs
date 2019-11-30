@@ -2,6 +2,7 @@ package babylon
 
 import "syscall/js"
 
+/*
 // ArcRotateCamera represents a babylon.js ArcRotateCamera.
 type ArcRotateCamera struct{ *TargetCamera }
 
@@ -26,6 +27,7 @@ func (b *Babylon) NewArcRotateCamera(name string, alpha, beta, radius float64, t
 	p := b.ctx.Get("ArcRotateCamera").New(name, alpha, beta, radius, target.JSObject(), scene.JSObject())
 	return ArcRotateCameraFromJSObject(p)
 }
+*/
 
 // AttachControl calls the JavaScript method of the same name.
 func (a *ArcRotateCamera) AttachControl(canvas js.Value, b bool) {

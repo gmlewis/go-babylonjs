@@ -8,7 +8,7 @@ import (
 
 // GUID represents a babylon.js GUID.
 // Class used to manipulate GUIDs
-type GUID struct{}
+type GUID struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (g *GUID) JSObject() js.Value { return g.p }
@@ -22,14 +22,6 @@ func (b *Babylon) GUID() *GUID {
 // GUIDFromJSObject returns a wrapped GUID JavaScript class.
 func GUIDFromJSObject(p js.Value) *GUID {
 	return &GUID{p: p}
-}
-
-// NewGUID returns a new GUID object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.guid
-func (b *Babylon) NewGUID(todo parameters) *GUID {
-	p := b.ctx.Get("GUID").New(todo)
-	return GUIDFromJSObject(p)
 }
 
 // TODO: methods

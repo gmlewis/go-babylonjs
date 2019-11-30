@@ -8,7 +8,7 @@ import (
 
 // FluentMaterial represents a babylon.js FluentMaterial.
 // Class used to render controls with fluent desgin
-type FluentMaterial struct{}
+type FluentMaterial struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (f *FluentMaterial) JSObject() js.Value { return f.p }
@@ -27,8 +27,8 @@ func FluentMaterialFromJSObject(p js.Value) *FluentMaterial {
 // NewFluentMaterial returns a new FluentMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial
-func (b *Babylon) NewFluentMaterial(todo parameters) *FluentMaterial {
-	p := b.ctx.Get("FluentMaterial").New(todo)
+func (b *Babylon) NewFluentMaterial(name string, scene *Scene) *FluentMaterial {
+	p := b.ctx.Get("FluentMaterial").New(name, scene.JSObject())
 	return FluentMaterialFromJSObject(p)
 }
 

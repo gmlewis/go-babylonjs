@@ -8,10 +8,9 @@ import (
 
 // Control represents a babylon.js Control.
 // Root class used for all 2D controls
-
 //
 // See: http://doc.babylonjs.com/how_to/gui#controls
-type Control struct{}
+type Control struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (c *Control) JSObject() js.Value { return c.p }
@@ -27,11 +26,20 @@ func ControlFromJSObject(p js.Value) *Control {
 	return &Control{p: p}
 }
 
+// NewControlOpts contains optional parameters for NewControl.
+type NewControlOpts struct {
+	Name *string
+}
+
 // NewControl returns a new Control object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control
-func (b *Babylon) NewControl(todo parameters) *Control {
-	p := b.ctx.Get("Control").New(todo)
+func (b *Babylon) NewControl(opts *NewControlOpts) *Control {
+	if opts == nil {
+		opts = &NewControlOpts{}
+	}
+
+	p := b.ctx.Get("Control").New(opts.Name)
 	return ControlFromJSObject(p)
 }
 

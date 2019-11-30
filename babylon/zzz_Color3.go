@@ -8,7 +8,7 @@ import (
 
 // Color3 represents a babylon.js Color3.
 // Class used to hold a RBG color
-type Color3 struct{}
+type Color3 struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (c *Color3) JSObject() js.Value { return c.p }
@@ -24,11 +24,24 @@ func Color3FromJSObject(p js.Value) *Color3 {
 	return &Color3{p: p}
 }
 
+// NewColor3Opts contains optional parameters for NewColor3.
+type NewColor3Opts struct {
+	R *float64
+
+	G *float64
+
+	B *float64
+}
+
 // NewColor3 returns a new Color3 object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.color3
-func (b *Babylon) NewColor3(todo parameters) *Color3 {
-	p := b.ctx.Get("Color3").New(todo)
+func (b *Babylon) NewColor3(opts *NewColor3Opts) *Color3 {
+	if opts == nil {
+		opts = &NewColor3Opts{}
+	}
+
+	p := b.ctx.Get("Color3").New(opts.R, opts.G, opts.B)
 	return Color3FromJSObject(p)
 }
 

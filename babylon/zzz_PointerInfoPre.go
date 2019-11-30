@@ -28,8 +28,8 @@ func PointerInfoPreFromJSObject(p js.Value) *PointerInfoPre {
 // NewPointerInfoPre returns a new PointerInfoPre object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointerinfopre
-func (b *Babylon) NewPointerInfoPre(todo parameters) *PointerInfoPre {
-	p := b.ctx.Get("PointerInfoPre").New(todo)
+func (b *Babylon) NewPointerInfoPre(jsType float64, event PointerEvent, localX float64, localY float64) *PointerInfoPre {
+	p := b.ctx.Get("PointerInfoPre").New(jsType, event.JSObject(), localX, localY)
 	return PointerInfoPreFromJSObject(p)
 }
 

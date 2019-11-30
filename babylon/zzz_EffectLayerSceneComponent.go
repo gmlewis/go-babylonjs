@@ -9,7 +9,7 @@ import (
 // EffectLayerSceneComponent represents a babylon.js EffectLayerSceneComponent.
 // Defines the layer scene component responsible to manage any effect layers
 // in a given scene.
-type EffectLayerSceneComponent struct{}
+type EffectLayerSceneComponent struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (e *EffectLayerSceneComponent) JSObject() js.Value { return e.p }
@@ -28,8 +28,8 @@ func EffectLayerSceneComponentFromJSObject(p js.Value) *EffectLayerSceneComponen
 // NewEffectLayerSceneComponent returns a new EffectLayerSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectlayerscenecomponent
-func (b *Babylon) NewEffectLayerSceneComponent(todo parameters) *EffectLayerSceneComponent {
-	p := b.ctx.Get("EffectLayerSceneComponent").New(todo)
+func (b *Babylon) NewEffectLayerSceneComponent(scene *Scene) *EffectLayerSceneComponent {
+	p := b.ctx.Get("EffectLayerSceneComponent").New(scene.JSObject())
 	return EffectLayerSceneComponentFromJSObject(p)
 }
 

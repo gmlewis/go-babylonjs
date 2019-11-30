@@ -12,7 +12,6 @@ import (
 // is automatically managed.
 // It is a cheap VideoTexture or DynamicTexture if you prefer to keep full control of the elements
 // in your application.
-
 //
 // As the update is not automatic, you need to call them manually.
 type HtmlElementTexture struct{ *BaseTexture }
@@ -34,8 +33,8 @@ func HtmlElementTextureFromJSObject(p js.Value) *HtmlElementTexture {
 // NewHtmlElementTexture returns a new HtmlElementTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.htmlelementtexture
-func (b *Babylon) NewHtmlElementTexture(todo parameters) *HtmlElementTexture {
-	p := b.ctx.Get("HtmlElementTexture").New(todo)
+func (b *Babylon) NewHtmlElementTexture(name string, element js.Value, options js.Value) *HtmlElementTexture {
+	p := b.ctx.Get("HtmlElementTexture").New(name, element, options)
 	return HtmlElementTextureFromJSObject(p)
 }
 

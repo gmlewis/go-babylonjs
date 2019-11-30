@@ -24,11 +24,28 @@ func PlaneRotationGizmoFromJSObject(p js.Value) *PlaneRotationGizmo {
 	return &PlaneRotationGizmo{GizmoFromJSObject(p)}
 }
 
+// NewPlaneRotationGizmoOpts contains optional parameters for NewPlaneRotationGizmo.
+type NewPlaneRotationGizmoOpts struct {
+	Color *Color3
+
+	GizmoLayer *UtilityLayerRenderer
+
+	Tessellation *float64
+
+	Parent *RotationGizmo
+
+	UseEulerRotation *bool
+}
+
 // NewPlaneRotationGizmo returns a new PlaneRotationGizmo object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.planerotationgizmo
-func (b *Babylon) NewPlaneRotationGizmo(todo parameters) *PlaneRotationGizmo {
-	p := b.ctx.Get("PlaneRotationGizmo").New(todo)
+func (b *Babylon) NewPlaneRotationGizmo(planeNormal *Vector3, opts *NewPlaneRotationGizmoOpts) *PlaneRotationGizmo {
+	if opts == nil {
+		opts = &NewPlaneRotationGizmoOpts{}
+	}
+
+	p := b.ctx.Get("PlaneRotationGizmo").New(planeNormal.JSObject(), opts.Color.JSObject(), opts.GizmoLayer.JSObject(), opts.Tessellation, opts.Parent.JSObject(), opts.UseEulerRotation.JSObject())
 	return PlaneRotationGizmoFromJSObject(p)
 }
 

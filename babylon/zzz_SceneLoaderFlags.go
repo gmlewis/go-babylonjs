@@ -8,7 +8,7 @@ import (
 
 // SceneLoaderFlags represents a babylon.js SceneLoaderFlags.
 // Class used to represent data loading progression
-type SceneLoaderFlags struct{}
+type SceneLoaderFlags struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (s *SceneLoaderFlags) JSObject() js.Value { return s.p }
@@ -22,14 +22,6 @@ func (b *Babylon) SceneLoaderFlags() *SceneLoaderFlags {
 // SceneLoaderFlagsFromJSObject returns a wrapped SceneLoaderFlags JavaScript class.
 func SceneLoaderFlagsFromJSObject(p js.Value) *SceneLoaderFlags {
 	return &SceneLoaderFlags{p: p}
-}
-
-// NewSceneLoaderFlags returns a new SceneLoaderFlags object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.sceneloaderflags
-func (b *Babylon) NewSceneLoaderFlags(todo parameters) *SceneLoaderFlags {
-	p := b.ctx.Get("SceneLoaderFlags").New(todo)
-	return SceneLoaderFlagsFromJSObject(p)
 }
 
 // TODO: methods

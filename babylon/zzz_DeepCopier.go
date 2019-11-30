@@ -8,7 +8,7 @@ import (
 
 // DeepCopier represents a babylon.js DeepCopier.
 // Class containing a set of static utilities functions for deep copy.
-type DeepCopier struct{}
+type DeepCopier struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (d *DeepCopier) JSObject() js.Value { return d.p }
@@ -22,14 +22,6 @@ func (b *Babylon) DeepCopier() *DeepCopier {
 // DeepCopierFromJSObject returns a wrapped DeepCopier JavaScript class.
 func DeepCopierFromJSObject(p js.Value) *DeepCopier {
 	return &DeepCopier{p: p}
-}
-
-// NewDeepCopier returns a new DeepCopier object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.deepcopier
-func (b *Babylon) NewDeepCopier(todo parameters) *DeepCopier {
-	p := b.ctx.Get("DeepCopier").New(todo)
-	return DeepCopierFromJSObject(p)
 }
 
 // TODO: methods

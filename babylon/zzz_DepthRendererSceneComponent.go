@@ -9,7 +9,7 @@ import (
 // DepthRendererSceneComponent represents a babylon.js DepthRendererSceneComponent.
 // Defines the Depth Renderer scene component responsible to manage a depth buffer useful
 // in several rendering techniques.
-type DepthRendererSceneComponent struct{}
+type DepthRendererSceneComponent struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (d *DepthRendererSceneComponent) JSObject() js.Value { return d.p }
@@ -28,8 +28,8 @@ func DepthRendererSceneComponentFromJSObject(p js.Value) *DepthRendererSceneComp
 // NewDepthRendererSceneComponent returns a new DepthRendererSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthrendererscenecomponent
-func (b *Babylon) NewDepthRendererSceneComponent(todo parameters) *DepthRendererSceneComponent {
-	p := b.ctx.Get("DepthRendererSceneComponent").New(todo)
+func (b *Babylon) NewDepthRendererSceneComponent(scene *Scene) *DepthRendererSceneComponent {
+	p := b.ctx.Get("DepthRendererSceneComponent").New(scene.JSObject())
 	return DepthRendererSceneComponentFromJSObject(p)
 }
 

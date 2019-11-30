@@ -8,7 +8,6 @@ import (
 
 // TransformNode represents a babylon.js TransformNode.
 // A TransformNode is an object that is not rendered but can be used as a center of transformation. This can decrease memory usage and increase rendering speed compared to using an empty mesh as a parent and is less complicated than using a pivot matrix.
-
 //
 // See: https://doc.babylonjs.com/how_to/transformnode
 type TransformNode struct{ *Node }
@@ -27,11 +26,22 @@ func TransformNodeFromJSObject(p js.Value) *TransformNode {
 	return &TransformNode{NodeFromJSObject(p)}
 }
 
+// NewTransformNodeOpts contains optional parameters for NewTransformNode.
+type NewTransformNodeOpts struct {
+	Scene *Scene
+
+	IsPure *bool
+}
+
 // NewTransformNode returns a new TransformNode object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode
-func (b *Babylon) NewTransformNode(todo parameters) *TransformNode {
-	p := b.ctx.Get("TransformNode").New(todo)
+func (b *Babylon) NewTransformNode(name string, opts *NewTransformNodeOpts) *TransformNode {
+	if opts == nil {
+		opts = &NewTransformNodeOpts{}
+	}
+
+	p := b.ctx.Get("TransformNode").New(name, opts.Scene.JSObject(), opts.IsPure.JSObject())
 	return TransformNodeFromJSObject(p)
 }
 

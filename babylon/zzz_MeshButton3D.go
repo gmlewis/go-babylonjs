@@ -24,11 +24,20 @@ func MeshButton3DFromJSObject(p js.Value) *MeshButton3D {
 	return &MeshButton3D{Button3DFromJSObject(p)}
 }
 
+// NewMeshButton3DOpts contains optional parameters for NewMeshButton3D.
+type NewMeshButton3DOpts struct {
+	Name *string
+}
+
 // NewMeshButton3D returns a new MeshButton3D object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.meshbutton3d
-func (b *Babylon) NewMeshButton3D(todo parameters) *MeshButton3D {
-	p := b.ctx.Get("MeshButton3D").New(todo)
+func (b *Babylon) NewMeshButton3D(mesh *Mesh, opts *NewMeshButton3DOpts) *MeshButton3D {
+	if opts == nil {
+		opts = &NewMeshButton3DOpts{}
+	}
+
+	p := b.ctx.Get("MeshButton3D").New(mesh.JSObject(), opts.Name)
 	return MeshButton3DFromJSObject(p)
 }
 

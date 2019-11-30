@@ -24,11 +24,22 @@ func ScrollViewerFromJSObject(p js.Value) *ScrollViewer {
 	return &ScrollViewer{RectangleFromJSObject(p)}
 }
 
+// NewScrollViewerOpts contains optional parameters for NewScrollViewer.
+type NewScrollViewerOpts struct {
+	Name *string
+
+	IsImageBased *bool
+}
+
 // NewScrollViewer returns a new ScrollViewer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scrollviewer
-func (b *Babylon) NewScrollViewer(todo parameters) *ScrollViewer {
-	p := b.ctx.Get("ScrollViewer").New(todo)
+func (b *Babylon) NewScrollViewer(opts *NewScrollViewerOpts) *ScrollViewer {
+	if opts == nil {
+		opts = &NewScrollViewerOpts{}
+	}
+
+	p := b.ctx.Get("ScrollViewer").New(opts.Name, opts.IsImageBased.JSObject())
 	return ScrollViewerFromJSObject(p)
 }
 

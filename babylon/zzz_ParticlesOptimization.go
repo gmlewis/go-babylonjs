@@ -8,7 +8,6 @@ import (
 
 // ParticlesOptimization represents a babylon.js ParticlesOptimization.
 // Defines an optimization used to turn particles off
-
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
 type ParticlesOptimization struct{ *SceneOptimization }
@@ -27,11 +26,20 @@ func ParticlesOptimizationFromJSObject(p js.Value) *ParticlesOptimization {
 	return &ParticlesOptimization{SceneOptimizationFromJSObject(p)}
 }
 
+// NewParticlesOptimizationOpts contains optional parameters for NewParticlesOptimization.
+type NewParticlesOptimizationOpts struct {
+	Priority *float64
+}
+
 // NewParticlesOptimization returns a new ParticlesOptimization object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesoptimization
-func (b *Babylon) NewParticlesOptimization(todo parameters) *ParticlesOptimization {
-	p := b.ctx.Get("ParticlesOptimization").New(todo)
+func (b *Babylon) NewParticlesOptimization(opts *NewParticlesOptimizationOpts) *ParticlesOptimization {
+	if opts == nil {
+		opts = &NewParticlesOptimizationOpts{}
+	}
+
+	p := b.ctx.Get("ParticlesOptimization").New(opts.Priority)
 	return ParticlesOptimizationFromJSObject(p)
 }
 

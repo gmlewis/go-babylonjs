@@ -24,11 +24,20 @@ func VirtualKeyboardFromJSObject(p js.Value) *VirtualKeyboard {
 	return &VirtualKeyboard{StackPanelFromJSObject(p)}
 }
 
+// NewVirtualKeyboardOpts contains optional parameters for NewVirtualKeyboard.
+type NewVirtualKeyboardOpts struct {
+	Name *string
+}
+
 // NewVirtualKeyboard returns a new VirtualKeyboard object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard
-func (b *Babylon) NewVirtualKeyboard(todo parameters) *VirtualKeyboard {
-	p := b.ctx.Get("VirtualKeyboard").New(todo)
+func (b *Babylon) NewVirtualKeyboard(opts *NewVirtualKeyboardOpts) *VirtualKeyboard {
+	if opts == nil {
+		opts = &NewVirtualKeyboardOpts{}
+	}
+
+	p := b.ctx.Get("VirtualKeyboard").New(opts.Name)
 	return VirtualKeyboardFromJSObject(p)
 }
 

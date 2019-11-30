@@ -27,8 +27,8 @@ func VRDistortionCorrectionPostProcessFromJSObject(p js.Value) *VRDistortionCorr
 // NewVRDistortionCorrectionPostProcess returns a new VRDistortionCorrectionPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrdistortioncorrectionpostprocess
-func (b *Babylon) NewVRDistortionCorrectionPostProcess(todo parameters) *VRDistortionCorrectionPostProcess {
-	p := b.ctx.Get("VRDistortionCorrectionPostProcess").New(todo)
+func (b *Babylon) NewVRDistortionCorrectionPostProcess(name string, camera *Camera, isRightEye bool, vrMetrics *VRCameraMetrics) *VRDistortionCorrectionPostProcess {
+	p := b.ctx.Get("VRDistortionCorrectionPostProcess").New(name, camera.JSObject(), isRightEye.JSObject(), vrMetrics.JSObject())
 	return VRDistortionCorrectionPostProcessFromJSObject(p)
 }
 

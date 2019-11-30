@@ -27,8 +27,8 @@ func RemapBlockFromJSObject(p js.Value) *RemapBlock {
 // NewRemapBlock returns a new RemapBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.remapblock
-func (b *Babylon) NewRemapBlock(todo parameters) *RemapBlock {
-	p := b.ctx.Get("RemapBlock").New(todo)
+func (b *Babylon) NewRemapBlock(name string) *RemapBlock {
+	p := b.ctx.Get("RemapBlock").New(name)
 	return RemapBlockFromJSObject(p)
 }
 

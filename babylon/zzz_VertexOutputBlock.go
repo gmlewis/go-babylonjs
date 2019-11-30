@@ -27,8 +27,8 @@ func VertexOutputBlockFromJSObject(p js.Value) *VertexOutputBlock {
 // NewVertexOutputBlock returns a new VertexOutputBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexoutputblock
-func (b *Babylon) NewVertexOutputBlock(todo parameters) *VertexOutputBlock {
-	p := b.ctx.Get("VertexOutputBlock").New(todo)
+func (b *Babylon) NewVertexOutputBlock(name string) *VertexOutputBlock {
+	p := b.ctx.Get("VertexOutputBlock").New(name)
 	return VertexOutputBlockFromJSObject(p)
 }
 

@@ -8,7 +8,7 @@ import (
 
 // PhysicsEngineSceneComponent represents a babylon.js PhysicsEngineSceneComponent.
 // Defines the physics engine scene component responsible to manage a physics engine
-type PhysicsEngineSceneComponent struct{}
+type PhysicsEngineSceneComponent struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (p *PhysicsEngineSceneComponent) JSObject() js.Value { return p.p }
@@ -27,8 +27,8 @@ func PhysicsEngineSceneComponentFromJSObject(p js.Value) *PhysicsEngineSceneComp
 // NewPhysicsEngineSceneComponent returns a new PhysicsEngineSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsenginescenecomponent
-func (b *Babylon) NewPhysicsEngineSceneComponent(todo parameters) *PhysicsEngineSceneComponent {
-	p := b.ctx.Get("PhysicsEngineSceneComponent").New(todo)
+func (b *Babylon) NewPhysicsEngineSceneComponent(scene *Scene) *PhysicsEngineSceneComponent {
+	p := b.ctx.Get("PhysicsEngineSceneComponent").New(scene.JSObject())
 	return PhysicsEngineSceneComponentFromJSObject(p)
 }
 

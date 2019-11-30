@@ -8,7 +8,6 @@ import (
 
 // HingeJoint represents a babylon.js HingeJoint.
 // This class represents a single physics Hinge-Joint
-
 //
 // See: https://doc.babylonjs.com/how_to/using_the_physics_engine
 type HingeJoint struct{ *MotorEnabledJoint }
@@ -30,8 +29,8 @@ func HingeJointFromJSObject(p js.Value) *HingeJoint {
 // NewHingeJoint returns a new HingeJoint object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hingejoint
-func (b *Babylon) NewHingeJoint(todo parameters) *HingeJoint {
-	p := b.ctx.Get("HingeJoint").New(todo)
+func (b *Babylon) NewHingeJoint(jointData js.Value) *HingeJoint {
+	p := b.ctx.Get("HingeJoint").New(jointData)
 	return HingeJointFromJSObject(p)
 }
 

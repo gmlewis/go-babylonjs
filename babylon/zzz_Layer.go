@@ -9,10 +9,9 @@ import (
 // Layer represents a babylon.js Layer.
 // This represents a full screen 2d layer.
 // This can be useful to display a picture in the  background of your scene for instance.
-
 //
 // See: https://www.babylonjs-playground.com/#08A2BS#1
-type Layer struct{}
+type Layer struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (l *Layer) JSObject() js.Value { return l.p }
@@ -28,11 +27,22 @@ func LayerFromJSObject(p js.Value) *Layer {
 	return &Layer{p: p}
 }
 
+// NewLayerOpts contains optional parameters for NewLayer.
+type NewLayerOpts struct {
+	IsBackground *bool
+
+	Color *Color4
+}
+
 // NewLayer returns a new Layer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.layer
-func (b *Babylon) NewLayer(todo parameters) *Layer {
-	p := b.ctx.Get("Layer").New(todo)
+func (b *Babylon) NewLayer(name string, imgUrl string, scene *Scene, opts *NewLayerOpts) *Layer {
+	if opts == nil {
+		opts = &NewLayerOpts{}
+	}
+
+	p := b.ctx.Get("Layer").New(name, imgUrl, scene.JSObject(), opts.IsBackground.JSObject(), opts.Color.JSObject())
 	return LayerFromJSObject(p)
 }
 

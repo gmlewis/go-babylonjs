@@ -10,7 +10,7 @@ import (
 // This groups together the common properties used for image processing either in direct forward pass
 // or through post processing effect depending on the use of the image processing pipeline in your scene
 // or not.
-type ImageProcessingConfiguration struct{}
+type ImageProcessingConfiguration struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (i *ImageProcessingConfiguration) JSObject() js.Value { return i.p }
@@ -24,14 +24,6 @@ func (b *Babylon) ImageProcessingConfiguration() *ImageProcessingConfiguration {
 // ImageProcessingConfigurationFromJSObject returns a wrapped ImageProcessingConfiguration JavaScript class.
 func ImageProcessingConfigurationFromJSObject(p js.Value) *ImageProcessingConfiguration {
 	return &ImageProcessingConfiguration{p: p}
-}
-
-// NewImageProcessingConfiguration returns a new ImageProcessingConfiguration object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration
-func (b *Babylon) NewImageProcessingConfiguration(todo parameters) *ImageProcessingConfiguration {
-	p := b.ctx.Get("ImageProcessingConfiguration").New(todo)
-	return ImageProcessingConfigurationFromJSObject(p)
 }
 
 // TODO: methods

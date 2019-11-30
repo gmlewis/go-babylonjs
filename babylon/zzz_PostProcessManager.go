@@ -9,7 +9,7 @@ import (
 // PostProcessManager represents a babylon.js PostProcessManager.
 // PostProcessManager is used to manage one or more post processes or post process pipelines
 // See &lt;a href=&#34;https://doc.babylonjs.com/how_to/how_to_use_postprocesses&#34;&gt;https://doc.babylonjs.com/how_to/how_to_use_postprocesses&lt;/a&gt;
-type PostProcessManager struct{}
+type PostProcessManager struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (p *PostProcessManager) JSObject() js.Value { return p.p }
@@ -28,8 +28,8 @@ func PostProcessManagerFromJSObject(p js.Value) *PostProcessManager {
 // NewPostProcessManager returns a new PostProcessManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocessmanager
-func (b *Babylon) NewPostProcessManager(todo parameters) *PostProcessManager {
-	p := b.ctx.Get("PostProcessManager").New(todo)
+func (b *Babylon) NewPostProcessManager(scene *Scene) *PostProcessManager {
+	p := b.ctx.Get("PostProcessManager").New(scene.JSObject())
 	return PostProcessManagerFromJSObject(p)
 }
 

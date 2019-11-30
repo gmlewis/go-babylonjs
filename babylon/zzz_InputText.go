@@ -24,11 +24,22 @@ func InputTextFromJSObject(p js.Value) *InputText {
 	return &InputText{ControlFromJSObject(p)}
 }
 
+// NewInputTextOpts contains optional parameters for NewInputText.
+type NewInputTextOpts struct {
+	Name *string
+
+	Text *string
+}
+
 // NewInputText returns a new InputText object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputtext
-func (b *Babylon) NewInputText(todo parameters) *InputText {
-	p := b.ctx.Get("InputText").New(todo)
+func (b *Babylon) NewInputText(opts *NewInputTextOpts) *InputText {
+	if opts == nil {
+		opts = &NewInputTextOpts{}
+	}
+
+	p := b.ctx.Get("InputText").New(opts.Name, opts.Text)
 	return InputTextFromJSObject(p)
 }
 

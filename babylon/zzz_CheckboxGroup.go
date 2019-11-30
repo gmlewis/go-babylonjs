@@ -28,8 +28,8 @@ func CheckboxGroupFromJSObject(p js.Value) *CheckboxGroup {
 // NewCheckboxGroup returns a new CheckboxGroup object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.checkboxgroup
-func (b *Babylon) NewCheckboxGroup(todo parameters) *CheckboxGroup {
-	p := b.ctx.Get("CheckboxGroup").New(todo)
+func (b *Babylon) NewCheckboxGroup(name string) *CheckboxGroup {
+	p := b.ctx.Get("CheckboxGroup").New(name)
 	return CheckboxGroupFromJSObject(p)
 }
 

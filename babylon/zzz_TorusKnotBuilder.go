@@ -8,7 +8,7 @@ import (
 
 // TorusKnotBuilder represents a babylon.js TorusKnotBuilder.
 // Class containing static functions to help procedurally build meshes
-type TorusKnotBuilder struct{}
+type TorusKnotBuilder struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (t *TorusKnotBuilder) JSObject() js.Value { return t.p }
@@ -22,14 +22,6 @@ func (b *Babylon) TorusKnotBuilder() *TorusKnotBuilder {
 // TorusKnotBuilderFromJSObject returns a wrapped TorusKnotBuilder JavaScript class.
 func TorusKnotBuilderFromJSObject(p js.Value) *TorusKnotBuilder {
 	return &TorusKnotBuilder{p: p}
-}
-
-// NewTorusKnotBuilder returns a new TorusKnotBuilder object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.torusknotbuilder
-func (b *Babylon) NewTorusKnotBuilder(todo parameters) *TorusKnotBuilder {
-	p := b.ctx.Get("TorusKnotBuilder").New(todo)
-	return TorusKnotBuilderFromJSObject(p)
 }
 
 // TODO: methods

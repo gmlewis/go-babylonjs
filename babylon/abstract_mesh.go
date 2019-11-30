@@ -1,9 +1,6 @@
 package babylon
 
-import (
-	"syscall/js"
-)
-
+/*
 // AbstractMesh represents a babylon.js AbstractMesh.
 type AbstractMesh struct{ *TransformNode }
 
@@ -28,3 +25,4 @@ func (b *Babylon) NewAbstractMesh(name string, scene *Scene) *AbstractMesh {
 	p := b.ctx.Get("AbstractMesh").New(name, scene.JSObject())
 	return AbstractMeshFromJSObject(p)
 }
+*/

@@ -8,7 +8,7 @@ import (
 
 // PhysicsVortexEvent represents a babylon.js PhysicsVortexEvent.
 // Represents a physics vortex event
-type PhysicsVortexEvent struct{}
+type PhysicsVortexEvent struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (p *PhysicsVortexEvent) JSObject() js.Value { return p.p }
@@ -27,8 +27,8 @@ func PhysicsVortexEventFromJSObject(p js.Value) *PhysicsVortexEvent {
 // NewPhysicsVortexEvent returns a new PhysicsVortexEvent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsvortexevent
-func (b *Babylon) NewPhysicsVortexEvent(todo parameters) *PhysicsVortexEvent {
-	p := b.ctx.Get("PhysicsVortexEvent").New(todo)
+func (b *Babylon) NewPhysicsVortexEvent(_scene *Scene, _origin *Vector3, _options *PhysicsVortexEventOptions) *PhysicsVortexEvent {
+	p := b.ctx.Get("PhysicsVortexEvent").New(_scene.JSObject(), _origin.JSObject(), _options.JSObject())
 	return PhysicsVortexEventFromJSObject(p)
 }
 

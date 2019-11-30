@@ -27,8 +27,8 @@ func MultiplyBlockFromJSObject(p js.Value) *MultiplyBlock {
 // NewMultiplyBlock returns a new MultiplyBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiplyblock
-func (b *Babylon) NewMultiplyBlock(todo parameters) *MultiplyBlock {
-	p := b.ctx.Get("MultiplyBlock").New(todo)
+func (b *Babylon) NewMultiplyBlock(name string) *MultiplyBlock {
+	p := b.ctx.Get("MultiplyBlock").New(name)
 	return MultiplyBlockFromJSObject(p)
 }
 

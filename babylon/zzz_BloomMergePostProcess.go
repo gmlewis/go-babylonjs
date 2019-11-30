@@ -24,11 +24,28 @@ func BloomMergePostProcessFromJSObject(p js.Value) *BloomMergePostProcess {
 	return &BloomMergePostProcess{PostProcessFromJSObject(p)}
 }
 
+// NewBloomMergePostProcessOpts contains optional parameters for NewBloomMergePostProcess.
+type NewBloomMergePostProcessOpts struct {
+	SamplingMode *float64
+
+	Engine *Engine
+
+	Reusable *bool
+
+	TextureType *float64
+
+	BlockCompilation *bool
+}
+
 // NewBloomMergePostProcess returns a new BloomMergePostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess
-func (b *Babylon) NewBloomMergePostProcess(todo parameters) *BloomMergePostProcess {
-	p := b.ctx.Get("BloomMergePostProcess").New(todo)
+func (b *Babylon) NewBloomMergePostProcess(name string, originalFromInput *PostProcess, blurred *PostProcess, weight float64, options float64, camera *Camera, opts *NewBloomMergePostProcessOpts) *BloomMergePostProcess {
+	if opts == nil {
+		opts = &NewBloomMergePostProcessOpts{}
+	}
+
+	p := b.ctx.Get("BloomMergePostProcess").New(name, originalFromInput.JSObject(), blurred.JSObject(), weight, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType, opts.BlockCompilation.JSObject())
 	return BloomMergePostProcessFromJSObject(p)
 }
 

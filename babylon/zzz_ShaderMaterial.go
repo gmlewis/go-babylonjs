@@ -8,10 +8,8 @@ import (
 
 // ShaderMaterial represents a babylon.js ShaderMaterial.
 // The ShaderMaterial object has the necessary methods to pass data from your scene to the Vertex and Fragment Shaders and returns a material that can be applied to any mesh.
-
 //
 // This returned material effects how the mesh will look based on the code in the shaders.
-
 //
 // See: http://doc.babylonjs.com/how_to/shader_material
 type ShaderMaterial struct{ *Material }
@@ -30,11 +28,20 @@ func ShaderMaterialFromJSObject(p js.Value) *ShaderMaterial {
 	return &ShaderMaterial{MaterialFromJSObject(p)}
 }
 
+// NewShaderMaterialOpts contains optional parameters for NewShaderMaterial.
+type NewShaderMaterialOpts struct {
+	Options *IShaderMaterialOptions
+}
+
 // NewShaderMaterial returns a new ShaderMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial
-func (b *Babylon) NewShaderMaterial(todo parameters) *ShaderMaterial {
-	p := b.ctx.Get("ShaderMaterial").New(todo)
+func (b *Babylon) NewShaderMaterial(name string, scene *Scene, shaderPath interface{}, opts *NewShaderMaterialOpts) *ShaderMaterial {
+	if opts == nil {
+		opts = &NewShaderMaterialOpts{}
+	}
+
+	p := b.ctx.Get("ShaderMaterial").New(name, scene.JSObject(), shaderPath, opts.Options.JSObject())
 	return ShaderMaterialFromJSObject(p)
 }
 

@@ -8,7 +8,6 @@ import (
 
 // PBRSpecularGlossinessMaterial represents a babylon.js PBRSpecularGlossinessMaterial.
 // The PBR material of BJS following the specular glossiness convention.
-
 //
 // This fits to the PBR convention in the GLTF definition:
 // &lt;a href=&#34;https://github.com/KhronosGroup/glTF/tree/2.0/extensions/Khronos/KHR_materials_pbrSpecularGlossiness&#34;&gt;https://github.com/KhronosGroup/glTF/tree/2.0/extensions/Khronos/KHR_materials_pbrSpecularGlossiness&lt;/a&gt;
@@ -31,8 +30,8 @@ func PBRSpecularGlossinessMaterialFromJSObject(p js.Value) *PBRSpecularGlossines
 // NewPBRSpecularGlossinessMaterial returns a new PBRSpecularGlossinessMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial
-func (b *Babylon) NewPBRSpecularGlossinessMaterial(todo parameters) *PBRSpecularGlossinessMaterial {
-	p := b.ctx.Get("PBRSpecularGlossinessMaterial").New(todo)
+func (b *Babylon) NewPBRSpecularGlossinessMaterial(name string, scene *Scene) *PBRSpecularGlossinessMaterial {
+	p := b.ctx.Get("PBRSpecularGlossinessMaterial").New(name, scene.JSObject())
 	return PBRSpecularGlossinessMaterialFromJSObject(p)
 }
 

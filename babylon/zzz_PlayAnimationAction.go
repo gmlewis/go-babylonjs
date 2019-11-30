@@ -8,7 +8,6 @@ import (
 
 // PlayAnimationAction represents a babylon.js PlayAnimationAction.
 // This defines an action responsible to start an animation once triggered.
-
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_actions
 type PlayAnimationAction struct{ *Action }
@@ -27,11 +26,22 @@ func PlayAnimationActionFromJSObject(p js.Value) *PlayAnimationAction {
 	return &PlayAnimationAction{ActionFromJSObject(p)}
 }
 
+// NewPlayAnimationActionOpts contains optional parameters for NewPlayAnimationAction.
+type NewPlayAnimationActionOpts struct {
+	Loop *bool
+
+	Condition *Condition
+}
+
 // NewPlayAnimationAction returns a new PlayAnimationAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.playanimationaction
-func (b *Babylon) NewPlayAnimationAction(todo parameters) *PlayAnimationAction {
-	p := b.ctx.Get("PlayAnimationAction").New(todo)
+func (b *Babylon) NewPlayAnimationAction(triggerOptions interface{}, target interface{}, from float64, to float64, opts *NewPlayAnimationActionOpts) *PlayAnimationAction {
+	if opts == nil {
+		opts = &NewPlayAnimationActionOpts{}
+	}
+
+	p := b.ctx.Get("PlayAnimationAction").New(triggerOptions, target, from, to, opts.Loop.JSObject(), opts.Condition.JSObject())
 	return PlayAnimationActionFromJSObject(p)
 }
 

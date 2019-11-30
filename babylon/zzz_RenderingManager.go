@@ -10,7 +10,7 @@ import (
 // This is the manager responsible of all the rendering for meshes sprites and particles.
 // It is enable to manage the different groups as well as the different necessary sort functions.
 // This should not be used directly aside of the few static configurations
-type RenderingManager struct{}
+type RenderingManager struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (r *RenderingManager) JSObject() js.Value { return r.p }
@@ -29,8 +29,8 @@ func RenderingManagerFromJSObject(p js.Value) *RenderingManager {
 // NewRenderingManager returns a new RenderingManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.renderingmanager
-func (b *Babylon) NewRenderingManager(todo parameters) *RenderingManager {
-	p := b.ctx.Get("RenderingManager").New(todo)
+func (b *Babylon) NewRenderingManager(scene *Scene) *RenderingManager {
+	p := b.ctx.Get("RenderingManager").New(scene.JSObject())
 	return RenderingManagerFromJSObject(p)
 }
 

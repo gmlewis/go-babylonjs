@@ -24,11 +24,22 @@ func CloudProceduralTextureFromJSObject(p js.Value) *CloudProceduralTexture {
 	return &CloudProceduralTexture{ProceduralTextureFromJSObject(p)}
 }
 
+// NewCloudProceduralTextureOpts contains optional parameters for NewCloudProceduralTexture.
+type NewCloudProceduralTextureOpts struct {
+	FallbackTexture *Texture
+
+	GenerateMipMaps *bool
+}
+
 // NewCloudProceduralTexture returns a new CloudProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cloudproceduraltexture
-func (b *Babylon) NewCloudProceduralTexture(todo parameters) *CloudProceduralTexture {
-	p := b.ctx.Get("CloudProceduralTexture").New(todo)
+func (b *Babylon) NewCloudProceduralTexture(name string, size float64, scene *Scene, opts *NewCloudProceduralTextureOpts) *CloudProceduralTexture {
+	if opts == nil {
+		opts = &NewCloudProceduralTextureOpts{}
+	}
+
+	p := b.ctx.Get("CloudProceduralTexture").New(name, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps.JSObject())
 	return CloudProceduralTextureFromJSObject(p)
 }
 

@@ -24,11 +24,24 @@ func DisplayPassPostProcessFromJSObject(p js.Value) *DisplayPassPostProcess {
 	return &DisplayPassPostProcess{PostProcessFromJSObject(p)}
 }
 
+// NewDisplayPassPostProcessOpts contains optional parameters for NewDisplayPassPostProcess.
+type NewDisplayPassPostProcessOpts struct {
+	SamplingMode *float64
+
+	Engine *Engine
+
+	Reusable *bool
+}
+
 // NewDisplayPassPostProcess returns a new DisplayPassPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.displaypasspostprocess
-func (b *Babylon) NewDisplayPassPostProcess(todo parameters) *DisplayPassPostProcess {
-	p := b.ctx.Get("DisplayPassPostProcess").New(todo)
+func (b *Babylon) NewDisplayPassPostProcess(name string, options float64, camera *Camera, opts *NewDisplayPassPostProcessOpts) *DisplayPassPostProcess {
+	if opts == nil {
+		opts = &NewDisplayPassPostProcessOpts{}
+	}
+
+	p := b.ctx.Get("DisplayPassPostProcess").New(name, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject())
 	return DisplayPassPostProcessFromJSObject(p)
 }
 

@@ -8,7 +8,7 @@ import (
 
 // PointerEventTypes represents a babylon.js PointerEventTypes.
 // Gather the list of pointer event types as constants.
-type PointerEventTypes struct{}
+type PointerEventTypes struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (p *PointerEventTypes) JSObject() js.Value { return p.p }
@@ -22,14 +22,6 @@ func (b *Babylon) PointerEventTypes() *PointerEventTypes {
 // PointerEventTypesFromJSObject returns a wrapped PointerEventTypes JavaScript class.
 func PointerEventTypesFromJSObject(p js.Value) *PointerEventTypes {
 	return &PointerEventTypes{p: p}
-}
-
-// NewPointerEventTypes returns a new PointerEventTypes object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.pointereventtypes
-func (b *Babylon) NewPointerEventTypes(todo parameters) *PointerEventTypes {
-	p := b.ctx.Get("PointerEventTypes").New(todo)
-	return PointerEventTypesFromJSObject(p)
 }
 
 // TODO: methods

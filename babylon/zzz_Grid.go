@@ -24,11 +24,20 @@ func GridFromJSObject(p js.Value) *Grid {
 	return &Grid{ContainerFromJSObject(p)}
 }
 
+// NewGridOpts contains optional parameters for NewGrid.
+type NewGridOpts struct {
+	Name *string
+}
+
 // NewGrid returns a new Grid object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.grid
-func (b *Babylon) NewGrid(todo parameters) *Grid {
-	p := b.ctx.Get("Grid").New(todo)
+func (b *Babylon) NewGrid(opts *NewGridOpts) *Grid {
+	if opts == nil {
+		opts = &NewGridOpts{}
+	}
+
+	p := b.ctx.Get("Grid").New(opts.Name)
 	return GridFromJSObject(p)
 }
 

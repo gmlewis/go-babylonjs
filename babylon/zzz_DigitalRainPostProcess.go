@@ -8,7 +8,6 @@ import (
 
 // DigitalRainPostProcess represents a babylon.js DigitalRainPostProcess.
 // DigitalRainPostProcess helps rendering everithing in digital rain.
-
 //
 // Simmply add it to your scene and let the nerd that lives in you have fun.
 // Example usage: var pp = new DigitalRainPostProcess(&amp;quot;digitalRain&amp;quot;, &amp;quot;20px Monospace&amp;quot;, camera);
@@ -28,11 +27,20 @@ func DigitalRainPostProcessFromJSObject(p js.Value) *DigitalRainPostProcess {
 	return &DigitalRainPostProcess{PostProcessFromJSObject(p)}
 }
 
+// NewDigitalRainPostProcessOpts contains optional parameters for NewDigitalRainPostProcess.
+type NewDigitalRainPostProcessOpts struct {
+	Options *string
+}
+
 // NewDigitalRainPostProcess returns a new DigitalRainPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainpostprocess
-func (b *Babylon) NewDigitalRainPostProcess(todo parameters) *DigitalRainPostProcess {
-	p := b.ctx.Get("DigitalRainPostProcess").New(todo)
+func (b *Babylon) NewDigitalRainPostProcess(name string, camera *Camera, opts *NewDigitalRainPostProcessOpts) *DigitalRainPostProcess {
+	if opts == nil {
+		opts = &NewDigitalRainPostProcessOpts{}
+	}
+
+	p := b.ctx.Get("DigitalRainPostProcess").New(name, camera.JSObject(), opts.Options)
 	return DigitalRainPostProcessFromJSObject(p)
 }
 

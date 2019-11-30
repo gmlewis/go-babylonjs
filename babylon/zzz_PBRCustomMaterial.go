@@ -27,8 +27,8 @@ func PBRCustomMaterialFromJSObject(p js.Value) *PBRCustomMaterial {
 // NewPBRCustomMaterial returns a new PBRCustomMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrcustommaterial
-func (b *Babylon) NewPBRCustomMaterial(todo parameters) *PBRCustomMaterial {
-	p := b.ctx.Get("PBRCustomMaterial").New(todo)
+func (b *Babylon) NewPBRCustomMaterial(name string, scene *Scene) *PBRCustomMaterial {
+	p := b.ctx.Get("PBRCustomMaterial").New(name, scene.JSObject())
 	return PBRCustomMaterialFromJSObject(p)
 }
 

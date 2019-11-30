@@ -8,7 +8,7 @@ import (
 
 // BabylonFileLoaderConfiguration represents a babylon.js BabylonFileLoaderConfiguration.
 // Helps setting up some configuration for the babylon file loader.
-type BabylonFileLoaderConfiguration struct{}
+type BabylonFileLoaderConfiguration struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (b *BabylonFileLoaderConfiguration) JSObject() js.Value { return b.p }
@@ -22,14 +22,6 @@ func (b *Babylon) BabylonFileLoaderConfiguration() *BabylonFileLoaderConfigurati
 // BabylonFileLoaderConfigurationFromJSObject returns a wrapped BabylonFileLoaderConfiguration JavaScript class.
 func BabylonFileLoaderConfigurationFromJSObject(p js.Value) *BabylonFileLoaderConfiguration {
 	return &BabylonFileLoaderConfiguration{p: p}
-}
-
-// NewBabylonFileLoaderConfiguration returns a new BabylonFileLoaderConfiguration object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.babylonfileloaderconfiguration
-func (b *Babylon) NewBabylonFileLoaderConfiguration(todo parameters) *BabylonFileLoaderConfiguration {
-	p := b.ctx.Get("BabylonFileLoaderConfiguration").New(todo)
-	return BabylonFileLoaderConfigurationFromJSObject(p)
 }
 
 // TODO: methods

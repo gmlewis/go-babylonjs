@@ -8,7 +8,6 @@ import (
 
 // VRDeviceOrientationFreeCamera represents a babylon.js VRDeviceOrientationFreeCamera.
 // Camera used to simulate VR rendering (based on FreeCamera)
-
 //
 // See: http://doc.babylonjs.com/babylon101/cameras#vr-device-orientation-cameras
 type VRDeviceOrientationFreeCamera struct{ *DeviceOrientationCamera }
@@ -27,11 +26,22 @@ func VRDeviceOrientationFreeCameraFromJSObject(p js.Value) *VRDeviceOrientationF
 	return &VRDeviceOrientationFreeCamera{DeviceOrientationCameraFromJSObject(p)}
 }
 
+// NewVRDeviceOrientationFreeCameraOpts contains optional parameters for NewVRDeviceOrientationFreeCamera.
+type NewVRDeviceOrientationFreeCameraOpts struct {
+	CompensateDistortion *bool
+
+	VrCameraMetrics *VRCameraMetrics
+}
+
 // NewVRDeviceOrientationFreeCamera returns a new VRDeviceOrientationFreeCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationfreecamera
-func (b *Babylon) NewVRDeviceOrientationFreeCamera(todo parameters) *VRDeviceOrientationFreeCamera {
-	p := b.ctx.Get("VRDeviceOrientationFreeCamera").New(todo)
+func (b *Babylon) NewVRDeviceOrientationFreeCamera(name string, position *Vector3, scene *Scene, opts *NewVRDeviceOrientationFreeCameraOpts) *VRDeviceOrientationFreeCamera {
+	if opts == nil {
+		opts = &NewVRDeviceOrientationFreeCameraOpts{}
+	}
+
+	p := b.ctx.Get("VRDeviceOrientationFreeCamera").New(name, position.JSObject(), scene.JSObject(), opts.CompensateDistortion.JSObject(), opts.VrCameraMetrics.JSObject())
 	return VRDeviceOrientationFreeCameraFromJSObject(p)
 }
 

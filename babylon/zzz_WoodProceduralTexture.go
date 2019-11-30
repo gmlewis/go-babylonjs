@@ -24,11 +24,22 @@ func WoodProceduralTextureFromJSObject(p js.Value) *WoodProceduralTexture {
 	return &WoodProceduralTexture{ProceduralTextureFromJSObject(p)}
 }
 
+// NewWoodProceduralTextureOpts contains optional parameters for NewWoodProceduralTexture.
+type NewWoodProceduralTextureOpts struct {
+	FallbackTexture *Texture
+
+	GenerateMipMaps *bool
+}
+
 // NewWoodProceduralTexture returns a new WoodProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.woodproceduraltexture
-func (b *Babylon) NewWoodProceduralTexture(todo parameters) *WoodProceduralTexture {
-	p := b.ctx.Get("WoodProceduralTexture").New(todo)
+func (b *Babylon) NewWoodProceduralTexture(name string, size float64, scene *Scene, opts *NewWoodProceduralTextureOpts) *WoodProceduralTexture {
+	if opts == nil {
+		opts = &NewWoodProceduralTextureOpts{}
+	}
+
+	p := b.ctx.Get("WoodProceduralTexture").New(name, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps.JSObject())
 	return WoodProceduralTextureFromJSObject(p)
 }
 

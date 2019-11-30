@@ -8,7 +8,7 @@ import (
 
 // ClipboardInfo represents a babylon.js ClipboardInfo.
 // This class is used to store clipboard related info for the onClipboardObservable event.
-type ClipboardInfo struct{}
+type ClipboardInfo struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (c *ClipboardInfo) JSObject() js.Value { return c.p }
@@ -27,8 +27,8 @@ func ClipboardInfoFromJSObject(p js.Value) *ClipboardInfo {
 // NewClipboardInfo returns a new ClipboardInfo object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.clipboardinfo
-func (b *Babylon) NewClipboardInfo(todo parameters) *ClipboardInfo {
-	p := b.ctx.Get("ClipboardInfo").New(todo)
+func (b *Babylon) NewClipboardInfo(jsType float64, event js.Value) *ClipboardInfo {
+	p := b.ctx.Get("ClipboardInfo").New(jsType, event)
 	return ClipboardInfoFromJSObject(p)
 }
 

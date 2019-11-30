@@ -27,8 +27,8 @@ func CustomMaterialFromJSObject(p js.Value) *CustomMaterial {
 // NewCustomMaterial returns a new CustomMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.custommaterial
-func (b *Babylon) NewCustomMaterial(todo parameters) *CustomMaterial {
-	p := b.ctx.Get("CustomMaterial").New(todo)
+func (b *Babylon) NewCustomMaterial(name string, scene *Scene) *CustomMaterial {
+	p := b.ctx.Get("CustomMaterial").New(name, scene.JSObject())
 	return CustomMaterialFromJSObject(p)
 }
 

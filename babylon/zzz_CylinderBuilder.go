@@ -8,7 +8,7 @@ import (
 
 // CylinderBuilder represents a babylon.js CylinderBuilder.
 // Class containing static functions to help procedurally build meshes
-type CylinderBuilder struct{}
+type CylinderBuilder struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (c *CylinderBuilder) JSObject() js.Value { return c.p }
@@ -22,14 +22,6 @@ func (b *Babylon) CylinderBuilder() *CylinderBuilder {
 // CylinderBuilderFromJSObject returns a wrapped CylinderBuilder JavaScript class.
 func CylinderBuilderFromJSObject(p js.Value) *CylinderBuilder {
 	return &CylinderBuilder{p: p}
-}
-
-// NewCylinderBuilder returns a new CylinderBuilder object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.cylinderbuilder
-func (b *Babylon) NewCylinderBuilder(todo parameters) *CylinderBuilder {
-	p := b.ctx.Get("CylinderBuilder").New(todo)
-	return CylinderBuilderFromJSObject(p)
 }
 
 // TODO: methods

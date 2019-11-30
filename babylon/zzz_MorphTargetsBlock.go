@@ -27,8 +27,8 @@ func MorphTargetsBlockFromJSObject(p js.Value) *MorphTargetsBlock {
 // NewMorphTargetsBlock returns a new MorphTargetsBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock
-func (b *Babylon) NewMorphTargetsBlock(todo parameters) *MorphTargetsBlock {
-	p := b.ctx.Get("MorphTargetsBlock").New(todo)
+func (b *Babylon) NewMorphTargetsBlock(name string) *MorphTargetsBlock {
+	p := b.ctx.Get("MorphTargetsBlock").New(name)
 	return MorphTargetsBlockFromJSObject(p)
 }
 

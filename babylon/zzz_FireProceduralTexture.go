@@ -24,11 +24,22 @@ func FireProceduralTextureFromJSObject(p js.Value) *FireProceduralTexture {
 	return &FireProceduralTexture{ProceduralTextureFromJSObject(p)}
 }
 
+// NewFireProceduralTextureOpts contains optional parameters for NewFireProceduralTexture.
+type NewFireProceduralTextureOpts struct {
+	FallbackTexture *Texture
+
+	GenerateMipMaps *bool
+}
+
 // NewFireProceduralTexture returns a new FireProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fireproceduraltexture
-func (b *Babylon) NewFireProceduralTexture(todo parameters) *FireProceduralTexture {
-	p := b.ctx.Get("FireProceduralTexture").New(todo)
+func (b *Babylon) NewFireProceduralTexture(name string, size float64, scene *Scene, opts *NewFireProceduralTextureOpts) *FireProceduralTexture {
+	if opts == nil {
+		opts = &NewFireProceduralTextureOpts{}
+	}
+
+	p := b.ctx.Get("FireProceduralTexture").New(name, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps.JSObject())
 	return FireProceduralTextureFromJSObject(p)
 }
 

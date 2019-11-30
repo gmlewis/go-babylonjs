@@ -11,10 +11,9 @@ import (
 // As it is just a mesh, the PointCloudSystem has all the same properties as any other BJS mesh : not more, not less. It can be scaled, rotated, translated, enlighted, textured, moved, etc.
 // The PointCloudSytem is also a particle system, with each point being a particle. It provides some methods to manage the particles.
 // However it is behavior agnostic. This means it has no emitter, no particle physics, no particle recycler. You have to implement your own behavior.
-
 //
 // Full documentation here : TO BE ENTERED
-type PointsCloudSystem struct{}
+type PointsCloudSystem struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (p *PointsCloudSystem) JSObject() js.Value { return p.p }
@@ -30,11 +29,20 @@ func PointsCloudSystemFromJSObject(p js.Value) *PointsCloudSystem {
 	return &PointsCloudSystem{p: p}
 }
 
+// NewPointsCloudSystemOpts contains optional parameters for NewPointsCloudSystem.
+type NewPointsCloudSystemOpts struct {
+	Options js.Value
+}
+
 // NewPointsCloudSystem returns a new PointsCloudSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem
-func (b *Babylon) NewPointsCloudSystem(todo parameters) *PointsCloudSystem {
-	p := b.ctx.Get("PointsCloudSystem").New(todo)
+func (b *Babylon) NewPointsCloudSystem(name string, pointSize float64, scene *Scene, opts *NewPointsCloudSystemOpts) *PointsCloudSystem {
+	if opts == nil {
+		opts = &NewPointsCloudSystemOpts{}
+	}
+
+	p := b.ctx.Get("PointsCloudSystem").New(name, pointSize, scene.JSObject(), opts.Options)
 	return PointsCloudSystemFromJSObject(p)
 }
 

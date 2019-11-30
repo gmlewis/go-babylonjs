@@ -8,7 +8,6 @@ import (
 
 // Texture represents a babylon.js Texture.
 // This represents a texture in babylon. It can be easily loaded from a network, base64 or html input.
-
 //
 // See: http://doc.babylonjs.com/babylon101/materials#texture
 type Texture struct{ *BaseTexture }
@@ -27,11 +26,36 @@ func TextureFromJSObject(p js.Value) *Texture {
 	return &Texture{BaseTextureFromJSObject(p)}
 }
 
+// NewTextureOpts contains optional parameters for NewTexture.
+type NewTextureOpts struct {
+	NoMipmap *bool
+
+	InvertY *bool
+
+	SamplingMode *float64
+
+	OnLoad *func()
+
+	OnError *func()
+
+	Buffer *string
+
+	DeleteBuffer *bool
+
+	Format *float64
+
+	MimeType *string
+}
+
 // NewTexture returns a new Texture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture
-func (b *Babylon) NewTexture(todo parameters) *Texture {
-	p := b.ctx.Get("Texture").New(todo)
+func (b *Babylon) NewTexture(url string, sceneOrEngine *Scene, opts *NewTextureOpts) *Texture {
+	if opts == nil {
+		opts = &NewTextureOpts{}
+	}
+
+	p := b.ctx.Get("Texture").New(url, sceneOrEngine.JSObject(), opts.NoMipmap.JSObject(), opts.InvertY.JSObject(), opts.SamplingMode, opts.OnLoad, opts.OnError, opts.Buffer, opts.DeleteBuffer.JSObject(), opts.Format, opts.MimeType)
 	return TextureFromJSObject(p)
 }
 

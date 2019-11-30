@@ -8,7 +8,7 @@ import (
 
 // PathCursor represents a babylon.js PathCursor.
 // A cursor which tracks a point on a path
-type PathCursor struct{}
+type PathCursor struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (p *PathCursor) JSObject() js.Value { return p.p }
@@ -27,8 +27,8 @@ func PathCursorFromJSObject(p js.Value) *PathCursor {
 // NewPathCursor returns a new PathCursor object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pathcursor
-func (b *Babylon) NewPathCursor(todo parameters) *PathCursor {
-	p := b.ctx.Get("PathCursor").New(todo)
+func (b *Babylon) NewPathCursor(path *Path2) *PathCursor {
+	p := b.ctx.Get("PathCursor").New(path.JSObject())
 	return PathCursorFromJSObject(p)
 }
 

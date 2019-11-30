@@ -8,7 +8,6 @@ import (
 
 // BounceEase represents a babylon.js BounceEase.
 // Easing function with a bouncing shape (see link below).
-
 //
 // See: http://doc.babylonjs.com/babylon101/animations#easing-functions
 type BounceEase struct{ *EasingFunction }
@@ -27,11 +26,22 @@ func BounceEaseFromJSObject(p js.Value) *BounceEase {
 	return &BounceEase{EasingFunctionFromJSObject(p)}
 }
 
+// NewBounceEaseOpts contains optional parameters for NewBounceEase.
+type NewBounceEaseOpts struct {
+	Bounces *float64
+
+	Bounciness *float64
+}
+
 // NewBounceEase returns a new BounceEase object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bounceease
-func (b *Babylon) NewBounceEase(todo parameters) *BounceEase {
-	p := b.ctx.Get("BounceEase").New(todo)
+func (b *Babylon) NewBounceEase(opts *NewBounceEaseOpts) *BounceEase {
+	if opts == nil {
+		opts = &NewBounceEaseOpts{}
+	}
+
+	p := b.ctx.Get("BounceEase").New(opts.Bounces, opts.Bounciness)
 	return BounceEaseFromJSObject(p)
 }
 

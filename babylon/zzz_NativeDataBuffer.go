@@ -24,12 +24,4 @@ func NativeDataBufferFromJSObject(p js.Value) *NativeDataBuffer {
 	return &NativeDataBuffer{DataBufferFromJSObject(p)}
 }
 
-// NewNativeDataBuffer returns a new NativeDataBuffer object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nativedatabuffer
-func (b *Babylon) NewNativeDataBuffer(todo parameters) *NativeDataBuffer {
-	p := b.ctx.Get("NativeDataBuffer").New(todo)
-	return NativeDataBufferFromJSObject(p)
-}
-
 // TODO: methods

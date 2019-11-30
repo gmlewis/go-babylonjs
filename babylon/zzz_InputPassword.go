@@ -24,11 +24,22 @@ func InputPasswordFromJSObject(p js.Value) *InputPassword {
 	return &InputPassword{InputTextFromJSObject(p)}
 }
 
+// NewInputPasswordOpts contains optional parameters for NewInputPassword.
+type NewInputPasswordOpts struct {
+	Name *string
+
+	Text *string
+}
+
 // NewInputPassword returns a new InputPassword object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputpassword
-func (b *Babylon) NewInputPassword(todo parameters) *InputPassword {
-	p := b.ctx.Get("InputPassword").New(todo)
+func (b *Babylon) NewInputPassword(opts *NewInputPasswordOpts) *InputPassword {
+	if opts == nil {
+		opts = &NewInputPasswordOpts{}
+	}
+
+	p := b.ctx.Get("InputPassword").New(opts.Name, opts.Text)
 	return InputPasswordFromJSObject(p)
 }
 

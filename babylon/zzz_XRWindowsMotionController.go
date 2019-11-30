@@ -27,8 +27,8 @@ func XRWindowsMotionControllerFromJSObject(p js.Value) *XRWindowsMotionControlle
 // NewXRWindowsMotionController returns a new XRWindowsMotionController object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.xrwindowsmotioncontroller
-func (b *Babylon) NewXRWindowsMotionController(todo parameters) *XRWindowsMotionController {
-	p := b.ctx.Get("XRWindowsMotionController").New(todo)
+func (b *Babylon) NewXRWindowsMotionController(gamepadInfo interface{}) *XRWindowsMotionController {
+	p := b.ctx.Get("XRWindowsMotionController").New(gamepadInfo)
 	return XRWindowsMotionControllerFromJSObject(p)
 }
 

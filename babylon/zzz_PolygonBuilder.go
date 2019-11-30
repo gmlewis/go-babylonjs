@@ -8,7 +8,7 @@ import (
 
 // PolygonBuilder represents a babylon.js PolygonBuilder.
 // Class containing static functions to help procedurally build meshes
-type PolygonBuilder struct{}
+type PolygonBuilder struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (p *PolygonBuilder) JSObject() js.Value { return p.p }
@@ -22,14 +22,6 @@ func (b *Babylon) PolygonBuilder() *PolygonBuilder {
 // PolygonBuilderFromJSObject returns a wrapped PolygonBuilder JavaScript class.
 func PolygonBuilderFromJSObject(p js.Value) *PolygonBuilder {
 	return &PolygonBuilder{p: p}
-}
-
-// NewPolygonBuilder returns a new PolygonBuilder object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.polygonbuilder
-func (b *Babylon) NewPolygonBuilder(todo parameters) *PolygonBuilder {
-	p := b.ctx.Get("PolygonBuilder").New(todo)
-	return PolygonBuilderFromJSObject(p)
 }
 
 // TODO: methods

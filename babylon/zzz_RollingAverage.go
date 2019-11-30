@@ -8,10 +8,9 @@ import (
 
 // RollingAverage represents a babylon.js RollingAverage.
 // RollingAverage
-
 //
 // Utility to efficiently compute the rolling average and variance over a sliding window of samples
-type RollingAverage struct{}
+type RollingAverage struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (r *RollingAverage) JSObject() js.Value { return r.p }
@@ -30,8 +29,8 @@ func RollingAverageFromJSObject(p js.Value) *RollingAverage {
 // NewRollingAverage returns a new RollingAverage object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rollingaverage
-func (b *Babylon) NewRollingAverage(todo parameters) *RollingAverage {
-	p := b.ctx.Get("RollingAverage").New(todo)
+func (b *Babylon) NewRollingAverage(length float64) *RollingAverage {
+	p := b.ctx.Get("RollingAverage").New(length)
 	return RollingAverageFromJSObject(p)
 }
 

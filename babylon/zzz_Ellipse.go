@@ -24,11 +24,20 @@ func EllipseFromJSObject(p js.Value) *Ellipse {
 	return &Ellipse{ContainerFromJSObject(p)}
 }
 
+// NewEllipseOpts contains optional parameters for NewEllipse.
+type NewEllipseOpts struct {
+	Name *string
+}
+
 // NewEllipse returns a new Ellipse object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ellipse
-func (b *Babylon) NewEllipse(todo parameters) *Ellipse {
-	p := b.ctx.Get("Ellipse").New(todo)
+func (b *Babylon) NewEllipse(opts *NewEllipseOpts) *Ellipse {
+	if opts == nil {
+		opts = &NewEllipseOpts{}
+	}
+
+	p := b.ctx.Get("Ellipse").New(opts.Name)
 	return EllipseFromJSObject(p)
 }
 

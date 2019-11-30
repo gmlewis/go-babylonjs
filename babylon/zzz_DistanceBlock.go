@@ -27,8 +27,8 @@ func DistanceBlockFromJSObject(p js.Value) *DistanceBlock {
 // NewDistanceBlock returns a new DistanceBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.distanceblock
-func (b *Babylon) NewDistanceBlock(todo parameters) *DistanceBlock {
-	p := b.ctx.Get("DistanceBlock").New(todo)
+func (b *Babylon) NewDistanceBlock(name string) *DistanceBlock {
+	p := b.ctx.Get("DistanceBlock").New(name)
 	return DistanceBlockFromJSObject(p)
 }
 

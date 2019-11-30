@@ -24,11 +24,28 @@ func MeshFromJSObject(p js.Value) *Mesh {
 	return &Mesh{AbstractMeshFromJSObject(p)}
 }
 
+// NewMeshOpts contains optional parameters for NewMesh.
+type NewMeshOpts struct {
+	Scene *Scene
+
+	Parent *Node
+
+	Source *Mesh
+
+	DoNotCloneChildren *bool
+
+	ClonePhysicsImpostor *bool
+}
+
 // NewMesh returns a new Mesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh
-func (b *Babylon) NewMesh(todo parameters) *Mesh {
-	p := b.ctx.Get("Mesh").New(todo)
+func (b *Babylon) NewMesh(name string, opts *NewMeshOpts) *Mesh {
+	if opts == nil {
+		opts = &NewMeshOpts{}
+	}
+
+	p := b.ctx.Get("Mesh").New(name, opts.Scene.JSObject(), opts.Parent.JSObject(), opts.Source.JSObject(), opts.DoNotCloneChildren.JSObject(), opts.ClonePhysicsImpostor.JSObject())
 	return MeshFromJSObject(p)
 }
 

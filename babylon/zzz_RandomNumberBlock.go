@@ -27,8 +27,8 @@ func RandomNumberBlockFromJSObject(p js.Value) *RandomNumberBlock {
 // NewRandomNumberBlock returns a new RandomNumberBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.randomnumberblock
-func (b *Babylon) NewRandomNumberBlock(todo parameters) *RandomNumberBlock {
-	p := b.ctx.Get("RandomNumberBlock").New(todo)
+func (b *Babylon) NewRandomNumberBlock(name string) *RandomNumberBlock {
+	p := b.ctx.Get("RandomNumberBlock").New(name)
 	return RandomNumberBlockFromJSObject(p)
 }
 

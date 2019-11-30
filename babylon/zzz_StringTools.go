@@ -8,7 +8,7 @@ import (
 
 // StringTools represents a babylon.js StringTools.
 // Helper to manipulate strings
-type StringTools struct{}
+type StringTools struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (s *StringTools) JSObject() js.Value { return s.p }
@@ -22,14 +22,6 @@ func (b *Babylon) StringTools() *StringTools {
 // StringToolsFromJSObject returns a wrapped StringTools JavaScript class.
 func StringToolsFromJSObject(p js.Value) *StringTools {
 	return &StringTools{p: p}
-}
-
-// NewStringTools returns a new StringTools object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.stringtools
-func (b *Babylon) NewStringTools(todo parameters) *StringTools {
-	p := b.ctx.Get("StringTools").New(todo)
-	return StringToolsFromJSObject(p)
 }
 
 // TODO: methods

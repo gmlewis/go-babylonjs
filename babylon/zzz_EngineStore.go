@@ -9,7 +9,7 @@ import (
 // EngineStore represents a babylon.js EngineStore.
 // The engine store class is responsible to hold all the instances of Engine and Scene created
 // during the life time of the application.
-type EngineStore struct{}
+type EngineStore struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (e *EngineStore) JSObject() js.Value { return e.p }
@@ -23,14 +23,6 @@ func (b *Babylon) EngineStore() *EngineStore {
 // EngineStoreFromJSObject returns a wrapped EngineStore JavaScript class.
 func EngineStoreFromJSObject(p js.Value) *EngineStore {
 	return &EngineStore{p: p}
-}
-
-// NewEngineStore returns a new EngineStore object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.enginestore
-func (b *Babylon) NewEngineStore(todo parameters) *EngineStore {
-	p := b.ctx.Get("EngineStore").New(todo)
-	return EngineStoreFromJSObject(p)
 }
 
 // TODO: methods

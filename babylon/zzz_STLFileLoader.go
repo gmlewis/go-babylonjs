@@ -9,7 +9,7 @@ import (
 // STLFileLoader represents a babylon.js STLFileLoader.
 // STL file type loader.
 // This is a babylon scene loader plugin.
-type STLFileLoader struct{}
+type STLFileLoader struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (s *STLFileLoader) JSObject() js.Value { return s.p }
@@ -23,14 +23,6 @@ func (b *Babylon) STLFileLoader() *STLFileLoader {
 // STLFileLoaderFromJSObject returns a wrapped STLFileLoader JavaScript class.
 func STLFileLoaderFromJSObject(p js.Value) *STLFileLoader {
 	return &STLFileLoader{p: p}
-}
-
-// NewSTLFileLoader returns a new STLFileLoader object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.stlfileloader
-func (b *Babylon) NewSTLFileLoader(todo parameters) *STLFileLoader {
-	p := b.ctx.Get("STLFileLoader").New(todo)
-	return STLFileLoaderFromJSObject(p)
 }
 
 // TODO: methods

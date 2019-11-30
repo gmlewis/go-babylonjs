@@ -27,8 +27,8 @@ func AssetContainerFromJSObject(p js.Value) *AssetContainer {
 // NewAssetContainer returns a new AssetContainer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetcontainer
-func (b *Babylon) NewAssetContainer(todo parameters) *AssetContainer {
-	p := b.ctx.Get("AssetContainer").New(todo)
+func (b *Babylon) NewAssetContainer(scene *Scene) *AssetContainer {
+	p := b.ctx.Get("AssetContainer").New(scene.JSObject())
 	return AssetContainerFromJSObject(p)
 }
 

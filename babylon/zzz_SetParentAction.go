@@ -8,7 +8,6 @@ import (
 
 // SetParentAction represents a babylon.js SetParentAction.
 // This defines an action responsible to set the parent property of the target once triggered.
-
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_actions
 type SetParentAction struct{ *Action }
@@ -27,11 +26,20 @@ func SetParentActionFromJSObject(p js.Value) *SetParentAction {
 	return &SetParentAction{ActionFromJSObject(p)}
 }
 
+// NewSetParentActionOpts contains optional parameters for NewSetParentAction.
+type NewSetParentActionOpts struct {
+	Condition *Condition
+}
+
 // NewSetParentAction returns a new SetParentAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.setparentaction
-func (b *Babylon) NewSetParentAction(todo parameters) *SetParentAction {
-	p := b.ctx.Get("SetParentAction").New(todo)
+func (b *Babylon) NewSetParentAction(triggerOptions interface{}, target interface{}, parent interface{}, opts *NewSetParentActionOpts) *SetParentAction {
+	if opts == nil {
+		opts = &NewSetParentActionOpts{}
+	}
+
+	p := b.ctx.Get("SetParentAction").New(triggerOptions, target, parent, opts.Condition.JSObject())
 	return SetParentActionFromJSObject(p)
 }
 

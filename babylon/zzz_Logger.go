@@ -9,7 +9,7 @@ import (
 // Logger represents a babylon.js Logger.
 // Logger used througouht the application to allow configuration of
 // the log level required for the messages.
-type Logger struct{}
+type Logger struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (l *Logger) JSObject() js.Value { return l.p }
@@ -23,14 +23,6 @@ func (b *Babylon) Logger() *Logger {
 // LoggerFromJSObject returns a wrapped Logger JavaScript class.
 func LoggerFromJSObject(p js.Value) *Logger {
 	return &Logger{p: p}
-}
-
-// NewLogger returns a new Logger object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.logger
-func (b *Babylon) NewLogger(todo parameters) *Logger {
-	p := b.ctx.Get("Logger").New(todo)
-	return LoggerFromJSObject(p)
 }
 
 // TODO: methods

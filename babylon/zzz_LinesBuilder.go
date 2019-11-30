@@ -8,7 +8,7 @@ import (
 
 // LinesBuilder represents a babylon.js LinesBuilder.
 // Class containing static functions to help procedurally build meshes
-type LinesBuilder struct{}
+type LinesBuilder struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (l *LinesBuilder) JSObject() js.Value { return l.p }
@@ -22,14 +22,6 @@ func (b *Babylon) LinesBuilder() *LinesBuilder {
 // LinesBuilderFromJSObject returns a wrapped LinesBuilder JavaScript class.
 func LinesBuilderFromJSObject(p js.Value) *LinesBuilder {
 	return &LinesBuilder{p: p}
-}
-
-// NewLinesBuilder returns a new LinesBuilder object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.linesbuilder
-func (b *Babylon) NewLinesBuilder(todo parameters) *LinesBuilder {
-	p := b.ctx.Get("LinesBuilder").New(todo)
-	return LinesBuilderFromJSObject(p)
 }
 
 // TODO: methods

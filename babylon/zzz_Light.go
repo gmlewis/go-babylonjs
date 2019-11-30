@@ -29,8 +29,8 @@ func LightFromJSObject(p js.Value) *Light {
 // NewLight returns a new Light object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light
-func (b *Babylon) NewLight(todo parameters) *Light {
-	p := b.ctx.Get("Light").New(todo)
+func (b *Babylon) NewLight(name string, scene *Scene) *Light {
+	p := b.ctx.Get("Light").New(name, scene.JSObject())
 	return LightFromJSObject(p)
 }
 

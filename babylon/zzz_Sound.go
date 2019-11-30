@@ -9,10 +9,9 @@ import (
 // Sound represents a babylon.js Sound.
 // Defines a sound that can be played in the application.
 // The sound can either be an ambient track or a simple sound played in reaction to a user action.
-
 //
 // See: http://doc.babylonjs.com/how_to/playing_sounds_and_music
-type Sound struct{}
+type Sound struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (s *Sound) JSObject() js.Value { return s.p }
@@ -28,11 +27,22 @@ func SoundFromJSObject(p js.Value) *Sound {
 	return &Sound{p: p}
 }
 
+// NewSoundOpts contains optional parameters for NewSound.
+type NewSoundOpts struct {
+	ReadyToPlayCallback *func()
+
+	Options *ISoundOptions
+}
+
 // NewSound returns a new Sound object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound
-func (b *Babylon) NewSound(todo parameters) *Sound {
-	p := b.ctx.Get("Sound").New(todo)
+func (b *Babylon) NewSound(name string, urlOrArrayBuffer interface{}, scene *Scene, opts *NewSoundOpts) *Sound {
+	if opts == nil {
+		opts = &NewSoundOpts{}
+	}
+
+	p := b.ctx.Get("Sound").New(name, urlOrArrayBuffer, scene.JSObject(), opts.ReadyToPlayCallback, opts.Options.JSObject())
 	return SoundFromJSObject(p)
 }
 

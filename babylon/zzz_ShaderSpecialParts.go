@@ -8,7 +8,7 @@ import (
 
 // ShaderSpecialParts represents a babylon.js ShaderSpecialParts.
 //
-type ShaderSpecialParts struct{}
+type ShaderSpecialParts struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (s *ShaderSpecialParts) JSObject() js.Value { return s.p }
@@ -27,8 +27,8 @@ func ShaderSpecialPartsFromJSObject(p js.Value) *ShaderSpecialParts {
 // NewShaderSpecialParts returns a new ShaderSpecialParts object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shaderspecialparts
-func (b *Babylon) NewShaderSpecialParts(todo parameters) *ShaderSpecialParts {
-	p := b.ctx.Get("ShaderSpecialParts").New(todo)
+func (b *Babylon) NewShaderSpecialParts() *ShaderSpecialParts {
+	p := b.ctx.Get("ShaderSpecialParts").New()
 	return ShaderSpecialPartsFromJSObject(p)
 }
 

@@ -10,7 +10,7 @@ import (
 // &lt;a href=&#34;https://github.com/KhronosGroup/glTF/pull/1688&#34;&gt;Proposed Specification&lt;/a&gt;
 // &lt;a href=&#34;https://www.babylonjs-playground.com/frame.html#BNIZX6#4&#34;&gt;Playground Sample&lt;/a&gt;
 // !!! Experimental Extension Subject to Changes !!!
-type KHR_materials_sheen struct{}
+type KHR_materials_sheen struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (k *KHR_materials_sheen) JSObject() js.Value { return k.p }
@@ -24,14 +24,6 @@ func (b *Babylon) KHR_materials_sheen() *KHR_materials_sheen {
 // KHR_materials_sheenFromJSObject returns a wrapped KHR_materials_sheen JavaScript class.
 func KHR_materials_sheenFromJSObject(p js.Value) *KHR_materials_sheen {
 	return &KHR_materials_sheen{p: p}
-}
-
-// NewKHR_materials_sheen returns a new KHR_materials_sheen object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.khr_materials_sheen
-func (b *Babylon) NewKHR_materials_sheen(todo parameters) *KHR_materials_sheen {
-	p := b.ctx.Get("KHR_materials_sheen").New(todo)
-	return KHR_materials_sheenFromJSObject(p)
 }
 
 // TODO: methods

@@ -27,8 +27,8 @@ func LengthBlockFromJSObject(p js.Value) *LengthBlock {
 // NewLengthBlock returns a new LengthBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lengthblock
-func (b *Babylon) NewLengthBlock(todo parameters) *LengthBlock {
-	p := b.ctx.Get("LengthBlock").New(todo)
+func (b *Babylon) NewLengthBlock(name string) *LengthBlock {
+	p := b.ctx.Get("LengthBlock").New(name)
 	return LengthBlockFromJSObject(p)
 }
 

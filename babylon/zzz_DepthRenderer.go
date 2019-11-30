@@ -9,7 +9,7 @@ import (
 // DepthRenderer represents a babylon.js DepthRenderer.
 // This represents a depth renderer in Babylon.
 // A depth renderer will render to it&amp;#39;s depth map every frame which can be displayed or used in post processing
-type DepthRenderer struct{}
+type DepthRenderer struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (d *DepthRenderer) JSObject() js.Value { return d.p }
@@ -25,11 +25,24 @@ func DepthRendererFromJSObject(p js.Value) *DepthRenderer {
 	return &DepthRenderer{p: p}
 }
 
+// NewDepthRendererOpts contains optional parameters for NewDepthRenderer.
+type NewDepthRendererOpts struct {
+	Type *float64
+
+	Camera *Camera
+
+	StoreNonLinearDepth *bool
+}
+
 // NewDepthRenderer returns a new DepthRenderer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthrenderer
-func (b *Babylon) NewDepthRenderer(todo parameters) *DepthRenderer {
-	p := b.ctx.Get("DepthRenderer").New(todo)
+func (b *Babylon) NewDepthRenderer(scene *Scene, opts *NewDepthRendererOpts) *DepthRenderer {
+	if opts == nil {
+		opts = &NewDepthRendererOpts{}
+	}
+
+	p := b.ctx.Get("DepthRenderer").New(scene.JSObject(), opts.Type, opts.Camera.JSObject(), opts.StoreNonLinearDepth.JSObject())
 	return DepthRendererFromJSObject(p)
 }
 

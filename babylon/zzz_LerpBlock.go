@@ -27,8 +27,8 @@ func LerpBlockFromJSObject(p js.Value) *LerpBlock {
 // NewLerpBlock returns a new LerpBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lerpblock
-func (b *Babylon) NewLerpBlock(todo parameters) *LerpBlock {
-	p := b.ctx.Get("LerpBlock").New(todo)
+func (b *Babylon) NewLerpBlock(name string) *LerpBlock {
+	p := b.ctx.Get("LerpBlock").New(name)
 	return LerpBlockFromJSObject(p)
 }
 

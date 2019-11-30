@@ -8,7 +8,7 @@ import (
 
 // Material represents a babylon.js Material.
 // Base class for the main features of a material in Babylon.js
-type Material struct{}
+type Material struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (m *Material) JSObject() js.Value { return m.p }
@@ -24,11 +24,20 @@ func MaterialFromJSObject(p js.Value) *Material {
 	return &Material{p: p}
 }
 
+// NewMaterialOpts contains optional parameters for NewMaterial.
+type NewMaterialOpts struct {
+	DoNotAdd *bool
+}
+
 // NewMaterial returns a new Material object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material
-func (b *Babylon) NewMaterial(todo parameters) *Material {
-	p := b.ctx.Get("Material").New(todo)
+func (b *Babylon) NewMaterial(name string, scene *Scene, opts *NewMaterialOpts) *Material {
+	if opts == nil {
+		opts = &NewMaterialOpts{}
+	}
+
+	p := b.ctx.Get("Material").New(name, scene.JSObject(), opts.DoNotAdd.JSObject())
 	return MaterialFromJSObject(p)
 }
 

@@ -27,8 +27,8 @@ func VectorMergerBlockFromJSObject(p js.Value) *VectorMergerBlock {
 // NewVectorMergerBlock returns a new VectorMergerBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vectormergerblock
-func (b *Babylon) NewVectorMergerBlock(todo parameters) *VectorMergerBlock {
-	p := b.ctx.Get("VectorMergerBlock").New(todo)
+func (b *Babylon) NewVectorMergerBlock(name string) *VectorMergerBlock {
+	p := b.ctx.Get("VectorMergerBlock").New(name)
 	return VectorMergerBlockFromJSObject(p)
 }
 

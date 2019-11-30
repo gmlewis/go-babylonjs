@@ -27,8 +27,8 @@ func ScaleBlockFromJSObject(p js.Value) *ScaleBlock {
 // NewScaleBlock returns a new ScaleBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scaleblock
-func (b *Babylon) NewScaleBlock(todo parameters) *ScaleBlock {
-	p := b.ctx.Get("ScaleBlock").New(todo)
+func (b *Babylon) NewScaleBlock(name string) *ScaleBlock {
+	p := b.ctx.Get("ScaleBlock").New(name)
 	return ScaleBlockFromJSObject(p)
 }
 

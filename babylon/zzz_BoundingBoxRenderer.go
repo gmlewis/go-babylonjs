@@ -9,7 +9,7 @@ import (
 // BoundingBoxRenderer represents a babylon.js BoundingBoxRenderer.
 // Component responsible of rendering the bounding box of the meshes in a scene.
 // This is usually used through the mesh.showBoundingBox or the scene.forceShowBoundingBoxes properties
-type BoundingBoxRenderer struct{}
+type BoundingBoxRenderer struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (b *BoundingBoxRenderer) JSObject() js.Value { return b.p }
@@ -28,8 +28,8 @@ func BoundingBoxRendererFromJSObject(p js.Value) *BoundingBoxRenderer {
 // NewBoundingBoxRenderer returns a new BoundingBoxRenderer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingboxrenderer
-func (b *Babylon) NewBoundingBoxRenderer(todo parameters) *BoundingBoxRenderer {
-	p := b.ctx.Get("BoundingBoxRenderer").New(todo)
+func (b *Babylon) NewBoundingBoxRenderer(scene *Scene) *BoundingBoxRenderer {
+	p := b.ctx.Get("BoundingBoxRenderer").New(scene.JSObject())
 	return BoundingBoxRendererFromJSObject(p)
 }
 

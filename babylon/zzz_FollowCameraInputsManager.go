@@ -9,7 +9,6 @@ import (
 // FollowCameraInputsManager represents a babylon.js FollowCameraInputsManager.
 // Default Inputs manager for the FollowCamera.
 // It groups all the default supported inputs for ease of use.
-
 //
 // See: http://doc.babylonjs.com/how_to/customizing_camera_inputs
 type FollowCameraInputsManager struct {
@@ -34,8 +33,8 @@ func FollowCameraInputsManagerFromJSObject(p js.Value) *FollowCameraInputsManage
 // NewFollowCameraInputsManager returns a new FollowCameraInputsManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamerainputsmanager
-func (b *Babylon) NewFollowCameraInputsManager(todo parameters) *FollowCameraInputsManager {
-	p := b.ctx.Get("FollowCameraInputsManager").New(todo)
+func (b *Babylon) NewFollowCameraInputsManager(camera *FollowCamera) *FollowCameraInputsManager {
+	p := b.ctx.Get("FollowCameraInputsManager").New(camera.JSObject())
 	return FollowCameraInputsManagerFromJSObject(p)
 }
 

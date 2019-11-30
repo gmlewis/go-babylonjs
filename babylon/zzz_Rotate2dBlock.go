@@ -27,8 +27,8 @@ func Rotate2dBlockFromJSObject(p js.Value) *Rotate2dBlock {
 // NewRotate2dBlock returns a new Rotate2dBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rotate2dblock
-func (b *Babylon) NewRotate2dBlock(todo parameters) *Rotate2dBlock {
-	p := b.ctx.Get("Rotate2dBlock").New(todo)
+func (b *Babylon) NewRotate2dBlock(name string) *Rotate2dBlock {
+	p := b.ctx.Get("Rotate2dBlock").New(name)
 	return Rotate2dBlockFromJSObject(p)
 }
 

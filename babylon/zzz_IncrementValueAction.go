@@ -9,7 +9,6 @@ import (
 // IncrementValueAction represents a babylon.js IncrementValueAction.
 // This defines an action responsible to increment the target value
 // to a desired value once triggered.
-
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_actions
 type IncrementValueAction struct{ *Action }
@@ -28,11 +27,20 @@ func IncrementValueActionFromJSObject(p js.Value) *IncrementValueAction {
 	return &IncrementValueAction{ActionFromJSObject(p)}
 }
 
+// NewIncrementValueActionOpts contains optional parameters for NewIncrementValueAction.
+type NewIncrementValueActionOpts struct {
+	Condition *Condition
+}
+
 // NewIncrementValueAction returns a new IncrementValueAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.incrementvalueaction
-func (b *Babylon) NewIncrementValueAction(todo parameters) *IncrementValueAction {
-	p := b.ctx.Get("IncrementValueAction").New(todo)
+func (b *Babylon) NewIncrementValueAction(triggerOptions interface{}, target interface{}, propertyPath string, value interface{}, opts *NewIncrementValueActionOpts) *IncrementValueAction {
+	if opts == nil {
+		opts = &NewIncrementValueActionOpts{}
+	}
+
+	p := b.ctx.Get("IncrementValueAction").New(triggerOptions, target, propertyPath, value, opts.Condition.JSObject())
 	return IncrementValueActionFromJSObject(p)
 }
 

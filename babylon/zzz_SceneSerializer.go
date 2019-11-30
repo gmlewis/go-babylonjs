@@ -8,7 +8,7 @@ import (
 
 // SceneSerializer represents a babylon.js SceneSerializer.
 // Class used to serialize a scene into a string
-type SceneSerializer struct{}
+type SceneSerializer struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (s *SceneSerializer) JSObject() js.Value { return s.p }
@@ -22,14 +22,6 @@ func (b *Babylon) SceneSerializer() *SceneSerializer {
 // SceneSerializerFromJSObject returns a wrapped SceneSerializer JavaScript class.
 func SceneSerializerFromJSObject(p js.Value) *SceneSerializer {
 	return &SceneSerializer{p: p}
-}
-
-// NewSceneSerializer returns a new SceneSerializer object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.sceneserializer
-func (b *Babylon) NewSceneSerializer(todo parameters) *SceneSerializer {
-	p := b.ctx.Get("SceneSerializer").New(todo)
-	return SceneSerializerFromJSObject(p)
 }
 
 // TODO: methods

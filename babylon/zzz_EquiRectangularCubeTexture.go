@@ -24,11 +24,26 @@ func EquiRectangularCubeTextureFromJSObject(p js.Value) *EquiRectangularCubeText
 	return &EquiRectangularCubeTexture{BaseTextureFromJSObject(p)}
 }
 
+// NewEquiRectangularCubeTextureOpts contains optional parameters for NewEquiRectangularCubeTexture.
+type NewEquiRectangularCubeTextureOpts struct {
+	NoMipmap *bool
+
+	GammaSpace *bool
+
+	OnLoad *func()
+
+	OnError *func()
+}
+
 // NewEquiRectangularCubeTexture returns a new EquiRectangularCubeTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture
-func (b *Babylon) NewEquiRectangularCubeTexture(todo parameters) *EquiRectangularCubeTexture {
-	p := b.ctx.Get("EquiRectangularCubeTexture").New(todo)
+func (b *Babylon) NewEquiRectangularCubeTexture(url string, scene *Scene, size float64, opts *NewEquiRectangularCubeTextureOpts) *EquiRectangularCubeTexture {
+	if opts == nil {
+		opts = &NewEquiRectangularCubeTextureOpts{}
+	}
+
+	p := b.ctx.Get("EquiRectangularCubeTexture").New(url, scene.JSObject(), size, opts.NoMipmap.JSObject(), opts.GammaSpace.JSObject(), opts.OnLoad, opts.OnError)
 	return EquiRectangularCubeTextureFromJSObject(p)
 }
 

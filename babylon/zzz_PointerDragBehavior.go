@@ -8,7 +8,7 @@ import (
 
 // PointerDragBehavior represents a babylon.js PointerDragBehavior.
 // A behavior that when attached to a mesh will allow the mesh to be dragged around the screen based on pointer events
-type PointerDragBehavior struct{}
+type PointerDragBehavior struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (p *PointerDragBehavior) JSObject() js.Value { return p.p }
@@ -24,11 +24,20 @@ func PointerDragBehaviorFromJSObject(p js.Value) *PointerDragBehavior {
 	return &PointerDragBehavior{p: p}
 }
 
+// NewPointerDragBehaviorOpts contains optional parameters for NewPointerDragBehavior.
+type NewPointerDragBehaviorOpts struct {
+	Options js.Value
+}
+
 // NewPointerDragBehavior returns a new PointerDragBehavior object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior
-func (b *Babylon) NewPointerDragBehavior(todo parameters) *PointerDragBehavior {
-	p := b.ctx.Get("PointerDragBehavior").New(todo)
+func (b *Babylon) NewPointerDragBehavior(opts *NewPointerDragBehaviorOpts) *PointerDragBehavior {
+	if opts == nil {
+		opts = &NewPointerDragBehaviorOpts{}
+	}
+
+	p := b.ctx.Get("PointerDragBehavior").New(opts.Options)
 	return PointerDragBehaviorFromJSObject(p)
 }
 

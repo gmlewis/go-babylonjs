@@ -24,11 +24,24 @@ func AxisScaleGizmoFromJSObject(p js.Value) *AxisScaleGizmo {
 	return &AxisScaleGizmo{GizmoFromJSObject(p)}
 }
 
+// NewAxisScaleGizmoOpts contains optional parameters for NewAxisScaleGizmo.
+type NewAxisScaleGizmoOpts struct {
+	Color *Color3
+
+	GizmoLayer *UtilityLayerRenderer
+
+	Parent *ScaleGizmo
+}
+
 // NewAxisScaleGizmo returns a new AxisScaleGizmo object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axisscalegizmo
-func (b *Babylon) NewAxisScaleGizmo(todo parameters) *AxisScaleGizmo {
-	p := b.ctx.Get("AxisScaleGizmo").New(todo)
+func (b *Babylon) NewAxisScaleGizmo(dragAxis *Vector3, opts *NewAxisScaleGizmoOpts) *AxisScaleGizmo {
+	if opts == nil {
+		opts = &NewAxisScaleGizmoOpts{}
+	}
+
+	p := b.ctx.Get("AxisScaleGizmo").New(dragAxis.JSObject(), opts.Color.JSObject(), opts.GizmoLayer.JSObject(), opts.Parent.JSObject())
 	return AxisScaleGizmoFromJSObject(p)
 }
 

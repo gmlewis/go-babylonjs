@@ -9,7 +9,6 @@ import (
 // SetValueAction represents a babylon.js SetValueAction.
 // This defines an action responsible to set a property of the target
 // to a desired value once triggered.
-
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_actions
 type SetValueAction struct{ *Action }
@@ -28,11 +27,20 @@ func SetValueActionFromJSObject(p js.Value) *SetValueAction {
 	return &SetValueAction{ActionFromJSObject(p)}
 }
 
+// NewSetValueActionOpts contains optional parameters for NewSetValueAction.
+type NewSetValueActionOpts struct {
+	Condition *Condition
+}
+
 // NewSetValueAction returns a new SetValueAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.setvalueaction
-func (b *Babylon) NewSetValueAction(todo parameters) *SetValueAction {
-	p := b.ctx.Get("SetValueAction").New(todo)
+func (b *Babylon) NewSetValueAction(triggerOptions interface{}, target interface{}, propertyPath string, value interface{}, opts *NewSetValueActionOpts) *SetValueAction {
+	if opts == nil {
+		opts = &NewSetValueActionOpts{}
+	}
+
+	p := b.ctx.Get("SetValueAction").New(triggerOptions, target, propertyPath, value, opts.Condition.JSObject())
 	return SetValueActionFromJSObject(p)
 }
 

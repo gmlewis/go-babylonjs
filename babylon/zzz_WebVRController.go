@@ -27,8 +27,8 @@ func WebVRControllerFromJSObject(p js.Value) *WebVRController {
 // NewWebVRController returns a new WebVRController object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrcontroller
-func (b *Babylon) NewWebVRController(todo parameters) *WebVRController {
-	p := b.ctx.Get("WebVRController").New(todo)
+func (b *Babylon) NewWebVRController(vrGamepad interface{}) *WebVRController {
+	p := b.ctx.Get("WebVRController").New(vrGamepad)
 	return WebVRControllerFromJSObject(p)
 }
 

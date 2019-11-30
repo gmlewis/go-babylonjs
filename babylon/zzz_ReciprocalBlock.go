@@ -27,8 +27,8 @@ func ReciprocalBlockFromJSObject(p js.Value) *ReciprocalBlock {
 // NewReciprocalBlock returns a new ReciprocalBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.reciprocalblock
-func (b *Babylon) NewReciprocalBlock(todo parameters) *ReciprocalBlock {
-	p := b.ctx.Get("ReciprocalBlock").New(todo)
+func (b *Babylon) NewReciprocalBlock(name string) *ReciprocalBlock {
+	p := b.ctx.Get("ReciprocalBlock").New(name)
 	return ReciprocalBlockFromJSObject(p)
 }
 

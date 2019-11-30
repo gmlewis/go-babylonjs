@@ -9,7 +9,7 @@ import (
 // HemisphericParticleEmitter represents a babylon.js HemisphericParticleEmitter.
 // Particle emitter emitting particles from the inside of a hemisphere.
 // It emits the particles alongside the hemisphere radius. The emission direction might be randomized.
-type HemisphericParticleEmitter struct{}
+type HemisphericParticleEmitter struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (h *HemisphericParticleEmitter) JSObject() js.Value { return h.p }
@@ -25,11 +25,24 @@ func HemisphericParticleEmitterFromJSObject(p js.Value) *HemisphericParticleEmit
 	return &HemisphericParticleEmitter{p: p}
 }
 
+// NewHemisphericParticleEmitterOpts contains optional parameters for NewHemisphericParticleEmitter.
+type NewHemisphericParticleEmitterOpts struct {
+	Radius *float64
+
+	RadiusRange *float64
+
+	DirectionRandomizer *float64
+}
+
 // NewHemisphericParticleEmitter returns a new HemisphericParticleEmitter object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hemisphericparticleemitter
-func (b *Babylon) NewHemisphericParticleEmitter(todo parameters) *HemisphericParticleEmitter {
-	p := b.ctx.Get("HemisphericParticleEmitter").New(todo)
+func (b *Babylon) NewHemisphericParticleEmitter(opts *NewHemisphericParticleEmitterOpts) *HemisphericParticleEmitter {
+	if opts == nil {
+		opts = &NewHemisphericParticleEmitterOpts{}
+	}
+
+	p := b.ctx.Get("HemisphericParticleEmitter").New(opts.Radius, opts.RadiusRange, opts.DirectionRandomizer)
 	return HemisphericParticleEmitterFromJSObject(p)
 }
 

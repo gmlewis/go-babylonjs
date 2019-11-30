@@ -9,10 +9,9 @@ import (
 // PhysicsJoint represents a babylon.js PhysicsJoint.
 // This is a holder class for the physics joint created by the physics plugin
 // It holds a set of functions to control the underlying joint
-
 //
 // See: https://doc.babylonjs.com/how_to/using_the_physics_engine
-type PhysicsJoint struct{}
+type PhysicsJoint struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (p *PhysicsJoint) JSObject() js.Value { return p.p }
@@ -31,8 +30,8 @@ func PhysicsJointFromJSObject(p js.Value) *PhysicsJoint {
 // NewPhysicsJoint returns a new PhysicsJoint object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsjoint
-func (b *Babylon) NewPhysicsJoint(todo parameters) *PhysicsJoint {
-	p := b.ctx.Get("PhysicsJoint").New(todo)
+func (b *Babylon) NewPhysicsJoint(jsType float64, jointData js.Value) *PhysicsJoint {
+	p := b.ctx.Get("PhysicsJoint").New(jsType, jointData)
 	return PhysicsJointFromJSObject(p)
 }
 

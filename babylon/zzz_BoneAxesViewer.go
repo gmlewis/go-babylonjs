@@ -8,7 +8,6 @@ import (
 
 // BoneAxesViewer represents a babylon.js BoneAxesViewer.
 // The BoneAxesViewer will attach 3 axes to a specific bone of a specific mesh
-
 //
 // See: https://www.babylonjs-playground.com/#0DE8F4#8
 type BoneAxesViewer struct{ *AxesViewer }
@@ -27,11 +26,20 @@ func BoneAxesViewerFromJSObject(p js.Value) *BoneAxesViewer {
 	return &BoneAxesViewer{AxesViewerFromJSObject(p)}
 }
 
+// NewBoneAxesViewerOpts contains optional parameters for NewBoneAxesViewer.
+type NewBoneAxesViewerOpts struct {
+	ScaleLines *float64
+}
+
 // NewBoneAxesViewer returns a new BoneAxesViewer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boneaxesviewer
-func (b *Babylon) NewBoneAxesViewer(todo parameters) *BoneAxesViewer {
-	p := b.ctx.Get("BoneAxesViewer").New(todo)
+func (b *Babylon) NewBoneAxesViewer(scene *Scene, bone *Bone, mesh *Mesh, opts *NewBoneAxesViewerOpts) *BoneAxesViewer {
+	if opts == nil {
+		opts = &NewBoneAxesViewerOpts{}
+	}
+
+	p := b.ctx.Get("BoneAxesViewer").New(scene.JSObject(), bone.JSObject(), mesh.JSObject(), opts.ScaleLines)
 	return BoneAxesViewerFromJSObject(p)
 }
 

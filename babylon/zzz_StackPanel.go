@@ -24,11 +24,20 @@ func StackPanelFromJSObject(p js.Value) *StackPanel {
 	return &StackPanel{ContainerFromJSObject(p)}
 }
 
+// NewStackPanelOpts contains optional parameters for NewStackPanel.
+type NewStackPanelOpts struct {
+	Name *string
+}
+
 // NewStackPanel returns a new StackPanel object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stackpanel
-func (b *Babylon) NewStackPanel(todo parameters) *StackPanel {
-	p := b.ctx.Get("StackPanel").New(todo)
+func (b *Babylon) NewStackPanel(opts *NewStackPanelOpts) *StackPanel {
+	if opts == nil {
+		opts = &NewStackPanelOpts{}
+	}
+
+	p := b.ctx.Get("StackPanel").New(opts.Name)
 	return StackPanelFromJSObject(p)
 }
 

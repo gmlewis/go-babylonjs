@@ -27,8 +27,8 @@ func TransformBlockFromJSObject(p js.Value) *TransformBlock {
 // NewTransformBlock returns a new TransformBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformblock
-func (b *Babylon) NewTransformBlock(todo parameters) *TransformBlock {
-	p := b.ctx.Get("TransformBlock").New(todo)
+func (b *Babylon) NewTransformBlock(name string) *TransformBlock {
+	p := b.ctx.Get("TransformBlock").New(name)
 	return TransformBlockFromJSObject(p)
 }
 

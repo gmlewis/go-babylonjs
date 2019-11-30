@@ -8,7 +8,7 @@ import (
 
 // EffectWrapper represents a babylon.js EffectWrapper.
 // Wraps an effect to be used for rendering
-type EffectWrapper struct{}
+type EffectWrapper struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (e *EffectWrapper) JSObject() js.Value { return e.p }
@@ -27,8 +27,8 @@ func EffectWrapperFromJSObject(p js.Value) *EffectWrapper {
 // NewEffectWrapper returns a new EffectWrapper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectwrapper
-func (b *Babylon) NewEffectWrapper(todo parameters) *EffectWrapper {
-	p := b.ctx.Get("EffectWrapper").New(todo)
+func (b *Babylon) NewEffectWrapper(creationOptions js.Value) *EffectWrapper {
+	p := b.ctx.Get("EffectWrapper").New(creationOptions)
 	return EffectWrapperFromJSObject(p)
 }
 

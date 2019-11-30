@@ -8,7 +8,7 @@ import (
 
 // BasisFileInfo represents a babylon.js BasisFileInfo.
 // Info about the .basis files
-type BasisFileInfo struct{}
+type BasisFileInfo struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (b *BasisFileInfo) JSObject() js.Value { return b.p }
@@ -22,14 +22,6 @@ func (b *Babylon) BasisFileInfo() *BasisFileInfo {
 // BasisFileInfoFromJSObject returns a wrapped BasisFileInfo JavaScript class.
 func BasisFileInfoFromJSObject(p js.Value) *BasisFileInfo {
 	return &BasisFileInfo{p: p}
-}
-
-// NewBasisFileInfo returns a new BasisFileInfo object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.basisfileinfo
-func (b *Babylon) NewBasisFileInfo(todo parameters) *BasisFileInfo {
-	p := b.ctx.Get("BasisFileInfo").New(todo)
-	return BasisFileInfoFromJSObject(p)
 }
 
 // TODO: methods

@@ -8,7 +8,7 @@ import (
 
 // Scalar represents a babylon.js Scalar.
 // Scalar computation library
-type Scalar struct{}
+type Scalar struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (s *Scalar) JSObject() js.Value { return s.p }
@@ -22,14 +22,6 @@ func (b *Babylon) Scalar() *Scalar {
 // ScalarFromJSObject returns a wrapped Scalar JavaScript class.
 func ScalarFromJSObject(p js.Value) *Scalar {
 	return &Scalar{p: p}
-}
-
-// NewScalar returns a new Scalar object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.scalar
-func (b *Babylon) NewScalar(todo parameters) *Scalar {
-	p := b.ctx.Get("Scalar").New(todo)
-	return ScalarFromJSObject(p)
 }
 
 // TODO: methods

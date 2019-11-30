@@ -27,8 +27,8 @@ func InstancedMeshFromJSObject(p js.Value) *InstancedMesh {
 // NewInstancedMesh returns a new InstancedMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancedmesh
-func (b *Babylon) NewInstancedMesh(todo parameters) *InstancedMesh {
-	p := b.ctx.Get("InstancedMesh").New(todo)
+func (b *Babylon) NewInstancedMesh(name string, source *Mesh) *InstancedMesh {
+	p := b.ctx.Get("InstancedMesh").New(name, source.JSObject())
 	return InstancedMeshFromJSObject(p)
 }
 

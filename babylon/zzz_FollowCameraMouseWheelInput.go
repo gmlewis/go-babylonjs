@@ -8,10 +8,9 @@ import (
 
 // FollowCameraMouseWheelInput represents a babylon.js FollowCameraMouseWheelInput.
 // Manage the mouse wheel inputs to control a follow camera.
-
 //
 // See: http://doc.babylonjs.com/how_to/customizing_camera_inputs
-type FollowCameraMouseWheelInput struct{}
+type FollowCameraMouseWheelInput struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (f *FollowCameraMouseWheelInput) JSObject() js.Value { return f.p }
@@ -25,14 +24,6 @@ func (b *Babylon) FollowCameraMouseWheelInput() *FollowCameraMouseWheelInput {
 // FollowCameraMouseWheelInputFromJSObject returns a wrapped FollowCameraMouseWheelInput JavaScript class.
 func FollowCameraMouseWheelInputFromJSObject(p js.Value) *FollowCameraMouseWheelInput {
 	return &FollowCameraMouseWheelInput{p: p}
-}
-
-// NewFollowCameraMouseWheelInput returns a new FollowCameraMouseWheelInput object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.followcameramousewheelinput
-func (b *Babylon) NewFollowCameraMouseWheelInput(todo parameters) *FollowCameraMouseWheelInput {
-	p := b.ctx.Get("FollowCameraMouseWheelInput").New(todo)
-	return FollowCameraMouseWheelInputFromJSObject(p)
 }
 
 // TODO: methods

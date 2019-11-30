@@ -8,7 +8,7 @@ import (
 
 // SerializationHelper represents a babylon.js SerializationHelper.
 // Class used to help serialization objects
-type SerializationHelper struct{}
+type SerializationHelper struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (s *SerializationHelper) JSObject() js.Value { return s.p }
@@ -22,14 +22,6 @@ func (b *Babylon) SerializationHelper() *SerializationHelper {
 // SerializationHelperFromJSObject returns a wrapped SerializationHelper JavaScript class.
 func SerializationHelperFromJSObject(p js.Value) *SerializationHelper {
 	return &SerializationHelper{p: p}
-}
-
-// NewSerializationHelper returns a new SerializationHelper object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.serializationhelper
-func (b *Babylon) NewSerializationHelper(todo parameters) *SerializationHelper {
-	p := b.ctx.Get("SerializationHelper").New(todo)
-	return SerializationHelperFromJSObject(p)
 }
 
 // TODO: methods

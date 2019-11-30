@@ -24,11 +24,20 @@ func ImageBasedSliderFromJSObject(p js.Value) *ImageBasedSlider {
 	return &ImageBasedSlider{BaseSliderFromJSObject(p)}
 }
 
+// NewImageBasedSliderOpts contains optional parameters for NewImageBasedSlider.
+type NewImageBasedSliderOpts struct {
+	Name *string
+}
+
 // NewImageBasedSlider returns a new ImageBasedSlider object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imagebasedslider
-func (b *Babylon) NewImageBasedSlider(todo parameters) *ImageBasedSlider {
-	p := b.ctx.Get("ImageBasedSlider").New(todo)
+func (b *Babylon) NewImageBasedSlider(opts *NewImageBasedSliderOpts) *ImageBasedSlider {
+	if opts == nil {
+		opts = &NewImageBasedSliderOpts{}
+	}
+
+	p := b.ctx.Get("ImageBasedSlider").New(opts.Name)
 	return ImageBasedSliderFromJSObject(p)
 }
 

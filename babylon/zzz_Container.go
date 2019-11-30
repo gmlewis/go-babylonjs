@@ -8,7 +8,6 @@ import (
 
 // Container represents a babylon.js Container.
 // Root class for 2D containers
-
 //
 // See: http://doc.babylonjs.com/how_to/gui#containers
 type Container struct{ *Control }
@@ -27,11 +26,20 @@ func ContainerFromJSObject(p js.Value) *Container {
 	return &Container{ControlFromJSObject(p)}
 }
 
+// NewContainerOpts contains optional parameters for NewContainer.
+type NewContainerOpts struct {
+	Name *string
+}
+
 // NewContainer returns a new Container object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container
-func (b *Babylon) NewContainer(todo parameters) *Container {
-	p := b.ctx.Get("Container").New(todo)
+func (b *Babylon) NewContainer(opts *NewContainerOpts) *Container {
+	if opts == nil {
+		opts = &NewContainerOpts{}
+	}
+
+	p := b.ctx.Get("Container").New(opts.Name)
 	return ContainerFromJSObject(p)
 }
 

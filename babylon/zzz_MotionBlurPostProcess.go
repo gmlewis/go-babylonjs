@@ -33,11 +33,28 @@ func MotionBlurPostProcessFromJSObject(p js.Value) *MotionBlurPostProcess {
 	return &MotionBlurPostProcess{PostProcessFromJSObject(p)}
 }
 
+// NewMotionBlurPostProcessOpts contains optional parameters for NewMotionBlurPostProcess.
+type NewMotionBlurPostProcessOpts struct {
+	SamplingMode *float64
+
+	Engine *Engine
+
+	Reusable *bool
+
+	TextureType *float64
+
+	BlockCompilation *bool
+}
+
 // NewMotionBlurPostProcess returns a new MotionBlurPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.motionblurpostprocess
-func (b *Babylon) NewMotionBlurPostProcess(todo parameters) *MotionBlurPostProcess {
-	p := b.ctx.Get("MotionBlurPostProcess").New(todo)
+func (b *Babylon) NewMotionBlurPostProcess(name string, scene *Scene, options float64, camera *Camera, opts *NewMotionBlurPostProcessOpts) *MotionBlurPostProcess {
+	if opts == nil {
+		opts = &NewMotionBlurPostProcessOpts{}
+	}
+
+	p := b.ctx.Get("MotionBlurPostProcess").New(name, scene.JSObject(), options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType, opts.BlockCompilation.JSObject())
 	return MotionBlurPostProcessFromJSObject(p)
 }
 

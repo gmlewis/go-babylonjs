@@ -27,8 +27,8 @@ func ClampBlockFromJSObject(p js.Value) *ClampBlock {
 // NewClampBlock returns a new ClampBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.clampblock
-func (b *Babylon) NewClampBlock(todo parameters) *ClampBlock {
-	p := b.ctx.Get("ClampBlock").New(todo)
+func (b *Babylon) NewClampBlock(name string) *ClampBlock {
+	p := b.ctx.Get("ClampBlock").New(name)
 	return ClampBlockFromJSObject(p)
 }
 

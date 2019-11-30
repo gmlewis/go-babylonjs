@@ -27,8 +27,8 @@ func GearVRControllerFromJSObject(p js.Value) *GearVRController {
 // NewGearVRController returns a new GearVRController object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller
-func (b *Babylon) NewGearVRController(todo parameters) *GearVRController {
-	p := b.ctx.Get("GearVRController").New(todo)
+func (b *Babylon) NewGearVRController(vrGamepad interface{}) *GearVRController {
+	p := b.ctx.Get("GearVRController").New(vrGamepad)
 	return GearVRControllerFromJSObject(p)
 }
 

@@ -24,11 +24,22 @@ func HolographicButtonFromJSObject(p js.Value) *HolographicButton {
 	return &HolographicButton{Button3DFromJSObject(p)}
 }
 
+// NewHolographicButtonOpts contains optional parameters for NewHolographicButton.
+type NewHolographicButtonOpts struct {
+	Name *string
+
+	ShareMaterials *bool
+}
+
 // NewHolographicButton returns a new HolographicButton object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.holographicbutton
-func (b *Babylon) NewHolographicButton(todo parameters) *HolographicButton {
-	p := b.ctx.Get("HolographicButton").New(todo)
+func (b *Babylon) NewHolographicButton(opts *NewHolographicButtonOpts) *HolographicButton {
+	if opts == nil {
+		opts = &NewHolographicButtonOpts{}
+	}
+
+	p := b.ctx.Get("HolographicButton").New(opts.Name, opts.ShareMaterials.JSObject())
 	return HolographicButtonFromJSObject(p)
 }
 

@@ -27,8 +27,8 @@ func GroundMeshFromJSObject(p js.Value) *GroundMesh {
 // NewGroundMesh returns a new GroundMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh
-func (b *Babylon) NewGroundMesh(todo parameters) *GroundMesh {
-	p := b.ctx.Get("GroundMesh").New(todo)
+func (b *Babylon) NewGroundMesh(name string, scene *Scene) *GroundMesh {
+	p := b.ctx.Get("GroundMesh").New(name, scene.JSObject())
 	return GroundMeshFromJSObject(p)
 }
 

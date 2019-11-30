@@ -10,7 +10,6 @@ import (
 // Default Inputs manager for the FreeCamera.
 // It groups all the default supported inputs for ease of use.
 // Interface representing a free camera inputs manager
-
 //
 // See: http://doc.babylonjs.com/how_to/customizing_camera_inputs
 type FreeCameraInputsManager struct {
@@ -35,8 +34,8 @@ func FreeCameraInputsManagerFromJSObject(p js.Value) *FreeCameraInputsManager {
 // NewFreeCameraInputsManager returns a new FreeCameraInputsManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamerainputsmanager
-func (b *Babylon) NewFreeCameraInputsManager(todo parameters) *FreeCameraInputsManager {
-	p := b.ctx.Get("FreeCameraInputsManager").New(todo)
+func (b *Babylon) NewFreeCameraInputsManager(camera *FreeCamera) *FreeCameraInputsManager {
+	p := b.ctx.Get("FreeCameraInputsManager").New(camera.JSObject())
 	return FreeCameraInputsManagerFromJSObject(p)
 }
 

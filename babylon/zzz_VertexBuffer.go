@@ -8,7 +8,7 @@ import (
 
 // VertexBuffer represents a babylon.js VertexBuffer.
 // Specialized buffer used to store vertex data
-type VertexBuffer struct{}
+type VertexBuffer struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (v *VertexBuffer) JSObject() js.Value { return v.p }
@@ -24,11 +24,36 @@ func VertexBufferFromJSObject(p js.Value) *VertexBuffer {
 	return &VertexBuffer{p: p}
 }
 
+// NewVertexBufferOpts contains optional parameters for NewVertexBuffer.
+type NewVertexBufferOpts struct {
+	PostponeInternalCreation *bool
+
+	Stride *float64
+
+	Instanced *bool
+
+	Offset *float64
+
+	Size *float64
+
+	Type *float64
+
+	Normalized *bool
+
+	UseBytes *bool
+
+	Divisor *float64
+}
+
 // NewVertexBuffer returns a new VertexBuffer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexbuffer
-func (b *Babylon) NewVertexBuffer(todo parameters) *VertexBuffer {
-	p := b.ctx.Get("VertexBuffer").New(todo)
+func (b *Babylon) NewVertexBuffer(engine interface{}, data []float64, kind string, updatable bool, opts *NewVertexBufferOpts) *VertexBuffer {
+	if opts == nil {
+		opts = &NewVertexBufferOpts{}
+	}
+
+	p := b.ctx.Get("VertexBuffer").New(engine, data.JSObject(), kind, updatable.JSObject(), opts.PostponeInternalCreation.JSObject(), opts.Stride, opts.Instanced.JSObject(), opts.Offset, opts.Size, opts.Type, opts.Normalized.JSObject(), opts.UseBytes.JSObject(), opts.Divisor)
 	return VertexBufferFromJSObject(p)
 }
 

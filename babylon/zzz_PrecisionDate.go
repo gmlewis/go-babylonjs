@@ -8,7 +8,7 @@ import (
 
 // PrecisionDate represents a babylon.js PrecisionDate.
 // Class containing a set of static utilities functions for precision date
-type PrecisionDate struct{}
+type PrecisionDate struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (p *PrecisionDate) JSObject() js.Value { return p.p }
@@ -22,14 +22,6 @@ func (b *Babylon) PrecisionDate() *PrecisionDate {
 // PrecisionDateFromJSObject returns a wrapped PrecisionDate JavaScript class.
 func PrecisionDateFromJSObject(p js.Value) *PrecisionDate {
 	return &PrecisionDate{p: p}
-}
-
-// NewPrecisionDate returns a new PrecisionDate object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.precisiondate
-func (b *Babylon) NewPrecisionDate(todo parameters) *PrecisionDate {
-	p := b.ctx.Get("PrecisionDate").New(todo)
-	return PrecisionDateFromJSObject(p)
 }
 
 // TODO: methods

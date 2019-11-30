@@ -8,7 +8,7 @@ import (
 
 // CustomShaderStructure represents a babylon.js CustomShaderStructure.
 //
-type CustomShaderStructure struct{}
+type CustomShaderStructure struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (c *CustomShaderStructure) JSObject() js.Value { return c.p }
@@ -27,8 +27,8 @@ func CustomShaderStructureFromJSObject(p js.Value) *CustomShaderStructure {
 // NewCustomShaderStructure returns a new CustomShaderStructure object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.customshaderstructure
-func (b *Babylon) NewCustomShaderStructure(todo parameters) *CustomShaderStructure {
-	p := b.ctx.Get("CustomShaderStructure").New(todo)
+func (b *Babylon) NewCustomShaderStructure() *CustomShaderStructure {
+	p := b.ctx.Get("CustomShaderStructure").New()
 	return CustomShaderStructureFromJSObject(p)
 }
 

@@ -8,7 +8,7 @@ import (
 
 // Vector2 represents a babylon.js Vector2.
 // Class representing a vector containing 2 coordinates
-type Vector2 struct{}
+type Vector2 struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (v *Vector2) JSObject() js.Value { return v.p }
@@ -24,11 +24,22 @@ func Vector2FromJSObject(p js.Value) *Vector2 {
 	return &Vector2{p: p}
 }
 
+// NewVector2Opts contains optional parameters for NewVector2.
+type NewVector2Opts struct {
+	X *float64
+
+	Y *float64
+}
+
 // NewVector2 returns a new Vector2 object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector2
-func (b *Babylon) NewVector2(todo parameters) *Vector2 {
-	p := b.ctx.Get("Vector2").New(todo)
+func (b *Babylon) NewVector2(opts *NewVector2Opts) *Vector2 {
+	if opts == nil {
+		opts = &NewVector2Opts{}
+	}
+
+	p := b.ctx.Get("Vector2").New(opts.X, opts.Y)
 	return Vector2FromJSObject(p)
 }
 

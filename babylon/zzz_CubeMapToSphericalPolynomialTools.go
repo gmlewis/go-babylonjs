@@ -9,7 +9,7 @@ import (
 // CubeMapToSphericalPolynomialTools represents a babylon.js CubeMapToSphericalPolynomialTools.
 // Helper class dealing with the extraction of spherical polynomial dataArray
 // from a cube map.
-type CubeMapToSphericalPolynomialTools struct{}
+type CubeMapToSphericalPolynomialTools struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (c *CubeMapToSphericalPolynomialTools) JSObject() js.Value { return c.p }
@@ -23,14 +23,6 @@ func (b *Babylon) CubeMapToSphericalPolynomialTools() *CubeMapToSphericalPolynom
 // CubeMapToSphericalPolynomialToolsFromJSObject returns a wrapped CubeMapToSphericalPolynomialTools JavaScript class.
 func CubeMapToSphericalPolynomialToolsFromJSObject(p js.Value) *CubeMapToSphericalPolynomialTools {
 	return &CubeMapToSphericalPolynomialTools{p: p}
-}
-
-// NewCubeMapToSphericalPolynomialTools returns a new CubeMapToSphericalPolynomialTools object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.cubemaptosphericalpolynomialtools
-func (b *Babylon) NewCubeMapToSphericalPolynomialTools(todo parameters) *CubeMapToSphericalPolynomialTools {
-	p := b.ctx.Get("CubeMapToSphericalPolynomialTools").New(todo)
-	return CubeMapToSphericalPolynomialToolsFromJSObject(p)
 }
 
 // TODO: methods

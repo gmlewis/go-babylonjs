@@ -8,7 +8,7 @@ import (
 
 // WebXREnterExitUIButton represents a babylon.js WebXREnterExitUIButton.
 // Button which can be used to enter a different mode of XR
-type WebXREnterExitUIButton struct{}
+type WebXREnterExitUIButton struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (w *WebXREnterExitUIButton) JSObject() js.Value { return w.p }
@@ -27,8 +27,8 @@ func WebXREnterExitUIButtonFromJSObject(p js.Value) *WebXREnterExitUIButton {
 // NewWebXREnterExitUIButton returns a new WebXREnterExitUIButton object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrenterexituibutton
-func (b *Babylon) NewWebXREnterExitUIButton(todo parameters) *WebXREnterExitUIButton {
-	p := b.ctx.Get("WebXREnterExitUIButton").New(todo)
+func (b *Babylon) NewWebXREnterExitUIButton(element js.Value, sessionMode *XRSessionMode, referenceSpaceType *XRReferenceSpaceType) *WebXREnterExitUIButton {
+	p := b.ctx.Get("WebXREnterExitUIButton").New(element, sessionMode.JSObject(), referenceSpaceType.JSObject())
 	return WebXREnterExitUIButtonFromJSObject(p)
 }
 

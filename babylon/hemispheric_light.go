@@ -1,7 +1,6 @@
 package babylon
 
-import "syscall/js"
-
+/*
 // HemisphericLight represents a babylon.js HemisphericLight.
 type HemisphericLight struct{ *Light }
 
@@ -26,3 +25,4 @@ func (b *Babylon) NewHemisphericLight(name string, direction *Vector3, scene *Sc
 	p := b.ctx.Get("HemisphericLight").New(name, direction.JSObject(), scene.JSObject())
 	return HemisphericLightFromJSObject(p)
 }
+*/

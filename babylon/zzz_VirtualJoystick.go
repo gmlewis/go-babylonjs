@@ -8,7 +8,7 @@ import (
 
 // VirtualJoystick represents a babylon.js VirtualJoystick.
 // Class used to define virtual joystick (used in touch mode)
-type VirtualJoystick struct{}
+type VirtualJoystick struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (v *VirtualJoystick) JSObject() js.Value { return v.p }
@@ -24,11 +24,20 @@ func VirtualJoystickFromJSObject(p js.Value) *VirtualJoystick {
 	return &VirtualJoystick{p: p}
 }
 
+// NewVirtualJoystickOpts contains optional parameters for NewVirtualJoystick.
+type NewVirtualJoystickOpts struct {
+	LeftJoystick *bool
+}
+
 // NewVirtualJoystick returns a new VirtualJoystick object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.virtualjoystick
-func (b *Babylon) NewVirtualJoystick(todo parameters) *VirtualJoystick {
-	p := b.ctx.Get("VirtualJoystick").New(todo)
+func (b *Babylon) NewVirtualJoystick(opts *NewVirtualJoystickOpts) *VirtualJoystick {
+	if opts == nil {
+		opts = &NewVirtualJoystickOpts{}
+	}
+
+	p := b.ctx.Get("VirtualJoystick").New(opts.LeftJoystick.JSObject())
 	return VirtualJoystickFromJSObject(p)
 }
 

@@ -8,7 +8,6 @@ import (
 
 // MergeMeshesOptimization represents a babylon.js MergeMeshesOptimization.
 // Defines an optimization used to merge meshes with compatible materials
-
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
 type MergeMeshesOptimization struct{ *SceneOptimization }
@@ -27,11 +26,20 @@ func MergeMeshesOptimizationFromJSObject(p js.Value) *MergeMeshesOptimization {
 	return &MergeMeshesOptimization{SceneOptimizationFromJSObject(p)}
 }
 
+// NewMergeMeshesOptimizationOpts contains optional parameters for NewMergeMeshesOptimization.
+type NewMergeMeshesOptimizationOpts struct {
+	Priority *float64
+}
+
 // NewMergeMeshesOptimization returns a new MergeMeshesOptimization object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mergemeshesoptimization
-func (b *Babylon) NewMergeMeshesOptimization(todo parameters) *MergeMeshesOptimization {
-	p := b.ctx.Get("MergeMeshesOptimization").New(todo)
+func (b *Babylon) NewMergeMeshesOptimization(opts *NewMergeMeshesOptimizationOpts) *MergeMeshesOptimization {
+	if opts == nil {
+		opts = &NewMergeMeshesOptimizationOpts{}
+	}
+
+	p := b.ctx.Get("MergeMeshesOptimization").New(opts.Priority)
 	return MergeMeshesOptimizationFromJSObject(p)
 }
 

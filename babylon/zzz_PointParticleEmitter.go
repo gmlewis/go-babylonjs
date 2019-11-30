@@ -9,7 +9,7 @@ import (
 // PointParticleEmitter represents a babylon.js PointParticleEmitter.
 // Particle emitter emitting particles from a point.
 // It emits the particles randomly between 2 given directions.
-type PointParticleEmitter struct{}
+type PointParticleEmitter struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (p *PointParticleEmitter) JSObject() js.Value { return p.p }
@@ -28,8 +28,8 @@ func PointParticleEmitterFromJSObject(p js.Value) *PointParticleEmitter {
 // NewPointParticleEmitter returns a new PointParticleEmitter object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointparticleemitter
-func (b *Babylon) NewPointParticleEmitter(todo parameters) *PointParticleEmitter {
-	p := b.ctx.Get("PointParticleEmitter").New(todo)
+func (b *Babylon) NewPointParticleEmitter() *PointParticleEmitter {
+	p := b.ctx.Get("PointParticleEmitter").New()
 	return PointParticleEmitterFromJSObject(p)
 }
 

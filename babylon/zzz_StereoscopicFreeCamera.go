@@ -8,7 +8,6 @@ import (
 
 // StereoscopicFreeCamera represents a babylon.js StereoscopicFreeCamera.
 // Camera used to simulate stereoscopic rendering (based on FreeCamera)
-
 //
 // See: http://doc.babylonjs.com/features/cameras
 type StereoscopicFreeCamera struct{ *FreeCamera }
@@ -30,8 +29,8 @@ func StereoscopicFreeCameraFromJSObject(p js.Value) *StereoscopicFreeCamera {
 // NewStereoscopicFreeCamera returns a new StereoscopicFreeCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicfreecamera
-func (b *Babylon) NewStereoscopicFreeCamera(todo parameters) *StereoscopicFreeCamera {
-	p := b.ctx.Get("StereoscopicFreeCamera").New(todo)
+func (b *Babylon) NewStereoscopicFreeCamera(name string, position *Vector3, interaxialDistance float64, isStereoscopicSideBySide bool, scene *Scene) *StereoscopicFreeCamera {
+	p := b.ctx.Get("StereoscopicFreeCamera").New(name, position.JSObject(), interaxialDistance, isStereoscopicSideBySide.JSObject(), scene.JSObject())
 	return StereoscopicFreeCameraFromJSObject(p)
 }
 

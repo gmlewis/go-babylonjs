@@ -27,8 +27,8 @@ func ImageProcessingBlockFromJSObject(p js.Value) *ImageProcessingBlock {
 // NewImageProcessingBlock returns a new ImageProcessingBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingblock
-func (b *Babylon) NewImageProcessingBlock(todo parameters) *ImageProcessingBlock {
-	p := b.ctx.Get("ImageProcessingBlock").New(todo)
+func (b *Babylon) NewImageProcessingBlock(name string) *ImageProcessingBlock {
+	p := b.ctx.Get("ImageProcessingBlock").New(name)
 	return ImageProcessingBlockFromJSObject(p)
 }
 

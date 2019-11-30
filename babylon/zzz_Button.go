@@ -24,11 +24,20 @@ func ButtonFromJSObject(p js.Value) *Button {
 	return &Button{RectangleFromJSObject(p)}
 }
 
+// NewButtonOpts contains optional parameters for NewButton.
+type NewButtonOpts struct {
+	Name *string
+}
+
 // NewButton returns a new Button object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.button
-func (b *Babylon) NewButton(todo parameters) *Button {
-	p := b.ctx.Get("Button").New(todo)
+func (b *Babylon) NewButton(opts *NewButtonOpts) *Button {
+	if opts == nil {
+		opts = &NewButtonOpts{}
+	}
+
+	p := b.ctx.Get("Button").New(opts.Name)
 	return ButtonFromJSObject(p)
 }
 

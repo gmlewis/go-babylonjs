@@ -9,7 +9,6 @@ import (
 // SetStateAction represents a babylon.js SetStateAction.
 // This defines an action responsible to set a the state field of the target
 // to a desired value once triggered.
-
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_actions
 type SetStateAction struct{ *Action }
@@ -28,11 +27,20 @@ func SetStateActionFromJSObject(p js.Value) *SetStateAction {
 	return &SetStateAction{ActionFromJSObject(p)}
 }
 
+// NewSetStateActionOpts contains optional parameters for NewSetStateAction.
+type NewSetStateActionOpts struct {
+	Condition *Condition
+}
+
 // NewSetStateAction returns a new SetStateAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.setstateaction
-func (b *Babylon) NewSetStateAction(todo parameters) *SetStateAction {
-	p := b.ctx.Get("SetStateAction").New(todo)
+func (b *Babylon) NewSetStateAction(triggerOptions interface{}, target interface{}, value string, opts *NewSetStateActionOpts) *SetStateAction {
+	if opts == nil {
+		opts = &NewSetStateActionOpts{}
+	}
+
+	p := b.ctx.Get("SetStateAction").New(triggerOptions, target, value, opts.Condition.JSObject())
 	return SetStateActionFromJSObject(p)
 }
 

@@ -8,7 +8,7 @@ import (
 
 // DataBuffer represents a babylon.js DataBuffer.
 // Class used to store gfx data (like WebGLBuffer)
-type DataBuffer struct{}
+type DataBuffer struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (d *DataBuffer) JSObject() js.Value { return d.p }
@@ -22,14 +22,6 @@ func (b *Babylon) DataBuffer() *DataBuffer {
 // DataBufferFromJSObject returns a wrapped DataBuffer JavaScript class.
 func DataBufferFromJSObject(p js.Value) *DataBuffer {
 	return &DataBuffer{p: p}
-}
-
-// NewDataBuffer returns a new DataBuffer object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.databuffer
-func (b *Babylon) NewDataBuffer(todo parameters) *DataBuffer {
-	p := b.ctx.Get("DataBuffer").New(todo)
-	return DataBufferFromJSObject(p)
 }
 
 // TODO: methods

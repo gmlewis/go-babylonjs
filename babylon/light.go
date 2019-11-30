@@ -1,7 +1,6 @@
 package babylon
 
-import "syscall/js"
-
+/*
 // Light represents a babylon.js Light.
 type Light struct{ *Node }
 
@@ -26,3 +25,4 @@ func (b *Babylon) NewLight(name string, scene *Scene) *Light {
 	p := b.ctx.Get("Light").New(name, scene.JSObject())
 	return LightFromJSObject(p)
 }
+*/

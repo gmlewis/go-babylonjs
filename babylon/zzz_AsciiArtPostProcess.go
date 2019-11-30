@@ -8,7 +8,6 @@ import (
 
 // AsciiArtPostProcess represents a babylon.js AsciiArtPostProcess.
 // AsciiArtPostProcess helps rendering everithing in Ascii Art.
-
 //
 // Simmply add it to your scene and let the nerd that lives in you have fun.
 // Example usage: var pp = new AsciiArtPostProcess(&amp;quot;myAscii&amp;quot;, &amp;quot;20px Monospace&amp;quot;, camera);
@@ -28,11 +27,20 @@ func AsciiArtPostProcessFromJSObject(p js.Value) *AsciiArtPostProcess {
 	return &AsciiArtPostProcess{PostProcessFromJSObject(p)}
 }
 
+// NewAsciiArtPostProcessOpts contains optional parameters for NewAsciiArtPostProcess.
+type NewAsciiArtPostProcessOpts struct {
+	Options *string
+}
+
 // NewAsciiArtPostProcess returns a new AsciiArtPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess
-func (b *Babylon) NewAsciiArtPostProcess(todo parameters) *AsciiArtPostProcess {
-	p := b.ctx.Get("AsciiArtPostProcess").New(todo)
+func (b *Babylon) NewAsciiArtPostProcess(name string, camera *Camera, opts *NewAsciiArtPostProcessOpts) *AsciiArtPostProcess {
+	if opts == nil {
+		opts = &NewAsciiArtPostProcessOpts{}
+	}
+
+	p := b.ctx.Get("AsciiArtPostProcess").New(name, camera.JSObject(), opts.Options)
 	return AsciiArtPostProcessFromJSObject(p)
 }
 

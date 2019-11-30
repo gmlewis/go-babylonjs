@@ -8,7 +8,7 @@ import (
 
 // ArrayItem represents a babylon.js ArrayItem.
 // Helper class for working with arrays when loading the glTF asset
-type ArrayItem struct{}
+type ArrayItem struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (a *ArrayItem) JSObject() js.Value { return a.p }
@@ -22,14 +22,6 @@ func (b *Babylon) ArrayItem() *ArrayItem {
 // ArrayItemFromJSObject returns a wrapped ArrayItem JavaScript class.
 func ArrayItemFromJSObject(p js.Value) *ArrayItem {
 	return &ArrayItem{p: p}
-}
-
-// NewArrayItem returns a new ArrayItem object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.arrayitem
-func (b *Babylon) NewArrayItem(todo parameters) *ArrayItem {
-	p := b.ctx.Get("ArrayItem").New(todo)
-	return ArrayItemFromJSObject(p)
 }
 
 // TODO: methods

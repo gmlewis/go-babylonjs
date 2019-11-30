@@ -27,8 +27,8 @@ func GenericControllerFromJSObject(p js.Value) *GenericController {
 // NewGenericController returns a new GenericController object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.genericcontroller
-func (b *Babylon) NewGenericController(todo parameters) *GenericController {
-	p := b.ctx.Get("GenericController").New(todo)
+func (b *Babylon) NewGenericController(vrGamepad interface{}) *GenericController {
+	p := b.ctx.Get("GenericController").New(vrGamepad)
 	return GenericControllerFromJSObject(p)
 }
 

@@ -10,7 +10,6 @@ import (
 // Default Inputs manager for the ArcRotateCamera.
 // It groups all the default supported inputs for ease of use.
 // Interface representing an arc rotate camera inputs manager
-
 //
 // See: http://doc.babylonjs.com/how_to/customizing_camera_inputs
 type ArcRotateCameraInputsManager struct {
@@ -35,8 +34,8 @@ func ArcRotateCameraInputsManagerFromJSObject(p js.Value) *ArcRotateCameraInputs
 // NewArcRotateCameraInputsManager returns a new ArcRotateCameraInputsManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerainputsmanager
-func (b *Babylon) NewArcRotateCameraInputsManager(todo parameters) *ArcRotateCameraInputsManager {
-	p := b.ctx.Get("ArcRotateCameraInputsManager").New(todo)
+func (b *Babylon) NewArcRotateCameraInputsManager(camera *ArcRotateCamera) *ArcRotateCameraInputsManager {
+	p := b.ctx.Get("ArcRotateCameraInputsManager").New(camera.JSObject())
 	return ArcRotateCameraInputsManagerFromJSObject(p)
 }
 

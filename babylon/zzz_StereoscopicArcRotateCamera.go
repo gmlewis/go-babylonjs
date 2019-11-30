@@ -8,7 +8,6 @@ import (
 
 // StereoscopicArcRotateCamera represents a babylon.js StereoscopicArcRotateCamera.
 // Camera used to simulate stereoscopic rendering (based on ArcRotateCamera)
-
 //
 // See: http://doc.babylonjs.com/features/cameras
 type StereoscopicArcRotateCamera struct{ *ArcRotateCamera }
@@ -30,8 +29,8 @@ func StereoscopicArcRotateCameraFromJSObject(p js.Value) *StereoscopicArcRotateC
 // NewStereoscopicArcRotateCamera returns a new StereoscopicArcRotateCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera
-func (b *Babylon) NewStereoscopicArcRotateCamera(todo parameters) *StereoscopicArcRotateCamera {
-	p := b.ctx.Get("StereoscopicArcRotateCamera").New(todo)
+func (b *Babylon) NewStereoscopicArcRotateCamera(name string, alpha float64, beta float64, radius float64, target *Vector3, interaxialDistance float64, isStereoscopicSideBySide bool, scene *Scene) *StereoscopicArcRotateCamera {
+	p := b.ctx.Get("StereoscopicArcRotateCamera").New(name, alpha, beta, radius, target.JSObject(), interaxialDistance, isStereoscopicSideBySide.JSObject(), scene.JSObject())
 	return StereoscopicArcRotateCameraFromJSObject(p)
 }
 

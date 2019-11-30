@@ -24,11 +24,28 @@ func ExtractHighlightsPostProcessFromJSObject(p js.Value) *ExtractHighlightsPost
 	return &ExtractHighlightsPostProcess{PostProcessFromJSObject(p)}
 }
 
+// NewExtractHighlightsPostProcessOpts contains optional parameters for NewExtractHighlightsPostProcess.
+type NewExtractHighlightsPostProcessOpts struct {
+	SamplingMode *float64
+
+	Engine *Engine
+
+	Reusable *bool
+
+	TextureType *float64
+
+	BlockCompilation *bool
+}
+
 // NewExtractHighlightsPostProcess returns a new ExtractHighlightsPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess
-func (b *Babylon) NewExtractHighlightsPostProcess(todo parameters) *ExtractHighlightsPostProcess {
-	p := b.ctx.Get("ExtractHighlightsPostProcess").New(todo)
+func (b *Babylon) NewExtractHighlightsPostProcess(name string, options float64, camera *Camera, opts *NewExtractHighlightsPostProcessOpts) *ExtractHighlightsPostProcess {
+	if opts == nil {
+		opts = &NewExtractHighlightsPostProcessOpts{}
+	}
+
+	p := b.ctx.Get("ExtractHighlightsPostProcess").New(name, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType, opts.BlockCompilation.JSObject())
 	return ExtractHighlightsPostProcessFromJSObject(p)
 }
 

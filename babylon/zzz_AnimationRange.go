@@ -8,7 +8,7 @@ import (
 
 // AnimationRange represents a babylon.js AnimationRange.
 // Represents the range of an animation
-type AnimationRange struct{}
+type AnimationRange struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (a *AnimationRange) JSObject() js.Value { return a.p }
@@ -27,8 +27,8 @@ func AnimationRangeFromJSObject(p js.Value) *AnimationRange {
 // NewAnimationRange returns a new AnimationRange object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationrange
-func (b *Babylon) NewAnimationRange(todo parameters) *AnimationRange {
-	p := b.ctx.Get("AnimationRange").New(todo)
+func (b *Babylon) NewAnimationRange(name string, from float64, to float64) *AnimationRange {
+	p := b.ctx.Get("AnimationRange").New(name, from, to)
 	return AnimationRangeFromJSObject(p)
 }
 

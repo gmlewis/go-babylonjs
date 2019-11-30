@@ -8,7 +8,6 @@ import (
 
 // StereoscopicGamepadCamera represents a babylon.js StereoscopicGamepadCamera.
 // Camera used to simulate stereoscopic rendering (based on GamepadCamera)
-
 //
 // See: http://doc.babylonjs.com/features/cameras
 type StereoscopicGamepadCamera struct{ *GamepadCamera }
@@ -30,8 +29,8 @@ func StereoscopicGamepadCameraFromJSObject(p js.Value) *StereoscopicGamepadCamer
 // NewStereoscopicGamepadCamera returns a new StereoscopicGamepadCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera
-func (b *Babylon) NewStereoscopicGamepadCamera(todo parameters) *StereoscopicGamepadCamera {
-	p := b.ctx.Get("StereoscopicGamepadCamera").New(todo)
+func (b *Babylon) NewStereoscopicGamepadCamera(name string, position *Vector3, interaxialDistance float64, isStereoscopicSideBySide bool, scene *Scene) *StereoscopicGamepadCamera {
+	p := b.ctx.Get("StereoscopicGamepadCamera").New(name, position.JSObject(), interaxialDistance, isStereoscopicSideBySide.JSObject(), scene.JSObject())
 	return StereoscopicGamepadCameraFromJSObject(p)
 }
 

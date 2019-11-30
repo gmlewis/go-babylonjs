@@ -27,8 +27,8 @@ func BonesBlockFromJSObject(p js.Value) *BonesBlock {
 // NewBonesBlock returns a new BonesBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bonesblock
-func (b *Babylon) NewBonesBlock(todo parameters) *BonesBlock {
-	p := b.ctx.Get("BonesBlock").New(todo)
+func (b *Babylon) NewBonesBlock(name string) *BonesBlock {
+	p := b.ctx.Get("BonesBlock").New(name)
 	return BonesBlockFromJSObject(p)
 }
 

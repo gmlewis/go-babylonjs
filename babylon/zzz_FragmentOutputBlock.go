@@ -27,8 +27,8 @@ func FragmentOutputBlockFromJSObject(p js.Value) *FragmentOutputBlock {
 // NewFragmentOutputBlock returns a new FragmentOutputBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock
-func (b *Babylon) NewFragmentOutputBlock(todo parameters) *FragmentOutputBlock {
-	p := b.ctx.Get("FragmentOutputBlock").New(todo)
+func (b *Babylon) NewFragmentOutputBlock(name string) *FragmentOutputBlock {
+	p := b.ctx.Get("FragmentOutputBlock").New(name)
 	return FragmentOutputBlockFromJSObject(p)
 }
 

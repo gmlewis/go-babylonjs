@@ -9,7 +9,7 @@ import (
 // DomManagement represents a babylon.js DomManagement.
 // Sets of helpers dealing with the DOM and some of the recurrent functions needed in
 // Babylon.js
-type DomManagement struct{}
+type DomManagement struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (d *DomManagement) JSObject() js.Value { return d.p }
@@ -23,14 +23,6 @@ func (b *Babylon) DomManagement() *DomManagement {
 // DomManagementFromJSObject returns a wrapped DomManagement JavaScript class.
 func DomManagementFromJSObject(p js.Value) *DomManagement {
 	return &DomManagement{p: p}
-}
-
-// NewDomManagement returns a new DomManagement object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.dommanagement
-func (b *Babylon) NewDomManagement(todo parameters) *DomManagement {
-	p := b.ctx.Get("DomManagement").New(todo)
-	return DomManagementFromJSObject(p)
 }
 
 // TODO: methods

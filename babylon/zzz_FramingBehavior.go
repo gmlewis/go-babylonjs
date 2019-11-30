@@ -8,10 +8,9 @@ import (
 
 // FramingBehavior represents a babylon.js FramingBehavior.
 // The framing behavior (FramingBehavior) is designed to automatically position an ArcRotateCamera when its target is set to a mesh. It is also useful if you want to prevent the camera to go under a virtual horizontal plane.
-
 //
 // See: http://doc.babylonjs.com/how_to/camera_behaviors#framing-behavior
-type FramingBehavior struct{}
+type FramingBehavior struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (f *FramingBehavior) JSObject() js.Value { return f.p }
@@ -25,14 +24,6 @@ func (b *Babylon) FramingBehavior() *FramingBehavior {
 // FramingBehaviorFromJSObject returns a wrapped FramingBehavior JavaScript class.
 func FramingBehaviorFromJSObject(p js.Value) *FramingBehavior {
 	return &FramingBehavior{p: p}
-}
-
-// NewFramingBehavior returns a new FramingBehavior object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.framingbehavior
-func (b *Babylon) NewFramingBehavior(todo parameters) *FramingBehavior {
-	p := b.ctx.Get("FramingBehavior").New(todo)
-	return FramingBehaviorFromJSObject(p)
 }
 
 // TODO: methods

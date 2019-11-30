@@ -8,7 +8,7 @@ import (
 
 // ShaderAlebdoParts represents a babylon.js ShaderAlebdoParts.
 //
-type ShaderAlebdoParts struct{}
+type ShaderAlebdoParts struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (s *ShaderAlebdoParts) JSObject() js.Value { return s.p }
@@ -27,8 +27,8 @@ func ShaderAlebdoPartsFromJSObject(p js.Value) *ShaderAlebdoParts {
 // NewShaderAlebdoParts returns a new ShaderAlebdoParts object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shaderalebdoparts
-func (b *Babylon) NewShaderAlebdoParts(todo parameters) *ShaderAlebdoParts {
-	p := b.ctx.Get("ShaderAlebdoParts").New(todo)
+func (b *Babylon) NewShaderAlebdoParts() *ShaderAlebdoParts {
+	p := b.ctx.Get("ShaderAlebdoParts").New()
 	return ShaderAlebdoPartsFromJSObject(p)
 }
 

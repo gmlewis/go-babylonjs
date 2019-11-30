@@ -8,7 +8,7 @@ import (
 
 // PromisePolyfill represents a babylon.js PromisePolyfill.
 // Helper class that provides a small promise polyfill
-type PromisePolyfill struct{}
+type PromisePolyfill struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (p *PromisePolyfill) JSObject() js.Value { return p.p }
@@ -22,14 +22,6 @@ func (b *Babylon) PromisePolyfill() *PromisePolyfill {
 // PromisePolyfillFromJSObject returns a wrapped PromisePolyfill JavaScript class.
 func PromisePolyfillFromJSObject(p js.Value) *PromisePolyfill {
 	return &PromisePolyfill{p: p}
-}
-
-// NewPromisePolyfill returns a new PromisePolyfill object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.promisepolyfill
-func (b *Babylon) NewPromisePolyfill(todo parameters) *PromisePolyfill {
-	p := b.ctx.Get("PromisePolyfill").New(todo)
-	return PromisePolyfillFromJSObject(p)
 }
 
 // TODO: methods

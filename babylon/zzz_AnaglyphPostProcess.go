@@ -24,11 +24,24 @@ func AnaglyphPostProcessFromJSObject(p js.Value) *AnaglyphPostProcess {
 	return &AnaglyphPostProcess{PostProcessFromJSObject(p)}
 }
 
+// NewAnaglyphPostProcessOpts contains optional parameters for NewAnaglyphPostProcess.
+type NewAnaglyphPostProcessOpts struct {
+	SamplingMode *float64
+
+	Engine *Engine
+
+	Reusable *bool
+}
+
 // NewAnaglyphPostProcess returns a new AnaglyphPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphpostprocess
-func (b *Babylon) NewAnaglyphPostProcess(todo parameters) *AnaglyphPostProcess {
-	p := b.ctx.Get("AnaglyphPostProcess").New(todo)
+func (b *Babylon) NewAnaglyphPostProcess(name string, options float64, rigCameras *Camera, opts *NewAnaglyphPostProcessOpts) *AnaglyphPostProcess {
+	if opts == nil {
+		opts = &NewAnaglyphPostProcessOpts{}
+	}
+
+	p := b.ctx.Get("AnaglyphPostProcess").New(name, options, rigCameras.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject())
 	return AnaglyphPostProcessFromJSObject(p)
 }
 

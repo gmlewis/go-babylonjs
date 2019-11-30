@@ -8,11 +8,10 @@ import (
 
 // EffectLayer represents a babylon.js EffectLayer.
 // The effect layer Helps adding post process effect blended with the main pass.
-
 //
 // The effect layer class can not be used directly and is intented to inherited from to be
 // customized per effects.
-type EffectLayer struct{}
+type EffectLayer struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (e *EffectLayer) JSObject() js.Value { return e.p }
@@ -31,8 +30,8 @@ func EffectLayerFromJSObject(p js.Value) *EffectLayer {
 // NewEffectLayer returns a new EffectLayer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectlayer
-func (b *Babylon) NewEffectLayer(todo parameters) *EffectLayer {
-	p := b.ctx.Get("EffectLayer").New(todo)
+func (b *Babylon) NewEffectLayer(name string, scene *Scene) *EffectLayer {
+	p := b.ctx.Get("EffectLayer").New(name, scene.JSObject())
 	return EffectLayerFromJSObject(p)
 }
 

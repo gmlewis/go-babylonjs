@@ -24,11 +24,26 @@ func NoiseProceduralTextureFromJSObject(p js.Value) *NoiseProceduralTexture {
 	return &NoiseProceduralTexture{ProceduralTextureFromJSObject(p)}
 }
 
+// NewNoiseProceduralTextureOpts contains optional parameters for NewNoiseProceduralTexture.
+type NewNoiseProceduralTextureOpts struct {
+	Size *float64
+
+	Scene *Scene
+
+	FallbackTexture *Texture
+
+	GenerateMipMaps *bool
+}
+
 // NewNoiseProceduralTexture returns a new NoiseProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture
-func (b *Babylon) NewNoiseProceduralTexture(todo parameters) *NoiseProceduralTexture {
-	p := b.ctx.Get("NoiseProceduralTexture").New(todo)
+func (b *Babylon) NewNoiseProceduralTexture(name string, opts *NewNoiseProceduralTextureOpts) *NoiseProceduralTexture {
+	if opts == nil {
+		opts = &NewNoiseProceduralTextureOpts{}
+	}
+
+	p := b.ctx.Get("NoiseProceduralTexture").New(name, opts.Size, opts.Scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps.JSObject())
 	return NoiseProceduralTextureFromJSObject(p)
 }
 

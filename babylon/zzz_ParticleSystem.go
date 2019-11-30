@@ -10,7 +10,6 @@ import (
 // This represents a particle system in Babylon.
 // Particles are often small sprites used to simulate hard-to-reproduce phenomena like fire, smoke, water, or abstract visual effects like magic glitter and faery dust.
 // Particles can take different shapes while emitted like box, sphere, cone or you can write your custom function.
-
 //
 // See: https://doc.babylonjs.com/babylon101/particles
 type ParticleSystem struct{ *BaseParticleSystem }
@@ -29,11 +28,24 @@ func ParticleSystemFromJSObject(p js.Value) *ParticleSystem {
 	return &ParticleSystem{BaseParticleSystemFromJSObject(p)}
 }
 
+// NewParticleSystemOpts contains optional parameters for NewParticleSystem.
+type NewParticleSystemOpts struct {
+	CustomEffect *Effect
+
+	IsAnimationSheetEnabled *bool
+
+	Epsilon *float64
+}
+
 // NewParticleSystem returns a new ParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystem
-func (b *Babylon) NewParticleSystem(todo parameters) *ParticleSystem {
-	p := b.ctx.Get("ParticleSystem").New(todo)
+func (b *Babylon) NewParticleSystem(name string, capacity float64, scene *Scene, opts *NewParticleSystemOpts) *ParticleSystem {
+	if opts == nil {
+		opts = &NewParticleSystemOpts{}
+	}
+
+	p := b.ctx.Get("ParticleSystem").New(name, capacity, scene.JSObject(), opts.CustomEffect.JSObject(), opts.IsAnimationSheetEnabled.JSObject(), opts.Epsilon)
 	return ParticleSystemFromJSObject(p)
 }
 

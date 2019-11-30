@@ -27,8 +27,8 @@ func ReflectBlockFromJSObject(p js.Value) *ReflectBlock {
 // NewReflectBlock returns a new ReflectBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.reflectblock
-func (b *Babylon) NewReflectBlock(todo parameters) *ReflectBlock {
-	p := b.ctx.Get("ReflectBlock").New(todo)
+func (b *Babylon) NewReflectBlock(name string) *ReflectBlock {
+	p := b.ctx.Get("ReflectBlock").New(name)
 	return ReflectBlockFromJSObject(p)
 }
 

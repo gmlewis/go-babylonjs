@@ -27,11 +27,20 @@ func PhotoDomeFromJSObject(p js.Value) *PhotoDome {
 	return &PhotoDome{TransformNodeFromJSObject(p)}
 }
 
+// NewPhotoDomeOpts contains optional parameters for NewPhotoDome.
+type NewPhotoDomeOpts struct {
+	OnError *func()
+}
+
 // NewPhotoDome returns a new PhotoDome object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.photodome
-func (b *Babylon) NewPhotoDome(todo parameters) *PhotoDome {
-	p := b.ctx.Get("PhotoDome").New(todo)
+func (b *Babylon) NewPhotoDome(name string, urlOfPhoto string, options js.Value, scene *Scene, opts *NewPhotoDomeOpts) *PhotoDome {
+	if opts == nil {
+		opts = &NewPhotoDomeOpts{}
+	}
+
+	p := b.ctx.Get("PhotoDome").New(name, urlOfPhoto, options, scene.JSObject(), opts.OnError)
 	return PhotoDomeFromJSObject(p)
 }
 

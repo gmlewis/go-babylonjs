@@ -8,7 +8,7 @@ import (
 
 // RecastJSCrowd represents a babylon.js RecastJSCrowd.
 // Recast detour crowd implementation
-type RecastJSCrowd struct{}
+type RecastJSCrowd struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (r *RecastJSCrowd) JSObject() js.Value { return r.p }
@@ -27,8 +27,8 @@ func RecastJSCrowdFromJSObject(p js.Value) *RecastJSCrowd {
 // NewRecastJSCrowd returns a new RecastJSCrowd object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.recastjscrowd
-func (b *Babylon) NewRecastJSCrowd(todo parameters) *RecastJSCrowd {
-	p := b.ctx.Get("RecastJSCrowd").New(todo)
+func (b *Babylon) NewRecastJSCrowd(plugin *RecastJSPlugin, maxAgents float64, maxAgentRadius float64, scene *Scene) *RecastJSCrowd {
+	p := b.ctx.Get("RecastJSCrowd").New(plugin.JSObject(), maxAgents, maxAgentRadius, scene.JSObject())
 	return RecastJSCrowdFromJSObject(p)
 }
 

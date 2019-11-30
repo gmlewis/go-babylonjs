@@ -8,7 +8,7 @@ import (
 
 // MaterialDefines represents a babylon.js MaterialDefines.
 // Manages the defines for the Material
-type MaterialDefines struct{}
+type MaterialDefines struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (m *MaterialDefines) JSObject() js.Value { return m.p }
@@ -22,14 +22,6 @@ func (b *Babylon) MaterialDefines() *MaterialDefines {
 // MaterialDefinesFromJSObject returns a wrapped MaterialDefines JavaScript class.
 func MaterialDefinesFromJSObject(p js.Value) *MaterialDefines {
 	return &MaterialDefines{p: p}
-}
-
-// NewMaterialDefines returns a new MaterialDefines object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.materialdefines
-func (b *Babylon) NewMaterialDefines(todo parameters) *MaterialDefines {
-	p := b.ctx.Get("MaterialDefines").New(todo)
-	return MaterialDefinesFromJSObject(p)
 }
 
 // TODO: methods

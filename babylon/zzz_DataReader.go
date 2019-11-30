@@ -8,7 +8,7 @@ import (
 
 // DataReader represents a babylon.js DataReader.
 // Utility class for reading from a data buffer
-type DataReader struct{}
+type DataReader struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (d *DataReader) JSObject() js.Value { return d.p }
@@ -27,8 +27,8 @@ func DataReaderFromJSObject(p js.Value) *DataReader {
 // NewDataReader returns a new DataReader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.datareader
-func (b *Babylon) NewDataReader(todo parameters) *DataReader {
-	p := b.ctx.Get("DataReader").New(todo)
+func (b *Babylon) NewDataReader(buffer js.Value) *DataReader {
+	p := b.ctx.Get("DataReader").New(buffer)
 	return DataReaderFromJSObject(p)
 }
 

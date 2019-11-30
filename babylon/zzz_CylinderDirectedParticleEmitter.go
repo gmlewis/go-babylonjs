@@ -25,11 +25,28 @@ func CylinderDirectedParticleEmitterFromJSObject(p js.Value) *CylinderDirectedPa
 	return &CylinderDirectedParticleEmitter{CylinderParticleEmitterFromJSObject(p)}
 }
 
+// NewCylinderDirectedParticleEmitterOpts contains optional parameters for NewCylinderDirectedParticleEmitter.
+type NewCylinderDirectedParticleEmitterOpts struct {
+	Radius *float64
+
+	Height *float64
+
+	RadiusRange *float64
+
+	Direction1 *Vector3
+
+	Direction2 *Vector3
+}
+
 // NewCylinderDirectedParticleEmitter returns a new CylinderDirectedParticleEmitter object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cylinderdirectedparticleemitter
-func (b *Babylon) NewCylinderDirectedParticleEmitter(todo parameters) *CylinderDirectedParticleEmitter {
-	p := b.ctx.Get("CylinderDirectedParticleEmitter").New(todo)
+func (b *Babylon) NewCylinderDirectedParticleEmitter(opts *NewCylinderDirectedParticleEmitterOpts) *CylinderDirectedParticleEmitter {
+	if opts == nil {
+		opts = &NewCylinderDirectedParticleEmitterOpts{}
+	}
+
+	p := b.ctx.Get("CylinderDirectedParticleEmitter").New(opts.Radius, opts.Height, opts.RadiusRange, opts.Direction1.JSObject(), opts.Direction2.JSObject())
 	return CylinderDirectedParticleEmitterFromJSObject(p)
 }
 

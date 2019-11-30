@@ -8,7 +8,6 @@ import (
 
 // PosterizeBlock represents a babylon.js PosterizeBlock.
 // Block used to posterize a value
-
 //
 // See: https://en.wikipedia.org/wiki/Posterization
 type PosterizeBlock struct{ *NodeMaterialBlock }
@@ -30,8 +29,8 @@ func PosterizeBlockFromJSObject(p js.Value) *PosterizeBlock {
 // NewPosterizeBlock returns a new PosterizeBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.posterizeblock
-func (b *Babylon) NewPosterizeBlock(todo parameters) *PosterizeBlock {
-	p := b.ctx.Get("PosterizeBlock").New(todo)
+func (b *Babylon) NewPosterizeBlock(name string) *PosterizeBlock {
+	p := b.ctx.Get("PosterizeBlock").New(name)
 	return PosterizeBlockFromJSObject(p)
 }
 

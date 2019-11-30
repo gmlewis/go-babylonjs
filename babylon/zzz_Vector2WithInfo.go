@@ -24,11 +24,20 @@ func Vector2WithInfoFromJSObject(p js.Value) *Vector2WithInfo {
 	return &Vector2WithInfo{Vector2FromJSObject(p)}
 }
 
+// NewVector2WithInfoOpts contains optional parameters for NewVector2WithInfo.
+type NewVector2WithInfoOpts struct {
+	ButtonIndex *float64
+}
+
 // NewVector2WithInfo returns a new Vector2WithInfo object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector2withinfo
-func (b *Babylon) NewVector2WithInfo(todo parameters) *Vector2WithInfo {
-	p := b.ctx.Get("Vector2WithInfo").New(todo)
+func (b *Babylon) NewVector2WithInfo(source *Vector2, opts *NewVector2WithInfoOpts) *Vector2WithInfo {
+	if opts == nil {
+		opts = &NewVector2WithInfoOpts{}
+	}
+
+	p := b.ctx.Get("Vector2WithInfo").New(source.JSObject(), opts.ButtonIndex)
 	return Vector2WithInfoFromJSObject(p)
 }
 

@@ -8,11 +8,9 @@ import (
 
 // ArcRotateCamera represents a babylon.js ArcRotateCamera.
 // This represents an orbital type of camera.
-
 //
 // This camera always points towards a given target position and can be rotated around that target with the target as the centre of rotation. It can be controlled with cursors and mouse, or with touch events.
 // Think of this camera as one orbiting its target position, or more imaginatively as a spy satellite orbiting the earth. Its position relative to the target (earth) can be set by three parameters, alpha (radians) the longitudinal rotation, beta (radians) the latitudinal rotation and radius the distance from the target position.
-
 //
 // See: http://doc.babylonjs.com/babylon101/cameras#arc-rotate-camera
 type ArcRotateCamera struct{ *TargetCamera }
@@ -31,11 +29,20 @@ func ArcRotateCameraFromJSObject(p js.Value) *ArcRotateCamera {
 	return &ArcRotateCamera{TargetCameraFromJSObject(p)}
 }
 
+// NewArcRotateCameraOpts contains optional parameters for NewArcRotateCamera.
+type NewArcRotateCameraOpts struct {
+	SetActiveOnSceneIfNoneActive *bool
+}
+
 // NewArcRotateCamera returns a new ArcRotateCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera
-func (b *Babylon) NewArcRotateCamera(todo parameters) *ArcRotateCamera {
-	p := b.ctx.Get("ArcRotateCamera").New(todo)
+func (b *Babylon) NewArcRotateCamera(name string, alpha float64, beta float64, radius float64, target *Vector3, scene *Scene, opts *NewArcRotateCameraOpts) *ArcRotateCamera {
+	if opts == nil {
+		opts = &NewArcRotateCameraOpts{}
+	}
+
+	p := b.ctx.Get("ArcRotateCamera").New(name, alpha, beta, radius, target.JSObject(), scene.JSObject(), opts.SetActiveOnSceneIfNoneActive.JSObject())
 	return ArcRotateCameraFromJSObject(p)
 }
 

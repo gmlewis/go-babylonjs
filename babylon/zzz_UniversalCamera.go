@@ -9,7 +9,6 @@ import (
 // UniversalCamera represents a babylon.js UniversalCamera.
 // The Universal Camera is the one to choose for first person shooter type games, and works with all the keyboard, mouse, touch and gamepads. This replaces the earlier Free Camera,
 // which still works and will still be found in many Playgrounds.
-
 //
 // See: http://doc.babylonjs.com/features/cameras#universal-camera
 type UniversalCamera struct{ *TouchCamera }
@@ -31,8 +30,8 @@ func UniversalCameraFromJSObject(p js.Value) *UniversalCamera {
 // NewUniversalCamera returns a new UniversalCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.universalcamera
-func (b *Babylon) NewUniversalCamera(todo parameters) *UniversalCamera {
-	p := b.ctx.Get("UniversalCamera").New(todo)
+func (b *Babylon) NewUniversalCamera(name string, position *Vector3, scene *Scene) *UniversalCamera {
+	p := b.ctx.Get("UniversalCamera").New(name, position.JSObject(), scene.JSObject())
 	return UniversalCameraFromJSObject(p)
 }
 

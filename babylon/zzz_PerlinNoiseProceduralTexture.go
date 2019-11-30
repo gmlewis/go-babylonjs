@@ -24,11 +24,22 @@ func PerlinNoiseProceduralTextureFromJSObject(p js.Value) *PerlinNoiseProcedural
 	return &PerlinNoiseProceduralTexture{ProceduralTextureFromJSObject(p)}
 }
 
+// NewPerlinNoiseProceduralTextureOpts contains optional parameters for NewPerlinNoiseProceduralTexture.
+type NewPerlinNoiseProceduralTextureOpts struct {
+	FallbackTexture *Texture
+
+	GenerateMipMaps *bool
+}
+
 // NewPerlinNoiseProceduralTexture returns a new PerlinNoiseProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.perlinnoiseproceduraltexture
-func (b *Babylon) NewPerlinNoiseProceduralTexture(todo parameters) *PerlinNoiseProceduralTexture {
-	p := b.ctx.Get("PerlinNoiseProceduralTexture").New(todo)
+func (b *Babylon) NewPerlinNoiseProceduralTexture(name string, size float64, scene *Scene, opts *NewPerlinNoiseProceduralTextureOpts) *PerlinNoiseProceduralTexture {
+	if opts == nil {
+		opts = &NewPerlinNoiseProceduralTextureOpts{}
+	}
+
+	p := b.ctx.Get("PerlinNoiseProceduralTexture").New(name, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps.JSObject())
 	return PerlinNoiseProceduralTextureFromJSObject(p)
 }
 

@@ -27,11 +27,30 @@ func DepthOfFieldBlurPostProcessFromJSObject(p js.Value) *DepthOfFieldBlurPostPr
 	return &DepthOfFieldBlurPostProcess{BlurPostProcessFromJSObject(p)}
 }
 
+// NewDepthOfFieldBlurPostProcessOpts contains optional parameters for NewDepthOfFieldBlurPostProcess.
+type NewDepthOfFieldBlurPostProcessOpts struct {
+	ImageToBlur *PostProcess
+
+	SamplingMode *float64
+
+	Engine *Engine
+
+	Reusable *bool
+
+	TextureType *float64
+
+	BlockCompilation *bool
+}
+
 // NewDepthOfFieldBlurPostProcess returns a new DepthOfFieldBlurPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthoffieldblurpostprocess
-func (b *Babylon) NewDepthOfFieldBlurPostProcess(todo parameters) *DepthOfFieldBlurPostProcess {
-	p := b.ctx.Get("DepthOfFieldBlurPostProcess").New(todo)
+func (b *Babylon) NewDepthOfFieldBlurPostProcess(name string, scene *Scene, direction *Vector2, kernel float64, options float64, camera *Camera, circleOfConfusion *PostProcess, opts *NewDepthOfFieldBlurPostProcessOpts) *DepthOfFieldBlurPostProcess {
+	if opts == nil {
+		opts = &NewDepthOfFieldBlurPostProcessOpts{}
+	}
+
+	p := b.ctx.Get("DepthOfFieldBlurPostProcess").New(name, scene.JSObject(), direction.JSObject(), kernel, options, camera.JSObject(), circleOfConfusion.JSObject(), opts.ImageToBlur.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType, opts.BlockCompilation.JSObject())
 	return DepthOfFieldBlurPostProcessFromJSObject(p)
 }
 

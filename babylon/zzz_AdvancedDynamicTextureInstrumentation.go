@@ -8,7 +8,7 @@ import (
 
 // AdvancedDynamicTextureInstrumentation represents a babylon.js AdvancedDynamicTextureInstrumentation.
 // This class can be used to get instrumentation data from a AdvancedDynamicTexture object
-type AdvancedDynamicTextureInstrumentation struct{}
+type AdvancedDynamicTextureInstrumentation struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (a *AdvancedDynamicTextureInstrumentation) JSObject() js.Value { return a.p }
@@ -27,8 +27,8 @@ func AdvancedDynamicTextureInstrumentationFromJSObject(p js.Value) *AdvancedDyna
 // NewAdvancedDynamicTextureInstrumentation returns a new AdvancedDynamicTextureInstrumentation object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictextureinstrumentation
-func (b *Babylon) NewAdvancedDynamicTextureInstrumentation(todo parameters) *AdvancedDynamicTextureInstrumentation {
-	p := b.ctx.Get("AdvancedDynamicTextureInstrumentation").New(todo)
+func (b *Babylon) NewAdvancedDynamicTextureInstrumentation(texture *AdvancedDynamicTexture) *AdvancedDynamicTextureInstrumentation {
+	p := b.ctx.Get("AdvancedDynamicTextureInstrumentation").New(texture.JSObject())
 	return AdvancedDynamicTextureInstrumentationFromJSObject(p)
 }
 

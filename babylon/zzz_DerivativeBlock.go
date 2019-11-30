@@ -27,8 +27,8 @@ func DerivativeBlockFromJSObject(p js.Value) *DerivativeBlock {
 // NewDerivativeBlock returns a new DerivativeBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.derivativeblock
-func (b *Babylon) NewDerivativeBlock(todo parameters) *DerivativeBlock {
-	p := b.ctx.Get("DerivativeBlock").New(todo)
+func (b *Babylon) NewDerivativeBlock(name string) *DerivativeBlock {
+	p := b.ctx.Get("DerivativeBlock").New(name)
 	return DerivativeBlockFromJSObject(p)
 }
 

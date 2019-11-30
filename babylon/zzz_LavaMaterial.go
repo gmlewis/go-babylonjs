@@ -8,7 +8,7 @@ import (
 
 // LavaMaterial represents a babylon.js LavaMaterial.
 //
-type LavaMaterial struct{}
+type LavaMaterial struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (l *LavaMaterial) JSObject() js.Value { return l.p }
@@ -27,8 +27,8 @@ func LavaMaterialFromJSObject(p js.Value) *LavaMaterial {
 // NewLavaMaterial returns a new LavaMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial
-func (b *Babylon) NewLavaMaterial(todo parameters) *LavaMaterial {
-	p := b.ctx.Get("LavaMaterial").New(todo)
+func (b *Babylon) NewLavaMaterial(name string, scene *Scene) *LavaMaterial {
+	p := b.ctx.Get("LavaMaterial").New(name, scene.JSObject())
 	return LavaMaterialFromJSObject(p)
 }
 

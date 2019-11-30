@@ -8,7 +8,7 @@ import (
 
 // RibbonBuilder represents a babylon.js RibbonBuilder.
 // Class containing static functions to help procedurally build meshes
-type RibbonBuilder struct{}
+type RibbonBuilder struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (r *RibbonBuilder) JSObject() js.Value { return r.p }
@@ -22,14 +22,6 @@ func (b *Babylon) RibbonBuilder() *RibbonBuilder {
 // RibbonBuilderFromJSObject returns a wrapped RibbonBuilder JavaScript class.
 func RibbonBuilderFromJSObject(p js.Value) *RibbonBuilder {
 	return &RibbonBuilder{p: p}
-}
-
-// NewRibbonBuilder returns a new RibbonBuilder object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.ribbonbuilder
-func (b *Babylon) NewRibbonBuilder(todo parameters) *RibbonBuilder {
-	p := b.ctx.Get("RibbonBuilder").New(todo)
-	return RibbonBuilderFromJSObject(p)
 }
 
 // TODO: methods

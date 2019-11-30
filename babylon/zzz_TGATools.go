@@ -9,10 +9,9 @@ import (
 // TGATools represents a babylon.js TGATools.
 // Based on jsTGALoader - Javascript loader for TGA file
 // By Vincent Thibault
-
 //
 // See: http://blog.robrowser.com/javascript-tga-loader.html
-type TGATools struct{}
+type TGATools struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (t *TGATools) JSObject() js.Value { return t.p }
@@ -26,14 +25,6 @@ func (b *Babylon) TGATools() *TGATools {
 // TGAToolsFromJSObject returns a wrapped TGATools JavaScript class.
 func TGAToolsFromJSObject(p js.Value) *TGATools {
 	return &TGATools{p: p}
-}
-
-// NewTGATools returns a new TGATools object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.tgatools
-func (b *Babylon) NewTGATools(todo parameters) *TGATools {
-	p := b.ctx.Get("TGATools").New(todo)
-	return TGAToolsFromJSObject(p)
 }
 
 // TODO: methods

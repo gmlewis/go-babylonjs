@@ -24,11 +24,20 @@ func ScaleGizmoFromJSObject(p js.Value) *ScaleGizmo {
 	return &ScaleGizmo{GizmoFromJSObject(p)}
 }
 
+// NewScaleGizmoOpts contains optional parameters for NewScaleGizmo.
+type NewScaleGizmoOpts struct {
+	GizmoLayer *UtilityLayerRenderer
+}
+
 // NewScaleGizmo returns a new ScaleGizmo object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scalegizmo
-func (b *Babylon) NewScaleGizmo(todo parameters) *ScaleGizmo {
-	p := b.ctx.Get("ScaleGizmo").New(todo)
+func (b *Babylon) NewScaleGizmo(opts *NewScaleGizmoOpts) *ScaleGizmo {
+	if opts == nil {
+		opts = &NewScaleGizmoOpts{}
+	}
+
+	p := b.ctx.Get("ScaleGizmo").New(opts.GizmoLayer.JSObject())
 	return ScaleGizmoFromJSObject(p)
 }
 

@@ -24,11 +24,22 @@ func BloomEffectFromJSObject(p js.Value) *BloomEffect {
 	return &BloomEffect{PostProcessRenderEffectFromJSObject(p)}
 }
 
+// NewBloomEffectOpts contains optional parameters for NewBloomEffect.
+type NewBloomEffectOpts struct {
+	PipelineTextureType *float64
+
+	BlockCompilation *bool
+}
+
 // NewBloomEffect returns a new BloomEffect object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bloomeffect
-func (b *Babylon) NewBloomEffect(todo parameters) *BloomEffect {
-	p := b.ctx.Get("BloomEffect").New(todo)
+func (b *Babylon) NewBloomEffect(scene *Scene, bloomScale float64, bloomWeight float64, bloomKernel float64, opts *NewBloomEffectOpts) *BloomEffect {
+	if opts == nil {
+		opts = &NewBloomEffectOpts{}
+	}
+
+	p := b.ctx.Get("BloomEffect").New(scene.JSObject(), bloomScale, bloomWeight, bloomKernel, opts.PipelineTextureType, opts.BlockCompilation.JSObject())
 	return BloomEffectFromJSObject(p)
 }
 

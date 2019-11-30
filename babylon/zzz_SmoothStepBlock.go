@@ -27,8 +27,8 @@ func SmoothStepBlockFromJSObject(p js.Value) *SmoothStepBlock {
 // NewSmoothStepBlock returns a new SmoothStepBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.smoothstepblock
-func (b *Babylon) NewSmoothStepBlock(todo parameters) *SmoothStepBlock {
-	p := b.ctx.Get("SmoothStepBlock").New(todo)
+func (b *Babylon) NewSmoothStepBlock(name string) *SmoothStepBlock {
+	p := b.ctx.Get("SmoothStepBlock").New(name)
 	return SmoothStepBlockFromJSObject(p)
 }
 

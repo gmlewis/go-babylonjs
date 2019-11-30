@@ -8,7 +8,6 @@ import (
 
 // FxaaPostProcess represents a babylon.js FxaaPostProcess.
 // Fxaa post process
-
 //
 // See: https://doc.babylonjs.com/how_to/how_to_use_postprocesses#fxaa
 type FxaaPostProcess struct{ *PostProcess }
@@ -27,11 +26,28 @@ func FxaaPostProcessFromJSObject(p js.Value) *FxaaPostProcess {
 	return &FxaaPostProcess{PostProcessFromJSObject(p)}
 }
 
+// NewFxaaPostProcessOpts contains optional parameters for NewFxaaPostProcess.
+type NewFxaaPostProcessOpts struct {
+	Camera *Camera
+
+	SamplingMode *float64
+
+	Engine *Engine
+
+	Reusable *bool
+
+	TextureType *float64
+}
+
 // NewFxaaPostProcess returns a new FxaaPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess
-func (b *Babylon) NewFxaaPostProcess(todo parameters) *FxaaPostProcess {
-	p := b.ctx.Get("FxaaPostProcess").New(todo)
+func (b *Babylon) NewFxaaPostProcess(name string, options float64, opts *NewFxaaPostProcessOpts) *FxaaPostProcess {
+	if opts == nil {
+		opts = &NewFxaaPostProcessOpts{}
+	}
+
+	p := b.ctx.Get("FxaaPostProcess").New(name, options, opts.Camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType)
 	return FxaaPostProcessFromJSObject(p)
 }
 

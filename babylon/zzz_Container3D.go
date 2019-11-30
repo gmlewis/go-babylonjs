@@ -24,11 +24,20 @@ func Container3DFromJSObject(p js.Value) *Container3D {
 	return &Container3D{Control3DFromJSObject(p)}
 }
 
+// NewContainer3DOpts contains optional parameters for NewContainer3D.
+type NewContainer3DOpts struct {
+	Name *string
+}
+
 // NewContainer3D returns a new Container3D object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container3d
-func (b *Babylon) NewContainer3D(todo parameters) *Container3D {
-	p := b.ctx.Get("Container3D").New(todo)
+func (b *Babylon) NewContainer3D(opts *NewContainer3DOpts) *Container3D {
+	if opts == nil {
+		opts = &NewContainer3DOpts{}
+	}
+
+	p := b.ctx.Get("Container3D").New(opts.Name)
 	return Container3DFromJSObject(p)
 }
 

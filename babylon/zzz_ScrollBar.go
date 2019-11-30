@@ -24,11 +24,20 @@ func ScrollBarFromJSObject(p js.Value) *ScrollBar {
 	return &ScrollBar{BaseSliderFromJSObject(p)}
 }
 
+// NewScrollBarOpts contains optional parameters for NewScrollBar.
+type NewScrollBarOpts struct {
+	Name *string
+}
+
 // NewScrollBar returns a new ScrollBar object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scrollbar
-func (b *Babylon) NewScrollBar(todo parameters) *ScrollBar {
-	p := b.ctx.Get("ScrollBar").New(todo)
+func (b *Babylon) NewScrollBar(opts *NewScrollBarOpts) *ScrollBar {
+	if opts == nil {
+		opts = &NewScrollBarOpts{}
+	}
+
+	p := b.ctx.Get("ScrollBar").New(opts.Name)
 	return ScrollBarFromJSObject(p)
 }
 

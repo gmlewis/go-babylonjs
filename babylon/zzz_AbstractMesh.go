@@ -24,11 +24,20 @@ func AbstractMeshFromJSObject(p js.Value) *AbstractMesh {
 	return &AbstractMesh{TransformNodeFromJSObject(p)}
 }
 
+// NewAbstractMeshOpts contains optional parameters for NewAbstractMesh.
+type NewAbstractMeshOpts struct {
+	Scene *Scene
+}
+
 // NewAbstractMesh returns a new AbstractMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh
-func (b *Babylon) NewAbstractMesh(todo parameters) *AbstractMesh {
-	p := b.ctx.Get("AbstractMesh").New(todo)
+func (b *Babylon) NewAbstractMesh(name string, opts *NewAbstractMeshOpts) *AbstractMesh {
+	if opts == nil {
+		opts = &NewAbstractMeshOpts{}
+	}
+
+	p := b.ctx.Get("AbstractMesh").New(name, opts.Scene.JSObject())
 	return AbstractMeshFromJSObject(p)
 }
 

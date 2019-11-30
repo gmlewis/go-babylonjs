@@ -8,7 +8,6 @@ import (
 
 // LensFlaresOptimization represents a babylon.js LensFlaresOptimization.
 // Defines an optimization used to turn lens flares off
-
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
 type LensFlaresOptimization struct{ *SceneOptimization }
@@ -27,11 +26,20 @@ func LensFlaresOptimizationFromJSObject(p js.Value) *LensFlaresOptimization {
 	return &LensFlaresOptimization{SceneOptimizationFromJSObject(p)}
 }
 
+// NewLensFlaresOptimizationOpts contains optional parameters for NewLensFlaresOptimization.
+type NewLensFlaresOptimizationOpts struct {
+	Priority *float64
+}
+
 // NewLensFlaresOptimization returns a new LensFlaresOptimization object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensflaresoptimization
-func (b *Babylon) NewLensFlaresOptimization(todo parameters) *LensFlaresOptimization {
-	p := b.ctx.Get("LensFlaresOptimization").New(todo)
+func (b *Babylon) NewLensFlaresOptimization(opts *NewLensFlaresOptimizationOpts) *LensFlaresOptimization {
+	if opts == nil {
+		opts = &NewLensFlaresOptimizationOpts{}
+	}
+
+	p := b.ctx.Get("LensFlaresOptimization").New(opts.Priority)
 	return LensFlaresOptimizationFromJSObject(p)
 }
 

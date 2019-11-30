@@ -9,7 +9,7 @@ import (
 // BoxParticleEmitter represents a babylon.js BoxParticleEmitter.
 // Particle emitter emitting particles from the inside of a box.
 // It emits the particles randomly between 2 given directions.
-type BoxParticleEmitter struct{}
+type BoxParticleEmitter struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (b *BoxParticleEmitter) JSObject() js.Value { return b.p }
@@ -28,8 +28,8 @@ func BoxParticleEmitterFromJSObject(p js.Value) *BoxParticleEmitter {
 // NewBoxParticleEmitter returns a new BoxParticleEmitter object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boxparticleemitter
-func (b *Babylon) NewBoxParticleEmitter(todo parameters) *BoxParticleEmitter {
-	p := b.ctx.Get("BoxParticleEmitter").New(todo)
+func (b *Babylon) NewBoxParticleEmitter() *BoxParticleEmitter {
+	p := b.ctx.Get("BoxParticleEmitter").New()
 	return BoxParticleEmitterFromJSObject(p)
 }
 

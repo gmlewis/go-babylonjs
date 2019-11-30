@@ -8,7 +8,7 @@ import (
 
 // NullEngineOptions represents a babylon.js NullEngineOptions.
 // Options to create the null engine
-type NullEngineOptions struct{}
+type NullEngineOptions struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (n *NullEngineOptions) JSObject() js.Value { return n.p }
@@ -22,14 +22,6 @@ func (b *Babylon) NullEngineOptions() *NullEngineOptions {
 // NullEngineOptionsFromJSObject returns a wrapped NullEngineOptions JavaScript class.
 func NullEngineOptionsFromJSObject(p js.Value) *NullEngineOptions {
 	return &NullEngineOptions{p: p}
-}
-
-// NewNullEngineOptions returns a new NullEngineOptions object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.nullengineoptions
-func (b *Babylon) NewNullEngineOptions(todo parameters) *NullEngineOptions {
-	p := b.ctx.Get("NullEngineOptions").New(todo)
-	return NullEngineOptionsFromJSObject(p)
 }
 
 // TODO: methods

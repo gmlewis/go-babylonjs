@@ -8,7 +8,7 @@ import (
 
 // TextureTools represents a babylon.js TextureTools.
 // Class used to host texture specific utilities
-type TextureTools struct{}
+type TextureTools struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (t *TextureTools) JSObject() js.Value { return t.p }
@@ -22,14 +22,6 @@ func (b *Babylon) TextureTools() *TextureTools {
 // TextureToolsFromJSObject returns a wrapped TextureTools JavaScript class.
 func TextureToolsFromJSObject(p js.Value) *TextureTools {
 	return &TextureTools{p: p}
-}
-
-// NewTextureTools returns a new TextureTools object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.texturetools
-func (b *Babylon) NewTextureTools(todo parameters) *TextureTools {
-	p := b.ctx.Get("TextureTools").New(todo)
-	return TextureToolsFromJSObject(p)
 }
 
 // TODO: methods

@@ -9,7 +9,7 @@ import (
 // Particle represents a babylon.js Particle.
 // A particle represents one of the element emitted by a particle system.
 // This is mainly define by its coordinates, direction, velocity and age.
-type Particle struct{}
+type Particle struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (p *Particle) JSObject() js.Value { return p.p }
@@ -28,8 +28,8 @@ func ParticleFromJSObject(p js.Value) *Particle {
 // NewParticle returns a new Particle object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particle
-func (b *Babylon) NewParticle(todo parameters) *Particle {
-	p := b.ctx.Get("Particle").New(todo)
+func (b *Babylon) NewParticle(particleSystem *ParticleSystem) *Particle {
+	p := b.ctx.Get("Particle").New(particleSystem.JSObject())
 	return ParticleFromJSObject(p)
 }
 

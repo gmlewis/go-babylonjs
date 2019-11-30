@@ -9,7 +9,7 @@ import (
 // SpriteSceneComponent represents a babylon.js SpriteSceneComponent.
 // Defines the sprite scene component responsible to manage sprites
 // in a given scene.
-type SpriteSceneComponent struct{}
+type SpriteSceneComponent struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (s *SpriteSceneComponent) JSObject() js.Value { return s.p }
@@ -28,8 +28,8 @@ func SpriteSceneComponentFromJSObject(p js.Value) *SpriteSceneComponent {
 // NewSpriteSceneComponent returns a new SpriteSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritescenecomponent
-func (b *Babylon) NewSpriteSceneComponent(todo parameters) *SpriteSceneComponent {
-	p := b.ctx.Get("SpriteSceneComponent").New(todo)
+func (b *Babylon) NewSpriteSceneComponent(scene *Scene) *SpriteSceneComponent {
+	p := b.ctx.Get("SpriteSceneComponent").New(scene.JSObject())
 	return SpriteSceneComponentFromJSObject(p)
 }
 

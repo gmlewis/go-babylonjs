@@ -27,8 +27,8 @@ func ImageAssetTaskFromJSObject(p js.Value) *ImageAssetTask {
 // NewImageAssetTask returns a new ImageAssetTask object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageassettask
-func (b *Babylon) NewImageAssetTask(todo parameters) *ImageAssetTask {
-	p := b.ctx.Get("ImageAssetTask").New(todo)
+func (b *Babylon) NewImageAssetTask(name string, url string) *ImageAssetTask {
+	p := b.ctx.Get("ImageAssetTask").New(name, url)
 	return ImageAssetTaskFromJSObject(p)
 }
 

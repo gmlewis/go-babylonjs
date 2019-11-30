@@ -27,8 +27,8 @@ func MeshAssetTaskFromJSObject(p js.Value) *MeshAssetTask {
 // NewMeshAssetTask returns a new MeshAssetTask object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.meshassettask
-func (b *Babylon) NewMeshAssetTask(todo parameters) *MeshAssetTask {
-	p := b.ctx.Get("MeshAssetTask").New(todo)
+func (b *Babylon) NewMeshAssetTask(name string, meshesNames interface{}, rootUrl string, sceneFilename string) *MeshAssetTask {
+	p := b.ctx.Get("MeshAssetTask").New(name, meshesNames, rootUrl, sceneFilename)
 	return MeshAssetTaskFromJSObject(p)
 }
 

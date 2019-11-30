@@ -24,11 +24,22 @@ func SubMeshFromJSObject(p js.Value) *SubMesh {
 	return &SubMesh{BaseSubMeshFromJSObject(p)}
 }
 
+// NewSubMeshOpts contains optional parameters for NewSubMesh.
+type NewSubMeshOpts struct {
+	RenderingMesh *Mesh
+
+	CreateBoundingBox *bool
+}
+
 // NewSubMesh returns a new SubMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.submesh
-func (b *Babylon) NewSubMesh(todo parameters) *SubMesh {
-	p := b.ctx.Get("SubMesh").New(todo)
+func (b *Babylon) NewSubMesh(materialIndex float64, verticesStart float64, verticesCount float64, indexStart float64, indexCount float64, mesh *AbstractMesh, opts *NewSubMeshOpts) *SubMesh {
+	if opts == nil {
+		opts = &NewSubMeshOpts{}
+	}
+
+	p := b.ctx.Get("SubMesh").New(materialIndex, verticesStart, verticesCount, indexStart, indexCount, mesh.JSObject(), opts.RenderingMesh.JSObject(), opts.CreateBoundingBox.JSObject())
 	return SubMeshFromJSObject(p)
 }
 

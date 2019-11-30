@@ -24,11 +24,22 @@ func ImageFromJSObject(p js.Value) *Image {
 	return &Image{ControlFromJSObject(p)}
 }
 
+// NewImageOpts contains optional parameters for NewImage.
+type NewImageOpts struct {
+	Name *string
+
+	Url *string
+}
+
 // NewImage returns a new Image object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image
-func (b *Babylon) NewImage(todo parameters) *Image {
-	p := b.ctx.Get("Image").New(todo)
+func (b *Babylon) NewImage(opts *NewImageOpts) *Image {
+	if opts == nil {
+		opts = &NewImageOpts{}
+	}
+
+	p := b.ctx.Get("Image").New(opts.Name, opts.Url)
 	return ImageFromJSObject(p)
 }
 

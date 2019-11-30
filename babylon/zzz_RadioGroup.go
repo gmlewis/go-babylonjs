@@ -28,8 +28,8 @@ func RadioGroupFromJSObject(p js.Value) *RadioGroup {
 // NewRadioGroup returns a new RadioGroup object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.radiogroup
-func (b *Babylon) NewRadioGroup(todo parameters) *RadioGroup {
-	p := b.ctx.Get("RadioGroup").New(todo)
+func (b *Babylon) NewRadioGroup(name string) *RadioGroup {
+	p := b.ctx.Get("RadioGroup").New(name)
 	return RadioGroupFromJSObject(p)
 }
 

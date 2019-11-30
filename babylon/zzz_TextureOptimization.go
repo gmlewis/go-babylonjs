@@ -8,7 +8,6 @@ import (
 
 // TextureOptimization represents a babylon.js TextureOptimization.
 // Defines an optimization used to reduce the size of render target textures
-
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
 type TextureOptimization struct{ *SceneOptimization }
@@ -27,11 +26,24 @@ func TextureOptimizationFromJSObject(p js.Value) *TextureOptimization {
 	return &TextureOptimization{SceneOptimizationFromJSObject(p)}
 }
 
+// NewTextureOptimizationOpts contains optional parameters for NewTextureOptimization.
+type NewTextureOptimizationOpts struct {
+	Priority *float64
+
+	MaximumSize *float64
+
+	Step *float64
+}
+
 // NewTextureOptimization returns a new TextureOptimization object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textureoptimization
-func (b *Babylon) NewTextureOptimization(todo parameters) *TextureOptimization {
-	p := b.ctx.Get("TextureOptimization").New(todo)
+func (b *Babylon) NewTextureOptimization(opts *NewTextureOptimizationOpts) *TextureOptimization {
+	if opts == nil {
+		opts = &NewTextureOptimizationOpts{}
+	}
+
+	p := b.ctx.Get("TextureOptimization").New(opts.Priority, opts.MaximumSize, opts.Step)
 	return TextureOptimizationFromJSObject(p)
 }
 

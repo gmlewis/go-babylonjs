@@ -8,7 +8,7 @@ import (
 
 // Matrix2D represents a babylon.js Matrix2D.
 // Class used to provide 2D matrix features
-type Matrix2D struct{}
+type Matrix2D struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (m *Matrix2D) JSObject() js.Value { return m.p }
@@ -27,8 +27,8 @@ func Matrix2DFromJSObject(p js.Value) *Matrix2D {
 // NewMatrix2D returns a new Matrix2D object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.matrix2d
-func (b *Babylon) NewMatrix2D(todo parameters) *Matrix2D {
-	p := b.ctx.Get("Matrix2D").New(todo)
+func (b *Babylon) NewMatrix2D(m00 float64, m01 float64, m10 float64, m11 float64, m20 float64, m21 float64) *Matrix2D {
+	p := b.ctx.Get("Matrix2D").New(m00, m01, m10, m11, m20, m21)
 	return Matrix2DFromJSObject(p)
 }
 

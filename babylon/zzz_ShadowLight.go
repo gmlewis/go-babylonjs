@@ -28,8 +28,8 @@ func ShadowLightFromJSObject(p js.Value) *ShadowLight {
 // NewShadowLight returns a new ShadowLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight
-func (b *Babylon) NewShadowLight(todo parameters) *ShadowLight {
-	p := b.ctx.Get("ShadowLight").New(todo)
+func (b *Babylon) NewShadowLight(name string, scene *Scene) *ShadowLight {
+	p := b.ctx.Get("ShadowLight").New(name, scene.JSObject())
 	return ShadowLightFromJSObject(p)
 }
 

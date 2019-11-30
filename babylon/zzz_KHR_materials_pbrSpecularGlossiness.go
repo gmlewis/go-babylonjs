@@ -8,7 +8,7 @@ import (
 
 // KHR_materials_pbrSpecularGlossiness represents a babylon.js KHR_materials_pbrSpecularGlossiness.
 // &lt;a href=&#34;https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Khronos/KHR_materials_pbrSpecularGlossiness&#34;&gt;Specification&lt;/a&gt;
-type KHR_materials_pbrSpecularGlossiness struct{}
+type KHR_materials_pbrSpecularGlossiness struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (k *KHR_materials_pbrSpecularGlossiness) JSObject() js.Value { return k.p }
@@ -22,14 +22,6 @@ func (b *Babylon) KHR_materials_pbrSpecularGlossiness() *KHR_materials_pbrSpecul
 // KHR_materials_pbrSpecularGlossinessFromJSObject returns a wrapped KHR_materials_pbrSpecularGlossiness JavaScript class.
 func KHR_materials_pbrSpecularGlossinessFromJSObject(p js.Value) *KHR_materials_pbrSpecularGlossiness {
 	return &KHR_materials_pbrSpecularGlossiness{p: p}
-}
-
-// NewKHR_materials_pbrSpecularGlossiness returns a new KHR_materials_pbrSpecularGlossiness object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.khr_materials_pbrspecularglossiness
-func (b *Babylon) NewKHR_materials_pbrSpecularGlossiness(todo parameters) *KHR_materials_pbrSpecularGlossiness {
-	p := b.ctx.Get("KHR_materials_pbrSpecularGlossiness").New(todo)
-	return KHR_materials_pbrSpecularGlossinessFromJSObject(p)
 }
 
 // TODO: methods

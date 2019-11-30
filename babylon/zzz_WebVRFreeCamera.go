@@ -9,7 +9,6 @@ import (
 // WebVRFreeCamera represents a babylon.js WebVRFreeCamera.
 // This represents a WebVR camera.
 // The WebVR camera is Babylon&amp;#39;s simple interface to interaction with Windows Mixed Reality, HTC Vive and Oculus Rift.
-
 //
 // See: http://doc.babylonjs.com/how_to/webvr_camera
 type WebVRFreeCamera struct{ *FreeCamera }
@@ -28,11 +27,20 @@ func WebVRFreeCameraFromJSObject(p js.Value) *WebVRFreeCamera {
 	return &WebVRFreeCamera{FreeCameraFromJSObject(p)}
 }
 
+// NewWebVRFreeCameraOpts contains optional parameters for NewWebVRFreeCamera.
+type NewWebVRFreeCameraOpts struct {
+	WebVROptions *WebVROptions
+}
+
 // NewWebVRFreeCamera returns a new WebVRFreeCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera
-func (b *Babylon) NewWebVRFreeCamera(todo parameters) *WebVRFreeCamera {
-	p := b.ctx.Get("WebVRFreeCamera").New(todo)
+func (b *Babylon) NewWebVRFreeCamera(name string, position *Vector3, scene *Scene, opts *NewWebVRFreeCameraOpts) *WebVRFreeCamera {
+	if opts == nil {
+		opts = &NewWebVRFreeCameraOpts{}
+	}
+
+	p := b.ctx.Get("WebVRFreeCamera").New(name, position.JSObject(), scene.JSObject(), opts.WebVROptions.JSObject())
 	return WebVRFreeCameraFromJSObject(p)
 }
 

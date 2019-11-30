@@ -30,8 +30,8 @@ func DirectionalLightFromJSObject(p js.Value) *DirectionalLight {
 // NewDirectionalLight returns a new DirectionalLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.directionallight
-func (b *Babylon) NewDirectionalLight(todo parameters) *DirectionalLight {
-	p := b.ctx.Get("DirectionalLight").New(todo)
+func (b *Babylon) NewDirectionalLight(name string, direction *Vector3, scene *Scene) *DirectionalLight {
+	p := b.ctx.Get("DirectionalLight").New(name, direction.JSObject(), scene.JSObject())
 	return DirectionalLightFromJSObject(p)
 }
 

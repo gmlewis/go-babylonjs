@@ -1,7 +1,6 @@
 package babylon
 
-import "syscall/js"
-
+/*
 // Node represents a babylon.js Node.
 type Node struct{ p js.Value }
 
@@ -26,3 +25,4 @@ func (b *Babylon) NewNode(name string, scene *Scene) *Node {
 	p := b.ctx.Get("Node").New(name, scene.JSObject())
 	return NodeFromJSObject(p)
 }
+*/

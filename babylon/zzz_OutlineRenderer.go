@@ -9,7 +9,7 @@ import (
 // OutlineRenderer represents a babylon.js OutlineRenderer.
 // This class is responsible to draw bothe outline/overlay of meshes.
 // It should not be used directly but through the available method on mesh.
-type OutlineRenderer struct{}
+type OutlineRenderer struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (o *OutlineRenderer) JSObject() js.Value { return o.p }
@@ -28,8 +28,8 @@ func OutlineRendererFromJSObject(p js.Value) *OutlineRenderer {
 // NewOutlineRenderer returns a new OutlineRenderer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.outlinerenderer
-func (b *Babylon) NewOutlineRenderer(todo parameters) *OutlineRenderer {
-	p := b.ctx.Get("OutlineRenderer").New(todo)
+func (b *Babylon) NewOutlineRenderer(scene *Scene) *OutlineRenderer {
+	p := b.ctx.Get("OutlineRenderer").New(scene.JSObject())
 	return OutlineRendererFromJSObject(p)
 }
 

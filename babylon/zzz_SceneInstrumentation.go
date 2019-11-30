@@ -8,10 +8,9 @@ import (
 
 // SceneInstrumentation represents a babylon.js SceneInstrumentation.
 // This class can be used to get instrumentation data from a Babylon engine
-
 //
 // See: http://doc.babylonjs.com/how_to/optimizing_your_scene#sceneinstrumentation
-type SceneInstrumentation struct{}
+type SceneInstrumentation struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (s *SceneInstrumentation) JSObject() js.Value { return s.p }
@@ -30,8 +29,8 @@ func SceneInstrumentationFromJSObject(p js.Value) *SceneInstrumentation {
 // NewSceneInstrumentation returns a new SceneInstrumentation object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation
-func (b *Babylon) NewSceneInstrumentation(todo parameters) *SceneInstrumentation {
-	p := b.ctx.Get("SceneInstrumentation").New(todo)
+func (b *Babylon) NewSceneInstrumentation(scene *Scene) *SceneInstrumentation {
+	p := b.ctx.Get("SceneInstrumentation").New(scene.JSObject())
 	return SceneInstrumentationFromJSObject(p)
 }
 

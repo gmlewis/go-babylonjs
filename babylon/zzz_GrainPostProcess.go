@@ -24,11 +24,28 @@ func GrainPostProcessFromJSObject(p js.Value) *GrainPostProcess {
 	return &GrainPostProcess{PostProcessFromJSObject(p)}
 }
 
+// NewGrainPostProcessOpts contains optional parameters for NewGrainPostProcess.
+type NewGrainPostProcessOpts struct {
+	SamplingMode *float64
+
+	Engine *Engine
+
+	Reusable *bool
+
+	TextureType *float64
+
+	BlockCompilation *bool
+}
+
 // NewGrainPostProcess returns a new GrainPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.grainpostprocess
-func (b *Babylon) NewGrainPostProcess(todo parameters) *GrainPostProcess {
-	p := b.ctx.Get("GrainPostProcess").New(todo)
+func (b *Babylon) NewGrainPostProcess(name string, options float64, camera *Camera, opts *NewGrainPostProcessOpts) *GrainPostProcess {
+	if opts == nil {
+		opts = &NewGrainPostProcessOpts{}
+	}
+
+	p := b.ctx.Get("GrainPostProcess").New(name, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType, opts.BlockCompilation.JSObject())
 	return GrainPostProcessFromJSObject(p)
 }
 

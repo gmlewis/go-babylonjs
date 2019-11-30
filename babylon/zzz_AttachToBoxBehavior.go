@@ -8,7 +8,7 @@ import (
 
 // AttachToBoxBehavior represents a babylon.js AttachToBoxBehavior.
 // A behavior that when attached to a mesh will will place a specified node on the meshes face pointing towards the camera
-type AttachToBoxBehavior struct{}
+type AttachToBoxBehavior struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (a *AttachToBoxBehavior) JSObject() js.Value { return a.p }
@@ -27,8 +27,8 @@ func AttachToBoxBehaviorFromJSObject(p js.Value) *AttachToBoxBehavior {
 // NewAttachToBoxBehavior returns a new AttachToBoxBehavior object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.attachtoboxbehavior
-func (b *Babylon) NewAttachToBoxBehavior(todo parameters) *AttachToBoxBehavior {
-	p := b.ctx.Get("AttachToBoxBehavior").New(todo)
+func (b *Babylon) NewAttachToBoxBehavior(ui *TransformNode) *AttachToBoxBehavior {
+	p := b.ctx.Get("AttachToBoxBehavior").New(ui.JSObject())
 	return AttachToBoxBehaviorFromJSObject(p)
 }
 

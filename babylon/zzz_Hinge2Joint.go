@@ -8,7 +8,6 @@ import (
 
 // Hinge2Joint represents a babylon.js Hinge2Joint.
 // This class represents a dual hinge physics joint (same as wheel joint)
-
 //
 // See: https://doc.babylonjs.com/how_to/using_the_physics_engine
 type Hinge2Joint struct{ *MotorEnabledJoint }
@@ -30,8 +29,8 @@ func Hinge2JointFromJSObject(p js.Value) *Hinge2Joint {
 // NewHinge2Joint returns a new Hinge2Joint object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hinge2joint
-func (b *Babylon) NewHinge2Joint(todo parameters) *Hinge2Joint {
-	p := b.ctx.Get("Hinge2Joint").New(todo)
+func (b *Babylon) NewHinge2Joint(jointData js.Value) *Hinge2Joint {
+	p := b.ctx.Get("Hinge2Joint").New(jointData)
 	return Hinge2JointFromJSObject(p)
 }
 

@@ -27,8 +27,8 @@ func WorleyNoise3DBlockFromJSObject(p js.Value) *WorleyNoise3DBlock {
 // NewWorleyNoise3DBlock returns a new WorleyNoise3DBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock
-func (b *Babylon) NewWorleyNoise3DBlock(todo parameters) *WorleyNoise3DBlock {
-	p := b.ctx.Get("WorleyNoise3DBlock").New(todo)
+func (b *Babylon) NewWorleyNoise3DBlock(name string) *WorleyNoise3DBlock {
+	p := b.ctx.Get("WorleyNoise3DBlock").New(name)
 	return WorleyNoise3DBlockFromJSObject(p)
 }
 

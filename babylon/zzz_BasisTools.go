@@ -9,7 +9,7 @@ import (
 // BasisTools represents a babylon.js BasisTools.
 // Used to load .Basis files
 // See &lt;a href=&#34;https://github.com/BinomialLLC/basis_universal/tree/master/webgl&#34;&gt;https://github.com/BinomialLLC/basis_universal/tree/master/webgl&lt;/a&gt;
-type BasisTools struct{}
+type BasisTools struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (b *BasisTools) JSObject() js.Value { return b.p }
@@ -23,14 +23,6 @@ func (b *Babylon) BasisTools() *BasisTools {
 // BasisToolsFromJSObject returns a wrapped BasisTools JavaScript class.
 func BasisToolsFromJSObject(p js.Value) *BasisTools {
 	return &BasisTools{p: p}
-}
-
-// NewBasisTools returns a new BasisTools object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.basistools
-func (b *Babylon) NewBasisTools(todo parameters) *BasisTools {
-	p := b.ctx.Get("BasisTools").New(todo)
-	return BasisToolsFromJSObject(p)
 }
 
 // TODO: methods

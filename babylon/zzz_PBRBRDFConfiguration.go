@@ -8,7 +8,7 @@ import (
 
 // PBRBRDFConfiguration represents a babylon.js PBRBRDFConfiguration.
 // Define the code related to the BRDF parameters of the pbr material.
-type PBRBRDFConfiguration struct{}
+type PBRBRDFConfiguration struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (p *PBRBRDFConfiguration) JSObject() js.Value { return p.p }
@@ -27,8 +27,8 @@ func PBRBRDFConfigurationFromJSObject(p js.Value) *PBRBRDFConfiguration {
 // NewPBRBRDFConfiguration returns a new PBRBRDFConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbrdfconfiguration
-func (b *Babylon) NewPBRBRDFConfiguration(todo parameters) *PBRBRDFConfiguration {
-	p := b.ctx.Get("PBRBRDFConfiguration").New(todo)
+func (b *Babylon) NewPBRBRDFConfiguration(markAllSubMeshesAsMiscDirty func()) *PBRBRDFConfiguration {
+	p := b.ctx.Get("PBRBRDFConfiguration").New(markAllSubMeshesAsMiscDirty)
 	return PBRBRDFConfigurationFromJSObject(p)
 }
 

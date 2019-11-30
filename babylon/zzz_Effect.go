@@ -8,7 +8,7 @@ import (
 
 // Effect represents a babylon.js Effect.
 // Effect containing vertex and fragment shader that can be executed on an object.
-type Effect struct{}
+type Effect struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (e *Effect) JSObject() js.Value { return e.p }
@@ -24,11 +24,32 @@ func EffectFromJSObject(p js.Value) *Effect {
 	return &Effect{p: p}
 }
 
+// NewEffectOpts contains optional parameters for NewEffect.
+type NewEffectOpts struct {
+	Samplers *string
+
+	Engine *ThinEngine
+
+	Defines *string
+
+	Fallbacks js.Value
+
+	OnCompiled *func()
+
+	OnError *func()
+
+	IndexParameters *interface{}
+}
+
 // NewEffect returns a new Effect object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect
-func (b *Babylon) NewEffect(todo parameters) *Effect {
-	p := b.ctx.Get("Effect").New(todo)
+func (b *Babylon) NewEffect(baseName interface{}, attributesNamesOrOptions string, uniformsNamesOrEngine string, opts *NewEffectOpts) *Effect {
+	if opts == nil {
+		opts = &NewEffectOpts{}
+	}
+
+	p := b.ctx.Get("Effect").New(baseName, attributesNamesOrOptions, uniformsNamesOrEngine, opts.Samplers, opts.Engine.JSObject(), opts.Defines, opts.Fallbacks, opts.OnCompiled, opts.OnError, opts.IndexParameters)
 	return EffectFromJSObject(p)
 }
 

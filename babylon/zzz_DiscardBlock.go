@@ -27,8 +27,8 @@ func DiscardBlockFromJSObject(p js.Value) *DiscardBlock {
 // NewDiscardBlock returns a new DiscardBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.discardblock
-func (b *Babylon) NewDiscardBlock(todo parameters) *DiscardBlock {
-	p := b.ctx.Get("DiscardBlock").New(todo)
+func (b *Babylon) NewDiscardBlock(name string) *DiscardBlock {
+	p := b.ctx.Get("DiscardBlock").New(name)
 	return DiscardBlockFromJSObject(p)
 }
 

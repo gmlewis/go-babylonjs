@@ -8,10 +8,9 @@ import (
 
 // PhysicsRadialExplosionEventOptions represents a babylon.js PhysicsRadialExplosionEventOptions.
 // Options fot the radial explosion event
-
 //
 // See: https://doc.babylonjs.com/how_to/using_the_physics_engine#further-functionality-of-the-impostor-class
-type PhysicsRadialExplosionEventOptions struct{}
+type PhysicsRadialExplosionEventOptions struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (p *PhysicsRadialExplosionEventOptions) JSObject() js.Value { return p.p }
@@ -25,14 +24,6 @@ func (b *Babylon) PhysicsRadialExplosionEventOptions() *PhysicsRadialExplosionEv
 // PhysicsRadialExplosionEventOptionsFromJSObject returns a wrapped PhysicsRadialExplosionEventOptions JavaScript class.
 func PhysicsRadialExplosionEventOptionsFromJSObject(p js.Value) *PhysicsRadialExplosionEventOptions {
 	return &PhysicsRadialExplosionEventOptions{p: p}
-}
-
-// NewPhysicsRadialExplosionEventOptions returns a new PhysicsRadialExplosionEventOptions object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.physicsradialexplosioneventoptions
-func (b *Babylon) NewPhysicsRadialExplosionEventOptions(todo parameters) *PhysicsRadialExplosionEventOptions {
-	p := b.ctx.Get("PhysicsRadialExplosionEventOptions").New(todo)
-	return PhysicsRadialExplosionEventOptionsFromJSObject(p)
 }
 
 // TODO: methods

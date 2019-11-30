@@ -27,8 +27,8 @@ func InstancedLinesMeshFromJSObject(p js.Value) *InstancedLinesMesh {
 // NewInstancedLinesMesh returns a new InstancedLinesMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh
-func (b *Babylon) NewInstancedLinesMesh(todo parameters) *InstancedLinesMesh {
-	p := b.ctx.Get("InstancedLinesMesh").New(todo)
+func (b *Babylon) NewInstancedLinesMesh(name string, source *LinesMesh) *InstancedLinesMesh {
+	p := b.ctx.Get("InstancedLinesMesh").New(name, source.JSObject())
 	return InstancedLinesMeshFromJSObject(p)
 }
 

@@ -8,10 +8,9 @@ import (
 
 // PhysicsRaycastResult represents a babylon.js PhysicsRaycastResult.
 // Holds the data for the raycast result
-
 //
 // See: https://doc.babylonjs.com/how_to/using_the_physics_engine
-type PhysicsRaycastResult struct{}
+type PhysicsRaycastResult struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (p *PhysicsRaycastResult) JSObject() js.Value { return p.p }
@@ -25,14 +24,6 @@ func (b *Babylon) PhysicsRaycastResult() *PhysicsRaycastResult {
 // PhysicsRaycastResultFromJSObject returns a wrapped PhysicsRaycastResult JavaScript class.
 func PhysicsRaycastResultFromJSObject(p js.Value) *PhysicsRaycastResult {
 	return &PhysicsRaycastResult{p: p}
-}
-
-// NewPhysicsRaycastResult returns a new PhysicsRaycastResult object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.physicsraycastresult
-func (b *Babylon) NewPhysicsRaycastResult(todo parameters) *PhysicsRaycastResult {
-	p := b.ctx.Get("PhysicsRaycastResult").New(todo)
-	return PhysicsRaycastResultFromJSObject(p)
 }
 
 // TODO: methods

@@ -8,7 +8,6 @@ import (
 
 // PBRMetallicRoughnessMaterial represents a babylon.js PBRMetallicRoughnessMaterial.
 // The PBR material of BJS following the metal roughness convention.
-
 //
 // This fits to the PBR convention in the GLTF definition:
 // &lt;a href=&#34;https://github.com/KhronosGroup/glTF/tree/2.0/specification/2.0&#34;&gt;https://github.com/KhronosGroup/glTF/tree/2.0/specification/2.0&lt;/a&gt;
@@ -31,8 +30,8 @@ func PBRMetallicRoughnessMaterialFromJSObject(p js.Value) *PBRMetallicRoughnessM
 // NewPBRMetallicRoughnessMaterial returns a new PBRMetallicRoughnessMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial
-func (b *Babylon) NewPBRMetallicRoughnessMaterial(todo parameters) *PBRMetallicRoughnessMaterial {
-	p := b.ctx.Get("PBRMetallicRoughnessMaterial").New(todo)
+func (b *Babylon) NewPBRMetallicRoughnessMaterial(name string, scene *Scene) *PBRMetallicRoughnessMaterial {
+	p := b.ctx.Get("PBRMetallicRoughnessMaterial").New(name, scene.JSObject())
 	return PBRMetallicRoughnessMaterialFromJSObject(p)
 }
 

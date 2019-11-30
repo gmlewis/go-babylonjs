@@ -8,7 +8,6 @@ import (
 
 // PBRBaseSimpleMaterial represents a babylon.js PBRBaseSimpleMaterial.
 // The Physically based simple base material of BJS.
-
 //
 // This enables better naming and convention enforcements on top of the pbrMaterial.
 // It is used as the base class for both the specGloss and metalRough conventions.
@@ -31,8 +30,8 @@ func PBRBaseSimpleMaterialFromJSObject(p js.Value) *PBRBaseSimpleMaterial {
 // NewPBRBaseSimpleMaterial returns a new PBRBaseSimpleMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbasesimplematerial
-func (b *Babylon) NewPBRBaseSimpleMaterial(todo parameters) *PBRBaseSimpleMaterial {
-	p := b.ctx.Get("PBRBaseSimpleMaterial").New(todo)
+func (b *Babylon) NewPBRBaseSimpleMaterial(name string, scene *Scene) *PBRBaseSimpleMaterial {
+	p := b.ctx.Get("PBRBaseSimpleMaterial").New(name, scene.JSObject())
 	return PBRBaseSimpleMaterialFromJSObject(p)
 }
 

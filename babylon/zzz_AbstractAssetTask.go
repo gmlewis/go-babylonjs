@@ -8,7 +8,7 @@ import (
 
 // AbstractAssetTask represents a babylon.js AbstractAssetTask.
 // Define an abstract asset task used with a AssetsManager class to load assets into a scene
-type AbstractAssetTask struct{}
+type AbstractAssetTask struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (a *AbstractAssetTask) JSObject() js.Value { return a.p }
@@ -27,8 +27,8 @@ func AbstractAssetTaskFromJSObject(p js.Value) *AbstractAssetTask {
 // NewAbstractAssetTask returns a new AbstractAssetTask object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractassettask
-func (b *Babylon) NewAbstractAssetTask(todo parameters) *AbstractAssetTask {
-	p := b.ctx.Get("AbstractAssetTask").New(todo)
+func (b *Babylon) NewAbstractAssetTask(name string) *AbstractAssetTask {
+	p := b.ctx.Get("AbstractAssetTask").New(name)
 	return AbstractAssetTaskFromJSObject(p)
 }
 

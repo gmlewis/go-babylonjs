@@ -28,8 +28,8 @@ func PointerInfoFromJSObject(p js.Value) *PointerInfo {
 // NewPointerInfo returns a new PointerInfo object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointerinfo
-func (b *Babylon) NewPointerInfo(todo parameters) *PointerInfo {
-	p := b.ctx.Get("PointerInfo").New(todo)
+func (b *Babylon) NewPointerInfo(jsType float64, event PointerEvent, pickInfo *PickingInfo) *PointerInfo {
+	p := b.ctx.Get("PointerInfo").New(jsType, event.JSObject(), pickInfo.JSObject())
 	return PointerInfoFromJSObject(p)
 }
 

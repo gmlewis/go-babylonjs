@@ -27,8 +27,8 @@ func DivideBlockFromJSObject(p js.Value) *DivideBlock {
 // NewDivideBlock returns a new DivideBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.divideblock
-func (b *Babylon) NewDivideBlock(todo parameters) *DivideBlock {
-	p := b.ctx.Get("DivideBlock").New(todo)
+func (b *Babylon) NewDivideBlock(name string) *DivideBlock {
+	p := b.ctx.Get("DivideBlock").New(name)
 	return DivideBlockFromJSObject(p)
 }
 

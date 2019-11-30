@@ -8,7 +8,7 @@ import (
 
 // PBRSubSurfaceConfiguration represents a babylon.js PBRSubSurfaceConfiguration.
 // Define the code related to the sub surface parameters of the pbr material.
-type PBRSubSurfaceConfiguration struct{}
+type PBRSubSurfaceConfiguration struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (p *PBRSubSurfaceConfiguration) JSObject() js.Value { return p.p }
@@ -27,8 +27,8 @@ func PBRSubSurfaceConfigurationFromJSObject(p js.Value) *PBRSubSurfaceConfigurat
 // NewPBRSubSurfaceConfiguration returns a new PBRSubSurfaceConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration
-func (b *Babylon) NewPBRSubSurfaceConfiguration(todo parameters) *PBRSubSurfaceConfiguration {
-	p := b.ctx.Get("PBRSubSurfaceConfiguration").New(todo)
+func (b *Babylon) NewPBRSubSurfaceConfiguration(markAllSubMeshesAsTexturesDirty func()) *PBRSubSurfaceConfiguration {
+	p := b.ctx.Get("PBRSubSurfaceConfiguration").New(markAllSubMeshesAsTexturesDirty)
 	return PBRSubSurfaceConfigurationFromJSObject(p)
 }
 

@@ -9,10 +9,9 @@ import (
 // DebugLayer represents a babylon.js DebugLayer.
 // The debug layer (aka Inspector) is the go to tool in order to better understand
 // what is happening in your scene
-
 //
 // See: http://doc.babylonjs.com/features/playground_debuglayer
-type DebugLayer struct{}
+type DebugLayer struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (d *DebugLayer) JSObject() js.Value { return d.p }
@@ -31,8 +30,8 @@ func DebugLayerFromJSObject(p js.Value) *DebugLayer {
 // NewDebugLayer returns a new DebugLayer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.debuglayer
-func (b *Babylon) NewDebugLayer(todo parameters) *DebugLayer {
-	p := b.ctx.Get("DebugLayer").New(todo)
+func (b *Babylon) NewDebugLayer(scene *Scene) *DebugLayer {
+	p := b.ctx.Get("DebugLayer").New(scene.JSObject())
 	return DebugLayerFromJSObject(p)
 }
 

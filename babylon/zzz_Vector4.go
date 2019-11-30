@@ -8,7 +8,7 @@ import (
 
 // Vector4 represents a babylon.js Vector4.
 // Vector4 class created for EulerAngle class conversion to Quaternion
-type Vector4 struct{}
+type Vector4 struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (v *Vector4) JSObject() js.Value { return v.p }
@@ -27,8 +27,8 @@ func Vector4FromJSObject(p js.Value) *Vector4 {
 // NewVector4 returns a new Vector4 object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector4
-func (b *Babylon) NewVector4(todo parameters) *Vector4 {
-	p := b.ctx.Get("Vector4").New(todo)
+func (b *Babylon) NewVector4(x float64, y float64, z float64, w float64) *Vector4 {
+	p := b.ctx.Get("Vector4").New(x, y, z, w)
 	return Vector4FromJSObject(p)
 }
 

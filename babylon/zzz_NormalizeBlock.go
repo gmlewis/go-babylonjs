@@ -27,8 +27,8 @@ func NormalizeBlockFromJSObject(p js.Value) *NormalizeBlock {
 // NewNormalizeBlock returns a new NormalizeBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.normalizeblock
-func (b *Babylon) NewNormalizeBlock(todo parameters) *NormalizeBlock {
-	p := b.ctx.Get("NormalizeBlock").New(todo)
+func (b *Babylon) NewNormalizeBlock(name string) *NormalizeBlock {
+	p := b.ctx.Get("NormalizeBlock").New(name)
 	return NormalizeBlockFromJSObject(p)
 }
 

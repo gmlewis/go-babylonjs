@@ -27,8 +27,8 @@ func WindowsMotionControllerFromJSObject(p js.Value) *WindowsMotionController {
 // NewWindowsMotionController returns a new WindowsMotionController object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.windowsmotioncontroller
-func (b *Babylon) NewWindowsMotionController(todo parameters) *WindowsMotionController {
-	p := b.ctx.Get("WindowsMotionController").New(todo)
+func (b *Babylon) NewWindowsMotionController(vrGamepad interface{}) *WindowsMotionController {
+	p := b.ctx.Get("WindowsMotionController").New(vrGamepad)
 	return WindowsMotionControllerFromJSObject(p)
 }
 

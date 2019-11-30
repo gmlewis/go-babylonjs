@@ -9,7 +9,6 @@ import (
 // ArcFollowCamera represents a babylon.js ArcFollowCamera.
 // Arc Rotate version of the follow camera.
 // It still follows a Defined mesh but in an Arc Rotate Camera fashion.
-
 //
 // See: http://doc.babylonjs.com/features/cameras#follow-camera
 type ArcFollowCamera struct{ *TargetCamera }
@@ -31,8 +30,8 @@ func ArcFollowCameraFromJSObject(p js.Value) *ArcFollowCamera {
 // NewArcFollowCamera returns a new ArcFollowCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcfollowcamera
-func (b *Babylon) NewArcFollowCamera(todo parameters) *ArcFollowCamera {
-	p := b.ctx.Get("ArcFollowCamera").New(todo)
+func (b *Babylon) NewArcFollowCamera(name string, alpha float64, beta float64, radius float64, target *AbstractMesh, scene *Scene) *ArcFollowCamera {
+	p := b.ctx.Get("ArcFollowCamera").New(name, alpha, beta, radius, target.JSObject(), scene.JSObject())
 	return ArcFollowCameraFromJSObject(p)
 }
 

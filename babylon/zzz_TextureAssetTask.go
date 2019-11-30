@@ -24,11 +24,24 @@ func TextureAssetTaskFromJSObject(p js.Value) *TextureAssetTask {
 	return &TextureAssetTask{AbstractAssetTaskFromJSObject(p)}
 }
 
+// NewTextureAssetTaskOpts contains optional parameters for NewTextureAssetTask.
+type NewTextureAssetTaskOpts struct {
+	NoMipmap *bool
+
+	InvertY *bool
+
+	SamplingMode *float64
+}
+
 // NewTextureAssetTask returns a new TextureAssetTask object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textureassettask
-func (b *Babylon) NewTextureAssetTask(todo parameters) *TextureAssetTask {
-	p := b.ctx.Get("TextureAssetTask").New(todo)
+func (b *Babylon) NewTextureAssetTask(name string, url string, opts *NewTextureAssetTaskOpts) *TextureAssetTask {
+	if opts == nil {
+		opts = &NewTextureAssetTaskOpts{}
+	}
+
+	p := b.ctx.Get("TextureAssetTask").New(name, url, opts.NoMipmap.JSObject(), opts.InvertY.JSObject(), opts.SamplingMode)
 	return TextureAssetTaskFromJSObject(p)
 }
 

@@ -8,7 +8,7 @@ import (
 
 // ValueAndUnit represents a babylon.js ValueAndUnit.
 // Class used to specific a value and its associated unit
-type ValueAndUnit struct{}
+type ValueAndUnit struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (v *ValueAndUnit) JSObject() js.Value { return v.p }
@@ -24,11 +24,22 @@ func ValueAndUnitFromJSObject(p js.Value) *ValueAndUnit {
 	return &ValueAndUnit{p: p}
 }
 
+// NewValueAndUnitOpts contains optional parameters for NewValueAndUnit.
+type NewValueAndUnitOpts struct {
+	Unit *float64
+
+	NegativeValueAllowed *bool
+}
+
 // NewValueAndUnit returns a new ValueAndUnit object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.valueandunit
-func (b *Babylon) NewValueAndUnit(todo parameters) *ValueAndUnit {
-	p := b.ctx.Get("ValueAndUnit").New(todo)
+func (b *Babylon) NewValueAndUnit(value float64, opts *NewValueAndUnitOpts) *ValueAndUnit {
+	if opts == nil {
+		opts = &NewValueAndUnitOpts{}
+	}
+
+	p := b.ctx.Get("ValueAndUnit").New(value, opts.Unit, opts.NegativeValueAllowed.JSObject())
 	return ValueAndUnitFromJSObject(p)
 }
 

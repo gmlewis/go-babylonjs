@@ -9,7 +9,6 @@ import (
 // TargetCamera represents a babylon.js TargetCamera.
 // A target camera takes a mesh or position as a target and continues to look at it while it moves.
 // This is the base of the follow, arc rotate cameras and Free camera
-
 //
 // See: http://doc.babylonjs.com/features/cameras
 type TargetCamera struct{ *Camera }
@@ -28,11 +27,20 @@ func TargetCameraFromJSObject(p js.Value) *TargetCamera {
 	return &TargetCamera{CameraFromJSObject(p)}
 }
 
+// NewTargetCameraOpts contains optional parameters for NewTargetCamera.
+type NewTargetCameraOpts struct {
+	SetActiveOnSceneIfNoneActive *bool
+}
+
 // NewTargetCamera returns a new TargetCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.targetcamera
-func (b *Babylon) NewTargetCamera(todo parameters) *TargetCamera {
-	p := b.ctx.Get("TargetCamera").New(todo)
+func (b *Babylon) NewTargetCamera(name string, position *Vector3, scene *Scene, opts *NewTargetCameraOpts) *TargetCamera {
+	if opts == nil {
+		opts = &NewTargetCameraOpts{}
+	}
+
+	p := b.ctx.Get("TargetCamera").New(name, position.JSObject(), scene.JSObject(), opts.SetActiveOnSceneIfNoneActive.JSObject())
 	return TargetCameraFromJSObject(p)
 }
 

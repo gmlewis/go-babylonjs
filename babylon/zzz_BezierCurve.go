@@ -8,7 +8,7 @@ import (
 
 // BezierCurve represents a babylon.js BezierCurve.
 // Class used to represent a Bezier curve
-type BezierCurve struct{}
+type BezierCurve struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (b *BezierCurve) JSObject() js.Value { return b.p }
@@ -22,14 +22,6 @@ func (b *Babylon) BezierCurve() *BezierCurve {
 // BezierCurveFromJSObject returns a wrapped BezierCurve JavaScript class.
 func BezierCurveFromJSObject(p js.Value) *BezierCurve {
 	return &BezierCurve{p: p}
-}
-
-// NewBezierCurve returns a new BezierCurve object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.beziercurve
-func (b *Babylon) NewBezierCurve(todo parameters) *BezierCurve {
-	p := b.ctx.Get("BezierCurve").New(todo)
-	return BezierCurveFromJSObject(p)
 }
 
 // TODO: methods

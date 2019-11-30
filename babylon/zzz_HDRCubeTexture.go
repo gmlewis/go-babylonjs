@@ -8,7 +8,6 @@ import (
 
 // HDRCubeTexture represents a babylon.js HDRCubeTexture.
 // This represents a texture coming from an HDR input.
-
 //
 // The only supported format is currently panorama picture stored in RGBE format.
 // Example of such files can be found on HDRLib: &lt;a href=&#34;http://hdrlib.com/&#34;&gt;http://hdrlib.com/&lt;/a&gt;
@@ -28,11 +27,30 @@ func HDRCubeTextureFromJSObject(p js.Value) *HDRCubeTexture {
 	return &HDRCubeTexture{BaseTextureFromJSObject(p)}
 }
 
+// NewHDRCubeTextureOpts contains optional parameters for NewHDRCubeTexture.
+type NewHDRCubeTextureOpts struct {
+	NoMipmap *bool
+
+	GenerateHarmonics *bool
+
+	GammaSpace *bool
+
+	Reserved *bool
+
+	OnLoad *func()
+
+	OnError *func()
+}
+
 // NewHDRCubeTexture returns a new HDRCubeTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetexture
-func (b *Babylon) NewHDRCubeTexture(todo parameters) *HDRCubeTexture {
-	p := b.ctx.Get("HDRCubeTexture").New(todo)
+func (b *Babylon) NewHDRCubeTexture(url string, scene *Scene, size float64, opts *NewHDRCubeTextureOpts) *HDRCubeTexture {
+	if opts == nil {
+		opts = &NewHDRCubeTextureOpts{}
+	}
+
+	p := b.ctx.Get("HDRCubeTexture").New(url, scene.JSObject(), size, opts.NoMipmap.JSObject(), opts.GenerateHarmonics.JSObject(), opts.GammaSpace.JSObject(), opts.Reserved.JSObject(), opts.OnLoad, opts.OnError)
 	return HDRCubeTextureFromJSObject(p)
 }
 

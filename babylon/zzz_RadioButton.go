@@ -24,11 +24,20 @@ func RadioButtonFromJSObject(p js.Value) *RadioButton {
 	return &RadioButton{ControlFromJSObject(p)}
 }
 
+// NewRadioButtonOpts contains optional parameters for NewRadioButton.
+type NewRadioButtonOpts struct {
+	Name *string
+}
+
 // NewRadioButton returns a new RadioButton object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.radiobutton
-func (b *Babylon) NewRadioButton(todo parameters) *RadioButton {
-	p := b.ctx.Get("RadioButton").New(todo)
+func (b *Babylon) NewRadioButton(opts *NewRadioButtonOpts) *RadioButton {
+	if opts == nil {
+		opts = &NewRadioButtonOpts{}
+	}
+
+	p := b.ctx.Get("RadioButton").New(opts.Name)
 	return RadioButtonFromJSObject(p)
 }
 

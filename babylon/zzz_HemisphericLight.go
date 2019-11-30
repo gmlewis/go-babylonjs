@@ -28,8 +28,8 @@ func HemisphericLightFromJSObject(p js.Value) *HemisphericLight {
 // NewHemisphericLight returns a new HemisphericLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hemisphericlight
-func (b *Babylon) NewHemisphericLight(todo parameters) *HemisphericLight {
-	p := b.ctx.Get("HemisphericLight").New(todo)
+func (b *Babylon) NewHemisphericLight(name string, direction *Vector3, scene *Scene) *HemisphericLight {
+	p := b.ctx.Get("HemisphericLight").New(name, direction.JSObject(), scene.JSObject())
 	return HemisphericLightFromJSObject(p)
 }
 

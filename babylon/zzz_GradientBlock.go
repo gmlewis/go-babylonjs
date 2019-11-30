@@ -27,8 +27,8 @@ func GradientBlockFromJSObject(p js.Value) *GradientBlock {
 // NewGradientBlock returns a new GradientBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gradientblock
-func (b *Babylon) NewGradientBlock(todo parameters) *GradientBlock {
-	p := b.ctx.Get("GradientBlock").New(todo)
+func (b *Babylon) NewGradientBlock(name string) *GradientBlock {
+	p := b.ctx.Get("GradientBlock").New(name)
 	return GradientBlockFromJSObject(p)
 }
 

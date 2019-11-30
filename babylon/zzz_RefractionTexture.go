@@ -9,7 +9,6 @@ import (
 // RefractionTexture represents a babylon.js RefractionTexture.
 // Creates a refraction texture used by refraction channel of the standard material.
 // It is like a mirror but to see through a material.
-
 //
 // See: https://doc.babylonjs.com/how_to/reflect#refraction
 type RefractionTexture struct{ *RenderTargetTexture }
@@ -28,11 +27,20 @@ func RefractionTextureFromJSObject(p js.Value) *RefractionTexture {
 	return &RefractionTexture{RenderTargetTextureFromJSObject(p)}
 }
 
+// NewRefractionTextureOpts contains optional parameters for NewRefractionTexture.
+type NewRefractionTextureOpts struct {
+	GenerateMipMaps *bool
+}
+
 // NewRefractionTexture returns a new RefractionTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.refractiontexture
-func (b *Babylon) NewRefractionTexture(todo parameters) *RefractionTexture {
-	p := b.ctx.Get("RefractionTexture").New(todo)
+func (b *Babylon) NewRefractionTexture(name string, size float64, scene *Scene, opts *NewRefractionTextureOpts) *RefractionTexture {
+	if opts == nil {
+		opts = &NewRefractionTextureOpts{}
+	}
+
+	p := b.ctx.Get("RefractionTexture").New(name, size, scene.JSObject(), opts.GenerateMipMaps.JSObject())
 	return RefractionTextureFromJSObject(p)
 }
 

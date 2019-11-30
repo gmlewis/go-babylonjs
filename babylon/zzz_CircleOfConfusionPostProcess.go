@@ -24,11 +24,28 @@ func CircleOfConfusionPostProcessFromJSObject(p js.Value) *CircleOfConfusionPost
 	return &CircleOfConfusionPostProcess{PostProcessFromJSObject(p)}
 }
 
+// NewCircleOfConfusionPostProcessOpts contains optional parameters for NewCircleOfConfusionPostProcess.
+type NewCircleOfConfusionPostProcessOpts struct {
+	SamplingMode *float64
+
+	Engine *Engine
+
+	Reusable *bool
+
+	TextureType *float64
+
+	BlockCompilation *bool
+}
+
 // NewCircleOfConfusionPostProcess returns a new CircleOfConfusionPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess
-func (b *Babylon) NewCircleOfConfusionPostProcess(todo parameters) *CircleOfConfusionPostProcess {
-	p := b.ctx.Get("CircleOfConfusionPostProcess").New(todo)
+func (b *Babylon) NewCircleOfConfusionPostProcess(name string, depthTexture *RenderTargetTexture, options float64, camera *Camera, opts *NewCircleOfConfusionPostProcessOpts) *CircleOfConfusionPostProcess {
+	if opts == nil {
+		opts = &NewCircleOfConfusionPostProcessOpts{}
+	}
+
+	p := b.ctx.Get("CircleOfConfusionPostProcess").New(name, depthTexture.JSObject(), options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType, opts.BlockCompilation.JSObject())
 	return CircleOfConfusionPostProcessFromJSObject(p)
 }
 

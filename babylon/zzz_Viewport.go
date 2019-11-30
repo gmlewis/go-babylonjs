@@ -8,7 +8,7 @@ import (
 
 // Viewport represents a babylon.js Viewport.
 // Class used to represent a viewport on screen
-type Viewport struct{}
+type Viewport struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (v *Viewport) JSObject() js.Value { return v.p }
@@ -27,8 +27,8 @@ func ViewportFromJSObject(p js.Value) *Viewport {
 // NewViewport returns a new Viewport object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.viewport
-func (b *Babylon) NewViewport(todo parameters) *Viewport {
-	p := b.ctx.Get("Viewport").New(todo)
+func (b *Babylon) NewViewport(x float64, y float64, width float64, height float64) *Viewport {
+	p := b.ctx.Get("Viewport").New(x, y, width, height)
 	return ViewportFromJSObject(p)
 }
 

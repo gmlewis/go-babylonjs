@@ -9,10 +9,9 @@ import (
 // StandardMaterial represents a babylon.js StandardMaterial.
 // This is the default material used in Babylon. It is the best trade off between quality
 // and performances.
-
 //
 // See: http://doc.babylonjs.com/babylon101/materials
-type StandardMaterial struct{}
+type StandardMaterial struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (s *StandardMaterial) JSObject() js.Value { return s.p }
@@ -31,8 +30,8 @@ func StandardMaterialFromJSObject(p js.Value) *StandardMaterial {
 // NewStandardMaterial returns a new StandardMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardmaterial
-func (b *Babylon) NewStandardMaterial(todo parameters) *StandardMaterial {
-	p := b.ctx.Get("StandardMaterial").New(todo)
+func (b *Babylon) NewStandardMaterial(name string, scene *Scene) *StandardMaterial {
+	p := b.ctx.Get("StandardMaterial").New(name, scene.JSObject())
 	return StandardMaterialFromJSObject(p)
 }
 

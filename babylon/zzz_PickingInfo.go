@@ -8,10 +8,9 @@ import (
 
 // PickingInfo represents a babylon.js PickingInfo.
 // Information about the result of picking within a scene
-
 //
 // See: https://doc.babylonjs.com/babylon101/picking_collisions
-type PickingInfo struct{}
+type PickingInfo struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (p *PickingInfo) JSObject() js.Value { return p.p }
@@ -25,14 +24,6 @@ func (b *Babylon) PickingInfo() *PickingInfo {
 // PickingInfoFromJSObject returns a wrapped PickingInfo JavaScript class.
 func PickingInfoFromJSObject(p js.Value) *PickingInfo {
 	return &PickingInfo{p: p}
-}
-
-// NewPickingInfo returns a new PickingInfo object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.pickinginfo
-func (b *Babylon) NewPickingInfo(todo parameters) *PickingInfo {
-	p := b.ctx.Get("PickingInfo").New(todo)
-	return PickingInfoFromJSObject(p)
 }
 
 // TODO: methods

@@ -8,10 +8,9 @@ import (
 
 // FreeCameraTouchInput represents a babylon.js FreeCameraTouchInput.
 // Manage the touch inputs to control the movement of a free camera.
-
 //
 // See: http://doc.babylonjs.com/how_to/customizing_camera_inputs
-type FreeCameraTouchInput struct{}
+type FreeCameraTouchInput struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (f *FreeCameraTouchInput) JSObject() js.Value { return f.p }
@@ -25,14 +24,6 @@ func (b *Babylon) FreeCameraTouchInput() *FreeCameraTouchInput {
 // FreeCameraTouchInputFromJSObject returns a wrapped FreeCameraTouchInput JavaScript class.
 func FreeCameraTouchInputFromJSObject(p js.Value) *FreeCameraTouchInput {
 	return &FreeCameraTouchInput{p: p}
-}
-
-// NewFreeCameraTouchInput returns a new FreeCameraTouchInput object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.freecameratouchinput
-func (b *Babylon) NewFreeCameraTouchInput(todo parameters) *FreeCameraTouchInput {
-	p := b.ctx.Get("FreeCameraTouchInput").New(todo)
-	return FreeCameraTouchInputFromJSObject(p)
 }
 
 // TODO: methods

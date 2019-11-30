@@ -8,11 +8,10 @@ import (
 
 // UniformBuffer represents a babylon.js UniformBuffer.
 // Uniform buffer objects.
-
 //
 // For more information, please refer to :
 // &lt;a href=&#34;https://www.khronos.org/opengl/wiki/Uniform_Buffer_Object&#34;&gt;https://www.khronos.org/opengl/wiki/Uniform_Buffer_Object&lt;/a&gt;
-type UniformBuffer struct{}
+type UniformBuffer struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (u *UniformBuffer) JSObject() js.Value { return u.p }
@@ -28,11 +27,22 @@ func UniformBufferFromJSObject(p js.Value) *UniformBuffer {
 	return &UniformBuffer{p: p}
 }
 
+// NewUniformBufferOpts contains optional parameters for NewUniformBuffer.
+type NewUniformBufferOpts struct {
+	Data *float64
+
+	Dynamic *bool
+}
+
 // NewUniformBuffer returns a new UniformBuffer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer
-func (b *Babylon) NewUniformBuffer(todo parameters) *UniformBuffer {
-	p := b.ctx.Get("UniformBuffer").New(todo)
+func (b *Babylon) NewUniformBuffer(engine *Engine, opts *NewUniformBufferOpts) *UniformBuffer {
+	if opts == nil {
+		opts = &NewUniformBufferOpts{}
+	}
+
+	p := b.ctx.Get("UniformBuffer").New(engine.JSObject(), opts.Data, opts.Dynamic.JSObject())
 	return UniformBufferFromJSObject(p)
 }
 

@@ -28,8 +28,8 @@ func DeviceOrientationCameraFromJSObject(p js.Value) *DeviceOrientationCamera {
 // NewDeviceOrientationCamera returns a new DeviceOrientationCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.deviceorientationcamera
-func (b *Babylon) NewDeviceOrientationCamera(todo parameters) *DeviceOrientationCamera {
-	p := b.ctx.Get("DeviceOrientationCamera").New(todo)
+func (b *Babylon) NewDeviceOrientationCamera(name string, position *Vector3, scene *Scene) *DeviceOrientationCamera {
+	p := b.ctx.Get("DeviceOrientationCamera").New(name, position.JSObject(), scene.JSObject())
 	return DeviceOrientationCameraFromJSObject(p)
 }
 

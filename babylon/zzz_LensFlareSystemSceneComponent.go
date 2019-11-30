@@ -9,7 +9,7 @@ import (
 // LensFlareSystemSceneComponent represents a babylon.js LensFlareSystemSceneComponent.
 // Defines the lens flare scene component responsible to manage any lens flares
 // in a given scene.
-type LensFlareSystemSceneComponent struct{}
+type LensFlareSystemSceneComponent struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (l *LensFlareSystemSceneComponent) JSObject() js.Value { return l.p }
@@ -28,8 +28,8 @@ func LensFlareSystemSceneComponentFromJSObject(p js.Value) *LensFlareSystemScene
 // NewLensFlareSystemSceneComponent returns a new LensFlareSystemSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensflaresystemscenecomponent
-func (b *Babylon) NewLensFlareSystemSceneComponent(todo parameters) *LensFlareSystemSceneComponent {
-	p := b.ctx.Get("LensFlareSystemSceneComponent").New(todo)
+func (b *Babylon) NewLensFlareSystemSceneComponent(scene *Scene) *LensFlareSystemSceneComponent {
+	p := b.ctx.Get("LensFlareSystemSceneComponent").New(scene.JSObject())
 	return LensFlareSystemSceneComponentFromJSObject(p)
 }
 

@@ -24,11 +24,22 @@ func LineEdgesRendererFromJSObject(p js.Value) *LineEdgesRenderer {
 	return &LineEdgesRenderer{EdgesRendererFromJSObject(p)}
 }
 
+// NewLineEdgesRendererOpts contains optional parameters for NewLineEdgesRenderer.
+type NewLineEdgesRendererOpts struct {
+	Epsilon *float64
+
+	CheckVerticesInsteadOfIndices *bool
+}
+
 // NewLineEdgesRenderer returns a new LineEdgesRenderer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lineedgesrenderer
-func (b *Babylon) NewLineEdgesRenderer(todo parameters) *LineEdgesRenderer {
-	p := b.ctx.Get("LineEdgesRenderer").New(todo)
+func (b *Babylon) NewLineEdgesRenderer(source *AbstractMesh, opts *NewLineEdgesRendererOpts) *LineEdgesRenderer {
+	if opts == nil {
+		opts = &NewLineEdgesRendererOpts{}
+	}
+
+	p := b.ctx.Get("LineEdgesRenderer").New(source.JSObject(), opts.Epsilon, opts.CheckVerticesInsteadOfIndices.JSObject())
 	return LineEdgesRendererFromJSObject(p)
 }
 

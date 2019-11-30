@@ -24,11 +24,24 @@ func BlackAndWhitePostProcessFromJSObject(p js.Value) *BlackAndWhitePostProcess 
 	return &BlackAndWhitePostProcess{PostProcessFromJSObject(p)}
 }
 
+// NewBlackAndWhitePostProcessOpts contains optional parameters for NewBlackAndWhitePostProcess.
+type NewBlackAndWhitePostProcessOpts struct {
+	SamplingMode *float64
+
+	Engine *Engine
+
+	Reusable *bool
+}
+
 // NewBlackAndWhitePostProcess returns a new BlackAndWhitePostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.blackandwhitepostprocess
-func (b *Babylon) NewBlackAndWhitePostProcess(todo parameters) *BlackAndWhitePostProcess {
-	p := b.ctx.Get("BlackAndWhitePostProcess").New(todo)
+func (b *Babylon) NewBlackAndWhitePostProcess(name string, options float64, camera *Camera, opts *NewBlackAndWhitePostProcessOpts) *BlackAndWhitePostProcess {
+	if opts == nil {
+		opts = &NewBlackAndWhitePostProcessOpts{}
+	}
+
+	p := b.ctx.Get("BlackAndWhitePostProcess").New(name, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject())
 	return BlackAndWhitePostProcessFromJSObject(p)
 }
 

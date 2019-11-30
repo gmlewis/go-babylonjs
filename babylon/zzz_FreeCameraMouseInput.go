@@ -8,10 +8,9 @@ import (
 
 // FreeCameraMouseInput represents a babylon.js FreeCameraMouseInput.
 // Manage the mouse inputs to control the movement of a free camera.
-
 //
 // See: http://doc.babylonjs.com/how_to/customizing_camera_inputs
-type FreeCameraMouseInput struct{}
+type FreeCameraMouseInput struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (f *FreeCameraMouseInput) JSObject() js.Value { return f.p }
@@ -27,11 +26,20 @@ func FreeCameraMouseInputFromJSObject(p js.Value) *FreeCameraMouseInput {
 	return &FreeCameraMouseInput{p: p}
 }
 
+// NewFreeCameraMouseInputOpts contains optional parameters for NewFreeCameraMouseInput.
+type NewFreeCameraMouseInputOpts struct {
+	TouchEnabled *bool
+}
+
 // NewFreeCameraMouseInput returns a new FreeCameraMouseInput object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecameramouseinput
-func (b *Babylon) NewFreeCameraMouseInput(todo parameters) *FreeCameraMouseInput {
-	p := b.ctx.Get("FreeCameraMouseInput").New(todo)
+func (b *Babylon) NewFreeCameraMouseInput(opts *NewFreeCameraMouseInputOpts) *FreeCameraMouseInput {
+	if opts == nil {
+		opts = &NewFreeCameraMouseInputOpts{}
+	}
+
+	p := b.ctx.Get("FreeCameraMouseInput").New(opts.TouchEnabled.JSObject())
 	return FreeCameraMouseInputFromJSObject(p)
 }
 

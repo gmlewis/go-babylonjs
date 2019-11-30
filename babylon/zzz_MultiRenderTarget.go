@@ -27,11 +27,20 @@ func MultiRenderTargetFromJSObject(p js.Value) *MultiRenderTarget {
 	return &MultiRenderTarget{RenderTargetTextureFromJSObject(p)}
 }
 
+// NewMultiRenderTargetOpts contains optional parameters for NewMultiRenderTarget.
+type NewMultiRenderTargetOpts struct {
+	Options js.Value
+}
+
 // NewMultiRenderTarget returns a new MultiRenderTarget object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multirendertarget
-func (b *Babylon) NewMultiRenderTarget(todo parameters) *MultiRenderTarget {
-	p := b.ctx.Get("MultiRenderTarget").New(todo)
+func (b *Babylon) NewMultiRenderTarget(name string, size interface{}, count float64, scene *Scene, opts *NewMultiRenderTargetOpts) *MultiRenderTarget {
+	if opts == nil {
+		opts = &NewMultiRenderTargetOpts{}
+	}
+
+	p := b.ctx.Get("MultiRenderTarget").New(name, size, count, scene.JSObject(), opts.Options)
 	return MultiRenderTargetFromJSObject(p)
 }
 

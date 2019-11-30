@@ -9,7 +9,6 @@ import (
 // StandardRenderingPipeline represents a babylon.js StandardRenderingPipeline.
 // Standard rendering pipeline
 // Default pipeline should be used going forward but the standard pipeline will be kept for backwards compatibility.
-
 //
 // See: https://doc.babylonjs.com/how_to/using_standard_rendering_pipeline
 type StandardRenderingPipeline struct{ *PostProcessRenderPipeline }
@@ -28,11 +27,22 @@ func StandardRenderingPipelineFromJSObject(p js.Value) *StandardRenderingPipelin
 	return &StandardRenderingPipeline{PostProcessRenderPipelineFromJSObject(p)}
 }
 
+// NewStandardRenderingPipelineOpts contains optional parameters for NewStandardRenderingPipeline.
+type NewStandardRenderingPipelineOpts struct {
+	OriginalPostProcess *PostProcess
+
+	Cameras *Camera
+}
+
 // NewStandardRenderingPipeline returns a new StandardRenderingPipeline object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline
-func (b *Babylon) NewStandardRenderingPipeline(todo parameters) *StandardRenderingPipeline {
-	p := b.ctx.Get("StandardRenderingPipeline").New(todo)
+func (b *Babylon) NewStandardRenderingPipeline(name string, scene *Scene, ratio float64, opts *NewStandardRenderingPipelineOpts) *StandardRenderingPipeline {
+	if opts == nil {
+		opts = &NewStandardRenderingPipelineOpts{}
+	}
+
+	p := b.ctx.Get("StandardRenderingPipeline").New(name, scene.JSObject(), ratio, opts.OriginalPostProcess.JSObject(), opts.Cameras.JSObject())
 	return StandardRenderingPipelineFromJSObject(p)
 }
 

@@ -27,8 +27,8 @@ func DaydreamControllerFromJSObject(p js.Value) *DaydreamController {
 // NewDaydreamController returns a new DaydreamController object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller
-func (b *Babylon) NewDaydreamController(todo parameters) *DaydreamController {
-	p := b.ctx.Get("DaydreamController").New(todo)
+func (b *Babylon) NewDaydreamController(vrGamepad interface{}) *DaydreamController {
+	p := b.ctx.Get("DaydreamController").New(vrGamepad)
 	return DaydreamControllerFromJSObject(p)
 }
 

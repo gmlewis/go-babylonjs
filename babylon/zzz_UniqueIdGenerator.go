@@ -8,7 +8,7 @@ import (
 
 // UniqueIdGenerator represents a babylon.js UniqueIdGenerator.
 // Helper class used to generate session unique ID
-type UniqueIdGenerator struct{}
+type UniqueIdGenerator struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (u *UniqueIdGenerator) JSObject() js.Value { return u.p }
@@ -22,14 +22,6 @@ func (b *Babylon) UniqueIdGenerator() *UniqueIdGenerator {
 // UniqueIdGeneratorFromJSObject returns a wrapped UniqueIdGenerator JavaScript class.
 func UniqueIdGeneratorFromJSObject(p js.Value) *UniqueIdGenerator {
 	return &UniqueIdGenerator{p: p}
-}
-
-// NewUniqueIdGenerator returns a new UniqueIdGenerator object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.uniqueidgenerator
-func (b *Babylon) NewUniqueIdGenerator(todo parameters) *UniqueIdGenerator {
-	p := b.ctx.Get("UniqueIdGenerator").New(todo)
-	return UniqueIdGeneratorFromJSObject(p)
 }
 
 // TODO: methods

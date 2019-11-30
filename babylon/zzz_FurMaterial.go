@@ -8,7 +8,7 @@ import (
 
 // FurMaterial represents a babylon.js FurMaterial.
 //
-type FurMaterial struct{}
+type FurMaterial struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (f *FurMaterial) JSObject() js.Value { return f.p }
@@ -27,8 +27,8 @@ func FurMaterialFromJSObject(p js.Value) *FurMaterial {
 // NewFurMaterial returns a new FurMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.furmaterial
-func (b *Babylon) NewFurMaterial(todo parameters) *FurMaterial {
-	p := b.ctx.Get("FurMaterial").New(todo)
+func (b *Babylon) NewFurMaterial(name string, scene *Scene) *FurMaterial {
+	p := b.ctx.Get("FurMaterial").New(name, scene.JSObject())
 	return FurMaterialFromJSObject(p)
 }
 

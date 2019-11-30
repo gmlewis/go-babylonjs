@@ -27,8 +27,8 @@ func PowBlockFromJSObject(p js.Value) *PowBlock {
 // NewPowBlock returns a new PowBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.powblock
-func (b *Babylon) NewPowBlock(todo parameters) *PowBlock {
-	p := b.ctx.Get("PowBlock").New(todo)
+func (b *Babylon) NewPowBlock(name string) *PowBlock {
+	p := b.ctx.Get("PowBlock").New(name)
 	return PowBlockFromJSObject(p)
 }
 

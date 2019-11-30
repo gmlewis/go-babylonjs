@@ -8,7 +8,7 @@ import (
 
 // AnimationPropertiesOverride represents a babylon.js AnimationPropertiesOverride.
 // Class used to override all child animations of a given target
-type AnimationPropertiesOverride struct{}
+type AnimationPropertiesOverride struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (a *AnimationPropertiesOverride) JSObject() js.Value { return a.p }
@@ -22,14 +22,6 @@ func (b *Babylon) AnimationPropertiesOverride() *AnimationPropertiesOverride {
 // AnimationPropertiesOverrideFromJSObject returns a wrapped AnimationPropertiesOverride JavaScript class.
 func AnimationPropertiesOverrideFromJSObject(p js.Value) *AnimationPropertiesOverride {
 	return &AnimationPropertiesOverride{p: p}
-}
-
-// NewAnimationPropertiesOverride returns a new AnimationPropertiesOverride object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.animationpropertiesoverride
-func (b *Babylon) NewAnimationPropertiesOverride(todo parameters) *AnimationPropertiesOverride {
-	p := b.ctx.Get("AnimationPropertiesOverride").New(todo)
-	return AnimationPropertiesOverrideFromJSObject(p)
 }
 
 // TODO: methods

@@ -8,7 +8,7 @@ import (
 
 // Geometry represents a babylon.js Geometry.
 // Class used to store geometry data (vertex buffers &#43; index buffer)
-type Geometry struct{}
+type Geometry struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (g *Geometry) JSObject() js.Value { return g.p }
@@ -24,11 +24,24 @@ func GeometryFromJSObject(p js.Value) *Geometry {
 	return &Geometry{p: p}
 }
 
+// NewGeometryOpts contains optional parameters for NewGeometry.
+type NewGeometryOpts struct {
+	VertexData *VertexData
+
+	Updatable *bool
+
+	Mesh *Mesh
+}
+
 // NewGeometry returns a new Geometry object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometry
-func (b *Babylon) NewGeometry(todo parameters) *Geometry {
-	p := b.ctx.Get("Geometry").New(todo)
+func (b *Babylon) NewGeometry(id string, scene *Scene, opts *NewGeometryOpts) *Geometry {
+	if opts == nil {
+		opts = &NewGeometryOpts{}
+	}
+
+	p := b.ctx.Get("Geometry").New(id, scene.JSObject(), opts.VertexData.JSObject(), opts.Updatable.JSObject(), opts.Mesh.JSObject())
 	return GeometryFromJSObject(p)
 }
 

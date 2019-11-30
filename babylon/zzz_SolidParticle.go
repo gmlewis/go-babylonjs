@@ -8,7 +8,7 @@ import (
 
 // SolidParticle represents a babylon.js SolidParticle.
 // Represents one particle of a solid particle system.
-type SolidParticle struct{}
+type SolidParticle struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (s *SolidParticle) JSObject() js.Value { return s.p }
@@ -24,11 +24,22 @@ func SolidParticleFromJSObject(p js.Value) *SolidParticle {
 	return &SolidParticle{p: p}
 }
 
+// NewSolidParticleOpts contains optional parameters for NewSolidParticle.
+type NewSolidParticleOpts struct {
+	ModelBoundingInfo *BoundingInfo
+
+	MaterialIndex *float64
+}
+
 // NewSolidParticle returns a new SolidParticle object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle
-func (b *Babylon) NewSolidParticle(todo parameters) *SolidParticle {
-	p := b.ctx.Get("SolidParticle").New(todo)
+func (b *Babylon) NewSolidParticle(particleIndex float64, particleId float64, positionIndex float64, indiceIndex float64, model *ModelShape, shapeId float64, idxInShape float64, sps *SolidParticleSystem, opts *NewSolidParticleOpts) *SolidParticle {
+	if opts == nil {
+		opts = &NewSolidParticleOpts{}
+	}
+
+	p := b.ctx.Get("SolidParticle").New(particleIndex, particleId, positionIndex, indiceIndex, model.JSObject(), shapeId, idxInShape, sps.JSObject(), opts.ModelBoundingInfo.JSObject(), opts.MaterialIndex)
 	return SolidParticleFromJSObject(p)
 }
 

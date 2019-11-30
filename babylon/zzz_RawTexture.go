@@ -26,11 +26,26 @@ func RawTextureFromJSObject(p js.Value) *RawTexture {
 	return &RawTexture{TextureFromJSObject(p)}
 }
 
+// NewRawTextureOpts contains optional parameters for NewRawTexture.
+type NewRawTextureOpts struct {
+	GenerateMipMaps *bool
+
+	InvertY *bool
+
+	SamplingMode *float64
+
+	Type *float64
+}
+
 // NewRawTexture returns a new RawTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rawtexture
-func (b *Babylon) NewRawTexture(todo parameters) *RawTexture {
-	p := b.ctx.Get("RawTexture").New(todo)
+func (b *Babylon) NewRawTexture(data ArrayBufferView, width float64, height float64, format float64, scene *Scene, opts *NewRawTextureOpts) *RawTexture {
+	if opts == nil {
+		opts = &NewRawTextureOpts{}
+	}
+
+	p := b.ctx.Get("RawTexture").New(data.JSObject(), width, height, format, scene.JSObject(), opts.GenerateMipMaps.JSObject(), opts.InvertY.JSObject(), opts.SamplingMode, opts.Type)
 	return RawTextureFromJSObject(p)
 }
 

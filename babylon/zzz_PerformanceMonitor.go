@@ -8,7 +8,7 @@ import (
 
 // PerformanceMonitor represents a babylon.js PerformanceMonitor.
 // Performance monitor tracks rolling average frame-time and frame-time variance over a user defined sliding-window
-type PerformanceMonitor struct{}
+type PerformanceMonitor struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (p *PerformanceMonitor) JSObject() js.Value { return p.p }
@@ -24,11 +24,20 @@ func PerformanceMonitorFromJSObject(p js.Value) *PerformanceMonitor {
 	return &PerformanceMonitor{p: p}
 }
 
+// NewPerformanceMonitorOpts contains optional parameters for NewPerformanceMonitor.
+type NewPerformanceMonitorOpts struct {
+	FrameSampleSize *float64
+}
+
 // NewPerformanceMonitor returns a new PerformanceMonitor object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.performancemonitor
-func (b *Babylon) NewPerformanceMonitor(todo parameters) *PerformanceMonitor {
-	p := b.ctx.Get("PerformanceMonitor").New(todo)
+func (b *Babylon) NewPerformanceMonitor(opts *NewPerformanceMonitorOpts) *PerformanceMonitor {
+	if opts == nil {
+		opts = &NewPerformanceMonitorOpts{}
+	}
+
+	p := b.ctx.Get("PerformanceMonitor").New(opts.FrameSampleSize)
 	return PerformanceMonitorFromJSObject(p)
 }
 

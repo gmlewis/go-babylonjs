@@ -9,7 +9,7 @@ import (
 // KhronosTextureContainer represents a babylon.js KhronosTextureContainer.
 // for description see &lt;a href=&#34;https://www.khronos.org/opengles/sdk/tools/KTX/&#34;&gt;https://www.khronos.org/opengles/sdk/tools/KTX/&lt;/a&gt;
 // for file layout see &lt;a href=&#34;https://www.khronos.org/opengles/sdk/tools/KTX/file_format_spec/&#34;&gt;https://www.khronos.org/opengles/sdk/tools/KTX/file_format_spec/&lt;/a&gt;
-type KhronosTextureContainer struct{}
+type KhronosTextureContainer struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (k *KhronosTextureContainer) JSObject() js.Value { return k.p }
@@ -25,11 +25,22 @@ func KhronosTextureContainerFromJSObject(p js.Value) *KhronosTextureContainer {
 	return &KhronosTextureContainer{p: p}
 }
 
+// NewKhronosTextureContainerOpts contains optional parameters for NewKhronosTextureContainer.
+type NewKhronosTextureContainerOpts struct {
+	ThreeDExpected *bool
+
+	TextureArrayExpected *bool
+}
+
 // NewKhronosTextureContainer returns a new KhronosTextureContainer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.khronostexturecontainer
-func (b *Babylon) NewKhronosTextureContainer(todo parameters) *KhronosTextureContainer {
-	p := b.ctx.Get("KhronosTextureContainer").New(todo)
+func (b *Babylon) NewKhronosTextureContainer(arrayBuffer interface{}, facesExpected float64, opts *NewKhronosTextureContainerOpts) *KhronosTextureContainer {
+	if opts == nil {
+		opts = &NewKhronosTextureContainerOpts{}
+	}
+
+	p := b.ctx.Get("KhronosTextureContainer").New(arrayBuffer, facesExpected, opts.ThreeDExpected.JSObject(), opts.TextureArrayExpected.JSObject())
 	return KhronosTextureContainerFromJSObject(p)
 }
 

@@ -8,7 +8,7 @@ import (
 
 // AnimationGroup represents a babylon.js AnimationGroup.
 // Use this class to create coordinated animations on multiple targets
-type AnimationGroup struct{}
+type AnimationGroup struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (a *AnimationGroup) JSObject() js.Value { return a.p }
@@ -24,11 +24,20 @@ func AnimationGroupFromJSObject(p js.Value) *AnimationGroup {
 	return &AnimationGroup{p: p}
 }
 
+// NewAnimationGroupOpts contains optional parameters for NewAnimationGroup.
+type NewAnimationGroupOpts struct {
+	Scene *Scene
+}
+
 // NewAnimationGroup returns a new AnimationGroup object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup
-func (b *Babylon) NewAnimationGroup(todo parameters) *AnimationGroup {
-	p := b.ctx.Get("AnimationGroup").New(todo)
+func (b *Babylon) NewAnimationGroup(name string, opts *NewAnimationGroupOpts) *AnimationGroup {
+	if opts == nil {
+		opts = &NewAnimationGroupOpts{}
+	}
+
+	p := b.ctx.Get("AnimationGroup").New(name, opts.Scene.JSObject())
 	return AnimationGroupFromJSObject(p)
 }
 

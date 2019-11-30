@@ -24,11 +24,20 @@ func StopSoundActionFromJSObject(p js.Value) *StopSoundAction {
 	return &StopSoundAction{ActionFromJSObject(p)}
 }
 
+// NewStopSoundActionOpts contains optional parameters for NewStopSoundAction.
+type NewStopSoundActionOpts struct {
+	Condition *Condition
+}
+
 // NewStopSoundAction returns a new StopSoundAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stopsoundaction
-func (b *Babylon) NewStopSoundAction(todo parameters) *StopSoundAction {
-	p := b.ctx.Get("StopSoundAction").New(todo)
+func (b *Babylon) NewStopSoundAction(triggerOptions interface{}, sound *Sound, opts *NewStopSoundActionOpts) *StopSoundAction {
+	if opts == nil {
+		opts = &NewStopSoundActionOpts{}
+	}
+
+	p := b.ctx.Get("StopSoundAction").New(triggerOptions, sound.JSObject(), opts.Condition.JSObject())
 	return StopSoundActionFromJSObject(p)
 }
 

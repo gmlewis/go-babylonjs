@@ -8,7 +8,7 @@ import (
 
 // STLExport represents a babylon.js STLExport.
 // Class for generating STL data from a Babylon scene.
-type STLExport struct{}
+type STLExport struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (s *STLExport) JSObject() js.Value { return s.p }
@@ -22,14 +22,6 @@ func (b *Babylon) STLExport() *STLExport {
 // STLExportFromJSObject returns a wrapped STLExport JavaScript class.
 func STLExportFromJSObject(p js.Value) *STLExport {
 	return &STLExport{p: p}
-}
-
-// NewSTLExport returns a new STLExport object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.stlexport
-func (b *Babylon) NewSTLExport(todo parameters) *STLExport {
-	p := b.ctx.Get("STLExport").New(todo)
-	return STLExportFromJSObject(p)
 }
 
 // TODO: methods

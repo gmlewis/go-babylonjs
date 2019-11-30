@@ -24,11 +24,20 @@ func LightGizmoFromJSObject(p js.Value) *LightGizmo {
 	return &LightGizmo{GizmoFromJSObject(p)}
 }
 
+// NewLightGizmoOpts contains optional parameters for NewLightGizmo.
+type NewLightGizmoOpts struct {
+	GizmoLayer *UtilityLayerRenderer
+}
+
 // NewLightGizmo returns a new LightGizmo object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightgizmo
-func (b *Babylon) NewLightGizmo(todo parameters) *LightGizmo {
-	p := b.ctx.Get("LightGizmo").New(todo)
+func (b *Babylon) NewLightGizmo(opts *NewLightGizmoOpts) *LightGizmo {
+	if opts == nil {
+		opts = &NewLightGizmoOpts{}
+	}
+
+	p := b.ctx.Get("LightGizmo").New(opts.GizmoLayer.JSObject())
 	return LightGizmoFromJSObject(p)
 }
 

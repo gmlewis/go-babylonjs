@@ -8,7 +8,7 @@ import (
 
 // IcoSphereBuilder represents a babylon.js IcoSphereBuilder.
 // Class containing static functions to help procedurally build meshes
-type IcoSphereBuilder struct{}
+type IcoSphereBuilder struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (i *IcoSphereBuilder) JSObject() js.Value { return i.p }
@@ -22,14 +22,6 @@ func (b *Babylon) IcoSphereBuilder() *IcoSphereBuilder {
 // IcoSphereBuilderFromJSObject returns a wrapped IcoSphereBuilder JavaScript class.
 func IcoSphereBuilderFromJSObject(p js.Value) *IcoSphereBuilder {
 	return &IcoSphereBuilder{p: p}
-}
-
-// NewIcoSphereBuilder returns a new IcoSphereBuilder object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.icospherebuilder
-func (b *Babylon) NewIcoSphereBuilder(todo parameters) *IcoSphereBuilder {
-	p := b.ctx.Get("IcoSphereBuilder").New(todo)
-	return IcoSphereBuilderFromJSObject(p)
 }
 
 // TODO: methods

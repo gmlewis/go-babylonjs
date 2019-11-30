@@ -27,8 +27,8 @@ func VectorSplitterBlockFromJSObject(p js.Value) *VectorSplitterBlock {
 // NewVectorSplitterBlock returns a new VectorSplitterBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vectorsplitterblock
-func (b *Babylon) NewVectorSplitterBlock(todo parameters) *VectorSplitterBlock {
-	p := b.ctx.Get("VectorSplitterBlock").New(todo)
+func (b *Babylon) NewVectorSplitterBlock(name string) *VectorSplitterBlock {
+	p := b.ctx.Get("VectorSplitterBlock").New(name)
 	return VectorSplitterBlockFromJSObject(p)
 }
 

@@ -27,8 +27,8 @@ func StepBlockFromJSObject(p js.Value) *StepBlock {
 // NewStepBlock returns a new StepBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stepblock
-func (b *Babylon) NewStepBlock(todo parameters) *StepBlock {
-	p := b.ctx.Get("StepBlock").New(todo)
+func (b *Babylon) NewStepBlock(name string) *StepBlock {
+	p := b.ctx.Get("StepBlock").New(name)
 	return StepBlockFromJSObject(p)
 }
 

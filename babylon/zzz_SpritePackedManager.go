@@ -8,7 +8,6 @@ import (
 
 // SpritePackedManager represents a babylon.js SpritePackedManager.
 // Class used to manage multiple sprites of different sizes on the same spritesheet
-
 //
 // See: http://doc.babylonjs.com/babylon101/sprites
 type SpritePackedManager struct{ *SpriteManager }
@@ -27,11 +26,24 @@ func SpritePackedManagerFromJSObject(p js.Value) *SpritePackedManager {
 	return &SpritePackedManager{SpriteManagerFromJSObject(p)}
 }
 
+// NewSpritePackedManagerOpts contains optional parameters for NewSpritePackedManager.
+type NewSpritePackedManagerOpts struct {
+	SpriteJSON *string
+
+	Epsilon *float64
+
+	SamplingMode *float64
+}
+
 // NewSpritePackedManager returns a new SpritePackedManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritepackedmanager
-func (b *Babylon) NewSpritePackedManager(todo parameters) *SpritePackedManager {
-	p := b.ctx.Get("SpritePackedManager").New(todo)
+func (b *Babylon) NewSpritePackedManager(name string, imgUrl string, capacity float64, scene *Scene, opts *NewSpritePackedManagerOpts) *SpritePackedManager {
+	if opts == nil {
+		opts = &NewSpritePackedManagerOpts{}
+	}
+
+	p := b.ctx.Get("SpritePackedManager").New(name, imgUrl, capacity, scene.JSObject(), opts.SpriteJSON, opts.Epsilon, opts.SamplingMode)
 	return SpritePackedManagerFromJSObject(p)
 }
 

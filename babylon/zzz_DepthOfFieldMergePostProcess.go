@@ -24,11 +24,28 @@ func DepthOfFieldMergePostProcessFromJSObject(p js.Value) *DepthOfFieldMergePost
 	return &DepthOfFieldMergePostProcess{PostProcessFromJSObject(p)}
 }
 
+// NewDepthOfFieldMergePostProcessOpts contains optional parameters for NewDepthOfFieldMergePostProcess.
+type NewDepthOfFieldMergePostProcessOpts struct {
+	SamplingMode *float64
+
+	Engine *Engine
+
+	Reusable *bool
+
+	TextureType *float64
+
+	BlockCompilation *bool
+}
+
 // NewDepthOfFieldMergePostProcess returns a new DepthOfFieldMergePostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess
-func (b *Babylon) NewDepthOfFieldMergePostProcess(todo parameters) *DepthOfFieldMergePostProcess {
-	p := b.ctx.Get("DepthOfFieldMergePostProcess").New(todo)
+func (b *Babylon) NewDepthOfFieldMergePostProcess(name string, originalFromInput *PostProcess, circleOfConfusion *PostProcess, blurSteps []PostProcess, options float64, camera *Camera, opts *NewDepthOfFieldMergePostProcessOpts) *DepthOfFieldMergePostProcess {
+	if opts == nil {
+		opts = &NewDepthOfFieldMergePostProcessOpts{}
+	}
+
+	p := b.ctx.Get("DepthOfFieldMergePostProcess").New(name, originalFromInput.JSObject(), circleOfConfusion.JSObject(), blurSteps.JSObject(), options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType, opts.BlockCompilation.JSObject())
 	return DepthOfFieldMergePostProcessFromJSObject(p)
 }
 

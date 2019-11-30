@@ -8,7 +8,6 @@ import (
 
 // AsciiArtFontTexture represents a babylon.js AsciiArtFontTexture.
 // AsciiArtFontTexture is the helper class used to easily create your ascii art font texture.
-
 //
 // It basically takes care rendering the font front the given font size to a texture.
 // This is used later on in the postprocess.
@@ -28,11 +27,20 @@ func AsciiArtFontTextureFromJSObject(p js.Value) *AsciiArtFontTexture {
 	return &AsciiArtFontTexture{BaseTextureFromJSObject(p)}
 }
 
+// NewAsciiArtFontTextureOpts contains optional parameters for NewAsciiArtFontTexture.
+type NewAsciiArtFontTextureOpts struct {
+	Scene *Scene
+}
+
 // NewAsciiArtFontTexture returns a new AsciiArtFontTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.asciiartfonttexture
-func (b *Babylon) NewAsciiArtFontTexture(todo parameters) *AsciiArtFontTexture {
-	p := b.ctx.Get("AsciiArtFontTexture").New(todo)
+func (b *Babylon) NewAsciiArtFontTexture(name string, font string, text string, opts *NewAsciiArtFontTextureOpts) *AsciiArtFontTexture {
+	if opts == nil {
+		opts = &NewAsciiArtFontTextureOpts{}
+	}
+
+	p := b.ctx.Get("AsciiArtFontTexture").New(name, font, text, opts.Scene.JSObject())
 	return AsciiArtFontTextureFromJSObject(p)
 }
 

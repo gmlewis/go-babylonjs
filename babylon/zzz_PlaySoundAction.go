@@ -24,11 +24,20 @@ func PlaySoundActionFromJSObject(p js.Value) *PlaySoundAction {
 	return &PlaySoundAction{ActionFromJSObject(p)}
 }
 
+// NewPlaySoundActionOpts contains optional parameters for NewPlaySoundAction.
+type NewPlaySoundActionOpts struct {
+	Condition *Condition
+}
+
 // NewPlaySoundAction returns a new PlaySoundAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.playsoundaction
-func (b *Babylon) NewPlaySoundAction(todo parameters) *PlaySoundAction {
-	p := b.ctx.Get("PlaySoundAction").New(todo)
+func (b *Babylon) NewPlaySoundAction(triggerOptions interface{}, sound *Sound, opts *NewPlaySoundActionOpts) *PlaySoundAction {
+	if opts == nil {
+		opts = &NewPlaySoundActionOpts{}
+	}
+
+	p := b.ctx.Get("PlaySoundAction").New(triggerOptions, sound.JSObject(), opts.Condition.JSObject())
 	return PlaySoundActionFromJSObject(p)
 }
 

@@ -8,7 +8,7 @@ import (
 
 // BoundingInfo represents a babylon.js BoundingInfo.
 // Info for a bounding data of a mesh
-type BoundingInfo struct{}
+type BoundingInfo struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (b *BoundingInfo) JSObject() js.Value { return b.p }
@@ -24,11 +24,20 @@ func BoundingInfoFromJSObject(p js.Value) *BoundingInfo {
 	return &BoundingInfo{p: p}
 }
 
+// NewBoundingInfoOpts contains optional parameters for NewBoundingInfo.
+type NewBoundingInfoOpts struct {
+	WorldMatrix *Matrix
+}
+
 // NewBoundingInfo returns a new BoundingInfo object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundinginfo
-func (b *Babylon) NewBoundingInfo(todo parameters) *BoundingInfo {
-	p := b.ctx.Get("BoundingInfo").New(todo)
+func (b *Babylon) NewBoundingInfo(minimum *Vector3, maximum *Vector3, opts *NewBoundingInfoOpts) *BoundingInfo {
+	if opts == nil {
+		opts = &NewBoundingInfoOpts{}
+	}
+
+	p := b.ctx.Get("BoundingInfo").New(minimum.JSObject(), maximum.JSObject(), opts.WorldMatrix.JSObject())
 	return BoundingInfoFromJSObject(p)
 }
 

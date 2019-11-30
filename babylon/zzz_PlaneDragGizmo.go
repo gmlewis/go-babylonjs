@@ -24,11 +24,24 @@ func PlaneDragGizmoFromJSObject(p js.Value) *PlaneDragGizmo {
 	return &PlaneDragGizmo{GizmoFromJSObject(p)}
 }
 
+// NewPlaneDragGizmoOpts contains optional parameters for NewPlaneDragGizmo.
+type NewPlaneDragGizmoOpts struct {
+	Color *Color3
+
+	GizmoLayer *UtilityLayerRenderer
+
+	Parent *PositionGizmo
+}
+
 // NewPlaneDragGizmo returns a new PlaneDragGizmo object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.planedraggizmo
-func (b *Babylon) NewPlaneDragGizmo(todo parameters) *PlaneDragGizmo {
-	p := b.ctx.Get("PlaneDragGizmo").New(todo)
+func (b *Babylon) NewPlaneDragGizmo(dragPlaneNormal *Vector3, opts *NewPlaneDragGizmoOpts) *PlaneDragGizmo {
+	if opts == nil {
+		opts = &NewPlaneDragGizmoOpts{}
+	}
+
+	p := b.ctx.Get("PlaneDragGizmo").New(dragPlaneNormal.JSObject(), opts.Color.JSObject(), opts.GizmoLayer.JSObject(), opts.Parent.JSObject())
 	return PlaneDragGizmoFromJSObject(p)
 }
 

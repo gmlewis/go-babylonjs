@@ -27,8 +27,8 @@ func MaxBlockFromJSObject(p js.Value) *MaxBlock {
 // NewMaxBlock returns a new MaxBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.maxblock
-func (b *Babylon) NewMaxBlock(todo parameters) *MaxBlock {
-	p := b.ctx.Get("MaxBlock").New(todo)
+func (b *Babylon) NewMaxBlock(name string) *MaxBlock {
+	p := b.ctx.Get("MaxBlock").New(name)
 	return MaxBlockFromJSObject(p)
 }
 

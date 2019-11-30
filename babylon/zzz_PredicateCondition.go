@@ -27,8 +27,8 @@ func PredicateConditionFromJSObject(p js.Value) *PredicateCondition {
 // NewPredicateCondition returns a new PredicateCondition object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.predicatecondition
-func (b *Babylon) NewPredicateCondition(todo parameters) *PredicateCondition {
-	p := b.ctx.Get("PredicateCondition").New(todo)
+func (b *Babylon) NewPredicateCondition(actionManager *ActionManager, predicate func()) *PredicateCondition {
+	p := b.ctx.Get("PredicateCondition").New(actionManager.JSObject(), predicate)
 	return PredicateConditionFromJSObject(p)
 }
 

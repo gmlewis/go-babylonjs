@@ -9,10 +9,9 @@ import (
 // RayHelper represents a babylon.js RayHelper.
 // As raycast might be hard to debug, the RayHelper can help rendering the different rays
 // in order to better appreciate the issue one might have.
-
 //
 // See: http://doc.babylonjs.com/babylon101/raycasts#debugging
-type RayHelper struct{}
+type RayHelper struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (r *RayHelper) JSObject() js.Value { return r.p }
@@ -31,8 +30,8 @@ func RayHelperFromJSObject(p js.Value) *RayHelper {
 // NewRayHelper returns a new RayHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rayhelper
-func (b *Babylon) NewRayHelper(todo parameters) *RayHelper {
-	p := b.ctx.Get("RayHelper").New(todo)
+func (b *Babylon) NewRayHelper(ray *Ray) *RayHelper {
+	p := b.ctx.Get("RayHelper").New(ray.JSObject())
 	return RayHelperFromJSObject(p)
 }
 

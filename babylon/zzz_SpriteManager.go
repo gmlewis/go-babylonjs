@@ -8,10 +8,9 @@ import (
 
 // SpriteManager represents a babylon.js SpriteManager.
 // Class used to manage multiple sprites on the same spritesheet
-
 //
 // See: http://doc.babylonjs.com/babylon101/sprites
-type SpriteManager struct{}
+type SpriteManager struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (s *SpriteManager) JSObject() js.Value { return s.p }
@@ -27,11 +26,26 @@ func SpriteManagerFromJSObject(p js.Value) *SpriteManager {
 	return &SpriteManager{p: p}
 }
 
+// NewSpriteManagerOpts contains optional parameters for NewSpriteManager.
+type NewSpriteManagerOpts struct {
+	Epsilon *float64
+
+	SamplingMode *float64
+
+	FromPacked *bool
+
+	SpriteJSON *string
+}
+
 // NewSpriteManager returns a new SpriteManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritemanager
-func (b *Babylon) NewSpriteManager(todo parameters) *SpriteManager {
-	p := b.ctx.Get("SpriteManager").New(todo)
+func (b *Babylon) NewSpriteManager(name string, imgUrl string, capacity float64, cellSize interface{}, scene *Scene, opts *NewSpriteManagerOpts) *SpriteManager {
+	if opts == nil {
+		opts = &NewSpriteManagerOpts{}
+	}
+
+	p := b.ctx.Get("SpriteManager").New(name, imgUrl, capacity, cellSize, scene.JSObject(), opts.Epsilon, opts.SamplingMode, opts.FromPacked.JSObject(), opts.SpriteJSON)
 	return SpriteManagerFromJSObject(p)
 }
 

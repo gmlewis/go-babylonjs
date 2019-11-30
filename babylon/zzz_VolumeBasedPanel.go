@@ -27,8 +27,8 @@ func VolumeBasedPanelFromJSObject(p js.Value) *VolumeBasedPanel {
 // NewVolumeBasedPanel returns a new VolumeBasedPanel object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumebasedpanel
-func (b *Babylon) NewVolumeBasedPanel(todo parameters) *VolumeBasedPanel {
-	p := b.ctx.Get("VolumeBasedPanel").New(todo)
+func (b *Babylon) NewVolumeBasedPanel() *VolumeBasedPanel {
+	p := b.ctx.Get("VolumeBasedPanel").New()
 	return VolumeBasedPanelFromJSObject(p)
 }
 

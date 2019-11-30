@@ -10,7 +10,6 @@ import (
 // This represents a color grading texture. This acts as a lookup table LUT, useful during post process
 // It can help converting any input color in a desired output one. This can then be used to create effects
 // from sepia, black and white to sixties or futuristic rendering...
-
 //
 // The only supported format is currently 3dl.
 // More information on LUT: &lt;a href=&#34;https://en.wikipedia.org/wiki/3D_lookup_table&#34;&gt;https://en.wikipedia.org/wiki/3D_lookup_table&lt;/a&gt;
@@ -33,8 +32,8 @@ func ColorGradingTextureFromJSObject(p js.Value) *ColorGradingTexture {
 // NewColorGradingTexture returns a new ColorGradingTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorgradingtexture
-func (b *Babylon) NewColorGradingTexture(todo parameters) *ColorGradingTexture {
-	p := b.ctx.Get("ColorGradingTexture").New(todo)
+func (b *Babylon) NewColorGradingTexture(url string, scene *Scene) *ColorGradingTexture {
+	p := b.ctx.Get("ColorGradingTexture").New(url, scene.JSObject())
 	return ColorGradingTextureFromJSObject(p)
 }
 

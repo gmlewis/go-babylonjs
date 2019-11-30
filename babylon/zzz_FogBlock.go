@@ -27,8 +27,8 @@ func FogBlockFromJSObject(p js.Value) *FogBlock {
 // NewFogBlock returns a new FogBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fogblock
-func (b *Babylon) NewFogBlock(todo parameters) *FogBlock {
-	p := b.ctx.Get("FogBlock").New(todo)
+func (b *Babylon) NewFogBlock(name string) *FogBlock {
+	p := b.ctx.Get("FogBlock").New(name)
 	return FogBlockFromJSObject(p)
 }
 

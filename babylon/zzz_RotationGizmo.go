@@ -24,11 +24,24 @@ func RotationGizmoFromJSObject(p js.Value) *RotationGizmo {
 	return &RotationGizmo{GizmoFromJSObject(p)}
 }
 
+// NewRotationGizmoOpts contains optional parameters for NewRotationGizmo.
+type NewRotationGizmoOpts struct {
+	GizmoLayer *UtilityLayerRenderer
+
+	Tessellation *float64
+
+	UseEulerRotation *bool
+}
+
 // NewRotationGizmo returns a new RotationGizmo object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rotationgizmo
-func (b *Babylon) NewRotationGizmo(todo parameters) *RotationGizmo {
-	p := b.ctx.Get("RotationGizmo").New(todo)
+func (b *Babylon) NewRotationGizmo(opts *NewRotationGizmoOpts) *RotationGizmo {
+	if opts == nil {
+		opts = &NewRotationGizmoOpts{}
+	}
+
+	p := b.ctx.Get("RotationGizmo").New(opts.GizmoLayer.JSObject(), opts.Tessellation, opts.UseEulerRotation.JSObject())
 	return RotationGizmoFromJSObject(p)
 }
 

@@ -8,7 +8,6 @@ import (
 
 // PostProcessesOptimization represents a babylon.js PostProcessesOptimization.
 // Defines an optimization used to turn post-processes off
-
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
 type PostProcessesOptimization struct{ *SceneOptimization }
@@ -27,11 +26,20 @@ func PostProcessesOptimizationFromJSObject(p js.Value) *PostProcessesOptimizatio
 	return &PostProcessesOptimization{SceneOptimizationFromJSObject(p)}
 }
 
+// NewPostProcessesOptimizationOpts contains optional parameters for NewPostProcessesOptimization.
+type NewPostProcessesOptimizationOpts struct {
+	Priority *float64
+}
+
 // NewPostProcessesOptimization returns a new PostProcessesOptimization object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocessesoptimization
-func (b *Babylon) NewPostProcessesOptimization(todo parameters) *PostProcessesOptimization {
-	p := b.ctx.Get("PostProcessesOptimization").New(todo)
+func (b *Babylon) NewPostProcessesOptimization(opts *NewPostProcessesOptimizationOpts) *PostProcessesOptimization {
+	if opts == nil {
+		opts = &NewPostProcessesOptimizationOpts{}
+	}
+
+	p := b.ctx.Get("PostProcessesOptimization").New(opts.Priority)
 	return PostProcessesOptimizationFromJSObject(p)
 }
 

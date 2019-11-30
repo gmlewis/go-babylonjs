@@ -8,7 +8,7 @@ import (
 
 // MTLFileLoader represents a babylon.js MTLFileLoader.
 // Class reading and parsing the MTL file bundled with the obj file.
-type MTLFileLoader struct{}
+type MTLFileLoader struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (m *MTLFileLoader) JSObject() js.Value { return m.p }
@@ -22,14 +22,6 @@ func (b *Babylon) MTLFileLoader() *MTLFileLoader {
 // MTLFileLoaderFromJSObject returns a wrapped MTLFileLoader JavaScript class.
 func MTLFileLoaderFromJSObject(p js.Value) *MTLFileLoader {
 	return &MTLFileLoader{p: p}
-}
-
-// NewMTLFileLoader returns a new MTLFileLoader object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.mtlfileloader
-func (b *Babylon) NewMTLFileLoader(todo parameters) *MTLFileLoader {
-	p := b.ctx.Get("MTLFileLoader").New(todo)
-	return MTLFileLoaderFromJSObject(p)
 }
 
 // TODO: methods

@@ -8,7 +8,6 @@ import (
 
 // StereoscopicUniversalCamera represents a babylon.js StereoscopicUniversalCamera.
 // Camera used to simulate stereoscopic rendering (based on UniversalCamera)
-
 //
 // See: http://doc.babylonjs.com/features/cameras
 type StereoscopicUniversalCamera struct{ *UniversalCamera }
@@ -30,8 +29,8 @@ func StereoscopicUniversalCameraFromJSObject(p js.Value) *StereoscopicUniversalC
 // NewStereoscopicUniversalCamera returns a new StereoscopicUniversalCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera
-func (b *Babylon) NewStereoscopicUniversalCamera(todo parameters) *StereoscopicUniversalCamera {
-	p := b.ctx.Get("StereoscopicUniversalCamera").New(todo)
+func (b *Babylon) NewStereoscopicUniversalCamera(name string, position *Vector3, interaxialDistance float64, isStereoscopicSideBySide bool, scene *Scene) *StereoscopicUniversalCamera {
+	p := b.ctx.Get("StereoscopicUniversalCamera").New(name, position.JSObject(), interaxialDistance, isStereoscopicSideBySide.JSObject(), scene.JSObject())
 	return StereoscopicUniversalCameraFromJSObject(p)
 }
 

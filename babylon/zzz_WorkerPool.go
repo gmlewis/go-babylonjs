@@ -8,7 +8,7 @@ import (
 
 // WorkerPool represents a babylon.js WorkerPool.
 // Helper class to push actions to a pool of workers.
-type WorkerPool struct{}
+type WorkerPool struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (w *WorkerPool) JSObject() js.Value { return w.p }
@@ -27,8 +27,8 @@ func WorkerPoolFromJSObject(p js.Value) *WorkerPool {
 // NewWorkerPool returns a new WorkerPool object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.workerpool
-func (b *Babylon) NewWorkerPool(todo parameters) *WorkerPool {
-	p := b.ctx.Get("WorkerPool").New(todo)
+func (b *Babylon) NewWorkerPool(workers Array) *WorkerPool {
+	p := b.ctx.Get("WorkerPool").New(workers.JSObject())
 	return WorkerPoolFromJSObject(p)
 }
 

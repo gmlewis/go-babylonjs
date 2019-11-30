@@ -8,7 +8,6 @@ import (
 
 // DynamicTexture represents a babylon.js DynamicTexture.
 // A class extending Texture allowing drawing on a texture
-
 //
 // See: http://doc.babylonjs.com/how_to/dynamictexture
 type DynamicTexture struct{ *Texture }
@@ -27,11 +26,22 @@ func DynamicTextureFromJSObject(p js.Value) *DynamicTexture {
 	return &DynamicTexture{TextureFromJSObject(p)}
 }
 
+// NewDynamicTextureOpts contains optional parameters for NewDynamicTexture.
+type NewDynamicTextureOpts struct {
+	SamplingMode *float64
+
+	Format *float64
+}
+
 // NewDynamicTexture returns a new DynamicTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.dynamictexture
-func (b *Babylon) NewDynamicTexture(todo parameters) *DynamicTexture {
-	p := b.ctx.Get("DynamicTexture").New(todo)
+func (b *Babylon) NewDynamicTexture(name string, options interface{}, scene *Scene, generateMipMaps bool, opts *NewDynamicTextureOpts) *DynamicTexture {
+	if opts == nil {
+		opts = &NewDynamicTextureOpts{}
+	}
+
+	p := b.ctx.Get("DynamicTexture").New(name, options, scene.JSObject(), generateMipMaps.JSObject(), opts.SamplingMode, opts.Format)
 	return DynamicTextureFromJSObject(p)
 }
 

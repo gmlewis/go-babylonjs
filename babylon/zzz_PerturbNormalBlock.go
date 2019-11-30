@@ -27,8 +27,8 @@ func PerturbNormalBlockFromJSObject(p js.Value) *PerturbNormalBlock {
 // NewPerturbNormalBlock returns a new PerturbNormalBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock
-func (b *Babylon) NewPerturbNormalBlock(todo parameters) *PerturbNormalBlock {
-	p := b.ctx.Get("PerturbNormalBlock").New(todo)
+func (b *Babylon) NewPerturbNormalBlock(name string) *PerturbNormalBlock {
+	p := b.ctx.Get("PerturbNormalBlock").New(name)
 	return PerturbNormalBlockFromJSObject(p)
 }
 

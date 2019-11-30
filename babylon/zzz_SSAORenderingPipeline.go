@@ -24,11 +24,20 @@ func SSAORenderingPipelineFromJSObject(p js.Value) *SSAORenderingPipeline {
 	return &SSAORenderingPipeline{PostProcessRenderPipelineFromJSObject(p)}
 }
 
+// NewSSAORenderingPipelineOpts contains optional parameters for NewSSAORenderingPipeline.
+type NewSSAORenderingPipelineOpts struct {
+	Cameras *Camera
+}
+
 // NewSSAORenderingPipeline returns a new SSAORenderingPipeline object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ssaorenderingpipeline
-func (b *Babylon) NewSSAORenderingPipeline(todo parameters) *SSAORenderingPipeline {
-	p := b.ctx.Get("SSAORenderingPipeline").New(todo)
+func (b *Babylon) NewSSAORenderingPipeline(name string, scene *Scene, ratio interface{}, opts *NewSSAORenderingPipelineOpts) *SSAORenderingPipeline {
+	if opts == nil {
+		opts = &NewSSAORenderingPipelineOpts{}
+	}
+
+	p := b.ctx.Get("SSAORenderingPipeline").New(name, scene.JSObject(), ratio, opts.Cameras.JSObject())
 	return SSAORenderingPipelineFromJSObject(p)
 }
 

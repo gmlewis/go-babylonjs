@@ -27,8 +27,8 @@ func BinaryFileAssetTaskFromJSObject(p js.Value) *BinaryFileAssetTask {
 // NewBinaryFileAssetTask returns a new BinaryFileAssetTask object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.binaryfileassettask
-func (b *Babylon) NewBinaryFileAssetTask(todo parameters) *BinaryFileAssetTask {
-	p := b.ctx.Get("BinaryFileAssetTask").New(todo)
+func (b *Babylon) NewBinaryFileAssetTask(name string, url string) *BinaryFileAssetTask {
+	p := b.ctx.Get("BinaryFileAssetTask").New(name, url)
 	return BinaryFileAssetTaskFromJSObject(p)
 }
 

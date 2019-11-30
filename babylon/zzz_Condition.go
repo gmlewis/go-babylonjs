@@ -8,7 +8,7 @@ import (
 
 // Condition represents a babylon.js Condition.
 // A Condition applied to an Action
-type Condition struct{}
+type Condition struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (c *Condition) JSObject() js.Value { return c.p }
@@ -27,8 +27,8 @@ func ConditionFromJSObject(p js.Value) *Condition {
 // NewCondition returns a new Condition object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.condition
-func (b *Babylon) NewCondition(todo parameters) *Condition {
-	p := b.ctx.Get("Condition").New(todo)
+func (b *Babylon) NewCondition(actionManager *ActionManager) *Condition {
+	p := b.ctx.Get("Condition").New(actionManager.JSObject())
 	return ConditionFromJSObject(p)
 }
 

@@ -8,10 +8,9 @@ import (
 
 // ArcRotateCameraMouseWheelInput represents a babylon.js ArcRotateCameraMouseWheelInput.
 // Manage the mouse wheel inputs to control an arc rotate camera.
-
 //
 // See: http://doc.babylonjs.com/how_to/customizing_camera_inputs
-type ArcRotateCameraMouseWheelInput struct{}
+type ArcRotateCameraMouseWheelInput struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (a *ArcRotateCameraMouseWheelInput) JSObject() js.Value { return a.p }
@@ -25,14 +24,6 @@ func (b *Babylon) ArcRotateCameraMouseWheelInput() *ArcRotateCameraMouseWheelInp
 // ArcRotateCameraMouseWheelInputFromJSObject returns a wrapped ArcRotateCameraMouseWheelInput JavaScript class.
 func ArcRotateCameraMouseWheelInputFromJSObject(p js.Value) *ArcRotateCameraMouseWheelInput {
 	return &ArcRotateCameraMouseWheelInput{p: p}
-}
-
-// NewArcRotateCameraMouseWheelInput returns a new ArcRotateCameraMouseWheelInput object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.arcrotatecameramousewheelinput
-func (b *Babylon) NewArcRotateCameraMouseWheelInput(todo parameters) *ArcRotateCameraMouseWheelInput {
-	p := b.ctx.Get("ArcRotateCameraMouseWheelInput").New(todo)
-	return ArcRotateCameraMouseWheelInputFromJSObject(p)
 }
 
 // TODO: methods

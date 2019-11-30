@@ -9,10 +9,9 @@ import (
 // MaterialHelper represents a babylon.js MaterialHelper.
 // &amp;quot;Static Class&amp;quot; containing the most commonly used helper while dealing with material for
 // rendering purpose.
-
 //
 // This works by convention in BabylonJS but is meant to be use only with shader following the in place naming rules and conventions.
-type MaterialHelper struct{}
+type MaterialHelper struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (m *MaterialHelper) JSObject() js.Value { return m.p }
@@ -26,14 +25,6 @@ func (b *Babylon) MaterialHelper() *MaterialHelper {
 // MaterialHelperFromJSObject returns a wrapped MaterialHelper JavaScript class.
 func MaterialHelperFromJSObject(p js.Value) *MaterialHelper {
 	return &MaterialHelper{p: p}
-}
-
-// NewMaterialHelper returns a new MaterialHelper object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.materialhelper
-func (b *Babylon) NewMaterialHelper(todo parameters) *MaterialHelper {
-	p := b.ctx.Get("MaterialHelper").New(todo)
-	return MaterialHelperFromJSObject(p)
 }
 
 // TODO: methods

@@ -27,8 +27,8 @@ func FrontFacingBlockFromJSObject(p js.Value) *FrontFacingBlock {
 // NewFrontFacingBlock returns a new FrontFacingBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.frontfacingblock
-func (b *Babylon) NewFrontFacingBlock(todo parameters) *FrontFacingBlock {
-	p := b.ctx.Get("FrontFacingBlock").New(todo)
+func (b *Babylon) NewFrontFacingBlock(name string) *FrontFacingBlock {
+	p := b.ctx.Get("FrontFacingBlock").New(name)
 	return FrontFacingBlockFromJSObject(p)
 }
 

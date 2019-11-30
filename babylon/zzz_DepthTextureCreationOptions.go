@@ -8,7 +8,7 @@ import (
 
 // DepthTextureCreationOptions represents a babylon.js DepthTextureCreationOptions.
 // Define options used to create a depth texture
-type DepthTextureCreationOptions struct{}
+type DepthTextureCreationOptions struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (d *DepthTextureCreationOptions) JSObject() js.Value { return d.p }
@@ -22,14 +22,6 @@ func (b *Babylon) DepthTextureCreationOptions() *DepthTextureCreationOptions {
 // DepthTextureCreationOptionsFromJSObject returns a wrapped DepthTextureCreationOptions JavaScript class.
 func DepthTextureCreationOptionsFromJSObject(p js.Value) *DepthTextureCreationOptions {
 	return &DepthTextureCreationOptions{p: p}
-}
-
-// NewDepthTextureCreationOptions returns a new DepthTextureCreationOptions object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.depthtexturecreationoptions
-func (b *Babylon) NewDepthTextureCreationOptions(todo parameters) *DepthTextureCreationOptions {
-	p := b.ctx.Get("DepthTextureCreationOptions").New(todo)
-	return DepthTextureCreationOptionsFromJSObject(p)
 }
 
 // TODO: methods

@@ -10,7 +10,7 @@ import (
 // Sets of helpers addressing the serialization and deserialization of environment texture
 // stored in a BabylonJS env file.
 // Those files are usually stored as .env files.
-type EnvironmentTextureTools struct{}
+type EnvironmentTextureTools struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (e *EnvironmentTextureTools) JSObject() js.Value { return e.p }
@@ -24,14 +24,6 @@ func (b *Babylon) EnvironmentTextureTools() *EnvironmentTextureTools {
 // EnvironmentTextureToolsFromJSObject returns a wrapped EnvironmentTextureTools JavaScript class.
 func EnvironmentTextureToolsFromJSObject(p js.Value) *EnvironmentTextureTools {
 	return &EnvironmentTextureTools{p: p}
-}
-
-// NewEnvironmentTextureTools returns a new EnvironmentTextureTools object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.environmenttexturetools
-func (b *Babylon) NewEnvironmentTextureTools(todo parameters) *EnvironmentTextureTools {
-	p := b.ctx.Get("EnvironmentTextureTools").New(todo)
-	return EnvironmentTextureToolsFromJSObject(p)
 }
 
 // TODO: methods

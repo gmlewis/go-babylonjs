@@ -24,11 +24,24 @@ func TrailMeshFromJSObject(p js.Value) *TrailMesh {
 	return &TrailMesh{MeshFromJSObject(p)}
 }
 
+// NewTrailMeshOpts contains optional parameters for NewTrailMesh.
+type NewTrailMeshOpts struct {
+	Diameter *float64
+
+	Length *float64
+
+	AutoStart *bool
+}
+
 // NewTrailMesh returns a new TrailMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.trailmesh
-func (b *Babylon) NewTrailMesh(todo parameters) *TrailMesh {
-	p := b.ctx.Get("TrailMesh").New(todo)
+func (b *Babylon) NewTrailMesh(name string, generator *AbstractMesh, scene *Scene, opts *NewTrailMeshOpts) *TrailMesh {
+	if opts == nil {
+		opts = &NewTrailMeshOpts{}
+	}
+
+	p := b.ctx.Get("TrailMesh").New(name, generator.JSObject(), scene.JSObject(), opts.Diameter, opts.Length, opts.AutoStart.JSObject())
 	return TrailMeshFromJSObject(p)
 }
 

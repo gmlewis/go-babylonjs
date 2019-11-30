@@ -28,8 +28,8 @@ func SliderGroupFromJSObject(p js.Value) *SliderGroup {
 // NewSliderGroup returns a new SliderGroup object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.slidergroup
-func (b *Babylon) NewSliderGroup(todo parameters) *SliderGroup {
-	p := b.ctx.Get("SliderGroup").New(todo)
+func (b *Babylon) NewSliderGroup(name string) *SliderGroup {
+	p := b.ctx.Get("SliderGroup").New(name)
 	return SliderGroupFromJSObject(p)
 }
 

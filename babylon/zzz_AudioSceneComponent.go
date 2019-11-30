@@ -9,7 +9,7 @@ import (
 // AudioSceneComponent represents a babylon.js AudioSceneComponent.
 // Defines the sound scene component responsible to manage any sounds
 // in a given scene.
-type AudioSceneComponent struct{}
+type AudioSceneComponent struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (a *AudioSceneComponent) JSObject() js.Value { return a.p }
@@ -28,8 +28,8 @@ func AudioSceneComponentFromJSObject(p js.Value) *AudioSceneComponent {
 // NewAudioSceneComponent returns a new AudioSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.audioscenecomponent
-func (b *Babylon) NewAudioSceneComponent(todo parameters) *AudioSceneComponent {
-	p := b.ctx.Get("AudioSceneComponent").New(todo)
+func (b *Babylon) NewAudioSceneComponent(scene *Scene) *AudioSceneComponent {
+	p := b.ctx.Get("AudioSceneComponent").New(scene.JSObject())
 	return AudioSceneComponentFromJSObject(p)
 }
 

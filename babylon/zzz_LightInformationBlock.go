@@ -27,8 +27,8 @@ func LightInformationBlockFromJSObject(p js.Value) *LightInformationBlock {
 // NewLightInformationBlock returns a new LightInformationBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightinformationblock
-func (b *Babylon) NewLightInformationBlock(todo parameters) *LightInformationBlock {
-	p := b.ctx.Get("LightInformationBlock").New(todo)
+func (b *Babylon) NewLightInformationBlock(name string) *LightInformationBlock {
+	p := b.ctx.Get("LightInformationBlock").New(name)
 	return LightInformationBlockFromJSObject(p)
 }
 

@@ -8,10 +8,9 @@ import (
 
 // SimplificationQueue represents a babylon.js SimplificationQueue.
 // Queue used to order the simplification tasks
-
 //
 // See: http://doc.babylonjs.com/how_to/in-browser_mesh_simplification
-type SimplificationQueue struct{}
+type SimplificationQueue struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (s *SimplificationQueue) JSObject() js.Value { return s.p }
@@ -30,8 +29,8 @@ func SimplificationQueueFromJSObject(p js.Value) *SimplificationQueue {
 // NewSimplificationQueue returns a new SimplificationQueue object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.simplificationqueue
-func (b *Babylon) NewSimplificationQueue(todo parameters) *SimplificationQueue {
-	p := b.ctx.Get("SimplificationQueue").New(todo)
+func (b *Babylon) NewSimplificationQueue() *SimplificationQueue {
+	p := b.ctx.Get("SimplificationQueue").New()
 	return SimplificationQueueFromJSObject(p)
 }
 

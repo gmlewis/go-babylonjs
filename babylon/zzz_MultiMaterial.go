@@ -9,7 +9,6 @@ import (
 // MultiMaterial represents a babylon.js MultiMaterial.
 // A multi-material is used to apply different materials to different parts of the same object without the need of
 // separate meshes. This can be use to improve performances.
-
 //
 // See: http://doc.babylonjs.com/how_to/multi_materials
 type MultiMaterial struct{ *Material }
@@ -31,8 +30,8 @@ func MultiMaterialFromJSObject(p js.Value) *MultiMaterial {
 // NewMultiMaterial returns a new MultiMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multimaterial
-func (b *Babylon) NewMultiMaterial(todo parameters) *MultiMaterial {
-	p := b.ctx.Get("MultiMaterial").New(todo)
+func (b *Babylon) NewMultiMaterial(name string, scene *Scene) *MultiMaterial {
+	p := b.ctx.Get("MultiMaterial").New(name, scene.JSObject())
 	return MultiMaterialFromJSObject(p)
 }
 

@@ -8,7 +8,7 @@ import (
 
 // PBRSheenConfiguration represents a babylon.js PBRSheenConfiguration.
 // Define the code related to the Sheen parameters of the pbr material.
-type PBRSheenConfiguration struct{}
+type PBRSheenConfiguration struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (p *PBRSheenConfiguration) JSObject() js.Value { return p.p }
@@ -27,8 +27,8 @@ func PBRSheenConfigurationFromJSObject(p js.Value) *PBRSheenConfiguration {
 // NewPBRSheenConfiguration returns a new PBRSheenConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration
-func (b *Babylon) NewPBRSheenConfiguration(todo parameters) *PBRSheenConfiguration {
-	p := b.ctx.Get("PBRSheenConfiguration").New(todo)
+func (b *Babylon) NewPBRSheenConfiguration(markAllSubMeshesAsTexturesDirty func()) *PBRSheenConfiguration {
+	p := b.ctx.Get("PBRSheenConfiguration").New(markAllSubMeshesAsTexturesDirty)
 	return PBRSheenConfigurationFromJSObject(p)
 }
 

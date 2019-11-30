@@ -9,7 +9,6 @@ import (
 // CustomProceduralTexture represents a babylon.js CustomProceduralTexture.
 // Procedural texturing is a way to programmatically create a texture. There are 2 types of procedural textures: code-only, and code that references some classic 2D images, sometimes called &amp;#39;refMaps&amp;#39; or &amp;#39;sampler&amp;#39; images.
 // Custom Procedural textures are the easiest way to create your own procedural in your application.
-
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_procedural_textures#creating-custom-procedural-textures
 type CustomProceduralTexture struct{ *ProceduralTexture }
@@ -28,11 +27,22 @@ func CustomProceduralTextureFromJSObject(p js.Value) *CustomProceduralTexture {
 	return &CustomProceduralTexture{ProceduralTextureFromJSObject(p)}
 }
 
+// NewCustomProceduralTextureOpts contains optional parameters for NewCustomProceduralTexture.
+type NewCustomProceduralTextureOpts struct {
+	FallbackTexture *Texture
+
+	GenerateMipMaps *bool
+}
+
 // NewCustomProceduralTexture returns a new CustomProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.customproceduraltexture
-func (b *Babylon) NewCustomProceduralTexture(todo parameters) *CustomProceduralTexture {
-	p := b.ctx.Get("CustomProceduralTexture").New(todo)
+func (b *Babylon) NewCustomProceduralTexture(name string, texturePath string, size float64, scene *Scene, opts *NewCustomProceduralTextureOpts) *CustomProceduralTexture {
+	if opts == nil {
+		opts = &NewCustomProceduralTextureOpts{}
+	}
+
+	p := b.ctx.Get("CustomProceduralTexture").New(name, texturePath, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps.JSObject())
 	return CustomProceduralTextureFromJSObject(p)
 }
 

@@ -8,7 +8,7 @@ import (
 
 // Measure represents a babylon.js Measure.
 // Class used to store 2D control sizes
-type Measure struct{}
+type Measure struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (m *Measure) JSObject() js.Value { return m.p }
@@ -27,8 +27,8 @@ func MeasureFromJSObject(p js.Value) *Measure {
 // NewMeasure returns a new Measure object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.measure
-func (b *Babylon) NewMeasure(todo parameters) *Measure {
-	p := b.ctx.Get("Measure").New(todo)
+func (b *Babylon) NewMeasure(left float64, top float64, width float64, height float64) *Measure {
+	p := b.ctx.Get("Measure").New(left, top, width, height)
 	return MeasureFromJSObject(p)
 }
 

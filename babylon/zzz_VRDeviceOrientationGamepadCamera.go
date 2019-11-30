@@ -8,7 +8,6 @@ import (
 
 // VRDeviceOrientationGamepadCamera represents a babylon.js VRDeviceOrientationGamepadCamera.
 // Camera used to simulate VR rendering (based on VRDeviceOrientationFreeCamera)
-
 //
 // See: http://doc.babylonjs.com/babylon101/cameras#vr-device-orientation-cameras
 type VRDeviceOrientationGamepadCamera struct{ *VRDeviceOrientationFreeCamera }
@@ -27,11 +26,22 @@ func VRDeviceOrientationGamepadCameraFromJSObject(p js.Value) *VRDeviceOrientati
 	return &VRDeviceOrientationGamepadCamera{VRDeviceOrientationFreeCameraFromJSObject(p)}
 }
 
+// NewVRDeviceOrientationGamepadCameraOpts contains optional parameters for NewVRDeviceOrientationGamepadCamera.
+type NewVRDeviceOrientationGamepadCameraOpts struct {
+	CompensateDistortion *bool
+
+	VrCameraMetrics *VRCameraMetrics
+}
+
 // NewVRDeviceOrientationGamepadCamera returns a new VRDeviceOrientationGamepadCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationgamepadcamera
-func (b *Babylon) NewVRDeviceOrientationGamepadCamera(todo parameters) *VRDeviceOrientationGamepadCamera {
-	p := b.ctx.Get("VRDeviceOrientationGamepadCamera").New(todo)
+func (b *Babylon) NewVRDeviceOrientationGamepadCamera(name string, position *Vector3, scene *Scene, opts *NewVRDeviceOrientationGamepadCameraOpts) *VRDeviceOrientationGamepadCamera {
+	if opts == nil {
+		opts = &NewVRDeviceOrientationGamepadCameraOpts{}
+	}
+
+	p := b.ctx.Get("VRDeviceOrientationGamepadCamera").New(name, position.JSObject(), scene.JSObject(), opts.CompensateDistortion.JSObject(), opts.VrCameraMetrics.JSObject())
 	return VRDeviceOrientationGamepadCameraFromJSObject(p)
 }
 

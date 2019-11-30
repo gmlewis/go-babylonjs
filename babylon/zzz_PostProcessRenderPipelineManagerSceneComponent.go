@@ -8,7 +8,7 @@ import (
 
 // PostProcessRenderPipelineManagerSceneComponent represents a babylon.js PostProcessRenderPipelineManagerSceneComponent.
 // Defines the Render Pipeline scene component responsible to rendering pipelines
-type PostProcessRenderPipelineManagerSceneComponent struct{}
+type PostProcessRenderPipelineManagerSceneComponent struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (p *PostProcessRenderPipelineManagerSceneComponent) JSObject() js.Value { return p.p }
@@ -27,8 +27,8 @@ func PostProcessRenderPipelineManagerSceneComponentFromJSObject(p js.Value) *Pos
 // NewPostProcessRenderPipelineManagerSceneComponent returns a new PostProcessRenderPipelineManagerSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipelinemanagerscenecomponent
-func (b *Babylon) NewPostProcessRenderPipelineManagerSceneComponent(todo parameters) *PostProcessRenderPipelineManagerSceneComponent {
-	p := b.ctx.Get("PostProcessRenderPipelineManagerSceneComponent").New(todo)
+func (b *Babylon) NewPostProcessRenderPipelineManagerSceneComponent(scene *Scene) *PostProcessRenderPipelineManagerSceneComponent {
+	p := b.ctx.Get("PostProcessRenderPipelineManagerSceneComponent").New(scene.JSObject())
 	return PostProcessRenderPipelineManagerSceneComponentFromJSObject(p)
 }
 

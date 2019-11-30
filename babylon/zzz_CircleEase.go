@@ -8,7 +8,6 @@ import (
 
 // CircleEase represents a babylon.js CircleEase.
 // Easing function with a circle shape (see link below).
-
 //
 // See: http://doc.babylonjs.com/babylon101/animations#easing-functions
 type CircleEase struct{ *EasingFunction }
@@ -25,14 +24,6 @@ func (b *Babylon) CircleEase() *CircleEase {
 // CircleEaseFromJSObject returns a wrapped CircleEase JavaScript class.
 func CircleEaseFromJSObject(p js.Value) *CircleEase {
 	return &CircleEase{EasingFunctionFromJSObject(p)}
-}
-
-// NewCircleEase returns a new CircleEase object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.circleease
-func (b *Babylon) NewCircleEase(todo parameters) *CircleEase {
-	p := b.ctx.Get("CircleEase").New(todo)
-	return CircleEaseFromJSObject(p)
 }
 
 // TODO: methods

@@ -9,10 +9,9 @@ import (
 // Curve3 represents a babylon.js Curve3.
 // A Curve3 object is a logical object, so not a mesh, to handle curves in the 3D geometric space.
 // A Curve3 is designed from a series of successive Vector3.
-
 //
 // See: https://doc.babylonjs.com/how_to/how_to_use_curve3
-type Curve3 struct{}
+type Curve3 struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (c *Curve3) JSObject() js.Value { return c.p }
@@ -31,8 +30,8 @@ func Curve3FromJSObject(p js.Value) *Curve3 {
 // NewCurve3 returns a new Curve3 object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.curve3
-func (b *Babylon) NewCurve3(todo parameters) *Curve3 {
-	p := b.ctx.Get("Curve3").New(todo)
+func (b *Babylon) NewCurve3(points *Vector3) *Curve3 {
+	p := b.ctx.Get("Curve3").New(points.JSObject())
 	return Curve3FromJSObject(p)
 }
 

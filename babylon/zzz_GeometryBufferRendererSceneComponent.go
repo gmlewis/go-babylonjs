@@ -9,7 +9,7 @@ import (
 // GeometryBufferRendererSceneComponent represents a babylon.js GeometryBufferRendererSceneComponent.
 // Defines the Geometry Buffer scene component responsible to manage a G-Buffer useful
 // in several rendering techniques.
-type GeometryBufferRendererSceneComponent struct{}
+type GeometryBufferRendererSceneComponent struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (g *GeometryBufferRendererSceneComponent) JSObject() js.Value { return g.p }
@@ -28,8 +28,8 @@ func GeometryBufferRendererSceneComponentFromJSObject(p js.Value) *GeometryBuffe
 // NewGeometryBufferRendererSceneComponent returns a new GeometryBufferRendererSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometrybufferrendererscenecomponent
-func (b *Babylon) NewGeometryBufferRendererSceneComponent(todo parameters) *GeometryBufferRendererSceneComponent {
-	p := b.ctx.Get("GeometryBufferRendererSceneComponent").New(todo)
+func (b *Babylon) NewGeometryBufferRendererSceneComponent(scene *Scene) *GeometryBufferRendererSceneComponent {
+	p := b.ctx.Get("GeometryBufferRendererSceneComponent").New(scene.JSObject())
 	return GeometryBufferRendererSceneComponentFromJSObject(p)
 }
 

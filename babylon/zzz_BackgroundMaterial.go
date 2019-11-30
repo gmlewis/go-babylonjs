@@ -8,7 +8,7 @@ import (
 
 // BackgroundMaterial represents a babylon.js BackgroundMaterial.
 // Background material used to create an efficient environement around your scene.
-type BackgroundMaterial struct{}
+type BackgroundMaterial struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (b *BackgroundMaterial) JSObject() js.Value { return b.p }
@@ -27,8 +27,8 @@ func BackgroundMaterialFromJSObject(p js.Value) *BackgroundMaterial {
 // NewBackgroundMaterial returns a new BackgroundMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial
-func (b *Babylon) NewBackgroundMaterial(todo parameters) *BackgroundMaterial {
-	p := b.ctx.Get("BackgroundMaterial").New(todo)
+func (b *Babylon) NewBackgroundMaterial(name string, scene *Scene) *BackgroundMaterial {
+	p := b.ctx.Get("BackgroundMaterial").New(name, scene.JSObject())
 	return BackgroundMaterialFromJSObject(p)
 }
 

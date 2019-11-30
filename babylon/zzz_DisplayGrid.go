@@ -24,11 +24,20 @@ func DisplayGridFromJSObject(p js.Value) *DisplayGrid {
 	return &DisplayGrid{ControlFromJSObject(p)}
 }
 
+// NewDisplayGridOpts contains optional parameters for NewDisplayGrid.
+type NewDisplayGridOpts struct {
+	Name *string
+}
+
 // NewDisplayGrid returns a new DisplayGrid object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.displaygrid
-func (b *Babylon) NewDisplayGrid(todo parameters) *DisplayGrid {
-	p := b.ctx.Get("DisplayGrid").New(todo)
+func (b *Babylon) NewDisplayGrid(opts *NewDisplayGridOpts) *DisplayGrid {
+	if opts == nil {
+		opts = &NewDisplayGridOpts{}
+	}
+
+	p := b.ctx.Get("DisplayGrid").New(opts.Name)
 	return DisplayGridFromJSObject(p)
 }
 

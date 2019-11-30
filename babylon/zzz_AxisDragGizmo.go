@@ -24,11 +24,24 @@ func AxisDragGizmoFromJSObject(p js.Value) *AxisDragGizmo {
 	return &AxisDragGizmo{GizmoFromJSObject(p)}
 }
 
+// NewAxisDragGizmoOpts contains optional parameters for NewAxisDragGizmo.
+type NewAxisDragGizmoOpts struct {
+	Color *Color3
+
+	GizmoLayer *UtilityLayerRenderer
+
+	Parent *PositionGizmo
+}
+
 // NewAxisDragGizmo returns a new AxisDragGizmo object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axisdraggizmo
-func (b *Babylon) NewAxisDragGizmo(todo parameters) *AxisDragGizmo {
-	p := b.ctx.Get("AxisDragGizmo").New(todo)
+func (b *Babylon) NewAxisDragGizmo(dragAxis *Vector3, opts *NewAxisDragGizmoOpts) *AxisDragGizmo {
+	if opts == nil {
+		opts = &NewAxisDragGizmoOpts{}
+	}
+
+	p := b.ctx.Get("AxisDragGizmo").New(dragAxis.JSObject(), opts.Color.JSObject(), opts.GizmoLayer.JSObject(), opts.Parent.JSObject())
 	return AxisDragGizmoFromJSObject(p)
 }
 

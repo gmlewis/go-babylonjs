@@ -24,11 +24,24 @@ func TonemapPostProcessFromJSObject(p js.Value) *TonemapPostProcess {
 	return &TonemapPostProcess{PostProcessFromJSObject(p)}
 }
 
+// NewTonemapPostProcessOpts contains optional parameters for NewTonemapPostProcess.
+type NewTonemapPostProcessOpts struct {
+	SamplingMode *float64
+
+	Engine *Engine
+
+	TextureFormat *float64
+}
+
 // NewTonemapPostProcess returns a new TonemapPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tonemappostprocess
-func (b *Babylon) NewTonemapPostProcess(todo parameters) *TonemapPostProcess {
-	p := b.ctx.Get("TonemapPostProcess").New(todo)
+func (b *Babylon) NewTonemapPostProcess(name string, _operator *TonemappingOperator, exposureAdjustment float64, camera *Camera, opts *NewTonemapPostProcessOpts) *TonemapPostProcess {
+	if opts == nil {
+		opts = &NewTonemapPostProcessOpts{}
+	}
+
+	p := b.ctx.Get("TonemapPostProcess").New(name, _operator.JSObject(), exposureAdjustment, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.TextureFormat)
 	return TonemapPostProcessFromJSObject(p)
 }
 

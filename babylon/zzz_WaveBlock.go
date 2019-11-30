@@ -27,8 +27,8 @@ func WaveBlockFromJSObject(p js.Value) *WaveBlock {
 // NewWaveBlock returns a new WaveBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.waveblock
-func (b *Babylon) NewWaveBlock(todo parameters) *WaveBlock {
-	p := b.ctx.Get("WaveBlock").New(todo)
+func (b *Babylon) NewWaveBlock(name string) *WaveBlock {
+	p := b.ctx.Get("WaveBlock").New(name)
 	return WaveBlockFromJSObject(p)
 }
 

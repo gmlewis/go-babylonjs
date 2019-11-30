@@ -1,7 +1,6 @@
 package babylon
 
-import "syscall/js"
-
+/*
 // Camera represents a babylon.js Camera.
 type Camera struct{ *Node }
 
@@ -26,3 +25,4 @@ func (b *Babylon) NewCamera(name string, position *Vector3, scene *Scene) *Camer
 	p := b.ctx.Get("Camera").New(name, position.JSObject(), scene.JSObject())
 	return CameraFromJSObject(p)
 }
+*/

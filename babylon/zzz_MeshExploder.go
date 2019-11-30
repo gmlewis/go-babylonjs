@@ -8,7 +8,7 @@ import (
 
 // MeshExploder represents a babylon.js MeshExploder.
 // Class used to explode meshes (ie. to have a center and move them away from that center to better see the overall organization)
-type MeshExploder struct{}
+type MeshExploder struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (m *MeshExploder) JSObject() js.Value { return m.p }
@@ -24,11 +24,20 @@ func MeshExploderFromJSObject(p js.Value) *MeshExploder {
 	return &MeshExploder{p: p}
 }
 
+// NewMeshExploderOpts contains optional parameters for NewMeshExploder.
+type NewMeshExploderOpts struct {
+	CenterMesh *Mesh
+}
+
 // NewMeshExploder returns a new MeshExploder object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.meshexploder
-func (b *Babylon) NewMeshExploder(todo parameters) *MeshExploder {
-	p := b.ctx.Get("MeshExploder").New(todo)
+func (b *Babylon) NewMeshExploder(meshes []Mesh, opts *NewMeshExploderOpts) *MeshExploder {
+	if opts == nil {
+		opts = &NewMeshExploderOpts{}
+	}
+
+	p := b.ctx.Get("MeshExploder").New(meshes.JSObject(), opts.CenterMesh.JSObject())
 	return MeshExploderFromJSObject(p)
 }
 

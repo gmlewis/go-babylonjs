@@ -8,7 +8,6 @@ import (
 
 // BackEase represents a babylon.js BackEase.
 // Easing function with a ease back shape (see link below).
-
 //
 // See: http://doc.babylonjs.com/babylon101/animations#easing-functions
 type BackEase struct{ *EasingFunction }
@@ -27,11 +26,20 @@ func BackEaseFromJSObject(p js.Value) *BackEase {
 	return &BackEase{EasingFunctionFromJSObject(p)}
 }
 
+// NewBackEaseOpts contains optional parameters for NewBackEase.
+type NewBackEaseOpts struct {
+	Amplitude *float64
+}
+
 // NewBackEase returns a new BackEase object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backease
-func (b *Babylon) NewBackEase(todo parameters) *BackEase {
-	p := b.ctx.Get("BackEase").New(todo)
+func (b *Babylon) NewBackEase(opts *NewBackEaseOpts) *BackEase {
+	if opts == nil {
+		opts = &NewBackEaseOpts{}
+	}
+
+	p := b.ctx.Get("BackEase").New(opts.Amplitude)
 	return BackEaseFromJSObject(p)
 }
 

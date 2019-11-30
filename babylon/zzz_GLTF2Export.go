@@ -8,7 +8,7 @@ import (
 
 // GLTF2Export represents a babylon.js GLTF2Export.
 // Class for generating glTF data from a Babylon scene.
-type GLTF2Export struct{}
+type GLTF2Export struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (g *GLTF2Export) JSObject() js.Value { return g.p }
@@ -22,14 +22,6 @@ func (b *Babylon) GLTF2Export() *GLTF2Export {
 // GLTF2ExportFromJSObject returns a wrapped GLTF2Export JavaScript class.
 func GLTF2ExportFromJSObject(p js.Value) *GLTF2Export {
 	return &GLTF2Export{p: p}
-}
-
-// NewGLTF2Export returns a new GLTF2Export object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.gltf2export
-func (b *Babylon) NewGLTF2Export(todo parameters) *GLTF2Export {
-	p := b.ctx.Get("GLTF2Export").New(todo)
-	return GLTF2ExportFromJSObject(p)
 }
 
 // TODO: methods

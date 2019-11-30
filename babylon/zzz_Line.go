@@ -24,11 +24,20 @@ func LineFromJSObject(p js.Value) *Line {
 	return &Line{ControlFromJSObject(p)}
 }
 
+// NewLineOpts contains optional parameters for NewLine.
+type NewLineOpts struct {
+	Name *string
+}
+
 // NewLine returns a new Line object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.line
-func (b *Babylon) NewLine(todo parameters) *Line {
-	p := b.ctx.Get("Line").New(todo)
+func (b *Babylon) NewLine(opts *NewLineOpts) *Line {
+	if opts == nil {
+		opts = &NewLineOpts{}
+	}
+
+	p := b.ctx.Get("Line").New(opts.Name)
 	return LineFromJSObject(p)
 }
 

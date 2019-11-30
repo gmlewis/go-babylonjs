@@ -10,7 +10,6 @@ import (
 // This represents a free type of camera. It can be useful in First Person Shooter game for instance.
 // It is identical to the Free Camera and simply adds by default a virtual joystick.
 // Virtual Joysticks are on-screen 2D graphics that are used to control the camera or other scene items.
-
 //
 // See: http://doc.babylonjs.com/features/cameras#virtual-joysticks-camera
 type VirtualJoysticksCamera struct{ *FreeCamera }
@@ -32,8 +31,8 @@ func VirtualJoysticksCameraFromJSObject(p js.Value) *VirtualJoysticksCamera {
 // NewVirtualJoysticksCamera returns a new VirtualJoysticksCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.virtualjoystickscamera
-func (b *Babylon) NewVirtualJoysticksCamera(todo parameters) *VirtualJoysticksCamera {
-	p := b.ctx.Get("VirtualJoysticksCamera").New(todo)
+func (b *Babylon) NewVirtualJoysticksCamera(name string, position *Vector3, scene *Scene) *VirtualJoysticksCamera {
+	p := b.ctx.Get("VirtualJoysticksCamera").New(name, position.JSObject(), scene.JSObject())
 	return VirtualJoysticksCameraFromJSObject(p)
 }
 

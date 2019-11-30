@@ -27,8 +27,8 @@ func CylinderPanelFromJSObject(p js.Value) *CylinderPanel {
 // NewCylinderPanel returns a new CylinderPanel object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cylinderpanel
-func (b *Babylon) NewCylinderPanel(todo parameters) *CylinderPanel {
-	p := b.ctx.Get("CylinderPanel").New(todo)
+func (b *Babylon) NewCylinderPanel() *CylinderPanel {
+	p := b.ctx.Get("CylinderPanel").New()
 	return CylinderPanelFromJSObject(p)
 }
 

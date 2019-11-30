@@ -24,11 +24,20 @@ func PositionGizmoFromJSObject(p js.Value) *PositionGizmo {
 	return &PositionGizmo{GizmoFromJSObject(p)}
 }
 
+// NewPositionGizmoOpts contains optional parameters for NewPositionGizmo.
+type NewPositionGizmoOpts struct {
+	GizmoLayer *UtilityLayerRenderer
+}
+
 // NewPositionGizmo returns a new PositionGizmo object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.positiongizmo
-func (b *Babylon) NewPositionGizmo(todo parameters) *PositionGizmo {
-	p := b.ctx.Get("PositionGizmo").New(todo)
+func (b *Babylon) NewPositionGizmo(opts *NewPositionGizmoOpts) *PositionGizmo {
+	if opts == nil {
+		opts = &NewPositionGizmoOpts{}
+	}
+
+	p := b.ctx.Get("PositionGizmo").New(opts.GizmoLayer.JSObject())
 	return PositionGizmoFromJSObject(p)
 }
 

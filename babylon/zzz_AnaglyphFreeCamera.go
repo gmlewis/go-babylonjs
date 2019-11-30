@@ -8,7 +8,6 @@ import (
 
 // AnaglyphFreeCamera represents a babylon.js AnaglyphFreeCamera.
 // Camera used to simulate anaglyphic rendering (based on FreeCamera)
-
 //
 // See: http://doc.babylonjs.com/features/cameras#anaglyph-cameras
 type AnaglyphFreeCamera struct{ *FreeCamera }
@@ -30,8 +29,8 @@ func AnaglyphFreeCameraFromJSObject(p js.Value) *AnaglyphFreeCamera {
 // NewAnaglyphFreeCamera returns a new AnaglyphFreeCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphfreecamera
-func (b *Babylon) NewAnaglyphFreeCamera(todo parameters) *AnaglyphFreeCamera {
-	p := b.ctx.Get("AnaglyphFreeCamera").New(todo)
+func (b *Babylon) NewAnaglyphFreeCamera(name string, position *Vector3, interaxialDistance float64, scene *Scene) *AnaglyphFreeCamera {
+	p := b.ctx.Get("AnaglyphFreeCamera").New(name, position.JSObject(), interaxialDistance, scene.JSObject())
 	return AnaglyphFreeCameraFromJSObject(p)
 }
 

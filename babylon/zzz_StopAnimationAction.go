@@ -8,7 +8,6 @@ import (
 
 // StopAnimationAction represents a babylon.js StopAnimationAction.
 // This defines an action responsible to stop an animation once triggered.
-
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_actions
 type StopAnimationAction struct{ *Action }
@@ -27,11 +26,20 @@ func StopAnimationActionFromJSObject(p js.Value) *StopAnimationAction {
 	return &StopAnimationAction{ActionFromJSObject(p)}
 }
 
+// NewStopAnimationActionOpts contains optional parameters for NewStopAnimationAction.
+type NewStopAnimationActionOpts struct {
+	Condition *Condition
+}
+
 // NewStopAnimationAction returns a new StopAnimationAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stopanimationaction
-func (b *Babylon) NewStopAnimationAction(todo parameters) *StopAnimationAction {
-	p := b.ctx.Get("StopAnimationAction").New(todo)
+func (b *Babylon) NewStopAnimationAction(triggerOptions interface{}, target interface{}, opts *NewStopAnimationActionOpts) *StopAnimationAction {
+	if opts == nil {
+		opts = &NewStopAnimationActionOpts{}
+	}
+
+	p := b.ctx.Get("StopAnimationAction").New(triggerOptions, target, opts.Condition.JSObject())
 	return StopAnimationActionFromJSObject(p)
 }
 

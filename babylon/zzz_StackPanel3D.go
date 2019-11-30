@@ -24,11 +24,20 @@ func StackPanel3DFromJSObject(p js.Value) *StackPanel3D {
 	return &StackPanel3D{Container3DFromJSObject(p)}
 }
 
+// NewStackPanel3DOpts contains optional parameters for NewStackPanel3D.
+type NewStackPanel3DOpts struct {
+	IsVertical *bool
+}
+
 // NewStackPanel3D returns a new StackPanel3D object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stackpanel3d
-func (b *Babylon) NewStackPanel3D(todo parameters) *StackPanel3D {
-	p := b.ctx.Get("StackPanel3D").New(todo)
+func (b *Babylon) NewStackPanel3D(opts *NewStackPanel3DOpts) *StackPanel3D {
+	if opts == nil {
+		opts = &NewStackPanel3DOpts{}
+	}
+
+	p := b.ctx.Get("StackPanel3D").New(opts.IsVertical.JSObject())
 	return StackPanel3DFromJSObject(p)
 }
 

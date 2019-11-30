@@ -8,7 +8,7 @@ import (
 
 // CSG represents a babylon.js CSG.
 // Class for building Constructive Solid Geometry
-type CSG struct{}
+type CSG struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (c *CSG) JSObject() js.Value { return c.p }
@@ -22,14 +22,6 @@ func (b *Babylon) CSG() *CSG {
 // CSGFromJSObject returns a wrapped CSG JavaScript class.
 func CSGFromJSObject(p js.Value) *CSG {
 	return &CSG{p: p}
-}
-
-// NewCSG returns a new CSG object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.csg
-func (b *Babylon) NewCSG(todo parameters) *CSG {
-	p := b.ctx.Get("CSG").New(todo)
-	return CSGFromJSObject(p)
 }
 
 // TODO: methods

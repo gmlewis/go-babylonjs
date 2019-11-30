@@ -24,11 +24,20 @@ func AbstractButton3DFromJSObject(p js.Value) *AbstractButton3D {
 	return &AbstractButton3D{Control3DFromJSObject(p)}
 }
 
+// NewAbstractButton3DOpts contains optional parameters for NewAbstractButton3D.
+type NewAbstractButton3DOpts struct {
+	Name *string
+}
+
 // NewAbstractButton3D returns a new AbstractButton3D object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractbutton3d
-func (b *Babylon) NewAbstractButton3D(todo parameters) *AbstractButton3D {
-	p := b.ctx.Get("AbstractButton3D").New(todo)
+func (b *Babylon) NewAbstractButton3D(opts *NewAbstractButton3DOpts) *AbstractButton3D {
+	if opts == nil {
+		opts = &NewAbstractButton3DOpts{}
+	}
+
+	p := b.ctx.Get("AbstractButton3D").New(opts.Name)
 	return AbstractButton3DFromJSObject(p)
 }
 

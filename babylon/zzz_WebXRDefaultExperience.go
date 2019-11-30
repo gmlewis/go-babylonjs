@@ -8,7 +8,7 @@ import (
 
 // WebXRDefaultExperience represents a babylon.js WebXRDefaultExperience.
 // Default experience which provides a similar setup to the previous webVRExperience
-type WebXRDefaultExperience struct{}
+type WebXRDefaultExperience struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (w *WebXRDefaultExperience) JSObject() js.Value { return w.p }
@@ -22,14 +22,6 @@ func (b *Babylon) WebXRDefaultExperience() *WebXRDefaultExperience {
 // WebXRDefaultExperienceFromJSObject returns a wrapped WebXRDefaultExperience JavaScript class.
 func WebXRDefaultExperienceFromJSObject(p js.Value) *WebXRDefaultExperience {
 	return &WebXRDefaultExperience{p: p}
-}
-
-// NewWebXRDefaultExperience returns a new WebXRDefaultExperience object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.webxrdefaultexperience
-func (b *Babylon) NewWebXRDefaultExperience(todo parameters) *WebXRDefaultExperience {
-	p := b.ctx.Get("WebXRDefaultExperience").New(todo)
-	return WebXRDefaultExperienceFromJSObject(p)
 }
 
 // TODO: methods

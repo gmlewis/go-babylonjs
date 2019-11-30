@@ -8,7 +8,7 @@ import (
 
 // GamepadSystemSceneComponent represents a babylon.js GamepadSystemSceneComponent.
 // Defines the gamepad scene component responsible to manage gamepads in a given scene
-type GamepadSystemSceneComponent struct{}
+type GamepadSystemSceneComponent struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (g *GamepadSystemSceneComponent) JSObject() js.Value { return g.p }
@@ -27,8 +27,8 @@ func GamepadSystemSceneComponentFromJSObject(p js.Value) *GamepadSystemSceneComp
 // NewGamepadSystemSceneComponent returns a new GamepadSystemSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gamepadsystemscenecomponent
-func (b *Babylon) NewGamepadSystemSceneComponent(todo parameters) *GamepadSystemSceneComponent {
-	p := b.ctx.Get("GamepadSystemSceneComponent").New(todo)
+func (b *Babylon) NewGamepadSystemSceneComponent(scene *Scene) *GamepadSystemSceneComponent {
+	p := b.ctx.Get("GamepadSystemSceneComponent").New(scene.JSObject())
 	return GamepadSystemSceneComponentFromJSObject(p)
 }
 

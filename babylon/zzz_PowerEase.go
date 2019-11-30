@@ -8,7 +8,6 @@ import (
 
 // PowerEase represents a babylon.js PowerEase.
 // Easing function with a power shape (see link below).
-
 //
 // See: http://doc.babylonjs.com/babylon101/animations#easing-functions
 type PowerEase struct{ *EasingFunction }
@@ -27,11 +26,20 @@ func PowerEaseFromJSObject(p js.Value) *PowerEase {
 	return &PowerEase{EasingFunctionFromJSObject(p)}
 }
 
+// NewPowerEaseOpts contains optional parameters for NewPowerEase.
+type NewPowerEaseOpts struct {
+	Power *float64
+}
+
 // NewPowerEase returns a new PowerEase object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.powerease
-func (b *Babylon) NewPowerEase(todo parameters) *PowerEase {
-	p := b.ctx.Get("PowerEase").New(todo)
+func (b *Babylon) NewPowerEase(opts *NewPowerEaseOpts) *PowerEase {
+	if opts == nil {
+		opts = &NewPowerEaseOpts{}
+	}
+
+	p := b.ctx.Get("PowerEase").New(opts.Power)
 	return PowerEaseFromJSObject(p)
 }
 

@@ -8,7 +8,7 @@ import (
 
 // WebXRInput represents a babylon.js WebXRInput.
 // XR input used to track XR inputs such as controllers/rays
-type WebXRInput struct{}
+type WebXRInput struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (w *WebXRInput) JSObject() js.Value { return w.p }
@@ -27,8 +27,8 @@ func WebXRInputFromJSObject(p js.Value) *WebXRInput {
 // NewWebXRInput returns a new WebXRInput object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrinput
-func (b *Babylon) NewWebXRInput(todo parameters) *WebXRInput {
-	p := b.ctx.Get("WebXRInput").New(todo)
+func (b *Babylon) NewWebXRInput(baseExperience *WebXRExperienceHelper) *WebXRInput {
+	p := b.ctx.Get("WebXRInput").New(baseExperience.JSObject())
 	return WebXRInputFromJSObject(p)
 }
 

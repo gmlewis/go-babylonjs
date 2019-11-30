@@ -8,7 +8,6 @@ import (
 
 // FollowCameraPointersInput represents a babylon.js FollowCameraPointersInput.
 // Manage the pointers inputs to control an follow camera.
-
 //
 // See: http://doc.babylonjs.com/how_to/customizing_camera_inputs
 type FollowCameraPointersInput struct{ *BaseCameraPointersInput }
@@ -25,14 +24,6 @@ func (b *Babylon) FollowCameraPointersInput() *FollowCameraPointersInput {
 // FollowCameraPointersInputFromJSObject returns a wrapped FollowCameraPointersInput JavaScript class.
 func FollowCameraPointersInputFromJSObject(p js.Value) *FollowCameraPointersInput {
 	return &FollowCameraPointersInput{BaseCameraPointersInputFromJSObject(p)}
-}
-
-// NewFollowCameraPointersInput returns a new FollowCameraPointersInput object.
-//
-// https://doc.babylonjs.com/api/classes/babylon.followcamerapointersinput
-func (b *Babylon) NewFollowCameraPointersInput(todo parameters) *FollowCameraPointersInput {
-	p := b.ctx.Get("FollowCameraPointersInput").New(todo)
-	return FollowCameraPointersInputFromJSObject(p)
 }
 
 // TODO: methods

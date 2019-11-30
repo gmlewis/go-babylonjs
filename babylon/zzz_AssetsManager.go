@@ -8,10 +8,9 @@ import (
 
 // AssetsManager represents a babylon.js AssetsManager.
 // This class can be used to easily import assets into a scene
-
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_assetsmanager
-type AssetsManager struct{}
+type AssetsManager struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (a *AssetsManager) JSObject() js.Value { return a.p }
@@ -30,8 +29,8 @@ func AssetsManagerFromJSObject(p js.Value) *AssetsManager {
 // NewAssetsManager returns a new AssetsManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager
-func (b *Babylon) NewAssetsManager(todo parameters) *AssetsManager {
-	p := b.ctx.Get("AssetsManager").New(todo)
+func (b *Babylon) NewAssetsManager(scene *Scene) *AssetsManager {
+	p := b.ctx.Get("AssetsManager").New(scene.JSObject())
 	return AssetsManagerFromJSObject(p)
 }
 

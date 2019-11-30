@@ -8,10 +8,9 @@ import (
 
 // MeshLODLevel represents a babylon.js MeshLODLevel.
 // Class used to represent a specific level of detail of a mesh
-
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_lod
-type MeshLODLevel struct{}
+type MeshLODLevel struct{ p js.Value }
 
 // JSObject returns the underlying js.Value.
 func (m *MeshLODLevel) JSObject() js.Value { return m.p }
@@ -30,8 +29,8 @@ func MeshLODLevelFromJSObject(p js.Value) *MeshLODLevel {
 // NewMeshLODLevel returns a new MeshLODLevel object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.meshlodlevel
-func (b *Babylon) NewMeshLODLevel(todo parameters) *MeshLODLevel {
-	p := b.ctx.Get("MeshLODLevel").New(todo)
+func (b *Babylon) NewMeshLODLevel(distance float64, mesh *Mesh) *MeshLODLevel {
+	p := b.ctx.Get("MeshLODLevel").New(distance, mesh.JSObject())
 	return MeshLODLevelFromJSObject(p)
 }
 
