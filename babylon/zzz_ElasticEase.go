@@ -10,7 +10,10 @@ import (
 // Easing function with an elastic shape (see link below).
 //
 // See: http://doc.babylonjs.com/babylon101/animations#easing-functions
-type ElasticEase struct{ *EasingFunction }
+type ElasticEase struct {
+	*EasingFunction
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (e *ElasticEase) JSObject() js.Value { return e.p }
@@ -18,12 +21,12 @@ func (e *ElasticEase) JSObject() js.Value { return e.p }
 // ElasticEase returns a ElasticEase JavaScript class.
 func (ba *Babylon) ElasticEase() *ElasticEase {
 	p := ba.ctx.Get("ElasticEase")
-	return ElasticEaseFromJSObject(p)
+	return ElasticEaseFromJSObject(p, ba.ctx)
 }
 
 // ElasticEaseFromJSObject returns a wrapped ElasticEase JavaScript class.
-func ElasticEaseFromJSObject(p js.Value) *ElasticEase {
-	return &ElasticEase{EasingFunctionFromJSObject(p)}
+func ElasticEaseFromJSObject(p js.Value, ctx js.Value) *ElasticEase {
+	return &ElasticEase{EasingFunction: EasingFunctionFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewElasticEaseOpts contains optional parameters for NewElasticEase.
@@ -42,7 +45,7 @@ func (ba *Babylon) NewElasticEase(opts *NewElasticEaseOpts) *ElasticEase {
 	}
 
 	p := ba.ctx.Get("ElasticEase").New(opts.Oscillations.JSObject(), opts.Springiness.JSObject())
-	return ElasticEaseFromJSObject(p)
+	return ElasticEaseFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

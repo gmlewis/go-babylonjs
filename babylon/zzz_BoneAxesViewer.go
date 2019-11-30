@@ -10,7 +10,10 @@ import (
 // The BoneAxesViewer will attach 3 axes to a specific bone of a specific mesh
 //
 // See: https://www.babylonjs-playground.com/#0DE8F4#8
-type BoneAxesViewer struct{ *AxesViewer }
+type BoneAxesViewer struct {
+	*AxesViewer
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (b *BoneAxesViewer) JSObject() js.Value { return b.p }
@@ -18,12 +21,12 @@ func (b *BoneAxesViewer) JSObject() js.Value { return b.p }
 // BoneAxesViewer returns a BoneAxesViewer JavaScript class.
 func (ba *Babylon) BoneAxesViewer() *BoneAxesViewer {
 	p := ba.ctx.Get("BoneAxesViewer")
-	return BoneAxesViewerFromJSObject(p)
+	return BoneAxesViewerFromJSObject(p, ba.ctx)
 }
 
 // BoneAxesViewerFromJSObject returns a wrapped BoneAxesViewer JavaScript class.
-func BoneAxesViewerFromJSObject(p js.Value) *BoneAxesViewer {
-	return &BoneAxesViewer{AxesViewerFromJSObject(p)}
+func BoneAxesViewerFromJSObject(p js.Value, ctx js.Value) *BoneAxesViewer {
+	return &BoneAxesViewer{AxesViewer: AxesViewerFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewBoneAxesViewerOpts contains optional parameters for NewBoneAxesViewer.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewBoneAxesViewer(scene *Scene, bone *Bone, mesh *Mesh, opts 
 	}
 
 	p := ba.ctx.Get("BoneAxesViewer").New(scene.JSObject(), bone.JSObject(), mesh.JSObject(), opts.ScaleLines.JSObject())
-	return BoneAxesViewerFromJSObject(p)
+	return BoneAxesViewerFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

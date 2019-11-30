@@ -8,7 +8,10 @@ import (
 
 // BoundingBoxGizmo represents a babylon.js BoundingBoxGizmo.
 // Bounding box gizmo
-type BoundingBoxGizmo struct{ *Gizmo }
+type BoundingBoxGizmo struct {
+	*Gizmo
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (b *BoundingBoxGizmo) JSObject() js.Value { return b.p }
@@ -16,12 +19,12 @@ func (b *BoundingBoxGizmo) JSObject() js.Value { return b.p }
 // BoundingBoxGizmo returns a BoundingBoxGizmo JavaScript class.
 func (ba *Babylon) BoundingBoxGizmo() *BoundingBoxGizmo {
 	p := ba.ctx.Get("BoundingBoxGizmo")
-	return BoundingBoxGizmoFromJSObject(p)
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
 }
 
 // BoundingBoxGizmoFromJSObject returns a wrapped BoundingBoxGizmo JavaScript class.
-func BoundingBoxGizmoFromJSObject(p js.Value) *BoundingBoxGizmo {
-	return &BoundingBoxGizmo{GizmoFromJSObject(p)}
+func BoundingBoxGizmoFromJSObject(p js.Value, ctx js.Value) *BoundingBoxGizmo {
+	return &BoundingBoxGizmo{Gizmo: GizmoFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewBoundingBoxGizmoOpts contains optional parameters for NewBoundingBoxGizmo.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewBoundingBoxGizmo(opts *NewBoundingBoxGizmoOpts) *BoundingB
 	}
 
 	p := ba.ctx.Get("BoundingBoxGizmo").New(opts.Color.JSObject(), opts.GizmoLayer.JSObject())
-	return BoundingBoxGizmoFromJSObject(p)
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

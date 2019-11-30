@@ -8,7 +8,10 @@ import (
 
 // InputText represents a babylon.js InputText.
 // Class used to create input text control
-type InputText struct{ *Control }
+type InputText struct {
+	*Control
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (i *InputText) JSObject() js.Value { return i.p }
@@ -16,12 +19,12 @@ func (i *InputText) JSObject() js.Value { return i.p }
 // InputText returns a InputText JavaScript class.
 func (ba *Babylon) InputText() *InputText {
 	p := ba.ctx.Get("InputText")
-	return InputTextFromJSObject(p)
+	return InputTextFromJSObject(p, ba.ctx)
 }
 
 // InputTextFromJSObject returns a wrapped InputText JavaScript class.
-func InputTextFromJSObject(p js.Value) *InputText {
-	return &InputText{ControlFromJSObject(p)}
+func InputTextFromJSObject(p js.Value, ctx js.Value) *InputText {
+	return &InputText{Control: ControlFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewInputTextOpts contains optional parameters for NewInputText.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewInputText(opts *NewInputTextOpts) *InputText {
 	}
 
 	p := ba.ctx.Get("InputText").New(opts.Name.JSObject(), opts.Text.JSObject())
-	return InputTextFromJSObject(p)
+	return InputTextFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

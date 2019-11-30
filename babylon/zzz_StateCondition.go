@@ -8,7 +8,10 @@ import (
 
 // StateCondition represents a babylon.js StateCondition.
 // Defines a state condition as an extension of Condition
-type StateCondition struct{ *Condition }
+type StateCondition struct {
+	*Condition
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *StateCondition) JSObject() js.Value { return s.p }
@@ -16,12 +19,12 @@ func (s *StateCondition) JSObject() js.Value { return s.p }
 // StateCondition returns a StateCondition JavaScript class.
 func (ba *Babylon) StateCondition() *StateCondition {
 	p := ba.ctx.Get("StateCondition")
-	return StateConditionFromJSObject(p)
+	return StateConditionFromJSObject(p, ba.ctx)
 }
 
 // StateConditionFromJSObject returns a wrapped StateCondition JavaScript class.
-func StateConditionFromJSObject(p js.Value) *StateCondition {
-	return &StateCondition{ConditionFromJSObject(p)}
+func StateConditionFromJSObject(p js.Value, ctx js.Value) *StateCondition {
+	return &StateCondition{Condition: ConditionFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewStateCondition returns a new StateCondition object.
@@ -29,7 +32,7 @@ func StateConditionFromJSObject(p js.Value) *StateCondition {
 // https://doc.babylonjs.com/api/classes/babylon.statecondition
 func (ba *Babylon) NewStateCondition(actionManager *ActionManager, target interface{}, value string) *StateCondition {
 	p := ba.ctx.Get("StateCondition").New(actionManager.JSObject(), target, value)
-	return StateConditionFromJSObject(p)
+	return StateConditionFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -8,7 +8,10 @@ import (
 
 // CubeTexture represents a babylon.js CubeTexture.
 // Class for creating a cube texture
-type CubeTexture struct{ *BaseTexture }
+type CubeTexture struct {
+	*BaseTexture
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (c *CubeTexture) JSObject() js.Value { return c.p }
@@ -16,12 +19,12 @@ func (c *CubeTexture) JSObject() js.Value { return c.p }
 // CubeTexture returns a CubeTexture JavaScript class.
 func (ba *Babylon) CubeTexture() *CubeTexture {
 	p := ba.ctx.Get("CubeTexture")
-	return CubeTextureFromJSObject(p)
+	return CubeTextureFromJSObject(p, ba.ctx)
 }
 
 // CubeTextureFromJSObject returns a wrapped CubeTexture JavaScript class.
-func CubeTextureFromJSObject(p js.Value) *CubeTexture {
-	return &CubeTexture{BaseTextureFromJSObject(p)}
+func CubeTextureFromJSObject(p js.Value, ctx js.Value) *CubeTexture {
+	return &CubeTexture{BaseTexture: BaseTextureFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewCubeTextureOpts contains optional parameters for NewCubeTexture.
@@ -58,7 +61,7 @@ func (ba *Babylon) NewCubeTexture(rootUrl string, scene *Scene, opts *NewCubeTex
 	}
 
 	p := ba.ctx.Get("CubeTexture").New(rootUrl, scene.JSObject(), opts.Extensions.JSObject(), opts.NoMipmap.JSObject(), opts.Files.JSObject(), opts.OnLoad, opts.OnError, opts.Format.JSObject(), opts.Prefiltered.JSObject(), opts.ForcedExtension, opts.CreatePolynomials.JSObject(), opts.LodScale.JSObject(), opts.LodOffset.JSObject())
-	return CubeTextureFromJSObject(p)
+	return CubeTextureFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

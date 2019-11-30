@@ -10,7 +10,10 @@ import (
 // A helper for physics simulations
 //
 // See: https://doc.babylonjs.com/how_to/using_the_physics_engine#further-functionality-of-the-impostor-class
-type PhysicsHelper struct{ p js.Value }
+type PhysicsHelper struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (p *PhysicsHelper) JSObject() js.Value { return p.p }
@@ -18,12 +21,12 @@ func (p *PhysicsHelper) JSObject() js.Value { return p.p }
 // PhysicsHelper returns a PhysicsHelper JavaScript class.
 func (ba *Babylon) PhysicsHelper() *PhysicsHelper {
 	p := ba.ctx.Get("PhysicsHelper")
-	return PhysicsHelperFromJSObject(p)
+	return PhysicsHelperFromJSObject(p, ba.ctx)
 }
 
 // PhysicsHelperFromJSObject returns a wrapped PhysicsHelper JavaScript class.
-func PhysicsHelperFromJSObject(p js.Value) *PhysicsHelper {
-	return &PhysicsHelper{p: p}
+func PhysicsHelperFromJSObject(p js.Value, ctx js.Value) *PhysicsHelper {
+	return &PhysicsHelper{p: p, ctx: ctx}
 }
 
 // NewPhysicsHelper returns a new PhysicsHelper object.
@@ -31,7 +34,7 @@ func PhysicsHelperFromJSObject(p js.Value) *PhysicsHelper {
 // https://doc.babylonjs.com/api/classes/babylon.physicshelper
 func (ba *Babylon) NewPhysicsHelper(scene *Scene) *PhysicsHelper {
 	p := ba.ctx.Get("PhysicsHelper").New(scene.JSObject())
-	return PhysicsHelperFromJSObject(p)
+	return PhysicsHelperFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

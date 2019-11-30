@@ -10,7 +10,10 @@ import (
 // Manage the keyboard inputs to control the movement of an arc rotate camera.
 //
 // See: http://doc.babylonjs.com/how_to/customizing_camera_inputs
-type ArcRotateCameraKeyboardMoveInput struct{ p js.Value }
+type ArcRotateCameraKeyboardMoveInput struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (a *ArcRotateCameraKeyboardMoveInput) JSObject() js.Value { return a.p }
@@ -18,12 +21,12 @@ func (a *ArcRotateCameraKeyboardMoveInput) JSObject() js.Value { return a.p }
 // ArcRotateCameraKeyboardMoveInput returns a ArcRotateCameraKeyboardMoveInput JavaScript class.
 func (ba *Babylon) ArcRotateCameraKeyboardMoveInput() *ArcRotateCameraKeyboardMoveInput {
 	p := ba.ctx.Get("ArcRotateCameraKeyboardMoveInput")
-	return ArcRotateCameraKeyboardMoveInputFromJSObject(p)
+	return ArcRotateCameraKeyboardMoveInputFromJSObject(p, ba.ctx)
 }
 
 // ArcRotateCameraKeyboardMoveInputFromJSObject returns a wrapped ArcRotateCameraKeyboardMoveInput JavaScript class.
-func ArcRotateCameraKeyboardMoveInputFromJSObject(p js.Value) *ArcRotateCameraKeyboardMoveInput {
-	return &ArcRotateCameraKeyboardMoveInput{p: p}
+func ArcRotateCameraKeyboardMoveInputFromJSObject(p js.Value, ctx js.Value) *ArcRotateCameraKeyboardMoveInput {
+	return &ArcRotateCameraKeyboardMoveInput{p: p, ctx: ctx}
 }
 
 // TODO: methods

@@ -10,7 +10,10 @@ import (
 // The action to be carried out following a trigger
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_actions#available-actions
-type Action struct{ p js.Value }
+type Action struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (a *Action) JSObject() js.Value { return a.p }
@@ -18,12 +21,12 @@ func (a *Action) JSObject() js.Value { return a.p }
 // Action returns a Action JavaScript class.
 func (ba *Babylon) Action() *Action {
 	p := ba.ctx.Get("Action")
-	return ActionFromJSObject(p)
+	return ActionFromJSObject(p, ba.ctx)
 }
 
 // ActionFromJSObject returns a wrapped Action JavaScript class.
-func ActionFromJSObject(p js.Value) *Action {
-	return &Action{p: p}
+func ActionFromJSObject(p js.Value, ctx js.Value) *Action {
+	return &Action{p: p, ctx: ctx}
 }
 
 // NewActionOpts contains optional parameters for NewAction.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewAction(triggerOptions interface{}, opts *NewActionOpts) *A
 	}
 
 	p := ba.ctx.Get("Action").New(triggerOptions, opts.Condition.JSObject())
-	return ActionFromJSObject(p)
+	return ActionFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

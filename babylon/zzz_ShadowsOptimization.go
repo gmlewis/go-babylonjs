@@ -10,7 +10,10 @@ import (
 // Defines an optimization used to remove shadows
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
-type ShadowsOptimization struct{ *SceneOptimization }
+type ShadowsOptimization struct {
+	*SceneOptimization
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *ShadowsOptimization) JSObject() js.Value { return s.p }
@@ -18,12 +21,12 @@ func (s *ShadowsOptimization) JSObject() js.Value { return s.p }
 // ShadowsOptimization returns a ShadowsOptimization JavaScript class.
 func (ba *Babylon) ShadowsOptimization() *ShadowsOptimization {
 	p := ba.ctx.Get("ShadowsOptimization")
-	return ShadowsOptimizationFromJSObject(p)
+	return ShadowsOptimizationFromJSObject(p, ba.ctx)
 }
 
 // ShadowsOptimizationFromJSObject returns a wrapped ShadowsOptimization JavaScript class.
-func ShadowsOptimizationFromJSObject(p js.Value) *ShadowsOptimization {
-	return &ShadowsOptimization{SceneOptimizationFromJSObject(p)}
+func ShadowsOptimizationFromJSObject(p js.Value, ctx js.Value) *ShadowsOptimization {
+	return &ShadowsOptimization{SceneOptimization: SceneOptimizationFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewShadowsOptimizationOpts contains optional parameters for NewShadowsOptimization.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewShadowsOptimization(opts *NewShadowsOptimizationOpts) *Sha
 	}
 
 	p := ba.ctx.Get("ShadowsOptimization").New(opts.Priority.JSObject())
-	return ShadowsOptimizationFromJSObject(p)
+	return ShadowsOptimizationFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

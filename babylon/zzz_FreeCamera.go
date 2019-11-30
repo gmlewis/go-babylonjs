@@ -11,7 +11,10 @@ import (
 // Please consider using the new UniversalCamera instead as it adds more functionality like the gamepad.
 //
 // See: http://doc.babylonjs.com/features/cameras#universal-camera
-type FreeCamera struct{ *TargetCamera }
+type FreeCamera struct {
+	*TargetCamera
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (f *FreeCamera) JSObject() js.Value { return f.p }
@@ -19,12 +22,12 @@ func (f *FreeCamera) JSObject() js.Value { return f.p }
 // FreeCamera returns a FreeCamera JavaScript class.
 func (ba *Babylon) FreeCamera() *FreeCamera {
 	p := ba.ctx.Get("FreeCamera")
-	return FreeCameraFromJSObject(p)
+	return FreeCameraFromJSObject(p, ba.ctx)
 }
 
 // FreeCameraFromJSObject returns a wrapped FreeCamera JavaScript class.
-func FreeCameraFromJSObject(p js.Value) *FreeCamera {
-	return &FreeCamera{TargetCameraFromJSObject(p)}
+func FreeCameraFromJSObject(p js.Value, ctx js.Value) *FreeCamera {
+	return &FreeCamera{TargetCamera: TargetCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewFreeCameraOpts contains optional parameters for NewFreeCamera.
@@ -41,7 +44,7 @@ func (ba *Babylon) NewFreeCamera(name string, position *Vector3, scene *Scene, o
 	}
 
 	p := ba.ctx.Get("FreeCamera").New(name, position.JSObject(), scene.JSObject(), opts.SetActiveOnSceneIfNoneActive.JSObject())
-	return FreeCameraFromJSObject(p)
+	return FreeCameraFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

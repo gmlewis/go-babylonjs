@@ -8,7 +8,10 @@ import (
 
 // MSFT_audio_emitter represents a babylon.js MSFT_audio_emitter.
 // &lt;a href=&#34;https://github.com/najadojo/glTF/tree/MSFT_audio_emitter/extensions/2.0/Vendor/MSFT_audio_emitter&#34;&gt;Specification&lt;/a&gt;
-type MSFT_audio_emitter struct{ p js.Value }
+type MSFT_audio_emitter struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (m *MSFT_audio_emitter) JSObject() js.Value { return m.p }
@@ -16,12 +19,12 @@ func (m *MSFT_audio_emitter) JSObject() js.Value { return m.p }
 // MSFT_audio_emitter returns a MSFT_audio_emitter JavaScript class.
 func (ba *Babylon) MSFT_audio_emitter() *MSFT_audio_emitter {
 	p := ba.ctx.Get("MSFT_audio_emitter")
-	return MSFT_audio_emitterFromJSObject(p)
+	return MSFT_audio_emitterFromJSObject(p, ba.ctx)
 }
 
 // MSFT_audio_emitterFromJSObject returns a wrapped MSFT_audio_emitter JavaScript class.
-func MSFT_audio_emitterFromJSObject(p js.Value) *MSFT_audio_emitter {
-	return &MSFT_audio_emitter{p: p}
+func MSFT_audio_emitterFromJSObject(p js.Value, ctx js.Value) *MSFT_audio_emitter {
+	return &MSFT_audio_emitter{p: p, ctx: ctx}
 }
 
 // TODO: methods

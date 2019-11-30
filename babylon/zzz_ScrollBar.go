@@ -8,7 +8,10 @@ import (
 
 // ScrollBar represents a babylon.js ScrollBar.
 // Class used to create slider controls
-type ScrollBar struct{ *BaseSlider }
+type ScrollBar struct {
+	*BaseSlider
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *ScrollBar) JSObject() js.Value { return s.p }
@@ -16,12 +19,12 @@ func (s *ScrollBar) JSObject() js.Value { return s.p }
 // ScrollBar returns a ScrollBar JavaScript class.
 func (ba *Babylon) ScrollBar() *ScrollBar {
 	p := ba.ctx.Get("ScrollBar")
-	return ScrollBarFromJSObject(p)
+	return ScrollBarFromJSObject(p, ba.ctx)
 }
 
 // ScrollBarFromJSObject returns a wrapped ScrollBar JavaScript class.
-func ScrollBarFromJSObject(p js.Value) *ScrollBar {
-	return &ScrollBar{BaseSliderFromJSObject(p)}
+func ScrollBarFromJSObject(p js.Value, ctx js.Value) *ScrollBar {
+	return &ScrollBar{BaseSlider: BaseSliderFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewScrollBarOpts contains optional parameters for NewScrollBar.
@@ -38,7 +41,7 @@ func (ba *Babylon) NewScrollBar(opts *NewScrollBarOpts) *ScrollBar {
 	}
 
 	p := ba.ctx.Get("ScrollBar").New(opts.Name.JSObject())
-	return ScrollBarFromJSObject(p)
+	return ScrollBarFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

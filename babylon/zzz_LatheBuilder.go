@@ -8,7 +8,10 @@ import (
 
 // LatheBuilder represents a babylon.js LatheBuilder.
 // Class containing static functions to help procedurally build meshes
-type LatheBuilder struct{ p js.Value }
+type LatheBuilder struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (l *LatheBuilder) JSObject() js.Value { return l.p }
@@ -16,12 +19,12 @@ func (l *LatheBuilder) JSObject() js.Value { return l.p }
 // LatheBuilder returns a LatheBuilder JavaScript class.
 func (ba *Babylon) LatheBuilder() *LatheBuilder {
 	p := ba.ctx.Get("LatheBuilder")
-	return LatheBuilderFromJSObject(p)
+	return LatheBuilderFromJSObject(p, ba.ctx)
 }
 
 // LatheBuilderFromJSObject returns a wrapped LatheBuilder JavaScript class.
-func LatheBuilderFromJSObject(p js.Value) *LatheBuilder {
-	return &LatheBuilder{p: p}
+func LatheBuilderFromJSObject(p js.Value, ctx js.Value) *LatheBuilder {
+	return &LatheBuilder{p: p, ctx: ctx}
 }
 
 // TODO: methods

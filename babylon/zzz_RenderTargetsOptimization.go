@@ -10,7 +10,10 @@ import (
 // Defines an optimization used to turn render targets off
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
-type RenderTargetsOptimization struct{ *SceneOptimization }
+type RenderTargetsOptimization struct {
+	*SceneOptimization
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (r *RenderTargetsOptimization) JSObject() js.Value { return r.p }
@@ -18,12 +21,12 @@ func (r *RenderTargetsOptimization) JSObject() js.Value { return r.p }
 // RenderTargetsOptimization returns a RenderTargetsOptimization JavaScript class.
 func (ba *Babylon) RenderTargetsOptimization() *RenderTargetsOptimization {
 	p := ba.ctx.Get("RenderTargetsOptimization")
-	return RenderTargetsOptimizationFromJSObject(p)
+	return RenderTargetsOptimizationFromJSObject(p, ba.ctx)
 }
 
 // RenderTargetsOptimizationFromJSObject returns a wrapped RenderTargetsOptimization JavaScript class.
-func RenderTargetsOptimizationFromJSObject(p js.Value) *RenderTargetsOptimization {
-	return &RenderTargetsOptimization{SceneOptimizationFromJSObject(p)}
+func RenderTargetsOptimizationFromJSObject(p js.Value, ctx js.Value) *RenderTargetsOptimization {
+	return &RenderTargetsOptimization{SceneOptimization: SceneOptimizationFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewRenderTargetsOptimizationOpts contains optional parameters for NewRenderTargetsOptimization.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewRenderTargetsOptimization(opts *NewRenderTargetsOptimizati
 	}
 
 	p := ba.ctx.Get("RenderTargetsOptimization").New(opts.Priority.JSObject())
-	return RenderTargetsOptimizationFromJSObject(p)
+	return RenderTargetsOptimizationFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -10,7 +10,10 @@ import (
 // Camera used to simulate anaglyphic rendering (based on UniversalCamera)
 //
 // See: http://doc.babylonjs.com/features/cameras#anaglyph-cameras
-type AnaglyphUniversalCamera struct{ *UniversalCamera }
+type AnaglyphUniversalCamera struct {
+	*UniversalCamera
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (a *AnaglyphUniversalCamera) JSObject() js.Value { return a.p }
@@ -18,12 +21,12 @@ func (a *AnaglyphUniversalCamera) JSObject() js.Value { return a.p }
 // AnaglyphUniversalCamera returns a AnaglyphUniversalCamera JavaScript class.
 func (ba *Babylon) AnaglyphUniversalCamera() *AnaglyphUniversalCamera {
 	p := ba.ctx.Get("AnaglyphUniversalCamera")
-	return AnaglyphUniversalCameraFromJSObject(p)
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
 }
 
 // AnaglyphUniversalCameraFromJSObject returns a wrapped AnaglyphUniversalCamera JavaScript class.
-func AnaglyphUniversalCameraFromJSObject(p js.Value) *AnaglyphUniversalCamera {
-	return &AnaglyphUniversalCamera{UniversalCameraFromJSObject(p)}
+func AnaglyphUniversalCameraFromJSObject(p js.Value, ctx js.Value) *AnaglyphUniversalCamera {
+	return &AnaglyphUniversalCamera{UniversalCamera: UniversalCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewAnaglyphUniversalCamera returns a new AnaglyphUniversalCamera object.
@@ -31,7 +34,7 @@ func AnaglyphUniversalCameraFromJSObject(p js.Value) *AnaglyphUniversalCamera {
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera
 func (ba *Babylon) NewAnaglyphUniversalCamera(name string, position *Vector3, interaxialDistance float64, scene *Scene) *AnaglyphUniversalCamera {
 	p := ba.ctx.Get("AnaglyphUniversalCamera").New(name, position.JSObject(), interaxialDistance, scene.JSObject())
-	return AnaglyphUniversalCameraFromJSObject(p)
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

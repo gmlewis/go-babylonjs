@@ -10,7 +10,10 @@ import (
 // Camera used to simulate VR rendering (based on ArcRotateCamera)
 //
 // See: http://doc.babylonjs.com/babylon101/cameras#vr-device-orientation-cameras
-type VRDeviceOrientationArcRotateCamera struct{ *ArcRotateCamera }
+type VRDeviceOrientationArcRotateCamera struct {
+	*ArcRotateCamera
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (v *VRDeviceOrientationArcRotateCamera) JSObject() js.Value { return v.p }
@@ -18,12 +21,12 @@ func (v *VRDeviceOrientationArcRotateCamera) JSObject() js.Value { return v.p }
 // VRDeviceOrientationArcRotateCamera returns a VRDeviceOrientationArcRotateCamera JavaScript class.
 func (ba *Babylon) VRDeviceOrientationArcRotateCamera() *VRDeviceOrientationArcRotateCamera {
 	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera")
-	return VRDeviceOrientationArcRotateCameraFromJSObject(p)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
 }
 
 // VRDeviceOrientationArcRotateCameraFromJSObject returns a wrapped VRDeviceOrientationArcRotateCamera JavaScript class.
-func VRDeviceOrientationArcRotateCameraFromJSObject(p js.Value) *VRDeviceOrientationArcRotateCamera {
-	return &VRDeviceOrientationArcRotateCamera{ArcRotateCameraFromJSObject(p)}
+func VRDeviceOrientationArcRotateCameraFromJSObject(p js.Value, ctx js.Value) *VRDeviceOrientationArcRotateCamera {
+	return &VRDeviceOrientationArcRotateCamera{ArcRotateCamera: ArcRotateCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewVRDeviceOrientationArcRotateCameraOpts contains optional parameters for NewVRDeviceOrientationArcRotateCamera.
@@ -42,7 +45,7 @@ func (ba *Babylon) NewVRDeviceOrientationArcRotateCamera(name string, alpha floa
 	}
 
 	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(name, alpha, beta, radius, target.JSObject(), scene.JSObject(), opts.CompensateDistortion.JSObject(), opts.VrCameraMetrics.JSObject())
-	return VRDeviceOrientationArcRotateCameraFromJSObject(p)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -10,7 +10,10 @@ import (
 // The glow layer Helps adding a glow effect around the emissive parts of a mesh.
 //
 // Documentation: &lt;a href=&#34;https://doc.babylonjs.com/how_to/glow_layer&#34;&gt;https://doc.babylonjs.com/how_to/glow_layer&lt;/a&gt;
-type GlowLayer struct{ *EffectLayer }
+type GlowLayer struct {
+	*EffectLayer
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (g *GlowLayer) JSObject() js.Value { return g.p }
@@ -18,12 +21,12 @@ func (g *GlowLayer) JSObject() js.Value { return g.p }
 // GlowLayer returns a GlowLayer JavaScript class.
 func (ba *Babylon) GlowLayer() *GlowLayer {
 	p := ba.ctx.Get("GlowLayer")
-	return GlowLayerFromJSObject(p)
+	return GlowLayerFromJSObject(p, ba.ctx)
 }
 
 // GlowLayerFromJSObject returns a wrapped GlowLayer JavaScript class.
-func GlowLayerFromJSObject(p js.Value) *GlowLayer {
-	return &GlowLayer{EffectLayerFromJSObject(p)}
+func GlowLayerFromJSObject(p js.Value, ctx js.Value) *GlowLayer {
+	return &GlowLayer{EffectLayer: EffectLayerFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewGlowLayerOpts contains optional parameters for NewGlowLayer.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewGlowLayer(name string, scene *Scene, opts *NewGlowLayerOpt
 	}
 
 	p := ba.ctx.Get("GlowLayer").New(name, scene.JSObject(), opts.Options.JSObject())
-	return GlowLayerFromJSObject(p)
+	return GlowLayerFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

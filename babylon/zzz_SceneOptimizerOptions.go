@@ -10,7 +10,10 @@ import (
 // Defines a list of options used by SceneOptimizer
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
-type SceneOptimizerOptions struct{ p js.Value }
+type SceneOptimizerOptions struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *SceneOptimizerOptions) JSObject() js.Value { return s.p }
@@ -18,12 +21,12 @@ func (s *SceneOptimizerOptions) JSObject() js.Value { return s.p }
 // SceneOptimizerOptions returns a SceneOptimizerOptions JavaScript class.
 func (ba *Babylon) SceneOptimizerOptions() *SceneOptimizerOptions {
 	p := ba.ctx.Get("SceneOptimizerOptions")
-	return SceneOptimizerOptionsFromJSObject(p)
+	return SceneOptimizerOptionsFromJSObject(p, ba.ctx)
 }
 
 // SceneOptimizerOptionsFromJSObject returns a wrapped SceneOptimizerOptions JavaScript class.
-func SceneOptimizerOptionsFromJSObject(p js.Value) *SceneOptimizerOptions {
-	return &SceneOptimizerOptions{p: p}
+func SceneOptimizerOptionsFromJSObject(p js.Value, ctx js.Value) *SceneOptimizerOptions {
+	return &SceneOptimizerOptions{p: p, ctx: ctx}
 }
 
 // NewSceneOptimizerOptionsOpts contains optional parameters for NewSceneOptimizerOptions.
@@ -42,7 +45,7 @@ func (ba *Babylon) NewSceneOptimizerOptions(opts *NewSceneOptimizerOptionsOpts) 
 	}
 
 	p := ba.ctx.Get("SceneOptimizerOptions").New(opts.TargetFrameRate.JSObject(), opts.TrackerDuration.JSObject())
-	return SceneOptimizerOptionsFromJSObject(p)
+	return SceneOptimizerOptionsFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

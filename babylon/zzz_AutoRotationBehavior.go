@@ -10,7 +10,10 @@ import (
 // The autoRotation behavior (AutoRotationBehavior) is designed to create a smooth rotation of an ArcRotateCamera when there is no user interaction.
 //
 // See: http://doc.babylonjs.com/how_to/camera_behaviors#autorotation-behavior
-type AutoRotationBehavior struct{ p js.Value }
+type AutoRotationBehavior struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (a *AutoRotationBehavior) JSObject() js.Value { return a.p }
@@ -18,12 +21,12 @@ func (a *AutoRotationBehavior) JSObject() js.Value { return a.p }
 // AutoRotationBehavior returns a AutoRotationBehavior JavaScript class.
 func (ba *Babylon) AutoRotationBehavior() *AutoRotationBehavior {
 	p := ba.ctx.Get("AutoRotationBehavior")
-	return AutoRotationBehaviorFromJSObject(p)
+	return AutoRotationBehaviorFromJSObject(p, ba.ctx)
 }
 
 // AutoRotationBehaviorFromJSObject returns a wrapped AutoRotationBehavior JavaScript class.
-func AutoRotationBehaviorFromJSObject(p js.Value) *AutoRotationBehavior {
-	return &AutoRotationBehavior{p: p}
+func AutoRotationBehaviorFromJSObject(p js.Value, ctx js.Value) *AutoRotationBehavior {
+	return &AutoRotationBehavior{p: p, ctx: ctx}
 }
 
 // TODO: methods

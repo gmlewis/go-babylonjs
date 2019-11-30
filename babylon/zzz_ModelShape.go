@@ -9,7 +9,10 @@ import (
 // ModelShape represents a babylon.js ModelShape.
 // Represents the shape of the model used by one particle of a solid particle system.
 // SPS internal tool, don&amp;#39;t use it manually.
-type ModelShape struct{ p js.Value }
+type ModelShape struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (m *ModelShape) JSObject() js.Value { return m.p }
@@ -17,12 +20,12 @@ func (m *ModelShape) JSObject() js.Value { return m.p }
 // ModelShape returns a ModelShape JavaScript class.
 func (ba *Babylon) ModelShape() *ModelShape {
 	p := ba.ctx.Get("ModelShape")
-	return ModelShapeFromJSObject(p)
+	return ModelShapeFromJSObject(p, ba.ctx)
 }
 
 // ModelShapeFromJSObject returns a wrapped ModelShape JavaScript class.
-func ModelShapeFromJSObject(p js.Value) *ModelShape {
-	return &ModelShape{p: p}
+func ModelShapeFromJSObject(p js.Value, ctx js.Value) *ModelShape {
+	return &ModelShape{p: p, ctx: ctx}
 }
 
 // TODO: methods

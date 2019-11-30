@@ -8,7 +8,10 @@ import (
 
 // SSAO2RenderingPipeline represents a babylon.js SSAO2RenderingPipeline.
 // Render pipeline to produce ssao effect
-type SSAO2RenderingPipeline struct{ *PostProcessRenderPipeline }
+type SSAO2RenderingPipeline struct {
+	*PostProcessRenderPipeline
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *SSAO2RenderingPipeline) JSObject() js.Value { return s.p }
@@ -16,12 +19,12 @@ func (s *SSAO2RenderingPipeline) JSObject() js.Value { return s.p }
 // SSAO2RenderingPipeline returns a SSAO2RenderingPipeline JavaScript class.
 func (ba *Babylon) SSAO2RenderingPipeline() *SSAO2RenderingPipeline {
 	p := ba.ctx.Get("SSAO2RenderingPipeline")
-	return SSAO2RenderingPipelineFromJSObject(p)
+	return SSAO2RenderingPipelineFromJSObject(p, ba.ctx)
 }
 
 // SSAO2RenderingPipelineFromJSObject returns a wrapped SSAO2RenderingPipeline JavaScript class.
-func SSAO2RenderingPipelineFromJSObject(p js.Value) *SSAO2RenderingPipeline {
-	return &SSAO2RenderingPipeline{PostProcessRenderPipelineFromJSObject(p)}
+func SSAO2RenderingPipelineFromJSObject(p js.Value, ctx js.Value) *SSAO2RenderingPipeline {
+	return &SSAO2RenderingPipeline{PostProcessRenderPipeline: PostProcessRenderPipelineFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewSSAO2RenderingPipelineOpts contains optional parameters for NewSSAO2RenderingPipeline.
@@ -38,7 +41,7 @@ func (ba *Babylon) NewSSAO2RenderingPipeline(name string, scene *Scene, ratio in
 	}
 
 	p := ba.ctx.Get("SSAO2RenderingPipeline").New(name, scene.JSObject(), ratio, opts.Cameras.JSObject())
-	return SSAO2RenderingPipelineFromJSObject(p)
+	return SSAO2RenderingPipelineFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

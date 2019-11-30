@@ -9,7 +9,10 @@ import (
 // SphereParticleEmitter represents a babylon.js SphereParticleEmitter.
 // Particle emitter emitting particles from the inside of a sphere.
 // It emits the particles alongside the sphere radius. The emission direction might be randomized.
-type SphereParticleEmitter struct{ p js.Value }
+type SphereParticleEmitter struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *SphereParticleEmitter) JSObject() js.Value { return s.p }
@@ -17,12 +20,12 @@ func (s *SphereParticleEmitter) JSObject() js.Value { return s.p }
 // SphereParticleEmitter returns a SphereParticleEmitter JavaScript class.
 func (ba *Babylon) SphereParticleEmitter() *SphereParticleEmitter {
 	p := ba.ctx.Get("SphereParticleEmitter")
-	return SphereParticleEmitterFromJSObject(p)
+	return SphereParticleEmitterFromJSObject(p, ba.ctx)
 }
 
 // SphereParticleEmitterFromJSObject returns a wrapped SphereParticleEmitter JavaScript class.
-func SphereParticleEmitterFromJSObject(p js.Value) *SphereParticleEmitter {
-	return &SphereParticleEmitter{p: p}
+func SphereParticleEmitterFromJSObject(p js.Value, ctx js.Value) *SphereParticleEmitter {
+	return &SphereParticleEmitter{p: p, ctx: ctx}
 }
 
 // NewSphereParticleEmitterOpts contains optional parameters for NewSphereParticleEmitter.
@@ -43,7 +46,7 @@ func (ba *Babylon) NewSphereParticleEmitter(opts *NewSphereParticleEmitterOpts) 
 	}
 
 	p := ba.ctx.Get("SphereParticleEmitter").New(opts.Radius.JSObject(), opts.RadiusRange.JSObject(), opts.DirectionRandomizer.JSObject())
-	return SphereParticleEmitterFromJSObject(p)
+	return SphereParticleEmitterFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

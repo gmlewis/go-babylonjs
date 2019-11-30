@@ -8,7 +8,10 @@ import (
 
 // WebXRControllerTeleportation represents a babylon.js WebXRControllerTeleportation.
 // Enables teleportation
-type WebXRControllerTeleportation struct{ p js.Value }
+type WebXRControllerTeleportation struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (w *WebXRControllerTeleportation) JSObject() js.Value { return w.p }
@@ -16,12 +19,12 @@ func (w *WebXRControllerTeleportation) JSObject() js.Value { return w.p }
 // WebXRControllerTeleportation returns a WebXRControllerTeleportation JavaScript class.
 func (ba *Babylon) WebXRControllerTeleportation() *WebXRControllerTeleportation {
 	p := ba.ctx.Get("WebXRControllerTeleportation")
-	return WebXRControllerTeleportationFromJSObject(p)
+	return WebXRControllerTeleportationFromJSObject(p, ba.ctx)
 }
 
 // WebXRControllerTeleportationFromJSObject returns a wrapped WebXRControllerTeleportation JavaScript class.
-func WebXRControllerTeleportationFromJSObject(p js.Value) *WebXRControllerTeleportation {
-	return &WebXRControllerTeleportation{p: p}
+func WebXRControllerTeleportationFromJSObject(p js.Value, ctx js.Value) *WebXRControllerTeleportation {
+	return &WebXRControllerTeleportation{p: p, ctx: ctx}
 }
 
 // NewWebXRControllerTeleportationOpts contains optional parameters for NewWebXRControllerTeleportation.
@@ -38,7 +41,7 @@ func (ba *Babylon) NewWebXRControllerTeleportation(input *WebXRInput, opts *NewW
 	}
 
 	p := ba.ctx.Get("WebXRControllerTeleportation").New(input.JSObject(), opts.FloorMeshes)
-	return WebXRControllerTeleportationFromJSObject(p)
+	return WebXRControllerTeleportationFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -8,7 +8,10 @@ import (
 
 // TextBlock represents a babylon.js TextBlock.
 // Class used to create text block control
-type TextBlock struct{ *Control }
+type TextBlock struct {
+	*Control
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (t *TextBlock) JSObject() js.Value { return t.p }
@@ -16,12 +19,12 @@ func (t *TextBlock) JSObject() js.Value { return t.p }
 // TextBlock returns a TextBlock JavaScript class.
 func (ba *Babylon) TextBlock() *TextBlock {
 	p := ba.ctx.Get("TextBlock")
-	return TextBlockFromJSObject(p)
+	return TextBlockFromJSObject(p, ba.ctx)
 }
 
 // TextBlockFromJSObject returns a wrapped TextBlock JavaScript class.
-func TextBlockFromJSObject(p js.Value) *TextBlock {
-	return &TextBlock{ControlFromJSObject(p)}
+func TextBlockFromJSObject(p js.Value, ctx js.Value) *TextBlock {
+	return &TextBlock{Control: ControlFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewTextBlockOpts contains optional parameters for NewTextBlock.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewTextBlock(opts *NewTextBlockOpts) *TextBlock {
 	}
 
 	p := ba.ctx.Get("TextBlock").New(opts.Name.JSObject(), opts.Text.JSObject())
-	return TextBlockFromJSObject(p)
+	return TextBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

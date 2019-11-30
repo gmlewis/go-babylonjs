@@ -8,7 +8,10 @@ import (
 
 // Tags represents a babylon.js Tags.
 // Class used to store custom tags
-type Tags struct{ p js.Value }
+type Tags struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (t *Tags) JSObject() js.Value { return t.p }
@@ -16,12 +19,12 @@ func (t *Tags) JSObject() js.Value { return t.p }
 // Tags returns a Tags JavaScript class.
 func (ba *Babylon) Tags() *Tags {
 	p := ba.ctx.Get("Tags")
-	return TagsFromJSObject(p)
+	return TagsFromJSObject(p, ba.ctx)
 }
 
 // TagsFromJSObject returns a wrapped Tags JavaScript class.
-func TagsFromJSObject(p js.Value) *Tags {
-	return &Tags{p: p}
+func TagsFromJSObject(p js.Value, ctx js.Value) *Tags {
+	return &Tags{p: p, ctx: ctx}
 }
 
 // TODO: methods

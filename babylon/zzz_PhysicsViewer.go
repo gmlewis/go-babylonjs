@@ -8,7 +8,10 @@ import (
 
 // PhysicsViewer represents a babylon.js PhysicsViewer.
 // Used to show the physics impostor around the specific mesh
-type PhysicsViewer struct{ p js.Value }
+type PhysicsViewer struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (p *PhysicsViewer) JSObject() js.Value { return p.p }
@@ -16,12 +19,12 @@ func (p *PhysicsViewer) JSObject() js.Value { return p.p }
 // PhysicsViewer returns a PhysicsViewer JavaScript class.
 func (ba *Babylon) PhysicsViewer() *PhysicsViewer {
 	p := ba.ctx.Get("PhysicsViewer")
-	return PhysicsViewerFromJSObject(p)
+	return PhysicsViewerFromJSObject(p, ba.ctx)
 }
 
 // PhysicsViewerFromJSObject returns a wrapped PhysicsViewer JavaScript class.
-func PhysicsViewerFromJSObject(p js.Value) *PhysicsViewer {
-	return &PhysicsViewer{p: p}
+func PhysicsViewerFromJSObject(p js.Value, ctx js.Value) *PhysicsViewer {
+	return &PhysicsViewer{p: p, ctx: ctx}
 }
 
 // NewPhysicsViewer returns a new PhysicsViewer object.
@@ -29,7 +32,7 @@ func PhysicsViewerFromJSObject(p js.Value) *PhysicsViewer {
 // https://doc.babylonjs.com/api/classes/babylon.physicsviewer
 func (ba *Babylon) NewPhysicsViewer(scene *Scene) *PhysicsViewer {
 	p := ba.ctx.Get("PhysicsViewer").New(scene.JSObject())
-	return PhysicsViewerFromJSObject(p)
+	return PhysicsViewerFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

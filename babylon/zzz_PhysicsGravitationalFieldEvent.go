@@ -8,7 +8,10 @@ import (
 
 // PhysicsGravitationalFieldEvent represents a babylon.js PhysicsGravitationalFieldEvent.
 // Represents a gravitational field event
-type PhysicsGravitationalFieldEvent struct{ p js.Value }
+type PhysicsGravitationalFieldEvent struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (p *PhysicsGravitationalFieldEvent) JSObject() js.Value { return p.p }
@@ -16,12 +19,12 @@ func (p *PhysicsGravitationalFieldEvent) JSObject() js.Value { return p.p }
 // PhysicsGravitationalFieldEvent returns a PhysicsGravitationalFieldEvent JavaScript class.
 func (ba *Babylon) PhysicsGravitationalFieldEvent() *PhysicsGravitationalFieldEvent {
 	p := ba.ctx.Get("PhysicsGravitationalFieldEvent")
-	return PhysicsGravitationalFieldEventFromJSObject(p)
+	return PhysicsGravitationalFieldEventFromJSObject(p, ba.ctx)
 }
 
 // PhysicsGravitationalFieldEventFromJSObject returns a wrapped PhysicsGravitationalFieldEvent JavaScript class.
-func PhysicsGravitationalFieldEventFromJSObject(p js.Value) *PhysicsGravitationalFieldEvent {
-	return &PhysicsGravitationalFieldEvent{p: p}
+func PhysicsGravitationalFieldEventFromJSObject(p js.Value, ctx js.Value) *PhysicsGravitationalFieldEvent {
+	return &PhysicsGravitationalFieldEvent{p: p, ctx: ctx}
 }
 
 // NewPhysicsGravitationalFieldEvent returns a new PhysicsGravitationalFieldEvent object.
@@ -29,7 +32,7 @@ func PhysicsGravitationalFieldEventFromJSObject(p js.Value) *PhysicsGravitationa
 // https://doc.babylonjs.com/api/classes/babylon.physicsgravitationalfieldevent
 func (ba *Babylon) NewPhysicsGravitationalFieldEvent(_physicsHelper *PhysicsHelper, _scene *Scene, _origin *Vector3, _options *PhysicsRadialExplosionEventOptions) *PhysicsGravitationalFieldEvent {
 	p := ba.ctx.Get("PhysicsGravitationalFieldEvent").New(_physicsHelper.JSObject(), _scene.JSObject(), _origin.JSObject(), _options.JSObject())
-	return PhysicsGravitationalFieldEventFromJSObject(p)
+	return PhysicsGravitationalFieldEventFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

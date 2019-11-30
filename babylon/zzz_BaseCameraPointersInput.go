@@ -10,7 +10,10 @@ import (
 // Base class for Camera Pointer Inputs.
 // See FollowCameraPointersInput in src/Cameras/Inputs/followCameraPointersInput.ts
 // for example usage.
-type BaseCameraPointersInput struct{ p js.Value }
+type BaseCameraPointersInput struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (b *BaseCameraPointersInput) JSObject() js.Value { return b.p }
@@ -18,12 +21,12 @@ func (b *BaseCameraPointersInput) JSObject() js.Value { return b.p }
 // BaseCameraPointersInput returns a BaseCameraPointersInput JavaScript class.
 func (ba *Babylon) BaseCameraPointersInput() *BaseCameraPointersInput {
 	p := ba.ctx.Get("BaseCameraPointersInput")
-	return BaseCameraPointersInputFromJSObject(p)
+	return BaseCameraPointersInputFromJSObject(p, ba.ctx)
 }
 
 // BaseCameraPointersInputFromJSObject returns a wrapped BaseCameraPointersInput JavaScript class.
-func BaseCameraPointersInputFromJSObject(p js.Value) *BaseCameraPointersInput {
-	return &BaseCameraPointersInput{p: p}
+func BaseCameraPointersInputFromJSObject(p js.Value, ctx js.Value) *BaseCameraPointersInput {
+	return &BaseCameraPointersInput{p: p, ctx: ctx}
 }
 
 // TODO: methods

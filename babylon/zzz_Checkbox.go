@@ -8,7 +8,10 @@ import (
 
 // Checkbox represents a babylon.js Checkbox.
 // Class used to represent a 2D checkbox
-type Checkbox struct{ *Control }
+type Checkbox struct {
+	*Control
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (c *Checkbox) JSObject() js.Value { return c.p }
@@ -16,12 +19,12 @@ func (c *Checkbox) JSObject() js.Value { return c.p }
 // Checkbox returns a Checkbox JavaScript class.
 func (ba *Babylon) Checkbox() *Checkbox {
 	p := ba.ctx.Get("Checkbox")
-	return CheckboxFromJSObject(p)
+	return CheckboxFromJSObject(p, ba.ctx)
 }
 
 // CheckboxFromJSObject returns a wrapped Checkbox JavaScript class.
-func CheckboxFromJSObject(p js.Value) *Checkbox {
-	return &Checkbox{ControlFromJSObject(p)}
+func CheckboxFromJSObject(p js.Value, ctx js.Value) *Checkbox {
+	return &Checkbox{Control: ControlFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewCheckboxOpts contains optional parameters for NewCheckbox.
@@ -38,7 +41,7 @@ func (ba *Babylon) NewCheckbox(opts *NewCheckboxOpts) *Checkbox {
 	}
 
 	p := ba.ctx.Get("Checkbox").New(opts.Name.JSObject())
-	return CheckboxFromJSObject(p)
+	return CheckboxFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

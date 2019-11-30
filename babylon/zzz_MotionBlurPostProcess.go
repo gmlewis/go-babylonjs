@@ -17,7 +17,10 @@ import (
 // camera // The camera to apply the render pass to.
 // );
 // Then, all objects moving, rotating and/or scaling will be blurred depending on the transformation speed.
-type MotionBlurPostProcess struct{ *PostProcess }
+type MotionBlurPostProcess struct {
+	*PostProcess
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (m *MotionBlurPostProcess) JSObject() js.Value { return m.p }
@@ -25,12 +28,12 @@ func (m *MotionBlurPostProcess) JSObject() js.Value { return m.p }
 // MotionBlurPostProcess returns a MotionBlurPostProcess JavaScript class.
 func (ba *Babylon) MotionBlurPostProcess() *MotionBlurPostProcess {
 	p := ba.ctx.Get("MotionBlurPostProcess")
-	return MotionBlurPostProcessFromJSObject(p)
+	return MotionBlurPostProcessFromJSObject(p, ba.ctx)
 }
 
 // MotionBlurPostProcessFromJSObject returns a wrapped MotionBlurPostProcess JavaScript class.
-func MotionBlurPostProcessFromJSObject(p js.Value) *MotionBlurPostProcess {
-	return &MotionBlurPostProcess{PostProcessFromJSObject(p)}
+func MotionBlurPostProcessFromJSObject(p js.Value, ctx js.Value) *MotionBlurPostProcess {
+	return &MotionBlurPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewMotionBlurPostProcessOpts contains optional parameters for NewMotionBlurPostProcess.
@@ -55,7 +58,7 @@ func (ba *Babylon) NewMotionBlurPostProcess(name string, scene *Scene, options f
 	}
 
 	p := ba.ctx.Get("MotionBlurPostProcess").New(name, scene.JSObject(), options, camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType.JSObject(), opts.BlockCompilation.JSObject())
-	return MotionBlurPostProcessFromJSObject(p)
+	return MotionBlurPostProcessFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

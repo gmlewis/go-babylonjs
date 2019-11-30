@@ -8,7 +8,10 @@ import (
 
 // LerpBlock represents a babylon.js LerpBlock.
 // Block used to lerp between 2 values
-type LerpBlock struct{ *NodeMaterialBlock }
+type LerpBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (l *LerpBlock) JSObject() js.Value { return l.p }
@@ -16,12 +19,12 @@ func (l *LerpBlock) JSObject() js.Value { return l.p }
 // LerpBlock returns a LerpBlock JavaScript class.
 func (ba *Babylon) LerpBlock() *LerpBlock {
 	p := ba.ctx.Get("LerpBlock")
-	return LerpBlockFromJSObject(p)
+	return LerpBlockFromJSObject(p, ba.ctx)
 }
 
 // LerpBlockFromJSObject returns a wrapped LerpBlock JavaScript class.
-func LerpBlockFromJSObject(p js.Value) *LerpBlock {
-	return &LerpBlock{NodeMaterialBlockFromJSObject(p)}
+func LerpBlockFromJSObject(p js.Value, ctx js.Value) *LerpBlock {
+	return &LerpBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewLerpBlock returns a new LerpBlock object.
@@ -29,7 +32,7 @@ func LerpBlockFromJSObject(p js.Value) *LerpBlock {
 // https://doc.babylonjs.com/api/classes/babylon.lerpblock
 func (ba *Babylon) NewLerpBlock(name string) *LerpBlock {
 	p := ba.ctx.Get("LerpBlock").New(name)
-	return LerpBlockFromJSObject(p)
+	return LerpBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

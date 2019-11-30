@@ -10,7 +10,10 @@ import (
 // Represents a scene to be rendered by the engine.
 //
 // See: http://doc.babylonjs.com/features/scene
-type Scene struct{ *AbstractScene }
+type Scene struct {
+	*AbstractScene
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *Scene) JSObject() js.Value { return s.p }
@@ -18,12 +21,12 @@ func (s *Scene) JSObject() js.Value { return s.p }
 // Scene returns a Scene JavaScript class.
 func (ba *Babylon) Scene() *Scene {
 	p := ba.ctx.Get("Scene")
-	return SceneFromJSObject(p)
+	return SceneFromJSObject(p, ba.ctx)
 }
 
 // SceneFromJSObject returns a wrapped Scene JavaScript class.
-func SceneFromJSObject(p js.Value) *Scene {
-	return &Scene{AbstractSceneFromJSObject(p)}
+func SceneFromJSObject(p js.Value, ctx js.Value) *Scene {
+	return &Scene{AbstractScene: AbstractSceneFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewSceneOpts contains optional parameters for NewScene.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewScene(engine *Engine, opts *NewSceneOpts) *Scene {
 	}
 
 	p := ba.ctx.Get("Scene").New(engine.JSObject(), opts.Options.JSObject())
-	return SceneFromJSObject(p)
+	return SceneFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

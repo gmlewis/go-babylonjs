@@ -8,7 +8,10 @@ import (
 
 // ExtrasAsMetadata represents a babylon.js ExtrasAsMetadata.
 // Store glTF extras (if present) in BJS objects&amp;#39; metadata
-type ExtrasAsMetadata struct{ p js.Value }
+type ExtrasAsMetadata struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (e *ExtrasAsMetadata) JSObject() js.Value { return e.p }
@@ -16,12 +19,12 @@ func (e *ExtrasAsMetadata) JSObject() js.Value { return e.p }
 // ExtrasAsMetadata returns a ExtrasAsMetadata JavaScript class.
 func (ba *Babylon) ExtrasAsMetadata() *ExtrasAsMetadata {
 	p := ba.ctx.Get("ExtrasAsMetadata")
-	return ExtrasAsMetadataFromJSObject(p)
+	return ExtrasAsMetadataFromJSObject(p, ba.ctx)
 }
 
 // ExtrasAsMetadataFromJSObject returns a wrapped ExtrasAsMetadata JavaScript class.
-func ExtrasAsMetadataFromJSObject(p js.Value) *ExtrasAsMetadata {
-	return &ExtrasAsMetadata{p: p}
+func ExtrasAsMetadataFromJSObject(p js.Value, ctx js.Value) *ExtrasAsMetadata {
+	return &ExtrasAsMetadata{p: p, ctx: ctx}
 }
 
 // TODO: methods

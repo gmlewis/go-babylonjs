@@ -10,7 +10,10 @@ import (
 // This defines an action responsible to set the parent property of the target once triggered.
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_actions
-type SetParentAction struct{ *Action }
+type SetParentAction struct {
+	*Action
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *SetParentAction) JSObject() js.Value { return s.p }
@@ -18,12 +21,12 @@ func (s *SetParentAction) JSObject() js.Value { return s.p }
 // SetParentAction returns a SetParentAction JavaScript class.
 func (ba *Babylon) SetParentAction() *SetParentAction {
 	p := ba.ctx.Get("SetParentAction")
-	return SetParentActionFromJSObject(p)
+	return SetParentActionFromJSObject(p, ba.ctx)
 }
 
 // SetParentActionFromJSObject returns a wrapped SetParentAction JavaScript class.
-func SetParentActionFromJSObject(p js.Value) *SetParentAction {
-	return &SetParentAction{ActionFromJSObject(p)}
+func SetParentActionFromJSObject(p js.Value, ctx js.Value) *SetParentAction {
+	return &SetParentAction{Action: ActionFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewSetParentActionOpts contains optional parameters for NewSetParentAction.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewSetParentAction(triggerOptions interface{}, target interfa
 	}
 
 	p := ba.ctx.Get("SetParentAction").New(triggerOptions, target, parent, opts.Condition.JSObject())
-	return SetParentActionFromJSObject(p)
+	return SetParentActionFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

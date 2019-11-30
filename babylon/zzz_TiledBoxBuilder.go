@@ -8,7 +8,10 @@ import (
 
 // TiledBoxBuilder represents a babylon.js TiledBoxBuilder.
 // Class containing static functions to help procedurally build meshes
-type TiledBoxBuilder struct{ p js.Value }
+type TiledBoxBuilder struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (t *TiledBoxBuilder) JSObject() js.Value { return t.p }
@@ -16,12 +19,12 @@ func (t *TiledBoxBuilder) JSObject() js.Value { return t.p }
 // TiledBoxBuilder returns a TiledBoxBuilder JavaScript class.
 func (ba *Babylon) TiledBoxBuilder() *TiledBoxBuilder {
 	p := ba.ctx.Get("TiledBoxBuilder")
-	return TiledBoxBuilderFromJSObject(p)
+	return TiledBoxBuilderFromJSObject(p, ba.ctx)
 }
 
 // TiledBoxBuilderFromJSObject returns a wrapped TiledBoxBuilder JavaScript class.
-func TiledBoxBuilderFromJSObject(p js.Value) *TiledBoxBuilder {
-	return &TiledBoxBuilder{p: p}
+func TiledBoxBuilderFromJSObject(p js.Value, ctx js.Value) *TiledBoxBuilder {
+	return &TiledBoxBuilder{p: p, ctx: ctx}
 }
 
 // TODO: methods

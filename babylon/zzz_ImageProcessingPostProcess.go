@@ -10,7 +10,10 @@ import (
 // ImageProcessingPostProcess
 //
 // See: https://doc.babylonjs.com/how_to/how_to_use_postprocesses#imageprocessing
-type ImageProcessingPostProcess struct{ *PostProcess }
+type ImageProcessingPostProcess struct {
+	*PostProcess
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (i *ImageProcessingPostProcess) JSObject() js.Value { return i.p }
@@ -18,12 +21,12 @@ func (i *ImageProcessingPostProcess) JSObject() js.Value { return i.p }
 // ImageProcessingPostProcess returns a ImageProcessingPostProcess JavaScript class.
 func (ba *Babylon) ImageProcessingPostProcess() *ImageProcessingPostProcess {
 	p := ba.ctx.Get("ImageProcessingPostProcess")
-	return ImageProcessingPostProcessFromJSObject(p)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
 }
 
 // ImageProcessingPostProcessFromJSObject returns a wrapped ImageProcessingPostProcess JavaScript class.
-func ImageProcessingPostProcessFromJSObject(p js.Value) *ImageProcessingPostProcess {
-	return &ImageProcessingPostProcess{PostProcessFromJSObject(p)}
+func ImageProcessingPostProcessFromJSObject(p js.Value, ctx js.Value) *ImageProcessingPostProcess {
+	return &ImageProcessingPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewImageProcessingPostProcessOpts contains optional parameters for NewImageProcessingPostProcess.
@@ -50,7 +53,7 @@ func (ba *Babylon) NewImageProcessingPostProcess(name string, options float64, o
 	}
 
 	p := ba.ctx.Get("ImageProcessingPostProcess").New(name, options, opts.Camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType.JSObject(), opts.ImageProcessingConfiguration.JSObject())
-	return ImageProcessingPostProcessFromJSObject(p)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

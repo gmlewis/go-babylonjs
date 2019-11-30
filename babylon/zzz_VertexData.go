@@ -8,7 +8,10 @@ import (
 
 // VertexData represents a babylon.js VertexData.
 // This class contains the various kinds of data on every vertex of a mesh used in determining its shape and appearance
-type VertexData struct{ p js.Value }
+type VertexData struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (v *VertexData) JSObject() js.Value { return v.p }
@@ -16,12 +19,12 @@ func (v *VertexData) JSObject() js.Value { return v.p }
 // VertexData returns a VertexData JavaScript class.
 func (ba *Babylon) VertexData() *VertexData {
 	p := ba.ctx.Get("VertexData")
-	return VertexDataFromJSObject(p)
+	return VertexDataFromJSObject(p, ba.ctx)
 }
 
 // VertexDataFromJSObject returns a wrapped VertexData JavaScript class.
-func VertexDataFromJSObject(p js.Value) *VertexData {
-	return &VertexData{p: p}
+func VertexDataFromJSObject(p js.Value, ctx js.Value) *VertexData {
+	return &VertexData{p: p, ctx: ctx}
 }
 
 // TODO: methods

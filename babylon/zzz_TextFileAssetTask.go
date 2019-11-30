@@ -8,7 +8,10 @@ import (
 
 // TextFileAssetTask represents a babylon.js TextFileAssetTask.
 // Define a task used by AssetsManager to load text content
-type TextFileAssetTask struct{ *AbstractAssetTask }
+type TextFileAssetTask struct {
+	*AbstractAssetTask
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (t *TextFileAssetTask) JSObject() js.Value { return t.p }
@@ -16,12 +19,12 @@ func (t *TextFileAssetTask) JSObject() js.Value { return t.p }
 // TextFileAssetTask returns a TextFileAssetTask JavaScript class.
 func (ba *Babylon) TextFileAssetTask() *TextFileAssetTask {
 	p := ba.ctx.Get("TextFileAssetTask")
-	return TextFileAssetTaskFromJSObject(p)
+	return TextFileAssetTaskFromJSObject(p, ba.ctx)
 }
 
 // TextFileAssetTaskFromJSObject returns a wrapped TextFileAssetTask JavaScript class.
-func TextFileAssetTaskFromJSObject(p js.Value) *TextFileAssetTask {
-	return &TextFileAssetTask{AbstractAssetTaskFromJSObject(p)}
+func TextFileAssetTaskFromJSObject(p js.Value, ctx js.Value) *TextFileAssetTask {
+	return &TextFileAssetTask{AbstractAssetTask: AbstractAssetTaskFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewTextFileAssetTask returns a new TextFileAssetTask object.
@@ -29,7 +32,7 @@ func TextFileAssetTaskFromJSObject(p js.Value) *TextFileAssetTask {
 // https://doc.babylonjs.com/api/classes/babylon.textfileassettask
 func (ba *Babylon) NewTextFileAssetTask(name string, url string) *TextFileAssetTask {
 	p := ba.ctx.Get("TextFileAssetTask").New(name, url)
-	return TextFileAssetTaskFromJSObject(p)
+	return TextFileAssetTaskFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

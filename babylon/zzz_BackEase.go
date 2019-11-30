@@ -10,7 +10,10 @@ import (
 // Easing function with a ease back shape (see link below).
 //
 // See: http://doc.babylonjs.com/babylon101/animations#easing-functions
-type BackEase struct{ *EasingFunction }
+type BackEase struct {
+	*EasingFunction
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (b *BackEase) JSObject() js.Value { return b.p }
@@ -18,12 +21,12 @@ func (b *BackEase) JSObject() js.Value { return b.p }
 // BackEase returns a BackEase JavaScript class.
 func (ba *Babylon) BackEase() *BackEase {
 	p := ba.ctx.Get("BackEase")
-	return BackEaseFromJSObject(p)
+	return BackEaseFromJSObject(p, ba.ctx)
 }
 
 // BackEaseFromJSObject returns a wrapped BackEase JavaScript class.
-func BackEaseFromJSObject(p js.Value) *BackEase {
-	return &BackEase{EasingFunctionFromJSObject(p)}
+func BackEaseFromJSObject(p js.Value, ctx js.Value) *BackEase {
+	return &BackEase{EasingFunction: EasingFunctionFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewBackEaseOpts contains optional parameters for NewBackEase.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewBackEase(opts *NewBackEaseOpts) *BackEase {
 	}
 
 	p := ba.ctx.Get("BackEase").New(opts.Amplitude.JSObject())
-	return BackEaseFromJSObject(p)
+	return BackEaseFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

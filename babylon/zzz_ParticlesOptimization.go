@@ -10,7 +10,10 @@ import (
 // Defines an optimization used to turn particles off
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
-type ParticlesOptimization struct{ *SceneOptimization }
+type ParticlesOptimization struct {
+	*SceneOptimization
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (p *ParticlesOptimization) JSObject() js.Value { return p.p }
@@ -18,12 +21,12 @@ func (p *ParticlesOptimization) JSObject() js.Value { return p.p }
 // ParticlesOptimization returns a ParticlesOptimization JavaScript class.
 func (ba *Babylon) ParticlesOptimization() *ParticlesOptimization {
 	p := ba.ctx.Get("ParticlesOptimization")
-	return ParticlesOptimizationFromJSObject(p)
+	return ParticlesOptimizationFromJSObject(p, ba.ctx)
 }
 
 // ParticlesOptimizationFromJSObject returns a wrapped ParticlesOptimization JavaScript class.
-func ParticlesOptimizationFromJSObject(p js.Value) *ParticlesOptimization {
-	return &ParticlesOptimization{SceneOptimizationFromJSObject(p)}
+func ParticlesOptimizationFromJSObject(p js.Value, ctx js.Value) *ParticlesOptimization {
+	return &ParticlesOptimization{SceneOptimization: SceneOptimizationFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewParticlesOptimizationOpts contains optional parameters for NewParticlesOptimization.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewParticlesOptimization(opts *NewParticlesOptimizationOpts) 
 	}
 
 	p := ba.ctx.Get("ParticlesOptimization").New(opts.Priority.JSObject())
-	return ParticlesOptimizationFromJSObject(p)
+	return ParticlesOptimizationFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

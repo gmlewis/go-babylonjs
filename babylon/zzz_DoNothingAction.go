@@ -10,7 +10,10 @@ import (
 // This defines an action responsible that does nothing once triggered.
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_actions
-type DoNothingAction struct{ *Action }
+type DoNothingAction struct {
+	*Action
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (d *DoNothingAction) JSObject() js.Value { return d.p }
@@ -18,12 +21,12 @@ func (d *DoNothingAction) JSObject() js.Value { return d.p }
 // DoNothingAction returns a DoNothingAction JavaScript class.
 func (ba *Babylon) DoNothingAction() *DoNothingAction {
 	p := ba.ctx.Get("DoNothingAction")
-	return DoNothingActionFromJSObject(p)
+	return DoNothingActionFromJSObject(p, ba.ctx)
 }
 
 // DoNothingActionFromJSObject returns a wrapped DoNothingAction JavaScript class.
-func DoNothingActionFromJSObject(p js.Value) *DoNothingAction {
-	return &DoNothingAction{ActionFromJSObject(p)}
+func DoNothingActionFromJSObject(p js.Value, ctx js.Value) *DoNothingAction {
+	return &DoNothingAction{Action: ActionFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewDoNothingActionOpts contains optional parameters for NewDoNothingAction.
@@ -42,7 +45,7 @@ func (ba *Babylon) NewDoNothingAction(opts *NewDoNothingActionOpts) *DoNothingAc
 	}
 
 	p := ba.ctx.Get("DoNothingAction").New(opts.TriggerOptions, opts.Condition.JSObject())
-	return DoNothingActionFromJSObject(p)
+	return DoNothingActionFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

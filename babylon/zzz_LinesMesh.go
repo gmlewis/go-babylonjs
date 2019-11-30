@@ -10,7 +10,10 @@ import (
 // Line mesh
 //
 // See: https://doc.babylonjs.com/babylon101/parametric_shapes
-type LinesMesh struct{ *Mesh }
+type LinesMesh struct {
+	*Mesh
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (l *LinesMesh) JSObject() js.Value { return l.p }
@@ -18,12 +21,12 @@ func (l *LinesMesh) JSObject() js.Value { return l.p }
 // LinesMesh returns a LinesMesh JavaScript class.
 func (ba *Babylon) LinesMesh() *LinesMesh {
 	p := ba.ctx.Get("LinesMesh")
-	return LinesMeshFromJSObject(p)
+	return LinesMeshFromJSObject(p, ba.ctx)
 }
 
 // LinesMeshFromJSObject returns a wrapped LinesMesh JavaScript class.
-func LinesMeshFromJSObject(p js.Value) *LinesMesh {
-	return &LinesMesh{MeshFromJSObject(p)}
+func LinesMeshFromJSObject(p js.Value, ctx js.Value) *LinesMesh {
+	return &LinesMesh{Mesh: MeshFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewLinesMeshOpts contains optional parameters for NewLinesMesh.
@@ -50,7 +53,7 @@ func (ba *Babylon) NewLinesMesh(name string, opts *NewLinesMeshOpts) *LinesMesh 
 	}
 
 	p := ba.ctx.Get("LinesMesh").New(name, opts.Scene.JSObject(), opts.Parent.JSObject(), opts.Source.JSObject(), opts.DoNotCloneChildren.JSObject(), opts.UseVertexColor.JSObject(), opts.UseVertexAlpha.JSObject())
-	return LinesMeshFromJSObject(p)
+	return LinesMeshFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -8,7 +8,10 @@ import (
 
 // WebXRDefaultExperienceOptions represents a babylon.js WebXRDefaultExperienceOptions.
 // Options for the default xr helper
-type WebXRDefaultExperienceOptions struct{ p js.Value }
+type WebXRDefaultExperienceOptions struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (w *WebXRDefaultExperienceOptions) JSObject() js.Value { return w.p }
@@ -16,12 +19,12 @@ func (w *WebXRDefaultExperienceOptions) JSObject() js.Value { return w.p }
 // WebXRDefaultExperienceOptions returns a WebXRDefaultExperienceOptions JavaScript class.
 func (ba *Babylon) WebXRDefaultExperienceOptions() *WebXRDefaultExperienceOptions {
 	p := ba.ctx.Get("WebXRDefaultExperienceOptions")
-	return WebXRDefaultExperienceOptionsFromJSObject(p)
+	return WebXRDefaultExperienceOptionsFromJSObject(p, ba.ctx)
 }
 
 // WebXRDefaultExperienceOptionsFromJSObject returns a wrapped WebXRDefaultExperienceOptions JavaScript class.
-func WebXRDefaultExperienceOptionsFromJSObject(p js.Value) *WebXRDefaultExperienceOptions {
-	return &WebXRDefaultExperienceOptions{p: p}
+func WebXRDefaultExperienceOptionsFromJSObject(p js.Value, ctx js.Value) *WebXRDefaultExperienceOptions {
+	return &WebXRDefaultExperienceOptions{p: p, ctx: ctx}
 }
 
 // TODO: methods

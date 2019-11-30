@@ -10,7 +10,10 @@ import (
 // RollingAverage
 //
 // Utility to efficiently compute the rolling average and variance over a sliding window of samples
-type RollingAverage struct{ p js.Value }
+type RollingAverage struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (r *RollingAverage) JSObject() js.Value { return r.p }
@@ -18,12 +21,12 @@ func (r *RollingAverage) JSObject() js.Value { return r.p }
 // RollingAverage returns a RollingAverage JavaScript class.
 func (ba *Babylon) RollingAverage() *RollingAverage {
 	p := ba.ctx.Get("RollingAverage")
-	return RollingAverageFromJSObject(p)
+	return RollingAverageFromJSObject(p, ba.ctx)
 }
 
 // RollingAverageFromJSObject returns a wrapped RollingAverage JavaScript class.
-func RollingAverageFromJSObject(p js.Value) *RollingAverage {
-	return &RollingAverage{p: p}
+func RollingAverageFromJSObject(p js.Value, ctx js.Value) *RollingAverage {
+	return &RollingAverage{p: p, ctx: ctx}
 }
 
 // NewRollingAverage returns a new RollingAverage object.
@@ -31,7 +34,7 @@ func RollingAverageFromJSObject(p js.Value) *RollingAverage {
 // https://doc.babylonjs.com/api/classes/babylon.rollingaverage
 func (ba *Babylon) NewRollingAverage(length float64) *RollingAverage {
 	p := ba.ctx.Get("RollingAverage").New(length)
-	return RollingAverageFromJSObject(p)
+	return RollingAverageFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -12,7 +12,10 @@ import (
 // Virtual Joysticks are on-screen 2D graphics that are used to control the camera or other scene items.
 //
 // See: http://doc.babylonjs.com/features/cameras#virtual-joysticks-camera
-type VirtualJoysticksCamera struct{ *FreeCamera }
+type VirtualJoysticksCamera struct {
+	*FreeCamera
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (v *VirtualJoysticksCamera) JSObject() js.Value { return v.p }
@@ -20,12 +23,12 @@ func (v *VirtualJoysticksCamera) JSObject() js.Value { return v.p }
 // VirtualJoysticksCamera returns a VirtualJoysticksCamera JavaScript class.
 func (ba *Babylon) VirtualJoysticksCamera() *VirtualJoysticksCamera {
 	p := ba.ctx.Get("VirtualJoysticksCamera")
-	return VirtualJoysticksCameraFromJSObject(p)
+	return VirtualJoysticksCameraFromJSObject(p, ba.ctx)
 }
 
 // VirtualJoysticksCameraFromJSObject returns a wrapped VirtualJoysticksCamera JavaScript class.
-func VirtualJoysticksCameraFromJSObject(p js.Value) *VirtualJoysticksCamera {
-	return &VirtualJoysticksCamera{FreeCameraFromJSObject(p)}
+func VirtualJoysticksCameraFromJSObject(p js.Value, ctx js.Value) *VirtualJoysticksCamera {
+	return &VirtualJoysticksCamera{FreeCamera: FreeCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewVirtualJoysticksCamera returns a new VirtualJoysticksCamera object.
@@ -33,7 +36,7 @@ func VirtualJoysticksCameraFromJSObject(p js.Value) *VirtualJoysticksCamera {
 // https://doc.babylonjs.com/api/classes/babylon.virtualjoystickscamera
 func (ba *Babylon) NewVirtualJoysticksCamera(name string, position *Vector3, scene *Scene) *VirtualJoysticksCamera {
 	p := ba.ctx.Get("VirtualJoysticksCamera").New(name, position.JSObject(), scene.JSObject())
-	return VirtualJoysticksCameraFromJSObject(p)
+	return VirtualJoysticksCameraFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

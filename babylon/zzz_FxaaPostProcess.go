@@ -10,7 +10,10 @@ import (
 // Fxaa post process
 //
 // See: https://doc.babylonjs.com/how_to/how_to_use_postprocesses#fxaa
-type FxaaPostProcess struct{ *PostProcess }
+type FxaaPostProcess struct {
+	*PostProcess
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (f *FxaaPostProcess) JSObject() js.Value { return f.p }
@@ -18,12 +21,12 @@ func (f *FxaaPostProcess) JSObject() js.Value { return f.p }
 // FxaaPostProcess returns a FxaaPostProcess JavaScript class.
 func (ba *Babylon) FxaaPostProcess() *FxaaPostProcess {
 	p := ba.ctx.Get("FxaaPostProcess")
-	return FxaaPostProcessFromJSObject(p)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
 }
 
 // FxaaPostProcessFromJSObject returns a wrapped FxaaPostProcess JavaScript class.
-func FxaaPostProcessFromJSObject(p js.Value) *FxaaPostProcess {
-	return &FxaaPostProcess{PostProcessFromJSObject(p)}
+func FxaaPostProcessFromJSObject(p js.Value, ctx js.Value) *FxaaPostProcess {
+	return &FxaaPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewFxaaPostProcessOpts contains optional parameters for NewFxaaPostProcess.
@@ -48,7 +51,7 @@ func (ba *Babylon) NewFxaaPostProcess(name string, options float64, opts *NewFxa
 	}
 
 	p := ba.ctx.Get("FxaaPostProcess").New(name, options, opts.Camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType.JSObject())
-	return FxaaPostProcessFromJSObject(p)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

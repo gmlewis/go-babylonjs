@@ -8,7 +8,10 @@ import (
 
 // NodeMaterial represents a babylon.js NodeMaterial.
 // Class used to create a node based material built by assembling shader blocks
-type NodeMaterial struct{ p js.Value }
+type NodeMaterial struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (n *NodeMaterial) JSObject() js.Value { return n.p }
@@ -16,12 +19,12 @@ func (n *NodeMaterial) JSObject() js.Value { return n.p }
 // NodeMaterial returns a NodeMaterial JavaScript class.
 func (ba *Babylon) NodeMaterial() *NodeMaterial {
 	p := ba.ctx.Get("NodeMaterial")
-	return NodeMaterialFromJSObject(p)
+	return NodeMaterialFromJSObject(p, ba.ctx)
 }
 
 // NodeMaterialFromJSObject returns a wrapped NodeMaterial JavaScript class.
-func NodeMaterialFromJSObject(p js.Value) *NodeMaterial {
-	return &NodeMaterial{p: p}
+func NodeMaterialFromJSObject(p js.Value, ctx js.Value) *NodeMaterial {
+	return &NodeMaterial{p: p, ctx: ctx}
 }
 
 // NewNodeMaterialOpts contains optional parameters for NewNodeMaterial.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewNodeMaterial(name string, opts *NewNodeMaterialOpts) *Node
 	}
 
 	p := ba.ctx.Get("NodeMaterial").New(name, opts.Scene.JSObject(), opts.Options.JSObject())
-	return NodeMaterialFromJSObject(p)
+	return NodeMaterialFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

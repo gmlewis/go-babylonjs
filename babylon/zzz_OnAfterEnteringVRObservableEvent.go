@@ -8,7 +8,10 @@ import (
 
 // OnAfterEnteringVRObservableEvent represents a babylon.js OnAfterEnteringVRObservableEvent.
 // Event containing information after VR has been entered
-type OnAfterEnteringVRObservableEvent struct{ p js.Value }
+type OnAfterEnteringVRObservableEvent struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (o *OnAfterEnteringVRObservableEvent) JSObject() js.Value { return o.p }
@@ -16,12 +19,12 @@ func (o *OnAfterEnteringVRObservableEvent) JSObject() js.Value { return o.p }
 // OnAfterEnteringVRObservableEvent returns a OnAfterEnteringVRObservableEvent JavaScript class.
 func (ba *Babylon) OnAfterEnteringVRObservableEvent() *OnAfterEnteringVRObservableEvent {
 	p := ba.ctx.Get("OnAfterEnteringVRObservableEvent")
-	return OnAfterEnteringVRObservableEventFromJSObject(p)
+	return OnAfterEnteringVRObservableEventFromJSObject(p, ba.ctx)
 }
 
 // OnAfterEnteringVRObservableEventFromJSObject returns a wrapped OnAfterEnteringVRObservableEvent JavaScript class.
-func OnAfterEnteringVRObservableEventFromJSObject(p js.Value) *OnAfterEnteringVRObservableEvent {
-	return &OnAfterEnteringVRObservableEvent{p: p}
+func OnAfterEnteringVRObservableEventFromJSObject(p js.Value, ctx js.Value) *OnAfterEnteringVRObservableEvent {
+	return &OnAfterEnteringVRObservableEvent{p: p, ctx: ctx}
 }
 
 // TODO: methods

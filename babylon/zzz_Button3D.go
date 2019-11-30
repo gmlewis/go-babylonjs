@@ -8,7 +8,10 @@ import (
 
 // Button3D represents a babylon.js Button3D.
 // Class used to create a button in 3D
-type Button3D struct{ *AbstractButton3D }
+type Button3D struct {
+	*AbstractButton3D
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (b *Button3D) JSObject() js.Value { return b.p }
@@ -16,12 +19,12 @@ func (b *Button3D) JSObject() js.Value { return b.p }
 // Button3D returns a Button3D JavaScript class.
 func (ba *Babylon) Button3D() *Button3D {
 	p := ba.ctx.Get("Button3D")
-	return Button3DFromJSObject(p)
+	return Button3DFromJSObject(p, ba.ctx)
 }
 
 // Button3DFromJSObject returns a wrapped Button3D JavaScript class.
-func Button3DFromJSObject(p js.Value) *Button3D {
-	return &Button3D{AbstractButton3DFromJSObject(p)}
+func Button3DFromJSObject(p js.Value, ctx js.Value) *Button3D {
+	return &Button3D{AbstractButton3D: AbstractButton3DFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewButton3DOpts contains optional parameters for NewButton3D.
@@ -38,7 +41,7 @@ func (ba *Babylon) NewButton3D(opts *NewButton3DOpts) *Button3D {
 	}
 
 	p := ba.ctx.Get("Button3D").New(opts.Name.JSObject())
-	return Button3DFromJSObject(p)
+	return Button3DFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

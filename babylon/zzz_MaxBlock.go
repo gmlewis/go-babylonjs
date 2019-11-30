@@ -8,7 +8,10 @@ import (
 
 // MaxBlock represents a babylon.js MaxBlock.
 // Block used to get the max of 2 values
-type MaxBlock struct{ *NodeMaterialBlock }
+type MaxBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (m *MaxBlock) JSObject() js.Value { return m.p }
@@ -16,12 +19,12 @@ func (m *MaxBlock) JSObject() js.Value { return m.p }
 // MaxBlock returns a MaxBlock JavaScript class.
 func (ba *Babylon) MaxBlock() *MaxBlock {
 	p := ba.ctx.Get("MaxBlock")
-	return MaxBlockFromJSObject(p)
+	return MaxBlockFromJSObject(p, ba.ctx)
 }
 
 // MaxBlockFromJSObject returns a wrapped MaxBlock JavaScript class.
-func MaxBlockFromJSObject(p js.Value) *MaxBlock {
-	return &MaxBlock{NodeMaterialBlockFromJSObject(p)}
+func MaxBlockFromJSObject(p js.Value, ctx js.Value) *MaxBlock {
+	return &MaxBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewMaxBlock returns a new MaxBlock object.
@@ -29,7 +32,7 @@ func MaxBlockFromJSObject(p js.Value) *MaxBlock {
 // https://doc.babylonjs.com/api/classes/babylon.maxblock
 func (ba *Babylon) NewMaxBlock(name string) *MaxBlock {
 	p := ba.ctx.Get("MaxBlock").New(name)
-	return MaxBlockFromJSObject(p)
+	return MaxBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

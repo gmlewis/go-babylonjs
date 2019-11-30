@@ -11,7 +11,10 @@ import (
 // A single scene can have many Action Managers to handle predefined actions on specific meshes.
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_actions
-type ActionManager struct{ *AbstractActionManager }
+type ActionManager struct {
+	*AbstractActionManager
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (a *ActionManager) JSObject() js.Value { return a.p }
@@ -19,12 +22,12 @@ func (a *ActionManager) JSObject() js.Value { return a.p }
 // ActionManager returns a ActionManager JavaScript class.
 func (ba *Babylon) ActionManager() *ActionManager {
 	p := ba.ctx.Get("ActionManager")
-	return ActionManagerFromJSObject(p)
+	return ActionManagerFromJSObject(p, ba.ctx)
 }
 
 // ActionManagerFromJSObject returns a wrapped ActionManager JavaScript class.
-func ActionManagerFromJSObject(p js.Value) *ActionManager {
-	return &ActionManager{AbstractActionManagerFromJSObject(p)}
+func ActionManagerFromJSObject(p js.Value, ctx js.Value) *ActionManager {
+	return &ActionManager{AbstractActionManager: AbstractActionManagerFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewActionManager returns a new ActionManager object.
@@ -32,7 +35,7 @@ func ActionManagerFromJSObject(p js.Value) *ActionManager {
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager
 func (ba *Babylon) NewActionManager(scene *Scene) *ActionManager {
 	p := ba.ctx.Get("ActionManager").New(scene.JSObject())
-	return ActionManagerFromJSObject(p)
+	return ActionManagerFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

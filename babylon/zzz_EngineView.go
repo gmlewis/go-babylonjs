@@ -10,7 +10,10 @@ import (
 // Class used to define an additional view for the engine
 //
 // See: https://doc.babylonjs.com/how_to/multi_canvases
-type EngineView struct{ p js.Value }
+type EngineView struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (e *EngineView) JSObject() js.Value { return e.p }
@@ -18,12 +21,12 @@ func (e *EngineView) JSObject() js.Value { return e.p }
 // EngineView returns a EngineView JavaScript class.
 func (ba *Babylon) EngineView() *EngineView {
 	p := ba.ctx.Get("EngineView")
-	return EngineViewFromJSObject(p)
+	return EngineViewFromJSObject(p, ba.ctx)
 }
 
 // EngineViewFromJSObject returns a wrapped EngineView JavaScript class.
-func EngineViewFromJSObject(p js.Value) *EngineView {
-	return &EngineView{p: p}
+func EngineViewFromJSObject(p js.Value, ctx js.Value) *EngineView {
+	return &EngineView{p: p, ctx: ctx}
 }
 
 // TODO: methods

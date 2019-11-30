@@ -10,7 +10,10 @@ import (
 // This class implement a typical dictionary using a string as key and the generic type T as value.
 // The underlying implementation relies on an associative array to ensure the best performances.
 // The value can be anything including &amp;#39;null&amp;#39; but except &amp;#39;undefined&amp;#39;
-type StringDictionary struct{ p js.Value }
+type StringDictionary struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *StringDictionary) JSObject() js.Value { return s.p }
@@ -18,12 +21,12 @@ func (s *StringDictionary) JSObject() js.Value { return s.p }
 // StringDictionary returns a StringDictionary JavaScript class.
 func (ba *Babylon) StringDictionary() *StringDictionary {
 	p := ba.ctx.Get("StringDictionary")
-	return StringDictionaryFromJSObject(p)
+	return StringDictionaryFromJSObject(p, ba.ctx)
 }
 
 // StringDictionaryFromJSObject returns a wrapped StringDictionary JavaScript class.
-func StringDictionaryFromJSObject(p js.Value) *StringDictionary {
-	return &StringDictionary{p: p}
+func StringDictionaryFromJSObject(p js.Value, ctx js.Value) *StringDictionary {
+	return &StringDictionary{p: p, ctx: ctx}
 }
 
 // TODO: methods

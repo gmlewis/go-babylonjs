@@ -8,7 +8,10 @@ import (
 
 // VolumetricLightScatteringPostProcess represents a babylon.js VolumetricLightScatteringPostProcess.
 // Inspired by &lt;a href=&#34;http://http.developer.nvidia.com/GPUGems3/gpugems3_ch13.html&#34;&gt;http://http.developer.nvidia.com/GPUGems3/gpugems3_ch13.html&lt;/a&gt;
-type VolumetricLightScatteringPostProcess struct{ *PostProcess }
+type VolumetricLightScatteringPostProcess struct {
+	*PostProcess
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (v *VolumetricLightScatteringPostProcess) JSObject() js.Value { return v.p }
@@ -16,12 +19,12 @@ func (v *VolumetricLightScatteringPostProcess) JSObject() js.Value { return v.p 
 // VolumetricLightScatteringPostProcess returns a VolumetricLightScatteringPostProcess JavaScript class.
 func (ba *Babylon) VolumetricLightScatteringPostProcess() *VolumetricLightScatteringPostProcess {
 	p := ba.ctx.Get("VolumetricLightScatteringPostProcess")
-	return VolumetricLightScatteringPostProcessFromJSObject(p)
+	return VolumetricLightScatteringPostProcessFromJSObject(p, ba.ctx)
 }
 
 // VolumetricLightScatteringPostProcessFromJSObject returns a wrapped VolumetricLightScatteringPostProcess JavaScript class.
-func VolumetricLightScatteringPostProcessFromJSObject(p js.Value) *VolumetricLightScatteringPostProcess {
-	return &VolumetricLightScatteringPostProcess{PostProcessFromJSObject(p)}
+func VolumetricLightScatteringPostProcessFromJSObject(p js.Value, ctx js.Value) *VolumetricLightScatteringPostProcess {
+	return &VolumetricLightScatteringPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewVolumetricLightScatteringPostProcessOpts contains optional parameters for NewVolumetricLightScatteringPostProcess.
@@ -48,7 +51,7 @@ func (ba *Babylon) NewVolumetricLightScatteringPostProcess(name string, ratio in
 	}
 
 	p := ba.ctx.Get("VolumetricLightScatteringPostProcess").New(name, ratio, camera.JSObject(), opts.Mesh.JSObject(), opts.Samples.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.Scene.JSObject())
-	return VolumetricLightScatteringPostProcessFromJSObject(p)
+	return VolumetricLightScatteringPostProcessFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

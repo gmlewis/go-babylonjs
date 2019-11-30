@@ -10,7 +10,10 @@ import (
 // This represents all the required metrics to create a VR camera.
 //
 // See: http://doc.babylonjs.com/babylon101/cameras#device-orientation-camera
-type VRCameraMetrics struct{ p js.Value }
+type VRCameraMetrics struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (v *VRCameraMetrics) JSObject() js.Value { return v.p }
@@ -18,12 +21,12 @@ func (v *VRCameraMetrics) JSObject() js.Value { return v.p }
 // VRCameraMetrics returns a VRCameraMetrics JavaScript class.
 func (ba *Babylon) VRCameraMetrics() *VRCameraMetrics {
 	p := ba.ctx.Get("VRCameraMetrics")
-	return VRCameraMetricsFromJSObject(p)
+	return VRCameraMetricsFromJSObject(p, ba.ctx)
 }
 
 // VRCameraMetricsFromJSObject returns a wrapped VRCameraMetrics JavaScript class.
-func VRCameraMetricsFromJSObject(p js.Value) *VRCameraMetrics {
-	return &VRCameraMetrics{p: p}
+func VRCameraMetricsFromJSObject(p js.Value, ctx js.Value) *VRCameraMetrics {
+	return &VRCameraMetrics{p: p, ctx: ctx}
 }
 
 // TODO: methods

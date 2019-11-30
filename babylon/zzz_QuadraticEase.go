@@ -10,7 +10,10 @@ import (
 // Easing function with a power of 2 shape (see link below).
 //
 // See: http://doc.babylonjs.com/babylon101/animations#easing-functions
-type QuadraticEase struct{ *EasingFunction }
+type QuadraticEase struct {
+	*EasingFunction
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (q *QuadraticEase) JSObject() js.Value { return q.p }
@@ -18,12 +21,12 @@ func (q *QuadraticEase) JSObject() js.Value { return q.p }
 // QuadraticEase returns a QuadraticEase JavaScript class.
 func (ba *Babylon) QuadraticEase() *QuadraticEase {
 	p := ba.ctx.Get("QuadraticEase")
-	return QuadraticEaseFromJSObject(p)
+	return QuadraticEaseFromJSObject(p, ba.ctx)
 }
 
 // QuadraticEaseFromJSObject returns a wrapped QuadraticEase JavaScript class.
-func QuadraticEaseFromJSObject(p js.Value) *QuadraticEase {
-	return &QuadraticEase{EasingFunctionFromJSObject(p)}
+func QuadraticEaseFromJSObject(p js.Value, ctx js.Value) *QuadraticEase {
+	return &QuadraticEase{EasingFunction: EasingFunctionFromJSObject(p, ctx), ctx: ctx}
 }
 
 // TODO: methods

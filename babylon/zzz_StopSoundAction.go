@@ -8,7 +8,10 @@ import (
 
 // StopSoundAction represents a babylon.js StopSoundAction.
 // This defines an action helpful to stop a defined sound on a triggered action.
-type StopSoundAction struct{ *Action }
+type StopSoundAction struct {
+	*Action
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *StopSoundAction) JSObject() js.Value { return s.p }
@@ -16,12 +19,12 @@ func (s *StopSoundAction) JSObject() js.Value { return s.p }
 // StopSoundAction returns a StopSoundAction JavaScript class.
 func (ba *Babylon) StopSoundAction() *StopSoundAction {
 	p := ba.ctx.Get("StopSoundAction")
-	return StopSoundActionFromJSObject(p)
+	return StopSoundActionFromJSObject(p, ba.ctx)
 }
 
 // StopSoundActionFromJSObject returns a wrapped StopSoundAction JavaScript class.
-func StopSoundActionFromJSObject(p js.Value) *StopSoundAction {
-	return &StopSoundAction{ActionFromJSObject(p)}
+func StopSoundActionFromJSObject(p js.Value, ctx js.Value) *StopSoundAction {
+	return &StopSoundAction{Action: ActionFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewStopSoundActionOpts contains optional parameters for NewStopSoundAction.
@@ -38,7 +41,7 @@ func (ba *Babylon) NewStopSoundAction(triggerOptions interface{}, sound *Sound, 
 	}
 
 	p := ba.ctx.Get("StopSoundAction").New(triggerOptions, sound.JSObject(), opts.Condition.JSObject())
-	return StopSoundActionFromJSObject(p)
+	return StopSoundActionFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -8,7 +8,10 @@ import (
 
 // EffectRenderer represents a babylon.js EffectRenderer.
 // Helper class to render one or more effects
-type EffectRenderer struct{ p js.Value }
+type EffectRenderer struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (e *EffectRenderer) JSObject() js.Value { return e.p }
@@ -16,12 +19,12 @@ func (e *EffectRenderer) JSObject() js.Value { return e.p }
 // EffectRenderer returns a EffectRenderer JavaScript class.
 func (ba *Babylon) EffectRenderer() *EffectRenderer {
 	p := ba.ctx.Get("EffectRenderer")
-	return EffectRendererFromJSObject(p)
+	return EffectRendererFromJSObject(p, ba.ctx)
 }
 
 // EffectRendererFromJSObject returns a wrapped EffectRenderer JavaScript class.
-func EffectRendererFromJSObject(p js.Value) *EffectRenderer {
-	return &EffectRenderer{p: p}
+func EffectRendererFromJSObject(p js.Value, ctx js.Value) *EffectRenderer {
+	return &EffectRenderer{p: p, ctx: ctx}
 }
 
 // NewEffectRendererOpts contains optional parameters for NewEffectRenderer.
@@ -38,7 +41,7 @@ func (ba *Babylon) NewEffectRenderer(engine *ThinEngine, opts *NewEffectRenderer
 	}
 
 	p := ba.ctx.Get("EffectRenderer").New(engine.JSObject(), opts.Options.JSObject())
-	return EffectRendererFromJSObject(p)
+	return EffectRendererFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

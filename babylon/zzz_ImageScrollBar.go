@@ -8,7 +8,10 @@ import (
 
 // ImageScrollBar represents a babylon.js ImageScrollBar.
 // Class used to create slider controls
-type ImageScrollBar struct{ *BaseSlider }
+type ImageScrollBar struct {
+	*BaseSlider
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (i *ImageScrollBar) JSObject() js.Value { return i.p }
@@ -16,12 +19,12 @@ func (i *ImageScrollBar) JSObject() js.Value { return i.p }
 // ImageScrollBar returns a ImageScrollBar JavaScript class.
 func (ba *Babylon) ImageScrollBar() *ImageScrollBar {
 	p := ba.ctx.Get("ImageScrollBar")
-	return ImageScrollBarFromJSObject(p)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
 }
 
 // ImageScrollBarFromJSObject returns a wrapped ImageScrollBar JavaScript class.
-func ImageScrollBarFromJSObject(p js.Value) *ImageScrollBar {
-	return &ImageScrollBar{BaseSliderFromJSObject(p)}
+func ImageScrollBarFromJSObject(p js.Value, ctx js.Value) *ImageScrollBar {
+	return &ImageScrollBar{BaseSlider: BaseSliderFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewImageScrollBarOpts contains optional parameters for NewImageScrollBar.
@@ -38,7 +41,7 @@ func (ba *Babylon) NewImageScrollBar(opts *NewImageScrollBarOpts) *ImageScrollBa
 	}
 
 	p := ba.ctx.Get("ImageScrollBar").New(opts.Name.JSObject())
-	return ImageScrollBarFromJSObject(p)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

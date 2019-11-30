@@ -8,7 +8,10 @@ import (
 
 // SimplexPerlin3DBlock represents a babylon.js SimplexPerlin3DBlock.
 // block used to Generate a Simplex Perlin 3d Noise Pattern
-type SimplexPerlin3DBlock struct{ *NodeMaterialBlock }
+type SimplexPerlin3DBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *SimplexPerlin3DBlock) JSObject() js.Value { return s.p }
@@ -16,12 +19,12 @@ func (s *SimplexPerlin3DBlock) JSObject() js.Value { return s.p }
 // SimplexPerlin3DBlock returns a SimplexPerlin3DBlock JavaScript class.
 func (ba *Babylon) SimplexPerlin3DBlock() *SimplexPerlin3DBlock {
 	p := ba.ctx.Get("SimplexPerlin3DBlock")
-	return SimplexPerlin3DBlockFromJSObject(p)
+	return SimplexPerlin3DBlockFromJSObject(p, ba.ctx)
 }
 
 // SimplexPerlin3DBlockFromJSObject returns a wrapped SimplexPerlin3DBlock JavaScript class.
-func SimplexPerlin3DBlockFromJSObject(p js.Value) *SimplexPerlin3DBlock {
-	return &SimplexPerlin3DBlock{NodeMaterialBlockFromJSObject(p)}
+func SimplexPerlin3DBlockFromJSObject(p js.Value, ctx js.Value) *SimplexPerlin3DBlock {
+	return &SimplexPerlin3DBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewSimplexPerlin3DBlock returns a new SimplexPerlin3DBlock object.
@@ -29,7 +32,7 @@ func SimplexPerlin3DBlockFromJSObject(p js.Value) *SimplexPerlin3DBlock {
 // https://doc.babylonjs.com/api/classes/babylon.simplexperlin3dblock
 func (ba *Babylon) NewSimplexPerlin3DBlock(name string) *SimplexPerlin3DBlock {
 	p := ba.ctx.Get("SimplexPerlin3DBlock").New(name)
-	return SimplexPerlin3DBlockFromJSObject(p)
+	return SimplexPerlin3DBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

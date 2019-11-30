@@ -8,7 +8,10 @@ import (
 
 // ScaleBlock represents a babylon.js ScaleBlock.
 // Block used to scale a vector by a float
-type ScaleBlock struct{ *NodeMaterialBlock }
+type ScaleBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *ScaleBlock) JSObject() js.Value { return s.p }
@@ -16,12 +19,12 @@ func (s *ScaleBlock) JSObject() js.Value { return s.p }
 // ScaleBlock returns a ScaleBlock JavaScript class.
 func (ba *Babylon) ScaleBlock() *ScaleBlock {
 	p := ba.ctx.Get("ScaleBlock")
-	return ScaleBlockFromJSObject(p)
+	return ScaleBlockFromJSObject(p, ba.ctx)
 }
 
 // ScaleBlockFromJSObject returns a wrapped ScaleBlock JavaScript class.
-func ScaleBlockFromJSObject(p js.Value) *ScaleBlock {
-	return &ScaleBlock{NodeMaterialBlockFromJSObject(p)}
+func ScaleBlockFromJSObject(p js.Value, ctx js.Value) *ScaleBlock {
+	return &ScaleBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewScaleBlock returns a new ScaleBlock object.
@@ -29,7 +32,7 @@ func ScaleBlockFromJSObject(p js.Value) *ScaleBlock {
 // https://doc.babylonjs.com/api/classes/babylon.scaleblock
 func (ba *Babylon) NewScaleBlock(name string) *ScaleBlock {
 	p := ba.ctx.Get("ScaleBlock").New(name)
-	return ScaleBlockFromJSObject(p)
+	return ScaleBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

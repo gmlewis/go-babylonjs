@@ -8,7 +8,10 @@ import (
 
 // KeyboardEventTypes represents a babylon.js KeyboardEventTypes.
 // Gather the list of keyboard event types as constants.
-type KeyboardEventTypes struct{ p js.Value }
+type KeyboardEventTypes struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (k *KeyboardEventTypes) JSObject() js.Value { return k.p }
@@ -16,12 +19,12 @@ func (k *KeyboardEventTypes) JSObject() js.Value { return k.p }
 // KeyboardEventTypes returns a KeyboardEventTypes JavaScript class.
 func (ba *Babylon) KeyboardEventTypes() *KeyboardEventTypes {
 	p := ba.ctx.Get("KeyboardEventTypes")
-	return KeyboardEventTypesFromJSObject(p)
+	return KeyboardEventTypesFromJSObject(p, ba.ctx)
 }
 
 // KeyboardEventTypesFromJSObject returns a wrapped KeyboardEventTypes JavaScript class.
-func KeyboardEventTypesFromJSObject(p js.Value) *KeyboardEventTypes {
-	return &KeyboardEventTypes{p: p}
+func KeyboardEventTypesFromJSObject(p js.Value, ctx js.Value) *KeyboardEventTypes {
+	return &KeyboardEventTypes{p: p, ctx: ctx}
 }
 
 // TODO: methods

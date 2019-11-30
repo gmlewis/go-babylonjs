@@ -8,7 +8,10 @@ import (
 
 // BoundingSphere represents a babylon.js BoundingSphere.
 // Class used to store bounding sphere information
-type BoundingSphere struct{ p js.Value }
+type BoundingSphere struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (b *BoundingSphere) JSObject() js.Value { return b.p }
@@ -16,12 +19,12 @@ func (b *BoundingSphere) JSObject() js.Value { return b.p }
 // BoundingSphere returns a BoundingSphere JavaScript class.
 func (ba *Babylon) BoundingSphere() *BoundingSphere {
 	p := ba.ctx.Get("BoundingSphere")
-	return BoundingSphereFromJSObject(p)
+	return BoundingSphereFromJSObject(p, ba.ctx)
 }
 
 // BoundingSphereFromJSObject returns a wrapped BoundingSphere JavaScript class.
-func BoundingSphereFromJSObject(p js.Value) *BoundingSphere {
-	return &BoundingSphere{p: p}
+func BoundingSphereFromJSObject(p js.Value, ctx js.Value) *BoundingSphere {
+	return &BoundingSphere{p: p, ctx: ctx}
 }
 
 // NewBoundingSphereOpts contains optional parameters for NewBoundingSphere.
@@ -38,7 +41,7 @@ func (ba *Babylon) NewBoundingSphere(min *Vector3, max *Vector3, opts *NewBoundi
 	}
 
 	p := ba.ctx.Get("BoundingSphere").New(min.JSObject(), max.JSObject(), opts.WorldMatrix.JSObject())
-	return BoundingSphereFromJSObject(p)
+	return BoundingSphereFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

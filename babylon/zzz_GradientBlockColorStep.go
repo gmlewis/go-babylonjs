@@ -8,7 +8,10 @@ import (
 
 // GradientBlockColorStep represents a babylon.js GradientBlockColorStep.
 // Class used to store a color step for the GradientBlock
-type GradientBlockColorStep struct{ p js.Value }
+type GradientBlockColorStep struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (g *GradientBlockColorStep) JSObject() js.Value { return g.p }
@@ -16,12 +19,12 @@ func (g *GradientBlockColorStep) JSObject() js.Value { return g.p }
 // GradientBlockColorStep returns a GradientBlockColorStep JavaScript class.
 func (ba *Babylon) GradientBlockColorStep() *GradientBlockColorStep {
 	p := ba.ctx.Get("GradientBlockColorStep")
-	return GradientBlockColorStepFromJSObject(p)
+	return GradientBlockColorStepFromJSObject(p, ba.ctx)
 }
 
 // GradientBlockColorStepFromJSObject returns a wrapped GradientBlockColorStep JavaScript class.
-func GradientBlockColorStepFromJSObject(p js.Value) *GradientBlockColorStep {
-	return &GradientBlockColorStep{p: p}
+func GradientBlockColorStepFromJSObject(p js.Value, ctx js.Value) *GradientBlockColorStep {
+	return &GradientBlockColorStep{p: p, ctx: ctx}
 }
 
 // NewGradientBlockColorStep returns a new GradientBlockColorStep object.
@@ -29,7 +32,7 @@ func GradientBlockColorStepFromJSObject(p js.Value) *GradientBlockColorStep {
 // https://doc.babylonjs.com/api/classes/babylon.gradientblockcolorstep
 func (ba *Babylon) NewGradientBlockColorStep(step float64, color *Color3) *GradientBlockColorStep {
 	p := ba.ctx.Get("GradientBlockColorStep").New(step, color.JSObject())
-	return GradientBlockColorStepFromJSObject(p)
+	return GradientBlockColorStepFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

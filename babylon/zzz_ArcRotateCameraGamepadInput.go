@@ -10,7 +10,10 @@ import (
 // Manage the gamepad inputs to control an arc rotate camera.
 //
 // See: http://doc.babylonjs.com/how_to/customizing_camera_inputs
-type ArcRotateCameraGamepadInput struct{ p js.Value }
+type ArcRotateCameraGamepadInput struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (a *ArcRotateCameraGamepadInput) JSObject() js.Value { return a.p }
@@ -18,12 +21,12 @@ func (a *ArcRotateCameraGamepadInput) JSObject() js.Value { return a.p }
 // ArcRotateCameraGamepadInput returns a ArcRotateCameraGamepadInput JavaScript class.
 func (ba *Babylon) ArcRotateCameraGamepadInput() *ArcRotateCameraGamepadInput {
 	p := ba.ctx.Get("ArcRotateCameraGamepadInput")
-	return ArcRotateCameraGamepadInputFromJSObject(p)
+	return ArcRotateCameraGamepadInputFromJSObject(p, ba.ctx)
 }
 
 // ArcRotateCameraGamepadInputFromJSObject returns a wrapped ArcRotateCameraGamepadInput JavaScript class.
-func ArcRotateCameraGamepadInputFromJSObject(p js.Value) *ArcRotateCameraGamepadInput {
-	return &ArcRotateCameraGamepadInput{p: p}
+func ArcRotateCameraGamepadInputFromJSObject(p js.Value, ctx js.Value) *ArcRotateCameraGamepadInput {
+	return &ArcRotateCameraGamepadInput{p: p, ctx: ctx}
 }
 
 // TODO: methods

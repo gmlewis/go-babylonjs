@@ -8,7 +8,10 @@ import (
 
 // ScrollViewer represents a babylon.js ScrollViewer.
 // Class used to hold a viewer window and sliders in a grid
-type ScrollViewer struct{ *Rectangle }
+type ScrollViewer struct {
+	*Rectangle
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *ScrollViewer) JSObject() js.Value { return s.p }
@@ -16,12 +19,12 @@ func (s *ScrollViewer) JSObject() js.Value { return s.p }
 // ScrollViewer returns a ScrollViewer JavaScript class.
 func (ba *Babylon) ScrollViewer() *ScrollViewer {
 	p := ba.ctx.Get("ScrollViewer")
-	return ScrollViewerFromJSObject(p)
+	return ScrollViewerFromJSObject(p, ba.ctx)
 }
 
 // ScrollViewerFromJSObject returns a wrapped ScrollViewer JavaScript class.
-func ScrollViewerFromJSObject(p js.Value) *ScrollViewer {
-	return &ScrollViewer{RectangleFromJSObject(p)}
+func ScrollViewerFromJSObject(p js.Value, ctx js.Value) *ScrollViewer {
+	return &ScrollViewer{Rectangle: RectangleFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewScrollViewerOpts contains optional parameters for NewScrollViewer.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewScrollViewer(opts *NewScrollViewerOpts) *ScrollViewer {
 	}
 
 	p := ba.ctx.Get("ScrollViewer").New(opts.Name.JSObject(), opts.IsImageBased.JSObject())
-	return ScrollViewerFromJSObject(p)
+	return ScrollViewerFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

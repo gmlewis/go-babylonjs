@@ -8,7 +8,10 @@ import (
 
 // HDRCubeTextureAssetTask represents a babylon.js HDRCubeTextureAssetTask.
 // Define a task used by AssetsManager to load HDR cube textures
-type HDRCubeTextureAssetTask struct{ *AbstractAssetTask }
+type HDRCubeTextureAssetTask struct {
+	*AbstractAssetTask
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (h *HDRCubeTextureAssetTask) JSObject() js.Value { return h.p }
@@ -16,12 +19,12 @@ func (h *HDRCubeTextureAssetTask) JSObject() js.Value { return h.p }
 // HDRCubeTextureAssetTask returns a HDRCubeTextureAssetTask JavaScript class.
 func (ba *Babylon) HDRCubeTextureAssetTask() *HDRCubeTextureAssetTask {
 	p := ba.ctx.Get("HDRCubeTextureAssetTask")
-	return HDRCubeTextureAssetTaskFromJSObject(p)
+	return HDRCubeTextureAssetTaskFromJSObject(p, ba.ctx)
 }
 
 // HDRCubeTextureAssetTaskFromJSObject returns a wrapped HDRCubeTextureAssetTask JavaScript class.
-func HDRCubeTextureAssetTaskFromJSObject(p js.Value) *HDRCubeTextureAssetTask {
-	return &HDRCubeTextureAssetTask{AbstractAssetTaskFromJSObject(p)}
+func HDRCubeTextureAssetTaskFromJSObject(p js.Value, ctx js.Value) *HDRCubeTextureAssetTask {
+	return &HDRCubeTextureAssetTask{AbstractAssetTask: AbstractAssetTaskFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewHDRCubeTextureAssetTaskOpts contains optional parameters for NewHDRCubeTextureAssetTask.
@@ -44,7 +47,7 @@ func (ba *Babylon) NewHDRCubeTextureAssetTask(name string, url string, size floa
 	}
 
 	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(name, url, size, opts.NoMipmap.JSObject(), opts.GenerateHarmonics.JSObject(), opts.GammaSpace.JSObject(), opts.Reserved.JSObject())
-	return HDRCubeTextureAssetTaskFromJSObject(p)
+	return HDRCubeTextureAssetTaskFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

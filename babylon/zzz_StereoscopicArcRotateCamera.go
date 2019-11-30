@@ -10,7 +10,10 @@ import (
 // Camera used to simulate stereoscopic rendering (based on ArcRotateCamera)
 //
 // See: http://doc.babylonjs.com/features/cameras
-type StereoscopicArcRotateCamera struct{ *ArcRotateCamera }
+type StereoscopicArcRotateCamera struct {
+	*ArcRotateCamera
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *StereoscopicArcRotateCamera) JSObject() js.Value { return s.p }
@@ -18,12 +21,12 @@ func (s *StereoscopicArcRotateCamera) JSObject() js.Value { return s.p }
 // StereoscopicArcRotateCamera returns a StereoscopicArcRotateCamera JavaScript class.
 func (ba *Babylon) StereoscopicArcRotateCamera() *StereoscopicArcRotateCamera {
 	p := ba.ctx.Get("StereoscopicArcRotateCamera")
-	return StereoscopicArcRotateCameraFromJSObject(p)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
 }
 
 // StereoscopicArcRotateCameraFromJSObject returns a wrapped StereoscopicArcRotateCamera JavaScript class.
-func StereoscopicArcRotateCameraFromJSObject(p js.Value) *StereoscopicArcRotateCamera {
-	return &StereoscopicArcRotateCamera{ArcRotateCameraFromJSObject(p)}
+func StereoscopicArcRotateCameraFromJSObject(p js.Value, ctx js.Value) *StereoscopicArcRotateCamera {
+	return &StereoscopicArcRotateCamera{ArcRotateCamera: ArcRotateCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewStereoscopicArcRotateCamera returns a new StereoscopicArcRotateCamera object.
@@ -31,7 +34,7 @@ func StereoscopicArcRotateCameraFromJSObject(p js.Value) *StereoscopicArcRotateC
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera
 func (ba *Babylon) NewStereoscopicArcRotateCamera(name string, alpha float64, beta float64, radius float64, target *Vector3, interaxialDistance float64, isStereoscopicSideBySide bool, scene *Scene) *StereoscopicArcRotateCamera {
 	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(name, alpha, beta, radius, target.JSObject(), interaxialDistance, isStereoscopicSideBySide, scene.JSObject())
-	return StereoscopicArcRotateCameraFromJSObject(p)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

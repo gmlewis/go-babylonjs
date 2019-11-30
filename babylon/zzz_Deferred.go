@@ -8,7 +8,10 @@ import (
 
 // Deferred represents a babylon.js Deferred.
 // Wrapper class for promise with external resolve and reject.
-type Deferred struct{ p js.Value }
+type Deferred struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (d *Deferred) JSObject() js.Value { return d.p }
@@ -16,12 +19,12 @@ func (d *Deferred) JSObject() js.Value { return d.p }
 // Deferred returns a Deferred JavaScript class.
 func (ba *Babylon) Deferred() *Deferred {
 	p := ba.ctx.Get("Deferred")
-	return DeferredFromJSObject(p)
+	return DeferredFromJSObject(p, ba.ctx)
 }
 
 // DeferredFromJSObject returns a wrapped Deferred JavaScript class.
-func DeferredFromJSObject(p js.Value) *Deferred {
-	return &Deferred{p: p}
+func DeferredFromJSObject(p js.Value, ctx js.Value) *Deferred {
+	return &Deferred{p: p, ctx: ctx}
 }
 
 // NewDeferred returns a new Deferred object.
@@ -29,7 +32,7 @@ func DeferredFromJSObject(p js.Value) *Deferred {
 // https://doc.babylonjs.com/api/classes/babylon.deferred
 func (ba *Babylon) NewDeferred() *Deferred {
 	p := ba.ctx.Get("Deferred").New()
-	return DeferredFromJSObject(p)
+	return DeferredFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -8,7 +8,10 @@ import (
 
 // DepthOfFieldEffect represents a babylon.js DepthOfFieldEffect.
 // The depth of field effect applies a blur to objects that are closer or further from where the camera is focusing.
-type DepthOfFieldEffect struct{ *PostProcessRenderEffect }
+type DepthOfFieldEffect struct {
+	*PostProcessRenderEffect
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (d *DepthOfFieldEffect) JSObject() js.Value { return d.p }
@@ -16,12 +19,12 @@ func (d *DepthOfFieldEffect) JSObject() js.Value { return d.p }
 // DepthOfFieldEffect returns a DepthOfFieldEffect JavaScript class.
 func (ba *Babylon) DepthOfFieldEffect() *DepthOfFieldEffect {
 	p := ba.ctx.Get("DepthOfFieldEffect")
-	return DepthOfFieldEffectFromJSObject(p)
+	return DepthOfFieldEffectFromJSObject(p, ba.ctx)
 }
 
 // DepthOfFieldEffectFromJSObject returns a wrapped DepthOfFieldEffect JavaScript class.
-func DepthOfFieldEffectFromJSObject(p js.Value) *DepthOfFieldEffect {
-	return &DepthOfFieldEffect{PostProcessRenderEffectFromJSObject(p)}
+func DepthOfFieldEffectFromJSObject(p js.Value, ctx js.Value) *DepthOfFieldEffect {
+	return &DepthOfFieldEffect{PostProcessRenderEffect: PostProcessRenderEffectFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewDepthOfFieldEffectOpts contains optional parameters for NewDepthOfFieldEffect.
@@ -42,7 +45,7 @@ func (ba *Babylon) NewDepthOfFieldEffect(scene *Scene, depthTexture *RenderTarge
 	}
 
 	p := ba.ctx.Get("DepthOfFieldEffect").New(scene.JSObject(), depthTexture.JSObject(), opts.BlurLevel.JSObject(), opts.PipelineTextureType.JSObject(), opts.BlockCompilation.JSObject())
-	return DepthOfFieldEffectFromJSObject(p)
+	return DepthOfFieldEffectFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

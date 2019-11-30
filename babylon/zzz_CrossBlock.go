@@ -8,7 +8,10 @@ import (
 
 // CrossBlock represents a babylon.js CrossBlock.
 // Block used to apply a cross product between 2 vectors
-type CrossBlock struct{ *NodeMaterialBlock }
+type CrossBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (c *CrossBlock) JSObject() js.Value { return c.p }
@@ -16,12 +19,12 @@ func (c *CrossBlock) JSObject() js.Value { return c.p }
 // CrossBlock returns a CrossBlock JavaScript class.
 func (ba *Babylon) CrossBlock() *CrossBlock {
 	p := ba.ctx.Get("CrossBlock")
-	return CrossBlockFromJSObject(p)
+	return CrossBlockFromJSObject(p, ba.ctx)
 }
 
 // CrossBlockFromJSObject returns a wrapped CrossBlock JavaScript class.
-func CrossBlockFromJSObject(p js.Value) *CrossBlock {
-	return &CrossBlock{NodeMaterialBlockFromJSObject(p)}
+func CrossBlockFromJSObject(p js.Value, ctx js.Value) *CrossBlock {
+	return &CrossBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewCrossBlock returns a new CrossBlock object.
@@ -29,7 +32,7 @@ func CrossBlockFromJSObject(p js.Value) *CrossBlock {
 // https://doc.babylonjs.com/api/classes/babylon.crossblock
 func (ba *Babylon) NewCrossBlock(name string) *CrossBlock {
 	p := ba.ctx.Get("CrossBlock").New(name)
-	return CrossBlockFromJSObject(p)
+	return CrossBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

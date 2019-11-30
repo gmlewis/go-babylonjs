@@ -11,7 +11,10 @@ import (
 // It controls one of the indiviual texture used in the effect.
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_lens_flares
-type LensFlare struct{ p js.Value }
+type LensFlare struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (l *LensFlare) JSObject() js.Value { return l.p }
@@ -19,12 +22,12 @@ func (l *LensFlare) JSObject() js.Value { return l.p }
 // LensFlare returns a LensFlare JavaScript class.
 func (ba *Babylon) LensFlare() *LensFlare {
 	p := ba.ctx.Get("LensFlare")
-	return LensFlareFromJSObject(p)
+	return LensFlareFromJSObject(p, ba.ctx)
 }
 
 // LensFlareFromJSObject returns a wrapped LensFlare JavaScript class.
-func LensFlareFromJSObject(p js.Value) *LensFlare {
-	return &LensFlare{p: p}
+func LensFlareFromJSObject(p js.Value, ctx js.Value) *LensFlare {
+	return &LensFlare{p: p, ctx: ctx}
 }
 
 // NewLensFlare returns a new LensFlare object.
@@ -32,7 +35,7 @@ func LensFlareFromJSObject(p js.Value) *LensFlare {
 // https://doc.babylonjs.com/api/classes/babylon.lensflare
 func (ba *Babylon) NewLensFlare(size float64, position float64, color *Color3, imgUrl string, system *LensFlareSystem) *LensFlare {
 	p := ba.ctx.Get("LensFlare").New(size, position, color.JSObject(), imgUrl, system.JSObject())
-	return LensFlareFromJSObject(p)
+	return LensFlareFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

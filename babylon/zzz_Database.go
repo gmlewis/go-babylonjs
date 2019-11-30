@@ -10,7 +10,10 @@ import (
 // Class used to enable access to IndexedDB
 //
 // See: http://doc.babylonjs.com/how_to/caching_resources_in_indexeddb
-type Database struct{ p js.Value }
+type Database struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (d *Database) JSObject() js.Value { return d.p }
@@ -18,12 +21,12 @@ func (d *Database) JSObject() js.Value { return d.p }
 // Database returns a Database JavaScript class.
 func (ba *Babylon) Database() *Database {
 	p := ba.ctx.Get("Database")
-	return DatabaseFromJSObject(p)
+	return DatabaseFromJSObject(p, ba.ctx)
 }
 
 // DatabaseFromJSObject returns a wrapped Database JavaScript class.
-func DatabaseFromJSObject(p js.Value) *Database {
-	return &Database{p: p}
+func DatabaseFromJSObject(p js.Value, ctx js.Value) *Database {
+	return &Database{p: p, ctx: ctx}
 }
 
 // NewDatabaseOpts contains optional parameters for NewDatabase.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewDatabase(urlToScene string, callbackManifestChecked func()
 	}
 
 	p := ba.ctx.Get("Database").New(urlToScene, callbackManifestChecked, opts.DisableManifestCheck.JSObject())
-	return DatabaseFromJSObject(p)
+	return DatabaseFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

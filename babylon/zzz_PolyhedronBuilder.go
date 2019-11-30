@@ -8,7 +8,10 @@ import (
 
 // PolyhedronBuilder represents a babylon.js PolyhedronBuilder.
 // Class containing static functions to help procedurally build meshes
-type PolyhedronBuilder struct{ p js.Value }
+type PolyhedronBuilder struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (p *PolyhedronBuilder) JSObject() js.Value { return p.p }
@@ -16,12 +19,12 @@ func (p *PolyhedronBuilder) JSObject() js.Value { return p.p }
 // PolyhedronBuilder returns a PolyhedronBuilder JavaScript class.
 func (ba *Babylon) PolyhedronBuilder() *PolyhedronBuilder {
 	p := ba.ctx.Get("PolyhedronBuilder")
-	return PolyhedronBuilderFromJSObject(p)
+	return PolyhedronBuilderFromJSObject(p, ba.ctx)
 }
 
 // PolyhedronBuilderFromJSObject returns a wrapped PolyhedronBuilder JavaScript class.
-func PolyhedronBuilderFromJSObject(p js.Value) *PolyhedronBuilder {
-	return &PolyhedronBuilder{p: p}
+func PolyhedronBuilderFromJSObject(p js.Value, ctx js.Value) *PolyhedronBuilder {
+	return &PolyhedronBuilder{p: p, ctx: ctx}
 }
 
 // TODO: methods

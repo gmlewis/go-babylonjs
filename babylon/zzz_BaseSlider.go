@@ -8,7 +8,10 @@ import (
 
 // BaseSlider represents a babylon.js BaseSlider.
 // Class used to create slider controls
-type BaseSlider struct{ *Control }
+type BaseSlider struct {
+	*Control
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (b *BaseSlider) JSObject() js.Value { return b.p }
@@ -16,12 +19,12 @@ func (b *BaseSlider) JSObject() js.Value { return b.p }
 // BaseSlider returns a BaseSlider JavaScript class.
 func (ba *Babylon) BaseSlider() *BaseSlider {
 	p := ba.ctx.Get("BaseSlider")
-	return BaseSliderFromJSObject(p)
+	return BaseSliderFromJSObject(p, ba.ctx)
 }
 
 // BaseSliderFromJSObject returns a wrapped BaseSlider JavaScript class.
-func BaseSliderFromJSObject(p js.Value) *BaseSlider {
-	return &BaseSlider{ControlFromJSObject(p)}
+func BaseSliderFromJSObject(p js.Value, ctx js.Value) *BaseSlider {
+	return &BaseSlider{Control: ControlFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewBaseSliderOpts contains optional parameters for NewBaseSlider.
@@ -38,7 +41,7 @@ func (ba *Babylon) NewBaseSlider(opts *NewBaseSliderOpts) *BaseSlider {
 	}
 
 	p := ba.ctx.Get("BaseSlider").New(opts.Name.JSObject())
-	return BaseSliderFromJSObject(p)
+	return BaseSliderFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -11,7 +11,10 @@ import (
 // It still follows a Defined mesh but in an Arc Rotate Camera fashion.
 //
 // See: http://doc.babylonjs.com/features/cameras#follow-camera
-type ArcFollowCamera struct{ *TargetCamera }
+type ArcFollowCamera struct {
+	*TargetCamera
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (a *ArcFollowCamera) JSObject() js.Value { return a.p }
@@ -19,12 +22,12 @@ func (a *ArcFollowCamera) JSObject() js.Value { return a.p }
 // ArcFollowCamera returns a ArcFollowCamera JavaScript class.
 func (ba *Babylon) ArcFollowCamera() *ArcFollowCamera {
 	p := ba.ctx.Get("ArcFollowCamera")
-	return ArcFollowCameraFromJSObject(p)
+	return ArcFollowCameraFromJSObject(p, ba.ctx)
 }
 
 // ArcFollowCameraFromJSObject returns a wrapped ArcFollowCamera JavaScript class.
-func ArcFollowCameraFromJSObject(p js.Value) *ArcFollowCamera {
-	return &ArcFollowCamera{TargetCameraFromJSObject(p)}
+func ArcFollowCameraFromJSObject(p js.Value, ctx js.Value) *ArcFollowCamera {
+	return &ArcFollowCamera{TargetCamera: TargetCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewArcFollowCamera returns a new ArcFollowCamera object.
@@ -32,7 +35,7 @@ func ArcFollowCameraFromJSObject(p js.Value) *ArcFollowCamera {
 // https://doc.babylonjs.com/api/classes/babylon.arcfollowcamera
 func (ba *Babylon) NewArcFollowCamera(name string, alpha float64, beta float64, radius float64, target *AbstractMesh, scene *Scene) *ArcFollowCamera {
 	p := ba.ctx.Get("ArcFollowCamera").New(name, alpha, beta, radius, target.JSObject(), scene.JSObject())
-	return ArcFollowCameraFromJSObject(p)
+	return ArcFollowCameraFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

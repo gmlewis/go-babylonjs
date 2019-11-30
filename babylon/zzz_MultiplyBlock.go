@@ -8,7 +8,10 @@ import (
 
 // MultiplyBlock represents a babylon.js MultiplyBlock.
 // Block used to multiply 2 values
-type MultiplyBlock struct{ *NodeMaterialBlock }
+type MultiplyBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (m *MultiplyBlock) JSObject() js.Value { return m.p }
@@ -16,12 +19,12 @@ func (m *MultiplyBlock) JSObject() js.Value { return m.p }
 // MultiplyBlock returns a MultiplyBlock JavaScript class.
 func (ba *Babylon) MultiplyBlock() *MultiplyBlock {
 	p := ba.ctx.Get("MultiplyBlock")
-	return MultiplyBlockFromJSObject(p)
+	return MultiplyBlockFromJSObject(p, ba.ctx)
 }
 
 // MultiplyBlockFromJSObject returns a wrapped MultiplyBlock JavaScript class.
-func MultiplyBlockFromJSObject(p js.Value) *MultiplyBlock {
-	return &MultiplyBlock{NodeMaterialBlockFromJSObject(p)}
+func MultiplyBlockFromJSObject(p js.Value, ctx js.Value) *MultiplyBlock {
+	return &MultiplyBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewMultiplyBlock returns a new MultiplyBlock object.
@@ -29,7 +32,7 @@ func MultiplyBlockFromJSObject(p js.Value) *MultiplyBlock {
 // https://doc.babylonjs.com/api/classes/babylon.multiplyblock
 func (ba *Babylon) NewMultiplyBlock(name string) *MultiplyBlock {
 	p := ba.ctx.Get("MultiplyBlock").New(name)
-	return MultiplyBlockFromJSObject(p)
+	return MultiplyBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

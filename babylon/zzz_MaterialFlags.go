@@ -8,7 +8,10 @@ import (
 
 // MaterialFlags represents a babylon.js MaterialFlags.
 // This groups all the flags used to control the materials channel.
-type MaterialFlags struct{ p js.Value }
+type MaterialFlags struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (m *MaterialFlags) JSObject() js.Value { return m.p }
@@ -16,12 +19,12 @@ func (m *MaterialFlags) JSObject() js.Value { return m.p }
 // MaterialFlags returns a MaterialFlags JavaScript class.
 func (ba *Babylon) MaterialFlags() *MaterialFlags {
 	p := ba.ctx.Get("MaterialFlags")
-	return MaterialFlagsFromJSObject(p)
+	return MaterialFlagsFromJSObject(p, ba.ctx)
 }
 
 // MaterialFlagsFromJSObject returns a wrapped MaterialFlags JavaScript class.
-func MaterialFlagsFromJSObject(p js.Value) *MaterialFlags {
-	return &MaterialFlags{p: p}
+func MaterialFlagsFromJSObject(p js.Value, ctx js.Value) *MaterialFlags {
+	return &MaterialFlags{p: p, ctx: ctx}
 }
 
 // TODO: methods

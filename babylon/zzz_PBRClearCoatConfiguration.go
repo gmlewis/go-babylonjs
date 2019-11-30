@@ -8,7 +8,10 @@ import (
 
 // PBRClearCoatConfiguration represents a babylon.js PBRClearCoatConfiguration.
 // Define the code related to the clear coat parameters of the pbr material.
-type PBRClearCoatConfiguration struct{ p js.Value }
+type PBRClearCoatConfiguration struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (p *PBRClearCoatConfiguration) JSObject() js.Value { return p.p }
@@ -16,12 +19,12 @@ func (p *PBRClearCoatConfiguration) JSObject() js.Value { return p.p }
 // PBRClearCoatConfiguration returns a PBRClearCoatConfiguration JavaScript class.
 func (ba *Babylon) PBRClearCoatConfiguration() *PBRClearCoatConfiguration {
 	p := ba.ctx.Get("PBRClearCoatConfiguration")
-	return PBRClearCoatConfigurationFromJSObject(p)
+	return PBRClearCoatConfigurationFromJSObject(p, ba.ctx)
 }
 
 // PBRClearCoatConfigurationFromJSObject returns a wrapped PBRClearCoatConfiguration JavaScript class.
-func PBRClearCoatConfigurationFromJSObject(p js.Value) *PBRClearCoatConfiguration {
-	return &PBRClearCoatConfiguration{p: p}
+func PBRClearCoatConfigurationFromJSObject(p js.Value, ctx js.Value) *PBRClearCoatConfiguration {
+	return &PBRClearCoatConfiguration{p: p, ctx: ctx}
 }
 
 // NewPBRClearCoatConfiguration returns a new PBRClearCoatConfiguration object.
@@ -29,7 +32,7 @@ func PBRClearCoatConfigurationFromJSObject(p js.Value) *PBRClearCoatConfiguratio
 // https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration
 func (ba *Babylon) NewPBRClearCoatConfiguration(markAllSubMeshesAsTexturesDirty func()) *PBRClearCoatConfiguration {
 	p := ba.ctx.Get("PBRClearCoatConfiguration").New(markAllSubMeshesAsTexturesDirty)
-	return PBRClearCoatConfigurationFromJSObject(p)
+	return PBRClearCoatConfigurationFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

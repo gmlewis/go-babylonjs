@@ -8,7 +8,10 @@ import (
 
 // TrailMesh represents a babylon.js TrailMesh.
 // Class used to create a trail following a mesh
-type TrailMesh struct{ *Mesh }
+type TrailMesh struct {
+	*Mesh
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (t *TrailMesh) JSObject() js.Value { return t.p }
@@ -16,12 +19,12 @@ func (t *TrailMesh) JSObject() js.Value { return t.p }
 // TrailMesh returns a TrailMesh JavaScript class.
 func (ba *Babylon) TrailMesh() *TrailMesh {
 	p := ba.ctx.Get("TrailMesh")
-	return TrailMeshFromJSObject(p)
+	return TrailMeshFromJSObject(p, ba.ctx)
 }
 
 // TrailMeshFromJSObject returns a wrapped TrailMesh JavaScript class.
-func TrailMeshFromJSObject(p js.Value) *TrailMesh {
-	return &TrailMesh{MeshFromJSObject(p)}
+func TrailMeshFromJSObject(p js.Value, ctx js.Value) *TrailMesh {
+	return &TrailMesh{Mesh: MeshFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewTrailMeshOpts contains optional parameters for NewTrailMesh.
@@ -42,7 +45,7 @@ func (ba *Babylon) NewTrailMesh(name string, generator *AbstractMesh, scene *Sce
 	}
 
 	p := ba.ctx.Get("TrailMesh").New(name, generator.JSObject(), scene.JSObject(), opts.Diameter.JSObject(), opts.Length.JSObject(), opts.AutoStart.JSObject())
-	return TrailMeshFromJSObject(p)
+	return TrailMeshFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

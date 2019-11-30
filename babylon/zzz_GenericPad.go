@@ -8,7 +8,10 @@ import (
 
 // GenericPad represents a babylon.js GenericPad.
 // Represents a generic gamepad
-type GenericPad struct{ *Gamepad }
+type GenericPad struct {
+	*Gamepad
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (g *GenericPad) JSObject() js.Value { return g.p }
@@ -16,12 +19,12 @@ func (g *GenericPad) JSObject() js.Value { return g.p }
 // GenericPad returns a GenericPad JavaScript class.
 func (ba *Babylon) GenericPad() *GenericPad {
 	p := ba.ctx.Get("GenericPad")
-	return GenericPadFromJSObject(p)
+	return GenericPadFromJSObject(p, ba.ctx)
 }
 
 // GenericPadFromJSObject returns a wrapped GenericPad JavaScript class.
-func GenericPadFromJSObject(p js.Value) *GenericPad {
-	return &GenericPad{GamepadFromJSObject(p)}
+func GenericPadFromJSObject(p js.Value, ctx js.Value) *GenericPad {
+	return &GenericPad{Gamepad: GamepadFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewGenericPad returns a new GenericPad object.
@@ -29,7 +32,7 @@ func GenericPadFromJSObject(p js.Value) *GenericPad {
 // https://doc.babylonjs.com/api/classes/babylon.genericpad
 func (ba *Babylon) NewGenericPad(id string, index float64, browserGamepad interface{}) *GenericPad {
 	p := ba.ctx.Get("GenericPad").New(id, index, browserGamepad)
-	return GenericPadFromJSObject(p)
+	return GenericPadFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

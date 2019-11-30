@@ -8,7 +8,10 @@ import (
 
 // WaterMaterial represents a babylon.js WaterMaterial.
 //
-type WaterMaterial struct{ p js.Value }
+type WaterMaterial struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (w *WaterMaterial) JSObject() js.Value { return w.p }
@@ -16,12 +19,12 @@ func (w *WaterMaterial) JSObject() js.Value { return w.p }
 // WaterMaterial returns a WaterMaterial JavaScript class.
 func (ba *Babylon) WaterMaterial() *WaterMaterial {
 	p := ba.ctx.Get("WaterMaterial")
-	return WaterMaterialFromJSObject(p)
+	return WaterMaterialFromJSObject(p, ba.ctx)
 }
 
 // WaterMaterialFromJSObject returns a wrapped WaterMaterial JavaScript class.
-func WaterMaterialFromJSObject(p js.Value) *WaterMaterial {
-	return &WaterMaterial{p: p}
+func WaterMaterialFromJSObject(p js.Value, ctx js.Value) *WaterMaterial {
+	return &WaterMaterial{p: p, ctx: ctx}
 }
 
 // NewWaterMaterialOpts contains optional parameters for NewWaterMaterial.
@@ -38,7 +41,7 @@ func (ba *Babylon) NewWaterMaterial(name string, scene *Scene, opts *NewWaterMat
 	}
 
 	p := ba.ctx.Get("WaterMaterial").New(name, scene.JSObject(), opts.RenderTargetSize.JSObject())
-	return WaterMaterialFromJSObject(p)
+	return WaterMaterialFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

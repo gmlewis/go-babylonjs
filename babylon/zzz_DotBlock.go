@@ -8,7 +8,10 @@ import (
 
 // DotBlock represents a babylon.js DotBlock.
 // Block used to apply a dot product between 2 vectors
-type DotBlock struct{ *NodeMaterialBlock }
+type DotBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (d *DotBlock) JSObject() js.Value { return d.p }
@@ -16,12 +19,12 @@ func (d *DotBlock) JSObject() js.Value { return d.p }
 // DotBlock returns a DotBlock JavaScript class.
 func (ba *Babylon) DotBlock() *DotBlock {
 	p := ba.ctx.Get("DotBlock")
-	return DotBlockFromJSObject(p)
+	return DotBlockFromJSObject(p, ba.ctx)
 }
 
 // DotBlockFromJSObject returns a wrapped DotBlock JavaScript class.
-func DotBlockFromJSObject(p js.Value) *DotBlock {
-	return &DotBlock{NodeMaterialBlockFromJSObject(p)}
+func DotBlockFromJSObject(p js.Value, ctx js.Value) *DotBlock {
+	return &DotBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewDotBlock returns a new DotBlock object.
@@ -29,7 +32,7 @@ func DotBlockFromJSObject(p js.Value) *DotBlock {
 // https://doc.babylonjs.com/api/classes/babylon.dotblock
 func (ba *Babylon) NewDotBlock(name string) *DotBlock {
 	p := ba.ctx.Get("DotBlock").New(name)
-	return DotBlockFromJSObject(p)
+	return DotBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

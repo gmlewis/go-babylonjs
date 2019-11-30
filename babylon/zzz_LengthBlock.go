@@ -8,7 +8,10 @@ import (
 
 // LengthBlock represents a babylon.js LengthBlock.
 // Block used to get the length of a vector
-type LengthBlock struct{ *NodeMaterialBlock }
+type LengthBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (l *LengthBlock) JSObject() js.Value { return l.p }
@@ -16,12 +19,12 @@ func (l *LengthBlock) JSObject() js.Value { return l.p }
 // LengthBlock returns a LengthBlock JavaScript class.
 func (ba *Babylon) LengthBlock() *LengthBlock {
 	p := ba.ctx.Get("LengthBlock")
-	return LengthBlockFromJSObject(p)
+	return LengthBlockFromJSObject(p, ba.ctx)
 }
 
 // LengthBlockFromJSObject returns a wrapped LengthBlock JavaScript class.
-func LengthBlockFromJSObject(p js.Value) *LengthBlock {
-	return &LengthBlock{NodeMaterialBlockFromJSObject(p)}
+func LengthBlockFromJSObject(p js.Value, ctx js.Value) *LengthBlock {
+	return &LengthBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewLengthBlock returns a new LengthBlock object.
@@ -29,7 +32,7 @@ func LengthBlockFromJSObject(p js.Value) *LengthBlock {
 // https://doc.babylonjs.com/api/classes/babylon.lengthblock
 func (ba *Babylon) NewLengthBlock(name string) *LengthBlock {
 	p := ba.ctx.Get("LengthBlock").New(name)
-	return LengthBlockFromJSObject(p)
+	return LengthBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

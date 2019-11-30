@@ -10,7 +10,10 @@ import (
 // This represents a texture in babylon. It can be easily loaded from a network, base64 or html input.
 //
 // See: http://doc.babylonjs.com/babylon101/materials#texture
-type Texture struct{ *BaseTexture }
+type Texture struct {
+	*BaseTexture
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (t *Texture) JSObject() js.Value { return t.p }
@@ -18,12 +21,12 @@ func (t *Texture) JSObject() js.Value { return t.p }
 // Texture returns a Texture JavaScript class.
 func (ba *Babylon) Texture() *Texture {
 	p := ba.ctx.Get("Texture")
-	return TextureFromJSObject(p)
+	return TextureFromJSObject(p, ba.ctx)
 }
 
 // TextureFromJSObject returns a wrapped Texture JavaScript class.
-func TextureFromJSObject(p js.Value) *Texture {
-	return &Texture{BaseTextureFromJSObject(p)}
+func TextureFromJSObject(p js.Value, ctx js.Value) *Texture {
+	return &Texture{BaseTexture: BaseTextureFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewTextureOpts contains optional parameters for NewTexture.
@@ -56,7 +59,7 @@ func (ba *Babylon) NewTexture(url string, sceneOrEngine *Scene, opts *NewTexture
 	}
 
 	p := ba.ctx.Get("Texture").New(url, sceneOrEngine.JSObject(), opts.NoMipmap.JSObject(), opts.InvertY.JSObject(), opts.SamplingMode.JSObject(), opts.OnLoad, opts.OnError, opts.Buffer.JSObject(), opts.DeleteBuffer.JSObject(), opts.Format.JSObject(), opts.MimeType.JSObject())
-	return TextureFromJSObject(p)
+	return TextureFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -11,7 +11,10 @@ import (
 // A Vector3 is the main object used in 3D geometry
 // It can represent etiher the coordinates of a point the space, either a direction
 // Reminder: js uses a left handed forward facing system
-type Vector3 struct{ p js.Value }
+type Vector3 struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (v *Vector3) JSObject() js.Value { return v.p }
@@ -19,12 +22,12 @@ func (v *Vector3) JSObject() js.Value { return v.p }
 // Vector3 returns a Vector3 JavaScript class.
 func (ba *Babylon) Vector3() *Vector3 {
 	p := ba.ctx.Get("Vector3")
-	return Vector3FromJSObject(p)
+	return Vector3FromJSObject(p, ba.ctx)
 }
 
 // Vector3FromJSObject returns a wrapped Vector3 JavaScript class.
-func Vector3FromJSObject(p js.Value) *Vector3 {
-	return &Vector3{p: p}
+func Vector3FromJSObject(p js.Value, ctx js.Value) *Vector3 {
+	return &Vector3{p: p, ctx: ctx}
 }
 
 // NewVector3 returns a new Vector3 object.
@@ -32,7 +35,7 @@ func Vector3FromJSObject(p js.Value) *Vector3 {
 // https://doc.babylonjs.com/api/classes/babylon.vector3
 func (ba *Babylon) NewVector3(x float64, y float64, z float64) *Vector3 {
 	p := ba.ctx.Get("Vector3").New(x, y, z)
-	return Vector3FromJSObject(p)
+	return Vector3FromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -8,7 +8,10 @@ import (
 
 // StackPanel represents a babylon.js StackPanel.
 // Class used to create a 2D stack panel container
-type StackPanel struct{ *Container }
+type StackPanel struct {
+	*Container
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *StackPanel) JSObject() js.Value { return s.p }
@@ -16,12 +19,12 @@ func (s *StackPanel) JSObject() js.Value { return s.p }
 // StackPanel returns a StackPanel JavaScript class.
 func (ba *Babylon) StackPanel() *StackPanel {
 	p := ba.ctx.Get("StackPanel")
-	return StackPanelFromJSObject(p)
+	return StackPanelFromJSObject(p, ba.ctx)
 }
 
 // StackPanelFromJSObject returns a wrapped StackPanel JavaScript class.
-func StackPanelFromJSObject(p js.Value) *StackPanel {
-	return &StackPanel{ContainerFromJSObject(p)}
+func StackPanelFromJSObject(p js.Value, ctx js.Value) *StackPanel {
+	return &StackPanel{Container: ContainerFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewStackPanelOpts contains optional parameters for NewStackPanel.
@@ -38,7 +41,7 @@ func (ba *Babylon) NewStackPanel(opts *NewStackPanelOpts) *StackPanel {
 	}
 
 	p := ba.ctx.Get("StackPanel").New(opts.Name.JSObject())
-	return StackPanelFromJSObject(p)
+	return StackPanelFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -8,7 +8,10 @@ import (
 
 // RandomNumberBlock represents a babylon.js RandomNumberBlock.
 // Block used to get a random number
-type RandomNumberBlock struct{ *NodeMaterialBlock }
+type RandomNumberBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (r *RandomNumberBlock) JSObject() js.Value { return r.p }
@@ -16,12 +19,12 @@ func (r *RandomNumberBlock) JSObject() js.Value { return r.p }
 // RandomNumberBlock returns a RandomNumberBlock JavaScript class.
 func (ba *Babylon) RandomNumberBlock() *RandomNumberBlock {
 	p := ba.ctx.Get("RandomNumberBlock")
-	return RandomNumberBlockFromJSObject(p)
+	return RandomNumberBlockFromJSObject(p, ba.ctx)
 }
 
 // RandomNumberBlockFromJSObject returns a wrapped RandomNumberBlock JavaScript class.
-func RandomNumberBlockFromJSObject(p js.Value) *RandomNumberBlock {
-	return &RandomNumberBlock{NodeMaterialBlockFromJSObject(p)}
+func RandomNumberBlockFromJSObject(p js.Value, ctx js.Value) *RandomNumberBlock {
+	return &RandomNumberBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewRandomNumberBlock returns a new RandomNumberBlock object.
@@ -29,7 +32,7 @@ func RandomNumberBlockFromJSObject(p js.Value) *RandomNumberBlock {
 // https://doc.babylonjs.com/api/classes/babylon.randomnumberblock
 func (ba *Babylon) NewRandomNumberBlock(name string) *RandomNumberBlock {
 	p := ba.ctx.Get("RandomNumberBlock").New(name)
-	return RandomNumberBlockFromJSObject(p)
+	return RandomNumberBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

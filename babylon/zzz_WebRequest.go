@@ -8,7 +8,10 @@ import (
 
 // WebRequest represents a babylon.js WebRequest.
 // Extended version of XMLHttpRequest with support for customizations (headers, ...)
-type WebRequest struct{ p js.Value }
+type WebRequest struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (w *WebRequest) JSObject() js.Value { return w.p }
@@ -16,12 +19,12 @@ func (w *WebRequest) JSObject() js.Value { return w.p }
 // WebRequest returns a WebRequest JavaScript class.
 func (ba *Babylon) WebRequest() *WebRequest {
 	p := ba.ctx.Get("WebRequest")
-	return WebRequestFromJSObject(p)
+	return WebRequestFromJSObject(p, ba.ctx)
 }
 
 // WebRequestFromJSObject returns a wrapped WebRequest JavaScript class.
-func WebRequestFromJSObject(p js.Value) *WebRequest {
-	return &WebRequest{p: p}
+func WebRequestFromJSObject(p js.Value, ctx js.Value) *WebRequest {
+	return &WebRequest{p: p, ctx: ctx}
 }
 
 // TODO: methods

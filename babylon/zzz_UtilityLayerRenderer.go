@@ -8,7 +8,10 @@ import (
 
 // UtilityLayerRenderer represents a babylon.js UtilityLayerRenderer.
 // Renders a layer on top of an existing scene
-type UtilityLayerRenderer struct{ p js.Value }
+type UtilityLayerRenderer struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (u *UtilityLayerRenderer) JSObject() js.Value { return u.p }
@@ -16,12 +19,12 @@ func (u *UtilityLayerRenderer) JSObject() js.Value { return u.p }
 // UtilityLayerRenderer returns a UtilityLayerRenderer JavaScript class.
 func (ba *Babylon) UtilityLayerRenderer() *UtilityLayerRenderer {
 	p := ba.ctx.Get("UtilityLayerRenderer")
-	return UtilityLayerRendererFromJSObject(p)
+	return UtilityLayerRendererFromJSObject(p, ba.ctx)
 }
 
 // UtilityLayerRendererFromJSObject returns a wrapped UtilityLayerRenderer JavaScript class.
-func UtilityLayerRendererFromJSObject(p js.Value) *UtilityLayerRenderer {
-	return &UtilityLayerRenderer{p: p}
+func UtilityLayerRendererFromJSObject(p js.Value, ctx js.Value) *UtilityLayerRenderer {
+	return &UtilityLayerRenderer{p: p, ctx: ctx}
 }
 
 // NewUtilityLayerRendererOpts contains optional parameters for NewUtilityLayerRenderer.
@@ -38,7 +41,7 @@ func (ba *Babylon) NewUtilityLayerRenderer(originalScene *Scene, opts *NewUtilit
 	}
 
 	p := ba.ctx.Get("UtilityLayerRenderer").New(originalScene.JSObject(), opts.HandleEvents.JSObject())
-	return UtilityLayerRendererFromJSObject(p)
+	return UtilityLayerRendererFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

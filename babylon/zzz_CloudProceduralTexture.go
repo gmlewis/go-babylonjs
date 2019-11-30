@@ -8,7 +8,10 @@ import (
 
 // CloudProceduralTexture represents a babylon.js CloudProceduralTexture.
 //
-type CloudProceduralTexture struct{ *ProceduralTexture }
+type CloudProceduralTexture struct {
+	*ProceduralTexture
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (c *CloudProceduralTexture) JSObject() js.Value { return c.p }
@@ -16,12 +19,12 @@ func (c *CloudProceduralTexture) JSObject() js.Value { return c.p }
 // CloudProceduralTexture returns a CloudProceduralTexture JavaScript class.
 func (ba *Babylon) CloudProceduralTexture() *CloudProceduralTexture {
 	p := ba.ctx.Get("CloudProceduralTexture")
-	return CloudProceduralTextureFromJSObject(p)
+	return CloudProceduralTextureFromJSObject(p, ba.ctx)
 }
 
 // CloudProceduralTextureFromJSObject returns a wrapped CloudProceduralTexture JavaScript class.
-func CloudProceduralTextureFromJSObject(p js.Value) *CloudProceduralTexture {
-	return &CloudProceduralTexture{ProceduralTextureFromJSObject(p)}
+func CloudProceduralTextureFromJSObject(p js.Value, ctx js.Value) *CloudProceduralTexture {
+	return &CloudProceduralTexture{ProceduralTexture: ProceduralTextureFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewCloudProceduralTextureOpts contains optional parameters for NewCloudProceduralTexture.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewCloudProceduralTexture(name string, size float64, scene *S
 	}
 
 	p := ba.ctx.Get("CloudProceduralTexture").New(name, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps.JSObject())
-	return CloudProceduralTextureFromJSObject(p)
+	return CloudProceduralTextureFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

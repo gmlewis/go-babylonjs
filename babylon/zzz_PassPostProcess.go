@@ -8,7 +8,10 @@ import (
 
 // PassPostProcess represents a babylon.js PassPostProcess.
 // PassPostProcess which produces an output the same as it&amp;#39;s input
-type PassPostProcess struct{ *PostProcess }
+type PassPostProcess struct {
+	*PostProcess
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (p *PassPostProcess) JSObject() js.Value { return p.p }
@@ -16,12 +19,12 @@ func (p *PassPostProcess) JSObject() js.Value { return p.p }
 // PassPostProcess returns a PassPostProcess JavaScript class.
 func (ba *Babylon) PassPostProcess() *PassPostProcess {
 	p := ba.ctx.Get("PassPostProcess")
-	return PassPostProcessFromJSObject(p)
+	return PassPostProcessFromJSObject(p, ba.ctx)
 }
 
 // PassPostProcessFromJSObject returns a wrapped PassPostProcess JavaScript class.
-func PassPostProcessFromJSObject(p js.Value) *PassPostProcess {
-	return &PassPostProcess{PostProcessFromJSObject(p)}
+func PassPostProcessFromJSObject(p js.Value, ctx js.Value) *PassPostProcess {
+	return &PassPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewPassPostProcessOpts contains optional parameters for NewPassPostProcess.
@@ -48,7 +51,7 @@ func (ba *Babylon) NewPassPostProcess(name string, options float64, opts *NewPas
 	}
 
 	p := ba.ctx.Get("PassPostProcess").New(name, options, opts.Camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType.JSObject(), opts.BlockCompilation.JSObject())
-	return PassPostProcessFromJSObject(p)
+	return PassPostProcessFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

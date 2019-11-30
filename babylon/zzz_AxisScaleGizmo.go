@@ -8,7 +8,10 @@ import (
 
 // AxisScaleGizmo represents a babylon.js AxisScaleGizmo.
 // Single axis scale gizmo
-type AxisScaleGizmo struct{ *Gizmo }
+type AxisScaleGizmo struct {
+	*Gizmo
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (a *AxisScaleGizmo) JSObject() js.Value { return a.p }
@@ -16,12 +19,12 @@ func (a *AxisScaleGizmo) JSObject() js.Value { return a.p }
 // AxisScaleGizmo returns a AxisScaleGizmo JavaScript class.
 func (ba *Babylon) AxisScaleGizmo() *AxisScaleGizmo {
 	p := ba.ctx.Get("AxisScaleGizmo")
-	return AxisScaleGizmoFromJSObject(p)
+	return AxisScaleGizmoFromJSObject(p, ba.ctx)
 }
 
 // AxisScaleGizmoFromJSObject returns a wrapped AxisScaleGizmo JavaScript class.
-func AxisScaleGizmoFromJSObject(p js.Value) *AxisScaleGizmo {
-	return &AxisScaleGizmo{GizmoFromJSObject(p)}
+func AxisScaleGizmoFromJSObject(p js.Value, ctx js.Value) *AxisScaleGizmo {
+	return &AxisScaleGizmo{Gizmo: GizmoFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewAxisScaleGizmoOpts contains optional parameters for NewAxisScaleGizmo.
@@ -42,7 +45,7 @@ func (ba *Babylon) NewAxisScaleGizmo(dragAxis *Vector3, opts *NewAxisScaleGizmoO
 	}
 
 	p := ba.ctx.Get("AxisScaleGizmo").New(dragAxis.JSObject(), opts.Color.JSObject(), opts.GizmoLayer.JSObject(), opts.Parent.JSObject())
-	return AxisScaleGizmoFromJSObject(p)
+	return AxisScaleGizmoFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

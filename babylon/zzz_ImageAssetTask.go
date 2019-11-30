@@ -8,7 +8,10 @@ import (
 
 // ImageAssetTask represents a babylon.js ImageAssetTask.
 // Define a task used by AssetsManager to load images
-type ImageAssetTask struct{ *AbstractAssetTask }
+type ImageAssetTask struct {
+	*AbstractAssetTask
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (i *ImageAssetTask) JSObject() js.Value { return i.p }
@@ -16,12 +19,12 @@ func (i *ImageAssetTask) JSObject() js.Value { return i.p }
 // ImageAssetTask returns a ImageAssetTask JavaScript class.
 func (ba *Babylon) ImageAssetTask() *ImageAssetTask {
 	p := ba.ctx.Get("ImageAssetTask")
-	return ImageAssetTaskFromJSObject(p)
+	return ImageAssetTaskFromJSObject(p, ba.ctx)
 }
 
 // ImageAssetTaskFromJSObject returns a wrapped ImageAssetTask JavaScript class.
-func ImageAssetTaskFromJSObject(p js.Value) *ImageAssetTask {
-	return &ImageAssetTask{AbstractAssetTaskFromJSObject(p)}
+func ImageAssetTaskFromJSObject(p js.Value, ctx js.Value) *ImageAssetTask {
+	return &ImageAssetTask{AbstractAssetTask: AbstractAssetTaskFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewImageAssetTask returns a new ImageAssetTask object.
@@ -29,7 +32,7 @@ func ImageAssetTaskFromJSObject(p js.Value) *ImageAssetTask {
 // https://doc.babylonjs.com/api/classes/babylon.imageassettask
 func (ba *Babylon) NewImageAssetTask(name string, url string) *ImageAssetTask {
 	p := ba.ctx.Get("ImageAssetTask").New(name, url)
-	return ImageAssetTaskFromJSObject(p)
+	return ImageAssetTaskFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

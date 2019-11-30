@@ -9,7 +9,10 @@ import (
 // NullEngine represents a babylon.js NullEngine.
 // The null engine class provides support for headless version of babylon.js.
 // This can be used in server side scenario or for testing purposes
-type NullEngine struct{ *Engine }
+type NullEngine struct {
+	*Engine
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (n *NullEngine) JSObject() js.Value { return n.p }
@@ -17,12 +20,12 @@ func (n *NullEngine) JSObject() js.Value { return n.p }
 // NullEngine returns a NullEngine JavaScript class.
 func (ba *Babylon) NullEngine() *NullEngine {
 	p := ba.ctx.Get("NullEngine")
-	return NullEngineFromJSObject(p)
+	return NullEngineFromJSObject(p, ba.ctx)
 }
 
 // NullEngineFromJSObject returns a wrapped NullEngine JavaScript class.
-func NullEngineFromJSObject(p js.Value) *NullEngine {
-	return &NullEngine{EngineFromJSObject(p)}
+func NullEngineFromJSObject(p js.Value, ctx js.Value) *NullEngine {
+	return &NullEngine{Engine: EngineFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewNullEngineOpts contains optional parameters for NewNullEngine.
@@ -39,7 +42,7 @@ func (ba *Babylon) NewNullEngine(opts *NewNullEngineOpts) *NullEngine {
 	}
 
 	p := ba.ctx.Get("NullEngine").New(opts.Options.JSObject())
-	return NullEngineFromJSObject(p)
+	return NullEngineFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

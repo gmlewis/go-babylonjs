@@ -8,7 +8,10 @@ import (
 
 // MeshButton3D represents a babylon.js MeshButton3D.
 // Class used to create an interactable object. It&amp;#39;s a 3D button using a mesh coming from the current scene
-type MeshButton3D struct{ *Button3D }
+type MeshButton3D struct {
+	*Button3D
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (m *MeshButton3D) JSObject() js.Value { return m.p }
@@ -16,12 +19,12 @@ func (m *MeshButton3D) JSObject() js.Value { return m.p }
 // MeshButton3D returns a MeshButton3D JavaScript class.
 func (ba *Babylon) MeshButton3D() *MeshButton3D {
 	p := ba.ctx.Get("MeshButton3D")
-	return MeshButton3DFromJSObject(p)
+	return MeshButton3DFromJSObject(p, ba.ctx)
 }
 
 // MeshButton3DFromJSObject returns a wrapped MeshButton3D JavaScript class.
-func MeshButton3DFromJSObject(p js.Value) *MeshButton3D {
-	return &MeshButton3D{Button3DFromJSObject(p)}
+func MeshButton3DFromJSObject(p js.Value, ctx js.Value) *MeshButton3D {
+	return &MeshButton3D{Button3D: Button3DFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewMeshButton3DOpts contains optional parameters for NewMeshButton3D.
@@ -38,7 +41,7 @@ func (ba *Babylon) NewMeshButton3D(mesh *Mesh, opts *NewMeshButton3DOpts) *MeshB
 	}
 
 	p := ba.ctx.Get("MeshButton3D").New(mesh.JSObject(), opts.Name.JSObject())
-	return MeshButton3DFromJSObject(p)
+	return MeshButton3DFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

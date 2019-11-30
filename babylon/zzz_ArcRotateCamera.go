@@ -13,7 +13,10 @@ import (
 // Think of this camera as one orbiting its target position, or more imaginatively as a spy satellite orbiting the earth. Its position relative to the target (earth) can be set by three parameters, alpha (radians) the longitudinal rotation, beta (radians) the latitudinal rotation and radius the distance from the target position.
 //
 // See: http://doc.babylonjs.com/babylon101/cameras#arc-rotate-camera
-type ArcRotateCamera struct{ *TargetCamera }
+type ArcRotateCamera struct {
+	*TargetCamera
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (a *ArcRotateCamera) JSObject() js.Value { return a.p }
@@ -21,12 +24,12 @@ func (a *ArcRotateCamera) JSObject() js.Value { return a.p }
 // ArcRotateCamera returns a ArcRotateCamera JavaScript class.
 func (ba *Babylon) ArcRotateCamera() *ArcRotateCamera {
 	p := ba.ctx.Get("ArcRotateCamera")
-	return ArcRotateCameraFromJSObject(p)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
 }
 
 // ArcRotateCameraFromJSObject returns a wrapped ArcRotateCamera JavaScript class.
-func ArcRotateCameraFromJSObject(p js.Value) *ArcRotateCamera {
-	return &ArcRotateCamera{TargetCameraFromJSObject(p)}
+func ArcRotateCameraFromJSObject(p js.Value, ctx js.Value) *ArcRotateCamera {
+	return &ArcRotateCamera{TargetCamera: TargetCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewArcRotateCameraOpts contains optional parameters for NewArcRotateCamera.
@@ -43,7 +46,7 @@ func (ba *Babylon) NewArcRotateCamera(name string, alpha float64, beta float64, 
 	}
 
 	p := ba.ctx.Get("ArcRotateCamera").New(name, alpha, beta, radius, target.JSObject(), scene.JSObject(), opts.SetActiveOnSceneIfNoneActive.JSObject())
-	return ArcRotateCameraFromJSObject(p)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

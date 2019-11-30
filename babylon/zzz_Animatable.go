@@ -8,7 +8,10 @@ import (
 
 // Animatable represents a babylon.js Animatable.
 // Class used to store an actual running animation
-type Animatable struct{ p js.Value }
+type Animatable struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (a *Animatable) JSObject() js.Value { return a.p }
@@ -16,12 +19,12 @@ func (a *Animatable) JSObject() js.Value { return a.p }
 // Animatable returns a Animatable JavaScript class.
 func (ba *Babylon) Animatable() *Animatable {
 	p := ba.ctx.Get("Animatable")
-	return AnimatableFromJSObject(p)
+	return AnimatableFromJSObject(p, ba.ctx)
 }
 
 // AnimatableFromJSObject returns a wrapped Animatable JavaScript class.
-func AnimatableFromJSObject(p js.Value) *Animatable {
-	return &Animatable{p: p}
+func AnimatableFromJSObject(p js.Value, ctx js.Value) *Animatable {
+	return &Animatable{p: p, ctx: ctx}
 }
 
 // NewAnimatableOpts contains optional parameters for NewAnimatable.
@@ -50,7 +53,7 @@ func (ba *Babylon) NewAnimatable(scene *Scene, target interface{}, opts *NewAnim
 	}
 
 	p := ba.ctx.Get("Animatable").New(scene.JSObject(), target, opts.FromFrame.JSObject(), opts.ToFrame.JSObject(), opts.LoopAnimation.JSObject(), opts.SpeedRatio.JSObject(), opts.OnAnimationEnd, opts.Animations.JSObject(), opts.OnAnimationLoop)
-	return AnimatableFromJSObject(p)
+	return AnimatableFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -10,7 +10,10 @@ import (
 // Camera used to simulate anaglyphic rendering (based on ArcRotateCamera)
 //
 // See: http://doc.babylonjs.com/features/cameras#anaglyph-cameras
-type AnaglyphArcRotateCamera struct{ *ArcRotateCamera }
+type AnaglyphArcRotateCamera struct {
+	*ArcRotateCamera
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (a *AnaglyphArcRotateCamera) JSObject() js.Value { return a.p }
@@ -18,12 +21,12 @@ func (a *AnaglyphArcRotateCamera) JSObject() js.Value { return a.p }
 // AnaglyphArcRotateCamera returns a AnaglyphArcRotateCamera JavaScript class.
 func (ba *Babylon) AnaglyphArcRotateCamera() *AnaglyphArcRotateCamera {
 	p := ba.ctx.Get("AnaglyphArcRotateCamera")
-	return AnaglyphArcRotateCameraFromJSObject(p)
+	return AnaglyphArcRotateCameraFromJSObject(p, ba.ctx)
 }
 
 // AnaglyphArcRotateCameraFromJSObject returns a wrapped AnaglyphArcRotateCamera JavaScript class.
-func AnaglyphArcRotateCameraFromJSObject(p js.Value) *AnaglyphArcRotateCamera {
-	return &AnaglyphArcRotateCamera{ArcRotateCameraFromJSObject(p)}
+func AnaglyphArcRotateCameraFromJSObject(p js.Value, ctx js.Value) *AnaglyphArcRotateCamera {
+	return &AnaglyphArcRotateCamera{ArcRotateCamera: ArcRotateCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewAnaglyphArcRotateCamera returns a new AnaglyphArcRotateCamera object.
@@ -31,7 +34,7 @@ func AnaglyphArcRotateCameraFromJSObject(p js.Value) *AnaglyphArcRotateCamera {
 // https://doc.babylonjs.com/api/classes/babylon.anaglypharcrotatecamera
 func (ba *Babylon) NewAnaglyphArcRotateCamera(name string, alpha float64, beta float64, radius float64, target *Vector3, interaxialDistance float64, scene *Scene) *AnaglyphArcRotateCamera {
 	p := ba.ctx.Get("AnaglyphArcRotateCamera").New(name, alpha, beta, radius, target.JSObject(), interaxialDistance, scene.JSObject())
-	return AnaglyphArcRotateCameraFromJSObject(p)
+	return AnaglyphArcRotateCameraFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -8,7 +8,10 @@ import (
 
 // EquiRectangularCubeTexture represents a babylon.js EquiRectangularCubeTexture.
 // This represents a texture coming from an equirectangular image supported by the web browser canvas.
-type EquiRectangularCubeTexture struct{ *BaseTexture }
+type EquiRectangularCubeTexture struct {
+	*BaseTexture
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (e *EquiRectangularCubeTexture) JSObject() js.Value { return e.p }
@@ -16,12 +19,12 @@ func (e *EquiRectangularCubeTexture) JSObject() js.Value { return e.p }
 // EquiRectangularCubeTexture returns a EquiRectangularCubeTexture JavaScript class.
 func (ba *Babylon) EquiRectangularCubeTexture() *EquiRectangularCubeTexture {
 	p := ba.ctx.Get("EquiRectangularCubeTexture")
-	return EquiRectangularCubeTextureFromJSObject(p)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
 }
 
 // EquiRectangularCubeTextureFromJSObject returns a wrapped EquiRectangularCubeTexture JavaScript class.
-func EquiRectangularCubeTextureFromJSObject(p js.Value) *EquiRectangularCubeTexture {
-	return &EquiRectangularCubeTexture{BaseTextureFromJSObject(p)}
+func EquiRectangularCubeTextureFromJSObject(p js.Value, ctx js.Value) *EquiRectangularCubeTexture {
+	return &EquiRectangularCubeTexture{BaseTexture: BaseTextureFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewEquiRectangularCubeTextureOpts contains optional parameters for NewEquiRectangularCubeTexture.
@@ -44,7 +47,7 @@ func (ba *Babylon) NewEquiRectangularCubeTexture(url string, scene *Scene, size 
 	}
 
 	p := ba.ctx.Get("EquiRectangularCubeTexture").New(url, scene.JSObject(), size, opts.NoMipmap.JSObject(), opts.GammaSpace.JSObject(), opts.OnLoad, opts.OnError)
-	return EquiRectangularCubeTextureFromJSObject(p)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

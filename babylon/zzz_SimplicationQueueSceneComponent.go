@@ -9,7 +9,10 @@ import (
 // SimplicationQueueSceneComponent represents a babylon.js SimplicationQueueSceneComponent.
 // Defines the simplification queue scene component responsible to help scheduling the various simplification task
 // created in a scene
-type SimplicationQueueSceneComponent struct{ p js.Value }
+type SimplicationQueueSceneComponent struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *SimplicationQueueSceneComponent) JSObject() js.Value { return s.p }
@@ -17,12 +20,12 @@ func (s *SimplicationQueueSceneComponent) JSObject() js.Value { return s.p }
 // SimplicationQueueSceneComponent returns a SimplicationQueueSceneComponent JavaScript class.
 func (ba *Babylon) SimplicationQueueSceneComponent() *SimplicationQueueSceneComponent {
 	p := ba.ctx.Get("SimplicationQueueSceneComponent")
-	return SimplicationQueueSceneComponentFromJSObject(p)
+	return SimplicationQueueSceneComponentFromJSObject(p, ba.ctx)
 }
 
 // SimplicationQueueSceneComponentFromJSObject returns a wrapped SimplicationQueueSceneComponent JavaScript class.
-func SimplicationQueueSceneComponentFromJSObject(p js.Value) *SimplicationQueueSceneComponent {
-	return &SimplicationQueueSceneComponent{p: p}
+func SimplicationQueueSceneComponentFromJSObject(p js.Value, ctx js.Value) *SimplicationQueueSceneComponent {
+	return &SimplicationQueueSceneComponent{p: p, ctx: ctx}
 }
 
 // NewSimplicationQueueSceneComponent returns a new SimplicationQueueSceneComponent object.
@@ -30,7 +33,7 @@ func SimplicationQueueSceneComponentFromJSObject(p js.Value) *SimplicationQueueS
 // https://doc.babylonjs.com/api/classes/babylon.simplicationqueuescenecomponent
 func (ba *Babylon) NewSimplicationQueueSceneComponent(scene *Scene) *SimplicationQueueSceneComponent {
 	p := ba.ctx.Get("SimplicationQueueSceneComponent").New(scene.JSObject())
-	return SimplicationQueueSceneComponentFromJSObject(p)
+	return SimplicationQueueSceneComponentFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

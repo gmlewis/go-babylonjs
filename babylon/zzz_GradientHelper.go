@@ -8,7 +8,10 @@ import (
 
 // GradientHelper represents a babylon.js GradientHelper.
 // Helper used to simplify some generic gradient tasks
-type GradientHelper struct{ p js.Value }
+type GradientHelper struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (g *GradientHelper) JSObject() js.Value { return g.p }
@@ -16,12 +19,12 @@ func (g *GradientHelper) JSObject() js.Value { return g.p }
 // GradientHelper returns a GradientHelper JavaScript class.
 func (ba *Babylon) GradientHelper() *GradientHelper {
 	p := ba.ctx.Get("GradientHelper")
-	return GradientHelperFromJSObject(p)
+	return GradientHelperFromJSObject(p, ba.ctx)
 }
 
 // GradientHelperFromJSObject returns a wrapped GradientHelper JavaScript class.
-func GradientHelperFromJSObject(p js.Value) *GradientHelper {
-	return &GradientHelper{p: p}
+func GradientHelperFromJSObject(p js.Value, ctx js.Value) *GradientHelper {
+	return &GradientHelper{p: p, ctx: ctx}
 }
 
 // TODO: methods

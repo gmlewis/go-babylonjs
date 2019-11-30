@@ -8,7 +8,10 @@ import (
 
 // Matrix represents a babylon.js Matrix.
 // Class used to store matrix data (4x4)
-type Matrix struct{ p js.Value }
+type Matrix struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (m *Matrix) JSObject() js.Value { return m.p }
@@ -16,12 +19,12 @@ func (m *Matrix) JSObject() js.Value { return m.p }
 // Matrix returns a Matrix JavaScript class.
 func (ba *Babylon) Matrix() *Matrix {
 	p := ba.ctx.Get("Matrix")
-	return MatrixFromJSObject(p)
+	return MatrixFromJSObject(p, ba.ctx)
 }
 
 // MatrixFromJSObject returns a wrapped Matrix JavaScript class.
-func MatrixFromJSObject(p js.Value) *Matrix {
-	return &Matrix{p: p}
+func MatrixFromJSObject(p js.Value, ctx js.Value) *Matrix {
+	return &Matrix{p: p, ctx: ctx}
 }
 
 // NewMatrix returns a new Matrix object.
@@ -29,7 +32,7 @@ func MatrixFromJSObject(p js.Value) *Matrix {
 // https://doc.babylonjs.com/api/classes/babylon.matrix
 func (ba *Babylon) NewMatrix() *Matrix {
 	p := ba.ctx.Get("Matrix").New()
-	return MatrixFromJSObject(p)
+	return MatrixFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

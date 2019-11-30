@@ -10,7 +10,10 @@ import (
 // Manages an XRSession to work with Babylon&amp;#39;s engine
 //
 // See: https://doc.babylonjs.com/how_to/webxr
-type WebXRSessionManager struct{ p js.Value }
+type WebXRSessionManager struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (w *WebXRSessionManager) JSObject() js.Value { return w.p }
@@ -18,12 +21,12 @@ func (w *WebXRSessionManager) JSObject() js.Value { return w.p }
 // WebXRSessionManager returns a WebXRSessionManager JavaScript class.
 func (ba *Babylon) WebXRSessionManager() *WebXRSessionManager {
 	p := ba.ctx.Get("WebXRSessionManager")
-	return WebXRSessionManagerFromJSObject(p)
+	return WebXRSessionManagerFromJSObject(p, ba.ctx)
 }
 
 // WebXRSessionManagerFromJSObject returns a wrapped WebXRSessionManager JavaScript class.
-func WebXRSessionManagerFromJSObject(p js.Value) *WebXRSessionManager {
-	return &WebXRSessionManager{p: p}
+func WebXRSessionManagerFromJSObject(p js.Value, ctx js.Value) *WebXRSessionManager {
+	return &WebXRSessionManager{p: p, ctx: ctx}
 }
 
 // NewWebXRSessionManager returns a new WebXRSessionManager object.
@@ -31,7 +34,7 @@ func WebXRSessionManagerFromJSObject(p js.Value) *WebXRSessionManager {
 // https://doc.babylonjs.com/api/classes/babylon.webxrsessionmanager
 func (ba *Babylon) NewWebXRSessionManager(scene *Scene) *WebXRSessionManager {
 	p := ba.ctx.Get("WebXRSessionManager").New(scene.JSObject())
-	return WebXRSessionManagerFromJSObject(p)
+	return WebXRSessionManagerFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

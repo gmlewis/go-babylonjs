@@ -8,7 +8,10 @@ import (
 
 // Gamepad represents a babylon.js Gamepad.
 // Represents a gamepad
-type Gamepad struct{ p js.Value }
+type Gamepad struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (g *Gamepad) JSObject() js.Value { return g.p }
@@ -16,12 +19,12 @@ func (g *Gamepad) JSObject() js.Value { return g.p }
 // Gamepad returns a Gamepad JavaScript class.
 func (ba *Babylon) Gamepad() *Gamepad {
 	p := ba.ctx.Get("Gamepad")
-	return GamepadFromJSObject(p)
+	return GamepadFromJSObject(p, ba.ctx)
 }
 
 // GamepadFromJSObject returns a wrapped Gamepad JavaScript class.
-func GamepadFromJSObject(p js.Value) *Gamepad {
-	return &Gamepad{p: p}
+func GamepadFromJSObject(p js.Value, ctx js.Value) *Gamepad {
+	return &Gamepad{p: p, ctx: ctx}
 }
 
 // NewGamepadOpts contains optional parameters for NewGamepad.
@@ -44,7 +47,7 @@ func (ba *Babylon) NewGamepad(id string, index float64, browserGamepad interface
 	}
 
 	p := ba.ctx.Get("Gamepad").New(id, index, browserGamepad, opts.LeftStickX.JSObject(), opts.LeftStickY.JSObject(), opts.RightStickX.JSObject(), opts.RightStickY.JSObject())
-	return GamepadFromJSObject(p)
+	return GamepadFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -8,7 +8,10 @@ import (
 
 // DisplayGrid represents a babylon.js DisplayGrid.
 // Class used to render a grid
-type DisplayGrid struct{ *Control }
+type DisplayGrid struct {
+	*Control
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (d *DisplayGrid) JSObject() js.Value { return d.p }
@@ -16,12 +19,12 @@ func (d *DisplayGrid) JSObject() js.Value { return d.p }
 // DisplayGrid returns a DisplayGrid JavaScript class.
 func (ba *Babylon) DisplayGrid() *DisplayGrid {
 	p := ba.ctx.Get("DisplayGrid")
-	return DisplayGridFromJSObject(p)
+	return DisplayGridFromJSObject(p, ba.ctx)
 }
 
 // DisplayGridFromJSObject returns a wrapped DisplayGrid JavaScript class.
-func DisplayGridFromJSObject(p js.Value) *DisplayGrid {
-	return &DisplayGrid{ControlFromJSObject(p)}
+func DisplayGridFromJSObject(p js.Value, ctx js.Value) *DisplayGrid {
+	return &DisplayGrid{Control: ControlFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewDisplayGridOpts contains optional parameters for NewDisplayGrid.
@@ -38,7 +41,7 @@ func (ba *Babylon) NewDisplayGrid(opts *NewDisplayGridOpts) *DisplayGrid {
 	}
 
 	p := ba.ctx.Get("DisplayGrid").New(opts.Name.JSObject())
-	return DisplayGridFromJSObject(p)
+	return DisplayGridFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

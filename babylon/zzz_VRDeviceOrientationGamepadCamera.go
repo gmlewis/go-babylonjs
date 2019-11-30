@@ -10,7 +10,10 @@ import (
 // Camera used to simulate VR rendering (based on VRDeviceOrientationFreeCamera)
 //
 // See: http://doc.babylonjs.com/babylon101/cameras#vr-device-orientation-cameras
-type VRDeviceOrientationGamepadCamera struct{ *VRDeviceOrientationFreeCamera }
+type VRDeviceOrientationGamepadCamera struct {
+	*VRDeviceOrientationFreeCamera
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (v *VRDeviceOrientationGamepadCamera) JSObject() js.Value { return v.p }
@@ -18,12 +21,12 @@ func (v *VRDeviceOrientationGamepadCamera) JSObject() js.Value { return v.p }
 // VRDeviceOrientationGamepadCamera returns a VRDeviceOrientationGamepadCamera JavaScript class.
 func (ba *Babylon) VRDeviceOrientationGamepadCamera() *VRDeviceOrientationGamepadCamera {
 	p := ba.ctx.Get("VRDeviceOrientationGamepadCamera")
-	return VRDeviceOrientationGamepadCameraFromJSObject(p)
+	return VRDeviceOrientationGamepadCameraFromJSObject(p, ba.ctx)
 }
 
 // VRDeviceOrientationGamepadCameraFromJSObject returns a wrapped VRDeviceOrientationGamepadCamera JavaScript class.
-func VRDeviceOrientationGamepadCameraFromJSObject(p js.Value) *VRDeviceOrientationGamepadCamera {
-	return &VRDeviceOrientationGamepadCamera{VRDeviceOrientationFreeCameraFromJSObject(p)}
+func VRDeviceOrientationGamepadCameraFromJSObject(p js.Value, ctx js.Value) *VRDeviceOrientationGamepadCamera {
+	return &VRDeviceOrientationGamepadCamera{VRDeviceOrientationFreeCamera: VRDeviceOrientationFreeCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewVRDeviceOrientationGamepadCameraOpts contains optional parameters for NewVRDeviceOrientationGamepadCamera.
@@ -42,7 +45,7 @@ func (ba *Babylon) NewVRDeviceOrientationGamepadCamera(name string, position *Ve
 	}
 
 	p := ba.ctx.Get("VRDeviceOrientationGamepadCamera").New(name, position.JSObject(), scene.JSObject(), opts.CompensateDistortion.JSObject(), opts.VrCameraMetrics.JSObject())
-	return VRDeviceOrientationGamepadCameraFromJSObject(p)
+	return VRDeviceOrientationGamepadCameraFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

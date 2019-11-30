@@ -10,7 +10,10 @@ import (
 // Block used to add support for instances
 //
 // See: https://doc.babylonjs.com/how_to/how_to_use_instances
-type InstancesBlock struct{ *NodeMaterialBlock }
+type InstancesBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (i *InstancesBlock) JSObject() js.Value { return i.p }
@@ -18,12 +21,12 @@ func (i *InstancesBlock) JSObject() js.Value { return i.p }
 // InstancesBlock returns a InstancesBlock JavaScript class.
 func (ba *Babylon) InstancesBlock() *InstancesBlock {
 	p := ba.ctx.Get("InstancesBlock")
-	return InstancesBlockFromJSObject(p)
+	return InstancesBlockFromJSObject(p, ba.ctx)
 }
 
 // InstancesBlockFromJSObject returns a wrapped InstancesBlock JavaScript class.
-func InstancesBlockFromJSObject(p js.Value) *InstancesBlock {
-	return &InstancesBlock{NodeMaterialBlockFromJSObject(p)}
+func InstancesBlockFromJSObject(p js.Value, ctx js.Value) *InstancesBlock {
+	return &InstancesBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewInstancesBlock returns a new InstancesBlock object.
@@ -31,7 +34,7 @@ func InstancesBlockFromJSObject(p js.Value) *InstancesBlock {
 // https://doc.babylonjs.com/api/classes/babylon.instancesblock
 func (ba *Babylon) NewInstancesBlock(name string) *InstancesBlock {
 	p := ba.ctx.Get("InstancesBlock").New(name)
-	return InstancesBlockFromJSObject(p)
+	return InstancesBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

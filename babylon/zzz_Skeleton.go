@@ -10,7 +10,10 @@ import (
 // Class used to handle skinning animations
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_bones_and_skeletons
-type Skeleton struct{ p js.Value }
+type Skeleton struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *Skeleton) JSObject() js.Value { return s.p }
@@ -18,12 +21,12 @@ func (s *Skeleton) JSObject() js.Value { return s.p }
 // Skeleton returns a Skeleton JavaScript class.
 func (ba *Babylon) Skeleton() *Skeleton {
 	p := ba.ctx.Get("Skeleton")
-	return SkeletonFromJSObject(p)
+	return SkeletonFromJSObject(p, ba.ctx)
 }
 
 // SkeletonFromJSObject returns a wrapped Skeleton JavaScript class.
-func SkeletonFromJSObject(p js.Value) *Skeleton {
-	return &Skeleton{p: p}
+func SkeletonFromJSObject(p js.Value, ctx js.Value) *Skeleton {
+	return &Skeleton{p: p, ctx: ctx}
 }
 
 // NewSkeleton returns a new Skeleton object.
@@ -31,7 +34,7 @@ func SkeletonFromJSObject(p js.Value) *Skeleton {
 // https://doc.babylonjs.com/api/classes/babylon.skeleton
 func (ba *Babylon) NewSkeleton(name string, id string, scene *Scene) *Skeleton {
 	p := ba.ctx.Get("Skeleton").New(name, id, scene.JSObject())
-	return SkeletonFromJSObject(p)
+	return SkeletonFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

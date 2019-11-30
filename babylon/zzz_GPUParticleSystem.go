@@ -11,7 +11,10 @@ import (
 // This is the fastest particle system in Babylon as it uses the GPU to update the individual particle data
 //
 // See: https://www.babylonjs-playground.com/#PU4WYI#4
-type GPUParticleSystem struct{ *BaseParticleSystem }
+type GPUParticleSystem struct {
+	*BaseParticleSystem
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (g *GPUParticleSystem) JSObject() js.Value { return g.p }
@@ -19,12 +22,12 @@ func (g *GPUParticleSystem) JSObject() js.Value { return g.p }
 // GPUParticleSystem returns a GPUParticleSystem JavaScript class.
 func (ba *Babylon) GPUParticleSystem() *GPUParticleSystem {
 	p := ba.ctx.Get("GPUParticleSystem")
-	return GPUParticleSystemFromJSObject(p)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
 }
 
 // GPUParticleSystemFromJSObject returns a wrapped GPUParticleSystem JavaScript class.
-func GPUParticleSystemFromJSObject(p js.Value) *GPUParticleSystem {
-	return &GPUParticleSystem{BaseParticleSystemFromJSObject(p)}
+func GPUParticleSystemFromJSObject(p js.Value, ctx js.Value) *GPUParticleSystem {
+	return &GPUParticleSystem{BaseParticleSystem: BaseParticleSystemFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewGPUParticleSystemOpts contains optional parameters for NewGPUParticleSystem.
@@ -41,7 +44,7 @@ func (ba *Babylon) NewGPUParticleSystem(name string, options js.Value, scene *Sc
 	}
 
 	p := ba.ctx.Get("GPUParticleSystem").New(name, options, scene.JSObject(), opts.IsAnimationSheetEnabled.JSObject())
-	return GPUParticleSystemFromJSObject(p)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

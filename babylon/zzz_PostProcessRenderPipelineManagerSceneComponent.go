@@ -8,7 +8,10 @@ import (
 
 // PostProcessRenderPipelineManagerSceneComponent represents a babylon.js PostProcessRenderPipelineManagerSceneComponent.
 // Defines the Render Pipeline scene component responsible to rendering pipelines
-type PostProcessRenderPipelineManagerSceneComponent struct{ p js.Value }
+type PostProcessRenderPipelineManagerSceneComponent struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (p *PostProcessRenderPipelineManagerSceneComponent) JSObject() js.Value { return p.p }
@@ -16,12 +19,12 @@ func (p *PostProcessRenderPipelineManagerSceneComponent) JSObject() js.Value { r
 // PostProcessRenderPipelineManagerSceneComponent returns a PostProcessRenderPipelineManagerSceneComponent JavaScript class.
 func (ba *Babylon) PostProcessRenderPipelineManagerSceneComponent() *PostProcessRenderPipelineManagerSceneComponent {
 	p := ba.ctx.Get("PostProcessRenderPipelineManagerSceneComponent")
-	return PostProcessRenderPipelineManagerSceneComponentFromJSObject(p)
+	return PostProcessRenderPipelineManagerSceneComponentFromJSObject(p, ba.ctx)
 }
 
 // PostProcessRenderPipelineManagerSceneComponentFromJSObject returns a wrapped PostProcessRenderPipelineManagerSceneComponent JavaScript class.
-func PostProcessRenderPipelineManagerSceneComponentFromJSObject(p js.Value) *PostProcessRenderPipelineManagerSceneComponent {
-	return &PostProcessRenderPipelineManagerSceneComponent{p: p}
+func PostProcessRenderPipelineManagerSceneComponentFromJSObject(p js.Value, ctx js.Value) *PostProcessRenderPipelineManagerSceneComponent {
+	return &PostProcessRenderPipelineManagerSceneComponent{p: p, ctx: ctx}
 }
 
 // NewPostProcessRenderPipelineManagerSceneComponent returns a new PostProcessRenderPipelineManagerSceneComponent object.
@@ -29,7 +32,7 @@ func PostProcessRenderPipelineManagerSceneComponentFromJSObject(p js.Value) *Pos
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipelinemanagerscenecomponent
 func (ba *Babylon) NewPostProcessRenderPipelineManagerSceneComponent(scene *Scene) *PostProcessRenderPipelineManagerSceneComponent {
 	p := ba.ctx.Get("PostProcessRenderPipelineManagerSceneComponent").New(scene.JSObject())
-	return PostProcessRenderPipelineManagerSceneComponentFromJSObject(p)
+	return PostProcessRenderPipelineManagerSceneComponentFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

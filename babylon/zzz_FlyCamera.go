@@ -9,7 +9,10 @@ import (
 // FlyCamera represents a babylon.js FlyCamera.
 // This is a flying camera, designed for 3D movement and rotation in all directions,
 // such as in a 3D Space Shooter or a Flight Simulator.
-type FlyCamera struct{ *TargetCamera }
+type FlyCamera struct {
+	*TargetCamera
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (f *FlyCamera) JSObject() js.Value { return f.p }
@@ -17,12 +20,12 @@ func (f *FlyCamera) JSObject() js.Value { return f.p }
 // FlyCamera returns a FlyCamera JavaScript class.
 func (ba *Babylon) FlyCamera() *FlyCamera {
 	p := ba.ctx.Get("FlyCamera")
-	return FlyCameraFromJSObject(p)
+	return FlyCameraFromJSObject(p, ba.ctx)
 }
 
 // FlyCameraFromJSObject returns a wrapped FlyCamera JavaScript class.
-func FlyCameraFromJSObject(p js.Value) *FlyCamera {
-	return &FlyCamera{TargetCameraFromJSObject(p)}
+func FlyCameraFromJSObject(p js.Value, ctx js.Value) *FlyCamera {
+	return &FlyCamera{TargetCamera: TargetCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewFlyCameraOpts contains optional parameters for NewFlyCamera.
@@ -39,7 +42,7 @@ func (ba *Babylon) NewFlyCamera(name string, position *Vector3, scene *Scene, op
 	}
 
 	p := ba.ctx.Get("FlyCamera").New(name, position.JSObject(), scene.JSObject(), opts.SetActiveOnSceneIfNoneActive.JSObject())
-	return FlyCameraFromJSObject(p)
+	return FlyCameraFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

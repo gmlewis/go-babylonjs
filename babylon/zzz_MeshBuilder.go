@@ -8,7 +8,10 @@ import (
 
 // MeshBuilder represents a babylon.js MeshBuilder.
 // Class containing static functions to help procedurally build meshes
-type MeshBuilder struct{ p js.Value }
+type MeshBuilder struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (m *MeshBuilder) JSObject() js.Value { return m.p }
@@ -16,12 +19,12 @@ func (m *MeshBuilder) JSObject() js.Value { return m.p }
 // MeshBuilder returns a MeshBuilder JavaScript class.
 func (ba *Babylon) MeshBuilder() *MeshBuilder {
 	p := ba.ctx.Get("MeshBuilder")
-	return MeshBuilderFromJSObject(p)
+	return MeshBuilderFromJSObject(p, ba.ctx)
 }
 
 // MeshBuilderFromJSObject returns a wrapped MeshBuilder JavaScript class.
-func MeshBuilderFromJSObject(p js.Value) *MeshBuilder {
-	return &MeshBuilder{p: p}
+func MeshBuilderFromJSObject(p js.Value, ctx js.Value) *MeshBuilder {
+	return &MeshBuilder{p: p, ctx: ctx}
 }
 
 // TODO: methods

@@ -10,7 +10,10 @@ import (
 // Easing function with an exponential shape (see link below).
 //
 // See: http://doc.babylonjs.com/babylon101/animations#easing-functions
-type ExponentialEase struct{ *EasingFunction }
+type ExponentialEase struct {
+	*EasingFunction
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (e *ExponentialEase) JSObject() js.Value { return e.p }
@@ -18,12 +21,12 @@ func (e *ExponentialEase) JSObject() js.Value { return e.p }
 // ExponentialEase returns a ExponentialEase JavaScript class.
 func (ba *Babylon) ExponentialEase() *ExponentialEase {
 	p := ba.ctx.Get("ExponentialEase")
-	return ExponentialEaseFromJSObject(p)
+	return ExponentialEaseFromJSObject(p, ba.ctx)
 }
 
 // ExponentialEaseFromJSObject returns a wrapped ExponentialEase JavaScript class.
-func ExponentialEaseFromJSObject(p js.Value) *ExponentialEase {
-	return &ExponentialEase{EasingFunctionFromJSObject(p)}
+func ExponentialEaseFromJSObject(p js.Value, ctx js.Value) *ExponentialEase {
+	return &ExponentialEase{EasingFunction: EasingFunctionFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewExponentialEaseOpts contains optional parameters for NewExponentialEase.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewExponentialEase(opts *NewExponentialEaseOpts) *Exponential
 	}
 
 	p := ba.ctx.Get("ExponentialEase").New(opts.Exponent.JSObject())
-	return ExponentialEaseFromJSObject(p)
+	return ExponentialEaseFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

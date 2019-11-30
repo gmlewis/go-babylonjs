@@ -11,7 +11,10 @@ import (
 //
 // This fits to the PBR convention in the GLTF definition:
 // &lt;a href=&#34;https://github.com/KhronosGroup/glTF/tree/2.0/extensions/Khronos/KHR_materials_pbrSpecularGlossiness&#34;&gt;https://github.com/KhronosGroup/glTF/tree/2.0/extensions/Khronos/KHR_materials_pbrSpecularGlossiness&lt;/a&gt;
-type PBRSpecularGlossinessMaterial struct{ *PBRBaseSimpleMaterial }
+type PBRSpecularGlossinessMaterial struct {
+	*PBRBaseSimpleMaterial
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (p *PBRSpecularGlossinessMaterial) JSObject() js.Value { return p.p }
@@ -19,12 +22,12 @@ func (p *PBRSpecularGlossinessMaterial) JSObject() js.Value { return p.p }
 // PBRSpecularGlossinessMaterial returns a PBRSpecularGlossinessMaterial JavaScript class.
 func (ba *Babylon) PBRSpecularGlossinessMaterial() *PBRSpecularGlossinessMaterial {
 	p := ba.ctx.Get("PBRSpecularGlossinessMaterial")
-	return PBRSpecularGlossinessMaterialFromJSObject(p)
+	return PBRSpecularGlossinessMaterialFromJSObject(p, ba.ctx)
 }
 
 // PBRSpecularGlossinessMaterialFromJSObject returns a wrapped PBRSpecularGlossinessMaterial JavaScript class.
-func PBRSpecularGlossinessMaterialFromJSObject(p js.Value) *PBRSpecularGlossinessMaterial {
-	return &PBRSpecularGlossinessMaterial{PBRBaseSimpleMaterialFromJSObject(p)}
+func PBRSpecularGlossinessMaterialFromJSObject(p js.Value, ctx js.Value) *PBRSpecularGlossinessMaterial {
+	return &PBRSpecularGlossinessMaterial{PBRBaseSimpleMaterial: PBRBaseSimpleMaterialFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewPBRSpecularGlossinessMaterial returns a new PBRSpecularGlossinessMaterial object.
@@ -32,7 +35,7 @@ func PBRSpecularGlossinessMaterialFromJSObject(p js.Value) *PBRSpecularGlossines
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial
 func (ba *Babylon) NewPBRSpecularGlossinessMaterial(name string, scene *Scene) *PBRSpecularGlossinessMaterial {
 	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(name, scene.JSObject())
-	return PBRSpecularGlossinessMaterialFromJSObject(p)
+	return PBRSpecularGlossinessMaterialFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

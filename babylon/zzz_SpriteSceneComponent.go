@@ -9,7 +9,10 @@ import (
 // SpriteSceneComponent represents a babylon.js SpriteSceneComponent.
 // Defines the sprite scene component responsible to manage sprites
 // in a given scene.
-type SpriteSceneComponent struct{ p js.Value }
+type SpriteSceneComponent struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *SpriteSceneComponent) JSObject() js.Value { return s.p }
@@ -17,12 +20,12 @@ func (s *SpriteSceneComponent) JSObject() js.Value { return s.p }
 // SpriteSceneComponent returns a SpriteSceneComponent JavaScript class.
 func (ba *Babylon) SpriteSceneComponent() *SpriteSceneComponent {
 	p := ba.ctx.Get("SpriteSceneComponent")
-	return SpriteSceneComponentFromJSObject(p)
+	return SpriteSceneComponentFromJSObject(p, ba.ctx)
 }
 
 // SpriteSceneComponentFromJSObject returns a wrapped SpriteSceneComponent JavaScript class.
-func SpriteSceneComponentFromJSObject(p js.Value) *SpriteSceneComponent {
-	return &SpriteSceneComponent{p: p}
+func SpriteSceneComponentFromJSObject(p js.Value, ctx js.Value) *SpriteSceneComponent {
+	return &SpriteSceneComponent{p: p, ctx: ctx}
 }
 
 // NewSpriteSceneComponent returns a new SpriteSceneComponent object.
@@ -30,7 +33,7 @@ func SpriteSceneComponentFromJSObject(p js.Value) *SpriteSceneComponent {
 // https://doc.babylonjs.com/api/classes/babylon.spritescenecomponent
 func (ba *Babylon) NewSpriteSceneComponent(scene *Scene) *SpriteSceneComponent {
 	p := ba.ctx.Get("SpriteSceneComponent").New(scene.JSObject())
-	return SpriteSceneComponentFromJSObject(p)
+	return SpriteSceneComponentFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

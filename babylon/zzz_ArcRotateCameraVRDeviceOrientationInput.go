@@ -10,7 +10,10 @@ import (
 // Manage the device orientation inputs (gyroscope) to control an arc rotate camera.
 //
 // See: http://doc.babylonjs.com/how_to/customizing_camera_inputs
-type ArcRotateCameraVRDeviceOrientationInput struct{ p js.Value }
+type ArcRotateCameraVRDeviceOrientationInput struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (a *ArcRotateCameraVRDeviceOrientationInput) JSObject() js.Value { return a.p }
@@ -18,12 +21,12 @@ func (a *ArcRotateCameraVRDeviceOrientationInput) JSObject() js.Value { return a
 // ArcRotateCameraVRDeviceOrientationInput returns a ArcRotateCameraVRDeviceOrientationInput JavaScript class.
 func (ba *Babylon) ArcRotateCameraVRDeviceOrientationInput() *ArcRotateCameraVRDeviceOrientationInput {
 	p := ba.ctx.Get("ArcRotateCameraVRDeviceOrientationInput")
-	return ArcRotateCameraVRDeviceOrientationInputFromJSObject(p)
+	return ArcRotateCameraVRDeviceOrientationInputFromJSObject(p, ba.ctx)
 }
 
 // ArcRotateCameraVRDeviceOrientationInputFromJSObject returns a wrapped ArcRotateCameraVRDeviceOrientationInput JavaScript class.
-func ArcRotateCameraVRDeviceOrientationInputFromJSObject(p js.Value) *ArcRotateCameraVRDeviceOrientationInput {
-	return &ArcRotateCameraVRDeviceOrientationInput{p: p}
+func ArcRotateCameraVRDeviceOrientationInputFromJSObject(p js.Value, ctx js.Value) *ArcRotateCameraVRDeviceOrientationInput {
+	return &ArcRotateCameraVRDeviceOrientationInput{p: p, ctx: ctx}
 }
 
 // NewArcRotateCameraVRDeviceOrientationInput returns a new ArcRotateCameraVRDeviceOrientationInput object.
@@ -31,7 +34,7 @@ func ArcRotateCameraVRDeviceOrientationInputFromJSObject(p js.Value) *ArcRotateC
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecameravrdeviceorientationinput
 func (ba *Babylon) NewArcRotateCameraVRDeviceOrientationInput() *ArcRotateCameraVRDeviceOrientationInput {
 	p := ba.ctx.Get("ArcRotateCameraVRDeviceOrientationInput").New()
-	return ArcRotateCameraVRDeviceOrientationInputFromJSObject(p)
+	return ArcRotateCameraVRDeviceOrientationInputFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

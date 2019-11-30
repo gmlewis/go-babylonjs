@@ -8,7 +8,10 @@ import (
 
 // DerivativeBlock represents a babylon.js DerivativeBlock.
 // Block used to get the derivative value on x and y of a given input
-type DerivativeBlock struct{ *NodeMaterialBlock }
+type DerivativeBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (d *DerivativeBlock) JSObject() js.Value { return d.p }
@@ -16,12 +19,12 @@ func (d *DerivativeBlock) JSObject() js.Value { return d.p }
 // DerivativeBlock returns a DerivativeBlock JavaScript class.
 func (ba *Babylon) DerivativeBlock() *DerivativeBlock {
 	p := ba.ctx.Get("DerivativeBlock")
-	return DerivativeBlockFromJSObject(p)
+	return DerivativeBlockFromJSObject(p, ba.ctx)
 }
 
 // DerivativeBlockFromJSObject returns a wrapped DerivativeBlock JavaScript class.
-func DerivativeBlockFromJSObject(p js.Value) *DerivativeBlock {
-	return &DerivativeBlock{NodeMaterialBlockFromJSObject(p)}
+func DerivativeBlockFromJSObject(p js.Value, ctx js.Value) *DerivativeBlock {
+	return &DerivativeBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewDerivativeBlock returns a new DerivativeBlock object.
@@ -29,7 +32,7 @@ func DerivativeBlockFromJSObject(p js.Value) *DerivativeBlock {
 // https://doc.babylonjs.com/api/classes/babylon.derivativeblock
 func (ba *Babylon) NewDerivativeBlock(name string) *DerivativeBlock {
 	p := ba.ctx.Get("DerivativeBlock").New(name)
-	return DerivativeBlockFromJSObject(p)
+	return DerivativeBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -8,7 +8,10 @@ import (
 
 // Node represents a babylon.js Node.
 // Node is the basic class for all scene objects (Mesh, Light, Camera.)
-type Node struct{ p js.Value }
+type Node struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (n *Node) JSObject() js.Value { return n.p }
@@ -16,12 +19,12 @@ func (n *Node) JSObject() js.Value { return n.p }
 // Node returns a Node JavaScript class.
 func (ba *Babylon) Node() *Node {
 	p := ba.ctx.Get("Node")
-	return NodeFromJSObject(p)
+	return NodeFromJSObject(p, ba.ctx)
 }
 
 // NodeFromJSObject returns a wrapped Node JavaScript class.
-func NodeFromJSObject(p js.Value) *Node {
-	return &Node{p: p}
+func NodeFromJSObject(p js.Value, ctx js.Value) *Node {
+	return &Node{p: p, ctx: ctx}
 }
 
 // NewNodeOpts contains optional parameters for NewNode.
@@ -38,7 +41,7 @@ func (ba *Babylon) NewNode(name string, opts *NewNodeOpts) *Node {
 	}
 
 	p := ba.ctx.Get("Node").New(name, opts.Scene.JSObject())
-	return NodeFromJSObject(p)
+	return NodeFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

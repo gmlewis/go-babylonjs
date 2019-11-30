@@ -10,7 +10,10 @@ import (
 // Builds a polygon
 //
 // See: https://doc.babylonjs.com/how_to/polygonmeshbuilder
-type PolygonMeshBuilder struct{ p js.Value }
+type PolygonMeshBuilder struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (p *PolygonMeshBuilder) JSObject() js.Value { return p.p }
@@ -18,12 +21,12 @@ func (p *PolygonMeshBuilder) JSObject() js.Value { return p.p }
 // PolygonMeshBuilder returns a PolygonMeshBuilder JavaScript class.
 func (ba *Babylon) PolygonMeshBuilder() *PolygonMeshBuilder {
 	p := ba.ctx.Get("PolygonMeshBuilder")
-	return PolygonMeshBuilderFromJSObject(p)
+	return PolygonMeshBuilderFromJSObject(p, ba.ctx)
 }
 
 // PolygonMeshBuilderFromJSObject returns a wrapped PolygonMeshBuilder JavaScript class.
-func PolygonMeshBuilderFromJSObject(p js.Value) *PolygonMeshBuilder {
-	return &PolygonMeshBuilder{p: p}
+func PolygonMeshBuilderFromJSObject(p js.Value, ctx js.Value) *PolygonMeshBuilder {
+	return &PolygonMeshBuilder{p: p, ctx: ctx}
 }
 
 // NewPolygonMeshBuilderOpts contains optional parameters for NewPolygonMeshBuilder.
@@ -42,7 +45,7 @@ func (ba *Babylon) NewPolygonMeshBuilder(name string, contours *Path2, opts *New
 	}
 
 	p := ba.ctx.Get("PolygonMeshBuilder").New(name, contours.JSObject(), opts.Scene.JSObject(), opts.EarcutInjection)
-	return PolygonMeshBuilderFromJSObject(p)
+	return PolygonMeshBuilderFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

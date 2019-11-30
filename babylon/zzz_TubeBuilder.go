@@ -8,7 +8,10 @@ import (
 
 // TubeBuilder represents a babylon.js TubeBuilder.
 // Class containing static functions to help procedurally build meshes
-type TubeBuilder struct{ p js.Value }
+type TubeBuilder struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (t *TubeBuilder) JSObject() js.Value { return t.p }
@@ -16,12 +19,12 @@ func (t *TubeBuilder) JSObject() js.Value { return t.p }
 // TubeBuilder returns a TubeBuilder JavaScript class.
 func (ba *Babylon) TubeBuilder() *TubeBuilder {
 	p := ba.ctx.Get("TubeBuilder")
-	return TubeBuilderFromJSObject(p)
+	return TubeBuilderFromJSObject(p, ba.ctx)
 }
 
 // TubeBuilderFromJSObject returns a wrapped TubeBuilder JavaScript class.
-func TubeBuilderFromJSObject(p js.Value) *TubeBuilder {
-	return &TubeBuilder{p: p}
+func TubeBuilderFromJSObject(p js.Value, ctx js.Value) *TubeBuilder {
+	return &TubeBuilder{p: p, ctx: ctx}
 }
 
 // TODO: methods

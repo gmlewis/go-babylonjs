@@ -9,7 +9,10 @@ import (
 // CylinderDirectedParticleEmitter represents a babylon.js CylinderDirectedParticleEmitter.
 // Particle emitter emitting particles from the inside of a cylinder.
 // It emits the particles randomly between two vectors.
-type CylinderDirectedParticleEmitter struct{ *CylinderParticleEmitter }
+type CylinderDirectedParticleEmitter struct {
+	*CylinderParticleEmitter
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (c *CylinderDirectedParticleEmitter) JSObject() js.Value { return c.p }
@@ -17,12 +20,12 @@ func (c *CylinderDirectedParticleEmitter) JSObject() js.Value { return c.p }
 // CylinderDirectedParticleEmitter returns a CylinderDirectedParticleEmitter JavaScript class.
 func (ba *Babylon) CylinderDirectedParticleEmitter() *CylinderDirectedParticleEmitter {
 	p := ba.ctx.Get("CylinderDirectedParticleEmitter")
-	return CylinderDirectedParticleEmitterFromJSObject(p)
+	return CylinderDirectedParticleEmitterFromJSObject(p, ba.ctx)
 }
 
 // CylinderDirectedParticleEmitterFromJSObject returns a wrapped CylinderDirectedParticleEmitter JavaScript class.
-func CylinderDirectedParticleEmitterFromJSObject(p js.Value) *CylinderDirectedParticleEmitter {
-	return &CylinderDirectedParticleEmitter{CylinderParticleEmitterFromJSObject(p)}
+func CylinderDirectedParticleEmitterFromJSObject(p js.Value, ctx js.Value) *CylinderDirectedParticleEmitter {
+	return &CylinderDirectedParticleEmitter{CylinderParticleEmitter: CylinderParticleEmitterFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewCylinderDirectedParticleEmitterOpts contains optional parameters for NewCylinderDirectedParticleEmitter.
@@ -47,7 +50,7 @@ func (ba *Babylon) NewCylinderDirectedParticleEmitter(opts *NewCylinderDirectedP
 	}
 
 	p := ba.ctx.Get("CylinderDirectedParticleEmitter").New(opts.Radius.JSObject(), opts.Height.JSObject(), opts.RadiusRange.JSObject(), opts.Direction1.JSObject(), opts.Direction2.JSObject())
-	return CylinderDirectedParticleEmitterFromJSObject(p)
+	return CylinderDirectedParticleEmitterFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

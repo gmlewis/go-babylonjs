@@ -10,7 +10,10 @@ import (
 // Camera used to simulate stereoscopic rendering (based on UniversalCamera)
 //
 // See: http://doc.babylonjs.com/features/cameras
-type StereoscopicUniversalCamera struct{ *UniversalCamera }
+type StereoscopicUniversalCamera struct {
+	*UniversalCamera
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *StereoscopicUniversalCamera) JSObject() js.Value { return s.p }
@@ -18,12 +21,12 @@ func (s *StereoscopicUniversalCamera) JSObject() js.Value { return s.p }
 // StereoscopicUniversalCamera returns a StereoscopicUniversalCamera JavaScript class.
 func (ba *Babylon) StereoscopicUniversalCamera() *StereoscopicUniversalCamera {
 	p := ba.ctx.Get("StereoscopicUniversalCamera")
-	return StereoscopicUniversalCameraFromJSObject(p)
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
 }
 
 // StereoscopicUniversalCameraFromJSObject returns a wrapped StereoscopicUniversalCamera JavaScript class.
-func StereoscopicUniversalCameraFromJSObject(p js.Value) *StereoscopicUniversalCamera {
-	return &StereoscopicUniversalCamera{UniversalCameraFromJSObject(p)}
+func StereoscopicUniversalCameraFromJSObject(p js.Value, ctx js.Value) *StereoscopicUniversalCamera {
+	return &StereoscopicUniversalCamera{UniversalCamera: UniversalCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewStereoscopicUniversalCamera returns a new StereoscopicUniversalCamera object.
@@ -31,7 +34,7 @@ func StereoscopicUniversalCameraFromJSObject(p js.Value) *StereoscopicUniversalC
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera
 func (ba *Babylon) NewStereoscopicUniversalCamera(name string, position *Vector3, interaxialDistance float64, isStereoscopicSideBySide bool, scene *Scene) *StereoscopicUniversalCamera {
 	p := ba.ctx.Get("StereoscopicUniversalCamera").New(name, position.JSObject(), interaxialDistance, isStereoscopicSideBySide, scene.JSObject())
-	return StereoscopicUniversalCameraFromJSObject(p)
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

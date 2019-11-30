@@ -8,7 +8,10 @@ import (
 
 // VRDistortionCorrectionPostProcess represents a babylon.js VRDistortionCorrectionPostProcess.
 // VRDistortionCorrectionPostProcess used for mobile VR
-type VRDistortionCorrectionPostProcess struct{ *PostProcess }
+type VRDistortionCorrectionPostProcess struct {
+	*PostProcess
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (v *VRDistortionCorrectionPostProcess) JSObject() js.Value { return v.p }
@@ -16,12 +19,12 @@ func (v *VRDistortionCorrectionPostProcess) JSObject() js.Value { return v.p }
 // VRDistortionCorrectionPostProcess returns a VRDistortionCorrectionPostProcess JavaScript class.
 func (ba *Babylon) VRDistortionCorrectionPostProcess() *VRDistortionCorrectionPostProcess {
 	p := ba.ctx.Get("VRDistortionCorrectionPostProcess")
-	return VRDistortionCorrectionPostProcessFromJSObject(p)
+	return VRDistortionCorrectionPostProcessFromJSObject(p, ba.ctx)
 }
 
 // VRDistortionCorrectionPostProcessFromJSObject returns a wrapped VRDistortionCorrectionPostProcess JavaScript class.
-func VRDistortionCorrectionPostProcessFromJSObject(p js.Value) *VRDistortionCorrectionPostProcess {
-	return &VRDistortionCorrectionPostProcess{PostProcessFromJSObject(p)}
+func VRDistortionCorrectionPostProcessFromJSObject(p js.Value, ctx js.Value) *VRDistortionCorrectionPostProcess {
+	return &VRDistortionCorrectionPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewVRDistortionCorrectionPostProcess returns a new VRDistortionCorrectionPostProcess object.
@@ -29,7 +32,7 @@ func VRDistortionCorrectionPostProcessFromJSObject(p js.Value) *VRDistortionCorr
 // https://doc.babylonjs.com/api/classes/babylon.vrdistortioncorrectionpostprocess
 func (ba *Babylon) NewVRDistortionCorrectionPostProcess(name string, camera *Camera, isRightEye bool, vrMetrics *VRCameraMetrics) *VRDistortionCorrectionPostProcess {
 	p := ba.ctx.Get("VRDistortionCorrectionPostProcess").New(name, camera.JSObject(), isRightEye, vrMetrics.JSObject())
-	return VRDistortionCorrectionPostProcessFromJSObject(p)
+	return VRDistortionCorrectionPostProcessFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

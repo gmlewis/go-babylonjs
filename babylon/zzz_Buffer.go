@@ -8,7 +8,10 @@ import (
 
 // Buffer represents a babylon.js Buffer.
 // Class used to store data that will be store in GPU memory
-type Buffer struct{ p js.Value }
+type Buffer struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (b *Buffer) JSObject() js.Value { return b.p }
@@ -16,12 +19,12 @@ func (b *Buffer) JSObject() js.Value { return b.p }
 // Buffer returns a Buffer JavaScript class.
 func (ba *Babylon) Buffer() *Buffer {
 	p := ba.ctx.Get("Buffer")
-	return BufferFromJSObject(p)
+	return BufferFromJSObject(p, ba.ctx)
 }
 
 // BufferFromJSObject returns a wrapped Buffer JavaScript class.
-func BufferFromJSObject(p js.Value) *Buffer {
-	return &Buffer{p: p}
+func BufferFromJSObject(p js.Value, ctx js.Value) *Buffer {
+	return &Buffer{p: p, ctx: ctx}
 }
 
 // NewBufferOpts contains optional parameters for NewBuffer.
@@ -46,7 +49,7 @@ func (ba *Babylon) NewBuffer(engine interface{}, data []float64, updatable bool,
 	}
 
 	p := ba.ctx.Get("Buffer").New(engine, data, updatable, opts.Stride.JSObject(), opts.PostponeInternalCreation.JSObject(), opts.Instanced.JSObject(), opts.UseBytes.JSObject(), opts.Divisor.JSObject())
-	return BufferFromJSObject(p)
+	return BufferFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

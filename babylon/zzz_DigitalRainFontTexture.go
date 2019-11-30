@@ -11,7 +11,10 @@ import (
 //
 // It basically takes care rendering the font front the given font size to a texture.
 // This is used later on in the postprocess.
-type DigitalRainFontTexture struct{ *BaseTexture }
+type DigitalRainFontTexture struct {
+	*BaseTexture
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (d *DigitalRainFontTexture) JSObject() js.Value { return d.p }
@@ -19,12 +22,12 @@ func (d *DigitalRainFontTexture) JSObject() js.Value { return d.p }
 // DigitalRainFontTexture returns a DigitalRainFontTexture JavaScript class.
 func (ba *Babylon) DigitalRainFontTexture() *DigitalRainFontTexture {
 	p := ba.ctx.Get("DigitalRainFontTexture")
-	return DigitalRainFontTextureFromJSObject(p)
+	return DigitalRainFontTextureFromJSObject(p, ba.ctx)
 }
 
 // DigitalRainFontTextureFromJSObject returns a wrapped DigitalRainFontTexture JavaScript class.
-func DigitalRainFontTextureFromJSObject(p js.Value) *DigitalRainFontTexture {
-	return &DigitalRainFontTexture{BaseTextureFromJSObject(p)}
+func DigitalRainFontTextureFromJSObject(p js.Value, ctx js.Value) *DigitalRainFontTexture {
+	return &DigitalRainFontTexture{BaseTexture: BaseTextureFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewDigitalRainFontTextureOpts contains optional parameters for NewDigitalRainFontTexture.
@@ -41,7 +44,7 @@ func (ba *Babylon) NewDigitalRainFontTexture(name string, font string, text stri
 	}
 
 	p := ba.ctx.Get("DigitalRainFontTexture").New(name, font, text, opts.Scene.JSObject())
-	return DigitalRainFontTextureFromJSObject(p)
+	return DigitalRainFontTextureFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

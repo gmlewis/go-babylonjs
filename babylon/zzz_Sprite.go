@@ -10,7 +10,10 @@ import (
 // Class used to represent a sprite
 //
 // See: http://doc.babylonjs.com/babylon101/sprites
-type Sprite struct{ p js.Value }
+type Sprite struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *Sprite) JSObject() js.Value { return s.p }
@@ -18,12 +21,12 @@ func (s *Sprite) JSObject() js.Value { return s.p }
 // Sprite returns a Sprite JavaScript class.
 func (ba *Babylon) Sprite() *Sprite {
 	p := ba.ctx.Get("Sprite")
-	return SpriteFromJSObject(p)
+	return SpriteFromJSObject(p, ba.ctx)
 }
 
 // SpriteFromJSObject returns a wrapped Sprite JavaScript class.
-func SpriteFromJSObject(p js.Value) *Sprite {
-	return &Sprite{p: p}
+func SpriteFromJSObject(p js.Value, ctx js.Value) *Sprite {
+	return &Sprite{p: p, ctx: ctx}
 }
 
 // NewSprite returns a new Sprite object.
@@ -31,7 +34,7 @@ func SpriteFromJSObject(p js.Value) *Sprite {
 // https://doc.babylonjs.com/api/classes/babylon.sprite
 func (ba *Babylon) NewSprite(name string, manager js.Value) *Sprite {
 	p := ba.ctx.Get("Sprite").New(name, manager)
-	return SpriteFromJSObject(p)
+	return SpriteFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

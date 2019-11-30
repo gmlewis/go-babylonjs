@@ -9,7 +9,10 @@ import (
 // DeviceOrientationCamera represents a babylon.js DeviceOrientationCamera.
 // This is a camera specifically designed to react to device orientation events such as a modern mobile device
 // being tilted forward or back and left or right.
-type DeviceOrientationCamera struct{ *FreeCamera }
+type DeviceOrientationCamera struct {
+	*FreeCamera
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (d *DeviceOrientationCamera) JSObject() js.Value { return d.p }
@@ -17,12 +20,12 @@ func (d *DeviceOrientationCamera) JSObject() js.Value { return d.p }
 // DeviceOrientationCamera returns a DeviceOrientationCamera JavaScript class.
 func (ba *Babylon) DeviceOrientationCamera() *DeviceOrientationCamera {
 	p := ba.ctx.Get("DeviceOrientationCamera")
-	return DeviceOrientationCameraFromJSObject(p)
+	return DeviceOrientationCameraFromJSObject(p, ba.ctx)
 }
 
 // DeviceOrientationCameraFromJSObject returns a wrapped DeviceOrientationCamera JavaScript class.
-func DeviceOrientationCameraFromJSObject(p js.Value) *DeviceOrientationCamera {
-	return &DeviceOrientationCamera{FreeCameraFromJSObject(p)}
+func DeviceOrientationCameraFromJSObject(p js.Value, ctx js.Value) *DeviceOrientationCamera {
+	return &DeviceOrientationCamera{FreeCamera: FreeCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewDeviceOrientationCamera returns a new DeviceOrientationCamera object.
@@ -30,7 +33,7 @@ func DeviceOrientationCameraFromJSObject(p js.Value) *DeviceOrientationCamera {
 // https://doc.babylonjs.com/api/classes/babylon.deviceorientationcamera
 func (ba *Babylon) NewDeviceOrientationCamera(name string, position *Vector3, scene *Scene) *DeviceOrientationCamera {
 	p := ba.ctx.Get("DeviceOrientationCamera").New(name, position.JSObject(), scene.JSObject())
-	return DeviceOrientationCameraFromJSObject(p)
+	return DeviceOrientationCameraFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

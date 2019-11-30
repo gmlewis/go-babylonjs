@@ -63,17 +63,19 @@ func formatParents(parents []string) string {
 	if len(lines) == 0 {
 		lines = append(lines, "p js.Value")
 	}
+	lines = append(lines, "ctx js.Value")
 	return strings.Join(lines, "\n")
 }
 
 func fromJSObject(parents []string) string {
 	if len(parents) == 0 {
-		return "p: p"
+		return "p: p, ctx: ctx"
 	}
 	var wraps []string
 	for _, p := range parents {
-		wraps = append(wraps, fmt.Sprintf("%vFromJSObject(p)", p))
+		wraps = append(wraps, fmt.Sprintf("%v: %vFromJSObject(p, ctx)", p, p))
 	}
+	wraps = append(wraps, "ctx: ctx")
 	return strings.Join(wraps, ", ")
 }
 
@@ -150,11 +152,11 @@ func ({{.Name | receiver}} *{{.Name}}) JSObject() js.Value { return {{.Name | re
 // {{.Name}} returns a {{.Name}} JavaScript class.
 func (ba *Babylon) {{.Name}}() *{{.Name}} {
 	p := ba.ctx.Get("{{.Name}}")
-	return {{.Name}}FromJSObject(p)
+	return {{.Name}}FromJSObject(p, ba.ctx)
 }
 
 // {{.Name}}FromJSObject returns a wrapped {{.Name}} JavaScript class.
-func {{.Name}}FromJSObject(p js.Value) *{{.Name}} {
+func {{.Name}}FromJSObject(p js.Value, ctx js.Value) *{{.Name}} {
 	return &{{.Name}}{ {{.Parents | fromJSObject}} }
 }
 
@@ -180,7 +182,7 @@ opts = &{{$key}}Opts{}
 }
 {{end}}
 	p := ba.ctx.Get("{{$name}}").New({{$key | parameterJSList $root}})
-	return {{$name}}FromJSObject(p)
+	return {{$name}}FromJSObject(p, ba.ctx)
 }
 {{end}}
 

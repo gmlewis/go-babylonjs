@@ -8,7 +8,10 @@ import (
 
 // Vector2WithInfo represents a babylon.js Vector2WithInfo.
 // Class used to transport BABYLON.Vector2 information for pointer events
-type Vector2WithInfo struct{ *Vector2 }
+type Vector2WithInfo struct {
+	*Vector2
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (v *Vector2WithInfo) JSObject() js.Value { return v.p }
@@ -16,12 +19,12 @@ func (v *Vector2WithInfo) JSObject() js.Value { return v.p }
 // Vector2WithInfo returns a Vector2WithInfo JavaScript class.
 func (ba *Babylon) Vector2WithInfo() *Vector2WithInfo {
 	p := ba.ctx.Get("Vector2WithInfo")
-	return Vector2WithInfoFromJSObject(p)
+	return Vector2WithInfoFromJSObject(p, ba.ctx)
 }
 
 // Vector2WithInfoFromJSObject returns a wrapped Vector2WithInfo JavaScript class.
-func Vector2WithInfoFromJSObject(p js.Value) *Vector2WithInfo {
-	return &Vector2WithInfo{Vector2FromJSObject(p)}
+func Vector2WithInfoFromJSObject(p js.Value, ctx js.Value) *Vector2WithInfo {
+	return &Vector2WithInfo{Vector2: Vector2FromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewVector2WithInfoOpts contains optional parameters for NewVector2WithInfo.
@@ -38,7 +41,7 @@ func (ba *Babylon) NewVector2WithInfo(source *Vector2, opts *NewVector2WithInfoO
 	}
 
 	p := ba.ctx.Get("Vector2WithInfo").New(source.JSObject(), opts.ButtonIndex.JSObject())
-	return Vector2WithInfoFromJSObject(p)
+	return Vector2WithInfoFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

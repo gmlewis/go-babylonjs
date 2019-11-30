@@ -10,7 +10,10 @@ import (
 // Class used to work with sound analyzer using fast fourier transform (FFT)
 //
 // See: http://doc.babylonjs.com/how_to/playing_sounds_and_music
-type Analyser struct{ p js.Value }
+type Analyser struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (a *Analyser) JSObject() js.Value { return a.p }
@@ -18,12 +21,12 @@ func (a *Analyser) JSObject() js.Value { return a.p }
 // Analyser returns a Analyser JavaScript class.
 func (ba *Babylon) Analyser() *Analyser {
 	p := ba.ctx.Get("Analyser")
-	return AnalyserFromJSObject(p)
+	return AnalyserFromJSObject(p, ba.ctx)
 }
 
 // AnalyserFromJSObject returns a wrapped Analyser JavaScript class.
-func AnalyserFromJSObject(p js.Value) *Analyser {
-	return &Analyser{p: p}
+func AnalyserFromJSObject(p js.Value, ctx js.Value) *Analyser {
+	return &Analyser{p: p, ctx: ctx}
 }
 
 // NewAnalyser returns a new Analyser object.
@@ -31,7 +34,7 @@ func AnalyserFromJSObject(p js.Value) *Analyser {
 // https://doc.babylonjs.com/api/classes/babylon.analyser
 func (ba *Babylon) NewAnalyser(scene *Scene) *Analyser {
 	p := ba.ctx.Get("Analyser").New(scene.JSObject())
-	return AnalyserFromJSObject(p)
+	return AnalyserFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

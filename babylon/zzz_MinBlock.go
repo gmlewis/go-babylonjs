@@ -8,7 +8,10 @@ import (
 
 // MinBlock represents a babylon.js MinBlock.
 // Block used to get the min of 2 values
-type MinBlock struct{ *NodeMaterialBlock }
+type MinBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (m *MinBlock) JSObject() js.Value { return m.p }
@@ -16,12 +19,12 @@ func (m *MinBlock) JSObject() js.Value { return m.p }
 // MinBlock returns a MinBlock JavaScript class.
 func (ba *Babylon) MinBlock() *MinBlock {
 	p := ba.ctx.Get("MinBlock")
-	return MinBlockFromJSObject(p)
+	return MinBlockFromJSObject(p, ba.ctx)
 }
 
 // MinBlockFromJSObject returns a wrapped MinBlock JavaScript class.
-func MinBlockFromJSObject(p js.Value) *MinBlock {
-	return &MinBlock{NodeMaterialBlockFromJSObject(p)}
+func MinBlockFromJSObject(p js.Value, ctx js.Value) *MinBlock {
+	return &MinBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewMinBlock returns a new MinBlock object.
@@ -29,7 +32,7 @@ func MinBlockFromJSObject(p js.Value) *MinBlock {
 // https://doc.babylonjs.com/api/classes/babylon.minblock
 func (ba *Babylon) NewMinBlock(name string) *MinBlock {
 	p := ba.ctx.Get("MinBlock").New(name)
-	return MinBlockFromJSObject(p)
+	return MinBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

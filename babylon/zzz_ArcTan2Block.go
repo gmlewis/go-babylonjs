@@ -8,7 +8,10 @@ import (
 
 // ArcTan2Block represents a babylon.js ArcTan2Block.
 // Block used to compute arc tangent of 2 values
-type ArcTan2Block struct{ *NodeMaterialBlock }
+type ArcTan2Block struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (a *ArcTan2Block) JSObject() js.Value { return a.p }
@@ -16,12 +19,12 @@ func (a *ArcTan2Block) JSObject() js.Value { return a.p }
 // ArcTan2Block returns a ArcTan2Block JavaScript class.
 func (ba *Babylon) ArcTan2Block() *ArcTan2Block {
 	p := ba.ctx.Get("ArcTan2Block")
-	return ArcTan2BlockFromJSObject(p)
+	return ArcTan2BlockFromJSObject(p, ba.ctx)
 }
 
 // ArcTan2BlockFromJSObject returns a wrapped ArcTan2Block JavaScript class.
-func ArcTan2BlockFromJSObject(p js.Value) *ArcTan2Block {
-	return &ArcTan2Block{NodeMaterialBlockFromJSObject(p)}
+func ArcTan2BlockFromJSObject(p js.Value, ctx js.Value) *ArcTan2Block {
+	return &ArcTan2Block{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewArcTan2Block returns a new ArcTan2Block object.
@@ -29,7 +32,7 @@ func ArcTan2BlockFromJSObject(p js.Value) *ArcTan2Block {
 // https://doc.babylonjs.com/api/classes/babylon.arctan2block
 func (ba *Babylon) NewArcTan2Block(name string) *ArcTan2Block {
 	p := ba.ctx.Get("ArcTan2Block").New(name)
-	return ArcTan2BlockFromJSObject(p)
+	return ArcTan2BlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

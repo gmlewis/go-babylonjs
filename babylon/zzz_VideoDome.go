@@ -11,7 +11,10 @@ import (
 // As a subclass of TransformNode, this allow parenting to the camera or multiple videos with different locations in the scene.
 // This class achieves its effect with a VideoTexture and a correctly configured BackgroundMaterial on an inverted sphere.
 // Potential additions to this helper include zoom and and non-infinite distance rendering effects.
-type VideoDome struct{ *TransformNode }
+type VideoDome struct {
+	*TransformNode
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (v *VideoDome) JSObject() js.Value { return v.p }
@@ -19,12 +22,12 @@ func (v *VideoDome) JSObject() js.Value { return v.p }
 // VideoDome returns a VideoDome JavaScript class.
 func (ba *Babylon) VideoDome() *VideoDome {
 	p := ba.ctx.Get("VideoDome")
-	return VideoDomeFromJSObject(p)
+	return VideoDomeFromJSObject(p, ba.ctx)
 }
 
 // VideoDomeFromJSObject returns a wrapped VideoDome JavaScript class.
-func VideoDomeFromJSObject(p js.Value) *VideoDome {
-	return &VideoDome{TransformNodeFromJSObject(p)}
+func VideoDomeFromJSObject(p js.Value, ctx js.Value) *VideoDome {
+	return &VideoDome{TransformNode: TransformNodeFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewVideoDome returns a new VideoDome object.
@@ -32,7 +35,7 @@ func VideoDomeFromJSObject(p js.Value) *VideoDome {
 // https://doc.babylonjs.com/api/classes/babylon.videodome
 func (ba *Babylon) NewVideoDome(name string, urlsOrVideo string, options js.Value, scene *Scene) *VideoDome {
 	p := ba.ctx.Get("VideoDome").New(name, urlsOrVideo, options, scene.JSObject())
-	return VideoDomeFromJSObject(p)
+	return VideoDomeFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

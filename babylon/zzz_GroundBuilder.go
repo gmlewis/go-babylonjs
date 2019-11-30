@@ -8,7 +8,10 @@ import (
 
 // GroundBuilder represents a babylon.js GroundBuilder.
 // Class containing static functions to help procedurally build meshes
-type GroundBuilder struct{ p js.Value }
+type GroundBuilder struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (g *GroundBuilder) JSObject() js.Value { return g.p }
@@ -16,12 +19,12 @@ func (g *GroundBuilder) JSObject() js.Value { return g.p }
 // GroundBuilder returns a GroundBuilder JavaScript class.
 func (ba *Babylon) GroundBuilder() *GroundBuilder {
 	p := ba.ctx.Get("GroundBuilder")
-	return GroundBuilderFromJSObject(p)
+	return GroundBuilderFromJSObject(p, ba.ctx)
 }
 
 // GroundBuilderFromJSObject returns a wrapped GroundBuilder JavaScript class.
-func GroundBuilderFromJSObject(p js.Value) *GroundBuilder {
-	return &GroundBuilder{p: p}
+func GroundBuilderFromJSObject(p js.Value, ctx js.Value) *GroundBuilder {
+	return &GroundBuilder{p: p, ctx: ctx}
 }
 
 // TODO: methods

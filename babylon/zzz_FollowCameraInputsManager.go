@@ -14,6 +14,7 @@ import (
 type FollowCameraInputsManager struct {
 	*CameraInputsManager
 	*FollowCamera
+	ctx js.Value
 }
 
 // JSObject returns the underlying js.Value.
@@ -22,12 +23,12 @@ func (f *FollowCameraInputsManager) JSObject() js.Value { return f.p }
 // FollowCameraInputsManager returns a FollowCameraInputsManager JavaScript class.
 func (ba *Babylon) FollowCameraInputsManager() *FollowCameraInputsManager {
 	p := ba.ctx.Get("FollowCameraInputsManager")
-	return FollowCameraInputsManagerFromJSObject(p)
+	return FollowCameraInputsManagerFromJSObject(p, ba.ctx)
 }
 
 // FollowCameraInputsManagerFromJSObject returns a wrapped FollowCameraInputsManager JavaScript class.
-func FollowCameraInputsManagerFromJSObject(p js.Value) *FollowCameraInputsManager {
-	return &FollowCameraInputsManager{CameraInputsManagerFromJSObject(p), FollowCameraFromJSObject(p)}
+func FollowCameraInputsManagerFromJSObject(p js.Value, ctx js.Value) *FollowCameraInputsManager {
+	return &FollowCameraInputsManager{CameraInputsManager: CameraInputsManagerFromJSObject(p, ctx), FollowCamera: FollowCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewFollowCameraInputsManager returns a new FollowCameraInputsManager object.
@@ -35,7 +36,7 @@ func FollowCameraInputsManagerFromJSObject(p js.Value) *FollowCameraInputsManage
 // https://doc.babylonjs.com/api/classes/babylon.followcamerainputsmanager
 func (ba *Babylon) NewFollowCameraInputsManager(camera *FollowCamera) *FollowCameraInputsManager {
 	p := ba.ctx.Get("FollowCameraInputsManager").New(camera.JSObject())
-	return FollowCameraInputsManagerFromJSObject(p)
+	return FollowCameraInputsManagerFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

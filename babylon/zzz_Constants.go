@@ -8,7 +8,10 @@ import (
 
 // Constants represents a babylon.js Constants.
 // Defines the cross module used constants to avoid circular dependncies
-type Constants struct{ p js.Value }
+type Constants struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (c *Constants) JSObject() js.Value { return c.p }
@@ -16,12 +19,12 @@ func (c *Constants) JSObject() js.Value { return c.p }
 // Constants returns a Constants JavaScript class.
 func (ba *Babylon) Constants() *Constants {
 	p := ba.ctx.Get("Constants")
-	return ConstantsFromJSObject(p)
+	return ConstantsFromJSObject(p, ba.ctx)
 }
 
 // ConstantsFromJSObject returns a wrapped Constants JavaScript class.
-func ConstantsFromJSObject(p js.Value) *Constants {
-	return &Constants{p: p}
+func ConstantsFromJSObject(p js.Value, ctx js.Value) *Constants {
+	return &Constants{p: p, ctx: ctx}
 }
 
 // TODO: methods

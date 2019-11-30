@@ -8,7 +8,10 @@ import (
 
 // NoiseProceduralTexture represents a babylon.js NoiseProceduralTexture.
 // Class used to generate noise procedural textures
-type NoiseProceduralTexture struct{ *ProceduralTexture }
+type NoiseProceduralTexture struct {
+	*ProceduralTexture
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (n *NoiseProceduralTexture) JSObject() js.Value { return n.p }
@@ -16,12 +19,12 @@ func (n *NoiseProceduralTexture) JSObject() js.Value { return n.p }
 // NoiseProceduralTexture returns a NoiseProceduralTexture JavaScript class.
 func (ba *Babylon) NoiseProceduralTexture() *NoiseProceduralTexture {
 	p := ba.ctx.Get("NoiseProceduralTexture")
-	return NoiseProceduralTextureFromJSObject(p)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
 }
 
 // NoiseProceduralTextureFromJSObject returns a wrapped NoiseProceduralTexture JavaScript class.
-func NoiseProceduralTextureFromJSObject(p js.Value) *NoiseProceduralTexture {
-	return &NoiseProceduralTexture{ProceduralTextureFromJSObject(p)}
+func NoiseProceduralTextureFromJSObject(p js.Value, ctx js.Value) *NoiseProceduralTexture {
+	return &NoiseProceduralTexture{ProceduralTexture: ProceduralTextureFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewNoiseProceduralTextureOpts contains optional parameters for NewNoiseProceduralTexture.
@@ -44,7 +47,7 @@ func (ba *Babylon) NewNoiseProceduralTexture(name string, opts *NewNoiseProcedur
 	}
 
 	p := ba.ctx.Get("NoiseProceduralTexture").New(name, opts.Size.JSObject(), opts.Scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps.JSObject())
-	return NoiseProceduralTextureFromJSObject(p)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -8,7 +8,10 @@ import (
 
 // TargetedAnimation represents a babylon.js TargetedAnimation.
 // This class defines the direct association between an animation and a target
-type TargetedAnimation struct{ p js.Value }
+type TargetedAnimation struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (t *TargetedAnimation) JSObject() js.Value { return t.p }
@@ -16,12 +19,12 @@ func (t *TargetedAnimation) JSObject() js.Value { return t.p }
 // TargetedAnimation returns a TargetedAnimation JavaScript class.
 func (ba *Babylon) TargetedAnimation() *TargetedAnimation {
 	p := ba.ctx.Get("TargetedAnimation")
-	return TargetedAnimationFromJSObject(p)
+	return TargetedAnimationFromJSObject(p, ba.ctx)
 }
 
 // TargetedAnimationFromJSObject returns a wrapped TargetedAnimation JavaScript class.
-func TargetedAnimationFromJSObject(p js.Value) *TargetedAnimation {
-	return &TargetedAnimation{p: p}
+func TargetedAnimationFromJSObject(p js.Value, ctx js.Value) *TargetedAnimation {
+	return &TargetedAnimation{p: p, ctx: ctx}
 }
 
 // TODO: methods

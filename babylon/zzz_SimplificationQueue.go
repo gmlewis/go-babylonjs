@@ -10,7 +10,10 @@ import (
 // Queue used to order the simplification tasks
 //
 // See: http://doc.babylonjs.com/how_to/in-browser_mesh_simplification
-type SimplificationQueue struct{ p js.Value }
+type SimplificationQueue struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *SimplificationQueue) JSObject() js.Value { return s.p }
@@ -18,12 +21,12 @@ func (s *SimplificationQueue) JSObject() js.Value { return s.p }
 // SimplificationQueue returns a SimplificationQueue JavaScript class.
 func (ba *Babylon) SimplificationQueue() *SimplificationQueue {
 	p := ba.ctx.Get("SimplificationQueue")
-	return SimplificationQueueFromJSObject(p)
+	return SimplificationQueueFromJSObject(p, ba.ctx)
 }
 
 // SimplificationQueueFromJSObject returns a wrapped SimplificationQueue JavaScript class.
-func SimplificationQueueFromJSObject(p js.Value) *SimplificationQueue {
-	return &SimplificationQueue{p: p}
+func SimplificationQueueFromJSObject(p js.Value, ctx js.Value) *SimplificationQueue {
+	return &SimplificationQueue{p: p, ctx: ctx}
 }
 
 // NewSimplificationQueue returns a new SimplificationQueue object.
@@ -31,7 +34,7 @@ func SimplificationQueueFromJSObject(p js.Value) *SimplificationQueue {
 // https://doc.babylonjs.com/api/classes/babylon.simplificationqueue
 func (ba *Babylon) NewSimplificationQueue() *SimplificationQueue {
 	p := ba.ctx.Get("SimplificationQueue").New()
-	return SimplificationQueueFromJSObject(p)
+	return SimplificationQueueFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

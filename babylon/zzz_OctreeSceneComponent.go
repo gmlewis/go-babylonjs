@@ -9,7 +9,10 @@ import (
 // OctreeSceneComponent represents a babylon.js OctreeSceneComponent.
 // Defines the octree scene component responsible to manage any octrees
 // in a given scene.
-type OctreeSceneComponent struct{ p js.Value }
+type OctreeSceneComponent struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (o *OctreeSceneComponent) JSObject() js.Value { return o.p }
@@ -17,12 +20,12 @@ func (o *OctreeSceneComponent) JSObject() js.Value { return o.p }
 // OctreeSceneComponent returns a OctreeSceneComponent JavaScript class.
 func (ba *Babylon) OctreeSceneComponent() *OctreeSceneComponent {
 	p := ba.ctx.Get("OctreeSceneComponent")
-	return OctreeSceneComponentFromJSObject(p)
+	return OctreeSceneComponentFromJSObject(p, ba.ctx)
 }
 
 // OctreeSceneComponentFromJSObject returns a wrapped OctreeSceneComponent JavaScript class.
-func OctreeSceneComponentFromJSObject(p js.Value) *OctreeSceneComponent {
-	return &OctreeSceneComponent{p: p}
+func OctreeSceneComponentFromJSObject(p js.Value, ctx js.Value) *OctreeSceneComponent {
+	return &OctreeSceneComponent{p: p, ctx: ctx}
 }
 
 // NewOctreeSceneComponent returns a new OctreeSceneComponent object.
@@ -30,7 +33,7 @@ func OctreeSceneComponentFromJSObject(p js.Value) *OctreeSceneComponent {
 // https://doc.babylonjs.com/api/classes/babylon.octreescenecomponent
 func (ba *Babylon) NewOctreeSceneComponent(scene *Scene) *OctreeSceneComponent {
 	p := ba.ctx.Get("OctreeSceneComponent").New(scene.JSObject())
-	return OctreeSceneComponentFromJSObject(p)
+	return OctreeSceneComponentFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

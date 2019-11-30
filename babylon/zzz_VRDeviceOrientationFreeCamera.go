@@ -10,7 +10,10 @@ import (
 // Camera used to simulate VR rendering (based on FreeCamera)
 //
 // See: http://doc.babylonjs.com/babylon101/cameras#vr-device-orientation-cameras
-type VRDeviceOrientationFreeCamera struct{ *DeviceOrientationCamera }
+type VRDeviceOrientationFreeCamera struct {
+	*DeviceOrientationCamera
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (v *VRDeviceOrientationFreeCamera) JSObject() js.Value { return v.p }
@@ -18,12 +21,12 @@ func (v *VRDeviceOrientationFreeCamera) JSObject() js.Value { return v.p }
 // VRDeviceOrientationFreeCamera returns a VRDeviceOrientationFreeCamera JavaScript class.
 func (ba *Babylon) VRDeviceOrientationFreeCamera() *VRDeviceOrientationFreeCamera {
 	p := ba.ctx.Get("VRDeviceOrientationFreeCamera")
-	return VRDeviceOrientationFreeCameraFromJSObject(p)
+	return VRDeviceOrientationFreeCameraFromJSObject(p, ba.ctx)
 }
 
 // VRDeviceOrientationFreeCameraFromJSObject returns a wrapped VRDeviceOrientationFreeCamera JavaScript class.
-func VRDeviceOrientationFreeCameraFromJSObject(p js.Value) *VRDeviceOrientationFreeCamera {
-	return &VRDeviceOrientationFreeCamera{DeviceOrientationCameraFromJSObject(p)}
+func VRDeviceOrientationFreeCameraFromJSObject(p js.Value, ctx js.Value) *VRDeviceOrientationFreeCamera {
+	return &VRDeviceOrientationFreeCamera{DeviceOrientationCamera: DeviceOrientationCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewVRDeviceOrientationFreeCameraOpts contains optional parameters for NewVRDeviceOrientationFreeCamera.
@@ -42,7 +45,7 @@ func (ba *Babylon) NewVRDeviceOrientationFreeCamera(name string, position *Vecto
 	}
 
 	p := ba.ctx.Get("VRDeviceOrientationFreeCamera").New(name, position.JSObject(), scene.JSObject(), opts.CompensateDistortion.JSObject(), opts.VrCameraMetrics.JSObject())
-	return VRDeviceOrientationFreeCameraFromJSObject(p)
+	return VRDeviceOrientationFreeCameraFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

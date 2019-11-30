@@ -10,7 +10,10 @@ import (
 // Class used for the default loading screen
 //
 // See: http://doc.babylonjs.com/how_to/creating_a_custom_loading_screen
-type DefaultLoadingScreen struct{ p js.Value }
+type DefaultLoadingScreen struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (d *DefaultLoadingScreen) JSObject() js.Value { return d.p }
@@ -18,12 +21,12 @@ func (d *DefaultLoadingScreen) JSObject() js.Value { return d.p }
 // DefaultLoadingScreen returns a DefaultLoadingScreen JavaScript class.
 func (ba *Babylon) DefaultLoadingScreen() *DefaultLoadingScreen {
 	p := ba.ctx.Get("DefaultLoadingScreen")
-	return DefaultLoadingScreenFromJSObject(p)
+	return DefaultLoadingScreenFromJSObject(p, ba.ctx)
 }
 
 // DefaultLoadingScreenFromJSObject returns a wrapped DefaultLoadingScreen JavaScript class.
-func DefaultLoadingScreenFromJSObject(p js.Value) *DefaultLoadingScreen {
-	return &DefaultLoadingScreen{p: p}
+func DefaultLoadingScreenFromJSObject(p js.Value, ctx js.Value) *DefaultLoadingScreen {
+	return &DefaultLoadingScreen{p: p, ctx: ctx}
 }
 
 // NewDefaultLoadingScreenOpts contains optional parameters for NewDefaultLoadingScreen.
@@ -42,7 +45,7 @@ func (ba *Babylon) NewDefaultLoadingScreen(_renderingCanvas js.Value, opts *NewD
 	}
 
 	p := ba.ctx.Get("DefaultLoadingScreen").New(_renderingCanvas, opts._loadingText.JSObject(), opts._loadingDivBackgroundColor.JSObject())
-	return DefaultLoadingScreenFromJSObject(p)
+	return DefaultLoadingScreenFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

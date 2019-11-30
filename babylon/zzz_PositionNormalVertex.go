@@ -8,7 +8,10 @@ import (
 
 // PositionNormalVertex represents a babylon.js PositionNormalVertex.
 // Contains position and normal vectors for a vertex
-type PositionNormalVertex struct{ p js.Value }
+type PositionNormalVertex struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (p *PositionNormalVertex) JSObject() js.Value { return p.p }
@@ -16,12 +19,12 @@ func (p *PositionNormalVertex) JSObject() js.Value { return p.p }
 // PositionNormalVertex returns a PositionNormalVertex JavaScript class.
 func (ba *Babylon) PositionNormalVertex() *PositionNormalVertex {
 	p := ba.ctx.Get("PositionNormalVertex")
-	return PositionNormalVertexFromJSObject(p)
+	return PositionNormalVertexFromJSObject(p, ba.ctx)
 }
 
 // PositionNormalVertexFromJSObject returns a wrapped PositionNormalVertex JavaScript class.
-func PositionNormalVertexFromJSObject(p js.Value) *PositionNormalVertex {
-	return &PositionNormalVertex{p: p}
+func PositionNormalVertexFromJSObject(p js.Value, ctx js.Value) *PositionNormalVertex {
+	return &PositionNormalVertex{p: p, ctx: ctx}
 }
 
 // NewPositionNormalVertexOpts contains optional parameters for NewPositionNormalVertex.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewPositionNormalVertex(opts *NewPositionNormalVertexOpts) *P
 	}
 
 	p := ba.ctx.Get("PositionNormalVertex").New(opts.Position.JSObject(), opts.Normal.JSObject())
-	return PositionNormalVertexFromJSObject(p)
+	return PositionNormalVertexFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

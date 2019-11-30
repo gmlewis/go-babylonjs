@@ -8,7 +8,10 @@ import (
 
 // ShapeBuilder represents a babylon.js ShapeBuilder.
 // Class containing static functions to help procedurally build meshes
-type ShapeBuilder struct{ p js.Value }
+type ShapeBuilder struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *ShapeBuilder) JSObject() js.Value { return s.p }
@@ -16,12 +19,12 @@ func (s *ShapeBuilder) JSObject() js.Value { return s.p }
 // ShapeBuilder returns a ShapeBuilder JavaScript class.
 func (ba *Babylon) ShapeBuilder() *ShapeBuilder {
 	p := ba.ctx.Get("ShapeBuilder")
-	return ShapeBuilderFromJSObject(p)
+	return ShapeBuilderFromJSObject(p, ba.ctx)
 }
 
 // ShapeBuilderFromJSObject returns a wrapped ShapeBuilder JavaScript class.
-func ShapeBuilderFromJSObject(p js.Value) *ShapeBuilder {
-	return &ShapeBuilder{p: p}
+func ShapeBuilderFromJSObject(p js.Value, ctx js.Value) *ShapeBuilder {
+	return &ShapeBuilder{p: p, ctx: ctx}
 }
 
 // TODO: methods

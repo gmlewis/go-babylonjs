@@ -10,7 +10,10 @@ import (
 // Renders to multiple views with a single draw call
 //
 // See: https://www.khronos.org/registry/webgl/extensions/WEBGL_multiview/
-type MultiviewRenderTarget struct{ *RenderTargetTexture }
+type MultiviewRenderTarget struct {
+	*RenderTargetTexture
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (m *MultiviewRenderTarget) JSObject() js.Value { return m.p }
@@ -18,12 +21,12 @@ func (m *MultiviewRenderTarget) JSObject() js.Value { return m.p }
 // MultiviewRenderTarget returns a MultiviewRenderTarget JavaScript class.
 func (ba *Babylon) MultiviewRenderTarget() *MultiviewRenderTarget {
 	p := ba.ctx.Get("MultiviewRenderTarget")
-	return MultiviewRenderTargetFromJSObject(p)
+	return MultiviewRenderTargetFromJSObject(p, ba.ctx)
 }
 
 // MultiviewRenderTargetFromJSObject returns a wrapped MultiviewRenderTarget JavaScript class.
-func MultiviewRenderTargetFromJSObject(p js.Value) *MultiviewRenderTarget {
-	return &MultiviewRenderTarget{RenderTargetTextureFromJSObject(p)}
+func MultiviewRenderTargetFromJSObject(p js.Value, ctx js.Value) *MultiviewRenderTarget {
+	return &MultiviewRenderTarget{RenderTargetTexture: RenderTargetTextureFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewMultiviewRenderTargetOpts contains optional parameters for NewMultiviewRenderTarget.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewMultiviewRenderTarget(scene *Scene, opts *NewMultiviewRend
 	}
 
 	p := ba.ctx.Get("MultiviewRenderTarget").New(scene.JSObject(), opts.Size.JSObject())
-	return MultiviewRenderTargetFromJSObject(p)
+	return MultiviewRenderTargetFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

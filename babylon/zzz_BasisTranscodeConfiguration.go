@@ -8,7 +8,10 @@ import (
 
 // BasisTranscodeConfiguration represents a babylon.js BasisTranscodeConfiguration.
 // Configuration options for the Basis transcoder
-type BasisTranscodeConfiguration struct{ p js.Value }
+type BasisTranscodeConfiguration struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (b *BasisTranscodeConfiguration) JSObject() js.Value { return b.p }
@@ -16,12 +19,12 @@ func (b *BasisTranscodeConfiguration) JSObject() js.Value { return b.p }
 // BasisTranscodeConfiguration returns a BasisTranscodeConfiguration JavaScript class.
 func (ba *Babylon) BasisTranscodeConfiguration() *BasisTranscodeConfiguration {
 	p := ba.ctx.Get("BasisTranscodeConfiguration")
-	return BasisTranscodeConfigurationFromJSObject(p)
+	return BasisTranscodeConfigurationFromJSObject(p, ba.ctx)
 }
 
 // BasisTranscodeConfigurationFromJSObject returns a wrapped BasisTranscodeConfiguration JavaScript class.
-func BasisTranscodeConfigurationFromJSObject(p js.Value) *BasisTranscodeConfiguration {
-	return &BasisTranscodeConfiguration{p: p}
+func BasisTranscodeConfigurationFromJSObject(p js.Value, ctx js.Value) *BasisTranscodeConfiguration {
+	return &BasisTranscodeConfiguration{p: p, ctx: ctx}
 }
 
 // TODO: methods

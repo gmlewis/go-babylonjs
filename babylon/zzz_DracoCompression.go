@@ -12,7 +12,10 @@ import (
 // To decode Draco compressed data, get the default DracoCompression object and call decodeMeshAsync:
 //
 // See: https://www.babylonjs-playground.com/#N3EK4B#0
-type DracoCompression struct{ p js.Value }
+type DracoCompression struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (d *DracoCompression) JSObject() js.Value { return d.p }
@@ -20,12 +23,12 @@ func (d *DracoCompression) JSObject() js.Value { return d.p }
 // DracoCompression returns a DracoCompression JavaScript class.
 func (ba *Babylon) DracoCompression() *DracoCompression {
 	p := ba.ctx.Get("DracoCompression")
-	return DracoCompressionFromJSObject(p)
+	return DracoCompressionFromJSObject(p, ba.ctx)
 }
 
 // DracoCompressionFromJSObject returns a wrapped DracoCompression JavaScript class.
-func DracoCompressionFromJSObject(p js.Value) *DracoCompression {
-	return &DracoCompression{p: p}
+func DracoCompressionFromJSObject(p js.Value, ctx js.Value) *DracoCompression {
+	return &DracoCompression{p: p, ctx: ctx}
 }
 
 // NewDracoCompressionOpts contains optional parameters for NewDracoCompression.
@@ -42,7 +45,7 @@ func (ba *Babylon) NewDracoCompression(opts *NewDracoCompressionOpts) *DracoComp
 	}
 
 	p := ba.ctx.Get("DracoCompression").New(opts.NumWorkers.JSObject())
-	return DracoCompressionFromJSObject(p)
+	return DracoCompressionFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

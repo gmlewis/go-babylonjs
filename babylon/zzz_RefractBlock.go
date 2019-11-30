@@ -8,7 +8,10 @@ import (
 
 // RefractBlock represents a babylon.js RefractBlock.
 // Block used to get the refracted vector from a direction and a normal
-type RefractBlock struct{ *NodeMaterialBlock }
+type RefractBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (r *RefractBlock) JSObject() js.Value { return r.p }
@@ -16,12 +19,12 @@ func (r *RefractBlock) JSObject() js.Value { return r.p }
 // RefractBlock returns a RefractBlock JavaScript class.
 func (ba *Babylon) RefractBlock() *RefractBlock {
 	p := ba.ctx.Get("RefractBlock")
-	return RefractBlockFromJSObject(p)
+	return RefractBlockFromJSObject(p, ba.ctx)
 }
 
 // RefractBlockFromJSObject returns a wrapped RefractBlock JavaScript class.
-func RefractBlockFromJSObject(p js.Value) *RefractBlock {
-	return &RefractBlock{NodeMaterialBlockFromJSObject(p)}
+func RefractBlockFromJSObject(p js.Value, ctx js.Value) *RefractBlock {
+	return &RefractBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewRefractBlock returns a new RefractBlock object.
@@ -29,7 +32,7 @@ func RefractBlockFromJSObject(p js.Value) *RefractBlock {
 // https://doc.babylonjs.com/api/classes/babylon.refractblock
 func (ba *Babylon) NewRefractBlock(name string) *RefractBlock {
 	p := ba.ctx.Get("RefractBlock").New(name)
-	return RefractBlockFromJSObject(p)
+	return RefractBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

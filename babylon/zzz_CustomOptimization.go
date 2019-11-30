@@ -10,7 +10,10 @@ import (
 // Defines an optimization based on user defined callback.
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
-type CustomOptimization struct{ *SceneOptimization }
+type CustomOptimization struct {
+	*SceneOptimization
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (c *CustomOptimization) JSObject() js.Value { return c.p }
@@ -18,12 +21,12 @@ func (c *CustomOptimization) JSObject() js.Value { return c.p }
 // CustomOptimization returns a CustomOptimization JavaScript class.
 func (ba *Babylon) CustomOptimization() *CustomOptimization {
 	p := ba.ctx.Get("CustomOptimization")
-	return CustomOptimizationFromJSObject(p)
+	return CustomOptimizationFromJSObject(p, ba.ctx)
 }
 
 // CustomOptimizationFromJSObject returns a wrapped CustomOptimization JavaScript class.
-func CustomOptimizationFromJSObject(p js.Value) *CustomOptimization {
-	return &CustomOptimization{SceneOptimizationFromJSObject(p)}
+func CustomOptimizationFromJSObject(p js.Value, ctx js.Value) *CustomOptimization {
+	return &CustomOptimization{SceneOptimization: SceneOptimizationFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewCustomOptimizationOpts contains optional parameters for NewCustomOptimization.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewCustomOptimization(opts *NewCustomOptimizationOpts) *Custo
 	}
 
 	p := ba.ctx.Get("CustomOptimization").New(opts.Priority.JSObject())
-	return CustomOptimizationFromJSObject(p)
+	return CustomOptimizationFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -8,7 +8,10 @@ import (
 
 // RawTexture2DArray represents a babylon.js RawTexture2DArray.
 // Class used to store 2D array textures containing user data
-type RawTexture2DArray struct{ *Texture }
+type RawTexture2DArray struct {
+	*Texture
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (r *RawTexture2DArray) JSObject() js.Value { return r.p }
@@ -16,12 +19,12 @@ func (r *RawTexture2DArray) JSObject() js.Value { return r.p }
 // RawTexture2DArray returns a RawTexture2DArray JavaScript class.
 func (ba *Babylon) RawTexture2DArray() *RawTexture2DArray {
 	p := ba.ctx.Get("RawTexture2DArray")
-	return RawTexture2DArrayFromJSObject(p)
+	return RawTexture2DArrayFromJSObject(p, ba.ctx)
 }
 
 // RawTexture2DArrayFromJSObject returns a wrapped RawTexture2DArray JavaScript class.
-func RawTexture2DArrayFromJSObject(p js.Value) *RawTexture2DArray {
-	return &RawTexture2DArray{TextureFromJSObject(p)}
+func RawTexture2DArrayFromJSObject(p js.Value, ctx js.Value) *RawTexture2DArray {
+	return &RawTexture2DArray{Texture: TextureFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewRawTexture2DArrayOpts contains optional parameters for NewRawTexture2DArray.
@@ -44,7 +47,7 @@ func (ba *Babylon) NewRawTexture2DArray(data js.Value, width float64, height flo
 	}
 
 	p := ba.ctx.Get("RawTexture2DArray").New(data, width, height, depth, format, scene.JSObject(), opts.GenerateMipMaps.JSObject(), opts.InvertY.JSObject(), opts.SamplingMode.JSObject(), opts.TextureType.JSObject())
-	return RawTexture2DArrayFromJSObject(p)
+	return RawTexture2DArrayFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

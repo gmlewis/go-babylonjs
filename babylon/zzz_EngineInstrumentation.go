@@ -10,7 +10,10 @@ import (
 // This class can be used to get instrumentation data from a Babylon engine
 //
 // See: http://doc.babylonjs.com/how_to/optimizing_your_scene#engineinstrumentation
-type EngineInstrumentation struct{ p js.Value }
+type EngineInstrumentation struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (e *EngineInstrumentation) JSObject() js.Value { return e.p }
@@ -18,12 +21,12 @@ func (e *EngineInstrumentation) JSObject() js.Value { return e.p }
 // EngineInstrumentation returns a EngineInstrumentation JavaScript class.
 func (ba *Babylon) EngineInstrumentation() *EngineInstrumentation {
 	p := ba.ctx.Get("EngineInstrumentation")
-	return EngineInstrumentationFromJSObject(p)
+	return EngineInstrumentationFromJSObject(p, ba.ctx)
 }
 
 // EngineInstrumentationFromJSObject returns a wrapped EngineInstrumentation JavaScript class.
-func EngineInstrumentationFromJSObject(p js.Value) *EngineInstrumentation {
-	return &EngineInstrumentation{p: p}
+func EngineInstrumentationFromJSObject(p js.Value, ctx js.Value) *EngineInstrumentation {
+	return &EngineInstrumentation{p: p, ctx: ctx}
 }
 
 // NewEngineInstrumentation returns a new EngineInstrumentation object.
@@ -31,7 +34,7 @@ func EngineInstrumentationFromJSObject(p js.Value) *EngineInstrumentation {
 // https://doc.babylonjs.com/api/classes/babylon.engineinstrumentation
 func (ba *Babylon) NewEngineInstrumentation(engine *Engine) *EngineInstrumentation {
 	p := ba.ctx.Get("EngineInstrumentation").New(engine.JSObject())
-	return EngineInstrumentationFromJSObject(p)
+	return EngineInstrumentationFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

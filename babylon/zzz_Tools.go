@@ -8,7 +8,10 @@ import (
 
 // Tools represents a babylon.js Tools.
 // Class containing a set of static utilities functions
-type Tools struct{ p js.Value }
+type Tools struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (t *Tools) JSObject() js.Value { return t.p }
@@ -16,12 +19,12 @@ func (t *Tools) JSObject() js.Value { return t.p }
 // Tools returns a Tools JavaScript class.
 func (ba *Babylon) Tools() *Tools {
 	p := ba.ctx.Get("Tools")
-	return ToolsFromJSObject(p)
+	return ToolsFromJSObject(p, ba.ctx)
 }
 
 // ToolsFromJSObject returns a wrapped Tools JavaScript class.
-func ToolsFromJSObject(p js.Value) *Tools {
-	return &Tools{p: p}
+func ToolsFromJSObject(p js.Value, ctx js.Value) *Tools {
+	return &Tools{p: p, ctx: ctx}
 }
 
 // TODO: methods

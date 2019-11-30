@@ -11,7 +11,10 @@ import (
 //
 // It basically takes care rendering the font front the given font size to a texture.
 // This is used later on in the postprocess.
-type AsciiArtFontTexture struct{ *BaseTexture }
+type AsciiArtFontTexture struct {
+	*BaseTexture
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (a *AsciiArtFontTexture) JSObject() js.Value { return a.p }
@@ -19,12 +22,12 @@ func (a *AsciiArtFontTexture) JSObject() js.Value { return a.p }
 // AsciiArtFontTexture returns a AsciiArtFontTexture JavaScript class.
 func (ba *Babylon) AsciiArtFontTexture() *AsciiArtFontTexture {
 	p := ba.ctx.Get("AsciiArtFontTexture")
-	return AsciiArtFontTextureFromJSObject(p)
+	return AsciiArtFontTextureFromJSObject(p, ba.ctx)
 }
 
 // AsciiArtFontTextureFromJSObject returns a wrapped AsciiArtFontTexture JavaScript class.
-func AsciiArtFontTextureFromJSObject(p js.Value) *AsciiArtFontTexture {
-	return &AsciiArtFontTexture{BaseTextureFromJSObject(p)}
+func AsciiArtFontTextureFromJSObject(p js.Value, ctx js.Value) *AsciiArtFontTexture {
+	return &AsciiArtFontTexture{BaseTexture: BaseTextureFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewAsciiArtFontTextureOpts contains optional parameters for NewAsciiArtFontTexture.
@@ -41,7 +44,7 @@ func (ba *Babylon) NewAsciiArtFontTexture(name string, font string, text string,
 	}
 
 	p := ba.ctx.Get("AsciiArtFontTexture").New(name, font, text, opts.Scene.JSObject())
-	return AsciiArtFontTextureFromJSObject(p)
+	return AsciiArtFontTextureFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

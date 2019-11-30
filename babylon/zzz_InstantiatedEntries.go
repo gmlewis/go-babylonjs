@@ -8,7 +8,10 @@ import (
 
 // InstantiatedEntries represents a babylon.js InstantiatedEntries.
 // Class used to store the output of the AssetContainer.instantiateAllMeshesToScene function
-type InstantiatedEntries struct{ p js.Value }
+type InstantiatedEntries struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (i *InstantiatedEntries) JSObject() js.Value { return i.p }
@@ -16,12 +19,12 @@ func (i *InstantiatedEntries) JSObject() js.Value { return i.p }
 // InstantiatedEntries returns a InstantiatedEntries JavaScript class.
 func (ba *Babylon) InstantiatedEntries() *InstantiatedEntries {
 	p := ba.ctx.Get("InstantiatedEntries")
-	return InstantiatedEntriesFromJSObject(p)
+	return InstantiatedEntriesFromJSObject(p, ba.ctx)
 }
 
 // InstantiatedEntriesFromJSObject returns a wrapped InstantiatedEntries JavaScript class.
-func InstantiatedEntriesFromJSObject(p js.Value) *InstantiatedEntries {
-	return &InstantiatedEntries{p: p}
+func InstantiatedEntriesFromJSObject(p js.Value, ctx js.Value) *InstantiatedEntries {
+	return &InstantiatedEntries{p: p, ctx: ctx}
 }
 
 // TODO: methods

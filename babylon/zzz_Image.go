@@ -8,7 +8,10 @@ import (
 
 // Image represents a babylon.js Image.
 // Class used to create 2D images
-type Image struct{ *Control }
+type Image struct {
+	*Control
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (i *Image) JSObject() js.Value { return i.p }
@@ -16,12 +19,12 @@ func (i *Image) JSObject() js.Value { return i.p }
 // Image returns a Image JavaScript class.
 func (ba *Babylon) Image() *Image {
 	p := ba.ctx.Get("Image")
-	return ImageFromJSObject(p)
+	return ImageFromJSObject(p, ba.ctx)
 }
 
 // ImageFromJSObject returns a wrapped Image JavaScript class.
-func ImageFromJSObject(p js.Value) *Image {
-	return &Image{ControlFromJSObject(p)}
+func ImageFromJSObject(p js.Value, ctx js.Value) *Image {
+	return &Image{Control: ControlFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewImageOpts contains optional parameters for NewImage.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewImage(opts *NewImageOpts) *Image {
 	}
 
 	p := ba.ctx.Get("Image").New(opts.Name.JSObject(), opts.Url.JSObject())
-	return ImageFromJSObject(p)
+	return ImageFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

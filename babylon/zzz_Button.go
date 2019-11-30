@@ -8,7 +8,10 @@ import (
 
 // Button represents a babylon.js Button.
 // Class used to create 2D buttons
-type Button struct{ *Rectangle }
+type Button struct {
+	*Rectangle
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (b *Button) JSObject() js.Value { return b.p }
@@ -16,12 +19,12 @@ func (b *Button) JSObject() js.Value { return b.p }
 // Button returns a Button JavaScript class.
 func (ba *Babylon) Button() *Button {
 	p := ba.ctx.Get("Button")
-	return ButtonFromJSObject(p)
+	return ButtonFromJSObject(p, ba.ctx)
 }
 
 // ButtonFromJSObject returns a wrapped Button JavaScript class.
-func ButtonFromJSObject(p js.Value) *Button {
-	return &Button{RectangleFromJSObject(p)}
+func ButtonFromJSObject(p js.Value, ctx js.Value) *Button {
+	return &Button{Rectangle: RectangleFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewButtonOpts contains optional parameters for NewButton.
@@ -38,7 +41,7 @@ func (ba *Babylon) NewButton(opts *NewButtonOpts) *Button {
 	}
 
 	p := ba.ctx.Get("Button").New(opts.Name.JSObject())
-	return ButtonFromJSObject(p)
+	return ButtonFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

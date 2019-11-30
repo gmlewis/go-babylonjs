@@ -8,7 +8,10 @@ import (
 
 // Size represents a babylon.js Size.
 // Size containing widht and height
-type Size struct{ p js.Value }
+type Size struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *Size) JSObject() js.Value { return s.p }
@@ -16,12 +19,12 @@ func (s *Size) JSObject() js.Value { return s.p }
 // Size returns a Size JavaScript class.
 func (ba *Babylon) Size() *Size {
 	p := ba.ctx.Get("Size")
-	return SizeFromJSObject(p)
+	return SizeFromJSObject(p, ba.ctx)
 }
 
 // SizeFromJSObject returns a wrapped Size JavaScript class.
-func SizeFromJSObject(p js.Value) *Size {
-	return &Size{p: p}
+func SizeFromJSObject(p js.Value, ctx js.Value) *Size {
+	return &Size{p: p, ctx: ctx}
 }
 
 // NewSize returns a new Size object.
@@ -29,7 +32,7 @@ func SizeFromJSObject(p js.Value) *Size {
 // https://doc.babylonjs.com/api/classes/babylon.size
 func (ba *Babylon) NewSize(width float64, height float64) *Size {
 	p := ba.ctx.Get("Size").New(width, height)
-	return SizeFromJSObject(p)
+	return SizeFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

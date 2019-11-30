@@ -9,7 +9,10 @@ import (
 // DefaultRenderingPipeline represents a babylon.js DefaultRenderingPipeline.
 // The default rendering pipeline can be added to a scene to apply common post processing effects such as anti-aliasing or depth of field.
 // See &lt;a href=&#34;https://doc.babylonjs.com/how_to/using_default_rendering_pipeline&#34;&gt;https://doc.babylonjs.com/how_to/using_default_rendering_pipeline&lt;/a&gt;
-type DefaultRenderingPipeline struct{ *PostProcessRenderPipeline }
+type DefaultRenderingPipeline struct {
+	*PostProcessRenderPipeline
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (d *DefaultRenderingPipeline) JSObject() js.Value { return d.p }
@@ -17,12 +20,12 @@ func (d *DefaultRenderingPipeline) JSObject() js.Value { return d.p }
 // DefaultRenderingPipeline returns a DefaultRenderingPipeline JavaScript class.
 func (ba *Babylon) DefaultRenderingPipeline() *DefaultRenderingPipeline {
 	p := ba.ctx.Get("DefaultRenderingPipeline")
-	return DefaultRenderingPipelineFromJSObject(p)
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
 }
 
 // DefaultRenderingPipelineFromJSObject returns a wrapped DefaultRenderingPipeline JavaScript class.
-func DefaultRenderingPipelineFromJSObject(p js.Value) *DefaultRenderingPipeline {
-	return &DefaultRenderingPipeline{PostProcessRenderPipelineFromJSObject(p)}
+func DefaultRenderingPipelineFromJSObject(p js.Value, ctx js.Value) *DefaultRenderingPipeline {
+	return &DefaultRenderingPipeline{PostProcessRenderPipeline: PostProcessRenderPipelineFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewDefaultRenderingPipelineOpts contains optional parameters for NewDefaultRenderingPipeline.
@@ -47,7 +50,7 @@ func (ba *Babylon) NewDefaultRenderingPipeline(opts *NewDefaultRenderingPipeline
 	}
 
 	p := ba.ctx.Get("DefaultRenderingPipeline").New(opts.Name.JSObject(), opts.Hdr.JSObject(), opts.Scene.JSObject(), opts.Cameras.JSObject(), opts.AutomaticBuild.JSObject())
-	return DefaultRenderingPipelineFromJSObject(p)
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

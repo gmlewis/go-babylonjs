@@ -10,7 +10,10 @@ import (
 // Easing function with a power of 3 shape (see link below).
 //
 // See: http://doc.babylonjs.com/babylon101/animations#easing-functions
-type CubicEase struct{ *EasingFunction }
+type CubicEase struct {
+	*EasingFunction
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (c *CubicEase) JSObject() js.Value { return c.p }
@@ -18,12 +21,12 @@ func (c *CubicEase) JSObject() js.Value { return c.p }
 // CubicEase returns a CubicEase JavaScript class.
 func (ba *Babylon) CubicEase() *CubicEase {
 	p := ba.ctx.Get("CubicEase")
-	return CubicEaseFromJSObject(p)
+	return CubicEaseFromJSObject(p, ba.ctx)
 }
 
 // CubicEaseFromJSObject returns a wrapped CubicEase JavaScript class.
-func CubicEaseFromJSObject(p js.Value) *CubicEase {
-	return &CubicEase{EasingFunctionFromJSObject(p)}
+func CubicEaseFromJSObject(p js.Value, ctx js.Value) *CubicEase {
+	return &CubicEase{EasingFunction: EasingFunctionFromJSObject(p, ctx), ctx: ctx}
 }
 
 // TODO: methods

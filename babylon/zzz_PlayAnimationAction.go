@@ -10,7 +10,10 @@ import (
 // This defines an action responsible to start an animation once triggered.
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_actions
-type PlayAnimationAction struct{ *Action }
+type PlayAnimationAction struct {
+	*Action
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (p *PlayAnimationAction) JSObject() js.Value { return p.p }
@@ -18,12 +21,12 @@ func (p *PlayAnimationAction) JSObject() js.Value { return p.p }
 // PlayAnimationAction returns a PlayAnimationAction JavaScript class.
 func (ba *Babylon) PlayAnimationAction() *PlayAnimationAction {
 	p := ba.ctx.Get("PlayAnimationAction")
-	return PlayAnimationActionFromJSObject(p)
+	return PlayAnimationActionFromJSObject(p, ba.ctx)
 }
 
 // PlayAnimationActionFromJSObject returns a wrapped PlayAnimationAction JavaScript class.
-func PlayAnimationActionFromJSObject(p js.Value) *PlayAnimationAction {
-	return &PlayAnimationAction{ActionFromJSObject(p)}
+func PlayAnimationActionFromJSObject(p js.Value, ctx js.Value) *PlayAnimationAction {
+	return &PlayAnimationAction{Action: ActionFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewPlayAnimationActionOpts contains optional parameters for NewPlayAnimationAction.
@@ -42,7 +45,7 @@ func (ba *Babylon) NewPlayAnimationAction(triggerOptions interface{}, target int
 	}
 
 	p := ba.ctx.Get("PlayAnimationAction").New(triggerOptions, target, from, to, opts.Loop.JSObject(), opts.Condition.JSObject())
-	return PlayAnimationActionFromJSObject(p)
+	return PlayAnimationActionFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

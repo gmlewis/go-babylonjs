@@ -8,7 +8,10 @@ import (
 
 // NegateBlock represents a babylon.js NegateBlock.
 // Block used to get negative version of a value (i.e. x * -1)
-type NegateBlock struct{ *NodeMaterialBlock }
+type NegateBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (n *NegateBlock) JSObject() js.Value { return n.p }
@@ -16,12 +19,12 @@ func (n *NegateBlock) JSObject() js.Value { return n.p }
 // NegateBlock returns a NegateBlock JavaScript class.
 func (ba *Babylon) NegateBlock() *NegateBlock {
 	p := ba.ctx.Get("NegateBlock")
-	return NegateBlockFromJSObject(p)
+	return NegateBlockFromJSObject(p, ba.ctx)
 }
 
 // NegateBlockFromJSObject returns a wrapped NegateBlock JavaScript class.
-func NegateBlockFromJSObject(p js.Value) *NegateBlock {
-	return &NegateBlock{NodeMaterialBlockFromJSObject(p)}
+func NegateBlockFromJSObject(p js.Value, ctx js.Value) *NegateBlock {
+	return &NegateBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewNegateBlock returns a new NegateBlock object.
@@ -29,7 +32,7 @@ func NegateBlockFromJSObject(p js.Value) *NegateBlock {
 // https://doc.babylonjs.com/api/classes/babylon.negateblock
 func (ba *Babylon) NewNegateBlock(name string) *NegateBlock {
 	p := ba.ctx.Get("NegateBlock").New(name)
-	return NegateBlockFromJSObject(p)
+	return NegateBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -10,7 +10,10 @@ import (
 // Base set of functionality needed to create an XR experince (WebXRSessionManager, Camera, StateManagement, etc.)
 //
 // See: https://doc.babylonjs.com/how_to/webxr
-type WebXRExperienceHelper struct{ p js.Value }
+type WebXRExperienceHelper struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (w *WebXRExperienceHelper) JSObject() js.Value { return w.p }
@@ -18,12 +21,12 @@ func (w *WebXRExperienceHelper) JSObject() js.Value { return w.p }
 // WebXRExperienceHelper returns a WebXRExperienceHelper JavaScript class.
 func (ba *Babylon) WebXRExperienceHelper() *WebXRExperienceHelper {
 	p := ba.ctx.Get("WebXRExperienceHelper")
-	return WebXRExperienceHelperFromJSObject(p)
+	return WebXRExperienceHelperFromJSObject(p, ba.ctx)
 }
 
 // WebXRExperienceHelperFromJSObject returns a wrapped WebXRExperienceHelper JavaScript class.
-func WebXRExperienceHelperFromJSObject(p js.Value) *WebXRExperienceHelper {
-	return &WebXRExperienceHelper{p: p}
+func WebXRExperienceHelperFromJSObject(p js.Value, ctx js.Value) *WebXRExperienceHelper {
+	return &WebXRExperienceHelper{p: p, ctx: ctx}
 }
 
 // TODO: methods

@@ -8,7 +8,10 @@ import (
 
 // FilterPostProcess represents a babylon.js FilterPostProcess.
 // Applies a kernel filter to the image
-type FilterPostProcess struct{ *PostProcess }
+type FilterPostProcess struct {
+	*PostProcess
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (f *FilterPostProcess) JSObject() js.Value { return f.p }
@@ -16,12 +19,12 @@ func (f *FilterPostProcess) JSObject() js.Value { return f.p }
 // FilterPostProcess returns a FilterPostProcess JavaScript class.
 func (ba *Babylon) FilterPostProcess() *FilterPostProcess {
 	p := ba.ctx.Get("FilterPostProcess")
-	return FilterPostProcessFromJSObject(p)
+	return FilterPostProcessFromJSObject(p, ba.ctx)
 }
 
 // FilterPostProcessFromJSObject returns a wrapped FilterPostProcess JavaScript class.
-func FilterPostProcessFromJSObject(p js.Value) *FilterPostProcess {
-	return &FilterPostProcess{PostProcessFromJSObject(p)}
+func FilterPostProcessFromJSObject(p js.Value, ctx js.Value) *FilterPostProcess {
+	return &FilterPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewFilterPostProcessOpts contains optional parameters for NewFilterPostProcess.
@@ -42,7 +45,7 @@ func (ba *Babylon) NewFilterPostProcess(name string, kernelMatrix *Matrix, optio
 	}
 
 	p := ba.ctx.Get("FilterPostProcess").New(name, kernelMatrix.JSObject(), options, camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject())
-	return FilterPostProcessFromJSObject(p)
+	return FilterPostProcessFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

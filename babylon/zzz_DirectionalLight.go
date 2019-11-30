@@ -11,7 +11,10 @@ import (
 // The light is emitted from everywhere in the specified direction, and has an infinite range.
 // An example of a directional light is when a distance planet is lit by the apparently parallel lines of light from its sun. Light in a downward direction will light the top of an object.
 // Documentation: &lt;a href=&#34;https://doc.babylonjs.com/babylon101/lights&#34;&gt;https://doc.babylonjs.com/babylon101/lights&lt;/a&gt;
-type DirectionalLight struct{ *ShadowLight }
+type DirectionalLight struct {
+	*ShadowLight
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (d *DirectionalLight) JSObject() js.Value { return d.p }
@@ -19,12 +22,12 @@ func (d *DirectionalLight) JSObject() js.Value { return d.p }
 // DirectionalLight returns a DirectionalLight JavaScript class.
 func (ba *Babylon) DirectionalLight() *DirectionalLight {
 	p := ba.ctx.Get("DirectionalLight")
-	return DirectionalLightFromJSObject(p)
+	return DirectionalLightFromJSObject(p, ba.ctx)
 }
 
 // DirectionalLightFromJSObject returns a wrapped DirectionalLight JavaScript class.
-func DirectionalLightFromJSObject(p js.Value) *DirectionalLight {
-	return &DirectionalLight{ShadowLightFromJSObject(p)}
+func DirectionalLightFromJSObject(p js.Value, ctx js.Value) *DirectionalLight {
+	return &DirectionalLight{ShadowLight: ShadowLightFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewDirectionalLight returns a new DirectionalLight object.
@@ -32,7 +35,7 @@ func DirectionalLightFromJSObject(p js.Value) *DirectionalLight {
 // https://doc.babylonjs.com/api/classes/babylon.directionallight
 func (ba *Babylon) NewDirectionalLight(name string, direction *Vector3, scene *Scene) *DirectionalLight {
 	p := ba.ctx.Get("DirectionalLight").New(name, direction.JSObject(), scene.JSObject())
-	return DirectionalLightFromJSObject(p)
+	return DirectionalLightFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

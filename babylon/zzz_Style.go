@@ -9,7 +9,10 @@ import (
 // Style represents a babylon.js Style.
 // Define a style used by control to automatically setup properties based on a template.
 // Only support font related properties so far
-type Style struct{ p js.Value }
+type Style struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *Style) JSObject() js.Value { return s.p }
@@ -17,12 +20,12 @@ func (s *Style) JSObject() js.Value { return s.p }
 // Style returns a Style JavaScript class.
 func (ba *Babylon) Style() *Style {
 	p := ba.ctx.Get("Style")
-	return StyleFromJSObject(p)
+	return StyleFromJSObject(p, ba.ctx)
 }
 
 // StyleFromJSObject returns a wrapped Style JavaScript class.
-func StyleFromJSObject(p js.Value) *Style {
-	return &Style{p: p}
+func StyleFromJSObject(p js.Value, ctx js.Value) *Style {
+	return &Style{p: p, ctx: ctx}
 }
 
 // NewStyle returns a new Style object.
@@ -30,7 +33,7 @@ func StyleFromJSObject(p js.Value) *Style {
 // https://doc.babylonjs.com/api/classes/babylon.style
 func (ba *Babylon) NewStyle(host *AdvancedDynamicTexture) *Style {
 	p := ba.ctx.Get("Style").New(host.JSObject())
-	return StyleFromJSObject(p)
+	return StyleFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

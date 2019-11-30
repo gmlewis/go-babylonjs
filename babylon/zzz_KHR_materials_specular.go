@@ -10,7 +10,10 @@ import (
 // &lt;a href=&#34;https://github.com/KhronosGroup/glTF/pull/1677&#34;&gt;Proposed Specification&lt;/a&gt;
 // &lt;a href=&#34;https://www.babylonjs-playground.com/frame.html#BNIZX6#4&#34;&gt;Playground Sample&lt;/a&gt;
 // !!! Experimental Extension Subject to Changes !!!
-type KHR_materials_specular struct{ p js.Value }
+type KHR_materials_specular struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (k *KHR_materials_specular) JSObject() js.Value { return k.p }
@@ -18,12 +21,12 @@ func (k *KHR_materials_specular) JSObject() js.Value { return k.p }
 // KHR_materials_specular returns a KHR_materials_specular JavaScript class.
 func (ba *Babylon) KHR_materials_specular() *KHR_materials_specular {
 	p := ba.ctx.Get("KHR_materials_specular")
-	return KHR_materials_specularFromJSObject(p)
+	return KHR_materials_specularFromJSObject(p, ba.ctx)
 }
 
 // KHR_materials_specularFromJSObject returns a wrapped KHR_materials_specular JavaScript class.
-func KHR_materials_specularFromJSObject(p js.Value) *KHR_materials_specular {
-	return &KHR_materials_specular{p: p}
+func KHR_materials_specularFromJSObject(p js.Value, ctx js.Value) *KHR_materials_specular {
+	return &KHR_materials_specular{p: p, ctx: ctx}
 }
 
 // TODO: methods

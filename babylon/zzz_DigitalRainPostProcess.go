@@ -11,7 +11,10 @@ import (
 //
 // Simmply add it to your scene and let the nerd that lives in you have fun.
 // Example usage: var pp = new DigitalRainPostProcess(&amp;quot;digitalRain&amp;quot;, &amp;quot;20px Monospace&amp;quot;, camera);
-type DigitalRainPostProcess struct{ *PostProcess }
+type DigitalRainPostProcess struct {
+	*PostProcess
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (d *DigitalRainPostProcess) JSObject() js.Value { return d.p }
@@ -19,12 +22,12 @@ func (d *DigitalRainPostProcess) JSObject() js.Value { return d.p }
 // DigitalRainPostProcess returns a DigitalRainPostProcess JavaScript class.
 func (ba *Babylon) DigitalRainPostProcess() *DigitalRainPostProcess {
 	p := ba.ctx.Get("DigitalRainPostProcess")
-	return DigitalRainPostProcessFromJSObject(p)
+	return DigitalRainPostProcessFromJSObject(p, ba.ctx)
 }
 
 // DigitalRainPostProcessFromJSObject returns a wrapped DigitalRainPostProcess JavaScript class.
-func DigitalRainPostProcessFromJSObject(p js.Value) *DigitalRainPostProcess {
-	return &DigitalRainPostProcess{PostProcessFromJSObject(p)}
+func DigitalRainPostProcessFromJSObject(p js.Value, ctx js.Value) *DigitalRainPostProcess {
+	return &DigitalRainPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewDigitalRainPostProcessOpts contains optional parameters for NewDigitalRainPostProcess.
@@ -41,7 +44,7 @@ func (ba *Babylon) NewDigitalRainPostProcess(name string, camera *Camera, opts *
 	}
 
 	p := ba.ctx.Get("DigitalRainPostProcess").New(name, camera.JSObject(), opts.Options.JSObject())
-	return DigitalRainPostProcessFromJSObject(p)
+	return DigitalRainPostProcessFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

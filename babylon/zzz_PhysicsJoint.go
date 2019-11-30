@@ -11,7 +11,10 @@ import (
 // It holds a set of functions to control the underlying joint
 //
 // See: https://doc.babylonjs.com/how_to/using_the_physics_engine
-type PhysicsJoint struct{ p js.Value }
+type PhysicsJoint struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (p *PhysicsJoint) JSObject() js.Value { return p.p }
@@ -19,12 +22,12 @@ func (p *PhysicsJoint) JSObject() js.Value { return p.p }
 // PhysicsJoint returns a PhysicsJoint JavaScript class.
 func (ba *Babylon) PhysicsJoint() *PhysicsJoint {
 	p := ba.ctx.Get("PhysicsJoint")
-	return PhysicsJointFromJSObject(p)
+	return PhysicsJointFromJSObject(p, ba.ctx)
 }
 
 // PhysicsJointFromJSObject returns a wrapped PhysicsJoint JavaScript class.
-func PhysicsJointFromJSObject(p js.Value) *PhysicsJoint {
-	return &PhysicsJoint{p: p}
+func PhysicsJointFromJSObject(p js.Value, ctx js.Value) *PhysicsJoint {
+	return &PhysicsJoint{p: p, ctx: ctx}
 }
 
 // NewPhysicsJoint returns a new PhysicsJoint object.
@@ -32,7 +35,7 @@ func PhysicsJointFromJSObject(p js.Value) *PhysicsJoint {
 // https://doc.babylonjs.com/api/classes/babylon.physicsjoint
 func (ba *Babylon) NewPhysicsJoint(jsType float64, jointData js.Value) *PhysicsJoint {
 	p := ba.ctx.Get("PhysicsJoint").New(jsType, jointData)
-	return PhysicsJointFromJSObject(p)
+	return PhysicsJointFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -8,7 +8,10 @@ import (
 
 // ChromaticAberrationPostProcess represents a babylon.js ChromaticAberrationPostProcess.
 // The ChromaticAberrationPostProcess separates the rgb channels in an image to produce chromatic distortion around the edges of the screen
-type ChromaticAberrationPostProcess struct{ *PostProcess }
+type ChromaticAberrationPostProcess struct {
+	*PostProcess
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (c *ChromaticAberrationPostProcess) JSObject() js.Value { return c.p }
@@ -16,12 +19,12 @@ func (c *ChromaticAberrationPostProcess) JSObject() js.Value { return c.p }
 // ChromaticAberrationPostProcess returns a ChromaticAberrationPostProcess JavaScript class.
 func (ba *Babylon) ChromaticAberrationPostProcess() *ChromaticAberrationPostProcess {
 	p := ba.ctx.Get("ChromaticAberrationPostProcess")
-	return ChromaticAberrationPostProcessFromJSObject(p)
+	return ChromaticAberrationPostProcessFromJSObject(p, ba.ctx)
 }
 
 // ChromaticAberrationPostProcessFromJSObject returns a wrapped ChromaticAberrationPostProcess JavaScript class.
-func ChromaticAberrationPostProcessFromJSObject(p js.Value) *ChromaticAberrationPostProcess {
-	return &ChromaticAberrationPostProcess{PostProcessFromJSObject(p)}
+func ChromaticAberrationPostProcessFromJSObject(p js.Value, ctx js.Value) *ChromaticAberrationPostProcess {
+	return &ChromaticAberrationPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewChromaticAberrationPostProcessOpts contains optional parameters for NewChromaticAberrationPostProcess.
@@ -46,7 +49,7 @@ func (ba *Babylon) NewChromaticAberrationPostProcess(name string, screenWidth fl
 	}
 
 	p := ba.ctx.Get("ChromaticAberrationPostProcess").New(name, screenWidth, screenHeight, options, camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType.JSObject(), opts.BlockCompilation.JSObject())
-	return ChromaticAberrationPostProcessFromJSObject(p)
+	return ChromaticAberrationPostProcessFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

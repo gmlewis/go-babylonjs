@@ -10,7 +10,10 @@ import (
 // Easing function with a bezier shape (see link below).
 //
 // See: http://doc.babylonjs.com/babylon101/animations#easing-functions
-type BezierCurveEase struct{ *EasingFunction }
+type BezierCurveEase struct {
+	*EasingFunction
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (b *BezierCurveEase) JSObject() js.Value { return b.p }
@@ -18,12 +21,12 @@ func (b *BezierCurveEase) JSObject() js.Value { return b.p }
 // BezierCurveEase returns a BezierCurveEase JavaScript class.
 func (ba *Babylon) BezierCurveEase() *BezierCurveEase {
 	p := ba.ctx.Get("BezierCurveEase")
-	return BezierCurveEaseFromJSObject(p)
+	return BezierCurveEaseFromJSObject(p, ba.ctx)
 }
 
 // BezierCurveEaseFromJSObject returns a wrapped BezierCurveEase JavaScript class.
-func BezierCurveEaseFromJSObject(p js.Value) *BezierCurveEase {
-	return &BezierCurveEase{EasingFunctionFromJSObject(p)}
+func BezierCurveEaseFromJSObject(p js.Value, ctx js.Value) *BezierCurveEase {
+	return &BezierCurveEase{EasingFunction: EasingFunctionFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewBezierCurveEaseOpts contains optional parameters for NewBezierCurveEase.
@@ -46,7 +49,7 @@ func (ba *Babylon) NewBezierCurveEase(opts *NewBezierCurveEaseOpts) *BezierCurve
 	}
 
 	p := ba.ctx.Get("BezierCurveEase").New(opts.X1.JSObject(), opts.Y1.JSObject(), opts.X2.JSObject(), opts.Y2.JSObject())
-	return BezierCurveEaseFromJSObject(p)
+	return BezierCurveEaseFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

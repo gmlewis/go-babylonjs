@@ -9,7 +9,10 @@ import (
 // PointerInfo represents a babylon.js PointerInfo.
 // This type contains all the data related to a pointer event in Babylon.js.
 // The event member is an instance of PointerEvent for all types except PointerWheel and is of type MouseWheelEvent when type equals PointerWheel. The different event types can be found in the PointerEventTypes class.
-type PointerInfo struct{ *PointerInfoBase }
+type PointerInfo struct {
+	*PointerInfoBase
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (p *PointerInfo) JSObject() js.Value { return p.p }
@@ -17,12 +20,12 @@ func (p *PointerInfo) JSObject() js.Value { return p.p }
 // PointerInfo returns a PointerInfo JavaScript class.
 func (ba *Babylon) PointerInfo() *PointerInfo {
 	p := ba.ctx.Get("PointerInfo")
-	return PointerInfoFromJSObject(p)
+	return PointerInfoFromJSObject(p, ba.ctx)
 }
 
 // PointerInfoFromJSObject returns a wrapped PointerInfo JavaScript class.
-func PointerInfoFromJSObject(p js.Value) *PointerInfo {
-	return &PointerInfo{PointerInfoBaseFromJSObject(p)}
+func PointerInfoFromJSObject(p js.Value, ctx js.Value) *PointerInfo {
+	return &PointerInfo{PointerInfoBase: PointerInfoBaseFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewPointerInfo returns a new PointerInfo object.
@@ -30,7 +33,7 @@ func PointerInfoFromJSObject(p js.Value) *PointerInfo {
 // https://doc.babylonjs.com/api/classes/babylon.pointerinfo
 func (ba *Babylon) NewPointerInfo(jsType float64, event js.Value, pickInfo *PickingInfo) *PointerInfo {
 	p := ba.ctx.Get("PointerInfo").New(jsType, event, pickInfo.JSObject())
-	return PointerInfoFromJSObject(p)
+	return PointerInfoFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -10,7 +10,10 @@ import (
 // Raw texture can help creating a texture directly from an array of data.
 // This can be super useful if you either get the data from an uncompressed source or
 // if you wish to create your texture pixel by pixel.
-type RawTexture struct{ *Texture }
+type RawTexture struct {
+	*Texture
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (r *RawTexture) JSObject() js.Value { return r.p }
@@ -18,12 +21,12 @@ func (r *RawTexture) JSObject() js.Value { return r.p }
 // RawTexture returns a RawTexture JavaScript class.
 func (ba *Babylon) RawTexture() *RawTexture {
 	p := ba.ctx.Get("RawTexture")
-	return RawTextureFromJSObject(p)
+	return RawTextureFromJSObject(p, ba.ctx)
 }
 
 // RawTextureFromJSObject returns a wrapped RawTexture JavaScript class.
-func RawTextureFromJSObject(p js.Value) *RawTexture {
-	return &RawTexture{TextureFromJSObject(p)}
+func RawTextureFromJSObject(p js.Value, ctx js.Value) *RawTexture {
+	return &RawTexture{Texture: TextureFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewRawTextureOpts contains optional parameters for NewRawTexture.
@@ -46,7 +49,7 @@ func (ba *Babylon) NewRawTexture(data js.Value, width float64, height float64, f
 	}
 
 	p := ba.ctx.Get("RawTexture").New(data, width, height, format, scene.JSObject(), opts.GenerateMipMaps.JSObject(), opts.InvertY.JSObject(), opts.SamplingMode.JSObject(), opts.Type.JSObject())
-	return RawTextureFromJSObject(p)
+	return RawTextureFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

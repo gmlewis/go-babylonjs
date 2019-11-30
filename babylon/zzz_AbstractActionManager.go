@@ -11,7 +11,10 @@ import (
 // Do not instantiate.
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_actions
-type AbstractActionManager struct{ p js.Value }
+type AbstractActionManager struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (a *AbstractActionManager) JSObject() js.Value { return a.p }
@@ -19,12 +22,12 @@ func (a *AbstractActionManager) JSObject() js.Value { return a.p }
 // AbstractActionManager returns a AbstractActionManager JavaScript class.
 func (ba *Babylon) AbstractActionManager() *AbstractActionManager {
 	p := ba.ctx.Get("AbstractActionManager")
-	return AbstractActionManagerFromJSObject(p)
+	return AbstractActionManagerFromJSObject(p, ba.ctx)
 }
 
 // AbstractActionManagerFromJSObject returns a wrapped AbstractActionManager JavaScript class.
-func AbstractActionManagerFromJSObject(p js.Value) *AbstractActionManager {
-	return &AbstractActionManager{p: p}
+func AbstractActionManagerFromJSObject(p js.Value, ctx js.Value) *AbstractActionManager {
+	return &AbstractActionManager{p: p, ctx: ctx}
 }
 
 // TODO: methods

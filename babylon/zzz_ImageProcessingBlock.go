@@ -8,7 +8,10 @@ import (
 
 // ImageProcessingBlock represents a babylon.js ImageProcessingBlock.
 // Block used to add image processing support to fragment shader
-type ImageProcessingBlock struct{ *NodeMaterialBlock }
+type ImageProcessingBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (i *ImageProcessingBlock) JSObject() js.Value { return i.p }
@@ -16,12 +19,12 @@ func (i *ImageProcessingBlock) JSObject() js.Value { return i.p }
 // ImageProcessingBlock returns a ImageProcessingBlock JavaScript class.
 func (ba *Babylon) ImageProcessingBlock() *ImageProcessingBlock {
 	p := ba.ctx.Get("ImageProcessingBlock")
-	return ImageProcessingBlockFromJSObject(p)
+	return ImageProcessingBlockFromJSObject(p, ba.ctx)
 }
 
 // ImageProcessingBlockFromJSObject returns a wrapped ImageProcessingBlock JavaScript class.
-func ImageProcessingBlockFromJSObject(p js.Value) *ImageProcessingBlock {
-	return &ImageProcessingBlock{NodeMaterialBlockFromJSObject(p)}
+func ImageProcessingBlockFromJSObject(p js.Value, ctx js.Value) *ImageProcessingBlock {
+	return &ImageProcessingBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewImageProcessingBlock returns a new ImageProcessingBlock object.
@@ -29,7 +32,7 @@ func ImageProcessingBlockFromJSObject(p js.Value) *ImageProcessingBlock {
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingblock
 func (ba *Babylon) NewImageProcessingBlock(name string) *ImageProcessingBlock {
 	p := ba.ctx.Get("ImageProcessingBlock").New(name)
-	return ImageProcessingBlockFromJSObject(p)
+	return ImageProcessingBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

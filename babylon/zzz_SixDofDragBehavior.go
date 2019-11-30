@@ -8,7 +8,10 @@ import (
 
 // SixDofDragBehavior represents a babylon.js SixDofDragBehavior.
 // A behavior that when attached to a mesh will allow the mesh to be dragged around based on directions and origin of the pointer&amp;#39;s ray
-type SixDofDragBehavior struct{ p js.Value }
+type SixDofDragBehavior struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *SixDofDragBehavior) JSObject() js.Value { return s.p }
@@ -16,12 +19,12 @@ func (s *SixDofDragBehavior) JSObject() js.Value { return s.p }
 // SixDofDragBehavior returns a SixDofDragBehavior JavaScript class.
 func (ba *Babylon) SixDofDragBehavior() *SixDofDragBehavior {
 	p := ba.ctx.Get("SixDofDragBehavior")
-	return SixDofDragBehaviorFromJSObject(p)
+	return SixDofDragBehaviorFromJSObject(p, ba.ctx)
 }
 
 // SixDofDragBehaviorFromJSObject returns a wrapped SixDofDragBehavior JavaScript class.
-func SixDofDragBehaviorFromJSObject(p js.Value) *SixDofDragBehavior {
-	return &SixDofDragBehavior{p: p}
+func SixDofDragBehaviorFromJSObject(p js.Value, ctx js.Value) *SixDofDragBehavior {
+	return &SixDofDragBehavior{p: p, ctx: ctx}
 }
 
 // NewSixDofDragBehavior returns a new SixDofDragBehavior object.
@@ -29,7 +32,7 @@ func SixDofDragBehaviorFromJSObject(p js.Value) *SixDofDragBehavior {
 // https://doc.babylonjs.com/api/classes/babylon.sixdofdragbehavior
 func (ba *Babylon) NewSixDofDragBehavior() *SixDofDragBehavior {
 	p := ba.ctx.Get("SixDofDragBehavior").New()
-	return SixDofDragBehaviorFromJSObject(p)
+	return SixDofDragBehaviorFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -14,7 +14,10 @@ import (
 // var pp = new OceanPostProcess(&amp;quot;myOcean&amp;quot;, camera);
 // pp.reflectionEnabled = true;
 // pp.refractionEnabled = true;
-type OceanPostProcess struct{ *PostProcess }
+type OceanPostProcess struct {
+	*PostProcess
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (o *OceanPostProcess) JSObject() js.Value { return o.p }
@@ -22,12 +25,12 @@ func (o *OceanPostProcess) JSObject() js.Value { return o.p }
 // OceanPostProcess returns a OceanPostProcess JavaScript class.
 func (ba *Babylon) OceanPostProcess() *OceanPostProcess {
 	p := ba.ctx.Get("OceanPostProcess")
-	return OceanPostProcessFromJSObject(p)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
 }
 
 // OceanPostProcessFromJSObject returns a wrapped OceanPostProcess JavaScript class.
-func OceanPostProcessFromJSObject(p js.Value) *OceanPostProcess {
-	return &OceanPostProcess{PostProcessFromJSObject(p)}
+func OceanPostProcessFromJSObject(p js.Value, ctx js.Value) *OceanPostProcess {
+	return &OceanPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewOceanPostProcessOpts contains optional parameters for NewOceanPostProcess.
@@ -44,7 +47,7 @@ func (ba *Babylon) NewOceanPostProcess(name string, camera *TargetCamera, opts *
 	}
 
 	p := ba.ctx.Get("OceanPostProcess").New(name, camera.JSObject(), opts.Options.JSObject())
-	return OceanPostProcessFromJSObject(p)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

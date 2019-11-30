@@ -8,7 +8,10 @@ import (
 
 // ViewDirectionBlock represents a babylon.js ViewDirectionBlock.
 // Block used to get the view direction
-type ViewDirectionBlock struct{ *NodeMaterialBlock }
+type ViewDirectionBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (v *ViewDirectionBlock) JSObject() js.Value { return v.p }
@@ -16,12 +19,12 @@ func (v *ViewDirectionBlock) JSObject() js.Value { return v.p }
 // ViewDirectionBlock returns a ViewDirectionBlock JavaScript class.
 func (ba *Babylon) ViewDirectionBlock() *ViewDirectionBlock {
 	p := ba.ctx.Get("ViewDirectionBlock")
-	return ViewDirectionBlockFromJSObject(p)
+	return ViewDirectionBlockFromJSObject(p, ba.ctx)
 }
 
 // ViewDirectionBlockFromJSObject returns a wrapped ViewDirectionBlock JavaScript class.
-func ViewDirectionBlockFromJSObject(p js.Value) *ViewDirectionBlock {
-	return &ViewDirectionBlock{NodeMaterialBlockFromJSObject(p)}
+func ViewDirectionBlockFromJSObject(p js.Value, ctx js.Value) *ViewDirectionBlock {
+	return &ViewDirectionBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewViewDirectionBlock returns a new ViewDirectionBlock object.
@@ -29,7 +32,7 @@ func ViewDirectionBlockFromJSObject(p js.Value) *ViewDirectionBlock {
 // https://doc.babylonjs.com/api/classes/babylon.viewdirectionblock
 func (ba *Babylon) NewViewDirectionBlock(name string) *ViewDirectionBlock {
 	p := ba.ctx.Get("ViewDirectionBlock").New(name)
-	return ViewDirectionBlockFromJSObject(p)
+	return ViewDirectionBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

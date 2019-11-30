@@ -11,7 +11,10 @@ import (
 // Default pipeline should be used going forward but the standard pipeline will be kept for backwards compatibility.
 //
 // See: https://doc.babylonjs.com/how_to/using_standard_rendering_pipeline
-type StandardRenderingPipeline struct{ *PostProcessRenderPipeline }
+type StandardRenderingPipeline struct {
+	*PostProcessRenderPipeline
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *StandardRenderingPipeline) JSObject() js.Value { return s.p }
@@ -19,12 +22,12 @@ func (s *StandardRenderingPipeline) JSObject() js.Value { return s.p }
 // StandardRenderingPipeline returns a StandardRenderingPipeline JavaScript class.
 func (ba *Babylon) StandardRenderingPipeline() *StandardRenderingPipeline {
 	p := ba.ctx.Get("StandardRenderingPipeline")
-	return StandardRenderingPipelineFromJSObject(p)
+	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
 }
 
 // StandardRenderingPipelineFromJSObject returns a wrapped StandardRenderingPipeline JavaScript class.
-func StandardRenderingPipelineFromJSObject(p js.Value) *StandardRenderingPipeline {
-	return &StandardRenderingPipeline{PostProcessRenderPipelineFromJSObject(p)}
+func StandardRenderingPipelineFromJSObject(p js.Value, ctx js.Value) *StandardRenderingPipeline {
+	return &StandardRenderingPipeline{PostProcessRenderPipeline: PostProcessRenderPipelineFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewStandardRenderingPipelineOpts contains optional parameters for NewStandardRenderingPipeline.
@@ -43,7 +46,7 @@ func (ba *Babylon) NewStandardRenderingPipeline(name string, scene *Scene, ratio
 	}
 
 	p := ba.ctx.Get("StandardRenderingPipeline").New(name, scene.JSObject(), ratio, opts.OriginalPostProcess.JSObject(), opts.Cameras.JSObject())
-	return StandardRenderingPipelineFromJSObject(p)
+	return StandardRenderingPipelineFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

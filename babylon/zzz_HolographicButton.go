@@ -8,7 +8,10 @@ import (
 
 // HolographicButton represents a babylon.js HolographicButton.
 // Class used to create a holographic button in 3D
-type HolographicButton struct{ *Button3D }
+type HolographicButton struct {
+	*Button3D
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (h *HolographicButton) JSObject() js.Value { return h.p }
@@ -16,12 +19,12 @@ func (h *HolographicButton) JSObject() js.Value { return h.p }
 // HolographicButton returns a HolographicButton JavaScript class.
 func (ba *Babylon) HolographicButton() *HolographicButton {
 	p := ba.ctx.Get("HolographicButton")
-	return HolographicButtonFromJSObject(p)
+	return HolographicButtonFromJSObject(p, ba.ctx)
 }
 
 // HolographicButtonFromJSObject returns a wrapped HolographicButton JavaScript class.
-func HolographicButtonFromJSObject(p js.Value) *HolographicButton {
-	return &HolographicButton{Button3DFromJSObject(p)}
+func HolographicButtonFromJSObject(p js.Value, ctx js.Value) *HolographicButton {
+	return &HolographicButton{Button3D: Button3DFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewHolographicButtonOpts contains optional parameters for NewHolographicButton.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewHolographicButton(opts *NewHolographicButtonOpts) *Hologra
 	}
 
 	p := ba.ctx.Get("HolographicButton").New(opts.Name.JSObject(), opts.ShareMaterials.JSObject())
-	return HolographicButtonFromJSObject(p)
+	return HolographicButtonFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

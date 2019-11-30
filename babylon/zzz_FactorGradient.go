@@ -8,7 +8,10 @@ import (
 
 // FactorGradient represents a babylon.js FactorGradient.
 // Class used to store factor gradient
-type FactorGradient struct{ p js.Value }
+type FactorGradient struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (f *FactorGradient) JSObject() js.Value { return f.p }
@@ -16,12 +19,12 @@ func (f *FactorGradient) JSObject() js.Value { return f.p }
 // FactorGradient returns a FactorGradient JavaScript class.
 func (ba *Babylon) FactorGradient() *FactorGradient {
 	p := ba.ctx.Get("FactorGradient")
-	return FactorGradientFromJSObject(p)
+	return FactorGradientFromJSObject(p, ba.ctx)
 }
 
 // FactorGradientFromJSObject returns a wrapped FactorGradient JavaScript class.
-func FactorGradientFromJSObject(p js.Value) *FactorGradient {
-	return &FactorGradient{p: p}
+func FactorGradientFromJSObject(p js.Value, ctx js.Value) *FactorGradient {
+	return &FactorGradient{p: p, ctx: ctx}
 }
 
 // TODO: methods

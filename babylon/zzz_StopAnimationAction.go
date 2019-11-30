@@ -10,7 +10,10 @@ import (
 // This defines an action responsible to stop an animation once triggered.
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_actions
-type StopAnimationAction struct{ *Action }
+type StopAnimationAction struct {
+	*Action
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *StopAnimationAction) JSObject() js.Value { return s.p }
@@ -18,12 +21,12 @@ func (s *StopAnimationAction) JSObject() js.Value { return s.p }
 // StopAnimationAction returns a StopAnimationAction JavaScript class.
 func (ba *Babylon) StopAnimationAction() *StopAnimationAction {
 	p := ba.ctx.Get("StopAnimationAction")
-	return StopAnimationActionFromJSObject(p)
+	return StopAnimationActionFromJSObject(p, ba.ctx)
 }
 
 // StopAnimationActionFromJSObject returns a wrapped StopAnimationAction JavaScript class.
-func StopAnimationActionFromJSObject(p js.Value) *StopAnimationAction {
-	return &StopAnimationAction{ActionFromJSObject(p)}
+func StopAnimationActionFromJSObject(p js.Value, ctx js.Value) *StopAnimationAction {
+	return &StopAnimationAction{Action: ActionFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewStopAnimationActionOpts contains optional parameters for NewStopAnimationAction.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewStopAnimationAction(triggerOptions interface{}, target int
 	}
 
 	p := ba.ctx.Get("StopAnimationAction").New(triggerOptions, target, opts.Condition.JSObject())
-	return StopAnimationActionFromJSObject(p)
+	return StopAnimationActionFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

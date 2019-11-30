@@ -9,7 +9,10 @@ import (
 // PointerInfoPre represents a babylon.js PointerInfoPre.
 // This class is used to store pointer related info for the onPrePointerObservable event.
 // Set the skipOnPointerObservable property to true if you want the engine to stop any process after this event is triggered, even not calling onPointerObservable
-type PointerInfoPre struct{ *PointerInfoBase }
+type PointerInfoPre struct {
+	*PointerInfoBase
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (p *PointerInfoPre) JSObject() js.Value { return p.p }
@@ -17,12 +20,12 @@ func (p *PointerInfoPre) JSObject() js.Value { return p.p }
 // PointerInfoPre returns a PointerInfoPre JavaScript class.
 func (ba *Babylon) PointerInfoPre() *PointerInfoPre {
 	p := ba.ctx.Get("PointerInfoPre")
-	return PointerInfoPreFromJSObject(p)
+	return PointerInfoPreFromJSObject(p, ba.ctx)
 }
 
 // PointerInfoPreFromJSObject returns a wrapped PointerInfoPre JavaScript class.
-func PointerInfoPreFromJSObject(p js.Value) *PointerInfoPre {
-	return &PointerInfoPre{PointerInfoBaseFromJSObject(p)}
+func PointerInfoPreFromJSObject(p js.Value, ctx js.Value) *PointerInfoPre {
+	return &PointerInfoPre{PointerInfoBase: PointerInfoBaseFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewPointerInfoPre returns a new PointerInfoPre object.
@@ -30,7 +33,7 @@ func PointerInfoPreFromJSObject(p js.Value) *PointerInfoPre {
 // https://doc.babylonjs.com/api/classes/babylon.pointerinfopre
 func (ba *Babylon) NewPointerInfoPre(jsType float64, event js.Value, localX float64, localY float64) *PointerInfoPre {
 	p := ba.ctx.Get("PointerInfoPre").New(jsType, event, localX, localY)
-	return PointerInfoPreFromJSObject(p)
+	return PointerInfoPreFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

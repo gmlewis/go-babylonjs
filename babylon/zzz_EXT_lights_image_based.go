@@ -8,7 +8,10 @@ import (
 
 // EXT_lights_image_based represents a babylon.js EXT_lights_image_based.
 // &lt;a href=&#34;https://github.com/KhronosGroup/glTF/blob/master/extensions/2.0/Vendor/EXT_lights_image_based/README.md&#34;&gt;Specification&lt;/a&gt;
-type EXT_lights_image_based struct{ p js.Value }
+type EXT_lights_image_based struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (e *EXT_lights_image_based) JSObject() js.Value { return e.p }
@@ -16,12 +19,12 @@ func (e *EXT_lights_image_based) JSObject() js.Value { return e.p }
 // EXT_lights_image_based returns a EXT_lights_image_based JavaScript class.
 func (ba *Babylon) EXT_lights_image_based() *EXT_lights_image_based {
 	p := ba.ctx.Get("EXT_lights_image_based")
-	return EXT_lights_image_basedFromJSObject(p)
+	return EXT_lights_image_basedFromJSObject(p, ba.ctx)
 }
 
 // EXT_lights_image_basedFromJSObject returns a wrapped EXT_lights_image_based JavaScript class.
-func EXT_lights_image_basedFromJSObject(p js.Value) *EXT_lights_image_based {
-	return &EXT_lights_image_based{p: p}
+func EXT_lights_image_basedFromJSObject(p js.Value, ctx js.Value) *EXT_lights_image_based {
+	return &EXT_lights_image_based{p: p, ctx: ctx}
 }
 
 // TODO: methods

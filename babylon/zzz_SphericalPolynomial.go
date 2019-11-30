@@ -8,7 +8,10 @@ import (
 
 // SphericalPolynomial represents a babylon.js SphericalPolynomial.
 // Class representing spherical polynomial coefficients to the 3rd degree
-type SphericalPolynomial struct{ p js.Value }
+type SphericalPolynomial struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *SphericalPolynomial) JSObject() js.Value { return s.p }
@@ -16,12 +19,12 @@ func (s *SphericalPolynomial) JSObject() js.Value { return s.p }
 // SphericalPolynomial returns a SphericalPolynomial JavaScript class.
 func (ba *Babylon) SphericalPolynomial() *SphericalPolynomial {
 	p := ba.ctx.Get("SphericalPolynomial")
-	return SphericalPolynomialFromJSObject(p)
+	return SphericalPolynomialFromJSObject(p, ba.ctx)
 }
 
 // SphericalPolynomialFromJSObject returns a wrapped SphericalPolynomial JavaScript class.
-func SphericalPolynomialFromJSObject(p js.Value) *SphericalPolynomial {
-	return &SphericalPolynomial{p: p}
+func SphericalPolynomialFromJSObject(p js.Value, ctx js.Value) *SphericalPolynomial {
+	return &SphericalPolynomial{p: p, ctx: ctx}
 }
 
 // TODO: methods

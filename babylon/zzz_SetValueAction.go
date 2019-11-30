@@ -11,7 +11,10 @@ import (
 // to a desired value once triggered.
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_actions
-type SetValueAction struct{ *Action }
+type SetValueAction struct {
+	*Action
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *SetValueAction) JSObject() js.Value { return s.p }
@@ -19,12 +22,12 @@ func (s *SetValueAction) JSObject() js.Value { return s.p }
 // SetValueAction returns a SetValueAction JavaScript class.
 func (ba *Babylon) SetValueAction() *SetValueAction {
 	p := ba.ctx.Get("SetValueAction")
-	return SetValueActionFromJSObject(p)
+	return SetValueActionFromJSObject(p, ba.ctx)
 }
 
 // SetValueActionFromJSObject returns a wrapped SetValueAction JavaScript class.
-func SetValueActionFromJSObject(p js.Value) *SetValueAction {
-	return &SetValueAction{ActionFromJSObject(p)}
+func SetValueActionFromJSObject(p js.Value, ctx js.Value) *SetValueAction {
+	return &SetValueAction{Action: ActionFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewSetValueActionOpts contains optional parameters for NewSetValueAction.
@@ -41,7 +44,7 @@ func (ba *Babylon) NewSetValueAction(triggerOptions interface{}, target interfac
 	}
 
 	p := ba.ctx.Get("SetValueAction").New(triggerOptions, target, propertyPath, value, opts.Condition.JSObject())
-	return SetValueActionFromJSObject(p)
+	return SetValueActionFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

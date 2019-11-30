@@ -11,7 +11,10 @@ import (
 // This is the base of the follow, arc rotate cameras and Free camera
 //
 // See: http://doc.babylonjs.com/features/cameras
-type TargetCamera struct{ *Camera }
+type TargetCamera struct {
+	*Camera
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (t *TargetCamera) JSObject() js.Value { return t.p }
@@ -19,12 +22,12 @@ func (t *TargetCamera) JSObject() js.Value { return t.p }
 // TargetCamera returns a TargetCamera JavaScript class.
 func (ba *Babylon) TargetCamera() *TargetCamera {
 	p := ba.ctx.Get("TargetCamera")
-	return TargetCameraFromJSObject(p)
+	return TargetCameraFromJSObject(p, ba.ctx)
 }
 
 // TargetCameraFromJSObject returns a wrapped TargetCamera JavaScript class.
-func TargetCameraFromJSObject(p js.Value) *TargetCamera {
-	return &TargetCamera{CameraFromJSObject(p)}
+func TargetCameraFromJSObject(p js.Value, ctx js.Value) *TargetCamera {
+	return &TargetCamera{Camera: CameraFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewTargetCameraOpts contains optional parameters for NewTargetCamera.
@@ -41,7 +44,7 @@ func (ba *Babylon) NewTargetCamera(name string, position *Vector3, scene *Scene,
 	}
 
 	p := ba.ctx.Get("TargetCamera").New(name, position.JSObject(), scene.JSObject(), opts.SetActiveOnSceneIfNoneActive.JSObject())
-	return TargetCameraFromJSObject(p)
+	return TargetCameraFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

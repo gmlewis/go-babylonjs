@@ -10,7 +10,10 @@ import (
 // Base class used for every default easing function.
 //
 // See: http://doc.babylonjs.com/babylon101/animations#easing-functions
-type EasingFunction struct{ p js.Value }
+type EasingFunction struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (e *EasingFunction) JSObject() js.Value { return e.p }
@@ -18,12 +21,12 @@ func (e *EasingFunction) JSObject() js.Value { return e.p }
 // EasingFunction returns a EasingFunction JavaScript class.
 func (ba *Babylon) EasingFunction() *EasingFunction {
 	p := ba.ctx.Get("EasingFunction")
-	return EasingFunctionFromJSObject(p)
+	return EasingFunctionFromJSObject(p, ba.ctx)
 }
 
 // EasingFunctionFromJSObject returns a wrapped EasingFunction JavaScript class.
-func EasingFunctionFromJSObject(p js.Value) *EasingFunction {
-	return &EasingFunction{p: p}
+func EasingFunctionFromJSObject(p js.Value, ctx js.Value) *EasingFunction {
+	return &EasingFunction{p: p, ctx: ctx}
 }
 
 // TODO: methods

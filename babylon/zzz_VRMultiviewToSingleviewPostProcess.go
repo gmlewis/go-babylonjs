@@ -9,7 +9,10 @@ import (
 // VRMultiviewToSingleviewPostProcess represents a babylon.js VRMultiviewToSingleviewPostProcess.
 // VRMultiviewToSingleview used to convert multiview texture arrays to standard textures for scenarios such as webVR
 // This will not be used for webXR as it supports displaying texture arrays directly
-type VRMultiviewToSingleviewPostProcess struct{ *PostProcess }
+type VRMultiviewToSingleviewPostProcess struct {
+	*PostProcess
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (v *VRMultiviewToSingleviewPostProcess) JSObject() js.Value { return v.p }
@@ -17,12 +20,12 @@ func (v *VRMultiviewToSingleviewPostProcess) JSObject() js.Value { return v.p }
 // VRMultiviewToSingleviewPostProcess returns a VRMultiviewToSingleviewPostProcess JavaScript class.
 func (ba *Babylon) VRMultiviewToSingleviewPostProcess() *VRMultiviewToSingleviewPostProcess {
 	p := ba.ctx.Get("VRMultiviewToSingleviewPostProcess")
-	return VRMultiviewToSingleviewPostProcessFromJSObject(p)
+	return VRMultiviewToSingleviewPostProcessFromJSObject(p, ba.ctx)
 }
 
 // VRMultiviewToSingleviewPostProcessFromJSObject returns a wrapped VRMultiviewToSingleviewPostProcess JavaScript class.
-func VRMultiviewToSingleviewPostProcessFromJSObject(p js.Value) *VRMultiviewToSingleviewPostProcess {
-	return &VRMultiviewToSingleviewPostProcess{PostProcessFromJSObject(p)}
+func VRMultiviewToSingleviewPostProcessFromJSObject(p js.Value, ctx js.Value) *VRMultiviewToSingleviewPostProcess {
+	return &VRMultiviewToSingleviewPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewVRMultiviewToSingleviewPostProcess returns a new VRMultiviewToSingleviewPostProcess object.
@@ -30,7 +33,7 @@ func VRMultiviewToSingleviewPostProcessFromJSObject(p js.Value) *VRMultiviewToSi
 // https://doc.babylonjs.com/api/classes/babylon.vrmultiviewtosingleviewpostprocess
 func (ba *Babylon) NewVRMultiviewToSingleviewPostProcess(name string, camera *Camera, scaleFactor float64) *VRMultiviewToSingleviewPostProcess {
 	p := ba.ctx.Get("VRMultiviewToSingleviewPostProcess").New(name, camera.JSObject(), scaleFactor)
-	return VRMultiviewToSingleviewPostProcessFromJSObject(p)
+	return VRMultiviewToSingleviewPostProcessFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

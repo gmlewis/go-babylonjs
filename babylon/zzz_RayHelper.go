@@ -11,7 +11,10 @@ import (
 // in order to better appreciate the issue one might have.
 //
 // See: http://doc.babylonjs.com/babylon101/raycasts#debugging
-type RayHelper struct{ p js.Value }
+type RayHelper struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (r *RayHelper) JSObject() js.Value { return r.p }
@@ -19,12 +22,12 @@ func (r *RayHelper) JSObject() js.Value { return r.p }
 // RayHelper returns a RayHelper JavaScript class.
 func (ba *Babylon) RayHelper() *RayHelper {
 	p := ba.ctx.Get("RayHelper")
-	return RayHelperFromJSObject(p)
+	return RayHelperFromJSObject(p, ba.ctx)
 }
 
 // RayHelperFromJSObject returns a wrapped RayHelper JavaScript class.
-func RayHelperFromJSObject(p js.Value) *RayHelper {
-	return &RayHelper{p: p}
+func RayHelperFromJSObject(p js.Value, ctx js.Value) *RayHelper {
+	return &RayHelper{p: p, ctx: ctx}
 }
 
 // NewRayHelper returns a new RayHelper object.
@@ -32,7 +35,7 @@ func RayHelperFromJSObject(p js.Value) *RayHelper {
 // https://doc.babylonjs.com/api/classes/babylon.rayhelper
 func (ba *Babylon) NewRayHelper(ray *Ray) *RayHelper {
 	p := ba.ctx.Get("RayHelper").New(ray.JSObject())
-	return RayHelperFromJSObject(p)
+	return RayHelperFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

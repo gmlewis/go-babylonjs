@@ -8,7 +8,10 @@ import (
 
 // NativeDataBuffer represents a babylon.js NativeDataBuffer.
 // Container for accessors for natively-stored mesh data buffers.
-type NativeDataBuffer struct{ *DataBuffer }
+type NativeDataBuffer struct {
+	*DataBuffer
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (n *NativeDataBuffer) JSObject() js.Value { return n.p }
@@ -16,12 +19,12 @@ func (n *NativeDataBuffer) JSObject() js.Value { return n.p }
 // NativeDataBuffer returns a NativeDataBuffer JavaScript class.
 func (ba *Babylon) NativeDataBuffer() *NativeDataBuffer {
 	p := ba.ctx.Get("NativeDataBuffer")
-	return NativeDataBufferFromJSObject(p)
+	return NativeDataBufferFromJSObject(p, ba.ctx)
 }
 
 // NativeDataBufferFromJSObject returns a wrapped NativeDataBuffer JavaScript class.
-func NativeDataBufferFromJSObject(p js.Value) *NativeDataBuffer {
-	return &NativeDataBuffer{DataBufferFromJSObject(p)}
+func NativeDataBufferFromJSObject(p js.Value, ctx js.Value) *NativeDataBuffer {
+	return &NativeDataBuffer{DataBuffer: DataBufferFromJSObject(p, ctx), ctx: ctx}
 }
 
 // TODO: methods

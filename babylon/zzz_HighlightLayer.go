@@ -10,7 +10,10 @@ import (
 // The highlight layer Helps adding a glow effect around a mesh.
 //
 // !!! THIS REQUIRES AN ACTIVE STENCIL BUFFER ON THE CANVAS !!!
-type HighlightLayer struct{ *EffectLayer }
+type HighlightLayer struct {
+	*EffectLayer
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (h *HighlightLayer) JSObject() js.Value { return h.p }
@@ -18,12 +21,12 @@ func (h *HighlightLayer) JSObject() js.Value { return h.p }
 // HighlightLayer returns a HighlightLayer JavaScript class.
 func (ba *Babylon) HighlightLayer() *HighlightLayer {
 	p := ba.ctx.Get("HighlightLayer")
-	return HighlightLayerFromJSObject(p)
+	return HighlightLayerFromJSObject(p, ba.ctx)
 }
 
 // HighlightLayerFromJSObject returns a wrapped HighlightLayer JavaScript class.
-func HighlightLayerFromJSObject(p js.Value) *HighlightLayer {
-	return &HighlightLayer{EffectLayerFromJSObject(p)}
+func HighlightLayerFromJSObject(p js.Value, ctx js.Value) *HighlightLayer {
+	return &HighlightLayer{EffectLayer: EffectLayerFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewHighlightLayerOpts contains optional parameters for NewHighlightLayer.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewHighlightLayer(name string, scene *Scene, opts *NewHighlig
 	}
 
 	p := ba.ctx.Get("HighlightLayer").New(name, scene.JSObject(), opts.Options.JSObject())
-	return HighlightLayerFromJSObject(p)
+	return HighlightLayerFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

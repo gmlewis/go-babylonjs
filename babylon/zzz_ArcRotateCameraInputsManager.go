@@ -15,6 +15,7 @@ import (
 type ArcRotateCameraInputsManager struct {
 	*CameraInputsManager
 	*ArcRotateCamera
+	ctx js.Value
 }
 
 // JSObject returns the underlying js.Value.
@@ -23,12 +24,12 @@ func (a *ArcRotateCameraInputsManager) JSObject() js.Value { return a.p }
 // ArcRotateCameraInputsManager returns a ArcRotateCameraInputsManager JavaScript class.
 func (ba *Babylon) ArcRotateCameraInputsManager() *ArcRotateCameraInputsManager {
 	p := ba.ctx.Get("ArcRotateCameraInputsManager")
-	return ArcRotateCameraInputsManagerFromJSObject(p)
+	return ArcRotateCameraInputsManagerFromJSObject(p, ba.ctx)
 }
 
 // ArcRotateCameraInputsManagerFromJSObject returns a wrapped ArcRotateCameraInputsManager JavaScript class.
-func ArcRotateCameraInputsManagerFromJSObject(p js.Value) *ArcRotateCameraInputsManager {
-	return &ArcRotateCameraInputsManager{CameraInputsManagerFromJSObject(p), ArcRotateCameraFromJSObject(p)}
+func ArcRotateCameraInputsManagerFromJSObject(p js.Value, ctx js.Value) *ArcRotateCameraInputsManager {
+	return &ArcRotateCameraInputsManager{CameraInputsManager: CameraInputsManagerFromJSObject(p, ctx), ArcRotateCamera: ArcRotateCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewArcRotateCameraInputsManager returns a new ArcRotateCameraInputsManager object.
@@ -36,7 +37,7 @@ func ArcRotateCameraInputsManagerFromJSObject(p js.Value) *ArcRotateCameraInputs
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamerainputsmanager
 func (ba *Babylon) NewArcRotateCameraInputsManager(camera *ArcRotateCamera) *ArcRotateCameraInputsManager {
 	p := ba.ctx.Get("ArcRotateCameraInputsManager").New(camera.JSObject())
-	return ArcRotateCameraInputsManagerFromJSObject(p)
+	return ArcRotateCameraInputsManagerFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

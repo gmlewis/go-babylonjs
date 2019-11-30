@@ -10,7 +10,10 @@ import (
 // Defines an optimization used to merge meshes with compatible materials
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
-type MergeMeshesOptimization struct{ *SceneOptimization }
+type MergeMeshesOptimization struct {
+	*SceneOptimization
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (m *MergeMeshesOptimization) JSObject() js.Value { return m.p }
@@ -18,12 +21,12 @@ func (m *MergeMeshesOptimization) JSObject() js.Value { return m.p }
 // MergeMeshesOptimization returns a MergeMeshesOptimization JavaScript class.
 func (ba *Babylon) MergeMeshesOptimization() *MergeMeshesOptimization {
 	p := ba.ctx.Get("MergeMeshesOptimization")
-	return MergeMeshesOptimizationFromJSObject(p)
+	return MergeMeshesOptimizationFromJSObject(p, ba.ctx)
 }
 
 // MergeMeshesOptimizationFromJSObject returns a wrapped MergeMeshesOptimization JavaScript class.
-func MergeMeshesOptimizationFromJSObject(p js.Value) *MergeMeshesOptimization {
-	return &MergeMeshesOptimization{SceneOptimizationFromJSObject(p)}
+func MergeMeshesOptimizationFromJSObject(p js.Value, ctx js.Value) *MergeMeshesOptimization {
+	return &MergeMeshesOptimization{SceneOptimization: SceneOptimizationFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewMergeMeshesOptimizationOpts contains optional parameters for NewMergeMeshesOptimization.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewMergeMeshesOptimization(opts *NewMergeMeshesOptimizationOp
 	}
 
 	p := ba.ctx.Get("MergeMeshesOptimization").New(opts.Priority.JSObject())
-	return MergeMeshesOptimizationFromJSObject(p)
+	return MergeMeshesOptimizationFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

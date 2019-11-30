@@ -8,7 +8,10 @@ import (
 
 // SubtractBlock represents a babylon.js SubtractBlock.
 // Block used to subtract 2 vectors
-type SubtractBlock struct{ *NodeMaterialBlock }
+type SubtractBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *SubtractBlock) JSObject() js.Value { return s.p }
@@ -16,12 +19,12 @@ func (s *SubtractBlock) JSObject() js.Value { return s.p }
 // SubtractBlock returns a SubtractBlock JavaScript class.
 func (ba *Babylon) SubtractBlock() *SubtractBlock {
 	p := ba.ctx.Get("SubtractBlock")
-	return SubtractBlockFromJSObject(p)
+	return SubtractBlockFromJSObject(p, ba.ctx)
 }
 
 // SubtractBlockFromJSObject returns a wrapped SubtractBlock JavaScript class.
-func SubtractBlockFromJSObject(p js.Value) *SubtractBlock {
-	return &SubtractBlock{NodeMaterialBlockFromJSObject(p)}
+func SubtractBlockFromJSObject(p js.Value, ctx js.Value) *SubtractBlock {
+	return &SubtractBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewSubtractBlock returns a new SubtractBlock object.
@@ -29,7 +32,7 @@ func SubtractBlockFromJSObject(p js.Value) *SubtractBlock {
 // https://doc.babylonjs.com/api/classes/babylon.subtractblock
 func (ba *Babylon) NewSubtractBlock(name string) *SubtractBlock {
 	p := ba.ctx.Get("SubtractBlock").New(name)
-	return SubtractBlockFromJSObject(p)
+	return SubtractBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

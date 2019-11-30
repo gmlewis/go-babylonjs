@@ -10,7 +10,10 @@ import (
 // Easing function with a sin shape (see link below).
 //
 // See: http://doc.babylonjs.com/babylon101/animations#easing-functions
-type SineEase struct{ *EasingFunction }
+type SineEase struct {
+	*EasingFunction
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *SineEase) JSObject() js.Value { return s.p }
@@ -18,12 +21,12 @@ func (s *SineEase) JSObject() js.Value { return s.p }
 // SineEase returns a SineEase JavaScript class.
 func (ba *Babylon) SineEase() *SineEase {
 	p := ba.ctx.Get("SineEase")
-	return SineEaseFromJSObject(p)
+	return SineEaseFromJSObject(p, ba.ctx)
 }
 
 // SineEaseFromJSObject returns a wrapped SineEase JavaScript class.
-func SineEaseFromJSObject(p js.Value) *SineEase {
-	return &SineEase{EasingFunctionFromJSObject(p)}
+func SineEaseFromJSObject(p js.Value, ctx js.Value) *SineEase {
+	return &SineEase{EasingFunction: EasingFunctionFromJSObject(p, ctx), ctx: ctx}
 }
 
 // TODO: methods

@@ -8,7 +8,10 @@ import (
 
 // BinaryFileAssetTask represents a babylon.js BinaryFileAssetTask.
 // Define a task used by AssetsManager to load binary data
-type BinaryFileAssetTask struct{ *AbstractAssetTask }
+type BinaryFileAssetTask struct {
+	*AbstractAssetTask
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (b *BinaryFileAssetTask) JSObject() js.Value { return b.p }
@@ -16,12 +19,12 @@ func (b *BinaryFileAssetTask) JSObject() js.Value { return b.p }
 // BinaryFileAssetTask returns a BinaryFileAssetTask JavaScript class.
 func (ba *Babylon) BinaryFileAssetTask() *BinaryFileAssetTask {
 	p := ba.ctx.Get("BinaryFileAssetTask")
-	return BinaryFileAssetTaskFromJSObject(p)
+	return BinaryFileAssetTaskFromJSObject(p, ba.ctx)
 }
 
 // BinaryFileAssetTaskFromJSObject returns a wrapped BinaryFileAssetTask JavaScript class.
-func BinaryFileAssetTaskFromJSObject(p js.Value) *BinaryFileAssetTask {
-	return &BinaryFileAssetTask{AbstractAssetTaskFromJSObject(p)}
+func BinaryFileAssetTaskFromJSObject(p js.Value, ctx js.Value) *BinaryFileAssetTask {
+	return &BinaryFileAssetTask{AbstractAssetTask: AbstractAssetTaskFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewBinaryFileAssetTask returns a new BinaryFileAssetTask object.
@@ -29,7 +32,7 @@ func BinaryFileAssetTaskFromJSObject(p js.Value) *BinaryFileAssetTask {
 // https://doc.babylonjs.com/api/classes/babylon.binaryfileassettask
 func (ba *Babylon) NewBinaryFileAssetTask(name string, url string) *BinaryFileAssetTask {
 	p := ba.ctx.Get("BinaryFileAssetTask").New(name, url)
-	return BinaryFileAssetTaskFromJSObject(p)
+	return BinaryFileAssetTaskFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

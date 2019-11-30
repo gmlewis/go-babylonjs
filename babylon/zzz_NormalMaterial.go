@@ -8,7 +8,10 @@ import (
 
 // NormalMaterial represents a babylon.js NormalMaterial.
 //
-type NormalMaterial struct{ p js.Value }
+type NormalMaterial struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (n *NormalMaterial) JSObject() js.Value { return n.p }
@@ -16,12 +19,12 @@ func (n *NormalMaterial) JSObject() js.Value { return n.p }
 // NormalMaterial returns a NormalMaterial JavaScript class.
 func (ba *Babylon) NormalMaterial() *NormalMaterial {
 	p := ba.ctx.Get("NormalMaterial")
-	return NormalMaterialFromJSObject(p)
+	return NormalMaterialFromJSObject(p, ba.ctx)
 }
 
 // NormalMaterialFromJSObject returns a wrapped NormalMaterial JavaScript class.
-func NormalMaterialFromJSObject(p js.Value) *NormalMaterial {
-	return &NormalMaterial{p: p}
+func NormalMaterialFromJSObject(p js.Value, ctx js.Value) *NormalMaterial {
+	return &NormalMaterial{p: p, ctx: ctx}
 }
 
 // NewNormalMaterial returns a new NormalMaterial object.
@@ -29,7 +32,7 @@ func NormalMaterialFromJSObject(p js.Value) *NormalMaterial {
 // https://doc.babylonjs.com/api/classes/babylon.normalmaterial
 func (ba *Babylon) NewNormalMaterial(name string, scene *Scene) *NormalMaterial {
 	p := ba.ctx.Get("NormalMaterial").New(name, scene.JSObject())
-	return NormalMaterialFromJSObject(p)
+	return NormalMaterialFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

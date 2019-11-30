@@ -8,7 +8,10 @@ import (
 
 // LineEdgesRenderer represents a babylon.js LineEdgesRenderer.
 // LineEdgesRenderer for LineMeshes to remove unnecessary triangulation
-type LineEdgesRenderer struct{ *EdgesRenderer }
+type LineEdgesRenderer struct {
+	*EdgesRenderer
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (l *LineEdgesRenderer) JSObject() js.Value { return l.p }
@@ -16,12 +19,12 @@ func (l *LineEdgesRenderer) JSObject() js.Value { return l.p }
 // LineEdgesRenderer returns a LineEdgesRenderer JavaScript class.
 func (ba *Babylon) LineEdgesRenderer() *LineEdgesRenderer {
 	p := ba.ctx.Get("LineEdgesRenderer")
-	return LineEdgesRendererFromJSObject(p)
+	return LineEdgesRendererFromJSObject(p, ba.ctx)
 }
 
 // LineEdgesRendererFromJSObject returns a wrapped LineEdgesRenderer JavaScript class.
-func LineEdgesRendererFromJSObject(p js.Value) *LineEdgesRenderer {
-	return &LineEdgesRenderer{EdgesRendererFromJSObject(p)}
+func LineEdgesRendererFromJSObject(p js.Value, ctx js.Value) *LineEdgesRenderer {
+	return &LineEdgesRenderer{EdgesRenderer: EdgesRendererFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewLineEdgesRendererOpts contains optional parameters for NewLineEdgesRenderer.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewLineEdgesRenderer(source *AbstractMesh, opts *NewLineEdges
 	}
 
 	p := ba.ctx.Get("LineEdgesRenderer").New(source.JSObject(), opts.Epsilon.JSObject(), opts.CheckVerticesInsteadOfIndices.JSObject())
-	return LineEdgesRendererFromJSObject(p)
+	return LineEdgesRendererFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -10,7 +10,10 @@ import (
 // Class used to store quaternion data
 //
 // See: http://doc.babylonjs.com/features/position,_rotation,_scaling
-type Quaternion struct{ p js.Value }
+type Quaternion struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (q *Quaternion) JSObject() js.Value { return q.p }
@@ -18,12 +21,12 @@ func (q *Quaternion) JSObject() js.Value { return q.p }
 // Quaternion returns a Quaternion JavaScript class.
 func (ba *Babylon) Quaternion() *Quaternion {
 	p := ba.ctx.Get("Quaternion")
-	return QuaternionFromJSObject(p)
+	return QuaternionFromJSObject(p, ba.ctx)
 }
 
 // QuaternionFromJSObject returns a wrapped Quaternion JavaScript class.
-func QuaternionFromJSObject(p js.Value) *Quaternion {
-	return &Quaternion{p: p}
+func QuaternionFromJSObject(p js.Value, ctx js.Value) *Quaternion {
+	return &Quaternion{p: p, ctx: ctx}
 }
 
 // NewQuaternionOpts contains optional parameters for NewQuaternion.
@@ -46,7 +49,7 @@ func (ba *Babylon) NewQuaternion(opts *NewQuaternionOpts) *Quaternion {
 	}
 
 	p := ba.ctx.Get("Quaternion").New(opts.X.JSObject(), opts.Y.JSObject(), opts.Z.JSObject(), opts.W.JSObject())
-	return QuaternionFromJSObject(p)
+	return QuaternionFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

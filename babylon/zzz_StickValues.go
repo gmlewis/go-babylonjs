@@ -8,7 +8,10 @@ import (
 
 // StickValues represents a babylon.js StickValues.
 // Represents a gamepad control stick position
-type StickValues struct{ p js.Value }
+type StickValues struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *StickValues) JSObject() js.Value { return s.p }
@@ -16,12 +19,12 @@ func (s *StickValues) JSObject() js.Value { return s.p }
 // StickValues returns a StickValues JavaScript class.
 func (ba *Babylon) StickValues() *StickValues {
 	p := ba.ctx.Get("StickValues")
-	return StickValuesFromJSObject(p)
+	return StickValuesFromJSObject(p, ba.ctx)
 }
 
 // StickValuesFromJSObject returns a wrapped StickValues JavaScript class.
-func StickValuesFromJSObject(p js.Value) *StickValues {
-	return &StickValues{p: p}
+func StickValuesFromJSObject(p js.Value, ctx js.Value) *StickValues {
+	return &StickValues{p: p, ctx: ctx}
 }
 
 // NewStickValues returns a new StickValues object.
@@ -29,7 +32,7 @@ func StickValuesFromJSObject(p js.Value) *StickValues {
 // https://doc.babylonjs.com/api/classes/babylon.stickvalues
 func (ba *Babylon) NewStickValues(x float64, y float64) *StickValues {
 	p := ba.ctx.Get("StickValues").New(x, y)
-	return StickValuesFromJSObject(p)
+	return StickValuesFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

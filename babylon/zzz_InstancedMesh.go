@@ -8,7 +8,10 @@ import (
 
 // InstancedMesh represents a babylon.js InstancedMesh.
 // Creates an instance based on a source mesh.
-type InstancedMesh struct{ *AbstractMesh }
+type InstancedMesh struct {
+	*AbstractMesh
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (i *InstancedMesh) JSObject() js.Value { return i.p }
@@ -16,12 +19,12 @@ func (i *InstancedMesh) JSObject() js.Value { return i.p }
 // InstancedMesh returns a InstancedMesh JavaScript class.
 func (ba *Babylon) InstancedMesh() *InstancedMesh {
 	p := ba.ctx.Get("InstancedMesh")
-	return InstancedMeshFromJSObject(p)
+	return InstancedMeshFromJSObject(p, ba.ctx)
 }
 
 // InstancedMeshFromJSObject returns a wrapped InstancedMesh JavaScript class.
-func InstancedMeshFromJSObject(p js.Value) *InstancedMesh {
-	return &InstancedMesh{AbstractMeshFromJSObject(p)}
+func InstancedMeshFromJSObject(p js.Value, ctx js.Value) *InstancedMesh {
+	return &InstancedMesh{AbstractMesh: AbstractMeshFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewInstancedMesh returns a new InstancedMesh object.
@@ -29,7 +32,7 @@ func InstancedMeshFromJSObject(p js.Value) *InstancedMesh {
 // https://doc.babylonjs.com/api/classes/babylon.instancedmesh
 func (ba *Babylon) NewInstancedMesh(name string, source *Mesh) *InstancedMesh {
 	p := ba.ctx.Get("InstancedMesh").New(name, source.JSObject())
-	return InstancedMeshFromJSObject(p)
+	return InstancedMeshFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -11,7 +11,10 @@ import (
 //
 // For more information, please refer to :
 // &lt;a href=&#34;https://www.khronos.org/opengl/wiki/Uniform_Buffer_Object&#34;&gt;https://www.khronos.org/opengl/wiki/Uniform_Buffer_Object&lt;/a&gt;
-type UniformBuffer struct{ p js.Value }
+type UniformBuffer struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (u *UniformBuffer) JSObject() js.Value { return u.p }
@@ -19,12 +22,12 @@ func (u *UniformBuffer) JSObject() js.Value { return u.p }
 // UniformBuffer returns a UniformBuffer JavaScript class.
 func (ba *Babylon) UniformBuffer() *UniformBuffer {
 	p := ba.ctx.Get("UniformBuffer")
-	return UniformBufferFromJSObject(p)
+	return UniformBufferFromJSObject(p, ba.ctx)
 }
 
 // UniformBufferFromJSObject returns a wrapped UniformBuffer JavaScript class.
-func UniformBufferFromJSObject(p js.Value) *UniformBuffer {
-	return &UniformBuffer{p: p}
+func UniformBufferFromJSObject(p js.Value, ctx js.Value) *UniformBuffer {
+	return &UniformBuffer{p: p, ctx: ctx}
 }
 
 // NewUniformBufferOpts contains optional parameters for NewUniformBuffer.
@@ -43,7 +46,7 @@ func (ba *Babylon) NewUniformBuffer(engine *Engine, opts *NewUniformBufferOpts) 
 	}
 
 	p := ba.ctx.Get("UniformBuffer").New(engine.JSObject(), opts.Data.JSObject(), opts.Dynamic.JSObject())
-	return UniformBufferFromJSObject(p)
+	return UniformBufferFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

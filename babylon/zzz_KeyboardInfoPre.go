@@ -9,7 +9,10 @@ import (
 // KeyboardInfoPre represents a babylon.js KeyboardInfoPre.
 // This class is used to store keyboard related info for the onPreKeyboardObservable event.
 // Set the skipOnKeyboardObservable property to true if you want the engine to stop any process after this event is triggered, even not calling onKeyboardObservable
-type KeyboardInfoPre struct{ *KeyboardInfo }
+type KeyboardInfoPre struct {
+	*KeyboardInfo
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (k *KeyboardInfoPre) JSObject() js.Value { return k.p }
@@ -17,12 +20,12 @@ func (k *KeyboardInfoPre) JSObject() js.Value { return k.p }
 // KeyboardInfoPre returns a KeyboardInfoPre JavaScript class.
 func (ba *Babylon) KeyboardInfoPre() *KeyboardInfoPre {
 	p := ba.ctx.Get("KeyboardInfoPre")
-	return KeyboardInfoPreFromJSObject(p)
+	return KeyboardInfoPreFromJSObject(p, ba.ctx)
 }
 
 // KeyboardInfoPreFromJSObject returns a wrapped KeyboardInfoPre JavaScript class.
-func KeyboardInfoPreFromJSObject(p js.Value) *KeyboardInfoPre {
-	return &KeyboardInfoPre{KeyboardInfoFromJSObject(p)}
+func KeyboardInfoPreFromJSObject(p js.Value, ctx js.Value) *KeyboardInfoPre {
+	return &KeyboardInfoPre{KeyboardInfo: KeyboardInfoFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewKeyboardInfoPre returns a new KeyboardInfoPre object.
@@ -30,7 +33,7 @@ func KeyboardInfoPreFromJSObject(p js.Value) *KeyboardInfoPre {
 // https://doc.babylonjs.com/api/classes/babylon.keyboardinfopre
 func (ba *Babylon) NewKeyboardInfoPre(jsType float64, event js.Value) *KeyboardInfoPre {
 	p := ba.ctx.Get("KeyboardInfoPre").New(jsType, event)
-	return KeyboardInfoPreFromJSObject(p)
+	return KeyboardInfoPreFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

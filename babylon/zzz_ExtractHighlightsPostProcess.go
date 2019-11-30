@@ -8,7 +8,10 @@ import (
 
 // ExtractHighlightsPostProcess represents a babylon.js ExtractHighlightsPostProcess.
 // The extract highlights post process sets all pixels to black except pixels above the specified luminance threshold. Used as the first step for a bloom effect.
-type ExtractHighlightsPostProcess struct{ *PostProcess }
+type ExtractHighlightsPostProcess struct {
+	*PostProcess
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (e *ExtractHighlightsPostProcess) JSObject() js.Value { return e.p }
@@ -16,12 +19,12 @@ func (e *ExtractHighlightsPostProcess) JSObject() js.Value { return e.p }
 // ExtractHighlightsPostProcess returns a ExtractHighlightsPostProcess JavaScript class.
 func (ba *Babylon) ExtractHighlightsPostProcess() *ExtractHighlightsPostProcess {
 	p := ba.ctx.Get("ExtractHighlightsPostProcess")
-	return ExtractHighlightsPostProcessFromJSObject(p)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
 }
 
 // ExtractHighlightsPostProcessFromJSObject returns a wrapped ExtractHighlightsPostProcess JavaScript class.
-func ExtractHighlightsPostProcessFromJSObject(p js.Value) *ExtractHighlightsPostProcess {
-	return &ExtractHighlightsPostProcess{PostProcessFromJSObject(p)}
+func ExtractHighlightsPostProcessFromJSObject(p js.Value, ctx js.Value) *ExtractHighlightsPostProcess {
+	return &ExtractHighlightsPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewExtractHighlightsPostProcessOpts contains optional parameters for NewExtractHighlightsPostProcess.
@@ -46,7 +49,7 @@ func (ba *Babylon) NewExtractHighlightsPostProcess(name string, options float64,
 	}
 
 	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(name, options, camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType.JSObject(), opts.BlockCompilation.JSObject())
-	return ExtractHighlightsPostProcessFromJSObject(p)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -10,7 +10,10 @@ import (
 // This represents all the required information to add a fresnel effect on a material:
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_fresnelparameters
-type FresnelParameters struct{ p js.Value }
+type FresnelParameters struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (f *FresnelParameters) JSObject() js.Value { return f.p }
@@ -18,12 +21,12 @@ func (f *FresnelParameters) JSObject() js.Value { return f.p }
 // FresnelParameters returns a FresnelParameters JavaScript class.
 func (ba *Babylon) FresnelParameters() *FresnelParameters {
 	p := ba.ctx.Get("FresnelParameters")
-	return FresnelParametersFromJSObject(p)
+	return FresnelParametersFromJSObject(p, ba.ctx)
 }
 
 // FresnelParametersFromJSObject returns a wrapped FresnelParameters JavaScript class.
-func FresnelParametersFromJSObject(p js.Value) *FresnelParameters {
-	return &FresnelParameters{p: p}
+func FresnelParametersFromJSObject(p js.Value, ctx js.Value) *FresnelParameters {
+	return &FresnelParameters{p: p, ctx: ctx}
 }
 
 // TODO: methods

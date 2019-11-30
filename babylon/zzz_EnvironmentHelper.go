@@ -10,7 +10,10 @@ import (
 // The Environment helper class can be used to add a fully featuread none expensive background to your scene.
 // It includes by default a skybox and a ground relying on the BackgroundMaterial.
 // It also helps with the default setup of your imageProcessing configuration.
-type EnvironmentHelper struct{ p js.Value }
+type EnvironmentHelper struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (e *EnvironmentHelper) JSObject() js.Value { return e.p }
@@ -18,12 +21,12 @@ func (e *EnvironmentHelper) JSObject() js.Value { return e.p }
 // EnvironmentHelper returns a EnvironmentHelper JavaScript class.
 func (ba *Babylon) EnvironmentHelper() *EnvironmentHelper {
 	p := ba.ctx.Get("EnvironmentHelper")
-	return EnvironmentHelperFromJSObject(p)
+	return EnvironmentHelperFromJSObject(p, ba.ctx)
 }
 
 // EnvironmentHelperFromJSObject returns a wrapped EnvironmentHelper JavaScript class.
-func EnvironmentHelperFromJSObject(p js.Value) *EnvironmentHelper {
-	return &EnvironmentHelper{p: p}
+func EnvironmentHelperFromJSObject(p js.Value, ctx js.Value) *EnvironmentHelper {
+	return &EnvironmentHelper{p: p, ctx: ctx}
 }
 
 // NewEnvironmentHelper returns a new EnvironmentHelper object.
@@ -31,7 +34,7 @@ func EnvironmentHelperFromJSObject(p js.Value) *EnvironmentHelper {
 // https://doc.babylonjs.com/api/classes/babylon.environmenthelper
 func (ba *Babylon) NewEnvironmentHelper(options js.Value, scene *Scene) *EnvironmentHelper {
 	p := ba.ctx.Get("EnvironmentHelper").New(options, scene.JSObject())
-	return EnvironmentHelperFromJSObject(p)
+	return EnvironmentHelperFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

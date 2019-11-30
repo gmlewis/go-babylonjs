@@ -8,7 +8,10 @@ import (
 
 // PointsGroup represents a babylon.js PointsGroup.
 // Represents a group of points in a points cloud system
-type PointsGroup struct{ p js.Value }
+type PointsGroup struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (p *PointsGroup) JSObject() js.Value { return p.p }
@@ -16,12 +19,12 @@ func (p *PointsGroup) JSObject() js.Value { return p.p }
 // PointsGroup returns a PointsGroup JavaScript class.
 func (ba *Babylon) PointsGroup() *PointsGroup {
 	p := ba.ctx.Get("PointsGroup")
-	return PointsGroupFromJSObject(p)
+	return PointsGroupFromJSObject(p, ba.ctx)
 }
 
 // PointsGroupFromJSObject returns a wrapped PointsGroup JavaScript class.
-func PointsGroupFromJSObject(p js.Value) *PointsGroup {
-	return &PointsGroup{p: p}
+func PointsGroupFromJSObject(p js.Value, ctx js.Value) *PointsGroup {
+	return &PointsGroup{p: p, ctx: ctx}
 }
 
 // TODO: methods

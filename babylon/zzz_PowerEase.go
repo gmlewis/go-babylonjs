@@ -10,7 +10,10 @@ import (
 // Easing function with a power shape (see link below).
 //
 // See: http://doc.babylonjs.com/babylon101/animations#easing-functions
-type PowerEase struct{ *EasingFunction }
+type PowerEase struct {
+	*EasingFunction
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (p *PowerEase) JSObject() js.Value { return p.p }
@@ -18,12 +21,12 @@ func (p *PowerEase) JSObject() js.Value { return p.p }
 // PowerEase returns a PowerEase JavaScript class.
 func (ba *Babylon) PowerEase() *PowerEase {
 	p := ba.ctx.Get("PowerEase")
-	return PowerEaseFromJSObject(p)
+	return PowerEaseFromJSObject(p, ba.ctx)
 }
 
 // PowerEaseFromJSObject returns a wrapped PowerEase JavaScript class.
-func PowerEaseFromJSObject(p js.Value) *PowerEase {
-	return &PowerEase{EasingFunctionFromJSObject(p)}
+func PowerEaseFromJSObject(p js.Value, ctx js.Value) *PowerEase {
+	return &PowerEase{EasingFunction: EasingFunctionFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewPowerEaseOpts contains optional parameters for NewPowerEase.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewPowerEase(opts *NewPowerEaseOpts) *PowerEase {
 	}
 
 	p := ba.ctx.Get("PowerEase").New(opts.Power.JSObject())
-	return PowerEaseFromJSObject(p)
+	return PowerEaseFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

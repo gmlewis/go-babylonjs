@@ -8,7 +8,10 @@ import (
 
 // MorphTargetsBlock represents a babylon.js MorphTargetsBlock.
 // Block used to add morph targets support to vertex shader
-type MorphTargetsBlock struct{ *NodeMaterialBlock }
+type MorphTargetsBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (m *MorphTargetsBlock) JSObject() js.Value { return m.p }
@@ -16,12 +19,12 @@ func (m *MorphTargetsBlock) JSObject() js.Value { return m.p }
 // MorphTargetsBlock returns a MorphTargetsBlock JavaScript class.
 func (ba *Babylon) MorphTargetsBlock() *MorphTargetsBlock {
 	p := ba.ctx.Get("MorphTargetsBlock")
-	return MorphTargetsBlockFromJSObject(p)
+	return MorphTargetsBlockFromJSObject(p, ba.ctx)
 }
 
 // MorphTargetsBlockFromJSObject returns a wrapped MorphTargetsBlock JavaScript class.
-func MorphTargetsBlockFromJSObject(p js.Value) *MorphTargetsBlock {
-	return &MorphTargetsBlock{NodeMaterialBlockFromJSObject(p)}
+func MorphTargetsBlockFromJSObject(p js.Value, ctx js.Value) *MorphTargetsBlock {
+	return &MorphTargetsBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewMorphTargetsBlock returns a new MorphTargetsBlock object.
@@ -29,7 +32,7 @@ func MorphTargetsBlockFromJSObject(p js.Value) *MorphTargetsBlock {
 // https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock
 func (ba *Babylon) NewMorphTargetsBlock(name string) *MorphTargetsBlock {
 	p := ba.ctx.Get("MorphTargetsBlock").New(name)
-	return MorphTargetsBlockFromJSObject(p)
+	return MorphTargetsBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

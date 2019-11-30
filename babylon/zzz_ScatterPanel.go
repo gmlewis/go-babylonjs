@@ -8,7 +8,10 @@ import (
 
 // ScatterPanel represents a babylon.js ScatterPanel.
 // Class used to create a container panel where items get randomized planar mapping
-type ScatterPanel struct{ *VolumeBasedPanel }
+type ScatterPanel struct {
+	*VolumeBasedPanel
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *ScatterPanel) JSObject() js.Value { return s.p }
@@ -16,12 +19,12 @@ func (s *ScatterPanel) JSObject() js.Value { return s.p }
 // ScatterPanel returns a ScatterPanel JavaScript class.
 func (ba *Babylon) ScatterPanel() *ScatterPanel {
 	p := ba.ctx.Get("ScatterPanel")
-	return ScatterPanelFromJSObject(p)
+	return ScatterPanelFromJSObject(p, ba.ctx)
 }
 
 // ScatterPanelFromJSObject returns a wrapped ScatterPanel JavaScript class.
-func ScatterPanelFromJSObject(p js.Value) *ScatterPanel {
-	return &ScatterPanel{VolumeBasedPanelFromJSObject(p)}
+func ScatterPanelFromJSObject(p js.Value, ctx js.Value) *ScatterPanel {
+	return &ScatterPanel{VolumeBasedPanel: VolumeBasedPanelFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewScatterPanel returns a new ScatterPanel object.
@@ -29,7 +32,7 @@ func ScatterPanelFromJSObject(p js.Value) *ScatterPanel {
 // https://doc.babylonjs.com/api/classes/babylon.scatterpanel
 func (ba *Babylon) NewScatterPanel() *ScatterPanel {
 	p := ba.ctx.Get("ScatterPanel").New()
-	return ScatterPanelFromJSObject(p)
+	return ScatterPanelFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

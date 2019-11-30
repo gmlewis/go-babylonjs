@@ -8,7 +8,10 @@ import (
 
 // GradientBlock represents a babylon.js GradientBlock.
 // Block used to return a color from a gradient based on an input value between 0 and 1
-type GradientBlock struct{ *NodeMaterialBlock }
+type GradientBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (g *GradientBlock) JSObject() js.Value { return g.p }
@@ -16,12 +19,12 @@ func (g *GradientBlock) JSObject() js.Value { return g.p }
 // GradientBlock returns a GradientBlock JavaScript class.
 func (ba *Babylon) GradientBlock() *GradientBlock {
 	p := ba.ctx.Get("GradientBlock")
-	return GradientBlockFromJSObject(p)
+	return GradientBlockFromJSObject(p, ba.ctx)
 }
 
 // GradientBlockFromJSObject returns a wrapped GradientBlock JavaScript class.
-func GradientBlockFromJSObject(p js.Value) *GradientBlock {
-	return &GradientBlock{NodeMaterialBlockFromJSObject(p)}
+func GradientBlockFromJSObject(p js.Value, ctx js.Value) *GradientBlock {
+	return &GradientBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewGradientBlock returns a new GradientBlock object.
@@ -29,7 +32,7 @@ func GradientBlockFromJSObject(p js.Value) *GradientBlock {
 // https://doc.babylonjs.com/api/classes/babylon.gradientblock
 func (ba *Babylon) NewGradientBlock(name string) *GradientBlock {
 	p := ba.ctx.Get("GradientBlock").New(name)
-	return GradientBlockFromJSObject(p)
+	return GradientBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

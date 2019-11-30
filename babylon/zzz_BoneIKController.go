@@ -10,7 +10,10 @@ import (
 // Class used to apply inverse kinematics to bones
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_bones_and_skeletons#boneikcontroller
-type BoneIKController struct{ p js.Value }
+type BoneIKController struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (b *BoneIKController) JSObject() js.Value { return b.p }
@@ -18,12 +21,12 @@ func (b *BoneIKController) JSObject() js.Value { return b.p }
 // BoneIKController returns a BoneIKController JavaScript class.
 func (ba *Babylon) BoneIKController() *BoneIKController {
 	p := ba.ctx.Get("BoneIKController")
-	return BoneIKControllerFromJSObject(p)
+	return BoneIKControllerFromJSObject(p, ba.ctx)
 }
 
 // BoneIKControllerFromJSObject returns a wrapped BoneIKController JavaScript class.
-func BoneIKControllerFromJSObject(p js.Value) *BoneIKController {
-	return &BoneIKController{p: p}
+func BoneIKControllerFromJSObject(p js.Value, ctx js.Value) *BoneIKController {
+	return &BoneIKController{p: p, ctx: ctx}
 }
 
 // NewBoneIKControllerOpts contains optional parameters for NewBoneIKController.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewBoneIKController(mesh *AbstractMesh, bone *Bone, opts *New
 	}
 
 	p := ba.ctx.Get("BoneIKController").New(mesh.JSObject(), bone.JSObject(), opts.Options.JSObject())
-	return BoneIKControllerFromJSObject(p)
+	return BoneIKControllerFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -8,7 +8,10 @@ import (
 
 // CustomMaterial represents a babylon.js CustomMaterial.
 //
-type CustomMaterial struct{ *StandardMaterial }
+type CustomMaterial struct {
+	*StandardMaterial
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (c *CustomMaterial) JSObject() js.Value { return c.p }
@@ -16,12 +19,12 @@ func (c *CustomMaterial) JSObject() js.Value { return c.p }
 // CustomMaterial returns a CustomMaterial JavaScript class.
 func (ba *Babylon) CustomMaterial() *CustomMaterial {
 	p := ba.ctx.Get("CustomMaterial")
-	return CustomMaterialFromJSObject(p)
+	return CustomMaterialFromJSObject(p, ba.ctx)
 }
 
 // CustomMaterialFromJSObject returns a wrapped CustomMaterial JavaScript class.
-func CustomMaterialFromJSObject(p js.Value) *CustomMaterial {
-	return &CustomMaterial{StandardMaterialFromJSObject(p)}
+func CustomMaterialFromJSObject(p js.Value, ctx js.Value) *CustomMaterial {
+	return &CustomMaterial{StandardMaterial: StandardMaterialFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewCustomMaterial returns a new CustomMaterial object.
@@ -29,7 +32,7 @@ func CustomMaterialFromJSObject(p js.Value) *CustomMaterial {
 // https://doc.babylonjs.com/api/classes/babylon.custommaterial
 func (ba *Babylon) NewCustomMaterial(name string, scene *Scene) *CustomMaterial {
 	p := ba.ctx.Get("CustomMaterial").New(name, scene.JSObject())
-	return CustomMaterialFromJSObject(p)
+	return CustomMaterialFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

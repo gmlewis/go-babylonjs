@@ -8,7 +8,10 @@ import (
 
 // AnimationEvent represents a babylon.js AnimationEvent.
 // Composed of a frame, and an action function
-type AnimationEvent struct{ p js.Value }
+type AnimationEvent struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (a *AnimationEvent) JSObject() js.Value { return a.p }
@@ -16,12 +19,12 @@ func (a *AnimationEvent) JSObject() js.Value { return a.p }
 // AnimationEvent returns a AnimationEvent JavaScript class.
 func (ba *Babylon) AnimationEvent() *AnimationEvent {
 	p := ba.ctx.Get("AnimationEvent")
-	return AnimationEventFromJSObject(p)
+	return AnimationEventFromJSObject(p, ba.ctx)
 }
 
 // AnimationEventFromJSObject returns a wrapped AnimationEvent JavaScript class.
-func AnimationEventFromJSObject(p js.Value) *AnimationEvent {
-	return &AnimationEvent{p: p}
+func AnimationEventFromJSObject(p js.Value, ctx js.Value) *AnimationEvent {
+	return &AnimationEvent{p: p, ctx: ctx}
 }
 
 // NewAnimationEventOpts contains optional parameters for NewAnimationEvent.
@@ -38,7 +41,7 @@ func (ba *Babylon) NewAnimationEvent(frame float64, action func(), opts *NewAnim
 	}
 
 	p := ba.ctx.Get("AnimationEvent").New(frame, action, opts.OnlyOnce.JSObject())
-	return AnimationEventFromJSObject(p)
+	return AnimationEventFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

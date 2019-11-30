@@ -11,7 +11,10 @@ import (
 // The WebVR camera is Babylon&amp;#39;s simple interface to interaction with Windows Mixed Reality, HTC Vive and Oculus Rift.
 //
 // See: http://doc.babylonjs.com/how_to/webvr_camera
-type WebVRFreeCamera struct{ *FreeCamera }
+type WebVRFreeCamera struct {
+	*FreeCamera
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (w *WebVRFreeCamera) JSObject() js.Value { return w.p }
@@ -19,12 +22,12 @@ func (w *WebVRFreeCamera) JSObject() js.Value { return w.p }
 // WebVRFreeCamera returns a WebVRFreeCamera JavaScript class.
 func (ba *Babylon) WebVRFreeCamera() *WebVRFreeCamera {
 	p := ba.ctx.Get("WebVRFreeCamera")
-	return WebVRFreeCameraFromJSObject(p)
+	return WebVRFreeCameraFromJSObject(p, ba.ctx)
 }
 
 // WebVRFreeCameraFromJSObject returns a wrapped WebVRFreeCamera JavaScript class.
-func WebVRFreeCameraFromJSObject(p js.Value) *WebVRFreeCamera {
-	return &WebVRFreeCamera{FreeCameraFromJSObject(p)}
+func WebVRFreeCameraFromJSObject(p js.Value, ctx js.Value) *WebVRFreeCamera {
+	return &WebVRFreeCamera{FreeCamera: FreeCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewWebVRFreeCameraOpts contains optional parameters for NewWebVRFreeCamera.
@@ -41,7 +44,7 @@ func (ba *Babylon) NewWebVRFreeCamera(name string, position *Vector3, scene *Sce
 	}
 
 	p := ba.ctx.Get("WebVRFreeCamera").New(name, position.JSObject(), scene.JSObject(), opts.WebVROptions.JSObject())
-	return WebVRFreeCameraFromJSObject(p)
+	return WebVRFreeCameraFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

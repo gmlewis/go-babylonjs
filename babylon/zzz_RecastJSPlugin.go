@@ -8,7 +8,10 @@ import (
 
 // RecastJSPlugin represents a babylon.js RecastJSPlugin.
 // RecastJS navigation plugin
-type RecastJSPlugin struct{ p js.Value }
+type RecastJSPlugin struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (r *RecastJSPlugin) JSObject() js.Value { return r.p }
@@ -16,12 +19,12 @@ func (r *RecastJSPlugin) JSObject() js.Value { return r.p }
 // RecastJSPlugin returns a RecastJSPlugin JavaScript class.
 func (ba *Babylon) RecastJSPlugin() *RecastJSPlugin {
 	p := ba.ctx.Get("RecastJSPlugin")
-	return RecastJSPluginFromJSObject(p)
+	return RecastJSPluginFromJSObject(p, ba.ctx)
 }
 
 // RecastJSPluginFromJSObject returns a wrapped RecastJSPlugin JavaScript class.
-func RecastJSPluginFromJSObject(p js.Value) *RecastJSPlugin {
-	return &RecastJSPlugin{p: p}
+func RecastJSPluginFromJSObject(p js.Value, ctx js.Value) *RecastJSPlugin {
+	return &RecastJSPlugin{p: p, ctx: ctx}
 }
 
 // NewRecastJSPluginOpts contains optional parameters for NewRecastJSPlugin.
@@ -38,7 +41,7 @@ func (ba *Babylon) NewRecastJSPlugin(opts *NewRecastJSPluginOpts) *RecastJSPlugi
 	}
 
 	p := ba.ctx.Get("RecastJSPlugin").New(opts.RecastInjection)
-	return RecastJSPluginFromJSObject(p)
+	return RecastJSPluginFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -9,7 +9,10 @@ import (
 // HemisphericParticleEmitter represents a babylon.js HemisphericParticleEmitter.
 // Particle emitter emitting particles from the inside of a hemisphere.
 // It emits the particles alongside the hemisphere radius. The emission direction might be randomized.
-type HemisphericParticleEmitter struct{ p js.Value }
+type HemisphericParticleEmitter struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (h *HemisphericParticleEmitter) JSObject() js.Value { return h.p }
@@ -17,12 +20,12 @@ func (h *HemisphericParticleEmitter) JSObject() js.Value { return h.p }
 // HemisphericParticleEmitter returns a HemisphericParticleEmitter JavaScript class.
 func (ba *Babylon) HemisphericParticleEmitter() *HemisphericParticleEmitter {
 	p := ba.ctx.Get("HemisphericParticleEmitter")
-	return HemisphericParticleEmitterFromJSObject(p)
+	return HemisphericParticleEmitterFromJSObject(p, ba.ctx)
 }
 
 // HemisphericParticleEmitterFromJSObject returns a wrapped HemisphericParticleEmitter JavaScript class.
-func HemisphericParticleEmitterFromJSObject(p js.Value) *HemisphericParticleEmitter {
-	return &HemisphericParticleEmitter{p: p}
+func HemisphericParticleEmitterFromJSObject(p js.Value, ctx js.Value) *HemisphericParticleEmitter {
+	return &HemisphericParticleEmitter{p: p, ctx: ctx}
 }
 
 // NewHemisphericParticleEmitterOpts contains optional parameters for NewHemisphericParticleEmitter.
@@ -43,7 +46,7 @@ func (ba *Babylon) NewHemisphericParticleEmitter(opts *NewHemisphericParticleEmi
 	}
 
 	p := ba.ctx.Get("HemisphericParticleEmitter").New(opts.Radius.JSObject(), opts.RadiusRange.JSObject(), opts.DirectionRandomizer.JSObject())
-	return HemisphericParticleEmitterFromJSObject(p)
+	return HemisphericParticleEmitterFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

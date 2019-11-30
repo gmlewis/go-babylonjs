@@ -8,7 +8,10 @@ import (
 
 // FireMaterial represents a babylon.js FireMaterial.
 //
-type FireMaterial struct{ p js.Value }
+type FireMaterial struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (f *FireMaterial) JSObject() js.Value { return f.p }
@@ -16,12 +19,12 @@ func (f *FireMaterial) JSObject() js.Value { return f.p }
 // FireMaterial returns a FireMaterial JavaScript class.
 func (ba *Babylon) FireMaterial() *FireMaterial {
 	p := ba.ctx.Get("FireMaterial")
-	return FireMaterialFromJSObject(p)
+	return FireMaterialFromJSObject(p, ba.ctx)
 }
 
 // FireMaterialFromJSObject returns a wrapped FireMaterial JavaScript class.
-func FireMaterialFromJSObject(p js.Value) *FireMaterial {
-	return &FireMaterial{p: p}
+func FireMaterialFromJSObject(p js.Value, ctx js.Value) *FireMaterial {
+	return &FireMaterial{p: p, ctx: ctx}
 }
 
 // NewFireMaterial returns a new FireMaterial object.
@@ -29,7 +32,7 @@ func FireMaterialFromJSObject(p js.Value) *FireMaterial {
 // https://doc.babylonjs.com/api/classes/babylon.firematerial
 func (ba *Babylon) NewFireMaterial(name string, scene *Scene) *FireMaterial {
 	p := ba.ctx.Get("FireMaterial").New(name, scene.JSObject())
-	return FireMaterialFromJSObject(p)
+	return FireMaterialFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

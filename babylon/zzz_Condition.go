@@ -8,7 +8,10 @@ import (
 
 // Condition represents a babylon.js Condition.
 // A Condition applied to an Action
-type Condition struct{ p js.Value }
+type Condition struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (c *Condition) JSObject() js.Value { return c.p }
@@ -16,12 +19,12 @@ func (c *Condition) JSObject() js.Value { return c.p }
 // Condition returns a Condition JavaScript class.
 func (ba *Babylon) Condition() *Condition {
 	p := ba.ctx.Get("Condition")
-	return ConditionFromJSObject(p)
+	return ConditionFromJSObject(p, ba.ctx)
 }
 
 // ConditionFromJSObject returns a wrapped Condition JavaScript class.
-func ConditionFromJSObject(p js.Value) *Condition {
-	return &Condition{p: p}
+func ConditionFromJSObject(p js.Value, ctx js.Value) *Condition {
+	return &Condition{p: p, ctx: ctx}
 }
 
 // NewCondition returns a new Condition object.
@@ -29,7 +32,7 @@ func ConditionFromJSObject(p js.Value) *Condition {
 // https://doc.babylonjs.com/api/classes/babylon.condition
 func (ba *Babylon) NewCondition(actionManager *ActionManager) *Condition {
 	p := ba.ctx.Get("Condition").New(actionManager.JSObject())
-	return ConditionFromJSObject(p)
+	return ConditionFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

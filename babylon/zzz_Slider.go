@@ -8,7 +8,10 @@ import (
 
 // Slider represents a babylon.js Slider.
 // Class used to create slider controls
-type Slider struct{ *BaseSlider }
+type Slider struct {
+	*BaseSlider
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *Slider) JSObject() js.Value { return s.p }
@@ -16,12 +19,12 @@ func (s *Slider) JSObject() js.Value { return s.p }
 // Slider returns a Slider JavaScript class.
 func (ba *Babylon) Slider() *Slider {
 	p := ba.ctx.Get("Slider")
-	return SliderFromJSObject(p)
+	return SliderFromJSObject(p, ba.ctx)
 }
 
 // SliderFromJSObject returns a wrapped Slider JavaScript class.
-func SliderFromJSObject(p js.Value) *Slider {
-	return &Slider{BaseSliderFromJSObject(p)}
+func SliderFromJSObject(p js.Value, ctx js.Value) *Slider {
+	return &Slider{BaseSlider: BaseSliderFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewSliderOpts contains optional parameters for NewSlider.
@@ -38,7 +41,7 @@ func (ba *Babylon) NewSlider(opts *NewSliderOpts) *Slider {
 	}
 
 	p := ba.ctx.Get("Slider").New(opts.Name.JSObject())
-	return SliderFromJSObject(p)
+	return SliderFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

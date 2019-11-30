@@ -8,7 +8,10 @@ import (
 
 // AbstractMesh represents a babylon.js AbstractMesh.
 // Class used to store all common mesh properties
-type AbstractMesh struct{ *TransformNode }
+type AbstractMesh struct {
+	*TransformNode
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (a *AbstractMesh) JSObject() js.Value { return a.p }
@@ -16,12 +19,12 @@ func (a *AbstractMesh) JSObject() js.Value { return a.p }
 // AbstractMesh returns a AbstractMesh JavaScript class.
 func (ba *Babylon) AbstractMesh() *AbstractMesh {
 	p := ba.ctx.Get("AbstractMesh")
-	return AbstractMeshFromJSObject(p)
+	return AbstractMeshFromJSObject(p, ba.ctx)
 }
 
 // AbstractMeshFromJSObject returns a wrapped AbstractMesh JavaScript class.
-func AbstractMeshFromJSObject(p js.Value) *AbstractMesh {
-	return &AbstractMesh{TransformNodeFromJSObject(p)}
+func AbstractMeshFromJSObject(p js.Value, ctx js.Value) *AbstractMesh {
+	return &AbstractMesh{TransformNode: TransformNodeFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewAbstractMeshOpts contains optional parameters for NewAbstractMesh.
@@ -38,7 +41,7 @@ func (ba *Babylon) NewAbstractMesh(name string, opts *NewAbstractMeshOpts) *Abst
 	}
 
 	p := ba.ctx.Get("AbstractMesh").New(name, opts.Scene.JSObject())
-	return AbstractMeshFromJSObject(p)
+	return AbstractMeshFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

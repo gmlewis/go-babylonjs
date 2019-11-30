@@ -8,7 +8,10 @@ import (
 
 // DiscardBlock represents a babylon.js DiscardBlock.
 // Block used to discard a pixel if a value is smaller than a cutoff
-type DiscardBlock struct{ *NodeMaterialBlock }
+type DiscardBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (d *DiscardBlock) JSObject() js.Value { return d.p }
@@ -16,12 +19,12 @@ func (d *DiscardBlock) JSObject() js.Value { return d.p }
 // DiscardBlock returns a DiscardBlock JavaScript class.
 func (ba *Babylon) DiscardBlock() *DiscardBlock {
 	p := ba.ctx.Get("DiscardBlock")
-	return DiscardBlockFromJSObject(p)
+	return DiscardBlockFromJSObject(p, ba.ctx)
 }
 
 // DiscardBlockFromJSObject returns a wrapped DiscardBlock JavaScript class.
-func DiscardBlockFromJSObject(p js.Value) *DiscardBlock {
-	return &DiscardBlock{NodeMaterialBlockFromJSObject(p)}
+func DiscardBlockFromJSObject(p js.Value, ctx js.Value) *DiscardBlock {
+	return &DiscardBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewDiscardBlock returns a new DiscardBlock object.
@@ -29,7 +32,7 @@ func DiscardBlockFromJSObject(p js.Value) *DiscardBlock {
 // https://doc.babylonjs.com/api/classes/babylon.discardblock
 func (ba *Babylon) NewDiscardBlock(name string) *DiscardBlock {
 	p := ba.ctx.Get("DiscardBlock").New(name)
-	return DiscardBlockFromJSObject(p)
+	return DiscardBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

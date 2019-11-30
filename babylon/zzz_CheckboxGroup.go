@@ -9,7 +9,10 @@ import (
 // CheckboxGroup represents a babylon.js CheckboxGroup.
 // Class used to create a CheckboxGroup
 // which contains groups of checkbox buttons
-type CheckboxGroup struct{ *SelectorGroup }
+type CheckboxGroup struct {
+	*SelectorGroup
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (c *CheckboxGroup) JSObject() js.Value { return c.p }
@@ -17,12 +20,12 @@ func (c *CheckboxGroup) JSObject() js.Value { return c.p }
 // CheckboxGroup returns a CheckboxGroup JavaScript class.
 func (ba *Babylon) CheckboxGroup() *CheckboxGroup {
 	p := ba.ctx.Get("CheckboxGroup")
-	return CheckboxGroupFromJSObject(p)
+	return CheckboxGroupFromJSObject(p, ba.ctx)
 }
 
 // CheckboxGroupFromJSObject returns a wrapped CheckboxGroup JavaScript class.
-func CheckboxGroupFromJSObject(p js.Value) *CheckboxGroup {
-	return &CheckboxGroup{SelectorGroupFromJSObject(p)}
+func CheckboxGroupFromJSObject(p js.Value, ctx js.Value) *CheckboxGroup {
+	return &CheckboxGroup{SelectorGroup: SelectorGroupFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewCheckboxGroup returns a new CheckboxGroup object.
@@ -30,7 +33,7 @@ func CheckboxGroupFromJSObject(p js.Value) *CheckboxGroup {
 // https://doc.babylonjs.com/api/classes/babylon.checkboxgroup
 func (ba *Babylon) NewCheckboxGroup(name string) *CheckboxGroup {
 	p := ba.ctx.Get("CheckboxGroup").New(name)
-	return CheckboxGroupFromJSObject(p)
+	return CheckboxGroupFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

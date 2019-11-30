@@ -8,7 +8,10 @@ import (
 
 // GLTFLoader represents a babylon.js GLTFLoader.
 // The glTF 2.0 loader
-type GLTFLoader struct{ p js.Value }
+type GLTFLoader struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (g *GLTFLoader) JSObject() js.Value { return g.p }
@@ -16,12 +19,12 @@ func (g *GLTFLoader) JSObject() js.Value { return g.p }
 // GLTFLoader returns a GLTFLoader JavaScript class.
 func (ba *Babylon) GLTFLoader() *GLTFLoader {
 	p := ba.ctx.Get("GLTFLoader")
-	return GLTFLoaderFromJSObject(p)
+	return GLTFLoaderFromJSObject(p, ba.ctx)
 }
 
 // GLTFLoaderFromJSObject returns a wrapped GLTFLoader JavaScript class.
-func GLTFLoaderFromJSObject(p js.Value) *GLTFLoader {
-	return &GLTFLoader{p: p}
+func GLTFLoaderFromJSObject(p js.Value, ctx js.Value) *GLTFLoader {
+	return &GLTFLoader{p: p, ctx: ctx}
 }
 
 // TODO: methods

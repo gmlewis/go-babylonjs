@@ -8,7 +8,10 @@ import (
 
 // Control3D represents a babylon.js Control3D.
 // Class used as base class for controls
-type Control3D struct{ p js.Value }
+type Control3D struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (c *Control3D) JSObject() js.Value { return c.p }
@@ -16,12 +19,12 @@ func (c *Control3D) JSObject() js.Value { return c.p }
 // Control3D returns a Control3D JavaScript class.
 func (ba *Babylon) Control3D() *Control3D {
 	p := ba.ctx.Get("Control3D")
-	return Control3DFromJSObject(p)
+	return Control3DFromJSObject(p, ba.ctx)
 }
 
 // Control3DFromJSObject returns a wrapped Control3D JavaScript class.
-func Control3DFromJSObject(p js.Value) *Control3D {
-	return &Control3D{p: p}
+func Control3DFromJSObject(p js.Value, ctx js.Value) *Control3D {
+	return &Control3D{p: p, ctx: ctx}
 }
 
 // NewControl3DOpts contains optional parameters for NewControl3D.
@@ -38,7 +41,7 @@ func (ba *Babylon) NewControl3D(opts *NewControl3DOpts) *Control3D {
 	}
 
 	p := ba.ctx.Get("Control3D").New(opts.Name.JSObject())
-	return Control3DFromJSObject(p)
+	return Control3DFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -10,7 +10,10 @@ import (
 // Class used to specify simplification options
 //
 // See: http://doc.babylonjs.com/how_to/in-browser_mesh_simplification
-type SimplificationSettings struct{ p js.Value }
+type SimplificationSettings struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *SimplificationSettings) JSObject() js.Value { return s.p }
@@ -18,12 +21,12 @@ func (s *SimplificationSettings) JSObject() js.Value { return s.p }
 // SimplificationSettings returns a SimplificationSettings JavaScript class.
 func (ba *Babylon) SimplificationSettings() *SimplificationSettings {
 	p := ba.ctx.Get("SimplificationSettings")
-	return SimplificationSettingsFromJSObject(p)
+	return SimplificationSettingsFromJSObject(p, ba.ctx)
 }
 
 // SimplificationSettingsFromJSObject returns a wrapped SimplificationSettings JavaScript class.
-func SimplificationSettingsFromJSObject(p js.Value) *SimplificationSettings {
-	return &SimplificationSettings{p: p}
+func SimplificationSettingsFromJSObject(p js.Value, ctx js.Value) *SimplificationSettings {
+	return &SimplificationSettings{p: p, ctx: ctx}
 }
 
 // NewSimplificationSettingsOpts contains optional parameters for NewSimplificationSettings.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewSimplificationSettings(quality float64, distance float64, 
 	}
 
 	p := ba.ctx.Get("SimplificationSettings").New(quality, distance, opts.OptimizeMesh.JSObject())
-	return SimplificationSettingsFromJSObject(p)
+	return SimplificationSettingsFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

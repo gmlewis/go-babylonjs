@@ -11,7 +11,10 @@ import (
 // rendering purpose.
 //
 // This works by convention in BabylonJS but is meant to be use only with shader following the in place naming rules and conventions.
-type MaterialHelper struct{ p js.Value }
+type MaterialHelper struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (m *MaterialHelper) JSObject() js.Value { return m.p }
@@ -19,12 +22,12 @@ func (m *MaterialHelper) JSObject() js.Value { return m.p }
 // MaterialHelper returns a MaterialHelper JavaScript class.
 func (ba *Babylon) MaterialHelper() *MaterialHelper {
 	p := ba.ctx.Get("MaterialHelper")
-	return MaterialHelperFromJSObject(p)
+	return MaterialHelperFromJSObject(p, ba.ctx)
 }
 
 // MaterialHelperFromJSObject returns a wrapped MaterialHelper JavaScript class.
-func MaterialHelperFromJSObject(p js.Value) *MaterialHelper {
-	return &MaterialHelper{p: p}
+func MaterialHelperFromJSObject(p js.Value, ctx js.Value) *MaterialHelper {
+	return &MaterialHelper{p: p, ctx: ctx}
 }
 
 // TODO: methods

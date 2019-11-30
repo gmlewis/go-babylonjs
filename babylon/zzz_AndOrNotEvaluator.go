@@ -8,7 +8,10 @@ import (
 
 // AndOrNotEvaluator represents a babylon.js AndOrNotEvaluator.
 // Class used to evalaute queries containing &lt;code&gt;and&lt;/code&gt; and &lt;code&gt;or&lt;/code&gt; operators
-type AndOrNotEvaluator struct{ p js.Value }
+type AndOrNotEvaluator struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (a *AndOrNotEvaluator) JSObject() js.Value { return a.p }
@@ -16,12 +19,12 @@ func (a *AndOrNotEvaluator) JSObject() js.Value { return a.p }
 // AndOrNotEvaluator returns a AndOrNotEvaluator JavaScript class.
 func (ba *Babylon) AndOrNotEvaluator() *AndOrNotEvaluator {
 	p := ba.ctx.Get("AndOrNotEvaluator")
-	return AndOrNotEvaluatorFromJSObject(p)
+	return AndOrNotEvaluatorFromJSObject(p, ba.ctx)
 }
 
 // AndOrNotEvaluatorFromJSObject returns a wrapped AndOrNotEvaluator JavaScript class.
-func AndOrNotEvaluatorFromJSObject(p js.Value) *AndOrNotEvaluator {
-	return &AndOrNotEvaluator{p: p}
+func AndOrNotEvaluatorFromJSObject(p js.Value, ctx js.Value) *AndOrNotEvaluator {
+	return &AndOrNotEvaluator{p: p, ctx: ctx}
 }
 
 // TODO: methods

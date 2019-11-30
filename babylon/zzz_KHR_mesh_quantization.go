@@ -8,7 +8,10 @@ import (
 
 // KHR_mesh_quantization represents a babylon.js KHR_mesh_quantization.
 // &lt;a href=&#34;https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Khronos/KHR_mesh_quantization&#34;&gt;Specification&lt;/a&gt;
-type KHR_mesh_quantization struct{ p js.Value }
+type KHR_mesh_quantization struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (k *KHR_mesh_quantization) JSObject() js.Value { return k.p }
@@ -16,12 +19,12 @@ func (k *KHR_mesh_quantization) JSObject() js.Value { return k.p }
 // KHR_mesh_quantization returns a KHR_mesh_quantization JavaScript class.
 func (ba *Babylon) KHR_mesh_quantization() *KHR_mesh_quantization {
 	p := ba.ctx.Get("KHR_mesh_quantization")
-	return KHR_mesh_quantizationFromJSObject(p)
+	return KHR_mesh_quantizationFromJSObject(p, ba.ctx)
 }
 
 // KHR_mesh_quantizationFromJSObject returns a wrapped KHR_mesh_quantization JavaScript class.
-func KHR_mesh_quantizationFromJSObject(p js.Value) *KHR_mesh_quantization {
-	return &KHR_mesh_quantization{p: p}
+func KHR_mesh_quantizationFromJSObject(p js.Value, ctx js.Value) *KHR_mesh_quantization {
+	return &KHR_mesh_quantization{p: p, ctx: ctx}
 }
 
 // TODO: methods

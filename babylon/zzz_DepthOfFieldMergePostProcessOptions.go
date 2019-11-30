@@ -8,7 +8,10 @@ import (
 
 // DepthOfFieldMergePostProcessOptions represents a babylon.js DepthOfFieldMergePostProcessOptions.
 // Options to be set when merging outputs from the default pipeline.
-type DepthOfFieldMergePostProcessOptions struct{ p js.Value }
+type DepthOfFieldMergePostProcessOptions struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (d *DepthOfFieldMergePostProcessOptions) JSObject() js.Value { return d.p }
@@ -16,12 +19,12 @@ func (d *DepthOfFieldMergePostProcessOptions) JSObject() js.Value { return d.p }
 // DepthOfFieldMergePostProcessOptions returns a DepthOfFieldMergePostProcessOptions JavaScript class.
 func (ba *Babylon) DepthOfFieldMergePostProcessOptions() *DepthOfFieldMergePostProcessOptions {
 	p := ba.ctx.Get("DepthOfFieldMergePostProcessOptions")
-	return DepthOfFieldMergePostProcessOptionsFromJSObject(p)
+	return DepthOfFieldMergePostProcessOptionsFromJSObject(p, ba.ctx)
 }
 
 // DepthOfFieldMergePostProcessOptionsFromJSObject returns a wrapped DepthOfFieldMergePostProcessOptions JavaScript class.
-func DepthOfFieldMergePostProcessOptionsFromJSObject(p js.Value) *DepthOfFieldMergePostProcessOptions {
-	return &DepthOfFieldMergePostProcessOptions{p: p}
+func DepthOfFieldMergePostProcessOptionsFromJSObject(p js.Value, ctx js.Value) *DepthOfFieldMergePostProcessOptions {
+	return &DepthOfFieldMergePostProcessOptions{p: p, ctx: ctx}
 }
 
 // TODO: methods

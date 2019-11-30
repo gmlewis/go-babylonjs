@@ -8,7 +8,10 @@ import (
 
 // HemisphereBuilder represents a babylon.js HemisphereBuilder.
 // Class containing static functions to help procedurally build meshes
-type HemisphereBuilder struct{ p js.Value }
+type HemisphereBuilder struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (h *HemisphereBuilder) JSObject() js.Value { return h.p }
@@ -16,12 +19,12 @@ func (h *HemisphereBuilder) JSObject() js.Value { return h.p }
 // HemisphereBuilder returns a HemisphereBuilder JavaScript class.
 func (ba *Babylon) HemisphereBuilder() *HemisphereBuilder {
 	p := ba.ctx.Get("HemisphereBuilder")
-	return HemisphereBuilderFromJSObject(p)
+	return HemisphereBuilderFromJSObject(p, ba.ctx)
 }
 
 // HemisphereBuilderFromJSObject returns a wrapped HemisphereBuilder JavaScript class.
-func HemisphereBuilderFromJSObject(p js.Value) *HemisphereBuilder {
-	return &HemisphereBuilder{p: p}
+func HemisphereBuilderFromJSObject(p js.Value, ctx js.Value) *HemisphereBuilder {
+	return &HemisphereBuilder{p: p, ctx: ctx}
 }
 
 // TODO: methods

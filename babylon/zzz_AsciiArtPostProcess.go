@@ -11,7 +11,10 @@ import (
 //
 // Simmply add it to your scene and let the nerd that lives in you have fun.
 // Example usage: var pp = new AsciiArtPostProcess(&amp;quot;myAscii&amp;quot;, &amp;quot;20px Monospace&amp;quot;, camera);
-type AsciiArtPostProcess struct{ *PostProcess }
+type AsciiArtPostProcess struct {
+	*PostProcess
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (a *AsciiArtPostProcess) JSObject() js.Value { return a.p }
@@ -19,12 +22,12 @@ func (a *AsciiArtPostProcess) JSObject() js.Value { return a.p }
 // AsciiArtPostProcess returns a AsciiArtPostProcess JavaScript class.
 func (ba *Babylon) AsciiArtPostProcess() *AsciiArtPostProcess {
 	p := ba.ctx.Get("AsciiArtPostProcess")
-	return AsciiArtPostProcessFromJSObject(p)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
 }
 
 // AsciiArtPostProcessFromJSObject returns a wrapped AsciiArtPostProcess JavaScript class.
-func AsciiArtPostProcessFromJSObject(p js.Value) *AsciiArtPostProcess {
-	return &AsciiArtPostProcess{PostProcessFromJSObject(p)}
+func AsciiArtPostProcessFromJSObject(p js.Value, ctx js.Value) *AsciiArtPostProcess {
+	return &AsciiArtPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewAsciiArtPostProcessOpts contains optional parameters for NewAsciiArtPostProcess.
@@ -41,7 +44,7 @@ func (ba *Babylon) NewAsciiArtPostProcess(name string, camera *Camera, opts *New
 	}
 
 	p := ba.ctx.Get("AsciiArtPostProcess").New(name, camera.JSObject(), opts.Options.JSObject())
-	return AsciiArtPostProcessFromJSObject(p)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

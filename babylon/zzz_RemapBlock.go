@@ -8,7 +8,10 @@ import (
 
 // RemapBlock represents a babylon.js RemapBlock.
 // Block used to remap a float from a range to a new one
-type RemapBlock struct{ *NodeMaterialBlock }
+type RemapBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (r *RemapBlock) JSObject() js.Value { return r.p }
@@ -16,12 +19,12 @@ func (r *RemapBlock) JSObject() js.Value { return r.p }
 // RemapBlock returns a RemapBlock JavaScript class.
 func (ba *Babylon) RemapBlock() *RemapBlock {
 	p := ba.ctx.Get("RemapBlock")
-	return RemapBlockFromJSObject(p)
+	return RemapBlockFromJSObject(p, ba.ctx)
 }
 
 // RemapBlockFromJSObject returns a wrapped RemapBlock JavaScript class.
-func RemapBlockFromJSObject(p js.Value) *RemapBlock {
-	return &RemapBlock{NodeMaterialBlockFromJSObject(p)}
+func RemapBlockFromJSObject(p js.Value, ctx js.Value) *RemapBlock {
+	return &RemapBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewRemapBlock returns a new RemapBlock object.
@@ -29,7 +32,7 @@ func RemapBlockFromJSObject(p js.Value) *RemapBlock {
 // https://doc.babylonjs.com/api/classes/babylon.remapblock
 func (ba *Babylon) NewRemapBlock(name string) *RemapBlock {
 	p := ba.ctx.Get("RemapBlock").New(name)
-	return RemapBlockFromJSObject(p)
+	return RemapBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

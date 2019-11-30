@@ -8,7 +8,10 @@ import (
 
 // ReflectBlock represents a babylon.js ReflectBlock.
 // Block used to get the reflected vector from a direction and a normal
-type ReflectBlock struct{ *NodeMaterialBlock }
+type ReflectBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (r *ReflectBlock) JSObject() js.Value { return r.p }
@@ -16,12 +19,12 @@ func (r *ReflectBlock) JSObject() js.Value { return r.p }
 // ReflectBlock returns a ReflectBlock JavaScript class.
 func (ba *Babylon) ReflectBlock() *ReflectBlock {
 	p := ba.ctx.Get("ReflectBlock")
-	return ReflectBlockFromJSObject(p)
+	return ReflectBlockFromJSObject(p, ba.ctx)
 }
 
 // ReflectBlockFromJSObject returns a wrapped ReflectBlock JavaScript class.
-func ReflectBlockFromJSObject(p js.Value) *ReflectBlock {
-	return &ReflectBlock{NodeMaterialBlockFromJSObject(p)}
+func ReflectBlockFromJSObject(p js.Value, ctx js.Value) *ReflectBlock {
+	return &ReflectBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewReflectBlock returns a new ReflectBlock object.
@@ -29,7 +32,7 @@ func ReflectBlockFromJSObject(p js.Value) *ReflectBlock {
 // https://doc.babylonjs.com/api/classes/babylon.reflectblock
 func (ba *Babylon) NewReflectBlock(name string) *ReflectBlock {
 	p := ba.ctx.Get("ReflectBlock").New(name)
-	return ReflectBlockFromJSObject(p)
+	return ReflectBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

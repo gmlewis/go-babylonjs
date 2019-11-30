@@ -11,7 +11,10 @@ import (
 // Custom Procedural textures are the easiest way to create your own procedural in your application.
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_procedural_textures#creating-custom-procedural-textures
-type CustomProceduralTexture struct{ *ProceduralTexture }
+type CustomProceduralTexture struct {
+	*ProceduralTexture
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (c *CustomProceduralTexture) JSObject() js.Value { return c.p }
@@ -19,12 +22,12 @@ func (c *CustomProceduralTexture) JSObject() js.Value { return c.p }
 // CustomProceduralTexture returns a CustomProceduralTexture JavaScript class.
 func (ba *Babylon) CustomProceduralTexture() *CustomProceduralTexture {
 	p := ba.ctx.Get("CustomProceduralTexture")
-	return CustomProceduralTextureFromJSObject(p)
+	return CustomProceduralTextureFromJSObject(p, ba.ctx)
 }
 
 // CustomProceduralTextureFromJSObject returns a wrapped CustomProceduralTexture JavaScript class.
-func CustomProceduralTextureFromJSObject(p js.Value) *CustomProceduralTexture {
-	return &CustomProceduralTexture{ProceduralTextureFromJSObject(p)}
+func CustomProceduralTextureFromJSObject(p js.Value, ctx js.Value) *CustomProceduralTexture {
+	return &CustomProceduralTexture{ProceduralTexture: ProceduralTextureFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewCustomProceduralTextureOpts contains optional parameters for NewCustomProceduralTexture.
@@ -43,7 +46,7 @@ func (ba *Babylon) NewCustomProceduralTexture(name string, texturePath string, s
 	}
 
 	p := ba.ctx.Get("CustomProceduralTexture").New(name, texturePath, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps.JSObject())
-	return CustomProceduralTextureFromJSObject(p)
+	return CustomProceduralTextureFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

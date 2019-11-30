@@ -8,7 +8,10 @@ import (
 
 // GearVRController represents a babylon.js GearVRController.
 // Gear VR Controller
-type GearVRController struct{ *WebVRController }
+type GearVRController struct {
+	*WebVRController
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (g *GearVRController) JSObject() js.Value { return g.p }
@@ -16,12 +19,12 @@ func (g *GearVRController) JSObject() js.Value { return g.p }
 // GearVRController returns a GearVRController JavaScript class.
 func (ba *Babylon) GearVRController() *GearVRController {
 	p := ba.ctx.Get("GearVRController")
-	return GearVRControllerFromJSObject(p)
+	return GearVRControllerFromJSObject(p, ba.ctx)
 }
 
 // GearVRControllerFromJSObject returns a wrapped GearVRController JavaScript class.
-func GearVRControllerFromJSObject(p js.Value) *GearVRController {
-	return &GearVRController{WebVRControllerFromJSObject(p)}
+func GearVRControllerFromJSObject(p js.Value, ctx js.Value) *GearVRController {
+	return &GearVRController{WebVRController: WebVRControllerFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewGearVRController returns a new GearVRController object.
@@ -29,7 +32,7 @@ func GearVRControllerFromJSObject(p js.Value) *GearVRController {
 // https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller
 func (ba *Babylon) NewGearVRController(vrGamepad interface{}) *GearVRController {
 	p := ba.ctx.Get("GearVRController").New(vrGamepad)
-	return GearVRControllerFromJSObject(p)
+	return GearVRControllerFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -8,7 +8,10 @@ import (
 
 // CloudPoint represents a babylon.js CloudPoint.
 // Represents one particle of a points cloud system.
-type CloudPoint struct{ p js.Value }
+type CloudPoint struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (c *CloudPoint) JSObject() js.Value { return c.p }
@@ -16,12 +19,12 @@ func (c *CloudPoint) JSObject() js.Value { return c.p }
 // CloudPoint returns a CloudPoint JavaScript class.
 func (ba *Babylon) CloudPoint() *CloudPoint {
 	p := ba.ctx.Get("CloudPoint")
-	return CloudPointFromJSObject(p)
+	return CloudPointFromJSObject(p, ba.ctx)
 }
 
 // CloudPointFromJSObject returns a wrapped CloudPoint JavaScript class.
-func CloudPointFromJSObject(p js.Value) *CloudPoint {
-	return &CloudPoint{p: p}
+func CloudPointFromJSObject(p js.Value, ctx js.Value) *CloudPoint {
+	return &CloudPoint{p: p, ctx: ctx}
 }
 
 // NewCloudPoint returns a new CloudPoint object.
@@ -29,7 +32,7 @@ func CloudPointFromJSObject(p js.Value) *CloudPoint {
 // https://doc.babylonjs.com/api/classes/babylon.cloudpoint
 func (ba *Babylon) NewCloudPoint(particleIndex float64, group *PointsGroup, groupId float64, idxInGroup float64, pcs *PointsCloudSystem) *CloudPoint {
 	p := ba.ctx.Get("CloudPoint").New(particleIndex, group.JSObject(), groupId, idxInGroup, pcs.JSObject())
-	return CloudPointFromJSObject(p)
+	return CloudPointFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

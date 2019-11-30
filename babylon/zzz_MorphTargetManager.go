@@ -10,7 +10,10 @@ import (
 // This class is used to deform meshes using morphing between different targets
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_morphtargets
-type MorphTargetManager struct{ p js.Value }
+type MorphTargetManager struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (m *MorphTargetManager) JSObject() js.Value { return m.p }
@@ -18,12 +21,12 @@ func (m *MorphTargetManager) JSObject() js.Value { return m.p }
 // MorphTargetManager returns a MorphTargetManager JavaScript class.
 func (ba *Babylon) MorphTargetManager() *MorphTargetManager {
 	p := ba.ctx.Get("MorphTargetManager")
-	return MorphTargetManagerFromJSObject(p)
+	return MorphTargetManagerFromJSObject(p, ba.ctx)
 }
 
 // MorphTargetManagerFromJSObject returns a wrapped MorphTargetManager JavaScript class.
-func MorphTargetManagerFromJSObject(p js.Value) *MorphTargetManager {
-	return &MorphTargetManager{p: p}
+func MorphTargetManagerFromJSObject(p js.Value, ctx js.Value) *MorphTargetManager {
+	return &MorphTargetManager{p: p, ctx: ctx}
 }
 
 // NewMorphTargetManagerOpts contains optional parameters for NewMorphTargetManager.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewMorphTargetManager(opts *NewMorphTargetManagerOpts) *Morph
 	}
 
 	p := ba.ctx.Get("MorphTargetManager").New(opts.Scene.JSObject())
-	return MorphTargetManagerFromJSObject(p)
+	return MorphTargetManagerFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

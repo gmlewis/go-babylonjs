@@ -8,7 +8,10 @@ import (
 
 // RenderTargetCreationOptions represents a babylon.js RenderTargetCreationOptions.
 // Define options used to create a render target texture
-type RenderTargetCreationOptions struct{ p js.Value }
+type RenderTargetCreationOptions struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (r *RenderTargetCreationOptions) JSObject() js.Value { return r.p }
@@ -16,12 +19,12 @@ func (r *RenderTargetCreationOptions) JSObject() js.Value { return r.p }
 // RenderTargetCreationOptions returns a RenderTargetCreationOptions JavaScript class.
 func (ba *Babylon) RenderTargetCreationOptions() *RenderTargetCreationOptions {
 	p := ba.ctx.Get("RenderTargetCreationOptions")
-	return RenderTargetCreationOptionsFromJSObject(p)
+	return RenderTargetCreationOptionsFromJSObject(p, ba.ctx)
 }
 
 // RenderTargetCreationOptionsFromJSObject returns a wrapped RenderTargetCreationOptions JavaScript class.
-func RenderTargetCreationOptionsFromJSObject(p js.Value) *RenderTargetCreationOptions {
-	return &RenderTargetCreationOptions{p: p}
+func RenderTargetCreationOptionsFromJSObject(p js.Value, ctx js.Value) *RenderTargetCreationOptions {
+	return &RenderTargetCreationOptions{p: p, ctx: ctx}
 }
 
 // TODO: methods

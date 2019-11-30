@@ -8,7 +8,10 @@ import (
 
 // TerrainMaterial represents a babylon.js TerrainMaterial.
 //
-type TerrainMaterial struct{ p js.Value }
+type TerrainMaterial struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (t *TerrainMaterial) JSObject() js.Value { return t.p }
@@ -16,12 +19,12 @@ func (t *TerrainMaterial) JSObject() js.Value { return t.p }
 // TerrainMaterial returns a TerrainMaterial JavaScript class.
 func (ba *Babylon) TerrainMaterial() *TerrainMaterial {
 	p := ba.ctx.Get("TerrainMaterial")
-	return TerrainMaterialFromJSObject(p)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
 }
 
 // TerrainMaterialFromJSObject returns a wrapped TerrainMaterial JavaScript class.
-func TerrainMaterialFromJSObject(p js.Value) *TerrainMaterial {
-	return &TerrainMaterial{p: p}
+func TerrainMaterialFromJSObject(p js.Value, ctx js.Value) *TerrainMaterial {
+	return &TerrainMaterial{p: p, ctx: ctx}
 }
 
 // NewTerrainMaterial returns a new TerrainMaterial object.
@@ -29,7 +32,7 @@ func TerrainMaterialFromJSObject(p js.Value) *TerrainMaterial {
 // https://doc.babylonjs.com/api/classes/babylon.terrainmaterial
 func (ba *Babylon) NewTerrainMaterial(name string, scene *Scene) *TerrainMaterial {
 	p := ba.ctx.Get("TerrainMaterial").New(name, scene.JSObject())
-	return TerrainMaterialFromJSObject(p)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

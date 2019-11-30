@@ -10,7 +10,10 @@ import (
 // Easing function with a power of 5 shape (see link below).
 //
 // See: http://doc.babylonjs.com/babylon101/animations#easing-functions
-type QuinticEase struct{ *EasingFunction }
+type QuinticEase struct {
+	*EasingFunction
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (q *QuinticEase) JSObject() js.Value { return q.p }
@@ -18,12 +21,12 @@ func (q *QuinticEase) JSObject() js.Value { return q.p }
 // QuinticEase returns a QuinticEase JavaScript class.
 func (ba *Babylon) QuinticEase() *QuinticEase {
 	p := ba.ctx.Get("QuinticEase")
-	return QuinticEaseFromJSObject(p)
+	return QuinticEaseFromJSObject(p, ba.ctx)
 }
 
 // QuinticEaseFromJSObject returns a wrapped QuinticEase JavaScript class.
-func QuinticEaseFromJSObject(p js.Value) *QuinticEase {
-	return &QuinticEase{EasingFunctionFromJSObject(p)}
+func QuinticEaseFromJSObject(p js.Value, ctx js.Value) *QuinticEase {
+	return &QuinticEase{EasingFunction: EasingFunctionFromJSObject(p, ctx), ctx: ctx}
 }
 
 // TODO: methods

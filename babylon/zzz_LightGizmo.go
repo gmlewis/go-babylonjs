@@ -8,7 +8,10 @@ import (
 
 // LightGizmo represents a babylon.js LightGizmo.
 // Gizmo that enables viewing a light
-type LightGizmo struct{ *Gizmo }
+type LightGizmo struct {
+	*Gizmo
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (l *LightGizmo) JSObject() js.Value { return l.p }
@@ -16,12 +19,12 @@ func (l *LightGizmo) JSObject() js.Value { return l.p }
 // LightGizmo returns a LightGizmo JavaScript class.
 func (ba *Babylon) LightGizmo() *LightGizmo {
 	p := ba.ctx.Get("LightGizmo")
-	return LightGizmoFromJSObject(p)
+	return LightGizmoFromJSObject(p, ba.ctx)
 }
 
 // LightGizmoFromJSObject returns a wrapped LightGizmo JavaScript class.
-func LightGizmoFromJSObject(p js.Value) *LightGizmo {
-	return &LightGizmo{GizmoFromJSObject(p)}
+func LightGizmoFromJSObject(p js.Value, ctx js.Value) *LightGizmo {
+	return &LightGizmo{Gizmo: GizmoFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewLightGizmoOpts contains optional parameters for NewLightGizmo.
@@ -38,7 +41,7 @@ func (ba *Babylon) NewLightGizmo(opts *NewLightGizmoOpts) *LightGizmo {
 	}
 
 	p := ba.ctx.Get("LightGizmo").New(opts.GizmoLayer.JSObject())
-	return LightGizmoFromJSObject(p)
+	return LightGizmoFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

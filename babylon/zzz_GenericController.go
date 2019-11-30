@@ -8,7 +8,10 @@ import (
 
 // GenericController represents a babylon.js GenericController.
 // Generic Controller
-type GenericController struct{ *WebVRController }
+type GenericController struct {
+	*WebVRController
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (g *GenericController) JSObject() js.Value { return g.p }
@@ -16,12 +19,12 @@ func (g *GenericController) JSObject() js.Value { return g.p }
 // GenericController returns a GenericController JavaScript class.
 func (ba *Babylon) GenericController() *GenericController {
 	p := ba.ctx.Get("GenericController")
-	return GenericControllerFromJSObject(p)
+	return GenericControllerFromJSObject(p, ba.ctx)
 }
 
 // GenericControllerFromJSObject returns a wrapped GenericController JavaScript class.
-func GenericControllerFromJSObject(p js.Value) *GenericController {
-	return &GenericController{WebVRControllerFromJSObject(p)}
+func GenericControllerFromJSObject(p js.Value, ctx js.Value) *GenericController {
+	return &GenericController{WebVRController: WebVRControllerFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewGenericController returns a new GenericController object.
@@ -29,7 +32,7 @@ func GenericControllerFromJSObject(p js.Value) *GenericController {
 // https://doc.babylonjs.com/api/classes/babylon.genericcontroller
 func (ba *Babylon) NewGenericController(vrGamepad interface{}) *GenericController {
 	p := ba.ctx.Get("GenericController").New(vrGamepad)
-	return GenericControllerFromJSObject(p)
+	return GenericControllerFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

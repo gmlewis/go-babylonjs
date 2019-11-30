@@ -8,7 +8,10 @@ import (
 
 // DiscBuilder represents a babylon.js DiscBuilder.
 // Class containing static functions to help procedurally build meshes
-type DiscBuilder struct{ p js.Value }
+type DiscBuilder struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (d *DiscBuilder) JSObject() js.Value { return d.p }
@@ -16,12 +19,12 @@ func (d *DiscBuilder) JSObject() js.Value { return d.p }
 // DiscBuilder returns a DiscBuilder JavaScript class.
 func (ba *Babylon) DiscBuilder() *DiscBuilder {
 	p := ba.ctx.Get("DiscBuilder")
-	return DiscBuilderFromJSObject(p)
+	return DiscBuilderFromJSObject(p, ba.ctx)
 }
 
 // DiscBuilderFromJSObject returns a wrapped DiscBuilder JavaScript class.
-func DiscBuilderFromJSObject(p js.Value) *DiscBuilder {
-	return &DiscBuilder{p: p}
+func DiscBuilderFromJSObject(p js.Value, ctx js.Value) *DiscBuilder {
+	return &DiscBuilder{p: p, ctx: ctx}
 }
 
 // TODO: methods

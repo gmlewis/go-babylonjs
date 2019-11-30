@@ -8,7 +8,10 @@ import (
 
 // TrigonometryBlock represents a babylon.js TrigonometryBlock.
 // Block used to apply trigonometry operation to floats
-type TrigonometryBlock struct{ *NodeMaterialBlock }
+type TrigonometryBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (t *TrigonometryBlock) JSObject() js.Value { return t.p }
@@ -16,12 +19,12 @@ func (t *TrigonometryBlock) JSObject() js.Value { return t.p }
 // TrigonometryBlock returns a TrigonometryBlock JavaScript class.
 func (ba *Babylon) TrigonometryBlock() *TrigonometryBlock {
 	p := ba.ctx.Get("TrigonometryBlock")
-	return TrigonometryBlockFromJSObject(p)
+	return TrigonometryBlockFromJSObject(p, ba.ctx)
 }
 
 // TrigonometryBlockFromJSObject returns a wrapped TrigonometryBlock JavaScript class.
-func TrigonometryBlockFromJSObject(p js.Value) *TrigonometryBlock {
-	return &TrigonometryBlock{NodeMaterialBlockFromJSObject(p)}
+func TrigonometryBlockFromJSObject(p js.Value, ctx js.Value) *TrigonometryBlock {
+	return &TrigonometryBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewTrigonometryBlock returns a new TrigonometryBlock object.
@@ -29,7 +32,7 @@ func TrigonometryBlockFromJSObject(p js.Value) *TrigonometryBlock {
 // https://doc.babylonjs.com/api/classes/babylon.trigonometryblock
 func (ba *Babylon) NewTrigonometryBlock(name string) *TrigonometryBlock {
 	p := ba.ctx.Get("TrigonometryBlock").New(name)
-	return TrigonometryBlockFromJSObject(p)
+	return TrigonometryBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

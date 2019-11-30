@@ -10,7 +10,10 @@ import (
 // Manage the keyboard inputs to control the movement of a free camera.
 //
 // See: http://doc.babylonjs.com/how_to/customizing_camera_inputs
-type FreeCameraKeyboardMoveInput struct{ p js.Value }
+type FreeCameraKeyboardMoveInput struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (f *FreeCameraKeyboardMoveInput) JSObject() js.Value { return f.p }
@@ -18,12 +21,12 @@ func (f *FreeCameraKeyboardMoveInput) JSObject() js.Value { return f.p }
 // FreeCameraKeyboardMoveInput returns a FreeCameraKeyboardMoveInput JavaScript class.
 func (ba *Babylon) FreeCameraKeyboardMoveInput() *FreeCameraKeyboardMoveInput {
 	p := ba.ctx.Get("FreeCameraKeyboardMoveInput")
-	return FreeCameraKeyboardMoveInputFromJSObject(p)
+	return FreeCameraKeyboardMoveInputFromJSObject(p, ba.ctx)
 }
 
 // FreeCameraKeyboardMoveInputFromJSObject returns a wrapped FreeCameraKeyboardMoveInput JavaScript class.
-func FreeCameraKeyboardMoveInputFromJSObject(p js.Value) *FreeCameraKeyboardMoveInput {
-	return &FreeCameraKeyboardMoveInput{p: p}
+func FreeCameraKeyboardMoveInputFromJSObject(p js.Value, ctx js.Value) *FreeCameraKeyboardMoveInput {
+	return &FreeCameraKeyboardMoveInput{p: p, ctx: ctx}
 }
 
 // TODO: methods

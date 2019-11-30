@@ -8,7 +8,10 @@ import (
 
 // SpherePanel represents a babylon.js SpherePanel.
 // Class used to create a container panel deployed on the surface of a sphere
-type SpherePanel struct{ *VolumeBasedPanel }
+type SpherePanel struct {
+	*VolumeBasedPanel
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *SpherePanel) JSObject() js.Value { return s.p }
@@ -16,12 +19,12 @@ func (s *SpherePanel) JSObject() js.Value { return s.p }
 // SpherePanel returns a SpherePanel JavaScript class.
 func (ba *Babylon) SpherePanel() *SpherePanel {
 	p := ba.ctx.Get("SpherePanel")
-	return SpherePanelFromJSObject(p)
+	return SpherePanelFromJSObject(p, ba.ctx)
 }
 
 // SpherePanelFromJSObject returns a wrapped SpherePanel JavaScript class.
-func SpherePanelFromJSObject(p js.Value) *SpherePanel {
-	return &SpherePanel{VolumeBasedPanelFromJSObject(p)}
+func SpherePanelFromJSObject(p js.Value, ctx js.Value) *SpherePanel {
+	return &SpherePanel{VolumeBasedPanel: VolumeBasedPanelFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewSpherePanel returns a new SpherePanel object.
@@ -29,7 +32,7 @@ func SpherePanelFromJSObject(p js.Value) *SpherePanel {
 // https://doc.babylonjs.com/api/classes/babylon.spherepanel
 func (ba *Babylon) NewSpherePanel() *SpherePanel {
 	p := ba.ctx.Get("SpherePanel").New()
-	return SpherePanelFromJSObject(p)
+	return SpherePanelFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

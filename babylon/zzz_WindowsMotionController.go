@@ -8,7 +8,10 @@ import (
 
 // WindowsMotionController represents a babylon.js WindowsMotionController.
 // Defines the WindowsMotionController object that the state of the windows motion controller
-type WindowsMotionController struct{ *WebVRController }
+type WindowsMotionController struct {
+	*WebVRController
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (w *WindowsMotionController) JSObject() js.Value { return w.p }
@@ -16,12 +19,12 @@ func (w *WindowsMotionController) JSObject() js.Value { return w.p }
 // WindowsMotionController returns a WindowsMotionController JavaScript class.
 func (ba *Babylon) WindowsMotionController() *WindowsMotionController {
 	p := ba.ctx.Get("WindowsMotionController")
-	return WindowsMotionControllerFromJSObject(p)
+	return WindowsMotionControllerFromJSObject(p, ba.ctx)
 }
 
 // WindowsMotionControllerFromJSObject returns a wrapped WindowsMotionController JavaScript class.
-func WindowsMotionControllerFromJSObject(p js.Value) *WindowsMotionController {
-	return &WindowsMotionController{WebVRControllerFromJSObject(p)}
+func WindowsMotionControllerFromJSObject(p js.Value, ctx js.Value) *WindowsMotionController {
+	return &WindowsMotionController{WebVRController: WebVRControllerFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewWindowsMotionController returns a new WindowsMotionController object.
@@ -29,7 +32,7 @@ func WindowsMotionControllerFromJSObject(p js.Value) *WindowsMotionController {
 // https://doc.babylonjs.com/api/classes/babylon.windowsmotioncontroller
 func (ba *Babylon) NewWindowsMotionController(vrGamepad interface{}) *WindowsMotionController {
 	p := ba.ctx.Get("WindowsMotionController").New(vrGamepad)
-	return WindowsMotionControllerFromJSObject(p)
+	return WindowsMotionControllerFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

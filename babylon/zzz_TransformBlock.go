@@ -8,7 +8,10 @@ import (
 
 // TransformBlock represents a babylon.js TransformBlock.
 // Block used to transform a vector (2, 3 or 4) with a matrix. It will generate a Vector4
-type TransformBlock struct{ *NodeMaterialBlock }
+type TransformBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (t *TransformBlock) JSObject() js.Value { return t.p }
@@ -16,12 +19,12 @@ func (t *TransformBlock) JSObject() js.Value { return t.p }
 // TransformBlock returns a TransformBlock JavaScript class.
 func (ba *Babylon) TransformBlock() *TransformBlock {
 	p := ba.ctx.Get("TransformBlock")
-	return TransformBlockFromJSObject(p)
+	return TransformBlockFromJSObject(p, ba.ctx)
 }
 
 // TransformBlockFromJSObject returns a wrapped TransformBlock JavaScript class.
-func TransformBlockFromJSObject(p js.Value) *TransformBlock {
-	return &TransformBlock{NodeMaterialBlockFromJSObject(p)}
+func TransformBlockFromJSObject(p js.Value, ctx js.Value) *TransformBlock {
+	return &TransformBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewTransformBlock returns a new TransformBlock object.
@@ -29,7 +32,7 @@ func TransformBlockFromJSObject(p js.Value) *TransformBlock {
 // https://doc.babylonjs.com/api/classes/babylon.transformblock
 func (ba *Babylon) NewTransformBlock(name string) *TransformBlock {
 	p := ba.ctx.Get("TransformBlock").New(name)
-	return TransformBlockFromJSObject(p)
+	return TransformBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

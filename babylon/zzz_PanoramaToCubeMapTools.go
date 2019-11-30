@@ -8,7 +8,10 @@ import (
 
 // PanoramaToCubeMapTools represents a babylon.js PanoramaToCubeMapTools.
 // Helper class useful to convert panorama picture to their cubemap representation in 6 faces.
-type PanoramaToCubeMapTools struct{ p js.Value }
+type PanoramaToCubeMapTools struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (p *PanoramaToCubeMapTools) JSObject() js.Value { return p.p }
@@ -16,12 +19,12 @@ func (p *PanoramaToCubeMapTools) JSObject() js.Value { return p.p }
 // PanoramaToCubeMapTools returns a PanoramaToCubeMapTools JavaScript class.
 func (ba *Babylon) PanoramaToCubeMapTools() *PanoramaToCubeMapTools {
 	p := ba.ctx.Get("PanoramaToCubeMapTools")
-	return PanoramaToCubeMapToolsFromJSObject(p)
+	return PanoramaToCubeMapToolsFromJSObject(p, ba.ctx)
 }
 
 // PanoramaToCubeMapToolsFromJSObject returns a wrapped PanoramaToCubeMapTools JavaScript class.
-func PanoramaToCubeMapToolsFromJSObject(p js.Value) *PanoramaToCubeMapTools {
-	return &PanoramaToCubeMapTools{p: p}
+func PanoramaToCubeMapToolsFromJSObject(p js.Value, ctx js.Value) *PanoramaToCubeMapTools {
+	return &PanoramaToCubeMapTools{p: p, ctx: ctx}
 }
 
 // TODO: methods

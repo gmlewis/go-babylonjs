@@ -10,7 +10,10 @@ import (
 // This defines an action responsible to run code (external event) once triggered.
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_actions
-type ExecuteCodeAction struct{ *Action }
+type ExecuteCodeAction struct {
+	*Action
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (e *ExecuteCodeAction) JSObject() js.Value { return e.p }
@@ -18,12 +21,12 @@ func (e *ExecuteCodeAction) JSObject() js.Value { return e.p }
 // ExecuteCodeAction returns a ExecuteCodeAction JavaScript class.
 func (ba *Babylon) ExecuteCodeAction() *ExecuteCodeAction {
 	p := ba.ctx.Get("ExecuteCodeAction")
-	return ExecuteCodeActionFromJSObject(p)
+	return ExecuteCodeActionFromJSObject(p, ba.ctx)
 }
 
 // ExecuteCodeActionFromJSObject returns a wrapped ExecuteCodeAction JavaScript class.
-func ExecuteCodeActionFromJSObject(p js.Value) *ExecuteCodeAction {
-	return &ExecuteCodeAction{ActionFromJSObject(p)}
+func ExecuteCodeActionFromJSObject(p js.Value, ctx js.Value) *ExecuteCodeAction {
+	return &ExecuteCodeAction{Action: ActionFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewExecuteCodeActionOpts contains optional parameters for NewExecuteCodeAction.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewExecuteCodeAction(triggerOptions interface{}, jsFunc func(
 	}
 
 	p := ba.ctx.Get("ExecuteCodeAction").New(triggerOptions, jsFunc, opts.Condition.JSObject())
-	return ExecuteCodeActionFromJSObject(p)
+	return ExecuteCodeActionFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -8,7 +8,10 @@ import (
 
 // Mesh represents a babylon.js Mesh.
 // Class used to represent renderable models
-type Mesh struct{ *AbstractMesh }
+type Mesh struct {
+	*AbstractMesh
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (m *Mesh) JSObject() js.Value { return m.p }
@@ -16,12 +19,12 @@ func (m *Mesh) JSObject() js.Value { return m.p }
 // Mesh returns a Mesh JavaScript class.
 func (ba *Babylon) Mesh() *Mesh {
 	p := ba.ctx.Get("Mesh")
-	return MeshFromJSObject(p)
+	return MeshFromJSObject(p, ba.ctx)
 }
 
 // MeshFromJSObject returns a wrapped Mesh JavaScript class.
-func MeshFromJSObject(p js.Value) *Mesh {
-	return &Mesh{AbstractMeshFromJSObject(p)}
+func MeshFromJSObject(p js.Value, ctx js.Value) *Mesh {
+	return &Mesh{AbstractMesh: AbstractMeshFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewMeshOpts contains optional parameters for NewMesh.
@@ -46,7 +49,7 @@ func (ba *Babylon) NewMesh(name string, opts *NewMeshOpts) *Mesh {
 	}
 
 	p := ba.ctx.Get("Mesh").New(name, opts.Scene.JSObject(), opts.Parent.JSObject(), opts.Source.JSObject(), opts.DoNotCloneChildren.JSObject(), opts.ClonePhysicsImpostor.JSObject())
-	return MeshFromJSObject(p)
+	return MeshFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

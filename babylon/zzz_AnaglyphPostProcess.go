@@ -8,7 +8,10 @@ import (
 
 // AnaglyphPostProcess represents a babylon.js AnaglyphPostProcess.
 // Postprocess used to generate anaglyphic rendering
-type AnaglyphPostProcess struct{ *PostProcess }
+type AnaglyphPostProcess struct {
+	*PostProcess
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (a *AnaglyphPostProcess) JSObject() js.Value { return a.p }
@@ -16,12 +19,12 @@ func (a *AnaglyphPostProcess) JSObject() js.Value { return a.p }
 // AnaglyphPostProcess returns a AnaglyphPostProcess JavaScript class.
 func (ba *Babylon) AnaglyphPostProcess() *AnaglyphPostProcess {
 	p := ba.ctx.Get("AnaglyphPostProcess")
-	return AnaglyphPostProcessFromJSObject(p)
+	return AnaglyphPostProcessFromJSObject(p, ba.ctx)
 }
 
 // AnaglyphPostProcessFromJSObject returns a wrapped AnaglyphPostProcess JavaScript class.
-func AnaglyphPostProcessFromJSObject(p js.Value) *AnaglyphPostProcess {
-	return &AnaglyphPostProcess{PostProcessFromJSObject(p)}
+func AnaglyphPostProcessFromJSObject(p js.Value, ctx js.Value) *AnaglyphPostProcess {
+	return &AnaglyphPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewAnaglyphPostProcessOpts contains optional parameters for NewAnaglyphPostProcess.
@@ -42,7 +45,7 @@ func (ba *Babylon) NewAnaglyphPostProcess(name string, options float64, rigCamer
 	}
 
 	p := ba.ctx.Get("AnaglyphPostProcess").New(name, options, rigCameras.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject())
-	return AnaglyphPostProcessFromJSObject(p)
+	return AnaglyphPostProcessFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

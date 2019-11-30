@@ -8,7 +8,10 @@ import (
 
 // NodeMaterialBuildStateSharedData represents a babylon.js NodeMaterialBuildStateSharedData.
 // Class used to store shared data between 2 NodeMaterialBuildState
-type NodeMaterialBuildStateSharedData struct{ p js.Value }
+type NodeMaterialBuildStateSharedData struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (n *NodeMaterialBuildStateSharedData) JSObject() js.Value { return n.p }
@@ -16,12 +19,12 @@ func (n *NodeMaterialBuildStateSharedData) JSObject() js.Value { return n.p }
 // NodeMaterialBuildStateSharedData returns a NodeMaterialBuildStateSharedData JavaScript class.
 func (ba *Babylon) NodeMaterialBuildStateSharedData() *NodeMaterialBuildStateSharedData {
 	p := ba.ctx.Get("NodeMaterialBuildStateSharedData")
-	return NodeMaterialBuildStateSharedDataFromJSObject(p)
+	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
 }
 
 // NodeMaterialBuildStateSharedDataFromJSObject returns a wrapped NodeMaterialBuildStateSharedData JavaScript class.
-func NodeMaterialBuildStateSharedDataFromJSObject(p js.Value) *NodeMaterialBuildStateSharedData {
-	return &NodeMaterialBuildStateSharedData{p: p}
+func NodeMaterialBuildStateSharedDataFromJSObject(p js.Value, ctx js.Value) *NodeMaterialBuildStateSharedData {
+	return &NodeMaterialBuildStateSharedData{p: p, ctx: ctx}
 }
 
 // NewNodeMaterialBuildStateSharedData returns a new NodeMaterialBuildStateSharedData object.
@@ -29,7 +32,7 @@ func NodeMaterialBuildStateSharedDataFromJSObject(p js.Value) *NodeMaterialBuild
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstateshareddata
 func (ba *Babylon) NewNodeMaterialBuildStateSharedData() *NodeMaterialBuildStateSharedData {
 	p := ba.ctx.Get("NodeMaterialBuildStateSharedData").New()
-	return NodeMaterialBuildStateSharedDataFromJSObject(p)
+	return NodeMaterialBuildStateSharedDataFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

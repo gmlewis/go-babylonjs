@@ -10,7 +10,10 @@ import (
 // This defines an action responsible to trigger several actions once triggered.
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_actions
-type CombineAction struct{ *Action }
+type CombineAction struct {
+	*Action
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (c *CombineAction) JSObject() js.Value { return c.p }
@@ -18,12 +21,12 @@ func (c *CombineAction) JSObject() js.Value { return c.p }
 // CombineAction returns a CombineAction JavaScript class.
 func (ba *Babylon) CombineAction() *CombineAction {
 	p := ba.ctx.Get("CombineAction")
-	return CombineActionFromJSObject(p)
+	return CombineActionFromJSObject(p, ba.ctx)
 }
 
 // CombineActionFromJSObject returns a wrapped CombineAction JavaScript class.
-func CombineActionFromJSObject(p js.Value) *CombineAction {
-	return &CombineAction{ActionFromJSObject(p)}
+func CombineActionFromJSObject(p js.Value, ctx js.Value) *CombineAction {
+	return &CombineAction{Action: ActionFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewCombineActionOpts contains optional parameters for NewCombineAction.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewCombineAction(triggerOptions interface{}, children *Action
 	}
 
 	p := ba.ctx.Get("CombineAction").New(triggerOptions, children.JSObject(), opts.Condition.JSObject())
-	return CombineActionFromJSObject(p)
+	return CombineActionFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -8,7 +8,10 @@ import (
 
 // VectorSplitterBlock represents a babylon.js VectorSplitterBlock.
 // Block used to expand a Vector3/4 into 4 outputs (one for each component)
-type VectorSplitterBlock struct{ *NodeMaterialBlock }
+type VectorSplitterBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (v *VectorSplitterBlock) JSObject() js.Value { return v.p }
@@ -16,12 +19,12 @@ func (v *VectorSplitterBlock) JSObject() js.Value { return v.p }
 // VectorSplitterBlock returns a VectorSplitterBlock JavaScript class.
 func (ba *Babylon) VectorSplitterBlock() *VectorSplitterBlock {
 	p := ba.ctx.Get("VectorSplitterBlock")
-	return VectorSplitterBlockFromJSObject(p)
+	return VectorSplitterBlockFromJSObject(p, ba.ctx)
 }
 
 // VectorSplitterBlockFromJSObject returns a wrapped VectorSplitterBlock JavaScript class.
-func VectorSplitterBlockFromJSObject(p js.Value) *VectorSplitterBlock {
-	return &VectorSplitterBlock{NodeMaterialBlockFromJSObject(p)}
+func VectorSplitterBlockFromJSObject(p js.Value, ctx js.Value) *VectorSplitterBlock {
+	return &VectorSplitterBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewVectorSplitterBlock returns a new VectorSplitterBlock object.
@@ -29,7 +32,7 @@ func VectorSplitterBlockFromJSObject(p js.Value) *VectorSplitterBlock {
 // https://doc.babylonjs.com/api/classes/babylon.vectorsplitterblock
 func (ba *Babylon) NewVectorSplitterBlock(name string) *VectorSplitterBlock {
 	p := ba.ctx.Get("VectorSplitterBlock").New(name)
-	return VectorSplitterBlockFromJSObject(p)
+	return VectorSplitterBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

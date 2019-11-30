@@ -8,7 +8,10 @@ import (
 
 // PowBlock represents a babylon.js PowBlock.
 // Block used to get the value of the first parameter raised to the power of the second
-type PowBlock struct{ *NodeMaterialBlock }
+type PowBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (p *PowBlock) JSObject() js.Value { return p.p }
@@ -16,12 +19,12 @@ func (p *PowBlock) JSObject() js.Value { return p.p }
 // PowBlock returns a PowBlock JavaScript class.
 func (ba *Babylon) PowBlock() *PowBlock {
 	p := ba.ctx.Get("PowBlock")
-	return PowBlockFromJSObject(p)
+	return PowBlockFromJSObject(p, ba.ctx)
 }
 
 // PowBlockFromJSObject returns a wrapped PowBlock JavaScript class.
-func PowBlockFromJSObject(p js.Value) *PowBlock {
-	return &PowBlock{NodeMaterialBlockFromJSObject(p)}
+func PowBlockFromJSObject(p js.Value, ctx js.Value) *PowBlock {
+	return &PowBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewPowBlock returns a new PowBlock object.
@@ -29,7 +32,7 @@ func PowBlockFromJSObject(p js.Value) *PowBlock {
 // https://doc.babylonjs.com/api/classes/babylon.powblock
 func (ba *Babylon) NewPowBlock(name string) *PowBlock {
 	p := ba.ctx.Get("PowBlock").New(name)
-	return PowBlockFromJSObject(p)
+	return PowBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

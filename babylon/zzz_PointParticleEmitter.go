@@ -9,7 +9,10 @@ import (
 // PointParticleEmitter represents a babylon.js PointParticleEmitter.
 // Particle emitter emitting particles from a point.
 // It emits the particles randomly between 2 given directions.
-type PointParticleEmitter struct{ p js.Value }
+type PointParticleEmitter struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (p *PointParticleEmitter) JSObject() js.Value { return p.p }
@@ -17,12 +20,12 @@ func (p *PointParticleEmitter) JSObject() js.Value { return p.p }
 // PointParticleEmitter returns a PointParticleEmitter JavaScript class.
 func (ba *Babylon) PointParticleEmitter() *PointParticleEmitter {
 	p := ba.ctx.Get("PointParticleEmitter")
-	return PointParticleEmitterFromJSObject(p)
+	return PointParticleEmitterFromJSObject(p, ba.ctx)
 }
 
 // PointParticleEmitterFromJSObject returns a wrapped PointParticleEmitter JavaScript class.
-func PointParticleEmitterFromJSObject(p js.Value) *PointParticleEmitter {
-	return &PointParticleEmitter{p: p}
+func PointParticleEmitterFromJSObject(p js.Value, ctx js.Value) *PointParticleEmitter {
+	return &PointParticleEmitter{p: p, ctx: ctx}
 }
 
 // NewPointParticleEmitter returns a new PointParticleEmitter object.
@@ -30,7 +33,7 @@ func PointParticleEmitterFromJSObject(p js.Value) *PointParticleEmitter {
 // https://doc.babylonjs.com/api/classes/babylon.pointparticleemitter
 func (ba *Babylon) NewPointParticleEmitter() *PointParticleEmitter {
 	p := ba.ctx.Get("PointParticleEmitter").New()
-	return PointParticleEmitterFromJSObject(p)
+	return PointParticleEmitterFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

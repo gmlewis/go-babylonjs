@@ -8,7 +8,10 @@ import (
 
 // EventState represents a babylon.js EventState.
 // A class serves as a medium between the observable and its observers
-type EventState struct{ p js.Value }
+type EventState struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (e *EventState) JSObject() js.Value { return e.p }
@@ -16,12 +19,12 @@ func (e *EventState) JSObject() js.Value { return e.p }
 // EventState returns a EventState JavaScript class.
 func (ba *Babylon) EventState() *EventState {
 	p := ba.ctx.Get("EventState")
-	return EventStateFromJSObject(p)
+	return EventStateFromJSObject(p, ba.ctx)
 }
 
 // EventStateFromJSObject returns a wrapped EventState JavaScript class.
-func EventStateFromJSObject(p js.Value) *EventState {
-	return &EventState{p: p}
+func EventStateFromJSObject(p js.Value, ctx js.Value) *EventState {
+	return &EventState{p: p, ctx: ctx}
 }
 
 // NewEventStateOpts contains optional parameters for NewEventState.
@@ -42,7 +45,7 @@ func (ba *Babylon) NewEventState(mask float64, opts *NewEventStateOpts) *EventSt
 	}
 
 	p := ba.ctx.Get("EventState").New(mask, opts.SkipNextObservers.JSObject(), opts.Target, opts.CurrentTarget)
-	return EventStateFromJSObject(p)
+	return EventStateFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

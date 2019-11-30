@@ -11,7 +11,10 @@ import (
 // an arc rotate version arcFollowCamera are available.
 //
 // See: http://doc.babylonjs.com/features/cameras#follow-camera
-type FollowCamera struct{ *TargetCamera }
+type FollowCamera struct {
+	*TargetCamera
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (f *FollowCamera) JSObject() js.Value { return f.p }
@@ -19,12 +22,12 @@ func (f *FollowCamera) JSObject() js.Value { return f.p }
 // FollowCamera returns a FollowCamera JavaScript class.
 func (ba *Babylon) FollowCamera() *FollowCamera {
 	p := ba.ctx.Get("FollowCamera")
-	return FollowCameraFromJSObject(p)
+	return FollowCameraFromJSObject(p, ba.ctx)
 }
 
 // FollowCameraFromJSObject returns a wrapped FollowCamera JavaScript class.
-func FollowCameraFromJSObject(p js.Value) *FollowCamera {
-	return &FollowCamera{TargetCameraFromJSObject(p)}
+func FollowCameraFromJSObject(p js.Value, ctx js.Value) *FollowCamera {
+	return &FollowCamera{TargetCamera: TargetCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewFollowCameraOpts contains optional parameters for NewFollowCamera.
@@ -41,7 +44,7 @@ func (ba *Babylon) NewFollowCamera(name string, position *Vector3, scene *Scene,
 	}
 
 	p := ba.ctx.Get("FollowCamera").New(name, position.JSObject(), scene.JSObject(), opts.LockedTarget.JSObject())
-	return FollowCameraFromJSObject(p)
+	return FollowCameraFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

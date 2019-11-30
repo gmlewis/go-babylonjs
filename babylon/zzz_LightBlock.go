@@ -8,7 +8,10 @@ import (
 
 // LightBlock represents a babylon.js LightBlock.
 // Block used to add light in the fragment shader
-type LightBlock struct{ *NodeMaterialBlock }
+type LightBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (l *LightBlock) JSObject() js.Value { return l.p }
@@ -16,12 +19,12 @@ func (l *LightBlock) JSObject() js.Value { return l.p }
 // LightBlock returns a LightBlock JavaScript class.
 func (ba *Babylon) LightBlock() *LightBlock {
 	p := ba.ctx.Get("LightBlock")
-	return LightBlockFromJSObject(p)
+	return LightBlockFromJSObject(p, ba.ctx)
 }
 
 // LightBlockFromJSObject returns a wrapped LightBlock JavaScript class.
-func LightBlockFromJSObject(p js.Value) *LightBlock {
-	return &LightBlock{NodeMaterialBlockFromJSObject(p)}
+func LightBlockFromJSObject(p js.Value, ctx js.Value) *LightBlock {
+	return &LightBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewLightBlock returns a new LightBlock object.
@@ -29,7 +32,7 @@ func LightBlockFromJSObject(p js.Value) *LightBlock {
 // https://doc.babylonjs.com/api/classes/babylon.lightblock
 func (ba *Babylon) NewLightBlock(name string) *LightBlock {
 	p := ba.ctx.Get("LightBlock").New(name)
-	return LightBlockFromJSObject(p)
+	return LightBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

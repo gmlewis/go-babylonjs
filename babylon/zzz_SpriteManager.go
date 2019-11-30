@@ -10,7 +10,10 @@ import (
 // Class used to manage multiple sprites on the same spritesheet
 //
 // See: http://doc.babylonjs.com/babylon101/sprites
-type SpriteManager struct{ p js.Value }
+type SpriteManager struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *SpriteManager) JSObject() js.Value { return s.p }
@@ -18,12 +21,12 @@ func (s *SpriteManager) JSObject() js.Value { return s.p }
 // SpriteManager returns a SpriteManager JavaScript class.
 func (ba *Babylon) SpriteManager() *SpriteManager {
 	p := ba.ctx.Get("SpriteManager")
-	return SpriteManagerFromJSObject(p)
+	return SpriteManagerFromJSObject(p, ba.ctx)
 }
 
 // SpriteManagerFromJSObject returns a wrapped SpriteManager JavaScript class.
-func SpriteManagerFromJSObject(p js.Value) *SpriteManager {
-	return &SpriteManager{p: p}
+func SpriteManagerFromJSObject(p js.Value, ctx js.Value) *SpriteManager {
+	return &SpriteManager{p: p, ctx: ctx}
 }
 
 // NewSpriteManagerOpts contains optional parameters for NewSpriteManager.
@@ -46,7 +49,7 @@ func (ba *Babylon) NewSpriteManager(name string, imgUrl string, capacity float64
 	}
 
 	p := ba.ctx.Get("SpriteManager").New(name, imgUrl, capacity, cellSize, scene.JSObject(), opts.Epsilon.JSObject(), opts.SamplingMode.JSObject(), opts.FromPacked.JSObject(), opts.SpriteJSON.JSObject())
-	return SpriteManagerFromJSObject(p)
+	return SpriteManagerFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

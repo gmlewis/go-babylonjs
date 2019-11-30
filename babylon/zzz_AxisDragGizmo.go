@@ -8,7 +8,10 @@ import (
 
 // AxisDragGizmo represents a babylon.js AxisDragGizmo.
 // Single axis drag gizmo
-type AxisDragGizmo struct{ *Gizmo }
+type AxisDragGizmo struct {
+	*Gizmo
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (a *AxisDragGizmo) JSObject() js.Value { return a.p }
@@ -16,12 +19,12 @@ func (a *AxisDragGizmo) JSObject() js.Value { return a.p }
 // AxisDragGizmo returns a AxisDragGizmo JavaScript class.
 func (ba *Babylon) AxisDragGizmo() *AxisDragGizmo {
 	p := ba.ctx.Get("AxisDragGizmo")
-	return AxisDragGizmoFromJSObject(p)
+	return AxisDragGizmoFromJSObject(p, ba.ctx)
 }
 
 // AxisDragGizmoFromJSObject returns a wrapped AxisDragGizmo JavaScript class.
-func AxisDragGizmoFromJSObject(p js.Value) *AxisDragGizmo {
-	return &AxisDragGizmo{GizmoFromJSObject(p)}
+func AxisDragGizmoFromJSObject(p js.Value, ctx js.Value) *AxisDragGizmo {
+	return &AxisDragGizmo{Gizmo: GizmoFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewAxisDragGizmoOpts contains optional parameters for NewAxisDragGizmo.
@@ -42,7 +45,7 @@ func (ba *Babylon) NewAxisDragGizmo(dragAxis *Vector3, opts *NewAxisDragGizmoOpt
 	}
 
 	p := ba.ctx.Get("AxisDragGizmo").New(dragAxis.JSObject(), opts.Color.JSObject(), opts.GizmoLayer.JSObject(), opts.Parent.JSObject())
-	return AxisDragGizmoFromJSObject(p)
+	return AxisDragGizmoFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

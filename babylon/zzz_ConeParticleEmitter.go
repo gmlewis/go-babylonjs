@@ -10,7 +10,10 @@ import (
 // Particle emitter emitting particles from the inside of a cone.
 // It emits the particles alongside the cone volume from the base to the particle.
 // The emission direction might be randomized.
-type ConeParticleEmitter struct{ p js.Value }
+type ConeParticleEmitter struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (c *ConeParticleEmitter) JSObject() js.Value { return c.p }
@@ -18,12 +21,12 @@ func (c *ConeParticleEmitter) JSObject() js.Value { return c.p }
 // ConeParticleEmitter returns a ConeParticleEmitter JavaScript class.
 func (ba *Babylon) ConeParticleEmitter() *ConeParticleEmitter {
 	p := ba.ctx.Get("ConeParticleEmitter")
-	return ConeParticleEmitterFromJSObject(p)
+	return ConeParticleEmitterFromJSObject(p, ba.ctx)
 }
 
 // ConeParticleEmitterFromJSObject returns a wrapped ConeParticleEmitter JavaScript class.
-func ConeParticleEmitterFromJSObject(p js.Value) *ConeParticleEmitter {
-	return &ConeParticleEmitter{p: p}
+func ConeParticleEmitterFromJSObject(p js.Value, ctx js.Value) *ConeParticleEmitter {
+	return &ConeParticleEmitter{p: p, ctx: ctx}
 }
 
 // NewConeParticleEmitterOpts contains optional parameters for NewConeParticleEmitter.
@@ -44,7 +47,7 @@ func (ba *Babylon) NewConeParticleEmitter(opts *NewConeParticleEmitterOpts) *Con
 	}
 
 	p := ba.ctx.Get("ConeParticleEmitter").New(opts.Radius.JSObject(), opts.Angle.JSObject(), opts.DirectionRandomizer.JSObject())
-	return ConeParticleEmitterFromJSObject(p)
+	return ConeParticleEmitterFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

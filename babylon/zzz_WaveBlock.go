@@ -8,7 +8,10 @@ import (
 
 // WaveBlock represents a babylon.js WaveBlock.
 // Block used to apply wave operation to floats
-type WaveBlock struct{ *NodeMaterialBlock }
+type WaveBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (w *WaveBlock) JSObject() js.Value { return w.p }
@@ -16,12 +19,12 @@ func (w *WaveBlock) JSObject() js.Value { return w.p }
 // WaveBlock returns a WaveBlock JavaScript class.
 func (ba *Babylon) WaveBlock() *WaveBlock {
 	p := ba.ctx.Get("WaveBlock")
-	return WaveBlockFromJSObject(p)
+	return WaveBlockFromJSObject(p, ba.ctx)
 }
 
 // WaveBlockFromJSObject returns a wrapped WaveBlock JavaScript class.
-func WaveBlockFromJSObject(p js.Value) *WaveBlock {
-	return &WaveBlock{NodeMaterialBlockFromJSObject(p)}
+func WaveBlockFromJSObject(p js.Value, ctx js.Value) *WaveBlock {
+	return &WaveBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewWaveBlock returns a new WaveBlock object.
@@ -29,7 +32,7 @@ func WaveBlockFromJSObject(p js.Value) *WaveBlock {
 // https://doc.babylonjs.com/api/classes/babylon.waveblock
 func (ba *Babylon) NewWaveBlock(name string) *WaveBlock {
 	p := ba.ctx.Get("WaveBlock").New(name)
-	return WaveBlockFromJSObject(p)
+	return WaveBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

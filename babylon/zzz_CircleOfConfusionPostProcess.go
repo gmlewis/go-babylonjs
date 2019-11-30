@@ -8,7 +8,10 @@ import (
 
 // CircleOfConfusionPostProcess represents a babylon.js CircleOfConfusionPostProcess.
 // The CircleOfConfusionPostProcess computes the circle of confusion value for each pixel given required lens parameters. See &lt;a href=&#34;https://en.wikipedia.org/wiki/Circle_of_confusion&#34;&gt;https://en.wikipedia.org/wiki/Circle_of_confusion&lt;/a&gt;
-type CircleOfConfusionPostProcess struct{ *PostProcess }
+type CircleOfConfusionPostProcess struct {
+	*PostProcess
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (c *CircleOfConfusionPostProcess) JSObject() js.Value { return c.p }
@@ -16,12 +19,12 @@ func (c *CircleOfConfusionPostProcess) JSObject() js.Value { return c.p }
 // CircleOfConfusionPostProcess returns a CircleOfConfusionPostProcess JavaScript class.
 func (ba *Babylon) CircleOfConfusionPostProcess() *CircleOfConfusionPostProcess {
 	p := ba.ctx.Get("CircleOfConfusionPostProcess")
-	return CircleOfConfusionPostProcessFromJSObject(p)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
 }
 
 // CircleOfConfusionPostProcessFromJSObject returns a wrapped CircleOfConfusionPostProcess JavaScript class.
-func CircleOfConfusionPostProcessFromJSObject(p js.Value) *CircleOfConfusionPostProcess {
-	return &CircleOfConfusionPostProcess{PostProcessFromJSObject(p)}
+func CircleOfConfusionPostProcessFromJSObject(p js.Value, ctx js.Value) *CircleOfConfusionPostProcess {
+	return &CircleOfConfusionPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewCircleOfConfusionPostProcessOpts contains optional parameters for NewCircleOfConfusionPostProcess.
@@ -46,7 +49,7 @@ func (ba *Babylon) NewCircleOfConfusionPostProcess(name string, depthTexture *Re
 	}
 
 	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(name, depthTexture.JSObject(), options, camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType.JSObject(), opts.BlockCompilation.JSObject())
-	return CircleOfConfusionPostProcessFromJSObject(p)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

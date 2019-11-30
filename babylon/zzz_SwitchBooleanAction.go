@@ -10,7 +10,10 @@ import (
 // This defines an action responsible to toggle a boolean once triggered.
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_actions
-type SwitchBooleanAction struct{ *Action }
+type SwitchBooleanAction struct {
+	*Action
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *SwitchBooleanAction) JSObject() js.Value { return s.p }
@@ -18,12 +21,12 @@ func (s *SwitchBooleanAction) JSObject() js.Value { return s.p }
 // SwitchBooleanAction returns a SwitchBooleanAction JavaScript class.
 func (ba *Babylon) SwitchBooleanAction() *SwitchBooleanAction {
 	p := ba.ctx.Get("SwitchBooleanAction")
-	return SwitchBooleanActionFromJSObject(p)
+	return SwitchBooleanActionFromJSObject(p, ba.ctx)
 }
 
 // SwitchBooleanActionFromJSObject returns a wrapped SwitchBooleanAction JavaScript class.
-func SwitchBooleanActionFromJSObject(p js.Value) *SwitchBooleanAction {
-	return &SwitchBooleanAction{ActionFromJSObject(p)}
+func SwitchBooleanActionFromJSObject(p js.Value, ctx js.Value) *SwitchBooleanAction {
+	return &SwitchBooleanAction{Action: ActionFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewSwitchBooleanActionOpts contains optional parameters for NewSwitchBooleanAction.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewSwitchBooleanAction(triggerOptions interface{}, target int
 	}
 
 	p := ba.ctx.Get("SwitchBooleanAction").New(triggerOptions, target, propertyPath, opts.Condition.JSObject())
-	return SwitchBooleanActionFromJSObject(p)
+	return SwitchBooleanActionFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

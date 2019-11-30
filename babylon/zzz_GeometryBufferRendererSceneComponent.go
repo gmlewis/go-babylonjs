@@ -9,7 +9,10 @@ import (
 // GeometryBufferRendererSceneComponent represents a babylon.js GeometryBufferRendererSceneComponent.
 // Defines the Geometry Buffer scene component responsible to manage a G-Buffer useful
 // in several rendering techniques.
-type GeometryBufferRendererSceneComponent struct{ p js.Value }
+type GeometryBufferRendererSceneComponent struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (g *GeometryBufferRendererSceneComponent) JSObject() js.Value { return g.p }
@@ -17,12 +20,12 @@ func (g *GeometryBufferRendererSceneComponent) JSObject() js.Value { return g.p 
 // GeometryBufferRendererSceneComponent returns a GeometryBufferRendererSceneComponent JavaScript class.
 func (ba *Babylon) GeometryBufferRendererSceneComponent() *GeometryBufferRendererSceneComponent {
 	p := ba.ctx.Get("GeometryBufferRendererSceneComponent")
-	return GeometryBufferRendererSceneComponentFromJSObject(p)
+	return GeometryBufferRendererSceneComponentFromJSObject(p, ba.ctx)
 }
 
 // GeometryBufferRendererSceneComponentFromJSObject returns a wrapped GeometryBufferRendererSceneComponent JavaScript class.
-func GeometryBufferRendererSceneComponentFromJSObject(p js.Value) *GeometryBufferRendererSceneComponent {
-	return &GeometryBufferRendererSceneComponent{p: p}
+func GeometryBufferRendererSceneComponentFromJSObject(p js.Value, ctx js.Value) *GeometryBufferRendererSceneComponent {
+	return &GeometryBufferRendererSceneComponent{p: p, ctx: ctx}
 }
 
 // NewGeometryBufferRendererSceneComponent returns a new GeometryBufferRendererSceneComponent object.
@@ -30,7 +33,7 @@ func GeometryBufferRendererSceneComponentFromJSObject(p js.Value) *GeometryBuffe
 // https://doc.babylonjs.com/api/classes/babylon.geometrybufferrendererscenecomponent
 func (ba *Babylon) NewGeometryBufferRendererSceneComponent(scene *Scene) *GeometryBufferRendererSceneComponent {
 	p := ba.ctx.Get("GeometryBufferRendererSceneComponent").New(scene.JSObject())
-	return GeometryBufferRendererSceneComponentFromJSObject(p)
+	return GeometryBufferRendererSceneComponentFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

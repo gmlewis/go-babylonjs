@@ -11,7 +11,10 @@ import (
 // This blur differs from the standard BlurPostProcess as it attempts to avoid blurring pixels
 // based on samples that have a large difference in distance than the center pixel.
 // See section 2.6.2 &lt;a href=&#34;http://fileadmin.cs.lth.se/cs/education/edan35/lectures/12dof.pdf&#34;&gt;http://fileadmin.cs.lth.se/cs/education/edan35/lectures/12dof.pdf&lt;/a&gt;
-type DepthOfFieldBlurPostProcess struct{ *BlurPostProcess }
+type DepthOfFieldBlurPostProcess struct {
+	*BlurPostProcess
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (d *DepthOfFieldBlurPostProcess) JSObject() js.Value { return d.p }
@@ -19,12 +22,12 @@ func (d *DepthOfFieldBlurPostProcess) JSObject() js.Value { return d.p }
 // DepthOfFieldBlurPostProcess returns a DepthOfFieldBlurPostProcess JavaScript class.
 func (ba *Babylon) DepthOfFieldBlurPostProcess() *DepthOfFieldBlurPostProcess {
 	p := ba.ctx.Get("DepthOfFieldBlurPostProcess")
-	return DepthOfFieldBlurPostProcessFromJSObject(p)
+	return DepthOfFieldBlurPostProcessFromJSObject(p, ba.ctx)
 }
 
 // DepthOfFieldBlurPostProcessFromJSObject returns a wrapped DepthOfFieldBlurPostProcess JavaScript class.
-func DepthOfFieldBlurPostProcessFromJSObject(p js.Value) *DepthOfFieldBlurPostProcess {
-	return &DepthOfFieldBlurPostProcess{BlurPostProcessFromJSObject(p)}
+func DepthOfFieldBlurPostProcessFromJSObject(p js.Value, ctx js.Value) *DepthOfFieldBlurPostProcess {
+	return &DepthOfFieldBlurPostProcess{BlurPostProcess: BlurPostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewDepthOfFieldBlurPostProcessOpts contains optional parameters for NewDepthOfFieldBlurPostProcess.
@@ -51,7 +54,7 @@ func (ba *Babylon) NewDepthOfFieldBlurPostProcess(name string, scene *Scene, dir
 	}
 
 	p := ba.ctx.Get("DepthOfFieldBlurPostProcess").New(name, scene.JSObject(), direction.JSObject(), kernel, options, camera.JSObject(), circleOfConfusion.JSObject(), opts.ImageToBlur.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType.JSObject(), opts.BlockCompilation.JSObject())
-	return DepthOfFieldBlurPostProcessFromJSObject(p)
+	return DepthOfFieldBlurPostProcessFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -8,7 +8,10 @@ import (
 
 // NormalBlendBlock represents a babylon.js NormalBlendBlock.
 // Block used to blend normals
-type NormalBlendBlock struct{ *NodeMaterialBlock }
+type NormalBlendBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (n *NormalBlendBlock) JSObject() js.Value { return n.p }
@@ -16,12 +19,12 @@ func (n *NormalBlendBlock) JSObject() js.Value { return n.p }
 // NormalBlendBlock returns a NormalBlendBlock JavaScript class.
 func (ba *Babylon) NormalBlendBlock() *NormalBlendBlock {
 	p := ba.ctx.Get("NormalBlendBlock")
-	return NormalBlendBlockFromJSObject(p)
+	return NormalBlendBlockFromJSObject(p, ba.ctx)
 }
 
 // NormalBlendBlockFromJSObject returns a wrapped NormalBlendBlock JavaScript class.
-func NormalBlendBlockFromJSObject(p js.Value) *NormalBlendBlock {
-	return &NormalBlendBlock{NodeMaterialBlockFromJSObject(p)}
+func NormalBlendBlockFromJSObject(p js.Value, ctx js.Value) *NormalBlendBlock {
+	return &NormalBlendBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewNormalBlendBlock returns a new NormalBlendBlock object.
@@ -29,7 +32,7 @@ func NormalBlendBlockFromJSObject(p js.Value) *NormalBlendBlock {
 // https://doc.babylonjs.com/api/classes/babylon.normalblendblock
 func (ba *Babylon) NewNormalBlendBlock(name string) *NormalBlendBlock {
 	p := ba.ctx.Get("NormalBlendBlock").New(name)
-	return NormalBlendBlockFromJSObject(p)
+	return NormalBlendBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -8,7 +8,10 @@ import (
 
 // Ray represents a babylon.js Ray.
 // Class representing a ray with position and direction
-type Ray struct{ p js.Value }
+type Ray struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (r *Ray) JSObject() js.Value { return r.p }
@@ -16,12 +19,12 @@ func (r *Ray) JSObject() js.Value { return r.p }
 // Ray returns a Ray JavaScript class.
 func (ba *Babylon) Ray() *Ray {
 	p := ba.ctx.Get("Ray")
-	return RayFromJSObject(p)
+	return RayFromJSObject(p, ba.ctx)
 }
 
 // RayFromJSObject returns a wrapped Ray JavaScript class.
-func RayFromJSObject(p js.Value) *Ray {
-	return &Ray{p: p}
+func RayFromJSObject(p js.Value, ctx js.Value) *Ray {
+	return &Ray{p: p, ctx: ctx}
 }
 
 // NewRayOpts contains optional parameters for NewRay.
@@ -38,7 +41,7 @@ func (ba *Babylon) NewRay(origin *Vector3, direction *Vector3, opts *NewRayOpts)
 	}
 
 	p := ba.ctx.Get("Ray").New(origin.JSObject(), direction.JSObject(), opts.Length.JSObject())
-	return RayFromJSObject(p)
+	return RayFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

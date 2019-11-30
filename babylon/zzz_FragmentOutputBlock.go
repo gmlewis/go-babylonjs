@@ -8,7 +8,10 @@ import (
 
 // FragmentOutputBlock represents a babylon.js FragmentOutputBlock.
 // Block used to output the final color
-type FragmentOutputBlock struct{ *NodeMaterialBlock }
+type FragmentOutputBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (f *FragmentOutputBlock) JSObject() js.Value { return f.p }
@@ -16,12 +19,12 @@ func (f *FragmentOutputBlock) JSObject() js.Value { return f.p }
 // FragmentOutputBlock returns a FragmentOutputBlock JavaScript class.
 func (ba *Babylon) FragmentOutputBlock() *FragmentOutputBlock {
 	p := ba.ctx.Get("FragmentOutputBlock")
-	return FragmentOutputBlockFromJSObject(p)
+	return FragmentOutputBlockFromJSObject(p, ba.ctx)
 }
 
 // FragmentOutputBlockFromJSObject returns a wrapped FragmentOutputBlock JavaScript class.
-func FragmentOutputBlockFromJSObject(p js.Value) *FragmentOutputBlock {
-	return &FragmentOutputBlock{NodeMaterialBlockFromJSObject(p)}
+func FragmentOutputBlockFromJSObject(p js.Value, ctx js.Value) *FragmentOutputBlock {
+	return &FragmentOutputBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewFragmentOutputBlock returns a new FragmentOutputBlock object.
@@ -29,7 +32,7 @@ func FragmentOutputBlockFromJSObject(p js.Value) *FragmentOutputBlock {
 // https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock
 func (ba *Babylon) NewFragmentOutputBlock(name string) *FragmentOutputBlock {
 	p := ba.ctx.Get("FragmentOutputBlock").New(name)
-	return FragmentOutputBlockFromJSObject(p)
+	return FragmentOutputBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

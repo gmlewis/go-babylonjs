@@ -8,7 +8,10 @@ import (
 
 // DepthOfFieldMergePostProcess represents a babylon.js DepthOfFieldMergePostProcess.
 // The DepthOfFieldMergePostProcess merges blurred images with the original based on the values of the circle of confusion.
-type DepthOfFieldMergePostProcess struct{ *PostProcess }
+type DepthOfFieldMergePostProcess struct {
+	*PostProcess
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (d *DepthOfFieldMergePostProcess) JSObject() js.Value { return d.p }
@@ -16,12 +19,12 @@ func (d *DepthOfFieldMergePostProcess) JSObject() js.Value { return d.p }
 // DepthOfFieldMergePostProcess returns a DepthOfFieldMergePostProcess JavaScript class.
 func (ba *Babylon) DepthOfFieldMergePostProcess() *DepthOfFieldMergePostProcess {
 	p := ba.ctx.Get("DepthOfFieldMergePostProcess")
-	return DepthOfFieldMergePostProcessFromJSObject(p)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
 }
 
 // DepthOfFieldMergePostProcessFromJSObject returns a wrapped DepthOfFieldMergePostProcess JavaScript class.
-func DepthOfFieldMergePostProcessFromJSObject(p js.Value) *DepthOfFieldMergePostProcess {
-	return &DepthOfFieldMergePostProcess{PostProcessFromJSObject(p)}
+func DepthOfFieldMergePostProcessFromJSObject(p js.Value, ctx js.Value) *DepthOfFieldMergePostProcess {
+	return &DepthOfFieldMergePostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewDepthOfFieldMergePostProcessOpts contains optional parameters for NewDepthOfFieldMergePostProcess.
@@ -46,7 +49,7 @@ func (ba *Babylon) NewDepthOfFieldMergePostProcess(name string, originalFromInpu
 	}
 
 	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(name, originalFromInput.JSObject(), circleOfConfusion.JSObject(), blurSteps, options, camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType.JSObject(), opts.BlockCompilation.JSObject())
-	return DepthOfFieldMergePostProcessFromJSObject(p)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

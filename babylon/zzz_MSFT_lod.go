@@ -8,7 +8,10 @@ import (
 
 // MSFT_lod represents a babylon.js MSFT_lod.
 // &lt;a href=&#34;https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Vendor/MSFT_lod&#34;&gt;Specification&lt;/a&gt;
-type MSFT_lod struct{ p js.Value }
+type MSFT_lod struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (m *MSFT_lod) JSObject() js.Value { return m.p }
@@ -16,12 +19,12 @@ func (m *MSFT_lod) JSObject() js.Value { return m.p }
 // MSFT_lod returns a MSFT_lod JavaScript class.
 func (ba *Babylon) MSFT_lod() *MSFT_lod {
 	p := ba.ctx.Get("MSFT_lod")
-	return MSFT_lodFromJSObject(p)
+	return MSFT_lodFromJSObject(p, ba.ctx)
 }
 
 // MSFT_lodFromJSObject returns a wrapped MSFT_lod JavaScript class.
-func MSFT_lodFromJSObject(p js.Value) *MSFT_lod {
-	return &MSFT_lod{p: p}
+func MSFT_lodFromJSObject(p js.Value, ctx js.Value) *MSFT_lod {
+	return &MSFT_lod{p: p, ctx: ctx}
 }
 
 // TODO: methods

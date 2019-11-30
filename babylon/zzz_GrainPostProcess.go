@@ -8,7 +8,10 @@ import (
 
 // GrainPostProcess represents a babylon.js GrainPostProcess.
 // The GrainPostProcess adds noise to the image at mid luminance levels
-type GrainPostProcess struct{ *PostProcess }
+type GrainPostProcess struct {
+	*PostProcess
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (g *GrainPostProcess) JSObject() js.Value { return g.p }
@@ -16,12 +19,12 @@ func (g *GrainPostProcess) JSObject() js.Value { return g.p }
 // GrainPostProcess returns a GrainPostProcess JavaScript class.
 func (ba *Babylon) GrainPostProcess() *GrainPostProcess {
 	p := ba.ctx.Get("GrainPostProcess")
-	return GrainPostProcessFromJSObject(p)
+	return GrainPostProcessFromJSObject(p, ba.ctx)
 }
 
 // GrainPostProcessFromJSObject returns a wrapped GrainPostProcess JavaScript class.
-func GrainPostProcessFromJSObject(p js.Value) *GrainPostProcess {
-	return &GrainPostProcess{PostProcessFromJSObject(p)}
+func GrainPostProcessFromJSObject(p js.Value, ctx js.Value) *GrainPostProcess {
+	return &GrainPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewGrainPostProcessOpts contains optional parameters for NewGrainPostProcess.
@@ -46,7 +49,7 @@ func (ba *Babylon) NewGrainPostProcess(name string, options float64, camera *Cam
 	}
 
 	p := ba.ctx.Get("GrainPostProcess").New(name, options, camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType.JSObject(), opts.BlockCompilation.JSObject())
-	return GrainPostProcessFromJSObject(p)
+	return GrainPostProcessFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

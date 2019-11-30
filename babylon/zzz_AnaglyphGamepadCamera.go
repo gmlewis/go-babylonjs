@@ -10,7 +10,10 @@ import (
 // Camera used to simulate anaglyphic rendering (based on GamepadCamera)
 //
 // See: http://doc.babylonjs.com/features/cameras#anaglyph-cameras
-type AnaglyphGamepadCamera struct{ *GamepadCamera }
+type AnaglyphGamepadCamera struct {
+	*GamepadCamera
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (a *AnaglyphGamepadCamera) JSObject() js.Value { return a.p }
@@ -18,12 +21,12 @@ func (a *AnaglyphGamepadCamera) JSObject() js.Value { return a.p }
 // AnaglyphGamepadCamera returns a AnaglyphGamepadCamera JavaScript class.
 func (ba *Babylon) AnaglyphGamepadCamera() *AnaglyphGamepadCamera {
 	p := ba.ctx.Get("AnaglyphGamepadCamera")
-	return AnaglyphGamepadCameraFromJSObject(p)
+	return AnaglyphGamepadCameraFromJSObject(p, ba.ctx)
 }
 
 // AnaglyphGamepadCameraFromJSObject returns a wrapped AnaglyphGamepadCamera JavaScript class.
-func AnaglyphGamepadCameraFromJSObject(p js.Value) *AnaglyphGamepadCamera {
-	return &AnaglyphGamepadCamera{GamepadCameraFromJSObject(p)}
+func AnaglyphGamepadCameraFromJSObject(p js.Value, ctx js.Value) *AnaglyphGamepadCamera {
+	return &AnaglyphGamepadCamera{GamepadCamera: GamepadCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewAnaglyphGamepadCamera returns a new AnaglyphGamepadCamera object.
@@ -31,7 +34,7 @@ func AnaglyphGamepadCameraFromJSObject(p js.Value) *AnaglyphGamepadCamera {
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphgamepadcamera
 func (ba *Babylon) NewAnaglyphGamepadCamera(name string, position *Vector3, interaxialDistance float64, scene *Scene) *AnaglyphGamepadCamera {
 	p := ba.ctx.Get("AnaglyphGamepadCamera").New(name, position.JSObject(), interaxialDistance, scene.JSObject())
-	return AnaglyphGamepadCameraFromJSObject(p)
+	return AnaglyphGamepadCameraFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

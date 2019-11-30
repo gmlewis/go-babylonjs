@@ -8,7 +8,10 @@ import (
 
 // Plane represents a babylon.js Plane.
 // Represens a plane by the equation ax &#43; by &#43; cz &#43; d = 0
-type Plane struct{ p js.Value }
+type Plane struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (p *Plane) JSObject() js.Value { return p.p }
@@ -16,12 +19,12 @@ func (p *Plane) JSObject() js.Value { return p.p }
 // Plane returns a Plane JavaScript class.
 func (ba *Babylon) Plane() *Plane {
 	p := ba.ctx.Get("Plane")
-	return PlaneFromJSObject(p)
+	return PlaneFromJSObject(p, ba.ctx)
 }
 
 // PlaneFromJSObject returns a wrapped Plane JavaScript class.
-func PlaneFromJSObject(p js.Value) *Plane {
-	return &Plane{p: p}
+func PlaneFromJSObject(p js.Value, ctx js.Value) *Plane {
+	return &Plane{p: p, ctx: ctx}
 }
 
 // NewPlane returns a new Plane object.
@@ -29,7 +32,7 @@ func PlaneFromJSObject(p js.Value) *Plane {
 // https://doc.babylonjs.com/api/classes/babylon.plane
 func (ba *Babylon) NewPlane(a float64, b float64, c float64, d float64) *Plane {
 	p := ba.ctx.Get("Plane").New(a, b, c, d)
-	return PlaneFromJSObject(p)
+	return PlaneFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

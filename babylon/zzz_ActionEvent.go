@@ -8,7 +8,10 @@ import (
 
 // ActionEvent represents a babylon.js ActionEvent.
 // ActionEvent is the event being sent when an action is triggered.
-type ActionEvent struct{ p js.Value }
+type ActionEvent struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (a *ActionEvent) JSObject() js.Value { return a.p }
@@ -16,12 +19,12 @@ func (a *ActionEvent) JSObject() js.Value { return a.p }
 // ActionEvent returns a ActionEvent JavaScript class.
 func (ba *Babylon) ActionEvent() *ActionEvent {
 	p := ba.ctx.Get("ActionEvent")
-	return ActionEventFromJSObject(p)
+	return ActionEventFromJSObject(p, ba.ctx)
 }
 
 // ActionEventFromJSObject returns a wrapped ActionEvent JavaScript class.
-func ActionEventFromJSObject(p js.Value) *ActionEvent {
-	return &ActionEvent{p: p}
+func ActionEventFromJSObject(p js.Value, ctx js.Value) *ActionEvent {
+	return &ActionEvent{p: p, ctx: ctx}
 }
 
 // NewActionEventOpts contains optional parameters for NewActionEvent.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewActionEvent(source interface{}, pointerX float64, pointerY
 	}
 
 	p := ba.ctx.Get("ActionEvent").New(source, pointerX, pointerY, meshUnderPointer.JSObject(), opts.SourceEvent, opts.AdditionalData)
-	return ActionEventFromJSObject(p)
+	return ActionEventFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

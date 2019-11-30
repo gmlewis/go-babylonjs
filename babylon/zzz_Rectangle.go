@@ -8,7 +8,10 @@ import (
 
 // Rectangle represents a babylon.js Rectangle.
 // Class used to create rectangle container
-type Rectangle struct{ *Container }
+type Rectangle struct {
+	*Container
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (r *Rectangle) JSObject() js.Value { return r.p }
@@ -16,12 +19,12 @@ func (r *Rectangle) JSObject() js.Value { return r.p }
 // Rectangle returns a Rectangle JavaScript class.
 func (ba *Babylon) Rectangle() *Rectangle {
 	p := ba.ctx.Get("Rectangle")
-	return RectangleFromJSObject(p)
+	return RectangleFromJSObject(p, ba.ctx)
 }
 
 // RectangleFromJSObject returns a wrapped Rectangle JavaScript class.
-func RectangleFromJSObject(p js.Value) *Rectangle {
-	return &Rectangle{ContainerFromJSObject(p)}
+func RectangleFromJSObject(p js.Value, ctx js.Value) *Rectangle {
+	return &Rectangle{Container: ContainerFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewRectangleOpts contains optional parameters for NewRectangle.
@@ -38,7 +41,7 @@ func (ba *Babylon) NewRectangle(opts *NewRectangleOpts) *Rectangle {
 	}
 
 	p := ba.ctx.Get("Rectangle").New(opts.Name.JSObject())
-	return RectangleFromJSObject(p)
+	return RectangleFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -8,7 +8,10 @@ import (
 
 // OBJExport represents a babylon.js OBJExport.
 // Class for generating OBJ data from a Babylon scene.
-type OBJExport struct{ p js.Value }
+type OBJExport struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (o *OBJExport) JSObject() js.Value { return o.p }
@@ -16,12 +19,12 @@ func (o *OBJExport) JSObject() js.Value { return o.p }
 // OBJExport returns a OBJExport JavaScript class.
 func (ba *Babylon) OBJExport() *OBJExport {
 	p := ba.ctx.Get("OBJExport")
-	return OBJExportFromJSObject(p)
+	return OBJExportFromJSObject(p, ba.ctx)
 }
 
 // OBJExportFromJSObject returns a wrapped OBJExport JavaScript class.
-func OBJExportFromJSObject(p js.Value) *OBJExport {
-	return &OBJExport{p: p}
+func OBJExportFromJSObject(p js.Value, ctx js.Value) *OBJExport {
+	return &OBJExport{p: p, ctx: ctx}
 }
 
 // TODO: methods

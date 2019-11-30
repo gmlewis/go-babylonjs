@@ -8,7 +8,10 @@ import (
 
 // MultiObserver represents a babylon.js MultiObserver.
 // Represent a list of observers registered to multiple Observables object.
-type MultiObserver struct{ p js.Value }
+type MultiObserver struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (m *MultiObserver) JSObject() js.Value { return m.p }
@@ -16,12 +19,12 @@ func (m *MultiObserver) JSObject() js.Value { return m.p }
 // MultiObserver returns a MultiObserver JavaScript class.
 func (ba *Babylon) MultiObserver() *MultiObserver {
 	p := ba.ctx.Get("MultiObserver")
-	return MultiObserverFromJSObject(p)
+	return MultiObserverFromJSObject(p, ba.ctx)
 }
 
 // MultiObserverFromJSObject returns a wrapped MultiObserver JavaScript class.
-func MultiObserverFromJSObject(p js.Value) *MultiObserver {
-	return &MultiObserver{p: p}
+func MultiObserverFromJSObject(p js.Value, ctx js.Value) *MultiObserver {
+	return &MultiObserver{p: p, ctx: ctx}
 }
 
 // TODO: methods

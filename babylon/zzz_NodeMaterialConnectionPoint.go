@@ -8,7 +8,10 @@ import (
 
 // NodeMaterialConnectionPoint represents a babylon.js NodeMaterialConnectionPoint.
 // Defines a connection point for a block
-type NodeMaterialConnectionPoint struct{ p js.Value }
+type NodeMaterialConnectionPoint struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (n *NodeMaterialConnectionPoint) JSObject() js.Value { return n.p }
@@ -16,12 +19,12 @@ func (n *NodeMaterialConnectionPoint) JSObject() js.Value { return n.p }
 // NodeMaterialConnectionPoint returns a NodeMaterialConnectionPoint JavaScript class.
 func (ba *Babylon) NodeMaterialConnectionPoint() *NodeMaterialConnectionPoint {
 	p := ba.ctx.Get("NodeMaterialConnectionPoint")
-	return NodeMaterialConnectionPointFromJSObject(p)
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
 }
 
 // NodeMaterialConnectionPointFromJSObject returns a wrapped NodeMaterialConnectionPoint JavaScript class.
-func NodeMaterialConnectionPointFromJSObject(p js.Value) *NodeMaterialConnectionPoint {
-	return &NodeMaterialConnectionPoint{p: p}
+func NodeMaterialConnectionPointFromJSObject(p js.Value, ctx js.Value) *NodeMaterialConnectionPoint {
+	return &NodeMaterialConnectionPoint{p: p, ctx: ctx}
 }
 
 // NewNodeMaterialConnectionPoint returns a new NodeMaterialConnectionPoint object.
@@ -29,7 +32,7 @@ func NodeMaterialConnectionPointFromJSObject(p js.Value) *NodeMaterialConnection
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint
 func (ba *Babylon) NewNodeMaterialConnectionPoint(name string, ownerBlock *NodeMaterialBlock, direction js.Value) *NodeMaterialConnectionPoint {
 	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(name, ownerBlock.JSObject(), direction)
-	return NodeMaterialConnectionPointFromJSObject(p)
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

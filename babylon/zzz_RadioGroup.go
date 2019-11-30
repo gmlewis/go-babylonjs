@@ -9,7 +9,10 @@ import (
 // RadioGroup represents a babylon.js RadioGroup.
 // Class used to create a RadioGroup
 // which contains groups of radio buttons
-type RadioGroup struct{ *SelectorGroup }
+type RadioGroup struct {
+	*SelectorGroup
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (r *RadioGroup) JSObject() js.Value { return r.p }
@@ -17,12 +20,12 @@ func (r *RadioGroup) JSObject() js.Value { return r.p }
 // RadioGroup returns a RadioGroup JavaScript class.
 func (ba *Babylon) RadioGroup() *RadioGroup {
 	p := ba.ctx.Get("RadioGroup")
-	return RadioGroupFromJSObject(p)
+	return RadioGroupFromJSObject(p, ba.ctx)
 }
 
 // RadioGroupFromJSObject returns a wrapped RadioGroup JavaScript class.
-func RadioGroupFromJSObject(p js.Value) *RadioGroup {
-	return &RadioGroup{SelectorGroupFromJSObject(p)}
+func RadioGroupFromJSObject(p js.Value, ctx js.Value) *RadioGroup {
+	return &RadioGroup{SelectorGroup: SelectorGroupFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewRadioGroup returns a new RadioGroup object.
@@ -30,7 +33,7 @@ func RadioGroupFromJSObject(p js.Value) *RadioGroup {
 // https://doc.babylonjs.com/api/classes/babylon.radiogroup
 func (ba *Babylon) NewRadioGroup(name string) *RadioGroup {
 	p := ba.ctx.Get("RadioGroup").New(name)
-	return RadioGroupFromJSObject(p)
+	return RadioGroupFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

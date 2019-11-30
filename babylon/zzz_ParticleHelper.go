@@ -8,7 +8,10 @@ import (
 
 // ParticleHelper represents a babylon.js ParticleHelper.
 // This class is made for on one-liner static method to help creating particle system set.
-type ParticleHelper struct{ p js.Value }
+type ParticleHelper struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (p *ParticleHelper) JSObject() js.Value { return p.p }
@@ -16,12 +19,12 @@ func (p *ParticleHelper) JSObject() js.Value { return p.p }
 // ParticleHelper returns a ParticleHelper JavaScript class.
 func (ba *Babylon) ParticleHelper() *ParticleHelper {
 	p := ba.ctx.Get("ParticleHelper")
-	return ParticleHelperFromJSObject(p)
+	return ParticleHelperFromJSObject(p, ba.ctx)
 }
 
 // ParticleHelperFromJSObject returns a wrapped ParticleHelper JavaScript class.
-func ParticleHelperFromJSObject(p js.Value) *ParticleHelper {
-	return &ParticleHelper{p: p}
+func ParticleHelperFromJSObject(p js.Value, ctx js.Value) *ParticleHelper {
+	return &ParticleHelper{p: p, ctx: ctx}
 }
 
 // TODO: methods

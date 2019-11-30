@@ -10,7 +10,10 @@ import (
 // Class used to make a bone look toward a point in space
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_bones_and_skeletons#bonelookcontroller
-type BoneLookController struct{ p js.Value }
+type BoneLookController struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (b *BoneLookController) JSObject() js.Value { return b.p }
@@ -18,12 +21,12 @@ func (b *BoneLookController) JSObject() js.Value { return b.p }
 // BoneLookController returns a BoneLookController JavaScript class.
 func (ba *Babylon) BoneLookController() *BoneLookController {
 	p := ba.ctx.Get("BoneLookController")
-	return BoneLookControllerFromJSObject(p)
+	return BoneLookControllerFromJSObject(p, ba.ctx)
 }
 
 // BoneLookControllerFromJSObject returns a wrapped BoneLookController JavaScript class.
-func BoneLookControllerFromJSObject(p js.Value) *BoneLookController {
-	return &BoneLookController{p: p}
+func BoneLookControllerFromJSObject(p js.Value, ctx js.Value) *BoneLookController {
+	return &BoneLookController{p: p, ctx: ctx}
 }
 
 // NewBoneLookControllerOpts contains optional parameters for NewBoneLookController.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewBoneLookController(mesh *AbstractMesh, bone *Bone, target 
 	}
 
 	p := ba.ctx.Get("BoneLookController").New(mesh.JSObject(), bone.JSObject(), target.JSObject(), opts.Options.JSObject())
-	return BoneLookControllerFromJSObject(p)
+	return BoneLookControllerFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

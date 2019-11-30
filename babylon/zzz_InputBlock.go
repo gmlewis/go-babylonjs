@@ -8,7 +8,10 @@ import (
 
 // InputBlock represents a babylon.js InputBlock.
 // Block used to expose an input value
-type InputBlock struct{ *NodeMaterialBlock }
+type InputBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (i *InputBlock) JSObject() js.Value { return i.p }
@@ -16,12 +19,12 @@ func (i *InputBlock) JSObject() js.Value { return i.p }
 // InputBlock returns a InputBlock JavaScript class.
 func (ba *Babylon) InputBlock() *InputBlock {
 	p := ba.ctx.Get("InputBlock")
-	return InputBlockFromJSObject(p)
+	return InputBlockFromJSObject(p, ba.ctx)
 }
 
 // InputBlockFromJSObject returns a wrapped InputBlock JavaScript class.
-func InputBlockFromJSObject(p js.Value) *InputBlock {
-	return &InputBlock{NodeMaterialBlockFromJSObject(p)}
+func InputBlockFromJSObject(p js.Value, ctx js.Value) *InputBlock {
+	return &InputBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewInputBlockOpts contains optional parameters for NewInputBlock.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewInputBlock(name string, opts *NewInputBlockOpts) *InputBlo
 	}
 
 	p := ba.ctx.Get("InputBlock").New(name, opts.Target.JSObject(), opts.Type.JSObject())
-	return InputBlockFromJSObject(p)
+	return InputBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

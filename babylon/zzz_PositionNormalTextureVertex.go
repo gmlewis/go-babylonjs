@@ -8,7 +8,10 @@ import (
 
 // PositionNormalTextureVertex represents a babylon.js PositionNormalTextureVertex.
 // Contains position, normal and uv vectors for a vertex
-type PositionNormalTextureVertex struct{ p js.Value }
+type PositionNormalTextureVertex struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (p *PositionNormalTextureVertex) JSObject() js.Value { return p.p }
@@ -16,12 +19,12 @@ func (p *PositionNormalTextureVertex) JSObject() js.Value { return p.p }
 // PositionNormalTextureVertex returns a PositionNormalTextureVertex JavaScript class.
 func (ba *Babylon) PositionNormalTextureVertex() *PositionNormalTextureVertex {
 	p := ba.ctx.Get("PositionNormalTextureVertex")
-	return PositionNormalTextureVertexFromJSObject(p)
+	return PositionNormalTextureVertexFromJSObject(p, ba.ctx)
 }
 
 // PositionNormalTextureVertexFromJSObject returns a wrapped PositionNormalTextureVertex JavaScript class.
-func PositionNormalTextureVertexFromJSObject(p js.Value) *PositionNormalTextureVertex {
-	return &PositionNormalTextureVertex{p: p}
+func PositionNormalTextureVertexFromJSObject(p js.Value, ctx js.Value) *PositionNormalTextureVertex {
+	return &PositionNormalTextureVertex{p: p, ctx: ctx}
 }
 
 // NewPositionNormalTextureVertexOpts contains optional parameters for NewPositionNormalTextureVertex.
@@ -42,7 +45,7 @@ func (ba *Babylon) NewPositionNormalTextureVertex(opts *NewPositionNormalTexture
 	}
 
 	p := ba.ctx.Get("PositionNormalTextureVertex").New(opts.Position.JSObject(), opts.Normal.JSObject(), opts.Uv.JSObject())
-	return PositionNormalTextureVertexFromJSObject(p)
+	return PositionNormalTextureVertexFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

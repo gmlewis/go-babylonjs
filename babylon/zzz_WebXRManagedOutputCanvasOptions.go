@@ -8,7 +8,10 @@ import (
 
 // WebXRManagedOutputCanvasOptions represents a babylon.js WebXRManagedOutputCanvasOptions.
 // COnfiguration object for WebXR output canvas
-type WebXRManagedOutputCanvasOptions struct{ p js.Value }
+type WebXRManagedOutputCanvasOptions struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (w *WebXRManagedOutputCanvasOptions) JSObject() js.Value { return w.p }
@@ -16,12 +19,12 @@ func (w *WebXRManagedOutputCanvasOptions) JSObject() js.Value { return w.p }
 // WebXRManagedOutputCanvasOptions returns a WebXRManagedOutputCanvasOptions JavaScript class.
 func (ba *Babylon) WebXRManagedOutputCanvasOptions() *WebXRManagedOutputCanvasOptions {
 	p := ba.ctx.Get("WebXRManagedOutputCanvasOptions")
-	return WebXRManagedOutputCanvasOptionsFromJSObject(p)
+	return WebXRManagedOutputCanvasOptionsFromJSObject(p, ba.ctx)
 }
 
 // WebXRManagedOutputCanvasOptionsFromJSObject returns a wrapped WebXRManagedOutputCanvasOptions JavaScript class.
-func WebXRManagedOutputCanvasOptionsFromJSObject(p js.Value) *WebXRManagedOutputCanvasOptions {
-	return &WebXRManagedOutputCanvasOptions{p: p}
+func WebXRManagedOutputCanvasOptionsFromJSObject(p js.Value, ctx js.Value) *WebXRManagedOutputCanvasOptions {
+	return &WebXRManagedOutputCanvasOptions{p: p, ctx: ctx}
 }
 
 // TODO: methods

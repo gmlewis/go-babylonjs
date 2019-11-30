@@ -11,7 +11,10 @@ import (
 // and performances.
 //
 // See: http://doc.babylonjs.com/babylon101/materials
-type StandardMaterial struct{ p js.Value }
+type StandardMaterial struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *StandardMaterial) JSObject() js.Value { return s.p }
@@ -19,12 +22,12 @@ func (s *StandardMaterial) JSObject() js.Value { return s.p }
 // StandardMaterial returns a StandardMaterial JavaScript class.
 func (ba *Babylon) StandardMaterial() *StandardMaterial {
 	p := ba.ctx.Get("StandardMaterial")
-	return StandardMaterialFromJSObject(p)
+	return StandardMaterialFromJSObject(p, ba.ctx)
 }
 
 // StandardMaterialFromJSObject returns a wrapped StandardMaterial JavaScript class.
-func StandardMaterialFromJSObject(p js.Value) *StandardMaterial {
-	return &StandardMaterial{p: p}
+func StandardMaterialFromJSObject(p js.Value, ctx js.Value) *StandardMaterial {
+	return &StandardMaterial{p: p, ctx: ctx}
 }
 
 // NewStandardMaterial returns a new StandardMaterial object.
@@ -32,7 +35,7 @@ func StandardMaterialFromJSObject(p js.Value) *StandardMaterial {
 // https://doc.babylonjs.com/api/classes/babylon.standardmaterial
 func (ba *Babylon) NewStandardMaterial(name string, scene *Scene) *StandardMaterial {
 	p := ba.ctx.Get("StandardMaterial").New(name, scene.JSObject())
-	return StandardMaterialFromJSObject(p)
+	return StandardMaterialFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -8,7 +8,10 @@ import (
 
 // Engine represents a babylon.js Engine.
 // The engine class is responsible for interfacing with all lower-level APIs such as WebGL and Audio
-type Engine struct{ *ThinEngine }
+type Engine struct {
+	*ThinEngine
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (e *Engine) JSObject() js.Value { return e.p }
@@ -16,12 +19,12 @@ func (e *Engine) JSObject() js.Value { return e.p }
 // Engine returns a Engine JavaScript class.
 func (ba *Babylon) Engine() *Engine {
 	p := ba.ctx.Get("Engine")
-	return EngineFromJSObject(p)
+	return EngineFromJSObject(p, ba.ctx)
 }
 
 // EngineFromJSObject returns a wrapped Engine JavaScript class.
-func EngineFromJSObject(p js.Value) *Engine {
-	return &Engine{ThinEngineFromJSObject(p)}
+func EngineFromJSObject(p js.Value, ctx js.Value) *Engine {
+	return &Engine{ThinEngine: ThinEngineFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewEngineOpts contains optional parameters for NewEngine.
@@ -42,7 +45,7 @@ func (ba *Babylon) NewEngine(canvasOrContext js.Value, opts *NewEngineOpts) *Eng
 	}
 
 	p := ba.ctx.Get("Engine").New(canvasOrContext, opts.Antialias.JSObject(), opts.Options.JSObject(), opts.AdaptToDeviceRatio.JSObject())
-	return EngineFromJSObject(p)
+	return EngineFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

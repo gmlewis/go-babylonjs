@@ -11,7 +11,10 @@ import (
 // By Vincent Thibault
 //
 // See: http://blog.robrowser.com/javascript-tga-loader.html
-type TGATools struct{ p js.Value }
+type TGATools struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (t *TGATools) JSObject() js.Value { return t.p }
@@ -19,12 +22,12 @@ func (t *TGATools) JSObject() js.Value { return t.p }
 // TGATools returns a TGATools JavaScript class.
 func (ba *Babylon) TGATools() *TGATools {
 	p := ba.ctx.Get("TGATools")
-	return TGAToolsFromJSObject(p)
+	return TGAToolsFromJSObject(p, ba.ctx)
 }
 
 // TGAToolsFromJSObject returns a wrapped TGATools JavaScript class.
-func TGAToolsFromJSObject(p js.Value) *TGATools {
-	return &TGATools{p: p}
+func TGAToolsFromJSObject(p js.Value, ctx js.Value) *TGATools {
+	return &TGATools{p: p, ctx: ctx}
 }
 
 // TODO: methods

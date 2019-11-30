@@ -8,7 +8,10 @@ import (
 
 // HDRTools represents a babylon.js HDRTools.
 // This groups tools to convert HDR texture to native colors array.
-type HDRTools struct{ p js.Value }
+type HDRTools struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (h *HDRTools) JSObject() js.Value { return h.p }
@@ -16,12 +19,12 @@ func (h *HDRTools) JSObject() js.Value { return h.p }
 // HDRTools returns a HDRTools JavaScript class.
 func (ba *Babylon) HDRTools() *HDRTools {
 	p := ba.ctx.Get("HDRTools")
-	return HDRToolsFromJSObject(p)
+	return HDRToolsFromJSObject(p, ba.ctx)
 }
 
 // HDRToolsFromJSObject returns a wrapped HDRTools JavaScript class.
-func HDRToolsFromJSObject(p js.Value) *HDRTools {
-	return &HDRTools{p: p}
+func HDRToolsFromJSObject(p js.Value, ctx js.Value) *HDRTools {
+	return &HDRTools{p: p, ctx: ctx}
 }
 
 // TODO: methods

@@ -11,7 +11,10 @@ import (
 // This is the base class of any Procedural texture and contains most of the shareable code.
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_procedural_textures
-type ProceduralTexture struct{ *Texture }
+type ProceduralTexture struct {
+	*Texture
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (p *ProceduralTexture) JSObject() js.Value { return p.p }
@@ -19,12 +22,12 @@ func (p *ProceduralTexture) JSObject() js.Value { return p.p }
 // ProceduralTexture returns a ProceduralTexture JavaScript class.
 func (ba *Babylon) ProceduralTexture() *ProceduralTexture {
 	p := ba.ctx.Get("ProceduralTexture")
-	return ProceduralTextureFromJSObject(p)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
 }
 
 // ProceduralTextureFromJSObject returns a wrapped ProceduralTexture JavaScript class.
-func ProceduralTextureFromJSObject(p js.Value) *ProceduralTexture {
-	return &ProceduralTexture{TextureFromJSObject(p)}
+func ProceduralTextureFromJSObject(p js.Value, ctx js.Value) *ProceduralTexture {
+	return &ProceduralTexture{Texture: TextureFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewProceduralTextureOpts contains optional parameters for NewProceduralTexture.
@@ -45,7 +48,7 @@ func (ba *Babylon) NewProceduralTexture(name string, size interface{}, fragment 
 	}
 
 	p := ba.ctx.Get("ProceduralTexture").New(name, size, fragment, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps.JSObject(), opts.IsCube.JSObject())
-	return ProceduralTextureFromJSObject(p)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

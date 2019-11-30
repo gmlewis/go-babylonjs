@@ -8,7 +8,10 @@ import (
 
 // Ellipse represents a babylon.js Ellipse.
 // Class used to create 2D ellipse containers
-type Ellipse struct{ *Container }
+type Ellipse struct {
+	*Container
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (e *Ellipse) JSObject() js.Value { return e.p }
@@ -16,12 +19,12 @@ func (e *Ellipse) JSObject() js.Value { return e.p }
 // Ellipse returns a Ellipse JavaScript class.
 func (ba *Babylon) Ellipse() *Ellipse {
 	p := ba.ctx.Get("Ellipse")
-	return EllipseFromJSObject(p)
+	return EllipseFromJSObject(p, ba.ctx)
 }
 
 // EllipseFromJSObject returns a wrapped Ellipse JavaScript class.
-func EllipseFromJSObject(p js.Value) *Ellipse {
-	return &Ellipse{ContainerFromJSObject(p)}
+func EllipseFromJSObject(p js.Value, ctx js.Value) *Ellipse {
+	return &Ellipse{Container: ContainerFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewEllipseOpts contains optional parameters for NewEllipse.
@@ -38,7 +41,7 @@ func (ba *Babylon) NewEllipse(opts *NewEllipseOpts) *Ellipse {
 	}
 
 	p := ba.ctx.Get("Ellipse").New(opts.Name.JSObject())
-	return EllipseFromJSObject(p)
+	return EllipseFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

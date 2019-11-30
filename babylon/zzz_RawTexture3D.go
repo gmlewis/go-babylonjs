@@ -8,7 +8,10 @@ import (
 
 // RawTexture3D represents a babylon.js RawTexture3D.
 // Class used to store 3D textures containing user data
-type RawTexture3D struct{ *Texture }
+type RawTexture3D struct {
+	*Texture
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (r *RawTexture3D) JSObject() js.Value { return r.p }
@@ -16,12 +19,12 @@ func (r *RawTexture3D) JSObject() js.Value { return r.p }
 // RawTexture3D returns a RawTexture3D JavaScript class.
 func (ba *Babylon) RawTexture3D() *RawTexture3D {
 	p := ba.ctx.Get("RawTexture3D")
-	return RawTexture3DFromJSObject(p)
+	return RawTexture3DFromJSObject(p, ba.ctx)
 }
 
 // RawTexture3DFromJSObject returns a wrapped RawTexture3D JavaScript class.
-func RawTexture3DFromJSObject(p js.Value) *RawTexture3D {
-	return &RawTexture3D{TextureFromJSObject(p)}
+func RawTexture3DFromJSObject(p js.Value, ctx js.Value) *RawTexture3D {
+	return &RawTexture3D{Texture: TextureFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewRawTexture3DOpts contains optional parameters for NewRawTexture3D.
@@ -44,7 +47,7 @@ func (ba *Babylon) NewRawTexture3D(data js.Value, width float64, height float64,
 	}
 
 	p := ba.ctx.Get("RawTexture3D").New(data, width, height, depth, format, scene.JSObject(), opts.GenerateMipMaps.JSObject(), opts.InvertY.JSObject(), opts.SamplingMode.JSObject(), opts.TextureType.JSObject())
-	return RawTexture3DFromJSObject(p)
+	return RawTexture3DFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

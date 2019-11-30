@@ -11,7 +11,10 @@ import (
 // to a desired value once triggered.
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_actions
-type IncrementValueAction struct{ *Action }
+type IncrementValueAction struct {
+	*Action
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (i *IncrementValueAction) JSObject() js.Value { return i.p }
@@ -19,12 +22,12 @@ func (i *IncrementValueAction) JSObject() js.Value { return i.p }
 // IncrementValueAction returns a IncrementValueAction JavaScript class.
 func (ba *Babylon) IncrementValueAction() *IncrementValueAction {
 	p := ba.ctx.Get("IncrementValueAction")
-	return IncrementValueActionFromJSObject(p)
+	return IncrementValueActionFromJSObject(p, ba.ctx)
 }
 
 // IncrementValueActionFromJSObject returns a wrapped IncrementValueAction JavaScript class.
-func IncrementValueActionFromJSObject(p js.Value) *IncrementValueAction {
-	return &IncrementValueAction{ActionFromJSObject(p)}
+func IncrementValueActionFromJSObject(p js.Value, ctx js.Value) *IncrementValueAction {
+	return &IncrementValueAction{Action: ActionFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewIncrementValueActionOpts contains optional parameters for NewIncrementValueAction.
@@ -41,7 +44,7 @@ func (ba *Babylon) NewIncrementValueAction(triggerOptions interface{}, target in
 	}
 
 	p := ba.ctx.Get("IncrementValueAction").New(triggerOptions, target, propertyPath, value, opts.Condition.JSObject())
-	return IncrementValueActionFromJSObject(p)
+	return IncrementValueActionFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

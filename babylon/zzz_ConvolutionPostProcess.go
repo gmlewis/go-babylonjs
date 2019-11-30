@@ -10,7 +10,10 @@ import (
 // The ConvolutionPostProcess applies a 3x3 kernel to every pixel of the
 // input texture to perform effects such as edge detection or sharpening
 // See &lt;a href=&#34;http://en.wikipedia.org/wiki/Kernel_(image_processing)&#34;&gt;http://en.wikipedia.org/wiki/Kernel_(image_processing)&lt;/a&gt;
-type ConvolutionPostProcess struct{ *PostProcess }
+type ConvolutionPostProcess struct {
+	*PostProcess
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (c *ConvolutionPostProcess) JSObject() js.Value { return c.p }
@@ -18,12 +21,12 @@ func (c *ConvolutionPostProcess) JSObject() js.Value { return c.p }
 // ConvolutionPostProcess returns a ConvolutionPostProcess JavaScript class.
 func (ba *Babylon) ConvolutionPostProcess() *ConvolutionPostProcess {
 	p := ba.ctx.Get("ConvolutionPostProcess")
-	return ConvolutionPostProcessFromJSObject(p)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
 }
 
 // ConvolutionPostProcessFromJSObject returns a wrapped ConvolutionPostProcess JavaScript class.
-func ConvolutionPostProcessFromJSObject(p js.Value) *ConvolutionPostProcess {
-	return &ConvolutionPostProcess{PostProcessFromJSObject(p)}
+func ConvolutionPostProcessFromJSObject(p js.Value, ctx js.Value) *ConvolutionPostProcess {
+	return &ConvolutionPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewConvolutionPostProcessOpts contains optional parameters for NewConvolutionPostProcess.
@@ -46,7 +49,7 @@ func (ba *Babylon) NewConvolutionPostProcess(name string, kernel float64, option
 	}
 
 	p := ba.ctx.Get("ConvolutionPostProcess").New(name, kernel, options, camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType.JSObject())
-	return ConvolutionPostProcessFromJSObject(p)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

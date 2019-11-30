@@ -10,7 +10,10 @@ import (
 // Class used to load scene from various file formats using registered plugins
 //
 // See: http://doc.babylonjs.com/how_to/load_from_any_file_type
-type SceneLoader struct{ p js.Value }
+type SceneLoader struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *SceneLoader) JSObject() js.Value { return s.p }
@@ -18,12 +21,12 @@ func (s *SceneLoader) JSObject() js.Value { return s.p }
 // SceneLoader returns a SceneLoader JavaScript class.
 func (ba *Babylon) SceneLoader() *SceneLoader {
 	p := ba.ctx.Get("SceneLoader")
-	return SceneLoaderFromJSObject(p)
+	return SceneLoaderFromJSObject(p, ba.ctx)
 }
 
 // SceneLoaderFromJSObject returns a wrapped SceneLoader JavaScript class.
-func SceneLoaderFromJSObject(p js.Value) *SceneLoader {
-	return &SceneLoader{p: p}
+func SceneLoaderFromJSObject(p js.Value, ctx js.Value) *SceneLoader {
+	return &SceneLoader{p: p, ctx: ctx}
 }
 
 // TODO: methods

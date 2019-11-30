@@ -11,7 +11,10 @@ import (
 // This is based on the available WebRTC functionalities of the browser.
 //
 // See: http://doc.babylonjs.com/how_to/render_scene_on_a_video
-type VideoRecorder struct{ p js.Value }
+type VideoRecorder struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (v *VideoRecorder) JSObject() js.Value { return v.p }
@@ -19,12 +22,12 @@ func (v *VideoRecorder) JSObject() js.Value { return v.p }
 // VideoRecorder returns a VideoRecorder JavaScript class.
 func (ba *Babylon) VideoRecorder() *VideoRecorder {
 	p := ba.ctx.Get("VideoRecorder")
-	return VideoRecorderFromJSObject(p)
+	return VideoRecorderFromJSObject(p, ba.ctx)
 }
 
 // VideoRecorderFromJSObject returns a wrapped VideoRecorder JavaScript class.
-func VideoRecorderFromJSObject(p js.Value) *VideoRecorder {
-	return &VideoRecorder{p: p}
+func VideoRecorderFromJSObject(p js.Value, ctx js.Value) *VideoRecorder {
+	return &VideoRecorder{p: p, ctx: ctx}
 }
 
 // NewVideoRecorderOpts contains optional parameters for NewVideoRecorder.
@@ -41,7 +44,7 @@ func (ba *Babylon) NewVideoRecorder(engine *Engine, opts *NewVideoRecorderOpts) 
 	}
 
 	p := ba.ctx.Get("VideoRecorder").New(engine.JSObject(), opts.Options.JSObject())
-	return VideoRecorderFromJSObject(p)
+	return VideoRecorderFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

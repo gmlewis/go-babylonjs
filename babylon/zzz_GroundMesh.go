@@ -8,7 +8,10 @@ import (
 
 // GroundMesh represents a babylon.js GroundMesh.
 // Mesh representing the gorund
-type GroundMesh struct{ *Mesh }
+type GroundMesh struct {
+	*Mesh
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (g *GroundMesh) JSObject() js.Value { return g.p }
@@ -16,12 +19,12 @@ func (g *GroundMesh) JSObject() js.Value { return g.p }
 // GroundMesh returns a GroundMesh JavaScript class.
 func (ba *Babylon) GroundMesh() *GroundMesh {
 	p := ba.ctx.Get("GroundMesh")
-	return GroundMeshFromJSObject(p)
+	return GroundMeshFromJSObject(p, ba.ctx)
 }
 
 // GroundMeshFromJSObject returns a wrapped GroundMesh JavaScript class.
-func GroundMeshFromJSObject(p js.Value) *GroundMesh {
-	return &GroundMesh{MeshFromJSObject(p)}
+func GroundMeshFromJSObject(p js.Value, ctx js.Value) *GroundMesh {
+	return &GroundMesh{Mesh: MeshFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewGroundMesh returns a new GroundMesh object.
@@ -29,7 +32,7 @@ func GroundMeshFromJSObject(p js.Value) *GroundMesh {
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh
 func (ba *Babylon) NewGroundMesh(name string, scene *Scene) *GroundMesh {
 	p := ba.ctx.Get("GroundMesh").New(name, scene.JSObject())
-	return GroundMeshFromJSObject(p)
+	return GroundMeshFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

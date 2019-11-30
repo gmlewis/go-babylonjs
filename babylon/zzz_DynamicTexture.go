@@ -10,7 +10,10 @@ import (
 // A class extending Texture allowing drawing on a texture
 //
 // See: http://doc.babylonjs.com/how_to/dynamictexture
-type DynamicTexture struct{ *Texture }
+type DynamicTexture struct {
+	*Texture
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (d *DynamicTexture) JSObject() js.Value { return d.p }
@@ -18,12 +21,12 @@ func (d *DynamicTexture) JSObject() js.Value { return d.p }
 // DynamicTexture returns a DynamicTexture JavaScript class.
 func (ba *Babylon) DynamicTexture() *DynamicTexture {
 	p := ba.ctx.Get("DynamicTexture")
-	return DynamicTextureFromJSObject(p)
+	return DynamicTextureFromJSObject(p, ba.ctx)
 }
 
 // DynamicTextureFromJSObject returns a wrapped DynamicTexture JavaScript class.
-func DynamicTextureFromJSObject(p js.Value) *DynamicTexture {
-	return &DynamicTexture{TextureFromJSObject(p)}
+func DynamicTextureFromJSObject(p js.Value, ctx js.Value) *DynamicTexture {
+	return &DynamicTexture{Texture: TextureFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewDynamicTextureOpts contains optional parameters for NewDynamicTexture.
@@ -42,7 +45,7 @@ func (ba *Babylon) NewDynamicTexture(name string, options interface{}, scene *Sc
 	}
 
 	p := ba.ctx.Get("DynamicTexture").New(name, options, scene.JSObject(), generateMipMaps, opts.SamplingMode.JSObject(), opts.Format.JSObject())
-	return DynamicTextureFromJSObject(p)
+	return DynamicTextureFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

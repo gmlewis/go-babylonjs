@@ -11,7 +11,10 @@ import (
 // They allow basic adjustment of saturation and small exposure adjustments, along with color filter tinting to provide white balance adjustment or more stylistic effects.
 // These are similar to controls found in many professional imaging or colorist software. The global controls are applied to the entire image. For advanced tuning, extra controls are provided to adjust the shadow, midtone and highlight areas of the image;
 // corresponding to low luminance, medium luminance, and high luminance areas respectively.
-type ColorCurves struct{ p js.Value }
+type ColorCurves struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (c *ColorCurves) JSObject() js.Value { return c.p }
@@ -19,12 +22,12 @@ func (c *ColorCurves) JSObject() js.Value { return c.p }
 // ColorCurves returns a ColorCurves JavaScript class.
 func (ba *Babylon) ColorCurves() *ColorCurves {
 	p := ba.ctx.Get("ColorCurves")
-	return ColorCurvesFromJSObject(p)
+	return ColorCurvesFromJSObject(p, ba.ctx)
 }
 
 // ColorCurvesFromJSObject returns a wrapped ColorCurves JavaScript class.
-func ColorCurvesFromJSObject(p js.Value) *ColorCurves {
-	return &ColorCurves{p: p}
+func ColorCurvesFromJSObject(p js.Value, ctx js.Value) *ColorCurves {
+	return &ColorCurves{p: p, ctx: ctx}
 }
 
 // TODO: methods

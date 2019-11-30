@@ -10,7 +10,10 @@ import (
 // Camera used to simulate stereoscopic rendering (based on FreeCamera)
 //
 // See: http://doc.babylonjs.com/features/cameras
-type StereoscopicFreeCamera struct{ *FreeCamera }
+type StereoscopicFreeCamera struct {
+	*FreeCamera
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *StereoscopicFreeCamera) JSObject() js.Value { return s.p }
@@ -18,12 +21,12 @@ func (s *StereoscopicFreeCamera) JSObject() js.Value { return s.p }
 // StereoscopicFreeCamera returns a StereoscopicFreeCamera JavaScript class.
 func (ba *Babylon) StereoscopicFreeCamera() *StereoscopicFreeCamera {
 	p := ba.ctx.Get("StereoscopicFreeCamera")
-	return StereoscopicFreeCameraFromJSObject(p)
+	return StereoscopicFreeCameraFromJSObject(p, ba.ctx)
 }
 
 // StereoscopicFreeCameraFromJSObject returns a wrapped StereoscopicFreeCamera JavaScript class.
-func StereoscopicFreeCameraFromJSObject(p js.Value) *StereoscopicFreeCamera {
-	return &StereoscopicFreeCamera{FreeCameraFromJSObject(p)}
+func StereoscopicFreeCameraFromJSObject(p js.Value, ctx js.Value) *StereoscopicFreeCamera {
+	return &StereoscopicFreeCamera{FreeCamera: FreeCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewStereoscopicFreeCamera returns a new StereoscopicFreeCamera object.
@@ -31,7 +34,7 @@ func StereoscopicFreeCameraFromJSObject(p js.Value) *StereoscopicFreeCamera {
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicfreecamera
 func (ba *Babylon) NewStereoscopicFreeCamera(name string, position *Vector3, interaxialDistance float64, isStereoscopicSideBySide bool, scene *Scene) *StereoscopicFreeCamera {
 	p := ba.ctx.Get("StereoscopicFreeCamera").New(name, position.JSObject(), interaxialDistance, isStereoscopicSideBySide, scene.JSObject())
-	return StereoscopicFreeCameraFromJSObject(p)
+	return StereoscopicFreeCameraFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

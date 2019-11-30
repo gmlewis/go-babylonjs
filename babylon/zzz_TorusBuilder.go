@@ -8,7 +8,10 @@ import (
 
 // TorusBuilder represents a babylon.js TorusBuilder.
 // Class containing static functions to help procedurally build meshes
-type TorusBuilder struct{ p js.Value }
+type TorusBuilder struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (t *TorusBuilder) JSObject() js.Value { return t.p }
@@ -16,12 +19,12 @@ func (t *TorusBuilder) JSObject() js.Value { return t.p }
 // TorusBuilder returns a TorusBuilder JavaScript class.
 func (ba *Babylon) TorusBuilder() *TorusBuilder {
 	p := ba.ctx.Get("TorusBuilder")
-	return TorusBuilderFromJSObject(p)
+	return TorusBuilderFromJSObject(p, ba.ctx)
 }
 
 // TorusBuilderFromJSObject returns a wrapped TorusBuilder JavaScript class.
-func TorusBuilderFromJSObject(p js.Value) *TorusBuilder {
-	return &TorusBuilder{p: p}
+func TorusBuilderFromJSObject(p js.Value, ctx js.Value) *TorusBuilder {
+	return &TorusBuilder{p: p, ctx: ctx}
 }
 
 // TODO: methods

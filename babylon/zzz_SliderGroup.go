@@ -9,7 +9,10 @@ import (
 // SliderGroup represents a babylon.js SliderGroup.
 // Class used to create a SliderGroup
 // which contains groups of slider buttons
-type SliderGroup struct{ *SelectorGroup }
+type SliderGroup struct {
+	*SelectorGroup
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *SliderGroup) JSObject() js.Value { return s.p }
@@ -17,12 +20,12 @@ func (s *SliderGroup) JSObject() js.Value { return s.p }
 // SliderGroup returns a SliderGroup JavaScript class.
 func (ba *Babylon) SliderGroup() *SliderGroup {
 	p := ba.ctx.Get("SliderGroup")
-	return SliderGroupFromJSObject(p)
+	return SliderGroupFromJSObject(p, ba.ctx)
 }
 
 // SliderGroupFromJSObject returns a wrapped SliderGroup JavaScript class.
-func SliderGroupFromJSObject(p js.Value) *SliderGroup {
-	return &SliderGroup{SelectorGroupFromJSObject(p)}
+func SliderGroupFromJSObject(p js.Value, ctx js.Value) *SliderGroup {
+	return &SliderGroup{SelectorGroup: SelectorGroupFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewSliderGroup returns a new SliderGroup object.
@@ -30,7 +33,7 @@ func SliderGroupFromJSObject(p js.Value) *SliderGroup {
 // https://doc.babylonjs.com/api/classes/babylon.slidergroup
 func (ba *Babylon) NewSliderGroup(name string) *SliderGroup {
 	p := ba.ctx.Get("SliderGroup").New(name)
-	return SliderGroupFromJSObject(p)
+	return SliderGroupFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

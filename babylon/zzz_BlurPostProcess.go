@@ -9,7 +9,10 @@ import (
 // BlurPostProcess represents a babylon.js BlurPostProcess.
 // The Blur Post Process which blurs an image based on a kernel and direction.
 // Can be used twice in x and y directions to perform a guassian blur in two passes.
-type BlurPostProcess struct{ *PostProcess }
+type BlurPostProcess struct {
+	*PostProcess
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (b *BlurPostProcess) JSObject() js.Value { return b.p }
@@ -17,12 +20,12 @@ func (b *BlurPostProcess) JSObject() js.Value { return b.p }
 // BlurPostProcess returns a BlurPostProcess JavaScript class.
 func (ba *Babylon) BlurPostProcess() *BlurPostProcess {
 	p := ba.ctx.Get("BlurPostProcess")
-	return BlurPostProcessFromJSObject(p)
+	return BlurPostProcessFromJSObject(p, ba.ctx)
 }
 
 // BlurPostProcessFromJSObject returns a wrapped BlurPostProcess JavaScript class.
-func BlurPostProcessFromJSObject(p js.Value) *BlurPostProcess {
-	return &BlurPostProcess{PostProcessFromJSObject(p)}
+func BlurPostProcessFromJSObject(p js.Value, ctx js.Value) *BlurPostProcess {
+	return &BlurPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewBlurPostProcessOpts contains optional parameters for NewBlurPostProcess.
@@ -49,7 +52,7 @@ func (ba *Babylon) NewBlurPostProcess(name string, direction *Vector2, kernel fl
 	}
 
 	p := ba.ctx.Get("BlurPostProcess").New(name, direction.JSObject(), kernel, options, camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType.JSObject(), opts.Defines.JSObject(), opts.BlockCompilation.JSObject())
-	return BlurPostProcessFromJSObject(p)
+	return BlurPostProcessFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

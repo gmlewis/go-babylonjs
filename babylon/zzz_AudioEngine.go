@@ -11,7 +11,10 @@ import (
 // It is responsible to play, synchronize and analyse sounds throughout the  application.
 //
 // See: http://doc.babylonjs.com/how_to/playing_sounds_and_music
-type AudioEngine struct{ p js.Value }
+type AudioEngine struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (a *AudioEngine) JSObject() js.Value { return a.p }
@@ -19,12 +22,12 @@ func (a *AudioEngine) JSObject() js.Value { return a.p }
 // AudioEngine returns a AudioEngine JavaScript class.
 func (ba *Babylon) AudioEngine() *AudioEngine {
 	p := ba.ctx.Get("AudioEngine")
-	return AudioEngineFromJSObject(p)
+	return AudioEngineFromJSObject(p, ba.ctx)
 }
 
 // AudioEngineFromJSObject returns a wrapped AudioEngine JavaScript class.
-func AudioEngineFromJSObject(p js.Value) *AudioEngine {
-	return &AudioEngine{p: p}
+func AudioEngineFromJSObject(p js.Value, ctx js.Value) *AudioEngine {
+	return &AudioEngine{p: p, ctx: ctx}
 }
 
 // NewAudioEngineOpts contains optional parameters for NewAudioEngine.
@@ -41,7 +44,7 @@ func (ba *Babylon) NewAudioEngine(opts *NewAudioEngineOpts) *AudioEngine {
 	}
 
 	p := ba.ctx.Get("AudioEngine").New(opts.HostElement.JSObject())
-	return AudioEngineFromJSObject(p)
+	return AudioEngineFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

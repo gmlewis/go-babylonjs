@@ -10,7 +10,10 @@ import (
 // Manage the pointers inputs to control an arc rotate camera.
 //
 // See: http://doc.babylonjs.com/how_to/customizing_camera_inputs
-type ArcRotateCameraPointersInput struct{ *BaseCameraPointersInput }
+type ArcRotateCameraPointersInput struct {
+	*BaseCameraPointersInput
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (a *ArcRotateCameraPointersInput) JSObject() js.Value { return a.p }
@@ -18,12 +21,12 @@ func (a *ArcRotateCameraPointersInput) JSObject() js.Value { return a.p }
 // ArcRotateCameraPointersInput returns a ArcRotateCameraPointersInput JavaScript class.
 func (ba *Babylon) ArcRotateCameraPointersInput() *ArcRotateCameraPointersInput {
 	p := ba.ctx.Get("ArcRotateCameraPointersInput")
-	return ArcRotateCameraPointersInputFromJSObject(p)
+	return ArcRotateCameraPointersInputFromJSObject(p, ba.ctx)
 }
 
 // ArcRotateCameraPointersInputFromJSObject returns a wrapped ArcRotateCameraPointersInput JavaScript class.
-func ArcRotateCameraPointersInputFromJSObject(p js.Value) *ArcRotateCameraPointersInput {
-	return &ArcRotateCameraPointersInput{BaseCameraPointersInputFromJSObject(p)}
+func ArcRotateCameraPointersInputFromJSObject(p js.Value, ctx js.Value) *ArcRotateCameraPointersInput {
+	return &ArcRotateCameraPointersInput{BaseCameraPointersInput: BaseCameraPointersInputFromJSObject(p, ctx), ctx: ctx}
 }
 
 // TODO: methods

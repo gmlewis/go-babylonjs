@@ -8,7 +8,10 @@ import (
 
 // ValueAndUnit represents a babylon.js ValueAndUnit.
 // Class used to specific a value and its associated unit
-type ValueAndUnit struct{ p js.Value }
+type ValueAndUnit struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (v *ValueAndUnit) JSObject() js.Value { return v.p }
@@ -16,12 +19,12 @@ func (v *ValueAndUnit) JSObject() js.Value { return v.p }
 // ValueAndUnit returns a ValueAndUnit JavaScript class.
 func (ba *Babylon) ValueAndUnit() *ValueAndUnit {
 	p := ba.ctx.Get("ValueAndUnit")
-	return ValueAndUnitFromJSObject(p)
+	return ValueAndUnitFromJSObject(p, ba.ctx)
 }
 
 // ValueAndUnitFromJSObject returns a wrapped ValueAndUnit JavaScript class.
-func ValueAndUnitFromJSObject(p js.Value) *ValueAndUnit {
-	return &ValueAndUnit{p: p}
+func ValueAndUnitFromJSObject(p js.Value, ctx js.Value) *ValueAndUnit {
+	return &ValueAndUnit{p: p, ctx: ctx}
 }
 
 // NewValueAndUnitOpts contains optional parameters for NewValueAndUnit.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewValueAndUnit(value float64, opts *NewValueAndUnitOpts) *Va
 	}
 
 	p := ba.ctx.Get("ValueAndUnit").New(value, opts.Unit.JSObject(), opts.NegativeValueAllowed.JSObject())
-	return ValueAndUnitFromJSObject(p)
+	return ValueAndUnitFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -8,7 +8,10 @@ import (
 
 // WebXRControllerModelLoader represents a babylon.js WebXRControllerModelLoader.
 // Loads a controller model and adds it as a child of the WebXRControllers grip when the controller is created
-type WebXRControllerModelLoader struct{ p js.Value }
+type WebXRControllerModelLoader struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (w *WebXRControllerModelLoader) JSObject() js.Value { return w.p }
@@ -16,12 +19,12 @@ func (w *WebXRControllerModelLoader) JSObject() js.Value { return w.p }
 // WebXRControllerModelLoader returns a WebXRControllerModelLoader JavaScript class.
 func (ba *Babylon) WebXRControllerModelLoader() *WebXRControllerModelLoader {
 	p := ba.ctx.Get("WebXRControllerModelLoader")
-	return WebXRControllerModelLoaderFromJSObject(p)
+	return WebXRControllerModelLoaderFromJSObject(p, ba.ctx)
 }
 
 // WebXRControllerModelLoaderFromJSObject returns a wrapped WebXRControllerModelLoader JavaScript class.
-func WebXRControllerModelLoaderFromJSObject(p js.Value) *WebXRControllerModelLoader {
-	return &WebXRControllerModelLoader{p: p}
+func WebXRControllerModelLoaderFromJSObject(p js.Value, ctx js.Value) *WebXRControllerModelLoader {
+	return &WebXRControllerModelLoader{p: p, ctx: ctx}
 }
 
 // NewWebXRControllerModelLoader returns a new WebXRControllerModelLoader object.
@@ -29,7 +32,7 @@ func WebXRControllerModelLoaderFromJSObject(p js.Value) *WebXRControllerModelLoa
 // https://doc.babylonjs.com/api/classes/babylon.webxrcontrollermodelloader
 func (ba *Babylon) NewWebXRControllerModelLoader(input *WebXRInput) *WebXRControllerModelLoader {
 	p := ba.ctx.Get("WebXRControllerModelLoader").New(input.JSObject())
-	return WebXRControllerModelLoaderFromJSObject(p)
+	return WebXRControllerModelLoaderFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

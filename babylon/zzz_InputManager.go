@@ -8,7 +8,10 @@ import (
 
 // InputManager represents a babylon.js InputManager.
 // Class used to manage all inputs for the scene.
-type InputManager struct{ p js.Value }
+type InputManager struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (i *InputManager) JSObject() js.Value { return i.p }
@@ -16,12 +19,12 @@ func (i *InputManager) JSObject() js.Value { return i.p }
 // InputManager returns a InputManager JavaScript class.
 func (ba *Babylon) InputManager() *InputManager {
 	p := ba.ctx.Get("InputManager")
-	return InputManagerFromJSObject(p)
+	return InputManagerFromJSObject(p, ba.ctx)
 }
 
 // InputManagerFromJSObject returns a wrapped InputManager JavaScript class.
-func InputManagerFromJSObject(p js.Value) *InputManager {
-	return &InputManager{p: p}
+func InputManagerFromJSObject(p js.Value, ctx js.Value) *InputManager {
+	return &InputManager{p: p, ctx: ctx}
 }
 
 // NewInputManager returns a new InputManager object.
@@ -29,7 +32,7 @@ func InputManagerFromJSObject(p js.Value) *InputManager {
 // https://doc.babylonjs.com/api/classes/babylon.inputmanager
 func (ba *Babylon) NewInputManager(scene *Scene) *InputManager {
 	p := ba.ctx.Get("InputManager").New(scene.JSObject())
-	return InputManagerFromJSObject(p)
+	return InputManagerFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

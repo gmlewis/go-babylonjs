@@ -10,7 +10,10 @@ import (
 // Manage the Virtual Joystick inputs to control the movement of a free camera.
 //
 // See: http://doc.babylonjs.com/how_to/customizing_camera_inputs
-type FreeCameraVirtualJoystickInput struct{ p js.Value }
+type FreeCameraVirtualJoystickInput struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (f *FreeCameraVirtualJoystickInput) JSObject() js.Value { return f.p }
@@ -18,12 +21,12 @@ func (f *FreeCameraVirtualJoystickInput) JSObject() js.Value { return f.p }
 // FreeCameraVirtualJoystickInput returns a FreeCameraVirtualJoystickInput JavaScript class.
 func (ba *Babylon) FreeCameraVirtualJoystickInput() *FreeCameraVirtualJoystickInput {
 	p := ba.ctx.Get("FreeCameraVirtualJoystickInput")
-	return FreeCameraVirtualJoystickInputFromJSObject(p)
+	return FreeCameraVirtualJoystickInputFromJSObject(p, ba.ctx)
 }
 
 // FreeCameraVirtualJoystickInputFromJSObject returns a wrapped FreeCameraVirtualJoystickInput JavaScript class.
-func FreeCameraVirtualJoystickInputFromJSObject(p js.Value) *FreeCameraVirtualJoystickInput {
-	return &FreeCameraVirtualJoystickInput{p: p}
+func FreeCameraVirtualJoystickInputFromJSObject(p js.Value, ctx js.Value) *FreeCameraVirtualJoystickInput {
+	return &FreeCameraVirtualJoystickInput{p: p, ctx: ctx}
 }
 
 // TODO: methods

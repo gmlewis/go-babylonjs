@@ -8,7 +8,10 @@ import (
 
 // KHR_materials_pbrSpecularGlossiness represents a babylon.js KHR_materials_pbrSpecularGlossiness.
 // &lt;a href=&#34;https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Khronos/KHR_materials_pbrSpecularGlossiness&#34;&gt;Specification&lt;/a&gt;
-type KHR_materials_pbrSpecularGlossiness struct{ p js.Value }
+type KHR_materials_pbrSpecularGlossiness struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (k *KHR_materials_pbrSpecularGlossiness) JSObject() js.Value { return k.p }
@@ -16,12 +19,12 @@ func (k *KHR_materials_pbrSpecularGlossiness) JSObject() js.Value { return k.p }
 // KHR_materials_pbrSpecularGlossiness returns a KHR_materials_pbrSpecularGlossiness JavaScript class.
 func (ba *Babylon) KHR_materials_pbrSpecularGlossiness() *KHR_materials_pbrSpecularGlossiness {
 	p := ba.ctx.Get("KHR_materials_pbrSpecularGlossiness")
-	return KHR_materials_pbrSpecularGlossinessFromJSObject(p)
+	return KHR_materials_pbrSpecularGlossinessFromJSObject(p, ba.ctx)
 }
 
 // KHR_materials_pbrSpecularGlossinessFromJSObject returns a wrapped KHR_materials_pbrSpecularGlossiness JavaScript class.
-func KHR_materials_pbrSpecularGlossinessFromJSObject(p js.Value) *KHR_materials_pbrSpecularGlossiness {
-	return &KHR_materials_pbrSpecularGlossiness{p: p}
+func KHR_materials_pbrSpecularGlossinessFromJSObject(p js.Value, ctx js.Value) *KHR_materials_pbrSpecularGlossiness {
+	return &KHR_materials_pbrSpecularGlossiness{p: p, ctx: ctx}
 }
 
 // TODO: methods

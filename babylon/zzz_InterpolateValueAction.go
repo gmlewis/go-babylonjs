@@ -11,7 +11,10 @@ import (
 // by interpolating between its current value and the newly set one once triggered.
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_actions
-type InterpolateValueAction struct{ *Action }
+type InterpolateValueAction struct {
+	*Action
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (i *InterpolateValueAction) JSObject() js.Value { return i.p }
@@ -19,12 +22,12 @@ func (i *InterpolateValueAction) JSObject() js.Value { return i.p }
 // InterpolateValueAction returns a InterpolateValueAction JavaScript class.
 func (ba *Babylon) InterpolateValueAction() *InterpolateValueAction {
 	p := ba.ctx.Get("InterpolateValueAction")
-	return InterpolateValueActionFromJSObject(p)
+	return InterpolateValueActionFromJSObject(p, ba.ctx)
 }
 
 // InterpolateValueActionFromJSObject returns a wrapped InterpolateValueAction JavaScript class.
-func InterpolateValueActionFromJSObject(p js.Value) *InterpolateValueAction {
-	return &InterpolateValueAction{ActionFromJSObject(p)}
+func InterpolateValueActionFromJSObject(p js.Value, ctx js.Value) *InterpolateValueAction {
+	return &InterpolateValueAction{Action: ActionFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewInterpolateValueActionOpts contains optional parameters for NewInterpolateValueAction.
@@ -47,7 +50,7 @@ func (ba *Babylon) NewInterpolateValueAction(triggerOptions interface{}, target 
 	}
 
 	p := ba.ctx.Get("InterpolateValueAction").New(triggerOptions, target, propertyPath, value, opts.Duration.JSObject(), opts.Condition.JSObject(), opts.StopOtherAnimations.JSObject(), opts.OnInterpolationDone)
-	return InterpolateValueActionFromJSObject(p)
+	return InterpolateValueActionFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

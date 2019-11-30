@@ -8,7 +8,10 @@ import (
 
 // MarbleProceduralTexture represents a babylon.js MarbleProceduralTexture.
 //
-type MarbleProceduralTexture struct{ *ProceduralTexture }
+type MarbleProceduralTexture struct {
+	*ProceduralTexture
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (m *MarbleProceduralTexture) JSObject() js.Value { return m.p }
@@ -16,12 +19,12 @@ func (m *MarbleProceduralTexture) JSObject() js.Value { return m.p }
 // MarbleProceduralTexture returns a MarbleProceduralTexture JavaScript class.
 func (ba *Babylon) MarbleProceduralTexture() *MarbleProceduralTexture {
 	p := ba.ctx.Get("MarbleProceduralTexture")
-	return MarbleProceduralTextureFromJSObject(p)
+	return MarbleProceduralTextureFromJSObject(p, ba.ctx)
 }
 
 // MarbleProceduralTextureFromJSObject returns a wrapped MarbleProceduralTexture JavaScript class.
-func MarbleProceduralTextureFromJSObject(p js.Value) *MarbleProceduralTexture {
-	return &MarbleProceduralTexture{ProceduralTextureFromJSObject(p)}
+func MarbleProceduralTextureFromJSObject(p js.Value, ctx js.Value) *MarbleProceduralTexture {
+	return &MarbleProceduralTexture{ProceduralTexture: ProceduralTextureFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewMarbleProceduralTextureOpts contains optional parameters for NewMarbleProceduralTexture.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewMarbleProceduralTexture(name string, size float64, scene *
 	}
 
 	p := ba.ctx.Get("MarbleProceduralTexture").New(name, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps.JSObject())
-	return MarbleProceduralTextureFromJSObject(p)
+	return MarbleProceduralTextureFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

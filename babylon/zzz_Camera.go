@@ -10,7 +10,10 @@ import (
 // This is the base class of all the camera used in the application.
 //
 // See: http://doc.babylonjs.com/features/cameras
-type Camera struct{ *Node }
+type Camera struct {
+	*Node
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (c *Camera) JSObject() js.Value { return c.p }
@@ -18,12 +21,12 @@ func (c *Camera) JSObject() js.Value { return c.p }
 // Camera returns a Camera JavaScript class.
 func (ba *Babylon) Camera() *Camera {
 	p := ba.ctx.Get("Camera")
-	return CameraFromJSObject(p)
+	return CameraFromJSObject(p, ba.ctx)
 }
 
 // CameraFromJSObject returns a wrapped Camera JavaScript class.
-func CameraFromJSObject(p js.Value) *Camera {
-	return &Camera{NodeFromJSObject(p)}
+func CameraFromJSObject(p js.Value, ctx js.Value) *Camera {
+	return &Camera{Node: NodeFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewCameraOpts contains optional parameters for NewCamera.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewCamera(name string, position *Vector3, scene *Scene, opts 
 	}
 
 	p := ba.ctx.Get("Camera").New(name, position.JSObject(), scene.JSObject(), opts.SetActiveOnSceneIfNoneActive.JSObject())
-	return CameraFromJSObject(p)
+	return CameraFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

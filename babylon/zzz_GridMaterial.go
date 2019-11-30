@@ -9,7 +9,10 @@ import (
 // GridMaterial represents a babylon.js GridMaterial.
 // The grid materials allows you to wrap any shape with a grid.
 // Colors are customizable.
-type GridMaterial struct{ p js.Value }
+type GridMaterial struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (g *GridMaterial) JSObject() js.Value { return g.p }
@@ -17,12 +20,12 @@ func (g *GridMaterial) JSObject() js.Value { return g.p }
 // GridMaterial returns a GridMaterial JavaScript class.
 func (ba *Babylon) GridMaterial() *GridMaterial {
 	p := ba.ctx.Get("GridMaterial")
-	return GridMaterialFromJSObject(p)
+	return GridMaterialFromJSObject(p, ba.ctx)
 }
 
 // GridMaterialFromJSObject returns a wrapped GridMaterial JavaScript class.
-func GridMaterialFromJSObject(p js.Value) *GridMaterial {
-	return &GridMaterial{p: p}
+func GridMaterialFromJSObject(p js.Value, ctx js.Value) *GridMaterial {
+	return &GridMaterial{p: p, ctx: ctx}
 }
 
 // NewGridMaterial returns a new GridMaterial object.
@@ -30,7 +33,7 @@ func GridMaterialFromJSObject(p js.Value) *GridMaterial {
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial
 func (ba *Babylon) NewGridMaterial(name string, scene *Scene) *GridMaterial {
 	p := ba.ctx.Get("GridMaterial").New(name, scene.JSObject())
-	return GridMaterialFromJSObject(p)
+	return GridMaterialFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

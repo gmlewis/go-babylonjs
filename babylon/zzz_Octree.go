@@ -10,7 +10,10 @@ import (
 // Octrees are a really powerful data structure that can quickly select entities based on space coordinates.
 //
 // See: https://doc.babylonjs.com/how_to/optimizing_your_scene_with_octrees
-type Octree struct{ p js.Value }
+type Octree struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (o *Octree) JSObject() js.Value { return o.p }
@@ -18,12 +21,12 @@ func (o *Octree) JSObject() js.Value { return o.p }
 // Octree returns a Octree JavaScript class.
 func (ba *Babylon) Octree() *Octree {
 	p := ba.ctx.Get("Octree")
-	return OctreeFromJSObject(p)
+	return OctreeFromJSObject(p, ba.ctx)
 }
 
 // OctreeFromJSObject returns a wrapped Octree JavaScript class.
-func OctreeFromJSObject(p js.Value) *Octree {
-	return &Octree{p: p}
+func OctreeFromJSObject(p js.Value, ctx js.Value) *Octree {
+	return &Octree{p: p, ctx: ctx}
 }
 
 // NewOctreeOpts contains optional parameters for NewOctree.
@@ -42,7 +45,7 @@ func (ba *Babylon) NewOctree(creationFunc func(), opts *NewOctreeOpts) *Octree {
 	}
 
 	p := ba.ctx.Get("Octree").New(creationFunc, opts.MaxBlockCapacity.JSObject(), opts.MaxDepth.JSObject())
-	return OctreeFromJSObject(p)
+	return OctreeFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -8,7 +8,10 @@ import (
 
 // WebXRInput represents a babylon.js WebXRInput.
 // XR input used to track XR inputs such as controllers/rays
-type WebXRInput struct{ p js.Value }
+type WebXRInput struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (w *WebXRInput) JSObject() js.Value { return w.p }
@@ -16,12 +19,12 @@ func (w *WebXRInput) JSObject() js.Value { return w.p }
 // WebXRInput returns a WebXRInput JavaScript class.
 func (ba *Babylon) WebXRInput() *WebXRInput {
 	p := ba.ctx.Get("WebXRInput")
-	return WebXRInputFromJSObject(p)
+	return WebXRInputFromJSObject(p, ba.ctx)
 }
 
 // WebXRInputFromJSObject returns a wrapped WebXRInput JavaScript class.
-func WebXRInputFromJSObject(p js.Value) *WebXRInput {
-	return &WebXRInput{p: p}
+func WebXRInputFromJSObject(p js.Value, ctx js.Value) *WebXRInput {
+	return &WebXRInput{p: p, ctx: ctx}
 }
 
 // NewWebXRInput returns a new WebXRInput object.
@@ -29,7 +32,7 @@ func WebXRInputFromJSObject(p js.Value) *WebXRInput {
 // https://doc.babylonjs.com/api/classes/babylon.webxrinput
 func (ba *Babylon) NewWebXRInput(baseExperience *WebXRExperienceHelper) *WebXRInput {
 	p := ba.ctx.Get("WebXRInput").New(baseExperience.JSObject())
-	return WebXRInputFromJSObject(p)
+	return WebXRInputFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

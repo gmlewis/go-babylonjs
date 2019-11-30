@@ -8,7 +8,10 @@ import (
 
 // FogBlock represents a babylon.js FogBlock.
 // Block used to add support for scene fog
-type FogBlock struct{ *NodeMaterialBlock }
+type FogBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (f *FogBlock) JSObject() js.Value { return f.p }
@@ -16,12 +19,12 @@ func (f *FogBlock) JSObject() js.Value { return f.p }
 // FogBlock returns a FogBlock JavaScript class.
 func (ba *Babylon) FogBlock() *FogBlock {
 	p := ba.ctx.Get("FogBlock")
-	return FogBlockFromJSObject(p)
+	return FogBlockFromJSObject(p, ba.ctx)
 }
 
 // FogBlockFromJSObject returns a wrapped FogBlock JavaScript class.
-func FogBlockFromJSObject(p js.Value) *FogBlock {
-	return &FogBlock{NodeMaterialBlockFromJSObject(p)}
+func FogBlockFromJSObject(p js.Value, ctx js.Value) *FogBlock {
+	return &FogBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewFogBlock returns a new FogBlock object.
@@ -29,7 +32,7 @@ func FogBlockFromJSObject(p js.Value) *FogBlock {
 // https://doc.babylonjs.com/api/classes/babylon.fogblock
 func (ba *Babylon) NewFogBlock(name string) *FogBlock {
 	p := ba.ctx.Get("FogBlock").New(name)
-	return FogBlockFromJSObject(p)
+	return FogBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

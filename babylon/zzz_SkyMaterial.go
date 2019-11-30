@@ -10,7 +10,10 @@ import (
 // This is the sky material which allows to create dynamic and texture free effects for skyboxes.
 //
 // See: https://doc.babylonjs.com/extensions/sky
-type SkyMaterial struct{ p js.Value }
+type SkyMaterial struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *SkyMaterial) JSObject() js.Value { return s.p }
@@ -18,12 +21,12 @@ func (s *SkyMaterial) JSObject() js.Value { return s.p }
 // SkyMaterial returns a SkyMaterial JavaScript class.
 func (ba *Babylon) SkyMaterial() *SkyMaterial {
 	p := ba.ctx.Get("SkyMaterial")
-	return SkyMaterialFromJSObject(p)
+	return SkyMaterialFromJSObject(p, ba.ctx)
 }
 
 // SkyMaterialFromJSObject returns a wrapped SkyMaterial JavaScript class.
-func SkyMaterialFromJSObject(p js.Value) *SkyMaterial {
-	return &SkyMaterial{p: p}
+func SkyMaterialFromJSObject(p js.Value, ctx js.Value) *SkyMaterial {
+	return &SkyMaterial{p: p, ctx: ctx}
 }
 
 // NewSkyMaterial returns a new SkyMaterial object.
@@ -31,7 +34,7 @@ func SkyMaterialFromJSObject(p js.Value) *SkyMaterial {
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial
 func (ba *Babylon) NewSkyMaterial(name string, scene *Scene) *SkyMaterial {
 	p := ba.ctx.Get("SkyMaterial").New(name, scene.JSObject())
-	return SkyMaterialFromJSObject(p)
+	return SkyMaterialFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

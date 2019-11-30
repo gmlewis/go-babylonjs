@@ -10,7 +10,10 @@ import (
 // Defines an optimization used to reduce the size of render target textures
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
-type TextureOptimization struct{ *SceneOptimization }
+type TextureOptimization struct {
+	*SceneOptimization
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (t *TextureOptimization) JSObject() js.Value { return t.p }
@@ -18,12 +21,12 @@ func (t *TextureOptimization) JSObject() js.Value { return t.p }
 // TextureOptimization returns a TextureOptimization JavaScript class.
 func (ba *Babylon) TextureOptimization() *TextureOptimization {
 	p := ba.ctx.Get("TextureOptimization")
-	return TextureOptimizationFromJSObject(p)
+	return TextureOptimizationFromJSObject(p, ba.ctx)
 }
 
 // TextureOptimizationFromJSObject returns a wrapped TextureOptimization JavaScript class.
-func TextureOptimizationFromJSObject(p js.Value) *TextureOptimization {
-	return &TextureOptimization{SceneOptimizationFromJSObject(p)}
+func TextureOptimizationFromJSObject(p js.Value, ctx js.Value) *TextureOptimization {
+	return &TextureOptimization{SceneOptimization: SceneOptimizationFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewTextureOptimizationOpts contains optional parameters for NewTextureOptimization.
@@ -44,7 +47,7 @@ func (ba *Babylon) NewTextureOptimization(opts *NewTextureOptimizationOpts) *Tex
 	}
 
 	p := ba.ctx.Get("TextureOptimization").New(opts.Priority.JSObject(), opts.MaximumSize.JSObject(), opts.Step.JSObject())
-	return TextureOptimizationFromJSObject(p)
+	return TextureOptimizationFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

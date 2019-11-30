@@ -8,7 +8,10 @@ import (
 
 // Observer represents a babylon.js Observer.
 // Represent an Observer registered to a given Observable object.
-type Observer struct{ p js.Value }
+type Observer struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (o *Observer) JSObject() js.Value { return o.p }
@@ -16,12 +19,12 @@ func (o *Observer) JSObject() js.Value { return o.p }
 // Observer returns a Observer JavaScript class.
 func (ba *Babylon) Observer() *Observer {
 	p := ba.ctx.Get("Observer")
-	return ObserverFromJSObject(p)
+	return ObserverFromJSObject(p, ba.ctx)
 }
 
 // ObserverFromJSObject returns a wrapped Observer JavaScript class.
-func ObserverFromJSObject(p js.Value) *Observer {
-	return &Observer{p: p}
+func ObserverFromJSObject(p js.Value, ctx js.Value) *Observer {
+	return &Observer{p: p, ctx: ctx}
 }
 
 // NewObserverOpts contains optional parameters for NewObserver.
@@ -38,7 +41,7 @@ func (ba *Babylon) NewObserver(callback func(), mask float64, opts *NewObserverO
 	}
 
 	p := ba.ctx.Get("Observer").New(callback, mask, opts.Scope)
-	return ObserverFromJSObject(p)
+	return ObserverFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

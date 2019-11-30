@@ -8,7 +8,10 @@ import (
 
 // ColorMergerBlock represents a babylon.js ColorMergerBlock.
 // Block used to create a Color3/4 out of individual inputs (one for each component)
-type ColorMergerBlock struct{ *NodeMaterialBlock }
+type ColorMergerBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (c *ColorMergerBlock) JSObject() js.Value { return c.p }
@@ -16,12 +19,12 @@ func (c *ColorMergerBlock) JSObject() js.Value { return c.p }
 // ColorMergerBlock returns a ColorMergerBlock JavaScript class.
 func (ba *Babylon) ColorMergerBlock() *ColorMergerBlock {
 	p := ba.ctx.Get("ColorMergerBlock")
-	return ColorMergerBlockFromJSObject(p)
+	return ColorMergerBlockFromJSObject(p, ba.ctx)
 }
 
 // ColorMergerBlockFromJSObject returns a wrapped ColorMergerBlock JavaScript class.
-func ColorMergerBlockFromJSObject(p js.Value) *ColorMergerBlock {
-	return &ColorMergerBlock{NodeMaterialBlockFromJSObject(p)}
+func ColorMergerBlockFromJSObject(p js.Value, ctx js.Value) *ColorMergerBlock {
+	return &ColorMergerBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewColorMergerBlock returns a new ColorMergerBlock object.
@@ -29,7 +32,7 @@ func ColorMergerBlockFromJSObject(p js.Value) *ColorMergerBlock {
 // https://doc.babylonjs.com/api/classes/babylon.colormergerblock
 func (ba *Babylon) NewColorMergerBlock(name string) *ColorMergerBlock {
 	p := ba.ctx.Get("ColorMergerBlock").New(name)
-	return ColorMergerBlockFromJSObject(p)
+	return ColorMergerBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

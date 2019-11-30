@@ -8,7 +8,10 @@ import (
 
 // SmartArray represents a babylon.js SmartArray.
 // Defines an GC Friendly array where the backfield array do not shrink to prevent over allocations.
-type SmartArray struct{ p js.Value }
+type SmartArray struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *SmartArray) JSObject() js.Value { return s.p }
@@ -16,12 +19,12 @@ func (s *SmartArray) JSObject() js.Value { return s.p }
 // SmartArray returns a SmartArray JavaScript class.
 func (ba *Babylon) SmartArray() *SmartArray {
 	p := ba.ctx.Get("SmartArray")
-	return SmartArrayFromJSObject(p)
+	return SmartArrayFromJSObject(p, ba.ctx)
 }
 
 // SmartArrayFromJSObject returns a wrapped SmartArray JavaScript class.
-func SmartArrayFromJSObject(p js.Value) *SmartArray {
-	return &SmartArray{p: p}
+func SmartArrayFromJSObject(p js.Value, ctx js.Value) *SmartArray {
+	return &SmartArray{p: p, ctx: ctx}
 }
 
 // NewSmartArray returns a new SmartArray object.
@@ -29,7 +32,7 @@ func SmartArrayFromJSObject(p js.Value) *SmartArray {
 // https://doc.babylonjs.com/api/classes/babylon.smartarray
 func (ba *Babylon) NewSmartArray(capacity float64) *SmartArray {
 	p := ba.ctx.Get("SmartArray").New(capacity)
-	return SmartArrayFromJSObject(p)
+	return SmartArrayFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -14,7 +14,10 @@ import (
 // in your application.
 //
 // As the update is not automatic, you need to call them manually.
-type HtmlElementTexture struct{ *BaseTexture }
+type HtmlElementTexture struct {
+	*BaseTexture
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (h *HtmlElementTexture) JSObject() js.Value { return h.p }
@@ -22,12 +25,12 @@ func (h *HtmlElementTexture) JSObject() js.Value { return h.p }
 // HtmlElementTexture returns a HtmlElementTexture JavaScript class.
 func (ba *Babylon) HtmlElementTexture() *HtmlElementTexture {
 	p := ba.ctx.Get("HtmlElementTexture")
-	return HtmlElementTextureFromJSObject(p)
+	return HtmlElementTextureFromJSObject(p, ba.ctx)
 }
 
 // HtmlElementTextureFromJSObject returns a wrapped HtmlElementTexture JavaScript class.
-func HtmlElementTextureFromJSObject(p js.Value) *HtmlElementTexture {
-	return &HtmlElementTexture{BaseTextureFromJSObject(p)}
+func HtmlElementTextureFromJSObject(p js.Value, ctx js.Value) *HtmlElementTexture {
+	return &HtmlElementTexture{BaseTexture: BaseTextureFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewHtmlElementTexture returns a new HtmlElementTexture object.
@@ -35,7 +38,7 @@ func HtmlElementTextureFromJSObject(p js.Value) *HtmlElementTexture {
 // https://doc.babylonjs.com/api/classes/babylon.htmlelementtexture
 func (ba *Babylon) NewHtmlElementTexture(name string, element js.Value, options js.Value) *HtmlElementTexture {
 	p := ba.ctx.Get("HtmlElementTexture").New(name, element, options)
-	return HtmlElementTextureFromJSObject(p)
+	return HtmlElementTextureFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

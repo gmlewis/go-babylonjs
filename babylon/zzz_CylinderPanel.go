@@ -8,7 +8,10 @@ import (
 
 // CylinderPanel represents a babylon.js CylinderPanel.
 // Class used to create a container panel deployed on the surface of a cylinder
-type CylinderPanel struct{ *VolumeBasedPanel }
+type CylinderPanel struct {
+	*VolumeBasedPanel
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (c *CylinderPanel) JSObject() js.Value { return c.p }
@@ -16,12 +19,12 @@ func (c *CylinderPanel) JSObject() js.Value { return c.p }
 // CylinderPanel returns a CylinderPanel JavaScript class.
 func (ba *Babylon) CylinderPanel() *CylinderPanel {
 	p := ba.ctx.Get("CylinderPanel")
-	return CylinderPanelFromJSObject(p)
+	return CylinderPanelFromJSObject(p, ba.ctx)
 }
 
 // CylinderPanelFromJSObject returns a wrapped CylinderPanel JavaScript class.
-func CylinderPanelFromJSObject(p js.Value) *CylinderPanel {
-	return &CylinderPanel{VolumeBasedPanelFromJSObject(p)}
+func CylinderPanelFromJSObject(p js.Value, ctx js.Value) *CylinderPanel {
+	return &CylinderPanel{VolumeBasedPanel: VolumeBasedPanelFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewCylinderPanel returns a new CylinderPanel object.
@@ -29,7 +32,7 @@ func CylinderPanelFromJSObject(p js.Value) *CylinderPanel {
 // https://doc.babylonjs.com/api/classes/babylon.cylinderpanel
 func (ba *Babylon) NewCylinderPanel() *CylinderPanel {
 	p := ba.ctx.Get("CylinderPanel").New()
-	return CylinderPanelFromJSObject(p)
+	return CylinderPanelFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

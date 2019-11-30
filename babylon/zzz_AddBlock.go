@@ -8,7 +8,10 @@ import (
 
 // AddBlock represents a babylon.js AddBlock.
 // Block used to add 2 vectors
-type AddBlock struct{ *NodeMaterialBlock }
+type AddBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (a *AddBlock) JSObject() js.Value { return a.p }
@@ -16,12 +19,12 @@ func (a *AddBlock) JSObject() js.Value { return a.p }
 // AddBlock returns a AddBlock JavaScript class.
 func (ba *Babylon) AddBlock() *AddBlock {
 	p := ba.ctx.Get("AddBlock")
-	return AddBlockFromJSObject(p)
+	return AddBlockFromJSObject(p, ba.ctx)
 }
 
 // AddBlockFromJSObject returns a wrapped AddBlock JavaScript class.
-func AddBlockFromJSObject(p js.Value) *AddBlock {
-	return &AddBlock{NodeMaterialBlockFromJSObject(p)}
+func AddBlockFromJSObject(p js.Value, ctx js.Value) *AddBlock {
+	return &AddBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewAddBlock returns a new AddBlock object.
@@ -29,7 +32,7 @@ func AddBlockFromJSObject(p js.Value) *AddBlock {
 // https://doc.babylonjs.com/api/classes/babylon.addblock
 func (ba *Babylon) NewAddBlock(name string) *AddBlock {
 	p := ba.ctx.Get("AddBlock").New(name)
-	return AddBlockFromJSObject(p)
+	return AddBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -8,7 +8,10 @@ import (
 
 // ArrayTools represents a babylon.js ArrayTools.
 // Class containing a set of static utilities functions for arrays.
-type ArrayTools struct{ p js.Value }
+type ArrayTools struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (a *ArrayTools) JSObject() js.Value { return a.p }
@@ -16,12 +19,12 @@ func (a *ArrayTools) JSObject() js.Value { return a.p }
 // ArrayTools returns a ArrayTools JavaScript class.
 func (ba *Babylon) ArrayTools() *ArrayTools {
 	p := ba.ctx.Get("ArrayTools")
-	return ArrayToolsFromJSObject(p)
+	return ArrayToolsFromJSObject(p, ba.ctx)
 }
 
 // ArrayToolsFromJSObject returns a wrapped ArrayTools JavaScript class.
-func ArrayToolsFromJSObject(p js.Value) *ArrayTools {
-	return &ArrayTools{p: p}
+func ArrayToolsFromJSObject(p js.Value, ctx js.Value) *ArrayTools {
+	return &ArrayTools{p: p, ctx: ctx}
 }
 
 // TODO: methods

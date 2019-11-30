@@ -8,7 +8,10 @@ import (
 
 // ClampBlock represents a babylon.js ClampBlock.
 // Block used to clamp a float
-type ClampBlock struct{ *NodeMaterialBlock }
+type ClampBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (c *ClampBlock) JSObject() js.Value { return c.p }
@@ -16,12 +19,12 @@ func (c *ClampBlock) JSObject() js.Value { return c.p }
 // ClampBlock returns a ClampBlock JavaScript class.
 func (ba *Babylon) ClampBlock() *ClampBlock {
 	p := ba.ctx.Get("ClampBlock")
-	return ClampBlockFromJSObject(p)
+	return ClampBlockFromJSObject(p, ba.ctx)
 }
 
 // ClampBlockFromJSObject returns a wrapped ClampBlock JavaScript class.
-func ClampBlockFromJSObject(p js.Value) *ClampBlock {
-	return &ClampBlock{NodeMaterialBlockFromJSObject(p)}
+func ClampBlockFromJSObject(p js.Value, ctx js.Value) *ClampBlock {
+	return &ClampBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewClampBlock returns a new ClampBlock object.
@@ -29,7 +32,7 @@ func ClampBlockFromJSObject(p js.Value) *ClampBlock {
 // https://doc.babylonjs.com/api/classes/babylon.clampblock
 func (ba *Babylon) NewClampBlock(name string) *ClampBlock {
 	p := ba.ctx.Get("ClampBlock").New(name)
-	return ClampBlockFromJSObject(p)
+	return ClampBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

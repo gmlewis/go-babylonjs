@@ -8,7 +8,10 @@ import (
 
 // Gizmo represents a babylon.js Gizmo.
 // Renders gizmos on top of an existing scene which provide controls for position, rotation, etc.
-type Gizmo struct{ p js.Value }
+type Gizmo struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (g *Gizmo) JSObject() js.Value { return g.p }
@@ -16,12 +19,12 @@ func (g *Gizmo) JSObject() js.Value { return g.p }
 // Gizmo returns a Gizmo JavaScript class.
 func (ba *Babylon) Gizmo() *Gizmo {
 	p := ba.ctx.Get("Gizmo")
-	return GizmoFromJSObject(p)
+	return GizmoFromJSObject(p, ba.ctx)
 }
 
 // GizmoFromJSObject returns a wrapped Gizmo JavaScript class.
-func GizmoFromJSObject(p js.Value) *Gizmo {
-	return &Gizmo{p: p}
+func GizmoFromJSObject(p js.Value, ctx js.Value) *Gizmo {
+	return &Gizmo{p: p, ctx: ctx}
 }
 
 // NewGizmoOpts contains optional parameters for NewGizmo.
@@ -38,7 +41,7 @@ func (ba *Babylon) NewGizmo(opts *NewGizmoOpts) *Gizmo {
 	}
 
 	p := ba.ctx.Get("Gizmo").New(opts.GizmoLayer.JSObject())
-	return GizmoFromJSObject(p)
+	return GizmoFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

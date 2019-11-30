@@ -9,7 +9,10 @@ import (
 // SharpenPostProcess represents a babylon.js SharpenPostProcess.
 // The SharpenPostProcess applies a sharpen kernel to every pixel
 // See &lt;a href=&#34;http://en.wikipedia.org/wiki/Kernel_(image_processing)&#34;&gt;http://en.wikipedia.org/wiki/Kernel_(image_processing)&lt;/a&gt;
-type SharpenPostProcess struct{ *PostProcess }
+type SharpenPostProcess struct {
+	*PostProcess
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *SharpenPostProcess) JSObject() js.Value { return s.p }
@@ -17,12 +20,12 @@ func (s *SharpenPostProcess) JSObject() js.Value { return s.p }
 // SharpenPostProcess returns a SharpenPostProcess JavaScript class.
 func (ba *Babylon) SharpenPostProcess() *SharpenPostProcess {
 	p := ba.ctx.Get("SharpenPostProcess")
-	return SharpenPostProcessFromJSObject(p)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
 }
 
 // SharpenPostProcessFromJSObject returns a wrapped SharpenPostProcess JavaScript class.
-func SharpenPostProcessFromJSObject(p js.Value) *SharpenPostProcess {
-	return &SharpenPostProcess{PostProcessFromJSObject(p)}
+func SharpenPostProcessFromJSObject(p js.Value, ctx js.Value) *SharpenPostProcess {
+	return &SharpenPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewSharpenPostProcessOpts contains optional parameters for NewSharpenPostProcess.
@@ -47,7 +50,7 @@ func (ba *Babylon) NewSharpenPostProcess(name string, options float64, camera *C
 	}
 
 	p := ba.ctx.Get("SharpenPostProcess").New(name, options, camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType.JSObject(), opts.BlockCompilation.JSObject())
-	return SharpenPostProcessFromJSObject(p)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

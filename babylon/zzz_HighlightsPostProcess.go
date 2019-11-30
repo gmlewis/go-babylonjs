@@ -10,7 +10,10 @@ import (
 // Extracts highlights from the image
 //
 // See: https://doc.babylonjs.com/how_to/how_to_use_postprocesses
-type HighlightsPostProcess struct{ *PostProcess }
+type HighlightsPostProcess struct {
+	*PostProcess
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (h *HighlightsPostProcess) JSObject() js.Value { return h.p }
@@ -18,12 +21,12 @@ func (h *HighlightsPostProcess) JSObject() js.Value { return h.p }
 // HighlightsPostProcess returns a HighlightsPostProcess JavaScript class.
 func (ba *Babylon) HighlightsPostProcess() *HighlightsPostProcess {
 	p := ba.ctx.Get("HighlightsPostProcess")
-	return HighlightsPostProcessFromJSObject(p)
+	return HighlightsPostProcessFromJSObject(p, ba.ctx)
 }
 
 // HighlightsPostProcessFromJSObject returns a wrapped HighlightsPostProcess JavaScript class.
-func HighlightsPostProcessFromJSObject(p js.Value) *HighlightsPostProcess {
-	return &HighlightsPostProcess{PostProcessFromJSObject(p)}
+func HighlightsPostProcessFromJSObject(p js.Value, ctx js.Value) *HighlightsPostProcess {
+	return &HighlightsPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewHighlightsPostProcessOpts contains optional parameters for NewHighlightsPostProcess.
@@ -46,7 +49,7 @@ func (ba *Babylon) NewHighlightsPostProcess(name string, options float64, camera
 	}
 
 	p := ba.ctx.Get("HighlightsPostProcess").New(name, options, camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType.JSObject())
-	return HighlightsPostProcessFromJSObject(p)
+	return HighlightsPostProcessFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

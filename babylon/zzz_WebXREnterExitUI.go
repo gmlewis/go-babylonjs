@@ -8,7 +8,10 @@ import (
 
 // WebXREnterExitUI represents a babylon.js WebXREnterExitUI.
 // UI to allow the user to enter/exit XR mode
-type WebXREnterExitUI struct{ p js.Value }
+type WebXREnterExitUI struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (w *WebXREnterExitUI) JSObject() js.Value { return w.p }
@@ -16,12 +19,12 @@ func (w *WebXREnterExitUI) JSObject() js.Value { return w.p }
 // WebXREnterExitUI returns a WebXREnterExitUI JavaScript class.
 func (ba *Babylon) WebXREnterExitUI() *WebXREnterExitUI {
 	p := ba.ctx.Get("WebXREnterExitUI")
-	return WebXREnterExitUIFromJSObject(p)
+	return WebXREnterExitUIFromJSObject(p, ba.ctx)
 }
 
 // WebXREnterExitUIFromJSObject returns a wrapped WebXREnterExitUI JavaScript class.
-func WebXREnterExitUIFromJSObject(p js.Value) *WebXREnterExitUI {
-	return &WebXREnterExitUI{p: p}
+func WebXREnterExitUIFromJSObject(p js.Value, ctx js.Value) *WebXREnterExitUI {
+	return &WebXREnterExitUI{p: p, ctx: ctx}
 }
 
 // TODO: methods

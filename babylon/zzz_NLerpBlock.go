@@ -8,7 +8,10 @@ import (
 
 // NLerpBlock represents a babylon.js NLerpBlock.
 // Block used to normalize lerp between 2 values
-type NLerpBlock struct{ *NodeMaterialBlock }
+type NLerpBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (n *NLerpBlock) JSObject() js.Value { return n.p }
@@ -16,12 +19,12 @@ func (n *NLerpBlock) JSObject() js.Value { return n.p }
 // NLerpBlock returns a NLerpBlock JavaScript class.
 func (ba *Babylon) NLerpBlock() *NLerpBlock {
 	p := ba.ctx.Get("NLerpBlock")
-	return NLerpBlockFromJSObject(p)
+	return NLerpBlockFromJSObject(p, ba.ctx)
 }
 
 // NLerpBlockFromJSObject returns a wrapped NLerpBlock JavaScript class.
-func NLerpBlockFromJSObject(p js.Value) *NLerpBlock {
-	return &NLerpBlock{NodeMaterialBlockFromJSObject(p)}
+func NLerpBlockFromJSObject(p js.Value, ctx js.Value) *NLerpBlock {
+	return &NLerpBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewNLerpBlock returns a new NLerpBlock object.
@@ -29,7 +32,7 @@ func NLerpBlockFromJSObject(p js.Value) *NLerpBlock {
 // https://doc.babylonjs.com/api/classes/babylon.nlerpblock
 func (ba *Babylon) NewNLerpBlock(name string) *NLerpBlock {
 	p := ba.ctx.Get("NLerpBlock").New(name)
-	return NLerpBlockFromJSObject(p)
+	return NLerpBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

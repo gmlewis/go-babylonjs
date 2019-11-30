@@ -8,7 +8,10 @@ import (
 
 // MeshAssetTask represents a babylon.js MeshAssetTask.
 // Define a task used by AssetsManager to load meshes
-type MeshAssetTask struct{ *AbstractAssetTask }
+type MeshAssetTask struct {
+	*AbstractAssetTask
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (m *MeshAssetTask) JSObject() js.Value { return m.p }
@@ -16,12 +19,12 @@ func (m *MeshAssetTask) JSObject() js.Value { return m.p }
 // MeshAssetTask returns a MeshAssetTask JavaScript class.
 func (ba *Babylon) MeshAssetTask() *MeshAssetTask {
 	p := ba.ctx.Get("MeshAssetTask")
-	return MeshAssetTaskFromJSObject(p)
+	return MeshAssetTaskFromJSObject(p, ba.ctx)
 }
 
 // MeshAssetTaskFromJSObject returns a wrapped MeshAssetTask JavaScript class.
-func MeshAssetTaskFromJSObject(p js.Value) *MeshAssetTask {
-	return &MeshAssetTask{AbstractAssetTaskFromJSObject(p)}
+func MeshAssetTaskFromJSObject(p js.Value, ctx js.Value) *MeshAssetTask {
+	return &MeshAssetTask{AbstractAssetTask: AbstractAssetTaskFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewMeshAssetTask returns a new MeshAssetTask object.
@@ -29,7 +32,7 @@ func MeshAssetTaskFromJSObject(p js.Value) *MeshAssetTask {
 // https://doc.babylonjs.com/api/classes/babylon.meshassettask
 func (ba *Babylon) NewMeshAssetTask(name string, meshesNames interface{}, rootUrl string, sceneFilename string) *MeshAssetTask {
 	p := ba.ctx.Get("MeshAssetTask").New(name, meshesNames, rootUrl, sceneFilename)
-	return MeshAssetTaskFromJSObject(p)
+	return MeshAssetTaskFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

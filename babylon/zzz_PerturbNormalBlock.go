@@ -8,7 +8,10 @@ import (
 
 // PerturbNormalBlock represents a babylon.js PerturbNormalBlock.
 // Block used to pertub normals based on a normal map
-type PerturbNormalBlock struct{ *NodeMaterialBlock }
+type PerturbNormalBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (p *PerturbNormalBlock) JSObject() js.Value { return p.p }
@@ -16,12 +19,12 @@ func (p *PerturbNormalBlock) JSObject() js.Value { return p.p }
 // PerturbNormalBlock returns a PerturbNormalBlock JavaScript class.
 func (ba *Babylon) PerturbNormalBlock() *PerturbNormalBlock {
 	p := ba.ctx.Get("PerturbNormalBlock")
-	return PerturbNormalBlockFromJSObject(p)
+	return PerturbNormalBlockFromJSObject(p, ba.ctx)
 }
 
 // PerturbNormalBlockFromJSObject returns a wrapped PerturbNormalBlock JavaScript class.
-func PerturbNormalBlockFromJSObject(p js.Value) *PerturbNormalBlock {
-	return &PerturbNormalBlock{NodeMaterialBlockFromJSObject(p)}
+func PerturbNormalBlockFromJSObject(p js.Value, ctx js.Value) *PerturbNormalBlock {
+	return &PerturbNormalBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewPerturbNormalBlock returns a new PerturbNormalBlock object.
@@ -29,7 +32,7 @@ func PerturbNormalBlockFromJSObject(p js.Value) *PerturbNormalBlock {
 // https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock
 func (ba *Babylon) NewPerturbNormalBlock(name string) *PerturbNormalBlock {
 	p := ba.ctx.Get("PerturbNormalBlock").New(name)
-	return PerturbNormalBlockFromJSObject(p)
+	return PerturbNormalBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

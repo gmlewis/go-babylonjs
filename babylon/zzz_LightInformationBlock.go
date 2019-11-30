@@ -8,7 +8,10 @@ import (
 
 // LightInformationBlock represents a babylon.js LightInformationBlock.
 // Block used to get data information from a light
-type LightInformationBlock struct{ *NodeMaterialBlock }
+type LightInformationBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (l *LightInformationBlock) JSObject() js.Value { return l.p }
@@ -16,12 +19,12 @@ func (l *LightInformationBlock) JSObject() js.Value { return l.p }
 // LightInformationBlock returns a LightInformationBlock JavaScript class.
 func (ba *Babylon) LightInformationBlock() *LightInformationBlock {
 	p := ba.ctx.Get("LightInformationBlock")
-	return LightInformationBlockFromJSObject(p)
+	return LightInformationBlockFromJSObject(p, ba.ctx)
 }
 
 // LightInformationBlockFromJSObject returns a wrapped LightInformationBlock JavaScript class.
-func LightInformationBlockFromJSObject(p js.Value) *LightInformationBlock {
-	return &LightInformationBlock{NodeMaterialBlockFromJSObject(p)}
+func LightInformationBlockFromJSObject(p js.Value, ctx js.Value) *LightInformationBlock {
+	return &LightInformationBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewLightInformationBlock returns a new LightInformationBlock object.
@@ -29,7 +32,7 @@ func LightInformationBlockFromJSObject(p js.Value) *LightInformationBlock {
 // https://doc.babylonjs.com/api/classes/babylon.lightinformationblock
 func (ba *Babylon) NewLightInformationBlock(name string) *LightInformationBlock {
 	p := ba.ctx.Get("LightInformationBlock").New(name)
-	return LightInformationBlockFromJSObject(p)
+	return LightInformationBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

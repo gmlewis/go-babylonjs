@@ -8,7 +8,10 @@ import (
 
 // Effect represents a babylon.js Effect.
 // Effect containing vertex and fragment shader that can be executed on an object.
-type Effect struct{ p js.Value }
+type Effect struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (e *Effect) JSObject() js.Value { return e.p }
@@ -16,12 +19,12 @@ func (e *Effect) JSObject() js.Value { return e.p }
 // Effect returns a Effect JavaScript class.
 func (ba *Babylon) Effect() *Effect {
 	p := ba.ctx.Get("Effect")
-	return EffectFromJSObject(p)
+	return EffectFromJSObject(p, ba.ctx)
 }
 
 // EffectFromJSObject returns a wrapped Effect JavaScript class.
-func EffectFromJSObject(p js.Value) *Effect {
-	return &Effect{p: p}
+func EffectFromJSObject(p js.Value, ctx js.Value) *Effect {
+	return &Effect{p: p, ctx: ctx}
 }
 
 // NewEffectOpts contains optional parameters for NewEffect.
@@ -50,7 +53,7 @@ func (ba *Babylon) NewEffect(baseName interface{}, attributesNamesOrOptions stri
 	}
 
 	p := ba.ctx.Get("Effect").New(baseName, attributesNamesOrOptions, uniformsNamesOrEngine, opts.Samplers.JSObject(), opts.Engine.JSObject(), opts.Defines.JSObject(), opts.Fallbacks.JSObject(), opts.OnCompiled, opts.OnError, opts.IndexParameters)
-	return EffectFromJSObject(p)
+	return EffectFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

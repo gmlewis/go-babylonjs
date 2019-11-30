@@ -8,7 +8,10 @@ import (
 
 // AxesViewer represents a babylon.js AxesViewer.
 // The Axes viewer will show 3 axes in a specific point in space
-type AxesViewer struct{ p js.Value }
+type AxesViewer struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (a *AxesViewer) JSObject() js.Value { return a.p }
@@ -16,12 +19,12 @@ func (a *AxesViewer) JSObject() js.Value { return a.p }
 // AxesViewer returns a AxesViewer JavaScript class.
 func (ba *Babylon) AxesViewer() *AxesViewer {
 	p := ba.ctx.Get("AxesViewer")
-	return AxesViewerFromJSObject(p)
+	return AxesViewerFromJSObject(p, ba.ctx)
 }
 
 // AxesViewerFromJSObject returns a wrapped AxesViewer JavaScript class.
-func AxesViewerFromJSObject(p js.Value) *AxesViewer {
-	return &AxesViewer{p: p}
+func AxesViewerFromJSObject(p js.Value, ctx js.Value) *AxesViewer {
+	return &AxesViewer{p: p, ctx: ctx}
 }
 
 // NewAxesViewerOpts contains optional parameters for NewAxesViewer.
@@ -46,7 +49,7 @@ func (ba *Babylon) NewAxesViewer(scene *Scene, opts *NewAxesViewerOpts) *AxesVie
 	}
 
 	p := ba.ctx.Get("AxesViewer").New(scene.JSObject(), opts.ScaleLines.JSObject(), opts.RenderingGroupId.JSObject(), opts.XAxis.JSObject(), opts.YAxis.JSObject(), opts.ZAxis.JSObject())
-	return AxesViewerFromJSObject(p)
+	return AxesViewerFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

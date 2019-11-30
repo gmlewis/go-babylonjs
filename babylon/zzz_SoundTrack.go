@@ -11,7 +11,10 @@ import (
 // It will be also used in a future release to apply effects on a specific track.
 //
 // See: http://doc.babylonjs.com/how_to/playing_sounds_and_music#using-sound-tracks
-type SoundTrack struct{ p js.Value }
+type SoundTrack struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *SoundTrack) JSObject() js.Value { return s.p }
@@ -19,12 +22,12 @@ func (s *SoundTrack) JSObject() js.Value { return s.p }
 // SoundTrack returns a SoundTrack JavaScript class.
 func (ba *Babylon) SoundTrack() *SoundTrack {
 	p := ba.ctx.Get("SoundTrack")
-	return SoundTrackFromJSObject(p)
+	return SoundTrackFromJSObject(p, ba.ctx)
 }
 
 // SoundTrackFromJSObject returns a wrapped SoundTrack JavaScript class.
-func SoundTrackFromJSObject(p js.Value) *SoundTrack {
-	return &SoundTrack{p: p}
+func SoundTrackFromJSObject(p js.Value, ctx js.Value) *SoundTrack {
+	return &SoundTrack{p: p, ctx: ctx}
 }
 
 // NewSoundTrackOpts contains optional parameters for NewSoundTrack.
@@ -41,7 +44,7 @@ func (ba *Babylon) NewSoundTrack(scene *Scene, opts *NewSoundTrackOpts) *SoundTr
 	}
 
 	p := ba.ctx.Get("SoundTrack").New(scene.JSObject(), opts.Options.JSObject())
-	return SoundTrackFromJSObject(p)
+	return SoundTrackFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

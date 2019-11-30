@@ -11,7 +11,10 @@ import (
 // which still works and will still be found in many Playgrounds.
 //
 // See: http://doc.babylonjs.com/features/cameras#universal-camera
-type UniversalCamera struct{ *TouchCamera }
+type UniversalCamera struct {
+	*TouchCamera
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (u *UniversalCamera) JSObject() js.Value { return u.p }
@@ -19,12 +22,12 @@ func (u *UniversalCamera) JSObject() js.Value { return u.p }
 // UniversalCamera returns a UniversalCamera JavaScript class.
 func (ba *Babylon) UniversalCamera() *UniversalCamera {
 	p := ba.ctx.Get("UniversalCamera")
-	return UniversalCameraFromJSObject(p)
+	return UniversalCameraFromJSObject(p, ba.ctx)
 }
 
 // UniversalCameraFromJSObject returns a wrapped UniversalCamera JavaScript class.
-func UniversalCameraFromJSObject(p js.Value) *UniversalCamera {
-	return &UniversalCamera{TouchCameraFromJSObject(p)}
+func UniversalCameraFromJSObject(p js.Value, ctx js.Value) *UniversalCamera {
+	return &UniversalCamera{TouchCamera: TouchCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewUniversalCamera returns a new UniversalCamera object.
@@ -32,7 +35,7 @@ func UniversalCameraFromJSObject(p js.Value) *UniversalCamera {
 // https://doc.babylonjs.com/api/classes/babylon.universalcamera
 func (ba *Babylon) NewUniversalCamera(name string, position *Vector3, scene *Scene) *UniversalCamera {
 	p := ba.ctx.Get("UniversalCamera").New(name, position.JSObject(), scene.JSObject())
-	return UniversalCameraFromJSObject(p)
+	return UniversalCameraFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -8,7 +8,10 @@ import (
 
 // SubMesh represents a babylon.js SubMesh.
 // Defines a subdivision inside a mesh
-type SubMesh struct{ *BaseSubMesh }
+type SubMesh struct {
+	*BaseSubMesh
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *SubMesh) JSObject() js.Value { return s.p }
@@ -16,12 +19,12 @@ func (s *SubMesh) JSObject() js.Value { return s.p }
 // SubMesh returns a SubMesh JavaScript class.
 func (ba *Babylon) SubMesh() *SubMesh {
 	p := ba.ctx.Get("SubMesh")
-	return SubMeshFromJSObject(p)
+	return SubMeshFromJSObject(p, ba.ctx)
 }
 
 // SubMeshFromJSObject returns a wrapped SubMesh JavaScript class.
-func SubMeshFromJSObject(p js.Value) *SubMesh {
-	return &SubMesh{BaseSubMeshFromJSObject(p)}
+func SubMeshFromJSObject(p js.Value, ctx js.Value) *SubMesh {
+	return &SubMesh{BaseSubMesh: BaseSubMeshFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewSubMeshOpts contains optional parameters for NewSubMesh.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewSubMesh(materialIndex float64, verticesStart float64, vert
 	}
 
 	p := ba.ctx.Get("SubMesh").New(materialIndex, verticesStart, verticesCount, indexStart, indexCount, mesh.JSObject(), opts.RenderingMesh.JSObject(), opts.CreateBoundingBox.JSObject())
-	return SubMeshFromJSObject(p)
+	return SubMeshFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

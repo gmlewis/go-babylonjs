@@ -8,7 +8,10 @@ import (
 
 // EquiRectangularCubeTextureAssetTask represents a babylon.js EquiRectangularCubeTextureAssetTask.
 // Define a task used by AssetsManager to load Equirectangular cube textures
-type EquiRectangularCubeTextureAssetTask struct{ *AbstractAssetTask }
+type EquiRectangularCubeTextureAssetTask struct {
+	*AbstractAssetTask
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (e *EquiRectangularCubeTextureAssetTask) JSObject() js.Value { return e.p }
@@ -16,12 +19,12 @@ func (e *EquiRectangularCubeTextureAssetTask) JSObject() js.Value { return e.p }
 // EquiRectangularCubeTextureAssetTask returns a EquiRectangularCubeTextureAssetTask JavaScript class.
 func (ba *Babylon) EquiRectangularCubeTextureAssetTask() *EquiRectangularCubeTextureAssetTask {
 	p := ba.ctx.Get("EquiRectangularCubeTextureAssetTask")
-	return EquiRectangularCubeTextureAssetTaskFromJSObject(p)
+	return EquiRectangularCubeTextureAssetTaskFromJSObject(p, ba.ctx)
 }
 
 // EquiRectangularCubeTextureAssetTaskFromJSObject returns a wrapped EquiRectangularCubeTextureAssetTask JavaScript class.
-func EquiRectangularCubeTextureAssetTaskFromJSObject(p js.Value) *EquiRectangularCubeTextureAssetTask {
-	return &EquiRectangularCubeTextureAssetTask{AbstractAssetTaskFromJSObject(p)}
+func EquiRectangularCubeTextureAssetTaskFromJSObject(p js.Value, ctx js.Value) *EquiRectangularCubeTextureAssetTask {
+	return &EquiRectangularCubeTextureAssetTask{AbstractAssetTask: AbstractAssetTaskFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewEquiRectangularCubeTextureAssetTaskOpts contains optional parameters for NewEquiRectangularCubeTextureAssetTask.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewEquiRectangularCubeTextureAssetTask(name string, url strin
 	}
 
 	p := ba.ctx.Get("EquiRectangularCubeTextureAssetTask").New(name, url, size, opts.NoMipmap.JSObject(), opts.GammaSpace.JSObject())
-	return EquiRectangularCubeTextureAssetTaskFromJSObject(p)
+	return EquiRectangularCubeTextureAssetTaskFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

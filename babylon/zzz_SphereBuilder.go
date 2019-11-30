@@ -8,7 +8,10 @@ import (
 
 // SphereBuilder represents a babylon.js SphereBuilder.
 // Class containing static functions to help procedurally build meshes
-type SphereBuilder struct{ p js.Value }
+type SphereBuilder struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *SphereBuilder) JSObject() js.Value { return s.p }
@@ -16,12 +19,12 @@ func (s *SphereBuilder) JSObject() js.Value { return s.p }
 // SphereBuilder returns a SphereBuilder JavaScript class.
 func (ba *Babylon) SphereBuilder() *SphereBuilder {
 	p := ba.ctx.Get("SphereBuilder")
-	return SphereBuilderFromJSObject(p)
+	return SphereBuilderFromJSObject(p, ba.ctx)
 }
 
 // SphereBuilderFromJSObject returns a wrapped SphereBuilder JavaScript class.
-func SphereBuilderFromJSObject(p js.Value) *SphereBuilder {
-	return &SphereBuilder{p: p}
+func SphereBuilderFromJSObject(p js.Value, ctx js.Value) *SphereBuilder {
+	return &SphereBuilder{p: p, ctx: ctx}
 }
 
 // TODO: methods

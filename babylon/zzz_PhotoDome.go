@@ -11,7 +11,10 @@ import (
 // As a subclass of TransformNode, this allow parenting to the camera with different locations in the scene.
 // This class achieves its effect with a Texture and a correctly configured BackgroundMaterial on an inverted sphere.
 // Potential additions to this helper include zoom and and non-infinite distance rendering effects.
-type PhotoDome struct{ *TransformNode }
+type PhotoDome struct {
+	*TransformNode
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (p *PhotoDome) JSObject() js.Value { return p.p }
@@ -19,12 +22,12 @@ func (p *PhotoDome) JSObject() js.Value { return p.p }
 // PhotoDome returns a PhotoDome JavaScript class.
 func (ba *Babylon) PhotoDome() *PhotoDome {
 	p := ba.ctx.Get("PhotoDome")
-	return PhotoDomeFromJSObject(p)
+	return PhotoDomeFromJSObject(p, ba.ctx)
 }
 
 // PhotoDomeFromJSObject returns a wrapped PhotoDome JavaScript class.
-func PhotoDomeFromJSObject(p js.Value) *PhotoDome {
-	return &PhotoDome{TransformNodeFromJSObject(p)}
+func PhotoDomeFromJSObject(p js.Value, ctx js.Value) *PhotoDome {
+	return &PhotoDome{TransformNode: TransformNodeFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewPhotoDomeOpts contains optional parameters for NewPhotoDome.
@@ -41,7 +44,7 @@ func (ba *Babylon) NewPhotoDome(name string, urlOfPhoto string, options js.Value
 	}
 
 	p := ba.ctx.Get("PhotoDome").New(name, urlOfPhoto, options, scene.JSObject(), opts.OnError)
-	return PhotoDomeFromJSObject(p)
+	return PhotoDomeFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

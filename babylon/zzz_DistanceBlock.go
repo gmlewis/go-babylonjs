@@ -8,7 +8,10 @@ import (
 
 // DistanceBlock represents a babylon.js DistanceBlock.
 // Block used to get the distance between 2 values
-type DistanceBlock struct{ *NodeMaterialBlock }
+type DistanceBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (d *DistanceBlock) JSObject() js.Value { return d.p }
@@ -16,12 +19,12 @@ func (d *DistanceBlock) JSObject() js.Value { return d.p }
 // DistanceBlock returns a DistanceBlock JavaScript class.
 func (ba *Babylon) DistanceBlock() *DistanceBlock {
 	p := ba.ctx.Get("DistanceBlock")
-	return DistanceBlockFromJSObject(p)
+	return DistanceBlockFromJSObject(p, ba.ctx)
 }
 
 // DistanceBlockFromJSObject returns a wrapped DistanceBlock JavaScript class.
-func DistanceBlockFromJSObject(p js.Value) *DistanceBlock {
-	return &DistanceBlock{NodeMaterialBlockFromJSObject(p)}
+func DistanceBlockFromJSObject(p js.Value, ctx js.Value) *DistanceBlock {
+	return &DistanceBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewDistanceBlock returns a new DistanceBlock object.
@@ -29,7 +32,7 @@ func DistanceBlockFromJSObject(p js.Value) *DistanceBlock {
 // https://doc.babylonjs.com/api/classes/babylon.distanceblock
 func (ba *Babylon) NewDistanceBlock(name string) *DistanceBlock {
 	p := ba.ctx.Get("DistanceBlock").New(name)
-	return DistanceBlockFromJSObject(p)
+	return DistanceBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

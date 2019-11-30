@@ -8,7 +8,10 @@ import (
 
 // ParticleSystemSet represents a babylon.js ParticleSystemSet.
 // Represents a set of particle systems working together to create a specific effect
-type ParticleSystemSet struct{ p js.Value }
+type ParticleSystemSet struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (p *ParticleSystemSet) JSObject() js.Value { return p.p }
@@ -16,12 +19,12 @@ func (p *ParticleSystemSet) JSObject() js.Value { return p.p }
 // ParticleSystemSet returns a ParticleSystemSet JavaScript class.
 func (ba *Babylon) ParticleSystemSet() *ParticleSystemSet {
 	p := ba.ctx.Get("ParticleSystemSet")
-	return ParticleSystemSetFromJSObject(p)
+	return ParticleSystemSetFromJSObject(p, ba.ctx)
 }
 
 // ParticleSystemSetFromJSObject returns a wrapped ParticleSystemSet JavaScript class.
-func ParticleSystemSetFromJSObject(p js.Value) *ParticleSystemSet {
-	return &ParticleSystemSet{p: p}
+func ParticleSystemSetFromJSObject(p js.Value, ctx js.Value) *ParticleSystemSet {
+	return &ParticleSystemSet{p: p, ctx: ctx}
 }
 
 // TODO: methods

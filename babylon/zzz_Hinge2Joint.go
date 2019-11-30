@@ -10,7 +10,10 @@ import (
 // This class represents a dual hinge physics joint (same as wheel joint)
 //
 // See: https://doc.babylonjs.com/how_to/using_the_physics_engine
-type Hinge2Joint struct{ *MotorEnabledJoint }
+type Hinge2Joint struct {
+	*MotorEnabledJoint
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (h *Hinge2Joint) JSObject() js.Value { return h.p }
@@ -18,12 +21,12 @@ func (h *Hinge2Joint) JSObject() js.Value { return h.p }
 // Hinge2Joint returns a Hinge2Joint JavaScript class.
 func (ba *Babylon) Hinge2Joint() *Hinge2Joint {
 	p := ba.ctx.Get("Hinge2Joint")
-	return Hinge2JointFromJSObject(p)
+	return Hinge2JointFromJSObject(p, ba.ctx)
 }
 
 // Hinge2JointFromJSObject returns a wrapped Hinge2Joint JavaScript class.
-func Hinge2JointFromJSObject(p js.Value) *Hinge2Joint {
-	return &Hinge2Joint{MotorEnabledJointFromJSObject(p)}
+func Hinge2JointFromJSObject(p js.Value, ctx js.Value) *Hinge2Joint {
+	return &Hinge2Joint{MotorEnabledJoint: MotorEnabledJointFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewHinge2Joint returns a new Hinge2Joint object.
@@ -31,7 +34,7 @@ func Hinge2JointFromJSObject(p js.Value) *Hinge2Joint {
 // https://doc.babylonjs.com/api/classes/babylon.hinge2joint
 func (ba *Babylon) NewHinge2Joint(jointData js.Value) *Hinge2Joint {
 	p := ba.ctx.Get("Hinge2Joint").New(jointData)
-	return Hinge2JointFromJSObject(p)
+	return Hinge2JointFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -8,7 +8,10 @@ import (
 
 // TriPlanarMaterial represents a babylon.js TriPlanarMaterial.
 //
-type TriPlanarMaterial struct{ p js.Value }
+type TriPlanarMaterial struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (t *TriPlanarMaterial) JSObject() js.Value { return t.p }
@@ -16,12 +19,12 @@ func (t *TriPlanarMaterial) JSObject() js.Value { return t.p }
 // TriPlanarMaterial returns a TriPlanarMaterial JavaScript class.
 func (ba *Babylon) TriPlanarMaterial() *TriPlanarMaterial {
 	p := ba.ctx.Get("TriPlanarMaterial")
-	return TriPlanarMaterialFromJSObject(p)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
 }
 
 // TriPlanarMaterialFromJSObject returns a wrapped TriPlanarMaterial JavaScript class.
-func TriPlanarMaterialFromJSObject(p js.Value) *TriPlanarMaterial {
-	return &TriPlanarMaterial{p: p}
+func TriPlanarMaterialFromJSObject(p js.Value, ctx js.Value) *TriPlanarMaterial {
+	return &TriPlanarMaterial{p: p, ctx: ctx}
 }
 
 // NewTriPlanarMaterial returns a new TriPlanarMaterial object.
@@ -29,7 +32,7 @@ func TriPlanarMaterialFromJSObject(p js.Value) *TriPlanarMaterial {
 // https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial
 func (ba *Babylon) NewTriPlanarMaterial(name string, scene *Scene) *TriPlanarMaterial {
 	p := ba.ctx.Get("TriPlanarMaterial").New(name, scene.JSObject())
-	return TriPlanarMaterialFromJSObject(p)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

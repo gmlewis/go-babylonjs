@@ -8,7 +8,10 @@ import (
 
 // PointerInfoBase represents a babylon.js PointerInfoBase.
 // Base class of pointer info types.
-type PointerInfoBase struct{ p js.Value }
+type PointerInfoBase struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (p *PointerInfoBase) JSObject() js.Value { return p.p }
@@ -16,12 +19,12 @@ func (p *PointerInfoBase) JSObject() js.Value { return p.p }
 // PointerInfoBase returns a PointerInfoBase JavaScript class.
 func (ba *Babylon) PointerInfoBase() *PointerInfoBase {
 	p := ba.ctx.Get("PointerInfoBase")
-	return PointerInfoBaseFromJSObject(p)
+	return PointerInfoBaseFromJSObject(p, ba.ctx)
 }
 
 // PointerInfoBaseFromJSObject returns a wrapped PointerInfoBase JavaScript class.
-func PointerInfoBaseFromJSObject(p js.Value) *PointerInfoBase {
-	return &PointerInfoBase{p: p}
+func PointerInfoBaseFromJSObject(p js.Value, ctx js.Value) *PointerInfoBase {
+	return &PointerInfoBase{p: p, ctx: ctx}
 }
 
 // NewPointerInfoBase returns a new PointerInfoBase object.
@@ -29,7 +32,7 @@ func PointerInfoBaseFromJSObject(p js.Value) *PointerInfoBase {
 // https://doc.babylonjs.com/api/classes/babylon.pointerinfobase
 func (ba *Babylon) NewPointerInfoBase(jsType float64, event js.Value) *PointerInfoBase {
 	p := ba.ctx.Get("PointerInfoBase").New(jsType, event)
-	return PointerInfoBaseFromJSObject(p)
+	return PointerInfoBaseFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

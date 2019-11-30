@@ -8,7 +8,10 @@ import (
 
 // CubeTextureAssetTask represents a babylon.js CubeTextureAssetTask.
 // Define a task used by AssetsManager to load cube textures
-type CubeTextureAssetTask struct{ *AbstractAssetTask }
+type CubeTextureAssetTask struct {
+	*AbstractAssetTask
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (c *CubeTextureAssetTask) JSObject() js.Value { return c.p }
@@ -16,12 +19,12 @@ func (c *CubeTextureAssetTask) JSObject() js.Value { return c.p }
 // CubeTextureAssetTask returns a CubeTextureAssetTask JavaScript class.
 func (ba *Babylon) CubeTextureAssetTask() *CubeTextureAssetTask {
 	p := ba.ctx.Get("CubeTextureAssetTask")
-	return CubeTextureAssetTaskFromJSObject(p)
+	return CubeTextureAssetTaskFromJSObject(p, ba.ctx)
 }
 
 // CubeTextureAssetTaskFromJSObject returns a wrapped CubeTextureAssetTask JavaScript class.
-func CubeTextureAssetTaskFromJSObject(p js.Value) *CubeTextureAssetTask {
-	return &CubeTextureAssetTask{AbstractAssetTaskFromJSObject(p)}
+func CubeTextureAssetTaskFromJSObject(p js.Value, ctx js.Value) *CubeTextureAssetTask {
+	return &CubeTextureAssetTask{AbstractAssetTask: AbstractAssetTaskFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewCubeTextureAssetTaskOpts contains optional parameters for NewCubeTextureAssetTask.
@@ -42,7 +45,7 @@ func (ba *Babylon) NewCubeTextureAssetTask(name string, url string, opts *NewCub
 	}
 
 	p := ba.ctx.Get("CubeTextureAssetTask").New(name, url, opts.Extensions.JSObject(), opts.NoMipmap.JSObject(), opts.Files.JSObject())
-	return CubeTextureAssetTaskFromJSObject(p)
+	return CubeTextureAssetTaskFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

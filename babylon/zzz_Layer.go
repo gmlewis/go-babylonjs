@@ -11,7 +11,10 @@ import (
 // This can be useful to display a picture in the  background of your scene for instance.
 //
 // See: https://www.babylonjs-playground.com/#08A2BS#1
-type Layer struct{ p js.Value }
+type Layer struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (l *Layer) JSObject() js.Value { return l.p }
@@ -19,12 +22,12 @@ func (l *Layer) JSObject() js.Value { return l.p }
 // Layer returns a Layer JavaScript class.
 func (ba *Babylon) Layer() *Layer {
 	p := ba.ctx.Get("Layer")
-	return LayerFromJSObject(p)
+	return LayerFromJSObject(p, ba.ctx)
 }
 
 // LayerFromJSObject returns a wrapped Layer JavaScript class.
-func LayerFromJSObject(p js.Value) *Layer {
-	return &Layer{p: p}
+func LayerFromJSObject(p js.Value, ctx js.Value) *Layer {
+	return &Layer{p: p, ctx: ctx}
 }
 
 // NewLayerOpts contains optional parameters for NewLayer.
@@ -43,7 +46,7 @@ func (ba *Babylon) NewLayer(name string, imgUrl string, scene *Scene, opts *NewL
 	}
 
 	p := ba.ctx.Get("Layer").New(name, imgUrl, scene.JSObject(), opts.IsBackground.JSObject(), opts.Color.JSObject())
-	return LayerFromJSObject(p)
+	return LayerFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

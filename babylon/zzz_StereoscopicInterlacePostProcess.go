@@ -8,7 +8,10 @@ import (
 
 // StereoscopicInterlacePostProcess represents a babylon.js StereoscopicInterlacePostProcess.
 // StereoscopicInterlacePostProcess used to render stereo views from a rigged camera
-type StereoscopicInterlacePostProcess struct{ *PostProcess }
+type StereoscopicInterlacePostProcess struct {
+	*PostProcess
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *StereoscopicInterlacePostProcess) JSObject() js.Value { return s.p }
@@ -16,12 +19,12 @@ func (s *StereoscopicInterlacePostProcess) JSObject() js.Value { return s.p }
 // StereoscopicInterlacePostProcess returns a StereoscopicInterlacePostProcess JavaScript class.
 func (ba *Babylon) StereoscopicInterlacePostProcess() *StereoscopicInterlacePostProcess {
 	p := ba.ctx.Get("StereoscopicInterlacePostProcess")
-	return StereoscopicInterlacePostProcessFromJSObject(p)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
 }
 
 // StereoscopicInterlacePostProcessFromJSObject returns a wrapped StereoscopicInterlacePostProcess JavaScript class.
-func StereoscopicInterlacePostProcessFromJSObject(p js.Value) *StereoscopicInterlacePostProcess {
-	return &StereoscopicInterlacePostProcess{PostProcessFromJSObject(p)}
+func StereoscopicInterlacePostProcessFromJSObject(p js.Value, ctx js.Value) *StereoscopicInterlacePostProcess {
+	return &StereoscopicInterlacePostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewStereoscopicInterlacePostProcessOpts contains optional parameters for NewStereoscopicInterlacePostProcess.
@@ -42,7 +45,7 @@ func (ba *Babylon) NewStereoscopicInterlacePostProcess(name string, rigCameras *
 	}
 
 	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(name, rigCameras.JSObject(), isStereoscopicHoriz, opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject())
-	return StereoscopicInterlacePostProcessFromJSObject(p)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

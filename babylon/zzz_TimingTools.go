@@ -8,7 +8,10 @@ import (
 
 // TimingTools represents a babylon.js TimingTools.
 // Class used to provide helper for timing
-type TimingTools struct{ p js.Value }
+type TimingTools struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (t *TimingTools) JSObject() js.Value { return t.p }
@@ -16,12 +19,12 @@ func (t *TimingTools) JSObject() js.Value { return t.p }
 // TimingTools returns a TimingTools JavaScript class.
 func (ba *Babylon) TimingTools() *TimingTools {
 	p := ba.ctx.Get("TimingTools")
-	return TimingToolsFromJSObject(p)
+	return TimingToolsFromJSObject(p, ba.ctx)
 }
 
 // TimingToolsFromJSObject returns a wrapped TimingTools JavaScript class.
-func TimingToolsFromJSObject(p js.Value) *TimingTools {
-	return &TimingTools{p: p}
+func TimingToolsFromJSObject(p js.Value, ctx js.Value) *TimingTools {
+	return &TimingTools{p: p, ctx: ctx}
 }
 
 // TODO: methods

@@ -8,7 +8,10 @@ import (
 
 // PoseEnabledController represents a babylon.js PoseEnabledController.
 // Defines the PoseEnabledController object that contains state of a vr capable controller
-type PoseEnabledController struct{ *Gamepad }
+type PoseEnabledController struct {
+	*Gamepad
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (p *PoseEnabledController) JSObject() js.Value { return p.p }
@@ -16,12 +19,12 @@ func (p *PoseEnabledController) JSObject() js.Value { return p.p }
 // PoseEnabledController returns a PoseEnabledController JavaScript class.
 func (ba *Babylon) PoseEnabledController() *PoseEnabledController {
 	p := ba.ctx.Get("PoseEnabledController")
-	return PoseEnabledControllerFromJSObject(p)
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
 }
 
 // PoseEnabledControllerFromJSObject returns a wrapped PoseEnabledController JavaScript class.
-func PoseEnabledControllerFromJSObject(p js.Value) *PoseEnabledController {
-	return &PoseEnabledController{GamepadFromJSObject(p)}
+func PoseEnabledControllerFromJSObject(p js.Value, ctx js.Value) *PoseEnabledController {
+	return &PoseEnabledController{Gamepad: GamepadFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewPoseEnabledController returns a new PoseEnabledController object.
@@ -29,7 +32,7 @@ func PoseEnabledControllerFromJSObject(p js.Value) *PoseEnabledController {
 // https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller
 func (ba *Babylon) NewPoseEnabledController(browserGamepad interface{}) *PoseEnabledController {
 	p := ba.ctx.Get("PoseEnabledController").New(browserGamepad)
-	return PoseEnabledControllerFromJSObject(p)
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -8,7 +8,10 @@ import (
 
 // PlaneRotationGizmo represents a babylon.js PlaneRotationGizmo.
 // Single plane rotation gizmo
-type PlaneRotationGizmo struct{ *Gizmo }
+type PlaneRotationGizmo struct {
+	*Gizmo
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (p *PlaneRotationGizmo) JSObject() js.Value { return p.p }
@@ -16,12 +19,12 @@ func (p *PlaneRotationGizmo) JSObject() js.Value { return p.p }
 // PlaneRotationGizmo returns a PlaneRotationGizmo JavaScript class.
 func (ba *Babylon) PlaneRotationGizmo() *PlaneRotationGizmo {
 	p := ba.ctx.Get("PlaneRotationGizmo")
-	return PlaneRotationGizmoFromJSObject(p)
+	return PlaneRotationGizmoFromJSObject(p, ba.ctx)
 }
 
 // PlaneRotationGizmoFromJSObject returns a wrapped PlaneRotationGizmo JavaScript class.
-func PlaneRotationGizmoFromJSObject(p js.Value) *PlaneRotationGizmo {
-	return &PlaneRotationGizmo{GizmoFromJSObject(p)}
+func PlaneRotationGizmoFromJSObject(p js.Value, ctx js.Value) *PlaneRotationGizmo {
+	return &PlaneRotationGizmo{Gizmo: GizmoFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewPlaneRotationGizmoOpts contains optional parameters for NewPlaneRotationGizmo.
@@ -46,7 +49,7 @@ func (ba *Babylon) NewPlaneRotationGizmo(planeNormal *Vector3, opts *NewPlaneRot
 	}
 
 	p := ba.ctx.Get("PlaneRotationGizmo").New(planeNormal.JSObject(), opts.Color.JSObject(), opts.GizmoLayer.JSObject(), opts.Tessellation.JSObject(), opts.Parent.JSObject(), opts.UseEulerRotation.JSObject())
-	return PlaneRotationGizmoFromJSObject(p)
+	return PlaneRotationGizmoFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

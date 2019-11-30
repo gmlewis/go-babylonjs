@@ -8,7 +8,10 @@ import (
 
 // DivideBlock represents a babylon.js DivideBlock.
 // Block used to divide 2 vectors
-type DivideBlock struct{ *NodeMaterialBlock }
+type DivideBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (d *DivideBlock) JSObject() js.Value { return d.p }
@@ -16,12 +19,12 @@ func (d *DivideBlock) JSObject() js.Value { return d.p }
 // DivideBlock returns a DivideBlock JavaScript class.
 func (ba *Babylon) DivideBlock() *DivideBlock {
 	p := ba.ctx.Get("DivideBlock")
-	return DivideBlockFromJSObject(p)
+	return DivideBlockFromJSObject(p, ba.ctx)
 }
 
 // DivideBlockFromJSObject returns a wrapped DivideBlock JavaScript class.
-func DivideBlockFromJSObject(p js.Value) *DivideBlock {
-	return &DivideBlock{NodeMaterialBlockFromJSObject(p)}
+func DivideBlockFromJSObject(p js.Value, ctx js.Value) *DivideBlock {
+	return &DivideBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewDivideBlock returns a new DivideBlock object.
@@ -29,7 +32,7 @@ func DivideBlockFromJSObject(p js.Value) *DivideBlock {
 // https://doc.babylonjs.com/api/classes/babylon.divideblock
 func (ba *Babylon) NewDivideBlock(name string) *DivideBlock {
 	p := ba.ctx.Get("DivideBlock").New(name)
-	return DivideBlockFromJSObject(p)
+	return DivideBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

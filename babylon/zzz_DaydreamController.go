@@ -8,7 +8,10 @@ import (
 
 // DaydreamController represents a babylon.js DaydreamController.
 // Google Daydream controller
-type DaydreamController struct{ *WebVRController }
+type DaydreamController struct {
+	*WebVRController
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (d *DaydreamController) JSObject() js.Value { return d.p }
@@ -16,12 +19,12 @@ func (d *DaydreamController) JSObject() js.Value { return d.p }
 // DaydreamController returns a DaydreamController JavaScript class.
 func (ba *Babylon) DaydreamController() *DaydreamController {
 	p := ba.ctx.Get("DaydreamController")
-	return DaydreamControllerFromJSObject(p)
+	return DaydreamControllerFromJSObject(p, ba.ctx)
 }
 
 // DaydreamControllerFromJSObject returns a wrapped DaydreamController JavaScript class.
-func DaydreamControllerFromJSObject(p js.Value) *DaydreamController {
-	return &DaydreamController{WebVRControllerFromJSObject(p)}
+func DaydreamControllerFromJSObject(p js.Value, ctx js.Value) *DaydreamController {
+	return &DaydreamController{WebVRController: WebVRControllerFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewDaydreamController returns a new DaydreamController object.
@@ -29,7 +32,7 @@ func DaydreamControllerFromJSObject(p js.Value) *DaydreamController {
 // https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller
 func (ba *Babylon) NewDaydreamController(vrGamepad interface{}) *DaydreamController {
 	p := ba.ctx.Get("DaydreamController").New(vrGamepad)
-	return DaydreamControllerFromJSObject(p)
+	return DaydreamControllerFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

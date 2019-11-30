@@ -8,7 +8,10 @@ import (
 
 // KHR_draco_mesh_compression represents a babylon.js KHR_draco_mesh_compression.
 // &lt;a href=&#34;https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Khronos/KHR_draco_mesh_compression&#34;&gt;Specification&lt;/a&gt;
-type KHR_draco_mesh_compression struct{ p js.Value }
+type KHR_draco_mesh_compression struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (k *KHR_draco_mesh_compression) JSObject() js.Value { return k.p }
@@ -16,12 +19,12 @@ func (k *KHR_draco_mesh_compression) JSObject() js.Value { return k.p }
 // KHR_draco_mesh_compression returns a KHR_draco_mesh_compression JavaScript class.
 func (ba *Babylon) KHR_draco_mesh_compression() *KHR_draco_mesh_compression {
 	p := ba.ctx.Get("KHR_draco_mesh_compression")
-	return KHR_draco_mesh_compressionFromJSObject(p)
+	return KHR_draco_mesh_compressionFromJSObject(p, ba.ctx)
 }
 
 // KHR_draco_mesh_compressionFromJSObject returns a wrapped KHR_draco_mesh_compression JavaScript class.
-func KHR_draco_mesh_compressionFromJSObject(p js.Value) *KHR_draco_mesh_compression {
-	return &KHR_draco_mesh_compression{p: p}
+func KHR_draco_mesh_compressionFromJSObject(p js.Value, ctx js.Value) *KHR_draco_mesh_compression {
+	return &KHR_draco_mesh_compression{p: p, ctx: ctx}
 }
 
 // TODO: methods

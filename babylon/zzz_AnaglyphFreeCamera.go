@@ -10,7 +10,10 @@ import (
 // Camera used to simulate anaglyphic rendering (based on FreeCamera)
 //
 // See: http://doc.babylonjs.com/features/cameras#anaglyph-cameras
-type AnaglyphFreeCamera struct{ *FreeCamera }
+type AnaglyphFreeCamera struct {
+	*FreeCamera
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (a *AnaglyphFreeCamera) JSObject() js.Value { return a.p }
@@ -18,12 +21,12 @@ func (a *AnaglyphFreeCamera) JSObject() js.Value { return a.p }
 // AnaglyphFreeCamera returns a AnaglyphFreeCamera JavaScript class.
 func (ba *Babylon) AnaglyphFreeCamera() *AnaglyphFreeCamera {
 	p := ba.ctx.Get("AnaglyphFreeCamera")
-	return AnaglyphFreeCameraFromJSObject(p)
+	return AnaglyphFreeCameraFromJSObject(p, ba.ctx)
 }
 
 // AnaglyphFreeCameraFromJSObject returns a wrapped AnaglyphFreeCamera JavaScript class.
-func AnaglyphFreeCameraFromJSObject(p js.Value) *AnaglyphFreeCamera {
-	return &AnaglyphFreeCamera{FreeCameraFromJSObject(p)}
+func AnaglyphFreeCameraFromJSObject(p js.Value, ctx js.Value) *AnaglyphFreeCamera {
+	return &AnaglyphFreeCamera{FreeCamera: FreeCameraFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewAnaglyphFreeCamera returns a new AnaglyphFreeCamera object.
@@ -31,7 +34,7 @@ func AnaglyphFreeCameraFromJSObject(p js.Value) *AnaglyphFreeCamera {
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphfreecamera
 func (ba *Babylon) NewAnaglyphFreeCamera(name string, position *Vector3, interaxialDistance float64, scene *Scene) *AnaglyphFreeCamera {
 	p := ba.ctx.Get("AnaglyphFreeCamera").New(name, position.JSObject(), interaxialDistance, scene.JSObject())
-	return AnaglyphFreeCameraFromJSObject(p)
+	return AnaglyphFreeCameraFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

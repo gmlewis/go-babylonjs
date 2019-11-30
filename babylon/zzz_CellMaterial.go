@@ -8,7 +8,10 @@ import (
 
 // CellMaterial represents a babylon.js CellMaterial.
 //
-type CellMaterial struct{ p js.Value }
+type CellMaterial struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (c *CellMaterial) JSObject() js.Value { return c.p }
@@ -16,12 +19,12 @@ func (c *CellMaterial) JSObject() js.Value { return c.p }
 // CellMaterial returns a CellMaterial JavaScript class.
 func (ba *Babylon) CellMaterial() *CellMaterial {
 	p := ba.ctx.Get("CellMaterial")
-	return CellMaterialFromJSObject(p)
+	return CellMaterialFromJSObject(p, ba.ctx)
 }
 
 // CellMaterialFromJSObject returns a wrapped CellMaterial JavaScript class.
-func CellMaterialFromJSObject(p js.Value) *CellMaterial {
-	return &CellMaterial{p: p}
+func CellMaterialFromJSObject(p js.Value, ctx js.Value) *CellMaterial {
+	return &CellMaterial{p: p, ctx: ctx}
 }
 
 // NewCellMaterial returns a new CellMaterial object.
@@ -29,7 +32,7 @@ func CellMaterialFromJSObject(p js.Value) *CellMaterial {
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial
 func (ba *Babylon) NewCellMaterial(name string, scene *Scene) *CellMaterial {
 	p := ba.ctx.Get("CellMaterial").New(name, scene.JSObject())
-	return CellMaterialFromJSObject(p)
+	return CellMaterialFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

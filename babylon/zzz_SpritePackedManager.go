@@ -10,7 +10,10 @@ import (
 // Class used to manage multiple sprites of different sizes on the same spritesheet
 //
 // See: http://doc.babylonjs.com/babylon101/sprites
-type SpritePackedManager struct{ *SpriteManager }
+type SpritePackedManager struct {
+	*SpriteManager
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *SpritePackedManager) JSObject() js.Value { return s.p }
@@ -18,12 +21,12 @@ func (s *SpritePackedManager) JSObject() js.Value { return s.p }
 // SpritePackedManager returns a SpritePackedManager JavaScript class.
 func (ba *Babylon) SpritePackedManager() *SpritePackedManager {
 	p := ba.ctx.Get("SpritePackedManager")
-	return SpritePackedManagerFromJSObject(p)
+	return SpritePackedManagerFromJSObject(p, ba.ctx)
 }
 
 // SpritePackedManagerFromJSObject returns a wrapped SpritePackedManager JavaScript class.
-func SpritePackedManagerFromJSObject(p js.Value) *SpritePackedManager {
-	return &SpritePackedManager{SpriteManagerFromJSObject(p)}
+func SpritePackedManagerFromJSObject(p js.Value, ctx js.Value) *SpritePackedManager {
+	return &SpritePackedManager{SpriteManager: SpriteManagerFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewSpritePackedManagerOpts contains optional parameters for NewSpritePackedManager.
@@ -44,7 +47,7 @@ func (ba *Babylon) NewSpritePackedManager(name string, imgUrl string, capacity f
 	}
 
 	p := ba.ctx.Get("SpritePackedManager").New(name, imgUrl, capacity, scene.JSObject(), opts.SpriteJSON.JSObject(), opts.Epsilon.JSObject(), opts.SamplingMode.JSObject())
-	return SpritePackedManagerFromJSObject(p)
+	return SpritePackedManagerFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

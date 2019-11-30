@@ -8,7 +8,10 @@ import (
 
 // OneMinusBlock represents a babylon.js OneMinusBlock.
 // Block used to get the opposite (1 - x) of a value
-type OneMinusBlock struct{ *NodeMaterialBlock }
+type OneMinusBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (o *OneMinusBlock) JSObject() js.Value { return o.p }
@@ -16,12 +19,12 @@ func (o *OneMinusBlock) JSObject() js.Value { return o.p }
 // OneMinusBlock returns a OneMinusBlock JavaScript class.
 func (ba *Babylon) OneMinusBlock() *OneMinusBlock {
 	p := ba.ctx.Get("OneMinusBlock")
-	return OneMinusBlockFromJSObject(p)
+	return OneMinusBlockFromJSObject(p, ba.ctx)
 }
 
 // OneMinusBlockFromJSObject returns a wrapped OneMinusBlock JavaScript class.
-func OneMinusBlockFromJSObject(p js.Value) *OneMinusBlock {
-	return &OneMinusBlock{NodeMaterialBlockFromJSObject(p)}
+func OneMinusBlockFromJSObject(p js.Value, ctx js.Value) *OneMinusBlock {
+	return &OneMinusBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewOneMinusBlock returns a new OneMinusBlock object.
@@ -29,7 +32,7 @@ func OneMinusBlockFromJSObject(p js.Value) *OneMinusBlock {
 // https://doc.babylonjs.com/api/classes/babylon.oneminusblock
 func (ba *Babylon) NewOneMinusBlock(name string) *OneMinusBlock {
 	p := ba.ctx.Get("OneMinusBlock").New(name)
-	return OneMinusBlockFromJSObject(p)
+	return OneMinusBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

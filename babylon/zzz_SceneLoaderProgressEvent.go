@@ -8,7 +8,10 @@ import (
 
 // SceneLoaderProgressEvent represents a babylon.js SceneLoaderProgressEvent.
 // Class used to represent data loading progression
-type SceneLoaderProgressEvent struct{ p js.Value }
+type SceneLoaderProgressEvent struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *SceneLoaderProgressEvent) JSObject() js.Value { return s.p }
@@ -16,12 +19,12 @@ func (s *SceneLoaderProgressEvent) JSObject() js.Value { return s.p }
 // SceneLoaderProgressEvent returns a SceneLoaderProgressEvent JavaScript class.
 func (ba *Babylon) SceneLoaderProgressEvent() *SceneLoaderProgressEvent {
 	p := ba.ctx.Get("SceneLoaderProgressEvent")
-	return SceneLoaderProgressEventFromJSObject(p)
+	return SceneLoaderProgressEventFromJSObject(p, ba.ctx)
 }
 
 // SceneLoaderProgressEventFromJSObject returns a wrapped SceneLoaderProgressEvent JavaScript class.
-func SceneLoaderProgressEventFromJSObject(p js.Value) *SceneLoaderProgressEvent {
-	return &SceneLoaderProgressEvent{p: p}
+func SceneLoaderProgressEventFromJSObject(p js.Value, ctx js.Value) *SceneLoaderProgressEvent {
+	return &SceneLoaderProgressEvent{p: p, ctx: ctx}
 }
 
 // NewSceneLoaderProgressEvent returns a new SceneLoaderProgressEvent object.
@@ -29,7 +32,7 @@ func SceneLoaderProgressEventFromJSObject(p js.Value) *SceneLoaderProgressEvent 
 // https://doc.babylonjs.com/api/classes/babylon.sceneloaderprogressevent
 func (ba *Babylon) NewSceneLoaderProgressEvent(lengthComputable bool, loaded float64, total float64) *SceneLoaderProgressEvent {
 	p := ba.ctx.Get("SceneLoaderProgressEvent").New(lengthComputable, loaded, total)
-	return SceneLoaderProgressEventFromJSObject(p)
+	return SceneLoaderProgressEventFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

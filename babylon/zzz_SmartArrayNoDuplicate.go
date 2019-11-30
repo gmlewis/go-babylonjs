@@ -9,7 +9,10 @@ import (
 // SmartArrayNoDuplicate represents a babylon.js SmartArrayNoDuplicate.
 // Defines an GC Friendly array where the backfield array do not shrink to prevent over allocations.
 // The data in this array can only be present once
-type SmartArrayNoDuplicate struct{ *SmartArray }
+type SmartArrayNoDuplicate struct {
+	*SmartArray
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *SmartArrayNoDuplicate) JSObject() js.Value { return s.p }
@@ -17,12 +20,12 @@ func (s *SmartArrayNoDuplicate) JSObject() js.Value { return s.p }
 // SmartArrayNoDuplicate returns a SmartArrayNoDuplicate JavaScript class.
 func (ba *Babylon) SmartArrayNoDuplicate() *SmartArrayNoDuplicate {
 	p := ba.ctx.Get("SmartArrayNoDuplicate")
-	return SmartArrayNoDuplicateFromJSObject(p)
+	return SmartArrayNoDuplicateFromJSObject(p, ba.ctx)
 }
 
 // SmartArrayNoDuplicateFromJSObject returns a wrapped SmartArrayNoDuplicate JavaScript class.
-func SmartArrayNoDuplicateFromJSObject(p js.Value) *SmartArrayNoDuplicate {
-	return &SmartArrayNoDuplicate{SmartArrayFromJSObject(p)}
+func SmartArrayNoDuplicateFromJSObject(p js.Value, ctx js.Value) *SmartArrayNoDuplicate {
+	return &SmartArrayNoDuplicate{SmartArray: SmartArrayFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewSmartArrayNoDuplicate returns a new SmartArrayNoDuplicate object.
@@ -30,7 +33,7 @@ func SmartArrayNoDuplicateFromJSObject(p js.Value) *SmartArrayNoDuplicate {
 // https://doc.babylonjs.com/api/classes/babylon.smartarraynoduplicate
 func (ba *Babylon) NewSmartArrayNoDuplicate(capacity float64) *SmartArrayNoDuplicate {
 	p := ba.ctx.Get("SmartArrayNoDuplicate").New(capacity)
-	return SmartArrayNoDuplicateFromJSObject(p)
+	return SmartArrayNoDuplicateFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

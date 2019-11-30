@@ -10,7 +10,10 @@ import (
 // Defines an optimization used to turn post-processes off
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
-type PostProcessesOptimization struct{ *SceneOptimization }
+type PostProcessesOptimization struct {
+	*SceneOptimization
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (p *PostProcessesOptimization) JSObject() js.Value { return p.p }
@@ -18,12 +21,12 @@ func (p *PostProcessesOptimization) JSObject() js.Value { return p.p }
 // PostProcessesOptimization returns a PostProcessesOptimization JavaScript class.
 func (ba *Babylon) PostProcessesOptimization() *PostProcessesOptimization {
 	p := ba.ctx.Get("PostProcessesOptimization")
-	return PostProcessesOptimizationFromJSObject(p)
+	return PostProcessesOptimizationFromJSObject(p, ba.ctx)
 }
 
 // PostProcessesOptimizationFromJSObject returns a wrapped PostProcessesOptimization JavaScript class.
-func PostProcessesOptimizationFromJSObject(p js.Value) *PostProcessesOptimization {
-	return &PostProcessesOptimization{SceneOptimizationFromJSObject(p)}
+func PostProcessesOptimizationFromJSObject(p js.Value, ctx js.Value) *PostProcessesOptimization {
+	return &PostProcessesOptimization{SceneOptimization: SceneOptimizationFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewPostProcessesOptimizationOpts contains optional parameters for NewPostProcessesOptimization.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewPostProcessesOptimization(opts *NewPostProcessesOptimizati
 	}
 
 	p := ba.ctx.Get("PostProcessesOptimization").New(opts.Priority.JSObject())
-	return PostProcessesOptimizationFromJSObject(p)
+	return PostProcessesOptimizationFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

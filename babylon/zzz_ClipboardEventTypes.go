@@ -8,7 +8,10 @@ import (
 
 // ClipboardEventTypes represents a babylon.js ClipboardEventTypes.
 // Gather the list of clipboard event types as constants.
-type ClipboardEventTypes struct{ p js.Value }
+type ClipboardEventTypes struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (c *ClipboardEventTypes) JSObject() js.Value { return c.p }
@@ -16,12 +19,12 @@ func (c *ClipboardEventTypes) JSObject() js.Value { return c.p }
 // ClipboardEventTypes returns a ClipboardEventTypes JavaScript class.
 func (ba *Babylon) ClipboardEventTypes() *ClipboardEventTypes {
 	p := ba.ctx.Get("ClipboardEventTypes")
-	return ClipboardEventTypesFromJSObject(p)
+	return ClipboardEventTypesFromJSObject(p, ba.ctx)
 }
 
 // ClipboardEventTypesFromJSObject returns a wrapped ClipboardEventTypes JavaScript class.
-func ClipboardEventTypesFromJSObject(p js.Value) *ClipboardEventTypes {
-	return &ClipboardEventTypes{p: p}
+func ClipboardEventTypesFromJSObject(p js.Value, ctx js.Value) *ClipboardEventTypes {
+	return &ClipboardEventTypes{p: p, ctx: ctx}
 }
 
 // TODO: methods

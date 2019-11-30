@@ -12,7 +12,10 @@ import (
 // The angle, in radians, defines the size (field of illumination) of the spotlight&amp;#39;s conical beam,
 // and the exponent defines the speed of the decay of the light with distance (reach).
 // Documentation: &lt;a href=&#34;https://doc.babylonjs.com/babylon101/lights&#34;&gt;https://doc.babylonjs.com/babylon101/lights&lt;/a&gt;
-type SpotLight struct{ *ShadowLight }
+type SpotLight struct {
+	*ShadowLight
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *SpotLight) JSObject() js.Value { return s.p }
@@ -20,12 +23,12 @@ func (s *SpotLight) JSObject() js.Value { return s.p }
 // SpotLight returns a SpotLight JavaScript class.
 func (ba *Babylon) SpotLight() *SpotLight {
 	p := ba.ctx.Get("SpotLight")
-	return SpotLightFromJSObject(p)
+	return SpotLightFromJSObject(p, ba.ctx)
 }
 
 // SpotLightFromJSObject returns a wrapped SpotLight JavaScript class.
-func SpotLightFromJSObject(p js.Value) *SpotLight {
-	return &SpotLight{ShadowLightFromJSObject(p)}
+func SpotLightFromJSObject(p js.Value, ctx js.Value) *SpotLight {
+	return &SpotLight{ShadowLight: ShadowLightFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewSpotLight returns a new SpotLight object.
@@ -33,7 +36,7 @@ func SpotLightFromJSObject(p js.Value) *SpotLight {
 // https://doc.babylonjs.com/api/classes/babylon.spotlight
 func (ba *Babylon) NewSpotLight(name string, position *Vector3, direction *Vector3, angle float64, exponent float64, scene *Scene) *SpotLight {
 	p := ba.ctx.Get("SpotLight").New(name, position.JSObject(), direction.JSObject(), angle, exponent, scene.JSObject())
-	return SpotLightFromJSObject(p)
+	return SpotLightFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

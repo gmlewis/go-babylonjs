@@ -11,7 +11,10 @@ import (
 //
 // This enables better naming and convention enforcements on top of the pbrMaterial.
 // It is used as the base class for both the specGloss and metalRough conventions.
-type PBRBaseSimpleMaterial struct{ *PBRBaseMaterial }
+type PBRBaseSimpleMaterial struct {
+	*PBRBaseMaterial
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (p *PBRBaseSimpleMaterial) JSObject() js.Value { return p.p }
@@ -19,12 +22,12 @@ func (p *PBRBaseSimpleMaterial) JSObject() js.Value { return p.p }
 // PBRBaseSimpleMaterial returns a PBRBaseSimpleMaterial JavaScript class.
 func (ba *Babylon) PBRBaseSimpleMaterial() *PBRBaseSimpleMaterial {
 	p := ba.ctx.Get("PBRBaseSimpleMaterial")
-	return PBRBaseSimpleMaterialFromJSObject(p)
+	return PBRBaseSimpleMaterialFromJSObject(p, ba.ctx)
 }
 
 // PBRBaseSimpleMaterialFromJSObject returns a wrapped PBRBaseSimpleMaterial JavaScript class.
-func PBRBaseSimpleMaterialFromJSObject(p js.Value) *PBRBaseSimpleMaterial {
-	return &PBRBaseSimpleMaterial{PBRBaseMaterialFromJSObject(p)}
+func PBRBaseSimpleMaterialFromJSObject(p js.Value, ctx js.Value) *PBRBaseSimpleMaterial {
+	return &PBRBaseSimpleMaterial{PBRBaseMaterial: PBRBaseMaterialFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewPBRBaseSimpleMaterial returns a new PBRBaseSimpleMaterial object.
@@ -32,7 +35,7 @@ func PBRBaseSimpleMaterialFromJSObject(p js.Value) *PBRBaseSimpleMaterial {
 // https://doc.babylonjs.com/api/classes/babylon.pbrbasesimplematerial
 func (ba *Babylon) NewPBRBaseSimpleMaterial(name string, scene *Scene) *PBRBaseSimpleMaterial {
 	p := ba.ctx.Get("PBRBaseSimpleMaterial").New(name, scene.JSObject())
-	return PBRBaseSimpleMaterialFromJSObject(p)
+	return PBRBaseSimpleMaterialFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

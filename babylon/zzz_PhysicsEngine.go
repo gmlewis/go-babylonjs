@@ -10,7 +10,10 @@ import (
 // Class used to control physics engine
 //
 // See: http://doc.babylonjs.com/how_to/using_the_physics_engine
-type PhysicsEngine struct{ p js.Value }
+type PhysicsEngine struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (p *PhysicsEngine) JSObject() js.Value { return p.p }
@@ -18,12 +21,12 @@ func (p *PhysicsEngine) JSObject() js.Value { return p.p }
 // PhysicsEngine returns a PhysicsEngine JavaScript class.
 func (ba *Babylon) PhysicsEngine() *PhysicsEngine {
 	p := ba.ctx.Get("PhysicsEngine")
-	return PhysicsEngineFromJSObject(p)
+	return PhysicsEngineFromJSObject(p, ba.ctx)
 }
 
 // PhysicsEngineFromJSObject returns a wrapped PhysicsEngine JavaScript class.
-func PhysicsEngineFromJSObject(p js.Value) *PhysicsEngine {
-	return &PhysicsEngine{p: p}
+func PhysicsEngineFromJSObject(p js.Value, ctx js.Value) *PhysicsEngine {
+	return &PhysicsEngine{p: p, ctx: ctx}
 }
 
 // NewPhysicsEngineOpts contains optional parameters for NewPhysicsEngine.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewPhysicsEngine(gravity *Vector3, opts *NewPhysicsEngineOpts
 	}
 
 	p := ba.ctx.Get("PhysicsEngine").New(gravity.JSObject(), opts._physicsPlugin.JSObject())
-	return PhysicsEngineFromJSObject(p)
+	return PhysicsEngineFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

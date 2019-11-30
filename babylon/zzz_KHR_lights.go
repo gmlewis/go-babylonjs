@@ -8,7 +8,10 @@ import (
 
 // KHR_lights represents a babylon.js KHR_lights.
 // &lt;a href=&#34;https://github.com/KhronosGroup/glTF/blob/master/extensions/2.0/Khronos/KHR_lights_punctual/README.md&#34;&gt;Specification&lt;/a&gt;
-type KHR_lights struct{ p js.Value }
+type KHR_lights struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (k *KHR_lights) JSObject() js.Value { return k.p }
@@ -16,12 +19,12 @@ func (k *KHR_lights) JSObject() js.Value { return k.p }
 // KHR_lights returns a KHR_lights JavaScript class.
 func (ba *Babylon) KHR_lights() *KHR_lights {
 	p := ba.ctx.Get("KHR_lights")
-	return KHR_lightsFromJSObject(p)
+	return KHR_lightsFromJSObject(p, ba.ctx)
 }
 
 // KHR_lightsFromJSObject returns a wrapped KHR_lights JavaScript class.
-func KHR_lightsFromJSObject(p js.Value) *KHR_lights {
-	return &KHR_lights{p: p}
+func KHR_lightsFromJSObject(p js.Value, ctx js.Value) *KHR_lights {
+	return &KHR_lights{p: p, ctx: ctx}
 }
 
 // TODO: methods

@@ -10,7 +10,10 @@ import (
 // Class used to store bone information
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_bones_and_skeletons
-type Bone struct{ *Node }
+type Bone struct {
+	*Node
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (b *Bone) JSObject() js.Value { return b.p }
@@ -18,12 +21,12 @@ func (b *Bone) JSObject() js.Value { return b.p }
 // Bone returns a Bone JavaScript class.
 func (ba *Babylon) Bone() *Bone {
 	p := ba.ctx.Get("Bone")
-	return BoneFromJSObject(p)
+	return BoneFromJSObject(p, ba.ctx)
 }
 
 // BoneFromJSObject returns a wrapped Bone JavaScript class.
-func BoneFromJSObject(p js.Value) *Bone {
-	return &Bone{NodeFromJSObject(p)}
+func BoneFromJSObject(p js.Value, ctx js.Value) *Bone {
+	return &Bone{Node: NodeFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewBoneOpts contains optional parameters for NewBone.
@@ -48,7 +51,7 @@ func (ba *Babylon) NewBone(name string, skeleton *Skeleton, opts *NewBoneOpts) *
 	}
 
 	p := ba.ctx.Get("Bone").New(name, skeleton.JSObject(), opts.ParentBone.JSObject(), opts.LocalMatrix.JSObject(), opts.RestPose.JSObject(), opts.BaseMatrix.JSObject(), opts.Index.JSObject())
-	return BoneFromJSObject(p)
+	return BoneFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -8,7 +8,10 @@ import (
 
 // SSAORenderingPipeline represents a babylon.js SSAORenderingPipeline.
 // Render pipeline to produce ssao effect
-type SSAORenderingPipeline struct{ *PostProcessRenderPipeline }
+type SSAORenderingPipeline struct {
+	*PostProcessRenderPipeline
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *SSAORenderingPipeline) JSObject() js.Value { return s.p }
@@ -16,12 +19,12 @@ func (s *SSAORenderingPipeline) JSObject() js.Value { return s.p }
 // SSAORenderingPipeline returns a SSAORenderingPipeline JavaScript class.
 func (ba *Babylon) SSAORenderingPipeline() *SSAORenderingPipeline {
 	p := ba.ctx.Get("SSAORenderingPipeline")
-	return SSAORenderingPipelineFromJSObject(p)
+	return SSAORenderingPipelineFromJSObject(p, ba.ctx)
 }
 
 // SSAORenderingPipelineFromJSObject returns a wrapped SSAORenderingPipeline JavaScript class.
-func SSAORenderingPipelineFromJSObject(p js.Value) *SSAORenderingPipeline {
-	return &SSAORenderingPipeline{PostProcessRenderPipelineFromJSObject(p)}
+func SSAORenderingPipelineFromJSObject(p js.Value, ctx js.Value) *SSAORenderingPipeline {
+	return &SSAORenderingPipeline{PostProcessRenderPipeline: PostProcessRenderPipelineFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewSSAORenderingPipelineOpts contains optional parameters for NewSSAORenderingPipeline.
@@ -38,7 +41,7 @@ func (ba *Babylon) NewSSAORenderingPipeline(name string, scene *Scene, ratio int
 	}
 
 	p := ba.ctx.Get("SSAORenderingPipeline").New(name, scene.JSObject(), ratio, opts.Cameras.JSObject())
-	return SSAORenderingPipelineFromJSObject(p)
+	return SSAORenderingPipelineFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

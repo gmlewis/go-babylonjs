@@ -8,7 +8,10 @@ import (
 
 // Angle represents a babylon.js Angle.
 // Defines angle representation
-type Angle struct{ p js.Value }
+type Angle struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (a *Angle) JSObject() js.Value { return a.p }
@@ -16,12 +19,12 @@ func (a *Angle) JSObject() js.Value { return a.p }
 // Angle returns a Angle JavaScript class.
 func (ba *Babylon) Angle() *Angle {
 	p := ba.ctx.Get("Angle")
-	return AngleFromJSObject(p)
+	return AngleFromJSObject(p, ba.ctx)
 }
 
 // AngleFromJSObject returns a wrapped Angle JavaScript class.
-func AngleFromJSObject(p js.Value) *Angle {
-	return &Angle{p: p}
+func AngleFromJSObject(p js.Value, ctx js.Value) *Angle {
+	return &Angle{p: p, ctx: ctx}
 }
 
 // NewAngle returns a new Angle object.
@@ -29,7 +32,7 @@ func AngleFromJSObject(p js.Value) *Angle {
 // https://doc.babylonjs.com/api/classes/babylon.angle
 func (ba *Babylon) NewAngle(radians float64) *Angle {
 	p := ba.ctx.Get("Angle").New(radians)
-	return AngleFromJSObject(p)
+	return AngleFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

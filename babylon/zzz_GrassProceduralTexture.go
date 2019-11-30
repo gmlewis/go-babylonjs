@@ -8,7 +8,10 @@ import (
 
 // GrassProceduralTexture represents a babylon.js GrassProceduralTexture.
 //
-type GrassProceduralTexture struct{ *ProceduralTexture }
+type GrassProceduralTexture struct {
+	*ProceduralTexture
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (g *GrassProceduralTexture) JSObject() js.Value { return g.p }
@@ -16,12 +19,12 @@ func (g *GrassProceduralTexture) JSObject() js.Value { return g.p }
 // GrassProceduralTexture returns a GrassProceduralTexture JavaScript class.
 func (ba *Babylon) GrassProceduralTexture() *GrassProceduralTexture {
 	p := ba.ctx.Get("GrassProceduralTexture")
-	return GrassProceduralTextureFromJSObject(p)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
 }
 
 // GrassProceduralTextureFromJSObject returns a wrapped GrassProceduralTexture JavaScript class.
-func GrassProceduralTextureFromJSObject(p js.Value) *GrassProceduralTexture {
-	return &GrassProceduralTexture{ProceduralTextureFromJSObject(p)}
+func GrassProceduralTextureFromJSObject(p js.Value, ctx js.Value) *GrassProceduralTexture {
+	return &GrassProceduralTexture{ProceduralTexture: ProceduralTextureFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewGrassProceduralTextureOpts contains optional parameters for NewGrassProceduralTexture.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewGrassProceduralTexture(name string, size float64, scene *S
 	}
 
 	p := ba.ctx.Get("GrassProceduralTexture").New(name, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps.JSObject())
-	return GrassProceduralTextureFromJSObject(p)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -10,7 +10,10 @@ import (
 // Class used to hold the controls for the checkboxes, radio buttons and sliders
 //
 // See: http://doc.babylonjs.com/how_to/selector
-type SelectionPanel struct{ *Rectangle }
+type SelectionPanel struct {
+	*Rectangle
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *SelectionPanel) JSObject() js.Value { return s.p }
@@ -18,12 +21,12 @@ func (s *SelectionPanel) JSObject() js.Value { return s.p }
 // SelectionPanel returns a SelectionPanel JavaScript class.
 func (ba *Babylon) SelectionPanel() *SelectionPanel {
 	p := ba.ctx.Get("SelectionPanel")
-	return SelectionPanelFromJSObject(p)
+	return SelectionPanelFromJSObject(p, ba.ctx)
 }
 
 // SelectionPanelFromJSObject returns a wrapped SelectionPanel JavaScript class.
-func SelectionPanelFromJSObject(p js.Value) *SelectionPanel {
-	return &SelectionPanel{RectangleFromJSObject(p)}
+func SelectionPanelFromJSObject(p js.Value, ctx js.Value) *SelectionPanel {
+	return &SelectionPanel{Rectangle: RectangleFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewSelectionPanelOpts contains optional parameters for NewSelectionPanel.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewSelectionPanel(name string, opts *NewSelectionPanelOpts) *
 	}
 
 	p := ba.ctx.Get("SelectionPanel").New(name, opts.Groups.JSObject())
-	return SelectionPanelFromJSObject(p)
+	return SelectionPanelFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

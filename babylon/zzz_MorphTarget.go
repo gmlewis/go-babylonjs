@@ -10,7 +10,10 @@ import (
 // Defines a target to use with MorphTargetManager
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_morphtargets
-type MorphTarget struct{ p js.Value }
+type MorphTarget struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (m *MorphTarget) JSObject() js.Value { return m.p }
@@ -18,12 +21,12 @@ func (m *MorphTarget) JSObject() js.Value { return m.p }
 // MorphTarget returns a MorphTarget JavaScript class.
 func (ba *Babylon) MorphTarget() *MorphTarget {
 	p := ba.ctx.Get("MorphTarget")
-	return MorphTargetFromJSObject(p)
+	return MorphTargetFromJSObject(p, ba.ctx)
 }
 
 // MorphTargetFromJSObject returns a wrapped MorphTarget JavaScript class.
-func MorphTargetFromJSObject(p js.Value) *MorphTarget {
-	return &MorphTarget{p: p}
+func MorphTargetFromJSObject(p js.Value, ctx js.Value) *MorphTarget {
+	return &MorphTarget{p: p, ctx: ctx}
 }
 
 // NewMorphTargetOpts contains optional parameters for NewMorphTarget.
@@ -42,7 +45,7 @@ func (ba *Babylon) NewMorphTarget(name string, opts *NewMorphTargetOpts) *MorphT
 	}
 
 	p := ba.ctx.Get("MorphTarget").New(name, opts.Influence.JSObject(), opts.Scene.JSObject())
-	return MorphTargetFromJSObject(p)
+	return MorphTargetFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

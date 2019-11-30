@@ -11,7 +11,10 @@ import (
 // A Curve3 is designed from a series of successive Vector3.
 //
 // See: https://doc.babylonjs.com/how_to/how_to_use_curve3
-type Curve3 struct{ p js.Value }
+type Curve3 struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (c *Curve3) JSObject() js.Value { return c.p }
@@ -19,12 +22,12 @@ func (c *Curve3) JSObject() js.Value { return c.p }
 // Curve3 returns a Curve3 JavaScript class.
 func (ba *Babylon) Curve3() *Curve3 {
 	p := ba.ctx.Get("Curve3")
-	return Curve3FromJSObject(p)
+	return Curve3FromJSObject(p, ba.ctx)
 }
 
 // Curve3FromJSObject returns a wrapped Curve3 JavaScript class.
-func Curve3FromJSObject(p js.Value) *Curve3 {
-	return &Curve3{p: p}
+func Curve3FromJSObject(p js.Value, ctx js.Value) *Curve3 {
+	return &Curve3{p: p, ctx: ctx}
 }
 
 // NewCurve3 returns a new Curve3 object.
@@ -32,7 +35,7 @@ func Curve3FromJSObject(p js.Value) *Curve3 {
 // https://doc.babylonjs.com/api/classes/babylon.curve3
 func (ba *Babylon) NewCurve3(points *Vector3) *Curve3 {
 	p := ba.ctx.Get("Curve3").New(points.JSObject())
-	return Curve3FromJSObject(p)
+	return Curve3FromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

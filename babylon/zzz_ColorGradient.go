@@ -8,7 +8,10 @@ import (
 
 // ColorGradient represents a babylon.js ColorGradient.
 // Class used to store color4 gradient
-type ColorGradient struct{ p js.Value }
+type ColorGradient struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (c *ColorGradient) JSObject() js.Value { return c.p }
@@ -16,12 +19,12 @@ func (c *ColorGradient) JSObject() js.Value { return c.p }
 // ColorGradient returns a ColorGradient JavaScript class.
 func (ba *Babylon) ColorGradient() *ColorGradient {
 	p := ba.ctx.Get("ColorGradient")
-	return ColorGradientFromJSObject(p)
+	return ColorGradientFromJSObject(p, ba.ctx)
 }
 
 // ColorGradientFromJSObject returns a wrapped ColorGradient JavaScript class.
-func ColorGradientFromJSObject(p js.Value) *ColorGradient {
-	return &ColorGradient{p: p}
+func ColorGradientFromJSObject(p js.Value, ctx js.Value) *ColorGradient {
+	return &ColorGradient{p: p, ctx: ctx}
 }
 
 // TODO: methods

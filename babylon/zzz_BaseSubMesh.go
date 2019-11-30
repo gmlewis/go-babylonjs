@@ -8,7 +8,10 @@ import (
 
 // BaseSubMesh represents a babylon.js BaseSubMesh.
 // Base class for submeshes
-type BaseSubMesh struct{ p js.Value }
+type BaseSubMesh struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (b *BaseSubMesh) JSObject() js.Value { return b.p }
@@ -16,12 +19,12 @@ func (b *BaseSubMesh) JSObject() js.Value { return b.p }
 // BaseSubMesh returns a BaseSubMesh JavaScript class.
 func (ba *Babylon) BaseSubMesh() *BaseSubMesh {
 	p := ba.ctx.Get("BaseSubMesh")
-	return BaseSubMeshFromJSObject(p)
+	return BaseSubMeshFromJSObject(p, ba.ctx)
 }
 
 // BaseSubMeshFromJSObject returns a wrapped BaseSubMesh JavaScript class.
-func BaseSubMeshFromJSObject(p js.Value) *BaseSubMesh {
-	return &BaseSubMesh{p: p}
+func BaseSubMeshFromJSObject(p js.Value, ctx js.Value) *BaseSubMesh {
+	return &BaseSubMesh{p: p, ctx: ctx}
 }
 
 // TODO: methods

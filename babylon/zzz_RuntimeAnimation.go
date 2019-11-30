@@ -8,7 +8,10 @@ import (
 
 // RuntimeAnimation represents a babylon.js RuntimeAnimation.
 // Defines a runtime animation
-type RuntimeAnimation struct{ p js.Value }
+type RuntimeAnimation struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (r *RuntimeAnimation) JSObject() js.Value { return r.p }
@@ -16,12 +19,12 @@ func (r *RuntimeAnimation) JSObject() js.Value { return r.p }
 // RuntimeAnimation returns a RuntimeAnimation JavaScript class.
 func (ba *Babylon) RuntimeAnimation() *RuntimeAnimation {
 	p := ba.ctx.Get("RuntimeAnimation")
-	return RuntimeAnimationFromJSObject(p)
+	return RuntimeAnimationFromJSObject(p, ba.ctx)
 }
 
 // RuntimeAnimationFromJSObject returns a wrapped RuntimeAnimation JavaScript class.
-func RuntimeAnimationFromJSObject(p js.Value) *RuntimeAnimation {
-	return &RuntimeAnimation{p: p}
+func RuntimeAnimationFromJSObject(p js.Value, ctx js.Value) *RuntimeAnimation {
+	return &RuntimeAnimation{p: p, ctx: ctx}
 }
 
 // NewRuntimeAnimation returns a new RuntimeAnimation object.
@@ -29,7 +32,7 @@ func RuntimeAnimationFromJSObject(p js.Value) *RuntimeAnimation {
 // https://doc.babylonjs.com/api/classes/babylon.runtimeanimation
 func (ba *Babylon) NewRuntimeAnimation(target interface{}, animation *Animation, scene *Scene, host *Animatable) *RuntimeAnimation {
 	p := ba.ctx.Get("RuntimeAnimation").New(target, animation.JSObject(), scene.JSObject(), host.JSObject())
-	return RuntimeAnimationFromJSObject(p)
+	return RuntimeAnimationFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

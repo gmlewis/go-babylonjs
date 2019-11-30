@@ -8,7 +8,10 @@ import (
 
 // KHR_materials_unlit represents a babylon.js KHR_materials_unlit.
 // &lt;a href=&#34;https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Khronos/KHR_materials_unlit&#34;&gt;Specification&lt;/a&gt;
-type KHR_materials_unlit struct{ p js.Value }
+type KHR_materials_unlit struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (k *KHR_materials_unlit) JSObject() js.Value { return k.p }
@@ -16,12 +19,12 @@ func (k *KHR_materials_unlit) JSObject() js.Value { return k.p }
 // KHR_materials_unlit returns a KHR_materials_unlit JavaScript class.
 func (ba *Babylon) KHR_materials_unlit() *KHR_materials_unlit {
 	p := ba.ctx.Get("KHR_materials_unlit")
-	return KHR_materials_unlitFromJSObject(p)
+	return KHR_materials_unlitFromJSObject(p, ba.ctx)
 }
 
 // KHR_materials_unlitFromJSObject returns a wrapped KHR_materials_unlit JavaScript class.
-func KHR_materials_unlitFromJSObject(p js.Value) *KHR_materials_unlit {
-	return &KHR_materials_unlit{p: p}
+func KHR_materials_unlitFromJSObject(p js.Value, ctx js.Value) *KHR_materials_unlit {
+	return &KHR_materials_unlit{p: p, ctx: ctx}
 }
 
 // TODO: methods

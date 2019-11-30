@@ -8,7 +8,10 @@ import (
 
 // MultiPointerScaleBehavior represents a babylon.js MultiPointerScaleBehavior.
 // A behavior that when attached to a mesh will allow the mesh to be scaled
-type MultiPointerScaleBehavior struct{ p js.Value }
+type MultiPointerScaleBehavior struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (m *MultiPointerScaleBehavior) JSObject() js.Value { return m.p }
@@ -16,12 +19,12 @@ func (m *MultiPointerScaleBehavior) JSObject() js.Value { return m.p }
 // MultiPointerScaleBehavior returns a MultiPointerScaleBehavior JavaScript class.
 func (ba *Babylon) MultiPointerScaleBehavior() *MultiPointerScaleBehavior {
 	p := ba.ctx.Get("MultiPointerScaleBehavior")
-	return MultiPointerScaleBehaviorFromJSObject(p)
+	return MultiPointerScaleBehaviorFromJSObject(p, ba.ctx)
 }
 
 // MultiPointerScaleBehaviorFromJSObject returns a wrapped MultiPointerScaleBehavior JavaScript class.
-func MultiPointerScaleBehaviorFromJSObject(p js.Value) *MultiPointerScaleBehavior {
-	return &MultiPointerScaleBehavior{p: p}
+func MultiPointerScaleBehaviorFromJSObject(p js.Value, ctx js.Value) *MultiPointerScaleBehavior {
+	return &MultiPointerScaleBehavior{p: p, ctx: ctx}
 }
 
 // NewMultiPointerScaleBehavior returns a new MultiPointerScaleBehavior object.
@@ -29,7 +32,7 @@ func MultiPointerScaleBehaviorFromJSObject(p js.Value) *MultiPointerScaleBehavio
 // https://doc.babylonjs.com/api/classes/babylon.multipointerscalebehavior
 func (ba *Babylon) NewMultiPointerScaleBehavior() *MultiPointerScaleBehavior {
 	p := ba.ctx.Get("MultiPointerScaleBehavior").New()
-	return MultiPointerScaleBehaviorFromJSObject(p)
+	return MultiPointerScaleBehaviorFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

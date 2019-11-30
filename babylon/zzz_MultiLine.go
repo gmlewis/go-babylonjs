@@ -8,7 +8,10 @@ import (
 
 // MultiLine represents a babylon.js MultiLine.
 // Class used to create multi line control
-type MultiLine struct{ *Control }
+type MultiLine struct {
+	*Control
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (m *MultiLine) JSObject() js.Value { return m.p }
@@ -16,12 +19,12 @@ func (m *MultiLine) JSObject() js.Value { return m.p }
 // MultiLine returns a MultiLine JavaScript class.
 func (ba *Babylon) MultiLine() *MultiLine {
 	p := ba.ctx.Get("MultiLine")
-	return MultiLineFromJSObject(p)
+	return MultiLineFromJSObject(p, ba.ctx)
 }
 
 // MultiLineFromJSObject returns a wrapped MultiLine JavaScript class.
-func MultiLineFromJSObject(p js.Value) *MultiLine {
-	return &MultiLine{ControlFromJSObject(p)}
+func MultiLineFromJSObject(p js.Value, ctx js.Value) *MultiLine {
+	return &MultiLine{Control: ControlFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewMultiLineOpts contains optional parameters for NewMultiLine.
@@ -38,7 +41,7 @@ func (ba *Babylon) NewMultiLine(opts *NewMultiLineOpts) *MultiLine {
 	}
 
 	p := ba.ctx.Get("MultiLine").New(opts.Name.JSObject())
-	return MultiLineFromJSObject(p)
+	return MultiLineFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

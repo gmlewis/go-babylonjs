@@ -8,7 +8,10 @@ import (
 
 // InputPassword represents a babylon.js InputPassword.
 // Class used to create a password control
-type InputPassword struct{ *InputText }
+type InputPassword struct {
+	*InputText
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (i *InputPassword) JSObject() js.Value { return i.p }
@@ -16,12 +19,12 @@ func (i *InputPassword) JSObject() js.Value { return i.p }
 // InputPassword returns a InputPassword JavaScript class.
 func (ba *Babylon) InputPassword() *InputPassword {
 	p := ba.ctx.Get("InputPassword")
-	return InputPasswordFromJSObject(p)
+	return InputPasswordFromJSObject(p, ba.ctx)
 }
 
 // InputPasswordFromJSObject returns a wrapped InputPassword JavaScript class.
-func InputPasswordFromJSObject(p js.Value) *InputPassword {
-	return &InputPassword{InputTextFromJSObject(p)}
+func InputPasswordFromJSObject(p js.Value, ctx js.Value) *InputPassword {
+	return &InputPassword{InputText: InputTextFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewInputPasswordOpts contains optional parameters for NewInputPassword.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewInputPassword(opts *NewInputPasswordOpts) *InputPassword {
 	}
 
 	p := ba.ctx.Get("InputPassword").New(opts.Name.JSObject(), opts.Text.JSObject())
-	return InputPasswordFromJSObject(p)
+	return InputPasswordFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

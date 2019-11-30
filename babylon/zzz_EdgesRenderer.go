@@ -8,7 +8,10 @@ import (
 
 // EdgesRenderer represents a babylon.js EdgesRenderer.
 // This class is used to generate edges of the mesh that could then easily be rendered in a scene.
-type EdgesRenderer struct{ p js.Value }
+type EdgesRenderer struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (e *EdgesRenderer) JSObject() js.Value { return e.p }
@@ -16,12 +19,12 @@ func (e *EdgesRenderer) JSObject() js.Value { return e.p }
 // EdgesRenderer returns a EdgesRenderer JavaScript class.
 func (ba *Babylon) EdgesRenderer() *EdgesRenderer {
 	p := ba.ctx.Get("EdgesRenderer")
-	return EdgesRendererFromJSObject(p)
+	return EdgesRendererFromJSObject(p, ba.ctx)
 }
 
 // EdgesRendererFromJSObject returns a wrapped EdgesRenderer JavaScript class.
-func EdgesRendererFromJSObject(p js.Value) *EdgesRenderer {
-	return &EdgesRenderer{p: p}
+func EdgesRendererFromJSObject(p js.Value, ctx js.Value) *EdgesRenderer {
+	return &EdgesRenderer{p: p, ctx: ctx}
 }
 
 // NewEdgesRendererOpts contains optional parameters for NewEdgesRenderer.
@@ -42,7 +45,7 @@ func (ba *Babylon) NewEdgesRenderer(source *AbstractMesh, opts *NewEdgesRenderer
 	}
 
 	p := ba.ctx.Get("EdgesRenderer").New(source.JSObject(), opts.Epsilon.JSObject(), opts.CheckVerticesInsteadOfIndices.JSObject(), opts.GenerateEdgesLines.JSObject())
-	return EdgesRendererFromJSObject(p)
+	return EdgesRendererFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -8,7 +8,10 @@ import (
 
 // CanvasGenerator represents a babylon.js CanvasGenerator.
 // Helper class used to generate a canvas to manipulate images
-type CanvasGenerator struct{ p js.Value }
+type CanvasGenerator struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (c *CanvasGenerator) JSObject() js.Value { return c.p }
@@ -16,12 +19,12 @@ func (c *CanvasGenerator) JSObject() js.Value { return c.p }
 // CanvasGenerator returns a CanvasGenerator JavaScript class.
 func (ba *Babylon) CanvasGenerator() *CanvasGenerator {
 	p := ba.ctx.Get("CanvasGenerator")
-	return CanvasGeneratorFromJSObject(p)
+	return CanvasGeneratorFromJSObject(p, ba.ctx)
 }
 
 // CanvasGeneratorFromJSObject returns a wrapped CanvasGenerator JavaScript class.
-func CanvasGeneratorFromJSObject(p js.Value) *CanvasGenerator {
-	return &CanvasGenerator{p: p}
+func CanvasGeneratorFromJSObject(p js.Value, ctx js.Value) *CanvasGenerator {
+	return &CanvasGenerator{p: p, ctx: ctx}
 }
 
 // TODO: methods

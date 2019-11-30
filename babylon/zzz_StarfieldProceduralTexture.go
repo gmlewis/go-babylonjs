@@ -8,7 +8,10 @@ import (
 
 // StarfieldProceduralTexture represents a babylon.js StarfieldProceduralTexture.
 //
-type StarfieldProceduralTexture struct{ *ProceduralTexture }
+type StarfieldProceduralTexture struct {
+	*ProceduralTexture
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *StarfieldProceduralTexture) JSObject() js.Value { return s.p }
@@ -16,12 +19,12 @@ func (s *StarfieldProceduralTexture) JSObject() js.Value { return s.p }
 // StarfieldProceduralTexture returns a StarfieldProceduralTexture JavaScript class.
 func (ba *Babylon) StarfieldProceduralTexture() *StarfieldProceduralTexture {
 	p := ba.ctx.Get("StarfieldProceduralTexture")
-	return StarfieldProceduralTextureFromJSObject(p)
+	return StarfieldProceduralTextureFromJSObject(p, ba.ctx)
 }
 
 // StarfieldProceduralTextureFromJSObject returns a wrapped StarfieldProceduralTexture JavaScript class.
-func StarfieldProceduralTextureFromJSObject(p js.Value) *StarfieldProceduralTexture {
-	return &StarfieldProceduralTexture{ProceduralTextureFromJSObject(p)}
+func StarfieldProceduralTextureFromJSObject(p js.Value, ctx js.Value) *StarfieldProceduralTexture {
+	return &StarfieldProceduralTexture{ProceduralTexture: ProceduralTextureFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewStarfieldProceduralTextureOpts contains optional parameters for NewStarfieldProceduralTexture.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewStarfieldProceduralTexture(name string, size float64, scen
 	}
 
 	p := ba.ctx.Get("StarfieldProceduralTexture").New(name, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps.JSObject())
-	return StarfieldProceduralTextureFromJSObject(p)
+	return StarfieldProceduralTextureFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

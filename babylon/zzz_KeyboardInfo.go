@@ -8,7 +8,10 @@ import (
 
 // KeyboardInfo represents a babylon.js KeyboardInfo.
 // This class is used to store keyboard related info for the onKeyboardObservable event.
-type KeyboardInfo struct{ p js.Value }
+type KeyboardInfo struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (k *KeyboardInfo) JSObject() js.Value { return k.p }
@@ -16,12 +19,12 @@ func (k *KeyboardInfo) JSObject() js.Value { return k.p }
 // KeyboardInfo returns a KeyboardInfo JavaScript class.
 func (ba *Babylon) KeyboardInfo() *KeyboardInfo {
 	p := ba.ctx.Get("KeyboardInfo")
-	return KeyboardInfoFromJSObject(p)
+	return KeyboardInfoFromJSObject(p, ba.ctx)
 }
 
 // KeyboardInfoFromJSObject returns a wrapped KeyboardInfo JavaScript class.
-func KeyboardInfoFromJSObject(p js.Value) *KeyboardInfo {
-	return &KeyboardInfo{p: p}
+func KeyboardInfoFromJSObject(p js.Value, ctx js.Value) *KeyboardInfo {
+	return &KeyboardInfo{p: p, ctx: ctx}
 }
 
 // NewKeyboardInfo returns a new KeyboardInfo object.
@@ -29,7 +32,7 @@ func KeyboardInfoFromJSObject(p js.Value) *KeyboardInfo {
 // https://doc.babylonjs.com/api/classes/babylon.keyboardinfo
 func (ba *Babylon) NewKeyboardInfo(jsType float64, event js.Value) *KeyboardInfo {
 	p := ba.ctx.Get("KeyboardInfo").New(jsType, event)
-	return KeyboardInfoFromJSObject(p)
+	return KeyboardInfoFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

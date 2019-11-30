@@ -8,7 +8,10 @@ import (
 
 // StackPanel3D represents a babylon.js StackPanel3D.
 // Class used to create a stack panel in 3D on XY plane
-type StackPanel3D struct{ *Container3D }
+type StackPanel3D struct {
+	*Container3D
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *StackPanel3D) JSObject() js.Value { return s.p }
@@ -16,12 +19,12 @@ func (s *StackPanel3D) JSObject() js.Value { return s.p }
 // StackPanel3D returns a StackPanel3D JavaScript class.
 func (ba *Babylon) StackPanel3D() *StackPanel3D {
 	p := ba.ctx.Get("StackPanel3D")
-	return StackPanel3DFromJSObject(p)
+	return StackPanel3DFromJSObject(p, ba.ctx)
 }
 
 // StackPanel3DFromJSObject returns a wrapped StackPanel3D JavaScript class.
-func StackPanel3DFromJSObject(p js.Value) *StackPanel3D {
-	return &StackPanel3D{Container3DFromJSObject(p)}
+func StackPanel3DFromJSObject(p js.Value, ctx js.Value) *StackPanel3D {
+	return &StackPanel3D{Container3D: Container3DFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewStackPanel3DOpts contains optional parameters for NewStackPanel3D.
@@ -38,7 +41,7 @@ func (ba *Babylon) NewStackPanel3D(opts *NewStackPanel3DOpts) *StackPanel3D {
 	}
 
 	p := ba.ctx.Get("StackPanel3D").New(opts.IsVertical.JSObject())
-	return StackPanel3DFromJSObject(p)
+	return StackPanel3DFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

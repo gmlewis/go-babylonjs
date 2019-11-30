@@ -12,7 +12,10 @@ import (
 // Particles can take different shapes while emitted like box, sphere, cone or you can write your custom function.
 //
 // See: https://doc.babylonjs.com/babylon101/particles
-type BaseParticleSystem struct{ p js.Value }
+type BaseParticleSystem struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (b *BaseParticleSystem) JSObject() js.Value { return b.p }
@@ -20,12 +23,12 @@ func (b *BaseParticleSystem) JSObject() js.Value { return b.p }
 // BaseParticleSystem returns a BaseParticleSystem JavaScript class.
 func (ba *Babylon) BaseParticleSystem() *BaseParticleSystem {
 	p := ba.ctx.Get("BaseParticleSystem")
-	return BaseParticleSystemFromJSObject(p)
+	return BaseParticleSystemFromJSObject(p, ba.ctx)
 }
 
 // BaseParticleSystemFromJSObject returns a wrapped BaseParticleSystem JavaScript class.
-func BaseParticleSystemFromJSObject(p js.Value) *BaseParticleSystem {
-	return &BaseParticleSystem{p: p}
+func BaseParticleSystemFromJSObject(p js.Value, ctx js.Value) *BaseParticleSystem {
+	return &BaseParticleSystem{p: p, ctx: ctx}
 }
 
 // NewBaseParticleSystem returns a new BaseParticleSystem object.
@@ -33,7 +36,7 @@ func BaseParticleSystemFromJSObject(p js.Value) *BaseParticleSystem {
 // https://doc.babylonjs.com/api/classes/babylon.baseparticlesystem
 func (ba *Babylon) NewBaseParticleSystem(name string) *BaseParticleSystem {
 	p := ba.ctx.Get("BaseParticleSystem").New(name)
-	return BaseParticleSystemFromJSObject(p)
+	return BaseParticleSystemFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -8,7 +8,10 @@ import (
 
 // BloomEffect represents a babylon.js BloomEffect.
 // The bloom effect spreads bright areas of an image to simulate artifacts seen in cameras
-type BloomEffect struct{ *PostProcessRenderEffect }
+type BloomEffect struct {
+	*PostProcessRenderEffect
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (b *BloomEffect) JSObject() js.Value { return b.p }
@@ -16,12 +19,12 @@ func (b *BloomEffect) JSObject() js.Value { return b.p }
 // BloomEffect returns a BloomEffect JavaScript class.
 func (ba *Babylon) BloomEffect() *BloomEffect {
 	p := ba.ctx.Get("BloomEffect")
-	return BloomEffectFromJSObject(p)
+	return BloomEffectFromJSObject(p, ba.ctx)
 }
 
 // BloomEffectFromJSObject returns a wrapped BloomEffect JavaScript class.
-func BloomEffectFromJSObject(p js.Value) *BloomEffect {
-	return &BloomEffect{PostProcessRenderEffectFromJSObject(p)}
+func BloomEffectFromJSObject(p js.Value, ctx js.Value) *BloomEffect {
+	return &BloomEffect{PostProcessRenderEffect: PostProcessRenderEffectFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewBloomEffectOpts contains optional parameters for NewBloomEffect.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewBloomEffect(scene *Scene, bloomScale float64, bloomWeight 
 	}
 
 	p := ba.ctx.Get("BloomEffect").New(scene.JSObject(), bloomScale, bloomWeight, bloomKernel, opts.PipelineTextureType.JSObject(), opts.BlockCompilation.JSObject())
-	return BloomEffectFromJSObject(p)
+	return BloomEffectFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

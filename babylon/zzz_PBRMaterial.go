@@ -12,7 +12,10 @@ import (
 // This offers the main features of a standard PBR material.
 // For more information, please refer to the documentation :
 // &lt;a href=&#34;https://doc.babylonjs.com/how_to/physically_based_rendering&#34;&gt;https://doc.babylonjs.com/how_to/physically_based_rendering&lt;/a&gt;
-type PBRMaterial struct{ *PBRBaseMaterial }
+type PBRMaterial struct {
+	*PBRBaseMaterial
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (p *PBRMaterial) JSObject() js.Value { return p.p }
@@ -20,12 +23,12 @@ func (p *PBRMaterial) JSObject() js.Value { return p.p }
 // PBRMaterial returns a PBRMaterial JavaScript class.
 func (ba *Babylon) PBRMaterial() *PBRMaterial {
 	p := ba.ctx.Get("PBRMaterial")
-	return PBRMaterialFromJSObject(p)
+	return PBRMaterialFromJSObject(p, ba.ctx)
 }
 
 // PBRMaterialFromJSObject returns a wrapped PBRMaterial JavaScript class.
-func PBRMaterialFromJSObject(p js.Value) *PBRMaterial {
-	return &PBRMaterial{PBRBaseMaterialFromJSObject(p)}
+func PBRMaterialFromJSObject(p js.Value, ctx js.Value) *PBRMaterial {
+	return &PBRMaterial{PBRBaseMaterial: PBRBaseMaterialFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewPBRMaterial returns a new PBRMaterial object.
@@ -33,7 +36,7 @@ func PBRMaterialFromJSObject(p js.Value) *PBRMaterial {
 // https://doc.babylonjs.com/api/classes/babylon.pbrmaterial
 func (ba *Babylon) NewPBRMaterial(name string, scene *Scene) *PBRMaterial {
 	p := ba.ctx.Get("PBRMaterial").New(name, scene.JSObject())
-	return PBRMaterialFromJSObject(p)
+	return PBRMaterialFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

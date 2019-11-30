@@ -8,7 +8,10 @@ import (
 
 // ColorSplitterBlock represents a babylon.js ColorSplitterBlock.
 // Block used to expand a Color3/4 into 4 outputs (one for each component)
-type ColorSplitterBlock struct{ *NodeMaterialBlock }
+type ColorSplitterBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (c *ColorSplitterBlock) JSObject() js.Value { return c.p }
@@ -16,12 +19,12 @@ func (c *ColorSplitterBlock) JSObject() js.Value { return c.p }
 // ColorSplitterBlock returns a ColorSplitterBlock JavaScript class.
 func (ba *Babylon) ColorSplitterBlock() *ColorSplitterBlock {
 	p := ba.ctx.Get("ColorSplitterBlock")
-	return ColorSplitterBlockFromJSObject(p)
+	return ColorSplitterBlockFromJSObject(p, ba.ctx)
 }
 
 // ColorSplitterBlockFromJSObject returns a wrapped ColorSplitterBlock JavaScript class.
-func ColorSplitterBlockFromJSObject(p js.Value) *ColorSplitterBlock {
-	return &ColorSplitterBlock{NodeMaterialBlockFromJSObject(p)}
+func ColorSplitterBlockFromJSObject(p js.Value, ctx js.Value) *ColorSplitterBlock {
+	return &ColorSplitterBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewColorSplitterBlock returns a new ColorSplitterBlock object.
@@ -29,7 +32,7 @@ func ColorSplitterBlockFromJSObject(p js.Value) *ColorSplitterBlock {
 // https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock
 func (ba *Babylon) NewColorSplitterBlock(name string) *ColorSplitterBlock {
 	p := ba.ctx.Get("ColorSplitterBlock").New(name)
-	return ColorSplitterBlockFromJSObject(p)
+	return ColorSplitterBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

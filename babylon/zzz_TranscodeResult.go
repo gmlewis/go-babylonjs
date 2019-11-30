@@ -8,7 +8,10 @@ import (
 
 // TranscodeResult represents a babylon.js TranscodeResult.
 // Result of transcoding a basis file
-type TranscodeResult struct{ p js.Value }
+type TranscodeResult struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (t *TranscodeResult) JSObject() js.Value { return t.p }
@@ -16,12 +19,12 @@ func (t *TranscodeResult) JSObject() js.Value { return t.p }
 // TranscodeResult returns a TranscodeResult JavaScript class.
 func (ba *Babylon) TranscodeResult() *TranscodeResult {
 	p := ba.ctx.Get("TranscodeResult")
-	return TranscodeResultFromJSObject(p)
+	return TranscodeResultFromJSObject(p, ba.ctx)
 }
 
 // TranscodeResultFromJSObject returns a wrapped TranscodeResult JavaScript class.
-func TranscodeResultFromJSObject(p js.Value) *TranscodeResult {
-	return &TranscodeResult{p: p}
+func TranscodeResultFromJSObject(p js.Value, ctx js.Value) *TranscodeResult {
+	return &TranscodeResult{p: p, ctx: ctx}
 }
 
 // TODO: methods

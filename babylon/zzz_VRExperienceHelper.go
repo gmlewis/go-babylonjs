@@ -9,7 +9,10 @@ import (
 // VRExperienceHelper represents a babylon.js VRExperienceHelper.
 // Helps to quickly add VR support to an existing scene.
 // See &lt;a href=&#34;http://doc.babylonjs.com/how_to/webvr_helper&#34;&gt;http://doc.babylonjs.com/how_to/webvr_helper&lt;/a&gt;
-type VRExperienceHelper struct{ p js.Value }
+type VRExperienceHelper struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (v *VRExperienceHelper) JSObject() js.Value { return v.p }
@@ -17,12 +20,12 @@ func (v *VRExperienceHelper) JSObject() js.Value { return v.p }
 // VRExperienceHelper returns a VRExperienceHelper JavaScript class.
 func (ba *Babylon) VRExperienceHelper() *VRExperienceHelper {
 	p := ba.ctx.Get("VRExperienceHelper")
-	return VRExperienceHelperFromJSObject(p)
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
 }
 
 // VRExperienceHelperFromJSObject returns a wrapped VRExperienceHelper JavaScript class.
-func VRExperienceHelperFromJSObject(p js.Value) *VRExperienceHelper {
-	return &VRExperienceHelper{p: p}
+func VRExperienceHelperFromJSObject(p js.Value, ctx js.Value) *VRExperienceHelper {
+	return &VRExperienceHelper{p: p, ctx: ctx}
 }
 
 // NewVRExperienceHelperOpts contains optional parameters for NewVRExperienceHelper.
@@ -39,7 +42,7 @@ func (ba *Babylon) NewVRExperienceHelper(scene *Scene, opts *NewVRExperienceHelp
 	}
 
 	p := ba.ctx.Get("VRExperienceHelper").New(scene.JSObject(), opts.WebVROptions.JSObject())
-	return VRExperienceHelperFromJSObject(p)
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -11,7 +11,10 @@ import (
 // Unlike the render target, it can render to several draw buffers in one draw.
 // This is specially interesting in deferred rendering or for any effects requiring more than
 // just one color from a single pass.
-type MultiRenderTarget struct{ *RenderTargetTexture }
+type MultiRenderTarget struct {
+	*RenderTargetTexture
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (m *MultiRenderTarget) JSObject() js.Value { return m.p }
@@ -19,12 +22,12 @@ func (m *MultiRenderTarget) JSObject() js.Value { return m.p }
 // MultiRenderTarget returns a MultiRenderTarget JavaScript class.
 func (ba *Babylon) MultiRenderTarget() *MultiRenderTarget {
 	p := ba.ctx.Get("MultiRenderTarget")
-	return MultiRenderTargetFromJSObject(p)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
 }
 
 // MultiRenderTargetFromJSObject returns a wrapped MultiRenderTarget JavaScript class.
-func MultiRenderTargetFromJSObject(p js.Value) *MultiRenderTarget {
-	return &MultiRenderTarget{RenderTargetTextureFromJSObject(p)}
+func MultiRenderTargetFromJSObject(p js.Value, ctx js.Value) *MultiRenderTarget {
+	return &MultiRenderTarget{RenderTargetTexture: RenderTargetTextureFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewMultiRenderTargetOpts contains optional parameters for NewMultiRenderTarget.
@@ -41,7 +44,7 @@ func (ba *Babylon) NewMultiRenderTarget(name string, size interface{}, count flo
 	}
 
 	p := ba.ctx.Get("MultiRenderTarget").New(name, size, count, scene.JSObject(), opts.Options.JSObject())
-	return MultiRenderTargetFromJSObject(p)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

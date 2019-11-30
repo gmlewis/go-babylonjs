@@ -11,7 +11,10 @@ import (
 // Author: Olivier Guyot
 // Separates very slightly R, G and B colors on the edges of the screen
 // Inspired by Francois Tarlier &amp;amp; Martins Upitis
-type LensRenderingPipeline struct{ *PostProcessRenderPipeline }
+type LensRenderingPipeline struct {
+	*PostProcessRenderPipeline
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (l *LensRenderingPipeline) JSObject() js.Value { return l.p }
@@ -19,12 +22,12 @@ func (l *LensRenderingPipeline) JSObject() js.Value { return l.p }
 // LensRenderingPipeline returns a LensRenderingPipeline JavaScript class.
 func (ba *Babylon) LensRenderingPipeline() *LensRenderingPipeline {
 	p := ba.ctx.Get("LensRenderingPipeline")
-	return LensRenderingPipelineFromJSObject(p)
+	return LensRenderingPipelineFromJSObject(p, ba.ctx)
 }
 
 // LensRenderingPipelineFromJSObject returns a wrapped LensRenderingPipeline JavaScript class.
-func LensRenderingPipelineFromJSObject(p js.Value) *LensRenderingPipeline {
-	return &LensRenderingPipeline{PostProcessRenderPipelineFromJSObject(p)}
+func LensRenderingPipelineFromJSObject(p js.Value, ctx js.Value) *LensRenderingPipeline {
+	return &LensRenderingPipeline{PostProcessRenderPipeline: PostProcessRenderPipelineFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewLensRenderingPipelineOpts contains optional parameters for NewLensRenderingPipeline.
@@ -43,7 +46,7 @@ func (ba *Babylon) NewLensRenderingPipeline(name string, parameters interface{},
 	}
 
 	p := ba.ctx.Get("LensRenderingPipeline").New(name, parameters, scene.JSObject(), opts.Ratio.JSObject(), opts.Cameras.JSObject())
-	return LensRenderingPipelineFromJSObject(p)
+	return LensRenderingPipelineFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -8,7 +8,10 @@ import (
 
 // BrickProceduralTexture represents a babylon.js BrickProceduralTexture.
 //
-type BrickProceduralTexture struct{ *ProceduralTexture }
+type BrickProceduralTexture struct {
+	*ProceduralTexture
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (b *BrickProceduralTexture) JSObject() js.Value { return b.p }
@@ -16,12 +19,12 @@ func (b *BrickProceduralTexture) JSObject() js.Value { return b.p }
 // BrickProceduralTexture returns a BrickProceduralTexture JavaScript class.
 func (ba *Babylon) BrickProceduralTexture() *BrickProceduralTexture {
 	p := ba.ctx.Get("BrickProceduralTexture")
-	return BrickProceduralTextureFromJSObject(p)
+	return BrickProceduralTextureFromJSObject(p, ba.ctx)
 }
 
 // BrickProceduralTextureFromJSObject returns a wrapped BrickProceduralTexture JavaScript class.
-func BrickProceduralTextureFromJSObject(p js.Value) *BrickProceduralTexture {
-	return &BrickProceduralTexture{ProceduralTextureFromJSObject(p)}
+func BrickProceduralTextureFromJSObject(p js.Value, ctx js.Value) *BrickProceduralTexture {
+	return &BrickProceduralTexture{ProceduralTexture: ProceduralTextureFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewBrickProceduralTextureOpts contains optional parameters for NewBrickProceduralTexture.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewBrickProceduralTexture(name string, size float64, scene *S
 	}
 
 	p := ba.ctx.Get("BrickProceduralTexture").New(name, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps.JSObject())
-	return BrickProceduralTextureFromJSObject(p)
+	return BrickProceduralTextureFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -8,7 +8,10 @@ import (
 
 // NodeMaterialOptimizer represents a babylon.js NodeMaterialOptimizer.
 // Root class for all node material optimizers
-type NodeMaterialOptimizer struct{ p js.Value }
+type NodeMaterialOptimizer struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (n *NodeMaterialOptimizer) JSObject() js.Value { return n.p }
@@ -16,12 +19,12 @@ func (n *NodeMaterialOptimizer) JSObject() js.Value { return n.p }
 // NodeMaterialOptimizer returns a NodeMaterialOptimizer JavaScript class.
 func (ba *Babylon) NodeMaterialOptimizer() *NodeMaterialOptimizer {
 	p := ba.ctx.Get("NodeMaterialOptimizer")
-	return NodeMaterialOptimizerFromJSObject(p)
+	return NodeMaterialOptimizerFromJSObject(p, ba.ctx)
 }
 
 // NodeMaterialOptimizerFromJSObject returns a wrapped NodeMaterialOptimizer JavaScript class.
-func NodeMaterialOptimizerFromJSObject(p js.Value) *NodeMaterialOptimizer {
-	return &NodeMaterialOptimizer{p: p}
+func NodeMaterialOptimizerFromJSObject(p js.Value, ctx js.Value) *NodeMaterialOptimizer {
+	return &NodeMaterialOptimizer{p: p, ctx: ctx}
 }
 
 // TODO: methods

@@ -10,7 +10,10 @@ import (
 // Default implementation IShadowGenerator.
 // This is the main object responsible of generating shadows in the framework.
 // Documentation: &lt;a href=&#34;https://doc.babylonjs.com/babylon101/shadows&#34;&gt;https://doc.babylonjs.com/babylon101/shadows&lt;/a&gt;
-type ShadowGenerator struct{ p js.Value }
+type ShadowGenerator struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *ShadowGenerator) JSObject() js.Value { return s.p }
@@ -18,12 +21,12 @@ func (s *ShadowGenerator) JSObject() js.Value { return s.p }
 // ShadowGenerator returns a ShadowGenerator JavaScript class.
 func (ba *Babylon) ShadowGenerator() *ShadowGenerator {
 	p := ba.ctx.Get("ShadowGenerator")
-	return ShadowGeneratorFromJSObject(p)
+	return ShadowGeneratorFromJSObject(p, ba.ctx)
 }
 
 // ShadowGeneratorFromJSObject returns a wrapped ShadowGenerator JavaScript class.
-func ShadowGeneratorFromJSObject(p js.Value) *ShadowGenerator {
-	return &ShadowGenerator{p: p}
+func ShadowGeneratorFromJSObject(p js.Value, ctx js.Value) *ShadowGenerator {
+	return &ShadowGenerator{p: p, ctx: ctx}
 }
 
 // NewShadowGeneratorOpts contains optional parameters for NewShadowGenerator.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewShadowGenerator(mapSize float64, light js.Value, opts *New
 	}
 
 	p := ba.ctx.Get("ShadowGenerator").New(mapSize, light, opts.UsefulFloatFirst.JSObject())
-	return ShadowGeneratorFromJSObject(p)
+	return ShadowGeneratorFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

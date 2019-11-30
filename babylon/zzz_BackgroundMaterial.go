@@ -8,7 +8,10 @@ import (
 
 // BackgroundMaterial represents a babylon.js BackgroundMaterial.
 // Background material used to create an efficient environement around your scene.
-type BackgroundMaterial struct{ p js.Value }
+type BackgroundMaterial struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (b *BackgroundMaterial) JSObject() js.Value { return b.p }
@@ -16,12 +19,12 @@ func (b *BackgroundMaterial) JSObject() js.Value { return b.p }
 // BackgroundMaterial returns a BackgroundMaterial JavaScript class.
 func (ba *Babylon) BackgroundMaterial() *BackgroundMaterial {
 	p := ba.ctx.Get("BackgroundMaterial")
-	return BackgroundMaterialFromJSObject(p)
+	return BackgroundMaterialFromJSObject(p, ba.ctx)
 }
 
 // BackgroundMaterialFromJSObject returns a wrapped BackgroundMaterial JavaScript class.
-func BackgroundMaterialFromJSObject(p js.Value) *BackgroundMaterial {
-	return &BackgroundMaterial{p: p}
+func BackgroundMaterialFromJSObject(p js.Value, ctx js.Value) *BackgroundMaterial {
+	return &BackgroundMaterial{p: p, ctx: ctx}
 }
 
 // NewBackgroundMaterial returns a new BackgroundMaterial object.
@@ -29,7 +32,7 @@ func BackgroundMaterialFromJSObject(p js.Value) *BackgroundMaterial {
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial
 func (ba *Babylon) NewBackgroundMaterial(name string, scene *Scene) *BackgroundMaterial {
 	p := ba.ctx.Get("BackgroundMaterial").New(name, scene.JSObject())
-	return BackgroundMaterialFromJSObject(p)
+	return BackgroundMaterialFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

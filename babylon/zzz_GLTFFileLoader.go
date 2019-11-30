@@ -8,7 +8,10 @@ import (
 
 // GLTFFileLoader represents a babylon.js GLTFFileLoader.
 // File loader for loading glTF files into a scene.
-type GLTFFileLoader struct{ p js.Value }
+type GLTFFileLoader struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (g *GLTFFileLoader) JSObject() js.Value { return g.p }
@@ -16,12 +19,12 @@ func (g *GLTFFileLoader) JSObject() js.Value { return g.p }
 // GLTFFileLoader returns a GLTFFileLoader JavaScript class.
 func (ba *Babylon) GLTFFileLoader() *GLTFFileLoader {
 	p := ba.ctx.Get("GLTFFileLoader")
-	return GLTFFileLoaderFromJSObject(p)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
 }
 
 // GLTFFileLoaderFromJSObject returns a wrapped GLTFFileLoader JavaScript class.
-func GLTFFileLoaderFromJSObject(p js.Value) *GLTFFileLoader {
-	return &GLTFFileLoader{p: p}
+func GLTFFileLoaderFromJSObject(p js.Value, ctx js.Value) *GLTFFileLoader {
+	return &GLTFFileLoader{p: p, ctx: ctx}
 }
 
 // TODO: methods

@@ -8,7 +8,10 @@ import (
 
 // DecalBuilder represents a babylon.js DecalBuilder.
 // Class containing static functions to help procedurally build meshes
-type DecalBuilder struct{ p js.Value }
+type DecalBuilder struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (d *DecalBuilder) JSObject() js.Value { return d.p }
@@ -16,12 +19,12 @@ func (d *DecalBuilder) JSObject() js.Value { return d.p }
 // DecalBuilder returns a DecalBuilder JavaScript class.
 func (ba *Babylon) DecalBuilder() *DecalBuilder {
 	p := ba.ctx.Get("DecalBuilder")
-	return DecalBuilderFromJSObject(p)
+	return DecalBuilderFromJSObject(p, ba.ctx)
 }
 
 // DecalBuilderFromJSObject returns a wrapped DecalBuilder JavaScript class.
-func DecalBuilderFromJSObject(p js.Value) *DecalBuilder {
-	return &DecalBuilder{p: p}
+func DecalBuilderFromJSObject(p js.Value, ctx js.Value) *DecalBuilder {
+	return &DecalBuilder{p: p, ctx: ctx}
 }
 
 // TODO: methods

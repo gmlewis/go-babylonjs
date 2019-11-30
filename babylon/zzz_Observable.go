@@ -13,7 +13,10 @@ import (
 // This enable a more fine grained execution without having to rely on multiple different Observable objects.
 // For instance you may have a given Observable that have four different types of notifications: Move (mask = 0x01), Stop (mask = 0x02), Turn Right (mask = 0X04), Turn Left (mask = 0X08).
 // A given observer can register itself with only Move and Stop (mask = 0x03), then it will only be notified when one of these two occurs and will never be for Turn Left/Right.
-type Observable struct{ p js.Value }
+type Observable struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (o *Observable) JSObject() js.Value { return o.p }
@@ -21,12 +24,12 @@ func (o *Observable) JSObject() js.Value { return o.p }
 // Observable returns a Observable JavaScript class.
 func (ba *Babylon) Observable() *Observable {
 	p := ba.ctx.Get("Observable")
-	return ObservableFromJSObject(p)
+	return ObservableFromJSObject(p, ba.ctx)
 }
 
 // ObservableFromJSObject returns a wrapped Observable JavaScript class.
-func ObservableFromJSObject(p js.Value) *Observable {
-	return &Observable{p: p}
+func ObservableFromJSObject(p js.Value, ctx js.Value) *Observable {
+	return &Observable{p: p, ctx: ctx}
 }
 
 // NewObservableOpts contains optional parameters for NewObservable.
@@ -43,7 +46,7 @@ func (ba *Babylon) NewObservable(opts *NewObservableOpts) *Observable {
 	}
 
 	p := ba.ctx.Get("Observable").New(opts.OnObserverAdded)
-	return ObservableFromJSObject(p)
+	return ObservableFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

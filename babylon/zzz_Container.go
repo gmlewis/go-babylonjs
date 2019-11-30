@@ -10,7 +10,10 @@ import (
 // Root class for 2D containers
 //
 // See: http://doc.babylonjs.com/how_to/gui#containers
-type Container struct{ *Control }
+type Container struct {
+	*Control
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (c *Container) JSObject() js.Value { return c.p }
@@ -18,12 +21,12 @@ func (c *Container) JSObject() js.Value { return c.p }
 // Container returns a Container JavaScript class.
 func (ba *Babylon) Container() *Container {
 	p := ba.ctx.Get("Container")
-	return ContainerFromJSObject(p)
+	return ContainerFromJSObject(p, ba.ctx)
 }
 
 // ContainerFromJSObject returns a wrapped Container JavaScript class.
-func ContainerFromJSObject(p js.Value) *Container {
-	return &Container{ControlFromJSObject(p)}
+func ContainerFromJSObject(p js.Value, ctx js.Value) *Container {
+	return &Container{Control: ControlFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewContainerOpts contains optional parameters for NewContainer.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewContainer(opts *NewContainerOpts) *Container {
 	}
 
 	p := ba.ctx.Get("Container").New(opts.Name.JSObject())
-	return ContainerFromJSObject(p)
+	return ContainerFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

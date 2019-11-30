@@ -8,7 +8,10 @@ import (
 
 // Axis represents a babylon.js Axis.
 // Defines the 3 main axes
-type Axis struct{ p js.Value }
+type Axis struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (a *Axis) JSObject() js.Value { return a.p }
@@ -16,12 +19,12 @@ func (a *Axis) JSObject() js.Value { return a.p }
 // Axis returns a Axis JavaScript class.
 func (ba *Babylon) Axis() *Axis {
 	p := ba.ctx.Get("Axis")
-	return AxisFromJSObject(p)
+	return AxisFromJSObject(p, ba.ctx)
 }
 
 // AxisFromJSObject returns a wrapped Axis JavaScript class.
-func AxisFromJSObject(p js.Value) *Axis {
-	return &Axis{p: p}
+func AxisFromJSObject(p js.Value, ctx js.Value) *Axis {
+	return &Axis{p: p, ctx: ctx}
 }
 
 // TODO: methods

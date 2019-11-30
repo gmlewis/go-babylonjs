@@ -10,7 +10,10 @@ import (
 // Class used to manage 3D user interface
 //
 // See: http://doc.babylonjs.com/how_to/gui3d
-type GUI3DManager struct{ p js.Value }
+type GUI3DManager struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (g *GUI3DManager) JSObject() js.Value { return g.p }
@@ -18,12 +21,12 @@ func (g *GUI3DManager) JSObject() js.Value { return g.p }
 // GUI3DManager returns a GUI3DManager JavaScript class.
 func (ba *Babylon) GUI3DManager() *GUI3DManager {
 	p := ba.ctx.Get("GUI3DManager")
-	return GUI3DManagerFromJSObject(p)
+	return GUI3DManagerFromJSObject(p, ba.ctx)
 }
 
 // GUI3DManagerFromJSObject returns a wrapped GUI3DManager JavaScript class.
-func GUI3DManagerFromJSObject(p js.Value) *GUI3DManager {
-	return &GUI3DManager{p: p}
+func GUI3DManagerFromJSObject(p js.Value, ctx js.Value) *GUI3DManager {
+	return &GUI3DManager{p: p, ctx: ctx}
 }
 
 // NewGUI3DManagerOpts contains optional parameters for NewGUI3DManager.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewGUI3DManager(opts *NewGUI3DManagerOpts) *GUI3DManager {
 	}
 
 	p := ba.ctx.Get("GUI3DManager").New(opts.Scene.JSObject())
-	return GUI3DManagerFromJSObject(p)
+	return GUI3DManagerFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

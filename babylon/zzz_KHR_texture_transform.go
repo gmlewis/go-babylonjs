@@ -8,7 +8,10 @@ import (
 
 // KHR_texture_transform represents a babylon.js KHR_texture_transform.
 // &lt;a href=&#34;https://github.com/KhronosGroup/glTF/blob/master/extensions/2.0/Khronos/KHR_texture_transform/README.md&#34;&gt;Specification&lt;/a&gt;
-type KHR_texture_transform struct{ p js.Value }
+type KHR_texture_transform struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (k *KHR_texture_transform) JSObject() js.Value { return k.p }
@@ -16,12 +19,12 @@ func (k *KHR_texture_transform) JSObject() js.Value { return k.p }
 // KHR_texture_transform returns a KHR_texture_transform JavaScript class.
 func (ba *Babylon) KHR_texture_transform() *KHR_texture_transform {
 	p := ba.ctx.Get("KHR_texture_transform")
-	return KHR_texture_transformFromJSObject(p)
+	return KHR_texture_transformFromJSObject(p, ba.ctx)
 }
 
 // KHR_texture_transformFromJSObject returns a wrapped KHR_texture_transform JavaScript class.
-func KHR_texture_transformFromJSObject(p js.Value) *KHR_texture_transform {
-	return &KHR_texture_transform{p: p}
+func KHR_texture_transformFromJSObject(p js.Value, ctx js.Value) *KHR_texture_transform {
+	return &KHR_texture_transform{p: p, ctx: ctx}
 }
 
 // TODO: methods

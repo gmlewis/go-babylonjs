@@ -8,7 +8,10 @@ import (
 
 // Frustum represents a babylon.js Frustum.
 // Represents a camera frustum
-type Frustum struct{ p js.Value }
+type Frustum struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (f *Frustum) JSObject() js.Value { return f.p }
@@ -16,12 +19,12 @@ func (f *Frustum) JSObject() js.Value { return f.p }
 // Frustum returns a Frustum JavaScript class.
 func (ba *Babylon) Frustum() *Frustum {
 	p := ba.ctx.Get("Frustum")
-	return FrustumFromJSObject(p)
+	return FrustumFromJSObject(p, ba.ctx)
 }
 
 // FrustumFromJSObject returns a wrapped Frustum JavaScript class.
-func FrustumFromJSObject(p js.Value) *Frustum {
-	return &Frustum{p: p}
+func FrustumFromJSObject(p js.Value, ctx js.Value) *Frustum {
+	return &Frustum{p: p, ctx: ctx}
 }
 
 // TODO: methods

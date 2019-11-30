@@ -8,7 +8,10 @@ import (
 
 // WebXRManagedOutputCanvas represents a babylon.js WebXRManagedOutputCanvas.
 // Creates a canvas that is added/removed from the webpage when entering/exiting XR
-type WebXRManagedOutputCanvas struct{ p js.Value }
+type WebXRManagedOutputCanvas struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (w *WebXRManagedOutputCanvas) JSObject() js.Value { return w.p }
@@ -16,12 +19,12 @@ func (w *WebXRManagedOutputCanvas) JSObject() js.Value { return w.p }
 // WebXRManagedOutputCanvas returns a WebXRManagedOutputCanvas JavaScript class.
 func (ba *Babylon) WebXRManagedOutputCanvas() *WebXRManagedOutputCanvas {
 	p := ba.ctx.Get("WebXRManagedOutputCanvas")
-	return WebXRManagedOutputCanvasFromJSObject(p)
+	return WebXRManagedOutputCanvasFromJSObject(p, ba.ctx)
 }
 
 // WebXRManagedOutputCanvasFromJSObject returns a wrapped WebXRManagedOutputCanvas JavaScript class.
-func WebXRManagedOutputCanvasFromJSObject(p js.Value) *WebXRManagedOutputCanvas {
-	return &WebXRManagedOutputCanvas{p: p}
+func WebXRManagedOutputCanvasFromJSObject(p js.Value, ctx js.Value) *WebXRManagedOutputCanvas {
+	return &WebXRManagedOutputCanvas{p: p, ctx: ctx}
 }
 
 // NewWebXRManagedOutputCanvasOpts contains optional parameters for NewWebXRManagedOutputCanvas.
@@ -42,7 +45,7 @@ func (ba *Babylon) NewWebXRManagedOutputCanvas(engine *ThinEngine, opts *NewWebX
 	}
 
 	p := ba.ctx.Get("WebXRManagedOutputCanvas").New(engine.JSObject(), opts.Canvas.JSObject(), opts.OnStateChangedObservable.JSObject(), opts.Configuration.JSObject())
-	return WebXRManagedOutputCanvasFromJSObject(p)
+	return WebXRManagedOutputCanvasFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

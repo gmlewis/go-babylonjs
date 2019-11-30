@@ -8,7 +8,10 @@ import (
 
 // BloomMergePostProcess represents a babylon.js BloomMergePostProcess.
 // The BloomMergePostProcess merges blurred images with the original based on the values of the circle of confusion.
-type BloomMergePostProcess struct{ *PostProcess }
+type BloomMergePostProcess struct {
+	*PostProcess
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (b *BloomMergePostProcess) JSObject() js.Value { return b.p }
@@ -16,12 +19,12 @@ func (b *BloomMergePostProcess) JSObject() js.Value { return b.p }
 // BloomMergePostProcess returns a BloomMergePostProcess JavaScript class.
 func (ba *Babylon) BloomMergePostProcess() *BloomMergePostProcess {
 	p := ba.ctx.Get("BloomMergePostProcess")
-	return BloomMergePostProcessFromJSObject(p)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
 }
 
 // BloomMergePostProcessFromJSObject returns a wrapped BloomMergePostProcess JavaScript class.
-func BloomMergePostProcessFromJSObject(p js.Value) *BloomMergePostProcess {
-	return &BloomMergePostProcess{PostProcessFromJSObject(p)}
+func BloomMergePostProcessFromJSObject(p js.Value, ctx js.Value) *BloomMergePostProcess {
+	return &BloomMergePostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewBloomMergePostProcessOpts contains optional parameters for NewBloomMergePostProcess.
@@ -46,7 +49,7 @@ func (ba *Babylon) NewBloomMergePostProcess(name string, originalFromInput *Post
 	}
 
 	p := ba.ctx.Get("BloomMergePostProcess").New(name, originalFromInput.JSObject(), blurred.JSObject(), weight, options, camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType.JSObject(), opts.BlockCompilation.JSObject())
-	return BloomMergePostProcessFromJSObject(p)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

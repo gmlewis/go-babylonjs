@@ -8,7 +8,10 @@ import (
 
 // Path2 represents a babylon.js Path2.
 // Represents a 2D path made up of multiple 2D points
-type Path2 struct{ p js.Value }
+type Path2 struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (p *Path2) JSObject() js.Value { return p.p }
@@ -16,12 +19,12 @@ func (p *Path2) JSObject() js.Value { return p.p }
 // Path2 returns a Path2 JavaScript class.
 func (ba *Babylon) Path2() *Path2 {
 	p := ba.ctx.Get("Path2")
-	return Path2FromJSObject(p)
+	return Path2FromJSObject(p, ba.ctx)
 }
 
 // Path2FromJSObject returns a wrapped Path2 JavaScript class.
-func Path2FromJSObject(p js.Value) *Path2 {
-	return &Path2{p: p}
+func Path2FromJSObject(p js.Value, ctx js.Value) *Path2 {
+	return &Path2{p: p, ctx: ctx}
 }
 
 // NewPath2 returns a new Path2 object.
@@ -29,7 +32,7 @@ func Path2FromJSObject(p js.Value) *Path2 {
 // https://doc.babylonjs.com/api/classes/babylon.path2
 func (ba *Babylon) NewPath2(x float64, y float64) *Path2 {
 	p := ba.ctx.Get("Path2").New(x, y)
-	return Path2FromJSObject(p)
+	return Path2FromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

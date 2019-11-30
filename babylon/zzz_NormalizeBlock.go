@@ -8,7 +8,10 @@ import (
 
 // NormalizeBlock represents a babylon.js NormalizeBlock.
 // Block used to normalize a vector
-type NormalizeBlock struct{ *NodeMaterialBlock }
+type NormalizeBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (n *NormalizeBlock) JSObject() js.Value { return n.p }
@@ -16,12 +19,12 @@ func (n *NormalizeBlock) JSObject() js.Value { return n.p }
 // NormalizeBlock returns a NormalizeBlock JavaScript class.
 func (ba *Babylon) NormalizeBlock() *NormalizeBlock {
 	p := ba.ctx.Get("NormalizeBlock")
-	return NormalizeBlockFromJSObject(p)
+	return NormalizeBlockFromJSObject(p, ba.ctx)
 }
 
 // NormalizeBlockFromJSObject returns a wrapped NormalizeBlock JavaScript class.
-func NormalizeBlockFromJSObject(p js.Value) *NormalizeBlock {
-	return &NormalizeBlock{NodeMaterialBlockFromJSObject(p)}
+func NormalizeBlockFromJSObject(p js.Value, ctx js.Value) *NormalizeBlock {
+	return &NormalizeBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewNormalizeBlock returns a new NormalizeBlock object.
@@ -29,7 +32,7 @@ func NormalizeBlockFromJSObject(p js.Value) *NormalizeBlock {
 // https://doc.babylonjs.com/api/classes/babylon.normalizeblock
 func (ba *Babylon) NewNormalizeBlock(name string) *NormalizeBlock {
 	p := ba.ctx.Get("NormalizeBlock").New(name)
-	return NormalizeBlockFromJSObject(p)
+	return NormalizeBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -8,7 +8,10 @@ import (
 
 // FadeInOutBehavior represents a babylon.js FadeInOutBehavior.
 // A behavior that when attached to a mesh will allow the mesh to fade in and out
-type FadeInOutBehavior struct{ p js.Value }
+type FadeInOutBehavior struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (f *FadeInOutBehavior) JSObject() js.Value { return f.p }
@@ -16,12 +19,12 @@ func (f *FadeInOutBehavior) JSObject() js.Value { return f.p }
 // FadeInOutBehavior returns a FadeInOutBehavior JavaScript class.
 func (ba *Babylon) FadeInOutBehavior() *FadeInOutBehavior {
 	p := ba.ctx.Get("FadeInOutBehavior")
-	return FadeInOutBehaviorFromJSObject(p)
+	return FadeInOutBehaviorFromJSObject(p, ba.ctx)
 }
 
 // FadeInOutBehaviorFromJSObject returns a wrapped FadeInOutBehavior JavaScript class.
-func FadeInOutBehaviorFromJSObject(p js.Value) *FadeInOutBehavior {
-	return &FadeInOutBehavior{p: p}
+func FadeInOutBehaviorFromJSObject(p js.Value, ctx js.Value) *FadeInOutBehavior {
+	return &FadeInOutBehavior{p: p, ctx: ctx}
 }
 
 // NewFadeInOutBehavior returns a new FadeInOutBehavior object.
@@ -29,7 +32,7 @@ func FadeInOutBehaviorFromJSObject(p js.Value) *FadeInOutBehavior {
 // https://doc.babylonjs.com/api/classes/babylon.fadeinoutbehavior
 func (ba *Babylon) NewFadeInOutBehavior() *FadeInOutBehavior {
 	p := ba.ctx.Get("FadeInOutBehavior").New()
-	return FadeInOutBehaviorFromJSObject(p)
+	return FadeInOutBehaviorFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -8,7 +8,10 @@ import (
 
 // SubEmitter represents a babylon.js SubEmitter.
 // Sub emitter class used to emit particles from an existing particle
-type SubEmitter struct{ p js.Value }
+type SubEmitter struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *SubEmitter) JSObject() js.Value { return s.p }
@@ -16,12 +19,12 @@ func (s *SubEmitter) JSObject() js.Value { return s.p }
 // SubEmitter returns a SubEmitter JavaScript class.
 func (ba *Babylon) SubEmitter() *SubEmitter {
 	p := ba.ctx.Get("SubEmitter")
-	return SubEmitterFromJSObject(p)
+	return SubEmitterFromJSObject(p, ba.ctx)
 }
 
 // SubEmitterFromJSObject returns a wrapped SubEmitter JavaScript class.
-func SubEmitterFromJSObject(p js.Value) *SubEmitter {
-	return &SubEmitter{p: p}
+func SubEmitterFromJSObject(p js.Value, ctx js.Value) *SubEmitter {
+	return &SubEmitter{p: p, ctx: ctx}
 }
 
 // NewSubEmitter returns a new SubEmitter object.
@@ -29,7 +32,7 @@ func SubEmitterFromJSObject(p js.Value) *SubEmitter {
 // https://doc.babylonjs.com/api/classes/babylon.subemitter
 func (ba *Babylon) NewSubEmitter(particleSystem *ParticleSystem) *SubEmitter {
 	p := ba.ctx.Get("SubEmitter").New(particleSystem.JSObject())
-	return SubEmitterFromJSObject(p)
+	return SubEmitterFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

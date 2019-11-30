@@ -8,7 +8,10 @@ import (
 
 // RotationGizmo represents a babylon.js RotationGizmo.
 // Gizmo that enables rotating a mesh along 3 axis
-type RotationGizmo struct{ *Gizmo }
+type RotationGizmo struct {
+	*Gizmo
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (r *RotationGizmo) JSObject() js.Value { return r.p }
@@ -16,12 +19,12 @@ func (r *RotationGizmo) JSObject() js.Value { return r.p }
 // RotationGizmo returns a RotationGizmo JavaScript class.
 func (ba *Babylon) RotationGizmo() *RotationGizmo {
 	p := ba.ctx.Get("RotationGizmo")
-	return RotationGizmoFromJSObject(p)
+	return RotationGizmoFromJSObject(p, ba.ctx)
 }
 
 // RotationGizmoFromJSObject returns a wrapped RotationGizmo JavaScript class.
-func RotationGizmoFromJSObject(p js.Value) *RotationGizmo {
-	return &RotationGizmo{GizmoFromJSObject(p)}
+func RotationGizmoFromJSObject(p js.Value, ctx js.Value) *RotationGizmo {
+	return &RotationGizmo{Gizmo: GizmoFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewRotationGizmoOpts contains optional parameters for NewRotationGizmo.
@@ -42,7 +45,7 @@ func (ba *Babylon) NewRotationGizmo(opts *NewRotationGizmoOpts) *RotationGizmo {
 	}
 
 	p := ba.ctx.Get("RotationGizmo").New(opts.GizmoLayer.JSObject(), opts.Tessellation.JSObject(), opts.UseEulerRotation.JSObject())
-	return RotationGizmoFromJSObject(p)
+	return RotationGizmoFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

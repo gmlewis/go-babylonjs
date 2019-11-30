@@ -10,7 +10,10 @@ import (
 // Class used to store a cell in an octree
 //
 // See: http://doc.babylonjs.com/how_to/optimizing_your_scene_with_octrees
-type OctreeBlock struct{ p js.Value }
+type OctreeBlock struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (o *OctreeBlock) JSObject() js.Value { return o.p }
@@ -18,12 +21,12 @@ func (o *OctreeBlock) JSObject() js.Value { return o.p }
 // OctreeBlock returns a OctreeBlock JavaScript class.
 func (ba *Babylon) OctreeBlock() *OctreeBlock {
 	p := ba.ctx.Get("OctreeBlock")
-	return OctreeBlockFromJSObject(p)
+	return OctreeBlockFromJSObject(p, ba.ctx)
 }
 
 // OctreeBlockFromJSObject returns a wrapped OctreeBlock JavaScript class.
-func OctreeBlockFromJSObject(p js.Value) *OctreeBlock {
-	return &OctreeBlock{p: p}
+func OctreeBlockFromJSObject(p js.Value, ctx js.Value) *OctreeBlock {
+	return &OctreeBlock{p: p, ctx: ctx}
 }
 
 // NewOctreeBlock returns a new OctreeBlock object.
@@ -31,7 +34,7 @@ func OctreeBlockFromJSObject(p js.Value) *OctreeBlock {
 // https://doc.babylonjs.com/api/classes/babylon.octreeblock
 func (ba *Babylon) NewOctreeBlock(minPoint *Vector3, maxPoint *Vector3, capacity float64, depth float64, maxDepth float64, creationFunc func()) *OctreeBlock {
 	p := ba.ctx.Get("OctreeBlock").New(minPoint.JSObject(), maxPoint.JSObject(), capacity, depth, maxDepth, creationFunc)
-	return OctreeBlockFromJSObject(p)
+	return OctreeBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

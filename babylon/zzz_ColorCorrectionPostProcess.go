@@ -13,7 +13,10 @@ import (
 // For an example of a color LUT, see here:
 //
 // See: http://udn.epicgames.com/Three/ColorGrading.html
-type ColorCorrectionPostProcess struct{ *PostProcess }
+type ColorCorrectionPostProcess struct {
+	*PostProcess
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (c *ColorCorrectionPostProcess) JSObject() js.Value { return c.p }
@@ -21,12 +24,12 @@ func (c *ColorCorrectionPostProcess) JSObject() js.Value { return c.p }
 // ColorCorrectionPostProcess returns a ColorCorrectionPostProcess JavaScript class.
 func (ba *Babylon) ColorCorrectionPostProcess() *ColorCorrectionPostProcess {
 	p := ba.ctx.Get("ColorCorrectionPostProcess")
-	return ColorCorrectionPostProcessFromJSObject(p)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
 }
 
 // ColorCorrectionPostProcessFromJSObject returns a wrapped ColorCorrectionPostProcess JavaScript class.
-func ColorCorrectionPostProcessFromJSObject(p js.Value) *ColorCorrectionPostProcess {
-	return &ColorCorrectionPostProcess{PostProcessFromJSObject(p)}
+func ColorCorrectionPostProcessFromJSObject(p js.Value, ctx js.Value) *ColorCorrectionPostProcess {
+	return &ColorCorrectionPostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewColorCorrectionPostProcessOpts contains optional parameters for NewColorCorrectionPostProcess.
@@ -47,7 +50,7 @@ func (ba *Babylon) NewColorCorrectionPostProcess(name string, colorTableUrl stri
 	}
 
 	p := ba.ctx.Get("ColorCorrectionPostProcess").New(name, colorTableUrl, options, camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject())
-	return ColorCorrectionPostProcessFromJSObject(p)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

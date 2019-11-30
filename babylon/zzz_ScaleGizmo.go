@@ -8,7 +8,10 @@ import (
 
 // ScaleGizmo represents a babylon.js ScaleGizmo.
 // Gizmo that enables scaling a mesh along 3 axis
-type ScaleGizmo struct{ *Gizmo }
+type ScaleGizmo struct {
+	*Gizmo
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *ScaleGizmo) JSObject() js.Value { return s.p }
@@ -16,12 +19,12 @@ func (s *ScaleGizmo) JSObject() js.Value { return s.p }
 // ScaleGizmo returns a ScaleGizmo JavaScript class.
 func (ba *Babylon) ScaleGizmo() *ScaleGizmo {
 	p := ba.ctx.Get("ScaleGizmo")
-	return ScaleGizmoFromJSObject(p)
+	return ScaleGizmoFromJSObject(p, ba.ctx)
 }
 
 // ScaleGizmoFromJSObject returns a wrapped ScaleGizmo JavaScript class.
-func ScaleGizmoFromJSObject(p js.Value) *ScaleGizmo {
-	return &ScaleGizmo{GizmoFromJSObject(p)}
+func ScaleGizmoFromJSObject(p js.Value, ctx js.Value) *ScaleGizmo {
+	return &ScaleGizmo{Gizmo: GizmoFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewScaleGizmoOpts contains optional parameters for NewScaleGizmo.
@@ -38,7 +41,7 @@ func (ba *Babylon) NewScaleGizmo(opts *NewScaleGizmoOpts) *ScaleGizmo {
 	}
 
 	p := ba.ctx.Get("ScaleGizmo").New(opts.GizmoLayer.JSObject())
-	return ScaleGizmoFromJSObject(p)
+	return ScaleGizmoFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

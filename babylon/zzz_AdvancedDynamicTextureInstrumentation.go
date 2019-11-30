@@ -8,7 +8,10 @@ import (
 
 // AdvancedDynamicTextureInstrumentation represents a babylon.js AdvancedDynamicTextureInstrumentation.
 // This class can be used to get instrumentation data from a AdvancedDynamicTexture object
-type AdvancedDynamicTextureInstrumentation struct{ p js.Value }
+type AdvancedDynamicTextureInstrumentation struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (a *AdvancedDynamicTextureInstrumentation) JSObject() js.Value { return a.p }
@@ -16,12 +19,12 @@ func (a *AdvancedDynamicTextureInstrumentation) JSObject() js.Value { return a.p
 // AdvancedDynamicTextureInstrumentation returns a AdvancedDynamicTextureInstrumentation JavaScript class.
 func (ba *Babylon) AdvancedDynamicTextureInstrumentation() *AdvancedDynamicTextureInstrumentation {
 	p := ba.ctx.Get("AdvancedDynamicTextureInstrumentation")
-	return AdvancedDynamicTextureInstrumentationFromJSObject(p)
+	return AdvancedDynamicTextureInstrumentationFromJSObject(p, ba.ctx)
 }
 
 // AdvancedDynamicTextureInstrumentationFromJSObject returns a wrapped AdvancedDynamicTextureInstrumentation JavaScript class.
-func AdvancedDynamicTextureInstrumentationFromJSObject(p js.Value) *AdvancedDynamicTextureInstrumentation {
-	return &AdvancedDynamicTextureInstrumentation{p: p}
+func AdvancedDynamicTextureInstrumentationFromJSObject(p js.Value, ctx js.Value) *AdvancedDynamicTextureInstrumentation {
+	return &AdvancedDynamicTextureInstrumentation{p: p, ctx: ctx}
 }
 
 // NewAdvancedDynamicTextureInstrumentation returns a new AdvancedDynamicTextureInstrumentation object.
@@ -29,7 +32,7 @@ func AdvancedDynamicTextureInstrumentationFromJSObject(p js.Value) *AdvancedDyna
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictextureinstrumentation
 func (ba *Babylon) NewAdvancedDynamicTextureInstrumentation(texture *AdvancedDynamicTexture) *AdvancedDynamicTextureInstrumentation {
 	p := ba.ctx.Get("AdvancedDynamicTextureInstrumentation").New(texture.JSObject())
-	return AdvancedDynamicTextureInstrumentationFromJSObject(p)
+	return AdvancedDynamicTextureInstrumentationFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

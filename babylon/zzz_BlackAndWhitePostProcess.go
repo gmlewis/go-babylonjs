@@ -8,7 +8,10 @@ import (
 
 // BlackAndWhitePostProcess represents a babylon.js BlackAndWhitePostProcess.
 // Post process used to render in black and white
-type BlackAndWhitePostProcess struct{ *PostProcess }
+type BlackAndWhitePostProcess struct {
+	*PostProcess
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (b *BlackAndWhitePostProcess) JSObject() js.Value { return b.p }
@@ -16,12 +19,12 @@ func (b *BlackAndWhitePostProcess) JSObject() js.Value { return b.p }
 // BlackAndWhitePostProcess returns a BlackAndWhitePostProcess JavaScript class.
 func (ba *Babylon) BlackAndWhitePostProcess() *BlackAndWhitePostProcess {
 	p := ba.ctx.Get("BlackAndWhitePostProcess")
-	return BlackAndWhitePostProcessFromJSObject(p)
+	return BlackAndWhitePostProcessFromJSObject(p, ba.ctx)
 }
 
 // BlackAndWhitePostProcessFromJSObject returns a wrapped BlackAndWhitePostProcess JavaScript class.
-func BlackAndWhitePostProcessFromJSObject(p js.Value) *BlackAndWhitePostProcess {
-	return &BlackAndWhitePostProcess{PostProcessFromJSObject(p)}
+func BlackAndWhitePostProcessFromJSObject(p js.Value, ctx js.Value) *BlackAndWhitePostProcess {
+	return &BlackAndWhitePostProcess{PostProcess: PostProcessFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewBlackAndWhitePostProcessOpts contains optional parameters for NewBlackAndWhitePostProcess.
@@ -42,7 +45,7 @@ func (ba *Babylon) NewBlackAndWhitePostProcess(name string, options float64, cam
 	}
 
 	p := ba.ctx.Get("BlackAndWhitePostProcess").New(name, options, camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject())
-	return BlackAndWhitePostProcessFromJSObject(p)
+	return BlackAndWhitePostProcessFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

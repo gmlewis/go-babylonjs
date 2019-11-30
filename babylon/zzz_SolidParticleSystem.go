@@ -13,7 +13,10 @@ import (
 // However it is behavior agnostic. This means it has no emitter, no particle physics, no particle recycler. You have to implement your own behavior.
 //
 // Full documentation here : &lt;a href=&#34;http://doc.babylonjs.com/how_to/Solid_Particle_System&#34;&gt;http://doc.babylonjs.com/how_to/Solid_Particle_System&lt;/a&gt;
-type SolidParticleSystem struct{ p js.Value }
+type SolidParticleSystem struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *SolidParticleSystem) JSObject() js.Value { return s.p }
@@ -21,12 +24,12 @@ func (s *SolidParticleSystem) JSObject() js.Value { return s.p }
 // SolidParticleSystem returns a SolidParticleSystem JavaScript class.
 func (ba *Babylon) SolidParticleSystem() *SolidParticleSystem {
 	p := ba.ctx.Get("SolidParticleSystem")
-	return SolidParticleSystemFromJSObject(p)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
 }
 
 // SolidParticleSystemFromJSObject returns a wrapped SolidParticleSystem JavaScript class.
-func SolidParticleSystemFromJSObject(p js.Value) *SolidParticleSystem {
-	return &SolidParticleSystem{p: p}
+func SolidParticleSystemFromJSObject(p js.Value, ctx js.Value) *SolidParticleSystem {
+	return &SolidParticleSystem{p: p, ctx: ctx}
 }
 
 // NewSolidParticleSystemOpts contains optional parameters for NewSolidParticleSystem.
@@ -43,7 +46,7 @@ func (ba *Babylon) NewSolidParticleSystem(name string, scene *Scene, opts *NewSo
 	}
 
 	p := ba.ctx.Get("SolidParticleSystem").New(name, scene.JSObject(), opts.Options.JSObject())
-	return SolidParticleSystemFromJSObject(p)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -10,7 +10,10 @@ import (
 // AmmoJS Physics plugin
 //
 // See: https://github.com/kripken/ammo.js/
-type AmmoJSPlugin struct{ p js.Value }
+type AmmoJSPlugin struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (a *AmmoJSPlugin) JSObject() js.Value { return a.p }
@@ -18,12 +21,12 @@ func (a *AmmoJSPlugin) JSObject() js.Value { return a.p }
 // AmmoJSPlugin returns a AmmoJSPlugin JavaScript class.
 func (ba *Babylon) AmmoJSPlugin() *AmmoJSPlugin {
 	p := ba.ctx.Get("AmmoJSPlugin")
-	return AmmoJSPluginFromJSObject(p)
+	return AmmoJSPluginFromJSObject(p, ba.ctx)
 }
 
 // AmmoJSPluginFromJSObject returns a wrapped AmmoJSPlugin JavaScript class.
-func AmmoJSPluginFromJSObject(p js.Value) *AmmoJSPlugin {
-	return &AmmoJSPlugin{p: p}
+func AmmoJSPluginFromJSObject(p js.Value, ctx js.Value) *AmmoJSPlugin {
+	return &AmmoJSPlugin{p: p, ctx: ctx}
 }
 
 // NewAmmoJSPluginOpts contains optional parameters for NewAmmoJSPlugin.
@@ -44,7 +47,7 @@ func (ba *Babylon) NewAmmoJSPlugin(opts *NewAmmoJSPluginOpts) *AmmoJSPlugin {
 	}
 
 	p := ba.ctx.Get("AmmoJSPlugin").New(opts._useDeltaForWorldStep.JSObject(), opts.AmmoInjection, opts.OverlappingPairCache)
-	return AmmoJSPluginFromJSObject(p)
+	return AmmoJSPluginFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

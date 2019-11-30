@@ -11,7 +11,10 @@ import (
 // This special texture works similar to other textures, with the exception of a few parameters.
 //
 // See: https://doc.babylonjs.com/how_to/video_texture
-type VideoTexture struct{ *Texture }
+type VideoTexture struct {
+	*Texture
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (v *VideoTexture) JSObject() js.Value { return v.p }
@@ -19,12 +22,12 @@ func (v *VideoTexture) JSObject() js.Value { return v.p }
 // VideoTexture returns a VideoTexture JavaScript class.
 func (ba *Babylon) VideoTexture() *VideoTexture {
 	p := ba.ctx.Get("VideoTexture")
-	return VideoTextureFromJSObject(p)
+	return VideoTextureFromJSObject(p, ba.ctx)
 }
 
 // VideoTextureFromJSObject returns a wrapped VideoTexture JavaScript class.
-func VideoTextureFromJSObject(p js.Value) *VideoTexture {
-	return &VideoTexture{TextureFromJSObject(p)}
+func VideoTextureFromJSObject(p js.Value, ctx js.Value) *VideoTexture {
+	return &VideoTexture{Texture: TextureFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewVideoTextureOpts contains optional parameters for NewVideoTexture.
@@ -47,7 +50,7 @@ func (ba *Babylon) NewVideoTexture(name string, src string, scene *Scene, opts *
 	}
 
 	p := ba.ctx.Get("VideoTexture").New(name, src, scene.JSObject(), opts.GenerateMipMaps.JSObject(), opts.InvertY.JSObject(), opts.SamplingMode.JSObject(), opts.Settings.JSObject())
-	return VideoTextureFromJSObject(p)
+	return VideoTextureFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

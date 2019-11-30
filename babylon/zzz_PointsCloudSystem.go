@@ -13,7 +13,10 @@ import (
 // However it is behavior agnostic. This means it has no emitter, no particle physics, no particle recycler. You have to implement your own behavior.
 //
 // Full documentation here : TO BE ENTERED
-type PointsCloudSystem struct{ p js.Value }
+type PointsCloudSystem struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (p *PointsCloudSystem) JSObject() js.Value { return p.p }
@@ -21,12 +24,12 @@ func (p *PointsCloudSystem) JSObject() js.Value { return p.p }
 // PointsCloudSystem returns a PointsCloudSystem JavaScript class.
 func (ba *Babylon) PointsCloudSystem() *PointsCloudSystem {
 	p := ba.ctx.Get("PointsCloudSystem")
-	return PointsCloudSystemFromJSObject(p)
+	return PointsCloudSystemFromJSObject(p, ba.ctx)
 }
 
 // PointsCloudSystemFromJSObject returns a wrapped PointsCloudSystem JavaScript class.
-func PointsCloudSystemFromJSObject(p js.Value) *PointsCloudSystem {
-	return &PointsCloudSystem{p: p}
+func PointsCloudSystemFromJSObject(p js.Value, ctx js.Value) *PointsCloudSystem {
+	return &PointsCloudSystem{p: p, ctx: ctx}
 }
 
 // NewPointsCloudSystemOpts contains optional parameters for NewPointsCloudSystem.
@@ -43,7 +46,7 @@ func (ba *Babylon) NewPointsCloudSystem(name string, pointSize float64, scene *S
 	}
 
 	p := ba.ctx.Get("PointsCloudSystem").New(name, pointSize, scene.JSObject(), opts.Options.JSObject())
-	return PointsCloudSystemFromJSObject(p)
+	return PointsCloudSystemFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

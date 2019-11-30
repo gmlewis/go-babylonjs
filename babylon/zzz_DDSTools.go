@@ -8,7 +8,10 @@ import (
 
 // DDSTools represents a babylon.js DDSTools.
 // Class used to provide DDS decompression tools
-type DDSTools struct{ p js.Value }
+type DDSTools struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (d *DDSTools) JSObject() js.Value { return d.p }
@@ -16,12 +19,12 @@ func (d *DDSTools) JSObject() js.Value { return d.p }
 // DDSTools returns a DDSTools JavaScript class.
 func (ba *Babylon) DDSTools() *DDSTools {
 	p := ba.ctx.Get("DDSTools")
-	return DDSToolsFromJSObject(p)
+	return DDSToolsFromJSObject(p, ba.ctx)
 }
 
 // DDSToolsFromJSObject returns a wrapped DDSTools JavaScript class.
-func DDSToolsFromJSObject(p js.Value) *DDSTools {
-	return &DDSTools{p: p}
+func DDSToolsFromJSObject(p js.Value, ctx js.Value) *DDSTools {
+	return &DDSTools{p: p, ctx: ctx}
 }
 
 // TODO: methods

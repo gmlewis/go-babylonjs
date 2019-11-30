@@ -8,7 +8,10 @@ import (
 
 // FresnelBlock represents a babylon.js FresnelBlock.
 // Block used to compute fresnel value
-type FresnelBlock struct{ *NodeMaterialBlock }
+type FresnelBlock struct {
+	*NodeMaterialBlock
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (f *FresnelBlock) JSObject() js.Value { return f.p }
@@ -16,12 +19,12 @@ func (f *FresnelBlock) JSObject() js.Value { return f.p }
 // FresnelBlock returns a FresnelBlock JavaScript class.
 func (ba *Babylon) FresnelBlock() *FresnelBlock {
 	p := ba.ctx.Get("FresnelBlock")
-	return FresnelBlockFromJSObject(p)
+	return FresnelBlockFromJSObject(p, ba.ctx)
 }
 
 // FresnelBlockFromJSObject returns a wrapped FresnelBlock JavaScript class.
-func FresnelBlockFromJSObject(p js.Value) *FresnelBlock {
-	return &FresnelBlock{NodeMaterialBlockFromJSObject(p)}
+func FresnelBlockFromJSObject(p js.Value, ctx js.Value) *FresnelBlock {
+	return &FresnelBlock{NodeMaterialBlock: NodeMaterialBlockFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewFresnelBlock returns a new FresnelBlock object.
@@ -29,7 +32,7 @@ func FresnelBlockFromJSObject(p js.Value) *FresnelBlock {
 // https://doc.babylonjs.com/api/classes/babylon.fresnelblock
 func (ba *Babylon) NewFresnelBlock(name string) *FresnelBlock {
 	p := ba.ctx.Get("FresnelBlock").New(name)
-	return FresnelBlockFromJSObject(p)
+	return FresnelBlockFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

@@ -8,7 +8,10 @@ import (
 
 // GizmoManager represents a babylon.js GizmoManager.
 // Helps setup gizmo&amp;#39;s in the scene to rotate/scale/position meshes
-type GizmoManager struct{ p js.Value }
+type GizmoManager struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (g *GizmoManager) JSObject() js.Value { return g.p }
@@ -16,12 +19,12 @@ func (g *GizmoManager) JSObject() js.Value { return g.p }
 // GizmoManager returns a GizmoManager JavaScript class.
 func (ba *Babylon) GizmoManager() *GizmoManager {
 	p := ba.ctx.Get("GizmoManager")
-	return GizmoManagerFromJSObject(p)
+	return GizmoManagerFromJSObject(p, ba.ctx)
 }
 
 // GizmoManagerFromJSObject returns a wrapped GizmoManager JavaScript class.
-func GizmoManagerFromJSObject(p js.Value) *GizmoManager {
-	return &GizmoManager{p: p}
+func GizmoManagerFromJSObject(p js.Value, ctx js.Value) *GizmoManager {
+	return &GizmoManager{p: p, ctx: ctx}
 }
 
 // NewGizmoManager returns a new GizmoManager object.
@@ -29,7 +32,7 @@ func GizmoManagerFromJSObject(p js.Value) *GizmoManager {
 // https://doc.babylonjs.com/api/classes/babylon.gizmomanager
 func (ba *Babylon) NewGizmoManager(scene *Scene) *GizmoManager {
 	p := ba.ctx.Get("GizmoManager").New(scene.JSObject())
-	return GizmoManagerFromJSObject(p)
+	return GizmoManagerFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

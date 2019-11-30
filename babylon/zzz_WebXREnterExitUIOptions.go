@@ -8,7 +8,10 @@ import (
 
 // WebXREnterExitUIOptions represents a babylon.js WebXREnterExitUIOptions.
 // Options to create the webXR UI
-type WebXREnterExitUIOptions struct{ p js.Value }
+type WebXREnterExitUIOptions struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (w *WebXREnterExitUIOptions) JSObject() js.Value { return w.p }
@@ -16,12 +19,12 @@ func (w *WebXREnterExitUIOptions) JSObject() js.Value { return w.p }
 // WebXREnterExitUIOptions returns a WebXREnterExitUIOptions JavaScript class.
 func (ba *Babylon) WebXREnterExitUIOptions() *WebXREnterExitUIOptions {
 	p := ba.ctx.Get("WebXREnterExitUIOptions")
-	return WebXREnterExitUIOptionsFromJSObject(p)
+	return WebXREnterExitUIOptionsFromJSObject(p, ba.ctx)
 }
 
 // WebXREnterExitUIOptionsFromJSObject returns a wrapped WebXREnterExitUIOptions JavaScript class.
-func WebXREnterExitUIOptionsFromJSObject(p js.Value) *WebXREnterExitUIOptions {
-	return &WebXREnterExitUIOptions{p: p}
+func WebXREnterExitUIOptionsFromJSObject(p js.Value, ctx js.Value) *WebXREnterExitUIOptions {
+	return &WebXREnterExitUIOptions{p: p, ctx: ctx}
 }
 
 // TODO: methods

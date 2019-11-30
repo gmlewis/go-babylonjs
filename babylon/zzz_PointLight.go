@@ -11,7 +11,10 @@ import (
 // The light is emitted in every direction from this point.
 // A good example of a point light is a standard light bulb.
 // Documentation: &lt;a href=&#34;https://doc.babylonjs.com/babylon101/lights&#34;&gt;https://doc.babylonjs.com/babylon101/lights&lt;/a&gt;
-type PointLight struct{ *ShadowLight }
+type PointLight struct {
+	*ShadowLight
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (p *PointLight) JSObject() js.Value { return p.p }
@@ -19,12 +22,12 @@ func (p *PointLight) JSObject() js.Value { return p.p }
 // PointLight returns a PointLight JavaScript class.
 func (ba *Babylon) PointLight() *PointLight {
 	p := ba.ctx.Get("PointLight")
-	return PointLightFromJSObject(p)
+	return PointLightFromJSObject(p, ba.ctx)
 }
 
 // PointLightFromJSObject returns a wrapped PointLight JavaScript class.
-func PointLightFromJSObject(p js.Value) *PointLight {
-	return &PointLight{ShadowLightFromJSObject(p)}
+func PointLightFromJSObject(p js.Value, ctx js.Value) *PointLight {
+	return &PointLight{ShadowLight: ShadowLightFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewPointLight returns a new PointLight object.
@@ -32,7 +35,7 @@ func PointLightFromJSObject(p js.Value) *PointLight {
 // https://doc.babylonjs.com/api/classes/babylon.pointlight
 func (ba *Babylon) NewPointLight(name string, position *Vector3, scene *Scene) *PointLight {
 	p := ba.ctx.Get("PointLight").New(name, position.JSObject(), scene.JSObject())
-	return PointLightFromJSObject(p)
+	return PointLightFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

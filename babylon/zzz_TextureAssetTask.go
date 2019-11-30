@@ -8,7 +8,10 @@ import (
 
 // TextureAssetTask represents a babylon.js TextureAssetTask.
 // Define a task used by AssetsManager to load 2D textures
-type TextureAssetTask struct{ *AbstractAssetTask }
+type TextureAssetTask struct {
+	*AbstractAssetTask
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (t *TextureAssetTask) JSObject() js.Value { return t.p }
@@ -16,12 +19,12 @@ func (t *TextureAssetTask) JSObject() js.Value { return t.p }
 // TextureAssetTask returns a TextureAssetTask JavaScript class.
 func (ba *Babylon) TextureAssetTask() *TextureAssetTask {
 	p := ba.ctx.Get("TextureAssetTask")
-	return TextureAssetTaskFromJSObject(p)
+	return TextureAssetTaskFromJSObject(p, ba.ctx)
 }
 
 // TextureAssetTaskFromJSObject returns a wrapped TextureAssetTask JavaScript class.
-func TextureAssetTaskFromJSObject(p js.Value) *TextureAssetTask {
-	return &TextureAssetTask{AbstractAssetTaskFromJSObject(p)}
+func TextureAssetTaskFromJSObject(p js.Value, ctx js.Value) *TextureAssetTask {
+	return &TextureAssetTask{AbstractAssetTask: AbstractAssetTaskFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewTextureAssetTaskOpts contains optional parameters for NewTextureAssetTask.
@@ -42,7 +45,7 @@ func (ba *Babylon) NewTextureAssetTask(name string, url string, opts *NewTexture
 	}
 
 	p := ba.ctx.Get("TextureAssetTask").New(name, url, opts.NoMipmap.JSObject(), opts.InvertY.JSObject(), opts.SamplingMode.JSObject())
-	return TextureAssetTaskFromJSObject(p)
+	return TextureAssetTaskFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

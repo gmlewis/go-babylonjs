@@ -8,7 +8,10 @@ import (
 
 // PositionGizmo represents a babylon.js PositionGizmo.
 // Gizmo that enables dragging a mesh along 3 axis
-type PositionGizmo struct{ *Gizmo }
+type PositionGizmo struct {
+	*Gizmo
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (p *PositionGizmo) JSObject() js.Value { return p.p }
@@ -16,12 +19,12 @@ func (p *PositionGizmo) JSObject() js.Value { return p.p }
 // PositionGizmo returns a PositionGizmo JavaScript class.
 func (ba *Babylon) PositionGizmo() *PositionGizmo {
 	p := ba.ctx.Get("PositionGizmo")
-	return PositionGizmoFromJSObject(p)
+	return PositionGizmoFromJSObject(p, ba.ctx)
 }
 
 // PositionGizmoFromJSObject returns a wrapped PositionGizmo JavaScript class.
-func PositionGizmoFromJSObject(p js.Value) *PositionGizmo {
-	return &PositionGizmo{GizmoFromJSObject(p)}
+func PositionGizmoFromJSObject(p js.Value, ctx js.Value) *PositionGizmo {
+	return &PositionGizmo{Gizmo: GizmoFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewPositionGizmoOpts contains optional parameters for NewPositionGizmo.
@@ -38,7 +41,7 @@ func (ba *Babylon) NewPositionGizmo(opts *NewPositionGizmoOpts) *PositionGizmo {
 	}
 
 	p := ba.ctx.Get("PositionGizmo").New(opts.GizmoLayer.JSObject())
-	return PositionGizmoFromJSObject(p)
+	return PositionGizmoFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

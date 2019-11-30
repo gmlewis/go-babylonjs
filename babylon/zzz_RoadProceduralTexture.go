@@ -8,7 +8,10 @@ import (
 
 // RoadProceduralTexture represents a babylon.js RoadProceduralTexture.
 //
-type RoadProceduralTexture struct{ *ProceduralTexture }
+type RoadProceduralTexture struct {
+	*ProceduralTexture
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (r *RoadProceduralTexture) JSObject() js.Value { return r.p }
@@ -16,12 +19,12 @@ func (r *RoadProceduralTexture) JSObject() js.Value { return r.p }
 // RoadProceduralTexture returns a RoadProceduralTexture JavaScript class.
 func (ba *Babylon) RoadProceduralTexture() *RoadProceduralTexture {
 	p := ba.ctx.Get("RoadProceduralTexture")
-	return RoadProceduralTextureFromJSObject(p)
+	return RoadProceduralTextureFromJSObject(p, ba.ctx)
 }
 
 // RoadProceduralTextureFromJSObject returns a wrapped RoadProceduralTexture JavaScript class.
-func RoadProceduralTextureFromJSObject(p js.Value) *RoadProceduralTexture {
-	return &RoadProceduralTexture{ProceduralTextureFromJSObject(p)}
+func RoadProceduralTextureFromJSObject(p js.Value, ctx js.Value) *RoadProceduralTexture {
+	return &RoadProceduralTexture{ProceduralTexture: ProceduralTextureFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewRoadProceduralTextureOpts contains optional parameters for NewRoadProceduralTexture.
@@ -40,7 +43,7 @@ func (ba *Babylon) NewRoadProceduralTexture(name string, size float64, scene *Sc
 	}
 
 	p := ba.ctx.Get("RoadProceduralTexture").New(name, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps.JSObject())
-	return RoadProceduralTextureFromJSObject(p)
+	return RoadProceduralTextureFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

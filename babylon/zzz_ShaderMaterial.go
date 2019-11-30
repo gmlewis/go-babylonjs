@@ -12,7 +12,10 @@ import (
 // This returned material effects how the mesh will look based on the code in the shaders.
 //
 // See: http://doc.babylonjs.com/how_to/shader_material
-type ShaderMaterial struct{ *Material }
+type ShaderMaterial struct {
+	*Material
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (s *ShaderMaterial) JSObject() js.Value { return s.p }
@@ -20,12 +23,12 @@ func (s *ShaderMaterial) JSObject() js.Value { return s.p }
 // ShaderMaterial returns a ShaderMaterial JavaScript class.
 func (ba *Babylon) ShaderMaterial() *ShaderMaterial {
 	p := ba.ctx.Get("ShaderMaterial")
-	return ShaderMaterialFromJSObject(p)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
 }
 
 // ShaderMaterialFromJSObject returns a wrapped ShaderMaterial JavaScript class.
-func ShaderMaterialFromJSObject(p js.Value) *ShaderMaterial {
-	return &ShaderMaterial{MaterialFromJSObject(p)}
+func ShaderMaterialFromJSObject(p js.Value, ctx js.Value) *ShaderMaterial {
+	return &ShaderMaterial{Material: MaterialFromJSObject(p, ctx), ctx: ctx}
 }
 
 // NewShaderMaterialOpts contains optional parameters for NewShaderMaterial.
@@ -42,7 +45,7 @@ func (ba *Babylon) NewShaderMaterial(name string, scene *Scene, shaderPath inter
 	}
 
 	p := ba.ctx.Get("ShaderMaterial").New(name, scene.JSObject(), shaderPath, opts.Options.JSObject())
-	return ShaderMaterialFromJSObject(p)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

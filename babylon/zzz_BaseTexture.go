@@ -10,7 +10,10 @@ import (
 // Base class of all the textures in babylon.
 // It groups all the common properties the materials, post process, lights... might need
 // in order to make a correct use of the texture.
-type BaseTexture struct{ p js.Value }
+type BaseTexture struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (b *BaseTexture) JSObject() js.Value { return b.p }
@@ -18,12 +21,12 @@ func (b *BaseTexture) JSObject() js.Value { return b.p }
 // BaseTexture returns a BaseTexture JavaScript class.
 func (ba *Babylon) BaseTexture() *BaseTexture {
 	p := ba.ctx.Get("BaseTexture")
-	return BaseTextureFromJSObject(p)
+	return BaseTextureFromJSObject(p, ba.ctx)
 }
 
 // BaseTextureFromJSObject returns a wrapped BaseTexture JavaScript class.
-func BaseTextureFromJSObject(p js.Value) *BaseTexture {
-	return &BaseTexture{p: p}
+func BaseTextureFromJSObject(p js.Value, ctx js.Value) *BaseTexture {
+	return &BaseTexture{p: p, ctx: ctx}
 }
 
 // NewBaseTexture returns a new BaseTexture object.
@@ -31,7 +34,7 @@ func BaseTextureFromJSObject(p js.Value) *BaseTexture {
 // https://doc.babylonjs.com/api/classes/babylon.basetexture
 func (ba *Babylon) NewBaseTexture(scene *Scene) *BaseTexture {
 	p := ba.ctx.Get("BaseTexture").New(scene.JSObject())
-	return BaseTextureFromJSObject(p)
+	return BaseTextureFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

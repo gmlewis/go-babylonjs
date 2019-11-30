@@ -8,7 +8,10 @@ import (
 
 // GLTFData represents a babylon.js GLTFData.
 // Class for holding and downloading glTF file data
-type GLTFData struct{ p js.Value }
+type GLTFData struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (g *GLTFData) JSObject() js.Value { return g.p }
@@ -16,12 +19,12 @@ func (g *GLTFData) JSObject() js.Value { return g.p }
 // GLTFData returns a GLTFData JavaScript class.
 func (ba *Babylon) GLTFData() *GLTFData {
 	p := ba.ctx.Get("GLTFData")
-	return GLTFDataFromJSObject(p)
+	return GLTFDataFromJSObject(p, ba.ctx)
 }
 
 // GLTFDataFromJSObject returns a wrapped GLTFData JavaScript class.
-func GLTFDataFromJSObject(p js.Value) *GLTFData {
-	return &GLTFData{p: p}
+func GLTFDataFromJSObject(p js.Value, ctx js.Value) *GLTFData {
+	return &GLTFData{p: p, ctx: ctx}
 }
 
 // NewGLTFData returns a new GLTFData object.
@@ -29,7 +32,7 @@ func GLTFDataFromJSObject(p js.Value) *GLTFData {
 // https://doc.babylonjs.com/api/classes/babylon.gltfdata
 func (ba *Babylon) NewGLTFData() *GLTFData {
 	p := ba.ctx.Get("GLTFData").New()
-	return GLTFDataFromJSObject(p)
+	return GLTFDataFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods

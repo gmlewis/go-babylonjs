@@ -8,7 +8,10 @@ import (
 
 // FurMaterial represents a babylon.js FurMaterial.
 //
-type FurMaterial struct{ p js.Value }
+type FurMaterial struct {
+	p   js.Value
+	ctx js.Value
+}
 
 // JSObject returns the underlying js.Value.
 func (f *FurMaterial) JSObject() js.Value { return f.p }
@@ -16,12 +19,12 @@ func (f *FurMaterial) JSObject() js.Value { return f.p }
 // FurMaterial returns a FurMaterial JavaScript class.
 func (ba *Babylon) FurMaterial() *FurMaterial {
 	p := ba.ctx.Get("FurMaterial")
-	return FurMaterialFromJSObject(p)
+	return FurMaterialFromJSObject(p, ba.ctx)
 }
 
 // FurMaterialFromJSObject returns a wrapped FurMaterial JavaScript class.
-func FurMaterialFromJSObject(p js.Value) *FurMaterial {
-	return &FurMaterial{p: p}
+func FurMaterialFromJSObject(p js.Value, ctx js.Value) *FurMaterial {
+	return &FurMaterial{p: p, ctx: ctx}
 }
 
 // NewFurMaterial returns a new FurMaterial object.
@@ -29,7 +32,7 @@ func FurMaterialFromJSObject(p js.Value) *FurMaterial {
 // https://doc.babylonjs.com/api/classes/babylon.furmaterial
 func (ba *Babylon) NewFurMaterial(name string, scene *Scene) *FurMaterial {
 	p := ba.ctx.Get("FurMaterial").New(name, scene.JSObject())
-	return FurMaterialFromJSObject(p)
+	return FurMaterialFromJSObject(p, ba.ctx)
 }
 
 // TODO: methods
