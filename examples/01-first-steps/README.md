@@ -1,7 +1,16 @@
 # Babylon First Steps for Go
 
+01-first-steps is a port to Go of the Babylon example located here:
+https://doc.babylonjs.com/babylon101/first
 
-----------------------------------------------------------------------
+To try it out, run:
+
+```
+./build.sh
+./serve.sh
+```
+
+---
 
 # License
 
