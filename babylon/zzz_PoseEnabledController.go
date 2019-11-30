@@ -14,8 +14,8 @@ type PoseEnabledController struct{ *Gamepad }
 func (p *PoseEnabledController) JSObject() js.Value { return p.p }
 
 // PoseEnabledController returns a PoseEnabledController JavaScript class.
-func (b *Babylon) PoseEnabledController() *PoseEnabledController {
-	p := b.ctx.Get("PoseEnabledController")
+func (ba *Babylon) PoseEnabledController() *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController")
 	return PoseEnabledControllerFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func PoseEnabledControllerFromJSObject(p js.Value) *PoseEnabledController {
 // NewPoseEnabledController returns a new PoseEnabledController object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller
-func (b *Babylon) NewPoseEnabledController(browserGamepad interface{}) *PoseEnabledController {
-	p := b.ctx.Get("PoseEnabledController").New(browserGamepad)
+func (ba *Babylon) NewPoseEnabledController(browserGamepad interface{}) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(browserGamepad)
 	return PoseEnabledControllerFromJSObject(p)
 }
 

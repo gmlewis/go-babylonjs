@@ -14,8 +14,8 @@ type TextureTools struct{ p js.Value }
 func (t *TextureTools) JSObject() js.Value { return t.p }
 
 // TextureTools returns a TextureTools JavaScript class.
-func (b *Babylon) TextureTools() *TextureTools {
-	p := b.ctx.Get("TextureTools")
+func (ba *Babylon) TextureTools() *TextureTools {
+	p := ba.ctx.Get("TextureTools")
 	return TextureToolsFromJSObject(p)
 }
 

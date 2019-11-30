@@ -14,8 +14,8 @@ type EventState struct{ p js.Value }
 func (e *EventState) JSObject() js.Value { return e.p }
 
 // EventState returns a EventState JavaScript class.
-func (b *Babylon) EventState() *EventState {
-	p := b.ctx.Get("EventState")
+func (ba *Babylon) EventState() *EventState {
+	p := ba.ctx.Get("EventState")
 	return EventStateFromJSObject(p)
 }
 
@@ -26,7 +26,7 @@ func EventStateFromJSObject(p js.Value) *EventState {
 
 // NewEventStateOpts contains optional parameters for NewEventState.
 type NewEventStateOpts struct {
-	SkipNextObservers *bool
+	SkipNextObservers *JSBool
 
 	Target *interface{}
 
@@ -36,12 +36,12 @@ type NewEventStateOpts struct {
 // NewEventState returns a new EventState object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.eventstate
-func (b *Babylon) NewEventState(mask float64, opts *NewEventStateOpts) *EventState {
+func (ba *Babylon) NewEventState(mask float64, opts *NewEventStateOpts) *EventState {
 	if opts == nil {
 		opts = &NewEventStateOpts{}
 	}
 
-	p := b.ctx.Get("EventState").New(mask, opts.SkipNextObservers.JSObject(), opts.Target, opts.CurrentTarget)
+	p := ba.ctx.Get("EventState").New(mask, opts.SkipNextObservers, opts.Target, opts.CurrentTarget)
 	return EventStateFromJSObject(p)
 }
 

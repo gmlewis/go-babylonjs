@@ -14,8 +14,8 @@ type GradientMaterial struct{ p js.Value }
 func (g *GradientMaterial) JSObject() js.Value { return g.p }
 
 // GradientMaterial returns a GradientMaterial JavaScript class.
-func (b *Babylon) GradientMaterial() *GradientMaterial {
-	p := b.ctx.Get("GradientMaterial")
+func (ba *Babylon) GradientMaterial() *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial")
 	return GradientMaterialFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func GradientMaterialFromJSObject(p js.Value) *GradientMaterial {
 // NewGradientMaterial returns a new GradientMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gradientmaterial
-func (b *Babylon) NewGradientMaterial(name string, scene *Scene) *GradientMaterial {
-	p := b.ctx.Get("GradientMaterial").New(name, scene.JSObject())
+func (ba *Babylon) NewGradientMaterial(name string, scene *Scene) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(name, scene.JSObject())
 	return GradientMaterialFromJSObject(p)
 }
 

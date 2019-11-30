@@ -14,8 +14,8 @@ type PositionNormalVertex struct{ p js.Value }
 func (p *PositionNormalVertex) JSObject() js.Value { return p.p }
 
 // PositionNormalVertex returns a PositionNormalVertex JavaScript class.
-func (b *Babylon) PositionNormalVertex() *PositionNormalVertex {
-	p := b.ctx.Get("PositionNormalVertex")
+func (ba *Babylon) PositionNormalVertex() *PositionNormalVertex {
+	p := ba.ctx.Get("PositionNormalVertex")
 	return PositionNormalVertexFromJSObject(p)
 }
 
@@ -34,12 +34,12 @@ type NewPositionNormalVertexOpts struct {
 // NewPositionNormalVertex returns a new PositionNormalVertex object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.positionnormalvertex
-func (b *Babylon) NewPositionNormalVertex(opts *NewPositionNormalVertexOpts) *PositionNormalVertex {
+func (ba *Babylon) NewPositionNormalVertex(opts *NewPositionNormalVertexOpts) *PositionNormalVertex {
 	if opts == nil {
 		opts = &NewPositionNormalVertexOpts{}
 	}
 
-	p := b.ctx.Get("PositionNormalVertex").New(opts.Position.JSObject(), opts.Normal.JSObject())
+	p := ba.ctx.Get("PositionNormalVertex").New(opts.Position.JSObject(), opts.Normal.JSObject())
 	return PositionNormalVertexFromJSObject(p)
 }
 

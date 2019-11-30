@@ -16,8 +16,8 @@ type AmmoJSPlugin struct{ p js.Value }
 func (a *AmmoJSPlugin) JSObject() js.Value { return a.p }
 
 // AmmoJSPlugin returns a AmmoJSPlugin JavaScript class.
-func (b *Babylon) AmmoJSPlugin() *AmmoJSPlugin {
-	p := b.ctx.Get("AmmoJSPlugin")
+func (ba *Babylon) AmmoJSPlugin() *AmmoJSPlugin {
+	p := ba.ctx.Get("AmmoJSPlugin")
 	return AmmoJSPluginFromJSObject(p)
 }
 
@@ -28,7 +28,7 @@ func AmmoJSPluginFromJSObject(p js.Value) *AmmoJSPlugin {
 
 // NewAmmoJSPluginOpts contains optional parameters for NewAmmoJSPlugin.
 type NewAmmoJSPluginOpts struct {
-	_useDeltaForWorldStep *bool
+	_useDeltaForWorldStep *JSBool
 
 	AmmoInjection *interface{}
 
@@ -38,12 +38,12 @@ type NewAmmoJSPluginOpts struct {
 // NewAmmoJSPlugin returns a new AmmoJSPlugin object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ammojsplugin
-func (b *Babylon) NewAmmoJSPlugin(opts *NewAmmoJSPluginOpts) *AmmoJSPlugin {
+func (ba *Babylon) NewAmmoJSPlugin(opts *NewAmmoJSPluginOpts) *AmmoJSPlugin {
 	if opts == nil {
 		opts = &NewAmmoJSPluginOpts{}
 	}
 
-	p := b.ctx.Get("AmmoJSPlugin").New(opts._useDeltaForWorldStep.JSObject(), opts.AmmoInjection, opts.OverlappingPairCache)
+	p := ba.ctx.Get("AmmoJSPlugin").New(opts._useDeltaForWorldStep, opts.AmmoInjection, opts.OverlappingPairCache)
 	return AmmoJSPluginFromJSObject(p)
 }
 

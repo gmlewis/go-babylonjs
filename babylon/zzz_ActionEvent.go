@@ -14,8 +14,8 @@ type ActionEvent struct{ p js.Value }
 func (a *ActionEvent) JSObject() js.Value { return a.p }
 
 // ActionEvent returns a ActionEvent JavaScript class.
-func (b *Babylon) ActionEvent() *ActionEvent {
-	p := b.ctx.Get("ActionEvent")
+func (ba *Babylon) ActionEvent() *ActionEvent {
+	p := ba.ctx.Get("ActionEvent")
 	return ActionEventFromJSObject(p)
 }
 
@@ -34,12 +34,12 @@ type NewActionEventOpts struct {
 // NewActionEvent returns a new ActionEvent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionevent
-func (b *Babylon) NewActionEvent(source interface{}, pointerX float64, pointerY float64, meshUnderPointer *AbstractMesh, opts *NewActionEventOpts) *ActionEvent {
+func (ba *Babylon) NewActionEvent(source interface{}, pointerX float64, pointerY float64, meshUnderPointer *AbstractMesh, opts *NewActionEventOpts) *ActionEvent {
 	if opts == nil {
 		opts = &NewActionEventOpts{}
 	}
 
-	p := b.ctx.Get("ActionEvent").New(source, pointerX, pointerY, meshUnderPointer.JSObject(), opts.SourceEvent, opts.AdditionalData)
+	p := ba.ctx.Get("ActionEvent").New(source, pointerX, pointerY, meshUnderPointer.JSObject(), opts.SourceEvent, opts.AdditionalData)
 	return ActionEventFromJSObject(p)
 }
 

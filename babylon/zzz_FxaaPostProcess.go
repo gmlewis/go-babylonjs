@@ -16,8 +16,8 @@ type FxaaPostProcess struct{ *PostProcess }
 func (f *FxaaPostProcess) JSObject() js.Value { return f.p }
 
 // FxaaPostProcess returns a FxaaPostProcess JavaScript class.
-func (b *Babylon) FxaaPostProcess() *FxaaPostProcess {
-	p := b.ctx.Get("FxaaPostProcess")
+func (ba *Babylon) FxaaPostProcess() *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess")
 	return FxaaPostProcessFromJSObject(p)
 }
 
@@ -30,24 +30,24 @@ func FxaaPostProcessFromJSObject(p js.Value) *FxaaPostProcess {
 type NewFxaaPostProcessOpts struct {
 	Camera *Camera
 
-	SamplingMode *float64
+	SamplingMode *JSFloat64
 
 	Engine *Engine
 
-	Reusable *bool
+	Reusable *JSBool
 
-	TextureType *float64
+	TextureType *JSFloat64
 }
 
 // NewFxaaPostProcess returns a new FxaaPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess
-func (b *Babylon) NewFxaaPostProcess(name string, options float64, opts *NewFxaaPostProcessOpts) *FxaaPostProcess {
+func (ba *Babylon) NewFxaaPostProcess(name string, options float64, opts *NewFxaaPostProcessOpts) *FxaaPostProcess {
 	if opts == nil {
 		opts = &NewFxaaPostProcessOpts{}
 	}
 
-	p := b.ctx.Get("FxaaPostProcess").New(name, options, opts.Camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType)
+	p := ba.ctx.Get("FxaaPostProcess").New(name, options, opts.Camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable, opts.TextureType)
 	return FxaaPostProcessFromJSObject(p)
 }
 

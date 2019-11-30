@@ -14,8 +14,8 @@ type GroundMesh struct{ *Mesh }
 func (g *GroundMesh) JSObject() js.Value { return g.p }
 
 // GroundMesh returns a GroundMesh JavaScript class.
-func (b *Babylon) GroundMesh() *GroundMesh {
-	p := b.ctx.Get("GroundMesh")
+func (ba *Babylon) GroundMesh() *GroundMesh {
+	p := ba.ctx.Get("GroundMesh")
 	return GroundMeshFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func GroundMeshFromJSObject(p js.Value) *GroundMesh {
 // NewGroundMesh returns a new GroundMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh
-func (b *Babylon) NewGroundMesh(name string, scene *Scene) *GroundMesh {
-	p := b.ctx.Get("GroundMesh").New(name, scene.JSObject())
+func (ba *Babylon) NewGroundMesh(name string, scene *Scene) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(name, scene.JSObject())
 	return GroundMeshFromJSObject(p)
 }
 

@@ -14,8 +14,8 @@ type InstantiationTools struct{ p js.Value }
 func (i *InstantiationTools) JSObject() js.Value { return i.p }
 
 // InstantiationTools returns a InstantiationTools JavaScript class.
-func (b *Babylon) InstantiationTools() *InstantiationTools {
-	p := b.ctx.Get("InstantiationTools")
+func (ba *Babylon) InstantiationTools() *InstantiationTools {
+	p := ba.ctx.Get("InstantiationTools")
 	return InstantiationToolsFromJSObject(p)
 }
 

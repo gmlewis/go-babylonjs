@@ -16,8 +16,8 @@ type BoneIKController struct{ p js.Value }
 func (b *BoneIKController) JSObject() js.Value { return b.p }
 
 // BoneIKController returns a BoneIKController JavaScript class.
-func (b *Babylon) BoneIKController() *BoneIKController {
-	p := b.ctx.Get("BoneIKController")
+func (ba *Babylon) BoneIKController() *BoneIKController {
+	p := ba.ctx.Get("BoneIKController")
 	return BoneIKControllerFromJSObject(p)
 }
 
@@ -34,12 +34,12 @@ type NewBoneIKControllerOpts struct {
 // NewBoneIKController returns a new BoneIKController object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boneikcontroller
-func (b *Babylon) NewBoneIKController(mesh *AbstractMesh, bone *Bone, opts *NewBoneIKControllerOpts) *BoneIKController {
+func (ba *Babylon) NewBoneIKController(mesh *AbstractMesh, bone *Bone, opts *NewBoneIKControllerOpts) *BoneIKController {
 	if opts == nil {
 		opts = &NewBoneIKControllerOpts{}
 	}
 
-	p := b.ctx.Get("BoneIKController").New(mesh.JSObject(), bone.JSObject(), opts.Options)
+	p := ba.ctx.Get("BoneIKController").New(mesh.JSObject(), bone.JSObject(), opts.Options)
 	return BoneIKControllerFromJSObject(p)
 }
 

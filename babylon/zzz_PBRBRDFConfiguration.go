@@ -14,8 +14,8 @@ type PBRBRDFConfiguration struct{ p js.Value }
 func (p *PBRBRDFConfiguration) JSObject() js.Value { return p.p }
 
 // PBRBRDFConfiguration returns a PBRBRDFConfiguration JavaScript class.
-func (b *Babylon) PBRBRDFConfiguration() *PBRBRDFConfiguration {
-	p := b.ctx.Get("PBRBRDFConfiguration")
+func (ba *Babylon) PBRBRDFConfiguration() *PBRBRDFConfiguration {
+	p := ba.ctx.Get("PBRBRDFConfiguration")
 	return PBRBRDFConfigurationFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func PBRBRDFConfigurationFromJSObject(p js.Value) *PBRBRDFConfiguration {
 // NewPBRBRDFConfiguration returns a new PBRBRDFConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbrdfconfiguration
-func (b *Babylon) NewPBRBRDFConfiguration(markAllSubMeshesAsMiscDirty func()) *PBRBRDFConfiguration {
-	p := b.ctx.Get("PBRBRDFConfiguration").New(markAllSubMeshesAsMiscDirty)
+func (ba *Babylon) NewPBRBRDFConfiguration(markAllSubMeshesAsMiscDirty func()) *PBRBRDFConfiguration {
+	p := ba.ctx.Get("PBRBRDFConfiguration").New(markAllSubMeshesAsMiscDirty)
 	return PBRBRDFConfigurationFromJSObject(p)
 }
 

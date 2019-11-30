@@ -16,8 +16,8 @@ type EnvironmentTextureTools struct{ p js.Value }
 func (e *EnvironmentTextureTools) JSObject() js.Value { return e.p }
 
 // EnvironmentTextureTools returns a EnvironmentTextureTools JavaScript class.
-func (b *Babylon) EnvironmentTextureTools() *EnvironmentTextureTools {
-	p := b.ctx.Get("EnvironmentTextureTools")
+func (ba *Babylon) EnvironmentTextureTools() *EnvironmentTextureTools {
+	p := ba.ctx.Get("EnvironmentTextureTools")
 	return EnvironmentTextureToolsFromJSObject(p)
 }
 

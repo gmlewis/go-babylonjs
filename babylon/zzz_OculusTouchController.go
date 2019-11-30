@@ -14,8 +14,8 @@ type OculusTouchController struct{ *WebVRController }
 func (o *OculusTouchController) JSObject() js.Value { return o.p }
 
 // OculusTouchController returns a OculusTouchController JavaScript class.
-func (b *Babylon) OculusTouchController() *OculusTouchController {
-	p := b.ctx.Get("OculusTouchController")
+func (ba *Babylon) OculusTouchController() *OculusTouchController {
+	p := ba.ctx.Get("OculusTouchController")
 	return OculusTouchControllerFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func OculusTouchControllerFromJSObject(p js.Value) *OculusTouchController {
 // NewOculusTouchController returns a new OculusTouchController object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oculustouchcontroller
-func (b *Babylon) NewOculusTouchController(vrGamepad interface{}) *OculusTouchController {
-	p := b.ctx.Get("OculusTouchController").New(vrGamepad)
+func (ba *Babylon) NewOculusTouchController(vrGamepad interface{}) *OculusTouchController {
+	p := ba.ctx.Get("OculusTouchController").New(vrGamepad)
 	return OculusTouchControllerFromJSObject(p)
 }
 

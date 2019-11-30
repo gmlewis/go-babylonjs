@@ -14,8 +14,8 @@ type PerturbNormalBlock struct{ *NodeMaterialBlock }
 func (p *PerturbNormalBlock) JSObject() js.Value { return p.p }
 
 // PerturbNormalBlock returns a PerturbNormalBlock JavaScript class.
-func (b *Babylon) PerturbNormalBlock() *PerturbNormalBlock {
-	p := b.ctx.Get("PerturbNormalBlock")
+func (ba *Babylon) PerturbNormalBlock() *PerturbNormalBlock {
+	p := ba.ctx.Get("PerturbNormalBlock")
 	return PerturbNormalBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func PerturbNormalBlockFromJSObject(p js.Value) *PerturbNormalBlock {
 // NewPerturbNormalBlock returns a new PerturbNormalBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.perturbnormalblock
-func (b *Babylon) NewPerturbNormalBlock(name string) *PerturbNormalBlock {
-	p := b.ctx.Get("PerturbNormalBlock").New(name)
+func (ba *Babylon) NewPerturbNormalBlock(name string) *PerturbNormalBlock {
+	p := ba.ctx.Get("PerturbNormalBlock").New(name)
 	return PerturbNormalBlockFromJSObject(p)
 }
 

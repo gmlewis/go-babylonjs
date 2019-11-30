@@ -17,8 +17,8 @@ type ArcFollowCamera struct{ *TargetCamera }
 func (a *ArcFollowCamera) JSObject() js.Value { return a.p }
 
 // ArcFollowCamera returns a ArcFollowCamera JavaScript class.
-func (b *Babylon) ArcFollowCamera() *ArcFollowCamera {
-	p := b.ctx.Get("ArcFollowCamera")
+func (ba *Babylon) ArcFollowCamera() *ArcFollowCamera {
+	p := ba.ctx.Get("ArcFollowCamera")
 	return ArcFollowCameraFromJSObject(p)
 }
 
@@ -30,8 +30,8 @@ func ArcFollowCameraFromJSObject(p js.Value) *ArcFollowCamera {
 // NewArcFollowCamera returns a new ArcFollowCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcfollowcamera
-func (b *Babylon) NewArcFollowCamera(name string, alpha float64, beta float64, radius float64, target *AbstractMesh, scene *Scene) *ArcFollowCamera {
-	p := b.ctx.Get("ArcFollowCamera").New(name, alpha, beta, radius, target.JSObject(), scene.JSObject())
+func (ba *Babylon) NewArcFollowCamera(name string, alpha float64, beta float64, radius float64, target *AbstractMesh, scene *Scene) *ArcFollowCamera {
+	p := ba.ctx.Get("ArcFollowCamera").New(name, alpha, beta, radius, target.JSObject(), scene.JSObject())
 	return ArcFollowCameraFromJSObject(p)
 }
 

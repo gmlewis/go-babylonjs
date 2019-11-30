@@ -14,8 +14,8 @@ type MTLFileLoader struct{ p js.Value }
 func (m *MTLFileLoader) JSObject() js.Value { return m.p }
 
 // MTLFileLoader returns a MTLFileLoader JavaScript class.
-func (b *Babylon) MTLFileLoader() *MTLFileLoader {
-	p := b.ctx.Get("MTLFileLoader")
+func (ba *Babylon) MTLFileLoader() *MTLFileLoader {
+	p := ba.ctx.Get("MTLFileLoader")
 	return MTLFileLoaderFromJSObject(p)
 }
 

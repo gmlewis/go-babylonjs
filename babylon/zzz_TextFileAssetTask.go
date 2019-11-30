@@ -14,8 +14,8 @@ type TextFileAssetTask struct{ *AbstractAssetTask }
 func (t *TextFileAssetTask) JSObject() js.Value { return t.p }
 
 // TextFileAssetTask returns a TextFileAssetTask JavaScript class.
-func (b *Babylon) TextFileAssetTask() *TextFileAssetTask {
-	p := b.ctx.Get("TextFileAssetTask")
+func (ba *Babylon) TextFileAssetTask() *TextFileAssetTask {
+	p := ba.ctx.Get("TextFileAssetTask")
 	return TextFileAssetTaskFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func TextFileAssetTaskFromJSObject(p js.Value) *TextFileAssetTask {
 // NewTextFileAssetTask returns a new TextFileAssetTask object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textfileassettask
-func (b *Babylon) NewTextFileAssetTask(name string, url string) *TextFileAssetTask {
-	p := b.ctx.Get("TextFileAssetTask").New(name, url)
+func (ba *Babylon) NewTextFileAssetTask(name string, url string) *TextFileAssetTask {
+	p := ba.ctx.Get("TextFileAssetTask").New(name, url)
 	return TextFileAssetTaskFromJSObject(p)
 }
 

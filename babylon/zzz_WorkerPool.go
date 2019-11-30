@@ -14,8 +14,8 @@ type WorkerPool struct{ p js.Value }
 func (w *WorkerPool) JSObject() js.Value { return w.p }
 
 // WorkerPool returns a WorkerPool JavaScript class.
-func (b *Babylon) WorkerPool() *WorkerPool {
-	p := b.ctx.Get("WorkerPool")
+func (ba *Babylon) WorkerPool() *WorkerPool {
+	p := ba.ctx.Get("WorkerPool")
 	return WorkerPoolFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func WorkerPoolFromJSObject(p js.Value) *WorkerPool {
 // NewWorkerPool returns a new WorkerPool object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.workerpool
-func (b *Babylon) NewWorkerPool(workers Array) *WorkerPool {
-	p := b.ctx.Get("WorkerPool").New(workers.JSObject())
+func (ba *Babylon) NewWorkerPool(workers []js.Value) *WorkerPool {
+	p := ba.ctx.Get("WorkerPool").New(workers)
 	return WorkerPoolFromJSObject(p)
 }
 

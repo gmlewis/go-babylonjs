@@ -14,8 +14,8 @@ type ImageProcessingBlock struct{ *NodeMaterialBlock }
 func (i *ImageProcessingBlock) JSObject() js.Value { return i.p }
 
 // ImageProcessingBlock returns a ImageProcessingBlock JavaScript class.
-func (b *Babylon) ImageProcessingBlock() *ImageProcessingBlock {
-	p := b.ctx.Get("ImageProcessingBlock")
+func (ba *Babylon) ImageProcessingBlock() *ImageProcessingBlock {
+	p := ba.ctx.Get("ImageProcessingBlock")
 	return ImageProcessingBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func ImageProcessingBlockFromJSObject(p js.Value) *ImageProcessingBlock {
 // NewImageProcessingBlock returns a new ImageProcessingBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingblock
-func (b *Babylon) NewImageProcessingBlock(name string) *ImageProcessingBlock {
-	p := b.ctx.Get("ImageProcessingBlock").New(name)
+func (ba *Babylon) NewImageProcessingBlock(name string) *ImageProcessingBlock {
+	p := ba.ctx.Get("ImageProcessingBlock").New(name)
 	return ImageProcessingBlockFromJSObject(p)
 }
 

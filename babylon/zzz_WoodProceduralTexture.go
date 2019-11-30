@@ -14,8 +14,8 @@ type WoodProceduralTexture struct{ *ProceduralTexture }
 func (w *WoodProceduralTexture) JSObject() js.Value { return w.p }
 
 // WoodProceduralTexture returns a WoodProceduralTexture JavaScript class.
-func (b *Babylon) WoodProceduralTexture() *WoodProceduralTexture {
-	p := b.ctx.Get("WoodProceduralTexture")
+func (ba *Babylon) WoodProceduralTexture() *WoodProceduralTexture {
+	p := ba.ctx.Get("WoodProceduralTexture")
 	return WoodProceduralTextureFromJSObject(p)
 }
 
@@ -28,18 +28,18 @@ func WoodProceduralTextureFromJSObject(p js.Value) *WoodProceduralTexture {
 type NewWoodProceduralTextureOpts struct {
 	FallbackTexture *Texture
 
-	GenerateMipMaps *bool
+	GenerateMipMaps *JSBool
 }
 
 // NewWoodProceduralTexture returns a new WoodProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.woodproceduraltexture
-func (b *Babylon) NewWoodProceduralTexture(name string, size float64, scene *Scene, opts *NewWoodProceduralTextureOpts) *WoodProceduralTexture {
+func (ba *Babylon) NewWoodProceduralTexture(name string, size float64, scene *Scene, opts *NewWoodProceduralTextureOpts) *WoodProceduralTexture {
 	if opts == nil {
 		opts = &NewWoodProceduralTextureOpts{}
 	}
 
-	p := b.ctx.Get("WoodProceduralTexture").New(name, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps.JSObject())
+	p := ba.ctx.Get("WoodProceduralTexture").New(name, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps)
 	return WoodProceduralTextureFromJSObject(p)
 }
 

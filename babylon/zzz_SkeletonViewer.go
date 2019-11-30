@@ -16,8 +16,8 @@ type SkeletonViewer struct{ p js.Value }
 func (s *SkeletonViewer) JSObject() js.Value { return s.p }
 
 // SkeletonViewer returns a SkeletonViewer JavaScript class.
-func (b *Babylon) SkeletonViewer() *SkeletonViewer {
-	p := b.ctx.Get("SkeletonViewer")
+func (ba *Babylon) SkeletonViewer() *SkeletonViewer {
+	p := ba.ctx.Get("SkeletonViewer")
 	return SkeletonViewerFromJSObject(p)
 }
 
@@ -28,20 +28,20 @@ func SkeletonViewerFromJSObject(p js.Value) *SkeletonViewer {
 
 // NewSkeletonViewerOpts contains optional parameters for NewSkeletonViewer.
 type NewSkeletonViewerOpts struct {
-	AutoUpdateBonesMatrices *bool
+	AutoUpdateBonesMatrices *JSBool
 
-	RenderingGroupId *float64
+	RenderingGroupId *JSFloat64
 }
 
 // NewSkeletonViewer returns a new SkeletonViewer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeletonviewer
-func (b *Babylon) NewSkeletonViewer(skeleton *Skeleton, mesh *AbstractMesh, scene *Scene, opts *NewSkeletonViewerOpts) *SkeletonViewer {
+func (ba *Babylon) NewSkeletonViewer(skeleton *Skeleton, mesh *AbstractMesh, scene *Scene, opts *NewSkeletonViewerOpts) *SkeletonViewer {
 	if opts == nil {
 		opts = &NewSkeletonViewerOpts{}
 	}
 
-	p := b.ctx.Get("SkeletonViewer").New(skeleton.JSObject(), mesh.JSObject(), scene.JSObject(), opts.AutoUpdateBonesMatrices.JSObject(), opts.RenderingGroupId)
+	p := ba.ctx.Get("SkeletonViewer").New(skeleton.JSObject(), mesh.JSObject(), scene.JSObject(), opts.AutoUpdateBonesMatrices, opts.RenderingGroupId)
 	return SkeletonViewerFromJSObject(p)
 }
 

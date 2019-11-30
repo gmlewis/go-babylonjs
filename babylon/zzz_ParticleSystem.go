@@ -18,8 +18,8 @@ type ParticleSystem struct{ *BaseParticleSystem }
 func (p *ParticleSystem) JSObject() js.Value { return p.p }
 
 // ParticleSystem returns a ParticleSystem JavaScript class.
-func (b *Babylon) ParticleSystem() *ParticleSystem {
-	p := b.ctx.Get("ParticleSystem")
+func (ba *Babylon) ParticleSystem() *ParticleSystem {
+	p := ba.ctx.Get("ParticleSystem")
 	return ParticleSystemFromJSObject(p)
 }
 
@@ -32,20 +32,20 @@ func ParticleSystemFromJSObject(p js.Value) *ParticleSystem {
 type NewParticleSystemOpts struct {
 	CustomEffect *Effect
 
-	IsAnimationSheetEnabled *bool
+	IsAnimationSheetEnabled *JSBool
 
-	Epsilon *float64
+	Epsilon *JSFloat64
 }
 
 // NewParticleSystem returns a new ParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesystem
-func (b *Babylon) NewParticleSystem(name string, capacity float64, scene *Scene, opts *NewParticleSystemOpts) *ParticleSystem {
+func (ba *Babylon) NewParticleSystem(name string, capacity float64, scene *Scene, opts *NewParticleSystemOpts) *ParticleSystem {
 	if opts == nil {
 		opts = &NewParticleSystemOpts{}
 	}
 
-	p := b.ctx.Get("ParticleSystem").New(name, capacity, scene.JSObject(), opts.CustomEffect.JSObject(), opts.IsAnimationSheetEnabled.JSObject(), opts.Epsilon)
+	p := ba.ctx.Get("ParticleSystem").New(name, capacity, scene.JSObject(), opts.CustomEffect.JSObject(), opts.IsAnimationSheetEnabled, opts.Epsilon)
 	return ParticleSystemFromJSObject(p)
 }
 

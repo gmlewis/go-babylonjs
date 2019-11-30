@@ -14,8 +14,8 @@ type PBRClearCoatConfiguration struct{ p js.Value }
 func (p *PBRClearCoatConfiguration) JSObject() js.Value { return p.p }
 
 // PBRClearCoatConfiguration returns a PBRClearCoatConfiguration JavaScript class.
-func (b *Babylon) PBRClearCoatConfiguration() *PBRClearCoatConfiguration {
-	p := b.ctx.Get("PBRClearCoatConfiguration")
+func (ba *Babylon) PBRClearCoatConfiguration() *PBRClearCoatConfiguration {
+	p := ba.ctx.Get("PBRClearCoatConfiguration")
 	return PBRClearCoatConfigurationFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func PBRClearCoatConfigurationFromJSObject(p js.Value) *PBRClearCoatConfiguratio
 // NewPBRClearCoatConfiguration returns a new PBRClearCoatConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration
-func (b *Babylon) NewPBRClearCoatConfiguration(markAllSubMeshesAsTexturesDirty func()) *PBRClearCoatConfiguration {
-	p := b.ctx.Get("PBRClearCoatConfiguration").New(markAllSubMeshesAsTexturesDirty)
+func (ba *Babylon) NewPBRClearCoatConfiguration(markAllSubMeshesAsTexturesDirty func()) *PBRClearCoatConfiguration {
+	p := ba.ctx.Get("PBRClearCoatConfiguration").New(markAllSubMeshesAsTexturesDirty)
 	return PBRClearCoatConfigurationFromJSObject(p)
 }
 

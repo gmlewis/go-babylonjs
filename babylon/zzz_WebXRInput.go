@@ -14,8 +14,8 @@ type WebXRInput struct{ p js.Value }
 func (w *WebXRInput) JSObject() js.Value { return w.p }
 
 // WebXRInput returns a WebXRInput JavaScript class.
-func (b *Babylon) WebXRInput() *WebXRInput {
-	p := b.ctx.Get("WebXRInput")
+func (ba *Babylon) WebXRInput() *WebXRInput {
+	p := ba.ctx.Get("WebXRInput")
 	return WebXRInputFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func WebXRInputFromJSObject(p js.Value) *WebXRInput {
 // NewWebXRInput returns a new WebXRInput object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrinput
-func (b *Babylon) NewWebXRInput(baseExperience *WebXRExperienceHelper) *WebXRInput {
-	p := b.ctx.Get("WebXRInput").New(baseExperience.JSObject())
+func (ba *Babylon) NewWebXRInput(baseExperience *WebXRExperienceHelper) *WebXRInput {
+	p := ba.ctx.Get("WebXRInput").New(baseExperience.JSObject())
 	return WebXRInputFromJSObject(p)
 }
 

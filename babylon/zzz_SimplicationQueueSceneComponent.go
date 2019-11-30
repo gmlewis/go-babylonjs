@@ -15,8 +15,8 @@ type SimplicationQueueSceneComponent struct{ p js.Value }
 func (s *SimplicationQueueSceneComponent) JSObject() js.Value { return s.p }
 
 // SimplicationQueueSceneComponent returns a SimplicationQueueSceneComponent JavaScript class.
-func (b *Babylon) SimplicationQueueSceneComponent() *SimplicationQueueSceneComponent {
-	p := b.ctx.Get("SimplicationQueueSceneComponent")
+func (ba *Babylon) SimplicationQueueSceneComponent() *SimplicationQueueSceneComponent {
+	p := ba.ctx.Get("SimplicationQueueSceneComponent")
 	return SimplicationQueueSceneComponentFromJSObject(p)
 }
 
@@ -28,8 +28,8 @@ func SimplicationQueueSceneComponentFromJSObject(p js.Value) *SimplicationQueueS
 // NewSimplicationQueueSceneComponent returns a new SimplicationQueueSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.simplicationqueuescenecomponent
-func (b *Babylon) NewSimplicationQueueSceneComponent(scene *Scene) *SimplicationQueueSceneComponent {
-	p := b.ctx.Get("SimplicationQueueSceneComponent").New(scene.JSObject())
+func (ba *Babylon) NewSimplicationQueueSceneComponent(scene *Scene) *SimplicationQueueSceneComponent {
+	p := ba.ctx.Get("SimplicationQueueSceneComponent").New(scene.JSObject())
 	return SimplicationQueueSceneComponentFromJSObject(p)
 }
 

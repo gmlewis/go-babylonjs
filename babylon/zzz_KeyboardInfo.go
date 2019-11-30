@@ -14,8 +14,8 @@ type KeyboardInfo struct{ p js.Value }
 func (k *KeyboardInfo) JSObject() js.Value { return k.p }
 
 // KeyboardInfo returns a KeyboardInfo JavaScript class.
-func (b *Babylon) KeyboardInfo() *KeyboardInfo {
-	p := b.ctx.Get("KeyboardInfo")
+func (ba *Babylon) KeyboardInfo() *KeyboardInfo {
+	p := ba.ctx.Get("KeyboardInfo")
 	return KeyboardInfoFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func KeyboardInfoFromJSObject(p js.Value) *KeyboardInfo {
 // NewKeyboardInfo returns a new KeyboardInfo object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.keyboardinfo
-func (b *Babylon) NewKeyboardInfo(jsType float64, event js.Value) *KeyboardInfo {
-	p := b.ctx.Get("KeyboardInfo").New(jsType, event)
+func (ba *Babylon) NewKeyboardInfo(jsType float64, event js.Value) *KeyboardInfo {
+	p := ba.ctx.Get("KeyboardInfo").New(jsType, event)
 	return KeyboardInfoFromJSObject(p)
 }
 

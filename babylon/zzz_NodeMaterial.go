@@ -14,8 +14,8 @@ type NodeMaterial struct{ p js.Value }
 func (n *NodeMaterial) JSObject() js.Value { return n.p }
 
 // NodeMaterial returns a NodeMaterial JavaScript class.
-func (b *Babylon) NodeMaterial() *NodeMaterial {
-	p := b.ctx.Get("NodeMaterial")
+func (ba *Babylon) NodeMaterial() *NodeMaterial {
+	p := ba.ctx.Get("NodeMaterial")
 	return NodeMaterialFromJSObject(p)
 }
 
@@ -28,18 +28,18 @@ func NodeMaterialFromJSObject(p js.Value) *NodeMaterial {
 type NewNodeMaterialOpts struct {
 	Scene *Scene
 
-	Options *INodeMaterialOptions
+	Options js.Value
 }
 
 // NewNodeMaterial returns a new NodeMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerial
-func (b *Babylon) NewNodeMaterial(name string, opts *NewNodeMaterialOpts) *NodeMaterial {
+func (ba *Babylon) NewNodeMaterial(name string, opts *NewNodeMaterialOpts) *NodeMaterial {
 	if opts == nil {
 		opts = &NewNodeMaterialOpts{}
 	}
 
-	p := b.ctx.Get("NodeMaterial").New(name, opts.Scene.JSObject(), opts.Options.JSObject())
+	p := ba.ctx.Get("NodeMaterial").New(name, opts.Scene.JSObject(), opts.Options)
 	return NodeMaterialFromJSObject(p)
 }
 

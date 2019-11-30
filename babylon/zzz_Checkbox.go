@@ -14,8 +14,8 @@ type Checkbox struct{ *Control }
 func (c *Checkbox) JSObject() js.Value { return c.p }
 
 // Checkbox returns a Checkbox JavaScript class.
-func (b *Babylon) Checkbox() *Checkbox {
-	p := b.ctx.Get("Checkbox")
+func (ba *Babylon) Checkbox() *Checkbox {
+	p := ba.ctx.Get("Checkbox")
 	return CheckboxFromJSObject(p)
 }
 
@@ -26,18 +26,18 @@ func CheckboxFromJSObject(p js.Value) *Checkbox {
 
 // NewCheckboxOpts contains optional parameters for NewCheckbox.
 type NewCheckboxOpts struct {
-	Name *string
+	Name *JSString
 }
 
 // NewCheckbox returns a new Checkbox object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.checkbox
-func (b *Babylon) NewCheckbox(opts *NewCheckboxOpts) *Checkbox {
+func (ba *Babylon) NewCheckbox(opts *NewCheckboxOpts) *Checkbox {
 	if opts == nil {
 		opts = &NewCheckboxOpts{}
 	}
 
-	p := b.ctx.Get("Checkbox").New(opts.Name)
+	p := ba.ctx.Get("Checkbox").New(opts.Name)
 	return CheckboxFromJSObject(p)
 }
 

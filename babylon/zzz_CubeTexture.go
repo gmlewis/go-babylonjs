@@ -14,8 +14,8 @@ type CubeTexture struct{ *BaseTexture }
 func (c *CubeTexture) JSObject() js.Value { return c.p }
 
 // CubeTexture returns a CubeTexture JavaScript class.
-func (b *Babylon) CubeTexture() *CubeTexture {
-	p := b.ctx.Get("CubeTexture")
+func (ba *Babylon) CubeTexture() *CubeTexture {
+	p := ba.ctx.Get("CubeTexture")
 	return CubeTextureFromJSObject(p)
 }
 
@@ -26,38 +26,38 @@ func CubeTextureFromJSObject(p js.Value) *CubeTexture {
 
 // NewCubeTextureOpts contains optional parameters for NewCubeTexture.
 type NewCubeTextureOpts struct {
-	Extensions *string
+	Extensions *JSString
 
-	NoMipmap *bool
+	NoMipmap *JSBool
 
-	Files *string
+	Files *JSString
 
 	OnLoad *func()
 
 	OnError *func()
 
-	Format *float64
+	Format *JSFloat64
 
-	Prefiltered *bool
+	Prefiltered *JSBool
 
 	ForcedExtension *interface{}
 
-	CreatePolynomials *bool
+	CreatePolynomials *JSBool
 
-	LodScale *float64
+	LodScale *JSFloat64
 
-	LodOffset *float64
+	LodOffset *JSFloat64
 }
 
 // NewCubeTexture returns a new CubeTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubetexture
-func (b *Babylon) NewCubeTexture(rootUrl string, scene *Scene, opts *NewCubeTextureOpts) *CubeTexture {
+func (ba *Babylon) NewCubeTexture(rootUrl string, scene *Scene, opts *NewCubeTextureOpts) *CubeTexture {
 	if opts == nil {
 		opts = &NewCubeTextureOpts{}
 	}
 
-	p := b.ctx.Get("CubeTexture").New(rootUrl, scene.JSObject(), opts.Extensions, opts.NoMipmap.JSObject(), opts.Files, opts.OnLoad, opts.OnError, opts.Format, opts.Prefiltered.JSObject(), opts.ForcedExtension, opts.CreatePolynomials.JSObject(), opts.LodScale, opts.LodOffset)
+	p := ba.ctx.Get("CubeTexture").New(rootUrl, scene.JSObject(), opts.Extensions, opts.NoMipmap, opts.Files, opts.OnLoad, opts.OnError, opts.Format, opts.Prefiltered, opts.ForcedExtension, opts.CreatePolynomials, opts.LodScale, opts.LodOffset)
 	return CubeTextureFromJSObject(p)
 }
 

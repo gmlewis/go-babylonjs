@@ -17,8 +17,8 @@ type HDRCubeTexture struct{ *BaseTexture }
 func (h *HDRCubeTexture) JSObject() js.Value { return h.p }
 
 // HDRCubeTexture returns a HDRCubeTexture JavaScript class.
-func (b *Babylon) HDRCubeTexture() *HDRCubeTexture {
-	p := b.ctx.Get("HDRCubeTexture")
+func (ba *Babylon) HDRCubeTexture() *HDRCubeTexture {
+	p := ba.ctx.Get("HDRCubeTexture")
 	return HDRCubeTextureFromJSObject(p)
 }
 
@@ -29,13 +29,13 @@ func HDRCubeTextureFromJSObject(p js.Value) *HDRCubeTexture {
 
 // NewHDRCubeTextureOpts contains optional parameters for NewHDRCubeTexture.
 type NewHDRCubeTextureOpts struct {
-	NoMipmap *bool
+	NoMipmap *JSBool
 
-	GenerateHarmonics *bool
+	GenerateHarmonics *JSBool
 
-	GammaSpace *bool
+	GammaSpace *JSBool
 
-	Reserved *bool
+	Reserved *JSBool
 
 	OnLoad *func()
 
@@ -45,12 +45,12 @@ type NewHDRCubeTextureOpts struct {
 // NewHDRCubeTexture returns a new HDRCubeTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetexture
-func (b *Babylon) NewHDRCubeTexture(url string, scene *Scene, size float64, opts *NewHDRCubeTextureOpts) *HDRCubeTexture {
+func (ba *Babylon) NewHDRCubeTexture(url string, scene *Scene, size float64, opts *NewHDRCubeTextureOpts) *HDRCubeTexture {
 	if opts == nil {
 		opts = &NewHDRCubeTextureOpts{}
 	}
 
-	p := b.ctx.Get("HDRCubeTexture").New(url, scene.JSObject(), size, opts.NoMipmap.JSObject(), opts.GenerateHarmonics.JSObject(), opts.GammaSpace.JSObject(), opts.Reserved.JSObject(), opts.OnLoad, opts.OnError)
+	p := ba.ctx.Get("HDRCubeTexture").New(url, scene.JSObject(), size, opts.NoMipmap, opts.GenerateHarmonics, opts.GammaSpace, opts.Reserved, opts.OnLoad, opts.OnError)
 	return HDRCubeTextureFromJSObject(p)
 }
 

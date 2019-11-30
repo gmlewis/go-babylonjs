@@ -14,8 +14,8 @@ type SixDofDragBehavior struct{ p js.Value }
 func (s *SixDofDragBehavior) JSObject() js.Value { return s.p }
 
 // SixDofDragBehavior returns a SixDofDragBehavior JavaScript class.
-func (b *Babylon) SixDofDragBehavior() *SixDofDragBehavior {
-	p := b.ctx.Get("SixDofDragBehavior")
+func (ba *Babylon) SixDofDragBehavior() *SixDofDragBehavior {
+	p := ba.ctx.Get("SixDofDragBehavior")
 	return SixDofDragBehaviorFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func SixDofDragBehaviorFromJSObject(p js.Value) *SixDofDragBehavior {
 // NewSixDofDragBehavior returns a new SixDofDragBehavior object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sixdofdragbehavior
-func (b *Babylon) NewSixDofDragBehavior() *SixDofDragBehavior {
-	p := b.ctx.Get("SixDofDragBehavior").New()
+func (ba *Babylon) NewSixDofDragBehavior() *SixDofDragBehavior {
+	p := ba.ctx.Get("SixDofDragBehavior").New()
 	return SixDofDragBehaviorFromJSObject(p)
 }
 

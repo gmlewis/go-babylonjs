@@ -14,8 +14,8 @@ type EquiRectangularCubeTexture struct{ *BaseTexture }
 func (e *EquiRectangularCubeTexture) JSObject() js.Value { return e.p }
 
 // EquiRectangularCubeTexture returns a EquiRectangularCubeTexture JavaScript class.
-func (b *Babylon) EquiRectangularCubeTexture() *EquiRectangularCubeTexture {
-	p := b.ctx.Get("EquiRectangularCubeTexture")
+func (ba *Babylon) EquiRectangularCubeTexture() *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture")
 	return EquiRectangularCubeTextureFromJSObject(p)
 }
 
@@ -26,9 +26,9 @@ func EquiRectangularCubeTextureFromJSObject(p js.Value) *EquiRectangularCubeText
 
 // NewEquiRectangularCubeTextureOpts contains optional parameters for NewEquiRectangularCubeTexture.
 type NewEquiRectangularCubeTextureOpts struct {
-	NoMipmap *bool
+	NoMipmap *JSBool
 
-	GammaSpace *bool
+	GammaSpace *JSBool
 
 	OnLoad *func()
 
@@ -38,12 +38,12 @@ type NewEquiRectangularCubeTextureOpts struct {
 // NewEquiRectangularCubeTexture returns a new EquiRectangularCubeTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture
-func (b *Babylon) NewEquiRectangularCubeTexture(url string, scene *Scene, size float64, opts *NewEquiRectangularCubeTextureOpts) *EquiRectangularCubeTexture {
+func (ba *Babylon) NewEquiRectangularCubeTexture(url string, scene *Scene, size float64, opts *NewEquiRectangularCubeTextureOpts) *EquiRectangularCubeTexture {
 	if opts == nil {
 		opts = &NewEquiRectangularCubeTextureOpts{}
 	}
 
-	p := b.ctx.Get("EquiRectangularCubeTexture").New(url, scene.JSObject(), size, opts.NoMipmap.JSObject(), opts.GammaSpace.JSObject(), opts.OnLoad, opts.OnError)
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(url, scene.JSObject(), size, opts.NoMipmap, opts.GammaSpace, opts.OnLoad, opts.OnError)
 	return EquiRectangularCubeTextureFromJSObject(p)
 }
 

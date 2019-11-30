@@ -14,8 +14,8 @@ type PassCubePostProcess struct{ *PostProcess }
 func (p *PassCubePostProcess) JSObject() js.Value { return p.p }
 
 // PassCubePostProcess returns a PassCubePostProcess JavaScript class.
-func (b *Babylon) PassCubePostProcess() *PassCubePostProcess {
-	p := b.ctx.Get("PassCubePostProcess")
+func (ba *Babylon) PassCubePostProcess() *PassCubePostProcess {
+	p := ba.ctx.Get("PassCubePostProcess")
 	return PassCubePostProcessFromJSObject(p)
 }
 
@@ -28,26 +28,26 @@ func PassCubePostProcessFromJSObject(p js.Value) *PassCubePostProcess {
 type NewPassCubePostProcessOpts struct {
 	Camera *Camera
 
-	SamplingMode *float64
+	SamplingMode *JSFloat64
 
 	Engine *Engine
 
-	Reusable *bool
+	Reusable *JSBool
 
-	TextureType *float64
+	TextureType *JSFloat64
 
-	BlockCompilation *bool
+	BlockCompilation *JSBool
 }
 
 // NewPassCubePostProcess returns a new PassCubePostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.passcubepostprocess
-func (b *Babylon) NewPassCubePostProcess(name string, options float64, opts *NewPassCubePostProcessOpts) *PassCubePostProcess {
+func (ba *Babylon) NewPassCubePostProcess(name string, options float64, opts *NewPassCubePostProcessOpts) *PassCubePostProcess {
 	if opts == nil {
 		opts = &NewPassCubePostProcessOpts{}
 	}
 
-	p := b.ctx.Get("PassCubePostProcess").New(name, options, opts.Camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType, opts.BlockCompilation.JSObject())
+	p := ba.ctx.Get("PassCubePostProcess").New(name, options, opts.Camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable, opts.TextureType, opts.BlockCompilation)
 	return PassCubePostProcessFromJSObject(p)
 }
 

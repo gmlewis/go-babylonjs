@@ -14,8 +14,8 @@ type VertexOutputBlock struct{ *NodeMaterialBlock }
 func (v *VertexOutputBlock) JSObject() js.Value { return v.p }
 
 // VertexOutputBlock returns a VertexOutputBlock JavaScript class.
-func (b *Babylon) VertexOutputBlock() *VertexOutputBlock {
-	p := b.ctx.Get("VertexOutputBlock")
+func (ba *Babylon) VertexOutputBlock() *VertexOutputBlock {
+	p := ba.ctx.Get("VertexOutputBlock")
 	return VertexOutputBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func VertexOutputBlockFromJSObject(p js.Value) *VertexOutputBlock {
 // NewVertexOutputBlock returns a new VertexOutputBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vertexoutputblock
-func (b *Babylon) NewVertexOutputBlock(name string) *VertexOutputBlock {
-	p := b.ctx.Get("VertexOutputBlock").New(name)
+func (ba *Babylon) NewVertexOutputBlock(name string) *VertexOutputBlock {
+	p := ba.ctx.Get("VertexOutputBlock").New(name)
 	return VertexOutputBlockFromJSObject(p)
 }
 

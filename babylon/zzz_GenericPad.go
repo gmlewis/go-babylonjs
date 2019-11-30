@@ -14,8 +14,8 @@ type GenericPad struct{ *Gamepad }
 func (g *GenericPad) JSObject() js.Value { return g.p }
 
 // GenericPad returns a GenericPad JavaScript class.
-func (b *Babylon) GenericPad() *GenericPad {
-	p := b.ctx.Get("GenericPad")
+func (ba *Babylon) GenericPad() *GenericPad {
+	p := ba.ctx.Get("GenericPad")
 	return GenericPadFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func GenericPadFromJSObject(p js.Value) *GenericPad {
 // NewGenericPad returns a new GenericPad object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.genericpad
-func (b *Babylon) NewGenericPad(id string, index float64, browserGamepad interface{}) *GenericPad {
-	p := b.ctx.Get("GenericPad").New(id, index, browserGamepad)
+func (ba *Babylon) NewGenericPad(id string, index float64, browserGamepad interface{}) *GenericPad {
+	p := ba.ctx.Get("GenericPad").New(id, index, browserGamepad)
 	return GenericPadFromJSObject(p)
 }
 

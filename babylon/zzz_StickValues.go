@@ -14,8 +14,8 @@ type StickValues struct{ p js.Value }
 func (s *StickValues) JSObject() js.Value { return s.p }
 
 // StickValues returns a StickValues JavaScript class.
-func (b *Babylon) StickValues() *StickValues {
-	p := b.ctx.Get("StickValues")
+func (ba *Babylon) StickValues() *StickValues {
+	p := ba.ctx.Get("StickValues")
 	return StickValuesFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func StickValuesFromJSObject(p js.Value) *StickValues {
 // NewStickValues returns a new StickValues object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stickvalues
-func (b *Babylon) NewStickValues(x float64, y float64) *StickValues {
-	p := b.ctx.Get("StickValues").New(x, y)
+func (ba *Babylon) NewStickValues(x float64, y float64) *StickValues {
+	p := ba.ctx.Get("StickValues").New(x, y)
 	return StickValuesFromJSObject(p)
 }
 

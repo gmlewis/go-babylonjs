@@ -14,8 +14,8 @@ type GradientHelper struct{ p js.Value }
 func (g *GradientHelper) JSObject() js.Value { return g.p }
 
 // GradientHelper returns a GradientHelper JavaScript class.
-func (b *Babylon) GradientHelper() *GradientHelper {
-	p := b.ctx.Get("GradientHelper")
+func (ba *Babylon) GradientHelper() *GradientHelper {
+	p := ba.ctx.Get("GradientHelper")
 	return GradientHelperFromJSObject(p)
 }
 

@@ -17,8 +17,8 @@ type UniformBuffer struct{ p js.Value }
 func (u *UniformBuffer) JSObject() js.Value { return u.p }
 
 // UniformBuffer returns a UniformBuffer JavaScript class.
-func (b *Babylon) UniformBuffer() *UniformBuffer {
-	p := b.ctx.Get("UniformBuffer")
+func (ba *Babylon) UniformBuffer() *UniformBuffer {
+	p := ba.ctx.Get("UniformBuffer")
 	return UniformBufferFromJSObject(p)
 }
 
@@ -29,20 +29,20 @@ func UniformBufferFromJSObject(p js.Value) *UniformBuffer {
 
 // NewUniformBufferOpts contains optional parameters for NewUniformBuffer.
 type NewUniformBufferOpts struct {
-	Data *float64
+	Data *JSFloat64
 
-	Dynamic *bool
+	Dynamic *JSBool
 }
 
 // NewUniformBuffer returns a new UniformBuffer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.uniformbuffer
-func (b *Babylon) NewUniformBuffer(engine *Engine, opts *NewUniformBufferOpts) *UniformBuffer {
+func (ba *Babylon) NewUniformBuffer(engine *Engine, opts *NewUniformBufferOpts) *UniformBuffer {
 	if opts == nil {
 		opts = &NewUniformBufferOpts{}
 	}
 
-	p := b.ctx.Get("UniformBuffer").New(engine.JSObject(), opts.Data, opts.Dynamic.JSObject())
+	p := ba.ctx.Get("UniformBuffer").New(engine.JSObject(), opts.Data, opts.Dynamic)
 	return UniformBufferFromJSObject(p)
 }
 

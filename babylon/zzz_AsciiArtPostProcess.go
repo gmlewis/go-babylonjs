@@ -17,8 +17,8 @@ type AsciiArtPostProcess struct{ *PostProcess }
 func (a *AsciiArtPostProcess) JSObject() js.Value { return a.p }
 
 // AsciiArtPostProcess returns a AsciiArtPostProcess JavaScript class.
-func (b *Babylon) AsciiArtPostProcess() *AsciiArtPostProcess {
-	p := b.ctx.Get("AsciiArtPostProcess")
+func (ba *Babylon) AsciiArtPostProcess() *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess")
 	return AsciiArtPostProcessFromJSObject(p)
 }
 
@@ -29,18 +29,18 @@ func AsciiArtPostProcessFromJSObject(p js.Value) *AsciiArtPostProcess {
 
 // NewAsciiArtPostProcessOpts contains optional parameters for NewAsciiArtPostProcess.
 type NewAsciiArtPostProcessOpts struct {
-	Options *string
+	Options *JSString
 }
 
 // NewAsciiArtPostProcess returns a new AsciiArtPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess
-func (b *Babylon) NewAsciiArtPostProcess(name string, camera *Camera, opts *NewAsciiArtPostProcessOpts) *AsciiArtPostProcess {
+func (ba *Babylon) NewAsciiArtPostProcess(name string, camera *Camera, opts *NewAsciiArtPostProcessOpts) *AsciiArtPostProcess {
 	if opts == nil {
 		opts = &NewAsciiArtPostProcessOpts{}
 	}
 
-	p := b.ctx.Get("AsciiArtPostProcess").New(name, camera.JSObject(), opts.Options)
+	p := ba.ctx.Get("AsciiArtPostProcess").New(name, camera.JSObject(), opts.Options)
 	return AsciiArtPostProcessFromJSObject(p)
 }
 

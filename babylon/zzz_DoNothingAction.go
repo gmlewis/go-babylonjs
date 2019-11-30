@@ -16,8 +16,8 @@ type DoNothingAction struct{ *Action }
 func (d *DoNothingAction) JSObject() js.Value { return d.p }
 
 // DoNothingAction returns a DoNothingAction JavaScript class.
-func (b *Babylon) DoNothingAction() *DoNothingAction {
-	p := b.ctx.Get("DoNothingAction")
+func (ba *Babylon) DoNothingAction() *DoNothingAction {
+	p := ba.ctx.Get("DoNothingAction")
 	return DoNothingActionFromJSObject(p)
 }
 
@@ -36,12 +36,12 @@ type NewDoNothingActionOpts struct {
 // NewDoNothingAction returns a new DoNothingAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.donothingaction
-func (b *Babylon) NewDoNothingAction(opts *NewDoNothingActionOpts) *DoNothingAction {
+func (ba *Babylon) NewDoNothingAction(opts *NewDoNothingActionOpts) *DoNothingAction {
 	if opts == nil {
 		opts = &NewDoNothingActionOpts{}
 	}
 
-	p := b.ctx.Get("DoNothingAction").New(opts.TriggerOptions, opts.Condition.JSObject())
+	p := ba.ctx.Get("DoNothingAction").New(opts.TriggerOptions, opts.Condition.JSObject())
 	return DoNothingActionFromJSObject(p)
 }
 

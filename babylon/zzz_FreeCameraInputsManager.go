@@ -21,8 +21,8 @@ type FreeCameraInputsManager struct {
 func (f *FreeCameraInputsManager) JSObject() js.Value { return f.p }
 
 // FreeCameraInputsManager returns a FreeCameraInputsManager JavaScript class.
-func (b *Babylon) FreeCameraInputsManager() *FreeCameraInputsManager {
-	p := b.ctx.Get("FreeCameraInputsManager")
+func (ba *Babylon) FreeCameraInputsManager() *FreeCameraInputsManager {
+	p := ba.ctx.Get("FreeCameraInputsManager")
 	return FreeCameraInputsManagerFromJSObject(p)
 }
 
@@ -34,8 +34,8 @@ func FreeCameraInputsManagerFromJSObject(p js.Value) *FreeCameraInputsManager {
 // NewFreeCameraInputsManager returns a new FreeCameraInputsManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamerainputsmanager
-func (b *Babylon) NewFreeCameraInputsManager(camera *FreeCamera) *FreeCameraInputsManager {
-	p := b.ctx.Get("FreeCameraInputsManager").New(camera.JSObject())
+func (ba *Babylon) NewFreeCameraInputsManager(camera *FreeCamera) *FreeCameraInputsManager {
+	p := ba.ctx.Get("FreeCameraInputsManager").New(camera.JSObject())
 	return FreeCameraInputsManagerFromJSObject(p)
 }
 

@@ -14,8 +14,8 @@ type Geometry struct{ p js.Value }
 func (g *Geometry) JSObject() js.Value { return g.p }
 
 // Geometry returns a Geometry JavaScript class.
-func (b *Babylon) Geometry() *Geometry {
-	p := b.ctx.Get("Geometry")
+func (ba *Babylon) Geometry() *Geometry {
+	p := ba.ctx.Get("Geometry")
 	return GeometryFromJSObject(p)
 }
 
@@ -28,7 +28,7 @@ func GeometryFromJSObject(p js.Value) *Geometry {
 type NewGeometryOpts struct {
 	VertexData *VertexData
 
-	Updatable *bool
+	Updatable *JSBool
 
 	Mesh *Mesh
 }
@@ -36,12 +36,12 @@ type NewGeometryOpts struct {
 // NewGeometry returns a new Geometry object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometry
-func (b *Babylon) NewGeometry(id string, scene *Scene, opts *NewGeometryOpts) *Geometry {
+func (ba *Babylon) NewGeometry(id string, scene *Scene, opts *NewGeometryOpts) *Geometry {
 	if opts == nil {
 		opts = &NewGeometryOpts{}
 	}
 
-	p := b.ctx.Get("Geometry").New(id, scene.JSObject(), opts.VertexData.JSObject(), opts.Updatable.JSObject(), opts.Mesh.JSObject())
+	p := ba.ctx.Get("Geometry").New(id, scene.JSObject(), opts.VertexData.JSObject(), opts.Updatable, opts.Mesh.JSObject())
 	return GeometryFromJSObject(p)
 }
 

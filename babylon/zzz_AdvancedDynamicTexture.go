@@ -16,8 +16,8 @@ type AdvancedDynamicTexture struct{ *DynamicTexture }
 func (a *AdvancedDynamicTexture) JSObject() js.Value { return a.p }
 
 // AdvancedDynamicTexture returns a AdvancedDynamicTexture JavaScript class.
-func (b *Babylon) AdvancedDynamicTexture() *AdvancedDynamicTexture {
-	p := b.ctx.Get("AdvancedDynamicTexture")
+func (ba *Babylon) AdvancedDynamicTexture() *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture")
 	return AdvancedDynamicTextureFromJSObject(p)
 }
 
@@ -28,20 +28,20 @@ func AdvancedDynamicTextureFromJSObject(p js.Value) *AdvancedDynamicTexture {
 
 // NewAdvancedDynamicTextureOpts contains optional parameters for NewAdvancedDynamicTexture.
 type NewAdvancedDynamicTextureOpts struct {
-	GenerateMipMaps *bool
+	GenerateMipMaps *JSBool
 
-	SamplingMode *float64
+	SamplingMode *JSFloat64
 }
 
 // NewAdvancedDynamicTexture returns a new AdvancedDynamicTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture
-func (b *Babylon) NewAdvancedDynamicTexture(name string, width float64, height float64, scene *Scene, opts *NewAdvancedDynamicTextureOpts) *AdvancedDynamicTexture {
+func (ba *Babylon) NewAdvancedDynamicTexture(name string, width float64, height float64, scene *Scene, opts *NewAdvancedDynamicTextureOpts) *AdvancedDynamicTexture {
 	if opts == nil {
 		opts = &NewAdvancedDynamicTextureOpts{}
 	}
 
-	p := b.ctx.Get("AdvancedDynamicTexture").New(name, width, height, scene.JSObject(), opts.GenerateMipMaps.JSObject(), opts.SamplingMode)
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(name, width, height, scene.JSObject(), opts.GenerateMipMaps, opts.SamplingMode)
 	return AdvancedDynamicTextureFromJSObject(p)
 }
 

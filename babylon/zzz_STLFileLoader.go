@@ -15,8 +15,8 @@ type STLFileLoader struct{ p js.Value }
 func (s *STLFileLoader) JSObject() js.Value { return s.p }
 
 // STLFileLoader returns a STLFileLoader JavaScript class.
-func (b *Babylon) STLFileLoader() *STLFileLoader {
-	p := b.ctx.Get("STLFileLoader")
+func (ba *Babylon) STLFileLoader() *STLFileLoader {
+	p := ba.ctx.Get("STLFileLoader")
 	return STLFileLoaderFromJSObject(p)
 }
 

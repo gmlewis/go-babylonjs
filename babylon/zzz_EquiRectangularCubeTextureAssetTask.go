@@ -14,8 +14,8 @@ type EquiRectangularCubeTextureAssetTask struct{ *AbstractAssetTask }
 func (e *EquiRectangularCubeTextureAssetTask) JSObject() js.Value { return e.p }
 
 // EquiRectangularCubeTextureAssetTask returns a EquiRectangularCubeTextureAssetTask JavaScript class.
-func (b *Babylon) EquiRectangularCubeTextureAssetTask() *EquiRectangularCubeTextureAssetTask {
-	p := b.ctx.Get("EquiRectangularCubeTextureAssetTask")
+func (ba *Babylon) EquiRectangularCubeTextureAssetTask() *EquiRectangularCubeTextureAssetTask {
+	p := ba.ctx.Get("EquiRectangularCubeTextureAssetTask")
 	return EquiRectangularCubeTextureAssetTaskFromJSObject(p)
 }
 
@@ -26,20 +26,20 @@ func EquiRectangularCubeTextureAssetTaskFromJSObject(p js.Value) *EquiRectangula
 
 // NewEquiRectangularCubeTextureAssetTaskOpts contains optional parameters for NewEquiRectangularCubeTextureAssetTask.
 type NewEquiRectangularCubeTextureAssetTaskOpts struct {
-	NoMipmap *bool
+	NoMipmap *JSBool
 
-	GammaSpace *bool
+	GammaSpace *JSBool
 }
 
 // NewEquiRectangularCubeTextureAssetTask returns a new EquiRectangularCubeTextureAssetTask object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetextureassettask
-func (b *Babylon) NewEquiRectangularCubeTextureAssetTask(name string, url string, size float64, opts *NewEquiRectangularCubeTextureAssetTaskOpts) *EquiRectangularCubeTextureAssetTask {
+func (ba *Babylon) NewEquiRectangularCubeTextureAssetTask(name string, url string, size float64, opts *NewEquiRectangularCubeTextureAssetTaskOpts) *EquiRectangularCubeTextureAssetTask {
 	if opts == nil {
 		opts = &NewEquiRectangularCubeTextureAssetTaskOpts{}
 	}
 
-	p := b.ctx.Get("EquiRectangularCubeTextureAssetTask").New(name, url, size, opts.NoMipmap.JSObject(), opts.GammaSpace.JSObject())
+	p := ba.ctx.Get("EquiRectangularCubeTextureAssetTask").New(name, url, size, opts.NoMipmap, opts.GammaSpace)
 	return EquiRectangularCubeTextureAssetTaskFromJSObject(p)
 }
 

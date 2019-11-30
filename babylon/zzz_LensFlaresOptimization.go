@@ -16,8 +16,8 @@ type LensFlaresOptimization struct{ *SceneOptimization }
 func (l *LensFlaresOptimization) JSObject() js.Value { return l.p }
 
 // LensFlaresOptimization returns a LensFlaresOptimization JavaScript class.
-func (b *Babylon) LensFlaresOptimization() *LensFlaresOptimization {
-	p := b.ctx.Get("LensFlaresOptimization")
+func (ba *Babylon) LensFlaresOptimization() *LensFlaresOptimization {
+	p := ba.ctx.Get("LensFlaresOptimization")
 	return LensFlaresOptimizationFromJSObject(p)
 }
 
@@ -28,18 +28,18 @@ func LensFlaresOptimizationFromJSObject(p js.Value) *LensFlaresOptimization {
 
 // NewLensFlaresOptimizationOpts contains optional parameters for NewLensFlaresOptimization.
 type NewLensFlaresOptimizationOpts struct {
-	Priority *float64
+	Priority *JSFloat64
 }
 
 // NewLensFlaresOptimization returns a new LensFlaresOptimization object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensflaresoptimization
-func (b *Babylon) NewLensFlaresOptimization(opts *NewLensFlaresOptimizationOpts) *LensFlaresOptimization {
+func (ba *Babylon) NewLensFlaresOptimization(opts *NewLensFlaresOptimizationOpts) *LensFlaresOptimization {
 	if opts == nil {
 		opts = &NewLensFlaresOptimizationOpts{}
 	}
 
-	p := b.ctx.Get("LensFlaresOptimization").New(opts.Priority)
+	p := ba.ctx.Get("LensFlaresOptimization").New(opts.Priority)
 	return LensFlaresOptimizationFromJSObject(p)
 }
 

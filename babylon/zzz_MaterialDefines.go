@@ -14,8 +14,8 @@ type MaterialDefines struct{ p js.Value }
 func (m *MaterialDefines) JSObject() js.Value { return m.p }
 
 // MaterialDefines returns a MaterialDefines JavaScript class.
-func (b *Babylon) MaterialDefines() *MaterialDefines {
-	p := b.ctx.Get("MaterialDefines")
+func (ba *Babylon) MaterialDefines() *MaterialDefines {
+	p := ba.ctx.Get("MaterialDefines")
 	return MaterialDefinesFromJSObject(p)
 }
 

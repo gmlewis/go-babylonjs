@@ -16,8 +16,8 @@ type CustomOptimization struct{ *SceneOptimization }
 func (c *CustomOptimization) JSObject() js.Value { return c.p }
 
 // CustomOptimization returns a CustomOptimization JavaScript class.
-func (b *Babylon) CustomOptimization() *CustomOptimization {
-	p := b.ctx.Get("CustomOptimization")
+func (ba *Babylon) CustomOptimization() *CustomOptimization {
+	p := ba.ctx.Get("CustomOptimization")
 	return CustomOptimizationFromJSObject(p)
 }
 
@@ -28,18 +28,18 @@ func CustomOptimizationFromJSObject(p js.Value) *CustomOptimization {
 
 // NewCustomOptimizationOpts contains optional parameters for NewCustomOptimization.
 type NewCustomOptimizationOpts struct {
-	Priority *float64
+	Priority *JSFloat64
 }
 
 // NewCustomOptimization returns a new CustomOptimization object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.customoptimization
-func (b *Babylon) NewCustomOptimization(opts *NewCustomOptimizationOpts) *CustomOptimization {
+func (ba *Babylon) NewCustomOptimization(opts *NewCustomOptimizationOpts) *CustomOptimization {
 	if opts == nil {
 		opts = &NewCustomOptimizationOpts{}
 	}
 
-	p := b.ctx.Get("CustomOptimization").New(opts.Priority)
+	p := ba.ctx.Get("CustomOptimization").New(opts.Priority)
 	return CustomOptimizationFromJSObject(p)
 }
 

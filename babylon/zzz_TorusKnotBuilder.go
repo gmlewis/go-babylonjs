@@ -14,8 +14,8 @@ type TorusKnotBuilder struct{ p js.Value }
 func (t *TorusKnotBuilder) JSObject() js.Value { return t.p }
 
 // TorusKnotBuilder returns a TorusKnotBuilder JavaScript class.
-func (b *Babylon) TorusKnotBuilder() *TorusKnotBuilder {
-	p := b.ctx.Get("TorusKnotBuilder")
+func (ba *Babylon) TorusKnotBuilder() *TorusKnotBuilder {
+	p := ba.ctx.Get("TorusKnotBuilder")
 	return TorusKnotBuilderFromJSObject(p)
 }
 

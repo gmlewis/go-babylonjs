@@ -14,8 +14,8 @@ type PerformanceMonitor struct{ p js.Value }
 func (p *PerformanceMonitor) JSObject() js.Value { return p.p }
 
 // PerformanceMonitor returns a PerformanceMonitor JavaScript class.
-func (b *Babylon) PerformanceMonitor() *PerformanceMonitor {
-	p := b.ctx.Get("PerformanceMonitor")
+func (ba *Babylon) PerformanceMonitor() *PerformanceMonitor {
+	p := ba.ctx.Get("PerformanceMonitor")
 	return PerformanceMonitorFromJSObject(p)
 }
 
@@ -26,18 +26,18 @@ func PerformanceMonitorFromJSObject(p js.Value) *PerformanceMonitor {
 
 // NewPerformanceMonitorOpts contains optional parameters for NewPerformanceMonitor.
 type NewPerformanceMonitorOpts struct {
-	FrameSampleSize *float64
+	FrameSampleSize *JSFloat64
 }
 
 // NewPerformanceMonitor returns a new PerformanceMonitor object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.performancemonitor
-func (b *Babylon) NewPerformanceMonitor(opts *NewPerformanceMonitorOpts) *PerformanceMonitor {
+func (ba *Babylon) NewPerformanceMonitor(opts *NewPerformanceMonitorOpts) *PerformanceMonitor {
 	if opts == nil {
 		opts = &NewPerformanceMonitorOpts{}
 	}
 
-	p := b.ctx.Get("PerformanceMonitor").New(opts.FrameSampleSize)
+	p := ba.ctx.Get("PerformanceMonitor").New(opts.FrameSampleSize)
 	return PerformanceMonitorFromJSObject(p)
 }
 

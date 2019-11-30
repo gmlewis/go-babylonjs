@@ -16,8 +16,8 @@ type ConvolutionPostProcess struct{ *PostProcess }
 func (c *ConvolutionPostProcess) JSObject() js.Value { return c.p }
 
 // ConvolutionPostProcess returns a ConvolutionPostProcess JavaScript class.
-func (b *Babylon) ConvolutionPostProcess() *ConvolutionPostProcess {
-	p := b.ctx.Get("ConvolutionPostProcess")
+func (ba *Babylon) ConvolutionPostProcess() *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess")
 	return ConvolutionPostProcessFromJSObject(p)
 }
 
@@ -28,24 +28,24 @@ func ConvolutionPostProcessFromJSObject(p js.Value) *ConvolutionPostProcess {
 
 // NewConvolutionPostProcessOpts contains optional parameters for NewConvolutionPostProcess.
 type NewConvolutionPostProcessOpts struct {
-	SamplingMode *float64
+	SamplingMode *JSFloat64
 
 	Engine *Engine
 
-	Reusable *bool
+	Reusable *JSBool
 
-	TextureType *float64
+	TextureType *JSFloat64
 }
 
 // NewConvolutionPostProcess returns a new ConvolutionPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess
-func (b *Babylon) NewConvolutionPostProcess(name string, kernel float64, options float64, camera *Camera, opts *NewConvolutionPostProcessOpts) *ConvolutionPostProcess {
+func (ba *Babylon) NewConvolutionPostProcess(name string, kernel float64, options float64, camera *Camera, opts *NewConvolutionPostProcessOpts) *ConvolutionPostProcess {
 	if opts == nil {
 		opts = &NewConvolutionPostProcessOpts{}
 	}
 
-	p := b.ctx.Get("ConvolutionPostProcess").New(name, kernel, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType)
+	p := ba.ctx.Get("ConvolutionPostProcess").New(name, kernel, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable, opts.TextureType)
 	return ConvolutionPostProcessFromJSObject(p)
 }
 

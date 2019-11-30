@@ -14,8 +14,8 @@ type FilesInput struct{ p js.Value }
 func (f *FilesInput) JSObject() js.Value { return f.p }
 
 // FilesInput returns a FilesInput JavaScript class.
-func (b *Babylon) FilesInput() *FilesInput {
-	p := b.ctx.Get("FilesInput")
+func (ba *Babylon) FilesInput() *FilesInput {
+	p := ba.ctx.Get("FilesInput")
 	return FilesInputFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func FilesInputFromJSObject(p js.Value) *FilesInput {
 // NewFilesInput returns a new FilesInput object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.filesinput
-func (b *Babylon) NewFilesInput(engine *Engine, scene *Scene, sceneLoadedCallback func(), progressCallback func(), additionalRenderLoopLogicCallback func(), textureLoadingCallback func(), startingProcessingFilesCallback func(), onReloadCallback func(), errorCallback func()) *FilesInput {
-	p := b.ctx.Get("FilesInput").New(engine.JSObject(), scene.JSObject(), sceneLoadedCallback, progressCallback, additionalRenderLoopLogicCallback, textureLoadingCallback, startingProcessingFilesCallback, onReloadCallback, errorCallback)
+func (ba *Babylon) NewFilesInput(engine *Engine, scene *Scene, sceneLoadedCallback func(), progressCallback func(), additionalRenderLoopLogicCallback func(), textureLoadingCallback func(), startingProcessingFilesCallback func(), onReloadCallback func(), errorCallback func()) *FilesInput {
+	p := ba.ctx.Get("FilesInput").New(engine.JSObject(), scene.JSObject(), sceneLoadedCallback, progressCallback, additionalRenderLoopLogicCallback, textureLoadingCallback, startingProcessingFilesCallback, onReloadCallback, errorCallback)
 	return FilesInputFromJSObject(p)
 }
 

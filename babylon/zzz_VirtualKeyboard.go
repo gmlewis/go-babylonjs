@@ -14,8 +14,8 @@ type VirtualKeyboard struct{ *StackPanel }
 func (v *VirtualKeyboard) JSObject() js.Value { return v.p }
 
 // VirtualKeyboard returns a VirtualKeyboard JavaScript class.
-func (b *Babylon) VirtualKeyboard() *VirtualKeyboard {
-	p := b.ctx.Get("VirtualKeyboard")
+func (ba *Babylon) VirtualKeyboard() *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard")
 	return VirtualKeyboardFromJSObject(p)
 }
 
@@ -26,18 +26,18 @@ func VirtualKeyboardFromJSObject(p js.Value) *VirtualKeyboard {
 
 // NewVirtualKeyboardOpts contains optional parameters for NewVirtualKeyboard.
 type NewVirtualKeyboardOpts struct {
-	Name *string
+	Name *JSString
 }
 
 // NewVirtualKeyboard returns a new VirtualKeyboard object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard
-func (b *Babylon) NewVirtualKeyboard(opts *NewVirtualKeyboardOpts) *VirtualKeyboard {
+func (ba *Babylon) NewVirtualKeyboard(opts *NewVirtualKeyboardOpts) *VirtualKeyboard {
 	if opts == nil {
 		opts = &NewVirtualKeyboardOpts{}
 	}
 
-	p := b.ctx.Get("VirtualKeyboard").New(opts.Name)
+	p := ba.ctx.Get("VirtualKeyboard").New(opts.Name)
 	return VirtualKeyboardFromJSObject(p)
 }
 

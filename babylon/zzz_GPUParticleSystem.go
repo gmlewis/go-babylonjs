@@ -17,8 +17,8 @@ type GPUParticleSystem struct{ *BaseParticleSystem }
 func (g *GPUParticleSystem) JSObject() js.Value { return g.p }
 
 // GPUParticleSystem returns a GPUParticleSystem JavaScript class.
-func (b *Babylon) GPUParticleSystem() *GPUParticleSystem {
-	p := b.ctx.Get("GPUParticleSystem")
+func (ba *Babylon) GPUParticleSystem() *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem")
 	return GPUParticleSystemFromJSObject(p)
 }
 
@@ -29,18 +29,18 @@ func GPUParticleSystemFromJSObject(p js.Value) *GPUParticleSystem {
 
 // NewGPUParticleSystemOpts contains optional parameters for NewGPUParticleSystem.
 type NewGPUParticleSystemOpts struct {
-	IsAnimationSheetEnabled *bool
+	IsAnimationSheetEnabled *JSBool
 }
 
 // NewGPUParticleSystem returns a new GPUParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem
-func (b *Babylon) NewGPUParticleSystem(name string, options js.Value, scene *Scene, opts *NewGPUParticleSystemOpts) *GPUParticleSystem {
+func (ba *Babylon) NewGPUParticleSystem(name string, options js.Value, scene *Scene, opts *NewGPUParticleSystemOpts) *GPUParticleSystem {
 	if opts == nil {
 		opts = &NewGPUParticleSystemOpts{}
 	}
 
-	p := b.ctx.Get("GPUParticleSystem").New(name, options, scene.JSObject(), opts.IsAnimationSheetEnabled.JSObject())
+	p := ba.ctx.Get("GPUParticleSystem").New(name, options, scene.JSObject(), opts.IsAnimationSheetEnabled)
 	return GPUParticleSystemFromJSObject(p)
 }
 

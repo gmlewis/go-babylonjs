@@ -17,8 +17,8 @@ type AsciiArtFontTexture struct{ *BaseTexture }
 func (a *AsciiArtFontTexture) JSObject() js.Value { return a.p }
 
 // AsciiArtFontTexture returns a AsciiArtFontTexture JavaScript class.
-func (b *Babylon) AsciiArtFontTexture() *AsciiArtFontTexture {
-	p := b.ctx.Get("AsciiArtFontTexture")
+func (ba *Babylon) AsciiArtFontTexture() *AsciiArtFontTexture {
+	p := ba.ctx.Get("AsciiArtFontTexture")
 	return AsciiArtFontTextureFromJSObject(p)
 }
 
@@ -35,12 +35,12 @@ type NewAsciiArtFontTextureOpts struct {
 // NewAsciiArtFontTexture returns a new AsciiArtFontTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.asciiartfonttexture
-func (b *Babylon) NewAsciiArtFontTexture(name string, font string, text string, opts *NewAsciiArtFontTextureOpts) *AsciiArtFontTexture {
+func (ba *Babylon) NewAsciiArtFontTexture(name string, font string, text string, opts *NewAsciiArtFontTextureOpts) *AsciiArtFontTexture {
 	if opts == nil {
 		opts = &NewAsciiArtFontTextureOpts{}
 	}
 
-	p := b.ctx.Get("AsciiArtFontTexture").New(name, font, text, opts.Scene.JSObject())
+	p := ba.ctx.Get("AsciiArtFontTexture").New(name, font, text, opts.Scene.JSObject())
 	return AsciiArtFontTextureFromJSObject(p)
 }
 

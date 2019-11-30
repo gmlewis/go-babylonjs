@@ -14,8 +14,8 @@ type DivideBlock struct{ *NodeMaterialBlock }
 func (d *DivideBlock) JSObject() js.Value { return d.p }
 
 // DivideBlock returns a DivideBlock JavaScript class.
-func (b *Babylon) DivideBlock() *DivideBlock {
-	p := b.ctx.Get("DivideBlock")
+func (ba *Babylon) DivideBlock() *DivideBlock {
+	p := ba.ctx.Get("DivideBlock")
 	return DivideBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func DivideBlockFromJSObject(p js.Value) *DivideBlock {
 // NewDivideBlock returns a new DivideBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.divideblock
-func (b *Babylon) NewDivideBlock(name string) *DivideBlock {
-	p := b.ctx.Get("DivideBlock").New(name)
+func (ba *Babylon) NewDivideBlock(name string) *DivideBlock {
+	p := ba.ctx.Get("DivideBlock").New(name)
 	return DivideBlockFromJSObject(p)
 }
 

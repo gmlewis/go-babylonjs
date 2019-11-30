@@ -14,8 +14,8 @@ type PoseEnabledControllerHelper struct{ p js.Value }
 func (p *PoseEnabledControllerHelper) JSObject() js.Value { return p.p }
 
 // PoseEnabledControllerHelper returns a PoseEnabledControllerHelper JavaScript class.
-func (b *Babylon) PoseEnabledControllerHelper() *PoseEnabledControllerHelper {
-	p := b.ctx.Get("PoseEnabledControllerHelper")
+func (ba *Babylon) PoseEnabledControllerHelper() *PoseEnabledControllerHelper {
+	p := ba.ctx.Get("PoseEnabledControllerHelper")
 	return PoseEnabledControllerHelperFromJSObject(p)
 }
 

@@ -17,8 +17,8 @@ type PhysicsJoint struct{ p js.Value }
 func (p *PhysicsJoint) JSObject() js.Value { return p.p }
 
 // PhysicsJoint returns a PhysicsJoint JavaScript class.
-func (b *Babylon) PhysicsJoint() *PhysicsJoint {
-	p := b.ctx.Get("PhysicsJoint")
+func (ba *Babylon) PhysicsJoint() *PhysicsJoint {
+	p := ba.ctx.Get("PhysicsJoint")
 	return PhysicsJointFromJSObject(p)
 }
 
@@ -30,8 +30,8 @@ func PhysicsJointFromJSObject(p js.Value) *PhysicsJoint {
 // NewPhysicsJoint returns a new PhysicsJoint object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsjoint
-func (b *Babylon) NewPhysicsJoint(jsType float64, jointData js.Value) *PhysicsJoint {
-	p := b.ctx.Get("PhysicsJoint").New(jsType, jointData)
+func (ba *Babylon) NewPhysicsJoint(jsType float64, jointData js.Value) *PhysicsJoint {
+	p := ba.ctx.Get("PhysicsJoint").New(jsType, jointData)
 	return PhysicsJointFromJSObject(p)
 }
 

@@ -14,8 +14,8 @@ type OneMinusBlock struct{ *NodeMaterialBlock }
 func (o *OneMinusBlock) JSObject() js.Value { return o.p }
 
 // OneMinusBlock returns a OneMinusBlock JavaScript class.
-func (b *Babylon) OneMinusBlock() *OneMinusBlock {
-	p := b.ctx.Get("OneMinusBlock")
+func (ba *Babylon) OneMinusBlock() *OneMinusBlock {
+	p := ba.ctx.Get("OneMinusBlock")
 	return OneMinusBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func OneMinusBlockFromJSObject(p js.Value) *OneMinusBlock {
 // NewOneMinusBlock returns a new OneMinusBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oneminusblock
-func (b *Babylon) NewOneMinusBlock(name string) *OneMinusBlock {
-	p := b.ctx.Get("OneMinusBlock").New(name)
+func (ba *Babylon) NewOneMinusBlock(name string) *OneMinusBlock {
+	p := ba.ctx.Get("OneMinusBlock").New(name)
 	return OneMinusBlockFromJSObject(p)
 }
 

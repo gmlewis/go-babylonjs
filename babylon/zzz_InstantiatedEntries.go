@@ -14,8 +14,8 @@ type InstantiatedEntries struct{ p js.Value }
 func (i *InstantiatedEntries) JSObject() js.Value { return i.p }
 
 // InstantiatedEntries returns a InstantiatedEntries JavaScript class.
-func (b *Babylon) InstantiatedEntries() *InstantiatedEntries {
-	p := b.ctx.Get("InstantiatedEntries")
+func (ba *Babylon) InstantiatedEntries() *InstantiatedEntries {
+	p := ba.ctx.Get("InstantiatedEntries")
 	return InstantiatedEntriesFromJSObject(p)
 }
 

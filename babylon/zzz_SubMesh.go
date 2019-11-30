@@ -14,8 +14,8 @@ type SubMesh struct{ *BaseSubMesh }
 func (s *SubMesh) JSObject() js.Value { return s.p }
 
 // SubMesh returns a SubMesh JavaScript class.
-func (b *Babylon) SubMesh() *SubMesh {
-	p := b.ctx.Get("SubMesh")
+func (ba *Babylon) SubMesh() *SubMesh {
+	p := ba.ctx.Get("SubMesh")
 	return SubMeshFromJSObject(p)
 }
 
@@ -28,18 +28,18 @@ func SubMeshFromJSObject(p js.Value) *SubMesh {
 type NewSubMeshOpts struct {
 	RenderingMesh *Mesh
 
-	CreateBoundingBox *bool
+	CreateBoundingBox *JSBool
 }
 
 // NewSubMesh returns a new SubMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.submesh
-func (b *Babylon) NewSubMesh(materialIndex float64, verticesStart float64, verticesCount float64, indexStart float64, indexCount float64, mesh *AbstractMesh, opts *NewSubMeshOpts) *SubMesh {
+func (ba *Babylon) NewSubMesh(materialIndex float64, verticesStart float64, verticesCount float64, indexStart float64, indexCount float64, mesh *AbstractMesh, opts *NewSubMeshOpts) *SubMesh {
 	if opts == nil {
 		opts = &NewSubMeshOpts{}
 	}
 
-	p := b.ctx.Get("SubMesh").New(materialIndex, verticesStart, verticesCount, indexStart, indexCount, mesh.JSObject(), opts.RenderingMesh.JSObject(), opts.CreateBoundingBox.JSObject())
+	p := ba.ctx.Get("SubMesh").New(materialIndex, verticesStart, verticesCount, indexStart, indexCount, mesh.JSObject(), opts.RenderingMesh.JSObject(), opts.CreateBoundingBox)
 	return SubMeshFromJSObject(p)
 }
 

@@ -16,8 +16,8 @@ type PickingInfo struct{ p js.Value }
 func (p *PickingInfo) JSObject() js.Value { return p.p }
 
 // PickingInfo returns a PickingInfo JavaScript class.
-func (b *Babylon) PickingInfo() *PickingInfo {
-	p := b.ctx.Get("PickingInfo")
+func (ba *Babylon) PickingInfo() *PickingInfo {
+	p := ba.ctx.Get("PickingInfo")
 	return PickingInfoFromJSObject(p)
 }
 

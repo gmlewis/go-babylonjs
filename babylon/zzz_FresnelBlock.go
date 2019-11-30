@@ -14,8 +14,8 @@ type FresnelBlock struct{ *NodeMaterialBlock }
 func (f *FresnelBlock) JSObject() js.Value { return f.p }
 
 // FresnelBlock returns a FresnelBlock JavaScript class.
-func (b *Babylon) FresnelBlock() *FresnelBlock {
-	p := b.ctx.Get("FresnelBlock")
+func (ba *Babylon) FresnelBlock() *FresnelBlock {
+	p := ba.ctx.Get("FresnelBlock")
 	return FresnelBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func FresnelBlockFromJSObject(p js.Value) *FresnelBlock {
 // NewFresnelBlock returns a new FresnelBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fresnelblock
-func (b *Babylon) NewFresnelBlock(name string) *FresnelBlock {
-	p := b.ctx.Get("FresnelBlock").New(name)
+func (ba *Babylon) NewFresnelBlock(name string) *FresnelBlock {
+	p := ba.ctx.Get("FresnelBlock").New(name)
 	return FresnelBlockFromJSObject(p)
 }
 

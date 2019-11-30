@@ -16,8 +16,8 @@ type FreeCameraGamepadInput struct{ p js.Value }
 func (f *FreeCameraGamepadInput) JSObject() js.Value { return f.p }
 
 // FreeCameraGamepadInput returns a FreeCameraGamepadInput JavaScript class.
-func (b *Babylon) FreeCameraGamepadInput() *FreeCameraGamepadInput {
-	p := b.ctx.Get("FreeCameraGamepadInput")
+func (ba *Babylon) FreeCameraGamepadInput() *FreeCameraGamepadInput {
+	p := ba.ctx.Get("FreeCameraGamepadInput")
 	return FreeCameraGamepadInputFromJSObject(p)
 }
 

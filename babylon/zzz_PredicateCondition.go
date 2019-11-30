@@ -14,8 +14,8 @@ type PredicateCondition struct{ *Condition }
 func (p *PredicateCondition) JSObject() js.Value { return p.p }
 
 // PredicateCondition returns a PredicateCondition JavaScript class.
-func (b *Babylon) PredicateCondition() *PredicateCondition {
-	p := b.ctx.Get("PredicateCondition")
+func (ba *Babylon) PredicateCondition() *PredicateCondition {
+	p := ba.ctx.Get("PredicateCondition")
 	return PredicateConditionFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func PredicateConditionFromJSObject(p js.Value) *PredicateCondition {
 // NewPredicateCondition returns a new PredicateCondition object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.predicatecondition
-func (b *Babylon) NewPredicateCondition(actionManager *ActionManager, predicate func()) *PredicateCondition {
-	p := b.ctx.Get("PredicateCondition").New(actionManager.JSObject(), predicate)
+func (ba *Babylon) NewPredicateCondition(actionManager *ActionManager, predicate func()) *PredicateCondition {
+	p := ba.ctx.Get("PredicateCondition").New(actionManager.JSObject(), predicate)
 	return PredicateConditionFromJSObject(p)
 }
 

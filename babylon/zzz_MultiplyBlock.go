@@ -14,8 +14,8 @@ type MultiplyBlock struct{ *NodeMaterialBlock }
 func (m *MultiplyBlock) JSObject() js.Value { return m.p }
 
 // MultiplyBlock returns a MultiplyBlock JavaScript class.
-func (b *Babylon) MultiplyBlock() *MultiplyBlock {
-	p := b.ctx.Get("MultiplyBlock")
+func (ba *Babylon) MultiplyBlock() *MultiplyBlock {
+	p := ba.ctx.Get("MultiplyBlock")
 	return MultiplyBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func MultiplyBlockFromJSObject(p js.Value) *MultiplyBlock {
 // NewMultiplyBlock returns a new MultiplyBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiplyblock
-func (b *Babylon) NewMultiplyBlock(name string) *MultiplyBlock {
-	p := b.ctx.Get("MultiplyBlock").New(name)
+func (ba *Babylon) NewMultiplyBlock(name string) *MultiplyBlock {
+	p := ba.ctx.Get("MultiplyBlock").New(name)
 	return MultiplyBlockFromJSObject(p)
 }
 

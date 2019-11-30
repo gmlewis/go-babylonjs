@@ -15,8 +15,8 @@ type PostProcessManager struct{ p js.Value }
 func (p *PostProcessManager) JSObject() js.Value { return p.p }
 
 // PostProcessManager returns a PostProcessManager JavaScript class.
-func (b *Babylon) PostProcessManager() *PostProcessManager {
-	p := b.ctx.Get("PostProcessManager")
+func (ba *Babylon) PostProcessManager() *PostProcessManager {
+	p := ba.ctx.Get("PostProcessManager")
 	return PostProcessManagerFromJSObject(p)
 }
 
@@ -28,8 +28,8 @@ func PostProcessManagerFromJSObject(p js.Value) *PostProcessManager {
 // NewPostProcessManager returns a new PostProcessManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocessmanager
-func (b *Babylon) NewPostProcessManager(scene *Scene) *PostProcessManager {
-	p := b.ctx.Get("PostProcessManager").New(scene.JSObject())
+func (ba *Babylon) NewPostProcessManager(scene *Scene) *PostProcessManager {
+	p := ba.ctx.Get("PostProcessManager").New(scene.JSObject())
 	return PostProcessManagerFromJSObject(p)
 }
 

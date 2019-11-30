@@ -14,8 +14,8 @@ type Vector3WithInfo struct{ *Vector3 }
 func (v *Vector3WithInfo) JSObject() js.Value { return v.p }
 
 // Vector3WithInfo returns a Vector3WithInfo JavaScript class.
-func (b *Babylon) Vector3WithInfo() *Vector3WithInfo {
-	p := b.ctx.Get("Vector3WithInfo")
+func (ba *Babylon) Vector3WithInfo() *Vector3WithInfo {
+	p := ba.ctx.Get("Vector3WithInfo")
 	return Vector3WithInfoFromJSObject(p)
 }
 
@@ -26,18 +26,18 @@ func Vector3WithInfoFromJSObject(p js.Value) *Vector3WithInfo {
 
 // NewVector3WithInfoOpts contains optional parameters for NewVector3WithInfo.
 type NewVector3WithInfoOpts struct {
-	ButtonIndex *float64
+	ButtonIndex *JSFloat64
 }
 
 // NewVector3WithInfo returns a new Vector3WithInfo object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector3withinfo
-func (b *Babylon) NewVector3WithInfo(source *Vector3, opts *NewVector3WithInfoOpts) *Vector3WithInfo {
+func (ba *Babylon) NewVector3WithInfo(source *Vector3, opts *NewVector3WithInfoOpts) *Vector3WithInfo {
 	if opts == nil {
 		opts = &NewVector3WithInfoOpts{}
 	}
 
-	p := b.ctx.Get("Vector3WithInfo").New(source.JSObject(), opts.ButtonIndex)
+	p := ba.ctx.Get("Vector3WithInfo").New(source.JSObject(), opts.ButtonIndex)
 	return Vector3WithInfoFromJSObject(p)
 }
 

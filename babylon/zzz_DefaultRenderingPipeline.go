@@ -15,8 +15,8 @@ type DefaultRenderingPipeline struct{ *PostProcessRenderPipeline }
 func (d *DefaultRenderingPipeline) JSObject() js.Value { return d.p }
 
 // DefaultRenderingPipeline returns a DefaultRenderingPipeline JavaScript class.
-func (b *Babylon) DefaultRenderingPipeline() *DefaultRenderingPipeline {
-	p := b.ctx.Get("DefaultRenderingPipeline")
+func (ba *Babylon) DefaultRenderingPipeline() *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline")
 	return DefaultRenderingPipelineFromJSObject(p)
 }
 
@@ -27,26 +27,26 @@ func DefaultRenderingPipelineFromJSObject(p js.Value) *DefaultRenderingPipeline 
 
 // NewDefaultRenderingPipelineOpts contains optional parameters for NewDefaultRenderingPipeline.
 type NewDefaultRenderingPipelineOpts struct {
-	Name *string
+	Name *JSString
 
-	Hdr *bool
+	Hdr *JSBool
 
 	Scene *Scene
 
 	Cameras *Camera
 
-	AutomaticBuild *bool
+	AutomaticBuild *JSBool
 }
 
 // NewDefaultRenderingPipeline returns a new DefaultRenderingPipeline object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline
-func (b *Babylon) NewDefaultRenderingPipeline(opts *NewDefaultRenderingPipelineOpts) *DefaultRenderingPipeline {
+func (ba *Babylon) NewDefaultRenderingPipeline(opts *NewDefaultRenderingPipelineOpts) *DefaultRenderingPipeline {
 	if opts == nil {
 		opts = &NewDefaultRenderingPipelineOpts{}
 	}
 
-	p := b.ctx.Get("DefaultRenderingPipeline").New(opts.Name, opts.Hdr.JSObject(), opts.Scene.JSObject(), opts.Cameras.JSObject(), opts.AutomaticBuild.JSObject())
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(opts.Name, opts.Hdr, opts.Scene.JSObject(), opts.Cameras.JSObject(), opts.AutomaticBuild)
 	return DefaultRenderingPipelineFromJSObject(p)
 }
 

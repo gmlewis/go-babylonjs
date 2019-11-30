@@ -14,8 +14,8 @@ type ParticleHelper struct{ p js.Value }
 func (p *ParticleHelper) JSObject() js.Value { return p.p }
 
 // ParticleHelper returns a ParticleHelper JavaScript class.
-func (b *Babylon) ParticleHelper() *ParticleHelper {
-	p := b.ctx.Get("ParticleHelper")
+func (ba *Babylon) ParticleHelper() *ParticleHelper {
+	p := ba.ctx.Get("ParticleHelper")
 	return ParticleHelperFromJSObject(p)
 }
 

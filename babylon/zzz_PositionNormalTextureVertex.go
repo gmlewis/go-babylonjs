@@ -14,8 +14,8 @@ type PositionNormalTextureVertex struct{ p js.Value }
 func (p *PositionNormalTextureVertex) JSObject() js.Value { return p.p }
 
 // PositionNormalTextureVertex returns a PositionNormalTextureVertex JavaScript class.
-func (b *Babylon) PositionNormalTextureVertex() *PositionNormalTextureVertex {
-	p := b.ctx.Get("PositionNormalTextureVertex")
+func (ba *Babylon) PositionNormalTextureVertex() *PositionNormalTextureVertex {
+	p := ba.ctx.Get("PositionNormalTextureVertex")
 	return PositionNormalTextureVertexFromJSObject(p)
 }
 
@@ -36,12 +36,12 @@ type NewPositionNormalTextureVertexOpts struct {
 // NewPositionNormalTextureVertex returns a new PositionNormalTextureVertex object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.positionnormaltexturevertex
-func (b *Babylon) NewPositionNormalTextureVertex(opts *NewPositionNormalTextureVertexOpts) *PositionNormalTextureVertex {
+func (ba *Babylon) NewPositionNormalTextureVertex(opts *NewPositionNormalTextureVertexOpts) *PositionNormalTextureVertex {
 	if opts == nil {
 		opts = &NewPositionNormalTextureVertexOpts{}
 	}
 
-	p := b.ctx.Get("PositionNormalTextureVertex").New(opts.Position.JSObject(), opts.Normal.JSObject(), opts.Uv.JSObject())
+	p := ba.ctx.Get("PositionNormalTextureVertex").New(opts.Position.JSObject(), opts.Normal.JSObject(), opts.Uv.JSObject())
 	return PositionNormalTextureVertexFromJSObject(p)
 }
 

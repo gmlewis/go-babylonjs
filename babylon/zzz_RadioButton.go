@@ -14,8 +14,8 @@ type RadioButton struct{ *Control }
 func (r *RadioButton) JSObject() js.Value { return r.p }
 
 // RadioButton returns a RadioButton JavaScript class.
-func (b *Babylon) RadioButton() *RadioButton {
-	p := b.ctx.Get("RadioButton")
+func (ba *Babylon) RadioButton() *RadioButton {
+	p := ba.ctx.Get("RadioButton")
 	return RadioButtonFromJSObject(p)
 }
 
@@ -26,18 +26,18 @@ func RadioButtonFromJSObject(p js.Value) *RadioButton {
 
 // NewRadioButtonOpts contains optional parameters for NewRadioButton.
 type NewRadioButtonOpts struct {
-	Name *string
+	Name *JSString
 }
 
 // NewRadioButton returns a new RadioButton object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.radiobutton
-func (b *Babylon) NewRadioButton(opts *NewRadioButtonOpts) *RadioButton {
+func (ba *Babylon) NewRadioButton(opts *NewRadioButtonOpts) *RadioButton {
 	if opts == nil {
 		opts = &NewRadioButtonOpts{}
 	}
 
-	p := b.ctx.Get("RadioButton").New(opts.Name)
+	p := ba.ctx.Get("RadioButton").New(opts.Name)
 	return RadioButtonFromJSObject(p)
 }
 

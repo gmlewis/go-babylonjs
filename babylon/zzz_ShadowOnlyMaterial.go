@@ -14,8 +14,8 @@ type ShadowOnlyMaterial struct{ p js.Value }
 func (s *ShadowOnlyMaterial) JSObject() js.Value { return s.p }
 
 // ShadowOnlyMaterial returns a ShadowOnlyMaterial JavaScript class.
-func (b *Babylon) ShadowOnlyMaterial() *ShadowOnlyMaterial {
-	p := b.ctx.Get("ShadowOnlyMaterial")
+func (ba *Babylon) ShadowOnlyMaterial() *ShadowOnlyMaterial {
+	p := ba.ctx.Get("ShadowOnlyMaterial")
 	return ShadowOnlyMaterialFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func ShadowOnlyMaterialFromJSObject(p js.Value) *ShadowOnlyMaterial {
 // NewShadowOnlyMaterial returns a new ShadowOnlyMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowonlymaterial
-func (b *Babylon) NewShadowOnlyMaterial(name string, scene *Scene) *ShadowOnlyMaterial {
-	p := b.ctx.Get("ShadowOnlyMaterial").New(name, scene.JSObject())
+func (ba *Babylon) NewShadowOnlyMaterial(name string, scene *Scene) *ShadowOnlyMaterial {
+	p := ba.ctx.Get("ShadowOnlyMaterial").New(name, scene.JSObject())
 	return ShadowOnlyMaterialFromJSObject(p)
 }
 

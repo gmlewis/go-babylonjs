@@ -16,8 +16,8 @@ type AutoRotationBehavior struct{ p js.Value }
 func (a *AutoRotationBehavior) JSObject() js.Value { return a.p }
 
 // AutoRotationBehavior returns a AutoRotationBehavior JavaScript class.
-func (b *Babylon) AutoRotationBehavior() *AutoRotationBehavior {
-	p := b.ctx.Get("AutoRotationBehavior")
+func (ba *Babylon) AutoRotationBehavior() *AutoRotationBehavior {
+	p := ba.ctx.Get("AutoRotationBehavior")
 	return AutoRotationBehaviorFromJSObject(p)
 }
 

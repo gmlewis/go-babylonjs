@@ -14,8 +14,8 @@ type MorphTargetsBlock struct{ *NodeMaterialBlock }
 func (m *MorphTargetsBlock) JSObject() js.Value { return m.p }
 
 // MorphTargetsBlock returns a MorphTargetsBlock JavaScript class.
-func (b *Babylon) MorphTargetsBlock() *MorphTargetsBlock {
-	p := b.ctx.Get("MorphTargetsBlock")
+func (ba *Babylon) MorphTargetsBlock() *MorphTargetsBlock {
+	p := ba.ctx.Get("MorphTargetsBlock")
 	return MorphTargetsBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func MorphTargetsBlockFromJSObject(p js.Value) *MorphTargetsBlock {
 // NewMorphTargetsBlock returns a new MorphTargetsBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock
-func (b *Babylon) NewMorphTargetsBlock(name string) *MorphTargetsBlock {
-	p := b.ctx.Get("MorphTargetsBlock").New(name)
+func (ba *Babylon) NewMorphTargetsBlock(name string) *MorphTargetsBlock {
+	p := ba.ctx.Get("MorphTargetsBlock").New(name)
 	return MorphTargetsBlockFromJSObject(p)
 }
 

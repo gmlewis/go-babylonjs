@@ -16,8 +16,8 @@ type Skeleton struct{ p js.Value }
 func (s *Skeleton) JSObject() js.Value { return s.p }
 
 // Skeleton returns a Skeleton JavaScript class.
-func (b *Babylon) Skeleton() *Skeleton {
-	p := b.ctx.Get("Skeleton")
+func (ba *Babylon) Skeleton() *Skeleton {
+	p := ba.ctx.Get("Skeleton")
 	return SkeletonFromJSObject(p)
 }
 
@@ -29,8 +29,8 @@ func SkeletonFromJSObject(p js.Value) *Skeleton {
 // NewSkeleton returns a new Skeleton object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skeleton
-func (b *Babylon) NewSkeleton(name string, id string, scene *Scene) *Skeleton {
-	p := b.ctx.Get("Skeleton").New(name, id, scene.JSObject())
+func (ba *Babylon) NewSkeleton(name string, id string, scene *Scene) *Skeleton {
+	p := ba.ctx.Get("Skeleton").New(name, id, scene.JSObject())
 	return SkeletonFromJSObject(p)
 }
 

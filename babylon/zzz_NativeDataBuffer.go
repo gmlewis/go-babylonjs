@@ -14,8 +14,8 @@ type NativeDataBuffer struct{ *DataBuffer }
 func (n *NativeDataBuffer) JSObject() js.Value { return n.p }
 
 // NativeDataBuffer returns a NativeDataBuffer JavaScript class.
-func (b *Babylon) NativeDataBuffer() *NativeDataBuffer {
-	p := b.ctx.Get("NativeDataBuffer")
+func (ba *Babylon) NativeDataBuffer() *NativeDataBuffer {
+	p := ba.ctx.Get("NativeDataBuffer")
 	return NativeDataBufferFromJSObject(p)
 }
 

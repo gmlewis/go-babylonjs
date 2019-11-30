@@ -14,8 +14,8 @@ type WaveBlock struct{ *NodeMaterialBlock }
 func (w *WaveBlock) JSObject() js.Value { return w.p }
 
 // WaveBlock returns a WaveBlock JavaScript class.
-func (b *Babylon) WaveBlock() *WaveBlock {
-	p := b.ctx.Get("WaveBlock")
+func (ba *Babylon) WaveBlock() *WaveBlock {
+	p := ba.ctx.Get("WaveBlock")
 	return WaveBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func WaveBlockFromJSObject(p js.Value) *WaveBlock {
 // NewWaveBlock returns a new WaveBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.waveblock
-func (b *Babylon) NewWaveBlock(name string) *WaveBlock {
-	p := b.ctx.Get("WaveBlock").New(name)
+func (ba *Babylon) NewWaveBlock(name string) *WaveBlock {
+	p := ba.ctx.Get("WaveBlock").New(name)
 	return WaveBlockFromJSObject(p)
 }
 

@@ -17,8 +17,8 @@ type VideoRecorder struct{ p js.Value }
 func (v *VideoRecorder) JSObject() js.Value { return v.p }
 
 // VideoRecorder returns a VideoRecorder JavaScript class.
-func (b *Babylon) VideoRecorder() *VideoRecorder {
-	p := b.ctx.Get("VideoRecorder")
+func (ba *Babylon) VideoRecorder() *VideoRecorder {
+	p := ba.ctx.Get("VideoRecorder")
 	return VideoRecorderFromJSObject(p)
 }
 
@@ -29,18 +29,18 @@ func VideoRecorderFromJSObject(p js.Value) *VideoRecorder {
 
 // NewVideoRecorderOpts contains optional parameters for NewVideoRecorder.
 type NewVideoRecorderOpts struct {
-	Options *VideoRecorderOptions
+	Options js.Value
 }
 
 // NewVideoRecorder returns a new VideoRecorder object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videorecorder
-func (b *Babylon) NewVideoRecorder(engine *Engine, opts *NewVideoRecorderOpts) *VideoRecorder {
+func (ba *Babylon) NewVideoRecorder(engine *Engine, opts *NewVideoRecorderOpts) *VideoRecorder {
 	if opts == nil {
 		opts = &NewVideoRecorderOpts{}
 	}
 
-	p := b.ctx.Get("VideoRecorder").New(engine.JSObject(), opts.Options.JSObject())
+	p := ba.ctx.Get("VideoRecorder").New(engine.JSObject(), opts.Options)
 	return VideoRecorderFromJSObject(p)
 }
 

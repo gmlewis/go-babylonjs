@@ -14,8 +14,8 @@ type RecastJSCrowd struct{ p js.Value }
 func (r *RecastJSCrowd) JSObject() js.Value { return r.p }
 
 // RecastJSCrowd returns a RecastJSCrowd JavaScript class.
-func (b *Babylon) RecastJSCrowd() *RecastJSCrowd {
-	p := b.ctx.Get("RecastJSCrowd")
+func (ba *Babylon) RecastJSCrowd() *RecastJSCrowd {
+	p := ba.ctx.Get("RecastJSCrowd")
 	return RecastJSCrowdFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func RecastJSCrowdFromJSObject(p js.Value) *RecastJSCrowd {
 // NewRecastJSCrowd returns a new RecastJSCrowd object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.recastjscrowd
-func (b *Babylon) NewRecastJSCrowd(plugin *RecastJSPlugin, maxAgents float64, maxAgentRadius float64, scene *Scene) *RecastJSCrowd {
-	p := b.ctx.Get("RecastJSCrowd").New(plugin.JSObject(), maxAgents, maxAgentRadius, scene.JSObject())
+func (ba *Babylon) NewRecastJSCrowd(plugin *RecastJSPlugin, maxAgents float64, maxAgentRadius float64, scene *Scene) *RecastJSCrowd {
+	p := ba.ctx.Get("RecastJSCrowd").New(plugin.JSObject(), maxAgents, maxAgentRadius, scene.JSObject())
 	return RecastJSCrowdFromJSObject(p)
 }
 

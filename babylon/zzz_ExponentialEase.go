@@ -16,8 +16,8 @@ type ExponentialEase struct{ *EasingFunction }
 func (e *ExponentialEase) JSObject() js.Value { return e.p }
 
 // ExponentialEase returns a ExponentialEase JavaScript class.
-func (b *Babylon) ExponentialEase() *ExponentialEase {
-	p := b.ctx.Get("ExponentialEase")
+func (ba *Babylon) ExponentialEase() *ExponentialEase {
+	p := ba.ctx.Get("ExponentialEase")
 	return ExponentialEaseFromJSObject(p)
 }
 
@@ -28,18 +28,18 @@ func ExponentialEaseFromJSObject(p js.Value) *ExponentialEase {
 
 // NewExponentialEaseOpts contains optional parameters for NewExponentialEase.
 type NewExponentialEaseOpts struct {
-	Exponent *float64
+	Exponent *JSFloat64
 }
 
 // NewExponentialEase returns a new ExponentialEase object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.exponentialease
-func (b *Babylon) NewExponentialEase(opts *NewExponentialEaseOpts) *ExponentialEase {
+func (ba *Babylon) NewExponentialEase(opts *NewExponentialEaseOpts) *ExponentialEase {
 	if opts == nil {
 		opts = &NewExponentialEaseOpts{}
 	}
 
-	p := b.ctx.Get("ExponentialEase").New(opts.Exponent)
+	p := ba.ctx.Get("ExponentialEase").New(opts.Exponent)
 	return ExponentialEaseFromJSObject(p)
 }
 

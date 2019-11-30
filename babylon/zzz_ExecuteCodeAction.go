@@ -16,8 +16,8 @@ type ExecuteCodeAction struct{ *Action }
 func (e *ExecuteCodeAction) JSObject() js.Value { return e.p }
 
 // ExecuteCodeAction returns a ExecuteCodeAction JavaScript class.
-func (b *Babylon) ExecuteCodeAction() *ExecuteCodeAction {
-	p := b.ctx.Get("ExecuteCodeAction")
+func (ba *Babylon) ExecuteCodeAction() *ExecuteCodeAction {
+	p := ba.ctx.Get("ExecuteCodeAction")
 	return ExecuteCodeActionFromJSObject(p)
 }
 
@@ -34,12 +34,12 @@ type NewExecuteCodeActionOpts struct {
 // NewExecuteCodeAction returns a new ExecuteCodeAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.executecodeaction
-func (b *Babylon) NewExecuteCodeAction(triggerOptions interface{}, jsFunc func(), opts *NewExecuteCodeActionOpts) *ExecuteCodeAction {
+func (ba *Babylon) NewExecuteCodeAction(triggerOptions interface{}, jsFunc func(), opts *NewExecuteCodeActionOpts) *ExecuteCodeAction {
 	if opts == nil {
 		opts = &NewExecuteCodeActionOpts{}
 	}
 
-	p := b.ctx.Get("ExecuteCodeAction").New(triggerOptions, jsFunc, opts.Condition.JSObject())
+	p := ba.ctx.Get("ExecuteCodeAction").New(triggerOptions, jsFunc, opts.Condition.JSObject())
 	return ExecuteCodeActionFromJSObject(p)
 }
 

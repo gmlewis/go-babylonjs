@@ -16,8 +16,8 @@ type ParticlesOptimization struct{ *SceneOptimization }
 func (p *ParticlesOptimization) JSObject() js.Value { return p.p }
 
 // ParticlesOptimization returns a ParticlesOptimization JavaScript class.
-func (b *Babylon) ParticlesOptimization() *ParticlesOptimization {
-	p := b.ctx.Get("ParticlesOptimization")
+func (ba *Babylon) ParticlesOptimization() *ParticlesOptimization {
+	p := ba.ctx.Get("ParticlesOptimization")
 	return ParticlesOptimizationFromJSObject(p)
 }
 
@@ -28,18 +28,18 @@ func ParticlesOptimizationFromJSObject(p js.Value) *ParticlesOptimization {
 
 // NewParticlesOptimizationOpts contains optional parameters for NewParticlesOptimization.
 type NewParticlesOptimizationOpts struct {
-	Priority *float64
+	Priority *JSFloat64
 }
 
 // NewParticlesOptimization returns a new ParticlesOptimization object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particlesoptimization
-func (b *Babylon) NewParticlesOptimization(opts *NewParticlesOptimizationOpts) *ParticlesOptimization {
+func (ba *Babylon) NewParticlesOptimization(opts *NewParticlesOptimizationOpts) *ParticlesOptimization {
 	if opts == nil {
 		opts = &NewParticlesOptimizationOpts{}
 	}
 
-	p := b.ctx.Get("ParticlesOptimization").New(opts.Priority)
+	p := ba.ctx.Get("ParticlesOptimization").New(opts.Priority)
 	return ParticlesOptimizationFromJSObject(p)
 }
 

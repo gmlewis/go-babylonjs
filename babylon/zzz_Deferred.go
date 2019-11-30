@@ -14,8 +14,8 @@ type Deferred struct{ p js.Value }
 func (d *Deferred) JSObject() js.Value { return d.p }
 
 // Deferred returns a Deferred JavaScript class.
-func (b *Babylon) Deferred() *Deferred {
-	p := b.ctx.Get("Deferred")
+func (ba *Babylon) Deferred() *Deferred {
+	p := ba.ctx.Get("Deferred")
 	return DeferredFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func DeferredFromJSObject(p js.Value) *Deferred {
 // NewDeferred returns a new Deferred object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.deferred
-func (b *Babylon) NewDeferred() *Deferred {
-	p := b.ctx.Get("Deferred").New()
+func (ba *Babylon) NewDeferred() *Deferred {
+	p := ba.ctx.Get("Deferred").New()
 	return DeferredFromJSObject(p)
 }
 

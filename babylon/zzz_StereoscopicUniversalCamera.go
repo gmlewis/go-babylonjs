@@ -16,8 +16,8 @@ type StereoscopicUniversalCamera struct{ *UniversalCamera }
 func (s *StereoscopicUniversalCamera) JSObject() js.Value { return s.p }
 
 // StereoscopicUniversalCamera returns a StereoscopicUniversalCamera JavaScript class.
-func (b *Babylon) StereoscopicUniversalCamera() *StereoscopicUniversalCamera {
-	p := b.ctx.Get("StereoscopicUniversalCamera")
+func (ba *Babylon) StereoscopicUniversalCamera() *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera")
 	return StereoscopicUniversalCameraFromJSObject(p)
 }
 
@@ -29,8 +29,8 @@ func StereoscopicUniversalCameraFromJSObject(p js.Value) *StereoscopicUniversalC
 // NewStereoscopicUniversalCamera returns a new StereoscopicUniversalCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera
-func (b *Babylon) NewStereoscopicUniversalCamera(name string, position *Vector3, interaxialDistance float64, isStereoscopicSideBySide bool, scene *Scene) *StereoscopicUniversalCamera {
-	p := b.ctx.Get("StereoscopicUniversalCamera").New(name, position.JSObject(), interaxialDistance, isStereoscopicSideBySide.JSObject(), scene.JSObject())
+func (ba *Babylon) NewStereoscopicUniversalCamera(name string, position *Vector3, interaxialDistance float64, isStereoscopicSideBySide bool, scene *Scene) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(name, position.JSObject(), interaxialDistance, isStereoscopicSideBySide.JSObject(), scene.JSObject())
 	return StereoscopicUniversalCameraFromJSObject(p)
 }
 

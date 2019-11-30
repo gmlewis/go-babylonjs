@@ -19,8 +19,8 @@ type Observable struct{ p js.Value }
 func (o *Observable) JSObject() js.Value { return o.p }
 
 // Observable returns a Observable JavaScript class.
-func (b *Babylon) Observable() *Observable {
-	p := b.ctx.Get("Observable")
+func (ba *Babylon) Observable() *Observable {
+	p := ba.ctx.Get("Observable")
 	return ObservableFromJSObject(p)
 }
 
@@ -37,12 +37,12 @@ type NewObservableOpts struct {
 // NewObservable returns a new Observable object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.observable
-func (b *Babylon) NewObservable(opts *NewObservableOpts) *Observable {
+func (ba *Babylon) NewObservable(opts *NewObservableOpts) *Observable {
 	if opts == nil {
 		opts = &NewObservableOpts{}
 	}
 
-	p := b.ctx.Get("Observable").New(opts.OnObserverAdded)
+	p := ba.ctx.Get("Observable").New(opts.OnObserverAdded)
 	return ObservableFromJSObject(p)
 }
 

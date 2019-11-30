@@ -17,8 +17,8 @@ type Layer struct{ p js.Value }
 func (l *Layer) JSObject() js.Value { return l.p }
 
 // Layer returns a Layer JavaScript class.
-func (b *Babylon) Layer() *Layer {
-	p := b.ctx.Get("Layer")
+func (ba *Babylon) Layer() *Layer {
+	p := ba.ctx.Get("Layer")
 	return LayerFromJSObject(p)
 }
 
@@ -29,7 +29,7 @@ func LayerFromJSObject(p js.Value) *Layer {
 
 // NewLayerOpts contains optional parameters for NewLayer.
 type NewLayerOpts struct {
-	IsBackground *bool
+	IsBackground *JSBool
 
 	Color *Color4
 }
@@ -37,12 +37,12 @@ type NewLayerOpts struct {
 // NewLayer returns a new Layer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.layer
-func (b *Babylon) NewLayer(name string, imgUrl string, scene *Scene, opts *NewLayerOpts) *Layer {
+func (ba *Babylon) NewLayer(name string, imgUrl string, scene *Scene, opts *NewLayerOpts) *Layer {
 	if opts == nil {
 		opts = &NewLayerOpts{}
 	}
 
-	p := b.ctx.Get("Layer").New(name, imgUrl, scene.JSObject(), opts.IsBackground.JSObject(), opts.Color.JSObject())
+	p := ba.ctx.Get("Layer").New(name, imgUrl, scene.JSObject(), opts.IsBackground, opts.Color.JSObject())
 	return LayerFromJSObject(p)
 }
 

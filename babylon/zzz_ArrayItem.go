@@ -14,8 +14,8 @@ type ArrayItem struct{ p js.Value }
 func (a *ArrayItem) JSObject() js.Value { return a.p }
 
 // ArrayItem returns a ArrayItem JavaScript class.
-func (b *Babylon) ArrayItem() *ArrayItem {
-	p := b.ctx.Get("ArrayItem")
+func (ba *Babylon) ArrayItem() *ArrayItem {
+	p := ba.ctx.Get("ArrayItem")
 	return ArrayItemFromJSObject(p)
 }
 

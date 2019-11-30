@@ -14,8 +14,8 @@ type PlaneBuilder struct{ p js.Value }
 func (p *PlaneBuilder) JSObject() js.Value { return p.p }
 
 // PlaneBuilder returns a PlaneBuilder JavaScript class.
-func (b *Babylon) PlaneBuilder() *PlaneBuilder {
-	p := b.ctx.Get("PlaneBuilder")
+func (ba *Babylon) PlaneBuilder() *PlaneBuilder {
+	p := ba.ctx.Get("PlaneBuilder")
 	return PlaneBuilderFromJSObject(p)
 }
 

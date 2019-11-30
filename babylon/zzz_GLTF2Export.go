@@ -14,8 +14,8 @@ type GLTF2Export struct{ p js.Value }
 func (g *GLTF2Export) JSObject() js.Value { return g.p }
 
 // GLTF2Export returns a GLTF2Export JavaScript class.
-func (b *Babylon) GLTF2Export() *GLTF2Export {
-	p := b.ctx.Get("GLTF2Export")
+func (ba *Babylon) GLTF2Export() *GLTF2Export {
+	p := ba.ctx.Get("GLTF2Export")
 	return GLTF2ExportFromJSObject(p)
 }
 

@@ -19,8 +19,8 @@ type ColorGradingTexture struct{ *BaseTexture }
 func (c *ColorGradingTexture) JSObject() js.Value { return c.p }
 
 // ColorGradingTexture returns a ColorGradingTexture JavaScript class.
-func (b *Babylon) ColorGradingTexture() *ColorGradingTexture {
-	p := b.ctx.Get("ColorGradingTexture")
+func (ba *Babylon) ColorGradingTexture() *ColorGradingTexture {
+	p := ba.ctx.Get("ColorGradingTexture")
 	return ColorGradingTextureFromJSObject(p)
 }
 
@@ -32,8 +32,8 @@ func ColorGradingTextureFromJSObject(p js.Value) *ColorGradingTexture {
 // NewColorGradingTexture returns a new ColorGradingTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorgradingtexture
-func (b *Babylon) NewColorGradingTexture(url string, scene *Scene) *ColorGradingTexture {
-	p := b.ctx.Get("ColorGradingTexture").New(url, scene.JSObject())
+func (ba *Babylon) NewColorGradingTexture(url string, scene *Scene) *ColorGradingTexture {
+	p := ba.ctx.Get("ColorGradingTexture").New(url, scene.JSObject())
 	return ColorGradingTextureFromJSObject(p)
 }
 

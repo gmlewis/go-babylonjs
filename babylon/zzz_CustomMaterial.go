@@ -14,8 +14,8 @@ type CustomMaterial struct{ *StandardMaterial }
 func (c *CustomMaterial) JSObject() js.Value { return c.p }
 
 // CustomMaterial returns a CustomMaterial JavaScript class.
-func (b *Babylon) CustomMaterial() *CustomMaterial {
-	p := b.ctx.Get("CustomMaterial")
+func (ba *Babylon) CustomMaterial() *CustomMaterial {
+	p := ba.ctx.Get("CustomMaterial")
 	return CustomMaterialFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func CustomMaterialFromJSObject(p js.Value) *CustomMaterial {
 // NewCustomMaterial returns a new CustomMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.custommaterial
-func (b *Babylon) NewCustomMaterial(name string, scene *Scene) *CustomMaterial {
-	p := b.ctx.Get("CustomMaterial").New(name, scene.JSObject())
+func (ba *Babylon) NewCustomMaterial(name string, scene *Scene) *CustomMaterial {
+	p := ba.ctx.Get("CustomMaterial").New(name, scene.JSObject())
 	return CustomMaterialFromJSObject(p)
 }
 

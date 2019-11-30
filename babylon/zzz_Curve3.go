@@ -17,8 +17,8 @@ type Curve3 struct{ p js.Value }
 func (c *Curve3) JSObject() js.Value { return c.p }
 
 // Curve3 returns a Curve3 JavaScript class.
-func (b *Babylon) Curve3() *Curve3 {
-	p := b.ctx.Get("Curve3")
+func (ba *Babylon) Curve3() *Curve3 {
+	p := ba.ctx.Get("Curve3")
 	return Curve3FromJSObject(p)
 }
 
@@ -30,8 +30,8 @@ func Curve3FromJSObject(p js.Value) *Curve3 {
 // NewCurve3 returns a new Curve3 object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.curve3
-func (b *Babylon) NewCurve3(points *Vector3) *Curve3 {
-	p := b.ctx.Get("Curve3").New(points.JSObject())
+func (ba *Babylon) NewCurve3(points *Vector3) *Curve3 {
+	p := ba.ctx.Get("Curve3").New(points.JSObject())
 	return Curve3FromJSObject(p)
 }
 

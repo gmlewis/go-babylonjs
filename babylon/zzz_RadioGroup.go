@@ -15,8 +15,8 @@ type RadioGroup struct{ *SelectorGroup }
 func (r *RadioGroup) JSObject() js.Value { return r.p }
 
 // RadioGroup returns a RadioGroup JavaScript class.
-func (b *Babylon) RadioGroup() *RadioGroup {
-	p := b.ctx.Get("RadioGroup")
+func (ba *Babylon) RadioGroup() *RadioGroup {
+	p := ba.ctx.Get("RadioGroup")
 	return RadioGroupFromJSObject(p)
 }
 
@@ -28,8 +28,8 @@ func RadioGroupFromJSObject(p js.Value) *RadioGroup {
 // NewRadioGroup returns a new RadioGroup object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.radiogroup
-func (b *Babylon) NewRadioGroup(name string) *RadioGroup {
-	p := b.ctx.Get("RadioGroup").New(name)
+func (ba *Babylon) NewRadioGroup(name string) *RadioGroup {
+	p := ba.ctx.Get("RadioGroup").New(name)
 	return RadioGroupFromJSObject(p)
 }
 

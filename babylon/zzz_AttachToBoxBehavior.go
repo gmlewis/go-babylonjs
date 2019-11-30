@@ -14,8 +14,8 @@ type AttachToBoxBehavior struct{ p js.Value }
 func (a *AttachToBoxBehavior) JSObject() js.Value { return a.p }
 
 // AttachToBoxBehavior returns a AttachToBoxBehavior JavaScript class.
-func (b *Babylon) AttachToBoxBehavior() *AttachToBoxBehavior {
-	p := b.ctx.Get("AttachToBoxBehavior")
+func (ba *Babylon) AttachToBoxBehavior() *AttachToBoxBehavior {
+	p := ba.ctx.Get("AttachToBoxBehavior")
 	return AttachToBoxBehaviorFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func AttachToBoxBehaviorFromJSObject(p js.Value) *AttachToBoxBehavior {
 // NewAttachToBoxBehavior returns a new AttachToBoxBehavior object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.attachtoboxbehavior
-func (b *Babylon) NewAttachToBoxBehavior(ui *TransformNode) *AttachToBoxBehavior {
-	p := b.ctx.Get("AttachToBoxBehavior").New(ui.JSObject())
+func (ba *Babylon) NewAttachToBoxBehavior(ui *TransformNode) *AttachToBoxBehavior {
+	p := ba.ctx.Get("AttachToBoxBehavior").New(ui.JSObject())
 	return AttachToBoxBehaviorFromJSObject(p)
 }
 

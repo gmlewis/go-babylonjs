@@ -14,8 +14,8 @@ type InputPassword struct{ *InputText }
 func (i *InputPassword) JSObject() js.Value { return i.p }
 
 // InputPassword returns a InputPassword JavaScript class.
-func (b *Babylon) InputPassword() *InputPassword {
-	p := b.ctx.Get("InputPassword")
+func (ba *Babylon) InputPassword() *InputPassword {
+	p := ba.ctx.Get("InputPassword")
 	return InputPasswordFromJSObject(p)
 }
 
@@ -26,20 +26,20 @@ func InputPasswordFromJSObject(p js.Value) *InputPassword {
 
 // NewInputPasswordOpts contains optional parameters for NewInputPassword.
 type NewInputPasswordOpts struct {
-	Name *string
+	Name *JSString
 
-	Text *string
+	Text *JSString
 }
 
 // NewInputPassword returns a new InputPassword object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputpassword
-func (b *Babylon) NewInputPassword(opts *NewInputPasswordOpts) *InputPassword {
+func (ba *Babylon) NewInputPassword(opts *NewInputPasswordOpts) *InputPassword {
 	if opts == nil {
 		opts = &NewInputPasswordOpts{}
 	}
 
-	p := b.ctx.Get("InputPassword").New(opts.Name, opts.Text)
+	p := ba.ctx.Get("InputPassword").New(opts.Name, opts.Text)
 	return InputPasswordFromJSObject(p)
 }
 

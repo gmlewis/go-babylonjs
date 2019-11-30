@@ -14,8 +14,8 @@ type KHR_lights struct{ p js.Value }
 func (k *KHR_lights) JSObject() js.Value { return k.p }
 
 // KHR_lights returns a KHR_lights JavaScript class.
-func (b *Babylon) KHR_lights() *KHR_lights {
-	p := b.ctx.Get("KHR_lights")
+func (ba *Babylon) KHR_lights() *KHR_lights {
+	p := ba.ctx.Get("KHR_lights")
 	return KHR_lightsFromJSObject(p)
 }
 

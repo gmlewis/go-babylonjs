@@ -16,8 +16,8 @@ type PosterizeBlock struct{ *NodeMaterialBlock }
 func (p *PosterizeBlock) JSObject() js.Value { return p.p }
 
 // PosterizeBlock returns a PosterizeBlock JavaScript class.
-func (b *Babylon) PosterizeBlock() *PosterizeBlock {
-	p := b.ctx.Get("PosterizeBlock")
+func (ba *Babylon) PosterizeBlock() *PosterizeBlock {
+	p := ba.ctx.Get("PosterizeBlock")
 	return PosterizeBlockFromJSObject(p)
 }
 
@@ -29,8 +29,8 @@ func PosterizeBlockFromJSObject(p js.Value) *PosterizeBlock {
 // NewPosterizeBlock returns a new PosterizeBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.posterizeblock
-func (b *Babylon) NewPosterizeBlock(name string) *PosterizeBlock {
-	p := b.ctx.Get("PosterizeBlock").New(name)
+func (ba *Babylon) NewPosterizeBlock(name string) *PosterizeBlock {
+	p := ba.ctx.Get("PosterizeBlock").New(name)
 	return PosterizeBlockFromJSObject(p)
 }
 

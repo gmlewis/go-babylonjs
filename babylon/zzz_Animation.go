@@ -14,8 +14,8 @@ type Animation struct{ p js.Value }
 func (a *Animation) JSObject() js.Value { return a.p }
 
 // Animation returns a Animation JavaScript class.
-func (b *Babylon) Animation() *Animation {
-	p := b.ctx.Get("Animation")
+func (ba *Babylon) Animation() *Animation {
+	p := ba.ctx.Get("Animation")
 	return AnimationFromJSObject(p)
 }
 
@@ -26,20 +26,20 @@ func AnimationFromJSObject(p js.Value) *Animation {
 
 // NewAnimationOpts contains optional parameters for NewAnimation.
 type NewAnimationOpts struct {
-	LoopMode *float64
+	LoopMode *JSFloat64
 
-	EnableBlending *bool
+	EnableBlending *JSBool
 }
 
 // NewAnimation returns a new Animation object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animation
-func (b *Babylon) NewAnimation(name string, targetProperty string, framePerSecond float64, dataType float64, opts *NewAnimationOpts) *Animation {
+func (ba *Babylon) NewAnimation(name string, targetProperty string, framePerSecond float64, dataType float64, opts *NewAnimationOpts) *Animation {
 	if opts == nil {
 		opts = &NewAnimationOpts{}
 	}
 
-	p := b.ctx.Get("Animation").New(name, targetProperty, framePerSecond, dataType, opts.LoopMode, opts.EnableBlending.JSObject())
+	p := ba.ctx.Get("Animation").New(name, targetProperty, framePerSecond, dataType, opts.LoopMode, opts.EnableBlending)
 	return AnimationFromJSObject(p)
 }
 

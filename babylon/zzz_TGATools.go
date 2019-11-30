@@ -17,8 +17,8 @@ type TGATools struct{ p js.Value }
 func (t *TGATools) JSObject() js.Value { return t.p }
 
 // TGATools returns a TGATools JavaScript class.
-func (b *Babylon) TGATools() *TGATools {
-	p := b.ctx.Get("TGATools")
+func (ba *Babylon) TGATools() *TGATools {
+	p := ba.ctx.Get("TGATools")
 	return TGAToolsFromJSObject(p)
 }
 

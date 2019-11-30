@@ -17,8 +17,8 @@ type DigitalRainPostProcess struct{ *PostProcess }
 func (d *DigitalRainPostProcess) JSObject() js.Value { return d.p }
 
 // DigitalRainPostProcess returns a DigitalRainPostProcess JavaScript class.
-func (b *Babylon) DigitalRainPostProcess() *DigitalRainPostProcess {
-	p := b.ctx.Get("DigitalRainPostProcess")
+func (ba *Babylon) DigitalRainPostProcess() *DigitalRainPostProcess {
+	p := ba.ctx.Get("DigitalRainPostProcess")
 	return DigitalRainPostProcessFromJSObject(p)
 }
 
@@ -29,18 +29,18 @@ func DigitalRainPostProcessFromJSObject(p js.Value) *DigitalRainPostProcess {
 
 // NewDigitalRainPostProcessOpts contains optional parameters for NewDigitalRainPostProcess.
 type NewDigitalRainPostProcessOpts struct {
-	Options *string
+	Options *JSString
 }
 
 // NewDigitalRainPostProcess returns a new DigitalRainPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainpostprocess
-func (b *Babylon) NewDigitalRainPostProcess(name string, camera *Camera, opts *NewDigitalRainPostProcessOpts) *DigitalRainPostProcess {
+func (ba *Babylon) NewDigitalRainPostProcess(name string, camera *Camera, opts *NewDigitalRainPostProcessOpts) *DigitalRainPostProcess {
 	if opts == nil {
 		opts = &NewDigitalRainPostProcessOpts{}
 	}
 
-	p := b.ctx.Get("DigitalRainPostProcess").New(name, camera.JSObject(), opts.Options)
+	p := ba.ctx.Get("DigitalRainPostProcess").New(name, camera.JSObject(), opts.Options)
 	return DigitalRainPostProcessFromJSObject(p)
 }
 

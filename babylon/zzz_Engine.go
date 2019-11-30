@@ -14,8 +14,8 @@ type Engine struct{ *ThinEngine }
 func (e *Engine) JSObject() js.Value { return e.p }
 
 // Engine returns a Engine JavaScript class.
-func (b *Babylon) Engine() *Engine {
-	p := b.ctx.Get("Engine")
+func (ba *Babylon) Engine() *Engine {
+	p := ba.ctx.Get("Engine")
 	return EngineFromJSObject(p)
 }
 
@@ -26,22 +26,22 @@ func EngineFromJSObject(p js.Value) *Engine {
 
 // NewEngineOpts contains optional parameters for NewEngine.
 type NewEngineOpts struct {
-	Antialias *bool
+	Antialias *JSBool
 
 	Options js.Value
 
-	AdaptToDeviceRatio *bool
+	AdaptToDeviceRatio *JSBool
 }
 
 // NewEngine returns a new Engine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engine
-func (b *Babylon) NewEngine(canvasOrContext js.Value, opts *NewEngineOpts) *Engine {
+func (ba *Babylon) NewEngine(canvasOrContext js.Value, opts *NewEngineOpts) *Engine {
 	if opts == nil {
 		opts = &NewEngineOpts{}
 	}
 
-	p := b.ctx.Get("Engine").New(canvasOrContext, opts.Antialias.JSObject(), opts.Options, opts.AdaptToDeviceRatio.JSObject())
+	p := ba.ctx.Get("Engine").New(canvasOrContext, opts.Antialias, opts.Options, opts.AdaptToDeviceRatio)
 	return EngineFromJSObject(p)
 }
 

@@ -16,8 +16,8 @@ type BezierCurveEase struct{ *EasingFunction }
 func (b *BezierCurveEase) JSObject() js.Value { return b.p }
 
 // BezierCurveEase returns a BezierCurveEase JavaScript class.
-func (b *Babylon) BezierCurveEase() *BezierCurveEase {
-	p := b.ctx.Get("BezierCurveEase")
+func (ba *Babylon) BezierCurveEase() *BezierCurveEase {
+	p := ba.ctx.Get("BezierCurveEase")
 	return BezierCurveEaseFromJSObject(p)
 }
 
@@ -28,24 +28,24 @@ func BezierCurveEaseFromJSObject(p js.Value) *BezierCurveEase {
 
 // NewBezierCurveEaseOpts contains optional parameters for NewBezierCurveEase.
 type NewBezierCurveEaseOpts struct {
-	X1 *float64
+	X1 *JSFloat64
 
-	Y1 *float64
+	Y1 *JSFloat64
 
-	X2 *float64
+	X2 *JSFloat64
 
-	Y2 *float64
+	Y2 *JSFloat64
 }
 
 // NewBezierCurveEase returns a new BezierCurveEase object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.beziercurveease
-func (b *Babylon) NewBezierCurveEase(opts *NewBezierCurveEaseOpts) *BezierCurveEase {
+func (ba *Babylon) NewBezierCurveEase(opts *NewBezierCurveEaseOpts) *BezierCurveEase {
 	if opts == nil {
 		opts = &NewBezierCurveEaseOpts{}
 	}
 
-	p := b.ctx.Get("BezierCurveEase").New(opts.X1, opts.Y1, opts.X2, opts.Y2)
+	p := ba.ctx.Get("BezierCurveEase").New(opts.X1, opts.Y1, opts.X2, opts.Y2)
 	return BezierCurveEaseFromJSObject(p)
 }
 

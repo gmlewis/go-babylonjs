@@ -14,8 +14,8 @@ type NormalizeBlock struct{ *NodeMaterialBlock }
 func (n *NormalizeBlock) JSObject() js.Value { return n.p }
 
 // NormalizeBlock returns a NormalizeBlock JavaScript class.
-func (b *Babylon) NormalizeBlock() *NormalizeBlock {
-	p := b.ctx.Get("NormalizeBlock")
+func (ba *Babylon) NormalizeBlock() *NormalizeBlock {
+	p := ba.ctx.Get("NormalizeBlock")
 	return NormalizeBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func NormalizeBlockFromJSObject(p js.Value) *NormalizeBlock {
 // NewNormalizeBlock returns a new NormalizeBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.normalizeblock
-func (b *Babylon) NewNormalizeBlock(name string) *NormalizeBlock {
-	p := b.ctx.Get("NormalizeBlock").New(name)
+func (ba *Babylon) NewNormalizeBlock(name string) *NormalizeBlock {
+	p := ba.ctx.Get("NormalizeBlock").New(name)
 	return NormalizeBlockFromJSObject(p)
 }
 

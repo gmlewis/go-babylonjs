@@ -16,8 +16,8 @@ type VRCameraMetrics struct{ p js.Value }
 func (v *VRCameraMetrics) JSObject() js.Value { return v.p }
 
 // VRCameraMetrics returns a VRCameraMetrics JavaScript class.
-func (b *Babylon) VRCameraMetrics() *VRCameraMetrics {
-	p := b.ctx.Get("VRCameraMetrics")
+func (ba *Babylon) VRCameraMetrics() *VRCameraMetrics {
+	p := ba.ctx.Get("VRCameraMetrics")
 	return VRCameraMetricsFromJSObject(p)
 }
 

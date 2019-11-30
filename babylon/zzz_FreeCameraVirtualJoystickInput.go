@@ -16,8 +16,8 @@ type FreeCameraVirtualJoystickInput struct{ p js.Value }
 func (f *FreeCameraVirtualJoystickInput) JSObject() js.Value { return f.p }
 
 // FreeCameraVirtualJoystickInput returns a FreeCameraVirtualJoystickInput JavaScript class.
-func (b *Babylon) FreeCameraVirtualJoystickInput() *FreeCameraVirtualJoystickInput {
-	p := b.ctx.Get("FreeCameraVirtualJoystickInput")
+func (ba *Babylon) FreeCameraVirtualJoystickInput() *FreeCameraVirtualJoystickInput {
+	p := ba.ctx.Get("FreeCameraVirtualJoystickInput")
 	return FreeCameraVirtualJoystickInputFromJSObject(p)
 }
 

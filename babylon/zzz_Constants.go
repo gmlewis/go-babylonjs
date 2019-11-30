@@ -14,8 +14,8 @@ type Constants struct{ p js.Value }
 func (c *Constants) JSObject() js.Value { return c.p }
 
 // Constants returns a Constants JavaScript class.
-func (b *Babylon) Constants() *Constants {
-	p := b.ctx.Get("Constants")
+func (ba *Babylon) Constants() *Constants {
+	p := ba.ctx.Get("Constants")
 	return ConstantsFromJSObject(p)
 }
 

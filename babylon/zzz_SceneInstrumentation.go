@@ -16,8 +16,8 @@ type SceneInstrumentation struct{ p js.Value }
 func (s *SceneInstrumentation) JSObject() js.Value { return s.p }
 
 // SceneInstrumentation returns a SceneInstrumentation JavaScript class.
-func (b *Babylon) SceneInstrumentation() *SceneInstrumentation {
-	p := b.ctx.Get("SceneInstrumentation")
+func (ba *Babylon) SceneInstrumentation() *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation")
 	return SceneInstrumentationFromJSObject(p)
 }
 
@@ -29,8 +29,8 @@ func SceneInstrumentationFromJSObject(p js.Value) *SceneInstrumentation {
 // NewSceneInstrumentation returns a new SceneInstrumentation object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation
-func (b *Babylon) NewSceneInstrumentation(scene *Scene) *SceneInstrumentation {
-	p := b.ctx.Get("SceneInstrumentation").New(scene.JSObject())
+func (ba *Babylon) NewSceneInstrumentation(scene *Scene) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(scene.JSObject())
 	return SceneInstrumentationFromJSObject(p)
 }
 

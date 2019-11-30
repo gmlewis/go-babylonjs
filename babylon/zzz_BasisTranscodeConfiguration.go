@@ -14,8 +14,8 @@ type BasisTranscodeConfiguration struct{ p js.Value }
 func (b *BasisTranscodeConfiguration) JSObject() js.Value { return b.p }
 
 // BasisTranscodeConfiguration returns a BasisTranscodeConfiguration JavaScript class.
-func (b *Babylon) BasisTranscodeConfiguration() *BasisTranscodeConfiguration {
-	p := b.ctx.Get("BasisTranscodeConfiguration")
+func (ba *Babylon) BasisTranscodeConfiguration() *BasisTranscodeConfiguration {
+	p := ba.ctx.Get("BasisTranscodeConfiguration")
 	return BasisTranscodeConfigurationFromJSObject(p)
 }
 

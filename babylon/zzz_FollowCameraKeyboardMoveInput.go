@@ -16,8 +16,8 @@ type FollowCameraKeyboardMoveInput struct{ p js.Value }
 func (f *FollowCameraKeyboardMoveInput) JSObject() js.Value { return f.p }
 
 // FollowCameraKeyboardMoveInput returns a FollowCameraKeyboardMoveInput JavaScript class.
-func (b *Babylon) FollowCameraKeyboardMoveInput() *FollowCameraKeyboardMoveInput {
-	p := b.ctx.Get("FollowCameraKeyboardMoveInput")
+func (ba *Babylon) FollowCameraKeyboardMoveInput() *FollowCameraKeyboardMoveInput {
+	p := ba.ctx.Get("FollowCameraKeyboardMoveInput")
 	return FollowCameraKeyboardMoveInputFromJSObject(p)
 }
 

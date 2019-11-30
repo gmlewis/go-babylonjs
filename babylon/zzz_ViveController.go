@@ -14,8 +14,8 @@ type ViveController struct{ *WebVRController }
 func (v *ViveController) JSObject() js.Value { return v.p }
 
 // ViveController returns a ViveController JavaScript class.
-func (b *Babylon) ViveController() *ViveController {
-	p := b.ctx.Get("ViveController")
+func (ba *Babylon) ViveController() *ViveController {
+	p := ba.ctx.Get("ViveController")
 	return ViveControllerFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func ViveControllerFromJSObject(p js.Value) *ViveController {
 // NewViveController returns a new ViveController object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vivecontroller
-func (b *Babylon) NewViveController(vrGamepad interface{}) *ViveController {
-	p := b.ctx.Get("ViveController").New(vrGamepad)
+func (ba *Babylon) NewViveController(vrGamepad interface{}) *ViveController {
+	p := ba.ctx.Get("ViveController").New(vrGamepad)
 	return ViveControllerFromJSObject(p)
 }
 

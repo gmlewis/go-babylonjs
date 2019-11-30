@@ -14,8 +14,8 @@ type DDSTools struct{ p js.Value }
 func (d *DDSTools) JSObject() js.Value { return d.p }
 
 // DDSTools returns a DDSTools JavaScript class.
-func (b *Babylon) DDSTools() *DDSTools {
-	p := b.ctx.Get("DDSTools")
+func (ba *Babylon) DDSTools() *DDSTools {
+	p := ba.ctx.Get("DDSTools")
 	return DDSToolsFromJSObject(p)
 }
 

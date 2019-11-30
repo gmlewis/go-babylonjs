@@ -14,8 +14,8 @@ type FactorGradient struct{ p js.Value }
 func (f *FactorGradient) JSObject() js.Value { return f.p }
 
 // FactorGradient returns a FactorGradient JavaScript class.
-func (b *Babylon) FactorGradient() *FactorGradient {
-	p := b.ctx.Get("FactorGradient")
+func (ba *Babylon) FactorGradient() *FactorGradient {
+	p := ba.ctx.Get("FactorGradient")
 	return FactorGradientFromJSObject(p)
 }
 

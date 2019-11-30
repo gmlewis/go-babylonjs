@@ -14,8 +14,8 @@ type SSAO2RenderingPipeline struct{ *PostProcessRenderPipeline }
 func (s *SSAO2RenderingPipeline) JSObject() js.Value { return s.p }
 
 // SSAO2RenderingPipeline returns a SSAO2RenderingPipeline JavaScript class.
-func (b *Babylon) SSAO2RenderingPipeline() *SSAO2RenderingPipeline {
-	p := b.ctx.Get("SSAO2RenderingPipeline")
+func (ba *Babylon) SSAO2RenderingPipeline() *SSAO2RenderingPipeline {
+	p := ba.ctx.Get("SSAO2RenderingPipeline")
 	return SSAO2RenderingPipelineFromJSObject(p)
 }
 
@@ -32,12 +32,12 @@ type NewSSAO2RenderingPipelineOpts struct {
 // NewSSAO2RenderingPipeline returns a new SSAO2RenderingPipeline object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline
-func (b *Babylon) NewSSAO2RenderingPipeline(name string, scene *Scene, ratio interface{}, opts *NewSSAO2RenderingPipelineOpts) *SSAO2RenderingPipeline {
+func (ba *Babylon) NewSSAO2RenderingPipeline(name string, scene *Scene, ratio interface{}, opts *NewSSAO2RenderingPipelineOpts) *SSAO2RenderingPipeline {
 	if opts == nil {
 		opts = &NewSSAO2RenderingPipelineOpts{}
 	}
 
-	p := b.ctx.Get("SSAO2RenderingPipeline").New(name, scene.JSObject(), ratio, opts.Cameras.JSObject())
+	p := ba.ctx.Get("SSAO2RenderingPipeline").New(name, scene.JSObject(), ratio, opts.Cameras.JSObject())
 	return SSAO2RenderingPipelineFromJSObject(p)
 }
 

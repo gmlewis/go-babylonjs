@@ -14,8 +14,8 @@ type PBRCustomMaterial struct{ *PBRMaterial }
 func (p *PBRCustomMaterial) JSObject() js.Value { return p.p }
 
 // PBRCustomMaterial returns a PBRCustomMaterial JavaScript class.
-func (b *Babylon) PBRCustomMaterial() *PBRCustomMaterial {
-	p := b.ctx.Get("PBRCustomMaterial")
+func (ba *Babylon) PBRCustomMaterial() *PBRCustomMaterial {
+	p := ba.ctx.Get("PBRCustomMaterial")
 	return PBRCustomMaterialFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func PBRCustomMaterialFromJSObject(p js.Value) *PBRCustomMaterial {
 // NewPBRCustomMaterial returns a new PBRCustomMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrcustommaterial
-func (b *Babylon) NewPBRCustomMaterial(name string, scene *Scene) *PBRCustomMaterial {
-	p := b.ctx.Get("PBRCustomMaterial").New(name, scene.JSObject())
+func (ba *Babylon) NewPBRCustomMaterial(name string, scene *Scene) *PBRCustomMaterial {
+	p := ba.ctx.Get("PBRCustomMaterial").New(name, scene.JSObject())
 	return PBRCustomMaterialFromJSObject(p)
 }
 

@@ -14,8 +14,8 @@ type SphericalPolynomial struct{ p js.Value }
 func (s *SphericalPolynomial) JSObject() js.Value { return s.p }
 
 // SphericalPolynomial returns a SphericalPolynomial JavaScript class.
-func (b *Babylon) SphericalPolynomial() *SphericalPolynomial {
-	p := b.ctx.Get("SphericalPolynomial")
+func (ba *Babylon) SphericalPolynomial() *SphericalPolynomial {
+	p := ba.ctx.Get("SphericalPolynomial")
 	return SphericalPolynomialFromJSObject(p)
 }
 

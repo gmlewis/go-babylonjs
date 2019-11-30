@@ -14,8 +14,8 @@ type HemisphereBuilder struct{ p js.Value }
 func (h *HemisphereBuilder) JSObject() js.Value { return h.p }
 
 // HemisphereBuilder returns a HemisphereBuilder JavaScript class.
-func (b *Babylon) HemisphereBuilder() *HemisphereBuilder {
-	p := b.ctx.Get("HemisphereBuilder")
+func (ba *Babylon) HemisphereBuilder() *HemisphereBuilder {
+	p := ba.ctx.Get("HemisphereBuilder")
 	return HemisphereBuilderFromJSObject(p)
 }
 

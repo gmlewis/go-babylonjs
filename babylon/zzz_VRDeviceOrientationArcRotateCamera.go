@@ -16,8 +16,8 @@ type VRDeviceOrientationArcRotateCamera struct{ *ArcRotateCamera }
 func (v *VRDeviceOrientationArcRotateCamera) JSObject() js.Value { return v.p }
 
 // VRDeviceOrientationArcRotateCamera returns a VRDeviceOrientationArcRotateCamera JavaScript class.
-func (b *Babylon) VRDeviceOrientationArcRotateCamera() *VRDeviceOrientationArcRotateCamera {
-	p := b.ctx.Get("VRDeviceOrientationArcRotateCamera")
+func (ba *Babylon) VRDeviceOrientationArcRotateCamera() *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera")
 	return VRDeviceOrientationArcRotateCameraFromJSObject(p)
 }
 
@@ -28,7 +28,7 @@ func VRDeviceOrientationArcRotateCameraFromJSObject(p js.Value) *VRDeviceOrienta
 
 // NewVRDeviceOrientationArcRotateCameraOpts contains optional parameters for NewVRDeviceOrientationArcRotateCamera.
 type NewVRDeviceOrientationArcRotateCameraOpts struct {
-	CompensateDistortion *bool
+	CompensateDistortion *JSBool
 
 	VrCameraMetrics *VRCameraMetrics
 }
@@ -36,12 +36,12 @@ type NewVRDeviceOrientationArcRotateCameraOpts struct {
 // NewVRDeviceOrientationArcRotateCamera returns a new VRDeviceOrientationArcRotateCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera
-func (b *Babylon) NewVRDeviceOrientationArcRotateCamera(name string, alpha float64, beta float64, radius float64, target *Vector3, scene *Scene, opts *NewVRDeviceOrientationArcRotateCameraOpts) *VRDeviceOrientationArcRotateCamera {
+func (ba *Babylon) NewVRDeviceOrientationArcRotateCamera(name string, alpha float64, beta float64, radius float64, target *Vector3, scene *Scene, opts *NewVRDeviceOrientationArcRotateCameraOpts) *VRDeviceOrientationArcRotateCamera {
 	if opts == nil {
 		opts = &NewVRDeviceOrientationArcRotateCameraOpts{}
 	}
 
-	p := b.ctx.Get("VRDeviceOrientationArcRotateCamera").New(name, alpha, beta, radius, target.JSObject(), scene.JSObject(), opts.CompensateDistortion.JSObject(), opts.VrCameraMetrics.JSObject())
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(name, alpha, beta, radius, target.JSObject(), scene.JSObject(), opts.CompensateDistortion, opts.VrCameraMetrics.JSObject())
 	return VRDeviceOrientationArcRotateCameraFromJSObject(p)
 }
 

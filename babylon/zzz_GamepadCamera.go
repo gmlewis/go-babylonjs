@@ -17,8 +17,8 @@ type GamepadCamera struct{ *UniversalCamera }
 func (g *GamepadCamera) JSObject() js.Value { return g.p }
 
 // GamepadCamera returns a GamepadCamera JavaScript class.
-func (b *Babylon) GamepadCamera() *GamepadCamera {
-	p := b.ctx.Get("GamepadCamera")
+func (ba *Babylon) GamepadCamera() *GamepadCamera {
+	p := ba.ctx.Get("GamepadCamera")
 	return GamepadCameraFromJSObject(p)
 }
 
@@ -30,8 +30,8 @@ func GamepadCameraFromJSObject(p js.Value) *GamepadCamera {
 // NewGamepadCamera returns a new GamepadCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gamepadcamera
-func (b *Babylon) NewGamepadCamera(name string, position *Vector3, scene *Scene) *GamepadCamera {
-	p := b.ctx.Get("GamepadCamera").New(name, position.JSObject(), scene.JSObject())
+func (ba *Babylon) NewGamepadCamera(name string, position *Vector3, scene *Scene) *GamepadCamera {
+	p := ba.ctx.Get("GamepadCamera").New(name, position.JSObject(), scene.JSObject())
 	return GamepadCameraFromJSObject(p)
 }
 

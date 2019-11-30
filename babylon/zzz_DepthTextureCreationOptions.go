@@ -14,8 +14,8 @@ type DepthTextureCreationOptions struct{ p js.Value }
 func (d *DepthTextureCreationOptions) JSObject() js.Value { return d.p }
 
 // DepthTextureCreationOptions returns a DepthTextureCreationOptions JavaScript class.
-func (b *Babylon) DepthTextureCreationOptions() *DepthTextureCreationOptions {
-	p := b.ctx.Get("DepthTextureCreationOptions")
+func (ba *Babylon) DepthTextureCreationOptions() *DepthTextureCreationOptions {
+	p := ba.ctx.Get("DepthTextureCreationOptions")
 	return DepthTextureCreationOptionsFromJSObject(p)
 }
 

@@ -15,8 +15,8 @@ type LayerSceneComponent struct{ p js.Value }
 func (l *LayerSceneComponent) JSObject() js.Value { return l.p }
 
 // LayerSceneComponent returns a LayerSceneComponent JavaScript class.
-func (b *Babylon) LayerSceneComponent() *LayerSceneComponent {
-	p := b.ctx.Get("LayerSceneComponent")
+func (ba *Babylon) LayerSceneComponent() *LayerSceneComponent {
+	p := ba.ctx.Get("LayerSceneComponent")
 	return LayerSceneComponentFromJSObject(p)
 }
 
@@ -28,8 +28,8 @@ func LayerSceneComponentFromJSObject(p js.Value) *LayerSceneComponent {
 // NewLayerSceneComponent returns a new LayerSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.layerscenecomponent
-func (b *Babylon) NewLayerSceneComponent(scene *Scene) *LayerSceneComponent {
-	p := b.ctx.Get("LayerSceneComponent").New(scene.JSObject())
+func (ba *Babylon) NewLayerSceneComponent(scene *Scene) *LayerSceneComponent {
+	p := ba.ctx.Get("LayerSceneComponent").New(scene.JSObject())
 	return LayerSceneComponentFromJSObject(p)
 }
 

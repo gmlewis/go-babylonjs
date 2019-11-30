@@ -14,8 +14,8 @@ type BaseSubMesh struct{ p js.Value }
 func (b *BaseSubMesh) JSObject() js.Value { return b.p }
 
 // BaseSubMesh returns a BaseSubMesh JavaScript class.
-func (b *Babylon) BaseSubMesh() *BaseSubMesh {
-	p := b.ctx.Get("BaseSubMesh")
+func (ba *Babylon) BaseSubMesh() *BaseSubMesh {
+	p := ba.ctx.Get("BaseSubMesh")
 	return BaseSubMeshFromJSObject(p)
 }
 

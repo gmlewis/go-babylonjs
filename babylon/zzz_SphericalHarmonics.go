@@ -14,8 +14,8 @@ type SphericalHarmonics struct{ p js.Value }
 func (s *SphericalHarmonics) JSObject() js.Value { return s.p }
 
 // SphericalHarmonics returns a SphericalHarmonics JavaScript class.
-func (b *Babylon) SphericalHarmonics() *SphericalHarmonics {
-	p := b.ctx.Get("SphericalHarmonics")
+func (ba *Babylon) SphericalHarmonics() *SphericalHarmonics {
+	p := ba.ctx.Get("SphericalHarmonics")
 	return SphericalHarmonicsFromJSObject(p)
 }
 

@@ -16,8 +16,8 @@ type PowerEase struct{ *EasingFunction }
 func (p *PowerEase) JSObject() js.Value { return p.p }
 
 // PowerEase returns a PowerEase JavaScript class.
-func (b *Babylon) PowerEase() *PowerEase {
-	p := b.ctx.Get("PowerEase")
+func (ba *Babylon) PowerEase() *PowerEase {
+	p := ba.ctx.Get("PowerEase")
 	return PowerEaseFromJSObject(p)
 }
 
@@ -28,18 +28,18 @@ func PowerEaseFromJSObject(p js.Value) *PowerEase {
 
 // NewPowerEaseOpts contains optional parameters for NewPowerEase.
 type NewPowerEaseOpts struct {
-	Power *float64
+	Power *JSFloat64
 }
 
 // NewPowerEase returns a new PowerEase object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.powerease
-func (b *Babylon) NewPowerEase(opts *NewPowerEaseOpts) *PowerEase {
+func (ba *Babylon) NewPowerEase(opts *NewPowerEaseOpts) *PowerEase {
 	if opts == nil {
 		opts = &NewPowerEaseOpts{}
 	}
 
-	p := b.ctx.Get("PowerEase").New(opts.Power)
+	p := ba.ctx.Get("PowerEase").New(opts.Power)
 	return PowerEaseFromJSObject(p)
 }
 

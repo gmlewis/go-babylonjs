@@ -19,8 +19,8 @@ type MirrorTexture struct{ *RenderTargetTexture }
 func (m *MirrorTexture) JSObject() js.Value { return m.p }
 
 // MirrorTexture returns a MirrorTexture JavaScript class.
-func (b *Babylon) MirrorTexture() *MirrorTexture {
-	p := b.ctx.Get("MirrorTexture")
+func (ba *Babylon) MirrorTexture() *MirrorTexture {
+	p := ba.ctx.Get("MirrorTexture")
 	return MirrorTextureFromJSObject(p)
 }
 
@@ -31,24 +31,24 @@ func MirrorTextureFromJSObject(p js.Value) *MirrorTexture {
 
 // NewMirrorTextureOpts contains optional parameters for NewMirrorTexture.
 type NewMirrorTextureOpts struct {
-	GenerateMipMaps *bool
+	GenerateMipMaps *JSBool
 
-	Type *float64
+	Type *JSFloat64
 
-	SamplingMode *float64
+	SamplingMode *JSFloat64
 
-	GenerateDepthBuffer *bool
+	GenerateDepthBuffer *JSBool
 }
 
 // NewMirrorTexture returns a new MirrorTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mirrortexture
-func (b *Babylon) NewMirrorTexture(name string, size float64, scene *Scene, opts *NewMirrorTextureOpts) *MirrorTexture {
+func (ba *Babylon) NewMirrorTexture(name string, size float64, scene *Scene, opts *NewMirrorTextureOpts) *MirrorTexture {
 	if opts == nil {
 		opts = &NewMirrorTextureOpts{}
 	}
 
-	p := b.ctx.Get("MirrorTexture").New(name, size, scene.JSObject(), opts.GenerateMipMaps.JSObject(), opts.Type, opts.SamplingMode, opts.GenerateDepthBuffer.JSObject())
+	p := ba.ctx.Get("MirrorTexture").New(name, size, scene.JSObject(), opts.GenerateMipMaps, opts.Type, opts.SamplingMode, opts.GenerateDepthBuffer)
 	return MirrorTextureFromJSObject(p)
 }
 

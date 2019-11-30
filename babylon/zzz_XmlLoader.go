@@ -14,8 +14,8 @@ type XmlLoader struct{ p js.Value }
 func (x *XmlLoader) JSObject() js.Value { return x.p }
 
 // XmlLoader returns a XmlLoader JavaScript class.
-func (b *Babylon) XmlLoader() *XmlLoader {
-	p := b.ctx.Get("XmlLoader")
+func (ba *Babylon) XmlLoader() *XmlLoader {
+	p := ba.ctx.Get("XmlLoader")
 	return XmlLoaderFromJSObject(p)
 }
 
@@ -26,18 +26,18 @@ func XmlLoaderFromJSObject(p js.Value) *XmlLoader {
 
 // NewXmlLoaderOpts contains optional parameters for NewXmlLoader.
 type NewXmlLoaderOpts struct {
-	ParentClass *null
+	ParentClass js.Value
 }
 
 // NewXmlLoader returns a new XmlLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.xmlloader
-func (b *Babylon) NewXmlLoader(opts *NewXmlLoaderOpts) *XmlLoader {
+func (ba *Babylon) NewXmlLoader(opts *NewXmlLoaderOpts) *XmlLoader {
 	if opts == nil {
 		opts = &NewXmlLoaderOpts{}
 	}
 
-	p := b.ctx.Get("XmlLoader").New(opts.ParentClass.JSObject())
+	p := ba.ctx.Get("XmlLoader").New(opts.ParentClass)
 	return XmlLoaderFromJSObject(p)
 }
 

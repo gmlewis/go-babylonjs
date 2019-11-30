@@ -17,8 +17,8 @@ type FreeCamera struct{ *TargetCamera }
 func (f *FreeCamera) JSObject() js.Value { return f.p }
 
 // FreeCamera returns a FreeCamera JavaScript class.
-func (b *Babylon) FreeCamera() *FreeCamera {
-	p := b.ctx.Get("FreeCamera")
+func (ba *Babylon) FreeCamera() *FreeCamera {
+	p := ba.ctx.Get("FreeCamera")
 	return FreeCameraFromJSObject(p)
 }
 
@@ -29,18 +29,18 @@ func FreeCameraFromJSObject(p js.Value) *FreeCamera {
 
 // NewFreeCameraOpts contains optional parameters for NewFreeCamera.
 type NewFreeCameraOpts struct {
-	SetActiveOnSceneIfNoneActive *bool
+	SetActiveOnSceneIfNoneActive *JSBool
 }
 
 // NewFreeCamera returns a new FreeCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecamera
-func (b *Babylon) NewFreeCamera(name string, position *Vector3, scene *Scene, opts *NewFreeCameraOpts) *FreeCamera {
+func (ba *Babylon) NewFreeCamera(name string, position *Vector3, scene *Scene, opts *NewFreeCameraOpts) *FreeCamera {
 	if opts == nil {
 		opts = &NewFreeCameraOpts{}
 	}
 
-	p := b.ctx.Get("FreeCamera").New(name, position.JSObject(), scene.JSObject(), opts.SetActiveOnSceneIfNoneActive.JSObject())
+	p := ba.ctx.Get("FreeCamera").New(name, position.JSObject(), scene.JSObject(), opts.SetActiveOnSceneIfNoneActive)
 	return FreeCameraFromJSObject(p)
 }
 

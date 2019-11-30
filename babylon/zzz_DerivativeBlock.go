@@ -14,8 +14,8 @@ type DerivativeBlock struct{ *NodeMaterialBlock }
 func (d *DerivativeBlock) JSObject() js.Value { return d.p }
 
 // DerivativeBlock returns a DerivativeBlock JavaScript class.
-func (b *Babylon) DerivativeBlock() *DerivativeBlock {
-	p := b.ctx.Get("DerivativeBlock")
+func (ba *Babylon) DerivativeBlock() *DerivativeBlock {
+	p := ba.ctx.Get("DerivativeBlock")
 	return DerivativeBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func DerivativeBlockFromJSObject(p js.Value) *DerivativeBlock {
 // NewDerivativeBlock returns a new DerivativeBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.derivativeblock
-func (b *Babylon) NewDerivativeBlock(name string) *DerivativeBlock {
-	p := b.ctx.Get("DerivativeBlock").New(name)
+func (ba *Babylon) NewDerivativeBlock(name string) *DerivativeBlock {
+	p := ba.ctx.Get("DerivativeBlock").New(name)
 	return DerivativeBlockFromJSObject(p)
 }
 

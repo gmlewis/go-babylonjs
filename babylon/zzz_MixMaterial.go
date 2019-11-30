@@ -14,8 +14,8 @@ type MixMaterial struct{ p js.Value }
 func (m *MixMaterial) JSObject() js.Value { return m.p }
 
 // MixMaterial returns a MixMaterial JavaScript class.
-func (b *Babylon) MixMaterial() *MixMaterial {
-	p := b.ctx.Get("MixMaterial")
+func (ba *Babylon) MixMaterial() *MixMaterial {
+	p := ba.ctx.Get("MixMaterial")
 	return MixMaterialFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func MixMaterialFromJSObject(p js.Value) *MixMaterial {
 // NewMixMaterial returns a new MixMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial
-func (b *Babylon) NewMixMaterial(name string, scene *Scene) *MixMaterial {
-	p := b.ctx.Get("MixMaterial").New(name, scene.JSObject())
+func (ba *Babylon) NewMixMaterial(name string, scene *Scene) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(name, scene.JSObject())
 	return MixMaterialFromJSObject(p)
 }
 

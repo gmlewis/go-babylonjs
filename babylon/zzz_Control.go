@@ -16,8 +16,8 @@ type Control struct{ p js.Value }
 func (c *Control) JSObject() js.Value { return c.p }
 
 // Control returns a Control JavaScript class.
-func (b *Babylon) Control() *Control {
-	p := b.ctx.Get("Control")
+func (ba *Babylon) Control() *Control {
+	p := ba.ctx.Get("Control")
 	return ControlFromJSObject(p)
 }
 
@@ -28,18 +28,18 @@ func ControlFromJSObject(p js.Value) *Control {
 
 // NewControlOpts contains optional parameters for NewControl.
 type NewControlOpts struct {
-	Name *string
+	Name *JSString
 }
 
 // NewControl returns a new Control object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control
-func (b *Babylon) NewControl(opts *NewControlOpts) *Control {
+func (ba *Babylon) NewControl(opts *NewControlOpts) *Control {
 	if opts == nil {
 		opts = &NewControlOpts{}
 	}
 
-	p := b.ctx.Get("Control").New(opts.Name)
+	p := ba.ctx.Get("Control").New(opts.Name)
 	return ControlFromJSObject(p)
 }
 

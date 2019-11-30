@@ -14,8 +14,8 @@ type ScatterPanel struct{ *VolumeBasedPanel }
 func (s *ScatterPanel) JSObject() js.Value { return s.p }
 
 // ScatterPanel returns a ScatterPanel JavaScript class.
-func (b *Babylon) ScatterPanel() *ScatterPanel {
-	p := b.ctx.Get("ScatterPanel")
+func (ba *Babylon) ScatterPanel() *ScatterPanel {
+	p := ba.ctx.Get("ScatterPanel")
 	return ScatterPanelFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func ScatterPanelFromJSObject(p js.Value) *ScatterPanel {
 // NewScatterPanel returns a new ScatterPanel object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scatterpanel
-func (b *Babylon) NewScatterPanel() *ScatterPanel {
-	p := b.ctx.Get("ScatterPanel").New()
+func (ba *Babylon) NewScatterPanel() *ScatterPanel {
+	p := ba.ctx.Get("ScatterPanel").New()
 	return ScatterPanelFromJSObject(p)
 }
 

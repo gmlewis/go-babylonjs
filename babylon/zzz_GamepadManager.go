@@ -14,8 +14,8 @@ type GamepadManager struct{ p js.Value }
 func (g *GamepadManager) JSObject() js.Value { return g.p }
 
 // GamepadManager returns a GamepadManager JavaScript class.
-func (b *Babylon) GamepadManager() *GamepadManager {
-	p := b.ctx.Get("GamepadManager")
+func (ba *Babylon) GamepadManager() *GamepadManager {
+	p := ba.ctx.Get("GamepadManager")
 	return GamepadManagerFromJSObject(p)
 }
 
@@ -32,12 +32,12 @@ type NewGamepadManagerOpts struct {
 // NewGamepadManager returns a new GamepadManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gamepadmanager
-func (b *Babylon) NewGamepadManager(opts *NewGamepadManagerOpts) *GamepadManager {
+func (ba *Babylon) NewGamepadManager(opts *NewGamepadManagerOpts) *GamepadManager {
 	if opts == nil {
 		opts = &NewGamepadManagerOpts{}
 	}
 
-	p := b.ctx.Get("GamepadManager").New(opts._scene.JSObject())
+	p := ba.ctx.Get("GamepadManager").New(opts._scene.JSObject())
 	return GamepadManagerFromJSObject(p)
 }
 

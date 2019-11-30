@@ -17,8 +17,8 @@ type IncrementValueAction struct{ *Action }
 func (i *IncrementValueAction) JSObject() js.Value { return i.p }
 
 // IncrementValueAction returns a IncrementValueAction JavaScript class.
-func (b *Babylon) IncrementValueAction() *IncrementValueAction {
-	p := b.ctx.Get("IncrementValueAction")
+func (ba *Babylon) IncrementValueAction() *IncrementValueAction {
+	p := ba.ctx.Get("IncrementValueAction")
 	return IncrementValueActionFromJSObject(p)
 }
 
@@ -35,12 +35,12 @@ type NewIncrementValueActionOpts struct {
 // NewIncrementValueAction returns a new IncrementValueAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.incrementvalueaction
-func (b *Babylon) NewIncrementValueAction(triggerOptions interface{}, target interface{}, propertyPath string, value interface{}, opts *NewIncrementValueActionOpts) *IncrementValueAction {
+func (ba *Babylon) NewIncrementValueAction(triggerOptions interface{}, target interface{}, propertyPath string, value interface{}, opts *NewIncrementValueActionOpts) *IncrementValueAction {
 	if opts == nil {
 		opts = &NewIncrementValueActionOpts{}
 	}
 
-	p := b.ctx.Get("IncrementValueAction").New(triggerOptions, target, propertyPath, value, opts.Condition.JSObject())
+	p := ba.ctx.Get("IncrementValueAction").New(triggerOptions, target, propertyPath, value, opts.Condition.JSObject())
 	return IncrementValueActionFromJSObject(p)
 }
 

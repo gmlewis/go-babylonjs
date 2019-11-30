@@ -14,8 +14,8 @@ type RecastJSPlugin struct{ p js.Value }
 func (r *RecastJSPlugin) JSObject() js.Value { return r.p }
 
 // RecastJSPlugin returns a RecastJSPlugin JavaScript class.
-func (b *Babylon) RecastJSPlugin() *RecastJSPlugin {
-	p := b.ctx.Get("RecastJSPlugin")
+func (ba *Babylon) RecastJSPlugin() *RecastJSPlugin {
+	p := ba.ctx.Get("RecastJSPlugin")
 	return RecastJSPluginFromJSObject(p)
 }
 
@@ -32,12 +32,12 @@ type NewRecastJSPluginOpts struct {
 // NewRecastJSPlugin returns a new RecastJSPlugin object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.recastjsplugin
-func (b *Babylon) NewRecastJSPlugin(opts *NewRecastJSPluginOpts) *RecastJSPlugin {
+func (ba *Babylon) NewRecastJSPlugin(opts *NewRecastJSPluginOpts) *RecastJSPlugin {
 	if opts == nil {
 		opts = &NewRecastJSPluginOpts{}
 	}
 
-	p := b.ctx.Get("RecastJSPlugin").New(opts.RecastInjection)
+	p := ba.ctx.Get("RecastJSPlugin").New(opts.RecastInjection)
 	return RecastJSPluginFromJSObject(p)
 }
 

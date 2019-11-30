@@ -14,8 +14,8 @@ type BoundingBox struct{ p js.Value }
 func (b *BoundingBox) JSObject() js.Value { return b.p }
 
 // BoundingBox returns a BoundingBox JavaScript class.
-func (b *Babylon) BoundingBox() *BoundingBox {
-	p := b.ctx.Get("BoundingBox")
+func (ba *Babylon) BoundingBox() *BoundingBox {
+	p := ba.ctx.Get("BoundingBox")
 	return BoundingBoxFromJSObject(p)
 }
 
@@ -32,12 +32,12 @@ type NewBoundingBoxOpts struct {
 // NewBoundingBox returns a new BoundingBox object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingbox
-func (b *Babylon) NewBoundingBox(min *Vector3, max *Vector3, opts *NewBoundingBoxOpts) *BoundingBox {
+func (ba *Babylon) NewBoundingBox(min *Vector3, max *Vector3, opts *NewBoundingBoxOpts) *BoundingBox {
 	if opts == nil {
 		opts = &NewBoundingBoxOpts{}
 	}
 
-	p := b.ctx.Get("BoundingBox").New(min.JSObject(), max.JSObject(), opts.WorldMatrix.JSObject())
+	p := ba.ctx.Get("BoundingBox").New(min.JSObject(), max.JSObject(), opts.WorldMatrix.JSObject())
 	return BoundingBoxFromJSObject(p)
 }
 

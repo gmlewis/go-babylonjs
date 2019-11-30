@@ -14,8 +14,8 @@ type PlanePanel struct{ *VolumeBasedPanel }
 func (p *PlanePanel) JSObject() js.Value { return p.p }
 
 // PlanePanel returns a PlanePanel JavaScript class.
-func (b *Babylon) PlanePanel() *PlanePanel {
-	p := b.ctx.Get("PlanePanel")
+func (ba *Babylon) PlanePanel() *PlanePanel {
+	p := ba.ctx.Get("PlanePanel")
 	return PlanePanelFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func PlanePanelFromJSObject(p js.Value) *PlanePanel {
 // NewPlanePanel returns a new PlanePanel object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.planepanel
-func (b *Babylon) NewPlanePanel() *PlanePanel {
-	p := b.ctx.Get("PlanePanel").New()
+func (ba *Babylon) NewPlanePanel() *PlanePanel {
+	p := ba.ctx.Get("PlanePanel").New()
 	return PlanePanelFromJSObject(p)
 }
 

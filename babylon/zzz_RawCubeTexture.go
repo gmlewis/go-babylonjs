@@ -14,8 +14,8 @@ type RawCubeTexture struct{ *CubeTexture }
 func (r *RawCubeTexture) JSObject() js.Value { return r.p }
 
 // RawCubeTexture returns a RawCubeTexture JavaScript class.
-func (b *Babylon) RawCubeTexture() *RawCubeTexture {
-	p := b.ctx.Get("RawCubeTexture")
+func (ba *Babylon) RawCubeTexture() *RawCubeTexture {
+	p := ba.ctx.Get("RawCubeTexture")
 	return RawCubeTextureFromJSObject(p)
 }
 
@@ -26,28 +26,28 @@ func RawCubeTextureFromJSObject(p js.Value) *RawCubeTexture {
 
 // NewRawCubeTextureOpts contains optional parameters for NewRawCubeTexture.
 type NewRawCubeTextureOpts struct {
-	Format *float64
+	Format *JSFloat64
 
-	Type *float64
+	Type *JSFloat64
 
-	GenerateMipMaps *bool
+	GenerateMipMaps *JSBool
 
-	InvertY *bool
+	InvertY *JSBool
 
-	SamplingMode *float64
+	SamplingMode *JSFloat64
 
-	Compression *string
+	Compression *JSString
 }
 
 // NewRawCubeTexture returns a new RawCubeTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rawcubetexture
-func (b *Babylon) NewRawCubeTexture(scene *Scene, data ArrayBufferView, size float64, opts *NewRawCubeTextureOpts) *RawCubeTexture {
+func (ba *Babylon) NewRawCubeTexture(scene *Scene, data js.Value, size float64, opts *NewRawCubeTextureOpts) *RawCubeTexture {
 	if opts == nil {
 		opts = &NewRawCubeTextureOpts{}
 	}
 
-	p := b.ctx.Get("RawCubeTexture").New(scene.JSObject(), data.JSObject(), size, opts.Format, opts.Type, opts.GenerateMipMaps.JSObject(), opts.InvertY.JSObject(), opts.SamplingMode, opts.Compression)
+	p := ba.ctx.Get("RawCubeTexture").New(scene.JSObject(), data, size, opts.Format, opts.Type, opts.GenerateMipMaps, opts.InvertY, opts.SamplingMode, opts.Compression)
 	return RawCubeTextureFromJSObject(p)
 }
 

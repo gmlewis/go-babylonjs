@@ -17,8 +17,8 @@ type MaterialHelper struct{ p js.Value }
 func (m *MaterialHelper) JSObject() js.Value { return m.p }
 
 // MaterialHelper returns a MaterialHelper JavaScript class.
-func (b *Babylon) MaterialHelper() *MaterialHelper {
-	p := b.ctx.Get("MaterialHelper")
+func (ba *Babylon) MaterialHelper() *MaterialHelper {
+	p := ba.ctx.Get("MaterialHelper")
 	return MaterialHelperFromJSObject(p)
 }
 

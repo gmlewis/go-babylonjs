@@ -14,8 +14,8 @@ type PathCursor struct{ p js.Value }
 func (p *PathCursor) JSObject() js.Value { return p.p }
 
 // PathCursor returns a PathCursor JavaScript class.
-func (b *Babylon) PathCursor() *PathCursor {
-	p := b.ctx.Get("PathCursor")
+func (ba *Babylon) PathCursor() *PathCursor {
+	p := ba.ctx.Get("PathCursor")
 	return PathCursorFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func PathCursorFromJSObject(p js.Value) *PathCursor {
 // NewPathCursor returns a new PathCursor object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pathcursor
-func (b *Babylon) NewPathCursor(path *Path2) *PathCursor {
-	p := b.ctx.Get("PathCursor").New(path.JSObject())
+func (ba *Babylon) NewPathCursor(path *Path2) *PathCursor {
+	p := ba.ctx.Get("PathCursor").New(path.JSObject())
 	return PathCursorFromJSObject(p)
 }
 

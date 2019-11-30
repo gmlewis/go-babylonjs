@@ -14,8 +14,8 @@ type CircleOfConfusionPostProcess struct{ *PostProcess }
 func (c *CircleOfConfusionPostProcess) JSObject() js.Value { return c.p }
 
 // CircleOfConfusionPostProcess returns a CircleOfConfusionPostProcess JavaScript class.
-func (b *Babylon) CircleOfConfusionPostProcess() *CircleOfConfusionPostProcess {
-	p := b.ctx.Get("CircleOfConfusionPostProcess")
+func (ba *Babylon) CircleOfConfusionPostProcess() *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess")
 	return CircleOfConfusionPostProcessFromJSObject(p)
 }
 
@@ -26,26 +26,26 @@ func CircleOfConfusionPostProcessFromJSObject(p js.Value) *CircleOfConfusionPost
 
 // NewCircleOfConfusionPostProcessOpts contains optional parameters for NewCircleOfConfusionPostProcess.
 type NewCircleOfConfusionPostProcessOpts struct {
-	SamplingMode *float64
+	SamplingMode *JSFloat64
 
 	Engine *Engine
 
-	Reusable *bool
+	Reusable *JSBool
 
-	TextureType *float64
+	TextureType *JSFloat64
 
-	BlockCompilation *bool
+	BlockCompilation *JSBool
 }
 
 // NewCircleOfConfusionPostProcess returns a new CircleOfConfusionPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess
-func (b *Babylon) NewCircleOfConfusionPostProcess(name string, depthTexture *RenderTargetTexture, options float64, camera *Camera, opts *NewCircleOfConfusionPostProcessOpts) *CircleOfConfusionPostProcess {
+func (ba *Babylon) NewCircleOfConfusionPostProcess(name string, depthTexture *RenderTargetTexture, options float64, camera *Camera, opts *NewCircleOfConfusionPostProcessOpts) *CircleOfConfusionPostProcess {
 	if opts == nil {
 		opts = &NewCircleOfConfusionPostProcessOpts{}
 	}
 
-	p := b.ctx.Get("CircleOfConfusionPostProcess").New(name, depthTexture.JSObject(), options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType, opts.BlockCompilation.JSObject())
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(name, depthTexture.JSObject(), options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable, opts.TextureType, opts.BlockCompilation)
 	return CircleOfConfusionPostProcessFromJSObject(p)
 }
 

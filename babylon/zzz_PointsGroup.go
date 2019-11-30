@@ -14,8 +14,8 @@ type PointsGroup struct{ p js.Value }
 func (p *PointsGroup) JSObject() js.Value { return p.p }
 
 // PointsGroup returns a PointsGroup JavaScript class.
-func (b *Babylon) PointsGroup() *PointsGroup {
-	p := b.ctx.Get("PointsGroup")
+func (ba *Babylon) PointsGroup() *PointsGroup {
+	p := ba.ctx.Get("PointsGroup")
 	return PointsGroupFromJSObject(p)
 }
 

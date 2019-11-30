@@ -14,8 +14,8 @@ type HDRTools struct{ p js.Value }
 func (h *HDRTools) JSObject() js.Value { return h.p }
 
 // HDRTools returns a HDRTools JavaScript class.
-func (b *Babylon) HDRTools() *HDRTools {
-	p := b.ctx.Get("HDRTools")
+func (ba *Babylon) HDRTools() *HDRTools {
+	p := ba.ctx.Get("HDRTools")
 	return HDRToolsFromJSObject(p)
 }
 

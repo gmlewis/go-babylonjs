@@ -14,8 +14,8 @@ type VectorSplitterBlock struct{ *NodeMaterialBlock }
 func (v *VectorSplitterBlock) JSObject() js.Value { return v.p }
 
 // VectorSplitterBlock returns a VectorSplitterBlock JavaScript class.
-func (b *Babylon) VectorSplitterBlock() *VectorSplitterBlock {
-	p := b.ctx.Get("VectorSplitterBlock")
+func (ba *Babylon) VectorSplitterBlock() *VectorSplitterBlock {
+	p := ba.ctx.Get("VectorSplitterBlock")
 	return VectorSplitterBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func VectorSplitterBlockFromJSObject(p js.Value) *VectorSplitterBlock {
 // NewVectorSplitterBlock returns a new VectorSplitterBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vectorsplitterblock
-func (b *Babylon) NewVectorSplitterBlock(name string) *VectorSplitterBlock {
-	p := b.ctx.Get("VectorSplitterBlock").New(name)
+func (ba *Babylon) NewVectorSplitterBlock(name string) *VectorSplitterBlock {
+	p := ba.ctx.Get("VectorSplitterBlock").New(name)
 	return VectorSplitterBlockFromJSObject(p)
 }
 

@@ -14,8 +14,8 @@ type GLTFFileLoader struct{ p js.Value }
 func (g *GLTFFileLoader) JSObject() js.Value { return g.p }
 
 // GLTFFileLoader returns a GLTFFileLoader JavaScript class.
-func (b *Babylon) GLTFFileLoader() *GLTFFileLoader {
-	p := b.ctx.Get("GLTFFileLoader")
+func (ba *Babylon) GLTFFileLoader() *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader")
 	return GLTFFileLoaderFromJSObject(p)
 }
 

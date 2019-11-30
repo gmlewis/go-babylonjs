@@ -15,8 +15,8 @@ type SharpenPostProcess struct{ *PostProcess }
 func (s *SharpenPostProcess) JSObject() js.Value { return s.p }
 
 // SharpenPostProcess returns a SharpenPostProcess JavaScript class.
-func (b *Babylon) SharpenPostProcess() *SharpenPostProcess {
-	p := b.ctx.Get("SharpenPostProcess")
+func (ba *Babylon) SharpenPostProcess() *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess")
 	return SharpenPostProcessFromJSObject(p)
 }
 
@@ -27,26 +27,26 @@ func SharpenPostProcessFromJSObject(p js.Value) *SharpenPostProcess {
 
 // NewSharpenPostProcessOpts contains optional parameters for NewSharpenPostProcess.
 type NewSharpenPostProcessOpts struct {
-	SamplingMode *float64
+	SamplingMode *JSFloat64
 
 	Engine *Engine
 
-	Reusable *bool
+	Reusable *JSBool
 
-	TextureType *float64
+	TextureType *JSFloat64
 
-	BlockCompilation *bool
+	BlockCompilation *JSBool
 }
 
 // NewSharpenPostProcess returns a new SharpenPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess
-func (b *Babylon) NewSharpenPostProcess(name string, options float64, camera *Camera, opts *NewSharpenPostProcessOpts) *SharpenPostProcess {
+func (ba *Babylon) NewSharpenPostProcess(name string, options float64, camera *Camera, opts *NewSharpenPostProcessOpts) *SharpenPostProcess {
 	if opts == nil {
 		opts = &NewSharpenPostProcessOpts{}
 	}
 
-	p := b.ctx.Get("SharpenPostProcess").New(name, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType, opts.BlockCompilation.JSObject())
+	p := ba.ctx.Get("SharpenPostProcess").New(name, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable, opts.TextureType, opts.BlockCompilation)
 	return SharpenPostProcessFromJSObject(p)
 }
 

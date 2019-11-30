@@ -14,8 +14,8 @@ type Xbox360Pad struct{ *Gamepad }
 func (x *Xbox360Pad) JSObject() js.Value { return x.p }
 
 // Xbox360Pad returns a Xbox360Pad JavaScript class.
-func (b *Babylon) Xbox360Pad() *Xbox360Pad {
-	p := b.ctx.Get("Xbox360Pad")
+func (ba *Babylon) Xbox360Pad() *Xbox360Pad {
+	p := ba.ctx.Get("Xbox360Pad")
 	return Xbox360PadFromJSObject(p)
 }
 
@@ -26,18 +26,18 @@ func Xbox360PadFromJSObject(p js.Value) *Xbox360Pad {
 
 // NewXbox360PadOpts contains optional parameters for NewXbox360Pad.
 type NewXbox360PadOpts struct {
-	XboxOne *bool
+	XboxOne *JSBool
 }
 
 // NewXbox360Pad returns a new Xbox360Pad object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.xbox360pad
-func (b *Babylon) NewXbox360Pad(id string, index float64, gamepad interface{}, opts *NewXbox360PadOpts) *Xbox360Pad {
+func (ba *Babylon) NewXbox360Pad(id string, index float64, gamepad interface{}, opts *NewXbox360PadOpts) *Xbox360Pad {
 	if opts == nil {
 		opts = &NewXbox360PadOpts{}
 	}
 
-	p := b.ctx.Get("Xbox360Pad").New(id, index, gamepad, opts.XboxOne.JSObject())
+	p := ba.ctx.Get("Xbox360Pad").New(id, index, gamepad, opts.XboxOne)
 	return Xbox360PadFromJSObject(p)
 }
 

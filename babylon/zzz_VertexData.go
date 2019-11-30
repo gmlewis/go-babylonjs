@@ -14,8 +14,8 @@ type VertexData struct{ p js.Value }
 func (v *VertexData) JSObject() js.Value { return v.p }
 
 // VertexData returns a VertexData JavaScript class.
-func (b *Babylon) VertexData() *VertexData {
-	p := b.ctx.Get("VertexData")
+func (ba *Babylon) VertexData() *VertexData {
+	p := ba.ctx.Get("VertexData")
 	return VertexDataFromJSObject(p)
 }
 

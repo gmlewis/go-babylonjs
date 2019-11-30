@@ -16,8 +16,8 @@ type SpriteManager struct{ p js.Value }
 func (s *SpriteManager) JSObject() js.Value { return s.p }
 
 // SpriteManager returns a SpriteManager JavaScript class.
-func (b *Babylon) SpriteManager() *SpriteManager {
-	p := b.ctx.Get("SpriteManager")
+func (ba *Babylon) SpriteManager() *SpriteManager {
+	p := ba.ctx.Get("SpriteManager")
 	return SpriteManagerFromJSObject(p)
 }
 
@@ -28,24 +28,24 @@ func SpriteManagerFromJSObject(p js.Value) *SpriteManager {
 
 // NewSpriteManagerOpts contains optional parameters for NewSpriteManager.
 type NewSpriteManagerOpts struct {
-	Epsilon *float64
+	Epsilon *JSFloat64
 
-	SamplingMode *float64
+	SamplingMode *JSFloat64
 
-	FromPacked *bool
+	FromPacked *JSBool
 
-	SpriteJSON *string
+	SpriteJSON *JSString
 }
 
 // NewSpriteManager returns a new SpriteManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritemanager
-func (b *Babylon) NewSpriteManager(name string, imgUrl string, capacity float64, cellSize interface{}, scene *Scene, opts *NewSpriteManagerOpts) *SpriteManager {
+func (ba *Babylon) NewSpriteManager(name string, imgUrl string, capacity float64, cellSize interface{}, scene *Scene, opts *NewSpriteManagerOpts) *SpriteManager {
 	if opts == nil {
 		opts = &NewSpriteManagerOpts{}
 	}
 
-	p := b.ctx.Get("SpriteManager").New(name, imgUrl, capacity, cellSize, scene.JSObject(), opts.Epsilon, opts.SamplingMode, opts.FromPacked.JSObject(), opts.SpriteJSON)
+	p := ba.ctx.Get("SpriteManager").New(name, imgUrl, capacity, cellSize, scene.JSObject(), opts.Epsilon, opts.SamplingMode, opts.FromPacked, opts.SpriteJSON)
 	return SpriteManagerFromJSObject(p)
 }
 

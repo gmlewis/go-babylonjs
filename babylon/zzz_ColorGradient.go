@@ -14,8 +14,8 @@ type ColorGradient struct{ p js.Value }
 func (c *ColorGradient) JSObject() js.Value { return c.p }
 
 // ColorGradient returns a ColorGradient JavaScript class.
-func (b *Babylon) ColorGradient() *ColorGradient {
-	p := b.ctx.Get("ColorGradient")
+func (ba *Babylon) ColorGradient() *ColorGradient {
+	p := ba.ctx.Get("ColorGradient")
 	return ColorGradientFromJSObject(p)
 }
 

@@ -14,8 +14,8 @@ type EffectWrapper struct{ p js.Value }
 func (e *EffectWrapper) JSObject() js.Value { return e.p }
 
 // EffectWrapper returns a EffectWrapper JavaScript class.
-func (b *Babylon) EffectWrapper() *EffectWrapper {
-	p := b.ctx.Get("EffectWrapper")
+func (ba *Babylon) EffectWrapper() *EffectWrapper {
+	p := ba.ctx.Get("EffectWrapper")
 	return EffectWrapperFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func EffectWrapperFromJSObject(p js.Value) *EffectWrapper {
 // NewEffectWrapper returns a new EffectWrapper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectwrapper
-func (b *Babylon) NewEffectWrapper(creationOptions js.Value) *EffectWrapper {
-	p := b.ctx.Get("EffectWrapper").New(creationOptions)
+func (ba *Babylon) NewEffectWrapper(creationOptions js.Value) *EffectWrapper {
+	p := ba.ctx.Get("EffectWrapper").New(creationOptions)
 	return EffectWrapperFromJSObject(p)
 }
 

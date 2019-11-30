@@ -14,8 +14,8 @@ type MeshAssetTask struct{ *AbstractAssetTask }
 func (m *MeshAssetTask) JSObject() js.Value { return m.p }
 
 // MeshAssetTask returns a MeshAssetTask JavaScript class.
-func (b *Babylon) MeshAssetTask() *MeshAssetTask {
-	p := b.ctx.Get("MeshAssetTask")
+func (ba *Babylon) MeshAssetTask() *MeshAssetTask {
+	p := ba.ctx.Get("MeshAssetTask")
 	return MeshAssetTaskFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func MeshAssetTaskFromJSObject(p js.Value) *MeshAssetTask {
 // NewMeshAssetTask returns a new MeshAssetTask object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.meshassettask
-func (b *Babylon) NewMeshAssetTask(name string, meshesNames interface{}, rootUrl string, sceneFilename string) *MeshAssetTask {
-	p := b.ctx.Get("MeshAssetTask").New(name, meshesNames, rootUrl, sceneFilename)
+func (ba *Babylon) NewMeshAssetTask(name string, meshesNames interface{}, rootUrl string, sceneFilename string) *MeshAssetTask {
+	p := ba.ctx.Get("MeshAssetTask").New(name, meshesNames, rootUrl, sceneFilename)
 	return MeshAssetTaskFromJSObject(p)
 }
 

@@ -14,8 +14,8 @@ type PBRSubSurfaceConfiguration struct{ p js.Value }
 func (p *PBRSubSurfaceConfiguration) JSObject() js.Value { return p.p }
 
 // PBRSubSurfaceConfiguration returns a PBRSubSurfaceConfiguration JavaScript class.
-func (b *Babylon) PBRSubSurfaceConfiguration() *PBRSubSurfaceConfiguration {
-	p := b.ctx.Get("PBRSubSurfaceConfiguration")
+func (ba *Babylon) PBRSubSurfaceConfiguration() *PBRSubSurfaceConfiguration {
+	p := ba.ctx.Get("PBRSubSurfaceConfiguration")
 	return PBRSubSurfaceConfigurationFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func PBRSubSurfaceConfigurationFromJSObject(p js.Value) *PBRSubSurfaceConfigurat
 // NewPBRSubSurfaceConfiguration returns a new PBRSubSurfaceConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsubsurfaceconfiguration
-func (b *Babylon) NewPBRSubSurfaceConfiguration(markAllSubMeshesAsTexturesDirty func()) *PBRSubSurfaceConfiguration {
-	p := b.ctx.Get("PBRSubSurfaceConfiguration").New(markAllSubMeshesAsTexturesDirty)
+func (ba *Babylon) NewPBRSubSurfaceConfiguration(markAllSubMeshesAsTexturesDirty func()) *PBRSubSurfaceConfiguration {
+	p := ba.ctx.Get("PBRSubSurfaceConfiguration").New(markAllSubMeshesAsTexturesDirty)
 	return PBRSubSurfaceConfigurationFromJSObject(p)
 }
 

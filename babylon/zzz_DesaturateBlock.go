@@ -14,8 +14,8 @@ type DesaturateBlock struct{ *NodeMaterialBlock }
 func (d *DesaturateBlock) JSObject() js.Value { return d.p }
 
 // DesaturateBlock returns a DesaturateBlock JavaScript class.
-func (b *Babylon) DesaturateBlock() *DesaturateBlock {
-	p := b.ctx.Get("DesaturateBlock")
+func (ba *Babylon) DesaturateBlock() *DesaturateBlock {
+	p := ba.ctx.Get("DesaturateBlock")
 	return DesaturateBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func DesaturateBlockFromJSObject(p js.Value) *DesaturateBlock {
 // NewDesaturateBlock returns a new DesaturateBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.desaturateblock
-func (b *Babylon) NewDesaturateBlock(name string) *DesaturateBlock {
-	p := b.ctx.Get("DesaturateBlock").New(name)
+func (ba *Babylon) NewDesaturateBlock(name string) *DesaturateBlock {
+	p := ba.ctx.Get("DesaturateBlock").New(name)
 	return DesaturateBlockFromJSObject(p)
 }
 

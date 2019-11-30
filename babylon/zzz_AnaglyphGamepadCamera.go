@@ -16,8 +16,8 @@ type AnaglyphGamepadCamera struct{ *GamepadCamera }
 func (a *AnaglyphGamepadCamera) JSObject() js.Value { return a.p }
 
 // AnaglyphGamepadCamera returns a AnaglyphGamepadCamera JavaScript class.
-func (b *Babylon) AnaglyphGamepadCamera() *AnaglyphGamepadCamera {
-	p := b.ctx.Get("AnaglyphGamepadCamera")
+func (ba *Babylon) AnaglyphGamepadCamera() *AnaglyphGamepadCamera {
+	p := ba.ctx.Get("AnaglyphGamepadCamera")
 	return AnaglyphGamepadCameraFromJSObject(p)
 }
 
@@ -29,8 +29,8 @@ func AnaglyphGamepadCameraFromJSObject(p js.Value) *AnaglyphGamepadCamera {
 // NewAnaglyphGamepadCamera returns a new AnaglyphGamepadCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphgamepadcamera
-func (b *Babylon) NewAnaglyphGamepadCamera(name string, position *Vector3, interaxialDistance float64, scene *Scene) *AnaglyphGamepadCamera {
-	p := b.ctx.Get("AnaglyphGamepadCamera").New(name, position.JSObject(), interaxialDistance, scene.JSObject())
+func (ba *Babylon) NewAnaglyphGamepadCamera(name string, position *Vector3, interaxialDistance float64, scene *Scene) *AnaglyphGamepadCamera {
+	p := ba.ctx.Get("AnaglyphGamepadCamera").New(name, position.JSObject(), interaxialDistance, scene.JSObject())
 	return AnaglyphGamepadCameraFromJSObject(p)
 }
 

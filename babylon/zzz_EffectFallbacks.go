@@ -15,8 +15,8 @@ type EffectFallbacks struct{ p js.Value }
 func (e *EffectFallbacks) JSObject() js.Value { return e.p }
 
 // EffectFallbacks returns a EffectFallbacks JavaScript class.
-func (b *Babylon) EffectFallbacks() *EffectFallbacks {
-	p := b.ctx.Get("EffectFallbacks")
+func (ba *Babylon) EffectFallbacks() *EffectFallbacks {
+	p := ba.ctx.Get("EffectFallbacks")
 	return EffectFallbacksFromJSObject(p)
 }
 

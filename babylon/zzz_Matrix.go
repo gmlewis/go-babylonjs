@@ -14,8 +14,8 @@ type Matrix struct{ p js.Value }
 func (m *Matrix) JSObject() js.Value { return m.p }
 
 // Matrix returns a Matrix JavaScript class.
-func (b *Babylon) Matrix() *Matrix {
-	p := b.ctx.Get("Matrix")
+func (ba *Babylon) Matrix() *Matrix {
+	p := ba.ctx.Get("Matrix")
 	return MatrixFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func MatrixFromJSObject(p js.Value) *Matrix {
 // NewMatrix returns a new Matrix object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.matrix
-func (b *Babylon) NewMatrix() *Matrix {
-	p := b.ctx.Get("Matrix").New()
+func (ba *Babylon) NewMatrix() *Matrix {
+	p := ba.ctx.Get("Matrix").New()
 	return MatrixFromJSObject(p)
 }
 

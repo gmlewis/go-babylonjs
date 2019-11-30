@@ -17,8 +17,8 @@ type DepthOfFieldBlurPostProcess struct{ *BlurPostProcess }
 func (d *DepthOfFieldBlurPostProcess) JSObject() js.Value { return d.p }
 
 // DepthOfFieldBlurPostProcess returns a DepthOfFieldBlurPostProcess JavaScript class.
-func (b *Babylon) DepthOfFieldBlurPostProcess() *DepthOfFieldBlurPostProcess {
-	p := b.ctx.Get("DepthOfFieldBlurPostProcess")
+func (ba *Babylon) DepthOfFieldBlurPostProcess() *DepthOfFieldBlurPostProcess {
+	p := ba.ctx.Get("DepthOfFieldBlurPostProcess")
 	return DepthOfFieldBlurPostProcessFromJSObject(p)
 }
 
@@ -31,26 +31,26 @@ func DepthOfFieldBlurPostProcessFromJSObject(p js.Value) *DepthOfFieldBlurPostPr
 type NewDepthOfFieldBlurPostProcessOpts struct {
 	ImageToBlur *PostProcess
 
-	SamplingMode *float64
+	SamplingMode *JSFloat64
 
 	Engine *Engine
 
-	Reusable *bool
+	Reusable *JSBool
 
-	TextureType *float64
+	TextureType *JSFloat64
 
-	BlockCompilation *bool
+	BlockCompilation *JSBool
 }
 
 // NewDepthOfFieldBlurPostProcess returns a new DepthOfFieldBlurPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthoffieldblurpostprocess
-func (b *Babylon) NewDepthOfFieldBlurPostProcess(name string, scene *Scene, direction *Vector2, kernel float64, options float64, camera *Camera, circleOfConfusion *PostProcess, opts *NewDepthOfFieldBlurPostProcessOpts) *DepthOfFieldBlurPostProcess {
+func (ba *Babylon) NewDepthOfFieldBlurPostProcess(name string, scene *Scene, direction *Vector2, kernel float64, options float64, camera *Camera, circleOfConfusion *PostProcess, opts *NewDepthOfFieldBlurPostProcessOpts) *DepthOfFieldBlurPostProcess {
 	if opts == nil {
 		opts = &NewDepthOfFieldBlurPostProcessOpts{}
 	}
 
-	p := b.ctx.Get("DepthOfFieldBlurPostProcess").New(name, scene.JSObject(), direction.JSObject(), kernel, options, camera.JSObject(), circleOfConfusion.JSObject(), opts.ImageToBlur.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType, opts.BlockCompilation.JSObject())
+	p := ba.ctx.Get("DepthOfFieldBlurPostProcess").New(name, scene.JSObject(), direction.JSObject(), kernel, options, camera.JSObject(), circleOfConfusion.JSObject(), opts.ImageToBlur.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable, opts.TextureType, opts.BlockCompilation)
 	return DepthOfFieldBlurPostProcessFromJSObject(p)
 }
 

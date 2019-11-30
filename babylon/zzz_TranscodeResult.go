@@ -14,8 +14,8 @@ type TranscodeResult struct{ p js.Value }
 func (t *TranscodeResult) JSObject() js.Value { return t.p }
 
 // TranscodeResult returns a TranscodeResult JavaScript class.
-func (b *Babylon) TranscodeResult() *TranscodeResult {
-	p := b.ctx.Get("TranscodeResult")
+func (ba *Babylon) TranscodeResult() *TranscodeResult {
+	p := ba.ctx.Get("TranscodeResult")
 	return TranscodeResultFromJSObject(p)
 }
 

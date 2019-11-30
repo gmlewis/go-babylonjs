@@ -14,8 +14,8 @@ type LinesBuilder struct{ p js.Value }
 func (l *LinesBuilder) JSObject() js.Value { return l.p }
 
 // LinesBuilder returns a LinesBuilder JavaScript class.
-func (b *Babylon) LinesBuilder() *LinesBuilder {
-	p := b.ctx.Get("LinesBuilder")
+func (ba *Babylon) LinesBuilder() *LinesBuilder {
+	p := ba.ctx.Get("LinesBuilder")
 	return LinesBuilderFromJSObject(p)
 }
 

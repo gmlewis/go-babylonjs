@@ -14,8 +14,8 @@ type BasisFileInfo struct{ p js.Value }
 func (b *BasisFileInfo) JSObject() js.Value { return b.p }
 
 // BasisFileInfo returns a BasisFileInfo JavaScript class.
-func (b *Babylon) BasisFileInfo() *BasisFileInfo {
-	p := b.ctx.Get("BasisFileInfo")
+func (ba *Babylon) BasisFileInfo() *BasisFileInfo {
+	p := ba.ctx.Get("BasisFileInfo")
 	return BasisFileInfoFromJSObject(p)
 }
 

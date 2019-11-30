@@ -14,8 +14,8 @@ type Condition struct{ p js.Value }
 func (c *Condition) JSObject() js.Value { return c.p }
 
 // Condition returns a Condition JavaScript class.
-func (b *Babylon) Condition() *Condition {
-	p := b.ctx.Get("Condition")
+func (ba *Babylon) Condition() *Condition {
+	p := ba.ctx.Get("Condition")
 	return ConditionFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func ConditionFromJSObject(p js.Value) *Condition {
 // NewCondition returns a new Condition object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.condition
-func (b *Babylon) NewCondition(actionManager *ActionManager) *Condition {
-	p := b.ctx.Get("Condition").New(actionManager.JSObject())
+func (ba *Babylon) NewCondition(actionManager *ActionManager) *Condition {
+	p := ba.ctx.Get("Condition").New(actionManager.JSObject())
 	return ConditionFromJSObject(p)
 }
 

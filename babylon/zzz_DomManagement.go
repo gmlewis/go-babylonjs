@@ -15,8 +15,8 @@ type DomManagement struct{ p js.Value }
 func (d *DomManagement) JSObject() js.Value { return d.p }
 
 // DomManagement returns a DomManagement JavaScript class.
-func (b *Babylon) DomManagement() *DomManagement {
-	p := b.ctx.Get("DomManagement")
+func (ba *Babylon) DomManagement() *DomManagement {
+	p := ba.ctx.Get("DomManagement")
 	return DomManagementFromJSObject(p)
 }
 

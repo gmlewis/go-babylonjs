@@ -16,8 +16,8 @@ type Action struct{ p js.Value }
 func (a *Action) JSObject() js.Value { return a.p }
 
 // Action returns a Action JavaScript class.
-func (b *Babylon) Action() *Action {
-	p := b.ctx.Get("Action")
+func (ba *Babylon) Action() *Action {
+	p := ba.ctx.Get("Action")
 	return ActionFromJSObject(p)
 }
 
@@ -34,12 +34,12 @@ type NewActionOpts struct {
 // NewAction returns a new Action object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.action
-func (b *Babylon) NewAction(triggerOptions interface{}, opts *NewActionOpts) *Action {
+func (ba *Babylon) NewAction(triggerOptions interface{}, opts *NewActionOpts) *Action {
 	if opts == nil {
 		opts = &NewActionOpts{}
 	}
 
-	p := b.ctx.Get("Action").New(triggerOptions, opts.Condition.JSObject())
+	p := ba.ctx.Get("Action").New(triggerOptions, opts.Condition.JSObject())
 	return ActionFromJSObject(p)
 }
 

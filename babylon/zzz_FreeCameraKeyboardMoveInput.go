@@ -16,8 +16,8 @@ type FreeCameraKeyboardMoveInput struct{ p js.Value }
 func (f *FreeCameraKeyboardMoveInput) JSObject() js.Value { return f.p }
 
 // FreeCameraKeyboardMoveInput returns a FreeCameraKeyboardMoveInput JavaScript class.
-func (b *Babylon) FreeCameraKeyboardMoveInput() *FreeCameraKeyboardMoveInput {
-	p := b.ctx.Get("FreeCameraKeyboardMoveInput")
+func (ba *Babylon) FreeCameraKeyboardMoveInput() *FreeCameraKeyboardMoveInput {
+	p := ba.ctx.Get("FreeCameraKeyboardMoveInput")
 	return FreeCameraKeyboardMoveInputFromJSObject(p)
 }
 

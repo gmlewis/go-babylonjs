@@ -15,8 +15,8 @@ type PointerInfoPre struct{ *PointerInfoBase }
 func (p *PointerInfoPre) JSObject() js.Value { return p.p }
 
 // PointerInfoPre returns a PointerInfoPre JavaScript class.
-func (b *Babylon) PointerInfoPre() *PointerInfoPre {
-	p := b.ctx.Get("PointerInfoPre")
+func (ba *Babylon) PointerInfoPre() *PointerInfoPre {
+	p := ba.ctx.Get("PointerInfoPre")
 	return PointerInfoPreFromJSObject(p)
 }
 
@@ -28,8 +28,8 @@ func PointerInfoPreFromJSObject(p js.Value) *PointerInfoPre {
 // NewPointerInfoPre returns a new PointerInfoPre object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointerinfopre
-func (b *Babylon) NewPointerInfoPre(jsType float64, event PointerEvent, localX float64, localY float64) *PointerInfoPre {
-	p := b.ctx.Get("PointerInfoPre").New(jsType, event.JSObject(), localX, localY)
+func (ba *Babylon) NewPointerInfoPre(jsType float64, event js.Value, localX float64, localY float64) *PointerInfoPre {
+	p := ba.ctx.Get("PointerInfoPre").New(jsType, event, localX, localY)
 	return PointerInfoPreFromJSObject(p)
 }
 

@@ -15,8 +15,8 @@ type EngineStore struct{ p js.Value }
 func (e *EngineStore) JSObject() js.Value { return e.p }
 
 // EngineStore returns a EngineStore JavaScript class.
-func (b *Babylon) EngineStore() *EngineStore {
-	p := b.ctx.Get("EngineStore")
+func (ba *Babylon) EngineStore() *EngineStore {
+	p := ba.ctx.Get("EngineStore")
 	return EngineStoreFromJSObject(p)
 }
 

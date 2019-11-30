@@ -14,8 +14,8 @@ type Grid struct{ *Container }
 func (g *Grid) JSObject() js.Value { return g.p }
 
 // Grid returns a Grid JavaScript class.
-func (b *Babylon) Grid() *Grid {
-	p := b.ctx.Get("Grid")
+func (ba *Babylon) Grid() *Grid {
+	p := ba.ctx.Get("Grid")
 	return GridFromJSObject(p)
 }
 
@@ -26,18 +26,18 @@ func GridFromJSObject(p js.Value) *Grid {
 
 // NewGridOpts contains optional parameters for NewGrid.
 type NewGridOpts struct {
-	Name *string
+	Name *JSString
 }
 
 // NewGrid returns a new Grid object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.grid
-func (b *Babylon) NewGrid(opts *NewGridOpts) *Grid {
+func (ba *Babylon) NewGrid(opts *NewGridOpts) *Grid {
 	if opts == nil {
 		opts = &NewGridOpts{}
 	}
 
-	p := b.ctx.Get("Grid").New(opts.Name)
+	p := ba.ctx.Get("Grid").New(opts.Name)
 	return GridFromJSObject(p)
 }
 

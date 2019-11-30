@@ -14,8 +14,8 @@ type PhysicsViewer struct{ p js.Value }
 func (p *PhysicsViewer) JSObject() js.Value { return p.p }
 
 // PhysicsViewer returns a PhysicsViewer JavaScript class.
-func (b *Babylon) PhysicsViewer() *PhysicsViewer {
-	p := b.ctx.Get("PhysicsViewer")
+func (ba *Babylon) PhysicsViewer() *PhysicsViewer {
+	p := ba.ctx.Get("PhysicsViewer")
 	return PhysicsViewerFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func PhysicsViewerFromJSObject(p js.Value) *PhysicsViewer {
 // NewPhysicsViewer returns a new PhysicsViewer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsviewer
-func (b *Babylon) NewPhysicsViewer(scene *Scene) *PhysicsViewer {
-	p := b.ctx.Get("PhysicsViewer").New(scene.JSObject())
+func (ba *Babylon) NewPhysicsViewer(scene *Scene) *PhysicsViewer {
+	p := ba.ctx.Get("PhysicsViewer").New(scene.JSObject())
 	return PhysicsViewerFromJSObject(p)
 }
 

@@ -14,8 +14,8 @@ type SerializationHelper struct{ p js.Value }
 func (s *SerializationHelper) JSObject() js.Value { return s.p }
 
 // SerializationHelper returns a SerializationHelper JavaScript class.
-func (b *Babylon) SerializationHelper() *SerializationHelper {
-	p := b.ctx.Get("SerializationHelper")
+func (ba *Babylon) SerializationHelper() *SerializationHelper {
+	p := ba.ctx.Get("SerializationHelper")
 	return SerializationHelperFromJSObject(p)
 }
 

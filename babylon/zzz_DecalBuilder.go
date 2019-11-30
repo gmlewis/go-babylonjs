@@ -14,8 +14,8 @@ type DecalBuilder struct{ p js.Value }
 func (d *DecalBuilder) JSObject() js.Value { return d.p }
 
 // DecalBuilder returns a DecalBuilder JavaScript class.
-func (b *Babylon) DecalBuilder() *DecalBuilder {
-	p := b.ctx.Get("DecalBuilder")
+func (ba *Babylon) DecalBuilder() *DecalBuilder {
+	p := ba.ctx.Get("DecalBuilder")
 	return DecalBuilderFromJSObject(p)
 }
 

@@ -15,8 +15,8 @@ type BoundingBoxRenderer struct{ p js.Value }
 func (b *BoundingBoxRenderer) JSObject() js.Value { return b.p }
 
 // BoundingBoxRenderer returns a BoundingBoxRenderer JavaScript class.
-func (b *Babylon) BoundingBoxRenderer() *BoundingBoxRenderer {
-	p := b.ctx.Get("BoundingBoxRenderer")
+func (ba *Babylon) BoundingBoxRenderer() *BoundingBoxRenderer {
+	p := ba.ctx.Get("BoundingBoxRenderer")
 	return BoundingBoxRendererFromJSObject(p)
 }
 
@@ -28,8 +28,8 @@ func BoundingBoxRendererFromJSObject(p js.Value) *BoundingBoxRenderer {
 // NewBoundingBoxRenderer returns a new BoundingBoxRenderer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingboxrenderer
-func (b *Babylon) NewBoundingBoxRenderer(scene *Scene) *BoundingBoxRenderer {
-	p := b.ctx.Get("BoundingBoxRenderer").New(scene.JSObject())
+func (ba *Babylon) NewBoundingBoxRenderer(scene *Scene) *BoundingBoxRenderer {
+	p := ba.ctx.Get("BoundingBoxRenderer").New(scene.JSObject())
 	return BoundingBoxRendererFromJSObject(p)
 }
 

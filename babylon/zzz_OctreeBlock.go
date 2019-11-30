@@ -16,8 +16,8 @@ type OctreeBlock struct{ p js.Value }
 func (o *OctreeBlock) JSObject() js.Value { return o.p }
 
 // OctreeBlock returns a OctreeBlock JavaScript class.
-func (b *Babylon) OctreeBlock() *OctreeBlock {
-	p := b.ctx.Get("OctreeBlock")
+func (ba *Babylon) OctreeBlock() *OctreeBlock {
+	p := ba.ctx.Get("OctreeBlock")
 	return OctreeBlockFromJSObject(p)
 }
 
@@ -29,8 +29,8 @@ func OctreeBlockFromJSObject(p js.Value) *OctreeBlock {
 // NewOctreeBlock returns a new OctreeBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octreeblock
-func (b *Babylon) NewOctreeBlock(minPoint *Vector3, maxPoint *Vector3, capacity float64, depth float64, maxDepth float64, creationFunc func()) *OctreeBlock {
-	p := b.ctx.Get("OctreeBlock").New(minPoint.JSObject(), maxPoint.JSObject(), capacity, depth, maxDepth, creationFunc)
+func (ba *Babylon) NewOctreeBlock(minPoint *Vector3, maxPoint *Vector3, capacity float64, depth float64, maxDepth float64, creationFunc func()) *OctreeBlock {
+	p := ba.ctx.Get("OctreeBlock").New(minPoint.JSObject(), maxPoint.JSObject(), capacity, depth, maxDepth, creationFunc)
 	return OctreeBlockFromJSObject(p)
 }
 

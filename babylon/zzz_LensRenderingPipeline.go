@@ -17,8 +17,8 @@ type LensRenderingPipeline struct{ *PostProcessRenderPipeline }
 func (l *LensRenderingPipeline) JSObject() js.Value { return l.p }
 
 // LensRenderingPipeline returns a LensRenderingPipeline JavaScript class.
-func (b *Babylon) LensRenderingPipeline() *LensRenderingPipeline {
-	p := b.ctx.Get("LensRenderingPipeline")
+func (ba *Babylon) LensRenderingPipeline() *LensRenderingPipeline {
+	p := ba.ctx.Get("LensRenderingPipeline")
 	return LensRenderingPipelineFromJSObject(p)
 }
 
@@ -29,7 +29,7 @@ func LensRenderingPipelineFromJSObject(p js.Value) *LensRenderingPipeline {
 
 // NewLensRenderingPipelineOpts contains optional parameters for NewLensRenderingPipeline.
 type NewLensRenderingPipelineOpts struct {
-	Ratio *float64
+	Ratio *JSFloat64
 
 	Cameras *Camera
 }
@@ -37,12 +37,12 @@ type NewLensRenderingPipelineOpts struct {
 // NewLensRenderingPipeline returns a new LensRenderingPipeline object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensrenderingpipeline
-func (b *Babylon) NewLensRenderingPipeline(name string, parameters interface{}, scene *Scene, opts *NewLensRenderingPipelineOpts) *LensRenderingPipeline {
+func (ba *Babylon) NewLensRenderingPipeline(name string, parameters interface{}, scene *Scene, opts *NewLensRenderingPipelineOpts) *LensRenderingPipeline {
 	if opts == nil {
 		opts = &NewLensRenderingPipelineOpts{}
 	}
 
-	p := b.ctx.Get("LensRenderingPipeline").New(name, parameters, scene.JSObject(), opts.Ratio, opts.Cameras.JSObject())
+	p := ba.ctx.Get("LensRenderingPipeline").New(name, parameters, scene.JSObject(), opts.Ratio, opts.Cameras.JSObject())
 	return LensRenderingPipelineFromJSObject(p)
 }
 

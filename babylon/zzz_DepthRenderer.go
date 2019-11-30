@@ -15,8 +15,8 @@ type DepthRenderer struct{ p js.Value }
 func (d *DepthRenderer) JSObject() js.Value { return d.p }
 
 // DepthRenderer returns a DepthRenderer JavaScript class.
-func (b *Babylon) DepthRenderer() *DepthRenderer {
-	p := b.ctx.Get("DepthRenderer")
+func (ba *Babylon) DepthRenderer() *DepthRenderer {
+	p := ba.ctx.Get("DepthRenderer")
 	return DepthRendererFromJSObject(p)
 }
 
@@ -27,22 +27,22 @@ func DepthRendererFromJSObject(p js.Value) *DepthRenderer {
 
 // NewDepthRendererOpts contains optional parameters for NewDepthRenderer.
 type NewDepthRendererOpts struct {
-	Type *float64
+	Type *JSFloat64
 
 	Camera *Camera
 
-	StoreNonLinearDepth *bool
+	StoreNonLinearDepth *JSBool
 }
 
 // NewDepthRenderer returns a new DepthRenderer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthrenderer
-func (b *Babylon) NewDepthRenderer(scene *Scene, opts *NewDepthRendererOpts) *DepthRenderer {
+func (ba *Babylon) NewDepthRenderer(scene *Scene, opts *NewDepthRendererOpts) *DepthRenderer {
 	if opts == nil {
 		opts = &NewDepthRendererOpts{}
 	}
 
-	p := b.ctx.Get("DepthRenderer").New(scene.JSObject(), opts.Type, opts.Camera.JSObject(), opts.StoreNonLinearDepth.JSObject())
+	p := ba.ctx.Get("DepthRenderer").New(scene.JSObject(), opts.Type, opts.Camera.JSObject(), opts.StoreNonLinearDepth)
 	return DepthRendererFromJSObject(p)
 }
 

@@ -14,8 +14,8 @@ type PanoramaToCubeMapTools struct{ p js.Value }
 func (p *PanoramaToCubeMapTools) JSObject() js.Value { return p.p }
 
 // PanoramaToCubeMapTools returns a PanoramaToCubeMapTools JavaScript class.
-func (b *Babylon) PanoramaToCubeMapTools() *PanoramaToCubeMapTools {
-	p := b.ctx.Get("PanoramaToCubeMapTools")
+func (ba *Babylon) PanoramaToCubeMapTools() *PanoramaToCubeMapTools {
+	p := ba.ctx.Get("PanoramaToCubeMapTools")
 	return PanoramaToCubeMapToolsFromJSObject(p)
 }
 

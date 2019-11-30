@@ -14,8 +14,8 @@ type ShaderSpecialParts struct{ p js.Value }
 func (s *ShaderSpecialParts) JSObject() js.Value { return s.p }
 
 // ShaderSpecialParts returns a ShaderSpecialParts JavaScript class.
-func (b *Babylon) ShaderSpecialParts() *ShaderSpecialParts {
-	p := b.ctx.Get("ShaderSpecialParts")
+func (ba *Babylon) ShaderSpecialParts() *ShaderSpecialParts {
+	p := ba.ctx.Get("ShaderSpecialParts")
 	return ShaderSpecialPartsFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func ShaderSpecialPartsFromJSObject(p js.Value) *ShaderSpecialParts {
 // NewShaderSpecialParts returns a new ShaderSpecialParts object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shaderspecialparts
-func (b *Babylon) NewShaderSpecialParts() *ShaderSpecialParts {
-	p := b.ctx.Get("ShaderSpecialParts").New()
+func (ba *Babylon) NewShaderSpecialParts() *ShaderSpecialParts {
+	p := ba.ctx.Get("ShaderSpecialParts").New()
 	return ShaderSpecialPartsFromJSObject(p)
 }
 

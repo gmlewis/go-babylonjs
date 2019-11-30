@@ -16,8 +16,8 @@ type ArcRotateCameraVRDeviceOrientationInput struct{ p js.Value }
 func (a *ArcRotateCameraVRDeviceOrientationInput) JSObject() js.Value { return a.p }
 
 // ArcRotateCameraVRDeviceOrientationInput returns a ArcRotateCameraVRDeviceOrientationInput JavaScript class.
-func (b *Babylon) ArcRotateCameraVRDeviceOrientationInput() *ArcRotateCameraVRDeviceOrientationInput {
-	p := b.ctx.Get("ArcRotateCameraVRDeviceOrientationInput")
+func (ba *Babylon) ArcRotateCameraVRDeviceOrientationInput() *ArcRotateCameraVRDeviceOrientationInput {
+	p := ba.ctx.Get("ArcRotateCameraVRDeviceOrientationInput")
 	return ArcRotateCameraVRDeviceOrientationInputFromJSObject(p)
 }
 
@@ -29,8 +29,8 @@ func ArcRotateCameraVRDeviceOrientationInputFromJSObject(p js.Value) *ArcRotateC
 // NewArcRotateCameraVRDeviceOrientationInput returns a new ArcRotateCameraVRDeviceOrientationInput object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecameravrdeviceorientationinput
-func (b *Babylon) NewArcRotateCameraVRDeviceOrientationInput() *ArcRotateCameraVRDeviceOrientationInput {
-	p := b.ctx.Get("ArcRotateCameraVRDeviceOrientationInput").New()
+func (ba *Babylon) NewArcRotateCameraVRDeviceOrientationInput() *ArcRotateCameraVRDeviceOrientationInput {
+	p := ba.ctx.Get("ArcRotateCameraVRDeviceOrientationInput").New()
 	return ArcRotateCameraVRDeviceOrientationInputFromJSObject(p)
 }
 

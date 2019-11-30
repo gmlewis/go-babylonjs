@@ -14,8 +14,8 @@ type DeepCopier struct{ p js.Value }
 func (d *DeepCopier) JSObject() js.Value { return d.p }
 
 // DeepCopier returns a DeepCopier JavaScript class.
-func (b *Babylon) DeepCopier() *DeepCopier {
-	p := b.ctx.Get("DeepCopier")
+func (ba *Babylon) DeepCopier() *DeepCopier {
+	p := ba.ctx.Get("DeepCopier")
 	return DeepCopierFromJSObject(p)
 }
 

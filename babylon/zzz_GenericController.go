@@ -14,8 +14,8 @@ type GenericController struct{ *WebVRController }
 func (g *GenericController) JSObject() js.Value { return g.p }
 
 // GenericController returns a GenericController JavaScript class.
-func (b *Babylon) GenericController() *GenericController {
-	p := b.ctx.Get("GenericController")
+func (ba *Babylon) GenericController() *GenericController {
+	p := ba.ctx.Get("GenericController")
 	return GenericControllerFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func GenericControllerFromJSObject(p js.Value) *GenericController {
 // NewGenericController returns a new GenericController object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.genericcontroller
-func (b *Babylon) NewGenericController(vrGamepad interface{}) *GenericController {
-	p := b.ctx.Get("GenericController").New(vrGamepad)
+func (ba *Babylon) NewGenericController(vrGamepad interface{}) *GenericController {
+	p := ba.ctx.Get("GenericController").New(vrGamepad)
 	return GenericControllerFromJSObject(p)
 }
 

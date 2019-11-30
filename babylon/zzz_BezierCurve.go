@@ -14,8 +14,8 @@ type BezierCurve struct{ p js.Value }
 func (b *BezierCurve) JSObject() js.Value { return b.p }
 
 // BezierCurve returns a BezierCurve JavaScript class.
-func (b *Babylon) BezierCurve() *BezierCurve {
-	p := b.ctx.Get("BezierCurve")
+func (ba *Babylon) BezierCurve() *BezierCurve {
+	p := ba.ctx.Get("BezierCurve")
 	return BezierCurveFromJSObject(p)
 }
 

@@ -14,8 +14,8 @@ type AddBlock struct{ *NodeMaterialBlock }
 func (a *AddBlock) JSObject() js.Value { return a.p }
 
 // AddBlock returns a AddBlock JavaScript class.
-func (b *Babylon) AddBlock() *AddBlock {
-	p := b.ctx.Get("AddBlock")
+func (ba *Babylon) AddBlock() *AddBlock {
+	p := ba.ctx.Get("AddBlock")
 	return AddBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func AddBlockFromJSObject(p js.Value) *AddBlock {
 // NewAddBlock returns a new AddBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.addblock
-func (b *Babylon) NewAddBlock(name string) *AddBlock {
-	p := b.ctx.Get("AddBlock").New(name)
+func (ba *Babylon) NewAddBlock(name string) *AddBlock {
+	p := ba.ctx.Get("AddBlock").New(name)
 	return AddBlockFromJSObject(p)
 }
 

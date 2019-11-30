@@ -14,8 +14,8 @@ type DepthOfFieldEffect struct{ *PostProcessRenderEffect }
 func (d *DepthOfFieldEffect) JSObject() js.Value { return d.p }
 
 // DepthOfFieldEffect returns a DepthOfFieldEffect JavaScript class.
-func (b *Babylon) DepthOfFieldEffect() *DepthOfFieldEffect {
-	p := b.ctx.Get("DepthOfFieldEffect")
+func (ba *Babylon) DepthOfFieldEffect() *DepthOfFieldEffect {
+	p := ba.ctx.Get("DepthOfFieldEffect")
 	return DepthOfFieldEffectFromJSObject(p)
 }
 
@@ -28,20 +28,20 @@ func DepthOfFieldEffectFromJSObject(p js.Value) *DepthOfFieldEffect {
 type NewDepthOfFieldEffectOpts struct {
 	BlurLevel *DepthOfFieldEffectBlurLevel
 
-	PipelineTextureType *float64
+	PipelineTextureType *JSFloat64
 
-	BlockCompilation *bool
+	BlockCompilation *JSBool
 }
 
 // NewDepthOfFieldEffect returns a new DepthOfFieldEffect object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthoffieldeffect
-func (b *Babylon) NewDepthOfFieldEffect(scene *Scene, depthTexture *RenderTargetTexture, opts *NewDepthOfFieldEffectOpts) *DepthOfFieldEffect {
+func (ba *Babylon) NewDepthOfFieldEffect(scene *Scene, depthTexture *RenderTargetTexture, opts *NewDepthOfFieldEffectOpts) *DepthOfFieldEffect {
 	if opts == nil {
 		opts = &NewDepthOfFieldEffectOpts{}
 	}
 
-	p := b.ctx.Get("DepthOfFieldEffect").New(scene.JSObject(), depthTexture.JSObject(), opts.BlurLevel.JSObject(), opts.PipelineTextureType, opts.BlockCompilation.JSObject())
+	p := ba.ctx.Get("DepthOfFieldEffect").New(scene.JSObject(), depthTexture.JSObject(), opts.BlurLevel.JSObject(), opts.PipelineTextureType, opts.BlockCompilation)
 	return DepthOfFieldEffectFromJSObject(p)
 }
 

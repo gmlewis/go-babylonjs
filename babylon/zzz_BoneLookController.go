@@ -16,8 +16,8 @@ type BoneLookController struct{ p js.Value }
 func (b *BoneLookController) JSObject() js.Value { return b.p }
 
 // BoneLookController returns a BoneLookController JavaScript class.
-func (b *Babylon) BoneLookController() *BoneLookController {
-	p := b.ctx.Get("BoneLookController")
+func (ba *Babylon) BoneLookController() *BoneLookController {
+	p := ba.ctx.Get("BoneLookController")
 	return BoneLookControllerFromJSObject(p)
 }
 
@@ -34,12 +34,12 @@ type NewBoneLookControllerOpts struct {
 // NewBoneLookController returns a new BoneLookController object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bonelookcontroller
-func (b *Babylon) NewBoneLookController(mesh *AbstractMesh, bone *Bone, target *Vector3, opts *NewBoneLookControllerOpts) *BoneLookController {
+func (ba *Babylon) NewBoneLookController(mesh *AbstractMesh, bone *Bone, target *Vector3, opts *NewBoneLookControllerOpts) *BoneLookController {
 	if opts == nil {
 		opts = &NewBoneLookControllerOpts{}
 	}
 
-	p := b.ctx.Get("BoneLookController").New(mesh.JSObject(), bone.JSObject(), target.JSObject(), opts.Options)
+	p := ba.ctx.Get("BoneLookController").New(mesh.JSObject(), bone.JSObject(), target.JSObject(), opts.Options)
 	return BoneLookControllerFromJSObject(p)
 }
 

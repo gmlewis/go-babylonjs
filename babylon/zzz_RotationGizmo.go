@@ -14,8 +14,8 @@ type RotationGizmo struct{ *Gizmo }
 func (r *RotationGizmo) JSObject() js.Value { return r.p }
 
 // RotationGizmo returns a RotationGizmo JavaScript class.
-func (b *Babylon) RotationGizmo() *RotationGizmo {
-	p := b.ctx.Get("RotationGizmo")
+func (ba *Babylon) RotationGizmo() *RotationGizmo {
+	p := ba.ctx.Get("RotationGizmo")
 	return RotationGizmoFromJSObject(p)
 }
 
@@ -28,20 +28,20 @@ func RotationGizmoFromJSObject(p js.Value) *RotationGizmo {
 type NewRotationGizmoOpts struct {
 	GizmoLayer *UtilityLayerRenderer
 
-	Tessellation *float64
+	Tessellation *JSFloat64
 
-	UseEulerRotation *bool
+	UseEulerRotation *JSBool
 }
 
 // NewRotationGizmo returns a new RotationGizmo object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rotationgizmo
-func (b *Babylon) NewRotationGizmo(opts *NewRotationGizmoOpts) *RotationGizmo {
+func (ba *Babylon) NewRotationGizmo(opts *NewRotationGizmoOpts) *RotationGizmo {
 	if opts == nil {
 		opts = &NewRotationGizmoOpts{}
 	}
 
-	p := b.ctx.Get("RotationGizmo").New(opts.GizmoLayer.JSObject(), opts.Tessellation, opts.UseEulerRotation.JSObject())
+	p := ba.ctx.Get("RotationGizmo").New(opts.GizmoLayer.JSObject(), opts.Tessellation, opts.UseEulerRotation)
 	return RotationGizmoFromJSObject(p)
 }
 

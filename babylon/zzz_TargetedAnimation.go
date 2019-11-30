@@ -14,8 +14,8 @@ type TargetedAnimation struct{ p js.Value }
 func (t *TargetedAnimation) JSObject() js.Value { return t.p }
 
 // TargetedAnimation returns a TargetedAnimation JavaScript class.
-func (b *Babylon) TargetedAnimation() *TargetedAnimation {
-	p := b.ctx.Get("TargetedAnimation")
+func (ba *Babylon) TargetedAnimation() *TargetedAnimation {
+	p := ba.ctx.Get("TargetedAnimation")
 	return TargetedAnimationFromJSObject(p)
 }
 

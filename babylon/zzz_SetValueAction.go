@@ -17,8 +17,8 @@ type SetValueAction struct{ *Action }
 func (s *SetValueAction) JSObject() js.Value { return s.p }
 
 // SetValueAction returns a SetValueAction JavaScript class.
-func (b *Babylon) SetValueAction() *SetValueAction {
-	p := b.ctx.Get("SetValueAction")
+func (ba *Babylon) SetValueAction() *SetValueAction {
+	p := ba.ctx.Get("SetValueAction")
 	return SetValueActionFromJSObject(p)
 }
 
@@ -35,12 +35,12 @@ type NewSetValueActionOpts struct {
 // NewSetValueAction returns a new SetValueAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.setvalueaction
-func (b *Babylon) NewSetValueAction(triggerOptions interface{}, target interface{}, propertyPath string, value interface{}, opts *NewSetValueActionOpts) *SetValueAction {
+func (ba *Babylon) NewSetValueAction(triggerOptions interface{}, target interface{}, propertyPath string, value interface{}, opts *NewSetValueActionOpts) *SetValueAction {
 	if opts == nil {
 		opts = &NewSetValueActionOpts{}
 	}
 
-	p := b.ctx.Get("SetValueAction").New(triggerOptions, target, propertyPath, value, opts.Condition.JSObject())
+	p := ba.ctx.Get("SetValueAction").New(triggerOptions, target, propertyPath, value, opts.Condition.JSObject())
 	return SetValueActionFromJSObject(p)
 }
 

@@ -14,8 +14,8 @@ type DistanceBlock struct{ *NodeMaterialBlock }
 func (d *DistanceBlock) JSObject() js.Value { return d.p }
 
 // DistanceBlock returns a DistanceBlock JavaScript class.
-func (b *Babylon) DistanceBlock() *DistanceBlock {
-	p := b.ctx.Get("DistanceBlock")
+func (ba *Babylon) DistanceBlock() *DistanceBlock {
+	p := ba.ctx.Get("DistanceBlock")
 	return DistanceBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func DistanceBlockFromJSObject(p js.Value) *DistanceBlock {
 // NewDistanceBlock returns a new DistanceBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.distanceblock
-func (b *Babylon) NewDistanceBlock(name string) *DistanceBlock {
-	p := b.ctx.Get("DistanceBlock").New(name)
+func (ba *Babylon) NewDistanceBlock(name string) *DistanceBlock {
+	p := ba.ctx.Get("DistanceBlock").New(name)
 	return DistanceBlockFromJSObject(p)
 }
 

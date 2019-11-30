@@ -14,8 +14,8 @@ type KeyPropertySet struct{ p js.Value }
 func (k *KeyPropertySet) JSObject() js.Value { return k.p }
 
 // KeyPropertySet returns a KeyPropertySet JavaScript class.
-func (b *Babylon) KeyPropertySet() *KeyPropertySet {
-	p := b.ctx.Get("KeyPropertySet")
+func (ba *Babylon) KeyPropertySet() *KeyPropertySet {
+	p := ba.ctx.Get("KeyPropertySet")
 	return KeyPropertySetFromJSObject(p)
 }
 

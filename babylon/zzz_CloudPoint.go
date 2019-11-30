@@ -14,8 +14,8 @@ type CloudPoint struct{ p js.Value }
 func (c *CloudPoint) JSObject() js.Value { return c.p }
 
 // CloudPoint returns a CloudPoint JavaScript class.
-func (b *Babylon) CloudPoint() *CloudPoint {
-	p := b.ctx.Get("CloudPoint")
+func (ba *Babylon) CloudPoint() *CloudPoint {
+	p := ba.ctx.Get("CloudPoint")
 	return CloudPointFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func CloudPointFromJSObject(p js.Value) *CloudPoint {
 // NewCloudPoint returns a new CloudPoint object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cloudpoint
-func (b *Babylon) NewCloudPoint(particleIndex float64, group *PointsGroup, groupId float64, idxInGroup float64, pcs *PointsCloudSystem) *CloudPoint {
-	p := b.ctx.Get("CloudPoint").New(particleIndex, group.JSObject(), groupId, idxInGroup, pcs.JSObject())
+func (ba *Babylon) NewCloudPoint(particleIndex float64, group *PointsGroup, groupId float64, idxInGroup float64, pcs *PointsCloudSystem) *CloudPoint {
+	p := ba.ctx.Get("CloudPoint").New(particleIndex, group.JSObject(), groupId, idxInGroup, pcs.JSObject())
 	return CloudPointFromJSObject(p)
 }
 

@@ -20,8 +20,8 @@ type FlyCameraInputsManager struct {
 func (f *FlyCameraInputsManager) JSObject() js.Value { return f.p }
 
 // FlyCameraInputsManager returns a FlyCameraInputsManager JavaScript class.
-func (b *Babylon) FlyCameraInputsManager() *FlyCameraInputsManager {
-	p := b.ctx.Get("FlyCameraInputsManager")
+func (ba *Babylon) FlyCameraInputsManager() *FlyCameraInputsManager {
+	p := ba.ctx.Get("FlyCameraInputsManager")
 	return FlyCameraInputsManagerFromJSObject(p)
 }
 
@@ -33,8 +33,8 @@ func FlyCameraInputsManagerFromJSObject(p js.Value) *FlyCameraInputsManager {
 // NewFlyCameraInputsManager returns a new FlyCameraInputsManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamerainputsmanager
-func (b *Babylon) NewFlyCameraInputsManager(camera *FlyCamera) *FlyCameraInputsManager {
-	p := b.ctx.Get("FlyCameraInputsManager").New(camera.JSObject())
+func (ba *Babylon) NewFlyCameraInputsManager(camera *FlyCamera) *FlyCameraInputsManager {
+	p := ba.ctx.Get("FlyCameraInputsManager").New(camera.JSObject())
 	return FlyCameraInputsManagerFromJSObject(p)
 }
 

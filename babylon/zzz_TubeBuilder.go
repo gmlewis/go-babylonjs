@@ -14,8 +14,8 @@ type TubeBuilder struct{ p js.Value }
 func (t *TubeBuilder) JSObject() js.Value { return t.p }
 
 // TubeBuilder returns a TubeBuilder JavaScript class.
-func (b *Babylon) TubeBuilder() *TubeBuilder {
-	p := b.ctx.Get("TubeBuilder")
+func (ba *Babylon) TubeBuilder() *TubeBuilder {
+	p := ba.ctx.Get("TubeBuilder")
 	return TubeBuilderFromJSObject(p)
 }
 

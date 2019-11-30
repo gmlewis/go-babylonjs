@@ -15,8 +15,8 @@ type PostProcess struct{ p js.Value }
 func (p *PostProcess) JSObject() js.Value { return p.p }
 
 // PostProcess returns a PostProcess JavaScript class.
-func (b *Babylon) PostProcess() *PostProcess {
-	p := b.ctx.Get("PostProcess")
+func (ba *Babylon) PostProcess() *PostProcess {
+	p := ba.ctx.Get("PostProcess")
 	return PostProcessFromJSObject(p)
 }
 
@@ -27,32 +27,32 @@ func PostProcessFromJSObject(p js.Value) *PostProcess {
 
 // NewPostProcessOpts contains optional parameters for NewPostProcess.
 type NewPostProcessOpts struct {
-	SamplingMode *float64
+	SamplingMode *JSFloat64
 
 	Engine *Engine
 
-	Reusable *bool
+	Reusable *JSBool
 
-	Defines *string
+	Defines *JSString
 
-	TextureType *float64
+	TextureType *JSFloat64
 
-	VertexUrl *string
+	VertexUrl *JSString
 
 	IndexParameters *interface{}
 
-	BlockCompilation *bool
+	BlockCompilation *JSBool
 }
 
 // NewPostProcess returns a new PostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocess
-func (b *Babylon) NewPostProcess(name string, fragmentUrl string, parameters string, samplers string, options float64, camera *Camera, opts *NewPostProcessOpts) *PostProcess {
+func (ba *Babylon) NewPostProcess(name string, fragmentUrl string, parameters string, samplers string, options float64, camera *Camera, opts *NewPostProcessOpts) *PostProcess {
 	if opts == nil {
 		opts = &NewPostProcessOpts{}
 	}
 
-	p := b.ctx.Get("PostProcess").New(name, fragmentUrl, parameters, samplers, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.Defines, opts.TextureType, opts.VertexUrl, opts.IndexParameters, opts.BlockCompilation.JSObject())
+	p := ba.ctx.Get("PostProcess").New(name, fragmentUrl, parameters, samplers, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable, opts.Defines, opts.TextureType, opts.VertexUrl, opts.IndexParameters, opts.BlockCompilation)
 	return PostProcessFromJSObject(p)
 }
 

@@ -18,8 +18,8 @@ type DracoCompression struct{ p js.Value }
 func (d *DracoCompression) JSObject() js.Value { return d.p }
 
 // DracoCompression returns a DracoCompression JavaScript class.
-func (b *Babylon) DracoCompression() *DracoCompression {
-	p := b.ctx.Get("DracoCompression")
+func (ba *Babylon) DracoCompression() *DracoCompression {
+	p := ba.ctx.Get("DracoCompression")
 	return DracoCompressionFromJSObject(p)
 }
 
@@ -30,18 +30,18 @@ func DracoCompressionFromJSObject(p js.Value) *DracoCompression {
 
 // NewDracoCompressionOpts contains optional parameters for NewDracoCompression.
 type NewDracoCompressionOpts struct {
-	NumWorkers *float64
+	NumWorkers *JSFloat64
 }
 
 // NewDracoCompression returns a new DracoCompression object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.dracocompression
-func (b *Babylon) NewDracoCompression(opts *NewDracoCompressionOpts) *DracoCompression {
+func (ba *Babylon) NewDracoCompression(opts *NewDracoCompressionOpts) *DracoCompression {
 	if opts == nil {
 		opts = &NewDracoCompressionOpts{}
 	}
 
-	p := b.ctx.Get("DracoCompression").New(opts.NumWorkers)
+	p := ba.ctx.Get("DracoCompression").New(opts.NumWorkers)
 	return DracoCompressionFromJSObject(p)
 }
 

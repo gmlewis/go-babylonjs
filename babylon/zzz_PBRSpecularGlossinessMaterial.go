@@ -17,8 +17,8 @@ type PBRSpecularGlossinessMaterial struct{ *PBRBaseSimpleMaterial }
 func (p *PBRSpecularGlossinessMaterial) JSObject() js.Value { return p.p }
 
 // PBRSpecularGlossinessMaterial returns a PBRSpecularGlossinessMaterial JavaScript class.
-func (b *Babylon) PBRSpecularGlossinessMaterial() *PBRSpecularGlossinessMaterial {
-	p := b.ctx.Get("PBRSpecularGlossinessMaterial")
+func (ba *Babylon) PBRSpecularGlossinessMaterial() *PBRSpecularGlossinessMaterial {
+	p := ba.ctx.Get("PBRSpecularGlossinessMaterial")
 	return PBRSpecularGlossinessMaterialFromJSObject(p)
 }
 
@@ -30,8 +30,8 @@ func PBRSpecularGlossinessMaterialFromJSObject(p js.Value) *PBRSpecularGlossines
 // NewPBRSpecularGlossinessMaterial returns a new PBRSpecularGlossinessMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrspecularglossinessmaterial
-func (b *Babylon) NewPBRSpecularGlossinessMaterial(name string, scene *Scene) *PBRSpecularGlossinessMaterial {
-	p := b.ctx.Get("PBRSpecularGlossinessMaterial").New(name, scene.JSObject())
+func (ba *Babylon) NewPBRSpecularGlossinessMaterial(name string, scene *Scene) *PBRSpecularGlossinessMaterial {
+	p := ba.ctx.Get("PBRSpecularGlossinessMaterial").New(name, scene.JSObject())
 	return PBRSpecularGlossinessMaterialFromJSObject(p)
 }
 

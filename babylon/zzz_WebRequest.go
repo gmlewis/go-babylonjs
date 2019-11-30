@@ -14,8 +14,8 @@ type WebRequest struct{ p js.Value }
 func (w *WebRequest) JSObject() js.Value { return w.p }
 
 // WebRequest returns a WebRequest JavaScript class.
-func (b *Babylon) WebRequest() *WebRequest {
-	p := b.ctx.Get("WebRequest")
+func (ba *Babylon) WebRequest() *WebRequest {
+	p := ba.ctx.Get("WebRequest")
 	return WebRequestFromJSObject(p)
 }
 

@@ -15,8 +15,8 @@ type FlyCamera struct{ *TargetCamera }
 func (f *FlyCamera) JSObject() js.Value { return f.p }
 
 // FlyCamera returns a FlyCamera JavaScript class.
-func (b *Babylon) FlyCamera() *FlyCamera {
-	p := b.ctx.Get("FlyCamera")
+func (ba *Babylon) FlyCamera() *FlyCamera {
+	p := ba.ctx.Get("FlyCamera")
 	return FlyCameraFromJSObject(p)
 }
 
@@ -27,18 +27,18 @@ func FlyCameraFromJSObject(p js.Value) *FlyCamera {
 
 // NewFlyCameraOpts contains optional parameters for NewFlyCamera.
 type NewFlyCameraOpts struct {
-	SetActiveOnSceneIfNoneActive *bool
+	SetActiveOnSceneIfNoneActive *JSBool
 }
 
 // NewFlyCamera returns a new FlyCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamera
-func (b *Babylon) NewFlyCamera(name string, position *Vector3, scene *Scene, opts *NewFlyCameraOpts) *FlyCamera {
+func (ba *Babylon) NewFlyCamera(name string, position *Vector3, scene *Scene, opts *NewFlyCameraOpts) *FlyCamera {
 	if opts == nil {
 		opts = &NewFlyCameraOpts{}
 	}
 
-	p := b.ctx.Get("FlyCamera").New(name, position.JSObject(), scene.JSObject(), opts.SetActiveOnSceneIfNoneActive.JSObject())
+	p := ba.ctx.Get("FlyCamera").New(name, position.JSObject(), scene.JSObject(), opts.SetActiveOnSceneIfNoneActive)
 	return FlyCameraFromJSObject(p)
 }
 

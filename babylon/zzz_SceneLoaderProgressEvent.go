@@ -14,8 +14,8 @@ type SceneLoaderProgressEvent struct{ p js.Value }
 func (s *SceneLoaderProgressEvent) JSObject() js.Value { return s.p }
 
 // SceneLoaderProgressEvent returns a SceneLoaderProgressEvent JavaScript class.
-func (b *Babylon) SceneLoaderProgressEvent() *SceneLoaderProgressEvent {
-	p := b.ctx.Get("SceneLoaderProgressEvent")
+func (ba *Babylon) SceneLoaderProgressEvent() *SceneLoaderProgressEvent {
+	p := ba.ctx.Get("SceneLoaderProgressEvent")
 	return SceneLoaderProgressEventFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func SceneLoaderProgressEventFromJSObject(p js.Value) *SceneLoaderProgressEvent 
 // NewSceneLoaderProgressEvent returns a new SceneLoaderProgressEvent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloaderprogressevent
-func (b *Babylon) NewSceneLoaderProgressEvent(lengthComputable bool, loaded float64, total float64) *SceneLoaderProgressEvent {
-	p := b.ctx.Get("SceneLoaderProgressEvent").New(lengthComputable.JSObject(), loaded, total)
+func (ba *Babylon) NewSceneLoaderProgressEvent(lengthComputable bool, loaded float64, total float64) *SceneLoaderProgressEvent {
+	p := ba.ctx.Get("SceneLoaderProgressEvent").New(lengthComputable.JSObject(), loaded, total)
 	return SceneLoaderProgressEventFromJSObject(p)
 }
 

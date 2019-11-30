@@ -16,8 +16,8 @@ type DistanceJoint struct{ *PhysicsJoint }
 func (d *DistanceJoint) JSObject() js.Value { return d.p }
 
 // DistanceJoint returns a DistanceJoint JavaScript class.
-func (b *Babylon) DistanceJoint() *DistanceJoint {
-	p := b.ctx.Get("DistanceJoint")
+func (ba *Babylon) DistanceJoint() *DistanceJoint {
+	p := ba.ctx.Get("DistanceJoint")
 	return DistanceJointFromJSObject(p)
 }
 
@@ -29,8 +29,8 @@ func DistanceJointFromJSObject(p js.Value) *DistanceJoint {
 // NewDistanceJoint returns a new DistanceJoint object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.distancejoint
-func (b *Babylon) NewDistanceJoint(jointData js.Value) *DistanceJoint {
-	p := b.ctx.Get("DistanceJoint").New(jointData)
+func (ba *Babylon) NewDistanceJoint(jointData js.Value) *DistanceJoint {
+	p := ba.ctx.Get("DistanceJoint").New(jointData)
 	return DistanceJointFromJSObject(p)
 }
 

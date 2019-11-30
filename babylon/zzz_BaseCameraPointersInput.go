@@ -16,8 +16,8 @@ type BaseCameraPointersInput struct{ p js.Value }
 func (b *BaseCameraPointersInput) JSObject() js.Value { return b.p }
 
 // BaseCameraPointersInput returns a BaseCameraPointersInput JavaScript class.
-func (b *Babylon) BaseCameraPointersInput() *BaseCameraPointersInput {
-	p := b.ctx.Get("BaseCameraPointersInput")
+func (ba *Babylon) BaseCameraPointersInput() *BaseCameraPointersInput {
+	p := ba.ctx.Get("BaseCameraPointersInput")
 	return BaseCameraPointersInputFromJSObject(p)
 }
 

@@ -15,8 +15,8 @@ type OutlineRenderer struct{ p js.Value }
 func (o *OutlineRenderer) JSObject() js.Value { return o.p }
 
 // OutlineRenderer returns a OutlineRenderer JavaScript class.
-func (b *Babylon) OutlineRenderer() *OutlineRenderer {
-	p := b.ctx.Get("OutlineRenderer")
+func (ba *Babylon) OutlineRenderer() *OutlineRenderer {
+	p := ba.ctx.Get("OutlineRenderer")
 	return OutlineRendererFromJSObject(p)
 }
 
@@ -28,8 +28,8 @@ func OutlineRendererFromJSObject(p js.Value) *OutlineRenderer {
 // NewOutlineRenderer returns a new OutlineRenderer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.outlinerenderer
-func (b *Babylon) NewOutlineRenderer(scene *Scene) *OutlineRenderer {
-	p := b.ctx.Get("OutlineRenderer").New(scene.JSObject())
+func (ba *Babylon) NewOutlineRenderer(scene *Scene) *OutlineRenderer {
+	p := ba.ctx.Get("OutlineRenderer").New(scene.JSObject())
 	return OutlineRendererFromJSObject(p)
 }
 

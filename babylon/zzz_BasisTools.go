@@ -15,8 +15,8 @@ type BasisTools struct{ p js.Value }
 func (b *BasisTools) JSObject() js.Value { return b.p }
 
 // BasisTools returns a BasisTools JavaScript class.
-func (b *Babylon) BasisTools() *BasisTools {
-	p := b.ctx.Get("BasisTools")
+func (ba *Babylon) BasisTools() *BasisTools {
+	p := ba.ctx.Get("BasisTools")
 	return BasisToolsFromJSObject(p)
 }
 

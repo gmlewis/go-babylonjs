@@ -14,8 +14,8 @@ type Container3D struct{ *Control3D }
 func (c *Container3D) JSObject() js.Value { return c.p }
 
 // Container3D returns a Container3D JavaScript class.
-func (b *Babylon) Container3D() *Container3D {
-	p := b.ctx.Get("Container3D")
+func (ba *Babylon) Container3D() *Container3D {
+	p := ba.ctx.Get("Container3D")
 	return Container3DFromJSObject(p)
 }
 
@@ -26,18 +26,18 @@ func Container3DFromJSObject(p js.Value) *Container3D {
 
 // NewContainer3DOpts contains optional parameters for NewContainer3D.
 type NewContainer3DOpts struct {
-	Name *string
+	Name *JSString
 }
 
 // NewContainer3D returns a new Container3D object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container3d
-func (b *Babylon) NewContainer3D(opts *NewContainer3DOpts) *Container3D {
+func (ba *Babylon) NewContainer3D(opts *NewContainer3DOpts) *Container3D {
 	if opts == nil {
 		opts = &NewContainer3DOpts{}
 	}
 
-	p := b.ctx.Get("Container3D").New(opts.Name)
+	p := ba.ctx.Get("Container3D").New(opts.Name)
 	return Container3DFromJSObject(p)
 }
 

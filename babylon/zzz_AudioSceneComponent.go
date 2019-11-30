@@ -15,8 +15,8 @@ type AudioSceneComponent struct{ p js.Value }
 func (a *AudioSceneComponent) JSObject() js.Value { return a.p }
 
 // AudioSceneComponent returns a AudioSceneComponent JavaScript class.
-func (b *Babylon) AudioSceneComponent() *AudioSceneComponent {
-	p := b.ctx.Get("AudioSceneComponent")
+func (ba *Babylon) AudioSceneComponent() *AudioSceneComponent {
+	p := ba.ctx.Get("AudioSceneComponent")
 	return AudioSceneComponentFromJSObject(p)
 }
 
@@ -28,8 +28,8 @@ func AudioSceneComponentFromJSObject(p js.Value) *AudioSceneComponent {
 // NewAudioSceneComponent returns a new AudioSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.audioscenecomponent
-func (b *Babylon) NewAudioSceneComponent(scene *Scene) *AudioSceneComponent {
-	p := b.ctx.Get("AudioSceneComponent").New(scene.JSObject())
+func (ba *Babylon) NewAudioSceneComponent(scene *Scene) *AudioSceneComponent {
+	p := ba.ctx.Get("AudioSceneComponent").New(scene.JSObject())
 	return AudioSceneComponentFromJSObject(p)
 }
 

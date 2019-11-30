@@ -16,8 +16,8 @@ type BoneAxesViewer struct{ *AxesViewer }
 func (b *BoneAxesViewer) JSObject() js.Value { return b.p }
 
 // BoneAxesViewer returns a BoneAxesViewer JavaScript class.
-func (b *Babylon) BoneAxesViewer() *BoneAxesViewer {
-	p := b.ctx.Get("BoneAxesViewer")
+func (ba *Babylon) BoneAxesViewer() *BoneAxesViewer {
+	p := ba.ctx.Get("BoneAxesViewer")
 	return BoneAxesViewerFromJSObject(p)
 }
 
@@ -28,18 +28,18 @@ func BoneAxesViewerFromJSObject(p js.Value) *BoneAxesViewer {
 
 // NewBoneAxesViewerOpts contains optional parameters for NewBoneAxesViewer.
 type NewBoneAxesViewerOpts struct {
-	ScaleLines *float64
+	ScaleLines *JSFloat64
 }
 
 // NewBoneAxesViewer returns a new BoneAxesViewer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boneaxesviewer
-func (b *Babylon) NewBoneAxesViewer(scene *Scene, bone *Bone, mesh *Mesh, opts *NewBoneAxesViewerOpts) *BoneAxesViewer {
+func (ba *Babylon) NewBoneAxesViewer(scene *Scene, bone *Bone, mesh *Mesh, opts *NewBoneAxesViewerOpts) *BoneAxesViewer {
 	if opts == nil {
 		opts = &NewBoneAxesViewerOpts{}
 	}
 
-	p := b.ctx.Get("BoneAxesViewer").New(scene.JSObject(), bone.JSObject(), mesh.JSObject(), opts.ScaleLines)
+	p := ba.ctx.Get("BoneAxesViewer").New(scene.JSObject(), bone.JSObject(), mesh.JSObject(), opts.ScaleLines)
 	return BoneAxesViewerFromJSObject(p)
 }
 

@@ -14,8 +14,8 @@ type Animatable struct{ p js.Value }
 func (a *Animatable) JSObject() js.Value { return a.p }
 
 // Animatable returns a Animatable JavaScript class.
-func (b *Babylon) Animatable() *Animatable {
-	p := b.ctx.Get("Animatable")
+func (ba *Babylon) Animatable() *Animatable {
+	p := ba.ctx.Get("Animatable")
 	return AnimatableFromJSObject(p)
 }
 
@@ -26,13 +26,13 @@ func AnimatableFromJSObject(p js.Value) *Animatable {
 
 // NewAnimatableOpts contains optional parameters for NewAnimatable.
 type NewAnimatableOpts struct {
-	FromFrame *float64
+	FromFrame *JSFloat64
 
-	ToFrame *float64
+	ToFrame *JSFloat64
 
-	LoopAnimation *bool
+	LoopAnimation *JSBool
 
-	SpeedRatio *float64
+	SpeedRatio *JSFloat64
 
 	OnAnimationEnd *func()
 
@@ -44,12 +44,12 @@ type NewAnimatableOpts struct {
 // NewAnimatable returns a new Animatable object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animatable
-func (b *Babylon) NewAnimatable(scene *Scene, target interface{}, opts *NewAnimatableOpts) *Animatable {
+func (ba *Babylon) NewAnimatable(scene *Scene, target interface{}, opts *NewAnimatableOpts) *Animatable {
 	if opts == nil {
 		opts = &NewAnimatableOpts{}
 	}
 
-	p := b.ctx.Get("Animatable").New(scene.JSObject(), target, opts.FromFrame, opts.ToFrame, opts.LoopAnimation.JSObject(), opts.SpeedRatio, opts.OnAnimationEnd, opts.Animations.JSObject(), opts.OnAnimationLoop)
+	p := ba.ctx.Get("Animatable").New(scene.JSObject(), target, opts.FromFrame, opts.ToFrame, opts.LoopAnimation, opts.SpeedRatio, opts.OnAnimationEnd, opts.Animations.JSObject(), opts.OnAnimationLoop)
 	return AnimatableFromJSObject(p)
 }
 

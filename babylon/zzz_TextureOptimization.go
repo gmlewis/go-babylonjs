@@ -16,8 +16,8 @@ type TextureOptimization struct{ *SceneOptimization }
 func (t *TextureOptimization) JSObject() js.Value { return t.p }
 
 // TextureOptimization returns a TextureOptimization JavaScript class.
-func (b *Babylon) TextureOptimization() *TextureOptimization {
-	p := b.ctx.Get("TextureOptimization")
+func (ba *Babylon) TextureOptimization() *TextureOptimization {
+	p := ba.ctx.Get("TextureOptimization")
 	return TextureOptimizationFromJSObject(p)
 }
 
@@ -28,22 +28,22 @@ func TextureOptimizationFromJSObject(p js.Value) *TextureOptimization {
 
 // NewTextureOptimizationOpts contains optional parameters for NewTextureOptimization.
 type NewTextureOptimizationOpts struct {
-	Priority *float64
+	Priority *JSFloat64
 
-	MaximumSize *float64
+	MaximumSize *JSFloat64
 
-	Step *float64
+	Step *JSFloat64
 }
 
 // NewTextureOptimization returns a new TextureOptimization object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textureoptimization
-func (b *Babylon) NewTextureOptimization(opts *NewTextureOptimizationOpts) *TextureOptimization {
+func (ba *Babylon) NewTextureOptimization(opts *NewTextureOptimizationOpts) *TextureOptimization {
 	if opts == nil {
 		opts = &NewTextureOptimizationOpts{}
 	}
 
-	p := b.ctx.Get("TextureOptimization").New(opts.Priority, opts.MaximumSize, opts.Step)
+	p := ba.ctx.Get("TextureOptimization").New(opts.Priority, opts.MaximumSize, opts.Step)
 	return TextureOptimizationFromJSObject(p)
 }
 

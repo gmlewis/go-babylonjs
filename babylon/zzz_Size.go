@@ -14,8 +14,8 @@ type Size struct{ p js.Value }
 func (s *Size) JSObject() js.Value { return s.p }
 
 // Size returns a Size JavaScript class.
-func (b *Babylon) Size() *Size {
-	p := b.ctx.Get("Size")
+func (ba *Babylon) Size() *Size {
+	p := ba.ctx.Get("Size")
 	return SizeFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func SizeFromJSObject(p js.Value) *Size {
 // NewSize returns a new Size object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.size
-func (b *Babylon) NewSize(width float64, height float64) *Size {
-	p := b.ctx.Get("Size").New(width, height)
+func (ba *Babylon) NewSize(width float64, height float64) *Size {
+	p := ba.ctx.Get("Size").New(width, height)
 	return SizeFromJSObject(p)
 }
 

@@ -16,8 +16,8 @@ type ArcRotateCameraMouseWheelInput struct{ p js.Value }
 func (a *ArcRotateCameraMouseWheelInput) JSObject() js.Value { return a.p }
 
 // ArcRotateCameraMouseWheelInput returns a ArcRotateCameraMouseWheelInput JavaScript class.
-func (b *Babylon) ArcRotateCameraMouseWheelInput() *ArcRotateCameraMouseWheelInput {
-	p := b.ctx.Get("ArcRotateCameraMouseWheelInput")
+func (ba *Babylon) ArcRotateCameraMouseWheelInput() *ArcRotateCameraMouseWheelInput {
+	p := ba.ctx.Get("ArcRotateCameraMouseWheelInput")
 	return ArcRotateCameraMouseWheelInputFromJSObject(p)
 }
 

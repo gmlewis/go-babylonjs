@@ -14,8 +14,8 @@ type GradientBlock struct{ *NodeMaterialBlock }
 func (g *GradientBlock) JSObject() js.Value { return g.p }
 
 // GradientBlock returns a GradientBlock JavaScript class.
-func (b *Babylon) GradientBlock() *GradientBlock {
-	p := b.ctx.Get("GradientBlock")
+func (ba *Babylon) GradientBlock() *GradientBlock {
+	p := ba.ctx.Get("GradientBlock")
 	return GradientBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func GradientBlockFromJSObject(p js.Value) *GradientBlock {
 // NewGradientBlock returns a new GradientBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gradientblock
-func (b *Babylon) NewGradientBlock(name string) *GradientBlock {
-	p := b.ctx.Get("GradientBlock").New(name)
+func (ba *Babylon) NewGradientBlock(name string) *GradientBlock {
+	p := ba.ctx.Get("GradientBlock").New(name)
 	return GradientBlockFromJSObject(p)
 }
 

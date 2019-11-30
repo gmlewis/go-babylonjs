@@ -15,8 +15,8 @@ type ModelShape struct{ p js.Value }
 func (m *ModelShape) JSObject() js.Value { return m.p }
 
 // ModelShape returns a ModelShape JavaScript class.
-func (b *Babylon) ModelShape() *ModelShape {
-	p := b.ctx.Get("ModelShape")
+func (ba *Babylon) ModelShape() *ModelShape {
+	p := ba.ctx.Get("ModelShape")
 	return ModelShapeFromJSObject(p)
 }
 

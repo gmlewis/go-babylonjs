@@ -14,8 +14,8 @@ type FadeInOutBehavior struct{ p js.Value }
 func (f *FadeInOutBehavior) JSObject() js.Value { return f.p }
 
 // FadeInOutBehavior returns a FadeInOutBehavior JavaScript class.
-func (b *Babylon) FadeInOutBehavior() *FadeInOutBehavior {
-	p := b.ctx.Get("FadeInOutBehavior")
+func (ba *Babylon) FadeInOutBehavior() *FadeInOutBehavior {
+	p := ba.ctx.Get("FadeInOutBehavior")
 	return FadeInOutBehaviorFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func FadeInOutBehaviorFromJSObject(p js.Value) *FadeInOutBehavior {
 // NewFadeInOutBehavior returns a new FadeInOutBehavior object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fadeinoutbehavior
-func (b *Babylon) NewFadeInOutBehavior() *FadeInOutBehavior {
-	p := b.ctx.Get("FadeInOutBehavior").New()
+func (ba *Babylon) NewFadeInOutBehavior() *FadeInOutBehavior {
+	p := ba.ctx.Get("FadeInOutBehavior").New()
 	return FadeInOutBehaviorFromJSObject(p)
 }
 

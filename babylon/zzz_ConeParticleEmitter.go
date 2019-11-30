@@ -16,8 +16,8 @@ type ConeParticleEmitter struct{ p js.Value }
 func (c *ConeParticleEmitter) JSObject() js.Value { return c.p }
 
 // ConeParticleEmitter returns a ConeParticleEmitter JavaScript class.
-func (b *Babylon) ConeParticleEmitter() *ConeParticleEmitter {
-	p := b.ctx.Get("ConeParticleEmitter")
+func (ba *Babylon) ConeParticleEmitter() *ConeParticleEmitter {
+	p := ba.ctx.Get("ConeParticleEmitter")
 	return ConeParticleEmitterFromJSObject(p)
 }
 
@@ -28,22 +28,22 @@ func ConeParticleEmitterFromJSObject(p js.Value) *ConeParticleEmitter {
 
 // NewConeParticleEmitterOpts contains optional parameters for NewConeParticleEmitter.
 type NewConeParticleEmitterOpts struct {
-	Radius *float64
+	Radius *JSFloat64
 
-	Angle *float64
+	Angle *JSFloat64
 
-	DirectionRandomizer *float64
+	DirectionRandomizer *JSFloat64
 }
 
 // NewConeParticleEmitter returns a new ConeParticleEmitter object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.coneparticleemitter
-func (b *Babylon) NewConeParticleEmitter(opts *NewConeParticleEmitterOpts) *ConeParticleEmitter {
+func (ba *Babylon) NewConeParticleEmitter(opts *NewConeParticleEmitterOpts) *ConeParticleEmitter {
 	if opts == nil {
 		opts = &NewConeParticleEmitterOpts{}
 	}
 
-	p := b.ctx.Get("ConeParticleEmitter").New(opts.Radius, opts.Angle, opts.DirectionRandomizer)
+	p := ba.ctx.Get("ConeParticleEmitter").New(opts.Radius, opts.Angle, opts.DirectionRandomizer)
 	return ConeParticleEmitterFromJSObject(p)
 }
 

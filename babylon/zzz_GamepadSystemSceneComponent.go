@@ -14,8 +14,8 @@ type GamepadSystemSceneComponent struct{ p js.Value }
 func (g *GamepadSystemSceneComponent) JSObject() js.Value { return g.p }
 
 // GamepadSystemSceneComponent returns a GamepadSystemSceneComponent JavaScript class.
-func (b *Babylon) GamepadSystemSceneComponent() *GamepadSystemSceneComponent {
-	p := b.ctx.Get("GamepadSystemSceneComponent")
+func (ba *Babylon) GamepadSystemSceneComponent() *GamepadSystemSceneComponent {
+	p := ba.ctx.Get("GamepadSystemSceneComponent")
 	return GamepadSystemSceneComponentFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func GamepadSystemSceneComponentFromJSObject(p js.Value) *GamepadSystemSceneComp
 // NewGamepadSystemSceneComponent returns a new GamepadSystemSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gamepadsystemscenecomponent
-func (b *Babylon) NewGamepadSystemSceneComponent(scene *Scene) *GamepadSystemSceneComponent {
-	p := b.ctx.Get("GamepadSystemSceneComponent").New(scene.JSObject())
+func (ba *Babylon) NewGamepadSystemSceneComponent(scene *Scene) *GamepadSystemSceneComponent {
+	p := ba.ctx.Get("GamepadSystemSceneComponent").New(scene.JSObject())
 	return GamepadSystemSceneComponentFromJSObject(p)
 }
 

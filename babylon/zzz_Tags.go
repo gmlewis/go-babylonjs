@@ -14,8 +14,8 @@ type Tags struct{ p js.Value }
 func (t *Tags) JSObject() js.Value { return t.p }
 
 // Tags returns a Tags JavaScript class.
-func (b *Babylon) Tags() *Tags {
-	p := b.ctx.Get("Tags")
+func (ba *Babylon) Tags() *Tags {
+	p := ba.ctx.Get("Tags")
 	return TagsFromJSObject(p)
 }
 

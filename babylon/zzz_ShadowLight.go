@@ -15,8 +15,8 @@ type ShadowLight struct{ *Light }
 func (s *ShadowLight) JSObject() js.Value { return s.p }
 
 // ShadowLight returns a ShadowLight JavaScript class.
-func (b *Babylon) ShadowLight() *ShadowLight {
-	p := b.ctx.Get("ShadowLight")
+func (ba *Babylon) ShadowLight() *ShadowLight {
+	p := ba.ctx.Get("ShadowLight")
 	return ShadowLightFromJSObject(p)
 }
 
@@ -28,8 +28,8 @@ func ShadowLightFromJSObject(p js.Value) *ShadowLight {
 // NewShadowLight returns a new ShadowLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight
-func (b *Babylon) NewShadowLight(name string, scene *Scene) *ShadowLight {
-	p := b.ctx.Get("ShadowLight").New(name, scene.JSObject())
+func (ba *Babylon) NewShadowLight(name string, scene *Scene) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(name, scene.JSObject())
 	return ShadowLightFromJSObject(p)
 }
 

@@ -14,8 +14,8 @@ type Color3 struct{ p js.Value }
 func (c *Color3) JSObject() js.Value { return c.p }
 
 // Color3 returns a Color3 JavaScript class.
-func (b *Babylon) Color3() *Color3 {
-	p := b.ctx.Get("Color3")
+func (ba *Babylon) Color3() *Color3 {
+	p := ba.ctx.Get("Color3")
 	return Color3FromJSObject(p)
 }
 
@@ -26,22 +26,22 @@ func Color3FromJSObject(p js.Value) *Color3 {
 
 // NewColor3Opts contains optional parameters for NewColor3.
 type NewColor3Opts struct {
-	R *float64
+	R *JSFloat64
 
-	G *float64
+	G *JSFloat64
 
-	B *float64
+	B *JSFloat64
 }
 
 // NewColor3 returns a new Color3 object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.color3
-func (b *Babylon) NewColor3(opts *NewColor3Opts) *Color3 {
+func (ba *Babylon) NewColor3(opts *NewColor3Opts) *Color3 {
 	if opts == nil {
 		opts = &NewColor3Opts{}
 	}
 
-	p := b.ctx.Get("Color3").New(opts.R, opts.G, opts.B)
+	p := ba.ctx.Get("Color3").New(opts.R, opts.G, opts.B)
 	return Color3FromJSObject(p)
 }
 

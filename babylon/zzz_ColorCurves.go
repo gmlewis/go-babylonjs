@@ -17,8 +17,8 @@ type ColorCurves struct{ p js.Value }
 func (c *ColorCurves) JSObject() js.Value { return c.p }
 
 // ColorCurves returns a ColorCurves JavaScript class.
-func (b *Babylon) ColorCurves() *ColorCurves {
-	p := b.ctx.Get("ColorCurves")
+func (ba *Babylon) ColorCurves() *ColorCurves {
+	p := ba.ctx.Get("ColorCurves")
 	return ColorCurvesFromJSObject(p)
 }
 

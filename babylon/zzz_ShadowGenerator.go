@@ -16,8 +16,8 @@ type ShadowGenerator struct{ p js.Value }
 func (s *ShadowGenerator) JSObject() js.Value { return s.p }
 
 // ShadowGenerator returns a ShadowGenerator JavaScript class.
-func (b *Babylon) ShadowGenerator() *ShadowGenerator {
-	p := b.ctx.Get("ShadowGenerator")
+func (ba *Babylon) ShadowGenerator() *ShadowGenerator {
+	p := ba.ctx.Get("ShadowGenerator")
 	return ShadowGeneratorFromJSObject(p)
 }
 
@@ -28,18 +28,18 @@ func ShadowGeneratorFromJSObject(p js.Value) *ShadowGenerator {
 
 // NewShadowGeneratorOpts contains optional parameters for NewShadowGenerator.
 type NewShadowGeneratorOpts struct {
-	UsefulFloatFirst *bool
+	UsefulFloatFirst *JSBool
 }
 
 // NewShadowGenerator returns a new ShadowGenerator object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgenerator
-func (b *Babylon) NewShadowGenerator(mapSize float64, light *IShadowLight, opts *NewShadowGeneratorOpts) *ShadowGenerator {
+func (ba *Babylon) NewShadowGenerator(mapSize float64, light js.Value, opts *NewShadowGeneratorOpts) *ShadowGenerator {
 	if opts == nil {
 		opts = &NewShadowGeneratorOpts{}
 	}
 
-	p := b.ctx.Get("ShadowGenerator").New(mapSize, light.JSObject(), opts.UsefulFloatFirst.JSObject())
+	p := ba.ctx.Get("ShadowGenerator").New(mapSize, light, opts.UsefulFloatFirst)
 	return ShadowGeneratorFromJSObject(p)
 }
 

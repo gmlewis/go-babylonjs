@@ -16,8 +16,8 @@ type WebXRExperienceHelper struct{ p js.Value }
 func (w *WebXRExperienceHelper) JSObject() js.Value { return w.p }
 
 // WebXRExperienceHelper returns a WebXRExperienceHelper JavaScript class.
-func (b *Babylon) WebXRExperienceHelper() *WebXRExperienceHelper {
-	p := b.ctx.Get("WebXRExperienceHelper")
+func (ba *Babylon) WebXRExperienceHelper() *WebXRExperienceHelper {
+	p := ba.ctx.Get("WebXRExperienceHelper")
 	return WebXRExperienceHelperFromJSObject(p)
 }
 

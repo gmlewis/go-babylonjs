@@ -16,8 +16,8 @@ type HighlightsPostProcess struct{ *PostProcess }
 func (h *HighlightsPostProcess) JSObject() js.Value { return h.p }
 
 // HighlightsPostProcess returns a HighlightsPostProcess JavaScript class.
-func (b *Babylon) HighlightsPostProcess() *HighlightsPostProcess {
-	p := b.ctx.Get("HighlightsPostProcess")
+func (ba *Babylon) HighlightsPostProcess() *HighlightsPostProcess {
+	p := ba.ctx.Get("HighlightsPostProcess")
 	return HighlightsPostProcessFromJSObject(p)
 }
 
@@ -28,24 +28,24 @@ func HighlightsPostProcessFromJSObject(p js.Value) *HighlightsPostProcess {
 
 // NewHighlightsPostProcessOpts contains optional parameters for NewHighlightsPostProcess.
 type NewHighlightsPostProcessOpts struct {
-	SamplingMode *float64
+	SamplingMode *JSFloat64
 
 	Engine *Engine
 
-	Reusable *bool
+	Reusable *JSBool
 
-	TextureType *float64
+	TextureType *JSFloat64
 }
 
 // NewHighlightsPostProcess returns a new HighlightsPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightspostprocess
-func (b *Babylon) NewHighlightsPostProcess(name string, options float64, camera *Camera, opts *NewHighlightsPostProcessOpts) *HighlightsPostProcess {
+func (ba *Babylon) NewHighlightsPostProcess(name string, options float64, camera *Camera, opts *NewHighlightsPostProcessOpts) *HighlightsPostProcess {
 	if opts == nil {
 		opts = &NewHighlightsPostProcessOpts{}
 	}
 
-	p := b.ctx.Get("HighlightsPostProcess").New(name, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType)
+	p := ba.ctx.Get("HighlightsPostProcess").New(name, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable, opts.TextureType)
 	return HighlightsPostProcessFromJSObject(p)
 }
 

@@ -16,8 +16,8 @@ type AnaglyphFreeCamera struct{ *FreeCamera }
 func (a *AnaglyphFreeCamera) JSObject() js.Value { return a.p }
 
 // AnaglyphFreeCamera returns a AnaglyphFreeCamera JavaScript class.
-func (b *Babylon) AnaglyphFreeCamera() *AnaglyphFreeCamera {
-	p := b.ctx.Get("AnaglyphFreeCamera")
+func (ba *Babylon) AnaglyphFreeCamera() *AnaglyphFreeCamera {
+	p := ba.ctx.Get("AnaglyphFreeCamera")
 	return AnaglyphFreeCameraFromJSObject(p)
 }
 
@@ -29,8 +29,8 @@ func AnaglyphFreeCameraFromJSObject(p js.Value) *AnaglyphFreeCamera {
 // NewAnaglyphFreeCamera returns a new AnaglyphFreeCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphfreecamera
-func (b *Babylon) NewAnaglyphFreeCamera(name string, position *Vector3, interaxialDistance float64, scene *Scene) *AnaglyphFreeCamera {
-	p := b.ctx.Get("AnaglyphFreeCamera").New(name, position.JSObject(), interaxialDistance, scene.JSObject())
+func (ba *Babylon) NewAnaglyphFreeCamera(name string, position *Vector3, interaxialDistance float64, scene *Scene) *AnaglyphFreeCamera {
+	p := ba.ctx.Get("AnaglyphFreeCamera").New(name, position.JSObject(), interaxialDistance, scene.JSObject())
 	return AnaglyphFreeCameraFromJSObject(p)
 }
 

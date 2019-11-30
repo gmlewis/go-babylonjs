@@ -16,8 +16,8 @@ type SineEase struct{ *EasingFunction }
 func (s *SineEase) JSObject() js.Value { return s.p }
 
 // SineEase returns a SineEase JavaScript class.
-func (b *Babylon) SineEase() *SineEase {
-	p := b.ctx.Get("SineEase")
+func (ba *Babylon) SineEase() *SineEase {
+	p := ba.ctx.Get("SineEase")
 	return SineEaseFromJSObject(p)
 }
 

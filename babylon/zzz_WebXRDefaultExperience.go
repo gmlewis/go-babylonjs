@@ -14,8 +14,8 @@ type WebXRDefaultExperience struct{ p js.Value }
 func (w *WebXRDefaultExperience) JSObject() js.Value { return w.p }
 
 // WebXRDefaultExperience returns a WebXRDefaultExperience JavaScript class.
-func (b *Babylon) WebXRDefaultExperience() *WebXRDefaultExperience {
-	p := b.ctx.Get("WebXRDefaultExperience")
+func (ba *Babylon) WebXRDefaultExperience() *WebXRDefaultExperience {
+	p := ba.ctx.Get("WebXRDefaultExperience")
 	return WebXRDefaultExperienceFromJSObject(p)
 }
 

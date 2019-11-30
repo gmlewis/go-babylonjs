@@ -14,8 +14,8 @@ type DiscBuilder struct{ p js.Value }
 func (d *DiscBuilder) JSObject() js.Value { return d.p }
 
 // DiscBuilder returns a DiscBuilder JavaScript class.
-func (b *Babylon) DiscBuilder() *DiscBuilder {
-	p := b.ctx.Get("DiscBuilder")
+func (ba *Babylon) DiscBuilder() *DiscBuilder {
+	p := ba.ctx.Get("DiscBuilder")
 	return DiscBuilderFromJSObject(p)
 }
 

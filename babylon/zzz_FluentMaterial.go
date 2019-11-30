@@ -14,8 +14,8 @@ type FluentMaterial struct{ p js.Value }
 func (f *FluentMaterial) JSObject() js.Value { return f.p }
 
 // FluentMaterial returns a FluentMaterial JavaScript class.
-func (b *Babylon) FluentMaterial() *FluentMaterial {
-	p := b.ctx.Get("FluentMaterial")
+func (ba *Babylon) FluentMaterial() *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial")
 	return FluentMaterialFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func FluentMaterialFromJSObject(p js.Value) *FluentMaterial {
 // NewFluentMaterial returns a new FluentMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial
-func (b *Babylon) NewFluentMaterial(name string, scene *Scene) *FluentMaterial {
-	p := b.ctx.Get("FluentMaterial").New(name, scene.JSObject())
+func (ba *Babylon) NewFluentMaterial(name string, scene *Scene) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(name, scene.JSObject())
 	return FluentMaterialFromJSObject(p)
 }
 

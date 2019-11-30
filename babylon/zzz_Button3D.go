@@ -14,8 +14,8 @@ type Button3D struct{ *AbstractButton3D }
 func (b *Button3D) JSObject() js.Value { return b.p }
 
 // Button3D returns a Button3D JavaScript class.
-func (b *Babylon) Button3D() *Button3D {
-	p := b.ctx.Get("Button3D")
+func (ba *Babylon) Button3D() *Button3D {
+	p := ba.ctx.Get("Button3D")
 	return Button3DFromJSObject(p)
 }
 
@@ -26,18 +26,18 @@ func Button3DFromJSObject(p js.Value) *Button3D {
 
 // NewButton3DOpts contains optional parameters for NewButton3D.
 type NewButton3DOpts struct {
-	Name *string
+	Name *JSString
 }
 
 // NewButton3D returns a new Button3D object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.button3d
-func (b *Babylon) NewButton3D(opts *NewButton3DOpts) *Button3D {
+func (ba *Babylon) NewButton3D(opts *NewButton3DOpts) *Button3D {
 	if opts == nil {
 		opts = &NewButton3DOpts{}
 	}
 
-	p := b.ctx.Get("Button3D").New(opts.Name)
+	p := ba.ctx.Get("Button3D").New(opts.Name)
 	return Button3DFromJSObject(p)
 }
 

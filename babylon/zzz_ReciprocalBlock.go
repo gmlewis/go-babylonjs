@@ -14,8 +14,8 @@ type ReciprocalBlock struct{ *NodeMaterialBlock }
 func (r *ReciprocalBlock) JSObject() js.Value { return r.p }
 
 // ReciprocalBlock returns a ReciprocalBlock JavaScript class.
-func (b *Babylon) ReciprocalBlock() *ReciprocalBlock {
-	p := b.ctx.Get("ReciprocalBlock")
+func (ba *Babylon) ReciprocalBlock() *ReciprocalBlock {
+	p := ba.ctx.Get("ReciprocalBlock")
 	return ReciprocalBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func ReciprocalBlockFromJSObject(p js.Value) *ReciprocalBlock {
 // NewReciprocalBlock returns a new ReciprocalBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.reciprocalblock
-func (b *Babylon) NewReciprocalBlock(name string) *ReciprocalBlock {
-	p := b.ctx.Get("ReciprocalBlock").New(name)
+func (ba *Babylon) NewReciprocalBlock(name string) *ReciprocalBlock {
+	p := ba.ctx.Get("ReciprocalBlock").New(name)
 	return ReciprocalBlockFromJSObject(p)
 }
 

@@ -16,8 +16,8 @@ type ArcRotateCameraGamepadInput struct{ p js.Value }
 func (a *ArcRotateCameraGamepadInput) JSObject() js.Value { return a.p }
 
 // ArcRotateCameraGamepadInput returns a ArcRotateCameraGamepadInput JavaScript class.
-func (b *Babylon) ArcRotateCameraGamepadInput() *ArcRotateCameraGamepadInput {
-	p := b.ctx.Get("ArcRotateCameraGamepadInput")
+func (ba *Babylon) ArcRotateCameraGamepadInput() *ArcRotateCameraGamepadInput {
+	p := ba.ctx.Get("ArcRotateCameraGamepadInput")
 	return ArcRotateCameraGamepadInputFromJSObject(p)
 }
 

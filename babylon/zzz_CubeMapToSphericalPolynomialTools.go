@@ -15,8 +15,8 @@ type CubeMapToSphericalPolynomialTools struct{ p js.Value }
 func (c *CubeMapToSphericalPolynomialTools) JSObject() js.Value { return c.p }
 
 // CubeMapToSphericalPolynomialTools returns a CubeMapToSphericalPolynomialTools JavaScript class.
-func (b *Babylon) CubeMapToSphericalPolynomialTools() *CubeMapToSphericalPolynomialTools {
-	p := b.ctx.Get("CubeMapToSphericalPolynomialTools")
+func (ba *Babylon) CubeMapToSphericalPolynomialTools() *CubeMapToSphericalPolynomialTools {
+	p := ba.ctx.Get("CubeMapToSphericalPolynomialTools")
 	return CubeMapToSphericalPolynomialToolsFromJSObject(p)
 }
 

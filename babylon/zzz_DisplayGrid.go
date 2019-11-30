@@ -14,8 +14,8 @@ type DisplayGrid struct{ *Control }
 func (d *DisplayGrid) JSObject() js.Value { return d.p }
 
 // DisplayGrid returns a DisplayGrid JavaScript class.
-func (b *Babylon) DisplayGrid() *DisplayGrid {
-	p := b.ctx.Get("DisplayGrid")
+func (ba *Babylon) DisplayGrid() *DisplayGrid {
+	p := ba.ctx.Get("DisplayGrid")
 	return DisplayGridFromJSObject(p)
 }
 
@@ -26,18 +26,18 @@ func DisplayGridFromJSObject(p js.Value) *DisplayGrid {
 
 // NewDisplayGridOpts contains optional parameters for NewDisplayGrid.
 type NewDisplayGridOpts struct {
-	Name *string
+	Name *JSString
 }
 
 // NewDisplayGrid returns a new DisplayGrid object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.displaygrid
-func (b *Babylon) NewDisplayGrid(opts *NewDisplayGridOpts) *DisplayGrid {
+func (ba *Babylon) NewDisplayGrid(opts *NewDisplayGridOpts) *DisplayGrid {
 	if opts == nil {
 		opts = &NewDisplayGridOpts{}
 	}
 
-	p := b.ctx.Get("DisplayGrid").New(opts.Name)
+	p := ba.ctx.Get("DisplayGrid").New(opts.Name)
 	return DisplayGridFromJSObject(p)
 }
 

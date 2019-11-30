@@ -14,8 +14,8 @@ type Effect struct{ p js.Value }
 func (e *Effect) JSObject() js.Value { return e.p }
 
 // Effect returns a Effect JavaScript class.
-func (b *Babylon) Effect() *Effect {
-	p := b.ctx.Get("Effect")
+func (ba *Babylon) Effect() *Effect {
+	p := ba.ctx.Get("Effect")
 	return EffectFromJSObject(p)
 }
 
@@ -26,11 +26,11 @@ func EffectFromJSObject(p js.Value) *Effect {
 
 // NewEffectOpts contains optional parameters for NewEffect.
 type NewEffectOpts struct {
-	Samplers *string
+	Samplers *JSString
 
 	Engine *ThinEngine
 
-	Defines *string
+	Defines *JSString
 
 	Fallbacks js.Value
 
@@ -44,12 +44,12 @@ type NewEffectOpts struct {
 // NewEffect returns a new Effect object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effect
-func (b *Babylon) NewEffect(baseName interface{}, attributesNamesOrOptions string, uniformsNamesOrEngine string, opts *NewEffectOpts) *Effect {
+func (ba *Babylon) NewEffect(baseName interface{}, attributesNamesOrOptions string, uniformsNamesOrEngine string, opts *NewEffectOpts) *Effect {
 	if opts == nil {
 		opts = &NewEffectOpts{}
 	}
 
-	p := b.ctx.Get("Effect").New(baseName, attributesNamesOrOptions, uniformsNamesOrEngine, opts.Samplers, opts.Engine.JSObject(), opts.Defines, opts.Fallbacks, opts.OnCompiled, opts.OnError, opts.IndexParameters)
+	p := ba.ctx.Get("Effect").New(baseName, attributesNamesOrOptions, uniformsNamesOrEngine, opts.Samplers, opts.Engine.JSObject(), opts.Defines, opts.Fallbacks, opts.OnCompiled, opts.OnError, opts.IndexParameters)
 	return EffectFromJSObject(p)
 }
 

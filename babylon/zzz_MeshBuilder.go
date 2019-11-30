@@ -14,8 +14,8 @@ type MeshBuilder struct{ p js.Value }
 func (m *MeshBuilder) JSObject() js.Value { return m.p }
 
 // MeshBuilder returns a MeshBuilder JavaScript class.
-func (b *Babylon) MeshBuilder() *MeshBuilder {
-	p := b.ctx.Get("MeshBuilder")
+func (ba *Babylon) MeshBuilder() *MeshBuilder {
+	p := ba.ctx.Get("MeshBuilder")
 	return MeshBuilderFromJSObject(p)
 }
 

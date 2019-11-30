@@ -14,8 +14,8 @@ type CrossBlock struct{ *NodeMaterialBlock }
 func (c *CrossBlock) JSObject() js.Value { return c.p }
 
 // CrossBlock returns a CrossBlock JavaScript class.
-func (b *Babylon) CrossBlock() *CrossBlock {
-	p := b.ctx.Get("CrossBlock")
+func (ba *Babylon) CrossBlock() *CrossBlock {
+	p := ba.ctx.Get("CrossBlock")
 	return CrossBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func CrossBlockFromJSObject(p js.Value) *CrossBlock {
 // NewCrossBlock returns a new CrossBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.crossblock
-func (b *Babylon) NewCrossBlock(name string) *CrossBlock {
-	p := b.ctx.Get("CrossBlock").New(name)
+func (ba *Babylon) NewCrossBlock(name string) *CrossBlock {
+	p := ba.ctx.Get("CrossBlock").New(name)
 	return CrossBlockFromJSObject(p)
 }
 

@@ -16,8 +16,8 @@ type VRDeviceOrientationFreeCamera struct{ *DeviceOrientationCamera }
 func (v *VRDeviceOrientationFreeCamera) JSObject() js.Value { return v.p }
 
 // VRDeviceOrientationFreeCamera returns a VRDeviceOrientationFreeCamera JavaScript class.
-func (b *Babylon) VRDeviceOrientationFreeCamera() *VRDeviceOrientationFreeCamera {
-	p := b.ctx.Get("VRDeviceOrientationFreeCamera")
+func (ba *Babylon) VRDeviceOrientationFreeCamera() *VRDeviceOrientationFreeCamera {
+	p := ba.ctx.Get("VRDeviceOrientationFreeCamera")
 	return VRDeviceOrientationFreeCameraFromJSObject(p)
 }
 
@@ -28,7 +28,7 @@ func VRDeviceOrientationFreeCameraFromJSObject(p js.Value) *VRDeviceOrientationF
 
 // NewVRDeviceOrientationFreeCameraOpts contains optional parameters for NewVRDeviceOrientationFreeCamera.
 type NewVRDeviceOrientationFreeCameraOpts struct {
-	CompensateDistortion *bool
+	CompensateDistortion *JSBool
 
 	VrCameraMetrics *VRCameraMetrics
 }
@@ -36,12 +36,12 @@ type NewVRDeviceOrientationFreeCameraOpts struct {
 // NewVRDeviceOrientationFreeCamera returns a new VRDeviceOrientationFreeCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationfreecamera
-func (b *Babylon) NewVRDeviceOrientationFreeCamera(name string, position *Vector3, scene *Scene, opts *NewVRDeviceOrientationFreeCameraOpts) *VRDeviceOrientationFreeCamera {
+func (ba *Babylon) NewVRDeviceOrientationFreeCamera(name string, position *Vector3, scene *Scene, opts *NewVRDeviceOrientationFreeCameraOpts) *VRDeviceOrientationFreeCamera {
 	if opts == nil {
 		opts = &NewVRDeviceOrientationFreeCameraOpts{}
 	}
 
-	p := b.ctx.Get("VRDeviceOrientationFreeCamera").New(name, position.JSObject(), scene.JSObject(), opts.CompensateDistortion.JSObject(), opts.VrCameraMetrics.JSObject())
+	p := ba.ctx.Get("VRDeviceOrientationFreeCamera").New(name, position.JSObject(), scene.JSObject(), opts.CompensateDistortion, opts.VrCameraMetrics.JSObject())
 	return VRDeviceOrientationFreeCameraFromJSObject(p)
 }
 

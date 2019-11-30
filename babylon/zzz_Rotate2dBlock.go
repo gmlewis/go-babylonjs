@@ -14,8 +14,8 @@ type Rotate2dBlock struct{ *NodeMaterialBlock }
 func (r *Rotate2dBlock) JSObject() js.Value { return r.p }
 
 // Rotate2dBlock returns a Rotate2dBlock JavaScript class.
-func (b *Babylon) Rotate2dBlock() *Rotate2dBlock {
-	p := b.ctx.Get("Rotate2dBlock")
+func (ba *Babylon) Rotate2dBlock() *Rotate2dBlock {
+	p := ba.ctx.Get("Rotate2dBlock")
 	return Rotate2dBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func Rotate2dBlockFromJSObject(p js.Value) *Rotate2dBlock {
 // NewRotate2dBlock returns a new Rotate2dBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rotate2dblock
-func (b *Babylon) NewRotate2dBlock(name string) *Rotate2dBlock {
-	p := b.ctx.Get("Rotate2dBlock").New(name)
+func (ba *Babylon) NewRotate2dBlock(name string) *Rotate2dBlock {
+	p := ba.ctx.Get("Rotate2dBlock").New(name)
 	return Rotate2dBlockFromJSObject(p)
 }
 

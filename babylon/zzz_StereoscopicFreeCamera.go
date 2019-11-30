@@ -16,8 +16,8 @@ type StereoscopicFreeCamera struct{ *FreeCamera }
 func (s *StereoscopicFreeCamera) JSObject() js.Value { return s.p }
 
 // StereoscopicFreeCamera returns a StereoscopicFreeCamera JavaScript class.
-func (b *Babylon) StereoscopicFreeCamera() *StereoscopicFreeCamera {
-	p := b.ctx.Get("StereoscopicFreeCamera")
+func (ba *Babylon) StereoscopicFreeCamera() *StereoscopicFreeCamera {
+	p := ba.ctx.Get("StereoscopicFreeCamera")
 	return StereoscopicFreeCameraFromJSObject(p)
 }
 
@@ -29,8 +29,8 @@ func StereoscopicFreeCameraFromJSObject(p js.Value) *StereoscopicFreeCamera {
 // NewStereoscopicFreeCamera returns a new StereoscopicFreeCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicfreecamera
-func (b *Babylon) NewStereoscopicFreeCamera(name string, position *Vector3, interaxialDistance float64, isStereoscopicSideBySide bool, scene *Scene) *StereoscopicFreeCamera {
-	p := b.ctx.Get("StereoscopicFreeCamera").New(name, position.JSObject(), interaxialDistance, isStereoscopicSideBySide.JSObject(), scene.JSObject())
+func (ba *Babylon) NewStereoscopicFreeCamera(name string, position *Vector3, interaxialDistance float64, isStereoscopicSideBySide bool, scene *Scene) *StereoscopicFreeCamera {
+	p := ba.ctx.Get("StereoscopicFreeCamera").New(name, position.JSObject(), interaxialDistance, isStereoscopicSideBySide.JSObject(), scene.JSObject())
 	return StereoscopicFreeCameraFromJSObject(p)
 }
 

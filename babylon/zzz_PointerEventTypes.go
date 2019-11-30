@@ -14,8 +14,8 @@ type PointerEventTypes struct{ p js.Value }
 func (p *PointerEventTypes) JSObject() js.Value { return p.p }
 
 // PointerEventTypes returns a PointerEventTypes JavaScript class.
-func (b *Babylon) PointerEventTypes() *PointerEventTypes {
-	p := b.ctx.Get("PointerEventTypes")
+func (ba *Babylon) PointerEventTypes() *PointerEventTypes {
+	p := ba.ctx.Get("PointerEventTypes")
 	return PointerEventTypesFromJSObject(p)
 }
 

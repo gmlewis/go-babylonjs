@@ -15,8 +15,8 @@ type GeometryBufferRendererSceneComponent struct{ p js.Value }
 func (g *GeometryBufferRendererSceneComponent) JSObject() js.Value { return g.p }
 
 // GeometryBufferRendererSceneComponent returns a GeometryBufferRendererSceneComponent JavaScript class.
-func (b *Babylon) GeometryBufferRendererSceneComponent() *GeometryBufferRendererSceneComponent {
-	p := b.ctx.Get("GeometryBufferRendererSceneComponent")
+func (ba *Babylon) GeometryBufferRendererSceneComponent() *GeometryBufferRendererSceneComponent {
+	p := ba.ctx.Get("GeometryBufferRendererSceneComponent")
 	return GeometryBufferRendererSceneComponentFromJSObject(p)
 }
 
@@ -28,8 +28,8 @@ func GeometryBufferRendererSceneComponentFromJSObject(p js.Value) *GeometryBuffe
 // NewGeometryBufferRendererSceneComponent returns a new GeometryBufferRendererSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometrybufferrendererscenecomponent
-func (b *Babylon) NewGeometryBufferRendererSceneComponent(scene *Scene) *GeometryBufferRendererSceneComponent {
-	p := b.ctx.Get("GeometryBufferRendererSceneComponent").New(scene.JSObject())
+func (ba *Babylon) NewGeometryBufferRendererSceneComponent(scene *Scene) *GeometryBufferRendererSceneComponent {
+	p := ba.ctx.Get("GeometryBufferRendererSceneComponent").New(scene.JSObject())
 	return GeometryBufferRendererSceneComponentFromJSObject(p)
 }
 

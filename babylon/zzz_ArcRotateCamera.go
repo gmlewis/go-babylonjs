@@ -19,8 +19,8 @@ type ArcRotateCamera struct{ *TargetCamera }
 func (a *ArcRotateCamera) JSObject() js.Value { return a.p }
 
 // ArcRotateCamera returns a ArcRotateCamera JavaScript class.
-func (b *Babylon) ArcRotateCamera() *ArcRotateCamera {
-	p := b.ctx.Get("ArcRotateCamera")
+func (ba *Babylon) ArcRotateCamera() *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera")
 	return ArcRotateCameraFromJSObject(p)
 }
 
@@ -31,18 +31,18 @@ func ArcRotateCameraFromJSObject(p js.Value) *ArcRotateCamera {
 
 // NewArcRotateCameraOpts contains optional parameters for NewArcRotateCamera.
 type NewArcRotateCameraOpts struct {
-	SetActiveOnSceneIfNoneActive *bool
+	SetActiveOnSceneIfNoneActive *JSBool
 }
 
 // NewArcRotateCamera returns a new ArcRotateCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera
-func (b *Babylon) NewArcRotateCamera(name string, alpha float64, beta float64, radius float64, target *Vector3, scene *Scene, opts *NewArcRotateCameraOpts) *ArcRotateCamera {
+func (ba *Babylon) NewArcRotateCamera(name string, alpha float64, beta float64, radius float64, target *Vector3, scene *Scene, opts *NewArcRotateCameraOpts) *ArcRotateCamera {
 	if opts == nil {
 		opts = &NewArcRotateCameraOpts{}
 	}
 
-	p := b.ctx.Get("ArcRotateCamera").New(name, alpha, beta, radius, target.JSObject(), scene.JSObject(), opts.SetActiveOnSceneIfNoneActive.JSObject())
+	p := ba.ctx.Get("ArcRotateCamera").New(name, alpha, beta, radius, target.JSObject(), scene.JSObject(), opts.SetActiveOnSceneIfNoneActive)
 	return ArcRotateCameraFromJSObject(p)
 }
 

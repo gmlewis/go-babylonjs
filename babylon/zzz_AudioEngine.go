@@ -17,8 +17,8 @@ type AudioEngine struct{ p js.Value }
 func (a *AudioEngine) JSObject() js.Value { return a.p }
 
 // AudioEngine returns a AudioEngine JavaScript class.
-func (b *Babylon) AudioEngine() *AudioEngine {
-	p := b.ctx.Get("AudioEngine")
+func (ba *Babylon) AudioEngine() *AudioEngine {
+	p := ba.ctx.Get("AudioEngine")
 	return AudioEngineFromJSObject(p)
 }
 
@@ -35,12 +35,12 @@ type NewAudioEngineOpts struct {
 // NewAudioEngine returns a new AudioEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.audioengine
-func (b *Babylon) NewAudioEngine(opts *NewAudioEngineOpts) *AudioEngine {
+func (ba *Babylon) NewAudioEngine(opts *NewAudioEngineOpts) *AudioEngine {
 	if opts == nil {
 		opts = &NewAudioEngineOpts{}
 	}
 
-	p := b.ctx.Get("AudioEngine").New(opts.HostElement)
+	p := ba.ctx.Get("AudioEngine").New(opts.HostElement)
 	return AudioEngineFromJSObject(p)
 }
 

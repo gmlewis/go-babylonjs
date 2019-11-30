@@ -16,8 +16,8 @@ type CubicEase struct{ *EasingFunction }
 func (c *CubicEase) JSObject() js.Value { return c.p }
 
 // CubicEase returns a CubicEase JavaScript class.
-func (b *Babylon) CubicEase() *CubicEase {
-	p := b.ctx.Get("CubicEase")
+func (ba *Babylon) CubicEase() *CubicEase {
+	p := ba.ctx.Get("CubicEase")
 	return CubicEaseFromJSObject(p)
 }
 

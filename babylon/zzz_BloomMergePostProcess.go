@@ -14,8 +14,8 @@ type BloomMergePostProcess struct{ *PostProcess }
 func (b *BloomMergePostProcess) JSObject() js.Value { return b.p }
 
 // BloomMergePostProcess returns a BloomMergePostProcess JavaScript class.
-func (b *Babylon) BloomMergePostProcess() *BloomMergePostProcess {
-	p := b.ctx.Get("BloomMergePostProcess")
+func (ba *Babylon) BloomMergePostProcess() *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess")
 	return BloomMergePostProcessFromJSObject(p)
 }
 
@@ -26,26 +26,26 @@ func BloomMergePostProcessFromJSObject(p js.Value) *BloomMergePostProcess {
 
 // NewBloomMergePostProcessOpts contains optional parameters for NewBloomMergePostProcess.
 type NewBloomMergePostProcessOpts struct {
-	SamplingMode *float64
+	SamplingMode *JSFloat64
 
 	Engine *Engine
 
-	Reusable *bool
+	Reusable *JSBool
 
-	TextureType *float64
+	TextureType *JSFloat64
 
-	BlockCompilation *bool
+	BlockCompilation *JSBool
 }
 
 // NewBloomMergePostProcess returns a new BloomMergePostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess
-func (b *Babylon) NewBloomMergePostProcess(name string, originalFromInput *PostProcess, blurred *PostProcess, weight float64, options float64, camera *Camera, opts *NewBloomMergePostProcessOpts) *BloomMergePostProcess {
+func (ba *Babylon) NewBloomMergePostProcess(name string, originalFromInput *PostProcess, blurred *PostProcess, weight float64, options float64, camera *Camera, opts *NewBloomMergePostProcessOpts) *BloomMergePostProcess {
 	if opts == nil {
 		opts = &NewBloomMergePostProcessOpts{}
 	}
 
-	p := b.ctx.Get("BloomMergePostProcess").New(name, originalFromInput.JSObject(), blurred.JSObject(), weight, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType, opts.BlockCompilation.JSObject())
+	p := ba.ctx.Get("BloomMergePostProcess").New(name, originalFromInput.JSObject(), blurred.JSObject(), weight, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable, opts.TextureType, opts.BlockCompilation)
 	return BloomMergePostProcessFromJSObject(p)
 }
 

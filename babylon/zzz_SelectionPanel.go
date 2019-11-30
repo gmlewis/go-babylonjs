@@ -16,8 +16,8 @@ type SelectionPanel struct{ *Rectangle }
 func (s *SelectionPanel) JSObject() js.Value { return s.p }
 
 // SelectionPanel returns a SelectionPanel JavaScript class.
-func (b *Babylon) SelectionPanel() *SelectionPanel {
-	p := b.ctx.Get("SelectionPanel")
+func (ba *Babylon) SelectionPanel() *SelectionPanel {
+	p := ba.ctx.Get("SelectionPanel")
 	return SelectionPanelFromJSObject(p)
 }
 
@@ -34,12 +34,12 @@ type NewSelectionPanelOpts struct {
 // NewSelectionPanel returns a new SelectionPanel object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.selectionpanel
-func (b *Babylon) NewSelectionPanel(name string, opts *NewSelectionPanelOpts) *SelectionPanel {
+func (ba *Babylon) NewSelectionPanel(name string, opts *NewSelectionPanelOpts) *SelectionPanel {
 	if opts == nil {
 		opts = &NewSelectionPanelOpts{}
 	}
 
-	p := b.ctx.Get("SelectionPanel").New(name, opts.Groups.JSObject())
+	p := ba.ctx.Get("SelectionPanel").New(name, opts.Groups.JSObject())
 	return SelectionPanelFromJSObject(p)
 }
 

@@ -14,8 +14,8 @@ type Ellipse struct{ *Container }
 func (e *Ellipse) JSObject() js.Value { return e.p }
 
 // Ellipse returns a Ellipse JavaScript class.
-func (b *Babylon) Ellipse() *Ellipse {
-	p := b.ctx.Get("Ellipse")
+func (ba *Babylon) Ellipse() *Ellipse {
+	p := ba.ctx.Get("Ellipse")
 	return EllipseFromJSObject(p)
 }
 
@@ -26,18 +26,18 @@ func EllipseFromJSObject(p js.Value) *Ellipse {
 
 // NewEllipseOpts contains optional parameters for NewEllipse.
 type NewEllipseOpts struct {
-	Name *string
+	Name *JSString
 }
 
 // NewEllipse returns a new Ellipse object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ellipse
-func (b *Babylon) NewEllipse(opts *NewEllipseOpts) *Ellipse {
+func (ba *Babylon) NewEllipse(opts *NewEllipseOpts) *Ellipse {
 	if opts == nil {
 		opts = &NewEllipseOpts{}
 	}
 
-	p := b.ctx.Get("Ellipse").New(opts.Name)
+	p := ba.ctx.Get("Ellipse").New(opts.Name)
 	return EllipseFromJSObject(p)
 }
 

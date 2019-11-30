@@ -17,8 +17,8 @@ type PBRMetallicRoughnessMaterial struct{ *PBRBaseSimpleMaterial }
 func (p *PBRMetallicRoughnessMaterial) JSObject() js.Value { return p.p }
 
 // PBRMetallicRoughnessMaterial returns a PBRMetallicRoughnessMaterial JavaScript class.
-func (b *Babylon) PBRMetallicRoughnessMaterial() *PBRMetallicRoughnessMaterial {
-	p := b.ctx.Get("PBRMetallicRoughnessMaterial")
+func (ba *Babylon) PBRMetallicRoughnessMaterial() *PBRMetallicRoughnessMaterial {
+	p := ba.ctx.Get("PBRMetallicRoughnessMaterial")
 	return PBRMetallicRoughnessMaterialFromJSObject(p)
 }
 
@@ -30,8 +30,8 @@ func PBRMetallicRoughnessMaterialFromJSObject(p js.Value) *PBRMetallicRoughnessM
 // NewPBRMetallicRoughnessMaterial returns a new PBRMetallicRoughnessMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrmetallicroughnessmaterial
-func (b *Babylon) NewPBRMetallicRoughnessMaterial(name string, scene *Scene) *PBRMetallicRoughnessMaterial {
-	p := b.ctx.Get("PBRMetallicRoughnessMaterial").New(name, scene.JSObject())
+func (ba *Babylon) NewPBRMetallicRoughnessMaterial(name string, scene *Scene) *PBRMetallicRoughnessMaterial {
+	p := ba.ctx.Get("PBRMetallicRoughnessMaterial").New(name, scene.JSObject())
 	return PBRMetallicRoughnessMaterialFromJSObject(p)
 }
 

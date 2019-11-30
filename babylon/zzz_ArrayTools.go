@@ -14,8 +14,8 @@ type ArrayTools struct{ p js.Value }
 func (a *ArrayTools) JSObject() js.Value { return a.p }
 
 // ArrayTools returns a ArrayTools JavaScript class.
-func (b *Babylon) ArrayTools() *ArrayTools {
-	p := b.ctx.Get("ArrayTools")
+func (ba *Babylon) ArrayTools() *ArrayTools {
+	p := ba.ctx.Get("ArrayTools")
 	return ArrayToolsFromJSObject(p)
 }
 

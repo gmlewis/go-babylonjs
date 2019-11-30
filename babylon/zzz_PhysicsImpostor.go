@@ -16,8 +16,8 @@ type PhysicsImpostor struct{ p js.Value }
 func (p *PhysicsImpostor) JSObject() js.Value { return p.p }
 
 // PhysicsImpostor returns a PhysicsImpostor JavaScript class.
-func (b *Babylon) PhysicsImpostor() *PhysicsImpostor {
-	p := b.ctx.Get("PhysicsImpostor")
+func (ba *Babylon) PhysicsImpostor() *PhysicsImpostor {
+	p := ba.ctx.Get("PhysicsImpostor")
 	return PhysicsImpostorFromJSObject(p)
 }
 
@@ -28,7 +28,7 @@ func PhysicsImpostorFromJSObject(p js.Value) *PhysicsImpostor {
 
 // NewPhysicsImpostorOpts contains optional parameters for NewPhysicsImpostor.
 type NewPhysicsImpostorOpts struct {
-	_options *PhysicsImpostorParameters
+	_options js.Value
 
 	_scene *Scene
 }
@@ -36,12 +36,12 @@ type NewPhysicsImpostorOpts struct {
 // NewPhysicsImpostor returns a new PhysicsImpostor object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsimpostor
-func (b *Babylon) NewPhysicsImpostor(object *IPhysicsEnabledObject, jsType float64, opts *NewPhysicsImpostorOpts) *PhysicsImpostor {
+func (ba *Babylon) NewPhysicsImpostor(object js.Value, jsType float64, opts *NewPhysicsImpostorOpts) *PhysicsImpostor {
 	if opts == nil {
 		opts = &NewPhysicsImpostorOpts{}
 	}
 
-	p := b.ctx.Get("PhysicsImpostor").New(object.JSObject(), jsType, opts._options.JSObject(), opts._scene.JSObject())
+	p := ba.ctx.Get("PhysicsImpostor").New(object, jsType, opts._options, opts._scene.JSObject())
 	return PhysicsImpostorFromJSObject(p)
 }
 

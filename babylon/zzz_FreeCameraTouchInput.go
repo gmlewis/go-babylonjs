@@ -16,8 +16,8 @@ type FreeCameraTouchInput struct{ p js.Value }
 func (f *FreeCameraTouchInput) JSObject() js.Value { return f.p }
 
 // FreeCameraTouchInput returns a FreeCameraTouchInput JavaScript class.
-func (b *Babylon) FreeCameraTouchInput() *FreeCameraTouchInput {
-	p := b.ctx.Get("FreeCameraTouchInput")
+func (ba *Babylon) FreeCameraTouchInput() *FreeCameraTouchInput {
+	p := ba.ctx.Get("FreeCameraTouchInput")
 	return FreeCameraTouchInputFromJSObject(p)
 }
 

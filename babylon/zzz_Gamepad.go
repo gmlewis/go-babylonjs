@@ -14,8 +14,8 @@ type Gamepad struct{ p js.Value }
 func (g *Gamepad) JSObject() js.Value { return g.p }
 
 // Gamepad returns a Gamepad JavaScript class.
-func (b *Babylon) Gamepad() *Gamepad {
-	p := b.ctx.Get("Gamepad")
+func (ba *Babylon) Gamepad() *Gamepad {
+	p := ba.ctx.Get("Gamepad")
 	return GamepadFromJSObject(p)
 }
 
@@ -26,24 +26,24 @@ func GamepadFromJSObject(p js.Value) *Gamepad {
 
 // NewGamepadOpts contains optional parameters for NewGamepad.
 type NewGamepadOpts struct {
-	LeftStickX *float64
+	LeftStickX *JSFloat64
 
-	LeftStickY *float64
+	LeftStickY *JSFloat64
 
-	RightStickX *float64
+	RightStickX *JSFloat64
 
-	RightStickY *float64
+	RightStickY *JSFloat64
 }
 
 // NewGamepad returns a new Gamepad object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gamepad
-func (b *Babylon) NewGamepad(id string, index float64, browserGamepad interface{}, opts *NewGamepadOpts) *Gamepad {
+func (ba *Babylon) NewGamepad(id string, index float64, browserGamepad interface{}, opts *NewGamepadOpts) *Gamepad {
 	if opts == nil {
 		opts = &NewGamepadOpts{}
 	}
 
-	p := b.ctx.Get("Gamepad").New(id, index, browserGamepad, opts.LeftStickX, opts.LeftStickY, opts.RightStickX, opts.RightStickY)
+	p := ba.ctx.Get("Gamepad").New(id, index, browserGamepad, opts.LeftStickX, opts.LeftStickY, opts.RightStickX, opts.RightStickY)
 	return GamepadFromJSObject(p)
 }
 

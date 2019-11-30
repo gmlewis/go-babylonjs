@@ -14,8 +14,8 @@ type ImageScrollBar struct{ *BaseSlider }
 func (i *ImageScrollBar) JSObject() js.Value { return i.p }
 
 // ImageScrollBar returns a ImageScrollBar JavaScript class.
-func (b *Babylon) ImageScrollBar() *ImageScrollBar {
-	p := b.ctx.Get("ImageScrollBar")
+func (ba *Babylon) ImageScrollBar() *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar")
 	return ImageScrollBarFromJSObject(p)
 }
 
@@ -26,18 +26,18 @@ func ImageScrollBarFromJSObject(p js.Value) *ImageScrollBar {
 
 // NewImageScrollBarOpts contains optional parameters for NewImageScrollBar.
 type NewImageScrollBarOpts struct {
-	Name *string
+	Name *JSString
 }
 
 // NewImageScrollBar returns a new ImageScrollBar object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imagescrollbar
-func (b *Babylon) NewImageScrollBar(opts *NewImageScrollBarOpts) *ImageScrollBar {
+func (ba *Babylon) NewImageScrollBar(opts *NewImageScrollBarOpts) *ImageScrollBar {
 	if opts == nil {
 		opts = &NewImageScrollBarOpts{}
 	}
 
-	p := b.ctx.Get("ImageScrollBar").New(opts.Name)
+	p := ba.ctx.Get("ImageScrollBar").New(opts.Name)
 	return ImageScrollBarFromJSObject(p)
 }
 

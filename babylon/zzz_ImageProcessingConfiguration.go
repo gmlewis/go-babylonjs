@@ -16,8 +16,8 @@ type ImageProcessingConfiguration struct{ p js.Value }
 func (i *ImageProcessingConfiguration) JSObject() js.Value { return i.p }
 
 // ImageProcessingConfiguration returns a ImageProcessingConfiguration JavaScript class.
-func (b *Babylon) ImageProcessingConfiguration() *ImageProcessingConfiguration {
-	p := b.ctx.Get("ImageProcessingConfiguration")
+func (ba *Babylon) ImageProcessingConfiguration() *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration")
 	return ImageProcessingConfigurationFromJSObject(p)
 }
 

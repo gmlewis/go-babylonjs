@@ -14,8 +14,8 @@ type TimingTools struct{ p js.Value }
 func (t *TimingTools) JSObject() js.Value { return t.p }
 
 // TimingTools returns a TimingTools JavaScript class.
-func (b *Babylon) TimingTools() *TimingTools {
-	p := b.ctx.Get("TimingTools")
+func (ba *Babylon) TimingTools() *TimingTools {
+	p := ba.ctx.Get("TimingTools")
 	return TimingToolsFromJSObject(p)
 }
 

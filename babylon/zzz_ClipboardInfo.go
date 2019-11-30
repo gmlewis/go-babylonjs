@@ -14,8 +14,8 @@ type ClipboardInfo struct{ p js.Value }
 func (c *ClipboardInfo) JSObject() js.Value { return c.p }
 
 // ClipboardInfo returns a ClipboardInfo JavaScript class.
-func (b *Babylon) ClipboardInfo() *ClipboardInfo {
-	p := b.ctx.Get("ClipboardInfo")
+func (ba *Babylon) ClipboardInfo() *ClipboardInfo {
+	p := ba.ctx.Get("ClipboardInfo")
 	return ClipboardInfoFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func ClipboardInfoFromJSObject(p js.Value) *ClipboardInfo {
 // NewClipboardInfo returns a new ClipboardInfo object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.clipboardinfo
-func (b *Babylon) NewClipboardInfo(jsType float64, event js.Value) *ClipboardInfo {
-	p := b.ctx.Get("ClipboardInfo").New(jsType, event)
+func (ba *Babylon) NewClipboardInfo(jsType float64, event js.Value) *ClipboardInfo {
+	p := ba.ctx.Get("ClipboardInfo").New(jsType, event)
 	return ClipboardInfoFromJSObject(p)
 }
 

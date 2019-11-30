@@ -16,8 +16,8 @@ type RenderTargetTexture struct{ *Texture }
 func (r *RenderTargetTexture) JSObject() js.Value { return r.p }
 
 // RenderTargetTexture returns a RenderTargetTexture JavaScript class.
-func (b *Babylon) RenderTargetTexture() *RenderTargetTexture {
-	p := b.ctx.Get("RenderTargetTexture")
+func (ba *Babylon) RenderTargetTexture() *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture")
 	return RenderTargetTextureFromJSObject(p)
 }
 
@@ -28,36 +28,36 @@ func RenderTargetTextureFromJSObject(p js.Value) *RenderTargetTexture {
 
 // NewRenderTargetTextureOpts contains optional parameters for NewRenderTargetTexture.
 type NewRenderTargetTextureOpts struct {
-	GenerateMipMaps *bool
+	GenerateMipMaps *JSBool
 
-	DoNotChangeAspectRatio *bool
+	DoNotChangeAspectRatio *JSBool
 
-	Type *float64
+	Type *JSFloat64
 
-	IsCube *bool
+	IsCube *JSBool
 
-	SamplingMode *float64
+	SamplingMode *JSFloat64
 
-	GenerateDepthBuffer *bool
+	GenerateDepthBuffer *JSBool
 
-	GenerateStencilBuffer *bool
+	GenerateStencilBuffer *JSBool
 
-	IsMulti *bool
+	IsMulti *JSBool
 
-	Format *float64
+	Format *JSFloat64
 
-	DelayAllocation *bool
+	DelayAllocation *JSBool
 }
 
 // NewRenderTargetTexture returns a new RenderTargetTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rendertargettexture
-func (b *Babylon) NewRenderTargetTexture(name string, size float64, scene *Scene, opts *NewRenderTargetTextureOpts) *RenderTargetTexture {
+func (ba *Babylon) NewRenderTargetTexture(name string, size float64, scene *Scene, opts *NewRenderTargetTextureOpts) *RenderTargetTexture {
 	if opts == nil {
 		opts = &NewRenderTargetTextureOpts{}
 	}
 
-	p := b.ctx.Get("RenderTargetTexture").New(name, size, scene.JSObject(), opts.GenerateMipMaps.JSObject(), opts.DoNotChangeAspectRatio.JSObject(), opts.Type, opts.IsCube.JSObject(), opts.SamplingMode, opts.GenerateDepthBuffer.JSObject(), opts.GenerateStencilBuffer.JSObject(), opts.IsMulti.JSObject(), opts.Format, opts.DelayAllocation.JSObject())
+	p := ba.ctx.Get("RenderTargetTexture").New(name, size, scene.JSObject(), opts.GenerateMipMaps, opts.DoNotChangeAspectRatio, opts.Type, opts.IsCube, opts.SamplingMode, opts.GenerateDepthBuffer, opts.GenerateStencilBuffer, opts.IsMulti, opts.Format, opts.DelayAllocation)
 	return RenderTargetTextureFromJSObject(p)
 }
 

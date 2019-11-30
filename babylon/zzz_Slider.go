@@ -14,8 +14,8 @@ type Slider struct{ *BaseSlider }
 func (s *Slider) JSObject() js.Value { return s.p }
 
 // Slider returns a Slider JavaScript class.
-func (b *Babylon) Slider() *Slider {
-	p := b.ctx.Get("Slider")
+func (ba *Babylon) Slider() *Slider {
+	p := ba.ctx.Get("Slider")
 	return SliderFromJSObject(p)
 }
 
@@ -26,18 +26,18 @@ func SliderFromJSObject(p js.Value) *Slider {
 
 // NewSliderOpts contains optional parameters for NewSlider.
 type NewSliderOpts struct {
-	Name *string
+	Name *JSString
 }
 
 // NewSlider returns a new Slider object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.slider
-func (b *Babylon) NewSlider(opts *NewSliderOpts) *Slider {
+func (ba *Babylon) NewSlider(opts *NewSliderOpts) *Slider {
 	if opts == nil {
 		opts = &NewSliderOpts{}
 	}
 
-	p := b.ctx.Get("Slider").New(opts.Name)
+	p := ba.ctx.Get("Slider").New(opts.Name)
 	return SliderFromJSObject(p)
 }
 

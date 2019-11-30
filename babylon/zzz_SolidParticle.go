@@ -14,8 +14,8 @@ type SolidParticle struct{ p js.Value }
 func (s *SolidParticle) JSObject() js.Value { return s.p }
 
 // SolidParticle returns a SolidParticle JavaScript class.
-func (b *Babylon) SolidParticle() *SolidParticle {
-	p := b.ctx.Get("SolidParticle")
+func (ba *Babylon) SolidParticle() *SolidParticle {
+	p := ba.ctx.Get("SolidParticle")
 	return SolidParticleFromJSObject(p)
 }
 
@@ -28,18 +28,18 @@ func SolidParticleFromJSObject(p js.Value) *SolidParticle {
 type NewSolidParticleOpts struct {
 	ModelBoundingInfo *BoundingInfo
 
-	MaterialIndex *float64
+	MaterialIndex *JSFloat64
 }
 
 // NewSolidParticle returns a new SolidParticle object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticle
-func (b *Babylon) NewSolidParticle(particleIndex float64, particleId float64, positionIndex float64, indiceIndex float64, model *ModelShape, shapeId float64, idxInShape float64, sps *SolidParticleSystem, opts *NewSolidParticleOpts) *SolidParticle {
+func (ba *Babylon) NewSolidParticle(particleIndex float64, particleId float64, positionIndex float64, indiceIndex float64, model *ModelShape, shapeId float64, idxInShape float64, sps *SolidParticleSystem, opts *NewSolidParticleOpts) *SolidParticle {
 	if opts == nil {
 		opts = &NewSolidParticleOpts{}
 	}
 
-	p := b.ctx.Get("SolidParticle").New(particleIndex, particleId, positionIndex, indiceIndex, model.JSObject(), shapeId, idxInShape, sps.JSObject(), opts.ModelBoundingInfo.JSObject(), opts.MaterialIndex)
+	p := ba.ctx.Get("SolidParticle").New(particleIndex, particleId, positionIndex, indiceIndex, model.JSObject(), shapeId, idxInShape, sps.JSObject(), opts.ModelBoundingInfo.JSObject(), opts.MaterialIndex)
 	return SolidParticleFromJSObject(p)
 }
 

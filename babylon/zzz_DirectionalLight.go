@@ -17,8 +17,8 @@ type DirectionalLight struct{ *ShadowLight }
 func (d *DirectionalLight) JSObject() js.Value { return d.p }
 
 // DirectionalLight returns a DirectionalLight JavaScript class.
-func (b *Babylon) DirectionalLight() *DirectionalLight {
-	p := b.ctx.Get("DirectionalLight")
+func (ba *Babylon) DirectionalLight() *DirectionalLight {
+	p := ba.ctx.Get("DirectionalLight")
 	return DirectionalLightFromJSObject(p)
 }
 
@@ -30,8 +30,8 @@ func DirectionalLightFromJSObject(p js.Value) *DirectionalLight {
 // NewDirectionalLight returns a new DirectionalLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.directionallight
-func (b *Babylon) NewDirectionalLight(name string, direction *Vector3, scene *Scene) *DirectionalLight {
-	p := b.ctx.Get("DirectionalLight").New(name, direction.JSObject(), scene.JSObject())
+func (ba *Babylon) NewDirectionalLight(name string, direction *Vector3, scene *Scene) *DirectionalLight {
+	p := ba.ctx.Get("DirectionalLight").New(name, direction.JSObject(), scene.JSObject())
 	return DirectionalLightFromJSObject(p)
 }
 

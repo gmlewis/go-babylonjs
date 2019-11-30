@@ -15,8 +15,8 @@ type CylinderDirectedParticleEmitter struct{ *CylinderParticleEmitter }
 func (c *CylinderDirectedParticleEmitter) JSObject() js.Value { return c.p }
 
 // CylinderDirectedParticleEmitter returns a CylinderDirectedParticleEmitter JavaScript class.
-func (b *Babylon) CylinderDirectedParticleEmitter() *CylinderDirectedParticleEmitter {
-	p := b.ctx.Get("CylinderDirectedParticleEmitter")
+func (ba *Babylon) CylinderDirectedParticleEmitter() *CylinderDirectedParticleEmitter {
+	p := ba.ctx.Get("CylinderDirectedParticleEmitter")
 	return CylinderDirectedParticleEmitterFromJSObject(p)
 }
 
@@ -27,11 +27,11 @@ func CylinderDirectedParticleEmitterFromJSObject(p js.Value) *CylinderDirectedPa
 
 // NewCylinderDirectedParticleEmitterOpts contains optional parameters for NewCylinderDirectedParticleEmitter.
 type NewCylinderDirectedParticleEmitterOpts struct {
-	Radius *float64
+	Radius *JSFloat64
 
-	Height *float64
+	Height *JSFloat64
 
-	RadiusRange *float64
+	RadiusRange *JSFloat64
 
 	Direction1 *Vector3
 
@@ -41,12 +41,12 @@ type NewCylinderDirectedParticleEmitterOpts struct {
 // NewCylinderDirectedParticleEmitter returns a new CylinderDirectedParticleEmitter object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cylinderdirectedparticleemitter
-func (b *Babylon) NewCylinderDirectedParticleEmitter(opts *NewCylinderDirectedParticleEmitterOpts) *CylinderDirectedParticleEmitter {
+func (ba *Babylon) NewCylinderDirectedParticleEmitter(opts *NewCylinderDirectedParticleEmitterOpts) *CylinderDirectedParticleEmitter {
 	if opts == nil {
 		opts = &NewCylinderDirectedParticleEmitterOpts{}
 	}
 
-	p := b.ctx.Get("CylinderDirectedParticleEmitter").New(opts.Radius, opts.Height, opts.RadiusRange, opts.Direction1.JSObject(), opts.Direction2.JSObject())
+	p := ba.ctx.Get("CylinderDirectedParticleEmitter").New(opts.Radius, opts.Height, opts.RadiusRange, opts.Direction1.JSObject(), opts.Direction2.JSObject())
 	return CylinderDirectedParticleEmitterFromJSObject(p)
 }
 

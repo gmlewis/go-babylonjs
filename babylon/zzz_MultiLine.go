@@ -14,8 +14,8 @@ type MultiLine struct{ *Control }
 func (m *MultiLine) JSObject() js.Value { return m.p }
 
 // MultiLine returns a MultiLine JavaScript class.
-func (b *Babylon) MultiLine() *MultiLine {
-	p := b.ctx.Get("MultiLine")
+func (ba *Babylon) MultiLine() *MultiLine {
+	p := ba.ctx.Get("MultiLine")
 	return MultiLineFromJSObject(p)
 }
 
@@ -26,18 +26,18 @@ func MultiLineFromJSObject(p js.Value) *MultiLine {
 
 // NewMultiLineOpts contains optional parameters for NewMultiLine.
 type NewMultiLineOpts struct {
-	Name *string
+	Name *JSString
 }
 
 // NewMultiLine returns a new MultiLine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiline
-func (b *Babylon) NewMultiLine(opts *NewMultiLineOpts) *MultiLine {
+func (ba *Babylon) NewMultiLine(opts *NewMultiLineOpts) *MultiLine {
 	if opts == nil {
 		opts = &NewMultiLineOpts{}
 	}
 
-	p := b.ctx.Get("MultiLine").New(opts.Name)
+	p := ba.ctx.Get("MultiLine").New(opts.Name)
 	return MultiLineFromJSObject(p)
 }
 

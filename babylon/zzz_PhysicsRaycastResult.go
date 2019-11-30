@@ -16,8 +16,8 @@ type PhysicsRaycastResult struct{ p js.Value }
 func (p *PhysicsRaycastResult) JSObject() js.Value { return p.p }
 
 // PhysicsRaycastResult returns a PhysicsRaycastResult JavaScript class.
-func (b *Babylon) PhysicsRaycastResult() *PhysicsRaycastResult {
-	p := b.ctx.Get("PhysicsRaycastResult")
+func (ba *Babylon) PhysicsRaycastResult() *PhysicsRaycastResult {
+	p := ba.ctx.Get("PhysicsRaycastResult")
 	return PhysicsRaycastResultFromJSObject(p)
 }
 

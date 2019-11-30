@@ -14,8 +14,8 @@ type AnimationGroup struct{ p js.Value }
 func (a *AnimationGroup) JSObject() js.Value { return a.p }
 
 // AnimationGroup returns a AnimationGroup JavaScript class.
-func (b *Babylon) AnimationGroup() *AnimationGroup {
-	p := b.ctx.Get("AnimationGroup")
+func (ba *Babylon) AnimationGroup() *AnimationGroup {
+	p := ba.ctx.Get("AnimationGroup")
 	return AnimationGroupFromJSObject(p)
 }
 
@@ -32,12 +32,12 @@ type NewAnimationGroupOpts struct {
 // NewAnimationGroup returns a new AnimationGroup object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationgroup
-func (b *Babylon) NewAnimationGroup(name string, opts *NewAnimationGroupOpts) *AnimationGroup {
+func (ba *Babylon) NewAnimationGroup(name string, opts *NewAnimationGroupOpts) *AnimationGroup {
 	if opts == nil {
 		opts = &NewAnimationGroupOpts{}
 	}
 
-	p := b.ctx.Get("AnimationGroup").New(name, opts.Scene.JSObject())
+	p := ba.ctx.Get("AnimationGroup").New(name, opts.Scene.JSObject())
 	return AnimationGroupFromJSObject(p)
 }
 

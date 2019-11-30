@@ -14,8 +14,8 @@ type LightInformationBlock struct{ *NodeMaterialBlock }
 func (l *LightInformationBlock) JSObject() js.Value { return l.p }
 
 // LightInformationBlock returns a LightInformationBlock JavaScript class.
-func (b *Babylon) LightInformationBlock() *LightInformationBlock {
-	p := b.ctx.Get("LightInformationBlock")
+func (ba *Babylon) LightInformationBlock() *LightInformationBlock {
+	p := ba.ctx.Get("LightInformationBlock")
 	return LightInformationBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func LightInformationBlockFromJSObject(p js.Value) *LightInformationBlock {
 // NewLightInformationBlock returns a new LightInformationBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lightinformationblock
-func (b *Babylon) NewLightInformationBlock(name string) *LightInformationBlock {
-	p := b.ctx.Get("LightInformationBlock").New(name)
+func (ba *Babylon) NewLightInformationBlock(name string) *LightInformationBlock {
+	p := ba.ctx.Get("LightInformationBlock").New(name)
 	return LightInformationBlockFromJSObject(p)
 }
 

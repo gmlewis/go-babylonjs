@@ -14,8 +14,8 @@ type MinBlock struct{ *NodeMaterialBlock }
 func (m *MinBlock) JSObject() js.Value { return m.p }
 
 // MinBlock returns a MinBlock JavaScript class.
-func (b *Babylon) MinBlock() *MinBlock {
-	p := b.ctx.Get("MinBlock")
+func (ba *Babylon) MinBlock() *MinBlock {
+	p := ba.ctx.Get("MinBlock")
 	return MinBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func MinBlockFromJSObject(p js.Value) *MinBlock {
 // NewMinBlock returns a new MinBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.minblock
-func (b *Babylon) NewMinBlock(name string) *MinBlock {
-	p := b.ctx.Get("MinBlock").New(name)
+func (ba *Babylon) NewMinBlock(name string) *MinBlock {
+	p := ba.ctx.Get("MinBlock").New(name)
 	return MinBlockFromJSObject(p)
 }
 

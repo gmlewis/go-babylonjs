@@ -15,8 +15,8 @@ type HemisphericLight struct{ *Light }
 func (h *HemisphericLight) JSObject() js.Value { return h.p }
 
 // HemisphericLight returns a HemisphericLight JavaScript class.
-func (b *Babylon) HemisphericLight() *HemisphericLight {
-	p := b.ctx.Get("HemisphericLight")
+func (ba *Babylon) HemisphericLight() *HemisphericLight {
+	p := ba.ctx.Get("HemisphericLight")
 	return HemisphericLightFromJSObject(p)
 }
 
@@ -28,8 +28,8 @@ func HemisphericLightFromJSObject(p js.Value) *HemisphericLight {
 // NewHemisphericLight returns a new HemisphericLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hemisphericlight
-func (b *Babylon) NewHemisphericLight(name string, direction *Vector3, scene *Scene) *HemisphericLight {
-	p := b.ctx.Get("HemisphericLight").New(name, direction.JSObject(), scene.JSObject())
+func (ba *Babylon) NewHemisphericLight(name string, direction *Vector3, scene *Scene) *HemisphericLight {
+	p := ba.ctx.Get("HemisphericLight").New(name, direction.JSObject(), scene.JSObject())
 	return HemisphericLightFromJSObject(p)
 }
 

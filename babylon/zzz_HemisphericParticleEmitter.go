@@ -15,8 +15,8 @@ type HemisphericParticleEmitter struct{ p js.Value }
 func (h *HemisphericParticleEmitter) JSObject() js.Value { return h.p }
 
 // HemisphericParticleEmitter returns a HemisphericParticleEmitter JavaScript class.
-func (b *Babylon) HemisphericParticleEmitter() *HemisphericParticleEmitter {
-	p := b.ctx.Get("HemisphericParticleEmitter")
+func (ba *Babylon) HemisphericParticleEmitter() *HemisphericParticleEmitter {
+	p := ba.ctx.Get("HemisphericParticleEmitter")
 	return HemisphericParticleEmitterFromJSObject(p)
 }
 
@@ -27,22 +27,22 @@ func HemisphericParticleEmitterFromJSObject(p js.Value) *HemisphericParticleEmit
 
 // NewHemisphericParticleEmitterOpts contains optional parameters for NewHemisphericParticleEmitter.
 type NewHemisphericParticleEmitterOpts struct {
-	Radius *float64
+	Radius *JSFloat64
 
-	RadiusRange *float64
+	RadiusRange *JSFloat64
 
-	DirectionRandomizer *float64
+	DirectionRandomizer *JSFloat64
 }
 
 // NewHemisphericParticleEmitter returns a new HemisphericParticleEmitter object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hemisphericparticleemitter
-func (b *Babylon) NewHemisphericParticleEmitter(opts *NewHemisphericParticleEmitterOpts) *HemisphericParticleEmitter {
+func (ba *Babylon) NewHemisphericParticleEmitter(opts *NewHemisphericParticleEmitterOpts) *HemisphericParticleEmitter {
 	if opts == nil {
 		opts = &NewHemisphericParticleEmitterOpts{}
 	}
 
-	p := b.ctx.Get("HemisphericParticleEmitter").New(opts.Radius, opts.RadiusRange, opts.DirectionRandomizer)
+	p := ba.ctx.Get("HemisphericParticleEmitter").New(opts.Radius, opts.RadiusRange, opts.DirectionRandomizer)
 	return HemisphericParticleEmitterFromJSObject(p)
 }
 

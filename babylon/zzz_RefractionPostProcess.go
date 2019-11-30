@@ -16,8 +16,8 @@ type RefractionPostProcess struct{ *PostProcess }
 func (r *RefractionPostProcess) JSObject() js.Value { return r.p }
 
 // RefractionPostProcess returns a RefractionPostProcess JavaScript class.
-func (b *Babylon) RefractionPostProcess() *RefractionPostProcess {
-	p := b.ctx.Get("RefractionPostProcess")
+func (ba *Babylon) RefractionPostProcess() *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess")
 	return RefractionPostProcessFromJSObject(p)
 }
 
@@ -28,22 +28,22 @@ func RefractionPostProcessFromJSObject(p js.Value) *RefractionPostProcess {
 
 // NewRefractionPostProcessOpts contains optional parameters for NewRefractionPostProcess.
 type NewRefractionPostProcessOpts struct {
-	SamplingMode *float64
+	SamplingMode *JSFloat64
 
 	Engine *Engine
 
-	Reusable *bool
+	Reusable *JSBool
 }
 
 // NewRefractionPostProcess returns a new RefractionPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess
-func (b *Babylon) NewRefractionPostProcess(name string, refractionTextureUrl string, color *Color3, depth float64, colorLevel float64, options float64, camera *Camera, opts *NewRefractionPostProcessOpts) *RefractionPostProcess {
+func (ba *Babylon) NewRefractionPostProcess(name string, refractionTextureUrl string, color *Color3, depth float64, colorLevel float64, options float64, camera *Camera, opts *NewRefractionPostProcessOpts) *RefractionPostProcess {
 	if opts == nil {
 		opts = &NewRefractionPostProcessOpts{}
 	}
 
-	p := b.ctx.Get("RefractionPostProcess").New(name, refractionTextureUrl, color.JSObject(), depth, colorLevel, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject())
+	p := ba.ctx.Get("RefractionPostProcess").New(name, refractionTextureUrl, color.JSObject(), depth, colorLevel, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable)
 	return RefractionPostProcessFromJSObject(p)
 }
 

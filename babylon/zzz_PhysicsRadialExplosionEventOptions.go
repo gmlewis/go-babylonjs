@@ -16,8 +16,8 @@ type PhysicsRadialExplosionEventOptions struct{ p js.Value }
 func (p *PhysicsRadialExplosionEventOptions) JSObject() js.Value { return p.p }
 
 // PhysicsRadialExplosionEventOptions returns a PhysicsRadialExplosionEventOptions JavaScript class.
-func (b *Babylon) PhysicsRadialExplosionEventOptions() *PhysicsRadialExplosionEventOptions {
-	p := b.ctx.Get("PhysicsRadialExplosionEventOptions")
+func (ba *Babylon) PhysicsRadialExplosionEventOptions() *PhysicsRadialExplosionEventOptions {
+	p := ba.ctx.Get("PhysicsRadialExplosionEventOptions")
 	return PhysicsRadialExplosionEventOptionsFromJSObject(p)
 }
 

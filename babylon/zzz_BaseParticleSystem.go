@@ -18,8 +18,8 @@ type BaseParticleSystem struct{ p js.Value }
 func (b *BaseParticleSystem) JSObject() js.Value { return b.p }
 
 // BaseParticleSystem returns a BaseParticleSystem JavaScript class.
-func (b *Babylon) BaseParticleSystem() *BaseParticleSystem {
-	p := b.ctx.Get("BaseParticleSystem")
+func (ba *Babylon) BaseParticleSystem() *BaseParticleSystem {
+	p := ba.ctx.Get("BaseParticleSystem")
 	return BaseParticleSystemFromJSObject(p)
 }
 
@@ -31,8 +31,8 @@ func BaseParticleSystemFromJSObject(p js.Value) *BaseParticleSystem {
 // NewBaseParticleSystem returns a new BaseParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.baseparticlesystem
-func (b *Babylon) NewBaseParticleSystem(name string) *BaseParticleSystem {
-	p := b.ctx.Get("BaseParticleSystem").New(name)
+func (ba *Babylon) NewBaseParticleSystem(name string) *BaseParticleSystem {
+	p := ba.ctx.Get("BaseParticleSystem").New(name)
 	return BaseParticleSystemFromJSObject(p)
 }
 

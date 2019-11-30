@@ -16,8 +16,8 @@ type EngineView struct{ p js.Value }
 func (e *EngineView) JSObject() js.Value { return e.p }
 
 // EngineView returns a EngineView JavaScript class.
-func (b *Babylon) EngineView() *EngineView {
-	p := b.ctx.Get("EngineView")
+func (ba *Babylon) EngineView() *EngineView {
+	p := ba.ctx.Get("EngineView")
 	return EngineViewFromJSObject(p)
 }
 

@@ -17,8 +17,8 @@ type PhotoDome struct{ *TransformNode }
 func (p *PhotoDome) JSObject() js.Value { return p.p }
 
 // PhotoDome returns a PhotoDome JavaScript class.
-func (b *Babylon) PhotoDome() *PhotoDome {
-	p := b.ctx.Get("PhotoDome")
+func (ba *Babylon) PhotoDome() *PhotoDome {
+	p := ba.ctx.Get("PhotoDome")
 	return PhotoDomeFromJSObject(p)
 }
 
@@ -35,12 +35,12 @@ type NewPhotoDomeOpts struct {
 // NewPhotoDome returns a new PhotoDome object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.photodome
-func (b *Babylon) NewPhotoDome(name string, urlOfPhoto string, options js.Value, scene *Scene, opts *NewPhotoDomeOpts) *PhotoDome {
+func (ba *Babylon) NewPhotoDome(name string, urlOfPhoto string, options js.Value, scene *Scene, opts *NewPhotoDomeOpts) *PhotoDome {
 	if opts == nil {
 		opts = &NewPhotoDomeOpts{}
 	}
 
-	p := b.ctx.Get("PhotoDome").New(name, urlOfPhoto, options, scene.JSObject(), opts.OnError)
+	p := ba.ctx.Get("PhotoDome").New(name, urlOfPhoto, options, scene.JSObject(), opts.OnError)
 	return PhotoDomeFromJSObject(p)
 }
 

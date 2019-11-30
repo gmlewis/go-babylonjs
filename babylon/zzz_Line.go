@@ -14,8 +14,8 @@ type Line struct{ *Control }
 func (l *Line) JSObject() js.Value { return l.p }
 
 // Line returns a Line JavaScript class.
-func (b *Babylon) Line() *Line {
-	p := b.ctx.Get("Line")
+func (ba *Babylon) Line() *Line {
+	p := ba.ctx.Get("Line")
 	return LineFromJSObject(p)
 }
 
@@ -26,18 +26,18 @@ func LineFromJSObject(p js.Value) *Line {
 
 // NewLineOpts contains optional parameters for NewLine.
 type NewLineOpts struct {
-	Name *string
+	Name *JSString
 }
 
 // NewLine returns a new Line object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.line
-func (b *Babylon) NewLine(opts *NewLineOpts) *Line {
+func (ba *Babylon) NewLine(opts *NewLineOpts) *Line {
 	if opts == nil {
 		opts = &NewLineOpts{}
 	}
 
-	p := b.ctx.Get("Line").New(opts.Name)
+	p := ba.ctx.Get("Line").New(opts.Name)
 	return LineFromJSObject(p)
 }
 

@@ -17,8 +17,8 @@ type PostProcessRenderEffect struct{ p js.Value }
 func (p *PostProcessRenderEffect) JSObject() js.Value { return p.p }
 
 // PostProcessRenderEffect returns a PostProcessRenderEffect JavaScript class.
-func (b *Babylon) PostProcessRenderEffect() *PostProcessRenderEffect {
-	p := b.ctx.Get("PostProcessRenderEffect")
+func (ba *Babylon) PostProcessRenderEffect() *PostProcessRenderEffect {
+	p := ba.ctx.Get("PostProcessRenderEffect")
 	return PostProcessRenderEffectFromJSObject(p)
 }
 
@@ -29,18 +29,18 @@ func PostProcessRenderEffectFromJSObject(p js.Value) *PostProcessRenderEffect {
 
 // NewPostProcessRenderEffectOpts contains optional parameters for NewPostProcessRenderEffect.
 type NewPostProcessRenderEffectOpts struct {
-	SingleInstance *bool
+	SingleInstance *JSBool
 }
 
 // NewPostProcessRenderEffect returns a new PostProcessRenderEffect object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrendereffect
-func (b *Babylon) NewPostProcessRenderEffect(engine *Engine, name string, getPostProcesses func(), opts *NewPostProcessRenderEffectOpts) *PostProcessRenderEffect {
+func (ba *Babylon) NewPostProcessRenderEffect(engine *Engine, name string, getPostProcesses func(), opts *NewPostProcessRenderEffectOpts) *PostProcessRenderEffect {
 	if opts == nil {
 		opts = &NewPostProcessRenderEffectOpts{}
 	}
 
-	p := b.ctx.Get("PostProcessRenderEffect").New(engine.JSObject(), name, getPostProcesses, opts.SingleInstance.JSObject())
+	p := ba.ctx.Get("PostProcessRenderEffect").New(engine.JSObject(), name, getPostProcesses, opts.SingleInstance)
 	return PostProcessRenderEffectFromJSObject(p)
 }
 

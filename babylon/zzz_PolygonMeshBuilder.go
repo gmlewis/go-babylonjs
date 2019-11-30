@@ -16,8 +16,8 @@ type PolygonMeshBuilder struct{ p js.Value }
 func (p *PolygonMeshBuilder) JSObject() js.Value { return p.p }
 
 // PolygonMeshBuilder returns a PolygonMeshBuilder JavaScript class.
-func (b *Babylon) PolygonMeshBuilder() *PolygonMeshBuilder {
-	p := b.ctx.Get("PolygonMeshBuilder")
+func (ba *Babylon) PolygonMeshBuilder() *PolygonMeshBuilder {
+	p := ba.ctx.Get("PolygonMeshBuilder")
 	return PolygonMeshBuilderFromJSObject(p)
 }
 
@@ -36,12 +36,12 @@ type NewPolygonMeshBuilderOpts struct {
 // NewPolygonMeshBuilder returns a new PolygonMeshBuilder object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.polygonmeshbuilder
-func (b *Babylon) NewPolygonMeshBuilder(name string, contours *Path2, opts *NewPolygonMeshBuilderOpts) *PolygonMeshBuilder {
+func (ba *Babylon) NewPolygonMeshBuilder(name string, contours *Path2, opts *NewPolygonMeshBuilderOpts) *PolygonMeshBuilder {
 	if opts == nil {
 		opts = &NewPolygonMeshBuilderOpts{}
 	}
 
-	p := b.ctx.Get("PolygonMeshBuilder").New(name, contours.JSObject(), opts.Scene.JSObject(), opts.EarcutInjection)
+	p := ba.ctx.Get("PolygonMeshBuilder").New(name, contours.JSObject(), opts.Scene.JSObject(), opts.EarcutInjection)
 	return PolygonMeshBuilderFromJSObject(p)
 }
 

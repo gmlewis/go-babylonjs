@@ -14,8 +14,8 @@ type PlaneDragGizmo struct{ *Gizmo }
 func (p *PlaneDragGizmo) JSObject() js.Value { return p.p }
 
 // PlaneDragGizmo returns a PlaneDragGizmo JavaScript class.
-func (b *Babylon) PlaneDragGizmo() *PlaneDragGizmo {
-	p := b.ctx.Get("PlaneDragGizmo")
+func (ba *Babylon) PlaneDragGizmo() *PlaneDragGizmo {
+	p := ba.ctx.Get("PlaneDragGizmo")
 	return PlaneDragGizmoFromJSObject(p)
 }
 
@@ -36,12 +36,12 @@ type NewPlaneDragGizmoOpts struct {
 // NewPlaneDragGizmo returns a new PlaneDragGizmo object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.planedraggizmo
-func (b *Babylon) NewPlaneDragGizmo(dragPlaneNormal *Vector3, opts *NewPlaneDragGizmoOpts) *PlaneDragGizmo {
+func (ba *Babylon) NewPlaneDragGizmo(dragPlaneNormal *Vector3, opts *NewPlaneDragGizmoOpts) *PlaneDragGizmo {
 	if opts == nil {
 		opts = &NewPlaneDragGizmoOpts{}
 	}
 
-	p := b.ctx.Get("PlaneDragGizmo").New(dragPlaneNormal.JSObject(), opts.Color.JSObject(), opts.GizmoLayer.JSObject(), opts.Parent.JSObject())
+	p := ba.ctx.Get("PlaneDragGizmo").New(dragPlaneNormal.JSObject(), opts.Color.JSObject(), opts.GizmoLayer.JSObject(), opts.Parent.JSObject())
 	return PlaneDragGizmoFromJSObject(p)
 }
 

@@ -14,8 +14,8 @@ type RefractBlock struct{ *NodeMaterialBlock }
 func (r *RefractBlock) JSObject() js.Value { return r.p }
 
 // RefractBlock returns a RefractBlock JavaScript class.
-func (b *Babylon) RefractBlock() *RefractBlock {
-	p := b.ctx.Get("RefractBlock")
+func (ba *Babylon) RefractBlock() *RefractBlock {
+	p := ba.ctx.Get("RefractBlock")
 	return RefractBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func RefractBlockFromJSObject(p js.Value) *RefractBlock {
 // NewRefractBlock returns a new RefractBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.refractblock
-func (b *Babylon) NewRefractBlock(name string) *RefractBlock {
-	p := b.ctx.Get("RefractBlock").New(name)
+func (ba *Babylon) NewRefractBlock(name string) *RefractBlock {
+	p := ba.ctx.Get("RefractBlock").New(name)
 	return RefractBlockFromJSObject(p)
 }
 

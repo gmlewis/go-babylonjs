@@ -14,8 +14,8 @@ type ExtractHighlightsPostProcess struct{ *PostProcess }
 func (e *ExtractHighlightsPostProcess) JSObject() js.Value { return e.p }
 
 // ExtractHighlightsPostProcess returns a ExtractHighlightsPostProcess JavaScript class.
-func (b *Babylon) ExtractHighlightsPostProcess() *ExtractHighlightsPostProcess {
-	p := b.ctx.Get("ExtractHighlightsPostProcess")
+func (ba *Babylon) ExtractHighlightsPostProcess() *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess")
 	return ExtractHighlightsPostProcessFromJSObject(p)
 }
 
@@ -26,26 +26,26 @@ func ExtractHighlightsPostProcessFromJSObject(p js.Value) *ExtractHighlightsPost
 
 // NewExtractHighlightsPostProcessOpts contains optional parameters for NewExtractHighlightsPostProcess.
 type NewExtractHighlightsPostProcessOpts struct {
-	SamplingMode *float64
+	SamplingMode *JSFloat64
 
 	Engine *Engine
 
-	Reusable *bool
+	Reusable *JSBool
 
-	TextureType *float64
+	TextureType *JSFloat64
 
-	BlockCompilation *bool
+	BlockCompilation *JSBool
 }
 
 // NewExtractHighlightsPostProcess returns a new ExtractHighlightsPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess
-func (b *Babylon) NewExtractHighlightsPostProcess(name string, options float64, camera *Camera, opts *NewExtractHighlightsPostProcessOpts) *ExtractHighlightsPostProcess {
+func (ba *Babylon) NewExtractHighlightsPostProcess(name string, options float64, camera *Camera, opts *NewExtractHighlightsPostProcessOpts) *ExtractHighlightsPostProcess {
 	if opts == nil {
 		opts = &NewExtractHighlightsPostProcessOpts{}
 	}
 
-	p := b.ctx.Get("ExtractHighlightsPostProcess").New(name, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType, opts.BlockCompilation.JSObject())
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(name, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable, opts.TextureType, opts.BlockCompilation)
 	return ExtractHighlightsPostProcessFromJSObject(p)
 }
 

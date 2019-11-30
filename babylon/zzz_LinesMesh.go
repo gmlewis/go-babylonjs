@@ -16,8 +16,8 @@ type LinesMesh struct{ *Mesh }
 func (l *LinesMesh) JSObject() js.Value { return l.p }
 
 // LinesMesh returns a LinesMesh JavaScript class.
-func (b *Babylon) LinesMesh() *LinesMesh {
-	p := b.ctx.Get("LinesMesh")
+func (ba *Babylon) LinesMesh() *LinesMesh {
+	p := ba.ctx.Get("LinesMesh")
 	return LinesMeshFromJSObject(p)
 }
 
@@ -34,22 +34,22 @@ type NewLinesMeshOpts struct {
 
 	Source *LinesMesh
 
-	DoNotCloneChildren *bool
+	DoNotCloneChildren *JSBool
 
-	UseVertexColor *bool
+	UseVertexColor *JSBool
 
-	UseVertexAlpha *bool
+	UseVertexAlpha *JSBool
 }
 
 // NewLinesMesh returns a new LinesMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.linesmesh
-func (b *Babylon) NewLinesMesh(name string, opts *NewLinesMeshOpts) *LinesMesh {
+func (ba *Babylon) NewLinesMesh(name string, opts *NewLinesMeshOpts) *LinesMesh {
 	if opts == nil {
 		opts = &NewLinesMeshOpts{}
 	}
 
-	p := b.ctx.Get("LinesMesh").New(name, opts.Scene.JSObject(), opts.Parent.JSObject(), opts.Source.JSObject(), opts.DoNotCloneChildren.JSObject(), opts.UseVertexColor.JSObject(), opts.UseVertexAlpha.JSObject())
+	p := ba.ctx.Get("LinesMesh").New(name, opts.Scene.JSObject(), opts.Parent.JSObject(), opts.Source.JSObject(), opts.DoNotCloneChildren, opts.UseVertexColor, opts.UseVertexAlpha)
 	return LinesMeshFromJSObject(p)
 }
 

@@ -16,8 +16,8 @@ type Analyser struct{ p js.Value }
 func (a *Analyser) JSObject() js.Value { return a.p }
 
 // Analyser returns a Analyser JavaScript class.
-func (b *Babylon) Analyser() *Analyser {
-	p := b.ctx.Get("Analyser")
+func (ba *Babylon) Analyser() *Analyser {
+	p := ba.ctx.Get("Analyser")
 	return AnalyserFromJSObject(p)
 }
 
@@ -29,8 +29,8 @@ func AnalyserFromJSObject(p js.Value) *Analyser {
 // NewAnalyser returns a new Analyser object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.analyser
-func (b *Babylon) NewAnalyser(scene *Scene) *Analyser {
-	p := b.ctx.Get("Analyser").New(scene.JSObject())
+func (ba *Babylon) NewAnalyser(scene *Scene) *Analyser {
+	p := ba.ctx.Get("Analyser").New(scene.JSObject())
 	return AnalyserFromJSObject(p)
 }
 

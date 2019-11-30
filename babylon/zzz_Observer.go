@@ -14,8 +14,8 @@ type Observer struct{ p js.Value }
 func (o *Observer) JSObject() js.Value { return o.p }
 
 // Observer returns a Observer JavaScript class.
-func (b *Babylon) Observer() *Observer {
-	p := b.ctx.Get("Observer")
+func (ba *Babylon) Observer() *Observer {
+	p := ba.ctx.Get("Observer")
 	return ObserverFromJSObject(p)
 }
 
@@ -32,12 +32,12 @@ type NewObserverOpts struct {
 // NewObserver returns a new Observer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.observer
-func (b *Babylon) NewObserver(callback func(), mask float64, opts *NewObserverOpts) *Observer {
+func (ba *Babylon) NewObserver(callback func(), mask float64, opts *NewObserverOpts) *Observer {
 	if opts == nil {
 		opts = &NewObserverOpts{}
 	}
 
-	p := b.ctx.Get("Observer").New(callback, mask, opts.Scope)
+	p := ba.ctx.Get("Observer").New(callback, mask, opts.Scope)
 	return ObserverFromJSObject(p)
 }
 

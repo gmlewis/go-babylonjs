@@ -14,8 +14,8 @@ type MeshButton3D struct{ *Button3D }
 func (m *MeshButton3D) JSObject() js.Value { return m.p }
 
 // MeshButton3D returns a MeshButton3D JavaScript class.
-func (b *Babylon) MeshButton3D() *MeshButton3D {
-	p := b.ctx.Get("MeshButton3D")
+func (ba *Babylon) MeshButton3D() *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D")
 	return MeshButton3DFromJSObject(p)
 }
 
@@ -26,18 +26,18 @@ func MeshButton3DFromJSObject(p js.Value) *MeshButton3D {
 
 // NewMeshButton3DOpts contains optional parameters for NewMeshButton3D.
 type NewMeshButton3DOpts struct {
-	Name *string
+	Name *JSString
 }
 
 // NewMeshButton3D returns a new MeshButton3D object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.meshbutton3d
-func (b *Babylon) NewMeshButton3D(mesh *Mesh, opts *NewMeshButton3DOpts) *MeshButton3D {
+func (ba *Babylon) NewMeshButton3D(mesh *Mesh, opts *NewMeshButton3DOpts) *MeshButton3D {
 	if opts == nil {
 		opts = &NewMeshButton3DOpts{}
 	}
 
-	p := b.ctx.Get("MeshButton3D").New(mesh.JSObject(), opts.Name)
+	p := ba.ctx.Get("MeshButton3D").New(mesh.JSObject(), opts.Name)
 	return MeshButton3DFromJSObject(p)
 }
 

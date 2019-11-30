@@ -14,8 +14,8 @@ type MultiPointerScaleBehavior struct{ p js.Value }
 func (m *MultiPointerScaleBehavior) JSObject() js.Value { return m.p }
 
 // MultiPointerScaleBehavior returns a MultiPointerScaleBehavior JavaScript class.
-func (b *Babylon) MultiPointerScaleBehavior() *MultiPointerScaleBehavior {
-	p := b.ctx.Get("MultiPointerScaleBehavior")
+func (ba *Babylon) MultiPointerScaleBehavior() *MultiPointerScaleBehavior {
+	p := ba.ctx.Get("MultiPointerScaleBehavior")
 	return MultiPointerScaleBehaviorFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func MultiPointerScaleBehaviorFromJSObject(p js.Value) *MultiPointerScaleBehavio
 // NewMultiPointerScaleBehavior returns a new MultiPointerScaleBehavior object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multipointerscalebehavior
-func (b *Babylon) NewMultiPointerScaleBehavior() *MultiPointerScaleBehavior {
-	p := b.ctx.Get("MultiPointerScaleBehavior").New()
+func (ba *Babylon) NewMultiPointerScaleBehavior() *MultiPointerScaleBehavior {
+	p := ba.ctx.Get("MultiPointerScaleBehavior").New()
 	return MultiPointerScaleBehaviorFromJSObject(p)
 }
 

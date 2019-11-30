@@ -14,8 +14,8 @@ type ParticleSystemSet struct{ p js.Value }
 func (p *ParticleSystemSet) JSObject() js.Value { return p.p }
 
 // ParticleSystemSet returns a ParticleSystemSet JavaScript class.
-func (b *Babylon) ParticleSystemSet() *ParticleSystemSet {
-	p := b.ctx.Get("ParticleSystemSet")
+func (ba *Babylon) ParticleSystemSet() *ParticleSystemSet {
+	p := ba.ctx.Get("ParticleSystemSet")
 	return ParticleSystemSetFromJSObject(p)
 }
 

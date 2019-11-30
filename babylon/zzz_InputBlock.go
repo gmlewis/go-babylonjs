@@ -14,8 +14,8 @@ type InputBlock struct{ *NodeMaterialBlock }
 func (i *InputBlock) JSObject() js.Value { return i.p }
 
 // InputBlock returns a InputBlock JavaScript class.
-func (b *Babylon) InputBlock() *InputBlock {
-	p := b.ctx.Get("InputBlock")
+func (ba *Babylon) InputBlock() *InputBlock {
+	p := ba.ctx.Get("InputBlock")
 	return InputBlockFromJSObject(p)
 }
 
@@ -34,12 +34,12 @@ type NewInputBlockOpts struct {
 // NewInputBlock returns a new InputBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputblock
-func (b *Babylon) NewInputBlock(name string, opts *NewInputBlockOpts) *InputBlock {
+func (ba *Babylon) NewInputBlock(name string, opts *NewInputBlockOpts) *InputBlock {
 	if opts == nil {
 		opts = &NewInputBlockOpts{}
 	}
 
-	p := b.ctx.Get("InputBlock").New(name, opts.Target, opts.Type)
+	p := ba.ctx.Get("InputBlock").New(name, opts.Target, opts.Type)
 	return InputBlockFromJSObject(p)
 }
 

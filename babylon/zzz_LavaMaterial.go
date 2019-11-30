@@ -14,8 +14,8 @@ type LavaMaterial struct{ p js.Value }
 func (l *LavaMaterial) JSObject() js.Value { return l.p }
 
 // LavaMaterial returns a LavaMaterial JavaScript class.
-func (b *Babylon) LavaMaterial() *LavaMaterial {
-	p := b.ctx.Get("LavaMaterial")
+func (ba *Babylon) LavaMaterial() *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial")
 	return LavaMaterialFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func LavaMaterialFromJSObject(p js.Value) *LavaMaterial {
 // NewLavaMaterial returns a new LavaMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial
-func (b *Babylon) NewLavaMaterial(name string, scene *Scene) *LavaMaterial {
-	p := b.ctx.Get("LavaMaterial").New(name, scene.JSObject())
+func (ba *Babylon) NewLavaMaterial(name string, scene *Scene) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(name, scene.JSObject())
 	return LavaMaterialFromJSObject(p)
 }
 

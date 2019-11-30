@@ -14,8 +14,8 @@ type SceneLoaderFlags struct{ p js.Value }
 func (s *SceneLoaderFlags) JSObject() js.Value { return s.p }
 
 // SceneLoaderFlags returns a SceneLoaderFlags JavaScript class.
-func (b *Babylon) SceneLoaderFlags() *SceneLoaderFlags {
-	p := b.ctx.Get("SceneLoaderFlags")
+func (ba *Babylon) SceneLoaderFlags() *SceneLoaderFlags {
+	p := ba.ctx.Get("SceneLoaderFlags")
 	return SceneLoaderFlagsFromJSObject(p)
 }
 

@@ -14,8 +14,8 @@ type PBRAnisotropicConfiguration struct{ p js.Value }
 func (p *PBRAnisotropicConfiguration) JSObject() js.Value { return p.p }
 
 // PBRAnisotropicConfiguration returns a PBRAnisotropicConfiguration JavaScript class.
-func (b *Babylon) PBRAnisotropicConfiguration() *PBRAnisotropicConfiguration {
-	p := b.ctx.Get("PBRAnisotropicConfiguration")
+func (ba *Babylon) PBRAnisotropicConfiguration() *PBRAnisotropicConfiguration {
+	p := ba.ctx.Get("PBRAnisotropicConfiguration")
 	return PBRAnisotropicConfigurationFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func PBRAnisotropicConfigurationFromJSObject(p js.Value) *PBRAnisotropicConfigur
 // NewPBRAnisotropicConfiguration returns a new PBRAnisotropicConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbranisotropicconfiguration
-func (b *Babylon) NewPBRAnisotropicConfiguration(markAllSubMeshesAsTexturesDirty func()) *PBRAnisotropicConfiguration {
-	p := b.ctx.Get("PBRAnisotropicConfiguration").New(markAllSubMeshesAsTexturesDirty)
+func (ba *Babylon) NewPBRAnisotropicConfiguration(markAllSubMeshesAsTexturesDirty func()) *PBRAnisotropicConfiguration {
+	p := ba.ctx.Get("PBRAnisotropicConfiguration").New(markAllSubMeshesAsTexturesDirty)
 	return PBRAnisotropicConfigurationFromJSObject(p)
 }
 

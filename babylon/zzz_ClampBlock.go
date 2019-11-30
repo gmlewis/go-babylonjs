@@ -14,8 +14,8 @@ type ClampBlock struct{ *NodeMaterialBlock }
 func (c *ClampBlock) JSObject() js.Value { return c.p }
 
 // ClampBlock returns a ClampBlock JavaScript class.
-func (b *Babylon) ClampBlock() *ClampBlock {
-	p := b.ctx.Get("ClampBlock")
+func (ba *Babylon) ClampBlock() *ClampBlock {
+	p := ba.ctx.Get("ClampBlock")
 	return ClampBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func ClampBlockFromJSObject(p js.Value) *ClampBlock {
 // NewClampBlock returns a new ClampBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.clampblock
-func (b *Babylon) NewClampBlock(name string) *ClampBlock {
-	p := b.ctx.Get("ClampBlock").New(name)
+func (ba *Babylon) NewClampBlock(name string) *ClampBlock {
+	p := ba.ctx.Get("ClampBlock").New(name)
 	return ClampBlockFromJSObject(p)
 }
 

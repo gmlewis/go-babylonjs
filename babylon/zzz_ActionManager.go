@@ -17,8 +17,8 @@ type ActionManager struct{ *AbstractActionManager }
 func (a *ActionManager) JSObject() js.Value { return a.p }
 
 // ActionManager returns a ActionManager JavaScript class.
-func (b *Babylon) ActionManager() *ActionManager {
-	p := b.ctx.Get("ActionManager")
+func (ba *Babylon) ActionManager() *ActionManager {
+	p := ba.ctx.Get("ActionManager")
 	return ActionManagerFromJSObject(p)
 }
 
@@ -30,8 +30,8 @@ func ActionManagerFromJSObject(p js.Value) *ActionManager {
 // NewActionManager returns a new ActionManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.actionmanager
-func (b *Babylon) NewActionManager(scene *Scene) *ActionManager {
-	p := b.ctx.Get("ActionManager").New(scene.JSObject())
+func (ba *Babylon) NewActionManager(scene *Scene) *ActionManager {
+	p := ba.ctx.Get("ActionManager").New(scene.JSObject())
 	return ActionManagerFromJSObject(p)
 }
 

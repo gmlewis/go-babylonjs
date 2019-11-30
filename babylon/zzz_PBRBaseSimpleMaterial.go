@@ -17,8 +17,8 @@ type PBRBaseSimpleMaterial struct{ *PBRBaseMaterial }
 func (p *PBRBaseSimpleMaterial) JSObject() js.Value { return p.p }
 
 // PBRBaseSimpleMaterial returns a PBRBaseSimpleMaterial JavaScript class.
-func (b *Babylon) PBRBaseSimpleMaterial() *PBRBaseSimpleMaterial {
-	p := b.ctx.Get("PBRBaseSimpleMaterial")
+func (ba *Babylon) PBRBaseSimpleMaterial() *PBRBaseSimpleMaterial {
+	p := ba.ctx.Get("PBRBaseSimpleMaterial")
 	return PBRBaseSimpleMaterialFromJSObject(p)
 }
 
@@ -30,8 +30,8 @@ func PBRBaseSimpleMaterialFromJSObject(p js.Value) *PBRBaseSimpleMaterial {
 // NewPBRBaseSimpleMaterial returns a new PBRBaseSimpleMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbasesimplematerial
-func (b *Babylon) NewPBRBaseSimpleMaterial(name string, scene *Scene) *PBRBaseSimpleMaterial {
-	p := b.ctx.Get("PBRBaseSimpleMaterial").New(name, scene.JSObject())
+func (ba *Babylon) NewPBRBaseSimpleMaterial(name string, scene *Scene) *PBRBaseSimpleMaterial {
+	p := ba.ctx.Get("PBRBaseSimpleMaterial").New(name, scene.JSObject())
 	return PBRBaseSimpleMaterialFromJSObject(p)
 }
 

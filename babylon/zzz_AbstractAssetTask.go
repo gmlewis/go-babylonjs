@@ -14,8 +14,8 @@ type AbstractAssetTask struct{ p js.Value }
 func (a *AbstractAssetTask) JSObject() js.Value { return a.p }
 
 // AbstractAssetTask returns a AbstractAssetTask JavaScript class.
-func (b *Babylon) AbstractAssetTask() *AbstractAssetTask {
-	p := b.ctx.Get("AbstractAssetTask")
+func (ba *Babylon) AbstractAssetTask() *AbstractAssetTask {
+	p := ba.ctx.Get("AbstractAssetTask")
 	return AbstractAssetTaskFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func AbstractAssetTaskFromJSObject(p js.Value) *AbstractAssetTask {
 // NewAbstractAssetTask returns a new AbstractAssetTask object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractassettask
-func (b *Babylon) NewAbstractAssetTask(name string) *AbstractAssetTask {
-	p := b.ctx.Get("AbstractAssetTask").New(name)
+func (ba *Babylon) NewAbstractAssetTask(name string) *AbstractAssetTask {
+	p := ba.ctx.Get("AbstractAssetTask").New(name)
 	return AbstractAssetTaskFromJSObject(p)
 }
 

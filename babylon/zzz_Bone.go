@@ -16,8 +16,8 @@ type Bone struct{ *Node }
 func (b *Bone) JSObject() js.Value { return b.p }
 
 // Bone returns a Bone JavaScript class.
-func (b *Babylon) Bone() *Bone {
-	p := b.ctx.Get("Bone")
+func (ba *Babylon) Bone() *Bone {
+	p := ba.ctx.Get("Bone")
 	return BoneFromJSObject(p)
 }
 
@@ -36,18 +36,18 @@ type NewBoneOpts struct {
 
 	BaseMatrix *Matrix
 
-	Index *float64
+	Index *JSFloat64
 }
 
 // NewBone returns a new Bone object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bone
-func (b *Babylon) NewBone(name string, skeleton *Skeleton, opts *NewBoneOpts) *Bone {
+func (ba *Babylon) NewBone(name string, skeleton *Skeleton, opts *NewBoneOpts) *Bone {
 	if opts == nil {
 		opts = &NewBoneOpts{}
 	}
 
-	p := b.ctx.Get("Bone").New(name, skeleton.JSObject(), opts.ParentBone.JSObject(), opts.LocalMatrix.JSObject(), opts.RestPose.JSObject(), opts.BaseMatrix.JSObject(), opts.Index)
+	p := ba.ctx.Get("Bone").New(name, skeleton.JSObject(), opts.ParentBone.JSObject(), opts.LocalMatrix.JSObject(), opts.RestPose.JSObject(), opts.BaseMatrix.JSObject(), opts.Index)
 	return BoneFromJSObject(p)
 }
 

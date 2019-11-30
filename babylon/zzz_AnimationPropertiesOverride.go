@@ -14,8 +14,8 @@ type AnimationPropertiesOverride struct{ p js.Value }
 func (a *AnimationPropertiesOverride) JSObject() js.Value { return a.p }
 
 // AnimationPropertiesOverride returns a AnimationPropertiesOverride JavaScript class.
-func (b *Babylon) AnimationPropertiesOverride() *AnimationPropertiesOverride {
-	p := b.ctx.Get("AnimationPropertiesOverride")
+func (ba *Babylon) AnimationPropertiesOverride() *AnimationPropertiesOverride {
+	p := ba.ctx.Get("AnimationPropertiesOverride")
 	return AnimationPropertiesOverrideFromJSObject(p)
 }
 

@@ -19,8 +19,8 @@ type ColorCorrectionPostProcess struct{ *PostProcess }
 func (c *ColorCorrectionPostProcess) JSObject() js.Value { return c.p }
 
 // ColorCorrectionPostProcess returns a ColorCorrectionPostProcess JavaScript class.
-func (b *Babylon) ColorCorrectionPostProcess() *ColorCorrectionPostProcess {
-	p := b.ctx.Get("ColorCorrectionPostProcess")
+func (ba *Babylon) ColorCorrectionPostProcess() *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess")
 	return ColorCorrectionPostProcessFromJSObject(p)
 }
 
@@ -31,22 +31,22 @@ func ColorCorrectionPostProcessFromJSObject(p js.Value) *ColorCorrectionPostProc
 
 // NewColorCorrectionPostProcessOpts contains optional parameters for NewColorCorrectionPostProcess.
 type NewColorCorrectionPostProcessOpts struct {
-	SamplingMode *float64
+	SamplingMode *JSFloat64
 
 	Engine *Engine
 
-	Reusable *bool
+	Reusable *JSBool
 }
 
 // NewColorCorrectionPostProcess returns a new ColorCorrectionPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess
-func (b *Babylon) NewColorCorrectionPostProcess(name string, colorTableUrl string, options float64, camera *Camera, opts *NewColorCorrectionPostProcessOpts) *ColorCorrectionPostProcess {
+func (ba *Babylon) NewColorCorrectionPostProcess(name string, colorTableUrl string, options float64, camera *Camera, opts *NewColorCorrectionPostProcessOpts) *ColorCorrectionPostProcess {
 	if opts == nil {
 		opts = &NewColorCorrectionPostProcessOpts{}
 	}
 
-	p := b.ctx.Get("ColorCorrectionPostProcess").New(name, colorTableUrl, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject())
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(name, colorTableUrl, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable)
 	return ColorCorrectionPostProcessFromJSObject(p)
 }
 

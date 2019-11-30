@@ -14,8 +14,8 @@ type WebXRManagedOutputCanvas struct{ p js.Value }
 func (w *WebXRManagedOutputCanvas) JSObject() js.Value { return w.p }
 
 // WebXRManagedOutputCanvas returns a WebXRManagedOutputCanvas JavaScript class.
-func (b *Babylon) WebXRManagedOutputCanvas() *WebXRManagedOutputCanvas {
-	p := b.ctx.Get("WebXRManagedOutputCanvas")
+func (ba *Babylon) WebXRManagedOutputCanvas() *WebXRManagedOutputCanvas {
+	p := ba.ctx.Get("WebXRManagedOutputCanvas")
 	return WebXRManagedOutputCanvasFromJSObject(p)
 }
 
@@ -30,18 +30,18 @@ type NewWebXRManagedOutputCanvasOpts struct {
 
 	OnStateChangedObservable *Observable
 
-	Configuration *WebXRState
+	Configuration js.Value
 }
 
 // NewWebXRManagedOutputCanvas returns a new WebXRManagedOutputCanvas object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrmanagedoutputcanvas
-func (b *Babylon) NewWebXRManagedOutputCanvas(engine *ThinEngine, opts *NewWebXRManagedOutputCanvasOpts) *WebXRManagedOutputCanvas {
+func (ba *Babylon) NewWebXRManagedOutputCanvas(engine *ThinEngine, opts *NewWebXRManagedOutputCanvasOpts) *WebXRManagedOutputCanvas {
 	if opts == nil {
 		opts = &NewWebXRManagedOutputCanvasOpts{}
 	}
 
-	p := b.ctx.Get("WebXRManagedOutputCanvas").New(engine.JSObject(), opts.Canvas, opts.OnStateChangedObservable.JSObject(), opts.Configuration.JSObject())
+	p := ba.ctx.Get("WebXRManagedOutputCanvas").New(engine.JSObject(), opts.Canvas, opts.OnStateChangedObservable.JSObject(), opts.Configuration)
 	return WebXRManagedOutputCanvasFromJSObject(p)
 }
 

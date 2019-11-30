@@ -14,8 +14,8 @@ type StateCondition struct{ *Condition }
 func (s *StateCondition) JSObject() js.Value { return s.p }
 
 // StateCondition returns a StateCondition JavaScript class.
-func (b *Babylon) StateCondition() *StateCondition {
-	p := b.ctx.Get("StateCondition")
+func (ba *Babylon) StateCondition() *StateCondition {
+	p := ba.ctx.Get("StateCondition")
 	return StateConditionFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func StateConditionFromJSObject(p js.Value) *StateCondition {
 // NewStateCondition returns a new StateCondition object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.statecondition
-func (b *Babylon) NewStateCondition(actionManager *ActionManager, target interface{}, value string) *StateCondition {
-	p := b.ctx.Get("StateCondition").New(actionManager.JSObject(), target, value)
+func (ba *Babylon) NewStateCondition(actionManager *ActionManager, target interface{}, value string) *StateCondition {
+	p := ba.ctx.Get("StateCondition").New(actionManager.JSObject(), target, value)
 	return StateConditionFromJSObject(p)
 }
 

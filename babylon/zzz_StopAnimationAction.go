@@ -16,8 +16,8 @@ type StopAnimationAction struct{ *Action }
 func (s *StopAnimationAction) JSObject() js.Value { return s.p }
 
 // StopAnimationAction returns a StopAnimationAction JavaScript class.
-func (b *Babylon) StopAnimationAction() *StopAnimationAction {
-	p := b.ctx.Get("StopAnimationAction")
+func (ba *Babylon) StopAnimationAction() *StopAnimationAction {
+	p := ba.ctx.Get("StopAnimationAction")
 	return StopAnimationActionFromJSObject(p)
 }
 
@@ -34,12 +34,12 @@ type NewStopAnimationActionOpts struct {
 // NewStopAnimationAction returns a new StopAnimationAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stopanimationaction
-func (b *Babylon) NewStopAnimationAction(triggerOptions interface{}, target interface{}, opts *NewStopAnimationActionOpts) *StopAnimationAction {
+func (ba *Babylon) NewStopAnimationAction(triggerOptions interface{}, target interface{}, opts *NewStopAnimationActionOpts) *StopAnimationAction {
 	if opts == nil {
 		opts = &NewStopAnimationActionOpts{}
 	}
 
-	p := b.ctx.Get("StopAnimationAction").New(triggerOptions, target, opts.Condition.JSObject())
+	p := ba.ctx.Get("StopAnimationAction").New(triggerOptions, target, opts.Condition.JSObject())
 	return StopAnimationActionFromJSObject(p)
 }
 

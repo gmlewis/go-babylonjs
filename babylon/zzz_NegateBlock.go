@@ -14,8 +14,8 @@ type NegateBlock struct{ *NodeMaterialBlock }
 func (n *NegateBlock) JSObject() js.Value { return n.p }
 
 // NegateBlock returns a NegateBlock JavaScript class.
-func (b *Babylon) NegateBlock() *NegateBlock {
-	p := b.ctx.Get("NegateBlock")
+func (ba *Babylon) NegateBlock() *NegateBlock {
+	p := ba.ctx.Get("NegateBlock")
 	return NegateBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func NegateBlockFromJSObject(p js.Value) *NegateBlock {
 // NewNegateBlock returns a new NegateBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.negateblock
-func (b *Babylon) NewNegateBlock(name string) *NegateBlock {
-	p := b.ctx.Get("NegateBlock").New(name)
+func (ba *Babylon) NewNegateBlock(name string) *NegateBlock {
+	p := ba.ctx.Get("NegateBlock").New(name)
 	return NegateBlockFromJSObject(p)
 }
 

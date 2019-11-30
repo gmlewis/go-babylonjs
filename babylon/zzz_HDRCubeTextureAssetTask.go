@@ -14,8 +14,8 @@ type HDRCubeTextureAssetTask struct{ *AbstractAssetTask }
 func (h *HDRCubeTextureAssetTask) JSObject() js.Value { return h.p }
 
 // HDRCubeTextureAssetTask returns a HDRCubeTextureAssetTask JavaScript class.
-func (b *Babylon) HDRCubeTextureAssetTask() *HDRCubeTextureAssetTask {
-	p := b.ctx.Get("HDRCubeTextureAssetTask")
+func (ba *Babylon) HDRCubeTextureAssetTask() *HDRCubeTextureAssetTask {
+	p := ba.ctx.Get("HDRCubeTextureAssetTask")
 	return HDRCubeTextureAssetTaskFromJSObject(p)
 }
 
@@ -26,24 +26,24 @@ func HDRCubeTextureAssetTaskFromJSObject(p js.Value) *HDRCubeTextureAssetTask {
 
 // NewHDRCubeTextureAssetTaskOpts contains optional parameters for NewHDRCubeTextureAssetTask.
 type NewHDRCubeTextureAssetTaskOpts struct {
-	NoMipmap *bool
+	NoMipmap *JSBool
 
-	GenerateHarmonics *bool
+	GenerateHarmonics *JSBool
 
-	GammaSpace *bool
+	GammaSpace *JSBool
 
-	Reserved *bool
+	Reserved *JSBool
 }
 
 // NewHDRCubeTextureAssetTask returns a new HDRCubeTextureAssetTask object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hdrcubetextureassettask
-func (b *Babylon) NewHDRCubeTextureAssetTask(name string, url string, size float64, opts *NewHDRCubeTextureAssetTaskOpts) *HDRCubeTextureAssetTask {
+func (ba *Babylon) NewHDRCubeTextureAssetTask(name string, url string, size float64, opts *NewHDRCubeTextureAssetTaskOpts) *HDRCubeTextureAssetTask {
 	if opts == nil {
 		opts = &NewHDRCubeTextureAssetTaskOpts{}
 	}
 
-	p := b.ctx.Get("HDRCubeTextureAssetTask").New(name, url, size, opts.NoMipmap.JSObject(), opts.GenerateHarmonics.JSObject(), opts.GammaSpace.JSObject(), opts.Reserved.JSObject())
+	p := ba.ctx.Get("HDRCubeTextureAssetTask").New(name, url, size, opts.NoMipmap, opts.GenerateHarmonics, opts.GammaSpace, opts.Reserved)
 	return HDRCubeTextureAssetTaskFromJSObject(p)
 }
 

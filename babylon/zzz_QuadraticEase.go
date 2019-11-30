@@ -16,8 +16,8 @@ type QuadraticEase struct{ *EasingFunction }
 func (q *QuadraticEase) JSObject() js.Value { return q.p }
 
 // QuadraticEase returns a QuadraticEase JavaScript class.
-func (b *Babylon) QuadraticEase() *QuadraticEase {
-	p := b.ctx.Get("QuadraticEase")
+func (ba *Babylon) QuadraticEase() *QuadraticEase {
+	p := ba.ctx.Get("QuadraticEase")
 	return QuadraticEaseFromJSObject(p)
 }
 

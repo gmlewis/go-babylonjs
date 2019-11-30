@@ -14,8 +14,8 @@ type KHR_materials_unlit struct{ p js.Value }
 func (k *KHR_materials_unlit) JSObject() js.Value { return k.p }
 
 // KHR_materials_unlit returns a KHR_materials_unlit JavaScript class.
-func (b *Babylon) KHR_materials_unlit() *KHR_materials_unlit {
-	p := b.ctx.Get("KHR_materials_unlit")
+func (ba *Babylon) KHR_materials_unlit() *KHR_materials_unlit {
+	p := ba.ctx.Get("KHR_materials_unlit")
 	return KHR_materials_unlitFromJSObject(p)
 }
 

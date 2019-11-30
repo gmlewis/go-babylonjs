@@ -14,8 +14,8 @@ type AxesViewer struct{ p js.Value }
 func (a *AxesViewer) JSObject() js.Value { return a.p }
 
 // AxesViewer returns a AxesViewer JavaScript class.
-func (b *Babylon) AxesViewer() *AxesViewer {
-	p := b.ctx.Get("AxesViewer")
+func (ba *Babylon) AxesViewer() *AxesViewer {
+	p := ba.ctx.Get("AxesViewer")
 	return AxesViewerFromJSObject(p)
 }
 
@@ -26,9 +26,9 @@ func AxesViewerFromJSObject(p js.Value) *AxesViewer {
 
 // NewAxesViewerOpts contains optional parameters for NewAxesViewer.
 type NewAxesViewerOpts struct {
-	ScaleLines *float64
+	ScaleLines *JSFloat64
 
-	RenderingGroupId *float64
+	RenderingGroupId *JSFloat64
 
 	XAxis *TransformNode
 
@@ -40,12 +40,12 @@ type NewAxesViewerOpts struct {
 // NewAxesViewer returns a new AxesViewer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axesviewer
-func (b *Babylon) NewAxesViewer(scene *Scene, opts *NewAxesViewerOpts) *AxesViewer {
+func (ba *Babylon) NewAxesViewer(scene *Scene, opts *NewAxesViewerOpts) *AxesViewer {
 	if opts == nil {
 		opts = &NewAxesViewerOpts{}
 	}
 
-	p := b.ctx.Get("AxesViewer").New(scene.JSObject(), opts.ScaleLines, opts.RenderingGroupId, opts.XAxis.JSObject(), opts.YAxis.JSObject(), opts.ZAxis.JSObject())
+	p := ba.ctx.Get("AxesViewer").New(scene.JSObject(), opts.ScaleLines, opts.RenderingGroupId, opts.XAxis.JSObject(), opts.YAxis.JSObject(), opts.ZAxis.JSObject())
 	return AxesViewerFromJSObject(p)
 }
 

@@ -14,8 +14,8 @@ type WorleyNoise3DBlock struct{ *NodeMaterialBlock }
 func (w *WorleyNoise3DBlock) JSObject() js.Value { return w.p }
 
 // WorleyNoise3DBlock returns a WorleyNoise3DBlock JavaScript class.
-func (b *Babylon) WorleyNoise3DBlock() *WorleyNoise3DBlock {
-	p := b.ctx.Get("WorleyNoise3DBlock")
+func (ba *Babylon) WorleyNoise3DBlock() *WorleyNoise3DBlock {
+	p := ba.ctx.Get("WorleyNoise3DBlock")
 	return WorleyNoise3DBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func WorleyNoise3DBlockFromJSObject(p js.Value) *WorleyNoise3DBlock {
 // NewWorleyNoise3DBlock returns a new WorleyNoise3DBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock
-func (b *Babylon) NewWorleyNoise3DBlock(name string) *WorleyNoise3DBlock {
-	p := b.ctx.Get("WorleyNoise3DBlock").New(name)
+func (ba *Babylon) NewWorleyNoise3DBlock(name string) *WorleyNoise3DBlock {
+	p := ba.ctx.Get("WorleyNoise3DBlock").New(name)
 	return WorleyNoise3DBlockFromJSObject(p)
 }
 

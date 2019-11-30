@@ -17,8 +17,8 @@ type AbstractActionManager struct{ p js.Value }
 func (a *AbstractActionManager) JSObject() js.Value { return a.p }
 
 // AbstractActionManager returns a AbstractActionManager JavaScript class.
-func (b *Babylon) AbstractActionManager() *AbstractActionManager {
-	p := b.ctx.Get("AbstractActionManager")
+func (ba *Babylon) AbstractActionManager() *AbstractActionManager {
+	p := ba.ctx.Get("AbstractActionManager")
 	return AbstractActionManagerFromJSObject(p)
 }
 

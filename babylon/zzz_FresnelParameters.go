@@ -16,8 +16,8 @@ type FresnelParameters struct{ p js.Value }
 func (f *FresnelParameters) JSObject() js.Value { return f.p }
 
 // FresnelParameters returns a FresnelParameters JavaScript class.
-func (b *Babylon) FresnelParameters() *FresnelParameters {
-	p := b.ctx.Get("FresnelParameters")
+func (ba *Babylon) FresnelParameters() *FresnelParameters {
+	p := ba.ctx.Get("FresnelParameters")
 	return FresnelParametersFromJSObject(p)
 }
 

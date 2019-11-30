@@ -14,8 +14,8 @@ type ImageBasedSlider struct{ *BaseSlider }
 func (i *ImageBasedSlider) JSObject() js.Value { return i.p }
 
 // ImageBasedSlider returns a ImageBasedSlider JavaScript class.
-func (b *Babylon) ImageBasedSlider() *ImageBasedSlider {
-	p := b.ctx.Get("ImageBasedSlider")
+func (ba *Babylon) ImageBasedSlider() *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider")
 	return ImageBasedSliderFromJSObject(p)
 }
 
@@ -26,18 +26,18 @@ func ImageBasedSliderFromJSObject(p js.Value) *ImageBasedSlider {
 
 // NewImageBasedSliderOpts contains optional parameters for NewImageBasedSlider.
 type NewImageBasedSliderOpts struct {
-	Name *string
+	Name *JSString
 }
 
 // NewImageBasedSlider returns a new ImageBasedSlider object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imagebasedslider
-func (b *Babylon) NewImageBasedSlider(opts *NewImageBasedSliderOpts) *ImageBasedSlider {
+func (ba *Babylon) NewImageBasedSlider(opts *NewImageBasedSliderOpts) *ImageBasedSlider {
 	if opts == nil {
 		opts = &NewImageBasedSliderOpts{}
 	}
 
-	p := b.ctx.Get("ImageBasedSlider").New(opts.Name)
+	p := ba.ctx.Get("ImageBasedSlider").New(opts.Name)
 	return ImageBasedSliderFromJSObject(p)
 }
 

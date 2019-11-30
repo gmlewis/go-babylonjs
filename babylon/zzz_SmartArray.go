@@ -14,8 +14,8 @@ type SmartArray struct{ p js.Value }
 func (s *SmartArray) JSObject() js.Value { return s.p }
 
 // SmartArray returns a SmartArray JavaScript class.
-func (b *Babylon) SmartArray() *SmartArray {
-	p := b.ctx.Get("SmartArray")
+func (ba *Babylon) SmartArray() *SmartArray {
+	p := ba.ctx.Get("SmartArray")
 	return SmartArrayFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func SmartArrayFromJSObject(p js.Value) *SmartArray {
 // NewSmartArray returns a new SmartArray object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.smartarray
-func (b *Babylon) NewSmartArray(capacity float64) *SmartArray {
-	p := b.ctx.Get("SmartArray").New(capacity)
+func (ba *Babylon) NewSmartArray(capacity float64) *SmartArray {
+	p := ba.ctx.Get("SmartArray").New(capacity)
 	return SmartArrayFromJSObject(p)
 }
 

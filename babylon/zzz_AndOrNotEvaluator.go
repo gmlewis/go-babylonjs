@@ -14,8 +14,8 @@ type AndOrNotEvaluator struct{ p js.Value }
 func (a *AndOrNotEvaluator) JSObject() js.Value { return a.p }
 
 // AndOrNotEvaluator returns a AndOrNotEvaluator JavaScript class.
-func (b *Babylon) AndOrNotEvaluator() *AndOrNotEvaluator {
-	p := b.ctx.Get("AndOrNotEvaluator")
+func (ba *Babylon) AndOrNotEvaluator() *AndOrNotEvaluator {
+	p := ba.ctx.Get("AndOrNotEvaluator")
 	return AndOrNotEvaluatorFromJSObject(p)
 }
 

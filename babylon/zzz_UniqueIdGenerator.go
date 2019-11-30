@@ -14,8 +14,8 @@ type UniqueIdGenerator struct{ p js.Value }
 func (u *UniqueIdGenerator) JSObject() js.Value { return u.p }
 
 // UniqueIdGenerator returns a UniqueIdGenerator JavaScript class.
-func (b *Babylon) UniqueIdGenerator() *UniqueIdGenerator {
-	p := b.ctx.Get("UniqueIdGenerator")
+func (ba *Babylon) UniqueIdGenerator() *UniqueIdGenerator {
+	p := ba.ctx.Get("UniqueIdGenerator")
 	return UniqueIdGeneratorFromJSObject(p)
 }
 

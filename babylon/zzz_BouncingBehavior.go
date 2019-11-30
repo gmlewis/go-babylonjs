@@ -16,8 +16,8 @@ type BouncingBehavior struct{ p js.Value }
 func (b *BouncingBehavior) JSObject() js.Value { return b.p }
 
 // BouncingBehavior returns a BouncingBehavior JavaScript class.
-func (b *Babylon) BouncingBehavior() *BouncingBehavior {
-	p := b.ctx.Get("BouncingBehavior")
+func (ba *Babylon) BouncingBehavior() *BouncingBehavior {
+	p := ba.ctx.Get("BouncingBehavior")
 	return BouncingBehaviorFromJSObject(p)
 }
 

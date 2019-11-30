@@ -14,8 +14,8 @@ type TiledBoxBuilder struct{ p js.Value }
 func (t *TiledBoxBuilder) JSObject() js.Value { return t.p }
 
 // TiledBoxBuilder returns a TiledBoxBuilder JavaScript class.
-func (b *Babylon) TiledBoxBuilder() *TiledBoxBuilder {
-	p := b.ctx.Get("TiledBoxBuilder")
+func (ba *Babylon) TiledBoxBuilder() *TiledBoxBuilder {
+	p := ba.ctx.Get("TiledBoxBuilder")
 	return TiledBoxBuilderFromJSObject(p)
 }
 

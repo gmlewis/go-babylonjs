@@ -17,8 +17,8 @@ type SoundTrack struct{ p js.Value }
 func (s *SoundTrack) JSObject() js.Value { return s.p }
 
 // SoundTrack returns a SoundTrack JavaScript class.
-func (b *Babylon) SoundTrack() *SoundTrack {
-	p := b.ctx.Get("SoundTrack")
+func (ba *Babylon) SoundTrack() *SoundTrack {
+	p := ba.ctx.Get("SoundTrack")
 	return SoundTrackFromJSObject(p)
 }
 
@@ -29,18 +29,18 @@ func SoundTrackFromJSObject(p js.Value) *SoundTrack {
 
 // NewSoundTrackOpts contains optional parameters for NewSoundTrack.
 type NewSoundTrackOpts struct {
-	Options *ISoundTrackOptions
+	Options js.Value
 }
 
 // NewSoundTrack returns a new SoundTrack object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.soundtrack
-func (b *Babylon) NewSoundTrack(scene *Scene, opts *NewSoundTrackOpts) *SoundTrack {
+func (ba *Babylon) NewSoundTrack(scene *Scene, opts *NewSoundTrackOpts) *SoundTrack {
 	if opts == nil {
 		opts = &NewSoundTrackOpts{}
 	}
 
-	p := b.ctx.Get("SoundTrack").New(scene.JSObject(), opts.Options.JSObject())
+	p := ba.ctx.Get("SoundTrack").New(scene.JSObject(), opts.Options)
 	return SoundTrackFromJSObject(p)
 }
 

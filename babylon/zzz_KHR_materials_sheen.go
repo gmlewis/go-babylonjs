@@ -16,8 +16,8 @@ type KHR_materials_sheen struct{ p js.Value }
 func (k *KHR_materials_sheen) JSObject() js.Value { return k.p }
 
 // KHR_materials_sheen returns a KHR_materials_sheen JavaScript class.
-func (b *Babylon) KHR_materials_sheen() *KHR_materials_sheen {
-	p := b.ctx.Get("KHR_materials_sheen")
+func (ba *Babylon) KHR_materials_sheen() *KHR_materials_sheen {
+	p := ba.ctx.Get("KHR_materials_sheen")
 	return KHR_materials_sheenFromJSObject(p)
 }
 

@@ -14,8 +14,8 @@ type BoxBuilder struct{ p js.Value }
 func (b *BoxBuilder) JSObject() js.Value { return b.p }
 
 // BoxBuilder returns a BoxBuilder JavaScript class.
-func (b *Babylon) BoxBuilder() *BoxBuilder {
-	p := b.ctx.Get("BoxBuilder")
+func (ba *Babylon) BoxBuilder() *BoxBuilder {
+	p := ba.ctx.Get("BoxBuilder")
 	return BoxBuilderFromJSObject(p)
 }
 

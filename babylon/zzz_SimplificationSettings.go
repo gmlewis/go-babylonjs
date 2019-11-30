@@ -16,8 +16,8 @@ type SimplificationSettings struct{ p js.Value }
 func (s *SimplificationSettings) JSObject() js.Value { return s.p }
 
 // SimplificationSettings returns a SimplificationSettings JavaScript class.
-func (b *Babylon) SimplificationSettings() *SimplificationSettings {
-	p := b.ctx.Get("SimplificationSettings")
+func (ba *Babylon) SimplificationSettings() *SimplificationSettings {
+	p := ba.ctx.Get("SimplificationSettings")
 	return SimplificationSettingsFromJSObject(p)
 }
 
@@ -28,18 +28,18 @@ func SimplificationSettingsFromJSObject(p js.Value) *SimplificationSettings {
 
 // NewSimplificationSettingsOpts contains optional parameters for NewSimplificationSettings.
 type NewSimplificationSettingsOpts struct {
-	OptimizeMesh *bool
+	OptimizeMesh *JSBool
 }
 
 // NewSimplificationSettings returns a new SimplificationSettings object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.simplificationsettings
-func (b *Babylon) NewSimplificationSettings(quality float64, distance float64, opts *NewSimplificationSettingsOpts) *SimplificationSettings {
+func (ba *Babylon) NewSimplificationSettings(quality float64, distance float64, opts *NewSimplificationSettingsOpts) *SimplificationSettings {
 	if opts == nil {
 		opts = &NewSimplificationSettingsOpts{}
 	}
 
-	p := b.ctx.Get("SimplificationSettings").New(quality, distance, opts.OptimizeMesh.JSObject())
+	p := ba.ctx.Get("SimplificationSettings").New(quality, distance, opts.OptimizeMesh)
 	return SimplificationSettingsFromJSObject(p)
 }
 

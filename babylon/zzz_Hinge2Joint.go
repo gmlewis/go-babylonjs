@@ -16,8 +16,8 @@ type Hinge2Joint struct{ *MotorEnabledJoint }
 func (h *Hinge2Joint) JSObject() js.Value { return h.p }
 
 // Hinge2Joint returns a Hinge2Joint JavaScript class.
-func (b *Babylon) Hinge2Joint() *Hinge2Joint {
-	p := b.ctx.Get("Hinge2Joint")
+func (ba *Babylon) Hinge2Joint() *Hinge2Joint {
+	p := ba.ctx.Get("Hinge2Joint")
 	return Hinge2JointFromJSObject(p)
 }
 
@@ -29,8 +29,8 @@ func Hinge2JointFromJSObject(p js.Value) *Hinge2Joint {
 // NewHinge2Joint returns a new Hinge2Joint object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hinge2joint
-func (b *Babylon) NewHinge2Joint(jointData js.Value) *Hinge2Joint {
-	p := b.ctx.Get("Hinge2Joint").New(jointData)
+func (ba *Babylon) NewHinge2Joint(jointData js.Value) *Hinge2Joint {
+	p := ba.ctx.Get("Hinge2Joint").New(jointData)
 	return Hinge2JointFromJSObject(p)
 }
 

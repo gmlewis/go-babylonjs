@@ -14,8 +14,8 @@ type Path3D struct{ p js.Value }
 func (p *Path3D) JSObject() js.Value { return p.p }
 
 // Path3D returns a Path3D JavaScript class.
-func (b *Babylon) Path3D() *Path3D {
-	p := b.ctx.Get("Path3D")
+func (ba *Babylon) Path3D() *Path3D {
+	p := ba.ctx.Get("Path3D")
 	return Path3DFromJSObject(p)
 }
 
@@ -28,20 +28,20 @@ func Path3DFromJSObject(p js.Value) *Path3D {
 type NewPath3DOpts struct {
 	FirstNormal *Vector3
 
-	Raw *bool
+	Raw *JSBool
 
-	AlignTangentsWithPath *bool
+	AlignTangentsWithPath *JSBool
 }
 
 // NewPath3D returns a new Path3D object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.path3d
-func (b *Babylon) NewPath3D(path *Vector3, opts *NewPath3DOpts) *Path3D {
+func (ba *Babylon) NewPath3D(path *Vector3, opts *NewPath3DOpts) *Path3D {
 	if opts == nil {
 		opts = &NewPath3DOpts{}
 	}
 
-	p := b.ctx.Get("Path3D").New(path.JSObject(), opts.FirstNormal.JSObject(), opts.Raw.JSObject(), opts.AlignTangentsWithPath.JSObject())
+	p := ba.ctx.Get("Path3D").New(path.JSObject(), opts.FirstNormal.JSObject(), opts.Raw, opts.AlignTangentsWithPath)
 	return Path3DFromJSObject(p)
 }
 

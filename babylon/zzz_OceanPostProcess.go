@@ -20,8 +20,8 @@ type OceanPostProcess struct{ *PostProcess }
 func (o *OceanPostProcess) JSObject() js.Value { return o.p }
 
 // OceanPostProcess returns a OceanPostProcess JavaScript class.
-func (b *Babylon) OceanPostProcess() *OceanPostProcess {
-	p := b.ctx.Get("OceanPostProcess")
+func (ba *Babylon) OceanPostProcess() *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess")
 	return OceanPostProcessFromJSObject(p)
 }
 
@@ -32,18 +32,18 @@ func OceanPostProcessFromJSObject(p js.Value) *OceanPostProcess {
 
 // NewOceanPostProcessOpts contains optional parameters for NewOceanPostProcess.
 type NewOceanPostProcessOpts struct {
-	Options *IOceanPostProcessOptions
+	Options js.Value
 }
 
 // NewOceanPostProcess returns a new OceanPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess
-func (b *Babylon) NewOceanPostProcess(name string, camera *TargetCamera, opts *NewOceanPostProcessOpts) *OceanPostProcess {
+func (ba *Babylon) NewOceanPostProcess(name string, camera *TargetCamera, opts *NewOceanPostProcessOpts) *OceanPostProcess {
 	if opts == nil {
 		opts = &NewOceanPostProcessOpts{}
 	}
 
-	p := b.ctx.Get("OceanPostProcess").New(name, camera.JSObject(), opts.Options.JSObject())
+	p := ba.ctx.Get("OceanPostProcess").New(name, camera.JSObject(), opts.Options)
 	return OceanPostProcessFromJSObject(p)
 }
 

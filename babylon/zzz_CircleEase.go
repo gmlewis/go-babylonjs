@@ -16,8 +16,8 @@ type CircleEase struct{ *EasingFunction }
 func (c *CircleEase) JSObject() js.Value { return c.p }
 
 // CircleEase returns a CircleEase JavaScript class.
-func (b *Babylon) CircleEase() *CircleEase {
-	p := b.ctx.Get("CircleEase")
+func (ba *Babylon) CircleEase() *CircleEase {
+	p := ba.ctx.Get("CircleEase")
 	return CircleEaseFromJSObject(p)
 }
 

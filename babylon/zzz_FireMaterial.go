@@ -14,8 +14,8 @@ type FireMaterial struct{ p js.Value }
 func (f *FireMaterial) JSObject() js.Value { return f.p }
 
 // FireMaterial returns a FireMaterial JavaScript class.
-func (b *Babylon) FireMaterial() *FireMaterial {
-	p := b.ctx.Get("FireMaterial")
+func (ba *Babylon) FireMaterial() *FireMaterial {
+	p := ba.ctx.Get("FireMaterial")
 	return FireMaterialFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func FireMaterialFromJSObject(p js.Value) *FireMaterial {
 // NewFireMaterial returns a new FireMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.firematerial
-func (b *Babylon) NewFireMaterial(name string, scene *Scene) *FireMaterial {
-	p := b.ctx.Get("FireMaterial").New(name, scene.JSObject())
+func (ba *Babylon) NewFireMaterial(name string, scene *Scene) *FireMaterial {
+	p := ba.ctx.Get("FireMaterial").New(name, scene.JSObject())
 	return FireMaterialFromJSObject(p)
 }
 

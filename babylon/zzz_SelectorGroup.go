@@ -15,8 +15,8 @@ type SelectorGroup struct{ p js.Value }
 func (s *SelectorGroup) JSObject() js.Value { return s.p }
 
 // SelectorGroup returns a SelectorGroup JavaScript class.
-func (b *Babylon) SelectorGroup() *SelectorGroup {
-	p := b.ctx.Get("SelectorGroup")
+func (ba *Babylon) SelectorGroup() *SelectorGroup {
+	p := ba.ctx.Get("SelectorGroup")
 	return SelectorGroupFromJSObject(p)
 }
 
@@ -28,8 +28,8 @@ func SelectorGroupFromJSObject(p js.Value) *SelectorGroup {
 // NewSelectorGroup returns a new SelectorGroup object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.selectorgroup
-func (b *Babylon) NewSelectorGroup(name string) *SelectorGroup {
-	p := b.ctx.Get("SelectorGroup").New(name)
+func (ba *Babylon) NewSelectorGroup(name string) *SelectorGroup {
+	p := ba.ctx.Get("SelectorGroup").New(name)
 	return SelectorGroupFromJSObject(p)
 }
 

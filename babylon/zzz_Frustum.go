@@ -14,8 +14,8 @@ type Frustum struct{ p js.Value }
 func (f *Frustum) JSObject() js.Value { return f.p }
 
 // Frustum returns a Frustum JavaScript class.
-func (b *Babylon) Frustum() *Frustum {
-	p := b.ctx.Get("Frustum")
+func (ba *Babylon) Frustum() *Frustum {
+	p := ba.ctx.Get("Frustum")
 	return FrustumFromJSObject(p)
 }
 

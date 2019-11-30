@@ -14,8 +14,8 @@ type AxisDragGizmo struct{ *Gizmo }
 func (a *AxisDragGizmo) JSObject() js.Value { return a.p }
 
 // AxisDragGizmo returns a AxisDragGizmo JavaScript class.
-func (b *Babylon) AxisDragGizmo() *AxisDragGizmo {
-	p := b.ctx.Get("AxisDragGizmo")
+func (ba *Babylon) AxisDragGizmo() *AxisDragGizmo {
+	p := ba.ctx.Get("AxisDragGizmo")
 	return AxisDragGizmoFromJSObject(p)
 }
 
@@ -36,12 +36,12 @@ type NewAxisDragGizmoOpts struct {
 // NewAxisDragGizmo returns a new AxisDragGizmo object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.axisdraggizmo
-func (b *Babylon) NewAxisDragGizmo(dragAxis *Vector3, opts *NewAxisDragGizmoOpts) *AxisDragGizmo {
+func (ba *Babylon) NewAxisDragGizmo(dragAxis *Vector3, opts *NewAxisDragGizmoOpts) *AxisDragGizmo {
 	if opts == nil {
 		opts = &NewAxisDragGizmoOpts{}
 	}
 
-	p := b.ctx.Get("AxisDragGizmo").New(dragAxis.JSObject(), opts.Color.JSObject(), opts.GizmoLayer.JSObject(), opts.Parent.JSObject())
+	p := ba.ctx.Get("AxisDragGizmo").New(dragAxis.JSObject(), opts.Color.JSObject(), opts.GizmoLayer.JSObject(), opts.Parent.JSObject())
 	return AxisDragGizmoFromJSObject(p)
 }
 

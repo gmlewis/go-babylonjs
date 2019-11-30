@@ -16,8 +16,8 @@ type PostProcessesOptimization struct{ *SceneOptimization }
 func (p *PostProcessesOptimization) JSObject() js.Value { return p.p }
 
 // PostProcessesOptimization returns a PostProcessesOptimization JavaScript class.
-func (b *Babylon) PostProcessesOptimization() *PostProcessesOptimization {
-	p := b.ctx.Get("PostProcessesOptimization")
+func (ba *Babylon) PostProcessesOptimization() *PostProcessesOptimization {
+	p := ba.ctx.Get("PostProcessesOptimization")
 	return PostProcessesOptimizationFromJSObject(p)
 }
 
@@ -28,18 +28,18 @@ func PostProcessesOptimizationFromJSObject(p js.Value) *PostProcessesOptimizatio
 
 // NewPostProcessesOptimizationOpts contains optional parameters for NewPostProcessesOptimization.
 type NewPostProcessesOptimizationOpts struct {
-	Priority *float64
+	Priority *JSFloat64
 }
 
 // NewPostProcessesOptimization returns a new PostProcessesOptimization object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocessesoptimization
-func (b *Babylon) NewPostProcessesOptimization(opts *NewPostProcessesOptimizationOpts) *PostProcessesOptimization {
+func (ba *Babylon) NewPostProcessesOptimization(opts *NewPostProcessesOptimizationOpts) *PostProcessesOptimization {
 	if opts == nil {
 		opts = &NewPostProcessesOptimizationOpts{}
 	}
 
-	p := b.ctx.Get("PostProcessesOptimization").New(opts.Priority)
+	p := ba.ctx.Get("PostProcessesOptimization").New(opts.Priority)
 	return PostProcessesOptimizationFromJSObject(p)
 }
 

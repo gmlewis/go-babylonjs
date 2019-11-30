@@ -19,8 +19,8 @@ type PointsCloudSystem struct{ p js.Value }
 func (p *PointsCloudSystem) JSObject() js.Value { return p.p }
 
 // PointsCloudSystem returns a PointsCloudSystem JavaScript class.
-func (b *Babylon) PointsCloudSystem() *PointsCloudSystem {
-	p := b.ctx.Get("PointsCloudSystem")
+func (ba *Babylon) PointsCloudSystem() *PointsCloudSystem {
+	p := ba.ctx.Get("PointsCloudSystem")
 	return PointsCloudSystemFromJSObject(p)
 }
 
@@ -37,12 +37,12 @@ type NewPointsCloudSystemOpts struct {
 // NewPointsCloudSystem returns a new PointsCloudSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem
-func (b *Babylon) NewPointsCloudSystem(name string, pointSize float64, scene *Scene, opts *NewPointsCloudSystemOpts) *PointsCloudSystem {
+func (ba *Babylon) NewPointsCloudSystem(name string, pointSize float64, scene *Scene, opts *NewPointsCloudSystemOpts) *PointsCloudSystem {
 	if opts == nil {
 		opts = &NewPointsCloudSystemOpts{}
 	}
 
-	p := b.ctx.Get("PointsCloudSystem").New(name, pointSize, scene.JSObject(), opts.Options)
+	p := ba.ctx.Get("PointsCloudSystem").New(name, pointSize, scene.JSObject(), opts.Options)
 	return PointsCloudSystemFromJSObject(p)
 }
 

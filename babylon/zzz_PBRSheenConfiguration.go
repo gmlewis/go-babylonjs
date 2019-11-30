@@ -14,8 +14,8 @@ type PBRSheenConfiguration struct{ p js.Value }
 func (p *PBRSheenConfiguration) JSObject() js.Value { return p.p }
 
 // PBRSheenConfiguration returns a PBRSheenConfiguration JavaScript class.
-func (b *Babylon) PBRSheenConfiguration() *PBRSheenConfiguration {
-	p := b.ctx.Get("PBRSheenConfiguration")
+func (ba *Babylon) PBRSheenConfiguration() *PBRSheenConfiguration {
+	p := ba.ctx.Get("PBRSheenConfiguration")
 	return PBRSheenConfigurationFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func PBRSheenConfigurationFromJSObject(p js.Value) *PBRSheenConfiguration {
 // NewPBRSheenConfiguration returns a new PBRSheenConfiguration object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration
-func (b *Babylon) NewPBRSheenConfiguration(markAllSubMeshesAsTexturesDirty func()) *PBRSheenConfiguration {
-	p := b.ctx.Get("PBRSheenConfiguration").New(markAllSubMeshesAsTexturesDirty)
+func (ba *Babylon) NewPBRSheenConfiguration(markAllSubMeshesAsTexturesDirty func()) *PBRSheenConfiguration {
+	p := ba.ctx.Get("PBRSheenConfiguration").New(markAllSubMeshesAsTexturesDirty)
 	return PBRSheenConfigurationFromJSObject(p)
 }
 

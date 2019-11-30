@@ -14,8 +14,8 @@ type BabylonFileLoaderConfiguration struct{ p js.Value }
 func (b *BabylonFileLoaderConfiguration) JSObject() js.Value { return b.p }
 
 // BabylonFileLoaderConfiguration returns a BabylonFileLoaderConfiguration JavaScript class.
-func (b *Babylon) BabylonFileLoaderConfiguration() *BabylonFileLoaderConfiguration {
-	p := b.ctx.Get("BabylonFileLoaderConfiguration")
+func (ba *Babylon) BabylonFileLoaderConfiguration() *BabylonFileLoaderConfiguration {
+	p := ba.ctx.Get("BabylonFileLoaderConfiguration")
 	return BabylonFileLoaderConfigurationFromJSObject(p)
 }
 

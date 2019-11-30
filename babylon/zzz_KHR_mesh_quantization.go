@@ -14,8 +14,8 @@ type KHR_mesh_quantization struct{ p js.Value }
 func (k *KHR_mesh_quantization) JSObject() js.Value { return k.p }
 
 // KHR_mesh_quantization returns a KHR_mesh_quantization JavaScript class.
-func (b *Babylon) KHR_mesh_quantization() *KHR_mesh_quantization {
-	p := b.ctx.Get("KHR_mesh_quantization")
+func (ba *Babylon) KHR_mesh_quantization() *KHR_mesh_quantization {
+	p := ba.ctx.Get("KHR_mesh_quantization")
 	return KHR_mesh_quantizationFromJSObject(p)
 }
 

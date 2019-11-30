@@ -17,8 +17,8 @@ type TouchCamera struct{ *FreeCamera }
 func (t *TouchCamera) JSObject() js.Value { return t.p }
 
 // TouchCamera returns a TouchCamera JavaScript class.
-func (b *Babylon) TouchCamera() *TouchCamera {
-	p := b.ctx.Get("TouchCamera")
+func (ba *Babylon) TouchCamera() *TouchCamera {
+	p := ba.ctx.Get("TouchCamera")
 	return TouchCameraFromJSObject(p)
 }
 
@@ -30,8 +30,8 @@ func TouchCameraFromJSObject(p js.Value) *TouchCamera {
 // NewTouchCamera returns a new TouchCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.touchcamera
-func (b *Babylon) NewTouchCamera(name string, position *Vector3, scene *Scene) *TouchCamera {
-	p := b.ctx.Get("TouchCamera").New(name, position.JSObject(), scene.JSObject())
+func (ba *Babylon) NewTouchCamera(name string, position *Vector3, scene *Scene) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(name, position.JSObject(), scene.JSObject())
 	return TouchCameraFromJSObject(p)
 }
 

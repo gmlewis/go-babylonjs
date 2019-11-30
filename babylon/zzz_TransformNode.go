@@ -16,8 +16,8 @@ type TransformNode struct{ *Node }
 func (t *TransformNode) JSObject() js.Value { return t.p }
 
 // TransformNode returns a TransformNode JavaScript class.
-func (b *Babylon) TransformNode() *TransformNode {
-	p := b.ctx.Get("TransformNode")
+func (ba *Babylon) TransformNode() *TransformNode {
+	p := ba.ctx.Get("TransformNode")
 	return TransformNodeFromJSObject(p)
 }
 
@@ -30,18 +30,18 @@ func TransformNodeFromJSObject(p js.Value) *TransformNode {
 type NewTransformNodeOpts struct {
 	Scene *Scene
 
-	IsPure *bool
+	IsPure *JSBool
 }
 
 // NewTransformNode returns a new TransformNode object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformnode
-func (b *Babylon) NewTransformNode(name string, opts *NewTransformNodeOpts) *TransformNode {
+func (ba *Babylon) NewTransformNode(name string, opts *NewTransformNodeOpts) *TransformNode {
 	if opts == nil {
 		opts = &NewTransformNodeOpts{}
 	}
 
-	p := b.ctx.Get("TransformNode").New(name, opts.Scene.JSObject(), opts.IsPure.JSObject())
+	p := ba.ctx.Get("TransformNode").New(name, opts.Scene.JSObject(), opts.IsPure)
 	return TransformNodeFromJSObject(p)
 }
 

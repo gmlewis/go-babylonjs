@@ -16,8 +16,8 @@ type CombineAction struct{ *Action }
 func (c *CombineAction) JSObject() js.Value { return c.p }
 
 // CombineAction returns a CombineAction JavaScript class.
-func (b *Babylon) CombineAction() *CombineAction {
-	p := b.ctx.Get("CombineAction")
+func (ba *Babylon) CombineAction() *CombineAction {
+	p := ba.ctx.Get("CombineAction")
 	return CombineActionFromJSObject(p)
 }
 
@@ -34,12 +34,12 @@ type NewCombineActionOpts struct {
 // NewCombineAction returns a new CombineAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.combineaction
-func (b *Babylon) NewCombineAction(triggerOptions interface{}, children *Action, opts *NewCombineActionOpts) *CombineAction {
+func (ba *Babylon) NewCombineAction(triggerOptions interface{}, children *Action, opts *NewCombineActionOpts) *CombineAction {
 	if opts == nil {
 		opts = &NewCombineActionOpts{}
 	}
 
-	p := b.ctx.Get("CombineAction").New(triggerOptions, children.JSObject(), opts.Condition.JSObject())
+	p := ba.ctx.Get("CombineAction").New(triggerOptions, children.JSObject(), opts.Condition.JSObject())
 	return CombineActionFromJSObject(p)
 }
 

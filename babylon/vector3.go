@@ -1,7 +1,6 @@
 package babylon
 
-import "syscall/js"
-
+/*
 // Vector3 represents a babylon.js Vector3.
 type Vector3 struct{ p js.Value }
 
@@ -26,3 +25,4 @@ func (b *Babylon) NewVector3(x, y, z float64) *Vector3 {
 	p := b.ctx.Get("Vector3").New(x, y, z)
 	return Vector3FromJSObject(p)
 }
+*/

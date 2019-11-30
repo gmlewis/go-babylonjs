@@ -14,8 +14,8 @@ type BloomEffect struct{ *PostProcessRenderEffect }
 func (b *BloomEffect) JSObject() js.Value { return b.p }
 
 // BloomEffect returns a BloomEffect JavaScript class.
-func (b *Babylon) BloomEffect() *BloomEffect {
-	p := b.ctx.Get("BloomEffect")
+func (ba *Babylon) BloomEffect() *BloomEffect {
+	p := ba.ctx.Get("BloomEffect")
 	return BloomEffectFromJSObject(p)
 }
 
@@ -26,20 +26,20 @@ func BloomEffectFromJSObject(p js.Value) *BloomEffect {
 
 // NewBloomEffectOpts contains optional parameters for NewBloomEffect.
 type NewBloomEffectOpts struct {
-	PipelineTextureType *float64
+	PipelineTextureType *JSFloat64
 
-	BlockCompilation *bool
+	BlockCompilation *JSBool
 }
 
 // NewBloomEffect returns a new BloomEffect object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bloomeffect
-func (b *Babylon) NewBloomEffect(scene *Scene, bloomScale float64, bloomWeight float64, bloomKernel float64, opts *NewBloomEffectOpts) *BloomEffect {
+func (ba *Babylon) NewBloomEffect(scene *Scene, bloomScale float64, bloomWeight float64, bloomKernel float64, opts *NewBloomEffectOpts) *BloomEffect {
 	if opts == nil {
 		opts = &NewBloomEffectOpts{}
 	}
 
-	p := b.ctx.Get("BloomEffect").New(scene.JSObject(), bloomScale, bloomWeight, bloomKernel, opts.PipelineTextureType, opts.BlockCompilation.JSObject())
+	p := ba.ctx.Get("BloomEffect").New(scene.JSObject(), bloomScale, bloomWeight, bloomKernel, opts.PipelineTextureType, opts.BlockCompilation)
 	return BloomEffectFromJSObject(p)
 }
 

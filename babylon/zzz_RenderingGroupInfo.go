@@ -14,8 +14,8 @@ type RenderingGroupInfo struct{ p js.Value }
 func (r *RenderingGroupInfo) JSObject() js.Value { return r.p }
 
 // RenderingGroupInfo returns a RenderingGroupInfo JavaScript class.
-func (b *Babylon) RenderingGroupInfo() *RenderingGroupInfo {
-	p := b.ctx.Get("RenderingGroupInfo")
+func (ba *Babylon) RenderingGroupInfo() *RenderingGroupInfo {
+	p := ba.ctx.Get("RenderingGroupInfo")
 	return RenderingGroupInfoFromJSObject(p)
 }
 

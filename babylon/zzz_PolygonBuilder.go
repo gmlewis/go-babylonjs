@@ -14,8 +14,8 @@ type PolygonBuilder struct{ p js.Value }
 func (p *PolygonBuilder) JSObject() js.Value { return p.p }
 
 // PolygonBuilder returns a PolygonBuilder JavaScript class.
-func (b *Babylon) PolygonBuilder() *PolygonBuilder {
-	p := b.ctx.Get("PolygonBuilder")
+func (ba *Babylon) PolygonBuilder() *PolygonBuilder {
+	p := ba.ctx.Get("PolygonBuilder")
 	return PolygonBuilderFromJSObject(p)
 }
 

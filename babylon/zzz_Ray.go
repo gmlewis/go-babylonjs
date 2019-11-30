@@ -14,8 +14,8 @@ type Ray struct{ p js.Value }
 func (r *Ray) JSObject() js.Value { return r.p }
 
 // Ray returns a Ray JavaScript class.
-func (b *Babylon) Ray() *Ray {
-	p := b.ctx.Get("Ray")
+func (ba *Babylon) Ray() *Ray {
+	p := ba.ctx.Get("Ray")
 	return RayFromJSObject(p)
 }
 
@@ -26,18 +26,18 @@ func RayFromJSObject(p js.Value) *Ray {
 
 // NewRayOpts contains optional parameters for NewRay.
 type NewRayOpts struct {
-	Length *float64
+	Length *JSFloat64
 }
 
 // NewRay returns a new Ray object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.ray
-func (b *Babylon) NewRay(origin *Vector3, direction *Vector3, opts *NewRayOpts) *Ray {
+func (ba *Babylon) NewRay(origin *Vector3, direction *Vector3, opts *NewRayOpts) *Ray {
 	if opts == nil {
 		opts = &NewRayOpts{}
 	}
 
-	p := b.ctx.Get("Ray").New(origin.JSObject(), direction.JSObject(), opts.Length)
+	p := ba.ctx.Get("Ray").New(origin.JSObject(), direction.JSObject(), opts.Length)
 	return RayFromJSObject(p)
 }
 

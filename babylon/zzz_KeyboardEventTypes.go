@@ -14,8 +14,8 @@ type KeyboardEventTypes struct{ p js.Value }
 func (k *KeyboardEventTypes) JSObject() js.Value { return k.p }
 
 // KeyboardEventTypes returns a KeyboardEventTypes JavaScript class.
-func (b *Babylon) KeyboardEventTypes() *KeyboardEventTypes {
-	p := b.ctx.Get("KeyboardEventTypes")
+func (ba *Babylon) KeyboardEventTypes() *KeyboardEventTypes {
+	p := ba.ctx.Get("KeyboardEventTypes")
 	return KeyboardEventTypesFromJSObject(p)
 }
 

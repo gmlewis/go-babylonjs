@@ -14,8 +14,8 @@ type NullEngineOptions struct{ p js.Value }
 func (n *NullEngineOptions) JSObject() js.Value { return n.p }
 
 // NullEngineOptions returns a NullEngineOptions JavaScript class.
-func (b *Babylon) NullEngineOptions() *NullEngineOptions {
-	p := b.ctx.Get("NullEngineOptions")
+func (ba *Babylon) NullEngineOptions() *NullEngineOptions {
+	p := ba.ctx.Get("NullEngineOptions")
 	return NullEngineOptionsFromJSObject(p)
 }
 

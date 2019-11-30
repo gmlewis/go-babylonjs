@@ -14,8 +14,8 @@ type KHR_texture_transform struct{ p js.Value }
 func (k *KHR_texture_transform) JSObject() js.Value { return k.p }
 
 // KHR_texture_transform returns a KHR_texture_transform JavaScript class.
-func (b *Babylon) KHR_texture_transform() *KHR_texture_transform {
-	p := b.ctx.Get("KHR_texture_transform")
+func (ba *Babylon) KHR_texture_transform() *KHR_texture_transform {
+	p := ba.ctx.Get("KHR_texture_transform")
 	return KHR_texture_transformFromJSObject(p)
 }
 

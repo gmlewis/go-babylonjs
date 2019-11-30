@@ -14,8 +14,8 @@ type Node struct{ p js.Value }
 func (n *Node) JSObject() js.Value { return n.p }
 
 // Node returns a Node JavaScript class.
-func (b *Babylon) Node() *Node {
-	p := b.ctx.Get("Node")
+func (ba *Babylon) Node() *Node {
+	p := ba.ctx.Get("Node")
 	return NodeFromJSObject(p)
 }
 
@@ -32,12 +32,12 @@ type NewNodeOpts struct {
 // NewNode returns a new Node object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.node
-func (b *Babylon) NewNode(name string, opts *NewNodeOpts) *Node {
+func (ba *Babylon) NewNode(name string, opts *NewNodeOpts) *Node {
 	if opts == nil {
 		opts = &NewNodeOpts{}
 	}
 
-	p := b.ctx.Get("Node").New(name, opts.Scene.JSObject())
+	p := ba.ctx.Get("Node").New(name, opts.Scene.JSObject())
 	return NodeFromJSObject(p)
 }
 

@@ -14,8 +14,8 @@ type Viewport struct{ p js.Value }
 func (v *Viewport) JSObject() js.Value { return v.p }
 
 // Viewport returns a Viewport JavaScript class.
-func (b *Babylon) Viewport() *Viewport {
-	p := b.ctx.Get("Viewport")
+func (ba *Babylon) Viewport() *Viewport {
+	p := ba.ctx.Get("Viewport")
 	return ViewportFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func ViewportFromJSObject(p js.Value) *Viewport {
 // NewViewport returns a new Viewport object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.viewport
-func (b *Babylon) NewViewport(x float64, y float64, width float64, height float64) *Viewport {
-	p := b.ctx.Get("Viewport").New(x, y, width, height)
+func (ba *Babylon) NewViewport(x float64, y float64, width float64, height float64) *Viewport {
+	p := ba.ctx.Get("Viewport").New(x, y, width, height)
 	return ViewportFromJSObject(p)
 }
 

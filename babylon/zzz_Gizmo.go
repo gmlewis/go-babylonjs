@@ -14,8 +14,8 @@ type Gizmo struct{ p js.Value }
 func (g *Gizmo) JSObject() js.Value { return g.p }
 
 // Gizmo returns a Gizmo JavaScript class.
-func (b *Babylon) Gizmo() *Gizmo {
-	p := b.ctx.Get("Gizmo")
+func (ba *Babylon) Gizmo() *Gizmo {
+	p := ba.ctx.Get("Gizmo")
 	return GizmoFromJSObject(p)
 }
 
@@ -32,12 +32,12 @@ type NewGizmoOpts struct {
 // NewGizmo returns a new Gizmo object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmo
-func (b *Babylon) NewGizmo(opts *NewGizmoOpts) *Gizmo {
+func (ba *Babylon) NewGizmo(opts *NewGizmoOpts) *Gizmo {
 	if opts == nil {
 		opts = &NewGizmoOpts{}
 	}
 
-	p := b.ctx.Get("Gizmo").New(opts.GizmoLayer.JSObject())
+	p := ba.ctx.Get("Gizmo").New(opts.GizmoLayer.JSObject())
 	return GizmoFromJSObject(p)
 }
 

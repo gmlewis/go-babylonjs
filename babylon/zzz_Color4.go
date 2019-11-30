@@ -14,8 +14,8 @@ type Color4 struct{ p js.Value }
 func (c *Color4) JSObject() js.Value { return c.p }
 
 // Color4 returns a Color4 JavaScript class.
-func (b *Babylon) Color4() *Color4 {
-	p := b.ctx.Get("Color4")
+func (ba *Babylon) Color4() *Color4 {
+	p := ba.ctx.Get("Color4")
 	return Color4FromJSObject(p)
 }
 
@@ -26,24 +26,24 @@ func Color4FromJSObject(p js.Value) *Color4 {
 
 // NewColor4Opts contains optional parameters for NewColor4.
 type NewColor4Opts struct {
-	R *float64
+	R *JSFloat64
 
-	G *float64
+	G *JSFloat64
 
-	B *float64
+	B *JSFloat64
 
-	A *float64
+	A *JSFloat64
 }
 
 // NewColor4 returns a new Color4 object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.color4
-func (b *Babylon) NewColor4(opts *NewColor4Opts) *Color4 {
+func (ba *Babylon) NewColor4(opts *NewColor4Opts) *Color4 {
 	if opts == nil {
 		opts = &NewColor4Opts{}
 	}
 
-	p := b.ctx.Get("Color4").New(opts.R, opts.G, opts.B, opts.A)
+	p := ba.ctx.Get("Color4").New(opts.R, opts.G, opts.B, opts.A)
 	return Color4FromJSObject(p)
 }
 

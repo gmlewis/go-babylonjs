@@ -15,8 +15,8 @@ type MultiLinePoint struct{ p js.Value }
 func (m *MultiLinePoint) JSObject() js.Value { return m.p }
 
 // MultiLinePoint returns a MultiLinePoint JavaScript class.
-func (b *Babylon) MultiLinePoint() *MultiLinePoint {
-	p := b.ctx.Get("MultiLinePoint")
+func (ba *Babylon) MultiLinePoint() *MultiLinePoint {
+	p := ba.ctx.Get("MultiLinePoint")
 	return MultiLinePointFromJSObject(p)
 }
 
@@ -28,8 +28,8 @@ func MultiLinePointFromJSObject(p js.Value) *MultiLinePoint {
 // NewMultiLinePoint returns a new MultiLinePoint object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multilinepoint
-func (b *Babylon) NewMultiLinePoint(multiLine *MultiLine) *MultiLinePoint {
-	p := b.ctx.Get("MultiLinePoint").New(multiLine.JSObject())
+func (ba *Babylon) NewMultiLinePoint(multiLine *MultiLine) *MultiLinePoint {
+	p := ba.ctx.Get("MultiLinePoint").New(multiLine.JSObject())
 	return MultiLinePointFromJSObject(p)
 }
 

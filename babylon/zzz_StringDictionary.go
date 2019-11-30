@@ -16,8 +16,8 @@ type StringDictionary struct{ p js.Value }
 func (s *StringDictionary) JSObject() js.Value { return s.p }
 
 // StringDictionary returns a StringDictionary JavaScript class.
-func (b *Babylon) StringDictionary() *StringDictionary {
-	p := b.ctx.Get("StringDictionary")
+func (ba *Babylon) StringDictionary() *StringDictionary {
+	p := ba.ctx.Get("StringDictionary")
 	return StringDictionaryFromJSObject(p)
 }
 

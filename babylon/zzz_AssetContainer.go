@@ -14,8 +14,8 @@ type AssetContainer struct{ *AbstractScene }
 func (a *AssetContainer) JSObject() js.Value { return a.p }
 
 // AssetContainer returns a AssetContainer JavaScript class.
-func (b *Babylon) AssetContainer() *AssetContainer {
-	p := b.ctx.Get("AssetContainer")
+func (ba *Babylon) AssetContainer() *AssetContainer {
+	p := ba.ctx.Get("AssetContainer")
 	return AssetContainerFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func AssetContainerFromJSObject(p js.Value) *AssetContainer {
 // NewAssetContainer returns a new AssetContainer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetcontainer
-func (b *Babylon) NewAssetContainer(scene *Scene) *AssetContainer {
-	p := b.ctx.Get("AssetContainer").New(scene.JSObject())
+func (ba *Babylon) NewAssetContainer(scene *Scene) *AssetContainer {
+	p := ba.ctx.Get("AssetContainer").New(scene.JSObject())
 	return AssetContainerFromJSObject(p)
 }
 

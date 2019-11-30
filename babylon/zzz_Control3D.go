@@ -14,8 +14,8 @@ type Control3D struct{ p js.Value }
 func (c *Control3D) JSObject() js.Value { return c.p }
 
 // Control3D returns a Control3D JavaScript class.
-func (b *Babylon) Control3D() *Control3D {
-	p := b.ctx.Get("Control3D")
+func (ba *Babylon) Control3D() *Control3D {
+	p := ba.ctx.Get("Control3D")
 	return Control3DFromJSObject(p)
 }
 
@@ -26,18 +26,18 @@ func Control3DFromJSObject(p js.Value) *Control3D {
 
 // NewControl3DOpts contains optional parameters for NewControl3D.
 type NewControl3DOpts struct {
-	Name *string
+	Name *JSString
 }
 
 // NewControl3D returns a new Control3D object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.control3d
-func (b *Babylon) NewControl3D(opts *NewControl3DOpts) *Control3D {
+func (ba *Babylon) NewControl3D(opts *NewControl3DOpts) *Control3D {
 	if opts == nil {
 		opts = &NewControl3DOpts{}
 	}
 
-	p := b.ctx.Get("Control3D").New(opts.Name)
+	p := ba.ctx.Get("Control3D").New(opts.Name)
 	return Control3DFromJSObject(p)
 }
 

@@ -16,8 +16,8 @@ type SwitchBooleanAction struct{ *Action }
 func (s *SwitchBooleanAction) JSObject() js.Value { return s.p }
 
 // SwitchBooleanAction returns a SwitchBooleanAction JavaScript class.
-func (b *Babylon) SwitchBooleanAction() *SwitchBooleanAction {
-	p := b.ctx.Get("SwitchBooleanAction")
+func (ba *Babylon) SwitchBooleanAction() *SwitchBooleanAction {
+	p := ba.ctx.Get("SwitchBooleanAction")
 	return SwitchBooleanActionFromJSObject(p)
 }
 
@@ -34,12 +34,12 @@ type NewSwitchBooleanActionOpts struct {
 // NewSwitchBooleanAction returns a new SwitchBooleanAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.switchbooleanaction
-func (b *Babylon) NewSwitchBooleanAction(triggerOptions interface{}, target interface{}, propertyPath string, opts *NewSwitchBooleanActionOpts) *SwitchBooleanAction {
+func (ba *Babylon) NewSwitchBooleanAction(triggerOptions interface{}, target interface{}, propertyPath string, opts *NewSwitchBooleanActionOpts) *SwitchBooleanAction {
 	if opts == nil {
 		opts = &NewSwitchBooleanActionOpts{}
 	}
 
-	p := b.ctx.Get("SwitchBooleanAction").New(triggerOptions, target, propertyPath, opts.Condition.JSObject())
+	p := ba.ctx.Get("SwitchBooleanAction").New(triggerOptions, target, propertyPath, opts.Condition.JSObject())
 	return SwitchBooleanActionFromJSObject(p)
 }
 

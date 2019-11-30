@@ -14,8 +14,8 @@ type Button struct{ *Rectangle }
 func (b *Button) JSObject() js.Value { return b.p }
 
 // Button returns a Button JavaScript class.
-func (b *Babylon) Button() *Button {
-	p := b.ctx.Get("Button")
+func (ba *Babylon) Button() *Button {
+	p := ba.ctx.Get("Button")
 	return ButtonFromJSObject(p)
 }
 
@@ -26,18 +26,18 @@ func ButtonFromJSObject(p js.Value) *Button {
 
 // NewButtonOpts contains optional parameters for NewButton.
 type NewButtonOpts struct {
-	Name *string
+	Name *JSString
 }
 
 // NewButton returns a new Button object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.button
-func (b *Babylon) NewButton(opts *NewButtonOpts) *Button {
+func (ba *Babylon) NewButton(opts *NewButtonOpts) *Button {
 	if opts == nil {
 		opts = &NewButtonOpts{}
 	}
 
-	p := b.ctx.Get("Button").New(opts.Name)
+	p := ba.ctx.Get("Button").New(opts.Name)
 	return ButtonFromJSObject(p)
 }
 

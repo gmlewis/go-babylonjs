@@ -16,8 +16,8 @@ type MorphTargetManager struct{ p js.Value }
 func (m *MorphTargetManager) JSObject() js.Value { return m.p }
 
 // MorphTargetManager returns a MorphTargetManager JavaScript class.
-func (b *Babylon) MorphTargetManager() *MorphTargetManager {
-	p := b.ctx.Get("MorphTargetManager")
+func (ba *Babylon) MorphTargetManager() *MorphTargetManager {
+	p := ba.ctx.Get("MorphTargetManager")
 	return MorphTargetManagerFromJSObject(p)
 }
 
@@ -34,12 +34,12 @@ type NewMorphTargetManagerOpts struct {
 // NewMorphTargetManager returns a new MorphTargetManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.morphtargetmanager
-func (b *Babylon) NewMorphTargetManager(opts *NewMorphTargetManagerOpts) *MorphTargetManager {
+func (ba *Babylon) NewMorphTargetManager(opts *NewMorphTargetManagerOpts) *MorphTargetManager {
 	if opts == nil {
 		opts = &NewMorphTargetManagerOpts{}
 	}
 
-	p := b.ctx.Get("MorphTargetManager").New(opts.Scene.JSObject())
+	p := ba.ctx.Get("MorphTargetManager").New(opts.Scene.JSObject())
 	return MorphTargetManagerFromJSObject(p)
 }
 

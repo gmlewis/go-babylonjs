@@ -14,8 +14,8 @@ type Plane struct{ p js.Value }
 func (p *Plane) JSObject() js.Value { return p.p }
 
 // Plane returns a Plane JavaScript class.
-func (b *Babylon) Plane() *Plane {
-	p := b.ctx.Get("Plane")
+func (ba *Babylon) Plane() *Plane {
+	p := ba.ctx.Get("Plane")
 	return PlaneFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func PlaneFromJSObject(p js.Value) *Plane {
 // NewPlane returns a new Plane object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.plane
-func (b *Babylon) NewPlane(a float64, b float64, c float64, d float64) *Plane {
-	p := b.ctx.Get("Plane").New(a, b, c, d)
+func (ba *Babylon) NewPlane(a float64, b float64, c float64, d float64) *Plane {
+	p := ba.ctx.Get("Plane").New(a, b, c, d)
 	return PlaneFromJSObject(p)
 }
 

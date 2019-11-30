@@ -14,8 +14,8 @@ type DataReader struct{ p js.Value }
 func (d *DataReader) JSObject() js.Value { return d.p }
 
 // DataReader returns a DataReader JavaScript class.
-func (b *Babylon) DataReader() *DataReader {
-	p := b.ctx.Get("DataReader")
+func (ba *Babylon) DataReader() *DataReader {
+	p := ba.ctx.Get("DataReader")
 	return DataReaderFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func DataReaderFromJSObject(p js.Value) *DataReader {
 // NewDataReader returns a new DataReader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.datareader
-func (b *Babylon) NewDataReader(buffer js.Value) *DataReader {
-	p := b.ctx.Get("DataReader").New(buffer)
+func (ba *Babylon) NewDataReader(buffer js.Value) *DataReader {
+	p := ba.ctx.Get("DataReader").New(buffer)
 	return DataReaderFromJSObject(p)
 }
 

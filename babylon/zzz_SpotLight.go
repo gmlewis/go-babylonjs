@@ -18,8 +18,8 @@ type SpotLight struct{ *ShadowLight }
 func (s *SpotLight) JSObject() js.Value { return s.p }
 
 // SpotLight returns a SpotLight JavaScript class.
-func (b *Babylon) SpotLight() *SpotLight {
-	p := b.ctx.Get("SpotLight")
+func (ba *Babylon) SpotLight() *SpotLight {
+	p := ba.ctx.Get("SpotLight")
 	return SpotLightFromJSObject(p)
 }
 
@@ -31,8 +31,8 @@ func SpotLightFromJSObject(p js.Value) *SpotLight {
 // NewSpotLight returns a new SpotLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spotlight
-func (b *Babylon) NewSpotLight(name string, position *Vector3, direction *Vector3, angle float64, exponent float64, scene *Scene) *SpotLight {
-	p := b.ctx.Get("SpotLight").New(name, position.JSObject(), direction.JSObject(), angle, exponent, scene.JSObject())
+func (ba *Babylon) NewSpotLight(name string, position *Vector3, direction *Vector3, angle float64, exponent float64, scene *Scene) *SpotLight {
+	p := ba.ctx.Get("SpotLight").New(name, position.JSObject(), direction.JSObject(), angle, exponent, scene.JSObject())
 	return SpotLightFromJSObject(p)
 }
 

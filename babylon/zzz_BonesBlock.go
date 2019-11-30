@@ -14,8 +14,8 @@ type BonesBlock struct{ *NodeMaterialBlock }
 func (b *BonesBlock) JSObject() js.Value { return b.p }
 
 // BonesBlock returns a BonesBlock JavaScript class.
-func (b *Babylon) BonesBlock() *BonesBlock {
-	p := b.ctx.Get("BonesBlock")
+func (ba *Babylon) BonesBlock() *BonesBlock {
+	p := ba.ctx.Get("BonesBlock")
 	return BonesBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func BonesBlockFromJSObject(p js.Value) *BonesBlock {
 // NewBonesBlock returns a new BonesBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bonesblock
-func (b *Babylon) NewBonesBlock(name string) *BonesBlock {
-	p := b.ctx.Get("BonesBlock").New(name)
+func (ba *Babylon) NewBonesBlock(name string) *BonesBlock {
+	p := ba.ctx.Get("BonesBlock").New(name)
 	return BonesBlockFromJSObject(p)
 }
 

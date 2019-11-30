@@ -14,8 +14,8 @@ type VirtualJoystick struct{ p js.Value }
 func (v *VirtualJoystick) JSObject() js.Value { return v.p }
 
 // VirtualJoystick returns a VirtualJoystick JavaScript class.
-func (b *Babylon) VirtualJoystick() *VirtualJoystick {
-	p := b.ctx.Get("VirtualJoystick")
+func (ba *Babylon) VirtualJoystick() *VirtualJoystick {
+	p := ba.ctx.Get("VirtualJoystick")
 	return VirtualJoystickFromJSObject(p)
 }
 
@@ -26,18 +26,18 @@ func VirtualJoystickFromJSObject(p js.Value) *VirtualJoystick {
 
 // NewVirtualJoystickOpts contains optional parameters for NewVirtualJoystick.
 type NewVirtualJoystickOpts struct {
-	LeftJoystick *bool
+	LeftJoystick *JSBool
 }
 
 // NewVirtualJoystick returns a new VirtualJoystick object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.virtualjoystick
-func (b *Babylon) NewVirtualJoystick(opts *NewVirtualJoystickOpts) *VirtualJoystick {
+func (ba *Babylon) NewVirtualJoystick(opts *NewVirtualJoystickOpts) *VirtualJoystick {
 	if opts == nil {
 		opts = &NewVirtualJoystickOpts{}
 	}
 
-	p := b.ctx.Get("VirtualJoystick").New(opts.LeftJoystick.JSObject())
+	p := ba.ctx.Get("VirtualJoystick").New(opts.LeftJoystick)
 	return VirtualJoystickFromJSObject(p)
 }
 

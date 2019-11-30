@@ -17,8 +17,8 @@ type RefractionTexture struct{ *RenderTargetTexture }
 func (r *RefractionTexture) JSObject() js.Value { return r.p }
 
 // RefractionTexture returns a RefractionTexture JavaScript class.
-func (b *Babylon) RefractionTexture() *RefractionTexture {
-	p := b.ctx.Get("RefractionTexture")
+func (ba *Babylon) RefractionTexture() *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture")
 	return RefractionTextureFromJSObject(p)
 }
 
@@ -29,18 +29,18 @@ func RefractionTextureFromJSObject(p js.Value) *RefractionTexture {
 
 // NewRefractionTextureOpts contains optional parameters for NewRefractionTexture.
 type NewRefractionTextureOpts struct {
-	GenerateMipMaps *bool
+	GenerateMipMaps *JSBool
 }
 
 // NewRefractionTexture returns a new RefractionTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.refractiontexture
-func (b *Babylon) NewRefractionTexture(name string, size float64, scene *Scene, opts *NewRefractionTextureOpts) *RefractionTexture {
+func (ba *Babylon) NewRefractionTexture(name string, size float64, scene *Scene, opts *NewRefractionTextureOpts) *RefractionTexture {
 	if opts == nil {
 		opts = &NewRefractionTextureOpts{}
 	}
 
-	p := b.ctx.Get("RefractionTexture").New(name, size, scene.JSObject(), opts.GenerateMipMaps.JSObject())
+	p := ba.ctx.Get("RefractionTexture").New(name, size, scene.JSObject(), opts.GenerateMipMaps)
 	return RefractionTextureFromJSObject(p)
 }
 

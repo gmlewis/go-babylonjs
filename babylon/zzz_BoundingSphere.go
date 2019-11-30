@@ -14,8 +14,8 @@ type BoundingSphere struct{ p js.Value }
 func (b *BoundingSphere) JSObject() js.Value { return b.p }
 
 // BoundingSphere returns a BoundingSphere JavaScript class.
-func (b *Babylon) BoundingSphere() *BoundingSphere {
-	p := b.ctx.Get("BoundingSphere")
+func (ba *Babylon) BoundingSphere() *BoundingSphere {
+	p := ba.ctx.Get("BoundingSphere")
 	return BoundingSphereFromJSObject(p)
 }
 
@@ -32,12 +32,12 @@ type NewBoundingSphereOpts struct {
 // NewBoundingSphere returns a new BoundingSphere object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingsphere
-func (b *Babylon) NewBoundingSphere(min *Vector3, max *Vector3, opts *NewBoundingSphereOpts) *BoundingSphere {
+func (ba *Babylon) NewBoundingSphere(min *Vector3, max *Vector3, opts *NewBoundingSphereOpts) *BoundingSphere {
 	if opts == nil {
 		opts = &NewBoundingSphereOpts{}
 	}
 
-	p := b.ctx.Get("BoundingSphere").New(min.JSObject(), max.JSObject(), opts.WorldMatrix.JSObject())
+	p := ba.ctx.Get("BoundingSphere").New(min.JSObject(), max.JSObject(), opts.WorldMatrix.JSObject())
 	return BoundingSphereFromJSObject(p)
 }
 

@@ -14,8 +14,8 @@ type Arc2 struct{ p js.Value }
 func (a *Arc2) JSObject() js.Value { return a.p }
 
 // Arc2 returns a Arc2 JavaScript class.
-func (b *Babylon) Arc2() *Arc2 {
-	p := b.ctx.Get("Arc2")
+func (ba *Babylon) Arc2() *Arc2 {
+	p := ba.ctx.Get("Arc2")
 	return Arc2FromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func Arc2FromJSObject(p js.Value) *Arc2 {
 // NewArc2 returns a new Arc2 object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arc2
-func (b *Babylon) NewArc2(startPoint *Vector2, midPoint *Vector2, endPoint *Vector2) *Arc2 {
-	p := b.ctx.Get("Arc2").New(startPoint.JSObject(), midPoint.JSObject(), endPoint.JSObject())
+func (ba *Babylon) NewArc2(startPoint *Vector2, midPoint *Vector2, endPoint *Vector2) *Arc2 {
+	p := ba.ctx.Get("Arc2").New(startPoint.JSObject(), midPoint.JSObject(), endPoint.JSObject())
 	return Arc2FromJSObject(p)
 }
 

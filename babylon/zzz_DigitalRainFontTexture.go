@@ -17,8 +17,8 @@ type DigitalRainFontTexture struct{ *BaseTexture }
 func (d *DigitalRainFontTexture) JSObject() js.Value { return d.p }
 
 // DigitalRainFontTexture returns a DigitalRainFontTexture JavaScript class.
-func (b *Babylon) DigitalRainFontTexture() *DigitalRainFontTexture {
-	p := b.ctx.Get("DigitalRainFontTexture")
+func (ba *Babylon) DigitalRainFontTexture() *DigitalRainFontTexture {
+	p := ba.ctx.Get("DigitalRainFontTexture")
 	return DigitalRainFontTextureFromJSObject(p)
 }
 
@@ -35,12 +35,12 @@ type NewDigitalRainFontTextureOpts struct {
 // NewDigitalRainFontTexture returns a new DigitalRainFontTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.digitalrainfonttexture
-func (b *Babylon) NewDigitalRainFontTexture(name string, font string, text string, opts *NewDigitalRainFontTextureOpts) *DigitalRainFontTexture {
+func (ba *Babylon) NewDigitalRainFontTexture(name string, font string, text string, opts *NewDigitalRainFontTextureOpts) *DigitalRainFontTexture {
 	if opts == nil {
 		opts = &NewDigitalRainFontTextureOpts{}
 	}
 
-	p := b.ctx.Get("DigitalRainFontTexture").New(name, font, text, opts.Scene.JSObject())
+	p := ba.ctx.Get("DigitalRainFontTexture").New(name, font, text, opts.Scene.JSObject())
 	return DigitalRainFontTextureFromJSObject(p)
 }
 

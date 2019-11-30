@@ -14,8 +14,8 @@ type WaterMaterial struct{ p js.Value }
 func (w *WaterMaterial) JSObject() js.Value { return w.p }
 
 // WaterMaterial returns a WaterMaterial JavaScript class.
-func (b *Babylon) WaterMaterial() *WaterMaterial {
-	p := b.ctx.Get("WaterMaterial")
+func (ba *Babylon) WaterMaterial() *WaterMaterial {
+	p := ba.ctx.Get("WaterMaterial")
 	return WaterMaterialFromJSObject(p)
 }
 
@@ -32,12 +32,12 @@ type NewWaterMaterialOpts struct {
 // NewWaterMaterial returns a new WaterMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.watermaterial
-func (b *Babylon) NewWaterMaterial(name string, scene *Scene, opts *NewWaterMaterialOpts) *WaterMaterial {
+func (ba *Babylon) NewWaterMaterial(name string, scene *Scene, opts *NewWaterMaterialOpts) *WaterMaterial {
 	if opts == nil {
 		opts = &NewWaterMaterialOpts{}
 	}
 
-	p := b.ctx.Get("WaterMaterial").New(name, scene.JSObject(), opts.RenderTargetSize.JSObject())
+	p := ba.ctx.Get("WaterMaterial").New(name, scene.JSObject(), opts.RenderTargetSize.JSObject())
 	return WaterMaterialFromJSObject(p)
 }
 

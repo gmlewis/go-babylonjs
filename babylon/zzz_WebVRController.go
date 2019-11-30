@@ -14,8 +14,8 @@ type WebVRController struct{ *PoseEnabledController }
 func (w *WebVRController) JSObject() js.Value { return w.p }
 
 // WebVRController returns a WebVRController JavaScript class.
-func (b *Babylon) WebVRController() *WebVRController {
-	p := b.ctx.Get("WebVRController")
+func (ba *Babylon) WebVRController() *WebVRController {
+	p := ba.ctx.Get("WebVRController")
 	return WebVRControllerFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func WebVRControllerFromJSObject(p js.Value) *WebVRController {
 // NewWebVRController returns a new WebVRController object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrcontroller
-func (b *Babylon) NewWebVRController(vrGamepad interface{}) *WebVRController {
-	p := b.ctx.Get("WebVRController").New(vrGamepad)
+func (ba *Babylon) NewWebVRController(vrGamepad interface{}) *WebVRController {
+	p := ba.ctx.Get("WebVRController").New(vrGamepad)
 	return WebVRControllerFromJSObject(p)
 }
 

@@ -15,8 +15,8 @@ type SpriteSceneComponent struct{ p js.Value }
 func (s *SpriteSceneComponent) JSObject() js.Value { return s.p }
 
 // SpriteSceneComponent returns a SpriteSceneComponent JavaScript class.
-func (b *Babylon) SpriteSceneComponent() *SpriteSceneComponent {
-	p := b.ctx.Get("SpriteSceneComponent")
+func (ba *Babylon) SpriteSceneComponent() *SpriteSceneComponent {
+	p := ba.ctx.Get("SpriteSceneComponent")
 	return SpriteSceneComponentFromJSObject(p)
 }
 
@@ -28,8 +28,8 @@ func SpriteSceneComponentFromJSObject(p js.Value) *SpriteSceneComponent {
 // NewSpriteSceneComponent returns a new SpriteSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritescenecomponent
-func (b *Babylon) NewSpriteSceneComponent(scene *Scene) *SpriteSceneComponent {
-	p := b.ctx.Get("SpriteSceneComponent").New(scene.JSObject())
+func (ba *Babylon) NewSpriteSceneComponent(scene *Scene) *SpriteSceneComponent {
+	p := ba.ctx.Get("SpriteSceneComponent").New(scene.JSObject())
 	return SpriteSceneComponentFromJSObject(p)
 }
 

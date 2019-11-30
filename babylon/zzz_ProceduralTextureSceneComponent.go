@@ -15,8 +15,8 @@ type ProceduralTextureSceneComponent struct{ p js.Value }
 func (p *ProceduralTextureSceneComponent) JSObject() js.Value { return p.p }
 
 // ProceduralTextureSceneComponent returns a ProceduralTextureSceneComponent JavaScript class.
-func (b *Babylon) ProceduralTextureSceneComponent() *ProceduralTextureSceneComponent {
-	p := b.ctx.Get("ProceduralTextureSceneComponent")
+func (ba *Babylon) ProceduralTextureSceneComponent() *ProceduralTextureSceneComponent {
+	p := ba.ctx.Get("ProceduralTextureSceneComponent")
 	return ProceduralTextureSceneComponentFromJSObject(p)
 }
 
@@ -28,8 +28,8 @@ func ProceduralTextureSceneComponentFromJSObject(p js.Value) *ProceduralTextureS
 // NewProceduralTextureSceneComponent returns a new ProceduralTextureSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexturescenecomponent
-func (b *Babylon) NewProceduralTextureSceneComponent(scene *Scene) *ProceduralTextureSceneComponent {
-	p := b.ctx.Get("ProceduralTextureSceneComponent").New(scene.JSObject())
+func (ba *Babylon) NewProceduralTextureSceneComponent(scene *Scene) *ProceduralTextureSceneComponent {
+	p := ba.ctx.Get("ProceduralTextureSceneComponent").New(scene.JSObject())
 	return ProceduralTextureSceneComponentFromJSObject(p)
 }
 

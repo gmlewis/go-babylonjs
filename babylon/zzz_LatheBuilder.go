@@ -14,8 +14,8 @@ type LatheBuilder struct{ p js.Value }
 func (l *LatheBuilder) JSObject() js.Value { return l.p }
 
 // LatheBuilder returns a LatheBuilder JavaScript class.
-func (b *Babylon) LatheBuilder() *LatheBuilder {
-	p := b.ctx.Get("LatheBuilder")
+func (ba *Babylon) LatheBuilder() *LatheBuilder {
+	p := ba.ctx.Get("LatheBuilder")
 	return LatheBuilderFromJSObject(p)
 }
 

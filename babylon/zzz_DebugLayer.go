@@ -17,8 +17,8 @@ type DebugLayer struct{ p js.Value }
 func (d *DebugLayer) JSObject() js.Value { return d.p }
 
 // DebugLayer returns a DebugLayer JavaScript class.
-func (b *Babylon) DebugLayer() *DebugLayer {
-	p := b.ctx.Get("DebugLayer")
+func (ba *Babylon) DebugLayer() *DebugLayer {
+	p := ba.ctx.Get("DebugLayer")
 	return DebugLayerFromJSObject(p)
 }
 
@@ -30,8 +30,8 @@ func DebugLayerFromJSObject(p js.Value) *DebugLayer {
 // NewDebugLayer returns a new DebugLayer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.debuglayer
-func (b *Babylon) NewDebugLayer(scene *Scene) *DebugLayer {
-	p := b.ctx.Get("DebugLayer").New(scene.JSObject())
+func (ba *Babylon) NewDebugLayer(scene *Scene) *DebugLayer {
+	p := ba.ctx.Get("DebugLayer").New(scene.JSObject())
 	return DebugLayerFromJSObject(p)
 }
 

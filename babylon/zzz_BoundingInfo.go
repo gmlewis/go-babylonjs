@@ -14,8 +14,8 @@ type BoundingInfo struct{ p js.Value }
 func (b *BoundingInfo) JSObject() js.Value { return b.p }
 
 // BoundingInfo returns a BoundingInfo JavaScript class.
-func (b *Babylon) BoundingInfo() *BoundingInfo {
-	p := b.ctx.Get("BoundingInfo")
+func (ba *Babylon) BoundingInfo() *BoundingInfo {
+	p := ba.ctx.Get("BoundingInfo")
 	return BoundingInfoFromJSObject(p)
 }
 
@@ -32,12 +32,12 @@ type NewBoundingInfoOpts struct {
 // NewBoundingInfo returns a new BoundingInfo object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundinginfo
-func (b *Babylon) NewBoundingInfo(minimum *Vector3, maximum *Vector3, opts *NewBoundingInfoOpts) *BoundingInfo {
+func (ba *Babylon) NewBoundingInfo(minimum *Vector3, maximum *Vector3, opts *NewBoundingInfoOpts) *BoundingInfo {
 	if opts == nil {
 		opts = &NewBoundingInfoOpts{}
 	}
 
-	p := b.ctx.Get("BoundingInfo").New(minimum.JSObject(), maximum.JSObject(), opts.WorldMatrix.JSObject())
+	p := ba.ctx.Get("BoundingInfo").New(minimum.JSObject(), maximum.JSObject(), opts.WorldMatrix.JSObject())
 	return BoundingInfoFromJSObject(p)
 }
 

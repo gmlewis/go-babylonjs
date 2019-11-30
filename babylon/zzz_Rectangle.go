@@ -14,8 +14,8 @@ type Rectangle struct{ *Container }
 func (r *Rectangle) JSObject() js.Value { return r.p }
 
 // Rectangle returns a Rectangle JavaScript class.
-func (b *Babylon) Rectangle() *Rectangle {
-	p := b.ctx.Get("Rectangle")
+func (ba *Babylon) Rectangle() *Rectangle {
+	p := ba.ctx.Get("Rectangle")
 	return RectangleFromJSObject(p)
 }
 
@@ -26,18 +26,18 @@ func RectangleFromJSObject(p js.Value) *Rectangle {
 
 // NewRectangleOpts contains optional parameters for NewRectangle.
 type NewRectangleOpts struct {
-	Name *string
+	Name *JSString
 }
 
 // NewRectangle returns a new Rectangle object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rectangle
-func (b *Babylon) NewRectangle(opts *NewRectangleOpts) *Rectangle {
+func (ba *Babylon) NewRectangle(opts *NewRectangleOpts) *Rectangle {
 	if opts == nil {
 		opts = &NewRectangleOpts{}
 	}
 
-	p := b.ctx.Get("Rectangle").New(opts.Name)
+	p := ba.ctx.Get("Rectangle").New(opts.Name)
 	return RectangleFromJSObject(p)
 }
 

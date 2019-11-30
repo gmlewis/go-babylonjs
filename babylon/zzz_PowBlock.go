@@ -14,8 +14,8 @@ type PowBlock struct{ *NodeMaterialBlock }
 func (p *PowBlock) JSObject() js.Value { return p.p }
 
 // PowBlock returns a PowBlock JavaScript class.
-func (b *Babylon) PowBlock() *PowBlock {
-	p := b.ctx.Get("PowBlock")
+func (ba *Babylon) PowBlock() *PowBlock {
+	p := ba.ctx.Get("PowBlock")
 	return PowBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func PowBlockFromJSObject(p js.Value) *PowBlock {
 // NewPowBlock returns a new PowBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.powblock
-func (b *Babylon) NewPowBlock(name string) *PowBlock {
-	p := b.ctx.Get("PowBlock").New(name)
+func (ba *Babylon) NewPowBlock(name string) *PowBlock {
+	p := ba.ctx.Get("PowBlock").New(name)
 	return PowBlockFromJSObject(p)
 }
 

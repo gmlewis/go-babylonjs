@@ -14,8 +14,8 @@ type AnaglyphPostProcess struct{ *PostProcess }
 func (a *AnaglyphPostProcess) JSObject() js.Value { return a.p }
 
 // AnaglyphPostProcess returns a AnaglyphPostProcess JavaScript class.
-func (b *Babylon) AnaglyphPostProcess() *AnaglyphPostProcess {
-	p := b.ctx.Get("AnaglyphPostProcess")
+func (ba *Babylon) AnaglyphPostProcess() *AnaglyphPostProcess {
+	p := ba.ctx.Get("AnaglyphPostProcess")
 	return AnaglyphPostProcessFromJSObject(p)
 }
 
@@ -26,22 +26,22 @@ func AnaglyphPostProcessFromJSObject(p js.Value) *AnaglyphPostProcess {
 
 // NewAnaglyphPostProcessOpts contains optional parameters for NewAnaglyphPostProcess.
 type NewAnaglyphPostProcessOpts struct {
-	SamplingMode *float64
+	SamplingMode *JSFloat64
 
 	Engine *Engine
 
-	Reusable *bool
+	Reusable *JSBool
 }
 
 // NewAnaglyphPostProcess returns a new AnaglyphPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphpostprocess
-func (b *Babylon) NewAnaglyphPostProcess(name string, options float64, rigCameras *Camera, opts *NewAnaglyphPostProcessOpts) *AnaglyphPostProcess {
+func (ba *Babylon) NewAnaglyphPostProcess(name string, options float64, rigCameras *Camera, opts *NewAnaglyphPostProcessOpts) *AnaglyphPostProcess {
 	if opts == nil {
 		opts = &NewAnaglyphPostProcessOpts{}
 	}
 
-	p := b.ctx.Get("AnaglyphPostProcess").New(name, options, rigCameras.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject())
+	p := ba.ctx.Get("AnaglyphPostProcess").New(name, options, rigCameras.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable)
 	return AnaglyphPostProcessFromJSObject(p)
 }
 

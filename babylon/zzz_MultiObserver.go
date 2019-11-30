@@ -14,8 +14,8 @@ type MultiObserver struct{ p js.Value }
 func (m *MultiObserver) JSObject() js.Value { return m.p }
 
 // MultiObserver returns a MultiObserver JavaScript class.
-func (b *Babylon) MultiObserver() *MultiObserver {
-	p := b.ctx.Get("MultiObserver")
+func (ba *Babylon) MultiObserver() *MultiObserver {
+	p := ba.ctx.Get("MultiObserver")
 	return MultiObserverFromJSObject(p)
 }
 

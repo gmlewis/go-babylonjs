@@ -16,8 +16,8 @@ type PhysicsHelper struct{ p js.Value }
 func (p *PhysicsHelper) JSObject() js.Value { return p.p }
 
 // PhysicsHelper returns a PhysicsHelper JavaScript class.
-func (b *Babylon) PhysicsHelper() *PhysicsHelper {
-	p := b.ctx.Get("PhysicsHelper")
+func (ba *Babylon) PhysicsHelper() *PhysicsHelper {
+	p := ba.ctx.Get("PhysicsHelper")
 	return PhysicsHelperFromJSObject(p)
 }
 
@@ -29,8 +29,8 @@ func PhysicsHelperFromJSObject(p js.Value) *PhysicsHelper {
 // NewPhysicsHelper returns a new PhysicsHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicshelper
-func (b *Babylon) NewPhysicsHelper(scene *Scene) *PhysicsHelper {
-	p := b.ctx.Get("PhysicsHelper").New(scene.JSObject())
+func (ba *Babylon) NewPhysicsHelper(scene *Scene) *PhysicsHelper {
+	p := ba.ctx.Get("PhysicsHelper").New(scene.JSObject())
 	return PhysicsHelperFromJSObject(p)
 }
 

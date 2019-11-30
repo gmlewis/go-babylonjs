@@ -17,8 +17,8 @@ type MultiRenderTarget struct{ *RenderTargetTexture }
 func (m *MultiRenderTarget) JSObject() js.Value { return m.p }
 
 // MultiRenderTarget returns a MultiRenderTarget JavaScript class.
-func (b *Babylon) MultiRenderTarget() *MultiRenderTarget {
-	p := b.ctx.Get("MultiRenderTarget")
+func (ba *Babylon) MultiRenderTarget() *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget")
 	return MultiRenderTargetFromJSObject(p)
 }
 
@@ -35,12 +35,12 @@ type NewMultiRenderTargetOpts struct {
 // NewMultiRenderTarget returns a new MultiRenderTarget object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multirendertarget
-func (b *Babylon) NewMultiRenderTarget(name string, size interface{}, count float64, scene *Scene, opts *NewMultiRenderTargetOpts) *MultiRenderTarget {
+func (ba *Babylon) NewMultiRenderTarget(name string, size interface{}, count float64, scene *Scene, opts *NewMultiRenderTargetOpts) *MultiRenderTarget {
 	if opts == nil {
 		opts = &NewMultiRenderTargetOpts{}
 	}
 
-	p := b.ctx.Get("MultiRenderTarget").New(name, size, count, scene.JSObject(), opts.Options)
+	p := ba.ctx.Get("MultiRenderTarget").New(name, size, count, scene.JSObject(), opts.Options)
 	return MultiRenderTargetFromJSObject(p)
 }
 

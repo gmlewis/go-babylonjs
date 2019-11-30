@@ -15,8 +15,8 @@ type GridMaterial struct{ p js.Value }
 func (g *GridMaterial) JSObject() js.Value { return g.p }
 
 // GridMaterial returns a GridMaterial JavaScript class.
-func (b *Babylon) GridMaterial() *GridMaterial {
-	p := b.ctx.Get("GridMaterial")
+func (ba *Babylon) GridMaterial() *GridMaterial {
+	p := ba.ctx.Get("GridMaterial")
 	return GridMaterialFromJSObject(p)
 }
 
@@ -28,8 +28,8 @@ func GridMaterialFromJSObject(p js.Value) *GridMaterial {
 // NewGridMaterial returns a new GridMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial
-func (b *Babylon) NewGridMaterial(name string, scene *Scene) *GridMaterial {
-	p := b.ctx.Get("GridMaterial").New(name, scene.JSObject())
+func (ba *Babylon) NewGridMaterial(name string, scene *Scene) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(name, scene.JSObject())
 	return GridMaterialFromJSObject(p)
 }
 

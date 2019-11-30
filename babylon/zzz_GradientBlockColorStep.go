@@ -14,8 +14,8 @@ type GradientBlockColorStep struct{ p js.Value }
 func (g *GradientBlockColorStep) JSObject() js.Value { return g.p }
 
 // GradientBlockColorStep returns a GradientBlockColorStep JavaScript class.
-func (b *Babylon) GradientBlockColorStep() *GradientBlockColorStep {
-	p := b.ctx.Get("GradientBlockColorStep")
+func (ba *Babylon) GradientBlockColorStep() *GradientBlockColorStep {
+	p := ba.ctx.Get("GradientBlockColorStep")
 	return GradientBlockColorStepFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func GradientBlockColorStepFromJSObject(p js.Value) *GradientBlockColorStep {
 // NewGradientBlockColorStep returns a new GradientBlockColorStep object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gradientblockcolorstep
-func (b *Babylon) NewGradientBlockColorStep(step float64, color *Color3) *GradientBlockColorStep {
-	p := b.ctx.Get("GradientBlockColorStep").New(step, color.JSObject())
+func (ba *Babylon) NewGradientBlockColorStep(step float64, color *Color3) *GradientBlockColorStep {
+	p := ba.ctx.Get("GradientBlockColorStep").New(step, color.JSObject())
 	return GradientBlockColorStepFromJSObject(p)
 }
 

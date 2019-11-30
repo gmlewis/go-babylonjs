@@ -14,8 +14,8 @@ type DepthOfFieldMergePostProcess struct{ *PostProcess }
 func (d *DepthOfFieldMergePostProcess) JSObject() js.Value { return d.p }
 
 // DepthOfFieldMergePostProcess returns a DepthOfFieldMergePostProcess JavaScript class.
-func (b *Babylon) DepthOfFieldMergePostProcess() *DepthOfFieldMergePostProcess {
-	p := b.ctx.Get("DepthOfFieldMergePostProcess")
+func (ba *Babylon) DepthOfFieldMergePostProcess() *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess")
 	return DepthOfFieldMergePostProcessFromJSObject(p)
 }
 
@@ -26,26 +26,26 @@ func DepthOfFieldMergePostProcessFromJSObject(p js.Value) *DepthOfFieldMergePost
 
 // NewDepthOfFieldMergePostProcessOpts contains optional parameters for NewDepthOfFieldMergePostProcess.
 type NewDepthOfFieldMergePostProcessOpts struct {
-	SamplingMode *float64
+	SamplingMode *JSFloat64
 
 	Engine *Engine
 
-	Reusable *bool
+	Reusable *JSBool
 
-	TextureType *float64
+	TextureType *JSFloat64
 
-	BlockCompilation *bool
+	BlockCompilation *JSBool
 }
 
 // NewDepthOfFieldMergePostProcess returns a new DepthOfFieldMergePostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess
-func (b *Babylon) NewDepthOfFieldMergePostProcess(name string, originalFromInput *PostProcess, circleOfConfusion *PostProcess, blurSteps []PostProcess, options float64, camera *Camera, opts *NewDepthOfFieldMergePostProcessOpts) *DepthOfFieldMergePostProcess {
+func (ba *Babylon) NewDepthOfFieldMergePostProcess(name string, originalFromInput *PostProcess, circleOfConfusion *PostProcess, blurSteps []PostProcess, options float64, camera *Camera, opts *NewDepthOfFieldMergePostProcessOpts) *DepthOfFieldMergePostProcess {
 	if opts == nil {
 		opts = &NewDepthOfFieldMergePostProcessOpts{}
 	}
 
-	p := b.ctx.Get("DepthOfFieldMergePostProcess").New(name, originalFromInput.JSObject(), circleOfConfusion.JSObject(), blurSteps.JSObject(), options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType, opts.BlockCompilation.JSObject())
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(name, originalFromInput.JSObject(), circleOfConfusion.JSObject(), blurSteps.JSObject(), options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable, opts.TextureType, opts.BlockCompilation)
 	return DepthOfFieldMergePostProcessFromJSObject(p)
 }
 

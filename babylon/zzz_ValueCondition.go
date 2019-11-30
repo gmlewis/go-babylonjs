@@ -14,8 +14,8 @@ type ValueCondition struct{ *Condition }
 func (v *ValueCondition) JSObject() js.Value { return v.p }
 
 // ValueCondition returns a ValueCondition JavaScript class.
-func (b *Babylon) ValueCondition() *ValueCondition {
-	p := b.ctx.Get("ValueCondition")
+func (ba *Babylon) ValueCondition() *ValueCondition {
+	p := ba.ctx.Get("ValueCondition")
 	return ValueConditionFromJSObject(p)
 }
 
@@ -26,18 +26,18 @@ func ValueConditionFromJSObject(p js.Value) *ValueCondition {
 
 // NewValueConditionOpts contains optional parameters for NewValueCondition.
 type NewValueConditionOpts struct {
-	Operator *float64
+	Operator *JSFloat64
 }
 
 // NewValueCondition returns a new ValueCondition object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.valuecondition
-func (b *Babylon) NewValueCondition(actionManager *ActionManager, target interface{}, propertyPath string, value interface{}, opts *NewValueConditionOpts) *ValueCondition {
+func (ba *Babylon) NewValueCondition(actionManager *ActionManager, target interface{}, propertyPath string, value interface{}, opts *NewValueConditionOpts) *ValueCondition {
 	if opts == nil {
 		opts = &NewValueConditionOpts{}
 	}
 
-	p := b.ctx.Get("ValueCondition").New(actionManager.JSObject(), target, propertyPath, value, opts.Operator)
+	p := ba.ctx.Get("ValueCondition").New(actionManager.JSObject(), target, propertyPath, value, opts.Operator)
 	return ValueConditionFromJSObject(p)
 }
 

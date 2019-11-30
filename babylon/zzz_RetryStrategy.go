@@ -14,8 +14,8 @@ type RetryStrategy struct{ p js.Value }
 func (r *RetryStrategy) JSObject() js.Value { return r.p }
 
 // RetryStrategy returns a RetryStrategy JavaScript class.
-func (b *Babylon) RetryStrategy() *RetryStrategy {
-	p := b.ctx.Get("RetryStrategy")
+func (ba *Babylon) RetryStrategy() *RetryStrategy {
+	p := ba.ctx.Get("RetryStrategy")
 	return RetryStrategyFromJSObject(p)
 }
 

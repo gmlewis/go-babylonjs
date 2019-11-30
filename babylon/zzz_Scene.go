@@ -16,8 +16,8 @@ type Scene struct{ *AbstractScene }
 func (s *Scene) JSObject() js.Value { return s.p }
 
 // Scene returns a Scene JavaScript class.
-func (b *Babylon) Scene() *Scene {
-	p := b.ctx.Get("Scene")
+func (ba *Babylon) Scene() *Scene {
+	p := ba.ctx.Get("Scene")
 	return SceneFromJSObject(p)
 }
 
@@ -28,18 +28,18 @@ func SceneFromJSObject(p js.Value) *Scene {
 
 // NewSceneOpts contains optional parameters for NewScene.
 type NewSceneOpts struct {
-	Options *SceneOptions
+	Options js.Value
 }
 
 // NewScene returns a new Scene object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scene
-func (b *Babylon) NewScene(engine *Engine, opts *NewSceneOpts) *Scene {
+func (ba *Babylon) NewScene(engine *Engine, opts *NewSceneOpts) *Scene {
 	if opts == nil {
 		opts = &NewSceneOpts{}
 	}
 
-	p := b.ctx.Get("Scene").New(engine.JSObject(), opts.Options.JSObject())
+	p := ba.ctx.Get("Scene").New(engine.JSObject(), opts.Options)
 	return SceneFromJSObject(p)
 }
 

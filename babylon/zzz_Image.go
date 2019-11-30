@@ -14,8 +14,8 @@ type Image struct{ *Control }
 func (i *Image) JSObject() js.Value { return i.p }
 
 // Image returns a Image JavaScript class.
-func (b *Babylon) Image() *Image {
-	p := b.ctx.Get("Image")
+func (ba *Babylon) Image() *Image {
+	p := ba.ctx.Get("Image")
 	return ImageFromJSObject(p)
 }
 
@@ -26,20 +26,20 @@ func ImageFromJSObject(p js.Value) *Image {
 
 // NewImageOpts contains optional parameters for NewImage.
 type NewImageOpts struct {
-	Name *string
+	Name *JSString
 
-	Url *string
+	Url *JSString
 }
 
 // NewImage returns a new Image object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.image
-func (b *Babylon) NewImage(opts *NewImageOpts) *Image {
+func (ba *Babylon) NewImage(opts *NewImageOpts) *Image {
 	if opts == nil {
 		opts = &NewImageOpts{}
 	}
 
-	p := b.ctx.Get("Image").New(opts.Name, opts.Url)
+	p := ba.ctx.Get("Image").New(opts.Name, opts.Url)
 	return ImageFromJSObject(p)
 }
 

@@ -16,8 +16,8 @@ type BaseTexture struct{ p js.Value }
 func (b *BaseTexture) JSObject() js.Value { return b.p }
 
 // BaseTexture returns a BaseTexture JavaScript class.
-func (b *Babylon) BaseTexture() *BaseTexture {
-	p := b.ctx.Get("BaseTexture")
+func (ba *Babylon) BaseTexture() *BaseTexture {
+	p := ba.ctx.Get("BaseTexture")
 	return BaseTextureFromJSObject(p)
 }
 
@@ -29,8 +29,8 @@ func BaseTextureFromJSObject(p js.Value) *BaseTexture {
 // NewBaseTexture returns a new BaseTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.basetexture
-func (b *Babylon) NewBaseTexture(scene *Scene) *BaseTexture {
-	p := b.ctx.Get("BaseTexture").New(scene.JSObject())
+func (ba *Babylon) NewBaseTexture(scene *Scene) *BaseTexture {
+	p := ba.ctx.Get("BaseTexture").New(scene.JSObject())
 	return BaseTextureFromJSObject(p)
 }
 

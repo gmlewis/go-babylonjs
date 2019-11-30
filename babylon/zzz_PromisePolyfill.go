@@ -14,8 +14,8 @@ type PromisePolyfill struct{ p js.Value }
 func (p *PromisePolyfill) JSObject() js.Value { return p.p }
 
 // PromisePolyfill returns a PromisePolyfill JavaScript class.
-func (b *Babylon) PromisePolyfill() *PromisePolyfill {
-	p := b.ctx.Get("PromisePolyfill")
+func (ba *Babylon) PromisePolyfill() *PromisePolyfill {
+	p := ba.ctx.Get("PromisePolyfill")
 	return PromisePolyfillFromJSObject(p)
 }
 

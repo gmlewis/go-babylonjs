@@ -16,8 +16,8 @@ type SimplificationQueue struct{ p js.Value }
 func (s *SimplificationQueue) JSObject() js.Value { return s.p }
 
 // SimplificationQueue returns a SimplificationQueue JavaScript class.
-func (b *Babylon) SimplificationQueue() *SimplificationQueue {
-	p := b.ctx.Get("SimplificationQueue")
+func (ba *Babylon) SimplificationQueue() *SimplificationQueue {
+	p := ba.ctx.Get("SimplificationQueue")
 	return SimplificationQueueFromJSObject(p)
 }
 
@@ -29,8 +29,8 @@ func SimplificationQueueFromJSObject(p js.Value) *SimplificationQueue {
 // NewSimplificationQueue returns a new SimplificationQueue object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.simplificationqueue
-func (b *Babylon) NewSimplificationQueue() *SimplificationQueue {
-	p := b.ctx.Get("SimplificationQueue").New()
+func (ba *Babylon) NewSimplificationQueue() *SimplificationQueue {
+	p := ba.ctx.Get("SimplificationQueue").New()
 	return SimplificationQueueFromJSObject(p)
 }
 

@@ -14,8 +14,8 @@ type StopSoundAction struct{ *Action }
 func (s *StopSoundAction) JSObject() js.Value { return s.p }
 
 // StopSoundAction returns a StopSoundAction JavaScript class.
-func (b *Babylon) StopSoundAction() *StopSoundAction {
-	p := b.ctx.Get("StopSoundAction")
+func (ba *Babylon) StopSoundAction() *StopSoundAction {
+	p := ba.ctx.Get("StopSoundAction")
 	return StopSoundActionFromJSObject(p)
 }
 
@@ -32,12 +32,12 @@ type NewStopSoundActionOpts struct {
 // NewStopSoundAction returns a new StopSoundAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stopsoundaction
-func (b *Babylon) NewStopSoundAction(triggerOptions interface{}, sound *Sound, opts *NewStopSoundActionOpts) *StopSoundAction {
+func (ba *Babylon) NewStopSoundAction(triggerOptions interface{}, sound *Sound, opts *NewStopSoundActionOpts) *StopSoundAction {
 	if opts == nil {
 		opts = &NewStopSoundActionOpts{}
 	}
 
-	p := b.ctx.Get("StopSoundAction").New(triggerOptions, sound.JSObject(), opts.Condition.JSObject())
+	p := ba.ctx.Get("StopSoundAction").New(triggerOptions, sound.JSObject(), opts.Condition.JSObject())
 	return StopSoundActionFromJSObject(p)
 }
 

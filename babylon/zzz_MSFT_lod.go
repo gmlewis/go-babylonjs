@@ -14,8 +14,8 @@ type MSFT_lod struct{ p js.Value }
 func (m *MSFT_lod) JSObject() js.Value { return m.p }
 
 // MSFT_lod returns a MSFT_lod JavaScript class.
-func (b *Babylon) MSFT_lod() *MSFT_lod {
-	p := b.ctx.Get("MSFT_lod")
+func (ba *Babylon) MSFT_lod() *MSFT_lod {
+	p := ba.ctx.Get("MSFT_lod")
 	return MSFT_lodFromJSObject(p)
 }
 

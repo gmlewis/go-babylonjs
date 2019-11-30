@@ -17,8 +17,8 @@ type InterpolateValueAction struct{ *Action }
 func (i *InterpolateValueAction) JSObject() js.Value { return i.p }
 
 // InterpolateValueAction returns a InterpolateValueAction JavaScript class.
-func (b *Babylon) InterpolateValueAction() *InterpolateValueAction {
-	p := b.ctx.Get("InterpolateValueAction")
+func (ba *Babylon) InterpolateValueAction() *InterpolateValueAction {
+	p := ba.ctx.Get("InterpolateValueAction")
 	return InterpolateValueActionFromJSObject(p)
 }
 
@@ -29,11 +29,11 @@ func InterpolateValueActionFromJSObject(p js.Value) *InterpolateValueAction {
 
 // NewInterpolateValueActionOpts contains optional parameters for NewInterpolateValueAction.
 type NewInterpolateValueActionOpts struct {
-	Duration *float64
+	Duration *JSFloat64
 
 	Condition *Condition
 
-	StopOtherAnimations *bool
+	StopOtherAnimations *JSBool
 
 	OnInterpolationDone *func()
 }
@@ -41,12 +41,12 @@ type NewInterpolateValueActionOpts struct {
 // NewInterpolateValueAction returns a new InterpolateValueAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.interpolatevalueaction
-func (b *Babylon) NewInterpolateValueAction(triggerOptions interface{}, target interface{}, propertyPath string, value interface{}, opts *NewInterpolateValueActionOpts) *InterpolateValueAction {
+func (ba *Babylon) NewInterpolateValueAction(triggerOptions interface{}, target interface{}, propertyPath string, value interface{}, opts *NewInterpolateValueActionOpts) *InterpolateValueAction {
 	if opts == nil {
 		opts = &NewInterpolateValueActionOpts{}
 	}
 
-	p := b.ctx.Get("InterpolateValueAction").New(triggerOptions, target, propertyPath, value, opts.Duration, opts.Condition.JSObject(), opts.StopOtherAnimations.JSObject(), opts.OnInterpolationDone)
+	p := ba.ctx.Get("InterpolateValueAction").New(triggerOptions, target, propertyPath, value, opts.Duration, opts.Condition.JSObject(), opts.StopOtherAnimations, opts.OnInterpolationDone)
 	return InterpolateValueActionFromJSObject(p)
 }
 

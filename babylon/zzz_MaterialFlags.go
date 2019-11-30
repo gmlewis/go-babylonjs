@@ -14,8 +14,8 @@ type MaterialFlags struct{ p js.Value }
 func (m *MaterialFlags) JSObject() js.Value { return m.p }
 
 // MaterialFlags returns a MaterialFlags JavaScript class.
-func (b *Babylon) MaterialFlags() *MaterialFlags {
-	p := b.ctx.Get("MaterialFlags")
+func (ba *Babylon) MaterialFlags() *MaterialFlags {
+	p := ba.ctx.Get("MaterialFlags")
 	return MaterialFlagsFromJSObject(p)
 }
 

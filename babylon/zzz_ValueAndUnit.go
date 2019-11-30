@@ -14,8 +14,8 @@ type ValueAndUnit struct{ p js.Value }
 func (v *ValueAndUnit) JSObject() js.Value { return v.p }
 
 // ValueAndUnit returns a ValueAndUnit JavaScript class.
-func (b *Babylon) ValueAndUnit() *ValueAndUnit {
-	p := b.ctx.Get("ValueAndUnit")
+func (ba *Babylon) ValueAndUnit() *ValueAndUnit {
+	p := ba.ctx.Get("ValueAndUnit")
 	return ValueAndUnitFromJSObject(p)
 }
 
@@ -26,20 +26,20 @@ func ValueAndUnitFromJSObject(p js.Value) *ValueAndUnit {
 
 // NewValueAndUnitOpts contains optional parameters for NewValueAndUnit.
 type NewValueAndUnitOpts struct {
-	Unit *float64
+	Unit *JSFloat64
 
-	NegativeValueAllowed *bool
+	NegativeValueAllowed *JSBool
 }
 
 // NewValueAndUnit returns a new ValueAndUnit object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.valueandunit
-func (b *Babylon) NewValueAndUnit(value float64, opts *NewValueAndUnitOpts) *ValueAndUnit {
+func (ba *Babylon) NewValueAndUnit(value float64, opts *NewValueAndUnitOpts) *ValueAndUnit {
 	if opts == nil {
 		opts = &NewValueAndUnitOpts{}
 	}
 
-	p := b.ctx.Get("ValueAndUnit").New(value, opts.Unit, opts.NegativeValueAllowed.JSObject())
+	p := ba.ctx.Get("ValueAndUnit").New(value, opts.Unit, opts.NegativeValueAllowed)
 	return ValueAndUnitFromJSObject(p)
 }
 

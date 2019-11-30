@@ -14,8 +14,8 @@ type Scalar struct{ p js.Value }
 func (s *Scalar) JSObject() js.Value { return s.p }
 
 // Scalar returns a Scalar JavaScript class.
-func (b *Babylon) Scalar() *Scalar {
-	p := b.ctx.Get("Scalar")
+func (ba *Babylon) Scalar() *Scalar {
+	p := ba.ctx.Get("Scalar")
 	return ScalarFromJSObject(p)
 }
 

@@ -16,8 +16,8 @@ type MotorEnabledJoint struct{ *PhysicsJoint }
 func (m *MotorEnabledJoint) JSObject() js.Value { return m.p }
 
 // MotorEnabledJoint returns a MotorEnabledJoint JavaScript class.
-func (b *Babylon) MotorEnabledJoint() *MotorEnabledJoint {
-	p := b.ctx.Get("MotorEnabledJoint")
+func (ba *Babylon) MotorEnabledJoint() *MotorEnabledJoint {
+	p := ba.ctx.Get("MotorEnabledJoint")
 	return MotorEnabledJointFromJSObject(p)
 }
 
@@ -29,8 +29,8 @@ func MotorEnabledJointFromJSObject(p js.Value) *MotorEnabledJoint {
 // NewMotorEnabledJoint returns a new MotorEnabledJoint object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.motorenabledjoint
-func (b *Babylon) NewMotorEnabledJoint(jsType float64, jointData js.Value) *MotorEnabledJoint {
-	p := b.ctx.Get("MotorEnabledJoint").New(jsType, jointData)
+func (ba *Babylon) NewMotorEnabledJoint(jsType float64, jointData js.Value) *MotorEnabledJoint {
+	p := ba.ctx.Get("MotorEnabledJoint").New(jsType, jointData)
 	return MotorEnabledJointFromJSObject(p)
 }
 

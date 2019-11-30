@@ -14,8 +14,8 @@ type DepthOfFieldMergePostProcessOptions struct{ p js.Value }
 func (d *DepthOfFieldMergePostProcessOptions) JSObject() js.Value { return d.p }
 
 // DepthOfFieldMergePostProcessOptions returns a DepthOfFieldMergePostProcessOptions JavaScript class.
-func (b *Babylon) DepthOfFieldMergePostProcessOptions() *DepthOfFieldMergePostProcessOptions {
-	p := b.ctx.Get("DepthOfFieldMergePostProcessOptions")
+func (ba *Babylon) DepthOfFieldMergePostProcessOptions() *DepthOfFieldMergePostProcessOptions {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcessOptions")
 	return DepthOfFieldMergePostProcessOptionsFromJSObject(p)
 }
 

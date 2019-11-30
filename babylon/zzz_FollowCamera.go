@@ -17,8 +17,8 @@ type FollowCamera struct{ *TargetCamera }
 func (f *FollowCamera) JSObject() js.Value { return f.p }
 
 // FollowCamera returns a FollowCamera JavaScript class.
-func (b *Babylon) FollowCamera() *FollowCamera {
-	p := b.ctx.Get("FollowCamera")
+func (ba *Babylon) FollowCamera() *FollowCamera {
+	p := ba.ctx.Get("FollowCamera")
 	return FollowCameraFromJSObject(p)
 }
 
@@ -35,12 +35,12 @@ type NewFollowCameraOpts struct {
 // NewFollowCamera returns a new FollowCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamera
-func (b *Babylon) NewFollowCamera(name string, position *Vector3, scene *Scene, opts *NewFollowCameraOpts) *FollowCamera {
+func (ba *Babylon) NewFollowCamera(name string, position *Vector3, scene *Scene, opts *NewFollowCameraOpts) *FollowCamera {
 	if opts == nil {
 		opts = &NewFollowCameraOpts{}
 	}
 
-	p := b.ctx.Get("FollowCamera").New(name, position.JSObject(), scene.JSObject(), opts.LockedTarget.JSObject())
+	p := ba.ctx.Get("FollowCamera").New(name, position.JSObject(), scene.JSObject(), opts.LockedTarget.JSObject())
 	return FollowCameraFromJSObject(p)
 }
 

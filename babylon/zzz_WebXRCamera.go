@@ -16,8 +16,8 @@ type WebXRCamera struct{ *FreeCamera }
 func (w *WebXRCamera) JSObject() js.Value { return w.p }
 
 // WebXRCamera returns a WebXRCamera JavaScript class.
-func (b *Babylon) WebXRCamera() *WebXRCamera {
-	p := b.ctx.Get("WebXRCamera")
+func (ba *Babylon) WebXRCamera() *WebXRCamera {
+	p := ba.ctx.Get("WebXRCamera")
 	return WebXRCameraFromJSObject(p)
 }
 
@@ -29,8 +29,8 @@ func WebXRCameraFromJSObject(p js.Value) *WebXRCamera {
 // NewWebXRCamera returns a new WebXRCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrcamera
-func (b *Babylon) NewWebXRCamera(name string, scene *Scene) *WebXRCamera {
-	p := b.ctx.Get("WebXRCamera").New(name, scene.JSObject())
+func (ba *Babylon) NewWebXRCamera(name string, scene *Scene) *WebXRCamera {
+	p := ba.ctx.Get("WebXRCamera").New(name, scene.JSObject())
 	return WebXRCameraFromJSObject(p)
 }
 

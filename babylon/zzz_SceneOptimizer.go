@@ -16,8 +16,8 @@ type SceneOptimizer struct{ p js.Value }
 func (s *SceneOptimizer) JSObject() js.Value { return s.p }
 
 // SceneOptimizer returns a SceneOptimizer JavaScript class.
-func (b *Babylon) SceneOptimizer() *SceneOptimizer {
-	p := b.ctx.Get("SceneOptimizer")
+func (ba *Babylon) SceneOptimizer() *SceneOptimizer {
+	p := ba.ctx.Get("SceneOptimizer")
 	return SceneOptimizerFromJSObject(p)
 }
 
@@ -30,20 +30,20 @@ func SceneOptimizerFromJSObject(p js.Value) *SceneOptimizer {
 type NewSceneOptimizerOpts struct {
 	Options *SceneOptimizerOptions
 
-	AutoGeneratePriorities *bool
+	AutoGeneratePriorities *JSBool
 
-	ImprovementMode *bool
+	ImprovementMode *JSBool
 }
 
 // NewSceneOptimizer returns a new SceneOptimizer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneoptimizer
-func (b *Babylon) NewSceneOptimizer(scene *Scene, opts *NewSceneOptimizerOpts) *SceneOptimizer {
+func (ba *Babylon) NewSceneOptimizer(scene *Scene, opts *NewSceneOptimizerOpts) *SceneOptimizer {
 	if opts == nil {
 		opts = &NewSceneOptimizerOpts{}
 	}
 
-	p := b.ctx.Get("SceneOptimizer").New(scene.JSObject(), opts.Options.JSObject(), opts.AutoGeneratePriorities.JSObject(), opts.ImprovementMode.JSObject())
+	p := ba.ctx.Get("SceneOptimizer").New(scene.JSObject(), opts.Options.JSObject(), opts.AutoGeneratePriorities, opts.ImprovementMode)
 	return SceneOptimizerFromJSObject(p)
 }
 

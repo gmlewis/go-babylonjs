@@ -16,8 +16,8 @@ type PlayAnimationAction struct{ *Action }
 func (p *PlayAnimationAction) JSObject() js.Value { return p.p }
 
 // PlayAnimationAction returns a PlayAnimationAction JavaScript class.
-func (b *Babylon) PlayAnimationAction() *PlayAnimationAction {
-	p := b.ctx.Get("PlayAnimationAction")
+func (ba *Babylon) PlayAnimationAction() *PlayAnimationAction {
+	p := ba.ctx.Get("PlayAnimationAction")
 	return PlayAnimationActionFromJSObject(p)
 }
 
@@ -28,7 +28,7 @@ func PlayAnimationActionFromJSObject(p js.Value) *PlayAnimationAction {
 
 // NewPlayAnimationActionOpts contains optional parameters for NewPlayAnimationAction.
 type NewPlayAnimationActionOpts struct {
-	Loop *bool
+	Loop *JSBool
 
 	Condition *Condition
 }
@@ -36,12 +36,12 @@ type NewPlayAnimationActionOpts struct {
 // NewPlayAnimationAction returns a new PlayAnimationAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.playanimationaction
-func (b *Babylon) NewPlayAnimationAction(triggerOptions interface{}, target interface{}, from float64, to float64, opts *NewPlayAnimationActionOpts) *PlayAnimationAction {
+func (ba *Babylon) NewPlayAnimationAction(triggerOptions interface{}, target interface{}, from float64, to float64, opts *NewPlayAnimationActionOpts) *PlayAnimationAction {
 	if opts == nil {
 		opts = &NewPlayAnimationActionOpts{}
 	}
 
-	p := b.ctx.Get("PlayAnimationAction").New(triggerOptions, target, from, to, opts.Loop.JSObject(), opts.Condition.JSObject())
+	p := ba.ctx.Get("PlayAnimationAction").New(triggerOptions, target, from, to, opts.Loop, opts.Condition.JSObject())
 	return PlayAnimationActionFromJSObject(p)
 }
 

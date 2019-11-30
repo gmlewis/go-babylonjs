@@ -17,8 +17,8 @@ type Sound struct{ p js.Value }
 func (s *Sound) JSObject() js.Value { return s.p }
 
 // Sound returns a Sound JavaScript class.
-func (b *Babylon) Sound() *Sound {
-	p := b.ctx.Get("Sound")
+func (ba *Babylon) Sound() *Sound {
+	p := ba.ctx.Get("Sound")
 	return SoundFromJSObject(p)
 }
 
@@ -31,18 +31,18 @@ func SoundFromJSObject(p js.Value) *Sound {
 type NewSoundOpts struct {
 	ReadyToPlayCallback *func()
 
-	Options *ISoundOptions
+	Options js.Value
 }
 
 // NewSound returns a new Sound object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sound
-func (b *Babylon) NewSound(name string, urlOrArrayBuffer interface{}, scene *Scene, opts *NewSoundOpts) *Sound {
+func (ba *Babylon) NewSound(name string, urlOrArrayBuffer interface{}, scene *Scene, opts *NewSoundOpts) *Sound {
 	if opts == nil {
 		opts = &NewSoundOpts{}
 	}
 
-	p := b.ctx.Get("Sound").New(name, urlOrArrayBuffer, scene.JSObject(), opts.ReadyToPlayCallback, opts.Options.JSObject())
+	p := ba.ctx.Get("Sound").New(name, urlOrArrayBuffer, scene.JSObject(), opts.ReadyToPlayCallback, opts.Options)
 	return SoundFromJSObject(p)
 }
 

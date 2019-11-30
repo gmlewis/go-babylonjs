@@ -14,8 +14,8 @@ type TorusBuilder struct{ p js.Value }
 func (t *TorusBuilder) JSObject() js.Value { return t.p }
 
 // TorusBuilder returns a TorusBuilder JavaScript class.
-func (b *Babylon) TorusBuilder() *TorusBuilder {
-	p := b.ctx.Get("TorusBuilder")
+func (ba *Babylon) TorusBuilder() *TorusBuilder {
+	p := ba.ctx.Get("TorusBuilder")
 	return TorusBuilderFromJSObject(p)
 }
 

@@ -14,8 +14,8 @@ type StepBlock struct{ *NodeMaterialBlock }
 func (s *StepBlock) JSObject() js.Value { return s.p }
 
 // StepBlock returns a StepBlock JavaScript class.
-func (b *Babylon) StepBlock() *StepBlock {
-	p := b.ctx.Get("StepBlock")
+func (ba *Babylon) StepBlock() *StepBlock {
+	p := ba.ctx.Get("StepBlock")
 	return StepBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func StepBlockFromJSObject(p js.Value) *StepBlock {
 // NewStepBlock returns a new StepBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stepblock
-func (b *Babylon) NewStepBlock(name string) *StepBlock {
-	p := b.ctx.Get("StepBlock").New(name)
+func (ba *Babylon) NewStepBlock(name string) *StepBlock {
+	p := ba.ctx.Get("StepBlock").New(name)
 	return StepBlockFromJSObject(p)
 }
 

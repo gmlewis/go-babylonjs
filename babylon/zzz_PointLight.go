@@ -17,8 +17,8 @@ type PointLight struct{ *ShadowLight }
 func (p *PointLight) JSObject() js.Value { return p.p }
 
 // PointLight returns a PointLight JavaScript class.
-func (b *Babylon) PointLight() *PointLight {
-	p := b.ctx.Get("PointLight")
+func (ba *Babylon) PointLight() *PointLight {
+	p := ba.ctx.Get("PointLight")
 	return PointLightFromJSObject(p)
 }
 
@@ -30,8 +30,8 @@ func PointLightFromJSObject(p js.Value) *PointLight {
 // NewPointLight returns a new PointLight object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointlight
-func (b *Babylon) NewPointLight(name string, position *Vector3, scene *Scene) *PointLight {
-	p := b.ctx.Get("PointLight").New(name, position.JSObject(), scene.JSObject())
+func (ba *Babylon) NewPointLight(name string, position *Vector3, scene *Scene) *PointLight {
+	p := ba.ctx.Get("PointLight").New(name, position.JSObject(), scene.JSObject())
 	return PointLightFromJSObject(p)
 }
 

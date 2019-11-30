@@ -17,8 +17,8 @@ type TargetCamera struct{ *Camera }
 func (t *TargetCamera) JSObject() js.Value { return t.p }
 
 // TargetCamera returns a TargetCamera JavaScript class.
-func (b *Babylon) TargetCamera() *TargetCamera {
-	p := b.ctx.Get("TargetCamera")
+func (ba *Babylon) TargetCamera() *TargetCamera {
+	p := ba.ctx.Get("TargetCamera")
 	return TargetCameraFromJSObject(p)
 }
 
@@ -29,18 +29,18 @@ func TargetCameraFromJSObject(p js.Value) *TargetCamera {
 
 // NewTargetCameraOpts contains optional parameters for NewTargetCamera.
 type NewTargetCameraOpts struct {
-	SetActiveOnSceneIfNoneActive *bool
+	SetActiveOnSceneIfNoneActive *JSBool
 }
 
 // NewTargetCamera returns a new TargetCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.targetcamera
-func (b *Babylon) NewTargetCamera(name string, position *Vector3, scene *Scene, opts *NewTargetCameraOpts) *TargetCamera {
+func (ba *Babylon) NewTargetCamera(name string, position *Vector3, scene *Scene, opts *NewTargetCameraOpts) *TargetCamera {
 	if opts == nil {
 		opts = &NewTargetCameraOpts{}
 	}
 
-	p := b.ctx.Get("TargetCamera").New(name, position.JSObject(), scene.JSObject(), opts.SetActiveOnSceneIfNoneActive.JSObject())
+	p := ba.ctx.Get("TargetCamera").New(name, position.JSObject(), scene.JSObject(), opts.SetActiveOnSceneIfNoneActive)
 	return TargetCameraFromJSObject(p)
 }
 

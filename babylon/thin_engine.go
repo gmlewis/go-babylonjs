@@ -1,7 +1,6 @@
 package babylon
 
-import "syscall/js"
-
+/*
 // ThinEngine represents a Babylon ThinEngine.
 type ThinEngine struct{ p js.Value }
 
@@ -26,3 +25,4 @@ func (b *Babylon) NewThinEngine(canvas js.Value, antialias bool) *ThinEngine {
 	p := b.ctx.Get("ThinEngine").New(canvas, antialias)
 	return ThinEngineFromJSObject(p)
 }
+*/

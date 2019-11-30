@@ -14,8 +14,8 @@ type Material struct{ p js.Value }
 func (m *Material) JSObject() js.Value { return m.p }
 
 // Material returns a Material JavaScript class.
-func (b *Babylon) Material() *Material {
-	p := b.ctx.Get("Material")
+func (ba *Babylon) Material() *Material {
+	p := ba.ctx.Get("Material")
 	return MaterialFromJSObject(p)
 }
 
@@ -26,18 +26,18 @@ func MaterialFromJSObject(p js.Value) *Material {
 
 // NewMaterialOpts contains optional parameters for NewMaterial.
 type NewMaterialOpts struct {
-	DoNotAdd *bool
+	DoNotAdd *JSBool
 }
 
 // NewMaterial returns a new Material object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.material
-func (b *Babylon) NewMaterial(name string, scene *Scene, opts *NewMaterialOpts) *Material {
+func (ba *Babylon) NewMaterial(name string, scene *Scene, opts *NewMaterialOpts) *Material {
 	if opts == nil {
 		opts = &NewMaterialOpts{}
 	}
 
-	p := b.ctx.Get("Material").New(name, scene.JSObject(), opts.DoNotAdd.JSObject())
+	p := ba.ctx.Get("Material").New(name, scene.JSObject(), opts.DoNotAdd)
 	return MaterialFromJSObject(p)
 }
 

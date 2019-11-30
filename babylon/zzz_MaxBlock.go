@@ -14,8 +14,8 @@ type MaxBlock struct{ *NodeMaterialBlock }
 func (m *MaxBlock) JSObject() js.Value { return m.p }
 
 // MaxBlock returns a MaxBlock JavaScript class.
-func (b *Babylon) MaxBlock() *MaxBlock {
-	p := b.ctx.Get("MaxBlock")
+func (ba *Babylon) MaxBlock() *MaxBlock {
+	p := ba.ctx.Get("MaxBlock")
 	return MaxBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func MaxBlockFromJSObject(p js.Value) *MaxBlock {
 // NewMaxBlock returns a new MaxBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.maxblock
-func (b *Babylon) NewMaxBlock(name string) *MaxBlock {
-	p := b.ctx.Get("MaxBlock").New(name)
+func (ba *Babylon) NewMaxBlock(name string) *MaxBlock {
+	p := ba.ctx.Get("MaxBlock").New(name)
 	return MaxBlockFromJSObject(p)
 }
 

@@ -16,8 +16,8 @@ type ArcRotateCameraPointersInput struct{ *BaseCameraPointersInput }
 func (a *ArcRotateCameraPointersInput) JSObject() js.Value { return a.p }
 
 // ArcRotateCameraPointersInput returns a ArcRotateCameraPointersInput JavaScript class.
-func (b *Babylon) ArcRotateCameraPointersInput() *ArcRotateCameraPointersInput {
-	p := b.ctx.Get("ArcRotateCameraPointersInput")
+func (ba *Babylon) ArcRotateCameraPointersInput() *ArcRotateCameraPointersInput {
+	p := ba.ctx.Get("ArcRotateCameraPointersInput")
 	return ArcRotateCameraPointersInputFromJSObject(p)
 }
 

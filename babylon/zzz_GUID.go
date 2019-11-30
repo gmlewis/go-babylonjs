@@ -14,8 +14,8 @@ type GUID struct{ p js.Value }
 func (g *GUID) JSObject() js.Value { return g.p }
 
 // GUID returns a GUID JavaScript class.
-func (b *Babylon) GUID() *GUID {
-	p := b.ctx.Get("GUID")
+func (ba *Babylon) GUID() *GUID {
+	p := ba.ctx.Get("GUID")
 	return GUIDFromJSObject(p)
 }
 

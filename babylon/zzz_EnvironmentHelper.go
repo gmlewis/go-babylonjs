@@ -16,8 +16,8 @@ type EnvironmentHelper struct{ p js.Value }
 func (e *EnvironmentHelper) JSObject() js.Value { return e.p }
 
 // EnvironmentHelper returns a EnvironmentHelper JavaScript class.
-func (b *Babylon) EnvironmentHelper() *EnvironmentHelper {
-	p := b.ctx.Get("EnvironmentHelper")
+func (ba *Babylon) EnvironmentHelper() *EnvironmentHelper {
+	p := ba.ctx.Get("EnvironmentHelper")
 	return EnvironmentHelperFromJSObject(p)
 }
 
@@ -29,8 +29,8 @@ func EnvironmentHelperFromJSObject(p js.Value) *EnvironmentHelper {
 // NewEnvironmentHelper returns a new EnvironmentHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.environmenthelper
-func (b *Babylon) NewEnvironmentHelper(options js.Value, scene *Scene) *EnvironmentHelper {
-	p := b.ctx.Get("EnvironmentHelper").New(options, scene.JSObject())
+func (ba *Babylon) NewEnvironmentHelper(options js.Value, scene *Scene) *EnvironmentHelper {
+	p := ba.ctx.Get("EnvironmentHelper").New(options, scene.JSObject())
 	return EnvironmentHelperFromJSObject(p)
 }
 

@@ -16,8 +16,8 @@ type KHR_materials_specular struct{ p js.Value }
 func (k *KHR_materials_specular) JSObject() js.Value { return k.p }
 
 // KHR_materials_specular returns a KHR_materials_specular JavaScript class.
-func (b *Babylon) KHR_materials_specular() *KHR_materials_specular {
-	p := b.ctx.Get("KHR_materials_specular")
+func (ba *Babylon) KHR_materials_specular() *KHR_materials_specular {
+	p := ba.ctx.Get("KHR_materials_specular")
 	return KHR_materials_specularFromJSObject(p)
 }
 

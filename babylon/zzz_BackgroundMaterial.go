@@ -14,8 +14,8 @@ type BackgroundMaterial struct{ p js.Value }
 func (b *BackgroundMaterial) JSObject() js.Value { return b.p }
 
 // BackgroundMaterial returns a BackgroundMaterial JavaScript class.
-func (b *Babylon) BackgroundMaterial() *BackgroundMaterial {
-	p := b.ctx.Get("BackgroundMaterial")
+func (ba *Babylon) BackgroundMaterial() *BackgroundMaterial {
+	p := ba.ctx.Get("BackgroundMaterial")
 	return BackgroundMaterialFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func BackgroundMaterialFromJSObject(p js.Value) *BackgroundMaterial {
 // NewBackgroundMaterial returns a new BackgroundMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backgroundmaterial
-func (b *Babylon) NewBackgroundMaterial(name string, scene *Scene) *BackgroundMaterial {
-	p := b.ctx.Get("BackgroundMaterial").New(name, scene.JSObject())
+func (ba *Babylon) NewBackgroundMaterial(name string, scene *Scene) *BackgroundMaterial {
+	p := ba.ctx.Get("BackgroundMaterial").New(name, scene.JSObject())
 	return BackgroundMaterialFromJSObject(p)
 }
 

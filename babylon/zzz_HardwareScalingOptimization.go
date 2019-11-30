@@ -16,8 +16,8 @@ type HardwareScalingOptimization struct{ *SceneOptimization }
 func (h *HardwareScalingOptimization) JSObject() js.Value { return h.p }
 
 // HardwareScalingOptimization returns a HardwareScalingOptimization JavaScript class.
-func (b *Babylon) HardwareScalingOptimization() *HardwareScalingOptimization {
-	p := b.ctx.Get("HardwareScalingOptimization")
+func (ba *Babylon) HardwareScalingOptimization() *HardwareScalingOptimization {
+	p := ba.ctx.Get("HardwareScalingOptimization")
 	return HardwareScalingOptimizationFromJSObject(p)
 }
 
@@ -28,22 +28,22 @@ func HardwareScalingOptimizationFromJSObject(p js.Value) *HardwareScalingOptimiz
 
 // NewHardwareScalingOptimizationOpts contains optional parameters for NewHardwareScalingOptimization.
 type NewHardwareScalingOptimizationOpts struct {
-	Priority *float64
+	Priority *JSFloat64
 
-	MaximumScale *float64
+	MaximumScale *JSFloat64
 
-	Step *float64
+	Step *JSFloat64
 }
 
 // NewHardwareScalingOptimization returns a new HardwareScalingOptimization object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hardwarescalingoptimization
-func (b *Babylon) NewHardwareScalingOptimization(opts *NewHardwareScalingOptimizationOpts) *HardwareScalingOptimization {
+func (ba *Babylon) NewHardwareScalingOptimization(opts *NewHardwareScalingOptimizationOpts) *HardwareScalingOptimization {
 	if opts == nil {
 		opts = &NewHardwareScalingOptimizationOpts{}
 	}
 
-	p := b.ctx.Get("HardwareScalingOptimization").New(opts.Priority, opts.MaximumScale, opts.Step)
+	p := ba.ctx.Get("HardwareScalingOptimization").New(opts.Priority, opts.MaximumScale, opts.Step)
 	return HardwareScalingOptimizationFromJSObject(p)
 }
 

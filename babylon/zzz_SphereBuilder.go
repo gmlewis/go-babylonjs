@@ -14,8 +14,8 @@ type SphereBuilder struct{ p js.Value }
 func (s *SphereBuilder) JSObject() js.Value { return s.p }
 
 // SphereBuilder returns a SphereBuilder JavaScript class.
-func (b *Babylon) SphereBuilder() *SphereBuilder {
-	p := b.ctx.Get("SphereBuilder")
+func (ba *Babylon) SphereBuilder() *SphereBuilder {
+	p := ba.ctx.Get("SphereBuilder")
 	return SphereBuilderFromJSObject(p)
 }
 

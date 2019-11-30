@@ -14,8 +14,8 @@ type FilterPostProcess struct{ *PostProcess }
 func (f *FilterPostProcess) JSObject() js.Value { return f.p }
 
 // FilterPostProcess returns a FilterPostProcess JavaScript class.
-func (b *Babylon) FilterPostProcess() *FilterPostProcess {
-	p := b.ctx.Get("FilterPostProcess")
+func (ba *Babylon) FilterPostProcess() *FilterPostProcess {
+	p := ba.ctx.Get("FilterPostProcess")
 	return FilterPostProcessFromJSObject(p)
 }
 
@@ -26,22 +26,22 @@ func FilterPostProcessFromJSObject(p js.Value) *FilterPostProcess {
 
 // NewFilterPostProcessOpts contains optional parameters for NewFilterPostProcess.
 type NewFilterPostProcessOpts struct {
-	SamplingMode *float64
+	SamplingMode *JSFloat64
 
 	Engine *Engine
 
-	Reusable *bool
+	Reusable *JSBool
 }
 
 // NewFilterPostProcess returns a new FilterPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.filterpostprocess
-func (b *Babylon) NewFilterPostProcess(name string, kernelMatrix *Matrix, options float64, camera *Camera, opts *NewFilterPostProcessOpts) *FilterPostProcess {
+func (ba *Babylon) NewFilterPostProcess(name string, kernelMatrix *Matrix, options float64, camera *Camera, opts *NewFilterPostProcessOpts) *FilterPostProcess {
 	if opts == nil {
 		opts = &NewFilterPostProcessOpts{}
 	}
 
-	p := b.ctx.Get("FilterPostProcess").New(name, kernelMatrix.JSObject(), options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject())
+	p := ba.ctx.Get("FilterPostProcess").New(name, kernelMatrix.JSObject(), options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable)
 	return FilterPostProcessFromJSObject(p)
 }
 

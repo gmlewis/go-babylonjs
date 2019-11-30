@@ -16,8 +16,8 @@ type PhysicsVortexEventOptions struct{ p js.Value }
 func (p *PhysicsVortexEventOptions) JSObject() js.Value { return p.p }
 
 // PhysicsVortexEventOptions returns a PhysicsVortexEventOptions JavaScript class.
-func (b *Babylon) PhysicsVortexEventOptions() *PhysicsVortexEventOptions {
-	p := b.ctx.Get("PhysicsVortexEventOptions")
+func (ba *Babylon) PhysicsVortexEventOptions() *PhysicsVortexEventOptions {
+	p := ba.ctx.Get("PhysicsVortexEventOptions")
 	return PhysicsVortexEventOptionsFromJSObject(p)
 }
 

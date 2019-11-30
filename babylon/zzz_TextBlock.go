@@ -14,8 +14,8 @@ type TextBlock struct{ *Control }
 func (t *TextBlock) JSObject() js.Value { return t.p }
 
 // TextBlock returns a TextBlock JavaScript class.
-func (b *Babylon) TextBlock() *TextBlock {
-	p := b.ctx.Get("TextBlock")
+func (ba *Babylon) TextBlock() *TextBlock {
+	p := ba.ctx.Get("TextBlock")
 	return TextBlockFromJSObject(p)
 }
 
@@ -26,20 +26,20 @@ func TextBlockFromJSObject(p js.Value) *TextBlock {
 
 // NewTextBlockOpts contains optional parameters for NewTextBlock.
 type NewTextBlockOpts struct {
-	Name *string
+	Name *JSString
 
-	Text *string
+	Text *JSString
 }
 
 // NewTextBlock returns a new TextBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.textblock
-func (b *Babylon) NewTextBlock(opts *NewTextBlockOpts) *TextBlock {
+func (ba *Babylon) NewTextBlock(opts *NewTextBlockOpts) *TextBlock {
 	if opts == nil {
 		opts = &NewTextBlockOpts{}
 	}
 
-	p := b.ctx.Get("TextBlock").New(opts.Name, opts.Text)
+	p := ba.ctx.Get("TextBlock").New(opts.Name, opts.Text)
 	return TextBlockFromJSObject(p)
 }
 

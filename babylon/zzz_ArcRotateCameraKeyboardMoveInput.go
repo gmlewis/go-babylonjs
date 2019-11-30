@@ -16,8 +16,8 @@ type ArcRotateCameraKeyboardMoveInput struct{ p js.Value }
 func (a *ArcRotateCameraKeyboardMoveInput) JSObject() js.Value { return a.p }
 
 // ArcRotateCameraKeyboardMoveInput returns a ArcRotateCameraKeyboardMoveInput JavaScript class.
-func (b *Babylon) ArcRotateCameraKeyboardMoveInput() *ArcRotateCameraKeyboardMoveInput {
-	p := b.ctx.Get("ArcRotateCameraKeyboardMoveInput")
+func (ba *Babylon) ArcRotateCameraKeyboardMoveInput() *ArcRotateCameraKeyboardMoveInput {
+	p := ba.ctx.Get("ArcRotateCameraKeyboardMoveInput")
 	return ArcRotateCameraKeyboardMoveInputFromJSObject(p)
 }
 

@@ -14,8 +14,8 @@ type PolyhedronBuilder struct{ p js.Value }
 func (p *PolyhedronBuilder) JSObject() js.Value { return p.p }
 
 // PolyhedronBuilder returns a PolyhedronBuilder JavaScript class.
-func (b *Babylon) PolyhedronBuilder() *PolyhedronBuilder {
-	p := b.ctx.Get("PolyhedronBuilder")
+func (ba *Babylon) PolyhedronBuilder() *PolyhedronBuilder {
+	p := ba.ctx.Get("PolyhedronBuilder")
 	return PolyhedronBuilderFromJSObject(p)
 }
 

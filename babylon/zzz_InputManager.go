@@ -14,8 +14,8 @@ type InputManager struct{ p js.Value }
 func (i *InputManager) JSObject() js.Value { return i.p }
 
 // InputManager returns a InputManager JavaScript class.
-func (b *Babylon) InputManager() *InputManager {
-	p := b.ctx.Get("InputManager")
+func (ba *Babylon) InputManager() *InputManager {
+	p := ba.ctx.Get("InputManager")
 	return InputManagerFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func InputManagerFromJSObject(p js.Value) *InputManager {
 // NewInputManager returns a new InputManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputmanager
-func (b *Babylon) NewInputManager(scene *Scene) *InputManager {
-	p := b.ctx.Get("InputManager").New(scene.JSObject())
+func (ba *Babylon) NewInputManager(scene *Scene) *InputManager {
+	p := ba.ctx.Get("InputManager").New(scene.JSObject())
 	return InputManagerFromJSObject(p)
 }
 

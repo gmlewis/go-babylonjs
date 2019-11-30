@@ -14,8 +14,8 @@ type ArcTan2Block struct{ *NodeMaterialBlock }
 func (a *ArcTan2Block) JSObject() js.Value { return a.p }
 
 // ArcTan2Block returns a ArcTan2Block JavaScript class.
-func (b *Babylon) ArcTan2Block() *ArcTan2Block {
-	p := b.ctx.Get("ArcTan2Block")
+func (ba *Babylon) ArcTan2Block() *ArcTan2Block {
+	p := ba.ctx.Get("ArcTan2Block")
 	return ArcTan2BlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func ArcTan2BlockFromJSObject(p js.Value) *ArcTan2Block {
 // NewArcTan2Block returns a new ArcTan2Block object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.arctan2block
-func (b *Babylon) NewArcTan2Block(name string) *ArcTan2Block {
-	p := b.ctx.Get("ArcTan2Block").New(name)
+func (ba *Babylon) NewArcTan2Block(name string) *ArcTan2Block {
+	p := ba.ctx.Get("ArcTan2Block").New(name)
 	return ArcTan2BlockFromJSObject(p)
 }
 

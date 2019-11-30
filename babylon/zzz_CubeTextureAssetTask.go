@@ -14,8 +14,8 @@ type CubeTextureAssetTask struct{ *AbstractAssetTask }
 func (c *CubeTextureAssetTask) JSObject() js.Value { return c.p }
 
 // CubeTextureAssetTask returns a CubeTextureAssetTask JavaScript class.
-func (b *Babylon) CubeTextureAssetTask() *CubeTextureAssetTask {
-	p := b.ctx.Get("CubeTextureAssetTask")
+func (ba *Babylon) CubeTextureAssetTask() *CubeTextureAssetTask {
+	p := ba.ctx.Get("CubeTextureAssetTask")
 	return CubeTextureAssetTaskFromJSObject(p)
 }
 
@@ -26,22 +26,22 @@ func CubeTextureAssetTaskFromJSObject(p js.Value) *CubeTextureAssetTask {
 
 // NewCubeTextureAssetTaskOpts contains optional parameters for NewCubeTextureAssetTask.
 type NewCubeTextureAssetTaskOpts struct {
-	Extensions *string
+	Extensions *JSString
 
-	NoMipmap *bool
+	NoMipmap *JSBool
 
-	Files *string
+	Files *JSString
 }
 
 // NewCubeTextureAssetTask returns a new CubeTextureAssetTask object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cubetextureassettask
-func (b *Babylon) NewCubeTextureAssetTask(name string, url string, opts *NewCubeTextureAssetTaskOpts) *CubeTextureAssetTask {
+func (ba *Babylon) NewCubeTextureAssetTask(name string, url string, opts *NewCubeTextureAssetTaskOpts) *CubeTextureAssetTask {
 	if opts == nil {
 		opts = &NewCubeTextureAssetTaskOpts{}
 	}
 
-	p := b.ctx.Get("CubeTextureAssetTask").New(name, url, opts.Extensions, opts.NoMipmap.JSObject(), opts.Files)
+	p := ba.ctx.Get("CubeTextureAssetTask").New(name, url, opts.Extensions, opts.NoMipmap, opts.Files)
 	return CubeTextureAssetTaskFromJSObject(p)
 }
 

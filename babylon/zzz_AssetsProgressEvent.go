@@ -14,8 +14,8 @@ type AssetsProgressEvent struct{ p js.Value }
 func (a *AssetsProgressEvent) JSObject() js.Value { return a.p }
 
 // AssetsProgressEvent returns a AssetsProgressEvent JavaScript class.
-func (b *Babylon) AssetsProgressEvent() *AssetsProgressEvent {
-	p := b.ctx.Get("AssetsProgressEvent")
+func (ba *Babylon) AssetsProgressEvent() *AssetsProgressEvent {
+	p := ba.ctx.Get("AssetsProgressEvent")
 	return AssetsProgressEventFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func AssetsProgressEventFromJSObject(p js.Value) *AssetsProgressEvent {
 // NewAssetsProgressEvent returns a new AssetsProgressEvent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsprogressevent
-func (b *Babylon) NewAssetsProgressEvent(remainingCount float64, totalCount float64, task *AbstractAssetTask) *AssetsProgressEvent {
-	p := b.ctx.Get("AssetsProgressEvent").New(remainingCount, totalCount, task.JSObject())
+func (ba *Babylon) NewAssetsProgressEvent(remainingCount float64, totalCount float64, task *AbstractAssetTask) *AssetsProgressEvent {
+	p := ba.ctx.Get("AssetsProgressEvent").New(remainingCount, totalCount, task.JSObject())
 	return AssetsProgressEventFromJSObject(p)
 }
 

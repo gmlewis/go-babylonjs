@@ -14,8 +14,8 @@ type WebXREnterExitUIOptions struct{ p js.Value }
 func (w *WebXREnterExitUIOptions) JSObject() js.Value { return w.p }
 
 // WebXREnterExitUIOptions returns a WebXREnterExitUIOptions JavaScript class.
-func (b *Babylon) WebXREnterExitUIOptions() *WebXREnterExitUIOptions {
-	p := b.ctx.Get("WebXREnterExitUIOptions")
+func (ba *Babylon) WebXREnterExitUIOptions() *WebXREnterExitUIOptions {
+	p := ba.ctx.Get("WebXREnterExitUIOptions")
 	return WebXREnterExitUIOptionsFromJSObject(p)
 }
 

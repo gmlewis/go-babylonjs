@@ -14,8 +14,8 @@ type GLTFData struct{ p js.Value }
 func (g *GLTFData) JSObject() js.Value { return g.p }
 
 // GLTFData returns a GLTFData JavaScript class.
-func (b *Babylon) GLTFData() *GLTFData {
-	p := b.ctx.Get("GLTFData")
+func (ba *Babylon) GLTFData() *GLTFData {
+	p := ba.ctx.Get("GLTFData")
 	return GLTFDataFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func GLTFDataFromJSObject(p js.Value) *GLTFData {
 // NewGLTFData returns a new GLTFData object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltfdata
-func (b *Babylon) NewGLTFData() *GLTFData {
-	p := b.ctx.Get("GLTFData").New()
+func (ba *Babylon) NewGLTFData() *GLTFData {
+	p := ba.ctx.Get("GLTFData").New()
 	return GLTFDataFromJSObject(p)
 }
 

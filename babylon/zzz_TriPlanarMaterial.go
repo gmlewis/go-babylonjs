@@ -14,8 +14,8 @@ type TriPlanarMaterial struct{ p js.Value }
 func (t *TriPlanarMaterial) JSObject() js.Value { return t.p }
 
 // TriPlanarMaterial returns a TriPlanarMaterial JavaScript class.
-func (b *Babylon) TriPlanarMaterial() *TriPlanarMaterial {
-	p := b.ctx.Get("TriPlanarMaterial")
+func (ba *Babylon) TriPlanarMaterial() *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial")
 	return TriPlanarMaterialFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func TriPlanarMaterialFromJSObject(p js.Value) *TriPlanarMaterial {
 // NewTriPlanarMaterial returns a new TriPlanarMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial
-func (b *Babylon) NewTriPlanarMaterial(name string, scene *Scene) *TriPlanarMaterial {
-	p := b.ctx.Get("TriPlanarMaterial").New(name, scene.JSObject())
+func (ba *Babylon) NewTriPlanarMaterial(name string, scene *Scene) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(name, scene.JSObject())
 	return TriPlanarMaterialFromJSObject(p)
 }
 

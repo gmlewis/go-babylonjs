@@ -14,8 +14,8 @@ type ScreenshotTools struct{ p js.Value }
 func (s *ScreenshotTools) JSObject() js.Value { return s.p }
 
 // ScreenshotTools returns a ScreenshotTools JavaScript class.
-func (b *Babylon) ScreenshotTools() *ScreenshotTools {
-	p := b.ctx.Get("ScreenshotTools")
+func (ba *Babylon) ScreenshotTools() *ScreenshotTools {
+	p := ba.ctx.Get("ScreenshotTools")
 	return ScreenshotToolsFromJSObject(p)
 }
 

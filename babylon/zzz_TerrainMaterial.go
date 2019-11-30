@@ -14,8 +14,8 @@ type TerrainMaterial struct{ p js.Value }
 func (t *TerrainMaterial) JSObject() js.Value { return t.p }
 
 // TerrainMaterial returns a TerrainMaterial JavaScript class.
-func (b *Babylon) TerrainMaterial() *TerrainMaterial {
-	p := b.ctx.Get("TerrainMaterial")
+func (ba *Babylon) TerrainMaterial() *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial")
 	return TerrainMaterialFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func TerrainMaterialFromJSObject(p js.Value) *TerrainMaterial {
 // NewTerrainMaterial returns a new TerrainMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.terrainmaterial
-func (b *Babylon) NewTerrainMaterial(name string, scene *Scene) *TerrainMaterial {
-	p := b.ctx.Get("TerrainMaterial").New(name, scene.JSObject())
+func (ba *Babylon) NewTerrainMaterial(name string, scene *Scene) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(name, scene.JSObject())
 	return TerrainMaterialFromJSObject(p)
 }
 

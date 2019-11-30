@@ -14,8 +14,8 @@ type CylinderPanel struct{ *VolumeBasedPanel }
 func (c *CylinderPanel) JSObject() js.Value { return c.p }
 
 // CylinderPanel returns a CylinderPanel JavaScript class.
-func (b *Babylon) CylinderPanel() *CylinderPanel {
-	p := b.ctx.Get("CylinderPanel")
+func (ba *Babylon) CylinderPanel() *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel")
 	return CylinderPanelFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func CylinderPanelFromJSObject(p js.Value) *CylinderPanel {
 // NewCylinderPanel returns a new CylinderPanel object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cylinderpanel
-func (b *Babylon) NewCylinderPanel() *CylinderPanel {
-	p := b.ctx.Get("CylinderPanel").New()
+func (ba *Babylon) NewCylinderPanel() *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New()
 	return CylinderPanelFromJSObject(p)
 }
 

@@ -16,8 +16,8 @@ type MergeMeshesOptimization struct{ *SceneOptimization }
 func (m *MergeMeshesOptimization) JSObject() js.Value { return m.p }
 
 // MergeMeshesOptimization returns a MergeMeshesOptimization JavaScript class.
-func (b *Babylon) MergeMeshesOptimization() *MergeMeshesOptimization {
-	p := b.ctx.Get("MergeMeshesOptimization")
+func (ba *Babylon) MergeMeshesOptimization() *MergeMeshesOptimization {
+	p := ba.ctx.Get("MergeMeshesOptimization")
 	return MergeMeshesOptimizationFromJSObject(p)
 }
 
@@ -28,18 +28,18 @@ func MergeMeshesOptimizationFromJSObject(p js.Value) *MergeMeshesOptimization {
 
 // NewMergeMeshesOptimizationOpts contains optional parameters for NewMergeMeshesOptimization.
 type NewMergeMeshesOptimizationOpts struct {
-	Priority *float64
+	Priority *JSFloat64
 }
 
 // NewMergeMeshesOptimization returns a new MergeMeshesOptimization object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mergemeshesoptimization
-func (b *Babylon) NewMergeMeshesOptimization(opts *NewMergeMeshesOptimizationOpts) *MergeMeshesOptimization {
+func (ba *Babylon) NewMergeMeshesOptimization(opts *NewMergeMeshesOptimizationOpts) *MergeMeshesOptimization {
 	if opts == nil {
 		opts = &NewMergeMeshesOptimizationOpts{}
 	}
 
-	p := b.ctx.Get("MergeMeshesOptimization").New(opts.Priority)
+	p := ba.ctx.Get("MergeMeshesOptimization").New(opts.Priority)
 	return MergeMeshesOptimizationFromJSObject(p)
 }
 

@@ -19,8 +19,8 @@ type PerfCounter struct{ p js.Value }
 func (p *PerfCounter) JSObject() js.Value { return p.p }
 
 // PerfCounter returns a PerfCounter JavaScript class.
-func (b *Babylon) PerfCounter() *PerfCounter {
-	p := b.ctx.Get("PerfCounter")
+func (ba *Babylon) PerfCounter() *PerfCounter {
+	p := ba.ctx.Get("PerfCounter")
 	return PerfCounterFromJSObject(p)
 }
 
@@ -32,8 +32,8 @@ func PerfCounterFromJSObject(p js.Value) *PerfCounter {
 // NewPerfCounter returns a new PerfCounter object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.perfcounter
-func (b *Babylon) NewPerfCounter() *PerfCounter {
-	p := b.ctx.Get("PerfCounter").New()
+func (ba *Babylon) NewPerfCounter() *PerfCounter {
+	p := ba.ctx.Get("PerfCounter").New()
 	return PerfCounterFromJSObject(p)
 }
 

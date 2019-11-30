@@ -145,8 +145,8 @@ type {{.Name}} struct{ {{.Parents | formatParents}} }
 func ({{.Name | receiver}} *{{.Name}}) JSObject() js.Value { return {{.Name | receiver}}.p }
 
 // {{.Name}} returns a {{.Name}} JavaScript class.
-func (b *Babylon) {{.Name}}() *{{.Name}} {
-	p := b.ctx.Get("{{.Name}}")
+func (ba *Babylon) {{.Name}}() *{{.Name}} {
+	p := ba.ctx.Get("{{.Name}}")
 	return {{.Name}}FromJSObject(p)
 }
 
@@ -171,12 +171,12 @@ type {{$key}}Opts struct {
 // {{$key}} returns a new {{$name}} object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.{{$name | toLower}}
-func (b *Babylon) {{$key}}({{$key | parameterGoList $root}}) *{{$name}} { {{if $value.HasOpts}}
+func (ba *Babylon) {{$key}}({{$key | parameterGoList $root}}) *{{$name}} { {{if $value.HasOpts}}
 if opts == nil {
 opts = &{{$key}}Opts{}
 }
 {{end}}
-	p := b.ctx.Get("{{$name}}").New({{$key | parameterJSList $root}})
+	p := ba.ctx.Get("{{$name}}").New({{$key | parameterJSList $root}})
 	return {{$name}}FromJSObject(p)
 }
 {{end}}

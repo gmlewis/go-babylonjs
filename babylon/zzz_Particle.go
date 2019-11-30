@@ -15,8 +15,8 @@ type Particle struct{ p js.Value }
 func (p *Particle) JSObject() js.Value { return p.p }
 
 // Particle returns a Particle JavaScript class.
-func (b *Babylon) Particle() *Particle {
-	p := b.ctx.Get("Particle")
+func (ba *Babylon) Particle() *Particle {
+	p := ba.ctx.Get("Particle")
 	return ParticleFromJSObject(p)
 }
 
@@ -28,8 +28,8 @@ func ParticleFromJSObject(p js.Value) *Particle {
 // NewParticle returns a new Particle object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.particle
-func (b *Babylon) NewParticle(particleSystem *ParticleSystem) *Particle {
-	p := b.ctx.Get("Particle").New(particleSystem.JSObject())
+func (ba *Babylon) NewParticle(particleSystem *ParticleSystem) *Particle {
+	p := ba.ctx.Get("Particle").New(particleSystem.JSObject())
 	return ParticleFromJSObject(p)
 }
 

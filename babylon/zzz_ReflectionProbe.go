@@ -16,8 +16,8 @@ type ReflectionProbe struct{ p js.Value }
 func (r *ReflectionProbe) JSObject() js.Value { return r.p }
 
 // ReflectionProbe returns a ReflectionProbe JavaScript class.
-func (b *Babylon) ReflectionProbe() *ReflectionProbe {
-	p := b.ctx.Get("ReflectionProbe")
+func (ba *Babylon) ReflectionProbe() *ReflectionProbe {
+	p := ba.ctx.Get("ReflectionProbe")
 	return ReflectionProbeFromJSObject(p)
 }
 
@@ -28,20 +28,20 @@ func ReflectionProbeFromJSObject(p js.Value) *ReflectionProbe {
 
 // NewReflectionProbeOpts contains optional parameters for NewReflectionProbe.
 type NewReflectionProbeOpts struct {
-	GenerateMipMaps *bool
+	GenerateMipMaps *JSBool
 
-	UseFloat *bool
+	UseFloat *JSBool
 }
 
 // NewReflectionProbe returns a new ReflectionProbe object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.reflectionprobe
-func (b *Babylon) NewReflectionProbe(name string, size float64, scene *Scene, opts *NewReflectionProbeOpts) *ReflectionProbe {
+func (ba *Babylon) NewReflectionProbe(name string, size float64, scene *Scene, opts *NewReflectionProbeOpts) *ReflectionProbe {
 	if opts == nil {
 		opts = &NewReflectionProbeOpts{}
 	}
 
-	p := b.ctx.Get("ReflectionProbe").New(name, size, scene.JSObject(), opts.GenerateMipMaps.JSObject(), opts.UseFloat.JSObject())
+	p := ba.ctx.Get("ReflectionProbe").New(name, size, scene.JSObject(), opts.GenerateMipMaps, opts.UseFloat)
 	return ReflectionProbeFromJSObject(p)
 }
 

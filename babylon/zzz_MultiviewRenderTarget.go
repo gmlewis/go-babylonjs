@@ -16,8 +16,8 @@ type MultiviewRenderTarget struct{ *RenderTargetTexture }
 func (m *MultiviewRenderTarget) JSObject() js.Value { return m.p }
 
 // MultiviewRenderTarget returns a MultiviewRenderTarget JavaScript class.
-func (b *Babylon) MultiviewRenderTarget() *MultiviewRenderTarget {
-	p := b.ctx.Get("MultiviewRenderTarget")
+func (ba *Babylon) MultiviewRenderTarget() *MultiviewRenderTarget {
+	p := ba.ctx.Get("MultiviewRenderTarget")
 	return MultiviewRenderTargetFromJSObject(p)
 }
 
@@ -28,18 +28,18 @@ func MultiviewRenderTargetFromJSObject(p js.Value) *MultiviewRenderTarget {
 
 // NewMultiviewRenderTargetOpts contains optional parameters for NewMultiviewRenderTarget.
 type NewMultiviewRenderTargetOpts struct {
-	Size *float64
+	Size *JSFloat64
 }
 
 // NewMultiviewRenderTarget returns a new MultiviewRenderTarget object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multiviewrendertarget
-func (b *Babylon) NewMultiviewRenderTarget(scene *Scene, opts *NewMultiviewRenderTargetOpts) *MultiviewRenderTarget {
+func (ba *Babylon) NewMultiviewRenderTarget(scene *Scene, opts *NewMultiviewRenderTargetOpts) *MultiviewRenderTarget {
 	if opts == nil {
 		opts = &NewMultiviewRenderTargetOpts{}
 	}
 
-	p := b.ctx.Get("MultiviewRenderTarget").New(scene.JSObject(), opts.Size)
+	p := ba.ctx.Get("MultiviewRenderTarget").New(scene.JSObject(), opts.Size)
 	return MultiviewRenderTargetFromJSObject(p)
 }
 

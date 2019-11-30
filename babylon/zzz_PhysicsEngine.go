@@ -16,8 +16,8 @@ type PhysicsEngine struct{ p js.Value }
 func (p *PhysicsEngine) JSObject() js.Value { return p.p }
 
 // PhysicsEngine returns a PhysicsEngine JavaScript class.
-func (b *Babylon) PhysicsEngine() *PhysicsEngine {
-	p := b.ctx.Get("PhysicsEngine")
+func (ba *Babylon) PhysicsEngine() *PhysicsEngine {
+	p := ba.ctx.Get("PhysicsEngine")
 	return PhysicsEngineFromJSObject(p)
 }
 
@@ -28,18 +28,18 @@ func PhysicsEngineFromJSObject(p js.Value) *PhysicsEngine {
 
 // NewPhysicsEngineOpts contains optional parameters for NewPhysicsEngine.
 type NewPhysicsEngineOpts struct {
-	_physicsPlugin *IPhysicsEnginePlugin
+	_physicsPlugin js.Value
 }
 
 // NewPhysicsEngine returns a new PhysicsEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsengine
-func (b *Babylon) NewPhysicsEngine(gravity *Vector3, opts *NewPhysicsEngineOpts) *PhysicsEngine {
+func (ba *Babylon) NewPhysicsEngine(gravity *Vector3, opts *NewPhysicsEngineOpts) *PhysicsEngine {
 	if opts == nil {
 		opts = &NewPhysicsEngineOpts{}
 	}
 
-	p := b.ctx.Get("PhysicsEngine").New(gravity.JSObject(), opts._physicsPlugin.JSObject())
+	p := ba.ctx.Get("PhysicsEngine").New(gravity.JSObject(), opts._physicsPlugin)
 	return PhysicsEngineFromJSObject(p)
 }
 

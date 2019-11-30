@@ -14,8 +14,8 @@ type Axis struct{ p js.Value }
 func (a *Axis) JSObject() js.Value { return a.p }
 
 // Axis returns a Axis JavaScript class.
-func (b *Babylon) Axis() *Axis {
-	p := b.ctx.Get("Axis")
+func (ba *Babylon) Axis() *Axis {
+	p := ba.ctx.Get("Axis")
 	return AxisFromJSObject(p)
 }
 

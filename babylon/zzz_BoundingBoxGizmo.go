@@ -14,8 +14,8 @@ type BoundingBoxGizmo struct{ *Gizmo }
 func (b *BoundingBoxGizmo) JSObject() js.Value { return b.p }
 
 // BoundingBoxGizmo returns a BoundingBoxGizmo JavaScript class.
-func (b *Babylon) BoundingBoxGizmo() *BoundingBoxGizmo {
-	p := b.ctx.Get("BoundingBoxGizmo")
+func (ba *Babylon) BoundingBoxGizmo() *BoundingBoxGizmo {
+	p := ba.ctx.Get("BoundingBoxGizmo")
 	return BoundingBoxGizmoFromJSObject(p)
 }
 
@@ -34,12 +34,12 @@ type NewBoundingBoxGizmoOpts struct {
 // NewBoundingBoxGizmo returns a new BoundingBoxGizmo object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo
-func (b *Babylon) NewBoundingBoxGizmo(opts *NewBoundingBoxGizmoOpts) *BoundingBoxGizmo {
+func (ba *Babylon) NewBoundingBoxGizmo(opts *NewBoundingBoxGizmoOpts) *BoundingBoxGizmo {
 	if opts == nil {
 		opts = &NewBoundingBoxGizmoOpts{}
 	}
 
-	p := b.ctx.Get("BoundingBoxGizmo").New(opts.Color.JSObject(), opts.GizmoLayer.JSObject())
+	p := ba.ctx.Get("BoundingBoxGizmo").New(opts.Color.JSObject(), opts.GizmoLayer.JSObject())
 	return BoundingBoxGizmoFromJSObject(p)
 }
 

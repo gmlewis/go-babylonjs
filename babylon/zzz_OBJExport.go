@@ -14,8 +14,8 @@ type OBJExport struct{ p js.Value }
 func (o *OBJExport) JSObject() js.Value { return o.p }
 
 // OBJExport returns a OBJExport JavaScript class.
-func (b *Babylon) OBJExport() *OBJExport {
-	p := b.ctx.Get("OBJExport")
+func (ba *Babylon) OBJExport() *OBJExport {
+	p := ba.ctx.Get("OBJExport")
 	return OBJExportFromJSObject(p)
 }
 

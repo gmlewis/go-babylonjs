@@ -16,8 +16,8 @@ type GUI3DManager struct{ p js.Value }
 func (g *GUI3DManager) JSObject() js.Value { return g.p }
 
 // GUI3DManager returns a GUI3DManager JavaScript class.
-func (b *Babylon) GUI3DManager() *GUI3DManager {
-	p := b.ctx.Get("GUI3DManager")
+func (ba *Babylon) GUI3DManager() *GUI3DManager {
+	p := ba.ctx.Get("GUI3DManager")
 	return GUI3DManagerFromJSObject(p)
 }
 
@@ -34,12 +34,12 @@ type NewGUI3DManagerOpts struct {
 // NewGUI3DManager returns a new GUI3DManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gui3dmanager
-func (b *Babylon) NewGUI3DManager(opts *NewGUI3DManagerOpts) *GUI3DManager {
+func (ba *Babylon) NewGUI3DManager(opts *NewGUI3DManagerOpts) *GUI3DManager {
 	if opts == nil {
 		opts = &NewGUI3DManagerOpts{}
 	}
 
-	p := b.ctx.Get("GUI3DManager").New(opts.Scene.JSObject())
+	p := ba.ctx.Get("GUI3DManager").New(opts.Scene.JSObject())
 	return GUI3DManagerFromJSObject(p)
 }
 

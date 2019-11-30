@@ -15,8 +15,8 @@ type VRMultiviewToSingleviewPostProcess struct{ *PostProcess }
 func (v *VRMultiviewToSingleviewPostProcess) JSObject() js.Value { return v.p }
 
 // VRMultiviewToSingleviewPostProcess returns a VRMultiviewToSingleviewPostProcess JavaScript class.
-func (b *Babylon) VRMultiviewToSingleviewPostProcess() *VRMultiviewToSingleviewPostProcess {
-	p := b.ctx.Get("VRMultiviewToSingleviewPostProcess")
+func (ba *Babylon) VRMultiviewToSingleviewPostProcess() *VRMultiviewToSingleviewPostProcess {
+	p := ba.ctx.Get("VRMultiviewToSingleviewPostProcess")
 	return VRMultiviewToSingleviewPostProcessFromJSObject(p)
 }
 
@@ -28,8 +28,8 @@ func VRMultiviewToSingleviewPostProcessFromJSObject(p js.Value) *VRMultiviewToSi
 // NewVRMultiviewToSingleviewPostProcess returns a new VRMultiviewToSingleviewPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrmultiviewtosingleviewpostprocess
-func (b *Babylon) NewVRMultiviewToSingleviewPostProcess(name string, camera *Camera, scaleFactor float64) *VRMultiviewToSingleviewPostProcess {
-	p := b.ctx.Get("VRMultiviewToSingleviewPostProcess").New(name, camera.JSObject(), scaleFactor)
+func (ba *Babylon) NewVRMultiviewToSingleviewPostProcess(name string, camera *Camera, scaleFactor float64) *VRMultiviewToSingleviewPostProcess {
+	p := ba.ctx.Get("VRMultiviewToSingleviewPostProcess").New(name, camera.JSObject(), scaleFactor)
 	return VRMultiviewToSingleviewPostProcessFromJSObject(p)
 }
 

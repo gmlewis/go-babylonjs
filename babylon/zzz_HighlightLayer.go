@@ -16,8 +16,8 @@ type HighlightLayer struct{ *EffectLayer }
 func (h *HighlightLayer) JSObject() js.Value { return h.p }
 
 // HighlightLayer returns a HighlightLayer JavaScript class.
-func (b *Babylon) HighlightLayer() *HighlightLayer {
-	p := b.ctx.Get("HighlightLayer")
+func (ba *Babylon) HighlightLayer() *HighlightLayer {
+	p := ba.ctx.Get("HighlightLayer")
 	return HighlightLayerFromJSObject(p)
 }
 
@@ -34,12 +34,12 @@ type NewHighlightLayerOpts struct {
 // NewHighlightLayer returns a new HighlightLayer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.highlightlayer
-func (b *Babylon) NewHighlightLayer(name string, scene *Scene, opts *NewHighlightLayerOpts) *HighlightLayer {
+func (ba *Babylon) NewHighlightLayer(name string, scene *Scene, opts *NewHighlightLayerOpts) *HighlightLayer {
 	if opts == nil {
 		opts = &NewHighlightLayerOpts{}
 	}
 
-	p := b.ctx.Get("HighlightLayer").New(name, scene.JSObject(), opts.Options)
+	p := ba.ctx.Get("HighlightLayer").New(name, scene.JSObject(), opts.Options)
 	return HighlightLayerFromJSObject(p)
 }
 

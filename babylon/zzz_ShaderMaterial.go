@@ -18,8 +18,8 @@ type ShaderMaterial struct{ *Material }
 func (s *ShaderMaterial) JSObject() js.Value { return s.p }
 
 // ShaderMaterial returns a ShaderMaterial JavaScript class.
-func (b *Babylon) ShaderMaterial() *ShaderMaterial {
-	p := b.ctx.Get("ShaderMaterial")
+func (ba *Babylon) ShaderMaterial() *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial")
 	return ShaderMaterialFromJSObject(p)
 }
 
@@ -30,18 +30,18 @@ func ShaderMaterialFromJSObject(p js.Value) *ShaderMaterial {
 
 // NewShaderMaterialOpts contains optional parameters for NewShaderMaterial.
 type NewShaderMaterialOpts struct {
-	Options *IShaderMaterialOptions
+	Options js.Value
 }
 
 // NewShaderMaterial returns a new ShaderMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadermaterial
-func (b *Babylon) NewShaderMaterial(name string, scene *Scene, shaderPath interface{}, opts *NewShaderMaterialOpts) *ShaderMaterial {
+func (ba *Babylon) NewShaderMaterial(name string, scene *Scene, shaderPath interface{}, opts *NewShaderMaterialOpts) *ShaderMaterial {
 	if opts == nil {
 		opts = &NewShaderMaterialOpts{}
 	}
 
-	p := b.ctx.Get("ShaderMaterial").New(name, scene.JSObject(), shaderPath, opts.Options.JSObject())
+	p := ba.ctx.Get("ShaderMaterial").New(name, scene.JSObject(), shaderPath, opts.Options)
 	return ShaderMaterialFromJSObject(p)
 }
 

@@ -16,8 +16,8 @@ type AnaglyphUniversalCamera struct{ *UniversalCamera }
 func (a *AnaglyphUniversalCamera) JSObject() js.Value { return a.p }
 
 // AnaglyphUniversalCamera returns a AnaglyphUniversalCamera JavaScript class.
-func (b *Babylon) AnaglyphUniversalCamera() *AnaglyphUniversalCamera {
-	p := b.ctx.Get("AnaglyphUniversalCamera")
+func (ba *Babylon) AnaglyphUniversalCamera() *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera")
 	return AnaglyphUniversalCameraFromJSObject(p)
 }
 
@@ -29,8 +29,8 @@ func AnaglyphUniversalCameraFromJSObject(p js.Value) *AnaglyphUniversalCamera {
 // NewAnaglyphUniversalCamera returns a new AnaglyphUniversalCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera
-func (b *Babylon) NewAnaglyphUniversalCamera(name string, position *Vector3, interaxialDistance float64, scene *Scene) *AnaglyphUniversalCamera {
-	p := b.ctx.Get("AnaglyphUniversalCamera").New(name, position.JSObject(), interaxialDistance, scene.JSObject())
+func (ba *Babylon) NewAnaglyphUniversalCamera(name string, position *Vector3, interaxialDistance float64, scene *Scene) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(name, position.JSObject(), interaxialDistance, scene.JSObject())
 	return AnaglyphUniversalCameraFromJSObject(p)
 }
 

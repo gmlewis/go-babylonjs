@@ -15,8 +15,8 @@ type InternalTexture struct{ p js.Value }
 func (i *InternalTexture) JSObject() js.Value { return i.p }
 
 // InternalTexture returns a InternalTexture JavaScript class.
-func (b *Babylon) InternalTexture() *InternalTexture {
-	p := b.ctx.Get("InternalTexture")
+func (ba *Babylon) InternalTexture() *InternalTexture {
+	p := ba.ctx.Get("InternalTexture")
 	return InternalTextureFromJSObject(p)
 }
 
@@ -27,18 +27,18 @@ func InternalTextureFromJSObject(p js.Value) *InternalTexture {
 
 // NewInternalTextureOpts contains optional parameters for NewInternalTexture.
 type NewInternalTextureOpts struct {
-	DelayAllocation *bool
+	DelayAllocation *JSBool
 }
 
 // NewInternalTexture returns a new InternalTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.internaltexture
-func (b *Babylon) NewInternalTexture(engine *ThinEngine, source js.Value, opts *NewInternalTextureOpts) *InternalTexture {
+func (ba *Babylon) NewInternalTexture(engine *ThinEngine, source js.Value, opts *NewInternalTextureOpts) *InternalTexture {
 	if opts == nil {
 		opts = &NewInternalTextureOpts{}
 	}
 
-	p := b.ctx.Get("InternalTexture").New(engine.JSObject(), source, opts.DelayAllocation.JSObject())
+	p := ba.ctx.Get("InternalTexture").New(engine.JSObject(), source, opts.DelayAllocation)
 	return InternalTextureFromJSObject(p)
 }
 

@@ -15,8 +15,8 @@ type FilesInputStore struct{ p js.Value }
 func (f *FilesInputStore) JSObject() js.Value { return f.p }
 
 // FilesInputStore returns a FilesInputStore JavaScript class.
-func (b *Babylon) FilesInputStore() *FilesInputStore {
-	p := b.ctx.Get("FilesInputStore")
+func (ba *Babylon) FilesInputStore() *FilesInputStore {
+	p := ba.ctx.Get("FilesInputStore")
 	return FilesInputStoreFromJSObject(p)
 }
 

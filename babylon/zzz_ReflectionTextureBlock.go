@@ -14,8 +14,8 @@ type ReflectionTextureBlock struct{ *NodeMaterialBlock }
 func (r *ReflectionTextureBlock) JSObject() js.Value { return r.p }
 
 // ReflectionTextureBlock returns a ReflectionTextureBlock JavaScript class.
-func (b *Babylon) ReflectionTextureBlock() *ReflectionTextureBlock {
-	p := b.ctx.Get("ReflectionTextureBlock")
+func (ba *Babylon) ReflectionTextureBlock() *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock")
 	return ReflectionTextureBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func ReflectionTextureBlockFromJSObject(p js.Value) *ReflectionTextureBlock {
 // NewReflectionTextureBlock returns a new ReflectionTextureBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock
-func (b *Babylon) NewReflectionTextureBlock(name string) *ReflectionTextureBlock {
-	p := b.ctx.Get("ReflectionTextureBlock").New(name)
+func (ba *Babylon) NewReflectionTextureBlock(name string) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(name)
 	return ReflectionTextureBlockFromJSObject(p)
 }
 

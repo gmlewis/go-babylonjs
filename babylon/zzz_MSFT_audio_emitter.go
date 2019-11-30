@@ -14,8 +14,8 @@ type MSFT_audio_emitter struct{ p js.Value }
 func (m *MSFT_audio_emitter) JSObject() js.Value { return m.p }
 
 // MSFT_audio_emitter returns a MSFT_audio_emitter JavaScript class.
-func (b *Babylon) MSFT_audio_emitter() *MSFT_audio_emitter {
-	p := b.ctx.Get("MSFT_audio_emitter")
+func (ba *Babylon) MSFT_audio_emitter() *MSFT_audio_emitter {
+	p := ba.ctx.Get("MSFT_audio_emitter")
 	return MSFT_audio_emitterFromJSObject(p)
 }
 

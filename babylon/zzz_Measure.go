@@ -14,8 +14,8 @@ type Measure struct{ p js.Value }
 func (m *Measure) JSObject() js.Value { return m.p }
 
 // Measure returns a Measure JavaScript class.
-func (b *Babylon) Measure() *Measure {
-	p := b.ctx.Get("Measure")
+func (ba *Babylon) Measure() *Measure {
+	p := ba.ctx.Get("Measure")
 	return MeasureFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func MeasureFromJSObject(p js.Value) *Measure {
 // NewMeasure returns a new Measure object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.measure
-func (b *Babylon) NewMeasure(left float64, top float64, width float64, height float64) *Measure {
-	p := b.ctx.Get("Measure").New(left, top, width, height)
+func (ba *Babylon) NewMeasure(left float64, top float64, width float64, height float64) *Measure {
+	p := ba.ctx.Get("Measure").New(left, top, width, height)
 	return MeasureFromJSObject(p)
 }
 

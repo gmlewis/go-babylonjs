@@ -14,8 +14,8 @@ type PhysicsGravitationalFieldEvent struct{ p js.Value }
 func (p *PhysicsGravitationalFieldEvent) JSObject() js.Value { return p.p }
 
 // PhysicsGravitationalFieldEvent returns a PhysicsGravitationalFieldEvent JavaScript class.
-func (b *Babylon) PhysicsGravitationalFieldEvent() *PhysicsGravitationalFieldEvent {
-	p := b.ctx.Get("PhysicsGravitationalFieldEvent")
+func (ba *Babylon) PhysicsGravitationalFieldEvent() *PhysicsGravitationalFieldEvent {
+	p := ba.ctx.Get("PhysicsGravitationalFieldEvent")
 	return PhysicsGravitationalFieldEventFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func PhysicsGravitationalFieldEventFromJSObject(p js.Value) *PhysicsGravitationa
 // NewPhysicsGravitationalFieldEvent returns a new PhysicsGravitationalFieldEvent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsgravitationalfieldevent
-func (b *Babylon) NewPhysicsGravitationalFieldEvent(_physicsHelper *PhysicsHelper, _scene *Scene, _origin *Vector3, _options *PhysicsRadialExplosionEventOptions) *PhysicsGravitationalFieldEvent {
-	p := b.ctx.Get("PhysicsGravitationalFieldEvent").New(_physicsHelper.JSObject(), _scene.JSObject(), _origin.JSObject(), _options.JSObject())
+func (ba *Babylon) NewPhysicsGravitationalFieldEvent(_physicsHelper *PhysicsHelper, _scene *Scene, _origin *Vector3, _options *PhysicsRadialExplosionEventOptions) *PhysicsGravitationalFieldEvent {
+	p := ba.ctx.Get("PhysicsGravitationalFieldEvent").New(_physicsHelper.JSObject(), _scene.JSObject(), _origin.JSObject(), _options.JSObject())
 	return PhysicsGravitationalFieldEventFromJSObject(p)
 }
 

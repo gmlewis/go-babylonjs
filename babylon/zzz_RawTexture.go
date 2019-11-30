@@ -16,8 +16,8 @@ type RawTexture struct{ *Texture }
 func (r *RawTexture) JSObject() js.Value { return r.p }
 
 // RawTexture returns a RawTexture JavaScript class.
-func (b *Babylon) RawTexture() *RawTexture {
-	p := b.ctx.Get("RawTexture")
+func (ba *Babylon) RawTexture() *RawTexture {
+	p := ba.ctx.Get("RawTexture")
 	return RawTextureFromJSObject(p)
 }
 
@@ -28,24 +28,24 @@ func RawTextureFromJSObject(p js.Value) *RawTexture {
 
 // NewRawTextureOpts contains optional parameters for NewRawTexture.
 type NewRawTextureOpts struct {
-	GenerateMipMaps *bool
+	GenerateMipMaps *JSBool
 
-	InvertY *bool
+	InvertY *JSBool
 
-	SamplingMode *float64
+	SamplingMode *JSFloat64
 
-	Type *float64
+	Type *JSFloat64
 }
 
 // NewRawTexture returns a new RawTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rawtexture
-func (b *Babylon) NewRawTexture(data ArrayBufferView, width float64, height float64, format float64, scene *Scene, opts *NewRawTextureOpts) *RawTexture {
+func (ba *Babylon) NewRawTexture(data js.Value, width float64, height float64, format float64, scene *Scene, opts *NewRawTextureOpts) *RawTexture {
 	if opts == nil {
 		opts = &NewRawTextureOpts{}
 	}
 
-	p := b.ctx.Get("RawTexture").New(data.JSObject(), width, height, format, scene.JSObject(), opts.GenerateMipMaps.JSObject(), opts.InvertY.JSObject(), opts.SamplingMode, opts.Type)
+	p := ba.ctx.Get("RawTexture").New(data, width, height, format, scene.JSObject(), opts.GenerateMipMaps, opts.InvertY, opts.SamplingMode, opts.Type)
 	return RawTextureFromJSObject(p)
 }
 

@@ -14,8 +14,8 @@ type StackPanel struct{ *Container }
 func (s *StackPanel) JSObject() js.Value { return s.p }
 
 // StackPanel returns a StackPanel JavaScript class.
-func (b *Babylon) StackPanel() *StackPanel {
-	p := b.ctx.Get("StackPanel")
+func (ba *Babylon) StackPanel() *StackPanel {
+	p := ba.ctx.Get("StackPanel")
 	return StackPanelFromJSObject(p)
 }
 
@@ -26,18 +26,18 @@ func StackPanelFromJSObject(p js.Value) *StackPanel {
 
 // NewStackPanelOpts contains optional parameters for NewStackPanel.
 type NewStackPanelOpts struct {
-	Name *string
+	Name *JSString
 }
 
 // NewStackPanel returns a new StackPanel object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stackpanel
-func (b *Babylon) NewStackPanel(opts *NewStackPanelOpts) *StackPanel {
+func (ba *Babylon) NewStackPanel(opts *NewStackPanelOpts) *StackPanel {
 	if opts == nil {
 		opts = &NewStackPanelOpts{}
 	}
 
-	p := b.ctx.Get("StackPanel").New(opts.Name)
+	p := ba.ctx.Get("StackPanel").New(opts.Name)
 	return StackPanelFromJSObject(p)
 }
 

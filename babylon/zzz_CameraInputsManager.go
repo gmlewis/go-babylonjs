@@ -17,8 +17,8 @@ type CameraInputsManager struct{ p js.Value }
 func (c *CameraInputsManager) JSObject() js.Value { return c.p }
 
 // CameraInputsManager returns a CameraInputsManager JavaScript class.
-func (b *Babylon) CameraInputsManager() *CameraInputsManager {
-	p := b.ctx.Get("CameraInputsManager")
+func (ba *Babylon) CameraInputsManager() *CameraInputsManager {
+	p := ba.ctx.Get("CameraInputsManager")
 	return CameraInputsManagerFromJSObject(p)
 }
 
@@ -30,8 +30,8 @@ func CameraInputsManagerFromJSObject(p js.Value) *CameraInputsManager {
 // NewCameraInputsManager returns a new CameraInputsManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.camerainputsmanager
-func (b *Babylon) NewCameraInputsManager(camera *Camera) *CameraInputsManager {
-	p := b.ctx.Get("CameraInputsManager").New(camera.JSObject())
+func (ba *Babylon) NewCameraInputsManager(camera *Camera) *CameraInputsManager {
+	p := ba.ctx.Get("CameraInputsManager").New(camera.JSObject())
 	return CameraInputsManagerFromJSObject(p)
 }
 

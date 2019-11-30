@@ -14,8 +14,8 @@ type AnimationEvent struct{ p js.Value }
 func (a *AnimationEvent) JSObject() js.Value { return a.p }
 
 // AnimationEvent returns a AnimationEvent JavaScript class.
-func (b *Babylon) AnimationEvent() *AnimationEvent {
-	p := b.ctx.Get("AnimationEvent")
+func (ba *Babylon) AnimationEvent() *AnimationEvent {
+	p := ba.ctx.Get("AnimationEvent")
 	return AnimationEventFromJSObject(p)
 }
 
@@ -26,18 +26,18 @@ func AnimationEventFromJSObject(p js.Value) *AnimationEvent {
 
 // NewAnimationEventOpts contains optional parameters for NewAnimationEvent.
 type NewAnimationEventOpts struct {
-	OnlyOnce *bool
+	OnlyOnce *JSBool
 }
 
 // NewAnimationEvent returns a new AnimationEvent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationevent
-func (b *Babylon) NewAnimationEvent(frame float64, action func(), opts *NewAnimationEventOpts) *AnimationEvent {
+func (ba *Babylon) NewAnimationEvent(frame float64, action func(), opts *NewAnimationEventOpts) *AnimationEvent {
 	if opts == nil {
 		opts = &NewAnimationEventOpts{}
 	}
 
-	p := b.ctx.Get("AnimationEvent").New(frame, action, opts.OnlyOnce.JSObject())
+	p := ba.ctx.Get("AnimationEvent").New(frame, action, opts.OnlyOnce)
 	return AnimationEventFromJSObject(p)
 }
 

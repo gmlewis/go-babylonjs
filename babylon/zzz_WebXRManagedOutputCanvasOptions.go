@@ -14,8 +14,8 @@ type WebXRManagedOutputCanvasOptions struct{ p js.Value }
 func (w *WebXRManagedOutputCanvasOptions) JSObject() js.Value { return w.p }
 
 // WebXRManagedOutputCanvasOptions returns a WebXRManagedOutputCanvasOptions JavaScript class.
-func (b *Babylon) WebXRManagedOutputCanvasOptions() *WebXRManagedOutputCanvasOptions {
-	p := b.ctx.Get("WebXRManagedOutputCanvasOptions")
+func (ba *Babylon) WebXRManagedOutputCanvasOptions() *WebXRManagedOutputCanvasOptions {
+	p := ba.ctx.Get("WebXRManagedOutputCanvasOptions")
 	return WebXRManagedOutputCanvasOptionsFromJSObject(p)
 }
 

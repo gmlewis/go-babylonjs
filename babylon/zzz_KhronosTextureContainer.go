@@ -15,8 +15,8 @@ type KhronosTextureContainer struct{ p js.Value }
 func (k *KhronosTextureContainer) JSObject() js.Value { return k.p }
 
 // KhronosTextureContainer returns a KhronosTextureContainer JavaScript class.
-func (b *Babylon) KhronosTextureContainer() *KhronosTextureContainer {
-	p := b.ctx.Get("KhronosTextureContainer")
+func (ba *Babylon) KhronosTextureContainer() *KhronosTextureContainer {
+	p := ba.ctx.Get("KhronosTextureContainer")
 	return KhronosTextureContainerFromJSObject(p)
 }
 
@@ -27,20 +27,20 @@ func KhronosTextureContainerFromJSObject(p js.Value) *KhronosTextureContainer {
 
 // NewKhronosTextureContainerOpts contains optional parameters for NewKhronosTextureContainer.
 type NewKhronosTextureContainerOpts struct {
-	ThreeDExpected *bool
+	ThreeDExpected *JSBool
 
-	TextureArrayExpected *bool
+	TextureArrayExpected *JSBool
 }
 
 // NewKhronosTextureContainer returns a new KhronosTextureContainer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.khronostexturecontainer
-func (b *Babylon) NewKhronosTextureContainer(arrayBuffer interface{}, facesExpected float64, opts *NewKhronosTextureContainerOpts) *KhronosTextureContainer {
+func (ba *Babylon) NewKhronosTextureContainer(arrayBuffer interface{}, facesExpected float64, opts *NewKhronosTextureContainerOpts) *KhronosTextureContainer {
 	if opts == nil {
 		opts = &NewKhronosTextureContainerOpts{}
 	}
 
-	p := b.ctx.Get("KhronosTextureContainer").New(arrayBuffer, facesExpected, opts.ThreeDExpected.JSObject(), opts.TextureArrayExpected.JSObject())
+	p := ba.ctx.Get("KhronosTextureContainer").New(arrayBuffer, facesExpected, opts.ThreeDExpected, opts.TextureArrayExpected)
 	return KhronosTextureContainerFromJSObject(p)
 }
 

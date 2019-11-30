@@ -14,8 +14,8 @@ type StringTools struct{ p js.Value }
 func (s *StringTools) JSObject() js.Value { return s.p }
 
 // StringTools returns a StringTools JavaScript class.
-func (b *Babylon) StringTools() *StringTools {
-	p := b.ctx.Get("StringTools")
+func (ba *Babylon) StringTools() *StringTools {
+	p := ba.ctx.Get("StringTools")
 	return StringToolsFromJSObject(p)
 }
 

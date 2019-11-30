@@ -16,8 +16,8 @@ type BounceEase struct{ *EasingFunction }
 func (b *BounceEase) JSObject() js.Value { return b.p }
 
 // BounceEase returns a BounceEase JavaScript class.
-func (b *Babylon) BounceEase() *BounceEase {
-	p := b.ctx.Get("BounceEase")
+func (ba *Babylon) BounceEase() *BounceEase {
+	p := ba.ctx.Get("BounceEase")
 	return BounceEaseFromJSObject(p)
 }
 
@@ -28,20 +28,20 @@ func BounceEaseFromJSObject(p js.Value) *BounceEase {
 
 // NewBounceEaseOpts contains optional parameters for NewBounceEase.
 type NewBounceEaseOpts struct {
-	Bounces *float64
+	Bounces *JSFloat64
 
-	Bounciness *float64
+	Bounciness *JSFloat64
 }
 
 // NewBounceEase returns a new BounceEase object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.bounceease
-func (b *Babylon) NewBounceEase(opts *NewBounceEaseOpts) *BounceEase {
+func (ba *Babylon) NewBounceEase(opts *NewBounceEaseOpts) *BounceEase {
 	if opts == nil {
 		opts = &NewBounceEaseOpts{}
 	}
 
-	p := b.ctx.Get("BounceEase").New(opts.Bounces, opts.Bounciness)
+	p := ba.ctx.Get("BounceEase").New(opts.Bounces, opts.Bounciness)
 	return BounceEaseFromJSObject(p)
 }
 

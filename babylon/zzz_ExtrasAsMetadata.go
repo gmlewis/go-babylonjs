@@ -14,8 +14,8 @@ type ExtrasAsMetadata struct{ p js.Value }
 func (e *ExtrasAsMetadata) JSObject() js.Value { return e.p }
 
 // ExtrasAsMetadata returns a ExtrasAsMetadata JavaScript class.
-func (b *Babylon) ExtrasAsMetadata() *ExtrasAsMetadata {
-	p := b.ctx.Get("ExtrasAsMetadata")
+func (ba *Babylon) ExtrasAsMetadata() *ExtrasAsMetadata {
+	p := ba.ctx.Get("ExtrasAsMetadata")
 	return ExtrasAsMetadataFromJSObject(p)
 }
 

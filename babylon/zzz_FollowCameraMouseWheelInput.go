@@ -16,8 +16,8 @@ type FollowCameraMouseWheelInput struct{ p js.Value }
 func (f *FollowCameraMouseWheelInput) JSObject() js.Value { return f.p }
 
 // FollowCameraMouseWheelInput returns a FollowCameraMouseWheelInput JavaScript class.
-func (b *Babylon) FollowCameraMouseWheelInput() *FollowCameraMouseWheelInput {
-	p := b.ctx.Get("FollowCameraMouseWheelInput")
+func (ba *Babylon) FollowCameraMouseWheelInput() *FollowCameraMouseWheelInput {
+	p := ba.ctx.Get("FollowCameraMouseWheelInput")
 	return FollowCameraMouseWheelInputFromJSObject(p)
 }
 

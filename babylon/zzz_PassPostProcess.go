@@ -14,8 +14,8 @@ type PassPostProcess struct{ *PostProcess }
 func (p *PassPostProcess) JSObject() js.Value { return p.p }
 
 // PassPostProcess returns a PassPostProcess JavaScript class.
-func (b *Babylon) PassPostProcess() *PassPostProcess {
-	p := b.ctx.Get("PassPostProcess")
+func (ba *Babylon) PassPostProcess() *PassPostProcess {
+	p := ba.ctx.Get("PassPostProcess")
 	return PassPostProcessFromJSObject(p)
 }
 
@@ -28,26 +28,26 @@ func PassPostProcessFromJSObject(p js.Value) *PassPostProcess {
 type NewPassPostProcessOpts struct {
 	Camera *Camera
 
-	SamplingMode *float64
+	SamplingMode *JSFloat64
 
 	Engine *Engine
 
-	Reusable *bool
+	Reusable *JSBool
 
-	TextureType *float64
+	TextureType *JSFloat64
 
-	BlockCompilation *bool
+	BlockCompilation *JSBool
 }
 
 // NewPassPostProcess returns a new PassPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.passpostprocess
-func (b *Babylon) NewPassPostProcess(name string, options float64, opts *NewPassPostProcessOpts) *PassPostProcess {
+func (ba *Babylon) NewPassPostProcess(name string, options float64, opts *NewPassPostProcessOpts) *PassPostProcess {
 	if opts == nil {
 		opts = &NewPassPostProcessOpts{}
 	}
 
-	p := b.ctx.Get("PassPostProcess").New(name, options, opts.Camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType, opts.BlockCompilation.JSObject())
+	p := ba.ctx.Get("PassPostProcess").New(name, options, opts.Camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable, opts.TextureType, opts.BlockCompilation)
 	return PassPostProcessFromJSObject(p)
 }
 

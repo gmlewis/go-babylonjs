@@ -14,8 +14,8 @@ type WebXREnterExitUIButton struct{ p js.Value }
 func (w *WebXREnterExitUIButton) JSObject() js.Value { return w.p }
 
 // WebXREnterExitUIButton returns a WebXREnterExitUIButton JavaScript class.
-func (b *Babylon) WebXREnterExitUIButton() *WebXREnterExitUIButton {
-	p := b.ctx.Get("WebXREnterExitUIButton")
+func (ba *Babylon) WebXREnterExitUIButton() *WebXREnterExitUIButton {
+	p := ba.ctx.Get("WebXREnterExitUIButton")
 	return WebXREnterExitUIButtonFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func WebXREnterExitUIButtonFromJSObject(p js.Value) *WebXREnterExitUIButton {
 // NewWebXREnterExitUIButton returns a new WebXREnterExitUIButton object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrenterexituibutton
-func (b *Babylon) NewWebXREnterExitUIButton(element js.Value, sessionMode *XRSessionMode, referenceSpaceType *XRReferenceSpaceType) *WebXREnterExitUIButton {
-	p := b.ctx.Get("WebXREnterExitUIButton").New(element, sessionMode.JSObject(), referenceSpaceType.JSObject())
+func (ba *Babylon) NewWebXREnterExitUIButton(element js.Value, sessionMode js.Value, referenceSpaceType js.Value) *WebXREnterExitUIButton {
+	p := ba.ctx.Get("WebXREnterExitUIButton").New(element, sessionMode, referenceSpaceType)
 	return WebXREnterExitUIButtonFromJSObject(p)
 }
 

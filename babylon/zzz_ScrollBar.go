@@ -14,8 +14,8 @@ type ScrollBar struct{ *BaseSlider }
 func (s *ScrollBar) JSObject() js.Value { return s.p }
 
 // ScrollBar returns a ScrollBar JavaScript class.
-func (b *Babylon) ScrollBar() *ScrollBar {
-	p := b.ctx.Get("ScrollBar")
+func (ba *Babylon) ScrollBar() *ScrollBar {
+	p := ba.ctx.Get("ScrollBar")
 	return ScrollBarFromJSObject(p)
 }
 
@@ -26,18 +26,18 @@ func ScrollBarFromJSObject(p js.Value) *ScrollBar {
 
 // NewScrollBarOpts contains optional parameters for NewScrollBar.
 type NewScrollBarOpts struct {
-	Name *string
+	Name *JSString
 }
 
 // NewScrollBar returns a new ScrollBar object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scrollbar
-func (b *Babylon) NewScrollBar(opts *NewScrollBarOpts) *ScrollBar {
+func (ba *Babylon) NewScrollBar(opts *NewScrollBarOpts) *ScrollBar {
 	if opts == nil {
 		opts = &NewScrollBarOpts{}
 	}
 
-	p := b.ctx.Get("ScrollBar").New(opts.Name)
+	p := ba.ctx.Get("ScrollBar").New(opts.Name)
 	return ScrollBarFromJSObject(p)
 }
 

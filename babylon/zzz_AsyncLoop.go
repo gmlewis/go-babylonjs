@@ -14,8 +14,8 @@ type AsyncLoop struct{ p js.Value }
 func (a *AsyncLoop) JSObject() js.Value { return a.p }
 
 // AsyncLoop returns a AsyncLoop JavaScript class.
-func (b *Babylon) AsyncLoop() *AsyncLoop {
-	p := b.ctx.Get("AsyncLoop")
+func (ba *Babylon) AsyncLoop() *AsyncLoop {
+	p := ba.ctx.Get("AsyncLoop")
 	return AsyncLoopFromJSObject(p)
 }
 
@@ -26,18 +26,18 @@ func AsyncLoopFromJSObject(p js.Value) *AsyncLoop {
 
 // NewAsyncLoopOpts contains optional parameters for NewAsyncLoop.
 type NewAsyncLoopOpts struct {
-	Offset *float64
+	Offset *JSFloat64
 }
 
 // NewAsyncLoop returns a new AsyncLoop object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.asyncloop
-func (b *Babylon) NewAsyncLoop(iterations float64, jsFunc func(), successCallback func(), opts *NewAsyncLoopOpts) *AsyncLoop {
+func (ba *Babylon) NewAsyncLoop(iterations float64, jsFunc func(), successCallback func(), opts *NewAsyncLoopOpts) *AsyncLoop {
 	if opts == nil {
 		opts = &NewAsyncLoopOpts{}
 	}
 
-	p := b.ctx.Get("AsyncLoop").New(iterations, jsFunc, successCallback, opts.Offset)
+	p := ba.ctx.Get("AsyncLoop").New(iterations, jsFunc, successCallback, opts.Offset)
 	return AsyncLoopFromJSObject(p)
 }
 

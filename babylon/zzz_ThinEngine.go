@@ -14,8 +14,8 @@ type ThinEngine struct{ p js.Value }
 func (t *ThinEngine) JSObject() js.Value { return t.p }
 
 // ThinEngine returns a ThinEngine JavaScript class.
-func (b *Babylon) ThinEngine() *ThinEngine {
-	p := b.ctx.Get("ThinEngine")
+func (ba *Babylon) ThinEngine() *ThinEngine {
+	p := ba.ctx.Get("ThinEngine")
 	return ThinEngineFromJSObject(p)
 }
 
@@ -26,22 +26,22 @@ func ThinEngineFromJSObject(p js.Value) *ThinEngine {
 
 // NewThinEngineOpts contains optional parameters for NewThinEngine.
 type NewThinEngineOpts struct {
-	Antialias *bool
+	Antialias *JSBool
 
 	Options js.Value
 
-	AdaptToDeviceRatio *bool
+	AdaptToDeviceRatio *JSBool
 }
 
 // NewThinEngine returns a new ThinEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.thinengine
-func (b *Babylon) NewThinEngine(canvasOrContext js.Value, opts *NewThinEngineOpts) *ThinEngine {
+func (ba *Babylon) NewThinEngine(canvasOrContext js.Value, opts *NewThinEngineOpts) *ThinEngine {
 	if opts == nil {
 		opts = &NewThinEngineOpts{}
 	}
 
-	p := b.ctx.Get("ThinEngine").New(canvasOrContext, opts.Antialias.JSObject(), opts.Options, opts.AdaptToDeviceRatio.JSObject())
+	p := ba.ctx.Get("ThinEngine").New(canvasOrContext, opts.Antialias, opts.Options, opts.AdaptToDeviceRatio)
 	return ThinEngineFromJSObject(p)
 }
 

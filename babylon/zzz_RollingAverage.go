@@ -16,8 +16,8 @@ type RollingAverage struct{ p js.Value }
 func (r *RollingAverage) JSObject() js.Value { return r.p }
 
 // RollingAverage returns a RollingAverage JavaScript class.
-func (b *Babylon) RollingAverage() *RollingAverage {
-	p := b.ctx.Get("RollingAverage")
+func (ba *Babylon) RollingAverage() *RollingAverage {
+	p := ba.ctx.Get("RollingAverage")
 	return RollingAverageFromJSObject(p)
 }
 
@@ -29,8 +29,8 @@ func RollingAverageFromJSObject(p js.Value) *RollingAverage {
 // NewRollingAverage returns a new RollingAverage object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rollingaverage
-func (b *Babylon) NewRollingAverage(length float64) *RollingAverage {
-	p := b.ctx.Get("RollingAverage").New(length)
+func (ba *Babylon) NewRollingAverage(length float64) *RollingAverage {
+	p := ba.ctx.Get("RollingAverage").New(length)
 	return RollingAverageFromJSObject(p)
 }
 

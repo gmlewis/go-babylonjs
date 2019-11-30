@@ -14,8 +14,8 @@ type RuntimeAnimation struct{ p js.Value }
 func (r *RuntimeAnimation) JSObject() js.Value { return r.p }
 
 // RuntimeAnimation returns a RuntimeAnimation JavaScript class.
-func (b *Babylon) RuntimeAnimation() *RuntimeAnimation {
-	p := b.ctx.Get("RuntimeAnimation")
+func (ba *Babylon) RuntimeAnimation() *RuntimeAnimation {
+	p := ba.ctx.Get("RuntimeAnimation")
 	return RuntimeAnimationFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func RuntimeAnimationFromJSObject(p js.Value) *RuntimeAnimation {
 // NewRuntimeAnimation returns a new RuntimeAnimation object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.runtimeanimation
-func (b *Babylon) NewRuntimeAnimation(target interface{}, animation *Animation, scene *Scene, host *Animatable) *RuntimeAnimation {
-	p := b.ctx.Get("RuntimeAnimation").New(target, animation.JSObject(), scene.JSObject(), host.JSObject())
+func (ba *Babylon) NewRuntimeAnimation(target interface{}, animation *Animation, scene *Scene, host *Animatable) *RuntimeAnimation {
+	p := ba.ctx.Get("RuntimeAnimation").New(target, animation.JSObject(), scene.JSObject(), host.JSObject())
 	return RuntimeAnimationFromJSObject(p)
 }
 

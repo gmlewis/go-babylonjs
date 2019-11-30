@@ -20,8 +20,8 @@ type HtmlElementTexture struct{ *BaseTexture }
 func (h *HtmlElementTexture) JSObject() js.Value { return h.p }
 
 // HtmlElementTexture returns a HtmlElementTexture JavaScript class.
-func (b *Babylon) HtmlElementTexture() *HtmlElementTexture {
-	p := b.ctx.Get("HtmlElementTexture")
+func (ba *Babylon) HtmlElementTexture() *HtmlElementTexture {
+	p := ba.ctx.Get("HtmlElementTexture")
 	return HtmlElementTextureFromJSObject(p)
 }
 
@@ -33,8 +33,8 @@ func HtmlElementTextureFromJSObject(p js.Value) *HtmlElementTexture {
 // NewHtmlElementTexture returns a new HtmlElementTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.htmlelementtexture
-func (b *Babylon) NewHtmlElementTexture(name string, element js.Value, options js.Value) *HtmlElementTexture {
-	p := b.ctx.Get("HtmlElementTexture").New(name, element, options)
+func (ba *Babylon) NewHtmlElementTexture(name string, element js.Value, options js.Value) *HtmlElementTexture {
+	p := ba.ctx.Get("HtmlElementTexture").New(name, element, options)
 	return HtmlElementTextureFromJSObject(p)
 }
 

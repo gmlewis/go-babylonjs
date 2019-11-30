@@ -14,8 +14,8 @@ type VectorMergerBlock struct{ *NodeMaterialBlock }
 func (v *VectorMergerBlock) JSObject() js.Value { return v.p }
 
 // VectorMergerBlock returns a VectorMergerBlock JavaScript class.
-func (b *Babylon) VectorMergerBlock() *VectorMergerBlock {
-	p := b.ctx.Get("VectorMergerBlock")
+func (ba *Babylon) VectorMergerBlock() *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock")
 	return VectorMergerBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func VectorMergerBlockFromJSObject(p js.Value) *VectorMergerBlock {
 // NewVectorMergerBlock returns a new VectorMergerBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vectormergerblock
-func (b *Babylon) NewVectorMergerBlock(name string) *VectorMergerBlock {
-	p := b.ctx.Get("VectorMergerBlock").New(name)
+func (ba *Babylon) NewVectorMergerBlock(name string) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(name)
 	return VectorMergerBlockFromJSObject(p)
 }
 

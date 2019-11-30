@@ -14,8 +14,8 @@ type ReplaceColorBlock struct{ *NodeMaterialBlock }
 func (r *ReplaceColorBlock) JSObject() js.Value { return r.p }
 
 // ReplaceColorBlock returns a ReplaceColorBlock JavaScript class.
-func (b *Babylon) ReplaceColorBlock() *ReplaceColorBlock {
-	p := b.ctx.Get("ReplaceColorBlock")
+func (ba *Babylon) ReplaceColorBlock() *ReplaceColorBlock {
+	p := ba.ctx.Get("ReplaceColorBlock")
 	return ReplaceColorBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func ReplaceColorBlockFromJSObject(p js.Value) *ReplaceColorBlock {
 // NewReplaceColorBlock returns a new ReplaceColorBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.replacecolorblock
-func (b *Babylon) NewReplaceColorBlock(name string) *ReplaceColorBlock {
-	p := b.ctx.Get("ReplaceColorBlock").New(name)
+func (ba *Babylon) NewReplaceColorBlock(name string) *ReplaceColorBlock {
+	p := ba.ctx.Get("ReplaceColorBlock").New(name)
 	return ReplaceColorBlockFromJSObject(p)
 }
 

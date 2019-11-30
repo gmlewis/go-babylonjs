@@ -14,8 +14,8 @@ type NodeMaterialBlock struct{ p js.Value }
 func (n *NodeMaterialBlock) JSObject() js.Value { return n.p }
 
 // NodeMaterialBlock returns a NodeMaterialBlock JavaScript class.
-func (b *Babylon) NodeMaterialBlock() *NodeMaterialBlock {
-	p := b.ctx.Get("NodeMaterialBlock")
+func (ba *Babylon) NodeMaterialBlock() *NodeMaterialBlock {
+	p := ba.ctx.Get("NodeMaterialBlock")
 	return NodeMaterialBlockFromJSObject(p)
 }
 
@@ -28,20 +28,20 @@ func NodeMaterialBlockFromJSObject(p js.Value) *NodeMaterialBlock {
 type NewNodeMaterialBlockOpts struct {
 	Target js.Value
 
-	IsFinalMerger *bool
+	IsFinalMerger *JSBool
 
-	IsInput *bool
+	IsInput *JSBool
 }
 
 // NewNodeMaterialBlock returns a new NodeMaterialBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialblock
-func (b *Babylon) NewNodeMaterialBlock(name string, opts *NewNodeMaterialBlockOpts) *NodeMaterialBlock {
+func (ba *Babylon) NewNodeMaterialBlock(name string, opts *NewNodeMaterialBlockOpts) *NodeMaterialBlock {
 	if opts == nil {
 		opts = &NewNodeMaterialBlockOpts{}
 	}
 
-	p := b.ctx.Get("NodeMaterialBlock").New(name, opts.Target, opts.IsFinalMerger.JSObject(), opts.IsInput.JSObject())
+	p := ba.ctx.Get("NodeMaterialBlock").New(name, opts.Target, opts.IsFinalMerger, opts.IsInput)
 	return NodeMaterialBlockFromJSObject(p)
 }
 

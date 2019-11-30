@@ -16,8 +16,8 @@ type ImageProcessingPostProcess struct{ *PostProcess }
 func (i *ImageProcessingPostProcess) JSObject() js.Value { return i.p }
 
 // ImageProcessingPostProcess returns a ImageProcessingPostProcess JavaScript class.
-func (b *Babylon) ImageProcessingPostProcess() *ImageProcessingPostProcess {
-	p := b.ctx.Get("ImageProcessingPostProcess")
+func (ba *Babylon) ImageProcessingPostProcess() *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess")
 	return ImageProcessingPostProcessFromJSObject(p)
 }
 
@@ -30,13 +30,13 @@ func ImageProcessingPostProcessFromJSObject(p js.Value) *ImageProcessingPostProc
 type NewImageProcessingPostProcessOpts struct {
 	Camera *Camera
 
-	SamplingMode *float64
+	SamplingMode *JSFloat64
 
 	Engine *Engine
 
-	Reusable *bool
+	Reusable *JSBool
 
-	TextureType *float64
+	TextureType *JSFloat64
 
 	ImageProcessingConfiguration *ImageProcessingConfiguration
 }
@@ -44,12 +44,12 @@ type NewImageProcessingPostProcessOpts struct {
 // NewImageProcessingPostProcess returns a new ImageProcessingPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess
-func (b *Babylon) NewImageProcessingPostProcess(name string, options float64, opts *NewImageProcessingPostProcessOpts) *ImageProcessingPostProcess {
+func (ba *Babylon) NewImageProcessingPostProcess(name string, options float64, opts *NewImageProcessingPostProcessOpts) *ImageProcessingPostProcess {
 	if opts == nil {
 		opts = &NewImageProcessingPostProcessOpts{}
 	}
 
-	p := b.ctx.Get("ImageProcessingPostProcess").New(name, options, opts.Camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType, opts.ImageProcessingConfiguration.JSObject())
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(name, options, opts.Camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable, opts.TextureType, opts.ImageProcessingConfiguration.JSObject())
 	return ImageProcessingPostProcessFromJSObject(p)
 }
 

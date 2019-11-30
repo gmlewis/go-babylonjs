@@ -14,8 +14,8 @@ type FrontFacingBlock struct{ *NodeMaterialBlock }
 func (f *FrontFacingBlock) JSObject() js.Value { return f.p }
 
 // FrontFacingBlock returns a FrontFacingBlock JavaScript class.
-func (b *Babylon) FrontFacingBlock() *FrontFacingBlock {
-	p := b.ctx.Get("FrontFacingBlock")
+func (ba *Babylon) FrontFacingBlock() *FrontFacingBlock {
+	p := ba.ctx.Get("FrontFacingBlock")
 	return FrontFacingBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func FrontFacingBlockFromJSObject(p js.Value) *FrontFacingBlock {
 // NewFrontFacingBlock returns a new FrontFacingBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.frontfacingblock
-func (b *Babylon) NewFrontFacingBlock(name string) *FrontFacingBlock {
-	p := b.ctx.Get("FrontFacingBlock").New(name)
+func (ba *Babylon) NewFrontFacingBlock(name string) *FrontFacingBlock {
+	p := ba.ctx.Get("FrontFacingBlock").New(name)
 	return FrontFacingBlockFromJSObject(p)
 }
 

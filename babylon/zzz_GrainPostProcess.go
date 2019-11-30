@@ -14,8 +14,8 @@ type GrainPostProcess struct{ *PostProcess }
 func (g *GrainPostProcess) JSObject() js.Value { return g.p }
 
 // GrainPostProcess returns a GrainPostProcess JavaScript class.
-func (b *Babylon) GrainPostProcess() *GrainPostProcess {
-	p := b.ctx.Get("GrainPostProcess")
+func (ba *Babylon) GrainPostProcess() *GrainPostProcess {
+	p := ba.ctx.Get("GrainPostProcess")
 	return GrainPostProcessFromJSObject(p)
 }
 
@@ -26,26 +26,26 @@ func GrainPostProcessFromJSObject(p js.Value) *GrainPostProcess {
 
 // NewGrainPostProcessOpts contains optional parameters for NewGrainPostProcess.
 type NewGrainPostProcessOpts struct {
-	SamplingMode *float64
+	SamplingMode *JSFloat64
 
 	Engine *Engine
 
-	Reusable *bool
+	Reusable *JSBool
 
-	TextureType *float64
+	TextureType *JSFloat64
 
-	BlockCompilation *bool
+	BlockCompilation *JSBool
 }
 
 // NewGrainPostProcess returns a new GrainPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.grainpostprocess
-func (b *Babylon) NewGrainPostProcess(name string, options float64, camera *Camera, opts *NewGrainPostProcessOpts) *GrainPostProcess {
+func (ba *Babylon) NewGrainPostProcess(name string, options float64, camera *Camera, opts *NewGrainPostProcessOpts) *GrainPostProcess {
 	if opts == nil {
 		opts = &NewGrainPostProcessOpts{}
 	}
 
-	p := b.ctx.Get("GrainPostProcess").New(name, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType, opts.BlockCompilation.JSObject())
+	p := ba.ctx.Get("GrainPostProcess").New(name, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable, opts.TextureType, opts.BlockCompilation)
 	return GrainPostProcessFromJSObject(p)
 }
 

@@ -17,8 +17,8 @@ type FreeCameraDeviceOrientationInput struct{ p js.Value }
 func (f *FreeCameraDeviceOrientationInput) JSObject() js.Value { return f.p }
 
 // FreeCameraDeviceOrientationInput returns a FreeCameraDeviceOrientationInput JavaScript class.
-func (b *Babylon) FreeCameraDeviceOrientationInput() *FreeCameraDeviceOrientationInput {
-	p := b.ctx.Get("FreeCameraDeviceOrientationInput")
+func (ba *Babylon) FreeCameraDeviceOrientationInput() *FreeCameraDeviceOrientationInput {
+	p := ba.ctx.Get("FreeCameraDeviceOrientationInput")
 	return FreeCameraDeviceOrientationInputFromJSObject(p)
 }
 
@@ -30,8 +30,8 @@ func FreeCameraDeviceOrientationInputFromJSObject(p js.Value) *FreeCameraDeviceO
 // NewFreeCameraDeviceOrientationInput returns a new FreeCameraDeviceOrientationInput object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecameradeviceorientationinput
-func (b *Babylon) NewFreeCameraDeviceOrientationInput() *FreeCameraDeviceOrientationInput {
-	p := b.ctx.Get("FreeCameraDeviceOrientationInput").New()
+func (ba *Babylon) NewFreeCameraDeviceOrientationInput() *FreeCameraDeviceOrientationInput {
+	p := ba.ctx.Get("FreeCameraDeviceOrientationInput").New()
 	return FreeCameraDeviceOrientationInputFromJSObject(p)
 }
 

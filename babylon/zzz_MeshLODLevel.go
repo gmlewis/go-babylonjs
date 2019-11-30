@@ -16,8 +16,8 @@ type MeshLODLevel struct{ p js.Value }
 func (m *MeshLODLevel) JSObject() js.Value { return m.p }
 
 // MeshLODLevel returns a MeshLODLevel JavaScript class.
-func (b *Babylon) MeshLODLevel() *MeshLODLevel {
-	p := b.ctx.Get("MeshLODLevel")
+func (ba *Babylon) MeshLODLevel() *MeshLODLevel {
+	p := ba.ctx.Get("MeshLODLevel")
 	return MeshLODLevelFromJSObject(p)
 }
 
@@ -29,8 +29,8 @@ func MeshLODLevelFromJSObject(p js.Value) *MeshLODLevel {
 // NewMeshLODLevel returns a new MeshLODLevel object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.meshlodlevel
-func (b *Babylon) NewMeshLODLevel(distance float64, mesh *Mesh) *MeshLODLevel {
-	p := b.ctx.Get("MeshLODLevel").New(distance, mesh.JSObject())
+func (ba *Babylon) NewMeshLODLevel(distance float64, mesh *Mesh) *MeshLODLevel {
+	p := ba.ctx.Get("MeshLODLevel").New(distance, mesh.JSObject())
 	return MeshLODLevelFromJSObject(p)
 }
 

@@ -14,8 +14,8 @@ type SceneSerializer struct{ p js.Value }
 func (s *SceneSerializer) JSObject() js.Value { return s.p }
 
 // SceneSerializer returns a SceneSerializer JavaScript class.
-func (b *Babylon) SceneSerializer() *SceneSerializer {
-	p := b.ctx.Get("SceneSerializer")
+func (ba *Babylon) SceneSerializer() *SceneSerializer {
+	p := ba.ctx.Get("SceneSerializer")
 	return SceneSerializerFromJSObject(p)
 }
 

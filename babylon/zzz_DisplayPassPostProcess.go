@@ -14,8 +14,8 @@ type DisplayPassPostProcess struct{ *PostProcess }
 func (d *DisplayPassPostProcess) JSObject() js.Value { return d.p }
 
 // DisplayPassPostProcess returns a DisplayPassPostProcess JavaScript class.
-func (b *Babylon) DisplayPassPostProcess() *DisplayPassPostProcess {
-	p := b.ctx.Get("DisplayPassPostProcess")
+func (ba *Babylon) DisplayPassPostProcess() *DisplayPassPostProcess {
+	p := ba.ctx.Get("DisplayPassPostProcess")
 	return DisplayPassPostProcessFromJSObject(p)
 }
 
@@ -26,22 +26,22 @@ func DisplayPassPostProcessFromJSObject(p js.Value) *DisplayPassPostProcess {
 
 // NewDisplayPassPostProcessOpts contains optional parameters for NewDisplayPassPostProcess.
 type NewDisplayPassPostProcessOpts struct {
-	SamplingMode *float64
+	SamplingMode *JSFloat64
 
 	Engine *Engine
 
-	Reusable *bool
+	Reusable *JSBool
 }
 
 // NewDisplayPassPostProcess returns a new DisplayPassPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.displaypasspostprocess
-func (b *Babylon) NewDisplayPassPostProcess(name string, options float64, camera *Camera, opts *NewDisplayPassPostProcessOpts) *DisplayPassPostProcess {
+func (ba *Babylon) NewDisplayPassPostProcess(name string, options float64, camera *Camera, opts *NewDisplayPassPostProcessOpts) *DisplayPassPostProcess {
 	if opts == nil {
 		opts = &NewDisplayPassPostProcessOpts{}
 	}
 
-	p := b.ctx.Get("DisplayPassPostProcess").New(name, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject())
+	p := ba.ctx.Get("DisplayPassPostProcess").New(name, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable)
 	return DisplayPassPostProcessFromJSObject(p)
 }
 

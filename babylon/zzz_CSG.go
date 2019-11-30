@@ -14,8 +14,8 @@ type CSG struct{ p js.Value }
 func (c *CSG) JSObject() js.Value { return c.p }
 
 // CSG returns a CSG JavaScript class.
-func (b *Babylon) CSG() *CSG {
-	p := b.ctx.Get("CSG")
+func (ba *Babylon) CSG() *CSG {
+	p := ba.ctx.Get("CSG")
 	return CSGFromJSObject(p)
 }
 

@@ -14,8 +14,8 @@ type SmoothStepBlock struct{ *NodeMaterialBlock }
 func (s *SmoothStepBlock) JSObject() js.Value { return s.p }
 
 // SmoothStepBlock returns a SmoothStepBlock JavaScript class.
-func (b *Babylon) SmoothStepBlock() *SmoothStepBlock {
-	p := b.ctx.Get("SmoothStepBlock")
+func (ba *Babylon) SmoothStepBlock() *SmoothStepBlock {
+	p := ba.ctx.Get("SmoothStepBlock")
 	return SmoothStepBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func SmoothStepBlockFromJSObject(p js.Value) *SmoothStepBlock {
 // NewSmoothStepBlock returns a new SmoothStepBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.smoothstepblock
-func (b *Babylon) NewSmoothStepBlock(name string) *SmoothStepBlock {
-	p := b.ctx.Get("SmoothStepBlock").New(name)
+func (ba *Babylon) NewSmoothStepBlock(name string) *SmoothStepBlock {
+	p := ba.ctx.Get("SmoothStepBlock").New(name)
 	return SmoothStepBlockFromJSObject(p)
 }
 

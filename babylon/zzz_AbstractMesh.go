@@ -14,8 +14,8 @@ type AbstractMesh struct{ *TransformNode }
 func (a *AbstractMesh) JSObject() js.Value { return a.p }
 
 // AbstractMesh returns a AbstractMesh JavaScript class.
-func (b *Babylon) AbstractMesh() *AbstractMesh {
-	p := b.ctx.Get("AbstractMesh")
+func (ba *Babylon) AbstractMesh() *AbstractMesh {
+	p := ba.ctx.Get("AbstractMesh")
 	return AbstractMeshFromJSObject(p)
 }
 
@@ -32,12 +32,12 @@ type NewAbstractMeshOpts struct {
 // NewAbstractMesh returns a new AbstractMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh
-func (b *Babylon) NewAbstractMesh(name string, opts *NewAbstractMeshOpts) *AbstractMesh {
+func (ba *Babylon) NewAbstractMesh(name string, opts *NewAbstractMeshOpts) *AbstractMesh {
 	if opts == nil {
 		opts = &NewAbstractMeshOpts{}
 	}
 
-	p := b.ctx.Get("AbstractMesh").New(name, opts.Scene.JSObject())
+	p := ba.ctx.Get("AbstractMesh").New(name, opts.Scene.JSObject())
 	return AbstractMeshFromJSObject(p)
 }
 

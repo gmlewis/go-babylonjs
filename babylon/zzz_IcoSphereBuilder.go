@@ -14,8 +14,8 @@ type IcoSphereBuilder struct{ p js.Value }
 func (i *IcoSphereBuilder) JSObject() js.Value { return i.p }
 
 // IcoSphereBuilder returns a IcoSphereBuilder JavaScript class.
-func (b *Babylon) IcoSphereBuilder() *IcoSphereBuilder {
-	p := b.ctx.Get("IcoSphereBuilder")
+func (ba *Babylon) IcoSphereBuilder() *IcoSphereBuilder {
+	p := ba.ctx.Get("IcoSphereBuilder")
 	return IcoSphereBuilderFromJSObject(p)
 }
 

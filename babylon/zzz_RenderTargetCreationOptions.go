@@ -14,8 +14,8 @@ type RenderTargetCreationOptions struct{ p js.Value }
 func (r *RenderTargetCreationOptions) JSObject() js.Value { return r.p }
 
 // RenderTargetCreationOptions returns a RenderTargetCreationOptions JavaScript class.
-func (b *Babylon) RenderTargetCreationOptions() *RenderTargetCreationOptions {
-	p := b.ctx.Get("RenderTargetCreationOptions")
+func (ba *Babylon) RenderTargetCreationOptions() *RenderTargetCreationOptions {
+	p := ba.ctx.Get("RenderTargetCreationOptions")
 	return RenderTargetCreationOptionsFromJSObject(p)
 }
 

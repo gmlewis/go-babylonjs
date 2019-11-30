@@ -16,8 +16,8 @@ type FlyCameraKeyboardInput struct{ p js.Value }
 func (f *FlyCameraKeyboardInput) JSObject() js.Value { return f.p }
 
 // FlyCameraKeyboardInput returns a FlyCameraKeyboardInput JavaScript class.
-func (b *Babylon) FlyCameraKeyboardInput() *FlyCameraKeyboardInput {
-	p := b.ctx.Get("FlyCameraKeyboardInput")
+func (ba *Babylon) FlyCameraKeyboardInput() *FlyCameraKeyboardInput {
+	p := ba.ctx.Get("FlyCameraKeyboardInput")
 	return FlyCameraKeyboardInputFromJSObject(p)
 }
 

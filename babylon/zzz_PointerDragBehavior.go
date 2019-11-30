@@ -14,8 +14,8 @@ type PointerDragBehavior struct{ p js.Value }
 func (p *PointerDragBehavior) JSObject() js.Value { return p.p }
 
 // PointerDragBehavior returns a PointerDragBehavior JavaScript class.
-func (b *Babylon) PointerDragBehavior() *PointerDragBehavior {
-	p := b.ctx.Get("PointerDragBehavior")
+func (ba *Babylon) PointerDragBehavior() *PointerDragBehavior {
+	p := ba.ctx.Get("PointerDragBehavior")
 	return PointerDragBehaviorFromJSObject(p)
 }
 
@@ -32,12 +32,12 @@ type NewPointerDragBehaviorOpts struct {
 // NewPointerDragBehavior returns a new PointerDragBehavior object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior
-func (b *Babylon) NewPointerDragBehavior(opts *NewPointerDragBehaviorOpts) *PointerDragBehavior {
+func (ba *Babylon) NewPointerDragBehavior(opts *NewPointerDragBehaviorOpts) *PointerDragBehavior {
 	if opts == nil {
 		opts = &NewPointerDragBehaviorOpts{}
 	}
 
-	p := b.ctx.Get("PointerDragBehavior").New(opts.Options)
+	p := ba.ctx.Get("PointerDragBehavior").New(opts.Options)
 	return PointerDragBehaviorFromJSObject(p)
 }
 

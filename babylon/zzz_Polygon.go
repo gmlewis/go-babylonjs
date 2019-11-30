@@ -16,8 +16,8 @@ type Polygon struct{ p js.Value }
 func (p *Polygon) JSObject() js.Value { return p.p }
 
 // Polygon returns a Polygon JavaScript class.
-func (b *Babylon) Polygon() *Polygon {
-	p := b.ctx.Get("Polygon")
+func (ba *Babylon) Polygon() *Polygon {
+	p := ba.ctx.Get("Polygon")
 	return PolygonFromJSObject(p)
 }
 

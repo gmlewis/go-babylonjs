@@ -14,8 +14,8 @@ type KHR_materials_pbrSpecularGlossiness struct{ p js.Value }
 func (k *KHR_materials_pbrSpecularGlossiness) JSObject() js.Value { return k.p }
 
 // KHR_materials_pbrSpecularGlossiness returns a KHR_materials_pbrSpecularGlossiness JavaScript class.
-func (b *Babylon) KHR_materials_pbrSpecularGlossiness() *KHR_materials_pbrSpecularGlossiness {
-	p := b.ctx.Get("KHR_materials_pbrSpecularGlossiness")
+func (ba *Babylon) KHR_materials_pbrSpecularGlossiness() *KHR_materials_pbrSpecularGlossiness {
+	p := ba.ctx.Get("KHR_materials_pbrSpecularGlossiness")
 	return KHR_materials_pbrSpecularGlossinessFromJSObject(p)
 }
 

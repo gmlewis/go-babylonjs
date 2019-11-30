@@ -14,8 +14,8 @@ type SpherePanel struct{ *VolumeBasedPanel }
 func (s *SpherePanel) JSObject() js.Value { return s.p }
 
 // SpherePanel returns a SpherePanel JavaScript class.
-func (b *Babylon) SpherePanel() *SpherePanel {
-	p := b.ctx.Get("SpherePanel")
+func (ba *Babylon) SpherePanel() *SpherePanel {
+	p := ba.ctx.Get("SpherePanel")
 	return SpherePanelFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func SpherePanelFromJSObject(p js.Value) *SpherePanel {
 // NewSpherePanel returns a new SpherePanel object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.spherepanel
-func (b *Babylon) NewSpherePanel() *SpherePanel {
-	p := b.ctx.Get("SpherePanel").New()
+func (ba *Babylon) NewSpherePanel() *SpherePanel {
+	p := ba.ctx.Get("SpherePanel").New()
 	return SpherePanelFromJSObject(p)
 }
 

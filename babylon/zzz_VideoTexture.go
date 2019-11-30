@@ -17,8 +17,8 @@ type VideoTexture struct{ *Texture }
 func (v *VideoTexture) JSObject() js.Value { return v.p }
 
 // VideoTexture returns a VideoTexture JavaScript class.
-func (b *Babylon) VideoTexture() *VideoTexture {
-	p := b.ctx.Get("VideoTexture")
+func (ba *Babylon) VideoTexture() *VideoTexture {
+	p := ba.ctx.Get("VideoTexture")
 	return VideoTextureFromJSObject(p)
 }
 
@@ -29,24 +29,24 @@ func VideoTextureFromJSObject(p js.Value) *VideoTexture {
 
 // NewVideoTextureOpts contains optional parameters for NewVideoTexture.
 type NewVideoTextureOpts struct {
-	GenerateMipMaps *bool
+	GenerateMipMaps *JSBool
 
-	InvertY *bool
+	InvertY *JSBool
 
-	SamplingMode *float64
+	SamplingMode *JSFloat64
 
-	Settings *VideoTextureSettings
+	Settings js.Value
 }
 
 // NewVideoTexture returns a new VideoTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videotexture
-func (b *Babylon) NewVideoTexture(name string, src string, scene *Scene, opts *NewVideoTextureOpts) *VideoTexture {
+func (ba *Babylon) NewVideoTexture(name string, src string, scene *Scene, opts *NewVideoTextureOpts) *VideoTexture {
 	if opts == nil {
 		opts = &NewVideoTextureOpts{}
 	}
 
-	p := b.ctx.Get("VideoTexture").New(name, src, scene.JSObject(), opts.GenerateMipMaps.JSObject(), opts.InvertY.JSObject(), opts.SamplingMode, opts.Settings.JSObject())
+	p := ba.ctx.Get("VideoTexture").New(name, src, scene.JSObject(), opts.GenerateMipMaps, opts.InvertY, opts.SamplingMode, opts.Settings)
 	return VideoTextureFromJSObject(p)
 }
 

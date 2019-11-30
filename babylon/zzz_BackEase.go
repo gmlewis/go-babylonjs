@@ -16,8 +16,8 @@ type BackEase struct{ *EasingFunction }
 func (b *BackEase) JSObject() js.Value { return b.p }
 
 // BackEase returns a BackEase JavaScript class.
-func (b *Babylon) BackEase() *BackEase {
-	p := b.ctx.Get("BackEase")
+func (ba *Babylon) BackEase() *BackEase {
+	p := ba.ctx.Get("BackEase")
 	return BackEaseFromJSObject(p)
 }
 
@@ -28,18 +28,18 @@ func BackEaseFromJSObject(p js.Value) *BackEase {
 
 // NewBackEaseOpts contains optional parameters for NewBackEase.
 type NewBackEaseOpts struct {
-	Amplitude *float64
+	Amplitude *JSFloat64
 }
 
 // NewBackEase returns a new BackEase object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.backease
-func (b *Babylon) NewBackEase(opts *NewBackEaseOpts) *BackEase {
+func (ba *Babylon) NewBackEase(opts *NewBackEaseOpts) *BackEase {
 	if opts == nil {
 		opts = &NewBackEaseOpts{}
 	}
 
-	p := b.ctx.Get("BackEase").New(opts.Amplitude)
+	p := ba.ctx.Get("BackEase").New(opts.Amplitude)
 	return BackEaseFromJSObject(p)
 }
 

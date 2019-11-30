@@ -16,8 +16,8 @@ type ElasticEase struct{ *EasingFunction }
 func (e *ElasticEase) JSObject() js.Value { return e.p }
 
 // ElasticEase returns a ElasticEase JavaScript class.
-func (b *Babylon) ElasticEase() *ElasticEase {
-	p := b.ctx.Get("ElasticEase")
+func (ba *Babylon) ElasticEase() *ElasticEase {
+	p := ba.ctx.Get("ElasticEase")
 	return ElasticEaseFromJSObject(p)
 }
 
@@ -28,20 +28,20 @@ func ElasticEaseFromJSObject(p js.Value) *ElasticEase {
 
 // NewElasticEaseOpts contains optional parameters for NewElasticEase.
 type NewElasticEaseOpts struct {
-	Oscillations *float64
+	Oscillations *JSFloat64
 
-	Springiness *float64
+	Springiness *JSFloat64
 }
 
 // NewElasticEase returns a new ElasticEase object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.elasticease
-func (b *Babylon) NewElasticEase(opts *NewElasticEaseOpts) *ElasticEase {
+func (ba *Babylon) NewElasticEase(opts *NewElasticEaseOpts) *ElasticEase {
 	if opts == nil {
 		opts = &NewElasticEaseOpts{}
 	}
 
-	p := b.ctx.Get("ElasticEase").New(opts.Oscillations, opts.Springiness)
+	p := ba.ctx.Get("ElasticEase").New(opts.Oscillations, opts.Springiness)
 	return ElasticEaseFromJSObject(p)
 }
 

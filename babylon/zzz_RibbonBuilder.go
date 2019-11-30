@@ -14,8 +14,8 @@ type RibbonBuilder struct{ p js.Value }
 func (r *RibbonBuilder) JSObject() js.Value { return r.p }
 
 // RibbonBuilder returns a RibbonBuilder JavaScript class.
-func (b *Babylon) RibbonBuilder() *RibbonBuilder {
-	p := b.ctx.Get("RibbonBuilder")
+func (ba *Babylon) RibbonBuilder() *RibbonBuilder {
+	p := ba.ctx.Get("RibbonBuilder")
 	return RibbonBuilderFromJSObject(p)
 }
 

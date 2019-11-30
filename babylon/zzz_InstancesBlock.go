@@ -16,8 +16,8 @@ type InstancesBlock struct{ *NodeMaterialBlock }
 func (i *InstancesBlock) JSObject() js.Value { return i.p }
 
 // InstancesBlock returns a InstancesBlock JavaScript class.
-func (b *Babylon) InstancesBlock() *InstancesBlock {
-	p := b.ctx.Get("InstancesBlock")
+func (ba *Babylon) InstancesBlock() *InstancesBlock {
+	p := ba.ctx.Get("InstancesBlock")
 	return InstancesBlockFromJSObject(p)
 }
 
@@ -29,8 +29,8 @@ func InstancesBlockFromJSObject(p js.Value) *InstancesBlock {
 // NewInstancesBlock returns a new InstancesBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancesblock
-func (b *Babylon) NewInstancesBlock(name string) *InstancesBlock {
-	p := b.ctx.Get("InstancesBlock").New(name)
+func (ba *Babylon) NewInstancesBlock(name string) *InstancesBlock {
+	p := ba.ctx.Get("InstancesBlock").New(name)
 	return InstancesBlockFromJSObject(p)
 }
 

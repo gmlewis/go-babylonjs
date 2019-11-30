@@ -15,8 +15,8 @@ type BoxParticleEmitter struct{ p js.Value }
 func (b *BoxParticleEmitter) JSObject() js.Value { return b.p }
 
 // BoxParticleEmitter returns a BoxParticleEmitter JavaScript class.
-func (b *Babylon) BoxParticleEmitter() *BoxParticleEmitter {
-	p := b.ctx.Get("BoxParticleEmitter")
+func (ba *Babylon) BoxParticleEmitter() *BoxParticleEmitter {
+	p := ba.ctx.Get("BoxParticleEmitter")
 	return BoxParticleEmitterFromJSObject(p)
 }
 
@@ -28,8 +28,8 @@ func BoxParticleEmitterFromJSObject(p js.Value) *BoxParticleEmitter {
 // NewBoxParticleEmitter returns a new BoxParticleEmitter object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.boxparticleemitter
-func (b *Babylon) NewBoxParticleEmitter() *BoxParticleEmitter {
-	p := b.ctx.Get("BoxParticleEmitter").New()
+func (ba *Babylon) NewBoxParticleEmitter() *BoxParticleEmitter {
+	p := ba.ctx.Get("BoxParticleEmitter").New()
 	return BoxParticleEmitterFromJSObject(p)
 }
 

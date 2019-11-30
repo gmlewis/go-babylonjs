@@ -14,8 +14,8 @@ type WeightedSound struct{ p js.Value }
 func (w *WeightedSound) JSObject() js.Value { return w.p }
 
 // WeightedSound returns a WeightedSound JavaScript class.
-func (b *Babylon) WeightedSound() *WeightedSound {
-	p := b.ctx.Get("WeightedSound")
+func (ba *Babylon) WeightedSound() *WeightedSound {
+	p := ba.ctx.Get("WeightedSound")
 	return WeightedSoundFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func WeightedSoundFromJSObject(p js.Value) *WeightedSound {
 // NewWeightedSound returns a new WeightedSound object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.weightedsound
-func (b *Babylon) NewWeightedSound(loop bool, sounds *Sound, weights float64) *WeightedSound {
-	p := b.ctx.Get("WeightedSound").New(loop.JSObject(), sounds.JSObject(), weights)
+func (ba *Babylon) NewWeightedSound(loop bool, sounds *Sound, weights float64) *WeightedSound {
+	p := ba.ctx.Get("WeightedSound").New(loop.JSObject(), sounds.JSObject(), weights)
 	return WeightedSoundFromJSObject(p)
 }
 

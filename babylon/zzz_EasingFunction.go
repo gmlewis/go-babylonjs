@@ -16,8 +16,8 @@ type EasingFunction struct{ p js.Value }
 func (e *EasingFunction) JSObject() js.Value { return e.p }
 
 // EasingFunction returns a EasingFunction JavaScript class.
-func (b *Babylon) EasingFunction() *EasingFunction {
-	p := b.ctx.Get("EasingFunction")
+func (ba *Babylon) EasingFunction() *EasingFunction {
+	p := ba.ctx.Get("EasingFunction")
 	return EasingFunctionFromJSObject(p)
 }
 

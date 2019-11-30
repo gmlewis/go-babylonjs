@@ -15,8 +15,8 @@ type NullEngine struct{ *Engine }
 func (n *NullEngine) JSObject() js.Value { return n.p }
 
 // NullEngine returns a NullEngine JavaScript class.
-func (b *Babylon) NullEngine() *NullEngine {
-	p := b.ctx.Get("NullEngine")
+func (ba *Babylon) NullEngine() *NullEngine {
+	p := ba.ctx.Get("NullEngine")
 	return NullEngineFromJSObject(p)
 }
 
@@ -33,12 +33,12 @@ type NewNullEngineOpts struct {
 // NewNullEngine returns a new NullEngine object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nullengine
-func (b *Babylon) NewNullEngine(opts *NewNullEngineOpts) *NullEngine {
+func (ba *Babylon) NewNullEngine(opts *NewNullEngineOpts) *NullEngine {
 	if opts == nil {
 		opts = &NewNullEngineOpts{}
 	}
 
-	p := b.ctx.Get("NullEngine").New(opts.Options.JSObject())
+	p := ba.ctx.Get("NullEngine").New(opts.Options.JSObject())
 	return NullEngineFromJSObject(p)
 }
 

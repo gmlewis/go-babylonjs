@@ -15,8 +15,8 @@ type PointParticleEmitter struct{ p js.Value }
 func (p *PointParticleEmitter) JSObject() js.Value { return p.p }
 
 // PointParticleEmitter returns a PointParticleEmitter JavaScript class.
-func (b *Babylon) PointParticleEmitter() *PointParticleEmitter {
-	p := b.ctx.Get("PointParticleEmitter")
+func (ba *Babylon) PointParticleEmitter() *PointParticleEmitter {
+	p := ba.ctx.Get("PointParticleEmitter")
 	return PointParticleEmitterFromJSObject(p)
 }
 
@@ -28,8 +28,8 @@ func PointParticleEmitterFromJSObject(p js.Value) *PointParticleEmitter {
 // NewPointParticleEmitter returns a new PointParticleEmitter object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointparticleemitter
-func (b *Babylon) NewPointParticleEmitter() *PointParticleEmitter {
-	p := b.ctx.Get("PointParticleEmitter").New()
+func (ba *Babylon) NewPointParticleEmitter() *PointParticleEmitter {
+	p := ba.ctx.Get("PointParticleEmitter").New()
 	return PointParticleEmitterFromJSObject(p)
 }
 

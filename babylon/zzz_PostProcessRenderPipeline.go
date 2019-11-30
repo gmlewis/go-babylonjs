@@ -16,8 +16,8 @@ type PostProcessRenderPipeline struct{ p js.Value }
 func (p *PostProcessRenderPipeline) JSObject() js.Value { return p.p }
 
 // PostProcessRenderPipeline returns a PostProcessRenderPipeline JavaScript class.
-func (b *Babylon) PostProcessRenderPipeline() *PostProcessRenderPipeline {
-	p := b.ctx.Get("PostProcessRenderPipeline")
+func (ba *Babylon) PostProcessRenderPipeline() *PostProcessRenderPipeline {
+	p := ba.ctx.Get("PostProcessRenderPipeline")
 	return PostProcessRenderPipelineFromJSObject(p)
 }
 
@@ -29,8 +29,8 @@ func PostProcessRenderPipelineFromJSObject(p js.Value) *PostProcessRenderPipelin
 // NewPostProcessRenderPipeline returns a new PostProcessRenderPipeline object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipeline
-func (b *Babylon) NewPostProcessRenderPipeline(engine *Engine, name string) *PostProcessRenderPipeline {
-	p := b.ctx.Get("PostProcessRenderPipeline").New(engine.JSObject(), name)
+func (ba *Babylon) NewPostProcessRenderPipeline(engine *Engine, name string) *PostProcessRenderPipeline {
+	p := ba.ctx.Get("PostProcessRenderPipeline").New(engine.JSObject(), name)
 	return PostProcessRenderPipelineFromJSObject(p)
 }
 

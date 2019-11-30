@@ -14,8 +14,8 @@ type TrigonometryBlock struct{ *NodeMaterialBlock }
 func (t *TrigonometryBlock) JSObject() js.Value { return t.p }
 
 // TrigonometryBlock returns a TrigonometryBlock JavaScript class.
-func (b *Babylon) TrigonometryBlock() *TrigonometryBlock {
-	p := b.ctx.Get("TrigonometryBlock")
+func (ba *Babylon) TrigonometryBlock() *TrigonometryBlock {
+	p := ba.ctx.Get("TrigonometryBlock")
 	return TrigonometryBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func TrigonometryBlockFromJSObject(p js.Value) *TrigonometryBlock {
 // NewTrigonometryBlock returns a new TrigonometryBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.trigonometryblock
-func (b *Babylon) NewTrigonometryBlock(name string) *TrigonometryBlock {
-	p := b.ctx.Get("TrigonometryBlock").New(name)
+func (ba *Babylon) NewTrigonometryBlock(name string) *TrigonometryBlock {
+	p := ba.ctx.Get("TrigonometryBlock").New(name)
 	return TrigonometryBlockFromJSObject(p)
 }
 

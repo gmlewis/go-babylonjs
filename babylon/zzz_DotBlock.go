@@ -14,8 +14,8 @@ type DotBlock struct{ *NodeMaterialBlock }
 func (d *DotBlock) JSObject() js.Value { return d.p }
 
 // DotBlock returns a DotBlock JavaScript class.
-func (b *Babylon) DotBlock() *DotBlock {
-	p := b.ctx.Get("DotBlock")
+func (ba *Babylon) DotBlock() *DotBlock {
+	p := ba.ctx.Get("DotBlock")
 	return DotBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func DotBlockFromJSObject(p js.Value) *DotBlock {
 // NewDotBlock returns a new DotBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.dotblock
-func (b *Babylon) NewDotBlock(name string) *DotBlock {
-	p := b.ctx.Get("DotBlock").New(name)
+func (ba *Babylon) NewDotBlock(name string) *DotBlock {
+	p := ba.ctx.Get("DotBlock").New(name)
 	return DotBlockFromJSObject(p)
 }
 

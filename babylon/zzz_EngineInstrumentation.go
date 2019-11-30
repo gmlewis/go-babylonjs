@@ -16,8 +16,8 @@ type EngineInstrumentation struct{ p js.Value }
 func (e *EngineInstrumentation) JSObject() js.Value { return e.p }
 
 // EngineInstrumentation returns a EngineInstrumentation JavaScript class.
-func (b *Babylon) EngineInstrumentation() *EngineInstrumentation {
-	p := b.ctx.Get("EngineInstrumentation")
+func (ba *Babylon) EngineInstrumentation() *EngineInstrumentation {
+	p := ba.ctx.Get("EngineInstrumentation")
 	return EngineInstrumentationFromJSObject(p)
 }
 
@@ -29,8 +29,8 @@ func EngineInstrumentationFromJSObject(p js.Value) *EngineInstrumentation {
 // NewEngineInstrumentation returns a new EngineInstrumentation object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.engineinstrumentation
-func (b *Babylon) NewEngineInstrumentation(engine *Engine) *EngineInstrumentation {
-	p := b.ctx.Get("EngineInstrumentation").New(engine.JSObject())
+func (ba *Babylon) NewEngineInstrumentation(engine *Engine) *EngineInstrumentation {
+	p := ba.ctx.Get("EngineInstrumentation").New(engine.JSObject())
 	return EngineInstrumentationFromJSObject(p)
 }
 

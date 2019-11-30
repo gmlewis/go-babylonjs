@@ -16,8 +16,8 @@ type KHR_materials_clearcoat struct{ p js.Value }
 func (k *KHR_materials_clearcoat) JSObject() js.Value { return k.p }
 
 // KHR_materials_clearcoat returns a KHR_materials_clearcoat JavaScript class.
-func (b *Babylon) KHR_materials_clearcoat() *KHR_materials_clearcoat {
-	p := b.ctx.Get("KHR_materials_clearcoat")
+func (ba *Babylon) KHR_materials_clearcoat() *KHR_materials_clearcoat {
+	p := ba.ctx.Get("KHR_materials_clearcoat")
 	return KHR_materials_clearcoatFromJSObject(p)
 }
 

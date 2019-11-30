@@ -14,8 +14,8 @@ type ClipboardEventTypes struct{ p js.Value }
 func (c *ClipboardEventTypes) JSObject() js.Value { return c.p }
 
 // ClipboardEventTypes returns a ClipboardEventTypes JavaScript class.
-func (b *Babylon) ClipboardEventTypes() *ClipboardEventTypes {
-	p := b.ctx.Get("ClipboardEventTypes")
+func (ba *Babylon) ClipboardEventTypes() *ClipboardEventTypes {
+	p := ba.ctx.Get("ClipboardEventTypes")
 	return ClipboardEventTypesFromJSObject(p)
 }
 

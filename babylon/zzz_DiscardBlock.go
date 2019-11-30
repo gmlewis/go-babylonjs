@@ -14,8 +14,8 @@ type DiscardBlock struct{ *NodeMaterialBlock }
 func (d *DiscardBlock) JSObject() js.Value { return d.p }
 
 // DiscardBlock returns a DiscardBlock JavaScript class.
-func (b *Babylon) DiscardBlock() *DiscardBlock {
-	p := b.ctx.Get("DiscardBlock")
+func (ba *Babylon) DiscardBlock() *DiscardBlock {
+	p := ba.ctx.Get("DiscardBlock")
 	return DiscardBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func DiscardBlockFromJSObject(p js.Value) *DiscardBlock {
 // NewDiscardBlock returns a new DiscardBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.discardblock
-func (b *Babylon) NewDiscardBlock(name string) *DiscardBlock {
-	p := b.ctx.Get("DiscardBlock").New(name)
+func (ba *Babylon) NewDiscardBlock(name string) *DiscardBlock {
+	p := ba.ctx.Get("DiscardBlock").New(name)
 	return DiscardBlockFromJSObject(p)
 }
 

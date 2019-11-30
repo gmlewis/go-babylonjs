@@ -17,8 +17,8 @@ type ProceduralTexture struct{ *Texture }
 func (p *ProceduralTexture) JSObject() js.Value { return p.p }
 
 // ProceduralTexture returns a ProceduralTexture JavaScript class.
-func (b *Babylon) ProceduralTexture() *ProceduralTexture {
-	p := b.ctx.Get("ProceduralTexture")
+func (ba *Babylon) ProceduralTexture() *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture")
 	return ProceduralTextureFromJSObject(p)
 }
 
@@ -31,20 +31,20 @@ func ProceduralTextureFromJSObject(p js.Value) *ProceduralTexture {
 type NewProceduralTextureOpts struct {
 	FallbackTexture *Texture
 
-	GenerateMipMaps *bool
+	GenerateMipMaps *JSBool
 
-	IsCube *bool
+	IsCube *JSBool
 }
 
 // NewProceduralTexture returns a new ProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexture
-func (b *Babylon) NewProceduralTexture(name string, size interface{}, fragment interface{}, scene *Scene, opts *NewProceduralTextureOpts) *ProceduralTexture {
+func (ba *Babylon) NewProceduralTexture(name string, size interface{}, fragment interface{}, scene *Scene, opts *NewProceduralTextureOpts) *ProceduralTexture {
 	if opts == nil {
 		opts = &NewProceduralTextureOpts{}
 	}
 
-	p := b.ctx.Get("ProceduralTexture").New(name, size, fragment, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps.JSObject(), opts.IsCube.JSObject())
+	p := ba.ctx.Get("ProceduralTexture").New(name, size, fragment, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps, opts.IsCube)
 	return ProceduralTextureFromJSObject(p)
 }
 

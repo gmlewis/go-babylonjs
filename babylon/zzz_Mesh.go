@@ -14,8 +14,8 @@ type Mesh struct{ *AbstractMesh }
 func (m *Mesh) JSObject() js.Value { return m.p }
 
 // Mesh returns a Mesh JavaScript class.
-func (b *Babylon) Mesh() *Mesh {
-	p := b.ctx.Get("Mesh")
+func (ba *Babylon) Mesh() *Mesh {
+	p := ba.ctx.Get("Mesh")
 	return MeshFromJSObject(p)
 }
 
@@ -32,20 +32,20 @@ type NewMeshOpts struct {
 
 	Source *Mesh
 
-	DoNotCloneChildren *bool
+	DoNotCloneChildren *JSBool
 
-	ClonePhysicsImpostor *bool
+	ClonePhysicsImpostor *JSBool
 }
 
 // NewMesh returns a new Mesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.mesh
-func (b *Babylon) NewMesh(name string, opts *NewMeshOpts) *Mesh {
+func (ba *Babylon) NewMesh(name string, opts *NewMeshOpts) *Mesh {
 	if opts == nil {
 		opts = &NewMeshOpts{}
 	}
 
-	p := b.ctx.Get("Mesh").New(name, opts.Scene.JSObject(), opts.Parent.JSObject(), opts.Source.JSObject(), opts.DoNotCloneChildren.JSObject(), opts.ClonePhysicsImpostor.JSObject())
+	p := ba.ctx.Get("Mesh").New(name, opts.Scene.JSObject(), opts.Parent.JSObject(), opts.Source.JSObject(), opts.DoNotCloneChildren, opts.ClonePhysicsImpostor)
 	return MeshFromJSObject(p)
 }
 

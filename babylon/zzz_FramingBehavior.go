@@ -16,8 +16,8 @@ type FramingBehavior struct{ p js.Value }
 func (f *FramingBehavior) JSObject() js.Value { return f.p }
 
 // FramingBehavior returns a FramingBehavior JavaScript class.
-func (b *Babylon) FramingBehavior() *FramingBehavior {
-	p := b.ctx.Get("FramingBehavior")
+func (ba *Babylon) FramingBehavior() *FramingBehavior {
+	p := ba.ctx.Get("FramingBehavior")
 	return FramingBehaviorFromJSObject(p)
 }
 

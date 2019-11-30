@@ -16,8 +16,8 @@ type Texture struct{ *BaseTexture }
 func (t *Texture) JSObject() js.Value { return t.p }
 
 // Texture returns a Texture JavaScript class.
-func (b *Babylon) Texture() *Texture {
-	p := b.ctx.Get("Texture")
+func (ba *Babylon) Texture() *Texture {
+	p := ba.ctx.Get("Texture")
 	return TextureFromJSObject(p)
 }
 
@@ -28,34 +28,34 @@ func TextureFromJSObject(p js.Value) *Texture {
 
 // NewTextureOpts contains optional parameters for NewTexture.
 type NewTextureOpts struct {
-	NoMipmap *bool
+	NoMipmap *JSBool
 
-	InvertY *bool
+	InvertY *JSBool
 
-	SamplingMode *float64
+	SamplingMode *JSFloat64
 
 	OnLoad *func()
 
 	OnError *func()
 
-	Buffer *string
+	Buffer *JSString
 
-	DeleteBuffer *bool
+	DeleteBuffer *JSBool
 
-	Format *float64
+	Format *JSFloat64
 
-	MimeType *string
+	MimeType *JSString
 }
 
 // NewTexture returns a new Texture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.texture
-func (b *Babylon) NewTexture(url string, sceneOrEngine *Scene, opts *NewTextureOpts) *Texture {
+func (ba *Babylon) NewTexture(url string, sceneOrEngine *Scene, opts *NewTextureOpts) *Texture {
 	if opts == nil {
 		opts = &NewTextureOpts{}
 	}
 
-	p := b.ctx.Get("Texture").New(url, sceneOrEngine.JSObject(), opts.NoMipmap.JSObject(), opts.InvertY.JSObject(), opts.SamplingMode, opts.OnLoad, opts.OnError, opts.Buffer, opts.DeleteBuffer.JSObject(), opts.Format, opts.MimeType)
+	p := ba.ctx.Get("Texture").New(url, sceneOrEngine.JSObject(), opts.NoMipmap, opts.InvertY, opts.SamplingMode, opts.OnLoad, opts.OnError, opts.Buffer, opts.DeleteBuffer, opts.Format, opts.MimeType)
 	return TextureFromJSObject(p)
 }
 

@@ -271,16 +271,22 @@ func (s *Signature) parseParameters() {
 			if ignoreNextType {
 				ignoreNextType = false
 			} else {
-				switch m[2] {
-				case "Nullable", "DeepImmutable", "Partial": // ignore and pick up next class
-				case "boolean":
-					types = append(types, "bool")
-				case "number":
-					types = append(types, "float64")
-				case "TCamera": // special case
-					types = append(types, "*Camera")
-				default:
-					types = append(types, m[2])
+				if i := len(types); i > 0 && types[i-1] == "Array" {
+					types[i-1] = "[]" + m[2]
+					// } else if i > 0 && types[i-1] == "*Nullable" {
+					// 	types[i-1] = "*" + m[2] // Override last type
+				} else {
+					switch m[2] {
+					case "Nullable", "DeepImmutable", "Partial": // ignore and pick up next class
+					case "boolean":
+						types = append(types, "bool")
+					case "number":
+						types = append(types, "float64")
+					case "TCamera": // special case
+						types = append(types, "*Camera")
+					default:
+						types = append(types, m[2])
+					}
 				}
 			}
 		}
@@ -327,7 +333,14 @@ func (s *Signature) parseParameters() {
 					paramType = "interface{}"
 				case "function":
 					paramType = "func()"
-				case "string", "float64":
+				case "[]Worker":
+					paramType = "[]js.Value"
+				case "string":
+					paramType = "JSString"
+				case "float64":
+					paramType = "JSFloat64"
+				case "bool":
+					paramType = "JSBool"
 				case "*DistanceJointData",
 					"*EffectWrapperCreationOptions",
 					"*EngineOptions",
@@ -339,16 +352,43 @@ func (s *Signature) parseParameters() {
 					"*IHighlightLayerOptions",
 					"*IHtmlElementTextureOptions",
 					"*IMultiRenderTargetOptions",
+					"*INodeMaterialOptions",
 					"*InternalTextureSource",
+					"*IOceanPostProcessOptions",
+					"*IPhysicsEnabledObject",
+					"*IShaderMaterialOptions",
+					"*IShadowLight",
+					"*ISoundOptions",
+					"*ISoundTrackOptions",
+					"*ISpriteManager",
+					"*MeshLoadOptions",
 					"*NodeMaterialBlockConnectionPointTypes",
 					"*NodeMaterialBlockTargets",
+					"*NodeMaterialConnectionPointDirection",
+					"*PhysicsImpostorParameters",
 					"*PhysicsJointData",
+					"*SceneOptions",
 					"*SpringJointData",
+					"*TonemappingOperator",
+					"*VideoRecorderOptions",
+					"*VideoTextureSettings",
+					"*VRExperienceHelperOptions",
+					"*WebVROptions",
+					"*WebXRState",
+					"*XRInputSource",
+					"*XRReferenceSpaceType",
+					"*XRSessionMode",
+					"ArrayBufferView",
+					"ClipboardEvent",
 					"HTMLCanvasElement",
 					"HTMLElement",
 					"HTMLVideoElement",
+					"IPhysicsEnginePlugin",
 					"KeyboardEvent",
+					"PointerEvent",
 					"WebGLRenderingContext",
+					"Worker",
+					"null",
 					"object":
 					paramType = "js.Value"
 				default:
@@ -377,6 +417,8 @@ func (s *Signature) parseParameters() {
 					paramType = "interface{}"
 				case "function":
 					paramType = "func()"
+				case "[]Worker":
+					paramType = "[]js.Value"
 				case "string", "float64":
 				case
 					"*DistanceJointData",
@@ -390,17 +432,43 @@ func (s *Signature) parseParameters() {
 					"*IHighlightLayerOptions",
 					"*IHtmlElementTextureOptions",
 					"*IMultiRenderTargetOptions",
+					"*INodeMaterialOptions",
 					"*InternalTextureSource",
+					"*IOceanPostProcessOptions",
+					"*IPhysicsEnabledObject",
+					"*IShaderMaterialOptions",
+					"*IShadowLight",
+					"*ISoundOptions",
+					"*ISoundTrackOptions",
+					"*ISpriteManager",
+					"*MeshLoadOptions",
 					"*NodeMaterialBlockConnectionPointTypes",
 					"*NodeMaterialBlockTargets",
+					"*NodeMaterialConnectionPointDirection",
+					"*PhysicsImpostorParameters",
 					"*PhysicsJointData",
+					"*SceneOptions",
 					"*SpringJointData",
+					"*TonemappingOperator",
+					"*VideoRecorderOptions",
+					"*VideoTextureSettings",
+					"*VRExperienceHelperOptions",
+					"*WebVROptions",
+					"*WebXRState",
+					"*XRInputSource",
+					"*XRReferenceSpaceType",
+					"*XRSessionMode",
+					"ArrayBufferView",
 					"ClipboardEvent",
 					"HTMLCanvasElement",
 					"HTMLElement",
 					"HTMLVideoElement",
+					"IPhysicsEnginePlugin",
 					"KeyboardEvent",
+					"PointerEvent",
 					"WebGLRenderingContext",
+					"Worker",
+					"null",
 					"object":
 					paramType = "js.Value"
 				default:

@@ -16,8 +16,8 @@ type PhysicsUpdraftEventOptions struct{ p js.Value }
 func (p *PhysicsUpdraftEventOptions) JSObject() js.Value { return p.p }
 
 // PhysicsUpdraftEventOptions returns a PhysicsUpdraftEventOptions JavaScript class.
-func (b *Babylon) PhysicsUpdraftEventOptions() *PhysicsUpdraftEventOptions {
-	p := b.ctx.Get("PhysicsUpdraftEventOptions")
+func (ba *Babylon) PhysicsUpdraftEventOptions() *PhysicsUpdraftEventOptions {
+	p := ba.ctx.Get("PhysicsUpdraftEventOptions")
 	return PhysicsUpdraftEventOptionsFromJSObject(p)
 }
 

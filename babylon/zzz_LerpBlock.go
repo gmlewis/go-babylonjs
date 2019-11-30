@@ -14,8 +14,8 @@ type LerpBlock struct{ *NodeMaterialBlock }
 func (l *LerpBlock) JSObject() js.Value { return l.p }
 
 // LerpBlock returns a LerpBlock JavaScript class.
-func (b *Babylon) LerpBlock() *LerpBlock {
-	p := b.ctx.Get("LerpBlock")
+func (ba *Babylon) LerpBlock() *LerpBlock {
+	p := ba.ctx.Get("LerpBlock")
 	return LerpBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func LerpBlockFromJSObject(p js.Value) *LerpBlock {
 // NewLerpBlock returns a new LerpBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lerpblock
-func (b *Babylon) NewLerpBlock(name string) *LerpBlock {
-	p := b.ctx.Get("LerpBlock").New(name)
+func (ba *Babylon) NewLerpBlock(name string) *LerpBlock {
+	p := ba.ctx.Get("LerpBlock").New(name)
 	return LerpBlockFromJSObject(p)
 }
 

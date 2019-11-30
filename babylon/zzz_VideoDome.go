@@ -17,8 +17,8 @@ type VideoDome struct{ *TransformNode }
 func (v *VideoDome) JSObject() js.Value { return v.p }
 
 // VideoDome returns a VideoDome JavaScript class.
-func (b *Babylon) VideoDome() *VideoDome {
-	p := b.ctx.Get("VideoDome")
+func (ba *Babylon) VideoDome() *VideoDome {
+	p := ba.ctx.Get("VideoDome")
 	return VideoDomeFromJSObject(p)
 }
 
@@ -30,8 +30,8 @@ func VideoDomeFromJSObject(p js.Value) *VideoDome {
 // NewVideoDome returns a new VideoDome object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.videodome
-func (b *Babylon) NewVideoDome(name string, urlsOrVideo string, options js.Value, scene *Scene) *VideoDome {
-	p := b.ctx.Get("VideoDome").New(name, urlsOrVideo, options, scene.JSObject())
+func (ba *Babylon) NewVideoDome(name string, urlsOrVideo string, options js.Value, scene *Scene) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(name, urlsOrVideo, options, scene.JSObject())
 	return VideoDomeFromJSObject(p)
 }
 

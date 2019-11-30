@@ -14,8 +14,8 @@ type GizmoManager struct{ p js.Value }
 func (g *GizmoManager) JSObject() js.Value { return g.p }
 
 // GizmoManager returns a GizmoManager JavaScript class.
-func (b *Babylon) GizmoManager() *GizmoManager {
-	p := b.ctx.Get("GizmoManager")
+func (ba *Babylon) GizmoManager() *GizmoManager {
+	p := ba.ctx.Get("GizmoManager")
 	return GizmoManagerFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func GizmoManagerFromJSObject(p js.Value) *GizmoManager {
 // NewGizmoManager returns a new GizmoManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.gizmomanager
-func (b *Babylon) NewGizmoManager(scene *Scene) *GizmoManager {
-	p := b.ctx.Get("GizmoManager").New(scene.JSObject())
+func (ba *Babylon) NewGizmoManager(scene *Scene) *GizmoManager {
+	p := ba.ctx.Get("GizmoManager").New(scene.JSObject())
 	return GizmoManagerFromJSObject(p)
 }
 

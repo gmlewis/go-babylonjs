@@ -14,8 +14,8 @@ type RawTexture2DArray struct{ *Texture }
 func (r *RawTexture2DArray) JSObject() js.Value { return r.p }
 
 // RawTexture2DArray returns a RawTexture2DArray JavaScript class.
-func (b *Babylon) RawTexture2DArray() *RawTexture2DArray {
-	p := b.ctx.Get("RawTexture2DArray")
+func (ba *Babylon) RawTexture2DArray() *RawTexture2DArray {
+	p := ba.ctx.Get("RawTexture2DArray")
 	return RawTexture2DArrayFromJSObject(p)
 }
 
@@ -26,24 +26,24 @@ func RawTexture2DArrayFromJSObject(p js.Value) *RawTexture2DArray {
 
 // NewRawTexture2DArrayOpts contains optional parameters for NewRawTexture2DArray.
 type NewRawTexture2DArrayOpts struct {
-	GenerateMipMaps *bool
+	GenerateMipMaps *JSBool
 
-	InvertY *bool
+	InvertY *JSBool
 
-	SamplingMode *float64
+	SamplingMode *JSFloat64
 
-	TextureType *float64
+	TextureType *JSFloat64
 }
 
 // NewRawTexture2DArray returns a new RawTexture2DArray object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rawtexture2darray
-func (b *Babylon) NewRawTexture2DArray(data ArrayBufferView, width float64, height float64, depth float64, format float64, scene *Scene, opts *NewRawTexture2DArrayOpts) *RawTexture2DArray {
+func (ba *Babylon) NewRawTexture2DArray(data js.Value, width float64, height float64, depth float64, format float64, scene *Scene, opts *NewRawTexture2DArrayOpts) *RawTexture2DArray {
 	if opts == nil {
 		opts = &NewRawTexture2DArrayOpts{}
 	}
 
-	p := b.ctx.Get("RawTexture2DArray").New(data.JSObject(), width, height, depth, format, scene.JSObject(), opts.GenerateMipMaps.JSObject(), opts.InvertY.JSObject(), opts.SamplingMode, opts.TextureType)
+	p := ba.ctx.Get("RawTexture2DArray").New(data, width, height, depth, format, scene.JSObject(), opts.GenerateMipMaps, opts.InvertY, opts.SamplingMode, opts.TextureType)
 	return RawTexture2DArrayFromJSObject(p)
 }
 

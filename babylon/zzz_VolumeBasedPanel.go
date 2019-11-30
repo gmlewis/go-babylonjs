@@ -14,8 +14,8 @@ type VolumeBasedPanel struct{ *Container3D }
 func (v *VolumeBasedPanel) JSObject() js.Value { return v.p }
 
 // VolumeBasedPanel returns a VolumeBasedPanel JavaScript class.
-func (b *Babylon) VolumeBasedPanel() *VolumeBasedPanel {
-	p := b.ctx.Get("VolumeBasedPanel")
+func (ba *Babylon) VolumeBasedPanel() *VolumeBasedPanel {
+	p := ba.ctx.Get("VolumeBasedPanel")
 	return VolumeBasedPanelFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func VolumeBasedPanelFromJSObject(p js.Value) *VolumeBasedPanel {
 // NewVolumeBasedPanel returns a new VolumeBasedPanel object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.volumebasedpanel
-func (b *Babylon) NewVolumeBasedPanel() *VolumeBasedPanel {
-	p := b.ctx.Get("VolumeBasedPanel").New()
+func (ba *Babylon) NewVolumeBasedPanel() *VolumeBasedPanel {
+	p := ba.ctx.Get("VolumeBasedPanel").New()
 	return VolumeBasedPanelFromJSObject(p)
 }
 

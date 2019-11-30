@@ -14,8 +14,8 @@ type TonemapPostProcess struct{ *PostProcess }
 func (t *TonemapPostProcess) JSObject() js.Value { return t.p }
 
 // TonemapPostProcess returns a TonemapPostProcess JavaScript class.
-func (b *Babylon) TonemapPostProcess() *TonemapPostProcess {
-	p := b.ctx.Get("TonemapPostProcess")
+func (ba *Babylon) TonemapPostProcess() *TonemapPostProcess {
+	p := ba.ctx.Get("TonemapPostProcess")
 	return TonemapPostProcessFromJSObject(p)
 }
 
@@ -26,22 +26,22 @@ func TonemapPostProcessFromJSObject(p js.Value) *TonemapPostProcess {
 
 // NewTonemapPostProcessOpts contains optional parameters for NewTonemapPostProcess.
 type NewTonemapPostProcessOpts struct {
-	SamplingMode *float64
+	SamplingMode *JSFloat64
 
 	Engine *Engine
 
-	TextureFormat *float64
+	TextureFormat *JSFloat64
 }
 
 // NewTonemapPostProcess returns a new TonemapPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.tonemappostprocess
-func (b *Babylon) NewTonemapPostProcess(name string, _operator *TonemappingOperator, exposureAdjustment float64, camera *Camera, opts *NewTonemapPostProcessOpts) *TonemapPostProcess {
+func (ba *Babylon) NewTonemapPostProcess(name string, _operator js.Value, exposureAdjustment float64, camera *Camera, opts *NewTonemapPostProcessOpts) *TonemapPostProcess {
 	if opts == nil {
 		opts = &NewTonemapPostProcessOpts{}
 	}
 
-	p := b.ctx.Get("TonemapPostProcess").New(name, _operator.JSObject(), exposureAdjustment, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.TextureFormat)
+	p := ba.ctx.Get("TonemapPostProcess").New(name, _operator, exposureAdjustment, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.TextureFormat)
 	return TonemapPostProcessFromJSObject(p)
 }
 

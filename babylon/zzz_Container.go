@@ -16,8 +16,8 @@ type Container struct{ *Control }
 func (c *Container) JSObject() js.Value { return c.p }
 
 // Container returns a Container JavaScript class.
-func (b *Babylon) Container() *Container {
-	p := b.ctx.Get("Container")
+func (ba *Babylon) Container() *Container {
+	p := ba.ctx.Get("Container")
 	return ContainerFromJSObject(p)
 }
 
@@ -28,18 +28,18 @@ func ContainerFromJSObject(p js.Value) *Container {
 
 // NewContainerOpts contains optional parameters for NewContainer.
 type NewContainerOpts struct {
-	Name *string
+	Name *JSString
 }
 
 // NewContainer returns a new Container object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.container
-func (b *Babylon) NewContainer(opts *NewContainerOpts) *Container {
+func (ba *Babylon) NewContainer(opts *NewContainerOpts) *Container {
 	if opts == nil {
 		opts = &NewContainerOpts{}
 	}
 
-	p := b.ctx.Get("Container").New(opts.Name)
+	p := ba.ctx.Get("Container").New(opts.Name)
 	return ContainerFromJSObject(p)
 }
 

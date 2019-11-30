@@ -14,8 +14,8 @@ type KHR_draco_mesh_compression struct{ p js.Value }
 func (k *KHR_draco_mesh_compression) JSObject() js.Value { return k.p }
 
 // KHR_draco_mesh_compression returns a KHR_draco_mesh_compression JavaScript class.
-func (b *Babylon) KHR_draco_mesh_compression() *KHR_draco_mesh_compression {
-	p := b.ctx.Get("KHR_draco_mesh_compression")
+func (ba *Babylon) KHR_draco_mesh_compression() *KHR_draco_mesh_compression {
+	p := ba.ctx.Get("KHR_draco_mesh_compression")
 	return KHR_draco_mesh_compressionFromJSObject(p)
 }
 

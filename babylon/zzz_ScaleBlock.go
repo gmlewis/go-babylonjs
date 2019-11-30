@@ -14,8 +14,8 @@ type ScaleBlock struct{ *NodeMaterialBlock }
 func (s *ScaleBlock) JSObject() js.Value { return s.p }
 
 // ScaleBlock returns a ScaleBlock JavaScript class.
-func (b *Babylon) ScaleBlock() *ScaleBlock {
-	p := b.ctx.Get("ScaleBlock")
+func (ba *Babylon) ScaleBlock() *ScaleBlock {
+	p := ba.ctx.Get("ScaleBlock")
 	return ScaleBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func ScaleBlockFromJSObject(p js.Value) *ScaleBlock {
 // NewScaleBlock returns a new ScaleBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scaleblock
-func (b *Babylon) NewScaleBlock(name string) *ScaleBlock {
-	p := b.ctx.Get("ScaleBlock").New(name)
+func (ba *Babylon) NewScaleBlock(name string) *ScaleBlock {
+	p := ba.ctx.Get("ScaleBlock").New(name)
 	return ScaleBlockFromJSObject(p)
 }
 

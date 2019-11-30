@@ -17,8 +17,8 @@ type WebVRFreeCamera struct{ *FreeCamera }
 func (w *WebVRFreeCamera) JSObject() js.Value { return w.p }
 
 // WebVRFreeCamera returns a WebVRFreeCamera JavaScript class.
-func (b *Babylon) WebVRFreeCamera() *WebVRFreeCamera {
-	p := b.ctx.Get("WebVRFreeCamera")
+func (ba *Babylon) WebVRFreeCamera() *WebVRFreeCamera {
+	p := ba.ctx.Get("WebVRFreeCamera")
 	return WebVRFreeCameraFromJSObject(p)
 }
 
@@ -29,18 +29,18 @@ func WebVRFreeCameraFromJSObject(p js.Value) *WebVRFreeCamera {
 
 // NewWebVRFreeCameraOpts contains optional parameters for NewWebVRFreeCamera.
 type NewWebVRFreeCameraOpts struct {
-	WebVROptions *WebVROptions
+	WebVROptions js.Value
 }
 
 // NewWebVRFreeCamera returns a new WebVRFreeCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webvrfreecamera
-func (b *Babylon) NewWebVRFreeCamera(name string, position *Vector3, scene *Scene, opts *NewWebVRFreeCameraOpts) *WebVRFreeCamera {
+func (ba *Babylon) NewWebVRFreeCamera(name string, position *Vector3, scene *Scene, opts *NewWebVRFreeCameraOpts) *WebVRFreeCamera {
 	if opts == nil {
 		opts = &NewWebVRFreeCameraOpts{}
 	}
 
-	p := b.ctx.Get("WebVRFreeCamera").New(name, position.JSObject(), scene.JSObject(), opts.WebVROptions.JSObject())
+	p := ba.ctx.Get("WebVRFreeCamera").New(name, position.JSObject(), scene.JSObject(), opts.WebVROptions)
 	return WebVRFreeCameraFromJSObject(p)
 }
 

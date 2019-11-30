@@ -14,8 +14,8 @@ type GroundBuilder struct{ p js.Value }
 func (g *GroundBuilder) JSObject() js.Value { return g.p }
 
 // GroundBuilder returns a GroundBuilder JavaScript class.
-func (b *Babylon) GroundBuilder() *GroundBuilder {
-	p := b.ctx.Get("GroundBuilder")
+func (ba *Babylon) GroundBuilder() *GroundBuilder {
+	p := ba.ctx.Get("GroundBuilder")
 	return GroundBuilderFromJSObject(p)
 }
 

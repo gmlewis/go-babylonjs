@@ -16,8 +16,8 @@ type RenderingManager struct{ p js.Value }
 func (r *RenderingManager) JSObject() js.Value { return r.p }
 
 // RenderingManager returns a RenderingManager JavaScript class.
-func (b *Babylon) RenderingManager() *RenderingManager {
-	p := b.ctx.Get("RenderingManager")
+func (ba *Babylon) RenderingManager() *RenderingManager {
+	p := ba.ctx.Get("RenderingManager")
 	return RenderingManagerFromJSObject(p)
 }
 
@@ -29,8 +29,8 @@ func RenderingManagerFromJSObject(p js.Value) *RenderingManager {
 // NewRenderingManager returns a new RenderingManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.renderingmanager
-func (b *Babylon) NewRenderingManager(scene *Scene) *RenderingManager {
-	p := b.ctx.Get("RenderingManager").New(scene.JSObject())
+func (ba *Babylon) NewRenderingManager(scene *Scene) *RenderingManager {
+	p := ba.ctx.Get("RenderingManager").New(scene.JSObject())
 	return RenderingManagerFromJSObject(p)
 }
 

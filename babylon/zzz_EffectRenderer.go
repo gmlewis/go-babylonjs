@@ -14,8 +14,8 @@ type EffectRenderer struct{ p js.Value }
 func (e *EffectRenderer) JSObject() js.Value { return e.p }
 
 // EffectRenderer returns a EffectRenderer JavaScript class.
-func (b *Babylon) EffectRenderer() *EffectRenderer {
-	p := b.ctx.Get("EffectRenderer")
+func (ba *Babylon) EffectRenderer() *EffectRenderer {
+	p := ba.ctx.Get("EffectRenderer")
 	return EffectRendererFromJSObject(p)
 }
 
@@ -32,12 +32,12 @@ type NewEffectRendererOpts struct {
 // NewEffectRenderer returns a new EffectRenderer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectrenderer
-func (b *Babylon) NewEffectRenderer(engine *ThinEngine, opts *NewEffectRendererOpts) *EffectRenderer {
+func (ba *Babylon) NewEffectRenderer(engine *ThinEngine, opts *NewEffectRendererOpts) *EffectRenderer {
 	if opts == nil {
 		opts = &NewEffectRendererOpts{}
 	}
 
-	p := b.ctx.Get("EffectRenderer").New(engine.JSObject(), opts.Options)
+	p := ba.ctx.Get("EffectRenderer").New(engine.JSObject(), opts.Options)
 	return EffectRendererFromJSObject(p)
 }
 

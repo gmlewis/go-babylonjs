@@ -14,8 +14,8 @@ type DataBuffer struct{ p js.Value }
 func (d *DataBuffer) JSObject() js.Value { return d.p }
 
 // DataBuffer returns a DataBuffer JavaScript class.
-func (b *Babylon) DataBuffer() *DataBuffer {
-	p := b.ctx.Get("DataBuffer")
+func (ba *Babylon) DataBuffer() *DataBuffer {
+	p := ba.ctx.Get("DataBuffer")
 	return DataBufferFromJSObject(p)
 }
 

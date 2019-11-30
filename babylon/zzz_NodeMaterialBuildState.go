@@ -14,8 +14,8 @@ type NodeMaterialBuildState struct{ p js.Value }
 func (n *NodeMaterialBuildState) JSObject() js.Value { return n.p }
 
 // NodeMaterialBuildState returns a NodeMaterialBuildState JavaScript class.
-func (b *Babylon) NodeMaterialBuildState() *NodeMaterialBuildState {
-	p := b.ctx.Get("NodeMaterialBuildState")
+func (ba *Babylon) NodeMaterialBuildState() *NodeMaterialBuildState {
+	p := ba.ctx.Get("NodeMaterialBuildState")
 	return NodeMaterialBuildStateFromJSObject(p)
 }
 

@@ -14,8 +14,8 @@ type ScaleGizmo struct{ *Gizmo }
 func (s *ScaleGizmo) JSObject() js.Value { return s.p }
 
 // ScaleGizmo returns a ScaleGizmo JavaScript class.
-func (b *Babylon) ScaleGizmo() *ScaleGizmo {
-	p := b.ctx.Get("ScaleGizmo")
+func (ba *Babylon) ScaleGizmo() *ScaleGizmo {
+	p := ba.ctx.Get("ScaleGizmo")
 	return ScaleGizmoFromJSObject(p)
 }
 
@@ -32,12 +32,12 @@ type NewScaleGizmoOpts struct {
 // NewScaleGizmo returns a new ScaleGizmo object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.scalegizmo
-func (b *Babylon) NewScaleGizmo(opts *NewScaleGizmoOpts) *ScaleGizmo {
+func (ba *Babylon) NewScaleGizmo(opts *NewScaleGizmoOpts) *ScaleGizmo {
 	if opts == nil {
 		opts = &NewScaleGizmoOpts{}
 	}
 
-	p := b.ctx.Get("ScaleGizmo").New(opts.GizmoLayer.JSObject())
+	p := ba.ctx.Get("ScaleGizmo").New(opts.GizmoLayer.JSObject())
 	return ScaleGizmoFromJSObject(p)
 }
 

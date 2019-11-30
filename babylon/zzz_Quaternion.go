@@ -16,8 +16,8 @@ type Quaternion struct{ p js.Value }
 func (q *Quaternion) JSObject() js.Value { return q.p }
 
 // Quaternion returns a Quaternion JavaScript class.
-func (b *Babylon) Quaternion() *Quaternion {
-	p := b.ctx.Get("Quaternion")
+func (ba *Babylon) Quaternion() *Quaternion {
+	p := ba.ctx.Get("Quaternion")
 	return QuaternionFromJSObject(p)
 }
 
@@ -28,24 +28,24 @@ func QuaternionFromJSObject(p js.Value) *Quaternion {
 
 // NewQuaternionOpts contains optional parameters for NewQuaternion.
 type NewQuaternionOpts struct {
-	X *float64
+	X *JSFloat64
 
-	Y *float64
+	Y *JSFloat64
 
-	Z *float64
+	Z *JSFloat64
 
-	W *float64
+	W *JSFloat64
 }
 
 // NewQuaternion returns a new Quaternion object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.quaternion
-func (b *Babylon) NewQuaternion(opts *NewQuaternionOpts) *Quaternion {
+func (ba *Babylon) NewQuaternion(opts *NewQuaternionOpts) *Quaternion {
 	if opts == nil {
 		opts = &NewQuaternionOpts{}
 	}
 
-	p := b.ctx.Get("Quaternion").New(opts.X, opts.Y, opts.Z, opts.W)
+	p := ba.ctx.Get("Quaternion").New(opts.X, opts.Y, opts.Z, opts.W)
 	return QuaternionFromJSObject(p)
 }
 

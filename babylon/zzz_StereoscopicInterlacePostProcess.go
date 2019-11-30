@@ -14,8 +14,8 @@ type StereoscopicInterlacePostProcess struct{ *PostProcess }
 func (s *StereoscopicInterlacePostProcess) JSObject() js.Value { return s.p }
 
 // StereoscopicInterlacePostProcess returns a StereoscopicInterlacePostProcess JavaScript class.
-func (b *Babylon) StereoscopicInterlacePostProcess() *StereoscopicInterlacePostProcess {
-	p := b.ctx.Get("StereoscopicInterlacePostProcess")
+func (ba *Babylon) StereoscopicInterlacePostProcess() *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess")
 	return StereoscopicInterlacePostProcessFromJSObject(p)
 }
 
@@ -26,22 +26,22 @@ func StereoscopicInterlacePostProcessFromJSObject(p js.Value) *StereoscopicInter
 
 // NewStereoscopicInterlacePostProcessOpts contains optional parameters for NewStereoscopicInterlacePostProcess.
 type NewStereoscopicInterlacePostProcessOpts struct {
-	SamplingMode *float64
+	SamplingMode *JSFloat64
 
 	Engine *Engine
 
-	Reusable *bool
+	Reusable *JSBool
 }
 
 // NewStereoscopicInterlacePostProcess returns a new StereoscopicInterlacePostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess
-func (b *Babylon) NewStereoscopicInterlacePostProcess(name string, rigCameras *Camera, isStereoscopicHoriz bool, opts *NewStereoscopicInterlacePostProcessOpts) *StereoscopicInterlacePostProcess {
+func (ba *Babylon) NewStereoscopicInterlacePostProcess(name string, rigCameras *Camera, isStereoscopicHoriz bool, opts *NewStereoscopicInterlacePostProcessOpts) *StereoscopicInterlacePostProcess {
 	if opts == nil {
 		opts = &NewStereoscopicInterlacePostProcessOpts{}
 	}
 
-	p := b.ctx.Get("StereoscopicInterlacePostProcess").New(name, rigCameras.JSObject(), isStereoscopicHoriz.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject())
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(name, rigCameras.JSObject(), isStereoscopicHoriz.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable)
 	return StereoscopicInterlacePostProcessFromJSObject(p)
 }
 

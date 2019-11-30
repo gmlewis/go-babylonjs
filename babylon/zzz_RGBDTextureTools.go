@@ -14,8 +14,8 @@ type RGBDTextureTools struct{ p js.Value }
 func (r *RGBDTextureTools) JSObject() js.Value { return r.p }
 
 // RGBDTextureTools returns a RGBDTextureTools JavaScript class.
-func (b *Babylon) RGBDTextureTools() *RGBDTextureTools {
-	p := b.ctx.Get("RGBDTextureTools")
+func (ba *Babylon) RGBDTextureTools() *RGBDTextureTools {
+	p := ba.ctx.Get("RGBDTextureTools")
 	return RGBDTextureToolsFromJSObject(p)
 }
 

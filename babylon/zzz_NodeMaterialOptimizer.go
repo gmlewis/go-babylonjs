@@ -14,8 +14,8 @@ type NodeMaterialOptimizer struct{ p js.Value }
 func (n *NodeMaterialOptimizer) JSObject() js.Value { return n.p }
 
 // NodeMaterialOptimizer returns a NodeMaterialOptimizer JavaScript class.
-func (b *Babylon) NodeMaterialOptimizer() *NodeMaterialOptimizer {
-	p := b.ctx.Get("NodeMaterialOptimizer")
+func (ba *Babylon) NodeMaterialOptimizer() *NodeMaterialOptimizer {
+	p := ba.ctx.Get("NodeMaterialOptimizer")
 	return NodeMaterialOptimizerFromJSObject(p)
 }
 

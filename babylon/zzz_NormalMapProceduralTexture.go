@@ -14,8 +14,8 @@ type NormalMapProceduralTexture struct{ *ProceduralTexture }
 func (n *NormalMapProceduralTexture) JSObject() js.Value { return n.p }
 
 // NormalMapProceduralTexture returns a NormalMapProceduralTexture JavaScript class.
-func (b *Babylon) NormalMapProceduralTexture() *NormalMapProceduralTexture {
-	p := b.ctx.Get("NormalMapProceduralTexture")
+func (ba *Babylon) NormalMapProceduralTexture() *NormalMapProceduralTexture {
+	p := ba.ctx.Get("NormalMapProceduralTexture")
 	return NormalMapProceduralTextureFromJSObject(p)
 }
 
@@ -28,18 +28,18 @@ func NormalMapProceduralTextureFromJSObject(p js.Value) *NormalMapProceduralText
 type NewNormalMapProceduralTextureOpts struct {
 	FallbackTexture *Texture
 
-	GenerateMipMaps *bool
+	GenerateMipMaps *JSBool
 }
 
 // NewNormalMapProceduralTexture returns a new NormalMapProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.normalmapproceduraltexture
-func (b *Babylon) NewNormalMapProceduralTexture(name string, size float64, scene *Scene, opts *NewNormalMapProceduralTextureOpts) *NormalMapProceduralTexture {
+func (ba *Babylon) NewNormalMapProceduralTexture(name string, size float64, scene *Scene, opts *NewNormalMapProceduralTextureOpts) *NormalMapProceduralTexture {
 	if opts == nil {
 		opts = &NewNormalMapProceduralTextureOpts{}
 	}
 
-	p := b.ctx.Get("NormalMapProceduralTexture").New(name, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps.JSObject())
+	p := ba.ctx.Get("NormalMapProceduralTexture").New(name, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps)
 	return NormalMapProceduralTextureFromJSObject(p)
 }
 

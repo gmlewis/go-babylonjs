@@ -16,8 +16,8 @@ type MorphTarget struct{ p js.Value }
 func (m *MorphTarget) JSObject() js.Value { return m.p }
 
 // MorphTarget returns a MorphTarget JavaScript class.
-func (b *Babylon) MorphTarget() *MorphTarget {
-	p := b.ctx.Get("MorphTarget")
+func (ba *Babylon) MorphTarget() *MorphTarget {
+	p := ba.ctx.Get("MorphTarget")
 	return MorphTargetFromJSObject(p)
 }
 
@@ -28,7 +28,7 @@ func MorphTargetFromJSObject(p js.Value) *MorphTarget {
 
 // NewMorphTargetOpts contains optional parameters for NewMorphTarget.
 type NewMorphTargetOpts struct {
-	Influence *float64
+	Influence *JSFloat64
 
 	Scene *Scene
 }
@@ -36,12 +36,12 @@ type NewMorphTargetOpts struct {
 // NewMorphTarget returns a new MorphTarget object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.morphtarget
-func (b *Babylon) NewMorphTarget(name string, opts *NewMorphTargetOpts) *MorphTarget {
+func (ba *Babylon) NewMorphTarget(name string, opts *NewMorphTargetOpts) *MorphTarget {
 	if opts == nil {
 		opts = &NewMorphTargetOpts{}
 	}
 
-	p := b.ctx.Get("MorphTarget").New(name, opts.Influence, opts.Scene.JSObject())
+	p := ba.ctx.Get("MorphTarget").New(name, opts.Influence, opts.Scene.JSObject())
 	return MorphTargetFromJSObject(p)
 }
 

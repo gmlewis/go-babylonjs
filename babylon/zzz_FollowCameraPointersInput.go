@@ -16,8 +16,8 @@ type FollowCameraPointersInput struct{ *BaseCameraPointersInput }
 func (f *FollowCameraPointersInput) JSObject() js.Value { return f.p }
 
 // FollowCameraPointersInput returns a FollowCameraPointersInput JavaScript class.
-func (b *Babylon) FollowCameraPointersInput() *FollowCameraPointersInput {
-	p := b.ctx.Get("FollowCameraPointersInput")
+func (ba *Babylon) FollowCameraPointersInput() *FollowCameraPointersInput {
+	p := ba.ctx.Get("FollowCameraPointersInput")
 	return FollowCameraPointersInputFromJSObject(p)
 }
 

@@ -15,8 +15,8 @@ type DepthRendererSceneComponent struct{ p js.Value }
 func (d *DepthRendererSceneComponent) JSObject() js.Value { return d.p }
 
 // DepthRendererSceneComponent returns a DepthRendererSceneComponent JavaScript class.
-func (b *Babylon) DepthRendererSceneComponent() *DepthRendererSceneComponent {
-	p := b.ctx.Get("DepthRendererSceneComponent")
+func (ba *Babylon) DepthRendererSceneComponent() *DepthRendererSceneComponent {
+	p := ba.ctx.Get("DepthRendererSceneComponent")
 	return DepthRendererSceneComponentFromJSObject(p)
 }
 
@@ -28,8 +28,8 @@ func DepthRendererSceneComponentFromJSObject(p js.Value) *DepthRendererSceneComp
 // NewDepthRendererSceneComponent returns a new DepthRendererSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.depthrendererscenecomponent
-func (b *Babylon) NewDepthRendererSceneComponent(scene *Scene) *DepthRendererSceneComponent {
-	p := b.ctx.Get("DepthRendererSceneComponent").New(scene.JSObject())
+func (ba *Babylon) NewDepthRendererSceneComponent(scene *Scene) *DepthRendererSceneComponent {
+	p := ba.ctx.Get("DepthRendererSceneComponent").New(scene.JSObject())
 	return DepthRendererSceneComponentFromJSObject(p)
 }
 

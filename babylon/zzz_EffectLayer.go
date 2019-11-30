@@ -17,8 +17,8 @@ type EffectLayer struct{ p js.Value }
 func (e *EffectLayer) JSObject() js.Value { return e.p }
 
 // EffectLayer returns a EffectLayer JavaScript class.
-func (b *Babylon) EffectLayer() *EffectLayer {
-	p := b.ctx.Get("EffectLayer")
+func (ba *Babylon) EffectLayer() *EffectLayer {
+	p := ba.ctx.Get("EffectLayer")
 	return EffectLayerFromJSObject(p)
 }
 
@@ -30,8 +30,8 @@ func EffectLayerFromJSObject(p js.Value) *EffectLayer {
 // NewEffectLayer returns a new EffectLayer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectlayer
-func (b *Babylon) NewEffectLayer(name string, scene *Scene) *EffectLayer {
-	p := b.ctx.Get("EffectLayer").New(name, scene.JSObject())
+func (ba *Babylon) NewEffectLayer(name string, scene *Scene) *EffectLayer {
+	p := ba.ctx.Get("EffectLayer").New(name, scene.JSObject())
 	return EffectLayerFromJSObject(p)
 }
 

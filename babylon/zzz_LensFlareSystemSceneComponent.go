@@ -15,8 +15,8 @@ type LensFlareSystemSceneComponent struct{ p js.Value }
 func (l *LensFlareSystemSceneComponent) JSObject() js.Value { return l.p }
 
 // LensFlareSystemSceneComponent returns a LensFlareSystemSceneComponent JavaScript class.
-func (b *Babylon) LensFlareSystemSceneComponent() *LensFlareSystemSceneComponent {
-	p := b.ctx.Get("LensFlareSystemSceneComponent")
+func (ba *Babylon) LensFlareSystemSceneComponent() *LensFlareSystemSceneComponent {
+	p := ba.ctx.Get("LensFlareSystemSceneComponent")
 	return LensFlareSystemSceneComponentFromJSObject(p)
 }
 
@@ -28,8 +28,8 @@ func LensFlareSystemSceneComponentFromJSObject(p js.Value) *LensFlareSystemScene
 // NewLensFlareSystemSceneComponent returns a new LensFlareSystemSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensflaresystemscenecomponent
-func (b *Babylon) NewLensFlareSystemSceneComponent(scene *Scene) *LensFlareSystemSceneComponent {
-	p := b.ctx.Get("LensFlareSystemSceneComponent").New(scene.JSObject())
+func (ba *Babylon) NewLensFlareSystemSceneComponent(scene *Scene) *LensFlareSystemSceneComponent {
+	p := ba.ctx.Get("LensFlareSystemSceneComponent").New(scene.JSObject())
 	return LensFlareSystemSceneComponentFromJSObject(p)
 }
 

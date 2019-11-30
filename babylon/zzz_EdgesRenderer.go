@@ -14,8 +14,8 @@ type EdgesRenderer struct{ p js.Value }
 func (e *EdgesRenderer) JSObject() js.Value { return e.p }
 
 // EdgesRenderer returns a EdgesRenderer JavaScript class.
-func (b *Babylon) EdgesRenderer() *EdgesRenderer {
-	p := b.ctx.Get("EdgesRenderer")
+func (ba *Babylon) EdgesRenderer() *EdgesRenderer {
+	p := ba.ctx.Get("EdgesRenderer")
 	return EdgesRendererFromJSObject(p)
 }
 
@@ -26,22 +26,22 @@ func EdgesRendererFromJSObject(p js.Value) *EdgesRenderer {
 
 // NewEdgesRendererOpts contains optional parameters for NewEdgesRenderer.
 type NewEdgesRendererOpts struct {
-	Epsilon *float64
+	Epsilon *JSFloat64
 
-	CheckVerticesInsteadOfIndices *bool
+	CheckVerticesInsteadOfIndices *JSBool
 
-	GenerateEdgesLines *bool
+	GenerateEdgesLines *JSBool
 }
 
 // NewEdgesRenderer returns a new EdgesRenderer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.edgesrenderer
-func (b *Babylon) NewEdgesRenderer(source *AbstractMesh, opts *NewEdgesRendererOpts) *EdgesRenderer {
+func (ba *Babylon) NewEdgesRenderer(source *AbstractMesh, opts *NewEdgesRendererOpts) *EdgesRenderer {
 	if opts == nil {
 		opts = &NewEdgesRendererOpts{}
 	}
 
-	p := b.ctx.Get("EdgesRenderer").New(source.JSObject(), opts.Epsilon, opts.CheckVerticesInsteadOfIndices.JSObject(), opts.GenerateEdgesLines.JSObject())
+	p := ba.ctx.Get("EdgesRenderer").New(source.JSObject(), opts.Epsilon, opts.CheckVerticesInsteadOfIndices, opts.GenerateEdgesLines)
 	return EdgesRendererFromJSObject(p)
 }
 

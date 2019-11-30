@@ -14,8 +14,8 @@ type WebXRControllerPointerSelection struct{ p js.Value }
 func (w *WebXRControllerPointerSelection) JSObject() js.Value { return w.p }
 
 // WebXRControllerPointerSelection returns a WebXRControllerPointerSelection JavaScript class.
-func (b *Babylon) WebXRControllerPointerSelection() *WebXRControllerPointerSelection {
-	p := b.ctx.Get("WebXRControllerPointerSelection")
+func (ba *Babylon) WebXRControllerPointerSelection() *WebXRControllerPointerSelection {
+	p := ba.ctx.Get("WebXRControllerPointerSelection")
 	return WebXRControllerPointerSelectionFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func WebXRControllerPointerSelectionFromJSObject(p js.Value) *WebXRControllerPoi
 // NewWebXRControllerPointerSelection returns a new WebXRControllerPointerSelection object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrcontrollerpointerselection
-func (b *Babylon) NewWebXRControllerPointerSelection(input *WebXRInput) *WebXRControllerPointerSelection {
-	p := b.ctx.Get("WebXRControllerPointerSelection").New(input.JSObject())
+func (ba *Babylon) NewWebXRControllerPointerSelection(input *WebXRInput) *WebXRControllerPointerSelection {
+	p := ba.ctx.Get("WebXRControllerPointerSelection").New(input.JSObject())
 	return WebXRControllerPointerSelectionFromJSObject(p)
 }
 

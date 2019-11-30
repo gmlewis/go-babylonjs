@@ -14,8 +14,8 @@ type TiledPlaneBuilder struct{ p js.Value }
 func (t *TiledPlaneBuilder) JSObject() js.Value { return t.p }
 
 // TiledPlaneBuilder returns a TiledPlaneBuilder JavaScript class.
-func (b *Babylon) TiledPlaneBuilder() *TiledPlaneBuilder {
-	p := b.ctx.Get("TiledPlaneBuilder")
+func (ba *Babylon) TiledPlaneBuilder() *TiledPlaneBuilder {
+	p := ba.ctx.Get("TiledPlaneBuilder")
 	return TiledPlaneBuilderFromJSObject(p)
 }
 

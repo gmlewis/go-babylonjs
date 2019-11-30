@@ -14,8 +14,8 @@ type FragmentOutputBlock struct{ *NodeMaterialBlock }
 func (f *FragmentOutputBlock) JSObject() js.Value { return f.p }
 
 // FragmentOutputBlock returns a FragmentOutputBlock JavaScript class.
-func (b *Babylon) FragmentOutputBlock() *FragmentOutputBlock {
-	p := b.ctx.Get("FragmentOutputBlock")
+func (ba *Babylon) FragmentOutputBlock() *FragmentOutputBlock {
+	p := ba.ctx.Get("FragmentOutputBlock")
 	return FragmentOutputBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func FragmentOutputBlockFromJSObject(p js.Value) *FragmentOutputBlock {
 // NewFragmentOutputBlock returns a new FragmentOutputBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock
-func (b *Babylon) NewFragmentOutputBlock(name string) *FragmentOutputBlock {
-	p := b.ctx.Get("FragmentOutputBlock").New(name)
+func (ba *Babylon) NewFragmentOutputBlock(name string) *FragmentOutputBlock {
+	p := ba.ctx.Get("FragmentOutputBlock").New(name)
 	return FragmentOutputBlockFromJSObject(p)
 }
 

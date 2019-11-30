@@ -16,8 +16,8 @@ type VRDeviceOrientationGamepadCamera struct{ *VRDeviceOrientationFreeCamera }
 func (v *VRDeviceOrientationGamepadCamera) JSObject() js.Value { return v.p }
 
 // VRDeviceOrientationGamepadCamera returns a VRDeviceOrientationGamepadCamera JavaScript class.
-func (b *Babylon) VRDeviceOrientationGamepadCamera() *VRDeviceOrientationGamepadCamera {
-	p := b.ctx.Get("VRDeviceOrientationGamepadCamera")
+func (ba *Babylon) VRDeviceOrientationGamepadCamera() *VRDeviceOrientationGamepadCamera {
+	p := ba.ctx.Get("VRDeviceOrientationGamepadCamera")
 	return VRDeviceOrientationGamepadCameraFromJSObject(p)
 }
 
@@ -28,7 +28,7 @@ func VRDeviceOrientationGamepadCameraFromJSObject(p js.Value) *VRDeviceOrientati
 
 // NewVRDeviceOrientationGamepadCameraOpts contains optional parameters for NewVRDeviceOrientationGamepadCamera.
 type NewVRDeviceOrientationGamepadCameraOpts struct {
-	CompensateDistortion *bool
+	CompensateDistortion *JSBool
 
 	VrCameraMetrics *VRCameraMetrics
 }
@@ -36,12 +36,12 @@ type NewVRDeviceOrientationGamepadCameraOpts struct {
 // NewVRDeviceOrientationGamepadCamera returns a new VRDeviceOrientationGamepadCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationgamepadcamera
-func (b *Babylon) NewVRDeviceOrientationGamepadCamera(name string, position *Vector3, scene *Scene, opts *NewVRDeviceOrientationGamepadCameraOpts) *VRDeviceOrientationGamepadCamera {
+func (ba *Babylon) NewVRDeviceOrientationGamepadCamera(name string, position *Vector3, scene *Scene, opts *NewVRDeviceOrientationGamepadCameraOpts) *VRDeviceOrientationGamepadCamera {
 	if opts == nil {
 		opts = &NewVRDeviceOrientationGamepadCameraOpts{}
 	}
 
-	p := b.ctx.Get("VRDeviceOrientationGamepadCamera").New(name, position.JSObject(), scene.JSObject(), opts.CompensateDistortion.JSObject(), opts.VrCameraMetrics.JSObject())
+	p := ba.ctx.Get("VRDeviceOrientationGamepadCamera").New(name, position.JSObject(), scene.JSObject(), opts.CompensateDistortion, opts.VrCameraMetrics.JSObject())
 	return VRDeviceOrientationGamepadCameraFromJSObject(p)
 }
 

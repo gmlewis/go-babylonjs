@@ -14,8 +14,8 @@ type ShapeBuilder struct{ p js.Value }
 func (s *ShapeBuilder) JSObject() js.Value { return s.p }
 
 // ShapeBuilder returns a ShapeBuilder JavaScript class.
-func (b *Babylon) ShapeBuilder() *ShapeBuilder {
-	p := b.ctx.Get("ShapeBuilder")
+func (ba *Babylon) ShapeBuilder() *ShapeBuilder {
+	p := ba.ctx.Get("ShapeBuilder")
 	return ShapeBuilderFromJSObject(p)
 }
 

@@ -19,8 +19,8 @@ type SolidParticleSystem struct{ p js.Value }
 func (s *SolidParticleSystem) JSObject() js.Value { return s.p }
 
 // SolidParticleSystem returns a SolidParticleSystem JavaScript class.
-func (b *Babylon) SolidParticleSystem() *SolidParticleSystem {
-	p := b.ctx.Get("SolidParticleSystem")
+func (ba *Babylon) SolidParticleSystem() *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem")
 	return SolidParticleSystemFromJSObject(p)
 }
 
@@ -37,12 +37,12 @@ type NewSolidParticleSystemOpts struct {
 // NewSolidParticleSystem returns a new SolidParticleSystem object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem
-func (b *Babylon) NewSolidParticleSystem(name string, scene *Scene, opts *NewSolidParticleSystemOpts) *SolidParticleSystem {
+func (ba *Babylon) NewSolidParticleSystem(name string, scene *Scene, opts *NewSolidParticleSystemOpts) *SolidParticleSystem {
 	if opts == nil {
 		opts = &NewSolidParticleSystemOpts{}
 	}
 
-	p := b.ctx.Get("SolidParticleSystem").New(name, scene.JSObject(), opts.Options)
+	p := ba.ctx.Get("SolidParticleSystem").New(name, scene.JSObject(), opts.Options)
 	return SolidParticleSystemFromJSObject(p)
 }
 

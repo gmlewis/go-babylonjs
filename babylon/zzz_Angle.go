@@ -14,8 +14,8 @@ type Angle struct{ p js.Value }
 func (a *Angle) JSObject() js.Value { return a.p }
 
 // Angle returns a Angle JavaScript class.
-func (b *Babylon) Angle() *Angle {
-	p := b.ctx.Get("Angle")
+func (ba *Babylon) Angle() *Angle {
+	p := ba.ctx.Get("Angle")
 	return AngleFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func AngleFromJSObject(p js.Value) *Angle {
 // NewAngle returns a new Angle object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.angle
-func (b *Babylon) NewAngle(radians float64) *Angle {
-	p := b.ctx.Get("Angle").New(radians)
+func (ba *Babylon) NewAngle(radians float64) *Angle {
+	p := ba.ctx.Get("Angle").New(radians)
 	return AngleFromJSObject(p)
 }
 

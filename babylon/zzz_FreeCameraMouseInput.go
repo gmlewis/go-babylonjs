@@ -16,8 +16,8 @@ type FreeCameraMouseInput struct{ p js.Value }
 func (f *FreeCameraMouseInput) JSObject() js.Value { return f.p }
 
 // FreeCameraMouseInput returns a FreeCameraMouseInput JavaScript class.
-func (b *Babylon) FreeCameraMouseInput() *FreeCameraMouseInput {
-	p := b.ctx.Get("FreeCameraMouseInput")
+func (ba *Babylon) FreeCameraMouseInput() *FreeCameraMouseInput {
+	p := ba.ctx.Get("FreeCameraMouseInput")
 	return FreeCameraMouseInputFromJSObject(p)
 }
 
@@ -28,18 +28,18 @@ func FreeCameraMouseInputFromJSObject(p js.Value) *FreeCameraMouseInput {
 
 // NewFreeCameraMouseInputOpts contains optional parameters for NewFreeCameraMouseInput.
 type NewFreeCameraMouseInputOpts struct {
-	TouchEnabled *bool
+	TouchEnabled *JSBool
 }
 
 // NewFreeCameraMouseInput returns a new FreeCameraMouseInput object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecameramouseinput
-func (b *Babylon) NewFreeCameraMouseInput(opts *NewFreeCameraMouseInputOpts) *FreeCameraMouseInput {
+func (ba *Babylon) NewFreeCameraMouseInput(opts *NewFreeCameraMouseInputOpts) *FreeCameraMouseInput {
 	if opts == nil {
 		opts = &NewFreeCameraMouseInputOpts{}
 	}
 
-	p := b.ctx.Get("FreeCameraMouseInput").New(opts.TouchEnabled.JSObject())
+	p := ba.ctx.Get("FreeCameraMouseInput").New(opts.TouchEnabled)
 	return FreeCameraMouseInputFromJSObject(p)
 }
 

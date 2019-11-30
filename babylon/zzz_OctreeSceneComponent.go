@@ -15,8 +15,8 @@ type OctreeSceneComponent struct{ p js.Value }
 func (o *OctreeSceneComponent) JSObject() js.Value { return o.p }
 
 // OctreeSceneComponent returns a OctreeSceneComponent JavaScript class.
-func (b *Babylon) OctreeSceneComponent() *OctreeSceneComponent {
-	p := b.ctx.Get("OctreeSceneComponent")
+func (ba *Babylon) OctreeSceneComponent() *OctreeSceneComponent {
+	p := ba.ctx.Get("OctreeSceneComponent")
 	return OctreeSceneComponentFromJSObject(p)
 }
 
@@ -28,8 +28,8 @@ func OctreeSceneComponentFromJSObject(p js.Value) *OctreeSceneComponent {
 // NewOctreeSceneComponent returns a new OctreeSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octreescenecomponent
-func (b *Babylon) NewOctreeSceneComponent(scene *Scene) *OctreeSceneComponent {
-	p := b.ctx.Get("OctreeSceneComponent").New(scene.JSObject())
+func (ba *Babylon) NewOctreeSceneComponent(scene *Scene) *OctreeSceneComponent {
+	p := ba.ctx.Get("OctreeSceneComponent").New(scene.JSObject())
 	return OctreeSceneComponentFromJSObject(p)
 }
 

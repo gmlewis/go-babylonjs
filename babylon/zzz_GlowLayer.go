@@ -16,8 +16,8 @@ type GlowLayer struct{ *EffectLayer }
 func (g *GlowLayer) JSObject() js.Value { return g.p }
 
 // GlowLayer returns a GlowLayer JavaScript class.
-func (b *Babylon) GlowLayer() *GlowLayer {
-	p := b.ctx.Get("GlowLayer")
+func (ba *Babylon) GlowLayer() *GlowLayer {
+	p := ba.ctx.Get("GlowLayer")
 	return GlowLayerFromJSObject(p)
 }
 
@@ -34,12 +34,12 @@ type NewGlowLayerOpts struct {
 // NewGlowLayer returns a new GlowLayer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.glowlayer
-func (b *Babylon) NewGlowLayer(name string, scene *Scene, opts *NewGlowLayerOpts) *GlowLayer {
+func (ba *Babylon) NewGlowLayer(name string, scene *Scene, opts *NewGlowLayerOpts) *GlowLayer {
 	if opts == nil {
 		opts = &NewGlowLayerOpts{}
 	}
 
-	p := b.ctx.Get("GlowLayer").New(name, scene.JSObject(), opts.Options)
+	p := ba.ctx.Get("GlowLayer").New(name, scene.JSObject(), opts.Options)
 	return GlowLayerFromJSObject(p)
 }
 

@@ -15,8 +15,8 @@ type ShadowGeneratorSceneComponent struct{ p js.Value }
 func (s *ShadowGeneratorSceneComponent) JSObject() js.Value { return s.p }
 
 // ShadowGeneratorSceneComponent returns a ShadowGeneratorSceneComponent JavaScript class.
-func (b *Babylon) ShadowGeneratorSceneComponent() *ShadowGeneratorSceneComponent {
-	p := b.ctx.Get("ShadowGeneratorSceneComponent")
+func (ba *Babylon) ShadowGeneratorSceneComponent() *ShadowGeneratorSceneComponent {
+	p := ba.ctx.Get("ShadowGeneratorSceneComponent")
 	return ShadowGeneratorSceneComponentFromJSObject(p)
 }
 
@@ -28,8 +28,8 @@ func ShadowGeneratorSceneComponentFromJSObject(p js.Value) *ShadowGeneratorScene
 // NewShadowGeneratorSceneComponent returns a new ShadowGeneratorSceneComponent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgeneratorscenecomponent
-func (b *Babylon) NewShadowGeneratorSceneComponent(scene *Scene) *ShadowGeneratorSceneComponent {
-	p := b.ctx.Get("ShadowGeneratorSceneComponent").New(scene.JSObject())
+func (ba *Babylon) NewShadowGeneratorSceneComponent(scene *Scene) *ShadowGeneratorSceneComponent {
+	p := ba.ctx.Get("ShadowGeneratorSceneComponent").New(scene.JSObject())
 	return ShadowGeneratorSceneComponentFromJSObject(p)
 }
 

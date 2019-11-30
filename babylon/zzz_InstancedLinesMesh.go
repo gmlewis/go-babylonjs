@@ -14,8 +14,8 @@ type InstancedLinesMesh struct{ *InstancedMesh }
 func (i *InstancedLinesMesh) JSObject() js.Value { return i.p }
 
 // InstancedLinesMesh returns a InstancedLinesMesh JavaScript class.
-func (b *Babylon) InstancedLinesMesh() *InstancedLinesMesh {
-	p := b.ctx.Get("InstancedLinesMesh")
+func (ba *Babylon) InstancedLinesMesh() *InstancedLinesMesh {
+	p := ba.ctx.Get("InstancedLinesMesh")
 	return InstancedLinesMeshFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func InstancedLinesMeshFromJSObject(p js.Value) *InstancedLinesMesh {
 // NewInstancedLinesMesh returns a new InstancedLinesMesh object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh
-func (b *Babylon) NewInstancedLinesMesh(name string, source *LinesMesh) *InstancedLinesMesh {
-	p := b.ctx.Get("InstancedLinesMesh").New(name, source.JSObject())
+func (ba *Babylon) NewInstancedLinesMesh(name string, source *LinesMesh) *InstancedLinesMesh {
+	p := ba.ctx.Get("InstancedLinesMesh").New(name, source.JSObject())
 	return InstancedLinesMeshFromJSObject(p)
 }
 

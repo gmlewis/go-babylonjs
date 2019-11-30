@@ -15,8 +15,8 @@ type CylinderParticleEmitter struct{ p js.Value }
 func (c *CylinderParticleEmitter) JSObject() js.Value { return c.p }
 
 // CylinderParticleEmitter returns a CylinderParticleEmitter JavaScript class.
-func (b *Babylon) CylinderParticleEmitter() *CylinderParticleEmitter {
-	p := b.ctx.Get("CylinderParticleEmitter")
+func (ba *Babylon) CylinderParticleEmitter() *CylinderParticleEmitter {
+	p := ba.ctx.Get("CylinderParticleEmitter")
 	return CylinderParticleEmitterFromJSObject(p)
 }
 
@@ -27,24 +27,24 @@ func CylinderParticleEmitterFromJSObject(p js.Value) *CylinderParticleEmitter {
 
 // NewCylinderParticleEmitterOpts contains optional parameters for NewCylinderParticleEmitter.
 type NewCylinderParticleEmitterOpts struct {
-	Radius *float64
+	Radius *JSFloat64
 
-	Height *float64
+	Height *JSFloat64
 
-	RadiusRange *float64
+	RadiusRange *JSFloat64
 
-	DirectionRandomizer *float64
+	DirectionRandomizer *JSFloat64
 }
 
 // NewCylinderParticleEmitter returns a new CylinderParticleEmitter object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cylinderparticleemitter
-func (b *Babylon) NewCylinderParticleEmitter(opts *NewCylinderParticleEmitterOpts) *CylinderParticleEmitter {
+func (ba *Babylon) NewCylinderParticleEmitter(opts *NewCylinderParticleEmitterOpts) *CylinderParticleEmitter {
 	if opts == nil {
 		opts = &NewCylinderParticleEmitterOpts{}
 	}
 
-	p := b.ctx.Get("CylinderParticleEmitter").New(opts.Radius, opts.Height, opts.RadiusRange, opts.DirectionRandomizer)
+	p := ba.ctx.Get("CylinderParticleEmitter").New(opts.Radius, opts.Height, opts.RadiusRange, opts.DirectionRandomizer)
 	return CylinderParticleEmitterFromJSObject(p)
 }
 

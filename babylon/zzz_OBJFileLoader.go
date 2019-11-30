@@ -15,8 +15,8 @@ type OBJFileLoader struct{ p js.Value }
 func (o *OBJFileLoader) JSObject() js.Value { return o.p }
 
 // OBJFileLoader returns a OBJFileLoader JavaScript class.
-func (b *Babylon) OBJFileLoader() *OBJFileLoader {
-	p := b.ctx.Get("OBJFileLoader")
+func (ba *Babylon) OBJFileLoader() *OBJFileLoader {
+	p := ba.ctx.Get("OBJFileLoader")
 	return OBJFileLoaderFromJSObject(p)
 }
 
@@ -27,18 +27,18 @@ func OBJFileLoaderFromJSObject(p js.Value) *OBJFileLoader {
 
 // NewOBJFileLoaderOpts contains optional parameters for NewOBJFileLoader.
 type NewOBJFileLoaderOpts struct {
-	MeshLoadOptions *MeshLoadOptions
+	MeshLoadOptions js.Value
 }
 
 // NewOBJFileLoader returns a new OBJFileLoader object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.objfileloader
-func (b *Babylon) NewOBJFileLoader(opts *NewOBJFileLoaderOpts) *OBJFileLoader {
+func (ba *Babylon) NewOBJFileLoader(opts *NewOBJFileLoaderOpts) *OBJFileLoader {
 	if opts == nil {
 		opts = &NewOBJFileLoaderOpts{}
 	}
 
-	p := b.ctx.Get("OBJFileLoader").New(opts.MeshLoadOptions.JSObject())
+	p := ba.ctx.Get("OBJFileLoader").New(opts.MeshLoadOptions)
 	return OBJFileLoaderFromJSObject(p)
 }
 

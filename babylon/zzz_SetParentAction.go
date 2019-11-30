@@ -16,8 +16,8 @@ type SetParentAction struct{ *Action }
 func (s *SetParentAction) JSObject() js.Value { return s.p }
 
 // SetParentAction returns a SetParentAction JavaScript class.
-func (b *Babylon) SetParentAction() *SetParentAction {
-	p := b.ctx.Get("SetParentAction")
+func (ba *Babylon) SetParentAction() *SetParentAction {
+	p := ba.ctx.Get("SetParentAction")
 	return SetParentActionFromJSObject(p)
 }
 
@@ -34,12 +34,12 @@ type NewSetParentActionOpts struct {
 // NewSetParentAction returns a new SetParentAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.setparentaction
-func (b *Babylon) NewSetParentAction(triggerOptions interface{}, target interface{}, parent interface{}, opts *NewSetParentActionOpts) *SetParentAction {
+func (ba *Babylon) NewSetParentAction(triggerOptions interface{}, target interface{}, parent interface{}, opts *NewSetParentActionOpts) *SetParentAction {
 	if opts == nil {
 		opts = &NewSetParentActionOpts{}
 	}
 
-	p := b.ctx.Get("SetParentAction").New(triggerOptions, target, parent, opts.Condition.JSObject())
+	p := ba.ctx.Get("SetParentAction").New(triggerOptions, target, parent, opts.Condition.JSObject())
 	return SetParentActionFromJSObject(p)
 }
 

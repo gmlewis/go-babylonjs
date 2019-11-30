@@ -14,8 +14,8 @@ type STLExport struct{ p js.Value }
 func (s *STLExport) JSObject() js.Value { return s.p }
 
 // STLExport returns a STLExport JavaScript class.
-func (b *Babylon) STLExport() *STLExport {
-	p := b.ctx.Get("STLExport")
+func (ba *Babylon) STLExport() *STLExport {
+	p := ba.ctx.Get("STLExport")
 	return STLExportFromJSObject(p)
 }
 

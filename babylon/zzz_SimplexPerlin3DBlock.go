@@ -14,8 +14,8 @@ type SimplexPerlin3DBlock struct{ *NodeMaterialBlock }
 func (s *SimplexPerlin3DBlock) JSObject() js.Value { return s.p }
 
 // SimplexPerlin3DBlock returns a SimplexPerlin3DBlock JavaScript class.
-func (b *Babylon) SimplexPerlin3DBlock() *SimplexPerlin3DBlock {
-	p := b.ctx.Get("SimplexPerlin3DBlock")
+func (ba *Babylon) SimplexPerlin3DBlock() *SimplexPerlin3DBlock {
+	p := ba.ctx.Get("SimplexPerlin3DBlock")
 	return SimplexPerlin3DBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func SimplexPerlin3DBlockFromJSObject(p js.Value) *SimplexPerlin3DBlock {
 // NewSimplexPerlin3DBlock returns a new SimplexPerlin3DBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.simplexperlin3dblock
-func (b *Babylon) NewSimplexPerlin3DBlock(name string) *SimplexPerlin3DBlock {
-	p := b.ctx.Get("SimplexPerlin3DBlock").New(name)
+func (ba *Babylon) NewSimplexPerlin3DBlock(name string) *SimplexPerlin3DBlock {
+	p := ba.ctx.Get("SimplexPerlin3DBlock").New(name)
 	return SimplexPerlin3DBlockFromJSObject(p)
 }
 

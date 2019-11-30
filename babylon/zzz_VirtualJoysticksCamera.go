@@ -18,8 +18,8 @@ type VirtualJoysticksCamera struct{ *FreeCamera }
 func (v *VirtualJoysticksCamera) JSObject() js.Value { return v.p }
 
 // VirtualJoysticksCamera returns a VirtualJoysticksCamera JavaScript class.
-func (b *Babylon) VirtualJoysticksCamera() *VirtualJoysticksCamera {
-	p := b.ctx.Get("VirtualJoysticksCamera")
+func (ba *Babylon) VirtualJoysticksCamera() *VirtualJoysticksCamera {
+	p := ba.ctx.Get("VirtualJoysticksCamera")
 	return VirtualJoysticksCameraFromJSObject(p)
 }
 
@@ -31,8 +31,8 @@ func VirtualJoysticksCameraFromJSObject(p js.Value) *VirtualJoysticksCamera {
 // NewVirtualJoysticksCamera returns a new VirtualJoysticksCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.virtualjoystickscamera
-func (b *Babylon) NewVirtualJoysticksCamera(name string, position *Vector3, scene *Scene) *VirtualJoysticksCamera {
-	p := b.ctx.Get("VirtualJoysticksCamera").New(name, position.JSObject(), scene.JSObject())
+func (ba *Babylon) NewVirtualJoysticksCamera(name string, position *Vector3, scene *Scene) *VirtualJoysticksCamera {
+	p := ba.ctx.Get("VirtualJoysticksCamera").New(name, position.JSObject(), scene.JSObject())
 	return VirtualJoysticksCameraFromJSObject(p)
 }
 

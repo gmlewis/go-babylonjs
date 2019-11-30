@@ -15,8 +15,8 @@ type SmartArrayNoDuplicate struct{ *SmartArray }
 func (s *SmartArrayNoDuplicate) JSObject() js.Value { return s.p }
 
 // SmartArrayNoDuplicate returns a SmartArrayNoDuplicate JavaScript class.
-func (b *Babylon) SmartArrayNoDuplicate() *SmartArrayNoDuplicate {
-	p := b.ctx.Get("SmartArrayNoDuplicate")
+func (ba *Babylon) SmartArrayNoDuplicate() *SmartArrayNoDuplicate {
+	p := ba.ctx.Get("SmartArrayNoDuplicate")
 	return SmartArrayNoDuplicateFromJSObject(p)
 }
 
@@ -28,8 +28,8 @@ func SmartArrayNoDuplicateFromJSObject(p js.Value) *SmartArrayNoDuplicate {
 // NewSmartArrayNoDuplicate returns a new SmartArrayNoDuplicate object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.smartarraynoduplicate
-func (b *Babylon) NewSmartArrayNoDuplicate(capacity float64) *SmartArrayNoDuplicate {
-	p := b.ctx.Get("SmartArrayNoDuplicate").New(capacity)
+func (ba *Babylon) NewSmartArrayNoDuplicate(capacity float64) *SmartArrayNoDuplicate {
+	p := ba.ctx.Get("SmartArrayNoDuplicate").New(capacity)
 	return SmartArrayNoDuplicateFromJSObject(p)
 }
 

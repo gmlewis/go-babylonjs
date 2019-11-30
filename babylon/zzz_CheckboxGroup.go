@@ -15,8 +15,8 @@ type CheckboxGroup struct{ *SelectorGroup }
 func (c *CheckboxGroup) JSObject() js.Value { return c.p }
 
 // CheckboxGroup returns a CheckboxGroup JavaScript class.
-func (b *Babylon) CheckboxGroup() *CheckboxGroup {
-	p := b.ctx.Get("CheckboxGroup")
+func (ba *Babylon) CheckboxGroup() *CheckboxGroup {
+	p := ba.ctx.Get("CheckboxGroup")
 	return CheckboxGroupFromJSObject(p)
 }
 
@@ -28,8 +28,8 @@ func CheckboxGroupFromJSObject(p js.Value) *CheckboxGroup {
 // NewCheckboxGroup returns a new CheckboxGroup object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.checkboxgroup
-func (b *Babylon) NewCheckboxGroup(name string) *CheckboxGroup {
-	p := b.ctx.Get("CheckboxGroup").New(name)
+func (ba *Babylon) NewCheckboxGroup(name string) *CheckboxGroup {
+	p := ba.ctx.Get("CheckboxGroup").New(name)
 	return CheckboxGroupFromJSObject(p)
 }
 

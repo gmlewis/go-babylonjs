@@ -14,8 +14,8 @@ type InputText struct{ *Control }
 func (i *InputText) JSObject() js.Value { return i.p }
 
 // InputText returns a InputText JavaScript class.
-func (b *Babylon) InputText() *InputText {
-	p := b.ctx.Get("InputText")
+func (ba *Babylon) InputText() *InputText {
+	p := ba.ctx.Get("InputText")
 	return InputTextFromJSObject(p)
 }
 
@@ -26,20 +26,20 @@ func InputTextFromJSObject(p js.Value) *InputText {
 
 // NewInputTextOpts contains optional parameters for NewInputText.
 type NewInputTextOpts struct {
-	Name *string
+	Name *JSString
 
-	Text *string
+	Text *JSString
 }
 
 // NewInputText returns a new InputText object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.inputtext
-func (b *Babylon) NewInputText(opts *NewInputTextOpts) *InputText {
+func (ba *Babylon) NewInputText(opts *NewInputTextOpts) *InputText {
 	if opts == nil {
 		opts = &NewInputTextOpts{}
 	}
 
-	p := b.ctx.Get("InputText").New(opts.Name, opts.Text)
+	p := ba.ctx.Get("InputText").New(opts.Name, opts.Text)
 	return InputTextFromJSObject(p)
 }
 

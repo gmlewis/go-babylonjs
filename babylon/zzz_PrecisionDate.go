@@ -14,8 +14,8 @@ type PrecisionDate struct{ p js.Value }
 func (p *PrecisionDate) JSObject() js.Value { return p.p }
 
 // PrecisionDate returns a PrecisionDate JavaScript class.
-func (b *Babylon) PrecisionDate() *PrecisionDate {
-	p := b.ctx.Get("PrecisionDate")
+func (ba *Babylon) PrecisionDate() *PrecisionDate {
+	p := ba.ctx.Get("PrecisionDate")
 	return PrecisionDateFromJSObject(p)
 }
 

@@ -14,8 +14,8 @@ type PhysicsVortexEvent struct{ p js.Value }
 func (p *PhysicsVortexEvent) JSObject() js.Value { return p.p }
 
 // PhysicsVortexEvent returns a PhysicsVortexEvent JavaScript class.
-func (b *Babylon) PhysicsVortexEvent() *PhysicsVortexEvent {
-	p := b.ctx.Get("PhysicsVortexEvent")
+func (ba *Babylon) PhysicsVortexEvent() *PhysicsVortexEvent {
+	p := ba.ctx.Get("PhysicsVortexEvent")
 	return PhysicsVortexEventFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func PhysicsVortexEventFromJSObject(p js.Value) *PhysicsVortexEvent {
 // NewPhysicsVortexEvent returns a new PhysicsVortexEvent object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsvortexevent
-func (b *Babylon) NewPhysicsVortexEvent(_scene *Scene, _origin *Vector3, _options *PhysicsVortexEventOptions) *PhysicsVortexEvent {
-	p := b.ctx.Get("PhysicsVortexEvent").New(_scene.JSObject(), _origin.JSObject(), _options.JSObject())
+func (ba *Babylon) NewPhysicsVortexEvent(_scene *Scene, _origin *Vector3, _options *PhysicsVortexEventOptions) *PhysicsVortexEvent {
+	p := ba.ctx.Get("PhysicsVortexEvent").New(_scene.JSObject(), _origin.JSObject(), _options.JSObject())
 	return PhysicsVortexEventFromJSObject(p)
 }
 

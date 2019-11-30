@@ -14,8 +14,8 @@ type SubEmitter struct{ p js.Value }
 func (s *SubEmitter) JSObject() js.Value { return s.p }
 
 // SubEmitter returns a SubEmitter JavaScript class.
-func (b *Babylon) SubEmitter() *SubEmitter {
-	p := b.ctx.Get("SubEmitter")
+func (ba *Babylon) SubEmitter() *SubEmitter {
+	p := ba.ctx.Get("SubEmitter")
 	return SubEmitterFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func SubEmitterFromJSObject(p js.Value) *SubEmitter {
 // NewSubEmitter returns a new SubEmitter object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.subemitter
-func (b *Babylon) NewSubEmitter(particleSystem *ParticleSystem) *SubEmitter {
-	p := b.ctx.Get("SubEmitter").New(particleSystem.JSObject())
+func (ba *Babylon) NewSubEmitter(particleSystem *ParticleSystem) *SubEmitter {
+	p := ba.ctx.Get("SubEmitter").New(particleSystem.JSObject())
 	return SubEmitterFromJSObject(p)
 }
 

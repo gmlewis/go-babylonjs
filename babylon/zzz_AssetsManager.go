@@ -16,8 +16,8 @@ type AssetsManager struct{ p js.Value }
 func (a *AssetsManager) JSObject() js.Value { return a.p }
 
 // AssetsManager returns a AssetsManager JavaScript class.
-func (b *Babylon) AssetsManager() *AssetsManager {
-	p := b.ctx.Get("AssetsManager")
+func (ba *Babylon) AssetsManager() *AssetsManager {
+	p := ba.ctx.Get("AssetsManager")
 	return AssetsManagerFromJSObject(p)
 }
 
@@ -29,8 +29,8 @@ func AssetsManagerFromJSObject(p js.Value) *AssetsManager {
 // NewAssetsManager returns a new AssetsManager object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsmanager
-func (b *Babylon) NewAssetsManager(scene *Scene) *AssetsManager {
-	p := b.ctx.Get("AssetsManager").New(scene.JSObject())
+func (ba *Babylon) NewAssetsManager(scene *Scene) *AssetsManager {
+	p := ba.ctx.Get("AssetsManager").New(scene.JSObject())
 	return AssetsManagerFromJSObject(p)
 }
 

@@ -17,8 +17,8 @@ type StandardRenderingPipeline struct{ *PostProcessRenderPipeline }
 func (s *StandardRenderingPipeline) JSObject() js.Value { return s.p }
 
 // StandardRenderingPipeline returns a StandardRenderingPipeline JavaScript class.
-func (b *Babylon) StandardRenderingPipeline() *StandardRenderingPipeline {
-	p := b.ctx.Get("StandardRenderingPipeline")
+func (ba *Babylon) StandardRenderingPipeline() *StandardRenderingPipeline {
+	p := ba.ctx.Get("StandardRenderingPipeline")
 	return StandardRenderingPipelineFromJSObject(p)
 }
 
@@ -37,12 +37,12 @@ type NewStandardRenderingPipelineOpts struct {
 // NewStandardRenderingPipeline returns a new StandardRenderingPipeline object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardrenderingpipeline
-func (b *Babylon) NewStandardRenderingPipeline(name string, scene *Scene, ratio float64, opts *NewStandardRenderingPipelineOpts) *StandardRenderingPipeline {
+func (ba *Babylon) NewStandardRenderingPipeline(name string, scene *Scene, ratio float64, opts *NewStandardRenderingPipelineOpts) *StandardRenderingPipeline {
 	if opts == nil {
 		opts = &NewStandardRenderingPipelineOpts{}
 	}
 
-	p := b.ctx.Get("StandardRenderingPipeline").New(name, scene.JSObject(), ratio, opts.OriginalPostProcess.JSObject(), opts.Cameras.JSObject())
+	p := ba.ctx.Get("StandardRenderingPipeline").New(name, scene.JSObject(), ratio, opts.OriginalPostProcess.JSObject(), opts.Cameras.JSObject())
 	return StandardRenderingPipelineFromJSObject(p)
 }
 

@@ -16,8 +16,8 @@ type SkyMaterial struct{ p js.Value }
 func (s *SkyMaterial) JSObject() js.Value { return s.p }
 
 // SkyMaterial returns a SkyMaterial JavaScript class.
-func (b *Babylon) SkyMaterial() *SkyMaterial {
-	p := b.ctx.Get("SkyMaterial")
+func (ba *Babylon) SkyMaterial() *SkyMaterial {
+	p := ba.ctx.Get("SkyMaterial")
 	return SkyMaterialFromJSObject(p)
 }
 
@@ -29,8 +29,8 @@ func SkyMaterialFromJSObject(p js.Value) *SkyMaterial {
 // NewSkyMaterial returns a new SkyMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.skymaterial
-func (b *Babylon) NewSkyMaterial(name string, scene *Scene) *SkyMaterial {
-	p := b.ctx.Get("SkyMaterial").New(name, scene.JSObject())
+func (ba *Babylon) NewSkyMaterial(name string, scene *Scene) *SkyMaterial {
+	p := ba.ctx.Get("SkyMaterial").New(name, scene.JSObject())
 	return SkyMaterialFromJSObject(p)
 }
 

@@ -14,8 +14,8 @@ type Buffer struct{ p js.Value }
 func (b *Buffer) JSObject() js.Value { return b.p }
 
 // Buffer returns a Buffer JavaScript class.
-func (b *Babylon) Buffer() *Buffer {
-	p := b.ctx.Get("Buffer")
+func (ba *Babylon) Buffer() *Buffer {
+	p := ba.ctx.Get("Buffer")
 	return BufferFromJSObject(p)
 }
 
@@ -26,26 +26,26 @@ func BufferFromJSObject(p js.Value) *Buffer {
 
 // NewBufferOpts contains optional parameters for NewBuffer.
 type NewBufferOpts struct {
-	Stride *float64
+	Stride *JSFloat64
 
-	PostponeInternalCreation *bool
+	PostponeInternalCreation *JSBool
 
-	Instanced *bool
+	Instanced *JSBool
 
-	UseBytes *bool
+	UseBytes *JSBool
 
-	Divisor *float64
+	Divisor *JSFloat64
 }
 
 // NewBuffer returns a new Buffer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.buffer
-func (b *Babylon) NewBuffer(engine interface{}, data []float64, updatable bool, opts *NewBufferOpts) *Buffer {
+func (ba *Babylon) NewBuffer(engine interface{}, data []float64, updatable bool, opts *NewBufferOpts) *Buffer {
 	if opts == nil {
 		opts = &NewBufferOpts{}
 	}
 
-	p := b.ctx.Get("Buffer").New(engine, data.JSObject(), updatable.JSObject(), opts.Stride, opts.PostponeInternalCreation.JSObject(), opts.Instanced.JSObject(), opts.UseBytes.JSObject(), opts.Divisor)
+	p := ba.ctx.Get("Buffer").New(engine, data.JSObject(), updatable.JSObject(), opts.Stride, opts.PostponeInternalCreation, opts.Instanced, opts.UseBytes, opts.Divisor)
 	return BufferFromJSObject(p)
 }
 

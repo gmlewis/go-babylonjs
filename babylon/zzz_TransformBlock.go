@@ -14,8 +14,8 @@ type TransformBlock struct{ *NodeMaterialBlock }
 func (t *TransformBlock) JSObject() js.Value { return t.p }
 
 // TransformBlock returns a TransformBlock JavaScript class.
-func (b *Babylon) TransformBlock() *TransformBlock {
-	p := b.ctx.Get("TransformBlock")
+func (ba *Babylon) TransformBlock() *TransformBlock {
+	p := ba.ctx.Get("TransformBlock")
 	return TransformBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func TransformBlockFromJSObject(p js.Value) *TransformBlock {
 // NewTransformBlock returns a new TransformBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.transformblock
-func (b *Babylon) NewTransformBlock(name string) *TransformBlock {
-	p := b.ctx.Get("TransformBlock").New(name)
+func (ba *Babylon) NewTransformBlock(name string) *TransformBlock {
+	p := ba.ctx.Get("TransformBlock").New(name)
 	return TransformBlockFromJSObject(p)
 }
 

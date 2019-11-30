@@ -14,8 +14,8 @@ type EXT_lights_image_based struct{ p js.Value }
 func (e *EXT_lights_image_based) JSObject() js.Value { return e.p }
 
 // EXT_lights_image_based returns a EXT_lights_image_based JavaScript class.
-func (b *Babylon) EXT_lights_image_based() *EXT_lights_image_based {
-	p := b.ctx.Get("EXT_lights_image_based")
+func (ba *Babylon) EXT_lights_image_based() *EXT_lights_image_based {
+	p := ba.ctx.Get("EXT_lights_image_based")
 	return EXT_lights_image_basedFromJSObject(p)
 }
 

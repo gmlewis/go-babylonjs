@@ -14,8 +14,8 @@ type GeometryBufferRenderer struct{ p js.Value }
 func (g *GeometryBufferRenderer) JSObject() js.Value { return g.p }
 
 // GeometryBufferRenderer returns a GeometryBufferRenderer JavaScript class.
-func (b *Babylon) GeometryBufferRenderer() *GeometryBufferRenderer {
-	p := b.ctx.Get("GeometryBufferRenderer")
+func (ba *Babylon) GeometryBufferRenderer() *GeometryBufferRenderer {
+	p := ba.ctx.Get("GeometryBufferRenderer")
 	return GeometryBufferRendererFromJSObject(p)
 }
 
@@ -26,18 +26,18 @@ func GeometryBufferRendererFromJSObject(p js.Value) *GeometryBufferRenderer {
 
 // NewGeometryBufferRendererOpts contains optional parameters for NewGeometryBufferRenderer.
 type NewGeometryBufferRendererOpts struct {
-	Ratio *float64
+	Ratio *JSFloat64
 }
 
 // NewGeometryBufferRenderer returns a new GeometryBufferRenderer object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometrybufferrenderer
-func (b *Babylon) NewGeometryBufferRenderer(scene *Scene, opts *NewGeometryBufferRendererOpts) *GeometryBufferRenderer {
+func (ba *Babylon) NewGeometryBufferRenderer(scene *Scene, opts *NewGeometryBufferRendererOpts) *GeometryBufferRenderer {
 	if opts == nil {
 		opts = &NewGeometryBufferRendererOpts{}
 	}
 
-	p := b.ctx.Get("GeometryBufferRenderer").New(scene.JSObject(), opts.Ratio)
+	p := ba.ctx.Get("GeometryBufferRenderer").New(scene.JSObject(), opts.Ratio)
 	return GeometryBufferRendererFromJSObject(p)
 }
 

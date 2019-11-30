@@ -16,8 +16,8 @@ type Octree struct{ p js.Value }
 func (o *Octree) JSObject() js.Value { return o.p }
 
 // Octree returns a Octree JavaScript class.
-func (b *Babylon) Octree() *Octree {
-	p := b.ctx.Get("Octree")
+func (ba *Babylon) Octree() *Octree {
+	p := ba.ctx.Get("Octree")
 	return OctreeFromJSObject(p)
 }
 
@@ -28,20 +28,20 @@ func OctreeFromJSObject(p js.Value) *Octree {
 
 // NewOctreeOpts contains optional parameters for NewOctree.
 type NewOctreeOpts struct {
-	MaxBlockCapacity *float64
+	MaxBlockCapacity *JSFloat64
 
-	MaxDepth *float64
+	MaxDepth *JSFloat64
 }
 
 // NewOctree returns a new Octree object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.octree
-func (b *Babylon) NewOctree(creationFunc func(), opts *NewOctreeOpts) *Octree {
+func (ba *Babylon) NewOctree(creationFunc func(), opts *NewOctreeOpts) *Octree {
 	if opts == nil {
 		opts = &NewOctreeOpts{}
 	}
 
-	p := b.ctx.Get("Octree").New(creationFunc, opts.MaxBlockCapacity, opts.MaxDepth)
+	p := ba.ctx.Get("Octree").New(creationFunc, opts.MaxBlockCapacity, opts.MaxDepth)
 	return OctreeFromJSObject(p)
 }
 

@@ -15,8 +15,8 @@ type Style struct{ p js.Value }
 func (s *Style) JSObject() js.Value { return s.p }
 
 // Style returns a Style JavaScript class.
-func (b *Babylon) Style() *Style {
-	p := b.ctx.Get("Style")
+func (ba *Babylon) Style() *Style {
+	p := ba.ctx.Get("Style")
 	return StyleFromJSObject(p)
 }
 
@@ -28,8 +28,8 @@ func StyleFromJSObject(p js.Value) *Style {
 // NewStyle returns a new Style object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.style
-func (b *Babylon) NewStyle(host *AdvancedDynamicTexture) *Style {
-	p := b.ctx.Get("Style").New(host.JSObject())
+func (ba *Babylon) NewStyle(host *AdvancedDynamicTexture) *Style {
+	p := ba.ctx.Get("Style").New(host.JSObject())
 	return StyleFromJSObject(p)
 }
 

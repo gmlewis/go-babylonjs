@@ -14,8 +14,8 @@ type BRDFTextureTools struct{ p js.Value }
 func (b *BRDFTextureTools) JSObject() js.Value { return b.p }
 
 // BRDFTextureTools returns a BRDFTextureTools JavaScript class.
-func (b *Babylon) BRDFTextureTools() *BRDFTextureTools {
-	p := b.ctx.Get("BRDFTextureTools")
+func (ba *Babylon) BRDFTextureTools() *BRDFTextureTools {
+	p := ba.ctx.Get("BRDFTextureTools")
 	return BRDFTextureToolsFromJSObject(p)
 }
 

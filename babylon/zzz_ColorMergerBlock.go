@@ -14,8 +14,8 @@ type ColorMergerBlock struct{ *NodeMaterialBlock }
 func (c *ColorMergerBlock) JSObject() js.Value { return c.p }
 
 // ColorMergerBlock returns a ColorMergerBlock JavaScript class.
-func (b *Babylon) ColorMergerBlock() *ColorMergerBlock {
-	p := b.ctx.Get("ColorMergerBlock")
+func (ba *Babylon) ColorMergerBlock() *ColorMergerBlock {
+	p := ba.ctx.Get("ColorMergerBlock")
 	return ColorMergerBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func ColorMergerBlockFromJSObject(p js.Value) *ColorMergerBlock {
 // NewColorMergerBlock returns a new ColorMergerBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.colormergerblock
-func (b *Babylon) NewColorMergerBlock(name string) *ColorMergerBlock {
-	p := b.ctx.Get("ColorMergerBlock").New(name)
+func (ba *Babylon) NewColorMergerBlock(name string) *ColorMergerBlock {
+	p := ba.ctx.Get("ColorMergerBlock").New(name)
 	return ColorMergerBlockFromJSObject(p)
 }
 

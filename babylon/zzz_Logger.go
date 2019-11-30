@@ -15,8 +15,8 @@ type Logger struct{ p js.Value }
 func (l *Logger) JSObject() js.Value { return l.p }
 
 // Logger returns a Logger JavaScript class.
-func (b *Babylon) Logger() *Logger {
-	p := b.ctx.Get("Logger")
+func (ba *Babylon) Logger() *Logger {
+	p := ba.ctx.Get("Logger")
 	return LoggerFromJSObject(p)
 }
 

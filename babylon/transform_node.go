@@ -1,7 +1,6 @@
 package babylon
 
-import "syscall/js"
-
+/*
 // TransformNode represents a babylon.js TransformNode.
 type TransformNode struct{ *Node }
 
@@ -26,3 +25,4 @@ func (b *Babylon) NewTransformNode(name string, scene *Scene) *TransformNode {
 	p := b.ctx.Get("TransformNode").New(name, scene.JSObject())
 	return TransformNodeFromJSObject(p)
 }
+*/

@@ -14,8 +14,8 @@ type ChromaticAberrationPostProcess struct{ *PostProcess }
 func (c *ChromaticAberrationPostProcess) JSObject() js.Value { return c.p }
 
 // ChromaticAberrationPostProcess returns a ChromaticAberrationPostProcess JavaScript class.
-func (b *Babylon) ChromaticAberrationPostProcess() *ChromaticAberrationPostProcess {
-	p := b.ctx.Get("ChromaticAberrationPostProcess")
+func (ba *Babylon) ChromaticAberrationPostProcess() *ChromaticAberrationPostProcess {
+	p := ba.ctx.Get("ChromaticAberrationPostProcess")
 	return ChromaticAberrationPostProcessFromJSObject(p)
 }
 
@@ -26,26 +26,26 @@ func ChromaticAberrationPostProcessFromJSObject(p js.Value) *ChromaticAberration
 
 // NewChromaticAberrationPostProcessOpts contains optional parameters for NewChromaticAberrationPostProcess.
 type NewChromaticAberrationPostProcessOpts struct {
-	SamplingMode *float64
+	SamplingMode *JSFloat64
 
 	Engine *Engine
 
-	Reusable *bool
+	Reusable *JSBool
 
-	TextureType *float64
+	TextureType *JSFloat64
 
-	BlockCompilation *bool
+	BlockCompilation *JSBool
 }
 
 // NewChromaticAberrationPostProcess returns a new ChromaticAberrationPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.chromaticaberrationpostprocess
-func (b *Babylon) NewChromaticAberrationPostProcess(name string, screenWidth float64, screenHeight float64, options float64, camera *Camera, opts *NewChromaticAberrationPostProcessOpts) *ChromaticAberrationPostProcess {
+func (ba *Babylon) NewChromaticAberrationPostProcess(name string, screenWidth float64, screenHeight float64, options float64, camera *Camera, opts *NewChromaticAberrationPostProcessOpts) *ChromaticAberrationPostProcess {
 	if opts == nil {
 		opts = &NewChromaticAberrationPostProcessOpts{}
 	}
 
-	p := b.ctx.Get("ChromaticAberrationPostProcess").New(name, screenWidth, screenHeight, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType, opts.BlockCompilation.JSObject())
+	p := ba.ctx.Get("ChromaticAberrationPostProcess").New(name, screenWidth, screenHeight, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable, opts.TextureType, opts.BlockCompilation)
 	return ChromaticAberrationPostProcessFromJSObject(p)
 }
 

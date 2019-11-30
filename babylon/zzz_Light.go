@@ -16,8 +16,8 @@ type Light struct{ *Node }
 func (l *Light) JSObject() js.Value { return l.p }
 
 // Light returns a Light JavaScript class.
-func (b *Babylon) Light() *Light {
-	p := b.ctx.Get("Light")
+func (ba *Babylon) Light() *Light {
+	p := ba.ctx.Get("Light")
 	return LightFromJSObject(p)
 }
 
@@ -29,8 +29,8 @@ func LightFromJSObject(p js.Value) *Light {
 // NewLight returns a new Light object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.light
-func (b *Babylon) NewLight(name string, scene *Scene) *Light {
-	p := b.ctx.Get("Light").New(name, scene.JSObject())
+func (ba *Babylon) NewLight(name string, scene *Scene) *Light {
+	p := ba.ctx.Get("Light").New(name, scene.JSObject())
 	return LightFromJSObject(p)
 }
 

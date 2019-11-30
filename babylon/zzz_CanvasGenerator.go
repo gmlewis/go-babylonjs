@@ -14,8 +14,8 @@ type CanvasGenerator struct{ p js.Value }
 func (c *CanvasGenerator) JSObject() js.Value { return c.p }
 
 // CanvasGenerator returns a CanvasGenerator JavaScript class.
-func (b *Babylon) CanvasGenerator() *CanvasGenerator {
-	p := b.ctx.Get("CanvasGenerator")
+func (ba *Babylon) CanvasGenerator() *CanvasGenerator {
+	p := ba.ctx.Get("CanvasGenerator")
 	return CanvasGeneratorFromJSObject(p)
 }
 

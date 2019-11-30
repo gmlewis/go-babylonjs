@@ -17,8 +17,8 @@ type MultiMaterial struct{ *Material }
 func (m *MultiMaterial) JSObject() js.Value { return m.p }
 
 // MultiMaterial returns a MultiMaterial JavaScript class.
-func (b *Babylon) MultiMaterial() *MultiMaterial {
-	p := b.ctx.Get("MultiMaterial")
+func (ba *Babylon) MultiMaterial() *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial")
 	return MultiMaterialFromJSObject(p)
 }
 
@@ -30,8 +30,8 @@ func MultiMaterialFromJSObject(p js.Value) *MultiMaterial {
 // NewMultiMaterial returns a new MultiMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.multimaterial
-func (b *Babylon) NewMultiMaterial(name string, scene *Scene) *MultiMaterial {
-	p := b.ctx.Get("MultiMaterial").New(name, scene.JSObject())
+func (ba *Babylon) NewMultiMaterial(name string, scene *Scene) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(name, scene.JSObject())
 	return MultiMaterialFromJSObject(p)
 }
 

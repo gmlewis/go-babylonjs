@@ -14,8 +14,8 @@ type CellMaterial struct{ p js.Value }
 func (c *CellMaterial) JSObject() js.Value { return c.p }
 
 // CellMaterial returns a CellMaterial JavaScript class.
-func (b *Babylon) CellMaterial() *CellMaterial {
-	p := b.ctx.Get("CellMaterial")
+func (ba *Babylon) CellMaterial() *CellMaterial {
+	p := ba.ctx.Get("CellMaterial")
 	return CellMaterialFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func CellMaterialFromJSObject(p js.Value) *CellMaterial {
 // NewCellMaterial returns a new CellMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial
-func (b *Babylon) NewCellMaterial(name string, scene *Scene) *CellMaterial {
-	p := b.ctx.Get("CellMaterial").New(name, scene.JSObject())
+func (ba *Babylon) NewCellMaterial(name string, scene *Scene) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(name, scene.JSObject())
 	return CellMaterialFromJSObject(p)
 }
 

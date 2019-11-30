@@ -14,8 +14,8 @@ type OnAfterEnteringVRObservableEvent struct{ p js.Value }
 func (o *OnAfterEnteringVRObservableEvent) JSObject() js.Value { return o.p }
 
 // OnAfterEnteringVRObservableEvent returns a OnAfterEnteringVRObservableEvent JavaScript class.
-func (b *Babylon) OnAfterEnteringVRObservableEvent() *OnAfterEnteringVRObservableEvent {
-	p := b.ctx.Get("OnAfterEnteringVRObservableEvent")
+func (ba *Babylon) OnAfterEnteringVRObservableEvent() *OnAfterEnteringVRObservableEvent {
+	p := ba.ctx.Get("OnAfterEnteringVRObservableEvent")
 	return OnAfterEnteringVRObservableEventFromJSObject(p)
 }
 

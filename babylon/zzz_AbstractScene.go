@@ -16,8 +16,8 @@ type AbstractScene struct{ p js.Value }
 func (a *AbstractScene) JSObject() js.Value { return a.p }
 
 // AbstractScene returns a AbstractScene JavaScript class.
-func (b *Babylon) AbstractScene() *AbstractScene {
-	p := b.ctx.Get("AbstractScene")
+func (ba *Babylon) AbstractScene() *AbstractScene {
+	p := ba.ctx.Get("AbstractScene")
 	return AbstractSceneFromJSObject(p)
 }
 

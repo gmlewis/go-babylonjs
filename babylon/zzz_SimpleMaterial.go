@@ -14,8 +14,8 @@ type SimpleMaterial struct{ p js.Value }
 func (s *SimpleMaterial) JSObject() js.Value { return s.p }
 
 // SimpleMaterial returns a SimpleMaterial JavaScript class.
-func (b *Babylon) SimpleMaterial() *SimpleMaterial {
-	p := b.ctx.Get("SimpleMaterial")
+func (ba *Babylon) SimpleMaterial() *SimpleMaterial {
+	p := ba.ctx.Get("SimpleMaterial")
 	return SimpleMaterialFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func SimpleMaterialFromJSObject(p js.Value) *SimpleMaterial {
 // NewSimpleMaterial returns a new SimpleMaterial object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.simplematerial
-func (b *Babylon) NewSimpleMaterial(name string, scene *Scene) *SimpleMaterial {
-	p := b.ctx.Get("SimpleMaterial").New(name, scene.JSObject())
+func (ba *Babylon) NewSimpleMaterial(name string, scene *Scene) *SimpleMaterial {
+	p := ba.ctx.Get("SimpleMaterial").New(name, scene.JSObject())
 	return SimpleMaterialFromJSObject(p)
 }
 

@@ -14,8 +14,8 @@ type FogBlock struct{ *NodeMaterialBlock }
 func (f *FogBlock) JSObject() js.Value { return f.p }
 
 // FogBlock returns a FogBlock JavaScript class.
-func (b *Babylon) FogBlock() *FogBlock {
-	p := b.ctx.Get("FogBlock")
+func (ba *Babylon) FogBlock() *FogBlock {
+	p := ba.ctx.Get("FogBlock")
 	return FogBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func FogBlockFromJSObject(p js.Value) *FogBlock {
 // NewFogBlock returns a new FogBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.fogblock
-func (b *Babylon) NewFogBlock(name string) *FogBlock {
-	p := b.ctx.Get("FogBlock").New(name)
+func (ba *Babylon) NewFogBlock(name string) *FogBlock {
+	p := ba.ctx.Get("FogBlock").New(name)
 	return FogBlockFromJSObject(p)
 }
 

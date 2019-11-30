@@ -17,8 +17,8 @@ type CustomProceduralTexture struct{ *ProceduralTexture }
 func (c *CustomProceduralTexture) JSObject() js.Value { return c.p }
 
 // CustomProceduralTexture returns a CustomProceduralTexture JavaScript class.
-func (b *Babylon) CustomProceduralTexture() *CustomProceduralTexture {
-	p := b.ctx.Get("CustomProceduralTexture")
+func (ba *Babylon) CustomProceduralTexture() *CustomProceduralTexture {
+	p := ba.ctx.Get("CustomProceduralTexture")
 	return CustomProceduralTextureFromJSObject(p)
 }
 
@@ -31,18 +31,18 @@ func CustomProceduralTextureFromJSObject(p js.Value) *CustomProceduralTexture {
 type NewCustomProceduralTextureOpts struct {
 	FallbackTexture *Texture
 
-	GenerateMipMaps *bool
+	GenerateMipMaps *JSBool
 }
 
 // NewCustomProceduralTexture returns a new CustomProceduralTexture object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.customproceduraltexture
-func (b *Babylon) NewCustomProceduralTexture(name string, texturePath string, size float64, scene *Scene, opts *NewCustomProceduralTextureOpts) *CustomProceduralTexture {
+func (ba *Babylon) NewCustomProceduralTexture(name string, texturePath string, size float64, scene *Scene, opts *NewCustomProceduralTextureOpts) *CustomProceduralTexture {
 	if opts == nil {
 		opts = &NewCustomProceduralTextureOpts{}
 	}
 
-	p := b.ctx.Get("CustomProceduralTexture").New(name, texturePath, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps.JSObject())
+	p := ba.ctx.Get("CustomProceduralTexture").New(name, texturePath, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps)
 	return CustomProceduralTextureFromJSObject(p)
 }
 

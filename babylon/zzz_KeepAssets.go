@@ -14,8 +14,8 @@ type KeepAssets struct{ *AbstractScene }
 func (k *KeepAssets) JSObject() js.Value { return k.p }
 
 // KeepAssets returns a KeepAssets JavaScript class.
-func (b *Babylon) KeepAssets() *KeepAssets {
-	p := b.ctx.Get("KeepAssets")
+func (ba *Babylon) KeepAssets() *KeepAssets {
+	p := ba.ctx.Get("KeepAssets")
 	return KeepAssetsFromJSObject(p)
 }
 

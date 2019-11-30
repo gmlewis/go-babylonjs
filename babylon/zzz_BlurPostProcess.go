@@ -15,8 +15,8 @@ type BlurPostProcess struct{ *PostProcess }
 func (b *BlurPostProcess) JSObject() js.Value { return b.p }
 
 // BlurPostProcess returns a BlurPostProcess JavaScript class.
-func (b *Babylon) BlurPostProcess() *BlurPostProcess {
-	p := b.ctx.Get("BlurPostProcess")
+func (ba *Babylon) BlurPostProcess() *BlurPostProcess {
+	p := ba.ctx.Get("BlurPostProcess")
 	return BlurPostProcessFromJSObject(p)
 }
 
@@ -27,28 +27,28 @@ func BlurPostProcessFromJSObject(p js.Value) *BlurPostProcess {
 
 // NewBlurPostProcessOpts contains optional parameters for NewBlurPostProcess.
 type NewBlurPostProcessOpts struct {
-	SamplingMode *float64
+	SamplingMode *JSFloat64
 
 	Engine *Engine
 
-	Reusable *bool
+	Reusable *JSBool
 
-	TextureType *float64
+	TextureType *JSFloat64
 
-	Defines *string
+	Defines *JSString
 
-	BlockCompilation *bool
+	BlockCompilation *JSBool
 }
 
 // NewBlurPostProcess returns a new BlurPostProcess object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.blurpostprocess
-func (b *Babylon) NewBlurPostProcess(name string, direction *Vector2, kernel float64, options float64, camera *Camera, opts *NewBlurPostProcessOpts) *BlurPostProcess {
+func (ba *Babylon) NewBlurPostProcess(name string, direction *Vector2, kernel float64, options float64, camera *Camera, opts *NewBlurPostProcessOpts) *BlurPostProcess {
 	if opts == nil {
 		opts = &NewBlurPostProcessOpts{}
 	}
 
-	p := b.ctx.Get("BlurPostProcess").New(name, direction.JSObject(), kernel, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType, opts.Defines, opts.BlockCompilation.JSObject())
+	p := ba.ctx.Get("BlurPostProcess").New(name, direction.JSObject(), kernel, options, camera.JSObject(), opts.SamplingMode, opts.Engine.JSObject(), opts.Reusable, opts.TextureType, opts.Defines, opts.BlockCompilation)
 	return BlurPostProcessFromJSObject(p)
 }
 

@@ -16,8 +16,8 @@ type Sprite struct{ p js.Value }
 func (s *Sprite) JSObject() js.Value { return s.p }
 
 // Sprite returns a Sprite JavaScript class.
-func (b *Babylon) Sprite() *Sprite {
-	p := b.ctx.Get("Sprite")
+func (ba *Babylon) Sprite() *Sprite {
+	p := ba.ctx.Get("Sprite")
 	return SpriteFromJSObject(p)
 }
 
@@ -29,8 +29,8 @@ func SpriteFromJSObject(p js.Value) *Sprite {
 // NewSprite returns a new Sprite object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.sprite
-func (b *Babylon) NewSprite(name string, manager *ISpriteManager) *Sprite {
-	p := b.ctx.Get("Sprite").New(name, manager.JSObject())
+func (ba *Babylon) NewSprite(name string, manager js.Value) *Sprite {
+	p := ba.ctx.Get("Sprite").New(name, manager)
 	return SpriteFromJSObject(p)
 }
 

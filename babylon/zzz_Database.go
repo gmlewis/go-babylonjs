@@ -16,8 +16,8 @@ type Database struct{ p js.Value }
 func (d *Database) JSObject() js.Value { return d.p }
 
 // Database returns a Database JavaScript class.
-func (b *Babylon) Database() *Database {
-	p := b.ctx.Get("Database")
+func (ba *Babylon) Database() *Database {
+	p := ba.ctx.Get("Database")
 	return DatabaseFromJSObject(p)
 }
 
@@ -28,18 +28,18 @@ func DatabaseFromJSObject(p js.Value) *Database {
 
 // NewDatabaseOpts contains optional parameters for NewDatabase.
 type NewDatabaseOpts struct {
-	DisableManifestCheck *bool
+	DisableManifestCheck *JSBool
 }
 
 // NewDatabase returns a new Database object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.database
-func (b *Babylon) NewDatabase(urlToScene string, callbackManifestChecked func(), opts *NewDatabaseOpts) *Database {
+func (ba *Babylon) NewDatabase(urlToScene string, callbackManifestChecked func(), opts *NewDatabaseOpts) *Database {
 	if opts == nil {
 		opts = &NewDatabaseOpts{}
 	}
 
-	p := b.ctx.Get("Database").New(urlToScene, callbackManifestChecked, opts.DisableManifestCheck.JSObject())
+	p := ba.ctx.Get("Database").New(urlToScene, callbackManifestChecked, opts.DisableManifestCheck)
 	return DatabaseFromJSObject(p)
 }
 

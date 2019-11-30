@@ -16,8 +16,8 @@ type QuinticEase struct{ *EasingFunction }
 func (q *QuinticEase) JSObject() js.Value { return q.p }
 
 // QuinticEase returns a QuinticEase JavaScript class.
-func (b *Babylon) QuinticEase() *QuinticEase {
-	p := b.ctx.Get("QuinticEase")
+func (ba *Babylon) QuinticEase() *QuinticEase {
+	p := ba.ctx.Get("QuinticEase")
 	return QuinticEaseFromJSObject(p)
 }
 

@@ -16,8 +16,8 @@ type SceneLoader struct{ p js.Value }
 func (s *SceneLoader) JSObject() js.Value { return s.p }
 
 // SceneLoader returns a SceneLoader JavaScript class.
-func (b *Babylon) SceneLoader() *SceneLoader {
-	p := b.ctx.Get("SceneLoader")
+func (ba *Babylon) SceneLoader() *SceneLoader {
+	p := ba.ctx.Get("SceneLoader")
 	return SceneLoaderFromJSObject(p)
 }
 

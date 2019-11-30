@@ -17,8 +17,8 @@ type RayHelper struct{ p js.Value }
 func (r *RayHelper) JSObject() js.Value { return r.p }
 
 // RayHelper returns a RayHelper JavaScript class.
-func (b *Babylon) RayHelper() *RayHelper {
-	p := b.ctx.Get("RayHelper")
+func (ba *Babylon) RayHelper() *RayHelper {
+	p := ba.ctx.Get("RayHelper")
 	return RayHelperFromJSObject(p)
 }
 
@@ -30,8 +30,8 @@ func RayHelperFromJSObject(p js.Value) *RayHelper {
 // NewRayHelper returns a new RayHelper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.rayhelper
-func (b *Babylon) NewRayHelper(ray *Ray) *RayHelper {
-	p := b.ctx.Get("RayHelper").New(ray.JSObject())
+func (ba *Babylon) NewRayHelper(ray *Ray) *RayHelper {
+	p := ba.ctx.Get("RayHelper").New(ray.JSObject())
 	return RayHelperFromJSObject(p)
 }
 

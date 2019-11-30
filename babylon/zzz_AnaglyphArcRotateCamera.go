@@ -16,8 +16,8 @@ type AnaglyphArcRotateCamera struct{ *ArcRotateCamera }
 func (a *AnaglyphArcRotateCamera) JSObject() js.Value { return a.p }
 
 // AnaglyphArcRotateCamera returns a AnaglyphArcRotateCamera JavaScript class.
-func (b *Babylon) AnaglyphArcRotateCamera() *AnaglyphArcRotateCamera {
-	p := b.ctx.Get("AnaglyphArcRotateCamera")
+func (ba *Babylon) AnaglyphArcRotateCamera() *AnaglyphArcRotateCamera {
+	p := ba.ctx.Get("AnaglyphArcRotateCamera")
 	return AnaglyphArcRotateCameraFromJSObject(p)
 }
 
@@ -29,8 +29,8 @@ func AnaglyphArcRotateCameraFromJSObject(p js.Value) *AnaglyphArcRotateCamera {
 // NewAnaglyphArcRotateCamera returns a new AnaglyphArcRotateCamera object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.anaglypharcrotatecamera
-func (b *Babylon) NewAnaglyphArcRotateCamera(name string, alpha float64, beta float64, radius float64, target *Vector3, interaxialDistance float64, scene *Scene) *AnaglyphArcRotateCamera {
-	p := b.ctx.Get("AnaglyphArcRotateCamera").New(name, alpha, beta, radius, target.JSObject(), interaxialDistance, scene.JSObject())
+func (ba *Babylon) NewAnaglyphArcRotateCamera(name string, alpha float64, beta float64, radius float64, target *Vector3, interaxialDistance float64, scene *Scene) *AnaglyphArcRotateCamera {
+	p := ba.ctx.Get("AnaglyphArcRotateCamera").New(name, alpha, beta, radius, target.JSObject(), interaxialDistance, scene.JSObject())
 	return AnaglyphArcRotateCameraFromJSObject(p)
 }
 

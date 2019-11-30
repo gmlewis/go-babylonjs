@@ -14,8 +14,8 @@ type RandomNumberBlock struct{ *NodeMaterialBlock }
 func (r *RandomNumberBlock) JSObject() js.Value { return r.p }
 
 // RandomNumberBlock returns a RandomNumberBlock JavaScript class.
-func (b *Babylon) RandomNumberBlock() *RandomNumberBlock {
-	p := b.ctx.Get("RandomNumberBlock")
+func (ba *Babylon) RandomNumberBlock() *RandomNumberBlock {
+	p := ba.ctx.Get("RandomNumberBlock")
 	return RandomNumberBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func RandomNumberBlockFromJSObject(p js.Value) *RandomNumberBlock {
 // NewRandomNumberBlock returns a new RandomNumberBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.randomnumberblock
-func (b *Babylon) NewRandomNumberBlock(name string) *RandomNumberBlock {
-	p := b.ctx.Get("RandomNumberBlock").New(name)
+func (ba *Babylon) NewRandomNumberBlock(name string) *RandomNumberBlock {
+	p := ba.ctx.Get("RandomNumberBlock").New(name)
 	return RandomNumberBlockFromJSObject(p)
 }
 

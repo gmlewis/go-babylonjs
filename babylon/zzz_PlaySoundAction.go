@@ -14,8 +14,8 @@ type PlaySoundAction struct{ *Action }
 func (p *PlaySoundAction) JSObject() js.Value { return p.p }
 
 // PlaySoundAction returns a PlaySoundAction JavaScript class.
-func (b *Babylon) PlaySoundAction() *PlaySoundAction {
-	p := b.ctx.Get("PlaySoundAction")
+func (ba *Babylon) PlaySoundAction() *PlaySoundAction {
+	p := ba.ctx.Get("PlaySoundAction")
 	return PlaySoundActionFromJSObject(p)
 }
 
@@ -32,12 +32,12 @@ type NewPlaySoundActionOpts struct {
 // NewPlaySoundAction returns a new PlaySoundAction object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.playsoundaction
-func (b *Babylon) NewPlaySoundAction(triggerOptions interface{}, sound *Sound, opts *NewPlaySoundActionOpts) *PlaySoundAction {
+func (ba *Babylon) NewPlaySoundAction(triggerOptions interface{}, sound *Sound, opts *NewPlaySoundActionOpts) *PlaySoundAction {
 	if opts == nil {
 		opts = &NewPlaySoundActionOpts{}
 	}
 
-	p := b.ctx.Get("PlaySoundAction").New(triggerOptions, sound.JSObject(), opts.Condition.JSObject())
+	p := ba.ctx.Get("PlaySoundAction").New(triggerOptions, sound.JSObject(), opts.Condition.JSObject())
 	return PlaySoundActionFromJSObject(p)
 }
 

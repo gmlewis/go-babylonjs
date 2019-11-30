@@ -14,8 +14,8 @@ type SubtractBlock struct{ *NodeMaterialBlock }
 func (s *SubtractBlock) JSObject() js.Value { return s.p }
 
 // SubtractBlock returns a SubtractBlock JavaScript class.
-func (b *Babylon) SubtractBlock() *SubtractBlock {
-	p := b.ctx.Get("SubtractBlock")
+func (ba *Babylon) SubtractBlock() *SubtractBlock {
+	p := ba.ctx.Get("SubtractBlock")
 	return SubtractBlockFromJSObject(p)
 }
 
@@ -27,8 +27,8 @@ func SubtractBlockFromJSObject(p js.Value) *SubtractBlock {
 // NewSubtractBlock returns a new SubtractBlock object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.subtractblock
-func (b *Babylon) NewSubtractBlock(name string) *SubtractBlock {
-	p := b.ctx.Get("SubtractBlock").New(name)
+func (ba *Babylon) NewSubtractBlock(name string) *SubtractBlock {
+	p := ba.ctx.Get("SubtractBlock").New(name)
 	return SubtractBlockFromJSObject(p)
 }
 

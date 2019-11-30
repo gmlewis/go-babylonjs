@@ -14,8 +14,8 @@ type CylinderBuilder struct{ p js.Value }
 func (c *CylinderBuilder) JSObject() js.Value { return c.p }
 
 // CylinderBuilder returns a CylinderBuilder JavaScript class.
-func (b *Babylon) CylinderBuilder() *CylinderBuilder {
-	p := b.ctx.Get("CylinderBuilder")
+func (ba *Babylon) CylinderBuilder() *CylinderBuilder {
+	p := ba.ctx.Get("CylinderBuilder")
 	return CylinderBuilderFromJSObject(p)
 }
 
