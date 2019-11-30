@@ -1,3 +1,5 @@
+// 01-first-steps is a port to Go of the Babylon example located here:
+// https://doc.babylonjs.com/babylon101/first
 package main
 
 import (
