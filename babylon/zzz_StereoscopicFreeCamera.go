@@ -30,7 +30,7 @@ func StereoscopicFreeCameraFromJSObject(p js.Value) *StereoscopicFreeCamera {
 //
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicfreecamera
 func (ba *Babylon) NewStereoscopicFreeCamera(name string, position *Vector3, interaxialDistance float64, isStereoscopicSideBySide bool, scene *Scene) *StereoscopicFreeCamera {
-	p := ba.ctx.Get("StereoscopicFreeCamera").New(name, position.JSObject(), interaxialDistance, isStereoscopicSideBySide.JSObject(), scene.JSObject())
+	p := ba.ctx.Get("StereoscopicFreeCamera").New(name, position.JSObject(), interaxialDistance, isStereoscopicSideBySide, scene.JSObject())
 	return StereoscopicFreeCameraFromJSObject(p)
 }
 

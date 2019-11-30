@@ -30,7 +30,7 @@ func StereoscopicUniversalCameraFromJSObject(p js.Value) *StereoscopicUniversalC
 //
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera
 func (ba *Babylon) NewStereoscopicUniversalCamera(name string, position *Vector3, interaxialDistance float64, isStereoscopicSideBySide bool, scene *Scene) *StereoscopicUniversalCamera {
-	p := ba.ctx.Get("StereoscopicUniversalCamera").New(name, position.JSObject(), interaxialDistance, isStereoscopicSideBySide.JSObject(), scene.JSObject())
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(name, position.JSObject(), interaxialDistance, isStereoscopicSideBySide, scene.JSObject())
 	return StereoscopicUniversalCameraFromJSObject(p)
 }
 

@@ -30,7 +30,7 @@ func StereoscopicGamepadCameraFromJSObject(p js.Value) *StereoscopicGamepadCamer
 //
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera
 func (ba *Babylon) NewStereoscopicGamepadCamera(name string, position *Vector3, interaxialDistance float64, isStereoscopicSideBySide bool, scene *Scene) *StereoscopicGamepadCamera {
-	p := ba.ctx.Get("StereoscopicGamepadCamera").New(name, position.JSObject(), interaxialDistance, isStereoscopicSideBySide.JSObject(), scene.JSObject())
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(name, position.JSObject(), interaxialDistance, isStereoscopicSideBySide, scene.JSObject())
 	return StereoscopicGamepadCameraFromJSObject(p)
 }
 

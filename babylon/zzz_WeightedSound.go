@@ -28,7 +28,7 @@ func WeightedSoundFromJSObject(p js.Value) *WeightedSound {
 //
 // https://doc.babylonjs.com/api/classes/babylon.weightedsound
 func (ba *Babylon) NewWeightedSound(loop bool, sounds *Sound, weights float64) *WeightedSound {
-	p := ba.ctx.Get("WeightedSound").New(loop.JSObject(), sounds.JSObject(), weights)
+	p := ba.ctx.Get("WeightedSound").New(loop, sounds.JSObject(), weights)
 	return WeightedSoundFromJSObject(p)
 }
 

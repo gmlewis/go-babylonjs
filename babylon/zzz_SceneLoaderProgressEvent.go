@@ -28,7 +28,7 @@ func SceneLoaderProgressEventFromJSObject(p js.Value) *SceneLoaderProgressEvent 
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneloaderprogressevent
 func (ba *Babylon) NewSceneLoaderProgressEvent(lengthComputable bool, loaded float64, total float64) *SceneLoaderProgressEvent {
-	p := ba.ctx.Get("SceneLoaderProgressEvent").New(lengthComputable.JSObject(), loaded, total)
+	p := ba.ctx.Get("SceneLoaderProgressEvent").New(lengthComputable, loaded, total)
 	return SceneLoaderProgressEventFromJSObject(p)
 }
 

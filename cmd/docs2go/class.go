@@ -333,7 +333,7 @@ func (s *Signature) parseParameters() {
 					paramType = "interface{}"
 				case "function":
 					paramType = "func()"
-				case "[]Worker":
+				case "[]AbstractMesh", "[]Worker":
 					paramType = "[]js.Value"
 				case "string":
 					paramType = "JSString"
@@ -394,7 +394,7 @@ func (s *Signature) parseParameters() {
 				default:
 					jsName += ".JSObject()"
 				}
-				if !strings.HasPrefix(paramType, "*") && paramType != "js.Value" {
+				if !strings.HasPrefix(paramType, "*") && paramType != "js.Value" && !strings.HasPrefix(paramType, "[]") {
 					paramType = "*" + paramType
 				}
 			}
@@ -417,9 +417,11 @@ func (s *Signature) parseParameters() {
 					paramType = "interface{}"
 				case "function":
 					paramType = "func()"
-				case "[]Worker":
+				case "[]PostProcess",
+					"[]Mesh",
+					"[]Worker":
 					paramType = "[]js.Value"
-				case "string", "float64":
+				case "string", "float64", "bool", "[]string", "[]float64", "[]bool":
 				case
 					"*DistanceJointData",
 					"*EffectWrapperCreationOptions",

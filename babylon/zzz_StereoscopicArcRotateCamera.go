@@ -30,7 +30,7 @@ func StereoscopicArcRotateCameraFromJSObject(p js.Value) *StereoscopicArcRotateC
 //
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera
 func (ba *Babylon) NewStereoscopicArcRotateCamera(name string, alpha float64, beta float64, radius float64, target *Vector3, interaxialDistance float64, isStereoscopicSideBySide bool, scene *Scene) *StereoscopicArcRotateCamera {
-	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(name, alpha, beta, radius, target.JSObject(), interaxialDistance, isStereoscopicSideBySide.JSObject(), scene.JSObject())
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(name, alpha, beta, radius, target.JSObject(), interaxialDistance, isStereoscopicSideBySide, scene.JSObject())
 	return StereoscopicArcRotateCameraFromJSObject(p)
 }
 

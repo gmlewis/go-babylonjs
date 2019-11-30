@@ -27,7 +27,7 @@ func (ba *Babylon) FollowCameraInputsManager() *FollowCameraInputsManager {
 
 // FollowCameraInputsManagerFromJSObject returns a wrapped FollowCameraInputsManager JavaScript class.
 func FollowCameraInputsManagerFromJSObject(p js.Value) *FollowCameraInputsManager {
-	return &FollowCameraInputsManager{CameraInputsManagerFromJSObject(p)}
+	return &FollowCameraInputsManager{CameraInputsManagerFromJSObject(p), FollowCameraFromJSObject(p)}
 }
 
 // NewFollowCameraInputsManager returns a new FollowCameraInputsManager object.

@@ -28,7 +28,7 @@ func (ba *Babylon) FreeCameraInputsManager() *FreeCameraInputsManager {
 
 // FreeCameraInputsManagerFromJSObject returns a wrapped FreeCameraInputsManager JavaScript class.
 func FreeCameraInputsManagerFromJSObject(p js.Value) *FreeCameraInputsManager {
-	return &FreeCameraInputsManager{CameraInputsManagerFromJSObject(p)}
+	return &FreeCameraInputsManager{CameraInputsManagerFromJSObject(p), FreeCameraFromJSObject(p)}
 }
 
 // NewFreeCameraInputsManager returns a new FreeCameraInputsManager object.

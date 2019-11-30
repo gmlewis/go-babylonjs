@@ -53,7 +53,7 @@ func (ba *Babylon) NewVertexBuffer(engine interface{}, data []float64, kind stri
 		opts = &NewVertexBufferOpts{}
 	}
 
-	p := ba.ctx.Get("VertexBuffer").New(engine, data.JSObject(), kind, updatable.JSObject(), opts.PostponeInternalCreation, opts.Stride, opts.Instanced, opts.Offset, opts.Size, opts.Type, opts.Normalized, opts.UseBytes, opts.Divisor)
+	p := ba.ctx.Get("VertexBuffer").New(engine, data, kind, updatable, opts.PostponeInternalCreation, opts.Stride, opts.Instanced, opts.Offset, opts.Size, opts.Type, opts.Normalized, opts.UseBytes, opts.Divisor)
 	return VertexBufferFromJSObject(p)
 }
 

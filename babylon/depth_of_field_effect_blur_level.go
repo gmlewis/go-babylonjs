@@ -1,9 +1,23 @@
 package babylon
 
+import "syscall/js"
+
+// DepthOfFieldEffectBlurLevel represents a Babylon enum.
 type DepthOfFieldEffectBlurLevel int
 
 var (
-	DepthOfFieldEffectBlurLevel_Low    DepthOfFieldEffectBlurLevel = 0
-	DepthOfFieldEffectBlurLevel_Medium DepthOfFieldEffectBlurLevel = 1
-	DepthOfFieldEffectBlurLevel_High   DepthOfFieldEffectBlurLevel = 2
+	// DepthOfFieldEffectBlurLevelLow represents a Babylon enum.
+	DepthOfFieldEffectBlurLevelLow DepthOfFieldEffectBlurLevel = 0
+	// DepthOfFieldEffectBlurLevelMedium represents a Babylon enum.
+	DepthOfFieldEffectBlurLevelMedium DepthOfFieldEffectBlurLevel = 1
+	// DepthOfFieldEffectBlurLevelHigh represents a Babylon enum.
+	DepthOfFieldEffectBlurLevelHigh DepthOfFieldEffectBlurLevel = 2
 )
+
+// JSObject returns the underlying js.Value.
+func (d *DepthOfFieldEffectBlurLevel) JSObject() js.Value {
+	if d == nil {
+		return js.Null()
+	}
+	return js.ValueOf(*d)
+}

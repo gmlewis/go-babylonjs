@@ -26,7 +26,7 @@ func WebXRControllerTeleportationFromJSObject(p js.Value) *WebXRControllerTelepo
 
 // NewWebXRControllerTeleportationOpts contains optional parameters for NewWebXRControllerTeleportation.
 type NewWebXRControllerTeleportationOpts struct {
-	FloorMeshes *[]AbstractMesh
+	FloorMeshes []js.Value
 }
 
 // NewWebXRControllerTeleportation returns a new WebXRControllerTeleportation object.
@@ -37,7 +37,7 @@ func (ba *Babylon) NewWebXRControllerTeleportation(input *WebXRInput, opts *NewW
 		opts = &NewWebXRControllerTeleportationOpts{}
 	}
 
-	p := ba.ctx.Get("WebXRControllerTeleportation").New(input.JSObject(), opts.FloorMeshes.JSObject())
+	p := ba.ctx.Get("WebXRControllerTeleportation").New(input.JSObject(), opts.FloorMeshes)
 	return WebXRControllerTeleportationFromJSObject(p)
 }
 

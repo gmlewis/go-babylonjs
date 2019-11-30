@@ -28,7 +28,7 @@ func (ba *Babylon) ArcRotateCameraInputsManager() *ArcRotateCameraInputsManager 
 
 // ArcRotateCameraInputsManagerFromJSObject returns a wrapped ArcRotateCameraInputsManager JavaScript class.
 func ArcRotateCameraInputsManagerFromJSObject(p js.Value) *ArcRotateCameraInputsManager {
-	return &ArcRotateCameraInputsManager{CameraInputsManagerFromJSObject(p)}
+	return &ArcRotateCameraInputsManager{CameraInputsManagerFromJSObject(p), ArcRotateCameraFromJSObject(p)}
 }
 
 // NewArcRotateCameraInputsManager returns a new ArcRotateCameraInputsManager object.

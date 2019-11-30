@@ -27,7 +27,7 @@ func (ba *Babylon) FlyCameraInputsManager() *FlyCameraInputsManager {
 
 // FlyCameraInputsManagerFromJSObject returns a wrapped FlyCameraInputsManager JavaScript class.
 func FlyCameraInputsManagerFromJSObject(p js.Value) *FlyCameraInputsManager {
-	return &FlyCameraInputsManager{CameraInputsManagerFromJSObject(p)}
+	return &FlyCameraInputsManager{CameraInputsManagerFromJSObject(p), FlyCameraFromJSObject(p)}
 }
 
 // NewFlyCameraInputsManager returns a new FlyCameraInputsManager object.

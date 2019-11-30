@@ -70,8 +70,11 @@ func fromJSObject(parents []string) string {
 	if len(parents) == 0 {
 		return "p: p"
 	}
-	// Can only wrap first parent.
-	return fmt.Sprintf("%vFromJSObject(p)", parents[0])
+	var wraps []string
+	for _, p := range parents {
+		wraps = append(wraps, fmt.Sprintf("%vFromJSObject(p)", p))
+	}
+	return strings.Join(wraps, ", ")
 }
 
 func receiver(name string) string {

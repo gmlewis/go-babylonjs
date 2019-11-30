@@ -32,12 +32,12 @@ type NewMeshExploderOpts struct {
 // NewMeshExploder returns a new MeshExploder object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.meshexploder
-func (ba *Babylon) NewMeshExploder(meshes []Mesh, opts *NewMeshExploderOpts) *MeshExploder {
+func (ba *Babylon) NewMeshExploder(meshes []js.Value, opts *NewMeshExploderOpts) *MeshExploder {
 	if opts == nil {
 		opts = &NewMeshExploderOpts{}
 	}
 
-	p := ba.ctx.Get("MeshExploder").New(meshes.JSObject(), opts.CenterMesh.JSObject())
+	p := ba.ctx.Get("MeshExploder").New(meshes, opts.CenterMesh.JSObject())
 	return MeshExploderFromJSObject(p)
 }
 
