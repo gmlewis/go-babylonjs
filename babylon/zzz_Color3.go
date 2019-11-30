@@ -27,24 +27,11 @@ func Color3FromJSObject(p js.Value, ctx js.Value) *Color3 {
 	return &Color3{p: p, ctx: ctx}
 }
 
-// NewColor3Opts contains optional parameters for NewColor3.
-type NewColor3Opts struct {
-	R *JSFloat64
-
-	G *JSFloat64
-
-	B *JSFloat64
-}
-
 // NewColor3 returns a new Color3 object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.color3
-func (ba *Babylon) NewColor3(opts *NewColor3Opts) *Color3 {
-	if opts == nil {
-		opts = &NewColor3Opts{}
-	}
-
-	p := ba.ctx.Get("Color3").New(opts.R.JSObject(), opts.G.JSObject(), opts.B.JSObject())
+func (ba *Babylon) NewColor3(r float64, g float64, b float64) *Color3 {
+	p := ba.ctx.Get("Color3").New(r, g, b)
 	return Color3FromJSObject(p, ba.ctx)
 }
 

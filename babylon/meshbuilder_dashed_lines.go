@@ -15,11 +15,10 @@ func (b *Babylon) CreateDashedLines(name string, opts *DashedLinesOpts, scene *S
 	params := map[string]interface{}{}
 	if opts != nil {
 		if opts.Points != nil {
-			pts := []interface{}{}
-			for _, p := range opts.Points {
-				pts = append(pts, p.JSObject())
+			if opts.Points != nil {
+				pts := Vector3Slice(opts.Points)
+				params["points"] = pts.JSObject()
 			}
-			params["points"] = pts
 		}
 		if opts.DashSize != nil {
 			params["dashSize"] = *opts.DashSize

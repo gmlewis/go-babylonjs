@@ -233,6 +233,8 @@ type processOverrider func(s *Signature, names []string, optional []bool, types 
 func processConstructorOverrides(s *Signature, names []string, optional []bool, types []string) ([]string, []bool, []string) {
 	override := true
 	switch s.Name() {
+	case "NewColor3":
+		optional = []bool{false, false, false}
 	case "NewVector2":
 		optional = []bool{false, false}
 	case "NewVector3":

@@ -32,10 +32,12 @@ func (b *Babylon) CreatePlane(name string, opts *PlaneOpts, scene *Scene) *Mesh 
 			params["sideOrientation"] = *opts.SideOrientation
 		}
 		if opts.FrontUVs != nil {
-			params["frontUVs"] = opts.FrontUVs
+			pts := Vector4Slice(opts.FrontUVs)
+			params["frontUVs"] = pts.JSObject()
 		}
 		if opts.BackUVs != nil {
-			params["backUVs"] = opts.BackUVs
+			pts := Vector4Slice(opts.BackUVs)
+			params["backUVs"] = pts.JSObject()
 		}
 		if opts.SourcePlane != nil {
 			params["sourcePlane"] = opts.SourcePlane.JSObject()

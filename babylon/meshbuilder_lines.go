@@ -14,11 +14,8 @@ func (b *Babylon) CreateLines(name string, opts *LinesOpts, scene *Scene) *Lines
 	params := map[string]interface{}{}
 	if opts != nil {
 		if opts.Points != nil {
-			pts := []interface{}{}
-			for _, p := range opts.Points {
-				pts = append(pts, p.JSObject())
-			}
-			params["points"] = pts
+			pts := Vector3Slice(opts.Points)
+			params["points"] = pts.JSObject()
 		}
 		if opts.Updatable != nil {
 			params["updatable"] = *opts.Updatable
@@ -27,7 +24,8 @@ func (b *Babylon) CreateLines(name string, opts *LinesOpts, scene *Scene) *Lines
 			params["instance"] = opts.Instance.JSObject()
 		}
 		if opts.Colors != nil {
-			params["colors"] = opts.Colors
+			colors := Color4Slice(opts.Colors)
+			params["colors"] = colors.JSObject()
 		}
 		if opts.UseVertexAlpha != nil {
 			params["useVertexAlpha"] = *opts.UseVertexAlpha

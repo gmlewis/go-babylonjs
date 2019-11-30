@@ -29,10 +29,12 @@ func (b *Babylon) CreateBox(name string, opts *BoxOpts, scene *Scene) *Mesh {
 			params["depth"] = *opts.Depth
 		}
 		if opts.FaceColors != nil {
-			params["faceColors"] = opts.FaceColors
+			colors := Color4Slice(opts.FaceColors)
+			params["faceColors"] = colors.JSObject()
 		}
 		if opts.FaceUV != nil {
-			params["faceUV"] = opts.FaceUV
+			pts := Vector4Slice(opts.FaceUV)
+			params["faceUV"] = pts.JSObject()
 		}
 		if opts.Updatable != nil {
 			params["updatable"] = *opts.Updatable
