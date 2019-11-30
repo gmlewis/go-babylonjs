@@ -38,7 +38,7 @@ func (b *Babylon) CreatePlane(name string, opts *PlaneOpts, scene *Scene) *Mesh 
 			params["backUVs"] = opts.BackUVs
 		}
 		if opts.SourcePlane != nil {
-			params["sourcePlane"] = *opts.SourcePlane
+			params["sourcePlane"] = opts.SourcePlane.JSObject()
 		}
 	}
 
