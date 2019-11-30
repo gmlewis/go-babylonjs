@@ -1,7 +1,5 @@
 package babylon
 
-import ()
-
 // SphereOpts represents options passed to CreateSphere.
 type SphereOpts struct {
 	Diameter *float64
