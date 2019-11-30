@@ -1,7 +1,7 @@
-# Babylon Discover Basic Elements: Box
+# Babylon Discover Basic Elements: Ellipsoid
 
-02-discover-basic-elements-box is a port to Go of the Babylon example located here:
-https://www.babylonjs-playground.com/#3QW4J1#1
+03-discover-basic-elements-ellipsoid is a port to Go of the Babylon example located here:
+https://www.babylonjs-playground.com/#K6M44R
 and linked from here:
 https://doc.babylonjs.com/babylon101/discover_basic_elements
 

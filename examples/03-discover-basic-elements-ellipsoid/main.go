@@ -1,5 +1,5 @@
-// 02-discover-basic-elements-box is a port to Go of the Babylon example located here:
-// https://www.babylonjs-playground.com/#3QW4J1#1
+// 03-discover-basic-elements-ellipsoid is a port to Go of the Babylon example located here:
+// https://www.babylonjs-playground.com/#K6M44R
 // and linked from here:
 // https://doc.babylonjs.com/babylon101/discover_basic_elements
 package main
@@ -26,7 +26,7 @@ func main() {
 		scene := b.NewScene(engine, nil)
 
 		// Add a camera to the scene and attach it to the canvas
-		camera := b.NewArcRotateCamera("Camera", 3*math.Pi/4, math.Pi/4, 4, b.Vector3().Zero(), scene, nil)
+		camera := b.NewArcRotateCamera("Camera", math.Pi/2, math.Pi/2, 4, b.Vector3().Zero(), scene, nil)
 		camera.AttachControl(canvas, true)
 
 		// Add lights to the scene
@@ -34,7 +34,7 @@ func main() {
 		b.NewPointLight("light2", b.NewVector3(0, 1, -1), scene)
 
 		// Add and manipulate meshes in the scene
-		b.CreateBox("box", &babylon.BoxOpts{Height: Float64(1), Width: Float64(0.75), Depth: Float64(0.25)}, scene)
+		b.CreateSphere("sphere", &babylon.SphereOpts{DiameterX: Float64(1), DiameterY: Float64(0.75), DiameterZ: Float64(0.25)}, scene)
 
 		return scene
 	}

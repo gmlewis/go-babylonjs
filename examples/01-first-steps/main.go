@@ -1,4 +1,6 @@
 // 01-first-steps is a port to Go of the Babylon example located here:
+// https://www.babylonjs-playground.com/#WG9OY#1
+// and linked from here:
 // https://doc.babylonjs.com/babylon101/first
 package main
 
