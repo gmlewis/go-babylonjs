@@ -38,7 +38,7 @@ func PointerDragBehaviorArrayToJSArray(array []*PointerDragBehavior) []interface
 
 // NewPointerDragBehaviorOpts contains optional parameters for NewPointerDragBehavior.
 type NewPointerDragBehaviorOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // NewPointerDragBehavior returns a new PointerDragBehavior object.
@@ -63,7 +63,7 @@ func (ba *Babylon) NewPointerDragBehavior(opts *NewPointerDragBehaviorOpts) *Poi
 
 // PointerDragBehaviorAttachOpts contains optional parameters for PointerDragBehavior.Attach.
 type PointerDragBehaviorAttachOpts struct {
-	Predicate *func()
+	Predicate func()
 }
 
 // Attach calls the Attach method on the PointerDragBehavior object.

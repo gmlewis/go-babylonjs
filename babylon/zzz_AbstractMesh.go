@@ -1248,11 +1248,7 @@ func (a *AbstractMesh) Intersects(ray *Ray, opts *AbstractMeshIntersectsOpts) *P
 	} else {
 		args = append(args, *opts.FastCheck)
 	}
-	if opts.TrianglePredicate == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.TrianglePredicate)
-	}
+	args = append(args, opts.TrianglePredicate)
 
 	retVal := a.p.Call("intersects", args...)
 	return PickingInfoFromJSObject(retVal, a.ctx)
@@ -1463,11 +1459,7 @@ func (a *AbstractMesh) LookAt(targetPoint *Vector3, opts *AbstractMeshLookAtOpts
 	} else {
 		args = append(args, *opts.RollCor)
 	}
-	if opts.Space == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Space)
-	}
+	args = append(args, opts.Space)
 
 	retVal := a.p.Call("lookAt", args...)
 	return TransformNodeFromJSObject(retVal, a.ctx)
@@ -1671,11 +1663,7 @@ func (a *AbstractMesh) Rotate(axis *Vector3, amount float64, opts *AbstractMeshR
 	args = append(args, axis.JSObject())
 	args = append(args, amount)
 
-	if opts.Space == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Space)
-	}
+	args = append(args, opts.Space)
 
 	retVal := a.p.Call("rotate", args...)
 	return TransformNodeFromJSObject(retVal, a.ctx)
@@ -1922,11 +1910,7 @@ func (a *AbstractMesh) SetPivotPoint(point *Vector3, opts *AbstractMeshSetPivotP
 
 	args = append(args, point.JSObject())
 
-	if opts.Space == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Space)
-	}
+	args = append(args, opts.Space)
 
 	retVal := a.p.Call("setPivotPoint", args...)
 	return TransformNodeFromJSObject(retVal, a.ctx)
@@ -2035,11 +2019,7 @@ func (a *AbstractMesh) Translate(axis *Vector3, distance float64, opts *Abstract
 	args = append(args, axis.JSObject())
 	args = append(args, distance)
 
-	if opts.Space == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Space)
-	}
+	args = append(args, opts.Space)
 
 	retVal := a.p.Call("translate", args...)
 	return TransformNodeFromJSObject(retVal, a.ctx)
@@ -2881,16 +2861,16 @@ func (a *AbstractMesh) SetInspectableCustomProperties(inspectableCustomPropertie
 // InstancedBuffers returns the InstancedBuffers property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#instancedbuffers
-func (a *AbstractMesh) InstancedBuffers(instancedBuffers *object) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(instancedBuffers.JSObject())
+func (a *AbstractMesh) InstancedBuffers(instancedBuffers js.Value) *AbstractMesh {
+	p := ba.ctx.Get("AbstractMesh").New(instancedBuffers)
 	return AbstractMeshFromJSObject(p, ba.ctx)
 }
 
 // SetInstancedBuffers sets the InstancedBuffers property of class AbstractMesh.
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractmesh#instancedbuffers
-func (a *AbstractMesh) SetInstancedBuffers(instancedBuffers *object) *AbstractMesh {
-	p := ba.ctx.Get("AbstractMesh").New(instancedBuffers.JSObject())
+func (a *AbstractMesh) SetInstancedBuffers(instancedBuffers js.Value) *AbstractMesh {
+	p := ba.ctx.Get("AbstractMesh").New(instancedBuffers)
 	return AbstractMeshFromJSObject(p, ba.ctx)
 }
 

@@ -131,7 +131,7 @@ func (m *MorphTargetsBlock) Clone(scene *Scene, opts *MorphTargetsBlockCloneOpts
 
 // MorphTargetsBlockConnectToOpts contains optional parameters for MorphTargetsBlock.ConnectTo.
 type MorphTargetsBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the MorphTargetsBlock object.
@@ -382,11 +382,7 @@ func (m *MorphTargetsBlock) RegisterInput(name string, jsType js.Value, opts *Mo
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := m.p.Call("registerInput", args...)
 	return MorphTargetsBlockFromJSObject(retVal, m.ctx)
@@ -410,11 +406,7 @@ func (m *MorphTargetsBlock) RegisterOutput(name string, jsType js.Value, opts *M
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := m.p.Call("registerOutput", args...)
 	return MorphTargetsBlockFromJSObject(retVal, m.ctx)

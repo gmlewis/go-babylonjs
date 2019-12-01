@@ -108,7 +108,7 @@ func (b *BaseSlider) GetClassName() string {
 // BaseSliderGetDescendantsOpts contains optional parameters for BaseSlider.GetDescendants.
 type BaseSliderGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the BaseSlider object.
@@ -139,7 +139,7 @@ func (b *BaseSlider) GetDescendants(opts *BaseSliderGetDescendantsOpts) *Control
 // BaseSliderGetDescendantsToRefOpts contains optional parameters for BaseSlider.GetDescendantsToRef.
 type BaseSliderGetDescendantsToRefOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendantsToRef calls the GetDescendantsToRef method on the BaseSlider object.

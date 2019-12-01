@@ -77,7 +77,7 @@ func (f *FramingBehavior) StopAllAnimations() {
 // FramingBehaviorZoomOnBoundingInfoOpts contains optional parameters for FramingBehavior.ZoomOnBoundingInfo.
 type FramingBehaviorZoomOnBoundingInfoOpts struct {
 	FocusOnOriginXZ *bool
-	OnAnimationEnd  *func()
+	OnAnimationEnd  func()
 }
 
 // ZoomOnBoundingInfo calls the ZoomOnBoundingInfo method on the FramingBehavior object.
@@ -110,7 +110,7 @@ func (f *FramingBehavior) ZoomOnBoundingInfo(minimumWorld *Vector3, maximumWorld
 // FramingBehaviorZoomOnMeshOpts contains optional parameters for FramingBehavior.ZoomOnMesh.
 type FramingBehaviorZoomOnMeshOpts struct {
 	FocusOnOriginXZ *bool
-	OnAnimationEnd  *func()
+	OnAnimationEnd  func()
 }
 
 // ZoomOnMesh calls the ZoomOnMesh method on the FramingBehavior object.
@@ -142,7 +142,7 @@ func (f *FramingBehavior) ZoomOnMesh(mesh *AbstractMesh, opts *FramingBehaviorZo
 // FramingBehaviorZoomOnMeshHierarchyOpts contains optional parameters for FramingBehavior.ZoomOnMeshHierarchy.
 type FramingBehaviorZoomOnMeshHierarchyOpts struct {
 	FocusOnOriginXZ *bool
-	OnAnimationEnd  *func()
+	OnAnimationEnd  func()
 }
 
 // ZoomOnMeshHierarchy calls the ZoomOnMeshHierarchy method on the FramingBehavior object.
@@ -174,7 +174,7 @@ func (f *FramingBehavior) ZoomOnMeshHierarchy(mesh *AbstractMesh, opts *FramingB
 // FramingBehaviorZoomOnMeshesHierarchyOpts contains optional parameters for FramingBehavior.ZoomOnMeshesHierarchy.
 type FramingBehaviorZoomOnMeshesHierarchyOpts struct {
 	FocusOnOriginXZ *bool
-	OnAnimationEnd  *func()
+	OnAnimationEnd  func()
 }
 
 // ZoomOnMeshesHierarchy calls the ZoomOnMeshesHierarchy method on the FramingBehavior object.

@@ -65,7 +65,7 @@ func (i *ISceneLoaderPluginAsync) DirectLoad(scene *Scene, data string) interfac
 
 // ISceneLoaderPluginAsyncImportMeshAsyncOpts contains optional parameters for ISceneLoaderPluginAsync.ImportMeshAsync.
 type ISceneLoaderPluginAsyncImportMeshAsyncOpts struct {
-	OnProgress *func()
+	OnProgress func()
 	FileName   *string
 }
 
@@ -101,7 +101,7 @@ func (i *ISceneLoaderPluginAsync) ImportMeshAsync(meshesNames interface{}, scene
 
 // ISceneLoaderPluginAsyncLoadAssetContainerAsyncOpts contains optional parameters for ISceneLoaderPluginAsync.LoadAssetContainerAsync.
 type ISceneLoaderPluginAsyncLoadAssetContainerAsyncOpts struct {
-	OnProgress *func()
+	OnProgress func()
 	FileName   *string
 }
 
@@ -136,7 +136,7 @@ func (i *ISceneLoaderPluginAsync) LoadAssetContainerAsync(scene *Scene, data int
 
 // ISceneLoaderPluginAsyncLoadAsyncOpts contains optional parameters for ISceneLoaderPluginAsync.LoadAsync.
 type ISceneLoaderPluginAsyncLoadAsyncOpts struct {
-	OnProgress *func()
+	OnProgress func()
 	FileName   *string
 }
 
@@ -171,9 +171,9 @@ func (i *ISceneLoaderPluginAsync) LoadAsync(scene *Scene, data interface{}, root
 
 // ISceneLoaderPluginAsyncReadFileOpts contains optional parameters for ISceneLoaderPluginAsync.ReadFile.
 type ISceneLoaderPluginAsyncReadFileOpts struct {
-	OnProgress     *func()
+	OnProgress     func()
 	UseArrayBuffer *bool
-	OnError        *func()
+	OnError        func()
 }
 
 // ReadFile calls the ReadFile method on the ISceneLoaderPluginAsync object.
@@ -212,9 +212,9 @@ func (i *ISceneLoaderPluginAsync) ReadFile(scene *Scene, file js.Value, onSucces
 
 // ISceneLoaderPluginAsyncRequestFileOpts contains optional parameters for ISceneLoaderPluginAsync.RequestFile.
 type ISceneLoaderPluginAsyncRequestFileOpts struct {
-	OnProgress     *func()
+	OnProgress     func()
 	UseArrayBuffer *bool
-	OnError        *func()
+	OnError        func()
 }
 
 // RequestFile calls the RequestFile method on the ISceneLoaderPluginAsync object.

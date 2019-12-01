@@ -108,7 +108,7 @@ func (g *GearVRController) GetForwardRay(opts *GearVRControllerGetForwardRayOpts
 
 // GearVRControllerInitControllerMeshOpts contains optional parameters for GearVRController.InitControllerMesh.
 type GearVRControllerInitControllerMeshOpts struct {
-	MeshLoaded *func()
+	MeshLoaded func()
 }
 
 // InitControllerMesh calls the InitControllerMesh method on the GearVRController object.

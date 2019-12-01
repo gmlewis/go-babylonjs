@@ -10,7 +10,7 @@ import (
 // A point light is a light defined by an unique point in world space.
 // The light is emitted in every direction from this point.
 // A good example of a point light is a standard light bulb.
-// Documentation: &lt;a href=&#34;https://doc.babylonjs.com/babylon101/lights&#34;&gt;https://doc.babylonjs.com/babylon101/lights&lt;/a&gt;
+// Documentation: <a href="https://doc.babylonjs.com/babylon101/lights">https://doc.babylonjs.com/babylon101/lights</a>
 type PointLight struct {
 	*ShadowLight
 	ctx js.Value
@@ -98,7 +98,7 @@ func (p *PointLight) AddNodeConstructor(jsType string, constructorFunc js.Value)
 type PointLightBeginAnimationOpts struct {
 	Loop           *bool
 	SpeedRatio     *float64
-	OnAnimationEnd *func()
+	OnAnimationEnd func()
 }
 
 // BeginAnimation calls the BeginAnimation method on the PointLight object.
@@ -409,7 +409,7 @@ func (p *PointLight) GetBehaviorByName(name string) js.Value {
 // PointLightGetChildMeshesOpts contains optional parameters for PointLight.GetChildMeshes.
 type PointLightGetChildMeshesOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetChildMeshes calls the GetChildMeshes method on the PointLight object.
@@ -439,7 +439,7 @@ func (p *PointLight) GetChildMeshes(opts *PointLightGetChildMeshesOpts) *Abstrac
 
 // PointLightGetChildrenOpts contains optional parameters for PointLight.GetChildren.
 type PointLightGetChildrenOpts struct {
-	Predicate             *func()
+	Predicate             func()
 	DirectDescendantsOnly *bool
 }
 
@@ -530,7 +530,7 @@ func (p *PointLight) GetDepthScale() float64 {
 // PointLightGetDescendantsOpts contains optional parameters for PointLight.GetDescendants.
 type PointLightGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the PointLight object.
@@ -570,7 +570,7 @@ func (p *PointLight) GetEngine() *Engine {
 // PointLightGetHierarchyBoundingVectorsOpts contains optional parameters for PointLight.GetHierarchyBoundingVectors.
 type PointLightGetHierarchyBoundingVectorsOpts struct {
 	IncludeDescendants *bool
-	Predicate          *func()
+	Predicate          func()
 }
 
 // GetHierarchyBoundingVectors calls the GetHierarchyBoundingVectors method on the PointLight object.

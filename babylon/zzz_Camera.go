@@ -164,7 +164,7 @@ func (c *Camera) AttachPostProcess(postProcess *PostProcess, opts *CameraAttachP
 type CameraBeginAnimationOpts struct {
 	Loop           *bool
 	SpeedRatio     *float64
-	OnAnimationEnd *func()
+	OnAnimationEnd func()
 }
 
 // BeginAnimation calls the BeginAnimation method on the Camera object.
@@ -428,7 +428,7 @@ func (c *Camera) GetBehaviorByName(name string) js.Value {
 // CameraGetChildMeshesOpts contains optional parameters for Camera.GetChildMeshes.
 type CameraGetChildMeshesOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetChildMeshes calls the GetChildMeshes method on the Camera object.
@@ -458,7 +458,7 @@ func (c *Camera) GetChildMeshes(opts *CameraGetChildMeshesOpts) *AbstractMesh {
 
 // CameraGetChildrenOpts contains optional parameters for Camera.GetChildren.
 type CameraGetChildrenOpts struct {
-	Predicate             *func()
+	Predicate             func()
 	DirectDescendantsOnly *bool
 }
 
@@ -534,7 +534,7 @@ func (c *Camera) GetConstructorFromName(jsType string, name string, scene *Scene
 // CameraGetDescendantsOpts contains optional parameters for Camera.GetDescendants.
 type CameraGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the Camera object.
@@ -637,7 +637,7 @@ func (c *Camera) GetForwardRay(opts *CameraGetForwardRayOpts) *Ray {
 // CameraGetHierarchyBoundingVectorsOpts contains optional parameters for Camera.GetHierarchyBoundingVectors.
 type CameraGetHierarchyBoundingVectorsOpts struct {
 	IncludeDescendants *bool
-	Predicate          *func()
+	Predicate          func()
 }
 
 // GetHierarchyBoundingVectors calls the GetHierarchyBoundingVectors method on the Camera object.

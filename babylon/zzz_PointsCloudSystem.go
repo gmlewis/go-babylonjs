@@ -43,7 +43,7 @@ func PointsCloudSystemArrayToJSArray(array []*PointsCloudSystem) []interface{} {
 
 // NewPointsCloudSystemOpts contains optional parameters for NewPointsCloudSystem.
 type NewPointsCloudSystemOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // NewPointsCloudSystem returns a new PointsCloudSystem object.

@@ -65,7 +65,7 @@ func (i *ISceneLoaderPlugin) DirectLoad(scene *Scene, data string) interface{} {
 
 // ISceneLoaderPluginImportMeshOpts contains optional parameters for ISceneLoaderPlugin.ImportMesh.
 type ISceneLoaderPluginImportMeshOpts struct {
-	OnError *func()
+	OnError func()
 }
 
 // ImportMesh calls the ImportMesh method on the ISceneLoaderPlugin object.
@@ -98,7 +98,7 @@ func (i *ISceneLoaderPlugin) ImportMesh(meshesNames interface{}, scene *Scene, d
 
 // ISceneLoaderPluginLoadOpts contains optional parameters for ISceneLoaderPlugin.Load.
 type ISceneLoaderPluginLoadOpts struct {
-	OnError *func()
+	OnError func()
 }
 
 // Load calls the Load method on the ISceneLoaderPlugin object.
@@ -127,7 +127,7 @@ func (i *ISceneLoaderPlugin) Load(scene *Scene, data interface{}, rootUrl string
 
 // ISceneLoaderPluginLoadAssetContainerOpts contains optional parameters for ISceneLoaderPlugin.LoadAssetContainer.
 type ISceneLoaderPluginLoadAssetContainerOpts struct {
-	OnError *func()
+	OnError func()
 }
 
 // LoadAssetContainer calls the LoadAssetContainer method on the ISceneLoaderPlugin object.
@@ -156,9 +156,9 @@ func (i *ISceneLoaderPlugin) LoadAssetContainer(scene *Scene, data interface{}, 
 
 // ISceneLoaderPluginReadFileOpts contains optional parameters for ISceneLoaderPlugin.ReadFile.
 type ISceneLoaderPluginReadFileOpts struct {
-	OnProgress     *func()
+	OnProgress     func()
 	UseArrayBuffer *bool
-	OnError        *func()
+	OnError        func()
 }
 
 // ReadFile calls the ReadFile method on the ISceneLoaderPlugin object.
@@ -197,9 +197,9 @@ func (i *ISceneLoaderPlugin) ReadFile(scene *Scene, file js.Value, onSuccess fun
 
 // ISceneLoaderPluginRequestFileOpts contains optional parameters for ISceneLoaderPlugin.RequestFile.
 type ISceneLoaderPluginRequestFileOpts struct {
-	OnProgress     *func()
+	OnProgress     func()
 	UseArrayBuffer *bool
-	OnError        *func()
+	OnError        func()
 }
 
 // RequestFile calls the RequestFile method on the ISceneLoaderPlugin object.

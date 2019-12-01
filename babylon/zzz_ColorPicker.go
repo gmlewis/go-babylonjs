@@ -108,7 +108,7 @@ func (c *ColorPicker) GetClassName() string {
 // ColorPickerGetDescendantsOpts contains optional parameters for ColorPicker.GetDescendants.
 type ColorPickerGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the ColorPicker object.
@@ -139,7 +139,7 @@ func (c *ColorPicker) GetDescendants(opts *ColorPickerGetDescendantsOpts) *Contr
 // ColorPickerGetDescendantsToRefOpts contains optional parameters for ColorPicker.GetDescendantsToRef.
 type ColorPickerGetDescendantsToRefOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendantsToRef calls the GetDescendantsToRef method on the ColorPicker object.

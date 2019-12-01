@@ -131,7 +131,7 @@ func (r *ReflectionTextureBlock) Clone(scene *Scene, opts *ReflectionTextureBloc
 
 // ReflectionTextureBlockConnectToOpts contains optional parameters for ReflectionTextureBlock.ConnectTo.
 type ReflectionTextureBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the ReflectionTextureBlock object.
@@ -362,11 +362,7 @@ func (r *ReflectionTextureBlock) RegisterInput(name string, jsType js.Value, opt
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := r.p.Call("registerInput", args...)
 	return ReflectionTextureBlockFromJSObject(retVal, r.ctx)
@@ -390,11 +386,7 @@ func (r *ReflectionTextureBlock) RegisterOutput(name string, jsType js.Value, op
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := r.p.Call("registerOutput", args...)
 	return ReflectionTextureBlockFromJSObject(retVal, r.ctx)

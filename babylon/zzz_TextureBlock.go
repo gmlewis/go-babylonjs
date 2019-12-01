@@ -131,7 +131,7 @@ func (t *TextureBlock) Clone(scene *Scene, opts *TextureBlockCloneOpts) *NodeMat
 
 // TextureBlockConnectToOpts contains optional parameters for TextureBlock.ConnectTo.
 type TextureBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the TextureBlock object.
@@ -362,11 +362,7 @@ func (t *TextureBlock) RegisterInput(name string, jsType js.Value, opts *Texture
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := t.p.Call("registerInput", args...)
 	return TextureBlockFromJSObject(retVal, t.ctx)
@@ -390,11 +386,7 @@ func (t *TextureBlock) RegisterOutput(name string, jsType js.Value, opts *Textur
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := t.p.Call("registerOutput", args...)
 	return TextureBlockFromJSObject(retVal, t.ctx)

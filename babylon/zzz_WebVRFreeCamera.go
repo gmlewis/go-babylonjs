@@ -8,7 +8,7 @@ import (
 
 // WebVRFreeCamera represents a babylon.js WebVRFreeCamera.
 // This represents a WebVR camera.
-// The WebVR camera is Babylon&amp;#39;s simple interface to interaction with Windows Mixed Reality, HTC Vive and Oculus Rift.
+// The WebVR camera is Babylon&#39;s simple interface to interaction with Windows Mixed Reality, HTC Vive and Oculus Rift.
 //
 // See: http://doc.babylonjs.com/how_to/webvr_camera
 type WebVRFreeCamera struct {
@@ -58,11 +58,7 @@ func (ba *Babylon) NewWebVRFreeCamera(name string, position *Vector3, scene *Sce
 	args = append(args, position.JSObject())
 	args = append(args, scene.JSObject())
 
-	if opts.WebVROptions == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.WebVROptions)
-	}
+	args = append(args, opts.WebVROptions)
 
 	p := ba.ctx.Get("WebVRFreeCamera").New(args...)
 	return WebVRFreeCameraFromJSObject(p, ba.ctx)
@@ -251,7 +247,7 @@ func (w *WebVRFreeCamera) UpdateFromDevice(poseData js.Value) {
 
 // WebVRFreeCameraUseStandingMatrixOpts contains optional parameters for WebVRFreeCamera.UseStandingMatrix.
 type WebVRFreeCameraUseStandingMatrixOpts struct {
-	Callback *func()
+	Callback func()
 }
 
 // UseStandingMatrix calls the UseStandingMatrix method on the WebVRFreeCamera object.

@@ -131,7 +131,7 @@ func (r *RandomNumberBlock) Clone(scene *Scene, opts *RandomNumberBlockCloneOpts
 
 // RandomNumberBlockConnectToOpts contains optional parameters for RandomNumberBlock.ConnectTo.
 type RandomNumberBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the RandomNumberBlock object.
@@ -396,11 +396,7 @@ func (r *RandomNumberBlock) RegisterInput(name string, jsType js.Value, opts *Ra
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := r.p.Call("registerInput", args...)
 	return RandomNumberBlockFromJSObject(retVal, r.ctx)
@@ -424,11 +420,7 @@ func (r *RandomNumberBlock) RegisterOutput(name string, jsType js.Value, opts *R
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := r.p.Call("registerOutput", args...)
 	return RandomNumberBlockFromJSObject(retVal, r.ctx)

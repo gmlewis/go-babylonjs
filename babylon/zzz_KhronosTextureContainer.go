@@ -7,8 +7,8 @@ import (
 )
 
 // KhronosTextureContainer represents a babylon.js KhronosTextureContainer.
-// for description see &lt;a href=&#34;https://www.khronos.org/opengles/sdk/tools/KTX/&#34;&gt;https://www.khronos.org/opengles/sdk/tools/KTX/&lt;/a&gt;
-// for file layout see &lt;a href=&#34;https://www.khronos.org/opengles/sdk/tools/KTX/file_format_spec/&#34;&gt;https://www.khronos.org/opengles/sdk/tools/KTX/file_format_spec/&lt;/a&gt;
+// for description see <a href="https://www.khronos.org/opengles/sdk/tools/KTX/">https://www.khronos.org/opengles/sdk/tools/KTX/</a>
+// for file layout see <a href="https://www.khronos.org/opengles/sdk/tools/KTX/file_format_spec/">https://www.khronos.org/opengles/sdk/tools/KTX/file_format_spec/</a>
 type KhronosTextureContainer struct {
 	p   js.Value
 	ctx js.Value

@@ -96,7 +96,7 @@ func (l *Light) AddNodeConstructor(jsType string, constructorFunc js.Value) {
 type LightBeginAnimationOpts struct {
 	Loop           *bool
 	SpeedRatio     *float64
-	OnAnimationEnd *func()
+	OnAnimationEnd func()
 }
 
 // BeginAnimation calls the BeginAnimation method on the Light object.
@@ -390,7 +390,7 @@ func (l *Light) GetBehaviorByName(name string) js.Value {
 // LightGetChildMeshesOpts contains optional parameters for Light.GetChildMeshes.
 type LightGetChildMeshesOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetChildMeshes calls the GetChildMeshes method on the Light object.
@@ -420,7 +420,7 @@ func (l *Light) GetChildMeshes(opts *LightGetChildMeshesOpts) *AbstractMesh {
 
 // LightGetChildrenOpts contains optional parameters for Light.GetChildren.
 type LightGetChildrenOpts struct {
-	Predicate             *func()
+	Predicate             func()
 	DirectDescendantsOnly *bool
 }
 
@@ -476,7 +476,7 @@ func (l *Light) GetConstructorFromName(jsType float64, name string, scene *Scene
 // LightGetDescendantsOpts contains optional parameters for Light.GetDescendants.
 type LightGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the Light object.
@@ -516,7 +516,7 @@ func (l *Light) GetEngine() *Engine {
 // LightGetHierarchyBoundingVectorsOpts contains optional parameters for Light.GetHierarchyBoundingVectors.
 type LightGetHierarchyBoundingVectorsOpts struct {
 	IncludeDescendants *bool
-	Predicate          *func()
+	Predicate          func()
 }
 
 // GetHierarchyBoundingVectors calls the GetHierarchyBoundingVectors method on the Light object.

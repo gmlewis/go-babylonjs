@@ -7,7 +7,7 @@ import (
 )
 
 // PassPostProcess represents a babylon.js PassPostProcess.
-// PassPostProcess which produces an output the same as it&amp;#39;s input
+// PassPostProcess which produces an output the same as it&#39;s input
 type PassPostProcess struct {
 	*PostProcess
 	ctx js.Value
@@ -250,8 +250,8 @@ type PassPostProcessUpdateEffectOpts struct {
 	Uniforms        *string
 	Samplers        *string
 	IndexParameters *interface{}
-	OnCompiled      *func()
-	OnError         *func()
+	OnCompiled      func()
+	OnError         func()
 }
 
 // UpdateEffect calls the UpdateEffect method on the PassPostProcess object.

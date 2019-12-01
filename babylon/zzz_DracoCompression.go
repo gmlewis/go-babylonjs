@@ -7,7 +7,7 @@ import (
 )
 
 // DracoCompression represents a babylon.js DracoCompression.
-// Draco compression (&lt;a href=&#34;https://google.github.io/draco/&#34;&gt;https://google.github.io/draco/&lt;/a&gt;)
+// Draco compression (<a href="https://google.github.io/draco/">https://google.github.io/draco/</a>)
 //
 // This class wraps the Draco module.
 //
@@ -67,7 +67,7 @@ func (ba *Babylon) NewDracoCompression(opts *NewDracoCompressionOpts) *DracoComp
 
 // DracoCompressionDecodeMeshAsyncOpts contains optional parameters for DracoCompression.DecodeMeshAsync.
 type DracoCompressionDecodeMeshAsyncOpts struct {
-	Attributes js.Value
+	Attributes map[string]interface{}
 }
 
 // DecodeMeshAsync calls the DecodeMeshAsync method on the DracoCompression object.

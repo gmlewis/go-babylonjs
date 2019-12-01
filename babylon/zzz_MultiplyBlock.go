@@ -131,7 +131,7 @@ func (m *MultiplyBlock) Clone(scene *Scene, opts *MultiplyBlockCloneOpts) *NodeM
 
 // MultiplyBlockConnectToOpts contains optional parameters for MultiplyBlock.ConnectTo.
 type MultiplyBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the MultiplyBlock object.
@@ -396,11 +396,7 @@ func (m *MultiplyBlock) RegisterInput(name string, jsType js.Value, opts *Multip
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := m.p.Call("registerInput", args...)
 	return MultiplyBlockFromJSObject(retVal, m.ctx)
@@ -424,11 +420,7 @@ func (m *MultiplyBlock) RegisterOutput(name string, jsType js.Value, opts *Multi
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := m.p.Call("registerOutput", args...)
 	return MultiplyBlockFromJSObject(retVal, m.ctx)

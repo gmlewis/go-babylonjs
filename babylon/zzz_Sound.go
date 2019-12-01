@@ -41,7 +41,7 @@ func SoundArrayToJSArray(array []*Sound) []interface{} {
 
 // NewSoundOpts contains optional parameters for NewSound.
 type NewSoundOpts struct {
-	ReadyToPlayCallback *func()
+	ReadyToPlayCallback func()
 	Options             *ISoundOptions
 }
 

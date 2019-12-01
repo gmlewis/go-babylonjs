@@ -131,7 +131,7 @@ func (v *VectorSplitterBlock) Clone(scene *Scene, opts *VectorSplitterBlockClone
 
 // VectorSplitterBlockConnectToOpts contains optional parameters for VectorSplitterBlock.ConnectTo.
 type VectorSplitterBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the VectorSplitterBlock object.
@@ -396,11 +396,7 @@ func (v *VectorSplitterBlock) RegisterInput(name string, jsType js.Value, opts *
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := v.p.Call("registerInput", args...)
 	return VectorSplitterBlockFromJSObject(retVal, v.ctx)
@@ -424,11 +420,7 @@ func (v *VectorSplitterBlock) RegisterOutput(name string, jsType js.Value, opts 
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := v.p.Call("registerOutput", args...)
 	return VectorSplitterBlockFromJSObject(retVal, v.ctx)

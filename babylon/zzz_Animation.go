@@ -140,7 +140,7 @@ func (a *Animation) Color4InterpolateFunction(startValue *Color4, endValue *Colo
 type AnimationCreateAndStartAnimationOpts struct {
 	LoopMode       *float64
 	EasingFunction *EasingFunction
-	OnAnimationEnd *func()
+	OnAnimationEnd func()
 }
 
 // CreateAndStartAnimation calls the CreateAndStartAnimation method on the Animation object.
@@ -185,7 +185,7 @@ func (a *Animation) CreateAndStartAnimation(name string, node *Node, targetPrope
 type AnimationCreateAndStartHierarchyAnimationOpts struct {
 	LoopMode       *float64
 	EasingFunction *EasingFunction
-	OnAnimationEnd *func()
+	OnAnimationEnd func()
 }
 
 // CreateAndStartHierarchyAnimation calls the CreateAndStartHierarchyAnimation method on the Animation object.
@@ -247,7 +247,7 @@ func (a *Animation) CreateAnimation(property string, animationType float64, fram
 type AnimationCreateMergeAndStartAnimationOpts struct {
 	LoopMode       *float64
 	EasingFunction *EasingFunction
-	OnAnimationEnd *func()
+	OnAnimationEnd func()
 }
 
 // CreateMergeAndStartAnimation calls the CreateMergeAndStartAnimation method on the Animation object.
@@ -393,7 +393,11 @@ func (a *Animation) GetHighestFrame() float64 {
 func (a *Animation) GetKeys() []*IAnimationKey {
 
 	retVal := a.p.Call("getKeys")
-	return retVal
+	result := []*IAnimationKey{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, IAnimationKeyFromJSObject(retVal.Index(ri), a.ctx))
+	}
+	return result
 }
 
 // GetRange calls the GetRange method on the Animation object.
@@ -570,7 +574,7 @@ func (a *Animation) ToString(opts *AnimationToStringOpts) string {
 
 // AnimationTransitionToOpts contains optional parameters for Animation.TransitionTo.
 type AnimationTransitionToOpts struct {
-	OnAnimationEnd *func()
+	OnAnimationEnd func()
 }
 
 // TransitionTo calls the TransitionTo method on the Animation object.

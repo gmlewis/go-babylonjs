@@ -131,7 +131,7 @@ func (d *DerivativeBlock) Clone(scene *Scene, opts *DerivativeBlockCloneOpts) *N
 
 // DerivativeBlockConnectToOpts contains optional parameters for DerivativeBlock.ConnectTo.
 type DerivativeBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the DerivativeBlock object.
@@ -396,11 +396,7 @@ func (d *DerivativeBlock) RegisterInput(name string, jsType js.Value, opts *Deri
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := d.p.Call("registerInput", args...)
 	return DerivativeBlockFromJSObject(retVal, d.ctx)
@@ -424,11 +420,7 @@ func (d *DerivativeBlock) RegisterOutput(name string, jsType js.Value, opts *Der
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := d.p.Call("registerOutput", args...)
 	return DerivativeBlockFromJSObject(retVal, d.ctx)

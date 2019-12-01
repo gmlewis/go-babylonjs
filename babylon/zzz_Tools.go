@@ -59,7 +59,7 @@ func (t *Tools) ClearLogCache() {
 
 // ToolsCreateScreenshotOpts contains optional parameters for Tools.CreateScreenshot.
 type ToolsCreateScreenshotOpts struct {
-	SuccessCallback *func()
+	SuccessCallback func()
 	MimeType        *string
 }
 
@@ -122,7 +122,7 @@ func (t *Tools) CreateScreenshotAsync(engine *Engine, camera *Camera, size *IScr
 
 // ToolsCreateScreenshotUsingRenderTargetOpts contains optional parameters for Tools.CreateScreenshotUsingRenderTarget.
 type ToolsCreateScreenshotUsingRenderTargetOpts struct {
-	SuccessCallback *func()
+	SuccessCallback func()
 	MimeType        *string
 	Samples         *float64
 	Antialiasing    *bool
@@ -293,7 +293,7 @@ func (t *Tools) Download(blob js.Value, fileName string) {
 
 // ToolsDumpFramebufferOpts contains optional parameters for Tools.DumpFramebuffer.
 type ToolsDumpFramebufferOpts struct {
-	SuccessCallback *func()
+	SuccessCallback func()
 	MimeType        *string
 	FileName        *string
 }
@@ -333,7 +333,7 @@ func (t *Tools) DumpFramebuffer(width float64, height float64, engine *Engine, o
 
 // ToolsEncodeScreenshotCanvasDataOpts contains optional parameters for Tools.EncodeScreenshotCanvasData.
 type ToolsEncodeScreenshotCanvasDataOpts struct {
-	SuccessCallback *func()
+	SuccessCallback func()
 	MimeType        *string
 	FileName        *string
 }
@@ -619,10 +619,10 @@ func (t *Tools) IsExponentOfTwo(value float64) bool {
 
 // ToolsLoadFileOpts contains optional parameters for Tools.LoadFile.
 type ToolsLoadFileOpts struct {
-	OnProgress      *func()
+	OnProgress      func()
 	OfflineProvider *IOfflineProvider
 	UseArrayBuffer  *bool
-	OnError         *func()
+	OnError         func()
 }
 
 // LoadFile calls the LoadFile method on the Tools object.
@@ -708,7 +708,7 @@ func (t *Tools) LoadImage(input string, onLoad func(), onError func(), offlinePr
 
 // ToolsLoadScriptOpts contains optional parameters for Tools.LoadScript.
 type ToolsLoadScriptOpts struct {
-	OnError  *func()
+	OnError  func()
 	ScriptId *string
 }
 
@@ -831,9 +831,9 @@ func (t *Tools) RandomId() string {
 
 // ToolsReadFileOpts contains optional parameters for Tools.ReadFile.
 type ToolsReadFileOpts struct {
-	OnProgress     *func()
+	OnProgress     func()
 	UseArrayBuffer *bool
-	OnError        *func()
+	OnError        func()
 }
 
 // ReadFile calls the ReadFile method on the Tools object.

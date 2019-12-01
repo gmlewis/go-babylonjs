@@ -154,8 +154,8 @@ type RefractionTextureCreateFromBase64StringOpts struct {
 	NoMipmap     *bool
 	InvertY      *bool
 	SamplingMode *float64
-	OnLoad       *func()
-	OnError      *func()
+	OnLoad       func()
+	OnError      func()
 	Format       *float64
 }
 
@@ -371,8 +371,8 @@ type RefractionTextureLoadFromDataStringOpts struct {
 	NoMipmap     *bool
 	InvertY      *bool
 	SamplingMode *float64
-	OnLoad       *func()
-	OnError      *func()
+	OnLoad       func()
+	OnError      func()
 	Format       *float64
 }
 
@@ -472,11 +472,7 @@ func (r *RefractionTexture) ReadPixels(opts *RefractionTextureReadPixelsOpts) js
 	} else {
 		args = append(args, *opts.Level)
 	}
-	if opts.Buffer == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Buffer)
-	}
+	args = append(args, opts.Buffer)
 
 	retVal := r.p.Call("readPixels", args...)
 	return retVal
@@ -588,9 +584,9 @@ func (r *RefractionTexture) SetRenderingAutoClearDepthStencil(renderingGroupId f
 
 // RefractionTextureSetRenderingOrderOpts contains optional parameters for RefractionTexture.SetRenderingOrder.
 type RefractionTextureSetRenderingOrderOpts struct {
-	OpaqueSortCompareFn      *func()
-	AlphaTestSortCompareFn   *func()
-	TransparentSortCompareFn *func()
+	OpaqueSortCompareFn      func()
+	AlphaTestSortCompareFn   func()
+	TransparentSortCompareFn func()
 }
 
 // SetRenderingOrder calls the SetRenderingOrder method on the RefractionTexture object.
@@ -648,7 +644,7 @@ func (r *RefractionTexture) UpdateSamplingMode(samplingMode float64) {
 // RefractionTextureUpdateURLOpts contains optional parameters for RefractionTexture.UpdateURL.
 type RefractionTextureUpdateURLOpts struct {
 	Buffer *string
-	OnLoad *func()
+	OnLoad func()
 }
 
 // UpdateURL calls the UpdateURL method on the RefractionTexture object.

@@ -7,7 +7,7 @@ import (
 )
 
 // DisplayPassPostProcess represents a babylon.js DisplayPassPostProcess.
-// DisplayPassPostProcess which produces an output the same as it&amp;#39;s input
+// DisplayPassPostProcess which produces an output the same as it&#39;s input
 type DisplayPassPostProcess struct {
 	*PostProcess
 	ctx js.Value
@@ -233,8 +233,8 @@ type DisplayPassPostProcessUpdateEffectOpts struct {
 	Uniforms        *string
 	Samplers        *string
 	IndexParameters *interface{}
-	OnCompiled      *func()
-	OnError         *func()
+	OnCompiled      func()
+	OnError         func()
 }
 
 // UpdateEffect calls the UpdateEffect method on the DisplayPassPostProcess object.

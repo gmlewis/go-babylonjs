@@ -56,11 +56,7 @@ func (ba *Babylon) NewVideoRecorder(engine *Engine, opts *NewVideoRecorderOpts) 
 
 	args = append(args, engine.JSObject())
 
-	if opts.Options == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Options)
-	}
+	args = append(args, opts.Options)
 
 	p := ba.ctx.Get("VideoRecorder").New(args...)
 	return VideoRecorderFromJSObject(p, ba.ctx)

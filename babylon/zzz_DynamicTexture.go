@@ -96,8 +96,8 @@ type DynamicTextureCreateFromBase64StringOpts struct {
 	NoMipmap     *bool
 	InvertY      *bool
 	SamplingMode *float64
-	OnLoad       *func()
-	OnError      *func()
+	OnLoad       func()
+	OnError      func()
 	Format       *float64
 }
 
@@ -307,8 +307,8 @@ type DynamicTextureLoadFromDataStringOpts struct {
 	NoMipmap     *bool
 	InvertY      *bool
 	SamplingMode *float64
-	OnLoad       *func()
-	OnError      *func()
+	OnLoad       func()
+	OnError      func()
 	Format       *float64
 }
 
@@ -408,11 +408,7 @@ func (d *DynamicTexture) ReadPixels(opts *DynamicTextureReadPixelsOpts) js.Value
 	} else {
 		args = append(args, *opts.Level)
 	}
-	if opts.Buffer == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Buffer)
-	}
+	args = append(args, opts.Buffer)
 
 	retVal := d.p.Call("readPixels", args...)
 	return retVal
@@ -514,7 +510,7 @@ func (d *DynamicTexture) UpdateSamplingMode(samplingMode float64) {
 // DynamicTextureUpdateURLOpts contains optional parameters for DynamicTexture.UpdateURL.
 type DynamicTextureUpdateURLOpts struct {
 	Buffer *string
-	OnLoad *func()
+	OnLoad func()
 }
 
 // UpdateURL calls the UpdateURL method on the DynamicTexture object.

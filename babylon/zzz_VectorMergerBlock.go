@@ -131,7 +131,7 @@ func (v *VectorMergerBlock) Clone(scene *Scene, opts *VectorMergerBlockCloneOpts
 
 // VectorMergerBlockConnectToOpts contains optional parameters for VectorMergerBlock.ConnectTo.
 type VectorMergerBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the VectorMergerBlock object.
@@ -396,11 +396,7 @@ func (v *VectorMergerBlock) RegisterInput(name string, jsType js.Value, opts *Ve
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := v.p.Call("registerInput", args...)
 	return VectorMergerBlockFromJSObject(retVal, v.ctx)
@@ -424,11 +420,7 @@ func (v *VectorMergerBlock) RegisterOutput(name string, jsType js.Value, opts *V
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := v.p.Call("registerOutput", args...)
 	return VectorMergerBlockFromJSObject(retVal, v.ctx)

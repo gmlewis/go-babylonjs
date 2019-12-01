@@ -269,7 +269,7 @@ func (v *VirtualKeyboard) GetClassName() string {
 // VirtualKeyboardGetDescendantsOpts contains optional parameters for VirtualKeyboard.GetDescendants.
 type VirtualKeyboardGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the VirtualKeyboard object.
@@ -300,7 +300,7 @@ func (v *VirtualKeyboard) GetDescendants(opts *VirtualKeyboardGetDescendantsOpts
 // VirtualKeyboardGetDescendantsToRefOpts contains optional parameters for VirtualKeyboard.GetDescendantsToRef.
 type VirtualKeyboardGetDescendantsToRefOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendantsToRef calls the GetDescendantsToRef method on the VirtualKeyboard object.

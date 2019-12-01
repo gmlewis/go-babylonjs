@@ -315,8 +315,8 @@ func (n *NullEngine) CreateDynamicVertexBuffer(vertices js.Value) *DataBuffer {
 // NullEngineCreateEffectForParticlesOpts contains optional parameters for NullEngine.CreateEffectForParticles.
 type NullEngineCreateEffectForParticlesOpts struct {
 	Fallbacks  *EffectFallbacks
-	OnCompiled *func()
-	OnError    *func()
+	OnCompiled func()
+	OnError    func()
 }
 
 // CreateEffectForParticles calls the CreateEffectForParticles method on the NullEngine object.
@@ -544,11 +544,7 @@ func (n *NullEngine) CreateShaderProgram(pipelineContext *IPipelineContext, vert
 	args = append(args, fragmentCode)
 	args = append(args, defines)
 
-	if opts.Context == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Context)
-	}
+	args = append(args, opts.Context)
 
 	retVal := n.p.Call("createShaderProgram", args...)
 	return retVal
@@ -557,8 +553,8 @@ func (n *NullEngine) CreateShaderProgram(pipelineContext *IPipelineContext, vert
 // NullEngineCreateTextureOpts contains optional parameters for NullEngine.CreateTexture.
 type NullEngineCreateTextureOpts struct {
 	SamplingMode *float64
-	OnLoad       *func()
-	OnError      *func()
+	OnLoad       func()
+	OnError      func()
 	Buffer       js.Value
 	FallBack     *InternalTexture
 	Format       *float64
@@ -594,11 +590,7 @@ func (n *NullEngine) CreateTexture(urlArg string, noMipmap bool, invertY bool, s
 	} else {
 		args = append(args, opts.OnError)
 	}
-	if opts.Buffer == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Buffer)
-	}
+	args = append(args, opts.Buffer)
 	if opts.FallBack == nil {
 		args = append(args, js.Undefined())
 	} else {
@@ -1372,7 +1364,7 @@ func (n *NullEngine) IsVRPresenting() bool {
 
 // NullEngineMarkAllMaterialsAsDirtyOpts contains optional parameters for NullEngine.MarkAllMaterialsAsDirty.
 type NullEngineMarkAllMaterialsAsDirtyOpts struct {
-	Predicate *func()
+	Predicate func()
 }
 
 // MarkAllMaterialsAsDirty calls the MarkAllMaterialsAsDirty method on the NullEngine object.
@@ -2211,7 +2203,7 @@ func (n *NullEngine) SwitchFullscreen(requestPointerLock bool) {
 // NullEngineUnBindFramebufferOpts contains optional parameters for NullEngine.UnBindFramebuffer.
 type NullEngineUnBindFramebufferOpts struct {
 	DisableGenerateMipMaps *bool
-	OnBeforeUnbind         *func()
+	OnBeforeUnbind         func()
 }
 
 // UnBindFramebuffer calls the UnBindFramebuffer method on the NullEngine object.

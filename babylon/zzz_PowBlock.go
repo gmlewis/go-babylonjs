@@ -131,7 +131,7 @@ func (p *PowBlock) Clone(scene *Scene, opts *PowBlockCloneOpts) *NodeMaterialBlo
 
 // PowBlockConnectToOpts contains optional parameters for PowBlock.ConnectTo.
 type PowBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the PowBlock object.
@@ -396,11 +396,7 @@ func (p *PowBlock) RegisterInput(name string, jsType js.Value, opts *PowBlockReg
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := p.p.Call("registerInput", args...)
 	return PowBlockFromJSObject(retVal, p.ctx)
@@ -424,11 +420,7 @@ func (p *PowBlock) RegisterOutput(name string, jsType js.Value, opts *PowBlockRe
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := p.p.Call("registerOutput", args...)
 	return PowBlockFromJSObject(retVal, p.ctx)

@@ -75,11 +75,7 @@ func (p *PhysicsHelper) ApplyRadialExplosionForce(origin *Vector3, radiusOrEvent
 	} else {
 		args = append(args, *opts.Strength)
 	}
-	if opts.Falloff == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Falloff)
-	}
+	args = append(args, opts.Falloff)
 
 	retVal := p.p.Call("applyRadialExplosionForce", args...)
 	return PhysicsRadialExplosionEventFromJSObject(retVal, p.ctx)
@@ -109,11 +105,7 @@ func (p *PhysicsHelper) ApplyRadialExplosionImpulse(origin *Vector3, radiusOrEve
 	} else {
 		args = append(args, *opts.Strength)
 	}
-	if opts.Falloff == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Falloff)
-	}
+	args = append(args, opts.Falloff)
 
 	retVal := p.p.Call("applyRadialExplosionImpulse", args...)
 	return PhysicsRadialExplosionEventFromJSObject(retVal, p.ctx)
@@ -143,11 +135,7 @@ func (p *PhysicsHelper) GravitationalField(origin *Vector3, radiusOrEventOptions
 	} else {
 		args = append(args, *opts.Strength)
 	}
-	if opts.Falloff == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Falloff)
-	}
+	args = append(args, opts.Falloff)
 
 	retVal := p.p.Call("gravitationalField", args...)
 	return PhysicsGravitationalFieldEventFromJSObject(retVal, p.ctx)
@@ -183,11 +171,7 @@ func (p *PhysicsHelper) Updraft(origin *Vector3, radiusOrEventOptions float64, o
 	} else {
 		args = append(args, *opts.Height)
 	}
-	if opts.UpdraftMode == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.UpdraftMode)
-	}
+	args = append(args, opts.UpdraftMode)
 
 	retVal := p.p.Call("updraft", args...)
 	return PhysicsUpdraftEventFromJSObject(retVal, p.ctx)

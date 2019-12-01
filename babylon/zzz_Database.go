@@ -68,8 +68,8 @@ func (ba *Babylon) NewDatabase(urlToScene string, callbackManifestChecked func()
 
 // DatabaseLoadFileOpts contains optional parameters for Database.LoadFile.
 type DatabaseLoadFileOpts struct {
-	ProgressCallBack *func()
-	ErrorCallback    *func()
+	ProgressCallBack func()
+	ErrorCallback    func()
 	UseArrayBuffer   *bool
 }
 

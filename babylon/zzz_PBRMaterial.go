@@ -11,7 +11,7 @@ import (
 //
 // This offers the main features of a standard PBR material.
 // For more information, please refer to the documentation :
-// &lt;a href=&#34;https://doc.babylonjs.com/how_to/physically_based_rendering&#34;&gt;https://doc.babylonjs.com/how_to/physically_based_rendering&lt;/a&gt;
+// <a href="https://doc.babylonjs.com/how_to/physically_based_rendering">https://doc.babylonjs.com/how_to/physically_based_rendering</a>
 type PBRMaterial struct {
 	*PBRBaseMaterial
 	ctx js.Value
@@ -208,7 +208,7 @@ func (p *PBRMaterial) Dispose(opts *PBRMaterialDisposeOpts) {
 
 // PBRMaterialForceCompilationOpts contains optional parameters for PBRMaterial.ForceCompilation.
 type PBRMaterialForceCompilationOpts struct {
-	OnCompiled *func()
+	OnCompiled func()
 	Options    js.Value
 }
 
@@ -229,11 +229,7 @@ func (p *PBRMaterial) ForceCompilation(mesh *AbstractMesh, opts *PBRMaterialForc
 	} else {
 		args = append(args, opts.OnCompiled)
 	}
-	if opts.Options == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Options)
-	}
+	args = append(args, opts.Options)
 
 	p.p.Call("forceCompilation", args...)
 }
@@ -255,11 +251,7 @@ func (p *PBRMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *PBRMateria
 
 	args = append(args, mesh.JSObject())
 
-	if opts.Options == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Options)
-	}
+	args = append(args, opts.Options)
 
 	retVal := p.p.Call("forceCompilationAsync", args...)
 	return PromiseFromJSObject(retVal, p.ctx)

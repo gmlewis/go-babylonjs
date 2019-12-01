@@ -8,7 +8,7 @@ import (
 
 // LensFlareSystem represents a babylon.js LensFlareSystem.
 // This represents a Lens Flare System or the shiny effect created by the light reflection on the  camera lenses.
-// It is usually composed of several &lt;code&gt;lensFlare&lt;/code&gt;.
+// It is usually composed of several <code>lensFlare</code>.
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_lens_flares
 type LensFlareSystem struct {

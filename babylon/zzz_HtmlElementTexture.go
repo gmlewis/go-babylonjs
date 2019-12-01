@@ -190,11 +190,7 @@ func (h *HtmlElementTexture) ReadPixels(opts *HtmlElementTextureReadPixelsOpts) 
 	} else {
 		args = append(args, *opts.Level)
 	}
-	if opts.Buffer == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Buffer)
-	}
+	args = append(args, opts.Buffer)
 
 	retVal := h.p.Call("readPixels", args...)
 	return retVal

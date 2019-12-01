@@ -104,7 +104,11 @@ func (i *IPhysicsEngine) GetImpostorWithPhysicsBody(body interface{}) *PhysicsIm
 func (i *IPhysicsEngine) GetImpostors() []*PhysicsImpostor {
 
 	retVal := i.p.Call("getImpostors")
-	return retVal
+	result := []*PhysicsImpostor{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, PhysicsImpostorFromJSObject(retVal.Index(ri), i.ctx))
+	}
+	return result
 }
 
 // GetPhysicsPlugin calls the GetPhysicsPlugin method on the IPhysicsEngine object.

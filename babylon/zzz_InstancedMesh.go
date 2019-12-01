@@ -177,7 +177,7 @@ func (i *InstancedMesh) AttachToBone(bone *Bone, affectedTransformNode *Transfor
 type InstancedMeshBeginAnimationOpts struct {
 	Loop           *bool
 	SpeedRatio     *float64
-	OnAnimationEnd *func()
+	OnAnimationEnd func()
 }
 
 // BeginAnimation calls the BeginAnimation method on the InstancedMesh object.
@@ -617,7 +617,7 @@ func (i *InstancedMesh) GetBoundingInfo() *BoundingInfo {
 // InstancedMeshGetChildMeshesOpts contains optional parameters for InstancedMesh.GetChildMeshes.
 type InstancedMeshGetChildMeshesOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetChildMeshes calls the GetChildMeshes method on the InstancedMesh object.
@@ -648,7 +648,7 @@ func (i *InstancedMesh) GetChildMeshes(opts *InstancedMeshGetChildMeshesOpts) *A
 // InstancedMeshGetChildTransformNodesOpts contains optional parameters for InstancedMesh.GetChildTransformNodes.
 type InstancedMeshGetChildTransformNodesOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetChildTransformNodes calls the GetChildTransformNodes method on the InstancedMesh object.
@@ -678,7 +678,7 @@ func (i *InstancedMesh) GetChildTransformNodes(opts *InstancedMeshGetChildTransf
 
 // InstancedMeshGetChildrenOpts contains optional parameters for InstancedMesh.GetChildren.
 type InstancedMeshGetChildrenOpts struct {
-	Predicate             *func()
+	Predicate             func()
 	DirectDescendantsOnly *bool
 }
 
@@ -801,7 +801,7 @@ func (i *InstancedMesh) GetClosestFacetAtLocalCoordinates(x float64, y float64, 
 // InstancedMeshGetDescendantsOpts contains optional parameters for InstancedMesh.GetDescendants.
 type InstancedMeshGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the InstancedMesh object.
@@ -998,7 +998,7 @@ func (i *InstancedMesh) GetFacetsAtLocalCoordinates(x float64, y float64, z floa
 // InstancedMeshGetHierarchyBoundingVectorsOpts contains optional parameters for InstancedMesh.GetHierarchyBoundingVectors.
 type InstancedMeshGetHierarchyBoundingVectorsOpts struct {
 	IncludeDescendants *bool
-	Predicate          *func()
+	Predicate          func()
 }
 
 // GetHierarchyBoundingVectors calls the GetHierarchyBoundingVectors method on the InstancedMesh object.
@@ -1197,8 +1197,8 @@ func (i *InstancedMesh) GetWorldMatrix() *Matrix {
 // InstancedMeshInstantiateHierarchyOpts contains optional parameters for InstancedMesh.InstantiateHierarchy.
 type InstancedMeshInstantiateHierarchyOpts struct {
 	NewParent        *TransformNode
-	Options          js.Value
-	OnNewNodeCreated *func()
+	Options          map[string]interface{}
+	OnNewNodeCreated func()
 }
 
 // InstantiateHierarchy calls the InstantiateHierarchy method on the InstancedMesh object.
@@ -1254,11 +1254,7 @@ func (i *InstancedMesh) Intersects(ray *Ray, opts *InstancedMeshIntersectsOpts) 
 	} else {
 		args = append(args, *opts.FastCheck)
 	}
-	if opts.TrianglePredicate == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.TrianglePredicate)
-	}
+	args = append(args, opts.TrianglePredicate)
 
 	retVal := i.p.Call("intersects", args...)
 	return PickingInfoFromJSObject(retVal, i.ctx)
@@ -1469,11 +1465,7 @@ func (i *InstancedMesh) LookAt(targetPoint *Vector3, opts *InstancedMeshLookAtOp
 	} else {
 		args = append(args, *opts.RollCor)
 	}
-	if opts.Space == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Space)
-	}
+	args = append(args, opts.Space)
 
 	retVal := i.p.Call("lookAt", args...)
 	return TransformNodeFromJSObject(retVal, i.ctx)
@@ -1524,7 +1516,7 @@ func (i *InstancedMesh) MoveWithCollisions(displacement *Vector3) *AbstractMesh 
 type InstancedMeshNormalizeToUnitCubeOpts struct {
 	IncludeDescendants *bool
 	IgnoreRotation     *bool
-	Predicate          *func()
+	Predicate          func()
 }
 
 // NormalizeToUnitCube calls the NormalizeToUnitCube method on the InstancedMesh object.
@@ -1677,11 +1669,7 @@ func (i *InstancedMesh) Rotate(axis *Vector3, amount float64, opts *InstancedMes
 	args = append(args, axis.JSObject())
 	args = append(args, amount)
 
-	if opts.Space == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Space)
-	}
+	args = append(args, opts.Space)
 
 	retVal := i.p.Call("rotate", args...)
 	return TransformNodeFromJSObject(retVal, i.ctx)
@@ -1941,11 +1929,7 @@ func (i *InstancedMesh) SetPivotPoint(point *Vector3, opts *InstancedMeshSetPivo
 
 	args = append(args, point.JSObject())
 
-	if opts.Space == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Space)
-	}
+	args = append(args, opts.Space)
 
 	retVal := i.p.Call("setPivotPoint", args...)
 	return TransformNodeFromJSObject(retVal, i.ctx)
@@ -2054,11 +2038,7 @@ func (i *InstancedMesh) Translate(axis *Vector3, distance float64, opts *Instanc
 	args = append(args, axis.JSObject())
 	args = append(args, distance)
 
-	if opts.Space == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Space)
-	}
+	args = append(args, opts.Space)
 
 	retVal := i.p.Call("translate", args...)
 	return TransformNodeFromJSObject(retVal, i.ctx)

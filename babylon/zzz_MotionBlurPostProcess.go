@@ -8,10 +8,10 @@ import (
 
 // MotionBlurPostProcess represents a babylon.js MotionBlurPostProcess.
 // The Motion Blur Post Process which blurs an image based on the objects velocity in scene.
-// Velocity can be affected by each object&amp;#39;s rotation, position and scale depending on the transformation speed.
+// Velocity can be affected by each object&#39;s rotation, position and scale depending on the transformation speed.
 // As an example, all you have to do is to create the post-process:
 // var mb = new BABYLON.MotionBlurPostProcess(
-// &amp;#39;mb&amp;#39;, // The name of the effect.
+// &#39;mb&#39;, // The name of the effect.
 // scene, // The scene containing the objects to blur according to their velocity.
 // 1.0, // The required width/height ratio to downsize to before computing the render pass.
 // camera // The camera to apply the render pass to.
@@ -279,8 +279,8 @@ type MotionBlurPostProcessUpdateEffectOpts struct {
 	Uniforms        *string
 	Samplers        *string
 	IndexParameters *interface{}
-	OnCompiled      *func()
-	OnError         *func()
+	OnCompiled      func()
+	OnError         func()
 }
 
 // UpdateEffect calls the UpdateEffect method on the MotionBlurPostProcess object.

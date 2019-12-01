@@ -119,7 +119,7 @@ func (g *GLTFLoader) LoadBufferViewAsync(context string, bufferView *IBufferView
 
 // GLTFLoaderLoadCameraAsyncOpts contains optional parameters for GLTFLoader.LoadCameraAsync.
 type GLTFLoaderLoadCameraAsyncOpts struct {
-	Assign *func()
+	Assign func()
 }
 
 // LoadCameraAsync calls the LoadCameraAsync method on the GLTFLoader object.
@@ -205,7 +205,7 @@ func (g *GLTFLoader) LoadMaterialPropertiesAsync(context string, material *IMate
 
 // GLTFLoaderLoadNodeAsyncOpts contains optional parameters for GLTFLoader.LoadNodeAsync.
 type GLTFLoaderLoadNodeAsyncOpts struct {
-	Assign *func()
+	Assign func()
 }
 
 // LoadNodeAsync calls the LoadNodeAsync method on the GLTFLoader object.
@@ -247,7 +247,7 @@ func (g *GLTFLoader) LoadSceneAsync(context string, scene *IScene) *Promise {
 
 // GLTFLoaderLoadTextureInfoAsyncOpts contains optional parameters for GLTFLoader.LoadTextureInfoAsync.
 type GLTFLoaderLoadTextureInfoAsyncOpts struct {
-	Assign *func()
+	Assign func()
 }
 
 // LoadTextureInfoAsync calls the LoadTextureInfoAsync method on the GLTFLoader object.

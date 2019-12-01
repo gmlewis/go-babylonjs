@@ -41,8 +41,8 @@ type NewCubeTextureOpts struct {
 	Extensions        *string
 	NoMipmap          *bool
 	Files             *string
-	OnLoad            *func()
-	OnError           *func()
+	OnLoad            func()
+	OnError           func()
 	Format            *float64
 	Prefiltered       *bool
 	ForcedExtension   *interface{}
@@ -350,11 +350,7 @@ func (c *CubeTexture) ReadPixels(opts *CubeTextureReadPixelsOpts) js.Value {
 	} else {
 		args = append(args, *opts.Level)
 	}
-	if opts.Buffer == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Buffer)
-	}
+	args = append(args, opts.Buffer)
 
 	retVal := c.p.Call("readPixels", args...)
 	return retVal
@@ -425,7 +421,7 @@ func (c *CubeTexture) UpdateSamplingMode(samplingMode float64) {
 // CubeTextureUpdateURLOpts contains optional parameters for CubeTexture.UpdateURL.
 type CubeTextureUpdateURLOpts struct {
 	ForcedExtension *string
-	OnLoad          *func()
+	OnLoad          func()
 }
 
 // UpdateURL calls the UpdateURL method on the CubeTexture object.

@@ -176,7 +176,7 @@ func (s *ScrollViewer) GetClassName() string {
 // ScrollViewerGetDescendantsOpts contains optional parameters for ScrollViewer.GetDescendants.
 type ScrollViewerGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the ScrollViewer object.
@@ -207,7 +207,7 @@ func (s *ScrollViewer) GetDescendants(opts *ScrollViewerGetDescendantsOpts) *Con
 // ScrollViewerGetDescendantsToRefOpts contains optional parameters for ScrollViewer.GetDescendantsToRef.
 type ScrollViewerGetDescendantsToRefOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendantsToRef calls the GetDescendantsToRef method on the ScrollViewer object.

@@ -55,11 +55,7 @@ func (ba *Babylon) NewWebXRManagedOutputCanvas(engine *ThinEngine, opts *NewWebX
 
 	args = append(args, engine.JSObject())
 
-	if opts.Canvas == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Canvas)
-	}
+	args = append(args, opts.Canvas)
 	if opts.OnStateChangedObservable == nil {
 		args = append(args, js.Undefined())
 	} else {

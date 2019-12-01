@@ -7,7 +7,7 @@ import (
 )
 
 // IScreenshotSize represents a babylon.js IScreenshotSize.
-// Interface for screenshot methods with describe argument called &lt;code&gt;size&lt;/code&gt; as object with options
+// Interface for screenshot methods with describe argument called <code>size</code> as object with options
 //
 // See: https://doc.babylonjs.com/api/classes/babylon.screenshottools
 type IScreenshotSize struct {

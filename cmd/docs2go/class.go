@@ -659,8 +659,8 @@ type Signature struct {
 	HasOpts bool
 
 	GoParams         []string
-	GoOpts           []string
 	GoOptsName       []string
+	GoOptsType       []string
 	NeedsArrayHelper []string
 	JSParams         []string
 	JSOpts           []string
@@ -878,7 +878,7 @@ func (s *Signature) parseParameters(className string, processOverrides processOv
 				}
 			}
 			s.GoOptsName = append(s.GoOptsName, name)
-			s.GoOpts = append(s.GoOpts, fmt.Sprintf("%v %v", name, paramType))
+			s.GoOptsType = append(s.GoOptsType, paramType)
 			s.HasOpts = true
 			s.JSOpts = append(s.JSOpts, jsName)
 		} else {
@@ -895,6 +895,12 @@ func (s *Signature) parseParameters(className string, processOverrides processOv
 				paramType = types[i]
 				var needsJSObject bool
 				paramType, needsJSObject, needsArrayHelper = jsTypeToGoType(paramType)
+
+				if paramType == "object" {
+					paramType = "js.Value"
+					needsJSObject = false
+				}
+
 				if needsJSObject {
 					if !isReferenceType(paramType) {
 						paramType = "*" + paramType
@@ -937,24 +943,31 @@ func (s *Signature) parseParameters(className string, processOverrides processOv
 			needsJSObject = false
 		}
 
-		if needsJSObject {
-			s.GoReturnStatement = fmt.Sprintf("%vFromJSObject(retVal, %v.ctx)", s.GoReturnType, receiver(className))
+		if strings.HasPrefix(s.GoReturnType, "[]*") {
+			lines := []string{fmt.Sprintf("result := %v{}", s.GoReturnType)}
+			lines = append(lines, "for ri := 0; ri < retVal.Length(); ri++ {")
+			lines = append(lines, fmt.Sprintf("  result = append(result, %vFromJSObject(retVal.Index(ri), %v.ctx))", s.GoReturnType[3:], receiver(className)))
+			lines = append(lines, "}")
+			lines = append(lines, "return result")
+			s.GoReturnStatement = strings.Join(lines, "\n")
+		} else if needsJSObject {
+			s.GoReturnStatement = fmt.Sprintf("return %vFromJSObject(retVal, %v.ctx)", s.GoReturnType, receiver(className))
 			s.GoReturnType = "*" + s.GoReturnType
 		} else {
 			switch s.GoReturnType {
 			case "bool":
-				s.GoReturnStatement = "retVal.Bool()"
+				s.GoReturnStatement = "return retVal.Bool()"
 			case "float64":
-				s.GoReturnStatement = "retVal.Float()"
+				s.GoReturnStatement = "return retVal.Float()"
 			case "string":
-				s.GoReturnStatement = "retVal.String()"
+				s.GoReturnStatement = "return retVal.String()"
 			default:
-				s.GoReturnStatement = "retVal"
+				s.GoReturnStatement = "return retVal"
 			}
 		}
 	}
 
-	logf("parseParameters[%v]: final params: HasOpts=%v, GoParams=%#v, GoOptsName=%#v, GoOpts=%#v, JSParams=%#v, JSOpts=%#v, GoReturnType=%v\n\n", s.GoName, s.HasOpts, s.GoParams, s.GoOptsName, s.GoOpts, s.JSParams, s.JSOpts, s.GoReturnType)
+	logf("parseParameters[%v]: final params: HasOpts=%v, GoParams=%#v, GoOptsName=%#v, GoOptsType=%#v, JSParams=%#v, JSOpts=%#v, GoReturnType=%v\n\n", s.GoName, s.HasOpts, s.GoParams, s.GoOptsName, s.GoOptsType, s.JSParams, s.JSOpts, s.GoReturnType)
 	return true
 }
 

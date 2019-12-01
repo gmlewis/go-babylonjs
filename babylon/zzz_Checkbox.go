@@ -122,7 +122,7 @@ func (c *Checkbox) GetClassName() string {
 // CheckboxGetDescendantsOpts contains optional parameters for Checkbox.GetDescendants.
 type CheckboxGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the Checkbox object.
@@ -153,7 +153,7 @@ func (c *Checkbox) GetDescendants(opts *CheckboxGetDescendantsOpts) *Control {
 // CheckboxGetDescendantsToRefOpts contains optional parameters for Checkbox.GetDescendantsToRef.
 type CheckboxGetDescendantsToRefOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendantsToRef calls the GetDescendantsToRef method on the Checkbox object.

@@ -216,7 +216,7 @@ func (a *AssetContainer) GetParser(name string) js.Value {
 
 // AssetContainerInstantiateModelsToSceneOpts contains optional parameters for AssetContainer.InstantiateModelsToScene.
 type AssetContainerInstantiateModelsToSceneOpts struct {
-	NameFunction   *func()
+	NameFunction   func()
 	CloneMaterials *bool
 }
 

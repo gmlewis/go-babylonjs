@@ -88,8 +88,8 @@ func (s *SceneOptimizer) Dispose() {
 // SceneOptimizerOptimizeAsyncOpts contains optional parameters for SceneOptimizer.OptimizeAsync.
 type SceneOptimizerOptimizeAsyncOpts struct {
 	Options   *SceneOptimizerOptions
-	OnSuccess *func()
-	OnFailure *func()
+	OnSuccess func()
+	OnFailure func()
 }
 
 // OptimizeAsync calls the OptimizeAsync method on the SceneOptimizer object.

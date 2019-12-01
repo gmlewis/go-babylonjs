@@ -163,9 +163,9 @@ func (r *RenderingManager) SetRenderingAutoClearDepthStencil(renderingGroupId fl
 
 // RenderingManagerSetRenderingOrderOpts contains optional parameters for RenderingManager.SetRenderingOrder.
 type RenderingManagerSetRenderingOrderOpts struct {
-	OpaqueSortCompareFn      *func()
-	AlphaTestSortCompareFn   *func()
-	TransparentSortCompareFn *func()
+	OpaqueSortCompareFn      func()
+	AlphaTestSortCompareFn   func()
+	TransparentSortCompareFn func()
 }
 
 // SetRenderingOrder calls the SetRenderingOrder method on the RenderingManager object.

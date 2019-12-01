@@ -108,7 +108,7 @@ func (g *GenericController) GetForwardRay(opts *GenericControllerGetForwardRayOp
 
 // GenericControllerInitControllerMeshOpts contains optional parameters for GenericController.InitControllerMesh.
 type GenericControllerInitControllerMeshOpts struct {
-	MeshLoaded *func()
+	MeshLoaded func()
 }
 
 // InitControllerMesh calls the InitControllerMesh method on the GenericController object.

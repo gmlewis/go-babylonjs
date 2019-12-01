@@ -7,7 +7,7 @@ import (
 )
 
 // KHR_texture_transform represents a babylon.js KHR_texture_transform.
-// &lt;a href=&#34;https://github.com/KhronosGroup/glTF/blob/master/extensions/2.0/Khronos/KHR_texture_transform/README.md&#34;&gt;Specification&lt;/a&gt;
+// <a href="https://github.com/KhronosGroup/glTF/blob/master/extensions/2.0/Khronos/KHR_texture_transform/README.md">Specification</a>
 type KHR_texture_transform struct {
 	p   js.Value
 	ctx js.Value

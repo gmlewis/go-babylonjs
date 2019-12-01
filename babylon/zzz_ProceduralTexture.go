@@ -7,7 +7,7 @@ import (
 )
 
 // ProceduralTexture represents a babylon.js ProceduralTexture.
-// Procedural texturing is a way to programmatically create a texture. There are 2 types of procedural textures: code-only, and code that references some classic 2D images, sometimes calmpler&amp;#39; images.
+// Procedural texturing is a way to programmatically create a texture. There are 2 types of procedural textures: code-only, and code that references some classic 2D images, sometimes calmpler&#39; images.
 // This is the base class of any Procedural texture and contains most of the shareable code.
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_procedural_textures
@@ -95,8 +95,8 @@ type ProceduralTextureCreateFromBase64StringOpts struct {
 	NoMipmap     *bool
 	InvertY      *bool
 	SamplingMode *float64
-	OnLoad       *func()
-	OnError      *func()
+	OnLoad       func()
+	OnError      func()
 	Format       *float64
 }
 
@@ -287,8 +287,8 @@ type ProceduralTextureLoadFromDataStringOpts struct {
 	NoMipmap     *bool
 	InvertY      *bool
 	SamplingMode *float64
-	OnLoad       *func()
-	OnError      *func()
+	OnLoad       func()
+	OnError      func()
 	Format       *float64
 }
 
@@ -388,11 +388,7 @@ func (p *ProceduralTexture) ReadPixels(opts *ProceduralTextureReadPixelsOpts) js
 	} else {
 		args = append(args, *opts.Level)
 	}
-	if opts.Buffer == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Buffer)
-	}
+	args = append(args, opts.Buffer)
 
 	retVal := p.p.Call("readPixels", args...)
 	return retVal
@@ -642,7 +638,7 @@ func (p *ProceduralTexture) UpdateSamplingMode(samplingMode float64) {
 // ProceduralTextureUpdateURLOpts contains optional parameters for ProceduralTexture.UpdateURL.
 type ProceduralTextureUpdateURLOpts struct {
 	Buffer *string
-	OnLoad *func()
+	OnLoad func()
 }
 
 // UpdateURL calls the UpdateURL method on the ProceduralTexture object.

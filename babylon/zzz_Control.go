@@ -110,7 +110,7 @@ func (c *Control) GetClassName() string {
 // ControlGetDescendantsOpts contains optional parameters for Control.GetDescendants.
 type ControlGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the Control object.
@@ -141,7 +141,7 @@ func (c *Control) GetDescendants(opts *ControlGetDescendantsOpts) *Control {
 // ControlGetDescendantsToRefOpts contains optional parameters for Control.GetDescendantsToRef.
 type ControlGetDescendantsToRefOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendantsToRef calls the GetDescendantsToRef method on the Control object.

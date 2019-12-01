@@ -131,7 +131,7 @@ func (m *MinBlock) Clone(scene *Scene, opts *MinBlockCloneOpts) *NodeMaterialBlo
 
 // MinBlockConnectToOpts contains optional parameters for MinBlock.ConnectTo.
 type MinBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the MinBlock object.
@@ -396,11 +396,7 @@ func (m *MinBlock) RegisterInput(name string, jsType js.Value, opts *MinBlockReg
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := m.p.Call("registerInput", args...)
 	return MinBlockFromJSObject(retVal, m.ctx)
@@ -424,11 +420,7 @@ func (m *MinBlock) RegisterOutput(name string, jsType js.Value, opts *MinBlockRe
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := m.p.Call("registerOutput", args...)
 	return MinBlockFromJSObject(retVal, m.ctx)

@@ -40,8 +40,8 @@ func IOfflineProviderArrayToJSArray(array []*IOfflineProvider) []interface{} {
 
 // IOfflineProviderLoadFileOpts contains optional parameters for IOfflineProvider.LoadFile.
 type IOfflineProviderLoadFileOpts struct {
-	ProgressCallBack *func()
-	ErrorCallback    *func()
+	ProgressCallBack func()
+	ErrorCallback    func()
 	UseArrayBuffer   *bool
 }
 

@@ -119,7 +119,11 @@ func (d *DepthOfFieldEffect) GetPostProcesses(opts *DepthOfFieldEffectGetPostPro
 	}
 
 	retVal := d.p.Call("getPostProcesses", args...)
-	return retVal
+	result := []*PostProcess{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, PostProcessFromJSObject(retVal.Index(ri), d.ctx))
+	}
+	return result
 }
 
 /*

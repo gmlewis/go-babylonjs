@@ -114,7 +114,7 @@ func (i *Image) GetClassName() string {
 // ImageGetDescendantsOpts contains optional parameters for Image.GetDescendants.
 type ImageGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the Image object.
@@ -145,7 +145,7 @@ func (i *Image) GetDescendants(opts *ImageGetDescendantsOpts) *Control {
 // ImageGetDescendantsToRefOpts contains optional parameters for Image.GetDescendantsToRef.
 type ImageGetDescendantsToRefOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendantsToRef calls the GetDescendantsToRef method on the Image object.

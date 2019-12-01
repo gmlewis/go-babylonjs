@@ -52,7 +52,7 @@ func (ba *Babylon) NewRadioGroup(name string) *RadioGroup {
 
 // RadioGroupAddRadioOpts contains optional parameters for RadioGroup.AddRadio.
 type RadioGroupAddRadioOpts struct {
-	Func    *func()
+	Func    func()
 	Checked *bool
 }
 

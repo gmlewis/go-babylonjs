@@ -170,7 +170,7 @@ func (e *Ellipse) GetClassName() string {
 // EllipseGetDescendantsOpts contains optional parameters for Ellipse.GetDescendants.
 type EllipseGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the Ellipse object.
@@ -201,7 +201,7 @@ func (e *Ellipse) GetDescendants(opts *EllipseGetDescendantsOpts) *Control {
 // EllipseGetDescendantsToRefOpts contains optional parameters for Ellipse.GetDescendantsToRef.
 type EllipseGetDescendantsToRefOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendantsToRef calls the GetDescendantsToRef method on the Ellipse object.

@@ -7,7 +7,7 @@ import (
 )
 
 // SoundTrack represents a babylon.js SoundTrack.
-// It could be useful to isolate your music &amp;amp; sounds on several tracks to better manage volume on a grouped instance of sounds.
+// It could be useful to isolate your music &amp; sounds on several tracks to better manage volume on a grouped instance of sounds.
 // It will be also used in a future release to apply effects on a specific track.
 //
 // See: http://doc.babylonjs.com/how_to/playing_sounds_and_music#using-sound-tracks

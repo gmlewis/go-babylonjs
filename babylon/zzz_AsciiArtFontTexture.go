@@ -215,11 +215,7 @@ func (a *AsciiArtFontTexture) ReadPixels(opts *AsciiArtFontTextureReadPixelsOpts
 	} else {
 		args = append(args, *opts.Level)
 	}
-	if opts.Buffer == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Buffer)
-	}
+	args = append(args, opts.Buffer)
 
 	retVal := a.p.Call("readPixels", args...)
 	return retVal

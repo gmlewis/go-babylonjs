@@ -10,7 +10,7 @@ import (
 // DigitalRainPostProcess helps rendering everithing in digital rain.
 //
 // Simmply add it to your scene and let the nerd that lives in you have fun.
-// Example usage: var pp = new DigitalRainPostProcess(&amp;quot;digitalRain&amp;quot;, &amp;quot;20px Monospace&amp;quot;, camera);
+// Example usage: var pp = new DigitalRainPostProcess(&quot;digitalRain&quot;, &quot;20px Monospace&quot;, camera);
 type DigitalRainPostProcess struct {
 	*PostProcess
 	ctx js.Value
@@ -223,8 +223,8 @@ type DigitalRainPostProcessUpdateEffectOpts struct {
 	Uniforms        *string
 	Samplers        *string
 	IndexParameters *interface{}
-	OnCompiled      *func()
-	OnError         *func()
+	OnCompiled      func()
+	OnError         func()
 }
 
 // UpdateEffect calls the UpdateEffect method on the DigitalRainPostProcess object.

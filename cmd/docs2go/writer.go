@@ -4,10 +4,10 @@ import (
 	"bytes"
 	"fmt"
 	"go/format"
-	"html/template"
 	"io/ioutil"
 	"path/filepath"
 	"strings"
+	"text/template"
 )
 
 const (
@@ -185,8 +185,8 @@ func {{$name}}ArrayToJSArray(array []*{{$name}}) []interface{} {
 {{range $key, $value := .ConstructorNames}}{{if $value.HasOpts}}
 // {{$key}}Opts contains optional parameters for {{$key}}.
 type {{$key}}Opts struct {
-{{range $opt := $value.GoOpts -}}
-  {{$opt}}
+{{range $index, $optType := $value.GoOptsType -}}
+  {{index $value.GoOptsName $index}} {{$optType}}
 {{end}}
 }
 {{end}}
@@ -206,13 +206,14 @@ if opts == nil {
   args = append(args, {{$element}})
   {{end}}
 
-  {{range $index, $element := $value.JSOpts -}}
+  {{range $index, $element := $value.JSOpts -}}{{if index $value.GoOptsType $index | eq "js.Value"}}args = append(args, opts.{{index $value.GoOptsName $index}})
+  {{else -}}
   if opts.{{index $value.GoOptsName $index}} == nil {
     args = append(args, js.Undefined())
   } else {
     args = append(args, {{$element}})
   }
-  {{end}}
+  {{end}}{{end}}
 
 	p := ba.ctx.Get("{{$name}}").New(args...)
 	return {{$name}}FromJSObject(p, ba.ctx)
@@ -222,8 +223,8 @@ if opts == nil {
 {{range $key, $value := .MethodNames}}{{if $value.HasOpts}}
 // {{$name}}{{$key}}Opts contains optional parameters for {{$name}}.{{$key}}.
 type {{$name}}{{$key}}Opts struct {
-{{range $opt := $value.GoOpts -}}
-  {{$opt}}
+{{range $index, $optType := $value.GoOptsType -}}
+  {{index $value.GoOptsName $index}} {{$optType}}
 {{end}}
 }
 {{end}}
@@ -243,16 +244,17 @@ opts = &{{$name}}{{$key}}Opts{}
   args = append(args, {{if index $value.NeedsArrayHelper $index}}{{index $value.NeedsArrayHelper $index}}{{else}}{{$element}}{{end}})
   {{end}}
 
-  {{range $index, $element := $value.JSOpts -}}
+  {{range $index, $element := $value.JSOpts -}}{{if index $value.GoOptsType $index | eq "js.Value"}}args = append(args, opts.{{index $value.GoOptsName $index}})
+  {{else -}}
   if opts.{{index $value.GoOptsName $index}} == nil {
     args = append(args, js.Undefined())
   } else {
     args = append(args, {{$element}})
   }
-  {{end}}
+  {{end}}{{end}}
 
 	{{if $value.GoReturnType}}retVal := {{end}}{{$name | receiver}}.p.Call("{{$value.JSName}}"{{if or $value.JSParams $value.JSOpts}}, args...{{end}}){{if $value.GoReturnType}}
-  return {{$value.GoReturnStatement}}{{end}}
+  {{$value.GoReturnStatement}}{{end}}
 }
 {{end}}
 

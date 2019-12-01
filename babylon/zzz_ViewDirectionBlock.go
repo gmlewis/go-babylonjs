@@ -131,7 +131,7 @@ func (v *ViewDirectionBlock) Clone(scene *Scene, opts *ViewDirectionBlockCloneOp
 
 // ViewDirectionBlockConnectToOpts contains optional parameters for ViewDirectionBlock.ConnectTo.
 type ViewDirectionBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the ViewDirectionBlock object.
@@ -396,11 +396,7 @@ func (v *ViewDirectionBlock) RegisterInput(name string, jsType js.Value, opts *V
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := v.p.Call("registerInput", args...)
 	return ViewDirectionBlockFromJSObject(retVal, v.ctx)
@@ -424,11 +420,7 @@ func (v *ViewDirectionBlock) RegisterOutput(name string, jsType js.Value, opts *
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := v.p.Call("registerOutput", args...)
 	return ViewDirectionBlockFromJSObject(retVal, v.ctx)

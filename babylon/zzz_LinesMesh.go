@@ -111,7 +111,7 @@ func (l *LinesMesh) AddLODLevel(distance float64, mesh *Mesh) *Mesh {
 
 // LinesMeshApplyDisplacementMapOpts contains optional parameters for LinesMesh.ApplyDisplacementMap.
 type LinesMeshApplyDisplacementMapOpts struct {
-	OnSuccess   *func()
+	OnSuccess   func()
 	UvOffset    *Vector2
 	UvScale     *Vector2
 	ForceUpdate *bool
@@ -531,7 +531,7 @@ func (l *LinesMesh) CreateGround(name string, width float64, height float64, sub
 // LinesMeshCreateGroundFromHeightMapOpts contains optional parameters for LinesMesh.CreateGroundFromHeightMap.
 type LinesMeshCreateGroundFromHeightMapOpts struct {
 	Updatable   *bool
-	OnReady     *func()
+	OnReady     func()
 	AlphaFilter *float64
 }
 
@@ -1507,8 +1507,8 @@ func (l *LinesMesh) IncreaseVertices(numberPerEdge float64) {
 // LinesMeshInstantiateHierarchyOpts contains optional parameters for LinesMesh.InstantiateHierarchy.
 type LinesMeshInstantiateHierarchyOpts struct {
 	NewParent        *TransformNode
-	Options          js.Value
-	OnNewNodeCreated *func()
+	Options          map[string]interface{}
+	OnNewNodeCreated func()
 }
 
 // InstantiateHierarchy calls the InstantiateHierarchy method on the LinesMesh object.
@@ -1690,7 +1690,7 @@ func (l *LinesMesh) MinMax(meshes *AbstractMesh) js.Value {
 
 // LinesMeshOptimizeIndicesOpts contains optional parameters for LinesMesh.OptimizeIndices.
 type LinesMeshOptimizeIndicesOpts struct {
-	SuccessCallback *func()
+	SuccessCallback func()
 }
 
 // OptimizeIndices calls the OptimizeIndices method on the LinesMesh object.
@@ -1972,7 +1972,7 @@ func (l *LinesMesh) SetVerticesData(kind string, data js.Value, opts *LinesMeshS
 type LinesMeshSimplifyOpts struct {
 	ParallelProcessing *bool
 	SimplificationType js.Value
-	SuccessCallback    *func()
+	SuccessCallback    func()
 }
 
 // Simplify calls the Simplify method on the LinesMesh object.
@@ -1992,11 +1992,7 @@ func (l *LinesMesh) Simplify(settings []*ISimplificationSettings, opts *LinesMes
 	} else {
 		args = append(args, *opts.ParallelProcessing)
 	}
-	if opts.SimplificationType == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.SimplificationType)
-	}
+	args = append(args, opts.SimplificationType)
 	if opts.SuccessCallback == nil {
 		args = append(args, js.Undefined())
 	} else {

@@ -697,7 +697,11 @@ func (p *ParticleSystem) Dispose(opts *ParticleSystemDisposeOpts) {
 func (p *ParticleSystem) GetAlphaRemapGradients() []*FactorGradient {
 
 	retVal := p.p.Call("getAlphaRemapGradients")
-	return retVal
+	result := []*FactorGradient{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, FactorGradientFromJSObject(retVal.Index(ri), p.ctx))
+	}
+	return result
 }
 
 // GetAngularSpeedGradients calls the GetAngularSpeedGradients method on the ParticleSystem object.
@@ -706,7 +710,11 @@ func (p *ParticleSystem) GetAlphaRemapGradients() []*FactorGradient {
 func (p *ParticleSystem) GetAngularSpeedGradients() []*FactorGradient {
 
 	retVal := p.p.Call("getAngularSpeedGradients")
-	return retVal
+	result := []*FactorGradient{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, FactorGradientFromJSObject(retVal.Index(ri), p.ctx))
+	}
+	return result
 }
 
 // GetCapacity calls the GetCapacity method on the ParticleSystem object.
@@ -733,7 +741,11 @@ func (p *ParticleSystem) GetClassName() string {
 func (p *ParticleSystem) GetColorGradients() []*ColorGradient {
 
 	retVal := p.p.Call("getColorGradients")
-	return retVal
+	result := []*ColorGradient{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, ColorGradientFromJSObject(retVal.Index(ri), p.ctx))
+	}
+	return result
 }
 
 // GetColorRemapGradients calls the GetColorRemapGradients method on the ParticleSystem object.
@@ -742,7 +754,11 @@ func (p *ParticleSystem) GetColorGradients() []*ColorGradient {
 func (p *ParticleSystem) GetColorRemapGradients() []*FactorGradient {
 
 	retVal := p.p.Call("getColorRemapGradients")
-	return retVal
+	result := []*FactorGradient{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, FactorGradientFromJSObject(retVal.Index(ri), p.ctx))
+	}
+	return result
 }
 
 // GetDragGradients calls the GetDragGradients method on the ParticleSystem object.
@@ -751,7 +767,11 @@ func (p *ParticleSystem) GetColorRemapGradients() []*FactorGradient {
 func (p *ParticleSystem) GetDragGradients() []*FactorGradient {
 
 	retVal := p.p.Call("getDragGradients")
-	return retVal
+	result := []*FactorGradient{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, FactorGradientFromJSObject(retVal.Index(ri), p.ctx))
+	}
+	return result
 }
 
 // GetEmitRateGradients calls the GetEmitRateGradients method on the ParticleSystem object.
@@ -760,7 +780,11 @@ func (p *ParticleSystem) GetDragGradients() []*FactorGradient {
 func (p *ParticleSystem) GetEmitRateGradients() []*FactorGradient {
 
 	retVal := p.p.Call("getEmitRateGradients")
-	return retVal
+	result := []*FactorGradient{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, FactorGradientFromJSObject(retVal.Index(ri), p.ctx))
+	}
+	return result
 }
 
 // GetLifeTimeGradients calls the GetLifeTimeGradients method on the ParticleSystem object.
@@ -769,7 +793,11 @@ func (p *ParticleSystem) GetEmitRateGradients() []*FactorGradient {
 func (p *ParticleSystem) GetLifeTimeGradients() []*FactorGradient {
 
 	retVal := p.p.Call("getLifeTimeGradients")
-	return retVal
+	result := []*FactorGradient{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, FactorGradientFromJSObject(retVal.Index(ri), p.ctx))
+	}
+	return result
 }
 
 // GetLimitVelocityGradients calls the GetLimitVelocityGradients method on the ParticleSystem object.
@@ -778,7 +806,11 @@ func (p *ParticleSystem) GetLifeTimeGradients() []*FactorGradient {
 func (p *ParticleSystem) GetLimitVelocityGradients() []*FactorGradient {
 
 	retVal := p.p.Call("getLimitVelocityGradients")
-	return retVal
+	result := []*FactorGradient{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, FactorGradientFromJSObject(retVal.Index(ri), p.ctx))
+	}
+	return result
 }
 
 // GetRampGradients calls the GetRampGradients method on the ParticleSystem object.
@@ -787,7 +819,11 @@ func (p *ParticleSystem) GetLimitVelocityGradients() []*FactorGradient {
 func (p *ParticleSystem) GetRampGradients() []*Color3Gradient {
 
 	retVal := p.p.Call("getRampGradients")
-	return retVal
+	result := []*Color3Gradient{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, Color3GradientFromJSObject(retVal.Index(ri), p.ctx))
+	}
+	return result
 }
 
 // GetScene calls the GetScene method on the ParticleSystem object.
@@ -805,7 +841,11 @@ func (p *ParticleSystem) GetScene() *Scene {
 func (p *ParticleSystem) GetSizeGradients() []*FactorGradient {
 
 	retVal := p.p.Call("getSizeGradients")
-	return retVal
+	result := []*FactorGradient{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, FactorGradientFromJSObject(retVal.Index(ri), p.ctx))
+	}
+	return result
 }
 
 // GetStartSizeGradients calls the GetStartSizeGradients method on the ParticleSystem object.
@@ -814,7 +854,11 @@ func (p *ParticleSystem) GetSizeGradients() []*FactorGradient {
 func (p *ParticleSystem) GetStartSizeGradients() []*FactorGradient {
 
 	retVal := p.p.Call("getStartSizeGradients")
-	return retVal
+	result := []*FactorGradient{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, FactorGradientFromJSObject(retVal.Index(ri), p.ctx))
+	}
+	return result
 }
 
 // GetVelocityGradients calls the GetVelocityGradients method on the ParticleSystem object.
@@ -823,7 +867,11 @@ func (p *ParticleSystem) GetStartSizeGradients() []*FactorGradient {
 func (p *ParticleSystem) GetVelocityGradients() []*FactorGradient {
 
 	retVal := p.p.Call("getVelocityGradients")
-	return retVal
+	result := []*FactorGradient{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, FactorGradientFromJSObject(retVal.Index(ri), p.ctx))
+	}
+	return result
 }
 
 // IsAlive calls the IsAlive method on the ParticleSystem object.

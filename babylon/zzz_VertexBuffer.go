@@ -193,7 +193,11 @@ func (v *VertexBuffer) GetBuffer() *DataBuffer {
 func (v *VertexBuffer) GetData() []*float64 {
 
 	retVal := v.p.Call("getData")
-	return retVal
+	result := []*float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, float64FromJSObject(retVal.Index(ri), v.ctx))
+	}
+	return result
 }
 
 // GetInstanceDivisor calls the GetInstanceDivisor method on the VertexBuffer object.

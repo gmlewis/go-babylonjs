@@ -131,7 +131,7 @@ func (d *DistanceBlock) Clone(scene *Scene, opts *DistanceBlockCloneOpts) *NodeM
 
 // DistanceBlockConnectToOpts contains optional parameters for DistanceBlock.ConnectTo.
 type DistanceBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the DistanceBlock object.
@@ -396,11 +396,7 @@ func (d *DistanceBlock) RegisterInput(name string, jsType js.Value, opts *Distan
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := d.p.Call("registerInput", args...)
 	return DistanceBlockFromJSObject(retVal, d.ctx)
@@ -424,11 +420,7 @@ func (d *DistanceBlock) RegisterOutput(name string, jsType js.Value, opts *Dista
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := d.p.Call("registerOutput", args...)
 	return DistanceBlockFromJSObject(retVal, d.ctx)

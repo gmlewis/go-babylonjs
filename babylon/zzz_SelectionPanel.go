@@ -92,7 +92,7 @@ func (s *SelectionPanel) AddGroup(group *SelectorGroup) {
 
 // SelectionPanelAddToGroupCheckboxOpts contains optional parameters for SelectionPanel.AddToGroupCheckbox.
 type SelectionPanelAddToGroupCheckboxOpts struct {
-	Func    *func()
+	Func    func()
 	Checked *bool
 }
 
@@ -125,7 +125,7 @@ func (s *SelectionPanel) AddToGroupCheckbox(groupNb float64, label string, opts 
 
 // SelectionPanelAddToGroupRadioOpts contains optional parameters for SelectionPanel.AddToGroupRadio.
 type SelectionPanelAddToGroupRadioOpts struct {
-	Func    *func()
+	Func    func()
 	Checked *bool
 }
 
@@ -158,12 +158,12 @@ func (s *SelectionPanel) AddToGroupRadio(groupNb float64, label string, opts *Se
 
 // SelectionPanelAddToGroupSliderOpts contains optional parameters for SelectionPanel.AddToGroupSlider.
 type SelectionPanelAddToGroupSliderOpts struct {
-	Func  *func()
+	Func  func()
 	Unit  *string
 	Min   *float64
 	Max   *float64
 	Value *float64
-	OnVal *func()
+	OnVal func()
 }
 
 // AddToGroupSlider calls the AddToGroupSlider method on the SelectionPanel object.
@@ -309,7 +309,7 @@ func (s *SelectionPanel) GetClassName() string {
 // SelectionPanelGetDescendantsOpts contains optional parameters for SelectionPanel.GetDescendants.
 type SelectionPanelGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the SelectionPanel object.
@@ -340,7 +340,7 @@ func (s *SelectionPanel) GetDescendants(opts *SelectionPanelGetDescendantsOpts) 
 // SelectionPanelGetDescendantsToRefOpts contains optional parameters for SelectionPanel.GetDescendantsToRef.
 type SelectionPanelGetDescendantsToRefOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendantsToRef calls the GetDescendantsToRef method on the SelectionPanel object.

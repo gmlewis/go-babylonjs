@@ -9,7 +9,7 @@ import (
 // StringDictionary represents a babylon.js StringDictionary.
 // This class implement a typical dictionary using a string as key and the generic type T as value.
 // The underlying implementation relies on an associative array to ensure the best performances.
-// The value can be anything including &amp;#39;null&amp;#39; but except &amp;#39;undefined&amp;#39;
+// The value can be anything including &#39;null&#39; but except &#39;undefined&#39;
 type StringDictionary struct {
 	p   js.Value
 	ctx js.Value

@@ -183,7 +183,11 @@ func (b *Buffer) GetBuffer() *DataBuffer {
 func (b *Buffer) GetData() []*float64 {
 
 	retVal := b.p.Call("getData")
-	return retVal
+	result := []*float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, float64FromJSObject(retVal.Index(ri), b.ctx))
+	}
+	return result
 }
 
 // GetStrideSize calls the GetStrideSize method on the Buffer object.

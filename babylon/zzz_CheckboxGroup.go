@@ -52,7 +52,7 @@ func (ba *Babylon) NewCheckboxGroup(name string) *CheckboxGroup {
 
 // CheckboxGroupAddCheckboxOpts contains optional parameters for CheckboxGroup.AddCheckbox.
 type CheckboxGroupAddCheckboxOpts struct {
-	Func    *func()
+	Func    func()
 	Checked *bool
 }
 

@@ -7,7 +7,7 @@ import (
 )
 
 // KHR_materials_unlit represents a babylon.js KHR_materials_unlit.
-// &lt;a href=&#34;https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Khronos/KHR_materials_unlit&#34;&gt;Specification&lt;/a&gt;
+// <a href="https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Khronos/KHR_materials_unlit">Specification</a>
 type KHR_materials_unlit struct {
 	p   js.Value
 	ctx js.Value

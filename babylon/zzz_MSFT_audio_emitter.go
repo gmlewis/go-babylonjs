@@ -7,7 +7,7 @@ import (
 )
 
 // MSFT_audio_emitter represents a babylon.js MSFT_audio_emitter.
-// &lt;a href=&#34;https://github.com/najadojo/glTF/tree/MSFT_audio_emitter/extensions/2.0/Vendor/MSFT_audio_emitter&#34;&gt;Specification&lt;/a&gt;
+// <a href="https://github.com/najadojo/glTF/tree/MSFT_audio_emitter/extensions/2.0/Vendor/MSFT_audio_emitter">Specification</a>
 type MSFT_audio_emitter struct {
 	p   js.Value
 	ctx js.Value

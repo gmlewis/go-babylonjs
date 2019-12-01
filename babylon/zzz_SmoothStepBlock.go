@@ -131,7 +131,7 @@ func (s *SmoothStepBlock) Clone(scene *Scene, opts *SmoothStepBlockCloneOpts) *N
 
 // SmoothStepBlockConnectToOpts contains optional parameters for SmoothStepBlock.ConnectTo.
 type SmoothStepBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the SmoothStepBlock object.
@@ -396,11 +396,7 @@ func (s *SmoothStepBlock) RegisterInput(name string, jsType js.Value, opts *Smoo
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := s.p.Call("registerInput", args...)
 	return SmoothStepBlockFromJSObject(retVal, s.ctx)
@@ -424,11 +420,7 @@ func (s *SmoothStepBlock) RegisterOutput(name string, jsType js.Value, opts *Smo
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := s.p.Call("registerOutput", args...)
 	return SmoothStepBlockFromJSObject(retVal, s.ctx)

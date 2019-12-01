@@ -100,8 +100,8 @@ type RawTexture2DArrayCreateFromBase64StringOpts struct {
 	NoMipmap     *bool
 	InvertY      *bool
 	SamplingMode *float64
-	OnLoad       *func()
-	OnError      *func()
+	OnLoad       func()
+	OnError      func()
 	Format       *float64
 }
 
@@ -265,8 +265,8 @@ type RawTexture2DArrayLoadFromDataStringOpts struct {
 	NoMipmap     *bool
 	InvertY      *bool
 	SamplingMode *float64
-	OnLoad       *func()
-	OnError      *func()
+	OnLoad       func()
+	OnError      func()
 	Format       *float64
 }
 
@@ -366,11 +366,7 @@ func (r *RawTexture2DArray) ReadPixels(opts *RawTexture2DArrayReadPixelsOpts) js
 	} else {
 		args = append(args, *opts.Level)
 	}
-	if opts.Buffer == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Buffer)
-	}
+	args = append(args, opts.Buffer)
 
 	retVal := r.p.Call("readPixels", args...)
 	return retVal
@@ -441,7 +437,7 @@ func (r *RawTexture2DArray) UpdateSamplingMode(samplingMode float64) {
 // RawTexture2DArrayUpdateURLOpts contains optional parameters for RawTexture2DArray.UpdateURL.
 type RawTexture2DArrayUpdateURLOpts struct {
 	Buffer *string
-	OnLoad *func()
+	OnLoad func()
 }
 
 // UpdateURL calls the UpdateURL method on the RawTexture2DArray object.

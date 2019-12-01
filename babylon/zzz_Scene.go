@@ -55,11 +55,7 @@ func (ba *Babylon) NewScene(engine *Engine, opts *NewSceneOpts) *Scene {
 
 	args = append(args, engine.JSObject())
 
-	if opts.Options == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Options)
-	}
+	args = append(args, opts.Options)
 
 	p := ba.ctx.Get("Scene").New(args...)
 	return SceneFromJSObject(p, ba.ctx)
@@ -357,11 +353,11 @@ func (s *Scene) AttachControl(opts *SceneAttachControlOpts) {
 type SceneBeginAnimationOpts struct {
 	Loop            *bool
 	SpeedRatio      *float64
-	OnAnimationEnd  *func()
+	OnAnimationEnd  func()
 	Animatable      *Animatable
 	StopCurrent     *bool
-	TargetMask      *func()
-	OnAnimationLoop *func()
+	TargetMask      func()
+	OnAnimationLoop func()
 }
 
 // BeginAnimation calls the BeginAnimation method on the Scene object.
@@ -422,8 +418,8 @@ func (s *Scene) BeginAnimation(target interface{}, from float64, to float64, opt
 type SceneBeginDirectAnimationOpts struct {
 	Loop            *bool
 	SpeedRatio      *float64
-	OnAnimationEnd  *func()
-	OnAnimationLoop *func()
+	OnAnimationEnd  func()
+	OnAnimationLoop func()
 }
 
 // BeginDirectAnimation calls the BeginDirectAnimation method on the Scene object.
@@ -470,8 +466,8 @@ func (s *Scene) BeginDirectAnimation(target interface{}, animations *Animation, 
 type SceneBeginDirectHierarchyAnimationOpts struct {
 	Loop            *bool
 	SpeedRatio      *float64
-	OnAnimationEnd  *func()
-	OnAnimationLoop *func()
+	OnAnimationEnd  func()
+	OnAnimationLoop func()
 }
 
 // BeginDirectHierarchyAnimation calls the BeginDirectHierarchyAnimation method on the Scene object.
@@ -519,11 +515,11 @@ func (s *Scene) BeginDirectHierarchyAnimation(target *Node, directDescendantsOnl
 type SceneBeginHierarchyAnimationOpts struct {
 	Loop            *bool
 	SpeedRatio      *float64
-	OnAnimationEnd  *func()
+	OnAnimationEnd  func()
 	Animatable      *Animatable
 	StopCurrent     *bool
-	TargetMask      *func()
-	OnAnimationLoop *func()
+	TargetMask      func()
+	OnAnimationLoop func()
 }
 
 // BeginHierarchyAnimation calls the BeginHierarchyAnimation method on the Scene object.
@@ -585,10 +581,10 @@ func (s *Scene) BeginHierarchyAnimation(target interface{}, directDescendantsOnl
 type SceneBeginWeightedAnimationOpts struct {
 	Loop            *bool
 	SpeedRatio      *float64
-	OnAnimationEnd  *func()
+	OnAnimationEnd  func()
 	Animatable      *Animatable
-	TargetMask      *func()
-	OnAnimationLoop *func()
+	TargetMask      func()
+	OnAnimationLoop func()
 }
 
 // BeginWeightedAnimation calls the BeginWeightedAnimation method on the Scene object.
@@ -851,11 +847,7 @@ func (s *Scene) CreateDefaultVRExperience(opts *SceneCreateDefaultVRExperienceOp
 
 	args := make([]interface{}, 0, 0+1)
 
-	if opts.WebVROptions == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.WebVROptions)
-	}
+	args = append(args, opts.WebVROptions)
 
 	retVal := s.p.Call("createDefaultVRExperience", args...)
 	return VRExperienceHelperFromJSObject(retVal, s.ctx)
@@ -1177,11 +1169,7 @@ func (s *Scene) EnablePhysics(gravity *Vector3, opts *SceneEnablePhysicsOpts) bo
 
 	args = append(args, gravity.JSObject())
 
-	if opts.Plugin == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Plugin)
-	}
+	args = append(args, opts.Plugin)
 
 	retVal := s.p.Call("enablePhysics", args...)
 	return retVal.Bool()
@@ -1328,7 +1316,11 @@ func (s *Scene) GetAllAnimatablesByTarget(target interface{}) []*Animatable {
 	args = append(args, target)
 
 	retVal := s.p.Call("getAllAnimatablesByTarget", args...)
-	return retVal
+	result := []*Animatable{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, AnimatableFromJSObject(retVal.Index(ri), s.ctx))
+	}
+	return result
 }
 
 // GetAnimatableByTarget calls the GetAnimatableByTarget method on the Scene object.
@@ -1482,7 +1474,7 @@ func (s *Scene) GetCameraByUniqueID(uniqueId float64) *Camera {
 
 // SceneGetCamerasByTagsOpts contains optional parameters for Scene.GetCamerasByTags.
 type SceneGetCamerasByTagsOpts struct {
-	ForEach *func()
+	ForEach func()
 }
 
 // GetCamerasByTags calls the GetCamerasByTags method on the Scene object.
@@ -1723,7 +1715,7 @@ func (s *Scene) GetLightByUniqueID(uniqueId float64) *Light {
 
 // SceneGetLightsByTagsOpts contains optional parameters for Scene.GetLightsByTags.
 type SceneGetLightsByTagsOpts struct {
-	ForEach *func()
+	ForEach func()
 }
 
 // GetLightsByTags calls the GetLightsByTags method on the Scene object.
@@ -1776,7 +1768,7 @@ func (s *Scene) GetMaterialByName(name string) *Material {
 
 // SceneGetMaterialByTagsOpts contains optional parameters for Scene.GetMaterialByTags.
 type SceneGetMaterialByTagsOpts struct {
-	ForEach *func()
+	ForEach func()
 }
 
 // GetMaterialByTags calls the GetMaterialByTags method on the Scene object.
@@ -1863,12 +1855,16 @@ func (s *Scene) GetMeshesByID(id string) []*AbstractMesh {
 	args = append(args, id)
 
 	retVal := s.p.Call("getMeshesByID", args...)
-	return retVal
+	result := []*AbstractMesh{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, AbstractMeshFromJSObject(retVal.Index(ri), s.ctx))
+	}
+	return result
 }
 
 // SceneGetMeshesByTagsOpts contains optional parameters for Scene.GetMeshesByTags.
 type SceneGetMeshesByTagsOpts struct {
-	ForEach *func()
+	ForEach func()
 }
 
 // GetMeshesByTags calls the GetMeshesByTags method on the Scene object.
@@ -2175,7 +2171,11 @@ func (s *Scene) GetTransformNodesByID(id string) []*TransformNode {
 	args = append(args, id)
 
 	retVal := s.p.Call("getTransformNodesByID", args...)
-	return retVal
+	result := []*TransformNode{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, TransformNodeFromJSObject(retVal.Index(ri), s.ctx))
+	}
+	return result
 }
 
 // GetUniqueId calls the GetUniqueId method on the Scene object.
@@ -2207,7 +2207,7 @@ func (s *Scene) GetWaitingItemsCount() float64 {
 
 // SceneGetWorldExtendsOpts contains optional parameters for Scene.GetWorldExtends.
 type SceneGetWorldExtendsOpts struct {
-	FilterPredicate *func()
+	FilterPredicate func()
 }
 
 // GetWorldExtends calls the GetWorldExtends method on the Scene object.
@@ -2324,7 +2324,7 @@ func (s *Scene) IsReady() bool {
 
 // SceneMarkAllMaterialsAsDirtyOpts contains optional parameters for Scene.MarkAllMaterialsAsDirty.
 type SceneMarkAllMaterialsAsDirtyOpts struct {
-	Predicate *func()
+	Predicate func()
 }
 
 // MarkAllMaterialsAsDirty calls the MarkAllMaterialsAsDirty method on the Scene object.
@@ -2350,7 +2350,7 @@ func (s *Scene) MarkAllMaterialsAsDirty(flag float64, opts *SceneMarkAllMaterial
 
 // SceneMultiPickOpts contains optional parameters for Scene.MultiPick.
 type SceneMultiPickOpts struct {
-	Predicate         *func()
+	Predicate         func()
 	Camera            *Camera
 	TrianglePredicate js.Value
 }
@@ -2378,11 +2378,7 @@ func (s *Scene) MultiPick(x float64, y float64, opts *SceneMultiPickOpts) *Picki
 	} else {
 		args = append(args, opts.Camera.JSObject())
 	}
-	if opts.TrianglePredicate == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.TrianglePredicate)
-	}
+	args = append(args, opts.TrianglePredicate)
 
 	retVal := s.p.Call("multiPick", args...)
 	return PickingInfoFromJSObject(retVal, s.ctx)
@@ -2390,7 +2386,7 @@ func (s *Scene) MultiPick(x float64, y float64, opts *SceneMultiPickOpts) *Picki
 
 // SceneMultiPickSpriteOpts contains optional parameters for Scene.MultiPickSprite.
 type SceneMultiPickSpriteOpts struct {
-	Predicate *func()
+	Predicate func()
 	Camera    *Camera
 }
 
@@ -2424,7 +2420,7 @@ func (s *Scene) MultiPickSprite(x float64, y float64, opts *SceneMultiPickSprite
 
 // SceneMultiPickSpriteWithRayOpts contains optional parameters for Scene.MultiPickSpriteWithRay.
 type SceneMultiPickSpriteWithRayOpts struct {
-	Predicate *func()
+	Predicate func()
 	Camera    *Camera
 }
 
@@ -2473,11 +2469,7 @@ func (s *Scene) MultiPickWithRay(ray *Ray, predicate func(), opts *SceneMultiPic
 	args = append(args, ray.JSObject())
 	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { predicate(); return nil }))
 
-	if opts.TrianglePredicate == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.TrianglePredicate)
-	}
+	args = append(args, opts.TrianglePredicate)
 
 	retVal := s.p.Call("multiPickWithRay", args...)
 	return PickingInfoFromJSObject(retVal, s.ctx)
@@ -2500,7 +2492,7 @@ func (s *Scene) Parse(jsonData interface{}, scene *Scene, container *AssetContai
 
 // ScenePickOpts contains optional parameters for Scene.Pick.
 type ScenePickOpts struct {
-	Predicate         *func()
+	Predicate         func()
 	FastCheck         *bool
 	Camera            *Camera
 	TrianglePredicate js.Value
@@ -2534,11 +2526,7 @@ func (s *Scene) Pick(x float64, y float64, opts *ScenePickOpts) *PickingInfo {
 	} else {
 		args = append(args, opts.Camera.JSObject())
 	}
-	if opts.TrianglePredicate == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.TrianglePredicate)
-	}
+	args = append(args, opts.TrianglePredicate)
 
 	retVal := s.p.Call("pick", args...)
 	return PickingInfoFromJSObject(retVal, s.ctx)
@@ -2546,7 +2534,7 @@ func (s *Scene) Pick(x float64, y float64, opts *ScenePickOpts) *PickingInfo {
 
 // ScenePickSpriteOpts contains optional parameters for Scene.PickSprite.
 type ScenePickSpriteOpts struct {
-	Predicate *func()
+	Predicate func()
 	FastCheck *bool
 	Camera    *Camera
 }
@@ -2586,7 +2574,7 @@ func (s *Scene) PickSprite(x float64, y float64, opts *ScenePickSpriteOpts) *Pic
 
 // ScenePickSpriteWithRayOpts contains optional parameters for Scene.PickSpriteWithRay.
 type ScenePickSpriteWithRayOpts struct {
-	Predicate *func()
+	Predicate func()
 	FastCheck *bool
 	Camera    *Camera
 }
@@ -2625,7 +2613,7 @@ func (s *Scene) PickSpriteWithRay(ray *Ray, opts *ScenePickSpriteWithRayOpts) *P
 
 // ScenePickWithRayOpts contains optional parameters for Scene.PickWithRay.
 type ScenePickWithRayOpts struct {
-	Predicate         *func()
+	Predicate         func()
 	FastCheck         *bool
 	TrianglePredicate js.Value
 }
@@ -2652,11 +2640,7 @@ func (s *Scene) PickWithRay(ray *Ray, opts *ScenePickWithRayOpts) *PickingInfo {
 	} else {
 		args = append(args, *opts.FastCheck)
 	}
-	if opts.TrianglePredicate == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.TrianglePredicate)
-	}
+	args = append(args, opts.TrianglePredicate)
 
 	retVal := s.p.Call("pickWithRay", args...)
 	return PickingInfoFromJSObject(retVal, s.ctx)
@@ -3100,9 +3084,9 @@ func (s *Scene) SetRenderingAutoClearDepthStencil(renderingGroupId float64, auto
 
 // SceneSetRenderingOrderOpts contains optional parameters for Scene.SetRenderingOrder.
 type SceneSetRenderingOrderOpts struct {
-	OpaqueSortCompareFn      *func()
-	AlphaTestSortCompareFn   *func()
-	TransparentSortCompareFn *func()
+	OpaqueSortCompareFn      func()
+	AlphaTestSortCompareFn   func()
+	TransparentSortCompareFn func()
 }
 
 // SetRenderingOrder calls the SetRenderingOrder method on the Scene object.
@@ -3198,11 +3182,7 @@ func (s *Scene) SimulatePointerDown(pickResult *PickingInfo, opts *SceneSimulate
 
 	args = append(args, pickResult.JSObject())
 
-	if opts.PointerEventInit == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.PointerEventInit)
-	}
+	args = append(args, opts.PointerEventInit)
 
 	retVal := s.p.Call("simulatePointerDown", args...)
 	return SceneFromJSObject(retVal, s.ctx)
@@ -3225,11 +3205,7 @@ func (s *Scene) SimulatePointerMove(pickResult *PickingInfo, opts *SceneSimulate
 
 	args = append(args, pickResult.JSObject())
 
-	if opts.PointerEventInit == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.PointerEventInit)
-	}
+	args = append(args, opts.PointerEventInit)
 
 	retVal := s.p.Call("simulatePointerMove", args...)
 	return SceneFromJSObject(retVal, s.ctx)
@@ -3253,11 +3229,7 @@ func (s *Scene) SimulatePointerUp(pickResult *PickingInfo, opts *SceneSimulatePo
 
 	args = append(args, pickResult.JSObject())
 
-	if opts.PointerEventInit == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.PointerEventInit)
-	}
+	args = append(args, opts.PointerEventInit)
 	if opts.DoubleTap == nil {
 		args = append(args, js.Undefined())
 	} else {
@@ -3287,7 +3259,7 @@ func (s *Scene) StopAllAnimations() {
 // SceneStopAnimationOpts contains optional parameters for Scene.StopAnimation.
 type SceneStopAnimationOpts struct {
 	AnimationName *string
-	TargetMask    *func()
+	TargetMask    func()
 }
 
 // StopAnimation calls the StopAnimation method on the Scene object.

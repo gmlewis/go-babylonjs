@@ -8,7 +8,7 @@ import (
 
 // DefaultRenderingPipeline represents a babylon.js DefaultRenderingPipeline.
 // The default rendering pipeline can be added to a scene to apply common post processing effects such as anti-aliasing or depth of field.
-// See &lt;a href=&#34;https://doc.babylonjs.com/how_to/using_default_rendering_pipeline&#34;&gt;https://doc.babylonjs.com/how_to/using_default_rendering_pipeline&lt;/a&gt;
+// See <a href="https://doc.babylonjs.com/how_to/using_default_rendering_pipeline">https://doc.babylonjs.com/how_to/using_default_rendering_pipeline</a>
 type DefaultRenderingPipeline struct {
 	*PostProcessRenderPipeline
 	ctx js.Value

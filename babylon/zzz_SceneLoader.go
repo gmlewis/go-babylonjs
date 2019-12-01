@@ -42,9 +42,9 @@ func SceneLoaderArrayToJSArray(array []*SceneLoader) []interface{} {
 type SceneLoaderAppendOpts struct {
 	SceneFilename   *string
 	Scene           *Scene
-	OnSuccess       *func()
-	OnProgress      *func()
-	OnError         *func()
+	OnSuccess       func()
+	OnProgress      func()
+	OnError         func()
 	PluginExtension *string
 }
 
@@ -99,7 +99,7 @@ func (s *SceneLoader) Append(rootUrl string, opts *SceneLoaderAppendOpts) *IScen
 type SceneLoaderAppendAsyncOpts struct {
 	SceneFilename   *string
 	Scene           *Scene
-	OnProgress      *func()
+	OnProgress      func()
 	PluginExtension *string
 }
 
@@ -157,9 +157,9 @@ func (s *SceneLoader) GetPluginForExtension(extension string) *ISceneLoaderPlugi
 type SceneLoaderImportMeshOpts struct {
 	SceneFilename   *string
 	Scene           *Scene
-	OnSuccess       *func()
-	OnProgress      *func()
-	OnError         *func()
+	OnSuccess       func()
+	OnProgress      func()
+	OnError         func()
 	PluginExtension *string
 }
 
@@ -215,7 +215,7 @@ func (s *SceneLoader) ImportMesh(meshNames interface{}, rootUrl string, opts *Sc
 type SceneLoaderImportMeshAsyncOpts struct {
 	SceneFilename   *string
 	Scene           *Scene
-	OnProgress      *func()
+	OnProgress      func()
 	PluginExtension *string
 }
 
@@ -274,9 +274,9 @@ func (s *SceneLoader) IsPluginForExtensionAvailable(extension string) bool {
 type SceneLoaderLoadOpts struct {
 	SceneFilename   *string
 	Engine          *Engine
-	OnSuccess       *func()
-	OnProgress      *func()
-	OnError         *func()
+	OnSuccess       func()
+	OnProgress      func()
+	OnError         func()
 	PluginExtension *string
 }
 
@@ -331,9 +331,9 @@ func (s *SceneLoader) Load(rootUrl string, opts *SceneLoaderLoadOpts) *ISceneLoa
 type SceneLoaderLoadAssetContainerOpts struct {
 	SceneFilename   *string
 	Scene           *Scene
-	OnSuccess       *func()
-	OnProgress      *func()
-	OnError         *func()
+	OnSuccess       func()
+	OnProgress      func()
+	OnError         func()
 	PluginExtension *string
 }
 
@@ -388,7 +388,7 @@ func (s *SceneLoader) LoadAssetContainer(rootUrl string, opts *SceneLoaderLoadAs
 type SceneLoaderLoadAssetContainerAsyncOpts struct {
 	SceneFilename   *string
 	Scene           *Scene
-	OnProgress      *func()
+	OnProgress      func()
 	PluginExtension *string
 }
 
@@ -433,7 +433,7 @@ func (s *SceneLoader) LoadAssetContainerAsync(rootUrl string, opts *SceneLoaderL
 type SceneLoaderLoadAsyncOpts struct {
 	SceneFilename   *string
 	Engine          *Engine
-	OnProgress      *func()
+	OnProgress      func()
 	PluginExtension *string
 }
 

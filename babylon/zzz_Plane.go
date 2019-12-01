@@ -7,7 +7,7 @@ import (
 )
 
 // Plane represents a babylon.js Plane.
-// Represens a plane by the equation ax &#43; by &#43; cz &#43; d = 0
+// Represens a plane by the equation ax + by + cz + d = 0
 type Plane struct {
 	p   js.Value
 	ctx js.Value

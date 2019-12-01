@@ -66,7 +66,7 @@ func (g *GroundMesh) AddLODLevel(distance float64, mesh *Mesh) *Mesh {
 
 // GroundMeshApplyDisplacementMapOpts contains optional parameters for GroundMesh.ApplyDisplacementMap.
 type GroundMeshApplyDisplacementMapOpts struct {
-	OnSuccess   *func()
+	OnSuccess   func()
 	UvOffset    *Vector2
 	UvScale     *Vector2
 	ForceUpdate *bool
@@ -496,7 +496,7 @@ func (g *GroundMesh) CreateGround(name string, width float64, height float64, su
 // GroundMeshCreateGroundFromHeightMapOpts contains optional parameters for GroundMesh.CreateGroundFromHeightMap.
 type GroundMeshCreateGroundFromHeightMapOpts struct {
 	Updatable   *bool
-	OnReady     *func()
+	OnReady     func()
 	AlphaFilter *float64
 }
 
@@ -1490,8 +1490,8 @@ func (g *GroundMesh) IncreaseVertices(numberPerEdge float64) {
 // GroundMeshInstantiateHierarchyOpts contains optional parameters for GroundMesh.InstantiateHierarchy.
 type GroundMeshInstantiateHierarchyOpts struct {
 	NewParent        *TransformNode
-	Options          js.Value
-	OnNewNodeCreated *func()
+	Options          map[string]interface{}
+	OnNewNodeCreated func()
 }
 
 // InstantiateHierarchy calls the InstantiateHierarchy method on the GroundMesh object.
@@ -1721,7 +1721,7 @@ func (g *GroundMesh) Optimize(chunksCount float64, opts *GroundMeshOptimizeOpts)
 
 // GroundMeshOptimizeIndicesOpts contains optional parameters for GroundMesh.OptimizeIndices.
 type GroundMeshOptimizeIndicesOpts struct {
-	SuccessCallback *func()
+	SuccessCallback func()
 }
 
 // OptimizeIndices calls the OptimizeIndices method on the GroundMesh object.
@@ -2002,7 +2002,7 @@ func (g *GroundMesh) SetVerticesData(kind string, data js.Value, opts *GroundMes
 type GroundMeshSimplifyOpts struct {
 	ParallelProcessing *bool
 	SimplificationType js.Value
-	SuccessCallback    *func()
+	SuccessCallback    func()
 }
 
 // Simplify calls the Simplify method on the GroundMesh object.
@@ -2022,11 +2022,7 @@ func (g *GroundMesh) Simplify(settings []*ISimplificationSettings, opts *GroundM
 	} else {
 		args = append(args, *opts.ParallelProcessing)
 	}
-	if opts.SimplificationType == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.SimplificationType)
-	}
+	args = append(args, opts.SimplificationType)
 	if opts.SuccessCallback == nil {
 		args = append(args, js.Undefined())
 	} else {

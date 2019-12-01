@@ -107,7 +107,7 @@ func (n *Node) AddNodeConstructor(jsType string, constructorFunc js.Value) {
 type NodeBeginAnimationOpts struct {
 	Loop           *bool
 	SpeedRatio     *float64
-	OnAnimationEnd *func()
+	OnAnimationEnd func()
 }
 
 // BeginAnimation calls the BeginAnimation method on the Node object.
@@ -317,7 +317,7 @@ func (n *Node) GetBehaviorByName(name string) js.Value {
 // NodeGetChildMeshesOpts contains optional parameters for Node.GetChildMeshes.
 type NodeGetChildMeshesOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetChildMeshes calls the GetChildMeshes method on the Node object.
@@ -347,7 +347,7 @@ func (n *Node) GetChildMeshes(opts *NodeGetChildMeshesOpts) *AbstractMesh {
 
 // NodeGetChildrenOpts contains optional parameters for Node.GetChildren.
 type NodeGetChildrenOpts struct {
-	Predicate             *func()
+	Predicate             func()
 	DirectDescendantsOnly *bool
 }
 
@@ -388,7 +388,7 @@ func (n *Node) GetClassName() string {
 // NodeGetDescendantsOpts contains optional parameters for Node.GetDescendants.
 type NodeGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the Node object.
@@ -428,7 +428,7 @@ func (n *Node) GetEngine() *Engine {
 // NodeGetHierarchyBoundingVectorsOpts contains optional parameters for Node.GetHierarchyBoundingVectors.
 type NodeGetHierarchyBoundingVectorsOpts struct {
 	IncludeDescendants *bool
-	Predicate          *func()
+	Predicate          func()
 }
 
 // GetHierarchyBoundingVectors calls the GetHierarchyBoundingVectors method on the Node object.

@@ -38,7 +38,7 @@ func ScreenshotToolsArrayToJSArray(array []*ScreenshotTools) []interface{} {
 
 // ScreenshotToolsCreateScreenshotOpts contains optional parameters for ScreenshotTools.CreateScreenshot.
 type ScreenshotToolsCreateScreenshotOpts struct {
-	SuccessCallback *func()
+	SuccessCallback func()
 	MimeType        *string
 }
 
@@ -101,7 +101,7 @@ func (s *ScreenshotTools) CreateScreenshotAsync(engine *Engine, camera *Camera, 
 
 // ScreenshotToolsCreateScreenshotUsingRenderTargetOpts contains optional parameters for ScreenshotTools.CreateScreenshotUsingRenderTarget.
 type ScreenshotToolsCreateScreenshotUsingRenderTargetOpts struct {
-	SuccessCallback *func()
+	SuccessCallback func()
 	MimeType        *string
 	Samples         *float64
 	Antialiasing    *bool

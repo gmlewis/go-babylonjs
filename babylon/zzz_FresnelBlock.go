@@ -131,7 +131,7 @@ func (f *FresnelBlock) Clone(scene *Scene, opts *FresnelBlockCloneOpts) *NodeMat
 
 // FresnelBlockConnectToOpts contains optional parameters for FresnelBlock.ConnectTo.
 type FresnelBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the FresnelBlock object.
@@ -396,11 +396,7 @@ func (f *FresnelBlock) RegisterInput(name string, jsType js.Value, opts *Fresnel
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := f.p.Call("registerInput", args...)
 	return FresnelBlockFromJSObject(retVal, f.ctx)
@@ -424,11 +420,7 @@ func (f *FresnelBlock) RegisterOutput(name string, jsType js.Value, opts *Fresne
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := f.p.Call("registerOutput", args...)
 	return FresnelBlockFromJSObject(retVal, f.ctx)

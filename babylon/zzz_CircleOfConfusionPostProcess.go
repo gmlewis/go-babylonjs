@@ -7,7 +7,7 @@ import (
 )
 
 // CircleOfConfusionPostProcess represents a babylon.js CircleOfConfusionPostProcess.
-// The CircleOfConfusionPostProcess computes the circle of confusion value for each pixel given required lens parameters. See &lt;a href=&#34;https://en.wikipedia.org/wiki/Circle_of_confusion&#34;&gt;https://en.wikipedia.org/wiki/Circle_of_confusion&lt;/a&gt;
+// The CircleOfConfusionPostProcess computes the circle of confusion value for each pixel given required lens parameters. See <a href="https://en.wikipedia.org/wiki/Circle_of_confusion">https://en.wikipedia.org/wiki/Circle_of_confusion</a>
 type CircleOfConfusionPostProcess struct {
 	*PostProcess
 	ctx js.Value
@@ -246,8 +246,8 @@ type CircleOfConfusionPostProcessUpdateEffectOpts struct {
 	Uniforms        *string
 	Samplers        *string
 	IndexParameters *interface{}
-	OnCompiled      *func()
-	OnError         *func()
+	OnCompiled      func()
+	OnError         func()
 }
 
 // UpdateEffect calls the UpdateEffect method on the CircleOfConfusionPostProcess object.

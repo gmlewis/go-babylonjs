@@ -131,7 +131,7 @@ func (n *NormalizeBlock) Clone(scene *Scene, opts *NormalizeBlockCloneOpts) *Nod
 
 // NormalizeBlockConnectToOpts contains optional parameters for NormalizeBlock.ConnectTo.
 type NormalizeBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the NormalizeBlock object.
@@ -396,11 +396,7 @@ func (n *NormalizeBlock) RegisterInput(name string, jsType js.Value, opts *Norma
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := n.p.Call("registerInput", args...)
 	return NormalizeBlockFromJSObject(retVal, n.ctx)
@@ -424,11 +420,7 @@ func (n *NormalizeBlock) RegisterOutput(name string, jsType js.Value, opts *Norm
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := n.p.Call("registerOutput", args...)
 	return NormalizeBlockFromJSObject(retVal, n.ctx)

@@ -7,7 +7,7 @@ import (
 )
 
 // DevicePose represents a babylon.js DevicePose.
-// This is a copy of VRPose. See &lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/API/VRPose&#34;&gt;https://developer.mozilla.org/en-US/docs/Web/API/VRPose&lt;/a&gt;
+// This is a copy of VRPose. See <a href="https://developer.mozilla.org/en-US/docs/Web/API/VRPose">https://developer.mozilla.org/en-US/docs/Web/API/VRPose</a>
 // IMPORTANT!! The data is right-hand data.
 type DevicePose struct {
 	p   js.Value

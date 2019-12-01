@@ -8,7 +8,7 @@ import (
 
 // SharpenPostProcess represents a babylon.js SharpenPostProcess.
 // The SharpenPostProcess applies a sharpen kernel to every pixel
-// See &lt;a href=&#34;http://en.wikipedia.org/wiki/Kernel_(image_processing)&#34;&gt;http://en.wikipedia.org/wiki/Kernel_(image_processing)&lt;/a&gt;
+// See <a href="http://en.wikipedia.org/wiki/Kernel_(image_processing)">http://en.wikipedia.org/wiki/Kernel_(image_processing)</a>
 type SharpenPostProcess struct {
 	*PostProcess
 	ctx js.Value
@@ -246,8 +246,8 @@ type SharpenPostProcessUpdateEffectOpts struct {
 	Uniforms        *string
 	Samplers        *string
 	IndexParameters *interface{}
-	OnCompiled      *func()
-	OnError         *func()
+	OnCompiled      func()
+	OnError         func()
 }
 
 // UpdateEffect calls the UpdateEffect method on the SharpenPostProcess object.

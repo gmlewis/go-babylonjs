@@ -131,7 +131,7 @@ func (s *SubtractBlock) Clone(scene *Scene, opts *SubtractBlockCloneOpts) *NodeM
 
 // SubtractBlockConnectToOpts contains optional parameters for SubtractBlock.ConnectTo.
 type SubtractBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the SubtractBlock object.
@@ -396,11 +396,7 @@ func (s *SubtractBlock) RegisterInput(name string, jsType js.Value, opts *Subtra
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := s.p.Call("registerInput", args...)
 	return SubtractBlockFromJSObject(retVal, s.ctx)
@@ -424,11 +420,7 @@ func (s *SubtractBlock) RegisterOutput(name string, jsType js.Value, opts *Subtr
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := s.p.Call("registerOutput", args...)
 	return SubtractBlockFromJSObject(retVal, s.ctx)

@@ -131,7 +131,7 @@ func (f *FrontFacingBlock) Clone(scene *Scene, opts *FrontFacingBlockCloneOpts) 
 
 // FrontFacingBlockConnectToOpts contains optional parameters for FrontFacingBlock.ConnectTo.
 type FrontFacingBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the FrontFacingBlock object.
@@ -396,11 +396,7 @@ func (f *FrontFacingBlock) RegisterInput(name string, jsType js.Value, opts *Fro
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := f.p.Call("registerInput", args...)
 	return FrontFacingBlockFromJSObject(retVal, f.ctx)
@@ -424,11 +420,7 @@ func (f *FrontFacingBlock) RegisterOutput(name string, jsType js.Value, opts *Fr
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := f.p.Call("registerOutput", args...)
 	return FrontFacingBlockFromJSObject(retVal, f.ctx)

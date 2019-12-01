@@ -131,7 +131,7 @@ func (l *LengthBlock) Clone(scene *Scene, opts *LengthBlockCloneOpts) *NodeMater
 
 // LengthBlockConnectToOpts contains optional parameters for LengthBlock.ConnectTo.
 type LengthBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the LengthBlock object.
@@ -396,11 +396,7 @@ func (l *LengthBlock) RegisterInput(name string, jsType js.Value, opts *LengthBl
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := l.p.Call("registerInput", args...)
 	return LengthBlockFromJSObject(retVal, l.ctx)
@@ -424,11 +420,7 @@ func (l *LengthBlock) RegisterOutput(name string, jsType js.Value, opts *LengthB
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := l.p.Call("registerOutput", args...)
 	return LengthBlockFromJSObject(retVal, l.ctx)

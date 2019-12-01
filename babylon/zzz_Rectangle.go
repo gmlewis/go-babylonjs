@@ -170,7 +170,7 @@ func (r *Rectangle) GetClassName() string {
 // RectangleGetDescendantsOpts contains optional parameters for Rectangle.GetDescendants.
 type RectangleGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the Rectangle object.
@@ -201,7 +201,7 @@ func (r *Rectangle) GetDescendants(opts *RectangleGetDescendantsOpts) *Control {
 // RectangleGetDescendantsToRefOpts contains optional parameters for Rectangle.GetDescendantsToRef.
 type RectangleGetDescendantsToRefOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendantsToRef calls the GetDescendantsToRef method on the Rectangle object.

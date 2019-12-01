@@ -131,7 +131,7 @@ func (c *CrossBlock) Clone(scene *Scene, opts *CrossBlockCloneOpts) *NodeMateria
 
 // CrossBlockConnectToOpts contains optional parameters for CrossBlock.ConnectTo.
 type CrossBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the CrossBlock object.
@@ -396,11 +396,7 @@ func (c *CrossBlock) RegisterInput(name string, jsType js.Value, opts *CrossBloc
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := c.p.Call("registerInput", args...)
 	return CrossBlockFromJSObject(retVal, c.ctx)
@@ -424,11 +420,7 @@ func (c *CrossBlock) RegisterOutput(name string, jsType js.Value, opts *CrossBlo
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := c.p.Call("registerOutput", args...)
 	return CrossBlockFromJSObject(retVal, c.ctx)

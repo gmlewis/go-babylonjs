@@ -10,7 +10,7 @@ import (
 // A directional light is defined by a direction (what a surprise!).
 // The light is emitted from everywhere in the specified direction, and has an infinite range.
 // An example of a directional light is when a distance planet is lit by the apparently parallel lines of light from its sun. Light in a downward direction will light the top of an object.
-// Documentation: &lt;a href=&#34;https://doc.babylonjs.com/babylon101/lights&#34;&gt;https://doc.babylonjs.com/babylon101/lights&lt;/a&gt;
+// Documentation: <a href="https://doc.babylonjs.com/babylon101/lights">https://doc.babylonjs.com/babylon101/lights</a>
 type DirectionalLight struct {
 	*ShadowLight
 	ctx js.Value
@@ -98,7 +98,7 @@ func (d *DirectionalLight) AddNodeConstructor(jsType string, constructorFunc js.
 type DirectionalLightBeginAnimationOpts struct {
 	Loop           *bool
 	SpeedRatio     *float64
-	OnAnimationEnd *func()
+	OnAnimationEnd func()
 }
 
 // BeginAnimation calls the BeginAnimation method on the DirectionalLight object.
@@ -409,7 +409,7 @@ func (d *DirectionalLight) GetBehaviorByName(name string) js.Value {
 // DirectionalLightGetChildMeshesOpts contains optional parameters for DirectionalLight.GetChildMeshes.
 type DirectionalLightGetChildMeshesOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetChildMeshes calls the GetChildMeshes method on the DirectionalLight object.
@@ -439,7 +439,7 @@ func (d *DirectionalLight) GetChildMeshes(opts *DirectionalLightGetChildMeshesOp
 
 // DirectionalLightGetChildrenOpts contains optional parameters for DirectionalLight.GetChildren.
 type DirectionalLightGetChildrenOpts struct {
-	Predicate             *func()
+	Predicate             func()
 	DirectDescendantsOnly *bool
 }
 
@@ -530,7 +530,7 @@ func (d *DirectionalLight) GetDepthScale() float64 {
 // DirectionalLightGetDescendantsOpts contains optional parameters for DirectionalLight.GetDescendants.
 type DirectionalLightGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the DirectionalLight object.
@@ -570,7 +570,7 @@ func (d *DirectionalLight) GetEngine() *Engine {
 // DirectionalLightGetHierarchyBoundingVectorsOpts contains optional parameters for DirectionalLight.GetHierarchyBoundingVectors.
 type DirectionalLightGetHierarchyBoundingVectorsOpts struct {
 	IncludeDescendants *bool
-	Predicate          *func()
+	Predicate          func()
 }
 
 // GetHierarchyBoundingVectors calls the GetHierarchyBoundingVectors method on the DirectionalLight object.

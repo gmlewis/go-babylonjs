@@ -131,7 +131,7 @@ func (l *LightBlock) Clone(scene *Scene, opts *LightBlockCloneOpts) *NodeMateria
 
 // LightBlockConnectToOpts contains optional parameters for LightBlock.ConnectTo.
 type LightBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the LightBlock object.
@@ -382,11 +382,7 @@ func (l *LightBlock) RegisterInput(name string, jsType js.Value, opts *LightBloc
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := l.p.Call("registerInput", args...)
 	return LightBlockFromJSObject(retVal, l.ctx)
@@ -410,11 +406,7 @@ func (l *LightBlock) RegisterOutput(name string, jsType js.Value, opts *LightBlo
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := l.p.Call("registerOutput", args...)
 	return LightBlockFromJSObject(retVal, l.ctx)

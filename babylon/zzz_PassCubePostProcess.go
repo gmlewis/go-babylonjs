@@ -7,7 +7,7 @@ import (
 )
 
 // PassCubePostProcess represents a babylon.js PassCubePostProcess.
-// PassCubePostProcess which produces an output the same as it&amp;#39;s input (which must be a cube texture)
+// PassCubePostProcess which produces an output the same as it&#39;s input (which must be a cube texture)
 type PassCubePostProcess struct {
 	*PostProcess
 	ctx js.Value
@@ -250,8 +250,8 @@ type PassCubePostProcessUpdateEffectOpts struct {
 	Uniforms        *string
 	Samplers        *string
 	IndexParameters *interface{}
-	OnCompiled      *func()
-	OnError         *func()
+	OnCompiled      func()
+	OnError         func()
 }
 
 // UpdateEffect calls the UpdateEffect method on the PassCubePostProcess object.

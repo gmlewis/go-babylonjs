@@ -131,7 +131,7 @@ func (f *FragmentOutputBlock) Clone(scene *Scene, opts *FragmentOutputBlockClone
 
 // FragmentOutputBlockConnectToOpts contains optional parameters for FragmentOutputBlock.ConnectTo.
 type FragmentOutputBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the FragmentOutputBlock object.
@@ -396,11 +396,7 @@ func (f *FragmentOutputBlock) RegisterInput(name string, jsType js.Value, opts *
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := f.p.Call("registerInput", args...)
 	return FragmentOutputBlockFromJSObject(retVal, f.ctx)
@@ -424,11 +420,7 @@ func (f *FragmentOutputBlock) RegisterOutput(name string, jsType js.Value, opts 
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := f.p.Call("registerOutput", args...)
 	return FragmentOutputBlockFromJSObject(retVal, f.ctx)

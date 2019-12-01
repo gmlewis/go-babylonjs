@@ -100,8 +100,8 @@ type RawTexture3DCreateFromBase64StringOpts struct {
 	NoMipmap     *bool
 	InvertY      *bool
 	SamplingMode *float64
-	OnLoad       *func()
-	OnError      *func()
+	OnLoad       func()
+	OnError      func()
 	Format       *float64
 }
 
@@ -265,8 +265,8 @@ type RawTexture3DLoadFromDataStringOpts struct {
 	NoMipmap     *bool
 	InvertY      *bool
 	SamplingMode *float64
-	OnLoad       *func()
-	OnError      *func()
+	OnLoad       func()
+	OnError      func()
 	Format       *float64
 }
 
@@ -366,11 +366,7 @@ func (r *RawTexture3D) ReadPixels(opts *RawTexture3DReadPixelsOpts) js.Value {
 	} else {
 		args = append(args, *opts.Level)
 	}
-	if opts.Buffer == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Buffer)
-	}
+	args = append(args, opts.Buffer)
 
 	retVal := r.p.Call("readPixels", args...)
 	return retVal
@@ -441,7 +437,7 @@ func (r *RawTexture3D) UpdateSamplingMode(samplingMode float64) {
 // RawTexture3DUpdateURLOpts contains optional parameters for RawTexture3D.UpdateURL.
 type RawTexture3DUpdateURLOpts struct {
 	Buffer *string
-	OnLoad *func()
+	OnLoad func()
 }
 
 // UpdateURL calls the UpdateURL method on the RawTexture3D object.

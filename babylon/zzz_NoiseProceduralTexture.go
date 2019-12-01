@@ -95,8 +95,8 @@ type NoiseProceduralTextureCreateFromBase64StringOpts struct {
 	NoMipmap     *bool
 	InvertY      *bool
 	SamplingMode *float64
-	OnLoad       *func()
-	OnError      *func()
+	OnLoad       func()
+	OnError      func()
 	Format       *float64
 }
 
@@ -287,8 +287,8 @@ type NoiseProceduralTextureLoadFromDataStringOpts struct {
 	NoMipmap     *bool
 	InvertY      *bool
 	SamplingMode *float64
-	OnLoad       *func()
-	OnError      *func()
+	OnLoad       func()
+	OnError      func()
 	Format       *float64
 }
 
@@ -387,11 +387,7 @@ func (n *NoiseProceduralTexture) ReadPixels(opts *NoiseProceduralTextureReadPixe
 	} else {
 		args = append(args, *opts.Level)
 	}
-	if opts.Buffer == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Buffer)
-	}
+	args = append(args, opts.Buffer)
 
 	retVal := n.p.Call("readPixels", args...)
 	return retVal
@@ -641,7 +637,7 @@ func (n *NoiseProceduralTexture) UpdateSamplingMode(samplingMode float64) {
 // NoiseProceduralTextureUpdateURLOpts contains optional parameters for NoiseProceduralTexture.UpdateURL.
 type NoiseProceduralTextureUpdateURLOpts struct {
 	Buffer *string
-	OnLoad *func()
+	OnLoad func()
 }
 
 // UpdateURL calls the UpdateURL method on the NoiseProceduralTexture object.

@@ -8,7 +8,7 @@ import (
 
 // DepthRenderer represents a babylon.js DepthRenderer.
 // This represents a depth renderer in Babylon.
-// A depth renderer will render to it&amp;#39;s depth map every frame which can be displayed or used in post processing
+// A depth renderer will render to it&#39;s depth map every frame which can be displayed or used in post processing
 type DepthRenderer struct {
 	p   js.Value
 	ctx js.Value

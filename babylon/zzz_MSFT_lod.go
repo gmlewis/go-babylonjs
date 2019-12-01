@@ -7,7 +7,7 @@ import (
 )
 
 // MSFT_lod represents a babylon.js MSFT_lod.
-// &lt;a href=&#34;https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Vendor/MSFT_lod&#34;&gt;Specification&lt;/a&gt;
+// <a href="https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Vendor/MSFT_lod">Specification</a>
 type MSFT_lod struct {
 	p   js.Value
 	ctx js.Value

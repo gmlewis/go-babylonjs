@@ -131,7 +131,7 @@ func (o *OneMinusBlock) Clone(scene *Scene, opts *OneMinusBlockCloneOpts) *NodeM
 
 // OneMinusBlockConnectToOpts contains optional parameters for OneMinusBlock.ConnectTo.
 type OneMinusBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the OneMinusBlock object.
@@ -396,11 +396,7 @@ func (o *OneMinusBlock) RegisterInput(name string, jsType js.Value, opts *OneMin
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := o.p.Call("registerInput", args...)
 	return OneMinusBlockFromJSObject(retVal, o.ctx)
@@ -424,11 +420,7 @@ func (o *OneMinusBlock) RegisterOutput(name string, jsType js.Value, opts *OneMi
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := o.p.Call("registerOutput", args...)
 	return OneMinusBlockFromJSObject(retVal, o.ctx)

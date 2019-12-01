@@ -131,7 +131,7 @@ func (n *NegateBlock) Clone(scene *Scene, opts *NegateBlockCloneOpts) *NodeMater
 
 // NegateBlockConnectToOpts contains optional parameters for NegateBlock.ConnectTo.
 type NegateBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the NegateBlock object.
@@ -396,11 +396,7 @@ func (n *NegateBlock) RegisterInput(name string, jsType js.Value, opts *NegateBl
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := n.p.Call("registerInput", args...)
 	return NegateBlockFromJSObject(retVal, n.ctx)
@@ -424,11 +420,7 @@ func (n *NegateBlock) RegisterOutput(name string, jsType js.Value, opts *NegateB
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := n.p.Call("registerOutput", args...)
 	return NegateBlockFromJSObject(retVal, n.ctx)

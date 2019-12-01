@@ -108,7 +108,7 @@ func (x *XRWindowsMotionController) GetForwardRay(opts *XRWindowsMotionControlle
 
 // XRWindowsMotionControllerInitControllerMeshOpts contains optional parameters for XRWindowsMotionController.InitControllerMesh.
 type XRWindowsMotionControllerInitControllerMeshOpts struct {
-	MeshLoaded   *func()
+	MeshLoaded   func()
 	ForceDefault *bool
 }
 

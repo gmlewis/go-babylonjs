@@ -131,7 +131,7 @@ func (c *ColorMergerBlock) Clone(scene *Scene, opts *ColorMergerBlockCloneOpts) 
 
 // ColorMergerBlockConnectToOpts contains optional parameters for ColorMergerBlock.ConnectTo.
 type ColorMergerBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the ColorMergerBlock object.
@@ -396,11 +396,7 @@ func (c *ColorMergerBlock) RegisterInput(name string, jsType js.Value, opts *Col
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := c.p.Call("registerInput", args...)
 	return ColorMergerBlockFromJSObject(retVal, c.ctx)
@@ -424,11 +420,7 @@ func (c *ColorMergerBlock) RegisterOutput(name string, jsType js.Value, opts *Co
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := c.p.Call("registerOutput", args...)
 	return ColorMergerBlockFromJSObject(retVal, c.ctx)

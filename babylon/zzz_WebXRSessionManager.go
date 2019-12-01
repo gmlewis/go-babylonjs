@@ -7,7 +7,7 @@ import (
 )
 
 // WebXRSessionManager represents a babylon.js WebXRSessionManager.
-// Manages an XRSession to work with Babylon&amp;#39;s engine
+// Manages an XRSession to work with Babylon&#39;s engine
 //
 // See: https://doc.babylonjs.com/how_to/webxr
 type WebXRSessionManager struct {

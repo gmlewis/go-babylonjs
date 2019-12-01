@@ -131,7 +131,7 @@ func (d *DivideBlock) Clone(scene *Scene, opts *DivideBlockCloneOpts) *NodeMater
 
 // DivideBlockConnectToOpts contains optional parameters for DivideBlock.ConnectTo.
 type DivideBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the DivideBlock object.
@@ -396,11 +396,7 @@ func (d *DivideBlock) RegisterInput(name string, jsType js.Value, opts *DivideBl
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := d.p.Call("registerInput", args...)
 	return DivideBlockFromJSObject(retVal, d.ctx)
@@ -424,11 +420,7 @@ func (d *DivideBlock) RegisterOutput(name string, jsType js.Value, opts *DivideB
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := d.p.Call("registerOutput", args...)
 	return DivideBlockFromJSObject(retVal, d.ctx)

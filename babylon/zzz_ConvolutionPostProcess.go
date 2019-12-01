@@ -9,7 +9,7 @@ import (
 // ConvolutionPostProcess represents a babylon.js ConvolutionPostProcess.
 // The ConvolutionPostProcess applies a 3x3 kernel to every pixel of the
 // input texture to perform effects such as edge detection or sharpening
-// See &lt;a href=&#34;http://en.wikipedia.org/wiki/Kernel_(image_processing)&#34;&gt;http://en.wikipedia.org/wiki/Kernel_(image_processing)&lt;/a&gt;
+// See <a href="http://en.wikipedia.org/wiki/Kernel_(image_processing)">http://en.wikipedia.org/wiki/Kernel_(image_processing)</a>
 type ConvolutionPostProcess struct {
 	*PostProcess
 	ctx js.Value
@@ -242,8 +242,8 @@ type ConvolutionPostProcessUpdateEffectOpts struct {
 	Uniforms        *string
 	Samplers        *string
 	IndexParameters *interface{}
-	OnCompiled      *func()
-	OnError         *func()
+	OnCompiled      func()
+	OnError         func()
 }
 
 // UpdateEffect calls the UpdateEffect method on the ConvolutionPostProcess object.

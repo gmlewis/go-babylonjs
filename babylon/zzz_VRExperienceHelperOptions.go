@@ -7,7 +7,7 @@ import (
 )
 
 // VRExperienceHelperOptions represents a babylon.js VRExperienceHelperOptions.
-// Options to modify the vr experience helper&amp;#39;s behavior.
+// Options to modify the vr experience helper&#39;s behavior.
 type VRExperienceHelperOptions struct {
 	*WebVROptions
 	ctx js.Value

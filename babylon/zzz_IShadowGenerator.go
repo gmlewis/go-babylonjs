@@ -59,8 +59,8 @@ func (i *IShadowGenerator) Dispose() {
 
 // IShadowGeneratorForceCompilationOpts contains optional parameters for IShadowGenerator.ForceCompilation.
 type IShadowGeneratorForceCompilationOpts struct {
-	OnCompiled *func()
-	Options    js.Value
+	OnCompiled func()
+	Options    map[string]interface{}
 }
 
 // ForceCompilation calls the ForceCompilation method on the IShadowGenerator object.
@@ -89,7 +89,7 @@ func (i *IShadowGenerator) ForceCompilation(opts *IShadowGeneratorForceCompilati
 
 // IShadowGeneratorForceCompilationAsyncOpts contains optional parameters for IShadowGenerator.ForceCompilationAsync.
 type IShadowGeneratorForceCompilationAsyncOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ForceCompilationAsync calls the ForceCompilationAsync method on the IShadowGenerator object.

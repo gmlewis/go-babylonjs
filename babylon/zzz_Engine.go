@@ -60,11 +60,7 @@ func (ba *Babylon) NewEngine(canvasOrContext js.Value, opts *NewEngineOpts) *Eng
 	} else {
 		args = append(args, *opts.Antialias)
 	}
-	if opts.Options == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Options)
-	}
+	args = append(args, opts.Options)
 	if opts.AdaptToDeviceRatio == nil {
 		args = append(args, js.Undefined())
 	} else {
@@ -491,8 +487,8 @@ type EngineCreateEffectOpts struct {
 	Samplers        *string
 	Defines         *string
 	Fallbacks       *IEffectFallbacks
-	OnCompiled      *func()
-	OnError         *func()
+	OnCompiled      func()
+	OnError         func()
 	IndexParameters *interface{}
 }
 
@@ -548,8 +544,8 @@ func (e *Engine) CreateEffect(baseName interface{}, attributesNamesOrOptions str
 // EngineCreateEffectForParticlesOpts contains optional parameters for Engine.CreateEffectForParticles.
 type EngineCreateEffectForParticlesOpts struct {
 	Fallbacks  *EffectFallbacks
-	OnCompiled *func()
-	OnError    *func()
+	OnCompiled func()
+	OnError    func()
 }
 
 // CreateEffectForParticles calls the CreateEffectForParticles method on the Engine object.
@@ -666,8 +662,8 @@ func (e *Engine) CreatePipelineContext() *IPipelineContext {
 
 // EngineCreatePrefilteredCubeTextureOpts contains optional parameters for Engine.CreatePrefilteredCubeTexture.
 type EngineCreatePrefilteredCubeTextureOpts struct {
-	OnLoad            *func()
-	OnError           *func()
+	OnLoad            func()
+	OnError           func()
 	Format            *float64
 	ForcedExtension   *interface{}
 	CreatePolynomials *bool
@@ -789,11 +785,7 @@ func (e *Engine) CreateRawShaderProgram(pipelineContext *IPipelineContext, verte
 	args = append(args, vertexCode)
 	args = append(args, fragmentCode)
 
-	if opts.Context == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Context)
-	}
+	args = append(args, opts.Context)
 	if opts.TransformFeedbackVaryings == nil {
 		args = append(args, js.Undefined())
 	} else {
@@ -931,11 +923,7 @@ func (e *Engine) CreateShaderProgram(pipelineContext *IPipelineContext, vertexCo
 	args = append(args, fragmentCode)
 	args = append(args, defines)
 
-	if opts.Context == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Context)
-	}
+	args = append(args, opts.Context)
 	if opts.TransformFeedbackVaryings == nil {
 		args = append(args, js.Undefined())
 	} else {
@@ -949,8 +937,8 @@ func (e *Engine) CreateShaderProgram(pipelineContext *IPipelineContext, vertexCo
 // EngineCreateTextureOpts contains optional parameters for Engine.CreateTexture.
 type EngineCreateTextureOpts struct {
 	SamplingMode    *float64
-	OnLoad          *func()
-	OnError         *func()
+	OnLoad          func()
+	OnError         func()
 	Buffer          *string
 	Fallback        *InternalTexture
 	Format          *float64
@@ -1967,7 +1955,7 @@ func (e *Engine) IsVRPresenting() bool {
 
 // EngineMarkAllMaterialsAsDirtyOpts contains optional parameters for Engine.MarkAllMaterialsAsDirty.
 type EngineMarkAllMaterialsAsDirtyOpts struct {
-	Predicate *func()
+	Predicate func()
 }
 
 // MarkAllMaterialsAsDirty calls the MarkAllMaterialsAsDirty method on the Engine object.
@@ -2876,7 +2864,7 @@ func (e *Engine) StartTimeQuery() js.Value {
 
 // EngineStopRenderLoopOpts contains optional parameters for Engine.StopRenderLoop.
 type EngineStopRenderLoopOpts struct {
-	RenderFunction *func()
+	RenderFunction func()
 }
 
 // StopRenderLoop calls the StopRenderLoop method on the Engine object.
@@ -2913,7 +2901,7 @@ func (e *Engine) SwitchFullscreen(requestPointerLock bool) {
 // EngineUnBindFramebufferOpts contains optional parameters for Engine.UnBindFramebuffer.
 type EngineUnBindFramebufferOpts struct {
 	DisableGenerateMipMaps *bool
-	OnBeforeUnbind         *func()
+	OnBeforeUnbind         func()
 }
 
 // UnBindFramebuffer calls the UnBindFramebuffer method on the Engine object.
@@ -2944,7 +2932,7 @@ func (e *Engine) UnBindFramebuffer(texture *InternalTexture, opts *EngineUnBindF
 
 // EngineUnBindMultiColorAttachmentFramebufferOpts contains optional parameters for Engine.UnBindMultiColorAttachmentFramebuffer.
 type EngineUnBindMultiColorAttachmentFramebufferOpts struct {
-	OnBeforeUnbind *func()
+	OnBeforeUnbind func()
 }
 
 // UnBindMultiColorAttachmentFramebuffer calls the UnBindMultiColorAttachmentFramebuffer method on the Engine object.

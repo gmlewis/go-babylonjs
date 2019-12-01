@@ -256,7 +256,11 @@ func (g *Grid) GetChildrenAt(row float64, column float64) []*Control {
 	args = append(args, column)
 
 	retVal := g.p.Call("getChildrenAt", args...)
-	return retVal
+	result := []*Control{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, ControlFromJSObject(retVal.Index(ri), g.ctx))
+	}
+	return result
 }
 
 // GetClassName calls the GetClassName method on the Grid object.
@@ -284,7 +288,7 @@ func (g *Grid) GetColumnDefinition(index float64) *ValueAndUnit {
 // GridGetDescendantsOpts contains optional parameters for Grid.GetDescendants.
 type GridGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the Grid object.
@@ -315,7 +319,7 @@ func (g *Grid) GetDescendants(opts *GridGetDescendantsOpts) *Control {
 // GridGetDescendantsToRefOpts contains optional parameters for Grid.GetDescendantsToRef.
 type GridGetDescendantsToRefOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendantsToRef calls the GetDescendantsToRef method on the Grid object.

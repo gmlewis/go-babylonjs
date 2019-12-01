@@ -108,7 +108,7 @@ func (v *ViveController) GetForwardRay(opts *ViveControllerGetForwardRayOpts) *R
 
 // ViveControllerInitControllerMeshOpts contains optional parameters for ViveController.InitControllerMesh.
 type ViveControllerInitControllerMeshOpts struct {
-	MeshLoaded *func()
+	MeshLoaded func()
 }
 
 // InitControllerMesh calls the InitControllerMesh method on the ViveController object.

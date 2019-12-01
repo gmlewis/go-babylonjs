@@ -52,11 +52,7 @@ func (ba *Babylon) NewOBJFileLoader(opts *NewOBJFileLoaderOpts) *OBJFileLoader {
 
 	args := make([]interface{}, 0, 0+1)
 
-	if opts.MeshLoadOptions == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.MeshLoadOptions)
-	}
+	args = append(args, opts.MeshLoadOptions)
 
 	p := ba.ctx.Get("OBJFileLoader").New(args...)
 	return OBJFileLoaderFromJSObject(p, ba.ctx)
@@ -86,7 +82,7 @@ func (o *OBJFileLoader) CreatePlugin() *ISceneLoaderPluginAsync {
 
 // OBJFileLoaderImportMeshAsyncOpts contains optional parameters for OBJFileLoader.ImportMeshAsync.
 type OBJFileLoaderImportMeshAsyncOpts struct {
-	OnProgress *func()
+	OnProgress func()
 	FileName   *string
 }
 
@@ -122,7 +118,7 @@ func (o *OBJFileLoader) ImportMeshAsync(meshesNames interface{}, scene *Scene, d
 
 // OBJFileLoaderLoadAssetContainerAsyncOpts contains optional parameters for OBJFileLoader.LoadAssetContainerAsync.
 type OBJFileLoaderLoadAssetContainerAsyncOpts struct {
-	OnProgress *func()
+	OnProgress func()
 	FileName   *string
 }
 
@@ -157,7 +153,7 @@ func (o *OBJFileLoader) LoadAssetContainerAsync(scene *Scene, data string, rootU
 
 // OBJFileLoaderLoadAsyncOpts contains optional parameters for OBJFileLoader.LoadAsync.
 type OBJFileLoaderLoadAsyncOpts struct {
-	OnProgress *func()
+	OnProgress func()
 	FileName   *string
 }
 

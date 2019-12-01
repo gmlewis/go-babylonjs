@@ -52,12 +52,12 @@ func (ba *Babylon) NewSliderGroup(name string) *SliderGroup {
 
 // SliderGroupAddSliderOpts contains optional parameters for SliderGroup.AddSlider.
 type SliderGroupAddSliderOpts struct {
-	Func          *func()
+	Func          func()
 	Unit          *string
 	Min           *float64
 	Max           *float64
 	Value         *float64
-	OnValueChange *func()
+	OnValueChange func()
 }
 
 // AddSlider calls the AddSlider method on the SliderGroup object.

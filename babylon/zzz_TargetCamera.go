@@ -165,7 +165,7 @@ func (t *TargetCamera) AttachPostProcess(postProcess *PostProcess, opts *TargetC
 type TargetCameraBeginAnimationOpts struct {
 	Loop           *bool
 	SpeedRatio     *float64
-	OnAnimationEnd *func()
+	OnAnimationEnd func()
 }
 
 // BeginAnimation calls the BeginAnimation method on the TargetCamera object.
@@ -429,7 +429,7 @@ func (t *TargetCamera) GetBehaviorByName(name string) js.Value {
 // TargetCameraGetChildMeshesOpts contains optional parameters for TargetCamera.GetChildMeshes.
 type TargetCameraGetChildMeshesOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetChildMeshes calls the GetChildMeshes method on the TargetCamera object.
@@ -459,7 +459,7 @@ func (t *TargetCamera) GetChildMeshes(opts *TargetCameraGetChildMeshesOpts) *Abs
 
 // TargetCameraGetChildrenOpts contains optional parameters for TargetCamera.GetChildren.
 type TargetCameraGetChildrenOpts struct {
-	Predicate             *func()
+	Predicate             func()
 	DirectDescendantsOnly *bool
 }
 
@@ -535,7 +535,7 @@ func (t *TargetCamera) GetConstructorFromName(jsType string, name string, scene 
 // TargetCameraGetDescendantsOpts contains optional parameters for TargetCamera.GetDescendants.
 type TargetCameraGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the TargetCamera object.
@@ -651,7 +651,7 @@ func (t *TargetCamera) GetFrontPosition(distance float64) *Vector3 {
 // TargetCameraGetHierarchyBoundingVectorsOpts contains optional parameters for TargetCamera.GetHierarchyBoundingVectors.
 type TargetCameraGetHierarchyBoundingVectorsOpts struct {
 	IncludeDescendants *bool
-	Predicate          *func()
+	Predicate          func()
 }
 
 // GetHierarchyBoundingVectors calls the GetHierarchyBoundingVectors method on the TargetCamera object.

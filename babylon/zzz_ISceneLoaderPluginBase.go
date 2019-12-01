@@ -65,9 +65,9 @@ func (i *ISceneLoaderPluginBase) DirectLoad(scene *Scene, data string) interface
 
 // ISceneLoaderPluginBaseReadFileOpts contains optional parameters for ISceneLoaderPluginBase.ReadFile.
 type ISceneLoaderPluginBaseReadFileOpts struct {
-	OnProgress     *func()
+	OnProgress     func()
 	UseArrayBuffer *bool
-	OnError        *func()
+	OnError        func()
 }
 
 // ReadFile calls the ReadFile method on the ISceneLoaderPluginBase object.
@@ -106,9 +106,9 @@ func (i *ISceneLoaderPluginBase) ReadFile(scene *Scene, file js.Value, onSuccess
 
 // ISceneLoaderPluginBaseRequestFileOpts contains optional parameters for ISceneLoaderPluginBase.RequestFile.
 type ISceneLoaderPluginBaseRequestFileOpts struct {
-	OnProgress     *func()
+	OnProgress     func()
 	UseArrayBuffer *bool
-	OnError        *func()
+	OnError        func()
 }
 
 // RequestFile calls the RequestFile method on the ISceneLoaderPluginBase object.

@@ -60,11 +60,7 @@ func (ba *Babylon) NewThinEngine(canvasOrContext js.Value, opts *NewThinEngineOp
 	} else {
 		args = append(args, *opts.Antialias)
 	}
-	if opts.Options == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Options)
-	}
+	args = append(args, opts.Options)
 	if opts.AdaptToDeviceRatio == nil {
 		args = append(args, js.Undefined())
 	} else {
@@ -421,8 +417,8 @@ type ThinEngineCreateEffectOpts struct {
 	Samplers        *string
 	Defines         *string
 	Fallbacks       *IEffectFallbacks
-	OnCompiled      *func()
-	OnError         *func()
+	OnCompiled      func()
+	OnError         func()
 	IndexParameters *interface{}
 }
 
@@ -527,8 +523,8 @@ func (t *ThinEngine) CreatePipelineContext() *IPipelineContext {
 
 // ThinEngineCreatePrefilteredCubeTextureOpts contains optional parameters for ThinEngine.CreatePrefilteredCubeTexture.
 type ThinEngineCreatePrefilteredCubeTextureOpts struct {
-	OnLoad            *func()
-	OnError           *func()
+	OnLoad            func()
+	OnError           func()
 	Format            *float64
 	ForcedExtension   *interface{}
 	CreatePolynomials *bool
@@ -632,11 +628,7 @@ func (t *ThinEngine) CreateRawShaderProgram(pipelineContext *IPipelineContext, v
 	args = append(args, vertexCode)
 	args = append(args, fragmentCode)
 
-	if opts.Context == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Context)
-	}
+	args = append(args, opts.Context)
 	if opts.TransformFeedbackVaryings == nil {
 		args = append(args, js.Undefined())
 	} else {
@@ -828,11 +820,7 @@ func (t *ThinEngine) CreateShaderProgram(pipelineContext *IPipelineContext, vert
 	args = append(args, fragmentCode)
 	args = append(args, defines)
 
-	if opts.Context == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Context)
-	}
+	args = append(args, opts.Context)
 	if opts.TransformFeedbackVaryings == nil {
 		args = append(args, js.Undefined())
 	} else {
@@ -846,8 +834,8 @@ func (t *ThinEngine) CreateShaderProgram(pipelineContext *IPipelineContext, vert
 // ThinEngineCreateTextureOpts contains optional parameters for ThinEngine.CreateTexture.
 type ThinEngineCreateTextureOpts struct {
 	SamplingMode    *float64
-	OnLoad          *func()
-	OnError         *func()
+	OnLoad          func()
+	OnError         func()
 	Buffer          *string
 	Fallback        *InternalTexture
 	Format          *float64
@@ -1743,7 +1731,7 @@ func (t *ThinEngine) SetViewport(viewport js.Value, opts *ThinEngineSetViewportO
 
 // ThinEngineStopRenderLoopOpts contains optional parameters for ThinEngine.StopRenderLoop.
 type ThinEngineStopRenderLoopOpts struct {
-	RenderFunction *func()
+	RenderFunction func()
 }
 
 // StopRenderLoop calls the StopRenderLoop method on the ThinEngine object.
@@ -1768,7 +1756,7 @@ func (t *ThinEngine) StopRenderLoop(opts *ThinEngineStopRenderLoopOpts) {
 // ThinEngineUnBindFramebufferOpts contains optional parameters for ThinEngine.UnBindFramebuffer.
 type ThinEngineUnBindFramebufferOpts struct {
 	DisableGenerateMipMaps *bool
-	OnBeforeUnbind         *func()
+	OnBeforeUnbind         func()
 }
 
 // UnBindFramebuffer calls the UnBindFramebuffer method on the ThinEngine object.
@@ -1799,7 +1787,7 @@ func (t *ThinEngine) UnBindFramebuffer(texture *InternalTexture, opts *ThinEngin
 
 // ThinEngineUnBindMultiColorAttachmentFramebufferOpts contains optional parameters for ThinEngine.UnBindMultiColorAttachmentFramebuffer.
 type ThinEngineUnBindMultiColorAttachmentFramebufferOpts struct {
-	OnBeforeUnbind *func()
+	OnBeforeUnbind func()
 }
 
 // UnBindMultiColorAttachmentFramebuffer calls the UnBindMultiColorAttachmentFramebuffer method on the ThinEngine object.

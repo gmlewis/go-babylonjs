@@ -131,7 +131,7 @@ func (t *TrigonometryBlock) Clone(scene *Scene, opts *TrigonometryBlockCloneOpts
 
 // TrigonometryBlockConnectToOpts contains optional parameters for TrigonometryBlock.ConnectTo.
 type TrigonometryBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the TrigonometryBlock object.
@@ -396,11 +396,7 @@ func (t *TrigonometryBlock) RegisterInput(name string, jsType js.Value, opts *Tr
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := t.p.Call("registerInput", args...)
 	return TrigonometryBlockFromJSObject(retVal, t.ctx)
@@ -424,11 +420,7 @@ func (t *TrigonometryBlock) RegisterOutput(name string, jsType js.Value, opts *T
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := t.p.Call("registerOutput", args...)
 	return TrigonometryBlockFromJSObject(retVal, t.ctx)

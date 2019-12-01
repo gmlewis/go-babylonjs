@@ -7,7 +7,7 @@ import (
 )
 
 // MaterialHelper represents a babylon.js MaterialHelper.
-// &amp;quot;Static Class&amp;quot; containing the most commonly used helper while dealing with material for
+// &quot;Static Class&quot; containing the most commonly used helper while dealing with material for
 // rendering purpose.
 //
 // It contains the basic tools to help defining defines, binding uniform for the common part of the materials.

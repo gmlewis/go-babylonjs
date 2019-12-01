@@ -131,7 +131,7 @@ func (g *GradientBlock) Clone(scene *Scene, opts *GradientBlockCloneOpts) *NodeM
 
 // GradientBlockConnectToOpts contains optional parameters for GradientBlock.ConnectTo.
 type GradientBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the GradientBlock object.
@@ -396,11 +396,7 @@ func (g *GradientBlock) RegisterInput(name string, jsType js.Value, opts *Gradie
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := g.p.Call("registerInput", args...)
 	return GradientBlockFromJSObject(retVal, g.ctx)
@@ -424,11 +420,7 @@ func (g *GradientBlock) RegisterOutput(name string, jsType js.Value, opts *Gradi
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := g.p.Call("registerOutput", args...)
 	return GradientBlockFromJSObject(retVal, g.ctx)

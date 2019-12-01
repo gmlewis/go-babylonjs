@@ -10,7 +10,7 @@ import (
 // This represents a texture coming from an HDR input.
 //
 // The only supported format is currently panorama picture stored in RGBE format.
-// Example of such files can be found on HDRLib: &lt;a href=&#34;http://hdrlib.com/&#34;&gt;http://hdrlib.com/&lt;/a&gt;
+// Example of such files can be found on HDRLib: <a href="http://hdrlib.com/">http://hdrlib.com/</a>
 type HDRCubeTexture struct {
 	*BaseTexture
 	ctx js.Value
@@ -45,8 +45,8 @@ type NewHDRCubeTextureOpts struct {
 	GenerateHarmonics *bool
 	GammaSpace        *bool
 	Reserved          *bool
-	OnLoad            *func()
-	OnError           *func()
+	OnLoad            func()
+	OnError           func()
 }
 
 // NewHDRCubeTexture returns a new HDRCubeTexture object.
@@ -246,11 +246,7 @@ func (h *HDRCubeTexture) ReadPixels(opts *HDRCubeTextureReadPixelsOpts) js.Value
 	} else {
 		args = append(args, *opts.Level)
 	}
-	if opts.Buffer == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Buffer)
-	}
+	args = append(args, opts.Buffer)
 
 	retVal := h.p.Call("readPixels", args...)
 	return retVal

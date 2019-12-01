@@ -96,7 +96,7 @@ func (i *IShadowLight) AddNodeConstructor(jsType string, constructorFunc js.Valu
 type IShadowLightBeginAnimationOpts struct {
 	Loop           *bool
 	SpeedRatio     *float64
-	OnAnimationEnd *func()
+	OnAnimationEnd func()
 }
 
 // BeginAnimation calls the BeginAnimation method on the IShadowLight object.
@@ -407,7 +407,7 @@ func (i *IShadowLight) GetBehaviorByName(name string) js.Value {
 // IShadowLightGetChildMeshesOpts contains optional parameters for IShadowLight.GetChildMeshes.
 type IShadowLightGetChildMeshesOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetChildMeshes calls the GetChildMeshes method on the IShadowLight object.
@@ -437,7 +437,7 @@ func (i *IShadowLight) GetChildMeshes(opts *IShadowLightGetChildMeshesOpts) *Abs
 
 // IShadowLightGetChildrenOpts contains optional parameters for IShadowLight.GetChildren.
 type IShadowLightGetChildrenOpts struct {
-	Predicate             *func()
+	Predicate             func()
 	DirectDescendantsOnly *bool
 }
 
@@ -528,7 +528,7 @@ func (i *IShadowLight) GetDepthScale() float64 {
 // IShadowLightGetDescendantsOpts contains optional parameters for IShadowLight.GetDescendants.
 type IShadowLightGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the IShadowLight object.
@@ -568,7 +568,7 @@ func (i *IShadowLight) GetEngine() *Engine {
 // IShadowLightGetHierarchyBoundingVectorsOpts contains optional parameters for IShadowLight.GetHierarchyBoundingVectors.
 type IShadowLightGetHierarchyBoundingVectorsOpts struct {
 	IncludeDescendants *bool
-	Predicate          *func()
+	Predicate          func()
 }
 
 // GetHierarchyBoundingVectors calls the GetHierarchyBoundingVectors method on the IShadowLight object.

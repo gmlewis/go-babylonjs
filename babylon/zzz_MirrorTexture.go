@@ -174,8 +174,8 @@ type MirrorTextureCreateFromBase64StringOpts struct {
 	NoMipmap     *bool
 	InvertY      *bool
 	SamplingMode *float64
-	OnLoad       *func()
-	OnError      *func()
+	OnLoad       func()
+	OnError      func()
 	Format       *float64
 }
 
@@ -391,8 +391,8 @@ type MirrorTextureLoadFromDataStringOpts struct {
 	NoMipmap     *bool
 	InvertY      *bool
 	SamplingMode *float64
-	OnLoad       *func()
-	OnError      *func()
+	OnLoad       func()
+	OnError      func()
 	Format       *float64
 }
 
@@ -492,11 +492,7 @@ func (m *MirrorTexture) ReadPixels(opts *MirrorTextureReadPixelsOpts) js.Value {
 	} else {
 		args = append(args, *opts.Level)
 	}
-	if opts.Buffer == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Buffer)
-	}
+	args = append(args, opts.Buffer)
 
 	retVal := m.p.Call("readPixels", args...)
 	return retVal
@@ -608,9 +604,9 @@ func (m *MirrorTexture) SetRenderingAutoClearDepthStencil(renderingGroupId float
 
 // MirrorTextureSetRenderingOrderOpts contains optional parameters for MirrorTexture.SetRenderingOrder.
 type MirrorTextureSetRenderingOrderOpts struct {
-	OpaqueSortCompareFn      *func()
-	AlphaTestSortCompareFn   *func()
-	TransparentSortCompareFn *func()
+	OpaqueSortCompareFn      func()
+	AlphaTestSortCompareFn   func()
+	TransparentSortCompareFn func()
 }
 
 // SetRenderingOrder calls the SetRenderingOrder method on the MirrorTexture object.
@@ -668,7 +664,7 @@ func (m *MirrorTexture) UpdateSamplingMode(samplingMode float64) {
 // MirrorTextureUpdateURLOpts contains optional parameters for MirrorTexture.UpdateURL.
 type MirrorTextureUpdateURLOpts struct {
 	Buffer *string
-	OnLoad *func()
+	OnLoad func()
 }
 
 // UpdateURL calls the UpdateURL method on the MirrorTexture object.

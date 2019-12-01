@@ -156,11 +156,7 @@ func (i *InputManager) SimulatePointerDown(pickResult *PickingInfo, opts *InputM
 
 	args = append(args, pickResult.JSObject())
 
-	if opts.PointerEventInit == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.PointerEventInit)
-	}
+	args = append(args, opts.PointerEventInit)
 
 	i.p.Call("simulatePointerDown", args...)
 }
@@ -182,11 +178,7 @@ func (i *InputManager) SimulatePointerMove(pickResult *PickingInfo, opts *InputM
 
 	args = append(args, pickResult.JSObject())
 
-	if opts.PointerEventInit == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.PointerEventInit)
-	}
+	args = append(args, opts.PointerEventInit)
 
 	i.p.Call("simulatePointerMove", args...)
 }
@@ -209,11 +201,7 @@ func (i *InputManager) SimulatePointerUp(pickResult *PickingInfo, opts *InputMan
 
 	args = append(args, pickResult.JSObject())
 
-	if opts.PointerEventInit == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.PointerEventInit)
-	}
+	args = append(args, opts.PointerEventInit)
 	if opts.DoubleTap == nil {
 		args = append(args, js.Undefined())
 	} else {

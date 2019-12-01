@@ -90,7 +90,11 @@ func (p *PostProcessRenderEffect) GetPostProcesses(opts *PostProcessRenderEffect
 	}
 
 	retVal := p.p.Call("getPostProcesses", args...)
-	return retVal
+	result := []*PostProcess{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, PostProcessFromJSObject(retVal.Index(ri), p.ctx))
+	}
+	return result
 }
 
 /*

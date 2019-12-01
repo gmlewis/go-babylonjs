@@ -228,7 +228,7 @@ func (b *Button) GetClassName() string {
 // ButtonGetDescendantsOpts contains optional parameters for Button.GetDescendants.
 type ButtonGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the Button object.
@@ -259,7 +259,7 @@ func (b *Button) GetDescendants(opts *ButtonGetDescendantsOpts) *Control {
 // ButtonGetDescendantsToRefOpts contains optional parameters for Button.GetDescendantsToRef.
 type ButtonGetDescendantsToRefOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendantsToRef calls the GetDescendantsToRef method on the Button object.

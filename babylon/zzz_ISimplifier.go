@@ -40,7 +40,7 @@ func ISimplifierArrayToJSArray(array []*ISimplifier) []interface{} {
 
 // ISimplifierSimplifyOpts contains optional parameters for ISimplifier.Simplify.
 type ISimplifierSimplifyOpts struct {
-	ErrorCallback *func()
+	ErrorCallback func()
 }
 
 // Simplify calls the Simplify method on the ISimplifier object.

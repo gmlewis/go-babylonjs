@@ -108,7 +108,7 @@ func (w *WindowsMotionController) GetForwardRay(opts *WindowsMotionControllerGet
 
 // WindowsMotionControllerInitControllerMeshOpts contains optional parameters for WindowsMotionController.InitControllerMesh.
 type WindowsMotionControllerInitControllerMeshOpts struct {
-	MeshLoaded   *func()
+	MeshLoaded   func()
 	ForceDefault *bool
 }
 

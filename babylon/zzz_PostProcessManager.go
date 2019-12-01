@@ -8,7 +8,7 @@ import (
 
 // PostProcessManager represents a babylon.js PostProcessManager.
 // PostProcessManager is used to manage one or more post processes or post process pipelines
-// See &lt;a href=&#34;https://doc.babylonjs.com/how_to/how_to_use_postprocesses&#34;&gt;https://doc.babylonjs.com/how_to/how_to_use_postprocesses&lt;/a&gt;
+// See <a href="https://doc.babylonjs.com/how_to/how_to_use_postprocesses">https://doc.babylonjs.com/how_to/how_to_use_postprocesses</a>
 type PostProcessManager struct {
 	p   js.Value
 	ctx js.Value

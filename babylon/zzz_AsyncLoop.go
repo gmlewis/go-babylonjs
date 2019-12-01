@@ -112,7 +112,7 @@ func (a *AsyncLoop) Run(iterations float64, fn func(), successCallback func(), o
 
 // AsyncLoopSyncAsyncForLoopOpts contains optional parameters for AsyncLoop.SyncAsyncForLoop.
 type AsyncLoopSyncAsyncForLoopOpts struct {
-	BreakFunction *func()
+	BreakFunction func()
 	Timeout       *float64
 }
 

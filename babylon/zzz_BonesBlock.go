@@ -131,7 +131,7 @@ func (b *BonesBlock) Clone(scene *Scene, opts *BonesBlockCloneOpts) *NodeMateria
 
 // BonesBlockConnectToOpts contains optional parameters for BonesBlock.ConnectTo.
 type BonesBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the BonesBlock object.
@@ -382,11 +382,7 @@ func (b *BonesBlock) RegisterInput(name string, jsType js.Value, opts *BonesBloc
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := b.p.Call("registerInput", args...)
 	return BonesBlockFromJSObject(retVal, b.ctx)
@@ -410,11 +406,7 @@ func (b *BonesBlock) RegisterOutput(name string, jsType js.Value, opts *BonesBlo
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := b.p.Call("registerOutput", args...)
 	return BonesBlockFromJSObject(retVal, b.ctx)

@@ -131,7 +131,7 @@ func (s *ScaleBlock) Clone(scene *Scene, opts *ScaleBlockCloneOpts) *NodeMateria
 
 // ScaleBlockConnectToOpts contains optional parameters for ScaleBlock.ConnectTo.
 type ScaleBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the ScaleBlock object.
@@ -396,11 +396,7 @@ func (s *ScaleBlock) RegisterInput(name string, jsType js.Value, opts *ScaleBloc
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := s.p.Call("registerInput", args...)
 	return ScaleBlockFromJSObject(retVal, s.ctx)
@@ -424,11 +420,7 @@ func (s *ScaleBlock) RegisterOutput(name string, jsType js.Value, opts *ScaleBlo
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := s.p.Call("registerOutput", args...)
 	return ScaleBlockFromJSObject(retVal, s.ctx)

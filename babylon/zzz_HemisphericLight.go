@@ -96,7 +96,7 @@ func (h *HemisphericLight) AddNodeConstructor(jsType string, constructorFunc js.
 type HemisphericLightBeginAnimationOpts struct {
 	Loop           *bool
 	SpeedRatio     *float64
-	OnAnimationEnd *func()
+	OnAnimationEnd func()
 }
 
 // BeginAnimation calls the BeginAnimation method on the HemisphericLight object.
@@ -374,7 +374,7 @@ func (h *HemisphericLight) GetBehaviorByName(name string) js.Value {
 // HemisphericLightGetChildMeshesOpts contains optional parameters for HemisphericLight.GetChildMeshes.
 type HemisphericLightGetChildMeshesOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetChildMeshes calls the GetChildMeshes method on the HemisphericLight object.
@@ -404,7 +404,7 @@ func (h *HemisphericLight) GetChildMeshes(opts *HemisphericLightGetChildMeshesOp
 
 // HemisphericLightGetChildrenOpts contains optional parameters for HemisphericLight.GetChildren.
 type HemisphericLightGetChildrenOpts struct {
-	Predicate             *func()
+	Predicate             func()
 	DirectDescendantsOnly *bool
 }
 
@@ -460,7 +460,7 @@ func (h *HemisphericLight) GetConstructorFromName(jsType float64, name string, s
 // HemisphericLightGetDescendantsOpts contains optional parameters for HemisphericLight.GetDescendants.
 type HemisphericLightGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the HemisphericLight object.
@@ -500,7 +500,7 @@ func (h *HemisphericLight) GetEngine() *Engine {
 // HemisphericLightGetHierarchyBoundingVectorsOpts contains optional parameters for HemisphericLight.GetHierarchyBoundingVectors.
 type HemisphericLightGetHierarchyBoundingVectorsOpts struct {
 	IncludeDescendants *bool
-	Predicate          *func()
+	Predicate          func()
 }
 
 // GetHierarchyBoundingVectors calls the GetHierarchyBoundingVectors method on the HemisphericLight object.

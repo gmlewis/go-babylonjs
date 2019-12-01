@@ -260,11 +260,7 @@ func (s *SubMesh) Intersects(ray *Ray, positions *Vector3, indices js.Value, opt
 	} else {
 		args = append(args, *opts.FastCheck)
 	}
-	if opts.TrianglePredicate == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.TrianglePredicate)
-	}
+	args = append(args, opts.TrianglePredicate)
 
 	retVal := s.p.Call("intersects", args...)
 	return retVal
@@ -311,11 +307,7 @@ func (s *SubMesh) RefreshBoundingInfo(opts *SubMeshRefreshBoundingInfoOpts) *Sub
 
 	args := make([]interface{}, 0, 0+1)
 
-	if opts.Data == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Data)
-	}
+	args = append(args, opts.Data)
 
 	retVal := s.p.Call("refreshBoundingInfo", args...)
 	return SubMeshFromJSObject(retVal, s.ctx)

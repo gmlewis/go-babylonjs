@@ -10,7 +10,7 @@ import (
 // The PBR material of BJS following the specular glossiness convention.
 //
 // This fits to the PBR convention in the GLTF definition:
-// &lt;a href=&#34;https://github.com/KhronosGroup/glTF/tree/2.0/extensions/Khronos/KHR_materials_pbrSpecularGlossiness&#34;&gt;https://github.com/KhronosGroup/glTF/tree/2.0/extensions/Khronos/KHR_materials_pbrSpecularGlossiness&lt;/a&gt;
+// <a href="https://github.com/KhronosGroup/glTF/tree/2.0/extensions/Khronos/KHR_materials_pbrSpecularGlossiness">https://github.com/KhronosGroup/glTF/tree/2.0/extensions/Khronos/KHR_materials_pbrSpecularGlossiness</a>
 type PBRSpecularGlossinessMaterial struct {
 	*PBRBaseSimpleMaterial
 	ctx js.Value
@@ -207,7 +207,7 @@ func (p *PBRSpecularGlossinessMaterial) Dispose(opts *PBRSpecularGlossinessMater
 
 // PBRSpecularGlossinessMaterialForceCompilationOpts contains optional parameters for PBRSpecularGlossinessMaterial.ForceCompilation.
 type PBRSpecularGlossinessMaterialForceCompilationOpts struct {
-	OnCompiled *func()
+	OnCompiled func()
 	Options    js.Value
 }
 
@@ -228,11 +228,7 @@ func (p *PBRSpecularGlossinessMaterial) ForceCompilation(mesh *AbstractMesh, opt
 	} else {
 		args = append(args, opts.OnCompiled)
 	}
-	if opts.Options == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Options)
-	}
+	args = append(args, opts.Options)
 
 	p.p.Call("forceCompilation", args...)
 }
@@ -254,11 +250,7 @@ func (p *PBRSpecularGlossinessMaterial) ForceCompilationAsync(mesh *AbstractMesh
 
 	args = append(args, mesh.JSObject())
 
-	if opts.Options == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Options)
-	}
+	args = append(args, opts.Options)
 
 	retVal := p.p.Call("forceCompilationAsync", args...)
 	return PromiseFromJSObject(retVal, p.ctx)

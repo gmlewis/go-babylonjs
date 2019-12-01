@@ -144,7 +144,7 @@ func (t *TransformNode) AttachToBone(bone *Bone, affectedTransformNode *Transfor
 type TransformNodeBeginAnimationOpts struct {
 	Loop           *bool
 	SpeedRatio     *float64
-	OnAnimationEnd *func()
+	OnAnimationEnd func()
 }
 
 // BeginAnimation calls the BeginAnimation method on the TransformNode object.
@@ -447,7 +447,7 @@ func (t *TransformNode) GetBehaviorByName(name string) js.Value {
 // TransformNodeGetChildMeshesOpts contains optional parameters for TransformNode.GetChildMeshes.
 type TransformNodeGetChildMeshesOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetChildMeshes calls the GetChildMeshes method on the TransformNode object.
@@ -478,7 +478,7 @@ func (t *TransformNode) GetChildMeshes(opts *TransformNodeGetChildMeshesOpts) *A
 // TransformNodeGetChildTransformNodesOpts contains optional parameters for TransformNode.GetChildTransformNodes.
 type TransformNodeGetChildTransformNodesOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetChildTransformNodes calls the GetChildTransformNodes method on the TransformNode object.
@@ -508,7 +508,7 @@ func (t *TransformNode) GetChildTransformNodes(opts *TransformNodeGetChildTransf
 
 // TransformNodeGetChildrenOpts contains optional parameters for TransformNode.GetChildren.
 type TransformNodeGetChildrenOpts struct {
-	Predicate             *func()
+	Predicate             func()
 	DirectDescendantsOnly *bool
 }
 
@@ -549,7 +549,7 @@ func (t *TransformNode) GetClassName() string {
 // TransformNodeGetDescendantsOpts contains optional parameters for TransformNode.GetDescendants.
 type TransformNodeGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the TransformNode object.
@@ -641,7 +641,7 @@ func (t *TransformNode) GetEngine() *Engine {
 // TransformNodeGetHierarchyBoundingVectorsOpts contains optional parameters for TransformNode.GetHierarchyBoundingVectors.
 type TransformNodeGetHierarchyBoundingVectorsOpts struct {
 	IncludeDescendants *bool
-	Predicate          *func()
+	Predicate          func()
 }
 
 // GetHierarchyBoundingVectors calls the GetHierarchyBoundingVectors method on the TransformNode object.
@@ -764,8 +764,8 @@ func (t *TransformNode) GetWorldMatrix() *Matrix {
 // TransformNodeInstantiateHierarchyOpts contains optional parameters for TransformNode.InstantiateHierarchy.
 type TransformNodeInstantiateHierarchyOpts struct {
 	NewParent        *TransformNode
-	Options          js.Value
-	OnNewNodeCreated *func()
+	Options          map[string]interface{}
+	OnNewNodeCreated func()
 }
 
 // InstantiateHierarchy calls the InstantiateHierarchy method on the TransformNode object.
@@ -918,11 +918,7 @@ func (t *TransformNode) LookAt(targetPoint *Vector3, opts *TransformNodeLookAtOp
 	} else {
 		args = append(args, *opts.RollCor)
 	}
-	if opts.Space == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Space)
-	}
+	args = append(args, opts.Space)
 
 	retVal := t.p.Call("lookAt", args...)
 	return TransformNodeFromJSObject(retVal, t.ctx)
@@ -945,7 +941,7 @@ func (t *TransformNode) MarkAsDirty(property string) *TransformNode {
 type TransformNodeNormalizeToUnitCubeOpts struct {
 	IncludeDescendants *bool
 	IgnoreRotation     *bool
-	Predicate          *func()
+	Predicate          func()
 }
 
 // NormalizeToUnitCube calls the NormalizeToUnitCube method on the TransformNode object.
@@ -1051,11 +1047,7 @@ func (t *TransformNode) Rotate(axis *Vector3, amount float64, opts *TransformNod
 	args = append(args, axis.JSObject())
 	args = append(args, amount)
 
-	if opts.Space == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Space)
-	}
+	args = append(args, opts.Space)
 
 	retVal := t.p.Call("rotate", args...)
 	return TransformNodeFromJSObject(retVal, t.ctx)
@@ -1231,11 +1223,7 @@ func (t *TransformNode) SetPivotPoint(point *Vector3, opts *TransformNodeSetPivo
 
 	args = append(args, point.JSObject())
 
-	if opts.Space == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Space)
-	}
+	args = append(args, opts.Space)
 
 	retVal := t.p.Call("setPivotPoint", args...)
 	return TransformNodeFromJSObject(retVal, t.ctx)
@@ -1285,11 +1273,7 @@ func (t *TransformNode) Translate(axis *Vector3, distance float64, opts *Transfo
 	args = append(args, axis.JSObject())
 	args = append(args, distance)
 
-	if opts.Space == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Space)
-	}
+	args = append(args, opts.Space)
 
 	retVal := t.p.Call("translate", args...)
 	return TransformNodeFromJSObject(retVal, t.ctx)

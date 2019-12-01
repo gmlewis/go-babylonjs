@@ -12,7 +12,7 @@ import (
 // The SPS is also a particle system. It provides some methods to manage the particles.
 // However it is behavior agnostic. This means it has no emitter, no particle physics, no particle recycler. You have to implement your own behavior.
 //
-// Full documentation here : &lt;a href=&#34;http://doc.babylonjs.com/how_to/Solid_Particle_System&#34;&gt;http://doc.babylonjs.com/how_to/Solid_Particle_System&lt;/a&gt;
+// Full documentation here : <a href="http://doc.babylonjs.com/how_to/Solid_Particle_System">http://doc.babylonjs.com/how_to/Solid_Particle_System</a>
 type SolidParticleSystem struct {
 	p   js.Value
 	ctx js.Value
@@ -43,7 +43,7 @@ func SolidParticleSystemArrayToJSArray(array []*SolidParticleSystem) []interface
 
 // NewSolidParticleSystemOpts contains optional parameters for NewSolidParticleSystem.
 type NewSolidParticleSystemOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // NewSolidParticleSystem returns a new SolidParticleSystem object.
@@ -71,7 +71,7 @@ func (ba *Babylon) NewSolidParticleSystem(name string, scene *Scene, opts *NewSo
 
 // SolidParticleSystemAddShapeOpts contains optional parameters for SolidParticleSystem.AddShape.
 type SolidParticleSystemAddShapeOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // AddShape calls the AddShape method on the SolidParticleSystem object.
@@ -189,7 +189,7 @@ func (s *SolidParticleSystem) ComputeSubMeshes() *SolidParticleSystem {
 
 // SolidParticleSystemDigestOpts contains optional parameters for SolidParticleSystem.Digest.
 type SolidParticleSystemDigestOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // Digest calls the Digest method on the SolidParticleSystem object.

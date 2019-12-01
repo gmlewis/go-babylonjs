@@ -131,7 +131,7 @@ func (d *DiscardBlock) Clone(scene *Scene, opts *DiscardBlockCloneOpts) *NodeMat
 
 // DiscardBlockConnectToOpts contains optional parameters for DiscardBlock.ConnectTo.
 type DiscardBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the DiscardBlock object.
@@ -396,11 +396,7 @@ func (d *DiscardBlock) RegisterInput(name string, jsType js.Value, opts *Discard
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := d.p.Call("registerInput", args...)
 	return DiscardBlockFromJSObject(retVal, d.ctx)
@@ -424,11 +420,7 @@ func (d *DiscardBlock) RegisterOutput(name string, jsType js.Value, opts *Discar
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := d.p.Call("registerOutput", args...)
 	return DiscardBlockFromJSObject(retVal, d.ctx)

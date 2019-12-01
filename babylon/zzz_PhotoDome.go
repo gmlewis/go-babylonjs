@@ -41,7 +41,7 @@ func PhotoDomeArrayToJSArray(array []*PhotoDome) []interface{} {
 
 // NewPhotoDomeOpts contains optional parameters for NewPhotoDome.
 type NewPhotoDomeOpts struct {
-	OnError *func()
+	OnError func()
 }
 
 // NewPhotoDome returns a new PhotoDome object.
@@ -142,7 +142,7 @@ func (p *PhotoDome) AttachToBone(bone *Bone, affectedTransformNode *TransformNod
 type PhotoDomeBeginAnimationOpts struct {
 	Loop           *bool
 	SpeedRatio     *float64
-	OnAnimationEnd *func()
+	OnAnimationEnd func()
 }
 
 // BeginAnimation calls the BeginAnimation method on the PhotoDome object.
@@ -445,7 +445,7 @@ func (p *PhotoDome) GetBehaviorByName(name string) js.Value {
 // PhotoDomeGetChildMeshesOpts contains optional parameters for PhotoDome.GetChildMeshes.
 type PhotoDomeGetChildMeshesOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetChildMeshes calls the GetChildMeshes method on the PhotoDome object.
@@ -476,7 +476,7 @@ func (p *PhotoDome) GetChildMeshes(opts *PhotoDomeGetChildMeshesOpts) *AbstractM
 // PhotoDomeGetChildTransformNodesOpts contains optional parameters for PhotoDome.GetChildTransformNodes.
 type PhotoDomeGetChildTransformNodesOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetChildTransformNodes calls the GetChildTransformNodes method on the PhotoDome object.
@@ -506,7 +506,7 @@ func (p *PhotoDome) GetChildTransformNodes(opts *PhotoDomeGetChildTransformNodes
 
 // PhotoDomeGetChildrenOpts contains optional parameters for PhotoDome.GetChildren.
 type PhotoDomeGetChildrenOpts struct {
-	Predicate             *func()
+	Predicate             func()
 	DirectDescendantsOnly *bool
 }
 
@@ -547,7 +547,7 @@ func (p *PhotoDome) GetClassName() string {
 // PhotoDomeGetDescendantsOpts contains optional parameters for PhotoDome.GetDescendants.
 type PhotoDomeGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the PhotoDome object.
@@ -639,7 +639,7 @@ func (p *PhotoDome) GetEngine() *Engine {
 // PhotoDomeGetHierarchyBoundingVectorsOpts contains optional parameters for PhotoDome.GetHierarchyBoundingVectors.
 type PhotoDomeGetHierarchyBoundingVectorsOpts struct {
 	IncludeDescendants *bool
-	Predicate          *func()
+	Predicate          func()
 }
 
 // GetHierarchyBoundingVectors calls the GetHierarchyBoundingVectors method on the PhotoDome object.
@@ -762,8 +762,8 @@ func (p *PhotoDome) GetWorldMatrix() *Matrix {
 // PhotoDomeInstantiateHierarchyOpts contains optional parameters for PhotoDome.InstantiateHierarchy.
 type PhotoDomeInstantiateHierarchyOpts struct {
 	NewParent        *TransformNode
-	Options          js.Value
-	OnNewNodeCreated *func()
+	Options          map[string]interface{}
+	OnNewNodeCreated func()
 }
 
 // InstantiateHierarchy calls the InstantiateHierarchy method on the PhotoDome object.
@@ -916,11 +916,7 @@ func (p *PhotoDome) LookAt(targetPoint *Vector3, opts *PhotoDomeLookAtOpts) *Tra
 	} else {
 		args = append(args, *opts.RollCor)
 	}
-	if opts.Space == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Space)
-	}
+	args = append(args, opts.Space)
 
 	retVal := p.p.Call("lookAt", args...)
 	return TransformNodeFromJSObject(retVal, p.ctx)
@@ -943,7 +939,7 @@ func (p *PhotoDome) MarkAsDirty(property string) *TransformNode {
 type PhotoDomeNormalizeToUnitCubeOpts struct {
 	IncludeDescendants *bool
 	IgnoreRotation     *bool
-	Predicate          *func()
+	Predicate          func()
 }
 
 // NormalizeToUnitCube calls the NormalizeToUnitCube method on the PhotoDome object.
@@ -1049,11 +1045,7 @@ func (p *PhotoDome) Rotate(axis *Vector3, amount float64, opts *PhotoDomeRotateO
 	args = append(args, axis.JSObject())
 	args = append(args, amount)
 
-	if opts.Space == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Space)
-	}
+	args = append(args, opts.Space)
 
 	retVal := p.p.Call("rotate", args...)
 	return TransformNodeFromJSObject(retVal, p.ctx)
@@ -1229,11 +1221,7 @@ func (p *PhotoDome) SetPivotPoint(point *Vector3, opts *PhotoDomeSetPivotPointOp
 
 	args = append(args, point.JSObject())
 
-	if opts.Space == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Space)
-	}
+	args = append(args, opts.Space)
 
 	retVal := p.p.Call("setPivotPoint", args...)
 	return TransformNodeFromJSObject(retVal, p.ctx)
@@ -1283,11 +1271,7 @@ func (p *PhotoDome) Translate(axis *Vector3, distance float64, opts *PhotoDomeTr
 	args = append(args, axis.JSObject())
 	args = append(args, distance)
 
-	if opts.Space == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Space)
-	}
+	args = append(args, opts.Space)
 
 	retVal := p.p.Call("translate", args...)
 	return TransformNodeFromJSObject(retVal, p.ctx)

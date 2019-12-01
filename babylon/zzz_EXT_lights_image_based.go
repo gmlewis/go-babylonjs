@@ -7,7 +7,7 @@ import (
 )
 
 // EXT_lights_image_based represents a babylon.js EXT_lights_image_based.
-// &lt;a href=&#34;https://github.com/KhronosGroup/glTF/blob/master/extensions/2.0/Vendor/EXT_lights_image_based/README.md&#34;&gt;Specification&lt;/a&gt;
+// <a href="https://github.com/KhronosGroup/glTF/blob/master/extensions/2.0/Vendor/EXT_lights_image_based/README.md">Specification</a>
 type EXT_lights_image_based struct {
 	p   js.Value
 	ctx js.Value

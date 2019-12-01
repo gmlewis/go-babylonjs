@@ -131,7 +131,7 @@ func (r *RemapBlock) Clone(scene *Scene, opts *RemapBlockCloneOpts) *NodeMateria
 
 // RemapBlockConnectToOpts contains optional parameters for RemapBlock.ConnectTo.
 type RemapBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the RemapBlock object.
@@ -396,11 +396,7 @@ func (r *RemapBlock) RegisterInput(name string, jsType js.Value, opts *RemapBloc
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := r.p.Call("registerInput", args...)
 	return RemapBlockFromJSObject(retVal, r.ctx)
@@ -424,11 +420,7 @@ func (r *RemapBlock) RegisterOutput(name string, jsType js.Value, opts *RemapBlo
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := r.p.Call("registerOutput", args...)
 	return RemapBlockFromJSObject(retVal, r.ctx)

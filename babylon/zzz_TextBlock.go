@@ -123,7 +123,7 @@ func (t *TextBlock) GetClassName() string {
 // TextBlockGetDescendantsOpts contains optional parameters for TextBlock.GetDescendants.
 type TextBlockGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the TextBlock object.
@@ -154,7 +154,7 @@ func (t *TextBlock) GetDescendants(opts *TextBlockGetDescendantsOpts) *Control {
 // TextBlockGetDescendantsToRefOpts contains optional parameters for TextBlock.GetDescendantsToRef.
 type TextBlockGetDescendantsToRefOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendantsToRef calls the GetDescendantsToRef method on the TextBlock object.

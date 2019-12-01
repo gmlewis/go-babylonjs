@@ -108,7 +108,7 @@ func (d *DaydreamController) GetForwardRay(opts *DaydreamControllerGetForwardRay
 
 // DaydreamControllerInitControllerMeshOpts contains optional parameters for DaydreamController.InitControllerMesh.
 type DaydreamControllerInitControllerMeshOpts struct {
-	MeshLoaded *func()
+	MeshLoaded func()
 }
 
 // InitControllerMesh calls the InitControllerMesh method on the DaydreamController object.

@@ -10,7 +10,7 @@ import (
 // The PBR material of BJS following the metal roughness convention.
 //
 // This fits to the PBR convention in the GLTF definition:
-// &lt;a href=&#34;https://github.com/KhronosGroup/glTF/tree/2.0/specification/2.0&#34;&gt;https://github.com/KhronosGroup/glTF/tree/2.0/specification/2.0&lt;/a&gt;
+// <a href="https://github.com/KhronosGroup/glTF/tree/2.0/specification/2.0">https://github.com/KhronosGroup/glTF/tree/2.0/specification/2.0</a>
 type PBRMetallicRoughnessMaterial struct {
 	*PBRBaseSimpleMaterial
 	ctx js.Value
@@ -207,7 +207,7 @@ func (p *PBRMetallicRoughnessMaterial) Dispose(opts *PBRMetallicRoughnessMateria
 
 // PBRMetallicRoughnessMaterialForceCompilationOpts contains optional parameters for PBRMetallicRoughnessMaterial.ForceCompilation.
 type PBRMetallicRoughnessMaterialForceCompilationOpts struct {
-	OnCompiled *func()
+	OnCompiled func()
 	Options    js.Value
 }
 
@@ -228,11 +228,7 @@ func (p *PBRMetallicRoughnessMaterial) ForceCompilation(mesh *AbstractMesh, opts
 	} else {
 		args = append(args, opts.OnCompiled)
 	}
-	if opts.Options == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Options)
-	}
+	args = append(args, opts.Options)
 
 	p.p.Call("forceCompilation", args...)
 }
@@ -254,11 +250,7 @@ func (p *PBRMetallicRoughnessMaterial) ForceCompilationAsync(mesh *AbstractMesh,
 
 	args = append(args, mesh.JSObject())
 
-	if opts.Options == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Options)
-	}
+	args = append(args, opts.Options)
 
 	retVal := p.p.Call("forceCompilationAsync", args...)
 	return PromiseFromJSObject(retVal, p.ctx)

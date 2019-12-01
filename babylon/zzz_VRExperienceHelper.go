@@ -8,7 +8,7 @@ import (
 
 // VRExperienceHelper represents a babylon.js VRExperienceHelper.
 // Helps to quickly add VR support to an existing scene.
-// See &lt;a href=&#34;http://doc.babylonjs.com/how_to/webvr_helper&#34;&gt;http://doc.babylonjs.com/how_to/webvr_helper&lt;/a&gt;
+// See <a href="http://doc.babylonjs.com/how_to/webvr_helper">http://doc.babylonjs.com/how_to/webvr_helper</a>
 type VRExperienceHelper struct {
 	p   js.Value
 	ctx js.Value
@@ -54,11 +54,7 @@ func (ba *Babylon) NewVRExperienceHelper(scene *Scene, opts *NewVRExperienceHelp
 
 	args = append(args, scene.JSObject())
 
-	if opts.WebVROptions == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.WebVROptions)
-	}
+	args = append(args, opts.WebVROptions)
 
 	p := ba.ctx.Get("VRExperienceHelper").New(args...)
 	return VRExperienceHelperFromJSObject(p, ba.ctx)

@@ -131,7 +131,7 @@ func (n *NLerpBlock) Clone(scene *Scene, opts *NLerpBlockCloneOpts) *NodeMateria
 
 // NLerpBlockConnectToOpts contains optional parameters for NLerpBlock.ConnectTo.
 type NLerpBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the NLerpBlock object.
@@ -396,11 +396,7 @@ func (n *NLerpBlock) RegisterInput(name string, jsType js.Value, opts *NLerpBloc
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := n.p.Call("registerInput", args...)
 	return NLerpBlockFromJSObject(retVal, n.ctx)
@@ -424,11 +420,7 @@ func (n *NLerpBlock) RegisterOutput(name string, jsType js.Value, opts *NLerpBlo
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := n.p.Call("registerOutput", args...)
 	return NLerpBlockFromJSObject(retVal, n.ctx)

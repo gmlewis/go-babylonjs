@@ -198,7 +198,7 @@ func (m *Mesh) AlignWithNormal(normal *Vector3, opts *MeshAlignWithNormalOpts) *
 
 // MeshApplyDisplacementMapOpts contains optional parameters for Mesh.ApplyDisplacementMap.
 type MeshApplyDisplacementMapOpts struct {
-	OnSuccess   *func()
+	OnSuccess   func()
 	UvOffset    *Vector2
 	UvScale     *Vector2
 	ForceUpdate *bool
@@ -353,7 +353,7 @@ func (m *Mesh) BakeTransformIntoVertices(transform *Matrix) *Mesh {
 type MeshBeginAnimationOpts struct {
 	Loop           *bool
 	SpeedRatio     *float64
-	OnAnimationEnd *func()
+	OnAnimationEnd func()
 }
 
 // BeginAnimation calls the BeginAnimation method on the Mesh object.
@@ -793,7 +793,7 @@ func (m *Mesh) CreateGround(name string, width float64, height float64, subdivis
 // MeshCreateGroundFromHeightMapOpts contains optional parameters for Mesh.CreateGroundFromHeightMap.
 type MeshCreateGroundFromHeightMapOpts struct {
 	Updatable   *bool
-	OnReady     *func()
+	OnReady     func()
 	AlphaFilter *float64
 }
 
@@ -1793,7 +1793,7 @@ func (m *Mesh) GetBoundingInfo() *BoundingInfo {
 // MeshGetChildMeshesOpts contains optional parameters for Mesh.GetChildMeshes.
 type MeshGetChildMeshesOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetChildMeshes calls the GetChildMeshes method on the Mesh object.
@@ -1824,7 +1824,7 @@ func (m *Mesh) GetChildMeshes(opts *MeshGetChildMeshesOpts) *AbstractMesh {
 // MeshGetChildTransformNodesOpts contains optional parameters for Mesh.GetChildTransformNodes.
 type MeshGetChildTransformNodesOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetChildTransformNodes calls the GetChildTransformNodes method on the Mesh object.
@@ -1854,7 +1854,7 @@ func (m *Mesh) GetChildTransformNodes(opts *MeshGetChildTransformNodesOpts) *Tra
 
 // MeshGetChildrenOpts contains optional parameters for Mesh.GetChildren.
 type MeshGetChildrenOpts struct {
-	Predicate             *func()
+	Predicate             func()
 	DirectDescendantsOnly *bool
 }
 
@@ -1977,7 +1977,7 @@ func (m *Mesh) GetClosestFacetAtLocalCoordinates(x float64, y float64, z float64
 // MeshGetDescendantsOpts contains optional parameters for Mesh.GetDescendants.
 type MeshGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the Mesh object.
@@ -2183,7 +2183,7 @@ func (m *Mesh) GetFacetsAtLocalCoordinates(x float64, y float64, z float64) floa
 // MeshGetHierarchyBoundingVectorsOpts contains optional parameters for Mesh.GetHierarchyBoundingVectors.
 type MeshGetHierarchyBoundingVectorsOpts struct {
 	IncludeDescendants *bool
-	Predicate          *func()
+	Predicate          func()
 }
 
 // GetHierarchyBoundingVectors calls the GetHierarchyBoundingVectors method on the Mesh object.
@@ -2489,8 +2489,8 @@ func (m *Mesh) IncreaseVertices(numberPerEdge float64) {
 // MeshInstantiateHierarchyOpts contains optional parameters for Mesh.InstantiateHierarchy.
 type MeshInstantiateHierarchyOpts struct {
 	NewParent        *TransformNode
-	Options          js.Value
-	OnNewNodeCreated *func()
+	Options          map[string]interface{}
+	OnNewNodeCreated func()
 }
 
 // InstantiateHierarchy calls the InstantiateHierarchy method on the Mesh object.
@@ -2546,11 +2546,7 @@ func (m *Mesh) Intersects(ray *Ray, opts *MeshIntersectsOpts) *PickingInfo {
 	} else {
 		args = append(args, *opts.FastCheck)
 	}
-	if opts.TrianglePredicate == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.TrianglePredicate)
-	}
+	args = append(args, opts.TrianglePredicate)
 
 	retVal := m.p.Call("intersects", args...)
 	return PickingInfoFromJSObject(retVal, m.ctx)
@@ -2780,11 +2776,7 @@ func (m *Mesh) LookAt(targetPoint *Vector3, opts *MeshLookAtOpts) *TransformNode
 	} else {
 		args = append(args, *opts.RollCor)
 	}
-	if opts.Space == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Space)
-	}
+	args = append(args, opts.Space)
 
 	retVal := m.p.Call("lookAt", args...)
 	return TransformNodeFromJSObject(retVal, m.ctx)
@@ -2934,7 +2926,7 @@ func (m *Mesh) MoveWithCollisions(displacement *Vector3) *AbstractMesh {
 type MeshNormalizeToUnitCubeOpts struct {
 	IncludeDescendants *bool
 	IgnoreRotation     *bool
-	Predicate          *func()
+	Predicate          func()
 }
 
 // NormalizeToUnitCube calls the NormalizeToUnitCube method on the Mesh object.
@@ -2969,7 +2961,7 @@ func (m *Mesh) NormalizeToUnitCube(opts *MeshNormalizeToUnitCubeOpts) *AbstractM
 
 // MeshOptimizeIndicesOpts contains optional parameters for Mesh.OptimizeIndices.
 type MeshOptimizeIndicesOpts struct {
-	SuccessCallback *func()
+	SuccessCallback func()
 }
 
 // OptimizeIndices calls the OptimizeIndices method on the Mesh object.
@@ -3204,11 +3196,7 @@ func (m *Mesh) Rotate(axis *Vector3, amount float64, opts *MeshRotateOpts) *Tran
 	args = append(args, axis.JSObject())
 	args = append(args, amount)
 
-	if opts.Space == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Space)
-	}
+	args = append(args, opts.Space)
 
 	retVal := m.p.Call("rotate", args...)
 	return TransformNodeFromJSObject(retVal, m.ctx)
@@ -3483,11 +3471,7 @@ func (m *Mesh) SetPivotPoint(point *Vector3, opts *MeshSetPivotPointOpts) *Trans
 
 	args = append(args, point.JSObject())
 
-	if opts.Space == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Space)
-	}
+	args = append(args, opts.Space)
 
 	retVal := m.p.Call("setPivotPoint", args...)
 	return TransformNodeFromJSObject(retVal, m.ctx)
@@ -3579,7 +3563,7 @@ func (m *Mesh) SetVerticesData(kind string, data js.Value, opts *MeshSetVertices
 type MeshSimplifyOpts struct {
 	ParallelProcessing *bool
 	SimplificationType js.Value
-	SuccessCallback    *func()
+	SuccessCallback    func()
 }
 
 // Simplify calls the Simplify method on the Mesh object.
@@ -3599,11 +3583,7 @@ func (m *Mesh) Simplify(settings []*ISimplificationSettings, opts *MeshSimplifyO
 	} else {
 		args = append(args, *opts.ParallelProcessing)
 	}
-	if opts.SimplificationType == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.SimplificationType)
-	}
+	args = append(args, opts.SimplificationType)
 	if opts.SuccessCallback == nil {
 		args = append(args, js.Undefined())
 	} else {
@@ -3687,11 +3667,7 @@ func (m *Mesh) Translate(axis *Vector3, distance float64, opts *MeshTranslateOpt
 	args = append(args, axis.JSObject())
 	args = append(args, distance)
 
-	if opts.Space == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Space)
-	}
+	args = append(args, opts.Space)
 
 	retVal := m.p.Call("translate", args...)
 	return TransformNodeFromJSObject(retVal, m.ctx)

@@ -114,7 +114,7 @@ func (i *InputPassword) GetClassName() string {
 // InputPasswordGetDescendantsOpts contains optional parameters for InputPassword.GetDescendants.
 type InputPasswordGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the InputPassword object.
@@ -145,7 +145,7 @@ func (i *InputPassword) GetDescendants(opts *InputPasswordGetDescendantsOpts) *C
 // InputPasswordGetDescendantsToRefOpts contains optional parameters for InputPassword.GetDescendantsToRef.
 type InputPasswordGetDescendantsToRefOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendantsToRef calls the GetDescendantsToRef method on the InputPassword object.

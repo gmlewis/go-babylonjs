@@ -8,7 +8,7 @@ import (
 
 // BasisTools represents a babylon.js BasisTools.
 // Used to load .Basis files
-// See &lt;a href=&#34;https://github.com/BinomialLLC/basis_universal/tree/master/webgl&#34;&gt;https://github.com/BinomialLLC/basis_universal/tree/master/webgl&lt;/a&gt;
+// See <a href="https://github.com/BinomialLLC/basis_universal/tree/master/webgl">https://github.com/BinomialLLC/basis_universal/tree/master/webgl</a>
 type BasisTools struct {
 	p   js.Value
 	ctx js.Value

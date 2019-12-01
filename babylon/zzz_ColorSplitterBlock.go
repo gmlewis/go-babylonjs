@@ -131,7 +131,7 @@ func (c *ColorSplitterBlock) Clone(scene *Scene, opts *ColorSplitterBlockCloneOp
 
 // ColorSplitterBlockConnectToOpts contains optional parameters for ColorSplitterBlock.ConnectTo.
 type ColorSplitterBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the ColorSplitterBlock object.
@@ -396,11 +396,7 @@ func (c *ColorSplitterBlock) RegisterInput(name string, jsType js.Value, opts *C
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := c.p.Call("registerInput", args...)
 	return ColorSplitterBlockFromJSObject(retVal, c.ctx)
@@ -424,11 +420,7 @@ func (c *ColorSplitterBlock) RegisterOutput(name string, jsType js.Value, opts *
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := c.p.Call("registerOutput", args...)
 	return ColorSplitterBlockFromJSObject(retVal, c.ctx)

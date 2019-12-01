@@ -7,8 +7,8 @@ import (
 )
 
 // KHR_materials_specular represents a babylon.js KHR_materials_specular.
-// &lt;a href=&#34;https://github.com/KhronosGroup/glTF/pull/1677&#34;&gt;Proposed Specification&lt;/a&gt;
-// &lt;a href=&#34;https://www.babylonjs-playground.com/frame.html#BNIZX6#4&#34;&gt;Playground Sample&lt;/a&gt;
+// <a href="https://github.com/KhronosGroup/glTF/pull/1677">Proposed Specification</a>
+// <a href="https://www.babylonjs-playground.com/frame.html#BNIZX6#4">Playground Sample</a>
 // !!! Experimental Extension Subject to Changes !!!
 type KHR_materials_specular struct {
 	p   js.Value

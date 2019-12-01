@@ -131,7 +131,7 @@ func (d *DesaturateBlock) Clone(scene *Scene, opts *DesaturateBlockCloneOpts) *N
 
 // DesaturateBlockConnectToOpts contains optional parameters for DesaturateBlock.ConnectTo.
 type DesaturateBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the DesaturateBlock object.
@@ -396,11 +396,7 @@ func (d *DesaturateBlock) RegisterInput(name string, jsType js.Value, opts *Desa
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := d.p.Call("registerInput", args...)
 	return DesaturateBlockFromJSObject(retVal, d.ctx)
@@ -424,11 +420,7 @@ func (d *DesaturateBlock) RegisterOutput(name string, jsType js.Value, opts *Des
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := d.p.Call("registerOutput", args...)
 	return DesaturateBlockFromJSObject(retVal, d.ctx)

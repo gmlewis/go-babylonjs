@@ -204,9 +204,9 @@ func (b *BackgroundMaterial) Dispose(opts *BackgroundMaterialDisposeOpts) {
 
 // BackgroundMaterialForceCompilationOpts contains optional parameters for BackgroundMaterial.ForceCompilation.
 type BackgroundMaterialForceCompilationOpts struct {
-	OnCompiled *func()
+	OnCompiled func()
 	Options    js.Value
-	OnError    *func()
+	OnError    func()
 }
 
 // ForceCompilation calls the ForceCompilation method on the BackgroundMaterial object.
@@ -226,11 +226,7 @@ func (b *BackgroundMaterial) ForceCompilation(mesh *AbstractMesh, opts *Backgrou
 	} else {
 		args = append(args, opts.OnCompiled)
 	}
-	if opts.Options == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Options)
-	}
+	args = append(args, opts.Options)
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
@@ -257,11 +253,7 @@ func (b *BackgroundMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *Bac
 
 	args = append(args, mesh.JSObject())
 
-	if opts.Options == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Options)
-	}
+	args = append(args, opts.Options)
 
 	retVal := b.p.Call("forceCompilationAsync", args...)
 	return PromiseFromJSObject(retVal, b.ctx)

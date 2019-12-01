@@ -7,7 +7,7 @@ import (
 )
 
 // KHR_lights represents a babylon.js KHR_lights.
-// &lt;a href=&#34;https://github.com/KhronosGroup/glTF/blob/master/extensions/2.0/Khronos/KHR_lights_punctual/README.md&#34;&gt;Specification&lt;/a&gt;
+// <a href="https://github.com/KhronosGroup/glTF/blob/master/extensions/2.0/Khronos/KHR_lights_punctual/README.md">Specification</a>
 type KHR_lights struct {
 	p   js.Value
 	ctx js.Value

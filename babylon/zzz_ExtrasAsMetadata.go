@@ -7,7 +7,7 @@ import (
 )
 
 // ExtrasAsMetadata represents a babylon.js ExtrasAsMetadata.
-// Store glTF extras (if present) in BJS objects&amp;#39; metadata
+// Store glTF extras (if present) in BJS objects&#39; metadata
 type ExtrasAsMetadata struct {
 	p   js.Value
 	ctx js.Value

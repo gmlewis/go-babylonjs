@@ -7,7 +7,7 @@ import (
 )
 
 // FilesInputStore represents a babylon.js FilesInputStore.
-// Class used to help managing file picking and drag&amp;#39;n&amp;#39;drop
+// Class used to help managing file picking and drag&#39;n&#39;drop
 // File Storage
 type FilesInputStore struct {
 	p   js.Value

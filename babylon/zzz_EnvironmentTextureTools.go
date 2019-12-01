@@ -62,7 +62,11 @@ func (e *EnvironmentTextureTools) CreateImageDataArrayBufferViews(arrayBuffer in
 	args = append(args, info)
 
 	retVal := e.p.Call("CreateImageDataArrayBufferViews", args...)
-	return retVal
+	result := []*[]ArrayBufferView{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, []ArrayBufferViewFromJSObject(retVal.Index(ri), e.ctx))
+	}
+	return result
 }
 
 // GetEnvInfo calls the GetEnvInfo method on the EnvironmentTextureTools object.

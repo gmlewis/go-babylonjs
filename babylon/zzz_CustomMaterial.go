@@ -249,9 +249,9 @@ func (c *CustomMaterial) Dispose(opts *CustomMaterialDisposeOpts) {
 
 // CustomMaterialForceCompilationOpts contains optional parameters for CustomMaterial.ForceCompilation.
 type CustomMaterialForceCompilationOpts struct {
-	OnCompiled *func()
+	OnCompiled func()
 	Options    js.Value
-	OnError    *func()
+	OnError    func()
 }
 
 // ForceCompilation calls the ForceCompilation method on the CustomMaterial object.
@@ -271,11 +271,7 @@ func (c *CustomMaterial) ForceCompilation(mesh *AbstractMesh, opts *CustomMateri
 	} else {
 		args = append(args, opts.OnCompiled)
 	}
-	if opts.Options == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Options)
-	}
+	args = append(args, opts.Options)
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
@@ -302,11 +298,7 @@ func (c *CustomMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *CustomM
 
 	args = append(args, mesh.JSObject())
 
-	if opts.Options == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Options)
-	}
+	args = append(args, opts.Options)
 
 	retVal := c.p.Call("forceCompilationAsync", args...)
 	return PromiseFromJSObject(retVal, c.ctx)

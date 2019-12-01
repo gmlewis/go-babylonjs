@@ -108,7 +108,7 @@ func (w *WebVRController) GetForwardRay(opts *WebVRControllerGetForwardRayOpts) 
 
 // WebVRControllerInitControllerMeshOpts contains optional parameters for WebVRController.InitControllerMesh.
 type WebVRControllerInitControllerMeshOpts struct {
-	MeshLoaded *func()
+	MeshLoaded func()
 }
 
 // InitControllerMesh calls the InitControllerMesh method on the WebVRController object.

@@ -207,7 +207,7 @@ func (p *PBRBaseSimpleMaterial) Dispose(opts *PBRBaseSimpleMaterialDisposeOpts) 
 
 // PBRBaseSimpleMaterialForceCompilationOpts contains optional parameters for PBRBaseSimpleMaterial.ForceCompilation.
 type PBRBaseSimpleMaterialForceCompilationOpts struct {
-	OnCompiled *func()
+	OnCompiled func()
 	Options    js.Value
 }
 
@@ -228,11 +228,7 @@ func (p *PBRBaseSimpleMaterial) ForceCompilation(mesh *AbstractMesh, opts *PBRBa
 	} else {
 		args = append(args, opts.OnCompiled)
 	}
-	if opts.Options == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Options)
-	}
+	args = append(args, opts.Options)
 
 	p.p.Call("forceCompilation", args...)
 }
@@ -254,11 +250,7 @@ func (p *PBRBaseSimpleMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *
 
 	args = append(args, mesh.JSObject())
 
-	if opts.Options == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Options)
-	}
+	args = append(args, opts.Options)
 
 	retVal := p.p.Call("forceCompilationAsync", args...)
 	return PromiseFromJSObject(retVal, p.ctx)

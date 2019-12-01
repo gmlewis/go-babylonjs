@@ -134,7 +134,7 @@ func (b *Bone) AddNodeConstructor(jsType string, constructorFunc js.Value) {
 type BoneBeginAnimationOpts struct {
 	Loop           *bool
 	SpeedRatio     *float64
-	OnAnimationEnd *func()
+	OnAnimationEnd func()
 }
 
 // BeginAnimation calls the BeginAnimation method on the Bone object.
@@ -466,7 +466,7 @@ func (b *Bone) GetBehaviorByName(name string) js.Value {
 // BoneGetChildMeshesOpts contains optional parameters for Bone.GetChildMeshes.
 type BoneGetChildMeshesOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetChildMeshes calls the GetChildMeshes method on the Bone object.
@@ -500,7 +500,11 @@ func (b *Bone) GetChildMeshes(opts *BoneGetChildMeshesOpts) *AbstractMesh {
 func (b *Bone) GetChildren() []*Bone {
 
 	retVal := b.p.Call("getChildren")
-	return retVal
+	result := []*Bone{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, BoneFromJSObject(retVal.Index(ri), b.ctx))
+	}
+	return result
 }
 
 // GetClassName calls the GetClassName method on the Bone object.
@@ -515,7 +519,7 @@ func (b *Bone) GetClassName() string {
 // BoneGetDescendantsOpts contains optional parameters for Bone.GetDescendants.
 type BoneGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the Bone object.
@@ -596,7 +600,7 @@ func (b *Bone) GetEngine() *Engine {
 // BoneGetHierarchyBoundingVectorsOpts contains optional parameters for Bone.GetHierarchyBoundingVectors.
 type BoneGetHierarchyBoundingVectorsOpts struct {
 	IncludeDescendants *bool
-	Predicate          *func()
+	Predicate          func()
 }
 
 // GetHierarchyBoundingVectors calls the GetHierarchyBoundingVectors method on the Bone object.
@@ -717,11 +721,7 @@ func (b *Bone) GetPosition(opts *BoneGetPositionOpts) *Vector3 {
 
 	args := make([]interface{}, 0, 0+2)
 
-	if opts.Space == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Space)
-	}
+	args = append(args, opts.Space)
 	if opts.Mesh == nil {
 		args = append(args, js.Undefined())
 	} else {
@@ -771,11 +771,7 @@ func (b *Bone) GetRotation(opts *BoneGetRotationOpts) *Vector3 {
 
 	args := make([]interface{}, 0, 0+2)
 
-	if opts.Space == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Space)
-	}
+	args = append(args, opts.Space)
 	if opts.Mesh == nil {
 		args = append(args, js.Undefined())
 	} else {
@@ -830,11 +826,7 @@ func (b *Bone) GetRotationQuaternion(opts *BoneGetRotationQuaternionOpts) *Quate
 
 	args := make([]interface{}, 0, 0+2)
 
-	if opts.Space == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Space)
-	}
+	args = append(args, opts.Space)
 	if opts.Mesh == nil {
 		args = append(args, js.Undefined())
 	} else {
@@ -1076,11 +1068,7 @@ func (b *Bone) Rotate(axis *Vector3, amount float64, opts *BoneRotateOpts) {
 	args = append(args, axis.JSObject())
 	args = append(args, amount)
 
-	if opts.Space == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Space)
-	}
+	args = append(args, opts.Space)
 	if opts.Mesh == nil {
 		args = append(args, js.Undefined())
 	} else {
@@ -1172,11 +1160,7 @@ func (b *Bone) SetAxisAngle(axis *Vector3, angle float64, opts *BoneSetAxisAngle
 	args = append(args, axis.JSObject())
 	args = append(args, angle)
 
-	if opts.Space == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Space)
-	}
+	args = append(args, opts.Space)
 	if opts.Mesh == nil {
 		args = append(args, js.Undefined())
 	} else {
@@ -1242,11 +1226,7 @@ func (b *Bone) SetPosition(position *Vector3, opts *BoneSetPositionOpts) {
 
 	args = append(args, position.JSObject())
 
-	if opts.Space == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Space)
-	}
+	args = append(args, opts.Space)
 	if opts.Mesh == nil {
 		args = append(args, js.Undefined())
 	} else {
@@ -1274,11 +1254,7 @@ func (b *Bone) SetRotation(rotation *Vector3, opts *BoneSetRotationOpts) {
 
 	args = append(args, rotation.JSObject())
 
-	if opts.Space == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Space)
-	}
+	args = append(args, opts.Space)
 	if opts.Mesh == nil {
 		args = append(args, js.Undefined())
 	} else {
@@ -1306,11 +1282,7 @@ func (b *Bone) SetRotationMatrix(rotMat *Matrix, opts *BoneSetRotationMatrixOpts
 
 	args = append(args, rotMat.JSObject())
 
-	if opts.Space == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Space)
-	}
+	args = append(args, opts.Space)
 	if opts.Mesh == nil {
 		args = append(args, js.Undefined())
 	} else {
@@ -1338,11 +1310,7 @@ func (b *Bone) SetRotationQuaternion(quat *Quaternion, opts *BoneSetRotationQuat
 
 	args = append(args, quat.JSObject())
 
-	if opts.Space == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Space)
-	}
+	args = append(args, opts.Space)
 	if opts.Mesh == nil {
 		args = append(args, js.Undefined())
 	} else {
@@ -1384,11 +1352,7 @@ func (b *Bone) SetYawPitchRoll(yaw float64, pitch float64, roll float64, opts *B
 	args = append(args, pitch)
 	args = append(args, roll)
 
-	if opts.Space == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Space)
-	}
+	args = append(args, opts.Space)
 	if opts.Mesh == nil {
 		args = append(args, js.Undefined())
 	} else {
@@ -1416,11 +1380,7 @@ func (b *Bone) Translate(vec *Vector3, opts *BoneTranslateOpts) {
 
 	args = append(args, vec.JSObject())
 
-	if opts.Space == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Space)
-	}
+	args = append(args, opts.Space)
 	if opts.Mesh == nil {
 		args = append(args, js.Undefined())
 	} else {

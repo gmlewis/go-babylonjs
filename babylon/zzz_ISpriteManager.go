@@ -46,7 +46,7 @@ func (i *ISpriteManager) Dispose() {
 
 // ISpriteManagerIntersectsOpts contains optional parameters for ISpriteManager.Intersects.
 type ISpriteManagerIntersectsOpts struct {
-	Predicate *func()
+	Predicate func()
 	FastCheck *bool
 }
 
@@ -80,7 +80,7 @@ func (i *ISpriteManager) Intersects(ray *Ray, camera *Camera, opts *ISpriteManag
 
 // ISpriteManagerMultiIntersectsOpts contains optional parameters for ISpriteManager.MultiIntersects.
 type ISpriteManagerMultiIntersectsOpts struct {
-	Predicate *func()
+	Predicate func()
 }
 
 // MultiIntersects calls the MultiIntersects method on the ISpriteManager object.

@@ -7,7 +7,7 @@ import (
 )
 
 // Geometry represents a babylon.js Geometry.
-// Class used to store geometry data (vertex buffers &#43; index buffer)
+// Class used to store geometry data (vertex buffers + index buffer)
 type Geometry struct {
 	p   js.Value
 	ctx js.Value
@@ -322,7 +322,7 @@ func (g *Geometry) IsVerticesDataPresent(kind string) bool {
 
 // GeometryLoadOpts contains optional parameters for Geometry.Load.
 type GeometryLoadOpts struct {
-	OnLoaded *func()
+	OnLoaded func()
 }
 
 // Load calls the Load method on the Geometry object.

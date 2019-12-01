@@ -207,9 +207,9 @@ func (m *MultiMaterial) Dispose(opts *MultiMaterialDisposeOpts) {
 
 // MultiMaterialForceCompilationOpts contains optional parameters for MultiMaterial.ForceCompilation.
 type MultiMaterialForceCompilationOpts struct {
-	OnCompiled *func()
+	OnCompiled func()
 	Options    js.Value
-	OnError    *func()
+	OnError    func()
 }
 
 // ForceCompilation calls the ForceCompilation method on the MultiMaterial object.
@@ -229,11 +229,7 @@ func (m *MultiMaterial) ForceCompilation(mesh *AbstractMesh, opts *MultiMaterial
 	} else {
 		args = append(args, opts.OnCompiled)
 	}
-	if opts.Options == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Options)
-	}
+	args = append(args, opts.Options)
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
@@ -260,11 +256,7 @@ func (m *MultiMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *MultiMat
 
 	args = append(args, mesh.JSObject())
 
-	if opts.Options == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Options)
-	}
+	args = append(args, opts.Options)
 
 	retVal := m.p.Call("forceCompilationAsync", args...)
 	return PromiseFromJSObject(retVal, m.ctx)

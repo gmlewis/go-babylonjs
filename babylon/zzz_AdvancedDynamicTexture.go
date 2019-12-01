@@ -188,8 +188,8 @@ type AdvancedDynamicTextureCreateFromBase64StringOpts struct {
 	NoMipmap     *bool
 	InvertY      *bool
 	SamplingMode *float64
-	OnLoad       *func()
-	OnError      *func()
+	OnLoad       func()
+	OnError      func()
 	Format       *float64
 }
 
@@ -376,7 +376,11 @@ func (a *AdvancedDynamicTexture) GetBaseSize() *ISize {
 func (a *AdvancedDynamicTexture) GetChildren() []*Container {
 
 	retVal := a.p.Call("getChildren")
-	return retVal
+	result := []*Container{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, ContainerFromJSObject(retVal.Index(ri), a.ctx))
+	}
+	return result
 }
 
 // GetClassName calls the GetClassName method on the AdvancedDynamicTexture object.
@@ -400,7 +404,7 @@ func (a *AdvancedDynamicTexture) GetContext() js.Value {
 // AdvancedDynamicTextureGetDescendantsOpts contains optional parameters for AdvancedDynamicTexture.GetDescendants.
 type AdvancedDynamicTextureGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the AdvancedDynamicTexture object.
@@ -542,8 +546,8 @@ type AdvancedDynamicTextureLoadFromDataStringOpts struct {
 	NoMipmap     *bool
 	InvertY      *bool
 	SamplingMode *float64
-	OnLoad       *func()
-	OnError      *func()
+	OnLoad       func()
+	OnError      func()
 	Format       *float64
 }
 
@@ -663,11 +667,7 @@ func (a *AdvancedDynamicTexture) ReadPixels(opts *AdvancedDynamicTextureReadPixe
 	} else {
 		args = append(args, *opts.Level)
 	}
-	if opts.Buffer == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Buffer)
-	}
+	args = append(args, opts.Buffer)
 
 	retVal := a.p.Call("readPixels", args...)
 	return retVal
@@ -798,7 +798,7 @@ func (a *AdvancedDynamicTexture) UpdateSamplingMode(samplingMode float64) {
 // AdvancedDynamicTextureUpdateURLOpts contains optional parameters for AdvancedDynamicTexture.UpdateURL.
 type AdvancedDynamicTextureUpdateURLOpts struct {
 	Buffer *string
-	OnLoad *func()
+	OnLoad func()
 }
 
 // UpdateURL calls the UpdateURL method on the AdvancedDynamicTexture object.

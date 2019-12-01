@@ -131,7 +131,7 @@ func (d *DotBlock) Clone(scene *Scene, opts *DotBlockCloneOpts) *NodeMaterialBlo
 
 // DotBlockConnectToOpts contains optional parameters for DotBlock.ConnectTo.
 type DotBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the DotBlock object.
@@ -396,11 +396,7 @@ func (d *DotBlock) RegisterInput(name string, jsType js.Value, opts *DotBlockReg
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := d.p.Call("registerInput", args...)
 	return DotBlockFromJSObject(retVal, d.ctx)
@@ -424,11 +420,7 @@ func (d *DotBlock) RegisterOutput(name string, jsType js.Value, opts *DotBlockRe
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := d.p.Call("registerOutput", args...)
 	return DotBlockFromJSObject(retVal, d.ctx)

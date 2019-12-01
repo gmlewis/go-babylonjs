@@ -7,7 +7,7 @@ import (
 )
 
 // KHR_draco_mesh_compression represents a babylon.js KHR_draco_mesh_compression.
-// &lt;a href=&#34;https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Khronos/KHR_draco_mesh_compression&#34;&gt;Specification&lt;/a&gt;
+// <a href="https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Khronos/KHR_draco_mesh_compression">Specification</a>
 type KHR_draco_mesh_compression struct {
 	p   js.Value
 	ctx js.Value

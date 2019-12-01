@@ -265,7 +265,11 @@ func (r *Ray) IntersectsMeshes(meshes []*AbstractMesh, opts *RayIntersectsMeshes
 	}
 
 	retVal := r.p.Call("intersectsMeshes", args...)
-	return retVal
+	result := []*PickingInfo{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, PickingInfoFromJSObject(retVal.Index(ri), r.ctx))
+	}
+	return result
 }
 
 // IntersectsPlane calls the IntersectsPlane method on the Ray object.

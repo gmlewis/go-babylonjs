@@ -10,7 +10,7 @@ import (
 // AsciiArtPostProcess helps rendering everithing in Ascii Art.
 //
 // Simmply add it to your scene and let the nerd that lives in you have fun.
-// Example usage: var pp = new AsciiArtPostProcess(&amp;quot;myAscii&amp;quot;, &amp;quot;20px Monospace&amp;quot;, camera);
+// Example usage: var pp = new AsciiArtPostProcess(&quot;myAscii&quot;, &quot;20px Monospace&quot;, camera);
 type AsciiArtPostProcess struct {
 	*PostProcess
 	ctx js.Value
@@ -223,8 +223,8 @@ type AsciiArtPostProcessUpdateEffectOpts struct {
 	Uniforms        *string
 	Samplers        *string
 	IndexParameters *interface{}
-	OnCompiled      *func()
-	OnError         *func()
+	OnCompiled      func()
+	OnError         func()
 }
 
 // UpdateEffect calls the UpdateEffect method on the AsciiArtPostProcess object.

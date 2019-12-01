@@ -76,11 +76,7 @@ func (ba *Babylon) NewVideoTexture(name string, src string, scene *Scene, opts *
 	} else {
 		args = append(args, *opts.SamplingMode)
 	}
-	if opts.Settings == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Settings)
-	}
+	args = append(args, opts.Settings)
 
 	p := ba.ctx.Get("VideoTexture").New(args...)
 	return VideoTextureFromJSObject(p, ba.ctx)
@@ -100,8 +96,8 @@ type VideoTextureCreateFromBase64StringOpts struct {
 	NoMipmap     *bool
 	InvertY      *bool
 	SamplingMode *float64
-	OnLoad       *func()
-	OnError      *func()
+	OnLoad       func()
+	OnError      func()
 	Format       *float64
 }
 
@@ -187,11 +183,7 @@ func (v *VideoTexture) CreateFromWebCam(scene *Scene, onReady func(), constraint
 	args = append(args, js.FuncOf(func(this js.Value, args []js.Value) interface{} { onReady(); return nil }))
 	args = append(args, constraints)
 
-	if opts.AudioConstaints == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.AudioConstaints)
-	}
+	args = append(args, opts.AudioConstaints)
 
 	v.p.Call("CreateFromWebCam", args...)
 }
@@ -214,11 +206,7 @@ func (v *VideoTexture) CreateFromWebCamAsync(scene *Scene, constraints js.Value,
 	args = append(args, scene.JSObject())
 	args = append(args, constraints)
 
-	if opts.AudioConstaints == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.AudioConstaints)
-	}
+	args = append(args, opts.AudioConstaints)
 
 	retVal := v.p.Call("CreateFromWebCamAsync", args...)
 	return PromiseFromJSObject(retVal, v.ctx)
@@ -335,8 +323,8 @@ type VideoTextureLoadFromDataStringOpts struct {
 	NoMipmap     *bool
 	InvertY      *bool
 	SamplingMode *float64
-	OnLoad       *func()
-	OnError      *func()
+	OnLoad       func()
+	OnError      func()
 	Format       *float64
 }
 
@@ -436,11 +424,7 @@ func (v *VideoTexture) ReadPixels(opts *VideoTextureReadPixelsOpts) js.Value {
 	} else {
 		args = append(args, *opts.Level)
 	}
-	if opts.Buffer == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Buffer)
-	}
+	args = append(args, opts.Buffer)
 
 	retVal := v.p.Call("readPixels", args...)
 	return retVal

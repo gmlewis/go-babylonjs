@@ -92,7 +92,7 @@ func (v *VertexData) ApplyToMesh(mesh *Mesh, opts *VertexDataApplyToMeshOpts) *V
 
 // VertexDataComputeNormalsOpts contains optional parameters for VertexData.ComputeNormals.
 type VertexDataComputeNormalsOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ComputeNormals calls the ComputeNormals method on the VertexData object.

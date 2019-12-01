@@ -131,7 +131,7 @@ func (s *StepBlock) Clone(scene *Scene, opts *StepBlockCloneOpts) *NodeMaterialB
 
 // StepBlockConnectToOpts contains optional parameters for StepBlock.ConnectTo.
 type StepBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the StepBlock object.
@@ -396,11 +396,7 @@ func (s *StepBlock) RegisterInput(name string, jsType js.Value, opts *StepBlockR
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := s.p.Call("registerInput", args...)
 	return StepBlockFromJSObject(retVal, s.ctx)
@@ -424,11 +420,7 @@ func (s *StepBlock) RegisterOutput(name string, jsType js.Value, opts *StepBlock
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := s.p.Call("registerOutput", args...)
 	return StepBlockFromJSObject(retVal, s.ctx)

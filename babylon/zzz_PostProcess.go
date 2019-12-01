@@ -8,7 +8,7 @@ import (
 
 // PostProcess represents a babylon.js PostProcess.
 // PostProcess can be used to apply a shader to a texture after it has been rendered
-// See &lt;a href=&#34;https://doc.babylonjs.com/how_to/how_to_use_postprocesses&#34;&gt;https://doc.babylonjs.com/how_to/how_to_use_postprocesses&lt;/a&gt;
+// See <a href="https://doc.babylonjs.com/how_to/how_to_use_postprocesses">https://doc.babylonjs.com/how_to/how_to_use_postprocesses</a>
 type PostProcess struct {
 	p   js.Value
 	ctx js.Value
@@ -267,8 +267,8 @@ type PostProcessUpdateEffectOpts struct {
 	Uniforms        *string
 	Samplers        *string
 	IndexParameters *interface{}
-	OnCompiled      *func()
-	OnError         *func()
+	OnCompiled      func()
+	OnError         func()
 }
 
 // UpdateEffect calls the UpdateEffect method on the PostProcess object.

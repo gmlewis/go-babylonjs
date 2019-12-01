@@ -131,7 +131,7 @@ func (v *VertexOutputBlock) Clone(scene *Scene, opts *VertexOutputBlockCloneOpts
 
 // VertexOutputBlockConnectToOpts contains optional parameters for VertexOutputBlock.ConnectTo.
 type VertexOutputBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the VertexOutputBlock object.
@@ -396,11 +396,7 @@ func (v *VertexOutputBlock) RegisterInput(name string, jsType js.Value, opts *Ve
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := v.p.Call("registerInput", args...)
 	return VertexOutputBlockFromJSObject(retVal, v.ctx)
@@ -424,11 +420,7 @@ func (v *VertexOutputBlock) RegisterOutput(name string, jsType js.Value, opts *V
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := v.p.Call("registerOutput", args...)
 	return VertexOutputBlockFromJSObject(retVal, v.ctx)

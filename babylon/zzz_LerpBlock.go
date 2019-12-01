@@ -131,7 +131,7 @@ func (l *LerpBlock) Clone(scene *Scene, opts *LerpBlockCloneOpts) *NodeMaterialB
 
 // LerpBlockConnectToOpts contains optional parameters for LerpBlock.ConnectTo.
 type LerpBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the LerpBlock object.
@@ -396,11 +396,7 @@ func (l *LerpBlock) RegisterInput(name string, jsType js.Value, opts *LerpBlockR
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := l.p.Call("registerInput", args...)
 	return LerpBlockFromJSObject(retVal, l.ctx)
@@ -424,11 +420,7 @@ func (l *LerpBlock) RegisterOutput(name string, jsType js.Value, opts *LerpBlock
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := l.p.Call("registerOutput", args...)
 	return LerpBlockFromJSObject(retVal, l.ctx)

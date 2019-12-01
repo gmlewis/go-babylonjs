@@ -131,7 +131,7 @@ func (n *NormalBlendBlock) Clone(scene *Scene, opts *NormalBlendBlockCloneOpts) 
 
 // NormalBlendBlockConnectToOpts contains optional parameters for NormalBlendBlock.ConnectTo.
 type NormalBlendBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the NormalBlendBlock object.
@@ -396,11 +396,7 @@ func (n *NormalBlendBlock) RegisterInput(name string, jsType js.Value, opts *Nor
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := n.p.Call("registerInput", args...)
 	return NormalBlendBlockFromJSObject(retVal, n.ctx)
@@ -424,11 +420,7 @@ func (n *NormalBlendBlock) RegisterOutput(name string, jsType js.Value, opts *No
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := n.p.Call("registerOutput", args...)
 	return NormalBlendBlockFromJSObject(retVal, n.ctx)

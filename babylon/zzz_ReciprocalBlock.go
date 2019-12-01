@@ -131,7 +131,7 @@ func (r *ReciprocalBlock) Clone(scene *Scene, opts *ReciprocalBlockCloneOpts) *N
 
 // ReciprocalBlockConnectToOpts contains optional parameters for ReciprocalBlock.ConnectTo.
 type ReciprocalBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the ReciprocalBlock object.
@@ -396,11 +396,7 @@ func (r *ReciprocalBlock) RegisterInput(name string, jsType js.Value, opts *Reci
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := r.p.Call("registerInput", args...)
 	return ReciprocalBlockFromJSObject(retVal, r.ctx)
@@ -424,11 +420,7 @@ func (r *ReciprocalBlock) RegisterOutput(name string, jsType js.Value, opts *Rec
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := r.p.Call("registerOutput", args...)
 	return ReciprocalBlockFromJSObject(retVal, r.ctx)

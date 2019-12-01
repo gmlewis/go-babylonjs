@@ -7,7 +7,7 @@ import (
 )
 
 // VolumetricLightScatteringPostProcess represents a babylon.js VolumetricLightScatteringPostProcess.
-// Inspired by &lt;a href=&#34;http://http.developer.nvidia.com/GPUGems3/gpugems3_ch13.html&#34;&gt;http://http.developer.nvidia.com/GPUGems3/gpugems3_ch13.html&lt;/a&gt;
+// Inspired by <a href="http://http.developer.nvidia.com/GPUGems3/gpugems3_ch13.html">http://http.developer.nvidia.com/GPUGems3/gpugems3_ch13.html</a>
 type VolumetricLightScatteringPostProcess struct {
 	*PostProcess
 	ctx js.Value
@@ -283,8 +283,8 @@ type VolumetricLightScatteringPostProcessUpdateEffectOpts struct {
 	Uniforms        *string
 	Samplers        *string
 	IndexParameters *interface{}
-	OnCompiled      *func()
-	OnError         *func()
+	OnCompiled      func()
+	OnError         func()
 }
 
 // UpdateEffect calls the UpdateEffect method on the VolumetricLightScatteringPostProcess object.

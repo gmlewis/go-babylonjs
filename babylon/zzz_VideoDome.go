@@ -128,7 +128,7 @@ func (v *VideoDome) AttachToBone(bone *Bone, affectedTransformNode *TransformNod
 type VideoDomeBeginAnimationOpts struct {
 	Loop           *bool
 	SpeedRatio     *float64
-	OnAnimationEnd *func()
+	OnAnimationEnd func()
 }
 
 // BeginAnimation calls the BeginAnimation method on the VideoDome object.
@@ -431,7 +431,7 @@ func (v *VideoDome) GetBehaviorByName(name string) js.Value {
 // VideoDomeGetChildMeshesOpts contains optional parameters for VideoDome.GetChildMeshes.
 type VideoDomeGetChildMeshesOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetChildMeshes calls the GetChildMeshes method on the VideoDome object.
@@ -462,7 +462,7 @@ func (v *VideoDome) GetChildMeshes(opts *VideoDomeGetChildMeshesOpts) *AbstractM
 // VideoDomeGetChildTransformNodesOpts contains optional parameters for VideoDome.GetChildTransformNodes.
 type VideoDomeGetChildTransformNodesOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetChildTransformNodes calls the GetChildTransformNodes method on the VideoDome object.
@@ -492,7 +492,7 @@ func (v *VideoDome) GetChildTransformNodes(opts *VideoDomeGetChildTransformNodes
 
 // VideoDomeGetChildrenOpts contains optional parameters for VideoDome.GetChildren.
 type VideoDomeGetChildrenOpts struct {
-	Predicate             *func()
+	Predicate             func()
 	DirectDescendantsOnly *bool
 }
 
@@ -533,7 +533,7 @@ func (v *VideoDome) GetClassName() string {
 // VideoDomeGetDescendantsOpts contains optional parameters for VideoDome.GetDescendants.
 type VideoDomeGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the VideoDome object.
@@ -625,7 +625,7 @@ func (v *VideoDome) GetEngine() *Engine {
 // VideoDomeGetHierarchyBoundingVectorsOpts contains optional parameters for VideoDome.GetHierarchyBoundingVectors.
 type VideoDomeGetHierarchyBoundingVectorsOpts struct {
 	IncludeDescendants *bool
-	Predicate          *func()
+	Predicate          func()
 }
 
 // GetHierarchyBoundingVectors calls the GetHierarchyBoundingVectors method on the VideoDome object.
@@ -748,8 +748,8 @@ func (v *VideoDome) GetWorldMatrix() *Matrix {
 // VideoDomeInstantiateHierarchyOpts contains optional parameters for VideoDome.InstantiateHierarchy.
 type VideoDomeInstantiateHierarchyOpts struct {
 	NewParent        *TransformNode
-	Options          js.Value
-	OnNewNodeCreated *func()
+	Options          map[string]interface{}
+	OnNewNodeCreated func()
 }
 
 // InstantiateHierarchy calls the InstantiateHierarchy method on the VideoDome object.
@@ -902,11 +902,7 @@ func (v *VideoDome) LookAt(targetPoint *Vector3, opts *VideoDomeLookAtOpts) *Tra
 	} else {
 		args = append(args, *opts.RollCor)
 	}
-	if opts.Space == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Space)
-	}
+	args = append(args, opts.Space)
 
 	retVal := v.p.Call("lookAt", args...)
 	return TransformNodeFromJSObject(retVal, v.ctx)
@@ -929,7 +925,7 @@ func (v *VideoDome) MarkAsDirty(property string) *TransformNode {
 type VideoDomeNormalizeToUnitCubeOpts struct {
 	IncludeDescendants *bool
 	IgnoreRotation     *bool
-	Predicate          *func()
+	Predicate          func()
 }
 
 // NormalizeToUnitCube calls the NormalizeToUnitCube method on the VideoDome object.
@@ -1035,11 +1031,7 @@ func (v *VideoDome) Rotate(axis *Vector3, amount float64, opts *VideoDomeRotateO
 	args = append(args, axis.JSObject())
 	args = append(args, amount)
 
-	if opts.Space == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Space)
-	}
+	args = append(args, opts.Space)
 
 	retVal := v.p.Call("rotate", args...)
 	return TransformNodeFromJSObject(retVal, v.ctx)
@@ -1215,11 +1207,7 @@ func (v *VideoDome) SetPivotPoint(point *Vector3, opts *VideoDomeSetPivotPointOp
 
 	args = append(args, point.JSObject())
 
-	if opts.Space == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Space)
-	}
+	args = append(args, opts.Space)
 
 	retVal := v.p.Call("setPivotPoint", args...)
 	return TransformNodeFromJSObject(retVal, v.ctx)
@@ -1269,11 +1257,7 @@ func (v *VideoDome) Translate(axis *Vector3, distance float64, opts *VideoDomeTr
 	args = append(args, axis.JSObject())
 	args = append(args, distance)
 
-	if opts.Space == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Space)
-	}
+	args = append(args, opts.Space)
 
 	retVal := v.p.Call("translate", args...)
 	return TransformNodeFromJSObject(retVal, v.ctx)

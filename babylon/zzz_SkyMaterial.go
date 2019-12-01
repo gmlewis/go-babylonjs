@@ -192,9 +192,9 @@ func (s *SkyMaterial) Dispose(opts *SkyMaterialDisposeOpts) {
 
 // SkyMaterialForceCompilationOpts contains optional parameters for SkyMaterial.ForceCompilation.
 type SkyMaterialForceCompilationOpts struct {
-	OnCompiled *func()
+	OnCompiled func()
 	Options    js.Value
-	OnError    *func()
+	OnError    func()
 }
 
 // ForceCompilation calls the ForceCompilation method on the SkyMaterial object.
@@ -214,11 +214,7 @@ func (s *SkyMaterial) ForceCompilation(mesh *AbstractMesh, opts *SkyMaterialForc
 	} else {
 		args = append(args, opts.OnCompiled)
 	}
-	if opts.Options == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Options)
-	}
+	args = append(args, opts.Options)
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
@@ -245,11 +241,7 @@ func (s *SkyMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *SkyMateria
 
 	args = append(args, mesh.JSObject())
 
-	if opts.Options == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Options)
-	}
+	args = append(args, opts.Options)
 
 	retVal := s.p.Call("forceCompilationAsync", args...)
 	return PromiseFromJSObject(retVal, s.ctx)

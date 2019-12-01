@@ -100,7 +100,11 @@ func (i *IPhysicsEnabledObject) GetChildMeshes(opts *IPhysicsEnabledObjectGetChi
 	}
 
 	retVal := i.p.Call("getChildMeshes", args...)
-	return retVal
+	result := []*AbstractMesh{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, AbstractMeshFromJSObject(retVal.Index(ri), i.ctx))
+	}
+	return result
 }
 
 // GetClassName calls the GetClassName method on the IPhysicsEnabledObject object.
@@ -140,7 +144,11 @@ func (i *IPhysicsEnabledObject) GetVerticesData(kind string) []*float64 {
 	args = append(args, kind)
 
 	retVal := i.p.Call("getVerticesData", args...)
-	return retVal
+	result := []*float64{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, float64FromJSObject(retVal.Index(ri), i.ctx))
+	}
+	return result
 }
 
 // GetWorldMatrix calls the GetWorldMatrix method on the IPhysicsEnabledObject object.
@@ -170,11 +178,7 @@ func (i *IPhysicsEnabledObject) Rotate(axis *Vector3, amount float64, opts *IPhy
 	args = append(args, axis.JSObject())
 	args = append(args, amount)
 
-	if opts.Space == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Space)
-	}
+	args = append(args, opts.Space)
 
 	retVal := i.p.Call("rotate", args...)
 	return TransformNodeFromJSObject(retVal, i.ctx)
@@ -211,11 +215,7 @@ func (i *IPhysicsEnabledObject) Translate(axis *Vector3, distance float64, opts 
 	args = append(args, axis.JSObject())
 	args = append(args, distance)
 
-	if opts.Space == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Space)
-	}
+	args = append(args, opts.Space)
 
 	retVal := i.p.Call("translate", args...)
 	return TransformNodeFromJSObject(retVal, i.ctx)

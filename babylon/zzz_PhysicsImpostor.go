@@ -57,11 +57,7 @@ func (ba *Babylon) NewPhysicsImpostor(object *IPhysicsEnabledObject, jsType floa
 	args = append(args, object.JSObject())
 	args = append(args, jsType)
 
-	if opts._options == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts._options)
-	}
+	args = append(args, opts._options)
 	if opts._scene == nil {
 		args = append(args, js.Undefined())
 	} else {

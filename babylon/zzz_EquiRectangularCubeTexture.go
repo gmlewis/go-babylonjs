@@ -40,8 +40,8 @@ func EquiRectangularCubeTextureArrayToJSArray(array []*EquiRectangularCubeTextur
 type NewEquiRectangularCubeTextureOpts struct {
 	NoMipmap   *bool
 	GammaSpace *bool
-	OnLoad     *func()
-	OnError    *func()
+	OnLoad     func()
+	OnError    func()
 }
 
 // NewEquiRectangularCubeTexture returns a new EquiRectangularCubeTexture object.
@@ -216,11 +216,7 @@ func (e *EquiRectangularCubeTexture) ReadPixels(opts *EquiRectangularCubeTexture
 	} else {
 		args = append(args, *opts.Level)
 	}
-	if opts.Buffer == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Buffer)
-	}
+	args = append(args, opts.Buffer)
 
 	retVal := e.p.Call("readPixels", args...)
 	return retVal

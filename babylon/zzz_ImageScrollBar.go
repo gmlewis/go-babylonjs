@@ -108,7 +108,7 @@ func (i *ImageScrollBar) GetClassName() string {
 // ImageScrollBarGetDescendantsOpts contains optional parameters for ImageScrollBar.GetDescendants.
 type ImageScrollBarGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the ImageScrollBar object.
@@ -139,7 +139,7 @@ func (i *ImageScrollBar) GetDescendants(opts *ImageScrollBarGetDescendantsOpts) 
 // ImageScrollBarGetDescendantsToRefOpts contains optional parameters for ImageScrollBar.GetDescendantsToRef.
 type ImageScrollBarGetDescendantsToRefOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendantsToRef calls the GetDescendantsToRef method on the ImageScrollBar object.

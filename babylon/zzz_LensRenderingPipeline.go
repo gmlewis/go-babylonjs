@@ -10,7 +10,7 @@ import (
 // BABYLON.JS Chromatic Aberration GLSL Shader
 // Author: Olivier Guyot
 // Separates very slightly R, G and B colors on the edges of the screen
-// Inspired by Francois Tarlier &amp;amp; Martins Upitis
+// Inspired by Francois Tarlier &amp; Martins Upitis
 type LensRenderingPipeline struct {
 	*PostProcessRenderPipeline
 	ctx js.Value

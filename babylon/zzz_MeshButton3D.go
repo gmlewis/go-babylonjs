@@ -7,7 +7,7 @@ import (
 )
 
 // MeshButton3D represents a babylon.js MeshButton3D.
-// Class used to create an interactable object. It&amp;#39;s a 3D button using a mesh coming from the current scene
+// Class used to create an interactable object. It&#39;s a 3D button using a mesh coming from the current scene
 type MeshButton3D struct {
 	*Button3D
 	ctx js.Value

@@ -170,7 +170,7 @@ func (s *StackPanel) GetClassName() string {
 // StackPanelGetDescendantsOpts contains optional parameters for StackPanel.GetDescendants.
 type StackPanelGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the StackPanel object.
@@ -201,7 +201,7 @@ func (s *StackPanel) GetDescendants(opts *StackPanelGetDescendantsOpts) *Control
 // StackPanelGetDescendantsToRefOpts contains optional parameters for StackPanel.GetDescendantsToRef.
 type StackPanelGetDescendantsToRefOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendantsToRef calls the GetDescendantsToRef method on the StackPanel object.

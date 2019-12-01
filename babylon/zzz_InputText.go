@@ -114,7 +114,7 @@ func (i *InputText) GetClassName() string {
 // InputTextGetDescendantsOpts contains optional parameters for InputText.GetDescendants.
 type InputTextGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the InputText object.
@@ -145,7 +145,7 @@ func (i *InputText) GetDescendants(opts *InputTextGetDescendantsOpts) *Control {
 // InputTextGetDescendantsToRefOpts contains optional parameters for InputText.GetDescendantsToRef.
 type InputTextGetDescendantsToRefOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendantsToRef calls the GetDescendantsToRef method on the InputText object.

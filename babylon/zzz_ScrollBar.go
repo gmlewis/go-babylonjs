@@ -108,7 +108,7 @@ func (s *ScrollBar) GetClassName() string {
 // ScrollBarGetDescendantsOpts contains optional parameters for ScrollBar.GetDescendants.
 type ScrollBarGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the ScrollBar object.
@@ -139,7 +139,7 @@ func (s *ScrollBar) GetDescendants(opts *ScrollBarGetDescendantsOpts) *Control {
 // ScrollBarGetDescendantsToRefOpts contains optional parameters for ScrollBar.GetDescendantsToRef.
 type ScrollBarGetDescendantsToRefOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendantsToRef calls the GetDescendantsToRef method on the ScrollBar object.

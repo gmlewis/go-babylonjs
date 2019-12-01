@@ -42,9 +42,9 @@ type NewAnimatableOpts struct {
 	ToFrame         *float64
 	LoopAnimation   *bool
 	SpeedRatio      *float64
-	OnAnimationEnd  *func()
+	OnAnimationEnd  func()
 	Animations      *Animation
-	OnAnimationLoop *func()
+	OnAnimationLoop func()
 }
 
 // NewAnimatable returns a new Animatable object.
@@ -207,7 +207,7 @@ func (a *Animatable) Restart() {
 // AnimatableStopOpts contains optional parameters for Animatable.Stop.
 type AnimatableStopOpts struct {
 	AnimationName *string
-	TargetMask    *func()
+	TargetMask    func()
 }
 
 // Stop calls the Stop method on the Animatable object.

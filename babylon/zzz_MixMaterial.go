@@ -190,9 +190,9 @@ func (m *MixMaterial) Dispose(opts *MixMaterialDisposeOpts) {
 
 // MixMaterialForceCompilationOpts contains optional parameters for MixMaterial.ForceCompilation.
 type MixMaterialForceCompilationOpts struct {
-	OnCompiled *func()
+	OnCompiled func()
 	Options    js.Value
-	OnError    *func()
+	OnError    func()
 }
 
 // ForceCompilation calls the ForceCompilation method on the MixMaterial object.
@@ -212,11 +212,7 @@ func (m *MixMaterial) ForceCompilation(mesh *AbstractMesh, opts *MixMaterialForc
 	} else {
 		args = append(args, opts.OnCompiled)
 	}
-	if opts.Options == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Options)
-	}
+	args = append(args, opts.Options)
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
@@ -243,11 +239,7 @@ func (m *MixMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *MixMateria
 
 	args = append(args, mesh.JSObject())
 
-	if opts.Options == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Options)
-	}
+	args = append(args, opts.Options)
 
 	retVal := m.p.Call("forceCompilationAsync", args...)
 	return PromiseFromJSObject(retVal, m.ctx)

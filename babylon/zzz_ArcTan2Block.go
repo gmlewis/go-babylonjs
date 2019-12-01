@@ -131,7 +131,7 @@ func (a *ArcTan2Block) Clone(scene *Scene, opts *ArcTan2BlockCloneOpts) *NodeMat
 
 // ArcTan2BlockConnectToOpts contains optional parameters for ArcTan2Block.ConnectTo.
 type ArcTan2BlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the ArcTan2Block object.
@@ -396,11 +396,7 @@ func (a *ArcTan2Block) RegisterInput(name string, jsType js.Value, opts *ArcTan2
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := a.p.Call("registerInput", args...)
 	return ArcTan2BlockFromJSObject(retVal, a.ctx)
@@ -424,11 +420,7 @@ func (a *ArcTan2Block) RegisterOutput(name string, jsType js.Value, opts *ArcTan
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := a.p.Call("registerOutput", args...)
 	return ArcTan2BlockFromJSObject(retVal, a.ctx)

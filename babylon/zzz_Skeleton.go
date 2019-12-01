@@ -57,7 +57,7 @@ func (ba *Babylon) NewSkeleton(name string, id string, scene *Scene) *Skeleton {
 type SkeletonBeginAnimationOpts struct {
 	Loop           *bool
 	SpeedRatio     *float64
-	OnAnimationEnd *func()
+	OnAnimationEnd func()
 }
 
 // BeginAnimation calls the BeginAnimation method on the Skeleton object.
@@ -293,7 +293,11 @@ func (s *Skeleton) GetBoneIndexByName(name string) float64 {
 func (s *Skeleton) GetChildren() []*Bone {
 
 	retVal := s.p.Call("getChildren")
-	return retVal
+	result := []*Bone{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, BoneFromJSObject(retVal.Index(ri), s.ctx))
+	}
+	return result
 }
 
 // GetClassName calls the GetClassName method on the Skeleton object.

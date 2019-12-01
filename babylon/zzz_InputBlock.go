@@ -54,16 +54,8 @@ func (ba *Babylon) NewInputBlock(name string, opts *NewInputBlockOpts) *InputBlo
 
 	args = append(args, name)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
-	if opts.Type == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Type)
-	}
+	args = append(args, opts.Target)
+	args = append(args, opts.Type)
 
 	p := ba.ctx.Get("InputBlock").New(args...)
 	return InputBlockFromJSObject(p, ba.ctx)
@@ -163,7 +155,7 @@ func (i *InputBlock) Clone(scene *Scene, opts *InputBlockCloneOpts) *NodeMateria
 
 // InputBlockConnectToOpts contains optional parameters for InputBlock.ConnectTo.
 type InputBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the InputBlock object.
@@ -428,11 +420,7 @@ func (i *InputBlock) RegisterInput(name string, jsType js.Value, opts *InputBloc
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := i.p.Call("registerInput", args...)
 	return InputBlockFromJSObject(retVal, i.ctx)
@@ -456,11 +444,7 @@ func (i *InputBlock) RegisterOutput(name string, jsType js.Value, opts *InputBlo
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := i.p.Call("registerOutput", args...)
 	return InputBlockFromJSObject(retVal, i.ctx)

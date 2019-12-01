@@ -134,7 +134,7 @@ func (m *MultiLine) GetClassName() string {
 // MultiLineGetDescendantsOpts contains optional parameters for MultiLine.GetDescendants.
 type MultiLineGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the MultiLine object.
@@ -165,7 +165,7 @@ func (m *MultiLine) GetDescendants(opts *MultiLineGetDescendantsOpts) *Control {
 // MultiLineGetDescendantsToRefOpts contains optional parameters for MultiLine.GetDescendantsToRef.
 type MultiLineGetDescendantsToRefOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendantsToRef calls the GetDescendantsToRef method on the MultiLine object.

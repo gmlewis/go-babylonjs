@@ -102,7 +102,11 @@ func (m *MeshExploder) GetClassName() string {
 func (m *MeshExploder) GetMeshes() []*Mesh {
 
 	retVal := m.p.Call("getMeshes")
-	return retVal
+	result := []*Mesh{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, MeshFromJSObject(retVal.Index(ri), m.ctx))
+	}
+	return result
 }
 
 /*

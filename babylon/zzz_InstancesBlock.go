@@ -133,7 +133,7 @@ func (i *InstancesBlock) Clone(scene *Scene, opts *InstancesBlockCloneOpts) *Nod
 
 // InstancesBlockConnectToOpts contains optional parameters for InstancesBlock.ConnectTo.
 type InstancesBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the InstancesBlock object.
@@ -398,11 +398,7 @@ func (i *InstancesBlock) RegisterInput(name string, jsType js.Value, opts *Insta
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := i.p.Call("registerInput", args...)
 	return InstancesBlockFromJSObject(retVal, i.ctx)
@@ -426,11 +422,7 @@ func (i *InstancesBlock) RegisterOutput(name string, jsType js.Value, opts *Inst
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := i.p.Call("registerOutput", args...)
 	return InstancesBlockFromJSObject(retVal, i.ctx)

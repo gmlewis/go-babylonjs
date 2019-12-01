@@ -7,7 +7,7 @@ import (
 )
 
 // KHR_materials_pbrSpecularGlossiness represents a babylon.js KHR_materials_pbrSpecularGlossiness.
-// &lt;a href=&#34;https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Khronos/KHR_materials_pbrSpecularGlossiness&#34;&gt;Specification&lt;/a&gt;
+// <a href="https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Khronos/KHR_materials_pbrSpecularGlossiness">Specification</a>
 type KHR_materials_pbrSpecularGlossiness struct {
 	p   js.Value
 	ctx js.Value

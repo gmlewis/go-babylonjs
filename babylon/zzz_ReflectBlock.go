@@ -131,7 +131,7 @@ func (r *ReflectBlock) Clone(scene *Scene, opts *ReflectBlockCloneOpts) *NodeMat
 
 // ReflectBlockConnectToOpts contains optional parameters for ReflectBlock.ConnectTo.
 type ReflectBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the ReflectBlock object.
@@ -396,11 +396,7 @@ func (r *ReflectBlock) RegisterInput(name string, jsType js.Value, opts *Reflect
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := r.p.Call("registerInput", args...)
 	return ReflectBlockFromJSObject(retVal, r.ctx)
@@ -424,11 +420,7 @@ func (r *ReflectBlock) RegisterOutput(name string, jsType js.Value, opts *Reflec
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := r.p.Call("registerOutput", args...)
 	return ReflectBlockFromJSObject(retVal, r.ctx)

@@ -190,9 +190,9 @@ func (f *FluentMaterial) Dispose(opts *FluentMaterialDisposeOpts) {
 
 // FluentMaterialForceCompilationOpts contains optional parameters for FluentMaterial.ForceCompilation.
 type FluentMaterialForceCompilationOpts struct {
-	OnCompiled *func()
+	OnCompiled func()
 	Options    js.Value
-	OnError    *func()
+	OnError    func()
 }
 
 // ForceCompilation calls the ForceCompilation method on the FluentMaterial object.
@@ -212,11 +212,7 @@ func (f *FluentMaterial) ForceCompilation(mesh *AbstractMesh, opts *FluentMateri
 	} else {
 		args = append(args, opts.OnCompiled)
 	}
-	if opts.Options == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Options)
-	}
+	args = append(args, opts.Options)
 	if opts.OnError == nil {
 		args = append(args, js.Undefined())
 	} else {
@@ -243,11 +239,7 @@ func (f *FluentMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *FluentM
 
 	args = append(args, mesh.JSObject())
 
-	if opts.Options == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Options)
-	}
+	args = append(args, opts.Options)
 
 	retVal := f.p.Call("forceCompilationAsync", args...)
 	return PromiseFromJSObject(retVal, f.ctx)

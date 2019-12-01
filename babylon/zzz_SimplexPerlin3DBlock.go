@@ -131,7 +131,7 @@ func (s *SimplexPerlin3DBlock) Clone(scene *Scene, opts *SimplexPerlin3DBlockClo
 
 // SimplexPerlin3DBlockConnectToOpts contains optional parameters for SimplexPerlin3DBlock.ConnectTo.
 type SimplexPerlin3DBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the SimplexPerlin3DBlock object.
@@ -396,11 +396,7 @@ func (s *SimplexPerlin3DBlock) RegisterInput(name string, jsType js.Value, opts 
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := s.p.Call("registerInput", args...)
 	return SimplexPerlin3DBlockFromJSObject(retVal, s.ctx)
@@ -424,11 +420,7 @@ func (s *SimplexPerlin3DBlock) RegisterOutput(name string, jsType js.Value, opts
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := s.p.Call("registerOutput", args...)
 	return SimplexPerlin3DBlockFromJSObject(retVal, s.ctx)

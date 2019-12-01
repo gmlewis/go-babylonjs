@@ -7,7 +7,7 @@ import (
 )
 
 // KHR_mesh_quantization represents a babylon.js KHR_mesh_quantization.
-// &lt;a href=&#34;https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Khronos/KHR_mesh_quantization&#34;&gt;Specification&lt;/a&gt;
+// <a href="https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Khronos/KHR_mesh_quantization">Specification</a>
 type KHR_mesh_quantization struct {
 	p   js.Value
 	ctx js.Value

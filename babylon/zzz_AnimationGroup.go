@@ -79,7 +79,7 @@ func (a *AnimationGroup) AddTargetedAnimation(animation *Animation, target inter
 
 // AnimationGroupCloneOpts contains optional parameters for AnimationGroup.Clone.
 type AnimationGroupCloneOpts struct {
-	TargetConverter *func()
+	TargetConverter func()
 }
 
 // Clone calls the Clone method on the AnimationGroup object.

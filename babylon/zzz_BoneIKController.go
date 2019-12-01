@@ -40,7 +40,7 @@ func BoneIKControllerArrayToJSArray(array []*BoneIKController) []interface{} {
 
 // NewBoneIKControllerOpts contains optional parameters for NewBoneIKController.
 type NewBoneIKControllerOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // NewBoneIKController returns a new BoneIKController object.

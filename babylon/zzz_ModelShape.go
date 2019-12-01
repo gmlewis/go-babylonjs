@@ -8,7 +8,7 @@ import (
 
 // ModelShape represents a babylon.js ModelShape.
 // Represents the shape of the model used by one particle of a solid particle system.
-// SPS internal tool, don&amp;#39;t use it manually.
+// SPS internal tool, don&#39;t use it manually.
 type ModelShape struct {
 	p   js.Value
 	ctx js.Value

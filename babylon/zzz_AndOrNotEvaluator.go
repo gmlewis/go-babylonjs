@@ -7,7 +7,7 @@ import (
 )
 
 // AndOrNotEvaluator represents a babylon.js AndOrNotEvaluator.
-// Class used to evalaute queries containing &lt;code&gt;and&lt;/code&gt; and &lt;code&gt;or&lt;/code&gt; operators
+// Class used to evalaute queries containing <code>and</code> and <code>or</code> operators
 type AndOrNotEvaluator struct {
 	p   js.Value
 	ctx js.Value

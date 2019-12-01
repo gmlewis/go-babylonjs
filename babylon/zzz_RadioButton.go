@@ -124,7 +124,7 @@ func (r *RadioButton) GetClassName() string {
 // RadioButtonGetDescendantsOpts contains optional parameters for RadioButton.GetDescendants.
 type RadioButtonGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the RadioButton object.
@@ -155,7 +155,7 @@ func (r *RadioButton) GetDescendants(opts *RadioButtonGetDescendantsOpts) *Contr
 // RadioButtonGetDescendantsToRefOpts contains optional parameters for RadioButton.GetDescendantsToRef.
 type RadioButtonGetDescendantsToRefOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendantsToRef calls the GetDescendantsToRef method on the RadioButton object.

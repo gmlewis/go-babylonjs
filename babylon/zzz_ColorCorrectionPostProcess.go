@@ -8,7 +8,7 @@ import (
 
 // ColorCorrectionPostProcess represents a babylon.js ColorCorrectionPostProcess.
 // This post-process allows the modification of rendered colors by using
-// a &amp;#39;look-up table&amp;#39; (LUT). This effect is also called Color Grading.
+// a &#39;look-up table&#39; (LUT). This effect is also called Color Grading.
 //
 // The object needs to be provided an url to a texture containing the color
 // look-up table: the texture must be 256 pixels wide and 16 pixels high.
@@ -242,8 +242,8 @@ type ColorCorrectionPostProcessUpdateEffectOpts struct {
 	Uniforms        *string
 	Samplers        *string
 	IndexParameters *interface{}
-	OnCompiled      *func()
-	OnError         *func()
+	OnCompiled      func()
+	OnError         func()
 }
 
 // UpdateEffect calls the UpdateEffect method on the ColorCorrectionPostProcess object.

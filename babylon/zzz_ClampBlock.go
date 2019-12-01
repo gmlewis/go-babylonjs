@@ -131,7 +131,7 @@ func (c *ClampBlock) Clone(scene *Scene, opts *ClampBlockCloneOpts) *NodeMateria
 
 // ClampBlockConnectToOpts contains optional parameters for ClampBlock.ConnectTo.
 type ClampBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the ClampBlock object.
@@ -396,11 +396,7 @@ func (c *ClampBlock) RegisterInput(name string, jsType js.Value, opts *ClampBloc
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := c.p.Call("registerInput", args...)
 	return ClampBlockFromJSObject(retVal, c.ctx)
@@ -424,11 +420,7 @@ func (c *ClampBlock) RegisterOutput(name string, jsType js.Value, opts *ClampBlo
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := c.p.Call("registerOutput", args...)
 	return ClampBlockFromJSObject(retVal, c.ctx)

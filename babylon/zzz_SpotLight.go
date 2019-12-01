@@ -9,9 +9,9 @@ import (
 // SpotLight represents a babylon.js SpotLight.
 // A spot light is defined by a position, a direction, an angle, and an exponent.
 // These values define a cone of light starting from the position, emitting toward the direction.
-// The angle, in radians, defines the size (field of illumination) of the spotlight&amp;#39;s conical beam,
+// The angle, in radians, defines the size (field of illumination) of the spotlight&#39;s conical beam,
 // and the exponent defines the speed of the decay of the light with distance (reach).
-// Documentation: &lt;a href=&#34;https://doc.babylonjs.com/babylon101/lights&#34;&gt;https://doc.babylonjs.com/babylon101/lights&lt;/a&gt;
+// Documentation: <a href="https://doc.babylonjs.com/babylon101/lights">https://doc.babylonjs.com/babylon101/lights</a>
 type SpotLight struct {
 	*ShadowLight
 	ctx js.Value
@@ -102,7 +102,7 @@ func (s *SpotLight) AddNodeConstructor(jsType string, constructorFunc js.Value) 
 type SpotLightBeginAnimationOpts struct {
 	Loop           *bool
 	SpeedRatio     *float64
-	OnAnimationEnd *func()
+	OnAnimationEnd func()
 }
 
 // BeginAnimation calls the BeginAnimation method on the SpotLight object.
@@ -391,7 +391,7 @@ func (s *SpotLight) GetBehaviorByName(name string) js.Value {
 // SpotLightGetChildMeshesOpts contains optional parameters for SpotLight.GetChildMeshes.
 type SpotLightGetChildMeshesOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetChildMeshes calls the GetChildMeshes method on the SpotLight object.
@@ -421,7 +421,7 @@ func (s *SpotLight) GetChildMeshes(opts *SpotLightGetChildMeshesOpts) *AbstractM
 
 // SpotLightGetChildrenOpts contains optional parameters for SpotLight.GetChildren.
 type SpotLightGetChildrenOpts struct {
-	Predicate             *func()
+	Predicate             func()
 	DirectDescendantsOnly *bool
 }
 
@@ -512,7 +512,7 @@ func (s *SpotLight) GetDepthScale() float64 {
 // SpotLightGetDescendantsOpts contains optional parameters for SpotLight.GetDescendants.
 type SpotLightGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the SpotLight object.
@@ -552,7 +552,7 @@ func (s *SpotLight) GetEngine() *Engine {
 // SpotLightGetHierarchyBoundingVectorsOpts contains optional parameters for SpotLight.GetHierarchyBoundingVectors.
 type SpotLightGetHierarchyBoundingVectorsOpts struct {
 	IncludeDescendants *bool
-	Predicate          *func()
+	Predicate          func()
 }
 
 // GetHierarchyBoundingVectors calls the GetHierarchyBoundingVectors method on the SpotLight object.

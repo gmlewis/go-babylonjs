@@ -131,7 +131,7 @@ func (w *WaveBlock) Clone(scene *Scene, opts *WaveBlockCloneOpts) *NodeMaterialB
 
 // WaveBlockConnectToOpts contains optional parameters for WaveBlock.ConnectTo.
 type WaveBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the WaveBlock object.
@@ -396,11 +396,7 @@ func (w *WaveBlock) RegisterInput(name string, jsType js.Value, opts *WaveBlockR
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := w.p.Call("registerInput", args...)
 	return WaveBlockFromJSObject(retVal, w.ctx)
@@ -424,11 +420,7 @@ func (w *WaveBlock) RegisterOutput(name string, jsType js.Value, opts *WaveBlock
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := w.p.Call("registerOutput", args...)
 	return WaveBlockFromJSObject(retVal, w.ctx)

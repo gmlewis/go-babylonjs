@@ -97,7 +97,7 @@ func (s *SpriteManager) Dispose() {
 
 // SpriteManagerIntersectsOpts contains optional parameters for SpriteManager.Intersects.
 type SpriteManagerIntersectsOpts struct {
-	Predicate *func()
+	Predicate func()
 	FastCheck *bool
 }
 
@@ -131,7 +131,7 @@ func (s *SpriteManager) Intersects(ray *Ray, camera *Camera, opts *SpriteManager
 
 // SpriteManagerMultiIntersectsOpts contains optional parameters for SpriteManager.MultiIntersects.
 type SpriteManagerMultiIntersectsOpts struct {
-	Predicate *func()
+	Predicate func()
 }
 
 // MultiIntersects calls the MultiIntersects method on the SpriteManager object.

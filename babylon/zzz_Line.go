@@ -108,7 +108,7 @@ func (l *Line) GetClassName() string {
 // LineGetDescendantsOpts contains optional parameters for Line.GetDescendants.
 type LineGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the Line object.
@@ -139,7 +139,7 @@ func (l *Line) GetDescendants(opts *LineGetDescendantsOpts) *Control {
 // LineGetDescendantsToRefOpts contains optional parameters for Line.GetDescendantsToRef.
 type LineGetDescendantsToRefOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendantsToRef calls the GetDescendantsToRef method on the Line object.

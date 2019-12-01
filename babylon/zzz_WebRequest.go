@@ -85,11 +85,7 @@ func (w *WebRequest) Send(opts *WebRequestSendOpts) {
 
 	args := make([]interface{}, 0, 0+1)
 
-	if opts.Body == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Body)
-	}
+	args = append(args, opts.Body)
 
 	w.p.Call("send", args...)
 }

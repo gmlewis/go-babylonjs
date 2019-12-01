@@ -43,8 +43,8 @@ type NewTextureOpts struct {
 	NoMipmap     *bool
 	InvertY      *bool
 	SamplingMode *float64
-	OnLoad       *func()
-	OnError      *func()
+	OnLoad       func()
+	OnError      func()
 	Buffer       *string
 	DeleteBuffer *bool
 	Format       *float64
@@ -128,8 +128,8 @@ type TextureCreateFromBase64StringOpts struct {
 	NoMipmap     *bool
 	InvertY      *bool
 	SamplingMode *float64
-	OnLoad       *func()
-	OnError      *func()
+	OnLoad       func()
+	OnError      func()
 	Format       *float64
 }
 
@@ -293,8 +293,8 @@ type TextureLoadFromDataStringOpts struct {
 	NoMipmap     *bool
 	InvertY      *bool
 	SamplingMode *float64
-	OnLoad       *func()
-	OnError      *func()
+	OnLoad       func()
+	OnError      func()
 	Format       *float64
 }
 
@@ -394,11 +394,7 @@ func (t *Texture) ReadPixels(opts *TextureReadPixelsOpts) js.Value {
 	} else {
 		args = append(args, *opts.Level)
 	}
-	if opts.Buffer == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Buffer)
-	}
+	args = append(args, opts.Buffer)
 
 	retVal := t.p.Call("readPixels", args...)
 	return retVal
@@ -457,7 +453,7 @@ func (t *Texture) UpdateSamplingMode(samplingMode float64) {
 // TextureUpdateURLOpts contains optional parameters for Texture.UpdateURL.
 type TextureUpdateURLOpts struct {
 	Buffer *string
-	OnLoad *func()
+	OnLoad func()
 }
 
 // UpdateURL calls the UpdateURL method on the Texture object.

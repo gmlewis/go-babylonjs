@@ -7,8 +7,8 @@ import (
 )
 
 // KHR_materials_clearcoat represents a babylon.js KHR_materials_clearcoat.
-// &lt;a href=&#34;https://github.com/KhronosGroup/glTF/pull/1677&#34;&gt;Proposed Specification&lt;/a&gt;
-// &lt;a href=&#34;https://www.babylonjs-playground.com/frame.html#7F7PN6#8&#34;&gt;Playground Sample&lt;/a&gt;
+// <a href="https://github.com/KhronosGroup/glTF/pull/1677">Proposed Specification</a>
+// <a href="https://www.babylonjs-playground.com/frame.html#7F7PN6#8">Playground Sample</a>
 // !!! Experimental Extension Subject to Changes !!!
 type KHR_materials_clearcoat struct {
 	p   js.Value

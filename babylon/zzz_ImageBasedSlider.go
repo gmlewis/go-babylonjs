@@ -108,7 +108,7 @@ func (i *ImageBasedSlider) GetClassName() string {
 // ImageBasedSliderGetDescendantsOpts contains optional parameters for ImageBasedSlider.GetDescendants.
 type ImageBasedSliderGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the ImageBasedSlider object.
@@ -139,7 +139,7 @@ func (i *ImageBasedSlider) GetDescendants(opts *ImageBasedSliderGetDescendantsOp
 // ImageBasedSliderGetDescendantsToRefOpts contains optional parameters for ImageBasedSlider.GetDescendantsToRef.
 type ImageBasedSliderGetDescendantsToRefOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendantsToRef calls the GetDescendantsToRef method on the ImageBasedSlider object.

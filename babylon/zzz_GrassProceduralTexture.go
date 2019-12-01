@@ -85,8 +85,8 @@ type GrassProceduralTextureCreateFromBase64StringOpts struct {
 	NoMipmap     *bool
 	InvertY      *bool
 	SamplingMode *float64
-	OnLoad       *func()
-	OnError      *func()
+	OnLoad       func()
+	OnError      func()
 	Format       *float64
 }
 
@@ -277,8 +277,8 @@ type GrassProceduralTextureLoadFromDataStringOpts struct {
 	NoMipmap     *bool
 	InvertY      *bool
 	SamplingMode *float64
-	OnLoad       *func()
-	OnError      *func()
+	OnLoad       func()
+	OnError      func()
 	Format       *float64
 }
 
@@ -378,11 +378,7 @@ func (g *GrassProceduralTexture) ReadPixels(opts *GrassProceduralTextureReadPixe
 	} else {
 		args = append(args, *opts.Level)
 	}
-	if opts.Buffer == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Buffer)
-	}
+	args = append(args, opts.Buffer)
 
 	retVal := g.p.Call("readPixels", args...)
 	return retVal
@@ -640,7 +636,7 @@ func (g *GrassProceduralTexture) UpdateShaderUniforms() {
 // GrassProceduralTextureUpdateURLOpts contains optional parameters for GrassProceduralTexture.UpdateURL.
 type GrassProceduralTextureUpdateURLOpts struct {
 	Buffer *string
-	OnLoad *func()
+	OnLoad func()
 }
 
 // UpdateURL calls the UpdateURL method on the GrassProceduralTexture object.

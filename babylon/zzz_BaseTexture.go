@@ -184,11 +184,7 @@ func (b *BaseTexture) ReadPixels(opts *BaseTextureReadPixelsOpts) js.Value {
 	} else {
 		args = append(args, *opts.Level)
 	}
-	if opts.Buffer == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Buffer)
-	}
+	args = append(args, opts.Buffer)
 
 	retVal := b.p.Call("readPixels", args...)
 	return retVal

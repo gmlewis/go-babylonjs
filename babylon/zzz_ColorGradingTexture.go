@@ -12,7 +12,7 @@ import (
 // from sepia, black and white to sixties or futuristic rendering...
 //
 // The only supported format is currently 3dl.
-// More information on LUT: &lt;a href=&#34;https://en.wikipedia.org/wiki/3D_lookup_table&#34;&gt;https://en.wikipedia.org/wiki/3D_lookup_table&lt;/a&gt;
+// More information on LUT: <a href="https://en.wikipedia.org/wiki/3D_lookup_table">https://en.wikipedia.org/wiki/3D_lookup_table</a>
 type ColorGradingTexture struct {
 	*BaseTexture
 	ctx js.Value
@@ -202,11 +202,7 @@ func (c *ColorGradingTexture) ReadPixels(opts *ColorGradingTextureReadPixelsOpts
 	} else {
 		args = append(args, *opts.Level)
 	}
-	if opts.Buffer == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Buffer)
-	}
+	args = append(args, opts.Buffer)
 
 	retVal := c.p.Call("readPixels", args...)
 	return retVal

@@ -7,7 +7,7 @@ import (
 )
 
 // GizmoManager represents a babylon.js GizmoManager.
-// Helps setup gizmo&amp;#39;s in the scene to rotate/scale/position meshes
+// Helps setup gizmo&#39;s in the scene to rotate/scale/position meshes
 type GizmoManager struct {
 	p   js.Value
 	ctx js.Value

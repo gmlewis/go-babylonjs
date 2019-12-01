@@ -40,7 +40,7 @@ func BoneLookControllerArrayToJSArray(array []*BoneLookController) []interface{}
 
 // NewBoneLookControllerOpts contains optional parameters for NewBoneLookController.
 type NewBoneLookControllerOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // NewBoneLookController returns a new BoneLookController object.

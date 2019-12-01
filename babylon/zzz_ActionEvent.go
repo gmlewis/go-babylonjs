@@ -90,11 +90,7 @@ func (a *ActionEvent) CreateNew(source *AbstractMesh, opts *ActionEventCreateNew
 
 	args = append(args, source.JSObject())
 
-	if opts.Evt == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Evt)
-	}
+	args = append(args, opts.Evt)
 	if opts.AdditionalData == nil {
 		args = append(args, js.Undefined())
 	} else {
@@ -124,11 +120,7 @@ func (a *ActionEvent) CreateNewFromPrimitive(prim interface{}, pointerPos *Vecto
 	args = append(args, prim)
 	args = append(args, pointerPos.JSObject())
 
-	if opts.Evt == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Evt)
-	}
+	args = append(args, opts.Evt)
 	if opts.AdditionalData == nil {
 		args = append(args, js.Undefined())
 	} else {
@@ -172,11 +164,7 @@ func (a *ActionEvent) CreateNewFromSprite(source *Sprite, scene *Scene, opts *Ac
 	args = append(args, source.JSObject())
 	args = append(args, scene.JSObject())
 
-	if opts.Evt == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Evt)
-	}
+	args = append(args, opts.Evt)
 	if opts.AdditionalData == nil {
 		args = append(args, js.Undefined())
 	} else {

@@ -51,11 +51,7 @@ func (ba *Babylon) NewXmlLoader(opts *NewXmlLoaderOpts) *XmlLoader {
 
 	args := make([]interface{}, 0, 0+1)
 
-	if opts.ParentClass == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.ParentClass)
-	}
+	args = append(args, opts.ParentClass)
 
 	p := ba.ctx.Get("XmlLoader").New(args...)
 	return XmlLoaderFromJSObject(p, ba.ctx)

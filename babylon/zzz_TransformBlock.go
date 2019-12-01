@@ -131,7 +131,7 @@ func (t *TransformBlock) Clone(scene *Scene, opts *TransformBlockCloneOpts) *Nod
 
 // TransformBlockConnectToOpts contains optional parameters for TransformBlock.ConnectTo.
 type TransformBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the TransformBlock object.
@@ -396,11 +396,7 @@ func (t *TransformBlock) RegisterInput(name string, jsType js.Value, opts *Trans
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := t.p.Call("registerInput", args...)
 	return TransformBlockFromJSObject(retVal, t.ctx)
@@ -424,11 +420,7 @@ func (t *TransformBlock) RegisterOutput(name string, jsType js.Value, opts *Tran
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := t.p.Call("registerOutput", args...)
 	return TransformBlockFromJSObject(retVal, t.ctx)

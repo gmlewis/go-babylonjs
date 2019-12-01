@@ -131,7 +131,7 @@ func (m *MaxBlock) Clone(scene *Scene, opts *MaxBlockCloneOpts) *NodeMaterialBlo
 
 // MaxBlockConnectToOpts contains optional parameters for MaxBlock.ConnectTo.
 type MaxBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the MaxBlock object.
@@ -396,11 +396,7 @@ func (m *MaxBlock) RegisterInput(name string, jsType js.Value, opts *MaxBlockReg
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := m.p.Call("registerInput", args...)
 	return MaxBlockFromJSObject(retVal, m.ctx)
@@ -424,11 +420,7 @@ func (m *MaxBlock) RegisterOutput(name string, jsType js.Value, opts *MaxBlockRe
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := m.p.Call("registerOutput", args...)
 	return MaxBlockFromJSObject(retVal, m.ctx)

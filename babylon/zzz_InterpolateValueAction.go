@@ -44,7 +44,7 @@ type NewInterpolateValueActionOpts struct {
 	Duration            *float64
 	Condition           *Condition
 	StopOtherAnimations *bool
-	OnInterpolationDone *func()
+	OnInterpolationDone func()
 }
 
 // NewInterpolateValueAction returns a new InterpolateValueAction object.

@@ -131,7 +131,7 @@ func (f *FogBlock) Clone(scene *Scene, opts *FogBlockCloneOpts) *NodeMaterialBlo
 
 // FogBlockConnectToOpts contains optional parameters for FogBlock.ConnectTo.
 type FogBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the FogBlock object.
@@ -382,11 +382,7 @@ func (f *FogBlock) RegisterInput(name string, jsType js.Value, opts *FogBlockReg
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := f.p.Call("registerInput", args...)
 	return FogBlockFromJSObject(retVal, f.ctx)
@@ -410,11 +406,7 @@ func (f *FogBlock) RegisterOutput(name string, jsType js.Value, opts *FogBlockRe
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := f.p.Call("registerOutput", args...)
 	return FogBlockFromJSObject(retVal, f.ctx)

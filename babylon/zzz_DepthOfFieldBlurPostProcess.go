@@ -10,7 +10,7 @@ import (
 // The DepthOfFieldBlurPostProcess applied a blur in a give direction.
 // This blur differs from the standard BlurPostProcess as it attempts to avoid blurring pixels
 // based on samples that have a large difference in distance than the center pixel.
-// See section 2.6.2 &lt;a href=&#34;http://fileadmin.cs.lth.se/cs/education/edan35/lectures/12dof.pdf&#34;&gt;http://fileadmin.cs.lth.se/cs/education/edan35/lectures/12dof.pdf&lt;/a&gt;
+// See section 2.6.2 <a href="http://fileadmin.cs.lth.se/cs/education/edan35/lectures/12dof.pdf">http://fileadmin.cs.lth.se/cs/education/edan35/lectures/12dof.pdf</a>
 type DepthOfFieldBlurPostProcess struct {
 	*BlurPostProcess
 	ctx js.Value
@@ -258,8 +258,8 @@ type DepthOfFieldBlurPostProcessUpdateEffectOpts struct {
 	Uniforms        *string
 	Samplers        *string
 	IndexParameters *interface{}
-	OnCompiled      *func()
-	OnError         *func()
+	OnCompiled      func()
+	OnError         func()
 }
 
 // UpdateEffect calls the UpdateEffect method on the DepthOfFieldBlurPostProcess object.

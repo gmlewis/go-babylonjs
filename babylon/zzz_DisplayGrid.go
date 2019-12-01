@@ -108,7 +108,7 @@ func (d *DisplayGrid) GetClassName() string {
 // DisplayGridGetDescendantsOpts contains optional parameters for DisplayGrid.GetDescendants.
 type DisplayGridGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the DisplayGrid object.
@@ -139,7 +139,7 @@ func (d *DisplayGrid) GetDescendants(opts *DisplayGridGetDescendantsOpts) *Contr
 // DisplayGridGetDescendantsToRefOpts contains optional parameters for DisplayGrid.GetDescendantsToRef.
 type DisplayGridGetDescendantsToRefOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendantsToRef calls the GetDescendantsToRef method on the DisplayGrid object.

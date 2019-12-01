@@ -321,11 +321,7 @@ func (r *RawCubeTexture) ReadPixels(opts *RawCubeTextureReadPixelsOpts) js.Value
 	} else {
 		args = append(args, *opts.Level)
 	}
-	if opts.Buffer == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Buffer)
-	}
+	args = append(args, opts.Buffer)
 
 	retVal := r.p.Call("readPixels", args...)
 	return retVal
@@ -464,7 +460,7 @@ func (r *RawCubeTexture) UpdateSamplingMode(samplingMode float64) {
 // RawCubeTextureUpdateURLOpts contains optional parameters for RawCubeTexture.UpdateURL.
 type RawCubeTextureUpdateURLOpts struct {
 	ForcedExtension *string
-	OnLoad          *func()
+	OnLoad          func()
 }
 
 // UpdateURL calls the UpdateURL method on the RawCubeTexture object.

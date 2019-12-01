@@ -9,7 +9,7 @@ import (
 // ShadowGenerator represents a babylon.js ShadowGenerator.
 // Default implementation IShadowGenerator.
 // This is the main object responsible of generating shadows in the framework.
-// Documentation: &lt;a href=&#34;https://doc.babylonjs.com/babylon101/shadows&#34;&gt;https://doc.babylonjs.com/babylon101/shadows&lt;/a&gt;
+// Documentation: <a href="https://doc.babylonjs.com/babylon101/shadows">https://doc.babylonjs.com/babylon101/shadows</a>
 type ShadowGenerator struct {
 	p   js.Value
 	ctx js.Value
@@ -116,8 +116,8 @@ func (s *ShadowGenerator) Dispose() {
 
 // ShadowGeneratorForceCompilationOpts contains optional parameters for ShadowGenerator.ForceCompilation.
 type ShadowGeneratorForceCompilationOpts struct {
-	OnCompiled *func()
-	Options    js.Value
+	OnCompiled func()
+	Options    map[string]interface{}
 }
 
 // ForceCompilation calls the ForceCompilation method on the ShadowGenerator object.
@@ -146,7 +146,7 @@ func (s *ShadowGenerator) ForceCompilation(opts *ShadowGeneratorForceCompilation
 
 // ShadowGeneratorForceCompilationAsyncOpts contains optional parameters for ShadowGenerator.ForceCompilationAsync.
 type ShadowGeneratorForceCompilationAsyncOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ForceCompilationAsync calls the ForceCompilationAsync method on the ShadowGenerator object.

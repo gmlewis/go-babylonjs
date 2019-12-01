@@ -7,7 +7,7 @@ import (
 )
 
 // LensFlare represents a babylon.js LensFlare.
-// This represents one of the lens effect in a &lt;code&gt;lensFlareSystem&lt;/code&gt;.
+// This represents one of the lens effect in a <code>lensFlareSystem</code>.
 // It controls one of the indiviual texture used in the effect.
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_lens_flares

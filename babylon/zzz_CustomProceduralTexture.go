@@ -7,7 +7,7 @@ import (
 )
 
 // CustomProceduralTexture represents a babylon.js CustomProceduralTexture.
-// Procedural texturing is a way to programmatically create a texture. There are 2 types of procedural textures: code-only, and code that references some classic 2D images, sometimes called &amp;#39;refMaps&amp;#39; or &amp;#39;sampler&amp;#39; images.
+// Procedural texturing is a way to programmatically create a texture. There are 2 types of procedural textures: code-only, and code that references some classic 2D images, sometimes called &#39;refMaps&#39; or &#39;sampler&#39; images.
 // Custom Procedural textures are the easiest way to create your own procedural in your application.
 //
 // See: http://doc.babylonjs.com/how_to/how_to_use_procedural_textures#creating-custom-procedural-textures
@@ -89,8 +89,8 @@ type CustomProceduralTextureCreateFromBase64StringOpts struct {
 	NoMipmap     *bool
 	InvertY      *bool
 	SamplingMode *float64
-	OnLoad       *func()
-	OnError      *func()
+	OnLoad       func()
+	OnError      func()
 	Format       *float64
 }
 
@@ -281,8 +281,8 @@ type CustomProceduralTextureLoadFromDataStringOpts struct {
 	NoMipmap     *bool
 	InvertY      *bool
 	SamplingMode *float64
-	OnLoad       *func()
-	OnError      *func()
+	OnLoad       func()
+	OnError      func()
 	Format       *float64
 }
 
@@ -382,11 +382,7 @@ func (c *CustomProceduralTexture) ReadPixels(opts *CustomProceduralTextureReadPi
 	} else {
 		args = append(args, *opts.Level)
 	}
-	if opts.Buffer == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Buffer)
-	}
+	args = append(args, opts.Buffer)
 
 	retVal := c.p.Call("readPixels", args...)
 	return retVal
@@ -652,7 +648,7 @@ func (c *CustomProceduralTexture) UpdateTextures() {
 // CustomProceduralTextureUpdateURLOpts contains optional parameters for CustomProceduralTexture.UpdateURL.
 type CustomProceduralTextureUpdateURLOpts struct {
 	Buffer *string
-	OnLoad *func()
+	OnLoad func()
 }
 
 // UpdateURL calls the UpdateURL method on the CustomProceduralTexture object.

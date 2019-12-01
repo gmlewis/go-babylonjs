@@ -108,7 +108,7 @@ func (o *OculusTouchController) GetForwardRay(opts *OculusTouchControllerGetForw
 
 // OculusTouchControllerInitControllerMeshOpts contains optional parameters for OculusTouchController.InitControllerMesh.
 type OculusTouchControllerInitControllerMeshOpts struct {
-	MeshLoaded *func()
+	MeshLoaded func()
 }
 
 // InitControllerMesh calls the InitControllerMesh method on the OculusTouchController object.

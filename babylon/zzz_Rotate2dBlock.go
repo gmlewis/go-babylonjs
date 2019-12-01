@@ -131,7 +131,7 @@ func (r *Rotate2dBlock) Clone(scene *Scene, opts *Rotate2dBlockCloneOpts) *NodeM
 
 // Rotate2dBlockConnectToOpts contains optional parameters for Rotate2dBlock.ConnectTo.
 type Rotate2dBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the Rotate2dBlock object.
@@ -396,11 +396,7 @@ func (r *Rotate2dBlock) RegisterInput(name string, jsType js.Value, opts *Rotate
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := r.p.Call("registerInput", args...)
 	return Rotate2dBlockFromJSObject(retVal, r.ctx)
@@ -424,11 +420,7 @@ func (r *Rotate2dBlock) RegisterOutput(name string, jsType js.Value, opts *Rotat
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := r.p.Call("registerOutput", args...)
 	return Rotate2dBlockFromJSObject(retVal, r.ctx)

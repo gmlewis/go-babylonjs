@@ -55,11 +55,7 @@ func (ba *Babylon) NewNodeMaterialBlock(name string, opts *NewNodeMaterialBlockO
 
 	args = append(args, name)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 	if opts.IsFinalMerger == nil {
 		args = append(args, js.Undefined())
 	} else {
@@ -157,7 +153,7 @@ func (n *NodeMaterialBlock) Clone(scene *Scene, opts *NodeMaterialBlockCloneOpts
 
 // NodeMaterialBlockConnectToOpts contains optional parameters for NodeMaterialBlock.ConnectTo.
 type NodeMaterialBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the NodeMaterialBlock object.
@@ -422,11 +418,7 @@ func (n *NodeMaterialBlock) RegisterInput(name string, jsType js.Value, opts *No
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := n.p.Call("registerInput", args...)
 	return NodeMaterialBlockFromJSObject(retVal, n.ctx)
@@ -450,11 +442,7 @@ func (n *NodeMaterialBlock) RegisterOutput(name string, jsType js.Value, opts *N
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := n.p.Call("registerOutput", args...)
 	return NodeMaterialBlockFromJSObject(retVal, n.ctx)

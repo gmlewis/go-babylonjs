@@ -172,7 +172,7 @@ func (c *Container) GetClassName() string {
 // ContainerGetDescendantsOpts contains optional parameters for Container.GetDescendants.
 type ContainerGetDescendantsOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendants calls the GetDescendants method on the Container object.
@@ -203,7 +203,7 @@ func (c *Container) GetDescendants(opts *ContainerGetDescendantsOpts) *Control {
 // ContainerGetDescendantsToRefOpts contains optional parameters for Container.GetDescendantsToRef.
 type ContainerGetDescendantsToRefOpts struct {
 	DirectDescendantsOnly *bool
-	Predicate             *func()
+	Predicate             func()
 }
 
 // GetDescendantsToRef calls the GetDescendantsToRef method on the Container object.

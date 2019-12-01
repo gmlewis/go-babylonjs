@@ -133,7 +133,7 @@ func (p *PosterizeBlock) Clone(scene *Scene, opts *PosterizeBlockCloneOpts) *Nod
 
 // PosterizeBlockConnectToOpts contains optional parameters for PosterizeBlock.ConnectTo.
 type PosterizeBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the PosterizeBlock object.
@@ -398,11 +398,7 @@ func (p *PosterizeBlock) RegisterInput(name string, jsType js.Value, opts *Poste
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := p.p.Call("registerInput", args...)
 	return PosterizeBlockFromJSObject(retVal, p.ctx)
@@ -426,11 +422,7 @@ func (p *PosterizeBlock) RegisterOutput(name string, jsType js.Value, opts *Post
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := p.p.Call("registerOutput", args...)
 	return PosterizeBlockFromJSObject(retVal, p.ctx)

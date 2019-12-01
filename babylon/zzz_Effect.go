@@ -42,8 +42,8 @@ type NewEffectOpts struct {
 	Engine          *ThinEngine
 	Defines         *string
 	Fallbacks       *IEffectFallbacks
-	OnCompiled      *func()
-	OnError         *func()
+	OnCompiled      func()
+	OnError         func()
 	IndexParameters *interface{}
 }
 

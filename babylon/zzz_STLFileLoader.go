@@ -73,7 +73,7 @@ func (s *STLFileLoader) Load(scene *Scene, data interface{}, rootUrl string) boo
 
 // STLFileLoaderLoadAssetContainerOpts contains optional parameters for STLFileLoader.LoadAssetContainer.
 type STLFileLoaderLoadAssetContainerOpts struct {
-	OnError *func()
+	OnError func()
 }
 
 // LoadAssetContainer calls the LoadAssetContainer method on the STLFileLoader object.

@@ -106,7 +106,11 @@ func (b *BloomEffect) GetPostProcesses(opts *BloomEffectGetPostProcessesOpts) []
 	}
 
 	retVal := b.p.Call("getPostProcesses", args...)
-	return retVal
+	result := []*PostProcess{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, PostProcessFromJSObject(retVal.Index(ri), b.ctx))
+	}
+	return result
 }
 
 /*

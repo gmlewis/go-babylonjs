@@ -131,7 +131,7 @@ func (i *ImageProcessingBlock) Clone(scene *Scene, opts *ImageProcessingBlockClo
 
 // ImageProcessingBlockConnectToOpts contains optional parameters for ImageProcessingBlock.ConnectTo.
 type ImageProcessingBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the ImageProcessingBlock object.
@@ -368,11 +368,7 @@ func (i *ImageProcessingBlock) RegisterInput(name string, jsType js.Value, opts 
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := i.p.Call("registerInput", args...)
 	return ImageProcessingBlockFromJSObject(retVal, i.ctx)
@@ -396,11 +392,7 @@ func (i *ImageProcessingBlock) RegisterOutput(name string, jsType js.Value, opts
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := i.p.Call("registerOutput", args...)
 	return ImageProcessingBlockFromJSObject(retVal, i.ctx)

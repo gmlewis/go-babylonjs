@@ -131,7 +131,7 @@ func (r *RefractBlock) Clone(scene *Scene, opts *RefractBlockCloneOpts) *NodeMat
 
 // RefractBlockConnectToOpts contains optional parameters for RefractBlock.ConnectTo.
 type RefractBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the RefractBlock object.
@@ -396,11 +396,7 @@ func (r *RefractBlock) RegisterInput(name string, jsType js.Value, opts *Refract
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := r.p.Call("registerInput", args...)
 	return RefractBlockFromJSObject(retVal, r.ctx)
@@ -424,11 +420,7 @@ func (r *RefractBlock) RegisterOutput(name string, jsType js.Value, opts *Refrac
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := r.p.Call("registerOutput", args...)
 	return RefractBlockFromJSObject(retVal, r.ctx)

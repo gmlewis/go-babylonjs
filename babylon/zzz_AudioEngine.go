@@ -54,11 +54,7 @@ func (ba *Babylon) NewAudioEngine(opts *NewAudioEngineOpts) *AudioEngine {
 
 	args := make([]interface{}, 0, 0+1)
 
-	if opts.HostElement == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.HostElement)
-	}
+	args = append(args, opts.HostElement)
 
 	p := ba.ctx.Get("AudioEngine").New(args...)
 	return AudioEngineFromJSObject(p, ba.ctx)

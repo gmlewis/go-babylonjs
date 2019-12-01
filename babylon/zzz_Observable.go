@@ -9,7 +9,7 @@ import (
 // Observable represents a babylon.js Observable.
 // The Observable class is a simple implementation of the Observable pattern.
 //
-// There&amp;#39;s one slight particularity though: a given Observable can notify its observer using a particular mask value, only the Observers registered with this mask value will be notified.
+// There&#39;s one slight particularity though: a given Observable can notify its observer using a particular mask value, only the Observers registered with this mask value will be notified.
 // This enable a more fine grained execution without having to rely on multiple different Observable objects.
 // For instance you may have a given Observable that have four different types of notifications: Move (mask = 0x01), Stop (mask = 0x02), Turn Right (mask = 0X04), Turn Left (mask = 0X08).
 // A given observer can register itself with only Move and Stop (mask = 0x03), then it will only be notified when one of these two occurs and will never be for Turn Left/Right.
@@ -43,7 +43,7 @@ func ObservableArrayToJSArray(array []*Observable) []interface{} {
 
 // NewObservableOpts contains optional parameters for NewObservable.
 type NewObservableOpts struct {
-	OnObserverAdded *func()
+	OnObserverAdded func()
 }
 
 // NewObservable returns a new Observable object.

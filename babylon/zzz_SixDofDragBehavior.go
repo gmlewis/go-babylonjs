@@ -7,7 +7,7 @@ import (
 )
 
 // SixDofDragBehavior represents a babylon.js SixDofDragBehavior.
-// A behavior that when attached to a mesh will allow the mesh to be dragged around based on directions and origin of the pointer&amp;#39;s ray
+// A behavior that when attached to a mesh will allow the mesh to be dragged around based on directions and origin of the pointer&#39;s ray
 type SixDofDragBehavior struct {
 	p   js.Value
 	ctx js.Value

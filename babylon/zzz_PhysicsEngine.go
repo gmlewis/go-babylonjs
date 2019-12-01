@@ -55,11 +55,7 @@ func (ba *Babylon) NewPhysicsEngine(gravity *Vector3, opts *NewPhysicsEngineOpts
 
 	args = append(args, gravity.JSObject())
 
-	if opts._physicsPlugin == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts._physicsPlugin)
-	}
+	args = append(args, opts._physicsPlugin)
 
 	p := ba.ctx.Get("PhysicsEngine").New(args...)
 	return PhysicsEngineFromJSObject(p, ba.ctx)
@@ -140,7 +136,11 @@ func (p *PhysicsEngine) GetImpostorWithPhysicsBody(body interface{}) *PhysicsImp
 func (p *PhysicsEngine) GetImpostors() []*PhysicsImpostor {
 
 	retVal := p.p.Call("getImpostors")
-	return retVal
+	result := []*PhysicsImpostor{}
+	for ri := 0; ri < retVal.Length(); ri++ {
+		result = append(result, PhysicsImpostorFromJSObject(retVal.Index(ri), p.ctx))
+	}
+	return result
 }
 
 // GetPhysicsPlugin calls the GetPhysicsPlugin method on the PhysicsEngine object.

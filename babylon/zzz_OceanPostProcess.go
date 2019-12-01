@@ -11,7 +11,7 @@ import (
 //
 // Simmply add it to your scene and let the nerd that lives in you have fun.
 // Example usage:
-// var pp = new OceanPostProcess(&amp;quot;myOcean&amp;quot;, camera);
+// var pp = new OceanPostProcess(&quot;myOcean&quot;, camera);
 // pp.reflectionEnabled = true;
 // pp.refractionEnabled = true;
 type OceanPostProcess struct {
@@ -226,8 +226,8 @@ type OceanPostProcessUpdateEffectOpts struct {
 	Uniforms        *string
 	Samplers        *string
 	IndexParameters *interface{}
-	OnCompiled      *func()
-	OnError         *func()
+	OnCompiled      func()
+	OnError         func()
 }
 
 // UpdateEffect calls the UpdateEffect method on the OceanPostProcess object.

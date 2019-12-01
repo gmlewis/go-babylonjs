@@ -131,7 +131,7 @@ func (r *ReplaceColorBlock) Clone(scene *Scene, opts *ReplaceColorBlockCloneOpts
 
 // ReplaceColorBlockConnectToOpts contains optional parameters for ReplaceColorBlock.ConnectTo.
 type ReplaceColorBlockConnectToOpts struct {
-	Options js.Value
+	Options map[string]interface{}
 }
 
 // ConnectTo calls the ConnectTo method on the ReplaceColorBlock object.
@@ -396,11 +396,7 @@ func (r *ReplaceColorBlock) RegisterInput(name string, jsType js.Value, opts *Re
 	} else {
 		args = append(args, *opts.IsOptional)
 	}
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := r.p.Call("registerInput", args...)
 	return ReplaceColorBlockFromJSObject(retVal, r.ctx)
@@ -424,11 +420,7 @@ func (r *ReplaceColorBlock) RegisterOutput(name string, jsType js.Value, opts *R
 	args = append(args, name)
 	args = append(args, jsType)
 
-	if opts.Target == nil {
-		args = append(args, js.Undefined())
-	} else {
-		args = append(args, opts.Target)
-	}
+	args = append(args, opts.Target)
 
 	retVal := r.p.Call("registerOutput", args...)
 	return ReplaceColorBlockFromJSObject(retVal, r.ctx)
