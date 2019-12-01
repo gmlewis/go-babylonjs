@@ -29,13 +29,10 @@ func NoiseProceduralTextureFromJSObject(p js.Value, ctx js.Value) *NoiseProcedur
 
 // NewNoiseProceduralTextureOpts contains optional parameters for NewNoiseProceduralTexture.
 type NewNoiseProceduralTextureOpts struct {
-	Size *JSFloat64
-
-	Scene *Scene
-
+	Size            *float64
+	Scene           *Scene
 	FallbackTexture *Texture
-
-	GenerateMipMaps *JSBool
+	GenerateMipMaps *bool
 }
 
 // NewNoiseProceduralTexture returns a new NoiseProceduralTexture object.
@@ -46,8 +43,2097 @@ func (ba *Babylon) NewNoiseProceduralTexture(name string, opts *NewNoiseProcedur
 		opts = &NewNoiseProceduralTextureOpts{}
 	}
 
-	p := ba.ctx.Get("NoiseProceduralTexture").New(name, opts.Size.JSObject(), opts.Scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps.JSObject())
+	args := make([]interface{}, 0, 1+4)
+
+	args = append(args, name)
+
+	if opts.Size == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Size)
+	}
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+	if opts.FallbackTexture == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.FallbackTexture.JSObject())
+	}
+	if opts.GenerateMipMaps == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.GenerateMipMaps)
+	}
+
+	p := ba.ctx.Get("NoiseProceduralTexture").New(args...)
 	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Clone calls the Clone method on the NoiseProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#clone
+func (n *NoiseProceduralTexture) Clone() *ProceduralTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("clone", args...)
+	return ProceduralTextureFromJSObject(retVal, n.ctx)
+}
+
+// NoiseProceduralTextureCreateFromBase64StringOpts contains optional parameters for NoiseProceduralTexture.CreateFromBase64String.
+type NoiseProceduralTextureCreateFromBase64StringOpts struct {
+	NoMipmap     *bool
+	InvertY      *bool
+	SamplingMode *float64
+	OnLoad       *func()
+	OnError      *func()
+	Format       *float64
+}
+
+// CreateFromBase64String calls the CreateFromBase64String method on the NoiseProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#createfrombase64string
+func (n *NoiseProceduralTexture) CreateFromBase64String(data string, name string, scene *Scene, opts *NoiseProceduralTextureCreateFromBase64StringOpts) *Texture {
+	if opts == nil {
+		opts = &NoiseProceduralTextureCreateFromBase64StringOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+6)
+
+	args = append(args, data)
+	args = append(args, name)
+	args = append(args, scene.JSObject())
+
+	if opts.NoMipmap == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoMipmap)
+	}
+	if opts.InvertY == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.InvertY)
+	}
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+	if opts.OnLoad == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnLoad)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+	if opts.Format == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Format)
+	}
+
+	retVal := n.p.Call("CreateFromBase64String", args...)
+	return TextureFromJSObject(retVal, n.ctx)
+}
+
+// Dispose calls the Dispose method on the NoiseProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#dispose
+func (n *NoiseProceduralTexture) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	n.p.Call("dispose", args...)
+}
+
+// GetBaseSize calls the GetBaseSize method on the NoiseProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#getbasesize
+func (n *NoiseProceduralTexture) GetBaseSize() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getBaseSize", args...)
+	return retVal
+}
+
+// GetClassName calls the GetClassName method on the NoiseProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#getclassname
+func (n *NoiseProceduralTexture) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetContent calls the GetContent method on the NoiseProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#getcontent
+func (n *NoiseProceduralTexture) GetContent() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getContent", args...)
+	return retVal
+}
+
+// GetEffect calls the GetEffect method on the NoiseProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#geteffect
+func (n *NoiseProceduralTexture) GetEffect() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getEffect", args...)
+	return EffectFromJSObject(retVal, n.ctx)
+}
+
+// GetInternalTexture calls the GetInternalTexture method on the NoiseProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#getinternaltexture
+func (n *NoiseProceduralTexture) GetInternalTexture() *InternalTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getInternalTexture", args...)
+	return InternalTextureFromJSObject(retVal, n.ctx)
+}
+
+// GetReflectionTextureMatrix calls the GetReflectionTextureMatrix method on the NoiseProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#getreflectiontexturematrix
+func (n *NoiseProceduralTexture) GetReflectionTextureMatrix() *Matrix {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getReflectionTextureMatrix", args...)
+	return MatrixFromJSObject(retVal, n.ctx)
+}
+
+// GetRenderSize calls the GetRenderSize method on the NoiseProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#getrendersize
+func (n *NoiseProceduralTexture) GetRenderSize() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getRenderSize", args...)
+	return retVal.Float()
+}
+
+// GetScene calls the GetScene method on the NoiseProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#getscene
+func (n *NoiseProceduralTexture) GetScene() *Scene {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getScene", args...)
+	return SceneFromJSObject(retVal, n.ctx)
+}
+
+// GetSize calls the GetSize method on the NoiseProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#getsize
+func (n *NoiseProceduralTexture) GetSize() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getSize", args...)
+	return retVal
+}
+
+// NoiseProceduralTextureGetTextureMatrixOpts contains optional parameters for NoiseProceduralTexture.GetTextureMatrix.
+type NoiseProceduralTextureGetTextureMatrixOpts struct {
+	UBase *float64
+}
+
+// GetTextureMatrix calls the GetTextureMatrix method on the NoiseProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#gettexturematrix
+func (n *NoiseProceduralTexture) GetTextureMatrix(opts *NoiseProceduralTextureGetTextureMatrixOpts) *Matrix {
+	if opts == nil {
+		opts = &NoiseProceduralTextureGetTextureMatrixOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.UBase == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UBase)
+	}
+
+	retVal := n.p.Call("getTextureMatrix", args...)
+	return MatrixFromJSObject(retVal, n.ctx)
+}
+
+// IsReady calls the IsReady method on the NoiseProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#isready
+func (n *NoiseProceduralTexture) IsReady() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// IsReadyOrNotBlocking calls the IsReadyOrNotBlocking method on the NoiseProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#isreadyornotblocking
+func (n *NoiseProceduralTexture) IsReadyOrNotBlocking() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("isReadyOrNotBlocking", args...)
+	return retVal.Bool()
+}
+
+// NoiseProceduralTextureLoadFromDataStringOpts contains optional parameters for NoiseProceduralTexture.LoadFromDataString.
+type NoiseProceduralTextureLoadFromDataStringOpts struct {
+	DeleteBuffer *bool
+	NoMipmap     *bool
+	InvertY      *bool
+	SamplingMode *float64
+	OnLoad       *func()
+	OnError      *func()
+	Format       *float64
+}
+
+// LoadFromDataString calls the LoadFromDataString method on the NoiseProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#loadfromdatastring
+func (n *NoiseProceduralTexture) LoadFromDataString(name string, buffer interface{}, scene *Scene, opts *NoiseProceduralTextureLoadFromDataStringOpts) *Texture {
+	if opts == nil {
+		opts = &NoiseProceduralTextureLoadFromDataStringOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+7)
+
+	args = append(args, name)
+	args = append(args, buffer)
+	args = append(args, scene.JSObject())
+
+	if opts.DeleteBuffer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DeleteBuffer)
+	}
+	if opts.NoMipmap == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoMipmap)
+	}
+	if opts.InvertY == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.InvertY)
+	}
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+	if opts.OnLoad == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnLoad)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+	if opts.Format == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Format)
+	}
+
+	retVal := n.p.Call("LoadFromDataString", args...)
+	return TextureFromJSObject(retVal, n.ctx)
+}
+
+// Parse calls the Parse method on the NoiseProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#parse
+func (n *NoiseProceduralTexture) Parse(parsedTexture interface{}, scene *Scene) *NoiseProceduralTexture {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, parsedTexture)
+	args = append(args, scene.JSObject())
+
+	retVal := n.p.Call("Parse", args...)
+	return NoiseProceduralTextureFromJSObject(retVal, n.ctx)
+}
+
+// NoiseProceduralTextureReadPixelsOpts contains optional parameters for NoiseProceduralTexture.ReadPixels.
+type NoiseProceduralTextureReadPixelsOpts struct {
+	FaceIndex *float64
+	Level     *float64
+	Buffer    js.Value
+}
+
+// ReadPixels calls the ReadPixels method on the NoiseProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#readpixels
+func (n *NoiseProceduralTexture) ReadPixels(opts *NoiseProceduralTextureReadPixelsOpts) js.Value {
+	if opts == nil {
+		opts = &NoiseProceduralTextureReadPixelsOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+3)
+
+	if opts.FaceIndex == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FaceIndex)
+	}
+	if opts.Level == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Level)
+	}
+	if opts.Buffer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Buffer)
+	}
+
+	retVal := n.p.Call("readPixels", args...)
+	return retVal
+}
+
+// ReleaseInternalTexture calls the ReleaseInternalTexture method on the NoiseProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#releaseinternaltexture
+func (n *NoiseProceduralTexture) ReleaseInternalTexture() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	n.p.Call("releaseInternalTexture", args...)
+}
+
+// NoiseProceduralTextureRenderOpts contains optional parameters for NoiseProceduralTexture.Render.
+type NoiseProceduralTextureRenderOpts struct {
+	UseCameraPostProcess *bool
+}
+
+// Render calls the Render method on the NoiseProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#render
+func (n *NoiseProceduralTexture) Render(opts *NoiseProceduralTextureRenderOpts) {
+	if opts == nil {
+		opts = &NoiseProceduralTextureRenderOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.UseCameraPostProcess == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseCameraPostProcess)
+	}
+
+	n.p.Call("render", args...)
+}
+
+// Reset calls the Reset method on the NoiseProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#reset
+func (n *NoiseProceduralTexture) Reset() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	n.p.Call("reset", args...)
+}
+
+// ResetRefreshCounter calls the ResetRefreshCounter method on the NoiseProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#resetrefreshcounter
+func (n *NoiseProceduralTexture) ResetRefreshCounter() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	n.p.Call("resetRefreshCounter", args...)
+}
+
+// Resize calls the Resize method on the NoiseProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#resize
+func (n *NoiseProceduralTexture) Resize(size float64, generateMipMaps bool) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, size)
+	args = append(args, generateMipMaps)
+
+	n.p.Call("resize", args...)
+}
+
+// Scale calls the Scale method on the NoiseProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#scale
+func (n *NoiseProceduralTexture) Scale(ratio float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, ratio)
+
+	n.p.Call("scale", args...)
+}
+
+// Serialize calls the Serialize method on the NoiseProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#serialize
+func (n *NoiseProceduralTexture) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("serialize", args...)
+	return retVal
+}
+
+// SetColor3 calls the SetColor3 method on the NoiseProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#setcolor3
+func (n *NoiseProceduralTexture) SetColor3(name string, value *Color3) *ProceduralTexture {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value.JSObject())
+
+	retVal := n.p.Call("setColor3", args...)
+	return ProceduralTextureFromJSObject(retVal, n.ctx)
+}
+
+// SetColor4 calls the SetColor4 method on the NoiseProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#setcolor4
+func (n *NoiseProceduralTexture) SetColor4(name string, value *Color4) *ProceduralTexture {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value.JSObject())
+
+	retVal := n.p.Call("setColor4", args...)
+	return ProceduralTextureFromJSObject(retVal, n.ctx)
+}
+
+// SetFloat calls the SetFloat method on the NoiseProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#setfloat
+func (n *NoiseProceduralTexture) SetFloat(name string, value float64) *ProceduralTexture {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value)
+
+	retVal := n.p.Call("setFloat", args...)
+	return ProceduralTextureFromJSObject(retVal, n.ctx)
+}
+
+// SetFloats calls the SetFloats method on the NoiseProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#setfloats
+func (n *NoiseProceduralTexture) SetFloats(name string, value float64) *ProceduralTexture {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value)
+
+	retVal := n.p.Call("setFloats", args...)
+	return ProceduralTextureFromJSObject(retVal, n.ctx)
+}
+
+// SetFragment calls the SetFragment method on the NoiseProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#setfragment
+func (n *NoiseProceduralTexture) SetFragment(fragment interface{}) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, fragment)
+
+	n.p.Call("setFragment", args...)
+}
+
+// SetInt calls the SetInt method on the NoiseProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#setint
+func (n *NoiseProceduralTexture) SetInt(name string, value float64) *ProceduralTexture {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value)
+
+	retVal := n.p.Call("setInt", args...)
+	return ProceduralTextureFromJSObject(retVal, n.ctx)
+}
+
+// SetMatrix calls the SetMatrix method on the NoiseProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#setmatrix
+func (n *NoiseProceduralTexture) SetMatrix(name string, value *Matrix) *ProceduralTexture {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value.JSObject())
+
+	retVal := n.p.Call("setMatrix", args...)
+	return ProceduralTextureFromJSObject(retVal, n.ctx)
+}
+
+// SetTexture calls the SetTexture method on the NoiseProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#settexture
+func (n *NoiseProceduralTexture) SetTexture(name string, texture *Texture) *ProceduralTexture {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, texture.JSObject())
+
+	retVal := n.p.Call("setTexture", args...)
+	return ProceduralTextureFromJSObject(retVal, n.ctx)
+}
+
+// SetVector2 calls the SetVector2 method on the NoiseProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#setvector2
+func (n *NoiseProceduralTexture) SetVector2(name string, value *Vector2) *ProceduralTexture {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value.JSObject())
+
+	retVal := n.p.Call("setVector2", args...)
+	return ProceduralTextureFromJSObject(retVal, n.ctx)
+}
+
+// SetVector3 calls the SetVector3 method on the NoiseProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#setvector3
+func (n *NoiseProceduralTexture) SetVector3(name string, value *Vector3) *ProceduralTexture {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value.JSObject())
+
+	retVal := n.p.Call("setVector3", args...)
+	return ProceduralTextureFromJSObject(retVal, n.ctx)
+}
+
+// ToString calls the ToString method on the NoiseProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#tostring
+func (n *NoiseProceduralTexture) ToString() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("toString", args...)
+	return retVal.String()
+}
+
+// UpdateSamplingMode calls the UpdateSamplingMode method on the NoiseProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#updatesamplingmode
+func (n *NoiseProceduralTexture) UpdateSamplingMode(samplingMode float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, samplingMode)
+
+	n.p.Call("updateSamplingMode", args...)
+}
+
+// NoiseProceduralTextureUpdateURLOpts contains optional parameters for NoiseProceduralTexture.UpdateURL.
+type NoiseProceduralTextureUpdateURLOpts struct {
+	Buffer *string
+	OnLoad *func()
+}
+
+// UpdateURL calls the UpdateURL method on the NoiseProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#updateurl
+func (n *NoiseProceduralTexture) UpdateURL(url string, opts *NoiseProceduralTextureUpdateURLOpts) {
+	if opts == nil {
+		opts = &NoiseProceduralTextureUpdateURLOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, url)
+
+	if opts.Buffer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Buffer)
+	}
+	if opts.OnLoad == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnLoad)
+	}
+
+	n.p.Call("updateURL", args...)
+}
+
+// WhenAllReady calls the WhenAllReady method on the NoiseProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#whenallready
+func (n *NoiseProceduralTexture) WhenAllReady(textures *BaseTexture, callback func()) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, textures.JSObject())
+	args = append(args, callback)
+
+	n.p.Call("WhenAllReady", args...)
+}
+
+/*
+
+// AnimationSpeedFactor returns the AnimationSpeedFactor property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#animationspeedfactor
+func (n *NoiseProceduralTexture) AnimationSpeedFactor(animationSpeedFactor float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(animationSpeedFactor)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetAnimationSpeedFactor sets the AnimationSpeedFactor property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#animationspeedfactor
+func (n *NoiseProceduralTexture) SetAnimationSpeedFactor(animationSpeedFactor float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(animationSpeedFactor)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// Animations returns the Animations property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#animations
+func (n *NoiseProceduralTexture) Animations(animations *Animation) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(animations.JSObject())
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#animations
+func (n *NoiseProceduralTexture) SetAnimations(animations *Animation) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(animations.JSObject())
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// AnisotropicFilteringLevel returns the AnisotropicFilteringLevel property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#anisotropicfilteringlevel
+func (n *NoiseProceduralTexture) AnisotropicFilteringLevel(anisotropicFilteringLevel float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(anisotropicFilteringLevel)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetAnisotropicFilteringLevel sets the AnisotropicFilteringLevel property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#anisotropicfilteringlevel
+func (n *NoiseProceduralTexture) SetAnisotropicFilteringLevel(anisotropicFilteringLevel float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(anisotropicFilteringLevel)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// AutoClear returns the AutoClear property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#autoclear
+func (n *NoiseProceduralTexture) AutoClear(autoClear bool) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(autoClear)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetAutoClear sets the AutoClear property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#autoclear
+func (n *NoiseProceduralTexture) SetAutoClear(autoClear bool) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(autoClear)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// BILINEAR_SAMPLINGMODE returns the BILINEAR_SAMPLINGMODE property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#bilinear_samplingmode
+func (n *NoiseProceduralTexture) BILINEAR_SAMPLINGMODE(BILINEAR_SAMPLINGMODE float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(BILINEAR_SAMPLINGMODE)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetBILINEAR_SAMPLINGMODE sets the BILINEAR_SAMPLINGMODE property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#bilinear_samplingmode
+func (n *NoiseProceduralTexture) SetBILINEAR_SAMPLINGMODE(BILINEAR_SAMPLINGMODE float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(BILINEAR_SAMPLINGMODE)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// Brightness returns the Brightness property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#brightness
+func (n *NoiseProceduralTexture) Brightness(brightness float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(brightness)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetBrightness sets the Brightness property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#brightness
+func (n *NoiseProceduralTexture) SetBrightness(brightness float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(brightness)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// CLAMP_ADDRESSMODE returns the CLAMP_ADDRESSMODE property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#clamp_addressmode
+func (n *NoiseProceduralTexture) CLAMP_ADDRESSMODE(CLAMP_ADDRESSMODE float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(CLAMP_ADDRESSMODE)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCLAMP_ADDRESSMODE sets the CLAMP_ADDRESSMODE property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#clamp_addressmode
+func (n *NoiseProceduralTexture) SetCLAMP_ADDRESSMODE(CLAMP_ADDRESSMODE float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(CLAMP_ADDRESSMODE)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// CUBIC_MODE returns the CUBIC_MODE property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#cubic_mode
+func (n *NoiseProceduralTexture) CUBIC_MODE(CUBIC_MODE float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(CUBIC_MODE)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCUBIC_MODE sets the CUBIC_MODE property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#cubic_mode
+func (n *NoiseProceduralTexture) SetCUBIC_MODE(CUBIC_MODE float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(CUBIC_MODE)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// CanRescale returns the CanRescale property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#canrescale
+func (n *NoiseProceduralTexture) CanRescale(canRescale bool) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(canRescale)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCanRescale sets the CanRescale property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#canrescale
+func (n *NoiseProceduralTexture) SetCanRescale(canRescale bool) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(canRescale)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// CoordinatesIndex returns the CoordinatesIndex property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#coordinatesindex
+func (n *NoiseProceduralTexture) CoordinatesIndex(coordinatesIndex float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(coordinatesIndex)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCoordinatesIndex sets the CoordinatesIndex property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#coordinatesindex
+func (n *NoiseProceduralTexture) SetCoordinatesIndex(coordinatesIndex float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(coordinatesIndex)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// CoordinatesMode returns the CoordinatesMode property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#coordinatesmode
+func (n *NoiseProceduralTexture) CoordinatesMode(coordinatesMode float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(coordinatesMode)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCoordinatesMode sets the CoordinatesMode property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#coordinatesmode
+func (n *NoiseProceduralTexture) SetCoordinatesMode(coordinatesMode float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(coordinatesMode)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// DEFAULT_ANISOTROPIC_FILTERING_LEVEL returns the DEFAULT_ANISOTROPIC_FILTERING_LEVEL property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#default_anisotropic_filtering_level
+func (n *NoiseProceduralTexture) DEFAULT_ANISOTROPIC_FILTERING_LEVEL(DEFAULT_ANISOTROPIC_FILTERING_LEVEL float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(DEFAULT_ANISOTROPIC_FILTERING_LEVEL)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetDEFAULT_ANISOTROPIC_FILTERING_LEVEL sets the DEFAULT_ANISOTROPIC_FILTERING_LEVEL property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#default_anisotropic_filtering_level
+func (n *NoiseProceduralTexture) SetDEFAULT_ANISOTROPIC_FILTERING_LEVEL(DEFAULT_ANISOTROPIC_FILTERING_LEVEL float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(DEFAULT_ANISOTROPIC_FILTERING_LEVEL)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// DelayLoadState returns the DelayLoadState property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#delayloadstate
+func (n *NoiseProceduralTexture) DelayLoadState(delayLoadState float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(delayLoadState)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetDelayLoadState sets the DelayLoadState property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#delayloadstate
+func (n *NoiseProceduralTexture) SetDelayLoadState(delayLoadState float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(delayLoadState)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// EQUIRECTANGULAR_MODE returns the EQUIRECTANGULAR_MODE property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#equirectangular_mode
+func (n *NoiseProceduralTexture) EQUIRECTANGULAR_MODE(EQUIRECTANGULAR_MODE float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(EQUIRECTANGULAR_MODE)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetEQUIRECTANGULAR_MODE sets the EQUIRECTANGULAR_MODE property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#equirectangular_mode
+func (n *NoiseProceduralTexture) SetEQUIRECTANGULAR_MODE(EQUIRECTANGULAR_MODE float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(EQUIRECTANGULAR_MODE)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// EXPLICIT_MODE returns the EXPLICIT_MODE property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#explicit_mode
+func (n *NoiseProceduralTexture) EXPLICIT_MODE(EXPLICIT_MODE float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(EXPLICIT_MODE)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetEXPLICIT_MODE sets the EXPLICIT_MODE property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#explicit_mode
+func (n *NoiseProceduralTexture) SetEXPLICIT_MODE(EXPLICIT_MODE float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(EXPLICIT_MODE)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// FIXED_EQUIRECTANGULAR_MIRRORED_MODE returns the FIXED_EQUIRECTANGULAR_MIRRORED_MODE property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#fixed_equirectangular_mirrored_mode
+func (n *NoiseProceduralTexture) FIXED_EQUIRECTANGULAR_MIRRORED_MODE(FIXED_EQUIRECTANGULAR_MIRRORED_MODE float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(FIXED_EQUIRECTANGULAR_MIRRORED_MODE)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetFIXED_EQUIRECTANGULAR_MIRRORED_MODE sets the FIXED_EQUIRECTANGULAR_MIRRORED_MODE property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#fixed_equirectangular_mirrored_mode
+func (n *NoiseProceduralTexture) SetFIXED_EQUIRECTANGULAR_MIRRORED_MODE(FIXED_EQUIRECTANGULAR_MIRRORED_MODE float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(FIXED_EQUIRECTANGULAR_MIRRORED_MODE)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// FIXED_EQUIRECTANGULAR_MODE returns the FIXED_EQUIRECTANGULAR_MODE property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#fixed_equirectangular_mode
+func (n *NoiseProceduralTexture) FIXED_EQUIRECTANGULAR_MODE(FIXED_EQUIRECTANGULAR_MODE float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(FIXED_EQUIRECTANGULAR_MODE)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetFIXED_EQUIRECTANGULAR_MODE sets the FIXED_EQUIRECTANGULAR_MODE property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#fixed_equirectangular_mode
+func (n *NoiseProceduralTexture) SetFIXED_EQUIRECTANGULAR_MODE(FIXED_EQUIRECTANGULAR_MODE float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(FIXED_EQUIRECTANGULAR_MODE)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// GammaSpace returns the GammaSpace property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#gammaspace
+func (n *NoiseProceduralTexture) GammaSpace(gammaSpace bool) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(gammaSpace)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetGammaSpace sets the GammaSpace property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#gammaspace
+func (n *NoiseProceduralTexture) SetGammaSpace(gammaSpace bool) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(gammaSpace)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// GetAlphaFromRGB returns the GetAlphaFromRGB property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#getalphafromrgb
+func (n *NoiseProceduralTexture) GetAlphaFromRGB(getAlphaFromRGB bool) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(getAlphaFromRGB)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetGetAlphaFromRGB sets the GetAlphaFromRGB property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#getalphafromrgb
+func (n *NoiseProceduralTexture) SetGetAlphaFromRGB(getAlphaFromRGB bool) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(getAlphaFromRGB)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// HasAlpha returns the HasAlpha property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#hasalpha
+func (n *NoiseProceduralTexture) HasAlpha(hasAlpha bool) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(hasAlpha)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetHasAlpha sets the HasAlpha property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#hasalpha
+func (n *NoiseProceduralTexture) SetHasAlpha(hasAlpha bool) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(hasAlpha)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// INVCUBIC_MODE returns the INVCUBIC_MODE property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#invcubic_mode
+func (n *NoiseProceduralTexture) INVCUBIC_MODE(INVCUBIC_MODE float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(INVCUBIC_MODE)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetINVCUBIC_MODE sets the INVCUBIC_MODE property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#invcubic_mode
+func (n *NoiseProceduralTexture) SetINVCUBIC_MODE(INVCUBIC_MODE float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(INVCUBIC_MODE)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#inspectablecustomproperties
+func (n *NoiseProceduralTexture) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(inspectableCustomProperties.JSObject())
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#inspectablecustomproperties
+func (n *NoiseProceduralTexture) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(inspectableCustomProperties.JSObject())
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// InvertY returns the InvertY property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#inverty
+func (n *NoiseProceduralTexture) InvertY(invertY bool) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(invertY)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetInvertY sets the InvertY property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#inverty
+func (n *NoiseProceduralTexture) SetInvertY(invertY bool) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(invertY)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// InvertZ returns the InvertZ property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#invertz
+func (n *NoiseProceduralTexture) InvertZ(invertZ bool) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(invertZ)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetInvertZ sets the InvertZ property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#invertz
+func (n *NoiseProceduralTexture) SetInvertZ(invertZ bool) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(invertZ)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// IrradianceTexture returns the IrradianceTexture property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#irradiancetexture
+func (n *NoiseProceduralTexture) IrradianceTexture(irradianceTexture *BaseTexture) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(irradianceTexture.JSObject())
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIrradianceTexture sets the IrradianceTexture property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#irradiancetexture
+func (n *NoiseProceduralTexture) SetIrradianceTexture(irradianceTexture *BaseTexture) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(irradianceTexture.JSObject())
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// Is2DArray returns the Is2DArray property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#is2darray
+func (n *NoiseProceduralTexture) Is2DArray(is2DArray bool) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(is2DArray)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIs2DArray sets the Is2DArray property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#is2darray
+func (n *NoiseProceduralTexture) SetIs2DArray(is2DArray bool) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(is2DArray)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// Is3D returns the Is3D property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#is3d
+func (n *NoiseProceduralTexture) Is3D(is3D bool) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(is3D)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIs3D sets the Is3D property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#is3d
+func (n *NoiseProceduralTexture) SetIs3D(is3D bool) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(is3D)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// IsBlocking returns the IsBlocking property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#isblocking
+func (n *NoiseProceduralTexture) IsBlocking(isBlocking bool) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(isBlocking)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsBlocking sets the IsBlocking property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#isblocking
+func (n *NoiseProceduralTexture) SetIsBlocking(isBlocking bool) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(isBlocking)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// IsCube returns the IsCube property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#iscube
+func (n *NoiseProceduralTexture) IsCube(isCube bool) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(isCube)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsCube sets the IsCube property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#iscube
+func (n *NoiseProceduralTexture) SetIsCube(isCube bool) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(isCube)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// IsEnabled returns the IsEnabled property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#isenabled
+func (n *NoiseProceduralTexture) IsEnabled(isEnabled bool) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(isEnabled)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsEnabled sets the IsEnabled property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#isenabled
+func (n *NoiseProceduralTexture) SetIsEnabled(isEnabled bool) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(isEnabled)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// IsRGBD returns the IsRGBD property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#isrgbd
+func (n *NoiseProceduralTexture) IsRGBD(isRGBD bool) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(isRGBD)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsRGBD sets the IsRGBD property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#isrgbd
+func (n *NoiseProceduralTexture) SetIsRGBD(isRGBD bool) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(isRGBD)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// IsRenderTarget returns the IsRenderTarget property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#isrendertarget
+func (n *NoiseProceduralTexture) IsRenderTarget(isRenderTarget bool) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(isRenderTarget)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsRenderTarget sets the IsRenderTarget property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#isrendertarget
+func (n *NoiseProceduralTexture) SetIsRenderTarget(isRenderTarget bool) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(isRenderTarget)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_LINEAR returns the LINEAR_LINEAR property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#linear_linear
+func (n *NoiseProceduralTexture) LINEAR_LINEAR(LINEAR_LINEAR float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(LINEAR_LINEAR)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_LINEAR sets the LINEAR_LINEAR property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#linear_linear
+func (n *NoiseProceduralTexture) SetLINEAR_LINEAR(LINEAR_LINEAR float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(LINEAR_LINEAR)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_LINEAR_MIPLINEAR returns the LINEAR_LINEAR_MIPLINEAR property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#linear_linear_miplinear
+func (n *NoiseProceduralTexture) LINEAR_LINEAR_MIPLINEAR(LINEAR_LINEAR_MIPLINEAR float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(LINEAR_LINEAR_MIPLINEAR)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_LINEAR_MIPLINEAR sets the LINEAR_LINEAR_MIPLINEAR property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#linear_linear_miplinear
+func (n *NoiseProceduralTexture) SetLINEAR_LINEAR_MIPLINEAR(LINEAR_LINEAR_MIPLINEAR float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(LINEAR_LINEAR_MIPLINEAR)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_LINEAR_MIPNEAREST returns the LINEAR_LINEAR_MIPNEAREST property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#linear_linear_mipnearest
+func (n *NoiseProceduralTexture) LINEAR_LINEAR_MIPNEAREST(LINEAR_LINEAR_MIPNEAREST float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(LINEAR_LINEAR_MIPNEAREST)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_LINEAR_MIPNEAREST sets the LINEAR_LINEAR_MIPNEAREST property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#linear_linear_mipnearest
+func (n *NoiseProceduralTexture) SetLINEAR_LINEAR_MIPNEAREST(LINEAR_LINEAR_MIPNEAREST float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(LINEAR_LINEAR_MIPNEAREST)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_NEAREST returns the LINEAR_NEAREST property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#linear_nearest
+func (n *NoiseProceduralTexture) LINEAR_NEAREST(LINEAR_NEAREST float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(LINEAR_NEAREST)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_NEAREST sets the LINEAR_NEAREST property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#linear_nearest
+func (n *NoiseProceduralTexture) SetLINEAR_NEAREST(LINEAR_NEAREST float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(LINEAR_NEAREST)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_NEAREST_MIPLINEAR returns the LINEAR_NEAREST_MIPLINEAR property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#linear_nearest_miplinear
+func (n *NoiseProceduralTexture) LINEAR_NEAREST_MIPLINEAR(LINEAR_NEAREST_MIPLINEAR float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(LINEAR_NEAREST_MIPLINEAR)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_NEAREST_MIPLINEAR sets the LINEAR_NEAREST_MIPLINEAR property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#linear_nearest_miplinear
+func (n *NoiseProceduralTexture) SetLINEAR_NEAREST_MIPLINEAR(LINEAR_NEAREST_MIPLINEAR float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(LINEAR_NEAREST_MIPLINEAR)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_NEAREST_MIPNEAREST returns the LINEAR_NEAREST_MIPNEAREST property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#linear_nearest_mipnearest
+func (n *NoiseProceduralTexture) LINEAR_NEAREST_MIPNEAREST(LINEAR_NEAREST_MIPNEAREST float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(LINEAR_NEAREST_MIPNEAREST)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_NEAREST_MIPNEAREST sets the LINEAR_NEAREST_MIPNEAREST property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#linear_nearest_mipnearest
+func (n *NoiseProceduralTexture) SetLINEAR_NEAREST_MIPNEAREST(LINEAR_NEAREST_MIPNEAREST float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(LINEAR_NEAREST_MIPNEAREST)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// Level returns the Level property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#level
+func (n *NoiseProceduralTexture) Level(level float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(level)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLevel sets the Level property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#level
+func (n *NoiseProceduralTexture) SetLevel(level float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(level)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// LinearSpecularLOD returns the LinearSpecularLOD property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#linearspecularlod
+func (n *NoiseProceduralTexture) LinearSpecularLOD(linearSpecularLOD bool) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(linearSpecularLOD)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLinearSpecularLOD sets the LinearSpecularLOD property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#linearspecularlod
+func (n *NoiseProceduralTexture) SetLinearSpecularLOD(linearSpecularLOD bool) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(linearSpecularLOD)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// LodGenerationOffset returns the LodGenerationOffset property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#lodgenerationoffset
+func (n *NoiseProceduralTexture) LodGenerationOffset(lodGenerationOffset float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(lodGenerationOffset)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLodGenerationOffset sets the LodGenerationOffset property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#lodgenerationoffset
+func (n *NoiseProceduralTexture) SetLodGenerationOffset(lodGenerationOffset float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(lodGenerationOffset)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// LodGenerationScale returns the LodGenerationScale property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#lodgenerationscale
+func (n *NoiseProceduralTexture) LodGenerationScale(lodGenerationScale float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(lodGenerationScale)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLodGenerationScale sets the LodGenerationScale property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#lodgenerationscale
+func (n *NoiseProceduralTexture) SetLodGenerationScale(lodGenerationScale float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(lodGenerationScale)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// MIRROR_ADDRESSMODE returns the MIRROR_ADDRESSMODE property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#mirror_addressmode
+func (n *NoiseProceduralTexture) MIRROR_ADDRESSMODE(MIRROR_ADDRESSMODE float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(MIRROR_ADDRESSMODE)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetMIRROR_ADDRESSMODE sets the MIRROR_ADDRESSMODE property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#mirror_addressmode
+func (n *NoiseProceduralTexture) SetMIRROR_ADDRESSMODE(MIRROR_ADDRESSMODE float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(MIRROR_ADDRESSMODE)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#metadata
+func (n *NoiseProceduralTexture) Metadata(metadata interface{}) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(metadata)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#metadata
+func (n *NoiseProceduralTexture) SetMetadata(metadata interface{}) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(metadata)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_LINEAR returns the NEAREST_LINEAR property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#nearest_linear
+func (n *NoiseProceduralTexture) NEAREST_LINEAR(NEAREST_LINEAR float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(NEAREST_LINEAR)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_LINEAR sets the NEAREST_LINEAR property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#nearest_linear
+func (n *NoiseProceduralTexture) SetNEAREST_LINEAR(NEAREST_LINEAR float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(NEAREST_LINEAR)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_LINEAR_MIPLINEAR returns the NEAREST_LINEAR_MIPLINEAR property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#nearest_linear_miplinear
+func (n *NoiseProceduralTexture) NEAREST_LINEAR_MIPLINEAR(NEAREST_LINEAR_MIPLINEAR float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(NEAREST_LINEAR_MIPLINEAR)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_LINEAR_MIPLINEAR sets the NEAREST_LINEAR_MIPLINEAR property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#nearest_linear_miplinear
+func (n *NoiseProceduralTexture) SetNEAREST_LINEAR_MIPLINEAR(NEAREST_LINEAR_MIPLINEAR float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(NEAREST_LINEAR_MIPLINEAR)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_LINEAR_MIPNEAREST returns the NEAREST_LINEAR_MIPNEAREST property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#nearest_linear_mipnearest
+func (n *NoiseProceduralTexture) NEAREST_LINEAR_MIPNEAREST(NEAREST_LINEAR_MIPNEAREST float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(NEAREST_LINEAR_MIPNEAREST)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_LINEAR_MIPNEAREST sets the NEAREST_LINEAR_MIPNEAREST property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#nearest_linear_mipnearest
+func (n *NoiseProceduralTexture) SetNEAREST_LINEAR_MIPNEAREST(NEAREST_LINEAR_MIPNEAREST float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(NEAREST_LINEAR_MIPNEAREST)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_NEAREST returns the NEAREST_NEAREST property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#nearest_nearest
+func (n *NoiseProceduralTexture) NEAREST_NEAREST(NEAREST_NEAREST float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(NEAREST_NEAREST)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_NEAREST sets the NEAREST_NEAREST property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#nearest_nearest
+func (n *NoiseProceduralTexture) SetNEAREST_NEAREST(NEAREST_NEAREST float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(NEAREST_NEAREST)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_NEAREST_MIPLINEAR returns the NEAREST_NEAREST_MIPLINEAR property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#nearest_nearest_miplinear
+func (n *NoiseProceduralTexture) NEAREST_NEAREST_MIPLINEAR(NEAREST_NEAREST_MIPLINEAR float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(NEAREST_NEAREST_MIPLINEAR)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_NEAREST_MIPLINEAR sets the NEAREST_NEAREST_MIPLINEAR property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#nearest_nearest_miplinear
+func (n *NoiseProceduralTexture) SetNEAREST_NEAREST_MIPLINEAR(NEAREST_NEAREST_MIPLINEAR float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(NEAREST_NEAREST_MIPLINEAR)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_NEAREST_MIPNEAREST returns the NEAREST_NEAREST_MIPNEAREST property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#nearest_nearest_mipnearest
+func (n *NoiseProceduralTexture) NEAREST_NEAREST_MIPNEAREST(NEAREST_NEAREST_MIPNEAREST float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(NEAREST_NEAREST_MIPNEAREST)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_NEAREST_MIPNEAREST sets the NEAREST_NEAREST_MIPNEAREST property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#nearest_nearest_mipnearest
+func (n *NoiseProceduralTexture) SetNEAREST_NEAREST_MIPNEAREST(NEAREST_NEAREST_MIPNEAREST float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(NEAREST_NEAREST_MIPNEAREST)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_SAMPLINGMODE returns the NEAREST_SAMPLINGMODE property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#nearest_samplingmode
+func (n *NoiseProceduralTexture) NEAREST_SAMPLINGMODE(NEAREST_SAMPLINGMODE float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(NEAREST_SAMPLINGMODE)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_SAMPLINGMODE sets the NEAREST_SAMPLINGMODE property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#nearest_samplingmode
+func (n *NoiseProceduralTexture) SetNEAREST_SAMPLINGMODE(NEAREST_SAMPLINGMODE float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(NEAREST_SAMPLINGMODE)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#name
+func (n *NoiseProceduralTexture) Name(name string) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(name)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#name
+func (n *NoiseProceduralTexture) SetName(name string) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(name)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// NoMipmap returns the NoMipmap property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#nomipmap
+func (n *NoiseProceduralTexture) NoMipmap(noMipmap bool) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(noMipmap)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNoMipmap sets the NoMipmap property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#nomipmap
+func (n *NoiseProceduralTexture) SetNoMipmap(noMipmap bool) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(noMipmap)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// Octaves returns the Octaves property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#octaves
+func (n *NoiseProceduralTexture) Octaves(octaves float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(octaves)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOctaves sets the Octaves property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#octaves
+func (n *NoiseProceduralTexture) SetOctaves(octaves float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(octaves)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// OnDispose returns the OnDispose property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#ondispose
+func (n *NoiseProceduralTexture) OnDispose(onDispose func()) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(onDispose)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnDispose sets the OnDispose property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#ondispose
+func (n *NoiseProceduralTexture) SetOnDispose(onDispose func()) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(onDispose)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// OnDisposeObservable returns the OnDisposeObservable property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#ondisposeobservable
+func (n *NoiseProceduralTexture) OnDisposeObservable(onDisposeObservable *Observable) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(onDisposeObservable.JSObject())
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnDisposeObservable sets the OnDisposeObservable property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#ondisposeobservable
+func (n *NoiseProceduralTexture) SetOnDisposeObservable(onDisposeObservable *Observable) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(onDisposeObservable.JSObject())
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// OnGenerated returns the OnGenerated property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#ongenerated
+func (n *NoiseProceduralTexture) OnGenerated(onGenerated func()) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(onGenerated)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnGenerated sets the OnGenerated property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#ongenerated
+func (n *NoiseProceduralTexture) SetOnGenerated(onGenerated func()) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(onGenerated)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// OnGeneratedObservable returns the OnGeneratedObservable property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#ongeneratedobservable
+func (n *NoiseProceduralTexture) OnGeneratedObservable(onGeneratedObservable *Observable) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(onGeneratedObservable.JSObject())
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnGeneratedObservable sets the OnGeneratedObservable property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#ongeneratedobservable
+func (n *NoiseProceduralTexture) SetOnGeneratedObservable(onGeneratedObservable *Observable) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(onGeneratedObservable.JSObject())
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// OnLoadObservable returns the OnLoadObservable property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#onloadobservable
+func (n *NoiseProceduralTexture) OnLoadObservable(onLoadObservable *Observable) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(onLoadObservable.JSObject())
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnLoadObservable sets the OnLoadObservable property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#onloadobservable
+func (n *NoiseProceduralTexture) SetOnLoadObservable(onLoadObservable *Observable) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(onLoadObservable.JSObject())
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// PLANAR_MODE returns the PLANAR_MODE property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#planar_mode
+func (n *NoiseProceduralTexture) PLANAR_MODE(PLANAR_MODE float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(PLANAR_MODE)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetPLANAR_MODE sets the PLANAR_MODE property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#planar_mode
+func (n *NoiseProceduralTexture) SetPLANAR_MODE(PLANAR_MODE float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(PLANAR_MODE)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// PROJECTION_MODE returns the PROJECTION_MODE property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#projection_mode
+func (n *NoiseProceduralTexture) PROJECTION_MODE(PROJECTION_MODE float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(PROJECTION_MODE)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetPROJECTION_MODE sets the PROJECTION_MODE property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#projection_mode
+func (n *NoiseProceduralTexture) SetPROJECTION_MODE(PROJECTION_MODE float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(PROJECTION_MODE)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// Persistence returns the Persistence property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#persistence
+func (n *NoiseProceduralTexture) Persistence(persistence float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(persistence)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetPersistence sets the Persistence property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#persistence
+func (n *NoiseProceduralTexture) SetPersistence(persistence float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(persistence)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// RefreshRate returns the RefreshRate property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#refreshrate
+func (n *NoiseProceduralTexture) RefreshRate(refreshRate float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(refreshRate)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetRefreshRate sets the RefreshRate property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#refreshrate
+func (n *NoiseProceduralTexture) SetRefreshRate(refreshRate float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(refreshRate)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// ReservedDataStore returns the ReservedDataStore property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#reserveddatastore
+func (n *NoiseProceduralTexture) ReservedDataStore(reservedDataStore interface{}) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(reservedDataStore)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetReservedDataStore sets the ReservedDataStore property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#reserveddatastore
+func (n *NoiseProceduralTexture) SetReservedDataStore(reservedDataStore interface{}) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(reservedDataStore)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SKYBOX_MODE returns the SKYBOX_MODE property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#skybox_mode
+func (n *NoiseProceduralTexture) SKYBOX_MODE(SKYBOX_MODE float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(SKYBOX_MODE)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetSKYBOX_MODE sets the SKYBOX_MODE property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#skybox_mode
+func (n *NoiseProceduralTexture) SetSKYBOX_MODE(SKYBOX_MODE float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(SKYBOX_MODE)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SPHERICAL_MODE returns the SPHERICAL_MODE property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#spherical_mode
+func (n *NoiseProceduralTexture) SPHERICAL_MODE(SPHERICAL_MODE float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(SPHERICAL_MODE)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetSPHERICAL_MODE sets the SPHERICAL_MODE property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#spherical_mode
+func (n *NoiseProceduralTexture) SetSPHERICAL_MODE(SPHERICAL_MODE float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(SPHERICAL_MODE)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SamplingMode returns the SamplingMode property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#samplingmode
+func (n *NoiseProceduralTexture) SamplingMode(samplingMode float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(samplingMode)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetSamplingMode sets the SamplingMode property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#samplingmode
+func (n *NoiseProceduralTexture) SetSamplingMode(samplingMode float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(samplingMode)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SerializeBuffers returns the SerializeBuffers property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#serializebuffers
+func (n *NoiseProceduralTexture) SerializeBuffers(SerializeBuffers bool) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(SerializeBuffers)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetSerializeBuffers sets the SerializeBuffers property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#serializebuffers
+func (n *NoiseProceduralTexture) SetSerializeBuffers(SerializeBuffers bool) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(SerializeBuffers)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// TRILINEAR_SAMPLINGMODE returns the TRILINEAR_SAMPLINGMODE property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#trilinear_samplingmode
+func (n *NoiseProceduralTexture) TRILINEAR_SAMPLINGMODE(TRILINEAR_SAMPLINGMODE float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(TRILINEAR_SAMPLINGMODE)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetTRILINEAR_SAMPLINGMODE sets the TRILINEAR_SAMPLINGMODE property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#trilinear_samplingmode
+func (n *NoiseProceduralTexture) SetTRILINEAR_SAMPLINGMODE(TRILINEAR_SAMPLINGMODE float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(TRILINEAR_SAMPLINGMODE)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// TextureFormat returns the TextureFormat property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#textureformat
+func (n *NoiseProceduralTexture) TextureFormat(textureFormat float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(textureFormat)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetTextureFormat sets the TextureFormat property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#textureformat
+func (n *NoiseProceduralTexture) SetTextureFormat(textureFormat float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(textureFormat)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// TextureType returns the TextureType property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#texturetype
+func (n *NoiseProceduralTexture) TextureType(textureType float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(textureType)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetTextureType sets the TextureType property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#texturetype
+func (n *NoiseProceduralTexture) SetTextureType(textureType float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(textureType)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// UAng returns the UAng property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#uang
+func (n *NoiseProceduralTexture) UAng(uAng float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(uAng)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUAng sets the UAng property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#uang
+func (n *NoiseProceduralTexture) SetUAng(uAng float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(uAng)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// UOffset returns the UOffset property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#uoffset
+func (n *NoiseProceduralTexture) UOffset(uOffset float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(uOffset)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUOffset sets the UOffset property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#uoffset
+func (n *NoiseProceduralTexture) SetUOffset(uOffset float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(uOffset)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// URotationCenter returns the URotationCenter property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#urotationcenter
+func (n *NoiseProceduralTexture) URotationCenter(uRotationCenter float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(uRotationCenter)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetURotationCenter sets the URotationCenter property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#urotationcenter
+func (n *NoiseProceduralTexture) SetURotationCenter(uRotationCenter float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(uRotationCenter)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// UScale returns the UScale property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#uscale
+func (n *NoiseProceduralTexture) UScale(uScale float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(uScale)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUScale sets the UScale property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#uscale
+func (n *NoiseProceduralTexture) SetUScale(uScale float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(uScale)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// Uid returns the Uid property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#uid
+func (n *NoiseProceduralTexture) Uid(uid string) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(uid)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUid sets the Uid property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#uid
+func (n *NoiseProceduralTexture) SetUid(uid string) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(uid)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#uniqueid
+func (n *NoiseProceduralTexture) UniqueId(uniqueId float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(uniqueId)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#uniqueid
+func (n *NoiseProceduralTexture) SetUniqueId(uniqueId float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(uniqueId)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// Url returns the Url property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#url
+func (n *NoiseProceduralTexture) Url(url string) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(url)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUrl sets the Url property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#url
+func (n *NoiseProceduralTexture) SetUrl(url string) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(url)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// UseSerializedUrlIfAny returns the UseSerializedUrlIfAny property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#useserializedurlifany
+func (n *NoiseProceduralTexture) UseSerializedUrlIfAny(UseSerializedUrlIfAny bool) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(UseSerializedUrlIfAny)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUseSerializedUrlIfAny sets the UseSerializedUrlIfAny property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#useserializedurlifany
+func (n *NoiseProceduralTexture) SetUseSerializedUrlIfAny(UseSerializedUrlIfAny bool) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(UseSerializedUrlIfAny)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// VAng returns the VAng property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#vang
+func (n *NoiseProceduralTexture) VAng(vAng float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(vAng)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetVAng sets the VAng property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#vang
+func (n *NoiseProceduralTexture) SetVAng(vAng float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(vAng)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// VOffset returns the VOffset property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#voffset
+func (n *NoiseProceduralTexture) VOffset(vOffset float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(vOffset)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetVOffset sets the VOffset property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#voffset
+func (n *NoiseProceduralTexture) SetVOffset(vOffset float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(vOffset)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// VRotationCenter returns the VRotationCenter property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#vrotationcenter
+func (n *NoiseProceduralTexture) VRotationCenter(vRotationCenter float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(vRotationCenter)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetVRotationCenter sets the VRotationCenter property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#vrotationcenter
+func (n *NoiseProceduralTexture) SetVRotationCenter(vRotationCenter float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(vRotationCenter)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// VScale returns the VScale property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#vscale
+func (n *NoiseProceduralTexture) VScale(vScale float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(vScale)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetVScale sets the VScale property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#vscale
+func (n *NoiseProceduralTexture) SetVScale(vScale float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(vScale)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// WAng returns the WAng property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#wang
+func (n *NoiseProceduralTexture) WAng(wAng float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(wAng)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWAng sets the WAng property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#wang
+func (n *NoiseProceduralTexture) SetWAng(wAng float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(wAng)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// WRAP_ADDRESSMODE returns the WRAP_ADDRESSMODE property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#wrap_addressmode
+func (n *NoiseProceduralTexture) WRAP_ADDRESSMODE(WRAP_ADDRESSMODE float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(WRAP_ADDRESSMODE)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWRAP_ADDRESSMODE sets the WRAP_ADDRESSMODE property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#wrap_addressmode
+func (n *NoiseProceduralTexture) SetWRAP_ADDRESSMODE(WRAP_ADDRESSMODE float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(WRAP_ADDRESSMODE)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// WRotationCenter returns the WRotationCenter property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#wrotationcenter
+func (n *NoiseProceduralTexture) WRotationCenter(wRotationCenter float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(wRotationCenter)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWRotationCenter sets the WRotationCenter property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#wrotationcenter
+func (n *NoiseProceduralTexture) SetWRotationCenter(wRotationCenter float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(wRotationCenter)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// WrapR returns the WrapR property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#wrapr
+func (n *NoiseProceduralTexture) WrapR(wrapR float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(wrapR)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWrapR sets the WrapR property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#wrapr
+func (n *NoiseProceduralTexture) SetWrapR(wrapR float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(wrapR)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// WrapU returns the WrapU property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#wrapu
+func (n *NoiseProceduralTexture) WrapU(wrapU float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(wrapU)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWrapU sets the WrapU property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#wrapu
+func (n *NoiseProceduralTexture) SetWrapU(wrapU float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(wrapU)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// WrapV returns the WrapV property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#wrapv
+func (n *NoiseProceduralTexture) WrapV(wrapV float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(wrapV)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWrapV sets the WrapV property of class NoiseProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.noiseproceduraltexture#wrapv
+func (n *NoiseProceduralTexture) SetWrapV(wrapV float64) *NoiseProceduralTexture {
+	p := ba.ctx.Get("NoiseProceduralTexture").New(wrapV)
+	return NoiseProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+*/

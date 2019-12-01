@@ -27,4 +27,22 @@ func UniqueIdGeneratorFromJSObject(p js.Value, ctx js.Value) *UniqueIdGenerator 
 	return &UniqueIdGenerator{p: p, ctx: ctx}
 }
 
-// TODO: methods
+/*
+
+// UniqueId returns the UniqueId property of class UniqueIdGenerator.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniqueidgenerator#uniqueid
+func (u *UniqueIdGenerator) UniqueId(UniqueId float64) *UniqueIdGenerator {
+	p := ba.ctx.Get("UniqueIdGenerator").New(UniqueId)
+	return UniqueIdGeneratorFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class UniqueIdGenerator.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniqueidgenerator#uniqueid
+func (u *UniqueIdGenerator) SetUniqueId(UniqueId float64) *UniqueIdGenerator {
+	p := ba.ctx.Get("UniqueIdGenerator").New(UniqueId)
+	return UniqueIdGeneratorFromJSObject(p, ba.ctx)
+}
+
+*/

@@ -31,8 +31,264 @@ func MeshAssetTaskFromJSObject(p js.Value, ctx js.Value) *MeshAssetTask {
 //
 // https://doc.babylonjs.com/api/classes/babylon.meshassettask
 func (ba *Babylon) NewMeshAssetTask(name string, meshesNames interface{}, rootUrl string, sceneFilename string) *MeshAssetTask {
-	p := ba.ctx.Get("MeshAssetTask").New(name, meshesNames, rootUrl, sceneFilename)
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, name)
+	args = append(args, meshesNames)
+	args = append(args, rootUrl)
+	args = append(args, sceneFilename)
+
+	p := ba.ctx.Get("MeshAssetTask").New(args...)
 	return MeshAssetTaskFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Reset calls the Reset method on the MeshAssetTask object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshassettask#reset
+func (m *MeshAssetTask) Reset() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	m.p.Call("reset", args...)
+}
+
+// Run calls the Run method on the MeshAssetTask object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshassettask#run
+func (m *MeshAssetTask) Run(scene *Scene, onSuccess func(), onError func()) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, scene.JSObject())
+	args = append(args, onSuccess)
+	args = append(args, onError)
+
+	m.p.Call("run", args...)
+}
+
+// RunTask calls the RunTask method on the MeshAssetTask object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshassettask#runtask
+func (m *MeshAssetTask) RunTask(scene *Scene, onSuccess func(), onError func()) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, scene.JSObject())
+	args = append(args, onSuccess)
+	args = append(args, onError)
+
+	m.p.Call("runTask", args...)
+}
+
+/*
+
+// ErrorObject returns the ErrorObject property of class MeshAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshassettask#errorobject
+func (m *MeshAssetTask) ErrorObject(errorObject js.Value) *MeshAssetTask {
+	p := ba.ctx.Get("MeshAssetTask").New(errorObject)
+	return MeshAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// SetErrorObject sets the ErrorObject property of class MeshAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshassettask#errorobject
+func (m *MeshAssetTask) SetErrorObject(errorObject js.Value) *MeshAssetTask {
+	p := ba.ctx.Get("MeshAssetTask").New(errorObject)
+	return MeshAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// IsCompleted returns the IsCompleted property of class MeshAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshassettask#iscompleted
+func (m *MeshAssetTask) IsCompleted(isCompleted bool) *MeshAssetTask {
+	p := ba.ctx.Get("MeshAssetTask").New(isCompleted)
+	return MeshAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// SetIsCompleted sets the IsCompleted property of class MeshAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshassettask#iscompleted
+func (m *MeshAssetTask) SetIsCompleted(isCompleted bool) *MeshAssetTask {
+	p := ba.ctx.Get("MeshAssetTask").New(isCompleted)
+	return MeshAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// LoadedAnimationGroups returns the LoadedAnimationGroups property of class MeshAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshassettask#loadedanimationgroups
+func (m *MeshAssetTask) LoadedAnimationGroups(loadedAnimationGroups []AnimationGroup) *MeshAssetTask {
+	p := ba.ctx.Get("MeshAssetTask").New(loadedAnimationGroups.JSObject())
+	return MeshAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// SetLoadedAnimationGroups sets the LoadedAnimationGroups property of class MeshAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshassettask#loadedanimationgroups
+func (m *MeshAssetTask) SetLoadedAnimationGroups(loadedAnimationGroups []AnimationGroup) *MeshAssetTask {
+	p := ba.ctx.Get("MeshAssetTask").New(loadedAnimationGroups.JSObject())
+	return MeshAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// LoadedMeshes returns the LoadedMeshes property of class MeshAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshassettask#loadedmeshes
+func (m *MeshAssetTask) LoadedMeshes(loadedMeshes []AbstractMesh) *MeshAssetTask {
+	p := ba.ctx.Get("MeshAssetTask").New(loadedMeshes.JSObject())
+	return MeshAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// SetLoadedMeshes sets the LoadedMeshes property of class MeshAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshassettask#loadedmeshes
+func (m *MeshAssetTask) SetLoadedMeshes(loadedMeshes []AbstractMesh) *MeshAssetTask {
+	p := ba.ctx.Get("MeshAssetTask").New(loadedMeshes.JSObject())
+	return MeshAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// LoadedParticleSystems returns the LoadedParticleSystems property of class MeshAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshassettask#loadedparticlesystems
+func (m *MeshAssetTask) LoadedParticleSystems(loadedParticleSystems []IParticleSystem) *MeshAssetTask {
+	p := ba.ctx.Get("MeshAssetTask").New(loadedParticleSystems.JSObject())
+	return MeshAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// SetLoadedParticleSystems sets the LoadedParticleSystems property of class MeshAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshassettask#loadedparticlesystems
+func (m *MeshAssetTask) SetLoadedParticleSystems(loadedParticleSystems []IParticleSystem) *MeshAssetTask {
+	p := ba.ctx.Get("MeshAssetTask").New(loadedParticleSystems.JSObject())
+	return MeshAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// LoadedSkeletons returns the LoadedSkeletons property of class MeshAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshassettask#loadedskeletons
+func (m *MeshAssetTask) LoadedSkeletons(loadedSkeletons []Skeleton) *MeshAssetTask {
+	p := ba.ctx.Get("MeshAssetTask").New(loadedSkeletons.JSObject())
+	return MeshAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// SetLoadedSkeletons sets the LoadedSkeletons property of class MeshAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshassettask#loadedskeletons
+func (m *MeshAssetTask) SetLoadedSkeletons(loadedSkeletons []Skeleton) *MeshAssetTask {
+	p := ba.ctx.Get("MeshAssetTask").New(loadedSkeletons.JSObject())
+	return MeshAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// MeshesNames returns the MeshesNames property of class MeshAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshassettask#meshesnames
+func (m *MeshAssetTask) MeshesNames(meshesNames interface{}) *MeshAssetTask {
+	p := ba.ctx.Get("MeshAssetTask").New(meshesNames)
+	return MeshAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// SetMeshesNames sets the MeshesNames property of class MeshAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshassettask#meshesnames
+func (m *MeshAssetTask) SetMeshesNames(meshesNames interface{}) *MeshAssetTask {
+	p := ba.ctx.Get("MeshAssetTask").New(meshesNames)
+	return MeshAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class MeshAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshassettask#name
+func (m *MeshAssetTask) Name(name string) *MeshAssetTask {
+	p := ba.ctx.Get("MeshAssetTask").New(name)
+	return MeshAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class MeshAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshassettask#name
+func (m *MeshAssetTask) SetName(name string) *MeshAssetTask {
+	p := ba.ctx.Get("MeshAssetTask").New(name)
+	return MeshAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// OnError returns the OnError property of class MeshAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshassettask#onerror
+func (m *MeshAssetTask) OnError(onError func()) *MeshAssetTask {
+	p := ba.ctx.Get("MeshAssetTask").New(onError)
+	return MeshAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// SetOnError sets the OnError property of class MeshAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshassettask#onerror
+func (m *MeshAssetTask) SetOnError(onError func()) *MeshAssetTask {
+	p := ba.ctx.Get("MeshAssetTask").New(onError)
+	return MeshAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// OnSuccess returns the OnSuccess property of class MeshAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshassettask#onsuccess
+func (m *MeshAssetTask) OnSuccess(onSuccess func()) *MeshAssetTask {
+	p := ba.ctx.Get("MeshAssetTask").New(onSuccess)
+	return MeshAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// SetOnSuccess sets the OnSuccess property of class MeshAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshassettask#onsuccess
+func (m *MeshAssetTask) SetOnSuccess(onSuccess func()) *MeshAssetTask {
+	p := ba.ctx.Get("MeshAssetTask").New(onSuccess)
+	return MeshAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// RootUrl returns the RootUrl property of class MeshAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshassettask#rooturl
+func (m *MeshAssetTask) RootUrl(rootUrl string) *MeshAssetTask {
+	p := ba.ctx.Get("MeshAssetTask").New(rootUrl)
+	return MeshAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// SetRootUrl sets the RootUrl property of class MeshAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshassettask#rooturl
+func (m *MeshAssetTask) SetRootUrl(rootUrl string) *MeshAssetTask {
+	p := ba.ctx.Get("MeshAssetTask").New(rootUrl)
+	return MeshAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// SceneFilename returns the SceneFilename property of class MeshAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshassettask#scenefilename
+func (m *MeshAssetTask) SceneFilename(sceneFilename string) *MeshAssetTask {
+	p := ba.ctx.Get("MeshAssetTask").New(sceneFilename)
+	return MeshAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// SetSceneFilename sets the SceneFilename property of class MeshAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshassettask#scenefilename
+func (m *MeshAssetTask) SetSceneFilename(sceneFilename string) *MeshAssetTask {
+	p := ba.ctx.Get("MeshAssetTask").New(sceneFilename)
+	return MeshAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// TaskState returns the TaskState property of class MeshAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshassettask#taskstate
+func (m *MeshAssetTask) TaskState(taskState *AssetTaskState) *MeshAssetTask {
+	p := ba.ctx.Get("MeshAssetTask").New(taskState.JSObject())
+	return MeshAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// SetTaskState sets the TaskState property of class MeshAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshassettask#taskstate
+func (m *MeshAssetTask) SetTaskState(taskState *AssetTaskState) *MeshAssetTask {
+	p := ba.ctx.Get("MeshAssetTask").New(taskState.JSObject())
+	return MeshAssetTaskFromJSObject(p, ba.ctx)
+}
+
+*/

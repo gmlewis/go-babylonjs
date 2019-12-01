@@ -31,8 +31,398 @@ func PBRClearCoatConfigurationFromJSObject(p js.Value, ctx js.Value) *PBRClearCo
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration
 func (ba *Babylon) NewPBRClearCoatConfiguration(markAllSubMeshesAsTexturesDirty func()) *PBRClearCoatConfiguration {
-	p := ba.ctx.Get("PBRClearCoatConfiguration").New(markAllSubMeshesAsTexturesDirty)
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, markAllSubMeshesAsTexturesDirty)
+
+	p := ba.ctx.Get("PBRClearCoatConfiguration").New(args...)
 	return PBRClearCoatConfigurationFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AddFallbacks calls the AddFallbacks method on the PBRClearCoatConfiguration object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#addfallbacks
+func (p *PBRClearCoatConfiguration) AddFallbacks(defines *IMaterialClearCoatDefines, fallbacks *EffectFallbacks, currentRank float64) float64 {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, defines.JSObject())
+	args = append(args, fallbacks.JSObject())
+	args = append(args, currentRank)
+
+	retVal := p.p.Call("AddFallbacks", args...)
+	return retVal.Float()
+}
+
+// AddSamplers calls the AddSamplers method on the PBRClearCoatConfiguration object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#addsamplers
+func (p *PBRClearCoatConfiguration) AddSamplers(samplers string) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, samplers)
+
+	p.p.Call("AddSamplers", args...)
+}
+
+// AddUniforms calls the AddUniforms method on the PBRClearCoatConfiguration object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#adduniforms
+func (p *PBRClearCoatConfiguration) AddUniforms(uniforms string) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, uniforms)
+
+	p.p.Call("AddUniforms", args...)
+}
+
+// BindForSubMesh calls the BindForSubMesh method on the PBRClearCoatConfiguration object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#bindforsubmesh
+func (p *PBRClearCoatConfiguration) BindForSubMesh(uniformBuffer *UniformBuffer, scene *Scene, engine *Engine, disableBumpMap bool, isFrozen bool, invertNormalMapX bool, invertNormalMapY bool) {
+
+	args := make([]interface{}, 0, 7+0)
+
+	args = append(args, uniformBuffer.JSObject())
+	args = append(args, scene.JSObject())
+	args = append(args, engine.JSObject())
+	args = append(args, disableBumpMap)
+	args = append(args, isFrozen)
+	args = append(args, invertNormalMapX)
+	args = append(args, invertNormalMapY)
+
+	p.p.Call("bindForSubMesh", args...)
+}
+
+// CopyTo calls the CopyTo method on the PBRClearCoatConfiguration object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#copyto
+func (p *PBRClearCoatConfiguration) CopyTo(clearCoatConfiguration *PBRClearCoatConfiguration) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, clearCoatConfiguration.JSObject())
+
+	p.p.Call("copyTo", args...)
+}
+
+// PBRClearCoatConfigurationDisposeOpts contains optional parameters for PBRClearCoatConfiguration.Dispose.
+type PBRClearCoatConfigurationDisposeOpts struct {
+	ForceDisposeTextures *bool
+}
+
+// Dispose calls the Dispose method on the PBRClearCoatConfiguration object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#dispose
+func (p *PBRClearCoatConfiguration) Dispose(opts *PBRClearCoatConfigurationDisposeOpts) {
+	if opts == nil {
+		opts = &PBRClearCoatConfigurationDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForceDisposeTextures == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceDisposeTextures)
+	}
+
+	p.p.Call("dispose", args...)
+}
+
+// GetActiveTextures calls the GetActiveTextures method on the PBRClearCoatConfiguration object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#getactivetextures
+func (p *PBRClearCoatConfiguration) GetActiveTextures(activeTextures *BaseTexture) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, activeTextures.JSObject())
+
+	p.p.Call("getActiveTextures", args...)
+}
+
+// GetAnimatables calls the GetAnimatables method on the PBRClearCoatConfiguration object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#getanimatables
+func (p *PBRClearCoatConfiguration) GetAnimatables(animatables js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, animatables)
+
+	p.p.Call("getAnimatables", args...)
+}
+
+// GetClassName calls the GetClassName method on the PBRClearCoatConfiguration object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#getclassname
+func (p *PBRClearCoatConfiguration) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// HasTexture calls the HasTexture method on the PBRClearCoatConfiguration object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#hastexture
+func (p *PBRClearCoatConfiguration) HasTexture(texture *BaseTexture) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, texture.JSObject())
+
+	retVal := p.p.Call("hasTexture", args...)
+	return retVal.Bool()
+}
+
+// IsReadyForSubMesh calls the IsReadyForSubMesh method on the PBRClearCoatConfiguration object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#isreadyforsubmesh
+func (p *PBRClearCoatConfiguration) IsReadyForSubMesh(defines *IMaterialClearCoatDefines, scene *Scene, engine *Engine, disableBumpMap bool) bool {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, defines.JSObject())
+	args = append(args, scene.JSObject())
+	args = append(args, engine.JSObject())
+	args = append(args, disableBumpMap)
+
+	retVal := p.p.Call("isReadyForSubMesh", args...)
+	return retVal.Bool()
+}
+
+// Parse calls the Parse method on the PBRClearCoatConfiguration object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#parse
+func (p *PBRClearCoatConfiguration) Parse(source interface{}, scene *Scene, rootUrl string) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, source)
+	args = append(args, scene.JSObject())
+	args = append(args, rootUrl)
+
+	p.p.Call("parse", args...)
+}
+
+// PrepareDefines calls the PrepareDefines method on the PBRClearCoatConfiguration object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#preparedefines
+func (p *PBRClearCoatConfiguration) PrepareDefines(defines *IMaterialClearCoatDefines, scene *Scene) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, defines.JSObject())
+	args = append(args, scene.JSObject())
+
+	p.p.Call("prepareDefines", args...)
+}
+
+// PrepareUniformBuffer calls the PrepareUniformBuffer method on the PBRClearCoatConfiguration object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#prepareuniformbuffer
+func (p *PBRClearCoatConfiguration) PrepareUniformBuffer(uniformBuffer *UniformBuffer) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, uniformBuffer.JSObject())
+
+	p.p.Call("PrepareUniformBuffer", args...)
+}
+
+// Serialize calls the Serialize method on the PBRClearCoatConfiguration object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#serialize
+func (p *PBRClearCoatConfiguration) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("serialize", args...)
+	return retVal
+}
+
+/*
+
+// BumpTexture returns the BumpTexture property of class PBRClearCoatConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#bumptexture
+func (p *PBRClearCoatConfiguration) BumpTexture(bumpTexture *BaseTexture) *PBRClearCoatConfiguration {
+	p := ba.ctx.Get("PBRClearCoatConfiguration").New(bumpTexture.JSObject())
+	return PBRClearCoatConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetBumpTexture sets the BumpTexture property of class PBRClearCoatConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#bumptexture
+func (p *PBRClearCoatConfiguration) SetBumpTexture(bumpTexture *BaseTexture) *PBRClearCoatConfiguration {
+	p := ba.ctx.Get("PBRClearCoatConfiguration").New(bumpTexture.JSObject())
+	return PBRClearCoatConfigurationFromJSObject(p, ba.ctx)
+}
+
+// IndexOfRefraction returns the IndexOfRefraction property of class PBRClearCoatConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#indexofrefraction
+func (p *PBRClearCoatConfiguration) IndexOfRefraction(indexOfRefraction float64) *PBRClearCoatConfiguration {
+	p := ba.ctx.Get("PBRClearCoatConfiguration").New(indexOfRefraction)
+	return PBRClearCoatConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetIndexOfRefraction sets the IndexOfRefraction property of class PBRClearCoatConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#indexofrefraction
+func (p *PBRClearCoatConfiguration) SetIndexOfRefraction(indexOfRefraction float64) *PBRClearCoatConfiguration {
+	p := ba.ctx.Get("PBRClearCoatConfiguration").New(indexOfRefraction)
+	return PBRClearCoatConfigurationFromJSObject(p, ba.ctx)
+}
+
+// Intensity returns the Intensity property of class PBRClearCoatConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#intensity
+func (p *PBRClearCoatConfiguration) Intensity(intensity float64) *PBRClearCoatConfiguration {
+	p := ba.ctx.Get("PBRClearCoatConfiguration").New(intensity)
+	return PBRClearCoatConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetIntensity sets the Intensity property of class PBRClearCoatConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#intensity
+func (p *PBRClearCoatConfiguration) SetIntensity(intensity float64) *PBRClearCoatConfiguration {
+	p := ba.ctx.Get("PBRClearCoatConfiguration").New(intensity)
+	return PBRClearCoatConfigurationFromJSObject(p, ba.ctx)
+}
+
+// IsEnabled returns the IsEnabled property of class PBRClearCoatConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#isenabled
+func (p *PBRClearCoatConfiguration) IsEnabled(isEnabled bool) *PBRClearCoatConfiguration {
+	p := ba.ctx.Get("PBRClearCoatConfiguration").New(isEnabled)
+	return PBRClearCoatConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetIsEnabled sets the IsEnabled property of class PBRClearCoatConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#isenabled
+func (p *PBRClearCoatConfiguration) SetIsEnabled(isEnabled bool) *PBRClearCoatConfiguration {
+	p := ba.ctx.Get("PBRClearCoatConfiguration").New(isEnabled)
+	return PBRClearCoatConfigurationFromJSObject(p, ba.ctx)
+}
+
+// IsTintEnabled returns the IsTintEnabled property of class PBRClearCoatConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#istintenabled
+func (p *PBRClearCoatConfiguration) IsTintEnabled(isTintEnabled bool) *PBRClearCoatConfiguration {
+	p := ba.ctx.Get("PBRClearCoatConfiguration").New(isTintEnabled)
+	return PBRClearCoatConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetIsTintEnabled sets the IsTintEnabled property of class PBRClearCoatConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#istintenabled
+func (p *PBRClearCoatConfiguration) SetIsTintEnabled(isTintEnabled bool) *PBRClearCoatConfiguration {
+	p := ba.ctx.Get("PBRClearCoatConfiguration").New(isTintEnabled)
+	return PBRClearCoatConfigurationFromJSObject(p, ba.ctx)
+}
+
+// Roughness returns the Roughness property of class PBRClearCoatConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#roughness
+func (p *PBRClearCoatConfiguration) Roughness(roughness float64) *PBRClearCoatConfiguration {
+	p := ba.ctx.Get("PBRClearCoatConfiguration").New(roughness)
+	return PBRClearCoatConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetRoughness sets the Roughness property of class PBRClearCoatConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#roughness
+func (p *PBRClearCoatConfiguration) SetRoughness(roughness float64) *PBRClearCoatConfiguration {
+	p := ba.ctx.Get("PBRClearCoatConfiguration").New(roughness)
+	return PBRClearCoatConfigurationFromJSObject(p, ba.ctx)
+}
+
+// Texture returns the Texture property of class PBRClearCoatConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#texture
+func (p *PBRClearCoatConfiguration) Texture(texture *BaseTexture) *PBRClearCoatConfiguration {
+	p := ba.ctx.Get("PBRClearCoatConfiguration").New(texture.JSObject())
+	return PBRClearCoatConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetTexture sets the Texture property of class PBRClearCoatConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#texture
+func (p *PBRClearCoatConfiguration) SetTexture(texture *BaseTexture) *PBRClearCoatConfiguration {
+	p := ba.ctx.Get("PBRClearCoatConfiguration").New(texture.JSObject())
+	return PBRClearCoatConfigurationFromJSObject(p, ba.ctx)
+}
+
+// TintColor returns the TintColor property of class PBRClearCoatConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#tintcolor
+func (p *PBRClearCoatConfiguration) TintColor(tintColor *Color3) *PBRClearCoatConfiguration {
+	p := ba.ctx.Get("PBRClearCoatConfiguration").New(tintColor.JSObject())
+	return PBRClearCoatConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetTintColor sets the TintColor property of class PBRClearCoatConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#tintcolor
+func (p *PBRClearCoatConfiguration) SetTintColor(tintColor *Color3) *PBRClearCoatConfiguration {
+	p := ba.ctx.Get("PBRClearCoatConfiguration").New(tintColor.JSObject())
+	return PBRClearCoatConfigurationFromJSObject(p, ba.ctx)
+}
+
+// TintColorAtDistance returns the TintColorAtDistance property of class PBRClearCoatConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#tintcoloratdistance
+func (p *PBRClearCoatConfiguration) TintColorAtDistance(tintColorAtDistance float64) *PBRClearCoatConfiguration {
+	p := ba.ctx.Get("PBRClearCoatConfiguration").New(tintColorAtDistance)
+	return PBRClearCoatConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetTintColorAtDistance sets the TintColorAtDistance property of class PBRClearCoatConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#tintcoloratdistance
+func (p *PBRClearCoatConfiguration) SetTintColorAtDistance(tintColorAtDistance float64) *PBRClearCoatConfiguration {
+	p := ba.ctx.Get("PBRClearCoatConfiguration").New(tintColorAtDistance)
+	return PBRClearCoatConfigurationFromJSObject(p, ba.ctx)
+}
+
+// TintTexture returns the TintTexture property of class PBRClearCoatConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#tinttexture
+func (p *PBRClearCoatConfiguration) TintTexture(tintTexture *BaseTexture) *PBRClearCoatConfiguration {
+	p := ba.ctx.Get("PBRClearCoatConfiguration").New(tintTexture.JSObject())
+	return PBRClearCoatConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetTintTexture sets the TintTexture property of class PBRClearCoatConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#tinttexture
+func (p *PBRClearCoatConfiguration) SetTintTexture(tintTexture *BaseTexture) *PBRClearCoatConfiguration {
+	p := ba.ctx.Get("PBRClearCoatConfiguration").New(tintTexture.JSObject())
+	return PBRClearCoatConfigurationFromJSObject(p, ba.ctx)
+}
+
+// TintThickness returns the TintThickness property of class PBRClearCoatConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#tintthickness
+func (p *PBRClearCoatConfiguration) TintThickness(tintThickness float64) *PBRClearCoatConfiguration {
+	p := ba.ctx.Get("PBRClearCoatConfiguration").New(tintThickness)
+	return PBRClearCoatConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetTintThickness sets the TintThickness property of class PBRClearCoatConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrclearcoatconfiguration#tintthickness
+func (p *PBRClearCoatConfiguration) SetTintThickness(tintThickness float64) *PBRClearCoatConfiguration {
+	p := ba.ctx.Get("PBRClearCoatConfiguration").New(tintThickness)
+	return PBRClearCoatConfigurationFromJSObject(p, ba.ctx)
+}
+
+*/

@@ -29,4 +29,114 @@ func ArcRotateCameraMouseWheelInputFromJSObject(p js.Value, ctx js.Value) *ArcRo
 	return &ArcRotateCameraMouseWheelInput{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// ArcRotateCameraMouseWheelInputAttachControlOpts contains optional parameters for ArcRotateCameraMouseWheelInput.AttachControl.
+type ArcRotateCameraMouseWheelInputAttachControlOpts struct {
+	NoPreventDefault *bool
+}
+
+// AttachControl calls the AttachControl method on the ArcRotateCameraMouseWheelInput object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecameramousewheelinput#attachcontrol
+func (a *ArcRotateCameraMouseWheelInput) AttachControl(element js.Value, opts *ArcRotateCameraMouseWheelInputAttachControlOpts) {
+	if opts == nil {
+		opts = &ArcRotateCameraMouseWheelInputAttachControlOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, element)
+
+	if opts.NoPreventDefault == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoPreventDefault)
+	}
+
+	a.p.Call("attachControl", args...)
+}
+
+// DetachControl calls the DetachControl method on the ArcRotateCameraMouseWheelInput object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecameramousewheelinput#detachcontrol
+func (a *ArcRotateCameraMouseWheelInput) DetachControl(element js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, element)
+
+	a.p.Call("detachControl", args...)
+}
+
+// GetClassName calls the GetClassName method on the ArcRotateCameraMouseWheelInput object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecameramousewheelinput#getclassname
+func (a *ArcRotateCameraMouseWheelInput) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetSimpleName calls the GetSimpleName method on the ArcRotateCameraMouseWheelInput object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecameramousewheelinput#getsimplename
+func (a *ArcRotateCameraMouseWheelInput) GetSimpleName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("getSimpleName", args...)
+	return retVal.String()
+}
+
+/*
+
+// Camera returns the Camera property of class ArcRotateCameraMouseWheelInput.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecameramousewheelinput#camera
+func (a *ArcRotateCameraMouseWheelInput) Camera(camera *ArcRotateCamera) *ArcRotateCameraMouseWheelInput {
+	p := ba.ctx.Get("ArcRotateCameraMouseWheelInput").New(camera.JSObject())
+	return ArcRotateCameraMouseWheelInputFromJSObject(p, ba.ctx)
+}
+
+// SetCamera sets the Camera property of class ArcRotateCameraMouseWheelInput.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecameramousewheelinput#camera
+func (a *ArcRotateCameraMouseWheelInput) SetCamera(camera *ArcRotateCamera) *ArcRotateCameraMouseWheelInput {
+	p := ba.ctx.Get("ArcRotateCameraMouseWheelInput").New(camera.JSObject())
+	return ArcRotateCameraMouseWheelInputFromJSObject(p, ba.ctx)
+}
+
+// WheelDeltaPercentage returns the WheelDeltaPercentage property of class ArcRotateCameraMouseWheelInput.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecameramousewheelinput#wheeldeltapercentage
+func (a *ArcRotateCameraMouseWheelInput) WheelDeltaPercentage(wheelDeltaPercentage float64) *ArcRotateCameraMouseWheelInput {
+	p := ba.ctx.Get("ArcRotateCameraMouseWheelInput").New(wheelDeltaPercentage)
+	return ArcRotateCameraMouseWheelInputFromJSObject(p, ba.ctx)
+}
+
+// SetWheelDeltaPercentage sets the WheelDeltaPercentage property of class ArcRotateCameraMouseWheelInput.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecameramousewheelinput#wheeldeltapercentage
+func (a *ArcRotateCameraMouseWheelInput) SetWheelDeltaPercentage(wheelDeltaPercentage float64) *ArcRotateCameraMouseWheelInput {
+	p := ba.ctx.Get("ArcRotateCameraMouseWheelInput").New(wheelDeltaPercentage)
+	return ArcRotateCameraMouseWheelInputFromJSObject(p, ba.ctx)
+}
+
+// WheelPrecision returns the WheelPrecision property of class ArcRotateCameraMouseWheelInput.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecameramousewheelinput#wheelprecision
+func (a *ArcRotateCameraMouseWheelInput) WheelPrecision(wheelPrecision float64) *ArcRotateCameraMouseWheelInput {
+	p := ba.ctx.Get("ArcRotateCameraMouseWheelInput").New(wheelPrecision)
+	return ArcRotateCameraMouseWheelInputFromJSObject(p, ba.ctx)
+}
+
+// SetWheelPrecision sets the WheelPrecision property of class ArcRotateCameraMouseWheelInput.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecameramousewheelinput#wheelprecision
+func (a *ArcRotateCameraMouseWheelInput) SetWheelPrecision(wheelPrecision float64) *ArcRotateCameraMouseWheelInput {
+	p := ba.ctx.Get("ArcRotateCameraMouseWheelInput").New(wheelPrecision)
+	return ArcRotateCameraMouseWheelInputFromJSObject(p, ba.ctx)
+}
+
+*/

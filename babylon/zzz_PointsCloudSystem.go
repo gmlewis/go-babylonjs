@@ -34,7 +34,7 @@ func PointsCloudSystemFromJSObject(p js.Value, ctx js.Value) *PointsCloudSystem 
 
 // NewPointsCloudSystemOpts contains optional parameters for NewPointsCloudSystem.
 type NewPointsCloudSystemOpts struct {
-	Options *JSValue
+	Options js.Value
 }
 
 // NewPointsCloudSystem returns a new PointsCloudSystem object.
@@ -45,8 +45,494 @@ func (ba *Babylon) NewPointsCloudSystem(name string, pointSize float64, scene *S
 		opts = &NewPointsCloudSystemOpts{}
 	}
 
-	p := ba.ctx.Get("PointsCloudSystem").New(name, pointSize, scene.JSObject(), opts.Options.JSObject())
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, name)
+	args = append(args, pointSize)
+	args = append(args, scene.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	p := ba.ctx.Get("PointsCloudSystem").New(args...)
 	return PointsCloudSystemFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// PointsCloudSystemAddPointsOpts contains optional parameters for PointsCloudSystem.AddPoints.
+type PointsCloudSystemAddPointsOpts struct {
+	PointFunction *interface{}
+}
+
+// AddPoints calls the AddPoints method on the PointsCloudSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#addpoints
+func (p *PointsCloudSystem) AddPoints(nb float64, opts *PointsCloudSystemAddPointsOpts) float64 {
+	if opts == nil {
+		opts = &PointsCloudSystemAddPointsOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, nb)
+
+	if opts.PointFunction == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.PointFunction)
+	}
+
+	retVal := p.p.Call("addPoints", args...)
+	return retVal.Float()
+}
+
+// PointsCloudSystemAddSurfacePointsOpts contains optional parameters for PointsCloudSystem.AddSurfacePoints.
+type PointsCloudSystemAddSurfacePointsOpts struct {
+	ColorWith *float64
+	Color     *Color4
+	Range     *float64
+}
+
+// AddSurfacePoints calls the AddSurfacePoints method on the PointsCloudSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#addsurfacepoints
+func (p *PointsCloudSystem) AddSurfacePoints(mesh *Mesh, nb float64, opts *PointsCloudSystemAddSurfacePointsOpts) float64 {
+	if opts == nil {
+		opts = &PointsCloudSystemAddSurfacePointsOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+3)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nb)
+
+	if opts.ColorWith == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ColorWith)
+	}
+	if opts.Color == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Color.JSObject())
+	}
+	if opts.Range == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Range)
+	}
+
+	retVal := p.p.Call("addSurfacePoints", args...)
+	return retVal.Float()
+}
+
+// PointsCloudSystemAddVolumePointsOpts contains optional parameters for PointsCloudSystem.AddVolumePoints.
+type PointsCloudSystemAddVolumePointsOpts struct {
+	ColorWith *float64
+	Color     *Color4
+	Range     *float64
+}
+
+// AddVolumePoints calls the AddVolumePoints method on the PointsCloudSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#addvolumepoints
+func (p *PointsCloudSystem) AddVolumePoints(mesh *Mesh, nb float64, opts *PointsCloudSystemAddVolumePointsOpts) float64 {
+	if opts == nil {
+		opts = &PointsCloudSystemAddVolumePointsOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+3)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nb)
+
+	if opts.ColorWith == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ColorWith)
+	}
+	if opts.Color == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Color.JSObject())
+	}
+	if opts.Range == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Range)
+	}
+
+	retVal := p.p.Call("addVolumePoints", args...)
+	return retVal.Float()
+}
+
+// PointsCloudSystemAfterUpdateParticlesOpts contains optional parameters for PointsCloudSystem.AfterUpdateParticles.
+type PointsCloudSystemAfterUpdateParticlesOpts struct {
+	Start  *float64
+	Stop   *float64
+	Update *bool
+}
+
+// AfterUpdateParticles calls the AfterUpdateParticles method on the PointsCloudSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#afterupdateparticles
+func (p *PointsCloudSystem) AfterUpdateParticles(opts *PointsCloudSystemAfterUpdateParticlesOpts) {
+	if opts == nil {
+		opts = &PointsCloudSystemAfterUpdateParticlesOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+3)
+
+	if opts.Start == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Start)
+	}
+	if opts.Stop == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Stop)
+	}
+	if opts.Update == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Update)
+	}
+
+	p.p.Call("afterUpdateParticles", args...)
+}
+
+// PointsCloudSystemBeforeUpdateParticlesOpts contains optional parameters for PointsCloudSystem.BeforeUpdateParticles.
+type PointsCloudSystemBeforeUpdateParticlesOpts struct {
+	Start  *float64
+	Stop   *float64
+	Update *bool
+}
+
+// BeforeUpdateParticles calls the BeforeUpdateParticles method on the PointsCloudSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#beforeupdateparticles
+func (p *PointsCloudSystem) BeforeUpdateParticles(opts *PointsCloudSystemBeforeUpdateParticlesOpts) {
+	if opts == nil {
+		opts = &PointsCloudSystemBeforeUpdateParticlesOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+3)
+
+	if opts.Start == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Start)
+	}
+	if opts.Stop == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Stop)
+	}
+	if opts.Update == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Update)
+	}
+
+	p.p.Call("beforeUpdateParticles", args...)
+}
+
+// BuildMeshAsync calls the BuildMeshAsync method on the PointsCloudSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#buildmeshasync
+func (p *PointsCloudSystem) BuildMeshAsync() *Mesh {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("buildMeshAsync", args...)
+	return MeshFromJSObject(retVal, p.ctx)
+}
+
+// Dispose calls the Dispose method on the PointsCloudSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#dispose
+func (p *PointsCloudSystem) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("dispose", args...)
+}
+
+// InitParticles calls the InitParticles method on the PointsCloudSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#initparticles
+func (p *PointsCloudSystem) InitParticles() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("initParticles", args...)
+}
+
+// RecycleParticle calls the RecycleParticle method on the PointsCloudSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#recycleparticle
+func (p *PointsCloudSystem) RecycleParticle(particle *CloudPoint) *CloudPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, particle.JSObject())
+
+	retVal := p.p.Call("recycleParticle", args...)
+	return CloudPointFromJSObject(retVal, p.ctx)
+}
+
+// RefreshVisibleSize calls the RefreshVisibleSize method on the PointsCloudSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#refreshvisiblesize
+func (p *PointsCloudSystem) RefreshVisibleSize() *PointsCloudSystem {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("refreshVisibleSize", args...)
+	return PointsCloudSystemFromJSObject(retVal, p.ctx)
+}
+
+// PointsCloudSystemSetParticlesOpts contains optional parameters for PointsCloudSystem.SetParticles.
+type PointsCloudSystemSetParticlesOpts struct {
+	Start  *float64
+	End    *float64
+	Update *bool
+}
+
+// SetParticles calls the SetParticles method on the PointsCloudSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#setparticles
+func (p *PointsCloudSystem) SetParticles(opts *PointsCloudSystemSetParticlesOpts) *PointsCloudSystem {
+	if opts == nil {
+		opts = &PointsCloudSystemSetParticlesOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+3)
+
+	if opts.Start == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Start)
+	}
+	if opts.End == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.End)
+	}
+	if opts.Update == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Update)
+	}
+
+	retVal := p.p.Call("setParticles", args...)
+	return PointsCloudSystemFromJSObject(retVal, p.ctx)
+}
+
+// SetVisibilityBox calls the SetVisibilityBox method on the PointsCloudSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#setvisibilitybox
+func (p *PointsCloudSystem) SetVisibilityBox(size float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, size)
+
+	p.p.Call("setVisibilityBox", args...)
+}
+
+// UpdateParticle calls the UpdateParticle method on the PointsCloudSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#updateparticle
+func (p *PointsCloudSystem) UpdateParticle(particle *CloudPoint) *CloudPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, particle.JSObject())
+
+	retVal := p.p.Call("updateParticle", args...)
+	return CloudPointFromJSObject(retVal, p.ctx)
+}
+
+/*
+
+// ComputeBoundingBox returns the ComputeBoundingBox property of class PointsCloudSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#computeboundingbox
+func (p *PointsCloudSystem) ComputeBoundingBox(computeBoundingBox bool) *PointsCloudSystem {
+	p := ba.ctx.Get("PointsCloudSystem").New(computeBoundingBox)
+	return PointsCloudSystemFromJSObject(p, ba.ctx)
+}
+
+// SetComputeBoundingBox sets the ComputeBoundingBox property of class PointsCloudSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#computeboundingbox
+func (p *PointsCloudSystem) SetComputeBoundingBox(computeBoundingBox bool) *PointsCloudSystem {
+	p := ba.ctx.Get("PointsCloudSystem").New(computeBoundingBox)
+	return PointsCloudSystemFromJSObject(p, ba.ctx)
+}
+
+// ComputeParticleColor returns the ComputeParticleColor property of class PointsCloudSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#computeparticlecolor
+func (p *PointsCloudSystem) ComputeParticleColor(computeParticleColor bool) *PointsCloudSystem {
+	p := ba.ctx.Get("PointsCloudSystem").New(computeParticleColor)
+	return PointsCloudSystemFromJSObject(p, ba.ctx)
+}
+
+// SetComputeParticleColor sets the ComputeParticleColor property of class PointsCloudSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#computeparticlecolor
+func (p *PointsCloudSystem) SetComputeParticleColor(computeParticleColor bool) *PointsCloudSystem {
+	p := ba.ctx.Get("PointsCloudSystem").New(computeParticleColor)
+	return PointsCloudSystemFromJSObject(p, ba.ctx)
+}
+
+// ComputeParticleRotation returns the ComputeParticleRotation property of class PointsCloudSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#computeparticlerotation
+func (p *PointsCloudSystem) ComputeParticleRotation(computeParticleRotation bool) *PointsCloudSystem {
+	p := ba.ctx.Get("PointsCloudSystem").New(computeParticleRotation)
+	return PointsCloudSystemFromJSObject(p, ba.ctx)
+}
+
+// SetComputeParticleRotation sets the ComputeParticleRotation property of class PointsCloudSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#computeparticlerotation
+func (p *PointsCloudSystem) SetComputeParticleRotation(computeParticleRotation bool) *PointsCloudSystem {
+	p := ba.ctx.Get("PointsCloudSystem").New(computeParticleRotation)
+	return PointsCloudSystemFromJSObject(p, ba.ctx)
+}
+
+// ComputeParticleTexture returns the ComputeParticleTexture property of class PointsCloudSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#computeparticletexture
+func (p *PointsCloudSystem) ComputeParticleTexture(computeParticleTexture bool) *PointsCloudSystem {
+	p := ba.ctx.Get("PointsCloudSystem").New(computeParticleTexture)
+	return PointsCloudSystemFromJSObject(p, ba.ctx)
+}
+
+// SetComputeParticleTexture sets the ComputeParticleTexture property of class PointsCloudSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#computeparticletexture
+func (p *PointsCloudSystem) SetComputeParticleTexture(computeParticleTexture bool) *PointsCloudSystem {
+	p := ba.ctx.Get("PointsCloudSystem").New(computeParticleTexture)
+	return PointsCloudSystemFromJSObject(p, ba.ctx)
+}
+
+// Counter returns the Counter property of class PointsCloudSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#counter
+func (p *PointsCloudSystem) Counter(counter float64) *PointsCloudSystem {
+	p := ba.ctx.Get("PointsCloudSystem").New(counter)
+	return PointsCloudSystemFromJSObject(p, ba.ctx)
+}
+
+// SetCounter sets the Counter property of class PointsCloudSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#counter
+func (p *PointsCloudSystem) SetCounter(counter float64) *PointsCloudSystem {
+	p := ba.ctx.Get("PointsCloudSystem").New(counter)
+	return PointsCloudSystemFromJSObject(p, ba.ctx)
+}
+
+// IsAlwaysVisible returns the IsAlwaysVisible property of class PointsCloudSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#isalwaysvisible
+func (p *PointsCloudSystem) IsAlwaysVisible(isAlwaysVisible bool) *PointsCloudSystem {
+	p := ba.ctx.Get("PointsCloudSystem").New(isAlwaysVisible)
+	return PointsCloudSystemFromJSObject(p, ba.ctx)
+}
+
+// SetIsAlwaysVisible sets the IsAlwaysVisible property of class PointsCloudSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#isalwaysvisible
+func (p *PointsCloudSystem) SetIsAlwaysVisible(isAlwaysVisible bool) *PointsCloudSystem {
+	p := ba.ctx.Get("PointsCloudSystem").New(isAlwaysVisible)
+	return PointsCloudSystemFromJSObject(p, ba.ctx)
+}
+
+// Mesh returns the Mesh property of class PointsCloudSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#mesh
+func (p *PointsCloudSystem) Mesh(mesh *Mesh) *PointsCloudSystem {
+	p := ba.ctx.Get("PointsCloudSystem").New(mesh.JSObject())
+	return PointsCloudSystemFromJSObject(p, ba.ctx)
+}
+
+// SetMesh sets the Mesh property of class PointsCloudSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#mesh
+func (p *PointsCloudSystem) SetMesh(mesh *Mesh) *PointsCloudSystem {
+	p := ba.ctx.Get("PointsCloudSystem").New(mesh.JSObject())
+	return PointsCloudSystemFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class PointsCloudSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#name
+func (p *PointsCloudSystem) Name(name string) *PointsCloudSystem {
+	p := ba.ctx.Get("PointsCloudSystem").New(name)
+	return PointsCloudSystemFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class PointsCloudSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#name
+func (p *PointsCloudSystem) SetName(name string) *PointsCloudSystem {
+	p := ba.ctx.Get("PointsCloudSystem").New(name)
+	return PointsCloudSystemFromJSObject(p, ba.ctx)
+}
+
+// NbParticles returns the NbParticles property of class PointsCloudSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#nbparticles
+func (p *PointsCloudSystem) NbParticles(nbParticles float64) *PointsCloudSystem {
+	p := ba.ctx.Get("PointsCloudSystem").New(nbParticles)
+	return PointsCloudSystemFromJSObject(p, ba.ctx)
+}
+
+// SetNbParticles sets the NbParticles property of class PointsCloudSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#nbparticles
+func (p *PointsCloudSystem) SetNbParticles(nbParticles float64) *PointsCloudSystem {
+	p := ba.ctx.Get("PointsCloudSystem").New(nbParticles)
+	return PointsCloudSystemFromJSObject(p, ba.ctx)
+}
+
+// Particles returns the Particles property of class PointsCloudSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#particles
+func (p *PointsCloudSystem) Particles(particles *CloudPoint) *PointsCloudSystem {
+	p := ba.ctx.Get("PointsCloudSystem").New(particles.JSObject())
+	return PointsCloudSystemFromJSObject(p, ba.ctx)
+}
+
+// SetParticles sets the Particles property of class PointsCloudSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#particles
+func (p *PointsCloudSystem) SetParticles(particles *CloudPoint) *PointsCloudSystem {
+	p := ba.ctx.Get("PointsCloudSystem").New(particles.JSObject())
+	return PointsCloudSystemFromJSObject(p, ba.ctx)
+}
+
+// Vars returns the Vars property of class PointsCloudSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#vars
+func (p *PointsCloudSystem) Vars(vars interface{}) *PointsCloudSystem {
+	p := ba.ctx.Get("PointsCloudSystem").New(vars)
+	return PointsCloudSystemFromJSObject(p, ba.ctx)
+}
+
+// SetVars sets the Vars property of class PointsCloudSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointscloudsystem#vars
+func (p *PointsCloudSystem) SetVars(vars interface{}) *PointsCloudSystem {
+	p := ba.ctx.Get("PointsCloudSystem").New(vars)
+	return PointsCloudSystemFromJSObject(p, ba.ctx)
+}
+
+*/

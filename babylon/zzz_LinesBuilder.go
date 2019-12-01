@@ -27,4 +27,77 @@ func LinesBuilderFromJSObject(p js.Value, ctx js.Value) *LinesBuilder {
 	return &LinesBuilder{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// LinesBuilderCreateDashedLinesOpts contains optional parameters for LinesBuilder.CreateDashedLines.
+type LinesBuilderCreateDashedLinesOpts struct {
+	Scene *Scene
+}
+
+// CreateDashedLines calls the CreateDashedLines method on the LinesBuilder object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.linesbuilder#createdashedlines
+func (l *LinesBuilder) CreateDashedLines(name string, options js.Value, opts *LinesBuilderCreateDashedLinesOpts) *LinesMesh {
+	if opts == nil {
+		opts = &LinesBuilderCreateDashedLinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, name)
+	args = append(args, options)
+
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+
+	retVal := l.p.Call("CreateDashedLines", args...)
+	return LinesMeshFromJSObject(retVal, l.ctx)
+}
+
+// CreateLineSystem calls the CreateLineSystem method on the LinesBuilder object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.linesbuilder#createlinesystem
+func (l *LinesBuilder) CreateLineSystem(name string, options js.Value, scene *Scene) *LinesMesh {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, name)
+	args = append(args, options)
+	args = append(args, scene.JSObject())
+
+	retVal := l.p.Call("CreateLineSystem", args...)
+	return LinesMeshFromJSObject(retVal, l.ctx)
+}
+
+// LinesBuilderCreateLinesOpts contains optional parameters for LinesBuilder.CreateLines.
+type LinesBuilderCreateLinesOpts struct {
+	Scene *Scene
+}
+
+// CreateLines calls the CreateLines method on the LinesBuilder object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.linesbuilder#createlines
+func (l *LinesBuilder) CreateLines(name string, options js.Value, opts *LinesBuilderCreateLinesOpts) *LinesMesh {
+	if opts == nil {
+		opts = &LinesBuilderCreateLinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, name)
+	args = append(args, options)
+
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+
+	retVal := l.p.Call("CreateLines", args...)
+	return LinesMeshFromJSObject(retVal, l.ctx)
+}
+
+/*
+
+ */

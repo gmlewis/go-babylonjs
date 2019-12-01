@@ -40,8 +40,66 @@ func (ba *Babylon) NewMeshExploder(meshes []js.Value, opts *NewMeshExploderOpts)
 		opts = &NewMeshExploderOpts{}
 	}
 
-	p := ba.ctx.Get("MeshExploder").New(meshes, opts.CenterMesh.JSObject())
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, meshes)
+
+	if opts.CenterMesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.CenterMesh.JSObject())
+	}
+
+	p := ba.ctx.Get("MeshExploder").New(args...)
 	return MeshExploderFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// MeshExploderExplodeOpts contains optional parameters for MeshExploder.Explode.
+type MeshExploderExplodeOpts struct {
+	Direction *float64
+}
+
+// Explode calls the Explode method on the MeshExploder object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshexploder#explode
+func (m *MeshExploder) Explode(opts *MeshExploderExplodeOpts) {
+	if opts == nil {
+		opts = &MeshExploderExplodeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Direction == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Direction)
+	}
+
+	m.p.Call("explode", args...)
+}
+
+// GetClassName calls the GetClassName method on the MeshExploder object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshexploder#getclassname
+func (m *MeshExploder) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetMeshes calls the GetMeshes method on the MeshExploder object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshexploder#getmeshes
+func (m *MeshExploder) GetMeshes() []js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("getMeshes", args...)
+	return retVal
+}
+
+/*
+
+ */

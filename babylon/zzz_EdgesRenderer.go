@@ -29,11 +29,9 @@ func EdgesRendererFromJSObject(p js.Value, ctx js.Value) *EdgesRenderer {
 
 // NewEdgesRendererOpts contains optional parameters for NewEdgesRenderer.
 type NewEdgesRendererOpts struct {
-	Epsilon *JSFloat64
-
-	CheckVerticesInsteadOfIndices *JSBool
-
-	GenerateEdgesLines *JSBool
+	Epsilon                       *float64
+	CheckVerticesInsteadOfIndices *bool
+	GenerateEdgesLines            *bool
 }
 
 // NewEdgesRenderer returns a new EdgesRenderer object.
@@ -44,8 +42,119 @@ func (ba *Babylon) NewEdgesRenderer(source *AbstractMesh, opts *NewEdgesRenderer
 		opts = &NewEdgesRendererOpts{}
 	}
 
-	p := ba.ctx.Get("EdgesRenderer").New(source.JSObject(), opts.Epsilon.JSObject(), opts.CheckVerticesInsteadOfIndices.JSObject(), opts.GenerateEdgesLines.JSObject())
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, source.JSObject())
+
+	if opts.Epsilon == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Epsilon)
+	}
+	if opts.CheckVerticesInsteadOfIndices == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.CheckVerticesInsteadOfIndices)
+	}
+	if opts.GenerateEdgesLines == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.GenerateEdgesLines)
+	}
+
+	p := ba.ctx.Get("EdgesRenderer").New(args...)
 	return EdgesRendererFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Dispose calls the Dispose method on the EdgesRenderer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.edgesrenderer#dispose
+func (e *EdgesRenderer) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	e.p.Call("dispose", args...)
+}
+
+// IsReady calls the IsReady method on the EdgesRenderer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.edgesrenderer#isready
+func (e *EdgesRenderer) IsReady() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := e.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// Render calls the Render method on the EdgesRenderer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.edgesrenderer#render
+func (e *EdgesRenderer) Render() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	e.p.Call("render", args...)
+}
+
+// _generateEdgesLines calls the _generateEdgesLines method on the EdgesRenderer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.edgesrenderer#_generateedgeslines
+func (e *EdgesRenderer) _generateEdgesLines() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	e.p.Call("_generateEdgesLines", args...)
+}
+
+/*
+
+// EdgesWidthScalerForOrthographic returns the EdgesWidthScalerForOrthographic property of class EdgesRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.edgesrenderer#edgeswidthscalerfororthographic
+func (e *EdgesRenderer) EdgesWidthScalerForOrthographic(edgesWidthScalerForOrthographic float64) *EdgesRenderer {
+	p := ba.ctx.Get("EdgesRenderer").New(edgesWidthScalerForOrthographic)
+	return EdgesRendererFromJSObject(p, ba.ctx)
+}
+
+// SetEdgesWidthScalerForOrthographic sets the EdgesWidthScalerForOrthographic property of class EdgesRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.edgesrenderer#edgeswidthscalerfororthographic
+func (e *EdgesRenderer) SetEdgesWidthScalerForOrthographic(edgesWidthScalerForOrthographic float64) *EdgesRenderer {
+	p := ba.ctx.Get("EdgesRenderer").New(edgesWidthScalerForOrthographic)
+	return EdgesRendererFromJSObject(p, ba.ctx)
+}
+
+// EdgesWidthScalerForPerspective returns the EdgesWidthScalerForPerspective property of class EdgesRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.edgesrenderer#edgeswidthscalerforperspective
+func (e *EdgesRenderer) EdgesWidthScalerForPerspective(edgesWidthScalerForPerspective float64) *EdgesRenderer {
+	p := ba.ctx.Get("EdgesRenderer").New(edgesWidthScalerForPerspective)
+	return EdgesRendererFromJSObject(p, ba.ctx)
+}
+
+// SetEdgesWidthScalerForPerspective sets the EdgesWidthScalerForPerspective property of class EdgesRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.edgesrenderer#edgeswidthscalerforperspective
+func (e *EdgesRenderer) SetEdgesWidthScalerForPerspective(edgesWidthScalerForPerspective float64) *EdgesRenderer {
+	p := ba.ctx.Get("EdgesRenderer").New(edgesWidthScalerForPerspective)
+	return EdgesRendererFromJSObject(p, ba.ctx)
+}
+
+// IsEnabled returns the IsEnabled property of class EdgesRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.edgesrenderer#isenabled
+func (e *EdgesRenderer) IsEnabled(isEnabled bool) *EdgesRenderer {
+	p := ba.ctx.Get("EdgesRenderer").New(isEnabled)
+	return EdgesRendererFromJSObject(p, ba.ctx)
+}
+
+// SetIsEnabled sets the IsEnabled property of class EdgesRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.edgesrenderer#isenabled
+func (e *EdgesRenderer) SetIsEnabled(isEnabled bool) *EdgesRenderer {
+	p := ba.ctx.Get("EdgesRenderer").New(isEnabled)
+	return EdgesRendererFromJSObject(p, ba.ctx)
+}
+
+*/

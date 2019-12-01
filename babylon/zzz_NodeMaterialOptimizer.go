@@ -27,4 +27,19 @@ func NodeMaterialOptimizerFromJSObject(p js.Value, ctx js.Value) *NodeMaterialOp
 	return &NodeMaterialOptimizer{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// Optimize calls the Optimize method on the NodeMaterialOptimizer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialoptimizer#optimize
+func (n *NodeMaterialOptimizer) Optimize(vertexOutputNodes *NodeMaterialBlock, fragmentOutputNodes *NodeMaterialBlock) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, vertexOutputNodes.JSObject())
+	args = append(args, fragmentOutputNodes.JSObject())
+
+	n.p.Call("optimize", args...)
+}
+
+/*
+
+ */

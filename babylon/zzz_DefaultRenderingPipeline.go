@@ -30,15 +30,11 @@ func DefaultRenderingPipelineFromJSObject(p js.Value, ctx js.Value) *DefaultRend
 
 // NewDefaultRenderingPipelineOpts contains optional parameters for NewDefaultRenderingPipeline.
 type NewDefaultRenderingPipelineOpts struct {
-	Name *JSString
-
-	Hdr *JSBool
-
-	Scene *Scene
-
-	Cameras *Camera
-
-	AutomaticBuild *JSBool
+	Name           *string
+	Hdr            *bool
+	Scene          *Scene
+	Cameras        *Camera
+	AutomaticBuild *bool
 }
 
 // NewDefaultRenderingPipeline returns a new DefaultRenderingPipeline object.
@@ -49,8 +45,563 @@ func (ba *Babylon) NewDefaultRenderingPipeline(opts *NewDefaultRenderingPipeline
 		opts = &NewDefaultRenderingPipelineOpts{}
 	}
 
-	p := ba.ctx.Get("DefaultRenderingPipeline").New(opts.Name.JSObject(), opts.Hdr.JSObject(), opts.Scene.JSObject(), opts.Cameras.JSObject(), opts.AutomaticBuild.JSObject())
+	args := make([]interface{}, 0, 0+5)
+
+	if opts.Name == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Name)
+	}
+	if opts.Hdr == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Hdr)
+	}
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+	if opts.Cameras == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Cameras.JSObject())
+	}
+	if opts.AutomaticBuild == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.AutomaticBuild)
+	}
+
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(args...)
 	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AddCamera calls the AddCamera method on the DefaultRenderingPipeline object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#addcamera
+func (d *DefaultRenderingPipeline) AddCamera(camera *Camera) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, camera.JSObject())
+
+	d.p.Call("addCamera", args...)
+}
+
+// AddEffect calls the AddEffect method on the DefaultRenderingPipeline object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#addeffect
+func (d *DefaultRenderingPipeline) AddEffect(renderEffect *PostProcessRenderEffect) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, renderEffect.JSObject())
+
+	d.p.Call("addEffect", args...)
+}
+
+// Dispose calls the Dispose method on the DefaultRenderingPipeline object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#dispose
+func (d *DefaultRenderingPipeline) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	d.p.Call("dispose", args...)
+}
+
+// GetClassName calls the GetClassName method on the DefaultRenderingPipeline object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#getclassname
+func (d *DefaultRenderingPipeline) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := d.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// Parse calls the Parse method on the DefaultRenderingPipeline object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#parse
+func (d *DefaultRenderingPipeline) Parse(source interface{}, scene *Scene, rootUrl string) *DefaultRenderingPipeline {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, source)
+	args = append(args, scene.JSObject())
+	args = append(args, rootUrl)
+
+	retVal := d.p.Call("Parse", args...)
+	return DefaultRenderingPipelineFromJSObject(retVal, d.ctx)
+}
+
+// Prepare calls the Prepare method on the DefaultRenderingPipeline object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#prepare
+func (d *DefaultRenderingPipeline) Prepare() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	d.p.Call("prepare", args...)
+}
+
+// RemoveCamera calls the RemoveCamera method on the DefaultRenderingPipeline object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#removecamera
+func (d *DefaultRenderingPipeline) RemoveCamera(camera *Camera) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, camera.JSObject())
+
+	d.p.Call("removeCamera", args...)
+}
+
+// Serialize calls the Serialize method on the DefaultRenderingPipeline object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#serialize
+func (d *DefaultRenderingPipeline) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := d.p.Call("serialize", args...)
+	return retVal
+}
+
+/*
+
+// Animations returns the Animations property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#animations
+func (d *DefaultRenderingPipeline) Animations(animations *Animation) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(animations.JSObject())
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#animations
+func (d *DefaultRenderingPipeline) SetAnimations(animations *Animation) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(animations.JSObject())
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// BloomEnabled returns the BloomEnabled property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#bloomenabled
+func (d *DefaultRenderingPipeline) BloomEnabled(bloomEnabled bool) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(bloomEnabled)
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetBloomEnabled sets the BloomEnabled property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#bloomenabled
+func (d *DefaultRenderingPipeline) SetBloomEnabled(bloomEnabled bool) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(bloomEnabled)
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// BloomKernel returns the BloomKernel property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#bloomkernel
+func (d *DefaultRenderingPipeline) BloomKernel(bloomKernel float64) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(bloomKernel)
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetBloomKernel sets the BloomKernel property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#bloomkernel
+func (d *DefaultRenderingPipeline) SetBloomKernel(bloomKernel float64) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(bloomKernel)
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// BloomScale returns the BloomScale property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#bloomscale
+func (d *DefaultRenderingPipeline) BloomScale(bloomScale float64) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(bloomScale)
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetBloomScale sets the BloomScale property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#bloomscale
+func (d *DefaultRenderingPipeline) SetBloomScale(bloomScale float64) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(bloomScale)
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// BloomThreshold returns the BloomThreshold property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#bloomthreshold
+func (d *DefaultRenderingPipeline) BloomThreshold(bloomThreshold float64) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(bloomThreshold)
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetBloomThreshold sets the BloomThreshold property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#bloomthreshold
+func (d *DefaultRenderingPipeline) SetBloomThreshold(bloomThreshold float64) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(bloomThreshold)
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// BloomWeight returns the BloomWeight property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#bloomweight
+func (d *DefaultRenderingPipeline) BloomWeight(bloomWeight float64) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(bloomWeight)
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetBloomWeight sets the BloomWeight property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#bloomweight
+func (d *DefaultRenderingPipeline) SetBloomWeight(bloomWeight float64) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(bloomWeight)
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// Cameras returns the Cameras property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#cameras
+func (d *DefaultRenderingPipeline) Cameras(cameras *Camera) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(cameras.JSObject())
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetCameras sets the Cameras property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#cameras
+func (d *DefaultRenderingPipeline) SetCameras(cameras *Camera) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(cameras.JSObject())
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// ChromaticAberration returns the ChromaticAberration property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#chromaticaberration
+func (d *DefaultRenderingPipeline) ChromaticAberration(chromaticAberration *ChromaticAberrationPostProcess) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(chromaticAberration.JSObject())
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetChromaticAberration sets the ChromaticAberration property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#chromaticaberration
+func (d *DefaultRenderingPipeline) SetChromaticAberration(chromaticAberration *ChromaticAberrationPostProcess) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(chromaticAberration.JSObject())
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// ChromaticAberrationEnabled returns the ChromaticAberrationEnabled property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#chromaticaberrationenabled
+func (d *DefaultRenderingPipeline) ChromaticAberrationEnabled(chromaticAberrationEnabled bool) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(chromaticAberrationEnabled)
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetChromaticAberrationEnabled sets the ChromaticAberrationEnabled property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#chromaticaberrationenabled
+func (d *DefaultRenderingPipeline) SetChromaticAberrationEnabled(chromaticAberrationEnabled bool) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(chromaticAberrationEnabled)
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// DepthOfField returns the DepthOfField property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#depthoffield
+func (d *DefaultRenderingPipeline) DepthOfField(depthOfField *DepthOfFieldEffect) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(depthOfField.JSObject())
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetDepthOfField sets the DepthOfField property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#depthoffield
+func (d *DefaultRenderingPipeline) SetDepthOfField(depthOfField *DepthOfFieldEffect) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(depthOfField.JSObject())
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// DepthOfFieldBlurLevel returns the DepthOfFieldBlurLevel property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#depthoffieldblurlevel
+func (d *DefaultRenderingPipeline) DepthOfFieldBlurLevel(depthOfFieldBlurLevel *DepthOfFieldEffectBlurLevel) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(depthOfFieldBlurLevel.JSObject())
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetDepthOfFieldBlurLevel sets the DepthOfFieldBlurLevel property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#depthoffieldblurlevel
+func (d *DefaultRenderingPipeline) SetDepthOfFieldBlurLevel(depthOfFieldBlurLevel *DepthOfFieldEffectBlurLevel) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(depthOfFieldBlurLevel.JSObject())
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// DepthOfFieldEnabled returns the DepthOfFieldEnabled property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#depthoffieldenabled
+func (d *DefaultRenderingPipeline) DepthOfFieldEnabled(depthOfFieldEnabled bool) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(depthOfFieldEnabled)
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetDepthOfFieldEnabled sets the DepthOfFieldEnabled property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#depthoffieldenabled
+func (d *DefaultRenderingPipeline) SetDepthOfFieldEnabled(depthOfFieldEnabled bool) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(depthOfFieldEnabled)
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// Fxaa returns the Fxaa property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#fxaa
+func (d *DefaultRenderingPipeline) Fxaa(fxaa *FxaaPostProcess) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(fxaa.JSObject())
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetFxaa sets the Fxaa property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#fxaa
+func (d *DefaultRenderingPipeline) SetFxaa(fxaa *FxaaPostProcess) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(fxaa.JSObject())
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// FxaaEnabled returns the FxaaEnabled property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#fxaaenabled
+func (d *DefaultRenderingPipeline) FxaaEnabled(fxaaEnabled bool) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(fxaaEnabled)
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetFxaaEnabled sets the FxaaEnabled property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#fxaaenabled
+func (d *DefaultRenderingPipeline) SetFxaaEnabled(fxaaEnabled bool) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(fxaaEnabled)
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// GlowLayer returns the GlowLayer property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#glowlayer
+func (d *DefaultRenderingPipeline) GlowLayer(glowLayer *GlowLayer) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(glowLayer.JSObject())
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetGlowLayer sets the GlowLayer property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#glowlayer
+func (d *DefaultRenderingPipeline) SetGlowLayer(glowLayer *GlowLayer) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(glowLayer.JSObject())
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// GlowLayerEnabled returns the GlowLayerEnabled property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#glowlayerenabled
+func (d *DefaultRenderingPipeline) GlowLayerEnabled(glowLayerEnabled bool) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(glowLayerEnabled)
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetGlowLayerEnabled sets the GlowLayerEnabled property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#glowlayerenabled
+func (d *DefaultRenderingPipeline) SetGlowLayerEnabled(glowLayerEnabled bool) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(glowLayerEnabled)
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// Grain returns the Grain property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#grain
+func (d *DefaultRenderingPipeline) Grain(grain *GrainPostProcess) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(grain.JSObject())
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetGrain sets the Grain property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#grain
+func (d *DefaultRenderingPipeline) SetGrain(grain *GrainPostProcess) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(grain.JSObject())
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// GrainEnabled returns the GrainEnabled property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#grainenabled
+func (d *DefaultRenderingPipeline) GrainEnabled(grainEnabled bool) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(grainEnabled)
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetGrainEnabled sets the GrainEnabled property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#grainenabled
+func (d *DefaultRenderingPipeline) SetGrainEnabled(grainEnabled bool) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(grainEnabled)
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// ImageProcessing returns the ImageProcessing property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#imageprocessing
+func (d *DefaultRenderingPipeline) ImageProcessing(imageProcessing *ImageProcessingPostProcess) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(imageProcessing.JSObject())
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetImageProcessing sets the ImageProcessing property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#imageprocessing
+func (d *DefaultRenderingPipeline) SetImageProcessing(imageProcessing *ImageProcessingPostProcess) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(imageProcessing.JSObject())
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// ImageProcessingEnabled returns the ImageProcessingEnabled property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#imageprocessingenabled
+func (d *DefaultRenderingPipeline) ImageProcessingEnabled(imageProcessingEnabled bool) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(imageProcessingEnabled)
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetImageProcessingEnabled sets the ImageProcessingEnabled property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#imageprocessingenabled
+func (d *DefaultRenderingPipeline) SetImageProcessingEnabled(imageProcessingEnabled bool) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(imageProcessingEnabled)
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#inspectablecustomproperties
+func (d *DefaultRenderingPipeline) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(inspectableCustomProperties.JSObject())
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#inspectablecustomproperties
+func (d *DefaultRenderingPipeline) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(inspectableCustomProperties.JSObject())
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// IsSupported returns the IsSupported property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#issupported
+func (d *DefaultRenderingPipeline) IsSupported(isSupported bool) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(isSupported)
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetIsSupported sets the IsSupported property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#issupported
+func (d *DefaultRenderingPipeline) SetIsSupported(isSupported bool) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(isSupported)
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#name
+func (d *DefaultRenderingPipeline) Name(name string) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(name)
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#name
+func (d *DefaultRenderingPipeline) SetName(name string) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(name)
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// Samples returns the Samples property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#samples
+func (d *DefaultRenderingPipeline) Samples(samples float64) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(samples)
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetSamples sets the Samples property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#samples
+func (d *DefaultRenderingPipeline) SetSamples(samples float64) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(samples)
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// Scene returns the Scene property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#scene
+func (d *DefaultRenderingPipeline) Scene(scene *Scene) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(scene.JSObject())
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetScene sets the Scene property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#scene
+func (d *DefaultRenderingPipeline) SetScene(scene *Scene) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(scene.JSObject())
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// Sharpen returns the Sharpen property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#sharpen
+func (d *DefaultRenderingPipeline) Sharpen(sharpen *SharpenPostProcess) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(sharpen.JSObject())
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetSharpen sets the Sharpen property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#sharpen
+func (d *DefaultRenderingPipeline) SetSharpen(sharpen *SharpenPostProcess) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(sharpen.JSObject())
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SharpenEnabled returns the SharpenEnabled property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#sharpenenabled
+func (d *DefaultRenderingPipeline) SharpenEnabled(sharpenEnabled bool) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(sharpenEnabled)
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetSharpenEnabled sets the SharpenEnabled property of class DefaultRenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultrenderingpipeline#sharpenenabled
+func (d *DefaultRenderingPipeline) SetSharpenEnabled(sharpenEnabled bool) *DefaultRenderingPipeline {
+	p := ba.ctx.Get("DefaultRenderingPipeline").New(sharpenEnabled)
+	return DefaultRenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+*/

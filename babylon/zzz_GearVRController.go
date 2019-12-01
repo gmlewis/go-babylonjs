@@ -31,8 +31,686 @@ func GearVRControllerFromJSObject(p js.Value, ctx js.Value) *GearVRController {
 //
 // https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller
 func (ba *Babylon) NewGearVRController(vrGamepad interface{}) *GearVRController {
-	p := ba.ctx.Get("GearVRController").New(vrGamepad)
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, vrGamepad)
+
+	p := ba.ctx.Get("GearVRController").New(args...)
 	return GearVRControllerFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AttachToMesh calls the AttachToMesh method on the GearVRController object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#attachtomesh
+func (g *GearVRController) AttachToMesh(mesh *AbstractMesh) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	g.p.Call("attachToMesh", args...)
+}
+
+// AttachToPoseControlledCamera calls the AttachToPoseControlledCamera method on the GearVRController object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#attachtoposecontrolledcamera
+func (g *GearVRController) AttachToPoseControlledCamera(camera *TargetCamera) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, camera.JSObject())
+
+	g.p.Call("attachToPoseControlledCamera", args...)
+}
+
+// Dispose calls the Dispose method on the GearVRController object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#dispose
+func (g *GearVRController) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	g.p.Call("dispose", args...)
+}
+
+// GearVRControllerGetForwardRayOpts contains optional parameters for GearVRController.GetForwardRay.
+type GearVRControllerGetForwardRayOpts struct {
+	Length *float64
+}
+
+// GetForwardRay calls the GetForwardRay method on the GearVRController object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#getforwardray
+func (g *GearVRController) GetForwardRay(opts *GearVRControllerGetForwardRayOpts) *Ray {
+	if opts == nil {
+		opts = &GearVRControllerGetForwardRayOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Length == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Length)
+	}
+
+	retVal := g.p.Call("getForwardRay", args...)
+	return RayFromJSObject(retVal, g.ctx)
+}
+
+// GearVRControllerInitControllerMeshOpts contains optional parameters for GearVRController.InitControllerMesh.
+type GearVRControllerInitControllerMeshOpts struct {
+	MeshLoaded *func()
+}
+
+// InitControllerMesh calls the InitControllerMesh method on the GearVRController object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#initcontrollermesh
+func (g *GearVRController) InitControllerMesh(scene *Scene, opts *GearVRControllerInitControllerMeshOpts) {
+	if opts == nil {
+		opts = &GearVRControllerInitControllerMeshOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, scene.JSObject())
+
+	if opts.MeshLoaded == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.MeshLoaded)
+	}
+
+	g.p.Call("initControllerMesh", args...)
+}
+
+// OnButtonStateChange calls the OnButtonStateChange method on the GearVRController object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#onbuttonstatechange
+func (g *GearVRController) OnButtonStateChange(callback func()) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, callback)
+
+	g.p.Call("onButtonStateChange", args...)
+}
+
+// Onleftstickchanged calls the Onleftstickchanged method on the GearVRController object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#onleftstickchanged
+func (g *GearVRController) Onleftstickchanged(callback func()) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, callback)
+
+	g.p.Call("onleftstickchanged", args...)
+}
+
+// Onrightstickchanged calls the Onrightstickchanged method on the GearVRController object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#onrightstickchanged
+func (g *GearVRController) Onrightstickchanged(callback func()) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, callback)
+
+	g.p.Call("onrightstickchanged", args...)
+}
+
+// Update calls the Update method on the GearVRController object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#update
+func (g *GearVRController) Update() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	g.p.Call("update", args...)
+}
+
+// UpdateFromDevice calls the UpdateFromDevice method on the GearVRController object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#updatefromdevice
+func (g *GearVRController) UpdateFromDevice(poseData js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, poseData)
+
+	g.p.Call("updateFromDevice", args...)
+}
+
+/*
+
+// BrowserGamepad returns the BrowserGamepad property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#browsergamepad
+func (g *GearVRController) BrowserGamepad(browserGamepad interface{}) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(browserGamepad)
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// SetBrowserGamepad sets the BrowserGamepad property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#browsergamepad
+func (g *GearVRController) SetBrowserGamepad(browserGamepad interface{}) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(browserGamepad)
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// ControllerType returns the ControllerType property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#controllertype
+func (g *GearVRController) ControllerType(controllerType *PoseEnabledControllerType) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(controllerType.JSObject())
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// SetControllerType sets the ControllerType property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#controllertype
+func (g *GearVRController) SetControllerType(controllerType *PoseEnabledControllerType) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(controllerType.JSObject())
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// DUALSHOCK returns the DUALSHOCK property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#dualshock
+func (g *GearVRController) DUALSHOCK(DUALSHOCK float64) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(DUALSHOCK)
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// SetDUALSHOCK sets the DUALSHOCK property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#dualshock
+func (g *GearVRController) SetDUALSHOCK(DUALSHOCK float64) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(DUALSHOCK)
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// DefaultModel returns the DefaultModel property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#defaultmodel
+func (g *GearVRController) DefaultModel(defaultModel *AbstractMesh) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(defaultModel.JSObject())
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// SetDefaultModel sets the DefaultModel property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#defaultmodel
+func (g *GearVRController) SetDefaultModel(defaultModel *AbstractMesh) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(defaultModel.JSObject())
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// DevicePosition returns the DevicePosition property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#deviceposition
+func (g *GearVRController) DevicePosition(devicePosition *Vector3) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(devicePosition.JSObject())
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// SetDevicePosition sets the DevicePosition property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#deviceposition
+func (g *GearVRController) SetDevicePosition(devicePosition *Vector3) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(devicePosition.JSObject())
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// DeviceRotationQuaternion returns the DeviceRotationQuaternion property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#devicerotationquaternion
+func (g *GearVRController) DeviceRotationQuaternion(deviceRotationQuaternion *Quaternion) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(deviceRotationQuaternion.JSObject())
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// SetDeviceRotationQuaternion sets the DeviceRotationQuaternion property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#devicerotationquaternion
+func (g *GearVRController) SetDeviceRotationQuaternion(deviceRotationQuaternion *Quaternion) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(deviceRotationQuaternion.JSObject())
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// DeviceScaleFactor returns the DeviceScaleFactor property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#devicescalefactor
+func (g *GearVRController) DeviceScaleFactor(deviceScaleFactor float64) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(deviceScaleFactor)
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// SetDeviceScaleFactor sets the DeviceScaleFactor property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#devicescalefactor
+func (g *GearVRController) SetDeviceScaleFactor(deviceScaleFactor float64) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(deviceScaleFactor)
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// GAMEPAD returns the GAMEPAD property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#gamepad
+func (g *GearVRController) GAMEPAD(GAMEPAD float64) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(GAMEPAD)
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// SetGAMEPAD sets the GAMEPAD property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#gamepad
+func (g *GearVRController) SetGAMEPAD(GAMEPAD float64) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(GAMEPAD)
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// GAMEPAD_ID_PREFIX returns the GAMEPAD_ID_PREFIX property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#gamepad_id_prefix
+func (g *GearVRController) GAMEPAD_ID_PREFIX(GAMEPAD_ID_PREFIX string) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(GAMEPAD_ID_PREFIX)
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// SetGAMEPAD_ID_PREFIX sets the GAMEPAD_ID_PREFIX property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#gamepad_id_prefix
+func (g *GearVRController) SetGAMEPAD_ID_PREFIX(GAMEPAD_ID_PREFIX string) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(GAMEPAD_ID_PREFIX)
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// GENERIC returns the GENERIC property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#generic
+func (g *GearVRController) GENERIC(GENERIC float64) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(GENERIC)
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// SetGENERIC sets the GENERIC property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#generic
+func (g *GearVRController) SetGENERIC(GENERIC float64) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(GENERIC)
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// Hand returns the Hand property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#hand
+func (g *GearVRController) Hand(hand string) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(hand)
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// SetHand sets the Hand property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#hand
+func (g *GearVRController) SetHand(hand string) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(hand)
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// Id returns the Id property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#id
+func (g *GearVRController) Id(id string) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(id)
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// SetId sets the Id property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#id
+func (g *GearVRController) SetId(id string) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(id)
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// Index returns the Index property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#index
+func (g *GearVRController) Index(index float64) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(index)
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// SetIndex sets the Index property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#index
+func (g *GearVRController) SetIndex(index float64) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(index)
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// IsConnected returns the IsConnected property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#isconnected
+func (g *GearVRController) IsConnected(isConnected bool) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(isConnected)
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// SetIsConnected sets the IsConnected property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#isconnected
+func (g *GearVRController) SetIsConnected(isConnected bool) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(isConnected)
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// IsXR returns the IsXR property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#isxr
+func (g *GearVRController) IsXR(isXR bool) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(isXR)
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// SetIsXR sets the IsXR property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#isxr
+func (g *GearVRController) SetIsXR(isXR bool) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(isXR)
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// LeftStick returns the LeftStick property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#leftstick
+func (g *GearVRController) LeftStick(leftStick *StickValues) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(leftStick.JSObject())
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// SetLeftStick sets the LeftStick property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#leftstick
+func (g *GearVRController) SetLeftStick(leftStick *StickValues) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(leftStick.JSObject())
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// MODEL_BASE_URL returns the MODEL_BASE_URL property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#model_base_url
+func (g *GearVRController) MODEL_BASE_URL(MODEL_BASE_URL string) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(MODEL_BASE_URL)
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// SetMODEL_BASE_URL sets the MODEL_BASE_URL property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#model_base_url
+func (g *GearVRController) SetMODEL_BASE_URL(MODEL_BASE_URL string) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(MODEL_BASE_URL)
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// MODEL_FILENAME returns the MODEL_FILENAME property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#model_filename
+func (g *GearVRController) MODEL_FILENAME(MODEL_FILENAME string) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(MODEL_FILENAME)
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// SetMODEL_FILENAME sets the MODEL_FILENAME property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#model_filename
+func (g *GearVRController) SetMODEL_FILENAME(MODEL_FILENAME string) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(MODEL_FILENAME)
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// Mesh returns the Mesh property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#mesh
+func (g *GearVRController) Mesh(mesh *AbstractMesh) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(mesh.JSObject())
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// SetMesh sets the Mesh property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#mesh
+func (g *GearVRController) SetMesh(mesh *AbstractMesh) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(mesh.JSObject())
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// OnMainButtonStateChangedObservable returns the OnMainButtonStateChangedObservable property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#onmainbuttonstatechangedobservable
+func (g *GearVRController) OnMainButtonStateChangedObservable(onMainButtonStateChangedObservable *Observable) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(onMainButtonStateChangedObservable.JSObject())
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// SetOnMainButtonStateChangedObservable sets the OnMainButtonStateChangedObservable property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#onmainbuttonstatechangedobservable
+func (g *GearVRController) SetOnMainButtonStateChangedObservable(onMainButtonStateChangedObservable *Observable) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(onMainButtonStateChangedObservable.JSObject())
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// OnPadStateChangedObservable returns the OnPadStateChangedObservable property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#onpadstatechangedobservable
+func (g *GearVRController) OnPadStateChangedObservable(onPadStateChangedObservable *Observable) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(onPadStateChangedObservable.JSObject())
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// SetOnPadStateChangedObservable sets the OnPadStateChangedObservable property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#onpadstatechangedobservable
+func (g *GearVRController) SetOnPadStateChangedObservable(onPadStateChangedObservable *Observable) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(onPadStateChangedObservable.JSObject())
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// OnPadValuesChangedObservable returns the OnPadValuesChangedObservable property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#onpadvalueschangedobservable
+func (g *GearVRController) OnPadValuesChangedObservable(onPadValuesChangedObservable *Observable) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(onPadValuesChangedObservable.JSObject())
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// SetOnPadValuesChangedObservable sets the OnPadValuesChangedObservable property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#onpadvalueschangedobservable
+func (g *GearVRController) SetOnPadValuesChangedObservable(onPadValuesChangedObservable *Observable) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(onPadValuesChangedObservable.JSObject())
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// OnSecondaryButtonStateChangedObservable returns the OnSecondaryButtonStateChangedObservable property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#onsecondarybuttonstatechangedobservable
+func (g *GearVRController) OnSecondaryButtonStateChangedObservable(onSecondaryButtonStateChangedObservable *Observable) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(onSecondaryButtonStateChangedObservable.JSObject())
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// SetOnSecondaryButtonStateChangedObservable sets the OnSecondaryButtonStateChangedObservable property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#onsecondarybuttonstatechangedobservable
+func (g *GearVRController) SetOnSecondaryButtonStateChangedObservable(onSecondaryButtonStateChangedObservable *Observable) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(onSecondaryButtonStateChangedObservable.JSObject())
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// OnTriggerStateChangedObservable returns the OnTriggerStateChangedObservable property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#ontriggerstatechangedobservable
+func (g *GearVRController) OnTriggerStateChangedObservable(onTriggerStateChangedObservable *Observable) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(onTriggerStateChangedObservable.JSObject())
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// SetOnTriggerStateChangedObservable sets the OnTriggerStateChangedObservable property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#ontriggerstatechangedobservable
+func (g *GearVRController) SetOnTriggerStateChangedObservable(onTriggerStateChangedObservable *Observable) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(onTriggerStateChangedObservable.JSObject())
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// POINTING_POSE returns the POINTING_POSE property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#pointing_pose
+func (g *GearVRController) POINTING_POSE(POINTING_POSE string) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(POINTING_POSE)
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// SetPOINTING_POSE sets the POINTING_POSE property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#pointing_pose
+func (g *GearVRController) SetPOINTING_POSE(POINTING_POSE string) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(POINTING_POSE)
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// POSE_ENABLED returns the POSE_ENABLED property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#pose_enabled
+func (g *GearVRController) POSE_ENABLED(POSE_ENABLED float64) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(POSE_ENABLED)
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// SetPOSE_ENABLED sets the POSE_ENABLED property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#pose_enabled
+func (g *GearVRController) SetPOSE_ENABLED(POSE_ENABLED float64) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(POSE_ENABLED)
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// Pad returns the Pad property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#pad
+func (g *GearVRController) Pad(pad *StickValues) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(pad.JSObject())
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// SetPad sets the Pad property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#pad
+func (g *GearVRController) SetPad(pad *StickValues) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(pad.JSObject())
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// Position returns the Position property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#position
+func (g *GearVRController) Position(position *Vector3) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(position.JSObject())
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// SetPosition sets the Position property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#position
+func (g *GearVRController) SetPosition(position *Vector3) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(position.JSObject())
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// RawPose returns the RawPose property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#rawpose
+func (g *GearVRController) RawPose(rawPose js.Value) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(rawPose)
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// SetRawPose sets the RawPose property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#rawpose
+func (g *GearVRController) SetRawPose(rawPose js.Value) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(rawPose)
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// RightStick returns the RightStick property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#rightstick
+func (g *GearVRController) RightStick(rightStick *StickValues) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(rightStick.JSObject())
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// SetRightStick sets the RightStick property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#rightstick
+func (g *GearVRController) SetRightStick(rightStick *StickValues) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(rightStick.JSObject())
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// RotationQuaternion returns the RotationQuaternion property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#rotationquaternion
+func (g *GearVRController) RotationQuaternion(rotationQuaternion *Quaternion) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(rotationQuaternion.JSObject())
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// SetRotationQuaternion sets the RotationQuaternion property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#rotationquaternion
+func (g *GearVRController) SetRotationQuaternion(rotationQuaternion *Quaternion) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(rotationQuaternion.JSObject())
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// Type returns the Type property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#type
+func (g *GearVRController) Type(jsType float64) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(jsType)
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// SetType sets the Type property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#type
+func (g *GearVRController) SetType(jsType float64) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(jsType)
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// XBOX returns the XBOX property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#xbox
+func (g *GearVRController) XBOX(XBOX float64) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(XBOX)
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+// SetXBOX sets the XBOX property of class GearVRController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gearvrcontroller#xbox
+func (g *GearVRController) SetXBOX(XBOX float64) *GearVRController {
+	p := ba.ctx.Get("GearVRController").New(XBOX)
+	return GearVRControllerFromJSObject(p, ba.ctx)
+}
+
+*/

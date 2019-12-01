@@ -35,8 +35,275 @@ func FlyCameraInputsManagerFromJSObject(p js.Value, ctx js.Value) *FlyCameraInpu
 //
 // https://doc.babylonjs.com/api/classes/babylon.flycamerainputsmanager
 func (ba *Babylon) NewFlyCameraInputsManager(camera *FlyCamera) *FlyCameraInputsManager {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, camera.JSObject())
+
+	p := ba.ctx.Get("FlyCameraInputsManager").New(args...)
+	return FlyCameraInputsManagerFromJSObject(p, ba.ctx)
+}
+
+// Add calls the Add method on the FlyCameraInputsManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamerainputsmanager#add
+func (f *FlyCameraInputsManager) Add(input js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, input)
+
+	f.p.Call("add", args...)
+}
+
+// AddKeyboard calls the AddKeyboard method on the FlyCameraInputsManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamerainputsmanager#addkeyboard
+func (f *FlyCameraInputsManager) AddKeyboard() *FlyCameraInputsManager {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("addKeyboard", args...)
+	return FlyCameraInputsManagerFromJSObject(retVal, f.ctx)
+}
+
+// FlyCameraInputsManagerAddMouseOpts contains optional parameters for FlyCameraInputsManager.AddMouse.
+type FlyCameraInputsManagerAddMouseOpts struct {
+	TouchEnabled *bool
+}
+
+// AddMouse calls the AddMouse method on the FlyCameraInputsManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamerainputsmanager#addmouse
+func (f *FlyCameraInputsManager) AddMouse(opts *FlyCameraInputsManagerAddMouseOpts) *FlyCameraInputsManager {
+	if opts == nil {
+		opts = &FlyCameraInputsManagerAddMouseOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.TouchEnabled == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.TouchEnabled)
+	}
+
+	retVal := f.p.Call("addMouse", args...)
+	return FlyCameraInputsManagerFromJSObject(retVal, f.ctx)
+}
+
+// FlyCameraInputsManagerAttachElementOpts contains optional parameters for FlyCameraInputsManager.AttachElement.
+type FlyCameraInputsManagerAttachElementOpts struct {
+	NoPreventDefault *bool
+}
+
+// AttachElement calls the AttachElement method on the FlyCameraInputsManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamerainputsmanager#attachelement
+func (f *FlyCameraInputsManager) AttachElement(element js.Value, opts *FlyCameraInputsManagerAttachElementOpts) {
+	if opts == nil {
+		opts = &FlyCameraInputsManagerAttachElementOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, element)
+
+	if opts.NoPreventDefault == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoPreventDefault)
+	}
+
+	f.p.Call("attachElement", args...)
+}
+
+// AttachInput calls the AttachInput method on the FlyCameraInputsManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamerainputsmanager#attachinput
+func (f *FlyCameraInputsManager) AttachInput(input js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, input)
+
+	f.p.Call("attachInput", args...)
+}
+
+// Clear calls the Clear method on the FlyCameraInputsManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamerainputsmanager#clear
+func (f *FlyCameraInputsManager) Clear() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	f.p.Call("clear", args...)
+}
+
+// FlyCameraInputsManagerDetachElementOpts contains optional parameters for FlyCameraInputsManager.DetachElement.
+type FlyCameraInputsManagerDetachElementOpts struct {
+	Disconnect *bool
+}
+
+// DetachElement calls the DetachElement method on the FlyCameraInputsManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamerainputsmanager#detachelement
+func (f *FlyCameraInputsManager) DetachElement(element js.Value, opts *FlyCameraInputsManagerDetachElementOpts) {
+	if opts == nil {
+		opts = &FlyCameraInputsManagerDetachElementOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, element)
+
+	if opts.Disconnect == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Disconnect)
+	}
+
+	f.p.Call("detachElement", args...)
+}
+
+// Parse calls the Parse method on the FlyCameraInputsManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamerainputsmanager#parse
+func (f *FlyCameraInputsManager) Parse(parsedCamera interface{}) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, parsedCamera)
+
+	f.p.Call("parse", args...)
+}
+
+// RebuildInputCheck calls the RebuildInputCheck method on the FlyCameraInputsManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamerainputsmanager#rebuildinputcheck
+func (f *FlyCameraInputsManager) RebuildInputCheck() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	f.p.Call("rebuildInputCheck", args...)
+}
+
+// Remove calls the Remove method on the FlyCameraInputsManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamerainputsmanager#remove
+func (f *FlyCameraInputsManager) Remove(inputToRemove js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, inputToRemove)
+
+	f.p.Call("remove", args...)
+}
+
+// RemoveByType calls the RemoveByType method on the FlyCameraInputsManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamerainputsmanager#removebytype
+func (f *FlyCameraInputsManager) RemoveByType(inputType string) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, inputType)
+
+	f.p.Call("removeByType", args...)
+}
+
+// Serialize calls the Serialize method on the FlyCameraInputsManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamerainputsmanager#serialize
+func (f *FlyCameraInputsManager) Serialize(serializedCamera interface{}) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, serializedCamera)
+
+	f.p.Call("serialize", args...)
+}
+
+/*
+
+// Attached returns the Attached property of class FlyCameraInputsManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamerainputsmanager#attached
+func (f *FlyCameraInputsManager) Attached(attached *CameraInputsMap) *FlyCameraInputsManager {
+	p := ba.ctx.Get("FlyCameraInputsManager").New(attached.JSObject())
+	return FlyCameraInputsManagerFromJSObject(p, ba.ctx)
+}
+
+// SetAttached sets the Attached property of class FlyCameraInputsManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamerainputsmanager#attached
+func (f *FlyCameraInputsManager) SetAttached(attached *CameraInputsMap) *FlyCameraInputsManager {
+	p := ba.ctx.Get("FlyCameraInputsManager").New(attached.JSObject())
+	return FlyCameraInputsManagerFromJSObject(p, ba.ctx)
+}
+
+// AttachedElement returns the AttachedElement property of class FlyCameraInputsManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamerainputsmanager#attachedelement
+func (f *FlyCameraInputsManager) AttachedElement(attachedElement js.Value) *FlyCameraInputsManager {
+	p := ba.ctx.Get("FlyCameraInputsManager").New(attachedElement)
+	return FlyCameraInputsManagerFromJSObject(p, ba.ctx)
+}
+
+// SetAttachedElement sets the AttachedElement property of class FlyCameraInputsManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamerainputsmanager#attachedelement
+func (f *FlyCameraInputsManager) SetAttachedElement(attachedElement js.Value) *FlyCameraInputsManager {
+	p := ba.ctx.Get("FlyCameraInputsManager").New(attachedElement)
+	return FlyCameraInputsManagerFromJSObject(p, ba.ctx)
+}
+
+// Camera returns the Camera property of class FlyCameraInputsManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamerainputsmanager#camera
+func (f *FlyCameraInputsManager) Camera(camera *FlyCamera) *FlyCameraInputsManager {
 	p := ba.ctx.Get("FlyCameraInputsManager").New(camera.JSObject())
 	return FlyCameraInputsManagerFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetCamera sets the Camera property of class FlyCameraInputsManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamerainputsmanager#camera
+func (f *FlyCameraInputsManager) SetCamera(camera *FlyCamera) *FlyCameraInputsManager {
+	p := ba.ctx.Get("FlyCameraInputsManager").New(camera.JSObject())
+	return FlyCameraInputsManagerFromJSObject(p, ba.ctx)
+}
+
+// CheckInputs returns the CheckInputs property of class FlyCameraInputsManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamerainputsmanager#checkinputs
+func (f *FlyCameraInputsManager) CheckInputs(checkInputs func()) *FlyCameraInputsManager {
+	p := ba.ctx.Get("FlyCameraInputsManager").New(checkInputs)
+	return FlyCameraInputsManagerFromJSObject(p, ba.ctx)
+}
+
+// SetCheckInputs sets the CheckInputs property of class FlyCameraInputsManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamerainputsmanager#checkinputs
+func (f *FlyCameraInputsManager) SetCheckInputs(checkInputs func()) *FlyCameraInputsManager {
+	p := ba.ctx.Get("FlyCameraInputsManager").New(checkInputs)
+	return FlyCameraInputsManagerFromJSObject(p, ba.ctx)
+}
+
+// NoPreventDefault returns the NoPreventDefault property of class FlyCameraInputsManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamerainputsmanager#nopreventdefault
+func (f *FlyCameraInputsManager) NoPreventDefault(noPreventDefault bool) *FlyCameraInputsManager {
+	p := ba.ctx.Get("FlyCameraInputsManager").New(noPreventDefault)
+	return FlyCameraInputsManagerFromJSObject(p, ba.ctx)
+}
+
+// SetNoPreventDefault sets the NoPreventDefault property of class FlyCameraInputsManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamerainputsmanager#nopreventdefault
+func (f *FlyCameraInputsManager) SetNoPreventDefault(noPreventDefault bool) *FlyCameraInputsManager {
+	p := ba.ctx.Get("FlyCameraInputsManager").New(noPreventDefault)
+	return FlyCameraInputsManagerFromJSObject(p, ba.ctx)
+}
+
+*/

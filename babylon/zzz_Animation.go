@@ -29,9 +29,8 @@ func AnimationFromJSObject(p js.Value, ctx js.Value) *Animation {
 
 // NewAnimationOpts contains optional parameters for NewAnimation.
 type NewAnimationOpts struct {
-	LoopMode *JSFloat64
-
-	EnableBlending *JSBool
+	LoopMode       *float64
+	EnableBlending *bool
 }
 
 // NewAnimation returns a new Animation object.
@@ -42,8 +41,1001 @@ func (ba *Babylon) NewAnimation(name string, targetProperty string, framePerSeco
 		opts = &NewAnimationOpts{}
 	}
 
-	p := ba.ctx.Get("Animation").New(name, targetProperty, framePerSecond, dataType, opts.LoopMode.JSObject(), opts.EnableBlending.JSObject())
+	args := make([]interface{}, 0, 4+2)
+
+	args = append(args, name)
+	args = append(args, targetProperty)
+	args = append(args, framePerSecond)
+	args = append(args, dataType)
+
+	if opts.LoopMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.LoopMode)
+	}
+	if opts.EnableBlending == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.EnableBlending)
+	}
+
+	p := ba.ctx.Get("Animation").New(args...)
 	return AnimationFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AddEvent calls the AddEvent method on the Animation object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#addevent
+func (a *Animation) AddEvent(event *AnimationEvent) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, event.JSObject())
+
+	a.p.Call("addEvent", args...)
+}
+
+// AppendSerializedAnimations calls the AppendSerializedAnimations method on the Animation object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#appendserializedanimations
+func (a *Animation) AppendSerializedAnimations(source js.Value, destination interface{}) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, source)
+	args = append(args, destination)
+
+	a.p.Call("AppendSerializedAnimations", args...)
+}
+
+// Clone calls the Clone method on the Animation object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#clone
+func (a *Animation) Clone() *Animation {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("clone", args...)
+	return AnimationFromJSObject(retVal, a.ctx)
+}
+
+// Color3InterpolateFunction calls the Color3InterpolateFunction method on the Animation object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#color3interpolatefunction
+func (a *Animation) Color3InterpolateFunction(startValue *Color3, endValue *Color3, gradient float64) *Color3 {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, startValue.JSObject())
+	args = append(args, endValue.JSObject())
+	args = append(args, gradient)
+
+	retVal := a.p.Call("color3InterpolateFunction", args...)
+	return Color3FromJSObject(retVal, a.ctx)
+}
+
+// Color4InterpolateFunction calls the Color4InterpolateFunction method on the Animation object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#color4interpolatefunction
+func (a *Animation) Color4InterpolateFunction(startValue *Color4, endValue *Color4, gradient float64) *Color4 {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, startValue.JSObject())
+	args = append(args, endValue.JSObject())
+	args = append(args, gradient)
+
+	retVal := a.p.Call("color4InterpolateFunction", args...)
+	return Color4FromJSObject(retVal, a.ctx)
+}
+
+// AnimationCreateAndStartAnimationOpts contains optional parameters for Animation.CreateAndStartAnimation.
+type AnimationCreateAndStartAnimationOpts struct {
+	LoopMode       *float64
+	EasingFunction *EasingFunction
+	OnAnimationEnd *func()
+}
+
+// CreateAndStartAnimation calls the CreateAndStartAnimation method on the Animation object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#createandstartanimation
+func (a *Animation) CreateAndStartAnimation(name string, node *Node, targetProperty string, framePerSecond float64, totalFrame float64, from interface{}, to interface{}, opts *AnimationCreateAndStartAnimationOpts) *Animatable {
+	if opts == nil {
+		opts = &AnimationCreateAndStartAnimationOpts{}
+	}
+
+	args := make([]interface{}, 0, 7+3)
+
+	args = append(args, name)
+	args = append(args, node.JSObject())
+	args = append(args, targetProperty)
+	args = append(args, framePerSecond)
+	args = append(args, totalFrame)
+	args = append(args, from)
+	args = append(args, to)
+
+	if opts.LoopMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.LoopMode)
+	}
+	if opts.EasingFunction == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.EasingFunction.JSObject())
+	}
+	if opts.OnAnimationEnd == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnAnimationEnd)
+	}
+
+	retVal := a.p.Call("CreateAndStartAnimation", args...)
+	return AnimatableFromJSObject(retVal, a.ctx)
+}
+
+// AnimationCreateAndStartHierarchyAnimationOpts contains optional parameters for Animation.CreateAndStartHierarchyAnimation.
+type AnimationCreateAndStartHierarchyAnimationOpts struct {
+	LoopMode       *float64
+	EasingFunction *EasingFunction
+	OnAnimationEnd *func()
+}
+
+// CreateAndStartHierarchyAnimation calls the CreateAndStartHierarchyAnimation method on the Animation object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#createandstarthierarchyanimation
+func (a *Animation) CreateAndStartHierarchyAnimation(name string, node *Node, directDescendantsOnly bool, targetProperty string, framePerSecond float64, totalFrame float64, from interface{}, to interface{}, opts *AnimationCreateAndStartHierarchyAnimationOpts) *Animatable {
+	if opts == nil {
+		opts = &AnimationCreateAndStartHierarchyAnimationOpts{}
+	}
+
+	args := make([]interface{}, 0, 8+3)
+
+	args = append(args, name)
+	args = append(args, node.JSObject())
+	args = append(args, directDescendantsOnly)
+	args = append(args, targetProperty)
+	args = append(args, framePerSecond)
+	args = append(args, totalFrame)
+	args = append(args, from)
+	args = append(args, to)
+
+	if opts.LoopMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.LoopMode)
+	}
+	if opts.EasingFunction == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.EasingFunction.JSObject())
+	}
+	if opts.OnAnimationEnd == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnAnimationEnd)
+	}
+
+	retVal := a.p.Call("CreateAndStartHierarchyAnimation", args...)
+	return AnimatableFromJSObject(retVal, a.ctx)
+}
+
+// CreateAnimation calls the CreateAnimation method on the Animation object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#createanimation
+func (a *Animation) CreateAnimation(property string, animationType float64, framePerSecond float64, easingFunction *EasingFunction) *Animation {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, property)
+	args = append(args, animationType)
+	args = append(args, framePerSecond)
+	args = append(args, easingFunction.JSObject())
+
+	retVal := a.p.Call("CreateAnimation", args...)
+	return AnimationFromJSObject(retVal, a.ctx)
+}
+
+// AnimationCreateMergeAndStartAnimationOpts contains optional parameters for Animation.CreateMergeAndStartAnimation.
+type AnimationCreateMergeAndStartAnimationOpts struct {
+	LoopMode       *float64
+	EasingFunction *EasingFunction
+	OnAnimationEnd *func()
+}
+
+// CreateMergeAndStartAnimation calls the CreateMergeAndStartAnimation method on the Animation object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#createmergeandstartanimation
+func (a *Animation) CreateMergeAndStartAnimation(name string, node *Node, targetProperty string, framePerSecond float64, totalFrame float64, from interface{}, to interface{}, opts *AnimationCreateMergeAndStartAnimationOpts) *Animatable {
+	if opts == nil {
+		opts = &AnimationCreateMergeAndStartAnimationOpts{}
+	}
+
+	args := make([]interface{}, 0, 7+3)
+
+	args = append(args, name)
+	args = append(args, node.JSObject())
+	args = append(args, targetProperty)
+	args = append(args, framePerSecond)
+	args = append(args, totalFrame)
+	args = append(args, from)
+	args = append(args, to)
+
+	if opts.LoopMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.LoopMode)
+	}
+	if opts.EasingFunction == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.EasingFunction.JSObject())
+	}
+	if opts.OnAnimationEnd == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnAnimationEnd)
+	}
+
+	retVal := a.p.Call("CreateMergeAndStartAnimation", args...)
+	return AnimatableFromJSObject(retVal, a.ctx)
+}
+
+// CreateRange calls the CreateRange method on the Animation object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#createrange
+func (a *Animation) CreateRange(name string, from float64, to float64) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, name)
+	args = append(args, from)
+	args = append(args, to)
+
+	a.p.Call("createRange", args...)
+}
+
+// AnimationDeleteRangeOpts contains optional parameters for Animation.DeleteRange.
+type AnimationDeleteRangeOpts struct {
+	DeleteFrames *bool
+}
+
+// DeleteRange calls the DeleteRange method on the Animation object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#deleterange
+func (a *Animation) DeleteRange(name string, opts *AnimationDeleteRangeOpts) {
+	if opts == nil {
+		opts = &AnimationDeleteRangeOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, name)
+
+	if opts.DeleteFrames == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DeleteFrames)
+	}
+
+	a.p.Call("deleteRange", args...)
+}
+
+// FloatInterpolateFunction calls the FloatInterpolateFunction method on the Animation object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#floatinterpolatefunction
+func (a *Animation) FloatInterpolateFunction(startValue float64, endValue float64, gradient float64) float64 {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, startValue)
+	args = append(args, endValue)
+	args = append(args, gradient)
+
+	retVal := a.p.Call("floatInterpolateFunction", args...)
+	return retVal.Float()
+}
+
+// FloatInterpolateFunctionWithTangents calls the FloatInterpolateFunctionWithTangents method on the Animation object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#floatinterpolatefunctionwithtangents
+func (a *Animation) FloatInterpolateFunctionWithTangents(startValue float64, outTangent float64, endValue float64, inTangent float64, gradient float64) float64 {
+
+	args := make([]interface{}, 0, 5+0)
+
+	args = append(args, startValue)
+	args = append(args, outTangent)
+	args = append(args, endValue)
+	args = append(args, inTangent)
+	args = append(args, gradient)
+
+	retVal := a.p.Call("floatInterpolateFunctionWithTangents", args...)
+	return retVal.Float()
+}
+
+// GetEasingFunction calls the GetEasingFunction method on the Animation object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#geteasingfunction
+func (a *Animation) GetEasingFunction() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("getEasingFunction", args...)
+	return retVal
+}
+
+// GetEvents calls the GetEvents method on the Animation object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#getevents
+func (a *Animation) GetEvents() *AnimationEvent {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("getEvents", args...)
+	return AnimationEventFromJSObject(retVal, a.ctx)
+}
+
+// GetHighestFrame calls the GetHighestFrame method on the Animation object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#gethighestframe
+func (a *Animation) GetHighestFrame() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("getHighestFrame", args...)
+	return retVal.Float()
+}
+
+// GetKeys calls the GetKeys method on the Animation object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#getkeys
+func (a *Animation) GetKeys() []js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("getKeys", args...)
+	return retVal
+}
+
+// GetRange calls the GetRange method on the Animation object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#getrange
+func (a *Animation) GetRange(name string) *AnimationRange {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := a.p.Call("getRange", args...)
+	return AnimationRangeFromJSObject(retVal, a.ctx)
+}
+
+// AnimationMatrixInterpolateFunctionOpts contains optional parameters for Animation.MatrixInterpolateFunction.
+type AnimationMatrixInterpolateFunctionOpts struct {
+	Result *Matrix
+}
+
+// MatrixInterpolateFunction calls the MatrixInterpolateFunction method on the Animation object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#matrixinterpolatefunction
+func (a *Animation) MatrixInterpolateFunction(startValue *Matrix, endValue *Matrix, gradient float64, opts *AnimationMatrixInterpolateFunctionOpts) *Matrix {
+	if opts == nil {
+		opts = &AnimationMatrixInterpolateFunctionOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, startValue.JSObject())
+	args = append(args, endValue.JSObject())
+	args = append(args, gradient)
+
+	if opts.Result == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Result.JSObject())
+	}
+
+	retVal := a.p.Call("matrixInterpolateFunction", args...)
+	return MatrixFromJSObject(retVal, a.ctx)
+}
+
+// Parse calls the Parse method on the Animation object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#parse
+func (a *Animation) Parse(parsedAnimation interface{}) *Animation {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, parsedAnimation)
+
+	retVal := a.p.Call("Parse", args...)
+	return AnimationFromJSObject(retVal, a.ctx)
+}
+
+// QuaternionInterpolateFunction calls the QuaternionInterpolateFunction method on the Animation object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#quaternioninterpolatefunction
+func (a *Animation) QuaternionInterpolateFunction(startValue *Quaternion, endValue *Quaternion, gradient float64) *Quaternion {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, startValue.JSObject())
+	args = append(args, endValue.JSObject())
+	args = append(args, gradient)
+
+	retVal := a.p.Call("quaternionInterpolateFunction", args...)
+	return QuaternionFromJSObject(retVal, a.ctx)
+}
+
+// QuaternionInterpolateFunctionWithTangents calls the QuaternionInterpolateFunctionWithTangents method on the Animation object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#quaternioninterpolatefunctionwithtangents
+func (a *Animation) QuaternionInterpolateFunctionWithTangents(startValue *Quaternion, outTangent *Quaternion, endValue *Quaternion, inTangent *Quaternion, gradient float64) *Quaternion {
+
+	args := make([]interface{}, 0, 5+0)
+
+	args = append(args, startValue.JSObject())
+	args = append(args, outTangent.JSObject())
+	args = append(args, endValue.JSObject())
+	args = append(args, inTangent.JSObject())
+	args = append(args, gradient)
+
+	retVal := a.p.Call("quaternionInterpolateFunctionWithTangents", args...)
+	return QuaternionFromJSObject(retVal, a.ctx)
+}
+
+// RemoveEvents calls the RemoveEvents method on the Animation object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#removeevents
+func (a *Animation) RemoveEvents(frame float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, frame)
+
+	a.p.Call("removeEvents", args...)
+}
+
+// Serialize calls the Serialize method on the Animation object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#serialize
+func (a *Animation) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("serialize", args...)
+	return retVal
+}
+
+// SetEasingFunction calls the SetEasingFunction method on the Animation object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#seteasingfunction
+func (a *Animation) SetEasingFunction(easingFunction *EasingFunction) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, easingFunction.JSObject())
+
+	a.p.Call("setEasingFunction", args...)
+}
+
+// SetKeys calls the SetKeys method on the Animation object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#setkeys
+func (a *Animation) SetKeys(values []js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, values)
+
+	a.p.Call("setKeys", args...)
+}
+
+// SizeInterpolateFunction calls the SizeInterpolateFunction method on the Animation object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#sizeinterpolatefunction
+func (a *Animation) SizeInterpolateFunction(startValue *Size, endValue *Size, gradient float64) *Size {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, startValue.JSObject())
+	args = append(args, endValue.JSObject())
+	args = append(args, gradient)
+
+	retVal := a.p.Call("sizeInterpolateFunction", args...)
+	return SizeFromJSObject(retVal, a.ctx)
+}
+
+// AnimationToStringOpts contains optional parameters for Animation.ToString.
+type AnimationToStringOpts struct {
+	FullDetails *bool
+}
+
+// ToString calls the ToString method on the Animation object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#tostring
+func (a *Animation) ToString(opts *AnimationToStringOpts) string {
+	if opts == nil {
+		opts = &AnimationToStringOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.FullDetails == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FullDetails)
+	}
+
+	retVal := a.p.Call("toString", args...)
+	return retVal.String()
+}
+
+// AnimationTransitionToOpts contains optional parameters for Animation.TransitionTo.
+type AnimationTransitionToOpts struct {
+	OnAnimationEnd *func()
+}
+
+// TransitionTo calls the TransitionTo method on the Animation object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#transitionto
+func (a *Animation) TransitionTo(property string, targetValue interface{}, host interface{}, scene *Scene, frameRate float64, transition *Animation, duration float64, opts *AnimationTransitionToOpts) *Animatable {
+	if opts == nil {
+		opts = &AnimationTransitionToOpts{}
+	}
+
+	args := make([]interface{}, 0, 7+1)
+
+	args = append(args, property)
+	args = append(args, targetValue)
+	args = append(args, host)
+	args = append(args, scene.JSObject())
+	args = append(args, frameRate)
+	args = append(args, transition.JSObject())
+	args = append(args, duration)
+
+	if opts.OnAnimationEnd == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnAnimationEnd)
+	}
+
+	retVal := a.p.Call("TransitionTo", args...)
+	return AnimatableFromJSObject(retVal, a.ctx)
+}
+
+// Vector2InterpolateFunction calls the Vector2InterpolateFunction method on the Animation object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#vector2interpolatefunction
+func (a *Animation) Vector2InterpolateFunction(startValue *Vector2, endValue *Vector2, gradient float64) *Vector2 {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, startValue.JSObject())
+	args = append(args, endValue.JSObject())
+	args = append(args, gradient)
+
+	retVal := a.p.Call("vector2InterpolateFunction", args...)
+	return Vector2FromJSObject(retVal, a.ctx)
+}
+
+// Vector2InterpolateFunctionWithTangents calls the Vector2InterpolateFunctionWithTangents method on the Animation object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#vector2interpolatefunctionwithtangents
+func (a *Animation) Vector2InterpolateFunctionWithTangents(startValue *Vector2, outTangent *Vector2, endValue *Vector2, inTangent *Vector2, gradient float64) *Vector2 {
+
+	args := make([]interface{}, 0, 5+0)
+
+	args = append(args, startValue.JSObject())
+	args = append(args, outTangent.JSObject())
+	args = append(args, endValue.JSObject())
+	args = append(args, inTangent.JSObject())
+	args = append(args, gradient)
+
+	retVal := a.p.Call("vector2InterpolateFunctionWithTangents", args...)
+	return Vector2FromJSObject(retVal, a.ctx)
+}
+
+// Vector3InterpolateFunction calls the Vector3InterpolateFunction method on the Animation object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#vector3interpolatefunction
+func (a *Animation) Vector3InterpolateFunction(startValue *Vector3, endValue *Vector3, gradient float64) *Vector3 {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, startValue.JSObject())
+	args = append(args, endValue.JSObject())
+	args = append(args, gradient)
+
+	retVal := a.p.Call("vector3InterpolateFunction", args...)
+	return Vector3FromJSObject(retVal, a.ctx)
+}
+
+// Vector3InterpolateFunctionWithTangents calls the Vector3InterpolateFunctionWithTangents method on the Animation object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#vector3interpolatefunctionwithtangents
+func (a *Animation) Vector3InterpolateFunctionWithTangents(startValue *Vector3, outTangent *Vector3, endValue *Vector3, inTangent *Vector3, gradient float64) *Vector3 {
+
+	args := make([]interface{}, 0, 5+0)
+
+	args = append(args, startValue.JSObject())
+	args = append(args, outTangent.JSObject())
+	args = append(args, endValue.JSObject())
+	args = append(args, inTangent.JSObject())
+	args = append(args, gradient)
+
+	retVal := a.p.Call("vector3InterpolateFunctionWithTangents", args...)
+	return Vector3FromJSObject(retVal, a.ctx)
+}
+
+/*
+
+// ANIMATIONLOOPMODE_CONSTANT returns the ANIMATIONLOOPMODE_CONSTANT property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#animationloopmode_constant
+func (a *Animation) ANIMATIONLOOPMODE_CONSTANT(ANIMATIONLOOPMODE_CONSTANT float64) *Animation {
+	p := ba.ctx.Get("Animation").New(ANIMATIONLOOPMODE_CONSTANT)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// SetANIMATIONLOOPMODE_CONSTANT sets the ANIMATIONLOOPMODE_CONSTANT property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#animationloopmode_constant
+func (a *Animation) SetANIMATIONLOOPMODE_CONSTANT(ANIMATIONLOOPMODE_CONSTANT float64) *Animation {
+	p := ba.ctx.Get("Animation").New(ANIMATIONLOOPMODE_CONSTANT)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// ANIMATIONLOOPMODE_CYCLE returns the ANIMATIONLOOPMODE_CYCLE property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#animationloopmode_cycle
+func (a *Animation) ANIMATIONLOOPMODE_CYCLE(ANIMATIONLOOPMODE_CYCLE float64) *Animation {
+	p := ba.ctx.Get("Animation").New(ANIMATIONLOOPMODE_CYCLE)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// SetANIMATIONLOOPMODE_CYCLE sets the ANIMATIONLOOPMODE_CYCLE property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#animationloopmode_cycle
+func (a *Animation) SetANIMATIONLOOPMODE_CYCLE(ANIMATIONLOOPMODE_CYCLE float64) *Animation {
+	p := ba.ctx.Get("Animation").New(ANIMATIONLOOPMODE_CYCLE)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// ANIMATIONLOOPMODE_RELATIVE returns the ANIMATIONLOOPMODE_RELATIVE property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#animationloopmode_relative
+func (a *Animation) ANIMATIONLOOPMODE_RELATIVE(ANIMATIONLOOPMODE_RELATIVE float64) *Animation {
+	p := ba.ctx.Get("Animation").New(ANIMATIONLOOPMODE_RELATIVE)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// SetANIMATIONLOOPMODE_RELATIVE sets the ANIMATIONLOOPMODE_RELATIVE property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#animationloopmode_relative
+func (a *Animation) SetANIMATIONLOOPMODE_RELATIVE(ANIMATIONLOOPMODE_RELATIVE float64) *Animation {
+	p := ba.ctx.Get("Animation").New(ANIMATIONLOOPMODE_RELATIVE)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// ANIMATIONTYPE_COLOR3 returns the ANIMATIONTYPE_COLOR3 property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#animationtype_color3
+func (a *Animation) ANIMATIONTYPE_COLOR3(ANIMATIONTYPE_COLOR3 float64) *Animation {
+	p := ba.ctx.Get("Animation").New(ANIMATIONTYPE_COLOR3)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// SetANIMATIONTYPE_COLOR3 sets the ANIMATIONTYPE_COLOR3 property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#animationtype_color3
+func (a *Animation) SetANIMATIONTYPE_COLOR3(ANIMATIONTYPE_COLOR3 float64) *Animation {
+	p := ba.ctx.Get("Animation").New(ANIMATIONTYPE_COLOR3)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// ANIMATIONTYPE_COLOR4 returns the ANIMATIONTYPE_COLOR4 property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#animationtype_color4
+func (a *Animation) ANIMATIONTYPE_COLOR4(ANIMATIONTYPE_COLOR4 float64) *Animation {
+	p := ba.ctx.Get("Animation").New(ANIMATIONTYPE_COLOR4)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// SetANIMATIONTYPE_COLOR4 sets the ANIMATIONTYPE_COLOR4 property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#animationtype_color4
+func (a *Animation) SetANIMATIONTYPE_COLOR4(ANIMATIONTYPE_COLOR4 float64) *Animation {
+	p := ba.ctx.Get("Animation").New(ANIMATIONTYPE_COLOR4)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// ANIMATIONTYPE_FLOAT returns the ANIMATIONTYPE_FLOAT property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#animationtype_float
+func (a *Animation) ANIMATIONTYPE_FLOAT(ANIMATIONTYPE_FLOAT float64) *Animation {
+	p := ba.ctx.Get("Animation").New(ANIMATIONTYPE_FLOAT)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// SetANIMATIONTYPE_FLOAT sets the ANIMATIONTYPE_FLOAT property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#animationtype_float
+func (a *Animation) SetANIMATIONTYPE_FLOAT(ANIMATIONTYPE_FLOAT float64) *Animation {
+	p := ba.ctx.Get("Animation").New(ANIMATIONTYPE_FLOAT)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// ANIMATIONTYPE_MATRIX returns the ANIMATIONTYPE_MATRIX property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#animationtype_matrix
+func (a *Animation) ANIMATIONTYPE_MATRIX(ANIMATIONTYPE_MATRIX float64) *Animation {
+	p := ba.ctx.Get("Animation").New(ANIMATIONTYPE_MATRIX)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// SetANIMATIONTYPE_MATRIX sets the ANIMATIONTYPE_MATRIX property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#animationtype_matrix
+func (a *Animation) SetANIMATIONTYPE_MATRIX(ANIMATIONTYPE_MATRIX float64) *Animation {
+	p := ba.ctx.Get("Animation").New(ANIMATIONTYPE_MATRIX)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// ANIMATIONTYPE_QUATERNION returns the ANIMATIONTYPE_QUATERNION property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#animationtype_quaternion
+func (a *Animation) ANIMATIONTYPE_QUATERNION(ANIMATIONTYPE_QUATERNION float64) *Animation {
+	p := ba.ctx.Get("Animation").New(ANIMATIONTYPE_QUATERNION)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// SetANIMATIONTYPE_QUATERNION sets the ANIMATIONTYPE_QUATERNION property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#animationtype_quaternion
+func (a *Animation) SetANIMATIONTYPE_QUATERNION(ANIMATIONTYPE_QUATERNION float64) *Animation {
+	p := ba.ctx.Get("Animation").New(ANIMATIONTYPE_QUATERNION)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// ANIMATIONTYPE_SIZE returns the ANIMATIONTYPE_SIZE property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#animationtype_size
+func (a *Animation) ANIMATIONTYPE_SIZE(ANIMATIONTYPE_SIZE float64) *Animation {
+	p := ba.ctx.Get("Animation").New(ANIMATIONTYPE_SIZE)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// SetANIMATIONTYPE_SIZE sets the ANIMATIONTYPE_SIZE property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#animationtype_size
+func (a *Animation) SetANIMATIONTYPE_SIZE(ANIMATIONTYPE_SIZE float64) *Animation {
+	p := ba.ctx.Get("Animation").New(ANIMATIONTYPE_SIZE)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// ANIMATIONTYPE_VECTOR2 returns the ANIMATIONTYPE_VECTOR2 property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#animationtype_vector2
+func (a *Animation) ANIMATIONTYPE_VECTOR2(ANIMATIONTYPE_VECTOR2 float64) *Animation {
+	p := ba.ctx.Get("Animation").New(ANIMATIONTYPE_VECTOR2)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// SetANIMATIONTYPE_VECTOR2 sets the ANIMATIONTYPE_VECTOR2 property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#animationtype_vector2
+func (a *Animation) SetANIMATIONTYPE_VECTOR2(ANIMATIONTYPE_VECTOR2 float64) *Animation {
+	p := ba.ctx.Get("Animation").New(ANIMATIONTYPE_VECTOR2)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// ANIMATIONTYPE_VECTOR3 returns the ANIMATIONTYPE_VECTOR3 property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#animationtype_vector3
+func (a *Animation) ANIMATIONTYPE_VECTOR3(ANIMATIONTYPE_VECTOR3 float64) *Animation {
+	p := ba.ctx.Get("Animation").New(ANIMATIONTYPE_VECTOR3)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// SetANIMATIONTYPE_VECTOR3 sets the ANIMATIONTYPE_VECTOR3 property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#animationtype_vector3
+func (a *Animation) SetANIMATIONTYPE_VECTOR3(ANIMATIONTYPE_VECTOR3 float64) *Animation {
+	p := ba.ctx.Get("Animation").New(ANIMATIONTYPE_VECTOR3)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// AllowMatricesInterpolation returns the AllowMatricesInterpolation property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#allowmatricesinterpolation
+func (a *Animation) AllowMatricesInterpolation(AllowMatricesInterpolation bool) *Animation {
+	p := ba.ctx.Get("Animation").New(AllowMatricesInterpolation)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// SetAllowMatricesInterpolation sets the AllowMatricesInterpolation property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#allowmatricesinterpolation
+func (a *Animation) SetAllowMatricesInterpolation(AllowMatricesInterpolation bool) *Animation {
+	p := ba.ctx.Get("Animation").New(AllowMatricesInterpolation)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// AllowMatrixDecomposeForInterpolation returns the AllowMatrixDecomposeForInterpolation property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#allowmatrixdecomposeforinterpolation
+func (a *Animation) AllowMatrixDecomposeForInterpolation(AllowMatrixDecomposeForInterpolation bool) *Animation {
+	p := ba.ctx.Get("Animation").New(AllowMatrixDecomposeForInterpolation)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// SetAllowMatrixDecomposeForInterpolation sets the AllowMatrixDecomposeForInterpolation property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#allowmatrixdecomposeforinterpolation
+func (a *Animation) SetAllowMatrixDecomposeForInterpolation(AllowMatrixDecomposeForInterpolation bool) *Animation {
+	p := ba.ctx.Get("Animation").New(AllowMatrixDecomposeForInterpolation)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// BlendingSpeed returns the BlendingSpeed property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#blendingspeed
+func (a *Animation) BlendingSpeed(blendingSpeed float64) *Animation {
+	p := ba.ctx.Get("Animation").New(blendingSpeed)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// SetBlendingSpeed sets the BlendingSpeed property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#blendingspeed
+func (a *Animation) SetBlendingSpeed(blendingSpeed float64) *Animation {
+	p := ba.ctx.Get("Animation").New(blendingSpeed)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// DataType returns the DataType property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#datatype
+func (a *Animation) DataType(dataType float64) *Animation {
+	p := ba.ctx.Get("Animation").New(dataType)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// SetDataType sets the DataType property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#datatype
+func (a *Animation) SetDataType(dataType float64) *Animation {
+	p := ba.ctx.Get("Animation").New(dataType)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// EnableBlending returns the EnableBlending property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#enableblending
+func (a *Animation) EnableBlending(enableBlending bool) *Animation {
+	p := ba.ctx.Get("Animation").New(enableBlending)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// SetEnableBlending sets the EnableBlending property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#enableblending
+func (a *Animation) SetEnableBlending(enableBlending bool) *Animation {
+	p := ba.ctx.Get("Animation").New(enableBlending)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// FramePerSecond returns the FramePerSecond property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#framepersecond
+func (a *Animation) FramePerSecond(framePerSecond float64) *Animation {
+	p := ba.ctx.Get("Animation").New(framePerSecond)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// SetFramePerSecond sets the FramePerSecond property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#framepersecond
+func (a *Animation) SetFramePerSecond(framePerSecond float64) *Animation {
+	p := ba.ctx.Get("Animation").New(framePerSecond)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// HasRunningRuntimeAnimations returns the HasRunningRuntimeAnimations property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#hasrunningruntimeanimations
+func (a *Animation) HasRunningRuntimeAnimations(hasRunningRuntimeAnimations bool) *Animation {
+	p := ba.ctx.Get("Animation").New(hasRunningRuntimeAnimations)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// SetHasRunningRuntimeAnimations sets the HasRunningRuntimeAnimations property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#hasrunningruntimeanimations
+func (a *Animation) SetHasRunningRuntimeAnimations(hasRunningRuntimeAnimations bool) *Animation {
+	p := ba.ctx.Get("Animation").New(hasRunningRuntimeAnimations)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// LoopMode returns the LoopMode property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#loopmode
+func (a *Animation) LoopMode(loopMode float64) *Animation {
+	p := ba.ctx.Get("Animation").New(loopMode)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// SetLoopMode sets the LoopMode property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#loopmode
+func (a *Animation) SetLoopMode(loopMode float64) *Animation {
+	p := ba.ctx.Get("Animation").New(loopMode)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#name
+func (a *Animation) Name(name string) *Animation {
+	p := ba.ctx.Get("Animation").New(name)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#name
+func (a *Animation) SetName(name string) *Animation {
+	p := ba.ctx.Get("Animation").New(name)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// RuntimeAnimations returns the RuntimeAnimations property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#runtimeanimations
+func (a *Animation) RuntimeAnimations(runtimeAnimations *RuntimeAnimation) *Animation {
+	p := ba.ctx.Get("Animation").New(runtimeAnimations.JSObject())
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// SetRuntimeAnimations sets the RuntimeAnimations property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#runtimeanimations
+func (a *Animation) SetRuntimeAnimations(runtimeAnimations *RuntimeAnimation) *Animation {
+	p := ba.ctx.Get("Animation").New(runtimeAnimations.JSObject())
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// TargetProperty returns the TargetProperty property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#targetproperty
+func (a *Animation) TargetProperty(targetProperty string) *Animation {
+	p := ba.ctx.Get("Animation").New(targetProperty)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// SetTargetProperty sets the TargetProperty property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#targetproperty
+func (a *Animation) SetTargetProperty(targetProperty string) *Animation {
+	p := ba.ctx.Get("Animation").New(targetProperty)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// TargetPropertyPath returns the TargetPropertyPath property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#targetpropertypath
+func (a *Animation) TargetPropertyPath(targetPropertyPath string) *Animation {
+	p := ba.ctx.Get("Animation").New(targetPropertyPath)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+// SetTargetPropertyPath sets the TargetPropertyPath property of class Animation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animation#targetpropertypath
+func (a *Animation) SetTargetPropertyPath(targetPropertyPath string) *Animation {
+	p := ba.ctx.Get("Animation").New(targetPropertyPath)
+	return AnimationFromJSObject(p, ba.ctx)
+}
+
+*/

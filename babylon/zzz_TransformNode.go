@@ -31,9 +31,8 @@ func TransformNodeFromJSObject(p js.Value, ctx js.Value) *TransformNode {
 
 // NewTransformNodeOpts contains optional parameters for NewTransformNode.
 type NewTransformNodeOpts struct {
-	Scene *Scene
-
-	IsPure *JSBool
+	Scene  *Scene
+	IsPure *bool
 }
 
 // NewTransformNode returns a new TransformNode object.
@@ -44,8 +43,1970 @@ func (ba *Babylon) NewTransformNode(name string, opts *NewTransformNodeOpts) *Tr
 		opts = &NewTransformNodeOpts{}
 	}
 
-	p := ba.ctx.Get("TransformNode").New(name, opts.Scene.JSObject(), opts.IsPure.JSObject())
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, name)
+
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+	if opts.IsPure == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IsPure)
+	}
+
+	p := ba.ctx.Get("TransformNode").New(args...)
 	return TransformNodeFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// TransformNodeAddBehaviorOpts contains optional parameters for TransformNode.AddBehavior.
+type TransformNodeAddBehaviorOpts struct {
+	AttachImmediately *Node
+}
+
+// AddBehavior calls the AddBehavior method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#addbehavior
+func (t *TransformNode) AddBehavior(behavior js.Value, opts *TransformNodeAddBehaviorOpts) *Node {
+	if opts == nil {
+		opts = &TransformNodeAddBehaviorOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, behavior)
+
+	if opts.AttachImmediately == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.AttachImmediately.JSObject())
+	}
+
+	retVal := t.p.Call("addBehavior", args...)
+	return NodeFromJSObject(retVal, t.ctx)
+}
+
+// AddNodeConstructor calls the AddNodeConstructor method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#addnodeconstructor
+func (t *TransformNode) AddNodeConstructor(jsType string, constructorFunc js.Value) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, jsType)
+	args = append(args, constructorFunc)
+
+	t.p.Call("AddNodeConstructor", args...)
+}
+
+// AddRotation calls the AddRotation method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#addrotation
+func (t *TransformNode) AddRotation(x float64, y float64, z float64) *TransformNode {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, x)
+	args = append(args, y)
+	args = append(args, z)
+
+	retVal := t.p.Call("addRotation", args...)
+	return TransformNodeFromJSObject(retVal, t.ctx)
+}
+
+// AttachToBone calls the AttachToBone method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#attachtobone
+func (t *TransformNode) AttachToBone(bone *Bone, affectedTransformNode *TransformNode) *TransformNode {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, bone.JSObject())
+	args = append(args, affectedTransformNode.JSObject())
+
+	retVal := t.p.Call("attachToBone", args...)
+	return TransformNodeFromJSObject(retVal, t.ctx)
+}
+
+// TransformNodeBeginAnimationOpts contains optional parameters for TransformNode.BeginAnimation.
+type TransformNodeBeginAnimationOpts struct {
+	Loop           *bool
+	SpeedRatio     *float64
+	OnAnimationEnd *func()
+}
+
+// BeginAnimation calls the BeginAnimation method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#beginanimation
+func (t *TransformNode) BeginAnimation(name string, opts *TransformNodeBeginAnimationOpts) *Animatable {
+	if opts == nil {
+		opts = &TransformNodeBeginAnimationOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, name)
+
+	if opts.Loop == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Loop)
+	}
+	if opts.SpeedRatio == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SpeedRatio)
+	}
+	if opts.OnAnimationEnd == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnAnimationEnd)
+	}
+
+	retVal := t.p.Call("beginAnimation", args...)
+	return AnimatableFromJSObject(retVal, t.ctx)
+}
+
+// TransformNodeCloneOpts contains optional parameters for TransformNode.Clone.
+type TransformNodeCloneOpts struct {
+	DoNotCloneChildren *bool
+}
+
+// Clone calls the Clone method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#clone
+func (t *TransformNode) Clone(name string, newParent *Node, opts *TransformNodeCloneOpts) *TransformNode {
+	if opts == nil {
+		opts = &TransformNodeCloneOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, name)
+	args = append(args, newParent.JSObject())
+
+	if opts.DoNotCloneChildren == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DoNotCloneChildren)
+	}
+
+	retVal := t.p.Call("clone", args...)
+	return TransformNodeFromJSObject(retVal, t.ctx)
+}
+
+// TransformNodeComputeWorldMatrixOpts contains optional parameters for TransformNode.ComputeWorldMatrix.
+type TransformNodeComputeWorldMatrixOpts struct {
+	Force *bool
+}
+
+// ComputeWorldMatrix calls the ComputeWorldMatrix method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#computeworldmatrix
+func (t *TransformNode) ComputeWorldMatrix(opts *TransformNodeComputeWorldMatrixOpts) *Matrix {
+	if opts == nil {
+		opts = &TransformNodeComputeWorldMatrixOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Force == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Force)
+	}
+
+	retVal := t.p.Call("computeWorldMatrix", args...)
+	return MatrixFromJSObject(retVal, t.ctx)
+}
+
+// TransformNodeConstructOpts contains optional parameters for TransformNode.Construct.
+type TransformNodeConstructOpts struct {
+	Options *interface{}
+}
+
+// Construct calls the Construct method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#construct
+func (t *TransformNode) Construct(jsType string, name string, scene *Scene, opts *TransformNodeConstructOpts) func() {
+	if opts == nil {
+		opts = &TransformNodeConstructOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, jsType)
+	args = append(args, name)
+	args = append(args, scene.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	retVal := t.p.Call("Construct", args...)
+	return retVal
+}
+
+// CreateAnimationRange calls the CreateAnimationRange method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#createanimationrange
+func (t *TransformNode) CreateAnimationRange(name string, from float64, to float64) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, name)
+	args = append(args, from)
+	args = append(args, to)
+
+	t.p.Call("createAnimationRange", args...)
+}
+
+// TransformNodeDeleteAnimationRangeOpts contains optional parameters for TransformNode.DeleteAnimationRange.
+type TransformNodeDeleteAnimationRangeOpts struct {
+	DeleteFrames *bool
+}
+
+// DeleteAnimationRange calls the DeleteAnimationRange method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#deleteanimationrange
+func (t *TransformNode) DeleteAnimationRange(name string, opts *TransformNodeDeleteAnimationRangeOpts) {
+	if opts == nil {
+		opts = &TransformNodeDeleteAnimationRangeOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, name)
+
+	if opts.DeleteFrames == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DeleteFrames)
+	}
+
+	t.p.Call("deleteAnimationRange", args...)
+}
+
+// DetachFromBone calls the DetachFromBone method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#detachfrombone
+func (t *TransformNode) DetachFromBone() *TransformNode {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("detachFromBone", args...)
+	return TransformNodeFromJSObject(retVal, t.ctx)
+}
+
+// TransformNodeDisposeOpts contains optional parameters for TransformNode.Dispose.
+type TransformNodeDisposeOpts struct {
+	DoNotRecurse               *bool
+	DisposeMaterialAndTextures *bool
+}
+
+// Dispose calls the Dispose method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#dispose
+func (t *TransformNode) Dispose(opts *TransformNodeDisposeOpts) {
+	if opts == nil {
+		opts = &TransformNodeDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.DoNotRecurse == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DoNotRecurse)
+	}
+	if opts.DisposeMaterialAndTextures == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DisposeMaterialAndTextures)
+	}
+
+	t.p.Call("dispose", args...)
+}
+
+// TransformNodeFreezeWorldMatrixOpts contains optional parameters for TransformNode.FreezeWorldMatrix.
+type TransformNodeFreezeWorldMatrixOpts struct {
+	NewWorldMatrix *Matrix
+}
+
+// FreezeWorldMatrix calls the FreezeWorldMatrix method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#freezeworldmatrix
+func (t *TransformNode) FreezeWorldMatrix(opts *TransformNodeFreezeWorldMatrixOpts) *TransformNode {
+	if opts == nil {
+		opts = &TransformNodeFreezeWorldMatrixOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.NewWorldMatrix == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.NewWorldMatrix.JSObject())
+	}
+
+	retVal := t.p.Call("freezeWorldMatrix", args...)
+	return TransformNodeFromJSObject(retVal, t.ctx)
+}
+
+// GetAbsolutePivotPoint calls the GetAbsolutePivotPoint method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#getabsolutepivotpoint
+func (t *TransformNode) GetAbsolutePivotPoint() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getAbsolutePivotPoint", args...)
+	return Vector3FromJSObject(retVal, t.ctx)
+}
+
+// GetAbsolutePivotPointToRef calls the GetAbsolutePivotPointToRef method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#getabsolutepivotpointtoref
+func (t *TransformNode) GetAbsolutePivotPointToRef(result *Vector3) *TransformNode {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, result.JSObject())
+
+	retVal := t.p.Call("getAbsolutePivotPointToRef", args...)
+	return TransformNodeFromJSObject(retVal, t.ctx)
+}
+
+// GetAbsolutePosition calls the GetAbsolutePosition method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#getabsoluteposition
+func (t *TransformNode) GetAbsolutePosition() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getAbsolutePosition", args...)
+	return Vector3FromJSObject(retVal, t.ctx)
+}
+
+// GetAnimationByName calls the GetAnimationByName method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#getanimationbyname
+func (t *TransformNode) GetAnimationByName(name string) *Animation {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := t.p.Call("getAnimationByName", args...)
+	return AnimationFromJSObject(retVal, t.ctx)
+}
+
+// GetAnimationRange calls the GetAnimationRange method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#getanimationrange
+func (t *TransformNode) GetAnimationRange(name string) *AnimationRange {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := t.p.Call("getAnimationRange", args...)
+	return AnimationRangeFromJSObject(retVal, t.ctx)
+}
+
+// GetAnimationRanges calls the GetAnimationRanges method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#getanimationranges
+func (t *TransformNode) GetAnimationRanges() *AnimationRange {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getAnimationRanges", args...)
+	return AnimationRangeFromJSObject(retVal, t.ctx)
+}
+
+// GetBehaviorByName calls the GetBehaviorByName method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#getbehaviorbyname
+func (t *TransformNode) GetBehaviorByName(name string) *Node {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := t.p.Call("getBehaviorByName", args...)
+	return NodeFromJSObject(retVal, t.ctx)
+}
+
+// TransformNodeGetChildMeshesOpts contains optional parameters for TransformNode.GetChildMeshes.
+type TransformNodeGetChildMeshesOpts struct {
+	DirectDescendantsOnly *bool
+	Predicate             *func()
+}
+
+// GetChildMeshes calls the GetChildMeshes method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#getchildmeshes
+func (t *TransformNode) GetChildMeshes(opts *TransformNodeGetChildMeshesOpts) *AbstractMesh {
+	if opts == nil {
+		opts = &TransformNodeGetChildMeshesOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	retVal := t.p.Call("getChildMeshes", args...)
+	return AbstractMeshFromJSObject(retVal, t.ctx)
+}
+
+// TransformNodeGetChildTransformNodesOpts contains optional parameters for TransformNode.GetChildTransformNodes.
+type TransformNodeGetChildTransformNodesOpts struct {
+	DirectDescendantsOnly *bool
+	Predicate             *func()
+}
+
+// GetChildTransformNodes calls the GetChildTransformNodes method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#getchildtransformnodes
+func (t *TransformNode) GetChildTransformNodes(opts *TransformNodeGetChildTransformNodesOpts) *TransformNode {
+	if opts == nil {
+		opts = &TransformNodeGetChildTransformNodesOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	retVal := t.p.Call("getChildTransformNodes", args...)
+	return TransformNodeFromJSObject(retVal, t.ctx)
+}
+
+// TransformNodeGetChildrenOpts contains optional parameters for TransformNode.GetChildren.
+type TransformNodeGetChildrenOpts struct {
+	Predicate             *func()
+	DirectDescendantsOnly *bool
+}
+
+// GetChildren calls the GetChildren method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#getchildren
+func (t *TransformNode) GetChildren(opts *TransformNodeGetChildrenOpts) *Node {
+	if opts == nil {
+		opts = &TransformNodeGetChildrenOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+
+	retVal := t.p.Call("getChildren", args...)
+	return NodeFromJSObject(retVal, t.ctx)
+}
+
+// GetClassName calls the GetClassName method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#getclassname
+func (t *TransformNode) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// TransformNodeGetDescendantsOpts contains optional parameters for TransformNode.GetDescendants.
+type TransformNodeGetDescendantsOpts struct {
+	DirectDescendantsOnly *bool
+	Predicate             *func()
+}
+
+// GetDescendants calls the GetDescendants method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#getdescendants
+func (t *TransformNode) GetDescendants(opts *TransformNodeGetDescendantsOpts) *Node {
+	if opts == nil {
+		opts = &TransformNodeGetDescendantsOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	retVal := t.p.Call("getDescendants", args...)
+	return NodeFromJSObject(retVal, t.ctx)
+}
+
+// GetDirection calls the GetDirection method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#getdirection
+func (t *TransformNode) GetDirection(localAxis *Vector3) *Vector3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, localAxis.JSObject())
+
+	retVal := t.p.Call("getDirection", args...)
+	return Vector3FromJSObject(retVal, t.ctx)
+}
+
+// GetDirectionToRef calls the GetDirectionToRef method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#getdirectiontoref
+func (t *TransformNode) GetDirectionToRef(localAxis *Vector3, result *Vector3) *TransformNode {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, localAxis.JSObject())
+	args = append(args, result.JSObject())
+
+	retVal := t.p.Call("getDirectionToRef", args...)
+	return TransformNodeFromJSObject(retVal, t.ctx)
+}
+
+// TransformNodeGetDistanceToCameraOpts contains optional parameters for TransformNode.GetDistanceToCamera.
+type TransformNodeGetDistanceToCameraOpts struct {
+	Camera *Camera
+}
+
+// GetDistanceToCamera calls the GetDistanceToCamera method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#getdistancetocamera
+func (t *TransformNode) GetDistanceToCamera(opts *TransformNodeGetDistanceToCameraOpts) float64 {
+	if opts == nil {
+		opts = &TransformNodeGetDistanceToCameraOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Camera == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Camera.JSObject())
+	}
+
+	retVal := t.p.Call("getDistanceToCamera", args...)
+	return retVal.Float()
+}
+
+// GetEngine calls the GetEngine method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#getengine
+func (t *TransformNode) GetEngine() *Engine {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getEngine", args...)
+	return EngineFromJSObject(retVal, t.ctx)
+}
+
+// TransformNodeGetHierarchyBoundingVectorsOpts contains optional parameters for TransformNode.GetHierarchyBoundingVectors.
+type TransformNodeGetHierarchyBoundingVectorsOpts struct {
+	IncludeDescendants *bool
+	Predicate          *func()
+}
+
+// GetHierarchyBoundingVectors calls the GetHierarchyBoundingVectors method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#gethierarchyboundingvectors
+func (t *TransformNode) GetHierarchyBoundingVectors(opts *TransformNodeGetHierarchyBoundingVectorsOpts) js.Value {
+	if opts == nil {
+		opts = &TransformNodeGetHierarchyBoundingVectorsOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.IncludeDescendants == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IncludeDescendants)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	retVal := t.p.Call("getHierarchyBoundingVectors", args...)
+	return retVal
+}
+
+// GetPivotMatrix calls the GetPivotMatrix method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#getpivotmatrix
+func (t *TransformNode) GetPivotMatrix() *Matrix {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getPivotMatrix", args...)
+	return MatrixFromJSObject(retVal, t.ctx)
+}
+
+// GetPivotPoint calls the GetPivotPoint method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#getpivotpoint
+func (t *TransformNode) GetPivotPoint() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getPivotPoint", args...)
+	return Vector3FromJSObject(retVal, t.ctx)
+}
+
+// GetPivotPointToRef calls the GetPivotPointToRef method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#getpivotpointtoref
+func (t *TransformNode) GetPivotPointToRef(result *Vector3) *TransformNode {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, result.JSObject())
+
+	retVal := t.p.Call("getPivotPointToRef", args...)
+	return TransformNodeFromJSObject(retVal, t.ctx)
+}
+
+// GetPoseMatrix calls the GetPoseMatrix method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#getposematrix
+func (t *TransformNode) GetPoseMatrix() *Matrix {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getPoseMatrix", args...)
+	return MatrixFromJSObject(retVal, t.ctx)
+}
+
+// GetPositionExpressedInLocalSpace calls the GetPositionExpressedInLocalSpace method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#getpositionexpressedinlocalspace
+func (t *TransformNode) GetPositionExpressedInLocalSpace() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getPositionExpressedInLocalSpace", args...)
+	return Vector3FromJSObject(retVal, t.ctx)
+}
+
+// TransformNodeGetPositionInCameraSpaceOpts contains optional parameters for TransformNode.GetPositionInCameraSpace.
+type TransformNodeGetPositionInCameraSpaceOpts struct {
+	Camera *Camera
+}
+
+// GetPositionInCameraSpace calls the GetPositionInCameraSpace method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#getpositionincameraspace
+func (t *TransformNode) GetPositionInCameraSpace(opts *TransformNodeGetPositionInCameraSpaceOpts) *Vector3 {
+	if opts == nil {
+		opts = &TransformNodeGetPositionInCameraSpaceOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Camera == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Camera.JSObject())
+	}
+
+	retVal := t.p.Call("getPositionInCameraSpace", args...)
+	return Vector3FromJSObject(retVal, t.ctx)
+}
+
+// GetScene calls the GetScene method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#getscene
+func (t *TransformNode) GetScene() *Scene {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getScene", args...)
+	return SceneFromJSObject(retVal, t.ctx)
+}
+
+// GetWorldMatrix calls the GetWorldMatrix method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#getworldmatrix
+func (t *TransformNode) GetWorldMatrix() *Matrix {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getWorldMatrix", args...)
+	return MatrixFromJSObject(retVal, t.ctx)
+}
+
+// TransformNodeInstantiateHierarchyOpts contains optional parameters for TransformNode.InstantiateHierarchy.
+type TransformNodeInstantiateHierarchyOpts struct {
+	NewParent        *TransformNode
+	Options          js.Value
+	OnNewNodeCreated *func()
+}
+
+// InstantiateHierarchy calls the InstantiateHierarchy method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#instantiatehierarchy
+func (t *TransformNode) InstantiateHierarchy(opts *TransformNodeInstantiateHierarchyOpts) *TransformNode {
+	if opts == nil {
+		opts = &TransformNodeInstantiateHierarchyOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+3)
+
+	if opts.NewParent == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.NewParent.JSObject())
+	}
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+	if opts.OnNewNodeCreated == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnNewNodeCreated)
+	}
+
+	retVal := t.p.Call("instantiateHierarchy", args...)
+	return TransformNodeFromJSObject(retVal, t.ctx)
+}
+
+// IsDescendantOf calls the IsDescendantOf method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#isdescendantof
+func (t *TransformNode) IsDescendantOf(ancestor *Node) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, ancestor.JSObject())
+
+	retVal := t.p.Call("isDescendantOf", args...)
+	return retVal.Bool()
+}
+
+// IsDisposed calls the IsDisposed method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#isdisposed
+func (t *TransformNode) IsDisposed() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("isDisposed", args...)
+	return retVal.Bool()
+}
+
+// TransformNodeIsEnabledOpts contains optional parameters for TransformNode.IsEnabled.
+type TransformNodeIsEnabledOpts struct {
+	CheckAncestors *bool
+}
+
+// IsEnabled calls the IsEnabled method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#isenabled
+func (t *TransformNode) IsEnabled(opts *TransformNodeIsEnabledOpts) bool {
+	if opts == nil {
+		opts = &TransformNodeIsEnabledOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.CheckAncestors == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.CheckAncestors)
+	}
+
+	retVal := t.p.Call("isEnabled", args...)
+	return retVal.Bool()
+}
+
+// TransformNodeIsReadyOpts contains optional parameters for TransformNode.IsReady.
+type TransformNodeIsReadyOpts struct {
+	CompleteCheck *bool
+}
+
+// IsReady calls the IsReady method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#isready
+func (t *TransformNode) IsReady(opts *TransformNodeIsReadyOpts) bool {
+	if opts == nil {
+		opts = &TransformNodeIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.CompleteCheck == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.CompleteCheck)
+	}
+
+	retVal := t.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// LocallyTranslate calls the LocallyTranslate method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#locallytranslate
+func (t *TransformNode) LocallyTranslate(vector3 *Vector3) *TransformNode {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, vector3.JSObject())
+
+	retVal := t.p.Call("locallyTranslate", args...)
+	return TransformNodeFromJSObject(retVal, t.ctx)
+}
+
+// TransformNodeLookAtOpts contains optional parameters for TransformNode.LookAt.
+type TransformNodeLookAtOpts struct {
+	YawCor   *float64
+	PitchCor *float64
+	RollCor  *float64
+	Space    js.Value
+}
+
+// LookAt calls the LookAt method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#lookat
+func (t *TransformNode) LookAt(targetPoint *Vector3, opts *TransformNodeLookAtOpts) *TransformNode {
+	if opts == nil {
+		opts = &TransformNodeLookAtOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+4)
+
+	args = append(args, targetPoint.JSObject())
+
+	if opts.YawCor == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.YawCor)
+	}
+	if opts.PitchCor == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.PitchCor)
+	}
+	if opts.RollCor == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RollCor)
+	}
+	if opts.Space == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Space)
+	}
+
+	retVal := t.p.Call("lookAt", args...)
+	return TransformNodeFromJSObject(retVal, t.ctx)
+}
+
+// MarkAsDirty calls the MarkAsDirty method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#markasdirty
+func (t *TransformNode) MarkAsDirty(property string) *TransformNode {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, property)
+
+	retVal := t.p.Call("markAsDirty", args...)
+	return TransformNodeFromJSObject(retVal, t.ctx)
+}
+
+// TransformNodeNormalizeToUnitCubeOpts contains optional parameters for TransformNode.NormalizeToUnitCube.
+type TransformNodeNormalizeToUnitCubeOpts struct {
+	IncludeDescendants *bool
+	IgnoreRotation     *bool
+	Predicate          *func()
+}
+
+// NormalizeToUnitCube calls the NormalizeToUnitCube method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#normalizetounitcube
+func (t *TransformNode) NormalizeToUnitCube(opts *TransformNodeNormalizeToUnitCubeOpts) *TransformNode {
+	if opts == nil {
+		opts = &TransformNodeNormalizeToUnitCubeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+3)
+
+	if opts.IncludeDescendants == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IncludeDescendants)
+	}
+	if opts.IgnoreRotation == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IgnoreRotation)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	retVal := t.p.Call("normalizeToUnitCube", args...)
+	return TransformNodeFromJSObject(retVal, t.ctx)
+}
+
+// Parse calls the Parse method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#parse
+func (t *TransformNode) Parse(parsedTransformNode interface{}, scene *Scene, rootUrl string) *TransformNode {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, parsedTransformNode)
+	args = append(args, scene.JSObject())
+	args = append(args, rootUrl)
+
+	retVal := t.p.Call("Parse", args...)
+	return TransformNodeFromJSObject(retVal, t.ctx)
+}
+
+// ParseAnimationRanges calls the ParseAnimationRanges method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#parseanimationranges
+func (t *TransformNode) ParseAnimationRanges(node *Node, parsedNode interface{}, scene *Scene) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, node.JSObject())
+	args = append(args, parsedNode)
+	args = append(args, scene.JSObject())
+
+	t.p.Call("ParseAnimationRanges", args...)
+}
+
+// RegisterAfterWorldMatrixUpdate calls the RegisterAfterWorldMatrixUpdate method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#registerafterworldmatrixupdate
+func (t *TransformNode) RegisterAfterWorldMatrixUpdate(jsFunc func()) *TransformNode {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, jsFunc)
+
+	retVal := t.p.Call("registerAfterWorldMatrixUpdate", args...)
+	return TransformNodeFromJSObject(retVal, t.ctx)
+}
+
+// RemoveBehavior calls the RemoveBehavior method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#removebehavior
+func (t *TransformNode) RemoveBehavior(behavior js.Value) *Node {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, behavior)
+
+	retVal := t.p.Call("removeBehavior", args...)
+	return NodeFromJSObject(retVal, t.ctx)
+}
+
+// TransformNodeRotateOpts contains optional parameters for TransformNode.Rotate.
+type TransformNodeRotateOpts struct {
+	Space js.Value
+}
+
+// Rotate calls the Rotate method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#rotate
+func (t *TransformNode) Rotate(axis *Vector3, amount float64, opts *TransformNodeRotateOpts) *TransformNode {
+	if opts == nil {
+		opts = &TransformNodeRotateOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, axis.JSObject())
+	args = append(args, amount)
+
+	if opts.Space == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Space)
+	}
+
+	retVal := t.p.Call("rotate", args...)
+	return TransformNodeFromJSObject(retVal, t.ctx)
+}
+
+// RotateAround calls the RotateAround method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#rotatearound
+func (t *TransformNode) RotateAround(point *Vector3, axis *Vector3, amount float64) *TransformNode {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, point.JSObject())
+	args = append(args, axis.JSObject())
+	args = append(args, amount)
+
+	retVal := t.p.Call("rotateAround", args...)
+	return TransformNodeFromJSObject(retVal, t.ctx)
+}
+
+// TransformNodeSerializeOpts contains optional parameters for TransformNode.Serialize.
+type TransformNodeSerializeOpts struct {
+	CurrentSerializationObject *interface{}
+}
+
+// Serialize calls the Serialize method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#serialize
+func (t *TransformNode) Serialize(opts *TransformNodeSerializeOpts) interface{} {
+	if opts == nil {
+		opts = &TransformNodeSerializeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.CurrentSerializationObject == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.CurrentSerializationObject)
+	}
+
+	retVal := t.p.Call("serialize", args...)
+	return retVal
+}
+
+// SerializeAnimationRanges calls the SerializeAnimationRanges method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#serializeanimationranges
+func (t *TransformNode) SerializeAnimationRanges() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("serializeAnimationRanges", args...)
+	return retVal
+}
+
+// SetAbsolutePosition calls the SetAbsolutePosition method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#setabsoluteposition
+func (t *TransformNode) SetAbsolutePosition(absolutePosition *Vector3) *TransformNode {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, absolutePosition.JSObject())
+
+	retVal := t.p.Call("setAbsolutePosition", args...)
+	return TransformNodeFromJSObject(retVal, t.ctx)
+}
+
+// TransformNodeSetDirectionOpts contains optional parameters for TransformNode.SetDirection.
+type TransformNodeSetDirectionOpts struct {
+	YawCor   *float64
+	PitchCor *float64
+	RollCor  *float64
+}
+
+// SetDirection calls the SetDirection method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#setdirection
+func (t *TransformNode) SetDirection(localAxis *Vector3, opts *TransformNodeSetDirectionOpts) *TransformNode {
+	if opts == nil {
+		opts = &TransformNodeSetDirectionOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, localAxis.JSObject())
+
+	if opts.YawCor == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.YawCor)
+	}
+	if opts.PitchCor == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.PitchCor)
+	}
+	if opts.RollCor == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RollCor)
+	}
+
+	retVal := t.p.Call("setDirection", args...)
+	return TransformNodeFromJSObject(retVal, t.ctx)
+}
+
+// SetEnabled calls the SetEnabled method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#setenabled
+func (t *TransformNode) SetEnabled(value bool) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, value)
+
+	t.p.Call("setEnabled", args...)
+}
+
+// SetParent calls the SetParent method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#setparent
+func (t *TransformNode) SetParent(node *Node) *TransformNode {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, node.JSObject())
+
+	retVal := t.p.Call("setParent", args...)
+	return TransformNodeFromJSObject(retVal, t.ctx)
+}
+
+// TransformNodeSetPivotMatrixOpts contains optional parameters for TransformNode.SetPivotMatrix.
+type TransformNodeSetPivotMatrixOpts struct {
+	PostMultiplyPivotMatrix *bool
+}
+
+// SetPivotMatrix calls the SetPivotMatrix method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#setpivotmatrix
+func (t *TransformNode) SetPivotMatrix(matrix *Matrix, opts *TransformNodeSetPivotMatrixOpts) *TransformNode {
+	if opts == nil {
+		opts = &TransformNodeSetPivotMatrixOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, matrix.JSObject())
+
+	if opts.PostMultiplyPivotMatrix == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.PostMultiplyPivotMatrix)
+	}
+
+	retVal := t.p.Call("setPivotMatrix", args...)
+	return TransformNodeFromJSObject(retVal, t.ctx)
+}
+
+// TransformNodeSetPivotPointOpts contains optional parameters for TransformNode.SetPivotPoint.
+type TransformNodeSetPivotPointOpts struct {
+	Space js.Value
+}
+
+// SetPivotPoint calls the SetPivotPoint method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#setpivotpoint
+func (t *TransformNode) SetPivotPoint(point *Vector3, opts *TransformNodeSetPivotPointOpts) *TransformNode {
+	if opts == nil {
+		opts = &TransformNodeSetPivotPointOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, point.JSObject())
+
+	if opts.Space == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Space)
+	}
+
+	retVal := t.p.Call("setPivotPoint", args...)
+	return TransformNodeFromJSObject(retVal, t.ctx)
+}
+
+// SetPositionWithLocalVector calls the SetPositionWithLocalVector method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#setpositionwithlocalvector
+func (t *TransformNode) SetPositionWithLocalVector(vector3 *Vector3) *TransformNode {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, vector3.JSObject())
+
+	retVal := t.p.Call("setPositionWithLocalVector", args...)
+	return TransformNodeFromJSObject(retVal, t.ctx)
+}
+
+// SetPreTransformMatrix calls the SetPreTransformMatrix method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#setpretransformmatrix
+func (t *TransformNode) SetPreTransformMatrix(matrix *Matrix) *TransformNode {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, matrix.JSObject())
+
+	retVal := t.p.Call("setPreTransformMatrix", args...)
+	return TransformNodeFromJSObject(retVal, t.ctx)
+}
+
+// TransformNodeTranslateOpts contains optional parameters for TransformNode.Translate.
+type TransformNodeTranslateOpts struct {
+	Space js.Value
+}
+
+// Translate calls the Translate method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#translate
+func (t *TransformNode) Translate(axis *Vector3, distance float64, opts *TransformNodeTranslateOpts) *TransformNode {
+	if opts == nil {
+		opts = &TransformNodeTranslateOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, axis.JSObject())
+	args = append(args, distance)
+
+	if opts.Space == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Space)
+	}
+
+	retVal := t.p.Call("translate", args...)
+	return TransformNodeFromJSObject(retVal, t.ctx)
+}
+
+// UnfreezeWorldMatrix calls the UnfreezeWorldMatrix method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#unfreezeworldmatrix
+func (t *TransformNode) UnfreezeWorldMatrix() *TransformNode {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("unfreezeWorldMatrix", args...)
+	return TransformNodeFromJSObject(retVal, t.ctx)
+}
+
+// UnregisterAfterWorldMatrixUpdate calls the UnregisterAfterWorldMatrixUpdate method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#unregisterafterworldmatrixupdate
+func (t *TransformNode) UnregisterAfterWorldMatrixUpdate(jsFunc func()) *TransformNode {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, jsFunc)
+
+	retVal := t.p.Call("unregisterAfterWorldMatrixUpdate", args...)
+	return TransformNodeFromJSObject(retVal, t.ctx)
+}
+
+// UpdatePoseMatrix calls the UpdatePoseMatrix method on the TransformNode object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#updateposematrix
+func (t *TransformNode) UpdatePoseMatrix(matrix *Matrix) *TransformNode {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, matrix.JSObject())
+
+	retVal := t.p.Call("updatePoseMatrix", args...)
+	return TransformNodeFromJSObject(retVal, t.ctx)
+}
+
+/*
+
+// AbsolutePosition returns the AbsolutePosition property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#absoluteposition
+func (t *TransformNode) AbsolutePosition(absolutePosition *Vector3) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(absolutePosition.JSObject())
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetAbsolutePosition sets the AbsolutePosition property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#absoluteposition
+func (t *TransformNode) SetAbsolutePosition(absolutePosition *Vector3) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(absolutePosition.JSObject())
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// AbsoluteRotationQuaternion returns the AbsoluteRotationQuaternion property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#absoluterotationquaternion
+func (t *TransformNode) AbsoluteRotationQuaternion(absoluteRotationQuaternion *Quaternion) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(absoluteRotationQuaternion.JSObject())
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetAbsoluteRotationQuaternion sets the AbsoluteRotationQuaternion property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#absoluterotationquaternion
+func (t *TransformNode) SetAbsoluteRotationQuaternion(absoluteRotationQuaternion *Quaternion) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(absoluteRotationQuaternion.JSObject())
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// AbsoluteScaling returns the AbsoluteScaling property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#absolutescaling
+func (t *TransformNode) AbsoluteScaling(absoluteScaling *Vector3) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(absoluteScaling.JSObject())
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetAbsoluteScaling sets the AbsoluteScaling property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#absolutescaling
+func (t *TransformNode) SetAbsoluteScaling(absoluteScaling *Vector3) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(absoluteScaling.JSObject())
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// AnimationPropertiesOverride returns the AnimationPropertiesOverride property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#animationpropertiesoverride
+func (t *TransformNode) AnimationPropertiesOverride(animationPropertiesOverride *AnimationPropertiesOverride) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(animationPropertiesOverride.JSObject())
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetAnimationPropertiesOverride sets the AnimationPropertiesOverride property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#animationpropertiesoverride
+func (t *TransformNode) SetAnimationPropertiesOverride(animationPropertiesOverride *AnimationPropertiesOverride) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(animationPropertiesOverride.JSObject())
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// Animations returns the Animations property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#animations
+func (t *TransformNode) Animations(animations *Animation) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(animations.JSObject())
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#animations
+func (t *TransformNode) SetAnimations(animations *Animation) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(animations.JSObject())
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// BILLBOARDMODE_ALL returns the BILLBOARDMODE_ALL property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#billboardmode_all
+func (t *TransformNode) BILLBOARDMODE_ALL(BILLBOARDMODE_ALL float64) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(BILLBOARDMODE_ALL)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetBILLBOARDMODE_ALL sets the BILLBOARDMODE_ALL property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#billboardmode_all
+func (t *TransformNode) SetBILLBOARDMODE_ALL(BILLBOARDMODE_ALL float64) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(BILLBOARDMODE_ALL)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// BILLBOARDMODE_NONE returns the BILLBOARDMODE_NONE property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#billboardmode_none
+func (t *TransformNode) BILLBOARDMODE_NONE(BILLBOARDMODE_NONE float64) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(BILLBOARDMODE_NONE)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetBILLBOARDMODE_NONE sets the BILLBOARDMODE_NONE property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#billboardmode_none
+func (t *TransformNode) SetBILLBOARDMODE_NONE(BILLBOARDMODE_NONE float64) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(BILLBOARDMODE_NONE)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// BILLBOARDMODE_USE_POSITION returns the BILLBOARDMODE_USE_POSITION property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#billboardmode_use_position
+func (t *TransformNode) BILLBOARDMODE_USE_POSITION(BILLBOARDMODE_USE_POSITION float64) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(BILLBOARDMODE_USE_POSITION)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetBILLBOARDMODE_USE_POSITION sets the BILLBOARDMODE_USE_POSITION property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#billboardmode_use_position
+func (t *TransformNode) SetBILLBOARDMODE_USE_POSITION(BILLBOARDMODE_USE_POSITION float64) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(BILLBOARDMODE_USE_POSITION)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// BILLBOARDMODE_X returns the BILLBOARDMODE_X property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#billboardmode_x
+func (t *TransformNode) BILLBOARDMODE_X(BILLBOARDMODE_X float64) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(BILLBOARDMODE_X)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetBILLBOARDMODE_X sets the BILLBOARDMODE_X property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#billboardmode_x
+func (t *TransformNode) SetBILLBOARDMODE_X(BILLBOARDMODE_X float64) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(BILLBOARDMODE_X)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// BILLBOARDMODE_Y returns the BILLBOARDMODE_Y property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#billboardmode_y
+func (t *TransformNode) BILLBOARDMODE_Y(BILLBOARDMODE_Y float64) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(BILLBOARDMODE_Y)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetBILLBOARDMODE_Y sets the BILLBOARDMODE_Y property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#billboardmode_y
+func (t *TransformNode) SetBILLBOARDMODE_Y(BILLBOARDMODE_Y float64) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(BILLBOARDMODE_Y)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// BILLBOARDMODE_Z returns the BILLBOARDMODE_Z property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#billboardmode_z
+func (t *TransformNode) BILLBOARDMODE_Z(BILLBOARDMODE_Z float64) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(BILLBOARDMODE_Z)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetBILLBOARDMODE_Z sets the BILLBOARDMODE_Z property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#billboardmode_z
+func (t *TransformNode) SetBILLBOARDMODE_Z(BILLBOARDMODE_Z float64) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(BILLBOARDMODE_Z)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// Behaviors returns the Behaviors property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#behaviors
+func (t *TransformNode) Behaviors(behaviors js.Value) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(behaviors)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetBehaviors sets the Behaviors property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#behaviors
+func (t *TransformNode) SetBehaviors(behaviors js.Value) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(behaviors)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// BillboardMode returns the BillboardMode property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#billboardmode
+func (t *TransformNode) BillboardMode(billboardMode float64) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(billboardMode)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetBillboardMode sets the BillboardMode property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#billboardmode
+func (t *TransformNode) SetBillboardMode(billboardMode float64) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(billboardMode)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// DoNotSerialize returns the DoNotSerialize property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#donotserialize
+func (t *TransformNode) DoNotSerialize(doNotSerialize bool) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(doNotSerialize)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetDoNotSerialize sets the DoNotSerialize property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#donotserialize
+func (t *TransformNode) SetDoNotSerialize(doNotSerialize bool) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(doNotSerialize)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// Forward returns the Forward property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#forward
+func (t *TransformNode) Forward(forward *Vector3) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(forward.JSObject())
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetForward sets the Forward property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#forward
+func (t *TransformNode) SetForward(forward *Vector3) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(forward.JSObject())
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// Id returns the Id property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#id
+func (t *TransformNode) Id(id string) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(id)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetId sets the Id property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#id
+func (t *TransformNode) SetId(id string) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(id)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// IgnoreNonUniformScaling returns the IgnoreNonUniformScaling property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#ignorenonuniformscaling
+func (t *TransformNode) IgnoreNonUniformScaling(ignoreNonUniformScaling bool) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(ignoreNonUniformScaling)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetIgnoreNonUniformScaling sets the IgnoreNonUniformScaling property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#ignorenonuniformscaling
+func (t *TransformNode) SetIgnoreNonUniformScaling(ignoreNonUniformScaling bool) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(ignoreNonUniformScaling)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// InfiniteDistance returns the InfiniteDistance property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#infinitedistance
+func (t *TransformNode) InfiniteDistance(infiniteDistance bool) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(infiniteDistance)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetInfiniteDistance sets the InfiniteDistance property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#infinitedistance
+func (t *TransformNode) SetInfiniteDistance(infiniteDistance bool) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(infiniteDistance)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#inspectablecustomproperties
+func (t *TransformNode) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(inspectableCustomProperties.JSObject())
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#inspectablecustomproperties
+func (t *TransformNode) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(inspectableCustomProperties.JSObject())
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// IsWorldMatrixFrozen returns the IsWorldMatrixFrozen property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#isworldmatrixfrozen
+func (t *TransformNode) IsWorldMatrixFrozen(isWorldMatrixFrozen bool) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(isWorldMatrixFrozen)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetIsWorldMatrixFrozen sets the IsWorldMatrixFrozen property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#isworldmatrixfrozen
+func (t *TransformNode) SetIsWorldMatrixFrozen(isWorldMatrixFrozen bool) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(isWorldMatrixFrozen)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#metadata
+func (t *TransformNode) Metadata(metadata interface{}) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(metadata)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#metadata
+func (t *TransformNode) SetMetadata(metadata interface{}) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(metadata)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#name
+func (t *TransformNode) Name(name string) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(name)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#name
+func (t *TransformNode) SetName(name string) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(name)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// NonUniformScaling returns the NonUniformScaling property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#nonuniformscaling
+func (t *TransformNode) NonUniformScaling(nonUniformScaling bool) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(nonUniformScaling)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetNonUniformScaling sets the NonUniformScaling property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#nonuniformscaling
+func (t *TransformNode) SetNonUniformScaling(nonUniformScaling bool) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(nonUniformScaling)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// OnAfterWorldMatrixUpdateObservable returns the OnAfterWorldMatrixUpdateObservable property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#onafterworldmatrixupdateobservable
+func (t *TransformNode) OnAfterWorldMatrixUpdateObservable(onAfterWorldMatrixUpdateObservable *Observable) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(onAfterWorldMatrixUpdateObservable.JSObject())
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterWorldMatrixUpdateObservable sets the OnAfterWorldMatrixUpdateObservable property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#onafterworldmatrixupdateobservable
+func (t *TransformNode) SetOnAfterWorldMatrixUpdateObservable(onAfterWorldMatrixUpdateObservable *Observable) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(onAfterWorldMatrixUpdateObservable.JSObject())
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// OnDispose returns the OnDispose property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#ondispose
+func (t *TransformNode) OnDispose(onDispose func()) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(onDispose)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetOnDispose sets the OnDispose property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#ondispose
+func (t *TransformNode) SetOnDispose(onDispose func()) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(onDispose)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// OnDisposeObservable returns the OnDisposeObservable property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#ondisposeobservable
+func (t *TransformNode) OnDisposeObservable(onDisposeObservable *Observable) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(onDisposeObservable.JSObject())
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetOnDisposeObservable sets the OnDisposeObservable property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#ondisposeobservable
+func (t *TransformNode) SetOnDisposeObservable(onDisposeObservable *Observable) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(onDisposeObservable.JSObject())
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// OnReady returns the OnReady property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#onready
+func (t *TransformNode) OnReady(onReady func()) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(onReady)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetOnReady sets the OnReady property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#onready
+func (t *TransformNode) SetOnReady(onReady func()) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(onReady)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// Parent returns the Parent property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#parent
+func (t *TransformNode) Parent(parent *Node) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(parent.JSObject())
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetParent sets the Parent property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#parent
+func (t *TransformNode) SetParent(parent *Node) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(parent.JSObject())
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// Position returns the Position property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#position
+func (t *TransformNode) Position(position *Vector3) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(position.JSObject())
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetPosition sets the Position property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#position
+func (t *TransformNode) SetPosition(position *Vector3) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(position.JSObject())
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// PreserveParentRotationForBillboard returns the PreserveParentRotationForBillboard property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#preserveparentrotationforbillboard
+func (t *TransformNode) PreserveParentRotationForBillboard(preserveParentRotationForBillboard bool) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(preserveParentRotationForBillboard)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetPreserveParentRotationForBillboard sets the PreserveParentRotationForBillboard property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#preserveparentrotationforbillboard
+func (t *TransformNode) SetPreserveParentRotationForBillboard(preserveParentRotationForBillboard bool) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(preserveParentRotationForBillboard)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// ReIntegrateRotationIntoRotationQuaternion returns the ReIntegrateRotationIntoRotationQuaternion property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#reintegraterotationintorotationquaternion
+func (t *TransformNode) ReIntegrateRotationIntoRotationQuaternion(reIntegrateRotationIntoRotationQuaternion bool) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(reIntegrateRotationIntoRotationQuaternion)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetReIntegrateRotationIntoRotationQuaternion sets the ReIntegrateRotationIntoRotationQuaternion property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#reintegraterotationintorotationquaternion
+func (t *TransformNode) SetReIntegrateRotationIntoRotationQuaternion(reIntegrateRotationIntoRotationQuaternion bool) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(reIntegrateRotationIntoRotationQuaternion)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// ReservedDataStore returns the ReservedDataStore property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#reserveddatastore
+func (t *TransformNode) ReservedDataStore(reservedDataStore interface{}) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(reservedDataStore)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetReservedDataStore sets the ReservedDataStore property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#reserveddatastore
+func (t *TransformNode) SetReservedDataStore(reservedDataStore interface{}) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(reservedDataStore)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// Right returns the Right property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#right
+func (t *TransformNode) Right(right *Vector3) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(right.JSObject())
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetRight sets the Right property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#right
+func (t *TransformNode) SetRight(right *Vector3) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(right.JSObject())
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// Rotation returns the Rotation property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#rotation
+func (t *TransformNode) Rotation(rotation *Vector3) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(rotation.JSObject())
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetRotation sets the Rotation property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#rotation
+func (t *TransformNode) SetRotation(rotation *Vector3) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(rotation.JSObject())
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// RotationQuaternion returns the RotationQuaternion property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#rotationquaternion
+func (t *TransformNode) RotationQuaternion(rotationQuaternion *Quaternion) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(rotationQuaternion.JSObject())
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetRotationQuaternion sets the RotationQuaternion property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#rotationquaternion
+func (t *TransformNode) SetRotationQuaternion(rotationQuaternion *Quaternion) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(rotationQuaternion.JSObject())
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// Scaling returns the Scaling property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#scaling
+func (t *TransformNode) Scaling(scaling *Vector3) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(scaling.JSObject())
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetScaling sets the Scaling property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#scaling
+func (t *TransformNode) SetScaling(scaling *Vector3) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(scaling.JSObject())
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// ScalingDeterminant returns the ScalingDeterminant property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#scalingdeterminant
+func (t *TransformNode) ScalingDeterminant(scalingDeterminant float64) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(scalingDeterminant)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetScalingDeterminant sets the ScalingDeterminant property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#scalingdeterminant
+func (t *TransformNode) SetScalingDeterminant(scalingDeterminant float64) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(scalingDeterminant)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// State returns the State property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#state
+func (t *TransformNode) State(state string) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(state)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetState sets the State property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#state
+func (t *TransformNode) SetState(state string) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(state)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#uniqueid
+func (t *TransformNode) UniqueId(uniqueId float64) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(uniqueId)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#uniqueid
+func (t *TransformNode) SetUniqueId(uniqueId float64) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(uniqueId)
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// Up returns the Up property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#up
+func (t *TransformNode) Up(up *Vector3) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(up.JSObject())
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetUp sets the Up property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#up
+func (t *TransformNode) SetUp(up *Vector3) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(up.JSObject())
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// WorldMatrixFromCache returns the WorldMatrixFromCache property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#worldmatrixfromcache
+func (t *TransformNode) WorldMatrixFromCache(worldMatrixFromCache *Matrix) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(worldMatrixFromCache.JSObject())
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+// SetWorldMatrixFromCache sets the WorldMatrixFromCache property of class TransformNode.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transformnode#worldmatrixfromcache
+func (t *TransformNode) SetWorldMatrixFromCache(worldMatrixFromCache *Matrix) *TransformNode {
+	p := ba.ctx.Get("TransformNode").New(worldMatrixFromCache.JSObject())
+	return TransformNodeFromJSObject(p, ba.ctx)
+}
+
+*/

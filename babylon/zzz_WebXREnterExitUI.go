@@ -27,4 +27,47 @@ func WebXREnterExitUIFromJSObject(p js.Value, ctx js.Value) *WebXREnterExitUI {
 	return &WebXREnterExitUI{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// CreateAsync calls the CreateAsync method on the WebXREnterExitUI object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrenterexitui#createasync
+func (w *WebXREnterExitUI) CreateAsync(scene *Scene, helper *WebXRExperienceHelper, options *WebXREnterExitUIOptions) *WebXREnterExitUI {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, scene.JSObject())
+	args = append(args, helper.JSObject())
+	args = append(args, options.JSObject())
+
+	retVal := w.p.Call("CreateAsync", args...)
+	return WebXREnterExitUIFromJSObject(retVal, w.ctx)
+}
+
+// Dispose calls the Dispose method on the WebXREnterExitUI object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrenterexitui#dispose
+func (w *WebXREnterExitUI) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	w.p.Call("dispose", args...)
+}
+
+/*
+
+// ActiveButtonChangedObservable returns the ActiveButtonChangedObservable property of class WebXREnterExitUI.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrenterexitui#activebuttonchangedobservable
+func (w *WebXREnterExitUI) ActiveButtonChangedObservable(activeButtonChangedObservable *Observable) *WebXREnterExitUI {
+	p := ba.ctx.Get("WebXREnterExitUI").New(activeButtonChangedObservable.JSObject())
+	return WebXREnterExitUIFromJSObject(p, ba.ctx)
+}
+
+// SetActiveButtonChangedObservable sets the ActiveButtonChangedObservable property of class WebXREnterExitUI.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrenterexitui#activebuttonchangedobservable
+func (w *WebXREnterExitUI) SetActiveButtonChangedObservable(activeButtonChangedObservable *Observable) *WebXREnterExitUI {
+	p := ba.ctx.Get("WebXREnterExitUI").New(activeButtonChangedObservable.JSObject())
+	return WebXREnterExitUIFromJSObject(p, ba.ctx)
+}
+
+*/

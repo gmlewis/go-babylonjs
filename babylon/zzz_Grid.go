@@ -29,7 +29,7 @@ func GridFromJSObject(p js.Value, ctx js.Value) *Grid {
 
 // NewGridOpts contains optional parameters for NewGrid.
 type NewGridOpts struct {
-	Name *JSString
+	Name *string
 }
 
 // NewGrid returns a new Grid object.
@@ -40,8 +40,1923 @@ func (ba *Babylon) NewGrid(opts *NewGridOpts) *Grid {
 		opts = &NewGridOpts{}
 	}
 
-	p := ba.ctx.Get("Grid").New(opts.Name.JSObject())
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Name == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Name)
+	}
+
+	p := ba.ctx.Get("Grid").New(args...)
 	return GridFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// GridAddColumnDefinitionOpts contains optional parameters for Grid.AddColumnDefinition.
+type GridAddColumnDefinitionOpts struct {
+	IsPixel *bool
+}
+
+// AddColumnDefinition calls the AddColumnDefinition method on the Grid object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#addcolumndefinition
+func (g *Grid) AddColumnDefinition(width float64, opts *GridAddColumnDefinitionOpts) *Grid {
+	if opts == nil {
+		opts = &GridAddColumnDefinitionOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, width)
+
+	if opts.IsPixel == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IsPixel)
+	}
+
+	retVal := g.p.Call("addColumnDefinition", args...)
+	return GridFromJSObject(retVal, g.ctx)
+}
+
+// GridAddControlOpts contains optional parameters for Grid.AddControl.
+type GridAddControlOpts struct {
+	Row    *float64
+	Column *float64
+}
+
+// AddControl calls the AddControl method on the Grid object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#addcontrol
+func (g *Grid) AddControl(control *Control, opts *GridAddControlOpts) *Grid {
+	if opts == nil {
+		opts = &GridAddControlOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, control.JSObject())
+
+	if opts.Row == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Row)
+	}
+	if opts.Column == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Column)
+	}
+
+	retVal := g.p.Call("addControl", args...)
+	return GridFromJSObject(retVal, g.ctx)
+}
+
+// GridAddRowDefinitionOpts contains optional parameters for Grid.AddRowDefinition.
+type GridAddRowDefinitionOpts struct {
+	IsPixel *bool
+}
+
+// AddRowDefinition calls the AddRowDefinition method on the Grid object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#addrowdefinition
+func (g *Grid) AddRowDefinition(height float64, opts *GridAddRowDefinitionOpts) *Grid {
+	if opts == nil {
+		opts = &GridAddRowDefinitionOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, height)
+
+	if opts.IsPixel == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IsPixel)
+	}
+
+	retVal := g.p.Call("addRowDefinition", args...)
+	return GridFromJSObject(retVal, g.ctx)
+}
+
+// ClearControls calls the ClearControls method on the Grid object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#clearcontrols
+func (g *Grid) ClearControls() *Container {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("clearControls", args...)
+	return ContainerFromJSObject(retVal, g.ctx)
+}
+
+// Contains calls the Contains method on the Grid object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#contains
+func (g *Grid) Contains(x float64, y float64) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, x)
+	args = append(args, y)
+
+	retVal := g.p.Call("contains", args...)
+	return retVal.Bool()
+}
+
+// ContainsControl calls the ContainsControl method on the Grid object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#containscontrol
+func (g *Grid) ContainsControl(control *Control) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, control.JSObject())
+
+	retVal := g.p.Call("containsControl", args...)
+	return retVal.Bool()
+}
+
+// Dispose calls the Dispose method on the Grid object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#dispose
+func (g *Grid) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	g.p.Call("dispose", args...)
+}
+
+// GetAscendantOfClass calls the GetAscendantOfClass method on the Grid object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#getascendantofclass
+func (g *Grid) GetAscendantOfClass(className string) *Control {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, className)
+
+	retVal := g.p.Call("getAscendantOfClass", args...)
+	return ControlFromJSObject(retVal, g.ctx)
+}
+
+// GetChildByName calls the GetChildByName method on the Grid object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#getchildbyname
+func (g *Grid) GetChildByName(name string) *Control {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := g.p.Call("getChildByName", args...)
+	return ControlFromJSObject(retVal, g.ctx)
+}
+
+// GetChildByType calls the GetChildByType method on the Grid object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#getchildbytype
+func (g *Grid) GetChildByType(name string, jsType string) *Control {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	retVal := g.p.Call("getChildByType", args...)
+	return ControlFromJSObject(retVal, g.ctx)
+}
+
+// GetChildCellInfo calls the GetChildCellInfo method on the Grid object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#getchildcellinfo
+func (g *Grid) GetChildCellInfo(child *Control) string {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, child.JSObject())
+
+	retVal := g.p.Call("getChildCellInfo", args...)
+	return retVal.String()
+}
+
+// GetChildrenAt calls the GetChildrenAt method on the Grid object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#getchildrenat
+func (g *Grid) GetChildrenAt(row float64, column float64) *[]Control {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, row)
+	args = append(args, column)
+
+	retVal := g.p.Call("getChildrenAt", args...)
+	return []ControlFromJSObject(retVal, g.ctx)
+}
+
+// GetClassName calls the GetClassName method on the Grid object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#getclassname
+func (g *Grid) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetColumnDefinition calls the GetColumnDefinition method on the Grid object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#getcolumndefinition
+func (g *Grid) GetColumnDefinition(index float64) *ValueAndUnit {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, index)
+
+	retVal := g.p.Call("getColumnDefinition", args...)
+	return ValueAndUnitFromJSObject(retVal, g.ctx)
+}
+
+// GridGetDescendantsOpts contains optional parameters for Grid.GetDescendants.
+type GridGetDescendantsOpts struct {
+	DirectDescendantsOnly *bool
+	Predicate             *func()
+}
+
+// GetDescendants calls the GetDescendants method on the Grid object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#getdescendants
+func (g *Grid) GetDescendants(opts *GridGetDescendantsOpts) *Control {
+	if opts == nil {
+		opts = &GridGetDescendantsOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	retVal := g.p.Call("getDescendants", args...)
+	return ControlFromJSObject(retVal, g.ctx)
+}
+
+// GridGetDescendantsToRefOpts contains optional parameters for Grid.GetDescendantsToRef.
+type GridGetDescendantsToRefOpts struct {
+	DirectDescendantsOnly *bool
+	Predicate             *func()
+}
+
+// GetDescendantsToRef calls the GetDescendantsToRef method on the Grid object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#getdescendantstoref
+func (g *Grid) GetDescendantsToRef(results *Control, opts *GridGetDescendantsToRefOpts) {
+	if opts == nil {
+		opts = &GridGetDescendantsToRefOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, results.JSObject())
+
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	g.p.Call("getDescendantsToRef", args...)
+}
+
+// GetLocalCoordinates calls the GetLocalCoordinates method on the Grid object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#getlocalcoordinates
+func (g *Grid) GetLocalCoordinates(globalCoordinates *Vector2) *Vector2 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, globalCoordinates.JSObject())
+
+	retVal := g.p.Call("getLocalCoordinates", args...)
+	return Vector2FromJSObject(retVal, g.ctx)
+}
+
+// GetLocalCoordinatesToRef calls the GetLocalCoordinatesToRef method on the Grid object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#getlocalcoordinatestoref
+func (g *Grid) GetLocalCoordinatesToRef(globalCoordinates *Vector2, result *Vector2) *Control {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, globalCoordinates.JSObject())
+	args = append(args, result.JSObject())
+
+	retVal := g.p.Call("getLocalCoordinatesToRef", args...)
+	return ControlFromJSObject(retVal, g.ctx)
+}
+
+// GetParentLocalCoordinates calls the GetParentLocalCoordinates method on the Grid object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#getparentlocalcoordinates
+func (g *Grid) GetParentLocalCoordinates(globalCoordinates *Vector2) *Vector2 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, globalCoordinates.JSObject())
+
+	retVal := g.p.Call("getParentLocalCoordinates", args...)
+	return Vector2FromJSObject(retVal, g.ctx)
+}
+
+// GetRowDefinition calls the GetRowDefinition method on the Grid object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#getrowdefinition
+func (g *Grid) GetRowDefinition(index float64) *ValueAndUnit {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, index)
+
+	retVal := g.p.Call("getRowDefinition", args...)
+	return ValueAndUnitFromJSObject(retVal, g.ctx)
+}
+
+// IsAscendant calls the IsAscendant method on the Grid object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#isascendant
+func (g *Grid) IsAscendant(container *Control) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, container.JSObject())
+
+	retVal := g.p.Call("isAscendant", args...)
+	return retVal.Bool()
+}
+
+// LinkWithMesh calls the LinkWithMesh method on the Grid object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#linkwithmesh
+func (g *Grid) LinkWithMesh(mesh *AbstractMesh) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	g.p.Call("linkWithMesh", args...)
+}
+
+// MoveToVector3 calls the MoveToVector3 method on the Grid object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#movetovector3
+func (g *Grid) MoveToVector3(position *Vector3, scene *Scene) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, position.JSObject())
+	args = append(args, scene.JSObject())
+
+	g.p.Call("moveToVector3", args...)
+}
+
+// RemoveColumnDefinition calls the RemoveColumnDefinition method on the Grid object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#removecolumndefinition
+func (g *Grid) RemoveColumnDefinition(index float64) *Grid {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, index)
+
+	retVal := g.p.Call("removeColumnDefinition", args...)
+	return GridFromJSObject(retVal, g.ctx)
+}
+
+// RemoveControl calls the RemoveControl method on the Grid object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#removecontrol
+func (g *Grid) RemoveControl(control *Control) *Container {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, control.JSObject())
+
+	retVal := g.p.Call("removeControl", args...)
+	return ContainerFromJSObject(retVal, g.ctx)
+}
+
+// RemoveRowDefinition calls the RemoveRowDefinition method on the Grid object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#removerowdefinition
+func (g *Grid) RemoveRowDefinition(index float64) *Grid {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, index)
+
+	retVal := g.p.Call("removeRowDefinition", args...)
+	return GridFromJSObject(retVal, g.ctx)
+}
+
+// GridSetColumnDefinitionOpts contains optional parameters for Grid.SetColumnDefinition.
+type GridSetColumnDefinitionOpts struct {
+	IsPixel *bool
+}
+
+// SetColumnDefinition calls the SetColumnDefinition method on the Grid object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#setcolumndefinition
+func (g *Grid) SetColumnDefinition(index float64, width float64, opts *GridSetColumnDefinitionOpts) *Grid {
+	if opts == nil {
+		opts = &GridSetColumnDefinitionOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, index)
+	args = append(args, width)
+
+	if opts.IsPixel == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IsPixel)
+	}
+
+	retVal := g.p.Call("setColumnDefinition", args...)
+	return GridFromJSObject(retVal, g.ctx)
+}
+
+// GridSetRowDefinitionOpts contains optional parameters for Grid.SetRowDefinition.
+type GridSetRowDefinitionOpts struct {
+	IsPixel *bool
+}
+
+// SetRowDefinition calls the SetRowDefinition method on the Grid object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#setrowdefinition
+func (g *Grid) SetRowDefinition(index float64, height float64, opts *GridSetRowDefinitionOpts) *Grid {
+	if opts == nil {
+		opts = &GridSetRowDefinitionOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, index)
+	args = append(args, height)
+
+	if opts.IsPixel == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IsPixel)
+	}
+
+	retVal := g.p.Call("setRowDefinition", args...)
+	return GridFromJSObject(retVal, g.ctx)
+}
+
+// _flagDescendantsAsMatrixDirty calls the _flagDescendantsAsMatrixDirty method on the Grid object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#_flagdescendantsasmatrixdirty
+func (g *Grid) _flagDescendantsAsMatrixDirty() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	g.p.Call("_flagDescendantsAsMatrixDirty", args...)
+}
+
+// _renderHighlightSpecific calls the _renderHighlightSpecific method on the Grid object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#_renderhighlightspecific
+func (g *Grid) _renderHighlightSpecific(context js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, context)
+
+	g.p.Call("_renderHighlightSpecific", args...)
+}
+
+/*
+
+// AdaptHeightToChildren returns the AdaptHeightToChildren property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#adaptheighttochildren
+func (g *Grid) AdaptHeightToChildren(adaptHeightToChildren bool) *Grid {
+	p := ba.ctx.Get("Grid").New(adaptHeightToChildren)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetAdaptHeightToChildren sets the AdaptHeightToChildren property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#adaptheighttochildren
+func (g *Grid) SetAdaptHeightToChildren(adaptHeightToChildren bool) *Grid {
+	p := ba.ctx.Get("Grid").New(adaptHeightToChildren)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// AdaptWidthToChildren returns the AdaptWidthToChildren property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#adaptwidthtochildren
+func (g *Grid) AdaptWidthToChildren(adaptWidthToChildren bool) *Grid {
+	p := ba.ctx.Get("Grid").New(adaptWidthToChildren)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetAdaptWidthToChildren sets the AdaptWidthToChildren property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#adaptwidthtochildren
+func (g *Grid) SetAdaptWidthToChildren(adaptWidthToChildren bool) *Grid {
+	p := ba.ctx.Get("Grid").New(adaptWidthToChildren)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// AllowAlphaInheritance returns the AllowAlphaInheritance property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#allowalphainheritance
+func (g *Grid) AllowAlphaInheritance(AllowAlphaInheritance bool) *Grid {
+	p := ba.ctx.Get("Grid").New(AllowAlphaInheritance)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetAllowAlphaInheritance sets the AllowAlphaInheritance property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#allowalphainheritance
+func (g *Grid) SetAllowAlphaInheritance(AllowAlphaInheritance bool) *Grid {
+	p := ba.ctx.Get("Grid").New(AllowAlphaInheritance)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// Alpha returns the Alpha property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#alpha
+func (g *Grid) Alpha(alpha float64) *Grid {
+	p := ba.ctx.Get("Grid").New(alpha)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetAlpha sets the Alpha property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#alpha
+func (g *Grid) SetAlpha(alpha float64) *Grid {
+	p := ba.ctx.Get("Grid").New(alpha)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// Background returns the Background property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#background
+func (g *Grid) Background(background string) *Grid {
+	p := ba.ctx.Get("Grid").New(background)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetBackground sets the Background property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#background
+func (g *Grid) SetBackground(background string) *Grid {
+	p := ba.ctx.Get("Grid").New(background)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// Cells returns the Cells property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#cells
+func (g *Grid) Cells(cells js.Value) *Grid {
+	p := ba.ctx.Get("Grid").New(cells)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetCells sets the Cells property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#cells
+func (g *Grid) SetCells(cells js.Value) *Grid {
+	p := ba.ctx.Get("Grid").New(cells)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// CenterX returns the CenterX property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#centerx
+func (g *Grid) CenterX(centerX float64) *Grid {
+	p := ba.ctx.Get("Grid").New(centerX)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetCenterX sets the CenterX property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#centerx
+func (g *Grid) SetCenterX(centerX float64) *Grid {
+	p := ba.ctx.Get("Grid").New(centerX)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// CenterY returns the CenterY property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#centery
+func (g *Grid) CenterY(centerY float64) *Grid {
+	p := ba.ctx.Get("Grid").New(centerY)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetCenterY sets the CenterY property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#centery
+func (g *Grid) SetCenterY(centerY float64) *Grid {
+	p := ba.ctx.Get("Grid").New(centerY)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// Children returns the Children property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#children
+func (g *Grid) Children(children *Control) *Grid {
+	p := ba.ctx.Get("Grid").New(children.JSObject())
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetChildren sets the Children property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#children
+func (g *Grid) SetChildren(children *Control) *Grid {
+	p := ba.ctx.Get("Grid").New(children.JSObject())
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// ClipChildren returns the ClipChildren property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#clipchildren
+func (g *Grid) ClipChildren(clipChildren bool) *Grid {
+	p := ba.ctx.Get("Grid").New(clipChildren)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetClipChildren sets the ClipChildren property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#clipchildren
+func (g *Grid) SetClipChildren(clipChildren bool) *Grid {
+	p := ba.ctx.Get("Grid").New(clipChildren)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// ClipContent returns the ClipContent property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#clipcontent
+func (g *Grid) ClipContent(clipContent bool) *Grid {
+	p := ba.ctx.Get("Grid").New(clipContent)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetClipContent sets the ClipContent property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#clipcontent
+func (g *Grid) SetClipContent(clipContent bool) *Grid {
+	p := ba.ctx.Get("Grid").New(clipContent)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// Color returns the Color property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#color
+func (g *Grid) Color(color string) *Grid {
+	p := ba.ctx.Get("Grid").New(color)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetColor sets the Color property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#color
+func (g *Grid) SetColor(color string) *Grid {
+	p := ba.ctx.Get("Grid").New(color)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// ColumnCount returns the ColumnCount property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#columncount
+func (g *Grid) ColumnCount(columnCount float64) *Grid {
+	p := ba.ctx.Get("Grid").New(columnCount)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetColumnCount sets the ColumnCount property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#columncount
+func (g *Grid) SetColumnCount(columnCount float64) *Grid {
+	p := ba.ctx.Get("Grid").New(columnCount)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// DisabledColor returns the DisabledColor property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#disabledcolor
+func (g *Grid) DisabledColor(disabledColor string) *Grid {
+	p := ba.ctx.Get("Grid").New(disabledColor)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetDisabledColor sets the DisabledColor property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#disabledcolor
+func (g *Grid) SetDisabledColor(disabledColor string) *Grid {
+	p := ba.ctx.Get("Grid").New(disabledColor)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// FontFamily returns the FontFamily property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#fontfamily
+func (g *Grid) FontFamily(fontFamily string) *Grid {
+	p := ba.ctx.Get("Grid").New(fontFamily)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetFontFamily sets the FontFamily property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#fontfamily
+func (g *Grid) SetFontFamily(fontFamily string) *Grid {
+	p := ba.ctx.Get("Grid").New(fontFamily)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// FontOffset returns the FontOffset property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#fontoffset
+func (g *Grid) FontOffset(fontOffset js.Value) *Grid {
+	p := ba.ctx.Get("Grid").New(fontOffset)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetFontOffset sets the FontOffset property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#fontoffset
+func (g *Grid) SetFontOffset(fontOffset js.Value) *Grid {
+	p := ba.ctx.Get("Grid").New(fontOffset)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// FontSize returns the FontSize property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#fontsize
+func (g *Grid) FontSize(fontSize string) *Grid {
+	p := ba.ctx.Get("Grid").New(fontSize)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetFontSize sets the FontSize property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#fontsize
+func (g *Grid) SetFontSize(fontSize string) *Grid {
+	p := ba.ctx.Get("Grid").New(fontSize)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// FontSizeInPixels returns the FontSizeInPixels property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#fontsizeinpixels
+func (g *Grid) FontSizeInPixels(fontSizeInPixels float64) *Grid {
+	p := ba.ctx.Get("Grid").New(fontSizeInPixels)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetFontSizeInPixels sets the FontSizeInPixels property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#fontsizeinpixels
+func (g *Grid) SetFontSizeInPixels(fontSizeInPixels float64) *Grid {
+	p := ba.ctx.Get("Grid").New(fontSizeInPixels)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// FontStyle returns the FontStyle property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#fontstyle
+func (g *Grid) FontStyle(fontStyle string) *Grid {
+	p := ba.ctx.Get("Grid").New(fontStyle)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetFontStyle sets the FontStyle property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#fontstyle
+func (g *Grid) SetFontStyle(fontStyle string) *Grid {
+	p := ba.ctx.Get("Grid").New(fontStyle)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// FontWeight returns the FontWeight property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#fontweight
+func (g *Grid) FontWeight(fontWeight string) *Grid {
+	p := ba.ctx.Get("Grid").New(fontWeight)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetFontWeight sets the FontWeight property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#fontweight
+func (g *Grid) SetFontWeight(fontWeight string) *Grid {
+	p := ba.ctx.Get("Grid").New(fontWeight)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// HORIZONTAL_ALIGNMENT_CENTER returns the HORIZONTAL_ALIGNMENT_CENTER property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#horizontal_alignment_center
+func (g *Grid) HORIZONTAL_ALIGNMENT_CENTER(HORIZONTAL_ALIGNMENT_CENTER float64) *Grid {
+	p := ba.ctx.Get("Grid").New(HORIZONTAL_ALIGNMENT_CENTER)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetHORIZONTAL_ALIGNMENT_CENTER sets the HORIZONTAL_ALIGNMENT_CENTER property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#horizontal_alignment_center
+func (g *Grid) SetHORIZONTAL_ALIGNMENT_CENTER(HORIZONTAL_ALIGNMENT_CENTER float64) *Grid {
+	p := ba.ctx.Get("Grid").New(HORIZONTAL_ALIGNMENT_CENTER)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// HORIZONTAL_ALIGNMENT_LEFT returns the HORIZONTAL_ALIGNMENT_LEFT property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#horizontal_alignment_left
+func (g *Grid) HORIZONTAL_ALIGNMENT_LEFT(HORIZONTAL_ALIGNMENT_LEFT float64) *Grid {
+	p := ba.ctx.Get("Grid").New(HORIZONTAL_ALIGNMENT_LEFT)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetHORIZONTAL_ALIGNMENT_LEFT sets the HORIZONTAL_ALIGNMENT_LEFT property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#horizontal_alignment_left
+func (g *Grid) SetHORIZONTAL_ALIGNMENT_LEFT(HORIZONTAL_ALIGNMENT_LEFT float64) *Grid {
+	p := ba.ctx.Get("Grid").New(HORIZONTAL_ALIGNMENT_LEFT)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// HORIZONTAL_ALIGNMENT_RIGHT returns the HORIZONTAL_ALIGNMENT_RIGHT property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#horizontal_alignment_right
+func (g *Grid) HORIZONTAL_ALIGNMENT_RIGHT(HORIZONTAL_ALIGNMENT_RIGHT float64) *Grid {
+	p := ba.ctx.Get("Grid").New(HORIZONTAL_ALIGNMENT_RIGHT)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetHORIZONTAL_ALIGNMENT_RIGHT sets the HORIZONTAL_ALIGNMENT_RIGHT property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#horizontal_alignment_right
+func (g *Grid) SetHORIZONTAL_ALIGNMENT_RIGHT(HORIZONTAL_ALIGNMENT_RIGHT float64) *Grid {
+	p := ba.ctx.Get("Grid").New(HORIZONTAL_ALIGNMENT_RIGHT)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// Height returns the Height property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#height
+func (g *Grid) Height(height string) *Grid {
+	p := ba.ctx.Get("Grid").New(height)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetHeight sets the Height property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#height
+func (g *Grid) SetHeight(height string) *Grid {
+	p := ba.ctx.Get("Grid").New(height)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// HeightInPixels returns the HeightInPixels property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#heightinpixels
+func (g *Grid) HeightInPixels(heightInPixels float64) *Grid {
+	p := ba.ctx.Get("Grid").New(heightInPixels)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetHeightInPixels sets the HeightInPixels property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#heightinpixels
+func (g *Grid) SetHeightInPixels(heightInPixels float64) *Grid {
+	p := ba.ctx.Get("Grid").New(heightInPixels)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// HorizontalAlignment returns the HorizontalAlignment property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#horizontalalignment
+func (g *Grid) HorizontalAlignment(horizontalAlignment float64) *Grid {
+	p := ba.ctx.Get("Grid").New(horizontalAlignment)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetHorizontalAlignment sets the HorizontalAlignment property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#horizontalalignment
+func (g *Grid) SetHorizontalAlignment(horizontalAlignment float64) *Grid {
+	p := ba.ctx.Get("Grid").New(horizontalAlignment)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// Host returns the Host property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#host
+func (g *Grid) Host(host *AdvancedDynamicTexture) *Grid {
+	p := ba.ctx.Get("Grid").New(host.JSObject())
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetHost sets the Host property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#host
+func (g *Grid) SetHost(host *AdvancedDynamicTexture) *Grid {
+	p := ba.ctx.Get("Grid").New(host.JSObject())
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// HoverCursor returns the HoverCursor property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#hovercursor
+func (g *Grid) HoverCursor(hoverCursor string) *Grid {
+	p := ba.ctx.Get("Grid").New(hoverCursor)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetHoverCursor sets the HoverCursor property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#hovercursor
+func (g *Grid) SetHoverCursor(hoverCursor string) *Grid {
+	p := ba.ctx.Get("Grid").New(hoverCursor)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// IsDirty returns the IsDirty property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#isdirty
+func (g *Grid) IsDirty(isDirty bool) *Grid {
+	p := ba.ctx.Get("Grid").New(isDirty)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetIsDirty sets the IsDirty property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#isdirty
+func (g *Grid) SetIsDirty(isDirty bool) *Grid {
+	p := ba.ctx.Get("Grid").New(isDirty)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// IsEnabled returns the IsEnabled property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#isenabled
+func (g *Grid) IsEnabled(isEnabled bool) *Grid {
+	p := ba.ctx.Get("Grid").New(isEnabled)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetIsEnabled sets the IsEnabled property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#isenabled
+func (g *Grid) SetIsEnabled(isEnabled bool) *Grid {
+	p := ba.ctx.Get("Grid").New(isEnabled)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// IsFocusInvisible returns the IsFocusInvisible property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#isfocusinvisible
+func (g *Grid) IsFocusInvisible(isFocusInvisible bool) *Grid {
+	p := ba.ctx.Get("Grid").New(isFocusInvisible)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetIsFocusInvisible sets the IsFocusInvisible property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#isfocusinvisible
+func (g *Grid) SetIsFocusInvisible(isFocusInvisible bool) *Grid {
+	p := ba.ctx.Get("Grid").New(isFocusInvisible)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// IsHighlighted returns the IsHighlighted property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#ishighlighted
+func (g *Grid) IsHighlighted(isHighlighted bool) *Grid {
+	p := ba.ctx.Get("Grid").New(isHighlighted)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetIsHighlighted sets the IsHighlighted property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#ishighlighted
+func (g *Grid) SetIsHighlighted(isHighlighted bool) *Grid {
+	p := ba.ctx.Get("Grid").New(isHighlighted)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// IsHitTestVisible returns the IsHitTestVisible property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#ishittestvisible
+func (g *Grid) IsHitTestVisible(isHitTestVisible bool) *Grid {
+	p := ba.ctx.Get("Grid").New(isHitTestVisible)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetIsHitTestVisible sets the IsHitTestVisible property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#ishittestvisible
+func (g *Grid) SetIsHitTestVisible(isHitTestVisible bool) *Grid {
+	p := ba.ctx.Get("Grid").New(isHitTestVisible)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// IsPointerBlocker returns the IsPointerBlocker property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#ispointerblocker
+func (g *Grid) IsPointerBlocker(isPointerBlocker bool) *Grid {
+	p := ba.ctx.Get("Grid").New(isPointerBlocker)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetIsPointerBlocker sets the IsPointerBlocker property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#ispointerblocker
+func (g *Grid) SetIsPointerBlocker(isPointerBlocker bool) *Grid {
+	p := ba.ctx.Get("Grid").New(isPointerBlocker)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// IsVisible returns the IsVisible property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#isvisible
+func (g *Grid) IsVisible(isVisible bool) *Grid {
+	p := ba.ctx.Get("Grid").New(isVisible)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetIsVisible sets the IsVisible property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#isvisible
+func (g *Grid) SetIsVisible(isVisible bool) *Grid {
+	p := ba.ctx.Get("Grid").New(isVisible)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// Left returns the Left property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#left
+func (g *Grid) Left(left string) *Grid {
+	p := ba.ctx.Get("Grid").New(left)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetLeft sets the Left property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#left
+func (g *Grid) SetLeft(left string) *Grid {
+	p := ba.ctx.Get("Grid").New(left)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// LeftInPixels returns the LeftInPixels property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#leftinpixels
+func (g *Grid) LeftInPixels(leftInPixels float64) *Grid {
+	p := ba.ctx.Get("Grid").New(leftInPixels)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetLeftInPixels sets the LeftInPixels property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#leftinpixels
+func (g *Grid) SetLeftInPixels(leftInPixels float64) *Grid {
+	p := ba.ctx.Get("Grid").New(leftInPixels)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetX returns the LinkOffsetX property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#linkoffsetx
+func (g *Grid) LinkOffsetX(linkOffsetX string) *Grid {
+	p := ba.ctx.Get("Grid").New(linkOffsetX)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetX sets the LinkOffsetX property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#linkoffsetx
+func (g *Grid) SetLinkOffsetX(linkOffsetX string) *Grid {
+	p := ba.ctx.Get("Grid").New(linkOffsetX)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetXInPixels returns the LinkOffsetXInPixels property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#linkoffsetxinpixels
+func (g *Grid) LinkOffsetXInPixels(linkOffsetXInPixels float64) *Grid {
+	p := ba.ctx.Get("Grid").New(linkOffsetXInPixels)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetXInPixels sets the LinkOffsetXInPixels property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#linkoffsetxinpixels
+func (g *Grid) SetLinkOffsetXInPixels(linkOffsetXInPixels float64) *Grid {
+	p := ba.ctx.Get("Grid").New(linkOffsetXInPixels)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetY returns the LinkOffsetY property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#linkoffsety
+func (g *Grid) LinkOffsetY(linkOffsetY string) *Grid {
+	p := ba.ctx.Get("Grid").New(linkOffsetY)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetY sets the LinkOffsetY property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#linkoffsety
+func (g *Grid) SetLinkOffsetY(linkOffsetY string) *Grid {
+	p := ba.ctx.Get("Grid").New(linkOffsetY)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetYInPixels returns the LinkOffsetYInPixels property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#linkoffsetyinpixels
+func (g *Grid) LinkOffsetYInPixels(linkOffsetYInPixels float64) *Grid {
+	p := ba.ctx.Get("Grid").New(linkOffsetYInPixels)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetYInPixels sets the LinkOffsetYInPixels property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#linkoffsetyinpixels
+func (g *Grid) SetLinkOffsetYInPixels(linkOffsetYInPixels float64) *Grid {
+	p := ba.ctx.Get("Grid").New(linkOffsetYInPixels)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// LinkedMesh returns the LinkedMesh property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#linkedmesh
+func (g *Grid) LinkedMesh(linkedMesh *AbstractMesh) *Grid {
+	p := ba.ctx.Get("Grid").New(linkedMesh.JSObject())
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetLinkedMesh sets the LinkedMesh property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#linkedmesh
+func (g *Grid) SetLinkedMesh(linkedMesh *AbstractMesh) *Grid {
+	p := ba.ctx.Get("Grid").New(linkedMesh.JSObject())
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// LogLayoutCycleErrors returns the LogLayoutCycleErrors property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#loglayoutcycleerrors
+func (g *Grid) LogLayoutCycleErrors(logLayoutCycleErrors bool) *Grid {
+	p := ba.ctx.Get("Grid").New(logLayoutCycleErrors)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetLogLayoutCycleErrors sets the LogLayoutCycleErrors property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#loglayoutcycleerrors
+func (g *Grid) SetLogLayoutCycleErrors(logLayoutCycleErrors bool) *Grid {
+	p := ba.ctx.Get("Grid").New(logLayoutCycleErrors)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// MaxLayoutCycle returns the MaxLayoutCycle property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#maxlayoutcycle
+func (g *Grid) MaxLayoutCycle(maxLayoutCycle float64) *Grid {
+	p := ba.ctx.Get("Grid").New(maxLayoutCycle)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetMaxLayoutCycle sets the MaxLayoutCycle property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#maxlayoutcycle
+func (g *Grid) SetMaxLayoutCycle(maxLayoutCycle float64) *Grid {
+	p := ba.ctx.Get("Grid").New(maxLayoutCycle)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#metadata
+func (g *Grid) Metadata(metadata interface{}) *Grid {
+	p := ba.ctx.Get("Grid").New(metadata)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#metadata
+func (g *Grid) SetMetadata(metadata interface{}) *Grid {
+	p := ba.ctx.Get("Grid").New(metadata)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#name
+func (g *Grid) Name(name string) *Grid {
+	p := ba.ctx.Get("Grid").New(name)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#name
+func (g *Grid) SetName(name string) *Grid {
+	p := ba.ctx.Get("Grid").New(name)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// NotRenderable returns the NotRenderable property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#notrenderable
+func (g *Grid) NotRenderable(notRenderable bool) *Grid {
+	p := ba.ctx.Get("Grid").New(notRenderable)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetNotRenderable sets the NotRenderable property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#notrenderable
+func (g *Grid) SetNotRenderable(notRenderable bool) *Grid {
+	p := ba.ctx.Get("Grid").New(notRenderable)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// OnAfterDrawObservable returns the OnAfterDrawObservable property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#onafterdrawobservable
+func (g *Grid) OnAfterDrawObservable(onAfterDrawObservable *Observable) *Grid {
+	p := ba.ctx.Get("Grid").New(onAfterDrawObservable.JSObject())
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterDrawObservable sets the OnAfterDrawObservable property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#onafterdrawobservable
+func (g *Grid) SetOnAfterDrawObservable(onAfterDrawObservable *Observable) *Grid {
+	p := ba.ctx.Get("Grid").New(onAfterDrawObservable.JSObject())
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeDrawObservable returns the OnBeforeDrawObservable property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#onbeforedrawobservable
+func (g *Grid) OnBeforeDrawObservable(onBeforeDrawObservable *Observable) *Grid {
+	p := ba.ctx.Get("Grid").New(onBeforeDrawObservable.JSObject())
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeDrawObservable sets the OnBeforeDrawObservable property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#onbeforedrawobservable
+func (g *Grid) SetOnBeforeDrawObservable(onBeforeDrawObservable *Observable) *Grid {
+	p := ba.ctx.Get("Grid").New(onBeforeDrawObservable.JSObject())
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// OnDirtyObservable returns the OnDirtyObservable property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#ondirtyobservable
+func (g *Grid) OnDirtyObservable(onDirtyObservable *Observable) *Grid {
+	p := ba.ctx.Get("Grid").New(onDirtyObservable.JSObject())
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetOnDirtyObservable sets the OnDirtyObservable property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#ondirtyobservable
+func (g *Grid) SetOnDirtyObservable(onDirtyObservable *Observable) *Grid {
+	p := ba.ctx.Get("Grid").New(onDirtyObservable.JSObject())
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// OnPointerClickObservable returns the OnPointerClickObservable property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#onpointerclickobservable
+func (g *Grid) OnPointerClickObservable(onPointerClickObservable *Observable) *Grid {
+	p := ba.ctx.Get("Grid").New(onPointerClickObservable.JSObject())
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerClickObservable sets the OnPointerClickObservable property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#onpointerclickobservable
+func (g *Grid) SetOnPointerClickObservable(onPointerClickObservable *Observable) *Grid {
+	p := ba.ctx.Get("Grid").New(onPointerClickObservable.JSObject())
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// OnPointerDownObservable returns the OnPointerDownObservable property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#onpointerdownobservable
+func (g *Grid) OnPointerDownObservable(onPointerDownObservable *Observable) *Grid {
+	p := ba.ctx.Get("Grid").New(onPointerDownObservable.JSObject())
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerDownObservable sets the OnPointerDownObservable property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#onpointerdownobservable
+func (g *Grid) SetOnPointerDownObservable(onPointerDownObservable *Observable) *Grid {
+	p := ba.ctx.Get("Grid").New(onPointerDownObservable.JSObject())
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// OnPointerEnterObservable returns the OnPointerEnterObservable property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#onpointerenterobservable
+func (g *Grid) OnPointerEnterObservable(onPointerEnterObservable *Observable) *Grid {
+	p := ba.ctx.Get("Grid").New(onPointerEnterObservable.JSObject())
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerEnterObservable sets the OnPointerEnterObservable property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#onpointerenterobservable
+func (g *Grid) SetOnPointerEnterObservable(onPointerEnterObservable *Observable) *Grid {
+	p := ba.ctx.Get("Grid").New(onPointerEnterObservable.JSObject())
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// OnPointerMoveObservable returns the OnPointerMoveObservable property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#onpointermoveobservable
+func (g *Grid) OnPointerMoveObservable(onPointerMoveObservable *Observable) *Grid {
+	p := ba.ctx.Get("Grid").New(onPointerMoveObservable.JSObject())
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerMoveObservable sets the OnPointerMoveObservable property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#onpointermoveobservable
+func (g *Grid) SetOnPointerMoveObservable(onPointerMoveObservable *Observable) *Grid {
+	p := ba.ctx.Get("Grid").New(onPointerMoveObservable.JSObject())
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// OnPointerOutObservable returns the OnPointerOutObservable property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#onpointeroutobservable
+func (g *Grid) OnPointerOutObservable(onPointerOutObservable *Observable) *Grid {
+	p := ba.ctx.Get("Grid").New(onPointerOutObservable.JSObject())
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerOutObservable sets the OnPointerOutObservable property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#onpointeroutobservable
+func (g *Grid) SetOnPointerOutObservable(onPointerOutObservable *Observable) *Grid {
+	p := ba.ctx.Get("Grid").New(onPointerOutObservable.JSObject())
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// OnPointerUpObservable returns the OnPointerUpObservable property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#onpointerupobservable
+func (g *Grid) OnPointerUpObservable(onPointerUpObservable *Observable) *Grid {
+	p := ba.ctx.Get("Grid").New(onPointerUpObservable.JSObject())
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerUpObservable sets the OnPointerUpObservable property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#onpointerupobservable
+func (g *Grid) SetOnPointerUpObservable(onPointerUpObservable *Observable) *Grid {
+	p := ba.ctx.Get("Grid").New(onPointerUpObservable.JSObject())
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// PaddingBottom returns the PaddingBottom property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#paddingbottom
+func (g *Grid) PaddingBottom(paddingBottom string) *Grid {
+	p := ba.ctx.Get("Grid").New(paddingBottom)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingBottom sets the PaddingBottom property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#paddingbottom
+func (g *Grid) SetPaddingBottom(paddingBottom string) *Grid {
+	p := ba.ctx.Get("Grid").New(paddingBottom)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// PaddingBottomInPixels returns the PaddingBottomInPixels property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#paddingbottominpixels
+func (g *Grid) PaddingBottomInPixels(paddingBottomInPixels float64) *Grid {
+	p := ba.ctx.Get("Grid").New(paddingBottomInPixels)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingBottomInPixels sets the PaddingBottomInPixels property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#paddingbottominpixels
+func (g *Grid) SetPaddingBottomInPixels(paddingBottomInPixels float64) *Grid {
+	p := ba.ctx.Get("Grid").New(paddingBottomInPixels)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// PaddingLeft returns the PaddingLeft property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#paddingleft
+func (g *Grid) PaddingLeft(paddingLeft string) *Grid {
+	p := ba.ctx.Get("Grid").New(paddingLeft)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingLeft sets the PaddingLeft property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#paddingleft
+func (g *Grid) SetPaddingLeft(paddingLeft string) *Grid {
+	p := ba.ctx.Get("Grid").New(paddingLeft)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// PaddingLeftInPixels returns the PaddingLeftInPixels property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#paddingleftinpixels
+func (g *Grid) PaddingLeftInPixels(paddingLeftInPixels float64) *Grid {
+	p := ba.ctx.Get("Grid").New(paddingLeftInPixels)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingLeftInPixels sets the PaddingLeftInPixels property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#paddingleftinpixels
+func (g *Grid) SetPaddingLeftInPixels(paddingLeftInPixels float64) *Grid {
+	p := ba.ctx.Get("Grid").New(paddingLeftInPixels)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// PaddingRight returns the PaddingRight property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#paddingright
+func (g *Grid) PaddingRight(paddingRight string) *Grid {
+	p := ba.ctx.Get("Grid").New(paddingRight)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingRight sets the PaddingRight property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#paddingright
+func (g *Grid) SetPaddingRight(paddingRight string) *Grid {
+	p := ba.ctx.Get("Grid").New(paddingRight)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// PaddingRightInPixels returns the PaddingRightInPixels property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#paddingrightinpixels
+func (g *Grid) PaddingRightInPixels(paddingRightInPixels float64) *Grid {
+	p := ba.ctx.Get("Grid").New(paddingRightInPixels)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingRightInPixels sets the PaddingRightInPixels property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#paddingrightinpixels
+func (g *Grid) SetPaddingRightInPixels(paddingRightInPixels float64) *Grid {
+	p := ba.ctx.Get("Grid").New(paddingRightInPixels)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// PaddingTop returns the PaddingTop property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#paddingtop
+func (g *Grid) PaddingTop(paddingTop string) *Grid {
+	p := ba.ctx.Get("Grid").New(paddingTop)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingTop sets the PaddingTop property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#paddingtop
+func (g *Grid) SetPaddingTop(paddingTop string) *Grid {
+	p := ba.ctx.Get("Grid").New(paddingTop)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// PaddingTopInPixels returns the PaddingTopInPixels property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#paddingtopinpixels
+func (g *Grid) PaddingTopInPixels(paddingTopInPixels float64) *Grid {
+	p := ba.ctx.Get("Grid").New(paddingTopInPixels)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingTopInPixels sets the PaddingTopInPixels property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#paddingtopinpixels
+func (g *Grid) SetPaddingTopInPixels(paddingTopInPixels float64) *Grid {
+	p := ba.ctx.Get("Grid").New(paddingTopInPixels)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// Parent returns the Parent property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#parent
+func (g *Grid) Parent(parent *Container) *Grid {
+	p := ba.ctx.Get("Grid").New(parent.JSObject())
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetParent sets the Parent property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#parent
+func (g *Grid) SetParent(parent *Container) *Grid {
+	p := ba.ctx.Get("Grid").New(parent.JSObject())
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// Rotation returns the Rotation property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#rotation
+func (g *Grid) Rotation(rotation float64) *Grid {
+	p := ba.ctx.Get("Grid").New(rotation)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetRotation sets the Rotation property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#rotation
+func (g *Grid) SetRotation(rotation float64) *Grid {
+	p := ba.ctx.Get("Grid").New(rotation)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// RowCount returns the RowCount property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#rowcount
+func (g *Grid) RowCount(rowCount float64) *Grid {
+	p := ba.ctx.Get("Grid").New(rowCount)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetRowCount sets the RowCount property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#rowcount
+func (g *Grid) SetRowCount(rowCount float64) *Grid {
+	p := ba.ctx.Get("Grid").New(rowCount)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// ScaleX returns the ScaleX property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#scalex
+func (g *Grid) ScaleX(scaleX float64) *Grid {
+	p := ba.ctx.Get("Grid").New(scaleX)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetScaleX sets the ScaleX property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#scalex
+func (g *Grid) SetScaleX(scaleX float64) *Grid {
+	p := ba.ctx.Get("Grid").New(scaleX)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// ScaleY returns the ScaleY property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#scaley
+func (g *Grid) ScaleY(scaleY float64) *Grid {
+	p := ba.ctx.Get("Grid").New(scaleY)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetScaleY sets the ScaleY property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#scaley
+func (g *Grid) SetScaleY(scaleY float64) *Grid {
+	p := ba.ctx.Get("Grid").New(scaleY)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// ShadowBlur returns the ShadowBlur property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#shadowblur
+func (g *Grid) ShadowBlur(shadowBlur float64) *Grid {
+	p := ba.ctx.Get("Grid").New(shadowBlur)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetShadowBlur sets the ShadowBlur property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#shadowblur
+func (g *Grid) SetShadowBlur(shadowBlur float64) *Grid {
+	p := ba.ctx.Get("Grid").New(shadowBlur)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// ShadowColor returns the ShadowColor property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#shadowcolor
+func (g *Grid) ShadowColor(shadowColor string) *Grid {
+	p := ba.ctx.Get("Grid").New(shadowColor)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetShadowColor sets the ShadowColor property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#shadowcolor
+func (g *Grid) SetShadowColor(shadowColor string) *Grid {
+	p := ba.ctx.Get("Grid").New(shadowColor)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// ShadowOffsetX returns the ShadowOffsetX property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#shadowoffsetx
+func (g *Grid) ShadowOffsetX(shadowOffsetX float64) *Grid {
+	p := ba.ctx.Get("Grid").New(shadowOffsetX)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetShadowOffsetX sets the ShadowOffsetX property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#shadowoffsetx
+func (g *Grid) SetShadowOffsetX(shadowOffsetX float64) *Grid {
+	p := ba.ctx.Get("Grid").New(shadowOffsetX)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// ShadowOffsetY returns the ShadowOffsetY property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#shadowoffsety
+func (g *Grid) ShadowOffsetY(shadowOffsetY float64) *Grid {
+	p := ba.ctx.Get("Grid").New(shadowOffsetY)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetShadowOffsetY sets the ShadowOffsetY property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#shadowoffsety
+func (g *Grid) SetShadowOffsetY(shadowOffsetY float64) *Grid {
+	p := ba.ctx.Get("Grid").New(shadowOffsetY)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// Style returns the Style property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#style
+func (g *Grid) Style(style *Style) *Grid {
+	p := ba.ctx.Get("Grid").New(style.JSObject())
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetStyle sets the Style property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#style
+func (g *Grid) SetStyle(style *Style) *Grid {
+	p := ba.ctx.Get("Grid").New(style.JSObject())
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// Top returns the Top property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#top
+func (g *Grid) Top(top string) *Grid {
+	p := ba.ctx.Get("Grid").New(top)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetTop sets the Top property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#top
+func (g *Grid) SetTop(top string) *Grid {
+	p := ba.ctx.Get("Grid").New(top)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// TopInPixels returns the TopInPixels property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#topinpixels
+func (g *Grid) TopInPixels(topInPixels float64) *Grid {
+	p := ba.ctx.Get("Grid").New(topInPixels)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetTopInPixels sets the TopInPixels property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#topinpixels
+func (g *Grid) SetTopInPixels(topInPixels float64) *Grid {
+	p := ba.ctx.Get("Grid").New(topInPixels)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// TransformCenterX returns the TransformCenterX property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#transformcenterx
+func (g *Grid) TransformCenterX(transformCenterX float64) *Grid {
+	p := ba.ctx.Get("Grid").New(transformCenterX)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetTransformCenterX sets the TransformCenterX property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#transformcenterx
+func (g *Grid) SetTransformCenterX(transformCenterX float64) *Grid {
+	p := ba.ctx.Get("Grid").New(transformCenterX)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// TransformCenterY returns the TransformCenterY property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#transformcentery
+func (g *Grid) TransformCenterY(transformCenterY float64) *Grid {
+	p := ba.ctx.Get("Grid").New(transformCenterY)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetTransformCenterY sets the TransformCenterY property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#transformcentery
+func (g *Grid) SetTransformCenterY(transformCenterY float64) *Grid {
+	p := ba.ctx.Get("Grid").New(transformCenterY)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// TypeName returns the TypeName property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#typename
+func (g *Grid) TypeName(typeName string) *Grid {
+	p := ba.ctx.Get("Grid").New(typeName)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetTypeName sets the TypeName property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#typename
+func (g *Grid) SetTypeName(typeName string) *Grid {
+	p := ba.ctx.Get("Grid").New(typeName)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#uniqueid
+func (g *Grid) UniqueId(uniqueId float64) *Grid {
+	p := ba.ctx.Get("Grid").New(uniqueId)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#uniqueid
+func (g *Grid) SetUniqueId(uniqueId float64) *Grid {
+	p := ba.ctx.Get("Grid").New(uniqueId)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// UseBitmapCache returns the UseBitmapCache property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#usebitmapcache
+func (g *Grid) UseBitmapCache(useBitmapCache bool) *Grid {
+	p := ba.ctx.Get("Grid").New(useBitmapCache)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetUseBitmapCache sets the UseBitmapCache property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#usebitmapcache
+func (g *Grid) SetUseBitmapCache(useBitmapCache bool) *Grid {
+	p := ba.ctx.Get("Grid").New(useBitmapCache)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// VERTICAL_ALIGNMENT_BOTTOM returns the VERTICAL_ALIGNMENT_BOTTOM property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#vertical_alignment_bottom
+func (g *Grid) VERTICAL_ALIGNMENT_BOTTOM(VERTICAL_ALIGNMENT_BOTTOM float64) *Grid {
+	p := ba.ctx.Get("Grid").New(VERTICAL_ALIGNMENT_BOTTOM)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetVERTICAL_ALIGNMENT_BOTTOM sets the VERTICAL_ALIGNMENT_BOTTOM property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#vertical_alignment_bottom
+func (g *Grid) SetVERTICAL_ALIGNMENT_BOTTOM(VERTICAL_ALIGNMENT_BOTTOM float64) *Grid {
+	p := ba.ctx.Get("Grid").New(VERTICAL_ALIGNMENT_BOTTOM)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// VERTICAL_ALIGNMENT_CENTER returns the VERTICAL_ALIGNMENT_CENTER property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#vertical_alignment_center
+func (g *Grid) VERTICAL_ALIGNMENT_CENTER(VERTICAL_ALIGNMENT_CENTER float64) *Grid {
+	p := ba.ctx.Get("Grid").New(VERTICAL_ALIGNMENT_CENTER)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetVERTICAL_ALIGNMENT_CENTER sets the VERTICAL_ALIGNMENT_CENTER property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#vertical_alignment_center
+func (g *Grid) SetVERTICAL_ALIGNMENT_CENTER(VERTICAL_ALIGNMENT_CENTER float64) *Grid {
+	p := ba.ctx.Get("Grid").New(VERTICAL_ALIGNMENT_CENTER)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// VERTICAL_ALIGNMENT_TOP returns the VERTICAL_ALIGNMENT_TOP property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#vertical_alignment_top
+func (g *Grid) VERTICAL_ALIGNMENT_TOP(VERTICAL_ALIGNMENT_TOP float64) *Grid {
+	p := ba.ctx.Get("Grid").New(VERTICAL_ALIGNMENT_TOP)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetVERTICAL_ALIGNMENT_TOP sets the VERTICAL_ALIGNMENT_TOP property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#vertical_alignment_top
+func (g *Grid) SetVERTICAL_ALIGNMENT_TOP(VERTICAL_ALIGNMENT_TOP float64) *Grid {
+	p := ba.ctx.Get("Grid").New(VERTICAL_ALIGNMENT_TOP)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// VerticalAlignment returns the VerticalAlignment property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#verticalalignment
+func (g *Grid) VerticalAlignment(verticalAlignment float64) *Grid {
+	p := ba.ctx.Get("Grid").New(verticalAlignment)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetVerticalAlignment sets the VerticalAlignment property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#verticalalignment
+func (g *Grid) SetVerticalAlignment(verticalAlignment float64) *Grid {
+	p := ba.ctx.Get("Grid").New(verticalAlignment)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// Width returns the Width property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#width
+func (g *Grid) Width(width string) *Grid {
+	p := ba.ctx.Get("Grid").New(width)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetWidth sets the Width property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#width
+func (g *Grid) SetWidth(width string) *Grid {
+	p := ba.ctx.Get("Grid").New(width)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// WidthInPixels returns the WidthInPixels property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#widthinpixels
+func (g *Grid) WidthInPixels(widthInPixels float64) *Grid {
+	p := ba.ctx.Get("Grid").New(widthInPixels)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetWidthInPixels sets the WidthInPixels property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#widthinpixels
+func (g *Grid) SetWidthInPixels(widthInPixels float64) *Grid {
+	p := ba.ctx.Get("Grid").New(widthInPixels)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// ZIndex returns the ZIndex property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#zindex
+func (g *Grid) ZIndex(zIndex float64) *Grid {
+	p := ba.ctx.Get("Grid").New(zIndex)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+// SetZIndex sets the ZIndex property of class Grid.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grid#zindex
+func (g *Grid) SetZIndex(zIndex float64) *Grid {
+	p := ba.ctx.Get("Grid").New(zIndex)
+	return GridFromJSObject(p, ba.ctx)
+}
+
+*/

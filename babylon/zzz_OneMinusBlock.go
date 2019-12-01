@@ -31,8 +31,637 @@ func OneMinusBlockFromJSObject(p js.Value, ctx js.Value) *OneMinusBlock {
 //
 // https://doc.babylonjs.com/api/classes/babylon.oneminusblock
 func (ba *Babylon) NewOneMinusBlock(name string) *OneMinusBlock {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	p := ba.ctx.Get("OneMinusBlock").New(args...)
+	return OneMinusBlockFromJSObject(p, ba.ctx)
+}
+
+// AutoConfigure calls the AutoConfigure method on the OneMinusBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#autoconfigure
+func (o *OneMinusBlock) AutoConfigure(material *NodeMaterial) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, material.JSObject())
+
+	o.p.Call("autoConfigure", args...)
+}
+
+// OneMinusBlockBindOpts contains optional parameters for OneMinusBlock.Bind.
+type OneMinusBlockBindOpts struct {
+	Mesh *Mesh
+}
+
+// Bind calls the Bind method on the OneMinusBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#bind
+func (o *OneMinusBlock) Bind(effect *Effect, nodeMaterial *NodeMaterial, opts *OneMinusBlockBindOpts) {
+	if opts == nil {
+		opts = &OneMinusBlockBindOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, effect.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	o.p.Call("bind", args...)
+}
+
+// Build calls the Build method on the OneMinusBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#build
+func (o *OneMinusBlock) Build(state *NodeMaterialBuildState, activeBlocks *NodeMaterialBlock) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, state.JSObject())
+	args = append(args, activeBlocks.JSObject())
+
+	retVal := o.p.Call("build", args...)
+	return retVal.Bool()
+}
+
+// OneMinusBlockCloneOpts contains optional parameters for OneMinusBlock.Clone.
+type OneMinusBlockCloneOpts struct {
+	RootUrl *string
+}
+
+// Clone calls the Clone method on the OneMinusBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#clone
+func (o *OneMinusBlock) Clone(scene *Scene, opts *OneMinusBlockCloneOpts) *NodeMaterialBlock {
+	if opts == nil {
+		opts = &OneMinusBlockCloneOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, scene.JSObject())
+
+	if opts.RootUrl == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RootUrl)
+	}
+
+	retVal := o.p.Call("clone", args...)
+	return NodeMaterialBlockFromJSObject(retVal, o.ctx)
+}
+
+// OneMinusBlockConnectToOpts contains optional parameters for OneMinusBlock.ConnectTo.
+type OneMinusBlockConnectToOpts struct {
+	Options js.Value
+}
+
+// ConnectTo calls the ConnectTo method on the OneMinusBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#connectto
+func (o *OneMinusBlock) ConnectTo(other *NodeMaterialBlock, opts *OneMinusBlockConnectToOpts) *OneMinusBlock {
+	if opts == nil {
+		opts = &OneMinusBlockConnectToOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, other.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	retVal := o.p.Call("connectTo", args...)
+	return OneMinusBlockFromJSObject(retVal, o.ctx)
+}
+
+// Dispose calls the Dispose method on the OneMinusBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#dispose
+func (o *OneMinusBlock) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	o.p.Call("dispose", args...)
+}
+
+// GetClassName calls the GetClassName method on the OneMinusBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#getclassname
+func (o *OneMinusBlock) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := o.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// OneMinusBlockGetFirstAvailableInputOpts contains optional parameters for OneMinusBlock.GetFirstAvailableInput.
+type OneMinusBlockGetFirstAvailableInputOpts struct {
+	ForOutput *NodeMaterialConnectionPoint
+}
+
+// GetFirstAvailableInput calls the GetFirstAvailableInput method on the OneMinusBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#getfirstavailableinput
+func (o *OneMinusBlock) GetFirstAvailableInput(opts *OneMinusBlockGetFirstAvailableInputOpts) *NodeMaterialConnectionPoint {
+	if opts == nil {
+		opts = &OneMinusBlockGetFirstAvailableInputOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForOutput == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForOutput.JSObject())
+	}
+
+	retVal := o.p.Call("getFirstAvailableInput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, o.ctx)
+}
+
+// OneMinusBlockGetFirstAvailableOutputOpts contains optional parameters for OneMinusBlock.GetFirstAvailableOutput.
+type OneMinusBlockGetFirstAvailableOutputOpts struct {
+	ForBlock *NodeMaterialBlock
+}
+
+// GetFirstAvailableOutput calls the GetFirstAvailableOutput method on the OneMinusBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#getfirstavailableoutput
+func (o *OneMinusBlock) GetFirstAvailableOutput(opts *OneMinusBlockGetFirstAvailableOutputOpts) *NodeMaterialConnectionPoint {
+	if opts == nil {
+		opts = &OneMinusBlockGetFirstAvailableOutputOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForBlock == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForBlock.JSObject())
+	}
+
+	retVal := o.p.Call("getFirstAvailableOutput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, o.ctx)
+}
+
+// GetInputByName calls the GetInputByName method on the OneMinusBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#getinputbyname
+func (o *OneMinusBlock) GetInputByName(name string) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := o.p.Call("getInputByName", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, o.ctx)
+}
+
+// GetOutputByName calls the GetOutputByName method on the OneMinusBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#getoutputbyname
+func (o *OneMinusBlock) GetOutputByName(name string) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := o.p.Call("getOutputByName", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, o.ctx)
+}
+
+// GetSiblingOutput calls the GetSiblingOutput method on the OneMinusBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#getsiblingoutput
+func (o *OneMinusBlock) GetSiblingOutput(current *NodeMaterialConnectionPoint) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, current.JSObject())
+
+	retVal := o.p.Call("getSiblingOutput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, o.ctx)
+}
+
+// Initialize calls the Initialize method on the OneMinusBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#initialize
+func (o *OneMinusBlock) Initialize(state *NodeMaterialBuildState) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, state.JSObject())
+
+	o.p.Call("initialize", args...)
+}
+
+// OneMinusBlockInitializeDefinesOpts contains optional parameters for OneMinusBlock.InitializeDefines.
+type OneMinusBlockInitializeDefinesOpts struct {
+	UseInstances *bool
+}
+
+// InitializeDefines calls the InitializeDefines method on the OneMinusBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#initializedefines
+func (o *OneMinusBlock) InitializeDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *OneMinusBlockInitializeDefinesOpts) {
+	if opts == nil {
+		opts = &OneMinusBlockInitializeDefinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	o.p.Call("initializeDefines", args...)
+}
+
+// OneMinusBlockIsReadyOpts contains optional parameters for OneMinusBlock.IsReady.
+type OneMinusBlockIsReadyOpts struct {
+	UseInstances *bool
+}
+
+// IsReady calls the IsReady method on the OneMinusBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#isready
+func (o *OneMinusBlock) IsReady(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *OneMinusBlockIsReadyOpts) bool {
+	if opts == nil {
+		opts = &OneMinusBlockIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := o.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// OneMinusBlockPrepareDefinesOpts contains optional parameters for OneMinusBlock.PrepareDefines.
+type OneMinusBlockPrepareDefinesOpts struct {
+	UseInstances *bool
+}
+
+// PrepareDefines calls the PrepareDefines method on the OneMinusBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#preparedefines
+func (o *OneMinusBlock) PrepareDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *OneMinusBlockPrepareDefinesOpts) {
+	if opts == nil {
+		opts = &OneMinusBlockPrepareDefinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	o.p.Call("prepareDefines", args...)
+}
+
+// ProvideFallbacks calls the ProvideFallbacks method on the OneMinusBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#providefallbacks
+func (o *OneMinusBlock) ProvideFallbacks(mesh *AbstractMesh, fallbacks *EffectFallbacks) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, fallbacks.JSObject())
+
+	o.p.Call("provideFallbacks", args...)
+}
+
+// OneMinusBlockRegisterInputOpts contains optional parameters for OneMinusBlock.RegisterInput.
+type OneMinusBlockRegisterInputOpts struct {
+	IsOptional *bool
+	Target     js.Value
+}
+
+// RegisterInput calls the RegisterInput method on the OneMinusBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#registerinput
+func (o *OneMinusBlock) RegisterInput(name string, jsType js.Value, opts *OneMinusBlockRegisterInputOpts) *OneMinusBlock {
+	if opts == nil {
+		opts = &OneMinusBlockRegisterInputOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+2)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	if opts.IsOptional == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IsOptional)
+	}
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+
+	retVal := o.p.Call("registerInput", args...)
+	return OneMinusBlockFromJSObject(retVal, o.ctx)
+}
+
+// OneMinusBlockRegisterOutputOpts contains optional parameters for OneMinusBlock.RegisterOutput.
+type OneMinusBlockRegisterOutputOpts struct {
+	Target js.Value
+}
+
+// RegisterOutput calls the RegisterOutput method on the OneMinusBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#registeroutput
+func (o *OneMinusBlock) RegisterOutput(name string, jsType js.Value, opts *OneMinusBlockRegisterOutputOpts) *OneMinusBlock {
+	if opts == nil {
+		opts = &OneMinusBlockRegisterOutputOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+
+	retVal := o.p.Call("registerOutput", args...)
+	return OneMinusBlockFromJSObject(retVal, o.ctx)
+}
+
+// ReplaceRepeatableContent calls the ReplaceRepeatableContent method on the OneMinusBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#replacerepeatablecontent
+func (o *OneMinusBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterialBuildState, fragmentShaderState *NodeMaterialBuildState, mesh *AbstractMesh, defines js.Value) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, vertexShaderState.JSObject())
+	args = append(args, fragmentShaderState.JSObject())
+	args = append(args, mesh.JSObject())
+	args = append(args, defines)
+
+	o.p.Call("replaceRepeatableContent", args...)
+}
+
+// Serialize calls the Serialize method on the OneMinusBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#serialize
+func (o *OneMinusBlock) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := o.p.Call("serialize", args...)
+	return retVal
+}
+
+// UpdateUniformsAndSamples calls the UpdateUniformsAndSamples method on the OneMinusBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#updateuniformsandsamples
+func (o *OneMinusBlock) UpdateUniformsAndSamples(state *NodeMaterialBuildState, nodeMaterial *NodeMaterial, defines js.Value, uniformBuffers string) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, state.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+	args = append(args, uniformBuffers)
+
+	o.p.Call("updateUniformsAndSamples", args...)
+}
+
+/*
+
+// BuildId returns the BuildId property of class OneMinusBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#buildid
+func (o *OneMinusBlock) BuildId(buildId float64) *OneMinusBlock {
+	p := ba.ctx.Get("OneMinusBlock").New(buildId)
+	return OneMinusBlockFromJSObject(p, ba.ctx)
+}
+
+// SetBuildId sets the BuildId property of class OneMinusBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#buildid
+func (o *OneMinusBlock) SetBuildId(buildId float64) *OneMinusBlock {
+	p := ba.ctx.Get("OneMinusBlock").New(buildId)
+	return OneMinusBlockFromJSObject(p, ba.ctx)
+}
+
+// Comments returns the Comments property of class OneMinusBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#comments
+func (o *OneMinusBlock) Comments(comments string) *OneMinusBlock {
+	p := ba.ctx.Get("OneMinusBlock").New(comments)
+	return OneMinusBlockFromJSObject(p, ba.ctx)
+}
+
+// SetComments sets the Comments property of class OneMinusBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#comments
+func (o *OneMinusBlock) SetComments(comments string) *OneMinusBlock {
+	p := ba.ctx.Get("OneMinusBlock").New(comments)
+	return OneMinusBlockFromJSObject(p, ba.ctx)
+}
+
+// Input returns the Input property of class OneMinusBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#input
+func (o *OneMinusBlock) Input(input *NodeMaterialConnectionPoint) *OneMinusBlock {
+	p := ba.ctx.Get("OneMinusBlock").New(input.JSObject())
+	return OneMinusBlockFromJSObject(p, ba.ctx)
+}
+
+// SetInput sets the Input property of class OneMinusBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#input
+func (o *OneMinusBlock) SetInput(input *NodeMaterialConnectionPoint) *OneMinusBlock {
+	p := ba.ctx.Get("OneMinusBlock").New(input.JSObject())
+	return OneMinusBlockFromJSObject(p, ba.ctx)
+}
+
+// Inputs returns the Inputs property of class OneMinusBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#inputs
+func (o *OneMinusBlock) Inputs(inputs *NodeMaterialConnectionPoint) *OneMinusBlock {
+	p := ba.ctx.Get("OneMinusBlock").New(inputs.JSObject())
+	return OneMinusBlockFromJSObject(p, ba.ctx)
+}
+
+// SetInputs sets the Inputs property of class OneMinusBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#inputs
+func (o *OneMinusBlock) SetInputs(inputs *NodeMaterialConnectionPoint) *OneMinusBlock {
+	p := ba.ctx.Get("OneMinusBlock").New(inputs.JSObject())
+	return OneMinusBlockFromJSObject(p, ba.ctx)
+}
+
+// IsFinalMerger returns the IsFinalMerger property of class OneMinusBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#isfinalmerger
+func (o *OneMinusBlock) IsFinalMerger(isFinalMerger bool) *OneMinusBlock {
+	p := ba.ctx.Get("OneMinusBlock").New(isFinalMerger)
+	return OneMinusBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsFinalMerger sets the IsFinalMerger property of class OneMinusBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#isfinalmerger
+func (o *OneMinusBlock) SetIsFinalMerger(isFinalMerger bool) *OneMinusBlock {
+	p := ba.ctx.Get("OneMinusBlock").New(isFinalMerger)
+	return OneMinusBlockFromJSObject(p, ba.ctx)
+}
+
+// IsInput returns the IsInput property of class OneMinusBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#isinput
+func (o *OneMinusBlock) IsInput(isInput bool) *OneMinusBlock {
+	p := ba.ctx.Get("OneMinusBlock").New(isInput)
+	return OneMinusBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsInput sets the IsInput property of class OneMinusBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#isinput
+func (o *OneMinusBlock) SetIsInput(isInput bool) *OneMinusBlock {
+	p := ba.ctx.Get("OneMinusBlock").New(isInput)
+	return OneMinusBlockFromJSObject(p, ba.ctx)
+}
+
+// IsUnique returns the IsUnique property of class OneMinusBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#isunique
+func (o *OneMinusBlock) IsUnique(isUnique bool) *OneMinusBlock {
+	p := ba.ctx.Get("OneMinusBlock").New(isUnique)
+	return OneMinusBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsUnique sets the IsUnique property of class OneMinusBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#isunique
+func (o *OneMinusBlock) SetIsUnique(isUnique bool) *OneMinusBlock {
+	p := ba.ctx.Get("OneMinusBlock").New(isUnique)
+	return OneMinusBlockFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class OneMinusBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#name
+func (o *OneMinusBlock) Name(name string) *OneMinusBlock {
 	p := ba.ctx.Get("OneMinusBlock").New(name)
 	return OneMinusBlockFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetName sets the Name property of class OneMinusBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#name
+func (o *OneMinusBlock) SetName(name string) *OneMinusBlock {
+	p := ba.ctx.Get("OneMinusBlock").New(name)
+	return OneMinusBlockFromJSObject(p, ba.ctx)
+}
+
+// Output returns the Output property of class OneMinusBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#output
+func (o *OneMinusBlock) Output(output *NodeMaterialConnectionPoint) *OneMinusBlock {
+	p := ba.ctx.Get("OneMinusBlock").New(output.JSObject())
+	return OneMinusBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOutput sets the Output property of class OneMinusBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#output
+func (o *OneMinusBlock) SetOutput(output *NodeMaterialConnectionPoint) *OneMinusBlock {
+	p := ba.ctx.Get("OneMinusBlock").New(output.JSObject())
+	return OneMinusBlockFromJSObject(p, ba.ctx)
+}
+
+// Outputs returns the Outputs property of class OneMinusBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#outputs
+func (o *OneMinusBlock) Outputs(outputs *NodeMaterialConnectionPoint) *OneMinusBlock {
+	p := ba.ctx.Get("OneMinusBlock").New(outputs.JSObject())
+	return OneMinusBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOutputs sets the Outputs property of class OneMinusBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#outputs
+func (o *OneMinusBlock) SetOutputs(outputs *NodeMaterialConnectionPoint) *OneMinusBlock {
+	p := ba.ctx.Get("OneMinusBlock").New(outputs.JSObject())
+	return OneMinusBlockFromJSObject(p, ba.ctx)
+}
+
+// Target returns the Target property of class OneMinusBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#target
+func (o *OneMinusBlock) Target(target js.Value) *OneMinusBlock {
+	p := ba.ctx.Get("OneMinusBlock").New(target)
+	return OneMinusBlockFromJSObject(p, ba.ctx)
+}
+
+// SetTarget sets the Target property of class OneMinusBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#target
+func (o *OneMinusBlock) SetTarget(target js.Value) *OneMinusBlock {
+	p := ba.ctx.Get("OneMinusBlock").New(target)
+	return OneMinusBlockFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class OneMinusBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#uniqueid
+func (o *OneMinusBlock) UniqueId(uniqueId float64) *OneMinusBlock {
+	p := ba.ctx.Get("OneMinusBlock").New(uniqueId)
+	return OneMinusBlockFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class OneMinusBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oneminusblock#uniqueid
+func (o *OneMinusBlock) SetUniqueId(uniqueId float64) *OneMinusBlock {
+	p := ba.ctx.Get("OneMinusBlock").New(uniqueId)
+	return OneMinusBlockFromJSObject(p, ba.ctx)
+}
+
+*/

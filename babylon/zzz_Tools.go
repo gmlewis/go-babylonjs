@@ -27,4 +27,1407 @@ func ToolsFromJSObject(p js.Value, ctx js.Value) *Tools {
 	return &Tools{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// CleanUrl calls the CleanUrl method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#cleanurl
+func (t *Tools) CleanUrl(url string) string {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, url)
+
+	retVal := t.p.Call("CleanUrl", args...)
+	return retVal.String()
+}
+
+// ClearLogCache calls the ClearLogCache method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#clearlogcache
+func (t *Tools) ClearLogCache() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	t.p.Call("ClearLogCache", args...)
+}
+
+// ToolsCreateScreenshotOpts contains optional parameters for Tools.CreateScreenshot.
+type ToolsCreateScreenshotOpts struct {
+	SuccessCallback *func()
+	MimeType        *string
+}
+
+// CreateScreenshot calls the CreateScreenshot method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#createscreenshot
+func (t *Tools) CreateScreenshot(engine *Engine, camera *Camera, size *IScreenshotSize, opts *ToolsCreateScreenshotOpts) {
+	if opts == nil {
+		opts = &ToolsCreateScreenshotOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+2)
+
+	args = append(args, engine.JSObject())
+	args = append(args, camera.JSObject())
+	args = append(args, size.JSObject())
+
+	if opts.SuccessCallback == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.SuccessCallback)
+	}
+	if opts.MimeType == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.MimeType)
+	}
+
+	t.p.Call("CreateScreenshot", args...)
+}
+
+// ToolsCreateScreenshotAsyncOpts contains optional parameters for Tools.CreateScreenshotAsync.
+type ToolsCreateScreenshotAsyncOpts struct {
+	MimeType *string
+}
+
+// CreateScreenshotAsync calls the CreateScreenshotAsync method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#createscreenshotasync
+func (t *Tools) CreateScreenshotAsync(engine *Engine, camera *Camera, size *IScreenshotSize, opts *ToolsCreateScreenshotAsyncOpts) string {
+	if opts == nil {
+		opts = &ToolsCreateScreenshotAsyncOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, engine.JSObject())
+	args = append(args, camera.JSObject())
+	args = append(args, size.JSObject())
+
+	if opts.MimeType == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.MimeType)
+	}
+
+	retVal := t.p.Call("CreateScreenshotAsync", args...)
+	return retVal.String()
+}
+
+// ToolsCreateScreenshotUsingRenderTargetOpts contains optional parameters for Tools.CreateScreenshotUsingRenderTarget.
+type ToolsCreateScreenshotUsingRenderTargetOpts struct {
+	SuccessCallback *func()
+	MimeType        *string
+	Samples         *float64
+	Antialiasing    *bool
+	FileName        *string
+}
+
+// CreateScreenshotUsingRenderTarget calls the CreateScreenshotUsingRenderTarget method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#createscreenshotusingrendertarget
+func (t *Tools) CreateScreenshotUsingRenderTarget(engine *Engine, camera *Camera, size *IScreenshotSize, opts *ToolsCreateScreenshotUsingRenderTargetOpts) {
+	if opts == nil {
+		opts = &ToolsCreateScreenshotUsingRenderTargetOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+5)
+
+	args = append(args, engine.JSObject())
+	args = append(args, camera.JSObject())
+	args = append(args, size.JSObject())
+
+	if opts.SuccessCallback == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.SuccessCallback)
+	}
+	if opts.MimeType == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.MimeType)
+	}
+	if opts.Samples == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Samples)
+	}
+	if opts.Antialiasing == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Antialiasing)
+	}
+	if opts.FileName == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FileName)
+	}
+
+	t.p.Call("CreateScreenshotUsingRenderTarget", args...)
+}
+
+// ToolsCreateScreenshotUsingRenderTargetAsyncOpts contains optional parameters for Tools.CreateScreenshotUsingRenderTargetAsync.
+type ToolsCreateScreenshotUsingRenderTargetAsyncOpts struct {
+	MimeType     *string
+	Samples      *float64
+	Antialiasing *bool
+	FileName     *string
+}
+
+// CreateScreenshotUsingRenderTargetAsync calls the CreateScreenshotUsingRenderTargetAsync method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#createscreenshotusingrendertargetasync
+func (t *Tools) CreateScreenshotUsingRenderTargetAsync(engine *Engine, camera *Camera, size *IScreenshotSize, opts *ToolsCreateScreenshotUsingRenderTargetAsyncOpts) string {
+	if opts == nil {
+		opts = &ToolsCreateScreenshotUsingRenderTargetAsyncOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+4)
+
+	args = append(args, engine.JSObject())
+	args = append(args, camera.JSObject())
+	args = append(args, size.JSObject())
+
+	if opts.MimeType == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.MimeType)
+	}
+	if opts.Samples == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Samples)
+	}
+	if opts.Antialiasing == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Antialiasing)
+	}
+	if opts.FileName == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FileName)
+	}
+
+	retVal := t.p.Call("CreateScreenshotUsingRenderTargetAsync", args...)
+	return retVal.String()
+}
+
+// DecodeBase64 calls the DecodeBase64 method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#decodebase64
+func (t *Tools) DecodeBase64(uri string) js.Value {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, uri)
+
+	retVal := t.p.Call("DecodeBase64", args...)
+	return retVal
+}
+
+// ToolsDeepCopyOpts contains optional parameters for Tools.DeepCopy.
+type ToolsDeepCopyOpts struct {
+	DoNotCopyList *string
+	MustCopyList  *string
+}
+
+// DeepCopy calls the DeepCopy method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#deepcopy
+func (t *Tools) DeepCopy(source interface{}, destination interface{}, opts *ToolsDeepCopyOpts) {
+	if opts == nil {
+		opts = &ToolsDeepCopyOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+2)
+
+	args = append(args, source)
+	args = append(args, destination)
+
+	if opts.DoNotCopyList == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DoNotCopyList)
+	}
+	if opts.MustCopyList == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.MustCopyList)
+	}
+
+	t.p.Call("DeepCopy", args...)
+}
+
+// DelayAsync calls the DelayAsync method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#delayasync
+func (t *Tools) DelayAsync(delay float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, delay)
+
+	t.p.Call("DelayAsync", args...)
+}
+
+// Download calls the Download method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#download
+func (t *Tools) Download(blob *Blob, fileName string) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, blob.JSObject())
+	args = append(args, fileName)
+
+	t.p.Call("Download", args...)
+}
+
+// ToolsDumpFramebufferOpts contains optional parameters for Tools.DumpFramebuffer.
+type ToolsDumpFramebufferOpts struct {
+	SuccessCallback *func()
+	MimeType        *string
+	FileName        *string
+}
+
+// DumpFramebuffer calls the DumpFramebuffer method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#dumpframebuffer
+func (t *Tools) DumpFramebuffer(width float64, height float64, engine *Engine, opts *ToolsDumpFramebufferOpts) {
+	if opts == nil {
+		opts = &ToolsDumpFramebufferOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+3)
+
+	args = append(args, width)
+	args = append(args, height)
+	args = append(args, engine.JSObject())
+
+	if opts.SuccessCallback == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.SuccessCallback)
+	}
+	if opts.MimeType == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.MimeType)
+	}
+	if opts.FileName == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FileName)
+	}
+
+	t.p.Call("DumpFramebuffer", args...)
+}
+
+// ToolsEncodeScreenshotCanvasDataOpts contains optional parameters for Tools.EncodeScreenshotCanvasData.
+type ToolsEncodeScreenshotCanvasDataOpts struct {
+	SuccessCallback *func()
+	MimeType        *string
+	FileName        *string
+}
+
+// EncodeScreenshotCanvasData calls the EncodeScreenshotCanvasData method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#encodescreenshotcanvasdata
+func (t *Tools) EncodeScreenshotCanvasData(opts *ToolsEncodeScreenshotCanvasDataOpts) {
+	if opts == nil {
+		opts = &ToolsEncodeScreenshotCanvasDataOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+3)
+
+	if opts.SuccessCallback == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.SuccessCallback)
+	}
+	if opts.MimeType == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.MimeType)
+	}
+	if opts.FileName == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FileName)
+	}
+
+	t.p.Call("EncodeScreenshotCanvasData", args...)
+}
+
+// Error calls the Error method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#error
+func (t *Tools) Error(message string) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, message)
+
+	t.p.Call("Error", args...)
+}
+
+// FetchToRef calls the FetchToRef method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#fetchtoref
+func (t *Tools) FetchToRef(u float64, v float64, width float64, height float64, pixels js.Value, color *IColor4Like) {
+
+	args := make([]interface{}, 0, 6+0)
+
+	args = append(args, u)
+	args = append(args, v)
+	args = append(args, width)
+	args = append(args, height)
+	args = append(args, pixels)
+	args = append(args, color.JSObject())
+
+	t.p.Call("FetchToRef", args...)
+}
+
+// FileAsURL calls the FileAsURL method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#fileasurl
+func (t *Tools) FileAsURL(content string) string {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, content)
+
+	retVal := t.p.Call("FileAsURL", args...)
+	return retVal.String()
+}
+
+// FloatRound calls the FloatRound method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#floatround
+func (t *Tools) FloatRound(value float64) float64 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, value)
+
+	retVal := t.p.Call("FloatRound", args...)
+	return retVal.Float()
+}
+
+// ToolsFormatOpts contains optional parameters for Tools.Format.
+type ToolsFormatOpts struct {
+	Decimals *float64
+}
+
+// Format calls the Format method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#format
+func (t *Tools) Format(value float64, opts *ToolsFormatOpts) string {
+	if opts == nil {
+		opts = &ToolsFormatOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, value)
+
+	if opts.Decimals == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Decimals)
+	}
+
+	retVal := t.p.Call("Format", args...)
+	return retVal.String()
+}
+
+// GetAbsoluteUrl calls the GetAbsoluteUrl method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#getabsoluteurl
+func (t *Tools) GetAbsoluteUrl(url string) string {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, url)
+
+	retVal := t.p.Call("GetAbsoluteUrl", args...)
+	return retVal.String()
+}
+
+// ToolsGetClassNameOpts contains optional parameters for Tools.GetClassName.
+type ToolsGetClassNameOpts struct {
+	IsType *bool
+}
+
+// GetClassName calls the GetClassName method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#getclassname
+func (t *Tools) GetClassName(object interface{}, opts *ToolsGetClassNameOpts) string {
+	if opts == nil {
+		opts = &ToolsGetClassNameOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, object)
+
+	if opts.IsType == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IsType)
+	}
+
+	retVal := t.p.Call("GetClassName", args...)
+	return retVal.String()
+}
+
+// GetFilename calls the GetFilename method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#getfilename
+func (t *Tools) GetFilename(path string) string {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, path)
+
+	retVal := t.p.Call("GetFilename", args...)
+	return retVal.String()
+}
+
+// ToolsGetFolderPathOpts contains optional parameters for Tools.GetFolderPath.
+type ToolsGetFolderPathOpts struct {
+	ReturnUnchangedIfNoSlash *bool
+}
+
+// GetFolderPath calls the GetFolderPath method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#getfolderpath
+func (t *Tools) GetFolderPath(uri string, opts *ToolsGetFolderPathOpts) string {
+	if opts == nil {
+		opts = &ToolsGetFolderPathOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, uri)
+
+	if opts.ReturnUnchangedIfNoSlash == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ReturnUnchangedIfNoSlash)
+	}
+
+	retVal := t.p.Call("GetFolderPath", args...)
+	return retVal.String()
+}
+
+// ToolsGetFullClassNameOpts contains optional parameters for Tools.GetFullClassName.
+type ToolsGetFullClassNameOpts struct {
+	IsType *bool
+}
+
+// GetFullClassName calls the GetFullClassName method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#getfullclassname
+func (t *Tools) GetFullClassName(object interface{}, opts *ToolsGetFullClassNameOpts) string {
+	if opts == nil {
+		opts = &ToolsGetFullClassNameOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, object)
+
+	if opts.IsType == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IsType)
+	}
+
+	retVal := t.p.Call("getFullClassName", args...)
+	return retVal.String()
+}
+
+// GetPointerPrefix calls the GetPointerPrefix method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#getpointerprefix
+func (t *Tools) GetPointerPrefix() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("GetPointerPrefix", args...)
+	return retVal.String()
+}
+
+// Instantiate calls the Instantiate method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#instantiate
+func (t *Tools) Instantiate(className string) interface{} {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, className)
+
+	retVal := t.p.Call("Instantiate", args...)
+	return retVal
+}
+
+// IsBase64 calls the IsBase64 method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#isbase64
+func (t *Tools) IsBase64(uri string) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, uri)
+
+	retVal := t.p.Call("IsBase64", args...)
+	return retVal.Bool()
+}
+
+// IsEmpty calls the IsEmpty method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#isempty
+func (t *Tools) IsEmpty(obj interface{}) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, obj)
+
+	retVal := t.p.Call("IsEmpty", args...)
+	return retVal.Bool()
+}
+
+// IsExponentOfTwo calls the IsExponentOfTwo method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#isexponentoftwo
+func (t *Tools) IsExponentOfTwo(value float64) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, value)
+
+	retVal := t.p.Call("IsExponentOfTwo", args...)
+	return retVal.Bool()
+}
+
+// ToolsLoadFileOpts contains optional parameters for Tools.LoadFile.
+type ToolsLoadFileOpts struct {
+	OnProgress      *func()
+	OfflineProvider *IOfflineProvider
+	UseArrayBuffer  *bool
+	OnError         *func()
+}
+
+// LoadFile calls the LoadFile method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#loadfile
+func (t *Tools) LoadFile(url string, onSuccess func(), opts *ToolsLoadFileOpts) *IFileRequest {
+	if opts == nil {
+		opts = &ToolsLoadFileOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+4)
+
+	args = append(args, url)
+	args = append(args, onSuccess)
+
+	if opts.OnProgress == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnProgress)
+	}
+	if opts.OfflineProvider == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OfflineProvider.JSObject())
+	}
+	if opts.UseArrayBuffer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseArrayBuffer)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+
+	retVal := t.p.Call("LoadFile", args...)
+	return IFileRequestFromJSObject(retVal, t.ctx)
+}
+
+// LoadFileAsync calls the LoadFileAsync method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#loadfileasync
+func (t *Tools) LoadFileAsync(url string) js.Value {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, url)
+
+	retVal := t.p.Call("LoadFileAsync", args...)
+	return retVal
+}
+
+// ToolsLoadImageOpts contains optional parameters for Tools.LoadImage.
+type ToolsLoadImageOpts struct {
+	MimeType *string
+}
+
+// LoadImage calls the LoadImage method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#loadimage
+func (t *Tools) LoadImage(input string, onLoad func(), onError func(), offlineProvider *IOfflineProvider, opts *ToolsLoadImageOpts) js.Value {
+	if opts == nil {
+		opts = &ToolsLoadImageOpts{}
+	}
+
+	args := make([]interface{}, 0, 4+1)
+
+	args = append(args, input)
+	args = append(args, onLoad)
+	args = append(args, onError)
+	args = append(args, offlineProvider.JSObject())
+
+	if opts.MimeType == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.MimeType)
+	}
+
+	retVal := t.p.Call("LoadImage", args...)
+	return retVal
+}
+
+// ToolsLoadScriptOpts contains optional parameters for Tools.LoadScript.
+type ToolsLoadScriptOpts struct {
+	OnError  *func()
+	ScriptId *string
+}
+
+// LoadScript calls the LoadScript method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#loadscript
+func (t *Tools) LoadScript(scriptUrl string, onSuccess func(), opts *ToolsLoadScriptOpts) {
+	if opts == nil {
+		opts = &ToolsLoadScriptOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+2)
+
+	args = append(args, scriptUrl)
+	args = append(args, onSuccess)
+
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+	if opts.ScriptId == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ScriptId)
+	}
+
+	t.p.Call("LoadScript", args...)
+}
+
+// ToolsLoadScriptAsyncOpts contains optional parameters for Tools.LoadScriptAsync.
+type ToolsLoadScriptAsyncOpts struct {
+	ScriptId *string
+}
+
+// LoadScriptAsync calls the LoadScriptAsync method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#loadscriptasync
+func (t *Tools) LoadScriptAsync(scriptUrl string, opts *ToolsLoadScriptAsyncOpts) bool {
+	if opts == nil {
+		opts = &ToolsLoadScriptAsyncOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, scriptUrl)
+
+	if opts.ScriptId == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ScriptId)
+	}
+
+	retVal := t.p.Call("LoadScriptAsync", args...)
+	return retVal.Bool()
+}
+
+// Log calls the Log method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#log
+func (t *Tools) Log(message string) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, message)
+
+	t.p.Call("Log", args...)
+}
+
+// ToolsMakeArrayOpts contains optional parameters for Tools.MakeArray.
+type ToolsMakeArrayOpts struct {
+	AllowsNullUndefined *bool
+}
+
+// MakeArray calls the MakeArray method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#makearray
+func (t *Tools) MakeArray(obj interface{}, opts *ToolsMakeArrayOpts) *[]any {
+	if opts == nil {
+		opts = &ToolsMakeArrayOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, obj)
+
+	if opts.AllowsNullUndefined == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.AllowsNullUndefined)
+	}
+
+	retVal := t.p.Call("MakeArray", args...)
+	return []anyFromJSObject(retVal, t.ctx)
+}
+
+// Mix calls the Mix method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#mix
+func (t *Tools) Mix(a float64, b float64, alpha float64) float64 {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, a)
+	args = append(args, b)
+	args = append(args, alpha)
+
+	retVal := t.p.Call("Mix", args...)
+	return retVal.Float()
+}
+
+// RandomId calls the RandomId method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#randomid
+func (t *Tools) RandomId() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("RandomId", args...)
+	return retVal.String()
+}
+
+// ToolsReadFileOpts contains optional parameters for Tools.ReadFile.
+type ToolsReadFileOpts struct {
+	OnProgress     *func()
+	UseArrayBuffer *bool
+	OnError        *func()
+}
+
+// ReadFile calls the ReadFile method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#readfile
+func (t *Tools) ReadFile(file *File, onSuccess func(), opts *ToolsReadFileOpts) *IFileRequest {
+	if opts == nil {
+		opts = &ToolsReadFileOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+3)
+
+	args = append(args, file.JSObject())
+	args = append(args, onSuccess)
+
+	if opts.OnProgress == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnProgress)
+	}
+	if opts.UseArrayBuffer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseArrayBuffer)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+
+	retVal := t.p.Call("ReadFile", args...)
+	return IFileRequestFromJSObject(retVal, t.ctx)
+}
+
+// ReadFileAsDataURL calls the ReadFileAsDataURL method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#readfileasdataurl
+func (t *Tools) ReadFileAsDataURL(fileToLoad *Blob, callback func(), progressCallback func()) *IFileRequest {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, fileToLoad.JSObject())
+	args = append(args, callback)
+	args = append(args, progressCallback)
+
+	retVal := t.p.Call("ReadFileAsDataURL", args...)
+	return IFileRequestFromJSObject(retVal, t.ctx)
+}
+
+// RegisterTopRootEvents calls the RegisterTopRootEvents method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#registertoprootevents
+func (t *Tools) RegisterTopRootEvents(windowElement *Window, events js.Value) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, windowElement.JSObject())
+	args = append(args, events)
+
+	t.p.Call("RegisterTopRootEvents", args...)
+}
+
+// SetCorsBehavior calls the SetCorsBehavior method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#setcorsbehavior
+func (t *Tools) SetCorsBehavior(url string, element js.Value) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, url)
+	args = append(args, element)
+
+	t.p.Call("SetCorsBehavior", args...)
+}
+
+// SetImmediate calls the SetImmediate method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#setimmediate
+func (t *Tools) SetImmediate(action func()) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, action)
+
+	t.p.Call("SetImmediate", args...)
+}
+
+// ToolsToBlobOpts contains optional parameters for Tools.ToBlob.
+type ToolsToBlobOpts struct {
+	MimeType *string
+}
+
+// ToBlob calls the ToBlob method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#toblob
+func (t *Tools) ToBlob(canvas js.Value, successCallback func(), opts *ToolsToBlobOpts) {
+	if opts == nil {
+		opts = &ToolsToBlobOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, canvas)
+	args = append(args, successCallback)
+
+	if opts.MimeType == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.MimeType)
+	}
+
+	t.p.Call("ToBlob", args...)
+}
+
+// ToDegrees calls the ToDegrees method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#todegrees
+func (t *Tools) ToDegrees(angle float64) float64 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, angle)
+
+	retVal := t.p.Call("ToDegrees", args...)
+	return retVal.Float()
+}
+
+// ToRadians calls the ToRadians method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#toradians
+func (t *Tools) ToRadians(angle float64) float64 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, angle)
+
+	retVal := t.p.Call("ToRadians", args...)
+	return retVal.Float()
+}
+
+// UnregisterTopRootEvents calls the UnregisterTopRootEvents method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#unregistertoprootevents
+func (t *Tools) UnregisterTopRootEvents(windowElement *Window, events js.Value) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, windowElement.JSObject())
+	args = append(args, events)
+
+	t.p.Call("UnregisterTopRootEvents", args...)
+}
+
+// Warn calls the Warn method on the Tools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#warn
+func (t *Tools) Warn(message string) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, message)
+
+	t.p.Call("Warn", args...)
+}
+
+/*
+
+// AllLogLevel returns the AllLogLevel property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#allloglevel
+func (t *Tools) AllLogLevel(AllLogLevel float64) *Tools {
+	p := ba.ctx.Get("Tools").New(AllLogLevel)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// SetAllLogLevel sets the AllLogLevel property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#allloglevel
+func (t *Tools) SetAllLogLevel(AllLogLevel float64) *Tools {
+	p := ba.ctx.Get("Tools").New(AllLogLevel)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// BaseUrl returns the BaseUrl property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#baseurl
+func (t *Tools) BaseUrl(BaseUrl string) *Tools {
+	p := ba.ctx.Get("Tools").New(BaseUrl)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// SetBaseUrl sets the BaseUrl property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#baseurl
+func (t *Tools) SetBaseUrl(BaseUrl string) *Tools {
+	p := ba.ctx.Get("Tools").New(BaseUrl)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// CorsBehavior returns the CorsBehavior property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#corsbehavior
+func (t *Tools) CorsBehavior(CorsBehavior string) *Tools {
+	p := ba.ctx.Get("Tools").New(CorsBehavior)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// SetCorsBehavior sets the CorsBehavior property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#corsbehavior
+func (t *Tools) SetCorsBehavior(CorsBehavior string) *Tools {
+	p := ba.ctx.Get("Tools").New(CorsBehavior)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// CustomRequestHeaders returns the CustomRequestHeaders property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#customrequestheaders
+func (t *Tools) CustomRequestHeaders(CustomRequestHeaders js.Value) *Tools {
+	p := ba.ctx.Get("Tools").New(CustomRequestHeaders)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// SetCustomRequestHeaders sets the CustomRequestHeaders property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#customrequestheaders
+func (t *Tools) SetCustomRequestHeaders(CustomRequestHeaders js.Value) *Tools {
+	p := ba.ctx.Get("Tools").New(CustomRequestHeaders)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// DefaultRetryStrategy returns the DefaultRetryStrategy property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#defaultretrystrategy
+func (t *Tools) DefaultRetryStrategy(DefaultRetryStrategy func()) *Tools {
+	p := ba.ctx.Get("Tools").New(DefaultRetryStrategy)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// SetDefaultRetryStrategy sets the DefaultRetryStrategy property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#defaultretrystrategy
+func (t *Tools) SetDefaultRetryStrategy(DefaultRetryStrategy func()) *Tools {
+	p := ba.ctx.Get("Tools").New(DefaultRetryStrategy)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// EndPerformanceCounter returns the EndPerformanceCounter property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#endperformancecounter
+func (t *Tools) EndPerformanceCounter(EndPerformanceCounter func()) *Tools {
+	p := ba.ctx.Get("Tools").New(EndPerformanceCounter)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// SetEndPerformanceCounter sets the EndPerformanceCounter property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#endperformancecounter
+func (t *Tools) SetEndPerformanceCounter(EndPerformanceCounter func()) *Tools {
+	p := ba.ctx.Get("Tools").New(EndPerformanceCounter)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// ErrorLogLevel returns the ErrorLogLevel property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#errorloglevel
+func (t *Tools) ErrorLogLevel(ErrorLogLevel float64) *Tools {
+	p := ba.ctx.Get("Tools").New(ErrorLogLevel)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// SetErrorLogLevel sets the ErrorLogLevel property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#errorloglevel
+func (t *Tools) SetErrorLogLevel(ErrorLogLevel float64) *Tools {
+	p := ba.ctx.Get("Tools").New(ErrorLogLevel)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// ErrorsCount returns the ErrorsCount property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#errorscount
+func (t *Tools) ErrorsCount(errorsCount float64) *Tools {
+	p := ba.ctx.Get("Tools").New(errorsCount)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// SetErrorsCount sets the ErrorsCount property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#errorscount
+func (t *Tools) SetErrorsCount(errorsCount float64) *Tools {
+	p := ba.ctx.Get("Tools").New(errorsCount)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// FallbackTexture returns the FallbackTexture property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#fallbacktexture
+func (t *Tools) FallbackTexture(fallbackTexture string) *Tools {
+	p := ba.ctx.Get("Tools").New(fallbackTexture)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// SetFallbackTexture sets the FallbackTexture property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#fallbacktexture
+func (t *Tools) SetFallbackTexture(fallbackTexture string) *Tools {
+	p := ba.ctx.Get("Tools").New(fallbackTexture)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// GetDOMTextContent returns the GetDOMTextContent property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#getdomtextcontent
+func (t *Tools) GetDOMTextContent(GetDOMTextContent *GetDOMTextContent) *Tools {
+	p := ba.ctx.Get("Tools").New(GetDOMTextContent.JSObject())
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// SetGetDOMTextContent sets the GetDOMTextContent property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#getdomtextcontent
+func (t *Tools) SetGetDOMTextContent(GetDOMTextContent *GetDOMTextContent) *Tools {
+	p := ba.ctx.Get("Tools").New(GetDOMTextContent.JSObject())
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// IsWindowObjectExist returns the IsWindowObjectExist property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#iswindowobjectexist
+func (t *Tools) IsWindowObjectExist(IsWindowObjectExist *IsWindowObjectExist) *Tools {
+	p := ba.ctx.Get("Tools").New(IsWindowObjectExist.JSObject())
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// SetIsWindowObjectExist sets the IsWindowObjectExist property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#iswindowobjectexist
+func (t *Tools) SetIsWindowObjectExist(IsWindowObjectExist *IsWindowObjectExist) *Tools {
+	p := ba.ctx.Get("Tools").New(IsWindowObjectExist.JSObject())
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// LogCache returns the LogCache property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#logcache
+func (t *Tools) LogCache(LogCache string) *Tools {
+	p := ba.ctx.Get("Tools").New(LogCache)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// SetLogCache sets the LogCache property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#logcache
+func (t *Tools) SetLogCache(LogCache string) *Tools {
+	p := ba.ctx.Get("Tools").New(LogCache)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// LogLevels returns the LogLevels property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#loglevels
+func (t *Tools) LogLevels(LogLevels float64) *Tools {
+	p := ba.ctx.Get("Tools").New(LogLevels)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// SetLogLevels sets the LogLevels property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#loglevels
+func (t *Tools) SetLogLevels(LogLevels float64) *Tools {
+	p := ba.ctx.Get("Tools").New(LogLevels)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// MessageLogLevel returns the MessageLogLevel property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#messageloglevel
+func (t *Tools) MessageLogLevel(MessageLogLevel float64) *Tools {
+	p := ba.ctx.Get("Tools").New(MessageLogLevel)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// SetMessageLogLevel sets the MessageLogLevel property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#messageloglevel
+func (t *Tools) SetMessageLogLevel(MessageLogLevel float64) *Tools {
+	p := ba.ctx.Get("Tools").New(MessageLogLevel)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// NoneLogLevel returns the NoneLogLevel property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#noneloglevel
+func (t *Tools) NoneLogLevel(NoneLogLevel float64) *Tools {
+	p := ba.ctx.Get("Tools").New(NoneLogLevel)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// SetNoneLogLevel sets the NoneLogLevel property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#noneloglevel
+func (t *Tools) SetNoneLogLevel(NoneLogLevel float64) *Tools {
+	p := ba.ctx.Get("Tools").New(NoneLogLevel)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// Now returns the Now property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#now
+func (t *Tools) Now(Now float64) *Tools {
+	p := ba.ctx.Get("Tools").New(Now)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// SetNow sets the Now property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#now
+func (t *Tools) SetNow(Now float64) *Tools {
+	p := ba.ctx.Get("Tools").New(Now)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// OnNewCacheEntry returns the OnNewCacheEntry property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#onnewcacheentry
+func (t *Tools) OnNewCacheEntry(OnNewCacheEntry func()) *Tools {
+	p := ba.ctx.Get("Tools").New(OnNewCacheEntry)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// SetOnNewCacheEntry sets the OnNewCacheEntry property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#onnewcacheentry
+func (t *Tools) SetOnNewCacheEntry(OnNewCacheEntry func()) *Tools {
+	p := ba.ctx.Get("Tools").New(OnNewCacheEntry)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// PerformanceConsoleLogLevel returns the PerformanceConsoleLogLevel property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#performanceconsoleloglevel
+func (t *Tools) PerformanceConsoleLogLevel(PerformanceConsoleLogLevel float64) *Tools {
+	p := ba.ctx.Get("Tools").New(PerformanceConsoleLogLevel)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// SetPerformanceConsoleLogLevel sets the PerformanceConsoleLogLevel property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#performanceconsoleloglevel
+func (t *Tools) SetPerformanceConsoleLogLevel(PerformanceConsoleLogLevel float64) *Tools {
+	p := ba.ctx.Get("Tools").New(PerformanceConsoleLogLevel)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// PerformanceLogLevel returns the PerformanceLogLevel property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#performanceloglevel
+func (t *Tools) PerformanceLogLevel(PerformanceLogLevel float64) *Tools {
+	p := ba.ctx.Get("Tools").New(PerformanceLogLevel)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// SetPerformanceLogLevel sets the PerformanceLogLevel property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#performanceloglevel
+func (t *Tools) SetPerformanceLogLevel(PerformanceLogLevel float64) *Tools {
+	p := ba.ctx.Get("Tools").New(PerformanceLogLevel)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// PerformanceNoneLogLevel returns the PerformanceNoneLogLevel property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#performancenoneloglevel
+func (t *Tools) PerformanceNoneLogLevel(PerformanceNoneLogLevel float64) *Tools {
+	p := ba.ctx.Get("Tools").New(PerformanceNoneLogLevel)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// SetPerformanceNoneLogLevel sets the PerformanceNoneLogLevel property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#performancenoneloglevel
+func (t *Tools) SetPerformanceNoneLogLevel(PerformanceNoneLogLevel float64) *Tools {
+	p := ba.ctx.Get("Tools").New(PerformanceNoneLogLevel)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// PerformanceUserMarkLogLevel returns the PerformanceUserMarkLogLevel property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#performanceusermarkloglevel
+func (t *Tools) PerformanceUserMarkLogLevel(PerformanceUserMarkLogLevel float64) *Tools {
+	p := ba.ctx.Get("Tools").New(PerformanceUserMarkLogLevel)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// SetPerformanceUserMarkLogLevel sets the PerformanceUserMarkLogLevel property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#performanceusermarkloglevel
+func (t *Tools) SetPerformanceUserMarkLogLevel(PerformanceUserMarkLogLevel float64) *Tools {
+	p := ba.ctx.Get("Tools").New(PerformanceUserMarkLogLevel)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// PreprocessUrl returns the PreprocessUrl property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#preprocessurl
+func (t *Tools) PreprocessUrl(PreprocessUrl func()) *Tools {
+	p := ba.ctx.Get("Tools").New(PreprocessUrl)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// SetPreprocessUrl sets the PreprocessUrl property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#preprocessurl
+func (t *Tools) SetPreprocessUrl(PreprocessUrl func()) *Tools {
+	p := ba.ctx.Get("Tools").New(PreprocessUrl)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// RegisteredExternalClasses returns the RegisteredExternalClasses property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#registeredexternalclasses
+func (t *Tools) RegisteredExternalClasses(RegisteredExternalClasses js.Value) *Tools {
+	p := ba.ctx.Get("Tools").New(RegisteredExternalClasses)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// SetRegisteredExternalClasses sets the RegisteredExternalClasses property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#registeredexternalclasses
+func (t *Tools) SetRegisteredExternalClasses(RegisteredExternalClasses js.Value) *Tools {
+	p := ba.ctx.Get("Tools").New(RegisteredExternalClasses)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// StartPerformanceCounter returns the StartPerformanceCounter property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#startperformancecounter
+func (t *Tools) StartPerformanceCounter(StartPerformanceCounter func()) *Tools {
+	p := ba.ctx.Get("Tools").New(StartPerformanceCounter)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// SetStartPerformanceCounter sets the StartPerformanceCounter property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#startperformancecounter
+func (t *Tools) SetStartPerformanceCounter(StartPerformanceCounter func()) *Tools {
+	p := ba.ctx.Get("Tools").New(StartPerformanceCounter)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// UseCustomRequestHeaders returns the UseCustomRequestHeaders property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#usecustomrequestheaders
+func (t *Tools) UseCustomRequestHeaders(UseCustomRequestHeaders bool) *Tools {
+	p := ba.ctx.Get("Tools").New(UseCustomRequestHeaders)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// SetUseCustomRequestHeaders sets the UseCustomRequestHeaders property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#usecustomrequestheaders
+func (t *Tools) SetUseCustomRequestHeaders(UseCustomRequestHeaders bool) *Tools {
+	p := ba.ctx.Get("Tools").New(UseCustomRequestHeaders)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// UseFallbackTexture returns the UseFallbackTexture property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#usefallbacktexture
+func (t *Tools) UseFallbackTexture(UseFallbackTexture bool) *Tools {
+	p := ba.ctx.Get("Tools").New(UseFallbackTexture)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// SetUseFallbackTexture sets the UseFallbackTexture property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#usefallbacktexture
+func (t *Tools) SetUseFallbackTexture(UseFallbackTexture bool) *Tools {
+	p := ba.ctx.Get("Tools").New(UseFallbackTexture)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// WarningLogLevel returns the WarningLogLevel property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#warningloglevel
+func (t *Tools) WarningLogLevel(WarningLogLevel float64) *Tools {
+	p := ba.ctx.Get("Tools").New(WarningLogLevel)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+// SetWarningLogLevel sets the WarningLogLevel property of class Tools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tools#warningloglevel
+func (t *Tools) SetWarningLogLevel(WarningLogLevel float64) *Tools {
+	p := ba.ctx.Get("Tools").New(WarningLogLevel)
+	return ToolsFromJSObject(p, ba.ctx)
+}
+
+*/

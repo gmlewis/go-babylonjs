@@ -27,4 +27,6 @@ func ArrayToolsFromJSObject(p js.Value, ctx js.Value) *ArrayTools {
 	return &ArrayTools{p: p, ctx: ctx}
 }
 
-// TODO: methods
+/*
+
+ */

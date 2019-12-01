@@ -29,4 +29,541 @@ func ImageProcessingConfigurationFromJSObject(p js.Value, ctx js.Value) *ImagePr
 	return &ImageProcessingConfiguration{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// ImageProcessingConfigurationBindOpts contains optional parameters for ImageProcessingConfiguration.Bind.
+type ImageProcessingConfigurationBindOpts struct {
+	OverrideAspectRatio *float64
+}
+
+// Bind calls the Bind method on the ImageProcessingConfiguration object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#bind
+func (i *ImageProcessingConfiguration) Bind(effect *Effect, opts *ImageProcessingConfigurationBindOpts) {
+	if opts == nil {
+		opts = &ImageProcessingConfigurationBindOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, effect.JSObject())
+
+	if opts.OverrideAspectRatio == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.OverrideAspectRatio)
+	}
+
+	i.p.Call("bind", args...)
+}
+
+// Clone calls the Clone method on the ImageProcessingConfiguration object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#clone
+func (i *ImageProcessingConfiguration) Clone() *ImageProcessingConfiguration {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := i.p.Call("clone", args...)
+	return ImageProcessingConfigurationFromJSObject(retVal, i.ctx)
+}
+
+// GetClassName calls the GetClassName method on the ImageProcessingConfiguration object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#getclassname
+func (i *ImageProcessingConfiguration) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := i.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// IsReady calls the IsReady method on the ImageProcessingConfiguration object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#isready
+func (i *ImageProcessingConfiguration) IsReady() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := i.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// Parse calls the Parse method on the ImageProcessingConfiguration object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#parse
+func (i *ImageProcessingConfiguration) Parse(source interface{}) *ImageProcessingConfiguration {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, source)
+
+	retVal := i.p.Call("Parse", args...)
+	return ImageProcessingConfigurationFromJSObject(retVal, i.ctx)
+}
+
+// ImageProcessingConfigurationPrepareDefinesOpts contains optional parameters for ImageProcessingConfiguration.PrepareDefines.
+type ImageProcessingConfigurationPrepareDefinesOpts struct {
+	ForPostProcess *bool
+}
+
+// PrepareDefines calls the PrepareDefines method on the ImageProcessingConfiguration object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#preparedefines
+func (i *ImageProcessingConfiguration) PrepareDefines(defines *IImageProcessingConfigurationDefines, opts *ImageProcessingConfigurationPrepareDefinesOpts) {
+	if opts == nil {
+		opts = &ImageProcessingConfigurationPrepareDefinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, defines.JSObject())
+
+	if opts.ForPostProcess == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForPostProcess)
+	}
+
+	i.p.Call("prepareDefines", args...)
+}
+
+// PrepareSamplers calls the PrepareSamplers method on the ImageProcessingConfiguration object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#preparesamplers
+func (i *ImageProcessingConfiguration) PrepareSamplers(samplersList string, defines *IImageProcessingConfigurationDefines) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, samplersList)
+	args = append(args, defines.JSObject())
+
+	i.p.Call("PrepareSamplers", args...)
+}
+
+// PrepareUniforms calls the PrepareUniforms method on the ImageProcessingConfiguration object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#prepareuniforms
+func (i *ImageProcessingConfiguration) PrepareUniforms(uniforms string, defines *IImageProcessingConfigurationDefines) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniforms)
+	args = append(args, defines.JSObject())
+
+	i.p.Call("PrepareUniforms", args...)
+}
+
+// Serialize calls the Serialize method on the ImageProcessingConfiguration object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#serialize
+func (i *ImageProcessingConfiguration) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := i.p.Call("serialize", args...)
+	return retVal
+}
+
+/*
+
+// ApplyByPostProcess returns the ApplyByPostProcess property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#applybypostprocess
+func (i *ImageProcessingConfiguration) ApplyByPostProcess(applyByPostProcess bool) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(applyByPostProcess)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetApplyByPostProcess sets the ApplyByPostProcess property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#applybypostprocess
+func (i *ImageProcessingConfiguration) SetApplyByPostProcess(applyByPostProcess bool) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(applyByPostProcess)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// ColorCurves returns the ColorCurves property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#colorcurves
+func (i *ImageProcessingConfiguration) ColorCurves(colorCurves *ColorCurves) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(colorCurves.JSObject())
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetColorCurves sets the ColorCurves property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#colorcurves
+func (i *ImageProcessingConfiguration) SetColorCurves(colorCurves *ColorCurves) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(colorCurves.JSObject())
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// ColorCurvesEnabled returns the ColorCurvesEnabled property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#colorcurvesenabled
+func (i *ImageProcessingConfiguration) ColorCurvesEnabled(colorCurvesEnabled bool) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(colorCurvesEnabled)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetColorCurvesEnabled sets the ColorCurvesEnabled property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#colorcurvesenabled
+func (i *ImageProcessingConfiguration) SetColorCurvesEnabled(colorCurvesEnabled bool) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(colorCurvesEnabled)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// ColorGradingBGR returns the ColorGradingBGR property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#colorgradingbgr
+func (i *ImageProcessingConfiguration) ColorGradingBGR(colorGradingBGR bool) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(colorGradingBGR)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetColorGradingBGR sets the ColorGradingBGR property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#colorgradingbgr
+func (i *ImageProcessingConfiguration) SetColorGradingBGR(colorGradingBGR bool) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(colorGradingBGR)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// ColorGradingEnabled returns the ColorGradingEnabled property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#colorgradingenabled
+func (i *ImageProcessingConfiguration) ColorGradingEnabled(colorGradingEnabled bool) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(colorGradingEnabled)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetColorGradingEnabled sets the ColorGradingEnabled property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#colorgradingenabled
+func (i *ImageProcessingConfiguration) SetColorGradingEnabled(colorGradingEnabled bool) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(colorGradingEnabled)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// ColorGradingTexture returns the ColorGradingTexture property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#colorgradingtexture
+func (i *ImageProcessingConfiguration) ColorGradingTexture(colorGradingTexture *BaseTexture) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(colorGradingTexture.JSObject())
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetColorGradingTexture sets the ColorGradingTexture property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#colorgradingtexture
+func (i *ImageProcessingConfiguration) SetColorGradingTexture(colorGradingTexture *BaseTexture) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(colorGradingTexture.JSObject())
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// ColorGradingWithGreenDepth returns the ColorGradingWithGreenDepth property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#colorgradingwithgreendepth
+func (i *ImageProcessingConfiguration) ColorGradingWithGreenDepth(colorGradingWithGreenDepth bool) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(colorGradingWithGreenDepth)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetColorGradingWithGreenDepth sets the ColorGradingWithGreenDepth property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#colorgradingwithgreendepth
+func (i *ImageProcessingConfiguration) SetColorGradingWithGreenDepth(colorGradingWithGreenDepth bool) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(colorGradingWithGreenDepth)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// Contrast returns the Contrast property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#contrast
+func (i *ImageProcessingConfiguration) Contrast(contrast float64) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(contrast)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetContrast sets the Contrast property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#contrast
+func (i *ImageProcessingConfiguration) SetContrast(contrast float64) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(contrast)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// Exposure returns the Exposure property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#exposure
+func (i *ImageProcessingConfiguration) Exposure(exposure float64) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(exposure)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetExposure sets the Exposure property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#exposure
+func (i *ImageProcessingConfiguration) SetExposure(exposure float64) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(exposure)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// IsEnabled returns the IsEnabled property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#isenabled
+func (i *ImageProcessingConfiguration) IsEnabled(isEnabled bool) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(isEnabled)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetIsEnabled sets the IsEnabled property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#isenabled
+func (i *ImageProcessingConfiguration) SetIsEnabled(isEnabled bool) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(isEnabled)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// OnUpdateParameters returns the OnUpdateParameters property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#onupdateparameters
+func (i *ImageProcessingConfiguration) OnUpdateParameters(onUpdateParameters *Observable) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(onUpdateParameters.JSObject())
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetOnUpdateParameters sets the OnUpdateParameters property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#onupdateparameters
+func (i *ImageProcessingConfiguration) SetOnUpdateParameters(onUpdateParameters *Observable) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(onUpdateParameters.JSObject())
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// TONEMAPPING_ACES returns the TONEMAPPING_ACES property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#tonemapping_aces
+func (i *ImageProcessingConfiguration) TONEMAPPING_ACES(TONEMAPPING_ACES float64) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(TONEMAPPING_ACES)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetTONEMAPPING_ACES sets the TONEMAPPING_ACES property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#tonemapping_aces
+func (i *ImageProcessingConfiguration) SetTONEMAPPING_ACES(TONEMAPPING_ACES float64) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(TONEMAPPING_ACES)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// TONEMAPPING_STANDARD returns the TONEMAPPING_STANDARD property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#tonemapping_standard
+func (i *ImageProcessingConfiguration) TONEMAPPING_STANDARD(TONEMAPPING_STANDARD float64) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(TONEMAPPING_STANDARD)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetTONEMAPPING_STANDARD sets the TONEMAPPING_STANDARD property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#tonemapping_standard
+func (i *ImageProcessingConfiguration) SetTONEMAPPING_STANDARD(TONEMAPPING_STANDARD float64) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(TONEMAPPING_STANDARD)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// ToneMappingEnabled returns the ToneMappingEnabled property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#tonemappingenabled
+func (i *ImageProcessingConfiguration) ToneMappingEnabled(toneMappingEnabled bool) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(toneMappingEnabled)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetToneMappingEnabled sets the ToneMappingEnabled property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#tonemappingenabled
+func (i *ImageProcessingConfiguration) SetToneMappingEnabled(toneMappingEnabled bool) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(toneMappingEnabled)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// ToneMappingType returns the ToneMappingType property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#tonemappingtype
+func (i *ImageProcessingConfiguration) ToneMappingType(toneMappingType float64) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(toneMappingType)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetToneMappingType sets the ToneMappingType property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#tonemappingtype
+func (i *ImageProcessingConfiguration) SetToneMappingType(toneMappingType float64) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(toneMappingType)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// VIGNETTEMODE_MULTIPLY returns the VIGNETTEMODE_MULTIPLY property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#vignettemode_multiply
+func (i *ImageProcessingConfiguration) VIGNETTEMODE_MULTIPLY(VIGNETTEMODE_MULTIPLY float64) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(VIGNETTEMODE_MULTIPLY)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetVIGNETTEMODE_MULTIPLY sets the VIGNETTEMODE_MULTIPLY property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#vignettemode_multiply
+func (i *ImageProcessingConfiguration) SetVIGNETTEMODE_MULTIPLY(VIGNETTEMODE_MULTIPLY float64) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(VIGNETTEMODE_MULTIPLY)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// VIGNETTEMODE_OPAQUE returns the VIGNETTEMODE_OPAQUE property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#vignettemode_opaque
+func (i *ImageProcessingConfiguration) VIGNETTEMODE_OPAQUE(VIGNETTEMODE_OPAQUE float64) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(VIGNETTEMODE_OPAQUE)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetVIGNETTEMODE_OPAQUE sets the VIGNETTEMODE_OPAQUE property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#vignettemode_opaque
+func (i *ImageProcessingConfiguration) SetVIGNETTEMODE_OPAQUE(VIGNETTEMODE_OPAQUE float64) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(VIGNETTEMODE_OPAQUE)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// VignetteBlendMode returns the VignetteBlendMode property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#vignetteblendmode
+func (i *ImageProcessingConfiguration) VignetteBlendMode(vignetteBlendMode float64) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(vignetteBlendMode)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetVignetteBlendMode sets the VignetteBlendMode property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#vignetteblendmode
+func (i *ImageProcessingConfiguration) SetVignetteBlendMode(vignetteBlendMode float64) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(vignetteBlendMode)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// VignetteCameraFov returns the VignetteCameraFov property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#vignettecamerafov
+func (i *ImageProcessingConfiguration) VignetteCameraFov(vignetteCameraFov float64) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(vignetteCameraFov)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetVignetteCameraFov sets the VignetteCameraFov property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#vignettecamerafov
+func (i *ImageProcessingConfiguration) SetVignetteCameraFov(vignetteCameraFov float64) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(vignetteCameraFov)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// VignetteCentreX returns the VignetteCentreX property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#vignettecentrex
+func (i *ImageProcessingConfiguration) VignetteCentreX(vignetteCentreX float64) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(vignetteCentreX)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetVignetteCentreX sets the VignetteCentreX property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#vignettecentrex
+func (i *ImageProcessingConfiguration) SetVignetteCentreX(vignetteCentreX float64) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(vignetteCentreX)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// VignetteCentreY returns the VignetteCentreY property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#vignettecentrey
+func (i *ImageProcessingConfiguration) VignetteCentreY(vignetteCentreY float64) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(vignetteCentreY)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetVignetteCentreY sets the VignetteCentreY property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#vignettecentrey
+func (i *ImageProcessingConfiguration) SetVignetteCentreY(vignetteCentreY float64) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(vignetteCentreY)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// VignetteColor returns the VignetteColor property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#vignettecolor
+func (i *ImageProcessingConfiguration) VignetteColor(vignetteColor *Color4) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(vignetteColor.JSObject())
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetVignetteColor sets the VignetteColor property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#vignettecolor
+func (i *ImageProcessingConfiguration) SetVignetteColor(vignetteColor *Color4) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(vignetteColor.JSObject())
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// VignetteEnabled returns the VignetteEnabled property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#vignetteenabled
+func (i *ImageProcessingConfiguration) VignetteEnabled(vignetteEnabled bool) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(vignetteEnabled)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetVignetteEnabled sets the VignetteEnabled property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#vignetteenabled
+func (i *ImageProcessingConfiguration) SetVignetteEnabled(vignetteEnabled bool) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(vignetteEnabled)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// VignetteStretch returns the VignetteStretch property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#vignettestretch
+func (i *ImageProcessingConfiguration) VignetteStretch(vignetteStretch float64) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(vignetteStretch)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetVignetteStretch sets the VignetteStretch property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#vignettestretch
+func (i *ImageProcessingConfiguration) SetVignetteStretch(vignetteStretch float64) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(vignetteStretch)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// VignetteWeight returns the VignetteWeight property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#vignetteweight
+func (i *ImageProcessingConfiguration) VignetteWeight(vignetteWeight float64) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(vignetteWeight)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetVignetteWeight sets the VignetteWeight property of class ImageProcessingConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingconfiguration#vignetteweight
+func (i *ImageProcessingConfiguration) SetVignetteWeight(vignetteWeight float64) *ImageProcessingConfiguration {
+	p := ba.ctx.Get("ImageProcessingConfiguration").New(vignetteWeight)
+	return ImageProcessingConfigurationFromJSObject(p, ba.ctx)
+}
+
+*/

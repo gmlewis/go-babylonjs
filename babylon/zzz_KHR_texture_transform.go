@@ -27,4 +27,38 @@ func KHR_texture_transformFromJSObject(p js.Value, ctx js.Value) *KHR_texture_tr
 	return &KHR_texture_transform{p: p, ctx: ctx}
 }
 
-// TODO: methods
+/*
+
+// Enabled returns the Enabled property of class KHR_texture_transform.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khr_texture_transform#enabled
+func (k *KHR_texture_transform) Enabled(enabled bool) *KHR_texture_transform {
+	p := ba.ctx.Get("KHR_texture_transform").New(enabled)
+	return KHR_texture_transformFromJSObject(p, ba.ctx)
+}
+
+// SetEnabled sets the Enabled property of class KHR_texture_transform.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khr_texture_transform#enabled
+func (k *KHR_texture_transform) SetEnabled(enabled bool) *KHR_texture_transform {
+	p := ba.ctx.Get("KHR_texture_transform").New(enabled)
+	return KHR_texture_transformFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class KHR_texture_transform.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khr_texture_transform#name
+func (k *KHR_texture_transform) Name(name string) *KHR_texture_transform {
+	p := ba.ctx.Get("KHR_texture_transform").New(name)
+	return KHR_texture_transformFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class KHR_texture_transform.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khr_texture_transform#name
+func (k *KHR_texture_transform) SetName(name string) *KHR_texture_transform {
+	p := ba.ctx.Get("KHR_texture_transform").New(name)
+	return KHR_texture_transformFromJSObject(p, ba.ctx)
+}
+
+*/

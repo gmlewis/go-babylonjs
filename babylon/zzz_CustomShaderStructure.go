@@ -31,8 +31,45 @@ func CustomShaderStructureFromJSObject(p js.Value, ctx js.Value) *CustomShaderSt
 //
 // https://doc.babylonjs.com/api/classes/babylon.customshaderstructure
 func (ba *Babylon) NewCustomShaderStructure() *CustomShaderStructure {
-	p := ba.ctx.Get("CustomShaderStructure").New()
+
+	args := make([]interface{}, 0, 0+0)
+
+	p := ba.ctx.Get("CustomShaderStructure").New(args...)
 	return CustomShaderStructureFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+/*
+
+// FragmentStore returns the FragmentStore property of class CustomShaderStructure.
+//
+// https://doc.babylonjs.com/api/classes/babylon.customshaderstructure#fragmentstore
+func (c *CustomShaderStructure) FragmentStore(FragmentStore string) *CustomShaderStructure {
+	p := ba.ctx.Get("CustomShaderStructure").New(FragmentStore)
+	return CustomShaderStructureFromJSObject(p, ba.ctx)
+}
+
+// SetFragmentStore sets the FragmentStore property of class CustomShaderStructure.
+//
+// https://doc.babylonjs.com/api/classes/babylon.customshaderstructure#fragmentstore
+func (c *CustomShaderStructure) SetFragmentStore(FragmentStore string) *CustomShaderStructure {
+	p := ba.ctx.Get("CustomShaderStructure").New(FragmentStore)
+	return CustomShaderStructureFromJSObject(p, ba.ctx)
+}
+
+// VertexStore returns the VertexStore property of class CustomShaderStructure.
+//
+// https://doc.babylonjs.com/api/classes/babylon.customshaderstructure#vertexstore
+func (c *CustomShaderStructure) VertexStore(VertexStore string) *CustomShaderStructure {
+	p := ba.ctx.Get("CustomShaderStructure").New(VertexStore)
+	return CustomShaderStructureFromJSObject(p, ba.ctx)
+}
+
+// SetVertexStore sets the VertexStore property of class CustomShaderStructure.
+//
+// https://doc.babylonjs.com/api/classes/babylon.customshaderstructure#vertexstore
+func (c *CustomShaderStructure) SetVertexStore(VertexStore string) *CustomShaderStructure {
+	p := ba.ctx.Get("CustomShaderStructure").New(VertexStore)
+	return CustomShaderStructureFromJSObject(p, ba.ctx)
+}
+
+*/

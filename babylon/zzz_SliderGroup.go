@@ -32,8 +32,147 @@ func SliderGroupFromJSObject(p js.Value, ctx js.Value) *SliderGroup {
 //
 // https://doc.babylonjs.com/api/classes/babylon.slidergroup
 func (ba *Babylon) NewSliderGroup(name string) *SliderGroup {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	p := ba.ctx.Get("SliderGroup").New(args...)
+	return SliderGroupFromJSObject(p, ba.ctx)
+}
+
+// SliderGroupAddSliderOpts contains optional parameters for SliderGroup.AddSlider.
+type SliderGroupAddSliderOpts struct {
+	Func          *func()
+	Unit          *string
+	Min           *float64
+	Max           *float64
+	Value         *float64
+	OnValueChange *func()
+}
+
+// AddSlider calls the AddSlider method on the SliderGroup object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.slidergroup#addslider
+func (s *SliderGroup) AddSlider(label string, opts *SliderGroupAddSliderOpts) {
+	if opts == nil {
+		opts = &SliderGroupAddSliderOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+6)
+
+	args = append(args, label)
+
+	if opts.Func == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Func)
+	}
+	if opts.Unit == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Unit)
+	}
+	if opts.Min == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Min)
+	}
+	if opts.Max == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Max)
+	}
+	if opts.Value == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Value)
+	}
+	if opts.OnValueChange == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnValueChange)
+	}
+
+	s.p.Call("addSlider", args...)
+}
+
+// RemoveSelector calls the RemoveSelector method on the SliderGroup object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.slidergroup#removeselector
+func (s *SliderGroup) RemoveSelector(selectorNb float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, selectorNb)
+
+	s.p.Call("removeSelector", args...)
+}
+
+/*
+
+// GroupPanel returns the GroupPanel property of class SliderGroup.
+//
+// https://doc.babylonjs.com/api/classes/babylon.slidergroup#grouppanel
+func (s *SliderGroup) GroupPanel(groupPanel *StackPanel) *SliderGroup {
+	p := ba.ctx.Get("SliderGroup").New(groupPanel.JSObject())
+	return SliderGroupFromJSObject(p, ba.ctx)
+}
+
+// SetGroupPanel sets the GroupPanel property of class SliderGroup.
+//
+// https://doc.babylonjs.com/api/classes/babylon.slidergroup#grouppanel
+func (s *SliderGroup) SetGroupPanel(groupPanel *StackPanel) *SliderGroup {
+	p := ba.ctx.Get("SliderGroup").New(groupPanel.JSObject())
+	return SliderGroupFromJSObject(p, ba.ctx)
+}
+
+// Header returns the Header property of class SliderGroup.
+//
+// https://doc.babylonjs.com/api/classes/babylon.slidergroup#header
+func (s *SliderGroup) Header(header string) *SliderGroup {
+	p := ba.ctx.Get("SliderGroup").New(header)
+	return SliderGroupFromJSObject(p, ba.ctx)
+}
+
+// SetHeader sets the Header property of class SliderGroup.
+//
+// https://doc.babylonjs.com/api/classes/babylon.slidergroup#header
+func (s *SliderGroup) SetHeader(header string) *SliderGroup {
+	p := ba.ctx.Get("SliderGroup").New(header)
+	return SliderGroupFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class SliderGroup.
+//
+// https://doc.babylonjs.com/api/classes/babylon.slidergroup#name
+func (s *SliderGroup) Name(name string) *SliderGroup {
 	p := ba.ctx.Get("SliderGroup").New(name)
 	return SliderGroupFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetName sets the Name property of class SliderGroup.
+//
+// https://doc.babylonjs.com/api/classes/babylon.slidergroup#name
+func (s *SliderGroup) SetName(name string) *SliderGroup {
+	p := ba.ctx.Get("SliderGroup").New(name)
+	return SliderGroupFromJSObject(p, ba.ctx)
+}
+
+// Selectors returns the Selectors property of class SliderGroup.
+//
+// https://doc.babylonjs.com/api/classes/babylon.slidergroup#selectors
+func (s *SliderGroup) Selectors(selectors *StackPanel) *SliderGroup {
+	p := ba.ctx.Get("SliderGroup").New(selectors.JSObject())
+	return SliderGroupFromJSObject(p, ba.ctx)
+}
+
+// SetSelectors sets the Selectors property of class SliderGroup.
+//
+// https://doc.babylonjs.com/api/classes/babylon.slidergroup#selectors
+func (s *SliderGroup) SetSelectors(selectors *StackPanel) *SliderGroup {
+	p := ba.ctx.Get("SliderGroup").New(selectors.JSObject())
+	return SliderGroupFromJSObject(p, ba.ctx)
+}
+
+*/

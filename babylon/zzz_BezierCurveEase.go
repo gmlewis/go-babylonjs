@@ -31,13 +31,10 @@ func BezierCurveEaseFromJSObject(p js.Value, ctx js.Value) *BezierCurveEase {
 
 // NewBezierCurveEaseOpts contains optional parameters for NewBezierCurveEase.
 type NewBezierCurveEaseOpts struct {
-	X1 *JSFloat64
-
-	Y1 *JSFloat64
-
-	X2 *JSFloat64
-
-	Y2 *JSFloat64
+	X1 *float64
+	Y1 *float64
+	X2 *float64
+	Y2 *float64
 }
 
 // NewBezierCurveEase returns a new BezierCurveEase object.
@@ -48,8 +45,181 @@ func (ba *Babylon) NewBezierCurveEase(opts *NewBezierCurveEaseOpts) *BezierCurve
 		opts = &NewBezierCurveEaseOpts{}
 	}
 
-	p := ba.ctx.Get("BezierCurveEase").New(opts.X1.JSObject(), opts.Y1.JSObject(), opts.X2.JSObject(), opts.Y2.JSObject())
+	args := make([]interface{}, 0, 0+4)
+
+	if opts.X1 == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.X1)
+	}
+	if opts.Y1 == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Y1)
+	}
+	if opts.X2 == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.X2)
+	}
+	if opts.Y2 == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Y2)
+	}
+
+	p := ba.ctx.Get("BezierCurveEase").New(args...)
 	return BezierCurveEaseFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Ease calls the Ease method on the BezierCurveEase object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.beziercurveease#ease
+func (b *BezierCurveEase) Ease(gradient float64) float64 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, gradient)
+
+	retVal := b.p.Call("ease", args...)
+	return retVal.Float()
+}
+
+// GetEasingMode calls the GetEasingMode method on the BezierCurveEase object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.beziercurveease#geteasingmode
+func (b *BezierCurveEase) GetEasingMode() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := b.p.Call("getEasingMode", args...)
+	return retVal.Float()
+}
+
+// SetEasingMode calls the SetEasingMode method on the BezierCurveEase object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.beziercurveease#seteasingmode
+func (b *BezierCurveEase) SetEasingMode(easingMode float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, easingMode)
+
+	b.p.Call("setEasingMode", args...)
+}
+
+/*
+
+// EASINGMODE_EASEIN returns the EASINGMODE_EASEIN property of class BezierCurveEase.
+//
+// https://doc.babylonjs.com/api/classes/babylon.beziercurveease#easingmode_easein
+func (b *BezierCurveEase) EASINGMODE_EASEIN(EASINGMODE_EASEIN float64) *BezierCurveEase {
+	p := ba.ctx.Get("BezierCurveEase").New(EASINGMODE_EASEIN)
+	return BezierCurveEaseFromJSObject(p, ba.ctx)
+}
+
+// SetEASINGMODE_EASEIN sets the EASINGMODE_EASEIN property of class BezierCurveEase.
+//
+// https://doc.babylonjs.com/api/classes/babylon.beziercurveease#easingmode_easein
+func (b *BezierCurveEase) SetEASINGMODE_EASEIN(EASINGMODE_EASEIN float64) *BezierCurveEase {
+	p := ba.ctx.Get("BezierCurveEase").New(EASINGMODE_EASEIN)
+	return BezierCurveEaseFromJSObject(p, ba.ctx)
+}
+
+// EASINGMODE_EASEINOUT returns the EASINGMODE_EASEINOUT property of class BezierCurveEase.
+//
+// https://doc.babylonjs.com/api/classes/babylon.beziercurveease#easingmode_easeinout
+func (b *BezierCurveEase) EASINGMODE_EASEINOUT(EASINGMODE_EASEINOUT float64) *BezierCurveEase {
+	p := ba.ctx.Get("BezierCurveEase").New(EASINGMODE_EASEINOUT)
+	return BezierCurveEaseFromJSObject(p, ba.ctx)
+}
+
+// SetEASINGMODE_EASEINOUT sets the EASINGMODE_EASEINOUT property of class BezierCurveEase.
+//
+// https://doc.babylonjs.com/api/classes/babylon.beziercurveease#easingmode_easeinout
+func (b *BezierCurveEase) SetEASINGMODE_EASEINOUT(EASINGMODE_EASEINOUT float64) *BezierCurveEase {
+	p := ba.ctx.Get("BezierCurveEase").New(EASINGMODE_EASEINOUT)
+	return BezierCurveEaseFromJSObject(p, ba.ctx)
+}
+
+// EASINGMODE_EASEOUT returns the EASINGMODE_EASEOUT property of class BezierCurveEase.
+//
+// https://doc.babylonjs.com/api/classes/babylon.beziercurveease#easingmode_easeout
+func (b *BezierCurveEase) EASINGMODE_EASEOUT(EASINGMODE_EASEOUT float64) *BezierCurveEase {
+	p := ba.ctx.Get("BezierCurveEase").New(EASINGMODE_EASEOUT)
+	return BezierCurveEaseFromJSObject(p, ba.ctx)
+}
+
+// SetEASINGMODE_EASEOUT sets the EASINGMODE_EASEOUT property of class BezierCurveEase.
+//
+// https://doc.babylonjs.com/api/classes/babylon.beziercurveease#easingmode_easeout
+func (b *BezierCurveEase) SetEASINGMODE_EASEOUT(EASINGMODE_EASEOUT float64) *BezierCurveEase {
+	p := ba.ctx.Get("BezierCurveEase").New(EASINGMODE_EASEOUT)
+	return BezierCurveEaseFromJSObject(p, ba.ctx)
+}
+
+// X1 returns the X1 property of class BezierCurveEase.
+//
+// https://doc.babylonjs.com/api/classes/babylon.beziercurveease#x1
+func (b *BezierCurveEase) X1(x1 float64) *BezierCurveEase {
+	p := ba.ctx.Get("BezierCurveEase").New(x1)
+	return BezierCurveEaseFromJSObject(p, ba.ctx)
+}
+
+// SetX1 sets the X1 property of class BezierCurveEase.
+//
+// https://doc.babylonjs.com/api/classes/babylon.beziercurveease#x1
+func (b *BezierCurveEase) SetX1(x1 float64) *BezierCurveEase {
+	p := ba.ctx.Get("BezierCurveEase").New(x1)
+	return BezierCurveEaseFromJSObject(p, ba.ctx)
+}
+
+// X2 returns the X2 property of class BezierCurveEase.
+//
+// https://doc.babylonjs.com/api/classes/babylon.beziercurveease#x2
+func (b *BezierCurveEase) X2(x2 float64) *BezierCurveEase {
+	p := ba.ctx.Get("BezierCurveEase").New(x2)
+	return BezierCurveEaseFromJSObject(p, ba.ctx)
+}
+
+// SetX2 sets the X2 property of class BezierCurveEase.
+//
+// https://doc.babylonjs.com/api/classes/babylon.beziercurveease#x2
+func (b *BezierCurveEase) SetX2(x2 float64) *BezierCurveEase {
+	p := ba.ctx.Get("BezierCurveEase").New(x2)
+	return BezierCurveEaseFromJSObject(p, ba.ctx)
+}
+
+// Y1 returns the Y1 property of class BezierCurveEase.
+//
+// https://doc.babylonjs.com/api/classes/babylon.beziercurveease#y1
+func (b *BezierCurveEase) Y1(y1 float64) *BezierCurveEase {
+	p := ba.ctx.Get("BezierCurveEase").New(y1)
+	return BezierCurveEaseFromJSObject(p, ba.ctx)
+}
+
+// SetY1 sets the Y1 property of class BezierCurveEase.
+//
+// https://doc.babylonjs.com/api/classes/babylon.beziercurveease#y1
+func (b *BezierCurveEase) SetY1(y1 float64) *BezierCurveEase {
+	p := ba.ctx.Get("BezierCurveEase").New(y1)
+	return BezierCurveEaseFromJSObject(p, ba.ctx)
+}
+
+// Y2 returns the Y2 property of class BezierCurveEase.
+//
+// https://doc.babylonjs.com/api/classes/babylon.beziercurveease#y2
+func (b *BezierCurveEase) Y2(y2 float64) *BezierCurveEase {
+	p := ba.ctx.Get("BezierCurveEase").New(y2)
+	return BezierCurveEaseFromJSObject(p, ba.ctx)
+}
+
+// SetY2 sets the Y2 property of class BezierCurveEase.
+//
+// https://doc.babylonjs.com/api/classes/babylon.beziercurveease#y2
+func (b *BezierCurveEase) SetY2(y2 float64) *BezierCurveEase {
+	p := ba.ctx.Get("BezierCurveEase").New(y2)
+	return BezierCurveEaseFromJSObject(p, ba.ctx)
+}
+
+*/

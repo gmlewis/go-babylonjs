@@ -31,7 +31,7 @@ func DatabaseFromJSObject(p js.Value, ctx js.Value) *Database {
 
 // NewDatabaseOpts contains optional parameters for NewDatabase.
 type NewDatabaseOpts struct {
-	DisableManifestCheck *JSBool
+	DisableManifestCheck *bool
 }
 
 // NewDatabase returns a new Database object.
@@ -42,8 +42,134 @@ func (ba *Babylon) NewDatabase(urlToScene string, callbackManifestChecked func()
 		opts = &NewDatabaseOpts{}
 	}
 
-	p := ba.ctx.Get("Database").New(urlToScene, callbackManifestChecked, opts.DisableManifestCheck.JSObject())
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, urlToScene)
+	args = append(args, callbackManifestChecked)
+
+	if opts.DisableManifestCheck == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DisableManifestCheck)
+	}
+
+	p := ba.ctx.Get("Database").New(args...)
 	return DatabaseFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// DatabaseLoadFileOpts contains optional parameters for Database.LoadFile.
+type DatabaseLoadFileOpts struct {
+	ProgressCallBack *func()
+	ErrorCallback    *func()
+	UseArrayBuffer   *bool
+}
+
+// LoadFile calls the LoadFile method on the Database object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.database#loadfile
+func (d *Database) LoadFile(url string, sceneLoaded func(), opts *DatabaseLoadFileOpts) {
+	if opts == nil {
+		opts = &DatabaseLoadFileOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+3)
+
+	args = append(args, url)
+	args = append(args, sceneLoaded)
+
+	if opts.ProgressCallBack == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ProgressCallBack)
+	}
+	if opts.ErrorCallback == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ErrorCallback)
+	}
+	if opts.UseArrayBuffer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseArrayBuffer)
+	}
+
+	d.p.Call("loadFile", args...)
+}
+
+// LoadImage calls the LoadImage method on the Database object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.database#loadimage
+func (d *Database) LoadImage(url string, image js.Value) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, url)
+	args = append(args, image)
+
+	d.p.Call("loadImage", args...)
+}
+
+// Open calls the Open method on the Database object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.database#open
+func (d *Database) Open(successCallback func(), errorCallback func()) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, successCallback)
+	args = append(args, errorCallback)
+
+	d.p.Call("open", args...)
+}
+
+/*
+
+// EnableSceneOffline returns the EnableSceneOffline property of class Database.
+//
+// https://doc.babylonjs.com/api/classes/babylon.database#enablesceneoffline
+func (d *Database) EnableSceneOffline(enableSceneOffline bool) *Database {
+	p := ba.ctx.Get("Database").New(enableSceneOffline)
+	return DatabaseFromJSObject(p, ba.ctx)
+}
+
+// SetEnableSceneOffline sets the EnableSceneOffline property of class Database.
+//
+// https://doc.babylonjs.com/api/classes/babylon.database#enablesceneoffline
+func (d *Database) SetEnableSceneOffline(enableSceneOffline bool) *Database {
+	p := ba.ctx.Get("Database").New(enableSceneOffline)
+	return DatabaseFromJSObject(p, ba.ctx)
+}
+
+// EnableTexturesOffline returns the EnableTexturesOffline property of class Database.
+//
+// https://doc.babylonjs.com/api/classes/babylon.database#enabletexturesoffline
+func (d *Database) EnableTexturesOffline(enableTexturesOffline bool) *Database {
+	p := ba.ctx.Get("Database").New(enableTexturesOffline)
+	return DatabaseFromJSObject(p, ba.ctx)
+}
+
+// SetEnableTexturesOffline sets the EnableTexturesOffline property of class Database.
+//
+// https://doc.babylonjs.com/api/classes/babylon.database#enabletexturesoffline
+func (d *Database) SetEnableTexturesOffline(enableTexturesOffline bool) *Database {
+	p := ba.ctx.Get("Database").New(enableTexturesOffline)
+	return DatabaseFromJSObject(p, ba.ctx)
+}
+
+// IDBStorageEnabled returns the IDBStorageEnabled property of class Database.
+//
+// https://doc.babylonjs.com/api/classes/babylon.database#idbstorageenabled
+func (d *Database) IDBStorageEnabled(IDBStorageEnabled bool) *Database {
+	p := ba.ctx.Get("Database").New(IDBStorageEnabled)
+	return DatabaseFromJSObject(p, ba.ctx)
+}
+
+// SetIDBStorageEnabled sets the IDBStorageEnabled property of class Database.
+//
+// https://doc.babylonjs.com/api/classes/babylon.database#idbstorageenabled
+func (d *Database) SetIDBStorageEnabled(IDBStorageEnabled bool) *Database {
+	p := ba.ctx.Get("Database").New(IDBStorageEnabled)
+	return DatabaseFromJSObject(p, ba.ctx)
+}
+
+*/

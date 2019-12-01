@@ -27,4 +27,30 @@ func PromisePolyfillFromJSObject(p js.Value, ctx js.Value) *PromisePolyfill {
 	return &PromisePolyfill{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// PromisePolyfillApplyOpts contains optional parameters for PromisePolyfill.Apply.
+type PromisePolyfillApplyOpts struct {
+	Force *bool
+}
+
+// Apply calls the Apply method on the PromisePolyfill object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.promisepolyfill#apply
+func (p *PromisePolyfill) Apply(opts *PromisePolyfillApplyOpts) {
+	if opts == nil {
+		opts = &PromisePolyfillApplyOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Force == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Force)
+	}
+
+	p.p.Call("Apply", args...)
+}
+
+/*
+
+ */

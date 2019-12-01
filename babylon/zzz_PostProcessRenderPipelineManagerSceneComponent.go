@@ -31,8 +31,77 @@ func PostProcessRenderPipelineManagerSceneComponentFromJSObject(p js.Value, ctx 
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipelinemanagerscenecomponent
 func (ba *Babylon) NewPostProcessRenderPipelineManagerSceneComponent(scene *Scene) *PostProcessRenderPipelineManagerSceneComponent {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("PostProcessRenderPipelineManagerSceneComponent").New(args...)
+	return PostProcessRenderPipelineManagerSceneComponentFromJSObject(p, ba.ctx)
+}
+
+// Dispose calls the Dispose method on the PostProcessRenderPipelineManagerSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipelinemanagerscenecomponent#dispose
+func (p *PostProcessRenderPipelineManagerSceneComponent) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("dispose", args...)
+}
+
+// Rebuild calls the Rebuild method on the PostProcessRenderPipelineManagerSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipelinemanagerscenecomponent#rebuild
+func (p *PostProcessRenderPipelineManagerSceneComponent) Rebuild() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("rebuild", args...)
+}
+
+// Register calls the Register method on the PostProcessRenderPipelineManagerSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipelinemanagerscenecomponent#register
+func (p *PostProcessRenderPipelineManagerSceneComponent) Register() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("register", args...)
+}
+
+/*
+
+// Name returns the Name property of class PostProcessRenderPipelineManagerSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipelinemanagerscenecomponent#name
+func (p *PostProcessRenderPipelineManagerSceneComponent) Name(name string) *PostProcessRenderPipelineManagerSceneComponent {
+	p := ba.ctx.Get("PostProcessRenderPipelineManagerSceneComponent").New(name)
+	return PostProcessRenderPipelineManagerSceneComponentFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class PostProcessRenderPipelineManagerSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipelinemanagerscenecomponent#name
+func (p *PostProcessRenderPipelineManagerSceneComponent) SetName(name string) *PostProcessRenderPipelineManagerSceneComponent {
+	p := ba.ctx.Get("PostProcessRenderPipelineManagerSceneComponent").New(name)
+	return PostProcessRenderPipelineManagerSceneComponentFromJSObject(p, ba.ctx)
+}
+
+// Scene returns the Scene property of class PostProcessRenderPipelineManagerSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipelinemanagerscenecomponent#scene
+func (p *PostProcessRenderPipelineManagerSceneComponent) Scene(scene *Scene) *PostProcessRenderPipelineManagerSceneComponent {
 	p := ba.ctx.Get("PostProcessRenderPipelineManagerSceneComponent").New(scene.JSObject())
 	return PostProcessRenderPipelineManagerSceneComponentFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetScene sets the Scene property of class PostProcessRenderPipelineManagerSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipelinemanagerscenecomponent#scene
+func (p *PostProcessRenderPipelineManagerSceneComponent) SetScene(scene *Scene) *PostProcessRenderPipelineManagerSceneComponent {
+	p := ba.ctx.Get("PostProcessRenderPipelineManagerSceneComponent").New(scene.JSObject())
+	return PostProcessRenderPipelineManagerSceneComponentFromJSObject(p, ba.ctx)
+}
+
+*/

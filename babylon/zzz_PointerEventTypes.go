@@ -27,4 +27,118 @@ func PointerEventTypesFromJSObject(p js.Value, ctx js.Value) *PointerEventTypes 
 	return &PointerEventTypes{p: p, ctx: ctx}
 }
 
-// TODO: methods
+/*
+
+// POINTERDOUBLETAP returns the POINTERDOUBLETAP property of class PointerEventTypes.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointereventtypes#pointerdoubletap
+func (p *PointerEventTypes) POINTERDOUBLETAP(POINTERDOUBLETAP float64) *PointerEventTypes {
+	p := ba.ctx.Get("PointerEventTypes").New(POINTERDOUBLETAP)
+	return PointerEventTypesFromJSObject(p, ba.ctx)
+}
+
+// SetPOINTERDOUBLETAP sets the POINTERDOUBLETAP property of class PointerEventTypes.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointereventtypes#pointerdoubletap
+func (p *PointerEventTypes) SetPOINTERDOUBLETAP(POINTERDOUBLETAP float64) *PointerEventTypes {
+	p := ba.ctx.Get("PointerEventTypes").New(POINTERDOUBLETAP)
+	return PointerEventTypesFromJSObject(p, ba.ctx)
+}
+
+// POINTERDOWN returns the POINTERDOWN property of class PointerEventTypes.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointereventtypes#pointerdown
+func (p *PointerEventTypes) POINTERDOWN(POINTERDOWN float64) *PointerEventTypes {
+	p := ba.ctx.Get("PointerEventTypes").New(POINTERDOWN)
+	return PointerEventTypesFromJSObject(p, ba.ctx)
+}
+
+// SetPOINTERDOWN sets the POINTERDOWN property of class PointerEventTypes.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointereventtypes#pointerdown
+func (p *PointerEventTypes) SetPOINTERDOWN(POINTERDOWN float64) *PointerEventTypes {
+	p := ba.ctx.Get("PointerEventTypes").New(POINTERDOWN)
+	return PointerEventTypesFromJSObject(p, ba.ctx)
+}
+
+// POINTERMOVE returns the POINTERMOVE property of class PointerEventTypes.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointereventtypes#pointermove
+func (p *PointerEventTypes) POINTERMOVE(POINTERMOVE float64) *PointerEventTypes {
+	p := ba.ctx.Get("PointerEventTypes").New(POINTERMOVE)
+	return PointerEventTypesFromJSObject(p, ba.ctx)
+}
+
+// SetPOINTERMOVE sets the POINTERMOVE property of class PointerEventTypes.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointereventtypes#pointermove
+func (p *PointerEventTypes) SetPOINTERMOVE(POINTERMOVE float64) *PointerEventTypes {
+	p := ba.ctx.Get("PointerEventTypes").New(POINTERMOVE)
+	return PointerEventTypesFromJSObject(p, ba.ctx)
+}
+
+// POINTERPICK returns the POINTERPICK property of class PointerEventTypes.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointereventtypes#pointerpick
+func (p *PointerEventTypes) POINTERPICK(POINTERPICK float64) *PointerEventTypes {
+	p := ba.ctx.Get("PointerEventTypes").New(POINTERPICK)
+	return PointerEventTypesFromJSObject(p, ba.ctx)
+}
+
+// SetPOINTERPICK sets the POINTERPICK property of class PointerEventTypes.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointereventtypes#pointerpick
+func (p *PointerEventTypes) SetPOINTERPICK(POINTERPICK float64) *PointerEventTypes {
+	p := ba.ctx.Get("PointerEventTypes").New(POINTERPICK)
+	return PointerEventTypesFromJSObject(p, ba.ctx)
+}
+
+// POINTERTAP returns the POINTERTAP property of class PointerEventTypes.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointereventtypes#pointertap
+func (p *PointerEventTypes) POINTERTAP(POINTERTAP float64) *PointerEventTypes {
+	p := ba.ctx.Get("PointerEventTypes").New(POINTERTAP)
+	return PointerEventTypesFromJSObject(p, ba.ctx)
+}
+
+// SetPOINTERTAP sets the POINTERTAP property of class PointerEventTypes.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointereventtypes#pointertap
+func (p *PointerEventTypes) SetPOINTERTAP(POINTERTAP float64) *PointerEventTypes {
+	p := ba.ctx.Get("PointerEventTypes").New(POINTERTAP)
+	return PointerEventTypesFromJSObject(p, ba.ctx)
+}
+
+// POINTERUP returns the POINTERUP property of class PointerEventTypes.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointereventtypes#pointerup
+func (p *PointerEventTypes) POINTERUP(POINTERUP float64) *PointerEventTypes {
+	p := ba.ctx.Get("PointerEventTypes").New(POINTERUP)
+	return PointerEventTypesFromJSObject(p, ba.ctx)
+}
+
+// SetPOINTERUP sets the POINTERUP property of class PointerEventTypes.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointereventtypes#pointerup
+func (p *PointerEventTypes) SetPOINTERUP(POINTERUP float64) *PointerEventTypes {
+	p := ba.ctx.Get("PointerEventTypes").New(POINTERUP)
+	return PointerEventTypesFromJSObject(p, ba.ctx)
+}
+
+// POINTERWHEEL returns the POINTERWHEEL property of class PointerEventTypes.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointereventtypes#pointerwheel
+func (p *PointerEventTypes) POINTERWHEEL(POINTERWHEEL float64) *PointerEventTypes {
+	p := ba.ctx.Get("PointerEventTypes").New(POINTERWHEEL)
+	return PointerEventTypesFromJSObject(p, ba.ctx)
+}
+
+// SetPOINTERWHEEL sets the POINTERWHEEL property of class PointerEventTypes.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointereventtypes#pointerwheel
+func (p *PointerEventTypes) SetPOINTERWHEEL(POINTERWHEEL float64) *PointerEventTypes {
+	p := ba.ctx.Get("PointerEventTypes").New(POINTERWHEEL)
+	return PointerEventTypesFromJSObject(p, ba.ctx)
+}
+
+*/

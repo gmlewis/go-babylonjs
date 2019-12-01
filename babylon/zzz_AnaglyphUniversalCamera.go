@@ -33,8 +33,508 @@ func AnaglyphUniversalCameraFromJSObject(p js.Value, ctx js.Value) *AnaglyphUniv
 //
 // https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera
 func (ba *Babylon) NewAnaglyphUniversalCamera(name string, position *Vector3, interaxialDistance float64, scene *Scene) *AnaglyphUniversalCamera {
-	p := ba.ctx.Get("AnaglyphUniversalCamera").New(name, position.JSObject(), interaxialDistance, scene.JSObject())
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, name)
+	args = append(args, position.JSObject())
+	args = append(args, interaxialDistance)
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(args...)
 	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AnaglyphUniversalCameraAttachControlOpts contains optional parameters for AnaglyphUniversalCamera.AttachControl.
+type AnaglyphUniversalCameraAttachControlOpts struct {
+	NoPreventDefault *bool
+}
+
+// AttachControl calls the AttachControl method on the AnaglyphUniversalCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#attachcontrol
+func (a *AnaglyphUniversalCamera) AttachControl(element js.Value, opts *AnaglyphUniversalCameraAttachControlOpts) {
+	if opts == nil {
+		opts = &AnaglyphUniversalCameraAttachControlOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, element)
+
+	if opts.NoPreventDefault == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoPreventDefault)
+	}
+
+	a.p.Call("attachControl", args...)
+}
+
+// DetachControl calls the DetachControl method on the AnaglyphUniversalCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#detachcontrol
+func (a *AnaglyphUniversalCamera) DetachControl(element js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, element)
+
+	a.p.Call("detachControl", args...)
+}
+
+// Dispose calls the Dispose method on the AnaglyphUniversalCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#dispose
+func (a *AnaglyphUniversalCamera) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	a.p.Call("dispose", args...)
+}
+
+// GetClassName calls the GetClassName method on the AnaglyphUniversalCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#getclassname
+func (a *AnaglyphUniversalCamera) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetFrontPosition calls the GetFrontPosition method on the AnaglyphUniversalCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#getfrontposition
+func (a *AnaglyphUniversalCamera) GetFrontPosition(distance float64) *Vector3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, distance)
+
+	retVal := a.p.Call("getFrontPosition", args...)
+	return Vector3FromJSObject(retVal, a.ctx)
+}
+
+// GetTarget calls the GetTarget method on the AnaglyphUniversalCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#gettarget
+func (a *AnaglyphUniversalCamera) GetTarget() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("getTarget", args...)
+	return Vector3FromJSObject(retVal, a.ctx)
+}
+
+// SetTarget calls the SetTarget method on the AnaglyphUniversalCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#settarget
+func (a *AnaglyphUniversalCamera) SetTarget(target *Vector3) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, target.JSObject())
+
+	a.p.Call("setTarget", args...)
+}
+
+// StoreState calls the StoreState method on the AnaglyphUniversalCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#storestate
+func (a *AnaglyphUniversalCamera) StoreState() *Camera {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("storeState", args...)
+	return CameraFromJSObject(retVal, a.ctx)
+}
+
+/*
+
+// AngularSensibility returns the AngularSensibility property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#angularsensibility
+func (a *AnaglyphUniversalCamera) AngularSensibility(angularSensibility float64) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(angularSensibility)
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetAngularSensibility sets the AngularSensibility property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#angularsensibility
+func (a *AnaglyphUniversalCamera) SetAngularSensibility(angularSensibility float64) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(angularSensibility)
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// ApplyGravity returns the ApplyGravity property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#applygravity
+func (a *AnaglyphUniversalCamera) ApplyGravity(applyGravity bool) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(applyGravity)
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetApplyGravity sets the ApplyGravity property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#applygravity
+func (a *AnaglyphUniversalCamera) SetApplyGravity(applyGravity bool) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(applyGravity)
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// CameraDirection returns the CameraDirection property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#cameradirection
+func (a *AnaglyphUniversalCamera) CameraDirection(cameraDirection *Vector3) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(cameraDirection.JSObject())
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetCameraDirection sets the CameraDirection property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#cameradirection
+func (a *AnaglyphUniversalCamera) SetCameraDirection(cameraDirection *Vector3) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(cameraDirection.JSObject())
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// CameraRotation returns the CameraRotation property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#camerarotation
+func (a *AnaglyphUniversalCamera) CameraRotation(cameraRotation *Vector2) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(cameraRotation.JSObject())
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetCameraRotation sets the CameraRotation property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#camerarotation
+func (a *AnaglyphUniversalCamera) SetCameraRotation(cameraRotation *Vector2) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(cameraRotation.JSObject())
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// CheckCollisions returns the CheckCollisions property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#checkcollisions
+func (a *AnaglyphUniversalCamera) CheckCollisions(checkCollisions bool) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(checkCollisions)
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetCheckCollisions sets the CheckCollisions property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#checkcollisions
+func (a *AnaglyphUniversalCamera) SetCheckCollisions(checkCollisions bool) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(checkCollisions)
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// CollisionMask returns the CollisionMask property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#collisionmask
+func (a *AnaglyphUniversalCamera) CollisionMask(collisionMask float64) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(collisionMask)
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetCollisionMask sets the CollisionMask property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#collisionmask
+func (a *AnaglyphUniversalCamera) SetCollisionMask(collisionMask float64) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(collisionMask)
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// Ellipsoid returns the Ellipsoid property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#ellipsoid
+func (a *AnaglyphUniversalCamera) Ellipsoid(ellipsoid *Vector3) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(ellipsoid.JSObject())
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetEllipsoid sets the Ellipsoid property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#ellipsoid
+func (a *AnaglyphUniversalCamera) SetEllipsoid(ellipsoid *Vector3) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(ellipsoid.JSObject())
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// EllipsoidOffset returns the EllipsoidOffset property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#ellipsoidoffset
+func (a *AnaglyphUniversalCamera) EllipsoidOffset(ellipsoidOffset *Vector3) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(ellipsoidOffset.JSObject())
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetEllipsoidOffset sets the EllipsoidOffset property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#ellipsoidoffset
+func (a *AnaglyphUniversalCamera) SetEllipsoidOffset(ellipsoidOffset *Vector3) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(ellipsoidOffset.JSObject())
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// GamepadAngularSensibility returns the GamepadAngularSensibility property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#gamepadangularsensibility
+func (a *AnaglyphUniversalCamera) GamepadAngularSensibility(gamepadAngularSensibility float64) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(gamepadAngularSensibility)
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetGamepadAngularSensibility sets the GamepadAngularSensibility property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#gamepadangularsensibility
+func (a *AnaglyphUniversalCamera) SetGamepadAngularSensibility(gamepadAngularSensibility float64) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(gamepadAngularSensibility)
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// GamepadMoveSensibility returns the GamepadMoveSensibility property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#gamepadmovesensibility
+func (a *AnaglyphUniversalCamera) GamepadMoveSensibility(gamepadMoveSensibility float64) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(gamepadMoveSensibility)
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetGamepadMoveSensibility sets the GamepadMoveSensibility property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#gamepadmovesensibility
+func (a *AnaglyphUniversalCamera) SetGamepadMoveSensibility(gamepadMoveSensibility float64) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(gamepadMoveSensibility)
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// Inputs returns the Inputs property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#inputs
+func (a *AnaglyphUniversalCamera) Inputs(inputs *FreeCameraInputsManager) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(inputs.JSObject())
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetInputs sets the Inputs property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#inputs
+func (a *AnaglyphUniversalCamera) SetInputs(inputs *FreeCameraInputsManager) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(inputs.JSObject())
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// KeysDown returns the KeysDown property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#keysdown
+func (a *AnaglyphUniversalCamera) KeysDown(keysDown float64) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(keysDown)
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetKeysDown sets the KeysDown property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#keysdown
+func (a *AnaglyphUniversalCamera) SetKeysDown(keysDown float64) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(keysDown)
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// KeysLeft returns the KeysLeft property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#keysleft
+func (a *AnaglyphUniversalCamera) KeysLeft(keysLeft float64) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(keysLeft)
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetKeysLeft sets the KeysLeft property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#keysleft
+func (a *AnaglyphUniversalCamera) SetKeysLeft(keysLeft float64) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(keysLeft)
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// KeysRight returns the KeysRight property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#keysright
+func (a *AnaglyphUniversalCamera) KeysRight(keysRight float64) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(keysRight)
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetKeysRight sets the KeysRight property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#keysright
+func (a *AnaglyphUniversalCamera) SetKeysRight(keysRight float64) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(keysRight)
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// KeysUp returns the KeysUp property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#keysup
+func (a *AnaglyphUniversalCamera) KeysUp(keysUp float64) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(keysUp)
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetKeysUp sets the KeysUp property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#keysup
+func (a *AnaglyphUniversalCamera) SetKeysUp(keysUp float64) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(keysUp)
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// LockedTarget returns the LockedTarget property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#lockedtarget
+func (a *AnaglyphUniversalCamera) LockedTarget(lockedTarget interface{}) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(lockedTarget)
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetLockedTarget sets the LockedTarget property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#lockedtarget
+func (a *AnaglyphUniversalCamera) SetLockedTarget(lockedTarget interface{}) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(lockedTarget)
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// NoRotationConstraint returns the NoRotationConstraint property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#norotationconstraint
+func (a *AnaglyphUniversalCamera) NoRotationConstraint(noRotationConstraint bool) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(noRotationConstraint)
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetNoRotationConstraint sets the NoRotationConstraint property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#norotationconstraint
+func (a *AnaglyphUniversalCamera) SetNoRotationConstraint(noRotationConstraint bool) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(noRotationConstraint)
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// OnCollide returns the OnCollide property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#oncollide
+func (a *AnaglyphUniversalCamera) OnCollide(onCollide func()) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(onCollide)
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetOnCollide sets the OnCollide property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#oncollide
+func (a *AnaglyphUniversalCamera) SetOnCollide(onCollide func()) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(onCollide)
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// Rotation returns the Rotation property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#rotation
+func (a *AnaglyphUniversalCamera) Rotation(rotation *Vector3) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(rotation.JSObject())
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetRotation sets the Rotation property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#rotation
+func (a *AnaglyphUniversalCamera) SetRotation(rotation *Vector3) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(rotation.JSObject())
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// RotationQuaternion returns the RotationQuaternion property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#rotationquaternion
+func (a *AnaglyphUniversalCamera) RotationQuaternion(rotationQuaternion *Quaternion) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(rotationQuaternion.JSObject())
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetRotationQuaternion sets the RotationQuaternion property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#rotationquaternion
+func (a *AnaglyphUniversalCamera) SetRotationQuaternion(rotationQuaternion *Quaternion) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(rotationQuaternion.JSObject())
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// Speed returns the Speed property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#speed
+func (a *AnaglyphUniversalCamera) Speed(speed float64) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(speed)
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetSpeed sets the Speed property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#speed
+func (a *AnaglyphUniversalCamera) SetSpeed(speed float64) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(speed)
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// TouchAngularSensibility returns the TouchAngularSensibility property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#touchangularsensibility
+func (a *AnaglyphUniversalCamera) TouchAngularSensibility(touchAngularSensibility float64) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(touchAngularSensibility)
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetTouchAngularSensibility sets the TouchAngularSensibility property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#touchangularsensibility
+func (a *AnaglyphUniversalCamera) SetTouchAngularSensibility(touchAngularSensibility float64) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(touchAngularSensibility)
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// TouchMoveSensibility returns the TouchMoveSensibility property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#touchmovesensibility
+func (a *AnaglyphUniversalCamera) TouchMoveSensibility(touchMoveSensibility float64) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(touchMoveSensibility)
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetTouchMoveSensibility sets the TouchMoveSensibility property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#touchmovesensibility
+func (a *AnaglyphUniversalCamera) SetTouchMoveSensibility(touchMoveSensibility float64) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(touchMoveSensibility)
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// UpdateUpVectorFromRotation returns the UpdateUpVectorFromRotation property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#updateupvectorfromrotation
+func (a *AnaglyphUniversalCamera) UpdateUpVectorFromRotation(updateUpVectorFromRotation bool) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(updateUpVectorFromRotation)
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateUpVectorFromRotation sets the UpdateUpVectorFromRotation property of class AnaglyphUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.anaglyphuniversalcamera#updateupvectorfromrotation
+func (a *AnaglyphUniversalCamera) SetUpdateUpVectorFromRotation(updateUpVectorFromRotation bool) *AnaglyphUniversalCamera {
+	p := ba.ctx.Get("AnaglyphUniversalCamera").New(updateUpVectorFromRotation)
+	return AnaglyphUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+*/

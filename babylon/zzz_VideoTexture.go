@@ -32,13 +32,10 @@ func VideoTextureFromJSObject(p js.Value, ctx js.Value) *VideoTexture {
 
 // NewVideoTextureOpts contains optional parameters for NewVideoTexture.
 type NewVideoTextureOpts struct {
-	GenerateMipMaps *JSBool
-
-	InvertY *JSBool
-
-	SamplingMode *JSFloat64
-
-	Settings *JSValue
+	GenerateMipMaps *bool
+	InvertY         *bool
+	SamplingMode    *float64
+	Settings        *VideoTextureSettings
 }
 
 // NewVideoTexture returns a new VideoTexture object.
@@ -49,8 +46,1848 @@ func (ba *Babylon) NewVideoTexture(name string, src string, scene *Scene, opts *
 		opts = &NewVideoTextureOpts{}
 	}
 
-	p := ba.ctx.Get("VideoTexture").New(name, src, scene.JSObject(), opts.GenerateMipMaps.JSObject(), opts.InvertY.JSObject(), opts.SamplingMode.JSObject(), opts.Settings.JSObject())
+	args := make([]interface{}, 0, 3+4)
+
+	args = append(args, name)
+	args = append(args, src)
+	args = append(args, scene.JSObject())
+
+	if opts.GenerateMipMaps == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.GenerateMipMaps)
+	}
+	if opts.InvertY == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.InvertY)
+	}
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+	if opts.Settings == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Settings.JSObject())
+	}
+
+	p := ba.ctx.Get("VideoTexture").New(args...)
 	return VideoTextureFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Clone calls the Clone method on the VideoTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#clone
+func (v *VideoTexture) Clone() *Texture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("clone", args...)
+	return TextureFromJSObject(retVal, v.ctx)
+}
+
+// VideoTextureCreateFromBase64StringOpts contains optional parameters for VideoTexture.CreateFromBase64String.
+type VideoTextureCreateFromBase64StringOpts struct {
+	NoMipmap     *bool
+	InvertY      *bool
+	SamplingMode *float64
+	OnLoad       *func()
+	OnError      *func()
+	Format       *float64
+}
+
+// CreateFromBase64String calls the CreateFromBase64String method on the VideoTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#createfrombase64string
+func (v *VideoTexture) CreateFromBase64String(data string, name string, scene *Scene, opts *VideoTextureCreateFromBase64StringOpts) *Texture {
+	if opts == nil {
+		opts = &VideoTextureCreateFromBase64StringOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+6)
+
+	args = append(args, data)
+	args = append(args, name)
+	args = append(args, scene.JSObject())
+
+	if opts.NoMipmap == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoMipmap)
+	}
+	if opts.InvertY == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.InvertY)
+	}
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+	if opts.OnLoad == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnLoad)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+	if opts.Format == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Format)
+	}
+
+	retVal := v.p.Call("CreateFromBase64String", args...)
+	return TextureFromJSObject(retVal, v.ctx)
+}
+
+// CreateFromStreamAsync calls the CreateFromStreamAsync method on the VideoTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#createfromstreamasync
+func (v *VideoTexture) CreateFromStreamAsync(scene *Scene, stream *MediaStream) *VideoTexture {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, scene.JSObject())
+	args = append(args, stream.JSObject())
+
+	retVal := v.p.Call("CreateFromStreamAsync", args...)
+	return VideoTextureFromJSObject(retVal, v.ctx)
+}
+
+// VideoTextureCreateFromWebCamOpts contains optional parameters for VideoTexture.CreateFromWebCam.
+type VideoTextureCreateFromWebCamOpts struct {
+	AudioConstaints *MediaTrackConstraints
+}
+
+// CreateFromWebCam calls the CreateFromWebCam method on the VideoTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#createfromwebcam
+func (v *VideoTexture) CreateFromWebCam(scene *Scene, onReady func(), constraints js.Value, opts *VideoTextureCreateFromWebCamOpts) {
+	if opts == nil {
+		opts = &VideoTextureCreateFromWebCamOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, scene.JSObject())
+	args = append(args, onReady)
+	args = append(args, constraints)
+
+	if opts.AudioConstaints == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.AudioConstaints.JSObject())
+	}
+
+	v.p.Call("CreateFromWebCam", args...)
+}
+
+// VideoTextureCreateFromWebCamAsyncOpts contains optional parameters for VideoTexture.CreateFromWebCamAsync.
+type VideoTextureCreateFromWebCamAsyncOpts struct {
+	AudioConstaints *MediaTrackConstraints
+}
+
+// CreateFromWebCamAsync calls the CreateFromWebCamAsync method on the VideoTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#createfromwebcamasync
+func (v *VideoTexture) CreateFromWebCamAsync(scene *Scene, constraints js.Value, opts *VideoTextureCreateFromWebCamAsyncOpts) *VideoTexture {
+	if opts == nil {
+		opts = &VideoTextureCreateFromWebCamAsyncOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, scene.JSObject())
+	args = append(args, constraints)
+
+	if opts.AudioConstaints == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.AudioConstaints.JSObject())
+	}
+
+	retVal := v.p.Call("CreateFromWebCamAsync", args...)
+	return VideoTextureFromJSObject(retVal, v.ctx)
+}
+
+// Dispose calls the Dispose method on the VideoTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#dispose
+func (v *VideoTexture) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	v.p.Call("dispose", args...)
+}
+
+// GetBaseSize calls the GetBaseSize method on the VideoTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#getbasesize
+func (v *VideoTexture) GetBaseSize() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("getBaseSize", args...)
+	return retVal
+}
+
+// GetClassName calls the GetClassName method on the VideoTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#getclassname
+func (v *VideoTexture) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetInternalTexture calls the GetInternalTexture method on the VideoTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#getinternaltexture
+func (v *VideoTexture) GetInternalTexture() *InternalTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("getInternalTexture", args...)
+	return InternalTextureFromJSObject(retVal, v.ctx)
+}
+
+// GetReflectionTextureMatrix calls the GetReflectionTextureMatrix method on the VideoTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#getreflectiontexturematrix
+func (v *VideoTexture) GetReflectionTextureMatrix() *Matrix {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("getReflectionTextureMatrix", args...)
+	return MatrixFromJSObject(retVal, v.ctx)
+}
+
+// GetScene calls the GetScene method on the VideoTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#getscene
+func (v *VideoTexture) GetScene() *Scene {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("getScene", args...)
+	return SceneFromJSObject(retVal, v.ctx)
+}
+
+// GetSize calls the GetSize method on the VideoTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#getsize
+func (v *VideoTexture) GetSize() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("getSize", args...)
+	return retVal
+}
+
+// VideoTextureGetTextureMatrixOpts contains optional parameters for VideoTexture.GetTextureMatrix.
+type VideoTextureGetTextureMatrixOpts struct {
+	UBase *float64
+}
+
+// GetTextureMatrix calls the GetTextureMatrix method on the VideoTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#gettexturematrix
+func (v *VideoTexture) GetTextureMatrix(opts *VideoTextureGetTextureMatrixOpts) *Matrix {
+	if opts == nil {
+		opts = &VideoTextureGetTextureMatrixOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.UBase == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UBase)
+	}
+
+	retVal := v.p.Call("getTextureMatrix", args...)
+	return MatrixFromJSObject(retVal, v.ctx)
+}
+
+// IsReady calls the IsReady method on the VideoTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#isready
+func (v *VideoTexture) IsReady() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// IsReadyOrNotBlocking calls the IsReadyOrNotBlocking method on the VideoTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#isreadyornotblocking
+func (v *VideoTexture) IsReadyOrNotBlocking() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("isReadyOrNotBlocking", args...)
+	return retVal.Bool()
+}
+
+// VideoTextureLoadFromDataStringOpts contains optional parameters for VideoTexture.LoadFromDataString.
+type VideoTextureLoadFromDataStringOpts struct {
+	DeleteBuffer *bool
+	NoMipmap     *bool
+	InvertY      *bool
+	SamplingMode *float64
+	OnLoad       *func()
+	OnError      *func()
+	Format       *float64
+}
+
+// LoadFromDataString calls the LoadFromDataString method on the VideoTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#loadfromdatastring
+func (v *VideoTexture) LoadFromDataString(name string, buffer interface{}, scene *Scene, opts *VideoTextureLoadFromDataStringOpts) *Texture {
+	if opts == nil {
+		opts = &VideoTextureLoadFromDataStringOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+7)
+
+	args = append(args, name)
+	args = append(args, buffer)
+	args = append(args, scene.JSObject())
+
+	if opts.DeleteBuffer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DeleteBuffer)
+	}
+	if opts.NoMipmap == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoMipmap)
+	}
+	if opts.InvertY == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.InvertY)
+	}
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+	if opts.OnLoad == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnLoad)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+	if opts.Format == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Format)
+	}
+
+	retVal := v.p.Call("LoadFromDataString", args...)
+	return TextureFromJSObject(retVal, v.ctx)
+}
+
+// Parse calls the Parse method on the VideoTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#parse
+func (v *VideoTexture) Parse(parsedTexture interface{}, scene *Scene, rootUrl string) *BaseTexture {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, parsedTexture)
+	args = append(args, scene.JSObject())
+	args = append(args, rootUrl)
+
+	retVal := v.p.Call("Parse", args...)
+	return BaseTextureFromJSObject(retVal, v.ctx)
+}
+
+// VideoTextureReadPixelsOpts contains optional parameters for VideoTexture.ReadPixels.
+type VideoTextureReadPixelsOpts struct {
+	FaceIndex *float64
+	Level     *float64
+	Buffer    js.Value
+}
+
+// ReadPixels calls the ReadPixels method on the VideoTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#readpixels
+func (v *VideoTexture) ReadPixels(opts *VideoTextureReadPixelsOpts) js.Value {
+	if opts == nil {
+		opts = &VideoTextureReadPixelsOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+3)
+
+	if opts.FaceIndex == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FaceIndex)
+	}
+	if opts.Level == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Level)
+	}
+	if opts.Buffer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Buffer)
+	}
+
+	retVal := v.p.Call("readPixels", args...)
+	return retVal
+}
+
+// ReleaseInternalTexture calls the ReleaseInternalTexture method on the VideoTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#releaseinternaltexture
+func (v *VideoTexture) ReleaseInternalTexture() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	v.p.Call("releaseInternalTexture", args...)
+}
+
+// Scale calls the Scale method on the VideoTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#scale
+func (v *VideoTexture) Scale(ratio float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, ratio)
+
+	v.p.Call("scale", args...)
+}
+
+// Serialize calls the Serialize method on the VideoTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#serialize
+func (v *VideoTexture) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("serialize", args...)
+	return retVal
+}
+
+// ToString calls the ToString method on the VideoTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#tostring
+func (v *VideoTexture) ToString() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("toString", args...)
+	return retVal.String()
+}
+
+// Update calls the Update method on the VideoTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#update
+func (v *VideoTexture) Update() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	v.p.Call("update", args...)
+}
+
+// UpdateSamplingMode calls the UpdateSamplingMode method on the VideoTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#updatesamplingmode
+func (v *VideoTexture) UpdateSamplingMode(samplingMode float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, samplingMode)
+
+	v.p.Call("updateSamplingMode", args...)
+}
+
+// UpdateTexture calls the UpdateTexture method on the VideoTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#updatetexture
+func (v *VideoTexture) UpdateTexture(isVisible bool) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, isVisible)
+
+	v.p.Call("updateTexture", args...)
+}
+
+// UpdateURL calls the UpdateURL method on the VideoTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#updateurl
+func (v *VideoTexture) UpdateURL(url string) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, url)
+
+	v.p.Call("updateURL", args...)
+}
+
+// WhenAllReady calls the WhenAllReady method on the VideoTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#whenallready
+func (v *VideoTexture) WhenAllReady(textures *BaseTexture, callback func()) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, textures.JSObject())
+	args = append(args, callback)
+
+	v.p.Call("WhenAllReady", args...)
+}
+
+/*
+
+// Animations returns the Animations property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#animations
+func (v *VideoTexture) Animations(animations *Animation) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(animations.JSObject())
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#animations
+func (v *VideoTexture) SetAnimations(animations *Animation) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(animations.JSObject())
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// AnisotropicFilteringLevel returns the AnisotropicFilteringLevel property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#anisotropicfilteringlevel
+func (v *VideoTexture) AnisotropicFilteringLevel(anisotropicFilteringLevel float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(anisotropicFilteringLevel)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetAnisotropicFilteringLevel sets the AnisotropicFilteringLevel property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#anisotropicfilteringlevel
+func (v *VideoTexture) SetAnisotropicFilteringLevel(anisotropicFilteringLevel float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(anisotropicFilteringLevel)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// AutoUpdateTexture returns the AutoUpdateTexture property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#autoupdatetexture
+func (v *VideoTexture) AutoUpdateTexture(autoUpdateTexture bool) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(autoUpdateTexture)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetAutoUpdateTexture sets the AutoUpdateTexture property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#autoupdatetexture
+func (v *VideoTexture) SetAutoUpdateTexture(autoUpdateTexture bool) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(autoUpdateTexture)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// BILINEAR_SAMPLINGMODE returns the BILINEAR_SAMPLINGMODE property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#bilinear_samplingmode
+func (v *VideoTexture) BILINEAR_SAMPLINGMODE(BILINEAR_SAMPLINGMODE float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(BILINEAR_SAMPLINGMODE)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetBILINEAR_SAMPLINGMODE sets the BILINEAR_SAMPLINGMODE property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#bilinear_samplingmode
+func (v *VideoTexture) SetBILINEAR_SAMPLINGMODE(BILINEAR_SAMPLINGMODE float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(BILINEAR_SAMPLINGMODE)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// CLAMP_ADDRESSMODE returns the CLAMP_ADDRESSMODE property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#clamp_addressmode
+func (v *VideoTexture) CLAMP_ADDRESSMODE(CLAMP_ADDRESSMODE float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(CLAMP_ADDRESSMODE)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCLAMP_ADDRESSMODE sets the CLAMP_ADDRESSMODE property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#clamp_addressmode
+func (v *VideoTexture) SetCLAMP_ADDRESSMODE(CLAMP_ADDRESSMODE float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(CLAMP_ADDRESSMODE)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// CUBIC_MODE returns the CUBIC_MODE property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#cubic_mode
+func (v *VideoTexture) CUBIC_MODE(CUBIC_MODE float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(CUBIC_MODE)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCUBIC_MODE sets the CUBIC_MODE property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#cubic_mode
+func (v *VideoTexture) SetCUBIC_MODE(CUBIC_MODE float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(CUBIC_MODE)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// CanRescale returns the CanRescale property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#canrescale
+func (v *VideoTexture) CanRescale(canRescale bool) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(canRescale)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCanRescale sets the CanRescale property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#canrescale
+func (v *VideoTexture) SetCanRescale(canRescale bool) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(canRescale)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// CoordinatesIndex returns the CoordinatesIndex property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#coordinatesindex
+func (v *VideoTexture) CoordinatesIndex(coordinatesIndex float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(coordinatesIndex)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCoordinatesIndex sets the CoordinatesIndex property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#coordinatesindex
+func (v *VideoTexture) SetCoordinatesIndex(coordinatesIndex float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(coordinatesIndex)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// CoordinatesMode returns the CoordinatesMode property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#coordinatesmode
+func (v *VideoTexture) CoordinatesMode(coordinatesMode float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(coordinatesMode)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCoordinatesMode sets the CoordinatesMode property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#coordinatesmode
+func (v *VideoTexture) SetCoordinatesMode(coordinatesMode float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(coordinatesMode)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// DEFAULT_ANISOTROPIC_FILTERING_LEVEL returns the DEFAULT_ANISOTROPIC_FILTERING_LEVEL property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#default_anisotropic_filtering_level
+func (v *VideoTexture) DEFAULT_ANISOTROPIC_FILTERING_LEVEL(DEFAULT_ANISOTROPIC_FILTERING_LEVEL float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(DEFAULT_ANISOTROPIC_FILTERING_LEVEL)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetDEFAULT_ANISOTROPIC_FILTERING_LEVEL sets the DEFAULT_ANISOTROPIC_FILTERING_LEVEL property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#default_anisotropic_filtering_level
+func (v *VideoTexture) SetDEFAULT_ANISOTROPIC_FILTERING_LEVEL(DEFAULT_ANISOTROPIC_FILTERING_LEVEL float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(DEFAULT_ANISOTROPIC_FILTERING_LEVEL)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// DelayLoadState returns the DelayLoadState property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#delayloadstate
+func (v *VideoTexture) DelayLoadState(delayLoadState float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(delayLoadState)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetDelayLoadState sets the DelayLoadState property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#delayloadstate
+func (v *VideoTexture) SetDelayLoadState(delayLoadState float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(delayLoadState)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// EQUIRECTANGULAR_MODE returns the EQUIRECTANGULAR_MODE property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#equirectangular_mode
+func (v *VideoTexture) EQUIRECTANGULAR_MODE(EQUIRECTANGULAR_MODE float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(EQUIRECTANGULAR_MODE)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetEQUIRECTANGULAR_MODE sets the EQUIRECTANGULAR_MODE property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#equirectangular_mode
+func (v *VideoTexture) SetEQUIRECTANGULAR_MODE(EQUIRECTANGULAR_MODE float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(EQUIRECTANGULAR_MODE)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// EXPLICIT_MODE returns the EXPLICIT_MODE property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#explicit_mode
+func (v *VideoTexture) EXPLICIT_MODE(EXPLICIT_MODE float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(EXPLICIT_MODE)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetEXPLICIT_MODE sets the EXPLICIT_MODE property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#explicit_mode
+func (v *VideoTexture) SetEXPLICIT_MODE(EXPLICIT_MODE float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(EXPLICIT_MODE)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// FIXED_EQUIRECTANGULAR_MIRRORED_MODE returns the FIXED_EQUIRECTANGULAR_MIRRORED_MODE property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#fixed_equirectangular_mirrored_mode
+func (v *VideoTexture) FIXED_EQUIRECTANGULAR_MIRRORED_MODE(FIXED_EQUIRECTANGULAR_MIRRORED_MODE float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(FIXED_EQUIRECTANGULAR_MIRRORED_MODE)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetFIXED_EQUIRECTANGULAR_MIRRORED_MODE sets the FIXED_EQUIRECTANGULAR_MIRRORED_MODE property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#fixed_equirectangular_mirrored_mode
+func (v *VideoTexture) SetFIXED_EQUIRECTANGULAR_MIRRORED_MODE(FIXED_EQUIRECTANGULAR_MIRRORED_MODE float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(FIXED_EQUIRECTANGULAR_MIRRORED_MODE)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// FIXED_EQUIRECTANGULAR_MODE returns the FIXED_EQUIRECTANGULAR_MODE property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#fixed_equirectangular_mode
+func (v *VideoTexture) FIXED_EQUIRECTANGULAR_MODE(FIXED_EQUIRECTANGULAR_MODE float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(FIXED_EQUIRECTANGULAR_MODE)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetFIXED_EQUIRECTANGULAR_MODE sets the FIXED_EQUIRECTANGULAR_MODE property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#fixed_equirectangular_mode
+func (v *VideoTexture) SetFIXED_EQUIRECTANGULAR_MODE(FIXED_EQUIRECTANGULAR_MODE float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(FIXED_EQUIRECTANGULAR_MODE)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// GammaSpace returns the GammaSpace property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#gammaspace
+func (v *VideoTexture) GammaSpace(gammaSpace bool) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(gammaSpace)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetGammaSpace sets the GammaSpace property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#gammaspace
+func (v *VideoTexture) SetGammaSpace(gammaSpace bool) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(gammaSpace)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// GetAlphaFromRGB returns the GetAlphaFromRGB property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#getalphafromrgb
+func (v *VideoTexture) GetAlphaFromRGB(getAlphaFromRGB bool) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(getAlphaFromRGB)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetGetAlphaFromRGB sets the GetAlphaFromRGB property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#getalphafromrgb
+func (v *VideoTexture) SetGetAlphaFromRGB(getAlphaFromRGB bool) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(getAlphaFromRGB)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// HasAlpha returns the HasAlpha property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#hasalpha
+func (v *VideoTexture) HasAlpha(hasAlpha bool) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(hasAlpha)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetHasAlpha sets the HasAlpha property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#hasalpha
+func (v *VideoTexture) SetHasAlpha(hasAlpha bool) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(hasAlpha)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// INVCUBIC_MODE returns the INVCUBIC_MODE property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#invcubic_mode
+func (v *VideoTexture) INVCUBIC_MODE(INVCUBIC_MODE float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(INVCUBIC_MODE)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetINVCUBIC_MODE sets the INVCUBIC_MODE property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#invcubic_mode
+func (v *VideoTexture) SetINVCUBIC_MODE(INVCUBIC_MODE float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(INVCUBIC_MODE)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#inspectablecustomproperties
+func (v *VideoTexture) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(inspectableCustomProperties.JSObject())
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#inspectablecustomproperties
+func (v *VideoTexture) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(inspectableCustomProperties.JSObject())
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// InvertY returns the InvertY property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#inverty
+func (v *VideoTexture) InvertY(invertY bool) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(invertY)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetInvertY sets the InvertY property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#inverty
+func (v *VideoTexture) SetInvertY(invertY bool) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(invertY)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// InvertZ returns the InvertZ property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#invertz
+func (v *VideoTexture) InvertZ(invertZ bool) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(invertZ)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetInvertZ sets the InvertZ property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#invertz
+func (v *VideoTexture) SetInvertZ(invertZ bool) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(invertZ)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// IrradianceTexture returns the IrradianceTexture property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#irradiancetexture
+func (v *VideoTexture) IrradianceTexture(irradianceTexture *BaseTexture) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(irradianceTexture.JSObject())
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIrradianceTexture sets the IrradianceTexture property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#irradiancetexture
+func (v *VideoTexture) SetIrradianceTexture(irradianceTexture *BaseTexture) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(irradianceTexture.JSObject())
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// Is2DArray returns the Is2DArray property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#is2darray
+func (v *VideoTexture) Is2DArray(is2DArray bool) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(is2DArray)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIs2DArray sets the Is2DArray property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#is2darray
+func (v *VideoTexture) SetIs2DArray(is2DArray bool) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(is2DArray)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// Is3D returns the Is3D property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#is3d
+func (v *VideoTexture) Is3D(is3D bool) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(is3D)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIs3D sets the Is3D property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#is3d
+func (v *VideoTexture) SetIs3D(is3D bool) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(is3D)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// IsBlocking returns the IsBlocking property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#isblocking
+func (v *VideoTexture) IsBlocking(isBlocking bool) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(isBlocking)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsBlocking sets the IsBlocking property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#isblocking
+func (v *VideoTexture) SetIsBlocking(isBlocking bool) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(isBlocking)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// IsCube returns the IsCube property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#iscube
+func (v *VideoTexture) IsCube(isCube bool) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(isCube)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsCube sets the IsCube property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#iscube
+func (v *VideoTexture) SetIsCube(isCube bool) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(isCube)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// IsRGBD returns the IsRGBD property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#isrgbd
+func (v *VideoTexture) IsRGBD(isRGBD bool) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(isRGBD)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsRGBD sets the IsRGBD property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#isrgbd
+func (v *VideoTexture) SetIsRGBD(isRGBD bool) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(isRGBD)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// IsRenderTarget returns the IsRenderTarget property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#isrendertarget
+func (v *VideoTexture) IsRenderTarget(isRenderTarget bool) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(isRenderTarget)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsRenderTarget sets the IsRenderTarget property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#isrendertarget
+func (v *VideoTexture) SetIsRenderTarget(isRenderTarget bool) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(isRenderTarget)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_LINEAR returns the LINEAR_LINEAR property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#linear_linear
+func (v *VideoTexture) LINEAR_LINEAR(LINEAR_LINEAR float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(LINEAR_LINEAR)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_LINEAR sets the LINEAR_LINEAR property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#linear_linear
+func (v *VideoTexture) SetLINEAR_LINEAR(LINEAR_LINEAR float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(LINEAR_LINEAR)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_LINEAR_MIPLINEAR returns the LINEAR_LINEAR_MIPLINEAR property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#linear_linear_miplinear
+func (v *VideoTexture) LINEAR_LINEAR_MIPLINEAR(LINEAR_LINEAR_MIPLINEAR float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(LINEAR_LINEAR_MIPLINEAR)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_LINEAR_MIPLINEAR sets the LINEAR_LINEAR_MIPLINEAR property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#linear_linear_miplinear
+func (v *VideoTexture) SetLINEAR_LINEAR_MIPLINEAR(LINEAR_LINEAR_MIPLINEAR float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(LINEAR_LINEAR_MIPLINEAR)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_LINEAR_MIPNEAREST returns the LINEAR_LINEAR_MIPNEAREST property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#linear_linear_mipnearest
+func (v *VideoTexture) LINEAR_LINEAR_MIPNEAREST(LINEAR_LINEAR_MIPNEAREST float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(LINEAR_LINEAR_MIPNEAREST)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_LINEAR_MIPNEAREST sets the LINEAR_LINEAR_MIPNEAREST property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#linear_linear_mipnearest
+func (v *VideoTexture) SetLINEAR_LINEAR_MIPNEAREST(LINEAR_LINEAR_MIPNEAREST float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(LINEAR_LINEAR_MIPNEAREST)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_NEAREST returns the LINEAR_NEAREST property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#linear_nearest
+func (v *VideoTexture) LINEAR_NEAREST(LINEAR_NEAREST float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(LINEAR_NEAREST)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_NEAREST sets the LINEAR_NEAREST property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#linear_nearest
+func (v *VideoTexture) SetLINEAR_NEAREST(LINEAR_NEAREST float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(LINEAR_NEAREST)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_NEAREST_MIPLINEAR returns the LINEAR_NEAREST_MIPLINEAR property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#linear_nearest_miplinear
+func (v *VideoTexture) LINEAR_NEAREST_MIPLINEAR(LINEAR_NEAREST_MIPLINEAR float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(LINEAR_NEAREST_MIPLINEAR)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_NEAREST_MIPLINEAR sets the LINEAR_NEAREST_MIPLINEAR property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#linear_nearest_miplinear
+func (v *VideoTexture) SetLINEAR_NEAREST_MIPLINEAR(LINEAR_NEAREST_MIPLINEAR float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(LINEAR_NEAREST_MIPLINEAR)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_NEAREST_MIPNEAREST returns the LINEAR_NEAREST_MIPNEAREST property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#linear_nearest_mipnearest
+func (v *VideoTexture) LINEAR_NEAREST_MIPNEAREST(LINEAR_NEAREST_MIPNEAREST float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(LINEAR_NEAREST_MIPNEAREST)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_NEAREST_MIPNEAREST sets the LINEAR_NEAREST_MIPNEAREST property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#linear_nearest_mipnearest
+func (v *VideoTexture) SetLINEAR_NEAREST_MIPNEAREST(LINEAR_NEAREST_MIPNEAREST float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(LINEAR_NEAREST_MIPNEAREST)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// Level returns the Level property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#level
+func (v *VideoTexture) Level(level float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(level)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLevel sets the Level property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#level
+func (v *VideoTexture) SetLevel(level float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(level)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// LinearSpecularLOD returns the LinearSpecularLOD property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#linearspecularlod
+func (v *VideoTexture) LinearSpecularLOD(linearSpecularLOD bool) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(linearSpecularLOD)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLinearSpecularLOD sets the LinearSpecularLOD property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#linearspecularlod
+func (v *VideoTexture) SetLinearSpecularLOD(linearSpecularLOD bool) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(linearSpecularLOD)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// LodGenerationOffset returns the LodGenerationOffset property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#lodgenerationoffset
+func (v *VideoTexture) LodGenerationOffset(lodGenerationOffset float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(lodGenerationOffset)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLodGenerationOffset sets the LodGenerationOffset property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#lodgenerationoffset
+func (v *VideoTexture) SetLodGenerationOffset(lodGenerationOffset float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(lodGenerationOffset)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// LodGenerationScale returns the LodGenerationScale property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#lodgenerationscale
+func (v *VideoTexture) LodGenerationScale(lodGenerationScale float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(lodGenerationScale)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLodGenerationScale sets the LodGenerationScale property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#lodgenerationscale
+func (v *VideoTexture) SetLodGenerationScale(lodGenerationScale float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(lodGenerationScale)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// MIRROR_ADDRESSMODE returns the MIRROR_ADDRESSMODE property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#mirror_addressmode
+func (v *VideoTexture) MIRROR_ADDRESSMODE(MIRROR_ADDRESSMODE float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(MIRROR_ADDRESSMODE)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetMIRROR_ADDRESSMODE sets the MIRROR_ADDRESSMODE property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#mirror_addressmode
+func (v *VideoTexture) SetMIRROR_ADDRESSMODE(MIRROR_ADDRESSMODE float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(MIRROR_ADDRESSMODE)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#metadata
+func (v *VideoTexture) Metadata(metadata interface{}) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(metadata)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#metadata
+func (v *VideoTexture) SetMetadata(metadata interface{}) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(metadata)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_LINEAR returns the NEAREST_LINEAR property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#nearest_linear
+func (v *VideoTexture) NEAREST_LINEAR(NEAREST_LINEAR float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(NEAREST_LINEAR)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_LINEAR sets the NEAREST_LINEAR property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#nearest_linear
+func (v *VideoTexture) SetNEAREST_LINEAR(NEAREST_LINEAR float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(NEAREST_LINEAR)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_LINEAR_MIPLINEAR returns the NEAREST_LINEAR_MIPLINEAR property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#nearest_linear_miplinear
+func (v *VideoTexture) NEAREST_LINEAR_MIPLINEAR(NEAREST_LINEAR_MIPLINEAR float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(NEAREST_LINEAR_MIPLINEAR)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_LINEAR_MIPLINEAR sets the NEAREST_LINEAR_MIPLINEAR property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#nearest_linear_miplinear
+func (v *VideoTexture) SetNEAREST_LINEAR_MIPLINEAR(NEAREST_LINEAR_MIPLINEAR float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(NEAREST_LINEAR_MIPLINEAR)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_LINEAR_MIPNEAREST returns the NEAREST_LINEAR_MIPNEAREST property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#nearest_linear_mipnearest
+func (v *VideoTexture) NEAREST_LINEAR_MIPNEAREST(NEAREST_LINEAR_MIPNEAREST float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(NEAREST_LINEAR_MIPNEAREST)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_LINEAR_MIPNEAREST sets the NEAREST_LINEAR_MIPNEAREST property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#nearest_linear_mipnearest
+func (v *VideoTexture) SetNEAREST_LINEAR_MIPNEAREST(NEAREST_LINEAR_MIPNEAREST float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(NEAREST_LINEAR_MIPNEAREST)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_NEAREST returns the NEAREST_NEAREST property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#nearest_nearest
+func (v *VideoTexture) NEAREST_NEAREST(NEAREST_NEAREST float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(NEAREST_NEAREST)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_NEAREST sets the NEAREST_NEAREST property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#nearest_nearest
+func (v *VideoTexture) SetNEAREST_NEAREST(NEAREST_NEAREST float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(NEAREST_NEAREST)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_NEAREST_MIPLINEAR returns the NEAREST_NEAREST_MIPLINEAR property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#nearest_nearest_miplinear
+func (v *VideoTexture) NEAREST_NEAREST_MIPLINEAR(NEAREST_NEAREST_MIPLINEAR float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(NEAREST_NEAREST_MIPLINEAR)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_NEAREST_MIPLINEAR sets the NEAREST_NEAREST_MIPLINEAR property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#nearest_nearest_miplinear
+func (v *VideoTexture) SetNEAREST_NEAREST_MIPLINEAR(NEAREST_NEAREST_MIPLINEAR float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(NEAREST_NEAREST_MIPLINEAR)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_NEAREST_MIPNEAREST returns the NEAREST_NEAREST_MIPNEAREST property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#nearest_nearest_mipnearest
+func (v *VideoTexture) NEAREST_NEAREST_MIPNEAREST(NEAREST_NEAREST_MIPNEAREST float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(NEAREST_NEAREST_MIPNEAREST)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_NEAREST_MIPNEAREST sets the NEAREST_NEAREST_MIPNEAREST property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#nearest_nearest_mipnearest
+func (v *VideoTexture) SetNEAREST_NEAREST_MIPNEAREST(NEAREST_NEAREST_MIPNEAREST float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(NEAREST_NEAREST_MIPNEAREST)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_SAMPLINGMODE returns the NEAREST_SAMPLINGMODE property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#nearest_samplingmode
+func (v *VideoTexture) NEAREST_SAMPLINGMODE(NEAREST_SAMPLINGMODE float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(NEAREST_SAMPLINGMODE)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_SAMPLINGMODE sets the NEAREST_SAMPLINGMODE property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#nearest_samplingmode
+func (v *VideoTexture) SetNEAREST_SAMPLINGMODE(NEAREST_SAMPLINGMODE float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(NEAREST_SAMPLINGMODE)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#name
+func (v *VideoTexture) Name(name string) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(name)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#name
+func (v *VideoTexture) SetName(name string) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(name)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// NoMipmap returns the NoMipmap property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#nomipmap
+func (v *VideoTexture) NoMipmap(noMipmap bool) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(noMipmap)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNoMipmap sets the NoMipmap property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#nomipmap
+func (v *VideoTexture) SetNoMipmap(noMipmap bool) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(noMipmap)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// OnDispose returns the OnDispose property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#ondispose
+func (v *VideoTexture) OnDispose(onDispose func()) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(onDispose)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnDispose sets the OnDispose property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#ondispose
+func (v *VideoTexture) SetOnDispose(onDispose func()) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(onDispose)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// OnDisposeObservable returns the OnDisposeObservable property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#ondisposeobservable
+func (v *VideoTexture) OnDisposeObservable(onDisposeObservable *Observable) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(onDisposeObservable.JSObject())
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnDisposeObservable sets the OnDisposeObservable property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#ondisposeobservable
+func (v *VideoTexture) SetOnDisposeObservable(onDisposeObservable *Observable) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(onDisposeObservable.JSObject())
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// OnLoadObservable returns the OnLoadObservable property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#onloadobservable
+func (v *VideoTexture) OnLoadObservable(onLoadObservable *Observable) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(onLoadObservable.JSObject())
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnLoadObservable sets the OnLoadObservable property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#onloadobservable
+func (v *VideoTexture) SetOnLoadObservable(onLoadObservable *Observable) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(onLoadObservable.JSObject())
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// OnUserActionRequestedObservable returns the OnUserActionRequestedObservable property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#onuseractionrequestedobservable
+func (v *VideoTexture) OnUserActionRequestedObservable(onUserActionRequestedObservable *Observable) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(onUserActionRequestedObservable.JSObject())
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnUserActionRequestedObservable sets the OnUserActionRequestedObservable property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#onuseractionrequestedobservable
+func (v *VideoTexture) SetOnUserActionRequestedObservable(onUserActionRequestedObservable *Observable) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(onUserActionRequestedObservable.JSObject())
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// PLANAR_MODE returns the PLANAR_MODE property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#planar_mode
+func (v *VideoTexture) PLANAR_MODE(PLANAR_MODE float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(PLANAR_MODE)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetPLANAR_MODE sets the PLANAR_MODE property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#planar_mode
+func (v *VideoTexture) SetPLANAR_MODE(PLANAR_MODE float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(PLANAR_MODE)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// PROJECTION_MODE returns the PROJECTION_MODE property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#projection_mode
+func (v *VideoTexture) PROJECTION_MODE(PROJECTION_MODE float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(PROJECTION_MODE)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetPROJECTION_MODE sets the PROJECTION_MODE property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#projection_mode
+func (v *VideoTexture) SetPROJECTION_MODE(PROJECTION_MODE float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(PROJECTION_MODE)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// ReservedDataStore returns the ReservedDataStore property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#reserveddatastore
+func (v *VideoTexture) ReservedDataStore(reservedDataStore interface{}) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(reservedDataStore)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetReservedDataStore sets the ReservedDataStore property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#reserveddatastore
+func (v *VideoTexture) SetReservedDataStore(reservedDataStore interface{}) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(reservedDataStore)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SKYBOX_MODE returns the SKYBOX_MODE property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#skybox_mode
+func (v *VideoTexture) SKYBOX_MODE(SKYBOX_MODE float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(SKYBOX_MODE)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetSKYBOX_MODE sets the SKYBOX_MODE property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#skybox_mode
+func (v *VideoTexture) SetSKYBOX_MODE(SKYBOX_MODE float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(SKYBOX_MODE)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SPHERICAL_MODE returns the SPHERICAL_MODE property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#spherical_mode
+func (v *VideoTexture) SPHERICAL_MODE(SPHERICAL_MODE float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(SPHERICAL_MODE)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetSPHERICAL_MODE sets the SPHERICAL_MODE property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#spherical_mode
+func (v *VideoTexture) SetSPHERICAL_MODE(SPHERICAL_MODE float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(SPHERICAL_MODE)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SamplingMode returns the SamplingMode property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#samplingmode
+func (v *VideoTexture) SamplingMode(samplingMode float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(samplingMode)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetSamplingMode sets the SamplingMode property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#samplingmode
+func (v *VideoTexture) SetSamplingMode(samplingMode float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(samplingMode)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SerializeBuffers returns the SerializeBuffers property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#serializebuffers
+func (v *VideoTexture) SerializeBuffers(SerializeBuffers bool) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(SerializeBuffers)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetSerializeBuffers sets the SerializeBuffers property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#serializebuffers
+func (v *VideoTexture) SetSerializeBuffers(SerializeBuffers bool) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(SerializeBuffers)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// TRILINEAR_SAMPLINGMODE returns the TRILINEAR_SAMPLINGMODE property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#trilinear_samplingmode
+func (v *VideoTexture) TRILINEAR_SAMPLINGMODE(TRILINEAR_SAMPLINGMODE float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(TRILINEAR_SAMPLINGMODE)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetTRILINEAR_SAMPLINGMODE sets the TRILINEAR_SAMPLINGMODE property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#trilinear_samplingmode
+func (v *VideoTexture) SetTRILINEAR_SAMPLINGMODE(TRILINEAR_SAMPLINGMODE float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(TRILINEAR_SAMPLINGMODE)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// TextureFormat returns the TextureFormat property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#textureformat
+func (v *VideoTexture) TextureFormat(textureFormat float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(textureFormat)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetTextureFormat sets the TextureFormat property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#textureformat
+func (v *VideoTexture) SetTextureFormat(textureFormat float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(textureFormat)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// TextureType returns the TextureType property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#texturetype
+func (v *VideoTexture) TextureType(textureType float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(textureType)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetTextureType sets the TextureType property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#texturetype
+func (v *VideoTexture) SetTextureType(textureType float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(textureType)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// UAng returns the UAng property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#uang
+func (v *VideoTexture) UAng(uAng float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(uAng)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUAng sets the UAng property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#uang
+func (v *VideoTexture) SetUAng(uAng float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(uAng)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// UOffset returns the UOffset property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#uoffset
+func (v *VideoTexture) UOffset(uOffset float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(uOffset)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUOffset sets the UOffset property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#uoffset
+func (v *VideoTexture) SetUOffset(uOffset float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(uOffset)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// URotationCenter returns the URotationCenter property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#urotationcenter
+func (v *VideoTexture) URotationCenter(uRotationCenter float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(uRotationCenter)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetURotationCenter sets the URotationCenter property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#urotationcenter
+func (v *VideoTexture) SetURotationCenter(uRotationCenter float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(uRotationCenter)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// UScale returns the UScale property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#uscale
+func (v *VideoTexture) UScale(uScale float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(uScale)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUScale sets the UScale property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#uscale
+func (v *VideoTexture) SetUScale(uScale float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(uScale)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// Uid returns the Uid property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#uid
+func (v *VideoTexture) Uid(uid string) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(uid)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUid sets the Uid property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#uid
+func (v *VideoTexture) SetUid(uid string) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(uid)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#uniqueid
+func (v *VideoTexture) UniqueId(uniqueId float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(uniqueId)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#uniqueid
+func (v *VideoTexture) SetUniqueId(uniqueId float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(uniqueId)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// Url returns the Url property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#url
+func (v *VideoTexture) Url(url string) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(url)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUrl sets the Url property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#url
+func (v *VideoTexture) SetUrl(url string) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(url)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// UseSerializedUrlIfAny returns the UseSerializedUrlIfAny property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#useserializedurlifany
+func (v *VideoTexture) UseSerializedUrlIfAny(UseSerializedUrlIfAny bool) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(UseSerializedUrlIfAny)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUseSerializedUrlIfAny sets the UseSerializedUrlIfAny property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#useserializedurlifany
+func (v *VideoTexture) SetUseSerializedUrlIfAny(UseSerializedUrlIfAny bool) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(UseSerializedUrlIfAny)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// VAng returns the VAng property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#vang
+func (v *VideoTexture) VAng(vAng float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(vAng)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetVAng sets the VAng property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#vang
+func (v *VideoTexture) SetVAng(vAng float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(vAng)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// VOffset returns the VOffset property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#voffset
+func (v *VideoTexture) VOffset(vOffset float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(vOffset)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetVOffset sets the VOffset property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#voffset
+func (v *VideoTexture) SetVOffset(vOffset float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(vOffset)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// VRotationCenter returns the VRotationCenter property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#vrotationcenter
+func (v *VideoTexture) VRotationCenter(vRotationCenter float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(vRotationCenter)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetVRotationCenter sets the VRotationCenter property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#vrotationcenter
+func (v *VideoTexture) SetVRotationCenter(vRotationCenter float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(vRotationCenter)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// VScale returns the VScale property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#vscale
+func (v *VideoTexture) VScale(vScale float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(vScale)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetVScale sets the VScale property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#vscale
+func (v *VideoTexture) SetVScale(vScale float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(vScale)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// Video returns the Video property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#video
+func (v *VideoTexture) Video(video js.Value) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(video)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetVideo sets the Video property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#video
+func (v *VideoTexture) SetVideo(video js.Value) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(video)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// WAng returns the WAng property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#wang
+func (v *VideoTexture) WAng(wAng float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(wAng)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWAng sets the WAng property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#wang
+func (v *VideoTexture) SetWAng(wAng float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(wAng)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// WRAP_ADDRESSMODE returns the WRAP_ADDRESSMODE property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#wrap_addressmode
+func (v *VideoTexture) WRAP_ADDRESSMODE(WRAP_ADDRESSMODE float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(WRAP_ADDRESSMODE)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWRAP_ADDRESSMODE sets the WRAP_ADDRESSMODE property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#wrap_addressmode
+func (v *VideoTexture) SetWRAP_ADDRESSMODE(WRAP_ADDRESSMODE float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(WRAP_ADDRESSMODE)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// WRotationCenter returns the WRotationCenter property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#wrotationcenter
+func (v *VideoTexture) WRotationCenter(wRotationCenter float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(wRotationCenter)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWRotationCenter sets the WRotationCenter property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#wrotationcenter
+func (v *VideoTexture) SetWRotationCenter(wRotationCenter float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(wRotationCenter)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// WrapR returns the WrapR property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#wrapr
+func (v *VideoTexture) WrapR(wrapR float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(wrapR)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWrapR sets the WrapR property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#wrapr
+func (v *VideoTexture) SetWrapR(wrapR float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(wrapR)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// WrapU returns the WrapU property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#wrapu
+func (v *VideoTexture) WrapU(wrapU float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(wrapU)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWrapU sets the WrapU property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#wrapu
+func (v *VideoTexture) SetWrapU(wrapU float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(wrapU)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// WrapV returns the WrapV property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#wrapv
+func (v *VideoTexture) WrapV(wrapV float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(wrapV)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWrapV sets the WrapV property of class VideoTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videotexture#wrapv
+func (v *VideoTexture) SetWrapV(wrapV float64) *VideoTexture {
+	p := ba.ctx.Get("VideoTexture").New(wrapV)
+	return VideoTextureFromJSObject(p, ba.ctx)
+}
+
+*/

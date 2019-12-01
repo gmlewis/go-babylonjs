@@ -27,4 +27,20 @@ func CanvasGeneratorFromJSObject(p js.Value, ctx js.Value) *CanvasGenerator {
 	return &CanvasGenerator{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// CreateCanvas calls the CreateCanvas method on the CanvasGenerator object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.canvasgenerator#createcanvas
+func (c *CanvasGenerator) CreateCanvas(width float64, height float64) js.Value {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, width)
+	args = append(args, height)
+
+	retVal := c.p.Call("CreateCanvas", args...)
+	return retVal
+}
+
+/*
+
+ */

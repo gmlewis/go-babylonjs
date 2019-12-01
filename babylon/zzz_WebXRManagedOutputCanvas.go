@@ -29,11 +29,9 @@ func WebXRManagedOutputCanvasFromJSObject(p js.Value, ctx js.Value) *WebXRManage
 
 // NewWebXRManagedOutputCanvasOpts contains optional parameters for NewWebXRManagedOutputCanvas.
 type NewWebXRManagedOutputCanvasOpts struct {
-	Canvas *JSValue
-
+	Canvas                   js.Value
 	OnStateChangedObservable *Observable
-
-	Configuration *JSValue
+	Configuration            *WebXRState
 }
 
 // NewWebXRManagedOutputCanvas returns a new WebXRManagedOutputCanvas object.
@@ -44,8 +42,85 @@ func (ba *Babylon) NewWebXRManagedOutputCanvas(engine *ThinEngine, opts *NewWebX
 		opts = &NewWebXRManagedOutputCanvasOpts{}
 	}
 
-	p := ba.ctx.Get("WebXRManagedOutputCanvas").New(engine.JSObject(), opts.Canvas.JSObject(), opts.OnStateChangedObservable.JSObject(), opts.Configuration.JSObject())
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, engine.JSObject())
+
+	if opts.Canvas == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Canvas)
+	}
+	if opts.OnStateChangedObservable == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnStateChangedObservable.JSObject())
+	}
+	if opts.Configuration == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Configuration.JSObject())
+	}
+
+	p := ba.ctx.Get("WebXRManagedOutputCanvas").New(args...)
 	return WebXRManagedOutputCanvasFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Dispose calls the Dispose method on the WebXRManagedOutputCanvas object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrmanagedoutputcanvas#dispose
+func (w *WebXRManagedOutputCanvas) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	w.p.Call("dispose", args...)
+}
+
+// InitializeXRLayerAsync calls the InitializeXRLayerAsync method on the WebXRManagedOutputCanvas object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrmanagedoutputcanvas#initializexrlayerasync
+func (w *WebXRManagedOutputCanvas) InitializeXRLayerAsync(xrSession interface{}) interface{} {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, xrSession)
+
+	retVal := w.p.Call("initializeXRLayerAsync", args...)
+	return retVal
+}
+
+/*
+
+// CanvasContext returns the CanvasContext property of class WebXRManagedOutputCanvas.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrmanagedoutputcanvas#canvascontext
+func (w *WebXRManagedOutputCanvas) CanvasContext(canvasContext js.Value) *WebXRManagedOutputCanvas {
+	p := ba.ctx.Get("WebXRManagedOutputCanvas").New(canvasContext)
+	return WebXRManagedOutputCanvasFromJSObject(p, ba.ctx)
+}
+
+// SetCanvasContext sets the CanvasContext property of class WebXRManagedOutputCanvas.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrmanagedoutputcanvas#canvascontext
+func (w *WebXRManagedOutputCanvas) SetCanvasContext(canvasContext js.Value) *WebXRManagedOutputCanvas {
+	p := ba.ctx.Get("WebXRManagedOutputCanvas").New(canvasContext)
+	return WebXRManagedOutputCanvasFromJSObject(p, ba.ctx)
+}
+
+// XrLayer returns the XrLayer property of class WebXRManagedOutputCanvas.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrmanagedoutputcanvas#xrlayer
+func (w *WebXRManagedOutputCanvas) XrLayer(xrLayer *XRWebGLLayer) *WebXRManagedOutputCanvas {
+	p := ba.ctx.Get("WebXRManagedOutputCanvas").New(xrLayer.JSObject())
+	return WebXRManagedOutputCanvasFromJSObject(p, ba.ctx)
+}
+
+// SetXrLayer sets the XrLayer property of class WebXRManagedOutputCanvas.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrmanagedoutputcanvas#xrlayer
+func (w *WebXRManagedOutputCanvas) SetXrLayer(xrLayer *XRWebGLLayer) *WebXRManagedOutputCanvas {
+	p := ba.ctx.Get("WebXRManagedOutputCanvas").New(xrLayer.JSObject())
+	return WebXRManagedOutputCanvasFromJSObject(p, ba.ctx)
+}
+
+*/

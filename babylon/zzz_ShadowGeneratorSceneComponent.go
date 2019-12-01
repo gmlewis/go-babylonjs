@@ -32,8 +32,127 @@ func ShadowGeneratorSceneComponentFromJSObject(p js.Value, ctx js.Value) *Shadow
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowgeneratorscenecomponent
 func (ba *Babylon) NewShadowGeneratorSceneComponent(scene *Scene) *ShadowGeneratorSceneComponent {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("ShadowGeneratorSceneComponent").New(args...)
+	return ShadowGeneratorSceneComponentFromJSObject(p, ba.ctx)
+}
+
+// AddFromContainer calls the AddFromContainer method on the ShadowGeneratorSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowgeneratorscenecomponent#addfromcontainer
+func (s *ShadowGeneratorSceneComponent) AddFromContainer(container *AbstractScene) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, container.JSObject())
+
+	s.p.Call("addFromContainer", args...)
+}
+
+// Dispose calls the Dispose method on the ShadowGeneratorSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowgeneratorscenecomponent#dispose
+func (s *ShadowGeneratorSceneComponent) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("dispose", args...)
+}
+
+// Rebuild calls the Rebuild method on the ShadowGeneratorSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowgeneratorscenecomponent#rebuild
+func (s *ShadowGeneratorSceneComponent) Rebuild() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("rebuild", args...)
+}
+
+// Register calls the Register method on the ShadowGeneratorSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowgeneratorscenecomponent#register
+func (s *ShadowGeneratorSceneComponent) Register() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("register", args...)
+}
+
+// ShadowGeneratorSceneComponentRemoveFromContainerOpts contains optional parameters for ShadowGeneratorSceneComponent.RemoveFromContainer.
+type ShadowGeneratorSceneComponentRemoveFromContainerOpts struct {
+	Dispose *bool
+}
+
+// RemoveFromContainer calls the RemoveFromContainer method on the ShadowGeneratorSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowgeneratorscenecomponent#removefromcontainer
+func (s *ShadowGeneratorSceneComponent) RemoveFromContainer(container *AbstractScene, opts *ShadowGeneratorSceneComponentRemoveFromContainerOpts) {
+	if opts == nil {
+		opts = &ShadowGeneratorSceneComponentRemoveFromContainerOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, container.JSObject())
+
+	if opts.Dispose == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Dispose)
+	}
+
+	s.p.Call("removeFromContainer", args...)
+}
+
+// Serialize calls the Serialize method on the ShadowGeneratorSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowgeneratorscenecomponent#serialize
+func (s *ShadowGeneratorSceneComponent) Serialize(serializationObject interface{}) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, serializationObject)
+
+	s.p.Call("serialize", args...)
+}
+
+/*
+
+// Name returns the Name property of class ShadowGeneratorSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowgeneratorscenecomponent#name
+func (s *ShadowGeneratorSceneComponent) Name(name string) *ShadowGeneratorSceneComponent {
+	p := ba.ctx.Get("ShadowGeneratorSceneComponent").New(name)
+	return ShadowGeneratorSceneComponentFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class ShadowGeneratorSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowgeneratorscenecomponent#name
+func (s *ShadowGeneratorSceneComponent) SetName(name string) *ShadowGeneratorSceneComponent {
+	p := ba.ctx.Get("ShadowGeneratorSceneComponent").New(name)
+	return ShadowGeneratorSceneComponentFromJSObject(p, ba.ctx)
+}
+
+// Scene returns the Scene property of class ShadowGeneratorSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowgeneratorscenecomponent#scene
+func (s *ShadowGeneratorSceneComponent) Scene(scene *Scene) *ShadowGeneratorSceneComponent {
 	p := ba.ctx.Get("ShadowGeneratorSceneComponent").New(scene.JSObject())
 	return ShadowGeneratorSceneComponentFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetScene sets the Scene property of class ShadowGeneratorSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowgeneratorscenecomponent#scene
+func (s *ShadowGeneratorSceneComponent) SetScene(scene *Scene) *ShadowGeneratorSceneComponent {
+	p := ba.ctx.Get("ShadowGeneratorSceneComponent").New(scene.JSObject())
+	return ShadowGeneratorSceneComponentFromJSObject(p, ba.ctx)
+}
+
+*/

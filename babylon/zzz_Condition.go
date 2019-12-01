@@ -31,8 +31,37 @@ func ConditionFromJSObject(p js.Value, ctx js.Value) *Condition {
 //
 // https://doc.babylonjs.com/api/classes/babylon.condition
 func (ba *Babylon) NewCondition(actionManager *ActionManager) *Condition {
-	p := ba.ctx.Get("Condition").New(actionManager.JSObject())
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, actionManager.JSObject())
+
+	p := ba.ctx.Get("Condition").New(args...)
 	return ConditionFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// IsValid calls the IsValid method on the Condition object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.condition#isvalid
+func (c *Condition) IsValid() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("isValid", args...)
+	return retVal.Bool()
+}
+
+// Serialize calls the Serialize method on the Condition object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.condition#serialize
+func (c *Condition) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("serialize", args...)
+	return retVal
+}
+
+/*
+
+ */

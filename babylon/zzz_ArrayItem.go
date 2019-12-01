@@ -27,4 +27,30 @@ func ArrayItemFromJSObject(p js.Value, ctx js.Value) *ArrayItem {
 	return &ArrayItem{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// ArrayItemAssignOpts contains optional parameters for ArrayItem.Assign.
+type ArrayItemAssignOpts struct {
+	Array js.Value
+}
+
+// Assign calls the Assign method on the ArrayItem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arrayitem#assign
+func (a *ArrayItem) Assign(opts *ArrayItemAssignOpts) {
+	if opts == nil {
+		opts = &ArrayItemAssignOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Array == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Array)
+	}
+
+	a.p.Call("Assign", args...)
+}
+
+/*
+
+ */

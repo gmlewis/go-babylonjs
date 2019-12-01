@@ -31,8 +31,1513 @@ func GradientMaterialFromJSObject(p js.Value, ctx js.Value) *GradientMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.gradientmaterial
 func (ba *Babylon) NewGradientMaterial(name string, scene *Scene) *GradientMaterial {
-	p := ba.ctx.Get("GradientMaterial").New(name, scene.JSObject())
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("GradientMaterial").New(args...)
 	return GradientMaterialFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// GradientMaterialBindOpts contains optional parameters for GradientMaterial.Bind.
+type GradientMaterialBindOpts struct {
+	Mesh *Mesh
+}
+
+// Bind calls the Bind method on the GradientMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#bind
+func (g *GradientMaterial) Bind(world *Matrix, opts *GradientMaterialBindOpts) {
+	if opts == nil {
+		opts = &GradientMaterialBindOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, world.JSObject())
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	g.p.Call("bind", args...)
+}
+
+// BindForSubMesh calls the BindForSubMesh method on the GradientMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#bindforsubmesh
+func (g *GradientMaterial) BindForSubMesh(world *Matrix, mesh *Mesh, subMesh *SubMesh) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, world.JSObject())
+	args = append(args, mesh.JSObject())
+	args = append(args, subMesh.JSObject())
+
+	g.p.Call("bindForSubMesh", args...)
+}
+
+// BindOnlyNormalMatrix calls the BindOnlyNormalMatrix method on the GradientMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#bindonlynormalmatrix
+func (g *GradientMaterial) BindOnlyNormalMatrix(normalMatrix *Matrix) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, normalMatrix.JSObject())
+
+	g.p.Call("bindOnlyNormalMatrix", args...)
+}
+
+// BindOnlyWorldMatrix calls the BindOnlyWorldMatrix method on the GradientMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#bindonlyworldmatrix
+func (g *GradientMaterial) BindOnlyWorldMatrix(world *Matrix) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, world.JSObject())
+
+	g.p.Call("bindOnlyWorldMatrix", args...)
+}
+
+// BindSceneUniformBuffer calls the BindSceneUniformBuffer method on the GradientMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#bindsceneuniformbuffer
+func (g *GradientMaterial) BindSceneUniformBuffer(effect *Effect, sceneUbo *UniformBuffer) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, effect.JSObject())
+	args = append(args, sceneUbo.JSObject())
+
+	g.p.Call("bindSceneUniformBuffer", args...)
+}
+
+// BindView calls the BindView method on the GradientMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#bindview
+func (g *GradientMaterial) BindView(effect *Effect) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, effect.JSObject())
+
+	g.p.Call("bindView", args...)
+}
+
+// BindViewProjection calls the BindViewProjection method on the GradientMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#bindviewprojection
+func (g *GradientMaterial) BindViewProjection(effect *Effect) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, effect.JSObject())
+
+	g.p.Call("bindViewProjection", args...)
+}
+
+// Clone calls the Clone method on the GradientMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#clone
+func (g *GradientMaterial) Clone(name string) *GradientMaterial {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := g.p.Call("clone", args...)
+	return GradientMaterialFromJSObject(retVal, g.ctx)
+}
+
+// GradientMaterialDisposeOpts contains optional parameters for GradientMaterial.Dispose.
+type GradientMaterialDisposeOpts struct {
+	ForceDisposeEffect *bool
+}
+
+// Dispose calls the Dispose method on the GradientMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#dispose
+func (g *GradientMaterial) Dispose(opts *GradientMaterialDisposeOpts) {
+	if opts == nil {
+		opts = &GradientMaterialDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForceDisposeEffect == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceDisposeEffect)
+	}
+
+	g.p.Call("dispose", args...)
+}
+
+// GradientMaterialForceCompilationOpts contains optional parameters for GradientMaterial.ForceCompilation.
+type GradientMaterialForceCompilationOpts struct {
+	OnCompiled *func()
+	Options    js.Value
+	OnError    *func()
+}
+
+// ForceCompilation calls the ForceCompilation method on the GradientMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#forcecompilation
+func (g *GradientMaterial) ForceCompilation(mesh *AbstractMesh, opts *GradientMaterialForceCompilationOpts) {
+	if opts == nil {
+		opts = &GradientMaterialForceCompilationOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, mesh.JSObject())
+
+	if opts.OnCompiled == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnCompiled)
+	}
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+
+	g.p.Call("forceCompilation", args...)
+}
+
+// GradientMaterialForceCompilationAsyncOpts contains optional parameters for GradientMaterial.ForceCompilationAsync.
+type GradientMaterialForceCompilationAsyncOpts struct {
+	Options js.Value
+}
+
+// ForceCompilationAsync calls the ForceCompilationAsync method on the GradientMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#forcecompilationasync
+func (g *GradientMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *GradientMaterialForceCompilationAsyncOpts) {
+	if opts == nil {
+		opts = &GradientMaterialForceCompilationAsyncOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, mesh.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	g.p.Call("forceCompilationAsync", args...)
+}
+
+// Freeze calls the Freeze method on the GradientMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#freeze
+func (g *GradientMaterial) Freeze() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	g.p.Call("freeze", args...)
+}
+
+// GetActiveTextures calls the GetActiveTextures method on the GradientMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#getactivetextures
+func (g *GradientMaterial) GetActiveTextures() *BaseTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getActiveTextures", args...)
+	return BaseTextureFromJSObject(retVal, g.ctx)
+}
+
+// GetAlphaTestTexture calls the GetAlphaTestTexture method on the GradientMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#getalphatesttexture
+func (g *GradientMaterial) GetAlphaTestTexture() *BaseTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getAlphaTestTexture", args...)
+	return BaseTextureFromJSObject(retVal, g.ctx)
+}
+
+// GetAnimatables calls the GetAnimatables method on the GradientMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#getanimatables
+func (g *GradientMaterial) GetAnimatables() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getAnimatables", args...)
+	return retVal
+}
+
+// GetBindedMeshes calls the GetBindedMeshes method on the GradientMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#getbindedmeshes
+func (g *GradientMaterial) GetBindedMeshes() *AbstractMesh {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getBindedMeshes", args...)
+	return AbstractMeshFromJSObject(retVal, g.ctx)
+}
+
+// GetClassName calls the GetClassName method on the GradientMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#getclassname
+func (g *GradientMaterial) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetEffect calls the GetEffect method on the GradientMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#geteffect
+func (g *GradientMaterial) GetEffect() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getEffect", args...)
+	return EffectFromJSObject(retVal, g.ctx)
+}
+
+// GetScene calls the GetScene method on the GradientMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#getscene
+func (g *GradientMaterial) GetScene() *Scene {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getScene", args...)
+	return SceneFromJSObject(retVal, g.ctx)
+}
+
+// HasTexture calls the HasTexture method on the GradientMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#hastexture
+func (g *GradientMaterial) HasTexture(texture *BaseTexture) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, texture.JSObject())
+
+	retVal := g.p.Call("hasTexture", args...)
+	return retVal.Bool()
+}
+
+// GradientMaterialIsReadyOpts contains optional parameters for GradientMaterial.IsReady.
+type GradientMaterialIsReadyOpts struct {
+	Mesh         *AbstractMesh
+	UseInstances *bool
+}
+
+// IsReady calls the IsReady method on the GradientMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#isready
+func (g *GradientMaterial) IsReady(opts *GradientMaterialIsReadyOpts) bool {
+	if opts == nil {
+		opts = &GradientMaterialIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := g.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// GradientMaterialIsReadyForSubMeshOpts contains optional parameters for GradientMaterial.IsReadyForSubMesh.
+type GradientMaterialIsReadyForSubMeshOpts struct {
+	UseInstances *bool
+}
+
+// IsReadyForSubMesh calls the IsReadyForSubMesh method on the GradientMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#isreadyforsubmesh
+func (g *GradientMaterial) IsReadyForSubMesh(mesh *AbstractMesh, subMesh *SubMesh, opts *GradientMaterialIsReadyForSubMeshOpts) bool {
+	if opts == nil {
+		opts = &GradientMaterialIsReadyForSubMeshOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, subMesh.JSObject())
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := g.p.Call("isReadyForSubMesh", args...)
+	return retVal.Bool()
+}
+
+// MarkAsDirty calls the MarkAsDirty method on the GradientMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#markasdirty
+func (g *GradientMaterial) MarkAsDirty(flag float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, flag)
+
+	g.p.Call("markAsDirty", args...)
+}
+
+// MarkDirty calls the MarkDirty method on the GradientMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#markdirty
+func (g *GradientMaterial) MarkDirty() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	g.p.Call("markDirty", args...)
+}
+
+// NeedAlphaBlending calls the NeedAlphaBlending method on the GradientMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#needalphablending
+func (g *GradientMaterial) NeedAlphaBlending() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("needAlphaBlending", args...)
+	return retVal.Bool()
+}
+
+// NeedAlphaBlendingForMesh calls the NeedAlphaBlendingForMesh method on the GradientMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#needalphablendingformesh
+func (g *GradientMaterial) NeedAlphaBlendingForMesh(mesh *AbstractMesh) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	retVal := g.p.Call("needAlphaBlendingForMesh", args...)
+	return retVal.Bool()
+}
+
+// NeedAlphaTesting calls the NeedAlphaTesting method on the GradientMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#needalphatesting
+func (g *GradientMaterial) NeedAlphaTesting() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("needAlphaTesting", args...)
+	return retVal.Bool()
+}
+
+// Parse calls the Parse method on the GradientMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#parse
+func (g *GradientMaterial) Parse(source interface{}, scene *Scene, rootUrl string) *GradientMaterial {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, source)
+	args = append(args, scene.JSObject())
+	args = append(args, rootUrl)
+
+	retVal := g.p.Call("Parse", args...)
+	return GradientMaterialFromJSObject(retVal, g.ctx)
+}
+
+// Serialize calls the Serialize method on the GradientMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#serialize
+func (g *GradientMaterial) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("serialize", args...)
+	return retVal
+}
+
+// GradientMaterialToStringOpts contains optional parameters for GradientMaterial.ToString.
+type GradientMaterialToStringOpts struct {
+	FullDetails *bool
+}
+
+// ToString calls the ToString method on the GradientMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#tostring
+func (g *GradientMaterial) ToString(opts *GradientMaterialToStringOpts) string {
+	if opts == nil {
+		opts = &GradientMaterialToStringOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.FullDetails == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FullDetails)
+	}
+
+	retVal := g.p.Call("toString", args...)
+	return retVal.String()
+}
+
+// Unbind calls the Unbind method on the GradientMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#unbind
+func (g *GradientMaterial) Unbind() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	g.p.Call("unbind", args...)
+}
+
+// Unfreeze calls the Unfreeze method on the GradientMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#unfreeze
+func (g *GradientMaterial) Unfreeze() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	g.p.Call("unfreeze", args...)
+}
+
+/*
+
+// AllDirtyFlag returns the AllDirtyFlag property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#alldirtyflag
+func (g *GradientMaterial) AllDirtyFlag(AllDirtyFlag float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(AllDirtyFlag)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAllDirtyFlag sets the AllDirtyFlag property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#alldirtyflag
+func (g *GradientMaterial) SetAllDirtyFlag(AllDirtyFlag float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(AllDirtyFlag)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// AllowShaderHotSwapping returns the AllowShaderHotSwapping property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#allowshaderhotswapping
+func (g *GradientMaterial) AllowShaderHotSwapping(allowShaderHotSwapping bool) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(allowShaderHotSwapping)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAllowShaderHotSwapping sets the AllowShaderHotSwapping property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#allowshaderhotswapping
+func (g *GradientMaterial) SetAllowShaderHotSwapping(allowShaderHotSwapping bool) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(allowShaderHotSwapping)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// Alpha returns the Alpha property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#alpha
+func (g *GradientMaterial) Alpha(alpha float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(alpha)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAlpha sets the Alpha property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#alpha
+func (g *GradientMaterial) SetAlpha(alpha float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(alpha)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// AlphaMode returns the AlphaMode property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#alphamode
+func (g *GradientMaterial) AlphaMode(alphaMode float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(alphaMode)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaMode sets the AlphaMode property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#alphamode
+func (g *GradientMaterial) SetAlphaMode(alphaMode float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(alphaMode)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// Animations returns the Animations property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#animations
+func (g *GradientMaterial) Animations(animations []Animation) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(animations.JSObject())
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#animations
+func (g *GradientMaterial) SetAnimations(animations []Animation) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(animations.JSObject())
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// AttributesDirtyFlag returns the AttributesDirtyFlag property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#attributesdirtyflag
+func (g *GradientMaterial) AttributesDirtyFlag(AttributesDirtyFlag float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(AttributesDirtyFlag)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAttributesDirtyFlag sets the AttributesDirtyFlag property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#attributesdirtyflag
+func (g *GradientMaterial) SetAttributesDirtyFlag(AttributesDirtyFlag float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(AttributesDirtyFlag)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// BackFaceCulling returns the BackFaceCulling property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#backfaceculling
+func (g *GradientMaterial) BackFaceCulling(backFaceCulling bool) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(backFaceCulling)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetBackFaceCulling sets the BackFaceCulling property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#backfaceculling
+func (g *GradientMaterial) SetBackFaceCulling(backFaceCulling bool) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(backFaceCulling)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// BottomColor returns the BottomColor property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#bottomcolor
+func (g *GradientMaterial) BottomColor(bottomColor *Color3) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(bottomColor.JSObject())
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetBottomColor sets the BottomColor property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#bottomcolor
+func (g *GradientMaterial) SetBottomColor(bottomColor *Color3) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(bottomColor.JSObject())
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// BottomColorAlpha returns the BottomColorAlpha property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#bottomcoloralpha
+func (g *GradientMaterial) BottomColorAlpha(bottomColorAlpha float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(bottomColorAlpha)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetBottomColorAlpha sets the BottomColorAlpha property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#bottomcoloralpha
+func (g *GradientMaterial) SetBottomColorAlpha(bottomColorAlpha float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(bottomColorAlpha)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// CheckReadyOnEveryCall returns the CheckReadyOnEveryCall property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#checkreadyoneverycall
+func (g *GradientMaterial) CheckReadyOnEveryCall(checkReadyOnEveryCall bool) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(checkReadyOnEveryCall)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCheckReadyOnEveryCall sets the CheckReadyOnEveryCall property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#checkreadyoneverycall
+func (g *GradientMaterial) SetCheckReadyOnEveryCall(checkReadyOnEveryCall bool) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(checkReadyOnEveryCall)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// CheckReadyOnlyOnce returns the CheckReadyOnlyOnce property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#checkreadyonlyonce
+func (g *GradientMaterial) CheckReadyOnlyOnce(checkReadyOnlyOnce bool) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(checkReadyOnlyOnce)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCheckReadyOnlyOnce sets the CheckReadyOnlyOnce property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#checkreadyonlyonce
+func (g *GradientMaterial) SetCheckReadyOnlyOnce(checkReadyOnlyOnce bool) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(checkReadyOnlyOnce)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// ClockWiseSideOrientation returns the ClockWiseSideOrientation property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#clockwisesideorientation
+func (g *GradientMaterial) ClockWiseSideOrientation(ClockWiseSideOrientation float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(ClockWiseSideOrientation)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetClockWiseSideOrientation sets the ClockWiseSideOrientation property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#clockwisesideorientation
+func (g *GradientMaterial) SetClockWiseSideOrientation(ClockWiseSideOrientation float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(ClockWiseSideOrientation)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// CounterClockWiseSideOrientation returns the CounterClockWiseSideOrientation property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#counterclockwisesideorientation
+func (g *GradientMaterial) CounterClockWiseSideOrientation(CounterClockWiseSideOrientation float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(CounterClockWiseSideOrientation)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCounterClockWiseSideOrientation sets the CounterClockWiseSideOrientation property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#counterclockwisesideorientation
+func (g *GradientMaterial) SetCounterClockWiseSideOrientation(CounterClockWiseSideOrientation float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(CounterClockWiseSideOrientation)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// DepthFunction returns the DepthFunction property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#depthfunction
+func (g *GradientMaterial) DepthFunction(depthFunction float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(depthFunction)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDepthFunction sets the DepthFunction property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#depthfunction
+func (g *GradientMaterial) SetDepthFunction(depthFunction float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(depthFunction)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// DisableDepthWrite returns the DisableDepthWrite property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#disabledepthwrite
+func (g *GradientMaterial) DisableDepthWrite(disableDepthWrite bool) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(disableDepthWrite)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDisableDepthWrite sets the DisableDepthWrite property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#disabledepthwrite
+func (g *GradientMaterial) SetDisableDepthWrite(disableDepthWrite bool) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(disableDepthWrite)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// DisableLighting returns the DisableLighting property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#disablelighting
+func (g *GradientMaterial) DisableLighting(disableLighting bool) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(disableLighting)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDisableLighting sets the DisableLighting property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#disablelighting
+func (g *GradientMaterial) SetDisableLighting(disableLighting bool) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(disableLighting)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// DoNotSerialize returns the DoNotSerialize property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#donotserialize
+func (g *GradientMaterial) DoNotSerialize(doNotSerialize bool) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(doNotSerialize)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDoNotSerialize sets the DoNotSerialize property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#donotserialize
+func (g *GradientMaterial) SetDoNotSerialize(doNotSerialize bool) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(doNotSerialize)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// FillMode returns the FillMode property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#fillmode
+func (g *GradientMaterial) FillMode(fillMode float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(fillMode)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFillMode sets the FillMode property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#fillmode
+func (g *GradientMaterial) SetFillMode(fillMode float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(fillMode)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// FogEnabled returns the FogEnabled property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#fogenabled
+func (g *GradientMaterial) FogEnabled(fogEnabled bool) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(fogEnabled)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFogEnabled sets the FogEnabled property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#fogenabled
+func (g *GradientMaterial) SetFogEnabled(fogEnabled bool) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(fogEnabled)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// ForceDepthWrite returns the ForceDepthWrite property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#forcedepthwrite
+func (g *GradientMaterial) ForceDepthWrite(forceDepthWrite bool) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(forceDepthWrite)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetForceDepthWrite sets the ForceDepthWrite property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#forcedepthwrite
+func (g *GradientMaterial) SetForceDepthWrite(forceDepthWrite bool) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(forceDepthWrite)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// FresnelDirtyFlag returns the FresnelDirtyFlag property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#fresneldirtyflag
+func (g *GradientMaterial) FresnelDirtyFlag(FresnelDirtyFlag float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(FresnelDirtyFlag)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFresnelDirtyFlag sets the FresnelDirtyFlag property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#fresneldirtyflag
+func (g *GradientMaterial) SetFresnelDirtyFlag(FresnelDirtyFlag float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(FresnelDirtyFlag)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// GetRenderTargetTextures returns the GetRenderTargetTextures property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#getrendertargettextures
+func (g *GradientMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(getRenderTargetTextures)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetGetRenderTargetTextures sets the GetRenderTargetTextures property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#getrendertargettextures
+func (g *GradientMaterial) SetGetRenderTargetTextures(getRenderTargetTextures func()) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(getRenderTargetTextures)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// HasRenderTargetTextures returns the HasRenderTargetTextures property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#hasrendertargettextures
+func (g *GradientMaterial) HasRenderTargetTextures(hasRenderTargetTextures bool) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(hasRenderTargetTextures)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetHasRenderTargetTextures sets the HasRenderTargetTextures property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#hasrendertargettextures
+func (g *GradientMaterial) SetHasRenderTargetTextures(hasRenderTargetTextures bool) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(hasRenderTargetTextures)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// Id returns the Id property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#id
+func (g *GradientMaterial) Id(id string) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(id)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetId sets the Id property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#id
+func (g *GradientMaterial) SetId(id string) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(id)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#inspectablecustomproperties
+func (g *GradientMaterial) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(inspectableCustomProperties.JSObject())
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#inspectablecustomproperties
+func (g *GradientMaterial) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(inspectableCustomProperties.JSObject())
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// IsFrozen returns the IsFrozen property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#isfrozen
+func (g *GradientMaterial) IsFrozen(isFrozen bool) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(isFrozen)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetIsFrozen sets the IsFrozen property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#isfrozen
+func (g *GradientMaterial) SetIsFrozen(isFrozen bool) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(isFrozen)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// LightDirtyFlag returns the LightDirtyFlag property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#lightdirtyflag
+func (g *GradientMaterial) LightDirtyFlag(LightDirtyFlag float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(LightDirtyFlag)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLightDirtyFlag sets the LightDirtyFlag property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#lightdirtyflag
+func (g *GradientMaterial) SetLightDirtyFlag(LightDirtyFlag float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(LightDirtyFlag)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineListDrawMode returns the LineListDrawMode property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#linelistdrawmode
+func (g *GradientMaterial) LineListDrawMode(LineListDrawMode float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(LineListDrawMode)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineListDrawMode sets the LineListDrawMode property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#linelistdrawmode
+func (g *GradientMaterial) SetLineListDrawMode(LineListDrawMode float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(LineListDrawMode)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineLoopDrawMode returns the LineLoopDrawMode property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#lineloopdrawmode
+func (g *GradientMaterial) LineLoopDrawMode(LineLoopDrawMode float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(LineLoopDrawMode)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineLoopDrawMode sets the LineLoopDrawMode property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#lineloopdrawmode
+func (g *GradientMaterial) SetLineLoopDrawMode(LineLoopDrawMode float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(LineLoopDrawMode)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineStripDrawMode returns the LineStripDrawMode property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#linestripdrawmode
+func (g *GradientMaterial) LineStripDrawMode(LineStripDrawMode float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(LineStripDrawMode)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineStripDrawMode sets the LineStripDrawMode property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#linestripdrawmode
+func (g *GradientMaterial) SetLineStripDrawMode(LineStripDrawMode float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(LineStripDrawMode)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// MaxSimultaneousLights returns the MaxSimultaneousLights property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#maxsimultaneouslights
+func (g *GradientMaterial) MaxSimultaneousLights(maxSimultaneousLights float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(maxSimultaneousLights)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMaxSimultaneousLights sets the MaxSimultaneousLights property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#maxsimultaneouslights
+func (g *GradientMaterial) SetMaxSimultaneousLights(maxSimultaneousLights float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(maxSimultaneousLights)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#metadata
+func (g *GradientMaterial) Metadata(metadata interface{}) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(metadata)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#metadata
+func (g *GradientMaterial) SetMetadata(metadata interface{}) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(metadata)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// MiscDirtyFlag returns the MiscDirtyFlag property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#miscdirtyflag
+func (g *GradientMaterial) MiscDirtyFlag(MiscDirtyFlag float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(MiscDirtyFlag)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMiscDirtyFlag sets the MiscDirtyFlag property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#miscdirtyflag
+func (g *GradientMaterial) SetMiscDirtyFlag(MiscDirtyFlag float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(MiscDirtyFlag)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#name
+func (g *GradientMaterial) Name(name string) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(name)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#name
+func (g *GradientMaterial) SetName(name string) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(name)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// NeedDepthPrePass returns the NeedDepthPrePass property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#needdepthprepass
+func (g *GradientMaterial) NeedDepthPrePass(needDepthPrePass bool) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(needDepthPrePass)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetNeedDepthPrePass sets the NeedDepthPrePass property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#needdepthprepass
+func (g *GradientMaterial) SetNeedDepthPrePass(needDepthPrePass bool) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(needDepthPrePass)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// Offset returns the Offset property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#offset
+func (g *GradientMaterial) Offset(offset float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(offset)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOffset sets the Offset property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#offset
+func (g *GradientMaterial) SetOffset(offset float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(offset)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnBind returns the OnBind property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#onbind
+func (g *GradientMaterial) OnBind(onBind func()) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(onBind)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnBind sets the OnBind property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#onbind
+func (g *GradientMaterial) SetOnBind(onBind func()) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(onBind)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnBindObservable returns the OnBindObservable property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#onbindobservable
+func (g *GradientMaterial) OnBindObservable(onBindObservable *Observable) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(onBindObservable.JSObject())
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnBindObservable sets the OnBindObservable property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#onbindobservable
+func (g *GradientMaterial) SetOnBindObservable(onBindObservable *Observable) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(onBindObservable.JSObject())
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnCompiled returns the OnCompiled property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#oncompiled
+func (g *GradientMaterial) OnCompiled(onCompiled func()) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(onCompiled)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnCompiled sets the OnCompiled property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#oncompiled
+func (g *GradientMaterial) SetOnCompiled(onCompiled func()) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(onCompiled)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnDispose returns the OnDispose property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#ondispose
+func (g *GradientMaterial) OnDispose(onDispose func()) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(onDispose)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnDispose sets the OnDispose property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#ondispose
+func (g *GradientMaterial) SetOnDispose(onDispose func()) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(onDispose)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnDisposeObservable returns the OnDisposeObservable property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#ondisposeobservable
+func (g *GradientMaterial) OnDisposeObservable(onDisposeObservable *Observable) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(onDisposeObservable.JSObject())
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnDisposeObservable sets the OnDisposeObservable property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#ondisposeobservable
+func (g *GradientMaterial) SetOnDisposeObservable(onDisposeObservable *Observable) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(onDisposeObservable.JSObject())
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnError returns the OnError property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#onerror
+func (g *GradientMaterial) OnError(onError func()) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(onError)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnError sets the OnError property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#onerror
+func (g *GradientMaterial) SetOnError(onError func()) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(onError)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnUnBindObservable returns the OnUnBindObservable property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#onunbindobservable
+func (g *GradientMaterial) OnUnBindObservable(onUnBindObservable *Observable) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(onUnBindObservable.JSObject())
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnUnBindObservable sets the OnUnBindObservable property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#onunbindobservable
+func (g *GradientMaterial) SetOnUnBindObservable(onUnBindObservable *Observable) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(onUnBindObservable.JSObject())
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointFillMode returns the PointFillMode property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#pointfillmode
+func (g *GradientMaterial) PointFillMode(PointFillMode float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(PointFillMode)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointFillMode sets the PointFillMode property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#pointfillmode
+func (g *GradientMaterial) SetPointFillMode(PointFillMode float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(PointFillMode)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointListDrawMode returns the PointListDrawMode property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#pointlistdrawmode
+func (g *GradientMaterial) PointListDrawMode(PointListDrawMode float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(PointListDrawMode)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointListDrawMode sets the PointListDrawMode property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#pointlistdrawmode
+func (g *GradientMaterial) SetPointListDrawMode(PointListDrawMode float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(PointListDrawMode)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointSize returns the PointSize property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#pointsize
+func (g *GradientMaterial) PointSize(pointSize float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(pointSize)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointSize sets the PointSize property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#pointsize
+func (g *GradientMaterial) SetPointSize(pointSize float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(pointSize)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointsCloud returns the PointsCloud property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#pointscloud
+func (g *GradientMaterial) PointsCloud(pointsCloud bool) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(pointsCloud)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointsCloud sets the PointsCloud property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#pointscloud
+func (g *GradientMaterial) SetPointsCloud(pointsCloud bool) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(pointsCloud)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// ReservedDataStore returns the ReservedDataStore property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#reserveddatastore
+func (g *GradientMaterial) ReservedDataStore(reservedDataStore interface{}) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(reservedDataStore)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetReservedDataStore sets the ReservedDataStore property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#reserveddatastore
+func (g *GradientMaterial) SetReservedDataStore(reservedDataStore interface{}) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(reservedDataStore)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// Scale returns the Scale property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#scale
+func (g *GradientMaterial) Scale(scale float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(scale)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetScale sets the Scale property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#scale
+func (g *GradientMaterial) SetScale(scale float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(scale)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SeparateCullingPass returns the SeparateCullingPass property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#separatecullingpass
+func (g *GradientMaterial) SeparateCullingPass(separateCullingPass bool) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(separateCullingPass)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSeparateCullingPass sets the SeparateCullingPass property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#separatecullingpass
+func (g *GradientMaterial) SetSeparateCullingPass(separateCullingPass bool) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(separateCullingPass)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SideOrientation returns the SideOrientation property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#sideorientation
+func (g *GradientMaterial) SideOrientation(sideOrientation float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(sideOrientation)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSideOrientation sets the SideOrientation property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#sideorientation
+func (g *GradientMaterial) SetSideOrientation(sideOrientation float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(sideOrientation)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// Smoothness returns the Smoothness property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#smoothness
+func (g *GradientMaterial) Smoothness(smoothness float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(smoothness)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSmoothness sets the Smoothness property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#smoothness
+func (g *GradientMaterial) SetSmoothness(smoothness float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(smoothness)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// State returns the State property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#state
+func (g *GradientMaterial) State(state string) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(state)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetState sets the State property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#state
+func (g *GradientMaterial) SetState(state string) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(state)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// TextureDirtyFlag returns the TextureDirtyFlag property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#texturedirtyflag
+func (g *GradientMaterial) TextureDirtyFlag(TextureDirtyFlag float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(TextureDirtyFlag)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTextureDirtyFlag sets the TextureDirtyFlag property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#texturedirtyflag
+func (g *GradientMaterial) SetTextureDirtyFlag(TextureDirtyFlag float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(TextureDirtyFlag)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// TopColor returns the TopColor property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#topcolor
+func (g *GradientMaterial) TopColor(topColor *Color3) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(topColor.JSObject())
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTopColor sets the TopColor property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#topcolor
+func (g *GradientMaterial) SetTopColor(topColor *Color3) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(topColor.JSObject())
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// TopColorAlpha returns the TopColorAlpha property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#topcoloralpha
+func (g *GradientMaterial) TopColorAlpha(topColorAlpha float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(topColorAlpha)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTopColorAlpha sets the TopColorAlpha property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#topcoloralpha
+func (g *GradientMaterial) SetTopColorAlpha(topColorAlpha float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(topColorAlpha)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// TriangleFanDrawMode returns the TriangleFanDrawMode property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#trianglefandrawmode
+func (g *GradientMaterial) TriangleFanDrawMode(TriangleFanDrawMode float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(TriangleFanDrawMode)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTriangleFanDrawMode sets the TriangleFanDrawMode property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#trianglefandrawmode
+func (g *GradientMaterial) SetTriangleFanDrawMode(TriangleFanDrawMode float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(TriangleFanDrawMode)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// TriangleFillMode returns the TriangleFillMode property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#trianglefillmode
+func (g *GradientMaterial) TriangleFillMode(TriangleFillMode float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(TriangleFillMode)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTriangleFillMode sets the TriangleFillMode property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#trianglefillmode
+func (g *GradientMaterial) SetTriangleFillMode(TriangleFillMode float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(TriangleFillMode)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// TriangleStripDrawMode returns the TriangleStripDrawMode property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#trianglestripdrawmode
+func (g *GradientMaterial) TriangleStripDrawMode(TriangleStripDrawMode float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(TriangleStripDrawMode)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTriangleStripDrawMode sets the TriangleStripDrawMode property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#trianglestripdrawmode
+func (g *GradientMaterial) SetTriangleStripDrawMode(TriangleStripDrawMode float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(TriangleStripDrawMode)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#uniqueid
+func (g *GradientMaterial) UniqueId(uniqueId float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(uniqueId)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#uniqueid
+func (g *GradientMaterial) SetUniqueId(uniqueId float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(uniqueId)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// WireFrameFillMode returns the WireFrameFillMode property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#wireframefillmode
+func (g *GradientMaterial) WireFrameFillMode(WireFrameFillMode float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(WireFrameFillMode)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetWireFrameFillMode sets the WireFrameFillMode property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#wireframefillmode
+func (g *GradientMaterial) SetWireFrameFillMode(WireFrameFillMode float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(WireFrameFillMode)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// Wireframe returns the Wireframe property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#wireframe
+func (g *GradientMaterial) Wireframe(wireframe bool) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(wireframe)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetWireframe sets the Wireframe property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#wireframe
+func (g *GradientMaterial) SetWireframe(wireframe bool) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(wireframe)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// ZOffset returns the ZOffset property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#zoffset
+func (g *GradientMaterial) ZOffset(zOffset float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(zOffset)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetZOffset sets the ZOffset property of class GradientMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientmaterial#zoffset
+func (g *GradientMaterial) SetZOffset(zOffset float64) *GradientMaterial {
+	p := ba.ctx.Get("GradientMaterial").New(zOffset)
+	return GradientMaterialFromJSObject(p, ba.ctx)
+}
+
+*/

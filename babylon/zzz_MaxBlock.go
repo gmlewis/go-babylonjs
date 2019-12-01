@@ -31,8 +31,653 @@ func MaxBlockFromJSObject(p js.Value, ctx js.Value) *MaxBlock {
 //
 // https://doc.babylonjs.com/api/classes/babylon.maxblock
 func (ba *Babylon) NewMaxBlock(name string) *MaxBlock {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	p := ba.ctx.Get("MaxBlock").New(args...)
+	return MaxBlockFromJSObject(p, ba.ctx)
+}
+
+// AutoConfigure calls the AutoConfigure method on the MaxBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#autoconfigure
+func (m *MaxBlock) AutoConfigure(material *NodeMaterial) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, material.JSObject())
+
+	m.p.Call("autoConfigure", args...)
+}
+
+// MaxBlockBindOpts contains optional parameters for MaxBlock.Bind.
+type MaxBlockBindOpts struct {
+	Mesh *Mesh
+}
+
+// Bind calls the Bind method on the MaxBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#bind
+func (m *MaxBlock) Bind(effect *Effect, nodeMaterial *NodeMaterial, opts *MaxBlockBindOpts) {
+	if opts == nil {
+		opts = &MaxBlockBindOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, effect.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	m.p.Call("bind", args...)
+}
+
+// Build calls the Build method on the MaxBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#build
+func (m *MaxBlock) Build(state *NodeMaterialBuildState, activeBlocks *NodeMaterialBlock) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, state.JSObject())
+	args = append(args, activeBlocks.JSObject())
+
+	retVal := m.p.Call("build", args...)
+	return retVal.Bool()
+}
+
+// MaxBlockCloneOpts contains optional parameters for MaxBlock.Clone.
+type MaxBlockCloneOpts struct {
+	RootUrl *string
+}
+
+// Clone calls the Clone method on the MaxBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#clone
+func (m *MaxBlock) Clone(scene *Scene, opts *MaxBlockCloneOpts) *NodeMaterialBlock {
+	if opts == nil {
+		opts = &MaxBlockCloneOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, scene.JSObject())
+
+	if opts.RootUrl == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RootUrl)
+	}
+
+	retVal := m.p.Call("clone", args...)
+	return NodeMaterialBlockFromJSObject(retVal, m.ctx)
+}
+
+// MaxBlockConnectToOpts contains optional parameters for MaxBlock.ConnectTo.
+type MaxBlockConnectToOpts struct {
+	Options js.Value
+}
+
+// ConnectTo calls the ConnectTo method on the MaxBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#connectto
+func (m *MaxBlock) ConnectTo(other *NodeMaterialBlock, opts *MaxBlockConnectToOpts) *MaxBlock {
+	if opts == nil {
+		opts = &MaxBlockConnectToOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, other.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	retVal := m.p.Call("connectTo", args...)
+	return MaxBlockFromJSObject(retVal, m.ctx)
+}
+
+// Dispose calls the Dispose method on the MaxBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#dispose
+func (m *MaxBlock) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	m.p.Call("dispose", args...)
+}
+
+// GetClassName calls the GetClassName method on the MaxBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#getclassname
+func (m *MaxBlock) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// MaxBlockGetFirstAvailableInputOpts contains optional parameters for MaxBlock.GetFirstAvailableInput.
+type MaxBlockGetFirstAvailableInputOpts struct {
+	ForOutput *NodeMaterialConnectionPoint
+}
+
+// GetFirstAvailableInput calls the GetFirstAvailableInput method on the MaxBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#getfirstavailableinput
+func (m *MaxBlock) GetFirstAvailableInput(opts *MaxBlockGetFirstAvailableInputOpts) *NodeMaterialConnectionPoint {
+	if opts == nil {
+		opts = &MaxBlockGetFirstAvailableInputOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForOutput == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForOutput.JSObject())
+	}
+
+	retVal := m.p.Call("getFirstAvailableInput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, m.ctx)
+}
+
+// MaxBlockGetFirstAvailableOutputOpts contains optional parameters for MaxBlock.GetFirstAvailableOutput.
+type MaxBlockGetFirstAvailableOutputOpts struct {
+	ForBlock *NodeMaterialBlock
+}
+
+// GetFirstAvailableOutput calls the GetFirstAvailableOutput method on the MaxBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#getfirstavailableoutput
+func (m *MaxBlock) GetFirstAvailableOutput(opts *MaxBlockGetFirstAvailableOutputOpts) *NodeMaterialConnectionPoint {
+	if opts == nil {
+		opts = &MaxBlockGetFirstAvailableOutputOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForBlock == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForBlock.JSObject())
+	}
+
+	retVal := m.p.Call("getFirstAvailableOutput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, m.ctx)
+}
+
+// GetInputByName calls the GetInputByName method on the MaxBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#getinputbyname
+func (m *MaxBlock) GetInputByName(name string) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := m.p.Call("getInputByName", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, m.ctx)
+}
+
+// GetOutputByName calls the GetOutputByName method on the MaxBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#getoutputbyname
+func (m *MaxBlock) GetOutputByName(name string) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := m.p.Call("getOutputByName", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, m.ctx)
+}
+
+// GetSiblingOutput calls the GetSiblingOutput method on the MaxBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#getsiblingoutput
+func (m *MaxBlock) GetSiblingOutput(current *NodeMaterialConnectionPoint) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, current.JSObject())
+
+	retVal := m.p.Call("getSiblingOutput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, m.ctx)
+}
+
+// Initialize calls the Initialize method on the MaxBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#initialize
+func (m *MaxBlock) Initialize(state *NodeMaterialBuildState) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, state.JSObject())
+
+	m.p.Call("initialize", args...)
+}
+
+// MaxBlockInitializeDefinesOpts contains optional parameters for MaxBlock.InitializeDefines.
+type MaxBlockInitializeDefinesOpts struct {
+	UseInstances *bool
+}
+
+// InitializeDefines calls the InitializeDefines method on the MaxBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#initializedefines
+func (m *MaxBlock) InitializeDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *MaxBlockInitializeDefinesOpts) {
+	if opts == nil {
+		opts = &MaxBlockInitializeDefinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	m.p.Call("initializeDefines", args...)
+}
+
+// MaxBlockIsReadyOpts contains optional parameters for MaxBlock.IsReady.
+type MaxBlockIsReadyOpts struct {
+	UseInstances *bool
+}
+
+// IsReady calls the IsReady method on the MaxBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#isready
+func (m *MaxBlock) IsReady(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *MaxBlockIsReadyOpts) bool {
+	if opts == nil {
+		opts = &MaxBlockIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := m.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// MaxBlockPrepareDefinesOpts contains optional parameters for MaxBlock.PrepareDefines.
+type MaxBlockPrepareDefinesOpts struct {
+	UseInstances *bool
+}
+
+// PrepareDefines calls the PrepareDefines method on the MaxBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#preparedefines
+func (m *MaxBlock) PrepareDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *MaxBlockPrepareDefinesOpts) {
+	if opts == nil {
+		opts = &MaxBlockPrepareDefinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	m.p.Call("prepareDefines", args...)
+}
+
+// ProvideFallbacks calls the ProvideFallbacks method on the MaxBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#providefallbacks
+func (m *MaxBlock) ProvideFallbacks(mesh *AbstractMesh, fallbacks *EffectFallbacks) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, fallbacks.JSObject())
+
+	m.p.Call("provideFallbacks", args...)
+}
+
+// MaxBlockRegisterInputOpts contains optional parameters for MaxBlock.RegisterInput.
+type MaxBlockRegisterInputOpts struct {
+	IsOptional *bool
+	Target     js.Value
+}
+
+// RegisterInput calls the RegisterInput method on the MaxBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#registerinput
+func (m *MaxBlock) RegisterInput(name string, jsType js.Value, opts *MaxBlockRegisterInputOpts) *MaxBlock {
+	if opts == nil {
+		opts = &MaxBlockRegisterInputOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+2)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	if opts.IsOptional == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IsOptional)
+	}
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+
+	retVal := m.p.Call("registerInput", args...)
+	return MaxBlockFromJSObject(retVal, m.ctx)
+}
+
+// MaxBlockRegisterOutputOpts contains optional parameters for MaxBlock.RegisterOutput.
+type MaxBlockRegisterOutputOpts struct {
+	Target js.Value
+}
+
+// RegisterOutput calls the RegisterOutput method on the MaxBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#registeroutput
+func (m *MaxBlock) RegisterOutput(name string, jsType js.Value, opts *MaxBlockRegisterOutputOpts) *MaxBlock {
+	if opts == nil {
+		opts = &MaxBlockRegisterOutputOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+
+	retVal := m.p.Call("registerOutput", args...)
+	return MaxBlockFromJSObject(retVal, m.ctx)
+}
+
+// ReplaceRepeatableContent calls the ReplaceRepeatableContent method on the MaxBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#replacerepeatablecontent
+func (m *MaxBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterialBuildState, fragmentShaderState *NodeMaterialBuildState, mesh *AbstractMesh, defines js.Value) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, vertexShaderState.JSObject())
+	args = append(args, fragmentShaderState.JSObject())
+	args = append(args, mesh.JSObject())
+	args = append(args, defines)
+
+	m.p.Call("replaceRepeatableContent", args...)
+}
+
+// Serialize calls the Serialize method on the MaxBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#serialize
+func (m *MaxBlock) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("serialize", args...)
+	return retVal
+}
+
+// UpdateUniformsAndSamples calls the UpdateUniformsAndSamples method on the MaxBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#updateuniformsandsamples
+func (m *MaxBlock) UpdateUniformsAndSamples(state *NodeMaterialBuildState, nodeMaterial *NodeMaterial, defines js.Value, uniformBuffers string) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, state.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+	args = append(args, uniformBuffers)
+
+	m.p.Call("updateUniformsAndSamples", args...)
+}
+
+/*
+
+// BuildId returns the BuildId property of class MaxBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#buildid
+func (m *MaxBlock) BuildId(buildId float64) *MaxBlock {
+	p := ba.ctx.Get("MaxBlock").New(buildId)
+	return MaxBlockFromJSObject(p, ba.ctx)
+}
+
+// SetBuildId sets the BuildId property of class MaxBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#buildid
+func (m *MaxBlock) SetBuildId(buildId float64) *MaxBlock {
+	p := ba.ctx.Get("MaxBlock").New(buildId)
+	return MaxBlockFromJSObject(p, ba.ctx)
+}
+
+// Comments returns the Comments property of class MaxBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#comments
+func (m *MaxBlock) Comments(comments string) *MaxBlock {
+	p := ba.ctx.Get("MaxBlock").New(comments)
+	return MaxBlockFromJSObject(p, ba.ctx)
+}
+
+// SetComments sets the Comments property of class MaxBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#comments
+func (m *MaxBlock) SetComments(comments string) *MaxBlock {
+	p := ba.ctx.Get("MaxBlock").New(comments)
+	return MaxBlockFromJSObject(p, ba.ctx)
+}
+
+// Inputs returns the Inputs property of class MaxBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#inputs
+func (m *MaxBlock) Inputs(inputs *NodeMaterialConnectionPoint) *MaxBlock {
+	p := ba.ctx.Get("MaxBlock").New(inputs.JSObject())
+	return MaxBlockFromJSObject(p, ba.ctx)
+}
+
+// SetInputs sets the Inputs property of class MaxBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#inputs
+func (m *MaxBlock) SetInputs(inputs *NodeMaterialConnectionPoint) *MaxBlock {
+	p := ba.ctx.Get("MaxBlock").New(inputs.JSObject())
+	return MaxBlockFromJSObject(p, ba.ctx)
+}
+
+// IsFinalMerger returns the IsFinalMerger property of class MaxBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#isfinalmerger
+func (m *MaxBlock) IsFinalMerger(isFinalMerger bool) *MaxBlock {
+	p := ba.ctx.Get("MaxBlock").New(isFinalMerger)
+	return MaxBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsFinalMerger sets the IsFinalMerger property of class MaxBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#isfinalmerger
+func (m *MaxBlock) SetIsFinalMerger(isFinalMerger bool) *MaxBlock {
+	p := ba.ctx.Get("MaxBlock").New(isFinalMerger)
+	return MaxBlockFromJSObject(p, ba.ctx)
+}
+
+// IsInput returns the IsInput property of class MaxBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#isinput
+func (m *MaxBlock) IsInput(isInput bool) *MaxBlock {
+	p := ba.ctx.Get("MaxBlock").New(isInput)
+	return MaxBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsInput sets the IsInput property of class MaxBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#isinput
+func (m *MaxBlock) SetIsInput(isInput bool) *MaxBlock {
+	p := ba.ctx.Get("MaxBlock").New(isInput)
+	return MaxBlockFromJSObject(p, ba.ctx)
+}
+
+// IsUnique returns the IsUnique property of class MaxBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#isunique
+func (m *MaxBlock) IsUnique(isUnique bool) *MaxBlock {
+	p := ba.ctx.Get("MaxBlock").New(isUnique)
+	return MaxBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsUnique sets the IsUnique property of class MaxBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#isunique
+func (m *MaxBlock) SetIsUnique(isUnique bool) *MaxBlock {
+	p := ba.ctx.Get("MaxBlock").New(isUnique)
+	return MaxBlockFromJSObject(p, ba.ctx)
+}
+
+// Left returns the Left property of class MaxBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#left
+func (m *MaxBlock) Left(left *NodeMaterialConnectionPoint) *MaxBlock {
+	p := ba.ctx.Get("MaxBlock").New(left.JSObject())
+	return MaxBlockFromJSObject(p, ba.ctx)
+}
+
+// SetLeft sets the Left property of class MaxBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#left
+func (m *MaxBlock) SetLeft(left *NodeMaterialConnectionPoint) *MaxBlock {
+	p := ba.ctx.Get("MaxBlock").New(left.JSObject())
+	return MaxBlockFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class MaxBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#name
+func (m *MaxBlock) Name(name string) *MaxBlock {
 	p := ba.ctx.Get("MaxBlock").New(name)
 	return MaxBlockFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetName sets the Name property of class MaxBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#name
+func (m *MaxBlock) SetName(name string) *MaxBlock {
+	p := ba.ctx.Get("MaxBlock").New(name)
+	return MaxBlockFromJSObject(p, ba.ctx)
+}
+
+// Output returns the Output property of class MaxBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#output
+func (m *MaxBlock) Output(output *NodeMaterialConnectionPoint) *MaxBlock {
+	p := ba.ctx.Get("MaxBlock").New(output.JSObject())
+	return MaxBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOutput sets the Output property of class MaxBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#output
+func (m *MaxBlock) SetOutput(output *NodeMaterialConnectionPoint) *MaxBlock {
+	p := ba.ctx.Get("MaxBlock").New(output.JSObject())
+	return MaxBlockFromJSObject(p, ba.ctx)
+}
+
+// Outputs returns the Outputs property of class MaxBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#outputs
+func (m *MaxBlock) Outputs(outputs *NodeMaterialConnectionPoint) *MaxBlock {
+	p := ba.ctx.Get("MaxBlock").New(outputs.JSObject())
+	return MaxBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOutputs sets the Outputs property of class MaxBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#outputs
+func (m *MaxBlock) SetOutputs(outputs *NodeMaterialConnectionPoint) *MaxBlock {
+	p := ba.ctx.Get("MaxBlock").New(outputs.JSObject())
+	return MaxBlockFromJSObject(p, ba.ctx)
+}
+
+// Right returns the Right property of class MaxBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#right
+func (m *MaxBlock) Right(right *NodeMaterialConnectionPoint) *MaxBlock {
+	p := ba.ctx.Get("MaxBlock").New(right.JSObject())
+	return MaxBlockFromJSObject(p, ba.ctx)
+}
+
+// SetRight sets the Right property of class MaxBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#right
+func (m *MaxBlock) SetRight(right *NodeMaterialConnectionPoint) *MaxBlock {
+	p := ba.ctx.Get("MaxBlock").New(right.JSObject())
+	return MaxBlockFromJSObject(p, ba.ctx)
+}
+
+// Target returns the Target property of class MaxBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#target
+func (m *MaxBlock) Target(target js.Value) *MaxBlock {
+	p := ba.ctx.Get("MaxBlock").New(target)
+	return MaxBlockFromJSObject(p, ba.ctx)
+}
+
+// SetTarget sets the Target property of class MaxBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#target
+func (m *MaxBlock) SetTarget(target js.Value) *MaxBlock {
+	p := ba.ctx.Get("MaxBlock").New(target)
+	return MaxBlockFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class MaxBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#uniqueid
+func (m *MaxBlock) UniqueId(uniqueId float64) *MaxBlock {
+	p := ba.ctx.Get("MaxBlock").New(uniqueId)
+	return MaxBlockFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class MaxBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.maxblock#uniqueid
+func (m *MaxBlock) SetUniqueId(uniqueId float64) *MaxBlock {
+	p := ba.ctx.Get("MaxBlock").New(uniqueId)
+	return MaxBlockFromJSObject(p, ba.ctx)
+}
+
+*/

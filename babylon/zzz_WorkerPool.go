@@ -31,8 +31,37 @@ func WorkerPoolFromJSObject(p js.Value, ctx js.Value) *WorkerPool {
 //
 // https://doc.babylonjs.com/api/classes/babylon.workerpool
 func (ba *Babylon) NewWorkerPool(workers []js.Value) *WorkerPool {
-	p := ba.ctx.Get("WorkerPool").New(workers)
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, workers)
+
+	p := ba.ctx.Get("WorkerPool").New(args...)
 	return WorkerPoolFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Dispose calls the Dispose method on the WorkerPool object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.workerpool#dispose
+func (w *WorkerPool) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	w.p.Call("dispose", args...)
+}
+
+// Push calls the Push method on the WorkerPool object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.workerpool#push
+func (w *WorkerPool) Push(action func()) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, action)
+
+	w.p.Call("push", args...)
+}
+
+/*
+
+ */

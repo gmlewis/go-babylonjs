@@ -29,7 +29,7 @@ func UtilityLayerRendererFromJSObject(p js.Value, ctx js.Value) *UtilityLayerRen
 
 // NewUtilityLayerRendererOpts contains optional parameters for NewUtilityLayerRenderer.
 type NewUtilityLayerRendererOpts struct {
-	HandleEvents *JSBool
+	HandleEvents *bool
 }
 
 // NewUtilityLayerRenderer returns a new UtilityLayerRenderer object.
@@ -40,8 +40,223 @@ func (ba *Babylon) NewUtilityLayerRenderer(originalScene *Scene, opts *NewUtilit
 		opts = &NewUtilityLayerRendererOpts{}
 	}
 
-	p := ba.ctx.Get("UtilityLayerRenderer").New(originalScene.JSObject(), opts.HandleEvents.JSObject())
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, originalScene.JSObject())
+
+	if opts.HandleEvents == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.HandleEvents)
+	}
+
+	p := ba.ctx.Get("UtilityLayerRenderer").New(args...)
 	return UtilityLayerRendererFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Dispose calls the Dispose method on the UtilityLayerRenderer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.utilitylayerrenderer#dispose
+func (u *UtilityLayerRenderer) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	u.p.Call("dispose", args...)
+}
+
+// GetRenderCamera calls the GetRenderCamera method on the UtilityLayerRenderer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.utilitylayerrenderer#getrendercamera
+func (u *UtilityLayerRenderer) GetRenderCamera() *Camera {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := u.p.Call("getRenderCamera", args...)
+	return CameraFromJSObject(retVal, u.ctx)
+}
+
+// Render calls the Render method on the UtilityLayerRenderer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.utilitylayerrenderer#render
+func (u *UtilityLayerRenderer) Render() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	u.p.Call("render", args...)
+}
+
+// SetRenderCamera calls the SetRenderCamera method on the UtilityLayerRenderer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.utilitylayerrenderer#setrendercamera
+func (u *UtilityLayerRenderer) SetRenderCamera(cam *Camera) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, cam.JSObject())
+
+	u.p.Call("setRenderCamera", args...)
+}
+
+/*
+
+// DefaultKeepDepthUtilityLayer returns the DefaultKeepDepthUtilityLayer property of class UtilityLayerRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.utilitylayerrenderer#defaultkeepdepthutilitylayer
+func (u *UtilityLayerRenderer) DefaultKeepDepthUtilityLayer(DefaultKeepDepthUtilityLayer *UtilityLayerRenderer) *UtilityLayerRenderer {
+	p := ba.ctx.Get("UtilityLayerRenderer").New(DefaultKeepDepthUtilityLayer.JSObject())
+	return UtilityLayerRendererFromJSObject(p, ba.ctx)
+}
+
+// SetDefaultKeepDepthUtilityLayer sets the DefaultKeepDepthUtilityLayer property of class UtilityLayerRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.utilitylayerrenderer#defaultkeepdepthutilitylayer
+func (u *UtilityLayerRenderer) SetDefaultKeepDepthUtilityLayer(DefaultKeepDepthUtilityLayer *UtilityLayerRenderer) *UtilityLayerRenderer {
+	p := ba.ctx.Get("UtilityLayerRenderer").New(DefaultKeepDepthUtilityLayer.JSObject())
+	return UtilityLayerRendererFromJSObject(p, ba.ctx)
+}
+
+// DefaultUtilityLayer returns the DefaultUtilityLayer property of class UtilityLayerRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.utilitylayerrenderer#defaultutilitylayer
+func (u *UtilityLayerRenderer) DefaultUtilityLayer(DefaultUtilityLayer *UtilityLayerRenderer) *UtilityLayerRenderer {
+	p := ba.ctx.Get("UtilityLayerRenderer").New(DefaultUtilityLayer.JSObject())
+	return UtilityLayerRendererFromJSObject(p, ba.ctx)
+}
+
+// SetDefaultUtilityLayer sets the DefaultUtilityLayer property of class UtilityLayerRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.utilitylayerrenderer#defaultutilitylayer
+func (u *UtilityLayerRenderer) SetDefaultUtilityLayer(DefaultUtilityLayer *UtilityLayerRenderer) *UtilityLayerRenderer {
+	p := ba.ctx.Get("UtilityLayerRenderer").New(DefaultUtilityLayer.JSObject())
+	return UtilityLayerRendererFromJSObject(p, ba.ctx)
+}
+
+// MainSceneTrackerPredicate returns the MainSceneTrackerPredicate property of class UtilityLayerRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.utilitylayerrenderer#mainscenetrackerpredicate
+func (u *UtilityLayerRenderer) MainSceneTrackerPredicate(mainSceneTrackerPredicate func()) *UtilityLayerRenderer {
+	p := ba.ctx.Get("UtilityLayerRenderer").New(mainSceneTrackerPredicate)
+	return UtilityLayerRendererFromJSObject(p, ba.ctx)
+}
+
+// SetMainSceneTrackerPredicate sets the MainSceneTrackerPredicate property of class UtilityLayerRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.utilitylayerrenderer#mainscenetrackerpredicate
+func (u *UtilityLayerRenderer) SetMainSceneTrackerPredicate(mainSceneTrackerPredicate func()) *UtilityLayerRenderer {
+	p := ba.ctx.Get("UtilityLayerRenderer").New(mainSceneTrackerPredicate)
+	return UtilityLayerRendererFromJSObject(p, ba.ctx)
+}
+
+// OnPointerOutObservable returns the OnPointerOutObservable property of class UtilityLayerRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.utilitylayerrenderer#onpointeroutobservable
+func (u *UtilityLayerRenderer) OnPointerOutObservable(onPointerOutObservable *Observable) *UtilityLayerRenderer {
+	p := ba.ctx.Get("UtilityLayerRenderer").New(onPointerOutObservable.JSObject())
+	return UtilityLayerRendererFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerOutObservable sets the OnPointerOutObservable property of class UtilityLayerRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.utilitylayerrenderer#onpointeroutobservable
+func (u *UtilityLayerRenderer) SetOnPointerOutObservable(onPointerOutObservable *Observable) *UtilityLayerRenderer {
+	p := ba.ctx.Get("UtilityLayerRenderer").New(onPointerOutObservable.JSObject())
+	return UtilityLayerRendererFromJSObject(p, ba.ctx)
+}
+
+// OnlyCheckPointerDownEvents returns the OnlyCheckPointerDownEvents property of class UtilityLayerRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.utilitylayerrenderer#onlycheckpointerdownevents
+func (u *UtilityLayerRenderer) OnlyCheckPointerDownEvents(onlyCheckPointerDownEvents bool) *UtilityLayerRenderer {
+	p := ba.ctx.Get("UtilityLayerRenderer").New(onlyCheckPointerDownEvents)
+	return UtilityLayerRendererFromJSObject(p, ba.ctx)
+}
+
+// SetOnlyCheckPointerDownEvents sets the OnlyCheckPointerDownEvents property of class UtilityLayerRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.utilitylayerrenderer#onlycheckpointerdownevents
+func (u *UtilityLayerRenderer) SetOnlyCheckPointerDownEvents(onlyCheckPointerDownEvents bool) *UtilityLayerRenderer {
+	p := ba.ctx.Get("UtilityLayerRenderer").New(onlyCheckPointerDownEvents)
+	return UtilityLayerRendererFromJSObject(p, ba.ctx)
+}
+
+// OriginalScene returns the OriginalScene property of class UtilityLayerRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.utilitylayerrenderer#originalscene
+func (u *UtilityLayerRenderer) OriginalScene(originalScene *Scene) *UtilityLayerRenderer {
+	p := ba.ctx.Get("UtilityLayerRenderer").New(originalScene.JSObject())
+	return UtilityLayerRendererFromJSObject(p, ba.ctx)
+}
+
+// SetOriginalScene sets the OriginalScene property of class UtilityLayerRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.utilitylayerrenderer#originalscene
+func (u *UtilityLayerRenderer) SetOriginalScene(originalScene *Scene) *UtilityLayerRenderer {
+	p := ba.ctx.Get("UtilityLayerRenderer").New(originalScene.JSObject())
+	return UtilityLayerRendererFromJSObject(p, ba.ctx)
+}
+
+// PickUtilitySceneFirst returns the PickUtilitySceneFirst property of class UtilityLayerRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.utilitylayerrenderer#pickutilityscenefirst
+func (u *UtilityLayerRenderer) PickUtilitySceneFirst(pickUtilitySceneFirst bool) *UtilityLayerRenderer {
+	p := ba.ctx.Get("UtilityLayerRenderer").New(pickUtilitySceneFirst)
+	return UtilityLayerRendererFromJSObject(p, ba.ctx)
+}
+
+// SetPickUtilitySceneFirst sets the PickUtilitySceneFirst property of class UtilityLayerRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.utilitylayerrenderer#pickutilityscenefirst
+func (u *UtilityLayerRenderer) SetPickUtilitySceneFirst(pickUtilitySceneFirst bool) *UtilityLayerRenderer {
+	p := ba.ctx.Get("UtilityLayerRenderer").New(pickUtilitySceneFirst)
+	return UtilityLayerRendererFromJSObject(p, ba.ctx)
+}
+
+// ProcessAllEvents returns the ProcessAllEvents property of class UtilityLayerRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.utilitylayerrenderer#processallevents
+func (u *UtilityLayerRenderer) ProcessAllEvents(processAllEvents bool) *UtilityLayerRenderer {
+	p := ba.ctx.Get("UtilityLayerRenderer").New(processAllEvents)
+	return UtilityLayerRendererFromJSObject(p, ba.ctx)
+}
+
+// SetProcessAllEvents sets the ProcessAllEvents property of class UtilityLayerRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.utilitylayerrenderer#processallevents
+func (u *UtilityLayerRenderer) SetProcessAllEvents(processAllEvents bool) *UtilityLayerRenderer {
+	p := ba.ctx.Get("UtilityLayerRenderer").New(processAllEvents)
+	return UtilityLayerRendererFromJSObject(p, ba.ctx)
+}
+
+// ShouldRender returns the ShouldRender property of class UtilityLayerRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.utilitylayerrenderer#shouldrender
+func (u *UtilityLayerRenderer) ShouldRender(shouldRender bool) *UtilityLayerRenderer {
+	p := ba.ctx.Get("UtilityLayerRenderer").New(shouldRender)
+	return UtilityLayerRendererFromJSObject(p, ba.ctx)
+}
+
+// SetShouldRender sets the ShouldRender property of class UtilityLayerRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.utilitylayerrenderer#shouldrender
+func (u *UtilityLayerRenderer) SetShouldRender(shouldRender bool) *UtilityLayerRenderer {
+	p := ba.ctx.Get("UtilityLayerRenderer").New(shouldRender)
+	return UtilityLayerRendererFromJSObject(p, ba.ctx)
+}
+
+// UtilityLayerScene returns the UtilityLayerScene property of class UtilityLayerRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.utilitylayerrenderer#utilitylayerscene
+func (u *UtilityLayerRenderer) UtilityLayerScene(utilityLayerScene *Scene) *UtilityLayerRenderer {
+	p := ba.ctx.Get("UtilityLayerRenderer").New(utilityLayerScene.JSObject())
+	return UtilityLayerRendererFromJSObject(p, ba.ctx)
+}
+
+// SetUtilityLayerScene sets the UtilityLayerScene property of class UtilityLayerRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.utilitylayerrenderer#utilitylayerscene
+func (u *UtilityLayerRenderer) SetUtilityLayerScene(utilityLayerScene *Scene) *UtilityLayerRenderer {
+	p := ba.ctx.Get("UtilityLayerRenderer").New(utilityLayerScene.JSObject())
+	return UtilityLayerRendererFromJSObject(p, ba.ctx)
+}
+
+*/

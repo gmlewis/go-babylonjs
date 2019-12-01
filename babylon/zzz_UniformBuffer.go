@@ -32,9 +32,8 @@ func UniformBufferFromJSObject(p js.Value, ctx js.Value) *UniformBuffer {
 
 // NewUniformBufferOpts contains optional parameters for NewUniformBuffer.
 type NewUniformBufferOpts struct {
-	Data *JSFloat64
-
-	Dynamic *JSBool
+	Data    *float64
+	Dynamic *bool
 }
 
 // NewUniformBuffer returns a new UniformBuffer object.
@@ -45,8 +44,468 @@ func (ba *Babylon) NewUniformBuffer(engine *Engine, opts *NewUniformBufferOpts) 
 		opts = &NewUniformBufferOpts{}
 	}
 
-	p := ba.ctx.Get("UniformBuffer").New(engine.JSObject(), opts.Data.JSObject(), opts.Dynamic.JSObject())
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, engine.JSObject())
+
+	if opts.Data == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Data)
+	}
+	if opts.Dynamic == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Dynamic)
+	}
+
+	p := ba.ctx.Get("UniformBuffer").New(args...)
 	return UniformBufferFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AddColor3 calls the AddColor3 method on the UniformBuffer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#addcolor3
+func (u *UniformBuffer) AddColor3(name string, color *Color3) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, color.JSObject())
+
+	u.p.Call("addColor3", args...)
+}
+
+// AddColor4 calls the AddColor4 method on the UniformBuffer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#addcolor4
+func (u *UniformBuffer) AddColor4(name string, color *Color3, alpha float64) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, name)
+	args = append(args, color.JSObject())
+	args = append(args, alpha)
+
+	u.p.Call("addColor4", args...)
+}
+
+// AddFloat2 calls the AddFloat2 method on the UniformBuffer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#addfloat2
+func (u *UniformBuffer) AddFloat2(name string, x float64, y float64) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, name)
+	args = append(args, x)
+	args = append(args, y)
+
+	u.p.Call("addFloat2", args...)
+}
+
+// AddFloat3 calls the AddFloat3 method on the UniformBuffer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#addfloat3
+func (u *UniformBuffer) AddFloat3(name string, x float64, y float64, z float64) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, name)
+	args = append(args, x)
+	args = append(args, y)
+	args = append(args, z)
+
+	u.p.Call("addFloat3", args...)
+}
+
+// AddMatrix calls the AddMatrix method on the UniformBuffer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#addmatrix
+func (u *UniformBuffer) AddMatrix(name string, mat *Matrix) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, mat.JSObject())
+
+	u.p.Call("addMatrix", args...)
+}
+
+// AddMatrix2x2 calls the AddMatrix2x2 method on the UniformBuffer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#addmatrix2x2
+func (u *UniformBuffer) AddMatrix2x2(name string) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	u.p.Call("addMatrix2x2", args...)
+}
+
+// AddMatrix3x3 calls the AddMatrix3x3 method on the UniformBuffer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#addmatrix3x3
+func (u *UniformBuffer) AddMatrix3x3(name string) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	u.p.Call("addMatrix3x3", args...)
+}
+
+// AddUniform calls the AddUniform method on the UniformBuffer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#adduniform
+func (u *UniformBuffer) AddUniform(name string, size float64) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, size)
+
+	u.p.Call("addUniform", args...)
+}
+
+// AddVector3 calls the AddVector3 method on the UniformBuffer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#addvector3
+func (u *UniformBuffer) AddVector3(name string, vector *Vector3) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, vector.JSObject())
+
+	u.p.Call("addVector3", args...)
+}
+
+// BindToEffect calls the BindToEffect method on the UniformBuffer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#bindtoeffect
+func (u *UniformBuffer) BindToEffect(effect *Effect, name string) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, effect.JSObject())
+	args = append(args, name)
+
+	u.p.Call("bindToEffect", args...)
+}
+
+// Create calls the Create method on the UniformBuffer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#create
+func (u *UniformBuffer) Create() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	u.p.Call("create", args...)
+}
+
+// Dispose calls the Dispose method on the UniformBuffer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#dispose
+func (u *UniformBuffer) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	u.p.Call("dispose", args...)
+}
+
+// GetBuffer calls the GetBuffer method on the UniformBuffer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#getbuffer
+func (u *UniformBuffer) GetBuffer() *DataBuffer {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := u.p.Call("getBuffer", args...)
+	return DataBufferFromJSObject(retVal, u.ctx)
+}
+
+// GetData calls the GetData method on the UniformBuffer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#getdata
+func (u *UniformBuffer) GetData() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := u.p.Call("getData", args...)
+	return retVal
+}
+
+// IsDynamic calls the IsDynamic method on the UniformBuffer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#isdynamic
+func (u *UniformBuffer) IsDynamic() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := u.p.Call("isDynamic", args...)
+	return retVal.Bool()
+}
+
+// SetTexture calls the SetTexture method on the UniformBuffer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#settexture
+func (u *UniformBuffer) SetTexture(name string, texture *BaseTexture) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, texture.JSObject())
+
+	u.p.Call("setTexture", args...)
+}
+
+// Update calls the Update method on the UniformBuffer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#update
+func (u *UniformBuffer) Update() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	u.p.Call("update", args...)
+}
+
+// UpdateUniform calls the UpdateUniform method on the UniformBuffer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updateuniform
+func (u *UniformBuffer) UpdateUniform(uniformName string, data js.Value, size float64) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, uniformName)
+	args = append(args, data)
+	args = append(args, size)
+
+	u.p.Call("updateUniform", args...)
+}
+
+// UpdateUniformDirectly calls the UpdateUniformDirectly method on the UniformBuffer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updateuniformdirectly
+func (u *UniformBuffer) UpdateUniformDirectly(uniformName string, data js.Value) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniformName)
+	args = append(args, data)
+
+	u.p.Call("updateUniformDirectly", args...)
+}
+
+/*
+
+// IsSync returns the IsSync property of class UniformBuffer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#issync
+func (u *UniformBuffer) IsSync(isSync bool) *UniformBuffer {
+	p := ba.ctx.Get("UniformBuffer").New(isSync)
+	return UniformBufferFromJSObject(p, ba.ctx)
+}
+
+// SetIsSync sets the IsSync property of class UniformBuffer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#issync
+func (u *UniformBuffer) SetIsSync(isSync bool) *UniformBuffer {
+	p := ba.ctx.Get("UniformBuffer").New(isSync)
+	return UniformBufferFromJSObject(p, ba.ctx)
+}
+
+// UpdateColor3 returns the UpdateColor3 property of class UniformBuffer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatecolor3
+func (u *UniformBuffer) UpdateColor3(updateColor3 func()) *UniformBuffer {
+	p := ba.ctx.Get("UniformBuffer").New(updateColor3)
+	return UniformBufferFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateColor3 sets the UpdateColor3 property of class UniformBuffer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatecolor3
+func (u *UniformBuffer) SetUpdateColor3(updateColor3 func()) *UniformBuffer {
+	p := ba.ctx.Get("UniformBuffer").New(updateColor3)
+	return UniformBufferFromJSObject(p, ba.ctx)
+}
+
+// UpdateColor4 returns the UpdateColor4 property of class UniformBuffer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatecolor4
+func (u *UniformBuffer) UpdateColor4(updateColor4 func()) *UniformBuffer {
+	p := ba.ctx.Get("UniformBuffer").New(updateColor4)
+	return UniformBufferFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateColor4 sets the UpdateColor4 property of class UniformBuffer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatecolor4
+func (u *UniformBuffer) SetUpdateColor4(updateColor4 func()) *UniformBuffer {
+	p := ba.ctx.Get("UniformBuffer").New(updateColor4)
+	return UniformBufferFromJSObject(p, ba.ctx)
+}
+
+// UpdateFloat returns the UpdateFloat property of class UniformBuffer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatefloat
+func (u *UniformBuffer) UpdateFloat(updateFloat func()) *UniformBuffer {
+	p := ba.ctx.Get("UniformBuffer").New(updateFloat)
+	return UniformBufferFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateFloat sets the UpdateFloat property of class UniformBuffer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatefloat
+func (u *UniformBuffer) SetUpdateFloat(updateFloat func()) *UniformBuffer {
+	p := ba.ctx.Get("UniformBuffer").New(updateFloat)
+	return UniformBufferFromJSObject(p, ba.ctx)
+}
+
+// UpdateFloat2 returns the UpdateFloat2 property of class UniformBuffer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatefloat2
+func (u *UniformBuffer) UpdateFloat2(updateFloat2 func()) *UniformBuffer {
+	p := ba.ctx.Get("UniformBuffer").New(updateFloat2)
+	return UniformBufferFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateFloat2 sets the UpdateFloat2 property of class UniformBuffer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatefloat2
+func (u *UniformBuffer) SetUpdateFloat2(updateFloat2 func()) *UniformBuffer {
+	p := ba.ctx.Get("UniformBuffer").New(updateFloat2)
+	return UniformBufferFromJSObject(p, ba.ctx)
+}
+
+// UpdateFloat3 returns the UpdateFloat3 property of class UniformBuffer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatefloat3
+func (u *UniformBuffer) UpdateFloat3(updateFloat3 func()) *UniformBuffer {
+	p := ba.ctx.Get("UniformBuffer").New(updateFloat3)
+	return UniformBufferFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateFloat3 sets the UpdateFloat3 property of class UniformBuffer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatefloat3
+func (u *UniformBuffer) SetUpdateFloat3(updateFloat3 func()) *UniformBuffer {
+	p := ba.ctx.Get("UniformBuffer").New(updateFloat3)
+	return UniformBufferFromJSObject(p, ba.ctx)
+}
+
+// UpdateFloat4 returns the UpdateFloat4 property of class UniformBuffer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatefloat4
+func (u *UniformBuffer) UpdateFloat4(updateFloat4 func()) *UniformBuffer {
+	p := ba.ctx.Get("UniformBuffer").New(updateFloat4)
+	return UniformBufferFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateFloat4 sets the UpdateFloat4 property of class UniformBuffer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatefloat4
+func (u *UniformBuffer) SetUpdateFloat4(updateFloat4 func()) *UniformBuffer {
+	p := ba.ctx.Get("UniformBuffer").New(updateFloat4)
+	return UniformBufferFromJSObject(p, ba.ctx)
+}
+
+// UpdateMatrix returns the UpdateMatrix property of class UniformBuffer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatematrix
+func (u *UniformBuffer) UpdateMatrix(updateMatrix func()) *UniformBuffer {
+	p := ba.ctx.Get("UniformBuffer").New(updateMatrix)
+	return UniformBufferFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateMatrix sets the UpdateMatrix property of class UniformBuffer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatematrix
+func (u *UniformBuffer) SetUpdateMatrix(updateMatrix func()) *UniformBuffer {
+	p := ba.ctx.Get("UniformBuffer").New(updateMatrix)
+	return UniformBufferFromJSObject(p, ba.ctx)
+}
+
+// UpdateMatrix2x2 returns the UpdateMatrix2x2 property of class UniformBuffer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatematrix2x2
+func (u *UniformBuffer) UpdateMatrix2x2(updateMatrix2x2 func()) *UniformBuffer {
+	p := ba.ctx.Get("UniformBuffer").New(updateMatrix2x2)
+	return UniformBufferFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateMatrix2x2 sets the UpdateMatrix2x2 property of class UniformBuffer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatematrix2x2
+func (u *UniformBuffer) SetUpdateMatrix2x2(updateMatrix2x2 func()) *UniformBuffer {
+	p := ba.ctx.Get("UniformBuffer").New(updateMatrix2x2)
+	return UniformBufferFromJSObject(p, ba.ctx)
+}
+
+// UpdateMatrix3x3 returns the UpdateMatrix3x3 property of class UniformBuffer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatematrix3x3
+func (u *UniformBuffer) UpdateMatrix3x3(updateMatrix3x3 func()) *UniformBuffer {
+	p := ba.ctx.Get("UniformBuffer").New(updateMatrix3x3)
+	return UniformBufferFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateMatrix3x3 sets the UpdateMatrix3x3 property of class UniformBuffer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatematrix3x3
+func (u *UniformBuffer) SetUpdateMatrix3x3(updateMatrix3x3 func()) *UniformBuffer {
+	p := ba.ctx.Get("UniformBuffer").New(updateMatrix3x3)
+	return UniformBufferFromJSObject(p, ba.ctx)
+}
+
+// UpdateVector3 returns the UpdateVector3 property of class UniformBuffer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatevector3
+func (u *UniformBuffer) UpdateVector3(updateVector3 func()) *UniformBuffer {
+	p := ba.ctx.Get("UniformBuffer").New(updateVector3)
+	return UniformBufferFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateVector3 sets the UpdateVector3 property of class UniformBuffer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatevector3
+func (u *UniformBuffer) SetUpdateVector3(updateVector3 func()) *UniformBuffer {
+	p := ba.ctx.Get("UniformBuffer").New(updateVector3)
+	return UniformBufferFromJSObject(p, ba.ctx)
+}
+
+// UpdateVector4 returns the UpdateVector4 property of class UniformBuffer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatevector4
+func (u *UniformBuffer) UpdateVector4(updateVector4 func()) *UniformBuffer {
+	p := ba.ctx.Get("UniformBuffer").New(updateVector4)
+	return UniformBufferFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateVector4 sets the UpdateVector4 property of class UniformBuffer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#updatevector4
+func (u *UniformBuffer) SetUpdateVector4(updateVector4 func()) *UniformBuffer {
+	p := ba.ctx.Get("UniformBuffer").New(updateVector4)
+	return UniformBufferFromJSObject(p, ba.ctx)
+}
+
+// UseUbo returns the UseUbo property of class UniformBuffer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#useubo
+func (u *UniformBuffer) UseUbo(useUbo bool) *UniformBuffer {
+	p := ba.ctx.Get("UniformBuffer").New(useUbo)
+	return UniformBufferFromJSObject(p, ba.ctx)
+}
+
+// SetUseUbo sets the UseUbo property of class UniformBuffer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.uniformbuffer#useubo
+func (u *UniformBuffer) SetUseUbo(useUbo bool) *UniformBuffer {
+	p := ba.ctx.Get("UniformBuffer").New(useUbo)
+	return UniformBufferFromJSObject(p, ba.ctx)
+}
+
+*/

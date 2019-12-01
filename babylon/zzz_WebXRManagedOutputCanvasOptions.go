@@ -27,4 +27,49 @@ func WebXRManagedOutputCanvasOptionsFromJSObject(p js.Value, ctx js.Value) *WebX
 	return &WebXRManagedOutputCanvasOptions{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// GetDefaults calls the GetDefaults method on the WebXRManagedOutputCanvasOptions object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrmanagedoutputcanvasoptions#getdefaults
+func (w *WebXRManagedOutputCanvasOptions) GetDefaults() *WebXRManagedOutputCanvasOptions {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := w.p.Call("GetDefaults", args...)
+	return WebXRManagedOutputCanvasOptionsFromJSObject(retVal, w.ctx)
+}
+
+/*
+
+// CanvasOptions returns the CanvasOptions property of class WebXRManagedOutputCanvasOptions.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrmanagedoutputcanvasoptions#canvasoptions
+func (w *WebXRManagedOutputCanvasOptions) CanvasOptions(canvasOptions *XRWebGLLayerOptions) *WebXRManagedOutputCanvasOptions {
+	p := ba.ctx.Get("WebXRManagedOutputCanvasOptions").New(canvasOptions.JSObject())
+	return WebXRManagedOutputCanvasOptionsFromJSObject(p, ba.ctx)
+}
+
+// SetCanvasOptions sets the CanvasOptions property of class WebXRManagedOutputCanvasOptions.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrmanagedoutputcanvasoptions#canvasoptions
+func (w *WebXRManagedOutputCanvasOptions) SetCanvasOptions(canvasOptions *XRWebGLLayerOptions) *WebXRManagedOutputCanvasOptions {
+	p := ba.ctx.Get("WebXRManagedOutputCanvasOptions").New(canvasOptions.JSObject())
+	return WebXRManagedOutputCanvasOptionsFromJSObject(p, ba.ctx)
+}
+
+// NewCanvasCssStyle returns the NewCanvasCssStyle property of class WebXRManagedOutputCanvasOptions.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrmanagedoutputcanvasoptions#newcanvascssstyle
+func (w *WebXRManagedOutputCanvasOptions) NewCanvasCssStyle(newCanvasCssStyle string) *WebXRManagedOutputCanvasOptions {
+	p := ba.ctx.Get("WebXRManagedOutputCanvasOptions").New(newCanvasCssStyle)
+	return WebXRManagedOutputCanvasOptionsFromJSObject(p, ba.ctx)
+}
+
+// SetNewCanvasCssStyle sets the NewCanvasCssStyle property of class WebXRManagedOutputCanvasOptions.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrmanagedoutputcanvasoptions#newcanvascssstyle
+func (w *WebXRManagedOutputCanvasOptions) SetNewCanvasCssStyle(newCanvasCssStyle string) *WebXRManagedOutputCanvasOptions {
+	p := ba.ctx.Get("WebXRManagedOutputCanvasOptions").New(newCanvasCssStyle)
+	return WebXRManagedOutputCanvasOptionsFromJSObject(p, ba.ctx)
+}
+
+*/

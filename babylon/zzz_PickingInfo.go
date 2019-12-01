@@ -29,4 +29,224 @@ func PickingInfoFromJSObject(p js.Value, ctx js.Value) *PickingInfo {
 	return &PickingInfo{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// PickingInfoGetNormalOpts contains optional parameters for PickingInfo.GetNormal.
+type PickingInfoGetNormalOpts struct {
+	UseWorldCoordinates *bool
+	UseVerticesNormals  *bool
+}
+
+// GetNormal calls the GetNormal method on the PickingInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pickinginfo#getnormal
+func (p *PickingInfo) GetNormal(opts *PickingInfoGetNormalOpts) *Vector3 {
+	if opts == nil {
+		opts = &PickingInfoGetNormalOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.UseWorldCoordinates == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseWorldCoordinates)
+	}
+	if opts.UseVerticesNormals == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseVerticesNormals)
+	}
+
+	retVal := p.p.Call("getNormal", args...)
+	return Vector3FromJSObject(retVal, p.ctx)
+}
+
+// GetTextureCoordinates calls the GetTextureCoordinates method on the PickingInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pickinginfo#gettexturecoordinates
+func (p *PickingInfo) GetTextureCoordinates() *Vector2 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("getTextureCoordinates", args...)
+	return Vector2FromJSObject(retVal, p.ctx)
+}
+
+/*
+
+// Bu returns the Bu property of class PickingInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pickinginfo#bu
+func (p *PickingInfo) Bu(bu float64) *PickingInfo {
+	p := ba.ctx.Get("PickingInfo").New(bu)
+	return PickingInfoFromJSObject(p, ba.ctx)
+}
+
+// SetBu sets the Bu property of class PickingInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pickinginfo#bu
+func (p *PickingInfo) SetBu(bu float64) *PickingInfo {
+	p := ba.ctx.Get("PickingInfo").New(bu)
+	return PickingInfoFromJSObject(p, ba.ctx)
+}
+
+// Bv returns the Bv property of class PickingInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pickinginfo#bv
+func (p *PickingInfo) Bv(bv float64) *PickingInfo {
+	p := ba.ctx.Get("PickingInfo").New(bv)
+	return PickingInfoFromJSObject(p, ba.ctx)
+}
+
+// SetBv sets the Bv property of class PickingInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pickinginfo#bv
+func (p *PickingInfo) SetBv(bv float64) *PickingInfo {
+	p := ba.ctx.Get("PickingInfo").New(bv)
+	return PickingInfoFromJSObject(p, ba.ctx)
+}
+
+// Distance returns the Distance property of class PickingInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pickinginfo#distance
+func (p *PickingInfo) Distance(distance float64) *PickingInfo {
+	p := ba.ctx.Get("PickingInfo").New(distance)
+	return PickingInfoFromJSObject(p, ba.ctx)
+}
+
+// SetDistance sets the Distance property of class PickingInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pickinginfo#distance
+func (p *PickingInfo) SetDistance(distance float64) *PickingInfo {
+	p := ba.ctx.Get("PickingInfo").New(distance)
+	return PickingInfoFromJSObject(p, ba.ctx)
+}
+
+// FaceId returns the FaceId property of class PickingInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pickinginfo#faceid
+func (p *PickingInfo) FaceId(faceId float64) *PickingInfo {
+	p := ba.ctx.Get("PickingInfo").New(faceId)
+	return PickingInfoFromJSObject(p, ba.ctx)
+}
+
+// SetFaceId sets the FaceId property of class PickingInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pickinginfo#faceid
+func (p *PickingInfo) SetFaceId(faceId float64) *PickingInfo {
+	p := ba.ctx.Get("PickingInfo").New(faceId)
+	return PickingInfoFromJSObject(p, ba.ctx)
+}
+
+// Hit returns the Hit property of class PickingInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pickinginfo#hit
+func (p *PickingInfo) Hit(hit bool) *PickingInfo {
+	p := ba.ctx.Get("PickingInfo").New(hit)
+	return PickingInfoFromJSObject(p, ba.ctx)
+}
+
+// SetHit sets the Hit property of class PickingInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pickinginfo#hit
+func (p *PickingInfo) SetHit(hit bool) *PickingInfo {
+	p := ba.ctx.Get("PickingInfo").New(hit)
+	return PickingInfoFromJSObject(p, ba.ctx)
+}
+
+// OriginMesh returns the OriginMesh property of class PickingInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pickinginfo#originmesh
+func (p *PickingInfo) OriginMesh(originMesh *AbstractMesh) *PickingInfo {
+	p := ba.ctx.Get("PickingInfo").New(originMesh.JSObject())
+	return PickingInfoFromJSObject(p, ba.ctx)
+}
+
+// SetOriginMesh sets the OriginMesh property of class PickingInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pickinginfo#originmesh
+func (p *PickingInfo) SetOriginMesh(originMesh *AbstractMesh) *PickingInfo {
+	p := ba.ctx.Get("PickingInfo").New(originMesh.JSObject())
+	return PickingInfoFromJSObject(p, ba.ctx)
+}
+
+// PickedMesh returns the PickedMesh property of class PickingInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pickinginfo#pickedmesh
+func (p *PickingInfo) PickedMesh(pickedMesh *AbstractMesh) *PickingInfo {
+	p := ba.ctx.Get("PickingInfo").New(pickedMesh.JSObject())
+	return PickingInfoFromJSObject(p, ba.ctx)
+}
+
+// SetPickedMesh sets the PickedMesh property of class PickingInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pickinginfo#pickedmesh
+func (p *PickingInfo) SetPickedMesh(pickedMesh *AbstractMesh) *PickingInfo {
+	p := ba.ctx.Get("PickingInfo").New(pickedMesh.JSObject())
+	return PickingInfoFromJSObject(p, ba.ctx)
+}
+
+// PickedPoint returns the PickedPoint property of class PickingInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pickinginfo#pickedpoint
+func (p *PickingInfo) PickedPoint(pickedPoint *Vector3) *PickingInfo {
+	p := ba.ctx.Get("PickingInfo").New(pickedPoint.JSObject())
+	return PickingInfoFromJSObject(p, ba.ctx)
+}
+
+// SetPickedPoint sets the PickedPoint property of class PickingInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pickinginfo#pickedpoint
+func (p *PickingInfo) SetPickedPoint(pickedPoint *Vector3) *PickingInfo {
+	p := ba.ctx.Get("PickingInfo").New(pickedPoint.JSObject())
+	return PickingInfoFromJSObject(p, ba.ctx)
+}
+
+// PickedSprite returns the PickedSprite property of class PickingInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pickinginfo#pickedsprite
+func (p *PickingInfo) PickedSprite(pickedSprite *Sprite) *PickingInfo {
+	p := ba.ctx.Get("PickingInfo").New(pickedSprite.JSObject())
+	return PickingInfoFromJSObject(p, ba.ctx)
+}
+
+// SetPickedSprite sets the PickedSprite property of class PickingInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pickinginfo#pickedsprite
+func (p *PickingInfo) SetPickedSprite(pickedSprite *Sprite) *PickingInfo {
+	p := ba.ctx.Get("PickingInfo").New(pickedSprite.JSObject())
+	return PickingInfoFromJSObject(p, ba.ctx)
+}
+
+// Ray returns the Ray property of class PickingInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pickinginfo#ray
+func (p *PickingInfo) Ray(ray *Ray) *PickingInfo {
+	p := ba.ctx.Get("PickingInfo").New(ray.JSObject())
+	return PickingInfoFromJSObject(p, ba.ctx)
+}
+
+// SetRay sets the Ray property of class PickingInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pickinginfo#ray
+func (p *PickingInfo) SetRay(ray *Ray) *PickingInfo {
+	p := ba.ctx.Get("PickingInfo").New(ray.JSObject())
+	return PickingInfoFromJSObject(p, ba.ctx)
+}
+
+// SubMeshId returns the SubMeshId property of class PickingInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pickinginfo#submeshid
+func (p *PickingInfo) SubMeshId(subMeshId float64) *PickingInfo {
+	p := ba.ctx.Get("PickingInfo").New(subMeshId)
+	return PickingInfoFromJSObject(p, ba.ctx)
+}
+
+// SetSubMeshId sets the SubMeshId property of class PickingInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pickinginfo#submeshid
+func (p *PickingInfo) SetSubMeshId(subMeshId float64) *PickingInfo {
+	p := ba.ctx.Get("PickingInfo").New(subMeshId)
+	return PickingInfoFromJSObject(p, ba.ctx)
+}
+
+*/

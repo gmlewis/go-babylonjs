@@ -31,8 +31,7 @@ func PolygonMeshBuilderFromJSObject(p js.Value, ctx js.Value) *PolygonMeshBuilde
 
 // NewPolygonMeshBuilderOpts contains optional parameters for NewPolygonMeshBuilder.
 type NewPolygonMeshBuilderOpts struct {
-	Scene *Scene
-
+	Scene           *Scene
 	EarcutInjection *interface{}
 }
 
@@ -44,8 +43,111 @@ func (ba *Babylon) NewPolygonMeshBuilder(name string, contours *Path2, opts *New
 		opts = &NewPolygonMeshBuilderOpts{}
 	}
 
-	p := ba.ctx.Get("PolygonMeshBuilder").New(name, contours.JSObject(), opts.Scene.JSObject(), opts.EarcutInjection)
+	args := make([]interface{}, 0, 2+2)
+
+	args = append(args, name)
+	args = append(args, contours.JSObject())
+
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+	if opts.EarcutInjection == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.EarcutInjection)
+	}
+
+	p := ba.ctx.Get("PolygonMeshBuilder").New(args...)
 	return PolygonMeshBuilderFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AddHole calls the AddHole method on the PolygonMeshBuilder object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.polygonmeshbuilder#addhole
+func (p *PolygonMeshBuilder) AddHole(hole *Vector2) *PolygonMeshBuilder {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, hole.JSObject())
+
+	retVal := p.p.Call("addHole", args...)
+	return PolygonMeshBuilderFromJSObject(retVal, p.ctx)
+}
+
+// PolygonMeshBuilderBuildOpts contains optional parameters for PolygonMeshBuilder.Build.
+type PolygonMeshBuilderBuildOpts struct {
+	Updatable *bool
+	Depth     *float64
+}
+
+// Build calls the Build method on the PolygonMeshBuilder object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.polygonmeshbuilder#build
+func (p *PolygonMeshBuilder) Build(opts *PolygonMeshBuilderBuildOpts) *Mesh {
+	if opts == nil {
+		opts = &PolygonMeshBuilderBuildOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.Updatable == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Updatable)
+	}
+	if opts.Depth == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Depth)
+	}
+
+	retVal := p.p.Call("build", args...)
+	return MeshFromJSObject(retVal, p.ctx)
+}
+
+// PolygonMeshBuilderBuildVertexDataOpts contains optional parameters for PolygonMeshBuilder.BuildVertexData.
+type PolygonMeshBuilderBuildVertexDataOpts struct {
+	Depth *float64
+}
+
+// BuildVertexData calls the BuildVertexData method on the PolygonMeshBuilder object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.polygonmeshbuilder#buildvertexdata
+func (p *PolygonMeshBuilder) BuildVertexData(opts *PolygonMeshBuilderBuildVertexDataOpts) *VertexData {
+	if opts == nil {
+		opts = &PolygonMeshBuilderBuildVertexDataOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Depth == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Depth)
+	}
+
+	retVal := p.p.Call("buildVertexData", args...)
+	return VertexDataFromJSObject(retVal, p.ctx)
+}
+
+/*
+
+// BjsEarcut returns the BjsEarcut property of class PolygonMeshBuilder.
+//
+// https://doc.babylonjs.com/api/classes/babylon.polygonmeshbuilder#bjsearcut
+func (p *PolygonMeshBuilder) BjsEarcut(bjsEarcut interface{}) *PolygonMeshBuilder {
+	p := ba.ctx.Get("PolygonMeshBuilder").New(bjsEarcut)
+	return PolygonMeshBuilderFromJSObject(p, ba.ctx)
+}
+
+// SetBjsEarcut sets the BjsEarcut property of class PolygonMeshBuilder.
+//
+// https://doc.babylonjs.com/api/classes/babylon.polygonmeshbuilder#bjsearcut
+func (p *PolygonMeshBuilder) SetBjsEarcut(bjsEarcut interface{}) *PolygonMeshBuilder {
+	p := ba.ctx.Get("PolygonMeshBuilder").New(bjsEarcut)
+	return PolygonMeshBuilderFromJSObject(p, ba.ctx)
+}
+
+*/

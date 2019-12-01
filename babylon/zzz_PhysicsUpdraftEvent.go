@@ -31,8 +31,72 @@ func PhysicsUpdraftEventFromJSObject(p js.Value, ctx js.Value) *PhysicsUpdraftEv
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsupdraftevent
 func (ba *Babylon) NewPhysicsUpdraftEvent(_scene *Scene, _origin *Vector3, _options *PhysicsUpdraftEventOptions) *PhysicsUpdraftEvent {
-	p := ba.ctx.Get("PhysicsUpdraftEvent").New(_scene.JSObject(), _origin.JSObject(), _options.JSObject())
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, _scene.JSObject())
+	args = append(args, _origin.JSObject())
+	args = append(args, _options.JSObject())
+
+	p := ba.ctx.Get("PhysicsUpdraftEvent").New(args...)
 	return PhysicsUpdraftEventFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Disable calls the Disable method on the PhysicsUpdraftEvent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsupdraftevent#disable
+func (p *PhysicsUpdraftEvent) Disable() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("disable", args...)
+}
+
+// PhysicsUpdraftEventDisposeOpts contains optional parameters for PhysicsUpdraftEvent.Dispose.
+type PhysicsUpdraftEventDisposeOpts struct {
+	Force *bool
+}
+
+// Dispose calls the Dispose method on the PhysicsUpdraftEvent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsupdraftevent#dispose
+func (p *PhysicsUpdraftEvent) Dispose(opts *PhysicsUpdraftEventDisposeOpts) {
+	if opts == nil {
+		opts = &PhysicsUpdraftEventDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Force == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Force)
+	}
+
+	p.p.Call("dispose", args...)
+}
+
+// Enable calls the Enable method on the PhysicsUpdraftEvent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsupdraftevent#enable
+func (p *PhysicsUpdraftEvent) Enable() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("enable", args...)
+}
+
+// GetData calls the GetData method on the PhysicsUpdraftEvent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsupdraftevent#getdata
+func (p *PhysicsUpdraftEvent) GetData() *PhysicsUpdraftEventData {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("getData", args...)
+	return PhysicsUpdraftEventDataFromJSObject(retVal, p.ctx)
+}
+
+/*
+
+ */

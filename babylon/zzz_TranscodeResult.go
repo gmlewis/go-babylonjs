@@ -27,4 +27,38 @@ func TranscodeResultFromJSObject(p js.Value, ctx js.Value) *TranscodeResult {
 	return &TranscodeResult{p: p, ctx: ctx}
 }
 
-// TODO: methods
+/*
+
+// FileInfo returns the FileInfo property of class TranscodeResult.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transcoderesult#fileinfo
+func (t *TranscodeResult) FileInfo(fileInfo *BasisFileInfo) *TranscodeResult {
+	p := ba.ctx.Get("TranscodeResult").New(fileInfo.JSObject())
+	return TranscodeResultFromJSObject(p, ba.ctx)
+}
+
+// SetFileInfo sets the FileInfo property of class TranscodeResult.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transcoderesult#fileinfo
+func (t *TranscodeResult) SetFileInfo(fileInfo *BasisFileInfo) *TranscodeResult {
+	p := ba.ctx.Get("TranscodeResult").New(fileInfo.JSObject())
+	return TranscodeResultFromJSObject(p, ba.ctx)
+}
+
+// Format returns the Format property of class TranscodeResult.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transcoderesult#format
+func (t *TranscodeResult) Format(format float64) *TranscodeResult {
+	p := ba.ctx.Get("TranscodeResult").New(format)
+	return TranscodeResultFromJSObject(p, ba.ctx)
+}
+
+// SetFormat sets the Format property of class TranscodeResult.
+//
+// https://doc.babylonjs.com/api/classes/babylon.transcoderesult#format
+func (t *TranscodeResult) SetFormat(format float64) *TranscodeResult {
+	p := ba.ctx.Get("TranscodeResult").New(format)
+	return TranscodeResultFromJSObject(p, ba.ctx)
+}
+
+*/

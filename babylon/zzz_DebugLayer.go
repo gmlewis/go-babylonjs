@@ -34,8 +34,119 @@ func DebugLayerFromJSObject(p js.Value, ctx js.Value) *DebugLayer {
 //
 // https://doc.babylonjs.com/api/classes/babylon.debuglayer
 func (ba *Babylon) NewDebugLayer(scene *Scene) *DebugLayer {
-	p := ba.ctx.Get("DebugLayer").New(scene.JSObject())
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("DebugLayer").New(args...)
 	return DebugLayerFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Hide calls the Hide method on the DebugLayer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.debuglayer#hide
+func (d *DebugLayer) Hide() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	d.p.Call("hide", args...)
+}
+
+// IsVisible calls the IsVisible method on the DebugLayer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.debuglayer#isvisible
+func (d *DebugLayer) IsVisible() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := d.p.Call("isVisible", args...)
+	return retVal.Bool()
+}
+
+// DebugLayerSelectOpts contains optional parameters for DebugLayer.Select.
+type DebugLayerSelectOpts struct {
+	LineContainerTitle *string
+}
+
+// Select calls the Select method on the DebugLayer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.debuglayer#select
+func (d *DebugLayer) Select(entity interface{}, opts *DebugLayerSelectOpts) {
+	if opts == nil {
+		opts = &DebugLayerSelectOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, entity)
+
+	if opts.LineContainerTitle == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.LineContainerTitle)
+	}
+
+	d.p.Call("select", args...)
+}
+
+// DebugLayerShowOpts contains optional parameters for DebugLayer.Show.
+type DebugLayerShowOpts struct {
+	Config js.Value
+}
+
+// Show calls the Show method on the DebugLayer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.debuglayer#show
+func (d *DebugLayer) Show(opts *DebugLayerShowOpts) *DebugLayer {
+	if opts == nil {
+		opts = &DebugLayerShowOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Config == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Config)
+	}
+
+	retVal := d.p.Call("show", args...)
+	return DebugLayerFromJSObject(retVal, d.ctx)
+}
+
+/*
+
+// InspectorURL returns the InspectorURL property of class DebugLayer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.debuglayer#inspectorurl
+func (d *DebugLayer) InspectorURL(InspectorURL string) *DebugLayer {
+	p := ba.ctx.Get("DebugLayer").New(InspectorURL)
+	return DebugLayerFromJSObject(p, ba.ctx)
+}
+
+// SetInspectorURL sets the InspectorURL property of class DebugLayer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.debuglayer#inspectorurl
+func (d *DebugLayer) SetInspectorURL(InspectorURL string) *DebugLayer {
+	p := ba.ctx.Get("DebugLayer").New(InspectorURL)
+	return DebugLayerFromJSObject(p, ba.ctx)
+}
+
+// OnPropertyChangedObservable returns the OnPropertyChangedObservable property of class DebugLayer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.debuglayer#onpropertychangedobservable
+func (d *DebugLayer) OnPropertyChangedObservable(onPropertyChangedObservable interface{}) *DebugLayer {
+	p := ba.ctx.Get("DebugLayer").New(onPropertyChangedObservable)
+	return DebugLayerFromJSObject(p, ba.ctx)
+}
+
+// SetOnPropertyChangedObservable sets the OnPropertyChangedObservable property of class DebugLayer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.debuglayer#onpropertychangedobservable
+func (d *DebugLayer) SetOnPropertyChangedObservable(onPropertyChangedObservable interface{}) *DebugLayer {
+	p := ba.ctx.Get("DebugLayer").New(onPropertyChangedObservable)
+	return DebugLayerFromJSObject(p, ba.ctx)
+}
+
+*/

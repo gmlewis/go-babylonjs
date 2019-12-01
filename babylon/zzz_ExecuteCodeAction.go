@@ -42,8 +42,144 @@ func (ba *Babylon) NewExecuteCodeAction(triggerOptions interface{}, jsFunc func(
 		opts = &NewExecuteCodeActionOpts{}
 	}
 
-	p := ba.ctx.Get("ExecuteCodeAction").New(triggerOptions, jsFunc, opts.Condition.JSObject())
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, triggerOptions)
+	args = append(args, jsFunc)
+
+	if opts.Condition == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Condition.JSObject())
+	}
+
+	p := ba.ctx.Get("ExecuteCodeAction").New(args...)
 	return ExecuteCodeActionFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Execute calls the Execute method on the ExecuteCodeAction object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.executecodeaction#execute
+func (e *ExecuteCodeAction) Execute(evt *ActionEvent) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, evt.JSObject())
+
+	e.p.Call("execute", args...)
+}
+
+// GetTriggerParameter calls the GetTriggerParameter method on the ExecuteCodeAction object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.executecodeaction#gettriggerparameter
+func (e *ExecuteCodeAction) GetTriggerParameter() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := e.p.Call("getTriggerParameter", args...)
+	return retVal
+}
+
+// Serialize calls the Serialize method on the ExecuteCodeAction object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.executecodeaction#serialize
+func (e *ExecuteCodeAction) Serialize(parent interface{}) interface{} {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, parent)
+
+	retVal := e.p.Call("serialize", args...)
+	return retVal
+}
+
+// SkipToNextActiveAction calls the SkipToNextActiveAction method on the ExecuteCodeAction object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.executecodeaction#skiptonextactiveaction
+func (e *ExecuteCodeAction) SkipToNextActiveAction() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	e.p.Call("skipToNextActiveAction", args...)
+}
+
+// Then calls the Then method on the ExecuteCodeAction object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.executecodeaction#then
+func (e *ExecuteCodeAction) Then(action *Action) *Action {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, action.JSObject())
+
+	retVal := e.p.Call("then", args...)
+	return ActionFromJSObject(retVal, e.ctx)
+}
+
+/*
+
+// Func returns the Func property of class ExecuteCodeAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.executecodeaction#func
+func (e *ExecuteCodeAction) Func(jsFunc func()) *ExecuteCodeAction {
+	p := ba.ctx.Get("ExecuteCodeAction").New(jsFunc)
+	return ExecuteCodeActionFromJSObject(p, ba.ctx)
+}
+
+// SetFunc sets the Func property of class ExecuteCodeAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.executecodeaction#func
+func (e *ExecuteCodeAction) SetFunc(jsFunc func()) *ExecuteCodeAction {
+	p := ba.ctx.Get("ExecuteCodeAction").New(jsFunc)
+	return ExecuteCodeActionFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeExecuteObservable returns the OnBeforeExecuteObservable property of class ExecuteCodeAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.executecodeaction#onbeforeexecuteobservable
+func (e *ExecuteCodeAction) OnBeforeExecuteObservable(onBeforeExecuteObservable *Observable) *ExecuteCodeAction {
+	p := ba.ctx.Get("ExecuteCodeAction").New(onBeforeExecuteObservable.JSObject())
+	return ExecuteCodeActionFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeExecuteObservable sets the OnBeforeExecuteObservable property of class ExecuteCodeAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.executecodeaction#onbeforeexecuteobservable
+func (e *ExecuteCodeAction) SetOnBeforeExecuteObservable(onBeforeExecuteObservable *Observable) *ExecuteCodeAction {
+	p := ba.ctx.Get("ExecuteCodeAction").New(onBeforeExecuteObservable.JSObject())
+	return ExecuteCodeActionFromJSObject(p, ba.ctx)
+}
+
+// Trigger returns the Trigger property of class ExecuteCodeAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.executecodeaction#trigger
+func (e *ExecuteCodeAction) Trigger(trigger float64) *ExecuteCodeAction {
+	p := ba.ctx.Get("ExecuteCodeAction").New(trigger)
+	return ExecuteCodeActionFromJSObject(p, ba.ctx)
+}
+
+// SetTrigger sets the Trigger property of class ExecuteCodeAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.executecodeaction#trigger
+func (e *ExecuteCodeAction) SetTrigger(trigger float64) *ExecuteCodeAction {
+	p := ba.ctx.Get("ExecuteCodeAction").New(trigger)
+	return ExecuteCodeActionFromJSObject(p, ba.ctx)
+}
+
+// TriggerOptions returns the TriggerOptions property of class ExecuteCodeAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.executecodeaction#triggeroptions
+func (e *ExecuteCodeAction) TriggerOptions(triggerOptions interface{}) *ExecuteCodeAction {
+	p := ba.ctx.Get("ExecuteCodeAction").New(triggerOptions)
+	return ExecuteCodeActionFromJSObject(p, ba.ctx)
+}
+
+// SetTriggerOptions sets the TriggerOptions property of class ExecuteCodeAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.executecodeaction#triggeroptions
+func (e *ExecuteCodeAction) SetTriggerOptions(triggerOptions interface{}) *ExecuteCodeAction {
+	p := ba.ctx.Get("ExecuteCodeAction").New(triggerOptions)
+	return ExecuteCodeActionFromJSObject(p, ba.ctx)
+}
+
+*/

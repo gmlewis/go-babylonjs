@@ -40,8 +40,152 @@ func (ba *Babylon) NewGizmo(opts *NewGizmoOpts) *Gizmo {
 		opts = &NewGizmoOpts{}
 	}
 
-	p := ba.ctx.Get("Gizmo").New(opts.GizmoLayer.JSObject())
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.GizmoLayer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.GizmoLayer.JSObject())
+	}
+
+	p := ba.ctx.Get("Gizmo").New(args...)
 	return GizmoFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Dispose calls the Dispose method on the Gizmo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gizmo#dispose
+func (g *Gizmo) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	g.p.Call("dispose", args...)
+}
+
+// SetCustomMesh calls the SetCustomMesh method on the Gizmo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gizmo#setcustommesh
+func (g *Gizmo) SetCustomMesh(mesh *Mesh) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	g.p.Call("setCustomMesh", args...)
+}
+
+/*
+
+// AttachedMesh returns the AttachedMesh property of class Gizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gizmo#attachedmesh
+func (g *Gizmo) AttachedMesh(attachedMesh *AbstractMesh) *Gizmo {
+	p := ba.ctx.Get("Gizmo").New(attachedMesh.JSObject())
+	return GizmoFromJSObject(p, ba.ctx)
+}
+
+// SetAttachedMesh sets the AttachedMesh property of class Gizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gizmo#attachedmesh
+func (g *Gizmo) SetAttachedMesh(attachedMesh *AbstractMesh) *Gizmo {
+	p := ba.ctx.Get("Gizmo").New(attachedMesh.JSObject())
+	return GizmoFromJSObject(p, ba.ctx)
+}
+
+// GizmoLayer returns the GizmoLayer property of class Gizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gizmo#gizmolayer
+func (g *Gizmo) GizmoLayer(gizmoLayer *UtilityLayerRenderer) *Gizmo {
+	p := ba.ctx.Get("Gizmo").New(gizmoLayer.JSObject())
+	return GizmoFromJSObject(p, ba.ctx)
+}
+
+// SetGizmoLayer sets the GizmoLayer property of class Gizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gizmo#gizmolayer
+func (g *Gizmo) SetGizmoLayer(gizmoLayer *UtilityLayerRenderer) *Gizmo {
+	p := ba.ctx.Get("Gizmo").New(gizmoLayer.JSObject())
+	return GizmoFromJSObject(p, ba.ctx)
+}
+
+// ScaleRatio returns the ScaleRatio property of class Gizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gizmo#scaleratio
+func (g *Gizmo) ScaleRatio(scaleRatio float64) *Gizmo {
+	p := ba.ctx.Get("Gizmo").New(scaleRatio)
+	return GizmoFromJSObject(p, ba.ctx)
+}
+
+// SetScaleRatio sets the ScaleRatio property of class Gizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gizmo#scaleratio
+func (g *Gizmo) SetScaleRatio(scaleRatio float64) *Gizmo {
+	p := ba.ctx.Get("Gizmo").New(scaleRatio)
+	return GizmoFromJSObject(p, ba.ctx)
+}
+
+// UpdateGizmoPositionToMatchAttachedMesh returns the UpdateGizmoPositionToMatchAttachedMesh property of class Gizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gizmo#updategizmopositiontomatchattachedmesh
+func (g *Gizmo) UpdateGizmoPositionToMatchAttachedMesh(updateGizmoPositionToMatchAttachedMesh bool) *Gizmo {
+	p := ba.ctx.Get("Gizmo").New(updateGizmoPositionToMatchAttachedMesh)
+	return GizmoFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateGizmoPositionToMatchAttachedMesh sets the UpdateGizmoPositionToMatchAttachedMesh property of class Gizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gizmo#updategizmopositiontomatchattachedmesh
+func (g *Gizmo) SetUpdateGizmoPositionToMatchAttachedMesh(updateGizmoPositionToMatchAttachedMesh bool) *Gizmo {
+	p := ba.ctx.Get("Gizmo").New(updateGizmoPositionToMatchAttachedMesh)
+	return GizmoFromJSObject(p, ba.ctx)
+}
+
+// UpdateGizmoRotationToMatchAttachedMesh returns the UpdateGizmoRotationToMatchAttachedMesh property of class Gizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gizmo#updategizmorotationtomatchattachedmesh
+func (g *Gizmo) UpdateGizmoRotationToMatchAttachedMesh(updateGizmoRotationToMatchAttachedMesh bool) *Gizmo {
+	p := ba.ctx.Get("Gizmo").New(updateGizmoRotationToMatchAttachedMesh)
+	return GizmoFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateGizmoRotationToMatchAttachedMesh sets the UpdateGizmoRotationToMatchAttachedMesh property of class Gizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gizmo#updategizmorotationtomatchattachedmesh
+func (g *Gizmo) SetUpdateGizmoRotationToMatchAttachedMesh(updateGizmoRotationToMatchAttachedMesh bool) *Gizmo {
+	p := ba.ctx.Get("Gizmo").New(updateGizmoRotationToMatchAttachedMesh)
+	return GizmoFromJSObject(p, ba.ctx)
+}
+
+// UpdateScale returns the UpdateScale property of class Gizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gizmo#updatescale
+func (g *Gizmo) UpdateScale(updateScale bool) *Gizmo {
+	p := ba.ctx.Get("Gizmo").New(updateScale)
+	return GizmoFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateScale sets the UpdateScale property of class Gizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gizmo#updatescale
+func (g *Gizmo) SetUpdateScale(updateScale bool) *Gizmo {
+	p := ba.ctx.Get("Gizmo").New(updateScale)
+	return GizmoFromJSObject(p, ba.ctx)
+}
+
+// _rootMesh returns the _rootMesh property of class Gizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gizmo#_rootmesh
+func (g *Gizmo) _rootMesh(_rootMesh *Mesh) *Gizmo {
+	p := ba.ctx.Get("Gizmo").New(_rootMesh.JSObject())
+	return GizmoFromJSObject(p, ba.ctx)
+}
+
+// Set_rootMesh sets the _rootMesh property of class Gizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gizmo#_rootmesh
+func (g *Gizmo) Set_rootMesh(_rootMesh *Mesh) *Gizmo {
+	p := ba.ctx.Get("Gizmo").New(_rootMesh.JSObject())
+	return GizmoFromJSObject(p, ba.ctx)
+}
+
+*/

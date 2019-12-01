@@ -40,8 +40,303 @@ func (ba *Babylon) NewSSAO2RenderingPipeline(name string, scene *Scene, ratio in
 		opts = &NewSSAO2RenderingPipelineOpts{}
 	}
 
-	p := ba.ctx.Get("SSAO2RenderingPipeline").New(name, scene.JSObject(), ratio, opts.Cameras.JSObject())
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, name)
+	args = append(args, scene.JSObject())
+	args = append(args, ratio)
+
+	if opts.Cameras == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Cameras.JSObject())
+	}
+
+	p := ba.ctx.Get("SSAO2RenderingPipeline").New(args...)
 	return SSAO2RenderingPipelineFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AddEffect calls the AddEffect method on the SSAO2RenderingPipeline object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#addeffect
+func (s *SSAO2RenderingPipeline) AddEffect(renderEffect *PostProcessRenderEffect) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, renderEffect.JSObject())
+
+	s.p.Call("addEffect", args...)
+}
+
+// SSAO2RenderingPipelineDisposeOpts contains optional parameters for SSAO2RenderingPipeline.Dispose.
+type SSAO2RenderingPipelineDisposeOpts struct {
+	DisableGeometryBufferRenderer *bool
+}
+
+// Dispose calls the Dispose method on the SSAO2RenderingPipeline object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#dispose
+func (s *SSAO2RenderingPipeline) Dispose(opts *SSAO2RenderingPipelineDisposeOpts) {
+	if opts == nil {
+		opts = &SSAO2RenderingPipelineDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.DisableGeometryBufferRenderer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DisableGeometryBufferRenderer)
+	}
+
+	s.p.Call("dispose", args...)
+}
+
+// GetClassName calls the GetClassName method on the SSAO2RenderingPipeline object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#getclassname
+func (s *SSAO2RenderingPipeline) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// Parse calls the Parse method on the SSAO2RenderingPipeline object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#parse
+func (s *SSAO2RenderingPipeline) Parse(source interface{}, scene *Scene, rootUrl string) *SSAO2RenderingPipeline {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, source)
+	args = append(args, scene.JSObject())
+	args = append(args, rootUrl)
+
+	retVal := s.p.Call("Parse", args...)
+	return SSAO2RenderingPipelineFromJSObject(retVal, s.ctx)
+}
+
+// Serialize calls the Serialize method on the SSAO2RenderingPipeline object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#serialize
+func (s *SSAO2RenderingPipeline) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("serialize", args...)
+	return retVal
+}
+
+/*
+
+// Base returns the Base property of class SSAO2RenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#base
+func (s *SSAO2RenderingPipeline) Base(base float64) *SSAO2RenderingPipeline {
+	p := ba.ctx.Get("SSAO2RenderingPipeline").New(base)
+	return SSAO2RenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetBase sets the Base property of class SSAO2RenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#base
+func (s *SSAO2RenderingPipeline) SetBase(base float64) *SSAO2RenderingPipeline {
+	p := ba.ctx.Get("SSAO2RenderingPipeline").New(base)
+	return SSAO2RenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// Cameras returns the Cameras property of class SSAO2RenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#cameras
+func (s *SSAO2RenderingPipeline) Cameras(cameras *Camera) *SSAO2RenderingPipeline {
+	p := ba.ctx.Get("SSAO2RenderingPipeline").New(cameras.JSObject())
+	return SSAO2RenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetCameras sets the Cameras property of class SSAO2RenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#cameras
+func (s *SSAO2RenderingPipeline) SetCameras(cameras *Camera) *SSAO2RenderingPipeline {
+	p := ba.ctx.Get("SSAO2RenderingPipeline").New(cameras.JSObject())
+	return SSAO2RenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// ExpensiveBlur returns the ExpensiveBlur property of class SSAO2RenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#expensiveblur
+func (s *SSAO2RenderingPipeline) ExpensiveBlur(expensiveBlur bool) *SSAO2RenderingPipeline {
+	p := ba.ctx.Get("SSAO2RenderingPipeline").New(expensiveBlur)
+	return SSAO2RenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetExpensiveBlur sets the ExpensiveBlur property of class SSAO2RenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#expensiveblur
+func (s *SSAO2RenderingPipeline) SetExpensiveBlur(expensiveBlur bool) *SSAO2RenderingPipeline {
+	p := ba.ctx.Get("SSAO2RenderingPipeline").New(expensiveBlur)
+	return SSAO2RenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class SSAO2RenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#inspectablecustomproperties
+func (s *SSAO2RenderingPipeline) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *SSAO2RenderingPipeline {
+	p := ba.ctx.Get("SSAO2RenderingPipeline").New(inspectableCustomProperties.JSObject())
+	return SSAO2RenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class SSAO2RenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#inspectablecustomproperties
+func (s *SSAO2RenderingPipeline) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *SSAO2RenderingPipeline {
+	p := ba.ctx.Get("SSAO2RenderingPipeline").New(inspectableCustomProperties.JSObject())
+	return SSAO2RenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// IsSupported returns the IsSupported property of class SSAO2RenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#issupported
+func (s *SSAO2RenderingPipeline) IsSupported(IsSupported bool) *SSAO2RenderingPipeline {
+	p := ba.ctx.Get("SSAO2RenderingPipeline").New(IsSupported)
+	return SSAO2RenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetIsSupported sets the IsSupported property of class SSAO2RenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#issupported
+func (s *SSAO2RenderingPipeline) SetIsSupported(IsSupported bool) *SSAO2RenderingPipeline {
+	p := ba.ctx.Get("SSAO2RenderingPipeline").New(IsSupported)
+	return SSAO2RenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// MaxZ returns the MaxZ property of class SSAO2RenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#maxz
+func (s *SSAO2RenderingPipeline) MaxZ(maxZ float64) *SSAO2RenderingPipeline {
+	p := ba.ctx.Get("SSAO2RenderingPipeline").New(maxZ)
+	return SSAO2RenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetMaxZ sets the MaxZ property of class SSAO2RenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#maxz
+func (s *SSAO2RenderingPipeline) SetMaxZ(maxZ float64) *SSAO2RenderingPipeline {
+	p := ba.ctx.Get("SSAO2RenderingPipeline").New(maxZ)
+	return SSAO2RenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// MinZAspect returns the MinZAspect property of class SSAO2RenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#minzaspect
+func (s *SSAO2RenderingPipeline) MinZAspect(minZAspect float64) *SSAO2RenderingPipeline {
+	p := ba.ctx.Get("SSAO2RenderingPipeline").New(minZAspect)
+	return SSAO2RenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetMinZAspect sets the MinZAspect property of class SSAO2RenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#minzaspect
+func (s *SSAO2RenderingPipeline) SetMinZAspect(minZAspect float64) *SSAO2RenderingPipeline {
+	p := ba.ctx.Get("SSAO2RenderingPipeline").New(minZAspect)
+	return SSAO2RenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class SSAO2RenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#name
+func (s *SSAO2RenderingPipeline) Name(name string) *SSAO2RenderingPipeline {
+	p := ba.ctx.Get("SSAO2RenderingPipeline").New(name)
+	return SSAO2RenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class SSAO2RenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#name
+func (s *SSAO2RenderingPipeline) SetName(name string) *SSAO2RenderingPipeline {
+	p := ba.ctx.Get("SSAO2RenderingPipeline").New(name)
+	return SSAO2RenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// Radius returns the Radius property of class SSAO2RenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#radius
+func (s *SSAO2RenderingPipeline) Radius(radius float64) *SSAO2RenderingPipeline {
+	p := ba.ctx.Get("SSAO2RenderingPipeline").New(radius)
+	return SSAO2RenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetRadius sets the Radius property of class SSAO2RenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#radius
+func (s *SSAO2RenderingPipeline) SetRadius(radius float64) *SSAO2RenderingPipeline {
+	p := ba.ctx.Get("SSAO2RenderingPipeline").New(radius)
+	return SSAO2RenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// Samples returns the Samples property of class SSAO2RenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#samples
+func (s *SSAO2RenderingPipeline) Samples(samples float64) *SSAO2RenderingPipeline {
+	p := ba.ctx.Get("SSAO2RenderingPipeline").New(samples)
+	return SSAO2RenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetSamples sets the Samples property of class SSAO2RenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#samples
+func (s *SSAO2RenderingPipeline) SetSamples(samples float64) *SSAO2RenderingPipeline {
+	p := ba.ctx.Get("SSAO2RenderingPipeline").New(samples)
+	return SSAO2RenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// Scene returns the Scene property of class SSAO2RenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#scene
+func (s *SSAO2RenderingPipeline) Scene(scene *Scene) *SSAO2RenderingPipeline {
+	p := ba.ctx.Get("SSAO2RenderingPipeline").New(scene.JSObject())
+	return SSAO2RenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetScene sets the Scene property of class SSAO2RenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#scene
+func (s *SSAO2RenderingPipeline) SetScene(scene *Scene) *SSAO2RenderingPipeline {
+	p := ba.ctx.Get("SSAO2RenderingPipeline").New(scene.JSObject())
+	return SSAO2RenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// TextureSamples returns the TextureSamples property of class SSAO2RenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#texturesamples
+func (s *SSAO2RenderingPipeline) TextureSamples(textureSamples float64) *SSAO2RenderingPipeline {
+	p := ba.ctx.Get("SSAO2RenderingPipeline").New(textureSamples)
+	return SSAO2RenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetTextureSamples sets the TextureSamples property of class SSAO2RenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#texturesamples
+func (s *SSAO2RenderingPipeline) SetTextureSamples(textureSamples float64) *SSAO2RenderingPipeline {
+	p := ba.ctx.Get("SSAO2RenderingPipeline").New(textureSamples)
+	return SSAO2RenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// TotalStrength returns the TotalStrength property of class SSAO2RenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#totalstrength
+func (s *SSAO2RenderingPipeline) TotalStrength(totalStrength float64) *SSAO2RenderingPipeline {
+	p := ba.ctx.Get("SSAO2RenderingPipeline").New(totalStrength)
+	return SSAO2RenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+// SetTotalStrength sets the TotalStrength property of class SSAO2RenderingPipeline.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ssao2renderingpipeline#totalstrength
+func (s *SSAO2RenderingPipeline) SetTotalStrength(totalStrength float64) *SSAO2RenderingPipeline {
+	p := ba.ctx.Get("SSAO2RenderingPipeline").New(totalStrength)
+	return SSAO2RenderingPipelineFromJSObject(p, ba.ctx)
+}
+
+*/

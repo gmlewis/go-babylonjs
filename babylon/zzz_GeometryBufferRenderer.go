@@ -29,7 +29,7 @@ func GeometryBufferRendererFromJSObject(p js.Value, ctx js.Value) *GeometryBuffe
 
 // NewGeometryBufferRendererOpts contains optional parameters for NewGeometryBufferRenderer.
 type NewGeometryBufferRendererOpts struct {
-	Ratio *JSFloat64
+	Ratio *float64
 }
 
 // NewGeometryBufferRenderer returns a new GeometryBufferRenderer object.
@@ -40,8 +40,228 @@ func (ba *Babylon) NewGeometryBufferRenderer(scene *Scene, opts *NewGeometryBuff
 		opts = &NewGeometryBufferRendererOpts{}
 	}
 
-	p := ba.ctx.Get("GeometryBufferRenderer").New(scene.JSObject(), opts.Ratio.JSObject())
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, scene.JSObject())
+
+	if opts.Ratio == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Ratio)
+	}
+
+	p := ba.ctx.Get("GeometryBufferRenderer").New(args...)
 	return GeometryBufferRendererFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Dispose calls the Dispose method on the GeometryBufferRenderer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.geometrybufferrenderer#dispose
+func (g *GeometryBufferRenderer) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	g.p.Call("dispose", args...)
+}
+
+// GetGBuffer calls the GetGBuffer method on the GeometryBufferRenderer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.geometrybufferrenderer#getgbuffer
+func (g *GeometryBufferRenderer) GetGBuffer() *MultiRenderTarget {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getGBuffer", args...)
+	return MultiRenderTargetFromJSObject(retVal, g.ctx)
+}
+
+// GetTextureIndex calls the GetTextureIndex method on the GeometryBufferRenderer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.geometrybufferrenderer#gettextureindex
+func (g *GeometryBufferRenderer) GetTextureIndex(textureType float64) float64 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, textureType)
+
+	retVal := g.p.Call("getTextureIndex", args...)
+	return retVal.Float()
+}
+
+// IsReady calls the IsReady method on the GeometryBufferRenderer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.geometrybufferrenderer#isready
+func (g *GeometryBufferRenderer) IsReady(subMesh *SubMesh, useInstances bool) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, subMesh.JSObject())
+	args = append(args, useInstances)
+
+	retVal := g.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+/*
+
+// EnablePosition returns the EnablePosition property of class GeometryBufferRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.geometrybufferrenderer#enableposition
+func (g *GeometryBufferRenderer) EnablePosition(enablePosition bool) *GeometryBufferRenderer {
+	p := ba.ctx.Get("GeometryBufferRenderer").New(enablePosition)
+	return GeometryBufferRendererFromJSObject(p, ba.ctx)
+}
+
+// SetEnablePosition sets the EnablePosition property of class GeometryBufferRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.geometrybufferrenderer#enableposition
+func (g *GeometryBufferRenderer) SetEnablePosition(enablePosition bool) *GeometryBufferRenderer {
+	p := ba.ctx.Get("GeometryBufferRenderer").New(enablePosition)
+	return GeometryBufferRendererFromJSObject(p, ba.ctx)
+}
+
+// EnableVelocity returns the EnableVelocity property of class GeometryBufferRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.geometrybufferrenderer#enablevelocity
+func (g *GeometryBufferRenderer) EnableVelocity(enableVelocity bool) *GeometryBufferRenderer {
+	p := ba.ctx.Get("GeometryBufferRenderer").New(enableVelocity)
+	return GeometryBufferRendererFromJSObject(p, ba.ctx)
+}
+
+// SetEnableVelocity sets the EnableVelocity property of class GeometryBufferRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.geometrybufferrenderer#enablevelocity
+func (g *GeometryBufferRenderer) SetEnableVelocity(enableVelocity bool) *GeometryBufferRenderer {
+	p := ba.ctx.Get("GeometryBufferRenderer").New(enableVelocity)
+	return GeometryBufferRendererFromJSObject(p, ba.ctx)
+}
+
+// ExcludedSkinnedMeshesFromVelocity returns the ExcludedSkinnedMeshesFromVelocity property of class GeometryBufferRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.geometrybufferrenderer#excludedskinnedmeshesfromvelocity
+func (g *GeometryBufferRenderer) ExcludedSkinnedMeshesFromVelocity(excludedSkinnedMeshesFromVelocity *AbstractMesh) *GeometryBufferRenderer {
+	p := ba.ctx.Get("GeometryBufferRenderer").New(excludedSkinnedMeshesFromVelocity.JSObject())
+	return GeometryBufferRendererFromJSObject(p, ba.ctx)
+}
+
+// SetExcludedSkinnedMeshesFromVelocity sets the ExcludedSkinnedMeshesFromVelocity property of class GeometryBufferRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.geometrybufferrenderer#excludedskinnedmeshesfromvelocity
+func (g *GeometryBufferRenderer) SetExcludedSkinnedMeshesFromVelocity(excludedSkinnedMeshesFromVelocity *AbstractMesh) *GeometryBufferRenderer {
+	p := ba.ctx.Get("GeometryBufferRenderer").New(excludedSkinnedMeshesFromVelocity.JSObject())
+	return GeometryBufferRendererFromJSObject(p, ba.ctx)
+}
+
+// IsSupported returns the IsSupported property of class GeometryBufferRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.geometrybufferrenderer#issupported
+func (g *GeometryBufferRenderer) IsSupported(isSupported bool) *GeometryBufferRenderer {
+	p := ba.ctx.Get("GeometryBufferRenderer").New(isSupported)
+	return GeometryBufferRendererFromJSObject(p, ba.ctx)
+}
+
+// SetIsSupported sets the IsSupported property of class GeometryBufferRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.geometrybufferrenderer#issupported
+func (g *GeometryBufferRenderer) SetIsSupported(isSupported bool) *GeometryBufferRenderer {
+	p := ba.ctx.Get("GeometryBufferRenderer").New(isSupported)
+	return GeometryBufferRendererFromJSObject(p, ba.ctx)
+}
+
+// POSITION_TEXTURE_TYPE returns the POSITION_TEXTURE_TYPE property of class GeometryBufferRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.geometrybufferrenderer#position_texture_type
+func (g *GeometryBufferRenderer) POSITION_TEXTURE_TYPE(POSITION_TEXTURE_TYPE float64) *GeometryBufferRenderer {
+	p := ba.ctx.Get("GeometryBufferRenderer").New(POSITION_TEXTURE_TYPE)
+	return GeometryBufferRendererFromJSObject(p, ba.ctx)
+}
+
+// SetPOSITION_TEXTURE_TYPE sets the POSITION_TEXTURE_TYPE property of class GeometryBufferRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.geometrybufferrenderer#position_texture_type
+func (g *GeometryBufferRenderer) SetPOSITION_TEXTURE_TYPE(POSITION_TEXTURE_TYPE float64) *GeometryBufferRenderer {
+	p := ba.ctx.Get("GeometryBufferRenderer").New(POSITION_TEXTURE_TYPE)
+	return GeometryBufferRendererFromJSObject(p, ba.ctx)
+}
+
+// Ratio returns the Ratio property of class GeometryBufferRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.geometrybufferrenderer#ratio
+func (g *GeometryBufferRenderer) Ratio(ratio float64) *GeometryBufferRenderer {
+	p := ba.ctx.Get("GeometryBufferRenderer").New(ratio)
+	return GeometryBufferRendererFromJSObject(p, ba.ctx)
+}
+
+// SetRatio sets the Ratio property of class GeometryBufferRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.geometrybufferrenderer#ratio
+func (g *GeometryBufferRenderer) SetRatio(ratio float64) *GeometryBufferRenderer {
+	p := ba.ctx.Get("GeometryBufferRenderer").New(ratio)
+	return GeometryBufferRendererFromJSObject(p, ba.ctx)
+}
+
+// RenderList returns the RenderList property of class GeometryBufferRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.geometrybufferrenderer#renderlist
+func (g *GeometryBufferRenderer) RenderList(renderList *Mesh) *GeometryBufferRenderer {
+	p := ba.ctx.Get("GeometryBufferRenderer").New(renderList.JSObject())
+	return GeometryBufferRendererFromJSObject(p, ba.ctx)
+}
+
+// SetRenderList sets the RenderList property of class GeometryBufferRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.geometrybufferrenderer#renderlist
+func (g *GeometryBufferRenderer) SetRenderList(renderList *Mesh) *GeometryBufferRenderer {
+	p := ba.ctx.Get("GeometryBufferRenderer").New(renderList.JSObject())
+	return GeometryBufferRendererFromJSObject(p, ba.ctx)
+}
+
+// Samples returns the Samples property of class GeometryBufferRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.geometrybufferrenderer#samples
+func (g *GeometryBufferRenderer) Samples(samples float64) *GeometryBufferRenderer {
+	p := ba.ctx.Get("GeometryBufferRenderer").New(samples)
+	return GeometryBufferRendererFromJSObject(p, ba.ctx)
+}
+
+// SetSamples sets the Samples property of class GeometryBufferRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.geometrybufferrenderer#samples
+func (g *GeometryBufferRenderer) SetSamples(samples float64) *GeometryBufferRenderer {
+	p := ba.ctx.Get("GeometryBufferRenderer").New(samples)
+	return GeometryBufferRendererFromJSObject(p, ba.ctx)
+}
+
+// Scene returns the Scene property of class GeometryBufferRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.geometrybufferrenderer#scene
+func (g *GeometryBufferRenderer) Scene(scene *Scene) *GeometryBufferRenderer {
+	p := ba.ctx.Get("GeometryBufferRenderer").New(scene.JSObject())
+	return GeometryBufferRendererFromJSObject(p, ba.ctx)
+}
+
+// SetScene sets the Scene property of class GeometryBufferRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.geometrybufferrenderer#scene
+func (g *GeometryBufferRenderer) SetScene(scene *Scene) *GeometryBufferRenderer {
+	p := ba.ctx.Get("GeometryBufferRenderer").New(scene.JSObject())
+	return GeometryBufferRendererFromJSObject(p, ba.ctx)
+}
+
+// VELOCITY_TEXTURE_TYPE returns the VELOCITY_TEXTURE_TYPE property of class GeometryBufferRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.geometrybufferrenderer#velocity_texture_type
+func (g *GeometryBufferRenderer) VELOCITY_TEXTURE_TYPE(VELOCITY_TEXTURE_TYPE float64) *GeometryBufferRenderer {
+	p := ba.ctx.Get("GeometryBufferRenderer").New(VELOCITY_TEXTURE_TYPE)
+	return GeometryBufferRendererFromJSObject(p, ba.ctx)
+}
+
+// SetVELOCITY_TEXTURE_TYPE sets the VELOCITY_TEXTURE_TYPE property of class GeometryBufferRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.geometrybufferrenderer#velocity_texture_type
+func (g *GeometryBufferRenderer) SetVELOCITY_TEXTURE_TYPE(VELOCITY_TEXTURE_TYPE float64) *GeometryBufferRenderer {
+	p := ba.ctx.Get("GeometryBufferRenderer").New(VELOCITY_TEXTURE_TYPE)
+	return GeometryBufferRendererFromJSObject(p, ba.ctx)
+}
+
+*/

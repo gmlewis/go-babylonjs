@@ -27,4 +27,62 @@ func GLTF2ExportFromJSObject(p js.Value, ctx js.Value) *GLTF2Export {
 	return &GLTF2Export{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// GLTF2ExportGLBAsyncOpts contains optional parameters for GLTF2Export.GLBAsync.
+type GLTF2ExportGLBAsyncOpts struct {
+	Options *IExportOptions
+}
+
+// GLBAsync calls the GLBAsync method on the GLTF2Export object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltf2export#glbasync
+func (g *GLTF2Export) GLBAsync(scene *Scene, filePrefix string, opts *GLTF2ExportGLBAsyncOpts) *GLTFData {
+	if opts == nil {
+		opts = &GLTF2ExportGLBAsyncOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, scene.JSObject())
+	args = append(args, filePrefix)
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options.JSObject())
+	}
+
+	retVal := g.p.Call("GLBAsync", args...)
+	return GLTFDataFromJSObject(retVal, g.ctx)
+}
+
+// GLTF2ExportGLTFAsyncOpts contains optional parameters for GLTF2Export.GLTFAsync.
+type GLTF2ExportGLTFAsyncOpts struct {
+	Options *IExportOptions
+}
+
+// GLTFAsync calls the GLTFAsync method on the GLTF2Export object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltf2export#gltfasync
+func (g *GLTF2Export) GLTFAsync(scene *Scene, filePrefix string, opts *GLTF2ExportGLTFAsyncOpts) *GLTFData {
+	if opts == nil {
+		opts = &GLTF2ExportGLTFAsyncOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, scene.JSObject())
+	args = append(args, filePrefix)
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options.JSObject())
+	}
+
+	retVal := g.p.Call("GLTFAsync", args...)
+	return GLTFDataFromJSObject(retVal, g.ctx)
+}
+
+/*
+
+ */

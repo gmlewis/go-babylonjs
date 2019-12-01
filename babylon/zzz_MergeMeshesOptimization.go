@@ -31,7 +31,7 @@ func MergeMeshesOptimizationFromJSObject(p js.Value, ctx js.Value) *MergeMeshesO
 
 // NewMergeMeshesOptimizationOpts contains optional parameters for NewMergeMeshesOptimization.
 type NewMergeMeshesOptimizationOpts struct {
-	Priority *JSFloat64
+	Priority *float64
 }
 
 // NewMergeMeshesOptimization returns a new MergeMeshesOptimization object.
@@ -42,8 +42,89 @@ func (ba *Babylon) NewMergeMeshesOptimization(opts *NewMergeMeshesOptimizationOp
 		opts = &NewMergeMeshesOptimizationOpts{}
 	}
 
-	p := ba.ctx.Get("MergeMeshesOptimization").New(opts.Priority.JSObject())
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Priority == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Priority)
+	}
+
+	p := ba.ctx.Get("MergeMeshesOptimization").New(args...)
 	return MergeMeshesOptimizationFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// MergeMeshesOptimizationApplyOpts contains optional parameters for MergeMeshesOptimization.Apply.
+type MergeMeshesOptimizationApplyOpts struct {
+	UpdateSelectionTree *bool
+}
+
+// Apply calls the Apply method on the MergeMeshesOptimization object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mergemeshesoptimization#apply
+func (m *MergeMeshesOptimization) Apply(scene *Scene, optimizer *SceneOptimizer, opts *MergeMeshesOptimizationApplyOpts) bool {
+	if opts == nil {
+		opts = &MergeMeshesOptimizationApplyOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, scene.JSObject())
+	args = append(args, optimizer.JSObject())
+
+	if opts.UpdateSelectionTree == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UpdateSelectionTree)
+	}
+
+	retVal := m.p.Call("apply", args...)
+	return retVal.Bool()
+}
+
+// GetDescription calls the GetDescription method on the MergeMeshesOptimization object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mergemeshesoptimization#getdescription
+func (m *MergeMeshesOptimization) GetDescription() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("getDescription", args...)
+	return retVal.String()
+}
+
+/*
+
+// Priority returns the Priority property of class MergeMeshesOptimization.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mergemeshesoptimization#priority
+func (m *MergeMeshesOptimization) Priority(priority float64) *MergeMeshesOptimization {
+	p := ba.ctx.Get("MergeMeshesOptimization").New(priority)
+	return MergeMeshesOptimizationFromJSObject(p, ba.ctx)
+}
+
+// SetPriority sets the Priority property of class MergeMeshesOptimization.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mergemeshesoptimization#priority
+func (m *MergeMeshesOptimization) SetPriority(priority float64) *MergeMeshesOptimization {
+	p := ba.ctx.Get("MergeMeshesOptimization").New(priority)
+	return MergeMeshesOptimizationFromJSObject(p, ba.ctx)
+}
+
+// UpdateSelectionTree returns the UpdateSelectionTree property of class MergeMeshesOptimization.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mergemeshesoptimization#updateselectiontree
+func (m *MergeMeshesOptimization) UpdateSelectionTree(UpdateSelectionTree bool) *MergeMeshesOptimization {
+	p := ba.ctx.Get("MergeMeshesOptimization").New(UpdateSelectionTree)
+	return MergeMeshesOptimizationFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateSelectionTree sets the UpdateSelectionTree property of class MergeMeshesOptimization.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mergemeshesoptimization#updateselectiontree
+func (m *MergeMeshesOptimization) SetUpdateSelectionTree(UpdateSelectionTree bool) *MergeMeshesOptimization {
+	p := ba.ctx.Get("MergeMeshesOptimization").New(UpdateSelectionTree)
+	return MergeMeshesOptimizationFromJSObject(p, ba.ctx)
+}
+
+*/

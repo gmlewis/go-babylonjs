@@ -28,4 +28,101 @@ func STLFileLoaderFromJSObject(p js.Value, ctx js.Value) *STLFileLoader {
 	return &STLFileLoader{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// ImportMesh calls the ImportMesh method on the STLFileLoader object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stlfileloader#importmesh
+func (s *STLFileLoader) ImportMesh(meshesNames interface{}, scene *Scene, data interface{}, rootUrl string, meshes *AbstractMesh, particleSystems *IParticleSystem, skeletons *Skeleton) bool {
+
+	args := make([]interface{}, 0, 7+0)
+
+	args = append(args, meshesNames)
+	args = append(args, scene.JSObject())
+	args = append(args, data)
+	args = append(args, rootUrl)
+	args = append(args, meshes.JSObject())
+	args = append(args, particleSystems.JSObject())
+	args = append(args, skeletons.JSObject())
+
+	retVal := s.p.Call("importMesh", args...)
+	return retVal.Bool()
+}
+
+// Load calls the Load method on the STLFileLoader object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stlfileloader#load
+func (s *STLFileLoader) Load(scene *Scene, data interface{}, rootUrl string) bool {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, scene.JSObject())
+	args = append(args, data)
+	args = append(args, rootUrl)
+
+	retVal := s.p.Call("load", args...)
+	return retVal.Bool()
+}
+
+// STLFileLoaderLoadAssetContainerOpts contains optional parameters for STLFileLoader.LoadAssetContainer.
+type STLFileLoaderLoadAssetContainerOpts struct {
+	OnError *func()
+}
+
+// LoadAssetContainer calls the LoadAssetContainer method on the STLFileLoader object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stlfileloader#loadassetcontainer
+func (s *STLFileLoader) LoadAssetContainer(scene *Scene, data string, rootUrl string, opts *STLFileLoaderLoadAssetContainerOpts) *AssetContainer {
+	if opts == nil {
+		opts = &STLFileLoaderLoadAssetContainerOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, scene.JSObject())
+	args = append(args, data)
+	args = append(args, rootUrl)
+
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+
+	retVal := s.p.Call("loadAssetContainer", args...)
+	return AssetContainerFromJSObject(retVal, s.ctx)
+}
+
+/*
+
+// Extensions returns the Extensions property of class STLFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stlfileloader#extensions
+func (s *STLFileLoader) Extensions(extensions *ISceneLoaderPluginExtensions) *STLFileLoader {
+	p := ba.ctx.Get("STLFileLoader").New(extensions.JSObject())
+	return STLFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetExtensions sets the Extensions property of class STLFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stlfileloader#extensions
+func (s *STLFileLoader) SetExtensions(extensions *ISceneLoaderPluginExtensions) *STLFileLoader {
+	p := ba.ctx.Get("STLFileLoader").New(extensions.JSObject())
+	return STLFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class STLFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stlfileloader#name
+func (s *STLFileLoader) Name(name string) *STLFileLoader {
+	p := ba.ctx.Get("STLFileLoader").New(name)
+	return STLFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class STLFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stlfileloader#name
+func (s *STLFileLoader) SetName(name string) *STLFileLoader {
+	p := ba.ctx.Get("STLFileLoader").New(name)
+	return STLFileLoaderFromJSObject(p, ba.ctx)
+}
+
+*/

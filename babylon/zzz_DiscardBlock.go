@@ -31,8 +31,637 @@ func DiscardBlockFromJSObject(p js.Value, ctx js.Value) *DiscardBlock {
 //
 // https://doc.babylonjs.com/api/classes/babylon.discardblock
 func (ba *Babylon) NewDiscardBlock(name string) *DiscardBlock {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	p := ba.ctx.Get("DiscardBlock").New(args...)
+	return DiscardBlockFromJSObject(p, ba.ctx)
+}
+
+// AutoConfigure calls the AutoConfigure method on the DiscardBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#autoconfigure
+func (d *DiscardBlock) AutoConfigure(material *NodeMaterial) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, material.JSObject())
+
+	d.p.Call("autoConfigure", args...)
+}
+
+// DiscardBlockBindOpts contains optional parameters for DiscardBlock.Bind.
+type DiscardBlockBindOpts struct {
+	Mesh *Mesh
+}
+
+// Bind calls the Bind method on the DiscardBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#bind
+func (d *DiscardBlock) Bind(effect *Effect, nodeMaterial *NodeMaterial, opts *DiscardBlockBindOpts) {
+	if opts == nil {
+		opts = &DiscardBlockBindOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, effect.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	d.p.Call("bind", args...)
+}
+
+// Build calls the Build method on the DiscardBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#build
+func (d *DiscardBlock) Build(state *NodeMaterialBuildState, activeBlocks *NodeMaterialBlock) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, state.JSObject())
+	args = append(args, activeBlocks.JSObject())
+
+	retVal := d.p.Call("build", args...)
+	return retVal.Bool()
+}
+
+// DiscardBlockCloneOpts contains optional parameters for DiscardBlock.Clone.
+type DiscardBlockCloneOpts struct {
+	RootUrl *string
+}
+
+// Clone calls the Clone method on the DiscardBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#clone
+func (d *DiscardBlock) Clone(scene *Scene, opts *DiscardBlockCloneOpts) *NodeMaterialBlock {
+	if opts == nil {
+		opts = &DiscardBlockCloneOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, scene.JSObject())
+
+	if opts.RootUrl == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RootUrl)
+	}
+
+	retVal := d.p.Call("clone", args...)
+	return NodeMaterialBlockFromJSObject(retVal, d.ctx)
+}
+
+// DiscardBlockConnectToOpts contains optional parameters for DiscardBlock.ConnectTo.
+type DiscardBlockConnectToOpts struct {
+	Options js.Value
+}
+
+// ConnectTo calls the ConnectTo method on the DiscardBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#connectto
+func (d *DiscardBlock) ConnectTo(other *NodeMaterialBlock, opts *DiscardBlockConnectToOpts) *DiscardBlock {
+	if opts == nil {
+		opts = &DiscardBlockConnectToOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, other.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	retVal := d.p.Call("connectTo", args...)
+	return DiscardBlockFromJSObject(retVal, d.ctx)
+}
+
+// Dispose calls the Dispose method on the DiscardBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#dispose
+func (d *DiscardBlock) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	d.p.Call("dispose", args...)
+}
+
+// GetClassName calls the GetClassName method on the DiscardBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#getclassname
+func (d *DiscardBlock) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := d.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// DiscardBlockGetFirstAvailableInputOpts contains optional parameters for DiscardBlock.GetFirstAvailableInput.
+type DiscardBlockGetFirstAvailableInputOpts struct {
+	ForOutput *NodeMaterialConnectionPoint
+}
+
+// GetFirstAvailableInput calls the GetFirstAvailableInput method on the DiscardBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#getfirstavailableinput
+func (d *DiscardBlock) GetFirstAvailableInput(opts *DiscardBlockGetFirstAvailableInputOpts) *NodeMaterialConnectionPoint {
+	if opts == nil {
+		opts = &DiscardBlockGetFirstAvailableInputOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForOutput == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForOutput.JSObject())
+	}
+
+	retVal := d.p.Call("getFirstAvailableInput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, d.ctx)
+}
+
+// DiscardBlockGetFirstAvailableOutputOpts contains optional parameters for DiscardBlock.GetFirstAvailableOutput.
+type DiscardBlockGetFirstAvailableOutputOpts struct {
+	ForBlock *NodeMaterialBlock
+}
+
+// GetFirstAvailableOutput calls the GetFirstAvailableOutput method on the DiscardBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#getfirstavailableoutput
+func (d *DiscardBlock) GetFirstAvailableOutput(opts *DiscardBlockGetFirstAvailableOutputOpts) *NodeMaterialConnectionPoint {
+	if opts == nil {
+		opts = &DiscardBlockGetFirstAvailableOutputOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForBlock == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForBlock.JSObject())
+	}
+
+	retVal := d.p.Call("getFirstAvailableOutput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, d.ctx)
+}
+
+// GetInputByName calls the GetInputByName method on the DiscardBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#getinputbyname
+func (d *DiscardBlock) GetInputByName(name string) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := d.p.Call("getInputByName", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, d.ctx)
+}
+
+// GetOutputByName calls the GetOutputByName method on the DiscardBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#getoutputbyname
+func (d *DiscardBlock) GetOutputByName(name string) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := d.p.Call("getOutputByName", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, d.ctx)
+}
+
+// GetSiblingOutput calls the GetSiblingOutput method on the DiscardBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#getsiblingoutput
+func (d *DiscardBlock) GetSiblingOutput(current *NodeMaterialConnectionPoint) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, current.JSObject())
+
+	retVal := d.p.Call("getSiblingOutput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, d.ctx)
+}
+
+// Initialize calls the Initialize method on the DiscardBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#initialize
+func (d *DiscardBlock) Initialize(state *NodeMaterialBuildState) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, state.JSObject())
+
+	d.p.Call("initialize", args...)
+}
+
+// DiscardBlockInitializeDefinesOpts contains optional parameters for DiscardBlock.InitializeDefines.
+type DiscardBlockInitializeDefinesOpts struct {
+	UseInstances *bool
+}
+
+// InitializeDefines calls the InitializeDefines method on the DiscardBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#initializedefines
+func (d *DiscardBlock) InitializeDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *DiscardBlockInitializeDefinesOpts) {
+	if opts == nil {
+		opts = &DiscardBlockInitializeDefinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	d.p.Call("initializeDefines", args...)
+}
+
+// DiscardBlockIsReadyOpts contains optional parameters for DiscardBlock.IsReady.
+type DiscardBlockIsReadyOpts struct {
+	UseInstances *bool
+}
+
+// IsReady calls the IsReady method on the DiscardBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#isready
+func (d *DiscardBlock) IsReady(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *DiscardBlockIsReadyOpts) bool {
+	if opts == nil {
+		opts = &DiscardBlockIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := d.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// DiscardBlockPrepareDefinesOpts contains optional parameters for DiscardBlock.PrepareDefines.
+type DiscardBlockPrepareDefinesOpts struct {
+	UseInstances *bool
+}
+
+// PrepareDefines calls the PrepareDefines method on the DiscardBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#preparedefines
+func (d *DiscardBlock) PrepareDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *DiscardBlockPrepareDefinesOpts) {
+	if opts == nil {
+		opts = &DiscardBlockPrepareDefinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	d.p.Call("prepareDefines", args...)
+}
+
+// ProvideFallbacks calls the ProvideFallbacks method on the DiscardBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#providefallbacks
+func (d *DiscardBlock) ProvideFallbacks(mesh *AbstractMesh, fallbacks *EffectFallbacks) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, fallbacks.JSObject())
+
+	d.p.Call("provideFallbacks", args...)
+}
+
+// DiscardBlockRegisterInputOpts contains optional parameters for DiscardBlock.RegisterInput.
+type DiscardBlockRegisterInputOpts struct {
+	IsOptional *bool
+	Target     js.Value
+}
+
+// RegisterInput calls the RegisterInput method on the DiscardBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#registerinput
+func (d *DiscardBlock) RegisterInput(name string, jsType js.Value, opts *DiscardBlockRegisterInputOpts) *DiscardBlock {
+	if opts == nil {
+		opts = &DiscardBlockRegisterInputOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+2)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	if opts.IsOptional == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IsOptional)
+	}
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+
+	retVal := d.p.Call("registerInput", args...)
+	return DiscardBlockFromJSObject(retVal, d.ctx)
+}
+
+// DiscardBlockRegisterOutputOpts contains optional parameters for DiscardBlock.RegisterOutput.
+type DiscardBlockRegisterOutputOpts struct {
+	Target js.Value
+}
+
+// RegisterOutput calls the RegisterOutput method on the DiscardBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#registeroutput
+func (d *DiscardBlock) RegisterOutput(name string, jsType js.Value, opts *DiscardBlockRegisterOutputOpts) *DiscardBlock {
+	if opts == nil {
+		opts = &DiscardBlockRegisterOutputOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+
+	retVal := d.p.Call("registerOutput", args...)
+	return DiscardBlockFromJSObject(retVal, d.ctx)
+}
+
+// ReplaceRepeatableContent calls the ReplaceRepeatableContent method on the DiscardBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#replacerepeatablecontent
+func (d *DiscardBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterialBuildState, fragmentShaderState *NodeMaterialBuildState, mesh *AbstractMesh, defines js.Value) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, vertexShaderState.JSObject())
+	args = append(args, fragmentShaderState.JSObject())
+	args = append(args, mesh.JSObject())
+	args = append(args, defines)
+
+	d.p.Call("replaceRepeatableContent", args...)
+}
+
+// Serialize calls the Serialize method on the DiscardBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#serialize
+func (d *DiscardBlock) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := d.p.Call("serialize", args...)
+	return retVal
+}
+
+// UpdateUniformsAndSamples calls the UpdateUniformsAndSamples method on the DiscardBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#updateuniformsandsamples
+func (d *DiscardBlock) UpdateUniformsAndSamples(state *NodeMaterialBuildState, nodeMaterial *NodeMaterial, defines js.Value, uniformBuffers string) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, state.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+	args = append(args, uniformBuffers)
+
+	d.p.Call("updateUniformsAndSamples", args...)
+}
+
+/*
+
+// BuildId returns the BuildId property of class DiscardBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#buildid
+func (d *DiscardBlock) BuildId(buildId float64) *DiscardBlock {
+	p := ba.ctx.Get("DiscardBlock").New(buildId)
+	return DiscardBlockFromJSObject(p, ba.ctx)
+}
+
+// SetBuildId sets the BuildId property of class DiscardBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#buildid
+func (d *DiscardBlock) SetBuildId(buildId float64) *DiscardBlock {
+	p := ba.ctx.Get("DiscardBlock").New(buildId)
+	return DiscardBlockFromJSObject(p, ba.ctx)
+}
+
+// Comments returns the Comments property of class DiscardBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#comments
+func (d *DiscardBlock) Comments(comments string) *DiscardBlock {
+	p := ba.ctx.Get("DiscardBlock").New(comments)
+	return DiscardBlockFromJSObject(p, ba.ctx)
+}
+
+// SetComments sets the Comments property of class DiscardBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#comments
+func (d *DiscardBlock) SetComments(comments string) *DiscardBlock {
+	p := ba.ctx.Get("DiscardBlock").New(comments)
+	return DiscardBlockFromJSObject(p, ba.ctx)
+}
+
+// Cutoff returns the Cutoff property of class DiscardBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#cutoff
+func (d *DiscardBlock) Cutoff(cutoff *NodeMaterialConnectionPoint) *DiscardBlock {
+	p := ba.ctx.Get("DiscardBlock").New(cutoff.JSObject())
+	return DiscardBlockFromJSObject(p, ba.ctx)
+}
+
+// SetCutoff sets the Cutoff property of class DiscardBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#cutoff
+func (d *DiscardBlock) SetCutoff(cutoff *NodeMaterialConnectionPoint) *DiscardBlock {
+	p := ba.ctx.Get("DiscardBlock").New(cutoff.JSObject())
+	return DiscardBlockFromJSObject(p, ba.ctx)
+}
+
+// Inputs returns the Inputs property of class DiscardBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#inputs
+func (d *DiscardBlock) Inputs(inputs *NodeMaterialConnectionPoint) *DiscardBlock {
+	p := ba.ctx.Get("DiscardBlock").New(inputs.JSObject())
+	return DiscardBlockFromJSObject(p, ba.ctx)
+}
+
+// SetInputs sets the Inputs property of class DiscardBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#inputs
+func (d *DiscardBlock) SetInputs(inputs *NodeMaterialConnectionPoint) *DiscardBlock {
+	p := ba.ctx.Get("DiscardBlock").New(inputs.JSObject())
+	return DiscardBlockFromJSObject(p, ba.ctx)
+}
+
+// IsFinalMerger returns the IsFinalMerger property of class DiscardBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#isfinalmerger
+func (d *DiscardBlock) IsFinalMerger(isFinalMerger bool) *DiscardBlock {
+	p := ba.ctx.Get("DiscardBlock").New(isFinalMerger)
+	return DiscardBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsFinalMerger sets the IsFinalMerger property of class DiscardBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#isfinalmerger
+func (d *DiscardBlock) SetIsFinalMerger(isFinalMerger bool) *DiscardBlock {
+	p := ba.ctx.Get("DiscardBlock").New(isFinalMerger)
+	return DiscardBlockFromJSObject(p, ba.ctx)
+}
+
+// IsInput returns the IsInput property of class DiscardBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#isinput
+func (d *DiscardBlock) IsInput(isInput bool) *DiscardBlock {
+	p := ba.ctx.Get("DiscardBlock").New(isInput)
+	return DiscardBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsInput sets the IsInput property of class DiscardBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#isinput
+func (d *DiscardBlock) SetIsInput(isInput bool) *DiscardBlock {
+	p := ba.ctx.Get("DiscardBlock").New(isInput)
+	return DiscardBlockFromJSObject(p, ba.ctx)
+}
+
+// IsUnique returns the IsUnique property of class DiscardBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#isunique
+func (d *DiscardBlock) IsUnique(isUnique bool) *DiscardBlock {
+	p := ba.ctx.Get("DiscardBlock").New(isUnique)
+	return DiscardBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsUnique sets the IsUnique property of class DiscardBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#isunique
+func (d *DiscardBlock) SetIsUnique(isUnique bool) *DiscardBlock {
+	p := ba.ctx.Get("DiscardBlock").New(isUnique)
+	return DiscardBlockFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class DiscardBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#name
+func (d *DiscardBlock) Name(name string) *DiscardBlock {
 	p := ba.ctx.Get("DiscardBlock").New(name)
 	return DiscardBlockFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetName sets the Name property of class DiscardBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#name
+func (d *DiscardBlock) SetName(name string) *DiscardBlock {
+	p := ba.ctx.Get("DiscardBlock").New(name)
+	return DiscardBlockFromJSObject(p, ba.ctx)
+}
+
+// Outputs returns the Outputs property of class DiscardBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#outputs
+func (d *DiscardBlock) Outputs(outputs *NodeMaterialConnectionPoint) *DiscardBlock {
+	p := ba.ctx.Get("DiscardBlock").New(outputs.JSObject())
+	return DiscardBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOutputs sets the Outputs property of class DiscardBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#outputs
+func (d *DiscardBlock) SetOutputs(outputs *NodeMaterialConnectionPoint) *DiscardBlock {
+	p := ba.ctx.Get("DiscardBlock").New(outputs.JSObject())
+	return DiscardBlockFromJSObject(p, ba.ctx)
+}
+
+// Target returns the Target property of class DiscardBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#target
+func (d *DiscardBlock) Target(target js.Value) *DiscardBlock {
+	p := ba.ctx.Get("DiscardBlock").New(target)
+	return DiscardBlockFromJSObject(p, ba.ctx)
+}
+
+// SetTarget sets the Target property of class DiscardBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#target
+func (d *DiscardBlock) SetTarget(target js.Value) *DiscardBlock {
+	p := ba.ctx.Get("DiscardBlock").New(target)
+	return DiscardBlockFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class DiscardBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#uniqueid
+func (d *DiscardBlock) UniqueId(uniqueId float64) *DiscardBlock {
+	p := ba.ctx.Get("DiscardBlock").New(uniqueId)
+	return DiscardBlockFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class DiscardBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#uniqueid
+func (d *DiscardBlock) SetUniqueId(uniqueId float64) *DiscardBlock {
+	p := ba.ctx.Get("DiscardBlock").New(uniqueId)
+	return DiscardBlockFromJSObject(p, ba.ctx)
+}
+
+// Value returns the Value property of class DiscardBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#value
+func (d *DiscardBlock) Value(value *NodeMaterialConnectionPoint) *DiscardBlock {
+	p := ba.ctx.Get("DiscardBlock").New(value.JSObject())
+	return DiscardBlockFromJSObject(p, ba.ctx)
+}
+
+// SetValue sets the Value property of class DiscardBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discardblock#value
+func (d *DiscardBlock) SetValue(value *NodeMaterialConnectionPoint) *DiscardBlock {
+	p := ba.ctx.Get("DiscardBlock").New(value.JSObject())
+	return DiscardBlockFromJSObject(p, ba.ctx)
+}
+
+*/

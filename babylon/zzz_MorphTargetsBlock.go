@@ -31,8 +31,719 @@ func MorphTargetsBlockFromJSObject(p js.Value, ctx js.Value) *MorphTargetsBlock 
 //
 // https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock
 func (ba *Babylon) NewMorphTargetsBlock(name string) *MorphTargetsBlock {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	p := ba.ctx.Get("MorphTargetsBlock").New(args...)
+	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+}
+
+// AutoConfigure calls the AutoConfigure method on the MorphTargetsBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#autoconfigure
+func (m *MorphTargetsBlock) AutoConfigure(material *NodeMaterial) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, material.JSObject())
+
+	m.p.Call("autoConfigure", args...)
+}
+
+// MorphTargetsBlockBindOpts contains optional parameters for MorphTargetsBlock.Bind.
+type MorphTargetsBlockBindOpts struct {
+	Mesh *Mesh
+}
+
+// Bind calls the Bind method on the MorphTargetsBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#bind
+func (m *MorphTargetsBlock) Bind(effect *Effect, nodeMaterial *NodeMaterial, opts *MorphTargetsBlockBindOpts) {
+	if opts == nil {
+		opts = &MorphTargetsBlockBindOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, effect.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	m.p.Call("bind", args...)
+}
+
+// Build calls the Build method on the MorphTargetsBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#build
+func (m *MorphTargetsBlock) Build(state *NodeMaterialBuildState, activeBlocks *NodeMaterialBlock) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, state.JSObject())
+	args = append(args, activeBlocks.JSObject())
+
+	retVal := m.p.Call("build", args...)
+	return retVal.Bool()
+}
+
+// MorphTargetsBlockCloneOpts contains optional parameters for MorphTargetsBlock.Clone.
+type MorphTargetsBlockCloneOpts struct {
+	RootUrl *string
+}
+
+// Clone calls the Clone method on the MorphTargetsBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#clone
+func (m *MorphTargetsBlock) Clone(scene *Scene, opts *MorphTargetsBlockCloneOpts) *NodeMaterialBlock {
+	if opts == nil {
+		opts = &MorphTargetsBlockCloneOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, scene.JSObject())
+
+	if opts.RootUrl == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RootUrl)
+	}
+
+	retVal := m.p.Call("clone", args...)
+	return NodeMaterialBlockFromJSObject(retVal, m.ctx)
+}
+
+// MorphTargetsBlockConnectToOpts contains optional parameters for MorphTargetsBlock.ConnectTo.
+type MorphTargetsBlockConnectToOpts struct {
+	Options js.Value
+}
+
+// ConnectTo calls the ConnectTo method on the MorphTargetsBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#connectto
+func (m *MorphTargetsBlock) ConnectTo(other *NodeMaterialBlock, opts *MorphTargetsBlockConnectToOpts) *MorphTargetsBlock {
+	if opts == nil {
+		opts = &MorphTargetsBlockConnectToOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, other.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	retVal := m.p.Call("connectTo", args...)
+	return MorphTargetsBlockFromJSObject(retVal, m.ctx)
+}
+
+// Dispose calls the Dispose method on the MorphTargetsBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#dispose
+func (m *MorphTargetsBlock) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	m.p.Call("dispose", args...)
+}
+
+// GetClassName calls the GetClassName method on the MorphTargetsBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#getclassname
+func (m *MorphTargetsBlock) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// MorphTargetsBlockGetFirstAvailableInputOpts contains optional parameters for MorphTargetsBlock.GetFirstAvailableInput.
+type MorphTargetsBlockGetFirstAvailableInputOpts struct {
+	ForOutput *NodeMaterialConnectionPoint
+}
+
+// GetFirstAvailableInput calls the GetFirstAvailableInput method on the MorphTargetsBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#getfirstavailableinput
+func (m *MorphTargetsBlock) GetFirstAvailableInput(opts *MorphTargetsBlockGetFirstAvailableInputOpts) *NodeMaterialConnectionPoint {
+	if opts == nil {
+		opts = &MorphTargetsBlockGetFirstAvailableInputOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForOutput == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForOutput.JSObject())
+	}
+
+	retVal := m.p.Call("getFirstAvailableInput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, m.ctx)
+}
+
+// MorphTargetsBlockGetFirstAvailableOutputOpts contains optional parameters for MorphTargetsBlock.GetFirstAvailableOutput.
+type MorphTargetsBlockGetFirstAvailableOutputOpts struct {
+	ForBlock *NodeMaterialBlock
+}
+
+// GetFirstAvailableOutput calls the GetFirstAvailableOutput method on the MorphTargetsBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#getfirstavailableoutput
+func (m *MorphTargetsBlock) GetFirstAvailableOutput(opts *MorphTargetsBlockGetFirstAvailableOutputOpts) *NodeMaterialConnectionPoint {
+	if opts == nil {
+		opts = &MorphTargetsBlockGetFirstAvailableOutputOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForBlock == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForBlock.JSObject())
+	}
+
+	retVal := m.p.Call("getFirstAvailableOutput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, m.ctx)
+}
+
+// GetInputByName calls the GetInputByName method on the MorphTargetsBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#getinputbyname
+func (m *MorphTargetsBlock) GetInputByName(name string) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := m.p.Call("getInputByName", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, m.ctx)
+}
+
+// GetOutputByName calls the GetOutputByName method on the MorphTargetsBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#getoutputbyname
+func (m *MorphTargetsBlock) GetOutputByName(name string) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := m.p.Call("getOutputByName", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, m.ctx)
+}
+
+// GetSiblingOutput calls the GetSiblingOutput method on the MorphTargetsBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#getsiblingoutput
+func (m *MorphTargetsBlock) GetSiblingOutput(current *NodeMaterialConnectionPoint) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, current.JSObject())
+
+	retVal := m.p.Call("getSiblingOutput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, m.ctx)
+}
+
+// Initialize calls the Initialize method on the MorphTargetsBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#initialize
+func (m *MorphTargetsBlock) Initialize(state *NodeMaterialBuildState) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, state.JSObject())
+
+	m.p.Call("initialize", args...)
+}
+
+// MorphTargetsBlockInitializeDefinesOpts contains optional parameters for MorphTargetsBlock.InitializeDefines.
+type MorphTargetsBlockInitializeDefinesOpts struct {
+	UseInstances *bool
+}
+
+// InitializeDefines calls the InitializeDefines method on the MorphTargetsBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#initializedefines
+func (m *MorphTargetsBlock) InitializeDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *MorphTargetsBlockInitializeDefinesOpts) {
+	if opts == nil {
+		opts = &MorphTargetsBlockInitializeDefinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	m.p.Call("initializeDefines", args...)
+}
+
+// MorphTargetsBlockIsReadyOpts contains optional parameters for MorphTargetsBlock.IsReady.
+type MorphTargetsBlockIsReadyOpts struct {
+	UseInstances *bool
+}
+
+// IsReady calls the IsReady method on the MorphTargetsBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#isready
+func (m *MorphTargetsBlock) IsReady(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *MorphTargetsBlockIsReadyOpts) bool {
+	if opts == nil {
+		opts = &MorphTargetsBlockIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := m.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// PrepareDefines calls the PrepareDefines method on the MorphTargetsBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#preparedefines
+func (m *MorphTargetsBlock) PrepareDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	m.p.Call("prepareDefines", args...)
+}
+
+// ProvideFallbacks calls the ProvideFallbacks method on the MorphTargetsBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#providefallbacks
+func (m *MorphTargetsBlock) ProvideFallbacks(mesh *AbstractMesh, fallbacks *EffectFallbacks) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, fallbacks.JSObject())
+
+	m.p.Call("provideFallbacks", args...)
+}
+
+// MorphTargetsBlockRegisterInputOpts contains optional parameters for MorphTargetsBlock.RegisterInput.
+type MorphTargetsBlockRegisterInputOpts struct {
+	IsOptional *bool
+	Target     js.Value
+}
+
+// RegisterInput calls the RegisterInput method on the MorphTargetsBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#registerinput
+func (m *MorphTargetsBlock) RegisterInput(name string, jsType js.Value, opts *MorphTargetsBlockRegisterInputOpts) *MorphTargetsBlock {
+	if opts == nil {
+		opts = &MorphTargetsBlockRegisterInputOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+2)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	if opts.IsOptional == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IsOptional)
+	}
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+
+	retVal := m.p.Call("registerInput", args...)
+	return MorphTargetsBlockFromJSObject(retVal, m.ctx)
+}
+
+// MorphTargetsBlockRegisterOutputOpts contains optional parameters for MorphTargetsBlock.RegisterOutput.
+type MorphTargetsBlockRegisterOutputOpts struct {
+	Target js.Value
+}
+
+// RegisterOutput calls the RegisterOutput method on the MorphTargetsBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#registeroutput
+func (m *MorphTargetsBlock) RegisterOutput(name string, jsType js.Value, opts *MorphTargetsBlockRegisterOutputOpts) *MorphTargetsBlock {
+	if opts == nil {
+		opts = &MorphTargetsBlockRegisterOutputOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+
+	retVal := m.p.Call("registerOutput", args...)
+	return MorphTargetsBlockFromJSObject(retVal, m.ctx)
+}
+
+// ReplaceRepeatableContent calls the ReplaceRepeatableContent method on the MorphTargetsBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#replacerepeatablecontent
+func (m *MorphTargetsBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterialBuildState, fragmentShaderState *NodeMaterialBuildState, mesh *AbstractMesh, defines js.Value) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, vertexShaderState.JSObject())
+	args = append(args, fragmentShaderState.JSObject())
+	args = append(args, mesh.JSObject())
+	args = append(args, defines)
+
+	m.p.Call("replaceRepeatableContent", args...)
+}
+
+// Serialize calls the Serialize method on the MorphTargetsBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#serialize
+func (m *MorphTargetsBlock) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("serialize", args...)
+	return retVal
+}
+
+// UpdateUniformsAndSamples calls the UpdateUniformsAndSamples method on the MorphTargetsBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#updateuniformsandsamples
+func (m *MorphTargetsBlock) UpdateUniformsAndSamples(state *NodeMaterialBuildState, nodeMaterial *NodeMaterial, defines js.Value, uniformBuffers string) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, state.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+	args = append(args, uniformBuffers)
+
+	m.p.Call("updateUniformsAndSamples", args...)
+}
+
+/*
+
+// BuildId returns the BuildId property of class MorphTargetsBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#buildid
+func (m *MorphTargetsBlock) BuildId(buildId float64) *MorphTargetsBlock {
+	p := ba.ctx.Get("MorphTargetsBlock").New(buildId)
+	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+}
+
+// SetBuildId sets the BuildId property of class MorphTargetsBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#buildid
+func (m *MorphTargetsBlock) SetBuildId(buildId float64) *MorphTargetsBlock {
+	p := ba.ctx.Get("MorphTargetsBlock").New(buildId)
+	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+}
+
+// Comments returns the Comments property of class MorphTargetsBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#comments
+func (m *MorphTargetsBlock) Comments(comments string) *MorphTargetsBlock {
+	p := ba.ctx.Get("MorphTargetsBlock").New(comments)
+	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+}
+
+// SetComments sets the Comments property of class MorphTargetsBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#comments
+func (m *MorphTargetsBlock) SetComments(comments string) *MorphTargetsBlock {
+	p := ba.ctx.Get("MorphTargetsBlock").New(comments)
+	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+}
+
+// Inputs returns the Inputs property of class MorphTargetsBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#inputs
+func (m *MorphTargetsBlock) Inputs(inputs *NodeMaterialConnectionPoint) *MorphTargetsBlock {
+	p := ba.ctx.Get("MorphTargetsBlock").New(inputs.JSObject())
+	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+}
+
+// SetInputs sets the Inputs property of class MorphTargetsBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#inputs
+func (m *MorphTargetsBlock) SetInputs(inputs *NodeMaterialConnectionPoint) *MorphTargetsBlock {
+	p := ba.ctx.Get("MorphTargetsBlock").New(inputs.JSObject())
+	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+}
+
+// IsFinalMerger returns the IsFinalMerger property of class MorphTargetsBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#isfinalmerger
+func (m *MorphTargetsBlock) IsFinalMerger(isFinalMerger bool) *MorphTargetsBlock {
+	p := ba.ctx.Get("MorphTargetsBlock").New(isFinalMerger)
+	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsFinalMerger sets the IsFinalMerger property of class MorphTargetsBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#isfinalmerger
+func (m *MorphTargetsBlock) SetIsFinalMerger(isFinalMerger bool) *MorphTargetsBlock {
+	p := ba.ctx.Get("MorphTargetsBlock").New(isFinalMerger)
+	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+}
+
+// IsInput returns the IsInput property of class MorphTargetsBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#isinput
+func (m *MorphTargetsBlock) IsInput(isInput bool) *MorphTargetsBlock {
+	p := ba.ctx.Get("MorphTargetsBlock").New(isInput)
+	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsInput sets the IsInput property of class MorphTargetsBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#isinput
+func (m *MorphTargetsBlock) SetIsInput(isInput bool) *MorphTargetsBlock {
+	p := ba.ctx.Get("MorphTargetsBlock").New(isInput)
+	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+}
+
+// IsUnique returns the IsUnique property of class MorphTargetsBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#isunique
+func (m *MorphTargetsBlock) IsUnique(isUnique bool) *MorphTargetsBlock {
+	p := ba.ctx.Get("MorphTargetsBlock").New(isUnique)
+	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsUnique sets the IsUnique property of class MorphTargetsBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#isunique
+func (m *MorphTargetsBlock) SetIsUnique(isUnique bool) *MorphTargetsBlock {
+	p := ba.ctx.Get("MorphTargetsBlock").New(isUnique)
+	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class MorphTargetsBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#name
+func (m *MorphTargetsBlock) Name(name string) *MorphTargetsBlock {
 	p := ba.ctx.Get("MorphTargetsBlock").New(name)
 	return MorphTargetsBlockFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetName sets the Name property of class MorphTargetsBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#name
+func (m *MorphTargetsBlock) SetName(name string) *MorphTargetsBlock {
+	p := ba.ctx.Get("MorphTargetsBlock").New(name)
+	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+}
+
+// Normal returns the Normal property of class MorphTargetsBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#normal
+func (m *MorphTargetsBlock) Normal(normal *NodeMaterialConnectionPoint) *MorphTargetsBlock {
+	p := ba.ctx.Get("MorphTargetsBlock").New(normal.JSObject())
+	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+}
+
+// SetNormal sets the Normal property of class MorphTargetsBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#normal
+func (m *MorphTargetsBlock) SetNormal(normal *NodeMaterialConnectionPoint) *MorphTargetsBlock {
+	p := ba.ctx.Get("MorphTargetsBlock").New(normal.JSObject())
+	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+}
+
+// NormalOutput returns the NormalOutput property of class MorphTargetsBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#normaloutput
+func (m *MorphTargetsBlock) NormalOutput(normalOutput *NodeMaterialConnectionPoint) *MorphTargetsBlock {
+	p := ba.ctx.Get("MorphTargetsBlock").New(normalOutput.JSObject())
+	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+}
+
+// SetNormalOutput sets the NormalOutput property of class MorphTargetsBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#normaloutput
+func (m *MorphTargetsBlock) SetNormalOutput(normalOutput *NodeMaterialConnectionPoint) *MorphTargetsBlock {
+	p := ba.ctx.Get("MorphTargetsBlock").New(normalOutput.JSObject())
+	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+}
+
+// Outputs returns the Outputs property of class MorphTargetsBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#outputs
+func (m *MorphTargetsBlock) Outputs(outputs *NodeMaterialConnectionPoint) *MorphTargetsBlock {
+	p := ba.ctx.Get("MorphTargetsBlock").New(outputs.JSObject())
+	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOutputs sets the Outputs property of class MorphTargetsBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#outputs
+func (m *MorphTargetsBlock) SetOutputs(outputs *NodeMaterialConnectionPoint) *MorphTargetsBlock {
+	p := ba.ctx.Get("MorphTargetsBlock").New(outputs.JSObject())
+	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+}
+
+// Position returns the Position property of class MorphTargetsBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#position
+func (m *MorphTargetsBlock) Position(position *NodeMaterialConnectionPoint) *MorphTargetsBlock {
+	p := ba.ctx.Get("MorphTargetsBlock").New(position.JSObject())
+	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+}
+
+// SetPosition sets the Position property of class MorphTargetsBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#position
+func (m *MorphTargetsBlock) SetPosition(position *NodeMaterialConnectionPoint) *MorphTargetsBlock {
+	p := ba.ctx.Get("MorphTargetsBlock").New(position.JSObject())
+	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+}
+
+// PositionOutput returns the PositionOutput property of class MorphTargetsBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#positionoutput
+func (m *MorphTargetsBlock) PositionOutput(positionOutput *NodeMaterialConnectionPoint) *MorphTargetsBlock {
+	p := ba.ctx.Get("MorphTargetsBlock").New(positionOutput.JSObject())
+	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+}
+
+// SetPositionOutput sets the PositionOutput property of class MorphTargetsBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#positionoutput
+func (m *MorphTargetsBlock) SetPositionOutput(positionOutput *NodeMaterialConnectionPoint) *MorphTargetsBlock {
+	p := ba.ctx.Get("MorphTargetsBlock").New(positionOutput.JSObject())
+	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+}
+
+// Tangent returns the Tangent property of class MorphTargetsBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#tangent
+func (m *MorphTargetsBlock) Tangent(tangent *NodeMaterialConnectionPoint) *MorphTargetsBlock {
+	p := ba.ctx.Get("MorphTargetsBlock").New(tangent.JSObject())
+	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+}
+
+// SetTangent sets the Tangent property of class MorphTargetsBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#tangent
+func (m *MorphTargetsBlock) SetTangent(tangent *NodeMaterialConnectionPoint) *MorphTargetsBlock {
+	p := ba.ctx.Get("MorphTargetsBlock").New(tangent.JSObject())
+	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+}
+
+// TangentOutput returns the TangentOutput property of class MorphTargetsBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#tangentoutput
+func (m *MorphTargetsBlock) TangentOutput(tangentOutput *NodeMaterialConnectionPoint) *MorphTargetsBlock {
+	p := ba.ctx.Get("MorphTargetsBlock").New(tangentOutput.JSObject())
+	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+}
+
+// SetTangentOutput sets the TangentOutput property of class MorphTargetsBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#tangentoutput
+func (m *MorphTargetsBlock) SetTangentOutput(tangentOutput *NodeMaterialConnectionPoint) *MorphTargetsBlock {
+	p := ba.ctx.Get("MorphTargetsBlock").New(tangentOutput.JSObject())
+	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+}
+
+// Target returns the Target property of class MorphTargetsBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#target
+func (m *MorphTargetsBlock) Target(target js.Value) *MorphTargetsBlock {
+	p := ba.ctx.Get("MorphTargetsBlock").New(target)
+	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+}
+
+// SetTarget sets the Target property of class MorphTargetsBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#target
+func (m *MorphTargetsBlock) SetTarget(target js.Value) *MorphTargetsBlock {
+	p := ba.ctx.Get("MorphTargetsBlock").New(target)
+	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class MorphTargetsBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#uniqueid
+func (m *MorphTargetsBlock) UniqueId(uniqueId float64) *MorphTargetsBlock {
+	p := ba.ctx.Get("MorphTargetsBlock").New(uniqueId)
+	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class MorphTargetsBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#uniqueid
+func (m *MorphTargetsBlock) SetUniqueId(uniqueId float64) *MorphTargetsBlock {
+	p := ba.ctx.Get("MorphTargetsBlock").New(uniqueId)
+	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+}
+
+// Uv returns the Uv property of class MorphTargetsBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#uv
+func (m *MorphTargetsBlock) Uv(uv *NodeMaterialConnectionPoint) *MorphTargetsBlock {
+	p := ba.ctx.Get("MorphTargetsBlock").New(uv.JSObject())
+	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+}
+
+// SetUv sets the Uv property of class MorphTargetsBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#uv
+func (m *MorphTargetsBlock) SetUv(uv *NodeMaterialConnectionPoint) *MorphTargetsBlock {
+	p := ba.ctx.Get("MorphTargetsBlock").New(uv.JSObject())
+	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+}
+
+// UvOutput returns the UvOutput property of class MorphTargetsBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#uvoutput
+func (m *MorphTargetsBlock) UvOutput(uvOutput *NodeMaterialConnectionPoint) *MorphTargetsBlock {
+	p := ba.ctx.Get("MorphTargetsBlock").New(uvOutput.JSObject())
+	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+}
+
+// SetUvOutput sets the UvOutput property of class MorphTargetsBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetsblock#uvoutput
+func (m *MorphTargetsBlock) SetUvOutput(uvOutput *NodeMaterialConnectionPoint) *MorphTargetsBlock {
+	p := ba.ctx.Get("MorphTargetsBlock").New(uvOutput.JSObject())
+	return MorphTargetsBlockFromJSObject(p, ba.ctx)
+}
+
+*/

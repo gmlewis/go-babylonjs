@@ -27,4 +27,62 @@ func ShapeBuilderFromJSObject(p js.Value, ctx js.Value) *ShapeBuilder {
 	return &ShapeBuilder{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// ShapeBuilderExtrudeShapeOpts contains optional parameters for ShapeBuilder.ExtrudeShape.
+type ShapeBuilderExtrudeShapeOpts struct {
+	Scene *Scene
+}
+
+// ExtrudeShape calls the ExtrudeShape method on the ShapeBuilder object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shapebuilder#extrudeshape
+func (s *ShapeBuilder) ExtrudeShape(name string, options js.Value, opts *ShapeBuilderExtrudeShapeOpts) *Mesh {
+	if opts == nil {
+		opts = &ShapeBuilderExtrudeShapeOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, name)
+	args = append(args, options)
+
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+
+	retVal := s.p.Call("ExtrudeShape", args...)
+	return MeshFromJSObject(retVal, s.ctx)
+}
+
+// ShapeBuilderExtrudeShapeCustomOpts contains optional parameters for ShapeBuilder.ExtrudeShapeCustom.
+type ShapeBuilderExtrudeShapeCustomOpts struct {
+	Scene *Scene
+}
+
+// ExtrudeShapeCustom calls the ExtrudeShapeCustom method on the ShapeBuilder object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shapebuilder#extrudeshapecustom
+func (s *ShapeBuilder) ExtrudeShapeCustom(name string, options js.Value, opts *ShapeBuilderExtrudeShapeCustomOpts) *Mesh {
+	if opts == nil {
+		opts = &ShapeBuilderExtrudeShapeCustomOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, name)
+	args = append(args, options)
+
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+
+	retVal := s.p.Call("ExtrudeShapeCustom", args...)
+	return MeshFromJSObject(retVal, s.ctx)
+}
+
+/*
+
+ */

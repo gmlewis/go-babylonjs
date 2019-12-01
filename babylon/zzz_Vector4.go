@@ -31,8 +31,894 @@ func Vector4FromJSObject(p js.Value, ctx js.Value) *Vector4 {
 //
 // https://doc.babylonjs.com/api/classes/babylon.vector4
 func (ba *Babylon) NewVector4(x float64, y float64, z float64, w float64) *Vector4 {
-	p := ba.ctx.Get("Vector4").New(x, y, z, w)
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, x)
+	args = append(args, y)
+	args = append(args, z)
+	args = append(args, w)
+
+	p := ba.ctx.Get("Vector4").New(args...)
 	return Vector4FromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Add calls the Add method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#add
+func (v *Vector4) Add(otherVector *Vector4) *Vector4 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, otherVector.JSObject())
+
+	retVal := v.p.Call("add", args...)
+	return Vector4FromJSObject(retVal, v.ctx)
+}
+
+// AddInPlace calls the AddInPlace method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#addinplace
+func (v *Vector4) AddInPlace(otherVector *Vector4) *Vector4 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, otherVector.JSObject())
+
+	retVal := v.p.Call("addInPlace", args...)
+	return Vector4FromJSObject(retVal, v.ctx)
+}
+
+// AddToRef calls the AddToRef method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#addtoref
+func (v *Vector4) AddToRef(otherVector *Vector4, result *Vector4) *Vector4 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, otherVector.JSObject())
+	args = append(args, result.JSObject())
+
+	retVal := v.p.Call("addToRef", args...)
+	return Vector4FromJSObject(retVal, v.ctx)
+}
+
+// AsArray calls the AsArray method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#asarray
+func (v *Vector4) AsArray() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("asArray", args...)
+	return retVal.Float()
+}
+
+// Center calls the Center method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#center
+func (v *Vector4) Center(value1 *Vector4, value2 *Vector4) *Vector4 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, value1.JSObject())
+	args = append(args, value2.JSObject())
+
+	retVal := v.p.Call("Center", args...)
+	return Vector4FromJSObject(retVal, v.ctx)
+}
+
+// Clone calls the Clone method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#clone
+func (v *Vector4) Clone() *Vector4 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("clone", args...)
+	return Vector4FromJSObject(retVal, v.ctx)
+}
+
+// CopyFrom calls the CopyFrom method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#copyfrom
+func (v *Vector4) CopyFrom(source *Vector4) *Vector4 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, source.JSObject())
+
+	retVal := v.p.Call("copyFrom", args...)
+	return Vector4FromJSObject(retVal, v.ctx)
+}
+
+// CopyFromFloats calls the CopyFromFloats method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#copyfromfloats
+func (v *Vector4) CopyFromFloats(x float64, y float64, z float64, w float64) *Vector4 {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, x)
+	args = append(args, y)
+	args = append(args, z)
+	args = append(args, w)
+
+	retVal := v.p.Call("copyFromFloats", args...)
+	return Vector4FromJSObject(retVal, v.ctx)
+}
+
+// Distance calls the Distance method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#distance
+func (v *Vector4) Distance(value1 *Vector4, value2 *Vector4) float64 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, value1.JSObject())
+	args = append(args, value2.JSObject())
+
+	retVal := v.p.Call("Distance", args...)
+	return retVal.Float()
+}
+
+// DistanceSquared calls the DistanceSquared method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#distancesquared
+func (v *Vector4) DistanceSquared(value1 *Vector4, value2 *Vector4) float64 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, value1.JSObject())
+	args = append(args, value2.JSObject())
+
+	retVal := v.p.Call("DistanceSquared", args...)
+	return retVal.Float()
+}
+
+// Divide calls the Divide method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#divide
+func (v *Vector4) Divide(otherVector *Vector4) *Vector4 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, otherVector.JSObject())
+
+	retVal := v.p.Call("divide", args...)
+	return Vector4FromJSObject(retVal, v.ctx)
+}
+
+// DivideInPlace calls the DivideInPlace method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#divideinplace
+func (v *Vector4) DivideInPlace(otherVector *Vector4) *Vector4 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, otherVector.JSObject())
+
+	retVal := v.p.Call("divideInPlace", args...)
+	return Vector4FromJSObject(retVal, v.ctx)
+}
+
+// DivideToRef calls the DivideToRef method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#dividetoref
+func (v *Vector4) DivideToRef(otherVector *Vector4, result *Vector4) *Vector4 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, otherVector.JSObject())
+	args = append(args, result.JSObject())
+
+	retVal := v.p.Call("divideToRef", args...)
+	return Vector4FromJSObject(retVal, v.ctx)
+}
+
+// Equals calls the Equals method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#equals
+func (v *Vector4) Equals(otherVector *Vector4) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, otherVector.JSObject())
+
+	retVal := v.p.Call("equals", args...)
+	return retVal.Bool()
+}
+
+// EqualsToFloats calls the EqualsToFloats method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#equalstofloats
+func (v *Vector4) EqualsToFloats(x float64, y float64, z float64, w float64) bool {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, x)
+	args = append(args, y)
+	args = append(args, z)
+	args = append(args, w)
+
+	retVal := v.p.Call("equalsToFloats", args...)
+	return retVal.Bool()
+}
+
+// Vector4EqualsWithEpsilonOpts contains optional parameters for Vector4.EqualsWithEpsilon.
+type Vector4EqualsWithEpsilonOpts struct {
+	Epsilon *float64
+}
+
+// EqualsWithEpsilon calls the EqualsWithEpsilon method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#equalswithepsilon
+func (v *Vector4) EqualsWithEpsilon(otherVector *Vector4, opts *Vector4EqualsWithEpsilonOpts) bool {
+	if opts == nil {
+		opts = &Vector4EqualsWithEpsilonOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, otherVector.JSObject())
+
+	if opts.Epsilon == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Epsilon)
+	}
+
+	retVal := v.p.Call("equalsWithEpsilon", args...)
+	return retVal.Bool()
+}
+
+// Floor calls the Floor method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#floor
+func (v *Vector4) Floor() *Vector4 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("floor", args...)
+	return Vector4FromJSObject(retVal, v.ctx)
+}
+
+// Fract calls the Fract method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#fract
+func (v *Vector4) Fract() *Vector4 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("fract", args...)
+	return Vector4FromJSObject(retVal, v.ctx)
+}
+
+// Vector4FromArrayOpts contains optional parameters for Vector4.FromArray.
+type Vector4FromArrayOpts struct {
+	Offset *float64
+}
+
+// FromArray calls the FromArray method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#fromarray
+func (v *Vector4) FromArray(array js.Value, opts *Vector4FromArrayOpts) *Vector4 {
+	if opts == nil {
+		opts = &Vector4FromArrayOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, array)
+
+	if opts.Offset == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Offset)
+	}
+
+	retVal := v.p.Call("FromArray", args...)
+	return Vector4FromJSObject(retVal, v.ctx)
+}
+
+// FromArrayToRef calls the FromArrayToRef method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#fromarraytoref
+func (v *Vector4) FromArrayToRef(array js.Value, offset float64, result float64) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, array)
+	args = append(args, offset)
+	args = append(args, result)
+
+	v.p.Call("FromArrayToRef", args...)
+}
+
+// FromFloatArrayToRef calls the FromFloatArrayToRef method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#fromfloatarraytoref
+func (v *Vector4) FromFloatArrayToRef(array js.Value, offset float64, result *Vector4) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, array)
+	args = append(args, offset)
+	args = append(args, result.JSObject())
+
+	v.p.Call("FromFloatArrayToRef", args...)
+}
+
+// FromFloatsToRef calls the FromFloatsToRef method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#fromfloatstoref
+func (v *Vector4) FromFloatsToRef(x float64, y float64, z float64, w float64, result *Vector4) {
+
+	args := make([]interface{}, 0, 5+0)
+
+	args = append(args, x)
+	args = append(args, y)
+	args = append(args, z)
+	args = append(args, w)
+	args = append(args, result.JSObject())
+
+	v.p.Call("FromFloatsToRef", args...)
+}
+
+// Vector4FromVector3Opts contains optional parameters for Vector4.FromVector3.
+type Vector4FromVector3Opts struct {
+	W *float64
+}
+
+// FromVector3 calls the FromVector3 method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#fromvector3
+func (v *Vector4) FromVector3(source *Vector3, opts *Vector4FromVector3Opts) *Vector4 {
+	if opts == nil {
+		opts = &Vector4FromVector3Opts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, source.JSObject())
+
+	if opts.W == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.W)
+	}
+
+	retVal := v.p.Call("FromVector3", args...)
+	return Vector4FromJSObject(retVal, v.ctx)
+}
+
+// GetClassName calls the GetClassName method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#getclassname
+func (v *Vector4) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetHashCode calls the GetHashCode method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#gethashcode
+func (v *Vector4) GetHashCode() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("getHashCode", args...)
+	return retVal.Float()
+}
+
+// Length calls the Length method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#length
+func (v *Vector4) Length() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("length", args...)
+	return retVal.Float()
+}
+
+// LengthSquared calls the LengthSquared method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#lengthsquared
+func (v *Vector4) LengthSquared() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("lengthSquared", args...)
+	return retVal.Float()
+}
+
+// Maximize calls the Maximize method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#maximize
+func (v *Vector4) Maximize(left *Vector4, right *Vector4) *Vector4 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, left.JSObject())
+	args = append(args, right.JSObject())
+
+	retVal := v.p.Call("Maximize", args...)
+	return Vector4FromJSObject(retVal, v.ctx)
+}
+
+// MaximizeInPlace calls the MaximizeInPlace method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#maximizeinplace
+func (v *Vector4) MaximizeInPlace(other *Vector4) *Vector4 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, other.JSObject())
+
+	retVal := v.p.Call("maximizeInPlace", args...)
+	return Vector4FromJSObject(retVal, v.ctx)
+}
+
+// Minimize calls the Minimize method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#minimize
+func (v *Vector4) Minimize(left *Vector4, right *Vector4) *Vector4 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, left.JSObject())
+	args = append(args, right.JSObject())
+
+	retVal := v.p.Call("Minimize", args...)
+	return Vector4FromJSObject(retVal, v.ctx)
+}
+
+// MinimizeInPlace calls the MinimizeInPlace method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#minimizeinplace
+func (v *Vector4) MinimizeInPlace(other *Vector4) *Vector4 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, other.JSObject())
+
+	retVal := v.p.Call("minimizeInPlace", args...)
+	return Vector4FromJSObject(retVal, v.ctx)
+}
+
+// Multiply calls the Multiply method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#multiply
+func (v *Vector4) Multiply(otherVector *Vector4) *Vector4 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, otherVector.JSObject())
+
+	retVal := v.p.Call("multiply", args...)
+	return Vector4FromJSObject(retVal, v.ctx)
+}
+
+// MultiplyByFloats calls the MultiplyByFloats method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#multiplybyfloats
+func (v *Vector4) MultiplyByFloats(x float64, y float64, z float64, w float64) *Vector4 {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, x)
+	args = append(args, y)
+	args = append(args, z)
+	args = append(args, w)
+
+	retVal := v.p.Call("multiplyByFloats", args...)
+	return Vector4FromJSObject(retVal, v.ctx)
+}
+
+// MultiplyInPlace calls the MultiplyInPlace method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#multiplyinplace
+func (v *Vector4) MultiplyInPlace(otherVector *Vector4) *Vector4 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, otherVector.JSObject())
+
+	retVal := v.p.Call("multiplyInPlace", args...)
+	return Vector4FromJSObject(retVal, v.ctx)
+}
+
+// MultiplyToRef calls the MultiplyToRef method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#multiplytoref
+func (v *Vector4) MultiplyToRef(otherVector *Vector4, result *Vector4) *Vector4 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, otherVector.JSObject())
+	args = append(args, result.JSObject())
+
+	retVal := v.p.Call("multiplyToRef", args...)
+	return Vector4FromJSObject(retVal, v.ctx)
+}
+
+// Negate calls the Negate method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#negate
+func (v *Vector4) Negate() *Vector4 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("negate", args...)
+	return Vector4FromJSObject(retVal, v.ctx)
+}
+
+// Normalize calls the Normalize method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#normalize
+func (v *Vector4) Normalize(vector *Vector4) *Vector4 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, vector.JSObject())
+
+	retVal := v.p.Call("Normalize", args...)
+	return Vector4FromJSObject(retVal, v.ctx)
+}
+
+// NormalizeToRef calls the NormalizeToRef method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#normalizetoref
+func (v *Vector4) NormalizeToRef(vector *Vector4, result *Vector4) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, vector.JSObject())
+	args = append(args, result.JSObject())
+
+	v.p.Call("NormalizeToRef", args...)
+}
+
+// One calls the One method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#one
+func (v *Vector4) One() *Vector4 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("One", args...)
+	return Vector4FromJSObject(retVal, v.ctx)
+}
+
+// Scale calls the Scale method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#scale
+func (v *Vector4) Scale(scale float64) *Vector4 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, scale)
+
+	retVal := v.p.Call("scale", args...)
+	return Vector4FromJSObject(retVal, v.ctx)
+}
+
+// ScaleAndAddToRef calls the ScaleAndAddToRef method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#scaleandaddtoref
+func (v *Vector4) ScaleAndAddToRef(scale float64, result *Vector4) *Vector4 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, scale)
+	args = append(args, result.JSObject())
+
+	retVal := v.p.Call("scaleAndAddToRef", args...)
+	return Vector4FromJSObject(retVal, v.ctx)
+}
+
+// ScaleInPlace calls the ScaleInPlace method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#scaleinplace
+func (v *Vector4) ScaleInPlace(scale float64) *Vector4 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, scale)
+
+	retVal := v.p.Call("scaleInPlace", args...)
+	return Vector4FromJSObject(retVal, v.ctx)
+}
+
+// ScaleToRef calls the ScaleToRef method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#scaletoref
+func (v *Vector4) ScaleToRef(scale float64, result *Vector4) *Vector4 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, scale)
+	args = append(args, result.JSObject())
+
+	retVal := v.p.Call("scaleToRef", args...)
+	return Vector4FromJSObject(retVal, v.ctx)
+}
+
+// Set calls the Set method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#set
+func (v *Vector4) Set(x float64, y float64, z float64, w float64) *Vector4 {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, x)
+	args = append(args, y)
+	args = append(args, z)
+	args = append(args, w)
+
+	retVal := v.p.Call("set", args...)
+	return Vector4FromJSObject(retVal, v.ctx)
+}
+
+// SetAll calls the SetAll method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#setall
+func (v *Vector4) SetAll(v float64) *Vector4 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, v)
+
+	retVal := v.p.Call("setAll", args...)
+	return Vector4FromJSObject(retVal, v.ctx)
+}
+
+// Subtract calls the Subtract method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#subtract
+func (v *Vector4) Subtract(otherVector *Vector4) *Vector4 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, otherVector.JSObject())
+
+	retVal := v.p.Call("subtract", args...)
+	return Vector4FromJSObject(retVal, v.ctx)
+}
+
+// SubtractFromFloats calls the SubtractFromFloats method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#subtractfromfloats
+func (v *Vector4) SubtractFromFloats(x float64, y float64, z float64, w float64) *Vector4 {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, x)
+	args = append(args, y)
+	args = append(args, z)
+	args = append(args, w)
+
+	retVal := v.p.Call("subtractFromFloats", args...)
+	return Vector4FromJSObject(retVal, v.ctx)
+}
+
+// SubtractFromFloatsToRef calls the SubtractFromFloatsToRef method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#subtractfromfloatstoref
+func (v *Vector4) SubtractFromFloatsToRef(x float64, y float64, z float64, w float64, result *Vector4) *Vector4 {
+
+	args := make([]interface{}, 0, 5+0)
+
+	args = append(args, x)
+	args = append(args, y)
+	args = append(args, z)
+	args = append(args, w)
+	args = append(args, result.JSObject())
+
+	retVal := v.p.Call("subtractFromFloatsToRef", args...)
+	return Vector4FromJSObject(retVal, v.ctx)
+}
+
+// SubtractInPlace calls the SubtractInPlace method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#subtractinplace
+func (v *Vector4) SubtractInPlace(otherVector *Vector4) *Vector4 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, otherVector.JSObject())
+
+	retVal := v.p.Call("subtractInPlace", args...)
+	return Vector4FromJSObject(retVal, v.ctx)
+}
+
+// SubtractToRef calls the SubtractToRef method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#subtracttoref
+func (v *Vector4) SubtractToRef(otherVector *Vector4, result *Vector4) *Vector4 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, otherVector.JSObject())
+	args = append(args, result.JSObject())
+
+	retVal := v.p.Call("subtractToRef", args...)
+	return Vector4FromJSObject(retVal, v.ctx)
+}
+
+// Vector4ToArrayOpts contains optional parameters for Vector4.ToArray.
+type Vector4ToArrayOpts struct {
+	Index *float64
+}
+
+// ToArray calls the ToArray method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#toarray
+func (v *Vector4) ToArray(array js.Value, opts *Vector4ToArrayOpts) *Vector4 {
+	if opts == nil {
+		opts = &Vector4ToArrayOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, array)
+
+	if opts.Index == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Index)
+	}
+
+	retVal := v.p.Call("toArray", args...)
+	return Vector4FromJSObject(retVal, v.ctx)
+}
+
+// ToString calls the ToString method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#tostring
+func (v *Vector4) ToString() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("toString", args...)
+	return retVal.String()
+}
+
+// ToVector3 calls the ToVector3 method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#tovector3
+func (v *Vector4) ToVector3() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("toVector3", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// TransformNormal calls the TransformNormal method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#transformnormal
+func (v *Vector4) TransformNormal(vector *Vector4, transformation *Matrix) *Vector4 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, vector.JSObject())
+	args = append(args, transformation.JSObject())
+
+	retVal := v.p.Call("TransformNormal", args...)
+	return Vector4FromJSObject(retVal, v.ctx)
+}
+
+// TransformNormalFromFloatsToRef calls the TransformNormalFromFloatsToRef method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#transformnormalfromfloatstoref
+func (v *Vector4) TransformNormalFromFloatsToRef(x float64, y float64, z float64, w float64, transformation *Matrix, result *Vector4) {
+
+	args := make([]interface{}, 0, 6+0)
+
+	args = append(args, x)
+	args = append(args, y)
+	args = append(args, z)
+	args = append(args, w)
+	args = append(args, transformation.JSObject())
+	args = append(args, result.JSObject())
+
+	v.p.Call("TransformNormalFromFloatsToRef", args...)
+}
+
+// TransformNormalToRef calls the TransformNormalToRef method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#transformnormaltoref
+func (v *Vector4) TransformNormalToRef(vector *Vector4, transformation *Matrix, result *Vector4) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, vector.JSObject())
+	args = append(args, transformation.JSObject())
+	args = append(args, result.JSObject())
+
+	v.p.Call("TransformNormalToRef", args...)
+}
+
+// Zero calls the Zero method on the Vector4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#zero
+func (v *Vector4) Zero() *Vector4 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("Zero", args...)
+	return Vector4FromJSObject(retVal, v.ctx)
+}
+
+/*
+
+// W returns the W property of class Vector4.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#w
+func (v *Vector4) W(w float64) *Vector4 {
+	p := ba.ctx.Get("Vector4").New(w)
+	return Vector4FromJSObject(p, ba.ctx)
+}
+
+// SetW sets the W property of class Vector4.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#w
+func (v *Vector4) SetW(w float64) *Vector4 {
+	p := ba.ctx.Get("Vector4").New(w)
+	return Vector4FromJSObject(p, ba.ctx)
+}
+
+// X returns the X property of class Vector4.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#x
+func (v *Vector4) X(x float64) *Vector4 {
+	p := ba.ctx.Get("Vector4").New(x)
+	return Vector4FromJSObject(p, ba.ctx)
+}
+
+// SetX sets the X property of class Vector4.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#x
+func (v *Vector4) SetX(x float64) *Vector4 {
+	p := ba.ctx.Get("Vector4").New(x)
+	return Vector4FromJSObject(p, ba.ctx)
+}
+
+// Y returns the Y property of class Vector4.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#y
+func (v *Vector4) Y(y float64) *Vector4 {
+	p := ba.ctx.Get("Vector4").New(y)
+	return Vector4FromJSObject(p, ba.ctx)
+}
+
+// SetY sets the Y property of class Vector4.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#y
+func (v *Vector4) SetY(y float64) *Vector4 {
+	p := ba.ctx.Get("Vector4").New(y)
+	return Vector4FromJSObject(p, ba.ctx)
+}
+
+// Z returns the Z property of class Vector4.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#z
+func (v *Vector4) Z(z float64) *Vector4 {
+	p := ba.ctx.Get("Vector4").New(z)
+	return Vector4FromJSObject(p, ba.ctx)
+}
+
+// SetZ sets the Z property of class Vector4.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector4#z
+func (v *Vector4) SetZ(z float64) *Vector4 {
+	p := ba.ctx.Get("Vector4").New(z)
+	return Vector4FromJSObject(p, ba.ctx)
+}
+
+*/

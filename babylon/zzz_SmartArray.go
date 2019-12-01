@@ -31,8 +31,141 @@ func SmartArrayFromJSObject(p js.Value, ctx js.Value) *SmartArray {
 //
 // https://doc.babylonjs.com/api/classes/babylon.smartarray
 func (ba *Babylon) NewSmartArray(capacity float64) *SmartArray {
-	p := ba.ctx.Get("SmartArray").New(capacity)
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, capacity)
+
+	p := ba.ctx.Get("SmartArray").New(args...)
 	return SmartArrayFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Concat calls the Concat method on the SmartArray object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.smartarray#concat
+func (s *SmartArray) Concat(array interface{}) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, array)
+
+	s.p.Call("concat", args...)
+}
+
+// Contains calls the Contains method on the SmartArray object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.smartarray#contains
+func (s *SmartArray) Contains(value *T) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, value.JSObject())
+
+	retVal := s.p.Call("contains", args...)
+	return retVal.Bool()
+}
+
+// Dispose calls the Dispose method on the SmartArray object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.smartarray#dispose
+func (s *SmartArray) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("dispose", args...)
+}
+
+// ForEach calls the ForEach method on the SmartArray object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.smartarray#foreach
+func (s *SmartArray) ForEach(jsFunc func()) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, jsFunc)
+
+	s.p.Call("forEach", args...)
+}
+
+// IndexOf calls the IndexOf method on the SmartArray object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.smartarray#indexof
+func (s *SmartArray) IndexOf(value *T) float64 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, value.JSObject())
+
+	retVal := s.p.Call("indexOf", args...)
+	return retVal.Float()
+}
+
+// Push calls the Push method on the SmartArray object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.smartarray#push
+func (s *SmartArray) Push(value *T) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, value.JSObject())
+
+	s.p.Call("push", args...)
+}
+
+// Reset calls the Reset method on the SmartArray object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.smartarray#reset
+func (s *SmartArray) Reset() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("reset", args...)
+}
+
+// Sort calls the Sort method on the SmartArray object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.smartarray#sort
+func (s *SmartArray) Sort(compareFn func()) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, compareFn)
+
+	s.p.Call("sort", args...)
+}
+
+/*
+
+// Data returns the Data property of class SmartArray.
+//
+// https://doc.babylonjs.com/api/classes/babylon.smartarray#data
+func (s *SmartArray) Data(data []T) *SmartArray {
+	p := ba.ctx.Get("SmartArray").New(data.JSObject())
+	return SmartArrayFromJSObject(p, ba.ctx)
+}
+
+// SetData sets the Data property of class SmartArray.
+//
+// https://doc.babylonjs.com/api/classes/babylon.smartarray#data
+func (s *SmartArray) SetData(data []T) *SmartArray {
+	p := ba.ctx.Get("SmartArray").New(data.JSObject())
+	return SmartArrayFromJSObject(p, ba.ctx)
+}
+
+// Length returns the Length property of class SmartArray.
+//
+// https://doc.babylonjs.com/api/classes/babylon.smartarray#length
+func (s *SmartArray) Length(length float64) *SmartArray {
+	p := ba.ctx.Get("SmartArray").New(length)
+	return SmartArrayFromJSObject(p, ba.ctx)
+}
+
+// SetLength sets the Length property of class SmartArray.
+//
+// https://doc.babylonjs.com/api/classes/babylon.smartarray#length
+func (s *SmartArray) SetLength(length float64) *SmartArray {
+	p := ba.ctx.Get("SmartArray").New(length)
+	return SmartArrayFromJSObject(p, ba.ctx)
+}
+
+*/

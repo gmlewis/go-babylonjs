@@ -27,4 +27,54 @@ func WebXRDefaultExperienceOptionsFromJSObject(p js.Value, ctx js.Value) *WebXRD
 	return &WebXRDefaultExperienceOptions{p: p, ctx: ctx}
 }
 
-// TODO: methods
+/*
+
+// DisableDefaultUI returns the DisableDefaultUI property of class WebXRDefaultExperienceOptions.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrdefaultexperienceoptions#disabledefaultui
+func (w *WebXRDefaultExperienceOptions) DisableDefaultUI(disableDefaultUI bool) *WebXRDefaultExperienceOptions {
+	p := ba.ctx.Get("WebXRDefaultExperienceOptions").New(disableDefaultUI)
+	return WebXRDefaultExperienceOptionsFromJSObject(p, ba.ctx)
+}
+
+// SetDisableDefaultUI sets the DisableDefaultUI property of class WebXRDefaultExperienceOptions.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrdefaultexperienceoptions#disabledefaultui
+func (w *WebXRDefaultExperienceOptions) SetDisableDefaultUI(disableDefaultUI bool) *WebXRDefaultExperienceOptions {
+	p := ba.ctx.Get("WebXRDefaultExperienceOptions").New(disableDefaultUI)
+	return WebXRDefaultExperienceOptionsFromJSObject(p, ba.ctx)
+}
+
+// FloorMeshes returns the FloorMeshes property of class WebXRDefaultExperienceOptions.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrdefaultexperienceoptions#floormeshes
+func (w *WebXRDefaultExperienceOptions) FloorMeshes(floorMeshes []AbstractMesh) *WebXRDefaultExperienceOptions {
+	p := ba.ctx.Get("WebXRDefaultExperienceOptions").New(floorMeshes.JSObject())
+	return WebXRDefaultExperienceOptionsFromJSObject(p, ba.ctx)
+}
+
+// SetFloorMeshes sets the FloorMeshes property of class WebXRDefaultExperienceOptions.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrdefaultexperienceoptions#floormeshes
+func (w *WebXRDefaultExperienceOptions) SetFloorMeshes(floorMeshes []AbstractMesh) *WebXRDefaultExperienceOptions {
+	p := ba.ctx.Get("WebXRDefaultExperienceOptions").New(floorMeshes.JSObject())
+	return WebXRDefaultExperienceOptionsFromJSObject(p, ba.ctx)
+}
+
+// OutputCanvasOptions returns the OutputCanvasOptions property of class WebXRDefaultExperienceOptions.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrdefaultexperienceoptions#outputcanvasoptions
+func (w *WebXRDefaultExperienceOptions) OutputCanvasOptions(outputCanvasOptions *WebXRManagedOutputCanvasOptions) *WebXRDefaultExperienceOptions {
+	p := ba.ctx.Get("WebXRDefaultExperienceOptions").New(outputCanvasOptions.JSObject())
+	return WebXRDefaultExperienceOptionsFromJSObject(p, ba.ctx)
+}
+
+// SetOutputCanvasOptions sets the OutputCanvasOptions property of class WebXRDefaultExperienceOptions.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrdefaultexperienceoptions#outputcanvasoptions
+func (w *WebXRDefaultExperienceOptions) SetOutputCanvasOptions(outputCanvasOptions *WebXRManagedOutputCanvasOptions) *WebXRDefaultExperienceOptions {
+	p := ba.ctx.Get("WebXRDefaultExperienceOptions").New(outputCanvasOptions.JSObject())
+	return WebXRDefaultExperienceOptionsFromJSObject(p, ba.ctx)
+}
+
+*/

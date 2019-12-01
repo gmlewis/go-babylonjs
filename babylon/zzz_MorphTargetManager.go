@@ -42,8 +42,290 @@ func (ba *Babylon) NewMorphTargetManager(opts *NewMorphTargetManagerOpts) *Morph
 		opts = &NewMorphTargetManagerOpts{}
 	}
 
-	p := ba.ctx.Get("MorphTargetManager").New(opts.Scene.JSObject())
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+
+	p := ba.ctx.Get("MorphTargetManager").New(args...)
 	return MorphTargetManagerFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AddTarget calls the AddTarget method on the MorphTargetManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetmanager#addtarget
+func (m *MorphTargetManager) AddTarget(target *MorphTarget) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, target.JSObject())
+
+	m.p.Call("addTarget", args...)
+}
+
+// Clone calls the Clone method on the MorphTargetManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetmanager#clone
+func (m *MorphTargetManager) Clone() *MorphTargetManager {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("clone", args...)
+	return MorphTargetManagerFromJSObject(retVal, m.ctx)
+}
+
+// GetActiveTarget calls the GetActiveTarget method on the MorphTargetManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetmanager#getactivetarget
+func (m *MorphTargetManager) GetActiveTarget(index float64) *MorphTarget {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, index)
+
+	retVal := m.p.Call("getActiveTarget", args...)
+	return MorphTargetFromJSObject(retVal, m.ctx)
+}
+
+// GetTarget calls the GetTarget method on the MorphTargetManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetmanager#gettarget
+func (m *MorphTargetManager) GetTarget(index float64) *MorphTarget {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, index)
+
+	retVal := m.p.Call("getTarget", args...)
+	return MorphTargetFromJSObject(retVal, m.ctx)
+}
+
+// Parse calls the Parse method on the MorphTargetManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetmanager#parse
+func (m *MorphTargetManager) Parse(serializationObject interface{}, scene *Scene) *MorphTargetManager {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, serializationObject)
+	args = append(args, scene.JSObject())
+
+	retVal := m.p.Call("Parse", args...)
+	return MorphTargetManagerFromJSObject(retVal, m.ctx)
+}
+
+// RemoveTarget calls the RemoveTarget method on the MorphTargetManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetmanager#removetarget
+func (m *MorphTargetManager) RemoveTarget(target *MorphTarget) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, target.JSObject())
+
+	m.p.Call("removeTarget", args...)
+}
+
+// Serialize calls the Serialize method on the MorphTargetManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetmanager#serialize
+func (m *MorphTargetManager) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("serialize", args...)
+	return retVal
+}
+
+// Synchronize calls the Synchronize method on the MorphTargetManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetmanager#synchronize
+func (m *MorphTargetManager) Synchronize() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	m.p.Call("synchronize", args...)
+}
+
+/*
+
+// EnableNormalMorphing returns the EnableNormalMorphing property of class MorphTargetManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetmanager#enablenormalmorphing
+func (m *MorphTargetManager) EnableNormalMorphing(enableNormalMorphing bool) *MorphTargetManager {
+	p := ba.ctx.Get("MorphTargetManager").New(enableNormalMorphing)
+	return MorphTargetManagerFromJSObject(p, ba.ctx)
+}
+
+// SetEnableNormalMorphing sets the EnableNormalMorphing property of class MorphTargetManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetmanager#enablenormalmorphing
+func (m *MorphTargetManager) SetEnableNormalMorphing(enableNormalMorphing bool) *MorphTargetManager {
+	p := ba.ctx.Get("MorphTargetManager").New(enableNormalMorphing)
+	return MorphTargetManagerFromJSObject(p, ba.ctx)
+}
+
+// EnableTangentMorphing returns the EnableTangentMorphing property of class MorphTargetManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetmanager#enabletangentmorphing
+func (m *MorphTargetManager) EnableTangentMorphing(enableTangentMorphing bool) *MorphTargetManager {
+	p := ba.ctx.Get("MorphTargetManager").New(enableTangentMorphing)
+	return MorphTargetManagerFromJSObject(p, ba.ctx)
+}
+
+// SetEnableTangentMorphing sets the EnableTangentMorphing property of class MorphTargetManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetmanager#enabletangentmorphing
+func (m *MorphTargetManager) SetEnableTangentMorphing(enableTangentMorphing bool) *MorphTargetManager {
+	p := ba.ctx.Get("MorphTargetManager").New(enableTangentMorphing)
+	return MorphTargetManagerFromJSObject(p, ba.ctx)
+}
+
+// EnableUVMorphing returns the EnableUVMorphing property of class MorphTargetManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetmanager#enableuvmorphing
+func (m *MorphTargetManager) EnableUVMorphing(enableUVMorphing bool) *MorphTargetManager {
+	p := ba.ctx.Get("MorphTargetManager").New(enableUVMorphing)
+	return MorphTargetManagerFromJSObject(p, ba.ctx)
+}
+
+// SetEnableUVMorphing sets the EnableUVMorphing property of class MorphTargetManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetmanager#enableuvmorphing
+func (m *MorphTargetManager) SetEnableUVMorphing(enableUVMorphing bool) *MorphTargetManager {
+	p := ba.ctx.Get("MorphTargetManager").New(enableUVMorphing)
+	return MorphTargetManagerFromJSObject(p, ba.ctx)
+}
+
+// Influences returns the Influences property of class MorphTargetManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetmanager#influences
+func (m *MorphTargetManager) Influences(influences js.Value) *MorphTargetManager {
+	p := ba.ctx.Get("MorphTargetManager").New(influences)
+	return MorphTargetManagerFromJSObject(p, ba.ctx)
+}
+
+// SetInfluences sets the Influences property of class MorphTargetManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetmanager#influences
+func (m *MorphTargetManager) SetInfluences(influences js.Value) *MorphTargetManager {
+	p := ba.ctx.Get("MorphTargetManager").New(influences)
+	return MorphTargetManagerFromJSObject(p, ba.ctx)
+}
+
+// NumInfluencers returns the NumInfluencers property of class MorphTargetManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetmanager#numinfluencers
+func (m *MorphTargetManager) NumInfluencers(numInfluencers float64) *MorphTargetManager {
+	p := ba.ctx.Get("MorphTargetManager").New(numInfluencers)
+	return MorphTargetManagerFromJSObject(p, ba.ctx)
+}
+
+// SetNumInfluencers sets the NumInfluencers property of class MorphTargetManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetmanager#numinfluencers
+func (m *MorphTargetManager) SetNumInfluencers(numInfluencers float64) *MorphTargetManager {
+	p := ba.ctx.Get("MorphTargetManager").New(numInfluencers)
+	return MorphTargetManagerFromJSObject(p, ba.ctx)
+}
+
+// NumTargets returns the NumTargets property of class MorphTargetManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetmanager#numtargets
+func (m *MorphTargetManager) NumTargets(numTargets float64) *MorphTargetManager {
+	p := ba.ctx.Get("MorphTargetManager").New(numTargets)
+	return MorphTargetManagerFromJSObject(p, ba.ctx)
+}
+
+// SetNumTargets sets the NumTargets property of class MorphTargetManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetmanager#numtargets
+func (m *MorphTargetManager) SetNumTargets(numTargets float64) *MorphTargetManager {
+	p := ba.ctx.Get("MorphTargetManager").New(numTargets)
+	return MorphTargetManagerFromJSObject(p, ba.ctx)
+}
+
+// SupportsNormals returns the SupportsNormals property of class MorphTargetManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetmanager#supportsnormals
+func (m *MorphTargetManager) SupportsNormals(supportsNormals bool) *MorphTargetManager {
+	p := ba.ctx.Get("MorphTargetManager").New(supportsNormals)
+	return MorphTargetManagerFromJSObject(p, ba.ctx)
+}
+
+// SetSupportsNormals sets the SupportsNormals property of class MorphTargetManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetmanager#supportsnormals
+func (m *MorphTargetManager) SetSupportsNormals(supportsNormals bool) *MorphTargetManager {
+	p := ba.ctx.Get("MorphTargetManager").New(supportsNormals)
+	return MorphTargetManagerFromJSObject(p, ba.ctx)
+}
+
+// SupportsTangents returns the SupportsTangents property of class MorphTargetManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetmanager#supportstangents
+func (m *MorphTargetManager) SupportsTangents(supportsTangents bool) *MorphTargetManager {
+	p := ba.ctx.Get("MorphTargetManager").New(supportsTangents)
+	return MorphTargetManagerFromJSObject(p, ba.ctx)
+}
+
+// SetSupportsTangents sets the SupportsTangents property of class MorphTargetManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetmanager#supportstangents
+func (m *MorphTargetManager) SetSupportsTangents(supportsTangents bool) *MorphTargetManager {
+	p := ba.ctx.Get("MorphTargetManager").New(supportsTangents)
+	return MorphTargetManagerFromJSObject(p, ba.ctx)
+}
+
+// SupportsUVs returns the SupportsUVs property of class MorphTargetManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetmanager#supportsuvs
+func (m *MorphTargetManager) SupportsUVs(supportsUVs bool) *MorphTargetManager {
+	p := ba.ctx.Get("MorphTargetManager").New(supportsUVs)
+	return MorphTargetManagerFromJSObject(p, ba.ctx)
+}
+
+// SetSupportsUVs sets the SupportsUVs property of class MorphTargetManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetmanager#supportsuvs
+func (m *MorphTargetManager) SetSupportsUVs(supportsUVs bool) *MorphTargetManager {
+	p := ba.ctx.Get("MorphTargetManager").New(supportsUVs)
+	return MorphTargetManagerFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class MorphTargetManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetmanager#uniqueid
+func (m *MorphTargetManager) UniqueId(uniqueId float64) *MorphTargetManager {
+	p := ba.ctx.Get("MorphTargetManager").New(uniqueId)
+	return MorphTargetManagerFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class MorphTargetManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetmanager#uniqueid
+func (m *MorphTargetManager) SetUniqueId(uniqueId float64) *MorphTargetManager {
+	p := ba.ctx.Get("MorphTargetManager").New(uniqueId)
+	return MorphTargetManagerFromJSObject(p, ba.ctx)
+}
+
+// VertexCount returns the VertexCount property of class MorphTargetManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetmanager#vertexcount
+func (m *MorphTargetManager) VertexCount(vertexCount float64) *MorphTargetManager {
+	p := ba.ctx.Get("MorphTargetManager").New(vertexCount)
+	return MorphTargetManagerFromJSObject(p, ba.ctx)
+}
+
+// SetVertexCount sets the VertexCount property of class MorphTargetManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtargetmanager#vertexcount
+func (m *MorphTargetManager) SetVertexCount(vertexCount float64) *MorphTargetManager {
+	p := ba.ctx.Get("MorphTargetManager").New(vertexCount)
+	return MorphTargetManagerFromJSObject(p, ba.ctx)
+}
+
+*/

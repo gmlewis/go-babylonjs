@@ -29,4 +29,90 @@ func QuadraticEaseFromJSObject(p js.Value, ctx js.Value) *QuadraticEase {
 	return &QuadraticEase{EasingFunction: EasingFunctionFromJSObject(p, ctx), ctx: ctx}
 }
 
-// TODO: methods
+// Ease calls the Ease method on the QuadraticEase object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.quadraticease#ease
+func (q *QuadraticEase) Ease(gradient float64) float64 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, gradient)
+
+	retVal := q.p.Call("ease", args...)
+	return retVal.Float()
+}
+
+// GetEasingMode calls the GetEasingMode method on the QuadraticEase object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.quadraticease#geteasingmode
+func (q *QuadraticEase) GetEasingMode() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := q.p.Call("getEasingMode", args...)
+	return retVal.Float()
+}
+
+// SetEasingMode calls the SetEasingMode method on the QuadraticEase object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.quadraticease#seteasingmode
+func (q *QuadraticEase) SetEasingMode(easingMode float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, easingMode)
+
+	q.p.Call("setEasingMode", args...)
+}
+
+/*
+
+// EASINGMODE_EASEIN returns the EASINGMODE_EASEIN property of class QuadraticEase.
+//
+// https://doc.babylonjs.com/api/classes/babylon.quadraticease#easingmode_easein
+func (q *QuadraticEase) EASINGMODE_EASEIN(EASINGMODE_EASEIN float64) *QuadraticEase {
+	p := ba.ctx.Get("QuadraticEase").New(EASINGMODE_EASEIN)
+	return QuadraticEaseFromJSObject(p, ba.ctx)
+}
+
+// SetEASINGMODE_EASEIN sets the EASINGMODE_EASEIN property of class QuadraticEase.
+//
+// https://doc.babylonjs.com/api/classes/babylon.quadraticease#easingmode_easein
+func (q *QuadraticEase) SetEASINGMODE_EASEIN(EASINGMODE_EASEIN float64) *QuadraticEase {
+	p := ba.ctx.Get("QuadraticEase").New(EASINGMODE_EASEIN)
+	return QuadraticEaseFromJSObject(p, ba.ctx)
+}
+
+// EASINGMODE_EASEINOUT returns the EASINGMODE_EASEINOUT property of class QuadraticEase.
+//
+// https://doc.babylonjs.com/api/classes/babylon.quadraticease#easingmode_easeinout
+func (q *QuadraticEase) EASINGMODE_EASEINOUT(EASINGMODE_EASEINOUT float64) *QuadraticEase {
+	p := ba.ctx.Get("QuadraticEase").New(EASINGMODE_EASEINOUT)
+	return QuadraticEaseFromJSObject(p, ba.ctx)
+}
+
+// SetEASINGMODE_EASEINOUT sets the EASINGMODE_EASEINOUT property of class QuadraticEase.
+//
+// https://doc.babylonjs.com/api/classes/babylon.quadraticease#easingmode_easeinout
+func (q *QuadraticEase) SetEASINGMODE_EASEINOUT(EASINGMODE_EASEINOUT float64) *QuadraticEase {
+	p := ba.ctx.Get("QuadraticEase").New(EASINGMODE_EASEINOUT)
+	return QuadraticEaseFromJSObject(p, ba.ctx)
+}
+
+// EASINGMODE_EASEOUT returns the EASINGMODE_EASEOUT property of class QuadraticEase.
+//
+// https://doc.babylonjs.com/api/classes/babylon.quadraticease#easingmode_easeout
+func (q *QuadraticEase) EASINGMODE_EASEOUT(EASINGMODE_EASEOUT float64) *QuadraticEase {
+	p := ba.ctx.Get("QuadraticEase").New(EASINGMODE_EASEOUT)
+	return QuadraticEaseFromJSObject(p, ba.ctx)
+}
+
+// SetEASINGMODE_EASEOUT sets the EASINGMODE_EASEOUT property of class QuadraticEase.
+//
+// https://doc.babylonjs.com/api/classes/babylon.quadraticease#easingmode_easeout
+func (q *QuadraticEase) SetEASINGMODE_EASEOUT(EASINGMODE_EASEOUT float64) *QuadraticEase {
+	p := ba.ctx.Get("QuadraticEase").New(EASINGMODE_EASEOUT)
+	return QuadraticEaseFromJSObject(p, ba.ctx)
+}
+
+*/

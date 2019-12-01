@@ -35,7 +35,7 @@ func OceanPostProcessFromJSObject(p js.Value, ctx js.Value) *OceanPostProcess {
 
 // NewOceanPostProcessOpts contains optional parameters for NewOceanPostProcess.
 type NewOceanPostProcessOpts struct {
-	Options *JSValue
+	Options *IOceanPostProcessOptions
 }
 
 // NewOceanPostProcess returns a new OceanPostProcess object.
@@ -46,8 +46,813 @@ func (ba *Babylon) NewOceanPostProcess(name string, camera *TargetCamera, opts *
 		opts = &NewOceanPostProcessOpts{}
 	}
 
-	p := ba.ctx.Get("OceanPostProcess").New(name, camera.JSObject(), opts.Options.JSObject())
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, name)
+	args = append(args, camera.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options.JSObject())
+	}
+
+	p := ba.ctx.Get("OceanPostProcess").New(args...)
 	return OceanPostProcessFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// OceanPostProcessActivateOpts contains optional parameters for OceanPostProcess.Activate.
+type OceanPostProcessActivateOpts struct {
+	SourceTexture     *InternalTexture
+	ForceDepthStencil *bool
+}
+
+// Activate calls the Activate method on the OceanPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#activate
+func (o *OceanPostProcess) Activate(camera *Camera, opts *OceanPostProcessActivateOpts) *InternalTexture {
+	if opts == nil {
+		opts = &OceanPostProcessActivateOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, camera.JSObject())
+
+	if opts.SourceTexture == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.SourceTexture.JSObject())
+	}
+	if opts.ForceDepthStencil == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceDepthStencil)
+	}
+
+	retVal := o.p.Call("activate", args...)
+	return InternalTextureFromJSObject(retVal, o.ctx)
+}
+
+// Apply calls the Apply method on the OceanPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#apply
+func (o *OceanPostProcess) Apply() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := o.p.Call("apply", args...)
+	return EffectFromJSObject(retVal, o.ctx)
+}
+
+// OceanPostProcessDisposeOpts contains optional parameters for OceanPostProcess.Dispose.
+type OceanPostProcessDisposeOpts struct {
+	Camera *Camera
+}
+
+// Dispose calls the Dispose method on the OceanPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#dispose
+func (o *OceanPostProcess) Dispose(opts *OceanPostProcessDisposeOpts) {
+	if opts == nil {
+		opts = &OceanPostProcessDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Camera == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Camera.JSObject())
+	}
+
+	o.p.Call("dispose", args...)
+}
+
+// GetCamera calls the GetCamera method on the OceanPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#getcamera
+func (o *OceanPostProcess) GetCamera() *Camera {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := o.p.Call("getCamera", args...)
+	return CameraFromJSObject(retVal, o.ctx)
+}
+
+// GetClassName calls the GetClassName method on the OceanPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#getclassname
+func (o *OceanPostProcess) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := o.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetEffect calls the GetEffect method on the OceanPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#geteffect
+func (o *OceanPostProcess) GetEffect() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := o.p.Call("getEffect", args...)
+	return EffectFromJSObject(retVal, o.ctx)
+}
+
+// GetEffectName calls the GetEffectName method on the OceanPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#geteffectname
+func (o *OceanPostProcess) GetEffectName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := o.p.Call("getEffectName", args...)
+	return retVal.String()
+}
+
+// GetEngine calls the GetEngine method on the OceanPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#getengine
+func (o *OceanPostProcess) GetEngine() *Engine {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := o.p.Call("getEngine", args...)
+	return EngineFromJSObject(retVal, o.ctx)
+}
+
+// IsReady calls the IsReady method on the OceanPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#isready
+func (o *OceanPostProcess) IsReady() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := o.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// IsReusable calls the IsReusable method on the OceanPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#isreusable
+func (o *OceanPostProcess) IsReusable() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := o.p.Call("isReusable", args...)
+	return retVal.Bool()
+}
+
+// MarkTextureDirty calls the MarkTextureDirty method on the OceanPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#marktexturedirty
+func (o *OceanPostProcess) MarkTextureDirty() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	o.p.Call("markTextureDirty", args...)
+}
+
+// ShareOutputWith calls the ShareOutputWith method on the OceanPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#shareoutputwith
+func (o *OceanPostProcess) ShareOutputWith(postProcess *PostProcess) *PostProcess {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, postProcess.JSObject())
+
+	retVal := o.p.Call("shareOutputWith", args...)
+	return PostProcessFromJSObject(retVal, o.ctx)
+}
+
+// OceanPostProcessUpdateEffectOpts contains optional parameters for OceanPostProcess.UpdateEffect.
+type OceanPostProcessUpdateEffectOpts struct {
+	Defines         *string
+	Uniforms        *string
+	Samplers        *string
+	IndexParameters *interface{}
+	OnCompiled      *func()
+	OnError         *func()
+}
+
+// UpdateEffect calls the UpdateEffect method on the OceanPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#updateeffect
+func (o *OceanPostProcess) UpdateEffect(opts *OceanPostProcessUpdateEffectOpts) {
+	if opts == nil {
+		opts = &OceanPostProcessUpdateEffectOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+6)
+
+	if opts.Defines == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Defines)
+	}
+	if opts.Uniforms == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Uniforms)
+	}
+	if opts.Samplers == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Samplers)
+	}
+	if opts.IndexParameters == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.IndexParameters)
+	}
+	if opts.OnCompiled == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnCompiled)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+
+	o.p.Call("updateEffect", args...)
+}
+
+// UseOwnOutput calls the UseOwnOutput method on the OceanPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#useownoutput
+func (o *OceanPostProcess) UseOwnOutput() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	o.p.Call("useOwnOutput", args...)
+}
+
+/*
+
+// AdaptScaleToCurrentViewport returns the AdaptScaleToCurrentViewport property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#adaptscaletocurrentviewport
+func (o *OceanPostProcess) AdaptScaleToCurrentViewport(adaptScaleToCurrentViewport bool) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(adaptScaleToCurrentViewport)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAdaptScaleToCurrentViewport sets the AdaptScaleToCurrentViewport property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#adaptscaletocurrentviewport
+func (o *OceanPostProcess) SetAdaptScaleToCurrentViewport(adaptScaleToCurrentViewport bool) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(adaptScaleToCurrentViewport)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AlphaConstants returns the AlphaConstants property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#alphaconstants
+func (o *OceanPostProcess) AlphaConstants(alphaConstants *Color4) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(alphaConstants.JSObject())
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaConstants sets the AlphaConstants property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#alphaconstants
+func (o *OceanPostProcess) SetAlphaConstants(alphaConstants *Color4) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(alphaConstants.JSObject())
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AlphaMode returns the AlphaMode property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#alphamode
+func (o *OceanPostProcess) AlphaMode(alphaMode float64) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(alphaMode)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaMode sets the AlphaMode property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#alphamode
+func (o *OceanPostProcess) SetAlphaMode(alphaMode float64) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(alphaMode)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AlwaysForcePOT returns the AlwaysForcePOT property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#alwaysforcepot
+func (o *OceanPostProcess) AlwaysForcePOT(alwaysForcePOT bool) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(alwaysForcePOT)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAlwaysForcePOT sets the AlwaysForcePOT property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#alwaysforcepot
+func (o *OceanPostProcess) SetAlwaysForcePOT(alwaysForcePOT bool) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(alwaysForcePOT)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Animations returns the Animations property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#animations
+func (o *OceanPostProcess) Animations(animations *Animation) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(animations.JSObject())
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#animations
+func (o *OceanPostProcess) SetAnimations(animations *Animation) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(animations.JSObject())
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AspectRatio returns the AspectRatio property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#aspectratio
+func (o *OceanPostProcess) AspectRatio(aspectRatio float64) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(aspectRatio)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAspectRatio sets the AspectRatio property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#aspectratio
+func (o *OceanPostProcess) SetAspectRatio(aspectRatio float64) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(aspectRatio)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AutoClear returns the AutoClear property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#autoclear
+func (o *OceanPostProcess) AutoClear(autoClear bool) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(autoClear)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAutoClear sets the AutoClear property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#autoclear
+func (o *OceanPostProcess) SetAutoClear(autoClear bool) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(autoClear)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ClearColor returns the ClearColor property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#clearcolor
+func (o *OceanPostProcess) ClearColor(clearColor *Color4) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(clearColor.JSObject())
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetClearColor sets the ClearColor property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#clearcolor
+func (o *OceanPostProcess) SetClearColor(clearColor *Color4) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(clearColor.JSObject())
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// EnablePixelPerfectMode returns the EnablePixelPerfectMode property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#enablepixelperfectmode
+func (o *OceanPostProcess) EnablePixelPerfectMode(enablePixelPerfectMode bool) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(enablePixelPerfectMode)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetEnablePixelPerfectMode sets the EnablePixelPerfectMode property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#enablepixelperfectmode
+func (o *OceanPostProcess) SetEnablePixelPerfectMode(enablePixelPerfectMode bool) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(enablePixelPerfectMode)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ForceFullscreenViewport returns the ForceFullscreenViewport property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#forcefullscreenviewport
+func (o *OceanPostProcess) ForceFullscreenViewport(forceFullscreenViewport bool) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(forceFullscreenViewport)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetForceFullscreenViewport sets the ForceFullscreenViewport property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#forcefullscreenviewport
+func (o *OceanPostProcess) SetForceFullscreenViewport(forceFullscreenViewport bool) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(forceFullscreenViewport)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Height returns the Height property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#height
+func (o *OceanPostProcess) Height(height float64) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(height)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetHeight sets the Height property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#height
+func (o *OceanPostProcess) SetHeight(height float64) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(height)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// InputTexture returns the InputTexture property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#inputtexture
+func (o *OceanPostProcess) InputTexture(inputTexture *InternalTexture) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(inputTexture.JSObject())
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetInputTexture sets the InputTexture property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#inputtexture
+func (o *OceanPostProcess) SetInputTexture(inputTexture *InternalTexture) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(inputTexture.JSObject())
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#inspectablecustomproperties
+func (o *OceanPostProcess) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(inspectableCustomProperties.JSObject())
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#inspectablecustomproperties
+func (o *OceanPostProcess) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(inspectableCustomProperties.JSObject())
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// IsSupported returns the IsSupported property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#issupported
+func (o *OceanPostProcess) IsSupported(isSupported bool) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(isSupported)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetIsSupported sets the IsSupported property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#issupported
+func (o *OceanPostProcess) SetIsSupported(isSupported bool) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(isSupported)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#name
+func (o *OceanPostProcess) Name(name string) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(name)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#name
+func (o *OceanPostProcess) SetName(name string) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(name)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnActivate returns the OnActivate property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#onactivate
+func (o *OceanPostProcess) OnActivate(onActivate func()) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(onActivate)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnActivate sets the OnActivate property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#onactivate
+func (o *OceanPostProcess) SetOnActivate(onActivate func()) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(onActivate)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnActivateObservable returns the OnActivateObservable property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#onactivateobservable
+func (o *OceanPostProcess) OnActivateObservable(onActivateObservable *Observable) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(onActivateObservable.JSObject())
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnActivateObservable sets the OnActivateObservable property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#onactivateobservable
+func (o *OceanPostProcess) SetOnActivateObservable(onActivateObservable *Observable) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(onActivateObservable.JSObject())
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnAfterRender returns the OnAfterRender property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#onafterrender
+func (o *OceanPostProcess) OnAfterRender(onAfterRender func()) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(onAfterRender)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterRender sets the OnAfterRender property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#onafterrender
+func (o *OceanPostProcess) SetOnAfterRender(onAfterRender func()) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(onAfterRender)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnAfterRenderObservable returns the OnAfterRenderObservable property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#onafterrenderobservable
+func (o *OceanPostProcess) OnAfterRenderObservable(onAfterRenderObservable *Observable) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(onAfterRenderObservable.JSObject())
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterRenderObservable sets the OnAfterRenderObservable property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#onafterrenderobservable
+func (o *OceanPostProcess) SetOnAfterRenderObservable(onAfterRenderObservable *Observable) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(onAfterRenderObservable.JSObject())
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnApply returns the OnApply property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#onapply
+func (o *OceanPostProcess) OnApply(onApply func()) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(onApply)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnApply sets the OnApply property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#onapply
+func (o *OceanPostProcess) SetOnApply(onApply func()) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(onApply)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnApplyObservable returns the OnApplyObservable property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#onapplyobservable
+func (o *OceanPostProcess) OnApplyObservable(onApplyObservable *Observable) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(onApplyObservable.JSObject())
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnApplyObservable sets the OnApplyObservable property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#onapplyobservable
+func (o *OceanPostProcess) SetOnApplyObservable(onApplyObservable *Observable) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(onApplyObservable.JSObject())
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeRender returns the OnBeforeRender property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#onbeforerender
+func (o *OceanPostProcess) OnBeforeRender(onBeforeRender func()) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(onBeforeRender)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeRender sets the OnBeforeRender property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#onbeforerender
+func (o *OceanPostProcess) SetOnBeforeRender(onBeforeRender func()) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(onBeforeRender)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeRenderObservable returns the OnBeforeRenderObservable property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#onbeforerenderobservable
+func (o *OceanPostProcess) OnBeforeRenderObservable(onBeforeRenderObservable *Observable) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(onBeforeRenderObservable.JSObject())
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeRenderObservable sets the OnBeforeRenderObservable property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#onbeforerenderobservable
+func (o *OceanPostProcess) SetOnBeforeRenderObservable(onBeforeRenderObservable *Observable) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(onBeforeRenderObservable.JSObject())
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnSizeChanged returns the OnSizeChanged property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#onsizechanged
+func (o *OceanPostProcess) OnSizeChanged(onSizeChanged func()) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(onSizeChanged)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnSizeChanged sets the OnSizeChanged property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#onsizechanged
+func (o *OceanPostProcess) SetOnSizeChanged(onSizeChanged func()) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(onSizeChanged)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnSizeChangedObservable returns the OnSizeChangedObservable property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#onsizechangedobservable
+func (o *OceanPostProcess) OnSizeChangedObservable(onSizeChangedObservable *Observable) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(onSizeChangedObservable.JSObject())
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnSizeChangedObservable sets the OnSizeChangedObservable property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#onsizechangedobservable
+func (o *OceanPostProcess) SetOnSizeChangedObservable(onSizeChangedObservable *Observable) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(onSizeChangedObservable.JSObject())
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ReflectionEnabled returns the ReflectionEnabled property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#reflectionenabled
+func (o *OceanPostProcess) ReflectionEnabled(reflectionEnabled bool) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(reflectionEnabled)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetReflectionEnabled sets the ReflectionEnabled property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#reflectionenabled
+func (o *OceanPostProcess) SetReflectionEnabled(reflectionEnabled bool) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(reflectionEnabled)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ReflectionTexture returns the ReflectionTexture property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#reflectiontexture
+func (o *OceanPostProcess) ReflectionTexture(reflectionTexture *MirrorTexture) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(reflectionTexture.JSObject())
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetReflectionTexture sets the ReflectionTexture property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#reflectiontexture
+func (o *OceanPostProcess) SetReflectionTexture(reflectionTexture *MirrorTexture) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(reflectionTexture.JSObject())
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// RefractionEnabled returns the RefractionEnabled property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#refractionenabled
+func (o *OceanPostProcess) RefractionEnabled(refractionEnabled bool) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(refractionEnabled)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetRefractionEnabled sets the RefractionEnabled property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#refractionenabled
+func (o *OceanPostProcess) SetRefractionEnabled(refractionEnabled bool) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(refractionEnabled)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// RefractionTexture returns the RefractionTexture property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#refractiontexture
+func (o *OceanPostProcess) RefractionTexture(refractionTexture *RenderTargetTexture) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(refractionTexture.JSObject())
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetRefractionTexture sets the RefractionTexture property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#refractiontexture
+func (o *OceanPostProcess) SetRefractionTexture(refractionTexture *RenderTargetTexture) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(refractionTexture.JSObject())
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// RenderTargetSamplingMode returns the RenderTargetSamplingMode property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#rendertargetsamplingmode
+func (o *OceanPostProcess) RenderTargetSamplingMode(renderTargetSamplingMode float64) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(renderTargetSamplingMode)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetRenderTargetSamplingMode sets the RenderTargetSamplingMode property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#rendertargetsamplingmode
+func (o *OceanPostProcess) SetRenderTargetSamplingMode(renderTargetSamplingMode float64) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(renderTargetSamplingMode)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Samples returns the Samples property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#samples
+func (o *OceanPostProcess) Samples(samples float64) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(samples)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetSamples sets the Samples property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#samples
+func (o *OceanPostProcess) SetSamples(samples float64) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(samples)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ScaleMode returns the ScaleMode property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#scalemode
+func (o *OceanPostProcess) ScaleMode(scaleMode float64) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(scaleMode)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetScaleMode sets the ScaleMode property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#scalemode
+func (o *OceanPostProcess) SetScaleMode(scaleMode float64) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(scaleMode)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// TexelSize returns the TexelSize property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#texelsize
+func (o *OceanPostProcess) TexelSize(texelSize *Vector2) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(texelSize.JSObject())
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetTexelSize sets the TexelSize property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#texelsize
+func (o *OceanPostProcess) SetTexelSize(texelSize *Vector2) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(texelSize.JSObject())
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#uniqueid
+func (o *OceanPostProcess) UniqueId(uniqueId float64) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(uniqueId)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#uniqueid
+func (o *OceanPostProcess) SetUniqueId(uniqueId float64) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(uniqueId)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Width returns the Width property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#width
+func (o *OceanPostProcess) Width(width float64) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(width)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetWidth sets the Width property of class OceanPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.oceanpostprocess#width
+func (o *OceanPostProcess) SetWidth(width float64) *OceanPostProcess {
+	p := ba.ctx.Get("OceanPostProcess").New(width)
+	return OceanPostProcessFromJSObject(p, ba.ctx)
+}
+
+*/

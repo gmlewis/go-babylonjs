@@ -27,4 +27,168 @@ func ScreenshotToolsFromJSObject(p js.Value, ctx js.Value) *ScreenshotTools {
 	return &ScreenshotTools{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// ScreenshotToolsCreateScreenshotOpts contains optional parameters for ScreenshotTools.CreateScreenshot.
+type ScreenshotToolsCreateScreenshotOpts struct {
+	SuccessCallback *func()
+	MimeType        *string
+}
+
+// CreateScreenshot calls the CreateScreenshot method on the ScreenshotTools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.screenshottools#createscreenshot
+func (s *ScreenshotTools) CreateScreenshot(engine *Engine, camera *Camera, size *IScreenshotSize, opts *ScreenshotToolsCreateScreenshotOpts) {
+	if opts == nil {
+		opts = &ScreenshotToolsCreateScreenshotOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+2)
+
+	args = append(args, engine.JSObject())
+	args = append(args, camera.JSObject())
+	args = append(args, size.JSObject())
+
+	if opts.SuccessCallback == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.SuccessCallback)
+	}
+	if opts.MimeType == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.MimeType)
+	}
+
+	s.p.Call("CreateScreenshot", args...)
+}
+
+// ScreenshotToolsCreateScreenshotAsyncOpts contains optional parameters for ScreenshotTools.CreateScreenshotAsync.
+type ScreenshotToolsCreateScreenshotAsyncOpts struct {
+	MimeType *string
+}
+
+// CreateScreenshotAsync calls the CreateScreenshotAsync method on the ScreenshotTools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.screenshottools#createscreenshotasync
+func (s *ScreenshotTools) CreateScreenshotAsync(engine *Engine, camera *Camera, size interface{}, opts *ScreenshotToolsCreateScreenshotAsyncOpts) string {
+	if opts == nil {
+		opts = &ScreenshotToolsCreateScreenshotAsyncOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, engine.JSObject())
+	args = append(args, camera.JSObject())
+	args = append(args, size)
+
+	if opts.MimeType == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.MimeType)
+	}
+
+	retVal := s.p.Call("CreateScreenshotAsync", args...)
+	return retVal.String()
+}
+
+// ScreenshotToolsCreateScreenshotUsingRenderTargetOpts contains optional parameters for ScreenshotTools.CreateScreenshotUsingRenderTarget.
+type ScreenshotToolsCreateScreenshotUsingRenderTargetOpts struct {
+	SuccessCallback *func()
+	MimeType        *string
+	Samples         *float64
+	Antialiasing    *bool
+	FileName        *string
+}
+
+// CreateScreenshotUsingRenderTarget calls the CreateScreenshotUsingRenderTarget method on the ScreenshotTools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.screenshottools#createscreenshotusingrendertarget
+func (s *ScreenshotTools) CreateScreenshotUsingRenderTarget(engine *Engine, camera *Camera, size *IScreenshotSize, opts *ScreenshotToolsCreateScreenshotUsingRenderTargetOpts) {
+	if opts == nil {
+		opts = &ScreenshotToolsCreateScreenshotUsingRenderTargetOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+5)
+
+	args = append(args, engine.JSObject())
+	args = append(args, camera.JSObject())
+	args = append(args, size.JSObject())
+
+	if opts.SuccessCallback == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.SuccessCallback)
+	}
+	if opts.MimeType == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.MimeType)
+	}
+	if opts.Samples == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Samples)
+	}
+	if opts.Antialiasing == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Antialiasing)
+	}
+	if opts.FileName == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FileName)
+	}
+
+	s.p.Call("CreateScreenshotUsingRenderTarget", args...)
+}
+
+// ScreenshotToolsCreateScreenshotUsingRenderTargetAsyncOpts contains optional parameters for ScreenshotTools.CreateScreenshotUsingRenderTargetAsync.
+type ScreenshotToolsCreateScreenshotUsingRenderTargetAsyncOpts struct {
+	MimeType     *string
+	Samples      *float64
+	Antialiasing *bool
+	FileName     *string
+}
+
+// CreateScreenshotUsingRenderTargetAsync calls the CreateScreenshotUsingRenderTargetAsync method on the ScreenshotTools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.screenshottools#createscreenshotusingrendertargetasync
+func (s *ScreenshotTools) CreateScreenshotUsingRenderTargetAsync(engine *Engine, camera *Camera, size interface{}, opts *ScreenshotToolsCreateScreenshotUsingRenderTargetAsyncOpts) string {
+	if opts == nil {
+		opts = &ScreenshotToolsCreateScreenshotUsingRenderTargetAsyncOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+4)
+
+	args = append(args, engine.JSObject())
+	args = append(args, camera.JSObject())
+	args = append(args, size)
+
+	if opts.MimeType == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.MimeType)
+	}
+	if opts.Samples == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Samples)
+	}
+	if opts.Antialiasing == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Antialiasing)
+	}
+	if opts.FileName == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FileName)
+	}
+
+	retVal := s.p.Call("CreateScreenshotUsingRenderTargetAsync", args...)
+	return retVal.String()
+}
+
+/*
+
+ */

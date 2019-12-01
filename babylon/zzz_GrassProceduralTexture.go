@@ -30,8 +30,7 @@ func GrassProceduralTextureFromJSObject(p js.Value, ctx js.Value) *GrassProcedur
 // NewGrassProceduralTextureOpts contains optional parameters for NewGrassProceduralTexture.
 type NewGrassProceduralTextureOpts struct {
 	FallbackTexture *Texture
-
-	GenerateMipMaps *JSBool
+	GenerateMipMaps *bool
 }
 
 // NewGrassProceduralTexture returns a new GrassProceduralTexture object.
@@ -42,8 +41,2068 @@ func (ba *Babylon) NewGrassProceduralTexture(name string, size float64, scene *S
 		opts = &NewGrassProceduralTextureOpts{}
 	}
 
-	p := ba.ctx.Get("GrassProceduralTexture").New(name, size, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps.JSObject())
+	args := make([]interface{}, 0, 3+2)
+
+	args = append(args, name)
+	args = append(args, size)
+	args = append(args, scene.JSObject())
+
+	if opts.FallbackTexture == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.FallbackTexture.JSObject())
+	}
+	if opts.GenerateMipMaps == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.GenerateMipMaps)
+	}
+
+	p := ba.ctx.Get("GrassProceduralTexture").New(args...)
 	return GrassProceduralTextureFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Clone calls the Clone method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#clone
+func (g *GrassProceduralTexture) Clone() *ProceduralTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("clone", args...)
+	return ProceduralTextureFromJSObject(retVal, g.ctx)
+}
+
+// GrassProceduralTextureCreateFromBase64StringOpts contains optional parameters for GrassProceduralTexture.CreateFromBase64String.
+type GrassProceduralTextureCreateFromBase64StringOpts struct {
+	NoMipmap     *bool
+	InvertY      *bool
+	SamplingMode *float64
+	OnLoad       *func()
+	OnError      *func()
+	Format       *float64
+}
+
+// CreateFromBase64String calls the CreateFromBase64String method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#createfrombase64string
+func (g *GrassProceduralTexture) CreateFromBase64String(data string, name string, scene *Scene, opts *GrassProceduralTextureCreateFromBase64StringOpts) *Texture {
+	if opts == nil {
+		opts = &GrassProceduralTextureCreateFromBase64StringOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+6)
+
+	args = append(args, data)
+	args = append(args, name)
+	args = append(args, scene.JSObject())
+
+	if opts.NoMipmap == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoMipmap)
+	}
+	if opts.InvertY == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.InvertY)
+	}
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+	if opts.OnLoad == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnLoad)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+	if opts.Format == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Format)
+	}
+
+	retVal := g.p.Call("CreateFromBase64String", args...)
+	return TextureFromJSObject(retVal, g.ctx)
+}
+
+// Dispose calls the Dispose method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#dispose
+func (g *GrassProceduralTexture) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	g.p.Call("dispose", args...)
+}
+
+// GetBaseSize calls the GetBaseSize method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#getbasesize
+func (g *GrassProceduralTexture) GetBaseSize() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getBaseSize", args...)
+	return retVal
+}
+
+// GetClassName calls the GetClassName method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#getclassname
+func (g *GrassProceduralTexture) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetContent calls the GetContent method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#getcontent
+func (g *GrassProceduralTexture) GetContent() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getContent", args...)
+	return retVal
+}
+
+// GetEffect calls the GetEffect method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#geteffect
+func (g *GrassProceduralTexture) GetEffect() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getEffect", args...)
+	return EffectFromJSObject(retVal, g.ctx)
+}
+
+// GetInternalTexture calls the GetInternalTexture method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#getinternaltexture
+func (g *GrassProceduralTexture) GetInternalTexture() *InternalTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getInternalTexture", args...)
+	return InternalTextureFromJSObject(retVal, g.ctx)
+}
+
+// GetReflectionTextureMatrix calls the GetReflectionTextureMatrix method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#getreflectiontexturematrix
+func (g *GrassProceduralTexture) GetReflectionTextureMatrix() *Matrix {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getReflectionTextureMatrix", args...)
+	return MatrixFromJSObject(retVal, g.ctx)
+}
+
+// GetRenderSize calls the GetRenderSize method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#getrendersize
+func (g *GrassProceduralTexture) GetRenderSize() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getRenderSize", args...)
+	return retVal.Float()
+}
+
+// GetScene calls the GetScene method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#getscene
+func (g *GrassProceduralTexture) GetScene() *Scene {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getScene", args...)
+	return SceneFromJSObject(retVal, g.ctx)
+}
+
+// GetSize calls the GetSize method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#getsize
+func (g *GrassProceduralTexture) GetSize() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getSize", args...)
+	return retVal
+}
+
+// GrassProceduralTextureGetTextureMatrixOpts contains optional parameters for GrassProceduralTexture.GetTextureMatrix.
+type GrassProceduralTextureGetTextureMatrixOpts struct {
+	UBase *float64
+}
+
+// GetTextureMatrix calls the GetTextureMatrix method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#gettexturematrix
+func (g *GrassProceduralTexture) GetTextureMatrix(opts *GrassProceduralTextureGetTextureMatrixOpts) *Matrix {
+	if opts == nil {
+		opts = &GrassProceduralTextureGetTextureMatrixOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.UBase == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UBase)
+	}
+
+	retVal := g.p.Call("getTextureMatrix", args...)
+	return MatrixFromJSObject(retVal, g.ctx)
+}
+
+// IsReady calls the IsReady method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#isready
+func (g *GrassProceduralTexture) IsReady() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// IsReadyOrNotBlocking calls the IsReadyOrNotBlocking method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#isreadyornotblocking
+func (g *GrassProceduralTexture) IsReadyOrNotBlocking() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("isReadyOrNotBlocking", args...)
+	return retVal.Bool()
+}
+
+// GrassProceduralTextureLoadFromDataStringOpts contains optional parameters for GrassProceduralTexture.LoadFromDataString.
+type GrassProceduralTextureLoadFromDataStringOpts struct {
+	DeleteBuffer *bool
+	NoMipmap     *bool
+	InvertY      *bool
+	SamplingMode *float64
+	OnLoad       *func()
+	OnError      *func()
+	Format       *float64
+}
+
+// LoadFromDataString calls the LoadFromDataString method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#loadfromdatastring
+func (g *GrassProceduralTexture) LoadFromDataString(name string, buffer interface{}, scene *Scene, opts *GrassProceduralTextureLoadFromDataStringOpts) *Texture {
+	if opts == nil {
+		opts = &GrassProceduralTextureLoadFromDataStringOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+7)
+
+	args = append(args, name)
+	args = append(args, buffer)
+	args = append(args, scene.JSObject())
+
+	if opts.DeleteBuffer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DeleteBuffer)
+	}
+	if opts.NoMipmap == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoMipmap)
+	}
+	if opts.InvertY == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.InvertY)
+	}
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+	if opts.OnLoad == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnLoad)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+	if opts.Format == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Format)
+	}
+
+	retVal := g.p.Call("LoadFromDataString", args...)
+	return TextureFromJSObject(retVal, g.ctx)
+}
+
+// Parse calls the Parse method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#parse
+func (g *GrassProceduralTexture) Parse(parsedTexture interface{}, scene *Scene, rootUrl string) *GrassProceduralTexture {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, parsedTexture)
+	args = append(args, scene.JSObject())
+	args = append(args, rootUrl)
+
+	retVal := g.p.Call("Parse", args...)
+	return GrassProceduralTextureFromJSObject(retVal, g.ctx)
+}
+
+// GrassProceduralTextureReadPixelsOpts contains optional parameters for GrassProceduralTexture.ReadPixels.
+type GrassProceduralTextureReadPixelsOpts struct {
+	FaceIndex *float64
+	Level     *float64
+	Buffer    js.Value
+}
+
+// ReadPixels calls the ReadPixels method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#readpixels
+func (g *GrassProceduralTexture) ReadPixels(opts *GrassProceduralTextureReadPixelsOpts) js.Value {
+	if opts == nil {
+		opts = &GrassProceduralTextureReadPixelsOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+3)
+
+	if opts.FaceIndex == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FaceIndex)
+	}
+	if opts.Level == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Level)
+	}
+	if opts.Buffer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Buffer)
+	}
+
+	retVal := g.p.Call("readPixels", args...)
+	return retVal
+}
+
+// ReleaseInternalTexture calls the ReleaseInternalTexture method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#releaseinternaltexture
+func (g *GrassProceduralTexture) ReleaseInternalTexture() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	g.p.Call("releaseInternalTexture", args...)
+}
+
+// GrassProceduralTextureRenderOpts contains optional parameters for GrassProceduralTexture.Render.
+type GrassProceduralTextureRenderOpts struct {
+	UseCameraPostProcess *bool
+}
+
+// Render calls the Render method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#render
+func (g *GrassProceduralTexture) Render(opts *GrassProceduralTextureRenderOpts) {
+	if opts == nil {
+		opts = &GrassProceduralTextureRenderOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.UseCameraPostProcess == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseCameraPostProcess)
+	}
+
+	g.p.Call("render", args...)
+}
+
+// Reset calls the Reset method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#reset
+func (g *GrassProceduralTexture) Reset() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	g.p.Call("reset", args...)
+}
+
+// ResetRefreshCounter calls the ResetRefreshCounter method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#resetrefreshcounter
+func (g *GrassProceduralTexture) ResetRefreshCounter() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	g.p.Call("resetRefreshCounter", args...)
+}
+
+// Resize calls the Resize method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#resize
+func (g *GrassProceduralTexture) Resize(size float64, generateMipMaps bool) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, size)
+	args = append(args, generateMipMaps)
+
+	g.p.Call("resize", args...)
+}
+
+// Scale calls the Scale method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#scale
+func (g *GrassProceduralTexture) Scale(ratio float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, ratio)
+
+	g.p.Call("scale", args...)
+}
+
+// Serialize calls the Serialize method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#serialize
+func (g *GrassProceduralTexture) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("serialize", args...)
+	return retVal
+}
+
+// SetColor3 calls the SetColor3 method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#setcolor3
+func (g *GrassProceduralTexture) SetColor3(name string, value *Color3) *ProceduralTexture {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value.JSObject())
+
+	retVal := g.p.Call("setColor3", args...)
+	return ProceduralTextureFromJSObject(retVal, g.ctx)
+}
+
+// SetColor4 calls the SetColor4 method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#setcolor4
+func (g *GrassProceduralTexture) SetColor4(name string, value *Color4) *ProceduralTexture {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value.JSObject())
+
+	retVal := g.p.Call("setColor4", args...)
+	return ProceduralTextureFromJSObject(retVal, g.ctx)
+}
+
+// SetFloat calls the SetFloat method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#setfloat
+func (g *GrassProceduralTexture) SetFloat(name string, value float64) *ProceduralTexture {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value)
+
+	retVal := g.p.Call("setFloat", args...)
+	return ProceduralTextureFromJSObject(retVal, g.ctx)
+}
+
+// SetFloats calls the SetFloats method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#setfloats
+func (g *GrassProceduralTexture) SetFloats(name string, value float64) *ProceduralTexture {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value)
+
+	retVal := g.p.Call("setFloats", args...)
+	return ProceduralTextureFromJSObject(retVal, g.ctx)
+}
+
+// SetFragment calls the SetFragment method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#setfragment
+func (g *GrassProceduralTexture) SetFragment(fragment interface{}) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, fragment)
+
+	g.p.Call("setFragment", args...)
+}
+
+// SetInt calls the SetInt method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#setint
+func (g *GrassProceduralTexture) SetInt(name string, value float64) *ProceduralTexture {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value)
+
+	retVal := g.p.Call("setInt", args...)
+	return ProceduralTextureFromJSObject(retVal, g.ctx)
+}
+
+// SetMatrix calls the SetMatrix method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#setmatrix
+func (g *GrassProceduralTexture) SetMatrix(name string, value *Matrix) *ProceduralTexture {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value.JSObject())
+
+	retVal := g.p.Call("setMatrix", args...)
+	return ProceduralTextureFromJSObject(retVal, g.ctx)
+}
+
+// SetTexture calls the SetTexture method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#settexture
+func (g *GrassProceduralTexture) SetTexture(name string, texture *Texture) *ProceduralTexture {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, texture.JSObject())
+
+	retVal := g.p.Call("setTexture", args...)
+	return ProceduralTextureFromJSObject(retVal, g.ctx)
+}
+
+// SetVector2 calls the SetVector2 method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#setvector2
+func (g *GrassProceduralTexture) SetVector2(name string, value *Vector2) *ProceduralTexture {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value.JSObject())
+
+	retVal := g.p.Call("setVector2", args...)
+	return ProceduralTextureFromJSObject(retVal, g.ctx)
+}
+
+// SetVector3 calls the SetVector3 method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#setvector3
+func (g *GrassProceduralTexture) SetVector3(name string, value *Vector3) *ProceduralTexture {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value.JSObject())
+
+	retVal := g.p.Call("setVector3", args...)
+	return ProceduralTextureFromJSObject(retVal, g.ctx)
+}
+
+// ToString calls the ToString method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#tostring
+func (g *GrassProceduralTexture) ToString() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("toString", args...)
+	return retVal.String()
+}
+
+// UpdateSamplingMode calls the UpdateSamplingMode method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#updatesamplingmode
+func (g *GrassProceduralTexture) UpdateSamplingMode(samplingMode float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, samplingMode)
+
+	g.p.Call("updateSamplingMode", args...)
+}
+
+// UpdateShaderUniforms calls the UpdateShaderUniforms method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#updateshaderuniforms
+func (g *GrassProceduralTexture) UpdateShaderUniforms() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	g.p.Call("updateShaderUniforms", args...)
+}
+
+// GrassProceduralTextureUpdateURLOpts contains optional parameters for GrassProceduralTexture.UpdateURL.
+type GrassProceduralTextureUpdateURLOpts struct {
+	Buffer *string
+	OnLoad *func()
+}
+
+// UpdateURL calls the UpdateURL method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#updateurl
+func (g *GrassProceduralTexture) UpdateURL(url string, opts *GrassProceduralTextureUpdateURLOpts) {
+	if opts == nil {
+		opts = &GrassProceduralTextureUpdateURLOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, url)
+
+	if opts.Buffer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Buffer)
+	}
+	if opts.OnLoad == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnLoad)
+	}
+
+	g.p.Call("updateURL", args...)
+}
+
+// WhenAllReady calls the WhenAllReady method on the GrassProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#whenallready
+func (g *GrassProceduralTexture) WhenAllReady(textures *BaseTexture, callback func()) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, textures.JSObject())
+	args = append(args, callback)
+
+	g.p.Call("WhenAllReady", args...)
+}
+
+/*
+
+// Animations returns the Animations property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#animations
+func (g *GrassProceduralTexture) Animations(animations *Animation) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(animations.JSObject())
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#animations
+func (g *GrassProceduralTexture) SetAnimations(animations *Animation) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(animations.JSObject())
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// AnisotropicFilteringLevel returns the AnisotropicFilteringLevel property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#anisotropicfilteringlevel
+func (g *GrassProceduralTexture) AnisotropicFilteringLevel(anisotropicFilteringLevel float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(anisotropicFilteringLevel)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetAnisotropicFilteringLevel sets the AnisotropicFilteringLevel property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#anisotropicfilteringlevel
+func (g *GrassProceduralTexture) SetAnisotropicFilteringLevel(anisotropicFilteringLevel float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(anisotropicFilteringLevel)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// AutoClear returns the AutoClear property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#autoclear
+func (g *GrassProceduralTexture) AutoClear(autoClear bool) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(autoClear)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetAutoClear sets the AutoClear property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#autoclear
+func (g *GrassProceduralTexture) SetAutoClear(autoClear bool) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(autoClear)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// BILINEAR_SAMPLINGMODE returns the BILINEAR_SAMPLINGMODE property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#bilinear_samplingmode
+func (g *GrassProceduralTexture) BILINEAR_SAMPLINGMODE(BILINEAR_SAMPLINGMODE float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(BILINEAR_SAMPLINGMODE)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetBILINEAR_SAMPLINGMODE sets the BILINEAR_SAMPLINGMODE property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#bilinear_samplingmode
+func (g *GrassProceduralTexture) SetBILINEAR_SAMPLINGMODE(BILINEAR_SAMPLINGMODE float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(BILINEAR_SAMPLINGMODE)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// CLAMP_ADDRESSMODE returns the CLAMP_ADDRESSMODE property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#clamp_addressmode
+func (g *GrassProceduralTexture) CLAMP_ADDRESSMODE(CLAMP_ADDRESSMODE float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(CLAMP_ADDRESSMODE)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCLAMP_ADDRESSMODE sets the CLAMP_ADDRESSMODE property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#clamp_addressmode
+func (g *GrassProceduralTexture) SetCLAMP_ADDRESSMODE(CLAMP_ADDRESSMODE float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(CLAMP_ADDRESSMODE)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// CUBIC_MODE returns the CUBIC_MODE property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#cubic_mode
+func (g *GrassProceduralTexture) CUBIC_MODE(CUBIC_MODE float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(CUBIC_MODE)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCUBIC_MODE sets the CUBIC_MODE property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#cubic_mode
+func (g *GrassProceduralTexture) SetCUBIC_MODE(CUBIC_MODE float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(CUBIC_MODE)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// CanRescale returns the CanRescale property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#canrescale
+func (g *GrassProceduralTexture) CanRescale(canRescale bool) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(canRescale)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCanRescale sets the CanRescale property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#canrescale
+func (g *GrassProceduralTexture) SetCanRescale(canRescale bool) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(canRescale)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// CoordinatesIndex returns the CoordinatesIndex property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#coordinatesindex
+func (g *GrassProceduralTexture) CoordinatesIndex(coordinatesIndex float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(coordinatesIndex)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCoordinatesIndex sets the CoordinatesIndex property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#coordinatesindex
+func (g *GrassProceduralTexture) SetCoordinatesIndex(coordinatesIndex float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(coordinatesIndex)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// CoordinatesMode returns the CoordinatesMode property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#coordinatesmode
+func (g *GrassProceduralTexture) CoordinatesMode(coordinatesMode float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(coordinatesMode)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCoordinatesMode sets the CoordinatesMode property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#coordinatesmode
+func (g *GrassProceduralTexture) SetCoordinatesMode(coordinatesMode float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(coordinatesMode)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// DEFAULT_ANISOTROPIC_FILTERING_LEVEL returns the DEFAULT_ANISOTROPIC_FILTERING_LEVEL property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#default_anisotropic_filtering_level
+func (g *GrassProceduralTexture) DEFAULT_ANISOTROPIC_FILTERING_LEVEL(DEFAULT_ANISOTROPIC_FILTERING_LEVEL float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(DEFAULT_ANISOTROPIC_FILTERING_LEVEL)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetDEFAULT_ANISOTROPIC_FILTERING_LEVEL sets the DEFAULT_ANISOTROPIC_FILTERING_LEVEL property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#default_anisotropic_filtering_level
+func (g *GrassProceduralTexture) SetDEFAULT_ANISOTROPIC_FILTERING_LEVEL(DEFAULT_ANISOTROPIC_FILTERING_LEVEL float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(DEFAULT_ANISOTROPIC_FILTERING_LEVEL)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// DelayLoadState returns the DelayLoadState property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#delayloadstate
+func (g *GrassProceduralTexture) DelayLoadState(delayLoadState float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(delayLoadState)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetDelayLoadState sets the DelayLoadState property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#delayloadstate
+func (g *GrassProceduralTexture) SetDelayLoadState(delayLoadState float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(delayLoadState)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// EQUIRECTANGULAR_MODE returns the EQUIRECTANGULAR_MODE property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#equirectangular_mode
+func (g *GrassProceduralTexture) EQUIRECTANGULAR_MODE(EQUIRECTANGULAR_MODE float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(EQUIRECTANGULAR_MODE)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetEQUIRECTANGULAR_MODE sets the EQUIRECTANGULAR_MODE property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#equirectangular_mode
+func (g *GrassProceduralTexture) SetEQUIRECTANGULAR_MODE(EQUIRECTANGULAR_MODE float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(EQUIRECTANGULAR_MODE)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// EXPLICIT_MODE returns the EXPLICIT_MODE property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#explicit_mode
+func (g *GrassProceduralTexture) EXPLICIT_MODE(EXPLICIT_MODE float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(EXPLICIT_MODE)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetEXPLICIT_MODE sets the EXPLICIT_MODE property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#explicit_mode
+func (g *GrassProceduralTexture) SetEXPLICIT_MODE(EXPLICIT_MODE float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(EXPLICIT_MODE)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// FIXED_EQUIRECTANGULAR_MIRRORED_MODE returns the FIXED_EQUIRECTANGULAR_MIRRORED_MODE property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#fixed_equirectangular_mirrored_mode
+func (g *GrassProceduralTexture) FIXED_EQUIRECTANGULAR_MIRRORED_MODE(FIXED_EQUIRECTANGULAR_MIRRORED_MODE float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(FIXED_EQUIRECTANGULAR_MIRRORED_MODE)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetFIXED_EQUIRECTANGULAR_MIRRORED_MODE sets the FIXED_EQUIRECTANGULAR_MIRRORED_MODE property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#fixed_equirectangular_mirrored_mode
+func (g *GrassProceduralTexture) SetFIXED_EQUIRECTANGULAR_MIRRORED_MODE(FIXED_EQUIRECTANGULAR_MIRRORED_MODE float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(FIXED_EQUIRECTANGULAR_MIRRORED_MODE)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// FIXED_EQUIRECTANGULAR_MODE returns the FIXED_EQUIRECTANGULAR_MODE property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#fixed_equirectangular_mode
+func (g *GrassProceduralTexture) FIXED_EQUIRECTANGULAR_MODE(FIXED_EQUIRECTANGULAR_MODE float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(FIXED_EQUIRECTANGULAR_MODE)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetFIXED_EQUIRECTANGULAR_MODE sets the FIXED_EQUIRECTANGULAR_MODE property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#fixed_equirectangular_mode
+func (g *GrassProceduralTexture) SetFIXED_EQUIRECTANGULAR_MODE(FIXED_EQUIRECTANGULAR_MODE float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(FIXED_EQUIRECTANGULAR_MODE)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// GammaSpace returns the GammaSpace property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#gammaspace
+func (g *GrassProceduralTexture) GammaSpace(gammaSpace bool) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(gammaSpace)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetGammaSpace sets the GammaSpace property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#gammaspace
+func (g *GrassProceduralTexture) SetGammaSpace(gammaSpace bool) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(gammaSpace)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// GetAlphaFromRGB returns the GetAlphaFromRGB property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#getalphafromrgb
+func (g *GrassProceduralTexture) GetAlphaFromRGB(getAlphaFromRGB bool) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(getAlphaFromRGB)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetGetAlphaFromRGB sets the GetAlphaFromRGB property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#getalphafromrgb
+func (g *GrassProceduralTexture) SetGetAlphaFromRGB(getAlphaFromRGB bool) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(getAlphaFromRGB)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// GrassColors returns the GrassColors property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#grasscolors
+func (g *GrassProceduralTexture) GrassColors(grassColors *Color3) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(grassColors.JSObject())
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetGrassColors sets the GrassColors property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#grasscolors
+func (g *GrassProceduralTexture) SetGrassColors(grassColors *Color3) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(grassColors.JSObject())
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// GroundColor returns the GroundColor property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#groundcolor
+func (g *GrassProceduralTexture) GroundColor(groundColor *Color3) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(groundColor.JSObject())
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetGroundColor sets the GroundColor property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#groundcolor
+func (g *GrassProceduralTexture) SetGroundColor(groundColor *Color3) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(groundColor.JSObject())
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// HasAlpha returns the HasAlpha property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#hasalpha
+func (g *GrassProceduralTexture) HasAlpha(hasAlpha bool) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(hasAlpha)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetHasAlpha sets the HasAlpha property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#hasalpha
+func (g *GrassProceduralTexture) SetHasAlpha(hasAlpha bool) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(hasAlpha)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// INVCUBIC_MODE returns the INVCUBIC_MODE property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#invcubic_mode
+func (g *GrassProceduralTexture) INVCUBIC_MODE(INVCUBIC_MODE float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(INVCUBIC_MODE)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetINVCUBIC_MODE sets the INVCUBIC_MODE property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#invcubic_mode
+func (g *GrassProceduralTexture) SetINVCUBIC_MODE(INVCUBIC_MODE float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(INVCUBIC_MODE)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#inspectablecustomproperties
+func (g *GrassProceduralTexture) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(inspectableCustomProperties.JSObject())
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#inspectablecustomproperties
+func (g *GrassProceduralTexture) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(inspectableCustomProperties.JSObject())
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// InvertY returns the InvertY property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#inverty
+func (g *GrassProceduralTexture) InvertY(invertY bool) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(invertY)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetInvertY sets the InvertY property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#inverty
+func (g *GrassProceduralTexture) SetInvertY(invertY bool) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(invertY)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// InvertZ returns the InvertZ property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#invertz
+func (g *GrassProceduralTexture) InvertZ(invertZ bool) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(invertZ)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetInvertZ sets the InvertZ property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#invertz
+func (g *GrassProceduralTexture) SetInvertZ(invertZ bool) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(invertZ)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// IrradianceTexture returns the IrradianceTexture property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#irradiancetexture
+func (g *GrassProceduralTexture) IrradianceTexture(irradianceTexture *BaseTexture) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(irradianceTexture.JSObject())
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIrradianceTexture sets the IrradianceTexture property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#irradiancetexture
+func (g *GrassProceduralTexture) SetIrradianceTexture(irradianceTexture *BaseTexture) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(irradianceTexture.JSObject())
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// Is2DArray returns the Is2DArray property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#is2darray
+func (g *GrassProceduralTexture) Is2DArray(is2DArray bool) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(is2DArray)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIs2DArray sets the Is2DArray property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#is2darray
+func (g *GrassProceduralTexture) SetIs2DArray(is2DArray bool) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(is2DArray)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// Is3D returns the Is3D property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#is3d
+func (g *GrassProceduralTexture) Is3D(is3D bool) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(is3D)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIs3D sets the Is3D property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#is3d
+func (g *GrassProceduralTexture) SetIs3D(is3D bool) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(is3D)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// IsBlocking returns the IsBlocking property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#isblocking
+func (g *GrassProceduralTexture) IsBlocking(isBlocking bool) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(isBlocking)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsBlocking sets the IsBlocking property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#isblocking
+func (g *GrassProceduralTexture) SetIsBlocking(isBlocking bool) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(isBlocking)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// IsCube returns the IsCube property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#iscube
+func (g *GrassProceduralTexture) IsCube(isCube bool) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(isCube)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsCube sets the IsCube property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#iscube
+func (g *GrassProceduralTexture) SetIsCube(isCube bool) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(isCube)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// IsEnabled returns the IsEnabled property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#isenabled
+func (g *GrassProceduralTexture) IsEnabled(isEnabled bool) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(isEnabled)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsEnabled sets the IsEnabled property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#isenabled
+func (g *GrassProceduralTexture) SetIsEnabled(isEnabled bool) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(isEnabled)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// IsRGBD returns the IsRGBD property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#isrgbd
+func (g *GrassProceduralTexture) IsRGBD(isRGBD bool) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(isRGBD)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsRGBD sets the IsRGBD property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#isrgbd
+func (g *GrassProceduralTexture) SetIsRGBD(isRGBD bool) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(isRGBD)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// IsRenderTarget returns the IsRenderTarget property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#isrendertarget
+func (g *GrassProceduralTexture) IsRenderTarget(isRenderTarget bool) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(isRenderTarget)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsRenderTarget sets the IsRenderTarget property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#isrendertarget
+func (g *GrassProceduralTexture) SetIsRenderTarget(isRenderTarget bool) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(isRenderTarget)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_LINEAR returns the LINEAR_LINEAR property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#linear_linear
+func (g *GrassProceduralTexture) LINEAR_LINEAR(LINEAR_LINEAR float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(LINEAR_LINEAR)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_LINEAR sets the LINEAR_LINEAR property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#linear_linear
+func (g *GrassProceduralTexture) SetLINEAR_LINEAR(LINEAR_LINEAR float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(LINEAR_LINEAR)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_LINEAR_MIPLINEAR returns the LINEAR_LINEAR_MIPLINEAR property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#linear_linear_miplinear
+func (g *GrassProceduralTexture) LINEAR_LINEAR_MIPLINEAR(LINEAR_LINEAR_MIPLINEAR float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(LINEAR_LINEAR_MIPLINEAR)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_LINEAR_MIPLINEAR sets the LINEAR_LINEAR_MIPLINEAR property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#linear_linear_miplinear
+func (g *GrassProceduralTexture) SetLINEAR_LINEAR_MIPLINEAR(LINEAR_LINEAR_MIPLINEAR float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(LINEAR_LINEAR_MIPLINEAR)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_LINEAR_MIPNEAREST returns the LINEAR_LINEAR_MIPNEAREST property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#linear_linear_mipnearest
+func (g *GrassProceduralTexture) LINEAR_LINEAR_MIPNEAREST(LINEAR_LINEAR_MIPNEAREST float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(LINEAR_LINEAR_MIPNEAREST)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_LINEAR_MIPNEAREST sets the LINEAR_LINEAR_MIPNEAREST property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#linear_linear_mipnearest
+func (g *GrassProceduralTexture) SetLINEAR_LINEAR_MIPNEAREST(LINEAR_LINEAR_MIPNEAREST float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(LINEAR_LINEAR_MIPNEAREST)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_NEAREST returns the LINEAR_NEAREST property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#linear_nearest
+func (g *GrassProceduralTexture) LINEAR_NEAREST(LINEAR_NEAREST float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(LINEAR_NEAREST)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_NEAREST sets the LINEAR_NEAREST property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#linear_nearest
+func (g *GrassProceduralTexture) SetLINEAR_NEAREST(LINEAR_NEAREST float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(LINEAR_NEAREST)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_NEAREST_MIPLINEAR returns the LINEAR_NEAREST_MIPLINEAR property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#linear_nearest_miplinear
+func (g *GrassProceduralTexture) LINEAR_NEAREST_MIPLINEAR(LINEAR_NEAREST_MIPLINEAR float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(LINEAR_NEAREST_MIPLINEAR)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_NEAREST_MIPLINEAR sets the LINEAR_NEAREST_MIPLINEAR property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#linear_nearest_miplinear
+func (g *GrassProceduralTexture) SetLINEAR_NEAREST_MIPLINEAR(LINEAR_NEAREST_MIPLINEAR float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(LINEAR_NEAREST_MIPLINEAR)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_NEAREST_MIPNEAREST returns the LINEAR_NEAREST_MIPNEAREST property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#linear_nearest_mipnearest
+func (g *GrassProceduralTexture) LINEAR_NEAREST_MIPNEAREST(LINEAR_NEAREST_MIPNEAREST float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(LINEAR_NEAREST_MIPNEAREST)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_NEAREST_MIPNEAREST sets the LINEAR_NEAREST_MIPNEAREST property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#linear_nearest_mipnearest
+func (g *GrassProceduralTexture) SetLINEAR_NEAREST_MIPNEAREST(LINEAR_NEAREST_MIPNEAREST float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(LINEAR_NEAREST_MIPNEAREST)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// Level returns the Level property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#level
+func (g *GrassProceduralTexture) Level(level float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(level)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLevel sets the Level property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#level
+func (g *GrassProceduralTexture) SetLevel(level float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(level)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// LinearSpecularLOD returns the LinearSpecularLOD property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#linearspecularlod
+func (g *GrassProceduralTexture) LinearSpecularLOD(linearSpecularLOD bool) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(linearSpecularLOD)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLinearSpecularLOD sets the LinearSpecularLOD property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#linearspecularlod
+func (g *GrassProceduralTexture) SetLinearSpecularLOD(linearSpecularLOD bool) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(linearSpecularLOD)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// LodGenerationOffset returns the LodGenerationOffset property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#lodgenerationoffset
+func (g *GrassProceduralTexture) LodGenerationOffset(lodGenerationOffset float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(lodGenerationOffset)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLodGenerationOffset sets the LodGenerationOffset property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#lodgenerationoffset
+func (g *GrassProceduralTexture) SetLodGenerationOffset(lodGenerationOffset float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(lodGenerationOffset)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// LodGenerationScale returns the LodGenerationScale property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#lodgenerationscale
+func (g *GrassProceduralTexture) LodGenerationScale(lodGenerationScale float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(lodGenerationScale)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLodGenerationScale sets the LodGenerationScale property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#lodgenerationscale
+func (g *GrassProceduralTexture) SetLodGenerationScale(lodGenerationScale float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(lodGenerationScale)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// MIRROR_ADDRESSMODE returns the MIRROR_ADDRESSMODE property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#mirror_addressmode
+func (g *GrassProceduralTexture) MIRROR_ADDRESSMODE(MIRROR_ADDRESSMODE float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(MIRROR_ADDRESSMODE)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetMIRROR_ADDRESSMODE sets the MIRROR_ADDRESSMODE property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#mirror_addressmode
+func (g *GrassProceduralTexture) SetMIRROR_ADDRESSMODE(MIRROR_ADDRESSMODE float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(MIRROR_ADDRESSMODE)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#metadata
+func (g *GrassProceduralTexture) Metadata(metadata interface{}) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(metadata)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#metadata
+func (g *GrassProceduralTexture) SetMetadata(metadata interface{}) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(metadata)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_LINEAR returns the NEAREST_LINEAR property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#nearest_linear
+func (g *GrassProceduralTexture) NEAREST_LINEAR(NEAREST_LINEAR float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(NEAREST_LINEAR)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_LINEAR sets the NEAREST_LINEAR property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#nearest_linear
+func (g *GrassProceduralTexture) SetNEAREST_LINEAR(NEAREST_LINEAR float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(NEAREST_LINEAR)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_LINEAR_MIPLINEAR returns the NEAREST_LINEAR_MIPLINEAR property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#nearest_linear_miplinear
+func (g *GrassProceduralTexture) NEAREST_LINEAR_MIPLINEAR(NEAREST_LINEAR_MIPLINEAR float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(NEAREST_LINEAR_MIPLINEAR)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_LINEAR_MIPLINEAR sets the NEAREST_LINEAR_MIPLINEAR property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#nearest_linear_miplinear
+func (g *GrassProceduralTexture) SetNEAREST_LINEAR_MIPLINEAR(NEAREST_LINEAR_MIPLINEAR float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(NEAREST_LINEAR_MIPLINEAR)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_LINEAR_MIPNEAREST returns the NEAREST_LINEAR_MIPNEAREST property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#nearest_linear_mipnearest
+func (g *GrassProceduralTexture) NEAREST_LINEAR_MIPNEAREST(NEAREST_LINEAR_MIPNEAREST float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(NEAREST_LINEAR_MIPNEAREST)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_LINEAR_MIPNEAREST sets the NEAREST_LINEAR_MIPNEAREST property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#nearest_linear_mipnearest
+func (g *GrassProceduralTexture) SetNEAREST_LINEAR_MIPNEAREST(NEAREST_LINEAR_MIPNEAREST float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(NEAREST_LINEAR_MIPNEAREST)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_NEAREST returns the NEAREST_NEAREST property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#nearest_nearest
+func (g *GrassProceduralTexture) NEAREST_NEAREST(NEAREST_NEAREST float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(NEAREST_NEAREST)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_NEAREST sets the NEAREST_NEAREST property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#nearest_nearest
+func (g *GrassProceduralTexture) SetNEAREST_NEAREST(NEAREST_NEAREST float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(NEAREST_NEAREST)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_NEAREST_MIPLINEAR returns the NEAREST_NEAREST_MIPLINEAR property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#nearest_nearest_miplinear
+func (g *GrassProceduralTexture) NEAREST_NEAREST_MIPLINEAR(NEAREST_NEAREST_MIPLINEAR float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(NEAREST_NEAREST_MIPLINEAR)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_NEAREST_MIPLINEAR sets the NEAREST_NEAREST_MIPLINEAR property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#nearest_nearest_miplinear
+func (g *GrassProceduralTexture) SetNEAREST_NEAREST_MIPLINEAR(NEAREST_NEAREST_MIPLINEAR float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(NEAREST_NEAREST_MIPLINEAR)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_NEAREST_MIPNEAREST returns the NEAREST_NEAREST_MIPNEAREST property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#nearest_nearest_mipnearest
+func (g *GrassProceduralTexture) NEAREST_NEAREST_MIPNEAREST(NEAREST_NEAREST_MIPNEAREST float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(NEAREST_NEAREST_MIPNEAREST)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_NEAREST_MIPNEAREST sets the NEAREST_NEAREST_MIPNEAREST property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#nearest_nearest_mipnearest
+func (g *GrassProceduralTexture) SetNEAREST_NEAREST_MIPNEAREST(NEAREST_NEAREST_MIPNEAREST float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(NEAREST_NEAREST_MIPNEAREST)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_SAMPLINGMODE returns the NEAREST_SAMPLINGMODE property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#nearest_samplingmode
+func (g *GrassProceduralTexture) NEAREST_SAMPLINGMODE(NEAREST_SAMPLINGMODE float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(NEAREST_SAMPLINGMODE)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_SAMPLINGMODE sets the NEAREST_SAMPLINGMODE property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#nearest_samplingmode
+func (g *GrassProceduralTexture) SetNEAREST_SAMPLINGMODE(NEAREST_SAMPLINGMODE float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(NEAREST_SAMPLINGMODE)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#name
+func (g *GrassProceduralTexture) Name(name string) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(name)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#name
+func (g *GrassProceduralTexture) SetName(name string) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(name)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// NoMipmap returns the NoMipmap property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#nomipmap
+func (g *GrassProceduralTexture) NoMipmap(noMipmap bool) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(noMipmap)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNoMipmap sets the NoMipmap property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#nomipmap
+func (g *GrassProceduralTexture) SetNoMipmap(noMipmap bool) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(noMipmap)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// OnDispose returns the OnDispose property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#ondispose
+func (g *GrassProceduralTexture) OnDispose(onDispose func()) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(onDispose)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnDispose sets the OnDispose property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#ondispose
+func (g *GrassProceduralTexture) SetOnDispose(onDispose func()) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(onDispose)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// OnDisposeObservable returns the OnDisposeObservable property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#ondisposeobservable
+func (g *GrassProceduralTexture) OnDisposeObservable(onDisposeObservable *Observable) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(onDisposeObservable.JSObject())
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnDisposeObservable sets the OnDisposeObservable property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#ondisposeobservable
+func (g *GrassProceduralTexture) SetOnDisposeObservable(onDisposeObservable *Observable) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(onDisposeObservable.JSObject())
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// OnGenerated returns the OnGenerated property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#ongenerated
+func (g *GrassProceduralTexture) OnGenerated(onGenerated func()) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(onGenerated)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnGenerated sets the OnGenerated property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#ongenerated
+func (g *GrassProceduralTexture) SetOnGenerated(onGenerated func()) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(onGenerated)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// OnGeneratedObservable returns the OnGeneratedObservable property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#ongeneratedobservable
+func (g *GrassProceduralTexture) OnGeneratedObservable(onGeneratedObservable *Observable) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(onGeneratedObservable.JSObject())
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnGeneratedObservable sets the OnGeneratedObservable property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#ongeneratedobservable
+func (g *GrassProceduralTexture) SetOnGeneratedObservable(onGeneratedObservable *Observable) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(onGeneratedObservable.JSObject())
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// OnLoadObservable returns the OnLoadObservable property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#onloadobservable
+func (g *GrassProceduralTexture) OnLoadObservable(onLoadObservable *Observable) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(onLoadObservable.JSObject())
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnLoadObservable sets the OnLoadObservable property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#onloadobservable
+func (g *GrassProceduralTexture) SetOnLoadObservable(onLoadObservable *Observable) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(onLoadObservable.JSObject())
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// PLANAR_MODE returns the PLANAR_MODE property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#planar_mode
+func (g *GrassProceduralTexture) PLANAR_MODE(PLANAR_MODE float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(PLANAR_MODE)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetPLANAR_MODE sets the PLANAR_MODE property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#planar_mode
+func (g *GrassProceduralTexture) SetPLANAR_MODE(PLANAR_MODE float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(PLANAR_MODE)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// PROJECTION_MODE returns the PROJECTION_MODE property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#projection_mode
+func (g *GrassProceduralTexture) PROJECTION_MODE(PROJECTION_MODE float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(PROJECTION_MODE)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetPROJECTION_MODE sets the PROJECTION_MODE property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#projection_mode
+func (g *GrassProceduralTexture) SetPROJECTION_MODE(PROJECTION_MODE float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(PROJECTION_MODE)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// RefreshRate returns the RefreshRate property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#refreshrate
+func (g *GrassProceduralTexture) RefreshRate(refreshRate float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(refreshRate)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetRefreshRate sets the RefreshRate property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#refreshrate
+func (g *GrassProceduralTexture) SetRefreshRate(refreshRate float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(refreshRate)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// ReservedDataStore returns the ReservedDataStore property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#reserveddatastore
+func (g *GrassProceduralTexture) ReservedDataStore(reservedDataStore interface{}) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(reservedDataStore)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetReservedDataStore sets the ReservedDataStore property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#reserveddatastore
+func (g *GrassProceduralTexture) SetReservedDataStore(reservedDataStore interface{}) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(reservedDataStore)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SKYBOX_MODE returns the SKYBOX_MODE property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#skybox_mode
+func (g *GrassProceduralTexture) SKYBOX_MODE(SKYBOX_MODE float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(SKYBOX_MODE)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetSKYBOX_MODE sets the SKYBOX_MODE property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#skybox_mode
+func (g *GrassProceduralTexture) SetSKYBOX_MODE(SKYBOX_MODE float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(SKYBOX_MODE)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SPHERICAL_MODE returns the SPHERICAL_MODE property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#spherical_mode
+func (g *GrassProceduralTexture) SPHERICAL_MODE(SPHERICAL_MODE float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(SPHERICAL_MODE)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetSPHERICAL_MODE sets the SPHERICAL_MODE property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#spherical_mode
+func (g *GrassProceduralTexture) SetSPHERICAL_MODE(SPHERICAL_MODE float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(SPHERICAL_MODE)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SamplingMode returns the SamplingMode property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#samplingmode
+func (g *GrassProceduralTexture) SamplingMode(samplingMode float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(samplingMode)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetSamplingMode sets the SamplingMode property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#samplingmode
+func (g *GrassProceduralTexture) SetSamplingMode(samplingMode float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(samplingMode)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SerializeBuffers returns the SerializeBuffers property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#serializebuffers
+func (g *GrassProceduralTexture) SerializeBuffers(SerializeBuffers bool) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(SerializeBuffers)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetSerializeBuffers sets the SerializeBuffers property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#serializebuffers
+func (g *GrassProceduralTexture) SetSerializeBuffers(SerializeBuffers bool) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(SerializeBuffers)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// TRILINEAR_SAMPLINGMODE returns the TRILINEAR_SAMPLINGMODE property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#trilinear_samplingmode
+func (g *GrassProceduralTexture) TRILINEAR_SAMPLINGMODE(TRILINEAR_SAMPLINGMODE float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(TRILINEAR_SAMPLINGMODE)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetTRILINEAR_SAMPLINGMODE sets the TRILINEAR_SAMPLINGMODE property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#trilinear_samplingmode
+func (g *GrassProceduralTexture) SetTRILINEAR_SAMPLINGMODE(TRILINEAR_SAMPLINGMODE float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(TRILINEAR_SAMPLINGMODE)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// TextureFormat returns the TextureFormat property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#textureformat
+func (g *GrassProceduralTexture) TextureFormat(textureFormat float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(textureFormat)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetTextureFormat sets the TextureFormat property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#textureformat
+func (g *GrassProceduralTexture) SetTextureFormat(textureFormat float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(textureFormat)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// TextureType returns the TextureType property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#texturetype
+func (g *GrassProceduralTexture) TextureType(textureType float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(textureType)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetTextureType sets the TextureType property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#texturetype
+func (g *GrassProceduralTexture) SetTextureType(textureType float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(textureType)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// UAng returns the UAng property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#uang
+func (g *GrassProceduralTexture) UAng(uAng float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(uAng)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUAng sets the UAng property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#uang
+func (g *GrassProceduralTexture) SetUAng(uAng float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(uAng)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// UOffset returns the UOffset property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#uoffset
+func (g *GrassProceduralTexture) UOffset(uOffset float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(uOffset)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUOffset sets the UOffset property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#uoffset
+func (g *GrassProceduralTexture) SetUOffset(uOffset float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(uOffset)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// URotationCenter returns the URotationCenter property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#urotationcenter
+func (g *GrassProceduralTexture) URotationCenter(uRotationCenter float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(uRotationCenter)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetURotationCenter sets the URotationCenter property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#urotationcenter
+func (g *GrassProceduralTexture) SetURotationCenter(uRotationCenter float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(uRotationCenter)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// UScale returns the UScale property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#uscale
+func (g *GrassProceduralTexture) UScale(uScale float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(uScale)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUScale sets the UScale property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#uscale
+func (g *GrassProceduralTexture) SetUScale(uScale float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(uScale)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// Uid returns the Uid property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#uid
+func (g *GrassProceduralTexture) Uid(uid string) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(uid)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUid sets the Uid property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#uid
+func (g *GrassProceduralTexture) SetUid(uid string) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(uid)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#uniqueid
+func (g *GrassProceduralTexture) UniqueId(uniqueId float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(uniqueId)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#uniqueid
+func (g *GrassProceduralTexture) SetUniqueId(uniqueId float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(uniqueId)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// Url returns the Url property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#url
+func (g *GrassProceduralTexture) Url(url string) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(url)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUrl sets the Url property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#url
+func (g *GrassProceduralTexture) SetUrl(url string) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(url)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// UseSerializedUrlIfAny returns the UseSerializedUrlIfAny property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#useserializedurlifany
+func (g *GrassProceduralTexture) UseSerializedUrlIfAny(UseSerializedUrlIfAny bool) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(UseSerializedUrlIfAny)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUseSerializedUrlIfAny sets the UseSerializedUrlIfAny property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#useserializedurlifany
+func (g *GrassProceduralTexture) SetUseSerializedUrlIfAny(UseSerializedUrlIfAny bool) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(UseSerializedUrlIfAny)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// VAng returns the VAng property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#vang
+func (g *GrassProceduralTexture) VAng(vAng float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(vAng)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetVAng sets the VAng property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#vang
+func (g *GrassProceduralTexture) SetVAng(vAng float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(vAng)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// VOffset returns the VOffset property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#voffset
+func (g *GrassProceduralTexture) VOffset(vOffset float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(vOffset)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetVOffset sets the VOffset property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#voffset
+func (g *GrassProceduralTexture) SetVOffset(vOffset float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(vOffset)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// VRotationCenter returns the VRotationCenter property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#vrotationcenter
+func (g *GrassProceduralTexture) VRotationCenter(vRotationCenter float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(vRotationCenter)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetVRotationCenter sets the VRotationCenter property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#vrotationcenter
+func (g *GrassProceduralTexture) SetVRotationCenter(vRotationCenter float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(vRotationCenter)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// VScale returns the VScale property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#vscale
+func (g *GrassProceduralTexture) VScale(vScale float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(vScale)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetVScale sets the VScale property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#vscale
+func (g *GrassProceduralTexture) SetVScale(vScale float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(vScale)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// WAng returns the WAng property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#wang
+func (g *GrassProceduralTexture) WAng(wAng float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(wAng)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWAng sets the WAng property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#wang
+func (g *GrassProceduralTexture) SetWAng(wAng float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(wAng)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// WRAP_ADDRESSMODE returns the WRAP_ADDRESSMODE property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#wrap_addressmode
+func (g *GrassProceduralTexture) WRAP_ADDRESSMODE(WRAP_ADDRESSMODE float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(WRAP_ADDRESSMODE)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWRAP_ADDRESSMODE sets the WRAP_ADDRESSMODE property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#wrap_addressmode
+func (g *GrassProceduralTexture) SetWRAP_ADDRESSMODE(WRAP_ADDRESSMODE float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(WRAP_ADDRESSMODE)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// WRotationCenter returns the WRotationCenter property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#wrotationcenter
+func (g *GrassProceduralTexture) WRotationCenter(wRotationCenter float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(wRotationCenter)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWRotationCenter sets the WRotationCenter property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#wrotationcenter
+func (g *GrassProceduralTexture) SetWRotationCenter(wRotationCenter float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(wRotationCenter)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// WrapR returns the WrapR property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#wrapr
+func (g *GrassProceduralTexture) WrapR(wrapR float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(wrapR)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWrapR sets the WrapR property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#wrapr
+func (g *GrassProceduralTexture) SetWrapR(wrapR float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(wrapR)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// WrapU returns the WrapU property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#wrapu
+func (g *GrassProceduralTexture) WrapU(wrapU float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(wrapU)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWrapU sets the WrapU property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#wrapu
+func (g *GrassProceduralTexture) SetWrapU(wrapU float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(wrapU)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// WrapV returns the WrapV property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#wrapv
+func (g *GrassProceduralTexture) WrapV(wrapV float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(wrapV)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWrapV sets the WrapV property of class GrassProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.grassproceduraltexture#wrapv
+func (g *GrassProceduralTexture) SetWrapV(wrapV float64) *GrassProceduralTexture {
+	p := ba.ctx.Get("GrassProceduralTexture").New(wrapV)
+	return GrassProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+*/

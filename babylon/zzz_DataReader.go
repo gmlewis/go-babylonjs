@@ -31,8 +31,108 @@ func DataReaderFromJSObject(p js.Value, ctx js.Value) *DataReader {
 //
 // https://doc.babylonjs.com/api/classes/babylon.datareader
 func (ba *Babylon) NewDataReader(buffer js.Value) *DataReader {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, buffer)
+
+	p := ba.ctx.Get("DataReader").New(args...)
+	return DataReaderFromJSObject(p, ba.ctx)
+}
+
+// LoadAsync calls the LoadAsync method on the DataReader object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.datareader#loadasync
+func (d *DataReader) LoadAsync(byteLength float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, byteLength)
+
+	d.p.Call("loadAsync", args...)
+}
+
+// ReadString calls the ReadString method on the DataReader object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.datareader#readstring
+func (d *DataReader) ReadString(byteLength float64) string {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, byteLength)
+
+	retVal := d.p.Call("readString", args...)
+	return retVal.String()
+}
+
+// ReadUint32 calls the ReadUint32 method on the DataReader object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.datareader#readuint32
+func (d *DataReader) ReadUint32() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := d.p.Call("readUint32", args...)
+	return retVal.Float()
+}
+
+// ReadUint8Array calls the ReadUint8Array method on the DataReader object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.datareader#readuint8array
+func (d *DataReader) ReadUint8Array(byteLength float64) js.Value {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, byteLength)
+
+	retVal := d.p.Call("readUint8Array", args...)
+	return retVal
+}
+
+// SkipBytes calls the SkipBytes method on the DataReader object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.datareader#skipbytes
+func (d *DataReader) SkipBytes(byteLength float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, byteLength)
+
+	d.p.Call("skipBytes", args...)
+}
+
+/*
+
+// Buffer returns the Buffer property of class DataReader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.datareader#buffer
+func (d *DataReader) Buffer(buffer js.Value) *DataReader {
 	p := ba.ctx.Get("DataReader").New(buffer)
 	return DataReaderFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetBuffer sets the Buffer property of class DataReader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.datareader#buffer
+func (d *DataReader) SetBuffer(buffer js.Value) *DataReader {
+	p := ba.ctx.Get("DataReader").New(buffer)
+	return DataReaderFromJSObject(p, ba.ctx)
+}
+
+// ByteOffset returns the ByteOffset property of class DataReader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.datareader#byteoffset
+func (d *DataReader) ByteOffset(byteOffset float64) *DataReader {
+	p := ba.ctx.Get("DataReader").New(byteOffset)
+	return DataReaderFromJSObject(p, ba.ctx)
+}
+
+// SetByteOffset sets the ByteOffset property of class DataReader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.datareader#byteoffset
+func (d *DataReader) SetByteOffset(byteOffset float64) *DataReader {
+	p := ba.ctx.Get("DataReader").New(byteOffset)
+	return DataReaderFromJSObject(p, ba.ctx)
+}
+
+*/

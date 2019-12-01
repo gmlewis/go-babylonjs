@@ -27,4 +27,102 @@ func MSFT_lodFromJSObject(p js.Value, ctx js.Value) *MSFT_lod {
 	return &MSFT_lod{p: p, ctx: ctx}
 }
 
-// TODO: methods
+/*
+
+// Enabled returns the Enabled property of class MSFT_lod.
+//
+// https://doc.babylonjs.com/api/classes/babylon.msft_lod#enabled
+func (m *MSFT_lod) Enabled(enabled bool) *MSFT_lod {
+	p := ba.ctx.Get("MSFT_lod").New(enabled)
+	return MSFT_lodFromJSObject(p, ba.ctx)
+}
+
+// SetEnabled sets the Enabled property of class MSFT_lod.
+//
+// https://doc.babylonjs.com/api/classes/babylon.msft_lod#enabled
+func (m *MSFT_lod) SetEnabled(enabled bool) *MSFT_lod {
+	p := ba.ctx.Get("MSFT_lod").New(enabled)
+	return MSFT_lodFromJSObject(p, ba.ctx)
+}
+
+// MaxLODsToLoad returns the MaxLODsToLoad property of class MSFT_lod.
+//
+// https://doc.babylonjs.com/api/classes/babylon.msft_lod#maxlodstoload
+func (m *MSFT_lod) MaxLODsToLoad(maxLODsToLoad float64) *MSFT_lod {
+	p := ba.ctx.Get("MSFT_lod").New(maxLODsToLoad)
+	return MSFT_lodFromJSObject(p, ba.ctx)
+}
+
+// SetMaxLODsToLoad sets the MaxLODsToLoad property of class MSFT_lod.
+//
+// https://doc.babylonjs.com/api/classes/babylon.msft_lod#maxlodstoload
+func (m *MSFT_lod) SetMaxLODsToLoad(maxLODsToLoad float64) *MSFT_lod {
+	p := ba.ctx.Get("MSFT_lod").New(maxLODsToLoad)
+	return MSFT_lodFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class MSFT_lod.
+//
+// https://doc.babylonjs.com/api/classes/babylon.msft_lod#name
+func (m *MSFT_lod) Name(name string) *MSFT_lod {
+	p := ba.ctx.Get("MSFT_lod").New(name)
+	return MSFT_lodFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class MSFT_lod.
+//
+// https://doc.babylonjs.com/api/classes/babylon.msft_lod#name
+func (m *MSFT_lod) SetName(name string) *MSFT_lod {
+	p := ba.ctx.Get("MSFT_lod").New(name)
+	return MSFT_lodFromJSObject(p, ba.ctx)
+}
+
+// OnMaterialLODsLoadedObservable returns the OnMaterialLODsLoadedObservable property of class MSFT_lod.
+//
+// https://doc.babylonjs.com/api/classes/babylon.msft_lod#onmateriallodsloadedobservable
+func (m *MSFT_lod) OnMaterialLODsLoadedObservable(onMaterialLODsLoadedObservable *Observable) *MSFT_lod {
+	p := ba.ctx.Get("MSFT_lod").New(onMaterialLODsLoadedObservable.JSObject())
+	return MSFT_lodFromJSObject(p, ba.ctx)
+}
+
+// SetOnMaterialLODsLoadedObservable sets the OnMaterialLODsLoadedObservable property of class MSFT_lod.
+//
+// https://doc.babylonjs.com/api/classes/babylon.msft_lod#onmateriallodsloadedobservable
+func (m *MSFT_lod) SetOnMaterialLODsLoadedObservable(onMaterialLODsLoadedObservable *Observable) *MSFT_lod {
+	p := ba.ctx.Get("MSFT_lod").New(onMaterialLODsLoadedObservable.JSObject())
+	return MSFT_lodFromJSObject(p, ba.ctx)
+}
+
+// OnNodeLODsLoadedObservable returns the OnNodeLODsLoadedObservable property of class MSFT_lod.
+//
+// https://doc.babylonjs.com/api/classes/babylon.msft_lod#onnodelodsloadedobservable
+func (m *MSFT_lod) OnNodeLODsLoadedObservable(onNodeLODsLoadedObservable *Observable) *MSFT_lod {
+	p := ba.ctx.Get("MSFT_lod").New(onNodeLODsLoadedObservable.JSObject())
+	return MSFT_lodFromJSObject(p, ba.ctx)
+}
+
+// SetOnNodeLODsLoadedObservable sets the OnNodeLODsLoadedObservable property of class MSFT_lod.
+//
+// https://doc.babylonjs.com/api/classes/babylon.msft_lod#onnodelodsloadedobservable
+func (m *MSFT_lod) SetOnNodeLODsLoadedObservable(onNodeLODsLoadedObservable *Observable) *MSFT_lod {
+	p := ba.ctx.Get("MSFT_lod").New(onNodeLODsLoadedObservable.JSObject())
+	return MSFT_lodFromJSObject(p, ba.ctx)
+}
+
+// Order returns the Order property of class MSFT_lod.
+//
+// https://doc.babylonjs.com/api/classes/babylon.msft_lod#order
+func (m *MSFT_lod) Order(order float64) *MSFT_lod {
+	p := ba.ctx.Get("MSFT_lod").New(order)
+	return MSFT_lodFromJSObject(p, ba.ctx)
+}
+
+// SetOrder sets the Order property of class MSFT_lod.
+//
+// https://doc.babylonjs.com/api/classes/babylon.msft_lod#order
+func (m *MSFT_lod) SetOrder(order float64) *MSFT_lod {
+	p := ba.ctx.Get("MSFT_lod").New(order)
+	return MSFT_lodFromJSObject(p, ba.ctx)
+}
+
+*/

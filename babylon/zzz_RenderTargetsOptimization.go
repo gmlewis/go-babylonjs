@@ -31,7 +31,7 @@ func RenderTargetsOptimizationFromJSObject(p js.Value, ctx js.Value) *RenderTarg
 
 // NewRenderTargetsOptimizationOpts contains optional parameters for NewRenderTargetsOptimization.
 type NewRenderTargetsOptimizationOpts struct {
-	Priority *JSFloat64
+	Priority *float64
 }
 
 // NewRenderTargetsOptimization returns a new RenderTargetsOptimization object.
@@ -42,8 +42,59 @@ func (ba *Babylon) NewRenderTargetsOptimization(opts *NewRenderTargetsOptimizati
 		opts = &NewRenderTargetsOptimizationOpts{}
 	}
 
-	p := ba.ctx.Get("RenderTargetsOptimization").New(opts.Priority.JSObject())
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Priority == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Priority)
+	}
+
+	p := ba.ctx.Get("RenderTargetsOptimization").New(args...)
 	return RenderTargetsOptimizationFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Apply calls the Apply method on the RenderTargetsOptimization object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargetsoptimization#apply
+func (r *RenderTargetsOptimization) Apply(scene *Scene, optimizer *SceneOptimizer) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, scene.JSObject())
+	args = append(args, optimizer.JSObject())
+
+	retVal := r.p.Call("apply", args...)
+	return retVal.Bool()
+}
+
+// GetDescription calls the GetDescription method on the RenderTargetsOptimization object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargetsoptimization#getdescription
+func (r *RenderTargetsOptimization) GetDescription() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("getDescription", args...)
+	return retVal.String()
+}
+
+/*
+
+// Priority returns the Priority property of class RenderTargetsOptimization.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargetsoptimization#priority
+func (r *RenderTargetsOptimization) Priority(priority float64) *RenderTargetsOptimization {
+	p := ba.ctx.Get("RenderTargetsOptimization").New(priority)
+	return RenderTargetsOptimizationFromJSObject(p, ba.ctx)
+}
+
+// SetPriority sets the Priority property of class RenderTargetsOptimization.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargetsoptimization#priority
+func (r *RenderTargetsOptimization) SetPriority(priority float64) *RenderTargetsOptimization {
+	p := ba.ctx.Get("RenderTargetsOptimization").New(priority)
+	return RenderTargetsOptimizationFromJSObject(p, ba.ctx)
+}
+
+*/

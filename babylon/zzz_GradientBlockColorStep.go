@@ -31,8 +31,48 @@ func GradientBlockColorStepFromJSObject(p js.Value, ctx js.Value) *GradientBlock
 //
 // https://doc.babylonjs.com/api/classes/babylon.gradientblockcolorstep
 func (ba *Babylon) NewGradientBlockColorStep(step float64, color *Color3) *GradientBlockColorStep {
-	p := ba.ctx.Get("GradientBlockColorStep").New(step, color.JSObject())
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, step)
+	args = append(args, color.JSObject())
+
+	p := ba.ctx.Get("GradientBlockColorStep").New(args...)
 	return GradientBlockColorStepFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+/*
+
+// Color returns the Color property of class GradientBlockColorStep.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientblockcolorstep#color
+func (g *GradientBlockColorStep) Color(color *Color3) *GradientBlockColorStep {
+	p := ba.ctx.Get("GradientBlockColorStep").New(color.JSObject())
+	return GradientBlockColorStepFromJSObject(p, ba.ctx)
+}
+
+// SetColor sets the Color property of class GradientBlockColorStep.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientblockcolorstep#color
+func (g *GradientBlockColorStep) SetColor(color *Color3) *GradientBlockColorStep {
+	p := ba.ctx.Get("GradientBlockColorStep").New(color.JSObject())
+	return GradientBlockColorStepFromJSObject(p, ba.ctx)
+}
+
+// Step returns the Step property of class GradientBlockColorStep.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientblockcolorstep#step
+func (g *GradientBlockColorStep) Step(step float64) *GradientBlockColorStep {
+	p := ba.ctx.Get("GradientBlockColorStep").New(step)
+	return GradientBlockColorStepFromJSObject(p, ba.ctx)
+}
+
+// SetStep sets the Step property of class GradientBlockColorStep.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradientblockcolorstep#step
+func (g *GradientBlockColorStep) SetStep(step float64) *GradientBlockColorStep {
+	p := ba.ctx.Get("GradientBlockColorStep").New(step)
+	return GradientBlockColorStepFromJSObject(p, ba.ctx)
+}
+
+*/

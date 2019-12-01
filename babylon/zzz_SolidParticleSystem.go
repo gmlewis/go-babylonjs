@@ -34,7 +34,7 @@ func SolidParticleSystemFromJSObject(p js.Value, ctx js.Value) *SolidParticleSys
 
 // NewSolidParticleSystemOpts contains optional parameters for NewSolidParticleSystem.
 type NewSolidParticleSystemOpts struct {
-	Options *JSValue
+	Options js.Value
 }
 
 // NewSolidParticleSystem returns a new SolidParticleSystem object.
@@ -45,8 +45,779 @@ func (ba *Babylon) NewSolidParticleSystem(name string, scene *Scene, opts *NewSo
 		opts = &NewSolidParticleSystemOpts{}
 	}
 
-	p := ba.ctx.Get("SolidParticleSystem").New(name, scene.JSObject(), opts.Options.JSObject())
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, name)
+	args = append(args, scene.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	p := ba.ctx.Get("SolidParticleSystem").New(args...)
 	return SolidParticleSystemFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SolidParticleSystemAddShapeOpts contains optional parameters for SolidParticleSystem.AddShape.
+type SolidParticleSystemAddShapeOpts struct {
+	Options js.Value
+}
+
+// AddShape calls the AddShape method on the SolidParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#addshape
+func (s *SolidParticleSystem) AddShape(mesh *Mesh, nb float64, opts *SolidParticleSystemAddShapeOpts) float64 {
+	if opts == nil {
+		opts = &SolidParticleSystemAddShapeOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nb)
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	retVal := s.p.Call("addShape", args...)
+	return retVal.Float()
+}
+
+// SolidParticleSystemAfterUpdateParticlesOpts contains optional parameters for SolidParticleSystem.AfterUpdateParticles.
+type SolidParticleSystemAfterUpdateParticlesOpts struct {
+	Start  *float64
+	Stop   *float64
+	Update *bool
+}
+
+// AfterUpdateParticles calls the AfterUpdateParticles method on the SolidParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#afterupdateparticles
+func (s *SolidParticleSystem) AfterUpdateParticles(opts *SolidParticleSystemAfterUpdateParticlesOpts) {
+	if opts == nil {
+		opts = &SolidParticleSystemAfterUpdateParticlesOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+3)
+
+	if opts.Start == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Start)
+	}
+	if opts.Stop == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Stop)
+	}
+	if opts.Update == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Update)
+	}
+
+	s.p.Call("afterUpdateParticles", args...)
+}
+
+// SolidParticleSystemBeforeUpdateParticlesOpts contains optional parameters for SolidParticleSystem.BeforeUpdateParticles.
+type SolidParticleSystemBeforeUpdateParticlesOpts struct {
+	Start  *float64
+	Stop   *float64
+	Update *bool
+}
+
+// BeforeUpdateParticles calls the BeforeUpdateParticles method on the SolidParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#beforeupdateparticles
+func (s *SolidParticleSystem) BeforeUpdateParticles(opts *SolidParticleSystemBeforeUpdateParticlesOpts) {
+	if opts == nil {
+		opts = &SolidParticleSystemBeforeUpdateParticlesOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+3)
+
+	if opts.Start == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Start)
+	}
+	if opts.Stop == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Stop)
+	}
+	if opts.Update == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Update)
+	}
+
+	s.p.Call("beforeUpdateParticles", args...)
+}
+
+// BuildMesh calls the BuildMesh method on the SolidParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#buildmesh
+func (s *SolidParticleSystem) BuildMesh() *Mesh {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("buildMesh", args...)
+	return MeshFromJSObject(retVal, s.ctx)
+}
+
+// ComputeSubMeshes calls the ComputeSubMeshes method on the SolidParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#computesubmeshes
+func (s *SolidParticleSystem) ComputeSubMeshes() *SolidParticleSystem {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("computeSubMeshes", args...)
+	return SolidParticleSystemFromJSObject(retVal, s.ctx)
+}
+
+// SolidParticleSystemDigestOpts contains optional parameters for SolidParticleSystem.Digest.
+type SolidParticleSystemDigestOpts struct {
+	Options js.Value
+}
+
+// Digest calls the Digest method on the SolidParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#digest
+func (s *SolidParticleSystem) Digest(mesh *Mesh, opts *SolidParticleSystemDigestOpts) *SolidParticleSystem {
+	if opts == nil {
+		opts = &SolidParticleSystemDigestOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, mesh.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	retVal := s.p.Call("digest", args...)
+	return SolidParticleSystemFromJSObject(retVal, s.ctx)
+}
+
+// Dispose calls the Dispose method on the SolidParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#dispose
+func (s *SolidParticleSystem) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("dispose", args...)
+}
+
+// GetParticleById calls the GetParticleById method on the SolidParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#getparticlebyid
+func (s *SolidParticleSystem) GetParticleById(id float64) *SolidParticle {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, id)
+
+	retVal := s.p.Call("getParticleById", args...)
+	return SolidParticleFromJSObject(retVal, s.ctx)
+}
+
+// GetParticlesByShapeId calls the GetParticlesByShapeId method on the SolidParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#getparticlesbyshapeid
+func (s *SolidParticleSystem) GetParticlesByShapeId(shapeId float64) *SolidParticle {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, shapeId)
+
+	retVal := s.p.Call("getParticlesByShapeId", args...)
+	return SolidParticleFromJSObject(retVal, s.ctx)
+}
+
+// GetParticlesByShapeIdToRef calls the GetParticlesByShapeIdToRef method on the SolidParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#getparticlesbyshapeidtoref
+func (s *SolidParticleSystem) GetParticlesByShapeIdToRef(shapeId float64, ref *SolidParticle) *SolidParticleSystem {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, shapeId)
+	args = append(args, ref.JSObject())
+
+	retVal := s.p.Call("getParticlesByShapeIdToRef", args...)
+	return SolidParticleSystemFromJSObject(retVal, s.ctx)
+}
+
+// InitParticles calls the InitParticles method on the SolidParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#initparticles
+func (s *SolidParticleSystem) InitParticles() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("initParticles", args...)
+}
+
+// InsertParticlesFromArray calls the InsertParticlesFromArray method on the SolidParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#insertparticlesfromarray
+func (s *SolidParticleSystem) InsertParticlesFromArray(solidParticleArray *SolidParticle) *SolidParticleSystem {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, solidParticleArray.JSObject())
+
+	retVal := s.p.Call("insertParticlesFromArray", args...)
+	return SolidParticleSystemFromJSObject(retVal, s.ctx)
+}
+
+// SolidParticleSystemRebuildMeshOpts contains optional parameters for SolidParticleSystem.RebuildMesh.
+type SolidParticleSystemRebuildMeshOpts struct {
+	Reset *bool
+}
+
+// RebuildMesh calls the RebuildMesh method on the SolidParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#rebuildmesh
+func (s *SolidParticleSystem) RebuildMesh(opts *SolidParticleSystemRebuildMeshOpts) *SolidParticleSystem {
+	if opts == nil {
+		opts = &SolidParticleSystemRebuildMeshOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Reset == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Reset)
+	}
+
+	retVal := s.p.Call("rebuildMesh", args...)
+	return SolidParticleSystemFromJSObject(retVal, s.ctx)
+}
+
+// RecycleParticle calls the RecycleParticle method on the SolidParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#recycleparticle
+func (s *SolidParticleSystem) RecycleParticle(particle *SolidParticle) *SolidParticle {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, particle.JSObject())
+
+	retVal := s.p.Call("recycleParticle", args...)
+	return SolidParticleFromJSObject(retVal, s.ctx)
+}
+
+// RefreshVisibleSize calls the RefreshVisibleSize method on the SolidParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#refreshvisiblesize
+func (s *SolidParticleSystem) RefreshVisibleSize() *SolidParticleSystem {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("refreshVisibleSize", args...)
+	return SolidParticleSystemFromJSObject(retVal, s.ctx)
+}
+
+// RemoveParticles calls the RemoveParticles method on the SolidParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#removeparticles
+func (s *SolidParticleSystem) RemoveParticles(start float64, end float64) *SolidParticle {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, start)
+	args = append(args, end)
+
+	retVal := s.p.Call("removeParticles", args...)
+	return SolidParticleFromJSObject(retVal, s.ctx)
+}
+
+// SetMultiMaterial calls the SetMultiMaterial method on the SolidParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#setmultimaterial
+func (s *SolidParticleSystem) SetMultiMaterial(materials *Material) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, materials.JSObject())
+
+	s.p.Call("setMultiMaterial", args...)
+}
+
+// SolidParticleSystemSetParticlesOpts contains optional parameters for SolidParticleSystem.SetParticles.
+type SolidParticleSystemSetParticlesOpts struct {
+	Start  *float64
+	End    *float64
+	Update *bool
+}
+
+// SetParticles calls the SetParticles method on the SolidParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#setparticles
+func (s *SolidParticleSystem) SetParticles(opts *SolidParticleSystemSetParticlesOpts) *SolidParticleSystem {
+	if opts == nil {
+		opts = &SolidParticleSystemSetParticlesOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+3)
+
+	if opts.Start == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Start)
+	}
+	if opts.End == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.End)
+	}
+	if opts.Update == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Update)
+	}
+
+	retVal := s.p.Call("setParticles", args...)
+	return SolidParticleSystemFromJSObject(retVal, s.ctx)
+}
+
+// SetVisibilityBox calls the SetVisibilityBox method on the SolidParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#setvisibilitybox
+func (s *SolidParticleSystem) SetVisibilityBox(size float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, size)
+
+	s.p.Call("setVisibilityBox", args...)
+}
+
+// UpdateParticle calls the UpdateParticle method on the SolidParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#updateparticle
+func (s *SolidParticleSystem) UpdateParticle(particle *SolidParticle) *SolidParticle {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, particle.JSObject())
+
+	retVal := s.p.Call("updateParticle", args...)
+	return SolidParticleFromJSObject(retVal, s.ctx)
+}
+
+// UpdateParticleVertex calls the UpdateParticleVertex method on the SolidParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#updateparticlevertex
+func (s *SolidParticleSystem) UpdateParticleVertex(particle *SolidParticle, vertex *Vector3, pt float64) *Vector3 {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, particle.JSObject())
+	args = append(args, vertex.JSObject())
+	args = append(args, pt)
+
+	retVal := s.p.Call("updateParticleVertex", args...)
+	return Vector3FromJSObject(retVal, s.ctx)
+}
+
+/*
+
+// AutoUpdateSubMeshes returns the AutoUpdateSubMeshes property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#autoupdatesubmeshes
+func (s *SolidParticleSystem) AutoUpdateSubMeshes(autoUpdateSubMeshes bool) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(autoUpdateSubMeshes)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetAutoUpdateSubMeshes sets the AutoUpdateSubMeshes property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#autoupdatesubmeshes
+func (s *SolidParticleSystem) SetAutoUpdateSubMeshes(autoUpdateSubMeshes bool) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(autoUpdateSubMeshes)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// Billboard returns the Billboard property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#billboard
+func (s *SolidParticleSystem) Billboard(billboard bool) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(billboard)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetBillboard sets the Billboard property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#billboard
+func (s *SolidParticleSystem) SetBillboard(billboard bool) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(billboard)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// ComputeBoundingBox returns the ComputeBoundingBox property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#computeboundingbox
+func (s *SolidParticleSystem) ComputeBoundingBox(computeBoundingBox bool) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(computeBoundingBox)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetComputeBoundingBox sets the ComputeBoundingBox property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#computeboundingbox
+func (s *SolidParticleSystem) SetComputeBoundingBox(computeBoundingBox bool) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(computeBoundingBox)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// ComputeParticleColor returns the ComputeParticleColor property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#computeparticlecolor
+func (s *SolidParticleSystem) ComputeParticleColor(computeParticleColor bool) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(computeParticleColor)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetComputeParticleColor sets the ComputeParticleColor property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#computeparticlecolor
+func (s *SolidParticleSystem) SetComputeParticleColor(computeParticleColor bool) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(computeParticleColor)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// ComputeParticleRotation returns the ComputeParticleRotation property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#computeparticlerotation
+func (s *SolidParticleSystem) ComputeParticleRotation(computeParticleRotation bool) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(computeParticleRotation)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetComputeParticleRotation sets the ComputeParticleRotation property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#computeparticlerotation
+func (s *SolidParticleSystem) SetComputeParticleRotation(computeParticleRotation bool) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(computeParticleRotation)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// ComputeParticleTexture returns the ComputeParticleTexture property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#computeparticletexture
+func (s *SolidParticleSystem) ComputeParticleTexture(computeParticleTexture bool) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(computeParticleTexture)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetComputeParticleTexture sets the ComputeParticleTexture property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#computeparticletexture
+func (s *SolidParticleSystem) SetComputeParticleTexture(computeParticleTexture bool) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(computeParticleTexture)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// ComputeParticleVertex returns the ComputeParticleVertex property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#computeparticlevertex
+func (s *SolidParticleSystem) ComputeParticleVertex(computeParticleVertex bool) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(computeParticleVertex)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetComputeParticleVertex sets the ComputeParticleVertex property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#computeparticlevertex
+func (s *SolidParticleSystem) SetComputeParticleVertex(computeParticleVertex bool) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(computeParticleVertex)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// Counter returns the Counter property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#counter
+func (s *SolidParticleSystem) Counter(counter float64) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(counter)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetCounter sets the Counter property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#counter
+func (s *SolidParticleSystem) SetCounter(counter float64) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(counter)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// DepthSortParticles returns the DepthSortParticles property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#depthsortparticles
+func (s *SolidParticleSystem) DepthSortParticles(depthSortParticles bool) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(depthSortParticles)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetDepthSortParticles sets the DepthSortParticles property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#depthsortparticles
+func (s *SolidParticleSystem) SetDepthSortParticles(depthSortParticles bool) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(depthSortParticles)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// DepthSortedParticles returns the DepthSortedParticles property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#depthsortedparticles
+func (s *SolidParticleSystem) DepthSortedParticles(depthSortedParticles *DepthSortedParticle) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(depthSortedParticles.JSObject())
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetDepthSortedParticles sets the DepthSortedParticles property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#depthsortedparticles
+func (s *SolidParticleSystem) SetDepthSortedParticles(depthSortedParticles *DepthSortedParticle) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(depthSortedParticles.JSObject())
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// Expandable returns the Expandable property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#expandable
+func (s *SolidParticleSystem) Expandable(expandable bool) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(expandable)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetExpandable sets the Expandable property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#expandable
+func (s *SolidParticleSystem) SetExpandable(expandable bool) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(expandable)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// IsAlwaysVisible returns the IsAlwaysVisible property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#isalwaysvisible
+func (s *SolidParticleSystem) IsAlwaysVisible(isAlwaysVisible bool) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(isAlwaysVisible)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetIsAlwaysVisible sets the IsAlwaysVisible property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#isalwaysvisible
+func (s *SolidParticleSystem) SetIsAlwaysVisible(isAlwaysVisible bool) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(isAlwaysVisible)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// IsVisibilityBoxLocked returns the IsVisibilityBoxLocked property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#isvisibilityboxlocked
+func (s *SolidParticleSystem) IsVisibilityBoxLocked(isVisibilityBoxLocked bool) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(isVisibilityBoxLocked)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetIsVisibilityBoxLocked sets the IsVisibilityBoxLocked property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#isvisibilityboxlocked
+func (s *SolidParticleSystem) SetIsVisibilityBoxLocked(isVisibilityBoxLocked bool) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(isVisibilityBoxLocked)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// Materials returns the Materials property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#materials
+func (s *SolidParticleSystem) Materials(materials *Material) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(materials.JSObject())
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetMaterials sets the Materials property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#materials
+func (s *SolidParticleSystem) SetMaterials(materials *Material) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(materials.JSObject())
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// Mesh returns the Mesh property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#mesh
+func (s *SolidParticleSystem) Mesh(mesh *Mesh) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(mesh.JSObject())
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetMesh sets the Mesh property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#mesh
+func (s *SolidParticleSystem) SetMesh(mesh *Mesh) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(mesh.JSObject())
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// Multimaterial returns the Multimaterial property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#multimaterial
+func (s *SolidParticleSystem) Multimaterial(multimaterial *MultiMaterial) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(multimaterial.JSObject())
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetMultimaterial sets the Multimaterial property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#multimaterial
+func (s *SolidParticleSystem) SetMultimaterial(multimaterial *MultiMaterial) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(multimaterial.JSObject())
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// MultimaterialEnabled returns the MultimaterialEnabled property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#multimaterialenabled
+func (s *SolidParticleSystem) MultimaterialEnabled(multimaterialEnabled bool) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(multimaterialEnabled)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetMultimaterialEnabled sets the MultimaterialEnabled property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#multimaterialenabled
+func (s *SolidParticleSystem) SetMultimaterialEnabled(multimaterialEnabled bool) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(multimaterialEnabled)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#name
+func (s *SolidParticleSystem) Name(name string) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(name)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#name
+func (s *SolidParticleSystem) SetName(name string) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(name)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// NbParticles returns the NbParticles property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#nbparticles
+func (s *SolidParticleSystem) NbParticles(nbParticles float64) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(nbParticles)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetNbParticles sets the NbParticles property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#nbparticles
+func (s *SolidParticleSystem) SetNbParticles(nbParticles float64) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(nbParticles)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// Particles returns the Particles property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#particles
+func (s *SolidParticleSystem) Particles(particles *SolidParticle) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(particles.JSObject())
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetParticles sets the Particles property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#particles
+func (s *SolidParticleSystem) SetParticles(particles *SolidParticle) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(particles.JSObject())
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// PickedParticles returns the PickedParticles property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#pickedparticles
+func (s *SolidParticleSystem) PickedParticles(pickedParticles js.Value) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(pickedParticles)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetPickedParticles sets the PickedParticles property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#pickedparticles
+func (s *SolidParticleSystem) SetPickedParticles(pickedParticles js.Value) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(pickedParticles)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// RecomputeNormals returns the RecomputeNormals property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#recomputenormals
+func (s *SolidParticleSystem) RecomputeNormals(recomputeNormals bool) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(recomputeNormals)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetRecomputeNormals sets the RecomputeNormals property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#recomputenormals
+func (s *SolidParticleSystem) SetRecomputeNormals(recomputeNormals bool) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(recomputeNormals)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// UseModelMaterial returns the UseModelMaterial property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#usemodelmaterial
+func (s *SolidParticleSystem) UseModelMaterial(useModelMaterial bool) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(useModelMaterial)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetUseModelMaterial sets the UseModelMaterial property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#usemodelmaterial
+func (s *SolidParticleSystem) SetUseModelMaterial(useModelMaterial bool) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(useModelMaterial)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// Vars returns the Vars property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#vars
+func (s *SolidParticleSystem) Vars(vars interface{}) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(vars)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetVars sets the Vars property of class SolidParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.solidparticlesystem#vars
+func (s *SolidParticleSystem) SetVars(vars interface{}) *SolidParticleSystem {
+	p := ba.ctx.Get("SolidParticleSystem").New(vars)
+	return SolidParticleSystemFromJSObject(p, ba.ctx)
+}
+
+*/

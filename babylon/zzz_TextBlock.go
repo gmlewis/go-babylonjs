@@ -29,9 +29,8 @@ func TextBlockFromJSObject(p js.Value, ctx js.Value) *TextBlock {
 
 // NewTextBlockOpts contains optional parameters for NewTextBlock.
 type NewTextBlockOpts struct {
-	Name *JSString
-
-	Text *JSString
+	Name *string
+	Text *string
 }
 
 // NewTextBlock returns a new TextBlock object.
@@ -42,8 +41,1663 @@ func (ba *Babylon) NewTextBlock(opts *NewTextBlockOpts) *TextBlock {
 		opts = &NewTextBlockOpts{}
 	}
 
-	p := ba.ctx.Get("TextBlock").New(opts.Name.JSObject(), opts.Text.JSObject())
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.Name == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Name)
+	}
+	if opts.Text == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Text)
+	}
+
+	p := ba.ctx.Get("TextBlock").New(args...)
 	return TextBlockFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// ComputeExpectedHeight calls the ComputeExpectedHeight method on the TextBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#computeexpectedheight
+func (t *TextBlock) ComputeExpectedHeight() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("computeExpectedHeight", args...)
+	return retVal.Float()
+}
+
+// Contains calls the Contains method on the TextBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#contains
+func (t *TextBlock) Contains(x float64, y float64) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, x)
+	args = append(args, y)
+
+	retVal := t.p.Call("contains", args...)
+	return retVal.Bool()
+}
+
+// Dispose calls the Dispose method on the TextBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#dispose
+func (t *TextBlock) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	t.p.Call("dispose", args...)
+}
+
+// GetAscendantOfClass calls the GetAscendantOfClass method on the TextBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#getascendantofclass
+func (t *TextBlock) GetAscendantOfClass(className string) *Control {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, className)
+
+	retVal := t.p.Call("getAscendantOfClass", args...)
+	return ControlFromJSObject(retVal, t.ctx)
+}
+
+// GetClassName calls the GetClassName method on the TextBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#getclassname
+func (t *TextBlock) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// TextBlockGetDescendantsOpts contains optional parameters for TextBlock.GetDescendants.
+type TextBlockGetDescendantsOpts struct {
+	DirectDescendantsOnly *bool
+	Predicate             *func()
+}
+
+// GetDescendants calls the GetDescendants method on the TextBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#getdescendants
+func (t *TextBlock) GetDescendants(opts *TextBlockGetDescendantsOpts) *Control {
+	if opts == nil {
+		opts = &TextBlockGetDescendantsOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	retVal := t.p.Call("getDescendants", args...)
+	return ControlFromJSObject(retVal, t.ctx)
+}
+
+// TextBlockGetDescendantsToRefOpts contains optional parameters for TextBlock.GetDescendantsToRef.
+type TextBlockGetDescendantsToRefOpts struct {
+	DirectDescendantsOnly *bool
+	Predicate             *func()
+}
+
+// GetDescendantsToRef calls the GetDescendantsToRef method on the TextBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#getdescendantstoref
+func (t *TextBlock) GetDescendantsToRef(results *Control, opts *TextBlockGetDescendantsToRefOpts) {
+	if opts == nil {
+		opts = &TextBlockGetDescendantsToRefOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, results.JSObject())
+
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	t.p.Call("getDescendantsToRef", args...)
+}
+
+// GetLocalCoordinates calls the GetLocalCoordinates method on the TextBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#getlocalcoordinates
+func (t *TextBlock) GetLocalCoordinates(globalCoordinates *Vector2) *Vector2 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, globalCoordinates.JSObject())
+
+	retVal := t.p.Call("getLocalCoordinates", args...)
+	return Vector2FromJSObject(retVal, t.ctx)
+}
+
+// GetLocalCoordinatesToRef calls the GetLocalCoordinatesToRef method on the TextBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#getlocalcoordinatestoref
+func (t *TextBlock) GetLocalCoordinatesToRef(globalCoordinates *Vector2, result *Vector2) *Control {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, globalCoordinates.JSObject())
+	args = append(args, result.JSObject())
+
+	retVal := t.p.Call("getLocalCoordinatesToRef", args...)
+	return ControlFromJSObject(retVal, t.ctx)
+}
+
+// GetParentLocalCoordinates calls the GetParentLocalCoordinates method on the TextBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#getparentlocalcoordinates
+func (t *TextBlock) GetParentLocalCoordinates(globalCoordinates *Vector2) *Vector2 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, globalCoordinates.JSObject())
+
+	retVal := t.p.Call("getParentLocalCoordinates", args...)
+	return Vector2FromJSObject(retVal, t.ctx)
+}
+
+// IsAscendant calls the IsAscendant method on the TextBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#isascendant
+func (t *TextBlock) IsAscendant(container *Control) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, container.JSObject())
+
+	retVal := t.p.Call("isAscendant", args...)
+	return retVal.Bool()
+}
+
+// LinkWithMesh calls the LinkWithMesh method on the TextBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#linkwithmesh
+func (t *TextBlock) LinkWithMesh(mesh *AbstractMesh) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	t.p.Call("linkWithMesh", args...)
+}
+
+// MoveToVector3 calls the MoveToVector3 method on the TextBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#movetovector3
+func (t *TextBlock) MoveToVector3(position *Vector3, scene *Scene) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, position.JSObject())
+	args = append(args, scene.JSObject())
+
+	t.p.Call("moveToVector3", args...)
+}
+
+/*
+
+// AllowAlphaInheritance returns the AllowAlphaInheritance property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#allowalphainheritance
+func (t *TextBlock) AllowAlphaInheritance(AllowAlphaInheritance bool) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(AllowAlphaInheritance)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetAllowAlphaInheritance sets the AllowAlphaInheritance property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#allowalphainheritance
+func (t *TextBlock) SetAllowAlphaInheritance(AllowAlphaInheritance bool) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(AllowAlphaInheritance)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// Alpha returns the Alpha property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#alpha
+func (t *TextBlock) Alpha(alpha float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(alpha)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetAlpha sets the Alpha property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#alpha
+func (t *TextBlock) SetAlpha(alpha float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(alpha)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// CenterX returns the CenterX property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#centerx
+func (t *TextBlock) CenterX(centerX float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(centerX)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetCenterX sets the CenterX property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#centerx
+func (t *TextBlock) SetCenterX(centerX float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(centerX)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// CenterY returns the CenterY property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#centery
+func (t *TextBlock) CenterY(centerY float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(centerY)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetCenterY sets the CenterY property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#centery
+func (t *TextBlock) SetCenterY(centerY float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(centerY)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// ClipChildren returns the ClipChildren property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#clipchildren
+func (t *TextBlock) ClipChildren(clipChildren bool) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(clipChildren)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetClipChildren sets the ClipChildren property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#clipchildren
+func (t *TextBlock) SetClipChildren(clipChildren bool) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(clipChildren)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// ClipContent returns the ClipContent property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#clipcontent
+func (t *TextBlock) ClipContent(clipContent bool) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(clipContent)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetClipContent sets the ClipContent property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#clipcontent
+func (t *TextBlock) SetClipContent(clipContent bool) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(clipContent)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// Color returns the Color property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#color
+func (t *TextBlock) Color(color string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(color)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetColor sets the Color property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#color
+func (t *TextBlock) SetColor(color string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(color)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// DisabledColor returns the DisabledColor property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#disabledcolor
+func (t *TextBlock) DisabledColor(disabledColor string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(disabledColor)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetDisabledColor sets the DisabledColor property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#disabledcolor
+func (t *TextBlock) SetDisabledColor(disabledColor string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(disabledColor)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// FontFamily returns the FontFamily property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#fontfamily
+func (t *TextBlock) FontFamily(fontFamily string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(fontFamily)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetFontFamily sets the FontFamily property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#fontfamily
+func (t *TextBlock) SetFontFamily(fontFamily string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(fontFamily)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// FontOffset returns the FontOffset property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#fontoffset
+func (t *TextBlock) FontOffset(fontOffset js.Value) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(fontOffset)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetFontOffset sets the FontOffset property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#fontoffset
+func (t *TextBlock) SetFontOffset(fontOffset js.Value) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(fontOffset)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// FontSize returns the FontSize property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#fontsize
+func (t *TextBlock) FontSize(fontSize string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(fontSize)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetFontSize sets the FontSize property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#fontsize
+func (t *TextBlock) SetFontSize(fontSize string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(fontSize)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// FontSizeInPixels returns the FontSizeInPixels property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#fontsizeinpixels
+func (t *TextBlock) FontSizeInPixels(fontSizeInPixels float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(fontSizeInPixels)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetFontSizeInPixels sets the FontSizeInPixels property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#fontsizeinpixels
+func (t *TextBlock) SetFontSizeInPixels(fontSizeInPixels float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(fontSizeInPixels)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// FontStyle returns the FontStyle property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#fontstyle
+func (t *TextBlock) FontStyle(fontStyle string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(fontStyle)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetFontStyle sets the FontStyle property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#fontstyle
+func (t *TextBlock) SetFontStyle(fontStyle string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(fontStyle)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// FontWeight returns the FontWeight property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#fontweight
+func (t *TextBlock) FontWeight(fontWeight string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(fontWeight)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetFontWeight sets the FontWeight property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#fontweight
+func (t *TextBlock) SetFontWeight(fontWeight string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(fontWeight)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// HORIZONTAL_ALIGNMENT_CENTER returns the HORIZONTAL_ALIGNMENT_CENTER property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#horizontal_alignment_center
+func (t *TextBlock) HORIZONTAL_ALIGNMENT_CENTER(HORIZONTAL_ALIGNMENT_CENTER float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(HORIZONTAL_ALIGNMENT_CENTER)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetHORIZONTAL_ALIGNMENT_CENTER sets the HORIZONTAL_ALIGNMENT_CENTER property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#horizontal_alignment_center
+func (t *TextBlock) SetHORIZONTAL_ALIGNMENT_CENTER(HORIZONTAL_ALIGNMENT_CENTER float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(HORIZONTAL_ALIGNMENT_CENTER)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// HORIZONTAL_ALIGNMENT_LEFT returns the HORIZONTAL_ALIGNMENT_LEFT property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#horizontal_alignment_left
+func (t *TextBlock) HORIZONTAL_ALIGNMENT_LEFT(HORIZONTAL_ALIGNMENT_LEFT float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(HORIZONTAL_ALIGNMENT_LEFT)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetHORIZONTAL_ALIGNMENT_LEFT sets the HORIZONTAL_ALIGNMENT_LEFT property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#horizontal_alignment_left
+func (t *TextBlock) SetHORIZONTAL_ALIGNMENT_LEFT(HORIZONTAL_ALIGNMENT_LEFT float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(HORIZONTAL_ALIGNMENT_LEFT)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// HORIZONTAL_ALIGNMENT_RIGHT returns the HORIZONTAL_ALIGNMENT_RIGHT property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#horizontal_alignment_right
+func (t *TextBlock) HORIZONTAL_ALIGNMENT_RIGHT(HORIZONTAL_ALIGNMENT_RIGHT float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(HORIZONTAL_ALIGNMENT_RIGHT)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetHORIZONTAL_ALIGNMENT_RIGHT sets the HORIZONTAL_ALIGNMENT_RIGHT property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#horizontal_alignment_right
+func (t *TextBlock) SetHORIZONTAL_ALIGNMENT_RIGHT(HORIZONTAL_ALIGNMENT_RIGHT float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(HORIZONTAL_ALIGNMENT_RIGHT)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// Height returns the Height property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#height
+func (t *TextBlock) Height(height string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(height)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetHeight sets the Height property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#height
+func (t *TextBlock) SetHeight(height string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(height)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// HeightInPixels returns the HeightInPixels property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#heightinpixels
+func (t *TextBlock) HeightInPixels(heightInPixels float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(heightInPixels)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetHeightInPixels sets the HeightInPixels property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#heightinpixels
+func (t *TextBlock) SetHeightInPixels(heightInPixels float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(heightInPixels)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// HorizontalAlignment returns the HorizontalAlignment property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#horizontalalignment
+func (t *TextBlock) HorizontalAlignment(horizontalAlignment float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(horizontalAlignment)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetHorizontalAlignment sets the HorizontalAlignment property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#horizontalalignment
+func (t *TextBlock) SetHorizontalAlignment(horizontalAlignment float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(horizontalAlignment)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// Host returns the Host property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#host
+func (t *TextBlock) Host(host *AdvancedDynamicTexture) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(host.JSObject())
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetHost sets the Host property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#host
+func (t *TextBlock) SetHost(host *AdvancedDynamicTexture) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(host.JSObject())
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// HoverCursor returns the HoverCursor property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#hovercursor
+func (t *TextBlock) HoverCursor(hoverCursor string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(hoverCursor)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetHoverCursor sets the HoverCursor property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#hovercursor
+func (t *TextBlock) SetHoverCursor(hoverCursor string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(hoverCursor)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// IsDirty returns the IsDirty property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#isdirty
+func (t *TextBlock) IsDirty(isDirty bool) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(isDirty)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsDirty sets the IsDirty property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#isdirty
+func (t *TextBlock) SetIsDirty(isDirty bool) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(isDirty)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// IsEnabled returns the IsEnabled property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#isenabled
+func (t *TextBlock) IsEnabled(isEnabled bool) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(isEnabled)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsEnabled sets the IsEnabled property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#isenabled
+func (t *TextBlock) SetIsEnabled(isEnabled bool) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(isEnabled)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// IsFocusInvisible returns the IsFocusInvisible property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#isfocusinvisible
+func (t *TextBlock) IsFocusInvisible(isFocusInvisible bool) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(isFocusInvisible)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsFocusInvisible sets the IsFocusInvisible property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#isfocusinvisible
+func (t *TextBlock) SetIsFocusInvisible(isFocusInvisible bool) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(isFocusInvisible)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// IsHighlighted returns the IsHighlighted property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#ishighlighted
+func (t *TextBlock) IsHighlighted(isHighlighted bool) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(isHighlighted)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsHighlighted sets the IsHighlighted property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#ishighlighted
+func (t *TextBlock) SetIsHighlighted(isHighlighted bool) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(isHighlighted)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// IsHitTestVisible returns the IsHitTestVisible property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#ishittestvisible
+func (t *TextBlock) IsHitTestVisible(isHitTestVisible bool) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(isHitTestVisible)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsHitTestVisible sets the IsHitTestVisible property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#ishittestvisible
+func (t *TextBlock) SetIsHitTestVisible(isHitTestVisible bool) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(isHitTestVisible)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// IsPointerBlocker returns the IsPointerBlocker property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#ispointerblocker
+func (t *TextBlock) IsPointerBlocker(isPointerBlocker bool) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(isPointerBlocker)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsPointerBlocker sets the IsPointerBlocker property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#ispointerblocker
+func (t *TextBlock) SetIsPointerBlocker(isPointerBlocker bool) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(isPointerBlocker)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// IsVisible returns the IsVisible property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#isvisible
+func (t *TextBlock) IsVisible(isVisible bool) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(isVisible)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsVisible sets the IsVisible property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#isvisible
+func (t *TextBlock) SetIsVisible(isVisible bool) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(isVisible)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// Left returns the Left property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#left
+func (t *TextBlock) Left(left string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(left)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetLeft sets the Left property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#left
+func (t *TextBlock) SetLeft(left string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(left)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// LeftInPixels returns the LeftInPixels property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#leftinpixels
+func (t *TextBlock) LeftInPixels(leftInPixels float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(leftInPixels)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetLeftInPixels sets the LeftInPixels property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#leftinpixels
+func (t *TextBlock) SetLeftInPixels(leftInPixels float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(leftInPixels)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// LineSpacing returns the LineSpacing property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#linespacing
+func (t *TextBlock) LineSpacing(lineSpacing string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(lineSpacing)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetLineSpacing sets the LineSpacing property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#linespacing
+func (t *TextBlock) SetLineSpacing(lineSpacing string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(lineSpacing)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// Lines returns the Lines property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#lines
+func (t *TextBlock) Lines(lines interface{}) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(lines)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetLines sets the Lines property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#lines
+func (t *TextBlock) SetLines(lines interface{}) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(lines)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetX returns the LinkOffsetX property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#linkoffsetx
+func (t *TextBlock) LinkOffsetX(linkOffsetX string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(linkOffsetX)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetX sets the LinkOffsetX property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#linkoffsetx
+func (t *TextBlock) SetLinkOffsetX(linkOffsetX string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(linkOffsetX)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetXInPixels returns the LinkOffsetXInPixels property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#linkoffsetxinpixels
+func (t *TextBlock) LinkOffsetXInPixels(linkOffsetXInPixels float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(linkOffsetXInPixels)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetXInPixels sets the LinkOffsetXInPixels property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#linkoffsetxinpixels
+func (t *TextBlock) SetLinkOffsetXInPixels(linkOffsetXInPixels float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(linkOffsetXInPixels)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetY returns the LinkOffsetY property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#linkoffsety
+func (t *TextBlock) LinkOffsetY(linkOffsetY string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(linkOffsetY)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetY sets the LinkOffsetY property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#linkoffsety
+func (t *TextBlock) SetLinkOffsetY(linkOffsetY string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(linkOffsetY)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetYInPixels returns the LinkOffsetYInPixels property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#linkoffsetyinpixels
+func (t *TextBlock) LinkOffsetYInPixels(linkOffsetYInPixels float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(linkOffsetYInPixels)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetYInPixels sets the LinkOffsetYInPixels property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#linkoffsetyinpixels
+func (t *TextBlock) SetLinkOffsetYInPixels(linkOffsetYInPixels float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(linkOffsetYInPixels)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// LinkedMesh returns the LinkedMesh property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#linkedmesh
+func (t *TextBlock) LinkedMesh(linkedMesh *AbstractMesh) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(linkedMesh.JSObject())
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetLinkedMesh sets the LinkedMesh property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#linkedmesh
+func (t *TextBlock) SetLinkedMesh(linkedMesh *AbstractMesh) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(linkedMesh.JSObject())
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#metadata
+func (t *TextBlock) Metadata(metadata interface{}) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(metadata)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#metadata
+func (t *TextBlock) SetMetadata(metadata interface{}) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(metadata)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#name
+func (t *TextBlock) Name(name string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(name)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#name
+func (t *TextBlock) SetName(name string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(name)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// NotRenderable returns the NotRenderable property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#notrenderable
+func (t *TextBlock) NotRenderable(notRenderable bool) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(notRenderable)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetNotRenderable sets the NotRenderable property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#notrenderable
+func (t *TextBlock) SetNotRenderable(notRenderable bool) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(notRenderable)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// OnAfterDrawObservable returns the OnAfterDrawObservable property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#onafterdrawobservable
+func (t *TextBlock) OnAfterDrawObservable(onAfterDrawObservable *Observable) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(onAfterDrawObservable.JSObject())
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterDrawObservable sets the OnAfterDrawObservable property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#onafterdrawobservable
+func (t *TextBlock) SetOnAfterDrawObservable(onAfterDrawObservable *Observable) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(onAfterDrawObservable.JSObject())
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeDrawObservable returns the OnBeforeDrawObservable property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#onbeforedrawobservable
+func (t *TextBlock) OnBeforeDrawObservable(onBeforeDrawObservable *Observable) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(onBeforeDrawObservable.JSObject())
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeDrawObservable sets the OnBeforeDrawObservable property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#onbeforedrawobservable
+func (t *TextBlock) SetOnBeforeDrawObservable(onBeforeDrawObservable *Observable) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(onBeforeDrawObservable.JSObject())
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// OnDirtyObservable returns the OnDirtyObservable property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#ondirtyobservable
+func (t *TextBlock) OnDirtyObservable(onDirtyObservable *Observable) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(onDirtyObservable.JSObject())
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOnDirtyObservable sets the OnDirtyObservable property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#ondirtyobservable
+func (t *TextBlock) SetOnDirtyObservable(onDirtyObservable *Observable) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(onDirtyObservable.JSObject())
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// OnLinesReadyObservable returns the OnLinesReadyObservable property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#onlinesreadyobservable
+func (t *TextBlock) OnLinesReadyObservable(onLinesReadyObservable *Observable) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(onLinesReadyObservable.JSObject())
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOnLinesReadyObservable sets the OnLinesReadyObservable property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#onlinesreadyobservable
+func (t *TextBlock) SetOnLinesReadyObservable(onLinesReadyObservable *Observable) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(onLinesReadyObservable.JSObject())
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// OnPointerClickObservable returns the OnPointerClickObservable property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#onpointerclickobservable
+func (t *TextBlock) OnPointerClickObservable(onPointerClickObservable *Observable) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(onPointerClickObservable.JSObject())
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerClickObservable sets the OnPointerClickObservable property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#onpointerclickobservable
+func (t *TextBlock) SetOnPointerClickObservable(onPointerClickObservable *Observable) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(onPointerClickObservable.JSObject())
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// OnPointerDownObservable returns the OnPointerDownObservable property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#onpointerdownobservable
+func (t *TextBlock) OnPointerDownObservable(onPointerDownObservable *Observable) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(onPointerDownObservable.JSObject())
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerDownObservable sets the OnPointerDownObservable property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#onpointerdownobservable
+func (t *TextBlock) SetOnPointerDownObservable(onPointerDownObservable *Observable) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(onPointerDownObservable.JSObject())
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// OnPointerEnterObservable returns the OnPointerEnterObservable property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#onpointerenterobservable
+func (t *TextBlock) OnPointerEnterObservable(onPointerEnterObservable *Observable) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(onPointerEnterObservable.JSObject())
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerEnterObservable sets the OnPointerEnterObservable property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#onpointerenterobservable
+func (t *TextBlock) SetOnPointerEnterObservable(onPointerEnterObservable *Observable) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(onPointerEnterObservable.JSObject())
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// OnPointerMoveObservable returns the OnPointerMoveObservable property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#onpointermoveobservable
+func (t *TextBlock) OnPointerMoveObservable(onPointerMoveObservable *Observable) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(onPointerMoveObservable.JSObject())
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerMoveObservable sets the OnPointerMoveObservable property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#onpointermoveobservable
+func (t *TextBlock) SetOnPointerMoveObservable(onPointerMoveObservable *Observable) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(onPointerMoveObservable.JSObject())
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// OnPointerOutObservable returns the OnPointerOutObservable property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#onpointeroutobservable
+func (t *TextBlock) OnPointerOutObservable(onPointerOutObservable *Observable) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(onPointerOutObservable.JSObject())
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerOutObservable sets the OnPointerOutObservable property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#onpointeroutobservable
+func (t *TextBlock) SetOnPointerOutObservable(onPointerOutObservable *Observable) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(onPointerOutObservable.JSObject())
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// OnPointerUpObservable returns the OnPointerUpObservable property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#onpointerupobservable
+func (t *TextBlock) OnPointerUpObservable(onPointerUpObservable *Observable) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(onPointerUpObservable.JSObject())
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerUpObservable sets the OnPointerUpObservable property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#onpointerupobservable
+func (t *TextBlock) SetOnPointerUpObservable(onPointerUpObservable *Observable) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(onPointerUpObservable.JSObject())
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// OnTextChangedObservable returns the OnTextChangedObservable property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#ontextchangedobservable
+func (t *TextBlock) OnTextChangedObservable(onTextChangedObservable *Observable) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(onTextChangedObservable.JSObject())
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOnTextChangedObservable sets the OnTextChangedObservable property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#ontextchangedobservable
+func (t *TextBlock) SetOnTextChangedObservable(onTextChangedObservable *Observable) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(onTextChangedObservable.JSObject())
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// OutlineColor returns the OutlineColor property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#outlinecolor
+func (t *TextBlock) OutlineColor(outlineColor string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(outlineColor)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOutlineColor sets the OutlineColor property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#outlinecolor
+func (t *TextBlock) SetOutlineColor(outlineColor string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(outlineColor)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// OutlineWidth returns the OutlineWidth property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#outlinewidth
+func (t *TextBlock) OutlineWidth(outlineWidth float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(outlineWidth)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOutlineWidth sets the OutlineWidth property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#outlinewidth
+func (t *TextBlock) SetOutlineWidth(outlineWidth float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(outlineWidth)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// PaddingBottom returns the PaddingBottom property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#paddingbottom
+func (t *TextBlock) PaddingBottom(paddingBottom string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(paddingBottom)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingBottom sets the PaddingBottom property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#paddingbottom
+func (t *TextBlock) SetPaddingBottom(paddingBottom string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(paddingBottom)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// PaddingBottomInPixels returns the PaddingBottomInPixels property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#paddingbottominpixels
+func (t *TextBlock) PaddingBottomInPixels(paddingBottomInPixels float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(paddingBottomInPixels)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingBottomInPixels sets the PaddingBottomInPixels property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#paddingbottominpixels
+func (t *TextBlock) SetPaddingBottomInPixels(paddingBottomInPixels float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(paddingBottomInPixels)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// PaddingLeft returns the PaddingLeft property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#paddingleft
+func (t *TextBlock) PaddingLeft(paddingLeft string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(paddingLeft)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingLeft sets the PaddingLeft property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#paddingleft
+func (t *TextBlock) SetPaddingLeft(paddingLeft string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(paddingLeft)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// PaddingLeftInPixels returns the PaddingLeftInPixels property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#paddingleftinpixels
+func (t *TextBlock) PaddingLeftInPixels(paddingLeftInPixels float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(paddingLeftInPixels)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingLeftInPixels sets the PaddingLeftInPixels property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#paddingleftinpixels
+func (t *TextBlock) SetPaddingLeftInPixels(paddingLeftInPixels float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(paddingLeftInPixels)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// PaddingRight returns the PaddingRight property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#paddingright
+func (t *TextBlock) PaddingRight(paddingRight string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(paddingRight)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingRight sets the PaddingRight property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#paddingright
+func (t *TextBlock) SetPaddingRight(paddingRight string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(paddingRight)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// PaddingRightInPixels returns the PaddingRightInPixels property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#paddingrightinpixels
+func (t *TextBlock) PaddingRightInPixels(paddingRightInPixels float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(paddingRightInPixels)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingRightInPixels sets the PaddingRightInPixels property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#paddingrightinpixels
+func (t *TextBlock) SetPaddingRightInPixels(paddingRightInPixels float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(paddingRightInPixels)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// PaddingTop returns the PaddingTop property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#paddingtop
+func (t *TextBlock) PaddingTop(paddingTop string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(paddingTop)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingTop sets the PaddingTop property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#paddingtop
+func (t *TextBlock) SetPaddingTop(paddingTop string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(paddingTop)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// PaddingTopInPixels returns the PaddingTopInPixels property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#paddingtopinpixels
+func (t *TextBlock) PaddingTopInPixels(paddingTopInPixels float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(paddingTopInPixels)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingTopInPixels sets the PaddingTopInPixels property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#paddingtopinpixels
+func (t *TextBlock) SetPaddingTopInPixels(paddingTopInPixels float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(paddingTopInPixels)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// Parent returns the Parent property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#parent
+func (t *TextBlock) Parent(parent *Container) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(parent.JSObject())
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetParent sets the Parent property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#parent
+func (t *TextBlock) SetParent(parent *Container) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(parent.JSObject())
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// ResizeToFit returns the ResizeToFit property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#resizetofit
+func (t *TextBlock) ResizeToFit(resizeToFit bool) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(resizeToFit)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetResizeToFit sets the ResizeToFit property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#resizetofit
+func (t *TextBlock) SetResizeToFit(resizeToFit bool) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(resizeToFit)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// Rotation returns the Rotation property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#rotation
+func (t *TextBlock) Rotation(rotation float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(rotation)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetRotation sets the Rotation property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#rotation
+func (t *TextBlock) SetRotation(rotation float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(rotation)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// ScaleX returns the ScaleX property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#scalex
+func (t *TextBlock) ScaleX(scaleX float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(scaleX)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetScaleX sets the ScaleX property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#scalex
+func (t *TextBlock) SetScaleX(scaleX float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(scaleX)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// ScaleY returns the ScaleY property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#scaley
+func (t *TextBlock) ScaleY(scaleY float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(scaleY)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetScaleY sets the ScaleY property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#scaley
+func (t *TextBlock) SetScaleY(scaleY float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(scaleY)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// ShadowBlur returns the ShadowBlur property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#shadowblur
+func (t *TextBlock) ShadowBlur(shadowBlur float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(shadowBlur)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetShadowBlur sets the ShadowBlur property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#shadowblur
+func (t *TextBlock) SetShadowBlur(shadowBlur float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(shadowBlur)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// ShadowColor returns the ShadowColor property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#shadowcolor
+func (t *TextBlock) ShadowColor(shadowColor string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(shadowColor)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetShadowColor sets the ShadowColor property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#shadowcolor
+func (t *TextBlock) SetShadowColor(shadowColor string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(shadowColor)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// ShadowOffsetX returns the ShadowOffsetX property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#shadowoffsetx
+func (t *TextBlock) ShadowOffsetX(shadowOffsetX float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(shadowOffsetX)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetShadowOffsetX sets the ShadowOffsetX property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#shadowoffsetx
+func (t *TextBlock) SetShadowOffsetX(shadowOffsetX float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(shadowOffsetX)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// ShadowOffsetY returns the ShadowOffsetY property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#shadowoffsety
+func (t *TextBlock) ShadowOffsetY(shadowOffsetY float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(shadowOffsetY)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetShadowOffsetY sets the ShadowOffsetY property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#shadowoffsety
+func (t *TextBlock) SetShadowOffsetY(shadowOffsetY float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(shadowOffsetY)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// Style returns the Style property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#style
+func (t *TextBlock) Style(style *Style) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(style.JSObject())
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetStyle sets the Style property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#style
+func (t *TextBlock) SetStyle(style *Style) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(style.JSObject())
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// Text returns the Text property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#text
+func (t *TextBlock) Text(text string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(text)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetText sets the Text property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#text
+func (t *TextBlock) SetText(text string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(text)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// TextHorizontalAlignment returns the TextHorizontalAlignment property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#texthorizontalalignment
+func (t *TextBlock) TextHorizontalAlignment(textHorizontalAlignment float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(textHorizontalAlignment)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetTextHorizontalAlignment sets the TextHorizontalAlignment property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#texthorizontalalignment
+func (t *TextBlock) SetTextHorizontalAlignment(textHorizontalAlignment float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(textHorizontalAlignment)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// TextVerticalAlignment returns the TextVerticalAlignment property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#textverticalalignment
+func (t *TextBlock) TextVerticalAlignment(textVerticalAlignment float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(textVerticalAlignment)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetTextVerticalAlignment sets the TextVerticalAlignment property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#textverticalalignment
+func (t *TextBlock) SetTextVerticalAlignment(textVerticalAlignment float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(textVerticalAlignment)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// TextWrapping returns the TextWrapping property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#textwrapping
+func (t *TextBlock) TextWrapping(textWrapping *TextWrapping) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(textWrapping.JSObject())
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetTextWrapping sets the TextWrapping property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#textwrapping
+func (t *TextBlock) SetTextWrapping(textWrapping *TextWrapping) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(textWrapping.JSObject())
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// Top returns the Top property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#top
+func (t *TextBlock) Top(top string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(top)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetTop sets the Top property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#top
+func (t *TextBlock) SetTop(top string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(top)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// TopInPixels returns the TopInPixels property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#topinpixels
+func (t *TextBlock) TopInPixels(topInPixels float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(topInPixels)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetTopInPixels sets the TopInPixels property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#topinpixels
+func (t *TextBlock) SetTopInPixels(topInPixels float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(topInPixels)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// TransformCenterX returns the TransformCenterX property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#transformcenterx
+func (t *TextBlock) TransformCenterX(transformCenterX float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(transformCenterX)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetTransformCenterX sets the TransformCenterX property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#transformcenterx
+func (t *TextBlock) SetTransformCenterX(transformCenterX float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(transformCenterX)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// TransformCenterY returns the TransformCenterY property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#transformcentery
+func (t *TextBlock) TransformCenterY(transformCenterY float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(transformCenterY)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetTransformCenterY sets the TransformCenterY property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#transformcentery
+func (t *TextBlock) SetTransformCenterY(transformCenterY float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(transformCenterY)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// TypeName returns the TypeName property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#typename
+func (t *TextBlock) TypeName(typeName string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(typeName)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetTypeName sets the TypeName property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#typename
+func (t *TextBlock) SetTypeName(typeName string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(typeName)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#uniqueid
+func (t *TextBlock) UniqueId(uniqueId float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(uniqueId)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#uniqueid
+func (t *TextBlock) SetUniqueId(uniqueId float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(uniqueId)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// UseBitmapCache returns the UseBitmapCache property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#usebitmapcache
+func (t *TextBlock) UseBitmapCache(useBitmapCache bool) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(useBitmapCache)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetUseBitmapCache sets the UseBitmapCache property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#usebitmapcache
+func (t *TextBlock) SetUseBitmapCache(useBitmapCache bool) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(useBitmapCache)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// VERTICAL_ALIGNMENT_BOTTOM returns the VERTICAL_ALIGNMENT_BOTTOM property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#vertical_alignment_bottom
+func (t *TextBlock) VERTICAL_ALIGNMENT_BOTTOM(VERTICAL_ALIGNMENT_BOTTOM float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(VERTICAL_ALIGNMENT_BOTTOM)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetVERTICAL_ALIGNMENT_BOTTOM sets the VERTICAL_ALIGNMENT_BOTTOM property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#vertical_alignment_bottom
+func (t *TextBlock) SetVERTICAL_ALIGNMENT_BOTTOM(VERTICAL_ALIGNMENT_BOTTOM float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(VERTICAL_ALIGNMENT_BOTTOM)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// VERTICAL_ALIGNMENT_CENTER returns the VERTICAL_ALIGNMENT_CENTER property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#vertical_alignment_center
+func (t *TextBlock) VERTICAL_ALIGNMENT_CENTER(VERTICAL_ALIGNMENT_CENTER float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(VERTICAL_ALIGNMENT_CENTER)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetVERTICAL_ALIGNMENT_CENTER sets the VERTICAL_ALIGNMENT_CENTER property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#vertical_alignment_center
+func (t *TextBlock) SetVERTICAL_ALIGNMENT_CENTER(VERTICAL_ALIGNMENT_CENTER float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(VERTICAL_ALIGNMENT_CENTER)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// VERTICAL_ALIGNMENT_TOP returns the VERTICAL_ALIGNMENT_TOP property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#vertical_alignment_top
+func (t *TextBlock) VERTICAL_ALIGNMENT_TOP(VERTICAL_ALIGNMENT_TOP float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(VERTICAL_ALIGNMENT_TOP)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetVERTICAL_ALIGNMENT_TOP sets the VERTICAL_ALIGNMENT_TOP property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#vertical_alignment_top
+func (t *TextBlock) SetVERTICAL_ALIGNMENT_TOP(VERTICAL_ALIGNMENT_TOP float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(VERTICAL_ALIGNMENT_TOP)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// VerticalAlignment returns the VerticalAlignment property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#verticalalignment
+func (t *TextBlock) VerticalAlignment(verticalAlignment float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(verticalAlignment)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetVerticalAlignment sets the VerticalAlignment property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#verticalalignment
+func (t *TextBlock) SetVerticalAlignment(verticalAlignment float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(verticalAlignment)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// Width returns the Width property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#width
+func (t *TextBlock) Width(width string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(width)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetWidth sets the Width property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#width
+func (t *TextBlock) SetWidth(width string) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(width)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// WidthInPixels returns the WidthInPixels property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#widthinpixels
+func (t *TextBlock) WidthInPixels(widthInPixels float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(widthInPixels)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetWidthInPixels sets the WidthInPixels property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#widthinpixels
+func (t *TextBlock) SetWidthInPixels(widthInPixels float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(widthInPixels)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// ZIndex returns the ZIndex property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#zindex
+func (t *TextBlock) ZIndex(zIndex float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(zIndex)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+// SetZIndex sets the ZIndex property of class TextBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.textblock#zindex
+func (t *TextBlock) SetZIndex(zIndex float64) *TextBlock {
+	p := ba.ctx.Get("TextBlock").New(zIndex)
+	return TextBlockFromJSObject(p, ba.ctx)
+}
+
+*/

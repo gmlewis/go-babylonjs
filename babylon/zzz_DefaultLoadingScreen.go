@@ -31,9 +31,8 @@ func DefaultLoadingScreenFromJSObject(p js.Value, ctx js.Value) *DefaultLoadingS
 
 // NewDefaultLoadingScreenOpts contains optional parameters for NewDefaultLoadingScreen.
 type NewDefaultLoadingScreenOpts struct {
-	_loadingText *JSString
-
-	_loadingDivBackgroundColor *JSString
+	_loadingText               *string
+	_loadingDivBackgroundColor *string
 }
 
 // NewDefaultLoadingScreen returns a new DefaultLoadingScreen object.
@@ -44,8 +43,109 @@ func (ba *Babylon) NewDefaultLoadingScreen(_renderingCanvas js.Value, opts *NewD
 		opts = &NewDefaultLoadingScreenOpts{}
 	}
 
-	p := ba.ctx.Get("DefaultLoadingScreen").New(_renderingCanvas, opts._loadingText.JSObject(), opts._loadingDivBackgroundColor.JSObject())
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, _renderingCanvas)
+
+	if opts._loadingText == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts._loadingText)
+	}
+	if opts._loadingDivBackgroundColor == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts._loadingDivBackgroundColor)
+	}
+
+	p := ba.ctx.Get("DefaultLoadingScreen").New(args...)
 	return DefaultLoadingScreenFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// DisplayLoadingUI calls the DisplayLoadingUI method on the DefaultLoadingScreen object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultloadingscreen#displayloadingui
+func (d *DefaultLoadingScreen) DisplayLoadingUI() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	d.p.Call("displayLoadingUI", args...)
+}
+
+// HideLoadingUI calls the HideLoadingUI method on the DefaultLoadingScreen object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultloadingscreen#hideloadingui
+func (d *DefaultLoadingScreen) HideLoadingUI() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	d.p.Call("hideLoadingUI", args...)
+}
+
+/*
+
+// DefaultLogoUrl returns the DefaultLogoUrl property of class DefaultLoadingScreen.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultloadingscreen#defaultlogourl
+func (d *DefaultLoadingScreen) DefaultLogoUrl(DefaultLogoUrl string) *DefaultLoadingScreen {
+	p := ba.ctx.Get("DefaultLoadingScreen").New(DefaultLogoUrl)
+	return DefaultLoadingScreenFromJSObject(p, ba.ctx)
+}
+
+// SetDefaultLogoUrl sets the DefaultLogoUrl property of class DefaultLoadingScreen.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultloadingscreen#defaultlogourl
+func (d *DefaultLoadingScreen) SetDefaultLogoUrl(DefaultLogoUrl string) *DefaultLoadingScreen {
+	p := ba.ctx.Get("DefaultLoadingScreen").New(DefaultLogoUrl)
+	return DefaultLoadingScreenFromJSObject(p, ba.ctx)
+}
+
+// DefaultSpinnerUrl returns the DefaultSpinnerUrl property of class DefaultLoadingScreen.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultloadingscreen#defaultspinnerurl
+func (d *DefaultLoadingScreen) DefaultSpinnerUrl(DefaultSpinnerUrl string) *DefaultLoadingScreen {
+	p := ba.ctx.Get("DefaultLoadingScreen").New(DefaultSpinnerUrl)
+	return DefaultLoadingScreenFromJSObject(p, ba.ctx)
+}
+
+// SetDefaultSpinnerUrl sets the DefaultSpinnerUrl property of class DefaultLoadingScreen.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultloadingscreen#defaultspinnerurl
+func (d *DefaultLoadingScreen) SetDefaultSpinnerUrl(DefaultSpinnerUrl string) *DefaultLoadingScreen {
+	p := ba.ctx.Get("DefaultLoadingScreen").New(DefaultSpinnerUrl)
+	return DefaultLoadingScreenFromJSObject(p, ba.ctx)
+}
+
+// LoadingUIBackgroundColor returns the LoadingUIBackgroundColor property of class DefaultLoadingScreen.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultloadingscreen#loadinguibackgroundcolor
+func (d *DefaultLoadingScreen) LoadingUIBackgroundColor(loadingUIBackgroundColor string) *DefaultLoadingScreen {
+	p := ba.ctx.Get("DefaultLoadingScreen").New(loadingUIBackgroundColor)
+	return DefaultLoadingScreenFromJSObject(p, ba.ctx)
+}
+
+// SetLoadingUIBackgroundColor sets the LoadingUIBackgroundColor property of class DefaultLoadingScreen.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultloadingscreen#loadinguibackgroundcolor
+func (d *DefaultLoadingScreen) SetLoadingUIBackgroundColor(loadingUIBackgroundColor string) *DefaultLoadingScreen {
+	p := ba.ctx.Get("DefaultLoadingScreen").New(loadingUIBackgroundColor)
+	return DefaultLoadingScreenFromJSObject(p, ba.ctx)
+}
+
+// LoadingUIText returns the LoadingUIText property of class DefaultLoadingScreen.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultloadingscreen#loadinguitext
+func (d *DefaultLoadingScreen) LoadingUIText(loadingUIText string) *DefaultLoadingScreen {
+	p := ba.ctx.Get("DefaultLoadingScreen").New(loadingUIText)
+	return DefaultLoadingScreenFromJSObject(p, ba.ctx)
+}
+
+// SetLoadingUIText sets the LoadingUIText property of class DefaultLoadingScreen.
+//
+// https://doc.babylonjs.com/api/classes/babylon.defaultloadingscreen#loadinguitext
+func (d *DefaultLoadingScreen) SetLoadingUIText(loadingUIText string) *DefaultLoadingScreen {
+	p := ba.ctx.Get("DefaultLoadingScreen").New(loadingUIText)
+	return DefaultLoadingScreenFromJSObject(p, ba.ctx)
+}
+
+*/

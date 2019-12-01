@@ -31,8 +31,653 @@ func CrossBlockFromJSObject(p js.Value, ctx js.Value) *CrossBlock {
 //
 // https://doc.babylonjs.com/api/classes/babylon.crossblock
 func (ba *Babylon) NewCrossBlock(name string) *CrossBlock {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	p := ba.ctx.Get("CrossBlock").New(args...)
+	return CrossBlockFromJSObject(p, ba.ctx)
+}
+
+// AutoConfigure calls the AutoConfigure method on the CrossBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#autoconfigure
+func (c *CrossBlock) AutoConfigure(material *NodeMaterial) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, material.JSObject())
+
+	c.p.Call("autoConfigure", args...)
+}
+
+// CrossBlockBindOpts contains optional parameters for CrossBlock.Bind.
+type CrossBlockBindOpts struct {
+	Mesh *Mesh
+}
+
+// Bind calls the Bind method on the CrossBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#bind
+func (c *CrossBlock) Bind(effect *Effect, nodeMaterial *NodeMaterial, opts *CrossBlockBindOpts) {
+	if opts == nil {
+		opts = &CrossBlockBindOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, effect.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	c.p.Call("bind", args...)
+}
+
+// Build calls the Build method on the CrossBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#build
+func (c *CrossBlock) Build(state *NodeMaterialBuildState, activeBlocks *NodeMaterialBlock) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, state.JSObject())
+	args = append(args, activeBlocks.JSObject())
+
+	retVal := c.p.Call("build", args...)
+	return retVal.Bool()
+}
+
+// CrossBlockCloneOpts contains optional parameters for CrossBlock.Clone.
+type CrossBlockCloneOpts struct {
+	RootUrl *string
+}
+
+// Clone calls the Clone method on the CrossBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#clone
+func (c *CrossBlock) Clone(scene *Scene, opts *CrossBlockCloneOpts) *NodeMaterialBlock {
+	if opts == nil {
+		opts = &CrossBlockCloneOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, scene.JSObject())
+
+	if opts.RootUrl == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RootUrl)
+	}
+
+	retVal := c.p.Call("clone", args...)
+	return NodeMaterialBlockFromJSObject(retVal, c.ctx)
+}
+
+// CrossBlockConnectToOpts contains optional parameters for CrossBlock.ConnectTo.
+type CrossBlockConnectToOpts struct {
+	Options js.Value
+}
+
+// ConnectTo calls the ConnectTo method on the CrossBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#connectto
+func (c *CrossBlock) ConnectTo(other *NodeMaterialBlock, opts *CrossBlockConnectToOpts) *CrossBlock {
+	if opts == nil {
+		opts = &CrossBlockConnectToOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, other.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	retVal := c.p.Call("connectTo", args...)
+	return CrossBlockFromJSObject(retVal, c.ctx)
+}
+
+// Dispose calls the Dispose method on the CrossBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#dispose
+func (c *CrossBlock) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	c.p.Call("dispose", args...)
+}
+
+// GetClassName calls the GetClassName method on the CrossBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#getclassname
+func (c *CrossBlock) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// CrossBlockGetFirstAvailableInputOpts contains optional parameters for CrossBlock.GetFirstAvailableInput.
+type CrossBlockGetFirstAvailableInputOpts struct {
+	ForOutput *NodeMaterialConnectionPoint
+}
+
+// GetFirstAvailableInput calls the GetFirstAvailableInput method on the CrossBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#getfirstavailableinput
+func (c *CrossBlock) GetFirstAvailableInput(opts *CrossBlockGetFirstAvailableInputOpts) *NodeMaterialConnectionPoint {
+	if opts == nil {
+		opts = &CrossBlockGetFirstAvailableInputOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForOutput == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForOutput.JSObject())
+	}
+
+	retVal := c.p.Call("getFirstAvailableInput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, c.ctx)
+}
+
+// CrossBlockGetFirstAvailableOutputOpts contains optional parameters for CrossBlock.GetFirstAvailableOutput.
+type CrossBlockGetFirstAvailableOutputOpts struct {
+	ForBlock *NodeMaterialBlock
+}
+
+// GetFirstAvailableOutput calls the GetFirstAvailableOutput method on the CrossBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#getfirstavailableoutput
+func (c *CrossBlock) GetFirstAvailableOutput(opts *CrossBlockGetFirstAvailableOutputOpts) *NodeMaterialConnectionPoint {
+	if opts == nil {
+		opts = &CrossBlockGetFirstAvailableOutputOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForBlock == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForBlock.JSObject())
+	}
+
+	retVal := c.p.Call("getFirstAvailableOutput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, c.ctx)
+}
+
+// GetInputByName calls the GetInputByName method on the CrossBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#getinputbyname
+func (c *CrossBlock) GetInputByName(name string) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := c.p.Call("getInputByName", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, c.ctx)
+}
+
+// GetOutputByName calls the GetOutputByName method on the CrossBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#getoutputbyname
+func (c *CrossBlock) GetOutputByName(name string) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := c.p.Call("getOutputByName", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, c.ctx)
+}
+
+// GetSiblingOutput calls the GetSiblingOutput method on the CrossBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#getsiblingoutput
+func (c *CrossBlock) GetSiblingOutput(current *NodeMaterialConnectionPoint) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, current.JSObject())
+
+	retVal := c.p.Call("getSiblingOutput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, c.ctx)
+}
+
+// Initialize calls the Initialize method on the CrossBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#initialize
+func (c *CrossBlock) Initialize(state *NodeMaterialBuildState) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, state.JSObject())
+
+	c.p.Call("initialize", args...)
+}
+
+// CrossBlockInitializeDefinesOpts contains optional parameters for CrossBlock.InitializeDefines.
+type CrossBlockInitializeDefinesOpts struct {
+	UseInstances *bool
+}
+
+// InitializeDefines calls the InitializeDefines method on the CrossBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#initializedefines
+func (c *CrossBlock) InitializeDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *CrossBlockInitializeDefinesOpts) {
+	if opts == nil {
+		opts = &CrossBlockInitializeDefinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	c.p.Call("initializeDefines", args...)
+}
+
+// CrossBlockIsReadyOpts contains optional parameters for CrossBlock.IsReady.
+type CrossBlockIsReadyOpts struct {
+	UseInstances *bool
+}
+
+// IsReady calls the IsReady method on the CrossBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#isready
+func (c *CrossBlock) IsReady(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *CrossBlockIsReadyOpts) bool {
+	if opts == nil {
+		opts = &CrossBlockIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := c.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// CrossBlockPrepareDefinesOpts contains optional parameters for CrossBlock.PrepareDefines.
+type CrossBlockPrepareDefinesOpts struct {
+	UseInstances *bool
+}
+
+// PrepareDefines calls the PrepareDefines method on the CrossBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#preparedefines
+func (c *CrossBlock) PrepareDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *CrossBlockPrepareDefinesOpts) {
+	if opts == nil {
+		opts = &CrossBlockPrepareDefinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	c.p.Call("prepareDefines", args...)
+}
+
+// ProvideFallbacks calls the ProvideFallbacks method on the CrossBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#providefallbacks
+func (c *CrossBlock) ProvideFallbacks(mesh *AbstractMesh, fallbacks *EffectFallbacks) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, fallbacks.JSObject())
+
+	c.p.Call("provideFallbacks", args...)
+}
+
+// CrossBlockRegisterInputOpts contains optional parameters for CrossBlock.RegisterInput.
+type CrossBlockRegisterInputOpts struct {
+	IsOptional *bool
+	Target     js.Value
+}
+
+// RegisterInput calls the RegisterInput method on the CrossBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#registerinput
+func (c *CrossBlock) RegisterInput(name string, jsType js.Value, opts *CrossBlockRegisterInputOpts) *CrossBlock {
+	if opts == nil {
+		opts = &CrossBlockRegisterInputOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+2)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	if opts.IsOptional == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IsOptional)
+	}
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+
+	retVal := c.p.Call("registerInput", args...)
+	return CrossBlockFromJSObject(retVal, c.ctx)
+}
+
+// CrossBlockRegisterOutputOpts contains optional parameters for CrossBlock.RegisterOutput.
+type CrossBlockRegisterOutputOpts struct {
+	Target js.Value
+}
+
+// RegisterOutput calls the RegisterOutput method on the CrossBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#registeroutput
+func (c *CrossBlock) RegisterOutput(name string, jsType js.Value, opts *CrossBlockRegisterOutputOpts) *CrossBlock {
+	if opts == nil {
+		opts = &CrossBlockRegisterOutputOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+
+	retVal := c.p.Call("registerOutput", args...)
+	return CrossBlockFromJSObject(retVal, c.ctx)
+}
+
+// ReplaceRepeatableContent calls the ReplaceRepeatableContent method on the CrossBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#replacerepeatablecontent
+func (c *CrossBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterialBuildState, fragmentShaderState *NodeMaterialBuildState, mesh *AbstractMesh, defines js.Value) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, vertexShaderState.JSObject())
+	args = append(args, fragmentShaderState.JSObject())
+	args = append(args, mesh.JSObject())
+	args = append(args, defines)
+
+	c.p.Call("replaceRepeatableContent", args...)
+}
+
+// Serialize calls the Serialize method on the CrossBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#serialize
+func (c *CrossBlock) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("serialize", args...)
+	return retVal
+}
+
+// UpdateUniformsAndSamples calls the UpdateUniformsAndSamples method on the CrossBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#updateuniformsandsamples
+func (c *CrossBlock) UpdateUniformsAndSamples(state *NodeMaterialBuildState, nodeMaterial *NodeMaterial, defines js.Value, uniformBuffers string) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, state.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+	args = append(args, uniformBuffers)
+
+	c.p.Call("updateUniformsAndSamples", args...)
+}
+
+/*
+
+// BuildId returns the BuildId property of class CrossBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#buildid
+func (c *CrossBlock) BuildId(buildId float64) *CrossBlock {
+	p := ba.ctx.Get("CrossBlock").New(buildId)
+	return CrossBlockFromJSObject(p, ba.ctx)
+}
+
+// SetBuildId sets the BuildId property of class CrossBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#buildid
+func (c *CrossBlock) SetBuildId(buildId float64) *CrossBlock {
+	p := ba.ctx.Get("CrossBlock").New(buildId)
+	return CrossBlockFromJSObject(p, ba.ctx)
+}
+
+// Comments returns the Comments property of class CrossBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#comments
+func (c *CrossBlock) Comments(comments string) *CrossBlock {
+	p := ba.ctx.Get("CrossBlock").New(comments)
+	return CrossBlockFromJSObject(p, ba.ctx)
+}
+
+// SetComments sets the Comments property of class CrossBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#comments
+func (c *CrossBlock) SetComments(comments string) *CrossBlock {
+	p := ba.ctx.Get("CrossBlock").New(comments)
+	return CrossBlockFromJSObject(p, ba.ctx)
+}
+
+// Inputs returns the Inputs property of class CrossBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#inputs
+func (c *CrossBlock) Inputs(inputs *NodeMaterialConnectionPoint) *CrossBlock {
+	p := ba.ctx.Get("CrossBlock").New(inputs.JSObject())
+	return CrossBlockFromJSObject(p, ba.ctx)
+}
+
+// SetInputs sets the Inputs property of class CrossBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#inputs
+func (c *CrossBlock) SetInputs(inputs *NodeMaterialConnectionPoint) *CrossBlock {
+	p := ba.ctx.Get("CrossBlock").New(inputs.JSObject())
+	return CrossBlockFromJSObject(p, ba.ctx)
+}
+
+// IsFinalMerger returns the IsFinalMerger property of class CrossBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#isfinalmerger
+func (c *CrossBlock) IsFinalMerger(isFinalMerger bool) *CrossBlock {
+	p := ba.ctx.Get("CrossBlock").New(isFinalMerger)
+	return CrossBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsFinalMerger sets the IsFinalMerger property of class CrossBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#isfinalmerger
+func (c *CrossBlock) SetIsFinalMerger(isFinalMerger bool) *CrossBlock {
+	p := ba.ctx.Get("CrossBlock").New(isFinalMerger)
+	return CrossBlockFromJSObject(p, ba.ctx)
+}
+
+// IsInput returns the IsInput property of class CrossBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#isinput
+func (c *CrossBlock) IsInput(isInput bool) *CrossBlock {
+	p := ba.ctx.Get("CrossBlock").New(isInput)
+	return CrossBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsInput sets the IsInput property of class CrossBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#isinput
+func (c *CrossBlock) SetIsInput(isInput bool) *CrossBlock {
+	p := ba.ctx.Get("CrossBlock").New(isInput)
+	return CrossBlockFromJSObject(p, ba.ctx)
+}
+
+// IsUnique returns the IsUnique property of class CrossBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#isunique
+func (c *CrossBlock) IsUnique(isUnique bool) *CrossBlock {
+	p := ba.ctx.Get("CrossBlock").New(isUnique)
+	return CrossBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsUnique sets the IsUnique property of class CrossBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#isunique
+func (c *CrossBlock) SetIsUnique(isUnique bool) *CrossBlock {
+	p := ba.ctx.Get("CrossBlock").New(isUnique)
+	return CrossBlockFromJSObject(p, ba.ctx)
+}
+
+// Left returns the Left property of class CrossBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#left
+func (c *CrossBlock) Left(left *NodeMaterialConnectionPoint) *CrossBlock {
+	p := ba.ctx.Get("CrossBlock").New(left.JSObject())
+	return CrossBlockFromJSObject(p, ba.ctx)
+}
+
+// SetLeft sets the Left property of class CrossBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#left
+func (c *CrossBlock) SetLeft(left *NodeMaterialConnectionPoint) *CrossBlock {
+	p := ba.ctx.Get("CrossBlock").New(left.JSObject())
+	return CrossBlockFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class CrossBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#name
+func (c *CrossBlock) Name(name string) *CrossBlock {
 	p := ba.ctx.Get("CrossBlock").New(name)
 	return CrossBlockFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetName sets the Name property of class CrossBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#name
+func (c *CrossBlock) SetName(name string) *CrossBlock {
+	p := ba.ctx.Get("CrossBlock").New(name)
+	return CrossBlockFromJSObject(p, ba.ctx)
+}
+
+// Output returns the Output property of class CrossBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#output
+func (c *CrossBlock) Output(output *NodeMaterialConnectionPoint) *CrossBlock {
+	p := ba.ctx.Get("CrossBlock").New(output.JSObject())
+	return CrossBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOutput sets the Output property of class CrossBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#output
+func (c *CrossBlock) SetOutput(output *NodeMaterialConnectionPoint) *CrossBlock {
+	p := ba.ctx.Get("CrossBlock").New(output.JSObject())
+	return CrossBlockFromJSObject(p, ba.ctx)
+}
+
+// Outputs returns the Outputs property of class CrossBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#outputs
+func (c *CrossBlock) Outputs(outputs *NodeMaterialConnectionPoint) *CrossBlock {
+	p := ba.ctx.Get("CrossBlock").New(outputs.JSObject())
+	return CrossBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOutputs sets the Outputs property of class CrossBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#outputs
+func (c *CrossBlock) SetOutputs(outputs *NodeMaterialConnectionPoint) *CrossBlock {
+	p := ba.ctx.Get("CrossBlock").New(outputs.JSObject())
+	return CrossBlockFromJSObject(p, ba.ctx)
+}
+
+// Right returns the Right property of class CrossBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#right
+func (c *CrossBlock) Right(right *NodeMaterialConnectionPoint) *CrossBlock {
+	p := ba.ctx.Get("CrossBlock").New(right.JSObject())
+	return CrossBlockFromJSObject(p, ba.ctx)
+}
+
+// SetRight sets the Right property of class CrossBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#right
+func (c *CrossBlock) SetRight(right *NodeMaterialConnectionPoint) *CrossBlock {
+	p := ba.ctx.Get("CrossBlock").New(right.JSObject())
+	return CrossBlockFromJSObject(p, ba.ctx)
+}
+
+// Target returns the Target property of class CrossBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#target
+func (c *CrossBlock) Target(target js.Value) *CrossBlock {
+	p := ba.ctx.Get("CrossBlock").New(target)
+	return CrossBlockFromJSObject(p, ba.ctx)
+}
+
+// SetTarget sets the Target property of class CrossBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#target
+func (c *CrossBlock) SetTarget(target js.Value) *CrossBlock {
+	p := ba.ctx.Get("CrossBlock").New(target)
+	return CrossBlockFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class CrossBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#uniqueid
+func (c *CrossBlock) UniqueId(uniqueId float64) *CrossBlock {
+	p := ba.ctx.Get("CrossBlock").New(uniqueId)
+	return CrossBlockFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class CrossBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.crossblock#uniqueid
+func (c *CrossBlock) SetUniqueId(uniqueId float64) *CrossBlock {
+	p := ba.ctx.Get("CrossBlock").New(uniqueId)
+	return CrossBlockFromJSObject(p, ba.ctx)
+}
+
+*/

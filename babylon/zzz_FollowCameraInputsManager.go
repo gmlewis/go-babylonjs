@@ -35,8 +35,283 @@ func FollowCameraInputsManagerFromJSObject(p js.Value, ctx js.Value) *FollowCame
 //
 // https://doc.babylonjs.com/api/classes/babylon.followcamerainputsmanager
 func (ba *Babylon) NewFollowCameraInputsManager(camera *FollowCamera) *FollowCameraInputsManager {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, camera.JSObject())
+
+	p := ba.ctx.Get("FollowCameraInputsManager").New(args...)
+	return FollowCameraInputsManagerFromJSObject(p, ba.ctx)
+}
+
+// Add calls the Add method on the FollowCameraInputsManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.followcamerainputsmanager#add
+func (f *FollowCameraInputsManager) Add(input js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, input)
+
+	f.p.Call("add", args...)
+}
+
+// AddKeyboard calls the AddKeyboard method on the FollowCameraInputsManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.followcamerainputsmanager#addkeyboard
+func (f *FollowCameraInputsManager) AddKeyboard() *FollowCameraInputsManager {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("addKeyboard", args...)
+	return FollowCameraInputsManagerFromJSObject(retVal, f.ctx)
+}
+
+// AddMouseWheel calls the AddMouseWheel method on the FollowCameraInputsManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.followcamerainputsmanager#addmousewheel
+func (f *FollowCameraInputsManager) AddMouseWheel() *FollowCameraInputsManager {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("addMouseWheel", args...)
+	return FollowCameraInputsManagerFromJSObject(retVal, f.ctx)
+}
+
+// AddPointers calls the AddPointers method on the FollowCameraInputsManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.followcamerainputsmanager#addpointers
+func (f *FollowCameraInputsManager) AddPointers() *FollowCameraInputsManager {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("addPointers", args...)
+	return FollowCameraInputsManagerFromJSObject(retVal, f.ctx)
+}
+
+// AddVRDeviceOrientation calls the AddVRDeviceOrientation method on the FollowCameraInputsManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.followcamerainputsmanager#addvrdeviceorientation
+func (f *FollowCameraInputsManager) AddVRDeviceOrientation() *FollowCameraInputsManager {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("addVRDeviceOrientation", args...)
+	return FollowCameraInputsManagerFromJSObject(retVal, f.ctx)
+}
+
+// FollowCameraInputsManagerAttachElementOpts contains optional parameters for FollowCameraInputsManager.AttachElement.
+type FollowCameraInputsManagerAttachElementOpts struct {
+	NoPreventDefault *bool
+}
+
+// AttachElement calls the AttachElement method on the FollowCameraInputsManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.followcamerainputsmanager#attachelement
+func (f *FollowCameraInputsManager) AttachElement(element js.Value, opts *FollowCameraInputsManagerAttachElementOpts) {
+	if opts == nil {
+		opts = &FollowCameraInputsManagerAttachElementOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, element)
+
+	if opts.NoPreventDefault == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoPreventDefault)
+	}
+
+	f.p.Call("attachElement", args...)
+}
+
+// AttachInput calls the AttachInput method on the FollowCameraInputsManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.followcamerainputsmanager#attachinput
+func (f *FollowCameraInputsManager) AttachInput(input js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, input)
+
+	f.p.Call("attachInput", args...)
+}
+
+// Clear calls the Clear method on the FollowCameraInputsManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.followcamerainputsmanager#clear
+func (f *FollowCameraInputsManager) Clear() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	f.p.Call("clear", args...)
+}
+
+// FollowCameraInputsManagerDetachElementOpts contains optional parameters for FollowCameraInputsManager.DetachElement.
+type FollowCameraInputsManagerDetachElementOpts struct {
+	Disconnect *bool
+}
+
+// DetachElement calls the DetachElement method on the FollowCameraInputsManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.followcamerainputsmanager#detachelement
+func (f *FollowCameraInputsManager) DetachElement(element js.Value, opts *FollowCameraInputsManagerDetachElementOpts) {
+	if opts == nil {
+		opts = &FollowCameraInputsManagerDetachElementOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, element)
+
+	if opts.Disconnect == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Disconnect)
+	}
+
+	f.p.Call("detachElement", args...)
+}
+
+// Parse calls the Parse method on the FollowCameraInputsManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.followcamerainputsmanager#parse
+func (f *FollowCameraInputsManager) Parse(parsedCamera interface{}) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, parsedCamera)
+
+	f.p.Call("parse", args...)
+}
+
+// RebuildInputCheck calls the RebuildInputCheck method on the FollowCameraInputsManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.followcamerainputsmanager#rebuildinputcheck
+func (f *FollowCameraInputsManager) RebuildInputCheck() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	f.p.Call("rebuildInputCheck", args...)
+}
+
+// Remove calls the Remove method on the FollowCameraInputsManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.followcamerainputsmanager#remove
+func (f *FollowCameraInputsManager) Remove(inputToRemove js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, inputToRemove)
+
+	f.p.Call("remove", args...)
+}
+
+// RemoveByType calls the RemoveByType method on the FollowCameraInputsManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.followcamerainputsmanager#removebytype
+func (f *FollowCameraInputsManager) RemoveByType(inputType string) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, inputType)
+
+	f.p.Call("removeByType", args...)
+}
+
+// Serialize calls the Serialize method on the FollowCameraInputsManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.followcamerainputsmanager#serialize
+func (f *FollowCameraInputsManager) Serialize(serializedCamera interface{}) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, serializedCamera)
+
+	f.p.Call("serialize", args...)
+}
+
+/*
+
+// Attached returns the Attached property of class FollowCameraInputsManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.followcamerainputsmanager#attached
+func (f *FollowCameraInputsManager) Attached(attached *CameraInputsMap) *FollowCameraInputsManager {
+	p := ba.ctx.Get("FollowCameraInputsManager").New(attached.JSObject())
+	return FollowCameraInputsManagerFromJSObject(p, ba.ctx)
+}
+
+// SetAttached sets the Attached property of class FollowCameraInputsManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.followcamerainputsmanager#attached
+func (f *FollowCameraInputsManager) SetAttached(attached *CameraInputsMap) *FollowCameraInputsManager {
+	p := ba.ctx.Get("FollowCameraInputsManager").New(attached.JSObject())
+	return FollowCameraInputsManagerFromJSObject(p, ba.ctx)
+}
+
+// AttachedElement returns the AttachedElement property of class FollowCameraInputsManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.followcamerainputsmanager#attachedelement
+func (f *FollowCameraInputsManager) AttachedElement(attachedElement js.Value) *FollowCameraInputsManager {
+	p := ba.ctx.Get("FollowCameraInputsManager").New(attachedElement)
+	return FollowCameraInputsManagerFromJSObject(p, ba.ctx)
+}
+
+// SetAttachedElement sets the AttachedElement property of class FollowCameraInputsManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.followcamerainputsmanager#attachedelement
+func (f *FollowCameraInputsManager) SetAttachedElement(attachedElement js.Value) *FollowCameraInputsManager {
+	p := ba.ctx.Get("FollowCameraInputsManager").New(attachedElement)
+	return FollowCameraInputsManagerFromJSObject(p, ba.ctx)
+}
+
+// Camera returns the Camera property of class FollowCameraInputsManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.followcamerainputsmanager#camera
+func (f *FollowCameraInputsManager) Camera(camera *FollowCamera) *FollowCameraInputsManager {
 	p := ba.ctx.Get("FollowCameraInputsManager").New(camera.JSObject())
 	return FollowCameraInputsManagerFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetCamera sets the Camera property of class FollowCameraInputsManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.followcamerainputsmanager#camera
+func (f *FollowCameraInputsManager) SetCamera(camera *FollowCamera) *FollowCameraInputsManager {
+	p := ba.ctx.Get("FollowCameraInputsManager").New(camera.JSObject())
+	return FollowCameraInputsManagerFromJSObject(p, ba.ctx)
+}
+
+// CheckInputs returns the CheckInputs property of class FollowCameraInputsManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.followcamerainputsmanager#checkinputs
+func (f *FollowCameraInputsManager) CheckInputs(checkInputs func()) *FollowCameraInputsManager {
+	p := ba.ctx.Get("FollowCameraInputsManager").New(checkInputs)
+	return FollowCameraInputsManagerFromJSObject(p, ba.ctx)
+}
+
+// SetCheckInputs sets the CheckInputs property of class FollowCameraInputsManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.followcamerainputsmanager#checkinputs
+func (f *FollowCameraInputsManager) SetCheckInputs(checkInputs func()) *FollowCameraInputsManager {
+	p := ba.ctx.Get("FollowCameraInputsManager").New(checkInputs)
+	return FollowCameraInputsManagerFromJSObject(p, ba.ctx)
+}
+
+// NoPreventDefault returns the NoPreventDefault property of class FollowCameraInputsManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.followcamerainputsmanager#nopreventdefault
+func (f *FollowCameraInputsManager) NoPreventDefault(noPreventDefault bool) *FollowCameraInputsManager {
+	p := ba.ctx.Get("FollowCameraInputsManager").New(noPreventDefault)
+	return FollowCameraInputsManagerFromJSObject(p, ba.ctx)
+}
+
+// SetNoPreventDefault sets the NoPreventDefault property of class FollowCameraInputsManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.followcamerainputsmanager#nopreventdefault
+func (f *FollowCameraInputsManager) SetNoPreventDefault(noPreventDefault bool) *FollowCameraInputsManager {
+	p := ba.ctx.Get("FollowCameraInputsManager").New(noPreventDefault)
+	return FollowCameraInputsManagerFromJSObject(p, ba.ctx)
+}
+
+*/

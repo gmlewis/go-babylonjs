@@ -31,8 +31,126 @@ func SubEmitterFromJSObject(p js.Value, ctx js.Value) *SubEmitter {
 //
 // https://doc.babylonjs.com/api/classes/babylon.subemitter
 func (ba *Babylon) NewSubEmitter(particleSystem *ParticleSystem) *SubEmitter {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, particleSystem.JSObject())
+
+	p := ba.ctx.Get("SubEmitter").New(args...)
+	return SubEmitterFromJSObject(p, ba.ctx)
+}
+
+// Clone calls the Clone method on the SubEmitter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.subemitter#clone
+func (s *SubEmitter) Clone() *SubEmitter {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("clone", args...)
+	return SubEmitterFromJSObject(retVal, s.ctx)
+}
+
+// Dispose calls the Dispose method on the SubEmitter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.subemitter#dispose
+func (s *SubEmitter) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("dispose", args...)
+}
+
+// Parse calls the Parse method on the SubEmitter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.subemitter#parse
+func (s *SubEmitter) Parse(serializationObject interface{}, scene *Scene, rootUrl string) *SubEmitter {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, serializationObject)
+	args = append(args, scene.JSObject())
+	args = append(args, rootUrl)
+
+	retVal := s.p.Call("Parse", args...)
+	return SubEmitterFromJSObject(retVal, s.ctx)
+}
+
+// Serialize calls the Serialize method on the SubEmitter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.subemitter#serialize
+func (s *SubEmitter) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("serialize", args...)
+	return retVal
+}
+
+/*
+
+// InheritDirection returns the InheritDirection property of class SubEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.subemitter#inheritdirection
+func (s *SubEmitter) InheritDirection(inheritDirection bool) *SubEmitter {
+	p := ba.ctx.Get("SubEmitter").New(inheritDirection)
+	return SubEmitterFromJSObject(p, ba.ctx)
+}
+
+// SetInheritDirection sets the InheritDirection property of class SubEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.subemitter#inheritdirection
+func (s *SubEmitter) SetInheritDirection(inheritDirection bool) *SubEmitter {
+	p := ba.ctx.Get("SubEmitter").New(inheritDirection)
+	return SubEmitterFromJSObject(p, ba.ctx)
+}
+
+// InheritedVelocityAmount returns the InheritedVelocityAmount property of class SubEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.subemitter#inheritedvelocityamount
+func (s *SubEmitter) InheritedVelocityAmount(inheritedVelocityAmount float64) *SubEmitter {
+	p := ba.ctx.Get("SubEmitter").New(inheritedVelocityAmount)
+	return SubEmitterFromJSObject(p, ba.ctx)
+}
+
+// SetInheritedVelocityAmount sets the InheritedVelocityAmount property of class SubEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.subemitter#inheritedvelocityamount
+func (s *SubEmitter) SetInheritedVelocityAmount(inheritedVelocityAmount float64) *SubEmitter {
+	p := ba.ctx.Get("SubEmitter").New(inheritedVelocityAmount)
+	return SubEmitterFromJSObject(p, ba.ctx)
+}
+
+// ParticleSystem returns the ParticleSystem property of class SubEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.subemitter#particlesystem
+func (s *SubEmitter) ParticleSystem(particleSystem *ParticleSystem) *SubEmitter {
 	p := ba.ctx.Get("SubEmitter").New(particleSystem.JSObject())
 	return SubEmitterFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetParticleSystem sets the ParticleSystem property of class SubEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.subemitter#particlesystem
+func (s *SubEmitter) SetParticleSystem(particleSystem *ParticleSystem) *SubEmitter {
+	p := ba.ctx.Get("SubEmitter").New(particleSystem.JSObject())
+	return SubEmitterFromJSObject(p, ba.ctx)
+}
+
+// Type returns the Type property of class SubEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.subemitter#type
+func (s *SubEmitter) Type(jsType *SubEmitterType) *SubEmitter {
+	p := ba.ctx.Get("SubEmitter").New(jsType.JSObject())
+	return SubEmitterFromJSObject(p, ba.ctx)
+}
+
+// SetType sets the Type property of class SubEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.subemitter#type
+func (s *SubEmitter) SetType(jsType *SubEmitterType) *SubEmitter {
+	p := ba.ctx.Get("SubEmitter").New(jsType.JSObject())
+	return SubEmitterFromJSObject(p, ba.ctx)
+}
+
+*/

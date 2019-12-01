@@ -31,8 +31,653 @@ func DotBlockFromJSObject(p js.Value, ctx js.Value) *DotBlock {
 //
 // https://doc.babylonjs.com/api/classes/babylon.dotblock
 func (ba *Babylon) NewDotBlock(name string) *DotBlock {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	p := ba.ctx.Get("DotBlock").New(args...)
+	return DotBlockFromJSObject(p, ba.ctx)
+}
+
+// AutoConfigure calls the AutoConfigure method on the DotBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#autoconfigure
+func (d *DotBlock) AutoConfigure(material *NodeMaterial) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, material.JSObject())
+
+	d.p.Call("autoConfigure", args...)
+}
+
+// DotBlockBindOpts contains optional parameters for DotBlock.Bind.
+type DotBlockBindOpts struct {
+	Mesh *Mesh
+}
+
+// Bind calls the Bind method on the DotBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#bind
+func (d *DotBlock) Bind(effect *Effect, nodeMaterial *NodeMaterial, opts *DotBlockBindOpts) {
+	if opts == nil {
+		opts = &DotBlockBindOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, effect.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	d.p.Call("bind", args...)
+}
+
+// Build calls the Build method on the DotBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#build
+func (d *DotBlock) Build(state *NodeMaterialBuildState, activeBlocks *NodeMaterialBlock) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, state.JSObject())
+	args = append(args, activeBlocks.JSObject())
+
+	retVal := d.p.Call("build", args...)
+	return retVal.Bool()
+}
+
+// DotBlockCloneOpts contains optional parameters for DotBlock.Clone.
+type DotBlockCloneOpts struct {
+	RootUrl *string
+}
+
+// Clone calls the Clone method on the DotBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#clone
+func (d *DotBlock) Clone(scene *Scene, opts *DotBlockCloneOpts) *NodeMaterialBlock {
+	if opts == nil {
+		opts = &DotBlockCloneOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, scene.JSObject())
+
+	if opts.RootUrl == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RootUrl)
+	}
+
+	retVal := d.p.Call("clone", args...)
+	return NodeMaterialBlockFromJSObject(retVal, d.ctx)
+}
+
+// DotBlockConnectToOpts contains optional parameters for DotBlock.ConnectTo.
+type DotBlockConnectToOpts struct {
+	Options js.Value
+}
+
+// ConnectTo calls the ConnectTo method on the DotBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#connectto
+func (d *DotBlock) ConnectTo(other *NodeMaterialBlock, opts *DotBlockConnectToOpts) *DotBlock {
+	if opts == nil {
+		opts = &DotBlockConnectToOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, other.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	retVal := d.p.Call("connectTo", args...)
+	return DotBlockFromJSObject(retVal, d.ctx)
+}
+
+// Dispose calls the Dispose method on the DotBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#dispose
+func (d *DotBlock) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	d.p.Call("dispose", args...)
+}
+
+// GetClassName calls the GetClassName method on the DotBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#getclassname
+func (d *DotBlock) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := d.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// DotBlockGetFirstAvailableInputOpts contains optional parameters for DotBlock.GetFirstAvailableInput.
+type DotBlockGetFirstAvailableInputOpts struct {
+	ForOutput *NodeMaterialConnectionPoint
+}
+
+// GetFirstAvailableInput calls the GetFirstAvailableInput method on the DotBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#getfirstavailableinput
+func (d *DotBlock) GetFirstAvailableInput(opts *DotBlockGetFirstAvailableInputOpts) *NodeMaterialConnectionPoint {
+	if opts == nil {
+		opts = &DotBlockGetFirstAvailableInputOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForOutput == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForOutput.JSObject())
+	}
+
+	retVal := d.p.Call("getFirstAvailableInput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, d.ctx)
+}
+
+// DotBlockGetFirstAvailableOutputOpts contains optional parameters for DotBlock.GetFirstAvailableOutput.
+type DotBlockGetFirstAvailableOutputOpts struct {
+	ForBlock *NodeMaterialBlock
+}
+
+// GetFirstAvailableOutput calls the GetFirstAvailableOutput method on the DotBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#getfirstavailableoutput
+func (d *DotBlock) GetFirstAvailableOutput(opts *DotBlockGetFirstAvailableOutputOpts) *NodeMaterialConnectionPoint {
+	if opts == nil {
+		opts = &DotBlockGetFirstAvailableOutputOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForBlock == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForBlock.JSObject())
+	}
+
+	retVal := d.p.Call("getFirstAvailableOutput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, d.ctx)
+}
+
+// GetInputByName calls the GetInputByName method on the DotBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#getinputbyname
+func (d *DotBlock) GetInputByName(name string) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := d.p.Call("getInputByName", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, d.ctx)
+}
+
+// GetOutputByName calls the GetOutputByName method on the DotBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#getoutputbyname
+func (d *DotBlock) GetOutputByName(name string) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := d.p.Call("getOutputByName", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, d.ctx)
+}
+
+// GetSiblingOutput calls the GetSiblingOutput method on the DotBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#getsiblingoutput
+func (d *DotBlock) GetSiblingOutput(current *NodeMaterialConnectionPoint) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, current.JSObject())
+
+	retVal := d.p.Call("getSiblingOutput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, d.ctx)
+}
+
+// Initialize calls the Initialize method on the DotBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#initialize
+func (d *DotBlock) Initialize(state *NodeMaterialBuildState) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, state.JSObject())
+
+	d.p.Call("initialize", args...)
+}
+
+// DotBlockInitializeDefinesOpts contains optional parameters for DotBlock.InitializeDefines.
+type DotBlockInitializeDefinesOpts struct {
+	UseInstances *bool
+}
+
+// InitializeDefines calls the InitializeDefines method on the DotBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#initializedefines
+func (d *DotBlock) InitializeDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *DotBlockInitializeDefinesOpts) {
+	if opts == nil {
+		opts = &DotBlockInitializeDefinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	d.p.Call("initializeDefines", args...)
+}
+
+// DotBlockIsReadyOpts contains optional parameters for DotBlock.IsReady.
+type DotBlockIsReadyOpts struct {
+	UseInstances *bool
+}
+
+// IsReady calls the IsReady method on the DotBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#isready
+func (d *DotBlock) IsReady(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *DotBlockIsReadyOpts) bool {
+	if opts == nil {
+		opts = &DotBlockIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := d.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// DotBlockPrepareDefinesOpts contains optional parameters for DotBlock.PrepareDefines.
+type DotBlockPrepareDefinesOpts struct {
+	UseInstances *bool
+}
+
+// PrepareDefines calls the PrepareDefines method on the DotBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#preparedefines
+func (d *DotBlock) PrepareDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *DotBlockPrepareDefinesOpts) {
+	if opts == nil {
+		opts = &DotBlockPrepareDefinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	d.p.Call("prepareDefines", args...)
+}
+
+// ProvideFallbacks calls the ProvideFallbacks method on the DotBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#providefallbacks
+func (d *DotBlock) ProvideFallbacks(mesh *AbstractMesh, fallbacks *EffectFallbacks) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, fallbacks.JSObject())
+
+	d.p.Call("provideFallbacks", args...)
+}
+
+// DotBlockRegisterInputOpts contains optional parameters for DotBlock.RegisterInput.
+type DotBlockRegisterInputOpts struct {
+	IsOptional *bool
+	Target     js.Value
+}
+
+// RegisterInput calls the RegisterInput method on the DotBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#registerinput
+func (d *DotBlock) RegisterInput(name string, jsType js.Value, opts *DotBlockRegisterInputOpts) *DotBlock {
+	if opts == nil {
+		opts = &DotBlockRegisterInputOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+2)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	if opts.IsOptional == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IsOptional)
+	}
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+
+	retVal := d.p.Call("registerInput", args...)
+	return DotBlockFromJSObject(retVal, d.ctx)
+}
+
+// DotBlockRegisterOutputOpts contains optional parameters for DotBlock.RegisterOutput.
+type DotBlockRegisterOutputOpts struct {
+	Target js.Value
+}
+
+// RegisterOutput calls the RegisterOutput method on the DotBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#registeroutput
+func (d *DotBlock) RegisterOutput(name string, jsType js.Value, opts *DotBlockRegisterOutputOpts) *DotBlock {
+	if opts == nil {
+		opts = &DotBlockRegisterOutputOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+
+	retVal := d.p.Call("registerOutput", args...)
+	return DotBlockFromJSObject(retVal, d.ctx)
+}
+
+// ReplaceRepeatableContent calls the ReplaceRepeatableContent method on the DotBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#replacerepeatablecontent
+func (d *DotBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterialBuildState, fragmentShaderState *NodeMaterialBuildState, mesh *AbstractMesh, defines js.Value) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, vertexShaderState.JSObject())
+	args = append(args, fragmentShaderState.JSObject())
+	args = append(args, mesh.JSObject())
+	args = append(args, defines)
+
+	d.p.Call("replaceRepeatableContent", args...)
+}
+
+// Serialize calls the Serialize method on the DotBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#serialize
+func (d *DotBlock) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := d.p.Call("serialize", args...)
+	return retVal
+}
+
+// UpdateUniformsAndSamples calls the UpdateUniformsAndSamples method on the DotBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#updateuniformsandsamples
+func (d *DotBlock) UpdateUniformsAndSamples(state *NodeMaterialBuildState, nodeMaterial *NodeMaterial, defines js.Value, uniformBuffers string) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, state.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+	args = append(args, uniformBuffers)
+
+	d.p.Call("updateUniformsAndSamples", args...)
+}
+
+/*
+
+// BuildId returns the BuildId property of class DotBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#buildid
+func (d *DotBlock) BuildId(buildId float64) *DotBlock {
+	p := ba.ctx.Get("DotBlock").New(buildId)
+	return DotBlockFromJSObject(p, ba.ctx)
+}
+
+// SetBuildId sets the BuildId property of class DotBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#buildid
+func (d *DotBlock) SetBuildId(buildId float64) *DotBlock {
+	p := ba.ctx.Get("DotBlock").New(buildId)
+	return DotBlockFromJSObject(p, ba.ctx)
+}
+
+// Comments returns the Comments property of class DotBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#comments
+func (d *DotBlock) Comments(comments string) *DotBlock {
+	p := ba.ctx.Get("DotBlock").New(comments)
+	return DotBlockFromJSObject(p, ba.ctx)
+}
+
+// SetComments sets the Comments property of class DotBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#comments
+func (d *DotBlock) SetComments(comments string) *DotBlock {
+	p := ba.ctx.Get("DotBlock").New(comments)
+	return DotBlockFromJSObject(p, ba.ctx)
+}
+
+// Inputs returns the Inputs property of class DotBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#inputs
+func (d *DotBlock) Inputs(inputs *NodeMaterialConnectionPoint) *DotBlock {
+	p := ba.ctx.Get("DotBlock").New(inputs.JSObject())
+	return DotBlockFromJSObject(p, ba.ctx)
+}
+
+// SetInputs sets the Inputs property of class DotBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#inputs
+func (d *DotBlock) SetInputs(inputs *NodeMaterialConnectionPoint) *DotBlock {
+	p := ba.ctx.Get("DotBlock").New(inputs.JSObject())
+	return DotBlockFromJSObject(p, ba.ctx)
+}
+
+// IsFinalMerger returns the IsFinalMerger property of class DotBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#isfinalmerger
+func (d *DotBlock) IsFinalMerger(isFinalMerger bool) *DotBlock {
+	p := ba.ctx.Get("DotBlock").New(isFinalMerger)
+	return DotBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsFinalMerger sets the IsFinalMerger property of class DotBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#isfinalmerger
+func (d *DotBlock) SetIsFinalMerger(isFinalMerger bool) *DotBlock {
+	p := ba.ctx.Get("DotBlock").New(isFinalMerger)
+	return DotBlockFromJSObject(p, ba.ctx)
+}
+
+// IsInput returns the IsInput property of class DotBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#isinput
+func (d *DotBlock) IsInput(isInput bool) *DotBlock {
+	p := ba.ctx.Get("DotBlock").New(isInput)
+	return DotBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsInput sets the IsInput property of class DotBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#isinput
+func (d *DotBlock) SetIsInput(isInput bool) *DotBlock {
+	p := ba.ctx.Get("DotBlock").New(isInput)
+	return DotBlockFromJSObject(p, ba.ctx)
+}
+
+// IsUnique returns the IsUnique property of class DotBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#isunique
+func (d *DotBlock) IsUnique(isUnique bool) *DotBlock {
+	p := ba.ctx.Get("DotBlock").New(isUnique)
+	return DotBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsUnique sets the IsUnique property of class DotBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#isunique
+func (d *DotBlock) SetIsUnique(isUnique bool) *DotBlock {
+	p := ba.ctx.Get("DotBlock").New(isUnique)
+	return DotBlockFromJSObject(p, ba.ctx)
+}
+
+// Left returns the Left property of class DotBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#left
+func (d *DotBlock) Left(left *NodeMaterialConnectionPoint) *DotBlock {
+	p := ba.ctx.Get("DotBlock").New(left.JSObject())
+	return DotBlockFromJSObject(p, ba.ctx)
+}
+
+// SetLeft sets the Left property of class DotBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#left
+func (d *DotBlock) SetLeft(left *NodeMaterialConnectionPoint) *DotBlock {
+	p := ba.ctx.Get("DotBlock").New(left.JSObject())
+	return DotBlockFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class DotBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#name
+func (d *DotBlock) Name(name string) *DotBlock {
 	p := ba.ctx.Get("DotBlock").New(name)
 	return DotBlockFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetName sets the Name property of class DotBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#name
+func (d *DotBlock) SetName(name string) *DotBlock {
+	p := ba.ctx.Get("DotBlock").New(name)
+	return DotBlockFromJSObject(p, ba.ctx)
+}
+
+// Output returns the Output property of class DotBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#output
+func (d *DotBlock) Output(output *NodeMaterialConnectionPoint) *DotBlock {
+	p := ba.ctx.Get("DotBlock").New(output.JSObject())
+	return DotBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOutput sets the Output property of class DotBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#output
+func (d *DotBlock) SetOutput(output *NodeMaterialConnectionPoint) *DotBlock {
+	p := ba.ctx.Get("DotBlock").New(output.JSObject())
+	return DotBlockFromJSObject(p, ba.ctx)
+}
+
+// Outputs returns the Outputs property of class DotBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#outputs
+func (d *DotBlock) Outputs(outputs *NodeMaterialConnectionPoint) *DotBlock {
+	p := ba.ctx.Get("DotBlock").New(outputs.JSObject())
+	return DotBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOutputs sets the Outputs property of class DotBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#outputs
+func (d *DotBlock) SetOutputs(outputs *NodeMaterialConnectionPoint) *DotBlock {
+	p := ba.ctx.Get("DotBlock").New(outputs.JSObject())
+	return DotBlockFromJSObject(p, ba.ctx)
+}
+
+// Right returns the Right property of class DotBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#right
+func (d *DotBlock) Right(right *NodeMaterialConnectionPoint) *DotBlock {
+	p := ba.ctx.Get("DotBlock").New(right.JSObject())
+	return DotBlockFromJSObject(p, ba.ctx)
+}
+
+// SetRight sets the Right property of class DotBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#right
+func (d *DotBlock) SetRight(right *NodeMaterialConnectionPoint) *DotBlock {
+	p := ba.ctx.Get("DotBlock").New(right.JSObject())
+	return DotBlockFromJSObject(p, ba.ctx)
+}
+
+// Target returns the Target property of class DotBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#target
+func (d *DotBlock) Target(target js.Value) *DotBlock {
+	p := ba.ctx.Get("DotBlock").New(target)
+	return DotBlockFromJSObject(p, ba.ctx)
+}
+
+// SetTarget sets the Target property of class DotBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#target
+func (d *DotBlock) SetTarget(target js.Value) *DotBlock {
+	p := ba.ctx.Get("DotBlock").New(target)
+	return DotBlockFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class DotBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#uniqueid
+func (d *DotBlock) UniqueId(uniqueId float64) *DotBlock {
+	p := ba.ctx.Get("DotBlock").New(uniqueId)
+	return DotBlockFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class DotBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dotblock#uniqueid
+func (d *DotBlock) SetUniqueId(uniqueId float64) *DotBlock {
+	p := ba.ctx.Get("DotBlock").New(uniqueId)
+	return DotBlockFromJSObject(p, ba.ctx)
+}
+
+*/

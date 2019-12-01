@@ -32,8 +32,1792 @@ func ShadowLightFromJSObject(p js.Value, ctx js.Value) *ShadowLight {
 //
 // https://doc.babylonjs.com/api/classes/babylon.shadowlight
 func (ba *Babylon) NewShadowLight(name string, scene *Scene) *ShadowLight {
-	p := ba.ctx.Get("ShadowLight").New(name, scene.JSObject())
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("ShadowLight").New(args...)
 	return ShadowLightFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// ShadowLightAddBehaviorOpts contains optional parameters for ShadowLight.AddBehavior.
+type ShadowLightAddBehaviorOpts struct {
+	AttachImmediately *Node
+}
+
+// AddBehavior calls the AddBehavior method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#addbehavior
+func (s *ShadowLight) AddBehavior(behavior js.Value, opts *ShadowLightAddBehaviorOpts) *Node {
+	if opts == nil {
+		opts = &ShadowLightAddBehaviorOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, behavior)
+
+	if opts.AttachImmediately == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.AttachImmediately.JSObject())
+	}
+
+	retVal := s.p.Call("addBehavior", args...)
+	return NodeFromJSObject(retVal, s.ctx)
+}
+
+// AddNodeConstructor calls the AddNodeConstructor method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#addnodeconstructor
+func (s *ShadowLight) AddNodeConstructor(jsType string, constructorFunc js.Value) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, jsType)
+	args = append(args, constructorFunc)
+
+	s.p.Call("AddNodeConstructor", args...)
+}
+
+// ShadowLightBeginAnimationOpts contains optional parameters for ShadowLight.BeginAnimation.
+type ShadowLightBeginAnimationOpts struct {
+	Loop           *bool
+	SpeedRatio     *float64
+	OnAnimationEnd *func()
+}
+
+// BeginAnimation calls the BeginAnimation method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#beginanimation
+func (s *ShadowLight) BeginAnimation(name string, opts *ShadowLightBeginAnimationOpts) *Animatable {
+	if opts == nil {
+		opts = &ShadowLightBeginAnimationOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, name)
+
+	if opts.Loop == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Loop)
+	}
+	if opts.SpeedRatio == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SpeedRatio)
+	}
+	if opts.OnAnimationEnd == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnAnimationEnd)
+	}
+
+	retVal := s.p.Call("beginAnimation", args...)
+	return AnimatableFromJSObject(retVal, s.ctx)
+}
+
+// ShadowLightBindLightOpts contains optional parameters for ShadowLight.BindLight.
+type ShadowLightBindLightOpts struct {
+	UsePhysicalLightFalloff *bool
+	RebuildInParallel       *bool
+}
+
+// BindLight calls the BindLight method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#bindlight
+func (s *ShadowLight) BindLight(lightIndex float64, scene *Scene, effect *Effect, useSpecular bool, opts *ShadowLightBindLightOpts) {
+	if opts == nil {
+		opts = &ShadowLightBindLightOpts{}
+	}
+
+	args := make([]interface{}, 0, 4+2)
+
+	args = append(args, lightIndex)
+	args = append(args, scene.JSObject())
+	args = append(args, effect.JSObject())
+	args = append(args, useSpecular)
+
+	if opts.UsePhysicalLightFalloff == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UsePhysicalLightFalloff)
+	}
+	if opts.RebuildInParallel == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RebuildInParallel)
+	}
+
+	s.p.Call("bindLight", args...)
+}
+
+// CanAffectMesh calls the CanAffectMesh method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#canaffectmesh
+func (s *ShadowLight) CanAffectMesh(mesh *AbstractMesh) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	retVal := s.p.Call("canAffectMesh", args...)
+	return retVal.Bool()
+}
+
+// Clone calls the Clone method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#clone
+func (s *ShadowLight) Clone(name string) *Light {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := s.p.Call("clone", args...)
+	return LightFromJSObject(retVal, s.ctx)
+}
+
+// CompareLightsPriority calls the CompareLightsPriority method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#comparelightspriority
+func (s *ShadowLight) CompareLightsPriority(a *Light, b *Light) float64 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, a.JSObject())
+	args = append(args, b.JSObject())
+
+	retVal := s.p.Call("CompareLightsPriority", args...)
+	return retVal.Float()
+}
+
+// ComputeTransformedInformation calls the ComputeTransformedInformation method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#computetransformedinformation
+func (s *ShadowLight) ComputeTransformedInformation() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("computeTransformedInformation", args...)
+	return retVal.Bool()
+}
+
+// ShadowLightComputeWorldMatrixOpts contains optional parameters for ShadowLight.ComputeWorldMatrix.
+type ShadowLightComputeWorldMatrixOpts struct {
+	Force *bool
+}
+
+// ComputeWorldMatrix calls the ComputeWorldMatrix method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#computeworldmatrix
+func (s *ShadowLight) ComputeWorldMatrix(opts *ShadowLightComputeWorldMatrixOpts) *Matrix {
+	if opts == nil {
+		opts = &ShadowLightComputeWorldMatrixOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Force == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Force)
+	}
+
+	retVal := s.p.Call("computeWorldMatrix", args...)
+	return MatrixFromJSObject(retVal, s.ctx)
+}
+
+// ShadowLightConstructOpts contains optional parameters for ShadowLight.Construct.
+type ShadowLightConstructOpts struct {
+	Options *interface{}
+}
+
+// Construct calls the Construct method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#construct
+func (s *ShadowLight) Construct(jsType string, name string, scene *Scene, opts *ShadowLightConstructOpts) func() {
+	if opts == nil {
+		opts = &ShadowLightConstructOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, jsType)
+	args = append(args, name)
+	args = append(args, scene.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	retVal := s.p.Call("Construct", args...)
+	return retVal
+}
+
+// CreateAnimationRange calls the CreateAnimationRange method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#createanimationrange
+func (s *ShadowLight) CreateAnimationRange(name string, from float64, to float64) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, name)
+	args = append(args, from)
+	args = append(args, to)
+
+	s.p.Call("createAnimationRange", args...)
+}
+
+// ShadowLightDeleteAnimationRangeOpts contains optional parameters for ShadowLight.DeleteAnimationRange.
+type ShadowLightDeleteAnimationRangeOpts struct {
+	DeleteFrames *bool
+}
+
+// DeleteAnimationRange calls the DeleteAnimationRange method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#deleteanimationrange
+func (s *ShadowLight) DeleteAnimationRange(name string, opts *ShadowLightDeleteAnimationRangeOpts) {
+	if opts == nil {
+		opts = &ShadowLightDeleteAnimationRangeOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, name)
+
+	if opts.DeleteFrames == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DeleteFrames)
+	}
+
+	s.p.Call("deleteAnimationRange", args...)
+}
+
+// ShadowLightDisposeOpts contains optional parameters for ShadowLight.Dispose.
+type ShadowLightDisposeOpts struct {
+	DoNotRecurse               *bool
+	DisposeMaterialAndTextures *bool
+}
+
+// Dispose calls the Dispose method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#dispose
+func (s *ShadowLight) Dispose(opts *ShadowLightDisposeOpts) {
+	if opts == nil {
+		opts = &ShadowLightDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.DoNotRecurse == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DoNotRecurse)
+	}
+	if opts.DisposeMaterialAndTextures == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DisposeMaterialAndTextures)
+	}
+
+	s.p.Call("dispose", args...)
+}
+
+// ForceProjectionMatrixCompute calls the ForceProjectionMatrixCompute method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#forceprojectionmatrixcompute
+func (s *ShadowLight) ForceProjectionMatrixCompute() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("forceProjectionMatrixCompute", args...)
+}
+
+// GetAbsolutePosition calls the GetAbsolutePosition method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#getabsoluteposition
+func (s *ShadowLight) GetAbsolutePosition() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getAbsolutePosition", args...)
+	return Vector3FromJSObject(retVal, s.ctx)
+}
+
+// GetAnimationByName calls the GetAnimationByName method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#getanimationbyname
+func (s *ShadowLight) GetAnimationByName(name string) *Animation {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := s.p.Call("getAnimationByName", args...)
+	return AnimationFromJSObject(retVal, s.ctx)
+}
+
+// GetAnimationRange calls the GetAnimationRange method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#getanimationrange
+func (s *ShadowLight) GetAnimationRange(name string) *AnimationRange {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := s.p.Call("getAnimationRange", args...)
+	return AnimationRangeFromJSObject(retVal, s.ctx)
+}
+
+// GetAnimationRanges calls the GetAnimationRanges method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#getanimationranges
+func (s *ShadowLight) GetAnimationRanges() *AnimationRange {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getAnimationRanges", args...)
+	return AnimationRangeFromJSObject(retVal, s.ctx)
+}
+
+// GetBehaviorByName calls the GetBehaviorByName method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#getbehaviorbyname
+func (s *ShadowLight) GetBehaviorByName(name string) *Node {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := s.p.Call("getBehaviorByName", args...)
+	return NodeFromJSObject(retVal, s.ctx)
+}
+
+// ShadowLightGetChildMeshesOpts contains optional parameters for ShadowLight.GetChildMeshes.
+type ShadowLightGetChildMeshesOpts struct {
+	DirectDescendantsOnly *bool
+	Predicate             *func()
+}
+
+// GetChildMeshes calls the GetChildMeshes method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#getchildmeshes
+func (s *ShadowLight) GetChildMeshes(opts *ShadowLightGetChildMeshesOpts) *AbstractMesh {
+	if opts == nil {
+		opts = &ShadowLightGetChildMeshesOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	retVal := s.p.Call("getChildMeshes", args...)
+	return AbstractMeshFromJSObject(retVal, s.ctx)
+}
+
+// ShadowLightGetChildrenOpts contains optional parameters for ShadowLight.GetChildren.
+type ShadowLightGetChildrenOpts struct {
+	Predicate             *func()
+	DirectDescendantsOnly *bool
+}
+
+// GetChildren calls the GetChildren method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#getchildren
+func (s *ShadowLight) GetChildren(opts *ShadowLightGetChildrenOpts) *Node {
+	if opts == nil {
+		opts = &ShadowLightGetChildrenOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+
+	retVal := s.p.Call("getChildren", args...)
+	return NodeFromJSObject(retVal, s.ctx)
+}
+
+// GetClassName calls the GetClassName method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#getclassname
+func (s *ShadowLight) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetConstructorFromName calls the GetConstructorFromName method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#getconstructorfromname
+func (s *ShadowLight) GetConstructorFromName(jsType float64, name string, scene *Scene) func() {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, jsType)
+	args = append(args, name)
+	args = append(args, scene.JSObject())
+
+	retVal := s.p.Call("GetConstructorFromName", args...)
+	return retVal
+}
+
+// GetDepthMaxZ calls the GetDepthMaxZ method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#getdepthmaxz
+func (s *ShadowLight) GetDepthMaxZ(activeCamera *Camera) float64 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, activeCamera.JSObject())
+
+	retVal := s.p.Call("getDepthMaxZ", args...)
+	return retVal.Float()
+}
+
+// GetDepthMinZ calls the GetDepthMinZ method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#getdepthminz
+func (s *ShadowLight) GetDepthMinZ(activeCamera *Camera) float64 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, activeCamera.JSObject())
+
+	retVal := s.p.Call("getDepthMinZ", args...)
+	return retVal.Float()
+}
+
+// GetDepthScale calls the GetDepthScale method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#getdepthscale
+func (s *ShadowLight) GetDepthScale() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getDepthScale", args...)
+	return retVal.Float()
+}
+
+// ShadowLightGetDescendantsOpts contains optional parameters for ShadowLight.GetDescendants.
+type ShadowLightGetDescendantsOpts struct {
+	DirectDescendantsOnly *bool
+	Predicate             *func()
+}
+
+// GetDescendants calls the GetDescendants method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#getdescendants
+func (s *ShadowLight) GetDescendants(opts *ShadowLightGetDescendantsOpts) *Node {
+	if opts == nil {
+		opts = &ShadowLightGetDescendantsOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	retVal := s.p.Call("getDescendants", args...)
+	return NodeFromJSObject(retVal, s.ctx)
+}
+
+// GetEngine calls the GetEngine method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#getengine
+func (s *ShadowLight) GetEngine() *Engine {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getEngine", args...)
+	return EngineFromJSObject(retVal, s.ctx)
+}
+
+// ShadowLightGetHierarchyBoundingVectorsOpts contains optional parameters for ShadowLight.GetHierarchyBoundingVectors.
+type ShadowLightGetHierarchyBoundingVectorsOpts struct {
+	IncludeDescendants *bool
+	Predicate          *func()
+}
+
+// GetHierarchyBoundingVectors calls the GetHierarchyBoundingVectors method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#gethierarchyboundingvectors
+func (s *ShadowLight) GetHierarchyBoundingVectors(opts *ShadowLightGetHierarchyBoundingVectorsOpts) js.Value {
+	if opts == nil {
+		opts = &ShadowLightGetHierarchyBoundingVectorsOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.IncludeDescendants == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IncludeDescendants)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	retVal := s.p.Call("getHierarchyBoundingVectors", args...)
+	return retVal
+}
+
+// GetRotation calls the GetRotation method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#getrotation
+func (s *ShadowLight) GetRotation() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getRotation", args...)
+	return Vector3FromJSObject(retVal, s.ctx)
+}
+
+// GetScaledIntensity calls the GetScaledIntensity method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#getscaledintensity
+func (s *ShadowLight) GetScaledIntensity() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getScaledIntensity", args...)
+	return retVal.Float()
+}
+
+// GetScene calls the GetScene method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#getscene
+func (s *ShadowLight) GetScene() *Scene {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getScene", args...)
+	return SceneFromJSObject(retVal, s.ctx)
+}
+
+// ShadowLightGetShadowDirectionOpts contains optional parameters for ShadowLight.GetShadowDirection.
+type ShadowLightGetShadowDirectionOpts struct {
+	FaceIndex *float64
+}
+
+// GetShadowDirection calls the GetShadowDirection method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#getshadowdirection
+func (s *ShadowLight) GetShadowDirection(opts *ShadowLightGetShadowDirectionOpts) *Vector3 {
+	if opts == nil {
+		opts = &ShadowLightGetShadowDirectionOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.FaceIndex == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FaceIndex)
+	}
+
+	retVal := s.p.Call("getShadowDirection", args...)
+	return Vector3FromJSObject(retVal, s.ctx)
+}
+
+// GetShadowGenerator calls the GetShadowGenerator method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#getshadowgenerator
+func (s *ShadowLight) GetShadowGenerator() *IShadowGenerator {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getShadowGenerator", args...)
+	return IShadowGeneratorFromJSObject(retVal, s.ctx)
+}
+
+// GetTypeID calls the GetTypeID method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#gettypeid
+func (s *ShadowLight) GetTypeID() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getTypeID", args...)
+	return retVal.Float()
+}
+
+// GetWorldMatrix calls the GetWorldMatrix method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#getworldmatrix
+func (s *ShadowLight) GetWorldMatrix() *Matrix {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getWorldMatrix", args...)
+	return MatrixFromJSObject(retVal, s.ctx)
+}
+
+// IsDescendantOf calls the IsDescendantOf method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#isdescendantof
+func (s *ShadowLight) IsDescendantOf(ancestor *Node) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, ancestor.JSObject())
+
+	retVal := s.p.Call("isDescendantOf", args...)
+	return retVal.Bool()
+}
+
+// IsDisposed calls the IsDisposed method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#isdisposed
+func (s *ShadowLight) IsDisposed() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("isDisposed", args...)
+	return retVal.Bool()
+}
+
+// ShadowLightIsEnabledOpts contains optional parameters for ShadowLight.IsEnabled.
+type ShadowLightIsEnabledOpts struct {
+	CheckAncestors *bool
+}
+
+// IsEnabled calls the IsEnabled method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#isenabled
+func (s *ShadowLight) IsEnabled(opts *ShadowLightIsEnabledOpts) bool {
+	if opts == nil {
+		opts = &ShadowLightIsEnabledOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.CheckAncestors == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.CheckAncestors)
+	}
+
+	retVal := s.p.Call("isEnabled", args...)
+	return retVal.Bool()
+}
+
+// ShadowLightIsReadyOpts contains optional parameters for ShadowLight.IsReady.
+type ShadowLightIsReadyOpts struct {
+	CompleteCheck *bool
+}
+
+// IsReady calls the IsReady method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#isready
+func (s *ShadowLight) IsReady(opts *ShadowLightIsReadyOpts) bool {
+	if opts == nil {
+		opts = &ShadowLightIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.CompleteCheck == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.CompleteCheck)
+	}
+
+	retVal := s.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// NeedCube calls the NeedCube method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#needcube
+func (s *ShadowLight) NeedCube() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("needCube", args...)
+	return retVal.Bool()
+}
+
+// NeedProjectionMatrixCompute calls the NeedProjectionMatrixCompute method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#needprojectionmatrixcompute
+func (s *ShadowLight) NeedProjectionMatrixCompute() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("needProjectionMatrixCompute", args...)
+	return retVal.Bool()
+}
+
+// Parse calls the Parse method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#parse
+func (s *ShadowLight) Parse(parsedLight interface{}, scene *Scene) *Light {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, parsedLight)
+	args = append(args, scene.JSObject())
+
+	retVal := s.p.Call("Parse", args...)
+	return LightFromJSObject(retVal, s.ctx)
+}
+
+// ParseAnimationRanges calls the ParseAnimationRanges method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#parseanimationranges
+func (s *ShadowLight) ParseAnimationRanges(node *Node, parsedNode interface{}, scene *Scene) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, node.JSObject())
+	args = append(args, parsedNode)
+	args = append(args, scene.JSObject())
+
+	s.p.Call("ParseAnimationRanges", args...)
+}
+
+// PrepareLightSpecificDefines calls the PrepareLightSpecificDefines method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#preparelightspecificdefines
+func (s *ShadowLight) PrepareLightSpecificDefines(defines interface{}, lightIndex float64) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, defines)
+	args = append(args, lightIndex)
+
+	s.p.Call("prepareLightSpecificDefines", args...)
+}
+
+// RemoveBehavior calls the RemoveBehavior method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#removebehavior
+func (s *ShadowLight) RemoveBehavior(behavior js.Value) *Node {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, behavior)
+
+	retVal := s.p.Call("removeBehavior", args...)
+	return NodeFromJSObject(retVal, s.ctx)
+}
+
+// Serialize calls the Serialize method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#serialize
+func (s *ShadowLight) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("serialize", args...)
+	return retVal
+}
+
+// SerializeAnimationRanges calls the SerializeAnimationRanges method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#serializeanimationranges
+func (s *ShadowLight) SerializeAnimationRanges() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("serializeAnimationRanges", args...)
+	return retVal
+}
+
+// SetDirectionToTarget calls the SetDirectionToTarget method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#setdirectiontotarget
+func (s *ShadowLight) SetDirectionToTarget(target *Vector3) *Vector3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, target.JSObject())
+
+	retVal := s.p.Call("setDirectionToTarget", args...)
+	return Vector3FromJSObject(retVal, s.ctx)
+}
+
+// SetEnabled calls the SetEnabled method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#setenabled
+func (s *ShadowLight) SetEnabled(value bool) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, value)
+
+	s.p.Call("setEnabled", args...)
+}
+
+// SetShadowProjectionMatrix calls the SetShadowProjectionMatrix method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#setshadowprojectionmatrix
+func (s *ShadowLight) SetShadowProjectionMatrix(matrix *Matrix, viewMatrix *Matrix, renderList []AbstractMesh) *IShadowLight {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, matrix.JSObject())
+	args = append(args, viewMatrix.JSObject())
+	args = append(args, renderList.JSObject())
+
+	retVal := s.p.Call("setShadowProjectionMatrix", args...)
+	return IShadowLightFromJSObject(retVal, s.ctx)
+}
+
+// ShadowLightToStringOpts contains optional parameters for ShadowLight.ToString.
+type ShadowLightToStringOpts struct {
+	FullDetails *bool
+}
+
+// ToString calls the ToString method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#tostring
+func (s *ShadowLight) ToString(opts *ShadowLightToStringOpts) string {
+	if opts == nil {
+		opts = &ShadowLightToStringOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.FullDetails == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FullDetails)
+	}
+
+	retVal := s.p.Call("toString", args...)
+	return retVal.String()
+}
+
+// TransferTexturesToEffect calls the TransferTexturesToEffect method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#transfertexturestoeffect
+func (s *ShadowLight) TransferTexturesToEffect(effect *Effect, lightIndex string) *Light {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, effect.JSObject())
+	args = append(args, lightIndex)
+
+	retVal := s.p.Call("transferTexturesToEffect", args...)
+	return LightFromJSObject(retVal, s.ctx)
+}
+
+// TransferToEffect calls the TransferToEffect method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#transfertoeffect
+func (s *ShadowLight) TransferToEffect(effect *Effect, lightIndex string) *Light {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, effect.JSObject())
+	args = append(args, lightIndex)
+
+	retVal := s.p.Call("transferToEffect", args...)
+	return LightFromJSObject(retVal, s.ctx)
+}
+
+// TransferToNodeMaterialEffect calls the TransferToNodeMaterialEffect method on the ShadowLight object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#transfertonodematerialeffect
+func (s *ShadowLight) TransferToNodeMaterialEffect(effect *Effect, lightDataUniformName string) *Light {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, effect.JSObject())
+	args = append(args, lightDataUniformName)
+
+	retVal := s.p.Call("transferToNodeMaterialEffect", args...)
+	return LightFromJSObject(retVal, s.ctx)
+}
+
+/*
+
+// AnimationPropertiesOverride returns the AnimationPropertiesOverride property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#animationpropertiesoverride
+func (s *ShadowLight) AnimationPropertiesOverride(animationPropertiesOverride *AnimationPropertiesOverride) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(animationPropertiesOverride.JSObject())
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetAnimationPropertiesOverride sets the AnimationPropertiesOverride property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#animationpropertiesoverride
+func (s *ShadowLight) SetAnimationPropertiesOverride(animationPropertiesOverride *AnimationPropertiesOverride) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(animationPropertiesOverride.JSObject())
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// Animations returns the Animations property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#animations
+func (s *ShadowLight) Animations(animations *Animation) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(animations.JSObject())
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#animations
+func (s *ShadowLight) SetAnimations(animations *Animation) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(animations.JSObject())
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// Behaviors returns the Behaviors property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#behaviors
+func (s *ShadowLight) Behaviors(behaviors js.Value) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(behaviors)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetBehaviors sets the Behaviors property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#behaviors
+func (s *ShadowLight) SetBehaviors(behaviors js.Value) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(behaviors)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// CustomProjectionMatrixBuilder returns the CustomProjectionMatrixBuilder property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#customprojectionmatrixbuilder
+func (s *ShadowLight) CustomProjectionMatrixBuilder(customProjectionMatrixBuilder func()) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(customProjectionMatrixBuilder)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetCustomProjectionMatrixBuilder sets the CustomProjectionMatrixBuilder property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#customprojectionmatrixbuilder
+func (s *ShadowLight) SetCustomProjectionMatrixBuilder(customProjectionMatrixBuilder func()) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(customProjectionMatrixBuilder)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// Diffuse returns the Diffuse property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#diffuse
+func (s *ShadowLight) Diffuse(diffuse *Color3) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(diffuse.JSObject())
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetDiffuse sets the Diffuse property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#diffuse
+func (s *ShadowLight) SetDiffuse(diffuse *Color3) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(diffuse.JSObject())
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// Direction returns the Direction property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#direction
+func (s *ShadowLight) Direction(direction *Vector3) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(direction.JSObject())
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetDirection sets the Direction property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#direction
+func (s *ShadowLight) SetDirection(direction *Vector3) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(direction.JSObject())
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// DoNotSerialize returns the DoNotSerialize property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#donotserialize
+func (s *ShadowLight) DoNotSerialize(doNotSerialize bool) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(doNotSerialize)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetDoNotSerialize sets the DoNotSerialize property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#donotserialize
+func (s *ShadowLight) SetDoNotSerialize(doNotSerialize bool) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(doNotSerialize)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// ExcludeWithLayerMask returns the ExcludeWithLayerMask property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#excludewithlayermask
+func (s *ShadowLight) ExcludeWithLayerMask(excludeWithLayerMask float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(excludeWithLayerMask)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetExcludeWithLayerMask sets the ExcludeWithLayerMask property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#excludewithlayermask
+func (s *ShadowLight) SetExcludeWithLayerMask(excludeWithLayerMask float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(excludeWithLayerMask)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// ExcludedMeshes returns the ExcludedMeshes property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#excludedmeshes
+func (s *ShadowLight) ExcludedMeshes(excludedMeshes *AbstractMesh) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(excludedMeshes.JSObject())
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetExcludedMeshes sets the ExcludedMeshes property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#excludedmeshes
+func (s *ShadowLight) SetExcludedMeshes(excludedMeshes *AbstractMesh) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(excludedMeshes.JSObject())
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// FALLOFF_DEFAULT returns the FALLOFF_DEFAULT property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#falloff_default
+func (s *ShadowLight) FALLOFF_DEFAULT(FALLOFF_DEFAULT float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(FALLOFF_DEFAULT)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetFALLOFF_DEFAULT sets the FALLOFF_DEFAULT property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#falloff_default
+func (s *ShadowLight) SetFALLOFF_DEFAULT(FALLOFF_DEFAULT float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(FALLOFF_DEFAULT)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// FALLOFF_GLTF returns the FALLOFF_GLTF property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#falloff_gltf
+func (s *ShadowLight) FALLOFF_GLTF(FALLOFF_GLTF float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(FALLOFF_GLTF)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetFALLOFF_GLTF sets the FALLOFF_GLTF property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#falloff_gltf
+func (s *ShadowLight) SetFALLOFF_GLTF(FALLOFF_GLTF float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(FALLOFF_GLTF)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// FALLOFF_PHYSICAL returns the FALLOFF_PHYSICAL property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#falloff_physical
+func (s *ShadowLight) FALLOFF_PHYSICAL(FALLOFF_PHYSICAL float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(FALLOFF_PHYSICAL)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetFALLOFF_PHYSICAL sets the FALLOFF_PHYSICAL property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#falloff_physical
+func (s *ShadowLight) SetFALLOFF_PHYSICAL(FALLOFF_PHYSICAL float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(FALLOFF_PHYSICAL)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// FALLOFF_STANDARD returns the FALLOFF_STANDARD property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#falloff_standard
+func (s *ShadowLight) FALLOFF_STANDARD(FALLOFF_STANDARD float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(FALLOFF_STANDARD)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetFALLOFF_STANDARD sets the FALLOFF_STANDARD property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#falloff_standard
+func (s *ShadowLight) SetFALLOFF_STANDARD(FALLOFF_STANDARD float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(FALLOFF_STANDARD)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// FalloffType returns the FalloffType property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#fallofftype
+func (s *ShadowLight) FalloffType(falloffType float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(falloffType)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetFalloffType sets the FalloffType property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#fallofftype
+func (s *ShadowLight) SetFalloffType(falloffType float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(falloffType)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// INTENSITYMODE_AUTOMATIC returns the INTENSITYMODE_AUTOMATIC property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#intensitymode_automatic
+func (s *ShadowLight) INTENSITYMODE_AUTOMATIC(INTENSITYMODE_AUTOMATIC float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(INTENSITYMODE_AUTOMATIC)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetINTENSITYMODE_AUTOMATIC sets the INTENSITYMODE_AUTOMATIC property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#intensitymode_automatic
+func (s *ShadowLight) SetINTENSITYMODE_AUTOMATIC(INTENSITYMODE_AUTOMATIC float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(INTENSITYMODE_AUTOMATIC)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// INTENSITYMODE_ILLUMINANCE returns the INTENSITYMODE_ILLUMINANCE property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#intensitymode_illuminance
+func (s *ShadowLight) INTENSITYMODE_ILLUMINANCE(INTENSITYMODE_ILLUMINANCE float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(INTENSITYMODE_ILLUMINANCE)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetINTENSITYMODE_ILLUMINANCE sets the INTENSITYMODE_ILLUMINANCE property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#intensitymode_illuminance
+func (s *ShadowLight) SetINTENSITYMODE_ILLUMINANCE(INTENSITYMODE_ILLUMINANCE float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(INTENSITYMODE_ILLUMINANCE)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// INTENSITYMODE_LUMINANCE returns the INTENSITYMODE_LUMINANCE property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#intensitymode_luminance
+func (s *ShadowLight) INTENSITYMODE_LUMINANCE(INTENSITYMODE_LUMINANCE float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(INTENSITYMODE_LUMINANCE)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetINTENSITYMODE_LUMINANCE sets the INTENSITYMODE_LUMINANCE property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#intensitymode_luminance
+func (s *ShadowLight) SetINTENSITYMODE_LUMINANCE(INTENSITYMODE_LUMINANCE float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(INTENSITYMODE_LUMINANCE)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// INTENSITYMODE_LUMINOUSINTENSITY returns the INTENSITYMODE_LUMINOUSINTENSITY property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#intensitymode_luminousintensity
+func (s *ShadowLight) INTENSITYMODE_LUMINOUSINTENSITY(INTENSITYMODE_LUMINOUSINTENSITY float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(INTENSITYMODE_LUMINOUSINTENSITY)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetINTENSITYMODE_LUMINOUSINTENSITY sets the INTENSITYMODE_LUMINOUSINTENSITY property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#intensitymode_luminousintensity
+func (s *ShadowLight) SetINTENSITYMODE_LUMINOUSINTENSITY(INTENSITYMODE_LUMINOUSINTENSITY float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(INTENSITYMODE_LUMINOUSINTENSITY)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// INTENSITYMODE_LUMINOUSPOWER returns the INTENSITYMODE_LUMINOUSPOWER property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#intensitymode_luminouspower
+func (s *ShadowLight) INTENSITYMODE_LUMINOUSPOWER(INTENSITYMODE_LUMINOUSPOWER float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(INTENSITYMODE_LUMINOUSPOWER)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetINTENSITYMODE_LUMINOUSPOWER sets the INTENSITYMODE_LUMINOUSPOWER property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#intensitymode_luminouspower
+func (s *ShadowLight) SetINTENSITYMODE_LUMINOUSPOWER(INTENSITYMODE_LUMINOUSPOWER float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(INTENSITYMODE_LUMINOUSPOWER)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// Id returns the Id property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#id
+func (s *ShadowLight) Id(id string) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(id)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetId sets the Id property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#id
+func (s *ShadowLight) SetId(id string) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(id)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// IncludeOnlyWithLayerMask returns the IncludeOnlyWithLayerMask property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#includeonlywithlayermask
+func (s *ShadowLight) IncludeOnlyWithLayerMask(includeOnlyWithLayerMask float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(includeOnlyWithLayerMask)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetIncludeOnlyWithLayerMask sets the IncludeOnlyWithLayerMask property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#includeonlywithlayermask
+func (s *ShadowLight) SetIncludeOnlyWithLayerMask(includeOnlyWithLayerMask float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(includeOnlyWithLayerMask)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// IncludedOnlyMeshes returns the IncludedOnlyMeshes property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#includedonlymeshes
+func (s *ShadowLight) IncludedOnlyMeshes(includedOnlyMeshes *AbstractMesh) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(includedOnlyMeshes.JSObject())
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetIncludedOnlyMeshes sets the IncludedOnlyMeshes property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#includedonlymeshes
+func (s *ShadowLight) SetIncludedOnlyMeshes(includedOnlyMeshes *AbstractMesh) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(includedOnlyMeshes.JSObject())
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#inspectablecustomproperties
+func (s *ShadowLight) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(inspectableCustomProperties.JSObject())
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#inspectablecustomproperties
+func (s *ShadowLight) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(inspectableCustomProperties.JSObject())
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// Intensity returns the Intensity property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#intensity
+func (s *ShadowLight) Intensity(intensity float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(intensity)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetIntensity sets the Intensity property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#intensity
+func (s *ShadowLight) SetIntensity(intensity float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(intensity)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// IntensityMode returns the IntensityMode property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#intensitymode
+func (s *ShadowLight) IntensityMode(intensityMode float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(intensityMode)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetIntensityMode sets the IntensityMode property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#intensitymode
+func (s *ShadowLight) SetIntensityMode(intensityMode float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(intensityMode)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// LIGHTMAP_DEFAULT returns the LIGHTMAP_DEFAULT property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#lightmap_default
+func (s *ShadowLight) LIGHTMAP_DEFAULT(LIGHTMAP_DEFAULT float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(LIGHTMAP_DEFAULT)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetLIGHTMAP_DEFAULT sets the LIGHTMAP_DEFAULT property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#lightmap_default
+func (s *ShadowLight) SetLIGHTMAP_DEFAULT(LIGHTMAP_DEFAULT float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(LIGHTMAP_DEFAULT)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// LIGHTMAP_SHADOWSONLY returns the LIGHTMAP_SHADOWSONLY property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#lightmap_shadowsonly
+func (s *ShadowLight) LIGHTMAP_SHADOWSONLY(LIGHTMAP_SHADOWSONLY float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(LIGHTMAP_SHADOWSONLY)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetLIGHTMAP_SHADOWSONLY sets the LIGHTMAP_SHADOWSONLY property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#lightmap_shadowsonly
+func (s *ShadowLight) SetLIGHTMAP_SHADOWSONLY(LIGHTMAP_SHADOWSONLY float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(LIGHTMAP_SHADOWSONLY)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// LIGHTMAP_SPECULAR returns the LIGHTMAP_SPECULAR property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#lightmap_specular
+func (s *ShadowLight) LIGHTMAP_SPECULAR(LIGHTMAP_SPECULAR float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(LIGHTMAP_SPECULAR)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetLIGHTMAP_SPECULAR sets the LIGHTMAP_SPECULAR property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#lightmap_specular
+func (s *ShadowLight) SetLIGHTMAP_SPECULAR(LIGHTMAP_SPECULAR float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(LIGHTMAP_SPECULAR)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// LIGHTTYPEID_DIRECTIONALLIGHT returns the LIGHTTYPEID_DIRECTIONALLIGHT property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#lighttypeid_directionallight
+func (s *ShadowLight) LIGHTTYPEID_DIRECTIONALLIGHT(LIGHTTYPEID_DIRECTIONALLIGHT float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(LIGHTTYPEID_DIRECTIONALLIGHT)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetLIGHTTYPEID_DIRECTIONALLIGHT sets the LIGHTTYPEID_DIRECTIONALLIGHT property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#lighttypeid_directionallight
+func (s *ShadowLight) SetLIGHTTYPEID_DIRECTIONALLIGHT(LIGHTTYPEID_DIRECTIONALLIGHT float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(LIGHTTYPEID_DIRECTIONALLIGHT)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// LIGHTTYPEID_HEMISPHERICLIGHT returns the LIGHTTYPEID_HEMISPHERICLIGHT property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#lighttypeid_hemisphericlight
+func (s *ShadowLight) LIGHTTYPEID_HEMISPHERICLIGHT(LIGHTTYPEID_HEMISPHERICLIGHT float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(LIGHTTYPEID_HEMISPHERICLIGHT)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetLIGHTTYPEID_HEMISPHERICLIGHT sets the LIGHTTYPEID_HEMISPHERICLIGHT property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#lighttypeid_hemisphericlight
+func (s *ShadowLight) SetLIGHTTYPEID_HEMISPHERICLIGHT(LIGHTTYPEID_HEMISPHERICLIGHT float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(LIGHTTYPEID_HEMISPHERICLIGHT)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// LIGHTTYPEID_POINTLIGHT returns the LIGHTTYPEID_POINTLIGHT property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#lighttypeid_pointlight
+func (s *ShadowLight) LIGHTTYPEID_POINTLIGHT(LIGHTTYPEID_POINTLIGHT float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(LIGHTTYPEID_POINTLIGHT)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetLIGHTTYPEID_POINTLIGHT sets the LIGHTTYPEID_POINTLIGHT property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#lighttypeid_pointlight
+func (s *ShadowLight) SetLIGHTTYPEID_POINTLIGHT(LIGHTTYPEID_POINTLIGHT float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(LIGHTTYPEID_POINTLIGHT)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// LIGHTTYPEID_SPOTLIGHT returns the LIGHTTYPEID_SPOTLIGHT property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#lighttypeid_spotlight
+func (s *ShadowLight) LIGHTTYPEID_SPOTLIGHT(LIGHTTYPEID_SPOTLIGHT float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(LIGHTTYPEID_SPOTLIGHT)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetLIGHTTYPEID_SPOTLIGHT sets the LIGHTTYPEID_SPOTLIGHT property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#lighttypeid_spotlight
+func (s *ShadowLight) SetLIGHTTYPEID_SPOTLIGHT(LIGHTTYPEID_SPOTLIGHT float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(LIGHTTYPEID_SPOTLIGHT)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// LightmapMode returns the LightmapMode property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#lightmapmode
+func (s *ShadowLight) LightmapMode(lightmapMode float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(lightmapMode)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetLightmapMode sets the LightmapMode property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#lightmapmode
+func (s *ShadowLight) SetLightmapMode(lightmapMode float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(lightmapMode)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#metadata
+func (s *ShadowLight) Metadata(metadata interface{}) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(metadata)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#metadata
+func (s *ShadowLight) SetMetadata(metadata interface{}) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(metadata)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#name
+func (s *ShadowLight) Name(name string) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(name)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#name
+func (s *ShadowLight) SetName(name string) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(name)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// OnDispose returns the OnDispose property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#ondispose
+func (s *ShadowLight) OnDispose(onDispose func()) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(onDispose)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetOnDispose sets the OnDispose property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#ondispose
+func (s *ShadowLight) SetOnDispose(onDispose func()) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(onDispose)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// OnDisposeObservable returns the OnDisposeObservable property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#ondisposeobservable
+func (s *ShadowLight) OnDisposeObservable(onDisposeObservable *Observable) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(onDisposeObservable.JSObject())
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetOnDisposeObservable sets the OnDisposeObservable property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#ondisposeobservable
+func (s *ShadowLight) SetOnDisposeObservable(onDisposeObservable *Observable) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(onDisposeObservable.JSObject())
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// OnReady returns the OnReady property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#onready
+func (s *ShadowLight) OnReady(onReady func()) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(onReady)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetOnReady sets the OnReady property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#onready
+func (s *ShadowLight) SetOnReady(onReady func()) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(onReady)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// Parent returns the Parent property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#parent
+func (s *ShadowLight) Parent(parent *Node) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(parent.JSObject())
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetParent sets the Parent property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#parent
+func (s *ShadowLight) SetParent(parent *Node) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(parent.JSObject())
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// Position returns the Position property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#position
+func (s *ShadowLight) Position(position *Vector3) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(position.JSObject())
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetPosition sets the Position property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#position
+func (s *ShadowLight) SetPosition(position *Vector3) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(position.JSObject())
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// Radius returns the Radius property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#radius
+func (s *ShadowLight) Radius(radius float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(radius)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetRadius sets the Radius property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#radius
+func (s *ShadowLight) SetRadius(radius float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(radius)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// Range returns the Range property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#range
+func (s *ShadowLight) Range(range float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(range)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetRange sets the Range property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#range
+func (s *ShadowLight) SetRange(range float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(range)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// RenderPriority returns the RenderPriority property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#renderpriority
+func (s *ShadowLight) RenderPriority(renderPriority float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(renderPriority)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetRenderPriority sets the RenderPriority property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#renderpriority
+func (s *ShadowLight) SetRenderPriority(renderPriority float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(renderPriority)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// ReservedDataStore returns the ReservedDataStore property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#reserveddatastore
+func (s *ShadowLight) ReservedDataStore(reservedDataStore interface{}) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(reservedDataStore)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetReservedDataStore sets the ReservedDataStore property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#reserveddatastore
+func (s *ShadowLight) SetReservedDataStore(reservedDataStore interface{}) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(reservedDataStore)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// ShadowEnabled returns the ShadowEnabled property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#shadowenabled
+func (s *ShadowLight) ShadowEnabled(shadowEnabled bool) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(shadowEnabled)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetShadowEnabled sets the ShadowEnabled property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#shadowenabled
+func (s *ShadowLight) SetShadowEnabled(shadowEnabled bool) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(shadowEnabled)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// ShadowMaxZ returns the ShadowMaxZ property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#shadowmaxz
+func (s *ShadowLight) ShadowMaxZ(shadowMaxZ float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(shadowMaxZ)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetShadowMaxZ sets the ShadowMaxZ property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#shadowmaxz
+func (s *ShadowLight) SetShadowMaxZ(shadowMaxZ float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(shadowMaxZ)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// ShadowMinZ returns the ShadowMinZ property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#shadowminz
+func (s *ShadowLight) ShadowMinZ(shadowMinZ float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(shadowMinZ)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetShadowMinZ sets the ShadowMinZ property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#shadowminz
+func (s *ShadowLight) SetShadowMinZ(shadowMinZ float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(shadowMinZ)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// Specular returns the Specular property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#specular
+func (s *ShadowLight) Specular(specular *Color3) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(specular.JSObject())
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetSpecular sets the Specular property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#specular
+func (s *ShadowLight) SetSpecular(specular *Color3) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(specular.JSObject())
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// State returns the State property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#state
+func (s *ShadowLight) State(state string) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(state)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetState sets the State property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#state
+func (s *ShadowLight) SetState(state string) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(state)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// TransformedDirection returns the TransformedDirection property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#transformeddirection
+func (s *ShadowLight) TransformedDirection(transformedDirection *Vector3) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(transformedDirection.JSObject())
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetTransformedDirection sets the TransformedDirection property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#transformeddirection
+func (s *ShadowLight) SetTransformedDirection(transformedDirection *Vector3) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(transformedDirection.JSObject())
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// TransformedPosition returns the TransformedPosition property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#transformedposition
+func (s *ShadowLight) TransformedPosition(transformedPosition *Vector3) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(transformedPosition.JSObject())
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetTransformedPosition sets the TransformedPosition property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#transformedposition
+func (s *ShadowLight) SetTransformedPosition(transformedPosition *Vector3) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(transformedPosition.JSObject())
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#uniqueid
+func (s *ShadowLight) UniqueId(uniqueId float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(uniqueId)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#uniqueid
+func (s *ShadowLight) SetUniqueId(uniqueId float64) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(uniqueId)
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// WorldMatrixFromCache returns the WorldMatrixFromCache property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#worldmatrixfromcache
+func (s *ShadowLight) WorldMatrixFromCache(worldMatrixFromCache *Matrix) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(worldMatrixFromCache.JSObject())
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+// SetWorldMatrixFromCache sets the WorldMatrixFromCache property of class ShadowLight.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowlight#worldmatrixfromcache
+func (s *ShadowLight) SetWorldMatrixFromCache(worldMatrixFromCache *Matrix) *ShadowLight {
+	p := ba.ctx.Get("ShadowLight").New(worldMatrixFromCache.JSObject())
+	return ShadowLightFromJSObject(p, ba.ctx)
+}
+
+*/

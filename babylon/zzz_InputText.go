@@ -29,9 +29,8 @@ func InputTextFromJSObject(p js.Value, ctx js.Value) *InputText {
 
 // NewInputTextOpts contains optional parameters for NewInputText.
 type NewInputTextOpts struct {
-	Name *JSString
-
-	Text *JSString
+	Name *string
+	Text *string
 }
 
 // NewInputText returns a new InputText object.
@@ -42,8 +41,2051 @@ func (ba *Babylon) NewInputText(opts *NewInputTextOpts) *InputText {
 		opts = &NewInputTextOpts{}
 	}
 
-	p := ba.ctx.Get("InputText").New(opts.Name.JSObject(), opts.Text.JSObject())
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.Name == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Name)
+	}
+	if opts.Text == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Text)
+	}
+
+	p := ba.ctx.Get("InputText").New(args...)
 	return InputTextFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Contains calls the Contains method on the InputText object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#contains
+func (i *InputText) Contains(x float64, y float64) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, x)
+	args = append(args, y)
+
+	retVal := i.p.Call("contains", args...)
+	return retVal.Bool()
+}
+
+// Dispose calls the Dispose method on the InputText object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#dispose
+func (i *InputText) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	i.p.Call("dispose", args...)
+}
+
+// GetAscendantOfClass calls the GetAscendantOfClass method on the InputText object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#getascendantofclass
+func (i *InputText) GetAscendantOfClass(className string) *Control {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, className)
+
+	retVal := i.p.Call("getAscendantOfClass", args...)
+	return ControlFromJSObject(retVal, i.ctx)
+}
+
+// GetClassName calls the GetClassName method on the InputText object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#getclassname
+func (i *InputText) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := i.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// InputTextGetDescendantsOpts contains optional parameters for InputText.GetDescendants.
+type InputTextGetDescendantsOpts struct {
+	DirectDescendantsOnly *bool
+	Predicate             *func()
+}
+
+// GetDescendants calls the GetDescendants method on the InputText object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#getdescendants
+func (i *InputText) GetDescendants(opts *InputTextGetDescendantsOpts) *Control {
+	if opts == nil {
+		opts = &InputTextGetDescendantsOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	retVal := i.p.Call("getDescendants", args...)
+	return ControlFromJSObject(retVal, i.ctx)
+}
+
+// InputTextGetDescendantsToRefOpts contains optional parameters for InputText.GetDescendantsToRef.
+type InputTextGetDescendantsToRefOpts struct {
+	DirectDescendantsOnly *bool
+	Predicate             *func()
+}
+
+// GetDescendantsToRef calls the GetDescendantsToRef method on the InputText object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#getdescendantstoref
+func (i *InputText) GetDescendantsToRef(results *Control, opts *InputTextGetDescendantsToRefOpts) {
+	if opts == nil {
+		opts = &InputTextGetDescendantsToRefOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, results.JSObject())
+
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	i.p.Call("getDescendantsToRef", args...)
+}
+
+// GetLocalCoordinates calls the GetLocalCoordinates method on the InputText object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#getlocalcoordinates
+func (i *InputText) GetLocalCoordinates(globalCoordinates *Vector2) *Vector2 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, globalCoordinates.JSObject())
+
+	retVal := i.p.Call("getLocalCoordinates", args...)
+	return Vector2FromJSObject(retVal, i.ctx)
+}
+
+// GetLocalCoordinatesToRef calls the GetLocalCoordinatesToRef method on the InputText object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#getlocalcoordinatestoref
+func (i *InputText) GetLocalCoordinatesToRef(globalCoordinates *Vector2, result *Vector2) *Control {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, globalCoordinates.JSObject())
+	args = append(args, result.JSObject())
+
+	retVal := i.p.Call("getLocalCoordinatesToRef", args...)
+	return ControlFromJSObject(retVal, i.ctx)
+}
+
+// GetParentLocalCoordinates calls the GetParentLocalCoordinates method on the InputText object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#getparentlocalcoordinates
+func (i *InputText) GetParentLocalCoordinates(globalCoordinates *Vector2) *Vector2 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, globalCoordinates.JSObject())
+
+	retVal := i.p.Call("getParentLocalCoordinates", args...)
+	return Vector2FromJSObject(retVal, i.ctx)
+}
+
+// IsAscendant calls the IsAscendant method on the InputText object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#isascendant
+func (i *InputText) IsAscendant(container *Control) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, container.JSObject())
+
+	retVal := i.p.Call("isAscendant", args...)
+	return retVal.Bool()
+}
+
+// KeepsFocusWith calls the KeepsFocusWith method on the InputText object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#keepsfocuswith
+func (i *InputText) KeepsFocusWith() *Control {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := i.p.Call("keepsFocusWith", args...)
+	return ControlFromJSObject(retVal, i.ctx)
+}
+
+// LinkWithMesh calls the LinkWithMesh method on the InputText object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#linkwithmesh
+func (i *InputText) LinkWithMesh(mesh *AbstractMesh) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	i.p.Call("linkWithMesh", args...)
+}
+
+// MoveToVector3 calls the MoveToVector3 method on the InputText object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#movetovector3
+func (i *InputText) MoveToVector3(position *Vector3, scene *Scene) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, position.JSObject())
+	args = append(args, scene.JSObject())
+
+	i.p.Call("moveToVector3", args...)
+}
+
+// ProcessKeyboard calls the ProcessKeyboard method on the InputText object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#processkeyboard
+func (i *InputText) ProcessKeyboard(evt js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, evt)
+
+	i.p.Call("processKeyboard", args...)
+}
+
+// InputText_drawOpts contains optional parameters for InputText._draw.
+type InputText_drawOpts struct {
+	InvalidatedRectangle *Measure
+}
+
+// _draw calls the _draw method on the InputText object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#_draw
+func (i *InputText) _draw(context js.Value, opts *InputText_drawOpts) {
+	if opts == nil {
+		opts = &InputText_drawOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, context)
+
+	if opts.InvalidatedRectangle == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.InvalidatedRectangle.JSObject())
+	}
+
+	i.p.Call("_draw", args...)
+}
+
+// _onPointerDown calls the _onPointerDown method on the InputText object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#_onpointerdown
+func (i *InputText) _onPointerDown(target *Control, coordinates *Vector2, pointerId float64, buttonIndex float64) bool {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, target.JSObject())
+	args = append(args, coordinates.JSObject())
+	args = append(args, pointerId)
+	args = append(args, buttonIndex)
+
+	retVal := i.p.Call("_onPointerDown", args...)
+	return retVal.Bool()
+}
+
+// _onPointerMove calls the _onPointerMove method on the InputText object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#_onpointermove
+func (i *InputText) _onPointerMove(target *Control, coordinates *Vector2, pointerId float64) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, target.JSObject())
+	args = append(args, coordinates.JSObject())
+	args = append(args, pointerId)
+
+	i.p.Call("_onPointerMove", args...)
+}
+
+// _onPointerUp calls the _onPointerUp method on the InputText object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#_onpointerup
+func (i *InputText) _onPointerUp(target *Control, coordinates *Vector2, pointerId float64, buttonIndex float64, notifyClick bool) {
+
+	args := make([]interface{}, 0, 5+0)
+
+	args = append(args, target.JSObject())
+	args = append(args, coordinates.JSObject())
+	args = append(args, pointerId)
+	args = append(args, buttonIndex)
+	args = append(args, notifyClick)
+
+	i.p.Call("_onPointerUp", args...)
+}
+
+/*
+
+// AddKey returns the AddKey property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#addkey
+func (i *InputText) AddKey(addKey bool) *InputText {
+	p := ba.ctx.Get("InputText").New(addKey)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetAddKey sets the AddKey property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#addkey
+func (i *InputText) SetAddKey(addKey bool) *InputText {
+	p := ba.ctx.Get("InputText").New(addKey)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// AllowAlphaInheritance returns the AllowAlphaInheritance property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#allowalphainheritance
+func (i *InputText) AllowAlphaInheritance(AllowAlphaInheritance bool) *InputText {
+	p := ba.ctx.Get("InputText").New(AllowAlphaInheritance)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetAllowAlphaInheritance sets the AllowAlphaInheritance property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#allowalphainheritance
+func (i *InputText) SetAllowAlphaInheritance(AllowAlphaInheritance bool) *InputText {
+	p := ba.ctx.Get("InputText").New(AllowAlphaInheritance)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// Alpha returns the Alpha property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#alpha
+func (i *InputText) Alpha(alpha float64) *InputText {
+	p := ba.ctx.Get("InputText").New(alpha)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetAlpha sets the Alpha property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#alpha
+func (i *InputText) SetAlpha(alpha float64) *InputText {
+	p := ba.ctx.Get("InputText").New(alpha)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// AutoStretchWidth returns the AutoStretchWidth property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#autostretchwidth
+func (i *InputText) AutoStretchWidth(autoStretchWidth bool) *InputText {
+	p := ba.ctx.Get("InputText").New(autoStretchWidth)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetAutoStretchWidth sets the AutoStretchWidth property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#autostretchwidth
+func (i *InputText) SetAutoStretchWidth(autoStretchWidth bool) *InputText {
+	p := ba.ctx.Get("InputText").New(autoStretchWidth)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// Background returns the Background property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#background
+func (i *InputText) Background(background string) *InputText {
+	p := ba.ctx.Get("InputText").New(background)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetBackground sets the Background property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#background
+func (i *InputText) SetBackground(background string) *InputText {
+	p := ba.ctx.Get("InputText").New(background)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// CenterX returns the CenterX property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#centerx
+func (i *InputText) CenterX(centerX float64) *InputText {
+	p := ba.ctx.Get("InputText").New(centerX)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetCenterX sets the CenterX property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#centerx
+func (i *InputText) SetCenterX(centerX float64) *InputText {
+	p := ba.ctx.Get("InputText").New(centerX)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// CenterY returns the CenterY property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#centery
+func (i *InputText) CenterY(centerY float64) *InputText {
+	p := ba.ctx.Get("InputText").New(centerY)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetCenterY sets the CenterY property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#centery
+func (i *InputText) SetCenterY(centerY float64) *InputText {
+	p := ba.ctx.Get("InputText").New(centerY)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// ClipChildren returns the ClipChildren property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#clipchildren
+func (i *InputText) ClipChildren(clipChildren bool) *InputText {
+	p := ba.ctx.Get("InputText").New(clipChildren)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetClipChildren sets the ClipChildren property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#clipchildren
+func (i *InputText) SetClipChildren(clipChildren bool) *InputText {
+	p := ba.ctx.Get("InputText").New(clipChildren)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// ClipContent returns the ClipContent property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#clipcontent
+func (i *InputText) ClipContent(clipContent bool) *InputText {
+	p := ba.ctx.Get("InputText").New(clipContent)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetClipContent sets the ClipContent property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#clipcontent
+func (i *InputText) SetClipContent(clipContent bool) *InputText {
+	p := ba.ctx.Get("InputText").New(clipContent)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// Color returns the Color property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#color
+func (i *InputText) Color(color string) *InputText {
+	p := ba.ctx.Get("InputText").New(color)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetColor sets the Color property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#color
+func (i *InputText) SetColor(color string) *InputText {
+	p := ba.ctx.Get("InputText").New(color)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// CurrentKey returns the CurrentKey property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#currentkey
+func (i *InputText) CurrentKey(currentKey string) *InputText {
+	p := ba.ctx.Get("InputText").New(currentKey)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetCurrentKey sets the CurrentKey property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#currentkey
+func (i *InputText) SetCurrentKey(currentKey string) *InputText {
+	p := ba.ctx.Get("InputText").New(currentKey)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// DeadKey returns the DeadKey property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#deadkey
+func (i *InputText) DeadKey(deadKey bool) *InputText {
+	p := ba.ctx.Get("InputText").New(deadKey)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetDeadKey sets the DeadKey property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#deadkey
+func (i *InputText) SetDeadKey(deadKey bool) *InputText {
+	p := ba.ctx.Get("InputText").New(deadKey)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// DisableMobilePrompt returns the DisableMobilePrompt property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#disablemobileprompt
+func (i *InputText) DisableMobilePrompt(disableMobilePrompt bool) *InputText {
+	p := ba.ctx.Get("InputText").New(disableMobilePrompt)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetDisableMobilePrompt sets the DisableMobilePrompt property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#disablemobileprompt
+func (i *InputText) SetDisableMobilePrompt(disableMobilePrompt bool) *InputText {
+	p := ba.ctx.Get("InputText").New(disableMobilePrompt)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// DisabledColor returns the DisabledColor property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#disabledcolor
+func (i *InputText) DisabledColor(disabledColor string) *InputText {
+	p := ba.ctx.Get("InputText").New(disabledColor)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetDisabledColor sets the DisabledColor property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#disabledcolor
+func (i *InputText) SetDisabledColor(disabledColor string) *InputText {
+	p := ba.ctx.Get("InputText").New(disabledColor)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// FocusedBackground returns the FocusedBackground property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#focusedbackground
+func (i *InputText) FocusedBackground(focusedBackground string) *InputText {
+	p := ba.ctx.Get("InputText").New(focusedBackground)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetFocusedBackground sets the FocusedBackground property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#focusedbackground
+func (i *InputText) SetFocusedBackground(focusedBackground string) *InputText {
+	p := ba.ctx.Get("InputText").New(focusedBackground)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// FocusedColor returns the FocusedColor property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#focusedcolor
+func (i *InputText) FocusedColor(focusedColor string) *InputText {
+	p := ba.ctx.Get("InputText").New(focusedColor)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetFocusedColor sets the FocusedColor property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#focusedcolor
+func (i *InputText) SetFocusedColor(focusedColor string) *InputText {
+	p := ba.ctx.Get("InputText").New(focusedColor)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// FontFamily returns the FontFamily property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#fontfamily
+func (i *InputText) FontFamily(fontFamily string) *InputText {
+	p := ba.ctx.Get("InputText").New(fontFamily)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetFontFamily sets the FontFamily property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#fontfamily
+func (i *InputText) SetFontFamily(fontFamily string) *InputText {
+	p := ba.ctx.Get("InputText").New(fontFamily)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// FontOffset returns the FontOffset property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#fontoffset
+func (i *InputText) FontOffset(fontOffset js.Value) *InputText {
+	p := ba.ctx.Get("InputText").New(fontOffset)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetFontOffset sets the FontOffset property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#fontoffset
+func (i *InputText) SetFontOffset(fontOffset js.Value) *InputText {
+	p := ba.ctx.Get("InputText").New(fontOffset)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// FontSize returns the FontSize property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#fontsize
+func (i *InputText) FontSize(fontSize string) *InputText {
+	p := ba.ctx.Get("InputText").New(fontSize)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetFontSize sets the FontSize property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#fontsize
+func (i *InputText) SetFontSize(fontSize string) *InputText {
+	p := ba.ctx.Get("InputText").New(fontSize)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// FontSizeInPixels returns the FontSizeInPixels property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#fontsizeinpixels
+func (i *InputText) FontSizeInPixels(fontSizeInPixels float64) *InputText {
+	p := ba.ctx.Get("InputText").New(fontSizeInPixels)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetFontSizeInPixels sets the FontSizeInPixels property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#fontsizeinpixels
+func (i *InputText) SetFontSizeInPixels(fontSizeInPixels float64) *InputText {
+	p := ba.ctx.Get("InputText").New(fontSizeInPixels)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// FontStyle returns the FontStyle property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#fontstyle
+func (i *InputText) FontStyle(fontStyle string) *InputText {
+	p := ba.ctx.Get("InputText").New(fontStyle)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetFontStyle sets the FontStyle property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#fontstyle
+func (i *InputText) SetFontStyle(fontStyle string) *InputText {
+	p := ba.ctx.Get("InputText").New(fontStyle)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// FontWeight returns the FontWeight property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#fontweight
+func (i *InputText) FontWeight(fontWeight string) *InputText {
+	p := ba.ctx.Get("InputText").New(fontWeight)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetFontWeight sets the FontWeight property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#fontweight
+func (i *InputText) SetFontWeight(fontWeight string) *InputText {
+	p := ba.ctx.Get("InputText").New(fontWeight)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// HORIZONTAL_ALIGNMENT_CENTER returns the HORIZONTAL_ALIGNMENT_CENTER property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#horizontal_alignment_center
+func (i *InputText) HORIZONTAL_ALIGNMENT_CENTER(HORIZONTAL_ALIGNMENT_CENTER float64) *InputText {
+	p := ba.ctx.Get("InputText").New(HORIZONTAL_ALIGNMENT_CENTER)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetHORIZONTAL_ALIGNMENT_CENTER sets the HORIZONTAL_ALIGNMENT_CENTER property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#horizontal_alignment_center
+func (i *InputText) SetHORIZONTAL_ALIGNMENT_CENTER(HORIZONTAL_ALIGNMENT_CENTER float64) *InputText {
+	p := ba.ctx.Get("InputText").New(HORIZONTAL_ALIGNMENT_CENTER)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// HORIZONTAL_ALIGNMENT_LEFT returns the HORIZONTAL_ALIGNMENT_LEFT property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#horizontal_alignment_left
+func (i *InputText) HORIZONTAL_ALIGNMENT_LEFT(HORIZONTAL_ALIGNMENT_LEFT float64) *InputText {
+	p := ba.ctx.Get("InputText").New(HORIZONTAL_ALIGNMENT_LEFT)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetHORIZONTAL_ALIGNMENT_LEFT sets the HORIZONTAL_ALIGNMENT_LEFT property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#horizontal_alignment_left
+func (i *InputText) SetHORIZONTAL_ALIGNMENT_LEFT(HORIZONTAL_ALIGNMENT_LEFT float64) *InputText {
+	p := ba.ctx.Get("InputText").New(HORIZONTAL_ALIGNMENT_LEFT)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// HORIZONTAL_ALIGNMENT_RIGHT returns the HORIZONTAL_ALIGNMENT_RIGHT property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#horizontal_alignment_right
+func (i *InputText) HORIZONTAL_ALIGNMENT_RIGHT(HORIZONTAL_ALIGNMENT_RIGHT float64) *InputText {
+	p := ba.ctx.Get("InputText").New(HORIZONTAL_ALIGNMENT_RIGHT)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetHORIZONTAL_ALIGNMENT_RIGHT sets the HORIZONTAL_ALIGNMENT_RIGHT property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#horizontal_alignment_right
+func (i *InputText) SetHORIZONTAL_ALIGNMENT_RIGHT(HORIZONTAL_ALIGNMENT_RIGHT float64) *InputText {
+	p := ba.ctx.Get("InputText").New(HORIZONTAL_ALIGNMENT_RIGHT)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// Height returns the Height property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#height
+func (i *InputText) Height(height string) *InputText {
+	p := ba.ctx.Get("InputText").New(height)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetHeight sets the Height property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#height
+func (i *InputText) SetHeight(height string) *InputText {
+	p := ba.ctx.Get("InputText").New(height)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// HeightInPixels returns the HeightInPixels property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#heightinpixels
+func (i *InputText) HeightInPixels(heightInPixels float64) *InputText {
+	p := ba.ctx.Get("InputText").New(heightInPixels)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetHeightInPixels sets the HeightInPixels property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#heightinpixels
+func (i *InputText) SetHeightInPixels(heightInPixels float64) *InputText {
+	p := ba.ctx.Get("InputText").New(heightInPixels)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// HighligherOpacity returns the HighligherOpacity property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#highligheropacity
+func (i *InputText) HighligherOpacity(highligherOpacity float64) *InputText {
+	p := ba.ctx.Get("InputText").New(highligherOpacity)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetHighligherOpacity sets the HighligherOpacity property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#highligheropacity
+func (i *InputText) SetHighligherOpacity(highligherOpacity float64) *InputText {
+	p := ba.ctx.Get("InputText").New(highligherOpacity)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// HighlightedText returns the HighlightedText property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#highlightedtext
+func (i *InputText) HighlightedText(highlightedText string) *InputText {
+	p := ba.ctx.Get("InputText").New(highlightedText)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetHighlightedText sets the HighlightedText property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#highlightedtext
+func (i *InputText) SetHighlightedText(highlightedText string) *InputText {
+	p := ba.ctx.Get("InputText").New(highlightedText)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// HorizontalAlignment returns the HorizontalAlignment property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#horizontalalignment
+func (i *InputText) HorizontalAlignment(horizontalAlignment float64) *InputText {
+	p := ba.ctx.Get("InputText").New(horizontalAlignment)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetHorizontalAlignment sets the HorizontalAlignment property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#horizontalalignment
+func (i *InputText) SetHorizontalAlignment(horizontalAlignment float64) *InputText {
+	p := ba.ctx.Get("InputText").New(horizontalAlignment)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// Host returns the Host property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#host
+func (i *InputText) Host(host *AdvancedDynamicTexture) *InputText {
+	p := ba.ctx.Get("InputText").New(host.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetHost sets the Host property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#host
+func (i *InputText) SetHost(host *AdvancedDynamicTexture) *InputText {
+	p := ba.ctx.Get("InputText").New(host.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// HoverCursor returns the HoverCursor property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#hovercursor
+func (i *InputText) HoverCursor(hoverCursor string) *InputText {
+	p := ba.ctx.Get("InputText").New(hoverCursor)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetHoverCursor sets the HoverCursor property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#hovercursor
+func (i *InputText) SetHoverCursor(hoverCursor string) *InputText {
+	p := ba.ctx.Get("InputText").New(hoverCursor)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// IsDirty returns the IsDirty property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#isdirty
+func (i *InputText) IsDirty(isDirty bool) *InputText {
+	p := ba.ctx.Get("InputText").New(isDirty)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetIsDirty sets the IsDirty property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#isdirty
+func (i *InputText) SetIsDirty(isDirty bool) *InputText {
+	p := ba.ctx.Get("InputText").New(isDirty)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// IsEnabled returns the IsEnabled property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#isenabled
+func (i *InputText) IsEnabled(isEnabled bool) *InputText {
+	p := ba.ctx.Get("InputText").New(isEnabled)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetIsEnabled sets the IsEnabled property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#isenabled
+func (i *InputText) SetIsEnabled(isEnabled bool) *InputText {
+	p := ba.ctx.Get("InputText").New(isEnabled)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// IsFocusInvisible returns the IsFocusInvisible property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#isfocusinvisible
+func (i *InputText) IsFocusInvisible(isFocusInvisible bool) *InputText {
+	p := ba.ctx.Get("InputText").New(isFocusInvisible)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetIsFocusInvisible sets the IsFocusInvisible property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#isfocusinvisible
+func (i *InputText) SetIsFocusInvisible(isFocusInvisible bool) *InputText {
+	p := ba.ctx.Get("InputText").New(isFocusInvisible)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// IsHighlighted returns the IsHighlighted property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#ishighlighted
+func (i *InputText) IsHighlighted(isHighlighted bool) *InputText {
+	p := ba.ctx.Get("InputText").New(isHighlighted)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetIsHighlighted sets the IsHighlighted property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#ishighlighted
+func (i *InputText) SetIsHighlighted(isHighlighted bool) *InputText {
+	p := ba.ctx.Get("InputText").New(isHighlighted)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// IsHitTestVisible returns the IsHitTestVisible property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#ishittestvisible
+func (i *InputText) IsHitTestVisible(isHitTestVisible bool) *InputText {
+	p := ba.ctx.Get("InputText").New(isHitTestVisible)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetIsHitTestVisible sets the IsHitTestVisible property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#ishittestvisible
+func (i *InputText) SetIsHitTestVisible(isHitTestVisible bool) *InputText {
+	p := ba.ctx.Get("InputText").New(isHitTestVisible)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// IsPointerBlocker returns the IsPointerBlocker property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#ispointerblocker
+func (i *InputText) IsPointerBlocker(isPointerBlocker bool) *InputText {
+	p := ba.ctx.Get("InputText").New(isPointerBlocker)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetIsPointerBlocker sets the IsPointerBlocker property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#ispointerblocker
+func (i *InputText) SetIsPointerBlocker(isPointerBlocker bool) *InputText {
+	p := ba.ctx.Get("InputText").New(isPointerBlocker)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// IsVisible returns the IsVisible property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#isvisible
+func (i *InputText) IsVisible(isVisible bool) *InputText {
+	p := ba.ctx.Get("InputText").New(isVisible)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetIsVisible sets the IsVisible property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#isvisible
+func (i *InputText) SetIsVisible(isVisible bool) *InputText {
+	p := ba.ctx.Get("InputText").New(isVisible)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// Left returns the Left property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#left
+func (i *InputText) Left(left string) *InputText {
+	p := ba.ctx.Get("InputText").New(left)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetLeft sets the Left property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#left
+func (i *InputText) SetLeft(left string) *InputText {
+	p := ba.ctx.Get("InputText").New(left)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// LeftInPixels returns the LeftInPixels property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#leftinpixels
+func (i *InputText) LeftInPixels(leftInPixels float64) *InputText {
+	p := ba.ctx.Get("InputText").New(leftInPixels)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetLeftInPixels sets the LeftInPixels property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#leftinpixels
+func (i *InputText) SetLeftInPixels(leftInPixels float64) *InputText {
+	p := ba.ctx.Get("InputText").New(leftInPixels)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetX returns the LinkOffsetX property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#linkoffsetx
+func (i *InputText) LinkOffsetX(linkOffsetX string) *InputText {
+	p := ba.ctx.Get("InputText").New(linkOffsetX)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetX sets the LinkOffsetX property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#linkoffsetx
+func (i *InputText) SetLinkOffsetX(linkOffsetX string) *InputText {
+	p := ba.ctx.Get("InputText").New(linkOffsetX)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetXInPixels returns the LinkOffsetXInPixels property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#linkoffsetxinpixels
+func (i *InputText) LinkOffsetXInPixels(linkOffsetXInPixels float64) *InputText {
+	p := ba.ctx.Get("InputText").New(linkOffsetXInPixels)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetXInPixels sets the LinkOffsetXInPixels property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#linkoffsetxinpixels
+func (i *InputText) SetLinkOffsetXInPixels(linkOffsetXInPixels float64) *InputText {
+	p := ba.ctx.Get("InputText").New(linkOffsetXInPixels)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetY returns the LinkOffsetY property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#linkoffsety
+func (i *InputText) LinkOffsetY(linkOffsetY string) *InputText {
+	p := ba.ctx.Get("InputText").New(linkOffsetY)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetY sets the LinkOffsetY property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#linkoffsety
+func (i *InputText) SetLinkOffsetY(linkOffsetY string) *InputText {
+	p := ba.ctx.Get("InputText").New(linkOffsetY)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetYInPixels returns the LinkOffsetYInPixels property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#linkoffsetyinpixels
+func (i *InputText) LinkOffsetYInPixels(linkOffsetYInPixels float64) *InputText {
+	p := ba.ctx.Get("InputText").New(linkOffsetYInPixels)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetYInPixels sets the LinkOffsetYInPixels property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#linkoffsetyinpixels
+func (i *InputText) SetLinkOffsetYInPixels(linkOffsetYInPixels float64) *InputText {
+	p := ba.ctx.Get("InputText").New(linkOffsetYInPixels)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// LinkedMesh returns the LinkedMesh property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#linkedmesh
+func (i *InputText) LinkedMesh(linkedMesh *AbstractMesh) *InputText {
+	p := ba.ctx.Get("InputText").New(linkedMesh.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetLinkedMesh sets the LinkedMesh property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#linkedmesh
+func (i *InputText) SetLinkedMesh(linkedMesh *AbstractMesh) *InputText {
+	p := ba.ctx.Get("InputText").New(linkedMesh.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// Margin returns the Margin property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#margin
+func (i *InputText) Margin(margin string) *InputText {
+	p := ba.ctx.Get("InputText").New(margin)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetMargin sets the Margin property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#margin
+func (i *InputText) SetMargin(margin string) *InputText {
+	p := ba.ctx.Get("InputText").New(margin)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// MarginInPixels returns the MarginInPixels property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#margininpixels
+func (i *InputText) MarginInPixels(marginInPixels float64) *InputText {
+	p := ba.ctx.Get("InputText").New(marginInPixels)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetMarginInPixels sets the MarginInPixels property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#margininpixels
+func (i *InputText) SetMarginInPixels(marginInPixels float64) *InputText {
+	p := ba.ctx.Get("InputText").New(marginInPixels)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// MaxWidth returns the MaxWidth property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#maxwidth
+func (i *InputText) MaxWidth(maxWidth string) *InputText {
+	p := ba.ctx.Get("InputText").New(maxWidth)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetMaxWidth sets the MaxWidth property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#maxwidth
+func (i *InputText) SetMaxWidth(maxWidth string) *InputText {
+	p := ba.ctx.Get("InputText").New(maxWidth)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// MaxWidthInPixels returns the MaxWidthInPixels property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#maxwidthinpixels
+func (i *InputText) MaxWidthInPixels(maxWidthInPixels float64) *InputText {
+	p := ba.ctx.Get("InputText").New(maxWidthInPixels)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetMaxWidthInPixels sets the MaxWidthInPixels property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#maxwidthinpixels
+func (i *InputText) SetMaxWidthInPixels(maxWidthInPixels float64) *InputText {
+	p := ba.ctx.Get("InputText").New(maxWidthInPixels)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#metadata
+func (i *InputText) Metadata(metadata interface{}) *InputText {
+	p := ba.ctx.Get("InputText").New(metadata)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#metadata
+func (i *InputText) SetMetadata(metadata interface{}) *InputText {
+	p := ba.ctx.Get("InputText").New(metadata)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#name
+func (i *InputText) Name(name string) *InputText {
+	p := ba.ctx.Get("InputText").New(name)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#name
+func (i *InputText) SetName(name string) *InputText {
+	p := ba.ctx.Get("InputText").New(name)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// NotRenderable returns the NotRenderable property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#notrenderable
+func (i *InputText) NotRenderable(notRenderable bool) *InputText {
+	p := ba.ctx.Get("InputText").New(notRenderable)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetNotRenderable sets the NotRenderable property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#notrenderable
+func (i *InputText) SetNotRenderable(notRenderable bool) *InputText {
+	p := ba.ctx.Get("InputText").New(notRenderable)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// OnAfterDrawObservable returns the OnAfterDrawObservable property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#onafterdrawobservable
+func (i *InputText) OnAfterDrawObservable(onAfterDrawObservable *Observable) *InputText {
+	p := ba.ctx.Get("InputText").New(onAfterDrawObservable.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterDrawObservable sets the OnAfterDrawObservable property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#onafterdrawobservable
+func (i *InputText) SetOnAfterDrawObservable(onAfterDrawObservable *Observable) *InputText {
+	p := ba.ctx.Get("InputText").New(onAfterDrawObservable.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeDrawObservable returns the OnBeforeDrawObservable property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#onbeforedrawobservable
+func (i *InputText) OnBeforeDrawObservable(onBeforeDrawObservable *Observable) *InputText {
+	p := ba.ctx.Get("InputText").New(onBeforeDrawObservable.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeDrawObservable sets the OnBeforeDrawObservable property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#onbeforedrawobservable
+func (i *InputText) SetOnBeforeDrawObservable(onBeforeDrawObservable *Observable) *InputText {
+	p := ba.ctx.Get("InputText").New(onBeforeDrawObservable.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeKeyAddObservable returns the OnBeforeKeyAddObservable property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#onbeforekeyaddobservable
+func (i *InputText) OnBeforeKeyAddObservable(onBeforeKeyAddObservable *Observable) *InputText {
+	p := ba.ctx.Get("InputText").New(onBeforeKeyAddObservable.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeKeyAddObservable sets the OnBeforeKeyAddObservable property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#onbeforekeyaddobservable
+func (i *InputText) SetOnBeforeKeyAddObservable(onBeforeKeyAddObservable *Observable) *InputText {
+	p := ba.ctx.Get("InputText").New(onBeforeKeyAddObservable.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// OnBlurObservable returns the OnBlurObservable property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#onblurobservable
+func (i *InputText) OnBlurObservable(onBlurObservable *Observable) *InputText {
+	p := ba.ctx.Get("InputText").New(onBlurObservable.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetOnBlurObservable sets the OnBlurObservable property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#onblurobservable
+func (i *InputText) SetOnBlurObservable(onBlurObservable *Observable) *InputText {
+	p := ba.ctx.Get("InputText").New(onBlurObservable.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// OnDirtyObservable returns the OnDirtyObservable property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#ondirtyobservable
+func (i *InputText) OnDirtyObservable(onDirtyObservable *Observable) *InputText {
+	p := ba.ctx.Get("InputText").New(onDirtyObservable.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetOnDirtyObservable sets the OnDirtyObservable property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#ondirtyobservable
+func (i *InputText) SetOnDirtyObservable(onDirtyObservable *Observable) *InputText {
+	p := ba.ctx.Get("InputText").New(onDirtyObservable.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// OnFocusObservable returns the OnFocusObservable property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#onfocusobservable
+func (i *InputText) OnFocusObservable(onFocusObservable *Observable) *InputText {
+	p := ba.ctx.Get("InputText").New(onFocusObservable.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetOnFocusObservable sets the OnFocusObservable property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#onfocusobservable
+func (i *InputText) SetOnFocusObservable(onFocusObservable *Observable) *InputText {
+	p := ba.ctx.Get("InputText").New(onFocusObservable.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// OnFocusSelectAll returns the OnFocusSelectAll property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#onfocusselectall
+func (i *InputText) OnFocusSelectAll(onFocusSelectAll bool) *InputText {
+	p := ba.ctx.Get("InputText").New(onFocusSelectAll)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetOnFocusSelectAll sets the OnFocusSelectAll property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#onfocusselectall
+func (i *InputText) SetOnFocusSelectAll(onFocusSelectAll bool) *InputText {
+	p := ba.ctx.Get("InputText").New(onFocusSelectAll)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// OnKeyboardEventProcessedObservable returns the OnKeyboardEventProcessedObservable property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#onkeyboardeventprocessedobservable
+func (i *InputText) OnKeyboardEventProcessedObservable(onKeyboardEventProcessedObservable *Observable) *InputText {
+	p := ba.ctx.Get("InputText").New(onKeyboardEventProcessedObservable.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetOnKeyboardEventProcessedObservable sets the OnKeyboardEventProcessedObservable property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#onkeyboardeventprocessedobservable
+func (i *InputText) SetOnKeyboardEventProcessedObservable(onKeyboardEventProcessedObservable *Observable) *InputText {
+	p := ba.ctx.Get("InputText").New(onKeyboardEventProcessedObservable.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// OnPointerClickObservable returns the OnPointerClickObservable property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#onpointerclickobservable
+func (i *InputText) OnPointerClickObservable(onPointerClickObservable *Observable) *InputText {
+	p := ba.ctx.Get("InputText").New(onPointerClickObservable.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerClickObservable sets the OnPointerClickObservable property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#onpointerclickobservable
+func (i *InputText) SetOnPointerClickObservable(onPointerClickObservable *Observable) *InputText {
+	p := ba.ctx.Get("InputText").New(onPointerClickObservable.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// OnPointerDownObservable returns the OnPointerDownObservable property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#onpointerdownobservable
+func (i *InputText) OnPointerDownObservable(onPointerDownObservable *Observable) *InputText {
+	p := ba.ctx.Get("InputText").New(onPointerDownObservable.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerDownObservable sets the OnPointerDownObservable property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#onpointerdownobservable
+func (i *InputText) SetOnPointerDownObservable(onPointerDownObservable *Observable) *InputText {
+	p := ba.ctx.Get("InputText").New(onPointerDownObservable.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// OnPointerEnterObservable returns the OnPointerEnterObservable property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#onpointerenterobservable
+func (i *InputText) OnPointerEnterObservable(onPointerEnterObservable *Observable) *InputText {
+	p := ba.ctx.Get("InputText").New(onPointerEnterObservable.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerEnterObservable sets the OnPointerEnterObservable property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#onpointerenterobservable
+func (i *InputText) SetOnPointerEnterObservable(onPointerEnterObservable *Observable) *InputText {
+	p := ba.ctx.Get("InputText").New(onPointerEnterObservable.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// OnPointerMoveObservable returns the OnPointerMoveObservable property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#onpointermoveobservable
+func (i *InputText) OnPointerMoveObservable(onPointerMoveObservable *Observable) *InputText {
+	p := ba.ctx.Get("InputText").New(onPointerMoveObservable.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerMoveObservable sets the OnPointerMoveObservable property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#onpointermoveobservable
+func (i *InputText) SetOnPointerMoveObservable(onPointerMoveObservable *Observable) *InputText {
+	p := ba.ctx.Get("InputText").New(onPointerMoveObservable.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// OnPointerOutObservable returns the OnPointerOutObservable property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#onpointeroutobservable
+func (i *InputText) OnPointerOutObservable(onPointerOutObservable *Observable) *InputText {
+	p := ba.ctx.Get("InputText").New(onPointerOutObservable.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerOutObservable sets the OnPointerOutObservable property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#onpointeroutobservable
+func (i *InputText) SetOnPointerOutObservable(onPointerOutObservable *Observable) *InputText {
+	p := ba.ctx.Get("InputText").New(onPointerOutObservable.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// OnPointerUpObservable returns the OnPointerUpObservable property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#onpointerupobservable
+func (i *InputText) OnPointerUpObservable(onPointerUpObservable *Observable) *InputText {
+	p := ba.ctx.Get("InputText").New(onPointerUpObservable.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerUpObservable sets the OnPointerUpObservable property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#onpointerupobservable
+func (i *InputText) SetOnPointerUpObservable(onPointerUpObservable *Observable) *InputText {
+	p := ba.ctx.Get("InputText").New(onPointerUpObservable.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// OnTextChangedObservable returns the OnTextChangedObservable property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#ontextchangedobservable
+func (i *InputText) OnTextChangedObservable(onTextChangedObservable *Observable) *InputText {
+	p := ba.ctx.Get("InputText").New(onTextChangedObservable.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetOnTextChangedObservable sets the OnTextChangedObservable property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#ontextchangedobservable
+func (i *InputText) SetOnTextChangedObservable(onTextChangedObservable *Observable) *InputText {
+	p := ba.ctx.Get("InputText").New(onTextChangedObservable.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// OnTextCopyObservable returns the OnTextCopyObservable property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#ontextcopyobservable
+func (i *InputText) OnTextCopyObservable(onTextCopyObservable *Observable) *InputText {
+	p := ba.ctx.Get("InputText").New(onTextCopyObservable.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetOnTextCopyObservable sets the OnTextCopyObservable property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#ontextcopyobservable
+func (i *InputText) SetOnTextCopyObservable(onTextCopyObservable *Observable) *InputText {
+	p := ba.ctx.Get("InputText").New(onTextCopyObservable.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// OnTextCutObservable returns the OnTextCutObservable property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#ontextcutobservable
+func (i *InputText) OnTextCutObservable(onTextCutObservable *Observable) *InputText {
+	p := ba.ctx.Get("InputText").New(onTextCutObservable.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetOnTextCutObservable sets the OnTextCutObservable property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#ontextcutobservable
+func (i *InputText) SetOnTextCutObservable(onTextCutObservable *Observable) *InputText {
+	p := ba.ctx.Get("InputText").New(onTextCutObservable.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// OnTextHighlightObservable returns the OnTextHighlightObservable property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#ontexthighlightobservable
+func (i *InputText) OnTextHighlightObservable(onTextHighlightObservable *Observable) *InputText {
+	p := ba.ctx.Get("InputText").New(onTextHighlightObservable.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetOnTextHighlightObservable sets the OnTextHighlightObservable property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#ontexthighlightobservable
+func (i *InputText) SetOnTextHighlightObservable(onTextHighlightObservable *Observable) *InputText {
+	p := ba.ctx.Get("InputText").New(onTextHighlightObservable.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// OnTextPasteObservable returns the OnTextPasteObservable property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#ontextpasteobservable
+func (i *InputText) OnTextPasteObservable(onTextPasteObservable *Observable) *InputText {
+	p := ba.ctx.Get("InputText").New(onTextPasteObservable.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetOnTextPasteObservable sets the OnTextPasteObservable property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#ontextpasteobservable
+func (i *InputText) SetOnTextPasteObservable(onTextPasteObservable *Observable) *InputText {
+	p := ba.ctx.Get("InputText").New(onTextPasteObservable.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// PaddingBottom returns the PaddingBottom property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#paddingbottom
+func (i *InputText) PaddingBottom(paddingBottom string) *InputText {
+	p := ba.ctx.Get("InputText").New(paddingBottom)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingBottom sets the PaddingBottom property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#paddingbottom
+func (i *InputText) SetPaddingBottom(paddingBottom string) *InputText {
+	p := ba.ctx.Get("InputText").New(paddingBottom)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// PaddingBottomInPixels returns the PaddingBottomInPixels property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#paddingbottominpixels
+func (i *InputText) PaddingBottomInPixels(paddingBottomInPixels float64) *InputText {
+	p := ba.ctx.Get("InputText").New(paddingBottomInPixels)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingBottomInPixels sets the PaddingBottomInPixels property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#paddingbottominpixels
+func (i *InputText) SetPaddingBottomInPixels(paddingBottomInPixels float64) *InputText {
+	p := ba.ctx.Get("InputText").New(paddingBottomInPixels)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// PaddingLeft returns the PaddingLeft property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#paddingleft
+func (i *InputText) PaddingLeft(paddingLeft string) *InputText {
+	p := ba.ctx.Get("InputText").New(paddingLeft)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingLeft sets the PaddingLeft property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#paddingleft
+func (i *InputText) SetPaddingLeft(paddingLeft string) *InputText {
+	p := ba.ctx.Get("InputText").New(paddingLeft)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// PaddingLeftInPixels returns the PaddingLeftInPixels property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#paddingleftinpixels
+func (i *InputText) PaddingLeftInPixels(paddingLeftInPixels float64) *InputText {
+	p := ba.ctx.Get("InputText").New(paddingLeftInPixels)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingLeftInPixels sets the PaddingLeftInPixels property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#paddingleftinpixels
+func (i *InputText) SetPaddingLeftInPixels(paddingLeftInPixels float64) *InputText {
+	p := ba.ctx.Get("InputText").New(paddingLeftInPixels)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// PaddingRight returns the PaddingRight property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#paddingright
+func (i *InputText) PaddingRight(paddingRight string) *InputText {
+	p := ba.ctx.Get("InputText").New(paddingRight)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingRight sets the PaddingRight property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#paddingright
+func (i *InputText) SetPaddingRight(paddingRight string) *InputText {
+	p := ba.ctx.Get("InputText").New(paddingRight)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// PaddingRightInPixels returns the PaddingRightInPixels property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#paddingrightinpixels
+func (i *InputText) PaddingRightInPixels(paddingRightInPixels float64) *InputText {
+	p := ba.ctx.Get("InputText").New(paddingRightInPixels)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingRightInPixels sets the PaddingRightInPixels property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#paddingrightinpixels
+func (i *InputText) SetPaddingRightInPixels(paddingRightInPixels float64) *InputText {
+	p := ba.ctx.Get("InputText").New(paddingRightInPixels)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// PaddingTop returns the PaddingTop property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#paddingtop
+func (i *InputText) PaddingTop(paddingTop string) *InputText {
+	p := ba.ctx.Get("InputText").New(paddingTop)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingTop sets the PaddingTop property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#paddingtop
+func (i *InputText) SetPaddingTop(paddingTop string) *InputText {
+	p := ba.ctx.Get("InputText").New(paddingTop)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// PaddingTopInPixels returns the PaddingTopInPixels property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#paddingtopinpixels
+func (i *InputText) PaddingTopInPixels(paddingTopInPixels float64) *InputText {
+	p := ba.ctx.Get("InputText").New(paddingTopInPixels)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingTopInPixels sets the PaddingTopInPixels property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#paddingtopinpixels
+func (i *InputText) SetPaddingTopInPixels(paddingTopInPixels float64) *InputText {
+	p := ba.ctx.Get("InputText").New(paddingTopInPixels)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// Parent returns the Parent property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#parent
+func (i *InputText) Parent(parent *Container) *InputText {
+	p := ba.ctx.Get("InputText").New(parent.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetParent sets the Parent property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#parent
+func (i *InputText) SetParent(parent *Container) *InputText {
+	p := ba.ctx.Get("InputText").New(parent.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// PlaceholderColor returns the PlaceholderColor property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#placeholdercolor
+func (i *InputText) PlaceholderColor(placeholderColor string) *InputText {
+	p := ba.ctx.Get("InputText").New(placeholderColor)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetPlaceholderColor sets the PlaceholderColor property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#placeholdercolor
+func (i *InputText) SetPlaceholderColor(placeholderColor string) *InputText {
+	p := ba.ctx.Get("InputText").New(placeholderColor)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// PlaceholderText returns the PlaceholderText property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#placeholdertext
+func (i *InputText) PlaceholderText(placeholderText string) *InputText {
+	p := ba.ctx.Get("InputText").New(placeholderText)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetPlaceholderText sets the PlaceholderText property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#placeholdertext
+func (i *InputText) SetPlaceholderText(placeholderText string) *InputText {
+	p := ba.ctx.Get("InputText").New(placeholderText)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// PromptMessage returns the PromptMessage property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#promptmessage
+func (i *InputText) PromptMessage(promptMessage string) *InputText {
+	p := ba.ctx.Get("InputText").New(promptMessage)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetPromptMessage sets the PromptMessage property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#promptmessage
+func (i *InputText) SetPromptMessage(promptMessage string) *InputText {
+	p := ba.ctx.Get("InputText").New(promptMessage)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// Rotation returns the Rotation property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#rotation
+func (i *InputText) Rotation(rotation float64) *InputText {
+	p := ba.ctx.Get("InputText").New(rotation)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetRotation sets the Rotation property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#rotation
+func (i *InputText) SetRotation(rotation float64) *InputText {
+	p := ba.ctx.Get("InputText").New(rotation)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// ScaleX returns the ScaleX property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#scalex
+func (i *InputText) ScaleX(scaleX float64) *InputText {
+	p := ba.ctx.Get("InputText").New(scaleX)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetScaleX sets the ScaleX property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#scalex
+func (i *InputText) SetScaleX(scaleX float64) *InputText {
+	p := ba.ctx.Get("InputText").New(scaleX)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// ScaleY returns the ScaleY property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#scaley
+func (i *InputText) ScaleY(scaleY float64) *InputText {
+	p := ba.ctx.Get("InputText").New(scaleY)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetScaleY sets the ScaleY property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#scaley
+func (i *InputText) SetScaleY(scaleY float64) *InputText {
+	p := ba.ctx.Get("InputText").New(scaleY)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// ShadowBlur returns the ShadowBlur property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#shadowblur
+func (i *InputText) ShadowBlur(shadowBlur float64) *InputText {
+	p := ba.ctx.Get("InputText").New(shadowBlur)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetShadowBlur sets the ShadowBlur property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#shadowblur
+func (i *InputText) SetShadowBlur(shadowBlur float64) *InputText {
+	p := ba.ctx.Get("InputText").New(shadowBlur)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// ShadowColor returns the ShadowColor property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#shadowcolor
+func (i *InputText) ShadowColor(shadowColor string) *InputText {
+	p := ba.ctx.Get("InputText").New(shadowColor)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetShadowColor sets the ShadowColor property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#shadowcolor
+func (i *InputText) SetShadowColor(shadowColor string) *InputText {
+	p := ba.ctx.Get("InputText").New(shadowColor)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// ShadowOffsetX returns the ShadowOffsetX property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#shadowoffsetx
+func (i *InputText) ShadowOffsetX(shadowOffsetX float64) *InputText {
+	p := ba.ctx.Get("InputText").New(shadowOffsetX)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetShadowOffsetX sets the ShadowOffsetX property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#shadowoffsetx
+func (i *InputText) SetShadowOffsetX(shadowOffsetX float64) *InputText {
+	p := ba.ctx.Get("InputText").New(shadowOffsetX)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// ShadowOffsetY returns the ShadowOffsetY property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#shadowoffsety
+func (i *InputText) ShadowOffsetY(shadowOffsetY float64) *InputText {
+	p := ba.ctx.Get("InputText").New(shadowOffsetY)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetShadowOffsetY sets the ShadowOffsetY property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#shadowoffsety
+func (i *InputText) SetShadowOffsetY(shadowOffsetY float64) *InputText {
+	p := ba.ctx.Get("InputText").New(shadowOffsetY)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// Style returns the Style property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#style
+func (i *InputText) Style(style *Style) *InputText {
+	p := ba.ctx.Get("InputText").New(style.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetStyle sets the Style property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#style
+func (i *InputText) SetStyle(style *Style) *InputText {
+	p := ba.ctx.Get("InputText").New(style.JSObject())
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// Text returns the Text property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#text
+func (i *InputText) Text(text string) *InputText {
+	p := ba.ctx.Get("InputText").New(text)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetText sets the Text property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#text
+func (i *InputText) SetText(text string) *InputText {
+	p := ba.ctx.Get("InputText").New(text)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// TextHighlightColor returns the TextHighlightColor property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#texthighlightcolor
+func (i *InputText) TextHighlightColor(textHighlightColor string) *InputText {
+	p := ba.ctx.Get("InputText").New(textHighlightColor)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetTextHighlightColor sets the TextHighlightColor property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#texthighlightcolor
+func (i *InputText) SetTextHighlightColor(textHighlightColor string) *InputText {
+	p := ba.ctx.Get("InputText").New(textHighlightColor)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// Thickness returns the Thickness property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#thickness
+func (i *InputText) Thickness(thickness float64) *InputText {
+	p := ba.ctx.Get("InputText").New(thickness)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetThickness sets the Thickness property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#thickness
+func (i *InputText) SetThickness(thickness float64) *InputText {
+	p := ba.ctx.Get("InputText").New(thickness)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// Top returns the Top property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#top
+func (i *InputText) Top(top string) *InputText {
+	p := ba.ctx.Get("InputText").New(top)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetTop sets the Top property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#top
+func (i *InputText) SetTop(top string) *InputText {
+	p := ba.ctx.Get("InputText").New(top)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// TopInPixels returns the TopInPixels property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#topinpixels
+func (i *InputText) TopInPixels(topInPixels float64) *InputText {
+	p := ba.ctx.Get("InputText").New(topInPixels)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetTopInPixels sets the TopInPixels property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#topinpixels
+func (i *InputText) SetTopInPixels(topInPixels float64) *InputText {
+	p := ba.ctx.Get("InputText").New(topInPixels)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// TransformCenterX returns the TransformCenterX property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#transformcenterx
+func (i *InputText) TransformCenterX(transformCenterX float64) *InputText {
+	p := ba.ctx.Get("InputText").New(transformCenterX)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetTransformCenterX sets the TransformCenterX property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#transformcenterx
+func (i *InputText) SetTransformCenterX(transformCenterX float64) *InputText {
+	p := ba.ctx.Get("InputText").New(transformCenterX)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// TransformCenterY returns the TransformCenterY property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#transformcentery
+func (i *InputText) TransformCenterY(transformCenterY float64) *InputText {
+	p := ba.ctx.Get("InputText").New(transformCenterY)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetTransformCenterY sets the TransformCenterY property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#transformcentery
+func (i *InputText) SetTransformCenterY(transformCenterY float64) *InputText {
+	p := ba.ctx.Get("InputText").New(transformCenterY)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// TypeName returns the TypeName property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#typename
+func (i *InputText) TypeName(typeName string) *InputText {
+	p := ba.ctx.Get("InputText").New(typeName)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetTypeName sets the TypeName property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#typename
+func (i *InputText) SetTypeName(typeName string) *InputText {
+	p := ba.ctx.Get("InputText").New(typeName)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#uniqueid
+func (i *InputText) UniqueId(uniqueId float64) *InputText {
+	p := ba.ctx.Get("InputText").New(uniqueId)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#uniqueid
+func (i *InputText) SetUniqueId(uniqueId float64) *InputText {
+	p := ba.ctx.Get("InputText").New(uniqueId)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// UseBitmapCache returns the UseBitmapCache property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#usebitmapcache
+func (i *InputText) UseBitmapCache(useBitmapCache bool) *InputText {
+	p := ba.ctx.Get("InputText").New(useBitmapCache)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetUseBitmapCache sets the UseBitmapCache property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#usebitmapcache
+func (i *InputText) SetUseBitmapCache(useBitmapCache bool) *InputText {
+	p := ba.ctx.Get("InputText").New(useBitmapCache)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// VERTICAL_ALIGNMENT_BOTTOM returns the VERTICAL_ALIGNMENT_BOTTOM property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#vertical_alignment_bottom
+func (i *InputText) VERTICAL_ALIGNMENT_BOTTOM(VERTICAL_ALIGNMENT_BOTTOM float64) *InputText {
+	p := ba.ctx.Get("InputText").New(VERTICAL_ALIGNMENT_BOTTOM)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetVERTICAL_ALIGNMENT_BOTTOM sets the VERTICAL_ALIGNMENT_BOTTOM property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#vertical_alignment_bottom
+func (i *InputText) SetVERTICAL_ALIGNMENT_BOTTOM(VERTICAL_ALIGNMENT_BOTTOM float64) *InputText {
+	p := ba.ctx.Get("InputText").New(VERTICAL_ALIGNMENT_BOTTOM)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// VERTICAL_ALIGNMENT_CENTER returns the VERTICAL_ALIGNMENT_CENTER property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#vertical_alignment_center
+func (i *InputText) VERTICAL_ALIGNMENT_CENTER(VERTICAL_ALIGNMENT_CENTER float64) *InputText {
+	p := ba.ctx.Get("InputText").New(VERTICAL_ALIGNMENT_CENTER)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetVERTICAL_ALIGNMENT_CENTER sets the VERTICAL_ALIGNMENT_CENTER property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#vertical_alignment_center
+func (i *InputText) SetVERTICAL_ALIGNMENT_CENTER(VERTICAL_ALIGNMENT_CENTER float64) *InputText {
+	p := ba.ctx.Get("InputText").New(VERTICAL_ALIGNMENT_CENTER)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// VERTICAL_ALIGNMENT_TOP returns the VERTICAL_ALIGNMENT_TOP property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#vertical_alignment_top
+func (i *InputText) VERTICAL_ALIGNMENT_TOP(VERTICAL_ALIGNMENT_TOP float64) *InputText {
+	p := ba.ctx.Get("InputText").New(VERTICAL_ALIGNMENT_TOP)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetVERTICAL_ALIGNMENT_TOP sets the VERTICAL_ALIGNMENT_TOP property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#vertical_alignment_top
+func (i *InputText) SetVERTICAL_ALIGNMENT_TOP(VERTICAL_ALIGNMENT_TOP float64) *InputText {
+	p := ba.ctx.Get("InputText").New(VERTICAL_ALIGNMENT_TOP)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// VerticalAlignment returns the VerticalAlignment property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#verticalalignment
+func (i *InputText) VerticalAlignment(verticalAlignment float64) *InputText {
+	p := ba.ctx.Get("InputText").New(verticalAlignment)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetVerticalAlignment sets the VerticalAlignment property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#verticalalignment
+func (i *InputText) SetVerticalAlignment(verticalAlignment float64) *InputText {
+	p := ba.ctx.Get("InputText").New(verticalAlignment)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// Width returns the Width property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#width
+func (i *InputText) Width(width string) *InputText {
+	p := ba.ctx.Get("InputText").New(width)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetWidth sets the Width property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#width
+func (i *InputText) SetWidth(width string) *InputText {
+	p := ba.ctx.Get("InputText").New(width)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// WidthInPixels returns the WidthInPixels property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#widthinpixels
+func (i *InputText) WidthInPixels(widthInPixels float64) *InputText {
+	p := ba.ctx.Get("InputText").New(widthInPixels)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetWidthInPixels sets the WidthInPixels property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#widthinpixels
+func (i *InputText) SetWidthInPixels(widthInPixels float64) *InputText {
+	p := ba.ctx.Get("InputText").New(widthInPixels)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// ZIndex returns the ZIndex property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#zindex
+func (i *InputText) ZIndex(zIndex float64) *InputText {
+	p := ba.ctx.Get("InputText").New(zIndex)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+// SetZIndex sets the ZIndex property of class InputText.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputtext#zindex
+func (i *InputText) SetZIndex(zIndex float64) *InputText {
+	p := ba.ctx.Get("InputText").New(zIndex)
+	return InputTextFromJSObject(p, ba.ctx)
+}
+
+*/

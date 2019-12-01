@@ -33,8 +33,93 @@ func RollingAverageFromJSObject(p js.Value, ctx js.Value) *RollingAverage {
 //
 // https://doc.babylonjs.com/api/classes/babylon.rollingaverage
 func (ba *Babylon) NewRollingAverage(length float64) *RollingAverage {
-	p := ba.ctx.Get("RollingAverage").New(length)
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, length)
+
+	p := ba.ctx.Get("RollingAverage").New(args...)
 	return RollingAverageFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Add calls the Add method on the RollingAverage object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rollingaverage#add
+func (r *RollingAverage) Add(v float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, v)
+
+	r.p.Call("add", args...)
+}
+
+// History calls the History method on the RollingAverage object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rollingaverage#history
+func (r *RollingAverage) History(i float64) float64 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, i)
+
+	retVal := r.p.Call("history", args...)
+	return retVal.Float()
+}
+
+// IsSaturated calls the IsSaturated method on the RollingAverage object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rollingaverage#issaturated
+func (r *RollingAverage) IsSaturated() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("isSaturated", args...)
+	return retVal.Bool()
+}
+
+// Reset calls the Reset method on the RollingAverage object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rollingaverage#reset
+func (r *RollingAverage) Reset() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	r.p.Call("reset", args...)
+}
+
+/*
+
+// Average returns the Average property of class RollingAverage.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rollingaverage#average
+func (r *RollingAverage) Average(average float64) *RollingAverage {
+	p := ba.ctx.Get("RollingAverage").New(average)
+	return RollingAverageFromJSObject(p, ba.ctx)
+}
+
+// SetAverage sets the Average property of class RollingAverage.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rollingaverage#average
+func (r *RollingAverage) SetAverage(average float64) *RollingAverage {
+	p := ba.ctx.Get("RollingAverage").New(average)
+	return RollingAverageFromJSObject(p, ba.ctx)
+}
+
+// Variance returns the Variance property of class RollingAverage.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rollingaverage#variance
+func (r *RollingAverage) Variance(variance float64) *RollingAverage {
+	p := ba.ctx.Get("RollingAverage").New(variance)
+	return RollingAverageFromJSObject(p, ba.ctx)
+}
+
+// SetVariance sets the Variance property of class RollingAverage.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rollingaverage#variance
+func (r *RollingAverage) SetVariance(variance float64) *RollingAverage {
+	p := ba.ctx.Get("RollingAverage").New(variance)
+	return RollingAverageFromJSObject(p, ba.ctx)
+}
+
+*/

@@ -30,9 +30,78 @@ func WebXREnterExitUIButtonFromJSObject(p js.Value, ctx js.Value) *WebXREnterExi
 // NewWebXREnterExitUIButton returns a new WebXREnterExitUIButton object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrenterexituibutton
-func (ba *Babylon) NewWebXREnterExitUIButton(element js.Value, sessionMode js.Value, referenceSpaceType js.Value) *WebXREnterExitUIButton {
-	p := ba.ctx.Get("WebXREnterExitUIButton").New(element, sessionMode, referenceSpaceType)
+func (ba *Babylon) NewWebXREnterExitUIButton(element js.Value, sessionMode *XRSessionMode, referenceSpaceType *XRReferenceSpaceType) *WebXREnterExitUIButton {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, element)
+	args = append(args, sessionMode.JSObject())
+	args = append(args, referenceSpaceType.JSObject())
+
+	p := ba.ctx.Get("WebXREnterExitUIButton").New(args...)
 	return WebXREnterExitUIButtonFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Update calls the Update method on the WebXREnterExitUIButton object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrenterexituibutton#update
+func (w *WebXREnterExitUIButton) Update(activeButton *WebXREnterExitUIButton) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, activeButton.JSObject())
+
+	w.p.Call("update", args...)
+}
+
+/*
+
+// Element returns the Element property of class WebXREnterExitUIButton.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrenterexituibutton#element
+func (w *WebXREnterExitUIButton) Element(element js.Value) *WebXREnterExitUIButton {
+	p := ba.ctx.Get("WebXREnterExitUIButton").New(element)
+	return WebXREnterExitUIButtonFromJSObject(p, ba.ctx)
+}
+
+// SetElement sets the Element property of class WebXREnterExitUIButton.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrenterexituibutton#element
+func (w *WebXREnterExitUIButton) SetElement(element js.Value) *WebXREnterExitUIButton {
+	p := ba.ctx.Get("WebXREnterExitUIButton").New(element)
+	return WebXREnterExitUIButtonFromJSObject(p, ba.ctx)
+}
+
+// ReferenceSpaceType returns the ReferenceSpaceType property of class WebXREnterExitUIButton.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrenterexituibutton#referencespacetype
+func (w *WebXREnterExitUIButton) ReferenceSpaceType(referenceSpaceType *XRReferenceSpaceType) *WebXREnterExitUIButton {
+	p := ba.ctx.Get("WebXREnterExitUIButton").New(referenceSpaceType.JSObject())
+	return WebXREnterExitUIButtonFromJSObject(p, ba.ctx)
+}
+
+// SetReferenceSpaceType sets the ReferenceSpaceType property of class WebXREnterExitUIButton.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrenterexituibutton#referencespacetype
+func (w *WebXREnterExitUIButton) SetReferenceSpaceType(referenceSpaceType *XRReferenceSpaceType) *WebXREnterExitUIButton {
+	p := ba.ctx.Get("WebXREnterExitUIButton").New(referenceSpaceType.JSObject())
+	return WebXREnterExitUIButtonFromJSObject(p, ba.ctx)
+}
+
+// SessionMode returns the SessionMode property of class WebXREnterExitUIButton.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrenterexituibutton#sessionmode
+func (w *WebXREnterExitUIButton) SessionMode(sessionMode *XRSessionMode) *WebXREnterExitUIButton {
+	p := ba.ctx.Get("WebXREnterExitUIButton").New(sessionMode.JSObject())
+	return WebXREnterExitUIButtonFromJSObject(p, ba.ctx)
+}
+
+// SetSessionMode sets the SessionMode property of class WebXREnterExitUIButton.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrenterexituibutton#sessionmode
+func (w *WebXREnterExitUIButton) SetSessionMode(sessionMode *XRSessionMode) *WebXREnterExitUIButton {
+	p := ba.ctx.Get("WebXREnterExitUIButton").New(sessionMode.JSObject())
+	return WebXREnterExitUIButtonFromJSObject(p, ba.ctx)
+}
+
+*/

@@ -30,9 +30,8 @@ func KhronosTextureContainerFromJSObject(p js.Value, ctx js.Value) *KhronosTextu
 
 // NewKhronosTextureContainerOpts contains optional parameters for NewKhronosTextureContainer.
 type NewKhronosTextureContainerOpts struct {
-	ThreeDExpected *JSBool
-
-	TextureArrayExpected *JSBool
+	ThreeDExpected       *bool
+	TextureArrayExpected *bool
 }
 
 // NewKhronosTextureContainer returns a new KhronosTextureContainer object.
@@ -43,8 +42,266 @@ func (ba *Babylon) NewKhronosTextureContainer(arrayBuffer interface{}, facesExpe
 		opts = &NewKhronosTextureContainerOpts{}
 	}
 
-	p := ba.ctx.Get("KhronosTextureContainer").New(arrayBuffer, facesExpected, opts.ThreeDExpected.JSObject(), opts.TextureArrayExpected.JSObject())
+	args := make([]interface{}, 0, 2+2)
+
+	args = append(args, arrayBuffer)
+	args = append(args, facesExpected)
+
+	if opts.ThreeDExpected == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ThreeDExpected)
+	}
+	if opts.TextureArrayExpected == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.TextureArrayExpected)
+	}
+
+	p := ba.ctx.Get("KhronosTextureContainer").New(args...)
 	return KhronosTextureContainerFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+/*
+
+// ArrayBuffer returns the ArrayBuffer property of class KhronosTextureContainer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khronostexturecontainer#arraybuffer
+func (k *KhronosTextureContainer) ArrayBuffer(arrayBuffer interface{}) *KhronosTextureContainer {
+	p := ba.ctx.Get("KhronosTextureContainer").New(arrayBuffer)
+	return KhronosTextureContainerFromJSObject(p, ba.ctx)
+}
+
+// SetArrayBuffer sets the ArrayBuffer property of class KhronosTextureContainer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khronostexturecontainer#arraybuffer
+func (k *KhronosTextureContainer) SetArrayBuffer(arrayBuffer interface{}) *KhronosTextureContainer {
+	p := ba.ctx.Get("KhronosTextureContainer").New(arrayBuffer)
+	return KhronosTextureContainerFromJSObject(p, ba.ctx)
+}
+
+// BytesOfKeyValueData returns the BytesOfKeyValueData property of class KhronosTextureContainer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khronostexturecontainer#bytesofkeyvaluedata
+func (k *KhronosTextureContainer) BytesOfKeyValueData(bytesOfKeyValueData float64) *KhronosTextureContainer {
+	p := ba.ctx.Get("KhronosTextureContainer").New(bytesOfKeyValueData)
+	return KhronosTextureContainerFromJSObject(p, ba.ctx)
+}
+
+// SetBytesOfKeyValueData sets the BytesOfKeyValueData property of class KhronosTextureContainer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khronostexturecontainer#bytesofkeyvaluedata
+func (k *KhronosTextureContainer) SetBytesOfKeyValueData(bytesOfKeyValueData float64) *KhronosTextureContainer {
+	p := ba.ctx.Get("KhronosTextureContainer").New(bytesOfKeyValueData)
+	return KhronosTextureContainerFromJSObject(p, ba.ctx)
+}
+
+// GlBaseInternalFormat returns the GlBaseInternalFormat property of class KhronosTextureContainer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khronostexturecontainer#glbaseinternalformat
+func (k *KhronosTextureContainer) GlBaseInternalFormat(glBaseInternalFormat float64) *KhronosTextureContainer {
+	p := ba.ctx.Get("KhronosTextureContainer").New(glBaseInternalFormat)
+	return KhronosTextureContainerFromJSObject(p, ba.ctx)
+}
+
+// SetGlBaseInternalFormat sets the GlBaseInternalFormat property of class KhronosTextureContainer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khronostexturecontainer#glbaseinternalformat
+func (k *KhronosTextureContainer) SetGlBaseInternalFormat(glBaseInternalFormat float64) *KhronosTextureContainer {
+	p := ba.ctx.Get("KhronosTextureContainer").New(glBaseInternalFormat)
+	return KhronosTextureContainerFromJSObject(p, ba.ctx)
+}
+
+// GlFormat returns the GlFormat property of class KhronosTextureContainer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khronostexturecontainer#glformat
+func (k *KhronosTextureContainer) GlFormat(glFormat float64) *KhronosTextureContainer {
+	p := ba.ctx.Get("KhronosTextureContainer").New(glFormat)
+	return KhronosTextureContainerFromJSObject(p, ba.ctx)
+}
+
+// SetGlFormat sets the GlFormat property of class KhronosTextureContainer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khronostexturecontainer#glformat
+func (k *KhronosTextureContainer) SetGlFormat(glFormat float64) *KhronosTextureContainer {
+	p := ba.ctx.Get("KhronosTextureContainer").New(glFormat)
+	return KhronosTextureContainerFromJSObject(p, ba.ctx)
+}
+
+// GlInternalFormat returns the GlInternalFormat property of class KhronosTextureContainer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khronostexturecontainer#glinternalformat
+func (k *KhronosTextureContainer) GlInternalFormat(glInternalFormat float64) *KhronosTextureContainer {
+	p := ba.ctx.Get("KhronosTextureContainer").New(glInternalFormat)
+	return KhronosTextureContainerFromJSObject(p, ba.ctx)
+}
+
+// SetGlInternalFormat sets the GlInternalFormat property of class KhronosTextureContainer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khronostexturecontainer#glinternalformat
+func (k *KhronosTextureContainer) SetGlInternalFormat(glInternalFormat float64) *KhronosTextureContainer {
+	p := ba.ctx.Get("KhronosTextureContainer").New(glInternalFormat)
+	return KhronosTextureContainerFromJSObject(p, ba.ctx)
+}
+
+// GlType returns the GlType property of class KhronosTextureContainer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khronostexturecontainer#gltype
+func (k *KhronosTextureContainer) GlType(glType float64) *KhronosTextureContainer {
+	p := ba.ctx.Get("KhronosTextureContainer").New(glType)
+	return KhronosTextureContainerFromJSObject(p, ba.ctx)
+}
+
+// SetGlType sets the GlType property of class KhronosTextureContainer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khronostexturecontainer#gltype
+func (k *KhronosTextureContainer) SetGlType(glType float64) *KhronosTextureContainer {
+	p := ba.ctx.Get("KhronosTextureContainer").New(glType)
+	return KhronosTextureContainerFromJSObject(p, ba.ctx)
+}
+
+// GlTypeSize returns the GlTypeSize property of class KhronosTextureContainer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khronostexturecontainer#gltypesize
+func (k *KhronosTextureContainer) GlTypeSize(glTypeSize float64) *KhronosTextureContainer {
+	p := ba.ctx.Get("KhronosTextureContainer").New(glTypeSize)
+	return KhronosTextureContainerFromJSObject(p, ba.ctx)
+}
+
+// SetGlTypeSize sets the GlTypeSize property of class KhronosTextureContainer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khronostexturecontainer#gltypesize
+func (k *KhronosTextureContainer) SetGlTypeSize(glTypeSize float64) *KhronosTextureContainer {
+	p := ba.ctx.Get("KhronosTextureContainer").New(glTypeSize)
+	return KhronosTextureContainerFromJSObject(p, ba.ctx)
+}
+
+// IsInvalid returns the IsInvalid property of class KhronosTextureContainer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khronostexturecontainer#isinvalid
+func (k *KhronosTextureContainer) IsInvalid(isInvalid bool) *KhronosTextureContainer {
+	p := ba.ctx.Get("KhronosTextureContainer").New(isInvalid)
+	return KhronosTextureContainerFromJSObject(p, ba.ctx)
+}
+
+// SetIsInvalid sets the IsInvalid property of class KhronosTextureContainer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khronostexturecontainer#isinvalid
+func (k *KhronosTextureContainer) SetIsInvalid(isInvalid bool) *KhronosTextureContainer {
+	p := ba.ctx.Get("KhronosTextureContainer").New(isInvalid)
+	return KhronosTextureContainerFromJSObject(p, ba.ctx)
+}
+
+// LoadType returns the LoadType property of class KhronosTextureContainer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khronostexturecontainer#loadtype
+func (k *KhronosTextureContainer) LoadType(loadType float64) *KhronosTextureContainer {
+	p := ba.ctx.Get("KhronosTextureContainer").New(loadType)
+	return KhronosTextureContainerFromJSObject(p, ba.ctx)
+}
+
+// SetLoadType sets the LoadType property of class KhronosTextureContainer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khronostexturecontainer#loadtype
+func (k *KhronosTextureContainer) SetLoadType(loadType float64) *KhronosTextureContainer {
+	p := ba.ctx.Get("KhronosTextureContainer").New(loadType)
+	return KhronosTextureContainerFromJSObject(p, ba.ctx)
+}
+
+// NumberOfArrayElements returns the NumberOfArrayElements property of class KhronosTextureContainer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khronostexturecontainer#numberofarrayelements
+func (k *KhronosTextureContainer) NumberOfArrayElements(numberOfArrayElements float64) *KhronosTextureContainer {
+	p := ba.ctx.Get("KhronosTextureContainer").New(numberOfArrayElements)
+	return KhronosTextureContainerFromJSObject(p, ba.ctx)
+}
+
+// SetNumberOfArrayElements sets the NumberOfArrayElements property of class KhronosTextureContainer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khronostexturecontainer#numberofarrayelements
+func (k *KhronosTextureContainer) SetNumberOfArrayElements(numberOfArrayElements float64) *KhronosTextureContainer {
+	p := ba.ctx.Get("KhronosTextureContainer").New(numberOfArrayElements)
+	return KhronosTextureContainerFromJSObject(p, ba.ctx)
+}
+
+// NumberOfFaces returns the NumberOfFaces property of class KhronosTextureContainer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khronostexturecontainer#numberoffaces
+func (k *KhronosTextureContainer) NumberOfFaces(numberOfFaces float64) *KhronosTextureContainer {
+	p := ba.ctx.Get("KhronosTextureContainer").New(numberOfFaces)
+	return KhronosTextureContainerFromJSObject(p, ba.ctx)
+}
+
+// SetNumberOfFaces sets the NumberOfFaces property of class KhronosTextureContainer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khronostexturecontainer#numberoffaces
+func (k *KhronosTextureContainer) SetNumberOfFaces(numberOfFaces float64) *KhronosTextureContainer {
+	p := ba.ctx.Get("KhronosTextureContainer").New(numberOfFaces)
+	return KhronosTextureContainerFromJSObject(p, ba.ctx)
+}
+
+// NumberOfMipmapLevels returns the NumberOfMipmapLevels property of class KhronosTextureContainer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khronostexturecontainer#numberofmipmaplevels
+func (k *KhronosTextureContainer) NumberOfMipmapLevels(numberOfMipmapLevels float64) *KhronosTextureContainer {
+	p := ba.ctx.Get("KhronosTextureContainer").New(numberOfMipmapLevels)
+	return KhronosTextureContainerFromJSObject(p, ba.ctx)
+}
+
+// SetNumberOfMipmapLevels sets the NumberOfMipmapLevels property of class KhronosTextureContainer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khronostexturecontainer#numberofmipmaplevels
+func (k *KhronosTextureContainer) SetNumberOfMipmapLevels(numberOfMipmapLevels float64) *KhronosTextureContainer {
+	p := ba.ctx.Get("KhronosTextureContainer").New(numberOfMipmapLevels)
+	return KhronosTextureContainerFromJSObject(p, ba.ctx)
+}
+
+// PixelDepth returns the PixelDepth property of class KhronosTextureContainer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khronostexturecontainer#pixeldepth
+func (k *KhronosTextureContainer) PixelDepth(pixelDepth float64) *KhronosTextureContainer {
+	p := ba.ctx.Get("KhronosTextureContainer").New(pixelDepth)
+	return KhronosTextureContainerFromJSObject(p, ba.ctx)
+}
+
+// SetPixelDepth sets the PixelDepth property of class KhronosTextureContainer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khronostexturecontainer#pixeldepth
+func (k *KhronosTextureContainer) SetPixelDepth(pixelDepth float64) *KhronosTextureContainer {
+	p := ba.ctx.Get("KhronosTextureContainer").New(pixelDepth)
+	return KhronosTextureContainerFromJSObject(p, ba.ctx)
+}
+
+// PixelHeight returns the PixelHeight property of class KhronosTextureContainer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khronostexturecontainer#pixelheight
+func (k *KhronosTextureContainer) PixelHeight(pixelHeight float64) *KhronosTextureContainer {
+	p := ba.ctx.Get("KhronosTextureContainer").New(pixelHeight)
+	return KhronosTextureContainerFromJSObject(p, ba.ctx)
+}
+
+// SetPixelHeight sets the PixelHeight property of class KhronosTextureContainer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khronostexturecontainer#pixelheight
+func (k *KhronosTextureContainer) SetPixelHeight(pixelHeight float64) *KhronosTextureContainer {
+	p := ba.ctx.Get("KhronosTextureContainer").New(pixelHeight)
+	return KhronosTextureContainerFromJSObject(p, ba.ctx)
+}
+
+// PixelWidth returns the PixelWidth property of class KhronosTextureContainer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khronostexturecontainer#pixelwidth
+func (k *KhronosTextureContainer) PixelWidth(pixelWidth float64) *KhronosTextureContainer {
+	p := ba.ctx.Get("KhronosTextureContainer").New(pixelWidth)
+	return KhronosTextureContainerFromJSObject(p, ba.ctx)
+}
+
+// SetPixelWidth sets the PixelWidth property of class KhronosTextureContainer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khronostexturecontainer#pixelwidth
+func (k *KhronosTextureContainer) SetPixelWidth(pixelWidth float64) *KhronosTextureContainer {
+	p := ba.ctx.Get("KhronosTextureContainer").New(pixelWidth)
+	return KhronosTextureContainerFromJSObject(p, ba.ctx)
+}
+
+*/

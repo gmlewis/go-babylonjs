@@ -27,4 +27,34 @@ func RibbonBuilderFromJSObject(p js.Value, ctx js.Value) *RibbonBuilder {
 	return &RibbonBuilder{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// RibbonBuilderCreateRibbonOpts contains optional parameters for RibbonBuilder.CreateRibbon.
+type RibbonBuilderCreateRibbonOpts struct {
+	Scene *Scene
+}
+
+// CreateRibbon calls the CreateRibbon method on the RibbonBuilder object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ribbonbuilder#createribbon
+func (r *RibbonBuilder) CreateRibbon(name string, options js.Value, opts *RibbonBuilderCreateRibbonOpts) *Mesh {
+	if opts == nil {
+		opts = &RibbonBuilderCreateRibbonOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, name)
+	args = append(args, options)
+
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+
+	retVal := r.p.Call("CreateRibbon", args...)
+	return MeshFromJSObject(retVal, r.ctx)
+}
+
+/*
+
+ */

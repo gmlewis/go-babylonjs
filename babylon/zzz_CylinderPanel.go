@@ -31,8 +31,632 @@ func CylinderPanelFromJSObject(p js.Value, ctx js.Value) *CylinderPanel {
 //
 // https://doc.babylonjs.com/api/classes/babylon.cylinderpanel
 func (ba *Babylon) NewCylinderPanel() *CylinderPanel {
-	p := ba.ctx.Get("CylinderPanel").New()
+
+	args := make([]interface{}, 0, 0+0)
+
+	p := ba.ctx.Get("CylinderPanel").New(args...)
 	return CylinderPanelFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AddBehavior calls the AddBehavior method on the CylinderPanel object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#addbehavior
+func (c *CylinderPanel) AddBehavior(behavior js.Value) *Control3D {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, behavior)
+
+	retVal := c.p.Call("addBehavior", args...)
+	return Control3DFromJSObject(retVal, c.ctx)
+}
+
+// AddControl calls the AddControl method on the CylinderPanel object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#addcontrol
+func (c *CylinderPanel) AddControl(control *Control3D) *Container3D {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, control.JSObject())
+
+	retVal := c.p.Call("addControl", args...)
+	return Container3DFromJSObject(retVal, c.ctx)
+}
+
+// ContainsControl calls the ContainsControl method on the CylinderPanel object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#containscontrol
+func (c *CylinderPanel) ContainsControl(control *Control3D) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, control.JSObject())
+
+	retVal := c.p.Call("containsControl", args...)
+	return retVal.Bool()
+}
+
+// Dispose calls the Dispose method on the CylinderPanel object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#dispose
+func (c *CylinderPanel) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	c.p.Call("dispose", args...)
+}
+
+// GetBehaviorByName calls the GetBehaviorByName method on the CylinderPanel object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#getbehaviorbyname
+func (c *CylinderPanel) GetBehaviorByName(name string) *Control3D {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := c.p.Call("getBehaviorByName", args...)
+	return Control3DFromJSObject(retVal, c.ctx)
+}
+
+// GetClassName calls the GetClassName method on the CylinderPanel object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#getclassname
+func (c *CylinderPanel) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// LinkToTransformNode calls the LinkToTransformNode method on the CylinderPanel object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#linktotransformnode
+func (c *CylinderPanel) LinkToTransformNode(node *TransformNode) *Control3D {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, node.JSObject())
+
+	retVal := c.p.Call("linkToTransformNode", args...)
+	return Control3DFromJSObject(retVal, c.ctx)
+}
+
+// RemoveBehavior calls the RemoveBehavior method on the CylinderPanel object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#removebehavior
+func (c *CylinderPanel) RemoveBehavior(behavior js.Value) *Control3D {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, behavior)
+
+	retVal := c.p.Call("removeBehavior", args...)
+	return Control3DFromJSObject(retVal, c.ctx)
+}
+
+// RemoveControl calls the RemoveControl method on the CylinderPanel object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#removecontrol
+func (c *CylinderPanel) RemoveControl(control *Control3D) *Container3D {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, control.JSObject())
+
+	retVal := c.p.Call("removeControl", args...)
+	return Container3DFromJSObject(retVal, c.ctx)
+}
+
+// UpdateLayout calls the UpdateLayout method on the CylinderPanel object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#updatelayout
+func (c *CylinderPanel) UpdateLayout() *Container3D {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("updateLayout", args...)
+	return Container3DFromJSObject(retVal, c.ctx)
+}
+
+/*
+
+// Behaviors returns the Behaviors property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#behaviors
+func (c *CylinderPanel) Behaviors(behaviors js.Value) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(behaviors)
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// SetBehaviors sets the Behaviors property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#behaviors
+func (c *CylinderPanel) SetBehaviors(behaviors js.Value) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(behaviors)
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// BlockLayout returns the BlockLayout property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#blocklayout
+func (c *CylinderPanel) BlockLayout(blockLayout bool) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(blockLayout)
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// SetBlockLayout sets the BlockLayout property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#blocklayout
+func (c *CylinderPanel) SetBlockLayout(blockLayout bool) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(blockLayout)
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// Children returns the Children property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#children
+func (c *CylinderPanel) Children(children []Control3D) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(children.JSObject())
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// SetChildren sets the Children property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#children
+func (c *CylinderPanel) SetChildren(children []Control3D) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(children.JSObject())
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// Columns returns the Columns property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#columns
+func (c *CylinderPanel) Columns(columns *int) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(columns.JSObject())
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// SetColumns sets the Columns property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#columns
+func (c *CylinderPanel) SetColumns(columns *int) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(columns.JSObject())
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// FACEFORWARDREVERSED_ORIENTATION returns the FACEFORWARDREVERSED_ORIENTATION property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#faceforwardreversed_orientation
+func (c *CylinderPanel) FACEFORWARDREVERSED_ORIENTATION(FACEFORWARDREVERSED_ORIENTATION float64) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(FACEFORWARDREVERSED_ORIENTATION)
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// SetFACEFORWARDREVERSED_ORIENTATION sets the FACEFORWARDREVERSED_ORIENTATION property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#faceforwardreversed_orientation
+func (c *CylinderPanel) SetFACEFORWARDREVERSED_ORIENTATION(FACEFORWARDREVERSED_ORIENTATION float64) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(FACEFORWARDREVERSED_ORIENTATION)
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// FACEFORWARD_ORIENTATION returns the FACEFORWARD_ORIENTATION property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#faceforward_orientation
+func (c *CylinderPanel) FACEFORWARD_ORIENTATION(FACEFORWARD_ORIENTATION float64) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(FACEFORWARD_ORIENTATION)
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// SetFACEFORWARD_ORIENTATION sets the FACEFORWARD_ORIENTATION property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#faceforward_orientation
+func (c *CylinderPanel) SetFACEFORWARD_ORIENTATION(FACEFORWARD_ORIENTATION float64) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(FACEFORWARD_ORIENTATION)
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// FACEORIGINREVERSED_ORIENTATION returns the FACEORIGINREVERSED_ORIENTATION property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#faceoriginreversed_orientation
+func (c *CylinderPanel) FACEORIGINREVERSED_ORIENTATION(FACEORIGINREVERSED_ORIENTATION float64) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(FACEORIGINREVERSED_ORIENTATION)
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// SetFACEORIGINREVERSED_ORIENTATION sets the FACEORIGINREVERSED_ORIENTATION property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#faceoriginreversed_orientation
+func (c *CylinderPanel) SetFACEORIGINREVERSED_ORIENTATION(FACEORIGINREVERSED_ORIENTATION float64) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(FACEORIGINREVERSED_ORIENTATION)
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// FACEORIGIN_ORIENTATION returns the FACEORIGIN_ORIENTATION property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#faceorigin_orientation
+func (c *CylinderPanel) FACEORIGIN_ORIENTATION(FACEORIGIN_ORIENTATION float64) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(FACEORIGIN_ORIENTATION)
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// SetFACEORIGIN_ORIENTATION sets the FACEORIGIN_ORIENTATION property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#faceorigin_orientation
+func (c *CylinderPanel) SetFACEORIGIN_ORIENTATION(FACEORIGIN_ORIENTATION float64) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(FACEORIGIN_ORIENTATION)
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// IsVisible returns the IsVisible property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#isvisible
+func (c *CylinderPanel) IsVisible(isVisible bool) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(isVisible)
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// SetIsVisible sets the IsVisible property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#isvisible
+func (c *CylinderPanel) SetIsVisible(isVisible bool) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(isVisible)
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// Margin returns the Margin property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#margin
+func (c *CylinderPanel) Margin(margin float64) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(margin)
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// SetMargin sets the Margin property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#margin
+func (c *CylinderPanel) SetMargin(margin float64) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(margin)
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// Mesh returns the Mesh property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#mesh
+func (c *CylinderPanel) Mesh(mesh *AbstractMesh) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(mesh.JSObject())
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// SetMesh sets the Mesh property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#mesh
+func (c *CylinderPanel) SetMesh(mesh *AbstractMesh) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(mesh.JSObject())
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#name
+func (c *CylinderPanel) Name(name string) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(name)
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#name
+func (c *CylinderPanel) SetName(name string) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(name)
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// Node returns the Node property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#node
+func (c *CylinderPanel) Node(node *TransformNode) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(node.JSObject())
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// SetNode sets the Node property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#node
+func (c *CylinderPanel) SetNode(node *TransformNode) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(node.JSObject())
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// OnPointerClickObservable returns the OnPointerClickObservable property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#onpointerclickobservable
+func (c *CylinderPanel) OnPointerClickObservable(onPointerClickObservable *Observable) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(onPointerClickObservable.JSObject())
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerClickObservable sets the OnPointerClickObservable property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#onpointerclickobservable
+func (c *CylinderPanel) SetOnPointerClickObservable(onPointerClickObservable *Observable) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(onPointerClickObservable.JSObject())
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// OnPointerDownObservable returns the OnPointerDownObservable property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#onpointerdownobservable
+func (c *CylinderPanel) OnPointerDownObservable(onPointerDownObservable *Observable) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(onPointerDownObservable.JSObject())
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerDownObservable sets the OnPointerDownObservable property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#onpointerdownobservable
+func (c *CylinderPanel) SetOnPointerDownObservable(onPointerDownObservable *Observable) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(onPointerDownObservable.JSObject())
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// OnPointerEnterObservable returns the OnPointerEnterObservable property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#onpointerenterobservable
+func (c *CylinderPanel) OnPointerEnterObservable(onPointerEnterObservable *Observable) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(onPointerEnterObservable.JSObject())
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerEnterObservable sets the OnPointerEnterObservable property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#onpointerenterobservable
+func (c *CylinderPanel) SetOnPointerEnterObservable(onPointerEnterObservable *Observable) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(onPointerEnterObservable.JSObject())
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// OnPointerMoveObservable returns the OnPointerMoveObservable property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#onpointermoveobservable
+func (c *CylinderPanel) OnPointerMoveObservable(onPointerMoveObservable *Observable) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(onPointerMoveObservable.JSObject())
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerMoveObservable sets the OnPointerMoveObservable property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#onpointermoveobservable
+func (c *CylinderPanel) SetOnPointerMoveObservable(onPointerMoveObservable *Observable) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(onPointerMoveObservable.JSObject())
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// OnPointerOutObservable returns the OnPointerOutObservable property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#onpointeroutobservable
+func (c *CylinderPanel) OnPointerOutObservable(onPointerOutObservable *Observable) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(onPointerOutObservable.JSObject())
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerOutObservable sets the OnPointerOutObservable property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#onpointeroutobservable
+func (c *CylinderPanel) SetOnPointerOutObservable(onPointerOutObservable *Observable) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(onPointerOutObservable.JSObject())
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// OnPointerUpObservable returns the OnPointerUpObservable property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#onpointerupobservable
+func (c *CylinderPanel) OnPointerUpObservable(onPointerUpObservable *Observable) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(onPointerUpObservable.JSObject())
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerUpObservable sets the OnPointerUpObservable property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#onpointerupobservable
+func (c *CylinderPanel) SetOnPointerUpObservable(onPointerUpObservable *Observable) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(onPointerUpObservable.JSObject())
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// Orientation returns the Orientation property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#orientation
+func (c *CylinderPanel) Orientation(orientation float64) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(orientation)
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// SetOrientation sets the Orientation property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#orientation
+func (c *CylinderPanel) SetOrientation(orientation float64) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(orientation)
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// Parent returns the Parent property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#parent
+func (c *CylinderPanel) Parent(parent *Container3D) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(parent.JSObject())
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// SetParent sets the Parent property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#parent
+func (c *CylinderPanel) SetParent(parent *Container3D) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(parent.JSObject())
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// PointerDownAnimation returns the PointerDownAnimation property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#pointerdownanimation
+func (c *CylinderPanel) PointerDownAnimation(pointerDownAnimation func()) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(pointerDownAnimation)
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// SetPointerDownAnimation sets the PointerDownAnimation property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#pointerdownanimation
+func (c *CylinderPanel) SetPointerDownAnimation(pointerDownAnimation func()) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(pointerDownAnimation)
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// PointerEnterAnimation returns the PointerEnterAnimation property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#pointerenteranimation
+func (c *CylinderPanel) PointerEnterAnimation(pointerEnterAnimation func()) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(pointerEnterAnimation)
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// SetPointerEnterAnimation sets the PointerEnterAnimation property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#pointerenteranimation
+func (c *CylinderPanel) SetPointerEnterAnimation(pointerEnterAnimation func()) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(pointerEnterAnimation)
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// PointerOutAnimation returns the PointerOutAnimation property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#pointeroutanimation
+func (c *CylinderPanel) PointerOutAnimation(pointerOutAnimation func()) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(pointerOutAnimation)
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// SetPointerOutAnimation sets the PointerOutAnimation property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#pointeroutanimation
+func (c *CylinderPanel) SetPointerOutAnimation(pointerOutAnimation func()) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(pointerOutAnimation)
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// PointerUpAnimation returns the PointerUpAnimation property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#pointerupanimation
+func (c *CylinderPanel) PointerUpAnimation(pointerUpAnimation func()) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(pointerUpAnimation)
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// SetPointerUpAnimation sets the PointerUpAnimation property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#pointerupanimation
+func (c *CylinderPanel) SetPointerUpAnimation(pointerUpAnimation func()) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(pointerUpAnimation)
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// Position returns the Position property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#position
+func (c *CylinderPanel) Position(position *Vector3) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(position.JSObject())
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// SetPosition sets the Position property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#position
+func (c *CylinderPanel) SetPosition(position *Vector3) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(position.JSObject())
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// Radius returns the Radius property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#radius
+func (c *CylinderPanel) Radius(radius *float) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(radius.JSObject())
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// SetRadius sets the Radius property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#radius
+func (c *CylinderPanel) SetRadius(radius *float) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(radius.JSObject())
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// Rows returns the Rows property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#rows
+func (c *CylinderPanel) Rows(rows *int) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(rows.JSObject())
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// SetRows sets the Rows property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#rows
+func (c *CylinderPanel) SetRows(rows *int) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(rows.JSObject())
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// Scaling returns the Scaling property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#scaling
+func (c *CylinderPanel) Scaling(scaling *Vector3) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(scaling.JSObject())
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// SetScaling sets the Scaling property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#scaling
+func (c *CylinderPanel) SetScaling(scaling *Vector3) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(scaling.JSObject())
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// TypeName returns the TypeName property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#typename
+func (c *CylinderPanel) TypeName(typeName string) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(typeName)
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// SetTypeName sets the TypeName property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#typename
+func (c *CylinderPanel) SetTypeName(typeName string) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(typeName)
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// UNSET_ORIENTATION returns the UNSET_ORIENTATION property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#unset_orientation
+func (c *CylinderPanel) UNSET_ORIENTATION(UNSET_ORIENTATION float64) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(UNSET_ORIENTATION)
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+// SetUNSET_ORIENTATION sets the UNSET_ORIENTATION property of class CylinderPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderpanel#unset_orientation
+func (c *CylinderPanel) SetUNSET_ORIENTATION(UNSET_ORIENTATION float64) *CylinderPanel {
+	p := ba.ctx.Get("CylinderPanel").New(UNSET_ORIENTATION)
+	return CylinderPanelFromJSObject(p, ba.ctx)
+}
+
+*/

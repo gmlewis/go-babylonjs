@@ -27,4 +27,34 @@ func PlaneBuilderFromJSObject(p js.Value, ctx js.Value) *PlaneBuilder {
 	return &PlaneBuilder{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// PlaneBuilderCreatePlaneOpts contains optional parameters for PlaneBuilder.CreatePlane.
+type PlaneBuilderCreatePlaneOpts struct {
+	Scene *Scene
+}
+
+// CreatePlane calls the CreatePlane method on the PlaneBuilder object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.planebuilder#createplane
+func (p *PlaneBuilder) CreatePlane(name string, options js.Value, opts *PlaneBuilderCreatePlaneOpts) *Mesh {
+	if opts == nil {
+		opts = &PlaneBuilderCreatePlaneOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, name)
+	args = append(args, options)
+
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+
+	retVal := p.p.Call("CreatePlane", args...)
+	return MeshFromJSObject(retVal, p.ctx)
+}
+
+/*
+
+ */

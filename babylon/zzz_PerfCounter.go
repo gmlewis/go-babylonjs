@@ -36,8 +36,198 @@ func PerfCounterFromJSObject(p js.Value, ctx js.Value) *PerfCounter {
 //
 // https://doc.babylonjs.com/api/classes/babylon.perfcounter
 func (ba *Babylon) NewPerfCounter() *PerfCounter {
-	p := ba.ctx.Get("PerfCounter").New()
+
+	args := make([]interface{}, 0, 0+0)
+
+	p := ba.ctx.Get("PerfCounter").New(args...)
 	return PerfCounterFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AddCount calls the AddCount method on the PerfCounter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.perfcounter#addcount
+func (p *PerfCounter) AddCount(newCount float64, fetchResult bool) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, newCount)
+	args = append(args, fetchResult)
+
+	p.p.Call("addCount", args...)
+}
+
+// BeginMonitoring calls the BeginMonitoring method on the PerfCounter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.perfcounter#beginmonitoring
+func (p *PerfCounter) BeginMonitoring() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("beginMonitoring", args...)
+}
+
+// PerfCounterEndMonitoringOpts contains optional parameters for PerfCounter.EndMonitoring.
+type PerfCounterEndMonitoringOpts struct {
+	NewFrame *bool
+}
+
+// EndMonitoring calls the EndMonitoring method on the PerfCounter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.perfcounter#endmonitoring
+func (p *PerfCounter) EndMonitoring(opts *PerfCounterEndMonitoringOpts) {
+	if opts == nil {
+		opts = &PerfCounterEndMonitoringOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.NewFrame == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NewFrame)
+	}
+
+	p.p.Call("endMonitoring", args...)
+}
+
+// FetchNewFrame calls the FetchNewFrame method on the PerfCounter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.perfcounter#fetchnewframe
+func (p *PerfCounter) FetchNewFrame() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("fetchNewFrame", args...)
+}
+
+/*
+
+// Average returns the Average property of class PerfCounter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.perfcounter#average
+func (p *PerfCounter) Average(average float64) *PerfCounter {
+	p := ba.ctx.Get("PerfCounter").New(average)
+	return PerfCounterFromJSObject(p, ba.ctx)
+}
+
+// SetAverage sets the Average property of class PerfCounter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.perfcounter#average
+func (p *PerfCounter) SetAverage(average float64) *PerfCounter {
+	p := ba.ctx.Get("PerfCounter").New(average)
+	return PerfCounterFromJSObject(p, ba.ctx)
+}
+
+// Count returns the Count property of class PerfCounter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.perfcounter#count
+func (p *PerfCounter) Count(count float64) *PerfCounter {
+	p := ba.ctx.Get("PerfCounter").New(count)
+	return PerfCounterFromJSObject(p, ba.ctx)
+}
+
+// SetCount sets the Count property of class PerfCounter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.perfcounter#count
+func (p *PerfCounter) SetCount(count float64) *PerfCounter {
+	p := ba.ctx.Get("PerfCounter").New(count)
+	return PerfCounterFromJSObject(p, ba.ctx)
+}
+
+// Current returns the Current property of class PerfCounter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.perfcounter#current
+func (p *PerfCounter) Current(current float64) *PerfCounter {
+	p := ba.ctx.Get("PerfCounter").New(current)
+	return PerfCounterFromJSObject(p, ba.ctx)
+}
+
+// SetCurrent sets the Current property of class PerfCounter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.perfcounter#current
+func (p *PerfCounter) SetCurrent(current float64) *PerfCounter {
+	p := ba.ctx.Get("PerfCounter").New(current)
+	return PerfCounterFromJSObject(p, ba.ctx)
+}
+
+// Enabled returns the Enabled property of class PerfCounter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.perfcounter#enabled
+func (p *PerfCounter) Enabled(Enabled bool) *PerfCounter {
+	p := ba.ctx.Get("PerfCounter").New(Enabled)
+	return PerfCounterFromJSObject(p, ba.ctx)
+}
+
+// SetEnabled sets the Enabled property of class PerfCounter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.perfcounter#enabled
+func (p *PerfCounter) SetEnabled(Enabled bool) *PerfCounter {
+	p := ba.ctx.Get("PerfCounter").New(Enabled)
+	return PerfCounterFromJSObject(p, ba.ctx)
+}
+
+// LastSecAverage returns the LastSecAverage property of class PerfCounter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.perfcounter#lastsecaverage
+func (p *PerfCounter) LastSecAverage(lastSecAverage float64) *PerfCounter {
+	p := ba.ctx.Get("PerfCounter").New(lastSecAverage)
+	return PerfCounterFromJSObject(p, ba.ctx)
+}
+
+// SetLastSecAverage sets the LastSecAverage property of class PerfCounter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.perfcounter#lastsecaverage
+func (p *PerfCounter) SetLastSecAverage(lastSecAverage float64) *PerfCounter {
+	p := ba.ctx.Get("PerfCounter").New(lastSecAverage)
+	return PerfCounterFromJSObject(p, ba.ctx)
+}
+
+// Max returns the Max property of class PerfCounter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.perfcounter#max
+func (p *PerfCounter) Max(max float64) *PerfCounter {
+	p := ba.ctx.Get("PerfCounter").New(max)
+	return PerfCounterFromJSObject(p, ba.ctx)
+}
+
+// SetMax sets the Max property of class PerfCounter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.perfcounter#max
+func (p *PerfCounter) SetMax(max float64) *PerfCounter {
+	p := ba.ctx.Get("PerfCounter").New(max)
+	return PerfCounterFromJSObject(p, ba.ctx)
+}
+
+// Min returns the Min property of class PerfCounter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.perfcounter#min
+func (p *PerfCounter) Min(min float64) *PerfCounter {
+	p := ba.ctx.Get("PerfCounter").New(min)
+	return PerfCounterFromJSObject(p, ba.ctx)
+}
+
+// SetMin sets the Min property of class PerfCounter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.perfcounter#min
+func (p *PerfCounter) SetMin(min float64) *PerfCounter {
+	p := ba.ctx.Get("PerfCounter").New(min)
+	return PerfCounterFromJSObject(p, ba.ctx)
+}
+
+// Total returns the Total property of class PerfCounter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.perfcounter#total
+func (p *PerfCounter) Total(total float64) *PerfCounter {
+	p := ba.ctx.Get("PerfCounter").New(total)
+	return PerfCounterFromJSObject(p, ba.ctx)
+}
+
+// SetTotal sets the Total property of class PerfCounter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.perfcounter#total
+func (p *PerfCounter) SetTotal(total float64) *PerfCounter {
+	p := ba.ctx.Get("PerfCounter").New(total)
+	return PerfCounterFromJSObject(p, ba.ctx)
+}
+
+*/

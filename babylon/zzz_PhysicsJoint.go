@@ -33,9 +33,269 @@ func PhysicsJointFromJSObject(p js.Value, ctx js.Value) *PhysicsJoint {
 // NewPhysicsJoint returns a new PhysicsJoint object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsjoint
-func (ba *Babylon) NewPhysicsJoint(jsType float64, jointData js.Value) *PhysicsJoint {
-	p := ba.ctx.Get("PhysicsJoint").New(jsType, jointData)
+func (ba *Babylon) NewPhysicsJoint(jsType float64, jointData *PhysicsJointData) *PhysicsJoint {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, jsType)
+	args = append(args, jointData.JSObject())
+
+	p := ba.ctx.Get("PhysicsJoint").New(args...)
 	return PhysicsJointFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// ExecuteNativeFunction calls the ExecuteNativeFunction method on the PhysicsJoint object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsjoint#executenativefunction
+func (p *PhysicsJoint) ExecuteNativeFunction(jsFunc func()) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, jsFunc)
+
+	p.p.Call("executeNativeFunction", args...)
+}
+
+/*
+
+// BallAndSocketJoint returns the BallAndSocketJoint property of class PhysicsJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsjoint#ballandsocketjoint
+func (p *PhysicsJoint) BallAndSocketJoint(BallAndSocketJoint float64) *PhysicsJoint {
+	p := ba.ctx.Get("PhysicsJoint").New(BallAndSocketJoint)
+	return PhysicsJointFromJSObject(p, ba.ctx)
+}
+
+// SetBallAndSocketJoint sets the BallAndSocketJoint property of class PhysicsJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsjoint#ballandsocketjoint
+func (p *PhysicsJoint) SetBallAndSocketJoint(BallAndSocketJoint float64) *PhysicsJoint {
+	p := ba.ctx.Get("PhysicsJoint").New(BallAndSocketJoint)
+	return PhysicsJointFromJSObject(p, ba.ctx)
+}
+
+// DistanceJoint returns the DistanceJoint property of class PhysicsJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsjoint#distancejoint
+func (p *PhysicsJoint) DistanceJoint(DistanceJoint float64) *PhysicsJoint {
+	p := ba.ctx.Get("PhysicsJoint").New(DistanceJoint)
+	return PhysicsJointFromJSObject(p, ba.ctx)
+}
+
+// SetDistanceJoint sets the DistanceJoint property of class PhysicsJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsjoint#distancejoint
+func (p *PhysicsJoint) SetDistanceJoint(DistanceJoint float64) *PhysicsJoint {
+	p := ba.ctx.Get("PhysicsJoint").New(DistanceJoint)
+	return PhysicsJointFromJSObject(p, ba.ctx)
+}
+
+// Hinge2Joint returns the Hinge2Joint property of class PhysicsJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsjoint#hinge2joint
+func (p *PhysicsJoint) Hinge2Joint(Hinge2Joint float64) *PhysicsJoint {
+	p := ba.ctx.Get("PhysicsJoint").New(Hinge2Joint)
+	return PhysicsJointFromJSObject(p, ba.ctx)
+}
+
+// SetHinge2Joint sets the Hinge2Joint property of class PhysicsJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsjoint#hinge2joint
+func (p *PhysicsJoint) SetHinge2Joint(Hinge2Joint float64) *PhysicsJoint {
+	p := ba.ctx.Get("PhysicsJoint").New(Hinge2Joint)
+	return PhysicsJointFromJSObject(p, ba.ctx)
+}
+
+// HingeJoint returns the HingeJoint property of class PhysicsJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsjoint#hingejoint
+func (p *PhysicsJoint) HingeJoint(HingeJoint float64) *PhysicsJoint {
+	p := ba.ctx.Get("PhysicsJoint").New(HingeJoint)
+	return PhysicsJointFromJSObject(p, ba.ctx)
+}
+
+// SetHingeJoint sets the HingeJoint property of class PhysicsJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsjoint#hingejoint
+func (p *PhysicsJoint) SetHingeJoint(HingeJoint float64) *PhysicsJoint {
+	p := ba.ctx.Get("PhysicsJoint").New(HingeJoint)
+	return PhysicsJointFromJSObject(p, ba.ctx)
+}
+
+// JointData returns the JointData property of class PhysicsJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsjoint#jointdata
+func (p *PhysicsJoint) JointData(jointData *PhysicsJointData) *PhysicsJoint {
+	p := ba.ctx.Get("PhysicsJoint").New(jointData.JSObject())
+	return PhysicsJointFromJSObject(p, ba.ctx)
+}
+
+// SetJointData sets the JointData property of class PhysicsJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsjoint#jointdata
+func (p *PhysicsJoint) SetJointData(jointData *PhysicsJointData) *PhysicsJoint {
+	p := ba.ctx.Get("PhysicsJoint").New(jointData.JSObject())
+	return PhysicsJointFromJSObject(p, ba.ctx)
+}
+
+// LockJoint returns the LockJoint property of class PhysicsJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsjoint#lockjoint
+func (p *PhysicsJoint) LockJoint(LockJoint float64) *PhysicsJoint {
+	p := ba.ctx.Get("PhysicsJoint").New(LockJoint)
+	return PhysicsJointFromJSObject(p, ba.ctx)
+}
+
+// SetLockJoint sets the LockJoint property of class PhysicsJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsjoint#lockjoint
+func (p *PhysicsJoint) SetLockJoint(LockJoint float64) *PhysicsJoint {
+	p := ba.ctx.Get("PhysicsJoint").New(LockJoint)
+	return PhysicsJointFromJSObject(p, ba.ctx)
+}
+
+// PhysicsJoint returns the PhysicsJoint property of class PhysicsJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsjoint#physicsjoint
+func (p *PhysicsJoint) PhysicsJoint(physicsJoint interface{}) *PhysicsJoint {
+	p := ba.ctx.Get("PhysicsJoint").New(physicsJoint)
+	return PhysicsJointFromJSObject(p, ba.ctx)
+}
+
+// SetPhysicsJoint sets the PhysicsJoint property of class PhysicsJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsjoint#physicsjoint
+func (p *PhysicsJoint) SetPhysicsJoint(physicsJoint interface{}) *PhysicsJoint {
+	p := ba.ctx.Get("PhysicsJoint").New(physicsJoint)
+	return PhysicsJointFromJSObject(p, ba.ctx)
+}
+
+// PhysicsPlugin returns the PhysicsPlugin property of class PhysicsJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsjoint#physicsplugin
+func (p *PhysicsJoint) PhysicsPlugin(physicsPlugin js.Value) *PhysicsJoint {
+	p := ba.ctx.Get("PhysicsJoint").New(physicsPlugin)
+	return PhysicsJointFromJSObject(p, ba.ctx)
+}
+
+// SetPhysicsPlugin sets the PhysicsPlugin property of class PhysicsJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsjoint#physicsplugin
+func (p *PhysicsJoint) SetPhysicsPlugin(physicsPlugin js.Value) *PhysicsJoint {
+	p := ba.ctx.Get("PhysicsJoint").New(physicsPlugin)
+	return PhysicsJointFromJSObject(p, ba.ctx)
+}
+
+// PointToPointJoint returns the PointToPointJoint property of class PhysicsJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsjoint#pointtopointjoint
+func (p *PhysicsJoint) PointToPointJoint(PointToPointJoint float64) *PhysicsJoint {
+	p := ba.ctx.Get("PhysicsJoint").New(PointToPointJoint)
+	return PhysicsJointFromJSObject(p, ba.ctx)
+}
+
+// SetPointToPointJoint sets the PointToPointJoint property of class PhysicsJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsjoint#pointtopointjoint
+func (p *PhysicsJoint) SetPointToPointJoint(PointToPointJoint float64) *PhysicsJoint {
+	p := ba.ctx.Get("PhysicsJoint").New(PointToPointJoint)
+	return PhysicsJointFromJSObject(p, ba.ctx)
+}
+
+// PrismaticJoint returns the PrismaticJoint property of class PhysicsJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsjoint#prismaticjoint
+func (p *PhysicsJoint) PrismaticJoint(PrismaticJoint float64) *PhysicsJoint {
+	p := ba.ctx.Get("PhysicsJoint").New(PrismaticJoint)
+	return PhysicsJointFromJSObject(p, ba.ctx)
+}
+
+// SetPrismaticJoint sets the PrismaticJoint property of class PhysicsJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsjoint#prismaticjoint
+func (p *PhysicsJoint) SetPrismaticJoint(PrismaticJoint float64) *PhysicsJoint {
+	p := ba.ctx.Get("PhysicsJoint").New(PrismaticJoint)
+	return PhysicsJointFromJSObject(p, ba.ctx)
+}
+
+// SliderJoint returns the SliderJoint property of class PhysicsJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsjoint#sliderjoint
+func (p *PhysicsJoint) SliderJoint(SliderJoint float64) *PhysicsJoint {
+	p := ba.ctx.Get("PhysicsJoint").New(SliderJoint)
+	return PhysicsJointFromJSObject(p, ba.ctx)
+}
+
+// SetSliderJoint sets the SliderJoint property of class PhysicsJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsjoint#sliderjoint
+func (p *PhysicsJoint) SetSliderJoint(SliderJoint float64) *PhysicsJoint {
+	p := ba.ctx.Get("PhysicsJoint").New(SliderJoint)
+	return PhysicsJointFromJSObject(p, ba.ctx)
+}
+
+// SpringJoint returns the SpringJoint property of class PhysicsJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsjoint#springjoint
+func (p *PhysicsJoint) SpringJoint(SpringJoint float64) *PhysicsJoint {
+	p := ba.ctx.Get("PhysicsJoint").New(SpringJoint)
+	return PhysicsJointFromJSObject(p, ba.ctx)
+}
+
+// SetSpringJoint sets the SpringJoint property of class PhysicsJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsjoint#springjoint
+func (p *PhysicsJoint) SetSpringJoint(SpringJoint float64) *PhysicsJoint {
+	p := ba.ctx.Get("PhysicsJoint").New(SpringJoint)
+	return PhysicsJointFromJSObject(p, ba.ctx)
+}
+
+// Type returns the Type property of class PhysicsJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsjoint#type
+func (p *PhysicsJoint) Type(jsType float64) *PhysicsJoint {
+	p := ba.ctx.Get("PhysicsJoint").New(jsType)
+	return PhysicsJointFromJSObject(p, ba.ctx)
+}
+
+// SetType sets the Type property of class PhysicsJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsjoint#type
+func (p *PhysicsJoint) SetType(jsType float64) *PhysicsJoint {
+	p := ba.ctx.Get("PhysicsJoint").New(jsType)
+	return PhysicsJointFromJSObject(p, ba.ctx)
+}
+
+// UniversalJoint returns the UniversalJoint property of class PhysicsJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsjoint#universaljoint
+func (p *PhysicsJoint) UniversalJoint(UniversalJoint float64) *PhysicsJoint {
+	p := ba.ctx.Get("PhysicsJoint").New(UniversalJoint)
+	return PhysicsJointFromJSObject(p, ba.ctx)
+}
+
+// SetUniversalJoint sets the UniversalJoint property of class PhysicsJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsjoint#universaljoint
+func (p *PhysicsJoint) SetUniversalJoint(UniversalJoint float64) *PhysicsJoint {
+	p := ba.ctx.Get("PhysicsJoint").New(UniversalJoint)
+	return PhysicsJointFromJSObject(p, ba.ctx)
+}
+
+// WheelJoint returns the WheelJoint property of class PhysicsJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsjoint#wheeljoint
+func (p *PhysicsJoint) WheelJoint(WheelJoint float64) *PhysicsJoint {
+	p := ba.ctx.Get("PhysicsJoint").New(WheelJoint)
+	return PhysicsJointFromJSObject(p, ba.ctx)
+}
+
+// SetWheelJoint sets the WheelJoint property of class PhysicsJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsjoint#wheeljoint
+func (p *PhysicsJoint) SetWheelJoint(WheelJoint float64) *PhysicsJoint {
+	p := ba.ctx.Get("PhysicsJoint").New(WheelJoint)
+	return PhysicsJointFromJSObject(p, ba.ctx)
+}
+
+*/

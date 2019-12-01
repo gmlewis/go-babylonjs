@@ -31,8 +31,1465 @@ func CellMaterialFromJSObject(p js.Value, ctx js.Value) *CellMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.cellmaterial
 func (ba *Babylon) NewCellMaterial(name string, scene *Scene) *CellMaterial {
-	p := ba.ctx.Get("CellMaterial").New(name, scene.JSObject())
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("CellMaterial").New(args...)
 	return CellMaterialFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// CellMaterialBindOpts contains optional parameters for CellMaterial.Bind.
+type CellMaterialBindOpts struct {
+	Mesh *Mesh
+}
+
+// Bind calls the Bind method on the CellMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#bind
+func (c *CellMaterial) Bind(world *Matrix, opts *CellMaterialBindOpts) {
+	if opts == nil {
+		opts = &CellMaterialBindOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, world.JSObject())
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	c.p.Call("bind", args...)
+}
+
+// BindForSubMesh calls the BindForSubMesh method on the CellMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#bindforsubmesh
+func (c *CellMaterial) BindForSubMesh(world *Matrix, mesh *Mesh, subMesh *SubMesh) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, world.JSObject())
+	args = append(args, mesh.JSObject())
+	args = append(args, subMesh.JSObject())
+
+	c.p.Call("bindForSubMesh", args...)
+}
+
+// BindOnlyNormalMatrix calls the BindOnlyNormalMatrix method on the CellMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#bindonlynormalmatrix
+func (c *CellMaterial) BindOnlyNormalMatrix(normalMatrix *Matrix) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, normalMatrix.JSObject())
+
+	c.p.Call("bindOnlyNormalMatrix", args...)
+}
+
+// BindOnlyWorldMatrix calls the BindOnlyWorldMatrix method on the CellMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#bindonlyworldmatrix
+func (c *CellMaterial) BindOnlyWorldMatrix(world *Matrix) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, world.JSObject())
+
+	c.p.Call("bindOnlyWorldMatrix", args...)
+}
+
+// BindSceneUniformBuffer calls the BindSceneUniformBuffer method on the CellMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#bindsceneuniformbuffer
+func (c *CellMaterial) BindSceneUniformBuffer(effect *Effect, sceneUbo *UniformBuffer) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, effect.JSObject())
+	args = append(args, sceneUbo.JSObject())
+
+	c.p.Call("bindSceneUniformBuffer", args...)
+}
+
+// BindView calls the BindView method on the CellMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#bindview
+func (c *CellMaterial) BindView(effect *Effect) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, effect.JSObject())
+
+	c.p.Call("bindView", args...)
+}
+
+// BindViewProjection calls the BindViewProjection method on the CellMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#bindviewprojection
+func (c *CellMaterial) BindViewProjection(effect *Effect) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, effect.JSObject())
+
+	c.p.Call("bindViewProjection", args...)
+}
+
+// Clone calls the Clone method on the CellMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#clone
+func (c *CellMaterial) Clone(name string) *CellMaterial {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := c.p.Call("clone", args...)
+	return CellMaterialFromJSObject(retVal, c.ctx)
+}
+
+// CellMaterialDisposeOpts contains optional parameters for CellMaterial.Dispose.
+type CellMaterialDisposeOpts struct {
+	ForceDisposeEffect *bool
+}
+
+// Dispose calls the Dispose method on the CellMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#dispose
+func (c *CellMaterial) Dispose(opts *CellMaterialDisposeOpts) {
+	if opts == nil {
+		opts = &CellMaterialDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForceDisposeEffect == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceDisposeEffect)
+	}
+
+	c.p.Call("dispose", args...)
+}
+
+// CellMaterialForceCompilationOpts contains optional parameters for CellMaterial.ForceCompilation.
+type CellMaterialForceCompilationOpts struct {
+	OnCompiled *func()
+	Options    js.Value
+	OnError    *func()
+}
+
+// ForceCompilation calls the ForceCompilation method on the CellMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#forcecompilation
+func (c *CellMaterial) ForceCompilation(mesh *AbstractMesh, opts *CellMaterialForceCompilationOpts) {
+	if opts == nil {
+		opts = &CellMaterialForceCompilationOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, mesh.JSObject())
+
+	if opts.OnCompiled == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnCompiled)
+	}
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+
+	c.p.Call("forceCompilation", args...)
+}
+
+// CellMaterialForceCompilationAsyncOpts contains optional parameters for CellMaterial.ForceCompilationAsync.
+type CellMaterialForceCompilationAsyncOpts struct {
+	Options js.Value
+}
+
+// ForceCompilationAsync calls the ForceCompilationAsync method on the CellMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#forcecompilationasync
+func (c *CellMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *CellMaterialForceCompilationAsyncOpts) {
+	if opts == nil {
+		opts = &CellMaterialForceCompilationAsyncOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, mesh.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	c.p.Call("forceCompilationAsync", args...)
+}
+
+// Freeze calls the Freeze method on the CellMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#freeze
+func (c *CellMaterial) Freeze() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	c.p.Call("freeze", args...)
+}
+
+// GetActiveTextures calls the GetActiveTextures method on the CellMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#getactivetextures
+func (c *CellMaterial) GetActiveTextures() *BaseTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getActiveTextures", args...)
+	return BaseTextureFromJSObject(retVal, c.ctx)
+}
+
+// GetAlphaTestTexture calls the GetAlphaTestTexture method on the CellMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#getalphatesttexture
+func (c *CellMaterial) GetAlphaTestTexture() *BaseTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getAlphaTestTexture", args...)
+	return BaseTextureFromJSObject(retVal, c.ctx)
+}
+
+// GetAnimatables calls the GetAnimatables method on the CellMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#getanimatables
+func (c *CellMaterial) GetAnimatables() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getAnimatables", args...)
+	return retVal
+}
+
+// GetBindedMeshes calls the GetBindedMeshes method on the CellMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#getbindedmeshes
+func (c *CellMaterial) GetBindedMeshes() *AbstractMesh {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getBindedMeshes", args...)
+	return AbstractMeshFromJSObject(retVal, c.ctx)
+}
+
+// GetClassName calls the GetClassName method on the CellMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#getclassname
+func (c *CellMaterial) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetEffect calls the GetEffect method on the CellMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#geteffect
+func (c *CellMaterial) GetEffect() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getEffect", args...)
+	return EffectFromJSObject(retVal, c.ctx)
+}
+
+// GetScene calls the GetScene method on the CellMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#getscene
+func (c *CellMaterial) GetScene() *Scene {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getScene", args...)
+	return SceneFromJSObject(retVal, c.ctx)
+}
+
+// HasTexture calls the HasTexture method on the CellMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#hastexture
+func (c *CellMaterial) HasTexture(texture *BaseTexture) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, texture.JSObject())
+
+	retVal := c.p.Call("hasTexture", args...)
+	return retVal.Bool()
+}
+
+// CellMaterialIsReadyOpts contains optional parameters for CellMaterial.IsReady.
+type CellMaterialIsReadyOpts struct {
+	Mesh         *AbstractMesh
+	UseInstances *bool
+}
+
+// IsReady calls the IsReady method on the CellMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#isready
+func (c *CellMaterial) IsReady(opts *CellMaterialIsReadyOpts) bool {
+	if opts == nil {
+		opts = &CellMaterialIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := c.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// CellMaterialIsReadyForSubMeshOpts contains optional parameters for CellMaterial.IsReadyForSubMesh.
+type CellMaterialIsReadyForSubMeshOpts struct {
+	UseInstances *bool
+}
+
+// IsReadyForSubMesh calls the IsReadyForSubMesh method on the CellMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#isreadyforsubmesh
+func (c *CellMaterial) IsReadyForSubMesh(mesh *AbstractMesh, subMesh *SubMesh, opts *CellMaterialIsReadyForSubMeshOpts) bool {
+	if opts == nil {
+		opts = &CellMaterialIsReadyForSubMeshOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, subMesh.JSObject())
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := c.p.Call("isReadyForSubMesh", args...)
+	return retVal.Bool()
+}
+
+// MarkAsDirty calls the MarkAsDirty method on the CellMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#markasdirty
+func (c *CellMaterial) MarkAsDirty(flag float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, flag)
+
+	c.p.Call("markAsDirty", args...)
+}
+
+// MarkDirty calls the MarkDirty method on the CellMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#markdirty
+func (c *CellMaterial) MarkDirty() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	c.p.Call("markDirty", args...)
+}
+
+// NeedAlphaBlending calls the NeedAlphaBlending method on the CellMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#needalphablending
+func (c *CellMaterial) NeedAlphaBlending() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("needAlphaBlending", args...)
+	return retVal.Bool()
+}
+
+// NeedAlphaBlendingForMesh calls the NeedAlphaBlendingForMesh method on the CellMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#needalphablendingformesh
+func (c *CellMaterial) NeedAlphaBlendingForMesh(mesh *AbstractMesh) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	retVal := c.p.Call("needAlphaBlendingForMesh", args...)
+	return retVal.Bool()
+}
+
+// NeedAlphaTesting calls the NeedAlphaTesting method on the CellMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#needalphatesting
+func (c *CellMaterial) NeedAlphaTesting() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("needAlphaTesting", args...)
+	return retVal.Bool()
+}
+
+// Parse calls the Parse method on the CellMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#parse
+func (c *CellMaterial) Parse(source interface{}, scene *Scene, rootUrl string) *CellMaterial {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, source)
+	args = append(args, scene.JSObject())
+	args = append(args, rootUrl)
+
+	retVal := c.p.Call("Parse", args...)
+	return CellMaterialFromJSObject(retVal, c.ctx)
+}
+
+// Serialize calls the Serialize method on the CellMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#serialize
+func (c *CellMaterial) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("serialize", args...)
+	return retVal
+}
+
+// CellMaterialToStringOpts contains optional parameters for CellMaterial.ToString.
+type CellMaterialToStringOpts struct {
+	FullDetails *bool
+}
+
+// ToString calls the ToString method on the CellMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#tostring
+func (c *CellMaterial) ToString(opts *CellMaterialToStringOpts) string {
+	if opts == nil {
+		opts = &CellMaterialToStringOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.FullDetails == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FullDetails)
+	}
+
+	retVal := c.p.Call("toString", args...)
+	return retVal.String()
+}
+
+// Unbind calls the Unbind method on the CellMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#unbind
+func (c *CellMaterial) Unbind() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	c.p.Call("unbind", args...)
+}
+
+// Unfreeze calls the Unfreeze method on the CellMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#unfreeze
+func (c *CellMaterial) Unfreeze() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	c.p.Call("unfreeze", args...)
+}
+
+/*
+
+// AllDirtyFlag returns the AllDirtyFlag property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#alldirtyflag
+func (c *CellMaterial) AllDirtyFlag(AllDirtyFlag float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(AllDirtyFlag)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAllDirtyFlag sets the AllDirtyFlag property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#alldirtyflag
+func (c *CellMaterial) SetAllDirtyFlag(AllDirtyFlag float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(AllDirtyFlag)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// AllowShaderHotSwapping returns the AllowShaderHotSwapping property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#allowshaderhotswapping
+func (c *CellMaterial) AllowShaderHotSwapping(allowShaderHotSwapping bool) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(allowShaderHotSwapping)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAllowShaderHotSwapping sets the AllowShaderHotSwapping property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#allowshaderhotswapping
+func (c *CellMaterial) SetAllowShaderHotSwapping(allowShaderHotSwapping bool) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(allowShaderHotSwapping)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// Alpha returns the Alpha property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#alpha
+func (c *CellMaterial) Alpha(alpha float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(alpha)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAlpha sets the Alpha property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#alpha
+func (c *CellMaterial) SetAlpha(alpha float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(alpha)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// AlphaMode returns the AlphaMode property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#alphamode
+func (c *CellMaterial) AlphaMode(alphaMode float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(alphaMode)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaMode sets the AlphaMode property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#alphamode
+func (c *CellMaterial) SetAlphaMode(alphaMode float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(alphaMode)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// Animations returns the Animations property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#animations
+func (c *CellMaterial) Animations(animations []Animation) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(animations.JSObject())
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#animations
+func (c *CellMaterial) SetAnimations(animations []Animation) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(animations.JSObject())
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// AttributesDirtyFlag returns the AttributesDirtyFlag property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#attributesdirtyflag
+func (c *CellMaterial) AttributesDirtyFlag(AttributesDirtyFlag float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(AttributesDirtyFlag)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAttributesDirtyFlag sets the AttributesDirtyFlag property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#attributesdirtyflag
+func (c *CellMaterial) SetAttributesDirtyFlag(AttributesDirtyFlag float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(AttributesDirtyFlag)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// BackFaceCulling returns the BackFaceCulling property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#backfaceculling
+func (c *CellMaterial) BackFaceCulling(backFaceCulling bool) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(backFaceCulling)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetBackFaceCulling sets the BackFaceCulling property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#backfaceculling
+func (c *CellMaterial) SetBackFaceCulling(backFaceCulling bool) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(backFaceCulling)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// CheckReadyOnEveryCall returns the CheckReadyOnEveryCall property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#checkreadyoneverycall
+func (c *CellMaterial) CheckReadyOnEveryCall(checkReadyOnEveryCall bool) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(checkReadyOnEveryCall)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCheckReadyOnEveryCall sets the CheckReadyOnEveryCall property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#checkreadyoneverycall
+func (c *CellMaterial) SetCheckReadyOnEveryCall(checkReadyOnEveryCall bool) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(checkReadyOnEveryCall)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// CheckReadyOnlyOnce returns the CheckReadyOnlyOnce property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#checkreadyonlyonce
+func (c *CellMaterial) CheckReadyOnlyOnce(checkReadyOnlyOnce bool) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(checkReadyOnlyOnce)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCheckReadyOnlyOnce sets the CheckReadyOnlyOnce property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#checkreadyonlyonce
+func (c *CellMaterial) SetCheckReadyOnlyOnce(checkReadyOnlyOnce bool) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(checkReadyOnlyOnce)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// ClockWiseSideOrientation returns the ClockWiseSideOrientation property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#clockwisesideorientation
+func (c *CellMaterial) ClockWiseSideOrientation(ClockWiseSideOrientation float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(ClockWiseSideOrientation)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetClockWiseSideOrientation sets the ClockWiseSideOrientation property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#clockwisesideorientation
+func (c *CellMaterial) SetClockWiseSideOrientation(ClockWiseSideOrientation float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(ClockWiseSideOrientation)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// ComputeHighLevel returns the ComputeHighLevel property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#computehighlevel
+func (c *CellMaterial) ComputeHighLevel(computeHighLevel bool) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(computeHighLevel)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetComputeHighLevel sets the ComputeHighLevel property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#computehighlevel
+func (c *CellMaterial) SetComputeHighLevel(computeHighLevel bool) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(computeHighLevel)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// CounterClockWiseSideOrientation returns the CounterClockWiseSideOrientation property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#counterclockwisesideorientation
+func (c *CellMaterial) CounterClockWiseSideOrientation(CounterClockWiseSideOrientation float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(CounterClockWiseSideOrientation)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCounterClockWiseSideOrientation sets the CounterClockWiseSideOrientation property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#counterclockwisesideorientation
+func (c *CellMaterial) SetCounterClockWiseSideOrientation(CounterClockWiseSideOrientation float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(CounterClockWiseSideOrientation)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// DepthFunction returns the DepthFunction property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#depthfunction
+func (c *CellMaterial) DepthFunction(depthFunction float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(depthFunction)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDepthFunction sets the DepthFunction property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#depthfunction
+func (c *CellMaterial) SetDepthFunction(depthFunction float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(depthFunction)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// DiffuseColor returns the DiffuseColor property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#diffusecolor
+func (c *CellMaterial) DiffuseColor(diffuseColor *Color3) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(diffuseColor.JSObject())
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDiffuseColor sets the DiffuseColor property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#diffusecolor
+func (c *CellMaterial) SetDiffuseColor(diffuseColor *Color3) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(diffuseColor.JSObject())
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// DiffuseTexture returns the DiffuseTexture property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#diffusetexture
+func (c *CellMaterial) DiffuseTexture(diffuseTexture *BaseTexture) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(diffuseTexture.JSObject())
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDiffuseTexture sets the DiffuseTexture property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#diffusetexture
+func (c *CellMaterial) SetDiffuseTexture(diffuseTexture *BaseTexture) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(diffuseTexture.JSObject())
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// DisableDepthWrite returns the DisableDepthWrite property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#disabledepthwrite
+func (c *CellMaterial) DisableDepthWrite(disableDepthWrite bool) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(disableDepthWrite)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDisableDepthWrite sets the DisableDepthWrite property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#disabledepthwrite
+func (c *CellMaterial) SetDisableDepthWrite(disableDepthWrite bool) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(disableDepthWrite)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// DisableLighting returns the DisableLighting property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#disablelighting
+func (c *CellMaterial) DisableLighting(disableLighting bool) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(disableLighting)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDisableLighting sets the DisableLighting property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#disablelighting
+func (c *CellMaterial) SetDisableLighting(disableLighting bool) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(disableLighting)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// DoNotSerialize returns the DoNotSerialize property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#donotserialize
+func (c *CellMaterial) DoNotSerialize(doNotSerialize bool) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(doNotSerialize)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDoNotSerialize sets the DoNotSerialize property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#donotserialize
+func (c *CellMaterial) SetDoNotSerialize(doNotSerialize bool) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(doNotSerialize)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// FillMode returns the FillMode property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#fillmode
+func (c *CellMaterial) FillMode(fillMode float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(fillMode)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFillMode sets the FillMode property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#fillmode
+func (c *CellMaterial) SetFillMode(fillMode float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(fillMode)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// FogEnabled returns the FogEnabled property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#fogenabled
+func (c *CellMaterial) FogEnabled(fogEnabled bool) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(fogEnabled)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFogEnabled sets the FogEnabled property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#fogenabled
+func (c *CellMaterial) SetFogEnabled(fogEnabled bool) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(fogEnabled)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// ForceDepthWrite returns the ForceDepthWrite property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#forcedepthwrite
+func (c *CellMaterial) ForceDepthWrite(forceDepthWrite bool) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(forceDepthWrite)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetForceDepthWrite sets the ForceDepthWrite property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#forcedepthwrite
+func (c *CellMaterial) SetForceDepthWrite(forceDepthWrite bool) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(forceDepthWrite)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// FresnelDirtyFlag returns the FresnelDirtyFlag property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#fresneldirtyflag
+func (c *CellMaterial) FresnelDirtyFlag(FresnelDirtyFlag float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(FresnelDirtyFlag)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFresnelDirtyFlag sets the FresnelDirtyFlag property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#fresneldirtyflag
+func (c *CellMaterial) SetFresnelDirtyFlag(FresnelDirtyFlag float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(FresnelDirtyFlag)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// GetRenderTargetTextures returns the GetRenderTargetTextures property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#getrendertargettextures
+func (c *CellMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(getRenderTargetTextures)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetGetRenderTargetTextures sets the GetRenderTargetTextures property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#getrendertargettextures
+func (c *CellMaterial) SetGetRenderTargetTextures(getRenderTargetTextures func()) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(getRenderTargetTextures)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// HasRenderTargetTextures returns the HasRenderTargetTextures property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#hasrendertargettextures
+func (c *CellMaterial) HasRenderTargetTextures(hasRenderTargetTextures bool) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(hasRenderTargetTextures)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetHasRenderTargetTextures sets the HasRenderTargetTextures property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#hasrendertargettextures
+func (c *CellMaterial) SetHasRenderTargetTextures(hasRenderTargetTextures bool) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(hasRenderTargetTextures)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// Id returns the Id property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#id
+func (c *CellMaterial) Id(id string) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(id)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetId sets the Id property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#id
+func (c *CellMaterial) SetId(id string) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(id)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#inspectablecustomproperties
+func (c *CellMaterial) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(inspectableCustomProperties.JSObject())
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#inspectablecustomproperties
+func (c *CellMaterial) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(inspectableCustomProperties.JSObject())
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// IsFrozen returns the IsFrozen property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#isfrozen
+func (c *CellMaterial) IsFrozen(isFrozen bool) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(isFrozen)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetIsFrozen sets the IsFrozen property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#isfrozen
+func (c *CellMaterial) SetIsFrozen(isFrozen bool) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(isFrozen)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// LightDirtyFlag returns the LightDirtyFlag property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#lightdirtyflag
+func (c *CellMaterial) LightDirtyFlag(LightDirtyFlag float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(LightDirtyFlag)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLightDirtyFlag sets the LightDirtyFlag property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#lightdirtyflag
+func (c *CellMaterial) SetLightDirtyFlag(LightDirtyFlag float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(LightDirtyFlag)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineListDrawMode returns the LineListDrawMode property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#linelistdrawmode
+func (c *CellMaterial) LineListDrawMode(LineListDrawMode float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(LineListDrawMode)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineListDrawMode sets the LineListDrawMode property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#linelistdrawmode
+func (c *CellMaterial) SetLineListDrawMode(LineListDrawMode float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(LineListDrawMode)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineLoopDrawMode returns the LineLoopDrawMode property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#lineloopdrawmode
+func (c *CellMaterial) LineLoopDrawMode(LineLoopDrawMode float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(LineLoopDrawMode)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineLoopDrawMode sets the LineLoopDrawMode property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#lineloopdrawmode
+func (c *CellMaterial) SetLineLoopDrawMode(LineLoopDrawMode float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(LineLoopDrawMode)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineStripDrawMode returns the LineStripDrawMode property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#linestripdrawmode
+func (c *CellMaterial) LineStripDrawMode(LineStripDrawMode float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(LineStripDrawMode)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineStripDrawMode sets the LineStripDrawMode property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#linestripdrawmode
+func (c *CellMaterial) SetLineStripDrawMode(LineStripDrawMode float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(LineStripDrawMode)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// MaxSimultaneousLights returns the MaxSimultaneousLights property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#maxsimultaneouslights
+func (c *CellMaterial) MaxSimultaneousLights(maxSimultaneousLights float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(maxSimultaneousLights)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMaxSimultaneousLights sets the MaxSimultaneousLights property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#maxsimultaneouslights
+func (c *CellMaterial) SetMaxSimultaneousLights(maxSimultaneousLights float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(maxSimultaneousLights)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#metadata
+func (c *CellMaterial) Metadata(metadata interface{}) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(metadata)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#metadata
+func (c *CellMaterial) SetMetadata(metadata interface{}) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(metadata)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// MiscDirtyFlag returns the MiscDirtyFlag property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#miscdirtyflag
+func (c *CellMaterial) MiscDirtyFlag(MiscDirtyFlag float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(MiscDirtyFlag)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMiscDirtyFlag sets the MiscDirtyFlag property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#miscdirtyflag
+func (c *CellMaterial) SetMiscDirtyFlag(MiscDirtyFlag float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(MiscDirtyFlag)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#name
+func (c *CellMaterial) Name(name string) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(name)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#name
+func (c *CellMaterial) SetName(name string) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(name)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// NeedDepthPrePass returns the NeedDepthPrePass property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#needdepthprepass
+func (c *CellMaterial) NeedDepthPrePass(needDepthPrePass bool) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(needDepthPrePass)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetNeedDepthPrePass sets the NeedDepthPrePass property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#needdepthprepass
+func (c *CellMaterial) SetNeedDepthPrePass(needDepthPrePass bool) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(needDepthPrePass)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnBind returns the OnBind property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#onbind
+func (c *CellMaterial) OnBind(onBind func()) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(onBind)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnBind sets the OnBind property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#onbind
+func (c *CellMaterial) SetOnBind(onBind func()) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(onBind)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnBindObservable returns the OnBindObservable property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#onbindobservable
+func (c *CellMaterial) OnBindObservable(onBindObservable *Observable) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(onBindObservable.JSObject())
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnBindObservable sets the OnBindObservable property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#onbindobservable
+func (c *CellMaterial) SetOnBindObservable(onBindObservable *Observable) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(onBindObservable.JSObject())
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnCompiled returns the OnCompiled property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#oncompiled
+func (c *CellMaterial) OnCompiled(onCompiled func()) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(onCompiled)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnCompiled sets the OnCompiled property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#oncompiled
+func (c *CellMaterial) SetOnCompiled(onCompiled func()) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(onCompiled)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnDispose returns the OnDispose property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#ondispose
+func (c *CellMaterial) OnDispose(onDispose func()) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(onDispose)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnDispose sets the OnDispose property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#ondispose
+func (c *CellMaterial) SetOnDispose(onDispose func()) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(onDispose)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnDisposeObservable returns the OnDisposeObservable property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#ondisposeobservable
+func (c *CellMaterial) OnDisposeObservable(onDisposeObservable *Observable) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(onDisposeObservable.JSObject())
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnDisposeObservable sets the OnDisposeObservable property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#ondisposeobservable
+func (c *CellMaterial) SetOnDisposeObservable(onDisposeObservable *Observable) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(onDisposeObservable.JSObject())
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnError returns the OnError property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#onerror
+func (c *CellMaterial) OnError(onError func()) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(onError)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnError sets the OnError property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#onerror
+func (c *CellMaterial) SetOnError(onError func()) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(onError)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnUnBindObservable returns the OnUnBindObservable property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#onunbindobservable
+func (c *CellMaterial) OnUnBindObservable(onUnBindObservable *Observable) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(onUnBindObservable.JSObject())
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnUnBindObservable sets the OnUnBindObservable property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#onunbindobservable
+func (c *CellMaterial) SetOnUnBindObservable(onUnBindObservable *Observable) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(onUnBindObservable.JSObject())
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointFillMode returns the PointFillMode property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#pointfillmode
+func (c *CellMaterial) PointFillMode(PointFillMode float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(PointFillMode)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointFillMode sets the PointFillMode property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#pointfillmode
+func (c *CellMaterial) SetPointFillMode(PointFillMode float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(PointFillMode)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointListDrawMode returns the PointListDrawMode property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#pointlistdrawmode
+func (c *CellMaterial) PointListDrawMode(PointListDrawMode float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(PointListDrawMode)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointListDrawMode sets the PointListDrawMode property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#pointlistdrawmode
+func (c *CellMaterial) SetPointListDrawMode(PointListDrawMode float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(PointListDrawMode)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointSize returns the PointSize property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#pointsize
+func (c *CellMaterial) PointSize(pointSize float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(pointSize)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointSize sets the PointSize property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#pointsize
+func (c *CellMaterial) SetPointSize(pointSize float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(pointSize)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointsCloud returns the PointsCloud property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#pointscloud
+func (c *CellMaterial) PointsCloud(pointsCloud bool) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(pointsCloud)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointsCloud sets the PointsCloud property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#pointscloud
+func (c *CellMaterial) SetPointsCloud(pointsCloud bool) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(pointsCloud)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// ReservedDataStore returns the ReservedDataStore property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#reserveddatastore
+func (c *CellMaterial) ReservedDataStore(reservedDataStore interface{}) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(reservedDataStore)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetReservedDataStore sets the ReservedDataStore property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#reserveddatastore
+func (c *CellMaterial) SetReservedDataStore(reservedDataStore interface{}) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(reservedDataStore)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SeparateCullingPass returns the SeparateCullingPass property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#separatecullingpass
+func (c *CellMaterial) SeparateCullingPass(separateCullingPass bool) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(separateCullingPass)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSeparateCullingPass sets the SeparateCullingPass property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#separatecullingpass
+func (c *CellMaterial) SetSeparateCullingPass(separateCullingPass bool) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(separateCullingPass)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SideOrientation returns the SideOrientation property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#sideorientation
+func (c *CellMaterial) SideOrientation(sideOrientation float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(sideOrientation)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSideOrientation sets the SideOrientation property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#sideorientation
+func (c *CellMaterial) SetSideOrientation(sideOrientation float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(sideOrientation)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// State returns the State property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#state
+func (c *CellMaterial) State(state string) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(state)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetState sets the State property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#state
+func (c *CellMaterial) SetState(state string) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(state)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// TextureDirtyFlag returns the TextureDirtyFlag property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#texturedirtyflag
+func (c *CellMaterial) TextureDirtyFlag(TextureDirtyFlag float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(TextureDirtyFlag)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTextureDirtyFlag sets the TextureDirtyFlag property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#texturedirtyflag
+func (c *CellMaterial) SetTextureDirtyFlag(TextureDirtyFlag float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(TextureDirtyFlag)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// TriangleFanDrawMode returns the TriangleFanDrawMode property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#trianglefandrawmode
+func (c *CellMaterial) TriangleFanDrawMode(TriangleFanDrawMode float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(TriangleFanDrawMode)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTriangleFanDrawMode sets the TriangleFanDrawMode property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#trianglefandrawmode
+func (c *CellMaterial) SetTriangleFanDrawMode(TriangleFanDrawMode float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(TriangleFanDrawMode)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// TriangleFillMode returns the TriangleFillMode property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#trianglefillmode
+func (c *CellMaterial) TriangleFillMode(TriangleFillMode float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(TriangleFillMode)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTriangleFillMode sets the TriangleFillMode property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#trianglefillmode
+func (c *CellMaterial) SetTriangleFillMode(TriangleFillMode float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(TriangleFillMode)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// TriangleStripDrawMode returns the TriangleStripDrawMode property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#trianglestripdrawmode
+func (c *CellMaterial) TriangleStripDrawMode(TriangleStripDrawMode float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(TriangleStripDrawMode)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTriangleStripDrawMode sets the TriangleStripDrawMode property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#trianglestripdrawmode
+func (c *CellMaterial) SetTriangleStripDrawMode(TriangleStripDrawMode float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(TriangleStripDrawMode)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#uniqueid
+func (c *CellMaterial) UniqueId(uniqueId float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(uniqueId)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#uniqueid
+func (c *CellMaterial) SetUniqueId(uniqueId float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(uniqueId)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// WireFrameFillMode returns the WireFrameFillMode property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#wireframefillmode
+func (c *CellMaterial) WireFrameFillMode(WireFrameFillMode float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(WireFrameFillMode)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetWireFrameFillMode sets the WireFrameFillMode property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#wireframefillmode
+func (c *CellMaterial) SetWireFrameFillMode(WireFrameFillMode float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(WireFrameFillMode)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// Wireframe returns the Wireframe property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#wireframe
+func (c *CellMaterial) Wireframe(wireframe bool) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(wireframe)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetWireframe sets the Wireframe property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#wireframe
+func (c *CellMaterial) SetWireframe(wireframe bool) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(wireframe)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// ZOffset returns the ZOffset property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#zoffset
+func (c *CellMaterial) ZOffset(zOffset float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(zOffset)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetZOffset sets the ZOffset property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#zoffset
+func (c *CellMaterial) SetZOffset(zOffset float64) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(zOffset)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// _computeHighLevel returns the _computeHighLevel property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#_computehighlevel
+func (c *CellMaterial) _computeHighLevel(_computeHighLevel bool) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(_computeHighLevel)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+// Set_computeHighLevel sets the _computeHighLevel property of class CellMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cellmaterial#_computehighlevel
+func (c *CellMaterial) Set_computeHighLevel(_computeHighLevel bool) *CellMaterial {
+	p := ba.ctx.Get("CellMaterial").New(_computeHighLevel)
+	return CellMaterialFromJSObject(p, ba.ctx)
+}
+
+*/

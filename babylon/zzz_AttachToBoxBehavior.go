@@ -31,8 +31,95 @@ func AttachToBoxBehaviorFromJSObject(p js.Value, ctx js.Value) *AttachToBoxBehav
 //
 // https://doc.babylonjs.com/api/classes/babylon.attachtoboxbehavior
 func (ba *Babylon) NewAttachToBoxBehavior(ui *TransformNode) *AttachToBoxBehavior {
-	p := ba.ctx.Get("AttachToBoxBehavior").New(ui.JSObject())
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, ui.JSObject())
+
+	p := ba.ctx.Get("AttachToBoxBehavior").New(args...)
 	return AttachToBoxBehaviorFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Attach calls the Attach method on the AttachToBoxBehavior object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.attachtoboxbehavior#attach
+func (a *AttachToBoxBehavior) Attach(target *Mesh) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, target.JSObject())
+
+	a.p.Call("attach", args...)
+}
+
+// Detach calls the Detach method on the AttachToBoxBehavior object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.attachtoboxbehavior#detach
+func (a *AttachToBoxBehavior) Detach() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	a.p.Call("detach", args...)
+}
+
+// Init calls the Init method on the AttachToBoxBehavior object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.attachtoboxbehavior#init
+func (a *AttachToBoxBehavior) Init() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	a.p.Call("init", args...)
+}
+
+/*
+
+// DistanceAwayFromBottomOfFace returns the DistanceAwayFromBottomOfFace property of class AttachToBoxBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.attachtoboxbehavior#distanceawayfrombottomofface
+func (a *AttachToBoxBehavior) DistanceAwayFromBottomOfFace(distanceAwayFromBottomOfFace float64) *AttachToBoxBehavior {
+	p := ba.ctx.Get("AttachToBoxBehavior").New(distanceAwayFromBottomOfFace)
+	return AttachToBoxBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetDistanceAwayFromBottomOfFace sets the DistanceAwayFromBottomOfFace property of class AttachToBoxBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.attachtoboxbehavior#distanceawayfrombottomofface
+func (a *AttachToBoxBehavior) SetDistanceAwayFromBottomOfFace(distanceAwayFromBottomOfFace float64) *AttachToBoxBehavior {
+	p := ba.ctx.Get("AttachToBoxBehavior").New(distanceAwayFromBottomOfFace)
+	return AttachToBoxBehaviorFromJSObject(p, ba.ctx)
+}
+
+// DistanceAwayFromFace returns the DistanceAwayFromFace property of class AttachToBoxBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.attachtoboxbehavior#distanceawayfromface
+func (a *AttachToBoxBehavior) DistanceAwayFromFace(distanceAwayFromFace float64) *AttachToBoxBehavior {
+	p := ba.ctx.Get("AttachToBoxBehavior").New(distanceAwayFromFace)
+	return AttachToBoxBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetDistanceAwayFromFace sets the DistanceAwayFromFace property of class AttachToBoxBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.attachtoboxbehavior#distanceawayfromface
+func (a *AttachToBoxBehavior) SetDistanceAwayFromFace(distanceAwayFromFace float64) *AttachToBoxBehavior {
+	p := ba.ctx.Get("AttachToBoxBehavior").New(distanceAwayFromFace)
+	return AttachToBoxBehaviorFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class AttachToBoxBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.attachtoboxbehavior#name
+func (a *AttachToBoxBehavior) Name(name string) *AttachToBoxBehavior {
+	p := ba.ctx.Get("AttachToBoxBehavior").New(name)
+	return AttachToBoxBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class AttachToBoxBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.attachtoboxbehavior#name
+func (a *AttachToBoxBehavior) SetName(name string) *AttachToBoxBehavior {
+	p := ba.ctx.Get("AttachToBoxBehavior").New(name)
+	return AttachToBoxBehaviorFromJSObject(p, ba.ctx)
+}
+
+*/

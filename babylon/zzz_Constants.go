@@ -27,4 +27,2358 @@ func ConstantsFromJSObject(p js.Value, ctx js.Value) *Constants {
 	return &Constants{p: p, ctx: ctx}
 }
 
-// TODO: methods
+/*
+
+// ACTION_NothingTrigger returns the ACTION_NothingTrigger property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#action_nothingtrigger
+func (c *Constants) ACTION_NothingTrigger(ACTION_NothingTrigger float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ACTION_NothingTrigger)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetACTION_NothingTrigger sets the ACTION_NothingTrigger property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#action_nothingtrigger
+func (c *Constants) SetACTION_NothingTrigger(ACTION_NothingTrigger float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ACTION_NothingTrigger)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// ACTION_OnCenterPickTrigger returns the ACTION_OnCenterPickTrigger property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#action_oncenterpicktrigger
+func (c *Constants) ACTION_OnCenterPickTrigger(ACTION_OnCenterPickTrigger float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ACTION_OnCenterPickTrigger)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetACTION_OnCenterPickTrigger sets the ACTION_OnCenterPickTrigger property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#action_oncenterpicktrigger
+func (c *Constants) SetACTION_OnCenterPickTrigger(ACTION_OnCenterPickTrigger float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ACTION_OnCenterPickTrigger)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// ACTION_OnDoublePickTrigger returns the ACTION_OnDoublePickTrigger property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#action_ondoublepicktrigger
+func (c *Constants) ACTION_OnDoublePickTrigger(ACTION_OnDoublePickTrigger float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ACTION_OnDoublePickTrigger)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetACTION_OnDoublePickTrigger sets the ACTION_OnDoublePickTrigger property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#action_ondoublepicktrigger
+func (c *Constants) SetACTION_OnDoublePickTrigger(ACTION_OnDoublePickTrigger float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ACTION_OnDoublePickTrigger)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// ACTION_OnEveryFrameTrigger returns the ACTION_OnEveryFrameTrigger property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#action_oneveryframetrigger
+func (c *Constants) ACTION_OnEveryFrameTrigger(ACTION_OnEveryFrameTrigger float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ACTION_OnEveryFrameTrigger)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetACTION_OnEveryFrameTrigger sets the ACTION_OnEveryFrameTrigger property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#action_oneveryframetrigger
+func (c *Constants) SetACTION_OnEveryFrameTrigger(ACTION_OnEveryFrameTrigger float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ACTION_OnEveryFrameTrigger)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// ACTION_OnIntersectionEnterTrigger returns the ACTION_OnIntersectionEnterTrigger property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#action_onintersectionentertrigger
+func (c *Constants) ACTION_OnIntersectionEnterTrigger(ACTION_OnIntersectionEnterTrigger float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ACTION_OnIntersectionEnterTrigger)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetACTION_OnIntersectionEnterTrigger sets the ACTION_OnIntersectionEnterTrigger property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#action_onintersectionentertrigger
+func (c *Constants) SetACTION_OnIntersectionEnterTrigger(ACTION_OnIntersectionEnterTrigger float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ACTION_OnIntersectionEnterTrigger)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// ACTION_OnIntersectionExitTrigger returns the ACTION_OnIntersectionExitTrigger property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#action_onintersectionexittrigger
+func (c *Constants) ACTION_OnIntersectionExitTrigger(ACTION_OnIntersectionExitTrigger float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ACTION_OnIntersectionExitTrigger)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetACTION_OnIntersectionExitTrigger sets the ACTION_OnIntersectionExitTrigger property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#action_onintersectionexittrigger
+func (c *Constants) SetACTION_OnIntersectionExitTrigger(ACTION_OnIntersectionExitTrigger float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ACTION_OnIntersectionExitTrigger)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// ACTION_OnKeyDownTrigger returns the ACTION_OnKeyDownTrigger property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#action_onkeydowntrigger
+func (c *Constants) ACTION_OnKeyDownTrigger(ACTION_OnKeyDownTrigger float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ACTION_OnKeyDownTrigger)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetACTION_OnKeyDownTrigger sets the ACTION_OnKeyDownTrigger property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#action_onkeydowntrigger
+func (c *Constants) SetACTION_OnKeyDownTrigger(ACTION_OnKeyDownTrigger float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ACTION_OnKeyDownTrigger)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// ACTION_OnKeyUpTrigger returns the ACTION_OnKeyUpTrigger property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#action_onkeyuptrigger
+func (c *Constants) ACTION_OnKeyUpTrigger(ACTION_OnKeyUpTrigger float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ACTION_OnKeyUpTrigger)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetACTION_OnKeyUpTrigger sets the ACTION_OnKeyUpTrigger property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#action_onkeyuptrigger
+func (c *Constants) SetACTION_OnKeyUpTrigger(ACTION_OnKeyUpTrigger float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ACTION_OnKeyUpTrigger)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// ACTION_OnLeftPickTrigger returns the ACTION_OnLeftPickTrigger property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#action_onleftpicktrigger
+func (c *Constants) ACTION_OnLeftPickTrigger(ACTION_OnLeftPickTrigger float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ACTION_OnLeftPickTrigger)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetACTION_OnLeftPickTrigger sets the ACTION_OnLeftPickTrigger property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#action_onleftpicktrigger
+func (c *Constants) SetACTION_OnLeftPickTrigger(ACTION_OnLeftPickTrigger float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ACTION_OnLeftPickTrigger)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// ACTION_OnLongPressTrigger returns the ACTION_OnLongPressTrigger property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#action_onlongpresstrigger
+func (c *Constants) ACTION_OnLongPressTrigger(ACTION_OnLongPressTrigger float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ACTION_OnLongPressTrigger)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetACTION_OnLongPressTrigger sets the ACTION_OnLongPressTrigger property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#action_onlongpresstrigger
+func (c *Constants) SetACTION_OnLongPressTrigger(ACTION_OnLongPressTrigger float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ACTION_OnLongPressTrigger)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// ACTION_OnPickDownTrigger returns the ACTION_OnPickDownTrigger property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#action_onpickdowntrigger
+func (c *Constants) ACTION_OnPickDownTrigger(ACTION_OnPickDownTrigger float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ACTION_OnPickDownTrigger)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetACTION_OnPickDownTrigger sets the ACTION_OnPickDownTrigger property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#action_onpickdowntrigger
+func (c *Constants) SetACTION_OnPickDownTrigger(ACTION_OnPickDownTrigger float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ACTION_OnPickDownTrigger)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// ACTION_OnPickOutTrigger returns the ACTION_OnPickOutTrigger property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#action_onpickouttrigger
+func (c *Constants) ACTION_OnPickOutTrigger(ACTION_OnPickOutTrigger float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ACTION_OnPickOutTrigger)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetACTION_OnPickOutTrigger sets the ACTION_OnPickOutTrigger property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#action_onpickouttrigger
+func (c *Constants) SetACTION_OnPickOutTrigger(ACTION_OnPickOutTrigger float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ACTION_OnPickOutTrigger)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// ACTION_OnPickTrigger returns the ACTION_OnPickTrigger property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#action_onpicktrigger
+func (c *Constants) ACTION_OnPickTrigger(ACTION_OnPickTrigger float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ACTION_OnPickTrigger)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetACTION_OnPickTrigger sets the ACTION_OnPickTrigger property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#action_onpicktrigger
+func (c *Constants) SetACTION_OnPickTrigger(ACTION_OnPickTrigger float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ACTION_OnPickTrigger)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// ACTION_OnPickUpTrigger returns the ACTION_OnPickUpTrigger property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#action_onpickuptrigger
+func (c *Constants) ACTION_OnPickUpTrigger(ACTION_OnPickUpTrigger float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ACTION_OnPickUpTrigger)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetACTION_OnPickUpTrigger sets the ACTION_OnPickUpTrigger property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#action_onpickuptrigger
+func (c *Constants) SetACTION_OnPickUpTrigger(ACTION_OnPickUpTrigger float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ACTION_OnPickUpTrigger)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// ACTION_OnPointerOutTrigger returns the ACTION_OnPointerOutTrigger property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#action_onpointerouttrigger
+func (c *Constants) ACTION_OnPointerOutTrigger(ACTION_OnPointerOutTrigger float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ACTION_OnPointerOutTrigger)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetACTION_OnPointerOutTrigger sets the ACTION_OnPointerOutTrigger property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#action_onpointerouttrigger
+func (c *Constants) SetACTION_OnPointerOutTrigger(ACTION_OnPointerOutTrigger float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ACTION_OnPointerOutTrigger)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// ACTION_OnPointerOverTrigger returns the ACTION_OnPointerOverTrigger property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#action_onpointerovertrigger
+func (c *Constants) ACTION_OnPointerOverTrigger(ACTION_OnPointerOverTrigger float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ACTION_OnPointerOverTrigger)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetACTION_OnPointerOverTrigger sets the ACTION_OnPointerOverTrigger property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#action_onpointerovertrigger
+func (c *Constants) SetACTION_OnPointerOverTrigger(ACTION_OnPointerOverTrigger float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ACTION_OnPointerOverTrigger)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// ACTION_OnRightPickTrigger returns the ACTION_OnRightPickTrigger property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#action_onrightpicktrigger
+func (c *Constants) ACTION_OnRightPickTrigger(ACTION_OnRightPickTrigger float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ACTION_OnRightPickTrigger)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetACTION_OnRightPickTrigger sets the ACTION_OnRightPickTrigger property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#action_onrightpicktrigger
+func (c *Constants) SetACTION_OnRightPickTrigger(ACTION_OnRightPickTrigger float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ACTION_OnRightPickTrigger)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// ALPHA_ADD returns the ALPHA_ADD property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_add
+func (c *Constants) ALPHA_ADD(ALPHA_ADD float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_ADD)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetALPHA_ADD sets the ALPHA_ADD property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_add
+func (c *Constants) SetALPHA_ADD(ALPHA_ADD float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_ADD)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// ALPHA_ALPHATOCOLOR returns the ALPHA_ALPHATOCOLOR property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_alphatocolor
+func (c *Constants) ALPHA_ALPHATOCOLOR(ALPHA_ALPHATOCOLOR float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_ALPHATOCOLOR)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetALPHA_ALPHATOCOLOR sets the ALPHA_ALPHATOCOLOR property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_alphatocolor
+func (c *Constants) SetALPHA_ALPHATOCOLOR(ALPHA_ALPHATOCOLOR float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_ALPHATOCOLOR)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// ALPHA_COMBINE returns the ALPHA_COMBINE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_combine
+func (c *Constants) ALPHA_COMBINE(ALPHA_COMBINE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_COMBINE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetALPHA_COMBINE sets the ALPHA_COMBINE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_combine
+func (c *Constants) SetALPHA_COMBINE(ALPHA_COMBINE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_COMBINE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// ALPHA_DISABLE returns the ALPHA_DISABLE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_disable
+func (c *Constants) ALPHA_DISABLE(ALPHA_DISABLE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_DISABLE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetALPHA_DISABLE sets the ALPHA_DISABLE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_disable
+func (c *Constants) SetALPHA_DISABLE(ALPHA_DISABLE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_DISABLE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// ALPHA_EQUATION_ADD returns the ALPHA_EQUATION_ADD property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_equation_add
+func (c *Constants) ALPHA_EQUATION_ADD(ALPHA_EQUATION_ADD float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_EQUATION_ADD)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetALPHA_EQUATION_ADD sets the ALPHA_EQUATION_ADD property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_equation_add
+func (c *Constants) SetALPHA_EQUATION_ADD(ALPHA_EQUATION_ADD float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_EQUATION_ADD)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// ALPHA_EQUATION_DARKEN returns the ALPHA_EQUATION_DARKEN property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_equation_darken
+func (c *Constants) ALPHA_EQUATION_DARKEN(ALPHA_EQUATION_DARKEN float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_EQUATION_DARKEN)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetALPHA_EQUATION_DARKEN sets the ALPHA_EQUATION_DARKEN property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_equation_darken
+func (c *Constants) SetALPHA_EQUATION_DARKEN(ALPHA_EQUATION_DARKEN float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_EQUATION_DARKEN)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// ALPHA_EQUATION_MAX returns the ALPHA_EQUATION_MAX property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_equation_max
+func (c *Constants) ALPHA_EQUATION_MAX(ALPHA_EQUATION_MAX float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_EQUATION_MAX)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetALPHA_EQUATION_MAX sets the ALPHA_EQUATION_MAX property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_equation_max
+func (c *Constants) SetALPHA_EQUATION_MAX(ALPHA_EQUATION_MAX float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_EQUATION_MAX)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// ALPHA_EQUATION_MIN returns the ALPHA_EQUATION_MIN property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_equation_min
+func (c *Constants) ALPHA_EQUATION_MIN(ALPHA_EQUATION_MIN float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_EQUATION_MIN)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetALPHA_EQUATION_MIN sets the ALPHA_EQUATION_MIN property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_equation_min
+func (c *Constants) SetALPHA_EQUATION_MIN(ALPHA_EQUATION_MIN float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_EQUATION_MIN)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// ALPHA_EQUATION_REVERSE_SUBTRACT returns the ALPHA_EQUATION_REVERSE_SUBTRACT property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_equation_reverse_subtract
+func (c *Constants) ALPHA_EQUATION_REVERSE_SUBTRACT(ALPHA_EQUATION_REVERSE_SUBTRACT float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_EQUATION_REVERSE_SUBTRACT)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetALPHA_EQUATION_REVERSE_SUBTRACT sets the ALPHA_EQUATION_REVERSE_SUBTRACT property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_equation_reverse_subtract
+func (c *Constants) SetALPHA_EQUATION_REVERSE_SUBTRACT(ALPHA_EQUATION_REVERSE_SUBTRACT float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_EQUATION_REVERSE_SUBTRACT)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// ALPHA_EQUATION_SUBSTRACT returns the ALPHA_EQUATION_SUBSTRACT property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_equation_substract
+func (c *Constants) ALPHA_EQUATION_SUBSTRACT(ALPHA_EQUATION_SUBSTRACT float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_EQUATION_SUBSTRACT)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetALPHA_EQUATION_SUBSTRACT sets the ALPHA_EQUATION_SUBSTRACT property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_equation_substract
+func (c *Constants) SetALPHA_EQUATION_SUBSTRACT(ALPHA_EQUATION_SUBSTRACT float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_EQUATION_SUBSTRACT)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// ALPHA_INTERPOLATE returns the ALPHA_INTERPOLATE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_interpolate
+func (c *Constants) ALPHA_INTERPOLATE(ALPHA_INTERPOLATE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_INTERPOLATE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetALPHA_INTERPOLATE sets the ALPHA_INTERPOLATE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_interpolate
+func (c *Constants) SetALPHA_INTERPOLATE(ALPHA_INTERPOLATE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_INTERPOLATE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// ALPHA_MAXIMIZED returns the ALPHA_MAXIMIZED property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_maximized
+func (c *Constants) ALPHA_MAXIMIZED(ALPHA_MAXIMIZED float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_MAXIMIZED)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetALPHA_MAXIMIZED sets the ALPHA_MAXIMIZED property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_maximized
+func (c *Constants) SetALPHA_MAXIMIZED(ALPHA_MAXIMIZED float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_MAXIMIZED)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// ALPHA_MULTIPLY returns the ALPHA_MULTIPLY property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_multiply
+func (c *Constants) ALPHA_MULTIPLY(ALPHA_MULTIPLY float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_MULTIPLY)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetALPHA_MULTIPLY sets the ALPHA_MULTIPLY property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_multiply
+func (c *Constants) SetALPHA_MULTIPLY(ALPHA_MULTIPLY float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_MULTIPLY)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// ALPHA_ONEONE returns the ALPHA_ONEONE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_oneone
+func (c *Constants) ALPHA_ONEONE(ALPHA_ONEONE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_ONEONE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetALPHA_ONEONE sets the ALPHA_ONEONE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_oneone
+func (c *Constants) SetALPHA_ONEONE(ALPHA_ONEONE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_ONEONE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// ALPHA_ONEONE_ONEONE returns the ALPHA_ONEONE_ONEONE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_oneone_oneone
+func (c *Constants) ALPHA_ONEONE_ONEONE(ALPHA_ONEONE_ONEONE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_ONEONE_ONEONE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetALPHA_ONEONE_ONEONE sets the ALPHA_ONEONE_ONEONE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_oneone_oneone
+func (c *Constants) SetALPHA_ONEONE_ONEONE(ALPHA_ONEONE_ONEONE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_ONEONE_ONEONE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// ALPHA_ONEONE_ONEZERO returns the ALPHA_ONEONE_ONEZERO property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_oneone_onezero
+func (c *Constants) ALPHA_ONEONE_ONEZERO(ALPHA_ONEONE_ONEZERO float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_ONEONE_ONEZERO)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetALPHA_ONEONE_ONEZERO sets the ALPHA_ONEONE_ONEZERO property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_oneone_onezero
+func (c *Constants) SetALPHA_ONEONE_ONEZERO(ALPHA_ONEONE_ONEZERO float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_ONEONE_ONEZERO)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// ALPHA_PREMULTIPLIED returns the ALPHA_PREMULTIPLIED property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_premultiplied
+func (c *Constants) ALPHA_PREMULTIPLIED(ALPHA_PREMULTIPLIED float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_PREMULTIPLIED)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetALPHA_PREMULTIPLIED sets the ALPHA_PREMULTIPLIED property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_premultiplied
+func (c *Constants) SetALPHA_PREMULTIPLIED(ALPHA_PREMULTIPLIED float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_PREMULTIPLIED)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// ALPHA_PREMULTIPLIED_PORTERDUFF returns the ALPHA_PREMULTIPLIED_PORTERDUFF property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_premultiplied_porterduff
+func (c *Constants) ALPHA_PREMULTIPLIED_PORTERDUFF(ALPHA_PREMULTIPLIED_PORTERDUFF float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_PREMULTIPLIED_PORTERDUFF)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetALPHA_PREMULTIPLIED_PORTERDUFF sets the ALPHA_PREMULTIPLIED_PORTERDUFF property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_premultiplied_porterduff
+func (c *Constants) SetALPHA_PREMULTIPLIED_PORTERDUFF(ALPHA_PREMULTIPLIED_PORTERDUFF float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_PREMULTIPLIED_PORTERDUFF)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// ALPHA_REVERSEONEMINUS returns the ALPHA_REVERSEONEMINUS property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_reverseoneminus
+func (c *Constants) ALPHA_REVERSEONEMINUS(ALPHA_REVERSEONEMINUS float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_REVERSEONEMINUS)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetALPHA_REVERSEONEMINUS sets the ALPHA_REVERSEONEMINUS property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_reverseoneminus
+func (c *Constants) SetALPHA_REVERSEONEMINUS(ALPHA_REVERSEONEMINUS float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_REVERSEONEMINUS)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// ALPHA_SCREENMODE returns the ALPHA_SCREENMODE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_screenmode
+func (c *Constants) ALPHA_SCREENMODE(ALPHA_SCREENMODE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_SCREENMODE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetALPHA_SCREENMODE sets the ALPHA_SCREENMODE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_screenmode
+func (c *Constants) SetALPHA_SCREENMODE(ALPHA_SCREENMODE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_SCREENMODE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// ALPHA_SRC_DSTONEMINUSSRCALPHA returns the ALPHA_SRC_DSTONEMINUSSRCALPHA property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_src_dstoneminussrcalpha
+func (c *Constants) ALPHA_SRC_DSTONEMINUSSRCALPHA(ALPHA_SRC_DSTONEMINUSSRCALPHA float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_SRC_DSTONEMINUSSRCALPHA)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetALPHA_SRC_DSTONEMINUSSRCALPHA sets the ALPHA_SRC_DSTONEMINUSSRCALPHA property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_src_dstoneminussrcalpha
+func (c *Constants) SetALPHA_SRC_DSTONEMINUSSRCALPHA(ALPHA_SRC_DSTONEMINUSSRCALPHA float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_SRC_DSTONEMINUSSRCALPHA)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// ALPHA_SUBTRACT returns the ALPHA_SUBTRACT property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_subtract
+func (c *Constants) ALPHA_SUBTRACT(ALPHA_SUBTRACT float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_SUBTRACT)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetALPHA_SUBTRACT sets the ALPHA_SUBTRACT property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#alpha_subtract
+func (c *Constants) SetALPHA_SUBTRACT(ALPHA_SUBTRACT float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALPHA_SUBTRACT)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// ALWAYS returns the ALWAYS property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#always
+func (c *Constants) ALWAYS(ALWAYS float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALWAYS)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetALWAYS sets the ALWAYS property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#always
+func (c *Constants) SetALWAYS(ALWAYS float64) *Constants {
+	p := ba.ctx.Get("Constants").New(ALWAYS)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// DECR returns the DECR property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#decr
+func (c *Constants) DECR(DECR float64) *Constants {
+	p := ba.ctx.Get("Constants").New(DECR)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetDECR sets the DECR property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#decr
+func (c *Constants) SetDECR(DECR float64) *Constants {
+	p := ba.ctx.Get("Constants").New(DECR)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// DECR_WRAP returns the DECR_WRAP property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#decr_wrap
+func (c *Constants) DECR_WRAP(DECR_WRAP float64) *Constants {
+	p := ba.ctx.Get("Constants").New(DECR_WRAP)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetDECR_WRAP sets the DECR_WRAP property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#decr_wrap
+func (c *Constants) SetDECR_WRAP(DECR_WRAP float64) *Constants {
+	p := ba.ctx.Get("Constants").New(DECR_WRAP)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// DELAYLOADSTATE_LOADED returns the DELAYLOADSTATE_LOADED property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#delayloadstate_loaded
+func (c *Constants) DELAYLOADSTATE_LOADED(DELAYLOADSTATE_LOADED float64) *Constants {
+	p := ba.ctx.Get("Constants").New(DELAYLOADSTATE_LOADED)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetDELAYLOADSTATE_LOADED sets the DELAYLOADSTATE_LOADED property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#delayloadstate_loaded
+func (c *Constants) SetDELAYLOADSTATE_LOADED(DELAYLOADSTATE_LOADED float64) *Constants {
+	p := ba.ctx.Get("Constants").New(DELAYLOADSTATE_LOADED)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// DELAYLOADSTATE_LOADING returns the DELAYLOADSTATE_LOADING property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#delayloadstate_loading
+func (c *Constants) DELAYLOADSTATE_LOADING(DELAYLOADSTATE_LOADING float64) *Constants {
+	p := ba.ctx.Get("Constants").New(DELAYLOADSTATE_LOADING)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetDELAYLOADSTATE_LOADING sets the DELAYLOADSTATE_LOADING property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#delayloadstate_loading
+func (c *Constants) SetDELAYLOADSTATE_LOADING(DELAYLOADSTATE_LOADING float64) *Constants {
+	p := ba.ctx.Get("Constants").New(DELAYLOADSTATE_LOADING)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// DELAYLOADSTATE_NONE returns the DELAYLOADSTATE_NONE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#delayloadstate_none
+func (c *Constants) DELAYLOADSTATE_NONE(DELAYLOADSTATE_NONE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(DELAYLOADSTATE_NONE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetDELAYLOADSTATE_NONE sets the DELAYLOADSTATE_NONE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#delayloadstate_none
+func (c *Constants) SetDELAYLOADSTATE_NONE(DELAYLOADSTATE_NONE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(DELAYLOADSTATE_NONE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// DELAYLOADSTATE_NOTLOADED returns the DELAYLOADSTATE_NOTLOADED property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#delayloadstate_notloaded
+func (c *Constants) DELAYLOADSTATE_NOTLOADED(DELAYLOADSTATE_NOTLOADED float64) *Constants {
+	p := ba.ctx.Get("Constants").New(DELAYLOADSTATE_NOTLOADED)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetDELAYLOADSTATE_NOTLOADED sets the DELAYLOADSTATE_NOTLOADED property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#delayloadstate_notloaded
+func (c *Constants) SetDELAYLOADSTATE_NOTLOADED(DELAYLOADSTATE_NOTLOADED float64) *Constants {
+	p := ba.ctx.Get("Constants").New(DELAYLOADSTATE_NOTLOADED)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// EQUAL returns the EQUAL property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#equal
+func (c *Constants) EQUAL(EQUAL float64) *Constants {
+	p := ba.ctx.Get("Constants").New(EQUAL)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetEQUAL sets the EQUAL property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#equal
+func (c *Constants) SetEQUAL(EQUAL float64) *Constants {
+	p := ba.ctx.Get("Constants").New(EQUAL)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// GEQUAL returns the GEQUAL property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#gequal
+func (c *Constants) GEQUAL(GEQUAL float64) *Constants {
+	p := ba.ctx.Get("Constants").New(GEQUAL)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetGEQUAL sets the GEQUAL property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#gequal
+func (c *Constants) SetGEQUAL(GEQUAL float64) *Constants {
+	p := ba.ctx.Get("Constants").New(GEQUAL)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// GREATER returns the GREATER property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#greater
+func (c *Constants) GREATER(GREATER float64) *Constants {
+	p := ba.ctx.Get("Constants").New(GREATER)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetGREATER sets the GREATER property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#greater
+func (c *Constants) SetGREATER(GREATER float64) *Constants {
+	p := ba.ctx.Get("Constants").New(GREATER)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// INCR returns the INCR property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#incr
+func (c *Constants) INCR(INCR float64) *Constants {
+	p := ba.ctx.Get("Constants").New(INCR)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetINCR sets the INCR property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#incr
+func (c *Constants) SetINCR(INCR float64) *Constants {
+	p := ba.ctx.Get("Constants").New(INCR)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// INCR_WRAP returns the INCR_WRAP property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#incr_wrap
+func (c *Constants) INCR_WRAP(INCR_WRAP float64) *Constants {
+	p := ba.ctx.Get("Constants").New(INCR_WRAP)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetINCR_WRAP sets the INCR_WRAP property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#incr_wrap
+func (c *Constants) SetINCR_WRAP(INCR_WRAP float64) *Constants {
+	p := ba.ctx.Get("Constants").New(INCR_WRAP)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// INVERT returns the INVERT property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#invert
+func (c *Constants) INVERT(INVERT float64) *Constants {
+	p := ba.ctx.Get("Constants").New(INVERT)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetINVERT sets the INVERT property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#invert
+func (c *Constants) SetINVERT(INVERT float64) *Constants {
+	p := ba.ctx.Get("Constants").New(INVERT)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// KEEP returns the KEEP property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#keep
+func (c *Constants) KEEP(KEEP float64) *Constants {
+	p := ba.ctx.Get("Constants").New(KEEP)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetKEEP sets the KEEP property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#keep
+func (c *Constants) SetKEEP(KEEP float64) *Constants {
+	p := ba.ctx.Get("Constants").New(KEEP)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// LEQUAL returns the LEQUAL property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#lequal
+func (c *Constants) LEQUAL(LEQUAL float64) *Constants {
+	p := ba.ctx.Get("Constants").New(LEQUAL)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetLEQUAL sets the LEQUAL property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#lequal
+func (c *Constants) SetLEQUAL(LEQUAL float64) *Constants {
+	p := ba.ctx.Get("Constants").New(LEQUAL)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// LESS returns the LESS property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#less
+func (c *Constants) LESS(LESS float64) *Constants {
+	p := ba.ctx.Get("Constants").New(LESS)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetLESS sets the LESS property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#less
+func (c *Constants) SetLESS(LESS float64) *Constants {
+	p := ba.ctx.Get("Constants").New(LESS)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// MATERIAL_AllDirtyFlag returns the MATERIAL_AllDirtyFlag property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#material_alldirtyflag
+func (c *Constants) MATERIAL_AllDirtyFlag(MATERIAL_AllDirtyFlag float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MATERIAL_AllDirtyFlag)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetMATERIAL_AllDirtyFlag sets the MATERIAL_AllDirtyFlag property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#material_alldirtyflag
+func (c *Constants) SetMATERIAL_AllDirtyFlag(MATERIAL_AllDirtyFlag float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MATERIAL_AllDirtyFlag)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// MATERIAL_AttributesDirtyFlag returns the MATERIAL_AttributesDirtyFlag property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#material_attributesdirtyflag
+func (c *Constants) MATERIAL_AttributesDirtyFlag(MATERIAL_AttributesDirtyFlag float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MATERIAL_AttributesDirtyFlag)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetMATERIAL_AttributesDirtyFlag sets the MATERIAL_AttributesDirtyFlag property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#material_attributesdirtyflag
+func (c *Constants) SetMATERIAL_AttributesDirtyFlag(MATERIAL_AttributesDirtyFlag float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MATERIAL_AttributesDirtyFlag)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// MATERIAL_ClockWiseSideOrientation returns the MATERIAL_ClockWiseSideOrientation property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#material_clockwisesideorientation
+func (c *Constants) MATERIAL_ClockWiseSideOrientation(MATERIAL_ClockWiseSideOrientation float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MATERIAL_ClockWiseSideOrientation)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetMATERIAL_ClockWiseSideOrientation sets the MATERIAL_ClockWiseSideOrientation property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#material_clockwisesideorientation
+func (c *Constants) SetMATERIAL_ClockWiseSideOrientation(MATERIAL_ClockWiseSideOrientation float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MATERIAL_ClockWiseSideOrientation)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// MATERIAL_CounterClockWiseSideOrientation returns the MATERIAL_CounterClockWiseSideOrientation property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#material_counterclockwisesideorientation
+func (c *Constants) MATERIAL_CounterClockWiseSideOrientation(MATERIAL_CounterClockWiseSideOrientation float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MATERIAL_CounterClockWiseSideOrientation)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetMATERIAL_CounterClockWiseSideOrientation sets the MATERIAL_CounterClockWiseSideOrientation property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#material_counterclockwisesideorientation
+func (c *Constants) SetMATERIAL_CounterClockWiseSideOrientation(MATERIAL_CounterClockWiseSideOrientation float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MATERIAL_CounterClockWiseSideOrientation)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// MATERIAL_FresnelDirtyFlag returns the MATERIAL_FresnelDirtyFlag property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#material_fresneldirtyflag
+func (c *Constants) MATERIAL_FresnelDirtyFlag(MATERIAL_FresnelDirtyFlag float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MATERIAL_FresnelDirtyFlag)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetMATERIAL_FresnelDirtyFlag sets the MATERIAL_FresnelDirtyFlag property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#material_fresneldirtyflag
+func (c *Constants) SetMATERIAL_FresnelDirtyFlag(MATERIAL_FresnelDirtyFlag float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MATERIAL_FresnelDirtyFlag)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// MATERIAL_LightDirtyFlag returns the MATERIAL_LightDirtyFlag property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#material_lightdirtyflag
+func (c *Constants) MATERIAL_LightDirtyFlag(MATERIAL_LightDirtyFlag float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MATERIAL_LightDirtyFlag)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetMATERIAL_LightDirtyFlag sets the MATERIAL_LightDirtyFlag property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#material_lightdirtyflag
+func (c *Constants) SetMATERIAL_LightDirtyFlag(MATERIAL_LightDirtyFlag float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MATERIAL_LightDirtyFlag)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// MATERIAL_LineListDrawMode returns the MATERIAL_LineListDrawMode property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#material_linelistdrawmode
+func (c *Constants) MATERIAL_LineListDrawMode(MATERIAL_LineListDrawMode float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MATERIAL_LineListDrawMode)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetMATERIAL_LineListDrawMode sets the MATERIAL_LineListDrawMode property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#material_linelistdrawmode
+func (c *Constants) SetMATERIAL_LineListDrawMode(MATERIAL_LineListDrawMode float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MATERIAL_LineListDrawMode)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// MATERIAL_LineLoopDrawMode returns the MATERIAL_LineLoopDrawMode property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#material_lineloopdrawmode
+func (c *Constants) MATERIAL_LineLoopDrawMode(MATERIAL_LineLoopDrawMode float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MATERIAL_LineLoopDrawMode)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetMATERIAL_LineLoopDrawMode sets the MATERIAL_LineLoopDrawMode property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#material_lineloopdrawmode
+func (c *Constants) SetMATERIAL_LineLoopDrawMode(MATERIAL_LineLoopDrawMode float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MATERIAL_LineLoopDrawMode)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// MATERIAL_LineStripDrawMode returns the MATERIAL_LineStripDrawMode property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#material_linestripdrawmode
+func (c *Constants) MATERIAL_LineStripDrawMode(MATERIAL_LineStripDrawMode float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MATERIAL_LineStripDrawMode)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetMATERIAL_LineStripDrawMode sets the MATERIAL_LineStripDrawMode property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#material_linestripdrawmode
+func (c *Constants) SetMATERIAL_LineStripDrawMode(MATERIAL_LineStripDrawMode float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MATERIAL_LineStripDrawMode)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// MATERIAL_MiscDirtyFlag returns the MATERIAL_MiscDirtyFlag property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#material_miscdirtyflag
+func (c *Constants) MATERIAL_MiscDirtyFlag(MATERIAL_MiscDirtyFlag float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MATERIAL_MiscDirtyFlag)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetMATERIAL_MiscDirtyFlag sets the MATERIAL_MiscDirtyFlag property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#material_miscdirtyflag
+func (c *Constants) SetMATERIAL_MiscDirtyFlag(MATERIAL_MiscDirtyFlag float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MATERIAL_MiscDirtyFlag)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// MATERIAL_PointFillMode returns the MATERIAL_PointFillMode property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#material_pointfillmode
+func (c *Constants) MATERIAL_PointFillMode(MATERIAL_PointFillMode float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MATERIAL_PointFillMode)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetMATERIAL_PointFillMode sets the MATERIAL_PointFillMode property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#material_pointfillmode
+func (c *Constants) SetMATERIAL_PointFillMode(MATERIAL_PointFillMode float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MATERIAL_PointFillMode)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// MATERIAL_PointListDrawMode returns the MATERIAL_PointListDrawMode property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#material_pointlistdrawmode
+func (c *Constants) MATERIAL_PointListDrawMode(MATERIAL_PointListDrawMode float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MATERIAL_PointListDrawMode)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetMATERIAL_PointListDrawMode sets the MATERIAL_PointListDrawMode property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#material_pointlistdrawmode
+func (c *Constants) SetMATERIAL_PointListDrawMode(MATERIAL_PointListDrawMode float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MATERIAL_PointListDrawMode)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// MATERIAL_TextureDirtyFlag returns the MATERIAL_TextureDirtyFlag property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#material_texturedirtyflag
+func (c *Constants) MATERIAL_TextureDirtyFlag(MATERIAL_TextureDirtyFlag float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MATERIAL_TextureDirtyFlag)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetMATERIAL_TextureDirtyFlag sets the MATERIAL_TextureDirtyFlag property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#material_texturedirtyflag
+func (c *Constants) SetMATERIAL_TextureDirtyFlag(MATERIAL_TextureDirtyFlag float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MATERIAL_TextureDirtyFlag)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// MATERIAL_TriangleFanDrawMode returns the MATERIAL_TriangleFanDrawMode property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#material_trianglefandrawmode
+func (c *Constants) MATERIAL_TriangleFanDrawMode(MATERIAL_TriangleFanDrawMode float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MATERIAL_TriangleFanDrawMode)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetMATERIAL_TriangleFanDrawMode sets the MATERIAL_TriangleFanDrawMode property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#material_trianglefandrawmode
+func (c *Constants) SetMATERIAL_TriangleFanDrawMode(MATERIAL_TriangleFanDrawMode float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MATERIAL_TriangleFanDrawMode)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// MATERIAL_TriangleFillMode returns the MATERIAL_TriangleFillMode property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#material_trianglefillmode
+func (c *Constants) MATERIAL_TriangleFillMode(MATERIAL_TriangleFillMode float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MATERIAL_TriangleFillMode)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetMATERIAL_TriangleFillMode sets the MATERIAL_TriangleFillMode property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#material_trianglefillmode
+func (c *Constants) SetMATERIAL_TriangleFillMode(MATERIAL_TriangleFillMode float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MATERIAL_TriangleFillMode)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// MATERIAL_TriangleStripDrawMode returns the MATERIAL_TriangleStripDrawMode property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#material_trianglestripdrawmode
+func (c *Constants) MATERIAL_TriangleStripDrawMode(MATERIAL_TriangleStripDrawMode float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MATERIAL_TriangleStripDrawMode)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetMATERIAL_TriangleStripDrawMode sets the MATERIAL_TriangleStripDrawMode property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#material_trianglestripdrawmode
+func (c *Constants) SetMATERIAL_TriangleStripDrawMode(MATERIAL_TriangleStripDrawMode float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MATERIAL_TriangleStripDrawMode)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// MATERIAL_WireFrameFillMode returns the MATERIAL_WireFrameFillMode property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#material_wireframefillmode
+func (c *Constants) MATERIAL_WireFrameFillMode(MATERIAL_WireFrameFillMode float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MATERIAL_WireFrameFillMode)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetMATERIAL_WireFrameFillMode sets the MATERIAL_WireFrameFillMode property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#material_wireframefillmode
+func (c *Constants) SetMATERIAL_WireFrameFillMode(MATERIAL_WireFrameFillMode float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MATERIAL_WireFrameFillMode)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// MESHES_CULLINGSTRATEGY_BOUNDINGSPHERE_ONLY returns the MESHES_CULLINGSTRATEGY_BOUNDINGSPHERE_ONLY property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#meshes_cullingstrategy_boundingsphere_only
+func (c *Constants) MESHES_CULLINGSTRATEGY_BOUNDINGSPHERE_ONLY(MESHES_CULLINGSTRATEGY_BOUNDINGSPHERE_ONLY float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MESHES_CULLINGSTRATEGY_BOUNDINGSPHERE_ONLY)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetMESHES_CULLINGSTRATEGY_BOUNDINGSPHERE_ONLY sets the MESHES_CULLINGSTRATEGY_BOUNDINGSPHERE_ONLY property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#meshes_cullingstrategy_boundingsphere_only
+func (c *Constants) SetMESHES_CULLINGSTRATEGY_BOUNDINGSPHERE_ONLY(MESHES_CULLINGSTRATEGY_BOUNDINGSPHERE_ONLY float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MESHES_CULLINGSTRATEGY_BOUNDINGSPHERE_ONLY)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// MESHES_CULLINGSTRATEGY_OPTIMISTIC_INCLUSION returns the MESHES_CULLINGSTRATEGY_OPTIMISTIC_INCLUSION property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#meshes_cullingstrategy_optimistic_inclusion
+func (c *Constants) MESHES_CULLINGSTRATEGY_OPTIMISTIC_INCLUSION(MESHES_CULLINGSTRATEGY_OPTIMISTIC_INCLUSION float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MESHES_CULLINGSTRATEGY_OPTIMISTIC_INCLUSION)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetMESHES_CULLINGSTRATEGY_OPTIMISTIC_INCLUSION sets the MESHES_CULLINGSTRATEGY_OPTIMISTIC_INCLUSION property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#meshes_cullingstrategy_optimistic_inclusion
+func (c *Constants) SetMESHES_CULLINGSTRATEGY_OPTIMISTIC_INCLUSION(MESHES_CULLINGSTRATEGY_OPTIMISTIC_INCLUSION float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MESHES_CULLINGSTRATEGY_OPTIMISTIC_INCLUSION)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// MESHES_CULLINGSTRATEGY_OPTIMISTIC_INCLUSION_THEN_BSPHERE_ONLY returns the MESHES_CULLINGSTRATEGY_OPTIMISTIC_INCLUSION_THEN_BSPHERE_ONLY property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#meshes_cullingstrategy_optimistic_inclusion_then_bsphere_only
+func (c *Constants) MESHES_CULLINGSTRATEGY_OPTIMISTIC_INCLUSION_THEN_BSPHERE_ONLY(MESHES_CULLINGSTRATEGY_OPTIMISTIC_INCLUSION_THEN_BSPHERE_ONLY float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MESHES_CULLINGSTRATEGY_OPTIMISTIC_INCLUSION_THEN_BSPHERE_ONLY)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetMESHES_CULLINGSTRATEGY_OPTIMISTIC_INCLUSION_THEN_BSPHERE_ONLY sets the MESHES_CULLINGSTRATEGY_OPTIMISTIC_INCLUSION_THEN_BSPHERE_ONLY property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#meshes_cullingstrategy_optimistic_inclusion_then_bsphere_only
+func (c *Constants) SetMESHES_CULLINGSTRATEGY_OPTIMISTIC_INCLUSION_THEN_BSPHERE_ONLY(MESHES_CULLINGSTRATEGY_OPTIMISTIC_INCLUSION_THEN_BSPHERE_ONLY float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MESHES_CULLINGSTRATEGY_OPTIMISTIC_INCLUSION_THEN_BSPHERE_ONLY)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// MESHES_CULLINGSTRATEGY_STANDARD returns the MESHES_CULLINGSTRATEGY_STANDARD property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#meshes_cullingstrategy_standard
+func (c *Constants) MESHES_CULLINGSTRATEGY_STANDARD(MESHES_CULLINGSTRATEGY_STANDARD float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MESHES_CULLINGSTRATEGY_STANDARD)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetMESHES_CULLINGSTRATEGY_STANDARD sets the MESHES_CULLINGSTRATEGY_STANDARD property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#meshes_cullingstrategy_standard
+func (c *Constants) SetMESHES_CULLINGSTRATEGY_STANDARD(MESHES_CULLINGSTRATEGY_STANDARD float64) *Constants {
+	p := ba.ctx.Get("Constants").New(MESHES_CULLINGSTRATEGY_STANDARD)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// NEVER returns the NEVER property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#never
+func (c *Constants) NEVER(NEVER float64) *Constants {
+	p := ba.ctx.Get("Constants").New(NEVER)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetNEVER sets the NEVER property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#never
+func (c *Constants) SetNEVER(NEVER float64) *Constants {
+	p := ba.ctx.Get("Constants").New(NEVER)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// NOTEQUAL returns the NOTEQUAL property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#notequal
+func (c *Constants) NOTEQUAL(NOTEQUAL float64) *Constants {
+	p := ba.ctx.Get("Constants").New(NOTEQUAL)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetNOTEQUAL sets the NOTEQUAL property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#notequal
+func (c *Constants) SetNOTEQUAL(NOTEQUAL float64) *Constants {
+	p := ba.ctx.Get("Constants").New(NOTEQUAL)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// PARTICLES_BILLBOARDMODE_ALL returns the PARTICLES_BILLBOARDMODE_ALL property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#particles_billboardmode_all
+func (c *Constants) PARTICLES_BILLBOARDMODE_ALL(PARTICLES_BILLBOARDMODE_ALL float64) *Constants {
+	p := ba.ctx.Get("Constants").New(PARTICLES_BILLBOARDMODE_ALL)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetPARTICLES_BILLBOARDMODE_ALL sets the PARTICLES_BILLBOARDMODE_ALL property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#particles_billboardmode_all
+func (c *Constants) SetPARTICLES_BILLBOARDMODE_ALL(PARTICLES_BILLBOARDMODE_ALL float64) *Constants {
+	p := ba.ctx.Get("Constants").New(PARTICLES_BILLBOARDMODE_ALL)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// PARTICLES_BILLBOARDMODE_STRETCHED returns the PARTICLES_BILLBOARDMODE_STRETCHED property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#particles_billboardmode_stretched
+func (c *Constants) PARTICLES_BILLBOARDMODE_STRETCHED(PARTICLES_BILLBOARDMODE_STRETCHED float64) *Constants {
+	p := ba.ctx.Get("Constants").New(PARTICLES_BILLBOARDMODE_STRETCHED)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetPARTICLES_BILLBOARDMODE_STRETCHED sets the PARTICLES_BILLBOARDMODE_STRETCHED property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#particles_billboardmode_stretched
+func (c *Constants) SetPARTICLES_BILLBOARDMODE_STRETCHED(PARTICLES_BILLBOARDMODE_STRETCHED float64) *Constants {
+	p := ba.ctx.Get("Constants").New(PARTICLES_BILLBOARDMODE_STRETCHED)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// PARTICLES_BILLBOARDMODE_Y returns the PARTICLES_BILLBOARDMODE_Y property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#particles_billboardmode_y
+func (c *Constants) PARTICLES_BILLBOARDMODE_Y(PARTICLES_BILLBOARDMODE_Y float64) *Constants {
+	p := ba.ctx.Get("Constants").New(PARTICLES_BILLBOARDMODE_Y)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetPARTICLES_BILLBOARDMODE_Y sets the PARTICLES_BILLBOARDMODE_Y property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#particles_billboardmode_y
+func (c *Constants) SetPARTICLES_BILLBOARDMODE_Y(PARTICLES_BILLBOARDMODE_Y float64) *Constants {
+	p := ba.ctx.Get("Constants").New(PARTICLES_BILLBOARDMODE_Y)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// REPLACE returns the REPLACE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#replace
+func (c *Constants) REPLACE(REPLACE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(REPLACE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetREPLACE sets the REPLACE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#replace
+func (c *Constants) SetREPLACE(REPLACE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(REPLACE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SCALEMODE_CEILING returns the SCALEMODE_CEILING property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#scalemode_ceiling
+func (c *Constants) SCALEMODE_CEILING(SCALEMODE_CEILING float64) *Constants {
+	p := ba.ctx.Get("Constants").New(SCALEMODE_CEILING)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetSCALEMODE_CEILING sets the SCALEMODE_CEILING property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#scalemode_ceiling
+func (c *Constants) SetSCALEMODE_CEILING(SCALEMODE_CEILING float64) *Constants {
+	p := ba.ctx.Get("Constants").New(SCALEMODE_CEILING)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SCALEMODE_FLOOR returns the SCALEMODE_FLOOR property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#scalemode_floor
+func (c *Constants) SCALEMODE_FLOOR(SCALEMODE_FLOOR float64) *Constants {
+	p := ba.ctx.Get("Constants").New(SCALEMODE_FLOOR)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetSCALEMODE_FLOOR sets the SCALEMODE_FLOOR property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#scalemode_floor
+func (c *Constants) SetSCALEMODE_FLOOR(SCALEMODE_FLOOR float64) *Constants {
+	p := ba.ctx.Get("Constants").New(SCALEMODE_FLOOR)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SCALEMODE_NEAREST returns the SCALEMODE_NEAREST property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#scalemode_nearest
+func (c *Constants) SCALEMODE_NEAREST(SCALEMODE_NEAREST float64) *Constants {
+	p := ba.ctx.Get("Constants").New(SCALEMODE_NEAREST)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetSCALEMODE_NEAREST sets the SCALEMODE_NEAREST property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#scalemode_nearest
+func (c *Constants) SetSCALEMODE_NEAREST(SCALEMODE_NEAREST float64) *Constants {
+	p := ba.ctx.Get("Constants").New(SCALEMODE_NEAREST)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SCENELOADER_DETAILED_LOGGING returns the SCENELOADER_DETAILED_LOGGING property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#sceneloader_detailed_logging
+func (c *Constants) SCENELOADER_DETAILED_LOGGING(SCENELOADER_DETAILED_LOGGING float64) *Constants {
+	p := ba.ctx.Get("Constants").New(SCENELOADER_DETAILED_LOGGING)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetSCENELOADER_DETAILED_LOGGING sets the SCENELOADER_DETAILED_LOGGING property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#sceneloader_detailed_logging
+func (c *Constants) SetSCENELOADER_DETAILED_LOGGING(SCENELOADER_DETAILED_LOGGING float64) *Constants {
+	p := ba.ctx.Get("Constants").New(SCENELOADER_DETAILED_LOGGING)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SCENELOADER_MINIMAL_LOGGING returns the SCENELOADER_MINIMAL_LOGGING property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#sceneloader_minimal_logging
+func (c *Constants) SCENELOADER_MINIMAL_LOGGING(SCENELOADER_MINIMAL_LOGGING float64) *Constants {
+	p := ba.ctx.Get("Constants").New(SCENELOADER_MINIMAL_LOGGING)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetSCENELOADER_MINIMAL_LOGGING sets the SCENELOADER_MINIMAL_LOGGING property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#sceneloader_minimal_logging
+func (c *Constants) SetSCENELOADER_MINIMAL_LOGGING(SCENELOADER_MINIMAL_LOGGING float64) *Constants {
+	p := ba.ctx.Get("Constants").New(SCENELOADER_MINIMAL_LOGGING)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SCENELOADER_NO_LOGGING returns the SCENELOADER_NO_LOGGING property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#sceneloader_no_logging
+func (c *Constants) SCENELOADER_NO_LOGGING(SCENELOADER_NO_LOGGING float64) *Constants {
+	p := ba.ctx.Get("Constants").New(SCENELOADER_NO_LOGGING)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetSCENELOADER_NO_LOGGING sets the SCENELOADER_NO_LOGGING property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#sceneloader_no_logging
+func (c *Constants) SetSCENELOADER_NO_LOGGING(SCENELOADER_NO_LOGGING float64) *Constants {
+	p := ba.ctx.Get("Constants").New(SCENELOADER_NO_LOGGING)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SCENELOADER_SUMMARY_LOGGING returns the SCENELOADER_SUMMARY_LOGGING property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#sceneloader_summary_logging
+func (c *Constants) SCENELOADER_SUMMARY_LOGGING(SCENELOADER_SUMMARY_LOGGING float64) *Constants {
+	p := ba.ctx.Get("Constants").New(SCENELOADER_SUMMARY_LOGGING)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetSCENELOADER_SUMMARY_LOGGING sets the SCENELOADER_SUMMARY_LOGGING property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#sceneloader_summary_logging
+func (c *Constants) SetSCENELOADER_SUMMARY_LOGGING(SCENELOADER_SUMMARY_LOGGING float64) *Constants {
+	p := ba.ctx.Get("Constants").New(SCENELOADER_SUMMARY_LOGGING)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTUREFORMAT_ALPHA returns the TEXTUREFORMAT_ALPHA property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#textureformat_alpha
+func (c *Constants) TEXTUREFORMAT_ALPHA(TEXTUREFORMAT_ALPHA float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTUREFORMAT_ALPHA)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTUREFORMAT_ALPHA sets the TEXTUREFORMAT_ALPHA property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#textureformat_alpha
+func (c *Constants) SetTEXTUREFORMAT_ALPHA(TEXTUREFORMAT_ALPHA float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTUREFORMAT_ALPHA)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTUREFORMAT_LUMINANCE returns the TEXTUREFORMAT_LUMINANCE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#textureformat_luminance
+func (c *Constants) TEXTUREFORMAT_LUMINANCE(TEXTUREFORMAT_LUMINANCE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTUREFORMAT_LUMINANCE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTUREFORMAT_LUMINANCE sets the TEXTUREFORMAT_LUMINANCE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#textureformat_luminance
+func (c *Constants) SetTEXTUREFORMAT_LUMINANCE(TEXTUREFORMAT_LUMINANCE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTUREFORMAT_LUMINANCE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTUREFORMAT_LUMINANCE_ALPHA returns the TEXTUREFORMAT_LUMINANCE_ALPHA property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#textureformat_luminance_alpha
+func (c *Constants) TEXTUREFORMAT_LUMINANCE_ALPHA(TEXTUREFORMAT_LUMINANCE_ALPHA float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTUREFORMAT_LUMINANCE_ALPHA)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTUREFORMAT_LUMINANCE_ALPHA sets the TEXTUREFORMAT_LUMINANCE_ALPHA property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#textureformat_luminance_alpha
+func (c *Constants) SetTEXTUREFORMAT_LUMINANCE_ALPHA(TEXTUREFORMAT_LUMINANCE_ALPHA float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTUREFORMAT_LUMINANCE_ALPHA)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTUREFORMAT_R returns the TEXTUREFORMAT_R property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#textureformat_r
+func (c *Constants) TEXTUREFORMAT_R(TEXTUREFORMAT_R float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTUREFORMAT_R)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTUREFORMAT_R sets the TEXTUREFORMAT_R property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#textureformat_r
+func (c *Constants) SetTEXTUREFORMAT_R(TEXTUREFORMAT_R float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTUREFORMAT_R)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTUREFORMAT_RED returns the TEXTUREFORMAT_RED property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#textureformat_red
+func (c *Constants) TEXTUREFORMAT_RED(TEXTUREFORMAT_RED float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTUREFORMAT_RED)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTUREFORMAT_RED sets the TEXTUREFORMAT_RED property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#textureformat_red
+func (c *Constants) SetTEXTUREFORMAT_RED(TEXTUREFORMAT_RED float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTUREFORMAT_RED)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTUREFORMAT_RED_INTEGER returns the TEXTUREFORMAT_RED_INTEGER property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#textureformat_red_integer
+func (c *Constants) TEXTUREFORMAT_RED_INTEGER(TEXTUREFORMAT_RED_INTEGER float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTUREFORMAT_RED_INTEGER)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTUREFORMAT_RED_INTEGER sets the TEXTUREFORMAT_RED_INTEGER property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#textureformat_red_integer
+func (c *Constants) SetTEXTUREFORMAT_RED_INTEGER(TEXTUREFORMAT_RED_INTEGER float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTUREFORMAT_RED_INTEGER)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTUREFORMAT_RG returns the TEXTUREFORMAT_RG property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#textureformat_rg
+func (c *Constants) TEXTUREFORMAT_RG(TEXTUREFORMAT_RG float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTUREFORMAT_RG)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTUREFORMAT_RG sets the TEXTUREFORMAT_RG property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#textureformat_rg
+func (c *Constants) SetTEXTUREFORMAT_RG(TEXTUREFORMAT_RG float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTUREFORMAT_RG)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTUREFORMAT_RGB returns the TEXTUREFORMAT_RGB property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#textureformat_rgb
+func (c *Constants) TEXTUREFORMAT_RGB(TEXTUREFORMAT_RGB float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTUREFORMAT_RGB)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTUREFORMAT_RGB sets the TEXTUREFORMAT_RGB property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#textureformat_rgb
+func (c *Constants) SetTEXTUREFORMAT_RGB(TEXTUREFORMAT_RGB float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTUREFORMAT_RGB)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTUREFORMAT_RGBA returns the TEXTUREFORMAT_RGBA property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#textureformat_rgba
+func (c *Constants) TEXTUREFORMAT_RGBA(TEXTUREFORMAT_RGBA float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTUREFORMAT_RGBA)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTUREFORMAT_RGBA sets the TEXTUREFORMAT_RGBA property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#textureformat_rgba
+func (c *Constants) SetTEXTUREFORMAT_RGBA(TEXTUREFORMAT_RGBA float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTUREFORMAT_RGBA)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTUREFORMAT_RGBA_INTEGER returns the TEXTUREFORMAT_RGBA_INTEGER property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#textureformat_rgba_integer
+func (c *Constants) TEXTUREFORMAT_RGBA_INTEGER(TEXTUREFORMAT_RGBA_INTEGER float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTUREFORMAT_RGBA_INTEGER)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTUREFORMAT_RGBA_INTEGER sets the TEXTUREFORMAT_RGBA_INTEGER property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#textureformat_rgba_integer
+func (c *Constants) SetTEXTUREFORMAT_RGBA_INTEGER(TEXTUREFORMAT_RGBA_INTEGER float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTUREFORMAT_RGBA_INTEGER)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTUREFORMAT_RGB_INTEGER returns the TEXTUREFORMAT_RGB_INTEGER property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#textureformat_rgb_integer
+func (c *Constants) TEXTUREFORMAT_RGB_INTEGER(TEXTUREFORMAT_RGB_INTEGER float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTUREFORMAT_RGB_INTEGER)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTUREFORMAT_RGB_INTEGER sets the TEXTUREFORMAT_RGB_INTEGER property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#textureformat_rgb_integer
+func (c *Constants) SetTEXTUREFORMAT_RGB_INTEGER(TEXTUREFORMAT_RGB_INTEGER float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTUREFORMAT_RGB_INTEGER)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTUREFORMAT_RG_INTEGER returns the TEXTUREFORMAT_RG_INTEGER property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#textureformat_rg_integer
+func (c *Constants) TEXTUREFORMAT_RG_INTEGER(TEXTUREFORMAT_RG_INTEGER float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTUREFORMAT_RG_INTEGER)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTUREFORMAT_RG_INTEGER sets the TEXTUREFORMAT_RG_INTEGER property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#textureformat_rg_integer
+func (c *Constants) SetTEXTUREFORMAT_RG_INTEGER(TEXTUREFORMAT_RG_INTEGER float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTUREFORMAT_RG_INTEGER)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTUREFORMAT_R_INTEGER returns the TEXTUREFORMAT_R_INTEGER property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#textureformat_r_integer
+func (c *Constants) TEXTUREFORMAT_R_INTEGER(TEXTUREFORMAT_R_INTEGER float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTUREFORMAT_R_INTEGER)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTUREFORMAT_R_INTEGER sets the TEXTUREFORMAT_R_INTEGER property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#textureformat_r_integer
+func (c *Constants) SetTEXTUREFORMAT_R_INTEGER(TEXTUREFORMAT_R_INTEGER float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTUREFORMAT_R_INTEGER)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURETYPE_BYTE returns the TEXTURETYPE_BYTE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texturetype_byte
+func (c *Constants) TEXTURETYPE_BYTE(TEXTURETYPE_BYTE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURETYPE_BYTE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURETYPE_BYTE sets the TEXTURETYPE_BYTE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texturetype_byte
+func (c *Constants) SetTEXTURETYPE_BYTE(TEXTURETYPE_BYTE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURETYPE_BYTE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURETYPE_FLOAT returns the TEXTURETYPE_FLOAT property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texturetype_float
+func (c *Constants) TEXTURETYPE_FLOAT(TEXTURETYPE_FLOAT float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURETYPE_FLOAT)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURETYPE_FLOAT sets the TEXTURETYPE_FLOAT property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texturetype_float
+func (c *Constants) SetTEXTURETYPE_FLOAT(TEXTURETYPE_FLOAT float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURETYPE_FLOAT)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURETYPE_FLOAT_32_UNSIGNED_INT_24_8_REV returns the TEXTURETYPE_FLOAT_32_UNSIGNED_INT_24_8_REV property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texturetype_float_32_unsigned_int_24_8_rev
+func (c *Constants) TEXTURETYPE_FLOAT_32_UNSIGNED_INT_24_8_REV(TEXTURETYPE_FLOAT_32_UNSIGNED_INT_24_8_REV float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURETYPE_FLOAT_32_UNSIGNED_INT_24_8_REV)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURETYPE_FLOAT_32_UNSIGNED_INT_24_8_REV sets the TEXTURETYPE_FLOAT_32_UNSIGNED_INT_24_8_REV property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texturetype_float_32_unsigned_int_24_8_rev
+func (c *Constants) SetTEXTURETYPE_FLOAT_32_UNSIGNED_INT_24_8_REV(TEXTURETYPE_FLOAT_32_UNSIGNED_INT_24_8_REV float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURETYPE_FLOAT_32_UNSIGNED_INT_24_8_REV)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURETYPE_HALF_FLOAT returns the TEXTURETYPE_HALF_FLOAT property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texturetype_half_float
+func (c *Constants) TEXTURETYPE_HALF_FLOAT(TEXTURETYPE_HALF_FLOAT float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURETYPE_HALF_FLOAT)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURETYPE_HALF_FLOAT sets the TEXTURETYPE_HALF_FLOAT property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texturetype_half_float
+func (c *Constants) SetTEXTURETYPE_HALF_FLOAT(TEXTURETYPE_HALF_FLOAT float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURETYPE_HALF_FLOAT)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURETYPE_INT returns the TEXTURETYPE_INT property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texturetype_int
+func (c *Constants) TEXTURETYPE_INT(TEXTURETYPE_INT float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURETYPE_INT)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURETYPE_INT sets the TEXTURETYPE_INT property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texturetype_int
+func (c *Constants) SetTEXTURETYPE_INT(TEXTURETYPE_INT float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURETYPE_INT)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURETYPE_SHORT returns the TEXTURETYPE_SHORT property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texturetype_short
+func (c *Constants) TEXTURETYPE_SHORT(TEXTURETYPE_SHORT float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURETYPE_SHORT)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURETYPE_SHORT sets the TEXTURETYPE_SHORT property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texturetype_short
+func (c *Constants) SetTEXTURETYPE_SHORT(TEXTURETYPE_SHORT float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURETYPE_SHORT)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURETYPE_UNSIGNED_BYTE returns the TEXTURETYPE_UNSIGNED_BYTE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texturetype_unsigned_byte
+func (c *Constants) TEXTURETYPE_UNSIGNED_BYTE(TEXTURETYPE_UNSIGNED_BYTE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURETYPE_UNSIGNED_BYTE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURETYPE_UNSIGNED_BYTE sets the TEXTURETYPE_UNSIGNED_BYTE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texturetype_unsigned_byte
+func (c *Constants) SetTEXTURETYPE_UNSIGNED_BYTE(TEXTURETYPE_UNSIGNED_BYTE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURETYPE_UNSIGNED_BYTE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURETYPE_UNSIGNED_INT returns the TEXTURETYPE_UNSIGNED_INT property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texturetype_unsigned_int
+func (c *Constants) TEXTURETYPE_UNSIGNED_INT(TEXTURETYPE_UNSIGNED_INT float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURETYPE_UNSIGNED_INT)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURETYPE_UNSIGNED_INT sets the TEXTURETYPE_UNSIGNED_INT property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texturetype_unsigned_int
+func (c *Constants) SetTEXTURETYPE_UNSIGNED_INT(TEXTURETYPE_UNSIGNED_INT float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURETYPE_UNSIGNED_INT)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURETYPE_UNSIGNED_INTEGER returns the TEXTURETYPE_UNSIGNED_INTEGER property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texturetype_unsigned_integer
+func (c *Constants) TEXTURETYPE_UNSIGNED_INTEGER(TEXTURETYPE_UNSIGNED_INTEGER float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURETYPE_UNSIGNED_INTEGER)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURETYPE_UNSIGNED_INTEGER sets the TEXTURETYPE_UNSIGNED_INTEGER property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texturetype_unsigned_integer
+func (c *Constants) SetTEXTURETYPE_UNSIGNED_INTEGER(TEXTURETYPE_UNSIGNED_INTEGER float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURETYPE_UNSIGNED_INTEGER)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURETYPE_UNSIGNED_INT_10F_11F_11F_REV returns the TEXTURETYPE_UNSIGNED_INT_10F_11F_11F_REV property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texturetype_unsigned_int_10f_11f_11f_rev
+func (c *Constants) TEXTURETYPE_UNSIGNED_INT_10F_11F_11F_REV(TEXTURETYPE_UNSIGNED_INT_10F_11F_11F_REV float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURETYPE_UNSIGNED_INT_10F_11F_11F_REV)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURETYPE_UNSIGNED_INT_10F_11F_11F_REV sets the TEXTURETYPE_UNSIGNED_INT_10F_11F_11F_REV property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texturetype_unsigned_int_10f_11f_11f_rev
+func (c *Constants) SetTEXTURETYPE_UNSIGNED_INT_10F_11F_11F_REV(TEXTURETYPE_UNSIGNED_INT_10F_11F_11F_REV float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURETYPE_UNSIGNED_INT_10F_11F_11F_REV)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURETYPE_UNSIGNED_INT_24_8 returns the TEXTURETYPE_UNSIGNED_INT_24_8 property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texturetype_unsigned_int_24_8
+func (c *Constants) TEXTURETYPE_UNSIGNED_INT_24_8(TEXTURETYPE_UNSIGNED_INT_24_8 float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURETYPE_UNSIGNED_INT_24_8)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURETYPE_UNSIGNED_INT_24_8 sets the TEXTURETYPE_UNSIGNED_INT_24_8 property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texturetype_unsigned_int_24_8
+func (c *Constants) SetTEXTURETYPE_UNSIGNED_INT_24_8(TEXTURETYPE_UNSIGNED_INT_24_8 float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURETYPE_UNSIGNED_INT_24_8)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURETYPE_UNSIGNED_INT_2_10_10_10_REV returns the TEXTURETYPE_UNSIGNED_INT_2_10_10_10_REV property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texturetype_unsigned_int_2_10_10_10_rev
+func (c *Constants) TEXTURETYPE_UNSIGNED_INT_2_10_10_10_REV(TEXTURETYPE_UNSIGNED_INT_2_10_10_10_REV float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURETYPE_UNSIGNED_INT_2_10_10_10_REV)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURETYPE_UNSIGNED_INT_2_10_10_10_REV sets the TEXTURETYPE_UNSIGNED_INT_2_10_10_10_REV property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texturetype_unsigned_int_2_10_10_10_rev
+func (c *Constants) SetTEXTURETYPE_UNSIGNED_INT_2_10_10_10_REV(TEXTURETYPE_UNSIGNED_INT_2_10_10_10_REV float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURETYPE_UNSIGNED_INT_2_10_10_10_REV)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURETYPE_UNSIGNED_INT_5_9_9_9_REV returns the TEXTURETYPE_UNSIGNED_INT_5_9_9_9_REV property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texturetype_unsigned_int_5_9_9_9_rev
+func (c *Constants) TEXTURETYPE_UNSIGNED_INT_5_9_9_9_REV(TEXTURETYPE_UNSIGNED_INT_5_9_9_9_REV float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURETYPE_UNSIGNED_INT_5_9_9_9_REV)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURETYPE_UNSIGNED_INT_5_9_9_9_REV sets the TEXTURETYPE_UNSIGNED_INT_5_9_9_9_REV property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texturetype_unsigned_int_5_9_9_9_rev
+func (c *Constants) SetTEXTURETYPE_UNSIGNED_INT_5_9_9_9_REV(TEXTURETYPE_UNSIGNED_INT_5_9_9_9_REV float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURETYPE_UNSIGNED_INT_5_9_9_9_REV)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURETYPE_UNSIGNED_SHORT returns the TEXTURETYPE_UNSIGNED_SHORT property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texturetype_unsigned_short
+func (c *Constants) TEXTURETYPE_UNSIGNED_SHORT(TEXTURETYPE_UNSIGNED_SHORT float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURETYPE_UNSIGNED_SHORT)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURETYPE_UNSIGNED_SHORT sets the TEXTURETYPE_UNSIGNED_SHORT property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texturetype_unsigned_short
+func (c *Constants) SetTEXTURETYPE_UNSIGNED_SHORT(TEXTURETYPE_UNSIGNED_SHORT float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURETYPE_UNSIGNED_SHORT)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURETYPE_UNSIGNED_SHORT_4_4_4_4 returns the TEXTURETYPE_UNSIGNED_SHORT_4_4_4_4 property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texturetype_unsigned_short_4_4_4_4
+func (c *Constants) TEXTURETYPE_UNSIGNED_SHORT_4_4_4_4(TEXTURETYPE_UNSIGNED_SHORT_4_4_4_4 float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURETYPE_UNSIGNED_SHORT_4_4_4_4)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURETYPE_UNSIGNED_SHORT_4_4_4_4 sets the TEXTURETYPE_UNSIGNED_SHORT_4_4_4_4 property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texturetype_unsigned_short_4_4_4_4
+func (c *Constants) SetTEXTURETYPE_UNSIGNED_SHORT_4_4_4_4(TEXTURETYPE_UNSIGNED_SHORT_4_4_4_4 float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURETYPE_UNSIGNED_SHORT_4_4_4_4)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURETYPE_UNSIGNED_SHORT_5_5_5_1 returns the TEXTURETYPE_UNSIGNED_SHORT_5_5_5_1 property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texturetype_unsigned_short_5_5_5_1
+func (c *Constants) TEXTURETYPE_UNSIGNED_SHORT_5_5_5_1(TEXTURETYPE_UNSIGNED_SHORT_5_5_5_1 float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURETYPE_UNSIGNED_SHORT_5_5_5_1)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURETYPE_UNSIGNED_SHORT_5_5_5_1 sets the TEXTURETYPE_UNSIGNED_SHORT_5_5_5_1 property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texturetype_unsigned_short_5_5_5_1
+func (c *Constants) SetTEXTURETYPE_UNSIGNED_SHORT_5_5_5_1(TEXTURETYPE_UNSIGNED_SHORT_5_5_5_1 float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURETYPE_UNSIGNED_SHORT_5_5_5_1)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURETYPE_UNSIGNED_SHORT_5_6_5 returns the TEXTURETYPE_UNSIGNED_SHORT_5_6_5 property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texturetype_unsigned_short_5_6_5
+func (c *Constants) TEXTURETYPE_UNSIGNED_SHORT_5_6_5(TEXTURETYPE_UNSIGNED_SHORT_5_6_5 float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURETYPE_UNSIGNED_SHORT_5_6_5)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURETYPE_UNSIGNED_SHORT_5_6_5 sets the TEXTURETYPE_UNSIGNED_SHORT_5_6_5 property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texturetype_unsigned_short_5_6_5
+func (c *Constants) SetTEXTURETYPE_UNSIGNED_SHORT_5_6_5(TEXTURETYPE_UNSIGNED_SHORT_5_6_5 float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURETYPE_UNSIGNED_SHORT_5_6_5)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_BILINEAR_SAMPLINGMODE returns the TEXTURE_BILINEAR_SAMPLINGMODE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_bilinear_samplingmode
+func (c *Constants) TEXTURE_BILINEAR_SAMPLINGMODE(TEXTURE_BILINEAR_SAMPLINGMODE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_BILINEAR_SAMPLINGMODE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_BILINEAR_SAMPLINGMODE sets the TEXTURE_BILINEAR_SAMPLINGMODE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_bilinear_samplingmode
+func (c *Constants) SetTEXTURE_BILINEAR_SAMPLINGMODE(TEXTURE_BILINEAR_SAMPLINGMODE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_BILINEAR_SAMPLINGMODE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_CLAMP_ADDRESSMODE returns the TEXTURE_CLAMP_ADDRESSMODE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_clamp_addressmode
+func (c *Constants) TEXTURE_CLAMP_ADDRESSMODE(TEXTURE_CLAMP_ADDRESSMODE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_CLAMP_ADDRESSMODE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_CLAMP_ADDRESSMODE sets the TEXTURE_CLAMP_ADDRESSMODE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_clamp_addressmode
+func (c *Constants) SetTEXTURE_CLAMP_ADDRESSMODE(TEXTURE_CLAMP_ADDRESSMODE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_CLAMP_ADDRESSMODE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_CUBIC_MODE returns the TEXTURE_CUBIC_MODE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_cubic_mode
+func (c *Constants) TEXTURE_CUBIC_MODE(TEXTURE_CUBIC_MODE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_CUBIC_MODE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_CUBIC_MODE sets the TEXTURE_CUBIC_MODE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_cubic_mode
+func (c *Constants) SetTEXTURE_CUBIC_MODE(TEXTURE_CUBIC_MODE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_CUBIC_MODE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_EQUIRECTANGULAR_MODE returns the TEXTURE_EQUIRECTANGULAR_MODE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_equirectangular_mode
+func (c *Constants) TEXTURE_EQUIRECTANGULAR_MODE(TEXTURE_EQUIRECTANGULAR_MODE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_EQUIRECTANGULAR_MODE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_EQUIRECTANGULAR_MODE sets the TEXTURE_EQUIRECTANGULAR_MODE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_equirectangular_mode
+func (c *Constants) SetTEXTURE_EQUIRECTANGULAR_MODE(TEXTURE_EQUIRECTANGULAR_MODE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_EQUIRECTANGULAR_MODE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_EXPLICIT_MODE returns the TEXTURE_EXPLICIT_MODE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_explicit_mode
+func (c *Constants) TEXTURE_EXPLICIT_MODE(TEXTURE_EXPLICIT_MODE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_EXPLICIT_MODE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_EXPLICIT_MODE sets the TEXTURE_EXPLICIT_MODE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_explicit_mode
+func (c *Constants) SetTEXTURE_EXPLICIT_MODE(TEXTURE_EXPLICIT_MODE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_EXPLICIT_MODE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_FIXED_EQUIRECTANGULAR_MIRRORED_MODE returns the TEXTURE_FIXED_EQUIRECTANGULAR_MIRRORED_MODE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_fixed_equirectangular_mirrored_mode
+func (c *Constants) TEXTURE_FIXED_EQUIRECTANGULAR_MIRRORED_MODE(TEXTURE_FIXED_EQUIRECTANGULAR_MIRRORED_MODE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_FIXED_EQUIRECTANGULAR_MIRRORED_MODE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_FIXED_EQUIRECTANGULAR_MIRRORED_MODE sets the TEXTURE_FIXED_EQUIRECTANGULAR_MIRRORED_MODE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_fixed_equirectangular_mirrored_mode
+func (c *Constants) SetTEXTURE_FIXED_EQUIRECTANGULAR_MIRRORED_MODE(TEXTURE_FIXED_EQUIRECTANGULAR_MIRRORED_MODE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_FIXED_EQUIRECTANGULAR_MIRRORED_MODE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_FIXED_EQUIRECTANGULAR_MODE returns the TEXTURE_FIXED_EQUIRECTANGULAR_MODE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_fixed_equirectangular_mode
+func (c *Constants) TEXTURE_FIXED_EQUIRECTANGULAR_MODE(TEXTURE_FIXED_EQUIRECTANGULAR_MODE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_FIXED_EQUIRECTANGULAR_MODE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_FIXED_EQUIRECTANGULAR_MODE sets the TEXTURE_FIXED_EQUIRECTANGULAR_MODE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_fixed_equirectangular_mode
+func (c *Constants) SetTEXTURE_FIXED_EQUIRECTANGULAR_MODE(TEXTURE_FIXED_EQUIRECTANGULAR_MODE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_FIXED_EQUIRECTANGULAR_MODE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_INVCUBIC_MODE returns the TEXTURE_INVCUBIC_MODE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_invcubic_mode
+func (c *Constants) TEXTURE_INVCUBIC_MODE(TEXTURE_INVCUBIC_MODE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_INVCUBIC_MODE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_INVCUBIC_MODE sets the TEXTURE_INVCUBIC_MODE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_invcubic_mode
+func (c *Constants) SetTEXTURE_INVCUBIC_MODE(TEXTURE_INVCUBIC_MODE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_INVCUBIC_MODE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_LINEAR_LINEAR returns the TEXTURE_LINEAR_LINEAR property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_linear_linear
+func (c *Constants) TEXTURE_LINEAR_LINEAR(TEXTURE_LINEAR_LINEAR float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_LINEAR_LINEAR)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_LINEAR_LINEAR sets the TEXTURE_LINEAR_LINEAR property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_linear_linear
+func (c *Constants) SetTEXTURE_LINEAR_LINEAR(TEXTURE_LINEAR_LINEAR float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_LINEAR_LINEAR)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_LINEAR_LINEAR_MIPLINEAR returns the TEXTURE_LINEAR_LINEAR_MIPLINEAR property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_linear_linear_miplinear
+func (c *Constants) TEXTURE_LINEAR_LINEAR_MIPLINEAR(TEXTURE_LINEAR_LINEAR_MIPLINEAR float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_LINEAR_LINEAR_MIPLINEAR)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_LINEAR_LINEAR_MIPLINEAR sets the TEXTURE_LINEAR_LINEAR_MIPLINEAR property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_linear_linear_miplinear
+func (c *Constants) SetTEXTURE_LINEAR_LINEAR_MIPLINEAR(TEXTURE_LINEAR_LINEAR_MIPLINEAR float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_LINEAR_LINEAR_MIPLINEAR)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_LINEAR_LINEAR_MIPNEAREST returns the TEXTURE_LINEAR_LINEAR_MIPNEAREST property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_linear_linear_mipnearest
+func (c *Constants) TEXTURE_LINEAR_LINEAR_MIPNEAREST(TEXTURE_LINEAR_LINEAR_MIPNEAREST float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_LINEAR_LINEAR_MIPNEAREST)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_LINEAR_LINEAR_MIPNEAREST sets the TEXTURE_LINEAR_LINEAR_MIPNEAREST property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_linear_linear_mipnearest
+func (c *Constants) SetTEXTURE_LINEAR_LINEAR_MIPNEAREST(TEXTURE_LINEAR_LINEAR_MIPNEAREST float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_LINEAR_LINEAR_MIPNEAREST)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_LINEAR_NEAREST returns the TEXTURE_LINEAR_NEAREST property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_linear_nearest
+func (c *Constants) TEXTURE_LINEAR_NEAREST(TEXTURE_LINEAR_NEAREST float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_LINEAR_NEAREST)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_LINEAR_NEAREST sets the TEXTURE_LINEAR_NEAREST property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_linear_nearest
+func (c *Constants) SetTEXTURE_LINEAR_NEAREST(TEXTURE_LINEAR_NEAREST float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_LINEAR_NEAREST)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_LINEAR_NEAREST_MIPLINEAR returns the TEXTURE_LINEAR_NEAREST_MIPLINEAR property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_linear_nearest_miplinear
+func (c *Constants) TEXTURE_LINEAR_NEAREST_MIPLINEAR(TEXTURE_LINEAR_NEAREST_MIPLINEAR float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_LINEAR_NEAREST_MIPLINEAR)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_LINEAR_NEAREST_MIPLINEAR sets the TEXTURE_LINEAR_NEAREST_MIPLINEAR property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_linear_nearest_miplinear
+func (c *Constants) SetTEXTURE_LINEAR_NEAREST_MIPLINEAR(TEXTURE_LINEAR_NEAREST_MIPLINEAR float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_LINEAR_NEAREST_MIPLINEAR)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_LINEAR_NEAREST_MIPNEAREST returns the TEXTURE_LINEAR_NEAREST_MIPNEAREST property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_linear_nearest_mipnearest
+func (c *Constants) TEXTURE_LINEAR_NEAREST_MIPNEAREST(TEXTURE_LINEAR_NEAREST_MIPNEAREST float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_LINEAR_NEAREST_MIPNEAREST)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_LINEAR_NEAREST_MIPNEAREST sets the TEXTURE_LINEAR_NEAREST_MIPNEAREST property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_linear_nearest_mipnearest
+func (c *Constants) SetTEXTURE_LINEAR_NEAREST_MIPNEAREST(TEXTURE_LINEAR_NEAREST_MIPNEAREST float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_LINEAR_NEAREST_MIPNEAREST)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_MIRROR_ADDRESSMODE returns the TEXTURE_MIRROR_ADDRESSMODE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_mirror_addressmode
+func (c *Constants) TEXTURE_MIRROR_ADDRESSMODE(TEXTURE_MIRROR_ADDRESSMODE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_MIRROR_ADDRESSMODE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_MIRROR_ADDRESSMODE sets the TEXTURE_MIRROR_ADDRESSMODE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_mirror_addressmode
+func (c *Constants) SetTEXTURE_MIRROR_ADDRESSMODE(TEXTURE_MIRROR_ADDRESSMODE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_MIRROR_ADDRESSMODE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_NEAREST_LINEAR returns the TEXTURE_NEAREST_LINEAR property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_nearest_linear
+func (c *Constants) TEXTURE_NEAREST_LINEAR(TEXTURE_NEAREST_LINEAR float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_NEAREST_LINEAR)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_NEAREST_LINEAR sets the TEXTURE_NEAREST_LINEAR property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_nearest_linear
+func (c *Constants) SetTEXTURE_NEAREST_LINEAR(TEXTURE_NEAREST_LINEAR float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_NEAREST_LINEAR)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_NEAREST_LINEAR_MIPLINEAR returns the TEXTURE_NEAREST_LINEAR_MIPLINEAR property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_nearest_linear_miplinear
+func (c *Constants) TEXTURE_NEAREST_LINEAR_MIPLINEAR(TEXTURE_NEAREST_LINEAR_MIPLINEAR float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_NEAREST_LINEAR_MIPLINEAR)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_NEAREST_LINEAR_MIPLINEAR sets the TEXTURE_NEAREST_LINEAR_MIPLINEAR property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_nearest_linear_miplinear
+func (c *Constants) SetTEXTURE_NEAREST_LINEAR_MIPLINEAR(TEXTURE_NEAREST_LINEAR_MIPLINEAR float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_NEAREST_LINEAR_MIPLINEAR)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_NEAREST_LINEAR_MIPNEAREST returns the TEXTURE_NEAREST_LINEAR_MIPNEAREST property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_nearest_linear_mipnearest
+func (c *Constants) TEXTURE_NEAREST_LINEAR_MIPNEAREST(TEXTURE_NEAREST_LINEAR_MIPNEAREST float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_NEAREST_LINEAR_MIPNEAREST)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_NEAREST_LINEAR_MIPNEAREST sets the TEXTURE_NEAREST_LINEAR_MIPNEAREST property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_nearest_linear_mipnearest
+func (c *Constants) SetTEXTURE_NEAREST_LINEAR_MIPNEAREST(TEXTURE_NEAREST_LINEAR_MIPNEAREST float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_NEAREST_LINEAR_MIPNEAREST)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_NEAREST_NEAREST returns the TEXTURE_NEAREST_NEAREST property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_nearest_nearest
+func (c *Constants) TEXTURE_NEAREST_NEAREST(TEXTURE_NEAREST_NEAREST float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_NEAREST_NEAREST)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_NEAREST_NEAREST sets the TEXTURE_NEAREST_NEAREST property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_nearest_nearest
+func (c *Constants) SetTEXTURE_NEAREST_NEAREST(TEXTURE_NEAREST_NEAREST float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_NEAREST_NEAREST)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_NEAREST_NEAREST_MIPLINEAR returns the TEXTURE_NEAREST_NEAREST_MIPLINEAR property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_nearest_nearest_miplinear
+func (c *Constants) TEXTURE_NEAREST_NEAREST_MIPLINEAR(TEXTURE_NEAREST_NEAREST_MIPLINEAR float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_NEAREST_NEAREST_MIPLINEAR)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_NEAREST_NEAREST_MIPLINEAR sets the TEXTURE_NEAREST_NEAREST_MIPLINEAR property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_nearest_nearest_miplinear
+func (c *Constants) SetTEXTURE_NEAREST_NEAREST_MIPLINEAR(TEXTURE_NEAREST_NEAREST_MIPLINEAR float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_NEAREST_NEAREST_MIPLINEAR)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_NEAREST_NEAREST_MIPNEAREST returns the TEXTURE_NEAREST_NEAREST_MIPNEAREST property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_nearest_nearest_mipnearest
+func (c *Constants) TEXTURE_NEAREST_NEAREST_MIPNEAREST(TEXTURE_NEAREST_NEAREST_MIPNEAREST float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_NEAREST_NEAREST_MIPNEAREST)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_NEAREST_NEAREST_MIPNEAREST sets the TEXTURE_NEAREST_NEAREST_MIPNEAREST property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_nearest_nearest_mipnearest
+func (c *Constants) SetTEXTURE_NEAREST_NEAREST_MIPNEAREST(TEXTURE_NEAREST_NEAREST_MIPNEAREST float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_NEAREST_NEAREST_MIPNEAREST)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_NEAREST_SAMPLINGMODE returns the TEXTURE_NEAREST_SAMPLINGMODE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_nearest_samplingmode
+func (c *Constants) TEXTURE_NEAREST_SAMPLINGMODE(TEXTURE_NEAREST_SAMPLINGMODE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_NEAREST_SAMPLINGMODE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_NEAREST_SAMPLINGMODE sets the TEXTURE_NEAREST_SAMPLINGMODE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_nearest_samplingmode
+func (c *Constants) SetTEXTURE_NEAREST_SAMPLINGMODE(TEXTURE_NEAREST_SAMPLINGMODE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_NEAREST_SAMPLINGMODE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_PLANAR_MODE returns the TEXTURE_PLANAR_MODE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_planar_mode
+func (c *Constants) TEXTURE_PLANAR_MODE(TEXTURE_PLANAR_MODE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_PLANAR_MODE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_PLANAR_MODE sets the TEXTURE_PLANAR_MODE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_planar_mode
+func (c *Constants) SetTEXTURE_PLANAR_MODE(TEXTURE_PLANAR_MODE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_PLANAR_MODE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_PROJECTION_MODE returns the TEXTURE_PROJECTION_MODE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_projection_mode
+func (c *Constants) TEXTURE_PROJECTION_MODE(TEXTURE_PROJECTION_MODE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_PROJECTION_MODE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_PROJECTION_MODE sets the TEXTURE_PROJECTION_MODE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_projection_mode
+func (c *Constants) SetTEXTURE_PROJECTION_MODE(TEXTURE_PROJECTION_MODE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_PROJECTION_MODE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_SKYBOX_MODE returns the TEXTURE_SKYBOX_MODE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_skybox_mode
+func (c *Constants) TEXTURE_SKYBOX_MODE(TEXTURE_SKYBOX_MODE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_SKYBOX_MODE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_SKYBOX_MODE sets the TEXTURE_SKYBOX_MODE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_skybox_mode
+func (c *Constants) SetTEXTURE_SKYBOX_MODE(TEXTURE_SKYBOX_MODE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_SKYBOX_MODE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_SPHERICAL_MODE returns the TEXTURE_SPHERICAL_MODE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_spherical_mode
+func (c *Constants) TEXTURE_SPHERICAL_MODE(TEXTURE_SPHERICAL_MODE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_SPHERICAL_MODE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_SPHERICAL_MODE sets the TEXTURE_SPHERICAL_MODE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_spherical_mode
+func (c *Constants) SetTEXTURE_SPHERICAL_MODE(TEXTURE_SPHERICAL_MODE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_SPHERICAL_MODE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_TRILINEAR_SAMPLINGMODE returns the TEXTURE_TRILINEAR_SAMPLINGMODE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_trilinear_samplingmode
+func (c *Constants) TEXTURE_TRILINEAR_SAMPLINGMODE(TEXTURE_TRILINEAR_SAMPLINGMODE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_TRILINEAR_SAMPLINGMODE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_TRILINEAR_SAMPLINGMODE sets the TEXTURE_TRILINEAR_SAMPLINGMODE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_trilinear_samplingmode
+func (c *Constants) SetTEXTURE_TRILINEAR_SAMPLINGMODE(TEXTURE_TRILINEAR_SAMPLINGMODE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_TRILINEAR_SAMPLINGMODE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_WRAP_ADDRESSMODE returns the TEXTURE_WRAP_ADDRESSMODE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_wrap_addressmode
+func (c *Constants) TEXTURE_WRAP_ADDRESSMODE(TEXTURE_WRAP_ADDRESSMODE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_WRAP_ADDRESSMODE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_WRAP_ADDRESSMODE sets the TEXTURE_WRAP_ADDRESSMODE property of class Constants.
+//
+// https://doc.babylonjs.com/api/classes/babylon.constants#texture_wrap_addressmode
+func (c *Constants) SetTEXTURE_WRAP_ADDRESSMODE(TEXTURE_WRAP_ADDRESSMODE float64) *Constants {
+	p := ba.ctx.Get("Constants").New(TEXTURE_WRAP_ADDRESSMODE)
+	return ConstantsFromJSObject(p, ba.ctx)
+}
+
+*/

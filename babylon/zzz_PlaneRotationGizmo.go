@@ -29,15 +29,11 @@ func PlaneRotationGizmoFromJSObject(p js.Value, ctx js.Value) *PlaneRotationGizm
 
 // NewPlaneRotationGizmoOpts contains optional parameters for NewPlaneRotationGizmo.
 type NewPlaneRotationGizmoOpts struct {
-	Color *Color3
-
-	GizmoLayer *UtilityLayerRenderer
-
-	Tessellation *JSFloat64
-
-	Parent *RotationGizmo
-
-	UseEulerRotation *JSBool
+	Color            *Color3
+	GizmoLayer       *UtilityLayerRenderer
+	Tessellation     *float64
+	Parent           *RotationGizmo
+	UseEulerRotation *bool
 }
 
 // NewPlaneRotationGizmo returns a new PlaneRotationGizmo object.
@@ -48,8 +44,238 @@ func (ba *Babylon) NewPlaneRotationGizmo(planeNormal *Vector3, opts *NewPlaneRot
 		opts = &NewPlaneRotationGizmoOpts{}
 	}
 
-	p := ba.ctx.Get("PlaneRotationGizmo").New(planeNormal.JSObject(), opts.Color.JSObject(), opts.GizmoLayer.JSObject(), opts.Tessellation.JSObject(), opts.Parent.JSObject(), opts.UseEulerRotation.JSObject())
+	args := make([]interface{}, 0, 1+5)
+
+	args = append(args, planeNormal.JSObject())
+
+	if opts.Color == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Color.JSObject())
+	}
+	if opts.GizmoLayer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.GizmoLayer.JSObject())
+	}
+	if opts.Tessellation == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Tessellation)
+	}
+	if opts.Parent == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Parent.JSObject())
+	}
+	if opts.UseEulerRotation == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseEulerRotation)
+	}
+
+	p := ba.ctx.Get("PlaneRotationGizmo").New(args...)
 	return PlaneRotationGizmoFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Dispose calls the Dispose method on the PlaneRotationGizmo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.planerotationgizmo#dispose
+func (p *PlaneRotationGizmo) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("dispose", args...)
+}
+
+// SetCustomMesh calls the SetCustomMesh method on the PlaneRotationGizmo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.planerotationgizmo#setcustommesh
+func (p *PlaneRotationGizmo) SetCustomMesh(mesh *Mesh) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	p.p.Call("setCustomMesh", args...)
+}
+
+/*
+
+// AttachedMesh returns the AttachedMesh property of class PlaneRotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.planerotationgizmo#attachedmesh
+func (p *PlaneRotationGizmo) AttachedMesh(attachedMesh *AbstractMesh) *PlaneRotationGizmo {
+	p := ba.ctx.Get("PlaneRotationGizmo").New(attachedMesh.JSObject())
+	return PlaneRotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetAttachedMesh sets the AttachedMesh property of class PlaneRotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.planerotationgizmo#attachedmesh
+func (p *PlaneRotationGizmo) SetAttachedMesh(attachedMesh *AbstractMesh) *PlaneRotationGizmo {
+	p := ba.ctx.Get("PlaneRotationGizmo").New(attachedMesh.JSObject())
+	return PlaneRotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// DragBehavior returns the DragBehavior property of class PlaneRotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.planerotationgizmo#dragbehavior
+func (p *PlaneRotationGizmo) DragBehavior(dragBehavior *PointerDragBehavior) *PlaneRotationGizmo {
+	p := ba.ctx.Get("PlaneRotationGizmo").New(dragBehavior.JSObject())
+	return PlaneRotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetDragBehavior sets the DragBehavior property of class PlaneRotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.planerotationgizmo#dragbehavior
+func (p *PlaneRotationGizmo) SetDragBehavior(dragBehavior *PointerDragBehavior) *PlaneRotationGizmo {
+	p := ba.ctx.Get("PlaneRotationGizmo").New(dragBehavior.JSObject())
+	return PlaneRotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// GizmoLayer returns the GizmoLayer property of class PlaneRotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.planerotationgizmo#gizmolayer
+func (p *PlaneRotationGizmo) GizmoLayer(gizmoLayer *UtilityLayerRenderer) *PlaneRotationGizmo {
+	p := ba.ctx.Get("PlaneRotationGizmo").New(gizmoLayer.JSObject())
+	return PlaneRotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetGizmoLayer sets the GizmoLayer property of class PlaneRotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.planerotationgizmo#gizmolayer
+func (p *PlaneRotationGizmo) SetGizmoLayer(gizmoLayer *UtilityLayerRenderer) *PlaneRotationGizmo {
+	p := ba.ctx.Get("PlaneRotationGizmo").New(gizmoLayer.JSObject())
+	return PlaneRotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// IsEnabled returns the IsEnabled property of class PlaneRotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.planerotationgizmo#isenabled
+func (p *PlaneRotationGizmo) IsEnabled(isEnabled bool) *PlaneRotationGizmo {
+	p := ba.ctx.Get("PlaneRotationGizmo").New(isEnabled)
+	return PlaneRotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetIsEnabled sets the IsEnabled property of class PlaneRotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.planerotationgizmo#isenabled
+func (p *PlaneRotationGizmo) SetIsEnabled(isEnabled bool) *PlaneRotationGizmo {
+	p := ba.ctx.Get("PlaneRotationGizmo").New(isEnabled)
+	return PlaneRotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// OnSnapObservable returns the OnSnapObservable property of class PlaneRotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.planerotationgizmo#onsnapobservable
+func (p *PlaneRotationGizmo) OnSnapObservable(onSnapObservable *Observable) *PlaneRotationGizmo {
+	p := ba.ctx.Get("PlaneRotationGizmo").New(onSnapObservable.JSObject())
+	return PlaneRotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetOnSnapObservable sets the OnSnapObservable property of class PlaneRotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.planerotationgizmo#onsnapobservable
+func (p *PlaneRotationGizmo) SetOnSnapObservable(onSnapObservable *Observable) *PlaneRotationGizmo {
+	p := ba.ctx.Get("PlaneRotationGizmo").New(onSnapObservable.JSObject())
+	return PlaneRotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// ScaleRatio returns the ScaleRatio property of class PlaneRotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.planerotationgizmo#scaleratio
+func (p *PlaneRotationGizmo) ScaleRatio(scaleRatio float64) *PlaneRotationGizmo {
+	p := ba.ctx.Get("PlaneRotationGizmo").New(scaleRatio)
+	return PlaneRotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetScaleRatio sets the ScaleRatio property of class PlaneRotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.planerotationgizmo#scaleratio
+func (p *PlaneRotationGizmo) SetScaleRatio(scaleRatio float64) *PlaneRotationGizmo {
+	p := ba.ctx.Get("PlaneRotationGizmo").New(scaleRatio)
+	return PlaneRotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// SnapDistance returns the SnapDistance property of class PlaneRotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.planerotationgizmo#snapdistance
+func (p *PlaneRotationGizmo) SnapDistance(snapDistance float64) *PlaneRotationGizmo {
+	p := ba.ctx.Get("PlaneRotationGizmo").New(snapDistance)
+	return PlaneRotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetSnapDistance sets the SnapDistance property of class PlaneRotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.planerotationgizmo#snapdistance
+func (p *PlaneRotationGizmo) SetSnapDistance(snapDistance float64) *PlaneRotationGizmo {
+	p := ba.ctx.Get("PlaneRotationGizmo").New(snapDistance)
+	return PlaneRotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// UpdateGizmoPositionToMatchAttachedMesh returns the UpdateGizmoPositionToMatchAttachedMesh property of class PlaneRotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.planerotationgizmo#updategizmopositiontomatchattachedmesh
+func (p *PlaneRotationGizmo) UpdateGizmoPositionToMatchAttachedMesh(updateGizmoPositionToMatchAttachedMesh bool) *PlaneRotationGizmo {
+	p := ba.ctx.Get("PlaneRotationGizmo").New(updateGizmoPositionToMatchAttachedMesh)
+	return PlaneRotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateGizmoPositionToMatchAttachedMesh sets the UpdateGizmoPositionToMatchAttachedMesh property of class PlaneRotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.planerotationgizmo#updategizmopositiontomatchattachedmesh
+func (p *PlaneRotationGizmo) SetUpdateGizmoPositionToMatchAttachedMesh(updateGizmoPositionToMatchAttachedMesh bool) *PlaneRotationGizmo {
+	p := ba.ctx.Get("PlaneRotationGizmo").New(updateGizmoPositionToMatchAttachedMesh)
+	return PlaneRotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// UpdateGizmoRotationToMatchAttachedMesh returns the UpdateGizmoRotationToMatchAttachedMesh property of class PlaneRotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.planerotationgizmo#updategizmorotationtomatchattachedmesh
+func (p *PlaneRotationGizmo) UpdateGizmoRotationToMatchAttachedMesh(updateGizmoRotationToMatchAttachedMesh bool) *PlaneRotationGizmo {
+	p := ba.ctx.Get("PlaneRotationGizmo").New(updateGizmoRotationToMatchAttachedMesh)
+	return PlaneRotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateGizmoRotationToMatchAttachedMesh sets the UpdateGizmoRotationToMatchAttachedMesh property of class PlaneRotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.planerotationgizmo#updategizmorotationtomatchattachedmesh
+func (p *PlaneRotationGizmo) SetUpdateGizmoRotationToMatchAttachedMesh(updateGizmoRotationToMatchAttachedMesh bool) *PlaneRotationGizmo {
+	p := ba.ctx.Get("PlaneRotationGizmo").New(updateGizmoRotationToMatchAttachedMesh)
+	return PlaneRotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// UpdateScale returns the UpdateScale property of class PlaneRotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.planerotationgizmo#updatescale
+func (p *PlaneRotationGizmo) UpdateScale(updateScale bool) *PlaneRotationGizmo {
+	p := ba.ctx.Get("PlaneRotationGizmo").New(updateScale)
+	return PlaneRotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateScale sets the UpdateScale property of class PlaneRotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.planerotationgizmo#updatescale
+func (p *PlaneRotationGizmo) SetUpdateScale(updateScale bool) *PlaneRotationGizmo {
+	p := ba.ctx.Get("PlaneRotationGizmo").New(updateScale)
+	return PlaneRotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// _rootMesh returns the _rootMesh property of class PlaneRotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.planerotationgizmo#_rootmesh
+func (p *PlaneRotationGizmo) _rootMesh(_rootMesh *Mesh) *PlaneRotationGizmo {
+	p := ba.ctx.Get("PlaneRotationGizmo").New(_rootMesh.JSObject())
+	return PlaneRotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// Set_rootMesh sets the _rootMesh property of class PlaneRotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.planerotationgizmo#_rootmesh
+func (p *PlaneRotationGizmo) Set_rootMesh(_rootMesh *Mesh) *PlaneRotationGizmo {
+	p := ba.ctx.Get("PlaneRotationGizmo").New(_rootMesh.JSObject())
+	return PlaneRotationGizmoFromJSObject(p, ba.ctx)
+}
+
+*/

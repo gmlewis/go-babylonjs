@@ -27,4 +27,21 @@ func CylinderBuilderFromJSObject(p js.Value, ctx js.Value) *CylinderBuilder {
 	return &CylinderBuilder{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// CreateCylinder calls the CreateCylinder method on the CylinderBuilder object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderbuilder#createcylinder
+func (c *CylinderBuilder) CreateCylinder(name string, options js.Value, scene interface{}) *Mesh {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, name)
+	args = append(args, options)
+	args = append(args, scene)
+
+	retVal := c.p.Call("CreateCylinder", args...)
+	return MeshFromJSObject(retVal, c.ctx)
+}
+
+/*
+
+ */

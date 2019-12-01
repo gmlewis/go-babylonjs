@@ -28,4 +28,22 @@ func FilesInputStoreFromJSObject(p js.Value, ctx js.Value) *FilesInputStore {
 	return &FilesInputStore{p: p, ctx: ctx}
 }
 
-// TODO: methods
+/*
+
+// FilesToLoad returns the FilesToLoad property of class FilesInputStore.
+//
+// https://doc.babylonjs.com/api/classes/babylon.filesinputstore#filestoload
+func (f *FilesInputStore) FilesToLoad(FilesToLoad js.Value) *FilesInputStore {
+	p := ba.ctx.Get("FilesInputStore").New(FilesToLoad)
+	return FilesInputStoreFromJSObject(p, ba.ctx)
+}
+
+// SetFilesToLoad sets the FilesToLoad property of class FilesInputStore.
+//
+// https://doc.babylonjs.com/api/classes/babylon.filesinputstore#filestoload
+func (f *FilesInputStore) SetFilesToLoad(FilesToLoad js.Value) *FilesInputStore {
+	p := ba.ctx.Get("FilesInputStore").New(FilesToLoad)
+	return FilesInputStoreFromJSObject(p, ba.ctx)
+}
+
+*/

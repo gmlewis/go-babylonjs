@@ -30,7 +30,7 @@ func VRExperienceHelperFromJSObject(p js.Value, ctx js.Value) *VRExperienceHelpe
 
 // NewVRExperienceHelperOpts contains optional parameters for NewVRExperienceHelper.
 type NewVRExperienceHelperOpts struct {
-	WebVROptions *JSValue
+	WebVROptions *VRExperienceHelperOptions
 }
 
 // NewVRExperienceHelper returns a new VRExperienceHelper object.
@@ -41,8 +41,795 @@ func (ba *Babylon) NewVRExperienceHelper(scene *Scene, opts *NewVRExperienceHelp
 		opts = &NewVRExperienceHelperOpts{}
 	}
 
-	p := ba.ctx.Get("VRExperienceHelper").New(scene.JSObject(), opts.WebVROptions.JSObject())
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, scene.JSObject())
+
+	if opts.WebVROptions == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.WebVROptions.JSObject())
+	}
+
+	p := ba.ctx.Get("VRExperienceHelper").New(args...)
 	return VRExperienceHelperFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AddFloorMesh calls the AddFloorMesh method on the VRExperienceHelper object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#addfloormesh
+func (v *VRExperienceHelper) AddFloorMesh(floorMesh *Mesh) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, floorMesh.JSObject())
+
+	v.p.Call("addFloorMesh", args...)
+}
+
+// ChangeGazeColor calls the ChangeGazeColor method on the VRExperienceHelper object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#changegazecolor
+func (v *VRExperienceHelper) ChangeGazeColor(color *Color3) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, color.JSObject())
+
+	v.p.Call("changeGazeColor", args...)
+}
+
+// ChangeLaserColor calls the ChangeLaserColor method on the VRExperienceHelper object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#changelasercolor
+func (v *VRExperienceHelper) ChangeLaserColor(color *Color3) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, color.JSObject())
+
+	v.p.Call("changeLaserColor", args...)
+}
+
+// Dispose calls the Dispose method on the VRExperienceHelper object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#dispose
+func (v *VRExperienceHelper) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	v.p.Call("dispose", args...)
+}
+
+// EnableInteractions calls the EnableInteractions method on the VRExperienceHelper object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#enableinteractions
+func (v *VRExperienceHelper) EnableInteractions() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	v.p.Call("enableInteractions", args...)
+}
+
+// VRExperienceHelperEnableTeleportationOpts contains optional parameters for VRExperienceHelper.EnableTeleportation.
+type VRExperienceHelperEnableTeleportationOpts struct {
+	VrTeleportationOptions *VRTeleportationOptions
+}
+
+// EnableTeleportation calls the EnableTeleportation method on the VRExperienceHelper object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#enableteleportation
+func (v *VRExperienceHelper) EnableTeleportation(opts *VRExperienceHelperEnableTeleportationOpts) {
+	if opts == nil {
+		opts = &VRExperienceHelperEnableTeleportationOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.VrTeleportationOptions == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.VrTeleportationOptions.JSObject())
+	}
+
+	v.p.Call("enableTeleportation", args...)
+}
+
+// EnterVR calls the EnterVR method on the VRExperienceHelper object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#entervr
+func (v *VRExperienceHelper) EnterVR() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	v.p.Call("enterVR", args...)
+}
+
+// ExitVR calls the ExitVR method on the VRExperienceHelper object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#exitvr
+func (v *VRExperienceHelper) ExitVR() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	v.p.Call("exitVR", args...)
+}
+
+// GetClassName calls the GetClassName method on the VRExperienceHelper object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#getclassname
+func (v *VRExperienceHelper) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// RemoveFloorMesh calls the RemoveFloorMesh method on the VRExperienceHelper object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#removefloormesh
+func (v *VRExperienceHelper) RemoveFloorMesh(floorMesh *Mesh) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, floorMesh.JSObject())
+
+	v.p.Call("removeFloorMesh", args...)
+}
+
+// TeleportCamera calls the TeleportCamera method on the VRExperienceHelper object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#teleportcamera
+func (v *VRExperienceHelper) TeleportCamera(location *Vector3) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, location.JSObject())
+
+	v.p.Call("teleportCamera", args...)
+}
+
+/*
+
+// CurrentVRCamera returns the CurrentVRCamera property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#currentvrcamera
+func (v *VRExperienceHelper) CurrentVRCamera(currentVRCamera *Camera) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(currentVRCamera.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetCurrentVRCamera sets the CurrentVRCamera property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#currentvrcamera
+func (v *VRExperienceHelper) SetCurrentVRCamera(currentVRCamera *Camera) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(currentVRCamera.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// DeviceOrientationCamera returns the DeviceOrientationCamera property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#deviceorientationcamera
+func (v *VRExperienceHelper) DeviceOrientationCamera(deviceOrientationCamera *DeviceOrientationCamera) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(deviceOrientationCamera.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetDeviceOrientationCamera sets the DeviceOrientationCamera property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#deviceorientationcamera
+func (v *VRExperienceHelper) SetDeviceOrientationCamera(deviceOrientationCamera *DeviceOrientationCamera) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(deviceOrientationCamera.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// DisplayGaze returns the DisplayGaze property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#displaygaze
+func (v *VRExperienceHelper) DisplayGaze(displayGaze bool) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(displayGaze)
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetDisplayGaze sets the DisplayGaze property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#displaygaze
+func (v *VRExperienceHelper) SetDisplayGaze(displayGaze bool) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(displayGaze)
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// DisplayLaserPointer returns the DisplayLaserPointer property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#displaylaserpointer
+func (v *VRExperienceHelper) DisplayLaserPointer(displayLaserPointer bool) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(displayLaserPointer)
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetDisplayLaserPointer sets the DisplayLaserPointer property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#displaylaserpointer
+func (v *VRExperienceHelper) SetDisplayLaserPointer(displayLaserPointer bool) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(displayLaserPointer)
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// EnableGazeEvenWhenNoPointerLock returns the EnableGazeEvenWhenNoPointerLock property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#enablegazeevenwhennopointerlock
+func (v *VRExperienceHelper) EnableGazeEvenWhenNoPointerLock(enableGazeEvenWhenNoPointerLock bool) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(enableGazeEvenWhenNoPointerLock)
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetEnableGazeEvenWhenNoPointerLock sets the EnableGazeEvenWhenNoPointerLock property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#enablegazeevenwhennopointerlock
+func (v *VRExperienceHelper) SetEnableGazeEvenWhenNoPointerLock(enableGazeEvenWhenNoPointerLock bool) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(enableGazeEvenWhenNoPointerLock)
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// ExitVROnDoubleTap returns the ExitVROnDoubleTap property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#exitvrondoubletap
+func (v *VRExperienceHelper) ExitVROnDoubleTap(exitVROnDoubleTap bool) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(exitVROnDoubleTap)
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetExitVROnDoubleTap sets the ExitVROnDoubleTap property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#exitvrondoubletap
+func (v *VRExperienceHelper) SetExitVROnDoubleTap(exitVROnDoubleTap bool) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(exitVROnDoubleTap)
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// GazeTrackerMesh returns the GazeTrackerMesh property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#gazetrackermesh
+func (v *VRExperienceHelper) GazeTrackerMesh(gazeTrackerMesh *Mesh) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(gazeTrackerMesh.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetGazeTrackerMesh sets the GazeTrackerMesh property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#gazetrackermesh
+func (v *VRExperienceHelper) SetGazeTrackerMesh(gazeTrackerMesh *Mesh) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(gazeTrackerMesh.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// IsInVRMode returns the IsInVRMode property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#isinvrmode
+func (v *VRExperienceHelper) IsInVRMode(isInVRMode bool) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(isInVRMode)
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetIsInVRMode sets the IsInVRMode property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#isinvrmode
+func (v *VRExperienceHelper) SetIsInVRMode(isInVRMode bool) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(isInVRMode)
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// LeftControllerGazeTrackerMesh returns the LeftControllerGazeTrackerMesh property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#leftcontrollergazetrackermesh
+func (v *VRExperienceHelper) LeftControllerGazeTrackerMesh(leftControllerGazeTrackerMesh *Mesh) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(leftControllerGazeTrackerMesh.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetLeftControllerGazeTrackerMesh sets the LeftControllerGazeTrackerMesh property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#leftcontrollergazetrackermesh
+func (v *VRExperienceHelper) SetLeftControllerGazeTrackerMesh(leftControllerGazeTrackerMesh *Mesh) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(leftControllerGazeTrackerMesh.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// MeshSelectionPredicate returns the MeshSelectionPredicate property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#meshselectionpredicate
+func (v *VRExperienceHelper) MeshSelectionPredicate(meshSelectionPredicate func()) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(meshSelectionPredicate)
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetMeshSelectionPredicate sets the MeshSelectionPredicate property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#meshselectionpredicate
+func (v *VRExperienceHelper) SetMeshSelectionPredicate(meshSelectionPredicate func()) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(meshSelectionPredicate)
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// OnAfterCameraTeleport returns the OnAfterCameraTeleport property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#onaftercamerateleport
+func (v *VRExperienceHelper) OnAfterCameraTeleport(onAfterCameraTeleport *Observable) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(onAfterCameraTeleport.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterCameraTeleport sets the OnAfterCameraTeleport property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#onaftercamerateleport
+func (v *VRExperienceHelper) SetOnAfterCameraTeleport(onAfterCameraTeleport *Observable) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(onAfterCameraTeleport.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// OnAfterEnteringVRObservable returns the OnAfterEnteringVRObservable property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#onafterenteringvrobservable
+func (v *VRExperienceHelper) OnAfterEnteringVRObservable(onAfterEnteringVRObservable *Observable) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(onAfterEnteringVRObservable.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterEnteringVRObservable sets the OnAfterEnteringVRObservable property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#onafterenteringvrobservable
+func (v *VRExperienceHelper) SetOnAfterEnteringVRObservable(onAfterEnteringVRObservable *Observable) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(onAfterEnteringVRObservable.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeCameraTeleport returns the OnBeforeCameraTeleport property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#onbeforecamerateleport
+func (v *VRExperienceHelper) OnBeforeCameraTeleport(onBeforeCameraTeleport *Observable) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(onBeforeCameraTeleport.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeCameraTeleport sets the OnBeforeCameraTeleport property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#onbeforecamerateleport
+func (v *VRExperienceHelper) SetOnBeforeCameraTeleport(onBeforeCameraTeleport *Observable) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(onBeforeCameraTeleport.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// OnControllerMeshLoaded returns the OnControllerMeshLoaded property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#oncontrollermeshloaded
+func (v *VRExperienceHelper) OnControllerMeshLoaded(onControllerMeshLoaded *Observable) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(onControllerMeshLoaded.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetOnControllerMeshLoaded sets the OnControllerMeshLoaded property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#oncontrollermeshloaded
+func (v *VRExperienceHelper) SetOnControllerMeshLoaded(onControllerMeshLoaded *Observable) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(onControllerMeshLoaded.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// OnControllerMeshLoadedObservable returns the OnControllerMeshLoadedObservable property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#oncontrollermeshloadedobservable
+func (v *VRExperienceHelper) OnControllerMeshLoadedObservable(onControllerMeshLoadedObservable *Observable) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(onControllerMeshLoadedObservable.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetOnControllerMeshLoadedObservable sets the OnControllerMeshLoadedObservable property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#oncontrollermeshloadedobservable
+func (v *VRExperienceHelper) SetOnControllerMeshLoadedObservable(onControllerMeshLoadedObservable *Observable) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(onControllerMeshLoadedObservable.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// OnEnteringVR returns the OnEnteringVR property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#onenteringvr
+func (v *VRExperienceHelper) OnEnteringVR(onEnteringVR *Observable) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(onEnteringVR.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetOnEnteringVR sets the OnEnteringVR property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#onenteringvr
+func (v *VRExperienceHelper) SetOnEnteringVR(onEnteringVR *Observable) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(onEnteringVR.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// OnEnteringVRObservable returns the OnEnteringVRObservable property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#onenteringvrobservable
+func (v *VRExperienceHelper) OnEnteringVRObservable(onEnteringVRObservable *Observable) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(onEnteringVRObservable.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetOnEnteringVRObservable sets the OnEnteringVRObservable property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#onenteringvrobservable
+func (v *VRExperienceHelper) SetOnEnteringVRObservable(onEnteringVRObservable *Observable) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(onEnteringVRObservable.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// OnExitingVR returns the OnExitingVR property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#onexitingvr
+func (v *VRExperienceHelper) OnExitingVR(onExitingVR *Observable) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(onExitingVR.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetOnExitingVR sets the OnExitingVR property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#onexitingvr
+func (v *VRExperienceHelper) SetOnExitingVR(onExitingVR *Observable) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(onExitingVR.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// OnExitingVRObservable returns the OnExitingVRObservable property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#onexitingvrobservable
+func (v *VRExperienceHelper) OnExitingVRObservable(onExitingVRObservable *Observable) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(onExitingVRObservable.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetOnExitingVRObservable sets the OnExitingVRObservable property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#onexitingvrobservable
+func (v *VRExperienceHelper) SetOnExitingVRObservable(onExitingVRObservable *Observable) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(onExitingVRObservable.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// OnMeshSelectedWithController returns the OnMeshSelectedWithController property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#onmeshselectedwithcontroller
+func (v *VRExperienceHelper) OnMeshSelectedWithController(onMeshSelectedWithController *Observable) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(onMeshSelectedWithController.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetOnMeshSelectedWithController sets the OnMeshSelectedWithController property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#onmeshselectedwithcontroller
+func (v *VRExperienceHelper) SetOnMeshSelectedWithController(onMeshSelectedWithController *Observable) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(onMeshSelectedWithController.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// OnNewMeshPicked returns the OnNewMeshPicked property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#onnewmeshpicked
+func (v *VRExperienceHelper) OnNewMeshPicked(onNewMeshPicked *Observable) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(onNewMeshPicked.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetOnNewMeshPicked sets the OnNewMeshPicked property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#onnewmeshpicked
+func (v *VRExperienceHelper) SetOnNewMeshPicked(onNewMeshPicked *Observable) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(onNewMeshPicked.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// OnNewMeshSelected returns the OnNewMeshSelected property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#onnewmeshselected
+func (v *VRExperienceHelper) OnNewMeshSelected(onNewMeshSelected *Observable) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(onNewMeshSelected.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetOnNewMeshSelected sets the OnNewMeshSelected property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#onnewmeshselected
+func (v *VRExperienceHelper) SetOnNewMeshSelected(onNewMeshSelected *Observable) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(onNewMeshSelected.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// OnSelectedMeshUnselected returns the OnSelectedMeshUnselected property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#onselectedmeshunselected
+func (v *VRExperienceHelper) OnSelectedMeshUnselected(onSelectedMeshUnselected *Observable) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(onSelectedMeshUnselected.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetOnSelectedMeshUnselected sets the OnSelectedMeshUnselected property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#onselectedmeshunselected
+func (v *VRExperienceHelper) SetOnSelectedMeshUnselected(onSelectedMeshUnselected *Observable) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(onSelectedMeshUnselected.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// Position returns the Position property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#position
+func (v *VRExperienceHelper) Position(position *Vector3) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(position.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetPosition sets the Position property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#position
+func (v *VRExperienceHelper) SetPosition(position *Vector3) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(position.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// RaySelectionPredicate returns the RaySelectionPredicate property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#rayselectionpredicate
+func (v *VRExperienceHelper) RaySelectionPredicate(raySelectionPredicate func()) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(raySelectionPredicate)
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetRaySelectionPredicate sets the RaySelectionPredicate property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#rayselectionpredicate
+func (v *VRExperienceHelper) SetRaySelectionPredicate(raySelectionPredicate func()) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(raySelectionPredicate)
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// RequestPointerLockOnFullScreen returns the RequestPointerLockOnFullScreen property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#requestpointerlockonfullscreen
+func (v *VRExperienceHelper) RequestPointerLockOnFullScreen(requestPointerLockOnFullScreen bool) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(requestPointerLockOnFullScreen)
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetRequestPointerLockOnFullScreen sets the RequestPointerLockOnFullScreen property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#requestpointerlockonfullscreen
+func (v *VRExperienceHelper) SetRequestPointerLockOnFullScreen(requestPointerLockOnFullScreen bool) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(requestPointerLockOnFullScreen)
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// RightControllerGazeTrackerMesh returns the RightControllerGazeTrackerMesh property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#rightcontrollergazetrackermesh
+func (v *VRExperienceHelper) RightControllerGazeTrackerMesh(rightControllerGazeTrackerMesh *Mesh) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(rightControllerGazeTrackerMesh.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetRightControllerGazeTrackerMesh sets the RightControllerGazeTrackerMesh property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#rightcontrollergazetrackermesh
+func (v *VRExperienceHelper) SetRightControllerGazeTrackerMesh(rightControllerGazeTrackerMesh *Mesh) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(rightControllerGazeTrackerMesh.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// TELEPORTATIONMODE_CONSTANTSPEED returns the TELEPORTATIONMODE_CONSTANTSPEED property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#teleportationmode_constantspeed
+func (v *VRExperienceHelper) TELEPORTATIONMODE_CONSTANTSPEED(TELEPORTATIONMODE_CONSTANTSPEED float64) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(TELEPORTATIONMODE_CONSTANTSPEED)
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetTELEPORTATIONMODE_CONSTANTSPEED sets the TELEPORTATIONMODE_CONSTANTSPEED property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#teleportationmode_constantspeed
+func (v *VRExperienceHelper) SetTELEPORTATIONMODE_CONSTANTSPEED(TELEPORTATIONMODE_CONSTANTSPEED float64) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(TELEPORTATIONMODE_CONSTANTSPEED)
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// TELEPORTATIONMODE_CONSTANTTIME returns the TELEPORTATIONMODE_CONSTANTTIME property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#teleportationmode_constanttime
+func (v *VRExperienceHelper) TELEPORTATIONMODE_CONSTANTTIME(TELEPORTATIONMODE_CONSTANTTIME float64) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(TELEPORTATIONMODE_CONSTANTTIME)
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetTELEPORTATIONMODE_CONSTANTTIME sets the TELEPORTATIONMODE_CONSTANTTIME property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#teleportationmode_constanttime
+func (v *VRExperienceHelper) SetTELEPORTATIONMODE_CONSTANTTIME(TELEPORTATIONMODE_CONSTANTTIME float64) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(TELEPORTATIONMODE_CONSTANTTIME)
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// TeleportationEnabled returns the TeleportationEnabled property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#teleportationenabled
+func (v *VRExperienceHelper) TeleportationEnabled(teleportationEnabled bool) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(teleportationEnabled)
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetTeleportationEnabled sets the TeleportationEnabled property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#teleportationenabled
+func (v *VRExperienceHelper) SetTeleportationEnabled(teleportationEnabled bool) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(teleportationEnabled)
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// TeleportationTarget returns the TeleportationTarget property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#teleportationtarget
+func (v *VRExperienceHelper) TeleportationTarget(teleportationTarget *Mesh) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(teleportationTarget.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetTeleportationTarget sets the TeleportationTarget property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#teleportationtarget
+func (v *VRExperienceHelper) SetTeleportationTarget(teleportationTarget *Mesh) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(teleportationTarget.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// UpdateControllerLaserColor returns the UpdateControllerLaserColor property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#updatecontrollerlasercolor
+func (v *VRExperienceHelper) UpdateControllerLaserColor(updateControllerLaserColor bool) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(updateControllerLaserColor)
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateControllerLaserColor sets the UpdateControllerLaserColor property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#updatecontrollerlasercolor
+func (v *VRExperienceHelper) SetUpdateControllerLaserColor(updateControllerLaserColor bool) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(updateControllerLaserColor)
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// UpdateGazeTrackerColor returns the UpdateGazeTrackerColor property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#updategazetrackercolor
+func (v *VRExperienceHelper) UpdateGazeTrackerColor(updateGazeTrackerColor bool) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(updateGazeTrackerColor)
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateGazeTrackerColor sets the UpdateGazeTrackerColor property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#updategazetrackercolor
+func (v *VRExperienceHelper) SetUpdateGazeTrackerColor(updateGazeTrackerColor bool) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(updateGazeTrackerColor)
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// UpdateGazeTrackerScale returns the UpdateGazeTrackerScale property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#updategazetrackerscale
+func (v *VRExperienceHelper) UpdateGazeTrackerScale(updateGazeTrackerScale bool) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(updateGazeTrackerScale)
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateGazeTrackerScale sets the UpdateGazeTrackerScale property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#updategazetrackerscale
+func (v *VRExperienceHelper) SetUpdateGazeTrackerScale(updateGazeTrackerScale bool) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(updateGazeTrackerScale)
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// VrButton returns the VrButton property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#vrbutton
+func (v *VRExperienceHelper) VrButton(vrButton *HTMLButtonElement) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(vrButton.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetVrButton sets the VrButton property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#vrbutton
+func (v *VRExperienceHelper) SetVrButton(vrButton *HTMLButtonElement) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(vrButton.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// VrDeviceOrientationCamera returns the VrDeviceOrientationCamera property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#vrdeviceorientationcamera
+func (v *VRExperienceHelper) VrDeviceOrientationCamera(vrDeviceOrientationCamera *VRDeviceOrientationFreeCamera) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(vrDeviceOrientationCamera.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetVrDeviceOrientationCamera sets the VrDeviceOrientationCamera property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#vrdeviceorientationcamera
+func (v *VRExperienceHelper) SetVrDeviceOrientationCamera(vrDeviceOrientationCamera *VRDeviceOrientationFreeCamera) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(vrDeviceOrientationCamera.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// WebVRCamera returns the WebVRCamera property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#webvrcamera
+func (v *VRExperienceHelper) WebVRCamera(webVRCamera *WebVRFreeCamera) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(webVRCamera.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetWebVRCamera sets the WebVRCamera property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#webvrcamera
+func (v *VRExperienceHelper) SetWebVRCamera(webVRCamera *WebVRFreeCamera) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(webVRCamera.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// WebVROptions returns the WebVROptions property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#webvroptions
+func (v *VRExperienceHelper) WebVROptions(webVROptions *VRExperienceHelperOptions) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(webVROptions.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetWebVROptions sets the WebVROptions property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#webvroptions
+func (v *VRExperienceHelper) SetWebVROptions(webVROptions *VRExperienceHelperOptions) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(webVROptions.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// Xr returns the Xr property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#xr
+func (v *VRExperienceHelper) Xr(xr *WebXRDefaultExperience) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(xr.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetXr sets the Xr property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#xr
+func (v *VRExperienceHelper) SetXr(xr *WebXRDefaultExperience) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(xr.JSObject())
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// XrTestDone returns the XrTestDone property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#xrtestdone
+func (v *VRExperienceHelper) XrTestDone(xrTestDone bool) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(xrTestDone)
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+// SetXrTestDone sets the XrTestDone property of class VRExperienceHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrexperiencehelper#xrtestdone
+func (v *VRExperienceHelper) SetXrTestDone(xrTestDone bool) *VRExperienceHelper {
+	p := ba.ctx.Get("VRExperienceHelper").New(xrTestDone)
+	return VRExperienceHelperFromJSObject(p, ba.ctx)
+}
+
+*/

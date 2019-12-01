@@ -31,8 +31,77 @@ func PhysicsRadialExplosionEventFromJSObject(p js.Value, ctx js.Value) *PhysicsR
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsradialexplosionevent
 func (ba *Babylon) NewPhysicsRadialExplosionEvent(_scene *Scene, _options *PhysicsRadialExplosionEventOptions) *PhysicsRadialExplosionEvent {
-	p := ba.ctx.Get("PhysicsRadialExplosionEvent").New(_scene.JSObject(), _options.JSObject())
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, _scene.JSObject())
+	args = append(args, _options.JSObject())
+
+	p := ba.ctx.Get("PhysicsRadialExplosionEvent").New(args...)
 	return PhysicsRadialExplosionEventFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// PhysicsRadialExplosionEventDisposeOpts contains optional parameters for PhysicsRadialExplosionEvent.Dispose.
+type PhysicsRadialExplosionEventDisposeOpts struct {
+	Force *bool
+}
+
+// Dispose calls the Dispose method on the PhysicsRadialExplosionEvent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsradialexplosionevent#dispose
+func (p *PhysicsRadialExplosionEvent) Dispose(opts *PhysicsRadialExplosionEventDisposeOpts) {
+	if opts == nil {
+		opts = &PhysicsRadialExplosionEventDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Force == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Force)
+	}
+
+	p.p.Call("dispose", args...)
+}
+
+// GetData calls the GetData method on the PhysicsRadialExplosionEvent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsradialexplosionevent#getdata
+func (p *PhysicsRadialExplosionEvent) GetData() *PhysicsRadialExplosionEventData {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("getData", args...)
+	return PhysicsRadialExplosionEventDataFromJSObject(retVal, p.ctx)
+}
+
+// GetImpostorHitData calls the GetImpostorHitData method on the PhysicsRadialExplosionEvent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsradialexplosionevent#getimpostorhitdata
+func (p *PhysicsRadialExplosionEvent) GetImpostorHitData(impostor *PhysicsImpostor, origin *Vector3) *PhysicsHitData {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, impostor.JSObject())
+	args = append(args, origin.JSObject())
+
+	retVal := p.p.Call("getImpostorHitData", args...)
+	return PhysicsHitDataFromJSObject(retVal, p.ctx)
+}
+
+// TriggerAffectedImpostorsCallback calls the TriggerAffectedImpostorsCallback method on the PhysicsRadialExplosionEvent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsradialexplosionevent#triggeraffectedimpostorscallback
+func (p *PhysicsRadialExplosionEvent) TriggerAffectedImpostorsCallback(affectedImpostorsWithData []PhysicsAffectedImpostorWithData) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, affectedImpostorsWithData.JSObject())
+
+	p.p.Call("triggerAffectedImpostorsCallback", args...)
+}
+
+/*
+
+ */

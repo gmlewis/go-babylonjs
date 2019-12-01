@@ -28,4 +28,6 @@ func ModelShapeFromJSObject(p js.Value, ctx js.Value) *ModelShape {
 	return &ModelShape{p: p, ctx: ctx}
 }
 
-// TODO: methods
+/*
+
+ */

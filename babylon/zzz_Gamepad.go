@@ -29,13 +29,10 @@ func GamepadFromJSObject(p js.Value, ctx js.Value) *Gamepad {
 
 // NewGamepadOpts contains optional parameters for NewGamepad.
 type NewGamepadOpts struct {
-	LeftStickX *JSFloat64
-
-	LeftStickY *JSFloat64
-
-	RightStickX *JSFloat64
-
-	RightStickY *JSFloat64
+	LeftStickX  *float64
+	LeftStickY  *float64
+	RightStickX *float64
+	RightStickY *float64
 }
 
 // NewGamepad returns a new Gamepad object.
@@ -46,8 +43,273 @@ func (ba *Babylon) NewGamepad(id string, index float64, browserGamepad interface
 		opts = &NewGamepadOpts{}
 	}
 
-	p := ba.ctx.Get("Gamepad").New(id, index, browserGamepad, opts.LeftStickX.JSObject(), opts.LeftStickY.JSObject(), opts.RightStickX.JSObject(), opts.RightStickY.JSObject())
+	args := make([]interface{}, 0, 3+4)
+
+	args = append(args, id)
+	args = append(args, index)
+	args = append(args, browserGamepad)
+
+	if opts.LeftStickX == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.LeftStickX)
+	}
+	if opts.LeftStickY == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.LeftStickY)
+	}
+	if opts.RightStickX == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RightStickX)
+	}
+	if opts.RightStickY == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RightStickY)
+	}
+
+	p := ba.ctx.Get("Gamepad").New(args...)
 	return GamepadFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Dispose calls the Dispose method on the Gamepad object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gamepad#dispose
+func (g *Gamepad) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	g.p.Call("dispose", args...)
+}
+
+// Onleftstickchanged calls the Onleftstickchanged method on the Gamepad object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gamepad#onleftstickchanged
+func (g *Gamepad) Onleftstickchanged(callback func()) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, callback)
+
+	g.p.Call("onleftstickchanged", args...)
+}
+
+// Onrightstickchanged calls the Onrightstickchanged method on the Gamepad object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gamepad#onrightstickchanged
+func (g *Gamepad) Onrightstickchanged(callback func()) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, callback)
+
+	g.p.Call("onrightstickchanged", args...)
+}
+
+// Update calls the Update method on the Gamepad object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gamepad#update
+func (g *Gamepad) Update() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	g.p.Call("update", args...)
+}
+
+/*
+
+// BrowserGamepad returns the BrowserGamepad property of class Gamepad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gamepad#browsergamepad
+func (g *Gamepad) BrowserGamepad(browserGamepad interface{}) *Gamepad {
+	p := ba.ctx.Get("Gamepad").New(browserGamepad)
+	return GamepadFromJSObject(p, ba.ctx)
+}
+
+// SetBrowserGamepad sets the BrowserGamepad property of class Gamepad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gamepad#browsergamepad
+func (g *Gamepad) SetBrowserGamepad(browserGamepad interface{}) *Gamepad {
+	p := ba.ctx.Get("Gamepad").New(browserGamepad)
+	return GamepadFromJSObject(p, ba.ctx)
+}
+
+// DUALSHOCK returns the DUALSHOCK property of class Gamepad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gamepad#dualshock
+func (g *Gamepad) DUALSHOCK(DUALSHOCK float64) *Gamepad {
+	p := ba.ctx.Get("Gamepad").New(DUALSHOCK)
+	return GamepadFromJSObject(p, ba.ctx)
+}
+
+// SetDUALSHOCK sets the DUALSHOCK property of class Gamepad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gamepad#dualshock
+func (g *Gamepad) SetDUALSHOCK(DUALSHOCK float64) *Gamepad {
+	p := ba.ctx.Get("Gamepad").New(DUALSHOCK)
+	return GamepadFromJSObject(p, ba.ctx)
+}
+
+// GAMEPAD returns the GAMEPAD property of class Gamepad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gamepad#gamepad
+func (g *Gamepad) GAMEPAD(GAMEPAD float64) *Gamepad {
+	p := ba.ctx.Get("Gamepad").New(GAMEPAD)
+	return GamepadFromJSObject(p, ba.ctx)
+}
+
+// SetGAMEPAD sets the GAMEPAD property of class Gamepad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gamepad#gamepad
+func (g *Gamepad) SetGAMEPAD(GAMEPAD float64) *Gamepad {
+	p := ba.ctx.Get("Gamepad").New(GAMEPAD)
+	return GamepadFromJSObject(p, ba.ctx)
+}
+
+// GENERIC returns the GENERIC property of class Gamepad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gamepad#generic
+func (g *Gamepad) GENERIC(GENERIC float64) *Gamepad {
+	p := ba.ctx.Get("Gamepad").New(GENERIC)
+	return GamepadFromJSObject(p, ba.ctx)
+}
+
+// SetGENERIC sets the GENERIC property of class Gamepad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gamepad#generic
+func (g *Gamepad) SetGENERIC(GENERIC float64) *Gamepad {
+	p := ba.ctx.Get("Gamepad").New(GENERIC)
+	return GamepadFromJSObject(p, ba.ctx)
+}
+
+// Id returns the Id property of class Gamepad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gamepad#id
+func (g *Gamepad) Id(id string) *Gamepad {
+	p := ba.ctx.Get("Gamepad").New(id)
+	return GamepadFromJSObject(p, ba.ctx)
+}
+
+// SetId sets the Id property of class Gamepad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gamepad#id
+func (g *Gamepad) SetId(id string) *Gamepad {
+	p := ba.ctx.Get("Gamepad").New(id)
+	return GamepadFromJSObject(p, ba.ctx)
+}
+
+// Index returns the Index property of class Gamepad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gamepad#index
+func (g *Gamepad) Index(index float64) *Gamepad {
+	p := ba.ctx.Get("Gamepad").New(index)
+	return GamepadFromJSObject(p, ba.ctx)
+}
+
+// SetIndex sets the Index property of class Gamepad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gamepad#index
+func (g *Gamepad) SetIndex(index float64) *Gamepad {
+	p := ba.ctx.Get("Gamepad").New(index)
+	return GamepadFromJSObject(p, ba.ctx)
+}
+
+// IsConnected returns the IsConnected property of class Gamepad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gamepad#isconnected
+func (g *Gamepad) IsConnected(isConnected bool) *Gamepad {
+	p := ba.ctx.Get("Gamepad").New(isConnected)
+	return GamepadFromJSObject(p, ba.ctx)
+}
+
+// SetIsConnected sets the IsConnected property of class Gamepad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gamepad#isconnected
+func (g *Gamepad) SetIsConnected(isConnected bool) *Gamepad {
+	p := ba.ctx.Get("Gamepad").New(isConnected)
+	return GamepadFromJSObject(p, ba.ctx)
+}
+
+// LeftStick returns the LeftStick property of class Gamepad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gamepad#leftstick
+func (g *Gamepad) LeftStick(leftStick *StickValues) *Gamepad {
+	p := ba.ctx.Get("Gamepad").New(leftStick.JSObject())
+	return GamepadFromJSObject(p, ba.ctx)
+}
+
+// SetLeftStick sets the LeftStick property of class Gamepad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gamepad#leftstick
+func (g *Gamepad) SetLeftStick(leftStick *StickValues) *Gamepad {
+	p := ba.ctx.Get("Gamepad").New(leftStick.JSObject())
+	return GamepadFromJSObject(p, ba.ctx)
+}
+
+// POSE_ENABLED returns the POSE_ENABLED property of class Gamepad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gamepad#pose_enabled
+func (g *Gamepad) POSE_ENABLED(POSE_ENABLED float64) *Gamepad {
+	p := ba.ctx.Get("Gamepad").New(POSE_ENABLED)
+	return GamepadFromJSObject(p, ba.ctx)
+}
+
+// SetPOSE_ENABLED sets the POSE_ENABLED property of class Gamepad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gamepad#pose_enabled
+func (g *Gamepad) SetPOSE_ENABLED(POSE_ENABLED float64) *Gamepad {
+	p := ba.ctx.Get("Gamepad").New(POSE_ENABLED)
+	return GamepadFromJSObject(p, ba.ctx)
+}
+
+// RightStick returns the RightStick property of class Gamepad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gamepad#rightstick
+func (g *Gamepad) RightStick(rightStick *StickValues) *Gamepad {
+	p := ba.ctx.Get("Gamepad").New(rightStick.JSObject())
+	return GamepadFromJSObject(p, ba.ctx)
+}
+
+// SetRightStick sets the RightStick property of class Gamepad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gamepad#rightstick
+func (g *Gamepad) SetRightStick(rightStick *StickValues) *Gamepad {
+	p := ba.ctx.Get("Gamepad").New(rightStick.JSObject())
+	return GamepadFromJSObject(p, ba.ctx)
+}
+
+// Type returns the Type property of class Gamepad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gamepad#type
+func (g *Gamepad) Type(jsType float64) *Gamepad {
+	p := ba.ctx.Get("Gamepad").New(jsType)
+	return GamepadFromJSObject(p, ba.ctx)
+}
+
+// SetType sets the Type property of class Gamepad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gamepad#type
+func (g *Gamepad) SetType(jsType float64) *Gamepad {
+	p := ba.ctx.Get("Gamepad").New(jsType)
+	return GamepadFromJSObject(p, ba.ctx)
+}
+
+// XBOX returns the XBOX property of class Gamepad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gamepad#xbox
+func (g *Gamepad) XBOX(XBOX float64) *Gamepad {
+	p := ba.ctx.Get("Gamepad").New(XBOX)
+	return GamepadFromJSObject(p, ba.ctx)
+}
+
+// SetXBOX sets the XBOX property of class Gamepad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gamepad#xbox
+func (g *Gamepad) SetXBOX(XBOX float64) *Gamepad {
+	p := ba.ctx.Get("Gamepad").New(XBOX)
+	return GamepadFromJSObject(p, ba.ctx)
+}
+
+*/

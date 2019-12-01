@@ -32,8 +32,77 @@ func ProceduralTextureSceneComponentFromJSObject(p js.Value, ctx js.Value) *Proc
 //
 // https://doc.babylonjs.com/api/classes/babylon.proceduraltexturescenecomponent
 func (ba *Babylon) NewProceduralTextureSceneComponent(scene *Scene) *ProceduralTextureSceneComponent {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("ProceduralTextureSceneComponent").New(args...)
+	return ProceduralTextureSceneComponentFromJSObject(p, ba.ctx)
+}
+
+// Dispose calls the Dispose method on the ProceduralTextureSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexturescenecomponent#dispose
+func (p *ProceduralTextureSceneComponent) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("dispose", args...)
+}
+
+// Rebuild calls the Rebuild method on the ProceduralTextureSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexturescenecomponent#rebuild
+func (p *ProceduralTextureSceneComponent) Rebuild() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("rebuild", args...)
+}
+
+// Register calls the Register method on the ProceduralTextureSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexturescenecomponent#register
+func (p *ProceduralTextureSceneComponent) Register() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("register", args...)
+}
+
+/*
+
+// Name returns the Name property of class ProceduralTextureSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexturescenecomponent#name
+func (p *ProceduralTextureSceneComponent) Name(name string) *ProceduralTextureSceneComponent {
+	p := ba.ctx.Get("ProceduralTextureSceneComponent").New(name)
+	return ProceduralTextureSceneComponentFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class ProceduralTextureSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexturescenecomponent#name
+func (p *ProceduralTextureSceneComponent) SetName(name string) *ProceduralTextureSceneComponent {
+	p := ba.ctx.Get("ProceduralTextureSceneComponent").New(name)
+	return ProceduralTextureSceneComponentFromJSObject(p, ba.ctx)
+}
+
+// Scene returns the Scene property of class ProceduralTextureSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexturescenecomponent#scene
+func (p *ProceduralTextureSceneComponent) Scene(scene *Scene) *ProceduralTextureSceneComponent {
 	p := ba.ctx.Get("ProceduralTextureSceneComponent").New(scene.JSObject())
 	return ProceduralTextureSceneComponentFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetScene sets the Scene property of class ProceduralTextureSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexturescenecomponent#scene
+func (p *ProceduralTextureSceneComponent) SetScene(scene *Scene) *ProceduralTextureSceneComponent {
+	p := ba.ctx.Get("ProceduralTextureSceneComponent").New(scene.JSObject())
+	return ProceduralTextureSceneComponentFromJSObject(p, ba.ctx)
+}
+
+*/

@@ -31,8 +31,1545 @@ func LavaMaterialFromJSObject(p js.Value, ctx js.Value) *LavaMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.lavamaterial
 func (ba *Babylon) NewLavaMaterial(name string, scene *Scene) *LavaMaterial {
-	p := ba.ctx.Get("LavaMaterial").New(name, scene.JSObject())
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("LavaMaterial").New(args...)
 	return LavaMaterialFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// LavaMaterialBindOpts contains optional parameters for LavaMaterial.Bind.
+type LavaMaterialBindOpts struct {
+	Mesh *Mesh
+}
+
+// Bind calls the Bind method on the LavaMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#bind
+func (l *LavaMaterial) Bind(world *Matrix, opts *LavaMaterialBindOpts) {
+	if opts == nil {
+		opts = &LavaMaterialBindOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, world.JSObject())
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	l.p.Call("bind", args...)
+}
+
+// BindForSubMesh calls the BindForSubMesh method on the LavaMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#bindforsubmesh
+func (l *LavaMaterial) BindForSubMesh(world *Matrix, mesh *Mesh, subMesh *SubMesh) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, world.JSObject())
+	args = append(args, mesh.JSObject())
+	args = append(args, subMesh.JSObject())
+
+	l.p.Call("bindForSubMesh", args...)
+}
+
+// BindOnlyNormalMatrix calls the BindOnlyNormalMatrix method on the LavaMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#bindonlynormalmatrix
+func (l *LavaMaterial) BindOnlyNormalMatrix(normalMatrix *Matrix) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, normalMatrix.JSObject())
+
+	l.p.Call("bindOnlyNormalMatrix", args...)
+}
+
+// BindOnlyWorldMatrix calls the BindOnlyWorldMatrix method on the LavaMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#bindonlyworldmatrix
+func (l *LavaMaterial) BindOnlyWorldMatrix(world *Matrix) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, world.JSObject())
+
+	l.p.Call("bindOnlyWorldMatrix", args...)
+}
+
+// BindSceneUniformBuffer calls the BindSceneUniformBuffer method on the LavaMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#bindsceneuniformbuffer
+func (l *LavaMaterial) BindSceneUniformBuffer(effect *Effect, sceneUbo *UniformBuffer) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, effect.JSObject())
+	args = append(args, sceneUbo.JSObject())
+
+	l.p.Call("bindSceneUniformBuffer", args...)
+}
+
+// BindView calls the BindView method on the LavaMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#bindview
+func (l *LavaMaterial) BindView(effect *Effect) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, effect.JSObject())
+
+	l.p.Call("bindView", args...)
+}
+
+// BindViewProjection calls the BindViewProjection method on the LavaMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#bindviewprojection
+func (l *LavaMaterial) BindViewProjection(effect *Effect) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, effect.JSObject())
+
+	l.p.Call("bindViewProjection", args...)
+}
+
+// Clone calls the Clone method on the LavaMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#clone
+func (l *LavaMaterial) Clone(name string) *LavaMaterial {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := l.p.Call("clone", args...)
+	return LavaMaterialFromJSObject(retVal, l.ctx)
+}
+
+// LavaMaterialDisposeOpts contains optional parameters for LavaMaterial.Dispose.
+type LavaMaterialDisposeOpts struct {
+	ForceDisposeEffect *bool
+}
+
+// Dispose calls the Dispose method on the LavaMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#dispose
+func (l *LavaMaterial) Dispose(opts *LavaMaterialDisposeOpts) {
+	if opts == nil {
+		opts = &LavaMaterialDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForceDisposeEffect == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceDisposeEffect)
+	}
+
+	l.p.Call("dispose", args...)
+}
+
+// LavaMaterialForceCompilationOpts contains optional parameters for LavaMaterial.ForceCompilation.
+type LavaMaterialForceCompilationOpts struct {
+	OnCompiled *func()
+	Options    js.Value
+	OnError    *func()
+}
+
+// ForceCompilation calls the ForceCompilation method on the LavaMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#forcecompilation
+func (l *LavaMaterial) ForceCompilation(mesh *AbstractMesh, opts *LavaMaterialForceCompilationOpts) {
+	if opts == nil {
+		opts = &LavaMaterialForceCompilationOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, mesh.JSObject())
+
+	if opts.OnCompiled == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnCompiled)
+	}
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+
+	l.p.Call("forceCompilation", args...)
+}
+
+// LavaMaterialForceCompilationAsyncOpts contains optional parameters for LavaMaterial.ForceCompilationAsync.
+type LavaMaterialForceCompilationAsyncOpts struct {
+	Options js.Value
+}
+
+// ForceCompilationAsync calls the ForceCompilationAsync method on the LavaMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#forcecompilationasync
+func (l *LavaMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *LavaMaterialForceCompilationAsyncOpts) {
+	if opts == nil {
+		opts = &LavaMaterialForceCompilationAsyncOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, mesh.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	l.p.Call("forceCompilationAsync", args...)
+}
+
+// Freeze calls the Freeze method on the LavaMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#freeze
+func (l *LavaMaterial) Freeze() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	l.p.Call("freeze", args...)
+}
+
+// GetActiveTextures calls the GetActiveTextures method on the LavaMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#getactivetextures
+func (l *LavaMaterial) GetActiveTextures() *BaseTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := l.p.Call("getActiveTextures", args...)
+	return BaseTextureFromJSObject(retVal, l.ctx)
+}
+
+// GetAlphaTestTexture calls the GetAlphaTestTexture method on the LavaMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#getalphatesttexture
+func (l *LavaMaterial) GetAlphaTestTexture() *BaseTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := l.p.Call("getAlphaTestTexture", args...)
+	return BaseTextureFromJSObject(retVal, l.ctx)
+}
+
+// GetAnimatables calls the GetAnimatables method on the LavaMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#getanimatables
+func (l *LavaMaterial) GetAnimatables() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := l.p.Call("getAnimatables", args...)
+	return retVal
+}
+
+// GetBindedMeshes calls the GetBindedMeshes method on the LavaMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#getbindedmeshes
+func (l *LavaMaterial) GetBindedMeshes() *AbstractMesh {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := l.p.Call("getBindedMeshes", args...)
+	return AbstractMeshFromJSObject(retVal, l.ctx)
+}
+
+// GetClassName calls the GetClassName method on the LavaMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#getclassname
+func (l *LavaMaterial) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := l.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetEffect calls the GetEffect method on the LavaMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#geteffect
+func (l *LavaMaterial) GetEffect() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := l.p.Call("getEffect", args...)
+	return EffectFromJSObject(retVal, l.ctx)
+}
+
+// GetScene calls the GetScene method on the LavaMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#getscene
+func (l *LavaMaterial) GetScene() *Scene {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := l.p.Call("getScene", args...)
+	return SceneFromJSObject(retVal, l.ctx)
+}
+
+// HasTexture calls the HasTexture method on the LavaMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#hastexture
+func (l *LavaMaterial) HasTexture(texture *BaseTexture) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, texture.JSObject())
+
+	retVal := l.p.Call("hasTexture", args...)
+	return retVal.Bool()
+}
+
+// LavaMaterialIsReadyOpts contains optional parameters for LavaMaterial.IsReady.
+type LavaMaterialIsReadyOpts struct {
+	Mesh         *AbstractMesh
+	UseInstances *bool
+}
+
+// IsReady calls the IsReady method on the LavaMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#isready
+func (l *LavaMaterial) IsReady(opts *LavaMaterialIsReadyOpts) bool {
+	if opts == nil {
+		opts = &LavaMaterialIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := l.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// LavaMaterialIsReadyForSubMeshOpts contains optional parameters for LavaMaterial.IsReadyForSubMesh.
+type LavaMaterialIsReadyForSubMeshOpts struct {
+	UseInstances *bool
+}
+
+// IsReadyForSubMesh calls the IsReadyForSubMesh method on the LavaMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#isreadyforsubmesh
+func (l *LavaMaterial) IsReadyForSubMesh(mesh *AbstractMesh, subMesh *SubMesh, opts *LavaMaterialIsReadyForSubMeshOpts) bool {
+	if opts == nil {
+		opts = &LavaMaterialIsReadyForSubMeshOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, subMesh.JSObject())
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := l.p.Call("isReadyForSubMesh", args...)
+	return retVal.Bool()
+}
+
+// MarkAsDirty calls the MarkAsDirty method on the LavaMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#markasdirty
+func (l *LavaMaterial) MarkAsDirty(flag float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, flag)
+
+	l.p.Call("markAsDirty", args...)
+}
+
+// MarkDirty calls the MarkDirty method on the LavaMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#markdirty
+func (l *LavaMaterial) MarkDirty() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	l.p.Call("markDirty", args...)
+}
+
+// NeedAlphaBlending calls the NeedAlphaBlending method on the LavaMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#needalphablending
+func (l *LavaMaterial) NeedAlphaBlending() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := l.p.Call("needAlphaBlending", args...)
+	return retVal.Bool()
+}
+
+// NeedAlphaBlendingForMesh calls the NeedAlphaBlendingForMesh method on the LavaMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#needalphablendingformesh
+func (l *LavaMaterial) NeedAlphaBlendingForMesh(mesh *AbstractMesh) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	retVal := l.p.Call("needAlphaBlendingForMesh", args...)
+	return retVal.Bool()
+}
+
+// NeedAlphaTesting calls the NeedAlphaTesting method on the LavaMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#needalphatesting
+func (l *LavaMaterial) NeedAlphaTesting() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := l.p.Call("needAlphaTesting", args...)
+	return retVal.Bool()
+}
+
+// Parse calls the Parse method on the LavaMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#parse
+func (l *LavaMaterial) Parse(source interface{}, scene *Scene, rootUrl string) *LavaMaterial {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, source)
+	args = append(args, scene.JSObject())
+	args = append(args, rootUrl)
+
+	retVal := l.p.Call("Parse", args...)
+	return LavaMaterialFromJSObject(retVal, l.ctx)
+}
+
+// Serialize calls the Serialize method on the LavaMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#serialize
+func (l *LavaMaterial) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := l.p.Call("serialize", args...)
+	return retVal
+}
+
+// LavaMaterialToStringOpts contains optional parameters for LavaMaterial.ToString.
+type LavaMaterialToStringOpts struct {
+	FullDetails *bool
+}
+
+// ToString calls the ToString method on the LavaMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#tostring
+func (l *LavaMaterial) ToString(opts *LavaMaterialToStringOpts) string {
+	if opts == nil {
+		opts = &LavaMaterialToStringOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.FullDetails == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FullDetails)
+	}
+
+	retVal := l.p.Call("toString", args...)
+	return retVal.String()
+}
+
+// Unbind calls the Unbind method on the LavaMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#unbind
+func (l *LavaMaterial) Unbind() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	l.p.Call("unbind", args...)
+}
+
+// Unfreeze calls the Unfreeze method on the LavaMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#unfreeze
+func (l *LavaMaterial) Unfreeze() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	l.p.Call("unfreeze", args...)
+}
+
+/*
+
+// AllDirtyFlag returns the AllDirtyFlag property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#alldirtyflag
+func (l *LavaMaterial) AllDirtyFlag(AllDirtyFlag float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(AllDirtyFlag)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAllDirtyFlag sets the AllDirtyFlag property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#alldirtyflag
+func (l *LavaMaterial) SetAllDirtyFlag(AllDirtyFlag float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(AllDirtyFlag)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// AllowShaderHotSwapping returns the AllowShaderHotSwapping property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#allowshaderhotswapping
+func (l *LavaMaterial) AllowShaderHotSwapping(allowShaderHotSwapping bool) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(allowShaderHotSwapping)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAllowShaderHotSwapping sets the AllowShaderHotSwapping property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#allowshaderhotswapping
+func (l *LavaMaterial) SetAllowShaderHotSwapping(allowShaderHotSwapping bool) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(allowShaderHotSwapping)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// Alpha returns the Alpha property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#alpha
+func (l *LavaMaterial) Alpha(alpha float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(alpha)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAlpha sets the Alpha property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#alpha
+func (l *LavaMaterial) SetAlpha(alpha float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(alpha)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// AlphaMode returns the AlphaMode property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#alphamode
+func (l *LavaMaterial) AlphaMode(alphaMode float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(alphaMode)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaMode sets the AlphaMode property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#alphamode
+func (l *LavaMaterial) SetAlphaMode(alphaMode float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(alphaMode)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// Animations returns the Animations property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#animations
+func (l *LavaMaterial) Animations(animations []Animation) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(animations.JSObject())
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#animations
+func (l *LavaMaterial) SetAnimations(animations []Animation) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(animations.JSObject())
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// AttributesDirtyFlag returns the AttributesDirtyFlag property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#attributesdirtyflag
+func (l *LavaMaterial) AttributesDirtyFlag(AttributesDirtyFlag float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(AttributesDirtyFlag)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAttributesDirtyFlag sets the AttributesDirtyFlag property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#attributesdirtyflag
+func (l *LavaMaterial) SetAttributesDirtyFlag(AttributesDirtyFlag float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(AttributesDirtyFlag)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// BackFaceCulling returns the BackFaceCulling property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#backfaceculling
+func (l *LavaMaterial) BackFaceCulling(backFaceCulling bool) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(backFaceCulling)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetBackFaceCulling sets the BackFaceCulling property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#backfaceculling
+func (l *LavaMaterial) SetBackFaceCulling(backFaceCulling bool) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(backFaceCulling)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// CheckReadyOnEveryCall returns the CheckReadyOnEveryCall property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#checkreadyoneverycall
+func (l *LavaMaterial) CheckReadyOnEveryCall(checkReadyOnEveryCall bool) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(checkReadyOnEveryCall)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCheckReadyOnEveryCall sets the CheckReadyOnEveryCall property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#checkreadyoneverycall
+func (l *LavaMaterial) SetCheckReadyOnEveryCall(checkReadyOnEveryCall bool) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(checkReadyOnEveryCall)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// CheckReadyOnlyOnce returns the CheckReadyOnlyOnce property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#checkreadyonlyonce
+func (l *LavaMaterial) CheckReadyOnlyOnce(checkReadyOnlyOnce bool) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(checkReadyOnlyOnce)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCheckReadyOnlyOnce sets the CheckReadyOnlyOnce property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#checkreadyonlyonce
+func (l *LavaMaterial) SetCheckReadyOnlyOnce(checkReadyOnlyOnce bool) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(checkReadyOnlyOnce)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// ClockWiseSideOrientation returns the ClockWiseSideOrientation property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#clockwisesideorientation
+func (l *LavaMaterial) ClockWiseSideOrientation(ClockWiseSideOrientation float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(ClockWiseSideOrientation)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetClockWiseSideOrientation sets the ClockWiseSideOrientation property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#clockwisesideorientation
+func (l *LavaMaterial) SetClockWiseSideOrientation(ClockWiseSideOrientation float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(ClockWiseSideOrientation)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// CounterClockWiseSideOrientation returns the CounterClockWiseSideOrientation property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#counterclockwisesideorientation
+func (l *LavaMaterial) CounterClockWiseSideOrientation(CounterClockWiseSideOrientation float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(CounterClockWiseSideOrientation)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCounterClockWiseSideOrientation sets the CounterClockWiseSideOrientation property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#counterclockwisesideorientation
+func (l *LavaMaterial) SetCounterClockWiseSideOrientation(CounterClockWiseSideOrientation float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(CounterClockWiseSideOrientation)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// DepthFunction returns the DepthFunction property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#depthfunction
+func (l *LavaMaterial) DepthFunction(depthFunction float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(depthFunction)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDepthFunction sets the DepthFunction property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#depthfunction
+func (l *LavaMaterial) SetDepthFunction(depthFunction float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(depthFunction)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// DiffuseColor returns the DiffuseColor property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#diffusecolor
+func (l *LavaMaterial) DiffuseColor(diffuseColor *Color3) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(diffuseColor.JSObject())
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDiffuseColor sets the DiffuseColor property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#diffusecolor
+func (l *LavaMaterial) SetDiffuseColor(diffuseColor *Color3) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(diffuseColor.JSObject())
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// DiffuseTexture returns the DiffuseTexture property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#diffusetexture
+func (l *LavaMaterial) DiffuseTexture(diffuseTexture *BaseTexture) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(diffuseTexture.JSObject())
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDiffuseTexture sets the DiffuseTexture property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#diffusetexture
+func (l *LavaMaterial) SetDiffuseTexture(diffuseTexture *BaseTexture) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(diffuseTexture.JSObject())
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// DisableDepthWrite returns the DisableDepthWrite property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#disabledepthwrite
+func (l *LavaMaterial) DisableDepthWrite(disableDepthWrite bool) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(disableDepthWrite)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDisableDepthWrite sets the DisableDepthWrite property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#disabledepthwrite
+func (l *LavaMaterial) SetDisableDepthWrite(disableDepthWrite bool) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(disableDepthWrite)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// DisableLighting returns the DisableLighting property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#disablelighting
+func (l *LavaMaterial) DisableLighting(disableLighting bool) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(disableLighting)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDisableLighting sets the DisableLighting property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#disablelighting
+func (l *LavaMaterial) SetDisableLighting(disableLighting bool) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(disableLighting)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// DoNotSerialize returns the DoNotSerialize property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#donotserialize
+func (l *LavaMaterial) DoNotSerialize(doNotSerialize bool) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(doNotSerialize)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDoNotSerialize sets the DoNotSerialize property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#donotserialize
+func (l *LavaMaterial) SetDoNotSerialize(doNotSerialize bool) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(doNotSerialize)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// FillMode returns the FillMode property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#fillmode
+func (l *LavaMaterial) FillMode(fillMode float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(fillMode)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFillMode sets the FillMode property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#fillmode
+func (l *LavaMaterial) SetFillMode(fillMode float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(fillMode)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// FogColor returns the FogColor property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#fogcolor
+func (l *LavaMaterial) FogColor(fogColor *Color3) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(fogColor.JSObject())
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFogColor sets the FogColor property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#fogcolor
+func (l *LavaMaterial) SetFogColor(fogColor *Color3) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(fogColor.JSObject())
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// FogDensity returns the FogDensity property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#fogdensity
+func (l *LavaMaterial) FogDensity(fogDensity float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(fogDensity)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFogDensity sets the FogDensity property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#fogdensity
+func (l *LavaMaterial) SetFogDensity(fogDensity float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(fogDensity)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// FogEnabled returns the FogEnabled property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#fogenabled
+func (l *LavaMaterial) FogEnabled(fogEnabled bool) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(fogEnabled)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFogEnabled sets the FogEnabled property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#fogenabled
+func (l *LavaMaterial) SetFogEnabled(fogEnabled bool) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(fogEnabled)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// ForceDepthWrite returns the ForceDepthWrite property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#forcedepthwrite
+func (l *LavaMaterial) ForceDepthWrite(forceDepthWrite bool) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(forceDepthWrite)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetForceDepthWrite sets the ForceDepthWrite property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#forcedepthwrite
+func (l *LavaMaterial) SetForceDepthWrite(forceDepthWrite bool) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(forceDepthWrite)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// FresnelDirtyFlag returns the FresnelDirtyFlag property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#fresneldirtyflag
+func (l *LavaMaterial) FresnelDirtyFlag(FresnelDirtyFlag float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(FresnelDirtyFlag)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFresnelDirtyFlag sets the FresnelDirtyFlag property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#fresneldirtyflag
+func (l *LavaMaterial) SetFresnelDirtyFlag(FresnelDirtyFlag float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(FresnelDirtyFlag)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// GetRenderTargetTextures returns the GetRenderTargetTextures property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#getrendertargettextures
+func (l *LavaMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(getRenderTargetTextures)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetGetRenderTargetTextures sets the GetRenderTargetTextures property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#getrendertargettextures
+func (l *LavaMaterial) SetGetRenderTargetTextures(getRenderTargetTextures func()) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(getRenderTargetTextures)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// HasRenderTargetTextures returns the HasRenderTargetTextures property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#hasrendertargettextures
+func (l *LavaMaterial) HasRenderTargetTextures(hasRenderTargetTextures bool) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(hasRenderTargetTextures)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetHasRenderTargetTextures sets the HasRenderTargetTextures property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#hasrendertargettextures
+func (l *LavaMaterial) SetHasRenderTargetTextures(hasRenderTargetTextures bool) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(hasRenderTargetTextures)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// Id returns the Id property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#id
+func (l *LavaMaterial) Id(id string) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(id)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetId sets the Id property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#id
+func (l *LavaMaterial) SetId(id string) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(id)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#inspectablecustomproperties
+func (l *LavaMaterial) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(inspectableCustomProperties.JSObject())
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#inspectablecustomproperties
+func (l *LavaMaterial) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(inspectableCustomProperties.JSObject())
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// IsFrozen returns the IsFrozen property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#isfrozen
+func (l *LavaMaterial) IsFrozen(isFrozen bool) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(isFrozen)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetIsFrozen sets the IsFrozen property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#isfrozen
+func (l *LavaMaterial) SetIsFrozen(isFrozen bool) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(isFrozen)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// LightDirtyFlag returns the LightDirtyFlag property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#lightdirtyflag
+func (l *LavaMaterial) LightDirtyFlag(LightDirtyFlag float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(LightDirtyFlag)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLightDirtyFlag sets the LightDirtyFlag property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#lightdirtyflag
+func (l *LavaMaterial) SetLightDirtyFlag(LightDirtyFlag float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(LightDirtyFlag)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineListDrawMode returns the LineListDrawMode property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#linelistdrawmode
+func (l *LavaMaterial) LineListDrawMode(LineListDrawMode float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(LineListDrawMode)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineListDrawMode sets the LineListDrawMode property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#linelistdrawmode
+func (l *LavaMaterial) SetLineListDrawMode(LineListDrawMode float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(LineListDrawMode)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineLoopDrawMode returns the LineLoopDrawMode property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#lineloopdrawmode
+func (l *LavaMaterial) LineLoopDrawMode(LineLoopDrawMode float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(LineLoopDrawMode)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineLoopDrawMode sets the LineLoopDrawMode property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#lineloopdrawmode
+func (l *LavaMaterial) SetLineLoopDrawMode(LineLoopDrawMode float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(LineLoopDrawMode)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineStripDrawMode returns the LineStripDrawMode property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#linestripdrawmode
+func (l *LavaMaterial) LineStripDrawMode(LineStripDrawMode float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(LineStripDrawMode)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineStripDrawMode sets the LineStripDrawMode property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#linestripdrawmode
+func (l *LavaMaterial) SetLineStripDrawMode(LineStripDrawMode float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(LineStripDrawMode)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// LowFrequencySpeed returns the LowFrequencySpeed property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#lowfrequencyspeed
+func (l *LavaMaterial) LowFrequencySpeed(lowFrequencySpeed float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(lowFrequencySpeed)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLowFrequencySpeed sets the LowFrequencySpeed property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#lowfrequencyspeed
+func (l *LavaMaterial) SetLowFrequencySpeed(lowFrequencySpeed float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(lowFrequencySpeed)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// MaxSimultaneousLights returns the MaxSimultaneousLights property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#maxsimultaneouslights
+func (l *LavaMaterial) MaxSimultaneousLights(maxSimultaneousLights float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(maxSimultaneousLights)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMaxSimultaneousLights sets the MaxSimultaneousLights property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#maxsimultaneouslights
+func (l *LavaMaterial) SetMaxSimultaneousLights(maxSimultaneousLights float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(maxSimultaneousLights)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#metadata
+func (l *LavaMaterial) Metadata(metadata interface{}) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(metadata)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#metadata
+func (l *LavaMaterial) SetMetadata(metadata interface{}) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(metadata)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// MiscDirtyFlag returns the MiscDirtyFlag property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#miscdirtyflag
+func (l *LavaMaterial) MiscDirtyFlag(MiscDirtyFlag float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(MiscDirtyFlag)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMiscDirtyFlag sets the MiscDirtyFlag property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#miscdirtyflag
+func (l *LavaMaterial) SetMiscDirtyFlag(MiscDirtyFlag float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(MiscDirtyFlag)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// MovingSpeed returns the MovingSpeed property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#movingspeed
+func (l *LavaMaterial) MovingSpeed(movingSpeed float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(movingSpeed)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMovingSpeed sets the MovingSpeed property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#movingspeed
+func (l *LavaMaterial) SetMovingSpeed(movingSpeed float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(movingSpeed)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#name
+func (l *LavaMaterial) Name(name string) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(name)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#name
+func (l *LavaMaterial) SetName(name string) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(name)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// NeedDepthPrePass returns the NeedDepthPrePass property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#needdepthprepass
+func (l *LavaMaterial) NeedDepthPrePass(needDepthPrePass bool) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(needDepthPrePass)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetNeedDepthPrePass sets the NeedDepthPrePass property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#needdepthprepass
+func (l *LavaMaterial) SetNeedDepthPrePass(needDepthPrePass bool) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(needDepthPrePass)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// NoiseTexture returns the NoiseTexture property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#noisetexture
+func (l *LavaMaterial) NoiseTexture(noiseTexture *BaseTexture) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(noiseTexture.JSObject())
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetNoiseTexture sets the NoiseTexture property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#noisetexture
+func (l *LavaMaterial) SetNoiseTexture(noiseTexture *BaseTexture) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(noiseTexture.JSObject())
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnBind returns the OnBind property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#onbind
+func (l *LavaMaterial) OnBind(onBind func()) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(onBind)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnBind sets the OnBind property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#onbind
+func (l *LavaMaterial) SetOnBind(onBind func()) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(onBind)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnBindObservable returns the OnBindObservable property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#onbindobservable
+func (l *LavaMaterial) OnBindObservable(onBindObservable *Observable) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(onBindObservable.JSObject())
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnBindObservable sets the OnBindObservable property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#onbindobservable
+func (l *LavaMaterial) SetOnBindObservable(onBindObservable *Observable) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(onBindObservable.JSObject())
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnCompiled returns the OnCompiled property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#oncompiled
+func (l *LavaMaterial) OnCompiled(onCompiled func()) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(onCompiled)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnCompiled sets the OnCompiled property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#oncompiled
+func (l *LavaMaterial) SetOnCompiled(onCompiled func()) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(onCompiled)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnDispose returns the OnDispose property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#ondispose
+func (l *LavaMaterial) OnDispose(onDispose func()) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(onDispose)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnDispose sets the OnDispose property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#ondispose
+func (l *LavaMaterial) SetOnDispose(onDispose func()) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(onDispose)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnDisposeObservable returns the OnDisposeObservable property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#ondisposeobservable
+func (l *LavaMaterial) OnDisposeObservable(onDisposeObservable *Observable) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(onDisposeObservable.JSObject())
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnDisposeObservable sets the OnDisposeObservable property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#ondisposeobservable
+func (l *LavaMaterial) SetOnDisposeObservable(onDisposeObservable *Observable) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(onDisposeObservable.JSObject())
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnError returns the OnError property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#onerror
+func (l *LavaMaterial) OnError(onError func()) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(onError)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnError sets the OnError property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#onerror
+func (l *LavaMaterial) SetOnError(onError func()) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(onError)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnUnBindObservable returns the OnUnBindObservable property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#onunbindobservable
+func (l *LavaMaterial) OnUnBindObservable(onUnBindObservable *Observable) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(onUnBindObservable.JSObject())
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnUnBindObservable sets the OnUnBindObservable property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#onunbindobservable
+func (l *LavaMaterial) SetOnUnBindObservable(onUnBindObservable *Observable) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(onUnBindObservable.JSObject())
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointFillMode returns the PointFillMode property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#pointfillmode
+func (l *LavaMaterial) PointFillMode(PointFillMode float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(PointFillMode)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointFillMode sets the PointFillMode property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#pointfillmode
+func (l *LavaMaterial) SetPointFillMode(PointFillMode float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(PointFillMode)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointListDrawMode returns the PointListDrawMode property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#pointlistdrawmode
+func (l *LavaMaterial) PointListDrawMode(PointListDrawMode float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(PointListDrawMode)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointListDrawMode sets the PointListDrawMode property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#pointlistdrawmode
+func (l *LavaMaterial) SetPointListDrawMode(PointListDrawMode float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(PointListDrawMode)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointSize returns the PointSize property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#pointsize
+func (l *LavaMaterial) PointSize(pointSize float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(pointSize)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointSize sets the PointSize property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#pointsize
+func (l *LavaMaterial) SetPointSize(pointSize float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(pointSize)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointsCloud returns the PointsCloud property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#pointscloud
+func (l *LavaMaterial) PointsCloud(pointsCloud bool) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(pointsCloud)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointsCloud sets the PointsCloud property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#pointscloud
+func (l *LavaMaterial) SetPointsCloud(pointsCloud bool) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(pointsCloud)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// ReservedDataStore returns the ReservedDataStore property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#reserveddatastore
+func (l *LavaMaterial) ReservedDataStore(reservedDataStore interface{}) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(reservedDataStore)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetReservedDataStore sets the ReservedDataStore property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#reserveddatastore
+func (l *LavaMaterial) SetReservedDataStore(reservedDataStore interface{}) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(reservedDataStore)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SeparateCullingPass returns the SeparateCullingPass property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#separatecullingpass
+func (l *LavaMaterial) SeparateCullingPass(separateCullingPass bool) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(separateCullingPass)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSeparateCullingPass sets the SeparateCullingPass property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#separatecullingpass
+func (l *LavaMaterial) SetSeparateCullingPass(separateCullingPass bool) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(separateCullingPass)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SideOrientation returns the SideOrientation property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#sideorientation
+func (l *LavaMaterial) SideOrientation(sideOrientation float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(sideOrientation)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSideOrientation sets the SideOrientation property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#sideorientation
+func (l *LavaMaterial) SetSideOrientation(sideOrientation float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(sideOrientation)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// Speed returns the Speed property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#speed
+func (l *LavaMaterial) Speed(speed float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(speed)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSpeed sets the Speed property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#speed
+func (l *LavaMaterial) SetSpeed(speed float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(speed)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// State returns the State property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#state
+func (l *LavaMaterial) State(state string) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(state)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetState sets the State property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#state
+func (l *LavaMaterial) SetState(state string) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(state)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// TextureDirtyFlag returns the TextureDirtyFlag property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#texturedirtyflag
+func (l *LavaMaterial) TextureDirtyFlag(TextureDirtyFlag float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(TextureDirtyFlag)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTextureDirtyFlag sets the TextureDirtyFlag property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#texturedirtyflag
+func (l *LavaMaterial) SetTextureDirtyFlag(TextureDirtyFlag float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(TextureDirtyFlag)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// TriangleFanDrawMode returns the TriangleFanDrawMode property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#trianglefandrawmode
+func (l *LavaMaterial) TriangleFanDrawMode(TriangleFanDrawMode float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(TriangleFanDrawMode)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTriangleFanDrawMode sets the TriangleFanDrawMode property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#trianglefandrawmode
+func (l *LavaMaterial) SetTriangleFanDrawMode(TriangleFanDrawMode float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(TriangleFanDrawMode)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// TriangleFillMode returns the TriangleFillMode property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#trianglefillmode
+func (l *LavaMaterial) TriangleFillMode(TriangleFillMode float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(TriangleFillMode)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTriangleFillMode sets the TriangleFillMode property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#trianglefillmode
+func (l *LavaMaterial) SetTriangleFillMode(TriangleFillMode float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(TriangleFillMode)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// TriangleStripDrawMode returns the TriangleStripDrawMode property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#trianglestripdrawmode
+func (l *LavaMaterial) TriangleStripDrawMode(TriangleStripDrawMode float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(TriangleStripDrawMode)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTriangleStripDrawMode sets the TriangleStripDrawMode property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#trianglestripdrawmode
+func (l *LavaMaterial) SetTriangleStripDrawMode(TriangleStripDrawMode float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(TriangleStripDrawMode)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#uniqueid
+func (l *LavaMaterial) UniqueId(uniqueId float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(uniqueId)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#uniqueid
+func (l *LavaMaterial) SetUniqueId(uniqueId float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(uniqueId)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// Unlit returns the Unlit property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#unlit
+func (l *LavaMaterial) Unlit(unlit bool) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(unlit)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetUnlit sets the Unlit property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#unlit
+func (l *LavaMaterial) SetUnlit(unlit bool) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(unlit)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// WireFrameFillMode returns the WireFrameFillMode property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#wireframefillmode
+func (l *LavaMaterial) WireFrameFillMode(WireFrameFillMode float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(WireFrameFillMode)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetWireFrameFillMode sets the WireFrameFillMode property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#wireframefillmode
+func (l *LavaMaterial) SetWireFrameFillMode(WireFrameFillMode float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(WireFrameFillMode)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// Wireframe returns the Wireframe property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#wireframe
+func (l *LavaMaterial) Wireframe(wireframe bool) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(wireframe)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetWireframe sets the Wireframe property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#wireframe
+func (l *LavaMaterial) SetWireframe(wireframe bool) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(wireframe)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// ZOffset returns the ZOffset property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#zoffset
+func (l *LavaMaterial) ZOffset(zOffset float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(zOffset)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetZOffset sets the ZOffset property of class LavaMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lavamaterial#zoffset
+func (l *LavaMaterial) SetZOffset(zOffset float64) *LavaMaterial {
+	p := ba.ctx.Get("LavaMaterial").New(zOffset)
+	return LavaMaterialFromJSObject(p, ba.ctx)
+}
+
+*/

@@ -27,4 +27,134 @@ func KeyPropertySetFromJSObject(p js.Value, ctx js.Value) *KeyPropertySet {
 	return &KeyPropertySet{p: p, ctx: ctx}
 }
 
-// TODO: methods
+/*
+
+// Background returns the Background property of class KeyPropertySet.
+//
+// https://doc.babylonjs.com/api/classes/babylon.keypropertyset#background
+func (k *KeyPropertySet) Background(background string) *KeyPropertySet {
+	p := ba.ctx.Get("KeyPropertySet").New(background)
+	return KeyPropertySetFromJSObject(p, ba.ctx)
+}
+
+// SetBackground sets the Background property of class KeyPropertySet.
+//
+// https://doc.babylonjs.com/api/classes/babylon.keypropertyset#background
+func (k *KeyPropertySet) SetBackground(background string) *KeyPropertySet {
+	p := ba.ctx.Get("KeyPropertySet").New(background)
+	return KeyPropertySetFromJSObject(p, ba.ctx)
+}
+
+// Color returns the Color property of class KeyPropertySet.
+//
+// https://doc.babylonjs.com/api/classes/babylon.keypropertyset#color
+func (k *KeyPropertySet) Color(color string) *KeyPropertySet {
+	p := ba.ctx.Get("KeyPropertySet").New(color)
+	return KeyPropertySetFromJSObject(p, ba.ctx)
+}
+
+// SetColor sets the Color property of class KeyPropertySet.
+//
+// https://doc.babylonjs.com/api/classes/babylon.keypropertyset#color
+func (k *KeyPropertySet) SetColor(color string) *KeyPropertySet {
+	p := ba.ctx.Get("KeyPropertySet").New(color)
+	return KeyPropertySetFromJSObject(p, ba.ctx)
+}
+
+// Height returns the Height property of class KeyPropertySet.
+//
+// https://doc.babylonjs.com/api/classes/babylon.keypropertyset#height
+func (k *KeyPropertySet) Height(height string) *KeyPropertySet {
+	p := ba.ctx.Get("KeyPropertySet").New(height)
+	return KeyPropertySetFromJSObject(p, ba.ctx)
+}
+
+// SetHeight sets the Height property of class KeyPropertySet.
+//
+// https://doc.babylonjs.com/api/classes/babylon.keypropertyset#height
+func (k *KeyPropertySet) SetHeight(height string) *KeyPropertySet {
+	p := ba.ctx.Get("KeyPropertySet").New(height)
+	return KeyPropertySetFromJSObject(p, ba.ctx)
+}
+
+// PaddingBottom returns the PaddingBottom property of class KeyPropertySet.
+//
+// https://doc.babylonjs.com/api/classes/babylon.keypropertyset#paddingbottom
+func (k *KeyPropertySet) PaddingBottom(paddingBottom string) *KeyPropertySet {
+	p := ba.ctx.Get("KeyPropertySet").New(paddingBottom)
+	return KeyPropertySetFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingBottom sets the PaddingBottom property of class KeyPropertySet.
+//
+// https://doc.babylonjs.com/api/classes/babylon.keypropertyset#paddingbottom
+func (k *KeyPropertySet) SetPaddingBottom(paddingBottom string) *KeyPropertySet {
+	p := ba.ctx.Get("KeyPropertySet").New(paddingBottom)
+	return KeyPropertySetFromJSObject(p, ba.ctx)
+}
+
+// PaddingLeft returns the PaddingLeft property of class KeyPropertySet.
+//
+// https://doc.babylonjs.com/api/classes/babylon.keypropertyset#paddingleft
+func (k *KeyPropertySet) PaddingLeft(paddingLeft string) *KeyPropertySet {
+	p := ba.ctx.Get("KeyPropertySet").New(paddingLeft)
+	return KeyPropertySetFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingLeft sets the PaddingLeft property of class KeyPropertySet.
+//
+// https://doc.babylonjs.com/api/classes/babylon.keypropertyset#paddingleft
+func (k *KeyPropertySet) SetPaddingLeft(paddingLeft string) *KeyPropertySet {
+	p := ba.ctx.Get("KeyPropertySet").New(paddingLeft)
+	return KeyPropertySetFromJSObject(p, ba.ctx)
+}
+
+// PaddingRight returns the PaddingRight property of class KeyPropertySet.
+//
+// https://doc.babylonjs.com/api/classes/babylon.keypropertyset#paddingright
+func (k *KeyPropertySet) PaddingRight(paddingRight string) *KeyPropertySet {
+	p := ba.ctx.Get("KeyPropertySet").New(paddingRight)
+	return KeyPropertySetFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingRight sets the PaddingRight property of class KeyPropertySet.
+//
+// https://doc.babylonjs.com/api/classes/babylon.keypropertyset#paddingright
+func (k *KeyPropertySet) SetPaddingRight(paddingRight string) *KeyPropertySet {
+	p := ba.ctx.Get("KeyPropertySet").New(paddingRight)
+	return KeyPropertySetFromJSObject(p, ba.ctx)
+}
+
+// PaddingTop returns the PaddingTop property of class KeyPropertySet.
+//
+// https://doc.babylonjs.com/api/classes/babylon.keypropertyset#paddingtop
+func (k *KeyPropertySet) PaddingTop(paddingTop string) *KeyPropertySet {
+	p := ba.ctx.Get("KeyPropertySet").New(paddingTop)
+	return KeyPropertySetFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingTop sets the PaddingTop property of class KeyPropertySet.
+//
+// https://doc.babylonjs.com/api/classes/babylon.keypropertyset#paddingtop
+func (k *KeyPropertySet) SetPaddingTop(paddingTop string) *KeyPropertySet {
+	p := ba.ctx.Get("KeyPropertySet").New(paddingTop)
+	return KeyPropertySetFromJSObject(p, ba.ctx)
+}
+
+// Width returns the Width property of class KeyPropertySet.
+//
+// https://doc.babylonjs.com/api/classes/babylon.keypropertyset#width
+func (k *KeyPropertySet) Width(width string) *KeyPropertySet {
+	p := ba.ctx.Get("KeyPropertySet").New(width)
+	return KeyPropertySetFromJSObject(p, ba.ctx)
+}
+
+// SetWidth sets the Width property of class KeyPropertySet.
+//
+// https://doc.babylonjs.com/api/classes/babylon.keypropertyset#width
+func (k *KeyPropertySet) SetWidth(width string) *KeyPropertySet {
+	p := ba.ctx.Get("KeyPropertySet").New(width)
+	return KeyPropertySetFromJSObject(p, ba.ctx)
+}
+
+*/

@@ -34,11 +34,9 @@ func ColorCorrectionPostProcessFromJSObject(p js.Value, ctx js.Value) *ColorCorr
 
 // NewColorCorrectionPostProcessOpts contains optional parameters for NewColorCorrectionPostProcess.
 type NewColorCorrectionPostProcessOpts struct {
-	SamplingMode *JSFloat64
-
-	Engine *Engine
-
-	Reusable *JSBool
+	SamplingMode *float64
+	Engine       *Engine
+	Reusable     *bool
 }
 
 // NewColorCorrectionPostProcess returns a new ColorCorrectionPostProcess object.
@@ -49,8 +47,761 @@ func (ba *Babylon) NewColorCorrectionPostProcess(name string, colorTableUrl stri
 		opts = &NewColorCorrectionPostProcessOpts{}
 	}
 
-	p := ba.ctx.Get("ColorCorrectionPostProcess").New(name, colorTableUrl, options, camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject())
+	args := make([]interface{}, 0, 4+3)
+
+	args = append(args, name)
+	args = append(args, colorTableUrl)
+	args = append(args, options)
+	args = append(args, camera.JSObject())
+
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+	if opts.Engine == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Engine.JSObject())
+	}
+	if opts.Reusable == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Reusable)
+	}
+
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(args...)
 	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// ColorCorrectionPostProcessActivateOpts contains optional parameters for ColorCorrectionPostProcess.Activate.
+type ColorCorrectionPostProcessActivateOpts struct {
+	SourceTexture     *InternalTexture
+	ForceDepthStencil *bool
+}
+
+// Activate calls the Activate method on the ColorCorrectionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#activate
+func (c *ColorCorrectionPostProcess) Activate(camera *Camera, opts *ColorCorrectionPostProcessActivateOpts) *InternalTexture {
+	if opts == nil {
+		opts = &ColorCorrectionPostProcessActivateOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, camera.JSObject())
+
+	if opts.SourceTexture == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.SourceTexture.JSObject())
+	}
+	if opts.ForceDepthStencil == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceDepthStencil)
+	}
+
+	retVal := c.p.Call("activate", args...)
+	return InternalTextureFromJSObject(retVal, c.ctx)
+}
+
+// Apply calls the Apply method on the ColorCorrectionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#apply
+func (c *ColorCorrectionPostProcess) Apply() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("apply", args...)
+	return EffectFromJSObject(retVal, c.ctx)
+}
+
+// ColorCorrectionPostProcessDisposeOpts contains optional parameters for ColorCorrectionPostProcess.Dispose.
+type ColorCorrectionPostProcessDisposeOpts struct {
+	Camera *Camera
+}
+
+// Dispose calls the Dispose method on the ColorCorrectionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#dispose
+func (c *ColorCorrectionPostProcess) Dispose(opts *ColorCorrectionPostProcessDisposeOpts) {
+	if opts == nil {
+		opts = &ColorCorrectionPostProcessDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Camera == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Camera.JSObject())
+	}
+
+	c.p.Call("dispose", args...)
+}
+
+// GetCamera calls the GetCamera method on the ColorCorrectionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#getcamera
+func (c *ColorCorrectionPostProcess) GetCamera() *Camera {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getCamera", args...)
+	return CameraFromJSObject(retVal, c.ctx)
+}
+
+// GetClassName calls the GetClassName method on the ColorCorrectionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#getclassname
+func (c *ColorCorrectionPostProcess) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetEffect calls the GetEffect method on the ColorCorrectionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#geteffect
+func (c *ColorCorrectionPostProcess) GetEffect() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getEffect", args...)
+	return EffectFromJSObject(retVal, c.ctx)
+}
+
+// GetEffectName calls the GetEffectName method on the ColorCorrectionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#geteffectname
+func (c *ColorCorrectionPostProcess) GetEffectName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getEffectName", args...)
+	return retVal.String()
+}
+
+// GetEngine calls the GetEngine method on the ColorCorrectionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#getengine
+func (c *ColorCorrectionPostProcess) GetEngine() *Engine {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getEngine", args...)
+	return EngineFromJSObject(retVal, c.ctx)
+}
+
+// IsReady calls the IsReady method on the ColorCorrectionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#isready
+func (c *ColorCorrectionPostProcess) IsReady() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// IsReusable calls the IsReusable method on the ColorCorrectionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#isreusable
+func (c *ColorCorrectionPostProcess) IsReusable() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("isReusable", args...)
+	return retVal.Bool()
+}
+
+// MarkTextureDirty calls the MarkTextureDirty method on the ColorCorrectionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#marktexturedirty
+func (c *ColorCorrectionPostProcess) MarkTextureDirty() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	c.p.Call("markTextureDirty", args...)
+}
+
+// ShareOutputWith calls the ShareOutputWith method on the ColorCorrectionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#shareoutputwith
+func (c *ColorCorrectionPostProcess) ShareOutputWith(postProcess *PostProcess) *PostProcess {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, postProcess.JSObject())
+
+	retVal := c.p.Call("shareOutputWith", args...)
+	return PostProcessFromJSObject(retVal, c.ctx)
+}
+
+// ColorCorrectionPostProcessUpdateEffectOpts contains optional parameters for ColorCorrectionPostProcess.UpdateEffect.
+type ColorCorrectionPostProcessUpdateEffectOpts struct {
+	Defines         *string
+	Uniforms        *string
+	Samplers        *string
+	IndexParameters *interface{}
+	OnCompiled      *func()
+	OnError         *func()
+}
+
+// UpdateEffect calls the UpdateEffect method on the ColorCorrectionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#updateeffect
+func (c *ColorCorrectionPostProcess) UpdateEffect(opts *ColorCorrectionPostProcessUpdateEffectOpts) {
+	if opts == nil {
+		opts = &ColorCorrectionPostProcessUpdateEffectOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+6)
+
+	if opts.Defines == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Defines)
+	}
+	if opts.Uniforms == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Uniforms)
+	}
+	if opts.Samplers == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Samplers)
+	}
+	if opts.IndexParameters == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.IndexParameters)
+	}
+	if opts.OnCompiled == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnCompiled)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+
+	c.p.Call("updateEffect", args...)
+}
+
+// UseOwnOutput calls the UseOwnOutput method on the ColorCorrectionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#useownoutput
+func (c *ColorCorrectionPostProcess) UseOwnOutput() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	c.p.Call("useOwnOutput", args...)
+}
+
+/*
+
+// AdaptScaleToCurrentViewport returns the AdaptScaleToCurrentViewport property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#adaptscaletocurrentviewport
+func (c *ColorCorrectionPostProcess) AdaptScaleToCurrentViewport(adaptScaleToCurrentViewport bool) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(adaptScaleToCurrentViewport)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAdaptScaleToCurrentViewport sets the AdaptScaleToCurrentViewport property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#adaptscaletocurrentviewport
+func (c *ColorCorrectionPostProcess) SetAdaptScaleToCurrentViewport(adaptScaleToCurrentViewport bool) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(adaptScaleToCurrentViewport)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AlphaConstants returns the AlphaConstants property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#alphaconstants
+func (c *ColorCorrectionPostProcess) AlphaConstants(alphaConstants *Color4) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(alphaConstants.JSObject())
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaConstants sets the AlphaConstants property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#alphaconstants
+func (c *ColorCorrectionPostProcess) SetAlphaConstants(alphaConstants *Color4) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(alphaConstants.JSObject())
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AlphaMode returns the AlphaMode property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#alphamode
+func (c *ColorCorrectionPostProcess) AlphaMode(alphaMode float64) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(alphaMode)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaMode sets the AlphaMode property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#alphamode
+func (c *ColorCorrectionPostProcess) SetAlphaMode(alphaMode float64) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(alphaMode)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AlwaysForcePOT returns the AlwaysForcePOT property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#alwaysforcepot
+func (c *ColorCorrectionPostProcess) AlwaysForcePOT(alwaysForcePOT bool) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(alwaysForcePOT)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAlwaysForcePOT sets the AlwaysForcePOT property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#alwaysforcepot
+func (c *ColorCorrectionPostProcess) SetAlwaysForcePOT(alwaysForcePOT bool) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(alwaysForcePOT)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Animations returns the Animations property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#animations
+func (c *ColorCorrectionPostProcess) Animations(animations *Animation) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(animations.JSObject())
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#animations
+func (c *ColorCorrectionPostProcess) SetAnimations(animations *Animation) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(animations.JSObject())
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AspectRatio returns the AspectRatio property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#aspectratio
+func (c *ColorCorrectionPostProcess) AspectRatio(aspectRatio float64) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(aspectRatio)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAspectRatio sets the AspectRatio property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#aspectratio
+func (c *ColorCorrectionPostProcess) SetAspectRatio(aspectRatio float64) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(aspectRatio)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AutoClear returns the AutoClear property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#autoclear
+func (c *ColorCorrectionPostProcess) AutoClear(autoClear bool) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(autoClear)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAutoClear sets the AutoClear property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#autoclear
+func (c *ColorCorrectionPostProcess) SetAutoClear(autoClear bool) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(autoClear)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ClearColor returns the ClearColor property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#clearcolor
+func (c *ColorCorrectionPostProcess) ClearColor(clearColor *Color4) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(clearColor.JSObject())
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetClearColor sets the ClearColor property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#clearcolor
+func (c *ColorCorrectionPostProcess) SetClearColor(clearColor *Color4) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(clearColor.JSObject())
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// EnablePixelPerfectMode returns the EnablePixelPerfectMode property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#enablepixelperfectmode
+func (c *ColorCorrectionPostProcess) EnablePixelPerfectMode(enablePixelPerfectMode bool) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(enablePixelPerfectMode)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetEnablePixelPerfectMode sets the EnablePixelPerfectMode property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#enablepixelperfectmode
+func (c *ColorCorrectionPostProcess) SetEnablePixelPerfectMode(enablePixelPerfectMode bool) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(enablePixelPerfectMode)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ForceFullscreenViewport returns the ForceFullscreenViewport property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#forcefullscreenviewport
+func (c *ColorCorrectionPostProcess) ForceFullscreenViewport(forceFullscreenViewport bool) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(forceFullscreenViewport)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetForceFullscreenViewport sets the ForceFullscreenViewport property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#forcefullscreenviewport
+func (c *ColorCorrectionPostProcess) SetForceFullscreenViewport(forceFullscreenViewport bool) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(forceFullscreenViewport)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Height returns the Height property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#height
+func (c *ColorCorrectionPostProcess) Height(height float64) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(height)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetHeight sets the Height property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#height
+func (c *ColorCorrectionPostProcess) SetHeight(height float64) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(height)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// InputTexture returns the InputTexture property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#inputtexture
+func (c *ColorCorrectionPostProcess) InputTexture(inputTexture *InternalTexture) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(inputTexture.JSObject())
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetInputTexture sets the InputTexture property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#inputtexture
+func (c *ColorCorrectionPostProcess) SetInputTexture(inputTexture *InternalTexture) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(inputTexture.JSObject())
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#inspectablecustomproperties
+func (c *ColorCorrectionPostProcess) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(inspectableCustomProperties.JSObject())
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#inspectablecustomproperties
+func (c *ColorCorrectionPostProcess) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(inspectableCustomProperties.JSObject())
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// IsSupported returns the IsSupported property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#issupported
+func (c *ColorCorrectionPostProcess) IsSupported(isSupported bool) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(isSupported)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetIsSupported sets the IsSupported property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#issupported
+func (c *ColorCorrectionPostProcess) SetIsSupported(isSupported bool) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(isSupported)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#name
+func (c *ColorCorrectionPostProcess) Name(name string) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(name)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#name
+func (c *ColorCorrectionPostProcess) SetName(name string) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(name)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnActivate returns the OnActivate property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#onactivate
+func (c *ColorCorrectionPostProcess) OnActivate(onActivate func()) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(onActivate)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnActivate sets the OnActivate property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#onactivate
+func (c *ColorCorrectionPostProcess) SetOnActivate(onActivate func()) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(onActivate)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnActivateObservable returns the OnActivateObservable property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#onactivateobservable
+func (c *ColorCorrectionPostProcess) OnActivateObservable(onActivateObservable *Observable) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(onActivateObservable.JSObject())
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnActivateObservable sets the OnActivateObservable property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#onactivateobservable
+func (c *ColorCorrectionPostProcess) SetOnActivateObservable(onActivateObservable *Observable) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(onActivateObservable.JSObject())
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnAfterRender returns the OnAfterRender property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#onafterrender
+func (c *ColorCorrectionPostProcess) OnAfterRender(onAfterRender func()) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(onAfterRender)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterRender sets the OnAfterRender property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#onafterrender
+func (c *ColorCorrectionPostProcess) SetOnAfterRender(onAfterRender func()) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(onAfterRender)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnAfterRenderObservable returns the OnAfterRenderObservable property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#onafterrenderobservable
+func (c *ColorCorrectionPostProcess) OnAfterRenderObservable(onAfterRenderObservable *Observable) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(onAfterRenderObservable.JSObject())
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterRenderObservable sets the OnAfterRenderObservable property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#onafterrenderobservable
+func (c *ColorCorrectionPostProcess) SetOnAfterRenderObservable(onAfterRenderObservable *Observable) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(onAfterRenderObservable.JSObject())
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnApply returns the OnApply property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#onapply
+func (c *ColorCorrectionPostProcess) OnApply(onApply func()) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(onApply)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnApply sets the OnApply property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#onapply
+func (c *ColorCorrectionPostProcess) SetOnApply(onApply func()) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(onApply)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnApplyObservable returns the OnApplyObservable property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#onapplyobservable
+func (c *ColorCorrectionPostProcess) OnApplyObservable(onApplyObservable *Observable) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(onApplyObservable.JSObject())
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnApplyObservable sets the OnApplyObservable property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#onapplyobservable
+func (c *ColorCorrectionPostProcess) SetOnApplyObservable(onApplyObservable *Observable) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(onApplyObservable.JSObject())
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeRender returns the OnBeforeRender property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#onbeforerender
+func (c *ColorCorrectionPostProcess) OnBeforeRender(onBeforeRender func()) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(onBeforeRender)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeRender sets the OnBeforeRender property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#onbeforerender
+func (c *ColorCorrectionPostProcess) SetOnBeforeRender(onBeforeRender func()) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(onBeforeRender)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeRenderObservable returns the OnBeforeRenderObservable property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#onbeforerenderobservable
+func (c *ColorCorrectionPostProcess) OnBeforeRenderObservable(onBeforeRenderObservable *Observable) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(onBeforeRenderObservable.JSObject())
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeRenderObservable sets the OnBeforeRenderObservable property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#onbeforerenderobservable
+func (c *ColorCorrectionPostProcess) SetOnBeforeRenderObservable(onBeforeRenderObservable *Observable) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(onBeforeRenderObservable.JSObject())
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnSizeChanged returns the OnSizeChanged property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#onsizechanged
+func (c *ColorCorrectionPostProcess) OnSizeChanged(onSizeChanged func()) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(onSizeChanged)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnSizeChanged sets the OnSizeChanged property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#onsizechanged
+func (c *ColorCorrectionPostProcess) SetOnSizeChanged(onSizeChanged func()) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(onSizeChanged)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnSizeChangedObservable returns the OnSizeChangedObservable property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#onsizechangedobservable
+func (c *ColorCorrectionPostProcess) OnSizeChangedObservable(onSizeChangedObservable *Observable) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(onSizeChangedObservable.JSObject())
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnSizeChangedObservable sets the OnSizeChangedObservable property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#onsizechangedobservable
+func (c *ColorCorrectionPostProcess) SetOnSizeChangedObservable(onSizeChangedObservable *Observable) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(onSizeChangedObservable.JSObject())
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// RenderTargetSamplingMode returns the RenderTargetSamplingMode property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#rendertargetsamplingmode
+func (c *ColorCorrectionPostProcess) RenderTargetSamplingMode(renderTargetSamplingMode float64) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(renderTargetSamplingMode)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetRenderTargetSamplingMode sets the RenderTargetSamplingMode property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#rendertargetsamplingmode
+func (c *ColorCorrectionPostProcess) SetRenderTargetSamplingMode(renderTargetSamplingMode float64) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(renderTargetSamplingMode)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Samples returns the Samples property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#samples
+func (c *ColorCorrectionPostProcess) Samples(samples float64) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(samples)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetSamples sets the Samples property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#samples
+func (c *ColorCorrectionPostProcess) SetSamples(samples float64) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(samples)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ScaleMode returns the ScaleMode property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#scalemode
+func (c *ColorCorrectionPostProcess) ScaleMode(scaleMode float64) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(scaleMode)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetScaleMode sets the ScaleMode property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#scalemode
+func (c *ColorCorrectionPostProcess) SetScaleMode(scaleMode float64) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(scaleMode)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// TexelSize returns the TexelSize property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#texelsize
+func (c *ColorCorrectionPostProcess) TexelSize(texelSize *Vector2) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(texelSize.JSObject())
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetTexelSize sets the TexelSize property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#texelsize
+func (c *ColorCorrectionPostProcess) SetTexelSize(texelSize *Vector2) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(texelSize.JSObject())
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#uniqueid
+func (c *ColorCorrectionPostProcess) UniqueId(uniqueId float64) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(uniqueId)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#uniqueid
+func (c *ColorCorrectionPostProcess) SetUniqueId(uniqueId float64) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(uniqueId)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Width returns the Width property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#width
+func (c *ColorCorrectionPostProcess) Width(width float64) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(width)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetWidth sets the Width property of class ColorCorrectionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcorrectionpostprocess#width
+func (c *ColorCorrectionPostProcess) SetWidth(width float64) *ColorCorrectionPostProcess {
+	p := ba.ctx.Get("ColorCorrectionPostProcess").New(width)
+	return ColorCorrectionPostProcessFromJSObject(p, ba.ctx)
+}
+
+*/

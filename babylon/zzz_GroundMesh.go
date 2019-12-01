@@ -31,8 +31,2985 @@ func GroundMeshFromJSObject(p js.Value, ctx js.Value) *GroundMesh {
 //
 // https://doc.babylonjs.com/api/classes/babylon.groundmesh
 func (ba *Babylon) NewGroundMesh(name string, scene *Scene) *GroundMesh {
-	p := ba.ctx.Get("GroundMesh").New(name, scene.JSObject())
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("GroundMesh").New(args...)
 	return GroundMeshFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AddLODLevel calls the AddLODLevel method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#addlodlevel
+func (g *GroundMesh) AddLODLevel(distance float64, mesh *Mesh) *Mesh {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, distance)
+	args = append(args, mesh.JSObject())
+
+	retVal := g.p.Call("addLODLevel", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// GroundMeshApplyDisplacementMapOpts contains optional parameters for GroundMesh.ApplyDisplacementMap.
+type GroundMeshApplyDisplacementMapOpts struct {
+	OnSuccess   *func()
+	UvOffset    *Vector2
+	UvScale     *Vector2
+	ForceUpdate *bool
+}
+
+// ApplyDisplacementMap calls the ApplyDisplacementMap method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#applydisplacementmap
+func (g *GroundMesh) ApplyDisplacementMap(url string, minHeight float64, maxHeight float64, opts *GroundMeshApplyDisplacementMapOpts) *Mesh {
+	if opts == nil {
+		opts = &GroundMeshApplyDisplacementMapOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+4)
+
+	args = append(args, url)
+	args = append(args, minHeight)
+	args = append(args, maxHeight)
+
+	if opts.OnSuccess == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnSuccess)
+	}
+	if opts.UvOffset == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.UvOffset.JSObject())
+	}
+	if opts.UvScale == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.UvScale.JSObject())
+	}
+	if opts.ForceUpdate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceUpdate)
+	}
+
+	retVal := g.p.Call("applyDisplacementMap", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// GroundMeshApplyDisplacementMapFromBufferOpts contains optional parameters for GroundMesh.ApplyDisplacementMapFromBuffer.
+type GroundMeshApplyDisplacementMapFromBufferOpts struct {
+	UvOffset    *Vector2
+	UvScale     *Vector2
+	ForceUpdate *bool
+}
+
+// ApplyDisplacementMapFromBuffer calls the ApplyDisplacementMapFromBuffer method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#applydisplacementmapfrombuffer
+func (g *GroundMesh) ApplyDisplacementMapFromBuffer(buffer js.Value, heightMapWidth float64, heightMapHeight float64, minHeight float64, maxHeight float64, opts *GroundMeshApplyDisplacementMapFromBufferOpts) *Mesh {
+	if opts == nil {
+		opts = &GroundMeshApplyDisplacementMapFromBufferOpts{}
+	}
+
+	args := make([]interface{}, 0, 5+3)
+
+	args = append(args, buffer)
+	args = append(args, heightMapWidth)
+	args = append(args, heightMapHeight)
+	args = append(args, minHeight)
+	args = append(args, maxHeight)
+
+	if opts.UvOffset == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.UvOffset.JSObject())
+	}
+	if opts.UvScale == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.UvScale.JSObject())
+	}
+	if opts.ForceUpdate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceUpdate)
+	}
+
+	retVal := g.p.Call("applyDisplacementMapFromBuffer", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// ApplySkeleton calls the ApplySkeleton method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#applyskeleton
+func (g *GroundMesh) ApplySkeleton(skeleton *Skeleton) *Mesh {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, skeleton.JSObject())
+
+	retVal := g.p.Call("applySkeleton", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// BakeCurrentTransformIntoVertices calls the BakeCurrentTransformIntoVertices method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#bakecurrenttransformintovertices
+func (g *GroundMesh) BakeCurrentTransformIntoVertices() *Mesh {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("bakeCurrentTransformIntoVertices", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// BakeTransformIntoVertices calls the BakeTransformIntoVertices method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#baketransformintovertices
+func (g *GroundMesh) BakeTransformIntoVertices(transform *Matrix) *Mesh {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, transform.JSObject())
+
+	retVal := g.p.Call("bakeTransformIntoVertices", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// Center calls the Center method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#center
+func (g *GroundMesh) Center(meshesOrMinMaxVector js.Value) *Vector3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, meshesOrMinMaxVector)
+
+	retVal := g.p.Call("Center", args...)
+	return Vector3FromJSObject(retVal, g.ctx)
+}
+
+// CleanMatrixWeights calls the CleanMatrixWeights method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#cleanmatrixweights
+func (g *GroundMesh) CleanMatrixWeights() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	g.p.Call("cleanMatrixWeights", args...)
+}
+
+// GroundMeshCloneOpts contains optional parameters for GroundMesh.Clone.
+type GroundMeshCloneOpts struct {
+	Name                 *string
+	NewParent            *Node
+	DoNotCloneChildren   *bool
+	ClonePhysicsImpostor *bool
+}
+
+// Clone calls the Clone method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#clone
+func (g *GroundMesh) Clone(opts *GroundMeshCloneOpts) *AbstractMesh {
+	if opts == nil {
+		opts = &GroundMeshCloneOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+4)
+
+	if opts.Name == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Name)
+	}
+	if opts.NewParent == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.NewParent.JSObject())
+	}
+	if opts.DoNotCloneChildren == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DoNotCloneChildren)
+	}
+	if opts.ClonePhysicsImpostor == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ClonePhysicsImpostor)
+	}
+
+	retVal := g.p.Call("clone", args...)
+	return AbstractMeshFromJSObject(retVal, g.ctx)
+}
+
+// ConvertToFlatShadedMesh calls the ConvertToFlatShadedMesh method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#converttoflatshadedmesh
+func (g *GroundMesh) ConvertToFlatShadedMesh() *Mesh {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("convertToFlatShadedMesh", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// ConvertToUnIndexedMesh calls the ConvertToUnIndexedMesh method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#converttounindexedmesh
+func (g *GroundMesh) ConvertToUnIndexedMesh() *Mesh {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("convertToUnIndexedMesh", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// GroundMeshCreateBoxOpts contains optional parameters for GroundMesh.CreateBox.
+type GroundMeshCreateBoxOpts struct {
+	Scene           *Scene
+	Updatable       *bool
+	SideOrientation *float64
+}
+
+// CreateBox calls the CreateBox method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#createbox
+func (g *GroundMesh) CreateBox(name string, size float64, opts *GroundMeshCreateBoxOpts) *Mesh {
+	if opts == nil {
+		opts = &GroundMeshCreateBoxOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+3)
+
+	args = append(args, name)
+	args = append(args, size)
+
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+	if opts.Updatable == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Updatable)
+	}
+	if opts.SideOrientation == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SideOrientation)
+	}
+
+	retVal := g.p.Call("CreateBox", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// GroundMeshCreateCylinderOpts contains optional parameters for GroundMesh.CreateCylinder.
+type GroundMeshCreateCylinderOpts struct {
+	Scene           *Scene
+	Updatable       *interface{}
+	SideOrientation *float64
+}
+
+// CreateCylinder calls the CreateCylinder method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#createcylinder
+func (g *GroundMesh) CreateCylinder(name string, height float64, diameterTop float64, diameterBottom float64, tessellation float64, subdivisions interface{}, opts *GroundMeshCreateCylinderOpts) *Mesh {
+	if opts == nil {
+		opts = &GroundMeshCreateCylinderOpts{}
+	}
+
+	args := make([]interface{}, 0, 6+3)
+
+	args = append(args, name)
+	args = append(args, height)
+	args = append(args, diameterTop)
+	args = append(args, diameterBottom)
+	args = append(args, tessellation)
+	args = append(args, subdivisions)
+
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+	if opts.Updatable == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Updatable)
+	}
+	if opts.SideOrientation == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SideOrientation)
+	}
+
+	retVal := g.p.Call("CreateCylinder", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// GroundMeshCreateDashedLinesOpts contains optional parameters for GroundMesh.CreateDashedLines.
+type GroundMeshCreateDashedLinesOpts struct {
+	Scene     *Scene
+	Updatable *bool
+	Instance  *LinesMesh
+}
+
+// CreateDashedLines calls the CreateDashedLines method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#createdashedlines
+func (g *GroundMesh) CreateDashedLines(name string, points *Vector3, dashSize float64, gapSize float64, dashNb float64, opts *GroundMeshCreateDashedLinesOpts) *LinesMesh {
+	if opts == nil {
+		opts = &GroundMeshCreateDashedLinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 5+3)
+
+	args = append(args, name)
+	args = append(args, points.JSObject())
+	args = append(args, dashSize)
+	args = append(args, gapSize)
+	args = append(args, dashNb)
+
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+	if opts.Updatable == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Updatable)
+	}
+	if opts.Instance == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Instance.JSObject())
+	}
+
+	retVal := g.p.Call("CreateDashedLines", args...)
+	return LinesMeshFromJSObject(retVal, g.ctx)
+}
+
+// CreateDecal calls the CreateDecal method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#createdecal
+func (g *GroundMesh) CreateDecal(name string, sourceMesh *AbstractMesh, position *Vector3, normal *Vector3, size *Vector3, angle float64) *Mesh {
+
+	args := make([]interface{}, 0, 6+0)
+
+	args = append(args, name)
+	args = append(args, sourceMesh.JSObject())
+	args = append(args, position.JSObject())
+	args = append(args, normal.JSObject())
+	args = append(args, size.JSObject())
+	args = append(args, angle)
+
+	retVal := g.p.Call("CreateDecal", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// GroundMeshCreateDiscOpts contains optional parameters for GroundMesh.CreateDisc.
+type GroundMeshCreateDiscOpts struct {
+	Scene           *Scene
+	Updatable       *bool
+	SideOrientation *float64
+}
+
+// CreateDisc calls the CreateDisc method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#createdisc
+func (g *GroundMesh) CreateDisc(name string, radius float64, tessellation float64, opts *GroundMeshCreateDiscOpts) *Mesh {
+	if opts == nil {
+		opts = &GroundMeshCreateDiscOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+3)
+
+	args = append(args, name)
+	args = append(args, radius)
+	args = append(args, tessellation)
+
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+	if opts.Updatable == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Updatable)
+	}
+	if opts.SideOrientation == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SideOrientation)
+	}
+
+	retVal := g.p.Call("CreateDisc", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// GroundMeshCreateGroundOpts contains optional parameters for GroundMesh.CreateGround.
+type GroundMeshCreateGroundOpts struct {
+	Scene     *Scene
+	Updatable *bool
+}
+
+// CreateGround calls the CreateGround method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#createground
+func (g *GroundMesh) CreateGround(name string, width float64, height float64, subdivisions float64, opts *GroundMeshCreateGroundOpts) *Mesh {
+	if opts == nil {
+		opts = &GroundMeshCreateGroundOpts{}
+	}
+
+	args := make([]interface{}, 0, 4+2)
+
+	args = append(args, name)
+	args = append(args, width)
+	args = append(args, height)
+	args = append(args, subdivisions)
+
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+	if opts.Updatable == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Updatable)
+	}
+
+	retVal := g.p.Call("CreateGround", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// GroundMeshCreateGroundFromHeightMapOpts contains optional parameters for GroundMesh.CreateGroundFromHeightMap.
+type GroundMeshCreateGroundFromHeightMapOpts struct {
+	Updatable   *bool
+	OnReady     *func()
+	AlphaFilter *float64
+}
+
+// CreateGroundFromHeightMap calls the CreateGroundFromHeightMap method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#creategroundfromheightmap
+func (g *GroundMesh) CreateGroundFromHeightMap(name string, url string, width float64, height float64, subdivisions float64, minHeight float64, maxHeight float64, scene *Scene, opts *GroundMeshCreateGroundFromHeightMapOpts) *GroundMesh {
+	if opts == nil {
+		opts = &GroundMeshCreateGroundFromHeightMapOpts{}
+	}
+
+	args := make([]interface{}, 0, 8+3)
+
+	args = append(args, name)
+	args = append(args, url)
+	args = append(args, width)
+	args = append(args, height)
+	args = append(args, subdivisions)
+	args = append(args, minHeight)
+	args = append(args, maxHeight)
+	args = append(args, scene.JSObject())
+
+	if opts.Updatable == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Updatable)
+	}
+	if opts.OnReady == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnReady)
+	}
+	if opts.AlphaFilter == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.AlphaFilter)
+	}
+
+	retVal := g.p.Call("CreateGroundFromHeightMap", args...)
+	return GroundMeshFromJSObject(retVal, g.ctx)
+}
+
+// GroundMeshCreateHemisphereOpts contains optional parameters for GroundMesh.CreateHemisphere.
+type GroundMeshCreateHemisphereOpts struct {
+	Scene *Scene
+}
+
+// CreateHemisphere calls the CreateHemisphere method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#createhemisphere
+func (g *GroundMesh) CreateHemisphere(name string, segments float64, diameter float64, opts *GroundMeshCreateHemisphereOpts) *Mesh {
+	if opts == nil {
+		opts = &GroundMeshCreateHemisphereOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, name)
+	args = append(args, segments)
+	args = append(args, diameter)
+
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+
+	retVal := g.p.Call("CreateHemisphere", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// CreateIcoSphere calls the CreateIcoSphere method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#createicosphere
+func (g *GroundMesh) CreateIcoSphere(name string, options js.Value, scene *Scene) *Mesh {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, name)
+	args = append(args, options)
+	args = append(args, scene.JSObject())
+
+	retVal := g.p.Call("CreateIcoSphere", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// CreateInstance calls the CreateInstance method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#createinstance
+func (g *GroundMesh) CreateInstance(name string) *InstancedMesh {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := g.p.Call("createInstance", args...)
+	return InstancedMeshFromJSObject(retVal, g.ctx)
+}
+
+// GroundMeshCreateLatheOpts contains optional parameters for GroundMesh.CreateLathe.
+type GroundMeshCreateLatheOpts struct {
+	Updatable       *bool
+	SideOrientation *float64
+}
+
+// CreateLathe calls the CreateLathe method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#createlathe
+func (g *GroundMesh) CreateLathe(name string, shape *Vector3, radius float64, tessellation float64, scene *Scene, opts *GroundMeshCreateLatheOpts) *Mesh {
+	if opts == nil {
+		opts = &GroundMeshCreateLatheOpts{}
+	}
+
+	args := make([]interface{}, 0, 5+2)
+
+	args = append(args, name)
+	args = append(args, shape.JSObject())
+	args = append(args, radius)
+	args = append(args, tessellation)
+	args = append(args, scene.JSObject())
+
+	if opts.Updatable == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Updatable)
+	}
+	if opts.SideOrientation == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SideOrientation)
+	}
+
+	retVal := g.p.Call("CreateLathe", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// GroundMeshCreateLinesOpts contains optional parameters for GroundMesh.CreateLines.
+type GroundMeshCreateLinesOpts struct {
+	Scene     *Scene
+	Updatable *bool
+	Instance  *LinesMesh
+}
+
+// CreateLines calls the CreateLines method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#createlines
+func (g *GroundMesh) CreateLines(name string, points *Vector3, opts *GroundMeshCreateLinesOpts) *LinesMesh {
+	if opts == nil {
+		opts = &GroundMeshCreateLinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+3)
+
+	args = append(args, name)
+	args = append(args, points.JSObject())
+
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+	if opts.Updatable == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Updatable)
+	}
+	if opts.Instance == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Instance.JSObject())
+	}
+
+	retVal := g.p.Call("CreateLines", args...)
+	return LinesMeshFromJSObject(retVal, g.ctx)
+}
+
+// GroundMeshCreatePlaneOpts contains optional parameters for GroundMesh.CreatePlane.
+type GroundMeshCreatePlaneOpts struct {
+	Updatable       *bool
+	SideOrientation *float64
+}
+
+// CreatePlane calls the CreatePlane method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#createplane
+func (g *GroundMesh) CreatePlane(name string, size float64, scene *Scene, opts *GroundMeshCreatePlaneOpts) *Mesh {
+	if opts == nil {
+		opts = &GroundMeshCreatePlaneOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+2)
+
+	args = append(args, name)
+	args = append(args, size)
+	args = append(args, scene.JSObject())
+
+	if opts.Updatable == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Updatable)
+	}
+	if opts.SideOrientation == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SideOrientation)
+	}
+
+	retVal := g.p.Call("CreatePlane", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// GroundMeshCreatePolygonOpts contains optional parameters for GroundMesh.CreatePolygon.
+type GroundMeshCreatePolygonOpts struct {
+	Holes           *Vector3
+	Updatable       *bool
+	SideOrientation *float64
+	EarcutInjection *interface{}
+}
+
+// CreatePolygon calls the CreatePolygon method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#createpolygon
+func (g *GroundMesh) CreatePolygon(name string, shape *Vector3, scene *Scene, opts *GroundMeshCreatePolygonOpts) *Mesh {
+	if opts == nil {
+		opts = &GroundMeshCreatePolygonOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+4)
+
+	args = append(args, name)
+	args = append(args, shape.JSObject())
+	args = append(args, scene.JSObject())
+
+	if opts.Holes == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Holes.JSObject())
+	}
+	if opts.Updatable == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Updatable)
+	}
+	if opts.SideOrientation == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SideOrientation)
+	}
+	if opts.EarcutInjection == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.EarcutInjection)
+	}
+
+	retVal := g.p.Call("CreatePolygon", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// CreatePolyhedron calls the CreatePolyhedron method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#createpolyhedron
+func (g *GroundMesh) CreatePolyhedron(name string, options js.Value, scene *Scene) *Mesh {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, name)
+	args = append(args, options)
+	args = append(args, scene.JSObject())
+
+	retVal := g.p.Call("CreatePolyhedron", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// GroundMeshCreateRibbonOpts contains optional parameters for GroundMesh.CreateRibbon.
+type GroundMeshCreateRibbonOpts struct {
+	Scene           *Scene
+	Updatable       *bool
+	SideOrientation *float64
+	Instance        *Mesh
+}
+
+// CreateRibbon calls the CreateRibbon method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#createribbon
+func (g *GroundMesh) CreateRibbon(name string, pathArray *Vector3, closeArray bool, closePath bool, offset float64, opts *GroundMeshCreateRibbonOpts) *Mesh {
+	if opts == nil {
+		opts = &GroundMeshCreateRibbonOpts{}
+	}
+
+	args := make([]interface{}, 0, 5+4)
+
+	args = append(args, name)
+	args = append(args, pathArray.JSObject())
+	args = append(args, closeArray)
+	args = append(args, closePath)
+	args = append(args, offset)
+
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+	if opts.Updatable == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Updatable)
+	}
+	if opts.SideOrientation == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SideOrientation)
+	}
+	if opts.Instance == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Instance.JSObject())
+	}
+
+	retVal := g.p.Call("CreateRibbon", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// GroundMeshCreateSphereOpts contains optional parameters for GroundMesh.CreateSphere.
+type GroundMeshCreateSphereOpts struct {
+	Scene           *Scene
+	Updatable       *bool
+	SideOrientation *float64
+}
+
+// CreateSphere calls the CreateSphere method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#createsphere
+func (g *GroundMesh) CreateSphere(name string, segments float64, diameter float64, opts *GroundMeshCreateSphereOpts) *Mesh {
+	if opts == nil {
+		opts = &GroundMeshCreateSphereOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+3)
+
+	args = append(args, name)
+	args = append(args, segments)
+	args = append(args, diameter)
+
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+	if opts.Updatable == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Updatable)
+	}
+	if opts.SideOrientation == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SideOrientation)
+	}
+
+	retVal := g.p.Call("CreateSphere", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// GroundMeshCreateTiledGroundOpts contains optional parameters for GroundMesh.CreateTiledGround.
+type GroundMeshCreateTiledGroundOpts struct {
+	Updatable *bool
+}
+
+// CreateTiledGround calls the CreateTiledGround method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#createtiledground
+func (g *GroundMesh) CreateTiledGround(name string, xmin float64, zmin float64, xmax float64, zmax float64, subdivisions js.Value, precision js.Value, scene *Scene, opts *GroundMeshCreateTiledGroundOpts) *Mesh {
+	if opts == nil {
+		opts = &GroundMeshCreateTiledGroundOpts{}
+	}
+
+	args := make([]interface{}, 0, 8+1)
+
+	args = append(args, name)
+	args = append(args, xmin)
+	args = append(args, zmin)
+	args = append(args, xmax)
+	args = append(args, zmax)
+	args = append(args, subdivisions)
+	args = append(args, precision)
+	args = append(args, scene.JSObject())
+
+	if opts.Updatable == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Updatable)
+	}
+
+	retVal := g.p.Call("CreateTiledGround", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// GroundMeshCreateTorusOpts contains optional parameters for GroundMesh.CreateTorus.
+type GroundMeshCreateTorusOpts struct {
+	Scene           *Scene
+	Updatable       *bool
+	SideOrientation *float64
+}
+
+// CreateTorus calls the CreateTorus method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#createtorus
+func (g *GroundMesh) CreateTorus(name string, diameter float64, thickness float64, tessellation float64, opts *GroundMeshCreateTorusOpts) *Mesh {
+	if opts == nil {
+		opts = &GroundMeshCreateTorusOpts{}
+	}
+
+	args := make([]interface{}, 0, 4+3)
+
+	args = append(args, name)
+	args = append(args, diameter)
+	args = append(args, thickness)
+	args = append(args, tessellation)
+
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+	if opts.Updatable == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Updatable)
+	}
+	if opts.SideOrientation == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SideOrientation)
+	}
+
+	retVal := g.p.Call("CreateTorus", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// GroundMeshCreateTorusKnotOpts contains optional parameters for GroundMesh.CreateTorusKnot.
+type GroundMeshCreateTorusKnotOpts struct {
+	Scene           *Scene
+	Updatable       *bool
+	SideOrientation *float64
+}
+
+// CreateTorusKnot calls the CreateTorusKnot method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#createtorusknot
+func (g *GroundMesh) CreateTorusKnot(name string, radius float64, tube float64, radialSegments float64, tubularSegments float64, p float64, q float64, opts *GroundMeshCreateTorusKnotOpts) *Mesh {
+	if opts == nil {
+		opts = &GroundMeshCreateTorusKnotOpts{}
+	}
+
+	args := make([]interface{}, 0, 7+3)
+
+	args = append(args, name)
+	args = append(args, radius)
+	args = append(args, tube)
+	args = append(args, radialSegments)
+	args = append(args, tubularSegments)
+	args = append(args, p)
+	args = append(args, q)
+
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+	if opts.Updatable == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Updatable)
+	}
+	if opts.SideOrientation == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SideOrientation)
+	}
+
+	retVal := g.p.Call("CreateTorusKnot", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// GroundMeshCreateTubeOpts contains optional parameters for GroundMesh.CreateTube.
+type GroundMeshCreateTubeOpts struct {
+	Updatable       *bool
+	SideOrientation *float64
+	Instance        *Mesh
+}
+
+// CreateTube calls the CreateTube method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#createtube
+func (g *GroundMesh) CreateTube(name string, path *Vector3, radius float64, tessellation float64, radiusFunction func(), cap float64, scene *Scene, opts *GroundMeshCreateTubeOpts) *Mesh {
+	if opts == nil {
+		opts = &GroundMeshCreateTubeOpts{}
+	}
+
+	args := make([]interface{}, 0, 7+3)
+
+	args = append(args, name)
+	args = append(args, path.JSObject())
+	args = append(args, radius)
+	args = append(args, tessellation)
+	args = append(args, radiusFunction)
+	args = append(args, cap)
+	args = append(args, scene.JSObject())
+
+	if opts.Updatable == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Updatable)
+	}
+	if opts.SideOrientation == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SideOrientation)
+	}
+	if opts.Instance == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Instance.JSObject())
+	}
+
+	retVal := g.p.Call("CreateTube", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// GroundMeshDisposeOpts contains optional parameters for GroundMesh.Dispose.
+type GroundMeshDisposeOpts struct {
+	DoNotRecurse               *bool
+	DisposeMaterialAndTextures *bool
+}
+
+// Dispose calls the Dispose method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#dispose
+func (g *GroundMesh) Dispose(opts *GroundMeshDisposeOpts) {
+	if opts == nil {
+		opts = &GroundMeshDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.DoNotRecurse == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DoNotRecurse)
+	}
+	if opts.DisposeMaterialAndTextures == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DisposeMaterialAndTextures)
+	}
+
+	g.p.Call("dispose", args...)
+}
+
+// GroundMeshExtrudePolygonOpts contains optional parameters for GroundMesh.ExtrudePolygon.
+type GroundMeshExtrudePolygonOpts struct {
+	Holes           *Vector3
+	Updatable       *bool
+	SideOrientation *float64
+	EarcutInjection *interface{}
+}
+
+// ExtrudePolygon calls the ExtrudePolygon method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#extrudepolygon
+func (g *GroundMesh) ExtrudePolygon(name string, shape *Vector3, depth float64, scene *Scene, opts *GroundMeshExtrudePolygonOpts) *Mesh {
+	if opts == nil {
+		opts = &GroundMeshExtrudePolygonOpts{}
+	}
+
+	args := make([]interface{}, 0, 4+4)
+
+	args = append(args, name)
+	args = append(args, shape.JSObject())
+	args = append(args, depth)
+	args = append(args, scene.JSObject())
+
+	if opts.Holes == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Holes.JSObject())
+	}
+	if opts.Updatable == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Updatable)
+	}
+	if opts.SideOrientation == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SideOrientation)
+	}
+	if opts.EarcutInjection == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.EarcutInjection)
+	}
+
+	retVal := g.p.Call("ExtrudePolygon", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// GroundMeshExtrudeShapeOpts contains optional parameters for GroundMesh.ExtrudeShape.
+type GroundMeshExtrudeShapeOpts struct {
+	Scene           *Scene
+	Updatable       *bool
+	SideOrientation *float64
+	Instance        *Mesh
+}
+
+// ExtrudeShape calls the ExtrudeShape method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#extrudeshape
+func (g *GroundMesh) ExtrudeShape(name string, shape *Vector3, path *Vector3, scale float64, rotation float64, cap float64, opts *GroundMeshExtrudeShapeOpts) *Mesh {
+	if opts == nil {
+		opts = &GroundMeshExtrudeShapeOpts{}
+	}
+
+	args := make([]interface{}, 0, 6+4)
+
+	args = append(args, name)
+	args = append(args, shape.JSObject())
+	args = append(args, path.JSObject())
+	args = append(args, scale)
+	args = append(args, rotation)
+	args = append(args, cap)
+
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+	if opts.Updatable == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Updatable)
+	}
+	if opts.SideOrientation == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SideOrientation)
+	}
+	if opts.Instance == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Instance.JSObject())
+	}
+
+	retVal := g.p.Call("ExtrudeShape", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// GroundMeshExtrudeShapeCustomOpts contains optional parameters for GroundMesh.ExtrudeShapeCustom.
+type GroundMeshExtrudeShapeCustomOpts struct {
+	Updatable       *bool
+	SideOrientation *float64
+	Instance        *Mesh
+}
+
+// ExtrudeShapeCustom calls the ExtrudeShapeCustom method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#extrudeshapecustom
+func (g *GroundMesh) ExtrudeShapeCustom(name string, shape *Vector3, path *Vector3, scaleFunction *Function, rotationFunction *Function, ribbonCloseArray bool, ribbonClosePath bool, cap float64, scene *Scene, opts *GroundMeshExtrudeShapeCustomOpts) *Mesh {
+	if opts == nil {
+		opts = &GroundMeshExtrudeShapeCustomOpts{}
+	}
+
+	args := make([]interface{}, 0, 9+3)
+
+	args = append(args, name)
+	args = append(args, shape.JSObject())
+	args = append(args, path.JSObject())
+	args = append(args, scaleFunction.JSObject())
+	args = append(args, rotationFunction.JSObject())
+	args = append(args, ribbonCloseArray)
+	args = append(args, ribbonClosePath)
+	args = append(args, cap)
+	args = append(args, scene.JSObject())
+
+	if opts.Updatable == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Updatable)
+	}
+	if opts.SideOrientation == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SideOrientation)
+	}
+	if opts.Instance == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Instance.JSObject())
+	}
+
+	retVal := g.p.Call("ExtrudeShapeCustom", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// GroundMeshFlipFacesOpts contains optional parameters for GroundMesh.FlipFaces.
+type GroundMeshFlipFacesOpts struct {
+	FlipNormals *bool
+}
+
+// FlipFaces calls the FlipFaces method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#flipfaces
+func (g *GroundMesh) FlipFaces(opts *GroundMeshFlipFacesOpts) *Mesh {
+	if opts == nil {
+		opts = &GroundMeshFlipFacesOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.FlipNormals == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FlipNormals)
+	}
+
+	retVal := g.p.Call("flipFaces", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// ForceSharedVertices calls the ForceSharedVertices method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#forcesharedvertices
+func (g *GroundMesh) ForceSharedVertices() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	g.p.Call("forceSharedVertices", args...)
+}
+
+// FreezeNormals calls the FreezeNormals method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#freezenormals
+func (g *GroundMesh) FreezeNormals() *Mesh {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("freezeNormals", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// GetAnimatables calls the GetAnimatables method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#getanimatables
+func (g *GroundMesh) GetAnimatables() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getAnimatables", args...)
+	return retVal
+}
+
+// GetClassName calls the GetClassName method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#getclassname
+func (g *GroundMesh) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetEmittedParticleSystems calls the GetEmittedParticleSystems method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#getemittedparticlesystems
+func (g *GroundMesh) GetEmittedParticleSystems() *IParticleSystem {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getEmittedParticleSystems", args...)
+	return IParticleSystemFromJSObject(retVal, g.ctx)
+}
+
+// GetHeightAtCoordinates calls the GetHeightAtCoordinates method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#getheightatcoordinates
+func (g *GroundMesh) GetHeightAtCoordinates(x float64, z float64) float64 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, x)
+	args = append(args, z)
+
+	retVal := g.p.Call("getHeightAtCoordinates", args...)
+	return retVal.Float()
+}
+
+// GetHierarchyEmittedParticleSystems calls the GetHierarchyEmittedParticleSystems method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#gethierarchyemittedparticlesystems
+func (g *GroundMesh) GetHierarchyEmittedParticleSystems() *IParticleSystem {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getHierarchyEmittedParticleSystems", args...)
+	return IParticleSystemFromJSObject(retVal, g.ctx)
+}
+
+// GroundMeshGetIndicesOpts contains optional parameters for GroundMesh.GetIndices.
+type GroundMeshGetIndicesOpts struct {
+	CopyWhenShared *bool
+	ForceCopy      *bool
+}
+
+// GetIndices calls the GetIndices method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#getindices
+func (g *GroundMesh) GetIndices(opts *GroundMeshGetIndicesOpts) js.Value {
+	if opts == nil {
+		opts = &GroundMeshGetIndicesOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.CopyWhenShared == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.CopyWhenShared)
+	}
+	if opts.ForceCopy == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceCopy)
+	}
+
+	retVal := g.p.Call("getIndices", args...)
+	return retVal
+}
+
+// GroundMeshGetLODOpts contains optional parameters for GroundMesh.GetLOD.
+type GroundMeshGetLODOpts struct {
+	BoundingSphere *BoundingSphere
+}
+
+// GetLOD calls the GetLOD method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#getlod
+func (g *GroundMesh) GetLOD(camera *Camera, opts *GroundMeshGetLODOpts) *AbstractMesh {
+	if opts == nil {
+		opts = &GroundMeshGetLODOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, camera.JSObject())
+
+	if opts.BoundingSphere == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.BoundingSphere.JSObject())
+	}
+
+	retVal := g.p.Call("getLOD", args...)
+	return AbstractMeshFromJSObject(retVal, g.ctx)
+}
+
+// GetLODLevelAtDistance calls the GetLODLevelAtDistance method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#getlodlevelatdistance
+func (g *GroundMesh) GetLODLevelAtDistance(distance float64) *Mesh {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, distance)
+
+	retVal := g.p.Call("getLODLevelAtDistance", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// GetLODLevels calls the GetLODLevels method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#getlodlevels
+func (g *GroundMesh) GetLODLevels() *MeshLODLevel {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getLODLevels", args...)
+	return MeshLODLevelFromJSObject(retVal, g.ctx)
+}
+
+// GetNormalAtCoordinates calls the GetNormalAtCoordinates method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#getnormalatcoordinates
+func (g *GroundMesh) GetNormalAtCoordinates(x float64, z float64) *Vector3 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, x)
+	args = append(args, z)
+
+	retVal := g.p.Call("getNormalAtCoordinates", args...)
+	return Vector3FromJSObject(retVal, g.ctx)
+}
+
+// GetNormalAtCoordinatesToRef calls the GetNormalAtCoordinatesToRef method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#getnormalatcoordinatestoref
+func (g *GroundMesh) GetNormalAtCoordinatesToRef(x float64, z float64, ref *Vector3) *GroundMesh {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, x)
+	args = append(args, z)
+	args = append(args, ref.JSObject())
+
+	retVal := g.p.Call("getNormalAtCoordinatesToRef", args...)
+	return GroundMeshFromJSObject(retVal, g.ctx)
+}
+
+// GetTotalIndices calls the GetTotalIndices method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#gettotalindices
+func (g *GroundMesh) GetTotalIndices() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getTotalIndices", args...)
+	return retVal.Float()
+}
+
+// GetTotalVertices calls the GetTotalVertices method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#gettotalvertices
+func (g *GroundMesh) GetTotalVertices() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getTotalVertices", args...)
+	return retVal.Float()
+}
+
+// GetVertexBuffer calls the GetVertexBuffer method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#getvertexbuffer
+func (g *GroundMesh) GetVertexBuffer(kind string) *VertexBuffer {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, kind)
+
+	retVal := g.p.Call("getVertexBuffer", args...)
+	return VertexBufferFromJSObject(retVal, g.ctx)
+}
+
+// GroundMeshGetVerticesDataOpts contains optional parameters for GroundMesh.GetVerticesData.
+type GroundMeshGetVerticesDataOpts struct {
+	CopyWhenShared *bool
+	ForceCopy      *bool
+}
+
+// GetVerticesData calls the GetVerticesData method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#getverticesdata
+func (g *GroundMesh) GetVerticesData(kind string, opts *GroundMeshGetVerticesDataOpts) js.Value {
+	if opts == nil {
+		opts = &GroundMeshGetVerticesDataOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, kind)
+
+	if opts.CopyWhenShared == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.CopyWhenShared)
+	}
+	if opts.ForceCopy == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceCopy)
+	}
+
+	retVal := g.p.Call("getVerticesData", args...)
+	return retVal
+}
+
+// GetVerticesDataKinds calls the GetVerticesDataKinds method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#getverticesdatakinds
+func (g *GroundMesh) GetVerticesDataKinds() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getVerticesDataKinds", args...)
+	return retVal.String()
+}
+
+// IncreaseVertices calls the IncreaseVertices method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#increasevertices
+func (g *GroundMesh) IncreaseVertices(numberPerEdge float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, numberPerEdge)
+
+	g.p.Call("increaseVertices", args...)
+}
+
+// GroundMeshInstantiateHierarchyOpts contains optional parameters for GroundMesh.InstantiateHierarchy.
+type GroundMeshInstantiateHierarchyOpts struct {
+	NewParent        *TransformNode
+	Options          js.Value
+	OnNewNodeCreated *func()
+}
+
+// InstantiateHierarchy calls the InstantiateHierarchy method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#instantiatehierarchy
+func (g *GroundMesh) InstantiateHierarchy(opts *GroundMeshInstantiateHierarchyOpts) *TransformNode {
+	if opts == nil {
+		opts = &GroundMeshInstantiateHierarchyOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+3)
+
+	if opts.NewParent == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.NewParent.JSObject())
+	}
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+	if opts.OnNewNodeCreated == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnNewNodeCreated)
+	}
+
+	retVal := g.p.Call("instantiateHierarchy", args...)
+	return TransformNodeFromJSObject(retVal, g.ctx)
+}
+
+// IsInFrustum calls the IsInFrustum method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#isinfrustum
+func (g *GroundMesh) IsInFrustum(frustumPlanes *Plane) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, frustumPlanes.JSObject())
+
+	retVal := g.p.Call("isInFrustum", args...)
+	return retVal.Bool()
+}
+
+// GroundMeshIsReadyOpts contains optional parameters for GroundMesh.IsReady.
+type GroundMeshIsReadyOpts struct {
+	CompleteCheck        *bool
+	ForceInstanceSupport *bool
+}
+
+// IsReady calls the IsReady method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#isready
+func (g *GroundMesh) IsReady(opts *GroundMeshIsReadyOpts) bool {
+	if opts == nil {
+		opts = &GroundMeshIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.CompleteCheck == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.CompleteCheck)
+	}
+	if opts.ForceInstanceSupport == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceInstanceSupport)
+	}
+
+	retVal := g.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// IsVertexBufferUpdatable calls the IsVertexBufferUpdatable method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#isvertexbufferupdatable
+func (g *GroundMesh) IsVertexBufferUpdatable(kind string) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, kind)
+
+	retVal := g.p.Call("isVertexBufferUpdatable", args...)
+	return retVal.Bool()
+}
+
+// IsVerticesDataPresent calls the IsVerticesDataPresent method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#isverticesdatapresent
+func (g *GroundMesh) IsVerticesDataPresent(kind string) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, kind)
+
+	retVal := g.p.Call("isVerticesDataPresent", args...)
+	return retVal.Bool()
+}
+
+// MakeGeometryUnique calls the MakeGeometryUnique method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#makegeometryunique
+func (g *GroundMesh) MakeGeometryUnique() *Mesh {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("makeGeometryUnique", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// GroundMeshMarkVerticesDataAsUpdatableOpts contains optional parameters for GroundMesh.MarkVerticesDataAsUpdatable.
+type GroundMeshMarkVerticesDataAsUpdatableOpts struct {
+	Updatable *bool
+}
+
+// MarkVerticesDataAsUpdatable calls the MarkVerticesDataAsUpdatable method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#markverticesdataasupdatable
+func (g *GroundMesh) MarkVerticesDataAsUpdatable(kind string, opts *GroundMeshMarkVerticesDataAsUpdatableOpts) {
+	if opts == nil {
+		opts = &GroundMeshMarkVerticesDataAsUpdatableOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, kind)
+
+	if opts.Updatable == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Updatable)
+	}
+
+	g.p.Call("markVerticesDataAsUpdatable", args...)
+}
+
+// GroundMeshMergeMeshesOpts contains optional parameters for GroundMesh.MergeMeshes.
+type GroundMeshMergeMeshesOpts struct {
+	DisposeSource          *bool
+	Allow32BitsIndices     *bool
+	MeshSubclass           *Mesh
+	SubdivideWithSubMeshes *bool
+	MultiMultiMaterials    *bool
+}
+
+// MergeMeshes calls the MergeMeshes method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#mergemeshes
+func (g *GroundMesh) MergeMeshes(meshes []js.Value, opts *GroundMeshMergeMeshesOpts) *Mesh {
+	if opts == nil {
+		opts = &GroundMeshMergeMeshesOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+5)
+
+	args = append(args, meshes)
+
+	if opts.DisposeSource == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DisposeSource)
+	}
+	if opts.Allow32BitsIndices == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Allow32BitsIndices)
+	}
+	if opts.MeshSubclass == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.MeshSubclass.JSObject())
+	}
+	if opts.SubdivideWithSubMeshes == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SubdivideWithSubMeshes)
+	}
+	if opts.MultiMultiMaterials == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.MultiMultiMaterials)
+	}
+
+	retVal := g.p.Call("MergeMeshes", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// MinMax calls the MinMax method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#minmax
+func (g *GroundMesh) MinMax(meshes *AbstractMesh) js.Value {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, meshes.JSObject())
+
+	retVal := g.p.Call("MinMax", args...)
+	return retVal
+}
+
+// GroundMeshOptimizeOpts contains optional parameters for GroundMesh.Optimize.
+type GroundMeshOptimizeOpts struct {
+	OctreeBlocksSize *float64
+}
+
+// Optimize calls the Optimize method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#optimize
+func (g *GroundMesh) Optimize(chunksCount float64, opts *GroundMeshOptimizeOpts) {
+	if opts == nil {
+		opts = &GroundMeshOptimizeOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, chunksCount)
+
+	if opts.OctreeBlocksSize == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.OctreeBlocksSize)
+	}
+
+	g.p.Call("optimize", args...)
+}
+
+// GroundMeshOptimizeIndicesOpts contains optional parameters for GroundMesh.OptimizeIndices.
+type GroundMeshOptimizeIndicesOpts struct {
+	SuccessCallback *func()
+}
+
+// OptimizeIndices calls the OptimizeIndices method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#optimizeindices
+func (g *GroundMesh) OptimizeIndices(opts *GroundMeshOptimizeIndicesOpts) *Mesh {
+	if opts == nil {
+		opts = &GroundMeshOptimizeIndicesOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.SuccessCallback == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.SuccessCallback)
+	}
+
+	retVal := g.p.Call("optimizeIndices", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// Parse calls the Parse method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#parse
+func (g *GroundMesh) Parse(parsedMesh interface{}, scene *Scene) *GroundMesh {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, parsedMesh)
+	args = append(args, scene.JSObject())
+
+	retVal := g.p.Call("Parse", args...)
+	return GroundMeshFromJSObject(retVal, g.ctx)
+}
+
+// GroundMeshRefreshBoundingInfoOpts contains optional parameters for GroundMesh.RefreshBoundingInfo.
+type GroundMeshRefreshBoundingInfoOpts struct {
+	ApplySkeleton *bool
+}
+
+// RefreshBoundingInfo calls the RefreshBoundingInfo method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#refreshboundinginfo
+func (g *GroundMesh) RefreshBoundingInfo(opts *GroundMeshRefreshBoundingInfoOpts) *Mesh {
+	if opts == nil {
+		opts = &GroundMeshRefreshBoundingInfoOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ApplySkeleton == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ApplySkeleton)
+	}
+
+	retVal := g.p.Call("refreshBoundingInfo", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// RegisterAfterRender calls the RegisterAfterRender method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#registerafterrender
+func (g *GroundMesh) RegisterAfterRender(jsFunc func()) *Mesh {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, jsFunc)
+
+	retVal := g.p.Call("registerAfterRender", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// RegisterBeforeRender calls the RegisterBeforeRender method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#registerbeforerender
+func (g *GroundMesh) RegisterBeforeRender(jsFunc func()) *Mesh {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, jsFunc)
+
+	retVal := g.p.Call("registerBeforeRender", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// RegisterInstancedBuffer calls the RegisterInstancedBuffer method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#registerinstancedbuffer
+func (g *GroundMesh) RegisterInstancedBuffer(kind string, stride float64) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, kind)
+	args = append(args, stride)
+
+	g.p.Call("registerInstancedBuffer", args...)
+}
+
+// RemoveLODLevel calls the RemoveLODLevel method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#removelodlevel
+func (g *GroundMesh) RemoveLODLevel(mesh *Mesh) *Mesh {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	retVal := g.p.Call("removeLODLevel", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// RemoveVerticesData calls the RemoveVerticesData method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#removeverticesdata
+func (g *GroundMesh) RemoveVerticesData(kind string) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, kind)
+
+	g.p.Call("removeVerticesData", args...)
+}
+
+// GroundMeshRenderOpts contains optional parameters for GroundMesh.Render.
+type GroundMeshRenderOpts struct {
+	EffectiveMeshReplacement *AbstractMesh
+}
+
+// Render calls the Render method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#render
+func (g *GroundMesh) Render(subMesh *SubMesh, enableAlphaMode bool, opts *GroundMeshRenderOpts) *Mesh {
+	if opts == nil {
+		opts = &GroundMeshRenderOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, subMesh.JSObject())
+	args = append(args, enableAlphaMode)
+
+	if opts.EffectiveMeshReplacement == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.EffectiveMeshReplacement.JSObject())
+	}
+
+	retVal := g.p.Call("render", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// Serialize calls the Serialize method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#serialize
+func (g *GroundMesh) Serialize(serializationObject interface{}) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, serializationObject)
+
+	g.p.Call("serialize", args...)
+}
+
+// GroundMeshSetIndicesOpts contains optional parameters for GroundMesh.SetIndices.
+type GroundMeshSetIndicesOpts struct {
+	TotalVertices *float64
+	Updatable     *bool
+}
+
+// SetIndices calls the SetIndices method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#setindices
+func (g *GroundMesh) SetIndices(indices js.Value, opts *GroundMeshSetIndicesOpts) *AbstractMesh {
+	if opts == nil {
+		opts = &GroundMeshSetIndicesOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, indices)
+
+	if opts.TotalVertices == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.TotalVertices)
+	}
+	if opts.Updatable == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Updatable)
+	}
+
+	retVal := g.p.Call("setIndices", args...)
+	return AbstractMeshFromJSObject(retVal, g.ctx)
+}
+
+// SetMaterialByID calls the SetMaterialByID method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#setmaterialbyid
+func (g *GroundMesh) SetMaterialByID(id string) *Mesh {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, id)
+
+	retVal := g.p.Call("setMaterialByID", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// SetNormalsForCPUSkinning calls the SetNormalsForCPUSkinning method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#setnormalsforcpuskinning
+func (g *GroundMesh) SetNormalsForCPUSkinning() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("setNormalsForCPUSkinning", args...)
+	return retVal
+}
+
+// SetPositionsForCPUSkinning calls the SetPositionsForCPUSkinning method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#setpositionsforcpuskinning
+func (g *GroundMesh) SetPositionsForCPUSkinning() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("setPositionsForCPUSkinning", args...)
+	return retVal
+}
+
+// SetVerticesBuffer calls the SetVerticesBuffer method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#setverticesbuffer
+func (g *GroundMesh) SetVerticesBuffer(buffer *VertexBuffer) *Mesh {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, buffer.JSObject())
+
+	retVal := g.p.Call("setVerticesBuffer", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// GroundMeshSetVerticesDataOpts contains optional parameters for GroundMesh.SetVerticesData.
+type GroundMeshSetVerticesDataOpts struct {
+	Updatable *bool
+	Stride    *float64
+}
+
+// SetVerticesData calls the SetVerticesData method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#setverticesdata
+func (g *GroundMesh) SetVerticesData(kind string, data js.Value, opts *GroundMeshSetVerticesDataOpts) *AbstractMesh {
+	if opts == nil {
+		opts = &GroundMeshSetVerticesDataOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+2)
+
+	args = append(args, kind)
+	args = append(args, data)
+
+	if opts.Updatable == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Updatable)
+	}
+	if opts.Stride == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Stride)
+	}
+
+	retVal := g.p.Call("setVerticesData", args...)
+	return AbstractMeshFromJSObject(retVal, g.ctx)
+}
+
+// GroundMeshSimplifyOpts contains optional parameters for GroundMesh.Simplify.
+type GroundMeshSimplifyOpts struct {
+	ParallelProcessing *bool
+	SimplificationType *SimplificationType
+	SuccessCallback    *func()
+}
+
+// Simplify calls the Simplify method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#simplify
+func (g *GroundMesh) Simplify(settings []ISimplificationSettings, opts *GroundMeshSimplifyOpts) *Mesh {
+	if opts == nil {
+		opts = &GroundMeshSimplifyOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, settings.JSObject())
+
+	if opts.ParallelProcessing == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ParallelProcessing)
+	}
+	if opts.SimplificationType == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.SimplificationType.JSObject())
+	}
+	if opts.SuccessCallback == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.SuccessCallback)
+	}
+
+	retVal := g.p.Call("simplify", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// Subdivide calls the Subdivide method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#subdivide
+func (g *GroundMesh) Subdivide(count float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, count)
+
+	g.p.Call("subdivide", args...)
+}
+
+// SynchronizeInstances calls the SynchronizeInstances method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#synchronizeinstances
+func (g *GroundMesh) SynchronizeInstances() *Mesh {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("synchronizeInstances", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// ToLeftHanded calls the ToLeftHanded method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#tolefthanded
+func (g *GroundMesh) ToLeftHanded() *Mesh {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("toLeftHanded", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// GroundMeshToStringOpts contains optional parameters for GroundMesh.ToString.
+type GroundMeshToStringOpts struct {
+	FullDetails *bool
+}
+
+// ToString calls the ToString method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#tostring
+func (g *GroundMesh) ToString(opts *GroundMeshToStringOpts) string {
+	if opts == nil {
+		opts = &GroundMeshToStringOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.FullDetails == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FullDetails)
+	}
+
+	retVal := g.p.Call("toString", args...)
+	return retVal.String()
+}
+
+// UnfreezeNormals calls the UnfreezeNormals method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#unfreezenormals
+func (g *GroundMesh) UnfreezeNormals() *Mesh {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("unfreezeNormals", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// UnregisterAfterRender calls the UnregisterAfterRender method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#unregisterafterrender
+func (g *GroundMesh) UnregisterAfterRender(jsFunc func()) *Mesh {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, jsFunc)
+
+	retVal := g.p.Call("unregisterAfterRender", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// UnregisterBeforeRender calls the UnregisterBeforeRender method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#unregisterbeforerender
+func (g *GroundMesh) UnregisterBeforeRender(jsFunc func()) *Mesh {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, jsFunc)
+
+	retVal := g.p.Call("unregisterBeforeRender", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// UpdateCoordinateHeights calls the UpdateCoordinateHeights method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#updatecoordinateheights
+func (g *GroundMesh) UpdateCoordinateHeights() *GroundMesh {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("updateCoordinateHeights", args...)
+	return GroundMeshFromJSObject(retVal, g.ctx)
+}
+
+// GroundMeshUpdateIndicesOpts contains optional parameters for GroundMesh.UpdateIndices.
+type GroundMeshUpdateIndicesOpts struct {
+	Offset        *float64
+	GpuMemoryOnly *bool
+}
+
+// UpdateIndices calls the UpdateIndices method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#updateindices
+func (g *GroundMesh) UpdateIndices(indices js.Value, opts *GroundMeshUpdateIndicesOpts) *AbstractMesh {
+	if opts == nil {
+		opts = &GroundMeshUpdateIndicesOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, indices)
+
+	if opts.Offset == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Offset)
+	}
+	if opts.GpuMemoryOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.GpuMemoryOnly)
+	}
+
+	retVal := g.p.Call("updateIndices", args...)
+	return AbstractMeshFromJSObject(retVal, g.ctx)
+}
+
+// GroundMeshUpdateMeshPositionsOpts contains optional parameters for GroundMesh.UpdateMeshPositions.
+type GroundMeshUpdateMeshPositionsOpts struct {
+	ComputeNormals *bool
+}
+
+// UpdateMeshPositions calls the UpdateMeshPositions method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#updatemeshpositions
+func (g *GroundMesh) UpdateMeshPositions(positionFunction func(), opts *GroundMeshUpdateMeshPositionsOpts) *Mesh {
+	if opts == nil {
+		opts = &GroundMeshUpdateMeshPositionsOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, positionFunction)
+
+	if opts.ComputeNormals == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ComputeNormals)
+	}
+
+	retVal := g.p.Call("updateMeshPositions", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// GroundMeshUpdateVerticesDataOpts contains optional parameters for GroundMesh.UpdateVerticesData.
+type GroundMeshUpdateVerticesDataOpts struct {
+	UpdateExtends *bool
+	MakeItUnique  *bool
+}
+
+// UpdateVerticesData calls the UpdateVerticesData method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#updateverticesdata
+func (g *GroundMesh) UpdateVerticesData(kind string, data js.Value, opts *GroundMeshUpdateVerticesDataOpts) *AbstractMesh {
+	if opts == nil {
+		opts = &GroundMeshUpdateVerticesDataOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+2)
+
+	args = append(args, kind)
+	args = append(args, data)
+
+	if opts.UpdateExtends == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UpdateExtends)
+	}
+	if opts.MakeItUnique == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.MakeItUnique)
+	}
+
+	retVal := g.p.Call("updateVerticesData", args...)
+	return AbstractMeshFromJSObject(retVal, g.ctx)
+}
+
+// ValidateSkinning calls the ValidateSkinning method on the GroundMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#validateskinning
+func (g *GroundMesh) ValidateSkinning() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("validateSkinning", args...)
+	return retVal
+}
+
+/*
+
+// AreNormalsFrozen returns the AreNormalsFrozen property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#arenormalsfrozen
+func (g *GroundMesh) AreNormalsFrozen(areNormalsFrozen bool) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(areNormalsFrozen)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetAreNormalsFrozen sets the AreNormalsFrozen property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#arenormalsfrozen
+func (g *GroundMesh) SetAreNormalsFrozen(areNormalsFrozen bool) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(areNormalsFrozen)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// BACKSIDE returns the BACKSIDE property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#backside
+func (g *GroundMesh) BACKSIDE(BACKSIDE float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(BACKSIDE)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetBACKSIDE sets the BACKSIDE property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#backside
+func (g *GroundMesh) SetBACKSIDE(BACKSIDE float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(BACKSIDE)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// BOTTOM returns the BOTTOM property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#bottom
+func (g *GroundMesh) BOTTOM(BOTTOM float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(BOTTOM)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetBOTTOM sets the BOTTOM property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#bottom
+func (g *GroundMesh) SetBOTTOM(BOTTOM float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(BOTTOM)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// CAP_ALL returns the CAP_ALL property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#cap_all
+func (g *GroundMesh) CAP_ALL(CAP_ALL float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(CAP_ALL)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetCAP_ALL sets the CAP_ALL property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#cap_all
+func (g *GroundMesh) SetCAP_ALL(CAP_ALL float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(CAP_ALL)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// CAP_END returns the CAP_END property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#cap_end
+func (g *GroundMesh) CAP_END(CAP_END float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(CAP_END)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetCAP_END sets the CAP_END property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#cap_end
+func (g *GroundMesh) SetCAP_END(CAP_END float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(CAP_END)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// CAP_START returns the CAP_START property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#cap_start
+func (g *GroundMesh) CAP_START(CAP_START float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(CAP_START)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetCAP_START sets the CAP_START property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#cap_start
+func (g *GroundMesh) SetCAP_START(CAP_START float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(CAP_START)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// CENTER returns the CENTER property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#center
+func (g *GroundMesh) CENTER(CENTER float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(CENTER)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetCENTER sets the CENTER property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#center
+func (g *GroundMesh) SetCENTER(CENTER float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(CENTER)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// DEFAULTSIDE returns the DEFAULTSIDE property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#defaultside
+func (g *GroundMesh) DEFAULTSIDE(DEFAULTSIDE float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(DEFAULTSIDE)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetDEFAULTSIDE sets the DEFAULTSIDE property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#defaultside
+func (g *GroundMesh) SetDEFAULTSIDE(DEFAULTSIDE float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(DEFAULTSIDE)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// DOUBLESIDE returns the DOUBLESIDE property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#doubleside
+func (g *GroundMesh) DOUBLESIDE(DOUBLESIDE float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(DOUBLESIDE)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetDOUBLESIDE sets the DOUBLESIDE property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#doubleside
+func (g *GroundMesh) SetDOUBLESIDE(DOUBLESIDE float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(DOUBLESIDE)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// DelayLoadState returns the DelayLoadState property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#delayloadstate
+func (g *GroundMesh) DelayLoadState(delayLoadState float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(delayLoadState)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetDelayLoadState sets the DelayLoadState property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#delayloadstate
+func (g *GroundMesh) SetDelayLoadState(delayLoadState float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(delayLoadState)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// DelayLoadingFile returns the DelayLoadingFile property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#delayloadingfile
+func (g *GroundMesh) DelayLoadingFile(delayLoadingFile string) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(delayLoadingFile)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetDelayLoadingFile sets the DelayLoadingFile property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#delayloadingfile
+func (g *GroundMesh) SetDelayLoadingFile(delayLoadingFile string) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(delayLoadingFile)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// FLIP_N_ROTATE_ROW returns the FLIP_N_ROTATE_ROW property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#flip_n_rotate_row
+func (g *GroundMesh) FLIP_N_ROTATE_ROW(FLIP_N_ROTATE_ROW float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(FLIP_N_ROTATE_ROW)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetFLIP_N_ROTATE_ROW sets the FLIP_N_ROTATE_ROW property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#flip_n_rotate_row
+func (g *GroundMesh) SetFLIP_N_ROTATE_ROW(FLIP_N_ROTATE_ROW float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(FLIP_N_ROTATE_ROW)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// FLIP_N_ROTATE_TILE returns the FLIP_N_ROTATE_TILE property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#flip_n_rotate_tile
+func (g *GroundMesh) FLIP_N_ROTATE_TILE(FLIP_N_ROTATE_TILE float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(FLIP_N_ROTATE_TILE)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetFLIP_N_ROTATE_TILE sets the FLIP_N_ROTATE_TILE property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#flip_n_rotate_tile
+func (g *GroundMesh) SetFLIP_N_ROTATE_TILE(FLIP_N_ROTATE_TILE float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(FLIP_N_ROTATE_TILE)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// FLIP_ROW returns the FLIP_ROW property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#flip_row
+func (g *GroundMesh) FLIP_ROW(FLIP_ROW float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(FLIP_ROW)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetFLIP_ROW sets the FLIP_ROW property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#flip_row
+func (g *GroundMesh) SetFLIP_ROW(FLIP_ROW float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(FLIP_ROW)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// FLIP_TILE returns the FLIP_TILE property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#flip_tile
+func (g *GroundMesh) FLIP_TILE(FLIP_TILE float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(FLIP_TILE)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetFLIP_TILE sets the FLIP_TILE property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#flip_tile
+func (g *GroundMesh) SetFLIP_TILE(FLIP_TILE float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(FLIP_TILE)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// FRONTSIDE returns the FRONTSIDE property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#frontside
+func (g *GroundMesh) FRONTSIDE(FRONTSIDE float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(FRONTSIDE)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetFRONTSIDE sets the FRONTSIDE property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#frontside
+func (g *GroundMesh) SetFRONTSIDE(FRONTSIDE float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(FRONTSIDE)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// GenerateOctree returns the GenerateOctree property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#generateoctree
+func (g *GroundMesh) GenerateOctree(generateOctree bool) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(generateOctree)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetGenerateOctree sets the GenerateOctree property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#generateoctree
+func (g *GroundMesh) SetGenerateOctree(generateOctree bool) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(generateOctree)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// Geometry returns the Geometry property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#geometry
+func (g *GroundMesh) Geometry(geometry *Geometry) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(geometry.JSObject())
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetGeometry sets the Geometry property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#geometry
+func (g *GroundMesh) SetGeometry(geometry *Geometry) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(geometry.JSObject())
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// HasInstances returns the HasInstances property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#hasinstances
+func (g *GroundMesh) HasInstances(hasInstances bool) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(hasInstances)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetHasInstances sets the HasInstances property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#hasinstances
+func (g *GroundMesh) SetHasInstances(hasInstances bool) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(hasInstances)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// HasLODLevels returns the HasLODLevels property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#haslodlevels
+func (g *GroundMesh) HasLODLevels(hasLODLevels bool) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(hasLODLevels)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetHasLODLevels sets the HasLODLevels property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#haslodlevels
+func (g *GroundMesh) SetHasLODLevels(hasLODLevels bool) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(hasLODLevels)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// InstancedBuffers returns the InstancedBuffers property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#instancedbuffers
+func (g *GroundMesh) InstancedBuffers(instancedBuffers js.Value) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(instancedBuffers)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetInstancedBuffers sets the InstancedBuffers property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#instancedbuffers
+func (g *GroundMesh) SetInstancedBuffers(instancedBuffers js.Value) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(instancedBuffers)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// Instances returns the Instances property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#instances
+func (g *GroundMesh) Instances(instances *InstancedMesh) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(instances.JSObject())
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetInstances sets the Instances property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#instances
+func (g *GroundMesh) SetInstances(instances *InstancedMesh) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(instances.JSObject())
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// IsBlocked returns the IsBlocked property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#isblocked
+func (g *GroundMesh) IsBlocked(isBlocked bool) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(isBlocked)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetIsBlocked sets the IsBlocked property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#isblocked
+func (g *GroundMesh) SetIsBlocked(isBlocked bool) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(isBlocked)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// IsUnIndexed returns the IsUnIndexed property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#isunindexed
+func (g *GroundMesh) IsUnIndexed(isUnIndexed bool) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(isUnIndexed)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetIsUnIndexed sets the IsUnIndexed property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#isunindexed
+func (g *GroundMesh) SetIsUnIndexed(isUnIndexed bool) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(isUnIndexed)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// LEFT returns the LEFT property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#left
+func (g *GroundMesh) LEFT(LEFT float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(LEFT)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetLEFT sets the LEFT property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#left
+func (g *GroundMesh) SetLEFT(LEFT float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(LEFT)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// ManualUpdateOfWorldMatrixInstancedBuffer returns the ManualUpdateOfWorldMatrixInstancedBuffer property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#manualupdateofworldmatrixinstancedbuffer
+func (g *GroundMesh) ManualUpdateOfWorldMatrixInstancedBuffer(manualUpdateOfWorldMatrixInstancedBuffer bool) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(manualUpdateOfWorldMatrixInstancedBuffer)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetManualUpdateOfWorldMatrixInstancedBuffer sets the ManualUpdateOfWorldMatrixInstancedBuffer property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#manualupdateofworldmatrixinstancedbuffer
+func (g *GroundMesh) SetManualUpdateOfWorldMatrixInstancedBuffer(manualUpdateOfWorldMatrixInstancedBuffer bool) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(manualUpdateOfWorldMatrixInstancedBuffer)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// MorphTargetManager returns the MorphTargetManager property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#morphtargetmanager
+func (g *GroundMesh) MorphTargetManager(morphTargetManager *MorphTargetManager) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(morphTargetManager.JSObject())
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetMorphTargetManager sets the MorphTargetManager property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#morphtargetmanager
+func (g *GroundMesh) SetMorphTargetManager(morphTargetManager *MorphTargetManager) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(morphTargetManager.JSObject())
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// NO_CAP returns the NO_CAP property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#no_cap
+func (g *GroundMesh) NO_CAP(NO_CAP float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(NO_CAP)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetNO_CAP sets the NO_CAP property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#no_cap
+func (g *GroundMesh) SetNO_CAP(NO_CAP float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(NO_CAP)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// NO_FLIP returns the NO_FLIP property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#no_flip
+func (g *GroundMesh) NO_FLIP(NO_FLIP float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(NO_FLIP)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetNO_FLIP sets the NO_FLIP property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#no_flip
+func (g *GroundMesh) SetNO_FLIP(NO_FLIP float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(NO_FLIP)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// OnAfterRenderObservable returns the OnAfterRenderObservable property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#onafterrenderobservable
+func (g *GroundMesh) OnAfterRenderObservable(onAfterRenderObservable *Observable) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(onAfterRenderObservable.JSObject())
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterRenderObservable sets the OnAfterRenderObservable property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#onafterrenderobservable
+func (g *GroundMesh) SetOnAfterRenderObservable(onAfterRenderObservable *Observable) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(onAfterRenderObservable.JSObject())
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeBindObservable returns the OnBeforeBindObservable property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#onbeforebindobservable
+func (g *GroundMesh) OnBeforeBindObservable(onBeforeBindObservable *Observable) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(onBeforeBindObservable.JSObject())
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeBindObservable sets the OnBeforeBindObservable property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#onbeforebindobservable
+func (g *GroundMesh) SetOnBeforeBindObservable(onBeforeBindObservable *Observable) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(onBeforeBindObservable.JSObject())
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeDraw returns the OnBeforeDraw property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#onbeforedraw
+func (g *GroundMesh) OnBeforeDraw(onBeforeDraw func()) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(onBeforeDraw)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeDraw sets the OnBeforeDraw property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#onbeforedraw
+func (g *GroundMesh) SetOnBeforeDraw(onBeforeDraw func()) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(onBeforeDraw)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeDrawObservable returns the OnBeforeDrawObservable property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#onbeforedrawobservable
+func (g *GroundMesh) OnBeforeDrawObservable(onBeforeDrawObservable *Observable) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(onBeforeDrawObservable.JSObject())
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeDrawObservable sets the OnBeforeDrawObservable property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#onbeforedrawobservable
+func (g *GroundMesh) SetOnBeforeDrawObservable(onBeforeDrawObservable *Observable) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(onBeforeDrawObservable.JSObject())
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeRenderObservable returns the OnBeforeRenderObservable property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#onbeforerenderobservable
+func (g *GroundMesh) OnBeforeRenderObservable(onBeforeRenderObservable *Observable) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(onBeforeRenderObservable.JSObject())
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeRenderObservable sets the OnBeforeRenderObservable property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#onbeforerenderobservable
+func (g *GroundMesh) SetOnBeforeRenderObservable(onBeforeRenderObservable *Observable) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(onBeforeRenderObservable.JSObject())
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// OnLODLevelSelection returns the OnLODLevelSelection property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#onlodlevelselection
+func (g *GroundMesh) OnLODLevelSelection(onLODLevelSelection func()) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(onLODLevelSelection)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetOnLODLevelSelection sets the OnLODLevelSelection property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#onlodlevelselection
+func (g *GroundMesh) SetOnLODLevelSelection(onLODLevelSelection func()) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(onLODLevelSelection)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// OverrideMaterialSideOrientation returns the OverrideMaterialSideOrientation property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#overridematerialsideorientation
+func (g *GroundMesh) OverrideMaterialSideOrientation(overrideMaterialSideOrientation float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(overrideMaterialSideOrientation)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetOverrideMaterialSideOrientation sets the OverrideMaterialSideOrientation property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#overridematerialsideorientation
+func (g *GroundMesh) SetOverrideMaterialSideOrientation(overrideMaterialSideOrientation float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(overrideMaterialSideOrientation)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// OverridenInstanceCount returns the OverridenInstanceCount property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#overrideninstancecount
+func (g *GroundMesh) OverridenInstanceCount(overridenInstanceCount float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(overridenInstanceCount)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetOverridenInstanceCount sets the OverridenInstanceCount property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#overrideninstancecount
+func (g *GroundMesh) SetOverridenInstanceCount(overridenInstanceCount float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(overridenInstanceCount)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// RIGHT returns the RIGHT property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#right
+func (g *GroundMesh) RIGHT(RIGHT float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(RIGHT)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetRIGHT sets the RIGHT property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#right
+func (g *GroundMesh) SetRIGHT(RIGHT float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(RIGHT)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// ROTATE_ROW returns the ROTATE_ROW property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#rotate_row
+func (g *GroundMesh) ROTATE_ROW(ROTATE_ROW float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(ROTATE_ROW)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetROTATE_ROW sets the ROTATE_ROW property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#rotate_row
+func (g *GroundMesh) SetROTATE_ROW(ROTATE_ROW float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(ROTATE_ROW)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// ROTATE_TILE returns the ROTATE_TILE property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#rotate_tile
+func (g *GroundMesh) ROTATE_TILE(ROTATE_TILE float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(ROTATE_TILE)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetROTATE_TILE sets the ROTATE_TILE property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#rotate_tile
+func (g *GroundMesh) SetROTATE_TILE(ROTATE_TILE float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(ROTATE_TILE)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// Source returns the Source property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#source
+func (g *GroundMesh) Source(source *Mesh) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(source.JSObject())
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetSource sets the Source property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#source
+func (g *GroundMesh) SetSource(source *Mesh) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(source.JSObject())
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// Subdivisions returns the Subdivisions property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#subdivisions
+func (g *GroundMesh) Subdivisions(subdivisions float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(subdivisions)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetSubdivisions sets the Subdivisions property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#subdivisions
+func (g *GroundMesh) SetSubdivisions(subdivisions float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(subdivisions)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SubdivisionsX returns the SubdivisionsX property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#subdivisionsx
+func (g *GroundMesh) SubdivisionsX(subdivisionsX float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(subdivisionsX)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetSubdivisionsX sets the SubdivisionsX property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#subdivisionsx
+func (g *GroundMesh) SetSubdivisionsX(subdivisionsX float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(subdivisionsX)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SubdivisionsY returns the SubdivisionsY property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#subdivisionsy
+func (g *GroundMesh) SubdivisionsY(subdivisionsY float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(subdivisionsY)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetSubdivisionsY sets the SubdivisionsY property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#subdivisionsy
+func (g *GroundMesh) SetSubdivisionsY(subdivisionsY float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(subdivisionsY)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// TOP returns the TOP property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#top
+func (g *GroundMesh) TOP(TOP float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(TOP)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetTOP sets the TOP property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#top
+func (g *GroundMesh) SetTOP(TOP float64) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(TOP)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// WorldMatrixInstancedBuffer returns the WorldMatrixInstancedBuffer property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#worldmatrixinstancedbuffer
+func (g *GroundMesh) WorldMatrixInstancedBuffer(worldMatrixInstancedBuffer js.Value) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(worldMatrixInstancedBuffer)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+// SetWorldMatrixInstancedBuffer sets the WorldMatrixInstancedBuffer property of class GroundMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundmesh#worldmatrixinstancedbuffer
+func (g *GroundMesh) SetWorldMatrixInstancedBuffer(worldMatrixInstancedBuffer js.Value) *GroundMesh {
+	p := ba.ctx.Get("GroundMesh").New(worldMatrixInstancedBuffer)
+	return GroundMeshFromJSObject(p, ba.ctx)
+}
+
+*/

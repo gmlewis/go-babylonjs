@@ -27,4 +27,110 @@ func TagsFromJSObject(p js.Value, ctx js.Value) *Tags {
 	return &Tags{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// AddTagsTo calls the AddTagsTo method on the Tags object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tags#addtagsto
+func (t *Tags) AddTagsTo(obj interface{}, tagsString string) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, obj)
+	args = append(args, tagsString)
+
+	t.p.Call("AddTagsTo", args...)
+}
+
+// DisableFor calls the DisableFor method on the Tags object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tags#disablefor
+func (t *Tags) DisableFor(obj interface{}) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, obj)
+
+	t.p.Call("DisableFor", args...)
+}
+
+// EnableFor calls the EnableFor method on the Tags object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tags#enablefor
+func (t *Tags) EnableFor(obj interface{}) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, obj)
+
+	t.p.Call("EnableFor", args...)
+}
+
+// TagsGetTagsOpts contains optional parameters for Tags.GetTags.
+type TagsGetTagsOpts struct {
+	AsString *bool
+}
+
+// GetTags calls the GetTags method on the Tags object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tags#gettags
+func (t *Tags) GetTags(obj interface{}, opts *TagsGetTagsOpts) interface{} {
+	if opts == nil {
+		opts = &TagsGetTagsOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, obj)
+
+	if opts.AsString == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.AsString)
+	}
+
+	retVal := t.p.Call("GetTags", args...)
+	return retVal
+}
+
+// HasTags calls the HasTags method on the Tags object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tags#hastags
+func (t *Tags) HasTags(obj interface{}) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, obj)
+
+	retVal := t.p.Call("HasTags", args...)
+	return retVal.Bool()
+}
+
+// MatchesQuery calls the MatchesQuery method on the Tags object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tags#matchesquery
+func (t *Tags) MatchesQuery(obj interface{}, tagsQuery string) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, obj)
+	args = append(args, tagsQuery)
+
+	retVal := t.p.Call("MatchesQuery", args...)
+	return retVal.Bool()
+}
+
+// RemoveTagsFrom calls the RemoveTagsFrom method on the Tags object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tags#removetagsfrom
+func (t *Tags) RemoveTagsFrom(obj interface{}, tagsString string) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, obj)
+	args = append(args, tagsString)
+
+	t.p.Call("RemoveTagsFrom", args...)
+}
+
+/*
+
+ */

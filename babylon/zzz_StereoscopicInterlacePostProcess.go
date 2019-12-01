@@ -29,11 +29,9 @@ func StereoscopicInterlacePostProcessFromJSObject(p js.Value, ctx js.Value) *Ste
 
 // NewStereoscopicInterlacePostProcessOpts contains optional parameters for NewStereoscopicInterlacePostProcess.
 type NewStereoscopicInterlacePostProcessOpts struct {
-	SamplingMode *JSFloat64
-
-	Engine *Engine
-
-	Reusable *JSBool
+	SamplingMode *float64
+	Engine       *Engine
+	Reusable     *bool
 }
 
 // NewStereoscopicInterlacePostProcess returns a new StereoscopicInterlacePostProcess object.
@@ -44,8 +42,760 @@ func (ba *Babylon) NewStereoscopicInterlacePostProcess(name string, rigCameras *
 		opts = &NewStereoscopicInterlacePostProcessOpts{}
 	}
 
-	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(name, rigCameras.JSObject(), isStereoscopicHoriz, opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject())
+	args := make([]interface{}, 0, 3+3)
+
+	args = append(args, name)
+	args = append(args, rigCameras.JSObject())
+	args = append(args, isStereoscopicHoriz)
+
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+	if opts.Engine == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Engine.JSObject())
+	}
+	if opts.Reusable == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Reusable)
+	}
+
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(args...)
 	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// StereoscopicInterlacePostProcessActivateOpts contains optional parameters for StereoscopicInterlacePostProcess.Activate.
+type StereoscopicInterlacePostProcessActivateOpts struct {
+	SourceTexture     *InternalTexture
+	ForceDepthStencil *bool
+}
+
+// Activate calls the Activate method on the StereoscopicInterlacePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#activate
+func (s *StereoscopicInterlacePostProcess) Activate(camera *Camera, opts *StereoscopicInterlacePostProcessActivateOpts) *InternalTexture {
+	if opts == nil {
+		opts = &StereoscopicInterlacePostProcessActivateOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, camera.JSObject())
+
+	if opts.SourceTexture == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.SourceTexture.JSObject())
+	}
+	if opts.ForceDepthStencil == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceDepthStencil)
+	}
+
+	retVal := s.p.Call("activate", args...)
+	return InternalTextureFromJSObject(retVal, s.ctx)
+}
+
+// Apply calls the Apply method on the StereoscopicInterlacePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#apply
+func (s *StereoscopicInterlacePostProcess) Apply() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("apply", args...)
+	return EffectFromJSObject(retVal, s.ctx)
+}
+
+// StereoscopicInterlacePostProcessDisposeOpts contains optional parameters for StereoscopicInterlacePostProcess.Dispose.
+type StereoscopicInterlacePostProcessDisposeOpts struct {
+	Camera *Camera
+}
+
+// Dispose calls the Dispose method on the StereoscopicInterlacePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#dispose
+func (s *StereoscopicInterlacePostProcess) Dispose(opts *StereoscopicInterlacePostProcessDisposeOpts) {
+	if opts == nil {
+		opts = &StereoscopicInterlacePostProcessDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Camera == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Camera.JSObject())
+	}
+
+	s.p.Call("dispose", args...)
+}
+
+// GetCamera calls the GetCamera method on the StereoscopicInterlacePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#getcamera
+func (s *StereoscopicInterlacePostProcess) GetCamera() *Camera {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getCamera", args...)
+	return CameraFromJSObject(retVal, s.ctx)
+}
+
+// GetClassName calls the GetClassName method on the StereoscopicInterlacePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#getclassname
+func (s *StereoscopicInterlacePostProcess) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetEffect calls the GetEffect method on the StereoscopicInterlacePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#geteffect
+func (s *StereoscopicInterlacePostProcess) GetEffect() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getEffect", args...)
+	return EffectFromJSObject(retVal, s.ctx)
+}
+
+// GetEffectName calls the GetEffectName method on the StereoscopicInterlacePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#geteffectname
+func (s *StereoscopicInterlacePostProcess) GetEffectName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getEffectName", args...)
+	return retVal.String()
+}
+
+// GetEngine calls the GetEngine method on the StereoscopicInterlacePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#getengine
+func (s *StereoscopicInterlacePostProcess) GetEngine() *Engine {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getEngine", args...)
+	return EngineFromJSObject(retVal, s.ctx)
+}
+
+// IsReady calls the IsReady method on the StereoscopicInterlacePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#isready
+func (s *StereoscopicInterlacePostProcess) IsReady() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// IsReusable calls the IsReusable method on the StereoscopicInterlacePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#isreusable
+func (s *StereoscopicInterlacePostProcess) IsReusable() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("isReusable", args...)
+	return retVal.Bool()
+}
+
+// MarkTextureDirty calls the MarkTextureDirty method on the StereoscopicInterlacePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#marktexturedirty
+func (s *StereoscopicInterlacePostProcess) MarkTextureDirty() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("markTextureDirty", args...)
+}
+
+// ShareOutputWith calls the ShareOutputWith method on the StereoscopicInterlacePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#shareoutputwith
+func (s *StereoscopicInterlacePostProcess) ShareOutputWith(postProcess *PostProcess) *PostProcess {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, postProcess.JSObject())
+
+	retVal := s.p.Call("shareOutputWith", args...)
+	return PostProcessFromJSObject(retVal, s.ctx)
+}
+
+// StereoscopicInterlacePostProcessUpdateEffectOpts contains optional parameters for StereoscopicInterlacePostProcess.UpdateEffect.
+type StereoscopicInterlacePostProcessUpdateEffectOpts struct {
+	Defines         *string
+	Uniforms        *string
+	Samplers        *string
+	IndexParameters *interface{}
+	OnCompiled      *func()
+	OnError         *func()
+}
+
+// UpdateEffect calls the UpdateEffect method on the StereoscopicInterlacePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#updateeffect
+func (s *StereoscopicInterlacePostProcess) UpdateEffect(opts *StereoscopicInterlacePostProcessUpdateEffectOpts) {
+	if opts == nil {
+		opts = &StereoscopicInterlacePostProcessUpdateEffectOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+6)
+
+	if opts.Defines == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Defines)
+	}
+	if opts.Uniforms == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Uniforms)
+	}
+	if opts.Samplers == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Samplers)
+	}
+	if opts.IndexParameters == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.IndexParameters)
+	}
+	if opts.OnCompiled == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnCompiled)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+
+	s.p.Call("updateEffect", args...)
+}
+
+// UseOwnOutput calls the UseOwnOutput method on the StereoscopicInterlacePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#useownoutput
+func (s *StereoscopicInterlacePostProcess) UseOwnOutput() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("useOwnOutput", args...)
+}
+
+/*
+
+// AdaptScaleToCurrentViewport returns the AdaptScaleToCurrentViewport property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#adaptscaletocurrentviewport
+func (s *StereoscopicInterlacePostProcess) AdaptScaleToCurrentViewport(adaptScaleToCurrentViewport bool) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(adaptScaleToCurrentViewport)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAdaptScaleToCurrentViewport sets the AdaptScaleToCurrentViewport property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#adaptscaletocurrentviewport
+func (s *StereoscopicInterlacePostProcess) SetAdaptScaleToCurrentViewport(adaptScaleToCurrentViewport bool) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(adaptScaleToCurrentViewport)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// AlphaConstants returns the AlphaConstants property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#alphaconstants
+func (s *StereoscopicInterlacePostProcess) AlphaConstants(alphaConstants *Color4) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(alphaConstants.JSObject())
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaConstants sets the AlphaConstants property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#alphaconstants
+func (s *StereoscopicInterlacePostProcess) SetAlphaConstants(alphaConstants *Color4) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(alphaConstants.JSObject())
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// AlphaMode returns the AlphaMode property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#alphamode
+func (s *StereoscopicInterlacePostProcess) AlphaMode(alphaMode float64) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(alphaMode)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaMode sets the AlphaMode property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#alphamode
+func (s *StereoscopicInterlacePostProcess) SetAlphaMode(alphaMode float64) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(alphaMode)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// AlwaysForcePOT returns the AlwaysForcePOT property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#alwaysforcepot
+func (s *StereoscopicInterlacePostProcess) AlwaysForcePOT(alwaysForcePOT bool) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(alwaysForcePOT)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAlwaysForcePOT sets the AlwaysForcePOT property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#alwaysforcepot
+func (s *StereoscopicInterlacePostProcess) SetAlwaysForcePOT(alwaysForcePOT bool) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(alwaysForcePOT)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// Animations returns the Animations property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#animations
+func (s *StereoscopicInterlacePostProcess) Animations(animations *Animation) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(animations.JSObject())
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#animations
+func (s *StereoscopicInterlacePostProcess) SetAnimations(animations *Animation) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(animations.JSObject())
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// AspectRatio returns the AspectRatio property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#aspectratio
+func (s *StereoscopicInterlacePostProcess) AspectRatio(aspectRatio float64) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(aspectRatio)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAspectRatio sets the AspectRatio property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#aspectratio
+func (s *StereoscopicInterlacePostProcess) SetAspectRatio(aspectRatio float64) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(aspectRatio)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// AutoClear returns the AutoClear property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#autoclear
+func (s *StereoscopicInterlacePostProcess) AutoClear(autoClear bool) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(autoClear)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAutoClear sets the AutoClear property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#autoclear
+func (s *StereoscopicInterlacePostProcess) SetAutoClear(autoClear bool) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(autoClear)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// ClearColor returns the ClearColor property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#clearcolor
+func (s *StereoscopicInterlacePostProcess) ClearColor(clearColor *Color4) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(clearColor.JSObject())
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetClearColor sets the ClearColor property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#clearcolor
+func (s *StereoscopicInterlacePostProcess) SetClearColor(clearColor *Color4) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(clearColor.JSObject())
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// EnablePixelPerfectMode returns the EnablePixelPerfectMode property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#enablepixelperfectmode
+func (s *StereoscopicInterlacePostProcess) EnablePixelPerfectMode(enablePixelPerfectMode bool) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(enablePixelPerfectMode)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetEnablePixelPerfectMode sets the EnablePixelPerfectMode property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#enablepixelperfectmode
+func (s *StereoscopicInterlacePostProcess) SetEnablePixelPerfectMode(enablePixelPerfectMode bool) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(enablePixelPerfectMode)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// ForceFullscreenViewport returns the ForceFullscreenViewport property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#forcefullscreenviewport
+func (s *StereoscopicInterlacePostProcess) ForceFullscreenViewport(forceFullscreenViewport bool) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(forceFullscreenViewport)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetForceFullscreenViewport sets the ForceFullscreenViewport property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#forcefullscreenviewport
+func (s *StereoscopicInterlacePostProcess) SetForceFullscreenViewport(forceFullscreenViewport bool) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(forceFullscreenViewport)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// Height returns the Height property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#height
+func (s *StereoscopicInterlacePostProcess) Height(height float64) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(height)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetHeight sets the Height property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#height
+func (s *StereoscopicInterlacePostProcess) SetHeight(height float64) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(height)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// InputTexture returns the InputTexture property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#inputtexture
+func (s *StereoscopicInterlacePostProcess) InputTexture(inputTexture *InternalTexture) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(inputTexture.JSObject())
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetInputTexture sets the InputTexture property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#inputtexture
+func (s *StereoscopicInterlacePostProcess) SetInputTexture(inputTexture *InternalTexture) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(inputTexture.JSObject())
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#inspectablecustomproperties
+func (s *StereoscopicInterlacePostProcess) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(inspectableCustomProperties.JSObject())
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#inspectablecustomproperties
+func (s *StereoscopicInterlacePostProcess) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(inspectableCustomProperties.JSObject())
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// IsSupported returns the IsSupported property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#issupported
+func (s *StereoscopicInterlacePostProcess) IsSupported(isSupported bool) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(isSupported)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetIsSupported sets the IsSupported property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#issupported
+func (s *StereoscopicInterlacePostProcess) SetIsSupported(isSupported bool) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(isSupported)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#name
+func (s *StereoscopicInterlacePostProcess) Name(name string) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(name)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#name
+func (s *StereoscopicInterlacePostProcess) SetName(name string) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(name)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnActivate returns the OnActivate property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#onactivate
+func (s *StereoscopicInterlacePostProcess) OnActivate(onActivate func()) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(onActivate)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnActivate sets the OnActivate property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#onactivate
+func (s *StereoscopicInterlacePostProcess) SetOnActivate(onActivate func()) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(onActivate)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnActivateObservable returns the OnActivateObservable property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#onactivateobservable
+func (s *StereoscopicInterlacePostProcess) OnActivateObservable(onActivateObservable *Observable) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(onActivateObservable.JSObject())
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnActivateObservable sets the OnActivateObservable property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#onactivateobservable
+func (s *StereoscopicInterlacePostProcess) SetOnActivateObservable(onActivateObservable *Observable) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(onActivateObservable.JSObject())
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnAfterRender returns the OnAfterRender property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#onafterrender
+func (s *StereoscopicInterlacePostProcess) OnAfterRender(onAfterRender func()) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(onAfterRender)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterRender sets the OnAfterRender property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#onafterrender
+func (s *StereoscopicInterlacePostProcess) SetOnAfterRender(onAfterRender func()) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(onAfterRender)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnAfterRenderObservable returns the OnAfterRenderObservable property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#onafterrenderobservable
+func (s *StereoscopicInterlacePostProcess) OnAfterRenderObservable(onAfterRenderObservable *Observable) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(onAfterRenderObservable.JSObject())
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterRenderObservable sets the OnAfterRenderObservable property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#onafterrenderobservable
+func (s *StereoscopicInterlacePostProcess) SetOnAfterRenderObservable(onAfterRenderObservable *Observable) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(onAfterRenderObservable.JSObject())
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnApply returns the OnApply property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#onapply
+func (s *StereoscopicInterlacePostProcess) OnApply(onApply func()) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(onApply)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnApply sets the OnApply property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#onapply
+func (s *StereoscopicInterlacePostProcess) SetOnApply(onApply func()) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(onApply)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnApplyObservable returns the OnApplyObservable property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#onapplyobservable
+func (s *StereoscopicInterlacePostProcess) OnApplyObservable(onApplyObservable *Observable) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(onApplyObservable.JSObject())
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnApplyObservable sets the OnApplyObservable property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#onapplyobservable
+func (s *StereoscopicInterlacePostProcess) SetOnApplyObservable(onApplyObservable *Observable) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(onApplyObservable.JSObject())
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeRender returns the OnBeforeRender property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#onbeforerender
+func (s *StereoscopicInterlacePostProcess) OnBeforeRender(onBeforeRender func()) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(onBeforeRender)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeRender sets the OnBeforeRender property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#onbeforerender
+func (s *StereoscopicInterlacePostProcess) SetOnBeforeRender(onBeforeRender func()) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(onBeforeRender)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeRenderObservable returns the OnBeforeRenderObservable property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#onbeforerenderobservable
+func (s *StereoscopicInterlacePostProcess) OnBeforeRenderObservable(onBeforeRenderObservable *Observable) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(onBeforeRenderObservable.JSObject())
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeRenderObservable sets the OnBeforeRenderObservable property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#onbeforerenderobservable
+func (s *StereoscopicInterlacePostProcess) SetOnBeforeRenderObservable(onBeforeRenderObservable *Observable) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(onBeforeRenderObservable.JSObject())
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnSizeChanged returns the OnSizeChanged property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#onsizechanged
+func (s *StereoscopicInterlacePostProcess) OnSizeChanged(onSizeChanged func()) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(onSizeChanged)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnSizeChanged sets the OnSizeChanged property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#onsizechanged
+func (s *StereoscopicInterlacePostProcess) SetOnSizeChanged(onSizeChanged func()) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(onSizeChanged)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnSizeChangedObservable returns the OnSizeChangedObservable property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#onsizechangedobservable
+func (s *StereoscopicInterlacePostProcess) OnSizeChangedObservable(onSizeChangedObservable *Observable) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(onSizeChangedObservable.JSObject())
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnSizeChangedObservable sets the OnSizeChangedObservable property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#onsizechangedobservable
+func (s *StereoscopicInterlacePostProcess) SetOnSizeChangedObservable(onSizeChangedObservable *Observable) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(onSizeChangedObservable.JSObject())
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// RenderTargetSamplingMode returns the RenderTargetSamplingMode property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#rendertargetsamplingmode
+func (s *StereoscopicInterlacePostProcess) RenderTargetSamplingMode(renderTargetSamplingMode float64) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(renderTargetSamplingMode)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetRenderTargetSamplingMode sets the RenderTargetSamplingMode property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#rendertargetsamplingmode
+func (s *StereoscopicInterlacePostProcess) SetRenderTargetSamplingMode(renderTargetSamplingMode float64) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(renderTargetSamplingMode)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// Samples returns the Samples property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#samples
+func (s *StereoscopicInterlacePostProcess) Samples(samples float64) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(samples)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetSamples sets the Samples property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#samples
+func (s *StereoscopicInterlacePostProcess) SetSamples(samples float64) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(samples)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// ScaleMode returns the ScaleMode property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#scalemode
+func (s *StereoscopicInterlacePostProcess) ScaleMode(scaleMode float64) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(scaleMode)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetScaleMode sets the ScaleMode property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#scalemode
+func (s *StereoscopicInterlacePostProcess) SetScaleMode(scaleMode float64) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(scaleMode)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// TexelSize returns the TexelSize property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#texelsize
+func (s *StereoscopicInterlacePostProcess) TexelSize(texelSize *Vector2) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(texelSize.JSObject())
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetTexelSize sets the TexelSize property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#texelsize
+func (s *StereoscopicInterlacePostProcess) SetTexelSize(texelSize *Vector2) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(texelSize.JSObject())
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#uniqueid
+func (s *StereoscopicInterlacePostProcess) UniqueId(uniqueId float64) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(uniqueId)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#uniqueid
+func (s *StereoscopicInterlacePostProcess) SetUniqueId(uniqueId float64) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(uniqueId)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// Width returns the Width property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#width
+func (s *StereoscopicInterlacePostProcess) Width(width float64) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(width)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetWidth sets the Width property of class StereoscopicInterlacePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicinterlacepostprocess#width
+func (s *StereoscopicInterlacePostProcess) SetWidth(width float64) *StereoscopicInterlacePostProcess {
+	p := ba.ctx.Get("StereoscopicInterlacePostProcess").New(width)
+	return StereoscopicInterlacePostProcessFromJSObject(p, ba.ctx)
+}
+
+*/

@@ -33,8 +33,129 @@ func PostProcessRenderPipelineManagerFromJSObject(p js.Value, ctx js.Value) *Pos
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipelinemanager
 func (ba *Babylon) NewPostProcessRenderPipelineManager() *PostProcessRenderPipelineManager {
-	p := ba.ctx.Get("PostProcessRenderPipelineManager").New()
+
+	args := make([]interface{}, 0, 0+0)
+
+	p := ba.ctx.Get("PostProcessRenderPipelineManager").New(args...)
 	return PostProcessRenderPipelineManagerFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AddPipeline calls the AddPipeline method on the PostProcessRenderPipelineManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipelinemanager#addpipeline
+func (p *PostProcessRenderPipelineManager) AddPipeline(renderPipeline *PostProcessRenderPipeline) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, renderPipeline.JSObject())
+
+	p.p.Call("addPipeline", args...)
+}
+
+// PostProcessRenderPipelineManagerAttachCamerasToRenderPipelineOpts contains optional parameters for PostProcessRenderPipelineManager.AttachCamerasToRenderPipeline.
+type PostProcessRenderPipelineManagerAttachCamerasToRenderPipelineOpts struct {
+	Unique *bool
+}
+
+// AttachCamerasToRenderPipeline calls the AttachCamerasToRenderPipeline method on the PostProcessRenderPipelineManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipelinemanager#attachcamerastorenderpipeline
+func (p *PostProcessRenderPipelineManager) AttachCamerasToRenderPipeline(renderPipelineName string, cameras interface{}, opts *PostProcessRenderPipelineManagerAttachCamerasToRenderPipelineOpts) {
+	if opts == nil {
+		opts = &PostProcessRenderPipelineManagerAttachCamerasToRenderPipelineOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, renderPipelineName)
+	args = append(args, cameras)
+
+	if opts.Unique == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Unique)
+	}
+
+	p.p.Call("attachCamerasToRenderPipeline", args...)
+}
+
+// DetachCamerasFromRenderPipeline calls the DetachCamerasFromRenderPipeline method on the PostProcessRenderPipelineManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipelinemanager#detachcamerasfromrenderpipeline
+func (p *PostProcessRenderPipelineManager) DetachCamerasFromRenderPipeline(renderPipelineName string, cameras interface{}) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, renderPipelineName)
+	args = append(args, cameras)
+
+	p.p.Call("detachCamerasFromRenderPipeline", args...)
+}
+
+// DisableEffectInPipeline calls the DisableEffectInPipeline method on the PostProcessRenderPipelineManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipelinemanager#disableeffectinpipeline
+func (p *PostProcessRenderPipelineManager) DisableEffectInPipeline(renderPipelineName string, renderEffectName string, cameras interface{}) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, renderPipelineName)
+	args = append(args, renderEffectName)
+	args = append(args, cameras)
+
+	p.p.Call("disableEffectInPipeline", args...)
+}
+
+// Dispose calls the Dispose method on the PostProcessRenderPipelineManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipelinemanager#dispose
+func (p *PostProcessRenderPipelineManager) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("dispose", args...)
+}
+
+// EnableEffectInPipeline calls the EnableEffectInPipeline method on the PostProcessRenderPipelineManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipelinemanager#enableeffectinpipeline
+func (p *PostProcessRenderPipelineManager) EnableEffectInPipeline(renderPipelineName string, renderEffectName string, cameras interface{}) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, renderPipelineName)
+	args = append(args, renderEffectName)
+	args = append(args, cameras)
+
+	p.p.Call("enableEffectInPipeline", args...)
+}
+
+// Update calls the Update method on the PostProcessRenderPipelineManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipelinemanager#update
+func (p *PostProcessRenderPipelineManager) Update() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("update", args...)
+}
+
+/*
+
+// SupportedPipelines returns the SupportedPipelines property of class PostProcessRenderPipelineManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipelinemanager#supportedpipelines
+func (p *PostProcessRenderPipelineManager) SupportedPipelines(supportedPipelines *PostProcessRenderPipeline) *PostProcessRenderPipelineManager {
+	p := ba.ctx.Get("PostProcessRenderPipelineManager").New(supportedPipelines.JSObject())
+	return PostProcessRenderPipelineManagerFromJSObject(p, ba.ctx)
+}
+
+// SetSupportedPipelines sets the SupportedPipelines property of class PostProcessRenderPipelineManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.postprocessrenderpipelinemanager#supportedpipelines
+func (p *PostProcessRenderPipelineManager) SetSupportedPipelines(supportedPipelines *PostProcessRenderPipeline) *PostProcessRenderPipelineManager {
+	p := ba.ctx.Get("PostProcessRenderPipelineManager").New(supportedPipelines.JSObject())
+	return PostProcessRenderPipelineManagerFromJSObject(p, ba.ctx)
+}
+
+*/

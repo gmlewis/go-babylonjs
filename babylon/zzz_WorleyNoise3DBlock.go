@@ -31,8 +31,683 @@ func WorleyNoise3DBlockFromJSObject(p js.Value, ctx js.Value) *WorleyNoise3DBloc
 //
 // https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock
 func (ba *Babylon) NewWorleyNoise3DBlock(name string) *WorleyNoise3DBlock {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	p := ba.ctx.Get("WorleyNoise3DBlock").New(args...)
+	return WorleyNoise3DBlockFromJSObject(p, ba.ctx)
+}
+
+// AutoConfigure calls the AutoConfigure method on the WorleyNoise3DBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#autoconfigure
+func (w *WorleyNoise3DBlock) AutoConfigure(material *NodeMaterial) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, material.JSObject())
+
+	w.p.Call("autoConfigure", args...)
+}
+
+// WorleyNoise3DBlockBindOpts contains optional parameters for WorleyNoise3DBlock.Bind.
+type WorleyNoise3DBlockBindOpts struct {
+	Mesh *Mesh
+}
+
+// Bind calls the Bind method on the WorleyNoise3DBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#bind
+func (w *WorleyNoise3DBlock) Bind(effect *Effect, nodeMaterial *NodeMaterial, opts *WorleyNoise3DBlockBindOpts) {
+	if opts == nil {
+		opts = &WorleyNoise3DBlockBindOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, effect.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	w.p.Call("bind", args...)
+}
+
+// Build calls the Build method on the WorleyNoise3DBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#build
+func (w *WorleyNoise3DBlock) Build(state *NodeMaterialBuildState, activeBlocks *NodeMaterialBlock) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, state.JSObject())
+	args = append(args, activeBlocks.JSObject())
+
+	retVal := w.p.Call("build", args...)
+	return retVal.Bool()
+}
+
+// WorleyNoise3DBlockCloneOpts contains optional parameters for WorleyNoise3DBlock.Clone.
+type WorleyNoise3DBlockCloneOpts struct {
+	RootUrl *string
+}
+
+// Clone calls the Clone method on the WorleyNoise3DBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#clone
+func (w *WorleyNoise3DBlock) Clone(scene *Scene, opts *WorleyNoise3DBlockCloneOpts) *NodeMaterialBlock {
+	if opts == nil {
+		opts = &WorleyNoise3DBlockCloneOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, scene.JSObject())
+
+	if opts.RootUrl == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RootUrl)
+	}
+
+	retVal := w.p.Call("clone", args...)
+	return NodeMaterialBlockFromJSObject(retVal, w.ctx)
+}
+
+// WorleyNoise3DBlockConnectToOpts contains optional parameters for WorleyNoise3DBlock.ConnectTo.
+type WorleyNoise3DBlockConnectToOpts struct {
+	Options js.Value
+}
+
+// ConnectTo calls the ConnectTo method on the WorleyNoise3DBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#connectto
+func (w *WorleyNoise3DBlock) ConnectTo(other *NodeMaterialBlock, opts *WorleyNoise3DBlockConnectToOpts) *WorleyNoise3DBlock {
+	if opts == nil {
+		opts = &WorleyNoise3DBlockConnectToOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, other.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	retVal := w.p.Call("connectTo", args...)
+	return WorleyNoise3DBlockFromJSObject(retVal, w.ctx)
+}
+
+// Dispose calls the Dispose method on the WorleyNoise3DBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#dispose
+func (w *WorleyNoise3DBlock) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	w.p.Call("dispose", args...)
+}
+
+// GetClassName calls the GetClassName method on the WorleyNoise3DBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#getclassname
+func (w *WorleyNoise3DBlock) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := w.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// WorleyNoise3DBlockGetFirstAvailableInputOpts contains optional parameters for WorleyNoise3DBlock.GetFirstAvailableInput.
+type WorleyNoise3DBlockGetFirstAvailableInputOpts struct {
+	ForOutput *NodeMaterialConnectionPoint
+}
+
+// GetFirstAvailableInput calls the GetFirstAvailableInput method on the WorleyNoise3DBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#getfirstavailableinput
+func (w *WorleyNoise3DBlock) GetFirstAvailableInput(opts *WorleyNoise3DBlockGetFirstAvailableInputOpts) *NodeMaterialConnectionPoint {
+	if opts == nil {
+		opts = &WorleyNoise3DBlockGetFirstAvailableInputOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForOutput == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForOutput.JSObject())
+	}
+
+	retVal := w.p.Call("getFirstAvailableInput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, w.ctx)
+}
+
+// WorleyNoise3DBlockGetFirstAvailableOutputOpts contains optional parameters for WorleyNoise3DBlock.GetFirstAvailableOutput.
+type WorleyNoise3DBlockGetFirstAvailableOutputOpts struct {
+	ForBlock *NodeMaterialBlock
+}
+
+// GetFirstAvailableOutput calls the GetFirstAvailableOutput method on the WorleyNoise3DBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#getfirstavailableoutput
+func (w *WorleyNoise3DBlock) GetFirstAvailableOutput(opts *WorleyNoise3DBlockGetFirstAvailableOutputOpts) *NodeMaterialConnectionPoint {
+	if opts == nil {
+		opts = &WorleyNoise3DBlockGetFirstAvailableOutputOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForBlock == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForBlock.JSObject())
+	}
+
+	retVal := w.p.Call("getFirstAvailableOutput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, w.ctx)
+}
+
+// GetInputByName calls the GetInputByName method on the WorleyNoise3DBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#getinputbyname
+func (w *WorleyNoise3DBlock) GetInputByName(name string) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := w.p.Call("getInputByName", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, w.ctx)
+}
+
+// GetOutputByName calls the GetOutputByName method on the WorleyNoise3DBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#getoutputbyname
+func (w *WorleyNoise3DBlock) GetOutputByName(name string) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := w.p.Call("getOutputByName", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, w.ctx)
+}
+
+// GetSiblingOutput calls the GetSiblingOutput method on the WorleyNoise3DBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#getsiblingoutput
+func (w *WorleyNoise3DBlock) GetSiblingOutput(current *NodeMaterialConnectionPoint) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, current.JSObject())
+
+	retVal := w.p.Call("getSiblingOutput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, w.ctx)
+}
+
+// Initialize calls the Initialize method on the WorleyNoise3DBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#initialize
+func (w *WorleyNoise3DBlock) Initialize(state *NodeMaterialBuildState) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, state.JSObject())
+
+	w.p.Call("initialize", args...)
+}
+
+// WorleyNoise3DBlockInitializeDefinesOpts contains optional parameters for WorleyNoise3DBlock.InitializeDefines.
+type WorleyNoise3DBlockInitializeDefinesOpts struct {
+	UseInstances *bool
+}
+
+// InitializeDefines calls the InitializeDefines method on the WorleyNoise3DBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#initializedefines
+func (w *WorleyNoise3DBlock) InitializeDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *WorleyNoise3DBlockInitializeDefinesOpts) {
+	if opts == nil {
+		opts = &WorleyNoise3DBlockInitializeDefinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	w.p.Call("initializeDefines", args...)
+}
+
+// WorleyNoise3DBlockIsReadyOpts contains optional parameters for WorleyNoise3DBlock.IsReady.
+type WorleyNoise3DBlockIsReadyOpts struct {
+	UseInstances *bool
+}
+
+// IsReady calls the IsReady method on the WorleyNoise3DBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#isready
+func (w *WorleyNoise3DBlock) IsReady(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *WorleyNoise3DBlockIsReadyOpts) bool {
+	if opts == nil {
+		opts = &WorleyNoise3DBlockIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := w.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// WorleyNoise3DBlockPrepareDefinesOpts contains optional parameters for WorleyNoise3DBlock.PrepareDefines.
+type WorleyNoise3DBlockPrepareDefinesOpts struct {
+	UseInstances *bool
+}
+
+// PrepareDefines calls the PrepareDefines method on the WorleyNoise3DBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#preparedefines
+func (w *WorleyNoise3DBlock) PrepareDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *WorleyNoise3DBlockPrepareDefinesOpts) {
+	if opts == nil {
+		opts = &WorleyNoise3DBlockPrepareDefinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	w.p.Call("prepareDefines", args...)
+}
+
+// ProvideFallbacks calls the ProvideFallbacks method on the WorleyNoise3DBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#providefallbacks
+func (w *WorleyNoise3DBlock) ProvideFallbacks(mesh *AbstractMesh, fallbacks *EffectFallbacks) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, fallbacks.JSObject())
+
+	w.p.Call("provideFallbacks", args...)
+}
+
+// WorleyNoise3DBlockRegisterInputOpts contains optional parameters for WorleyNoise3DBlock.RegisterInput.
+type WorleyNoise3DBlockRegisterInputOpts struct {
+	IsOptional *bool
+	Target     js.Value
+}
+
+// RegisterInput calls the RegisterInput method on the WorleyNoise3DBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#registerinput
+func (w *WorleyNoise3DBlock) RegisterInput(name string, jsType js.Value, opts *WorleyNoise3DBlockRegisterInputOpts) *WorleyNoise3DBlock {
+	if opts == nil {
+		opts = &WorleyNoise3DBlockRegisterInputOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+2)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	if opts.IsOptional == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IsOptional)
+	}
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+
+	retVal := w.p.Call("registerInput", args...)
+	return WorleyNoise3DBlockFromJSObject(retVal, w.ctx)
+}
+
+// WorleyNoise3DBlockRegisterOutputOpts contains optional parameters for WorleyNoise3DBlock.RegisterOutput.
+type WorleyNoise3DBlockRegisterOutputOpts struct {
+	Target js.Value
+}
+
+// RegisterOutput calls the RegisterOutput method on the WorleyNoise3DBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#registeroutput
+func (w *WorleyNoise3DBlock) RegisterOutput(name string, jsType js.Value, opts *WorleyNoise3DBlockRegisterOutputOpts) *WorleyNoise3DBlock {
+	if opts == nil {
+		opts = &WorleyNoise3DBlockRegisterOutputOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+
+	retVal := w.p.Call("registerOutput", args...)
+	return WorleyNoise3DBlockFromJSObject(retVal, w.ctx)
+}
+
+// ReplaceRepeatableContent calls the ReplaceRepeatableContent method on the WorleyNoise3DBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#replacerepeatablecontent
+func (w *WorleyNoise3DBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterialBuildState, fragmentShaderState *NodeMaterialBuildState, mesh *AbstractMesh, defines js.Value) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, vertexShaderState.JSObject())
+	args = append(args, fragmentShaderState.JSObject())
+	args = append(args, mesh.JSObject())
+	args = append(args, defines)
+
+	w.p.Call("replaceRepeatableContent", args...)
+}
+
+// Serialize calls the Serialize method on the WorleyNoise3DBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#serialize
+func (w *WorleyNoise3DBlock) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := w.p.Call("serialize", args...)
+	return retVal
+}
+
+// UpdateUniformsAndSamples calls the UpdateUniformsAndSamples method on the WorleyNoise3DBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#updateuniformsandsamples
+func (w *WorleyNoise3DBlock) UpdateUniformsAndSamples(state *NodeMaterialBuildState, nodeMaterial *NodeMaterial, defines js.Value, uniformBuffers string) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, state.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+	args = append(args, uniformBuffers)
+
+	w.p.Call("updateUniformsAndSamples", args...)
+}
+
+// _deserialize calls the _deserialize method on the WorleyNoise3DBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#_deserialize
+func (w *WorleyNoise3DBlock) _deserialize(serializationObject interface{}, scene *Scene, rootUrl string) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, serializationObject)
+	args = append(args, scene.JSObject())
+	args = append(args, rootUrl)
+
+	w.p.Call("_deserialize", args...)
+}
+
+/*
+
+// BuildId returns the BuildId property of class WorleyNoise3DBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#buildid
+func (w *WorleyNoise3DBlock) BuildId(buildId float64) *WorleyNoise3DBlock {
+	p := ba.ctx.Get("WorleyNoise3DBlock").New(buildId)
+	return WorleyNoise3DBlockFromJSObject(p, ba.ctx)
+}
+
+// SetBuildId sets the BuildId property of class WorleyNoise3DBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#buildid
+func (w *WorleyNoise3DBlock) SetBuildId(buildId float64) *WorleyNoise3DBlock {
+	p := ba.ctx.Get("WorleyNoise3DBlock").New(buildId)
+	return WorleyNoise3DBlockFromJSObject(p, ba.ctx)
+}
+
+// Comments returns the Comments property of class WorleyNoise3DBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#comments
+func (w *WorleyNoise3DBlock) Comments(comments string) *WorleyNoise3DBlock {
+	p := ba.ctx.Get("WorleyNoise3DBlock").New(comments)
+	return WorleyNoise3DBlockFromJSObject(p, ba.ctx)
+}
+
+// SetComments sets the Comments property of class WorleyNoise3DBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#comments
+func (w *WorleyNoise3DBlock) SetComments(comments string) *WorleyNoise3DBlock {
+	p := ba.ctx.Get("WorleyNoise3DBlock").New(comments)
+	return WorleyNoise3DBlockFromJSObject(p, ba.ctx)
+}
+
+// Inputs returns the Inputs property of class WorleyNoise3DBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#inputs
+func (w *WorleyNoise3DBlock) Inputs(inputs *NodeMaterialConnectionPoint) *WorleyNoise3DBlock {
+	p := ba.ctx.Get("WorleyNoise3DBlock").New(inputs.JSObject())
+	return WorleyNoise3DBlockFromJSObject(p, ba.ctx)
+}
+
+// SetInputs sets the Inputs property of class WorleyNoise3DBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#inputs
+func (w *WorleyNoise3DBlock) SetInputs(inputs *NodeMaterialConnectionPoint) *WorleyNoise3DBlock {
+	p := ba.ctx.Get("WorleyNoise3DBlock").New(inputs.JSObject())
+	return WorleyNoise3DBlockFromJSObject(p, ba.ctx)
+}
+
+// IsFinalMerger returns the IsFinalMerger property of class WorleyNoise3DBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#isfinalmerger
+func (w *WorleyNoise3DBlock) IsFinalMerger(isFinalMerger bool) *WorleyNoise3DBlock {
+	p := ba.ctx.Get("WorleyNoise3DBlock").New(isFinalMerger)
+	return WorleyNoise3DBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsFinalMerger sets the IsFinalMerger property of class WorleyNoise3DBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#isfinalmerger
+func (w *WorleyNoise3DBlock) SetIsFinalMerger(isFinalMerger bool) *WorleyNoise3DBlock {
+	p := ba.ctx.Get("WorleyNoise3DBlock").New(isFinalMerger)
+	return WorleyNoise3DBlockFromJSObject(p, ba.ctx)
+}
+
+// IsInput returns the IsInput property of class WorleyNoise3DBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#isinput
+func (w *WorleyNoise3DBlock) IsInput(isInput bool) *WorleyNoise3DBlock {
+	p := ba.ctx.Get("WorleyNoise3DBlock").New(isInput)
+	return WorleyNoise3DBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsInput sets the IsInput property of class WorleyNoise3DBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#isinput
+func (w *WorleyNoise3DBlock) SetIsInput(isInput bool) *WorleyNoise3DBlock {
+	p := ba.ctx.Get("WorleyNoise3DBlock").New(isInput)
+	return WorleyNoise3DBlockFromJSObject(p, ba.ctx)
+}
+
+// IsUnique returns the IsUnique property of class WorleyNoise3DBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#isunique
+func (w *WorleyNoise3DBlock) IsUnique(isUnique bool) *WorleyNoise3DBlock {
+	p := ba.ctx.Get("WorleyNoise3DBlock").New(isUnique)
+	return WorleyNoise3DBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsUnique sets the IsUnique property of class WorleyNoise3DBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#isunique
+func (w *WorleyNoise3DBlock) SetIsUnique(isUnique bool) *WorleyNoise3DBlock {
+	p := ba.ctx.Get("WorleyNoise3DBlock").New(isUnique)
+	return WorleyNoise3DBlockFromJSObject(p, ba.ctx)
+}
+
+// Jitter returns the Jitter property of class WorleyNoise3DBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#jitter
+func (w *WorleyNoise3DBlock) Jitter(jitter *NodeMaterialConnectionPoint) *WorleyNoise3DBlock {
+	p := ba.ctx.Get("WorleyNoise3DBlock").New(jitter.JSObject())
+	return WorleyNoise3DBlockFromJSObject(p, ba.ctx)
+}
+
+// SetJitter sets the Jitter property of class WorleyNoise3DBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#jitter
+func (w *WorleyNoise3DBlock) SetJitter(jitter *NodeMaterialConnectionPoint) *WorleyNoise3DBlock {
+	p := ba.ctx.Get("WorleyNoise3DBlock").New(jitter.JSObject())
+	return WorleyNoise3DBlockFromJSObject(p, ba.ctx)
+}
+
+// ManhattanDistance returns the ManhattanDistance property of class WorleyNoise3DBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#manhattandistance
+func (w *WorleyNoise3DBlock) ManhattanDistance(manhattanDistance bool) *WorleyNoise3DBlock {
+	p := ba.ctx.Get("WorleyNoise3DBlock").New(manhattanDistance)
+	return WorleyNoise3DBlockFromJSObject(p, ba.ctx)
+}
+
+// SetManhattanDistance sets the ManhattanDistance property of class WorleyNoise3DBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#manhattandistance
+func (w *WorleyNoise3DBlock) SetManhattanDistance(manhattanDistance bool) *WorleyNoise3DBlock {
+	p := ba.ctx.Get("WorleyNoise3DBlock").New(manhattanDistance)
+	return WorleyNoise3DBlockFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class WorleyNoise3DBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#name
+func (w *WorleyNoise3DBlock) Name(name string) *WorleyNoise3DBlock {
 	p := ba.ctx.Get("WorleyNoise3DBlock").New(name)
 	return WorleyNoise3DBlockFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetName sets the Name property of class WorleyNoise3DBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#name
+func (w *WorleyNoise3DBlock) SetName(name string) *WorleyNoise3DBlock {
+	p := ba.ctx.Get("WorleyNoise3DBlock").New(name)
+	return WorleyNoise3DBlockFromJSObject(p, ba.ctx)
+}
+
+// Output returns the Output property of class WorleyNoise3DBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#output
+func (w *WorleyNoise3DBlock) Output(output *NodeMaterialConnectionPoint) *WorleyNoise3DBlock {
+	p := ba.ctx.Get("WorleyNoise3DBlock").New(output.JSObject())
+	return WorleyNoise3DBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOutput sets the Output property of class WorleyNoise3DBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#output
+func (w *WorleyNoise3DBlock) SetOutput(output *NodeMaterialConnectionPoint) *WorleyNoise3DBlock {
+	p := ba.ctx.Get("WorleyNoise3DBlock").New(output.JSObject())
+	return WorleyNoise3DBlockFromJSObject(p, ba.ctx)
+}
+
+// Outputs returns the Outputs property of class WorleyNoise3DBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#outputs
+func (w *WorleyNoise3DBlock) Outputs(outputs *NodeMaterialConnectionPoint) *WorleyNoise3DBlock {
+	p := ba.ctx.Get("WorleyNoise3DBlock").New(outputs.JSObject())
+	return WorleyNoise3DBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOutputs sets the Outputs property of class WorleyNoise3DBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#outputs
+func (w *WorleyNoise3DBlock) SetOutputs(outputs *NodeMaterialConnectionPoint) *WorleyNoise3DBlock {
+	p := ba.ctx.Get("WorleyNoise3DBlock").New(outputs.JSObject())
+	return WorleyNoise3DBlockFromJSObject(p, ba.ctx)
+}
+
+// Seed returns the Seed property of class WorleyNoise3DBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#seed
+func (w *WorleyNoise3DBlock) Seed(seed *NodeMaterialConnectionPoint) *WorleyNoise3DBlock {
+	p := ba.ctx.Get("WorleyNoise3DBlock").New(seed.JSObject())
+	return WorleyNoise3DBlockFromJSObject(p, ba.ctx)
+}
+
+// SetSeed sets the Seed property of class WorleyNoise3DBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#seed
+func (w *WorleyNoise3DBlock) SetSeed(seed *NodeMaterialConnectionPoint) *WorleyNoise3DBlock {
+	p := ba.ctx.Get("WorleyNoise3DBlock").New(seed.JSObject())
+	return WorleyNoise3DBlockFromJSObject(p, ba.ctx)
+}
+
+// Target returns the Target property of class WorleyNoise3DBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#target
+func (w *WorleyNoise3DBlock) Target(target js.Value) *WorleyNoise3DBlock {
+	p := ba.ctx.Get("WorleyNoise3DBlock").New(target)
+	return WorleyNoise3DBlockFromJSObject(p, ba.ctx)
+}
+
+// SetTarget sets the Target property of class WorleyNoise3DBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#target
+func (w *WorleyNoise3DBlock) SetTarget(target js.Value) *WorleyNoise3DBlock {
+	p := ba.ctx.Get("WorleyNoise3DBlock").New(target)
+	return WorleyNoise3DBlockFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class WorleyNoise3DBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#uniqueid
+func (w *WorleyNoise3DBlock) UniqueId(uniqueId float64) *WorleyNoise3DBlock {
+	p := ba.ctx.Get("WorleyNoise3DBlock").New(uniqueId)
+	return WorleyNoise3DBlockFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class WorleyNoise3DBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.worleynoise3dblock#uniqueid
+func (w *WorleyNoise3DBlock) SetUniqueId(uniqueId float64) *WorleyNoise3DBlock {
+	p := ba.ctx.Get("WorleyNoise3DBlock").New(uniqueId)
+	return WorleyNoise3DBlockFromJSObject(p, ba.ctx)
+}
+
+*/

@@ -29,4 +29,598 @@ func SceneLoaderFromJSObject(p js.Value, ctx js.Value) *SceneLoader {
 	return &SceneLoader{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// SceneLoaderAppendOpts contains optional parameters for SceneLoader.Append.
+type SceneLoaderAppendOpts struct {
+	SceneFilename   *string
+	Scene           *Scene
+	OnSuccess       *func()
+	OnProgress      *func()
+	OnError         *func()
+	PluginExtension *string
+}
+
+// Append calls the Append method on the SceneLoader object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneloader#append
+func (s *SceneLoader) Append(rootUrl string, opts *SceneLoaderAppendOpts) *ISceneLoaderPlugin {
+	if opts == nil {
+		opts = &SceneLoaderAppendOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+6)
+
+	args = append(args, rootUrl)
+
+	if opts.SceneFilename == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SceneFilename)
+	}
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+	if opts.OnSuccess == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnSuccess)
+	}
+	if opts.OnProgress == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnProgress)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+	if opts.PluginExtension == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.PluginExtension)
+	}
+
+	retVal := s.p.Call("Append", args...)
+	return ISceneLoaderPluginFromJSObject(retVal, s.ctx)
+}
+
+// SceneLoaderAppendAsyncOpts contains optional parameters for SceneLoader.AppendAsync.
+type SceneLoaderAppendAsyncOpts struct {
+	SceneFilename   *string
+	Scene           *Scene
+	OnProgress      *func()
+	PluginExtension *string
+}
+
+// AppendAsync calls the AppendAsync method on the SceneLoader object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneloader#appendasync
+func (s *SceneLoader) AppendAsync(rootUrl string, opts *SceneLoaderAppendAsyncOpts) *Scene {
+	if opts == nil {
+		opts = &SceneLoaderAppendAsyncOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+4)
+
+	args = append(args, rootUrl)
+
+	if opts.SceneFilename == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SceneFilename)
+	}
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+	if opts.OnProgress == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnProgress)
+	}
+	if opts.PluginExtension == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.PluginExtension)
+	}
+
+	retVal := s.p.Call("AppendAsync", args...)
+	return SceneFromJSObject(retVal, s.ctx)
+}
+
+// GetPluginForExtension calls the GetPluginForExtension method on the SceneLoader object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneloader#getpluginforextension
+func (s *SceneLoader) GetPluginForExtension(extension string) *ISceneLoaderPlugin {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, extension)
+
+	retVal := s.p.Call("GetPluginForExtension", args...)
+	return ISceneLoaderPluginFromJSObject(retVal, s.ctx)
+}
+
+// SceneLoaderImportMeshOpts contains optional parameters for SceneLoader.ImportMesh.
+type SceneLoaderImportMeshOpts struct {
+	SceneFilename   *string
+	Scene           *Scene
+	OnSuccess       *func()
+	OnProgress      *func()
+	OnError         *func()
+	PluginExtension *string
+}
+
+// ImportMesh calls the ImportMesh method on the SceneLoader object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneloader#importmesh
+func (s *SceneLoader) ImportMesh(meshNames interface{}, rootUrl string, opts *SceneLoaderImportMeshOpts) *ISceneLoaderPlugin {
+	if opts == nil {
+		opts = &SceneLoaderImportMeshOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+6)
+
+	args = append(args, meshNames)
+	args = append(args, rootUrl)
+
+	if opts.SceneFilename == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SceneFilename)
+	}
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+	if opts.OnSuccess == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnSuccess)
+	}
+	if opts.OnProgress == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnProgress)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+	if opts.PluginExtension == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.PluginExtension)
+	}
+
+	retVal := s.p.Call("ImportMesh", args...)
+	return ISceneLoaderPluginFromJSObject(retVal, s.ctx)
+}
+
+// SceneLoaderImportMeshAsyncOpts contains optional parameters for SceneLoader.ImportMeshAsync.
+type SceneLoaderImportMeshAsyncOpts struct {
+	SceneFilename   *string
+	Scene           *Scene
+	OnProgress      *func()
+	PluginExtension *string
+}
+
+// ImportMeshAsync calls the ImportMeshAsync method on the SceneLoader object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneloader#importmeshasync
+func (s *SceneLoader) ImportMeshAsync(meshNames interface{}, rootUrl string, opts *SceneLoaderImportMeshAsyncOpts) js.Value {
+	if opts == nil {
+		opts = &SceneLoaderImportMeshAsyncOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+4)
+
+	args = append(args, meshNames)
+	args = append(args, rootUrl)
+
+	if opts.SceneFilename == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SceneFilename)
+	}
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+	if opts.OnProgress == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnProgress)
+	}
+	if opts.PluginExtension == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.PluginExtension)
+	}
+
+	retVal := s.p.Call("ImportMeshAsync", args...)
+	return retVal
+}
+
+// IsPluginForExtensionAvailable calls the IsPluginForExtensionAvailable method on the SceneLoader object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneloader#ispluginforextensionavailable
+func (s *SceneLoader) IsPluginForExtensionAvailable(extension string) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, extension)
+
+	retVal := s.p.Call("IsPluginForExtensionAvailable", args...)
+	return retVal.Bool()
+}
+
+// SceneLoaderLoadOpts contains optional parameters for SceneLoader.Load.
+type SceneLoaderLoadOpts struct {
+	SceneFilename   *string
+	Engine          *Engine
+	OnSuccess       *func()
+	OnProgress      *func()
+	OnError         *func()
+	PluginExtension *string
+}
+
+// Load calls the Load method on the SceneLoader object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneloader#load
+func (s *SceneLoader) Load(rootUrl string, opts *SceneLoaderLoadOpts) *ISceneLoaderPlugin {
+	if opts == nil {
+		opts = &SceneLoaderLoadOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+6)
+
+	args = append(args, rootUrl)
+
+	if opts.SceneFilename == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SceneFilename)
+	}
+	if opts.Engine == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Engine.JSObject())
+	}
+	if opts.OnSuccess == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnSuccess)
+	}
+	if opts.OnProgress == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnProgress)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+	if opts.PluginExtension == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.PluginExtension)
+	}
+
+	retVal := s.p.Call("Load", args...)
+	return ISceneLoaderPluginFromJSObject(retVal, s.ctx)
+}
+
+// SceneLoaderLoadAssetContainerOpts contains optional parameters for SceneLoader.LoadAssetContainer.
+type SceneLoaderLoadAssetContainerOpts struct {
+	SceneFilename   *string
+	Scene           *Scene
+	OnSuccess       *func()
+	OnProgress      *func()
+	OnError         *func()
+	PluginExtension *string
+}
+
+// LoadAssetContainer calls the LoadAssetContainer method on the SceneLoader object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneloader#loadassetcontainer
+func (s *SceneLoader) LoadAssetContainer(rootUrl string, opts *SceneLoaderLoadAssetContainerOpts) *ISceneLoaderPlugin {
+	if opts == nil {
+		opts = &SceneLoaderLoadAssetContainerOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+6)
+
+	args = append(args, rootUrl)
+
+	if opts.SceneFilename == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SceneFilename)
+	}
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+	if opts.OnSuccess == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnSuccess)
+	}
+	if opts.OnProgress == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnProgress)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+	if opts.PluginExtension == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.PluginExtension)
+	}
+
+	retVal := s.p.Call("LoadAssetContainer", args...)
+	return ISceneLoaderPluginFromJSObject(retVal, s.ctx)
+}
+
+// SceneLoaderLoadAssetContainerAsyncOpts contains optional parameters for SceneLoader.LoadAssetContainerAsync.
+type SceneLoaderLoadAssetContainerAsyncOpts struct {
+	SceneFilename   *string
+	Scene           *Scene
+	OnProgress      *func()
+	PluginExtension *string
+}
+
+// LoadAssetContainerAsync calls the LoadAssetContainerAsync method on the SceneLoader object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneloader#loadassetcontainerasync
+func (s *SceneLoader) LoadAssetContainerAsync(rootUrl string, opts *SceneLoaderLoadAssetContainerAsyncOpts) *AssetContainer {
+	if opts == nil {
+		opts = &SceneLoaderLoadAssetContainerAsyncOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+4)
+
+	args = append(args, rootUrl)
+
+	if opts.SceneFilename == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SceneFilename)
+	}
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+	if opts.OnProgress == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnProgress)
+	}
+	if opts.PluginExtension == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.PluginExtension)
+	}
+
+	retVal := s.p.Call("LoadAssetContainerAsync", args...)
+	return AssetContainerFromJSObject(retVal, s.ctx)
+}
+
+// SceneLoaderLoadAsyncOpts contains optional parameters for SceneLoader.LoadAsync.
+type SceneLoaderLoadAsyncOpts struct {
+	SceneFilename   *string
+	Engine          *Engine
+	OnProgress      *func()
+	PluginExtension *string
+}
+
+// LoadAsync calls the LoadAsync method on the SceneLoader object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneloader#loadasync
+func (s *SceneLoader) LoadAsync(rootUrl string, opts *SceneLoaderLoadAsyncOpts) *Scene {
+	if opts == nil {
+		opts = &SceneLoaderLoadAsyncOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+4)
+
+	args = append(args, rootUrl)
+
+	if opts.SceneFilename == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SceneFilename)
+	}
+	if opts.Engine == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Engine.JSObject())
+	}
+	if opts.OnProgress == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnProgress)
+	}
+	if opts.PluginExtension == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.PluginExtension)
+	}
+
+	retVal := s.p.Call("LoadAsync", args...)
+	return SceneFromJSObject(retVal, s.ctx)
+}
+
+// RegisterPlugin calls the RegisterPlugin method on the SceneLoader object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneloader#registerplugin
+func (s *SceneLoader) RegisterPlugin(plugin *ISceneLoaderPlugin) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, plugin.JSObject())
+
+	s.p.Call("RegisterPlugin", args...)
+}
+
+/*
+
+// CleanBoneMatrixWeights returns the CleanBoneMatrixWeights property of class SceneLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneloader#cleanbonematrixweights
+func (s *SceneLoader) CleanBoneMatrixWeights(CleanBoneMatrixWeights bool) *SceneLoader {
+	p := ba.ctx.Get("SceneLoader").New(CleanBoneMatrixWeights)
+	return SceneLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetCleanBoneMatrixWeights sets the CleanBoneMatrixWeights property of class SceneLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneloader#cleanbonematrixweights
+func (s *SceneLoader) SetCleanBoneMatrixWeights(CleanBoneMatrixWeights bool) *SceneLoader {
+	p := ba.ctx.Get("SceneLoader").New(CleanBoneMatrixWeights)
+	return SceneLoaderFromJSObject(p, ba.ctx)
+}
+
+// DETAILED_LOGGING returns the DETAILED_LOGGING property of class SceneLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneloader#detailed_logging
+func (s *SceneLoader) DETAILED_LOGGING(DETAILED_LOGGING float64) *SceneLoader {
+	p := ba.ctx.Get("SceneLoader").New(DETAILED_LOGGING)
+	return SceneLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetDETAILED_LOGGING sets the DETAILED_LOGGING property of class SceneLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneloader#detailed_logging
+func (s *SceneLoader) SetDETAILED_LOGGING(DETAILED_LOGGING float64) *SceneLoader {
+	p := ba.ctx.Get("SceneLoader").New(DETAILED_LOGGING)
+	return SceneLoaderFromJSObject(p, ba.ctx)
+}
+
+// ForceFullSceneLoadingForIncremental returns the ForceFullSceneLoadingForIncremental property of class SceneLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneloader#forcefullsceneloadingforincremental
+func (s *SceneLoader) ForceFullSceneLoadingForIncremental(ForceFullSceneLoadingForIncremental bool) *SceneLoader {
+	p := ba.ctx.Get("SceneLoader").New(ForceFullSceneLoadingForIncremental)
+	return SceneLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetForceFullSceneLoadingForIncremental sets the ForceFullSceneLoadingForIncremental property of class SceneLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneloader#forcefullsceneloadingforincremental
+func (s *SceneLoader) SetForceFullSceneLoadingForIncremental(ForceFullSceneLoadingForIncremental bool) *SceneLoader {
+	p := ba.ctx.Get("SceneLoader").New(ForceFullSceneLoadingForIncremental)
+	return SceneLoaderFromJSObject(p, ba.ctx)
+}
+
+// LoggingLevel returns the LoggingLevel property of class SceneLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneloader#logginglevel
+func (s *SceneLoader) LoggingLevel(loggingLevel float64) *SceneLoader {
+	p := ba.ctx.Get("SceneLoader").New(loggingLevel)
+	return SceneLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetLoggingLevel sets the LoggingLevel property of class SceneLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneloader#logginglevel
+func (s *SceneLoader) SetLoggingLevel(loggingLevel float64) *SceneLoader {
+	p := ba.ctx.Get("SceneLoader").New(loggingLevel)
+	return SceneLoaderFromJSObject(p, ba.ctx)
+}
+
+// MINIMAL_LOGGING returns the MINIMAL_LOGGING property of class SceneLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneloader#minimal_logging
+func (s *SceneLoader) MINIMAL_LOGGING(MINIMAL_LOGGING float64) *SceneLoader {
+	p := ba.ctx.Get("SceneLoader").New(MINIMAL_LOGGING)
+	return SceneLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetMINIMAL_LOGGING sets the MINIMAL_LOGGING property of class SceneLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneloader#minimal_logging
+func (s *SceneLoader) SetMINIMAL_LOGGING(MINIMAL_LOGGING float64) *SceneLoader {
+	p := ba.ctx.Get("SceneLoader").New(MINIMAL_LOGGING)
+	return SceneLoaderFromJSObject(p, ba.ctx)
+}
+
+// NO_LOGGING returns the NO_LOGGING property of class SceneLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneloader#no_logging
+func (s *SceneLoader) NO_LOGGING(NO_LOGGING float64) *SceneLoader {
+	p := ba.ctx.Get("SceneLoader").New(NO_LOGGING)
+	return SceneLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetNO_LOGGING sets the NO_LOGGING property of class SceneLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneloader#no_logging
+func (s *SceneLoader) SetNO_LOGGING(NO_LOGGING float64) *SceneLoader {
+	p := ba.ctx.Get("SceneLoader").New(NO_LOGGING)
+	return SceneLoaderFromJSObject(p, ba.ctx)
+}
+
+// OnPluginActivatedObservable returns the OnPluginActivatedObservable property of class SceneLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneloader#onpluginactivatedobservable
+func (s *SceneLoader) OnPluginActivatedObservable(OnPluginActivatedObservable *Observable) *SceneLoader {
+	p := ba.ctx.Get("SceneLoader").New(OnPluginActivatedObservable.JSObject())
+	return SceneLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetOnPluginActivatedObservable sets the OnPluginActivatedObservable property of class SceneLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneloader#onpluginactivatedobservable
+func (s *SceneLoader) SetOnPluginActivatedObservable(OnPluginActivatedObservable *Observable) *SceneLoader {
+	p := ba.ctx.Get("SceneLoader").New(OnPluginActivatedObservable.JSObject())
+	return SceneLoaderFromJSObject(p, ba.ctx)
+}
+
+// SUMMARY_LOGGING returns the SUMMARY_LOGGING property of class SceneLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneloader#summary_logging
+func (s *SceneLoader) SUMMARY_LOGGING(SUMMARY_LOGGING float64) *SceneLoader {
+	p := ba.ctx.Get("SceneLoader").New(SUMMARY_LOGGING)
+	return SceneLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetSUMMARY_LOGGING sets the SUMMARY_LOGGING property of class SceneLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneloader#summary_logging
+func (s *SceneLoader) SetSUMMARY_LOGGING(SUMMARY_LOGGING float64) *SceneLoader {
+	p := ba.ctx.Get("SceneLoader").New(SUMMARY_LOGGING)
+	return SceneLoaderFromJSObject(p, ba.ctx)
+}
+
+// ShowLoadingScreen returns the ShowLoadingScreen property of class SceneLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneloader#showloadingscreen
+func (s *SceneLoader) ShowLoadingScreen(ShowLoadingScreen bool) *SceneLoader {
+	p := ba.ctx.Get("SceneLoader").New(ShowLoadingScreen)
+	return SceneLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetShowLoadingScreen sets the ShowLoadingScreen property of class SceneLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneloader#showloadingscreen
+func (s *SceneLoader) SetShowLoadingScreen(ShowLoadingScreen bool) *SceneLoader {
+	p := ba.ctx.Get("SceneLoader").New(ShowLoadingScreen)
+	return SceneLoaderFromJSObject(p, ba.ctx)
+}
+
+*/

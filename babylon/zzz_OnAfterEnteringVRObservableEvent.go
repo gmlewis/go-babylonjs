@@ -27,4 +27,22 @@ func OnAfterEnteringVRObservableEventFromJSObject(p js.Value, ctx js.Value) *OnA
 	return &OnAfterEnteringVRObservableEvent{p: p, ctx: ctx}
 }
 
-// TODO: methods
+/*
+
+// Success returns the Success property of class OnAfterEnteringVRObservableEvent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.onafterenteringvrobservableevent#success
+func (o *OnAfterEnteringVRObservableEvent) Success(success bool) *OnAfterEnteringVRObservableEvent {
+	p := ba.ctx.Get("OnAfterEnteringVRObservableEvent").New(success)
+	return OnAfterEnteringVRObservableEventFromJSObject(p, ba.ctx)
+}
+
+// SetSuccess sets the Success property of class OnAfterEnteringVRObservableEvent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.onafterenteringvrobservableevent#success
+func (o *OnAfterEnteringVRObservableEvent) SetSuccess(success bool) *OnAfterEnteringVRObservableEvent {
+	p := ba.ctx.Get("OnAfterEnteringVRObservableEvent").New(success)
+	return OnAfterEnteringVRObservableEventFromJSObject(p, ba.ctx)
+}
+
+*/

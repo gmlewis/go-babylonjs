@@ -31,13 +31,10 @@ func ConvolutionPostProcessFromJSObject(p js.Value, ctx js.Value) *ConvolutionPo
 
 // NewConvolutionPostProcessOpts contains optional parameters for NewConvolutionPostProcess.
 type NewConvolutionPostProcessOpts struct {
-	SamplingMode *JSFloat64
-
-	Engine *Engine
-
-	Reusable *JSBool
-
-	TextureType *JSFloat64
+	SamplingMode *float64
+	Engine       *Engine
+	Reusable     *bool
+	TextureType  *float64
 }
 
 // NewConvolutionPostProcess returns a new ConvolutionPostProcess object.
@@ -48,8 +45,878 @@ func (ba *Babylon) NewConvolutionPostProcess(name string, kernel float64, option
 		opts = &NewConvolutionPostProcessOpts{}
 	}
 
-	p := ba.ctx.Get("ConvolutionPostProcess").New(name, kernel, options, camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType.JSObject())
+	args := make([]interface{}, 0, 4+4)
+
+	args = append(args, name)
+	args = append(args, kernel)
+	args = append(args, options)
+	args = append(args, camera.JSObject())
+
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+	if opts.Engine == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Engine.JSObject())
+	}
+	if opts.Reusable == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Reusable)
+	}
+	if opts.TextureType == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.TextureType)
+	}
+
+	p := ba.ctx.Get("ConvolutionPostProcess").New(args...)
 	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// ConvolutionPostProcessActivateOpts contains optional parameters for ConvolutionPostProcess.Activate.
+type ConvolutionPostProcessActivateOpts struct {
+	SourceTexture     *InternalTexture
+	ForceDepthStencil *bool
+}
+
+// Activate calls the Activate method on the ConvolutionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#activate
+func (c *ConvolutionPostProcess) Activate(camera *Camera, opts *ConvolutionPostProcessActivateOpts) *InternalTexture {
+	if opts == nil {
+		opts = &ConvolutionPostProcessActivateOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, camera.JSObject())
+
+	if opts.SourceTexture == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.SourceTexture.JSObject())
+	}
+	if opts.ForceDepthStencil == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceDepthStencil)
+	}
+
+	retVal := c.p.Call("activate", args...)
+	return InternalTextureFromJSObject(retVal, c.ctx)
+}
+
+// Apply calls the Apply method on the ConvolutionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#apply
+func (c *ConvolutionPostProcess) Apply() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("apply", args...)
+	return EffectFromJSObject(retVal, c.ctx)
+}
+
+// ConvolutionPostProcessDisposeOpts contains optional parameters for ConvolutionPostProcess.Dispose.
+type ConvolutionPostProcessDisposeOpts struct {
+	Camera *Camera
+}
+
+// Dispose calls the Dispose method on the ConvolutionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#dispose
+func (c *ConvolutionPostProcess) Dispose(opts *ConvolutionPostProcessDisposeOpts) {
+	if opts == nil {
+		opts = &ConvolutionPostProcessDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Camera == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Camera.JSObject())
+	}
+
+	c.p.Call("dispose", args...)
+}
+
+// GetCamera calls the GetCamera method on the ConvolutionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#getcamera
+func (c *ConvolutionPostProcess) GetCamera() *Camera {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getCamera", args...)
+	return CameraFromJSObject(retVal, c.ctx)
+}
+
+// GetClassName calls the GetClassName method on the ConvolutionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#getclassname
+func (c *ConvolutionPostProcess) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetEffect calls the GetEffect method on the ConvolutionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#geteffect
+func (c *ConvolutionPostProcess) GetEffect() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getEffect", args...)
+	return EffectFromJSObject(retVal, c.ctx)
+}
+
+// GetEffectName calls the GetEffectName method on the ConvolutionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#geteffectname
+func (c *ConvolutionPostProcess) GetEffectName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getEffectName", args...)
+	return retVal.String()
+}
+
+// GetEngine calls the GetEngine method on the ConvolutionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#getengine
+func (c *ConvolutionPostProcess) GetEngine() *Engine {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getEngine", args...)
+	return EngineFromJSObject(retVal, c.ctx)
+}
+
+// IsReady calls the IsReady method on the ConvolutionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#isready
+func (c *ConvolutionPostProcess) IsReady() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// IsReusable calls the IsReusable method on the ConvolutionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#isreusable
+func (c *ConvolutionPostProcess) IsReusable() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("isReusable", args...)
+	return retVal.Bool()
+}
+
+// MarkTextureDirty calls the MarkTextureDirty method on the ConvolutionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#marktexturedirty
+func (c *ConvolutionPostProcess) MarkTextureDirty() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	c.p.Call("markTextureDirty", args...)
+}
+
+// ShareOutputWith calls the ShareOutputWith method on the ConvolutionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#shareoutputwith
+func (c *ConvolutionPostProcess) ShareOutputWith(postProcess *PostProcess) *PostProcess {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, postProcess.JSObject())
+
+	retVal := c.p.Call("shareOutputWith", args...)
+	return PostProcessFromJSObject(retVal, c.ctx)
+}
+
+// ConvolutionPostProcessUpdateEffectOpts contains optional parameters for ConvolutionPostProcess.UpdateEffect.
+type ConvolutionPostProcessUpdateEffectOpts struct {
+	Defines         *string
+	Uniforms        *string
+	Samplers        *string
+	IndexParameters *interface{}
+	OnCompiled      *func()
+	OnError         *func()
+}
+
+// UpdateEffect calls the UpdateEffect method on the ConvolutionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#updateeffect
+func (c *ConvolutionPostProcess) UpdateEffect(opts *ConvolutionPostProcessUpdateEffectOpts) {
+	if opts == nil {
+		opts = &ConvolutionPostProcessUpdateEffectOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+6)
+
+	if opts.Defines == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Defines)
+	}
+	if opts.Uniforms == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Uniforms)
+	}
+	if opts.Samplers == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Samplers)
+	}
+	if opts.IndexParameters == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.IndexParameters)
+	}
+	if opts.OnCompiled == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnCompiled)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+
+	c.p.Call("updateEffect", args...)
+}
+
+// UseOwnOutput calls the UseOwnOutput method on the ConvolutionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#useownoutput
+func (c *ConvolutionPostProcess) UseOwnOutput() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	c.p.Call("useOwnOutput", args...)
+}
+
+/*
+
+// AdaptScaleToCurrentViewport returns the AdaptScaleToCurrentViewport property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#adaptscaletocurrentviewport
+func (c *ConvolutionPostProcess) AdaptScaleToCurrentViewport(adaptScaleToCurrentViewport bool) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(adaptScaleToCurrentViewport)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAdaptScaleToCurrentViewport sets the AdaptScaleToCurrentViewport property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#adaptscaletocurrentviewport
+func (c *ConvolutionPostProcess) SetAdaptScaleToCurrentViewport(adaptScaleToCurrentViewport bool) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(adaptScaleToCurrentViewport)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AlphaConstants returns the AlphaConstants property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#alphaconstants
+func (c *ConvolutionPostProcess) AlphaConstants(alphaConstants *Color4) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(alphaConstants.JSObject())
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaConstants sets the AlphaConstants property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#alphaconstants
+func (c *ConvolutionPostProcess) SetAlphaConstants(alphaConstants *Color4) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(alphaConstants.JSObject())
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AlphaMode returns the AlphaMode property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#alphamode
+func (c *ConvolutionPostProcess) AlphaMode(alphaMode float64) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(alphaMode)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaMode sets the AlphaMode property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#alphamode
+func (c *ConvolutionPostProcess) SetAlphaMode(alphaMode float64) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(alphaMode)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AlwaysForcePOT returns the AlwaysForcePOT property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#alwaysforcepot
+func (c *ConvolutionPostProcess) AlwaysForcePOT(alwaysForcePOT bool) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(alwaysForcePOT)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAlwaysForcePOT sets the AlwaysForcePOT property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#alwaysforcepot
+func (c *ConvolutionPostProcess) SetAlwaysForcePOT(alwaysForcePOT bool) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(alwaysForcePOT)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Animations returns the Animations property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#animations
+func (c *ConvolutionPostProcess) Animations(animations *Animation) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(animations.JSObject())
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#animations
+func (c *ConvolutionPostProcess) SetAnimations(animations *Animation) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(animations.JSObject())
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AspectRatio returns the AspectRatio property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#aspectratio
+func (c *ConvolutionPostProcess) AspectRatio(aspectRatio float64) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(aspectRatio)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAspectRatio sets the AspectRatio property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#aspectratio
+func (c *ConvolutionPostProcess) SetAspectRatio(aspectRatio float64) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(aspectRatio)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AutoClear returns the AutoClear property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#autoclear
+func (c *ConvolutionPostProcess) AutoClear(autoClear bool) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(autoClear)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAutoClear sets the AutoClear property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#autoclear
+func (c *ConvolutionPostProcess) SetAutoClear(autoClear bool) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(autoClear)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ClearColor returns the ClearColor property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#clearcolor
+func (c *ConvolutionPostProcess) ClearColor(clearColor *Color4) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(clearColor.JSObject())
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetClearColor sets the ClearColor property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#clearcolor
+func (c *ConvolutionPostProcess) SetClearColor(clearColor *Color4) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(clearColor.JSObject())
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// EdgeDetect0Kernel returns the EdgeDetect0Kernel property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#edgedetect0kernel
+func (c *ConvolutionPostProcess) EdgeDetect0Kernel(EdgeDetect0Kernel float64) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(EdgeDetect0Kernel)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetEdgeDetect0Kernel sets the EdgeDetect0Kernel property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#edgedetect0kernel
+func (c *ConvolutionPostProcess) SetEdgeDetect0Kernel(EdgeDetect0Kernel float64) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(EdgeDetect0Kernel)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// EdgeDetect1Kernel returns the EdgeDetect1Kernel property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#edgedetect1kernel
+func (c *ConvolutionPostProcess) EdgeDetect1Kernel(EdgeDetect1Kernel float64) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(EdgeDetect1Kernel)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetEdgeDetect1Kernel sets the EdgeDetect1Kernel property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#edgedetect1kernel
+func (c *ConvolutionPostProcess) SetEdgeDetect1Kernel(EdgeDetect1Kernel float64) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(EdgeDetect1Kernel)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// EdgeDetect2Kernel returns the EdgeDetect2Kernel property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#edgedetect2kernel
+func (c *ConvolutionPostProcess) EdgeDetect2Kernel(EdgeDetect2Kernel float64) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(EdgeDetect2Kernel)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetEdgeDetect2Kernel sets the EdgeDetect2Kernel property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#edgedetect2kernel
+func (c *ConvolutionPostProcess) SetEdgeDetect2Kernel(EdgeDetect2Kernel float64) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(EdgeDetect2Kernel)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// EmbossKernel returns the EmbossKernel property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#embosskernel
+func (c *ConvolutionPostProcess) EmbossKernel(EmbossKernel float64) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(EmbossKernel)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetEmbossKernel sets the EmbossKernel property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#embosskernel
+func (c *ConvolutionPostProcess) SetEmbossKernel(EmbossKernel float64) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(EmbossKernel)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// EnablePixelPerfectMode returns the EnablePixelPerfectMode property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#enablepixelperfectmode
+func (c *ConvolutionPostProcess) EnablePixelPerfectMode(enablePixelPerfectMode bool) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(enablePixelPerfectMode)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetEnablePixelPerfectMode sets the EnablePixelPerfectMode property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#enablepixelperfectmode
+func (c *ConvolutionPostProcess) SetEnablePixelPerfectMode(enablePixelPerfectMode bool) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(enablePixelPerfectMode)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ForceFullscreenViewport returns the ForceFullscreenViewport property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#forcefullscreenviewport
+func (c *ConvolutionPostProcess) ForceFullscreenViewport(forceFullscreenViewport bool) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(forceFullscreenViewport)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetForceFullscreenViewport sets the ForceFullscreenViewport property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#forcefullscreenviewport
+func (c *ConvolutionPostProcess) SetForceFullscreenViewport(forceFullscreenViewport bool) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(forceFullscreenViewport)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// GaussianKernel returns the GaussianKernel property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#gaussiankernel
+func (c *ConvolutionPostProcess) GaussianKernel(GaussianKernel float64) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(GaussianKernel)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetGaussianKernel sets the GaussianKernel property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#gaussiankernel
+func (c *ConvolutionPostProcess) SetGaussianKernel(GaussianKernel float64) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(GaussianKernel)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Height returns the Height property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#height
+func (c *ConvolutionPostProcess) Height(height float64) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(height)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetHeight sets the Height property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#height
+func (c *ConvolutionPostProcess) SetHeight(height float64) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(height)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// InputTexture returns the InputTexture property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#inputtexture
+func (c *ConvolutionPostProcess) InputTexture(inputTexture *InternalTexture) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(inputTexture.JSObject())
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetInputTexture sets the InputTexture property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#inputtexture
+func (c *ConvolutionPostProcess) SetInputTexture(inputTexture *InternalTexture) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(inputTexture.JSObject())
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#inspectablecustomproperties
+func (c *ConvolutionPostProcess) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(inspectableCustomProperties.JSObject())
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#inspectablecustomproperties
+func (c *ConvolutionPostProcess) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(inspectableCustomProperties.JSObject())
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// IsSupported returns the IsSupported property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#issupported
+func (c *ConvolutionPostProcess) IsSupported(isSupported bool) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(isSupported)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetIsSupported sets the IsSupported property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#issupported
+func (c *ConvolutionPostProcess) SetIsSupported(isSupported bool) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(isSupported)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Kernel returns the Kernel property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#kernel
+func (c *ConvolutionPostProcess) Kernel(kernel float64) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(kernel)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetKernel sets the Kernel property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#kernel
+func (c *ConvolutionPostProcess) SetKernel(kernel float64) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(kernel)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#name
+func (c *ConvolutionPostProcess) Name(name string) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(name)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#name
+func (c *ConvolutionPostProcess) SetName(name string) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(name)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnActivate returns the OnActivate property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#onactivate
+func (c *ConvolutionPostProcess) OnActivate(onActivate func()) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(onActivate)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnActivate sets the OnActivate property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#onactivate
+func (c *ConvolutionPostProcess) SetOnActivate(onActivate func()) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(onActivate)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnActivateObservable returns the OnActivateObservable property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#onactivateobservable
+func (c *ConvolutionPostProcess) OnActivateObservable(onActivateObservable *Observable) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(onActivateObservable.JSObject())
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnActivateObservable sets the OnActivateObservable property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#onactivateobservable
+func (c *ConvolutionPostProcess) SetOnActivateObservable(onActivateObservable *Observable) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(onActivateObservable.JSObject())
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnAfterRender returns the OnAfterRender property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#onafterrender
+func (c *ConvolutionPostProcess) OnAfterRender(onAfterRender func()) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(onAfterRender)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterRender sets the OnAfterRender property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#onafterrender
+func (c *ConvolutionPostProcess) SetOnAfterRender(onAfterRender func()) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(onAfterRender)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnAfterRenderObservable returns the OnAfterRenderObservable property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#onafterrenderobservable
+func (c *ConvolutionPostProcess) OnAfterRenderObservable(onAfterRenderObservable *Observable) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(onAfterRenderObservable.JSObject())
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterRenderObservable sets the OnAfterRenderObservable property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#onafterrenderobservable
+func (c *ConvolutionPostProcess) SetOnAfterRenderObservable(onAfterRenderObservable *Observable) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(onAfterRenderObservable.JSObject())
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnApply returns the OnApply property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#onapply
+func (c *ConvolutionPostProcess) OnApply(onApply func()) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(onApply)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnApply sets the OnApply property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#onapply
+func (c *ConvolutionPostProcess) SetOnApply(onApply func()) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(onApply)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnApplyObservable returns the OnApplyObservable property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#onapplyobservable
+func (c *ConvolutionPostProcess) OnApplyObservable(onApplyObservable *Observable) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(onApplyObservable.JSObject())
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnApplyObservable sets the OnApplyObservable property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#onapplyobservable
+func (c *ConvolutionPostProcess) SetOnApplyObservable(onApplyObservable *Observable) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(onApplyObservable.JSObject())
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeRender returns the OnBeforeRender property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#onbeforerender
+func (c *ConvolutionPostProcess) OnBeforeRender(onBeforeRender func()) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(onBeforeRender)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeRender sets the OnBeforeRender property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#onbeforerender
+func (c *ConvolutionPostProcess) SetOnBeforeRender(onBeforeRender func()) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(onBeforeRender)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeRenderObservable returns the OnBeforeRenderObservable property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#onbeforerenderobservable
+func (c *ConvolutionPostProcess) OnBeforeRenderObservable(onBeforeRenderObservable *Observable) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(onBeforeRenderObservable.JSObject())
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeRenderObservable sets the OnBeforeRenderObservable property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#onbeforerenderobservable
+func (c *ConvolutionPostProcess) SetOnBeforeRenderObservable(onBeforeRenderObservable *Observable) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(onBeforeRenderObservable.JSObject())
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnSizeChanged returns the OnSizeChanged property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#onsizechanged
+func (c *ConvolutionPostProcess) OnSizeChanged(onSizeChanged func()) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(onSizeChanged)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnSizeChanged sets the OnSizeChanged property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#onsizechanged
+func (c *ConvolutionPostProcess) SetOnSizeChanged(onSizeChanged func()) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(onSizeChanged)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnSizeChangedObservable returns the OnSizeChangedObservable property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#onsizechangedobservable
+func (c *ConvolutionPostProcess) OnSizeChangedObservable(onSizeChangedObservable *Observable) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(onSizeChangedObservable.JSObject())
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnSizeChangedObservable sets the OnSizeChangedObservable property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#onsizechangedobservable
+func (c *ConvolutionPostProcess) SetOnSizeChangedObservable(onSizeChangedObservable *Observable) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(onSizeChangedObservable.JSObject())
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// RenderTargetSamplingMode returns the RenderTargetSamplingMode property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#rendertargetsamplingmode
+func (c *ConvolutionPostProcess) RenderTargetSamplingMode(renderTargetSamplingMode float64) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(renderTargetSamplingMode)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetRenderTargetSamplingMode sets the RenderTargetSamplingMode property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#rendertargetsamplingmode
+func (c *ConvolutionPostProcess) SetRenderTargetSamplingMode(renderTargetSamplingMode float64) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(renderTargetSamplingMode)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Samples returns the Samples property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#samples
+func (c *ConvolutionPostProcess) Samples(samples float64) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(samples)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetSamples sets the Samples property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#samples
+func (c *ConvolutionPostProcess) SetSamples(samples float64) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(samples)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ScaleMode returns the ScaleMode property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#scalemode
+func (c *ConvolutionPostProcess) ScaleMode(scaleMode float64) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(scaleMode)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetScaleMode sets the ScaleMode property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#scalemode
+func (c *ConvolutionPostProcess) SetScaleMode(scaleMode float64) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(scaleMode)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SharpenKernel returns the SharpenKernel property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#sharpenkernel
+func (c *ConvolutionPostProcess) SharpenKernel(SharpenKernel float64) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(SharpenKernel)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetSharpenKernel sets the SharpenKernel property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#sharpenkernel
+func (c *ConvolutionPostProcess) SetSharpenKernel(SharpenKernel float64) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(SharpenKernel)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// TexelSize returns the TexelSize property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#texelsize
+func (c *ConvolutionPostProcess) TexelSize(texelSize *Vector2) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(texelSize.JSObject())
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetTexelSize sets the TexelSize property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#texelsize
+func (c *ConvolutionPostProcess) SetTexelSize(texelSize *Vector2) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(texelSize.JSObject())
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#uniqueid
+func (c *ConvolutionPostProcess) UniqueId(uniqueId float64) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(uniqueId)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#uniqueid
+func (c *ConvolutionPostProcess) SetUniqueId(uniqueId float64) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(uniqueId)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Width returns the Width property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#width
+func (c *ConvolutionPostProcess) Width(width float64) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(width)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetWidth sets the Width property of class ConvolutionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.convolutionpostprocess#width
+func (c *ConvolutionPostProcess) SetWidth(width float64) *ConvolutionPostProcess {
+	p := ba.ctx.Get("ConvolutionPostProcess").New(width)
+	return ConvolutionPostProcessFromJSObject(p, ba.ctx)
+}
+
+*/

@@ -31,8 +31,781 @@ func VectorMergerBlockFromJSObject(p js.Value, ctx js.Value) *VectorMergerBlock 
 //
 // https://doc.babylonjs.com/api/classes/babylon.vectormergerblock
 func (ba *Babylon) NewVectorMergerBlock(name string) *VectorMergerBlock {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	p := ba.ctx.Get("VectorMergerBlock").New(args...)
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// AutoConfigure calls the AutoConfigure method on the VectorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#autoconfigure
+func (v *VectorMergerBlock) AutoConfigure(material *NodeMaterial) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, material.JSObject())
+
+	v.p.Call("autoConfigure", args...)
+}
+
+// VectorMergerBlockBindOpts contains optional parameters for VectorMergerBlock.Bind.
+type VectorMergerBlockBindOpts struct {
+	Mesh *Mesh
+}
+
+// Bind calls the Bind method on the VectorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#bind
+func (v *VectorMergerBlock) Bind(effect *Effect, nodeMaterial *NodeMaterial, opts *VectorMergerBlockBindOpts) {
+	if opts == nil {
+		opts = &VectorMergerBlockBindOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, effect.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	v.p.Call("bind", args...)
+}
+
+// Build calls the Build method on the VectorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#build
+func (v *VectorMergerBlock) Build(state *NodeMaterialBuildState, activeBlocks *NodeMaterialBlock) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, state.JSObject())
+	args = append(args, activeBlocks.JSObject())
+
+	retVal := v.p.Call("build", args...)
+	return retVal.Bool()
+}
+
+// VectorMergerBlockCloneOpts contains optional parameters for VectorMergerBlock.Clone.
+type VectorMergerBlockCloneOpts struct {
+	RootUrl *string
+}
+
+// Clone calls the Clone method on the VectorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#clone
+func (v *VectorMergerBlock) Clone(scene *Scene, opts *VectorMergerBlockCloneOpts) *NodeMaterialBlock {
+	if opts == nil {
+		opts = &VectorMergerBlockCloneOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, scene.JSObject())
+
+	if opts.RootUrl == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RootUrl)
+	}
+
+	retVal := v.p.Call("clone", args...)
+	return NodeMaterialBlockFromJSObject(retVal, v.ctx)
+}
+
+// VectorMergerBlockConnectToOpts contains optional parameters for VectorMergerBlock.ConnectTo.
+type VectorMergerBlockConnectToOpts struct {
+	Options js.Value
+}
+
+// ConnectTo calls the ConnectTo method on the VectorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#connectto
+func (v *VectorMergerBlock) ConnectTo(other *NodeMaterialBlock, opts *VectorMergerBlockConnectToOpts) *VectorMergerBlock {
+	if opts == nil {
+		opts = &VectorMergerBlockConnectToOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, other.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	retVal := v.p.Call("connectTo", args...)
+	return VectorMergerBlockFromJSObject(retVal, v.ctx)
+}
+
+// Dispose calls the Dispose method on the VectorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#dispose
+func (v *VectorMergerBlock) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	v.p.Call("dispose", args...)
+}
+
+// GetClassName calls the GetClassName method on the VectorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#getclassname
+func (v *VectorMergerBlock) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// VectorMergerBlockGetFirstAvailableInputOpts contains optional parameters for VectorMergerBlock.GetFirstAvailableInput.
+type VectorMergerBlockGetFirstAvailableInputOpts struct {
+	ForOutput *NodeMaterialConnectionPoint
+}
+
+// GetFirstAvailableInput calls the GetFirstAvailableInput method on the VectorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#getfirstavailableinput
+func (v *VectorMergerBlock) GetFirstAvailableInput(opts *VectorMergerBlockGetFirstAvailableInputOpts) *NodeMaterialConnectionPoint {
+	if opts == nil {
+		opts = &VectorMergerBlockGetFirstAvailableInputOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForOutput == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForOutput.JSObject())
+	}
+
+	retVal := v.p.Call("getFirstAvailableInput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, v.ctx)
+}
+
+// VectorMergerBlockGetFirstAvailableOutputOpts contains optional parameters for VectorMergerBlock.GetFirstAvailableOutput.
+type VectorMergerBlockGetFirstAvailableOutputOpts struct {
+	ForBlock *NodeMaterialBlock
+}
+
+// GetFirstAvailableOutput calls the GetFirstAvailableOutput method on the VectorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#getfirstavailableoutput
+func (v *VectorMergerBlock) GetFirstAvailableOutput(opts *VectorMergerBlockGetFirstAvailableOutputOpts) *NodeMaterialConnectionPoint {
+	if opts == nil {
+		opts = &VectorMergerBlockGetFirstAvailableOutputOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForBlock == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForBlock.JSObject())
+	}
+
+	retVal := v.p.Call("getFirstAvailableOutput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, v.ctx)
+}
+
+// GetInputByName calls the GetInputByName method on the VectorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#getinputbyname
+func (v *VectorMergerBlock) GetInputByName(name string) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := v.p.Call("getInputByName", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, v.ctx)
+}
+
+// GetOutputByName calls the GetOutputByName method on the VectorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#getoutputbyname
+func (v *VectorMergerBlock) GetOutputByName(name string) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := v.p.Call("getOutputByName", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, v.ctx)
+}
+
+// GetSiblingOutput calls the GetSiblingOutput method on the VectorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#getsiblingoutput
+func (v *VectorMergerBlock) GetSiblingOutput(current *NodeMaterialConnectionPoint) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, current.JSObject())
+
+	retVal := v.p.Call("getSiblingOutput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, v.ctx)
+}
+
+// Initialize calls the Initialize method on the VectorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#initialize
+func (v *VectorMergerBlock) Initialize(state *NodeMaterialBuildState) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, state.JSObject())
+
+	v.p.Call("initialize", args...)
+}
+
+// VectorMergerBlockInitializeDefinesOpts contains optional parameters for VectorMergerBlock.InitializeDefines.
+type VectorMergerBlockInitializeDefinesOpts struct {
+	UseInstances *bool
+}
+
+// InitializeDefines calls the InitializeDefines method on the VectorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#initializedefines
+func (v *VectorMergerBlock) InitializeDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *VectorMergerBlockInitializeDefinesOpts) {
+	if opts == nil {
+		opts = &VectorMergerBlockInitializeDefinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	v.p.Call("initializeDefines", args...)
+}
+
+// VectorMergerBlockIsReadyOpts contains optional parameters for VectorMergerBlock.IsReady.
+type VectorMergerBlockIsReadyOpts struct {
+	UseInstances *bool
+}
+
+// IsReady calls the IsReady method on the VectorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#isready
+func (v *VectorMergerBlock) IsReady(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *VectorMergerBlockIsReadyOpts) bool {
+	if opts == nil {
+		opts = &VectorMergerBlockIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := v.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// VectorMergerBlockPrepareDefinesOpts contains optional parameters for VectorMergerBlock.PrepareDefines.
+type VectorMergerBlockPrepareDefinesOpts struct {
+	UseInstances *bool
+}
+
+// PrepareDefines calls the PrepareDefines method on the VectorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#preparedefines
+func (v *VectorMergerBlock) PrepareDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *VectorMergerBlockPrepareDefinesOpts) {
+	if opts == nil {
+		opts = &VectorMergerBlockPrepareDefinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	v.p.Call("prepareDefines", args...)
+}
+
+// ProvideFallbacks calls the ProvideFallbacks method on the VectorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#providefallbacks
+func (v *VectorMergerBlock) ProvideFallbacks(mesh *AbstractMesh, fallbacks *EffectFallbacks) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, fallbacks.JSObject())
+
+	v.p.Call("provideFallbacks", args...)
+}
+
+// VectorMergerBlockRegisterInputOpts contains optional parameters for VectorMergerBlock.RegisterInput.
+type VectorMergerBlockRegisterInputOpts struct {
+	IsOptional *bool
+	Target     js.Value
+}
+
+// RegisterInput calls the RegisterInput method on the VectorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#registerinput
+func (v *VectorMergerBlock) RegisterInput(name string, jsType js.Value, opts *VectorMergerBlockRegisterInputOpts) *VectorMergerBlock {
+	if opts == nil {
+		opts = &VectorMergerBlockRegisterInputOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+2)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	if opts.IsOptional == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IsOptional)
+	}
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+
+	retVal := v.p.Call("registerInput", args...)
+	return VectorMergerBlockFromJSObject(retVal, v.ctx)
+}
+
+// VectorMergerBlockRegisterOutputOpts contains optional parameters for VectorMergerBlock.RegisterOutput.
+type VectorMergerBlockRegisterOutputOpts struct {
+	Target js.Value
+}
+
+// RegisterOutput calls the RegisterOutput method on the VectorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#registeroutput
+func (v *VectorMergerBlock) RegisterOutput(name string, jsType js.Value, opts *VectorMergerBlockRegisterOutputOpts) *VectorMergerBlock {
+	if opts == nil {
+		opts = &VectorMergerBlockRegisterOutputOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+
+	retVal := v.p.Call("registerOutput", args...)
+	return VectorMergerBlockFromJSObject(retVal, v.ctx)
+}
+
+// ReplaceRepeatableContent calls the ReplaceRepeatableContent method on the VectorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#replacerepeatablecontent
+func (v *VectorMergerBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterialBuildState, fragmentShaderState *NodeMaterialBuildState, mesh *AbstractMesh, defines js.Value) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, vertexShaderState.JSObject())
+	args = append(args, fragmentShaderState.JSObject())
+	args = append(args, mesh.JSObject())
+	args = append(args, defines)
+
+	v.p.Call("replaceRepeatableContent", args...)
+}
+
+// Serialize calls the Serialize method on the VectorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#serialize
+func (v *VectorMergerBlock) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("serialize", args...)
+	return retVal
+}
+
+// UpdateUniformsAndSamples calls the UpdateUniformsAndSamples method on the VectorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#updateuniformsandsamples
+func (v *VectorMergerBlock) UpdateUniformsAndSamples(state *NodeMaterialBuildState, nodeMaterial *NodeMaterial, defines js.Value, uniformBuffers string) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, state.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+	args = append(args, uniformBuffers)
+
+	v.p.Call("updateUniformsAndSamples", args...)
+}
+
+/*
+
+// BuildId returns the BuildId property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#buildid
+func (v *VectorMergerBlock) BuildId(buildId float64) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(buildId)
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// SetBuildId sets the BuildId property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#buildid
+func (v *VectorMergerBlock) SetBuildId(buildId float64) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(buildId)
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// Comments returns the Comments property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#comments
+func (v *VectorMergerBlock) Comments(comments string) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(comments)
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// SetComments sets the Comments property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#comments
+func (v *VectorMergerBlock) SetComments(comments string) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(comments)
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// Inputs returns the Inputs property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#inputs
+func (v *VectorMergerBlock) Inputs(inputs *NodeMaterialConnectionPoint) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(inputs.JSObject())
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// SetInputs sets the Inputs property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#inputs
+func (v *VectorMergerBlock) SetInputs(inputs *NodeMaterialConnectionPoint) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(inputs.JSObject())
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// IsFinalMerger returns the IsFinalMerger property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#isfinalmerger
+func (v *VectorMergerBlock) IsFinalMerger(isFinalMerger bool) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(isFinalMerger)
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsFinalMerger sets the IsFinalMerger property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#isfinalmerger
+func (v *VectorMergerBlock) SetIsFinalMerger(isFinalMerger bool) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(isFinalMerger)
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// IsInput returns the IsInput property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#isinput
+func (v *VectorMergerBlock) IsInput(isInput bool) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(isInput)
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsInput sets the IsInput property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#isinput
+func (v *VectorMergerBlock) SetIsInput(isInput bool) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(isInput)
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// IsUnique returns the IsUnique property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#isunique
+func (v *VectorMergerBlock) IsUnique(isUnique bool) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(isUnique)
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsUnique sets the IsUnique property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#isunique
+func (v *VectorMergerBlock) SetIsUnique(isUnique bool) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(isUnique)
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#name
+func (v *VectorMergerBlock) Name(name string) *VectorMergerBlock {
 	p := ba.ctx.Get("VectorMergerBlock").New(name)
 	return VectorMergerBlockFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetName sets the Name property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#name
+func (v *VectorMergerBlock) SetName(name string) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(name)
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// Outputs returns the Outputs property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#outputs
+func (v *VectorMergerBlock) Outputs(outputs *NodeMaterialConnectionPoint) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(outputs.JSObject())
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOutputs sets the Outputs property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#outputs
+func (v *VectorMergerBlock) SetOutputs(outputs *NodeMaterialConnectionPoint) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(outputs.JSObject())
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// Target returns the Target property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#target
+func (v *VectorMergerBlock) Target(target js.Value) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(target)
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// SetTarget sets the Target property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#target
+func (v *VectorMergerBlock) SetTarget(target js.Value) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(target)
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#uniqueid
+func (v *VectorMergerBlock) UniqueId(uniqueId float64) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(uniqueId)
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#uniqueid
+func (v *VectorMergerBlock) SetUniqueId(uniqueId float64) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(uniqueId)
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// W returns the W property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#w
+func (v *VectorMergerBlock) W(w *NodeMaterialConnectionPoint) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(w.JSObject())
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// SetW sets the W property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#w
+func (v *VectorMergerBlock) SetW(w *NodeMaterialConnectionPoint) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(w.JSObject())
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// X returns the X property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#x
+func (v *VectorMergerBlock) X(x *NodeMaterialConnectionPoint) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(x.JSObject())
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// SetX sets the X property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#x
+func (v *VectorMergerBlock) SetX(x *NodeMaterialConnectionPoint) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(x.JSObject())
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// Xy returns the Xy property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#xy
+func (v *VectorMergerBlock) Xy(xy *NodeMaterialConnectionPoint) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(xy.JSObject())
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// SetXy sets the Xy property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#xy
+func (v *VectorMergerBlock) SetXy(xy *NodeMaterialConnectionPoint) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(xy.JSObject())
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// XyIn returns the XyIn property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#xyin
+func (v *VectorMergerBlock) XyIn(xyIn *NodeMaterialConnectionPoint) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(xyIn.JSObject())
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// SetXyIn sets the XyIn property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#xyin
+func (v *VectorMergerBlock) SetXyIn(xyIn *NodeMaterialConnectionPoint) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(xyIn.JSObject())
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// XyOut returns the XyOut property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#xyout
+func (v *VectorMergerBlock) XyOut(xyOut *NodeMaterialConnectionPoint) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(xyOut.JSObject())
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// SetXyOut sets the XyOut property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#xyout
+func (v *VectorMergerBlock) SetXyOut(xyOut *NodeMaterialConnectionPoint) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(xyOut.JSObject())
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// Xyz returns the Xyz property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#xyz
+func (v *VectorMergerBlock) Xyz(xyz *NodeMaterialConnectionPoint) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(xyz.JSObject())
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// SetXyz sets the Xyz property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#xyz
+func (v *VectorMergerBlock) SetXyz(xyz *NodeMaterialConnectionPoint) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(xyz.JSObject())
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// XyzIn returns the XyzIn property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#xyzin
+func (v *VectorMergerBlock) XyzIn(xyzIn *NodeMaterialConnectionPoint) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(xyzIn.JSObject())
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// SetXyzIn sets the XyzIn property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#xyzin
+func (v *VectorMergerBlock) SetXyzIn(xyzIn *NodeMaterialConnectionPoint) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(xyzIn.JSObject())
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// XyzOut returns the XyzOut property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#xyzout
+func (v *VectorMergerBlock) XyzOut(xyzOut *NodeMaterialConnectionPoint) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(xyzOut.JSObject())
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// SetXyzOut sets the XyzOut property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#xyzout
+func (v *VectorMergerBlock) SetXyzOut(xyzOut *NodeMaterialConnectionPoint) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(xyzOut.JSObject())
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// Xyzw returns the Xyzw property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#xyzw
+func (v *VectorMergerBlock) Xyzw(xyzw *NodeMaterialConnectionPoint) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(xyzw.JSObject())
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// SetXyzw sets the Xyzw property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#xyzw
+func (v *VectorMergerBlock) SetXyzw(xyzw *NodeMaterialConnectionPoint) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(xyzw.JSObject())
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// Y returns the Y property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#y
+func (v *VectorMergerBlock) Y(y *NodeMaterialConnectionPoint) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(y.JSObject())
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// SetY sets the Y property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#y
+func (v *VectorMergerBlock) SetY(y *NodeMaterialConnectionPoint) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(y.JSObject())
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// Z returns the Z property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#z
+func (v *VectorMergerBlock) Z(z *NodeMaterialConnectionPoint) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(z.JSObject())
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// SetZ sets the Z property of class VectorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vectormergerblock#z
+func (v *VectorMergerBlock) SetZ(z *NodeMaterialConnectionPoint) *VectorMergerBlock {
+	p := ba.ctx.Get("VectorMergerBlock").New(z.JSObject())
+	return VectorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+*/

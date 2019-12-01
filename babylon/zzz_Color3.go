@@ -31,8 +31,710 @@ func Color3FromJSObject(p js.Value, ctx js.Value) *Color3 {
 //
 // https://doc.babylonjs.com/api/classes/babylon.color3
 func (ba *Babylon) NewColor3(r float64, g float64, b float64) *Color3 {
-	p := ba.ctx.Get("Color3").New(r, g, b)
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, r)
+	args = append(args, g)
+	args = append(args, b)
+
+	p := ba.ctx.Get("Color3").New(args...)
 	return Color3FromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Add calls the Add method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#add
+func (c *Color3) Add(otherColor *Color3) *Color3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, otherColor.JSObject())
+
+	retVal := c.p.Call("add", args...)
+	return Color3FromJSObject(retVal, c.ctx)
+}
+
+// AddToRef calls the AddToRef method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#addtoref
+func (c *Color3) AddToRef(otherColor *Color3, result *Color3) *Color3 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, otherColor.JSObject())
+	args = append(args, result.JSObject())
+
+	retVal := c.p.Call("addToRef", args...)
+	return Color3FromJSObject(retVal, c.ctx)
+}
+
+// AsArray calls the AsArray method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#asarray
+func (c *Color3) AsArray() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("asArray", args...)
+	return retVal.Float()
+}
+
+// Black calls the Black method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#black
+func (c *Color3) Black() *Color3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("Black", args...)
+	return Color3FromJSObject(retVal, c.ctx)
+}
+
+// Blue calls the Blue method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#blue
+func (c *Color3) Blue() *Color3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("Blue", args...)
+	return Color3FromJSObject(retVal, c.ctx)
+}
+
+// ClampToRef calls the ClampToRef method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#clamptoref
+func (c *Color3) ClampToRef(min float64, max float64, result *Color3) *Color3 {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, min)
+	args = append(args, max)
+	args = append(args, result.JSObject())
+
+	retVal := c.p.Call("clampToRef", args...)
+	return Color3FromJSObject(retVal, c.ctx)
+}
+
+// Clone calls the Clone method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#clone
+func (c *Color3) Clone() *Color3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("clone", args...)
+	return Color3FromJSObject(retVal, c.ctx)
+}
+
+// CopyFrom calls the CopyFrom method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#copyfrom
+func (c *Color3) CopyFrom(source *Color3) *Color3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, source.JSObject())
+
+	retVal := c.p.Call("copyFrom", args...)
+	return Color3FromJSObject(retVal, c.ctx)
+}
+
+// CopyFromFloats calls the CopyFromFloats method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#copyfromfloats
+func (c *Color3) CopyFromFloats(r float64, g float64, b float64) *Color3 {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, r)
+	args = append(args, g)
+	args = append(args, b)
+
+	retVal := c.p.Call("copyFromFloats", args...)
+	return Color3FromJSObject(retVal, c.ctx)
+}
+
+// Equals calls the Equals method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#equals
+func (c *Color3) Equals(otherColor *Color3) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, otherColor.JSObject())
+
+	retVal := c.p.Call("equals", args...)
+	return retVal.Bool()
+}
+
+// EqualsFloats calls the EqualsFloats method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#equalsfloats
+func (c *Color3) EqualsFloats(r float64, g float64, b float64) bool {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, r)
+	args = append(args, g)
+	args = append(args, b)
+
+	retVal := c.p.Call("equalsFloats", args...)
+	return retVal.Bool()
+}
+
+// Color3FromArrayOpts contains optional parameters for Color3.FromArray.
+type Color3FromArrayOpts struct {
+	Offset *float64
+}
+
+// FromArray calls the FromArray method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#fromarray
+func (c *Color3) FromArray(array js.Value, opts *Color3FromArrayOpts) *Color3 {
+	if opts == nil {
+		opts = &Color3FromArrayOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, array)
+
+	if opts.Offset == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Offset)
+	}
+
+	retVal := c.p.Call("FromArray", args...)
+	return Color3FromJSObject(retVal, c.ctx)
+}
+
+// FromHexString calls the FromHexString method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#fromhexstring
+func (c *Color3) FromHexString(hex string) *Color3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, hex)
+
+	retVal := c.p.Call("FromHexString", args...)
+	return Color3FromJSObject(retVal, c.ctx)
+}
+
+// FromInts calls the FromInts method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#fromints
+func (c *Color3) FromInts(r float64, g float64, b float64) *Color3 {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, r)
+	args = append(args, g)
+	args = append(args, b)
+
+	retVal := c.p.Call("FromInts", args...)
+	return Color3FromJSObject(retVal, c.ctx)
+}
+
+// GetClassName calls the GetClassName method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#getclassname
+func (c *Color3) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetHashCode calls the GetHashCode method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#gethashcode
+func (c *Color3) GetHashCode() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getHashCode", args...)
+	return retVal.Float()
+}
+
+// Gray calls the Gray method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#gray
+func (c *Color3) Gray() *Color3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("Gray", args...)
+	return Color3FromJSObject(retVal, c.ctx)
+}
+
+// Green calls the Green method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#green
+func (c *Color3) Green() *Color3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("Green", args...)
+	return Color3FromJSObject(retVal, c.ctx)
+}
+
+// HSVtoRGBToRef calls the HSVtoRGBToRef method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#hsvtorgbtoref
+func (c *Color3) HSVtoRGBToRef(hue float64, saturation float64, value float64, result *Color3) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, hue)
+	args = append(args, saturation)
+	args = append(args, value)
+	args = append(args, result.JSObject())
+
+	c.p.Call("HSVtoRGBToRef", args...)
+}
+
+// Lerp calls the Lerp method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#lerp
+func (c *Color3) Lerp(start *Color3, end *Color3, amount float64) *Color3 {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, start.JSObject())
+	args = append(args, end.JSObject())
+	args = append(args, amount)
+
+	retVal := c.p.Call("Lerp", args...)
+	return Color3FromJSObject(retVal, c.ctx)
+}
+
+// LerpToRef calls the LerpToRef method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#lerptoref
+func (c *Color3) LerpToRef(left *Color3, right *Color3, amount float64, result *Color3) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, left.JSObject())
+	args = append(args, right.JSObject())
+	args = append(args, amount)
+	args = append(args, result.JSObject())
+
+	c.p.Call("LerpToRef", args...)
+}
+
+// Magenta calls the Magenta method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#magenta
+func (c *Color3) Magenta() *Color3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("Magenta", args...)
+	return Color3FromJSObject(retVal, c.ctx)
+}
+
+// Multiply calls the Multiply method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#multiply
+func (c *Color3) Multiply(otherColor *Color3) *Color3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, otherColor.JSObject())
+
+	retVal := c.p.Call("multiply", args...)
+	return Color3FromJSObject(retVal, c.ctx)
+}
+
+// MultiplyToRef calls the MultiplyToRef method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#multiplytoref
+func (c *Color3) MultiplyToRef(otherColor *Color3, result *Color3) *Color3 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, otherColor.JSObject())
+	args = append(args, result.JSObject())
+
+	retVal := c.p.Call("multiplyToRef", args...)
+	return Color3FromJSObject(retVal, c.ctx)
+}
+
+// Purple calls the Purple method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#purple
+func (c *Color3) Purple() *Color3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("Purple", args...)
+	return Color3FromJSObject(retVal, c.ctx)
+}
+
+// Random calls the Random method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#random
+func (c *Color3) Random() *Color3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("Random", args...)
+	return Color3FromJSObject(retVal, c.ctx)
+}
+
+// Red calls the Red method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#red
+func (c *Color3) Red() *Color3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("Red", args...)
+	return Color3FromJSObject(retVal, c.ctx)
+}
+
+// Scale calls the Scale method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#scale
+func (c *Color3) Scale(scale float64) *Color3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, scale)
+
+	retVal := c.p.Call("scale", args...)
+	return Color3FromJSObject(retVal, c.ctx)
+}
+
+// ScaleAndAddToRef calls the ScaleAndAddToRef method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#scaleandaddtoref
+func (c *Color3) ScaleAndAddToRef(scale float64, result *Color3) *Color3 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, scale)
+	args = append(args, result.JSObject())
+
+	retVal := c.p.Call("scaleAndAddToRef", args...)
+	return Color3FromJSObject(retVal, c.ctx)
+}
+
+// ScaleToRef calls the ScaleToRef method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#scaletoref
+func (c *Color3) ScaleToRef(scale float64, result *Color3) *Color3 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, scale)
+	args = append(args, result.JSObject())
+
+	retVal := c.p.Call("scaleToRef", args...)
+	return Color3FromJSObject(retVal, c.ctx)
+}
+
+// Set calls the Set method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#set
+func (c *Color3) Set(r float64, g float64, b float64) *Color3 {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, r)
+	args = append(args, g)
+	args = append(args, b)
+
+	retVal := c.p.Call("set", args...)
+	return Color3FromJSObject(retVal, c.ctx)
+}
+
+// Subtract calls the Subtract method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#subtract
+func (c *Color3) Subtract(otherColor *Color3) *Color3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, otherColor.JSObject())
+
+	retVal := c.p.Call("subtract", args...)
+	return Color3FromJSObject(retVal, c.ctx)
+}
+
+// SubtractToRef calls the SubtractToRef method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#subtracttoref
+func (c *Color3) SubtractToRef(otherColor *Color3, result *Color3) *Color3 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, otherColor.JSObject())
+	args = append(args, result.JSObject())
+
+	retVal := c.p.Call("subtractToRef", args...)
+	return Color3FromJSObject(retVal, c.ctx)
+}
+
+// Teal calls the Teal method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#teal
+func (c *Color3) Teal() *Color3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("Teal", args...)
+	return Color3FromJSObject(retVal, c.ctx)
+}
+
+// Color3ToArrayOpts contains optional parameters for Color3.ToArray.
+type Color3ToArrayOpts struct {
+	Index *float64
+}
+
+// ToArray calls the ToArray method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#toarray
+func (c *Color3) ToArray(array js.Value, opts *Color3ToArrayOpts) *Color3 {
+	if opts == nil {
+		opts = &Color3ToArrayOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, array)
+
+	if opts.Index == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Index)
+	}
+
+	retVal := c.p.Call("toArray", args...)
+	return Color3FromJSObject(retVal, c.ctx)
+}
+
+// Color3ToColor4Opts contains optional parameters for Color3.ToColor4.
+type Color3ToColor4Opts struct {
+	Alpha *float64
+}
+
+// ToColor4 calls the ToColor4 method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#tocolor4
+func (c *Color3) ToColor4(opts *Color3ToColor4Opts) *Color4 {
+	if opts == nil {
+		opts = &Color3ToColor4Opts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Alpha == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Alpha)
+	}
+
+	retVal := c.p.Call("toColor4", args...)
+	return Color4FromJSObject(retVal, c.ctx)
+}
+
+// ToGammaSpace calls the ToGammaSpace method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#togammaspace
+func (c *Color3) ToGammaSpace() *Color3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("toGammaSpace", args...)
+	return Color3FromJSObject(retVal, c.ctx)
+}
+
+// ToGammaSpaceToRef calls the ToGammaSpaceToRef method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#togammaspacetoref
+func (c *Color3) ToGammaSpaceToRef(convertedColor *Color3) *Color3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, convertedColor.JSObject())
+
+	retVal := c.p.Call("toGammaSpaceToRef", args...)
+	return Color3FromJSObject(retVal, c.ctx)
+}
+
+// ToHSV calls the ToHSV method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#tohsv
+func (c *Color3) ToHSV() *Color3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("toHSV", args...)
+	return Color3FromJSObject(retVal, c.ctx)
+}
+
+// ToHSVToRef calls the ToHSVToRef method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#tohsvtoref
+func (c *Color3) ToHSVToRef(result *Color3) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, result.JSObject())
+
+	c.p.Call("toHSVToRef", args...)
+}
+
+// ToHexString calls the ToHexString method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#tohexstring
+func (c *Color3) ToHexString() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("toHexString", args...)
+	return retVal.String()
+}
+
+// ToLinearSpace calls the ToLinearSpace method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#tolinearspace
+func (c *Color3) ToLinearSpace() *Color3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("toLinearSpace", args...)
+	return Color3FromJSObject(retVal, c.ctx)
+}
+
+// ToLinearSpaceToRef calls the ToLinearSpaceToRef method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#tolinearspacetoref
+func (c *Color3) ToLinearSpaceToRef(convertedColor *Color3) *Color3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, convertedColor.JSObject())
+
+	retVal := c.p.Call("toLinearSpaceToRef", args...)
+	return Color3FromJSObject(retVal, c.ctx)
+}
+
+// ToLuminance calls the ToLuminance method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#toluminance
+func (c *Color3) ToLuminance() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("toLuminance", args...)
+	return retVal.Float()
+}
+
+// ToString calls the ToString method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#tostring
+func (c *Color3) ToString() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("toString", args...)
+	return retVal.String()
+}
+
+// White calls the White method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#white
+func (c *Color3) White() *Color3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("White", args...)
+	return Color3FromJSObject(retVal, c.ctx)
+}
+
+// Yellow calls the Yellow method on the Color3 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#yellow
+func (c *Color3) Yellow() *Color3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("Yellow", args...)
+	return Color3FromJSObject(retVal, c.ctx)
+}
+
+/*
+
+// B returns the B property of class Color3.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#b
+func (c *Color3) B(b float64) *Color3 {
+	p := ba.ctx.Get("Color3").New(b)
+	return Color3FromJSObject(p, ba.ctx)
+}
+
+// SetB sets the B property of class Color3.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#b
+func (c *Color3) SetB(b float64) *Color3 {
+	p := ba.ctx.Get("Color3").New(b)
+	return Color3FromJSObject(p, ba.ctx)
+}
+
+// BlackReadOnly returns the BlackReadOnly property of class Color3.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#blackreadonly
+func (c *Color3) BlackReadOnly(BlackReadOnly *Color3) *Color3 {
+	p := ba.ctx.Get("Color3").New(BlackReadOnly.JSObject())
+	return Color3FromJSObject(p, ba.ctx)
+}
+
+// SetBlackReadOnly sets the BlackReadOnly property of class Color3.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#blackreadonly
+func (c *Color3) SetBlackReadOnly(BlackReadOnly *Color3) *Color3 {
+	p := ba.ctx.Get("Color3").New(BlackReadOnly.JSObject())
+	return Color3FromJSObject(p, ba.ctx)
+}
+
+// G returns the G property of class Color3.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#g
+func (c *Color3) G(g float64) *Color3 {
+	p := ba.ctx.Get("Color3").New(g)
+	return Color3FromJSObject(p, ba.ctx)
+}
+
+// SetG sets the G property of class Color3.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#g
+func (c *Color3) SetG(g float64) *Color3 {
+	p := ba.ctx.Get("Color3").New(g)
+	return Color3FromJSObject(p, ba.ctx)
+}
+
+// R returns the R property of class Color3.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#r
+func (c *Color3) R(r float64) *Color3 {
+	p := ba.ctx.Get("Color3").New(r)
+	return Color3FromJSObject(p, ba.ctx)
+}
+
+// SetR sets the R property of class Color3.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3#r
+func (c *Color3) SetR(r float64) *Color3 {
+	p := ba.ctx.Get("Color3").New(r)
+	return Color3FromJSObject(p, ba.ctx)
+}
+
+*/

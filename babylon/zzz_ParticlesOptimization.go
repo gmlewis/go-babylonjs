@@ -31,7 +31,7 @@ func ParticlesOptimizationFromJSObject(p js.Value, ctx js.Value) *ParticlesOptim
 
 // NewParticlesOptimizationOpts contains optional parameters for NewParticlesOptimization.
 type NewParticlesOptimizationOpts struct {
-	Priority *JSFloat64
+	Priority *float64
 }
 
 // NewParticlesOptimization returns a new ParticlesOptimization object.
@@ -42,8 +42,59 @@ func (ba *Babylon) NewParticlesOptimization(opts *NewParticlesOptimizationOpts) 
 		opts = &NewParticlesOptimizationOpts{}
 	}
 
-	p := ba.ctx.Get("ParticlesOptimization").New(opts.Priority.JSObject())
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Priority == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Priority)
+	}
+
+	p := ba.ctx.Get("ParticlesOptimization").New(args...)
 	return ParticlesOptimizationFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Apply calls the Apply method on the ParticlesOptimization object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.particlesoptimization#apply
+func (p *ParticlesOptimization) Apply(scene *Scene, optimizer *SceneOptimizer) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, scene.JSObject())
+	args = append(args, optimizer.JSObject())
+
+	retVal := p.p.Call("apply", args...)
+	return retVal.Bool()
+}
+
+// GetDescription calls the GetDescription method on the ParticlesOptimization object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.particlesoptimization#getdescription
+func (p *ParticlesOptimization) GetDescription() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("getDescription", args...)
+	return retVal.String()
+}
+
+/*
+
+// Priority returns the Priority property of class ParticlesOptimization.
+//
+// https://doc.babylonjs.com/api/classes/babylon.particlesoptimization#priority
+func (p *ParticlesOptimization) Priority(priority float64) *ParticlesOptimization {
+	p := ba.ctx.Get("ParticlesOptimization").New(priority)
+	return ParticlesOptimizationFromJSObject(p, ba.ctx)
+}
+
+// SetPriority sets the Priority property of class ParticlesOptimization.
+//
+// https://doc.babylonjs.com/api/classes/babylon.particlesoptimization#priority
+func (p *ParticlesOptimization) SetPriority(priority float64) *ParticlesOptimization {
+	p := ba.ctx.Get("ParticlesOptimization").New(priority)
+	return ParticlesOptimizationFromJSObject(p, ba.ctx)
+}
+
+*/

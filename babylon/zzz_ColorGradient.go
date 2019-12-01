@@ -27,4 +27,66 @@ func ColorGradientFromJSObject(p js.Value, ctx js.Value) *ColorGradient {
 	return &ColorGradient{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// GetColorToRef calls the GetColorToRef method on the ColorGradient object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorgradient#getcolortoref
+func (c *ColorGradient) GetColorToRef(result *Color4) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, result.JSObject())
+
+	c.p.Call("getColorToRef", args...)
+}
+
+/*
+
+// Color1 returns the Color1 property of class ColorGradient.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorgradient#color1
+func (c *ColorGradient) Color1(color1 *Color4) *ColorGradient {
+	p := ba.ctx.Get("ColorGradient").New(color1.JSObject())
+	return ColorGradientFromJSObject(p, ba.ctx)
+}
+
+// SetColor1 sets the Color1 property of class ColorGradient.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorgradient#color1
+func (c *ColorGradient) SetColor1(color1 *Color4) *ColorGradient {
+	p := ba.ctx.Get("ColorGradient").New(color1.JSObject())
+	return ColorGradientFromJSObject(p, ba.ctx)
+}
+
+// Color2 returns the Color2 property of class ColorGradient.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorgradient#color2
+func (c *ColorGradient) Color2(color2 *Color4) *ColorGradient {
+	p := ba.ctx.Get("ColorGradient").New(color2.JSObject())
+	return ColorGradientFromJSObject(p, ba.ctx)
+}
+
+// SetColor2 sets the Color2 property of class ColorGradient.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorgradient#color2
+func (c *ColorGradient) SetColor2(color2 *Color4) *ColorGradient {
+	p := ba.ctx.Get("ColorGradient").New(color2.JSObject())
+	return ColorGradientFromJSObject(p, ba.ctx)
+}
+
+// Gradient returns the Gradient property of class ColorGradient.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorgradient#gradient
+func (c *ColorGradient) Gradient(gradient float64) *ColorGradient {
+	p := ba.ctx.Get("ColorGradient").New(gradient)
+	return ColorGradientFromJSObject(p, ba.ctx)
+}
+
+// SetGradient sets the Gradient property of class ColorGradient.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorgradient#gradient
+func (c *ColorGradient) SetGradient(gradient float64) *ColorGradient {
+	p := ba.ctx.Get("ColorGradient").New(gradient)
+	return ColorGradientFromJSObject(p, ba.ctx)
+}
+
+*/

@@ -27,4 +27,54 @@ func AxisFromJSObject(p js.Value, ctx js.Value) *Axis {
 	return &Axis{p: p, ctx: ctx}
 }
 
-// TODO: methods
+/*
+
+// X returns the X property of class Axis.
+//
+// https://doc.babylonjs.com/api/classes/babylon.axis#x
+func (a *Axis) X(X *Vector3) *Axis {
+	p := ba.ctx.Get("Axis").New(X.JSObject())
+	return AxisFromJSObject(p, ba.ctx)
+}
+
+// SetX sets the X property of class Axis.
+//
+// https://doc.babylonjs.com/api/classes/babylon.axis#x
+func (a *Axis) SetX(X *Vector3) *Axis {
+	p := ba.ctx.Get("Axis").New(X.JSObject())
+	return AxisFromJSObject(p, ba.ctx)
+}
+
+// Y returns the Y property of class Axis.
+//
+// https://doc.babylonjs.com/api/classes/babylon.axis#y
+func (a *Axis) Y(Y *Vector3) *Axis {
+	p := ba.ctx.Get("Axis").New(Y.JSObject())
+	return AxisFromJSObject(p, ba.ctx)
+}
+
+// SetY sets the Y property of class Axis.
+//
+// https://doc.babylonjs.com/api/classes/babylon.axis#y
+func (a *Axis) SetY(Y *Vector3) *Axis {
+	p := ba.ctx.Get("Axis").New(Y.JSObject())
+	return AxisFromJSObject(p, ba.ctx)
+}
+
+// Z returns the Z property of class Axis.
+//
+// https://doc.babylonjs.com/api/classes/babylon.axis#z
+func (a *Axis) Z(Z *Vector3) *Axis {
+	p := ba.ctx.Get("Axis").New(Z.JSObject())
+	return AxisFromJSObject(p, ba.ctx)
+}
+
+// SetZ sets the Z property of class Axis.
+//
+// https://doc.babylonjs.com/api/classes/babylon.axis#z
+func (a *Axis) SetZ(Z *Vector3) *Axis {
+	p := ba.ctx.Get("Axis").New(Z.JSObject())
+	return AxisFromJSObject(p, ba.ctx)
+}
+
+*/

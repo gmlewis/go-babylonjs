@@ -27,4 +27,110 @@ func FrustumFromJSObject(p js.Value, ctx js.Value) *Frustum {
 	return &Frustum{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// GetBottomPlaneToRef calls the GetBottomPlaneToRef method on the Frustum object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.frustum#getbottomplanetoref
+func (f *Frustum) GetBottomPlaneToRef(transform *Matrix, frustumPlane *Plane) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, transform.JSObject())
+	args = append(args, frustumPlane.JSObject())
+
+	f.p.Call("GetBottomPlaneToRef", args...)
+}
+
+// GetFarPlaneToRef calls the GetFarPlaneToRef method on the Frustum object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.frustum#getfarplanetoref
+func (f *Frustum) GetFarPlaneToRef(transform *Matrix, frustumPlane *Plane) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, transform.JSObject())
+	args = append(args, frustumPlane.JSObject())
+
+	f.p.Call("GetFarPlaneToRef", args...)
+}
+
+// GetLeftPlaneToRef calls the GetLeftPlaneToRef method on the Frustum object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.frustum#getleftplanetoref
+func (f *Frustum) GetLeftPlaneToRef(transform *Matrix, frustumPlane *Plane) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, transform.JSObject())
+	args = append(args, frustumPlane.JSObject())
+
+	f.p.Call("GetLeftPlaneToRef", args...)
+}
+
+// GetNearPlaneToRef calls the GetNearPlaneToRef method on the Frustum object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.frustum#getnearplanetoref
+func (f *Frustum) GetNearPlaneToRef(transform *Matrix, frustumPlane *Plane) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, transform.JSObject())
+	args = append(args, frustumPlane.JSObject())
+
+	f.p.Call("GetNearPlaneToRef", args...)
+}
+
+// GetPlanes calls the GetPlanes method on the Frustum object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.frustum#getplanes
+func (f *Frustum) GetPlanes(transform *Matrix) *Plane {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, transform.JSObject())
+
+	retVal := f.p.Call("GetPlanes", args...)
+	return PlaneFromJSObject(retVal, f.ctx)
+}
+
+// GetPlanesToRef calls the GetPlanesToRef method on the Frustum object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.frustum#getplanestoref
+func (f *Frustum) GetPlanesToRef(transform *Matrix, frustumPlanes *Plane) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, transform.JSObject())
+	args = append(args, frustumPlanes.JSObject())
+
+	f.p.Call("GetPlanesToRef", args...)
+}
+
+// GetRightPlaneToRef calls the GetRightPlaneToRef method on the Frustum object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.frustum#getrightplanetoref
+func (f *Frustum) GetRightPlaneToRef(transform *Matrix, frustumPlane *Plane) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, transform.JSObject())
+	args = append(args, frustumPlane.JSObject())
+
+	f.p.Call("GetRightPlaneToRef", args...)
+}
+
+// GetTopPlaneToRef calls the GetTopPlaneToRef method on the Frustum object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.frustum#gettopplanetoref
+func (f *Frustum) GetTopPlaneToRef(transform *Matrix, frustumPlane *Plane) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, transform.JSObject())
+	args = append(args, frustumPlane.JSObject())
+
+	f.p.Call("GetTopPlaneToRef", args...)
+}
+
+/*
+
+ */

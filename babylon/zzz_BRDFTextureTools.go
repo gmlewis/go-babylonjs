@@ -27,4 +27,19 @@ func BRDFTextureToolsFromJSObject(p js.Value, ctx js.Value) *BRDFTextureTools {
 	return &BRDFTextureTools{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// GetEnvironmentBRDFTexture calls the GetEnvironmentBRDFTexture method on the BRDFTextureTools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.brdftexturetools#getenvironmentbrdftexture
+func (b *BRDFTextureTools) GetEnvironmentBRDFTexture(scene *Scene) *BaseTexture {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, scene.JSObject())
+
+	retVal := b.p.Call("GetEnvironmentBRDFTexture", args...)
+	return BaseTextureFromJSObject(retVal, b.ctx)
+}
+
+/*
+
+ */

@@ -27,4 +27,18 @@ func TimingToolsFromJSObject(p js.Value, ctx js.Value) *TimingTools {
 	return &TimingTools{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// SetImmediate calls the SetImmediate method on the TimingTools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.timingtools#setimmediate
+func (t *TimingTools) SetImmediate(action func()) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, action)
+
+	t.p.Call("SetImmediate", args...)
+}
+
+/*
+
+ */

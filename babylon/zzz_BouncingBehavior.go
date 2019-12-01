@@ -29,4 +29,160 @@ func BouncingBehaviorFromJSObject(p js.Value, ctx js.Value) *BouncingBehavior {
 	return &BouncingBehavior{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// Attach calls the Attach method on the BouncingBehavior object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bouncingbehavior#attach
+func (b *BouncingBehavior) Attach(camera *ArcRotateCamera) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, camera.JSObject())
+
+	b.p.Call("attach", args...)
+}
+
+// Detach calls the Detach method on the BouncingBehavior object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bouncingbehavior#detach
+func (b *BouncingBehavior) Detach() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	b.p.Call("detach", args...)
+}
+
+// Init calls the Init method on the BouncingBehavior object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bouncingbehavior#init
+func (b *BouncingBehavior) Init() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	b.p.Call("init", args...)
+}
+
+// StopAllAnimations calls the StopAllAnimations method on the BouncingBehavior object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bouncingbehavior#stopallanimations
+func (b *BouncingBehavior) StopAllAnimations() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	b.p.Call("stopAllAnimations", args...)
+}
+
+/*
+
+// AutoTransitionRange returns the AutoTransitionRange property of class BouncingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bouncingbehavior#autotransitionrange
+func (b *BouncingBehavior) AutoTransitionRange(autoTransitionRange bool) *BouncingBehavior {
+	p := ba.ctx.Get("BouncingBehavior").New(autoTransitionRange)
+	return BouncingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetAutoTransitionRange sets the AutoTransitionRange property of class BouncingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bouncingbehavior#autotransitionrange
+func (b *BouncingBehavior) SetAutoTransitionRange(autoTransitionRange bool) *BouncingBehavior {
+	p := ba.ctx.Get("BouncingBehavior").New(autoTransitionRange)
+	return BouncingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// EasingFunction returns the EasingFunction property of class BouncingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bouncingbehavior#easingfunction
+func (b *BouncingBehavior) EasingFunction(EasingFunction *BackEase) *BouncingBehavior {
+	p := ba.ctx.Get("BouncingBehavior").New(EasingFunction.JSObject())
+	return BouncingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetEasingFunction sets the EasingFunction property of class BouncingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bouncingbehavior#easingfunction
+func (b *BouncingBehavior) SetEasingFunction(EasingFunction *BackEase) *BouncingBehavior {
+	p := ba.ctx.Get("BouncingBehavior").New(EasingFunction.JSObject())
+	return BouncingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// EasingMode returns the EasingMode property of class BouncingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bouncingbehavior#easingmode
+func (b *BouncingBehavior) EasingMode(EasingMode float64) *BouncingBehavior {
+	p := ba.ctx.Get("BouncingBehavior").New(EasingMode)
+	return BouncingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetEasingMode sets the EasingMode property of class BouncingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bouncingbehavior#easingmode
+func (b *BouncingBehavior) SetEasingMode(EasingMode float64) *BouncingBehavior {
+	p := ba.ctx.Get("BouncingBehavior").New(EasingMode)
+	return BouncingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// LowerRadiusTransitionRange returns the LowerRadiusTransitionRange property of class BouncingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bouncingbehavior#lowerradiustransitionrange
+func (b *BouncingBehavior) LowerRadiusTransitionRange(lowerRadiusTransitionRange float64) *BouncingBehavior {
+	p := ba.ctx.Get("BouncingBehavior").New(lowerRadiusTransitionRange)
+	return BouncingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetLowerRadiusTransitionRange sets the LowerRadiusTransitionRange property of class BouncingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bouncingbehavior#lowerradiustransitionrange
+func (b *BouncingBehavior) SetLowerRadiusTransitionRange(lowerRadiusTransitionRange float64) *BouncingBehavior {
+	p := ba.ctx.Get("BouncingBehavior").New(lowerRadiusTransitionRange)
+	return BouncingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class BouncingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bouncingbehavior#name
+func (b *BouncingBehavior) Name(name string) *BouncingBehavior {
+	p := ba.ctx.Get("BouncingBehavior").New(name)
+	return BouncingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class BouncingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bouncingbehavior#name
+func (b *BouncingBehavior) SetName(name string) *BouncingBehavior {
+	p := ba.ctx.Get("BouncingBehavior").New(name)
+	return BouncingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// TransitionDuration returns the TransitionDuration property of class BouncingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bouncingbehavior#transitionduration
+func (b *BouncingBehavior) TransitionDuration(transitionDuration float64) *BouncingBehavior {
+	p := ba.ctx.Get("BouncingBehavior").New(transitionDuration)
+	return BouncingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetTransitionDuration sets the TransitionDuration property of class BouncingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bouncingbehavior#transitionduration
+func (b *BouncingBehavior) SetTransitionDuration(transitionDuration float64) *BouncingBehavior {
+	p := ba.ctx.Get("BouncingBehavior").New(transitionDuration)
+	return BouncingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// UpperRadiusTransitionRange returns the UpperRadiusTransitionRange property of class BouncingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bouncingbehavior#upperradiustransitionrange
+func (b *BouncingBehavior) UpperRadiusTransitionRange(upperRadiusTransitionRange float64) *BouncingBehavior {
+	p := ba.ctx.Get("BouncingBehavior").New(upperRadiusTransitionRange)
+	return BouncingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetUpperRadiusTransitionRange sets the UpperRadiusTransitionRange property of class BouncingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bouncingbehavior#upperradiustransitionrange
+func (b *BouncingBehavior) SetUpperRadiusTransitionRange(upperRadiusTransitionRange float64) *BouncingBehavior {
+	p := ba.ctx.Get("BouncingBehavior").New(upperRadiusTransitionRange)
+	return BouncingBehaviorFromJSObject(p, ba.ctx)
+}
+
+*/

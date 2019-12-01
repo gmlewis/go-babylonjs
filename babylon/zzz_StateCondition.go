@@ -31,8 +31,55 @@ func StateConditionFromJSObject(p js.Value, ctx js.Value) *StateCondition {
 //
 // https://doc.babylonjs.com/api/classes/babylon.statecondition
 func (ba *Babylon) NewStateCondition(actionManager *ActionManager, target interface{}, value string) *StateCondition {
-	p := ba.ctx.Get("StateCondition").New(actionManager.JSObject(), target, value)
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, actionManager.JSObject())
+	args = append(args, target)
+	args = append(args, value)
+
+	p := ba.ctx.Get("StateCondition").New(args...)
 	return StateConditionFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// IsValid calls the IsValid method on the StateCondition object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.statecondition#isvalid
+func (s *StateCondition) IsValid() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("isValid", args...)
+	return retVal.Bool()
+}
+
+// Serialize calls the Serialize method on the StateCondition object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.statecondition#serialize
+func (s *StateCondition) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("serialize", args...)
+	return retVal
+}
+
+/*
+
+// Value returns the Value property of class StateCondition.
+//
+// https://doc.babylonjs.com/api/classes/babylon.statecondition#value
+func (s *StateCondition) Value(value string) *StateCondition {
+	p := ba.ctx.Get("StateCondition").New(value)
+	return StateConditionFromJSObject(p, ba.ctx)
+}
+
+// SetValue sets the Value property of class StateCondition.
+//
+// https://doc.babylonjs.com/api/classes/babylon.statecondition#value
+func (s *StateCondition) SetValue(value string) *StateCondition {
+	p := ba.ctx.Get("StateCondition").New(value)
+	return StateConditionFromJSObject(p, ba.ctx)
+}
+
+*/

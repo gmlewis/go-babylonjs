@@ -27,4 +27,54 @@ func KHR_draco_mesh_compressionFromJSObject(p js.Value, ctx js.Value) *KHR_draco
 	return &KHR_draco_mesh_compression{p: p, ctx: ctx}
 }
 
-// TODO: methods
+/*
+
+// DracoCompression returns the DracoCompression property of class KHR_draco_mesh_compression.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khr_draco_mesh_compression#dracocompression
+func (k *KHR_draco_mesh_compression) DracoCompression(dracoCompression *DracoCompression) *KHR_draco_mesh_compression {
+	p := ba.ctx.Get("KHR_draco_mesh_compression").New(dracoCompression.JSObject())
+	return KHR_draco_mesh_compressionFromJSObject(p, ba.ctx)
+}
+
+// SetDracoCompression sets the DracoCompression property of class KHR_draco_mesh_compression.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khr_draco_mesh_compression#dracocompression
+func (k *KHR_draco_mesh_compression) SetDracoCompression(dracoCompression *DracoCompression) *KHR_draco_mesh_compression {
+	p := ba.ctx.Get("KHR_draco_mesh_compression").New(dracoCompression.JSObject())
+	return KHR_draco_mesh_compressionFromJSObject(p, ba.ctx)
+}
+
+// Enabled returns the Enabled property of class KHR_draco_mesh_compression.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khr_draco_mesh_compression#enabled
+func (k *KHR_draco_mesh_compression) Enabled(enabled bool) *KHR_draco_mesh_compression {
+	p := ba.ctx.Get("KHR_draco_mesh_compression").New(enabled)
+	return KHR_draco_mesh_compressionFromJSObject(p, ba.ctx)
+}
+
+// SetEnabled sets the Enabled property of class KHR_draco_mesh_compression.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khr_draco_mesh_compression#enabled
+func (k *KHR_draco_mesh_compression) SetEnabled(enabled bool) *KHR_draco_mesh_compression {
+	p := ba.ctx.Get("KHR_draco_mesh_compression").New(enabled)
+	return KHR_draco_mesh_compressionFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class KHR_draco_mesh_compression.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khr_draco_mesh_compression#name
+func (k *KHR_draco_mesh_compression) Name(name string) *KHR_draco_mesh_compression {
+	p := ba.ctx.Get("KHR_draco_mesh_compression").New(name)
+	return KHR_draco_mesh_compressionFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class KHR_draco_mesh_compression.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khr_draco_mesh_compression#name
+func (k *KHR_draco_mesh_compression) SetName(name string) *KHR_draco_mesh_compression {
+	p := ba.ctx.Get("KHR_draco_mesh_compression").New(name)
+	return KHR_draco_mesh_compressionFromJSObject(p, ba.ctx)
+}
+
+*/

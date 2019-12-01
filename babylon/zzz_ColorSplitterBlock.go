@@ -31,8 +31,717 @@ func ColorSplitterBlockFromJSObject(p js.Value, ctx js.Value) *ColorSplitterBloc
 //
 // https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock
 func (ba *Babylon) NewColorSplitterBlock(name string) *ColorSplitterBlock {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	p := ba.ctx.Get("ColorSplitterBlock").New(args...)
+	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+}
+
+// AutoConfigure calls the AutoConfigure method on the ColorSplitterBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#autoconfigure
+func (c *ColorSplitterBlock) AutoConfigure(material *NodeMaterial) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, material.JSObject())
+
+	c.p.Call("autoConfigure", args...)
+}
+
+// ColorSplitterBlockBindOpts contains optional parameters for ColorSplitterBlock.Bind.
+type ColorSplitterBlockBindOpts struct {
+	Mesh *Mesh
+}
+
+// Bind calls the Bind method on the ColorSplitterBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#bind
+func (c *ColorSplitterBlock) Bind(effect *Effect, nodeMaterial *NodeMaterial, opts *ColorSplitterBlockBindOpts) {
+	if opts == nil {
+		opts = &ColorSplitterBlockBindOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, effect.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	c.p.Call("bind", args...)
+}
+
+// Build calls the Build method on the ColorSplitterBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#build
+func (c *ColorSplitterBlock) Build(state *NodeMaterialBuildState, activeBlocks *NodeMaterialBlock) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, state.JSObject())
+	args = append(args, activeBlocks.JSObject())
+
+	retVal := c.p.Call("build", args...)
+	return retVal.Bool()
+}
+
+// ColorSplitterBlockCloneOpts contains optional parameters for ColorSplitterBlock.Clone.
+type ColorSplitterBlockCloneOpts struct {
+	RootUrl *string
+}
+
+// Clone calls the Clone method on the ColorSplitterBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#clone
+func (c *ColorSplitterBlock) Clone(scene *Scene, opts *ColorSplitterBlockCloneOpts) *NodeMaterialBlock {
+	if opts == nil {
+		opts = &ColorSplitterBlockCloneOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, scene.JSObject())
+
+	if opts.RootUrl == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RootUrl)
+	}
+
+	retVal := c.p.Call("clone", args...)
+	return NodeMaterialBlockFromJSObject(retVal, c.ctx)
+}
+
+// ColorSplitterBlockConnectToOpts contains optional parameters for ColorSplitterBlock.ConnectTo.
+type ColorSplitterBlockConnectToOpts struct {
+	Options js.Value
+}
+
+// ConnectTo calls the ConnectTo method on the ColorSplitterBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#connectto
+func (c *ColorSplitterBlock) ConnectTo(other *NodeMaterialBlock, opts *ColorSplitterBlockConnectToOpts) *ColorSplitterBlock {
+	if opts == nil {
+		opts = &ColorSplitterBlockConnectToOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, other.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	retVal := c.p.Call("connectTo", args...)
+	return ColorSplitterBlockFromJSObject(retVal, c.ctx)
+}
+
+// Dispose calls the Dispose method on the ColorSplitterBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#dispose
+func (c *ColorSplitterBlock) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	c.p.Call("dispose", args...)
+}
+
+// GetClassName calls the GetClassName method on the ColorSplitterBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#getclassname
+func (c *ColorSplitterBlock) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// ColorSplitterBlockGetFirstAvailableInputOpts contains optional parameters for ColorSplitterBlock.GetFirstAvailableInput.
+type ColorSplitterBlockGetFirstAvailableInputOpts struct {
+	ForOutput *NodeMaterialConnectionPoint
+}
+
+// GetFirstAvailableInput calls the GetFirstAvailableInput method on the ColorSplitterBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#getfirstavailableinput
+func (c *ColorSplitterBlock) GetFirstAvailableInput(opts *ColorSplitterBlockGetFirstAvailableInputOpts) *NodeMaterialConnectionPoint {
+	if opts == nil {
+		opts = &ColorSplitterBlockGetFirstAvailableInputOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForOutput == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForOutput.JSObject())
+	}
+
+	retVal := c.p.Call("getFirstAvailableInput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, c.ctx)
+}
+
+// ColorSplitterBlockGetFirstAvailableOutputOpts contains optional parameters for ColorSplitterBlock.GetFirstAvailableOutput.
+type ColorSplitterBlockGetFirstAvailableOutputOpts struct {
+	ForBlock *NodeMaterialBlock
+}
+
+// GetFirstAvailableOutput calls the GetFirstAvailableOutput method on the ColorSplitterBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#getfirstavailableoutput
+func (c *ColorSplitterBlock) GetFirstAvailableOutput(opts *ColorSplitterBlockGetFirstAvailableOutputOpts) *NodeMaterialConnectionPoint {
+	if opts == nil {
+		opts = &ColorSplitterBlockGetFirstAvailableOutputOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForBlock == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForBlock.JSObject())
+	}
+
+	retVal := c.p.Call("getFirstAvailableOutput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, c.ctx)
+}
+
+// GetInputByName calls the GetInputByName method on the ColorSplitterBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#getinputbyname
+func (c *ColorSplitterBlock) GetInputByName(name string) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := c.p.Call("getInputByName", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, c.ctx)
+}
+
+// GetOutputByName calls the GetOutputByName method on the ColorSplitterBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#getoutputbyname
+func (c *ColorSplitterBlock) GetOutputByName(name string) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := c.p.Call("getOutputByName", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, c.ctx)
+}
+
+// GetSiblingOutput calls the GetSiblingOutput method on the ColorSplitterBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#getsiblingoutput
+func (c *ColorSplitterBlock) GetSiblingOutput(current *NodeMaterialConnectionPoint) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, current.JSObject())
+
+	retVal := c.p.Call("getSiblingOutput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, c.ctx)
+}
+
+// Initialize calls the Initialize method on the ColorSplitterBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#initialize
+func (c *ColorSplitterBlock) Initialize(state *NodeMaterialBuildState) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, state.JSObject())
+
+	c.p.Call("initialize", args...)
+}
+
+// ColorSplitterBlockInitializeDefinesOpts contains optional parameters for ColorSplitterBlock.InitializeDefines.
+type ColorSplitterBlockInitializeDefinesOpts struct {
+	UseInstances *bool
+}
+
+// InitializeDefines calls the InitializeDefines method on the ColorSplitterBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#initializedefines
+func (c *ColorSplitterBlock) InitializeDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *ColorSplitterBlockInitializeDefinesOpts) {
+	if opts == nil {
+		opts = &ColorSplitterBlockInitializeDefinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	c.p.Call("initializeDefines", args...)
+}
+
+// ColorSplitterBlockIsReadyOpts contains optional parameters for ColorSplitterBlock.IsReady.
+type ColorSplitterBlockIsReadyOpts struct {
+	UseInstances *bool
+}
+
+// IsReady calls the IsReady method on the ColorSplitterBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#isready
+func (c *ColorSplitterBlock) IsReady(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *ColorSplitterBlockIsReadyOpts) bool {
+	if opts == nil {
+		opts = &ColorSplitterBlockIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := c.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// ColorSplitterBlockPrepareDefinesOpts contains optional parameters for ColorSplitterBlock.PrepareDefines.
+type ColorSplitterBlockPrepareDefinesOpts struct {
+	UseInstances *bool
+}
+
+// PrepareDefines calls the PrepareDefines method on the ColorSplitterBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#preparedefines
+func (c *ColorSplitterBlock) PrepareDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *ColorSplitterBlockPrepareDefinesOpts) {
+	if opts == nil {
+		opts = &ColorSplitterBlockPrepareDefinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	c.p.Call("prepareDefines", args...)
+}
+
+// ProvideFallbacks calls the ProvideFallbacks method on the ColorSplitterBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#providefallbacks
+func (c *ColorSplitterBlock) ProvideFallbacks(mesh *AbstractMesh, fallbacks *EffectFallbacks) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, fallbacks.JSObject())
+
+	c.p.Call("provideFallbacks", args...)
+}
+
+// ColorSplitterBlockRegisterInputOpts contains optional parameters for ColorSplitterBlock.RegisterInput.
+type ColorSplitterBlockRegisterInputOpts struct {
+	IsOptional *bool
+	Target     js.Value
+}
+
+// RegisterInput calls the RegisterInput method on the ColorSplitterBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#registerinput
+func (c *ColorSplitterBlock) RegisterInput(name string, jsType js.Value, opts *ColorSplitterBlockRegisterInputOpts) *ColorSplitterBlock {
+	if opts == nil {
+		opts = &ColorSplitterBlockRegisterInputOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+2)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	if opts.IsOptional == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IsOptional)
+	}
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+
+	retVal := c.p.Call("registerInput", args...)
+	return ColorSplitterBlockFromJSObject(retVal, c.ctx)
+}
+
+// ColorSplitterBlockRegisterOutputOpts contains optional parameters for ColorSplitterBlock.RegisterOutput.
+type ColorSplitterBlockRegisterOutputOpts struct {
+	Target js.Value
+}
+
+// RegisterOutput calls the RegisterOutput method on the ColorSplitterBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#registeroutput
+func (c *ColorSplitterBlock) RegisterOutput(name string, jsType js.Value, opts *ColorSplitterBlockRegisterOutputOpts) *ColorSplitterBlock {
+	if opts == nil {
+		opts = &ColorSplitterBlockRegisterOutputOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+
+	retVal := c.p.Call("registerOutput", args...)
+	return ColorSplitterBlockFromJSObject(retVal, c.ctx)
+}
+
+// ReplaceRepeatableContent calls the ReplaceRepeatableContent method on the ColorSplitterBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#replacerepeatablecontent
+func (c *ColorSplitterBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterialBuildState, fragmentShaderState *NodeMaterialBuildState, mesh *AbstractMesh, defines js.Value) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, vertexShaderState.JSObject())
+	args = append(args, fragmentShaderState.JSObject())
+	args = append(args, mesh.JSObject())
+	args = append(args, defines)
+
+	c.p.Call("replaceRepeatableContent", args...)
+}
+
+// Serialize calls the Serialize method on the ColorSplitterBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#serialize
+func (c *ColorSplitterBlock) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("serialize", args...)
+	return retVal
+}
+
+// UpdateUniformsAndSamples calls the UpdateUniformsAndSamples method on the ColorSplitterBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#updateuniformsandsamples
+func (c *ColorSplitterBlock) UpdateUniformsAndSamples(state *NodeMaterialBuildState, nodeMaterial *NodeMaterial, defines js.Value, uniformBuffers string) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, state.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+	args = append(args, uniformBuffers)
+
+	c.p.Call("updateUniformsAndSamples", args...)
+}
+
+/*
+
+// A returns the A property of class ColorSplitterBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#a
+func (c *ColorSplitterBlock) A(a *NodeMaterialConnectionPoint) *ColorSplitterBlock {
+	p := ba.ctx.Get("ColorSplitterBlock").New(a.JSObject())
+	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+}
+
+// SetA sets the A property of class ColorSplitterBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#a
+func (c *ColorSplitterBlock) SetA(a *NodeMaterialConnectionPoint) *ColorSplitterBlock {
+	p := ba.ctx.Get("ColorSplitterBlock").New(a.JSObject())
+	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+}
+
+// B returns the B property of class ColorSplitterBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#b
+func (c *ColorSplitterBlock) B(b *NodeMaterialConnectionPoint) *ColorSplitterBlock {
+	p := ba.ctx.Get("ColorSplitterBlock").New(b.JSObject())
+	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+}
+
+// SetB sets the B property of class ColorSplitterBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#b
+func (c *ColorSplitterBlock) SetB(b *NodeMaterialConnectionPoint) *ColorSplitterBlock {
+	p := ba.ctx.Get("ColorSplitterBlock").New(b.JSObject())
+	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+}
+
+// BuildId returns the BuildId property of class ColorSplitterBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#buildid
+func (c *ColorSplitterBlock) BuildId(buildId float64) *ColorSplitterBlock {
+	p := ba.ctx.Get("ColorSplitterBlock").New(buildId)
+	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+}
+
+// SetBuildId sets the BuildId property of class ColorSplitterBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#buildid
+func (c *ColorSplitterBlock) SetBuildId(buildId float64) *ColorSplitterBlock {
+	p := ba.ctx.Get("ColorSplitterBlock").New(buildId)
+	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+}
+
+// Comments returns the Comments property of class ColorSplitterBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#comments
+func (c *ColorSplitterBlock) Comments(comments string) *ColorSplitterBlock {
+	p := ba.ctx.Get("ColorSplitterBlock").New(comments)
+	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+}
+
+// SetComments sets the Comments property of class ColorSplitterBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#comments
+func (c *ColorSplitterBlock) SetComments(comments string) *ColorSplitterBlock {
+	p := ba.ctx.Get("ColorSplitterBlock").New(comments)
+	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+}
+
+// G returns the G property of class ColorSplitterBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#g
+func (c *ColorSplitterBlock) G(g *NodeMaterialConnectionPoint) *ColorSplitterBlock {
+	p := ba.ctx.Get("ColorSplitterBlock").New(g.JSObject())
+	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+}
+
+// SetG sets the G property of class ColorSplitterBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#g
+func (c *ColorSplitterBlock) SetG(g *NodeMaterialConnectionPoint) *ColorSplitterBlock {
+	p := ba.ctx.Get("ColorSplitterBlock").New(g.JSObject())
+	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+}
+
+// Inputs returns the Inputs property of class ColorSplitterBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#inputs
+func (c *ColorSplitterBlock) Inputs(inputs *NodeMaterialConnectionPoint) *ColorSplitterBlock {
+	p := ba.ctx.Get("ColorSplitterBlock").New(inputs.JSObject())
+	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+}
+
+// SetInputs sets the Inputs property of class ColorSplitterBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#inputs
+func (c *ColorSplitterBlock) SetInputs(inputs *NodeMaterialConnectionPoint) *ColorSplitterBlock {
+	p := ba.ctx.Get("ColorSplitterBlock").New(inputs.JSObject())
+	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+}
+
+// IsFinalMerger returns the IsFinalMerger property of class ColorSplitterBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#isfinalmerger
+func (c *ColorSplitterBlock) IsFinalMerger(isFinalMerger bool) *ColorSplitterBlock {
+	p := ba.ctx.Get("ColorSplitterBlock").New(isFinalMerger)
+	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsFinalMerger sets the IsFinalMerger property of class ColorSplitterBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#isfinalmerger
+func (c *ColorSplitterBlock) SetIsFinalMerger(isFinalMerger bool) *ColorSplitterBlock {
+	p := ba.ctx.Get("ColorSplitterBlock").New(isFinalMerger)
+	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+}
+
+// IsInput returns the IsInput property of class ColorSplitterBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#isinput
+func (c *ColorSplitterBlock) IsInput(isInput bool) *ColorSplitterBlock {
+	p := ba.ctx.Get("ColorSplitterBlock").New(isInput)
+	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsInput sets the IsInput property of class ColorSplitterBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#isinput
+func (c *ColorSplitterBlock) SetIsInput(isInput bool) *ColorSplitterBlock {
+	p := ba.ctx.Get("ColorSplitterBlock").New(isInput)
+	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+}
+
+// IsUnique returns the IsUnique property of class ColorSplitterBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#isunique
+func (c *ColorSplitterBlock) IsUnique(isUnique bool) *ColorSplitterBlock {
+	p := ba.ctx.Get("ColorSplitterBlock").New(isUnique)
+	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsUnique sets the IsUnique property of class ColorSplitterBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#isunique
+func (c *ColorSplitterBlock) SetIsUnique(isUnique bool) *ColorSplitterBlock {
+	p := ba.ctx.Get("ColorSplitterBlock").New(isUnique)
+	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class ColorSplitterBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#name
+func (c *ColorSplitterBlock) Name(name string) *ColorSplitterBlock {
 	p := ba.ctx.Get("ColorSplitterBlock").New(name)
 	return ColorSplitterBlockFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetName sets the Name property of class ColorSplitterBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#name
+func (c *ColorSplitterBlock) SetName(name string) *ColorSplitterBlock {
+	p := ba.ctx.Get("ColorSplitterBlock").New(name)
+	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+}
+
+// Outputs returns the Outputs property of class ColorSplitterBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#outputs
+func (c *ColorSplitterBlock) Outputs(outputs *NodeMaterialConnectionPoint) *ColorSplitterBlock {
+	p := ba.ctx.Get("ColorSplitterBlock").New(outputs.JSObject())
+	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOutputs sets the Outputs property of class ColorSplitterBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#outputs
+func (c *ColorSplitterBlock) SetOutputs(outputs *NodeMaterialConnectionPoint) *ColorSplitterBlock {
+	p := ba.ctx.Get("ColorSplitterBlock").New(outputs.JSObject())
+	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+}
+
+// R returns the R property of class ColorSplitterBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#r
+func (c *ColorSplitterBlock) R(r *NodeMaterialConnectionPoint) *ColorSplitterBlock {
+	p := ba.ctx.Get("ColorSplitterBlock").New(r.JSObject())
+	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+}
+
+// SetR sets the R property of class ColorSplitterBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#r
+func (c *ColorSplitterBlock) SetR(r *NodeMaterialConnectionPoint) *ColorSplitterBlock {
+	p := ba.ctx.Get("ColorSplitterBlock").New(r.JSObject())
+	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+}
+
+// RgbIn returns the RgbIn property of class ColorSplitterBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#rgbin
+func (c *ColorSplitterBlock) RgbIn(rgbIn *NodeMaterialConnectionPoint) *ColorSplitterBlock {
+	p := ba.ctx.Get("ColorSplitterBlock").New(rgbIn.JSObject())
+	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+}
+
+// SetRgbIn sets the RgbIn property of class ColorSplitterBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#rgbin
+func (c *ColorSplitterBlock) SetRgbIn(rgbIn *NodeMaterialConnectionPoint) *ColorSplitterBlock {
+	p := ba.ctx.Get("ColorSplitterBlock").New(rgbIn.JSObject())
+	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+}
+
+// RgbOut returns the RgbOut property of class ColorSplitterBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#rgbout
+func (c *ColorSplitterBlock) RgbOut(rgbOut *NodeMaterialConnectionPoint) *ColorSplitterBlock {
+	p := ba.ctx.Get("ColorSplitterBlock").New(rgbOut.JSObject())
+	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+}
+
+// SetRgbOut sets the RgbOut property of class ColorSplitterBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#rgbout
+func (c *ColorSplitterBlock) SetRgbOut(rgbOut *NodeMaterialConnectionPoint) *ColorSplitterBlock {
+	p := ba.ctx.Get("ColorSplitterBlock").New(rgbOut.JSObject())
+	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+}
+
+// Rgba returns the Rgba property of class ColorSplitterBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#rgba
+func (c *ColorSplitterBlock) Rgba(rgba *NodeMaterialConnectionPoint) *ColorSplitterBlock {
+	p := ba.ctx.Get("ColorSplitterBlock").New(rgba.JSObject())
+	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+}
+
+// SetRgba sets the Rgba property of class ColorSplitterBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#rgba
+func (c *ColorSplitterBlock) SetRgba(rgba *NodeMaterialConnectionPoint) *ColorSplitterBlock {
+	p := ba.ctx.Get("ColorSplitterBlock").New(rgba.JSObject())
+	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+}
+
+// Target returns the Target property of class ColorSplitterBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#target
+func (c *ColorSplitterBlock) Target(target js.Value) *ColorSplitterBlock {
+	p := ba.ctx.Get("ColorSplitterBlock").New(target)
+	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+}
+
+// SetTarget sets the Target property of class ColorSplitterBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#target
+func (c *ColorSplitterBlock) SetTarget(target js.Value) *ColorSplitterBlock {
+	p := ba.ctx.Get("ColorSplitterBlock").New(target)
+	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class ColorSplitterBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#uniqueid
+func (c *ColorSplitterBlock) UniqueId(uniqueId float64) *ColorSplitterBlock {
+	p := ba.ctx.Get("ColorSplitterBlock").New(uniqueId)
+	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class ColorSplitterBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorsplitterblock#uniqueid
+func (c *ColorSplitterBlock) SetUniqueId(uniqueId float64) *ColorSplitterBlock {
+	p := ba.ctx.Get("ColorSplitterBlock").New(uniqueId)
+	return ColorSplitterBlockFromJSObject(p, ba.ctx)
+}
+
+*/

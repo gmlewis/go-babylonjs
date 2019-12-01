@@ -27,4 +27,38 @@ func EXT_lights_image_basedFromJSObject(p js.Value, ctx js.Value) *EXT_lights_im
 	return &EXT_lights_image_based{p: p, ctx: ctx}
 }
 
-// TODO: methods
+/*
+
+// Enabled returns the Enabled property of class EXT_lights_image_based.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ext_lights_image_based#enabled
+func (e *EXT_lights_image_based) Enabled(enabled bool) *EXT_lights_image_based {
+	p := ba.ctx.Get("EXT_lights_image_based").New(enabled)
+	return EXT_lights_image_basedFromJSObject(p, ba.ctx)
+}
+
+// SetEnabled sets the Enabled property of class EXT_lights_image_based.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ext_lights_image_based#enabled
+func (e *EXT_lights_image_based) SetEnabled(enabled bool) *EXT_lights_image_based {
+	p := ba.ctx.Get("EXT_lights_image_based").New(enabled)
+	return EXT_lights_image_basedFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class EXT_lights_image_based.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ext_lights_image_based#name
+func (e *EXT_lights_image_based) Name(name string) *EXT_lights_image_based {
+	p := ba.ctx.Get("EXT_lights_image_based").New(name)
+	return EXT_lights_image_basedFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class EXT_lights_image_based.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ext_lights_image_based#name
+func (e *EXT_lights_image_based) SetName(name string) *EXT_lights_image_based {
+	p := ba.ctx.Get("EXT_lights_image_based").New(name)
+	return EXT_lights_image_basedFromJSObject(p, ba.ctx)
+}
+
+*/

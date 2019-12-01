@@ -31,8 +31,54 @@ func PredicateConditionFromJSObject(p js.Value, ctx js.Value) *PredicateConditio
 //
 // https://doc.babylonjs.com/api/classes/babylon.predicatecondition
 func (ba *Babylon) NewPredicateCondition(actionManager *ActionManager, predicate func()) *PredicateCondition {
-	p := ba.ctx.Get("PredicateCondition").New(actionManager.JSObject(), predicate)
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, actionManager.JSObject())
+	args = append(args, predicate)
+
+	p := ba.ctx.Get("PredicateCondition").New(args...)
 	return PredicateConditionFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// IsValid calls the IsValid method on the PredicateCondition object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.predicatecondition#isvalid
+func (p *PredicateCondition) IsValid() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("isValid", args...)
+	return retVal.Bool()
+}
+
+// Serialize calls the Serialize method on the PredicateCondition object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.predicatecondition#serialize
+func (p *PredicateCondition) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("serialize", args...)
+	return retVal
+}
+
+/*
+
+// Predicate returns the Predicate property of class PredicateCondition.
+//
+// https://doc.babylonjs.com/api/classes/babylon.predicatecondition#predicate
+func (p *PredicateCondition) Predicate(predicate func()) *PredicateCondition {
+	p := ba.ctx.Get("PredicateCondition").New(predicate)
+	return PredicateConditionFromJSObject(p, ba.ctx)
+}
+
+// SetPredicate sets the Predicate property of class PredicateCondition.
+//
+// https://doc.babylonjs.com/api/classes/babylon.predicatecondition#predicate
+func (p *PredicateCondition) SetPredicate(predicate func()) *PredicateCondition {
+	p := ba.ctx.Get("PredicateCondition").New(predicate)
+	return PredicateConditionFromJSObject(p, ba.ctx)
+}
+
+*/

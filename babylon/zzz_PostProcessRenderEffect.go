@@ -32,7 +32,7 @@ func PostProcessRenderEffectFromJSObject(p js.Value, ctx js.Value) *PostProcessR
 
 // NewPostProcessRenderEffectOpts contains optional parameters for NewPostProcessRenderEffect.
 type NewPostProcessRenderEffectOpts struct {
-	SingleInstance *JSBool
+	SingleInstance *bool
 }
 
 // NewPostProcessRenderEffect returns a new PostProcessRenderEffect object.
@@ -43,8 +43,63 @@ func (ba *Babylon) NewPostProcessRenderEffect(engine *Engine, name string, getPo
 		opts = &NewPostProcessRenderEffectOpts{}
 	}
 
-	p := ba.ctx.Get("PostProcessRenderEffect").New(engine.JSObject(), name, getPostProcesses, opts.SingleInstance.JSObject())
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, engine.JSObject())
+	args = append(args, name)
+	args = append(args, getPostProcesses)
+
+	if opts.SingleInstance == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SingleInstance)
+	}
+
+	p := ba.ctx.Get("PostProcessRenderEffect").New(args...)
 	return PostProcessRenderEffectFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// PostProcessRenderEffectGetPostProcessesOpts contains optional parameters for PostProcessRenderEffect.GetPostProcesses.
+type PostProcessRenderEffectGetPostProcessesOpts struct {
+	Camera *Camera
+}
+
+// GetPostProcesses calls the GetPostProcesses method on the PostProcessRenderEffect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.postprocessrendereffect#getpostprocesses
+func (p *PostProcessRenderEffect) GetPostProcesses(opts *PostProcessRenderEffectGetPostProcessesOpts) []js.Value {
+	if opts == nil {
+		opts = &PostProcessRenderEffectGetPostProcessesOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Camera == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Camera.JSObject())
+	}
+
+	retVal := p.p.Call("getPostProcesses", args...)
+	return retVal
+}
+
+/*
+
+// IsSupported returns the IsSupported property of class PostProcessRenderEffect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.postprocessrendereffect#issupported
+func (p *PostProcessRenderEffect) IsSupported(isSupported bool) *PostProcessRenderEffect {
+	p := ba.ctx.Get("PostProcessRenderEffect").New(isSupported)
+	return PostProcessRenderEffectFromJSObject(p, ba.ctx)
+}
+
+// SetIsSupported sets the IsSupported property of class PostProcessRenderEffect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.postprocessrendereffect#issupported
+func (p *PostProcessRenderEffect) SetIsSupported(isSupported bool) *PostProcessRenderEffect {
+	p := ba.ctx.Get("PostProcessRenderEffect").New(isSupported)
+	return PostProcessRenderEffectFromJSObject(p, ba.ctx)
+}
+
+*/

@@ -31,8 +31,472 @@ func PoseEnabledControllerFromJSObject(p js.Value, ctx js.Value) *PoseEnabledCon
 //
 // https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller
 func (ba *Babylon) NewPoseEnabledController(browserGamepad interface{}) *PoseEnabledController {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, browserGamepad)
+
+	p := ba.ctx.Get("PoseEnabledController").New(args...)
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// AttachToMesh calls the AttachToMesh method on the PoseEnabledController object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#attachtomesh
+func (p *PoseEnabledController) AttachToMesh(mesh *AbstractMesh) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	p.p.Call("attachToMesh", args...)
+}
+
+// AttachToPoseControlledCamera calls the AttachToPoseControlledCamera method on the PoseEnabledController object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#attachtoposecontrolledcamera
+func (p *PoseEnabledController) AttachToPoseControlledCamera(camera *TargetCamera) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, camera.JSObject())
+
+	p.p.Call("attachToPoseControlledCamera", args...)
+}
+
+// Dispose calls the Dispose method on the PoseEnabledController object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#dispose
+func (p *PoseEnabledController) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("dispose", args...)
+}
+
+// PoseEnabledControllerGetForwardRayOpts contains optional parameters for PoseEnabledController.GetForwardRay.
+type PoseEnabledControllerGetForwardRayOpts struct {
+	Length *float64
+}
+
+// GetForwardRay calls the GetForwardRay method on the PoseEnabledController object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#getforwardray
+func (p *PoseEnabledController) GetForwardRay(opts *PoseEnabledControllerGetForwardRayOpts) *Ray {
+	if opts == nil {
+		opts = &PoseEnabledControllerGetForwardRayOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Length == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Length)
+	}
+
+	retVal := p.p.Call("getForwardRay", args...)
+	return RayFromJSObject(retVal, p.ctx)
+}
+
+// Onleftstickchanged calls the Onleftstickchanged method on the PoseEnabledController object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#onleftstickchanged
+func (p *PoseEnabledController) Onleftstickchanged(callback func()) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, callback)
+
+	p.p.Call("onleftstickchanged", args...)
+}
+
+// Onrightstickchanged calls the Onrightstickchanged method on the PoseEnabledController object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#onrightstickchanged
+func (p *PoseEnabledController) Onrightstickchanged(callback func()) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, callback)
+
+	p.p.Call("onrightstickchanged", args...)
+}
+
+// Update calls the Update method on the PoseEnabledController object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#update
+func (p *PoseEnabledController) Update() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("update", args...)
+}
+
+// UpdateFromDevice calls the UpdateFromDevice method on the PoseEnabledController object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#updatefromdevice
+func (p *PoseEnabledController) UpdateFromDevice(poseData js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, poseData)
+
+	p.p.Call("updateFromDevice", args...)
+}
+
+/*
+
+// BrowserGamepad returns the BrowserGamepad property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#browsergamepad
+func (p *PoseEnabledController) BrowserGamepad(browserGamepad interface{}) *PoseEnabledController {
 	p := ba.ctx.Get("PoseEnabledController").New(browserGamepad)
 	return PoseEnabledControllerFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetBrowserGamepad sets the BrowserGamepad property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#browsergamepad
+func (p *PoseEnabledController) SetBrowserGamepad(browserGamepad interface{}) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(browserGamepad)
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// ControllerType returns the ControllerType property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#controllertype
+func (p *PoseEnabledController) ControllerType(controllerType *PoseEnabledControllerType) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(controllerType.JSObject())
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// SetControllerType sets the ControllerType property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#controllertype
+func (p *PoseEnabledController) SetControllerType(controllerType *PoseEnabledControllerType) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(controllerType.JSObject())
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// DUALSHOCK returns the DUALSHOCK property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#dualshock
+func (p *PoseEnabledController) DUALSHOCK(DUALSHOCK float64) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(DUALSHOCK)
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// SetDUALSHOCK sets the DUALSHOCK property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#dualshock
+func (p *PoseEnabledController) SetDUALSHOCK(DUALSHOCK float64) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(DUALSHOCK)
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// DevicePosition returns the DevicePosition property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#deviceposition
+func (p *PoseEnabledController) DevicePosition(devicePosition *Vector3) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(devicePosition.JSObject())
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// SetDevicePosition sets the DevicePosition property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#deviceposition
+func (p *PoseEnabledController) SetDevicePosition(devicePosition *Vector3) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(devicePosition.JSObject())
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// DeviceRotationQuaternion returns the DeviceRotationQuaternion property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#devicerotationquaternion
+func (p *PoseEnabledController) DeviceRotationQuaternion(deviceRotationQuaternion *Quaternion) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(deviceRotationQuaternion.JSObject())
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// SetDeviceRotationQuaternion sets the DeviceRotationQuaternion property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#devicerotationquaternion
+func (p *PoseEnabledController) SetDeviceRotationQuaternion(deviceRotationQuaternion *Quaternion) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(deviceRotationQuaternion.JSObject())
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// DeviceScaleFactor returns the DeviceScaleFactor property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#devicescalefactor
+func (p *PoseEnabledController) DeviceScaleFactor(deviceScaleFactor float64) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(deviceScaleFactor)
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// SetDeviceScaleFactor sets the DeviceScaleFactor property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#devicescalefactor
+func (p *PoseEnabledController) SetDeviceScaleFactor(deviceScaleFactor float64) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(deviceScaleFactor)
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// GAMEPAD returns the GAMEPAD property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#gamepad
+func (p *PoseEnabledController) GAMEPAD(GAMEPAD float64) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(GAMEPAD)
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// SetGAMEPAD sets the GAMEPAD property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#gamepad
+func (p *PoseEnabledController) SetGAMEPAD(GAMEPAD float64) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(GAMEPAD)
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// GENERIC returns the GENERIC property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#generic
+func (p *PoseEnabledController) GENERIC(GENERIC float64) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(GENERIC)
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// SetGENERIC sets the GENERIC property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#generic
+func (p *PoseEnabledController) SetGENERIC(GENERIC float64) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(GENERIC)
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// Id returns the Id property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#id
+func (p *PoseEnabledController) Id(id string) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(id)
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// SetId sets the Id property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#id
+func (p *PoseEnabledController) SetId(id string) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(id)
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// Index returns the Index property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#index
+func (p *PoseEnabledController) Index(index float64) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(index)
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// SetIndex sets the Index property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#index
+func (p *PoseEnabledController) SetIndex(index float64) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(index)
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// IsConnected returns the IsConnected property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#isconnected
+func (p *PoseEnabledController) IsConnected(isConnected bool) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(isConnected)
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// SetIsConnected sets the IsConnected property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#isconnected
+func (p *PoseEnabledController) SetIsConnected(isConnected bool) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(isConnected)
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// IsXR returns the IsXR property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#isxr
+func (p *PoseEnabledController) IsXR(isXR bool) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(isXR)
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// SetIsXR sets the IsXR property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#isxr
+func (p *PoseEnabledController) SetIsXR(isXR bool) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(isXR)
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// LeftStick returns the LeftStick property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#leftstick
+func (p *PoseEnabledController) LeftStick(leftStick *StickValues) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(leftStick.JSObject())
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// SetLeftStick sets the LeftStick property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#leftstick
+func (p *PoseEnabledController) SetLeftStick(leftStick *StickValues) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(leftStick.JSObject())
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// Mesh returns the Mesh property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#mesh
+func (p *PoseEnabledController) Mesh(mesh *AbstractMesh) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(mesh.JSObject())
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// SetMesh sets the Mesh property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#mesh
+func (p *PoseEnabledController) SetMesh(mesh *AbstractMesh) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(mesh.JSObject())
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// POINTING_POSE returns the POINTING_POSE property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#pointing_pose
+func (p *PoseEnabledController) POINTING_POSE(POINTING_POSE string) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(POINTING_POSE)
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// SetPOINTING_POSE sets the POINTING_POSE property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#pointing_pose
+func (p *PoseEnabledController) SetPOINTING_POSE(POINTING_POSE string) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(POINTING_POSE)
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// POSE_ENABLED returns the POSE_ENABLED property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#pose_enabled
+func (p *PoseEnabledController) POSE_ENABLED(POSE_ENABLED float64) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(POSE_ENABLED)
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// SetPOSE_ENABLED sets the POSE_ENABLED property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#pose_enabled
+func (p *PoseEnabledController) SetPOSE_ENABLED(POSE_ENABLED float64) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(POSE_ENABLED)
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// Position returns the Position property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#position
+func (p *PoseEnabledController) Position(position *Vector3) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(position.JSObject())
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// SetPosition sets the Position property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#position
+func (p *PoseEnabledController) SetPosition(position *Vector3) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(position.JSObject())
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// RawPose returns the RawPose property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#rawpose
+func (p *PoseEnabledController) RawPose(rawPose js.Value) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(rawPose)
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// SetRawPose sets the RawPose property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#rawpose
+func (p *PoseEnabledController) SetRawPose(rawPose js.Value) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(rawPose)
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// RightStick returns the RightStick property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#rightstick
+func (p *PoseEnabledController) RightStick(rightStick *StickValues) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(rightStick.JSObject())
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// SetRightStick sets the RightStick property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#rightstick
+func (p *PoseEnabledController) SetRightStick(rightStick *StickValues) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(rightStick.JSObject())
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// RotationQuaternion returns the RotationQuaternion property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#rotationquaternion
+func (p *PoseEnabledController) RotationQuaternion(rotationQuaternion *Quaternion) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(rotationQuaternion.JSObject())
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// SetRotationQuaternion sets the RotationQuaternion property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#rotationquaternion
+func (p *PoseEnabledController) SetRotationQuaternion(rotationQuaternion *Quaternion) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(rotationQuaternion.JSObject())
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// Type returns the Type property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#type
+func (p *PoseEnabledController) Type(jsType float64) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(jsType)
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// SetType sets the Type property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#type
+func (p *PoseEnabledController) SetType(jsType float64) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(jsType)
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// XBOX returns the XBOX property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#xbox
+func (p *PoseEnabledController) XBOX(XBOX float64) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(XBOX)
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+// SetXBOX sets the XBOX property of class PoseEnabledController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontroller#xbox
+func (p *PoseEnabledController) SetXBOX(XBOX float64) *PoseEnabledController {
+	p := ba.ctx.Get("PoseEnabledController").New(XBOX)
+	return PoseEnabledControllerFromJSObject(p, ba.ctx)
+}
+
+*/

@@ -27,4 +27,597 @@ func GLTFFileLoaderFromJSObject(p js.Value, ctx js.Value) *GLTFFileLoader {
 	return &GLTFFileLoader{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// Dispose calls the Dispose method on the GLTFFileLoader object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#dispose
+func (g *GLTFFileLoader) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	g.p.Call("dispose", args...)
+}
+
+// GLTFFileLoaderRewriteRootURLOpts contains optional parameters for GLTFFileLoader.RewriteRootURL.
+type GLTFFileLoaderRewriteRootURLOpts struct {
+	ResponseURL *string
+}
+
+// RewriteRootURL calls the RewriteRootURL method on the GLTFFileLoader object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#rewriterooturl
+func (g *GLTFFileLoader) RewriteRootURL(rootUrl string, opts *GLTFFileLoaderRewriteRootURLOpts) string {
+	if opts == nil {
+		opts = &GLTFFileLoaderRewriteRootURLOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, rootUrl)
+
+	if opts.ResponseURL == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ResponseURL)
+	}
+
+	retVal := g.p.Call("rewriteRootURL", args...)
+	return retVal.String()
+}
+
+// WhenCompleteAsync calls the WhenCompleteAsync method on the GLTFFileLoader object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#whencompleteasync
+func (g *GLTFFileLoader) WhenCompleteAsync() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	g.p.Call("whenCompleteAsync", args...)
+}
+
+/*
+
+// AnimationStartMode returns the AnimationStartMode property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#animationstartmode
+func (g *GLTFFileLoader) AnimationStartMode(animationStartMode *GLTFLoaderAnimationStartMode) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(animationStartMode.JSObject())
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetAnimationStartMode sets the AnimationStartMode property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#animationstartmode
+func (g *GLTFFileLoader) SetAnimationStartMode(animationStartMode *GLTFLoaderAnimationStartMode) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(animationStartMode.JSObject())
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// CapturePerformanceCounters returns the CapturePerformanceCounters property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#captureperformancecounters
+func (g *GLTFFileLoader) CapturePerformanceCounters(capturePerformanceCounters bool) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(capturePerformanceCounters)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetCapturePerformanceCounters sets the CapturePerformanceCounters property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#captureperformancecounters
+func (g *GLTFFileLoader) SetCapturePerformanceCounters(capturePerformanceCounters bool) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(capturePerformanceCounters)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// CompileMaterials returns the CompileMaterials property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#compilematerials
+func (g *GLTFFileLoader) CompileMaterials(compileMaterials bool) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(compileMaterials)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetCompileMaterials sets the CompileMaterials property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#compilematerials
+func (g *GLTFFileLoader) SetCompileMaterials(compileMaterials bool) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(compileMaterials)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// CompileShadowGenerators returns the CompileShadowGenerators property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#compileshadowgenerators
+func (g *GLTFFileLoader) CompileShadowGenerators(compileShadowGenerators bool) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(compileShadowGenerators)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetCompileShadowGenerators sets the CompileShadowGenerators property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#compileshadowgenerators
+func (g *GLTFFileLoader) SetCompileShadowGenerators(compileShadowGenerators bool) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(compileShadowGenerators)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// CoordinateSystemMode returns the CoordinateSystemMode property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#coordinatesystemmode
+func (g *GLTFFileLoader) CoordinateSystemMode(coordinateSystemMode *GLTFLoaderCoordinateSystemMode) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(coordinateSystemMode.JSObject())
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetCoordinateSystemMode sets the CoordinateSystemMode property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#coordinatesystemmode
+func (g *GLTFFileLoader) SetCoordinateSystemMode(coordinateSystemMode *GLTFLoaderCoordinateSystemMode) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(coordinateSystemMode.JSObject())
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// CreateInstances returns the CreateInstances property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#createinstances
+func (g *GLTFFileLoader) CreateInstances(createInstances bool) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(createInstances)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetCreateInstances sets the CreateInstances property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#createinstances
+func (g *GLTFFileLoader) SetCreateInstances(createInstances bool) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(createInstances)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// LoaderState returns the LoaderState property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#loaderstate
+func (g *GLTFFileLoader) LoaderState(loaderState *GLTFLoaderState) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(loaderState.JSObject())
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetLoaderState sets the LoaderState property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#loaderstate
+func (g *GLTFFileLoader) SetLoaderState(loaderState *GLTFLoaderState) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(loaderState.JSObject())
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// LoggingEnabled returns the LoggingEnabled property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#loggingenabled
+func (g *GLTFFileLoader) LoggingEnabled(loggingEnabled bool) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(loggingEnabled)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetLoggingEnabled sets the LoggingEnabled property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#loggingenabled
+func (g *GLTFFileLoader) SetLoggingEnabled(loggingEnabled bool) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(loggingEnabled)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#name
+func (g *GLTFFileLoader) Name(name string) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(name)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#name
+func (g *GLTFFileLoader) SetName(name string) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(name)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// OnCameraLoaded returns the OnCameraLoaded property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#oncameraloaded
+func (g *GLTFFileLoader) OnCameraLoaded(onCameraLoaded func()) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onCameraLoaded)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetOnCameraLoaded sets the OnCameraLoaded property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#oncameraloaded
+func (g *GLTFFileLoader) SetOnCameraLoaded(onCameraLoaded func()) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onCameraLoaded)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// OnCameraLoadedObservable returns the OnCameraLoadedObservable property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#oncameraloadedobservable
+func (g *GLTFFileLoader) OnCameraLoadedObservable(onCameraLoadedObservable *Observable) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onCameraLoadedObservable.JSObject())
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetOnCameraLoadedObservable sets the OnCameraLoadedObservable property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#oncameraloadedobservable
+func (g *GLTFFileLoader) SetOnCameraLoadedObservable(onCameraLoadedObservable *Observable) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onCameraLoadedObservable.JSObject())
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// OnComplete returns the OnComplete property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#oncomplete
+func (g *GLTFFileLoader) OnComplete(onComplete func()) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onComplete)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetOnComplete sets the OnComplete property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#oncomplete
+func (g *GLTFFileLoader) SetOnComplete(onComplete func()) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onComplete)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// OnCompleteObservable returns the OnCompleteObservable property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#oncompleteobservable
+func (g *GLTFFileLoader) OnCompleteObservable(onCompleteObservable *Observable) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onCompleteObservable.JSObject())
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetOnCompleteObservable sets the OnCompleteObservable property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#oncompleteobservable
+func (g *GLTFFileLoader) SetOnCompleteObservable(onCompleteObservable *Observable) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onCompleteObservable.JSObject())
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// OnDispose returns the OnDispose property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#ondispose
+func (g *GLTFFileLoader) OnDispose(onDispose func()) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onDispose)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetOnDispose sets the OnDispose property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#ondispose
+func (g *GLTFFileLoader) SetOnDispose(onDispose func()) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onDispose)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// OnDisposeObservable returns the OnDisposeObservable property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#ondisposeobservable
+func (g *GLTFFileLoader) OnDisposeObservable(onDisposeObservable *Observable) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onDisposeObservable.JSObject())
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetOnDisposeObservable sets the OnDisposeObservable property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#ondisposeobservable
+func (g *GLTFFileLoader) SetOnDisposeObservable(onDisposeObservable *Observable) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onDisposeObservable.JSObject())
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// OnError returns the OnError property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onerror
+func (g *GLTFFileLoader) OnError(onError func()) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onError)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetOnError sets the OnError property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onerror
+func (g *GLTFFileLoader) SetOnError(onError func()) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onError)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// OnErrorObservable returns the OnErrorObservable property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onerrorobservable
+func (g *GLTFFileLoader) OnErrorObservable(onErrorObservable *Observable) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onErrorObservable.JSObject())
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetOnErrorObservable sets the OnErrorObservable property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onerrorobservable
+func (g *GLTFFileLoader) SetOnErrorObservable(onErrorObservable *Observable) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onErrorObservable.JSObject())
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// OnExtensionLoaded returns the OnExtensionLoaded property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onextensionloaded
+func (g *GLTFFileLoader) OnExtensionLoaded(onExtensionLoaded func()) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onExtensionLoaded)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetOnExtensionLoaded sets the OnExtensionLoaded property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onextensionloaded
+func (g *GLTFFileLoader) SetOnExtensionLoaded(onExtensionLoaded func()) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onExtensionLoaded)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// OnExtensionLoadedObservable returns the OnExtensionLoadedObservable property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onextensionloadedobservable
+func (g *GLTFFileLoader) OnExtensionLoadedObservable(onExtensionLoadedObservable *Observable) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onExtensionLoadedObservable.JSObject())
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetOnExtensionLoadedObservable sets the OnExtensionLoadedObservable property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onextensionloadedobservable
+func (g *GLTFFileLoader) SetOnExtensionLoadedObservable(onExtensionLoadedObservable *Observable) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onExtensionLoadedObservable.JSObject())
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// OnMaterialLoaded returns the OnMaterialLoaded property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onmaterialloaded
+func (g *GLTFFileLoader) OnMaterialLoaded(onMaterialLoaded func()) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onMaterialLoaded)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetOnMaterialLoaded sets the OnMaterialLoaded property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onmaterialloaded
+func (g *GLTFFileLoader) SetOnMaterialLoaded(onMaterialLoaded func()) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onMaterialLoaded)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// OnMaterialLoadedObservable returns the OnMaterialLoadedObservable property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onmaterialloadedobservable
+func (g *GLTFFileLoader) OnMaterialLoadedObservable(onMaterialLoadedObservable *Observable) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onMaterialLoadedObservable.JSObject())
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetOnMaterialLoadedObservable sets the OnMaterialLoadedObservable property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onmaterialloadedobservable
+func (g *GLTFFileLoader) SetOnMaterialLoadedObservable(onMaterialLoadedObservable *Observable) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onMaterialLoadedObservable.JSObject())
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// OnMeshLoaded returns the OnMeshLoaded property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onmeshloaded
+func (g *GLTFFileLoader) OnMeshLoaded(onMeshLoaded func()) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onMeshLoaded)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetOnMeshLoaded sets the OnMeshLoaded property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onmeshloaded
+func (g *GLTFFileLoader) SetOnMeshLoaded(onMeshLoaded func()) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onMeshLoaded)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// OnMeshLoadedObservable returns the OnMeshLoadedObservable property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onmeshloadedobservable
+func (g *GLTFFileLoader) OnMeshLoadedObservable(onMeshLoadedObservable *Observable) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onMeshLoadedObservable.JSObject())
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetOnMeshLoadedObservable sets the OnMeshLoadedObservable property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onmeshloadedobservable
+func (g *GLTFFileLoader) SetOnMeshLoadedObservable(onMeshLoadedObservable *Observable) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onMeshLoadedObservable.JSObject())
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// OnParsed returns the OnParsed property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onparsed
+func (g *GLTFFileLoader) OnParsed(onParsed func()) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onParsed)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetOnParsed sets the OnParsed property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onparsed
+func (g *GLTFFileLoader) SetOnParsed(onParsed func()) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onParsed)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// OnParsedObservable returns the OnParsedObservable property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onparsedobservable
+func (g *GLTFFileLoader) OnParsedObservable(onParsedObservable *Observable) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onParsedObservable.JSObject())
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetOnParsedObservable sets the OnParsedObservable property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onparsedobservable
+func (g *GLTFFileLoader) SetOnParsedObservable(onParsedObservable *Observable) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onParsedObservable.JSObject())
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// OnTextureLoaded returns the OnTextureLoaded property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#ontextureloaded
+func (g *GLTFFileLoader) OnTextureLoaded(onTextureLoaded func()) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onTextureLoaded)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetOnTextureLoaded sets the OnTextureLoaded property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#ontextureloaded
+func (g *GLTFFileLoader) SetOnTextureLoaded(onTextureLoaded func()) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onTextureLoaded)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// OnTextureLoadedObservable returns the OnTextureLoadedObservable property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#ontextureloadedobservable
+func (g *GLTFFileLoader) OnTextureLoadedObservable(onTextureLoadedObservable *Observable) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onTextureLoadedObservable.JSObject())
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetOnTextureLoadedObservable sets the OnTextureLoadedObservable property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#ontextureloadedobservable
+func (g *GLTFFileLoader) SetOnTextureLoadedObservable(onTextureLoadedObservable *Observable) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onTextureLoadedObservable.JSObject())
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// OnValidated returns the OnValidated property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onvalidated
+func (g *GLTFFileLoader) OnValidated(onValidated func()) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onValidated)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetOnValidated sets the OnValidated property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onvalidated
+func (g *GLTFFileLoader) SetOnValidated(onValidated func()) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onValidated)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// OnValidatedObservable returns the OnValidatedObservable property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onvalidatedobservable
+func (g *GLTFFileLoader) OnValidatedObservable(onValidatedObservable *Observable) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onValidatedObservable.JSObject())
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetOnValidatedObservable sets the OnValidatedObservable property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#onvalidatedobservable
+func (g *GLTFFileLoader) SetOnValidatedObservable(onValidatedObservable *Observable) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(onValidatedObservable.JSObject())
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// PreprocessUrlAsync returns the PreprocessUrlAsync property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#preprocessurlasync
+func (g *GLTFFileLoader) PreprocessUrlAsync(preprocessUrlAsync func()) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(preprocessUrlAsync)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetPreprocessUrlAsync sets the PreprocessUrlAsync property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#preprocessurlasync
+func (g *GLTFFileLoader) SetPreprocessUrlAsync(preprocessUrlAsync func()) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(preprocessUrlAsync)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// TransparencyAsCoverage returns the TransparencyAsCoverage property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#transparencyascoverage
+func (g *GLTFFileLoader) TransparencyAsCoverage(transparencyAsCoverage bool) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(transparencyAsCoverage)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetTransparencyAsCoverage sets the TransparencyAsCoverage property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#transparencyascoverage
+func (g *GLTFFileLoader) SetTransparencyAsCoverage(transparencyAsCoverage bool) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(transparencyAsCoverage)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// UseClipPlane returns the UseClipPlane property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#useclipplane
+func (g *GLTFFileLoader) UseClipPlane(useClipPlane bool) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(useClipPlane)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetUseClipPlane sets the UseClipPlane property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#useclipplane
+func (g *GLTFFileLoader) SetUseClipPlane(useClipPlane bool) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(useClipPlane)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// UseRangeRequests returns the UseRangeRequests property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#userangerequests
+func (g *GLTFFileLoader) UseRangeRequests(useRangeRequests bool) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(useRangeRequests)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetUseRangeRequests sets the UseRangeRequests property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#userangerequests
+func (g *GLTFFileLoader) SetUseRangeRequests(useRangeRequests bool) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(useRangeRequests)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// Validate returns the Validate property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#validate
+func (g *GLTFFileLoader) Validate(validate bool) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(validate)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+// SetValidate sets the Validate property of class GLTFFileLoader.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltffileloader#validate
+func (g *GLTFFileLoader) SetValidate(validate bool) *GLTFFileLoader {
+	p := ba.ctx.Get("GLTFFileLoader").New(validate)
+	return GLTFFileLoaderFromJSObject(p, ba.ctx)
+}
+
+*/

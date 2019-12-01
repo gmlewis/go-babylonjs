@@ -31,8 +31,65 @@ func AssetsProgressEventFromJSObject(p js.Value, ctx js.Value) *AssetsProgressEv
 //
 // https://doc.babylonjs.com/api/classes/babylon.assetsprogressevent
 func (ba *Babylon) NewAssetsProgressEvent(remainingCount float64, totalCount float64, task *AbstractAssetTask) *AssetsProgressEvent {
-	p := ba.ctx.Get("AssetsProgressEvent").New(remainingCount, totalCount, task.JSObject())
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, remainingCount)
+	args = append(args, totalCount)
+	args = append(args, task.JSObject())
+
+	p := ba.ctx.Get("AssetsProgressEvent").New(args...)
 	return AssetsProgressEventFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+/*
+
+// RemainingCount returns the RemainingCount property of class AssetsProgressEvent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.assetsprogressevent#remainingcount
+func (a *AssetsProgressEvent) RemainingCount(remainingCount float64) *AssetsProgressEvent {
+	p := ba.ctx.Get("AssetsProgressEvent").New(remainingCount)
+	return AssetsProgressEventFromJSObject(p, ba.ctx)
+}
+
+// SetRemainingCount sets the RemainingCount property of class AssetsProgressEvent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.assetsprogressevent#remainingcount
+func (a *AssetsProgressEvent) SetRemainingCount(remainingCount float64) *AssetsProgressEvent {
+	p := ba.ctx.Get("AssetsProgressEvent").New(remainingCount)
+	return AssetsProgressEventFromJSObject(p, ba.ctx)
+}
+
+// Task returns the Task property of class AssetsProgressEvent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.assetsprogressevent#task
+func (a *AssetsProgressEvent) Task(task *AbstractAssetTask) *AssetsProgressEvent {
+	p := ba.ctx.Get("AssetsProgressEvent").New(task.JSObject())
+	return AssetsProgressEventFromJSObject(p, ba.ctx)
+}
+
+// SetTask sets the Task property of class AssetsProgressEvent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.assetsprogressevent#task
+func (a *AssetsProgressEvent) SetTask(task *AbstractAssetTask) *AssetsProgressEvent {
+	p := ba.ctx.Get("AssetsProgressEvent").New(task.JSObject())
+	return AssetsProgressEventFromJSObject(p, ba.ctx)
+}
+
+// TotalCount returns the TotalCount property of class AssetsProgressEvent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.assetsprogressevent#totalcount
+func (a *AssetsProgressEvent) TotalCount(totalCount float64) *AssetsProgressEvent {
+	p := ba.ctx.Get("AssetsProgressEvent").New(totalCount)
+	return AssetsProgressEventFromJSObject(p, ba.ctx)
+}
+
+// SetTotalCount sets the TotalCount property of class AssetsProgressEvent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.assetsprogressevent#totalcount
+func (a *AssetsProgressEvent) SetTotalCount(totalCount float64) *AssetsProgressEvent {
+	p := ba.ctx.Get("AssetsProgressEvent").New(totalCount)
+	return AssetsProgressEventFromJSObject(p, ba.ctx)
+}
+
+*/

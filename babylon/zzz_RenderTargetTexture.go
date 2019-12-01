@@ -31,25 +31,16 @@ func RenderTargetTextureFromJSObject(p js.Value, ctx js.Value) *RenderTargetText
 
 // NewRenderTargetTextureOpts contains optional parameters for NewRenderTargetTexture.
 type NewRenderTargetTextureOpts struct {
-	GenerateMipMaps *JSBool
-
-	DoNotChangeAspectRatio *JSBool
-
-	Type *JSFloat64
-
-	IsCube *JSBool
-
-	SamplingMode *JSFloat64
-
-	GenerateDepthBuffer *JSBool
-
-	GenerateStencilBuffer *JSBool
-
-	IsMulti *JSBool
-
-	Format *JSFloat64
-
-	DelayAllocation *JSBool
+	GenerateMipMaps        *bool
+	DoNotChangeAspectRatio *bool
+	Type                   *float64
+	IsCube                 *bool
+	SamplingMode           *float64
+	GenerateDepthBuffer    *bool
+	GenerateStencilBuffer  *bool
+	IsMulti                *bool
+	Format                 *float64
+	DelayAllocation        *bool
 }
 
 // NewRenderTargetTexture returns a new RenderTargetTexture object.
@@ -60,8 +51,2457 @@ func (ba *Babylon) NewRenderTargetTexture(name string, size float64, scene *Scen
 		opts = &NewRenderTargetTextureOpts{}
 	}
 
-	p := ba.ctx.Get("RenderTargetTexture").New(name, size, scene.JSObject(), opts.GenerateMipMaps.JSObject(), opts.DoNotChangeAspectRatio.JSObject(), opts.Type.JSObject(), opts.IsCube.JSObject(), opts.SamplingMode.JSObject(), opts.GenerateDepthBuffer.JSObject(), opts.GenerateStencilBuffer.JSObject(), opts.IsMulti.JSObject(), opts.Format.JSObject(), opts.DelayAllocation.JSObject())
+	args := make([]interface{}, 0, 3+10)
+
+	args = append(args, name)
+	args = append(args, size)
+	args = append(args, scene.JSObject())
+
+	if opts.GenerateMipMaps == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.GenerateMipMaps)
+	}
+	if opts.DoNotChangeAspectRatio == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DoNotChangeAspectRatio)
+	}
+	if opts.Type == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Type)
+	}
+	if opts.IsCube == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IsCube)
+	}
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+	if opts.GenerateDepthBuffer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.GenerateDepthBuffer)
+	}
+	if opts.GenerateStencilBuffer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.GenerateStencilBuffer)
+	}
+	if opts.IsMulti == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IsMulti)
+	}
+	if opts.Format == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Format)
+	}
+	if opts.DelayAllocation == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DelayAllocation)
+	}
+
+	p := ba.ctx.Get("RenderTargetTexture").New(args...)
 	return RenderTargetTextureFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AddPostProcess calls the AddPostProcess method on the RenderTargetTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#addpostprocess
+func (r *RenderTargetTexture) AddPostProcess(postProcess *PostProcess) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, postProcess.JSObject())
+
+	r.p.Call("addPostProcess", args...)
+}
+
+// RenderTargetTextureClearPostProcessesOpts contains optional parameters for RenderTargetTexture.ClearPostProcesses.
+type RenderTargetTextureClearPostProcessesOpts struct {
+	Dispose *bool
+}
+
+// ClearPostProcesses calls the ClearPostProcesses method on the RenderTargetTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#clearpostprocesses
+func (r *RenderTargetTexture) ClearPostProcesses(opts *RenderTargetTextureClearPostProcessesOpts) {
+	if opts == nil {
+		opts = &RenderTargetTextureClearPostProcessesOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Dispose == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Dispose)
+	}
+
+	r.p.Call("clearPostProcesses", args...)
+}
+
+// Clone calls the Clone method on the RenderTargetTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#clone
+func (r *RenderTargetTexture) Clone() *RenderTargetTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("clone", args...)
+	return RenderTargetTextureFromJSObject(retVal, r.ctx)
+}
+
+// RenderTargetTextureCreateDepthStencilTextureOpts contains optional parameters for RenderTargetTexture.CreateDepthStencilTexture.
+type RenderTargetTextureCreateDepthStencilTextureOpts struct {
+	ComparisonFunction *float64
+	BilinearFiltering  *bool
+	GenerateStencil    *bool
+}
+
+// CreateDepthStencilTexture calls the CreateDepthStencilTexture method on the RenderTargetTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#createdepthstenciltexture
+func (r *RenderTargetTexture) CreateDepthStencilTexture(opts *RenderTargetTextureCreateDepthStencilTextureOpts) {
+	if opts == nil {
+		opts = &RenderTargetTextureCreateDepthStencilTextureOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+3)
+
+	if opts.ComparisonFunction == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ComparisonFunction)
+	}
+	if opts.BilinearFiltering == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.BilinearFiltering)
+	}
+	if opts.GenerateStencil == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.GenerateStencil)
+	}
+
+	r.p.Call("createDepthStencilTexture", args...)
+}
+
+// RenderTargetTextureCreateFromBase64StringOpts contains optional parameters for RenderTargetTexture.CreateFromBase64String.
+type RenderTargetTextureCreateFromBase64StringOpts struct {
+	NoMipmap     *bool
+	InvertY      *bool
+	SamplingMode *float64
+	OnLoad       *func()
+	OnError      *func()
+	Format       *float64
+}
+
+// CreateFromBase64String calls the CreateFromBase64String method on the RenderTargetTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#createfrombase64string
+func (r *RenderTargetTexture) CreateFromBase64String(data string, name string, scene *Scene, opts *RenderTargetTextureCreateFromBase64StringOpts) *Texture {
+	if opts == nil {
+		opts = &RenderTargetTextureCreateFromBase64StringOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+6)
+
+	args = append(args, data)
+	args = append(args, name)
+	args = append(args, scene.JSObject())
+
+	if opts.NoMipmap == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoMipmap)
+	}
+	if opts.InvertY == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.InvertY)
+	}
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+	if opts.OnLoad == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnLoad)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+	if opts.Format == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Format)
+	}
+
+	retVal := r.p.Call("CreateFromBase64String", args...)
+	return TextureFromJSObject(retVal, r.ctx)
+}
+
+// Dispose calls the Dispose method on the RenderTargetTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#dispose
+func (r *RenderTargetTexture) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	r.p.Call("dispose", args...)
+}
+
+// DisposeFramebufferObjects calls the DisposeFramebufferObjects method on the RenderTargetTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#disposeframebufferobjects
+func (r *RenderTargetTexture) DisposeFramebufferObjects() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	r.p.Call("disposeFramebufferObjects", args...)
+}
+
+// FreeRenderingGroups calls the FreeRenderingGroups method on the RenderTargetTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#freerenderinggroups
+func (r *RenderTargetTexture) FreeRenderingGroups() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	r.p.Call("freeRenderingGroups", args...)
+}
+
+// GetBaseSize calls the GetBaseSize method on the RenderTargetTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#getbasesize
+func (r *RenderTargetTexture) GetBaseSize() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("getBaseSize", args...)
+	return retVal
+}
+
+// GetClassName calls the GetClassName method on the RenderTargetTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#getclassname
+func (r *RenderTargetTexture) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetInternalTexture calls the GetInternalTexture method on the RenderTargetTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#getinternaltexture
+func (r *RenderTargetTexture) GetInternalTexture() *InternalTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("getInternalTexture", args...)
+	return InternalTextureFromJSObject(retVal, r.ctx)
+}
+
+// GetReflectionTextureMatrix calls the GetReflectionTextureMatrix method on the RenderTargetTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#getreflectiontexturematrix
+func (r *RenderTargetTexture) GetReflectionTextureMatrix() *Matrix {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("getReflectionTextureMatrix", args...)
+	return MatrixFromJSObject(retVal, r.ctx)
+}
+
+// GetRenderHeight calls the GetRenderHeight method on the RenderTargetTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#getrenderheight
+func (r *RenderTargetTexture) GetRenderHeight() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("getRenderHeight", args...)
+	return retVal.Float()
+}
+
+// GetRenderSize calls the GetRenderSize method on the RenderTargetTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#getrendersize
+func (r *RenderTargetTexture) GetRenderSize() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("getRenderSize", args...)
+	return retVal.Float()
+}
+
+// GetRenderWidth calls the GetRenderWidth method on the RenderTargetTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#getrenderwidth
+func (r *RenderTargetTexture) GetRenderWidth() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("getRenderWidth", args...)
+	return retVal.Float()
+}
+
+// GetScene calls the GetScene method on the RenderTargetTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#getscene
+func (r *RenderTargetTexture) GetScene() *Scene {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("getScene", args...)
+	return SceneFromJSObject(retVal, r.ctx)
+}
+
+// GetSize calls the GetSize method on the RenderTargetTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#getsize
+func (r *RenderTargetTexture) GetSize() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("getSize", args...)
+	return retVal
+}
+
+// RenderTargetTextureGetTextureMatrixOpts contains optional parameters for RenderTargetTexture.GetTextureMatrix.
+type RenderTargetTextureGetTextureMatrixOpts struct {
+	UBase *float64
+}
+
+// GetTextureMatrix calls the GetTextureMatrix method on the RenderTargetTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#gettexturematrix
+func (r *RenderTargetTexture) GetTextureMatrix(opts *RenderTargetTextureGetTextureMatrixOpts) *Matrix {
+	if opts == nil {
+		opts = &RenderTargetTextureGetTextureMatrixOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.UBase == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UBase)
+	}
+
+	retVal := r.p.Call("getTextureMatrix", args...)
+	return MatrixFromJSObject(retVal, r.ctx)
+}
+
+// GetViewCount calls the GetViewCount method on the RenderTargetTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#getviewcount
+func (r *RenderTargetTexture) GetViewCount() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("getViewCount", args...)
+	return retVal.Float()
+}
+
+// IsReady calls the IsReady method on the RenderTargetTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#isready
+func (r *RenderTargetTexture) IsReady() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// IsReadyOrNotBlocking calls the IsReadyOrNotBlocking method on the RenderTargetTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#isreadyornotblocking
+func (r *RenderTargetTexture) IsReadyOrNotBlocking() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("isReadyOrNotBlocking", args...)
+	return retVal.Bool()
+}
+
+// RenderTargetTextureLoadFromDataStringOpts contains optional parameters for RenderTargetTexture.LoadFromDataString.
+type RenderTargetTextureLoadFromDataStringOpts struct {
+	DeleteBuffer *bool
+	NoMipmap     *bool
+	InvertY      *bool
+	SamplingMode *float64
+	OnLoad       *func()
+	OnError      *func()
+	Format       *float64
+}
+
+// LoadFromDataString calls the LoadFromDataString method on the RenderTargetTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#loadfromdatastring
+func (r *RenderTargetTexture) LoadFromDataString(name string, buffer interface{}, scene *Scene, opts *RenderTargetTextureLoadFromDataStringOpts) *Texture {
+	if opts == nil {
+		opts = &RenderTargetTextureLoadFromDataStringOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+7)
+
+	args = append(args, name)
+	args = append(args, buffer)
+	args = append(args, scene.JSObject())
+
+	if opts.DeleteBuffer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DeleteBuffer)
+	}
+	if opts.NoMipmap == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoMipmap)
+	}
+	if opts.InvertY == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.InvertY)
+	}
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+	if opts.OnLoad == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnLoad)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+	if opts.Format == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Format)
+	}
+
+	retVal := r.p.Call("LoadFromDataString", args...)
+	return TextureFromJSObject(retVal, r.ctx)
+}
+
+// Parse calls the Parse method on the RenderTargetTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#parse
+func (r *RenderTargetTexture) Parse(parsedTexture interface{}, scene *Scene, rootUrl string) *BaseTexture {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, parsedTexture)
+	args = append(args, scene.JSObject())
+	args = append(args, rootUrl)
+
+	retVal := r.p.Call("Parse", args...)
+	return BaseTextureFromJSObject(retVal, r.ctx)
+}
+
+// RenderTargetTextureReadPixelsOpts contains optional parameters for RenderTargetTexture.ReadPixels.
+type RenderTargetTextureReadPixelsOpts struct {
+	FaceIndex *float64
+	Level     *float64
+	Buffer    js.Value
+}
+
+// ReadPixels calls the ReadPixels method on the RenderTargetTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#readpixels
+func (r *RenderTargetTexture) ReadPixels(opts *RenderTargetTextureReadPixelsOpts) js.Value {
+	if opts == nil {
+		opts = &RenderTargetTextureReadPixelsOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+3)
+
+	if opts.FaceIndex == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FaceIndex)
+	}
+	if opts.Level == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Level)
+	}
+	if opts.Buffer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Buffer)
+	}
+
+	retVal := r.p.Call("readPixels", args...)
+	return retVal
+}
+
+// ReleaseInternalTexture calls the ReleaseInternalTexture method on the RenderTargetTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#releaseinternaltexture
+func (r *RenderTargetTexture) ReleaseInternalTexture() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	r.p.Call("releaseInternalTexture", args...)
+}
+
+// RemovePostProcess calls the RemovePostProcess method on the RenderTargetTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#removepostprocess
+func (r *RenderTargetTexture) RemovePostProcess(postProcess *PostProcess) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, postProcess.JSObject())
+
+	r.p.Call("removePostProcess", args...)
+}
+
+// RenderTargetTextureRenderOpts contains optional parameters for RenderTargetTexture.Render.
+type RenderTargetTextureRenderOpts struct {
+	UseCameraPostProcess *bool
+	DumpForDebug         *bool
+}
+
+// Render calls the Render method on the RenderTargetTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#render
+func (r *RenderTargetTexture) Render(opts *RenderTargetTextureRenderOpts) {
+	if opts == nil {
+		opts = &RenderTargetTextureRenderOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.UseCameraPostProcess == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseCameraPostProcess)
+	}
+	if opts.DumpForDebug == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DumpForDebug)
+	}
+
+	r.p.Call("render", args...)
+}
+
+// ResetRefreshCounter calls the ResetRefreshCounter method on the RenderTargetTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#resetrefreshcounter
+func (r *RenderTargetTexture) ResetRefreshCounter() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	r.p.Call("resetRefreshCounter", args...)
+}
+
+// Resize calls the Resize method on the RenderTargetTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#resize
+func (r *RenderTargetTexture) Resize(size float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, size)
+
+	r.p.Call("resize", args...)
+}
+
+// Scale calls the Scale method on the RenderTargetTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#scale
+func (r *RenderTargetTexture) Scale(ratio float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, ratio)
+
+	r.p.Call("scale", args...)
+}
+
+// Serialize calls the Serialize method on the RenderTargetTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#serialize
+func (r *RenderTargetTexture) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("serialize", args...)
+	return retVal
+}
+
+// SetRenderingAutoClearDepthStencil calls the SetRenderingAutoClearDepthStencil method on the RenderTargetTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#setrenderingautocleardepthstencil
+func (r *RenderTargetTexture) SetRenderingAutoClearDepthStencil(renderingGroupId float64, autoClearDepthStencil bool) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, renderingGroupId)
+	args = append(args, autoClearDepthStencil)
+
+	r.p.Call("setRenderingAutoClearDepthStencil", args...)
+}
+
+// RenderTargetTextureSetRenderingOrderOpts contains optional parameters for RenderTargetTexture.SetRenderingOrder.
+type RenderTargetTextureSetRenderingOrderOpts struct {
+	OpaqueSortCompareFn      *func()
+	AlphaTestSortCompareFn   *func()
+	TransparentSortCompareFn *func()
+}
+
+// SetRenderingOrder calls the SetRenderingOrder method on the RenderTargetTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#setrenderingorder
+func (r *RenderTargetTexture) SetRenderingOrder(renderingGroupId float64, opts *RenderTargetTextureSetRenderingOrderOpts) {
+	if opts == nil {
+		opts = &RenderTargetTextureSetRenderingOrderOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, renderingGroupId)
+
+	if opts.OpaqueSortCompareFn == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OpaqueSortCompareFn)
+	}
+	if opts.AlphaTestSortCompareFn == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.AlphaTestSortCompareFn)
+	}
+	if opts.TransparentSortCompareFn == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.TransparentSortCompareFn)
+	}
+
+	r.p.Call("setRenderingOrder", args...)
+}
+
+// ToString calls the ToString method on the RenderTargetTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#tostring
+func (r *RenderTargetTexture) ToString() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("toString", args...)
+	return retVal.String()
+}
+
+// UpdateSamplingMode calls the UpdateSamplingMode method on the RenderTargetTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#updatesamplingmode
+func (r *RenderTargetTexture) UpdateSamplingMode(samplingMode float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, samplingMode)
+
+	r.p.Call("updateSamplingMode", args...)
+}
+
+// RenderTargetTextureUpdateURLOpts contains optional parameters for RenderTargetTexture.UpdateURL.
+type RenderTargetTextureUpdateURLOpts struct {
+	Buffer *string
+	OnLoad *func()
+}
+
+// UpdateURL calls the UpdateURL method on the RenderTargetTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#updateurl
+func (r *RenderTargetTexture) UpdateURL(url string, opts *RenderTargetTextureUpdateURLOpts) {
+	if opts == nil {
+		opts = &RenderTargetTextureUpdateURLOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, url)
+
+	if opts.Buffer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Buffer)
+	}
+	if opts.OnLoad == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnLoad)
+	}
+
+	r.p.Call("updateURL", args...)
+}
+
+// WhenAllReady calls the WhenAllReady method on the RenderTargetTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#whenallready
+func (r *RenderTargetTexture) WhenAllReady(textures *BaseTexture, callback func()) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, textures.JSObject())
+	args = append(args, callback)
+
+	r.p.Call("WhenAllReady", args...)
+}
+
+/*
+
+// ActiveCamera returns the ActiveCamera property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#activecamera
+func (r *RenderTargetTexture) ActiveCamera(activeCamera *Camera) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(activeCamera.JSObject())
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetActiveCamera sets the ActiveCamera property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#activecamera
+func (r *RenderTargetTexture) SetActiveCamera(activeCamera *Camera) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(activeCamera.JSObject())
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// Animations returns the Animations property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#animations
+func (r *RenderTargetTexture) Animations(animations *Animation) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(animations.JSObject())
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#animations
+func (r *RenderTargetTexture) SetAnimations(animations *Animation) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(animations.JSObject())
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// AnisotropicFilteringLevel returns the AnisotropicFilteringLevel property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#anisotropicfilteringlevel
+func (r *RenderTargetTexture) AnisotropicFilteringLevel(anisotropicFilteringLevel float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(anisotropicFilteringLevel)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetAnisotropicFilteringLevel sets the AnisotropicFilteringLevel property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#anisotropicfilteringlevel
+func (r *RenderTargetTexture) SetAnisotropicFilteringLevel(anisotropicFilteringLevel float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(anisotropicFilteringLevel)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// BILINEAR_SAMPLINGMODE returns the BILINEAR_SAMPLINGMODE property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#bilinear_samplingmode
+func (r *RenderTargetTexture) BILINEAR_SAMPLINGMODE(BILINEAR_SAMPLINGMODE float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(BILINEAR_SAMPLINGMODE)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetBILINEAR_SAMPLINGMODE sets the BILINEAR_SAMPLINGMODE property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#bilinear_samplingmode
+func (r *RenderTargetTexture) SetBILINEAR_SAMPLINGMODE(BILINEAR_SAMPLINGMODE float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(BILINEAR_SAMPLINGMODE)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// BoundingBoxPosition returns the BoundingBoxPosition property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#boundingboxposition
+func (r *RenderTargetTexture) BoundingBoxPosition(boundingBoxPosition *Vector3) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(boundingBoxPosition.JSObject())
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetBoundingBoxPosition sets the BoundingBoxPosition property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#boundingboxposition
+func (r *RenderTargetTexture) SetBoundingBoxPosition(boundingBoxPosition *Vector3) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(boundingBoxPosition.JSObject())
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// BoundingBoxSize returns the BoundingBoxSize property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#boundingboxsize
+func (r *RenderTargetTexture) BoundingBoxSize(boundingBoxSize *Vector3) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(boundingBoxSize.JSObject())
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetBoundingBoxSize sets the BoundingBoxSize property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#boundingboxsize
+func (r *RenderTargetTexture) SetBoundingBoxSize(boundingBoxSize *Vector3) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(boundingBoxSize.JSObject())
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// CLAMP_ADDRESSMODE returns the CLAMP_ADDRESSMODE property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#clamp_addressmode
+func (r *RenderTargetTexture) CLAMP_ADDRESSMODE(CLAMP_ADDRESSMODE float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(CLAMP_ADDRESSMODE)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCLAMP_ADDRESSMODE sets the CLAMP_ADDRESSMODE property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#clamp_addressmode
+func (r *RenderTargetTexture) SetCLAMP_ADDRESSMODE(CLAMP_ADDRESSMODE float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(CLAMP_ADDRESSMODE)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// CUBIC_MODE returns the CUBIC_MODE property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#cubic_mode
+func (r *RenderTargetTexture) CUBIC_MODE(CUBIC_MODE float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(CUBIC_MODE)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCUBIC_MODE sets the CUBIC_MODE property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#cubic_mode
+func (r *RenderTargetTexture) SetCUBIC_MODE(CUBIC_MODE float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(CUBIC_MODE)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// CanRescale returns the CanRescale property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#canrescale
+func (r *RenderTargetTexture) CanRescale(canRescale bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(canRescale)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCanRescale sets the CanRescale property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#canrescale
+func (r *RenderTargetTexture) SetCanRescale(canRescale bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(canRescale)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// ClearColor returns the ClearColor property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#clearcolor
+func (r *RenderTargetTexture) ClearColor(clearColor *Color4) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(clearColor.JSObject())
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetClearColor sets the ClearColor property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#clearcolor
+func (r *RenderTargetTexture) SetClearColor(clearColor *Color4) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(clearColor.JSObject())
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// CoordinatesIndex returns the CoordinatesIndex property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#coordinatesindex
+func (r *RenderTargetTexture) CoordinatesIndex(coordinatesIndex float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(coordinatesIndex)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCoordinatesIndex sets the CoordinatesIndex property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#coordinatesindex
+func (r *RenderTargetTexture) SetCoordinatesIndex(coordinatesIndex float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(coordinatesIndex)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// CoordinatesMode returns the CoordinatesMode property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#coordinatesmode
+func (r *RenderTargetTexture) CoordinatesMode(coordinatesMode float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(coordinatesMode)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCoordinatesMode sets the CoordinatesMode property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#coordinatesmode
+func (r *RenderTargetTexture) SetCoordinatesMode(coordinatesMode float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(coordinatesMode)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// CustomRenderFunction returns the CustomRenderFunction property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#customrenderfunction
+func (r *RenderTargetTexture) CustomRenderFunction(customRenderFunction func()) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(customRenderFunction)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCustomRenderFunction sets the CustomRenderFunction property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#customrenderfunction
+func (r *RenderTargetTexture) SetCustomRenderFunction(customRenderFunction func()) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(customRenderFunction)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// DEFAULT_ANISOTROPIC_FILTERING_LEVEL returns the DEFAULT_ANISOTROPIC_FILTERING_LEVEL property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#default_anisotropic_filtering_level
+func (r *RenderTargetTexture) DEFAULT_ANISOTROPIC_FILTERING_LEVEL(DEFAULT_ANISOTROPIC_FILTERING_LEVEL float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(DEFAULT_ANISOTROPIC_FILTERING_LEVEL)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetDEFAULT_ANISOTROPIC_FILTERING_LEVEL sets the DEFAULT_ANISOTROPIC_FILTERING_LEVEL property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#default_anisotropic_filtering_level
+func (r *RenderTargetTexture) SetDEFAULT_ANISOTROPIC_FILTERING_LEVEL(DEFAULT_ANISOTROPIC_FILTERING_LEVEL float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(DEFAULT_ANISOTROPIC_FILTERING_LEVEL)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// DelayLoadState returns the DelayLoadState property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#delayloadstate
+func (r *RenderTargetTexture) DelayLoadState(delayLoadState float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(delayLoadState)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetDelayLoadState sets the DelayLoadState property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#delayloadstate
+func (r *RenderTargetTexture) SetDelayLoadState(delayLoadState float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(delayLoadState)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// DepthStencilTexture returns the DepthStencilTexture property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#depthstenciltexture
+func (r *RenderTargetTexture) DepthStencilTexture(depthStencilTexture *InternalTexture) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(depthStencilTexture.JSObject())
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetDepthStencilTexture sets the DepthStencilTexture property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#depthstenciltexture
+func (r *RenderTargetTexture) SetDepthStencilTexture(depthStencilTexture *InternalTexture) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(depthStencilTexture.JSObject())
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// EQUIRECTANGULAR_MODE returns the EQUIRECTANGULAR_MODE property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#equirectangular_mode
+func (r *RenderTargetTexture) EQUIRECTANGULAR_MODE(EQUIRECTANGULAR_MODE float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(EQUIRECTANGULAR_MODE)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetEQUIRECTANGULAR_MODE sets the EQUIRECTANGULAR_MODE property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#equirectangular_mode
+func (r *RenderTargetTexture) SetEQUIRECTANGULAR_MODE(EQUIRECTANGULAR_MODE float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(EQUIRECTANGULAR_MODE)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// EXPLICIT_MODE returns the EXPLICIT_MODE property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#explicit_mode
+func (r *RenderTargetTexture) EXPLICIT_MODE(EXPLICIT_MODE float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(EXPLICIT_MODE)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetEXPLICIT_MODE sets the EXPLICIT_MODE property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#explicit_mode
+func (r *RenderTargetTexture) SetEXPLICIT_MODE(EXPLICIT_MODE float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(EXPLICIT_MODE)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// FIXED_EQUIRECTANGULAR_MIRRORED_MODE returns the FIXED_EQUIRECTANGULAR_MIRRORED_MODE property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#fixed_equirectangular_mirrored_mode
+func (r *RenderTargetTexture) FIXED_EQUIRECTANGULAR_MIRRORED_MODE(FIXED_EQUIRECTANGULAR_MIRRORED_MODE float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(FIXED_EQUIRECTANGULAR_MIRRORED_MODE)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetFIXED_EQUIRECTANGULAR_MIRRORED_MODE sets the FIXED_EQUIRECTANGULAR_MIRRORED_MODE property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#fixed_equirectangular_mirrored_mode
+func (r *RenderTargetTexture) SetFIXED_EQUIRECTANGULAR_MIRRORED_MODE(FIXED_EQUIRECTANGULAR_MIRRORED_MODE float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(FIXED_EQUIRECTANGULAR_MIRRORED_MODE)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// FIXED_EQUIRECTANGULAR_MODE returns the FIXED_EQUIRECTANGULAR_MODE property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#fixed_equirectangular_mode
+func (r *RenderTargetTexture) FIXED_EQUIRECTANGULAR_MODE(FIXED_EQUIRECTANGULAR_MODE float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(FIXED_EQUIRECTANGULAR_MODE)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetFIXED_EQUIRECTANGULAR_MODE sets the FIXED_EQUIRECTANGULAR_MODE property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#fixed_equirectangular_mode
+func (r *RenderTargetTexture) SetFIXED_EQUIRECTANGULAR_MODE(FIXED_EQUIRECTANGULAR_MODE float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(FIXED_EQUIRECTANGULAR_MODE)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// GammaSpace returns the GammaSpace property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#gammaspace
+func (r *RenderTargetTexture) GammaSpace(gammaSpace bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(gammaSpace)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetGammaSpace sets the GammaSpace property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#gammaspace
+func (r *RenderTargetTexture) SetGammaSpace(gammaSpace bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(gammaSpace)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// GetAlphaFromRGB returns the GetAlphaFromRGB property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#getalphafromrgb
+func (r *RenderTargetTexture) GetAlphaFromRGB(getAlphaFromRGB bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(getAlphaFromRGB)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetGetAlphaFromRGB sets the GetAlphaFromRGB property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#getalphafromrgb
+func (r *RenderTargetTexture) SetGetAlphaFromRGB(getAlphaFromRGB bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(getAlphaFromRGB)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// HasAlpha returns the HasAlpha property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#hasalpha
+func (r *RenderTargetTexture) HasAlpha(hasAlpha bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(hasAlpha)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetHasAlpha sets the HasAlpha property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#hasalpha
+func (r *RenderTargetTexture) SetHasAlpha(hasAlpha bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(hasAlpha)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// INVCUBIC_MODE returns the INVCUBIC_MODE property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#invcubic_mode
+func (r *RenderTargetTexture) INVCUBIC_MODE(INVCUBIC_MODE float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(INVCUBIC_MODE)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetINVCUBIC_MODE sets the INVCUBIC_MODE property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#invcubic_mode
+func (r *RenderTargetTexture) SetINVCUBIC_MODE(INVCUBIC_MODE float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(INVCUBIC_MODE)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// IgnoreCameraViewport returns the IgnoreCameraViewport property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#ignorecameraviewport
+func (r *RenderTargetTexture) IgnoreCameraViewport(ignoreCameraViewport bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(ignoreCameraViewport)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIgnoreCameraViewport sets the IgnoreCameraViewport property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#ignorecameraviewport
+func (r *RenderTargetTexture) SetIgnoreCameraViewport(ignoreCameraViewport bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(ignoreCameraViewport)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#inspectablecustomproperties
+func (r *RenderTargetTexture) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(inspectableCustomProperties.JSObject())
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#inspectablecustomproperties
+func (r *RenderTargetTexture) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(inspectableCustomProperties.JSObject())
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// InvertY returns the InvertY property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#inverty
+func (r *RenderTargetTexture) InvertY(invertY bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(invertY)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetInvertY sets the InvertY property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#inverty
+func (r *RenderTargetTexture) SetInvertY(invertY bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(invertY)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// InvertZ returns the InvertZ property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#invertz
+func (r *RenderTargetTexture) InvertZ(invertZ bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(invertZ)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetInvertZ sets the InvertZ property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#invertz
+func (r *RenderTargetTexture) SetInvertZ(invertZ bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(invertZ)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// IrradianceTexture returns the IrradianceTexture property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#irradiancetexture
+func (r *RenderTargetTexture) IrradianceTexture(irradianceTexture *BaseTexture) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(irradianceTexture.JSObject())
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIrradianceTexture sets the IrradianceTexture property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#irradiancetexture
+func (r *RenderTargetTexture) SetIrradianceTexture(irradianceTexture *BaseTexture) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(irradianceTexture.JSObject())
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// Is2DArray returns the Is2DArray property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#is2darray
+func (r *RenderTargetTexture) Is2DArray(is2DArray bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(is2DArray)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIs2DArray sets the Is2DArray property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#is2darray
+func (r *RenderTargetTexture) SetIs2DArray(is2DArray bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(is2DArray)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// Is3D returns the Is3D property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#is3d
+func (r *RenderTargetTexture) Is3D(is3D bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(is3D)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIs3D sets the Is3D property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#is3d
+func (r *RenderTargetTexture) SetIs3D(is3D bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(is3D)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// IsBlocking returns the IsBlocking property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#isblocking
+func (r *RenderTargetTexture) IsBlocking(isBlocking bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(isBlocking)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsBlocking sets the IsBlocking property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#isblocking
+func (r *RenderTargetTexture) SetIsBlocking(isBlocking bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(isBlocking)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// IsCube returns the IsCube property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#iscube
+func (r *RenderTargetTexture) IsCube(isCube bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(isCube)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsCube sets the IsCube property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#iscube
+func (r *RenderTargetTexture) SetIsCube(isCube bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(isCube)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// IsRGBD returns the IsRGBD property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#isrgbd
+func (r *RenderTargetTexture) IsRGBD(isRGBD bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(isRGBD)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsRGBD sets the IsRGBD property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#isrgbd
+func (r *RenderTargetTexture) SetIsRGBD(isRGBD bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(isRGBD)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// IsRenderTarget returns the IsRenderTarget property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#isrendertarget
+func (r *RenderTargetTexture) IsRenderTarget(isRenderTarget bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(isRenderTarget)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsRenderTarget sets the IsRenderTarget property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#isrendertarget
+func (r *RenderTargetTexture) SetIsRenderTarget(isRenderTarget bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(isRenderTarget)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_LINEAR returns the LINEAR_LINEAR property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#linear_linear
+func (r *RenderTargetTexture) LINEAR_LINEAR(LINEAR_LINEAR float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(LINEAR_LINEAR)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_LINEAR sets the LINEAR_LINEAR property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#linear_linear
+func (r *RenderTargetTexture) SetLINEAR_LINEAR(LINEAR_LINEAR float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(LINEAR_LINEAR)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_LINEAR_MIPLINEAR returns the LINEAR_LINEAR_MIPLINEAR property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#linear_linear_miplinear
+func (r *RenderTargetTexture) LINEAR_LINEAR_MIPLINEAR(LINEAR_LINEAR_MIPLINEAR float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(LINEAR_LINEAR_MIPLINEAR)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_LINEAR_MIPLINEAR sets the LINEAR_LINEAR_MIPLINEAR property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#linear_linear_miplinear
+func (r *RenderTargetTexture) SetLINEAR_LINEAR_MIPLINEAR(LINEAR_LINEAR_MIPLINEAR float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(LINEAR_LINEAR_MIPLINEAR)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_LINEAR_MIPNEAREST returns the LINEAR_LINEAR_MIPNEAREST property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#linear_linear_mipnearest
+func (r *RenderTargetTexture) LINEAR_LINEAR_MIPNEAREST(LINEAR_LINEAR_MIPNEAREST float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(LINEAR_LINEAR_MIPNEAREST)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_LINEAR_MIPNEAREST sets the LINEAR_LINEAR_MIPNEAREST property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#linear_linear_mipnearest
+func (r *RenderTargetTexture) SetLINEAR_LINEAR_MIPNEAREST(LINEAR_LINEAR_MIPNEAREST float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(LINEAR_LINEAR_MIPNEAREST)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_NEAREST returns the LINEAR_NEAREST property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#linear_nearest
+func (r *RenderTargetTexture) LINEAR_NEAREST(LINEAR_NEAREST float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(LINEAR_NEAREST)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_NEAREST sets the LINEAR_NEAREST property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#linear_nearest
+func (r *RenderTargetTexture) SetLINEAR_NEAREST(LINEAR_NEAREST float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(LINEAR_NEAREST)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_NEAREST_MIPLINEAR returns the LINEAR_NEAREST_MIPLINEAR property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#linear_nearest_miplinear
+func (r *RenderTargetTexture) LINEAR_NEAREST_MIPLINEAR(LINEAR_NEAREST_MIPLINEAR float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(LINEAR_NEAREST_MIPLINEAR)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_NEAREST_MIPLINEAR sets the LINEAR_NEAREST_MIPLINEAR property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#linear_nearest_miplinear
+func (r *RenderTargetTexture) SetLINEAR_NEAREST_MIPLINEAR(LINEAR_NEAREST_MIPLINEAR float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(LINEAR_NEAREST_MIPLINEAR)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_NEAREST_MIPNEAREST returns the LINEAR_NEAREST_MIPNEAREST property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#linear_nearest_mipnearest
+func (r *RenderTargetTexture) LINEAR_NEAREST_MIPNEAREST(LINEAR_NEAREST_MIPNEAREST float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(LINEAR_NEAREST_MIPNEAREST)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_NEAREST_MIPNEAREST sets the LINEAR_NEAREST_MIPNEAREST property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#linear_nearest_mipnearest
+func (r *RenderTargetTexture) SetLINEAR_NEAREST_MIPNEAREST(LINEAR_NEAREST_MIPNEAREST float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(LINEAR_NEAREST_MIPNEAREST)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// Level returns the Level property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#level
+func (r *RenderTargetTexture) Level(level float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(level)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLevel sets the Level property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#level
+func (r *RenderTargetTexture) SetLevel(level float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(level)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// LinearSpecularLOD returns the LinearSpecularLOD property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#linearspecularlod
+func (r *RenderTargetTexture) LinearSpecularLOD(linearSpecularLOD bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(linearSpecularLOD)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLinearSpecularLOD sets the LinearSpecularLOD property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#linearspecularlod
+func (r *RenderTargetTexture) SetLinearSpecularLOD(linearSpecularLOD bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(linearSpecularLOD)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// LodGenerationOffset returns the LodGenerationOffset property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#lodgenerationoffset
+func (r *RenderTargetTexture) LodGenerationOffset(lodGenerationOffset float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(lodGenerationOffset)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLodGenerationOffset sets the LodGenerationOffset property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#lodgenerationoffset
+func (r *RenderTargetTexture) SetLodGenerationOffset(lodGenerationOffset float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(lodGenerationOffset)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// LodGenerationScale returns the LodGenerationScale property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#lodgenerationscale
+func (r *RenderTargetTexture) LodGenerationScale(lodGenerationScale float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(lodGenerationScale)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLodGenerationScale sets the LodGenerationScale property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#lodgenerationscale
+func (r *RenderTargetTexture) SetLodGenerationScale(lodGenerationScale float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(lodGenerationScale)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// MIRROR_ADDRESSMODE returns the MIRROR_ADDRESSMODE property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#mirror_addressmode
+func (r *RenderTargetTexture) MIRROR_ADDRESSMODE(MIRROR_ADDRESSMODE float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(MIRROR_ADDRESSMODE)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetMIRROR_ADDRESSMODE sets the MIRROR_ADDRESSMODE property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#mirror_addressmode
+func (r *RenderTargetTexture) SetMIRROR_ADDRESSMODE(MIRROR_ADDRESSMODE float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(MIRROR_ADDRESSMODE)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#metadata
+func (r *RenderTargetTexture) Metadata(metadata interface{}) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(metadata)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#metadata
+func (r *RenderTargetTexture) SetMetadata(metadata interface{}) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(metadata)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_LINEAR returns the NEAREST_LINEAR property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#nearest_linear
+func (r *RenderTargetTexture) NEAREST_LINEAR(NEAREST_LINEAR float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(NEAREST_LINEAR)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_LINEAR sets the NEAREST_LINEAR property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#nearest_linear
+func (r *RenderTargetTexture) SetNEAREST_LINEAR(NEAREST_LINEAR float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(NEAREST_LINEAR)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_LINEAR_MIPLINEAR returns the NEAREST_LINEAR_MIPLINEAR property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#nearest_linear_miplinear
+func (r *RenderTargetTexture) NEAREST_LINEAR_MIPLINEAR(NEAREST_LINEAR_MIPLINEAR float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(NEAREST_LINEAR_MIPLINEAR)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_LINEAR_MIPLINEAR sets the NEAREST_LINEAR_MIPLINEAR property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#nearest_linear_miplinear
+func (r *RenderTargetTexture) SetNEAREST_LINEAR_MIPLINEAR(NEAREST_LINEAR_MIPLINEAR float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(NEAREST_LINEAR_MIPLINEAR)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_LINEAR_MIPNEAREST returns the NEAREST_LINEAR_MIPNEAREST property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#nearest_linear_mipnearest
+func (r *RenderTargetTexture) NEAREST_LINEAR_MIPNEAREST(NEAREST_LINEAR_MIPNEAREST float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(NEAREST_LINEAR_MIPNEAREST)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_LINEAR_MIPNEAREST sets the NEAREST_LINEAR_MIPNEAREST property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#nearest_linear_mipnearest
+func (r *RenderTargetTexture) SetNEAREST_LINEAR_MIPNEAREST(NEAREST_LINEAR_MIPNEAREST float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(NEAREST_LINEAR_MIPNEAREST)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_NEAREST returns the NEAREST_NEAREST property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#nearest_nearest
+func (r *RenderTargetTexture) NEAREST_NEAREST(NEAREST_NEAREST float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(NEAREST_NEAREST)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_NEAREST sets the NEAREST_NEAREST property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#nearest_nearest
+func (r *RenderTargetTexture) SetNEAREST_NEAREST(NEAREST_NEAREST float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(NEAREST_NEAREST)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_NEAREST_MIPLINEAR returns the NEAREST_NEAREST_MIPLINEAR property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#nearest_nearest_miplinear
+func (r *RenderTargetTexture) NEAREST_NEAREST_MIPLINEAR(NEAREST_NEAREST_MIPLINEAR float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(NEAREST_NEAREST_MIPLINEAR)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_NEAREST_MIPLINEAR sets the NEAREST_NEAREST_MIPLINEAR property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#nearest_nearest_miplinear
+func (r *RenderTargetTexture) SetNEAREST_NEAREST_MIPLINEAR(NEAREST_NEAREST_MIPLINEAR float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(NEAREST_NEAREST_MIPLINEAR)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_NEAREST_MIPNEAREST returns the NEAREST_NEAREST_MIPNEAREST property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#nearest_nearest_mipnearest
+func (r *RenderTargetTexture) NEAREST_NEAREST_MIPNEAREST(NEAREST_NEAREST_MIPNEAREST float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(NEAREST_NEAREST_MIPNEAREST)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_NEAREST_MIPNEAREST sets the NEAREST_NEAREST_MIPNEAREST property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#nearest_nearest_mipnearest
+func (r *RenderTargetTexture) SetNEAREST_NEAREST_MIPNEAREST(NEAREST_NEAREST_MIPNEAREST float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(NEAREST_NEAREST_MIPNEAREST)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_SAMPLINGMODE returns the NEAREST_SAMPLINGMODE property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#nearest_samplingmode
+func (r *RenderTargetTexture) NEAREST_SAMPLINGMODE(NEAREST_SAMPLINGMODE float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(NEAREST_SAMPLINGMODE)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_SAMPLINGMODE sets the NEAREST_SAMPLINGMODE property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#nearest_samplingmode
+func (r *RenderTargetTexture) SetNEAREST_SAMPLINGMODE(NEAREST_SAMPLINGMODE float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(NEAREST_SAMPLINGMODE)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#name
+func (r *RenderTargetTexture) Name(name string) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(name)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#name
+func (r *RenderTargetTexture) SetName(name string) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(name)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// NoMipmap returns the NoMipmap property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#nomipmap
+func (r *RenderTargetTexture) NoMipmap(noMipmap bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(noMipmap)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNoMipmap sets the NoMipmap property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#nomipmap
+func (r *RenderTargetTexture) SetNoMipmap(noMipmap bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(noMipmap)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// OnAfterRender returns the OnAfterRender property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#onafterrender
+func (r *RenderTargetTexture) OnAfterRender(onAfterRender func()) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(onAfterRender)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterRender sets the OnAfterRender property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#onafterrender
+func (r *RenderTargetTexture) SetOnAfterRender(onAfterRender func()) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(onAfterRender)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// OnAfterRenderObservable returns the OnAfterRenderObservable property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#onafterrenderobservable
+func (r *RenderTargetTexture) OnAfterRenderObservable(onAfterRenderObservable *Observable) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(onAfterRenderObservable.JSObject())
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterRenderObservable sets the OnAfterRenderObservable property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#onafterrenderobservable
+func (r *RenderTargetTexture) SetOnAfterRenderObservable(onAfterRenderObservable *Observable) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(onAfterRenderObservable.JSObject())
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// OnAfterUnbind returns the OnAfterUnbind property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#onafterunbind
+func (r *RenderTargetTexture) OnAfterUnbind(onAfterUnbind func()) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(onAfterUnbind)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterUnbind sets the OnAfterUnbind property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#onafterunbind
+func (r *RenderTargetTexture) SetOnAfterUnbind(onAfterUnbind func()) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(onAfterUnbind)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// OnAfterUnbindObservable returns the OnAfterUnbindObservable property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#onafterunbindobservable
+func (r *RenderTargetTexture) OnAfterUnbindObservable(onAfterUnbindObservable *Observable) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(onAfterUnbindObservable.JSObject())
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterUnbindObservable sets the OnAfterUnbindObservable property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#onafterunbindobservable
+func (r *RenderTargetTexture) SetOnAfterUnbindObservable(onAfterUnbindObservable *Observable) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(onAfterUnbindObservable.JSObject())
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeBindObservable returns the OnBeforeBindObservable property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#onbeforebindobservable
+func (r *RenderTargetTexture) OnBeforeBindObservable(onBeforeBindObservable *Observable) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(onBeforeBindObservable.JSObject())
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeBindObservable sets the OnBeforeBindObservable property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#onbeforebindobservable
+func (r *RenderTargetTexture) SetOnBeforeBindObservable(onBeforeBindObservable *Observable) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(onBeforeBindObservable.JSObject())
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeRender returns the OnBeforeRender property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#onbeforerender
+func (r *RenderTargetTexture) OnBeforeRender(onBeforeRender func()) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(onBeforeRender)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeRender sets the OnBeforeRender property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#onbeforerender
+func (r *RenderTargetTexture) SetOnBeforeRender(onBeforeRender func()) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(onBeforeRender)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeRenderObservable returns the OnBeforeRenderObservable property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#onbeforerenderobservable
+func (r *RenderTargetTexture) OnBeforeRenderObservable(onBeforeRenderObservable *Observable) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(onBeforeRenderObservable.JSObject())
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeRenderObservable sets the OnBeforeRenderObservable property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#onbeforerenderobservable
+func (r *RenderTargetTexture) SetOnBeforeRenderObservable(onBeforeRenderObservable *Observable) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(onBeforeRenderObservable.JSObject())
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// OnClear returns the OnClear property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#onclear
+func (r *RenderTargetTexture) OnClear(onClear func()) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(onClear)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnClear sets the OnClear property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#onclear
+func (r *RenderTargetTexture) SetOnClear(onClear func()) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(onClear)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// OnClearObservable returns the OnClearObservable property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#onclearobservable
+func (r *RenderTargetTexture) OnClearObservable(onClearObservable *Observable) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(onClearObservable.JSObject())
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnClearObservable sets the OnClearObservable property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#onclearobservable
+func (r *RenderTargetTexture) SetOnClearObservable(onClearObservable *Observable) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(onClearObservable.JSObject())
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// OnDispose returns the OnDispose property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#ondispose
+func (r *RenderTargetTexture) OnDispose(onDispose func()) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(onDispose)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnDispose sets the OnDispose property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#ondispose
+func (r *RenderTargetTexture) SetOnDispose(onDispose func()) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(onDispose)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// OnDisposeObservable returns the OnDisposeObservable property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#ondisposeobservable
+func (r *RenderTargetTexture) OnDisposeObservable(onDisposeObservable *Observable) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(onDisposeObservable.JSObject())
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnDisposeObservable sets the OnDisposeObservable property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#ondisposeobservable
+func (r *RenderTargetTexture) SetOnDisposeObservable(onDisposeObservable *Observable) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(onDisposeObservable.JSObject())
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// OnLoadObservable returns the OnLoadObservable property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#onloadobservable
+func (r *RenderTargetTexture) OnLoadObservable(onLoadObservable *Observable) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(onLoadObservable.JSObject())
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnLoadObservable sets the OnLoadObservable property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#onloadobservable
+func (r *RenderTargetTexture) SetOnLoadObservable(onLoadObservable *Observable) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(onLoadObservable.JSObject())
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// OnResizeObservable returns the OnResizeObservable property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#onresizeobservable
+func (r *RenderTargetTexture) OnResizeObservable(onResizeObservable *Observable) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(onResizeObservable.JSObject())
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnResizeObservable sets the OnResizeObservable property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#onresizeobservable
+func (r *RenderTargetTexture) SetOnResizeObservable(onResizeObservable *Observable) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(onResizeObservable.JSObject())
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// PLANAR_MODE returns the PLANAR_MODE property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#planar_mode
+func (r *RenderTargetTexture) PLANAR_MODE(PLANAR_MODE float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(PLANAR_MODE)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetPLANAR_MODE sets the PLANAR_MODE property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#planar_mode
+func (r *RenderTargetTexture) SetPLANAR_MODE(PLANAR_MODE float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(PLANAR_MODE)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// PROJECTION_MODE returns the PROJECTION_MODE property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#projection_mode
+func (r *RenderTargetTexture) PROJECTION_MODE(PROJECTION_MODE float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(PROJECTION_MODE)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetPROJECTION_MODE sets the PROJECTION_MODE property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#projection_mode
+func (r *RenderTargetTexture) SetPROJECTION_MODE(PROJECTION_MODE float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(PROJECTION_MODE)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// REFRESHRATE_RENDER_ONCE returns the REFRESHRATE_RENDER_ONCE property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#refreshrate_render_once
+func (r *RenderTargetTexture) REFRESHRATE_RENDER_ONCE(REFRESHRATE_RENDER_ONCE float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(REFRESHRATE_RENDER_ONCE)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetREFRESHRATE_RENDER_ONCE sets the REFRESHRATE_RENDER_ONCE property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#refreshrate_render_once
+func (r *RenderTargetTexture) SetREFRESHRATE_RENDER_ONCE(REFRESHRATE_RENDER_ONCE float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(REFRESHRATE_RENDER_ONCE)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// REFRESHRATE_RENDER_ONEVERYFRAME returns the REFRESHRATE_RENDER_ONEVERYFRAME property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#refreshrate_render_oneveryframe
+func (r *RenderTargetTexture) REFRESHRATE_RENDER_ONEVERYFRAME(REFRESHRATE_RENDER_ONEVERYFRAME float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(REFRESHRATE_RENDER_ONEVERYFRAME)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetREFRESHRATE_RENDER_ONEVERYFRAME sets the REFRESHRATE_RENDER_ONEVERYFRAME property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#refreshrate_render_oneveryframe
+func (r *RenderTargetTexture) SetREFRESHRATE_RENDER_ONEVERYFRAME(REFRESHRATE_RENDER_ONEVERYFRAME float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(REFRESHRATE_RENDER_ONEVERYFRAME)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// REFRESHRATE_RENDER_ONEVERYTWOFRAMES returns the REFRESHRATE_RENDER_ONEVERYTWOFRAMES property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#refreshrate_render_oneverytwoframes
+func (r *RenderTargetTexture) REFRESHRATE_RENDER_ONEVERYTWOFRAMES(REFRESHRATE_RENDER_ONEVERYTWOFRAMES float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(REFRESHRATE_RENDER_ONEVERYTWOFRAMES)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetREFRESHRATE_RENDER_ONEVERYTWOFRAMES sets the REFRESHRATE_RENDER_ONEVERYTWOFRAMES property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#refreshrate_render_oneverytwoframes
+func (r *RenderTargetTexture) SetREFRESHRATE_RENDER_ONEVERYTWOFRAMES(REFRESHRATE_RENDER_ONEVERYTWOFRAMES float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(REFRESHRATE_RENDER_ONEVERYTWOFRAMES)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// RefreshRate returns the RefreshRate property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#refreshrate
+func (r *RenderTargetTexture) RefreshRate(refreshRate float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(refreshRate)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetRefreshRate sets the RefreshRate property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#refreshrate
+func (r *RenderTargetTexture) SetRefreshRate(refreshRate float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(refreshRate)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// RenderList returns the RenderList property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#renderlist
+func (r *RenderTargetTexture) RenderList(renderList []AbstractMesh) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(renderList.JSObject())
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetRenderList sets the RenderList property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#renderlist
+func (r *RenderTargetTexture) SetRenderList(renderList []AbstractMesh) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(renderList.JSObject())
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// RenderListPredicate returns the RenderListPredicate property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#renderlistpredicate
+func (r *RenderTargetTexture) RenderListPredicate(renderListPredicate func()) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(renderListPredicate)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetRenderListPredicate sets the RenderListPredicate property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#renderlistpredicate
+func (r *RenderTargetTexture) SetRenderListPredicate(renderListPredicate func()) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(renderListPredicate)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// RenderParticles returns the RenderParticles property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#renderparticles
+func (r *RenderTargetTexture) RenderParticles(renderParticles bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(renderParticles)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetRenderParticles sets the RenderParticles property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#renderparticles
+func (r *RenderTargetTexture) SetRenderParticles(renderParticles bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(renderParticles)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// RenderSprites returns the RenderSprites property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#rendersprites
+func (r *RenderTargetTexture) RenderSprites(renderSprites bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(renderSprites)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetRenderSprites sets the RenderSprites property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#rendersprites
+func (r *RenderTargetTexture) SetRenderSprites(renderSprites bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(renderSprites)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// RenderTargetOptions returns the RenderTargetOptions property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#rendertargetoptions
+func (r *RenderTargetTexture) RenderTargetOptions(renderTargetOptions *RenderTargetCreationOptions) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(renderTargetOptions.JSObject())
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetRenderTargetOptions sets the RenderTargetOptions property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#rendertargetoptions
+func (r *RenderTargetTexture) SetRenderTargetOptions(renderTargetOptions *RenderTargetCreationOptions) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(renderTargetOptions.JSObject())
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// ReservedDataStore returns the ReservedDataStore property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#reserveddatastore
+func (r *RenderTargetTexture) ReservedDataStore(reservedDataStore interface{}) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(reservedDataStore)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetReservedDataStore sets the ReservedDataStore property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#reserveddatastore
+func (r *RenderTargetTexture) SetReservedDataStore(reservedDataStore interface{}) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(reservedDataStore)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SKYBOX_MODE returns the SKYBOX_MODE property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#skybox_mode
+func (r *RenderTargetTexture) SKYBOX_MODE(SKYBOX_MODE float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(SKYBOX_MODE)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetSKYBOX_MODE sets the SKYBOX_MODE property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#skybox_mode
+func (r *RenderTargetTexture) SetSKYBOX_MODE(SKYBOX_MODE float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(SKYBOX_MODE)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SPHERICAL_MODE returns the SPHERICAL_MODE property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#spherical_mode
+func (r *RenderTargetTexture) SPHERICAL_MODE(SPHERICAL_MODE float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(SPHERICAL_MODE)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetSPHERICAL_MODE sets the SPHERICAL_MODE property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#spherical_mode
+func (r *RenderTargetTexture) SetSPHERICAL_MODE(SPHERICAL_MODE float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(SPHERICAL_MODE)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// Samples returns the Samples property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#samples
+func (r *RenderTargetTexture) Samples(samples float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(samples)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetSamples sets the Samples property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#samples
+func (r *RenderTargetTexture) SetSamples(samples float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(samples)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SamplingMode returns the SamplingMode property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#samplingmode
+func (r *RenderTargetTexture) SamplingMode(samplingMode float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(samplingMode)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetSamplingMode sets the SamplingMode property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#samplingmode
+func (r *RenderTargetTexture) SetSamplingMode(samplingMode float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(samplingMode)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SerializeBuffers returns the SerializeBuffers property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#serializebuffers
+func (r *RenderTargetTexture) SerializeBuffers(SerializeBuffers bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(SerializeBuffers)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetSerializeBuffers sets the SerializeBuffers property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#serializebuffers
+func (r *RenderTargetTexture) SetSerializeBuffers(SerializeBuffers bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(SerializeBuffers)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// TRILINEAR_SAMPLINGMODE returns the TRILINEAR_SAMPLINGMODE property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#trilinear_samplingmode
+func (r *RenderTargetTexture) TRILINEAR_SAMPLINGMODE(TRILINEAR_SAMPLINGMODE float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(TRILINEAR_SAMPLINGMODE)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetTRILINEAR_SAMPLINGMODE sets the TRILINEAR_SAMPLINGMODE property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#trilinear_samplingmode
+func (r *RenderTargetTexture) SetTRILINEAR_SAMPLINGMODE(TRILINEAR_SAMPLINGMODE float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(TRILINEAR_SAMPLINGMODE)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// TextureFormat returns the TextureFormat property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#textureformat
+func (r *RenderTargetTexture) TextureFormat(textureFormat float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(textureFormat)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetTextureFormat sets the TextureFormat property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#textureformat
+func (r *RenderTargetTexture) SetTextureFormat(textureFormat float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(textureFormat)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// TextureType returns the TextureType property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#texturetype
+func (r *RenderTargetTexture) TextureType(textureType float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(textureType)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetTextureType sets the TextureType property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#texturetype
+func (r *RenderTargetTexture) SetTextureType(textureType float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(textureType)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// UAng returns the UAng property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#uang
+func (r *RenderTargetTexture) UAng(uAng float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(uAng)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUAng sets the UAng property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#uang
+func (r *RenderTargetTexture) SetUAng(uAng float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(uAng)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// UOffset returns the UOffset property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#uoffset
+func (r *RenderTargetTexture) UOffset(uOffset float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(uOffset)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUOffset sets the UOffset property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#uoffset
+func (r *RenderTargetTexture) SetUOffset(uOffset float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(uOffset)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// URotationCenter returns the URotationCenter property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#urotationcenter
+func (r *RenderTargetTexture) URotationCenter(uRotationCenter float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(uRotationCenter)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetURotationCenter sets the URotationCenter property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#urotationcenter
+func (r *RenderTargetTexture) SetURotationCenter(uRotationCenter float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(uRotationCenter)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// UScale returns the UScale property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#uscale
+func (r *RenderTargetTexture) UScale(uScale float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(uScale)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUScale sets the UScale property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#uscale
+func (r *RenderTargetTexture) SetUScale(uScale float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(uScale)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// Uid returns the Uid property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#uid
+func (r *RenderTargetTexture) Uid(uid string) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(uid)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUid sets the Uid property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#uid
+func (r *RenderTargetTexture) SetUid(uid string) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(uid)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#uniqueid
+func (r *RenderTargetTexture) UniqueId(uniqueId float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(uniqueId)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#uniqueid
+func (r *RenderTargetTexture) SetUniqueId(uniqueId float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(uniqueId)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// Url returns the Url property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#url
+func (r *RenderTargetTexture) Url(url string) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(url)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUrl sets the Url property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#url
+func (r *RenderTargetTexture) SetUrl(url string) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(url)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// UseCameraPostProcesses returns the UseCameraPostProcesses property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#usecamerapostprocesses
+func (r *RenderTargetTexture) UseCameraPostProcesses(useCameraPostProcesses bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(useCameraPostProcesses)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUseCameraPostProcesses sets the UseCameraPostProcesses property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#usecamerapostprocesses
+func (r *RenderTargetTexture) SetUseCameraPostProcesses(useCameraPostProcesses bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(useCameraPostProcesses)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// UseSerializedUrlIfAny returns the UseSerializedUrlIfAny property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#useserializedurlifany
+func (r *RenderTargetTexture) UseSerializedUrlIfAny(UseSerializedUrlIfAny bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(UseSerializedUrlIfAny)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUseSerializedUrlIfAny sets the UseSerializedUrlIfAny property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#useserializedurlifany
+func (r *RenderTargetTexture) SetUseSerializedUrlIfAny(UseSerializedUrlIfAny bool) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(UseSerializedUrlIfAny)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// VAng returns the VAng property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#vang
+func (r *RenderTargetTexture) VAng(vAng float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(vAng)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetVAng sets the VAng property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#vang
+func (r *RenderTargetTexture) SetVAng(vAng float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(vAng)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// VOffset returns the VOffset property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#voffset
+func (r *RenderTargetTexture) VOffset(vOffset float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(vOffset)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetVOffset sets the VOffset property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#voffset
+func (r *RenderTargetTexture) SetVOffset(vOffset float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(vOffset)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// VRotationCenter returns the VRotationCenter property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#vrotationcenter
+func (r *RenderTargetTexture) VRotationCenter(vRotationCenter float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(vRotationCenter)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetVRotationCenter sets the VRotationCenter property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#vrotationcenter
+func (r *RenderTargetTexture) SetVRotationCenter(vRotationCenter float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(vRotationCenter)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// VScale returns the VScale property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#vscale
+func (r *RenderTargetTexture) VScale(vScale float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(vScale)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetVScale sets the VScale property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#vscale
+func (r *RenderTargetTexture) SetVScale(vScale float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(vScale)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// WAng returns the WAng property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#wang
+func (r *RenderTargetTexture) WAng(wAng float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(wAng)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWAng sets the WAng property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#wang
+func (r *RenderTargetTexture) SetWAng(wAng float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(wAng)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// WRAP_ADDRESSMODE returns the WRAP_ADDRESSMODE property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#wrap_addressmode
+func (r *RenderTargetTexture) WRAP_ADDRESSMODE(WRAP_ADDRESSMODE float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(WRAP_ADDRESSMODE)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWRAP_ADDRESSMODE sets the WRAP_ADDRESSMODE property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#wrap_addressmode
+func (r *RenderTargetTexture) SetWRAP_ADDRESSMODE(WRAP_ADDRESSMODE float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(WRAP_ADDRESSMODE)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// WRotationCenter returns the WRotationCenter property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#wrotationcenter
+func (r *RenderTargetTexture) WRotationCenter(wRotationCenter float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(wRotationCenter)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWRotationCenter sets the WRotationCenter property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#wrotationcenter
+func (r *RenderTargetTexture) SetWRotationCenter(wRotationCenter float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(wRotationCenter)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// WrapR returns the WrapR property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#wrapr
+func (r *RenderTargetTexture) WrapR(wrapR float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(wrapR)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWrapR sets the WrapR property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#wrapr
+func (r *RenderTargetTexture) SetWrapR(wrapR float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(wrapR)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// WrapU returns the WrapU property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#wrapu
+func (r *RenderTargetTexture) WrapU(wrapU float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(wrapU)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWrapU sets the WrapU property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#wrapu
+func (r *RenderTargetTexture) SetWrapU(wrapU float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(wrapU)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// WrapV returns the WrapV property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#wrapv
+func (r *RenderTargetTexture) WrapV(wrapV float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(wrapV)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWrapV sets the WrapV property of class RenderTargetTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rendertargettexture#wrapv
+func (r *RenderTargetTexture) SetWrapV(wrapV float64) *RenderTargetTexture {
+	p := ba.ctx.Get("RenderTargetTexture").New(wrapV)
+	return RenderTargetTextureFromJSObject(p, ba.ctx)
+}
+
+*/

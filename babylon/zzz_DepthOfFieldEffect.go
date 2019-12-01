@@ -29,11 +29,9 @@ func DepthOfFieldEffectFromJSObject(p js.Value, ctx js.Value) *DepthOfFieldEffec
 
 // NewDepthOfFieldEffectOpts contains optional parameters for NewDepthOfFieldEffect.
 type NewDepthOfFieldEffectOpts struct {
-	BlurLevel *DepthOfFieldEffectBlurLevel
-
-	PipelineTextureType *JSFloat64
-
-	BlockCompilation *JSBool
+	BlurLevel           *DepthOfFieldEffectBlurLevel
+	PipelineTextureType *float64
+	BlockCompilation    *bool
 }
 
 // NewDepthOfFieldEffect returns a new DepthOfFieldEffect object.
@@ -44,8 +42,175 @@ func (ba *Babylon) NewDepthOfFieldEffect(scene *Scene, depthTexture *RenderTarge
 		opts = &NewDepthOfFieldEffectOpts{}
 	}
 
-	p := ba.ctx.Get("DepthOfFieldEffect").New(scene.JSObject(), depthTexture.JSObject(), opts.BlurLevel.JSObject(), opts.PipelineTextureType.JSObject(), opts.BlockCompilation.JSObject())
+	args := make([]interface{}, 0, 2+3)
+
+	args = append(args, scene.JSObject())
+	args = append(args, depthTexture.JSObject())
+
+	if opts.BlurLevel == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.BlurLevel.JSObject())
+	}
+	if opts.PipelineTextureType == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.PipelineTextureType)
+	}
+	if opts.BlockCompilation == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.BlockCompilation)
+	}
+
+	p := ba.ctx.Get("DepthOfFieldEffect").New(args...)
 	return DepthOfFieldEffectFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// DisposeEffects calls the DisposeEffects method on the DepthOfFieldEffect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldeffect#disposeeffects
+func (d *DepthOfFieldEffect) DisposeEffects(camera *Camera) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, camera.JSObject())
+
+	d.p.Call("disposeEffects", args...)
+}
+
+// GetClassName calls the GetClassName method on the DepthOfFieldEffect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldeffect#getclassname
+func (d *DepthOfFieldEffect) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := d.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// DepthOfFieldEffectGetPostProcessesOpts contains optional parameters for DepthOfFieldEffect.GetPostProcesses.
+type DepthOfFieldEffectGetPostProcessesOpts struct {
+	Camera *Camera
+}
+
+// GetPostProcesses calls the GetPostProcesses method on the DepthOfFieldEffect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldeffect#getpostprocesses
+func (d *DepthOfFieldEffect) GetPostProcesses(opts *DepthOfFieldEffectGetPostProcessesOpts) []js.Value {
+	if opts == nil {
+		opts = &DepthOfFieldEffectGetPostProcessesOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Camera == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Camera.JSObject())
+	}
+
+	retVal := d.p.Call("getPostProcesses", args...)
+	return retVal
+}
+
+/*
+
+// DepthTexture returns the DepthTexture property of class DepthOfFieldEffect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldeffect#depthtexture
+func (d *DepthOfFieldEffect) DepthTexture(depthTexture *RenderTargetTexture) *DepthOfFieldEffect {
+	p := ba.ctx.Get("DepthOfFieldEffect").New(depthTexture.JSObject())
+	return DepthOfFieldEffectFromJSObject(p, ba.ctx)
+}
+
+// SetDepthTexture sets the DepthTexture property of class DepthOfFieldEffect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldeffect#depthtexture
+func (d *DepthOfFieldEffect) SetDepthTexture(depthTexture *RenderTargetTexture) *DepthOfFieldEffect {
+	p := ba.ctx.Get("DepthOfFieldEffect").New(depthTexture.JSObject())
+	return DepthOfFieldEffectFromJSObject(p, ba.ctx)
+}
+
+// FStop returns the FStop property of class DepthOfFieldEffect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldeffect#fstop
+func (d *DepthOfFieldEffect) FStop(fStop float64) *DepthOfFieldEffect {
+	p := ba.ctx.Get("DepthOfFieldEffect").New(fStop)
+	return DepthOfFieldEffectFromJSObject(p, ba.ctx)
+}
+
+// SetFStop sets the FStop property of class DepthOfFieldEffect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldeffect#fstop
+func (d *DepthOfFieldEffect) SetFStop(fStop float64) *DepthOfFieldEffect {
+	p := ba.ctx.Get("DepthOfFieldEffect").New(fStop)
+	return DepthOfFieldEffectFromJSObject(p, ba.ctx)
+}
+
+// FocalLength returns the FocalLength property of class DepthOfFieldEffect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldeffect#focallength
+func (d *DepthOfFieldEffect) FocalLength(focalLength float64) *DepthOfFieldEffect {
+	p := ba.ctx.Get("DepthOfFieldEffect").New(focalLength)
+	return DepthOfFieldEffectFromJSObject(p, ba.ctx)
+}
+
+// SetFocalLength sets the FocalLength property of class DepthOfFieldEffect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldeffect#focallength
+func (d *DepthOfFieldEffect) SetFocalLength(focalLength float64) *DepthOfFieldEffect {
+	p := ba.ctx.Get("DepthOfFieldEffect").New(focalLength)
+	return DepthOfFieldEffectFromJSObject(p, ba.ctx)
+}
+
+// FocusDistance returns the FocusDistance property of class DepthOfFieldEffect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldeffect#focusdistance
+func (d *DepthOfFieldEffect) FocusDistance(focusDistance float64) *DepthOfFieldEffect {
+	p := ba.ctx.Get("DepthOfFieldEffect").New(focusDistance)
+	return DepthOfFieldEffectFromJSObject(p, ba.ctx)
+}
+
+// SetFocusDistance sets the FocusDistance property of class DepthOfFieldEffect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldeffect#focusdistance
+func (d *DepthOfFieldEffect) SetFocusDistance(focusDistance float64) *DepthOfFieldEffect {
+	p := ba.ctx.Get("DepthOfFieldEffect").New(focusDistance)
+	return DepthOfFieldEffectFromJSObject(p, ba.ctx)
+}
+
+// IsSupported returns the IsSupported property of class DepthOfFieldEffect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldeffect#issupported
+func (d *DepthOfFieldEffect) IsSupported(isSupported bool) *DepthOfFieldEffect {
+	p := ba.ctx.Get("DepthOfFieldEffect").New(isSupported)
+	return DepthOfFieldEffectFromJSObject(p, ba.ctx)
+}
+
+// SetIsSupported sets the IsSupported property of class DepthOfFieldEffect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldeffect#issupported
+func (d *DepthOfFieldEffect) SetIsSupported(isSupported bool) *DepthOfFieldEffect {
+	p := ba.ctx.Get("DepthOfFieldEffect").New(isSupported)
+	return DepthOfFieldEffectFromJSObject(p, ba.ctx)
+}
+
+// LensSize returns the LensSize property of class DepthOfFieldEffect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldeffect#lenssize
+func (d *DepthOfFieldEffect) LensSize(lensSize float64) *DepthOfFieldEffect {
+	p := ba.ctx.Get("DepthOfFieldEffect").New(lensSize)
+	return DepthOfFieldEffectFromJSObject(p, ba.ctx)
+}
+
+// SetLensSize sets the LensSize property of class DepthOfFieldEffect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldeffect#lenssize
+func (d *DepthOfFieldEffect) SetLensSize(lensSize float64) *DepthOfFieldEffect {
+	p := ba.ctx.Get("DepthOfFieldEffect").New(lensSize)
+	return DepthOfFieldEffectFromJSObject(p, ba.ctx)
+}
+
+*/

@@ -34,8 +34,226 @@ func LensFlareSystemFromJSObject(p js.Value, ctx js.Value) *LensFlareSystem {
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensflaresystem
 func (ba *Babylon) NewLensFlareSystem(name string, emitter interface{}, scene *Scene) *LensFlareSystem {
-	p := ba.ctx.Get("LensFlareSystem").New(name, emitter, scene.JSObject())
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, name)
+	args = append(args, emitter)
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("LensFlareSystem").New(args...)
 	return LensFlareSystemFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Dispose calls the Dispose method on the LensFlareSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflaresystem#dispose
+func (l *LensFlareSystem) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	l.p.Call("dispose", args...)
+}
+
+// GetEmitter calls the GetEmitter method on the LensFlareSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflaresystem#getemitter
+func (l *LensFlareSystem) GetEmitter() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := l.p.Call("getEmitter", args...)
+	return retVal
+}
+
+// GetEmitterPosition calls the GetEmitterPosition method on the LensFlareSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflaresystem#getemitterposition
+func (l *LensFlareSystem) GetEmitterPosition() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := l.p.Call("getEmitterPosition", args...)
+	return Vector3FromJSObject(retVal, l.ctx)
+}
+
+// GetScene calls the GetScene method on the LensFlareSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflaresystem#getscene
+func (l *LensFlareSystem) GetScene() *Scene {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := l.p.Call("getScene", args...)
+	return SceneFromJSObject(retVal, l.ctx)
+}
+
+// Parse calls the Parse method on the LensFlareSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflaresystem#parse
+func (l *LensFlareSystem) Parse(parsedLensFlareSystem interface{}, scene *Scene, rootUrl string) *LensFlareSystem {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, parsedLensFlareSystem)
+	args = append(args, scene.JSObject())
+	args = append(args, rootUrl)
+
+	retVal := l.p.Call("Parse", args...)
+	return LensFlareSystemFromJSObject(retVal, l.ctx)
+}
+
+// Serialize calls the Serialize method on the LensFlareSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflaresystem#serialize
+func (l *LensFlareSystem) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := l.p.Call("serialize", args...)
+	return retVal
+}
+
+// SetEmitter calls the SetEmitter method on the LensFlareSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflaresystem#setemitter
+func (l *LensFlareSystem) SetEmitter(newEmitter interface{}) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, newEmitter)
+
+	l.p.Call("setEmitter", args...)
+}
+
+/*
+
+// BorderLimit returns the BorderLimit property of class LensFlareSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflaresystem#borderlimit
+func (l *LensFlareSystem) BorderLimit(borderLimit float64) *LensFlareSystem {
+	p := ba.ctx.Get("LensFlareSystem").New(borderLimit)
+	return LensFlareSystemFromJSObject(p, ba.ctx)
+}
+
+// SetBorderLimit sets the BorderLimit property of class LensFlareSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflaresystem#borderlimit
+func (l *LensFlareSystem) SetBorderLimit(borderLimit float64) *LensFlareSystem {
+	p := ba.ctx.Get("LensFlareSystem").New(borderLimit)
+	return LensFlareSystemFromJSObject(p, ba.ctx)
+}
+
+// Id returns the Id property of class LensFlareSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflaresystem#id
+func (l *LensFlareSystem) Id(id string) *LensFlareSystem {
+	p := ba.ctx.Get("LensFlareSystem").New(id)
+	return LensFlareSystemFromJSObject(p, ba.ctx)
+}
+
+// SetId sets the Id property of class LensFlareSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflaresystem#id
+func (l *LensFlareSystem) SetId(id string) *LensFlareSystem {
+	p := ba.ctx.Get("LensFlareSystem").New(id)
+	return LensFlareSystemFromJSObject(p, ba.ctx)
+}
+
+// IsEnabled returns the IsEnabled property of class LensFlareSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflaresystem#isenabled
+func (l *LensFlareSystem) IsEnabled(isEnabled bool) *LensFlareSystem {
+	p := ba.ctx.Get("LensFlareSystem").New(isEnabled)
+	return LensFlareSystemFromJSObject(p, ba.ctx)
+}
+
+// SetIsEnabled sets the IsEnabled property of class LensFlareSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflaresystem#isenabled
+func (l *LensFlareSystem) SetIsEnabled(isEnabled bool) *LensFlareSystem {
+	p := ba.ctx.Get("LensFlareSystem").New(isEnabled)
+	return LensFlareSystemFromJSObject(p, ba.ctx)
+}
+
+// LayerMask returns the LayerMask property of class LensFlareSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflaresystem#layermask
+func (l *LensFlareSystem) LayerMask(layerMask float64) *LensFlareSystem {
+	p := ba.ctx.Get("LensFlareSystem").New(layerMask)
+	return LensFlareSystemFromJSObject(p, ba.ctx)
+}
+
+// SetLayerMask sets the LayerMask property of class LensFlareSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflaresystem#layermask
+func (l *LensFlareSystem) SetLayerMask(layerMask float64) *LensFlareSystem {
+	p := ba.ctx.Get("LensFlareSystem").New(layerMask)
+	return LensFlareSystemFromJSObject(p, ba.ctx)
+}
+
+// LensFlares returns the LensFlares property of class LensFlareSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflaresystem#lensflares
+func (l *LensFlareSystem) LensFlares(lensFlares *LensFlare) *LensFlareSystem {
+	p := ba.ctx.Get("LensFlareSystem").New(lensFlares.JSObject())
+	return LensFlareSystemFromJSObject(p, ba.ctx)
+}
+
+// SetLensFlares sets the LensFlares property of class LensFlareSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflaresystem#lensflares
+func (l *LensFlareSystem) SetLensFlares(lensFlares *LensFlare) *LensFlareSystem {
+	p := ba.ctx.Get("LensFlareSystem").New(lensFlares.JSObject())
+	return LensFlareSystemFromJSObject(p, ba.ctx)
+}
+
+// MeshesSelectionPredicate returns the MeshesSelectionPredicate property of class LensFlareSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflaresystem#meshesselectionpredicate
+func (l *LensFlareSystem) MeshesSelectionPredicate(meshesSelectionPredicate func()) *LensFlareSystem {
+	p := ba.ctx.Get("LensFlareSystem").New(meshesSelectionPredicate)
+	return LensFlareSystemFromJSObject(p, ba.ctx)
+}
+
+// SetMeshesSelectionPredicate sets the MeshesSelectionPredicate property of class LensFlareSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflaresystem#meshesselectionpredicate
+func (l *LensFlareSystem) SetMeshesSelectionPredicate(meshesSelectionPredicate func()) *LensFlareSystem {
+	p := ba.ctx.Get("LensFlareSystem").New(meshesSelectionPredicate)
+	return LensFlareSystemFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class LensFlareSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflaresystem#name
+func (l *LensFlareSystem) Name(name string) *LensFlareSystem {
+	p := ba.ctx.Get("LensFlareSystem").New(name)
+	return LensFlareSystemFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class LensFlareSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflaresystem#name
+func (l *LensFlareSystem) SetName(name string) *LensFlareSystem {
+	p := ba.ctx.Get("LensFlareSystem").New(name)
+	return LensFlareSystemFromJSObject(p, ba.ctx)
+}
+
+// ViewportBorder returns the ViewportBorder property of class LensFlareSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflaresystem#viewportborder
+func (l *LensFlareSystem) ViewportBorder(viewportBorder float64) *LensFlareSystem {
+	p := ba.ctx.Get("LensFlareSystem").New(viewportBorder)
+	return LensFlareSystemFromJSObject(p, ba.ctx)
+}
+
+// SetViewportBorder sets the ViewportBorder property of class LensFlareSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflaresystem#viewportborder
+func (l *LensFlareSystem) SetViewportBorder(viewportBorder float64) *LensFlareSystem {
+	p := ba.ctx.Get("LensFlareSystem").New(viewportBorder)
+	return LensFlareSystemFromJSObject(p, ba.ctx)
+}
+
+*/

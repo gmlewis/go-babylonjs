@@ -27,4 +27,38 @@ func Color3GradientFromJSObject(p js.Value, ctx js.Value) *Color3Gradient {
 	return &Color3Gradient{p: p, ctx: ctx}
 }
 
-// TODO: methods
+/*
+
+// Color returns the Color property of class Color3Gradient.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3gradient#color
+func (c *Color3Gradient) Color(color *Color3) *Color3Gradient {
+	p := ba.ctx.Get("Color3Gradient").New(color.JSObject())
+	return Color3GradientFromJSObject(p, ba.ctx)
+}
+
+// SetColor sets the Color property of class Color3Gradient.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3gradient#color
+func (c *Color3Gradient) SetColor(color *Color3) *Color3Gradient {
+	p := ba.ctx.Get("Color3Gradient").New(color.JSObject())
+	return Color3GradientFromJSObject(p, ba.ctx)
+}
+
+// Gradient returns the Gradient property of class Color3Gradient.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3gradient#gradient
+func (c *Color3Gradient) Gradient(gradient float64) *Color3Gradient {
+	p := ba.ctx.Get("Color3Gradient").New(gradient)
+	return Color3GradientFromJSObject(p, ba.ctx)
+}
+
+// SetGradient sets the Gradient property of class Color3Gradient.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color3gradient#gradient
+func (c *Color3Gradient) SetGradient(gradient float64) *Color3Gradient {
+	p := ba.ctx.Get("Color3Gradient").New(gradient)
+	return Color3GradientFromJSObject(p, ba.ctx)
+}
+
+*/

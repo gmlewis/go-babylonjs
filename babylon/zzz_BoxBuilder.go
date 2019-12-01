@@ -27,4 +27,34 @@ func BoxBuilderFromJSObject(p js.Value, ctx js.Value) *BoxBuilder {
 	return &BoxBuilder{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// BoxBuilderCreateBoxOpts contains optional parameters for BoxBuilder.CreateBox.
+type BoxBuilderCreateBoxOpts struct {
+	Scene *Scene
+}
+
+// CreateBox calls the CreateBox method on the BoxBuilder object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boxbuilder#createbox
+func (b *BoxBuilder) CreateBox(name string, options js.Value, opts *BoxBuilderCreateBoxOpts) *Mesh {
+	if opts == nil {
+		opts = &BoxBuilderCreateBoxOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, name)
+	args = append(args, options)
+
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+
+	retVal := b.p.Call("CreateBox", args...)
+	return MeshFromJSObject(retVal, b.ctx)
+}
+
+/*
+
+ */

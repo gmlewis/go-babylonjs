@@ -30,11 +30,9 @@ func HemisphericParticleEmitterFromJSObject(p js.Value, ctx js.Value) *Hemispher
 
 // NewHemisphericParticleEmitterOpts contains optional parameters for NewHemisphericParticleEmitter.
 type NewHemisphericParticleEmitterOpts struct {
-	Radius *JSFloat64
-
-	RadiusRange *JSFloat64
-
-	DirectionRandomizer *JSFloat64
+	Radius              *float64
+	RadiusRange         *float64
+	DirectionRandomizer *float64
 }
 
 // NewHemisphericParticleEmitter returns a new HemisphericParticleEmitter object.
@@ -45,8 +43,172 @@ func (ba *Babylon) NewHemisphericParticleEmitter(opts *NewHemisphericParticleEmi
 		opts = &NewHemisphericParticleEmitterOpts{}
 	}
 
-	p := ba.ctx.Get("HemisphericParticleEmitter").New(opts.Radius.JSObject(), opts.RadiusRange.JSObject(), opts.DirectionRandomizer.JSObject())
+	args := make([]interface{}, 0, 0+3)
+
+	if opts.Radius == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Radius)
+	}
+	if opts.RadiusRange == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RadiusRange)
+	}
+	if opts.DirectionRandomizer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectionRandomizer)
+	}
+
+	p := ba.ctx.Get("HemisphericParticleEmitter").New(args...)
 	return HemisphericParticleEmitterFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// ApplyToShader calls the ApplyToShader method on the HemisphericParticleEmitter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hemisphericparticleemitter#applytoshader
+func (h *HemisphericParticleEmitter) ApplyToShader(effect *Effect) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, effect.JSObject())
+
+	h.p.Call("applyToShader", args...)
+}
+
+// Clone calls the Clone method on the HemisphericParticleEmitter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hemisphericparticleemitter#clone
+func (h *HemisphericParticleEmitter) Clone() *HemisphericParticleEmitter {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := h.p.Call("clone", args...)
+	return HemisphericParticleEmitterFromJSObject(retVal, h.ctx)
+}
+
+// GetClassName calls the GetClassName method on the HemisphericParticleEmitter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hemisphericparticleemitter#getclassname
+func (h *HemisphericParticleEmitter) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := h.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetEffectDefines calls the GetEffectDefines method on the HemisphericParticleEmitter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hemisphericparticleemitter#geteffectdefines
+func (h *HemisphericParticleEmitter) GetEffectDefines() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := h.p.Call("getEffectDefines", args...)
+	return retVal.String()
+}
+
+// Parse calls the Parse method on the HemisphericParticleEmitter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hemisphericparticleemitter#parse
+func (h *HemisphericParticleEmitter) Parse(serializationObject interface{}) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, serializationObject)
+
+	h.p.Call("parse", args...)
+}
+
+// Serialize calls the Serialize method on the HemisphericParticleEmitter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hemisphericparticleemitter#serialize
+func (h *HemisphericParticleEmitter) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := h.p.Call("serialize", args...)
+	return retVal
+}
+
+// StartDirectionFunction calls the StartDirectionFunction method on the HemisphericParticleEmitter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hemisphericparticleemitter#startdirectionfunction
+func (h *HemisphericParticleEmitter) StartDirectionFunction(worldMatrix *Matrix, directionToUpdate *Vector3, particle *Particle) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, worldMatrix.JSObject())
+	args = append(args, directionToUpdate.JSObject())
+	args = append(args, particle.JSObject())
+
+	h.p.Call("startDirectionFunction", args...)
+}
+
+// StartPositionFunction calls the StartPositionFunction method on the HemisphericParticleEmitter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hemisphericparticleemitter#startpositionfunction
+func (h *HemisphericParticleEmitter) StartPositionFunction(worldMatrix *Matrix, positionToUpdate *Vector3, particle *Particle) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, worldMatrix.JSObject())
+	args = append(args, positionToUpdate.JSObject())
+	args = append(args, particle.JSObject())
+
+	h.p.Call("startPositionFunction", args...)
+}
+
+/*
+
+// DirectionRandomizer returns the DirectionRandomizer property of class HemisphericParticleEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hemisphericparticleemitter#directionrandomizer
+func (h *HemisphericParticleEmitter) DirectionRandomizer(directionRandomizer float64) *HemisphericParticleEmitter {
+	p := ba.ctx.Get("HemisphericParticleEmitter").New(directionRandomizer)
+	return HemisphericParticleEmitterFromJSObject(p, ba.ctx)
+}
+
+// SetDirectionRandomizer sets the DirectionRandomizer property of class HemisphericParticleEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hemisphericparticleemitter#directionrandomizer
+func (h *HemisphericParticleEmitter) SetDirectionRandomizer(directionRandomizer float64) *HemisphericParticleEmitter {
+	p := ba.ctx.Get("HemisphericParticleEmitter").New(directionRandomizer)
+	return HemisphericParticleEmitterFromJSObject(p, ba.ctx)
+}
+
+// Radius returns the Radius property of class HemisphericParticleEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hemisphericparticleemitter#radius
+func (h *HemisphericParticleEmitter) Radius(radius float64) *HemisphericParticleEmitter {
+	p := ba.ctx.Get("HemisphericParticleEmitter").New(radius)
+	return HemisphericParticleEmitterFromJSObject(p, ba.ctx)
+}
+
+// SetRadius sets the Radius property of class HemisphericParticleEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hemisphericparticleemitter#radius
+func (h *HemisphericParticleEmitter) SetRadius(radius float64) *HemisphericParticleEmitter {
+	p := ba.ctx.Get("HemisphericParticleEmitter").New(radius)
+	return HemisphericParticleEmitterFromJSObject(p, ba.ctx)
+}
+
+// RadiusRange returns the RadiusRange property of class HemisphericParticleEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hemisphericparticleemitter#radiusrange
+func (h *HemisphericParticleEmitter) RadiusRange(radiusRange float64) *HemisphericParticleEmitter {
+	p := ba.ctx.Get("HemisphericParticleEmitter").New(radiusRange)
+	return HemisphericParticleEmitterFromJSObject(p, ba.ctx)
+}
+
+// SetRadiusRange sets the RadiusRange property of class HemisphericParticleEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hemisphericparticleemitter#radiusrange
+func (h *HemisphericParticleEmitter) SetRadiusRange(radiusRange float64) *HemisphericParticleEmitter {
+	p := ba.ctx.Get("HemisphericParticleEmitter").New(radiusRange)
+	return HemisphericParticleEmitterFromJSObject(p, ba.ctx)
+}
+
+*/

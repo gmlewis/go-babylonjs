@@ -30,4 +30,233 @@ func AbstractActionManagerFromJSObject(p js.Value, ctx js.Value) *AbstractAction
 	return &AbstractActionManager{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// Dispose calls the Dispose method on the AbstractActionManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.abstractactionmanager#dispose
+func (a *AbstractActionManager) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	a.p.Call("dispose", args...)
+}
+
+// HasSpecificTrigger calls the HasSpecificTrigger method on the AbstractActionManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.abstractactionmanager#hasspecifictrigger
+func (a *AbstractActionManager) HasSpecificTrigger(trigger float64) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, trigger)
+
+	retVal := a.p.Call("HasSpecificTrigger", args...)
+	return retVal.Bool()
+}
+
+// HasSpecificTriggers calls the HasSpecificTriggers method on the AbstractActionManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.abstractactionmanager#hasspecifictriggers
+func (a *AbstractActionManager) HasSpecificTriggers(triggers float64) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, triggers)
+
+	retVal := a.p.Call("hasSpecificTriggers", args...)
+	return retVal.Bool()
+}
+
+// HasSpecificTriggers2 calls the HasSpecificTriggers2 method on the AbstractActionManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.abstractactionmanager#hasspecifictriggers2
+func (a *AbstractActionManager) HasSpecificTriggers2(triggerA float64, triggerB float64) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, triggerA)
+	args = append(args, triggerB)
+
+	retVal := a.p.Call("hasSpecificTriggers2", args...)
+	return retVal.Bool()
+}
+
+// AbstractActionManagerProcessTriggerOpts contains optional parameters for AbstractActionManager.ProcessTrigger.
+type AbstractActionManagerProcessTriggerOpts struct {
+	Evt js.Value
+}
+
+// ProcessTrigger calls the ProcessTrigger method on the AbstractActionManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.abstractactionmanager#processtrigger
+func (a *AbstractActionManager) ProcessTrigger(trigger float64, opts *AbstractActionManagerProcessTriggerOpts) {
+	if opts == nil {
+		opts = &AbstractActionManagerProcessTriggerOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, trigger)
+
+	if opts.Evt == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Evt)
+	}
+
+	a.p.Call("processTrigger", args...)
+}
+
+// RegisterAction calls the RegisterAction method on the AbstractActionManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.abstractactionmanager#registeraction
+func (a *AbstractActionManager) RegisterAction(action js.Value) js.Value {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, action)
+
+	retVal := a.p.Call("registerAction", args...)
+	return retVal
+}
+
+// Serialize calls the Serialize method on the AbstractActionManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.abstractactionmanager#serialize
+func (a *AbstractActionManager) Serialize(name string) interface{} {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := a.p.Call("serialize", args...)
+	return retVal
+}
+
+// UnregisterAction calls the UnregisterAction method on the AbstractActionManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.abstractactionmanager#unregisteraction
+func (a *AbstractActionManager) UnregisterAction(action js.Value) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, action)
+
+	retVal := a.p.Call("unregisterAction", args...)
+	return retVal.Bool()
+}
+
+/*
+
+// Actions returns the Actions property of class AbstractActionManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.abstractactionmanager#actions
+func (a *AbstractActionManager) Actions(actions js.Value) *AbstractActionManager {
+	p := ba.ctx.Get("AbstractActionManager").New(actions)
+	return AbstractActionManagerFromJSObject(p, ba.ctx)
+}
+
+// SetActions sets the Actions property of class AbstractActionManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.abstractactionmanager#actions
+func (a *AbstractActionManager) SetActions(actions js.Value) *AbstractActionManager {
+	p := ba.ctx.Get("AbstractActionManager").New(actions)
+	return AbstractActionManagerFromJSObject(p, ba.ctx)
+}
+
+// HasPickTriggers returns the HasPickTriggers property of class AbstractActionManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.abstractactionmanager#haspicktriggers
+func (a *AbstractActionManager) HasPickTriggers(HasPickTriggers bool) *AbstractActionManager {
+	p := ba.ctx.Get("AbstractActionManager").New(HasPickTriggers)
+	return AbstractActionManagerFromJSObject(p, ba.ctx)
+}
+
+// SetHasPickTriggers sets the HasPickTriggers property of class AbstractActionManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.abstractactionmanager#haspicktriggers
+func (a *AbstractActionManager) SetHasPickTriggers(HasPickTriggers bool) *AbstractActionManager {
+	p := ba.ctx.Get("AbstractActionManager").New(HasPickTriggers)
+	return AbstractActionManagerFromJSObject(p, ba.ctx)
+}
+
+// HasPointerTriggers returns the HasPointerTriggers property of class AbstractActionManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.abstractactionmanager#haspointertriggers
+func (a *AbstractActionManager) HasPointerTriggers(hasPointerTriggers bool) *AbstractActionManager {
+	p := ba.ctx.Get("AbstractActionManager").New(hasPointerTriggers)
+	return AbstractActionManagerFromJSObject(p, ba.ctx)
+}
+
+// SetHasPointerTriggers sets the HasPointerTriggers property of class AbstractActionManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.abstractactionmanager#haspointertriggers
+func (a *AbstractActionManager) SetHasPointerTriggers(hasPointerTriggers bool) *AbstractActionManager {
+	p := ba.ctx.Get("AbstractActionManager").New(hasPointerTriggers)
+	return AbstractActionManagerFromJSObject(p, ba.ctx)
+}
+
+// HasTriggers returns the HasTriggers property of class AbstractActionManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.abstractactionmanager#hastriggers
+func (a *AbstractActionManager) HasTriggers(HasTriggers bool) *AbstractActionManager {
+	p := ba.ctx.Get("AbstractActionManager").New(HasTriggers)
+	return AbstractActionManagerFromJSObject(p, ba.ctx)
+}
+
+// SetHasTriggers sets the HasTriggers property of class AbstractActionManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.abstractactionmanager#hastriggers
+func (a *AbstractActionManager) SetHasTriggers(HasTriggers bool) *AbstractActionManager {
+	p := ba.ctx.Get("AbstractActionManager").New(HasTriggers)
+	return AbstractActionManagerFromJSObject(p, ba.ctx)
+}
+
+// HoverCursor returns the HoverCursor property of class AbstractActionManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.abstractactionmanager#hovercursor
+func (a *AbstractActionManager) HoverCursor(hoverCursor string) *AbstractActionManager {
+	p := ba.ctx.Get("AbstractActionManager").New(hoverCursor)
+	return AbstractActionManagerFromJSObject(p, ba.ctx)
+}
+
+// SetHoverCursor sets the HoverCursor property of class AbstractActionManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.abstractactionmanager#hovercursor
+func (a *AbstractActionManager) SetHoverCursor(hoverCursor string) *AbstractActionManager {
+	p := ba.ctx.Get("AbstractActionManager").New(hoverCursor)
+	return AbstractActionManagerFromJSObject(p, ba.ctx)
+}
+
+// IsRecursive returns the IsRecursive property of class AbstractActionManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.abstractactionmanager#isrecursive
+func (a *AbstractActionManager) IsRecursive(isRecursive bool) *AbstractActionManager {
+	p := ba.ctx.Get("AbstractActionManager").New(isRecursive)
+	return AbstractActionManagerFromJSObject(p, ba.ctx)
+}
+
+// SetIsRecursive sets the IsRecursive property of class AbstractActionManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.abstractactionmanager#isrecursive
+func (a *AbstractActionManager) SetIsRecursive(isRecursive bool) *AbstractActionManager {
+	p := ba.ctx.Get("AbstractActionManager").New(isRecursive)
+	return AbstractActionManagerFromJSObject(p, ba.ctx)
+}
+
+// Triggers returns the Triggers property of class AbstractActionManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.abstractactionmanager#triggers
+func (a *AbstractActionManager) Triggers(Triggers js.Value) *AbstractActionManager {
+	p := ba.ctx.Get("AbstractActionManager").New(Triggers)
+	return AbstractActionManagerFromJSObject(p, ba.ctx)
+}
+
+// SetTriggers sets the Triggers property of class AbstractActionManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.abstractactionmanager#triggers
+func (a *AbstractActionManager) SetTriggers(Triggers js.Value) *AbstractActionManager {
+	p := ba.ctx.Get("AbstractActionManager").New(Triggers)
+	return AbstractActionManagerFromJSObject(p, ba.ctx)
+}
+
+*/

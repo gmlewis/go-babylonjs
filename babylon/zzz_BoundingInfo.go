@@ -40,8 +40,250 @@ func (ba *Babylon) NewBoundingInfo(minimum *Vector3, maximum *Vector3, opts *New
 		opts = &NewBoundingInfoOpts{}
 	}
 
-	p := ba.ctx.Get("BoundingInfo").New(minimum.JSObject(), maximum.JSObject(), opts.WorldMatrix.JSObject())
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, minimum.JSObject())
+	args = append(args, maximum.JSObject())
+
+	if opts.WorldMatrix == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.WorldMatrix.JSObject())
+	}
+
+	p := ba.ctx.Get("BoundingInfo").New(args...)
 	return BoundingInfoFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// CenterOn calls the CenterOn method on the BoundingInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundinginfo#centeron
+func (b *BoundingInfo) CenterOn(center *Vector3, extend *Vector3) *BoundingInfo {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, center.JSObject())
+	args = append(args, extend.JSObject())
+
+	retVal := b.p.Call("centerOn", args...)
+	return BoundingInfoFromJSObject(retVal, b.ctx)
+}
+
+// Intersects calls the Intersects method on the BoundingInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundinginfo#intersects
+func (b *BoundingInfo) Intersects(boundingInfo *BoundingInfo, precise bool) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, boundingInfo.JSObject())
+	args = append(args, precise)
+
+	retVal := b.p.Call("intersects", args...)
+	return retVal.Bool()
+}
+
+// IntersectsPoint calls the IntersectsPoint method on the BoundingInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundinginfo#intersectspoint
+func (b *BoundingInfo) IntersectsPoint(point *Vector3) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, point.JSObject())
+
+	retVal := b.p.Call("intersectsPoint", args...)
+	return retVal.Bool()
+}
+
+// IsCompletelyInFrustum calls the IsCompletelyInFrustum method on the BoundingInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundinginfo#iscompletelyinfrustum
+func (b *BoundingInfo) IsCompletelyInFrustum(frustumPlanes []DeepImmutable) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, frustumPlanes.JSObject())
+
+	retVal := b.p.Call("isCompletelyInFrustum", args...)
+	return retVal.Bool()
+}
+
+// BoundingInfoIsInFrustumOpts contains optional parameters for BoundingInfo.IsInFrustum.
+type BoundingInfoIsInFrustumOpts struct {
+	Strategy *Plane
+}
+
+// IsInFrustum calls the IsInFrustum method on the BoundingInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundinginfo#isinfrustum
+func (b *BoundingInfo) IsInFrustum(frustumPlanes []DeepImmutable, opts *BoundingInfoIsInFrustumOpts) bool {
+	if opts == nil {
+		opts = &BoundingInfoIsInFrustumOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, frustumPlanes.JSObject())
+
+	if opts.Strategy == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Strategy.JSObject())
+	}
+
+	retVal := b.p.Call("isInFrustum", args...)
+	return retVal.Bool()
+}
+
+// BoundingInfoReConstructOpts contains optional parameters for BoundingInfo.ReConstruct.
+type BoundingInfoReConstructOpts struct {
+	WorldMatrix *Matrix
+}
+
+// ReConstruct calls the ReConstruct method on the BoundingInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundinginfo#reconstruct
+func (b *BoundingInfo) ReConstruct(min *Vector3, max *Vector3, opts *BoundingInfoReConstructOpts) {
+	if opts == nil {
+		opts = &BoundingInfoReConstructOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, min.JSObject())
+	args = append(args, max.JSObject())
+
+	if opts.WorldMatrix == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.WorldMatrix.JSObject())
+	}
+
+	b.p.Call("reConstruct", args...)
+}
+
+// Scale calls the Scale method on the BoundingInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundinginfo#scale
+func (b *BoundingInfo) Scale(factor float64) *BoundingInfo {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, factor)
+
+	retVal := b.p.Call("scale", args...)
+	return BoundingInfoFromJSObject(retVal, b.ctx)
+}
+
+// Update calls the Update method on the BoundingInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundinginfo#update
+func (b *BoundingInfo) Update(world *Matrix) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, world.JSObject())
+
+	b.p.Call("update", args...)
+}
+
+/*
+
+// BoundingBox returns the BoundingBox property of class BoundingInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundinginfo#boundingbox
+func (b *BoundingInfo) BoundingBox(boundingBox *BoundingBox) *BoundingInfo {
+	p := ba.ctx.Get("BoundingInfo").New(boundingBox.JSObject())
+	return BoundingInfoFromJSObject(p, ba.ctx)
+}
+
+// SetBoundingBox sets the BoundingBox property of class BoundingInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundinginfo#boundingbox
+func (b *BoundingInfo) SetBoundingBox(boundingBox *BoundingBox) *BoundingInfo {
+	p := ba.ctx.Get("BoundingInfo").New(boundingBox.JSObject())
+	return BoundingInfoFromJSObject(p, ba.ctx)
+}
+
+// BoundingSphere returns the BoundingSphere property of class BoundingInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundinginfo#boundingsphere
+func (b *BoundingInfo) BoundingSphere(boundingSphere *BoundingSphere) *BoundingInfo {
+	p := ba.ctx.Get("BoundingInfo").New(boundingSphere.JSObject())
+	return BoundingInfoFromJSObject(p, ba.ctx)
+}
+
+// SetBoundingSphere sets the BoundingSphere property of class BoundingInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundinginfo#boundingsphere
+func (b *BoundingInfo) SetBoundingSphere(boundingSphere *BoundingSphere) *BoundingInfo {
+	p := ba.ctx.Get("BoundingInfo").New(boundingSphere.JSObject())
+	return BoundingInfoFromJSObject(p, ba.ctx)
+}
+
+// DiagonalLength returns the DiagonalLength property of class BoundingInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundinginfo#diagonallength
+func (b *BoundingInfo) DiagonalLength(diagonalLength float64) *BoundingInfo {
+	p := ba.ctx.Get("BoundingInfo").New(diagonalLength)
+	return BoundingInfoFromJSObject(p, ba.ctx)
+}
+
+// SetDiagonalLength sets the DiagonalLength property of class BoundingInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundinginfo#diagonallength
+func (b *BoundingInfo) SetDiagonalLength(diagonalLength float64) *BoundingInfo {
+	p := ba.ctx.Get("BoundingInfo").New(diagonalLength)
+	return BoundingInfoFromJSObject(p, ba.ctx)
+}
+
+// IsLocked returns the IsLocked property of class BoundingInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundinginfo#islocked
+func (b *BoundingInfo) IsLocked(isLocked bool) *BoundingInfo {
+	p := ba.ctx.Get("BoundingInfo").New(isLocked)
+	return BoundingInfoFromJSObject(p, ba.ctx)
+}
+
+// SetIsLocked sets the IsLocked property of class BoundingInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundinginfo#islocked
+func (b *BoundingInfo) SetIsLocked(isLocked bool) *BoundingInfo {
+	p := ba.ctx.Get("BoundingInfo").New(isLocked)
+	return BoundingInfoFromJSObject(p, ba.ctx)
+}
+
+// Maximum returns the Maximum property of class BoundingInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundinginfo#maximum
+func (b *BoundingInfo) Maximum(maximum *Vector3) *BoundingInfo {
+	p := ba.ctx.Get("BoundingInfo").New(maximum.JSObject())
+	return BoundingInfoFromJSObject(p, ba.ctx)
+}
+
+// SetMaximum sets the Maximum property of class BoundingInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundinginfo#maximum
+func (b *BoundingInfo) SetMaximum(maximum *Vector3) *BoundingInfo {
+	p := ba.ctx.Get("BoundingInfo").New(maximum.JSObject())
+	return BoundingInfoFromJSObject(p, ba.ctx)
+}
+
+// Minimum returns the Minimum property of class BoundingInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundinginfo#minimum
+func (b *BoundingInfo) Minimum(minimum *Vector3) *BoundingInfo {
+	p := ba.ctx.Get("BoundingInfo").New(minimum.JSObject())
+	return BoundingInfoFromJSObject(p, ba.ctx)
+}
+
+// SetMinimum sets the Minimum property of class BoundingInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundinginfo#minimum
+func (b *BoundingInfo) SetMinimum(minimum *Vector3) *BoundingInfo {
+	p := ba.ctx.Get("BoundingInfo").New(minimum.JSObject())
+	return BoundingInfoFromJSObject(p, ba.ctx)
+}
+
+*/

@@ -34,8 +34,126 @@ func LensFlareFromJSObject(p js.Value, ctx js.Value) *LensFlare {
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensflare
 func (ba *Babylon) NewLensFlare(size float64, position float64, color *Color3, imgUrl string, system *LensFlareSystem) *LensFlare {
-	p := ba.ctx.Get("LensFlare").New(size, position, color.JSObject(), imgUrl, system.JSObject())
+
+	args := make([]interface{}, 0, 5+0)
+
+	args = append(args, size)
+	args = append(args, position)
+	args = append(args, color.JSObject())
+	args = append(args, imgUrl)
+	args = append(args, system.JSObject())
+
+	p := ba.ctx.Get("LensFlare").New(args...)
 	return LensFlareFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AddFlare calls the AddFlare method on the LensFlare object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflare#addflare
+func (l *LensFlare) AddFlare(size float64, position float64, color *Color3, imgUrl string, system *LensFlareSystem) *LensFlare {
+
+	args := make([]interface{}, 0, 5+0)
+
+	args = append(args, size)
+	args = append(args, position)
+	args = append(args, color.JSObject())
+	args = append(args, imgUrl)
+	args = append(args, system.JSObject())
+
+	retVal := l.p.Call("AddFlare", args...)
+	return LensFlareFromJSObject(retVal, l.ctx)
+}
+
+// Dispose calls the Dispose method on the LensFlare object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflare#dispose
+func (l *LensFlare) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	l.p.Call("dispose", args...)
+}
+
+/*
+
+// AlphaMode returns the AlphaMode property of class LensFlare.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflare#alphamode
+func (l *LensFlare) AlphaMode(alphaMode float64) *LensFlare {
+	p := ba.ctx.Get("LensFlare").New(alphaMode)
+	return LensFlareFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaMode sets the AlphaMode property of class LensFlare.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflare#alphamode
+func (l *LensFlare) SetAlphaMode(alphaMode float64) *LensFlare {
+	p := ba.ctx.Get("LensFlare").New(alphaMode)
+	return LensFlareFromJSObject(p, ba.ctx)
+}
+
+// Color returns the Color property of class LensFlare.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflare#color
+func (l *LensFlare) Color(color *Color3) *LensFlare {
+	p := ba.ctx.Get("LensFlare").New(color.JSObject())
+	return LensFlareFromJSObject(p, ba.ctx)
+}
+
+// SetColor sets the Color property of class LensFlare.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflare#color
+func (l *LensFlare) SetColor(color *Color3) *LensFlare {
+	p := ba.ctx.Get("LensFlare").New(color.JSObject())
+	return LensFlareFromJSObject(p, ba.ctx)
+}
+
+// Position returns the Position property of class LensFlare.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflare#position
+func (l *LensFlare) Position(position float64) *LensFlare {
+	p := ba.ctx.Get("LensFlare").New(position)
+	return LensFlareFromJSObject(p, ba.ctx)
+}
+
+// SetPosition sets the Position property of class LensFlare.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflare#position
+func (l *LensFlare) SetPosition(position float64) *LensFlare {
+	p := ba.ctx.Get("LensFlare").New(position)
+	return LensFlareFromJSObject(p, ba.ctx)
+}
+
+// Size returns the Size property of class LensFlare.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflare#size
+func (l *LensFlare) Size(size float64) *LensFlare {
+	p := ba.ctx.Get("LensFlare").New(size)
+	return LensFlareFromJSObject(p, ba.ctx)
+}
+
+// SetSize sets the Size property of class LensFlare.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflare#size
+func (l *LensFlare) SetSize(size float64) *LensFlare {
+	p := ba.ctx.Get("LensFlare").New(size)
+	return LensFlareFromJSObject(p, ba.ctx)
+}
+
+// Texture returns the Texture property of class LensFlare.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflare#texture
+func (l *LensFlare) Texture(texture *Texture) *LensFlare {
+	p := ba.ctx.Get("LensFlare").New(texture.JSObject())
+	return LensFlareFromJSObject(p, ba.ctx)
+}
+
+// SetTexture sets the Texture property of class LensFlare.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflare#texture
+func (l *LensFlare) SetTexture(texture *Texture) *LensFlare {
+	p := ba.ctx.Get("LensFlare").New(texture.JSObject())
+	return LensFlareFromJSObject(p, ba.ctx)
+}
+
+*/

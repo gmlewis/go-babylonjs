@@ -31,8 +31,134 @@ func PathCursorFromJSObject(p js.Value, ctx js.Value) *PathCursor {
 //
 // https://doc.babylonjs.com/api/classes/babylon.pathcursor
 func (ba *Babylon) NewPathCursor(path *Path2) *PathCursor {
-	p := ba.ctx.Get("PathCursor").New(path.JSObject())
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, path.JSObject())
+
+	p := ba.ctx.Get("PathCursor").New(args...)
 	return PathCursorFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// GetPoint calls the GetPoint method on the PathCursor object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pathcursor#getpoint
+func (p *PathCursor) GetPoint() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("getPoint", args...)
+	return Vector3FromJSObject(retVal, p.ctx)
+}
+
+// Move calls the Move method on the PathCursor object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pathcursor#move
+func (p *PathCursor) Move(step float64) *PathCursor {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, step)
+
+	retVal := p.p.Call("move", args...)
+	return PathCursorFromJSObject(retVal, p.ctx)
+}
+
+// PathCursorMoveAheadOpts contains optional parameters for PathCursor.MoveAhead.
+type PathCursorMoveAheadOpts struct {
+	Step *float64
+}
+
+// MoveAhead calls the MoveAhead method on the PathCursor object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pathcursor#moveahead
+func (p *PathCursor) MoveAhead(opts *PathCursorMoveAheadOpts) *PathCursor {
+	if opts == nil {
+		opts = &PathCursorMoveAheadOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Step == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Step)
+	}
+
+	retVal := p.p.Call("moveAhead", args...)
+	return PathCursorFromJSObject(retVal, p.ctx)
+}
+
+// PathCursorMoveBackOpts contains optional parameters for PathCursor.MoveBack.
+type PathCursorMoveBackOpts struct {
+	Step *float64
+}
+
+// MoveBack calls the MoveBack method on the PathCursor object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pathcursor#moveback
+func (p *PathCursor) MoveBack(opts *PathCursorMoveBackOpts) *PathCursor {
+	if opts == nil {
+		opts = &PathCursorMoveBackOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Step == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Step)
+	}
+
+	retVal := p.p.Call("moveBack", args...)
+	return PathCursorFromJSObject(retVal, p.ctx)
+}
+
+// Onchange calls the Onchange method on the PathCursor object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pathcursor#onchange
+func (p *PathCursor) Onchange(f func()) *PathCursor {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, f)
+
+	retVal := p.p.Call("onchange", args...)
+	return PathCursorFromJSObject(retVal, p.ctx)
+}
+
+/*
+
+// Animations returns the Animations property of class PathCursor.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pathcursor#animations
+func (p *PathCursor) Animations(animations *Animation) *PathCursor {
+	p := ba.ctx.Get("PathCursor").New(animations.JSObject())
+	return PathCursorFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class PathCursor.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pathcursor#animations
+func (p *PathCursor) SetAnimations(animations *Animation) *PathCursor {
+	p := ba.ctx.Get("PathCursor").New(animations.JSObject())
+	return PathCursorFromJSObject(p, ba.ctx)
+}
+
+// Value returns the Value property of class PathCursor.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pathcursor#value
+func (p *PathCursor) Value(value float64) *PathCursor {
+	p := ba.ctx.Get("PathCursor").New(value)
+	return PathCursorFromJSObject(p, ba.ctx)
+}
+
+// SetValue sets the Value property of class PathCursor.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pathcursor#value
+func (p *PathCursor) SetValue(value float64) *PathCursor {
+	p := ba.ctx.Get("PathCursor").New(value)
+	return PathCursorFromJSObject(p, ba.ctx)
+}
+
+*/

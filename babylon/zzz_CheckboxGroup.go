@@ -32,8 +32,123 @@ func CheckboxGroupFromJSObject(p js.Value, ctx js.Value) *CheckboxGroup {
 //
 // https://doc.babylonjs.com/api/classes/babylon.checkboxgroup
 func (ba *Babylon) NewCheckboxGroup(name string) *CheckboxGroup {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	p := ba.ctx.Get("CheckboxGroup").New(args...)
+	return CheckboxGroupFromJSObject(p, ba.ctx)
+}
+
+// CheckboxGroupAddCheckboxOpts contains optional parameters for CheckboxGroup.AddCheckbox.
+type CheckboxGroupAddCheckboxOpts struct {
+	Func    *func()
+	Checked *bool
+}
+
+// AddCheckbox calls the AddCheckbox method on the CheckboxGroup object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.checkboxgroup#addcheckbox
+func (c *CheckboxGroup) AddCheckbox(text string, opts *CheckboxGroupAddCheckboxOpts) {
+	if opts == nil {
+		opts = &CheckboxGroupAddCheckboxOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, text)
+
+	if opts.Func == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Func)
+	}
+	if opts.Checked == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Checked)
+	}
+
+	c.p.Call("addCheckbox", args...)
+}
+
+// RemoveSelector calls the RemoveSelector method on the CheckboxGroup object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.checkboxgroup#removeselector
+func (c *CheckboxGroup) RemoveSelector(selectorNb float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, selectorNb)
+
+	c.p.Call("removeSelector", args...)
+}
+
+/*
+
+// GroupPanel returns the GroupPanel property of class CheckboxGroup.
+//
+// https://doc.babylonjs.com/api/classes/babylon.checkboxgroup#grouppanel
+func (c *CheckboxGroup) GroupPanel(groupPanel *StackPanel) *CheckboxGroup {
+	p := ba.ctx.Get("CheckboxGroup").New(groupPanel.JSObject())
+	return CheckboxGroupFromJSObject(p, ba.ctx)
+}
+
+// SetGroupPanel sets the GroupPanel property of class CheckboxGroup.
+//
+// https://doc.babylonjs.com/api/classes/babylon.checkboxgroup#grouppanel
+func (c *CheckboxGroup) SetGroupPanel(groupPanel *StackPanel) *CheckboxGroup {
+	p := ba.ctx.Get("CheckboxGroup").New(groupPanel.JSObject())
+	return CheckboxGroupFromJSObject(p, ba.ctx)
+}
+
+// Header returns the Header property of class CheckboxGroup.
+//
+// https://doc.babylonjs.com/api/classes/babylon.checkboxgroup#header
+func (c *CheckboxGroup) Header(header string) *CheckboxGroup {
+	p := ba.ctx.Get("CheckboxGroup").New(header)
+	return CheckboxGroupFromJSObject(p, ba.ctx)
+}
+
+// SetHeader sets the Header property of class CheckboxGroup.
+//
+// https://doc.babylonjs.com/api/classes/babylon.checkboxgroup#header
+func (c *CheckboxGroup) SetHeader(header string) *CheckboxGroup {
+	p := ba.ctx.Get("CheckboxGroup").New(header)
+	return CheckboxGroupFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class CheckboxGroup.
+//
+// https://doc.babylonjs.com/api/classes/babylon.checkboxgroup#name
+func (c *CheckboxGroup) Name(name string) *CheckboxGroup {
 	p := ba.ctx.Get("CheckboxGroup").New(name)
 	return CheckboxGroupFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetName sets the Name property of class CheckboxGroup.
+//
+// https://doc.babylonjs.com/api/classes/babylon.checkboxgroup#name
+func (c *CheckboxGroup) SetName(name string) *CheckboxGroup {
+	p := ba.ctx.Get("CheckboxGroup").New(name)
+	return CheckboxGroupFromJSObject(p, ba.ctx)
+}
+
+// Selectors returns the Selectors property of class CheckboxGroup.
+//
+// https://doc.babylonjs.com/api/classes/babylon.checkboxgroup#selectors
+func (c *CheckboxGroup) Selectors(selectors *StackPanel) *CheckboxGroup {
+	p := ba.ctx.Get("CheckboxGroup").New(selectors.JSObject())
+	return CheckboxGroupFromJSObject(p, ba.ctx)
+}
+
+// SetSelectors sets the Selectors property of class CheckboxGroup.
+//
+// https://doc.babylonjs.com/api/classes/babylon.checkboxgroup#selectors
+func (c *CheckboxGroup) SetSelectors(selectors *StackPanel) *CheckboxGroup {
+	p := ba.ctx.Get("CheckboxGroup").New(selectors.JSObject())
+	return CheckboxGroupFromJSObject(p, ba.ctx)
+}
+
+*/

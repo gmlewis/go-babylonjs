@@ -31,15 +31,11 @@ func FxaaPostProcessFromJSObject(p js.Value, ctx js.Value) *FxaaPostProcess {
 
 // NewFxaaPostProcessOpts contains optional parameters for NewFxaaPostProcess.
 type NewFxaaPostProcessOpts struct {
-	Camera *Camera
-
-	SamplingMode *JSFloat64
-
-	Engine *Engine
-
-	Reusable *JSBool
-
-	TextureType *JSFloat64
+	Camera       *Camera
+	SamplingMode *float64
+	Engine       *Engine
+	Reusable     *bool
+	TextureType  *float64
 }
 
 // NewFxaaPostProcess returns a new FxaaPostProcess object.
@@ -50,8 +46,769 @@ func (ba *Babylon) NewFxaaPostProcess(name string, options float64, opts *NewFxa
 		opts = &NewFxaaPostProcessOpts{}
 	}
 
-	p := ba.ctx.Get("FxaaPostProcess").New(name, options, opts.Camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType.JSObject())
+	args := make([]interface{}, 0, 2+5)
+
+	args = append(args, name)
+	args = append(args, options)
+
+	if opts.Camera == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Camera.JSObject())
+	}
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+	if opts.Engine == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Engine.JSObject())
+	}
+	if opts.Reusable == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Reusable)
+	}
+	if opts.TextureType == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.TextureType)
+	}
+
+	p := ba.ctx.Get("FxaaPostProcess").New(args...)
 	return FxaaPostProcessFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// FxaaPostProcessActivateOpts contains optional parameters for FxaaPostProcess.Activate.
+type FxaaPostProcessActivateOpts struct {
+	SourceTexture     *InternalTexture
+	ForceDepthStencil *bool
+}
+
+// Activate calls the Activate method on the FxaaPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#activate
+func (f *FxaaPostProcess) Activate(camera *Camera, opts *FxaaPostProcessActivateOpts) *InternalTexture {
+	if opts == nil {
+		opts = &FxaaPostProcessActivateOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, camera.JSObject())
+
+	if opts.SourceTexture == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.SourceTexture.JSObject())
+	}
+	if opts.ForceDepthStencil == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceDepthStencil)
+	}
+
+	retVal := f.p.Call("activate", args...)
+	return InternalTextureFromJSObject(retVal, f.ctx)
+}
+
+// Apply calls the Apply method on the FxaaPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#apply
+func (f *FxaaPostProcess) Apply() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("apply", args...)
+	return EffectFromJSObject(retVal, f.ctx)
+}
+
+// FxaaPostProcessDisposeOpts contains optional parameters for FxaaPostProcess.Dispose.
+type FxaaPostProcessDisposeOpts struct {
+	Camera *Camera
+}
+
+// Dispose calls the Dispose method on the FxaaPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#dispose
+func (f *FxaaPostProcess) Dispose(opts *FxaaPostProcessDisposeOpts) {
+	if opts == nil {
+		opts = &FxaaPostProcessDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Camera == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Camera.JSObject())
+	}
+
+	f.p.Call("dispose", args...)
+}
+
+// GetCamera calls the GetCamera method on the FxaaPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#getcamera
+func (f *FxaaPostProcess) GetCamera() *Camera {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("getCamera", args...)
+	return CameraFromJSObject(retVal, f.ctx)
+}
+
+// GetClassName calls the GetClassName method on the FxaaPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#getclassname
+func (f *FxaaPostProcess) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetEffect calls the GetEffect method on the FxaaPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#geteffect
+func (f *FxaaPostProcess) GetEffect() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("getEffect", args...)
+	return EffectFromJSObject(retVal, f.ctx)
+}
+
+// GetEffectName calls the GetEffectName method on the FxaaPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#geteffectname
+func (f *FxaaPostProcess) GetEffectName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("getEffectName", args...)
+	return retVal.String()
+}
+
+// GetEngine calls the GetEngine method on the FxaaPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#getengine
+func (f *FxaaPostProcess) GetEngine() *Engine {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("getEngine", args...)
+	return EngineFromJSObject(retVal, f.ctx)
+}
+
+// IsReady calls the IsReady method on the FxaaPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#isready
+func (f *FxaaPostProcess) IsReady() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// IsReusable calls the IsReusable method on the FxaaPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#isreusable
+func (f *FxaaPostProcess) IsReusable() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("isReusable", args...)
+	return retVal.Bool()
+}
+
+// MarkTextureDirty calls the MarkTextureDirty method on the FxaaPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#marktexturedirty
+func (f *FxaaPostProcess) MarkTextureDirty() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	f.p.Call("markTextureDirty", args...)
+}
+
+// ShareOutputWith calls the ShareOutputWith method on the FxaaPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#shareoutputwith
+func (f *FxaaPostProcess) ShareOutputWith(postProcess *PostProcess) *PostProcess {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, postProcess.JSObject())
+
+	retVal := f.p.Call("shareOutputWith", args...)
+	return PostProcessFromJSObject(retVal, f.ctx)
+}
+
+// FxaaPostProcessUpdateEffectOpts contains optional parameters for FxaaPostProcess.UpdateEffect.
+type FxaaPostProcessUpdateEffectOpts struct {
+	Defines         *string
+	Uniforms        *string
+	Samplers        *string
+	IndexParameters *interface{}
+	OnCompiled      *func()
+	OnError         *func()
+}
+
+// UpdateEffect calls the UpdateEffect method on the FxaaPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#updateeffect
+func (f *FxaaPostProcess) UpdateEffect(opts *FxaaPostProcessUpdateEffectOpts) {
+	if opts == nil {
+		opts = &FxaaPostProcessUpdateEffectOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+6)
+
+	if opts.Defines == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Defines)
+	}
+	if opts.Uniforms == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Uniforms)
+	}
+	if opts.Samplers == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Samplers)
+	}
+	if opts.IndexParameters == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.IndexParameters)
+	}
+	if opts.OnCompiled == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnCompiled)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+
+	f.p.Call("updateEffect", args...)
+}
+
+// UseOwnOutput calls the UseOwnOutput method on the FxaaPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#useownoutput
+func (f *FxaaPostProcess) UseOwnOutput() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	f.p.Call("useOwnOutput", args...)
+}
+
+/*
+
+// AdaptScaleToCurrentViewport returns the AdaptScaleToCurrentViewport property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#adaptscaletocurrentviewport
+func (f *FxaaPostProcess) AdaptScaleToCurrentViewport(adaptScaleToCurrentViewport bool) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(adaptScaleToCurrentViewport)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAdaptScaleToCurrentViewport sets the AdaptScaleToCurrentViewport property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#adaptscaletocurrentviewport
+func (f *FxaaPostProcess) SetAdaptScaleToCurrentViewport(adaptScaleToCurrentViewport bool) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(adaptScaleToCurrentViewport)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AlphaConstants returns the AlphaConstants property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#alphaconstants
+func (f *FxaaPostProcess) AlphaConstants(alphaConstants *Color4) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(alphaConstants.JSObject())
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaConstants sets the AlphaConstants property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#alphaconstants
+func (f *FxaaPostProcess) SetAlphaConstants(alphaConstants *Color4) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(alphaConstants.JSObject())
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AlphaMode returns the AlphaMode property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#alphamode
+func (f *FxaaPostProcess) AlphaMode(alphaMode float64) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(alphaMode)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaMode sets the AlphaMode property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#alphamode
+func (f *FxaaPostProcess) SetAlphaMode(alphaMode float64) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(alphaMode)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AlwaysForcePOT returns the AlwaysForcePOT property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#alwaysforcepot
+func (f *FxaaPostProcess) AlwaysForcePOT(alwaysForcePOT bool) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(alwaysForcePOT)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAlwaysForcePOT sets the AlwaysForcePOT property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#alwaysforcepot
+func (f *FxaaPostProcess) SetAlwaysForcePOT(alwaysForcePOT bool) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(alwaysForcePOT)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Animations returns the Animations property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#animations
+func (f *FxaaPostProcess) Animations(animations *Animation) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(animations.JSObject())
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#animations
+func (f *FxaaPostProcess) SetAnimations(animations *Animation) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(animations.JSObject())
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AspectRatio returns the AspectRatio property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#aspectratio
+func (f *FxaaPostProcess) AspectRatio(aspectRatio float64) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(aspectRatio)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAspectRatio sets the AspectRatio property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#aspectratio
+func (f *FxaaPostProcess) SetAspectRatio(aspectRatio float64) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(aspectRatio)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AutoClear returns the AutoClear property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#autoclear
+func (f *FxaaPostProcess) AutoClear(autoClear bool) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(autoClear)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAutoClear sets the AutoClear property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#autoclear
+func (f *FxaaPostProcess) SetAutoClear(autoClear bool) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(autoClear)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ClearColor returns the ClearColor property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#clearcolor
+func (f *FxaaPostProcess) ClearColor(clearColor *Color4) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(clearColor.JSObject())
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetClearColor sets the ClearColor property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#clearcolor
+func (f *FxaaPostProcess) SetClearColor(clearColor *Color4) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(clearColor.JSObject())
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// EnablePixelPerfectMode returns the EnablePixelPerfectMode property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#enablepixelperfectmode
+func (f *FxaaPostProcess) EnablePixelPerfectMode(enablePixelPerfectMode bool) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(enablePixelPerfectMode)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetEnablePixelPerfectMode sets the EnablePixelPerfectMode property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#enablepixelperfectmode
+func (f *FxaaPostProcess) SetEnablePixelPerfectMode(enablePixelPerfectMode bool) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(enablePixelPerfectMode)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ForceFullscreenViewport returns the ForceFullscreenViewport property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#forcefullscreenviewport
+func (f *FxaaPostProcess) ForceFullscreenViewport(forceFullscreenViewport bool) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(forceFullscreenViewport)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetForceFullscreenViewport sets the ForceFullscreenViewport property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#forcefullscreenviewport
+func (f *FxaaPostProcess) SetForceFullscreenViewport(forceFullscreenViewport bool) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(forceFullscreenViewport)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Height returns the Height property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#height
+func (f *FxaaPostProcess) Height(height float64) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(height)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetHeight sets the Height property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#height
+func (f *FxaaPostProcess) SetHeight(height float64) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(height)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// InputTexture returns the InputTexture property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#inputtexture
+func (f *FxaaPostProcess) InputTexture(inputTexture *InternalTexture) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(inputTexture.JSObject())
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetInputTexture sets the InputTexture property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#inputtexture
+func (f *FxaaPostProcess) SetInputTexture(inputTexture *InternalTexture) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(inputTexture.JSObject())
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#inspectablecustomproperties
+func (f *FxaaPostProcess) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(inspectableCustomProperties.JSObject())
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#inspectablecustomproperties
+func (f *FxaaPostProcess) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(inspectableCustomProperties.JSObject())
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// IsSupported returns the IsSupported property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#issupported
+func (f *FxaaPostProcess) IsSupported(isSupported bool) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(isSupported)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetIsSupported sets the IsSupported property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#issupported
+func (f *FxaaPostProcess) SetIsSupported(isSupported bool) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(isSupported)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#name
+func (f *FxaaPostProcess) Name(name string) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(name)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#name
+func (f *FxaaPostProcess) SetName(name string) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(name)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnActivate returns the OnActivate property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#onactivate
+func (f *FxaaPostProcess) OnActivate(onActivate func()) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(onActivate)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnActivate sets the OnActivate property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#onactivate
+func (f *FxaaPostProcess) SetOnActivate(onActivate func()) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(onActivate)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnActivateObservable returns the OnActivateObservable property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#onactivateobservable
+func (f *FxaaPostProcess) OnActivateObservable(onActivateObservable *Observable) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(onActivateObservable.JSObject())
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnActivateObservable sets the OnActivateObservable property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#onactivateobservable
+func (f *FxaaPostProcess) SetOnActivateObservable(onActivateObservable *Observable) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(onActivateObservable.JSObject())
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnAfterRender returns the OnAfterRender property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#onafterrender
+func (f *FxaaPostProcess) OnAfterRender(onAfterRender func()) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(onAfterRender)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterRender sets the OnAfterRender property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#onafterrender
+func (f *FxaaPostProcess) SetOnAfterRender(onAfterRender func()) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(onAfterRender)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnAfterRenderObservable returns the OnAfterRenderObservable property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#onafterrenderobservable
+func (f *FxaaPostProcess) OnAfterRenderObservable(onAfterRenderObservable *Observable) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(onAfterRenderObservable.JSObject())
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterRenderObservable sets the OnAfterRenderObservable property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#onafterrenderobservable
+func (f *FxaaPostProcess) SetOnAfterRenderObservable(onAfterRenderObservable *Observable) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(onAfterRenderObservable.JSObject())
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnApply returns the OnApply property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#onapply
+func (f *FxaaPostProcess) OnApply(onApply func()) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(onApply)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnApply sets the OnApply property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#onapply
+func (f *FxaaPostProcess) SetOnApply(onApply func()) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(onApply)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnApplyObservable returns the OnApplyObservable property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#onapplyobservable
+func (f *FxaaPostProcess) OnApplyObservable(onApplyObservable *Observable) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(onApplyObservable.JSObject())
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnApplyObservable sets the OnApplyObservable property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#onapplyobservable
+func (f *FxaaPostProcess) SetOnApplyObservable(onApplyObservable *Observable) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(onApplyObservable.JSObject())
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeRender returns the OnBeforeRender property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#onbeforerender
+func (f *FxaaPostProcess) OnBeforeRender(onBeforeRender func()) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(onBeforeRender)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeRender sets the OnBeforeRender property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#onbeforerender
+func (f *FxaaPostProcess) SetOnBeforeRender(onBeforeRender func()) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(onBeforeRender)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeRenderObservable returns the OnBeforeRenderObservable property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#onbeforerenderobservable
+func (f *FxaaPostProcess) OnBeforeRenderObservable(onBeforeRenderObservable *Observable) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(onBeforeRenderObservable.JSObject())
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeRenderObservable sets the OnBeforeRenderObservable property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#onbeforerenderobservable
+func (f *FxaaPostProcess) SetOnBeforeRenderObservable(onBeforeRenderObservable *Observable) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(onBeforeRenderObservable.JSObject())
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnSizeChanged returns the OnSizeChanged property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#onsizechanged
+func (f *FxaaPostProcess) OnSizeChanged(onSizeChanged func()) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(onSizeChanged)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnSizeChanged sets the OnSizeChanged property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#onsizechanged
+func (f *FxaaPostProcess) SetOnSizeChanged(onSizeChanged func()) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(onSizeChanged)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnSizeChangedObservable returns the OnSizeChangedObservable property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#onsizechangedobservable
+func (f *FxaaPostProcess) OnSizeChangedObservable(onSizeChangedObservable *Observable) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(onSizeChangedObservable.JSObject())
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnSizeChangedObservable sets the OnSizeChangedObservable property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#onsizechangedobservable
+func (f *FxaaPostProcess) SetOnSizeChangedObservable(onSizeChangedObservable *Observable) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(onSizeChangedObservable.JSObject())
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// RenderTargetSamplingMode returns the RenderTargetSamplingMode property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#rendertargetsamplingmode
+func (f *FxaaPostProcess) RenderTargetSamplingMode(renderTargetSamplingMode float64) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(renderTargetSamplingMode)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetRenderTargetSamplingMode sets the RenderTargetSamplingMode property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#rendertargetsamplingmode
+func (f *FxaaPostProcess) SetRenderTargetSamplingMode(renderTargetSamplingMode float64) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(renderTargetSamplingMode)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Samples returns the Samples property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#samples
+func (f *FxaaPostProcess) Samples(samples float64) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(samples)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetSamples sets the Samples property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#samples
+func (f *FxaaPostProcess) SetSamples(samples float64) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(samples)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ScaleMode returns the ScaleMode property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#scalemode
+func (f *FxaaPostProcess) ScaleMode(scaleMode float64) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(scaleMode)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetScaleMode sets the ScaleMode property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#scalemode
+func (f *FxaaPostProcess) SetScaleMode(scaleMode float64) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(scaleMode)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// TexelSize returns the TexelSize property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#texelsize
+func (f *FxaaPostProcess) TexelSize(texelSize *Vector2) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(texelSize.JSObject())
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetTexelSize sets the TexelSize property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#texelsize
+func (f *FxaaPostProcess) SetTexelSize(texelSize *Vector2) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(texelSize.JSObject())
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#uniqueid
+func (f *FxaaPostProcess) UniqueId(uniqueId float64) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(uniqueId)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#uniqueid
+func (f *FxaaPostProcess) SetUniqueId(uniqueId float64) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(uniqueId)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Width returns the Width property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#width
+func (f *FxaaPostProcess) Width(width float64) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(width)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetWidth sets the Width property of class FxaaPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fxaapostprocess#width
+func (f *FxaaPostProcess) SetWidth(width float64) *FxaaPostProcess {
+	p := ba.ctx.Get("FxaaPostProcess").New(width)
+	return FxaaPostProcessFromJSObject(p, ba.ctx)
+}
+
+*/

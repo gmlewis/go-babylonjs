@@ -27,4 +27,142 @@ func WebXRDefaultExperienceFromJSObject(p js.Value, ctx js.Value) *WebXRDefaultE
 	return &WebXRDefaultExperience{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// CreateAsync calls the CreateAsync method on the WebXRDefaultExperience object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrdefaultexperience#createasync
+func (w *WebXRDefaultExperience) CreateAsync(scene *Scene, options *WebXRDefaultExperienceOptions) *WebXRDefaultExperience {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, scene.JSObject())
+	args = append(args, options.JSObject())
+
+	retVal := w.p.Call("CreateAsync", args...)
+	return WebXRDefaultExperienceFromJSObject(retVal, w.ctx)
+}
+
+// Dispose calls the Dispose method on the WebXRDefaultExperience object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrdefaultexperience#dispose
+func (w *WebXRDefaultExperience) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	w.p.Call("dispose", args...)
+}
+
+/*
+
+// BaseExperience returns the BaseExperience property of class WebXRDefaultExperience.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrdefaultexperience#baseexperience
+func (w *WebXRDefaultExperience) BaseExperience(baseExperience *WebXRExperienceHelper) *WebXRDefaultExperience {
+	p := ba.ctx.Get("WebXRDefaultExperience").New(baseExperience.JSObject())
+	return WebXRDefaultExperienceFromJSObject(p, ba.ctx)
+}
+
+// SetBaseExperience sets the BaseExperience property of class WebXRDefaultExperience.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrdefaultexperience#baseexperience
+func (w *WebXRDefaultExperience) SetBaseExperience(baseExperience *WebXRExperienceHelper) *WebXRDefaultExperience {
+	p := ba.ctx.Get("WebXRDefaultExperience").New(baseExperience.JSObject())
+	return WebXRDefaultExperienceFromJSObject(p, ba.ctx)
+}
+
+// ControllerModelLoader returns the ControllerModelLoader property of class WebXRDefaultExperience.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrdefaultexperience#controllermodelloader
+func (w *WebXRDefaultExperience) ControllerModelLoader(controllerModelLoader *WebXRControllerModelLoader) *WebXRDefaultExperience {
+	p := ba.ctx.Get("WebXRDefaultExperience").New(controllerModelLoader.JSObject())
+	return WebXRDefaultExperienceFromJSObject(p, ba.ctx)
+}
+
+// SetControllerModelLoader sets the ControllerModelLoader property of class WebXRDefaultExperience.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrdefaultexperience#controllermodelloader
+func (w *WebXRDefaultExperience) SetControllerModelLoader(controllerModelLoader *WebXRControllerModelLoader) *WebXRDefaultExperience {
+	p := ba.ctx.Get("WebXRDefaultExperience").New(controllerModelLoader.JSObject())
+	return WebXRDefaultExperienceFromJSObject(p, ba.ctx)
+}
+
+// EnterExitUI returns the EnterExitUI property of class WebXRDefaultExperience.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrdefaultexperience#enterexitui
+func (w *WebXRDefaultExperience) EnterExitUI(enterExitUI *WebXREnterExitUI) *WebXRDefaultExperience {
+	p := ba.ctx.Get("WebXRDefaultExperience").New(enterExitUI.JSObject())
+	return WebXRDefaultExperienceFromJSObject(p, ba.ctx)
+}
+
+// SetEnterExitUI sets the EnterExitUI property of class WebXRDefaultExperience.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrdefaultexperience#enterexitui
+func (w *WebXRDefaultExperience) SetEnterExitUI(enterExitUI *WebXREnterExitUI) *WebXRDefaultExperience {
+	p := ba.ctx.Get("WebXRDefaultExperience").New(enterExitUI.JSObject())
+	return WebXRDefaultExperienceFromJSObject(p, ba.ctx)
+}
+
+// Input returns the Input property of class WebXRDefaultExperience.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrdefaultexperience#input
+func (w *WebXRDefaultExperience) Input(input *WebXRInput) *WebXRDefaultExperience {
+	p := ba.ctx.Get("WebXRDefaultExperience").New(input.JSObject())
+	return WebXRDefaultExperienceFromJSObject(p, ba.ctx)
+}
+
+// SetInput sets the Input property of class WebXRDefaultExperience.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrdefaultexperience#input
+func (w *WebXRDefaultExperience) SetInput(input *WebXRInput) *WebXRDefaultExperience {
+	p := ba.ctx.Get("WebXRDefaultExperience").New(input.JSObject())
+	return WebXRDefaultExperienceFromJSObject(p, ba.ctx)
+}
+
+// PointerSelection returns the PointerSelection property of class WebXRDefaultExperience.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrdefaultexperience#pointerselection
+func (w *WebXRDefaultExperience) PointerSelection(pointerSelection *WebXRControllerPointerSelection) *WebXRDefaultExperience {
+	p := ba.ctx.Get("WebXRDefaultExperience").New(pointerSelection.JSObject())
+	return WebXRDefaultExperienceFromJSObject(p, ba.ctx)
+}
+
+// SetPointerSelection sets the PointerSelection property of class WebXRDefaultExperience.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrdefaultexperience#pointerselection
+func (w *WebXRDefaultExperience) SetPointerSelection(pointerSelection *WebXRControllerPointerSelection) *WebXRDefaultExperience {
+	p := ba.ctx.Get("WebXRDefaultExperience").New(pointerSelection.JSObject())
+	return WebXRDefaultExperienceFromJSObject(p, ba.ctx)
+}
+
+// RenderTarget returns the RenderTarget property of class WebXRDefaultExperience.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrdefaultexperience#rendertarget
+func (w *WebXRDefaultExperience) RenderTarget(renderTarget *WebXRRenderTarget) *WebXRDefaultExperience {
+	p := ba.ctx.Get("WebXRDefaultExperience").New(renderTarget.JSObject())
+	return WebXRDefaultExperienceFromJSObject(p, ba.ctx)
+}
+
+// SetRenderTarget sets the RenderTarget property of class WebXRDefaultExperience.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrdefaultexperience#rendertarget
+func (w *WebXRDefaultExperience) SetRenderTarget(renderTarget *WebXRRenderTarget) *WebXRDefaultExperience {
+	p := ba.ctx.Get("WebXRDefaultExperience").New(renderTarget.JSObject())
+	return WebXRDefaultExperienceFromJSObject(p, ba.ctx)
+}
+
+// Teleportation returns the Teleportation property of class WebXRDefaultExperience.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrdefaultexperience#teleportation
+func (w *WebXRDefaultExperience) Teleportation(teleportation *WebXRControllerTeleportation) *WebXRDefaultExperience {
+	p := ba.ctx.Get("WebXRDefaultExperience").New(teleportation.JSObject())
+	return WebXRDefaultExperienceFromJSObject(p, ba.ctx)
+}
+
+// SetTeleportation sets the Teleportation property of class WebXRDefaultExperience.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrdefaultexperience#teleportation
+func (w *WebXRDefaultExperience) SetTeleportation(teleportation *WebXRControllerTeleportation) *WebXRDefaultExperience {
+	p := ba.ctx.Get("WebXRDefaultExperience").New(teleportation.JSObject())
+	return WebXRDefaultExperienceFromJSObject(p, ba.ctx)
+}
+
+*/

@@ -31,9 +31,8 @@ func VRDeviceOrientationArcRotateCameraFromJSObject(p js.Value, ctx js.Value) *V
 
 // NewVRDeviceOrientationArcRotateCameraOpts contains optional parameters for NewVRDeviceOrientationArcRotateCamera.
 type NewVRDeviceOrientationArcRotateCameraOpts struct {
-	CompensateDistortion *JSBool
-
-	VrCameraMetrics *VRCameraMetrics
+	CompensateDistortion *bool
+	VrCameraMetrics      *VRCameraMetrics
 }
 
 // NewVRDeviceOrientationArcRotateCamera returns a new VRDeviceOrientationArcRotateCamera object.
@@ -44,8 +43,1166 @@ func (ba *Babylon) NewVRDeviceOrientationArcRotateCamera(name string, alpha floa
 		opts = &NewVRDeviceOrientationArcRotateCameraOpts{}
 	}
 
-	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(name, alpha, beta, radius, target.JSObject(), scene.JSObject(), opts.CompensateDistortion.JSObject(), opts.VrCameraMetrics.JSObject())
+	args := make([]interface{}, 0, 6+2)
+
+	args = append(args, name)
+	args = append(args, alpha)
+	args = append(args, beta)
+	args = append(args, radius)
+	args = append(args, target.JSObject())
+	args = append(args, scene.JSObject())
+
+	if opts.CompensateDistortion == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.CompensateDistortion)
+	}
+	if opts.VrCameraMetrics == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.VrCameraMetrics.JSObject())
+	}
+
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(args...)
 	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// VRDeviceOrientationArcRotateCameraAttachControlOpts contains optional parameters for VRDeviceOrientationArcRotateCamera.AttachControl.
+type VRDeviceOrientationArcRotateCameraAttachControlOpts struct {
+	NoPreventDefault   *bool
+	UseCtrlForPanning  *bool
+	PanningMouseButton *float64
+}
+
+// AttachControl calls the AttachControl method on the VRDeviceOrientationArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#attachcontrol
+func (v *VRDeviceOrientationArcRotateCamera) AttachControl(element js.Value, opts *VRDeviceOrientationArcRotateCameraAttachControlOpts) {
+	if opts == nil {
+		opts = &VRDeviceOrientationArcRotateCameraAttachControlOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, element)
+
+	if opts.NoPreventDefault == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoPreventDefault)
+	}
+	if opts.UseCtrlForPanning == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseCtrlForPanning)
+	}
+	if opts.PanningMouseButton == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.PanningMouseButton)
+	}
+
+	v.p.Call("attachControl", args...)
+}
+
+// CreateRigCamera calls the CreateRigCamera method on the VRDeviceOrientationArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#createrigcamera
+func (v *VRDeviceOrientationArcRotateCamera) CreateRigCamera(name string, cameraIndex float64) *Camera {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, cameraIndex)
+
+	retVal := v.p.Call("createRigCamera", args...)
+	return CameraFromJSObject(retVal, v.ctx)
+}
+
+// DetachControl calls the DetachControl method on the VRDeviceOrientationArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#detachcontrol
+func (v *VRDeviceOrientationArcRotateCamera) DetachControl(element js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, element)
+
+	v.p.Call("detachControl", args...)
+}
+
+// Dispose calls the Dispose method on the VRDeviceOrientationArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#dispose
+func (v *VRDeviceOrientationArcRotateCamera) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	v.p.Call("dispose", args...)
+}
+
+// VRDeviceOrientationArcRotateCameraFocusOnOpts contains optional parameters for VRDeviceOrientationArcRotateCamera.FocusOn.
+type VRDeviceOrientationArcRotateCameraFocusOnOpts struct {
+	DoNotUpdateMaxZ *bool
+}
+
+// FocusOn calls the FocusOn method on the VRDeviceOrientationArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#focuson
+func (v *VRDeviceOrientationArcRotateCamera) FocusOn(meshesOrMinMaxVectorAndDistance *AbstractMesh, opts *VRDeviceOrientationArcRotateCameraFocusOnOpts) {
+	if opts == nil {
+		opts = &VRDeviceOrientationArcRotateCameraFocusOnOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, meshesOrMinMaxVectorAndDistance.JSObject())
+
+	if opts.DoNotUpdateMaxZ == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DoNotUpdateMaxZ)
+	}
+
+	v.p.Call("focusOn", args...)
+}
+
+// GetClassName calls the GetClassName method on the VRDeviceOrientationArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#getclassname
+func (v *VRDeviceOrientationArcRotateCamera) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetFrontPosition calls the GetFrontPosition method on the VRDeviceOrientationArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#getfrontposition
+func (v *VRDeviceOrientationArcRotateCamera) GetFrontPosition(distance float64) *Vector3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, distance)
+
+	retVal := v.p.Call("getFrontPosition", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// GetTarget calls the GetTarget method on the VRDeviceOrientationArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#gettarget
+func (v *VRDeviceOrientationArcRotateCamera) GetTarget() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("getTarget", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// RebuildAnglesAndRadius calls the RebuildAnglesAndRadius method on the VRDeviceOrientationArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#rebuildanglesandradius
+func (v *VRDeviceOrientationArcRotateCamera) RebuildAnglesAndRadius() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	v.p.Call("rebuildAnglesAndRadius", args...)
+}
+
+// SetMatUp calls the SetMatUp method on the VRDeviceOrientationArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#setmatup
+func (v *VRDeviceOrientationArcRotateCamera) SetMatUp() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	v.p.Call("setMatUp", args...)
+}
+
+// SetPosition calls the SetPosition method on the VRDeviceOrientationArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#setposition
+func (v *VRDeviceOrientationArcRotateCamera) SetPosition(position *Vector3) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, position.JSObject())
+
+	v.p.Call("setPosition", args...)
+}
+
+// VRDeviceOrientationArcRotateCameraSetTargetOpts contains optional parameters for VRDeviceOrientationArcRotateCamera.SetTarget.
+type VRDeviceOrientationArcRotateCameraSetTargetOpts struct {
+	ToBoundingCenter  *bool
+	AllowSamePosition *bool
+}
+
+// SetTarget calls the SetTarget method on the VRDeviceOrientationArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#settarget
+func (v *VRDeviceOrientationArcRotateCamera) SetTarget(target *AbstractMesh, opts *VRDeviceOrientationArcRotateCameraSetTargetOpts) {
+	if opts == nil {
+		opts = &VRDeviceOrientationArcRotateCameraSetTargetOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, target.JSObject())
+
+	if opts.ToBoundingCenter == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ToBoundingCenter)
+	}
+	if opts.AllowSamePosition == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.AllowSamePosition)
+	}
+
+	v.p.Call("setTarget", args...)
+}
+
+// StoreState calls the StoreState method on the VRDeviceOrientationArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#storestate
+func (v *VRDeviceOrientationArcRotateCamera) StoreState() *Camera {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("storeState", args...)
+	return CameraFromJSObject(retVal, v.ctx)
+}
+
+// VRDeviceOrientationArcRotateCameraZoomOnOpts contains optional parameters for VRDeviceOrientationArcRotateCamera.ZoomOn.
+type VRDeviceOrientationArcRotateCameraZoomOnOpts struct {
+	Meshes          *AbstractMesh
+	DoNotUpdateMaxZ *bool
+}
+
+// ZoomOn calls the ZoomOn method on the VRDeviceOrientationArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#zoomon
+func (v *VRDeviceOrientationArcRotateCamera) ZoomOn(opts *VRDeviceOrientationArcRotateCameraZoomOnOpts) {
+	if opts == nil {
+		opts = &VRDeviceOrientationArcRotateCameraZoomOnOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.Meshes == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Meshes.JSObject())
+	}
+	if opts.DoNotUpdateMaxZ == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DoNotUpdateMaxZ)
+	}
+
+	v.p.Call("zoomOn", args...)
+}
+
+/*
+
+// AllowUpsideDown returns the AllowUpsideDown property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#allowupsidedown
+func (v *VRDeviceOrientationArcRotateCamera) AllowUpsideDown(allowUpsideDown bool) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(allowUpsideDown)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetAllowUpsideDown sets the AllowUpsideDown property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#allowupsidedown
+func (v *VRDeviceOrientationArcRotateCamera) SetAllowUpsideDown(allowUpsideDown bool) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(allowUpsideDown)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// Alpha returns the Alpha property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#alpha
+func (v *VRDeviceOrientationArcRotateCamera) Alpha(alpha float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(alpha)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetAlpha sets the Alpha property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#alpha
+func (v *VRDeviceOrientationArcRotateCamera) SetAlpha(alpha float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(alpha)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// AngularSensibilityX returns the AngularSensibilityX property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#angularsensibilityx
+func (v *VRDeviceOrientationArcRotateCamera) AngularSensibilityX(angularSensibilityX float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(angularSensibilityX)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetAngularSensibilityX sets the AngularSensibilityX property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#angularsensibilityx
+func (v *VRDeviceOrientationArcRotateCamera) SetAngularSensibilityX(angularSensibilityX float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(angularSensibilityX)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// AngularSensibilityY returns the AngularSensibilityY property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#angularsensibilityy
+func (v *VRDeviceOrientationArcRotateCamera) AngularSensibilityY(angularSensibilityY float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(angularSensibilityY)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetAngularSensibilityY sets the AngularSensibilityY property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#angularsensibilityy
+func (v *VRDeviceOrientationArcRotateCamera) SetAngularSensibilityY(angularSensibilityY float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(angularSensibilityY)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// AutoRotationBehavior returns the AutoRotationBehavior property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#autorotationbehavior
+func (v *VRDeviceOrientationArcRotateCamera) AutoRotationBehavior(autoRotationBehavior *AutoRotationBehavior) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(autoRotationBehavior.JSObject())
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetAutoRotationBehavior sets the AutoRotationBehavior property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#autorotationbehavior
+func (v *VRDeviceOrientationArcRotateCamera) SetAutoRotationBehavior(autoRotationBehavior *AutoRotationBehavior) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(autoRotationBehavior.JSObject())
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// Beta returns the Beta property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#beta
+func (v *VRDeviceOrientationArcRotateCamera) Beta(beta float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(beta)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetBeta sets the Beta property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#beta
+func (v *VRDeviceOrientationArcRotateCamera) SetBeta(beta float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(beta)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// BouncingBehavior returns the BouncingBehavior property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#bouncingbehavior
+func (v *VRDeviceOrientationArcRotateCamera) BouncingBehavior(bouncingBehavior *BouncingBehavior) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(bouncingBehavior.JSObject())
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetBouncingBehavior sets the BouncingBehavior property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#bouncingbehavior
+func (v *VRDeviceOrientationArcRotateCamera) SetBouncingBehavior(bouncingBehavior *BouncingBehavior) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(bouncingBehavior.JSObject())
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// CameraDirection returns the CameraDirection property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#cameradirection
+func (v *VRDeviceOrientationArcRotateCamera) CameraDirection(cameraDirection *Vector3) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(cameraDirection.JSObject())
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetCameraDirection sets the CameraDirection property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#cameradirection
+func (v *VRDeviceOrientationArcRotateCamera) SetCameraDirection(cameraDirection *Vector3) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(cameraDirection.JSObject())
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// CameraRotation returns the CameraRotation property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#camerarotation
+func (v *VRDeviceOrientationArcRotateCamera) CameraRotation(cameraRotation *Vector2) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(cameraRotation.JSObject())
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetCameraRotation sets the CameraRotation property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#camerarotation
+func (v *VRDeviceOrientationArcRotateCamera) SetCameraRotation(cameraRotation *Vector2) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(cameraRotation.JSObject())
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// CheckCollisions returns the CheckCollisions property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#checkcollisions
+func (v *VRDeviceOrientationArcRotateCamera) CheckCollisions(checkCollisions bool) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(checkCollisions)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetCheckCollisions sets the CheckCollisions property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#checkcollisions
+func (v *VRDeviceOrientationArcRotateCamera) SetCheckCollisions(checkCollisions bool) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(checkCollisions)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// CollisionRadius returns the CollisionRadius property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#collisionradius
+func (v *VRDeviceOrientationArcRotateCamera) CollisionRadius(collisionRadius *Vector3) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(collisionRadius.JSObject())
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetCollisionRadius sets the CollisionRadius property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#collisionradius
+func (v *VRDeviceOrientationArcRotateCamera) SetCollisionRadius(collisionRadius *Vector3) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(collisionRadius.JSObject())
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// FramingBehavior returns the FramingBehavior property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#framingbehavior
+func (v *VRDeviceOrientationArcRotateCamera) FramingBehavior(framingBehavior *FramingBehavior) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(framingBehavior.JSObject())
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetFramingBehavior sets the FramingBehavior property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#framingbehavior
+func (v *VRDeviceOrientationArcRotateCamera) SetFramingBehavior(framingBehavior *FramingBehavior) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(framingBehavior.JSObject())
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// InertialAlphaOffset returns the InertialAlphaOffset property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#inertialalphaoffset
+func (v *VRDeviceOrientationArcRotateCamera) InertialAlphaOffset(inertialAlphaOffset float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(inertialAlphaOffset)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetInertialAlphaOffset sets the InertialAlphaOffset property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#inertialalphaoffset
+func (v *VRDeviceOrientationArcRotateCamera) SetInertialAlphaOffset(inertialAlphaOffset float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(inertialAlphaOffset)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// InertialBetaOffset returns the InertialBetaOffset property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#inertialbetaoffset
+func (v *VRDeviceOrientationArcRotateCamera) InertialBetaOffset(inertialBetaOffset float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(inertialBetaOffset)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetInertialBetaOffset sets the InertialBetaOffset property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#inertialbetaoffset
+func (v *VRDeviceOrientationArcRotateCamera) SetInertialBetaOffset(inertialBetaOffset float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(inertialBetaOffset)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// InertialPanningX returns the InertialPanningX property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#inertialpanningx
+func (v *VRDeviceOrientationArcRotateCamera) InertialPanningX(inertialPanningX float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(inertialPanningX)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetInertialPanningX sets the InertialPanningX property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#inertialpanningx
+func (v *VRDeviceOrientationArcRotateCamera) SetInertialPanningX(inertialPanningX float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(inertialPanningX)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// InertialPanningY returns the InertialPanningY property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#inertialpanningy
+func (v *VRDeviceOrientationArcRotateCamera) InertialPanningY(inertialPanningY float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(inertialPanningY)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetInertialPanningY sets the InertialPanningY property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#inertialpanningy
+func (v *VRDeviceOrientationArcRotateCamera) SetInertialPanningY(inertialPanningY float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(inertialPanningY)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// InertialRadiusOffset returns the InertialRadiusOffset property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#inertialradiusoffset
+func (v *VRDeviceOrientationArcRotateCamera) InertialRadiusOffset(inertialRadiusOffset float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(inertialRadiusOffset)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetInertialRadiusOffset sets the InertialRadiusOffset property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#inertialradiusoffset
+func (v *VRDeviceOrientationArcRotateCamera) SetInertialRadiusOffset(inertialRadiusOffset float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(inertialRadiusOffset)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// Inputs returns the Inputs property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#inputs
+func (v *VRDeviceOrientationArcRotateCamera) Inputs(inputs *ArcRotateCameraInputsManager) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(inputs.JSObject())
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetInputs sets the Inputs property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#inputs
+func (v *VRDeviceOrientationArcRotateCamera) SetInputs(inputs *ArcRotateCameraInputsManager) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(inputs.JSObject())
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// KeysDown returns the KeysDown property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#keysdown
+func (v *VRDeviceOrientationArcRotateCamera) KeysDown(keysDown float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(keysDown)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetKeysDown sets the KeysDown property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#keysdown
+func (v *VRDeviceOrientationArcRotateCamera) SetKeysDown(keysDown float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(keysDown)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// KeysLeft returns the KeysLeft property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#keysleft
+func (v *VRDeviceOrientationArcRotateCamera) KeysLeft(keysLeft float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(keysLeft)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetKeysLeft sets the KeysLeft property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#keysleft
+func (v *VRDeviceOrientationArcRotateCamera) SetKeysLeft(keysLeft float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(keysLeft)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// KeysRight returns the KeysRight property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#keysright
+func (v *VRDeviceOrientationArcRotateCamera) KeysRight(keysRight float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(keysRight)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetKeysRight sets the KeysRight property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#keysright
+func (v *VRDeviceOrientationArcRotateCamera) SetKeysRight(keysRight float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(keysRight)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// KeysUp returns the KeysUp property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#keysup
+func (v *VRDeviceOrientationArcRotateCamera) KeysUp(keysUp float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(keysUp)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetKeysUp sets the KeysUp property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#keysup
+func (v *VRDeviceOrientationArcRotateCamera) SetKeysUp(keysUp float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(keysUp)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// LockedTarget returns the LockedTarget property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#lockedtarget
+func (v *VRDeviceOrientationArcRotateCamera) LockedTarget(lockedTarget interface{}) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(lockedTarget)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetLockedTarget sets the LockedTarget property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#lockedtarget
+func (v *VRDeviceOrientationArcRotateCamera) SetLockedTarget(lockedTarget interface{}) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(lockedTarget)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// LowerAlphaLimit returns the LowerAlphaLimit property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#loweralphalimit
+func (v *VRDeviceOrientationArcRotateCamera) LowerAlphaLimit(lowerAlphaLimit float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(lowerAlphaLimit)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetLowerAlphaLimit sets the LowerAlphaLimit property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#loweralphalimit
+func (v *VRDeviceOrientationArcRotateCamera) SetLowerAlphaLimit(lowerAlphaLimit float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(lowerAlphaLimit)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// LowerBetaLimit returns the LowerBetaLimit property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#lowerbetalimit
+func (v *VRDeviceOrientationArcRotateCamera) LowerBetaLimit(lowerBetaLimit float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(lowerBetaLimit)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetLowerBetaLimit sets the LowerBetaLimit property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#lowerbetalimit
+func (v *VRDeviceOrientationArcRotateCamera) SetLowerBetaLimit(lowerBetaLimit float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(lowerBetaLimit)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// LowerRadiusLimit returns the LowerRadiusLimit property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#lowerradiuslimit
+func (v *VRDeviceOrientationArcRotateCamera) LowerRadiusLimit(lowerRadiusLimit float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(lowerRadiusLimit)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetLowerRadiusLimit sets the LowerRadiusLimit property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#lowerradiuslimit
+func (v *VRDeviceOrientationArcRotateCamera) SetLowerRadiusLimit(lowerRadiusLimit float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(lowerRadiusLimit)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// NoRotationConstraint returns the NoRotationConstraint property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#norotationconstraint
+func (v *VRDeviceOrientationArcRotateCamera) NoRotationConstraint(noRotationConstraint bool) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(noRotationConstraint)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetNoRotationConstraint sets the NoRotationConstraint property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#norotationconstraint
+func (v *VRDeviceOrientationArcRotateCamera) SetNoRotationConstraint(noRotationConstraint bool) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(noRotationConstraint)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// OnCollide returns the OnCollide property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#oncollide
+func (v *VRDeviceOrientationArcRotateCamera) OnCollide(onCollide func()) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(onCollide)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetOnCollide sets the OnCollide property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#oncollide
+func (v *VRDeviceOrientationArcRotateCamera) SetOnCollide(onCollide func()) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(onCollide)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// OnMeshTargetChangedObservable returns the OnMeshTargetChangedObservable property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#onmeshtargetchangedobservable
+func (v *VRDeviceOrientationArcRotateCamera) OnMeshTargetChangedObservable(onMeshTargetChangedObservable *Observable) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(onMeshTargetChangedObservable.JSObject())
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetOnMeshTargetChangedObservable sets the OnMeshTargetChangedObservable property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#onmeshtargetchangedobservable
+func (v *VRDeviceOrientationArcRotateCamera) SetOnMeshTargetChangedObservable(onMeshTargetChangedObservable *Observable) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(onMeshTargetChangedObservable.JSObject())
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// PanningAxis returns the PanningAxis property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#panningaxis
+func (v *VRDeviceOrientationArcRotateCamera) PanningAxis(panningAxis *Vector3) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(panningAxis.JSObject())
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetPanningAxis sets the PanningAxis property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#panningaxis
+func (v *VRDeviceOrientationArcRotateCamera) SetPanningAxis(panningAxis *Vector3) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(panningAxis.JSObject())
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// PanningDistanceLimit returns the PanningDistanceLimit property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#panningdistancelimit
+func (v *VRDeviceOrientationArcRotateCamera) PanningDistanceLimit(panningDistanceLimit float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(panningDistanceLimit)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetPanningDistanceLimit sets the PanningDistanceLimit property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#panningdistancelimit
+func (v *VRDeviceOrientationArcRotateCamera) SetPanningDistanceLimit(panningDistanceLimit float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(panningDistanceLimit)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// PanningInertia returns the PanningInertia property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#panninginertia
+func (v *VRDeviceOrientationArcRotateCamera) PanningInertia(panningInertia float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(panningInertia)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetPanningInertia sets the PanningInertia property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#panninginertia
+func (v *VRDeviceOrientationArcRotateCamera) SetPanningInertia(panningInertia float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(panningInertia)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// PanningOriginTarget returns the PanningOriginTarget property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#panningorigintarget
+func (v *VRDeviceOrientationArcRotateCamera) PanningOriginTarget(panningOriginTarget *Vector3) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(panningOriginTarget.JSObject())
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetPanningOriginTarget sets the PanningOriginTarget property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#panningorigintarget
+func (v *VRDeviceOrientationArcRotateCamera) SetPanningOriginTarget(panningOriginTarget *Vector3) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(panningOriginTarget.JSObject())
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// PanningSensibility returns the PanningSensibility property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#panningsensibility
+func (v *VRDeviceOrientationArcRotateCamera) PanningSensibility(panningSensibility float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(panningSensibility)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetPanningSensibility sets the PanningSensibility property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#panningsensibility
+func (v *VRDeviceOrientationArcRotateCamera) SetPanningSensibility(panningSensibility float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(panningSensibility)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// PinchDeltaPercentage returns the PinchDeltaPercentage property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#pinchdeltapercentage
+func (v *VRDeviceOrientationArcRotateCamera) PinchDeltaPercentage(pinchDeltaPercentage float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(pinchDeltaPercentage)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetPinchDeltaPercentage sets the PinchDeltaPercentage property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#pinchdeltapercentage
+func (v *VRDeviceOrientationArcRotateCamera) SetPinchDeltaPercentage(pinchDeltaPercentage float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(pinchDeltaPercentage)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// PinchPrecision returns the PinchPrecision property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#pinchprecision
+func (v *VRDeviceOrientationArcRotateCamera) PinchPrecision(pinchPrecision float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(pinchPrecision)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetPinchPrecision sets the PinchPrecision property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#pinchprecision
+func (v *VRDeviceOrientationArcRotateCamera) SetPinchPrecision(pinchPrecision float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(pinchPrecision)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// PinchToPanMaxDistance returns the PinchToPanMaxDistance property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#pinchtopanmaxdistance
+func (v *VRDeviceOrientationArcRotateCamera) PinchToPanMaxDistance(pinchToPanMaxDistance float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(pinchToPanMaxDistance)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetPinchToPanMaxDistance sets the PinchToPanMaxDistance property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#pinchtopanmaxdistance
+func (v *VRDeviceOrientationArcRotateCamera) SetPinchToPanMaxDistance(pinchToPanMaxDistance float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(pinchToPanMaxDistance)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// Position returns the Position property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#position
+func (v *VRDeviceOrientationArcRotateCamera) Position(position *Vector3) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(position.JSObject())
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetPosition sets the Position property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#position
+func (v *VRDeviceOrientationArcRotateCamera) SetPosition(position *Vector3) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(position.JSObject())
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// Radius returns the Radius property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#radius
+func (v *VRDeviceOrientationArcRotateCamera) Radius(radius float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(radius)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetRadius sets the Radius property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#radius
+func (v *VRDeviceOrientationArcRotateCamera) SetRadius(radius float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(radius)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// Rotation returns the Rotation property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#rotation
+func (v *VRDeviceOrientationArcRotateCamera) Rotation(rotation *Vector3) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(rotation.JSObject())
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetRotation sets the Rotation property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#rotation
+func (v *VRDeviceOrientationArcRotateCamera) SetRotation(rotation *Vector3) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(rotation.JSObject())
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// RotationQuaternion returns the RotationQuaternion property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#rotationquaternion
+func (v *VRDeviceOrientationArcRotateCamera) RotationQuaternion(rotationQuaternion *Quaternion) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(rotationQuaternion.JSObject())
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetRotationQuaternion sets the RotationQuaternion property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#rotationquaternion
+func (v *VRDeviceOrientationArcRotateCamera) SetRotationQuaternion(rotationQuaternion *Quaternion) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(rotationQuaternion.JSObject())
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// Speed returns the Speed property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#speed
+func (v *VRDeviceOrientationArcRotateCamera) Speed(speed float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(speed)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetSpeed sets the Speed property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#speed
+func (v *VRDeviceOrientationArcRotateCamera) SetSpeed(speed float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(speed)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// Target returns the Target property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#target
+func (v *VRDeviceOrientationArcRotateCamera) Target(target *Vector3) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(target.JSObject())
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetTarget sets the Target property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#target
+func (v *VRDeviceOrientationArcRotateCamera) SetTarget(target *Vector3) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(target.JSObject())
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// TargetScreenOffset returns the TargetScreenOffset property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#targetscreenoffset
+func (v *VRDeviceOrientationArcRotateCamera) TargetScreenOffset(targetScreenOffset *Vector2) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(targetScreenOffset.JSObject())
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetTargetScreenOffset sets the TargetScreenOffset property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#targetscreenoffset
+func (v *VRDeviceOrientationArcRotateCamera) SetTargetScreenOffset(targetScreenOffset *Vector2) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(targetScreenOffset.JSObject())
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// UpVector returns the UpVector property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#upvector
+func (v *VRDeviceOrientationArcRotateCamera) UpVector(upVector *Vector3) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(upVector.JSObject())
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetUpVector sets the UpVector property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#upvector
+func (v *VRDeviceOrientationArcRotateCamera) SetUpVector(upVector *Vector3) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(upVector.JSObject())
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// UpdateUpVectorFromRotation returns the UpdateUpVectorFromRotation property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#updateupvectorfromrotation
+func (v *VRDeviceOrientationArcRotateCamera) UpdateUpVectorFromRotation(updateUpVectorFromRotation bool) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(updateUpVectorFromRotation)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateUpVectorFromRotation sets the UpdateUpVectorFromRotation property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#updateupvectorfromrotation
+func (v *VRDeviceOrientationArcRotateCamera) SetUpdateUpVectorFromRotation(updateUpVectorFromRotation bool) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(updateUpVectorFromRotation)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// UpperAlphaLimit returns the UpperAlphaLimit property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#upperalphalimit
+func (v *VRDeviceOrientationArcRotateCamera) UpperAlphaLimit(upperAlphaLimit float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(upperAlphaLimit)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetUpperAlphaLimit sets the UpperAlphaLimit property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#upperalphalimit
+func (v *VRDeviceOrientationArcRotateCamera) SetUpperAlphaLimit(upperAlphaLimit float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(upperAlphaLimit)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// UpperBetaLimit returns the UpperBetaLimit property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#upperbetalimit
+func (v *VRDeviceOrientationArcRotateCamera) UpperBetaLimit(upperBetaLimit float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(upperBetaLimit)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetUpperBetaLimit sets the UpperBetaLimit property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#upperbetalimit
+func (v *VRDeviceOrientationArcRotateCamera) SetUpperBetaLimit(upperBetaLimit float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(upperBetaLimit)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// UpperRadiusLimit returns the UpperRadiusLimit property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#upperradiuslimit
+func (v *VRDeviceOrientationArcRotateCamera) UpperRadiusLimit(upperRadiusLimit float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(upperRadiusLimit)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetUpperRadiusLimit sets the UpperRadiusLimit property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#upperradiuslimit
+func (v *VRDeviceOrientationArcRotateCamera) SetUpperRadiusLimit(upperRadiusLimit float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(upperRadiusLimit)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// UseAutoRotationBehavior returns the UseAutoRotationBehavior property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#useautorotationbehavior
+func (v *VRDeviceOrientationArcRotateCamera) UseAutoRotationBehavior(useAutoRotationBehavior bool) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(useAutoRotationBehavior)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetUseAutoRotationBehavior sets the UseAutoRotationBehavior property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#useautorotationbehavior
+func (v *VRDeviceOrientationArcRotateCamera) SetUseAutoRotationBehavior(useAutoRotationBehavior bool) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(useAutoRotationBehavior)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// UseBouncingBehavior returns the UseBouncingBehavior property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#usebouncingbehavior
+func (v *VRDeviceOrientationArcRotateCamera) UseBouncingBehavior(useBouncingBehavior bool) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(useBouncingBehavior)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetUseBouncingBehavior sets the UseBouncingBehavior property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#usebouncingbehavior
+func (v *VRDeviceOrientationArcRotateCamera) SetUseBouncingBehavior(useBouncingBehavior bool) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(useBouncingBehavior)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// UseFramingBehavior returns the UseFramingBehavior property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#useframingbehavior
+func (v *VRDeviceOrientationArcRotateCamera) UseFramingBehavior(useFramingBehavior bool) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(useFramingBehavior)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetUseFramingBehavior sets the UseFramingBehavior property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#useframingbehavior
+func (v *VRDeviceOrientationArcRotateCamera) SetUseFramingBehavior(useFramingBehavior bool) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(useFramingBehavior)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// UseInputToRestoreState returns the UseInputToRestoreState property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#useinputtorestorestate
+func (v *VRDeviceOrientationArcRotateCamera) UseInputToRestoreState(useInputToRestoreState bool) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(useInputToRestoreState)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetUseInputToRestoreState sets the UseInputToRestoreState property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#useinputtorestorestate
+func (v *VRDeviceOrientationArcRotateCamera) SetUseInputToRestoreState(useInputToRestoreState bool) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(useInputToRestoreState)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// WheelDeltaPercentage returns the WheelDeltaPercentage property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#wheeldeltapercentage
+func (v *VRDeviceOrientationArcRotateCamera) WheelDeltaPercentage(wheelDeltaPercentage float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(wheelDeltaPercentage)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetWheelDeltaPercentage sets the WheelDeltaPercentage property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#wheeldeltapercentage
+func (v *VRDeviceOrientationArcRotateCamera) SetWheelDeltaPercentage(wheelDeltaPercentage float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(wheelDeltaPercentage)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// WheelPrecision returns the WheelPrecision property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#wheelprecision
+func (v *VRDeviceOrientationArcRotateCamera) WheelPrecision(wheelPrecision float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(wheelPrecision)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetWheelPrecision sets the WheelPrecision property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#wheelprecision
+func (v *VRDeviceOrientationArcRotateCamera) SetWheelPrecision(wheelPrecision float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(wheelPrecision)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// ZoomOnFactor returns the ZoomOnFactor property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#zoomonfactor
+func (v *VRDeviceOrientationArcRotateCamera) ZoomOnFactor(zoomOnFactor float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(zoomOnFactor)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetZoomOnFactor sets the ZoomOnFactor property of class VRDeviceOrientationArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrdeviceorientationarcrotatecamera#zoomonfactor
+func (v *VRDeviceOrientationArcRotateCamera) SetZoomOnFactor(zoomOnFactor float64) *VRDeviceOrientationArcRotateCamera {
+	p := ba.ctx.Get("VRDeviceOrientationArcRotateCamera").New(zoomOnFactor)
+	return VRDeviceOrientationArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+*/

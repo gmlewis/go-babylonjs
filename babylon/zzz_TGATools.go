@@ -30,4 +30,19 @@ func TGAToolsFromJSObject(p js.Value, ctx js.Value) *TGATools {
 	return &TGATools{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// GetTGAHeader calls the GetTGAHeader method on the TGATools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tgatools#gettgaheader
+func (t *TGATools) GetTGAHeader(data js.Value) interface{} {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, data)
+
+	retVal := t.p.Call("GetTGAHeader", args...)
+	return retVal
+}
+
+/*
+
+ */

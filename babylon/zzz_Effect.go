@@ -29,18 +29,12 @@ func EffectFromJSObject(p js.Value, ctx js.Value) *Effect {
 
 // NewEffectOpts contains optional parameters for NewEffect.
 type NewEffectOpts struct {
-	Samplers *JSString
-
-	Engine *ThinEngine
-
-	Defines *JSString
-
-	Fallbacks *JSValue
-
-	OnCompiled *func()
-
-	OnError *func()
-
+	Samplers        *string
+	Engine          *ThinEngine
+	Defines         *string
+	Fallbacks       *IEffectFallbacks
+	OnCompiled      *func()
+	OnError         *func()
 	IndexParameters *interface{}
 }
 
@@ -52,8 +46,970 @@ func (ba *Babylon) NewEffect(baseName interface{}, attributesNamesOrOptions stri
 		opts = &NewEffectOpts{}
 	}
 
-	p := ba.ctx.Get("Effect").New(baseName, attributesNamesOrOptions, uniformsNamesOrEngine, opts.Samplers.JSObject(), opts.Engine.JSObject(), opts.Defines.JSObject(), opts.Fallbacks.JSObject(), opts.OnCompiled, opts.OnError, opts.IndexParameters)
+	args := make([]interface{}, 0, 3+7)
+
+	args = append(args, baseName)
+	args = append(args, attributesNamesOrOptions)
+	args = append(args, uniformsNamesOrEngine)
+
+	if opts.Samplers == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Samplers)
+	}
+	if opts.Engine == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Engine.JSObject())
+	}
+	if opts.Defines == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Defines)
+	}
+	if opts.Fallbacks == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Fallbacks.JSObject())
+	}
+	if opts.OnCompiled == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnCompiled)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+	if opts.IndexParameters == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.IndexParameters)
+	}
+
+	p := ba.ctx.Get("Effect").New(args...)
 	return EffectFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AllFallbacksProcessed calls the AllFallbacksProcessed method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#allfallbacksprocessed
+func (e *Effect) AllFallbacksProcessed() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := e.p.Call("allFallbacksProcessed", args...)
+	return retVal.Bool()
+}
+
+// BindUniformBlock calls the BindUniformBlock method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#binduniformblock
+func (e *Effect) BindUniformBlock(blockName string, index float64) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, blockName)
+	args = append(args, index)
+
+	e.p.Call("bindUniformBlock", args...)
+}
+
+// BindUniformBuffer calls the BindUniformBuffer method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#binduniformbuffer
+func (e *Effect) BindUniformBuffer(buffer *DataBuffer, name string) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, buffer.JSObject())
+	args = append(args, name)
+
+	e.p.Call("bindUniformBuffer", args...)
+}
+
+// Dispose calls the Dispose method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#dispose
+func (e *Effect) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	e.p.Call("dispose", args...)
+}
+
+// ExecuteWhenCompiled calls the ExecuteWhenCompiled method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#executewhencompiled
+func (e *Effect) ExecuteWhenCompiled(jsFunc func()) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, jsFunc)
+
+	e.p.Call("executeWhenCompiled", args...)
+}
+
+// GetAttributeLocation calls the GetAttributeLocation method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#getattributelocation
+func (e *Effect) GetAttributeLocation(index float64) float64 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, index)
+
+	retVal := e.p.Call("getAttributeLocation", args...)
+	return retVal.Float()
+}
+
+// GetAttributeLocationByName calls the GetAttributeLocationByName method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#getattributelocationbyname
+func (e *Effect) GetAttributeLocationByName(name string) float64 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := e.p.Call("getAttributeLocationByName", args...)
+	return retVal.Float()
+}
+
+// GetAttributesCount calls the GetAttributesCount method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#getattributescount
+func (e *Effect) GetAttributesCount() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := e.p.Call("getAttributesCount", args...)
+	return retVal.Float()
+}
+
+// GetAttributesNames calls the GetAttributesNames method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#getattributesnames
+func (e *Effect) GetAttributesNames() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := e.p.Call("getAttributesNames", args...)
+	return retVal.String()
+}
+
+// GetCompilationError calls the GetCompilationError method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#getcompilationerror
+func (e *Effect) GetCompilationError() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := e.p.Call("getCompilationError", args...)
+	return retVal.String()
+}
+
+// GetEngine calls the GetEngine method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#getengine
+func (e *Effect) GetEngine() *Engine {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := e.p.Call("getEngine", args...)
+	return EngineFromJSObject(retVal, e.ctx)
+}
+
+// GetPipelineContext calls the GetPipelineContext method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#getpipelinecontext
+func (e *Effect) GetPipelineContext() *IPipelineContext {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := e.p.Call("getPipelineContext", args...)
+	return IPipelineContextFromJSObject(retVal, e.ctx)
+}
+
+// GetSamplers calls the GetSamplers method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#getsamplers
+func (e *Effect) GetSamplers() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := e.p.Call("getSamplers", args...)
+	return retVal.String()
+}
+
+// GetUniform calls the GetUniform method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#getuniform
+func (e *Effect) GetUniform(uniformName string) *WebGLUniformLocation {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, uniformName)
+
+	retVal := e.p.Call("getUniform", args...)
+	return WebGLUniformLocationFromJSObject(retVal, e.ctx)
+}
+
+// GetUniformIndex calls the GetUniformIndex method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#getuniformindex
+func (e *Effect) GetUniformIndex(uniformName string) float64 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, uniformName)
+
+	retVal := e.p.Call("getUniformIndex", args...)
+	return retVal.Float()
+}
+
+// IsReady calls the IsReady method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#isready
+func (e *Effect) IsReady() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := e.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// EffectRegisterShaderOpts contains optional parameters for Effect.RegisterShader.
+type EffectRegisterShaderOpts struct {
+	PixelShader  *string
+	VertexShader *string
+}
+
+// RegisterShader calls the RegisterShader method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#registershader
+func (e *Effect) RegisterShader(name string, opts *EffectRegisterShaderOpts) {
+	if opts == nil {
+		opts = &EffectRegisterShaderOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, name)
+
+	if opts.PixelShader == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.PixelShader)
+	}
+	if opts.VertexShader == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.VertexShader)
+	}
+
+	e.p.Call("RegisterShader", args...)
+}
+
+// ResetCache calls the ResetCache method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#resetcache
+func (e *Effect) ResetCache() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	e.p.Call("ResetCache", args...)
+}
+
+// SetArray calls the SetArray method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#setarray
+func (e *Effect) SetArray(uniformName string, array float64) *Effect {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniformName)
+	args = append(args, array)
+
+	retVal := e.p.Call("setArray", args...)
+	return EffectFromJSObject(retVal, e.ctx)
+}
+
+// SetArray2 calls the SetArray2 method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#setarray2
+func (e *Effect) SetArray2(uniformName string, array float64) *Effect {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniformName)
+	args = append(args, array)
+
+	retVal := e.p.Call("setArray2", args...)
+	return EffectFromJSObject(retVal, e.ctx)
+}
+
+// SetArray3 calls the SetArray3 method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#setarray3
+func (e *Effect) SetArray3(uniformName string, array float64) *Effect {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniformName)
+	args = append(args, array)
+
+	retVal := e.p.Call("setArray3", args...)
+	return EffectFromJSObject(retVal, e.ctx)
+}
+
+// SetArray4 calls the SetArray4 method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#setarray4
+func (e *Effect) SetArray4(uniformName string, array float64) *Effect {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniformName)
+	args = append(args, array)
+
+	retVal := e.p.Call("setArray4", args...)
+	return EffectFromJSObject(retVal, e.ctx)
+}
+
+// SetBool calls the SetBool method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#setbool
+func (e *Effect) SetBool(uniformName string, bool bool) *Effect {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniformName)
+	args = append(args, bool)
+
+	retVal := e.p.Call("setBool", args...)
+	return EffectFromJSObject(retVal, e.ctx)
+}
+
+// SetColor3 calls the SetColor3 method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#setcolor3
+func (e *Effect) SetColor3(uniformName string, color3 *IColor3Like) *Effect {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniformName)
+	args = append(args, color3.JSObject())
+
+	retVal := e.p.Call("setColor3", args...)
+	return EffectFromJSObject(retVal, e.ctx)
+}
+
+// SetColor4 calls the SetColor4 method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#setcolor4
+func (e *Effect) SetColor4(uniformName string, color3 *IColor3Like, alpha float64) *Effect {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, uniformName)
+	args = append(args, color3.JSObject())
+	args = append(args, alpha)
+
+	retVal := e.p.Call("setColor4", args...)
+	return EffectFromJSObject(retVal, e.ctx)
+}
+
+// SetDepthStencilTexture calls the SetDepthStencilTexture method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#setdepthstenciltexture
+func (e *Effect) SetDepthStencilTexture(channel string, texture *RenderTargetTexture) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, channel)
+	args = append(args, texture.JSObject())
+
+	e.p.Call("setDepthStencilTexture", args...)
+}
+
+// SetDirectColor4 calls the SetDirectColor4 method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#setdirectcolor4
+func (e *Effect) SetDirectColor4(uniformName string, color4 *IColor4Like) *Effect {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniformName)
+	args = append(args, color4.JSObject())
+
+	retVal := e.p.Call("setDirectColor4", args...)
+	return EffectFromJSObject(retVal, e.ctx)
+}
+
+// SetFloat calls the SetFloat method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#setfloat
+func (e *Effect) SetFloat(uniformName string, value float64) *Effect {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniformName)
+	args = append(args, value)
+
+	retVal := e.p.Call("setFloat", args...)
+	return EffectFromJSObject(retVal, e.ctx)
+}
+
+// SetFloat2 calls the SetFloat2 method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#setfloat2
+func (e *Effect) SetFloat2(uniformName string, x float64, y float64) *Effect {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, uniformName)
+	args = append(args, x)
+	args = append(args, y)
+
+	retVal := e.p.Call("setFloat2", args...)
+	return EffectFromJSObject(retVal, e.ctx)
+}
+
+// SetFloat3 calls the SetFloat3 method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#setfloat3
+func (e *Effect) SetFloat3(uniformName string, x float64, y float64, z float64) *Effect {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, uniformName)
+	args = append(args, x)
+	args = append(args, y)
+	args = append(args, z)
+
+	retVal := e.p.Call("setFloat3", args...)
+	return EffectFromJSObject(retVal, e.ctx)
+}
+
+// SetFloat4 calls the SetFloat4 method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#setfloat4
+func (e *Effect) SetFloat4(uniformName string, x float64, y float64, z float64, w float64) *Effect {
+
+	args := make([]interface{}, 0, 5+0)
+
+	args = append(args, uniformName)
+	args = append(args, x)
+	args = append(args, y)
+	args = append(args, z)
+	args = append(args, w)
+
+	retVal := e.p.Call("setFloat4", args...)
+	return EffectFromJSObject(retVal, e.ctx)
+}
+
+// SetFloatArray calls the SetFloatArray method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#setfloatarray
+func (e *Effect) SetFloatArray(uniformName string, array js.Value) *Effect {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniformName)
+	args = append(args, array)
+
+	retVal := e.p.Call("setFloatArray", args...)
+	return EffectFromJSObject(retVal, e.ctx)
+}
+
+// SetFloatArray2 calls the SetFloatArray2 method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#setfloatarray2
+func (e *Effect) SetFloatArray2(uniformName string, array js.Value) *Effect {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniformName)
+	args = append(args, array)
+
+	retVal := e.p.Call("setFloatArray2", args...)
+	return EffectFromJSObject(retVal, e.ctx)
+}
+
+// SetFloatArray3 calls the SetFloatArray3 method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#setfloatarray3
+func (e *Effect) SetFloatArray3(uniformName string, array js.Value) *Effect {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniformName)
+	args = append(args, array)
+
+	retVal := e.p.Call("setFloatArray3", args...)
+	return EffectFromJSObject(retVal, e.ctx)
+}
+
+// SetFloatArray4 calls the SetFloatArray4 method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#setfloatarray4
+func (e *Effect) SetFloatArray4(uniformName string, array js.Value) *Effect {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniformName)
+	args = append(args, array)
+
+	retVal := e.p.Call("setFloatArray4", args...)
+	return EffectFromJSObject(retVal, e.ctx)
+}
+
+// SetInt calls the SetInt method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#setint
+func (e *Effect) SetInt(uniformName string, value float64) *Effect {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniformName)
+	args = append(args, value)
+
+	retVal := e.p.Call("setInt", args...)
+	return EffectFromJSObject(retVal, e.ctx)
+}
+
+// SetIntArray calls the SetIntArray method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#setintarray
+func (e *Effect) SetIntArray(uniformName string, array *Int32Array) *Effect {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniformName)
+	args = append(args, array.JSObject())
+
+	retVal := e.p.Call("setIntArray", args...)
+	return EffectFromJSObject(retVal, e.ctx)
+}
+
+// SetIntArray2 calls the SetIntArray2 method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#setintarray2
+func (e *Effect) SetIntArray2(uniformName string, array *Int32Array) *Effect {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniformName)
+	args = append(args, array.JSObject())
+
+	retVal := e.p.Call("setIntArray2", args...)
+	return EffectFromJSObject(retVal, e.ctx)
+}
+
+// SetIntArray3 calls the SetIntArray3 method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#setintarray3
+func (e *Effect) SetIntArray3(uniformName string, array *Int32Array) *Effect {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniformName)
+	args = append(args, array.JSObject())
+
+	retVal := e.p.Call("setIntArray3", args...)
+	return EffectFromJSObject(retVal, e.ctx)
+}
+
+// SetIntArray4 calls the SetIntArray4 method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#setintarray4
+func (e *Effect) SetIntArray4(uniformName string, array *Int32Array) *Effect {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniformName)
+	args = append(args, array.JSObject())
+
+	retVal := e.p.Call("setIntArray4", args...)
+	return EffectFromJSObject(retVal, e.ctx)
+}
+
+// SetMatrices calls the SetMatrices method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#setmatrices
+func (e *Effect) SetMatrices(uniformName string, matrices js.Value) *Effect {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniformName)
+	args = append(args, matrices)
+
+	retVal := e.p.Call("setMatrices", args...)
+	return EffectFromJSObject(retVal, e.ctx)
+}
+
+// SetMatrix calls the SetMatrix method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#setmatrix
+func (e *Effect) SetMatrix(uniformName string, matrix *IMatrixLike) *Effect {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniformName)
+	args = append(args, matrix.JSObject())
+
+	retVal := e.p.Call("setMatrix", args...)
+	return EffectFromJSObject(retVal, e.ctx)
+}
+
+// SetMatrix2x2 calls the SetMatrix2x2 method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#setmatrix2x2
+func (e *Effect) SetMatrix2x2(uniformName string, matrix js.Value) *Effect {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniformName)
+	args = append(args, matrix)
+
+	retVal := e.p.Call("setMatrix2x2", args...)
+	return EffectFromJSObject(retVal, e.ctx)
+}
+
+// SetMatrix3x3 calls the SetMatrix3x3 method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#setmatrix3x3
+func (e *Effect) SetMatrix3x3(uniformName string, matrix js.Value) *Effect {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniformName)
+	args = append(args, matrix)
+
+	retVal := e.p.Call("setMatrix3x3", args...)
+	return EffectFromJSObject(retVal, e.ctx)
+}
+
+// SetTexture calls the SetTexture method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#settexture
+func (e *Effect) SetTexture(channel string, texture *BaseTexture) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, channel)
+	args = append(args, texture.JSObject())
+
+	e.p.Call("setTexture", args...)
+}
+
+// SetTextureArray calls the SetTextureArray method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#settexturearray
+func (e *Effect) SetTextureArray(channel string, textures *BaseTexture) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, channel)
+	args = append(args, textures.JSObject())
+
+	e.p.Call("setTextureArray", args...)
+}
+
+// SetTextureFromPostProcess calls the SetTextureFromPostProcess method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#settexturefrompostprocess
+func (e *Effect) SetTextureFromPostProcess(channel string, postProcess *PostProcess) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, channel)
+	args = append(args, postProcess.JSObject())
+
+	e.p.Call("setTextureFromPostProcess", args...)
+}
+
+// SetTextureFromPostProcessOutput calls the SetTextureFromPostProcessOutput method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#settexturefrompostprocessoutput
+func (e *Effect) SetTextureFromPostProcessOutput(channel string, postProcess *PostProcess) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, channel)
+	args = append(args, postProcess.JSObject())
+
+	e.p.Call("setTextureFromPostProcessOutput", args...)
+}
+
+// SetVector2 calls the SetVector2 method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#setvector2
+func (e *Effect) SetVector2(uniformName string, vector2 *IVector2Like) *Effect {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniformName)
+	args = append(args, vector2.JSObject())
+
+	retVal := e.p.Call("setVector2", args...)
+	return EffectFromJSObject(retVal, e.ctx)
+}
+
+// SetVector3 calls the SetVector3 method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#setvector3
+func (e *Effect) SetVector3(uniformName string, vector3 *IVector3Like) *Effect {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniformName)
+	args = append(args, vector3.JSObject())
+
+	retVal := e.p.Call("setVector3", args...)
+	return EffectFromJSObject(retVal, e.ctx)
+}
+
+// SetVector4 calls the SetVector4 method on the Effect object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#setvector4
+func (e *Effect) SetVector4(uniformName string, vector4 *IVector4Like) *Effect {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniformName)
+	args = append(args, vector4.JSObject())
+
+	retVal := e.p.Call("setVector4", args...)
+	return EffectFromJSObject(retVal, e.ctx)
+}
+
+/*
+
+// Defines returns the Defines property of class Effect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#defines
+func (e *Effect) Defines(defines string) *Effect {
+	p := ba.ctx.Get("Effect").New(defines)
+	return EffectFromJSObject(p, ba.ctx)
+}
+
+// SetDefines sets the Defines property of class Effect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#defines
+func (e *Effect) SetDefines(defines string) *Effect {
+	p := ba.ctx.Get("Effect").New(defines)
+	return EffectFromJSObject(p, ba.ctx)
+}
+
+// IncludesShadersStore returns the IncludesShadersStore property of class Effect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#includesshadersstore
+func (e *Effect) IncludesShadersStore(IncludesShadersStore js.Value) *Effect {
+	p := ba.ctx.Get("Effect").New(IncludesShadersStore)
+	return EffectFromJSObject(p, ba.ctx)
+}
+
+// SetIncludesShadersStore sets the IncludesShadersStore property of class Effect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#includesshadersstore
+func (e *Effect) SetIncludesShadersStore(IncludesShadersStore js.Value) *Effect {
+	p := ba.ctx.Get("Effect").New(IncludesShadersStore)
+	return EffectFromJSObject(p, ba.ctx)
+}
+
+// IsSupported returns the IsSupported property of class Effect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#issupported
+func (e *Effect) IsSupported(isSupported bool) *Effect {
+	p := ba.ctx.Get("Effect").New(isSupported)
+	return EffectFromJSObject(p, ba.ctx)
+}
+
+// SetIsSupported sets the IsSupported property of class Effect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#issupported
+func (e *Effect) SetIsSupported(isSupported bool) *Effect {
+	p := ba.ctx.Get("Effect").New(isSupported)
+	return EffectFromJSObject(p, ba.ctx)
+}
+
+// Key returns the Key property of class Effect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#key
+func (e *Effect) Key(key string) *Effect {
+	p := ba.ctx.Get("Effect").New(key)
+	return EffectFromJSObject(p, ba.ctx)
+}
+
+// SetKey sets the Key property of class Effect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#key
+func (e *Effect) SetKey(key string) *Effect {
+	p := ba.ctx.Get("Effect").New(key)
+	return EffectFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class Effect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#name
+func (e *Effect) Name(name interface{}) *Effect {
+	p := ba.ctx.Get("Effect").New(name)
+	return EffectFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class Effect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#name
+func (e *Effect) SetName(name interface{}) *Effect {
+	p := ba.ctx.Get("Effect").New(name)
+	return EffectFromJSObject(p, ba.ctx)
+}
+
+// OnBind returns the OnBind property of class Effect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#onbind
+func (e *Effect) OnBind(onBind func()) *Effect {
+	p := ba.ctx.Get("Effect").New(onBind)
+	return EffectFromJSObject(p, ba.ctx)
+}
+
+// SetOnBind sets the OnBind property of class Effect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#onbind
+func (e *Effect) SetOnBind(onBind func()) *Effect {
+	p := ba.ctx.Get("Effect").New(onBind)
+	return EffectFromJSObject(p, ba.ctx)
+}
+
+// OnBindObservable returns the OnBindObservable property of class Effect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#onbindobservable
+func (e *Effect) OnBindObservable(onBindObservable *Observable) *Effect {
+	p := ba.ctx.Get("Effect").New(onBindObservable.JSObject())
+	return EffectFromJSObject(p, ba.ctx)
+}
+
+// SetOnBindObservable sets the OnBindObservable property of class Effect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#onbindobservable
+func (e *Effect) SetOnBindObservable(onBindObservable *Observable) *Effect {
+	p := ba.ctx.Get("Effect").New(onBindObservable.JSObject())
+	return EffectFromJSObject(p, ba.ctx)
+}
+
+// OnCompileObservable returns the OnCompileObservable property of class Effect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#oncompileobservable
+func (e *Effect) OnCompileObservable(onCompileObservable *Observable) *Effect {
+	p := ba.ctx.Get("Effect").New(onCompileObservable.JSObject())
+	return EffectFromJSObject(p, ba.ctx)
+}
+
+// SetOnCompileObservable sets the OnCompileObservable property of class Effect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#oncompileobservable
+func (e *Effect) SetOnCompileObservable(onCompileObservable *Observable) *Effect {
+	p := ba.ctx.Get("Effect").New(onCompileObservable.JSObject())
+	return EffectFromJSObject(p, ba.ctx)
+}
+
+// OnCompiled returns the OnCompiled property of class Effect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#oncompiled
+func (e *Effect) OnCompiled(onCompiled func()) *Effect {
+	p := ba.ctx.Get("Effect").New(onCompiled)
+	return EffectFromJSObject(p, ba.ctx)
+}
+
+// SetOnCompiled sets the OnCompiled property of class Effect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#oncompiled
+func (e *Effect) SetOnCompiled(onCompiled func()) *Effect {
+	p := ba.ctx.Get("Effect").New(onCompiled)
+	return EffectFromJSObject(p, ba.ctx)
+}
+
+// OnError returns the OnError property of class Effect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#onerror
+func (e *Effect) OnError(onError func()) *Effect {
+	p := ba.ctx.Get("Effect").New(onError)
+	return EffectFromJSObject(p, ba.ctx)
+}
+
+// SetOnError sets the OnError property of class Effect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#onerror
+func (e *Effect) SetOnError(onError func()) *Effect {
+	p := ba.ctx.Get("Effect").New(onError)
+	return EffectFromJSObject(p, ba.ctx)
+}
+
+// OnErrorObservable returns the OnErrorObservable property of class Effect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#onerrorobservable
+func (e *Effect) OnErrorObservable(onErrorObservable *Observable) *Effect {
+	p := ba.ctx.Get("Effect").New(onErrorObservable.JSObject())
+	return EffectFromJSObject(p, ba.ctx)
+}
+
+// SetOnErrorObservable sets the OnErrorObservable property of class Effect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#onerrorobservable
+func (e *Effect) SetOnErrorObservable(onErrorObservable *Observable) *Effect {
+	p := ba.ctx.Get("Effect").New(onErrorObservable.JSObject())
+	return EffectFromJSObject(p, ba.ctx)
+}
+
+// ShadersRepository returns the ShadersRepository property of class Effect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#shadersrepository
+func (e *Effect) ShadersRepository(ShadersRepository string) *Effect {
+	p := ba.ctx.Get("Effect").New(ShadersRepository)
+	return EffectFromJSObject(p, ba.ctx)
+}
+
+// SetShadersRepository sets the ShadersRepository property of class Effect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#shadersrepository
+func (e *Effect) SetShadersRepository(ShadersRepository string) *Effect {
+	p := ba.ctx.Get("Effect").New(ShadersRepository)
+	return EffectFromJSObject(p, ba.ctx)
+}
+
+// ShadersStore returns the ShadersStore property of class Effect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#shadersstore
+func (e *Effect) ShadersStore(ShadersStore js.Value) *Effect {
+	p := ba.ctx.Get("Effect").New(ShadersStore)
+	return EffectFromJSObject(p, ba.ctx)
+}
+
+// SetShadersStore sets the ShadersStore property of class Effect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#shadersstore
+func (e *Effect) SetShadersStore(ShadersStore js.Value) *Effect {
+	p := ba.ctx.Get("Effect").New(ShadersStore)
+	return EffectFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class Effect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#uniqueid
+func (e *Effect) UniqueId(uniqueId float64) *Effect {
+	p := ba.ctx.Get("Effect").New(uniqueId)
+	return EffectFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class Effect.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effect#uniqueid
+func (e *Effect) SetUniqueId(uniqueId float64) *Effect {
+	p := ba.ctx.Get("Effect").New(uniqueId)
+	return EffectFromJSObject(p, ba.ctx)
+}
+
+*/

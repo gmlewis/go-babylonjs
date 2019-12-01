@@ -29,7 +29,7 @@ func ImageBasedSliderFromJSObject(p js.Value, ctx js.Value) *ImageBasedSlider {
 
 // NewImageBasedSliderOpts contains optional parameters for NewImageBasedSlider.
 type NewImageBasedSliderOpts struct {
-	Name *JSString
+	Name *string
 }
 
 // NewImageBasedSlider returns a new ImageBasedSlider object.
@@ -40,8 +40,1783 @@ func (ba *Babylon) NewImageBasedSlider(opts *NewImageBasedSliderOpts) *ImageBase
 		opts = &NewImageBasedSliderOpts{}
 	}
 
-	p := ba.ctx.Get("ImageBasedSlider").New(opts.Name.JSObject())
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Name == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Name)
+	}
+
+	p := ba.ctx.Get("ImageBasedSlider").New(args...)
 	return ImageBasedSliderFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Contains calls the Contains method on the ImageBasedSlider object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#contains
+func (i *ImageBasedSlider) Contains(x float64, y float64) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, x)
+	args = append(args, y)
+
+	retVal := i.p.Call("contains", args...)
+	return retVal.Bool()
+}
+
+// Dispose calls the Dispose method on the ImageBasedSlider object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#dispose
+func (i *ImageBasedSlider) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	i.p.Call("dispose", args...)
+}
+
+// GetAscendantOfClass calls the GetAscendantOfClass method on the ImageBasedSlider object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#getascendantofclass
+func (i *ImageBasedSlider) GetAscendantOfClass(className string) *Control {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, className)
+
+	retVal := i.p.Call("getAscendantOfClass", args...)
+	return ControlFromJSObject(retVal, i.ctx)
+}
+
+// GetClassName calls the GetClassName method on the ImageBasedSlider object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#getclassname
+func (i *ImageBasedSlider) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := i.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// ImageBasedSliderGetDescendantsOpts contains optional parameters for ImageBasedSlider.GetDescendants.
+type ImageBasedSliderGetDescendantsOpts struct {
+	DirectDescendantsOnly *bool
+	Predicate             *func()
+}
+
+// GetDescendants calls the GetDescendants method on the ImageBasedSlider object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#getdescendants
+func (i *ImageBasedSlider) GetDescendants(opts *ImageBasedSliderGetDescendantsOpts) *Control {
+	if opts == nil {
+		opts = &ImageBasedSliderGetDescendantsOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	retVal := i.p.Call("getDescendants", args...)
+	return ControlFromJSObject(retVal, i.ctx)
+}
+
+// ImageBasedSliderGetDescendantsToRefOpts contains optional parameters for ImageBasedSlider.GetDescendantsToRef.
+type ImageBasedSliderGetDescendantsToRefOpts struct {
+	DirectDescendantsOnly *bool
+	Predicate             *func()
+}
+
+// GetDescendantsToRef calls the GetDescendantsToRef method on the ImageBasedSlider object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#getdescendantstoref
+func (i *ImageBasedSlider) GetDescendantsToRef(results *Control, opts *ImageBasedSliderGetDescendantsToRefOpts) {
+	if opts == nil {
+		opts = &ImageBasedSliderGetDescendantsToRefOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, results.JSObject())
+
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	i.p.Call("getDescendantsToRef", args...)
+}
+
+// GetLocalCoordinates calls the GetLocalCoordinates method on the ImageBasedSlider object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#getlocalcoordinates
+func (i *ImageBasedSlider) GetLocalCoordinates(globalCoordinates *Vector2) *Vector2 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, globalCoordinates.JSObject())
+
+	retVal := i.p.Call("getLocalCoordinates", args...)
+	return Vector2FromJSObject(retVal, i.ctx)
+}
+
+// GetLocalCoordinatesToRef calls the GetLocalCoordinatesToRef method on the ImageBasedSlider object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#getlocalcoordinatestoref
+func (i *ImageBasedSlider) GetLocalCoordinatesToRef(globalCoordinates *Vector2, result *Vector2) *Control {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, globalCoordinates.JSObject())
+	args = append(args, result.JSObject())
+
+	retVal := i.p.Call("getLocalCoordinatesToRef", args...)
+	return ControlFromJSObject(retVal, i.ctx)
+}
+
+// GetParentLocalCoordinates calls the GetParentLocalCoordinates method on the ImageBasedSlider object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#getparentlocalcoordinates
+func (i *ImageBasedSlider) GetParentLocalCoordinates(globalCoordinates *Vector2) *Vector2 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, globalCoordinates.JSObject())
+
+	retVal := i.p.Call("getParentLocalCoordinates", args...)
+	return Vector2FromJSObject(retVal, i.ctx)
+}
+
+// IsAscendant calls the IsAscendant method on the ImageBasedSlider object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#isascendant
+func (i *ImageBasedSlider) IsAscendant(container *Control) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, container.JSObject())
+
+	retVal := i.p.Call("isAscendant", args...)
+	return retVal.Bool()
+}
+
+// LinkWithMesh calls the LinkWithMesh method on the ImageBasedSlider object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#linkwithmesh
+func (i *ImageBasedSlider) LinkWithMesh(mesh *AbstractMesh) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	i.p.Call("linkWithMesh", args...)
+}
+
+// MoveToVector3 calls the MoveToVector3 method on the ImageBasedSlider object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#movetovector3
+func (i *ImageBasedSlider) MoveToVector3(position *Vector3, scene *Scene) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, position.JSObject())
+	args = append(args, scene.JSObject())
+
+	i.p.Call("moveToVector3", args...)
+}
+
+// ImageBasedSlider_drawOpts contains optional parameters for ImageBasedSlider._draw.
+type ImageBasedSlider_drawOpts struct {
+	InvalidatedRectangle *Measure
+}
+
+// _draw calls the _draw method on the ImageBasedSlider object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#_draw
+func (i *ImageBasedSlider) _draw(context js.Value, opts *ImageBasedSlider_drawOpts) {
+	if opts == nil {
+		opts = &ImageBasedSlider_drawOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, context)
+
+	if opts.InvalidatedRectangle == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.InvalidatedRectangle.JSObject())
+	}
+
+	i.p.Call("_draw", args...)
+}
+
+// _onPointerDown calls the _onPointerDown method on the ImageBasedSlider object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#_onpointerdown
+func (i *ImageBasedSlider) _onPointerDown(target *Control, coordinates *Vector2, pointerId float64, buttonIndex float64) bool {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, target.JSObject())
+	args = append(args, coordinates.JSObject())
+	args = append(args, pointerId)
+	args = append(args, buttonIndex)
+
+	retVal := i.p.Call("_onPointerDown", args...)
+	return retVal.Bool()
+}
+
+// _onPointerMove calls the _onPointerMove method on the ImageBasedSlider object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#_onpointermove
+func (i *ImageBasedSlider) _onPointerMove(target *Control, coordinates *Vector2, pointerId float64) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, target.JSObject())
+	args = append(args, coordinates.JSObject())
+	args = append(args, pointerId)
+
+	i.p.Call("_onPointerMove", args...)
+}
+
+// _onPointerUp calls the _onPointerUp method on the ImageBasedSlider object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#_onpointerup
+func (i *ImageBasedSlider) _onPointerUp(target *Control, coordinates *Vector2, pointerId float64, buttonIndex float64, notifyClick bool) {
+
+	args := make([]interface{}, 0, 5+0)
+
+	args = append(args, target.JSObject())
+	args = append(args, coordinates.JSObject())
+	args = append(args, pointerId)
+	args = append(args, buttonIndex)
+	args = append(args, notifyClick)
+
+	i.p.Call("_onPointerUp", args...)
+}
+
+/*
+
+// AllowAlphaInheritance returns the AllowAlphaInheritance property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#allowalphainheritance
+func (i *ImageBasedSlider) AllowAlphaInheritance(AllowAlphaInheritance bool) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(AllowAlphaInheritance)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetAllowAlphaInheritance sets the AllowAlphaInheritance property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#allowalphainheritance
+func (i *ImageBasedSlider) SetAllowAlphaInheritance(AllowAlphaInheritance bool) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(AllowAlphaInheritance)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// Alpha returns the Alpha property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#alpha
+func (i *ImageBasedSlider) Alpha(alpha float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(alpha)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetAlpha sets the Alpha property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#alpha
+func (i *ImageBasedSlider) SetAlpha(alpha float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(alpha)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// BackgroundImage returns the BackgroundImage property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#backgroundimage
+func (i *ImageBasedSlider) BackgroundImage(backgroundImage *Image) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(backgroundImage.JSObject())
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetBackgroundImage sets the BackgroundImage property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#backgroundimage
+func (i *ImageBasedSlider) SetBackgroundImage(backgroundImage *Image) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(backgroundImage.JSObject())
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// BarOffset returns the BarOffset property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#baroffset
+func (i *ImageBasedSlider) BarOffset(barOffset string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(barOffset)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetBarOffset sets the BarOffset property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#baroffset
+func (i *ImageBasedSlider) SetBarOffset(barOffset string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(barOffset)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// BarOffsetInPixels returns the BarOffsetInPixels property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#baroffsetinpixels
+func (i *ImageBasedSlider) BarOffsetInPixels(barOffsetInPixels float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(barOffsetInPixels)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetBarOffsetInPixels sets the BarOffsetInPixels property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#baroffsetinpixels
+func (i *ImageBasedSlider) SetBarOffsetInPixels(barOffsetInPixels float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(barOffsetInPixels)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// CenterX returns the CenterX property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#centerx
+func (i *ImageBasedSlider) CenterX(centerX float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(centerX)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetCenterX sets the CenterX property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#centerx
+func (i *ImageBasedSlider) SetCenterX(centerX float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(centerX)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// CenterY returns the CenterY property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#centery
+func (i *ImageBasedSlider) CenterY(centerY float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(centerY)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetCenterY sets the CenterY property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#centery
+func (i *ImageBasedSlider) SetCenterY(centerY float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(centerY)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// ClipChildren returns the ClipChildren property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#clipchildren
+func (i *ImageBasedSlider) ClipChildren(clipChildren bool) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(clipChildren)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetClipChildren sets the ClipChildren property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#clipchildren
+func (i *ImageBasedSlider) SetClipChildren(clipChildren bool) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(clipChildren)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// ClipContent returns the ClipContent property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#clipcontent
+func (i *ImageBasedSlider) ClipContent(clipContent bool) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(clipContent)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetClipContent sets the ClipContent property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#clipcontent
+func (i *ImageBasedSlider) SetClipContent(clipContent bool) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(clipContent)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// Color returns the Color property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#color
+func (i *ImageBasedSlider) Color(color string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(color)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetColor sets the Color property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#color
+func (i *ImageBasedSlider) SetColor(color string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(color)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// DisabledColor returns the DisabledColor property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#disabledcolor
+func (i *ImageBasedSlider) DisabledColor(disabledColor string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(disabledColor)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetDisabledColor sets the DisabledColor property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#disabledcolor
+func (i *ImageBasedSlider) SetDisabledColor(disabledColor string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(disabledColor)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// DisplayThumb returns the DisplayThumb property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#displaythumb
+func (i *ImageBasedSlider) DisplayThumb(displayThumb bool) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(displayThumb)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetDisplayThumb sets the DisplayThumb property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#displaythumb
+func (i *ImageBasedSlider) SetDisplayThumb(displayThumb bool) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(displayThumb)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// FontFamily returns the FontFamily property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#fontfamily
+func (i *ImageBasedSlider) FontFamily(fontFamily string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(fontFamily)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetFontFamily sets the FontFamily property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#fontfamily
+func (i *ImageBasedSlider) SetFontFamily(fontFamily string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(fontFamily)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// FontOffset returns the FontOffset property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#fontoffset
+func (i *ImageBasedSlider) FontOffset(fontOffset js.Value) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(fontOffset)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetFontOffset sets the FontOffset property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#fontoffset
+func (i *ImageBasedSlider) SetFontOffset(fontOffset js.Value) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(fontOffset)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// FontSize returns the FontSize property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#fontsize
+func (i *ImageBasedSlider) FontSize(fontSize string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(fontSize)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetFontSize sets the FontSize property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#fontsize
+func (i *ImageBasedSlider) SetFontSize(fontSize string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(fontSize)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// FontSizeInPixels returns the FontSizeInPixels property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#fontsizeinpixels
+func (i *ImageBasedSlider) FontSizeInPixels(fontSizeInPixels float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(fontSizeInPixels)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetFontSizeInPixels sets the FontSizeInPixels property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#fontsizeinpixels
+func (i *ImageBasedSlider) SetFontSizeInPixels(fontSizeInPixels float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(fontSizeInPixels)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// FontStyle returns the FontStyle property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#fontstyle
+func (i *ImageBasedSlider) FontStyle(fontStyle string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(fontStyle)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetFontStyle sets the FontStyle property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#fontstyle
+func (i *ImageBasedSlider) SetFontStyle(fontStyle string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(fontStyle)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// FontWeight returns the FontWeight property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#fontweight
+func (i *ImageBasedSlider) FontWeight(fontWeight string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(fontWeight)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetFontWeight sets the FontWeight property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#fontweight
+func (i *ImageBasedSlider) SetFontWeight(fontWeight string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(fontWeight)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// HORIZONTAL_ALIGNMENT_CENTER returns the HORIZONTAL_ALIGNMENT_CENTER property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#horizontal_alignment_center
+func (i *ImageBasedSlider) HORIZONTAL_ALIGNMENT_CENTER(HORIZONTAL_ALIGNMENT_CENTER float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(HORIZONTAL_ALIGNMENT_CENTER)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetHORIZONTAL_ALIGNMENT_CENTER sets the HORIZONTAL_ALIGNMENT_CENTER property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#horizontal_alignment_center
+func (i *ImageBasedSlider) SetHORIZONTAL_ALIGNMENT_CENTER(HORIZONTAL_ALIGNMENT_CENTER float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(HORIZONTAL_ALIGNMENT_CENTER)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// HORIZONTAL_ALIGNMENT_LEFT returns the HORIZONTAL_ALIGNMENT_LEFT property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#horizontal_alignment_left
+func (i *ImageBasedSlider) HORIZONTAL_ALIGNMENT_LEFT(HORIZONTAL_ALIGNMENT_LEFT float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(HORIZONTAL_ALIGNMENT_LEFT)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetHORIZONTAL_ALIGNMENT_LEFT sets the HORIZONTAL_ALIGNMENT_LEFT property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#horizontal_alignment_left
+func (i *ImageBasedSlider) SetHORIZONTAL_ALIGNMENT_LEFT(HORIZONTAL_ALIGNMENT_LEFT float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(HORIZONTAL_ALIGNMENT_LEFT)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// HORIZONTAL_ALIGNMENT_RIGHT returns the HORIZONTAL_ALIGNMENT_RIGHT property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#horizontal_alignment_right
+func (i *ImageBasedSlider) HORIZONTAL_ALIGNMENT_RIGHT(HORIZONTAL_ALIGNMENT_RIGHT float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(HORIZONTAL_ALIGNMENT_RIGHT)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetHORIZONTAL_ALIGNMENT_RIGHT sets the HORIZONTAL_ALIGNMENT_RIGHT property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#horizontal_alignment_right
+func (i *ImageBasedSlider) SetHORIZONTAL_ALIGNMENT_RIGHT(HORIZONTAL_ALIGNMENT_RIGHT float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(HORIZONTAL_ALIGNMENT_RIGHT)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// Height returns the Height property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#height
+func (i *ImageBasedSlider) Height(height string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(height)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetHeight sets the Height property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#height
+func (i *ImageBasedSlider) SetHeight(height string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(height)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// HeightInPixels returns the HeightInPixels property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#heightinpixels
+func (i *ImageBasedSlider) HeightInPixels(heightInPixels float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(heightInPixels)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetHeightInPixels sets the HeightInPixels property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#heightinpixels
+func (i *ImageBasedSlider) SetHeightInPixels(heightInPixels float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(heightInPixels)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// HorizontalAlignment returns the HorizontalAlignment property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#horizontalalignment
+func (i *ImageBasedSlider) HorizontalAlignment(horizontalAlignment float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(horizontalAlignment)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetHorizontalAlignment sets the HorizontalAlignment property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#horizontalalignment
+func (i *ImageBasedSlider) SetHorizontalAlignment(horizontalAlignment float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(horizontalAlignment)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// Host returns the Host property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#host
+func (i *ImageBasedSlider) Host(host *AdvancedDynamicTexture) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(host.JSObject())
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetHost sets the Host property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#host
+func (i *ImageBasedSlider) SetHost(host *AdvancedDynamicTexture) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(host.JSObject())
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// HoverCursor returns the HoverCursor property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#hovercursor
+func (i *ImageBasedSlider) HoverCursor(hoverCursor string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(hoverCursor)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetHoverCursor sets the HoverCursor property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#hovercursor
+func (i *ImageBasedSlider) SetHoverCursor(hoverCursor string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(hoverCursor)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// IsDirty returns the IsDirty property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#isdirty
+func (i *ImageBasedSlider) IsDirty(isDirty bool) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(isDirty)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetIsDirty sets the IsDirty property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#isdirty
+func (i *ImageBasedSlider) SetIsDirty(isDirty bool) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(isDirty)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// IsEnabled returns the IsEnabled property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#isenabled
+func (i *ImageBasedSlider) IsEnabled(isEnabled bool) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(isEnabled)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetIsEnabled sets the IsEnabled property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#isenabled
+func (i *ImageBasedSlider) SetIsEnabled(isEnabled bool) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(isEnabled)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// IsFocusInvisible returns the IsFocusInvisible property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#isfocusinvisible
+func (i *ImageBasedSlider) IsFocusInvisible(isFocusInvisible bool) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(isFocusInvisible)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetIsFocusInvisible sets the IsFocusInvisible property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#isfocusinvisible
+func (i *ImageBasedSlider) SetIsFocusInvisible(isFocusInvisible bool) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(isFocusInvisible)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// IsHighlighted returns the IsHighlighted property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#ishighlighted
+func (i *ImageBasedSlider) IsHighlighted(isHighlighted bool) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(isHighlighted)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetIsHighlighted sets the IsHighlighted property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#ishighlighted
+func (i *ImageBasedSlider) SetIsHighlighted(isHighlighted bool) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(isHighlighted)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// IsHitTestVisible returns the IsHitTestVisible property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#ishittestvisible
+func (i *ImageBasedSlider) IsHitTestVisible(isHitTestVisible bool) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(isHitTestVisible)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetIsHitTestVisible sets the IsHitTestVisible property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#ishittestvisible
+func (i *ImageBasedSlider) SetIsHitTestVisible(isHitTestVisible bool) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(isHitTestVisible)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// IsPointerBlocker returns the IsPointerBlocker property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#ispointerblocker
+func (i *ImageBasedSlider) IsPointerBlocker(isPointerBlocker bool) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(isPointerBlocker)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetIsPointerBlocker sets the IsPointerBlocker property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#ispointerblocker
+func (i *ImageBasedSlider) SetIsPointerBlocker(isPointerBlocker bool) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(isPointerBlocker)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// IsThumbClamped returns the IsThumbClamped property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#isthumbclamped
+func (i *ImageBasedSlider) IsThumbClamped(isThumbClamped bool) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(isThumbClamped)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetIsThumbClamped sets the IsThumbClamped property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#isthumbclamped
+func (i *ImageBasedSlider) SetIsThumbClamped(isThumbClamped bool) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(isThumbClamped)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// IsVertical returns the IsVertical property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#isvertical
+func (i *ImageBasedSlider) IsVertical(isVertical bool) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(isVertical)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetIsVertical sets the IsVertical property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#isvertical
+func (i *ImageBasedSlider) SetIsVertical(isVertical bool) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(isVertical)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// IsVisible returns the IsVisible property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#isvisible
+func (i *ImageBasedSlider) IsVisible(isVisible bool) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(isVisible)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetIsVisible sets the IsVisible property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#isvisible
+func (i *ImageBasedSlider) SetIsVisible(isVisible bool) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(isVisible)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// Left returns the Left property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#left
+func (i *ImageBasedSlider) Left(left string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(left)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetLeft sets the Left property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#left
+func (i *ImageBasedSlider) SetLeft(left string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(left)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// LeftInPixels returns the LeftInPixels property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#leftinpixels
+func (i *ImageBasedSlider) LeftInPixels(leftInPixels float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(leftInPixels)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetLeftInPixels sets the LeftInPixels property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#leftinpixels
+func (i *ImageBasedSlider) SetLeftInPixels(leftInPixels float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(leftInPixels)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetX returns the LinkOffsetX property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#linkoffsetx
+func (i *ImageBasedSlider) LinkOffsetX(linkOffsetX string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(linkOffsetX)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetX sets the LinkOffsetX property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#linkoffsetx
+func (i *ImageBasedSlider) SetLinkOffsetX(linkOffsetX string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(linkOffsetX)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetXInPixels returns the LinkOffsetXInPixels property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#linkoffsetxinpixels
+func (i *ImageBasedSlider) LinkOffsetXInPixels(linkOffsetXInPixels float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(linkOffsetXInPixels)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetXInPixels sets the LinkOffsetXInPixels property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#linkoffsetxinpixels
+func (i *ImageBasedSlider) SetLinkOffsetXInPixels(linkOffsetXInPixels float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(linkOffsetXInPixels)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetY returns the LinkOffsetY property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#linkoffsety
+func (i *ImageBasedSlider) LinkOffsetY(linkOffsetY string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(linkOffsetY)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetY sets the LinkOffsetY property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#linkoffsety
+func (i *ImageBasedSlider) SetLinkOffsetY(linkOffsetY string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(linkOffsetY)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetYInPixels returns the LinkOffsetYInPixels property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#linkoffsetyinpixels
+func (i *ImageBasedSlider) LinkOffsetYInPixels(linkOffsetYInPixels float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(linkOffsetYInPixels)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetYInPixels sets the LinkOffsetYInPixels property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#linkoffsetyinpixels
+func (i *ImageBasedSlider) SetLinkOffsetYInPixels(linkOffsetYInPixels float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(linkOffsetYInPixels)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// LinkedMesh returns the LinkedMesh property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#linkedmesh
+func (i *ImageBasedSlider) LinkedMesh(linkedMesh *AbstractMesh) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(linkedMesh.JSObject())
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetLinkedMesh sets the LinkedMesh property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#linkedmesh
+func (i *ImageBasedSlider) SetLinkedMesh(linkedMesh *AbstractMesh) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(linkedMesh.JSObject())
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// Maximum returns the Maximum property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#maximum
+func (i *ImageBasedSlider) Maximum(maximum float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(maximum)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetMaximum sets the Maximum property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#maximum
+func (i *ImageBasedSlider) SetMaximum(maximum float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(maximum)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#metadata
+func (i *ImageBasedSlider) Metadata(metadata interface{}) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(metadata)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#metadata
+func (i *ImageBasedSlider) SetMetadata(metadata interface{}) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(metadata)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// Minimum returns the Minimum property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#minimum
+func (i *ImageBasedSlider) Minimum(minimum float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(minimum)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetMinimum sets the Minimum property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#minimum
+func (i *ImageBasedSlider) SetMinimum(minimum float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(minimum)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#name
+func (i *ImageBasedSlider) Name(name string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(name)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#name
+func (i *ImageBasedSlider) SetName(name string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(name)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// NotRenderable returns the NotRenderable property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#notrenderable
+func (i *ImageBasedSlider) NotRenderable(notRenderable bool) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(notRenderable)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetNotRenderable sets the NotRenderable property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#notrenderable
+func (i *ImageBasedSlider) SetNotRenderable(notRenderable bool) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(notRenderable)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// OnAfterDrawObservable returns the OnAfterDrawObservable property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#onafterdrawobservable
+func (i *ImageBasedSlider) OnAfterDrawObservable(onAfterDrawObservable *Observable) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(onAfterDrawObservable.JSObject())
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterDrawObservable sets the OnAfterDrawObservable property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#onafterdrawobservable
+func (i *ImageBasedSlider) SetOnAfterDrawObservable(onAfterDrawObservable *Observable) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(onAfterDrawObservable.JSObject())
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeDrawObservable returns the OnBeforeDrawObservable property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#onbeforedrawobservable
+func (i *ImageBasedSlider) OnBeforeDrawObservable(onBeforeDrawObservable *Observable) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(onBeforeDrawObservable.JSObject())
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeDrawObservable sets the OnBeforeDrawObservable property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#onbeforedrawobservable
+func (i *ImageBasedSlider) SetOnBeforeDrawObservable(onBeforeDrawObservable *Observable) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(onBeforeDrawObservable.JSObject())
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// OnDirtyObservable returns the OnDirtyObservable property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#ondirtyobservable
+func (i *ImageBasedSlider) OnDirtyObservable(onDirtyObservable *Observable) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(onDirtyObservable.JSObject())
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetOnDirtyObservable sets the OnDirtyObservable property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#ondirtyobservable
+func (i *ImageBasedSlider) SetOnDirtyObservable(onDirtyObservable *Observable) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(onDirtyObservable.JSObject())
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// OnPointerClickObservable returns the OnPointerClickObservable property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#onpointerclickobservable
+func (i *ImageBasedSlider) OnPointerClickObservable(onPointerClickObservable *Observable) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(onPointerClickObservable.JSObject())
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerClickObservable sets the OnPointerClickObservable property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#onpointerclickobservable
+func (i *ImageBasedSlider) SetOnPointerClickObservable(onPointerClickObservable *Observable) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(onPointerClickObservable.JSObject())
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// OnPointerDownObservable returns the OnPointerDownObservable property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#onpointerdownobservable
+func (i *ImageBasedSlider) OnPointerDownObservable(onPointerDownObservable *Observable) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(onPointerDownObservable.JSObject())
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerDownObservable sets the OnPointerDownObservable property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#onpointerdownobservable
+func (i *ImageBasedSlider) SetOnPointerDownObservable(onPointerDownObservable *Observable) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(onPointerDownObservable.JSObject())
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// OnPointerEnterObservable returns the OnPointerEnterObservable property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#onpointerenterobservable
+func (i *ImageBasedSlider) OnPointerEnterObservable(onPointerEnterObservable *Observable) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(onPointerEnterObservable.JSObject())
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerEnterObservable sets the OnPointerEnterObservable property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#onpointerenterobservable
+func (i *ImageBasedSlider) SetOnPointerEnterObservable(onPointerEnterObservable *Observable) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(onPointerEnterObservable.JSObject())
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// OnPointerMoveObservable returns the OnPointerMoveObservable property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#onpointermoveobservable
+func (i *ImageBasedSlider) OnPointerMoveObservable(onPointerMoveObservable *Observable) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(onPointerMoveObservable.JSObject())
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerMoveObservable sets the OnPointerMoveObservable property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#onpointermoveobservable
+func (i *ImageBasedSlider) SetOnPointerMoveObservable(onPointerMoveObservable *Observable) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(onPointerMoveObservable.JSObject())
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// OnPointerOutObservable returns the OnPointerOutObservable property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#onpointeroutobservable
+func (i *ImageBasedSlider) OnPointerOutObservable(onPointerOutObservable *Observable) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(onPointerOutObservable.JSObject())
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerOutObservable sets the OnPointerOutObservable property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#onpointeroutobservable
+func (i *ImageBasedSlider) SetOnPointerOutObservable(onPointerOutObservable *Observable) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(onPointerOutObservable.JSObject())
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// OnPointerUpObservable returns the OnPointerUpObservable property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#onpointerupobservable
+func (i *ImageBasedSlider) OnPointerUpObservable(onPointerUpObservable *Observable) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(onPointerUpObservable.JSObject())
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerUpObservable sets the OnPointerUpObservable property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#onpointerupobservable
+func (i *ImageBasedSlider) SetOnPointerUpObservable(onPointerUpObservable *Observable) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(onPointerUpObservable.JSObject())
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// OnValueChangedObservable returns the OnValueChangedObservable property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#onvaluechangedobservable
+func (i *ImageBasedSlider) OnValueChangedObservable(onValueChangedObservable *Observable) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(onValueChangedObservable.JSObject())
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetOnValueChangedObservable sets the OnValueChangedObservable property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#onvaluechangedobservable
+func (i *ImageBasedSlider) SetOnValueChangedObservable(onValueChangedObservable *Observable) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(onValueChangedObservable.JSObject())
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// PaddingBottom returns the PaddingBottom property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#paddingbottom
+func (i *ImageBasedSlider) PaddingBottom(paddingBottom string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(paddingBottom)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingBottom sets the PaddingBottom property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#paddingbottom
+func (i *ImageBasedSlider) SetPaddingBottom(paddingBottom string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(paddingBottom)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// PaddingBottomInPixels returns the PaddingBottomInPixels property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#paddingbottominpixels
+func (i *ImageBasedSlider) PaddingBottomInPixels(paddingBottomInPixels float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(paddingBottomInPixels)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingBottomInPixels sets the PaddingBottomInPixels property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#paddingbottominpixels
+func (i *ImageBasedSlider) SetPaddingBottomInPixels(paddingBottomInPixels float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(paddingBottomInPixels)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// PaddingLeft returns the PaddingLeft property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#paddingleft
+func (i *ImageBasedSlider) PaddingLeft(paddingLeft string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(paddingLeft)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingLeft sets the PaddingLeft property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#paddingleft
+func (i *ImageBasedSlider) SetPaddingLeft(paddingLeft string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(paddingLeft)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// PaddingLeftInPixels returns the PaddingLeftInPixels property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#paddingleftinpixels
+func (i *ImageBasedSlider) PaddingLeftInPixels(paddingLeftInPixels float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(paddingLeftInPixels)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingLeftInPixels sets the PaddingLeftInPixels property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#paddingleftinpixels
+func (i *ImageBasedSlider) SetPaddingLeftInPixels(paddingLeftInPixels float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(paddingLeftInPixels)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// PaddingRight returns the PaddingRight property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#paddingright
+func (i *ImageBasedSlider) PaddingRight(paddingRight string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(paddingRight)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingRight sets the PaddingRight property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#paddingright
+func (i *ImageBasedSlider) SetPaddingRight(paddingRight string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(paddingRight)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// PaddingRightInPixels returns the PaddingRightInPixels property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#paddingrightinpixels
+func (i *ImageBasedSlider) PaddingRightInPixels(paddingRightInPixels float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(paddingRightInPixels)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingRightInPixels sets the PaddingRightInPixels property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#paddingrightinpixels
+func (i *ImageBasedSlider) SetPaddingRightInPixels(paddingRightInPixels float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(paddingRightInPixels)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// PaddingTop returns the PaddingTop property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#paddingtop
+func (i *ImageBasedSlider) PaddingTop(paddingTop string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(paddingTop)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingTop sets the PaddingTop property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#paddingtop
+func (i *ImageBasedSlider) SetPaddingTop(paddingTop string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(paddingTop)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// PaddingTopInPixels returns the PaddingTopInPixels property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#paddingtopinpixels
+func (i *ImageBasedSlider) PaddingTopInPixels(paddingTopInPixels float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(paddingTopInPixels)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingTopInPixels sets the PaddingTopInPixels property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#paddingtopinpixels
+func (i *ImageBasedSlider) SetPaddingTopInPixels(paddingTopInPixels float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(paddingTopInPixels)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// Parent returns the Parent property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#parent
+func (i *ImageBasedSlider) Parent(parent *Container) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(parent.JSObject())
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetParent sets the Parent property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#parent
+func (i *ImageBasedSlider) SetParent(parent *Container) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(parent.JSObject())
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// Rotation returns the Rotation property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#rotation
+func (i *ImageBasedSlider) Rotation(rotation float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(rotation)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetRotation sets the Rotation property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#rotation
+func (i *ImageBasedSlider) SetRotation(rotation float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(rotation)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// ScaleX returns the ScaleX property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#scalex
+func (i *ImageBasedSlider) ScaleX(scaleX float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(scaleX)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetScaleX sets the ScaleX property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#scalex
+func (i *ImageBasedSlider) SetScaleX(scaleX float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(scaleX)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// ScaleY returns the ScaleY property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#scaley
+func (i *ImageBasedSlider) ScaleY(scaleY float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(scaleY)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetScaleY sets the ScaleY property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#scaley
+func (i *ImageBasedSlider) SetScaleY(scaleY float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(scaleY)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// ShadowBlur returns the ShadowBlur property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#shadowblur
+func (i *ImageBasedSlider) ShadowBlur(shadowBlur float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(shadowBlur)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetShadowBlur sets the ShadowBlur property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#shadowblur
+func (i *ImageBasedSlider) SetShadowBlur(shadowBlur float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(shadowBlur)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// ShadowColor returns the ShadowColor property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#shadowcolor
+func (i *ImageBasedSlider) ShadowColor(shadowColor string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(shadowColor)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetShadowColor sets the ShadowColor property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#shadowcolor
+func (i *ImageBasedSlider) SetShadowColor(shadowColor string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(shadowColor)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// ShadowOffsetX returns the ShadowOffsetX property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#shadowoffsetx
+func (i *ImageBasedSlider) ShadowOffsetX(shadowOffsetX float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(shadowOffsetX)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetShadowOffsetX sets the ShadowOffsetX property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#shadowoffsetx
+func (i *ImageBasedSlider) SetShadowOffsetX(shadowOffsetX float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(shadowOffsetX)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// ShadowOffsetY returns the ShadowOffsetY property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#shadowoffsety
+func (i *ImageBasedSlider) ShadowOffsetY(shadowOffsetY float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(shadowOffsetY)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetShadowOffsetY sets the ShadowOffsetY property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#shadowoffsety
+func (i *ImageBasedSlider) SetShadowOffsetY(shadowOffsetY float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(shadowOffsetY)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// Step returns the Step property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#step
+func (i *ImageBasedSlider) Step(step float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(step)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetStep sets the Step property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#step
+func (i *ImageBasedSlider) SetStep(step float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(step)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// Style returns the Style property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#style
+func (i *ImageBasedSlider) Style(style *Style) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(style.JSObject())
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetStyle sets the Style property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#style
+func (i *ImageBasedSlider) SetStyle(style *Style) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(style.JSObject())
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// ThumbImage returns the ThumbImage property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#thumbimage
+func (i *ImageBasedSlider) ThumbImage(thumbImage *Image) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(thumbImage.JSObject())
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetThumbImage sets the ThumbImage property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#thumbimage
+func (i *ImageBasedSlider) SetThumbImage(thumbImage *Image) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(thumbImage.JSObject())
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// ThumbWidth returns the ThumbWidth property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#thumbwidth
+func (i *ImageBasedSlider) ThumbWidth(thumbWidth string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(thumbWidth)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetThumbWidth sets the ThumbWidth property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#thumbwidth
+func (i *ImageBasedSlider) SetThumbWidth(thumbWidth string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(thumbWidth)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// ThumbWidthInPixels returns the ThumbWidthInPixels property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#thumbwidthinpixels
+func (i *ImageBasedSlider) ThumbWidthInPixels(thumbWidthInPixels float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(thumbWidthInPixels)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetThumbWidthInPixels sets the ThumbWidthInPixels property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#thumbwidthinpixels
+func (i *ImageBasedSlider) SetThumbWidthInPixels(thumbWidthInPixels float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(thumbWidthInPixels)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// Top returns the Top property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#top
+func (i *ImageBasedSlider) Top(top string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(top)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetTop sets the Top property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#top
+func (i *ImageBasedSlider) SetTop(top string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(top)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// TopInPixels returns the TopInPixels property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#topinpixels
+func (i *ImageBasedSlider) TopInPixels(topInPixels float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(topInPixels)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetTopInPixels sets the TopInPixels property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#topinpixels
+func (i *ImageBasedSlider) SetTopInPixels(topInPixels float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(topInPixels)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// TransformCenterX returns the TransformCenterX property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#transformcenterx
+func (i *ImageBasedSlider) TransformCenterX(transformCenterX float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(transformCenterX)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetTransformCenterX sets the TransformCenterX property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#transformcenterx
+func (i *ImageBasedSlider) SetTransformCenterX(transformCenterX float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(transformCenterX)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// TransformCenterY returns the TransformCenterY property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#transformcentery
+func (i *ImageBasedSlider) TransformCenterY(transformCenterY float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(transformCenterY)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetTransformCenterY sets the TransformCenterY property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#transformcentery
+func (i *ImageBasedSlider) SetTransformCenterY(transformCenterY float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(transformCenterY)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// TypeName returns the TypeName property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#typename
+func (i *ImageBasedSlider) TypeName(typeName string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(typeName)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetTypeName sets the TypeName property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#typename
+func (i *ImageBasedSlider) SetTypeName(typeName string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(typeName)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#uniqueid
+func (i *ImageBasedSlider) UniqueId(uniqueId float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(uniqueId)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#uniqueid
+func (i *ImageBasedSlider) SetUniqueId(uniqueId float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(uniqueId)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// UseBitmapCache returns the UseBitmapCache property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#usebitmapcache
+func (i *ImageBasedSlider) UseBitmapCache(useBitmapCache bool) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(useBitmapCache)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetUseBitmapCache sets the UseBitmapCache property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#usebitmapcache
+func (i *ImageBasedSlider) SetUseBitmapCache(useBitmapCache bool) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(useBitmapCache)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// VERTICAL_ALIGNMENT_BOTTOM returns the VERTICAL_ALIGNMENT_BOTTOM property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#vertical_alignment_bottom
+func (i *ImageBasedSlider) VERTICAL_ALIGNMENT_BOTTOM(VERTICAL_ALIGNMENT_BOTTOM float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(VERTICAL_ALIGNMENT_BOTTOM)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetVERTICAL_ALIGNMENT_BOTTOM sets the VERTICAL_ALIGNMENT_BOTTOM property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#vertical_alignment_bottom
+func (i *ImageBasedSlider) SetVERTICAL_ALIGNMENT_BOTTOM(VERTICAL_ALIGNMENT_BOTTOM float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(VERTICAL_ALIGNMENT_BOTTOM)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// VERTICAL_ALIGNMENT_CENTER returns the VERTICAL_ALIGNMENT_CENTER property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#vertical_alignment_center
+func (i *ImageBasedSlider) VERTICAL_ALIGNMENT_CENTER(VERTICAL_ALIGNMENT_CENTER float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(VERTICAL_ALIGNMENT_CENTER)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetVERTICAL_ALIGNMENT_CENTER sets the VERTICAL_ALIGNMENT_CENTER property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#vertical_alignment_center
+func (i *ImageBasedSlider) SetVERTICAL_ALIGNMENT_CENTER(VERTICAL_ALIGNMENT_CENTER float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(VERTICAL_ALIGNMENT_CENTER)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// VERTICAL_ALIGNMENT_TOP returns the VERTICAL_ALIGNMENT_TOP property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#vertical_alignment_top
+func (i *ImageBasedSlider) VERTICAL_ALIGNMENT_TOP(VERTICAL_ALIGNMENT_TOP float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(VERTICAL_ALIGNMENT_TOP)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetVERTICAL_ALIGNMENT_TOP sets the VERTICAL_ALIGNMENT_TOP property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#vertical_alignment_top
+func (i *ImageBasedSlider) SetVERTICAL_ALIGNMENT_TOP(VERTICAL_ALIGNMENT_TOP float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(VERTICAL_ALIGNMENT_TOP)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// Value returns the Value property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#value
+func (i *ImageBasedSlider) Value(value float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(value)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetValue sets the Value property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#value
+func (i *ImageBasedSlider) SetValue(value float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(value)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// ValueBarImage returns the ValueBarImage property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#valuebarimage
+func (i *ImageBasedSlider) ValueBarImage(valueBarImage *Image) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(valueBarImage.JSObject())
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetValueBarImage sets the ValueBarImage property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#valuebarimage
+func (i *ImageBasedSlider) SetValueBarImage(valueBarImage *Image) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(valueBarImage.JSObject())
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// VerticalAlignment returns the VerticalAlignment property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#verticalalignment
+func (i *ImageBasedSlider) VerticalAlignment(verticalAlignment float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(verticalAlignment)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetVerticalAlignment sets the VerticalAlignment property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#verticalalignment
+func (i *ImageBasedSlider) SetVerticalAlignment(verticalAlignment float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(verticalAlignment)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// Width returns the Width property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#width
+func (i *ImageBasedSlider) Width(width string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(width)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetWidth sets the Width property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#width
+func (i *ImageBasedSlider) SetWidth(width string) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(width)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// WidthInPixels returns the WidthInPixels property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#widthinpixels
+func (i *ImageBasedSlider) WidthInPixels(widthInPixels float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(widthInPixels)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetWidthInPixels sets the WidthInPixels property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#widthinpixels
+func (i *ImageBasedSlider) SetWidthInPixels(widthInPixels float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(widthInPixels)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// ZIndex returns the ZIndex property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#zindex
+func (i *ImageBasedSlider) ZIndex(zIndex float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(zIndex)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+// SetZIndex sets the ZIndex property of class ImageBasedSlider.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagebasedslider#zindex
+func (i *ImageBasedSlider) SetZIndex(zIndex float64) *ImageBasedSlider {
+	p := ba.ctx.Get("ImageBasedSlider").New(zIndex)
+	return ImageBasedSliderFromJSObject(p, ba.ctx)
+}
+
+*/

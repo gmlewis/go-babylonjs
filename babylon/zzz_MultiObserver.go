@@ -27,4 +27,16 @@ func MultiObserverFromJSObject(p js.Value, ctx js.Value) *MultiObserver {
 	return &MultiObserver{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// Dispose calls the Dispose method on the MultiObserver object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multiobserver#dispose
+func (m *MultiObserver) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	m.p.Call("dispose", args...)
+}
+
+/*
+
+ */

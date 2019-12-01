@@ -32,7 +32,7 @@ func TargetCameraFromJSObject(p js.Value, ctx js.Value) *TargetCamera {
 
 // NewTargetCameraOpts contains optional parameters for NewTargetCamera.
 type NewTargetCameraOpts struct {
-	SetActiveOnSceneIfNoneActive *JSBool
+	SetActiveOnSceneIfNoneActive *bool
 }
 
 // NewTargetCamera returns a new TargetCamera object.
@@ -43,8 +43,2155 @@ func (ba *Babylon) NewTargetCamera(name string, position *Vector3, scene *Scene,
 		opts = &NewTargetCameraOpts{}
 	}
 
-	p := ba.ctx.Get("TargetCamera").New(name, position.JSObject(), scene.JSObject(), opts.SetActiveOnSceneIfNoneActive.JSObject())
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, name)
+	args = append(args, position.JSObject())
+	args = append(args, scene.JSObject())
+
+	if opts.SetActiveOnSceneIfNoneActive == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SetActiveOnSceneIfNoneActive)
+	}
+
+	p := ba.ctx.Get("TargetCamera").New(args...)
 	return TargetCameraFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// TargetCameraAddBehaviorOpts contains optional parameters for TargetCamera.AddBehavior.
+type TargetCameraAddBehaviorOpts struct {
+	AttachImmediately *Node
+}
+
+// AddBehavior calls the AddBehavior method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#addbehavior
+func (t *TargetCamera) AddBehavior(behavior js.Value, opts *TargetCameraAddBehaviorOpts) *Node {
+	if opts == nil {
+		opts = &TargetCameraAddBehaviorOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, behavior)
+
+	if opts.AttachImmediately == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.AttachImmediately.JSObject())
+	}
+
+	retVal := t.p.Call("addBehavior", args...)
+	return NodeFromJSObject(retVal, t.ctx)
+}
+
+// AddNodeConstructor calls the AddNodeConstructor method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#addnodeconstructor
+func (t *TargetCamera) AddNodeConstructor(jsType string, constructorFunc js.Value) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, jsType)
+	args = append(args, constructorFunc)
+
+	t.p.Call("AddNodeConstructor", args...)
+}
+
+// TargetCameraAttachControlOpts contains optional parameters for TargetCamera.AttachControl.
+type TargetCameraAttachControlOpts struct {
+	NoPreventDefault *bool
+}
+
+// AttachControl calls the AttachControl method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#attachcontrol
+func (t *TargetCamera) AttachControl(element js.Value, opts *TargetCameraAttachControlOpts) {
+	if opts == nil {
+		opts = &TargetCameraAttachControlOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, element)
+
+	if opts.NoPreventDefault == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoPreventDefault)
+	}
+
+	t.p.Call("attachControl", args...)
+}
+
+// TargetCameraAttachPostProcessOpts contains optional parameters for TargetCamera.AttachPostProcess.
+type TargetCameraAttachPostProcessOpts struct {
+	InsertAt *float64
+}
+
+// AttachPostProcess calls the AttachPostProcess method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#attachpostprocess
+func (t *TargetCamera) AttachPostProcess(postProcess *PostProcess, opts *TargetCameraAttachPostProcessOpts) float64 {
+	if opts == nil {
+		opts = &TargetCameraAttachPostProcessOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, postProcess.JSObject())
+
+	if opts.InsertAt == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.InsertAt)
+	}
+
+	retVal := t.p.Call("attachPostProcess", args...)
+	return retVal.Float()
+}
+
+// TargetCameraBeginAnimationOpts contains optional parameters for TargetCamera.BeginAnimation.
+type TargetCameraBeginAnimationOpts struct {
+	Loop           *bool
+	SpeedRatio     *float64
+	OnAnimationEnd *func()
+}
+
+// BeginAnimation calls the BeginAnimation method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#beginanimation
+func (t *TargetCamera) BeginAnimation(name string, opts *TargetCameraBeginAnimationOpts) *Animatable {
+	if opts == nil {
+		opts = &TargetCameraBeginAnimationOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, name)
+
+	if opts.Loop == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Loop)
+	}
+	if opts.SpeedRatio == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SpeedRatio)
+	}
+	if opts.OnAnimationEnd == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnAnimationEnd)
+	}
+
+	retVal := t.p.Call("beginAnimation", args...)
+	return AnimatableFromJSObject(retVal, t.ctx)
+}
+
+// Clone calls the Clone method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#clone
+func (t *TargetCamera) Clone(name string) *Camera {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := t.p.Call("clone", args...)
+	return CameraFromJSObject(retVal, t.ctx)
+}
+
+// ComputeWorldMatrix calls the ComputeWorldMatrix method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#computeworldmatrix
+func (t *TargetCamera) ComputeWorldMatrix() *Matrix {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("computeWorldMatrix", args...)
+	return MatrixFromJSObject(retVal, t.ctx)
+}
+
+// TargetCameraConstructOpts contains optional parameters for TargetCamera.Construct.
+type TargetCameraConstructOpts struct {
+	Options *interface{}
+}
+
+// Construct calls the Construct method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#construct
+func (t *TargetCamera) Construct(jsType string, name string, scene *Scene, opts *TargetCameraConstructOpts) func() {
+	if opts == nil {
+		opts = &TargetCameraConstructOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, jsType)
+	args = append(args, name)
+	args = append(args, scene.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	retVal := t.p.Call("Construct", args...)
+	return retVal
+}
+
+// CreateAnimationRange calls the CreateAnimationRange method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#createanimationrange
+func (t *TargetCamera) CreateAnimationRange(name string, from float64, to float64) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, name)
+	args = append(args, from)
+	args = append(args, to)
+
+	t.p.Call("createAnimationRange", args...)
+}
+
+// TargetCameraDeleteAnimationRangeOpts contains optional parameters for TargetCamera.DeleteAnimationRange.
+type TargetCameraDeleteAnimationRangeOpts struct {
+	DeleteFrames *bool
+}
+
+// DeleteAnimationRange calls the DeleteAnimationRange method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#deleteanimationrange
+func (t *TargetCamera) DeleteAnimationRange(name string, opts *TargetCameraDeleteAnimationRangeOpts) {
+	if opts == nil {
+		opts = &TargetCameraDeleteAnimationRangeOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, name)
+
+	if opts.DeleteFrames == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DeleteFrames)
+	}
+
+	t.p.Call("deleteAnimationRange", args...)
+}
+
+// DetachControl calls the DetachControl method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#detachcontrol
+func (t *TargetCamera) DetachControl(element js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, element)
+
+	t.p.Call("detachControl", args...)
+}
+
+// DetachPostProcess calls the DetachPostProcess method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#detachpostprocess
+func (t *TargetCamera) DetachPostProcess(postProcess *PostProcess) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, postProcess.JSObject())
+
+	t.p.Call("detachPostProcess", args...)
+}
+
+// TargetCameraDisposeOpts contains optional parameters for TargetCamera.Dispose.
+type TargetCameraDisposeOpts struct {
+	DoNotRecurse               *bool
+	DisposeMaterialAndTextures *bool
+}
+
+// Dispose calls the Dispose method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#dispose
+func (t *TargetCamera) Dispose(opts *TargetCameraDisposeOpts) {
+	if opts == nil {
+		opts = &TargetCameraDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.DoNotRecurse == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DoNotRecurse)
+	}
+	if opts.DisposeMaterialAndTextures == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DisposeMaterialAndTextures)
+	}
+
+	t.p.Call("dispose", args...)
+}
+
+// TargetCameraFreezeProjectionMatrixOpts contains optional parameters for TargetCamera.FreezeProjectionMatrix.
+type TargetCameraFreezeProjectionMatrixOpts struct {
+	Projection *Matrix
+}
+
+// FreezeProjectionMatrix calls the FreezeProjectionMatrix method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#freezeprojectionmatrix
+func (t *TargetCamera) FreezeProjectionMatrix(opts *TargetCameraFreezeProjectionMatrixOpts) {
+	if opts == nil {
+		opts = &TargetCameraFreezeProjectionMatrixOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Projection == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Projection.JSObject())
+	}
+
+	t.p.Call("freezeProjectionMatrix", args...)
+}
+
+// GetActiveMeshes calls the GetActiveMeshes method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#getactivemeshes
+func (t *TargetCamera) GetActiveMeshes() *AbstractMesh {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getActiveMeshes", args...)
+	return AbstractMeshFromJSObject(retVal, t.ctx)
+}
+
+// GetAnimationByName calls the GetAnimationByName method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#getanimationbyname
+func (t *TargetCamera) GetAnimationByName(name string) *Animation {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := t.p.Call("getAnimationByName", args...)
+	return AnimationFromJSObject(retVal, t.ctx)
+}
+
+// GetAnimationRange calls the GetAnimationRange method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#getanimationrange
+func (t *TargetCamera) GetAnimationRange(name string) *AnimationRange {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := t.p.Call("getAnimationRange", args...)
+	return AnimationRangeFromJSObject(retVal, t.ctx)
+}
+
+// GetAnimationRanges calls the GetAnimationRanges method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#getanimationranges
+func (t *TargetCamera) GetAnimationRanges() *AnimationRange {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getAnimationRanges", args...)
+	return AnimationRangeFromJSObject(retVal, t.ctx)
+}
+
+// GetBehaviorByName calls the GetBehaviorByName method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#getbehaviorbyname
+func (t *TargetCamera) GetBehaviorByName(name string) *Node {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := t.p.Call("getBehaviorByName", args...)
+	return NodeFromJSObject(retVal, t.ctx)
+}
+
+// TargetCameraGetChildMeshesOpts contains optional parameters for TargetCamera.GetChildMeshes.
+type TargetCameraGetChildMeshesOpts struct {
+	DirectDescendantsOnly *bool
+	Predicate             *func()
+}
+
+// GetChildMeshes calls the GetChildMeshes method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#getchildmeshes
+func (t *TargetCamera) GetChildMeshes(opts *TargetCameraGetChildMeshesOpts) *AbstractMesh {
+	if opts == nil {
+		opts = &TargetCameraGetChildMeshesOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	retVal := t.p.Call("getChildMeshes", args...)
+	return AbstractMeshFromJSObject(retVal, t.ctx)
+}
+
+// TargetCameraGetChildrenOpts contains optional parameters for TargetCamera.GetChildren.
+type TargetCameraGetChildrenOpts struct {
+	Predicate             *func()
+	DirectDescendantsOnly *bool
+}
+
+// GetChildren calls the GetChildren method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#getchildren
+func (t *TargetCamera) GetChildren(opts *TargetCameraGetChildrenOpts) *Node {
+	if opts == nil {
+		opts = &TargetCameraGetChildrenOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+
+	retVal := t.p.Call("getChildren", args...)
+	return NodeFromJSObject(retVal, t.ctx)
+}
+
+// GetClassName calls the GetClassName method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#getclassname
+func (t *TargetCamera) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// TargetCameraGetConstructorFromNameOpts contains optional parameters for TargetCamera.GetConstructorFromName.
+type TargetCameraGetConstructorFromNameOpts struct {
+	Interaxial_distance      *float64
+	IsStereoscopicSideBySide *bool
+}
+
+// GetConstructorFromName calls the GetConstructorFromName method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#getconstructorfromname
+func (t *TargetCamera) GetConstructorFromName(jsType string, name string, scene *Scene, opts *TargetCameraGetConstructorFromNameOpts) func() {
+	if opts == nil {
+		opts = &TargetCameraGetConstructorFromNameOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+2)
+
+	args = append(args, jsType)
+	args = append(args, name)
+	args = append(args, scene.JSObject())
+
+	if opts.Interaxial_distance == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Interaxial_distance)
+	}
+	if opts.IsStereoscopicSideBySide == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IsStereoscopicSideBySide)
+	}
+
+	retVal := t.p.Call("GetConstructorFromName", args...)
+	return retVal
+}
+
+// TargetCameraGetDescendantsOpts contains optional parameters for TargetCamera.GetDescendants.
+type TargetCameraGetDescendantsOpts struct {
+	DirectDescendantsOnly *bool
+	Predicate             *func()
+}
+
+// GetDescendants calls the GetDescendants method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#getdescendants
+func (t *TargetCamera) GetDescendants(opts *TargetCameraGetDescendantsOpts) *Node {
+	if opts == nil {
+		opts = &TargetCameraGetDescendantsOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	retVal := t.p.Call("getDescendants", args...)
+	return NodeFromJSObject(retVal, t.ctx)
+}
+
+// GetDirection calls the GetDirection method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#getdirection
+func (t *TargetCamera) GetDirection(localAxis *Vector3) *Vector3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, localAxis.JSObject())
+
+	retVal := t.p.Call("getDirection", args...)
+	return Vector3FromJSObject(retVal, t.ctx)
+}
+
+// GetDirectionToRef calls the GetDirectionToRef method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#getdirectiontoref
+func (t *TargetCamera) GetDirectionToRef(localAxis *Vector3, result *Vector3) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, localAxis.JSObject())
+	args = append(args, result.JSObject())
+
+	t.p.Call("getDirectionToRef", args...)
+}
+
+// GetEngine calls the GetEngine method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#getengine
+func (t *TargetCamera) GetEngine() *Engine {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getEngine", args...)
+	return EngineFromJSObject(retVal, t.ctx)
+}
+
+// TargetCameraGetForwardRayOpts contains optional parameters for TargetCamera.GetForwardRay.
+type TargetCameraGetForwardRayOpts struct {
+	Length    *float64
+	Transform *Matrix
+	Origin    *Vector3
+}
+
+// GetForwardRay calls the GetForwardRay method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#getforwardray
+func (t *TargetCamera) GetForwardRay(opts *TargetCameraGetForwardRayOpts) *Ray {
+	if opts == nil {
+		opts = &TargetCameraGetForwardRayOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+3)
+
+	if opts.Length == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Length)
+	}
+	if opts.Transform == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Transform.JSObject())
+	}
+	if opts.Origin == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Origin.JSObject())
+	}
+
+	retVal := t.p.Call("getForwardRay", args...)
+	return RayFromJSObject(retVal, t.ctx)
+}
+
+// GetFrontPosition calls the GetFrontPosition method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#getfrontposition
+func (t *TargetCamera) GetFrontPosition(distance float64) *Vector3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, distance)
+
+	retVal := t.p.Call("getFrontPosition", args...)
+	return Vector3FromJSObject(retVal, t.ctx)
+}
+
+// TargetCameraGetHierarchyBoundingVectorsOpts contains optional parameters for TargetCamera.GetHierarchyBoundingVectors.
+type TargetCameraGetHierarchyBoundingVectorsOpts struct {
+	IncludeDescendants *bool
+	Predicate          *func()
+}
+
+// GetHierarchyBoundingVectors calls the GetHierarchyBoundingVectors method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#gethierarchyboundingvectors
+func (t *TargetCamera) GetHierarchyBoundingVectors(opts *TargetCameraGetHierarchyBoundingVectorsOpts) js.Value {
+	if opts == nil {
+		opts = &TargetCameraGetHierarchyBoundingVectorsOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.IncludeDescendants == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IncludeDescendants)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	retVal := t.p.Call("getHierarchyBoundingVectors", args...)
+	return retVal
+}
+
+// GetLeftTarget calls the GetLeftTarget method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#getlefttarget
+func (t *TargetCamera) GetLeftTarget() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getLeftTarget", args...)
+	return Vector3FromJSObject(retVal, t.ctx)
+}
+
+// TargetCameraGetProjectionMatrixOpts contains optional parameters for TargetCamera.GetProjectionMatrix.
+type TargetCameraGetProjectionMatrixOpts struct {
+	Force *bool
+}
+
+// GetProjectionMatrix calls the GetProjectionMatrix method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#getprojectionmatrix
+func (t *TargetCamera) GetProjectionMatrix(opts *TargetCameraGetProjectionMatrixOpts) *Matrix {
+	if opts == nil {
+		opts = &TargetCameraGetProjectionMatrixOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Force == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Force)
+	}
+
+	retVal := t.p.Call("getProjectionMatrix", args...)
+	return MatrixFromJSObject(retVal, t.ctx)
+}
+
+// GetRightTarget calls the GetRightTarget method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#getrighttarget
+func (t *TargetCamera) GetRightTarget() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getRightTarget", args...)
+	return Vector3FromJSObject(retVal, t.ctx)
+}
+
+// GetScene calls the GetScene method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#getscene
+func (t *TargetCamera) GetScene() *Scene {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getScene", args...)
+	return SceneFromJSObject(retVal, t.ctx)
+}
+
+// GetTarget calls the GetTarget method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#gettarget
+func (t *TargetCamera) GetTarget() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getTarget", args...)
+	return Vector3FromJSObject(retVal, t.ctx)
+}
+
+// GetTransformationMatrix calls the GetTransformationMatrix method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#gettransformationmatrix
+func (t *TargetCamera) GetTransformationMatrix() *Matrix {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getTransformationMatrix", args...)
+	return MatrixFromJSObject(retVal, t.ctx)
+}
+
+// TargetCameraGetViewMatrixOpts contains optional parameters for TargetCamera.GetViewMatrix.
+type TargetCameraGetViewMatrixOpts struct {
+	Force *bool
+}
+
+// GetViewMatrix calls the GetViewMatrix method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#getviewmatrix
+func (t *TargetCamera) GetViewMatrix(opts *TargetCameraGetViewMatrixOpts) *Matrix {
+	if opts == nil {
+		opts = &TargetCameraGetViewMatrixOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Force == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Force)
+	}
+
+	retVal := t.p.Call("getViewMatrix", args...)
+	return MatrixFromJSObject(retVal, t.ctx)
+}
+
+// GetWorldMatrix calls the GetWorldMatrix method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#getworldmatrix
+func (t *TargetCamera) GetWorldMatrix() *Matrix {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getWorldMatrix", args...)
+	return MatrixFromJSObject(retVal, t.ctx)
+}
+
+// IsActiveMesh calls the IsActiveMesh method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#isactivemesh
+func (t *TargetCamera) IsActiveMesh(mesh *Mesh) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	retVal := t.p.Call("isActiveMesh", args...)
+	return retVal.Bool()
+}
+
+// IsCompletelyInFrustum calls the IsCompletelyInFrustum method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#iscompletelyinfrustum
+func (t *TargetCamera) IsCompletelyInFrustum(target js.Value) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, target)
+
+	retVal := t.p.Call("isCompletelyInFrustum", args...)
+	return retVal.Bool()
+}
+
+// IsDescendantOf calls the IsDescendantOf method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#isdescendantof
+func (t *TargetCamera) IsDescendantOf(ancestor *Node) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, ancestor.JSObject())
+
+	retVal := t.p.Call("isDescendantOf", args...)
+	return retVal.Bool()
+}
+
+// IsDisposed calls the IsDisposed method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#isdisposed
+func (t *TargetCamera) IsDisposed() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("isDisposed", args...)
+	return retVal.Bool()
+}
+
+// TargetCameraIsEnabledOpts contains optional parameters for TargetCamera.IsEnabled.
+type TargetCameraIsEnabledOpts struct {
+	CheckAncestors *bool
+}
+
+// IsEnabled calls the IsEnabled method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#isenabled
+func (t *TargetCamera) IsEnabled(opts *TargetCameraIsEnabledOpts) bool {
+	if opts == nil {
+		opts = &TargetCameraIsEnabledOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.CheckAncestors == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.CheckAncestors)
+	}
+
+	retVal := t.p.Call("isEnabled", args...)
+	return retVal.Bool()
+}
+
+// TargetCameraIsInFrustumOpts contains optional parameters for TargetCamera.IsInFrustum.
+type TargetCameraIsInFrustumOpts struct {
+	CheckRigCameras *bool
+}
+
+// IsInFrustum calls the IsInFrustum method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#isinfrustum
+func (t *TargetCamera) IsInFrustum(target js.Value, opts *TargetCameraIsInFrustumOpts) bool {
+	if opts == nil {
+		opts = &TargetCameraIsInFrustumOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, target)
+
+	if opts.CheckRigCameras == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.CheckRigCameras)
+	}
+
+	retVal := t.p.Call("isInFrustum", args...)
+	return retVal.Bool()
+}
+
+// TargetCameraIsReadyOpts contains optional parameters for TargetCamera.IsReady.
+type TargetCameraIsReadyOpts struct {
+	CompleteCheck *bool
+}
+
+// IsReady calls the IsReady method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#isready
+func (t *TargetCamera) IsReady(opts *TargetCameraIsReadyOpts) bool {
+	if opts == nil {
+		opts = &TargetCameraIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.CompleteCheck == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.CompleteCheck)
+	}
+
+	retVal := t.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// Parse calls the Parse method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#parse
+func (t *TargetCamera) Parse(parsedCamera interface{}, scene *Scene) *Camera {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, parsedCamera)
+	args = append(args, scene.JSObject())
+
+	retVal := t.p.Call("Parse", args...)
+	return CameraFromJSObject(retVal, t.ctx)
+}
+
+// ParseAnimationRanges calls the ParseAnimationRanges method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#parseanimationranges
+func (t *TargetCamera) ParseAnimationRanges(node *Node, parsedNode interface{}, scene *Scene) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, node.JSObject())
+	args = append(args, parsedNode)
+	args = append(args, scene.JSObject())
+
+	t.p.Call("ParseAnimationRanges", args...)
+}
+
+// RemoveBehavior calls the RemoveBehavior method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#removebehavior
+func (t *TargetCamera) RemoveBehavior(behavior js.Value) *Node {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, behavior)
+
+	retVal := t.p.Call("removeBehavior", args...)
+	return NodeFromJSObject(retVal, t.ctx)
+}
+
+// RestoreState calls the RestoreState method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#restorestate
+func (t *TargetCamera) RestoreState() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("restoreState", args...)
+	return retVal.Bool()
+}
+
+// Serialize calls the Serialize method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#serialize
+func (t *TargetCamera) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("serialize", args...)
+	return retVal
+}
+
+// SerializeAnimationRanges calls the SerializeAnimationRanges method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#serializeanimationranges
+func (t *TargetCamera) SerializeAnimationRanges() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("serializeAnimationRanges", args...)
+	return retVal
+}
+
+// SetEnabled calls the SetEnabled method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#setenabled
+func (t *TargetCamera) SetEnabled(value bool) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, value)
+
+	t.p.Call("setEnabled", args...)
+}
+
+// SetTarget calls the SetTarget method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#settarget
+func (t *TargetCamera) SetTarget(target *Vector3) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, target.JSObject())
+
+	t.p.Call("setTarget", args...)
+}
+
+// StoreState calls the StoreState method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#storestate
+func (t *TargetCamera) StoreState() *Camera {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("storeState", args...)
+	return CameraFromJSObject(retVal, t.ctx)
+}
+
+// TargetCameraToStringOpts contains optional parameters for TargetCamera.ToString.
+type TargetCameraToStringOpts struct {
+	FullDetails *bool
+}
+
+// ToString calls the ToString method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#tostring
+func (t *TargetCamera) ToString(opts *TargetCameraToStringOpts) string {
+	if opts == nil {
+		opts = &TargetCameraToStringOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.FullDetails == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FullDetails)
+	}
+
+	retVal := t.p.Call("toString", args...)
+	return retVal.String()
+}
+
+// UnfreezeProjectionMatrix calls the UnfreezeProjectionMatrix method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#unfreezeprojectionmatrix
+func (t *TargetCamera) UnfreezeProjectionMatrix() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	t.p.Call("unfreezeProjectionMatrix", args...)
+}
+
+// Update calls the Update method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#update
+func (t *TargetCamera) Update() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	t.p.Call("update", args...)
+}
+
+// _getFirstPostProcess calls the _getFirstPostProcess method on the TargetCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#_getfirstpostprocess
+func (t *TargetCamera) _getFirstPostProcess() *PostProcess {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("_getFirstPostProcess", args...)
+	return PostProcessFromJSObject(retVal, t.ctx)
+}
+
+/*
+
+// AbsoluteRotation returns the AbsoluteRotation property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#absoluterotation
+func (t *TargetCamera) AbsoluteRotation(absoluteRotation *Quaternion) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(absoluteRotation.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetAbsoluteRotation sets the AbsoluteRotation property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#absoluterotation
+func (t *TargetCamera) SetAbsoluteRotation(absoluteRotation *Quaternion) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(absoluteRotation.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// AnimationPropertiesOverride returns the AnimationPropertiesOverride property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#animationpropertiesoverride
+func (t *TargetCamera) AnimationPropertiesOverride(animationPropertiesOverride *AnimationPropertiesOverride) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(animationPropertiesOverride.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetAnimationPropertiesOverride sets the AnimationPropertiesOverride property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#animationpropertiesoverride
+func (t *TargetCamera) SetAnimationPropertiesOverride(animationPropertiesOverride *AnimationPropertiesOverride) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(animationPropertiesOverride.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// Animations returns the Animations property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#animations
+func (t *TargetCamera) Animations(animations *Animation) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(animations.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#animations
+func (t *TargetCamera) SetAnimations(animations *Animation) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(animations.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// Behaviors returns the Behaviors property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#behaviors
+func (t *TargetCamera) Behaviors(behaviors js.Value) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(behaviors)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetBehaviors sets the Behaviors property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#behaviors
+func (t *TargetCamera) SetBehaviors(behaviors js.Value) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(behaviors)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// CameraDirection returns the CameraDirection property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#cameradirection
+func (t *TargetCamera) CameraDirection(cameraDirection *Vector3) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(cameraDirection.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetCameraDirection sets the CameraDirection property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#cameradirection
+func (t *TargetCamera) SetCameraDirection(cameraDirection *Vector3) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(cameraDirection.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// CameraRigMode returns the CameraRigMode property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#camerarigmode
+func (t *TargetCamera) CameraRigMode(cameraRigMode float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(cameraRigMode)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetCameraRigMode sets the CameraRigMode property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#camerarigmode
+func (t *TargetCamera) SetCameraRigMode(cameraRigMode float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(cameraRigMode)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// CameraRotation returns the CameraRotation property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#camerarotation
+func (t *TargetCamera) CameraRotation(cameraRotation *Vector2) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(cameraRotation.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetCameraRotation sets the CameraRotation property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#camerarotation
+func (t *TargetCamera) SetCameraRotation(cameraRotation *Vector2) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(cameraRotation.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// CustomRenderTargets returns the CustomRenderTargets property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#customrendertargets
+func (t *TargetCamera) CustomRenderTargets(customRenderTargets *RenderTargetTexture) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(customRenderTargets.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetCustomRenderTargets sets the CustomRenderTargets property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#customrendertargets
+func (t *TargetCamera) SetCustomRenderTargets(customRenderTargets *RenderTargetTexture) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(customRenderTargets.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// DoNotSerialize returns the DoNotSerialize property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#donotserialize
+func (t *TargetCamera) DoNotSerialize(doNotSerialize bool) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(doNotSerialize)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetDoNotSerialize sets the DoNotSerialize property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#donotserialize
+func (t *TargetCamera) SetDoNotSerialize(doNotSerialize bool) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(doNotSerialize)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// FOVMODE_HORIZONTAL_FIXED returns the FOVMODE_HORIZONTAL_FIXED property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#fovmode_horizontal_fixed
+func (t *TargetCamera) FOVMODE_HORIZONTAL_FIXED(FOVMODE_HORIZONTAL_FIXED float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(FOVMODE_HORIZONTAL_FIXED)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetFOVMODE_HORIZONTAL_FIXED sets the FOVMODE_HORIZONTAL_FIXED property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#fovmode_horizontal_fixed
+func (t *TargetCamera) SetFOVMODE_HORIZONTAL_FIXED(FOVMODE_HORIZONTAL_FIXED float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(FOVMODE_HORIZONTAL_FIXED)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// FOVMODE_VERTICAL_FIXED returns the FOVMODE_VERTICAL_FIXED property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#fovmode_vertical_fixed
+func (t *TargetCamera) FOVMODE_VERTICAL_FIXED(FOVMODE_VERTICAL_FIXED float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(FOVMODE_VERTICAL_FIXED)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetFOVMODE_VERTICAL_FIXED sets the FOVMODE_VERTICAL_FIXED property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#fovmode_vertical_fixed
+func (t *TargetCamera) SetFOVMODE_VERTICAL_FIXED(FOVMODE_VERTICAL_FIXED float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(FOVMODE_VERTICAL_FIXED)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// ForceAttachControlToAlwaysPreventDefault returns the ForceAttachControlToAlwaysPreventDefault property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#forceattachcontroltoalwayspreventdefault
+func (t *TargetCamera) ForceAttachControlToAlwaysPreventDefault(ForceAttachControlToAlwaysPreventDefault bool) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(ForceAttachControlToAlwaysPreventDefault)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetForceAttachControlToAlwaysPreventDefault sets the ForceAttachControlToAlwaysPreventDefault property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#forceattachcontroltoalwayspreventdefault
+func (t *TargetCamera) SetForceAttachControlToAlwaysPreventDefault(ForceAttachControlToAlwaysPreventDefault bool) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(ForceAttachControlToAlwaysPreventDefault)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// Fov returns the Fov property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#fov
+func (t *TargetCamera) Fov(fov float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(fov)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetFov sets the Fov property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#fov
+func (t *TargetCamera) SetFov(fov float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(fov)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// FovMode returns the FovMode property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#fovmode
+func (t *TargetCamera) FovMode(fovMode float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(fovMode)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetFovMode sets the FovMode property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#fovmode
+func (t *TargetCamera) SetFovMode(fovMode float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(fovMode)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// GlobalPosition returns the GlobalPosition property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#globalposition
+func (t *TargetCamera) GlobalPosition(globalPosition *Vector3) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(globalPosition.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetGlobalPosition sets the GlobalPosition property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#globalposition
+func (t *TargetCamera) SetGlobalPosition(globalPosition *Vector3) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(globalPosition.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// Id returns the Id property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#id
+func (t *TargetCamera) Id(id string) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(id)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetId sets the Id property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#id
+func (t *TargetCamera) SetId(id string) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(id)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// Inertia returns the Inertia property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#inertia
+func (t *TargetCamera) Inertia(inertia float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(inertia)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetInertia sets the Inertia property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#inertia
+func (t *TargetCamera) SetInertia(inertia float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(inertia)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// Inputs returns the Inputs property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#inputs
+func (t *TargetCamera) Inputs(inputs *CameraInputsManager) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(inputs.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetInputs sets the Inputs property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#inputs
+func (t *TargetCamera) SetInputs(inputs *CameraInputsManager) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(inputs.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#inspectablecustomproperties
+func (t *TargetCamera) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(inspectableCustomProperties.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#inspectablecustomproperties
+func (t *TargetCamera) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(inspectableCustomProperties.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// InteraxialDistance returns the InteraxialDistance property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#interaxialdistance
+func (t *TargetCamera) InteraxialDistance(interaxialDistance float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(interaxialDistance)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetInteraxialDistance sets the InteraxialDistance property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#interaxialdistance
+func (t *TargetCamera) SetInteraxialDistance(interaxialDistance float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(interaxialDistance)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// IsIntermediate returns the IsIntermediate property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#isintermediate
+func (t *TargetCamera) IsIntermediate(isIntermediate bool) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(isIntermediate)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetIsIntermediate sets the IsIntermediate property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#isintermediate
+func (t *TargetCamera) SetIsIntermediate(isIntermediate bool) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(isIntermediate)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// IsLeftCamera returns the IsLeftCamera property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#isleftcamera
+func (t *TargetCamera) IsLeftCamera(isLeftCamera bool) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(isLeftCamera)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetIsLeftCamera sets the IsLeftCamera property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#isleftcamera
+func (t *TargetCamera) SetIsLeftCamera(isLeftCamera bool) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(isLeftCamera)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// IsRightCamera returns the IsRightCamera property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#isrightcamera
+func (t *TargetCamera) IsRightCamera(isRightCamera bool) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(isRightCamera)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetIsRightCamera sets the IsRightCamera property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#isrightcamera
+func (t *TargetCamera) SetIsRightCamera(isRightCamera bool) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(isRightCamera)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// IsStereoscopicSideBySide returns the IsStereoscopicSideBySide property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#isstereoscopicsidebyside
+func (t *TargetCamera) IsStereoscopicSideBySide(isStereoscopicSideBySide bool) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(isStereoscopicSideBySide)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetIsStereoscopicSideBySide sets the IsStereoscopicSideBySide property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#isstereoscopicsidebyside
+func (t *TargetCamera) SetIsStereoscopicSideBySide(isStereoscopicSideBySide bool) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(isStereoscopicSideBySide)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// LayerMask returns the LayerMask property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#layermask
+func (t *TargetCamera) LayerMask(layerMask float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(layerMask)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetLayerMask sets the LayerMask property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#layermask
+func (t *TargetCamera) SetLayerMask(layerMask float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(layerMask)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// LeftCamera returns the LeftCamera property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#leftcamera
+func (t *TargetCamera) LeftCamera(leftCamera *FreeCamera) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(leftCamera.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetLeftCamera sets the LeftCamera property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#leftcamera
+func (t *TargetCamera) SetLeftCamera(leftCamera *FreeCamera) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(leftCamera.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// LockedTarget returns the LockedTarget property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#lockedtarget
+func (t *TargetCamera) LockedTarget(lockedTarget interface{}) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(lockedTarget)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetLockedTarget sets the LockedTarget property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#lockedtarget
+func (t *TargetCamera) SetLockedTarget(lockedTarget interface{}) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(lockedTarget)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// MaxZ returns the MaxZ property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#maxz
+func (t *TargetCamera) MaxZ(maxZ float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(maxZ)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetMaxZ sets the MaxZ property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#maxz
+func (t *TargetCamera) SetMaxZ(maxZ float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(maxZ)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#metadata
+func (t *TargetCamera) Metadata(metadata interface{}) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(metadata)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#metadata
+func (t *TargetCamera) SetMetadata(metadata interface{}) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(metadata)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// MinZ returns the MinZ property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#minz
+func (t *TargetCamera) MinZ(minZ float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(minZ)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetMinZ sets the MinZ property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#minz
+func (t *TargetCamera) SetMinZ(minZ float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(minZ)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// Mode returns the Mode property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#mode
+func (t *TargetCamera) Mode(mode float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(mode)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetMode sets the Mode property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#mode
+func (t *TargetCamera) SetMode(mode float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(mode)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#name
+func (t *TargetCamera) Name(name string) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(name)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#name
+func (t *TargetCamera) SetName(name string) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(name)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// NoRotationConstraint returns the NoRotationConstraint property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#norotationconstraint
+func (t *TargetCamera) NoRotationConstraint(noRotationConstraint bool) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(noRotationConstraint)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetNoRotationConstraint sets the NoRotationConstraint property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#norotationconstraint
+func (t *TargetCamera) SetNoRotationConstraint(noRotationConstraint bool) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(noRotationConstraint)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// ORTHOGRAPHIC_CAMERA returns the ORTHOGRAPHIC_CAMERA property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#orthographic_camera
+func (t *TargetCamera) ORTHOGRAPHIC_CAMERA(ORTHOGRAPHIC_CAMERA float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(ORTHOGRAPHIC_CAMERA)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetORTHOGRAPHIC_CAMERA sets the ORTHOGRAPHIC_CAMERA property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#orthographic_camera
+func (t *TargetCamera) SetORTHOGRAPHIC_CAMERA(ORTHOGRAPHIC_CAMERA float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(ORTHOGRAPHIC_CAMERA)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// OnAfterCheckInputsObservable returns the OnAfterCheckInputsObservable property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#onaftercheckinputsobservable
+func (t *TargetCamera) OnAfterCheckInputsObservable(onAfterCheckInputsObservable *Observable) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(onAfterCheckInputsObservable.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterCheckInputsObservable sets the OnAfterCheckInputsObservable property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#onaftercheckinputsobservable
+func (t *TargetCamera) SetOnAfterCheckInputsObservable(onAfterCheckInputsObservable *Observable) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(onAfterCheckInputsObservable.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// OnDispose returns the OnDispose property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#ondispose
+func (t *TargetCamera) OnDispose(onDispose func()) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(onDispose)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetOnDispose sets the OnDispose property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#ondispose
+func (t *TargetCamera) SetOnDispose(onDispose func()) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(onDispose)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// OnDisposeObservable returns the OnDisposeObservable property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#ondisposeobservable
+func (t *TargetCamera) OnDisposeObservable(onDisposeObservable *Observable) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(onDisposeObservable.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetOnDisposeObservable sets the OnDisposeObservable property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#ondisposeobservable
+func (t *TargetCamera) SetOnDisposeObservable(onDisposeObservable *Observable) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(onDisposeObservable.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// OnProjectionMatrixChangedObservable returns the OnProjectionMatrixChangedObservable property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#onprojectionmatrixchangedobservable
+func (t *TargetCamera) OnProjectionMatrixChangedObservable(onProjectionMatrixChangedObservable *Observable) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(onProjectionMatrixChangedObservable.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetOnProjectionMatrixChangedObservable sets the OnProjectionMatrixChangedObservable property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#onprojectionmatrixchangedobservable
+func (t *TargetCamera) SetOnProjectionMatrixChangedObservable(onProjectionMatrixChangedObservable *Observable) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(onProjectionMatrixChangedObservable.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// OnReady returns the OnReady property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#onready
+func (t *TargetCamera) OnReady(onReady func()) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(onReady)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetOnReady sets the OnReady property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#onready
+func (t *TargetCamera) SetOnReady(onReady func()) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(onReady)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// OnRestoreStateObservable returns the OnRestoreStateObservable property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#onrestorestateobservable
+func (t *TargetCamera) OnRestoreStateObservable(onRestoreStateObservable *Observable) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(onRestoreStateObservable.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetOnRestoreStateObservable sets the OnRestoreStateObservable property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#onrestorestateobservable
+func (t *TargetCamera) SetOnRestoreStateObservable(onRestoreStateObservable *Observable) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(onRestoreStateObservable.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// OnViewMatrixChangedObservable returns the OnViewMatrixChangedObservable property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#onviewmatrixchangedobservable
+func (t *TargetCamera) OnViewMatrixChangedObservable(onViewMatrixChangedObservable *Observable) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(onViewMatrixChangedObservable.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetOnViewMatrixChangedObservable sets the OnViewMatrixChangedObservable property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#onviewmatrixchangedobservable
+func (t *TargetCamera) SetOnViewMatrixChangedObservable(onViewMatrixChangedObservable *Observable) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(onViewMatrixChangedObservable.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// OrthoBottom returns the OrthoBottom property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#orthobottom
+func (t *TargetCamera) OrthoBottom(orthoBottom float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(orthoBottom)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetOrthoBottom sets the OrthoBottom property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#orthobottom
+func (t *TargetCamera) SetOrthoBottom(orthoBottom float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(orthoBottom)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// OrthoLeft returns the OrthoLeft property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#ortholeft
+func (t *TargetCamera) OrthoLeft(orthoLeft float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(orthoLeft)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetOrthoLeft sets the OrthoLeft property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#ortholeft
+func (t *TargetCamera) SetOrthoLeft(orthoLeft float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(orthoLeft)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// OrthoRight returns the OrthoRight property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#orthoright
+func (t *TargetCamera) OrthoRight(orthoRight float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(orthoRight)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetOrthoRight sets the OrthoRight property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#orthoright
+func (t *TargetCamera) SetOrthoRight(orthoRight float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(orthoRight)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// OrthoTop returns the OrthoTop property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#orthotop
+func (t *TargetCamera) OrthoTop(orthoTop float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(orthoTop)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetOrthoTop sets the OrthoTop property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#orthotop
+func (t *TargetCamera) SetOrthoTop(orthoTop float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(orthoTop)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// OutputRenderTarget returns the OutputRenderTarget property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#outputrendertarget
+func (t *TargetCamera) OutputRenderTarget(outputRenderTarget *RenderTargetTexture) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(outputRenderTarget.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetOutputRenderTarget sets the OutputRenderTarget property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#outputrendertarget
+func (t *TargetCamera) SetOutputRenderTarget(outputRenderTarget *RenderTargetTexture) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(outputRenderTarget.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// PERSPECTIVE_CAMERA returns the PERSPECTIVE_CAMERA property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#perspective_camera
+func (t *TargetCamera) PERSPECTIVE_CAMERA(PERSPECTIVE_CAMERA float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(PERSPECTIVE_CAMERA)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetPERSPECTIVE_CAMERA sets the PERSPECTIVE_CAMERA property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#perspective_camera
+func (t *TargetCamera) SetPERSPECTIVE_CAMERA(PERSPECTIVE_CAMERA float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(PERSPECTIVE_CAMERA)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// Parent returns the Parent property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#parent
+func (t *TargetCamera) Parent(parent *Node) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(parent.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetParent sets the Parent property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#parent
+func (t *TargetCamera) SetParent(parent *Node) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(parent.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// Position returns the Position property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#position
+func (t *TargetCamera) Position(position *Vector3) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(position.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetPosition sets the Position property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#position
+func (t *TargetCamera) SetPosition(position *Vector3) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(position.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// RIG_MODE_CUSTOM returns the RIG_MODE_CUSTOM property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#rig_mode_custom
+func (t *TargetCamera) RIG_MODE_CUSTOM(RIG_MODE_CUSTOM float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(RIG_MODE_CUSTOM)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetRIG_MODE_CUSTOM sets the RIG_MODE_CUSTOM property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#rig_mode_custom
+func (t *TargetCamera) SetRIG_MODE_CUSTOM(RIG_MODE_CUSTOM float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(RIG_MODE_CUSTOM)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// RIG_MODE_NONE returns the RIG_MODE_NONE property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#rig_mode_none
+func (t *TargetCamera) RIG_MODE_NONE(RIG_MODE_NONE float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(RIG_MODE_NONE)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetRIG_MODE_NONE sets the RIG_MODE_NONE property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#rig_mode_none
+func (t *TargetCamera) SetRIG_MODE_NONE(RIG_MODE_NONE float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(RIG_MODE_NONE)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// RIG_MODE_STEREOSCOPIC_ANAGLYPH returns the RIG_MODE_STEREOSCOPIC_ANAGLYPH property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#rig_mode_stereoscopic_anaglyph
+func (t *TargetCamera) RIG_MODE_STEREOSCOPIC_ANAGLYPH(RIG_MODE_STEREOSCOPIC_ANAGLYPH float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(RIG_MODE_STEREOSCOPIC_ANAGLYPH)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetRIG_MODE_STEREOSCOPIC_ANAGLYPH sets the RIG_MODE_STEREOSCOPIC_ANAGLYPH property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#rig_mode_stereoscopic_anaglyph
+func (t *TargetCamera) SetRIG_MODE_STEREOSCOPIC_ANAGLYPH(RIG_MODE_STEREOSCOPIC_ANAGLYPH float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(RIG_MODE_STEREOSCOPIC_ANAGLYPH)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// RIG_MODE_STEREOSCOPIC_OVERUNDER returns the RIG_MODE_STEREOSCOPIC_OVERUNDER property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#rig_mode_stereoscopic_overunder
+func (t *TargetCamera) RIG_MODE_STEREOSCOPIC_OVERUNDER(RIG_MODE_STEREOSCOPIC_OVERUNDER float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(RIG_MODE_STEREOSCOPIC_OVERUNDER)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetRIG_MODE_STEREOSCOPIC_OVERUNDER sets the RIG_MODE_STEREOSCOPIC_OVERUNDER property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#rig_mode_stereoscopic_overunder
+func (t *TargetCamera) SetRIG_MODE_STEREOSCOPIC_OVERUNDER(RIG_MODE_STEREOSCOPIC_OVERUNDER float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(RIG_MODE_STEREOSCOPIC_OVERUNDER)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// RIG_MODE_STEREOSCOPIC_SIDEBYSIDE_CROSSEYED returns the RIG_MODE_STEREOSCOPIC_SIDEBYSIDE_CROSSEYED property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#rig_mode_stereoscopic_sidebyside_crosseyed
+func (t *TargetCamera) RIG_MODE_STEREOSCOPIC_SIDEBYSIDE_CROSSEYED(RIG_MODE_STEREOSCOPIC_SIDEBYSIDE_CROSSEYED float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(RIG_MODE_STEREOSCOPIC_SIDEBYSIDE_CROSSEYED)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetRIG_MODE_STEREOSCOPIC_SIDEBYSIDE_CROSSEYED sets the RIG_MODE_STEREOSCOPIC_SIDEBYSIDE_CROSSEYED property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#rig_mode_stereoscopic_sidebyside_crosseyed
+func (t *TargetCamera) SetRIG_MODE_STEREOSCOPIC_SIDEBYSIDE_CROSSEYED(RIG_MODE_STEREOSCOPIC_SIDEBYSIDE_CROSSEYED float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(RIG_MODE_STEREOSCOPIC_SIDEBYSIDE_CROSSEYED)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// RIG_MODE_STEREOSCOPIC_SIDEBYSIDE_PARALLEL returns the RIG_MODE_STEREOSCOPIC_SIDEBYSIDE_PARALLEL property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#rig_mode_stereoscopic_sidebyside_parallel
+func (t *TargetCamera) RIG_MODE_STEREOSCOPIC_SIDEBYSIDE_PARALLEL(RIG_MODE_STEREOSCOPIC_SIDEBYSIDE_PARALLEL float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(RIG_MODE_STEREOSCOPIC_SIDEBYSIDE_PARALLEL)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetRIG_MODE_STEREOSCOPIC_SIDEBYSIDE_PARALLEL sets the RIG_MODE_STEREOSCOPIC_SIDEBYSIDE_PARALLEL property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#rig_mode_stereoscopic_sidebyside_parallel
+func (t *TargetCamera) SetRIG_MODE_STEREOSCOPIC_SIDEBYSIDE_PARALLEL(RIG_MODE_STEREOSCOPIC_SIDEBYSIDE_PARALLEL float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(RIG_MODE_STEREOSCOPIC_SIDEBYSIDE_PARALLEL)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// RIG_MODE_VR returns the RIG_MODE_VR property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#rig_mode_vr
+func (t *TargetCamera) RIG_MODE_VR(RIG_MODE_VR float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(RIG_MODE_VR)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetRIG_MODE_VR sets the RIG_MODE_VR property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#rig_mode_vr
+func (t *TargetCamera) SetRIG_MODE_VR(RIG_MODE_VR float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(RIG_MODE_VR)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// RIG_MODE_WEBVR returns the RIG_MODE_WEBVR property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#rig_mode_webvr
+func (t *TargetCamera) RIG_MODE_WEBVR(RIG_MODE_WEBVR float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(RIG_MODE_WEBVR)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetRIG_MODE_WEBVR sets the RIG_MODE_WEBVR property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#rig_mode_webvr
+func (t *TargetCamera) SetRIG_MODE_WEBVR(RIG_MODE_WEBVR float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(RIG_MODE_WEBVR)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// ReservedDataStore returns the ReservedDataStore property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#reserveddatastore
+func (t *TargetCamera) ReservedDataStore(reservedDataStore interface{}) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(reservedDataStore)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetReservedDataStore sets the ReservedDataStore property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#reserveddatastore
+func (t *TargetCamera) SetReservedDataStore(reservedDataStore interface{}) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(reservedDataStore)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// RigPostProcess returns the RigPostProcess property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#rigpostprocess
+func (t *TargetCamera) RigPostProcess(rigPostProcess *PostProcess) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(rigPostProcess.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetRigPostProcess sets the RigPostProcess property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#rigpostprocess
+func (t *TargetCamera) SetRigPostProcess(rigPostProcess *PostProcess) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(rigPostProcess.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// RightCamera returns the RightCamera property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#rightcamera
+func (t *TargetCamera) RightCamera(rightCamera *FreeCamera) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(rightCamera.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetRightCamera sets the RightCamera property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#rightcamera
+func (t *TargetCamera) SetRightCamera(rightCamera *FreeCamera) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(rightCamera.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// Rotation returns the Rotation property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#rotation
+func (t *TargetCamera) Rotation(rotation *Vector3) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(rotation.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetRotation sets the Rotation property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#rotation
+func (t *TargetCamera) SetRotation(rotation *Vector3) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(rotation.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// RotationQuaternion returns the RotationQuaternion property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#rotationquaternion
+func (t *TargetCamera) RotationQuaternion(rotationQuaternion *Quaternion) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(rotationQuaternion.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetRotationQuaternion sets the RotationQuaternion property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#rotationquaternion
+func (t *TargetCamera) SetRotationQuaternion(rotationQuaternion *Quaternion) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(rotationQuaternion.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// Speed returns the Speed property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#speed
+func (t *TargetCamera) Speed(speed float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(speed)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetSpeed sets the Speed property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#speed
+func (t *TargetCamera) SetSpeed(speed float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(speed)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// State returns the State property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#state
+func (t *TargetCamera) State(state string) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(state)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetState sets the State property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#state
+func (t *TargetCamera) SetState(state string) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(state)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#uniqueid
+func (t *TargetCamera) UniqueId(uniqueId float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(uniqueId)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#uniqueid
+func (t *TargetCamera) SetUniqueId(uniqueId float64) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(uniqueId)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// UpVector returns the UpVector property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#upvector
+func (t *TargetCamera) UpVector(upVector *Vector3) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(upVector.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetUpVector sets the UpVector property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#upvector
+func (t *TargetCamera) SetUpVector(upVector *Vector3) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(upVector.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// UpdateUpVectorFromRotation returns the UpdateUpVectorFromRotation property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#updateupvectorfromrotation
+func (t *TargetCamera) UpdateUpVectorFromRotation(updateUpVectorFromRotation bool) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(updateUpVectorFromRotation)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateUpVectorFromRotation sets the UpdateUpVectorFromRotation property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#updateupvectorfromrotation
+func (t *TargetCamera) SetUpdateUpVectorFromRotation(updateUpVectorFromRotation bool) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(updateUpVectorFromRotation)
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// Viewport returns the Viewport property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#viewport
+func (t *TargetCamera) Viewport(viewport *Viewport) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(viewport.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetViewport sets the Viewport property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#viewport
+func (t *TargetCamera) SetViewport(viewport *Viewport) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(viewport.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// WorldMatrixFromCache returns the WorldMatrixFromCache property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#worldmatrixfromcache
+func (t *TargetCamera) WorldMatrixFromCache(worldMatrixFromCache *Matrix) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(worldMatrixFromCache.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+// SetWorldMatrixFromCache sets the WorldMatrixFromCache property of class TargetCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetcamera#worldmatrixfromcache
+func (t *TargetCamera) SetWorldMatrixFromCache(worldMatrixFromCache *Matrix) *TargetCamera {
+	p := ba.ctx.Get("TargetCamera").New(worldMatrixFromCache.JSObject())
+	return TargetCameraFromJSObject(p, ba.ctx)
+}
+
+*/

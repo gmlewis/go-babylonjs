@@ -42,8 +42,143 @@ func (ba *Babylon) NewSwitchBooleanAction(triggerOptions interface{}, target int
 		opts = &NewSwitchBooleanActionOpts{}
 	}
 
-	p := ba.ctx.Get("SwitchBooleanAction").New(triggerOptions, target, propertyPath, opts.Condition.JSObject())
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, triggerOptions)
+	args = append(args, target)
+	args = append(args, propertyPath)
+
+	if opts.Condition == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Condition.JSObject())
+	}
+
+	p := ba.ctx.Get("SwitchBooleanAction").New(args...)
 	return SwitchBooleanActionFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Execute calls the Execute method on the SwitchBooleanAction object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.switchbooleanaction#execute
+func (s *SwitchBooleanAction) Execute() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("execute", args...)
+}
+
+// GetTriggerParameter calls the GetTriggerParameter method on the SwitchBooleanAction object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.switchbooleanaction#gettriggerparameter
+func (s *SwitchBooleanAction) GetTriggerParameter() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getTriggerParameter", args...)
+	return retVal
+}
+
+// Serialize calls the Serialize method on the SwitchBooleanAction object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.switchbooleanaction#serialize
+func (s *SwitchBooleanAction) Serialize(parent interface{}) interface{} {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, parent)
+
+	retVal := s.p.Call("serialize", args...)
+	return retVal
+}
+
+// SkipToNextActiveAction calls the SkipToNextActiveAction method on the SwitchBooleanAction object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.switchbooleanaction#skiptonextactiveaction
+func (s *SwitchBooleanAction) SkipToNextActiveAction() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("skipToNextActiveAction", args...)
+}
+
+// Then calls the Then method on the SwitchBooleanAction object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.switchbooleanaction#then
+func (s *SwitchBooleanAction) Then(action *Action) *Action {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, action.JSObject())
+
+	retVal := s.p.Call("then", args...)
+	return ActionFromJSObject(retVal, s.ctx)
+}
+
+/*
+
+// OnBeforeExecuteObservable returns the OnBeforeExecuteObservable property of class SwitchBooleanAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.switchbooleanaction#onbeforeexecuteobservable
+func (s *SwitchBooleanAction) OnBeforeExecuteObservable(onBeforeExecuteObservable *Observable) *SwitchBooleanAction {
+	p := ba.ctx.Get("SwitchBooleanAction").New(onBeforeExecuteObservable.JSObject())
+	return SwitchBooleanActionFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeExecuteObservable sets the OnBeforeExecuteObservable property of class SwitchBooleanAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.switchbooleanaction#onbeforeexecuteobservable
+func (s *SwitchBooleanAction) SetOnBeforeExecuteObservable(onBeforeExecuteObservable *Observable) *SwitchBooleanAction {
+	p := ba.ctx.Get("SwitchBooleanAction").New(onBeforeExecuteObservable.JSObject())
+	return SwitchBooleanActionFromJSObject(p, ba.ctx)
+}
+
+// PropertyPath returns the PropertyPath property of class SwitchBooleanAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.switchbooleanaction#propertypath
+func (s *SwitchBooleanAction) PropertyPath(propertyPath string) *SwitchBooleanAction {
+	p := ba.ctx.Get("SwitchBooleanAction").New(propertyPath)
+	return SwitchBooleanActionFromJSObject(p, ba.ctx)
+}
+
+// SetPropertyPath sets the PropertyPath property of class SwitchBooleanAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.switchbooleanaction#propertypath
+func (s *SwitchBooleanAction) SetPropertyPath(propertyPath string) *SwitchBooleanAction {
+	p := ba.ctx.Get("SwitchBooleanAction").New(propertyPath)
+	return SwitchBooleanActionFromJSObject(p, ba.ctx)
+}
+
+// Trigger returns the Trigger property of class SwitchBooleanAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.switchbooleanaction#trigger
+func (s *SwitchBooleanAction) Trigger(trigger float64) *SwitchBooleanAction {
+	p := ba.ctx.Get("SwitchBooleanAction").New(trigger)
+	return SwitchBooleanActionFromJSObject(p, ba.ctx)
+}
+
+// SetTrigger sets the Trigger property of class SwitchBooleanAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.switchbooleanaction#trigger
+func (s *SwitchBooleanAction) SetTrigger(trigger float64) *SwitchBooleanAction {
+	p := ba.ctx.Get("SwitchBooleanAction").New(trigger)
+	return SwitchBooleanActionFromJSObject(p, ba.ctx)
+}
+
+// TriggerOptions returns the TriggerOptions property of class SwitchBooleanAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.switchbooleanaction#triggeroptions
+func (s *SwitchBooleanAction) TriggerOptions(triggerOptions interface{}) *SwitchBooleanAction {
+	p := ba.ctx.Get("SwitchBooleanAction").New(triggerOptions)
+	return SwitchBooleanActionFromJSObject(p, ba.ctx)
+}
+
+// SetTriggerOptions sets the TriggerOptions property of class SwitchBooleanAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.switchbooleanaction#triggeroptions
+func (s *SwitchBooleanAction) SetTriggerOptions(triggerOptions interface{}) *SwitchBooleanAction {
+	p := ba.ctx.Get("SwitchBooleanAction").New(triggerOptions)
+	return SwitchBooleanActionFromJSObject(p, ba.ctx)
+}
+
+*/

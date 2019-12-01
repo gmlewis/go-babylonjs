@@ -29,7 +29,7 @@ func VirtualKeyboardFromJSObject(p js.Value, ctx js.Value) *VirtualKeyboard {
 
 // NewVirtualKeyboardOpts contains optional parameters for NewVirtualKeyboard.
 type NewVirtualKeyboardOpts struct {
-	Name *JSString
+	Name *string
 }
 
 // NewVirtualKeyboard returns a new VirtualKeyboard object.
@@ -40,8 +40,1993 @@ func (ba *Babylon) NewVirtualKeyboard(opts *NewVirtualKeyboardOpts) *VirtualKeyb
 		opts = &NewVirtualKeyboardOpts{}
 	}
 
-	p := ba.ctx.Get("VirtualKeyboard").New(opts.Name.JSObject())
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Name == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Name)
+	}
+
+	p := ba.ctx.Get("VirtualKeyboard").New(args...)
 	return VirtualKeyboardFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AddControl calls the AddControl method on the VirtualKeyboard object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#addcontrol
+func (v *VirtualKeyboard) AddControl(control *Control) *Container {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, control.JSObject())
+
+	retVal := v.p.Call("addControl", args...)
+	return ContainerFromJSObject(retVal, v.ctx)
+}
+
+// VirtualKeyboardAddKeysRowOpts contains optional parameters for VirtualKeyboard.AddKeysRow.
+type VirtualKeyboardAddKeysRowOpts struct {
+	PropertySets []KeyPropertySet
+}
+
+// AddKeysRow calls the AddKeysRow method on the VirtualKeyboard object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#addkeysrow
+func (v *VirtualKeyboard) AddKeysRow(keys []string, opts *VirtualKeyboardAddKeysRowOpts) {
+	if opts == nil {
+		opts = &VirtualKeyboardAddKeysRowOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, keys)
+
+	if opts.PropertySets == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.PropertySets.JSObject())
+	}
+
+	v.p.Call("addKeysRow", args...)
+}
+
+// ApplyShiftState calls the ApplyShiftState method on the VirtualKeyboard object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#applyshiftstate
+func (v *VirtualKeyboard) ApplyShiftState(shiftState float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, shiftState)
+
+	v.p.Call("applyShiftState", args...)
+}
+
+// ClearControls calls the ClearControls method on the VirtualKeyboard object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#clearcontrols
+func (v *VirtualKeyboard) ClearControls() *Container {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("clearControls", args...)
+	return ContainerFromJSObject(retVal, v.ctx)
+}
+
+// Connect calls the Connect method on the VirtualKeyboard object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#connect
+func (v *VirtualKeyboard) Connect(input *InputText) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, input.JSObject())
+
+	v.p.Call("connect", args...)
+}
+
+// Contains calls the Contains method on the VirtualKeyboard object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#contains
+func (v *VirtualKeyboard) Contains(x float64, y float64) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, x)
+	args = append(args, y)
+
+	retVal := v.p.Call("contains", args...)
+	return retVal.Bool()
+}
+
+// ContainsControl calls the ContainsControl method on the VirtualKeyboard object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#containscontrol
+func (v *VirtualKeyboard) ContainsControl(control *Control) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, control.JSObject())
+
+	retVal := v.p.Call("containsControl", args...)
+	return retVal.Bool()
+}
+
+// VirtualKeyboardCreateDefaultLayoutOpts contains optional parameters for VirtualKeyboard.CreateDefaultLayout.
+type VirtualKeyboardCreateDefaultLayoutOpts struct {
+	Name *string
+}
+
+// CreateDefaultLayout calls the CreateDefaultLayout method on the VirtualKeyboard object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#createdefaultlayout
+func (v *VirtualKeyboard) CreateDefaultLayout(opts *VirtualKeyboardCreateDefaultLayoutOpts) *VirtualKeyboard {
+	if opts == nil {
+		opts = &VirtualKeyboardCreateDefaultLayoutOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Name == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Name)
+	}
+
+	retVal := v.p.Call("CreateDefaultLayout", args...)
+	return VirtualKeyboardFromJSObject(retVal, v.ctx)
+}
+
+// VirtualKeyboardDisconnectOpts contains optional parameters for VirtualKeyboard.Disconnect.
+type VirtualKeyboardDisconnectOpts struct {
+	Input *InputText
+}
+
+// Disconnect calls the Disconnect method on the VirtualKeyboard object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#disconnect
+func (v *VirtualKeyboard) Disconnect(opts *VirtualKeyboardDisconnectOpts) {
+	if opts == nil {
+		opts = &VirtualKeyboardDisconnectOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Input == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Input.JSObject())
+	}
+
+	v.p.Call("disconnect", args...)
+}
+
+// Dispose calls the Dispose method on the VirtualKeyboard object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#dispose
+func (v *VirtualKeyboard) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	v.p.Call("dispose", args...)
+}
+
+// GetAscendantOfClass calls the GetAscendantOfClass method on the VirtualKeyboard object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#getascendantofclass
+func (v *VirtualKeyboard) GetAscendantOfClass(className string) *Control {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, className)
+
+	retVal := v.p.Call("getAscendantOfClass", args...)
+	return ControlFromJSObject(retVal, v.ctx)
+}
+
+// GetChildByName calls the GetChildByName method on the VirtualKeyboard object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#getchildbyname
+func (v *VirtualKeyboard) GetChildByName(name string) *Control {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := v.p.Call("getChildByName", args...)
+	return ControlFromJSObject(retVal, v.ctx)
+}
+
+// GetChildByType calls the GetChildByType method on the VirtualKeyboard object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#getchildbytype
+func (v *VirtualKeyboard) GetChildByType(name string, jsType string) *Control {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	retVal := v.p.Call("getChildByType", args...)
+	return ControlFromJSObject(retVal, v.ctx)
+}
+
+// GetClassName calls the GetClassName method on the VirtualKeyboard object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#getclassname
+func (v *VirtualKeyboard) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// VirtualKeyboardGetDescendantsOpts contains optional parameters for VirtualKeyboard.GetDescendants.
+type VirtualKeyboardGetDescendantsOpts struct {
+	DirectDescendantsOnly *bool
+	Predicate             *func()
+}
+
+// GetDescendants calls the GetDescendants method on the VirtualKeyboard object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#getdescendants
+func (v *VirtualKeyboard) GetDescendants(opts *VirtualKeyboardGetDescendantsOpts) *Control {
+	if opts == nil {
+		opts = &VirtualKeyboardGetDescendantsOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	retVal := v.p.Call("getDescendants", args...)
+	return ControlFromJSObject(retVal, v.ctx)
+}
+
+// VirtualKeyboardGetDescendantsToRefOpts contains optional parameters for VirtualKeyboard.GetDescendantsToRef.
+type VirtualKeyboardGetDescendantsToRefOpts struct {
+	DirectDescendantsOnly *bool
+	Predicate             *func()
+}
+
+// GetDescendantsToRef calls the GetDescendantsToRef method on the VirtualKeyboard object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#getdescendantstoref
+func (v *VirtualKeyboard) GetDescendantsToRef(results *Control, opts *VirtualKeyboardGetDescendantsToRefOpts) {
+	if opts == nil {
+		opts = &VirtualKeyboardGetDescendantsToRefOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, results.JSObject())
+
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	v.p.Call("getDescendantsToRef", args...)
+}
+
+// GetLocalCoordinates calls the GetLocalCoordinates method on the VirtualKeyboard object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#getlocalcoordinates
+func (v *VirtualKeyboard) GetLocalCoordinates(globalCoordinates *Vector2) *Vector2 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, globalCoordinates.JSObject())
+
+	retVal := v.p.Call("getLocalCoordinates", args...)
+	return Vector2FromJSObject(retVal, v.ctx)
+}
+
+// GetLocalCoordinatesToRef calls the GetLocalCoordinatesToRef method on the VirtualKeyboard object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#getlocalcoordinatestoref
+func (v *VirtualKeyboard) GetLocalCoordinatesToRef(globalCoordinates *Vector2, result *Vector2) *Control {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, globalCoordinates.JSObject())
+	args = append(args, result.JSObject())
+
+	retVal := v.p.Call("getLocalCoordinatesToRef", args...)
+	return ControlFromJSObject(retVal, v.ctx)
+}
+
+// GetParentLocalCoordinates calls the GetParentLocalCoordinates method on the VirtualKeyboard object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#getparentlocalcoordinates
+func (v *VirtualKeyboard) GetParentLocalCoordinates(globalCoordinates *Vector2) *Vector2 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, globalCoordinates.JSObject())
+
+	retVal := v.p.Call("getParentLocalCoordinates", args...)
+	return Vector2FromJSObject(retVal, v.ctx)
+}
+
+// IsAscendant calls the IsAscendant method on the VirtualKeyboard object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#isascendant
+func (v *VirtualKeyboard) IsAscendant(container *Control) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, container.JSObject())
+
+	retVal := v.p.Call("isAscendant", args...)
+	return retVal.Bool()
+}
+
+// LinkWithMesh calls the LinkWithMesh method on the VirtualKeyboard object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#linkwithmesh
+func (v *VirtualKeyboard) LinkWithMesh(mesh *AbstractMesh) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	v.p.Call("linkWithMesh", args...)
+}
+
+// MoveToVector3 calls the MoveToVector3 method on the VirtualKeyboard object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#movetovector3
+func (v *VirtualKeyboard) MoveToVector3(position *Vector3, scene *Scene) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, position.JSObject())
+	args = append(args, scene.JSObject())
+
+	v.p.Call("moveToVector3", args...)
+}
+
+// RemoveControl calls the RemoveControl method on the VirtualKeyboard object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#removecontrol
+func (v *VirtualKeyboard) RemoveControl(control *Control) *Container {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, control.JSObject())
+
+	retVal := v.p.Call("removeControl", args...)
+	return ContainerFromJSObject(retVal, v.ctx)
+}
+
+// _flagDescendantsAsMatrixDirty calls the _flagDescendantsAsMatrixDirty method on the VirtualKeyboard object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#_flagdescendantsasmatrixdirty
+func (v *VirtualKeyboard) _flagDescendantsAsMatrixDirty() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	v.p.Call("_flagDescendantsAsMatrixDirty", args...)
+}
+
+/*
+
+// AdaptHeightToChildren returns the AdaptHeightToChildren property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#adaptheighttochildren
+func (v *VirtualKeyboard) AdaptHeightToChildren(adaptHeightToChildren bool) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(adaptHeightToChildren)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetAdaptHeightToChildren sets the AdaptHeightToChildren property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#adaptheighttochildren
+func (v *VirtualKeyboard) SetAdaptHeightToChildren(adaptHeightToChildren bool) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(adaptHeightToChildren)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// AdaptWidthToChildren returns the AdaptWidthToChildren property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#adaptwidthtochildren
+func (v *VirtualKeyboard) AdaptWidthToChildren(adaptWidthToChildren bool) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(adaptWidthToChildren)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetAdaptWidthToChildren sets the AdaptWidthToChildren property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#adaptwidthtochildren
+func (v *VirtualKeyboard) SetAdaptWidthToChildren(adaptWidthToChildren bool) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(adaptWidthToChildren)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// AllowAlphaInheritance returns the AllowAlphaInheritance property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#allowalphainheritance
+func (v *VirtualKeyboard) AllowAlphaInheritance(AllowAlphaInheritance bool) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(AllowAlphaInheritance)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetAllowAlphaInheritance sets the AllowAlphaInheritance property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#allowalphainheritance
+func (v *VirtualKeyboard) SetAllowAlphaInheritance(AllowAlphaInheritance bool) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(AllowAlphaInheritance)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// Alpha returns the Alpha property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#alpha
+func (v *VirtualKeyboard) Alpha(alpha float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(alpha)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetAlpha sets the Alpha property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#alpha
+func (v *VirtualKeyboard) SetAlpha(alpha float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(alpha)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// Background returns the Background property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#background
+func (v *VirtualKeyboard) Background(background string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(background)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetBackground sets the Background property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#background
+func (v *VirtualKeyboard) SetBackground(background string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(background)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// CenterX returns the CenterX property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#centerx
+func (v *VirtualKeyboard) CenterX(centerX float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(centerX)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetCenterX sets the CenterX property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#centerx
+func (v *VirtualKeyboard) SetCenterX(centerX float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(centerX)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// CenterY returns the CenterY property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#centery
+func (v *VirtualKeyboard) CenterY(centerY float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(centerY)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetCenterY sets the CenterY property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#centery
+func (v *VirtualKeyboard) SetCenterY(centerY float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(centerY)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// Children returns the Children property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#children
+func (v *VirtualKeyboard) Children(children *Control) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(children.JSObject())
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetChildren sets the Children property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#children
+func (v *VirtualKeyboard) SetChildren(children *Control) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(children.JSObject())
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// ClipChildren returns the ClipChildren property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#clipchildren
+func (v *VirtualKeyboard) ClipChildren(clipChildren bool) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(clipChildren)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetClipChildren sets the ClipChildren property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#clipchildren
+func (v *VirtualKeyboard) SetClipChildren(clipChildren bool) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(clipChildren)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// ClipContent returns the ClipContent property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#clipcontent
+func (v *VirtualKeyboard) ClipContent(clipContent bool) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(clipContent)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetClipContent sets the ClipContent property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#clipcontent
+func (v *VirtualKeyboard) SetClipContent(clipContent bool) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(clipContent)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// Color returns the Color property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#color
+func (v *VirtualKeyboard) Color(color string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(color)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetColor sets the Color property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#color
+func (v *VirtualKeyboard) SetColor(color string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(color)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// ConnectedInputText returns the ConnectedInputText property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#connectedinputtext
+func (v *VirtualKeyboard) ConnectedInputText(connectedInputText *InputText) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(connectedInputText.JSObject())
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetConnectedInputText sets the ConnectedInputText property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#connectedinputtext
+func (v *VirtualKeyboard) SetConnectedInputText(connectedInputText *InputText) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(connectedInputText.JSObject())
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// DefaultButtonBackground returns the DefaultButtonBackground property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#defaultbuttonbackground
+func (v *VirtualKeyboard) DefaultButtonBackground(defaultButtonBackground string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(defaultButtonBackground)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetDefaultButtonBackground sets the DefaultButtonBackground property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#defaultbuttonbackground
+func (v *VirtualKeyboard) SetDefaultButtonBackground(defaultButtonBackground string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(defaultButtonBackground)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// DefaultButtonColor returns the DefaultButtonColor property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#defaultbuttoncolor
+func (v *VirtualKeyboard) DefaultButtonColor(defaultButtonColor string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(defaultButtonColor)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetDefaultButtonColor sets the DefaultButtonColor property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#defaultbuttoncolor
+func (v *VirtualKeyboard) SetDefaultButtonColor(defaultButtonColor string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(defaultButtonColor)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// DefaultButtonHeight returns the DefaultButtonHeight property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#defaultbuttonheight
+func (v *VirtualKeyboard) DefaultButtonHeight(defaultButtonHeight string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(defaultButtonHeight)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetDefaultButtonHeight sets the DefaultButtonHeight property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#defaultbuttonheight
+func (v *VirtualKeyboard) SetDefaultButtonHeight(defaultButtonHeight string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(defaultButtonHeight)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// DefaultButtonPaddingBottom returns the DefaultButtonPaddingBottom property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#defaultbuttonpaddingbottom
+func (v *VirtualKeyboard) DefaultButtonPaddingBottom(defaultButtonPaddingBottom string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(defaultButtonPaddingBottom)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetDefaultButtonPaddingBottom sets the DefaultButtonPaddingBottom property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#defaultbuttonpaddingbottom
+func (v *VirtualKeyboard) SetDefaultButtonPaddingBottom(defaultButtonPaddingBottom string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(defaultButtonPaddingBottom)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// DefaultButtonPaddingLeft returns the DefaultButtonPaddingLeft property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#defaultbuttonpaddingleft
+func (v *VirtualKeyboard) DefaultButtonPaddingLeft(defaultButtonPaddingLeft string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(defaultButtonPaddingLeft)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetDefaultButtonPaddingLeft sets the DefaultButtonPaddingLeft property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#defaultbuttonpaddingleft
+func (v *VirtualKeyboard) SetDefaultButtonPaddingLeft(defaultButtonPaddingLeft string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(defaultButtonPaddingLeft)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// DefaultButtonPaddingRight returns the DefaultButtonPaddingRight property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#defaultbuttonpaddingright
+func (v *VirtualKeyboard) DefaultButtonPaddingRight(defaultButtonPaddingRight string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(defaultButtonPaddingRight)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetDefaultButtonPaddingRight sets the DefaultButtonPaddingRight property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#defaultbuttonpaddingright
+func (v *VirtualKeyboard) SetDefaultButtonPaddingRight(defaultButtonPaddingRight string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(defaultButtonPaddingRight)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// DefaultButtonPaddingTop returns the DefaultButtonPaddingTop property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#defaultbuttonpaddingtop
+func (v *VirtualKeyboard) DefaultButtonPaddingTop(defaultButtonPaddingTop string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(defaultButtonPaddingTop)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetDefaultButtonPaddingTop sets the DefaultButtonPaddingTop property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#defaultbuttonpaddingtop
+func (v *VirtualKeyboard) SetDefaultButtonPaddingTop(defaultButtonPaddingTop string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(defaultButtonPaddingTop)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// DefaultButtonWidth returns the DefaultButtonWidth property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#defaultbuttonwidth
+func (v *VirtualKeyboard) DefaultButtonWidth(defaultButtonWidth string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(defaultButtonWidth)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetDefaultButtonWidth sets the DefaultButtonWidth property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#defaultbuttonwidth
+func (v *VirtualKeyboard) SetDefaultButtonWidth(defaultButtonWidth string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(defaultButtonWidth)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// DisabledColor returns the DisabledColor property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#disabledcolor
+func (v *VirtualKeyboard) DisabledColor(disabledColor string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(disabledColor)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetDisabledColor sets the DisabledColor property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#disabledcolor
+func (v *VirtualKeyboard) SetDisabledColor(disabledColor string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(disabledColor)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// FontFamily returns the FontFamily property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#fontfamily
+func (v *VirtualKeyboard) FontFamily(fontFamily string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(fontFamily)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetFontFamily sets the FontFamily property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#fontfamily
+func (v *VirtualKeyboard) SetFontFamily(fontFamily string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(fontFamily)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// FontOffset returns the FontOffset property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#fontoffset
+func (v *VirtualKeyboard) FontOffset(fontOffset js.Value) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(fontOffset)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetFontOffset sets the FontOffset property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#fontoffset
+func (v *VirtualKeyboard) SetFontOffset(fontOffset js.Value) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(fontOffset)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// FontSize returns the FontSize property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#fontsize
+func (v *VirtualKeyboard) FontSize(fontSize string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(fontSize)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetFontSize sets the FontSize property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#fontsize
+func (v *VirtualKeyboard) SetFontSize(fontSize string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(fontSize)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// FontSizeInPixels returns the FontSizeInPixels property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#fontsizeinpixels
+func (v *VirtualKeyboard) FontSizeInPixels(fontSizeInPixels float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(fontSizeInPixels)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetFontSizeInPixels sets the FontSizeInPixels property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#fontsizeinpixels
+func (v *VirtualKeyboard) SetFontSizeInPixels(fontSizeInPixels float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(fontSizeInPixels)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// FontStyle returns the FontStyle property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#fontstyle
+func (v *VirtualKeyboard) FontStyle(fontStyle string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(fontStyle)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetFontStyle sets the FontStyle property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#fontstyle
+func (v *VirtualKeyboard) SetFontStyle(fontStyle string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(fontStyle)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// FontWeight returns the FontWeight property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#fontweight
+func (v *VirtualKeyboard) FontWeight(fontWeight string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(fontWeight)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetFontWeight sets the FontWeight property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#fontweight
+func (v *VirtualKeyboard) SetFontWeight(fontWeight string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(fontWeight)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// HORIZONTAL_ALIGNMENT_CENTER returns the HORIZONTAL_ALIGNMENT_CENTER property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#horizontal_alignment_center
+func (v *VirtualKeyboard) HORIZONTAL_ALIGNMENT_CENTER(HORIZONTAL_ALIGNMENT_CENTER float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(HORIZONTAL_ALIGNMENT_CENTER)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetHORIZONTAL_ALIGNMENT_CENTER sets the HORIZONTAL_ALIGNMENT_CENTER property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#horizontal_alignment_center
+func (v *VirtualKeyboard) SetHORIZONTAL_ALIGNMENT_CENTER(HORIZONTAL_ALIGNMENT_CENTER float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(HORIZONTAL_ALIGNMENT_CENTER)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// HORIZONTAL_ALIGNMENT_LEFT returns the HORIZONTAL_ALIGNMENT_LEFT property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#horizontal_alignment_left
+func (v *VirtualKeyboard) HORIZONTAL_ALIGNMENT_LEFT(HORIZONTAL_ALIGNMENT_LEFT float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(HORIZONTAL_ALIGNMENT_LEFT)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetHORIZONTAL_ALIGNMENT_LEFT sets the HORIZONTAL_ALIGNMENT_LEFT property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#horizontal_alignment_left
+func (v *VirtualKeyboard) SetHORIZONTAL_ALIGNMENT_LEFT(HORIZONTAL_ALIGNMENT_LEFT float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(HORIZONTAL_ALIGNMENT_LEFT)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// HORIZONTAL_ALIGNMENT_RIGHT returns the HORIZONTAL_ALIGNMENT_RIGHT property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#horizontal_alignment_right
+func (v *VirtualKeyboard) HORIZONTAL_ALIGNMENT_RIGHT(HORIZONTAL_ALIGNMENT_RIGHT float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(HORIZONTAL_ALIGNMENT_RIGHT)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetHORIZONTAL_ALIGNMENT_RIGHT sets the HORIZONTAL_ALIGNMENT_RIGHT property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#horizontal_alignment_right
+func (v *VirtualKeyboard) SetHORIZONTAL_ALIGNMENT_RIGHT(HORIZONTAL_ALIGNMENT_RIGHT float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(HORIZONTAL_ALIGNMENT_RIGHT)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// Height returns the Height property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#height
+func (v *VirtualKeyboard) Height(height string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(height)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetHeight sets the Height property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#height
+func (v *VirtualKeyboard) SetHeight(height string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(height)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// HeightInPixels returns the HeightInPixels property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#heightinpixels
+func (v *VirtualKeyboard) HeightInPixels(heightInPixels float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(heightInPixels)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetHeightInPixels sets the HeightInPixels property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#heightinpixels
+func (v *VirtualKeyboard) SetHeightInPixels(heightInPixels float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(heightInPixels)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// HorizontalAlignment returns the HorizontalAlignment property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#horizontalalignment
+func (v *VirtualKeyboard) HorizontalAlignment(horizontalAlignment float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(horizontalAlignment)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetHorizontalAlignment sets the HorizontalAlignment property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#horizontalalignment
+func (v *VirtualKeyboard) SetHorizontalAlignment(horizontalAlignment float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(horizontalAlignment)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// Host returns the Host property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#host
+func (v *VirtualKeyboard) Host(host *AdvancedDynamicTexture) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(host.JSObject())
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetHost sets the Host property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#host
+func (v *VirtualKeyboard) SetHost(host *AdvancedDynamicTexture) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(host.JSObject())
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// HoverCursor returns the HoverCursor property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#hovercursor
+func (v *VirtualKeyboard) HoverCursor(hoverCursor string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(hoverCursor)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetHoverCursor sets the HoverCursor property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#hovercursor
+func (v *VirtualKeyboard) SetHoverCursor(hoverCursor string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(hoverCursor)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// IgnoreLayoutWarnings returns the IgnoreLayoutWarnings property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#ignorelayoutwarnings
+func (v *VirtualKeyboard) IgnoreLayoutWarnings(ignoreLayoutWarnings bool) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(ignoreLayoutWarnings)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetIgnoreLayoutWarnings sets the IgnoreLayoutWarnings property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#ignorelayoutwarnings
+func (v *VirtualKeyboard) SetIgnoreLayoutWarnings(ignoreLayoutWarnings bool) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(ignoreLayoutWarnings)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// IsDirty returns the IsDirty property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#isdirty
+func (v *VirtualKeyboard) IsDirty(isDirty bool) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(isDirty)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetIsDirty sets the IsDirty property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#isdirty
+func (v *VirtualKeyboard) SetIsDirty(isDirty bool) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(isDirty)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// IsEnabled returns the IsEnabled property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#isenabled
+func (v *VirtualKeyboard) IsEnabled(isEnabled bool) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(isEnabled)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetIsEnabled sets the IsEnabled property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#isenabled
+func (v *VirtualKeyboard) SetIsEnabled(isEnabled bool) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(isEnabled)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// IsFocusInvisible returns the IsFocusInvisible property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#isfocusinvisible
+func (v *VirtualKeyboard) IsFocusInvisible(isFocusInvisible bool) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(isFocusInvisible)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetIsFocusInvisible sets the IsFocusInvisible property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#isfocusinvisible
+func (v *VirtualKeyboard) SetIsFocusInvisible(isFocusInvisible bool) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(isFocusInvisible)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// IsHighlighted returns the IsHighlighted property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#ishighlighted
+func (v *VirtualKeyboard) IsHighlighted(isHighlighted bool) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(isHighlighted)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetIsHighlighted sets the IsHighlighted property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#ishighlighted
+func (v *VirtualKeyboard) SetIsHighlighted(isHighlighted bool) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(isHighlighted)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// IsHitTestVisible returns the IsHitTestVisible property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#ishittestvisible
+func (v *VirtualKeyboard) IsHitTestVisible(isHitTestVisible bool) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(isHitTestVisible)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetIsHitTestVisible sets the IsHitTestVisible property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#ishittestvisible
+func (v *VirtualKeyboard) SetIsHitTestVisible(isHitTestVisible bool) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(isHitTestVisible)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// IsPointerBlocker returns the IsPointerBlocker property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#ispointerblocker
+func (v *VirtualKeyboard) IsPointerBlocker(isPointerBlocker bool) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(isPointerBlocker)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetIsPointerBlocker sets the IsPointerBlocker property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#ispointerblocker
+func (v *VirtualKeyboard) SetIsPointerBlocker(isPointerBlocker bool) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(isPointerBlocker)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// IsVertical returns the IsVertical property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#isvertical
+func (v *VirtualKeyboard) IsVertical(isVertical bool) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(isVertical)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetIsVertical sets the IsVertical property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#isvertical
+func (v *VirtualKeyboard) SetIsVertical(isVertical bool) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(isVertical)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// IsVisible returns the IsVisible property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#isvisible
+func (v *VirtualKeyboard) IsVisible(isVisible bool) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(isVisible)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetIsVisible sets the IsVisible property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#isvisible
+func (v *VirtualKeyboard) SetIsVisible(isVisible bool) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(isVisible)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// Left returns the Left property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#left
+func (v *VirtualKeyboard) Left(left string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(left)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetLeft sets the Left property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#left
+func (v *VirtualKeyboard) SetLeft(left string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(left)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// LeftInPixels returns the LeftInPixels property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#leftinpixels
+func (v *VirtualKeyboard) LeftInPixels(leftInPixels float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(leftInPixels)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetLeftInPixels sets the LeftInPixels property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#leftinpixels
+func (v *VirtualKeyboard) SetLeftInPixels(leftInPixels float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(leftInPixels)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetX returns the LinkOffsetX property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#linkoffsetx
+func (v *VirtualKeyboard) LinkOffsetX(linkOffsetX string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(linkOffsetX)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetX sets the LinkOffsetX property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#linkoffsetx
+func (v *VirtualKeyboard) SetLinkOffsetX(linkOffsetX string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(linkOffsetX)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetXInPixels returns the LinkOffsetXInPixels property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#linkoffsetxinpixels
+func (v *VirtualKeyboard) LinkOffsetXInPixels(linkOffsetXInPixels float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(linkOffsetXInPixels)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetXInPixels sets the LinkOffsetXInPixels property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#linkoffsetxinpixels
+func (v *VirtualKeyboard) SetLinkOffsetXInPixels(linkOffsetXInPixels float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(linkOffsetXInPixels)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetY returns the LinkOffsetY property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#linkoffsety
+func (v *VirtualKeyboard) LinkOffsetY(linkOffsetY string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(linkOffsetY)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetY sets the LinkOffsetY property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#linkoffsety
+func (v *VirtualKeyboard) SetLinkOffsetY(linkOffsetY string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(linkOffsetY)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetYInPixels returns the LinkOffsetYInPixels property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#linkoffsetyinpixels
+func (v *VirtualKeyboard) LinkOffsetYInPixels(linkOffsetYInPixels float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(linkOffsetYInPixels)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetYInPixels sets the LinkOffsetYInPixels property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#linkoffsetyinpixels
+func (v *VirtualKeyboard) SetLinkOffsetYInPixels(linkOffsetYInPixels float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(linkOffsetYInPixels)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// LinkedMesh returns the LinkedMesh property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#linkedmesh
+func (v *VirtualKeyboard) LinkedMesh(linkedMesh *AbstractMesh) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(linkedMesh.JSObject())
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetLinkedMesh sets the LinkedMesh property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#linkedmesh
+func (v *VirtualKeyboard) SetLinkedMesh(linkedMesh *AbstractMesh) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(linkedMesh.JSObject())
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// LogLayoutCycleErrors returns the LogLayoutCycleErrors property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#loglayoutcycleerrors
+func (v *VirtualKeyboard) LogLayoutCycleErrors(logLayoutCycleErrors bool) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(logLayoutCycleErrors)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetLogLayoutCycleErrors sets the LogLayoutCycleErrors property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#loglayoutcycleerrors
+func (v *VirtualKeyboard) SetLogLayoutCycleErrors(logLayoutCycleErrors bool) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(logLayoutCycleErrors)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// MaxLayoutCycle returns the MaxLayoutCycle property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#maxlayoutcycle
+func (v *VirtualKeyboard) MaxLayoutCycle(maxLayoutCycle float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(maxLayoutCycle)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetMaxLayoutCycle sets the MaxLayoutCycle property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#maxlayoutcycle
+func (v *VirtualKeyboard) SetMaxLayoutCycle(maxLayoutCycle float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(maxLayoutCycle)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#metadata
+func (v *VirtualKeyboard) Metadata(metadata interface{}) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(metadata)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#metadata
+func (v *VirtualKeyboard) SetMetadata(metadata interface{}) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(metadata)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#name
+func (v *VirtualKeyboard) Name(name string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(name)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#name
+func (v *VirtualKeyboard) SetName(name string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(name)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// NotRenderable returns the NotRenderable property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#notrenderable
+func (v *VirtualKeyboard) NotRenderable(notRenderable bool) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(notRenderable)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetNotRenderable sets the NotRenderable property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#notrenderable
+func (v *VirtualKeyboard) SetNotRenderable(notRenderable bool) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(notRenderable)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// OnAfterDrawObservable returns the OnAfterDrawObservable property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#onafterdrawobservable
+func (v *VirtualKeyboard) OnAfterDrawObservable(onAfterDrawObservable *Observable) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(onAfterDrawObservable.JSObject())
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterDrawObservable sets the OnAfterDrawObservable property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#onafterdrawobservable
+func (v *VirtualKeyboard) SetOnAfterDrawObservable(onAfterDrawObservable *Observable) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(onAfterDrawObservable.JSObject())
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeDrawObservable returns the OnBeforeDrawObservable property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#onbeforedrawobservable
+func (v *VirtualKeyboard) OnBeforeDrawObservable(onBeforeDrawObservable *Observable) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(onBeforeDrawObservable.JSObject())
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeDrawObservable sets the OnBeforeDrawObservable property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#onbeforedrawobservable
+func (v *VirtualKeyboard) SetOnBeforeDrawObservable(onBeforeDrawObservable *Observable) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(onBeforeDrawObservable.JSObject())
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// OnDirtyObservable returns the OnDirtyObservable property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#ondirtyobservable
+func (v *VirtualKeyboard) OnDirtyObservable(onDirtyObservable *Observable) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(onDirtyObservable.JSObject())
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetOnDirtyObservable sets the OnDirtyObservable property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#ondirtyobservable
+func (v *VirtualKeyboard) SetOnDirtyObservable(onDirtyObservable *Observable) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(onDirtyObservable.JSObject())
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// OnKeyPressObservable returns the OnKeyPressObservable property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#onkeypressobservable
+func (v *VirtualKeyboard) OnKeyPressObservable(onKeyPressObservable *Observable) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(onKeyPressObservable.JSObject())
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetOnKeyPressObservable sets the OnKeyPressObservable property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#onkeypressobservable
+func (v *VirtualKeyboard) SetOnKeyPressObservable(onKeyPressObservable *Observable) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(onKeyPressObservable.JSObject())
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// OnPointerClickObservable returns the OnPointerClickObservable property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#onpointerclickobservable
+func (v *VirtualKeyboard) OnPointerClickObservable(onPointerClickObservable *Observable) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(onPointerClickObservable.JSObject())
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerClickObservable sets the OnPointerClickObservable property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#onpointerclickobservable
+func (v *VirtualKeyboard) SetOnPointerClickObservable(onPointerClickObservable *Observable) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(onPointerClickObservable.JSObject())
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// OnPointerDownObservable returns the OnPointerDownObservable property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#onpointerdownobservable
+func (v *VirtualKeyboard) OnPointerDownObservable(onPointerDownObservable *Observable) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(onPointerDownObservable.JSObject())
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerDownObservable sets the OnPointerDownObservable property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#onpointerdownobservable
+func (v *VirtualKeyboard) SetOnPointerDownObservable(onPointerDownObservable *Observable) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(onPointerDownObservable.JSObject())
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// OnPointerEnterObservable returns the OnPointerEnterObservable property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#onpointerenterobservable
+func (v *VirtualKeyboard) OnPointerEnterObservable(onPointerEnterObservable *Observable) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(onPointerEnterObservable.JSObject())
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerEnterObservable sets the OnPointerEnterObservable property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#onpointerenterobservable
+func (v *VirtualKeyboard) SetOnPointerEnterObservable(onPointerEnterObservable *Observable) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(onPointerEnterObservable.JSObject())
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// OnPointerMoveObservable returns the OnPointerMoveObservable property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#onpointermoveobservable
+func (v *VirtualKeyboard) OnPointerMoveObservable(onPointerMoveObservable *Observable) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(onPointerMoveObservable.JSObject())
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerMoveObservable sets the OnPointerMoveObservable property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#onpointermoveobservable
+func (v *VirtualKeyboard) SetOnPointerMoveObservable(onPointerMoveObservable *Observable) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(onPointerMoveObservable.JSObject())
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// OnPointerOutObservable returns the OnPointerOutObservable property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#onpointeroutobservable
+func (v *VirtualKeyboard) OnPointerOutObservable(onPointerOutObservable *Observable) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(onPointerOutObservable.JSObject())
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerOutObservable sets the OnPointerOutObservable property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#onpointeroutobservable
+func (v *VirtualKeyboard) SetOnPointerOutObservable(onPointerOutObservable *Observable) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(onPointerOutObservable.JSObject())
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// OnPointerUpObservable returns the OnPointerUpObservable property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#onpointerupobservable
+func (v *VirtualKeyboard) OnPointerUpObservable(onPointerUpObservable *Observable) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(onPointerUpObservable.JSObject())
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerUpObservable sets the OnPointerUpObservable property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#onpointerupobservable
+func (v *VirtualKeyboard) SetOnPointerUpObservable(onPointerUpObservable *Observable) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(onPointerUpObservable.JSObject())
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// PaddingBottom returns the PaddingBottom property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#paddingbottom
+func (v *VirtualKeyboard) PaddingBottom(paddingBottom string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(paddingBottom)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingBottom sets the PaddingBottom property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#paddingbottom
+func (v *VirtualKeyboard) SetPaddingBottom(paddingBottom string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(paddingBottom)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// PaddingBottomInPixels returns the PaddingBottomInPixels property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#paddingbottominpixels
+func (v *VirtualKeyboard) PaddingBottomInPixels(paddingBottomInPixels float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(paddingBottomInPixels)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingBottomInPixels sets the PaddingBottomInPixels property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#paddingbottominpixels
+func (v *VirtualKeyboard) SetPaddingBottomInPixels(paddingBottomInPixels float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(paddingBottomInPixels)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// PaddingLeft returns the PaddingLeft property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#paddingleft
+func (v *VirtualKeyboard) PaddingLeft(paddingLeft string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(paddingLeft)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingLeft sets the PaddingLeft property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#paddingleft
+func (v *VirtualKeyboard) SetPaddingLeft(paddingLeft string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(paddingLeft)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// PaddingLeftInPixels returns the PaddingLeftInPixels property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#paddingleftinpixels
+func (v *VirtualKeyboard) PaddingLeftInPixels(paddingLeftInPixels float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(paddingLeftInPixels)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingLeftInPixels sets the PaddingLeftInPixels property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#paddingleftinpixels
+func (v *VirtualKeyboard) SetPaddingLeftInPixels(paddingLeftInPixels float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(paddingLeftInPixels)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// PaddingRight returns the PaddingRight property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#paddingright
+func (v *VirtualKeyboard) PaddingRight(paddingRight string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(paddingRight)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingRight sets the PaddingRight property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#paddingright
+func (v *VirtualKeyboard) SetPaddingRight(paddingRight string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(paddingRight)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// PaddingRightInPixels returns the PaddingRightInPixels property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#paddingrightinpixels
+func (v *VirtualKeyboard) PaddingRightInPixels(paddingRightInPixels float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(paddingRightInPixels)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingRightInPixels sets the PaddingRightInPixels property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#paddingrightinpixels
+func (v *VirtualKeyboard) SetPaddingRightInPixels(paddingRightInPixels float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(paddingRightInPixels)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// PaddingTop returns the PaddingTop property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#paddingtop
+func (v *VirtualKeyboard) PaddingTop(paddingTop string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(paddingTop)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingTop sets the PaddingTop property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#paddingtop
+func (v *VirtualKeyboard) SetPaddingTop(paddingTop string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(paddingTop)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// PaddingTopInPixels returns the PaddingTopInPixels property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#paddingtopinpixels
+func (v *VirtualKeyboard) PaddingTopInPixels(paddingTopInPixels float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(paddingTopInPixels)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingTopInPixels sets the PaddingTopInPixels property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#paddingtopinpixels
+func (v *VirtualKeyboard) SetPaddingTopInPixels(paddingTopInPixels float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(paddingTopInPixels)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// Parent returns the Parent property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#parent
+func (v *VirtualKeyboard) Parent(parent *Container) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(parent.JSObject())
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetParent sets the Parent property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#parent
+func (v *VirtualKeyboard) SetParent(parent *Container) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(parent.JSObject())
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// Rotation returns the Rotation property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#rotation
+func (v *VirtualKeyboard) Rotation(rotation float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(rotation)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetRotation sets the Rotation property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#rotation
+func (v *VirtualKeyboard) SetRotation(rotation float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(rotation)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// ScaleX returns the ScaleX property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#scalex
+func (v *VirtualKeyboard) ScaleX(scaleX float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(scaleX)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetScaleX sets the ScaleX property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#scalex
+func (v *VirtualKeyboard) SetScaleX(scaleX float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(scaleX)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// ScaleY returns the ScaleY property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#scaley
+func (v *VirtualKeyboard) ScaleY(scaleY float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(scaleY)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetScaleY sets the ScaleY property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#scaley
+func (v *VirtualKeyboard) SetScaleY(scaleY float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(scaleY)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SelectedShiftThickness returns the SelectedShiftThickness property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#selectedshiftthickness
+func (v *VirtualKeyboard) SelectedShiftThickness(selectedShiftThickness float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(selectedShiftThickness)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetSelectedShiftThickness sets the SelectedShiftThickness property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#selectedshiftthickness
+func (v *VirtualKeyboard) SetSelectedShiftThickness(selectedShiftThickness float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(selectedShiftThickness)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// ShadowBlur returns the ShadowBlur property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#shadowblur
+func (v *VirtualKeyboard) ShadowBlur(shadowBlur float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(shadowBlur)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetShadowBlur sets the ShadowBlur property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#shadowblur
+func (v *VirtualKeyboard) SetShadowBlur(shadowBlur float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(shadowBlur)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// ShadowColor returns the ShadowColor property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#shadowcolor
+func (v *VirtualKeyboard) ShadowColor(shadowColor string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(shadowColor)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetShadowColor sets the ShadowColor property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#shadowcolor
+func (v *VirtualKeyboard) SetShadowColor(shadowColor string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(shadowColor)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// ShadowOffsetX returns the ShadowOffsetX property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#shadowoffsetx
+func (v *VirtualKeyboard) ShadowOffsetX(shadowOffsetX float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(shadowOffsetX)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetShadowOffsetX sets the ShadowOffsetX property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#shadowoffsetx
+func (v *VirtualKeyboard) SetShadowOffsetX(shadowOffsetX float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(shadowOffsetX)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// ShadowOffsetY returns the ShadowOffsetY property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#shadowoffsety
+func (v *VirtualKeyboard) ShadowOffsetY(shadowOffsetY float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(shadowOffsetY)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetShadowOffsetY sets the ShadowOffsetY property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#shadowoffsety
+func (v *VirtualKeyboard) SetShadowOffsetY(shadowOffsetY float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(shadowOffsetY)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// ShiftButtonColor returns the ShiftButtonColor property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#shiftbuttoncolor
+func (v *VirtualKeyboard) ShiftButtonColor(shiftButtonColor string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(shiftButtonColor)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetShiftButtonColor sets the ShiftButtonColor property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#shiftbuttoncolor
+func (v *VirtualKeyboard) SetShiftButtonColor(shiftButtonColor string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(shiftButtonColor)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// ShiftState returns the ShiftState property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#shiftstate
+func (v *VirtualKeyboard) ShiftState(shiftState float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(shiftState)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetShiftState sets the ShiftState property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#shiftstate
+func (v *VirtualKeyboard) SetShiftState(shiftState float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(shiftState)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// Style returns the Style property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#style
+func (v *VirtualKeyboard) Style(style *Style) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(style.JSObject())
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetStyle sets the Style property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#style
+func (v *VirtualKeyboard) SetStyle(style *Style) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(style.JSObject())
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// Top returns the Top property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#top
+func (v *VirtualKeyboard) Top(top string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(top)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetTop sets the Top property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#top
+func (v *VirtualKeyboard) SetTop(top string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(top)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// TopInPixels returns the TopInPixels property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#topinpixels
+func (v *VirtualKeyboard) TopInPixels(topInPixels float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(topInPixels)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetTopInPixels sets the TopInPixels property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#topinpixels
+func (v *VirtualKeyboard) SetTopInPixels(topInPixels float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(topInPixels)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// TransformCenterX returns the TransformCenterX property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#transformcenterx
+func (v *VirtualKeyboard) TransformCenterX(transformCenterX float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(transformCenterX)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetTransformCenterX sets the TransformCenterX property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#transformcenterx
+func (v *VirtualKeyboard) SetTransformCenterX(transformCenterX float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(transformCenterX)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// TransformCenterY returns the TransformCenterY property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#transformcentery
+func (v *VirtualKeyboard) TransformCenterY(transformCenterY float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(transformCenterY)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetTransformCenterY sets the TransformCenterY property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#transformcentery
+func (v *VirtualKeyboard) SetTransformCenterY(transformCenterY float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(transformCenterY)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// TypeName returns the TypeName property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#typename
+func (v *VirtualKeyboard) TypeName(typeName string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(typeName)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetTypeName sets the TypeName property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#typename
+func (v *VirtualKeyboard) SetTypeName(typeName string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(typeName)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#uniqueid
+func (v *VirtualKeyboard) UniqueId(uniqueId float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(uniqueId)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#uniqueid
+func (v *VirtualKeyboard) SetUniqueId(uniqueId float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(uniqueId)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// UseBitmapCache returns the UseBitmapCache property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#usebitmapcache
+func (v *VirtualKeyboard) UseBitmapCache(useBitmapCache bool) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(useBitmapCache)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetUseBitmapCache sets the UseBitmapCache property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#usebitmapcache
+func (v *VirtualKeyboard) SetUseBitmapCache(useBitmapCache bool) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(useBitmapCache)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// VERTICAL_ALIGNMENT_BOTTOM returns the VERTICAL_ALIGNMENT_BOTTOM property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#vertical_alignment_bottom
+func (v *VirtualKeyboard) VERTICAL_ALIGNMENT_BOTTOM(VERTICAL_ALIGNMENT_BOTTOM float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(VERTICAL_ALIGNMENT_BOTTOM)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetVERTICAL_ALIGNMENT_BOTTOM sets the VERTICAL_ALIGNMENT_BOTTOM property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#vertical_alignment_bottom
+func (v *VirtualKeyboard) SetVERTICAL_ALIGNMENT_BOTTOM(VERTICAL_ALIGNMENT_BOTTOM float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(VERTICAL_ALIGNMENT_BOTTOM)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// VERTICAL_ALIGNMENT_CENTER returns the VERTICAL_ALIGNMENT_CENTER property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#vertical_alignment_center
+func (v *VirtualKeyboard) VERTICAL_ALIGNMENT_CENTER(VERTICAL_ALIGNMENT_CENTER float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(VERTICAL_ALIGNMENT_CENTER)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetVERTICAL_ALIGNMENT_CENTER sets the VERTICAL_ALIGNMENT_CENTER property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#vertical_alignment_center
+func (v *VirtualKeyboard) SetVERTICAL_ALIGNMENT_CENTER(VERTICAL_ALIGNMENT_CENTER float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(VERTICAL_ALIGNMENT_CENTER)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// VERTICAL_ALIGNMENT_TOP returns the VERTICAL_ALIGNMENT_TOP property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#vertical_alignment_top
+func (v *VirtualKeyboard) VERTICAL_ALIGNMENT_TOP(VERTICAL_ALIGNMENT_TOP float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(VERTICAL_ALIGNMENT_TOP)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetVERTICAL_ALIGNMENT_TOP sets the VERTICAL_ALIGNMENT_TOP property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#vertical_alignment_top
+func (v *VirtualKeyboard) SetVERTICAL_ALIGNMENT_TOP(VERTICAL_ALIGNMENT_TOP float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(VERTICAL_ALIGNMENT_TOP)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// VerticalAlignment returns the VerticalAlignment property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#verticalalignment
+func (v *VirtualKeyboard) VerticalAlignment(verticalAlignment float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(verticalAlignment)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetVerticalAlignment sets the VerticalAlignment property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#verticalalignment
+func (v *VirtualKeyboard) SetVerticalAlignment(verticalAlignment float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(verticalAlignment)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// Width returns the Width property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#width
+func (v *VirtualKeyboard) Width(width string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(width)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetWidth sets the Width property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#width
+func (v *VirtualKeyboard) SetWidth(width string) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(width)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// WidthInPixels returns the WidthInPixels property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#widthinpixels
+func (v *VirtualKeyboard) WidthInPixels(widthInPixels float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(widthInPixels)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetWidthInPixels sets the WidthInPixels property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#widthinpixels
+func (v *VirtualKeyboard) SetWidthInPixels(widthInPixels float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(widthInPixels)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// ZIndex returns the ZIndex property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#zindex
+func (v *VirtualKeyboard) ZIndex(zIndex float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(zIndex)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+// SetZIndex sets the ZIndex property of class VirtualKeyboard.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualkeyboard#zindex
+func (v *VirtualKeyboard) SetZIndex(zIndex float64) *VirtualKeyboard {
+	p := ba.ctx.Get("VirtualKeyboard").New(zIndex)
+	return VirtualKeyboardFromJSObject(p, ba.ctx)
+}
+
+*/

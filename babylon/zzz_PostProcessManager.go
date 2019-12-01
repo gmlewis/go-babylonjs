@@ -32,8 +32,69 @@ func PostProcessManagerFromJSObject(p js.Value, ctx js.Value) *PostProcessManage
 //
 // https://doc.babylonjs.com/api/classes/babylon.postprocessmanager
 func (ba *Babylon) NewPostProcessManager(scene *Scene) *PostProcessManager {
-	p := ba.ctx.Get("PostProcessManager").New(scene.JSObject())
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("PostProcessManager").New(args...)
 	return PostProcessManagerFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// PostProcessManagerDirectRenderOpts contains optional parameters for PostProcessManager.DirectRender.
+type PostProcessManagerDirectRenderOpts struct {
+	TargetTexture           *InternalTexture
+	ForceFullscreenViewport *bool
+	FaceIndex               *float64
+	LodLevel                *float64
+}
+
+// DirectRender calls the DirectRender method on the PostProcessManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.postprocessmanager#directrender
+func (p *PostProcessManager) DirectRender(postProcesses *PostProcess, opts *PostProcessManagerDirectRenderOpts) {
+	if opts == nil {
+		opts = &PostProcessManagerDirectRenderOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+4)
+
+	args = append(args, postProcesses.JSObject())
+
+	if opts.TargetTexture == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.TargetTexture.JSObject())
+	}
+	if opts.ForceFullscreenViewport == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceFullscreenViewport)
+	}
+	if opts.FaceIndex == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FaceIndex)
+	}
+	if opts.LodLevel == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.LodLevel)
+	}
+
+	p.p.Call("directRender", args...)
+}
+
+// Dispose calls the Dispose method on the PostProcessManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.postprocessmanager#dispose
+func (p *PostProcessManager) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("dispose", args...)
+}
+
+/*
+
+ */

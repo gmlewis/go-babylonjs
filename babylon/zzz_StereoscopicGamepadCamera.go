@@ -33,8 +33,509 @@ func StereoscopicGamepadCameraFromJSObject(p js.Value, ctx js.Value) *Stereoscop
 //
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera
 func (ba *Babylon) NewStereoscopicGamepadCamera(name string, position *Vector3, interaxialDistance float64, isStereoscopicSideBySide bool, scene *Scene) *StereoscopicGamepadCamera {
-	p := ba.ctx.Get("StereoscopicGamepadCamera").New(name, position.JSObject(), interaxialDistance, isStereoscopicSideBySide, scene.JSObject())
+
+	args := make([]interface{}, 0, 5+0)
+
+	args = append(args, name)
+	args = append(args, position.JSObject())
+	args = append(args, interaxialDistance)
+	args = append(args, isStereoscopicSideBySide)
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(args...)
 	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// StereoscopicGamepadCameraAttachControlOpts contains optional parameters for StereoscopicGamepadCamera.AttachControl.
+type StereoscopicGamepadCameraAttachControlOpts struct {
+	NoPreventDefault *bool
+}
+
+// AttachControl calls the AttachControl method on the StereoscopicGamepadCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#attachcontrol
+func (s *StereoscopicGamepadCamera) AttachControl(element js.Value, opts *StereoscopicGamepadCameraAttachControlOpts) {
+	if opts == nil {
+		opts = &StereoscopicGamepadCameraAttachControlOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, element)
+
+	if opts.NoPreventDefault == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoPreventDefault)
+	}
+
+	s.p.Call("attachControl", args...)
+}
+
+// DetachControl calls the DetachControl method on the StereoscopicGamepadCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#detachcontrol
+func (s *StereoscopicGamepadCamera) DetachControl(element js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, element)
+
+	s.p.Call("detachControl", args...)
+}
+
+// Dispose calls the Dispose method on the StereoscopicGamepadCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#dispose
+func (s *StereoscopicGamepadCamera) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("dispose", args...)
+}
+
+// GetClassName calls the GetClassName method on the StereoscopicGamepadCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#getclassname
+func (s *StereoscopicGamepadCamera) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetFrontPosition calls the GetFrontPosition method on the StereoscopicGamepadCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#getfrontposition
+func (s *StereoscopicGamepadCamera) GetFrontPosition(distance float64) *Vector3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, distance)
+
+	retVal := s.p.Call("getFrontPosition", args...)
+	return Vector3FromJSObject(retVal, s.ctx)
+}
+
+// GetTarget calls the GetTarget method on the StereoscopicGamepadCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#gettarget
+func (s *StereoscopicGamepadCamera) GetTarget() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getTarget", args...)
+	return Vector3FromJSObject(retVal, s.ctx)
+}
+
+// SetTarget calls the SetTarget method on the StereoscopicGamepadCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#settarget
+func (s *StereoscopicGamepadCamera) SetTarget(target *Vector3) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, target.JSObject())
+
+	s.p.Call("setTarget", args...)
+}
+
+// StoreState calls the StoreState method on the StereoscopicGamepadCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#storestate
+func (s *StereoscopicGamepadCamera) StoreState() *Camera {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("storeState", args...)
+	return CameraFromJSObject(retVal, s.ctx)
+}
+
+/*
+
+// AngularSensibility returns the AngularSensibility property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#angularsensibility
+func (s *StereoscopicGamepadCamera) AngularSensibility(angularSensibility float64) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(angularSensibility)
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// SetAngularSensibility sets the AngularSensibility property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#angularsensibility
+func (s *StereoscopicGamepadCamera) SetAngularSensibility(angularSensibility float64) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(angularSensibility)
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// ApplyGravity returns the ApplyGravity property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#applygravity
+func (s *StereoscopicGamepadCamera) ApplyGravity(applyGravity bool) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(applyGravity)
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// SetApplyGravity sets the ApplyGravity property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#applygravity
+func (s *StereoscopicGamepadCamera) SetApplyGravity(applyGravity bool) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(applyGravity)
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// CameraDirection returns the CameraDirection property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#cameradirection
+func (s *StereoscopicGamepadCamera) CameraDirection(cameraDirection *Vector3) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(cameraDirection.JSObject())
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// SetCameraDirection sets the CameraDirection property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#cameradirection
+func (s *StereoscopicGamepadCamera) SetCameraDirection(cameraDirection *Vector3) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(cameraDirection.JSObject())
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// CameraRotation returns the CameraRotation property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#camerarotation
+func (s *StereoscopicGamepadCamera) CameraRotation(cameraRotation *Vector2) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(cameraRotation.JSObject())
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// SetCameraRotation sets the CameraRotation property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#camerarotation
+func (s *StereoscopicGamepadCamera) SetCameraRotation(cameraRotation *Vector2) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(cameraRotation.JSObject())
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// CheckCollisions returns the CheckCollisions property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#checkcollisions
+func (s *StereoscopicGamepadCamera) CheckCollisions(checkCollisions bool) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(checkCollisions)
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// SetCheckCollisions sets the CheckCollisions property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#checkcollisions
+func (s *StereoscopicGamepadCamera) SetCheckCollisions(checkCollisions bool) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(checkCollisions)
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// CollisionMask returns the CollisionMask property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#collisionmask
+func (s *StereoscopicGamepadCamera) CollisionMask(collisionMask float64) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(collisionMask)
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// SetCollisionMask sets the CollisionMask property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#collisionmask
+func (s *StereoscopicGamepadCamera) SetCollisionMask(collisionMask float64) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(collisionMask)
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// Ellipsoid returns the Ellipsoid property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#ellipsoid
+func (s *StereoscopicGamepadCamera) Ellipsoid(ellipsoid *Vector3) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(ellipsoid.JSObject())
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// SetEllipsoid sets the Ellipsoid property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#ellipsoid
+func (s *StereoscopicGamepadCamera) SetEllipsoid(ellipsoid *Vector3) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(ellipsoid.JSObject())
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// EllipsoidOffset returns the EllipsoidOffset property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#ellipsoidoffset
+func (s *StereoscopicGamepadCamera) EllipsoidOffset(ellipsoidOffset *Vector3) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(ellipsoidOffset.JSObject())
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// SetEllipsoidOffset sets the EllipsoidOffset property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#ellipsoidoffset
+func (s *StereoscopicGamepadCamera) SetEllipsoidOffset(ellipsoidOffset *Vector3) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(ellipsoidOffset.JSObject())
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// GamepadAngularSensibility returns the GamepadAngularSensibility property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#gamepadangularsensibility
+func (s *StereoscopicGamepadCamera) GamepadAngularSensibility(gamepadAngularSensibility float64) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(gamepadAngularSensibility)
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// SetGamepadAngularSensibility sets the GamepadAngularSensibility property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#gamepadangularsensibility
+func (s *StereoscopicGamepadCamera) SetGamepadAngularSensibility(gamepadAngularSensibility float64) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(gamepadAngularSensibility)
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// GamepadMoveSensibility returns the GamepadMoveSensibility property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#gamepadmovesensibility
+func (s *StereoscopicGamepadCamera) GamepadMoveSensibility(gamepadMoveSensibility float64) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(gamepadMoveSensibility)
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// SetGamepadMoveSensibility sets the GamepadMoveSensibility property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#gamepadmovesensibility
+func (s *StereoscopicGamepadCamera) SetGamepadMoveSensibility(gamepadMoveSensibility float64) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(gamepadMoveSensibility)
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// Inputs returns the Inputs property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#inputs
+func (s *StereoscopicGamepadCamera) Inputs(inputs *FreeCameraInputsManager) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(inputs.JSObject())
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// SetInputs sets the Inputs property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#inputs
+func (s *StereoscopicGamepadCamera) SetInputs(inputs *FreeCameraInputsManager) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(inputs.JSObject())
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// KeysDown returns the KeysDown property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#keysdown
+func (s *StereoscopicGamepadCamera) KeysDown(keysDown float64) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(keysDown)
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// SetKeysDown sets the KeysDown property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#keysdown
+func (s *StereoscopicGamepadCamera) SetKeysDown(keysDown float64) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(keysDown)
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// KeysLeft returns the KeysLeft property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#keysleft
+func (s *StereoscopicGamepadCamera) KeysLeft(keysLeft float64) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(keysLeft)
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// SetKeysLeft sets the KeysLeft property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#keysleft
+func (s *StereoscopicGamepadCamera) SetKeysLeft(keysLeft float64) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(keysLeft)
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// KeysRight returns the KeysRight property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#keysright
+func (s *StereoscopicGamepadCamera) KeysRight(keysRight float64) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(keysRight)
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// SetKeysRight sets the KeysRight property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#keysright
+func (s *StereoscopicGamepadCamera) SetKeysRight(keysRight float64) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(keysRight)
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// KeysUp returns the KeysUp property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#keysup
+func (s *StereoscopicGamepadCamera) KeysUp(keysUp float64) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(keysUp)
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// SetKeysUp sets the KeysUp property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#keysup
+func (s *StereoscopicGamepadCamera) SetKeysUp(keysUp float64) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(keysUp)
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// LockedTarget returns the LockedTarget property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#lockedtarget
+func (s *StereoscopicGamepadCamera) LockedTarget(lockedTarget interface{}) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(lockedTarget)
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// SetLockedTarget sets the LockedTarget property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#lockedtarget
+func (s *StereoscopicGamepadCamera) SetLockedTarget(lockedTarget interface{}) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(lockedTarget)
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// NoRotationConstraint returns the NoRotationConstraint property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#norotationconstraint
+func (s *StereoscopicGamepadCamera) NoRotationConstraint(noRotationConstraint bool) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(noRotationConstraint)
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// SetNoRotationConstraint sets the NoRotationConstraint property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#norotationconstraint
+func (s *StereoscopicGamepadCamera) SetNoRotationConstraint(noRotationConstraint bool) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(noRotationConstraint)
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// OnCollide returns the OnCollide property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#oncollide
+func (s *StereoscopicGamepadCamera) OnCollide(onCollide func()) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(onCollide)
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// SetOnCollide sets the OnCollide property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#oncollide
+func (s *StereoscopicGamepadCamera) SetOnCollide(onCollide func()) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(onCollide)
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// Rotation returns the Rotation property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#rotation
+func (s *StereoscopicGamepadCamera) Rotation(rotation *Vector3) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(rotation.JSObject())
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// SetRotation sets the Rotation property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#rotation
+func (s *StereoscopicGamepadCamera) SetRotation(rotation *Vector3) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(rotation.JSObject())
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// RotationQuaternion returns the RotationQuaternion property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#rotationquaternion
+func (s *StereoscopicGamepadCamera) RotationQuaternion(rotationQuaternion *Quaternion) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(rotationQuaternion.JSObject())
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// SetRotationQuaternion sets the RotationQuaternion property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#rotationquaternion
+func (s *StereoscopicGamepadCamera) SetRotationQuaternion(rotationQuaternion *Quaternion) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(rotationQuaternion.JSObject())
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// Speed returns the Speed property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#speed
+func (s *StereoscopicGamepadCamera) Speed(speed float64) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(speed)
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// SetSpeed sets the Speed property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#speed
+func (s *StereoscopicGamepadCamera) SetSpeed(speed float64) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(speed)
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// TouchAngularSensibility returns the TouchAngularSensibility property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#touchangularsensibility
+func (s *StereoscopicGamepadCamera) TouchAngularSensibility(touchAngularSensibility float64) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(touchAngularSensibility)
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// SetTouchAngularSensibility sets the TouchAngularSensibility property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#touchangularsensibility
+func (s *StereoscopicGamepadCamera) SetTouchAngularSensibility(touchAngularSensibility float64) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(touchAngularSensibility)
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// TouchMoveSensibility returns the TouchMoveSensibility property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#touchmovesensibility
+func (s *StereoscopicGamepadCamera) TouchMoveSensibility(touchMoveSensibility float64) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(touchMoveSensibility)
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// SetTouchMoveSensibility sets the TouchMoveSensibility property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#touchmovesensibility
+func (s *StereoscopicGamepadCamera) SetTouchMoveSensibility(touchMoveSensibility float64) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(touchMoveSensibility)
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// UpdateUpVectorFromRotation returns the UpdateUpVectorFromRotation property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#updateupvectorfromrotation
+func (s *StereoscopicGamepadCamera) UpdateUpVectorFromRotation(updateUpVectorFromRotation bool) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(updateUpVectorFromRotation)
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateUpVectorFromRotation sets the UpdateUpVectorFromRotation property of class StereoscopicGamepadCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicgamepadcamera#updateupvectorfromrotation
+func (s *StereoscopicGamepadCamera) SetUpdateUpVectorFromRotation(updateUpVectorFromRotation bool) *StereoscopicGamepadCamera {
+	p := ba.ctx.Get("StereoscopicGamepadCamera").New(updateUpVectorFromRotation)
+	return StereoscopicGamepadCameraFromJSObject(p, ba.ctx)
+}
+
+*/

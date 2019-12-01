@@ -30,9 +30,452 @@ func NodeMaterialConnectionPointFromJSObject(p js.Value, ctx js.Value) *NodeMate
 // NewNodeMaterialConnectionPoint returns a new NodeMaterialConnectionPoint object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint
-func (ba *Babylon) NewNodeMaterialConnectionPoint(name string, ownerBlock *NodeMaterialBlock, direction js.Value) *NodeMaterialConnectionPoint {
-	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(name, ownerBlock.JSObject(), direction)
+func (ba *Babylon) NewNodeMaterialConnectionPoint(name string, ownerBlock *NodeMaterialBlock, direction *NodeMaterialConnectionPointDirection) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, name)
+	args = append(args, ownerBlock.JSObject())
+	args = append(args, direction.JSObject())
+
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(args...)
 	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// CanConnectTo calls the CanConnectTo method on the NodeMaterialConnectionPoint object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#canconnectto
+func (n *NodeMaterialConnectionPoint) CanConnectTo(connectionPoint *NodeMaterialConnectionPoint) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, connectionPoint.JSObject())
+
+	retVal := n.p.Call("canConnectTo", args...)
+	return retVal.Bool()
+}
+
+// CheckCompatibilityState calls the CheckCompatibilityState method on the NodeMaterialConnectionPoint object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#checkcompatibilitystate
+func (n *NodeMaterialConnectionPoint) CheckCompatibilityState(connectionPoint *NodeMaterialConnectionPoint) *NodeMaterialConnectionPointCompatibilityStates {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, connectionPoint.JSObject())
+
+	retVal := n.p.Call("checkCompatibilityState", args...)
+	return NodeMaterialConnectionPointCompatibilityStatesFromJSObject(retVal, n.ctx)
+}
+
+// NodeMaterialConnectionPointConnectToOpts contains optional parameters for NodeMaterialConnectionPoint.ConnectTo.
+type NodeMaterialConnectionPointConnectToOpts struct {
+	IgnoreConstraints *bool
+}
+
+// ConnectTo calls the ConnectTo method on the NodeMaterialConnectionPoint object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#connectto
+func (n *NodeMaterialConnectionPoint) ConnectTo(connectionPoint *NodeMaterialConnectionPoint, opts *NodeMaterialConnectionPointConnectToOpts) *NodeMaterialConnectionPoint {
+	if opts == nil {
+		opts = &NodeMaterialConnectionPointConnectToOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, connectionPoint.JSObject())
+
+	if opts.IgnoreConstraints == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IgnoreConstraints)
+	}
+
+	retVal := n.p.Call("connectTo", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, n.ctx)
+}
+
+// DisconnectFrom calls the DisconnectFrom method on the NodeMaterialConnectionPoint object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#disconnectfrom
+func (n *NodeMaterialConnectionPoint) DisconnectFrom(endpoint *NodeMaterialConnectionPoint) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, endpoint.JSObject())
+
+	retVal := n.p.Call("disconnectFrom", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, n.ctx)
+}
+
+// Dispose calls the Dispose method on the NodeMaterialConnectionPoint object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#dispose
+func (n *NodeMaterialConnectionPoint) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	n.p.Call("dispose", args...)
+}
+
+// GetClassName calls the GetClassName method on the NodeMaterialConnectionPoint object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#getclassname
+func (n *NodeMaterialConnectionPoint) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// Serialize calls the Serialize method on the NodeMaterialConnectionPoint object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#serialize
+func (n *NodeMaterialConnectionPoint) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("serialize", args...)
+	return retVal
+}
+
+/*
+
+// AcceptedConnectionPointTypes returns the AcceptedConnectionPointTypes property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#acceptedconnectionpointtypes
+func (n *NodeMaterialConnectionPoint) AcceptedConnectionPointTypes(acceptedConnectionPointTypes js.Value) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(acceptedConnectionPointTypes)
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// SetAcceptedConnectionPointTypes sets the AcceptedConnectionPointTypes property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#acceptedconnectionpointtypes
+func (n *NodeMaterialConnectionPoint) SetAcceptedConnectionPointTypes(acceptedConnectionPointTypes js.Value) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(acceptedConnectionPointTypes)
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// AssociatedVariableName returns the AssociatedVariableName property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#associatedvariablename
+func (n *NodeMaterialConnectionPoint) AssociatedVariableName(associatedVariableName string) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(associatedVariableName)
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// SetAssociatedVariableName sets the AssociatedVariableName property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#associatedvariablename
+func (n *NodeMaterialConnectionPoint) SetAssociatedVariableName(associatedVariableName string) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(associatedVariableName)
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// ConnectInputBlock returns the ConnectInputBlock property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#connectinputblock
+func (n *NodeMaterialConnectionPoint) ConnectInputBlock(connectInputBlock *InputBlock) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(connectInputBlock.JSObject())
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// SetConnectInputBlock sets the ConnectInputBlock property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#connectinputblock
+func (n *NodeMaterialConnectionPoint) SetConnectInputBlock(connectInputBlock *InputBlock) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(connectInputBlock.JSObject())
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// ConnectedBlocks returns the ConnectedBlocks property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#connectedblocks
+func (n *NodeMaterialConnectionPoint) ConnectedBlocks(connectedBlocks []NodeMaterialBlock) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(connectedBlocks.JSObject())
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// SetConnectedBlocks sets the ConnectedBlocks property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#connectedblocks
+func (n *NodeMaterialConnectionPoint) SetConnectedBlocks(connectedBlocks []NodeMaterialBlock) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(connectedBlocks.JSObject())
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// ConnectedPoint returns the ConnectedPoint property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#connectedpoint
+func (n *NodeMaterialConnectionPoint) ConnectedPoint(connectedPoint *NodeMaterialConnectionPoint) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(connectedPoint.JSObject())
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// SetConnectedPoint sets the ConnectedPoint property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#connectedpoint
+func (n *NodeMaterialConnectionPoint) SetConnectedPoint(connectedPoint *NodeMaterialConnectionPoint) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(connectedPoint.JSObject())
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// Define returns the Define property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#define
+func (n *NodeMaterialConnectionPoint) Define(define string) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(define)
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// SetDefine sets the Define property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#define
+func (n *NodeMaterialConnectionPoint) SetDefine(define string) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(define)
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// Direction returns the Direction property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#direction
+func (n *NodeMaterialConnectionPoint) Direction(direction *NodeMaterialConnectionPointDirection) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(direction.JSObject())
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// SetDirection sets the Direction property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#direction
+func (n *NodeMaterialConnectionPoint) SetDirection(direction *NodeMaterialConnectionPointDirection) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(direction.JSObject())
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// Endpoints returns the Endpoints property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#endpoints
+func (n *NodeMaterialConnectionPoint) Endpoints(endpoints *NodeMaterialConnectionPoint) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(endpoints.JSObject())
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// SetEndpoints sets the Endpoints property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#endpoints
+func (n *NodeMaterialConnectionPoint) SetEndpoints(endpoints *NodeMaterialConnectionPoint) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(endpoints.JSObject())
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// ExcludedConnectionPointTypes returns the ExcludedConnectionPointTypes property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#excludedconnectionpointtypes
+func (n *NodeMaterialConnectionPoint) ExcludedConnectionPointTypes(excludedConnectionPointTypes js.Value) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(excludedConnectionPointTypes)
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// SetExcludedConnectionPointTypes sets the ExcludedConnectionPointTypes property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#excludedconnectionpointtypes
+func (n *NodeMaterialConnectionPoint) SetExcludedConnectionPointTypes(excludedConnectionPointTypes js.Value) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(excludedConnectionPointTypes)
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// HasEndpoints returns the HasEndpoints property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#hasendpoints
+func (n *NodeMaterialConnectionPoint) HasEndpoints(hasEndpoints bool) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(hasEndpoints)
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// SetHasEndpoints sets the HasEndpoints property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#hasendpoints
+func (n *NodeMaterialConnectionPoint) SetHasEndpoints(hasEndpoints bool) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(hasEndpoints)
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// IsConnected returns the IsConnected property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#isconnected
+func (n *NodeMaterialConnectionPoint) IsConnected(isConnected bool) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(isConnected)
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// SetIsConnected sets the IsConnected property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#isconnected
+func (n *NodeMaterialConnectionPoint) SetIsConnected(isConnected bool) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(isConnected)
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// IsConnectedInFragmentShader returns the IsConnectedInFragmentShader property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#isconnectedinfragmentshader
+func (n *NodeMaterialConnectionPoint) IsConnectedInFragmentShader(isConnectedInFragmentShader bool) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(isConnectedInFragmentShader)
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// SetIsConnectedInFragmentShader sets the IsConnectedInFragmentShader property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#isconnectedinfragmentshader
+func (n *NodeMaterialConnectionPoint) SetIsConnectedInFragmentShader(isConnectedInFragmentShader bool) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(isConnectedInFragmentShader)
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// IsConnectedInVertexShader returns the IsConnectedInVertexShader property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#isconnectedinvertexshader
+func (n *NodeMaterialConnectionPoint) IsConnectedInVertexShader(isConnectedInVertexShader bool) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(isConnectedInVertexShader)
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// SetIsConnectedInVertexShader sets the IsConnectedInVertexShader property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#isconnectedinvertexshader
+func (n *NodeMaterialConnectionPoint) SetIsConnectedInVertexShader(isConnectedInVertexShader bool) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(isConnectedInVertexShader)
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// IsConnectedToInputBlock returns the IsConnectedToInputBlock property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#isconnectedtoinputblock
+func (n *NodeMaterialConnectionPoint) IsConnectedToInputBlock(isConnectedToInputBlock bool) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(isConnectedToInputBlock)
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// SetIsConnectedToInputBlock sets the IsConnectedToInputBlock property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#isconnectedtoinputblock
+func (n *NodeMaterialConnectionPoint) SetIsConnectedToInputBlock(isConnectedToInputBlock bool) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(isConnectedToInputBlock)
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// IsOptional returns the IsOptional property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#isoptional
+func (n *NodeMaterialConnectionPoint) IsOptional(isOptional bool) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(isOptional)
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// SetIsOptional sets the IsOptional property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#isoptional
+func (n *NodeMaterialConnectionPoint) SetIsOptional(isOptional bool) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(isOptional)
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#name
+func (n *NodeMaterialConnectionPoint) Name(name string) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(name)
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#name
+func (n *NodeMaterialConnectionPoint) SetName(name string) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(name)
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// OnConnectionObservable returns the OnConnectionObservable property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#onconnectionobservable
+func (n *NodeMaterialConnectionPoint) OnConnectionObservable(onConnectionObservable *Observable) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(onConnectionObservable.JSObject())
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// SetOnConnectionObservable sets the OnConnectionObservable property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#onconnectionobservable
+func (n *NodeMaterialConnectionPoint) SetOnConnectionObservable(onConnectionObservable *Observable) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(onConnectionObservable.JSObject())
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// OwnerBlock returns the OwnerBlock property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#ownerblock
+func (n *NodeMaterialConnectionPoint) OwnerBlock(ownerBlock *NodeMaterialBlock) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(ownerBlock.JSObject())
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// SetOwnerBlock sets the OwnerBlock property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#ownerblock
+func (n *NodeMaterialConnectionPoint) SetOwnerBlock(ownerBlock *NodeMaterialBlock) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(ownerBlock.JSObject())
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// SourceBlock returns the SourceBlock property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#sourceblock
+func (n *NodeMaterialConnectionPoint) SourceBlock(sourceBlock *NodeMaterialBlock) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(sourceBlock.JSObject())
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// SetSourceBlock sets the SourceBlock property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#sourceblock
+func (n *NodeMaterialConnectionPoint) SetSourceBlock(sourceBlock *NodeMaterialBlock) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(sourceBlock.JSObject())
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// Target returns the Target property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#target
+func (n *NodeMaterialConnectionPoint) Target(target js.Value) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(target)
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// SetTarget sets the Target property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#target
+func (n *NodeMaterialConnectionPoint) SetTarget(target js.Value) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(target)
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// Type returns the Type property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#type
+func (n *NodeMaterialConnectionPoint) Type(jsType js.Value) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(jsType)
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+// SetType sets the Type property of class NodeMaterialConnectionPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialconnectionpoint#type
+func (n *NodeMaterialConnectionPoint) SetType(jsType js.Value) *NodeMaterialConnectionPoint {
+	p := ba.ctx.Get("NodeMaterialConnectionPoint").New(jsType)
+	return NodeMaterialConnectionPointFromJSObject(p, ba.ctx)
+}
+
+*/

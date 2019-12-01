@@ -43,8 +43,160 @@ func (ba *Babylon) NewSetValueAction(triggerOptions interface{}, target interfac
 		opts = &NewSetValueActionOpts{}
 	}
 
-	p := ba.ctx.Get("SetValueAction").New(triggerOptions, target, propertyPath, value, opts.Condition.JSObject())
+	args := make([]interface{}, 0, 4+1)
+
+	args = append(args, triggerOptions)
+	args = append(args, target)
+	args = append(args, propertyPath)
+	args = append(args, value)
+
+	if opts.Condition == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Condition.JSObject())
+	}
+
+	p := ba.ctx.Get("SetValueAction").New(args...)
 	return SetValueActionFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Execute calls the Execute method on the SetValueAction object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.setvalueaction#execute
+func (s *SetValueAction) Execute() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("execute", args...)
+}
+
+// GetTriggerParameter calls the GetTriggerParameter method on the SetValueAction object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.setvalueaction#gettriggerparameter
+func (s *SetValueAction) GetTriggerParameter() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getTriggerParameter", args...)
+	return retVal
+}
+
+// Serialize calls the Serialize method on the SetValueAction object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.setvalueaction#serialize
+func (s *SetValueAction) Serialize(parent interface{}) interface{} {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, parent)
+
+	retVal := s.p.Call("serialize", args...)
+	return retVal
+}
+
+// SkipToNextActiveAction calls the SkipToNextActiveAction method on the SetValueAction object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.setvalueaction#skiptonextactiveaction
+func (s *SetValueAction) SkipToNextActiveAction() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("skipToNextActiveAction", args...)
+}
+
+// Then calls the Then method on the SetValueAction object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.setvalueaction#then
+func (s *SetValueAction) Then(action *Action) *Action {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, action.JSObject())
+
+	retVal := s.p.Call("then", args...)
+	return ActionFromJSObject(retVal, s.ctx)
+}
+
+/*
+
+// OnBeforeExecuteObservable returns the OnBeforeExecuteObservable property of class SetValueAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.setvalueaction#onbeforeexecuteobservable
+func (s *SetValueAction) OnBeforeExecuteObservable(onBeforeExecuteObservable *Observable) *SetValueAction {
+	p := ba.ctx.Get("SetValueAction").New(onBeforeExecuteObservable.JSObject())
+	return SetValueActionFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeExecuteObservable sets the OnBeforeExecuteObservable property of class SetValueAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.setvalueaction#onbeforeexecuteobservable
+func (s *SetValueAction) SetOnBeforeExecuteObservable(onBeforeExecuteObservable *Observable) *SetValueAction {
+	p := ba.ctx.Get("SetValueAction").New(onBeforeExecuteObservable.JSObject())
+	return SetValueActionFromJSObject(p, ba.ctx)
+}
+
+// PropertyPath returns the PropertyPath property of class SetValueAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.setvalueaction#propertypath
+func (s *SetValueAction) PropertyPath(propertyPath string) *SetValueAction {
+	p := ba.ctx.Get("SetValueAction").New(propertyPath)
+	return SetValueActionFromJSObject(p, ba.ctx)
+}
+
+// SetPropertyPath sets the PropertyPath property of class SetValueAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.setvalueaction#propertypath
+func (s *SetValueAction) SetPropertyPath(propertyPath string) *SetValueAction {
+	p := ba.ctx.Get("SetValueAction").New(propertyPath)
+	return SetValueActionFromJSObject(p, ba.ctx)
+}
+
+// Trigger returns the Trigger property of class SetValueAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.setvalueaction#trigger
+func (s *SetValueAction) Trigger(trigger float64) *SetValueAction {
+	p := ba.ctx.Get("SetValueAction").New(trigger)
+	return SetValueActionFromJSObject(p, ba.ctx)
+}
+
+// SetTrigger sets the Trigger property of class SetValueAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.setvalueaction#trigger
+func (s *SetValueAction) SetTrigger(trigger float64) *SetValueAction {
+	p := ba.ctx.Get("SetValueAction").New(trigger)
+	return SetValueActionFromJSObject(p, ba.ctx)
+}
+
+// TriggerOptions returns the TriggerOptions property of class SetValueAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.setvalueaction#triggeroptions
+func (s *SetValueAction) TriggerOptions(triggerOptions interface{}) *SetValueAction {
+	p := ba.ctx.Get("SetValueAction").New(triggerOptions)
+	return SetValueActionFromJSObject(p, ba.ctx)
+}
+
+// SetTriggerOptions sets the TriggerOptions property of class SetValueAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.setvalueaction#triggeroptions
+func (s *SetValueAction) SetTriggerOptions(triggerOptions interface{}) *SetValueAction {
+	p := ba.ctx.Get("SetValueAction").New(triggerOptions)
+	return SetValueActionFromJSObject(p, ba.ctx)
+}
+
+// Value returns the Value property of class SetValueAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.setvalueaction#value
+func (s *SetValueAction) Value(value interface{}) *SetValueAction {
+	p := ba.ctx.Get("SetValueAction").New(value)
+	return SetValueActionFromJSObject(p, ba.ctx)
+}
+
+// SetValue sets the Value property of class SetValueAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.setvalueaction#value
+func (s *SetValueAction) SetValue(value interface{}) *SetValueAction {
+	p := ba.ctx.Get("SetValueAction").New(value)
+	return SetValueActionFromJSObject(p, ba.ctx)
+}
+
+*/

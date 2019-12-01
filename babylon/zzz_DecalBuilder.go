@@ -27,4 +27,21 @@ func DecalBuilderFromJSObject(p js.Value, ctx js.Value) *DecalBuilder {
 	return &DecalBuilder{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// CreateDecal calls the CreateDecal method on the DecalBuilder object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.decalbuilder#createdecal
+func (d *DecalBuilder) CreateDecal(name string, sourceMesh *AbstractMesh, options js.Value) *Mesh {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, name)
+	args = append(args, sourceMesh.JSObject())
+	args = append(args, options)
+
+	retVal := d.p.Call("CreateDecal", args...)
+	return MeshFromJSObject(retVal, d.ctx)
+}
+
+/*
+
+ */

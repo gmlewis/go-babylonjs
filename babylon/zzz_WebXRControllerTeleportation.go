@@ -40,8 +40,20 @@ func (ba *Babylon) NewWebXRControllerTeleportation(input *WebXRInput, opts *NewW
 		opts = &NewWebXRControllerTeleportationOpts{}
 	}
 
-	p := ba.ctx.Get("WebXRControllerTeleportation").New(input.JSObject(), opts.FloorMeshes)
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, input.JSObject())
+
+	if opts.FloorMeshes == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.FloorMeshes)
+	}
+
+	p := ba.ctx.Get("WebXRControllerTeleportation").New(args...)
 	return WebXRControllerTeleportationFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+/*
+
+ */

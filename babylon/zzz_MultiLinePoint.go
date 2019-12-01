@@ -32,8 +32,110 @@ func MultiLinePointFromJSObject(p js.Value, ctx js.Value) *MultiLinePoint {
 //
 // https://doc.babylonjs.com/api/classes/babylon.multilinepoint
 func (ba *Babylon) NewMultiLinePoint(multiLine *MultiLine) *MultiLinePoint {
-	p := ba.ctx.Get("MultiLinePoint").New(multiLine.JSObject())
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, multiLine.JSObject())
+
+	p := ba.ctx.Get("MultiLinePoint").New(args...)
 	return MultiLinePointFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Dispose calls the Dispose method on the MultiLinePoint object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multilinepoint#dispose
+func (m *MultiLinePoint) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	m.p.Call("dispose", args...)
+}
+
+// ResetLinks calls the ResetLinks method on the MultiLinePoint object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multilinepoint#resetlinks
+func (m *MultiLinePoint) ResetLinks() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	m.p.Call("resetLinks", args...)
+}
+
+// Translate calls the Translate method on the MultiLinePoint object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multilinepoint#translate
+func (m *MultiLinePoint) Translate() *Vector2 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("translate", args...)
+	return Vector2FromJSObject(retVal, m.ctx)
+}
+
+/*
+
+// Control returns the Control property of class MultiLinePoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multilinepoint#control
+func (m *MultiLinePoint) Control(control *Control) *MultiLinePoint {
+	p := ba.ctx.Get("MultiLinePoint").New(control.JSObject())
+	return MultiLinePointFromJSObject(p, ba.ctx)
+}
+
+// SetControl sets the Control property of class MultiLinePoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multilinepoint#control
+func (m *MultiLinePoint) SetControl(control *Control) *MultiLinePoint {
+	p := ba.ctx.Get("MultiLinePoint").New(control.JSObject())
+	return MultiLinePointFromJSObject(p, ba.ctx)
+}
+
+// Mesh returns the Mesh property of class MultiLinePoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multilinepoint#mesh
+func (m *MultiLinePoint) Mesh(mesh *AbstractMesh) *MultiLinePoint {
+	p := ba.ctx.Get("MultiLinePoint").New(mesh.JSObject())
+	return MultiLinePointFromJSObject(p, ba.ctx)
+}
+
+// SetMesh sets the Mesh property of class MultiLinePoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multilinepoint#mesh
+func (m *MultiLinePoint) SetMesh(mesh *AbstractMesh) *MultiLinePoint {
+	p := ba.ctx.Get("MultiLinePoint").New(mesh.JSObject())
+	return MultiLinePointFromJSObject(p, ba.ctx)
+}
+
+// X returns the X property of class MultiLinePoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multilinepoint#x
+func (m *MultiLinePoint) X(x string) *MultiLinePoint {
+	p := ba.ctx.Get("MultiLinePoint").New(x)
+	return MultiLinePointFromJSObject(p, ba.ctx)
+}
+
+// SetX sets the X property of class MultiLinePoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multilinepoint#x
+func (m *MultiLinePoint) SetX(x string) *MultiLinePoint {
+	p := ba.ctx.Get("MultiLinePoint").New(x)
+	return MultiLinePointFromJSObject(p, ba.ctx)
+}
+
+// Y returns the Y property of class MultiLinePoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multilinepoint#y
+func (m *MultiLinePoint) Y(y string) *MultiLinePoint {
+	p := ba.ctx.Get("MultiLinePoint").New(y)
+	return MultiLinePointFromJSObject(p, ba.ctx)
+}
+
+// SetY sets the Y property of class MultiLinePoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multilinepoint#y
+func (m *MultiLinePoint) SetY(y string) *MultiLinePoint {
+	p := ba.ctx.Get("MultiLinePoint").New(y)
+	return MultiLinePointFromJSObject(p, ba.ctx)
+}
+
+*/

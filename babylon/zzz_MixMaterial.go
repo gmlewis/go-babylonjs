@@ -31,8 +31,1609 @@ func MixMaterialFromJSObject(p js.Value, ctx js.Value) *MixMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.mixmaterial
 func (ba *Babylon) NewMixMaterial(name string, scene *Scene) *MixMaterial {
-	p := ba.ctx.Get("MixMaterial").New(name, scene.JSObject())
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("MixMaterial").New(args...)
 	return MixMaterialFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// MixMaterialBindOpts contains optional parameters for MixMaterial.Bind.
+type MixMaterialBindOpts struct {
+	Mesh *Mesh
+}
+
+// Bind calls the Bind method on the MixMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#bind
+func (m *MixMaterial) Bind(world *Matrix, opts *MixMaterialBindOpts) {
+	if opts == nil {
+		opts = &MixMaterialBindOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, world.JSObject())
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	m.p.Call("bind", args...)
+}
+
+// BindForSubMesh calls the BindForSubMesh method on the MixMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#bindforsubmesh
+func (m *MixMaterial) BindForSubMesh(world *Matrix, mesh *Mesh, subMesh *SubMesh) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, world.JSObject())
+	args = append(args, mesh.JSObject())
+	args = append(args, subMesh.JSObject())
+
+	m.p.Call("bindForSubMesh", args...)
+}
+
+// BindOnlyNormalMatrix calls the BindOnlyNormalMatrix method on the MixMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#bindonlynormalmatrix
+func (m *MixMaterial) BindOnlyNormalMatrix(normalMatrix *Matrix) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, normalMatrix.JSObject())
+
+	m.p.Call("bindOnlyNormalMatrix", args...)
+}
+
+// BindOnlyWorldMatrix calls the BindOnlyWorldMatrix method on the MixMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#bindonlyworldmatrix
+func (m *MixMaterial) BindOnlyWorldMatrix(world *Matrix) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, world.JSObject())
+
+	m.p.Call("bindOnlyWorldMatrix", args...)
+}
+
+// BindSceneUniformBuffer calls the BindSceneUniformBuffer method on the MixMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#bindsceneuniformbuffer
+func (m *MixMaterial) BindSceneUniformBuffer(effect *Effect, sceneUbo *UniformBuffer) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, effect.JSObject())
+	args = append(args, sceneUbo.JSObject())
+
+	m.p.Call("bindSceneUniformBuffer", args...)
+}
+
+// BindView calls the BindView method on the MixMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#bindview
+func (m *MixMaterial) BindView(effect *Effect) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, effect.JSObject())
+
+	m.p.Call("bindView", args...)
+}
+
+// BindViewProjection calls the BindViewProjection method on the MixMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#bindviewprojection
+func (m *MixMaterial) BindViewProjection(effect *Effect) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, effect.JSObject())
+
+	m.p.Call("bindViewProjection", args...)
+}
+
+// Clone calls the Clone method on the MixMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#clone
+func (m *MixMaterial) Clone(name string) *MixMaterial {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := m.p.Call("clone", args...)
+	return MixMaterialFromJSObject(retVal, m.ctx)
+}
+
+// MixMaterialDisposeOpts contains optional parameters for MixMaterial.Dispose.
+type MixMaterialDisposeOpts struct {
+	ForceDisposeEffect *bool
+}
+
+// Dispose calls the Dispose method on the MixMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#dispose
+func (m *MixMaterial) Dispose(opts *MixMaterialDisposeOpts) {
+	if opts == nil {
+		opts = &MixMaterialDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForceDisposeEffect == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceDisposeEffect)
+	}
+
+	m.p.Call("dispose", args...)
+}
+
+// MixMaterialForceCompilationOpts contains optional parameters for MixMaterial.ForceCompilation.
+type MixMaterialForceCompilationOpts struct {
+	OnCompiled *func()
+	Options    js.Value
+	OnError    *func()
+}
+
+// ForceCompilation calls the ForceCompilation method on the MixMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#forcecompilation
+func (m *MixMaterial) ForceCompilation(mesh *AbstractMesh, opts *MixMaterialForceCompilationOpts) {
+	if opts == nil {
+		opts = &MixMaterialForceCompilationOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, mesh.JSObject())
+
+	if opts.OnCompiled == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnCompiled)
+	}
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+
+	m.p.Call("forceCompilation", args...)
+}
+
+// MixMaterialForceCompilationAsyncOpts contains optional parameters for MixMaterial.ForceCompilationAsync.
+type MixMaterialForceCompilationAsyncOpts struct {
+	Options js.Value
+}
+
+// ForceCompilationAsync calls the ForceCompilationAsync method on the MixMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#forcecompilationasync
+func (m *MixMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *MixMaterialForceCompilationAsyncOpts) {
+	if opts == nil {
+		opts = &MixMaterialForceCompilationAsyncOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, mesh.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	m.p.Call("forceCompilationAsync", args...)
+}
+
+// Freeze calls the Freeze method on the MixMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#freeze
+func (m *MixMaterial) Freeze() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	m.p.Call("freeze", args...)
+}
+
+// GetActiveTextures calls the GetActiveTextures method on the MixMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#getactivetextures
+func (m *MixMaterial) GetActiveTextures() *BaseTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("getActiveTextures", args...)
+	return BaseTextureFromJSObject(retVal, m.ctx)
+}
+
+// GetAlphaTestTexture calls the GetAlphaTestTexture method on the MixMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#getalphatesttexture
+func (m *MixMaterial) GetAlphaTestTexture() *BaseTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("getAlphaTestTexture", args...)
+	return BaseTextureFromJSObject(retVal, m.ctx)
+}
+
+// GetAnimatables calls the GetAnimatables method on the MixMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#getanimatables
+func (m *MixMaterial) GetAnimatables() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("getAnimatables", args...)
+	return retVal
+}
+
+// GetBindedMeshes calls the GetBindedMeshes method on the MixMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#getbindedmeshes
+func (m *MixMaterial) GetBindedMeshes() *AbstractMesh {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("getBindedMeshes", args...)
+	return AbstractMeshFromJSObject(retVal, m.ctx)
+}
+
+// GetClassName calls the GetClassName method on the MixMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#getclassname
+func (m *MixMaterial) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetEffect calls the GetEffect method on the MixMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#geteffect
+func (m *MixMaterial) GetEffect() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("getEffect", args...)
+	return EffectFromJSObject(retVal, m.ctx)
+}
+
+// GetScene calls the GetScene method on the MixMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#getscene
+func (m *MixMaterial) GetScene() *Scene {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("getScene", args...)
+	return SceneFromJSObject(retVal, m.ctx)
+}
+
+// HasTexture calls the HasTexture method on the MixMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#hastexture
+func (m *MixMaterial) HasTexture(texture *BaseTexture) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, texture.JSObject())
+
+	retVal := m.p.Call("hasTexture", args...)
+	return retVal.Bool()
+}
+
+// MixMaterialIsReadyOpts contains optional parameters for MixMaterial.IsReady.
+type MixMaterialIsReadyOpts struct {
+	Mesh         *AbstractMesh
+	UseInstances *bool
+}
+
+// IsReady calls the IsReady method on the MixMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#isready
+func (m *MixMaterial) IsReady(opts *MixMaterialIsReadyOpts) bool {
+	if opts == nil {
+		opts = &MixMaterialIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := m.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// MixMaterialIsReadyForSubMeshOpts contains optional parameters for MixMaterial.IsReadyForSubMesh.
+type MixMaterialIsReadyForSubMeshOpts struct {
+	UseInstances *bool
+}
+
+// IsReadyForSubMesh calls the IsReadyForSubMesh method on the MixMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#isreadyforsubmesh
+func (m *MixMaterial) IsReadyForSubMesh(mesh *AbstractMesh, subMesh *SubMesh, opts *MixMaterialIsReadyForSubMeshOpts) bool {
+	if opts == nil {
+		opts = &MixMaterialIsReadyForSubMeshOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, subMesh.JSObject())
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := m.p.Call("isReadyForSubMesh", args...)
+	return retVal.Bool()
+}
+
+// MarkAsDirty calls the MarkAsDirty method on the MixMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#markasdirty
+func (m *MixMaterial) MarkAsDirty(flag float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, flag)
+
+	m.p.Call("markAsDirty", args...)
+}
+
+// MarkDirty calls the MarkDirty method on the MixMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#markdirty
+func (m *MixMaterial) MarkDirty() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	m.p.Call("markDirty", args...)
+}
+
+// NeedAlphaBlending calls the NeedAlphaBlending method on the MixMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#needalphablending
+func (m *MixMaterial) NeedAlphaBlending() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("needAlphaBlending", args...)
+	return retVal.Bool()
+}
+
+// NeedAlphaBlendingForMesh calls the NeedAlphaBlendingForMesh method on the MixMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#needalphablendingformesh
+func (m *MixMaterial) NeedAlphaBlendingForMesh(mesh *AbstractMesh) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	retVal := m.p.Call("needAlphaBlendingForMesh", args...)
+	return retVal.Bool()
+}
+
+// NeedAlphaTesting calls the NeedAlphaTesting method on the MixMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#needalphatesting
+func (m *MixMaterial) NeedAlphaTesting() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("needAlphaTesting", args...)
+	return retVal.Bool()
+}
+
+// Parse calls the Parse method on the MixMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#parse
+func (m *MixMaterial) Parse(source interface{}, scene *Scene, rootUrl string) *MixMaterial {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, source)
+	args = append(args, scene.JSObject())
+	args = append(args, rootUrl)
+
+	retVal := m.p.Call("Parse", args...)
+	return MixMaterialFromJSObject(retVal, m.ctx)
+}
+
+// Serialize calls the Serialize method on the MixMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#serialize
+func (m *MixMaterial) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("serialize", args...)
+	return retVal
+}
+
+// MixMaterialToStringOpts contains optional parameters for MixMaterial.ToString.
+type MixMaterialToStringOpts struct {
+	FullDetails *bool
+}
+
+// ToString calls the ToString method on the MixMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#tostring
+func (m *MixMaterial) ToString(opts *MixMaterialToStringOpts) string {
+	if opts == nil {
+		opts = &MixMaterialToStringOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.FullDetails == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FullDetails)
+	}
+
+	retVal := m.p.Call("toString", args...)
+	return retVal.String()
+}
+
+// Unbind calls the Unbind method on the MixMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#unbind
+func (m *MixMaterial) Unbind() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	m.p.Call("unbind", args...)
+}
+
+// Unfreeze calls the Unfreeze method on the MixMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#unfreeze
+func (m *MixMaterial) Unfreeze() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	m.p.Call("unfreeze", args...)
+}
+
+/*
+
+// AllDirtyFlag returns the AllDirtyFlag property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#alldirtyflag
+func (m *MixMaterial) AllDirtyFlag(AllDirtyFlag float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(AllDirtyFlag)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAllDirtyFlag sets the AllDirtyFlag property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#alldirtyflag
+func (m *MixMaterial) SetAllDirtyFlag(AllDirtyFlag float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(AllDirtyFlag)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// AllowShaderHotSwapping returns the AllowShaderHotSwapping property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#allowshaderhotswapping
+func (m *MixMaterial) AllowShaderHotSwapping(allowShaderHotSwapping bool) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(allowShaderHotSwapping)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAllowShaderHotSwapping sets the AllowShaderHotSwapping property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#allowshaderhotswapping
+func (m *MixMaterial) SetAllowShaderHotSwapping(allowShaderHotSwapping bool) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(allowShaderHotSwapping)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// Alpha returns the Alpha property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#alpha
+func (m *MixMaterial) Alpha(alpha float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(alpha)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAlpha sets the Alpha property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#alpha
+func (m *MixMaterial) SetAlpha(alpha float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(alpha)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// AlphaMode returns the AlphaMode property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#alphamode
+func (m *MixMaterial) AlphaMode(alphaMode float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(alphaMode)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaMode sets the AlphaMode property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#alphamode
+func (m *MixMaterial) SetAlphaMode(alphaMode float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(alphaMode)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// Animations returns the Animations property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#animations
+func (m *MixMaterial) Animations(animations []Animation) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(animations.JSObject())
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#animations
+func (m *MixMaterial) SetAnimations(animations []Animation) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(animations.JSObject())
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// AttributesDirtyFlag returns the AttributesDirtyFlag property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#attributesdirtyflag
+func (m *MixMaterial) AttributesDirtyFlag(AttributesDirtyFlag float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(AttributesDirtyFlag)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAttributesDirtyFlag sets the AttributesDirtyFlag property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#attributesdirtyflag
+func (m *MixMaterial) SetAttributesDirtyFlag(AttributesDirtyFlag float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(AttributesDirtyFlag)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// BackFaceCulling returns the BackFaceCulling property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#backfaceculling
+func (m *MixMaterial) BackFaceCulling(backFaceCulling bool) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(backFaceCulling)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetBackFaceCulling sets the BackFaceCulling property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#backfaceculling
+func (m *MixMaterial) SetBackFaceCulling(backFaceCulling bool) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(backFaceCulling)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// CheckReadyOnEveryCall returns the CheckReadyOnEveryCall property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#checkreadyoneverycall
+func (m *MixMaterial) CheckReadyOnEveryCall(checkReadyOnEveryCall bool) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(checkReadyOnEveryCall)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCheckReadyOnEveryCall sets the CheckReadyOnEveryCall property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#checkreadyoneverycall
+func (m *MixMaterial) SetCheckReadyOnEveryCall(checkReadyOnEveryCall bool) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(checkReadyOnEveryCall)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// CheckReadyOnlyOnce returns the CheckReadyOnlyOnce property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#checkreadyonlyonce
+func (m *MixMaterial) CheckReadyOnlyOnce(checkReadyOnlyOnce bool) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(checkReadyOnlyOnce)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCheckReadyOnlyOnce sets the CheckReadyOnlyOnce property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#checkreadyonlyonce
+func (m *MixMaterial) SetCheckReadyOnlyOnce(checkReadyOnlyOnce bool) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(checkReadyOnlyOnce)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// ClockWiseSideOrientation returns the ClockWiseSideOrientation property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#clockwisesideorientation
+func (m *MixMaterial) ClockWiseSideOrientation(ClockWiseSideOrientation float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(ClockWiseSideOrientation)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetClockWiseSideOrientation sets the ClockWiseSideOrientation property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#clockwisesideorientation
+func (m *MixMaterial) SetClockWiseSideOrientation(ClockWiseSideOrientation float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(ClockWiseSideOrientation)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// CounterClockWiseSideOrientation returns the CounterClockWiseSideOrientation property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#counterclockwisesideorientation
+func (m *MixMaterial) CounterClockWiseSideOrientation(CounterClockWiseSideOrientation float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(CounterClockWiseSideOrientation)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCounterClockWiseSideOrientation sets the CounterClockWiseSideOrientation property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#counterclockwisesideorientation
+func (m *MixMaterial) SetCounterClockWiseSideOrientation(CounterClockWiseSideOrientation float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(CounterClockWiseSideOrientation)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// DepthFunction returns the DepthFunction property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#depthfunction
+func (m *MixMaterial) DepthFunction(depthFunction float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(depthFunction)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDepthFunction sets the DepthFunction property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#depthfunction
+func (m *MixMaterial) SetDepthFunction(depthFunction float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(depthFunction)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// DiffuseColor returns the DiffuseColor property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#diffusecolor
+func (m *MixMaterial) DiffuseColor(diffuseColor *Color3) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(diffuseColor.JSObject())
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDiffuseColor sets the DiffuseColor property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#diffusecolor
+func (m *MixMaterial) SetDiffuseColor(diffuseColor *Color3) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(diffuseColor.JSObject())
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// DiffuseTexture1 returns the DiffuseTexture1 property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#diffusetexture1
+func (m *MixMaterial) DiffuseTexture1(diffuseTexture1 *Texture) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(diffuseTexture1.JSObject())
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDiffuseTexture1 sets the DiffuseTexture1 property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#diffusetexture1
+func (m *MixMaterial) SetDiffuseTexture1(diffuseTexture1 *Texture) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(diffuseTexture1.JSObject())
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// DiffuseTexture2 returns the DiffuseTexture2 property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#diffusetexture2
+func (m *MixMaterial) DiffuseTexture2(diffuseTexture2 *Texture) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(diffuseTexture2.JSObject())
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDiffuseTexture2 sets the DiffuseTexture2 property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#diffusetexture2
+func (m *MixMaterial) SetDiffuseTexture2(diffuseTexture2 *Texture) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(diffuseTexture2.JSObject())
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// DiffuseTexture3 returns the DiffuseTexture3 property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#diffusetexture3
+func (m *MixMaterial) DiffuseTexture3(diffuseTexture3 *Texture) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(diffuseTexture3.JSObject())
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDiffuseTexture3 sets the DiffuseTexture3 property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#diffusetexture3
+func (m *MixMaterial) SetDiffuseTexture3(diffuseTexture3 *Texture) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(diffuseTexture3.JSObject())
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// DiffuseTexture4 returns the DiffuseTexture4 property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#diffusetexture4
+func (m *MixMaterial) DiffuseTexture4(diffuseTexture4 *Texture) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(diffuseTexture4.JSObject())
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDiffuseTexture4 sets the DiffuseTexture4 property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#diffusetexture4
+func (m *MixMaterial) SetDiffuseTexture4(diffuseTexture4 *Texture) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(diffuseTexture4.JSObject())
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// DiffuseTexture5 returns the DiffuseTexture5 property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#diffusetexture5
+func (m *MixMaterial) DiffuseTexture5(diffuseTexture5 *Texture) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(diffuseTexture5.JSObject())
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDiffuseTexture5 sets the DiffuseTexture5 property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#diffusetexture5
+func (m *MixMaterial) SetDiffuseTexture5(diffuseTexture5 *Texture) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(diffuseTexture5.JSObject())
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// DiffuseTexture6 returns the DiffuseTexture6 property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#diffusetexture6
+func (m *MixMaterial) DiffuseTexture6(diffuseTexture6 *Texture) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(diffuseTexture6.JSObject())
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDiffuseTexture6 sets the DiffuseTexture6 property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#diffusetexture6
+func (m *MixMaterial) SetDiffuseTexture6(diffuseTexture6 *Texture) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(diffuseTexture6.JSObject())
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// DiffuseTexture7 returns the DiffuseTexture7 property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#diffusetexture7
+func (m *MixMaterial) DiffuseTexture7(diffuseTexture7 *Texture) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(diffuseTexture7.JSObject())
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDiffuseTexture7 sets the DiffuseTexture7 property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#diffusetexture7
+func (m *MixMaterial) SetDiffuseTexture7(diffuseTexture7 *Texture) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(diffuseTexture7.JSObject())
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// DiffuseTexture8 returns the DiffuseTexture8 property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#diffusetexture8
+func (m *MixMaterial) DiffuseTexture8(diffuseTexture8 *Texture) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(diffuseTexture8.JSObject())
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDiffuseTexture8 sets the DiffuseTexture8 property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#diffusetexture8
+func (m *MixMaterial) SetDiffuseTexture8(diffuseTexture8 *Texture) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(diffuseTexture8.JSObject())
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// DisableDepthWrite returns the DisableDepthWrite property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#disabledepthwrite
+func (m *MixMaterial) DisableDepthWrite(disableDepthWrite bool) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(disableDepthWrite)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDisableDepthWrite sets the DisableDepthWrite property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#disabledepthwrite
+func (m *MixMaterial) SetDisableDepthWrite(disableDepthWrite bool) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(disableDepthWrite)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// DisableLighting returns the DisableLighting property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#disablelighting
+func (m *MixMaterial) DisableLighting(disableLighting bool) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(disableLighting)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDisableLighting sets the DisableLighting property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#disablelighting
+func (m *MixMaterial) SetDisableLighting(disableLighting bool) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(disableLighting)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// DoNotSerialize returns the DoNotSerialize property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#donotserialize
+func (m *MixMaterial) DoNotSerialize(doNotSerialize bool) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(doNotSerialize)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDoNotSerialize sets the DoNotSerialize property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#donotserialize
+func (m *MixMaterial) SetDoNotSerialize(doNotSerialize bool) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(doNotSerialize)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// FillMode returns the FillMode property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#fillmode
+func (m *MixMaterial) FillMode(fillMode float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(fillMode)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFillMode sets the FillMode property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#fillmode
+func (m *MixMaterial) SetFillMode(fillMode float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(fillMode)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// FogEnabled returns the FogEnabled property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#fogenabled
+func (m *MixMaterial) FogEnabled(fogEnabled bool) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(fogEnabled)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFogEnabled sets the FogEnabled property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#fogenabled
+func (m *MixMaterial) SetFogEnabled(fogEnabled bool) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(fogEnabled)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// ForceDepthWrite returns the ForceDepthWrite property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#forcedepthwrite
+func (m *MixMaterial) ForceDepthWrite(forceDepthWrite bool) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(forceDepthWrite)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetForceDepthWrite sets the ForceDepthWrite property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#forcedepthwrite
+func (m *MixMaterial) SetForceDepthWrite(forceDepthWrite bool) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(forceDepthWrite)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// FresnelDirtyFlag returns the FresnelDirtyFlag property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#fresneldirtyflag
+func (m *MixMaterial) FresnelDirtyFlag(FresnelDirtyFlag float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(FresnelDirtyFlag)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFresnelDirtyFlag sets the FresnelDirtyFlag property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#fresneldirtyflag
+func (m *MixMaterial) SetFresnelDirtyFlag(FresnelDirtyFlag float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(FresnelDirtyFlag)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// GetRenderTargetTextures returns the GetRenderTargetTextures property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#getrendertargettextures
+func (m *MixMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(getRenderTargetTextures)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetGetRenderTargetTextures sets the GetRenderTargetTextures property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#getrendertargettextures
+func (m *MixMaterial) SetGetRenderTargetTextures(getRenderTargetTextures func()) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(getRenderTargetTextures)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// HasRenderTargetTextures returns the HasRenderTargetTextures property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#hasrendertargettextures
+func (m *MixMaterial) HasRenderTargetTextures(hasRenderTargetTextures bool) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(hasRenderTargetTextures)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetHasRenderTargetTextures sets the HasRenderTargetTextures property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#hasrendertargettextures
+func (m *MixMaterial) SetHasRenderTargetTextures(hasRenderTargetTextures bool) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(hasRenderTargetTextures)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// Id returns the Id property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#id
+func (m *MixMaterial) Id(id string) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(id)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetId sets the Id property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#id
+func (m *MixMaterial) SetId(id string) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(id)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#inspectablecustomproperties
+func (m *MixMaterial) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(inspectableCustomProperties.JSObject())
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#inspectablecustomproperties
+func (m *MixMaterial) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(inspectableCustomProperties.JSObject())
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// IsFrozen returns the IsFrozen property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#isfrozen
+func (m *MixMaterial) IsFrozen(isFrozen bool) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(isFrozen)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetIsFrozen sets the IsFrozen property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#isfrozen
+func (m *MixMaterial) SetIsFrozen(isFrozen bool) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(isFrozen)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// LightDirtyFlag returns the LightDirtyFlag property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#lightdirtyflag
+func (m *MixMaterial) LightDirtyFlag(LightDirtyFlag float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(LightDirtyFlag)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLightDirtyFlag sets the LightDirtyFlag property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#lightdirtyflag
+func (m *MixMaterial) SetLightDirtyFlag(LightDirtyFlag float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(LightDirtyFlag)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineListDrawMode returns the LineListDrawMode property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#linelistdrawmode
+func (m *MixMaterial) LineListDrawMode(LineListDrawMode float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(LineListDrawMode)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineListDrawMode sets the LineListDrawMode property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#linelistdrawmode
+func (m *MixMaterial) SetLineListDrawMode(LineListDrawMode float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(LineListDrawMode)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineLoopDrawMode returns the LineLoopDrawMode property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#lineloopdrawmode
+func (m *MixMaterial) LineLoopDrawMode(LineLoopDrawMode float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(LineLoopDrawMode)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineLoopDrawMode sets the LineLoopDrawMode property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#lineloopdrawmode
+func (m *MixMaterial) SetLineLoopDrawMode(LineLoopDrawMode float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(LineLoopDrawMode)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineStripDrawMode returns the LineStripDrawMode property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#linestripdrawmode
+func (m *MixMaterial) LineStripDrawMode(LineStripDrawMode float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(LineStripDrawMode)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineStripDrawMode sets the LineStripDrawMode property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#linestripdrawmode
+func (m *MixMaterial) SetLineStripDrawMode(LineStripDrawMode float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(LineStripDrawMode)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// MaxSimultaneousLights returns the MaxSimultaneousLights property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#maxsimultaneouslights
+func (m *MixMaterial) MaxSimultaneousLights(maxSimultaneousLights float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(maxSimultaneousLights)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMaxSimultaneousLights sets the MaxSimultaneousLights property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#maxsimultaneouslights
+func (m *MixMaterial) SetMaxSimultaneousLights(maxSimultaneousLights float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(maxSimultaneousLights)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#metadata
+func (m *MixMaterial) Metadata(metadata interface{}) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(metadata)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#metadata
+func (m *MixMaterial) SetMetadata(metadata interface{}) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(metadata)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// MiscDirtyFlag returns the MiscDirtyFlag property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#miscdirtyflag
+func (m *MixMaterial) MiscDirtyFlag(MiscDirtyFlag float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(MiscDirtyFlag)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMiscDirtyFlag sets the MiscDirtyFlag property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#miscdirtyflag
+func (m *MixMaterial) SetMiscDirtyFlag(MiscDirtyFlag float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(MiscDirtyFlag)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// MixTexture1 returns the MixTexture1 property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#mixtexture1
+func (m *MixMaterial) MixTexture1(mixTexture1 *BaseTexture) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(mixTexture1.JSObject())
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMixTexture1 sets the MixTexture1 property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#mixtexture1
+func (m *MixMaterial) SetMixTexture1(mixTexture1 *BaseTexture) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(mixTexture1.JSObject())
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// MixTexture2 returns the MixTexture2 property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#mixtexture2
+func (m *MixMaterial) MixTexture2(mixTexture2 *BaseTexture) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(mixTexture2.JSObject())
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMixTexture2 sets the MixTexture2 property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#mixtexture2
+func (m *MixMaterial) SetMixTexture2(mixTexture2 *BaseTexture) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(mixTexture2.JSObject())
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#name
+func (m *MixMaterial) Name(name string) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(name)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#name
+func (m *MixMaterial) SetName(name string) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(name)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// NeedDepthPrePass returns the NeedDepthPrePass property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#needdepthprepass
+func (m *MixMaterial) NeedDepthPrePass(needDepthPrePass bool) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(needDepthPrePass)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetNeedDepthPrePass sets the NeedDepthPrePass property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#needdepthprepass
+func (m *MixMaterial) SetNeedDepthPrePass(needDepthPrePass bool) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(needDepthPrePass)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnBind returns the OnBind property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#onbind
+func (m *MixMaterial) OnBind(onBind func()) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(onBind)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnBind sets the OnBind property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#onbind
+func (m *MixMaterial) SetOnBind(onBind func()) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(onBind)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnBindObservable returns the OnBindObservable property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#onbindobservable
+func (m *MixMaterial) OnBindObservable(onBindObservable *Observable) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(onBindObservable.JSObject())
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnBindObservable sets the OnBindObservable property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#onbindobservable
+func (m *MixMaterial) SetOnBindObservable(onBindObservable *Observable) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(onBindObservable.JSObject())
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnCompiled returns the OnCompiled property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#oncompiled
+func (m *MixMaterial) OnCompiled(onCompiled func()) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(onCompiled)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnCompiled sets the OnCompiled property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#oncompiled
+func (m *MixMaterial) SetOnCompiled(onCompiled func()) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(onCompiled)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnDispose returns the OnDispose property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#ondispose
+func (m *MixMaterial) OnDispose(onDispose func()) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(onDispose)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnDispose sets the OnDispose property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#ondispose
+func (m *MixMaterial) SetOnDispose(onDispose func()) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(onDispose)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnDisposeObservable returns the OnDisposeObservable property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#ondisposeobservable
+func (m *MixMaterial) OnDisposeObservable(onDisposeObservable *Observable) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(onDisposeObservable.JSObject())
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnDisposeObservable sets the OnDisposeObservable property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#ondisposeobservable
+func (m *MixMaterial) SetOnDisposeObservable(onDisposeObservable *Observable) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(onDisposeObservable.JSObject())
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnError returns the OnError property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#onerror
+func (m *MixMaterial) OnError(onError func()) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(onError)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnError sets the OnError property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#onerror
+func (m *MixMaterial) SetOnError(onError func()) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(onError)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnUnBindObservable returns the OnUnBindObservable property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#onunbindobservable
+func (m *MixMaterial) OnUnBindObservable(onUnBindObservable *Observable) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(onUnBindObservable.JSObject())
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnUnBindObservable sets the OnUnBindObservable property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#onunbindobservable
+func (m *MixMaterial) SetOnUnBindObservable(onUnBindObservable *Observable) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(onUnBindObservable.JSObject())
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointFillMode returns the PointFillMode property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#pointfillmode
+func (m *MixMaterial) PointFillMode(PointFillMode float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(PointFillMode)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointFillMode sets the PointFillMode property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#pointfillmode
+func (m *MixMaterial) SetPointFillMode(PointFillMode float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(PointFillMode)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointListDrawMode returns the PointListDrawMode property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#pointlistdrawmode
+func (m *MixMaterial) PointListDrawMode(PointListDrawMode float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(PointListDrawMode)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointListDrawMode sets the PointListDrawMode property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#pointlistdrawmode
+func (m *MixMaterial) SetPointListDrawMode(PointListDrawMode float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(PointListDrawMode)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointSize returns the PointSize property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#pointsize
+func (m *MixMaterial) PointSize(pointSize float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(pointSize)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointSize sets the PointSize property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#pointsize
+func (m *MixMaterial) SetPointSize(pointSize float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(pointSize)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointsCloud returns the PointsCloud property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#pointscloud
+func (m *MixMaterial) PointsCloud(pointsCloud bool) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(pointsCloud)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointsCloud sets the PointsCloud property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#pointscloud
+func (m *MixMaterial) SetPointsCloud(pointsCloud bool) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(pointsCloud)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// ReservedDataStore returns the ReservedDataStore property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#reserveddatastore
+func (m *MixMaterial) ReservedDataStore(reservedDataStore interface{}) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(reservedDataStore)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetReservedDataStore sets the ReservedDataStore property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#reserveddatastore
+func (m *MixMaterial) SetReservedDataStore(reservedDataStore interface{}) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(reservedDataStore)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SeparateCullingPass returns the SeparateCullingPass property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#separatecullingpass
+func (m *MixMaterial) SeparateCullingPass(separateCullingPass bool) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(separateCullingPass)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSeparateCullingPass sets the SeparateCullingPass property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#separatecullingpass
+func (m *MixMaterial) SetSeparateCullingPass(separateCullingPass bool) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(separateCullingPass)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SideOrientation returns the SideOrientation property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#sideorientation
+func (m *MixMaterial) SideOrientation(sideOrientation float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(sideOrientation)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSideOrientation sets the SideOrientation property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#sideorientation
+func (m *MixMaterial) SetSideOrientation(sideOrientation float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(sideOrientation)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SpecularColor returns the SpecularColor property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#specularcolor
+func (m *MixMaterial) SpecularColor(specularColor *Color3) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(specularColor.JSObject())
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSpecularColor sets the SpecularColor property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#specularcolor
+func (m *MixMaterial) SetSpecularColor(specularColor *Color3) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(specularColor.JSObject())
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SpecularPower returns the SpecularPower property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#specularpower
+func (m *MixMaterial) SpecularPower(specularPower float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(specularPower)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSpecularPower sets the SpecularPower property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#specularpower
+func (m *MixMaterial) SetSpecularPower(specularPower float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(specularPower)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// State returns the State property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#state
+func (m *MixMaterial) State(state string) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(state)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetState sets the State property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#state
+func (m *MixMaterial) SetState(state string) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(state)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// TextureDirtyFlag returns the TextureDirtyFlag property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#texturedirtyflag
+func (m *MixMaterial) TextureDirtyFlag(TextureDirtyFlag float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(TextureDirtyFlag)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTextureDirtyFlag sets the TextureDirtyFlag property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#texturedirtyflag
+func (m *MixMaterial) SetTextureDirtyFlag(TextureDirtyFlag float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(TextureDirtyFlag)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// TriangleFanDrawMode returns the TriangleFanDrawMode property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#trianglefandrawmode
+func (m *MixMaterial) TriangleFanDrawMode(TriangleFanDrawMode float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(TriangleFanDrawMode)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTriangleFanDrawMode sets the TriangleFanDrawMode property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#trianglefandrawmode
+func (m *MixMaterial) SetTriangleFanDrawMode(TriangleFanDrawMode float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(TriangleFanDrawMode)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// TriangleFillMode returns the TriangleFillMode property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#trianglefillmode
+func (m *MixMaterial) TriangleFillMode(TriangleFillMode float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(TriangleFillMode)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTriangleFillMode sets the TriangleFillMode property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#trianglefillmode
+func (m *MixMaterial) SetTriangleFillMode(TriangleFillMode float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(TriangleFillMode)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// TriangleStripDrawMode returns the TriangleStripDrawMode property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#trianglestripdrawmode
+func (m *MixMaterial) TriangleStripDrawMode(TriangleStripDrawMode float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(TriangleStripDrawMode)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTriangleStripDrawMode sets the TriangleStripDrawMode property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#trianglestripdrawmode
+func (m *MixMaterial) SetTriangleStripDrawMode(TriangleStripDrawMode float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(TriangleStripDrawMode)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#uniqueid
+func (m *MixMaterial) UniqueId(uniqueId float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(uniqueId)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#uniqueid
+func (m *MixMaterial) SetUniqueId(uniqueId float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(uniqueId)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// WireFrameFillMode returns the WireFrameFillMode property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#wireframefillmode
+func (m *MixMaterial) WireFrameFillMode(WireFrameFillMode float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(WireFrameFillMode)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetWireFrameFillMode sets the WireFrameFillMode property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#wireframefillmode
+func (m *MixMaterial) SetWireFrameFillMode(WireFrameFillMode float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(WireFrameFillMode)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// Wireframe returns the Wireframe property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#wireframe
+func (m *MixMaterial) Wireframe(wireframe bool) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(wireframe)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetWireframe sets the Wireframe property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#wireframe
+func (m *MixMaterial) SetWireframe(wireframe bool) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(wireframe)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// ZOffset returns the ZOffset property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#zoffset
+func (m *MixMaterial) ZOffset(zOffset float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(zOffset)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetZOffset sets the ZOffset property of class MixMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.mixmaterial#zoffset
+func (m *MixMaterial) SetZOffset(zOffset float64) *MixMaterial {
+	p := ba.ctx.Get("MixMaterial").New(zOffset)
+	return MixMaterialFromJSObject(p, ba.ctx)
+}
+
+*/

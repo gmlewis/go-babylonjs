@@ -34,8 +34,1410 @@ func MultiMaterialFromJSObject(p js.Value, ctx js.Value) *MultiMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.multimaterial
 func (ba *Babylon) NewMultiMaterial(name string, scene *Scene) *MultiMaterial {
-	p := ba.ctx.Get("MultiMaterial").New(name, scene.JSObject())
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("MultiMaterial").New(args...)
 	return MultiMaterialFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// MultiMaterialBindOpts contains optional parameters for MultiMaterial.Bind.
+type MultiMaterialBindOpts struct {
+	Mesh *Mesh
+}
+
+// Bind calls the Bind method on the MultiMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#bind
+func (m *MultiMaterial) Bind(world *Matrix, opts *MultiMaterialBindOpts) {
+	if opts == nil {
+		opts = &MultiMaterialBindOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, world.JSObject())
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	m.p.Call("bind", args...)
+}
+
+// BindForSubMesh calls the BindForSubMesh method on the MultiMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#bindforsubmesh
+func (m *MultiMaterial) BindForSubMesh(world *Matrix, mesh *Mesh, subMesh *SubMesh) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, world.JSObject())
+	args = append(args, mesh.JSObject())
+	args = append(args, subMesh.JSObject())
+
+	m.p.Call("bindForSubMesh", args...)
+}
+
+// BindOnlyWorldMatrix calls the BindOnlyWorldMatrix method on the MultiMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#bindonlyworldmatrix
+func (m *MultiMaterial) BindOnlyWorldMatrix(world *Matrix) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, world.JSObject())
+
+	m.p.Call("bindOnlyWorldMatrix", args...)
+}
+
+// BindSceneUniformBuffer calls the BindSceneUniformBuffer method on the MultiMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#bindsceneuniformbuffer
+func (m *MultiMaterial) BindSceneUniformBuffer(effect *Effect, sceneUbo *UniformBuffer) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, effect.JSObject())
+	args = append(args, sceneUbo.JSObject())
+
+	m.p.Call("bindSceneUniformBuffer", args...)
+}
+
+// BindView calls the BindView method on the MultiMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#bindview
+func (m *MultiMaterial) BindView(effect *Effect) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, effect.JSObject())
+
+	m.p.Call("bindView", args...)
+}
+
+// BindViewProjection calls the BindViewProjection method on the MultiMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#bindviewprojection
+func (m *MultiMaterial) BindViewProjection(effect *Effect) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, effect.JSObject())
+
+	m.p.Call("bindViewProjection", args...)
+}
+
+// MultiMaterialCloneOpts contains optional parameters for MultiMaterial.Clone.
+type MultiMaterialCloneOpts struct {
+	CloneChildren *bool
+}
+
+// Clone calls the Clone method on the MultiMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#clone
+func (m *MultiMaterial) Clone(name string, opts *MultiMaterialCloneOpts) *MultiMaterial {
+	if opts == nil {
+		opts = &MultiMaterialCloneOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, name)
+
+	if opts.CloneChildren == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.CloneChildren)
+	}
+
+	retVal := m.p.Call("clone", args...)
+	return MultiMaterialFromJSObject(retVal, m.ctx)
+}
+
+// MultiMaterialDisposeOpts contains optional parameters for MultiMaterial.Dispose.
+type MultiMaterialDisposeOpts struct {
+	ForceDisposeEffect   *bool
+	ForceDisposeTextures *bool
+	ForceDisposeChildren *bool
+}
+
+// Dispose calls the Dispose method on the MultiMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#dispose
+func (m *MultiMaterial) Dispose(opts *MultiMaterialDisposeOpts) {
+	if opts == nil {
+		opts = &MultiMaterialDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+3)
+
+	if opts.ForceDisposeEffect == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceDisposeEffect)
+	}
+	if opts.ForceDisposeTextures == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceDisposeTextures)
+	}
+	if opts.ForceDisposeChildren == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceDisposeChildren)
+	}
+
+	m.p.Call("dispose", args...)
+}
+
+// MultiMaterialForceCompilationOpts contains optional parameters for MultiMaterial.ForceCompilation.
+type MultiMaterialForceCompilationOpts struct {
+	OnCompiled *func()
+	Options    js.Value
+	OnError    *func()
+}
+
+// ForceCompilation calls the ForceCompilation method on the MultiMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#forcecompilation
+func (m *MultiMaterial) ForceCompilation(mesh *AbstractMesh, opts *MultiMaterialForceCompilationOpts) {
+	if opts == nil {
+		opts = &MultiMaterialForceCompilationOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, mesh.JSObject())
+
+	if opts.OnCompiled == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnCompiled)
+	}
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+
+	m.p.Call("forceCompilation", args...)
+}
+
+// MultiMaterialForceCompilationAsyncOpts contains optional parameters for MultiMaterial.ForceCompilationAsync.
+type MultiMaterialForceCompilationAsyncOpts struct {
+	Options js.Value
+}
+
+// ForceCompilationAsync calls the ForceCompilationAsync method on the MultiMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#forcecompilationasync
+func (m *MultiMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *MultiMaterialForceCompilationAsyncOpts) {
+	if opts == nil {
+		opts = &MultiMaterialForceCompilationAsyncOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, mesh.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	m.p.Call("forceCompilationAsync", args...)
+}
+
+// Freeze calls the Freeze method on the MultiMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#freeze
+func (m *MultiMaterial) Freeze() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	m.p.Call("freeze", args...)
+}
+
+// GetActiveTextures calls the GetActiveTextures method on the MultiMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#getactivetextures
+func (m *MultiMaterial) GetActiveTextures() *BaseTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("getActiveTextures", args...)
+	return BaseTextureFromJSObject(retVal, m.ctx)
+}
+
+// GetAlphaTestTexture calls the GetAlphaTestTexture method on the MultiMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#getalphatesttexture
+func (m *MultiMaterial) GetAlphaTestTexture() *BaseTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("getAlphaTestTexture", args...)
+	return BaseTextureFromJSObject(retVal, m.ctx)
+}
+
+// GetBindedMeshes calls the GetBindedMeshes method on the MultiMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#getbindedmeshes
+func (m *MultiMaterial) GetBindedMeshes() *AbstractMesh {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("getBindedMeshes", args...)
+	return AbstractMeshFromJSObject(retVal, m.ctx)
+}
+
+// GetChildren calls the GetChildren method on the MultiMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#getchildren
+func (m *MultiMaterial) GetChildren() *Material {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("getChildren", args...)
+	return MaterialFromJSObject(retVal, m.ctx)
+}
+
+// GetClassName calls the GetClassName method on the MultiMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#getclassname
+func (m *MultiMaterial) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetEffect calls the GetEffect method on the MultiMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#geteffect
+func (m *MultiMaterial) GetEffect() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("getEffect", args...)
+	return EffectFromJSObject(retVal, m.ctx)
+}
+
+// GetScene calls the GetScene method on the MultiMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#getscene
+func (m *MultiMaterial) GetScene() *Scene {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("getScene", args...)
+	return SceneFromJSObject(retVal, m.ctx)
+}
+
+// GetSubMaterial calls the GetSubMaterial method on the MultiMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#getsubmaterial
+func (m *MultiMaterial) GetSubMaterial(index float64) *Material {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, index)
+
+	retVal := m.p.Call("getSubMaterial", args...)
+	return MaterialFromJSObject(retVal, m.ctx)
+}
+
+// HasTexture calls the HasTexture method on the MultiMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#hastexture
+func (m *MultiMaterial) HasTexture(texture *BaseTexture) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, texture.JSObject())
+
+	retVal := m.p.Call("hasTexture", args...)
+	return retVal.Bool()
+}
+
+// MultiMaterialIsReadyOpts contains optional parameters for MultiMaterial.IsReady.
+type MultiMaterialIsReadyOpts struct {
+	Mesh         *AbstractMesh
+	UseInstances *bool
+}
+
+// IsReady calls the IsReady method on the MultiMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#isready
+func (m *MultiMaterial) IsReady(opts *MultiMaterialIsReadyOpts) bool {
+	if opts == nil {
+		opts = &MultiMaterialIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := m.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// MultiMaterialIsReadyForSubMeshOpts contains optional parameters for MultiMaterial.IsReadyForSubMesh.
+type MultiMaterialIsReadyForSubMeshOpts struct {
+	UseInstances *bool
+}
+
+// IsReadyForSubMesh calls the IsReadyForSubMesh method on the MultiMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#isreadyforsubmesh
+func (m *MultiMaterial) IsReadyForSubMesh(mesh *AbstractMesh, subMesh *BaseSubMesh, opts *MultiMaterialIsReadyForSubMeshOpts) bool {
+	if opts == nil {
+		opts = &MultiMaterialIsReadyForSubMeshOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, subMesh.JSObject())
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := m.p.Call("isReadyForSubMesh", args...)
+	return retVal.Bool()
+}
+
+// MarkAsDirty calls the MarkAsDirty method on the MultiMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#markasdirty
+func (m *MultiMaterial) MarkAsDirty(flag float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, flag)
+
+	m.p.Call("markAsDirty", args...)
+}
+
+// MarkDirty calls the MarkDirty method on the MultiMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#markdirty
+func (m *MultiMaterial) MarkDirty() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	m.p.Call("markDirty", args...)
+}
+
+// NeedAlphaBlending calls the NeedAlphaBlending method on the MultiMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#needalphablending
+func (m *MultiMaterial) NeedAlphaBlending() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("needAlphaBlending", args...)
+	return retVal.Bool()
+}
+
+// NeedAlphaBlendingForMesh calls the NeedAlphaBlendingForMesh method on the MultiMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#needalphablendingformesh
+func (m *MultiMaterial) NeedAlphaBlendingForMesh(mesh *AbstractMesh) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	retVal := m.p.Call("needAlphaBlendingForMesh", args...)
+	return retVal.Bool()
+}
+
+// NeedAlphaTesting calls the NeedAlphaTesting method on the MultiMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#needalphatesting
+func (m *MultiMaterial) NeedAlphaTesting() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("needAlphaTesting", args...)
+	return retVal.Bool()
+}
+
+// Parse calls the Parse method on the MultiMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#parse
+func (m *MultiMaterial) Parse(parsedMaterial interface{}, scene *Scene, rootUrl string) *Material {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, parsedMaterial)
+	args = append(args, scene.JSObject())
+	args = append(args, rootUrl)
+
+	retVal := m.p.Call("Parse", args...)
+	return MaterialFromJSObject(retVal, m.ctx)
+}
+
+// ParseMultiMaterial calls the ParseMultiMaterial method on the MultiMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#parsemultimaterial
+func (m *MultiMaterial) ParseMultiMaterial(parsedMultiMaterial interface{}, scene *Scene) *MultiMaterial {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, parsedMultiMaterial)
+	args = append(args, scene.JSObject())
+
+	retVal := m.p.Call("ParseMultiMaterial", args...)
+	return MultiMaterialFromJSObject(retVal, m.ctx)
+}
+
+// Serialize calls the Serialize method on the MultiMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#serialize
+func (m *MultiMaterial) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("serialize", args...)
+	return retVal
+}
+
+// MultiMaterialToStringOpts contains optional parameters for MultiMaterial.ToString.
+type MultiMaterialToStringOpts struct {
+	FullDetails *bool
+}
+
+// ToString calls the ToString method on the MultiMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#tostring
+func (m *MultiMaterial) ToString(opts *MultiMaterialToStringOpts) string {
+	if opts == nil {
+		opts = &MultiMaterialToStringOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.FullDetails == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FullDetails)
+	}
+
+	retVal := m.p.Call("toString", args...)
+	return retVal.String()
+}
+
+// Unbind calls the Unbind method on the MultiMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#unbind
+func (m *MultiMaterial) Unbind() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	m.p.Call("unbind", args...)
+}
+
+// Unfreeze calls the Unfreeze method on the MultiMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#unfreeze
+func (m *MultiMaterial) Unfreeze() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	m.p.Call("unfreeze", args...)
+}
+
+/*
+
+// AllDirtyFlag returns the AllDirtyFlag property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#alldirtyflag
+func (m *MultiMaterial) AllDirtyFlag(AllDirtyFlag float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(AllDirtyFlag)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAllDirtyFlag sets the AllDirtyFlag property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#alldirtyflag
+func (m *MultiMaterial) SetAllDirtyFlag(AllDirtyFlag float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(AllDirtyFlag)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// Alpha returns the Alpha property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#alpha
+func (m *MultiMaterial) Alpha(alpha float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(alpha)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAlpha sets the Alpha property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#alpha
+func (m *MultiMaterial) SetAlpha(alpha float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(alpha)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// AlphaMode returns the AlphaMode property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#alphamode
+func (m *MultiMaterial) AlphaMode(alphaMode float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(alphaMode)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaMode sets the AlphaMode property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#alphamode
+func (m *MultiMaterial) SetAlphaMode(alphaMode float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(alphaMode)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// Animations returns the Animations property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#animations
+func (m *MultiMaterial) Animations(animations []Animation) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(animations.JSObject())
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#animations
+func (m *MultiMaterial) SetAnimations(animations []Animation) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(animations.JSObject())
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// AttributesDirtyFlag returns the AttributesDirtyFlag property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#attributesdirtyflag
+func (m *MultiMaterial) AttributesDirtyFlag(AttributesDirtyFlag float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(AttributesDirtyFlag)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAttributesDirtyFlag sets the AttributesDirtyFlag property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#attributesdirtyflag
+func (m *MultiMaterial) SetAttributesDirtyFlag(AttributesDirtyFlag float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(AttributesDirtyFlag)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// BackFaceCulling returns the BackFaceCulling property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#backfaceculling
+func (m *MultiMaterial) BackFaceCulling(backFaceCulling bool) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(backFaceCulling)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetBackFaceCulling sets the BackFaceCulling property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#backfaceculling
+func (m *MultiMaterial) SetBackFaceCulling(backFaceCulling bool) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(backFaceCulling)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// CheckReadyOnEveryCall returns the CheckReadyOnEveryCall property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#checkreadyoneverycall
+func (m *MultiMaterial) CheckReadyOnEveryCall(checkReadyOnEveryCall bool) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(checkReadyOnEveryCall)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCheckReadyOnEveryCall sets the CheckReadyOnEveryCall property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#checkreadyoneverycall
+func (m *MultiMaterial) SetCheckReadyOnEveryCall(checkReadyOnEveryCall bool) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(checkReadyOnEveryCall)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// CheckReadyOnlyOnce returns the CheckReadyOnlyOnce property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#checkreadyonlyonce
+func (m *MultiMaterial) CheckReadyOnlyOnce(checkReadyOnlyOnce bool) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(checkReadyOnlyOnce)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCheckReadyOnlyOnce sets the CheckReadyOnlyOnce property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#checkreadyonlyonce
+func (m *MultiMaterial) SetCheckReadyOnlyOnce(checkReadyOnlyOnce bool) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(checkReadyOnlyOnce)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// ClockWiseSideOrientation returns the ClockWiseSideOrientation property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#clockwisesideorientation
+func (m *MultiMaterial) ClockWiseSideOrientation(ClockWiseSideOrientation float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(ClockWiseSideOrientation)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetClockWiseSideOrientation sets the ClockWiseSideOrientation property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#clockwisesideorientation
+func (m *MultiMaterial) SetClockWiseSideOrientation(ClockWiseSideOrientation float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(ClockWiseSideOrientation)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// CounterClockWiseSideOrientation returns the CounterClockWiseSideOrientation property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#counterclockwisesideorientation
+func (m *MultiMaterial) CounterClockWiseSideOrientation(CounterClockWiseSideOrientation float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(CounterClockWiseSideOrientation)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCounterClockWiseSideOrientation sets the CounterClockWiseSideOrientation property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#counterclockwisesideorientation
+func (m *MultiMaterial) SetCounterClockWiseSideOrientation(CounterClockWiseSideOrientation float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(CounterClockWiseSideOrientation)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// DepthFunction returns the DepthFunction property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#depthfunction
+func (m *MultiMaterial) DepthFunction(depthFunction float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(depthFunction)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDepthFunction sets the DepthFunction property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#depthfunction
+func (m *MultiMaterial) SetDepthFunction(depthFunction float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(depthFunction)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// DisableDepthWrite returns the DisableDepthWrite property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#disabledepthwrite
+func (m *MultiMaterial) DisableDepthWrite(disableDepthWrite bool) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(disableDepthWrite)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDisableDepthWrite sets the DisableDepthWrite property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#disabledepthwrite
+func (m *MultiMaterial) SetDisableDepthWrite(disableDepthWrite bool) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(disableDepthWrite)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// DoNotSerialize returns the DoNotSerialize property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#donotserialize
+func (m *MultiMaterial) DoNotSerialize(doNotSerialize bool) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(doNotSerialize)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDoNotSerialize sets the DoNotSerialize property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#donotserialize
+func (m *MultiMaterial) SetDoNotSerialize(doNotSerialize bool) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(doNotSerialize)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// FillMode returns the FillMode property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#fillmode
+func (m *MultiMaterial) FillMode(fillMode float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(fillMode)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFillMode sets the FillMode property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#fillmode
+func (m *MultiMaterial) SetFillMode(fillMode float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(fillMode)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// FogEnabled returns the FogEnabled property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#fogenabled
+func (m *MultiMaterial) FogEnabled(fogEnabled bool) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(fogEnabled)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFogEnabled sets the FogEnabled property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#fogenabled
+func (m *MultiMaterial) SetFogEnabled(fogEnabled bool) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(fogEnabled)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// ForceDepthWrite returns the ForceDepthWrite property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#forcedepthwrite
+func (m *MultiMaterial) ForceDepthWrite(forceDepthWrite bool) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(forceDepthWrite)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetForceDepthWrite sets the ForceDepthWrite property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#forcedepthwrite
+func (m *MultiMaterial) SetForceDepthWrite(forceDepthWrite bool) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(forceDepthWrite)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// FresnelDirtyFlag returns the FresnelDirtyFlag property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#fresneldirtyflag
+func (m *MultiMaterial) FresnelDirtyFlag(FresnelDirtyFlag float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(FresnelDirtyFlag)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFresnelDirtyFlag sets the FresnelDirtyFlag property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#fresneldirtyflag
+func (m *MultiMaterial) SetFresnelDirtyFlag(FresnelDirtyFlag float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(FresnelDirtyFlag)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// GetRenderTargetTextures returns the GetRenderTargetTextures property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#getrendertargettextures
+func (m *MultiMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(getRenderTargetTextures)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetGetRenderTargetTextures sets the GetRenderTargetTextures property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#getrendertargettextures
+func (m *MultiMaterial) SetGetRenderTargetTextures(getRenderTargetTextures func()) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(getRenderTargetTextures)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// HasRenderTargetTextures returns the HasRenderTargetTextures property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#hasrendertargettextures
+func (m *MultiMaterial) HasRenderTargetTextures(hasRenderTargetTextures bool) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(hasRenderTargetTextures)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetHasRenderTargetTextures sets the HasRenderTargetTextures property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#hasrendertargettextures
+func (m *MultiMaterial) SetHasRenderTargetTextures(hasRenderTargetTextures bool) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(hasRenderTargetTextures)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// Id returns the Id property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#id
+func (m *MultiMaterial) Id(id string) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(id)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetId sets the Id property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#id
+func (m *MultiMaterial) SetId(id string) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(id)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#inspectablecustomproperties
+func (m *MultiMaterial) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(inspectableCustomProperties.JSObject())
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#inspectablecustomproperties
+func (m *MultiMaterial) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(inspectableCustomProperties.JSObject())
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// IsFrozen returns the IsFrozen property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#isfrozen
+func (m *MultiMaterial) IsFrozen(isFrozen bool) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(isFrozen)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetIsFrozen sets the IsFrozen property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#isfrozen
+func (m *MultiMaterial) SetIsFrozen(isFrozen bool) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(isFrozen)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// LightDirtyFlag returns the LightDirtyFlag property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#lightdirtyflag
+func (m *MultiMaterial) LightDirtyFlag(LightDirtyFlag float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(LightDirtyFlag)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLightDirtyFlag sets the LightDirtyFlag property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#lightdirtyflag
+func (m *MultiMaterial) SetLightDirtyFlag(LightDirtyFlag float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(LightDirtyFlag)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineListDrawMode returns the LineListDrawMode property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#linelistdrawmode
+func (m *MultiMaterial) LineListDrawMode(LineListDrawMode float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(LineListDrawMode)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineListDrawMode sets the LineListDrawMode property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#linelistdrawmode
+func (m *MultiMaterial) SetLineListDrawMode(LineListDrawMode float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(LineListDrawMode)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineLoopDrawMode returns the LineLoopDrawMode property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#lineloopdrawmode
+func (m *MultiMaterial) LineLoopDrawMode(LineLoopDrawMode float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(LineLoopDrawMode)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineLoopDrawMode sets the LineLoopDrawMode property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#lineloopdrawmode
+func (m *MultiMaterial) SetLineLoopDrawMode(LineLoopDrawMode float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(LineLoopDrawMode)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineStripDrawMode returns the LineStripDrawMode property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#linestripdrawmode
+func (m *MultiMaterial) LineStripDrawMode(LineStripDrawMode float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(LineStripDrawMode)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineStripDrawMode sets the LineStripDrawMode property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#linestripdrawmode
+func (m *MultiMaterial) SetLineStripDrawMode(LineStripDrawMode float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(LineStripDrawMode)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#metadata
+func (m *MultiMaterial) Metadata(metadata interface{}) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(metadata)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#metadata
+func (m *MultiMaterial) SetMetadata(metadata interface{}) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(metadata)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// MiscDirtyFlag returns the MiscDirtyFlag property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#miscdirtyflag
+func (m *MultiMaterial) MiscDirtyFlag(MiscDirtyFlag float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(MiscDirtyFlag)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMiscDirtyFlag sets the MiscDirtyFlag property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#miscdirtyflag
+func (m *MultiMaterial) SetMiscDirtyFlag(MiscDirtyFlag float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(MiscDirtyFlag)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#name
+func (m *MultiMaterial) Name(name string) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(name)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#name
+func (m *MultiMaterial) SetName(name string) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(name)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// NeedDepthPrePass returns the NeedDepthPrePass property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#needdepthprepass
+func (m *MultiMaterial) NeedDepthPrePass(needDepthPrePass bool) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(needDepthPrePass)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetNeedDepthPrePass sets the NeedDepthPrePass property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#needdepthprepass
+func (m *MultiMaterial) SetNeedDepthPrePass(needDepthPrePass bool) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(needDepthPrePass)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnBind returns the OnBind property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#onbind
+func (m *MultiMaterial) OnBind(onBind func()) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(onBind)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnBind sets the OnBind property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#onbind
+func (m *MultiMaterial) SetOnBind(onBind func()) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(onBind)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnBindObservable returns the OnBindObservable property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#onbindobservable
+func (m *MultiMaterial) OnBindObservable(onBindObservable *Observable) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(onBindObservable.JSObject())
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnBindObservable sets the OnBindObservable property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#onbindobservable
+func (m *MultiMaterial) SetOnBindObservable(onBindObservable *Observable) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(onBindObservable.JSObject())
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnCompiled returns the OnCompiled property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#oncompiled
+func (m *MultiMaterial) OnCompiled(onCompiled func()) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(onCompiled)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnCompiled sets the OnCompiled property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#oncompiled
+func (m *MultiMaterial) SetOnCompiled(onCompiled func()) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(onCompiled)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnDispose returns the OnDispose property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#ondispose
+func (m *MultiMaterial) OnDispose(onDispose func()) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(onDispose)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnDispose sets the OnDispose property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#ondispose
+func (m *MultiMaterial) SetOnDispose(onDispose func()) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(onDispose)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnDisposeObservable returns the OnDisposeObservable property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#ondisposeobservable
+func (m *MultiMaterial) OnDisposeObservable(onDisposeObservable *Observable) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(onDisposeObservable.JSObject())
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnDisposeObservable sets the OnDisposeObservable property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#ondisposeobservable
+func (m *MultiMaterial) SetOnDisposeObservable(onDisposeObservable *Observable) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(onDisposeObservable.JSObject())
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnError returns the OnError property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#onerror
+func (m *MultiMaterial) OnError(onError func()) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(onError)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnError sets the OnError property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#onerror
+func (m *MultiMaterial) SetOnError(onError func()) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(onError)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnUnBindObservable returns the OnUnBindObservable property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#onunbindobservable
+func (m *MultiMaterial) OnUnBindObservable(onUnBindObservable *Observable) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(onUnBindObservable.JSObject())
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnUnBindObservable sets the OnUnBindObservable property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#onunbindobservable
+func (m *MultiMaterial) SetOnUnBindObservable(onUnBindObservable *Observable) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(onUnBindObservable.JSObject())
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointFillMode returns the PointFillMode property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#pointfillmode
+func (m *MultiMaterial) PointFillMode(PointFillMode float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(PointFillMode)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointFillMode sets the PointFillMode property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#pointfillmode
+func (m *MultiMaterial) SetPointFillMode(PointFillMode float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(PointFillMode)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointListDrawMode returns the PointListDrawMode property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#pointlistdrawmode
+func (m *MultiMaterial) PointListDrawMode(PointListDrawMode float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(PointListDrawMode)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointListDrawMode sets the PointListDrawMode property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#pointlistdrawmode
+func (m *MultiMaterial) SetPointListDrawMode(PointListDrawMode float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(PointListDrawMode)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointSize returns the PointSize property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#pointsize
+func (m *MultiMaterial) PointSize(pointSize float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(pointSize)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointSize sets the PointSize property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#pointsize
+func (m *MultiMaterial) SetPointSize(pointSize float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(pointSize)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointsCloud returns the PointsCloud property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#pointscloud
+func (m *MultiMaterial) PointsCloud(pointsCloud bool) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(pointsCloud)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointsCloud sets the PointsCloud property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#pointscloud
+func (m *MultiMaterial) SetPointsCloud(pointsCloud bool) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(pointsCloud)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// ReservedDataStore returns the ReservedDataStore property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#reserveddatastore
+func (m *MultiMaterial) ReservedDataStore(reservedDataStore interface{}) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(reservedDataStore)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetReservedDataStore sets the ReservedDataStore property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#reserveddatastore
+func (m *MultiMaterial) SetReservedDataStore(reservedDataStore interface{}) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(reservedDataStore)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SeparateCullingPass returns the SeparateCullingPass property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#separatecullingpass
+func (m *MultiMaterial) SeparateCullingPass(separateCullingPass bool) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(separateCullingPass)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSeparateCullingPass sets the SeparateCullingPass property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#separatecullingpass
+func (m *MultiMaterial) SetSeparateCullingPass(separateCullingPass bool) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(separateCullingPass)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SideOrientation returns the SideOrientation property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#sideorientation
+func (m *MultiMaterial) SideOrientation(sideOrientation float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(sideOrientation)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSideOrientation sets the SideOrientation property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#sideorientation
+func (m *MultiMaterial) SetSideOrientation(sideOrientation float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(sideOrientation)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// State returns the State property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#state
+func (m *MultiMaterial) State(state string) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(state)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetState sets the State property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#state
+func (m *MultiMaterial) SetState(state string) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(state)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SubMaterials returns the SubMaterials property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#submaterials
+func (m *MultiMaterial) SubMaterials(subMaterials *Material) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(subMaterials.JSObject())
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSubMaterials sets the SubMaterials property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#submaterials
+func (m *MultiMaterial) SetSubMaterials(subMaterials *Material) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(subMaterials.JSObject())
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// TextureDirtyFlag returns the TextureDirtyFlag property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#texturedirtyflag
+func (m *MultiMaterial) TextureDirtyFlag(TextureDirtyFlag float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(TextureDirtyFlag)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTextureDirtyFlag sets the TextureDirtyFlag property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#texturedirtyflag
+func (m *MultiMaterial) SetTextureDirtyFlag(TextureDirtyFlag float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(TextureDirtyFlag)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// TriangleFanDrawMode returns the TriangleFanDrawMode property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#trianglefandrawmode
+func (m *MultiMaterial) TriangleFanDrawMode(TriangleFanDrawMode float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(TriangleFanDrawMode)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTriangleFanDrawMode sets the TriangleFanDrawMode property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#trianglefandrawmode
+func (m *MultiMaterial) SetTriangleFanDrawMode(TriangleFanDrawMode float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(TriangleFanDrawMode)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// TriangleFillMode returns the TriangleFillMode property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#trianglefillmode
+func (m *MultiMaterial) TriangleFillMode(TriangleFillMode float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(TriangleFillMode)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTriangleFillMode sets the TriangleFillMode property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#trianglefillmode
+func (m *MultiMaterial) SetTriangleFillMode(TriangleFillMode float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(TriangleFillMode)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// TriangleStripDrawMode returns the TriangleStripDrawMode property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#trianglestripdrawmode
+func (m *MultiMaterial) TriangleStripDrawMode(TriangleStripDrawMode float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(TriangleStripDrawMode)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTriangleStripDrawMode sets the TriangleStripDrawMode property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#trianglestripdrawmode
+func (m *MultiMaterial) SetTriangleStripDrawMode(TriangleStripDrawMode float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(TriangleStripDrawMode)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#uniqueid
+func (m *MultiMaterial) UniqueId(uniqueId float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(uniqueId)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#uniqueid
+func (m *MultiMaterial) SetUniqueId(uniqueId float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(uniqueId)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// WireFrameFillMode returns the WireFrameFillMode property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#wireframefillmode
+func (m *MultiMaterial) WireFrameFillMode(WireFrameFillMode float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(WireFrameFillMode)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetWireFrameFillMode sets the WireFrameFillMode property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#wireframefillmode
+func (m *MultiMaterial) SetWireFrameFillMode(WireFrameFillMode float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(WireFrameFillMode)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// Wireframe returns the Wireframe property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#wireframe
+func (m *MultiMaterial) Wireframe(wireframe bool) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(wireframe)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetWireframe sets the Wireframe property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#wireframe
+func (m *MultiMaterial) SetWireframe(wireframe bool) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(wireframe)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// ZOffset returns the ZOffset property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#zoffset
+func (m *MultiMaterial) ZOffset(zOffset float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(zOffset)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetZOffset sets the ZOffset property of class MultiMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multimaterial#zoffset
+func (m *MultiMaterial) SetZOffset(zOffset float64) *MultiMaterial {
+	p := ba.ctx.Get("MultiMaterial").New(zOffset)
+	return MultiMaterialFromJSObject(p, ba.ctx)
+}
+
+*/

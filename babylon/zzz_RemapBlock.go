@@ -31,8 +31,747 @@ func RemapBlockFromJSObject(p js.Value, ctx js.Value) *RemapBlock {
 //
 // https://doc.babylonjs.com/api/classes/babylon.remapblock
 func (ba *Babylon) NewRemapBlock(name string) *RemapBlock {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	p := ba.ctx.Get("RemapBlock").New(args...)
+	return RemapBlockFromJSObject(p, ba.ctx)
+}
+
+// AutoConfigure calls the AutoConfigure method on the RemapBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#autoconfigure
+func (r *RemapBlock) AutoConfigure(material *NodeMaterial) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, material.JSObject())
+
+	r.p.Call("autoConfigure", args...)
+}
+
+// RemapBlockBindOpts contains optional parameters for RemapBlock.Bind.
+type RemapBlockBindOpts struct {
+	Mesh *Mesh
+}
+
+// Bind calls the Bind method on the RemapBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#bind
+func (r *RemapBlock) Bind(effect *Effect, nodeMaterial *NodeMaterial, opts *RemapBlockBindOpts) {
+	if opts == nil {
+		opts = &RemapBlockBindOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, effect.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	r.p.Call("bind", args...)
+}
+
+// Build calls the Build method on the RemapBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#build
+func (r *RemapBlock) Build(state *NodeMaterialBuildState, activeBlocks *NodeMaterialBlock) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, state.JSObject())
+	args = append(args, activeBlocks.JSObject())
+
+	retVal := r.p.Call("build", args...)
+	return retVal.Bool()
+}
+
+// RemapBlockCloneOpts contains optional parameters for RemapBlock.Clone.
+type RemapBlockCloneOpts struct {
+	RootUrl *string
+}
+
+// Clone calls the Clone method on the RemapBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#clone
+func (r *RemapBlock) Clone(scene *Scene, opts *RemapBlockCloneOpts) *NodeMaterialBlock {
+	if opts == nil {
+		opts = &RemapBlockCloneOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, scene.JSObject())
+
+	if opts.RootUrl == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RootUrl)
+	}
+
+	retVal := r.p.Call("clone", args...)
+	return NodeMaterialBlockFromJSObject(retVal, r.ctx)
+}
+
+// RemapBlockConnectToOpts contains optional parameters for RemapBlock.ConnectTo.
+type RemapBlockConnectToOpts struct {
+	Options js.Value
+}
+
+// ConnectTo calls the ConnectTo method on the RemapBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#connectto
+func (r *RemapBlock) ConnectTo(other *NodeMaterialBlock, opts *RemapBlockConnectToOpts) *RemapBlock {
+	if opts == nil {
+		opts = &RemapBlockConnectToOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, other.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	retVal := r.p.Call("connectTo", args...)
+	return RemapBlockFromJSObject(retVal, r.ctx)
+}
+
+// Dispose calls the Dispose method on the RemapBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#dispose
+func (r *RemapBlock) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	r.p.Call("dispose", args...)
+}
+
+// GetClassName calls the GetClassName method on the RemapBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#getclassname
+func (r *RemapBlock) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// RemapBlockGetFirstAvailableInputOpts contains optional parameters for RemapBlock.GetFirstAvailableInput.
+type RemapBlockGetFirstAvailableInputOpts struct {
+	ForOutput *NodeMaterialConnectionPoint
+}
+
+// GetFirstAvailableInput calls the GetFirstAvailableInput method on the RemapBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#getfirstavailableinput
+func (r *RemapBlock) GetFirstAvailableInput(opts *RemapBlockGetFirstAvailableInputOpts) *NodeMaterialConnectionPoint {
+	if opts == nil {
+		opts = &RemapBlockGetFirstAvailableInputOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForOutput == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForOutput.JSObject())
+	}
+
+	retVal := r.p.Call("getFirstAvailableInput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
+}
+
+// RemapBlockGetFirstAvailableOutputOpts contains optional parameters for RemapBlock.GetFirstAvailableOutput.
+type RemapBlockGetFirstAvailableOutputOpts struct {
+	ForBlock *NodeMaterialBlock
+}
+
+// GetFirstAvailableOutput calls the GetFirstAvailableOutput method on the RemapBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#getfirstavailableoutput
+func (r *RemapBlock) GetFirstAvailableOutput(opts *RemapBlockGetFirstAvailableOutputOpts) *NodeMaterialConnectionPoint {
+	if opts == nil {
+		opts = &RemapBlockGetFirstAvailableOutputOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForBlock == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForBlock.JSObject())
+	}
+
+	retVal := r.p.Call("getFirstAvailableOutput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
+}
+
+// GetInputByName calls the GetInputByName method on the RemapBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#getinputbyname
+func (r *RemapBlock) GetInputByName(name string) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := r.p.Call("getInputByName", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
+}
+
+// GetOutputByName calls the GetOutputByName method on the RemapBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#getoutputbyname
+func (r *RemapBlock) GetOutputByName(name string) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := r.p.Call("getOutputByName", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
+}
+
+// GetSiblingOutput calls the GetSiblingOutput method on the RemapBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#getsiblingoutput
+func (r *RemapBlock) GetSiblingOutput(current *NodeMaterialConnectionPoint) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, current.JSObject())
+
+	retVal := r.p.Call("getSiblingOutput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
+}
+
+// Initialize calls the Initialize method on the RemapBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#initialize
+func (r *RemapBlock) Initialize(state *NodeMaterialBuildState) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, state.JSObject())
+
+	r.p.Call("initialize", args...)
+}
+
+// RemapBlockInitializeDefinesOpts contains optional parameters for RemapBlock.InitializeDefines.
+type RemapBlockInitializeDefinesOpts struct {
+	UseInstances *bool
+}
+
+// InitializeDefines calls the InitializeDefines method on the RemapBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#initializedefines
+func (r *RemapBlock) InitializeDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *RemapBlockInitializeDefinesOpts) {
+	if opts == nil {
+		opts = &RemapBlockInitializeDefinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	r.p.Call("initializeDefines", args...)
+}
+
+// RemapBlockIsReadyOpts contains optional parameters for RemapBlock.IsReady.
+type RemapBlockIsReadyOpts struct {
+	UseInstances *bool
+}
+
+// IsReady calls the IsReady method on the RemapBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#isready
+func (r *RemapBlock) IsReady(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *RemapBlockIsReadyOpts) bool {
+	if opts == nil {
+		opts = &RemapBlockIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := r.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// RemapBlockPrepareDefinesOpts contains optional parameters for RemapBlock.PrepareDefines.
+type RemapBlockPrepareDefinesOpts struct {
+	UseInstances *bool
+}
+
+// PrepareDefines calls the PrepareDefines method on the RemapBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#preparedefines
+func (r *RemapBlock) PrepareDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *RemapBlockPrepareDefinesOpts) {
+	if opts == nil {
+		opts = &RemapBlockPrepareDefinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	r.p.Call("prepareDefines", args...)
+}
+
+// ProvideFallbacks calls the ProvideFallbacks method on the RemapBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#providefallbacks
+func (r *RemapBlock) ProvideFallbacks(mesh *AbstractMesh, fallbacks *EffectFallbacks) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, fallbacks.JSObject())
+
+	r.p.Call("provideFallbacks", args...)
+}
+
+// RemapBlockRegisterInputOpts contains optional parameters for RemapBlock.RegisterInput.
+type RemapBlockRegisterInputOpts struct {
+	IsOptional *bool
+	Target     js.Value
+}
+
+// RegisterInput calls the RegisterInput method on the RemapBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#registerinput
+func (r *RemapBlock) RegisterInput(name string, jsType js.Value, opts *RemapBlockRegisterInputOpts) *RemapBlock {
+	if opts == nil {
+		opts = &RemapBlockRegisterInputOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+2)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	if opts.IsOptional == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IsOptional)
+	}
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+
+	retVal := r.p.Call("registerInput", args...)
+	return RemapBlockFromJSObject(retVal, r.ctx)
+}
+
+// RemapBlockRegisterOutputOpts contains optional parameters for RemapBlock.RegisterOutput.
+type RemapBlockRegisterOutputOpts struct {
+	Target js.Value
+}
+
+// RegisterOutput calls the RegisterOutput method on the RemapBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#registeroutput
+func (r *RemapBlock) RegisterOutput(name string, jsType js.Value, opts *RemapBlockRegisterOutputOpts) *RemapBlock {
+	if opts == nil {
+		opts = &RemapBlockRegisterOutputOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+
+	retVal := r.p.Call("registerOutput", args...)
+	return RemapBlockFromJSObject(retVal, r.ctx)
+}
+
+// ReplaceRepeatableContent calls the ReplaceRepeatableContent method on the RemapBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#replacerepeatablecontent
+func (r *RemapBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterialBuildState, fragmentShaderState *NodeMaterialBuildState, mesh *AbstractMesh, defines js.Value) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, vertexShaderState.JSObject())
+	args = append(args, fragmentShaderState.JSObject())
+	args = append(args, mesh.JSObject())
+	args = append(args, defines)
+
+	r.p.Call("replaceRepeatableContent", args...)
+}
+
+// Serialize calls the Serialize method on the RemapBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#serialize
+func (r *RemapBlock) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("serialize", args...)
+	return retVal
+}
+
+// UpdateUniformsAndSamples calls the UpdateUniformsAndSamples method on the RemapBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#updateuniformsandsamples
+func (r *RemapBlock) UpdateUniformsAndSamples(state *NodeMaterialBuildState, nodeMaterial *NodeMaterial, defines js.Value, uniformBuffers string) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, state.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+	args = append(args, uniformBuffers)
+
+	r.p.Call("updateUniformsAndSamples", args...)
+}
+
+// _deserialize calls the _deserialize method on the RemapBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#_deserialize
+func (r *RemapBlock) _deserialize(serializationObject interface{}, scene *Scene, rootUrl string) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, serializationObject)
+	args = append(args, scene.JSObject())
+	args = append(args, rootUrl)
+
+	r.p.Call("_deserialize", args...)
+}
+
+/*
+
+// BuildId returns the BuildId property of class RemapBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#buildid
+func (r *RemapBlock) BuildId(buildId float64) *RemapBlock {
+	p := ba.ctx.Get("RemapBlock").New(buildId)
+	return RemapBlockFromJSObject(p, ba.ctx)
+}
+
+// SetBuildId sets the BuildId property of class RemapBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#buildid
+func (r *RemapBlock) SetBuildId(buildId float64) *RemapBlock {
+	p := ba.ctx.Get("RemapBlock").New(buildId)
+	return RemapBlockFromJSObject(p, ba.ctx)
+}
+
+// Comments returns the Comments property of class RemapBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#comments
+func (r *RemapBlock) Comments(comments string) *RemapBlock {
+	p := ba.ctx.Get("RemapBlock").New(comments)
+	return RemapBlockFromJSObject(p, ba.ctx)
+}
+
+// SetComments sets the Comments property of class RemapBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#comments
+func (r *RemapBlock) SetComments(comments string) *RemapBlock {
+	p := ba.ctx.Get("RemapBlock").New(comments)
+	return RemapBlockFromJSObject(p, ba.ctx)
+}
+
+// Input returns the Input property of class RemapBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#input
+func (r *RemapBlock) Input(input *NodeMaterialConnectionPoint) *RemapBlock {
+	p := ba.ctx.Get("RemapBlock").New(input.JSObject())
+	return RemapBlockFromJSObject(p, ba.ctx)
+}
+
+// SetInput sets the Input property of class RemapBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#input
+func (r *RemapBlock) SetInput(input *NodeMaterialConnectionPoint) *RemapBlock {
+	p := ba.ctx.Get("RemapBlock").New(input.JSObject())
+	return RemapBlockFromJSObject(p, ba.ctx)
+}
+
+// Inputs returns the Inputs property of class RemapBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#inputs
+func (r *RemapBlock) Inputs(inputs *NodeMaterialConnectionPoint) *RemapBlock {
+	p := ba.ctx.Get("RemapBlock").New(inputs.JSObject())
+	return RemapBlockFromJSObject(p, ba.ctx)
+}
+
+// SetInputs sets the Inputs property of class RemapBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#inputs
+func (r *RemapBlock) SetInputs(inputs *NodeMaterialConnectionPoint) *RemapBlock {
+	p := ba.ctx.Get("RemapBlock").New(inputs.JSObject())
+	return RemapBlockFromJSObject(p, ba.ctx)
+}
+
+// IsFinalMerger returns the IsFinalMerger property of class RemapBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#isfinalmerger
+func (r *RemapBlock) IsFinalMerger(isFinalMerger bool) *RemapBlock {
+	p := ba.ctx.Get("RemapBlock").New(isFinalMerger)
+	return RemapBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsFinalMerger sets the IsFinalMerger property of class RemapBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#isfinalmerger
+func (r *RemapBlock) SetIsFinalMerger(isFinalMerger bool) *RemapBlock {
+	p := ba.ctx.Get("RemapBlock").New(isFinalMerger)
+	return RemapBlockFromJSObject(p, ba.ctx)
+}
+
+// IsInput returns the IsInput property of class RemapBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#isinput
+func (r *RemapBlock) IsInput(isInput bool) *RemapBlock {
+	p := ba.ctx.Get("RemapBlock").New(isInput)
+	return RemapBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsInput sets the IsInput property of class RemapBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#isinput
+func (r *RemapBlock) SetIsInput(isInput bool) *RemapBlock {
+	p := ba.ctx.Get("RemapBlock").New(isInput)
+	return RemapBlockFromJSObject(p, ba.ctx)
+}
+
+// IsUnique returns the IsUnique property of class RemapBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#isunique
+func (r *RemapBlock) IsUnique(isUnique bool) *RemapBlock {
+	p := ba.ctx.Get("RemapBlock").New(isUnique)
+	return RemapBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsUnique sets the IsUnique property of class RemapBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#isunique
+func (r *RemapBlock) SetIsUnique(isUnique bool) *RemapBlock {
+	p := ba.ctx.Get("RemapBlock").New(isUnique)
+	return RemapBlockFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class RemapBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#name
+func (r *RemapBlock) Name(name string) *RemapBlock {
 	p := ba.ctx.Get("RemapBlock").New(name)
 	return RemapBlockFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetName sets the Name property of class RemapBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#name
+func (r *RemapBlock) SetName(name string) *RemapBlock {
+	p := ba.ctx.Get("RemapBlock").New(name)
+	return RemapBlockFromJSObject(p, ba.ctx)
+}
+
+// Output returns the Output property of class RemapBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#output
+func (r *RemapBlock) Output(output *NodeMaterialConnectionPoint) *RemapBlock {
+	p := ba.ctx.Get("RemapBlock").New(output.JSObject())
+	return RemapBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOutput sets the Output property of class RemapBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#output
+func (r *RemapBlock) SetOutput(output *NodeMaterialConnectionPoint) *RemapBlock {
+	p := ba.ctx.Get("RemapBlock").New(output.JSObject())
+	return RemapBlockFromJSObject(p, ba.ctx)
+}
+
+// Outputs returns the Outputs property of class RemapBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#outputs
+func (r *RemapBlock) Outputs(outputs *NodeMaterialConnectionPoint) *RemapBlock {
+	p := ba.ctx.Get("RemapBlock").New(outputs.JSObject())
+	return RemapBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOutputs sets the Outputs property of class RemapBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#outputs
+func (r *RemapBlock) SetOutputs(outputs *NodeMaterialConnectionPoint) *RemapBlock {
+	p := ba.ctx.Get("RemapBlock").New(outputs.JSObject())
+	return RemapBlockFromJSObject(p, ba.ctx)
+}
+
+// SourceMax returns the SourceMax property of class RemapBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#sourcemax
+func (r *RemapBlock) SourceMax(sourceMax *NodeMaterialConnectionPoint) *RemapBlock {
+	p := ba.ctx.Get("RemapBlock").New(sourceMax.JSObject())
+	return RemapBlockFromJSObject(p, ba.ctx)
+}
+
+// SetSourceMax sets the SourceMax property of class RemapBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#sourcemax
+func (r *RemapBlock) SetSourceMax(sourceMax *NodeMaterialConnectionPoint) *RemapBlock {
+	p := ba.ctx.Get("RemapBlock").New(sourceMax.JSObject())
+	return RemapBlockFromJSObject(p, ba.ctx)
+}
+
+// SourceMin returns the SourceMin property of class RemapBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#sourcemin
+func (r *RemapBlock) SourceMin(sourceMin *NodeMaterialConnectionPoint) *RemapBlock {
+	p := ba.ctx.Get("RemapBlock").New(sourceMin.JSObject())
+	return RemapBlockFromJSObject(p, ba.ctx)
+}
+
+// SetSourceMin sets the SourceMin property of class RemapBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#sourcemin
+func (r *RemapBlock) SetSourceMin(sourceMin *NodeMaterialConnectionPoint) *RemapBlock {
+	p := ba.ctx.Get("RemapBlock").New(sourceMin.JSObject())
+	return RemapBlockFromJSObject(p, ba.ctx)
+}
+
+// SourceRange returns the SourceRange property of class RemapBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#sourcerange
+func (r *RemapBlock) SourceRange(sourceRange *Vector2) *RemapBlock {
+	p := ba.ctx.Get("RemapBlock").New(sourceRange.JSObject())
+	return RemapBlockFromJSObject(p, ba.ctx)
+}
+
+// SetSourceRange sets the SourceRange property of class RemapBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#sourcerange
+func (r *RemapBlock) SetSourceRange(sourceRange *Vector2) *RemapBlock {
+	p := ba.ctx.Get("RemapBlock").New(sourceRange.JSObject())
+	return RemapBlockFromJSObject(p, ba.ctx)
+}
+
+// Target returns the Target property of class RemapBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#target
+func (r *RemapBlock) Target(target js.Value) *RemapBlock {
+	p := ba.ctx.Get("RemapBlock").New(target)
+	return RemapBlockFromJSObject(p, ba.ctx)
+}
+
+// SetTarget sets the Target property of class RemapBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#target
+func (r *RemapBlock) SetTarget(target js.Value) *RemapBlock {
+	p := ba.ctx.Get("RemapBlock").New(target)
+	return RemapBlockFromJSObject(p, ba.ctx)
+}
+
+// TargetMax returns the TargetMax property of class RemapBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#targetmax
+func (r *RemapBlock) TargetMax(targetMax *NodeMaterialConnectionPoint) *RemapBlock {
+	p := ba.ctx.Get("RemapBlock").New(targetMax.JSObject())
+	return RemapBlockFromJSObject(p, ba.ctx)
+}
+
+// SetTargetMax sets the TargetMax property of class RemapBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#targetmax
+func (r *RemapBlock) SetTargetMax(targetMax *NodeMaterialConnectionPoint) *RemapBlock {
+	p := ba.ctx.Get("RemapBlock").New(targetMax.JSObject())
+	return RemapBlockFromJSObject(p, ba.ctx)
+}
+
+// TargetMin returns the TargetMin property of class RemapBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#targetmin
+func (r *RemapBlock) TargetMin(targetMin *NodeMaterialConnectionPoint) *RemapBlock {
+	p := ba.ctx.Get("RemapBlock").New(targetMin.JSObject())
+	return RemapBlockFromJSObject(p, ba.ctx)
+}
+
+// SetTargetMin sets the TargetMin property of class RemapBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#targetmin
+func (r *RemapBlock) SetTargetMin(targetMin *NodeMaterialConnectionPoint) *RemapBlock {
+	p := ba.ctx.Get("RemapBlock").New(targetMin.JSObject())
+	return RemapBlockFromJSObject(p, ba.ctx)
+}
+
+// TargetRange returns the TargetRange property of class RemapBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#targetrange
+func (r *RemapBlock) TargetRange(targetRange *Vector2) *RemapBlock {
+	p := ba.ctx.Get("RemapBlock").New(targetRange.JSObject())
+	return RemapBlockFromJSObject(p, ba.ctx)
+}
+
+// SetTargetRange sets the TargetRange property of class RemapBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#targetrange
+func (r *RemapBlock) SetTargetRange(targetRange *Vector2) *RemapBlock {
+	p := ba.ctx.Get("RemapBlock").New(targetRange.JSObject())
+	return RemapBlockFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class RemapBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#uniqueid
+func (r *RemapBlock) UniqueId(uniqueId float64) *RemapBlock {
+	p := ba.ctx.Get("RemapBlock").New(uniqueId)
+	return RemapBlockFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class RemapBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.remapblock#uniqueid
+func (r *RemapBlock) SetUniqueId(uniqueId float64) *RemapBlock {
+	p := ba.ctx.Get("RemapBlock").New(uniqueId)
+	return RemapBlockFromJSObject(p, ba.ctx)
+}
+
+*/

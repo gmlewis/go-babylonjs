@@ -31,11 +31,9 @@ func SpritePackedManagerFromJSObject(p js.Value, ctx js.Value) *SpritePackedMana
 
 // NewSpritePackedManagerOpts contains optional parameters for NewSpritePackedManager.
 type NewSpritePackedManagerOpts struct {
-	SpriteJSON *JSString
-
-	Epsilon *JSFloat64
-
-	SamplingMode *JSFloat64
+	SpriteJSON   *string
+	Epsilon      *float64
+	SamplingMode *float64
 }
 
 // NewSpritePackedManager returns a new SpritePackedManager object.
@@ -46,8 +44,291 @@ func (ba *Babylon) NewSpritePackedManager(name string, imgUrl string, capacity f
 		opts = &NewSpritePackedManagerOpts{}
 	}
 
-	p := ba.ctx.Get("SpritePackedManager").New(name, imgUrl, capacity, scene.JSObject(), opts.SpriteJSON.JSObject(), opts.Epsilon.JSObject(), opts.SamplingMode.JSObject())
+	args := make([]interface{}, 0, 4+3)
+
+	args = append(args, name)
+	args = append(args, imgUrl)
+	args = append(args, capacity)
+	args = append(args, scene.JSObject())
+
+	if opts.SpriteJSON == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SpriteJSON)
+	}
+	if opts.Epsilon == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Epsilon)
+	}
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+
+	p := ba.ctx.Get("SpritePackedManager").New(args...)
 	return SpritePackedManagerFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Dispose calls the Dispose method on the SpritePackedManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.spritepackedmanager#dispose
+func (s *SpritePackedManager) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("dispose", args...)
+}
+
+// SpritePackedManagerIntersectsOpts contains optional parameters for SpritePackedManager.Intersects.
+type SpritePackedManagerIntersectsOpts struct {
+	Predicate *func()
+	FastCheck *bool
+}
+
+// Intersects calls the Intersects method on the SpritePackedManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.spritepackedmanager#intersects
+func (s *SpritePackedManager) Intersects(ray *Ray, camera *Camera, opts *SpritePackedManagerIntersectsOpts) *PickingInfo {
+	if opts == nil {
+		opts = &SpritePackedManagerIntersectsOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+2)
+
+	args = append(args, ray.JSObject())
+	args = append(args, camera.JSObject())
+
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+	if opts.FastCheck == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FastCheck)
+	}
+
+	retVal := s.p.Call("intersects", args...)
+	return PickingInfoFromJSObject(retVal, s.ctx)
+}
+
+// SpritePackedManagerMultiIntersectsOpts contains optional parameters for SpritePackedManager.MultiIntersects.
+type SpritePackedManagerMultiIntersectsOpts struct {
+	Predicate *func()
+}
+
+// MultiIntersects calls the MultiIntersects method on the SpritePackedManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.spritepackedmanager#multiintersects
+func (s *SpritePackedManager) MultiIntersects(ray *Ray, camera *Camera, opts *SpritePackedManagerMultiIntersectsOpts) *PickingInfo {
+	if opts == nil {
+		opts = &SpritePackedManagerMultiIntersectsOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, ray.JSObject())
+	args = append(args, camera.JSObject())
+
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	retVal := s.p.Call("multiIntersects", args...)
+	return PickingInfoFromJSObject(retVal, s.ctx)
+}
+
+// Render calls the Render method on the SpritePackedManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.spritepackedmanager#render
+func (s *SpritePackedManager) Render() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("render", args...)
+}
+
+/*
+
+// CellHeight returns the CellHeight property of class SpritePackedManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.spritepackedmanager#cellheight
+func (s *SpritePackedManager) CellHeight(cellHeight float64) *SpritePackedManager {
+	p := ba.ctx.Get("SpritePackedManager").New(cellHeight)
+	return SpritePackedManagerFromJSObject(p, ba.ctx)
+}
+
+// SetCellHeight sets the CellHeight property of class SpritePackedManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.spritepackedmanager#cellheight
+func (s *SpritePackedManager) SetCellHeight(cellHeight float64) *SpritePackedManager {
+	p := ba.ctx.Get("SpritePackedManager").New(cellHeight)
+	return SpritePackedManagerFromJSObject(p, ba.ctx)
+}
+
+// CellWidth returns the CellWidth property of class SpritePackedManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.spritepackedmanager#cellwidth
+func (s *SpritePackedManager) CellWidth(cellWidth float64) *SpritePackedManager {
+	p := ba.ctx.Get("SpritePackedManager").New(cellWidth)
+	return SpritePackedManagerFromJSObject(p, ba.ctx)
+}
+
+// SetCellWidth sets the CellWidth property of class SpritePackedManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.spritepackedmanager#cellwidth
+func (s *SpritePackedManager) SetCellWidth(cellWidth float64) *SpritePackedManager {
+	p := ba.ctx.Get("SpritePackedManager").New(cellWidth)
+	return SpritePackedManagerFromJSObject(p, ba.ctx)
+}
+
+// FogEnabled returns the FogEnabled property of class SpritePackedManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.spritepackedmanager#fogenabled
+func (s *SpritePackedManager) FogEnabled(fogEnabled bool) *SpritePackedManager {
+	p := ba.ctx.Get("SpritePackedManager").New(fogEnabled)
+	return SpritePackedManagerFromJSObject(p, ba.ctx)
+}
+
+// SetFogEnabled sets the FogEnabled property of class SpritePackedManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.spritepackedmanager#fogenabled
+func (s *SpritePackedManager) SetFogEnabled(fogEnabled bool) *SpritePackedManager {
+	p := ba.ctx.Get("SpritePackedManager").New(fogEnabled)
+	return SpritePackedManagerFromJSObject(p, ba.ctx)
+}
+
+// IsPickable returns the IsPickable property of class SpritePackedManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.spritepackedmanager#ispickable
+func (s *SpritePackedManager) IsPickable(isPickable bool) *SpritePackedManager {
+	p := ba.ctx.Get("SpritePackedManager").New(isPickable)
+	return SpritePackedManagerFromJSObject(p, ba.ctx)
+}
+
+// SetIsPickable sets the IsPickable property of class SpritePackedManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.spritepackedmanager#ispickable
+func (s *SpritePackedManager) SetIsPickable(isPickable bool) *SpritePackedManager {
+	p := ba.ctx.Get("SpritePackedManager").New(isPickable)
+	return SpritePackedManagerFromJSObject(p, ba.ctx)
+}
+
+// LayerMask returns the LayerMask property of class SpritePackedManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.spritepackedmanager#layermask
+func (s *SpritePackedManager) LayerMask(layerMask float64) *SpritePackedManager {
+	p := ba.ctx.Get("SpritePackedManager").New(layerMask)
+	return SpritePackedManagerFromJSObject(p, ba.ctx)
+}
+
+// SetLayerMask sets the LayerMask property of class SpritePackedManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.spritepackedmanager#layermask
+func (s *SpritePackedManager) SetLayerMask(layerMask float64) *SpritePackedManager {
+	p := ba.ctx.Get("SpritePackedManager").New(layerMask)
+	return SpritePackedManagerFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class SpritePackedManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.spritepackedmanager#name
+func (s *SpritePackedManager) Name(name string) *SpritePackedManager {
+	p := ba.ctx.Get("SpritePackedManager").New(name)
+	return SpritePackedManagerFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class SpritePackedManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.spritepackedmanager#name
+func (s *SpritePackedManager) SetName(name string) *SpritePackedManager {
+	p := ba.ctx.Get("SpritePackedManager").New(name)
+	return SpritePackedManagerFromJSObject(p, ba.ctx)
+}
+
+// OnDispose returns the OnDispose property of class SpritePackedManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.spritepackedmanager#ondispose
+func (s *SpritePackedManager) OnDispose(onDispose func()) *SpritePackedManager {
+	p := ba.ctx.Get("SpritePackedManager").New(onDispose)
+	return SpritePackedManagerFromJSObject(p, ba.ctx)
+}
+
+// SetOnDispose sets the OnDispose property of class SpritePackedManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.spritepackedmanager#ondispose
+func (s *SpritePackedManager) SetOnDispose(onDispose func()) *SpritePackedManager {
+	p := ba.ctx.Get("SpritePackedManager").New(onDispose)
+	return SpritePackedManagerFromJSObject(p, ba.ctx)
+}
+
+// OnDisposeObservable returns the OnDisposeObservable property of class SpritePackedManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.spritepackedmanager#ondisposeobservable
+func (s *SpritePackedManager) OnDisposeObservable(onDisposeObservable *Observable) *SpritePackedManager {
+	p := ba.ctx.Get("SpritePackedManager").New(onDisposeObservable.JSObject())
+	return SpritePackedManagerFromJSObject(p, ba.ctx)
+}
+
+// SetOnDisposeObservable sets the OnDisposeObservable property of class SpritePackedManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.spritepackedmanager#ondisposeobservable
+func (s *SpritePackedManager) SetOnDisposeObservable(onDisposeObservable *Observable) *SpritePackedManager {
+	p := ba.ctx.Get("SpritePackedManager").New(onDisposeObservable.JSObject())
+	return SpritePackedManagerFromJSObject(p, ba.ctx)
+}
+
+// RenderingGroupId returns the RenderingGroupId property of class SpritePackedManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.spritepackedmanager#renderinggroupid
+func (s *SpritePackedManager) RenderingGroupId(renderingGroupId float64) *SpritePackedManager {
+	p := ba.ctx.Get("SpritePackedManager").New(renderingGroupId)
+	return SpritePackedManagerFromJSObject(p, ba.ctx)
+}
+
+// SetRenderingGroupId sets the RenderingGroupId property of class SpritePackedManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.spritepackedmanager#renderinggroupid
+func (s *SpritePackedManager) SetRenderingGroupId(renderingGroupId float64) *SpritePackedManager {
+	p := ba.ctx.Get("SpritePackedManager").New(renderingGroupId)
+	return SpritePackedManagerFromJSObject(p, ba.ctx)
+}
+
+// Sprites returns the Sprites property of class SpritePackedManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.spritepackedmanager#sprites
+func (s *SpritePackedManager) Sprites(sprites *Sprite) *SpritePackedManager {
+	p := ba.ctx.Get("SpritePackedManager").New(sprites.JSObject())
+	return SpritePackedManagerFromJSObject(p, ba.ctx)
+}
+
+// SetSprites sets the Sprites property of class SpritePackedManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.spritepackedmanager#sprites
+func (s *SpritePackedManager) SetSprites(sprites *Sprite) *SpritePackedManager {
+	p := ba.ctx.Get("SpritePackedManager").New(sprites.JSObject())
+	return SpritePackedManagerFromJSObject(p, ba.ctx)
+}
+
+// Texture returns the Texture property of class SpritePackedManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.spritepackedmanager#texture
+func (s *SpritePackedManager) Texture(texture *Texture) *SpritePackedManager {
+	p := ba.ctx.Get("SpritePackedManager").New(texture.JSObject())
+	return SpritePackedManagerFromJSObject(p, ba.ctx)
+}
+
+// SetTexture sets the Texture property of class SpritePackedManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.spritepackedmanager#texture
+func (s *SpritePackedManager) SetTexture(texture *Texture) *SpritePackedManager {
+	p := ba.ctx.Get("SpritePackedManager").New(texture.JSObject())
+	return SpritePackedManagerFromJSObject(p, ba.ctx)
+}
+
+*/

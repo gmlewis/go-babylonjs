@@ -31,8 +31,718 @@ func ViveControllerFromJSObject(p js.Value, ctx js.Value) *ViveController {
 //
 // https://doc.babylonjs.com/api/classes/babylon.vivecontroller
 func (ba *Babylon) NewViveController(vrGamepad interface{}) *ViveController {
-	p := ba.ctx.Get("ViveController").New(vrGamepad)
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, vrGamepad)
+
+	p := ba.ctx.Get("ViveController").New(args...)
 	return ViveControllerFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AttachToMesh calls the AttachToMesh method on the ViveController object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#attachtomesh
+func (v *ViveController) AttachToMesh(mesh *AbstractMesh) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	v.p.Call("attachToMesh", args...)
+}
+
+// AttachToPoseControlledCamera calls the AttachToPoseControlledCamera method on the ViveController object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#attachtoposecontrolledcamera
+func (v *ViveController) AttachToPoseControlledCamera(camera *TargetCamera) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, camera.JSObject())
+
+	v.p.Call("attachToPoseControlledCamera", args...)
+}
+
+// Dispose calls the Dispose method on the ViveController object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#dispose
+func (v *ViveController) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	v.p.Call("dispose", args...)
+}
+
+// ViveControllerGetForwardRayOpts contains optional parameters for ViveController.GetForwardRay.
+type ViveControllerGetForwardRayOpts struct {
+	Length *float64
+}
+
+// GetForwardRay calls the GetForwardRay method on the ViveController object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#getforwardray
+func (v *ViveController) GetForwardRay(opts *ViveControllerGetForwardRayOpts) *Ray {
+	if opts == nil {
+		opts = &ViveControllerGetForwardRayOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Length == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Length)
+	}
+
+	retVal := v.p.Call("getForwardRay", args...)
+	return RayFromJSObject(retVal, v.ctx)
+}
+
+// ViveControllerInitControllerMeshOpts contains optional parameters for ViveController.InitControllerMesh.
+type ViveControllerInitControllerMeshOpts struct {
+	MeshLoaded *func()
+}
+
+// InitControllerMesh calls the InitControllerMesh method on the ViveController object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#initcontrollermesh
+func (v *ViveController) InitControllerMesh(scene *Scene, opts *ViveControllerInitControllerMeshOpts) {
+	if opts == nil {
+		opts = &ViveControllerInitControllerMeshOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, scene.JSObject())
+
+	if opts.MeshLoaded == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.MeshLoaded)
+	}
+
+	v.p.Call("initControllerMesh", args...)
+}
+
+// OnButtonStateChange calls the OnButtonStateChange method on the ViveController object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#onbuttonstatechange
+func (v *ViveController) OnButtonStateChange(callback func()) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, callback)
+
+	v.p.Call("onButtonStateChange", args...)
+}
+
+// Onleftstickchanged calls the Onleftstickchanged method on the ViveController object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#onleftstickchanged
+func (v *ViveController) Onleftstickchanged(callback func()) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, callback)
+
+	v.p.Call("onleftstickchanged", args...)
+}
+
+// Onrightstickchanged calls the Onrightstickchanged method on the ViveController object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#onrightstickchanged
+func (v *ViveController) Onrightstickchanged(callback func()) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, callback)
+
+	v.p.Call("onrightstickchanged", args...)
+}
+
+// Update calls the Update method on the ViveController object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#update
+func (v *ViveController) Update() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	v.p.Call("update", args...)
+}
+
+// UpdateFromDevice calls the UpdateFromDevice method on the ViveController object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#updatefromdevice
+func (v *ViveController) UpdateFromDevice(poseData js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, poseData)
+
+	v.p.Call("updateFromDevice", args...)
+}
+
+/*
+
+// BrowserGamepad returns the BrowserGamepad property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#browsergamepad
+func (v *ViveController) BrowserGamepad(browserGamepad interface{}) *ViveController {
+	p := ba.ctx.Get("ViveController").New(browserGamepad)
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// SetBrowserGamepad sets the BrowserGamepad property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#browsergamepad
+func (v *ViveController) SetBrowserGamepad(browserGamepad interface{}) *ViveController {
+	p := ba.ctx.Get("ViveController").New(browserGamepad)
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// ControllerType returns the ControllerType property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#controllertype
+func (v *ViveController) ControllerType(controllerType *PoseEnabledControllerType) *ViveController {
+	p := ba.ctx.Get("ViveController").New(controllerType.JSObject())
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// SetControllerType sets the ControllerType property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#controllertype
+func (v *ViveController) SetControllerType(controllerType *PoseEnabledControllerType) *ViveController {
+	p := ba.ctx.Get("ViveController").New(controllerType.JSObject())
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// DUALSHOCK returns the DUALSHOCK property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#dualshock
+func (v *ViveController) DUALSHOCK(DUALSHOCK float64) *ViveController {
+	p := ba.ctx.Get("ViveController").New(DUALSHOCK)
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// SetDUALSHOCK sets the DUALSHOCK property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#dualshock
+func (v *ViveController) SetDUALSHOCK(DUALSHOCK float64) *ViveController {
+	p := ba.ctx.Get("ViveController").New(DUALSHOCK)
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// DefaultModel returns the DefaultModel property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#defaultmodel
+func (v *ViveController) DefaultModel(defaultModel *AbstractMesh) *ViveController {
+	p := ba.ctx.Get("ViveController").New(defaultModel.JSObject())
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// SetDefaultModel sets the DefaultModel property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#defaultmodel
+func (v *ViveController) SetDefaultModel(defaultModel *AbstractMesh) *ViveController {
+	p := ba.ctx.Get("ViveController").New(defaultModel.JSObject())
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// DevicePosition returns the DevicePosition property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#deviceposition
+func (v *ViveController) DevicePosition(devicePosition *Vector3) *ViveController {
+	p := ba.ctx.Get("ViveController").New(devicePosition.JSObject())
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// SetDevicePosition sets the DevicePosition property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#deviceposition
+func (v *ViveController) SetDevicePosition(devicePosition *Vector3) *ViveController {
+	p := ba.ctx.Get("ViveController").New(devicePosition.JSObject())
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// DeviceRotationQuaternion returns the DeviceRotationQuaternion property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#devicerotationquaternion
+func (v *ViveController) DeviceRotationQuaternion(deviceRotationQuaternion *Quaternion) *ViveController {
+	p := ba.ctx.Get("ViveController").New(deviceRotationQuaternion.JSObject())
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// SetDeviceRotationQuaternion sets the DeviceRotationQuaternion property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#devicerotationquaternion
+func (v *ViveController) SetDeviceRotationQuaternion(deviceRotationQuaternion *Quaternion) *ViveController {
+	p := ba.ctx.Get("ViveController").New(deviceRotationQuaternion.JSObject())
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// DeviceScaleFactor returns the DeviceScaleFactor property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#devicescalefactor
+func (v *ViveController) DeviceScaleFactor(deviceScaleFactor float64) *ViveController {
+	p := ba.ctx.Get("ViveController").New(deviceScaleFactor)
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// SetDeviceScaleFactor sets the DeviceScaleFactor property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#devicescalefactor
+func (v *ViveController) SetDeviceScaleFactor(deviceScaleFactor float64) *ViveController {
+	p := ba.ctx.Get("ViveController").New(deviceScaleFactor)
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// GAMEPAD returns the GAMEPAD property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#gamepad
+func (v *ViveController) GAMEPAD(GAMEPAD float64) *ViveController {
+	p := ba.ctx.Get("ViveController").New(GAMEPAD)
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// SetGAMEPAD sets the GAMEPAD property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#gamepad
+func (v *ViveController) SetGAMEPAD(GAMEPAD float64) *ViveController {
+	p := ba.ctx.Get("ViveController").New(GAMEPAD)
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// GENERIC returns the GENERIC property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#generic
+func (v *ViveController) GENERIC(GENERIC float64) *ViveController {
+	p := ba.ctx.Get("ViveController").New(GENERIC)
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// SetGENERIC sets the GENERIC property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#generic
+func (v *ViveController) SetGENERIC(GENERIC float64) *ViveController {
+	p := ba.ctx.Get("ViveController").New(GENERIC)
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// Hand returns the Hand property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#hand
+func (v *ViveController) Hand(hand string) *ViveController {
+	p := ba.ctx.Get("ViveController").New(hand)
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// SetHand sets the Hand property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#hand
+func (v *ViveController) SetHand(hand string) *ViveController {
+	p := ba.ctx.Get("ViveController").New(hand)
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// Id returns the Id property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#id
+func (v *ViveController) Id(id string) *ViveController {
+	p := ba.ctx.Get("ViveController").New(id)
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// SetId sets the Id property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#id
+func (v *ViveController) SetId(id string) *ViveController {
+	p := ba.ctx.Get("ViveController").New(id)
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// Index returns the Index property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#index
+func (v *ViveController) Index(index float64) *ViveController {
+	p := ba.ctx.Get("ViveController").New(index)
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// SetIndex sets the Index property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#index
+func (v *ViveController) SetIndex(index float64) *ViveController {
+	p := ba.ctx.Get("ViveController").New(index)
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// IsConnected returns the IsConnected property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#isconnected
+func (v *ViveController) IsConnected(isConnected bool) *ViveController {
+	p := ba.ctx.Get("ViveController").New(isConnected)
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// SetIsConnected sets the IsConnected property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#isconnected
+func (v *ViveController) SetIsConnected(isConnected bool) *ViveController {
+	p := ba.ctx.Get("ViveController").New(isConnected)
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// IsXR returns the IsXR property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#isxr
+func (v *ViveController) IsXR(isXR bool) *ViveController {
+	p := ba.ctx.Get("ViveController").New(isXR)
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// SetIsXR sets the IsXR property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#isxr
+func (v *ViveController) SetIsXR(isXR bool) *ViveController {
+	p := ba.ctx.Get("ViveController").New(isXR)
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// LeftStick returns the LeftStick property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#leftstick
+func (v *ViveController) LeftStick(leftStick *StickValues) *ViveController {
+	p := ba.ctx.Get("ViveController").New(leftStick.JSObject())
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// SetLeftStick sets the LeftStick property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#leftstick
+func (v *ViveController) SetLeftStick(leftStick *StickValues) *ViveController {
+	p := ba.ctx.Get("ViveController").New(leftStick.JSObject())
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// MODEL_BASE_URL returns the MODEL_BASE_URL property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#model_base_url
+func (v *ViveController) MODEL_BASE_URL(MODEL_BASE_URL string) *ViveController {
+	p := ba.ctx.Get("ViveController").New(MODEL_BASE_URL)
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// SetMODEL_BASE_URL sets the MODEL_BASE_URL property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#model_base_url
+func (v *ViveController) SetMODEL_BASE_URL(MODEL_BASE_URL string) *ViveController {
+	p := ba.ctx.Get("ViveController").New(MODEL_BASE_URL)
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// MODEL_FILENAME returns the MODEL_FILENAME property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#model_filename
+func (v *ViveController) MODEL_FILENAME(MODEL_FILENAME string) *ViveController {
+	p := ba.ctx.Get("ViveController").New(MODEL_FILENAME)
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// SetMODEL_FILENAME sets the MODEL_FILENAME property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#model_filename
+func (v *ViveController) SetMODEL_FILENAME(MODEL_FILENAME string) *ViveController {
+	p := ba.ctx.Get("ViveController").New(MODEL_FILENAME)
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// Mesh returns the Mesh property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#mesh
+func (v *ViveController) Mesh(mesh *AbstractMesh) *ViveController {
+	p := ba.ctx.Get("ViveController").New(mesh.JSObject())
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// SetMesh sets the Mesh property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#mesh
+func (v *ViveController) SetMesh(mesh *AbstractMesh) *ViveController {
+	p := ba.ctx.Get("ViveController").New(mesh.JSObject())
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// OnLeftButtonStateChangedObservable returns the OnLeftButtonStateChangedObservable property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#onleftbuttonstatechangedobservable
+func (v *ViveController) OnLeftButtonStateChangedObservable(onLeftButtonStateChangedObservable *Observable) *ViveController {
+	p := ba.ctx.Get("ViveController").New(onLeftButtonStateChangedObservable.JSObject())
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// SetOnLeftButtonStateChangedObservable sets the OnLeftButtonStateChangedObservable property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#onleftbuttonstatechangedobservable
+func (v *ViveController) SetOnLeftButtonStateChangedObservable(onLeftButtonStateChangedObservable *Observable) *ViveController {
+	p := ba.ctx.Get("ViveController").New(onLeftButtonStateChangedObservable.JSObject())
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// OnMainButtonStateChangedObservable returns the OnMainButtonStateChangedObservable property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#onmainbuttonstatechangedobservable
+func (v *ViveController) OnMainButtonStateChangedObservable(onMainButtonStateChangedObservable *Observable) *ViveController {
+	p := ba.ctx.Get("ViveController").New(onMainButtonStateChangedObservable.JSObject())
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// SetOnMainButtonStateChangedObservable sets the OnMainButtonStateChangedObservable property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#onmainbuttonstatechangedobservable
+func (v *ViveController) SetOnMainButtonStateChangedObservable(onMainButtonStateChangedObservable *Observable) *ViveController {
+	p := ba.ctx.Get("ViveController").New(onMainButtonStateChangedObservable.JSObject())
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// OnMenuButtonStateChangedObservable returns the OnMenuButtonStateChangedObservable property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#onmenubuttonstatechangedobservable
+func (v *ViveController) OnMenuButtonStateChangedObservable(onMenuButtonStateChangedObservable *Observable) *ViveController {
+	p := ba.ctx.Get("ViveController").New(onMenuButtonStateChangedObservable.JSObject())
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// SetOnMenuButtonStateChangedObservable sets the OnMenuButtonStateChangedObservable property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#onmenubuttonstatechangedobservable
+func (v *ViveController) SetOnMenuButtonStateChangedObservable(onMenuButtonStateChangedObservable *Observable) *ViveController {
+	p := ba.ctx.Get("ViveController").New(onMenuButtonStateChangedObservable.JSObject())
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// OnPadStateChangedObservable returns the OnPadStateChangedObservable property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#onpadstatechangedobservable
+func (v *ViveController) OnPadStateChangedObservable(onPadStateChangedObservable *Observable) *ViveController {
+	p := ba.ctx.Get("ViveController").New(onPadStateChangedObservable.JSObject())
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// SetOnPadStateChangedObservable sets the OnPadStateChangedObservable property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#onpadstatechangedobservable
+func (v *ViveController) SetOnPadStateChangedObservable(onPadStateChangedObservable *Observable) *ViveController {
+	p := ba.ctx.Get("ViveController").New(onPadStateChangedObservable.JSObject())
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// OnPadValuesChangedObservable returns the OnPadValuesChangedObservable property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#onpadvalueschangedobservable
+func (v *ViveController) OnPadValuesChangedObservable(onPadValuesChangedObservable *Observable) *ViveController {
+	p := ba.ctx.Get("ViveController").New(onPadValuesChangedObservable.JSObject())
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// SetOnPadValuesChangedObservable sets the OnPadValuesChangedObservable property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#onpadvalueschangedobservable
+func (v *ViveController) SetOnPadValuesChangedObservable(onPadValuesChangedObservable *Observable) *ViveController {
+	p := ba.ctx.Get("ViveController").New(onPadValuesChangedObservable.JSObject())
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// OnRightButtonStateChangedObservable returns the OnRightButtonStateChangedObservable property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#onrightbuttonstatechangedobservable
+func (v *ViveController) OnRightButtonStateChangedObservable(onRightButtonStateChangedObservable *Observable) *ViveController {
+	p := ba.ctx.Get("ViveController").New(onRightButtonStateChangedObservable.JSObject())
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// SetOnRightButtonStateChangedObservable sets the OnRightButtonStateChangedObservable property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#onrightbuttonstatechangedobservable
+func (v *ViveController) SetOnRightButtonStateChangedObservable(onRightButtonStateChangedObservable *Observable) *ViveController {
+	p := ba.ctx.Get("ViveController").New(onRightButtonStateChangedObservable.JSObject())
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// OnSecondaryButtonStateChangedObservable returns the OnSecondaryButtonStateChangedObservable property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#onsecondarybuttonstatechangedobservable
+func (v *ViveController) OnSecondaryButtonStateChangedObservable(onSecondaryButtonStateChangedObservable *Observable) *ViveController {
+	p := ba.ctx.Get("ViveController").New(onSecondaryButtonStateChangedObservable.JSObject())
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// SetOnSecondaryButtonStateChangedObservable sets the OnSecondaryButtonStateChangedObservable property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#onsecondarybuttonstatechangedobservable
+func (v *ViveController) SetOnSecondaryButtonStateChangedObservable(onSecondaryButtonStateChangedObservable *Observable) *ViveController {
+	p := ba.ctx.Get("ViveController").New(onSecondaryButtonStateChangedObservable.JSObject())
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// OnTriggerStateChangedObservable returns the OnTriggerStateChangedObservable property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#ontriggerstatechangedobservable
+func (v *ViveController) OnTriggerStateChangedObservable(onTriggerStateChangedObservable *Observable) *ViveController {
+	p := ba.ctx.Get("ViveController").New(onTriggerStateChangedObservable.JSObject())
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// SetOnTriggerStateChangedObservable sets the OnTriggerStateChangedObservable property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#ontriggerstatechangedobservable
+func (v *ViveController) SetOnTriggerStateChangedObservable(onTriggerStateChangedObservable *Observable) *ViveController {
+	p := ba.ctx.Get("ViveController").New(onTriggerStateChangedObservable.JSObject())
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// POINTING_POSE returns the POINTING_POSE property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#pointing_pose
+func (v *ViveController) POINTING_POSE(POINTING_POSE string) *ViveController {
+	p := ba.ctx.Get("ViveController").New(POINTING_POSE)
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// SetPOINTING_POSE sets the POINTING_POSE property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#pointing_pose
+func (v *ViveController) SetPOINTING_POSE(POINTING_POSE string) *ViveController {
+	p := ba.ctx.Get("ViveController").New(POINTING_POSE)
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// POSE_ENABLED returns the POSE_ENABLED property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#pose_enabled
+func (v *ViveController) POSE_ENABLED(POSE_ENABLED float64) *ViveController {
+	p := ba.ctx.Get("ViveController").New(POSE_ENABLED)
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// SetPOSE_ENABLED sets the POSE_ENABLED property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#pose_enabled
+func (v *ViveController) SetPOSE_ENABLED(POSE_ENABLED float64) *ViveController {
+	p := ba.ctx.Get("ViveController").New(POSE_ENABLED)
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// Pad returns the Pad property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#pad
+func (v *ViveController) Pad(pad *StickValues) *ViveController {
+	p := ba.ctx.Get("ViveController").New(pad.JSObject())
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// SetPad sets the Pad property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#pad
+func (v *ViveController) SetPad(pad *StickValues) *ViveController {
+	p := ba.ctx.Get("ViveController").New(pad.JSObject())
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// Position returns the Position property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#position
+func (v *ViveController) Position(position *Vector3) *ViveController {
+	p := ba.ctx.Get("ViveController").New(position.JSObject())
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// SetPosition sets the Position property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#position
+func (v *ViveController) SetPosition(position *Vector3) *ViveController {
+	p := ba.ctx.Get("ViveController").New(position.JSObject())
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// RawPose returns the RawPose property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#rawpose
+func (v *ViveController) RawPose(rawPose js.Value) *ViveController {
+	p := ba.ctx.Get("ViveController").New(rawPose)
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// SetRawPose sets the RawPose property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#rawpose
+func (v *ViveController) SetRawPose(rawPose js.Value) *ViveController {
+	p := ba.ctx.Get("ViveController").New(rawPose)
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// RightStick returns the RightStick property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#rightstick
+func (v *ViveController) RightStick(rightStick *StickValues) *ViveController {
+	p := ba.ctx.Get("ViveController").New(rightStick.JSObject())
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// SetRightStick sets the RightStick property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#rightstick
+func (v *ViveController) SetRightStick(rightStick *StickValues) *ViveController {
+	p := ba.ctx.Get("ViveController").New(rightStick.JSObject())
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// RotationQuaternion returns the RotationQuaternion property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#rotationquaternion
+func (v *ViveController) RotationQuaternion(rotationQuaternion *Quaternion) *ViveController {
+	p := ba.ctx.Get("ViveController").New(rotationQuaternion.JSObject())
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// SetRotationQuaternion sets the RotationQuaternion property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#rotationquaternion
+func (v *ViveController) SetRotationQuaternion(rotationQuaternion *Quaternion) *ViveController {
+	p := ba.ctx.Get("ViveController").New(rotationQuaternion.JSObject())
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// Type returns the Type property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#type
+func (v *ViveController) Type(jsType float64) *ViveController {
+	p := ba.ctx.Get("ViveController").New(jsType)
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// SetType sets the Type property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#type
+func (v *ViveController) SetType(jsType float64) *ViveController {
+	p := ba.ctx.Get("ViveController").New(jsType)
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// XBOX returns the XBOX property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#xbox
+func (v *ViveController) XBOX(XBOX float64) *ViveController {
+	p := ba.ctx.Get("ViveController").New(XBOX)
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+// SetXBOX sets the XBOX property of class ViveController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vivecontroller#xbox
+func (v *ViveController) SetXBOX(XBOX float64) *ViveController {
+	p := ba.ctx.Get("ViveController").New(XBOX)
+	return ViveControllerFromJSObject(p, ba.ctx)
+}
+
+*/

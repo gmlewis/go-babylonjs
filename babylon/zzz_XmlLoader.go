@@ -29,7 +29,7 @@ func XmlLoaderFromJSObject(p js.Value, ctx js.Value) *XmlLoader {
 
 // NewXmlLoaderOpts contains optional parameters for NewXmlLoader.
 type NewXmlLoaderOpts struct {
-	ParentClass *JSValue
+	ParentClass js.Value
 }
 
 // NewXmlLoader returns a new XmlLoader object.
@@ -40,8 +40,67 @@ func (ba *Babylon) NewXmlLoader(opts *NewXmlLoaderOpts) *XmlLoader {
 		opts = &NewXmlLoaderOpts{}
 	}
 
-	p := ba.ctx.Get("XmlLoader").New(opts.ParentClass.JSObject())
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ParentClass == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ParentClass)
+	}
+
+	p := ba.ctx.Get("XmlLoader").New(args...)
 	return XmlLoaderFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// GetNodeById calls the GetNodeById method on the XmlLoader object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.xmlloader#getnodebyid
+func (x *XmlLoader) GetNodeById(id string) interface{} {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, id)
+
+	retVal := x.p.Call("getNodeById", args...)
+	return retVal
+}
+
+// GetNodes calls the GetNodes method on the XmlLoader object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.xmlloader#getnodes
+func (x *XmlLoader) GetNodes() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := x.p.Call("getNodes", args...)
+	return retVal
+}
+
+// IsLoaded calls the IsLoaded method on the XmlLoader object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.xmlloader#isloaded
+func (x *XmlLoader) IsLoaded() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := x.p.Call("isLoaded", args...)
+	return retVal.Bool()
+}
+
+// LoadLayout calls the LoadLayout method on the XmlLoader object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.xmlloader#loadlayout
+func (x *XmlLoader) LoadLayout(xmlFile interface{}, rootNode interface{}, callback interface{}) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, xmlFile)
+	args = append(args, rootNode)
+	args = append(args, callback)
+
+	x.p.Call("loadLayout", args...)
+}
+
+/*
+
+ */

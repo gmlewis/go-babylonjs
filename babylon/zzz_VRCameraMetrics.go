@@ -29,4 +29,273 @@ func VRCameraMetricsFromJSObject(p js.Value, ctx js.Value) *VRCameraMetrics {
 	return &VRCameraMetrics{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// GetDefault calls the GetDefault method on the VRCameraMetrics object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrcamerametrics#getdefault
+func (v *VRCameraMetrics) GetDefault() *VRCameraMetrics {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("GetDefault", args...)
+	return VRCameraMetricsFromJSObject(retVal, v.ctx)
+}
+
+/*
+
+// AspectRatio returns the AspectRatio property of class VRCameraMetrics.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrcamerametrics#aspectratio
+func (v *VRCameraMetrics) AspectRatio(aspectRatio float64) *VRCameraMetrics {
+	p := ba.ctx.Get("VRCameraMetrics").New(aspectRatio)
+	return VRCameraMetricsFromJSObject(p, ba.ctx)
+}
+
+// SetAspectRatio sets the AspectRatio property of class VRCameraMetrics.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrcamerametrics#aspectratio
+func (v *VRCameraMetrics) SetAspectRatio(aspectRatio float64) *VRCameraMetrics {
+	p := ba.ctx.Get("VRCameraMetrics").New(aspectRatio)
+	return VRCameraMetricsFromJSObject(p, ba.ctx)
+}
+
+// AspectRatioFov returns the AspectRatioFov property of class VRCameraMetrics.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrcamerametrics#aspectratiofov
+func (v *VRCameraMetrics) AspectRatioFov(aspectRatioFov float64) *VRCameraMetrics {
+	p := ba.ctx.Get("VRCameraMetrics").New(aspectRatioFov)
+	return VRCameraMetricsFromJSObject(p, ba.ctx)
+}
+
+// SetAspectRatioFov sets the AspectRatioFov property of class VRCameraMetrics.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrcamerametrics#aspectratiofov
+func (v *VRCameraMetrics) SetAspectRatioFov(aspectRatioFov float64) *VRCameraMetrics {
+	p := ba.ctx.Get("VRCameraMetrics").New(aspectRatioFov)
+	return VRCameraMetricsFromJSObject(p, ba.ctx)
+}
+
+// ChromaAbCorrection returns the ChromaAbCorrection property of class VRCameraMetrics.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrcamerametrics#chromaabcorrection
+func (v *VRCameraMetrics) ChromaAbCorrection(chromaAbCorrection float64) *VRCameraMetrics {
+	p := ba.ctx.Get("VRCameraMetrics").New(chromaAbCorrection)
+	return VRCameraMetricsFromJSObject(p, ba.ctx)
+}
+
+// SetChromaAbCorrection sets the ChromaAbCorrection property of class VRCameraMetrics.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrcamerametrics#chromaabcorrection
+func (v *VRCameraMetrics) SetChromaAbCorrection(chromaAbCorrection float64) *VRCameraMetrics {
+	p := ba.ctx.Get("VRCameraMetrics").New(chromaAbCorrection)
+	return VRCameraMetricsFromJSObject(p, ba.ctx)
+}
+
+// CompensateDistortion returns the CompensateDistortion property of class VRCameraMetrics.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrcamerametrics#compensatedistortion
+func (v *VRCameraMetrics) CompensateDistortion(compensateDistortion bool) *VRCameraMetrics {
+	p := ba.ctx.Get("VRCameraMetrics").New(compensateDistortion)
+	return VRCameraMetricsFromJSObject(p, ba.ctx)
+}
+
+// SetCompensateDistortion sets the CompensateDistortion property of class VRCameraMetrics.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrcamerametrics#compensatedistortion
+func (v *VRCameraMetrics) SetCompensateDistortion(compensateDistortion bool) *VRCameraMetrics {
+	p := ba.ctx.Get("VRCameraMetrics").New(compensateDistortion)
+	return VRCameraMetricsFromJSObject(p, ba.ctx)
+}
+
+// DistortionK returns the DistortionK property of class VRCameraMetrics.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrcamerametrics#distortionk
+func (v *VRCameraMetrics) DistortionK(distortionK float64) *VRCameraMetrics {
+	p := ba.ctx.Get("VRCameraMetrics").New(distortionK)
+	return VRCameraMetricsFromJSObject(p, ba.ctx)
+}
+
+// SetDistortionK sets the DistortionK property of class VRCameraMetrics.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrcamerametrics#distortionk
+func (v *VRCameraMetrics) SetDistortionK(distortionK float64) *VRCameraMetrics {
+	p := ba.ctx.Get("VRCameraMetrics").New(distortionK)
+	return VRCameraMetricsFromJSObject(p, ba.ctx)
+}
+
+// EyeToScreenDistance returns the EyeToScreenDistance property of class VRCameraMetrics.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrcamerametrics#eyetoscreendistance
+func (v *VRCameraMetrics) EyeToScreenDistance(eyeToScreenDistance float64) *VRCameraMetrics {
+	p := ba.ctx.Get("VRCameraMetrics").New(eyeToScreenDistance)
+	return VRCameraMetricsFromJSObject(p, ba.ctx)
+}
+
+// SetEyeToScreenDistance sets the EyeToScreenDistance property of class VRCameraMetrics.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrcamerametrics#eyetoscreendistance
+func (v *VRCameraMetrics) SetEyeToScreenDistance(eyeToScreenDistance float64) *VRCameraMetrics {
+	p := ba.ctx.Get("VRCameraMetrics").New(eyeToScreenDistance)
+	return VRCameraMetricsFromJSObject(p, ba.ctx)
+}
+
+// HResolution returns the HResolution property of class VRCameraMetrics.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrcamerametrics#hresolution
+func (v *VRCameraMetrics) HResolution(hResolution float64) *VRCameraMetrics {
+	p := ba.ctx.Get("VRCameraMetrics").New(hResolution)
+	return VRCameraMetricsFromJSObject(p, ba.ctx)
+}
+
+// SetHResolution sets the HResolution property of class VRCameraMetrics.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrcamerametrics#hresolution
+func (v *VRCameraMetrics) SetHResolution(hResolution float64) *VRCameraMetrics {
+	p := ba.ctx.Get("VRCameraMetrics").New(hResolution)
+	return VRCameraMetricsFromJSObject(p, ba.ctx)
+}
+
+// HScreenSize returns the HScreenSize property of class VRCameraMetrics.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrcamerametrics#hscreensize
+func (v *VRCameraMetrics) HScreenSize(hScreenSize float64) *VRCameraMetrics {
+	p := ba.ctx.Get("VRCameraMetrics").New(hScreenSize)
+	return VRCameraMetricsFromJSObject(p, ba.ctx)
+}
+
+// SetHScreenSize sets the HScreenSize property of class VRCameraMetrics.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrcamerametrics#hscreensize
+func (v *VRCameraMetrics) SetHScreenSize(hScreenSize float64) *VRCameraMetrics {
+	p := ba.ctx.Get("VRCameraMetrics").New(hScreenSize)
+	return VRCameraMetricsFromJSObject(p, ba.ctx)
+}
+
+// InterpupillaryDistance returns the InterpupillaryDistance property of class VRCameraMetrics.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrcamerametrics#interpupillarydistance
+func (v *VRCameraMetrics) InterpupillaryDistance(interpupillaryDistance float64) *VRCameraMetrics {
+	p := ba.ctx.Get("VRCameraMetrics").New(interpupillaryDistance)
+	return VRCameraMetricsFromJSObject(p, ba.ctx)
+}
+
+// SetInterpupillaryDistance sets the InterpupillaryDistance property of class VRCameraMetrics.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrcamerametrics#interpupillarydistance
+func (v *VRCameraMetrics) SetInterpupillaryDistance(interpupillaryDistance float64) *VRCameraMetrics {
+	p := ba.ctx.Get("VRCameraMetrics").New(interpupillaryDistance)
+	return VRCameraMetricsFromJSObject(p, ba.ctx)
+}
+
+// LensCenterOffset returns the LensCenterOffset property of class VRCameraMetrics.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrcamerametrics#lenscenteroffset
+func (v *VRCameraMetrics) LensCenterOffset(lensCenterOffset float64) *VRCameraMetrics {
+	p := ba.ctx.Get("VRCameraMetrics").New(lensCenterOffset)
+	return VRCameraMetricsFromJSObject(p, ba.ctx)
+}
+
+// SetLensCenterOffset sets the LensCenterOffset property of class VRCameraMetrics.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrcamerametrics#lenscenteroffset
+func (v *VRCameraMetrics) SetLensCenterOffset(lensCenterOffset float64) *VRCameraMetrics {
+	p := ba.ctx.Get("VRCameraMetrics").New(lensCenterOffset)
+	return VRCameraMetricsFromJSObject(p, ba.ctx)
+}
+
+// LensSeparationDistance returns the LensSeparationDistance property of class VRCameraMetrics.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrcamerametrics#lensseparationdistance
+func (v *VRCameraMetrics) LensSeparationDistance(lensSeparationDistance float64) *VRCameraMetrics {
+	p := ba.ctx.Get("VRCameraMetrics").New(lensSeparationDistance)
+	return VRCameraMetricsFromJSObject(p, ba.ctx)
+}
+
+// SetLensSeparationDistance sets the LensSeparationDistance property of class VRCameraMetrics.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrcamerametrics#lensseparationdistance
+func (v *VRCameraMetrics) SetLensSeparationDistance(lensSeparationDistance float64) *VRCameraMetrics {
+	p := ba.ctx.Get("VRCameraMetrics").New(lensSeparationDistance)
+	return VRCameraMetricsFromJSObject(p, ba.ctx)
+}
+
+// MultiviewEnabled returns the MultiviewEnabled property of class VRCameraMetrics.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrcamerametrics#multiviewenabled
+func (v *VRCameraMetrics) MultiviewEnabled(multiviewEnabled bool) *VRCameraMetrics {
+	p := ba.ctx.Get("VRCameraMetrics").New(multiviewEnabled)
+	return VRCameraMetricsFromJSObject(p, ba.ctx)
+}
+
+// SetMultiviewEnabled sets the MultiviewEnabled property of class VRCameraMetrics.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrcamerametrics#multiviewenabled
+func (v *VRCameraMetrics) SetMultiviewEnabled(multiviewEnabled bool) *VRCameraMetrics {
+	p := ba.ctx.Get("VRCameraMetrics").New(multiviewEnabled)
+	return VRCameraMetricsFromJSObject(p, ba.ctx)
+}
+
+// PostProcessScaleFactor returns the PostProcessScaleFactor property of class VRCameraMetrics.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrcamerametrics#postprocessscalefactor
+func (v *VRCameraMetrics) PostProcessScaleFactor(postProcessScaleFactor float64) *VRCameraMetrics {
+	p := ba.ctx.Get("VRCameraMetrics").New(postProcessScaleFactor)
+	return VRCameraMetricsFromJSObject(p, ba.ctx)
+}
+
+// SetPostProcessScaleFactor sets the PostProcessScaleFactor property of class VRCameraMetrics.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrcamerametrics#postprocessscalefactor
+func (v *VRCameraMetrics) SetPostProcessScaleFactor(postProcessScaleFactor float64) *VRCameraMetrics {
+	p := ba.ctx.Get("VRCameraMetrics").New(postProcessScaleFactor)
+	return VRCameraMetricsFromJSObject(p, ba.ctx)
+}
+
+// VResolution returns the VResolution property of class VRCameraMetrics.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrcamerametrics#vresolution
+func (v *VRCameraMetrics) VResolution(vResolution float64) *VRCameraMetrics {
+	p := ba.ctx.Get("VRCameraMetrics").New(vResolution)
+	return VRCameraMetricsFromJSObject(p, ba.ctx)
+}
+
+// SetVResolution sets the VResolution property of class VRCameraMetrics.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrcamerametrics#vresolution
+func (v *VRCameraMetrics) SetVResolution(vResolution float64) *VRCameraMetrics {
+	p := ba.ctx.Get("VRCameraMetrics").New(vResolution)
+	return VRCameraMetricsFromJSObject(p, ba.ctx)
+}
+
+// VScreenCenter returns the VScreenCenter property of class VRCameraMetrics.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrcamerametrics#vscreencenter
+func (v *VRCameraMetrics) VScreenCenter(vScreenCenter float64) *VRCameraMetrics {
+	p := ba.ctx.Get("VRCameraMetrics").New(vScreenCenter)
+	return VRCameraMetricsFromJSObject(p, ba.ctx)
+}
+
+// SetVScreenCenter sets the VScreenCenter property of class VRCameraMetrics.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrcamerametrics#vscreencenter
+func (v *VRCameraMetrics) SetVScreenCenter(vScreenCenter float64) *VRCameraMetrics {
+	p := ba.ctx.Get("VRCameraMetrics").New(vScreenCenter)
+	return VRCameraMetricsFromJSObject(p, ba.ctx)
+}
+
+// VScreenSize returns the VScreenSize property of class VRCameraMetrics.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrcamerametrics#vscreensize
+func (v *VRCameraMetrics) VScreenSize(vScreenSize float64) *VRCameraMetrics {
+	p := ba.ctx.Get("VRCameraMetrics").New(vScreenSize)
+	return VRCameraMetricsFromJSObject(p, ba.ctx)
+}
+
+// SetVScreenSize sets the VScreenSize property of class VRCameraMetrics.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vrcamerametrics#vscreensize
+func (v *VRCameraMetrics) SetVScreenSize(vScreenSize float64) *VRCameraMetrics {
+	p := ba.ctx.Get("VRCameraMetrics").New(vScreenSize)
+	return VRCameraMetricsFromJSObject(p, ba.ctx)
+}
+
+*/

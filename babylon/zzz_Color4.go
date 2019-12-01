@@ -29,13 +29,10 @@ func Color4FromJSObject(p js.Value, ctx js.Value) *Color4 {
 
 // NewColor4Opts contains optional parameters for NewColor4.
 type NewColor4Opts struct {
-	R *JSFloat64
-
-	G *JSFloat64
-
-	B *JSFloat64
-
-	A *JSFloat64
+	R *float64
+	G *float64
+	B *float64
+	A *float64
 }
 
 // NewColor4 returns a new Color4 object.
@@ -46,8 +43,559 @@ func (ba *Babylon) NewColor4(opts *NewColor4Opts) *Color4 {
 		opts = &NewColor4Opts{}
 	}
 
-	p := ba.ctx.Get("Color4").New(opts.R.JSObject(), opts.G.JSObject(), opts.B.JSObject(), opts.A.JSObject())
+	args := make([]interface{}, 0, 0+4)
+
+	if opts.R == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.R)
+	}
+	if opts.G == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.G)
+	}
+	if opts.B == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.B)
+	}
+	if opts.A == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.A)
+	}
+
+	p := ba.ctx.Get("Color4").New(args...)
 	return Color4FromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Add calls the Add method on the Color4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#add
+func (c *Color4) Add(right *Color4) *Color4 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, right.JSObject())
+
+	retVal := c.p.Call("add", args...)
+	return Color4FromJSObject(retVal, c.ctx)
+}
+
+// AddInPlace calls the AddInPlace method on the Color4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#addinplace
+func (c *Color4) AddInPlace(right *Color4) *Color4 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, right.JSObject())
+
+	retVal := c.p.Call("addInPlace", args...)
+	return Color4FromJSObject(retVal, c.ctx)
+}
+
+// AsArray calls the AsArray method on the Color4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#asarray
+func (c *Color4) AsArray() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("asArray", args...)
+	return retVal.Float()
+}
+
+// CheckColors4 calls the CheckColors4 method on the Color4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#checkcolors4
+func (c *Color4) CheckColors4(colors float64, count float64) float64 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, colors)
+	args = append(args, count)
+
+	retVal := c.p.Call("CheckColors4", args...)
+	return retVal.Float()
+}
+
+// ClampToRef calls the ClampToRef method on the Color4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#clamptoref
+func (c *Color4) ClampToRef(min float64, max float64, result *Color4) *Color4 {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, min)
+	args = append(args, max)
+	args = append(args, result.JSObject())
+
+	retVal := c.p.Call("clampToRef", args...)
+	return Color4FromJSObject(retVal, c.ctx)
+}
+
+// Clone calls the Clone method on the Color4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#clone
+func (c *Color4) Clone() *Color4 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("clone", args...)
+	return Color4FromJSObject(retVal, c.ctx)
+}
+
+// CopyFrom calls the CopyFrom method on the Color4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#copyfrom
+func (c *Color4) CopyFrom(source *Color4) *Color4 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, source.JSObject())
+
+	retVal := c.p.Call("copyFrom", args...)
+	return Color4FromJSObject(retVal, c.ctx)
+}
+
+// CopyFromFloats calls the CopyFromFloats method on the Color4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#copyfromfloats
+func (c *Color4) CopyFromFloats(r float64, g float64, b float64, a float64) *Color4 {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, r)
+	args = append(args, g)
+	args = append(args, b)
+	args = append(args, a)
+
+	retVal := c.p.Call("copyFromFloats", args...)
+	return Color4FromJSObject(retVal, c.ctx)
+}
+
+// Equals calls the Equals method on the Color4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#equals
+func (c *Color4) Equals(otherColor *Color4) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, otherColor.JSObject())
+
+	retVal := c.p.Call("equals", args...)
+	return retVal.Bool()
+}
+
+// Color4FromArrayOpts contains optional parameters for Color4.FromArray.
+type Color4FromArrayOpts struct {
+	Offset *float64
+}
+
+// FromArray calls the FromArray method on the Color4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#fromarray
+func (c *Color4) FromArray(array js.Value, opts *Color4FromArrayOpts) *Color4 {
+	if opts == nil {
+		opts = &Color4FromArrayOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, array)
+
+	if opts.Offset == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Offset)
+	}
+
+	retVal := c.p.Call("FromArray", args...)
+	return Color4FromJSObject(retVal, c.ctx)
+}
+
+// Color4FromColor3Opts contains optional parameters for Color4.FromColor3.
+type Color4FromColor3Opts struct {
+	Alpha *float64
+}
+
+// FromColor3 calls the FromColor3 method on the Color4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#fromcolor3
+func (c *Color4) FromColor3(color3 *Color3, opts *Color4FromColor3Opts) *Color4 {
+	if opts == nil {
+		opts = &Color4FromColor3Opts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, color3.JSObject())
+
+	if opts.Alpha == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Alpha)
+	}
+
+	retVal := c.p.Call("FromColor3", args...)
+	return Color4FromJSObject(retVal, c.ctx)
+}
+
+// FromHexString calls the FromHexString method on the Color4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#fromhexstring
+func (c *Color4) FromHexString(hex string) *Color4 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, hex)
+
+	retVal := c.p.Call("FromHexString", args...)
+	return Color4FromJSObject(retVal, c.ctx)
+}
+
+// FromInts calls the FromInts method on the Color4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#fromints
+func (c *Color4) FromInts(r float64, g float64, b float64, a float64) *Color4 {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, r)
+	args = append(args, g)
+	args = append(args, b)
+	args = append(args, a)
+
+	retVal := c.p.Call("FromInts", args...)
+	return Color4FromJSObject(retVal, c.ctx)
+}
+
+// GetClassName calls the GetClassName method on the Color4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#getclassname
+func (c *Color4) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetHashCode calls the GetHashCode method on the Color4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#gethashcode
+func (c *Color4) GetHashCode() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getHashCode", args...)
+	return retVal.Float()
+}
+
+// Lerp calls the Lerp method on the Color4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#lerp
+func (c *Color4) Lerp(left *Color4, right *Color4, amount float64) *Color4 {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, left.JSObject())
+	args = append(args, right.JSObject())
+	args = append(args, amount)
+
+	retVal := c.p.Call("Lerp", args...)
+	return Color4FromJSObject(retVal, c.ctx)
+}
+
+// LerpToRef calls the LerpToRef method on the Color4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#lerptoref
+func (c *Color4) LerpToRef(left *Color4, right *Color4, amount float64, result *Color4) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, left.JSObject())
+	args = append(args, right.JSObject())
+	args = append(args, amount)
+	args = append(args, result.JSObject())
+
+	c.p.Call("LerpToRef", args...)
+}
+
+// Multiply calls the Multiply method on the Color4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#multiply
+func (c *Color4) Multiply(color *Color4) *Color4 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, color.JSObject())
+
+	retVal := c.p.Call("multiply", args...)
+	return Color4FromJSObject(retVal, c.ctx)
+}
+
+// MultiplyToRef calls the MultiplyToRef method on the Color4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#multiplytoref
+func (c *Color4) MultiplyToRef(color *Color4, result *Color4) *Color4 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, color.JSObject())
+	args = append(args, result.JSObject())
+
+	retVal := c.p.Call("multiplyToRef", args...)
+	return Color4FromJSObject(retVal, c.ctx)
+}
+
+// Scale calls the Scale method on the Color4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#scale
+func (c *Color4) Scale(scale float64) *Color4 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, scale)
+
+	retVal := c.p.Call("scale", args...)
+	return Color4FromJSObject(retVal, c.ctx)
+}
+
+// ScaleAndAddToRef calls the ScaleAndAddToRef method on the Color4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#scaleandaddtoref
+func (c *Color4) ScaleAndAddToRef(scale float64, result *Color4) *Color4 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, scale)
+	args = append(args, result.JSObject())
+
+	retVal := c.p.Call("scaleAndAddToRef", args...)
+	return Color4FromJSObject(retVal, c.ctx)
+}
+
+// ScaleToRef calls the ScaleToRef method on the Color4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#scaletoref
+func (c *Color4) ScaleToRef(scale float64, result *Color4) *Color4 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, scale)
+	args = append(args, result.JSObject())
+
+	retVal := c.p.Call("scaleToRef", args...)
+	return Color4FromJSObject(retVal, c.ctx)
+}
+
+// Set calls the Set method on the Color4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#set
+func (c *Color4) Set(r float64, g float64, b float64, a float64) *Color4 {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, r)
+	args = append(args, g)
+	args = append(args, b)
+	args = append(args, a)
+
+	retVal := c.p.Call("set", args...)
+	return Color4FromJSObject(retVal, c.ctx)
+}
+
+// Subtract calls the Subtract method on the Color4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#subtract
+func (c *Color4) Subtract(right *Color4) *Color4 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, right.JSObject())
+
+	retVal := c.p.Call("subtract", args...)
+	return Color4FromJSObject(retVal, c.ctx)
+}
+
+// SubtractToRef calls the SubtractToRef method on the Color4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#subtracttoref
+func (c *Color4) SubtractToRef(right *Color4, result *Color4) *Color4 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, right.JSObject())
+	args = append(args, result.JSObject())
+
+	retVal := c.p.Call("subtractToRef", args...)
+	return Color4FromJSObject(retVal, c.ctx)
+}
+
+// Color4ToArrayOpts contains optional parameters for Color4.ToArray.
+type Color4ToArrayOpts struct {
+	Index *float64
+}
+
+// ToArray calls the ToArray method on the Color4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#toarray
+func (c *Color4) ToArray(array float64, opts *Color4ToArrayOpts) *Color4 {
+	if opts == nil {
+		opts = &Color4ToArrayOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, array)
+
+	if opts.Index == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Index)
+	}
+
+	retVal := c.p.Call("toArray", args...)
+	return Color4FromJSObject(retVal, c.ctx)
+}
+
+// ToGammaSpace calls the ToGammaSpace method on the Color4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#togammaspace
+func (c *Color4) ToGammaSpace() *Color4 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("toGammaSpace", args...)
+	return Color4FromJSObject(retVal, c.ctx)
+}
+
+// ToGammaSpaceToRef calls the ToGammaSpaceToRef method on the Color4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#togammaspacetoref
+func (c *Color4) ToGammaSpaceToRef(convertedColor *Color4) *Color4 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, convertedColor.JSObject())
+
+	retVal := c.p.Call("toGammaSpaceToRef", args...)
+	return Color4FromJSObject(retVal, c.ctx)
+}
+
+// ToHexString calls the ToHexString method on the Color4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#tohexstring
+func (c *Color4) ToHexString() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("toHexString", args...)
+	return retVal.String()
+}
+
+// ToLinearSpace calls the ToLinearSpace method on the Color4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#tolinearspace
+func (c *Color4) ToLinearSpace() *Color4 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("toLinearSpace", args...)
+	return Color4FromJSObject(retVal, c.ctx)
+}
+
+// ToLinearSpaceToRef calls the ToLinearSpaceToRef method on the Color4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#tolinearspacetoref
+func (c *Color4) ToLinearSpaceToRef(convertedColor *Color4) *Color4 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, convertedColor.JSObject())
+
+	retVal := c.p.Call("toLinearSpaceToRef", args...)
+	return Color4FromJSObject(retVal, c.ctx)
+}
+
+// ToString calls the ToString method on the Color4 object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#tostring
+func (c *Color4) ToString() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("toString", args...)
+	return retVal.String()
+}
+
+/*
+
+// A returns the A property of class Color4.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#a
+func (c *Color4) A(a float64) *Color4 {
+	p := ba.ctx.Get("Color4").New(a)
+	return Color4FromJSObject(p, ba.ctx)
+}
+
+// SetA sets the A property of class Color4.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#a
+func (c *Color4) SetA(a float64) *Color4 {
+	p := ba.ctx.Get("Color4").New(a)
+	return Color4FromJSObject(p, ba.ctx)
+}
+
+// B returns the B property of class Color4.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#b
+func (c *Color4) B(b float64) *Color4 {
+	p := ba.ctx.Get("Color4").New(b)
+	return Color4FromJSObject(p, ba.ctx)
+}
+
+// SetB sets the B property of class Color4.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#b
+func (c *Color4) SetB(b float64) *Color4 {
+	p := ba.ctx.Get("Color4").New(b)
+	return Color4FromJSObject(p, ba.ctx)
+}
+
+// G returns the G property of class Color4.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#g
+func (c *Color4) G(g float64) *Color4 {
+	p := ba.ctx.Get("Color4").New(g)
+	return Color4FromJSObject(p, ba.ctx)
+}
+
+// SetG sets the G property of class Color4.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#g
+func (c *Color4) SetG(g float64) *Color4 {
+	p := ba.ctx.Get("Color4").New(g)
+	return Color4FromJSObject(p, ba.ctx)
+}
+
+// R returns the R property of class Color4.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#r
+func (c *Color4) R(r float64) *Color4 {
+	p := ba.ctx.Get("Color4").New(r)
+	return Color4FromJSObject(p, ba.ctx)
+}
+
+// SetR sets the R property of class Color4.
+//
+// https://doc.babylonjs.com/api/classes/babylon.color4#r
+func (c *Color4) SetR(r float64) *Color4 {
+	p := ba.ctx.Get("Color4").New(r)
+	return Color4FromJSObject(p, ba.ctx)
+}
+
+*/

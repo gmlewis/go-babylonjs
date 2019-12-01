@@ -31,7 +31,7 @@ func BoneLookControllerFromJSObject(p js.Value, ctx js.Value) *BoneLookControlle
 
 // NewBoneLookControllerOpts contains optional parameters for NewBoneLookController.
 type NewBoneLookControllerOpts struct {
-	Options *JSValue
+	Options js.Value
 }
 
 // NewBoneLookController returns a new BoneLookController object.
@@ -42,8 +42,240 @@ func (ba *Babylon) NewBoneLookController(mesh *AbstractMesh, bone *Bone, target 
 		opts = &NewBoneLookControllerOpts{}
 	}
 
-	p := ba.ctx.Get("BoneLookController").New(mesh.JSObject(), bone.JSObject(), target.JSObject(), opts.Options.JSObject())
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, bone.JSObject())
+	args = append(args, target.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	p := ba.ctx.Get("BoneLookController").New(args...)
 	return BoneLookControllerFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Update calls the Update method on the BoneLookController object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bonelookcontroller#update
+func (b *BoneLookController) Update() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	b.p.Call("update", args...)
+}
+
+/*
+
+// AdjustPitch returns the AdjustPitch property of class BoneLookController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bonelookcontroller#adjustpitch
+func (b *BoneLookController) AdjustPitch(adjustPitch float64) *BoneLookController {
+	p := ba.ctx.Get("BoneLookController").New(adjustPitch)
+	return BoneLookControllerFromJSObject(p, ba.ctx)
+}
+
+// SetAdjustPitch sets the AdjustPitch property of class BoneLookController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bonelookcontroller#adjustpitch
+func (b *BoneLookController) SetAdjustPitch(adjustPitch float64) *BoneLookController {
+	p := ba.ctx.Get("BoneLookController").New(adjustPitch)
+	return BoneLookControllerFromJSObject(p, ba.ctx)
+}
+
+// AdjustRoll returns the AdjustRoll property of class BoneLookController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bonelookcontroller#adjustroll
+func (b *BoneLookController) AdjustRoll(adjustRoll float64) *BoneLookController {
+	p := ba.ctx.Get("BoneLookController").New(adjustRoll)
+	return BoneLookControllerFromJSObject(p, ba.ctx)
+}
+
+// SetAdjustRoll sets the AdjustRoll property of class BoneLookController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bonelookcontroller#adjustroll
+func (b *BoneLookController) SetAdjustRoll(adjustRoll float64) *BoneLookController {
+	p := ba.ctx.Get("BoneLookController").New(adjustRoll)
+	return BoneLookControllerFromJSObject(p, ba.ctx)
+}
+
+// AdjustYaw returns the AdjustYaw property of class BoneLookController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bonelookcontroller#adjustyaw
+func (b *BoneLookController) AdjustYaw(adjustYaw float64) *BoneLookController {
+	p := ba.ctx.Get("BoneLookController").New(adjustYaw)
+	return BoneLookControllerFromJSObject(p, ba.ctx)
+}
+
+// SetAdjustYaw sets the AdjustYaw property of class BoneLookController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bonelookcontroller#adjustyaw
+func (b *BoneLookController) SetAdjustYaw(adjustYaw float64) *BoneLookController {
+	p := ba.ctx.Get("BoneLookController").New(adjustYaw)
+	return BoneLookControllerFromJSObject(p, ba.ctx)
+}
+
+// Bone returns the Bone property of class BoneLookController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bonelookcontroller#bone
+func (b *BoneLookController) Bone(bone *Bone) *BoneLookController {
+	p := ba.ctx.Get("BoneLookController").New(bone.JSObject())
+	return BoneLookControllerFromJSObject(p, ba.ctx)
+}
+
+// SetBone sets the Bone property of class BoneLookController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bonelookcontroller#bone
+func (b *BoneLookController) SetBone(bone *Bone) *BoneLookController {
+	p := ba.ctx.Get("BoneLookController").New(bone.JSObject())
+	return BoneLookControllerFromJSObject(p, ba.ctx)
+}
+
+// MaxPitch returns the MaxPitch property of class BoneLookController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bonelookcontroller#maxpitch
+func (b *BoneLookController) MaxPitch(maxPitch float64) *BoneLookController {
+	p := ba.ctx.Get("BoneLookController").New(maxPitch)
+	return BoneLookControllerFromJSObject(p, ba.ctx)
+}
+
+// SetMaxPitch sets the MaxPitch property of class BoneLookController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bonelookcontroller#maxpitch
+func (b *BoneLookController) SetMaxPitch(maxPitch float64) *BoneLookController {
+	p := ba.ctx.Get("BoneLookController").New(maxPitch)
+	return BoneLookControllerFromJSObject(p, ba.ctx)
+}
+
+// MaxYaw returns the MaxYaw property of class BoneLookController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bonelookcontroller#maxyaw
+func (b *BoneLookController) MaxYaw(maxYaw float64) *BoneLookController {
+	p := ba.ctx.Get("BoneLookController").New(maxYaw)
+	return BoneLookControllerFromJSObject(p, ba.ctx)
+}
+
+// SetMaxYaw sets the MaxYaw property of class BoneLookController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bonelookcontroller#maxyaw
+func (b *BoneLookController) SetMaxYaw(maxYaw float64) *BoneLookController {
+	p := ba.ctx.Get("BoneLookController").New(maxYaw)
+	return BoneLookControllerFromJSObject(p, ba.ctx)
+}
+
+// Mesh returns the Mesh property of class BoneLookController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bonelookcontroller#mesh
+func (b *BoneLookController) Mesh(mesh *AbstractMesh) *BoneLookController {
+	p := ba.ctx.Get("BoneLookController").New(mesh.JSObject())
+	return BoneLookControllerFromJSObject(p, ba.ctx)
+}
+
+// SetMesh sets the Mesh property of class BoneLookController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bonelookcontroller#mesh
+func (b *BoneLookController) SetMesh(mesh *AbstractMesh) *BoneLookController {
+	p := ba.ctx.Get("BoneLookController").New(mesh.JSObject())
+	return BoneLookControllerFromJSObject(p, ba.ctx)
+}
+
+// MinPitch returns the MinPitch property of class BoneLookController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bonelookcontroller#minpitch
+func (b *BoneLookController) MinPitch(minPitch float64) *BoneLookController {
+	p := ba.ctx.Get("BoneLookController").New(minPitch)
+	return BoneLookControllerFromJSObject(p, ba.ctx)
+}
+
+// SetMinPitch sets the MinPitch property of class BoneLookController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bonelookcontroller#minpitch
+func (b *BoneLookController) SetMinPitch(minPitch float64) *BoneLookController {
+	p := ba.ctx.Get("BoneLookController").New(minPitch)
+	return BoneLookControllerFromJSObject(p, ba.ctx)
+}
+
+// MinYaw returns the MinYaw property of class BoneLookController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bonelookcontroller#minyaw
+func (b *BoneLookController) MinYaw(minYaw float64) *BoneLookController {
+	p := ba.ctx.Get("BoneLookController").New(minYaw)
+	return BoneLookControllerFromJSObject(p, ba.ctx)
+}
+
+// SetMinYaw sets the MinYaw property of class BoneLookController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bonelookcontroller#minyaw
+func (b *BoneLookController) SetMinYaw(minYaw float64) *BoneLookController {
+	p := ba.ctx.Get("BoneLookController").New(minYaw)
+	return BoneLookControllerFromJSObject(p, ba.ctx)
+}
+
+// SlerpAmount returns the SlerpAmount property of class BoneLookController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bonelookcontroller#slerpamount
+func (b *BoneLookController) SlerpAmount(slerpAmount float64) *BoneLookController {
+	p := ba.ctx.Get("BoneLookController").New(slerpAmount)
+	return BoneLookControllerFromJSObject(p, ba.ctx)
+}
+
+// SetSlerpAmount sets the SlerpAmount property of class BoneLookController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bonelookcontroller#slerpamount
+func (b *BoneLookController) SetSlerpAmount(slerpAmount float64) *BoneLookController {
+	p := ba.ctx.Get("BoneLookController").New(slerpAmount)
+	return BoneLookControllerFromJSObject(p, ba.ctx)
+}
+
+// Target returns the Target property of class BoneLookController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bonelookcontroller#target
+func (b *BoneLookController) Target(target *Vector3) *BoneLookController {
+	p := ba.ctx.Get("BoneLookController").New(target.JSObject())
+	return BoneLookControllerFromJSObject(p, ba.ctx)
+}
+
+// SetTarget sets the Target property of class BoneLookController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bonelookcontroller#target
+func (b *BoneLookController) SetTarget(target *Vector3) *BoneLookController {
+	p := ba.ctx.Get("BoneLookController").New(target.JSObject())
+	return BoneLookControllerFromJSObject(p, ba.ctx)
+}
+
+// UpAxis returns the UpAxis property of class BoneLookController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bonelookcontroller#upaxis
+func (b *BoneLookController) UpAxis(upAxis *Vector3) *BoneLookController {
+	p := ba.ctx.Get("BoneLookController").New(upAxis.JSObject())
+	return BoneLookControllerFromJSObject(p, ba.ctx)
+}
+
+// SetUpAxis sets the UpAxis property of class BoneLookController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bonelookcontroller#upaxis
+func (b *BoneLookController) SetUpAxis(upAxis *Vector3) *BoneLookController {
+	p := ba.ctx.Get("BoneLookController").New(upAxis.JSObject())
+	return BoneLookControllerFromJSObject(p, ba.ctx)
+}
+
+// UpAxisSpace returns the UpAxisSpace property of class BoneLookController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bonelookcontroller#upaxisspace
+func (b *BoneLookController) UpAxisSpace(upAxisSpace js.Value) *BoneLookController {
+	p := ba.ctx.Get("BoneLookController").New(upAxisSpace)
+	return BoneLookControllerFromJSObject(p, ba.ctx)
+}
+
+// SetUpAxisSpace sets the UpAxisSpace property of class BoneLookController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bonelookcontroller#upaxisspace
+func (b *BoneLookController) SetUpAxisSpace(upAxisSpace js.Value) *BoneLookController {
+	p := ba.ctx.Get("BoneLookController").New(upAxisSpace)
+	return BoneLookControllerFromJSObject(p, ba.ctx)
+}
+
+*/

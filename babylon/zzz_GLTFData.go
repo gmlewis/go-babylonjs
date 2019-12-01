@@ -31,8 +31,39 @@ func GLTFDataFromJSObject(p js.Value, ctx js.Value) *GLTFData {
 //
 // https://doc.babylonjs.com/api/classes/babylon.gltfdata
 func (ba *Babylon) NewGLTFData() *GLTFData {
-	p := ba.ctx.Get("GLTFData").New()
+
+	args := make([]interface{}, 0, 0+0)
+
+	p := ba.ctx.Get("GLTFData").New(args...)
 	return GLTFDataFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// DownloadFiles calls the DownloadFiles method on the GLTFData object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltfdata#downloadfiles
+func (g *GLTFData) DownloadFiles() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	g.p.Call("downloadFiles", args...)
+}
+
+/*
+
+// GlTFFiles returns the GlTFFiles property of class GLTFData.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltfdata#gltffiles
+func (g *GLTFData) GlTFFiles(glTFFiles js.Value) *GLTFData {
+	p := ba.ctx.Get("GLTFData").New(glTFFiles)
+	return GLTFDataFromJSObject(p, ba.ctx)
+}
+
+// SetGlTFFiles sets the GlTFFiles property of class GLTFData.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gltfdata#gltffiles
+func (g *GLTFData) SetGlTFFiles(glTFFiles js.Value) *GLTFData {
+	p := ba.ctx.Get("GLTFData").New(glTFFiles)
+	return GLTFDataFromJSObject(p, ba.ctx)
+}
+
+*/

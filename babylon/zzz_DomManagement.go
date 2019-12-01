@@ -28,4 +28,41 @@ func DomManagementFromJSObject(p js.Value, ctx js.Value) *DomManagement {
 	return &DomManagement{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// GetDOMTextContent calls the GetDOMTextContent method on the DomManagement object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dommanagement#getdomtextcontent
+func (d *DomManagement) GetDOMTextContent(element js.Value) string {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, element)
+
+	retVal := d.p.Call("GetDOMTextContent", args...)
+	return retVal.String()
+}
+
+// IsNavigatorAvailable calls the IsNavigatorAvailable method on the DomManagement object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dommanagement#isnavigatoravailable
+func (d *DomManagement) IsNavigatorAvailable() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := d.p.Call("IsNavigatorAvailable", args...)
+	return retVal.Bool()
+}
+
+// IsWindowObjectExist calls the IsWindowObjectExist method on the DomManagement object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dommanagement#iswindowobjectexist
+func (d *DomManagement) IsWindowObjectExist() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := d.p.Call("IsWindowObjectExist", args...)
+	return retVal.Bool()
+}
+
+/*
+
+ */

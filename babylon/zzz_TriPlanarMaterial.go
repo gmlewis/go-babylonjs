@@ -31,8 +31,1577 @@ func TriPlanarMaterialFromJSObject(p js.Value, ctx js.Value) *TriPlanarMaterial 
 //
 // https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial
 func (ba *Babylon) NewTriPlanarMaterial(name string, scene *Scene) *TriPlanarMaterial {
-	p := ba.ctx.Get("TriPlanarMaterial").New(name, scene.JSObject())
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("TriPlanarMaterial").New(args...)
 	return TriPlanarMaterialFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// TriPlanarMaterialBindOpts contains optional parameters for TriPlanarMaterial.Bind.
+type TriPlanarMaterialBindOpts struct {
+	Mesh *Mesh
+}
+
+// Bind calls the Bind method on the TriPlanarMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#bind
+func (t *TriPlanarMaterial) Bind(world *Matrix, opts *TriPlanarMaterialBindOpts) {
+	if opts == nil {
+		opts = &TriPlanarMaterialBindOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, world.JSObject())
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	t.p.Call("bind", args...)
+}
+
+// BindForSubMesh calls the BindForSubMesh method on the TriPlanarMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#bindforsubmesh
+func (t *TriPlanarMaterial) BindForSubMesh(world *Matrix, mesh *Mesh, subMesh *SubMesh) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, world.JSObject())
+	args = append(args, mesh.JSObject())
+	args = append(args, subMesh.JSObject())
+
+	t.p.Call("bindForSubMesh", args...)
+}
+
+// BindOnlyNormalMatrix calls the BindOnlyNormalMatrix method on the TriPlanarMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#bindonlynormalmatrix
+func (t *TriPlanarMaterial) BindOnlyNormalMatrix(normalMatrix *Matrix) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, normalMatrix.JSObject())
+
+	t.p.Call("bindOnlyNormalMatrix", args...)
+}
+
+// BindOnlyWorldMatrix calls the BindOnlyWorldMatrix method on the TriPlanarMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#bindonlyworldmatrix
+func (t *TriPlanarMaterial) BindOnlyWorldMatrix(world *Matrix) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, world.JSObject())
+
+	t.p.Call("bindOnlyWorldMatrix", args...)
+}
+
+// BindSceneUniformBuffer calls the BindSceneUniformBuffer method on the TriPlanarMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#bindsceneuniformbuffer
+func (t *TriPlanarMaterial) BindSceneUniformBuffer(effect *Effect, sceneUbo *UniformBuffer) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, effect.JSObject())
+	args = append(args, sceneUbo.JSObject())
+
+	t.p.Call("bindSceneUniformBuffer", args...)
+}
+
+// BindView calls the BindView method on the TriPlanarMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#bindview
+func (t *TriPlanarMaterial) BindView(effect *Effect) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, effect.JSObject())
+
+	t.p.Call("bindView", args...)
+}
+
+// BindViewProjection calls the BindViewProjection method on the TriPlanarMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#bindviewprojection
+func (t *TriPlanarMaterial) BindViewProjection(effect *Effect) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, effect.JSObject())
+
+	t.p.Call("bindViewProjection", args...)
+}
+
+// Clone calls the Clone method on the TriPlanarMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#clone
+func (t *TriPlanarMaterial) Clone(name string) *TriPlanarMaterial {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := t.p.Call("clone", args...)
+	return TriPlanarMaterialFromJSObject(retVal, t.ctx)
+}
+
+// TriPlanarMaterialDisposeOpts contains optional parameters for TriPlanarMaterial.Dispose.
+type TriPlanarMaterialDisposeOpts struct {
+	ForceDisposeEffect *bool
+}
+
+// Dispose calls the Dispose method on the TriPlanarMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#dispose
+func (t *TriPlanarMaterial) Dispose(opts *TriPlanarMaterialDisposeOpts) {
+	if opts == nil {
+		opts = &TriPlanarMaterialDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForceDisposeEffect == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceDisposeEffect)
+	}
+
+	t.p.Call("dispose", args...)
+}
+
+// TriPlanarMaterialForceCompilationOpts contains optional parameters for TriPlanarMaterial.ForceCompilation.
+type TriPlanarMaterialForceCompilationOpts struct {
+	OnCompiled *func()
+	Options    js.Value
+	OnError    *func()
+}
+
+// ForceCompilation calls the ForceCompilation method on the TriPlanarMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#forcecompilation
+func (t *TriPlanarMaterial) ForceCompilation(mesh *AbstractMesh, opts *TriPlanarMaterialForceCompilationOpts) {
+	if opts == nil {
+		opts = &TriPlanarMaterialForceCompilationOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, mesh.JSObject())
+
+	if opts.OnCompiled == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnCompiled)
+	}
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+
+	t.p.Call("forceCompilation", args...)
+}
+
+// TriPlanarMaterialForceCompilationAsyncOpts contains optional parameters for TriPlanarMaterial.ForceCompilationAsync.
+type TriPlanarMaterialForceCompilationAsyncOpts struct {
+	Options js.Value
+}
+
+// ForceCompilationAsync calls the ForceCompilationAsync method on the TriPlanarMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#forcecompilationasync
+func (t *TriPlanarMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *TriPlanarMaterialForceCompilationAsyncOpts) {
+	if opts == nil {
+		opts = &TriPlanarMaterialForceCompilationAsyncOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, mesh.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	t.p.Call("forceCompilationAsync", args...)
+}
+
+// Freeze calls the Freeze method on the TriPlanarMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#freeze
+func (t *TriPlanarMaterial) Freeze() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	t.p.Call("freeze", args...)
+}
+
+// GetActiveTextures calls the GetActiveTextures method on the TriPlanarMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#getactivetextures
+func (t *TriPlanarMaterial) GetActiveTextures() *BaseTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getActiveTextures", args...)
+	return BaseTextureFromJSObject(retVal, t.ctx)
+}
+
+// GetAlphaTestTexture calls the GetAlphaTestTexture method on the TriPlanarMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#getalphatesttexture
+func (t *TriPlanarMaterial) GetAlphaTestTexture() *BaseTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getAlphaTestTexture", args...)
+	return BaseTextureFromJSObject(retVal, t.ctx)
+}
+
+// GetAnimatables calls the GetAnimatables method on the TriPlanarMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#getanimatables
+func (t *TriPlanarMaterial) GetAnimatables() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getAnimatables", args...)
+	return retVal
+}
+
+// GetBindedMeshes calls the GetBindedMeshes method on the TriPlanarMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#getbindedmeshes
+func (t *TriPlanarMaterial) GetBindedMeshes() *AbstractMesh {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getBindedMeshes", args...)
+	return AbstractMeshFromJSObject(retVal, t.ctx)
+}
+
+// GetClassName calls the GetClassName method on the TriPlanarMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#getclassname
+func (t *TriPlanarMaterial) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetEffect calls the GetEffect method on the TriPlanarMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#geteffect
+func (t *TriPlanarMaterial) GetEffect() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getEffect", args...)
+	return EffectFromJSObject(retVal, t.ctx)
+}
+
+// GetScene calls the GetScene method on the TriPlanarMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#getscene
+func (t *TriPlanarMaterial) GetScene() *Scene {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getScene", args...)
+	return SceneFromJSObject(retVal, t.ctx)
+}
+
+// HasTexture calls the HasTexture method on the TriPlanarMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#hastexture
+func (t *TriPlanarMaterial) HasTexture(texture *BaseTexture) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, texture.JSObject())
+
+	retVal := t.p.Call("hasTexture", args...)
+	return retVal.Bool()
+}
+
+// TriPlanarMaterialIsReadyOpts contains optional parameters for TriPlanarMaterial.IsReady.
+type TriPlanarMaterialIsReadyOpts struct {
+	Mesh         *AbstractMesh
+	UseInstances *bool
+}
+
+// IsReady calls the IsReady method on the TriPlanarMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#isready
+func (t *TriPlanarMaterial) IsReady(opts *TriPlanarMaterialIsReadyOpts) bool {
+	if opts == nil {
+		opts = &TriPlanarMaterialIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := t.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// TriPlanarMaterialIsReadyForSubMeshOpts contains optional parameters for TriPlanarMaterial.IsReadyForSubMesh.
+type TriPlanarMaterialIsReadyForSubMeshOpts struct {
+	UseInstances *bool
+}
+
+// IsReadyForSubMesh calls the IsReadyForSubMesh method on the TriPlanarMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#isreadyforsubmesh
+func (t *TriPlanarMaterial) IsReadyForSubMesh(mesh *AbstractMesh, subMesh *SubMesh, opts *TriPlanarMaterialIsReadyForSubMeshOpts) bool {
+	if opts == nil {
+		opts = &TriPlanarMaterialIsReadyForSubMeshOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, subMesh.JSObject())
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := t.p.Call("isReadyForSubMesh", args...)
+	return retVal.Bool()
+}
+
+// MarkAsDirty calls the MarkAsDirty method on the TriPlanarMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#markasdirty
+func (t *TriPlanarMaterial) MarkAsDirty(flag float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, flag)
+
+	t.p.Call("markAsDirty", args...)
+}
+
+// MarkDirty calls the MarkDirty method on the TriPlanarMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#markdirty
+func (t *TriPlanarMaterial) MarkDirty() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	t.p.Call("markDirty", args...)
+}
+
+// NeedAlphaBlending calls the NeedAlphaBlending method on the TriPlanarMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#needalphablending
+func (t *TriPlanarMaterial) NeedAlphaBlending() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("needAlphaBlending", args...)
+	return retVal.Bool()
+}
+
+// NeedAlphaBlendingForMesh calls the NeedAlphaBlendingForMesh method on the TriPlanarMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#needalphablendingformesh
+func (t *TriPlanarMaterial) NeedAlphaBlendingForMesh(mesh *AbstractMesh) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	retVal := t.p.Call("needAlphaBlendingForMesh", args...)
+	return retVal.Bool()
+}
+
+// NeedAlphaTesting calls the NeedAlphaTesting method on the TriPlanarMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#needalphatesting
+func (t *TriPlanarMaterial) NeedAlphaTesting() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("needAlphaTesting", args...)
+	return retVal.Bool()
+}
+
+// Parse calls the Parse method on the TriPlanarMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#parse
+func (t *TriPlanarMaterial) Parse(source interface{}, scene *Scene, rootUrl string) *TriPlanarMaterial {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, source)
+	args = append(args, scene.JSObject())
+	args = append(args, rootUrl)
+
+	retVal := t.p.Call("Parse", args...)
+	return TriPlanarMaterialFromJSObject(retVal, t.ctx)
+}
+
+// Serialize calls the Serialize method on the TriPlanarMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#serialize
+func (t *TriPlanarMaterial) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("serialize", args...)
+	return retVal
+}
+
+// TriPlanarMaterialToStringOpts contains optional parameters for TriPlanarMaterial.ToString.
+type TriPlanarMaterialToStringOpts struct {
+	FullDetails *bool
+}
+
+// ToString calls the ToString method on the TriPlanarMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#tostring
+func (t *TriPlanarMaterial) ToString(opts *TriPlanarMaterialToStringOpts) string {
+	if opts == nil {
+		opts = &TriPlanarMaterialToStringOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.FullDetails == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FullDetails)
+	}
+
+	retVal := t.p.Call("toString", args...)
+	return retVal.String()
+}
+
+// Unbind calls the Unbind method on the TriPlanarMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#unbind
+func (t *TriPlanarMaterial) Unbind() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	t.p.Call("unbind", args...)
+}
+
+// Unfreeze calls the Unfreeze method on the TriPlanarMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#unfreeze
+func (t *TriPlanarMaterial) Unfreeze() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	t.p.Call("unfreeze", args...)
+}
+
+/*
+
+// AllDirtyFlag returns the AllDirtyFlag property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#alldirtyflag
+func (t *TriPlanarMaterial) AllDirtyFlag(AllDirtyFlag float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(AllDirtyFlag)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAllDirtyFlag sets the AllDirtyFlag property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#alldirtyflag
+func (t *TriPlanarMaterial) SetAllDirtyFlag(AllDirtyFlag float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(AllDirtyFlag)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// AllowShaderHotSwapping returns the AllowShaderHotSwapping property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#allowshaderhotswapping
+func (t *TriPlanarMaterial) AllowShaderHotSwapping(allowShaderHotSwapping bool) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(allowShaderHotSwapping)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAllowShaderHotSwapping sets the AllowShaderHotSwapping property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#allowshaderhotswapping
+func (t *TriPlanarMaterial) SetAllowShaderHotSwapping(allowShaderHotSwapping bool) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(allowShaderHotSwapping)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// Alpha returns the Alpha property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#alpha
+func (t *TriPlanarMaterial) Alpha(alpha float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(alpha)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAlpha sets the Alpha property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#alpha
+func (t *TriPlanarMaterial) SetAlpha(alpha float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(alpha)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// AlphaMode returns the AlphaMode property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#alphamode
+func (t *TriPlanarMaterial) AlphaMode(alphaMode float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(alphaMode)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaMode sets the AlphaMode property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#alphamode
+func (t *TriPlanarMaterial) SetAlphaMode(alphaMode float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(alphaMode)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// Animations returns the Animations property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#animations
+func (t *TriPlanarMaterial) Animations(animations []Animation) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(animations.JSObject())
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#animations
+func (t *TriPlanarMaterial) SetAnimations(animations []Animation) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(animations.JSObject())
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// AttributesDirtyFlag returns the AttributesDirtyFlag property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#attributesdirtyflag
+func (t *TriPlanarMaterial) AttributesDirtyFlag(AttributesDirtyFlag float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(AttributesDirtyFlag)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAttributesDirtyFlag sets the AttributesDirtyFlag property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#attributesdirtyflag
+func (t *TriPlanarMaterial) SetAttributesDirtyFlag(AttributesDirtyFlag float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(AttributesDirtyFlag)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// BackFaceCulling returns the BackFaceCulling property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#backfaceculling
+func (t *TriPlanarMaterial) BackFaceCulling(backFaceCulling bool) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(backFaceCulling)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetBackFaceCulling sets the BackFaceCulling property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#backfaceculling
+func (t *TriPlanarMaterial) SetBackFaceCulling(backFaceCulling bool) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(backFaceCulling)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// CheckReadyOnEveryCall returns the CheckReadyOnEveryCall property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#checkreadyoneverycall
+func (t *TriPlanarMaterial) CheckReadyOnEveryCall(checkReadyOnEveryCall bool) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(checkReadyOnEveryCall)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCheckReadyOnEveryCall sets the CheckReadyOnEveryCall property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#checkreadyoneverycall
+func (t *TriPlanarMaterial) SetCheckReadyOnEveryCall(checkReadyOnEveryCall bool) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(checkReadyOnEveryCall)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// CheckReadyOnlyOnce returns the CheckReadyOnlyOnce property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#checkreadyonlyonce
+func (t *TriPlanarMaterial) CheckReadyOnlyOnce(checkReadyOnlyOnce bool) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(checkReadyOnlyOnce)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCheckReadyOnlyOnce sets the CheckReadyOnlyOnce property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#checkreadyonlyonce
+func (t *TriPlanarMaterial) SetCheckReadyOnlyOnce(checkReadyOnlyOnce bool) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(checkReadyOnlyOnce)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// ClockWiseSideOrientation returns the ClockWiseSideOrientation property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#clockwisesideorientation
+func (t *TriPlanarMaterial) ClockWiseSideOrientation(ClockWiseSideOrientation float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(ClockWiseSideOrientation)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetClockWiseSideOrientation sets the ClockWiseSideOrientation property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#clockwisesideorientation
+func (t *TriPlanarMaterial) SetClockWiseSideOrientation(ClockWiseSideOrientation float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(ClockWiseSideOrientation)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// CounterClockWiseSideOrientation returns the CounterClockWiseSideOrientation property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#counterclockwisesideorientation
+func (t *TriPlanarMaterial) CounterClockWiseSideOrientation(CounterClockWiseSideOrientation float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(CounterClockWiseSideOrientation)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCounterClockWiseSideOrientation sets the CounterClockWiseSideOrientation property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#counterclockwisesideorientation
+func (t *TriPlanarMaterial) SetCounterClockWiseSideOrientation(CounterClockWiseSideOrientation float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(CounterClockWiseSideOrientation)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// DepthFunction returns the DepthFunction property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#depthfunction
+func (t *TriPlanarMaterial) DepthFunction(depthFunction float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(depthFunction)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDepthFunction sets the DepthFunction property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#depthfunction
+func (t *TriPlanarMaterial) SetDepthFunction(depthFunction float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(depthFunction)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// DiffuseColor returns the DiffuseColor property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#diffusecolor
+func (t *TriPlanarMaterial) DiffuseColor(diffuseColor *Color3) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(diffuseColor.JSObject())
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDiffuseColor sets the DiffuseColor property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#diffusecolor
+func (t *TriPlanarMaterial) SetDiffuseColor(diffuseColor *Color3) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(diffuseColor.JSObject())
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// DiffuseTextureX returns the DiffuseTextureX property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#diffusetexturex
+func (t *TriPlanarMaterial) DiffuseTextureX(diffuseTextureX *BaseTexture) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(diffuseTextureX.JSObject())
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDiffuseTextureX sets the DiffuseTextureX property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#diffusetexturex
+func (t *TriPlanarMaterial) SetDiffuseTextureX(diffuseTextureX *BaseTexture) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(diffuseTextureX.JSObject())
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// DiffuseTextureY returns the DiffuseTextureY property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#diffusetexturey
+func (t *TriPlanarMaterial) DiffuseTextureY(diffuseTextureY *BaseTexture) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(diffuseTextureY.JSObject())
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDiffuseTextureY sets the DiffuseTextureY property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#diffusetexturey
+func (t *TriPlanarMaterial) SetDiffuseTextureY(diffuseTextureY *BaseTexture) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(diffuseTextureY.JSObject())
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// DiffuseTextureZ returns the DiffuseTextureZ property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#diffusetexturez
+func (t *TriPlanarMaterial) DiffuseTextureZ(diffuseTextureZ *BaseTexture) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(diffuseTextureZ.JSObject())
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDiffuseTextureZ sets the DiffuseTextureZ property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#diffusetexturez
+func (t *TriPlanarMaterial) SetDiffuseTextureZ(diffuseTextureZ *BaseTexture) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(diffuseTextureZ.JSObject())
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// DisableDepthWrite returns the DisableDepthWrite property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#disabledepthwrite
+func (t *TriPlanarMaterial) DisableDepthWrite(disableDepthWrite bool) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(disableDepthWrite)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDisableDepthWrite sets the DisableDepthWrite property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#disabledepthwrite
+func (t *TriPlanarMaterial) SetDisableDepthWrite(disableDepthWrite bool) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(disableDepthWrite)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// DisableLighting returns the DisableLighting property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#disablelighting
+func (t *TriPlanarMaterial) DisableLighting(disableLighting bool) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(disableLighting)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDisableLighting sets the DisableLighting property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#disablelighting
+func (t *TriPlanarMaterial) SetDisableLighting(disableLighting bool) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(disableLighting)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// DoNotSerialize returns the DoNotSerialize property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#donotserialize
+func (t *TriPlanarMaterial) DoNotSerialize(doNotSerialize bool) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(doNotSerialize)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDoNotSerialize sets the DoNotSerialize property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#donotserialize
+func (t *TriPlanarMaterial) SetDoNotSerialize(doNotSerialize bool) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(doNotSerialize)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// FillMode returns the FillMode property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#fillmode
+func (t *TriPlanarMaterial) FillMode(fillMode float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(fillMode)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFillMode sets the FillMode property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#fillmode
+func (t *TriPlanarMaterial) SetFillMode(fillMode float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(fillMode)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// FogEnabled returns the FogEnabled property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#fogenabled
+func (t *TriPlanarMaterial) FogEnabled(fogEnabled bool) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(fogEnabled)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFogEnabled sets the FogEnabled property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#fogenabled
+func (t *TriPlanarMaterial) SetFogEnabled(fogEnabled bool) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(fogEnabled)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// ForceDepthWrite returns the ForceDepthWrite property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#forcedepthwrite
+func (t *TriPlanarMaterial) ForceDepthWrite(forceDepthWrite bool) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(forceDepthWrite)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetForceDepthWrite sets the ForceDepthWrite property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#forcedepthwrite
+func (t *TriPlanarMaterial) SetForceDepthWrite(forceDepthWrite bool) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(forceDepthWrite)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// FresnelDirtyFlag returns the FresnelDirtyFlag property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#fresneldirtyflag
+func (t *TriPlanarMaterial) FresnelDirtyFlag(FresnelDirtyFlag float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(FresnelDirtyFlag)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFresnelDirtyFlag sets the FresnelDirtyFlag property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#fresneldirtyflag
+func (t *TriPlanarMaterial) SetFresnelDirtyFlag(FresnelDirtyFlag float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(FresnelDirtyFlag)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// GetRenderTargetTextures returns the GetRenderTargetTextures property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#getrendertargettextures
+func (t *TriPlanarMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(getRenderTargetTextures)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetGetRenderTargetTextures sets the GetRenderTargetTextures property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#getrendertargettextures
+func (t *TriPlanarMaterial) SetGetRenderTargetTextures(getRenderTargetTextures func()) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(getRenderTargetTextures)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// HasRenderTargetTextures returns the HasRenderTargetTextures property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#hasrendertargettextures
+func (t *TriPlanarMaterial) HasRenderTargetTextures(hasRenderTargetTextures bool) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(hasRenderTargetTextures)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetHasRenderTargetTextures sets the HasRenderTargetTextures property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#hasrendertargettextures
+func (t *TriPlanarMaterial) SetHasRenderTargetTextures(hasRenderTargetTextures bool) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(hasRenderTargetTextures)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// Id returns the Id property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#id
+func (t *TriPlanarMaterial) Id(id string) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(id)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetId sets the Id property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#id
+func (t *TriPlanarMaterial) SetId(id string) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(id)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#inspectablecustomproperties
+func (t *TriPlanarMaterial) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(inspectableCustomProperties.JSObject())
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#inspectablecustomproperties
+func (t *TriPlanarMaterial) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(inspectableCustomProperties.JSObject())
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// IsFrozen returns the IsFrozen property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#isfrozen
+func (t *TriPlanarMaterial) IsFrozen(isFrozen bool) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(isFrozen)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetIsFrozen sets the IsFrozen property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#isfrozen
+func (t *TriPlanarMaterial) SetIsFrozen(isFrozen bool) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(isFrozen)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// LightDirtyFlag returns the LightDirtyFlag property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#lightdirtyflag
+func (t *TriPlanarMaterial) LightDirtyFlag(LightDirtyFlag float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(LightDirtyFlag)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLightDirtyFlag sets the LightDirtyFlag property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#lightdirtyflag
+func (t *TriPlanarMaterial) SetLightDirtyFlag(LightDirtyFlag float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(LightDirtyFlag)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineListDrawMode returns the LineListDrawMode property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#linelistdrawmode
+func (t *TriPlanarMaterial) LineListDrawMode(LineListDrawMode float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(LineListDrawMode)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineListDrawMode sets the LineListDrawMode property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#linelistdrawmode
+func (t *TriPlanarMaterial) SetLineListDrawMode(LineListDrawMode float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(LineListDrawMode)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineLoopDrawMode returns the LineLoopDrawMode property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#lineloopdrawmode
+func (t *TriPlanarMaterial) LineLoopDrawMode(LineLoopDrawMode float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(LineLoopDrawMode)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineLoopDrawMode sets the LineLoopDrawMode property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#lineloopdrawmode
+func (t *TriPlanarMaterial) SetLineLoopDrawMode(LineLoopDrawMode float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(LineLoopDrawMode)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineStripDrawMode returns the LineStripDrawMode property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#linestripdrawmode
+func (t *TriPlanarMaterial) LineStripDrawMode(LineStripDrawMode float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(LineStripDrawMode)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineStripDrawMode sets the LineStripDrawMode property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#linestripdrawmode
+func (t *TriPlanarMaterial) SetLineStripDrawMode(LineStripDrawMode float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(LineStripDrawMode)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// MaxSimultaneousLights returns the MaxSimultaneousLights property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#maxsimultaneouslights
+func (t *TriPlanarMaterial) MaxSimultaneousLights(maxSimultaneousLights float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(maxSimultaneousLights)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMaxSimultaneousLights sets the MaxSimultaneousLights property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#maxsimultaneouslights
+func (t *TriPlanarMaterial) SetMaxSimultaneousLights(maxSimultaneousLights float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(maxSimultaneousLights)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#metadata
+func (t *TriPlanarMaterial) Metadata(metadata interface{}) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(metadata)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#metadata
+func (t *TriPlanarMaterial) SetMetadata(metadata interface{}) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(metadata)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// MiscDirtyFlag returns the MiscDirtyFlag property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#miscdirtyflag
+func (t *TriPlanarMaterial) MiscDirtyFlag(MiscDirtyFlag float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(MiscDirtyFlag)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMiscDirtyFlag sets the MiscDirtyFlag property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#miscdirtyflag
+func (t *TriPlanarMaterial) SetMiscDirtyFlag(MiscDirtyFlag float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(MiscDirtyFlag)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// MixTexture returns the MixTexture property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#mixtexture
+func (t *TriPlanarMaterial) MixTexture(mixTexture *BaseTexture) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(mixTexture.JSObject())
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMixTexture sets the MixTexture property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#mixtexture
+func (t *TriPlanarMaterial) SetMixTexture(mixTexture *BaseTexture) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(mixTexture.JSObject())
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#name
+func (t *TriPlanarMaterial) Name(name string) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(name)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#name
+func (t *TriPlanarMaterial) SetName(name string) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(name)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// NeedDepthPrePass returns the NeedDepthPrePass property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#needdepthprepass
+func (t *TriPlanarMaterial) NeedDepthPrePass(needDepthPrePass bool) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(needDepthPrePass)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetNeedDepthPrePass sets the NeedDepthPrePass property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#needdepthprepass
+func (t *TriPlanarMaterial) SetNeedDepthPrePass(needDepthPrePass bool) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(needDepthPrePass)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// NormalTextureX returns the NormalTextureX property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#normaltexturex
+func (t *TriPlanarMaterial) NormalTextureX(normalTextureX *BaseTexture) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(normalTextureX.JSObject())
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetNormalTextureX sets the NormalTextureX property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#normaltexturex
+func (t *TriPlanarMaterial) SetNormalTextureX(normalTextureX *BaseTexture) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(normalTextureX.JSObject())
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// NormalTextureY returns the NormalTextureY property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#normaltexturey
+func (t *TriPlanarMaterial) NormalTextureY(normalTextureY *BaseTexture) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(normalTextureY.JSObject())
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetNormalTextureY sets the NormalTextureY property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#normaltexturey
+func (t *TriPlanarMaterial) SetNormalTextureY(normalTextureY *BaseTexture) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(normalTextureY.JSObject())
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// NormalTextureZ returns the NormalTextureZ property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#normaltexturez
+func (t *TriPlanarMaterial) NormalTextureZ(normalTextureZ *BaseTexture) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(normalTextureZ.JSObject())
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetNormalTextureZ sets the NormalTextureZ property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#normaltexturez
+func (t *TriPlanarMaterial) SetNormalTextureZ(normalTextureZ *BaseTexture) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(normalTextureZ.JSObject())
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnBind returns the OnBind property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#onbind
+func (t *TriPlanarMaterial) OnBind(onBind func()) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(onBind)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnBind sets the OnBind property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#onbind
+func (t *TriPlanarMaterial) SetOnBind(onBind func()) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(onBind)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnBindObservable returns the OnBindObservable property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#onbindobservable
+func (t *TriPlanarMaterial) OnBindObservable(onBindObservable *Observable) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(onBindObservable.JSObject())
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnBindObservable sets the OnBindObservable property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#onbindobservable
+func (t *TriPlanarMaterial) SetOnBindObservable(onBindObservable *Observable) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(onBindObservable.JSObject())
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnCompiled returns the OnCompiled property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#oncompiled
+func (t *TriPlanarMaterial) OnCompiled(onCompiled func()) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(onCompiled)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnCompiled sets the OnCompiled property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#oncompiled
+func (t *TriPlanarMaterial) SetOnCompiled(onCompiled func()) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(onCompiled)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnDispose returns the OnDispose property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#ondispose
+func (t *TriPlanarMaterial) OnDispose(onDispose func()) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(onDispose)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnDispose sets the OnDispose property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#ondispose
+func (t *TriPlanarMaterial) SetOnDispose(onDispose func()) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(onDispose)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnDisposeObservable returns the OnDisposeObservable property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#ondisposeobservable
+func (t *TriPlanarMaterial) OnDisposeObservable(onDisposeObservable *Observable) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(onDisposeObservable.JSObject())
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnDisposeObservable sets the OnDisposeObservable property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#ondisposeobservable
+func (t *TriPlanarMaterial) SetOnDisposeObservable(onDisposeObservable *Observable) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(onDisposeObservable.JSObject())
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnError returns the OnError property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#onerror
+func (t *TriPlanarMaterial) OnError(onError func()) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(onError)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnError sets the OnError property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#onerror
+func (t *TriPlanarMaterial) SetOnError(onError func()) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(onError)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnUnBindObservable returns the OnUnBindObservable property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#onunbindobservable
+func (t *TriPlanarMaterial) OnUnBindObservable(onUnBindObservable *Observable) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(onUnBindObservable.JSObject())
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnUnBindObservable sets the OnUnBindObservable property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#onunbindobservable
+func (t *TriPlanarMaterial) SetOnUnBindObservable(onUnBindObservable *Observable) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(onUnBindObservable.JSObject())
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointFillMode returns the PointFillMode property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#pointfillmode
+func (t *TriPlanarMaterial) PointFillMode(PointFillMode float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(PointFillMode)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointFillMode sets the PointFillMode property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#pointfillmode
+func (t *TriPlanarMaterial) SetPointFillMode(PointFillMode float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(PointFillMode)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointListDrawMode returns the PointListDrawMode property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#pointlistdrawmode
+func (t *TriPlanarMaterial) PointListDrawMode(PointListDrawMode float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(PointListDrawMode)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointListDrawMode sets the PointListDrawMode property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#pointlistdrawmode
+func (t *TriPlanarMaterial) SetPointListDrawMode(PointListDrawMode float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(PointListDrawMode)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointSize returns the PointSize property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#pointsize
+func (t *TriPlanarMaterial) PointSize(pointSize float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(pointSize)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointSize sets the PointSize property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#pointsize
+func (t *TriPlanarMaterial) SetPointSize(pointSize float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(pointSize)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointsCloud returns the PointsCloud property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#pointscloud
+func (t *TriPlanarMaterial) PointsCloud(pointsCloud bool) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(pointsCloud)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointsCloud sets the PointsCloud property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#pointscloud
+func (t *TriPlanarMaterial) SetPointsCloud(pointsCloud bool) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(pointsCloud)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// ReservedDataStore returns the ReservedDataStore property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#reserveddatastore
+func (t *TriPlanarMaterial) ReservedDataStore(reservedDataStore interface{}) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(reservedDataStore)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetReservedDataStore sets the ReservedDataStore property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#reserveddatastore
+func (t *TriPlanarMaterial) SetReservedDataStore(reservedDataStore interface{}) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(reservedDataStore)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SeparateCullingPass returns the SeparateCullingPass property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#separatecullingpass
+func (t *TriPlanarMaterial) SeparateCullingPass(separateCullingPass bool) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(separateCullingPass)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSeparateCullingPass sets the SeparateCullingPass property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#separatecullingpass
+func (t *TriPlanarMaterial) SetSeparateCullingPass(separateCullingPass bool) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(separateCullingPass)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SideOrientation returns the SideOrientation property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#sideorientation
+func (t *TriPlanarMaterial) SideOrientation(sideOrientation float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(sideOrientation)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSideOrientation sets the SideOrientation property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#sideorientation
+func (t *TriPlanarMaterial) SetSideOrientation(sideOrientation float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(sideOrientation)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SpecularColor returns the SpecularColor property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#specularcolor
+func (t *TriPlanarMaterial) SpecularColor(specularColor *Color3) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(specularColor.JSObject())
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSpecularColor sets the SpecularColor property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#specularcolor
+func (t *TriPlanarMaterial) SetSpecularColor(specularColor *Color3) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(specularColor.JSObject())
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SpecularPower returns the SpecularPower property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#specularpower
+func (t *TriPlanarMaterial) SpecularPower(specularPower float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(specularPower)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSpecularPower sets the SpecularPower property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#specularpower
+func (t *TriPlanarMaterial) SetSpecularPower(specularPower float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(specularPower)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// State returns the State property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#state
+func (t *TriPlanarMaterial) State(state string) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(state)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetState sets the State property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#state
+func (t *TriPlanarMaterial) SetState(state string) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(state)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// TextureDirtyFlag returns the TextureDirtyFlag property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#texturedirtyflag
+func (t *TriPlanarMaterial) TextureDirtyFlag(TextureDirtyFlag float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(TextureDirtyFlag)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTextureDirtyFlag sets the TextureDirtyFlag property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#texturedirtyflag
+func (t *TriPlanarMaterial) SetTextureDirtyFlag(TextureDirtyFlag float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(TextureDirtyFlag)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// TileSize returns the TileSize property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#tilesize
+func (t *TriPlanarMaterial) TileSize(tileSize float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(tileSize)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTileSize sets the TileSize property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#tilesize
+func (t *TriPlanarMaterial) SetTileSize(tileSize float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(tileSize)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// TriangleFanDrawMode returns the TriangleFanDrawMode property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#trianglefandrawmode
+func (t *TriPlanarMaterial) TriangleFanDrawMode(TriangleFanDrawMode float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(TriangleFanDrawMode)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTriangleFanDrawMode sets the TriangleFanDrawMode property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#trianglefandrawmode
+func (t *TriPlanarMaterial) SetTriangleFanDrawMode(TriangleFanDrawMode float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(TriangleFanDrawMode)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// TriangleFillMode returns the TriangleFillMode property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#trianglefillmode
+func (t *TriPlanarMaterial) TriangleFillMode(TriangleFillMode float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(TriangleFillMode)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTriangleFillMode sets the TriangleFillMode property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#trianglefillmode
+func (t *TriPlanarMaterial) SetTriangleFillMode(TriangleFillMode float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(TriangleFillMode)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// TriangleStripDrawMode returns the TriangleStripDrawMode property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#trianglestripdrawmode
+func (t *TriPlanarMaterial) TriangleStripDrawMode(TriangleStripDrawMode float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(TriangleStripDrawMode)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTriangleStripDrawMode sets the TriangleStripDrawMode property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#trianglestripdrawmode
+func (t *TriPlanarMaterial) SetTriangleStripDrawMode(TriangleStripDrawMode float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(TriangleStripDrawMode)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#uniqueid
+func (t *TriPlanarMaterial) UniqueId(uniqueId float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(uniqueId)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#uniqueid
+func (t *TriPlanarMaterial) SetUniqueId(uniqueId float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(uniqueId)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// WireFrameFillMode returns the WireFrameFillMode property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#wireframefillmode
+func (t *TriPlanarMaterial) WireFrameFillMode(WireFrameFillMode float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(WireFrameFillMode)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetWireFrameFillMode sets the WireFrameFillMode property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#wireframefillmode
+func (t *TriPlanarMaterial) SetWireFrameFillMode(WireFrameFillMode float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(WireFrameFillMode)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// Wireframe returns the Wireframe property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#wireframe
+func (t *TriPlanarMaterial) Wireframe(wireframe bool) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(wireframe)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetWireframe sets the Wireframe property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#wireframe
+func (t *TriPlanarMaterial) SetWireframe(wireframe bool) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(wireframe)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// ZOffset returns the ZOffset property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#zoffset
+func (t *TriPlanarMaterial) ZOffset(zOffset float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(zOffset)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetZOffset sets the ZOffset property of class TriPlanarMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.triplanarmaterial#zoffset
+func (t *TriPlanarMaterial) SetZOffset(zOffset float64) *TriPlanarMaterial {
+	p := ba.ctx.Get("TriPlanarMaterial").New(zOffset)
+	return TriPlanarMaterialFromJSObject(p, ba.ctx)
+}
+
+*/

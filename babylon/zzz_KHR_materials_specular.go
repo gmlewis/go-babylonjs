@@ -29,4 +29,54 @@ func KHR_materials_specularFromJSObject(p js.Value, ctx js.Value) *KHR_materials
 	return &KHR_materials_specular{p: p, ctx: ctx}
 }
 
-// TODO: methods
+/*
+
+// Enabled returns the Enabled property of class KHR_materials_specular.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khr_materials_specular#enabled
+func (k *KHR_materials_specular) Enabled(enabled bool) *KHR_materials_specular {
+	p := ba.ctx.Get("KHR_materials_specular").New(enabled)
+	return KHR_materials_specularFromJSObject(p, ba.ctx)
+}
+
+// SetEnabled sets the Enabled property of class KHR_materials_specular.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khr_materials_specular#enabled
+func (k *KHR_materials_specular) SetEnabled(enabled bool) *KHR_materials_specular {
+	p := ba.ctx.Get("KHR_materials_specular").New(enabled)
+	return KHR_materials_specularFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class KHR_materials_specular.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khr_materials_specular#name
+func (k *KHR_materials_specular) Name(name string) *KHR_materials_specular {
+	p := ba.ctx.Get("KHR_materials_specular").New(name)
+	return KHR_materials_specularFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class KHR_materials_specular.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khr_materials_specular#name
+func (k *KHR_materials_specular) SetName(name string) *KHR_materials_specular {
+	p := ba.ctx.Get("KHR_materials_specular").New(name)
+	return KHR_materials_specularFromJSObject(p, ba.ctx)
+}
+
+// Order returns the Order property of class KHR_materials_specular.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khr_materials_specular#order
+func (k *KHR_materials_specular) Order(order float64) *KHR_materials_specular {
+	p := ba.ctx.Get("KHR_materials_specular").New(order)
+	return KHR_materials_specularFromJSObject(p, ba.ctx)
+}
+
+// SetOrder sets the Order property of class KHR_materials_specular.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khr_materials_specular#order
+func (k *KHR_materials_specular) SetOrder(order float64) *KHR_materials_specular {
+	p := ba.ctx.Get("KHR_materials_specular").New(order)
+	return KHR_materials_specularFromJSObject(p, ba.ctx)
+}
+
+*/

@@ -29,4 +29,86 @@ func EnvironmentTextureToolsFromJSObject(p js.Value, ctx js.Value) *EnvironmentT
 	return &EnvironmentTextureTools{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// CreateEnvTextureAsync calls the CreateEnvTextureAsync method on the EnvironmentTextureTools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.environmenttexturetools#createenvtextureasync
+func (e *EnvironmentTextureTools) CreateEnvTextureAsync(texture *CubeTexture) js.Value {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, texture.JSObject())
+
+	retVal := e.p.Call("CreateEnvTextureAsync", args...)
+	return retVal
+}
+
+// CreateImageDataArrayBufferViews calls the CreateImageDataArrayBufferViews method on the EnvironmentTextureTools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.environmenttexturetools#createimagedataarraybufferviews
+func (e *EnvironmentTextureTools) CreateImageDataArrayBufferViews(arrayBuffer interface{}, info *EnvironmentTextureInfo) js.Value {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, arrayBuffer)
+	args = append(args, info.JSObject())
+
+	retVal := e.p.Call("CreateImageDataArrayBufferViews", args...)
+	return retVal
+}
+
+// GetEnvInfo calls the GetEnvInfo method on the EnvironmentTextureTools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.environmenttexturetools#getenvinfo
+func (e *EnvironmentTextureTools) GetEnvInfo(data js.Value) *EnvironmentTextureInfo {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, data)
+
+	retVal := e.p.Call("GetEnvInfo", args...)
+	return EnvironmentTextureInfoFromJSObject(retVal, e.ctx)
+}
+
+// UploadEnvLevelsAsync calls the UploadEnvLevelsAsync method on the EnvironmentTextureTools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.environmenttexturetools#uploadenvlevelsasync
+func (e *EnvironmentTextureTools) UploadEnvLevelsAsync(texture *InternalTexture, arrayBuffer interface{}, info *EnvironmentTextureInfo) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, texture.JSObject())
+	args = append(args, arrayBuffer)
+	args = append(args, info.JSObject())
+
+	e.p.Call("UploadEnvLevelsAsync", args...)
+}
+
+// UploadEnvSpherical calls the UploadEnvSpherical method on the EnvironmentTextureTools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.environmenttexturetools#uploadenvspherical
+func (e *EnvironmentTextureTools) UploadEnvSpherical(texture *InternalTexture, info *EnvironmentTextureInfo) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, texture.JSObject())
+	args = append(args, info.JSObject())
+
+	e.p.Call("UploadEnvSpherical", args...)
+}
+
+// UploadLevelsAsync calls the UploadLevelsAsync method on the EnvironmentTextureTools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.environmenttexturetools#uploadlevelsasync
+func (e *EnvironmentTextureTools) UploadLevelsAsync(texture *InternalTexture, imageData js.Value) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, texture.JSObject())
+	args = append(args, imageData)
+
+	e.p.Call("UploadLevelsAsync", args...)
+}
+
+/*
+
+ */

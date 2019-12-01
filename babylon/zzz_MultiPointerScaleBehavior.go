@@ -31,8 +31,61 @@ func MultiPointerScaleBehaviorFromJSObject(p js.Value, ctx js.Value) *MultiPoint
 //
 // https://doc.babylonjs.com/api/classes/babylon.multipointerscalebehavior
 func (ba *Babylon) NewMultiPointerScaleBehavior() *MultiPointerScaleBehavior {
-	p := ba.ctx.Get("MultiPointerScaleBehavior").New()
+
+	args := make([]interface{}, 0, 0+0)
+
+	p := ba.ctx.Get("MultiPointerScaleBehavior").New(args...)
 	return MultiPointerScaleBehaviorFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Attach calls the Attach method on the MultiPointerScaleBehavior object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multipointerscalebehavior#attach
+func (m *MultiPointerScaleBehavior) Attach(ownerNode *Mesh) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, ownerNode.JSObject())
+
+	m.p.Call("attach", args...)
+}
+
+// Detach calls the Detach method on the MultiPointerScaleBehavior object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multipointerscalebehavior#detach
+func (m *MultiPointerScaleBehavior) Detach() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	m.p.Call("detach", args...)
+}
+
+// Init calls the Init method on the MultiPointerScaleBehavior object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multipointerscalebehavior#init
+func (m *MultiPointerScaleBehavior) Init() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	m.p.Call("init", args...)
+}
+
+/*
+
+// Name returns the Name property of class MultiPointerScaleBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multipointerscalebehavior#name
+func (m *MultiPointerScaleBehavior) Name(name string) *MultiPointerScaleBehavior {
+	p := ba.ctx.Get("MultiPointerScaleBehavior").New(name)
+	return MultiPointerScaleBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class MultiPointerScaleBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multipointerscalebehavior#name
+func (m *MultiPointerScaleBehavior) SetName(name string) *MultiPointerScaleBehavior {
+	p := ba.ctx.Get("MultiPointerScaleBehavior").New(name)
+	return MultiPointerScaleBehaviorFromJSObject(p, ba.ctx)
+}
+
+*/

@@ -27,4 +27,17 @@ func GUIDFromJSObject(p js.Value, ctx js.Value) *GUID {
 	return &GUID{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// RandomId calls the RandomId method on the GUID object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.guid#randomid
+func (g *GUID) RandomId() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("RandomId", args...)
+	return retVal.String()
+}
+
+/*
+
+ */

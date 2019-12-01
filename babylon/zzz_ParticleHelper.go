@@ -27,4 +27,102 @@ func ParticleHelperFromJSObject(p js.Value, ctx js.Value) *ParticleHelper {
 	return &ParticleHelper{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// ParticleHelperCreateAsyncOpts contains optional parameters for ParticleHelper.CreateAsync.
+type ParticleHelperCreateAsyncOpts struct {
+	Gpu *bool
+}
+
+// CreateAsync calls the CreateAsync method on the ParticleHelper object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.particlehelper#createasync
+func (p *ParticleHelper) CreateAsync(jsType string, scene *Scene, opts *ParticleHelperCreateAsyncOpts) *ParticleSystemSet {
+	if opts == nil {
+		opts = &ParticleHelperCreateAsyncOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, jsType)
+	args = append(args, scene.JSObject())
+
+	if opts.Gpu == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Gpu)
+	}
+
+	retVal := p.p.Call("CreateAsync", args...)
+	return ParticleSystemSetFromJSObject(retVal, p.ctx)
+}
+
+// ParticleHelperCreateDefaultOpts contains optional parameters for ParticleHelper.CreateDefault.
+type ParticleHelperCreateDefaultOpts struct {
+	Capacity *float64
+	Scene    *Scene
+	UseGPU   *bool
+}
+
+// CreateDefault calls the CreateDefault method on the ParticleHelper object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.particlehelper#createdefault
+func (p *ParticleHelper) CreateDefault(emitter *AbstractMesh, opts *ParticleHelperCreateDefaultOpts) *IParticleSystem {
+	if opts == nil {
+		opts = &ParticleHelperCreateDefaultOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, emitter.JSObject())
+
+	if opts.Capacity == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Capacity)
+	}
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+	if opts.UseGPU == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseGPU)
+	}
+
+	retVal := p.p.Call("CreateDefault", args...)
+	return IParticleSystemFromJSObject(retVal, p.ctx)
+}
+
+// ExportSet calls the ExportSet method on the ParticleHelper object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.particlehelper#exportset
+func (p *ParticleHelper) ExportSet(systems *IParticleSystem) *ParticleSystemSet {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, systems.JSObject())
+
+	retVal := p.p.Call("ExportSet", args...)
+	return ParticleSystemSetFromJSObject(retVal, p.ctx)
+}
+
+/*
+
+// BaseAssetsUrl returns the BaseAssetsUrl property of class ParticleHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.particlehelper#baseassetsurl
+func (p *ParticleHelper) BaseAssetsUrl(BaseAssetsUrl string) *ParticleHelper {
+	p := ba.ctx.Get("ParticleHelper").New(BaseAssetsUrl)
+	return ParticleHelperFromJSObject(p, ba.ctx)
+}
+
+// SetBaseAssetsUrl sets the BaseAssetsUrl property of class ParticleHelper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.particlehelper#baseassetsurl
+func (p *ParticleHelper) SetBaseAssetsUrl(BaseAssetsUrl string) *ParticleHelper {
+	p := ba.ctx.Get("ParticleHelper").New(BaseAssetsUrl)
+	return ParticleHelperFromJSObject(p, ba.ctx)
+}
+
+*/

@@ -28,4 +28,86 @@ func EngineStoreFromJSObject(p js.Value, ctx js.Value) *EngineStore {
 	return &EngineStore{p: p, ctx: ctx}
 }
 
-// TODO: methods
+/*
+
+// FallbackTexture returns the FallbackTexture property of class EngineStore.
+//
+// https://doc.babylonjs.com/api/classes/babylon.enginestore#fallbacktexture
+func (e *EngineStore) FallbackTexture(FallbackTexture string) *EngineStore {
+	p := ba.ctx.Get("EngineStore").New(FallbackTexture)
+	return EngineStoreFromJSObject(p, ba.ctx)
+}
+
+// SetFallbackTexture sets the FallbackTexture property of class EngineStore.
+//
+// https://doc.babylonjs.com/api/classes/babylon.enginestore#fallbacktexture
+func (e *EngineStore) SetFallbackTexture(FallbackTexture string) *EngineStore {
+	p := ba.ctx.Get("EngineStore").New(FallbackTexture)
+	return EngineStoreFromJSObject(p, ba.ctx)
+}
+
+// Instances returns the Instances property of class EngineStore.
+//
+// https://doc.babylonjs.com/api/classes/babylon.enginestore#instances
+func (e *EngineStore) Instances(Instances *Engine) *EngineStore {
+	p := ba.ctx.Get("EngineStore").New(Instances.JSObject())
+	return EngineStoreFromJSObject(p, ba.ctx)
+}
+
+// SetInstances sets the Instances property of class EngineStore.
+//
+// https://doc.babylonjs.com/api/classes/babylon.enginestore#instances
+func (e *EngineStore) SetInstances(Instances *Engine) *EngineStore {
+	p := ba.ctx.Get("EngineStore").New(Instances.JSObject())
+	return EngineStoreFromJSObject(p, ba.ctx)
+}
+
+// LastCreatedEngine returns the LastCreatedEngine property of class EngineStore.
+//
+// https://doc.babylonjs.com/api/classes/babylon.enginestore#lastcreatedengine
+func (e *EngineStore) LastCreatedEngine(LastCreatedEngine *Engine) *EngineStore {
+	p := ba.ctx.Get("EngineStore").New(LastCreatedEngine.JSObject())
+	return EngineStoreFromJSObject(p, ba.ctx)
+}
+
+// SetLastCreatedEngine sets the LastCreatedEngine property of class EngineStore.
+//
+// https://doc.babylonjs.com/api/classes/babylon.enginestore#lastcreatedengine
+func (e *EngineStore) SetLastCreatedEngine(LastCreatedEngine *Engine) *EngineStore {
+	p := ba.ctx.Get("EngineStore").New(LastCreatedEngine.JSObject())
+	return EngineStoreFromJSObject(p, ba.ctx)
+}
+
+// LastCreatedScene returns the LastCreatedScene property of class EngineStore.
+//
+// https://doc.babylonjs.com/api/classes/babylon.enginestore#lastcreatedscene
+func (e *EngineStore) LastCreatedScene(LastCreatedScene *Scene) *EngineStore {
+	p := ba.ctx.Get("EngineStore").New(LastCreatedScene.JSObject())
+	return EngineStoreFromJSObject(p, ba.ctx)
+}
+
+// SetLastCreatedScene sets the LastCreatedScene property of class EngineStore.
+//
+// https://doc.babylonjs.com/api/classes/babylon.enginestore#lastcreatedscene
+func (e *EngineStore) SetLastCreatedScene(LastCreatedScene *Scene) *EngineStore {
+	p := ba.ctx.Get("EngineStore").New(LastCreatedScene.JSObject())
+	return EngineStoreFromJSObject(p, ba.ctx)
+}
+
+// UseFallbackTexture returns the UseFallbackTexture property of class EngineStore.
+//
+// https://doc.babylonjs.com/api/classes/babylon.enginestore#usefallbacktexture
+func (e *EngineStore) UseFallbackTexture(UseFallbackTexture bool) *EngineStore {
+	p := ba.ctx.Get("EngineStore").New(UseFallbackTexture)
+	return EngineStoreFromJSObject(p, ba.ctx)
+}
+
+// SetUseFallbackTexture sets the UseFallbackTexture property of class EngineStore.
+//
+// https://doc.babylonjs.com/api/classes/babylon.enginestore#usefallbacktexture
+func (e *EngineStore) SetUseFallbackTexture(UseFallbackTexture bool) *EngineStore {
+	p := ba.ctx.Get("EngineStore").New(UseFallbackTexture)
+	return EngineStoreFromJSObject(p, ba.ctx)
+}
+
+*/

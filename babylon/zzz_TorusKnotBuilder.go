@@ -27,4 +27,21 @@ func TorusKnotBuilderFromJSObject(p js.Value, ctx js.Value) *TorusKnotBuilder {
 	return &TorusKnotBuilder{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// CreateTorusKnot calls the CreateTorusKnot method on the TorusKnotBuilder object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.torusknotbuilder#createtorusknot
+func (t *TorusKnotBuilder) CreateTorusKnot(name string, options js.Value, scene interface{}) *Mesh {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, name)
+	args = append(args, options)
+	args = append(args, scene)
+
+	retVal := t.p.Call("CreateTorusKnot", args...)
+	return MeshFromJSObject(retVal, t.ctx)
+}
+
+/*
+
+ */

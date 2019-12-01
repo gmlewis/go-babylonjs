@@ -27,4 +27,34 @@ func TiledPlaneBuilderFromJSObject(p js.Value, ctx js.Value) *TiledPlaneBuilder 
 	return &TiledPlaneBuilder{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// TiledPlaneBuilderCreateTiledPlaneOpts contains optional parameters for TiledPlaneBuilder.CreateTiledPlane.
+type TiledPlaneBuilderCreateTiledPlaneOpts struct {
+	Scene *Scene
+}
+
+// CreateTiledPlane calls the CreateTiledPlane method on the TiledPlaneBuilder object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tiledplanebuilder#createtiledplane
+func (t *TiledPlaneBuilder) CreateTiledPlane(name string, options js.Value, opts *TiledPlaneBuilderCreateTiledPlaneOpts) *Mesh {
+	if opts == nil {
+		opts = &TiledPlaneBuilderCreateTiledPlaneOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, name)
+	args = append(args, options)
+
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+
+	retVal := t.p.Call("CreateTiledPlane", args...)
+	return MeshFromJSObject(retVal, t.ctx)
+}
+
+/*
+
+ */

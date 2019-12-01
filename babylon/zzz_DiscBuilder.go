@@ -27,4 +27,34 @@ func DiscBuilderFromJSObject(p js.Value, ctx js.Value) *DiscBuilder {
 	return &DiscBuilder{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// DiscBuilderCreateDiscOpts contains optional parameters for DiscBuilder.CreateDisc.
+type DiscBuilderCreateDiscOpts struct {
+	Scene *Scene
+}
+
+// CreateDisc calls the CreateDisc method on the DiscBuilder object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.discbuilder#createdisc
+func (d *DiscBuilder) CreateDisc(name string, options js.Value, opts *DiscBuilderCreateDiscOpts) *Mesh {
+	if opts == nil {
+		opts = &DiscBuilderCreateDiscOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, name)
+	args = append(args, options)
+
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+
+	retVal := d.p.Call("CreateDisc", args...)
+	return MeshFromJSObject(retVal, d.ctx)
+}
+
+/*
+
+ */

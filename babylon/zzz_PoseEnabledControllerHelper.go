@@ -27,4 +27,19 @@ func PoseEnabledControllerHelperFromJSObject(p js.Value, ctx js.Value) *PoseEnab
 	return &PoseEnabledControllerHelper{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// InitiateController calls the InitiateController method on the PoseEnabledControllerHelper object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.poseenabledcontrollerhelper#initiatecontroller
+func (p *PoseEnabledControllerHelper) InitiateController(vrGamepad interface{}) *Gamepad {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, vrGamepad)
+
+	retVal := p.p.Call("InitiateController", args...)
+	return GamepadFromJSObject(retVal, p.ctx)
+}
+
+/*
+
+ */

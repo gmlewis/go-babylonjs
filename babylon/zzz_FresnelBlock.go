@@ -31,8 +31,685 @@ func FresnelBlockFromJSObject(p js.Value, ctx js.Value) *FresnelBlock {
 //
 // https://doc.babylonjs.com/api/classes/babylon.fresnelblock
 func (ba *Babylon) NewFresnelBlock(name string) *FresnelBlock {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	p := ba.ctx.Get("FresnelBlock").New(args...)
+	return FresnelBlockFromJSObject(p, ba.ctx)
+}
+
+// AutoConfigure calls the AutoConfigure method on the FresnelBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#autoconfigure
+func (f *FresnelBlock) AutoConfigure(material *NodeMaterial) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, material.JSObject())
+
+	f.p.Call("autoConfigure", args...)
+}
+
+// FresnelBlockBindOpts contains optional parameters for FresnelBlock.Bind.
+type FresnelBlockBindOpts struct {
+	Mesh *Mesh
+}
+
+// Bind calls the Bind method on the FresnelBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#bind
+func (f *FresnelBlock) Bind(effect *Effect, nodeMaterial *NodeMaterial, opts *FresnelBlockBindOpts) {
+	if opts == nil {
+		opts = &FresnelBlockBindOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, effect.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	f.p.Call("bind", args...)
+}
+
+// Build calls the Build method on the FresnelBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#build
+func (f *FresnelBlock) Build(state *NodeMaterialBuildState, activeBlocks *NodeMaterialBlock) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, state.JSObject())
+	args = append(args, activeBlocks.JSObject())
+
+	retVal := f.p.Call("build", args...)
+	return retVal.Bool()
+}
+
+// FresnelBlockCloneOpts contains optional parameters for FresnelBlock.Clone.
+type FresnelBlockCloneOpts struct {
+	RootUrl *string
+}
+
+// Clone calls the Clone method on the FresnelBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#clone
+func (f *FresnelBlock) Clone(scene *Scene, opts *FresnelBlockCloneOpts) *NodeMaterialBlock {
+	if opts == nil {
+		opts = &FresnelBlockCloneOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, scene.JSObject())
+
+	if opts.RootUrl == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RootUrl)
+	}
+
+	retVal := f.p.Call("clone", args...)
+	return NodeMaterialBlockFromJSObject(retVal, f.ctx)
+}
+
+// FresnelBlockConnectToOpts contains optional parameters for FresnelBlock.ConnectTo.
+type FresnelBlockConnectToOpts struct {
+	Options js.Value
+}
+
+// ConnectTo calls the ConnectTo method on the FresnelBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#connectto
+func (f *FresnelBlock) ConnectTo(other *NodeMaterialBlock, opts *FresnelBlockConnectToOpts) *FresnelBlock {
+	if opts == nil {
+		opts = &FresnelBlockConnectToOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, other.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	retVal := f.p.Call("connectTo", args...)
+	return FresnelBlockFromJSObject(retVal, f.ctx)
+}
+
+// Dispose calls the Dispose method on the FresnelBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#dispose
+func (f *FresnelBlock) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	f.p.Call("dispose", args...)
+}
+
+// GetClassName calls the GetClassName method on the FresnelBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#getclassname
+func (f *FresnelBlock) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// FresnelBlockGetFirstAvailableInputOpts contains optional parameters for FresnelBlock.GetFirstAvailableInput.
+type FresnelBlockGetFirstAvailableInputOpts struct {
+	ForOutput *NodeMaterialConnectionPoint
+}
+
+// GetFirstAvailableInput calls the GetFirstAvailableInput method on the FresnelBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#getfirstavailableinput
+func (f *FresnelBlock) GetFirstAvailableInput(opts *FresnelBlockGetFirstAvailableInputOpts) *NodeMaterialConnectionPoint {
+	if opts == nil {
+		opts = &FresnelBlockGetFirstAvailableInputOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForOutput == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForOutput.JSObject())
+	}
+
+	retVal := f.p.Call("getFirstAvailableInput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, f.ctx)
+}
+
+// FresnelBlockGetFirstAvailableOutputOpts contains optional parameters for FresnelBlock.GetFirstAvailableOutput.
+type FresnelBlockGetFirstAvailableOutputOpts struct {
+	ForBlock *NodeMaterialBlock
+}
+
+// GetFirstAvailableOutput calls the GetFirstAvailableOutput method on the FresnelBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#getfirstavailableoutput
+func (f *FresnelBlock) GetFirstAvailableOutput(opts *FresnelBlockGetFirstAvailableOutputOpts) *NodeMaterialConnectionPoint {
+	if opts == nil {
+		opts = &FresnelBlockGetFirstAvailableOutputOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForBlock == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForBlock.JSObject())
+	}
+
+	retVal := f.p.Call("getFirstAvailableOutput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, f.ctx)
+}
+
+// GetInputByName calls the GetInputByName method on the FresnelBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#getinputbyname
+func (f *FresnelBlock) GetInputByName(name string) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := f.p.Call("getInputByName", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, f.ctx)
+}
+
+// GetOutputByName calls the GetOutputByName method on the FresnelBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#getoutputbyname
+func (f *FresnelBlock) GetOutputByName(name string) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := f.p.Call("getOutputByName", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, f.ctx)
+}
+
+// GetSiblingOutput calls the GetSiblingOutput method on the FresnelBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#getsiblingoutput
+func (f *FresnelBlock) GetSiblingOutput(current *NodeMaterialConnectionPoint) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, current.JSObject())
+
+	retVal := f.p.Call("getSiblingOutput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, f.ctx)
+}
+
+// Initialize calls the Initialize method on the FresnelBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#initialize
+func (f *FresnelBlock) Initialize(state *NodeMaterialBuildState) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, state.JSObject())
+
+	f.p.Call("initialize", args...)
+}
+
+// FresnelBlockInitializeDefinesOpts contains optional parameters for FresnelBlock.InitializeDefines.
+type FresnelBlockInitializeDefinesOpts struct {
+	UseInstances *bool
+}
+
+// InitializeDefines calls the InitializeDefines method on the FresnelBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#initializedefines
+func (f *FresnelBlock) InitializeDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *FresnelBlockInitializeDefinesOpts) {
+	if opts == nil {
+		opts = &FresnelBlockInitializeDefinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	f.p.Call("initializeDefines", args...)
+}
+
+// FresnelBlockIsReadyOpts contains optional parameters for FresnelBlock.IsReady.
+type FresnelBlockIsReadyOpts struct {
+	UseInstances *bool
+}
+
+// IsReady calls the IsReady method on the FresnelBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#isready
+func (f *FresnelBlock) IsReady(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *FresnelBlockIsReadyOpts) bool {
+	if opts == nil {
+		opts = &FresnelBlockIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := f.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// FresnelBlockPrepareDefinesOpts contains optional parameters for FresnelBlock.PrepareDefines.
+type FresnelBlockPrepareDefinesOpts struct {
+	UseInstances *bool
+}
+
+// PrepareDefines calls the PrepareDefines method on the FresnelBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#preparedefines
+func (f *FresnelBlock) PrepareDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *FresnelBlockPrepareDefinesOpts) {
+	if opts == nil {
+		opts = &FresnelBlockPrepareDefinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	f.p.Call("prepareDefines", args...)
+}
+
+// ProvideFallbacks calls the ProvideFallbacks method on the FresnelBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#providefallbacks
+func (f *FresnelBlock) ProvideFallbacks(mesh *AbstractMesh, fallbacks *EffectFallbacks) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, fallbacks.JSObject())
+
+	f.p.Call("provideFallbacks", args...)
+}
+
+// FresnelBlockRegisterInputOpts contains optional parameters for FresnelBlock.RegisterInput.
+type FresnelBlockRegisterInputOpts struct {
+	IsOptional *bool
+	Target     js.Value
+}
+
+// RegisterInput calls the RegisterInput method on the FresnelBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#registerinput
+func (f *FresnelBlock) RegisterInput(name string, jsType js.Value, opts *FresnelBlockRegisterInputOpts) *FresnelBlock {
+	if opts == nil {
+		opts = &FresnelBlockRegisterInputOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+2)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	if opts.IsOptional == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IsOptional)
+	}
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+
+	retVal := f.p.Call("registerInput", args...)
+	return FresnelBlockFromJSObject(retVal, f.ctx)
+}
+
+// FresnelBlockRegisterOutputOpts contains optional parameters for FresnelBlock.RegisterOutput.
+type FresnelBlockRegisterOutputOpts struct {
+	Target js.Value
+}
+
+// RegisterOutput calls the RegisterOutput method on the FresnelBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#registeroutput
+func (f *FresnelBlock) RegisterOutput(name string, jsType js.Value, opts *FresnelBlockRegisterOutputOpts) *FresnelBlock {
+	if opts == nil {
+		opts = &FresnelBlockRegisterOutputOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+
+	retVal := f.p.Call("registerOutput", args...)
+	return FresnelBlockFromJSObject(retVal, f.ctx)
+}
+
+// ReplaceRepeatableContent calls the ReplaceRepeatableContent method on the FresnelBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#replacerepeatablecontent
+func (f *FresnelBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterialBuildState, fragmentShaderState *NodeMaterialBuildState, mesh *AbstractMesh, defines js.Value) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, vertexShaderState.JSObject())
+	args = append(args, fragmentShaderState.JSObject())
+	args = append(args, mesh.JSObject())
+	args = append(args, defines)
+
+	f.p.Call("replaceRepeatableContent", args...)
+}
+
+// Serialize calls the Serialize method on the FresnelBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#serialize
+func (f *FresnelBlock) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("serialize", args...)
+	return retVal
+}
+
+// UpdateUniformsAndSamples calls the UpdateUniformsAndSamples method on the FresnelBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#updateuniformsandsamples
+func (f *FresnelBlock) UpdateUniformsAndSamples(state *NodeMaterialBuildState, nodeMaterial *NodeMaterial, defines js.Value, uniformBuffers string) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, state.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+	args = append(args, uniformBuffers)
+
+	f.p.Call("updateUniformsAndSamples", args...)
+}
+
+/*
+
+// Bias returns the Bias property of class FresnelBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#bias
+func (f *FresnelBlock) Bias(bias *NodeMaterialConnectionPoint) *FresnelBlock {
+	p := ba.ctx.Get("FresnelBlock").New(bias.JSObject())
+	return FresnelBlockFromJSObject(p, ba.ctx)
+}
+
+// SetBias sets the Bias property of class FresnelBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#bias
+func (f *FresnelBlock) SetBias(bias *NodeMaterialConnectionPoint) *FresnelBlock {
+	p := ba.ctx.Get("FresnelBlock").New(bias.JSObject())
+	return FresnelBlockFromJSObject(p, ba.ctx)
+}
+
+// BuildId returns the BuildId property of class FresnelBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#buildid
+func (f *FresnelBlock) BuildId(buildId float64) *FresnelBlock {
+	p := ba.ctx.Get("FresnelBlock").New(buildId)
+	return FresnelBlockFromJSObject(p, ba.ctx)
+}
+
+// SetBuildId sets the BuildId property of class FresnelBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#buildid
+func (f *FresnelBlock) SetBuildId(buildId float64) *FresnelBlock {
+	p := ba.ctx.Get("FresnelBlock").New(buildId)
+	return FresnelBlockFromJSObject(p, ba.ctx)
+}
+
+// Comments returns the Comments property of class FresnelBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#comments
+func (f *FresnelBlock) Comments(comments string) *FresnelBlock {
+	p := ba.ctx.Get("FresnelBlock").New(comments)
+	return FresnelBlockFromJSObject(p, ba.ctx)
+}
+
+// SetComments sets the Comments property of class FresnelBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#comments
+func (f *FresnelBlock) SetComments(comments string) *FresnelBlock {
+	p := ba.ctx.Get("FresnelBlock").New(comments)
+	return FresnelBlockFromJSObject(p, ba.ctx)
+}
+
+// Fresnel returns the Fresnel property of class FresnelBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#fresnel
+func (f *FresnelBlock) Fresnel(fresnel *NodeMaterialConnectionPoint) *FresnelBlock {
+	p := ba.ctx.Get("FresnelBlock").New(fresnel.JSObject())
+	return FresnelBlockFromJSObject(p, ba.ctx)
+}
+
+// SetFresnel sets the Fresnel property of class FresnelBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#fresnel
+func (f *FresnelBlock) SetFresnel(fresnel *NodeMaterialConnectionPoint) *FresnelBlock {
+	p := ba.ctx.Get("FresnelBlock").New(fresnel.JSObject())
+	return FresnelBlockFromJSObject(p, ba.ctx)
+}
+
+// Inputs returns the Inputs property of class FresnelBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#inputs
+func (f *FresnelBlock) Inputs(inputs *NodeMaterialConnectionPoint) *FresnelBlock {
+	p := ba.ctx.Get("FresnelBlock").New(inputs.JSObject())
+	return FresnelBlockFromJSObject(p, ba.ctx)
+}
+
+// SetInputs sets the Inputs property of class FresnelBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#inputs
+func (f *FresnelBlock) SetInputs(inputs *NodeMaterialConnectionPoint) *FresnelBlock {
+	p := ba.ctx.Get("FresnelBlock").New(inputs.JSObject())
+	return FresnelBlockFromJSObject(p, ba.ctx)
+}
+
+// IsFinalMerger returns the IsFinalMerger property of class FresnelBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#isfinalmerger
+func (f *FresnelBlock) IsFinalMerger(isFinalMerger bool) *FresnelBlock {
+	p := ba.ctx.Get("FresnelBlock").New(isFinalMerger)
+	return FresnelBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsFinalMerger sets the IsFinalMerger property of class FresnelBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#isfinalmerger
+func (f *FresnelBlock) SetIsFinalMerger(isFinalMerger bool) *FresnelBlock {
+	p := ba.ctx.Get("FresnelBlock").New(isFinalMerger)
+	return FresnelBlockFromJSObject(p, ba.ctx)
+}
+
+// IsInput returns the IsInput property of class FresnelBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#isinput
+func (f *FresnelBlock) IsInput(isInput bool) *FresnelBlock {
+	p := ba.ctx.Get("FresnelBlock").New(isInput)
+	return FresnelBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsInput sets the IsInput property of class FresnelBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#isinput
+func (f *FresnelBlock) SetIsInput(isInput bool) *FresnelBlock {
+	p := ba.ctx.Get("FresnelBlock").New(isInput)
+	return FresnelBlockFromJSObject(p, ba.ctx)
+}
+
+// IsUnique returns the IsUnique property of class FresnelBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#isunique
+func (f *FresnelBlock) IsUnique(isUnique bool) *FresnelBlock {
+	p := ba.ctx.Get("FresnelBlock").New(isUnique)
+	return FresnelBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsUnique sets the IsUnique property of class FresnelBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#isunique
+func (f *FresnelBlock) SetIsUnique(isUnique bool) *FresnelBlock {
+	p := ba.ctx.Get("FresnelBlock").New(isUnique)
+	return FresnelBlockFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class FresnelBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#name
+func (f *FresnelBlock) Name(name string) *FresnelBlock {
 	p := ba.ctx.Get("FresnelBlock").New(name)
 	return FresnelBlockFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetName sets the Name property of class FresnelBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#name
+func (f *FresnelBlock) SetName(name string) *FresnelBlock {
+	p := ba.ctx.Get("FresnelBlock").New(name)
+	return FresnelBlockFromJSObject(p, ba.ctx)
+}
+
+// Outputs returns the Outputs property of class FresnelBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#outputs
+func (f *FresnelBlock) Outputs(outputs *NodeMaterialConnectionPoint) *FresnelBlock {
+	p := ba.ctx.Get("FresnelBlock").New(outputs.JSObject())
+	return FresnelBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOutputs sets the Outputs property of class FresnelBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#outputs
+func (f *FresnelBlock) SetOutputs(outputs *NodeMaterialConnectionPoint) *FresnelBlock {
+	p := ba.ctx.Get("FresnelBlock").New(outputs.JSObject())
+	return FresnelBlockFromJSObject(p, ba.ctx)
+}
+
+// Power returns the Power property of class FresnelBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#power
+func (f *FresnelBlock) Power(power *NodeMaterialConnectionPoint) *FresnelBlock {
+	p := ba.ctx.Get("FresnelBlock").New(power.JSObject())
+	return FresnelBlockFromJSObject(p, ba.ctx)
+}
+
+// SetPower sets the Power property of class FresnelBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#power
+func (f *FresnelBlock) SetPower(power *NodeMaterialConnectionPoint) *FresnelBlock {
+	p := ba.ctx.Get("FresnelBlock").New(power.JSObject())
+	return FresnelBlockFromJSObject(p, ba.ctx)
+}
+
+// Target returns the Target property of class FresnelBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#target
+func (f *FresnelBlock) Target(target js.Value) *FresnelBlock {
+	p := ba.ctx.Get("FresnelBlock").New(target)
+	return FresnelBlockFromJSObject(p, ba.ctx)
+}
+
+// SetTarget sets the Target property of class FresnelBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#target
+func (f *FresnelBlock) SetTarget(target js.Value) *FresnelBlock {
+	p := ba.ctx.Get("FresnelBlock").New(target)
+	return FresnelBlockFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class FresnelBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#uniqueid
+func (f *FresnelBlock) UniqueId(uniqueId float64) *FresnelBlock {
+	p := ba.ctx.Get("FresnelBlock").New(uniqueId)
+	return FresnelBlockFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class FresnelBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#uniqueid
+func (f *FresnelBlock) SetUniqueId(uniqueId float64) *FresnelBlock {
+	p := ba.ctx.Get("FresnelBlock").New(uniqueId)
+	return FresnelBlockFromJSObject(p, ba.ctx)
+}
+
+// ViewDirection returns the ViewDirection property of class FresnelBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#viewdirection
+func (f *FresnelBlock) ViewDirection(viewDirection *NodeMaterialConnectionPoint) *FresnelBlock {
+	p := ba.ctx.Get("FresnelBlock").New(viewDirection.JSObject())
+	return FresnelBlockFromJSObject(p, ba.ctx)
+}
+
+// SetViewDirection sets the ViewDirection property of class FresnelBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#viewdirection
+func (f *FresnelBlock) SetViewDirection(viewDirection *NodeMaterialConnectionPoint) *FresnelBlock {
+	p := ba.ctx.Get("FresnelBlock").New(viewDirection.JSObject())
+	return FresnelBlockFromJSObject(p, ba.ctx)
+}
+
+// WorldNormal returns the WorldNormal property of class FresnelBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#worldnormal
+func (f *FresnelBlock) WorldNormal(worldNormal *NodeMaterialConnectionPoint) *FresnelBlock {
+	p := ba.ctx.Get("FresnelBlock").New(worldNormal.JSObject())
+	return FresnelBlockFromJSObject(p, ba.ctx)
+}
+
+// SetWorldNormal sets the WorldNormal property of class FresnelBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fresnelblock#worldnormal
+func (f *FresnelBlock) SetWorldNormal(worldNormal *NodeMaterialConnectionPoint) *FresnelBlock {
+	p := ba.ctx.Get("FresnelBlock").New(worldNormal.JSObject())
+	return FresnelBlockFromJSObject(p, ba.ctx)
+}
+
+*/

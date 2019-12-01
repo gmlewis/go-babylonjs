@@ -27,4 +27,54 @@ func KHR_materials_unlitFromJSObject(p js.Value, ctx js.Value) *KHR_materials_un
 	return &KHR_materials_unlit{p: p, ctx: ctx}
 }
 
-// TODO: methods
+/*
+
+// Enabled returns the Enabled property of class KHR_materials_unlit.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khr_materials_unlit#enabled
+func (k *KHR_materials_unlit) Enabled(enabled bool) *KHR_materials_unlit {
+	p := ba.ctx.Get("KHR_materials_unlit").New(enabled)
+	return KHR_materials_unlitFromJSObject(p, ba.ctx)
+}
+
+// SetEnabled sets the Enabled property of class KHR_materials_unlit.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khr_materials_unlit#enabled
+func (k *KHR_materials_unlit) SetEnabled(enabled bool) *KHR_materials_unlit {
+	p := ba.ctx.Get("KHR_materials_unlit").New(enabled)
+	return KHR_materials_unlitFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class KHR_materials_unlit.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khr_materials_unlit#name
+func (k *KHR_materials_unlit) Name(name string) *KHR_materials_unlit {
+	p := ba.ctx.Get("KHR_materials_unlit").New(name)
+	return KHR_materials_unlitFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class KHR_materials_unlit.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khr_materials_unlit#name
+func (k *KHR_materials_unlit) SetName(name string) *KHR_materials_unlit {
+	p := ba.ctx.Get("KHR_materials_unlit").New(name)
+	return KHR_materials_unlitFromJSObject(p, ba.ctx)
+}
+
+// Order returns the Order property of class KHR_materials_unlit.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khr_materials_unlit#order
+func (k *KHR_materials_unlit) Order(order float64) *KHR_materials_unlit {
+	p := ba.ctx.Get("KHR_materials_unlit").New(order)
+	return KHR_materials_unlitFromJSObject(p, ba.ctx)
+}
+
+// SetOrder sets the Order property of class KHR_materials_unlit.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khr_materials_unlit#order
+func (k *KHR_materials_unlit) SetOrder(order float64) *KHR_materials_unlit {
+	p := ba.ctx.Get("KHR_materials_unlit").New(order)
+	return KHR_materials_unlitFromJSObject(p, ba.ctx)
+}
+
+*/

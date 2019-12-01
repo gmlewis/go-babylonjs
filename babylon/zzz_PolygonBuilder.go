@@ -27,4 +27,74 @@ func PolygonBuilderFromJSObject(p js.Value, ctx js.Value) *PolygonBuilder {
 	return &PolygonBuilder{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// PolygonBuilderCreatePolygonOpts contains optional parameters for PolygonBuilder.CreatePolygon.
+type PolygonBuilderCreatePolygonOpts struct {
+	Scene           *Scene
+	EarcutInjection *interface{}
+}
+
+// CreatePolygon calls the CreatePolygon method on the PolygonBuilder object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.polygonbuilder#createpolygon
+func (p *PolygonBuilder) CreatePolygon(name string, options js.Value, opts *PolygonBuilderCreatePolygonOpts) *Mesh {
+	if opts == nil {
+		opts = &PolygonBuilderCreatePolygonOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+2)
+
+	args = append(args, name)
+	args = append(args, options)
+
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+	if opts.EarcutInjection == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.EarcutInjection)
+	}
+
+	retVal := p.p.Call("CreatePolygon", args...)
+	return MeshFromJSObject(retVal, p.ctx)
+}
+
+// PolygonBuilderExtrudePolygonOpts contains optional parameters for PolygonBuilder.ExtrudePolygon.
+type PolygonBuilderExtrudePolygonOpts struct {
+	Scene           *Scene
+	EarcutInjection *interface{}
+}
+
+// ExtrudePolygon calls the ExtrudePolygon method on the PolygonBuilder object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.polygonbuilder#extrudepolygon
+func (p *PolygonBuilder) ExtrudePolygon(name string, options js.Value, opts *PolygonBuilderExtrudePolygonOpts) *Mesh {
+	if opts == nil {
+		opts = &PolygonBuilderExtrudePolygonOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+2)
+
+	args = append(args, name)
+	args = append(args, options)
+
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+	if opts.EarcutInjection == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.EarcutInjection)
+	}
+
+	retVal := p.p.Call("ExtrudePolygon", args...)
+	return MeshFromJSObject(retVal, p.ctx)
+}
+
+/*
+
+ */

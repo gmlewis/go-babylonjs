@@ -29,11 +29,9 @@ func AxisDragGizmoFromJSObject(p js.Value, ctx js.Value) *AxisDragGizmo {
 
 // NewAxisDragGizmoOpts contains optional parameters for NewAxisDragGizmo.
 type NewAxisDragGizmoOpts struct {
-	Color *Color3
-
+	Color      *Color3
 	GizmoLayer *UtilityLayerRenderer
-
-	Parent *PositionGizmo
+	Parent     *PositionGizmo
 }
 
 // NewAxisDragGizmo returns a new AxisDragGizmo object.
@@ -44,8 +42,228 @@ func (ba *Babylon) NewAxisDragGizmo(dragAxis *Vector3, opts *NewAxisDragGizmoOpt
 		opts = &NewAxisDragGizmoOpts{}
 	}
 
-	p := ba.ctx.Get("AxisDragGizmo").New(dragAxis.JSObject(), opts.Color.JSObject(), opts.GizmoLayer.JSObject(), opts.Parent.JSObject())
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, dragAxis.JSObject())
+
+	if opts.Color == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Color.JSObject())
+	}
+	if opts.GizmoLayer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.GizmoLayer.JSObject())
+	}
+	if opts.Parent == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Parent.JSObject())
+	}
+
+	p := ba.ctx.Get("AxisDragGizmo").New(args...)
 	return AxisDragGizmoFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Dispose calls the Dispose method on the AxisDragGizmo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.axisdraggizmo#dispose
+func (a *AxisDragGizmo) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	a.p.Call("dispose", args...)
+}
+
+// SetCustomMesh calls the SetCustomMesh method on the AxisDragGizmo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.axisdraggizmo#setcustommesh
+func (a *AxisDragGizmo) SetCustomMesh(mesh *Mesh) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	a.p.Call("setCustomMesh", args...)
+}
+
+/*
+
+// AttachedMesh returns the AttachedMesh property of class AxisDragGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.axisdraggizmo#attachedmesh
+func (a *AxisDragGizmo) AttachedMesh(attachedMesh *AbstractMesh) *AxisDragGizmo {
+	p := ba.ctx.Get("AxisDragGizmo").New(attachedMesh.JSObject())
+	return AxisDragGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetAttachedMesh sets the AttachedMesh property of class AxisDragGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.axisdraggizmo#attachedmesh
+func (a *AxisDragGizmo) SetAttachedMesh(attachedMesh *AbstractMesh) *AxisDragGizmo {
+	p := ba.ctx.Get("AxisDragGizmo").New(attachedMesh.JSObject())
+	return AxisDragGizmoFromJSObject(p, ba.ctx)
+}
+
+// DragBehavior returns the DragBehavior property of class AxisDragGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.axisdraggizmo#dragbehavior
+func (a *AxisDragGizmo) DragBehavior(dragBehavior *PointerDragBehavior) *AxisDragGizmo {
+	p := ba.ctx.Get("AxisDragGizmo").New(dragBehavior.JSObject())
+	return AxisDragGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetDragBehavior sets the DragBehavior property of class AxisDragGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.axisdraggizmo#dragbehavior
+func (a *AxisDragGizmo) SetDragBehavior(dragBehavior *PointerDragBehavior) *AxisDragGizmo {
+	p := ba.ctx.Get("AxisDragGizmo").New(dragBehavior.JSObject())
+	return AxisDragGizmoFromJSObject(p, ba.ctx)
+}
+
+// GizmoLayer returns the GizmoLayer property of class AxisDragGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.axisdraggizmo#gizmolayer
+func (a *AxisDragGizmo) GizmoLayer(gizmoLayer *UtilityLayerRenderer) *AxisDragGizmo {
+	p := ba.ctx.Get("AxisDragGizmo").New(gizmoLayer.JSObject())
+	return AxisDragGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetGizmoLayer sets the GizmoLayer property of class AxisDragGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.axisdraggizmo#gizmolayer
+func (a *AxisDragGizmo) SetGizmoLayer(gizmoLayer *UtilityLayerRenderer) *AxisDragGizmo {
+	p := ba.ctx.Get("AxisDragGizmo").New(gizmoLayer.JSObject())
+	return AxisDragGizmoFromJSObject(p, ba.ctx)
+}
+
+// IsEnabled returns the IsEnabled property of class AxisDragGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.axisdraggizmo#isenabled
+func (a *AxisDragGizmo) IsEnabled(isEnabled bool) *AxisDragGizmo {
+	p := ba.ctx.Get("AxisDragGizmo").New(isEnabled)
+	return AxisDragGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetIsEnabled sets the IsEnabled property of class AxisDragGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.axisdraggizmo#isenabled
+func (a *AxisDragGizmo) SetIsEnabled(isEnabled bool) *AxisDragGizmo {
+	p := ba.ctx.Get("AxisDragGizmo").New(isEnabled)
+	return AxisDragGizmoFromJSObject(p, ba.ctx)
+}
+
+// OnSnapObservable returns the OnSnapObservable property of class AxisDragGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.axisdraggizmo#onsnapobservable
+func (a *AxisDragGizmo) OnSnapObservable(onSnapObservable *Observable) *AxisDragGizmo {
+	p := ba.ctx.Get("AxisDragGizmo").New(onSnapObservable.JSObject())
+	return AxisDragGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetOnSnapObservable sets the OnSnapObservable property of class AxisDragGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.axisdraggizmo#onsnapobservable
+func (a *AxisDragGizmo) SetOnSnapObservable(onSnapObservable *Observable) *AxisDragGizmo {
+	p := ba.ctx.Get("AxisDragGizmo").New(onSnapObservable.JSObject())
+	return AxisDragGizmoFromJSObject(p, ba.ctx)
+}
+
+// ScaleRatio returns the ScaleRatio property of class AxisDragGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.axisdraggizmo#scaleratio
+func (a *AxisDragGizmo) ScaleRatio(scaleRatio float64) *AxisDragGizmo {
+	p := ba.ctx.Get("AxisDragGizmo").New(scaleRatio)
+	return AxisDragGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetScaleRatio sets the ScaleRatio property of class AxisDragGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.axisdraggizmo#scaleratio
+func (a *AxisDragGizmo) SetScaleRatio(scaleRatio float64) *AxisDragGizmo {
+	p := ba.ctx.Get("AxisDragGizmo").New(scaleRatio)
+	return AxisDragGizmoFromJSObject(p, ba.ctx)
+}
+
+// SnapDistance returns the SnapDistance property of class AxisDragGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.axisdraggizmo#snapdistance
+func (a *AxisDragGizmo) SnapDistance(snapDistance float64) *AxisDragGizmo {
+	p := ba.ctx.Get("AxisDragGizmo").New(snapDistance)
+	return AxisDragGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetSnapDistance sets the SnapDistance property of class AxisDragGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.axisdraggizmo#snapdistance
+func (a *AxisDragGizmo) SetSnapDistance(snapDistance float64) *AxisDragGizmo {
+	p := ba.ctx.Get("AxisDragGizmo").New(snapDistance)
+	return AxisDragGizmoFromJSObject(p, ba.ctx)
+}
+
+// UpdateGizmoPositionToMatchAttachedMesh returns the UpdateGizmoPositionToMatchAttachedMesh property of class AxisDragGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.axisdraggizmo#updategizmopositiontomatchattachedmesh
+func (a *AxisDragGizmo) UpdateGizmoPositionToMatchAttachedMesh(updateGizmoPositionToMatchAttachedMesh bool) *AxisDragGizmo {
+	p := ba.ctx.Get("AxisDragGizmo").New(updateGizmoPositionToMatchAttachedMesh)
+	return AxisDragGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateGizmoPositionToMatchAttachedMesh sets the UpdateGizmoPositionToMatchAttachedMesh property of class AxisDragGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.axisdraggizmo#updategizmopositiontomatchattachedmesh
+func (a *AxisDragGizmo) SetUpdateGizmoPositionToMatchAttachedMesh(updateGizmoPositionToMatchAttachedMesh bool) *AxisDragGizmo {
+	p := ba.ctx.Get("AxisDragGizmo").New(updateGizmoPositionToMatchAttachedMesh)
+	return AxisDragGizmoFromJSObject(p, ba.ctx)
+}
+
+// UpdateGizmoRotationToMatchAttachedMesh returns the UpdateGizmoRotationToMatchAttachedMesh property of class AxisDragGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.axisdraggizmo#updategizmorotationtomatchattachedmesh
+func (a *AxisDragGizmo) UpdateGizmoRotationToMatchAttachedMesh(updateGizmoRotationToMatchAttachedMesh bool) *AxisDragGizmo {
+	p := ba.ctx.Get("AxisDragGizmo").New(updateGizmoRotationToMatchAttachedMesh)
+	return AxisDragGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateGizmoRotationToMatchAttachedMesh sets the UpdateGizmoRotationToMatchAttachedMesh property of class AxisDragGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.axisdraggizmo#updategizmorotationtomatchattachedmesh
+func (a *AxisDragGizmo) SetUpdateGizmoRotationToMatchAttachedMesh(updateGizmoRotationToMatchAttachedMesh bool) *AxisDragGizmo {
+	p := ba.ctx.Get("AxisDragGizmo").New(updateGizmoRotationToMatchAttachedMesh)
+	return AxisDragGizmoFromJSObject(p, ba.ctx)
+}
+
+// UpdateScale returns the UpdateScale property of class AxisDragGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.axisdraggizmo#updatescale
+func (a *AxisDragGizmo) UpdateScale(updateScale bool) *AxisDragGizmo {
+	p := ba.ctx.Get("AxisDragGizmo").New(updateScale)
+	return AxisDragGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateScale sets the UpdateScale property of class AxisDragGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.axisdraggizmo#updatescale
+func (a *AxisDragGizmo) SetUpdateScale(updateScale bool) *AxisDragGizmo {
+	p := ba.ctx.Get("AxisDragGizmo").New(updateScale)
+	return AxisDragGizmoFromJSObject(p, ba.ctx)
+}
+
+// _rootMesh returns the _rootMesh property of class AxisDragGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.axisdraggizmo#_rootmesh
+func (a *AxisDragGizmo) _rootMesh(_rootMesh *Mesh) *AxisDragGizmo {
+	p := ba.ctx.Get("AxisDragGizmo").New(_rootMesh.JSObject())
+	return AxisDragGizmoFromJSObject(p, ba.ctx)
+}
+
+// Set_rootMesh sets the _rootMesh property of class AxisDragGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.axisdraggizmo#_rootmesh
+func (a *AxisDragGizmo) Set_rootMesh(_rootMesh *Mesh) *AxisDragGizmo {
+	p := ba.ctx.Get("AxisDragGizmo").New(_rootMesh.JSObject())
+	return AxisDragGizmoFromJSObject(p, ba.ctx)
+}
+
+*/

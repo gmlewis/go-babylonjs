@@ -31,8 +31,204 @@ func RecastJSCrowdFromJSObject(p js.Value, ctx js.Value) *RecastJSCrowd {
 //
 // https://doc.babylonjs.com/api/classes/babylon.recastjscrowd
 func (ba *Babylon) NewRecastJSCrowd(plugin *RecastJSPlugin, maxAgents float64, maxAgentRadius float64, scene *Scene) *RecastJSCrowd {
-	p := ba.ctx.Get("RecastJSCrowd").New(plugin.JSObject(), maxAgents, maxAgentRadius, scene.JSObject())
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, plugin.JSObject())
+	args = append(args, maxAgents)
+	args = append(args, maxAgentRadius)
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("RecastJSCrowd").New(args...)
 	return RecastJSCrowdFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AddAgent calls the AddAgent method on the RecastJSCrowd object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.recastjscrowd#addagent
+func (r *RecastJSCrowd) AddAgent(pos *Vector3, parameters *IAgentParameters, transform *TransformNode) float64 {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, pos.JSObject())
+	args = append(args, parameters.JSObject())
+	args = append(args, transform.JSObject())
+
+	retVal := r.p.Call("addAgent", args...)
+	return retVal.Float()
+}
+
+// AgentGoto calls the AgentGoto method on the RecastJSCrowd object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.recastjscrowd#agentgoto
+func (r *RecastJSCrowd) AgentGoto(index float64, destination *Vector3) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, index)
+	args = append(args, destination.JSObject())
+
+	r.p.Call("agentGoto", args...)
+}
+
+// Dispose calls the Dispose method on the RecastJSCrowd object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.recastjscrowd#dispose
+func (r *RecastJSCrowd) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	r.p.Call("dispose", args...)
+}
+
+// GetAgentPosition calls the GetAgentPosition method on the RecastJSCrowd object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.recastjscrowd#getagentposition
+func (r *RecastJSCrowd) GetAgentPosition(index float64) *Vector3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, index)
+
+	retVal := r.p.Call("getAgentPosition", args...)
+	return Vector3FromJSObject(retVal, r.ctx)
+}
+
+// GetAgentVelocity calls the GetAgentVelocity method on the RecastJSCrowd object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.recastjscrowd#getagentvelocity
+func (r *RecastJSCrowd) GetAgentVelocity(index float64) *Vector3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, index)
+
+	retVal := r.p.Call("getAgentVelocity", args...)
+	return Vector3FromJSObject(retVal, r.ctx)
+}
+
+// GetAgents calls the GetAgents method on the RecastJSCrowd object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.recastjscrowd#getagents
+func (r *RecastJSCrowd) GetAgents() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("getAgents", args...)
+	return retVal.Float()
+}
+
+// GetDefaultQueryExtent calls the GetDefaultQueryExtent method on the RecastJSCrowd object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.recastjscrowd#getdefaultqueryextent
+func (r *RecastJSCrowd) GetDefaultQueryExtent() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("getDefaultQueryExtent", args...)
+	return Vector3FromJSObject(retVal, r.ctx)
+}
+
+// RemoveAgent calls the RemoveAgent method on the RecastJSCrowd object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.recastjscrowd#removeagent
+func (r *RecastJSCrowd) RemoveAgent(index float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, index)
+
+	r.p.Call("removeAgent", args...)
+}
+
+// SetDefaultQueryExtent calls the SetDefaultQueryExtent method on the RecastJSCrowd object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.recastjscrowd#setdefaultqueryextent
+func (r *RecastJSCrowd) SetDefaultQueryExtent(extent *Vector3) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, extent.JSObject())
+
+	r.p.Call("setDefaultQueryExtent", args...)
+}
+
+// Update calls the Update method on the RecastJSCrowd object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.recastjscrowd#update
+func (r *RecastJSCrowd) Update(deltaTime float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, deltaTime)
+
+	r.p.Call("update", args...)
+}
+
+/*
+
+// Agents returns the Agents property of class RecastJSCrowd.
+//
+// https://doc.babylonjs.com/api/classes/babylon.recastjscrowd#agents
+func (r *RecastJSCrowd) Agents(agents float64) *RecastJSCrowd {
+	p := ba.ctx.Get("RecastJSCrowd").New(agents)
+	return RecastJSCrowdFromJSObject(p, ba.ctx)
+}
+
+// SetAgents sets the Agents property of class RecastJSCrowd.
+//
+// https://doc.babylonjs.com/api/classes/babylon.recastjscrowd#agents
+func (r *RecastJSCrowd) SetAgents(agents float64) *RecastJSCrowd {
+	p := ba.ctx.Get("RecastJSCrowd").New(agents)
+	return RecastJSCrowdFromJSObject(p, ba.ctx)
+}
+
+// BjsRECASTPlugin returns the BjsRECASTPlugin property of class RecastJSCrowd.
+//
+// https://doc.babylonjs.com/api/classes/babylon.recastjscrowd#bjsrecastplugin
+func (r *RecastJSCrowd) BjsRECASTPlugin(bjsRECASTPlugin *RecastJSPlugin) *RecastJSCrowd {
+	p := ba.ctx.Get("RecastJSCrowd").New(bjsRECASTPlugin.JSObject())
+	return RecastJSCrowdFromJSObject(p, ba.ctx)
+}
+
+// SetBjsRECASTPlugin sets the BjsRECASTPlugin property of class RecastJSCrowd.
+//
+// https://doc.babylonjs.com/api/classes/babylon.recastjscrowd#bjsrecastplugin
+func (r *RecastJSCrowd) SetBjsRECASTPlugin(bjsRECASTPlugin *RecastJSPlugin) *RecastJSCrowd {
+	p := ba.ctx.Get("RecastJSCrowd").New(bjsRECASTPlugin.JSObject())
+	return RecastJSCrowdFromJSObject(p, ba.ctx)
+}
+
+// RecastCrowd returns the RecastCrowd property of class RecastJSCrowd.
+//
+// https://doc.babylonjs.com/api/classes/babylon.recastjscrowd#recastcrowd
+func (r *RecastJSCrowd) RecastCrowd(recastCrowd interface{}) *RecastJSCrowd {
+	p := ba.ctx.Get("RecastJSCrowd").New(recastCrowd)
+	return RecastJSCrowdFromJSObject(p, ba.ctx)
+}
+
+// SetRecastCrowd sets the RecastCrowd property of class RecastJSCrowd.
+//
+// https://doc.babylonjs.com/api/classes/babylon.recastjscrowd#recastcrowd
+func (r *RecastJSCrowd) SetRecastCrowd(recastCrowd interface{}) *RecastJSCrowd {
+	p := ba.ctx.Get("RecastJSCrowd").New(recastCrowd)
+	return RecastJSCrowdFromJSObject(p, ba.ctx)
+}
+
+// Transforms returns the Transforms property of class RecastJSCrowd.
+//
+// https://doc.babylonjs.com/api/classes/babylon.recastjscrowd#transforms
+func (r *RecastJSCrowd) Transforms(transforms *TransformNode) *RecastJSCrowd {
+	p := ba.ctx.Get("RecastJSCrowd").New(transforms.JSObject())
+	return RecastJSCrowdFromJSObject(p, ba.ctx)
+}
+
+// SetTransforms sets the Transforms property of class RecastJSCrowd.
+//
+// https://doc.babylonjs.com/api/classes/babylon.recastjscrowd#transforms
+func (r *RecastJSCrowd) SetTransforms(transforms *TransformNode) *RecastJSCrowd {
+	p := ba.ctx.Get("RecastJSCrowd").New(transforms.JSObject())
+	return RecastJSCrowdFromJSObject(p, ba.ctx)
+}
+
+*/

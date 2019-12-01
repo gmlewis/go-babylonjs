@@ -31,8 +31,653 @@ func DesaturateBlockFromJSObject(p js.Value, ctx js.Value) *DesaturateBlock {
 //
 // https://doc.babylonjs.com/api/classes/babylon.desaturateblock
 func (ba *Babylon) NewDesaturateBlock(name string) *DesaturateBlock {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	p := ba.ctx.Get("DesaturateBlock").New(args...)
+	return DesaturateBlockFromJSObject(p, ba.ctx)
+}
+
+// AutoConfigure calls the AutoConfigure method on the DesaturateBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#autoconfigure
+func (d *DesaturateBlock) AutoConfigure(material *NodeMaterial) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, material.JSObject())
+
+	d.p.Call("autoConfigure", args...)
+}
+
+// DesaturateBlockBindOpts contains optional parameters for DesaturateBlock.Bind.
+type DesaturateBlockBindOpts struct {
+	Mesh *Mesh
+}
+
+// Bind calls the Bind method on the DesaturateBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#bind
+func (d *DesaturateBlock) Bind(effect *Effect, nodeMaterial *NodeMaterial, opts *DesaturateBlockBindOpts) {
+	if opts == nil {
+		opts = &DesaturateBlockBindOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, effect.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	d.p.Call("bind", args...)
+}
+
+// Build calls the Build method on the DesaturateBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#build
+func (d *DesaturateBlock) Build(state *NodeMaterialBuildState, activeBlocks *NodeMaterialBlock) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, state.JSObject())
+	args = append(args, activeBlocks.JSObject())
+
+	retVal := d.p.Call("build", args...)
+	return retVal.Bool()
+}
+
+// DesaturateBlockCloneOpts contains optional parameters for DesaturateBlock.Clone.
+type DesaturateBlockCloneOpts struct {
+	RootUrl *string
+}
+
+// Clone calls the Clone method on the DesaturateBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#clone
+func (d *DesaturateBlock) Clone(scene *Scene, opts *DesaturateBlockCloneOpts) *NodeMaterialBlock {
+	if opts == nil {
+		opts = &DesaturateBlockCloneOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, scene.JSObject())
+
+	if opts.RootUrl == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RootUrl)
+	}
+
+	retVal := d.p.Call("clone", args...)
+	return NodeMaterialBlockFromJSObject(retVal, d.ctx)
+}
+
+// DesaturateBlockConnectToOpts contains optional parameters for DesaturateBlock.ConnectTo.
+type DesaturateBlockConnectToOpts struct {
+	Options js.Value
+}
+
+// ConnectTo calls the ConnectTo method on the DesaturateBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#connectto
+func (d *DesaturateBlock) ConnectTo(other *NodeMaterialBlock, opts *DesaturateBlockConnectToOpts) *DesaturateBlock {
+	if opts == nil {
+		opts = &DesaturateBlockConnectToOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, other.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	retVal := d.p.Call("connectTo", args...)
+	return DesaturateBlockFromJSObject(retVal, d.ctx)
+}
+
+// Dispose calls the Dispose method on the DesaturateBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#dispose
+func (d *DesaturateBlock) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	d.p.Call("dispose", args...)
+}
+
+// GetClassName calls the GetClassName method on the DesaturateBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#getclassname
+func (d *DesaturateBlock) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := d.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// DesaturateBlockGetFirstAvailableInputOpts contains optional parameters for DesaturateBlock.GetFirstAvailableInput.
+type DesaturateBlockGetFirstAvailableInputOpts struct {
+	ForOutput *NodeMaterialConnectionPoint
+}
+
+// GetFirstAvailableInput calls the GetFirstAvailableInput method on the DesaturateBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#getfirstavailableinput
+func (d *DesaturateBlock) GetFirstAvailableInput(opts *DesaturateBlockGetFirstAvailableInputOpts) *NodeMaterialConnectionPoint {
+	if opts == nil {
+		opts = &DesaturateBlockGetFirstAvailableInputOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForOutput == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForOutput.JSObject())
+	}
+
+	retVal := d.p.Call("getFirstAvailableInput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, d.ctx)
+}
+
+// DesaturateBlockGetFirstAvailableOutputOpts contains optional parameters for DesaturateBlock.GetFirstAvailableOutput.
+type DesaturateBlockGetFirstAvailableOutputOpts struct {
+	ForBlock *NodeMaterialBlock
+}
+
+// GetFirstAvailableOutput calls the GetFirstAvailableOutput method on the DesaturateBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#getfirstavailableoutput
+func (d *DesaturateBlock) GetFirstAvailableOutput(opts *DesaturateBlockGetFirstAvailableOutputOpts) *NodeMaterialConnectionPoint {
+	if opts == nil {
+		opts = &DesaturateBlockGetFirstAvailableOutputOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForBlock == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForBlock.JSObject())
+	}
+
+	retVal := d.p.Call("getFirstAvailableOutput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, d.ctx)
+}
+
+// GetInputByName calls the GetInputByName method on the DesaturateBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#getinputbyname
+func (d *DesaturateBlock) GetInputByName(name string) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := d.p.Call("getInputByName", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, d.ctx)
+}
+
+// GetOutputByName calls the GetOutputByName method on the DesaturateBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#getoutputbyname
+func (d *DesaturateBlock) GetOutputByName(name string) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := d.p.Call("getOutputByName", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, d.ctx)
+}
+
+// GetSiblingOutput calls the GetSiblingOutput method on the DesaturateBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#getsiblingoutput
+func (d *DesaturateBlock) GetSiblingOutput(current *NodeMaterialConnectionPoint) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, current.JSObject())
+
+	retVal := d.p.Call("getSiblingOutput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, d.ctx)
+}
+
+// Initialize calls the Initialize method on the DesaturateBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#initialize
+func (d *DesaturateBlock) Initialize(state *NodeMaterialBuildState) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, state.JSObject())
+
+	d.p.Call("initialize", args...)
+}
+
+// DesaturateBlockInitializeDefinesOpts contains optional parameters for DesaturateBlock.InitializeDefines.
+type DesaturateBlockInitializeDefinesOpts struct {
+	UseInstances *bool
+}
+
+// InitializeDefines calls the InitializeDefines method on the DesaturateBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#initializedefines
+func (d *DesaturateBlock) InitializeDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *DesaturateBlockInitializeDefinesOpts) {
+	if opts == nil {
+		opts = &DesaturateBlockInitializeDefinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	d.p.Call("initializeDefines", args...)
+}
+
+// DesaturateBlockIsReadyOpts contains optional parameters for DesaturateBlock.IsReady.
+type DesaturateBlockIsReadyOpts struct {
+	UseInstances *bool
+}
+
+// IsReady calls the IsReady method on the DesaturateBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#isready
+func (d *DesaturateBlock) IsReady(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *DesaturateBlockIsReadyOpts) bool {
+	if opts == nil {
+		opts = &DesaturateBlockIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := d.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// DesaturateBlockPrepareDefinesOpts contains optional parameters for DesaturateBlock.PrepareDefines.
+type DesaturateBlockPrepareDefinesOpts struct {
+	UseInstances *bool
+}
+
+// PrepareDefines calls the PrepareDefines method on the DesaturateBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#preparedefines
+func (d *DesaturateBlock) PrepareDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *DesaturateBlockPrepareDefinesOpts) {
+	if opts == nil {
+		opts = &DesaturateBlockPrepareDefinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	d.p.Call("prepareDefines", args...)
+}
+
+// ProvideFallbacks calls the ProvideFallbacks method on the DesaturateBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#providefallbacks
+func (d *DesaturateBlock) ProvideFallbacks(mesh *AbstractMesh, fallbacks *EffectFallbacks) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, fallbacks.JSObject())
+
+	d.p.Call("provideFallbacks", args...)
+}
+
+// DesaturateBlockRegisterInputOpts contains optional parameters for DesaturateBlock.RegisterInput.
+type DesaturateBlockRegisterInputOpts struct {
+	IsOptional *bool
+	Target     js.Value
+}
+
+// RegisterInput calls the RegisterInput method on the DesaturateBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#registerinput
+func (d *DesaturateBlock) RegisterInput(name string, jsType js.Value, opts *DesaturateBlockRegisterInputOpts) *DesaturateBlock {
+	if opts == nil {
+		opts = &DesaturateBlockRegisterInputOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+2)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	if opts.IsOptional == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IsOptional)
+	}
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+
+	retVal := d.p.Call("registerInput", args...)
+	return DesaturateBlockFromJSObject(retVal, d.ctx)
+}
+
+// DesaturateBlockRegisterOutputOpts contains optional parameters for DesaturateBlock.RegisterOutput.
+type DesaturateBlockRegisterOutputOpts struct {
+	Target js.Value
+}
+
+// RegisterOutput calls the RegisterOutput method on the DesaturateBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#registeroutput
+func (d *DesaturateBlock) RegisterOutput(name string, jsType js.Value, opts *DesaturateBlockRegisterOutputOpts) *DesaturateBlock {
+	if opts == nil {
+		opts = &DesaturateBlockRegisterOutputOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+
+	retVal := d.p.Call("registerOutput", args...)
+	return DesaturateBlockFromJSObject(retVal, d.ctx)
+}
+
+// ReplaceRepeatableContent calls the ReplaceRepeatableContent method on the DesaturateBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#replacerepeatablecontent
+func (d *DesaturateBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterialBuildState, fragmentShaderState *NodeMaterialBuildState, mesh *AbstractMesh, defines js.Value) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, vertexShaderState.JSObject())
+	args = append(args, fragmentShaderState.JSObject())
+	args = append(args, mesh.JSObject())
+	args = append(args, defines)
+
+	d.p.Call("replaceRepeatableContent", args...)
+}
+
+// Serialize calls the Serialize method on the DesaturateBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#serialize
+func (d *DesaturateBlock) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := d.p.Call("serialize", args...)
+	return retVal
+}
+
+// UpdateUniformsAndSamples calls the UpdateUniformsAndSamples method on the DesaturateBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#updateuniformsandsamples
+func (d *DesaturateBlock) UpdateUniformsAndSamples(state *NodeMaterialBuildState, nodeMaterial *NodeMaterial, defines js.Value, uniformBuffers string) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, state.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+	args = append(args, uniformBuffers)
+
+	d.p.Call("updateUniformsAndSamples", args...)
+}
+
+/*
+
+// BuildId returns the BuildId property of class DesaturateBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#buildid
+func (d *DesaturateBlock) BuildId(buildId float64) *DesaturateBlock {
+	p := ba.ctx.Get("DesaturateBlock").New(buildId)
+	return DesaturateBlockFromJSObject(p, ba.ctx)
+}
+
+// SetBuildId sets the BuildId property of class DesaturateBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#buildid
+func (d *DesaturateBlock) SetBuildId(buildId float64) *DesaturateBlock {
+	p := ba.ctx.Get("DesaturateBlock").New(buildId)
+	return DesaturateBlockFromJSObject(p, ba.ctx)
+}
+
+// Color returns the Color property of class DesaturateBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#color
+func (d *DesaturateBlock) Color(color *NodeMaterialConnectionPoint) *DesaturateBlock {
+	p := ba.ctx.Get("DesaturateBlock").New(color.JSObject())
+	return DesaturateBlockFromJSObject(p, ba.ctx)
+}
+
+// SetColor sets the Color property of class DesaturateBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#color
+func (d *DesaturateBlock) SetColor(color *NodeMaterialConnectionPoint) *DesaturateBlock {
+	p := ba.ctx.Get("DesaturateBlock").New(color.JSObject())
+	return DesaturateBlockFromJSObject(p, ba.ctx)
+}
+
+// Comments returns the Comments property of class DesaturateBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#comments
+func (d *DesaturateBlock) Comments(comments string) *DesaturateBlock {
+	p := ba.ctx.Get("DesaturateBlock").New(comments)
+	return DesaturateBlockFromJSObject(p, ba.ctx)
+}
+
+// SetComments sets the Comments property of class DesaturateBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#comments
+func (d *DesaturateBlock) SetComments(comments string) *DesaturateBlock {
+	p := ba.ctx.Get("DesaturateBlock").New(comments)
+	return DesaturateBlockFromJSObject(p, ba.ctx)
+}
+
+// Inputs returns the Inputs property of class DesaturateBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#inputs
+func (d *DesaturateBlock) Inputs(inputs *NodeMaterialConnectionPoint) *DesaturateBlock {
+	p := ba.ctx.Get("DesaturateBlock").New(inputs.JSObject())
+	return DesaturateBlockFromJSObject(p, ba.ctx)
+}
+
+// SetInputs sets the Inputs property of class DesaturateBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#inputs
+func (d *DesaturateBlock) SetInputs(inputs *NodeMaterialConnectionPoint) *DesaturateBlock {
+	p := ba.ctx.Get("DesaturateBlock").New(inputs.JSObject())
+	return DesaturateBlockFromJSObject(p, ba.ctx)
+}
+
+// IsFinalMerger returns the IsFinalMerger property of class DesaturateBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#isfinalmerger
+func (d *DesaturateBlock) IsFinalMerger(isFinalMerger bool) *DesaturateBlock {
+	p := ba.ctx.Get("DesaturateBlock").New(isFinalMerger)
+	return DesaturateBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsFinalMerger sets the IsFinalMerger property of class DesaturateBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#isfinalmerger
+func (d *DesaturateBlock) SetIsFinalMerger(isFinalMerger bool) *DesaturateBlock {
+	p := ba.ctx.Get("DesaturateBlock").New(isFinalMerger)
+	return DesaturateBlockFromJSObject(p, ba.ctx)
+}
+
+// IsInput returns the IsInput property of class DesaturateBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#isinput
+func (d *DesaturateBlock) IsInput(isInput bool) *DesaturateBlock {
+	p := ba.ctx.Get("DesaturateBlock").New(isInput)
+	return DesaturateBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsInput sets the IsInput property of class DesaturateBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#isinput
+func (d *DesaturateBlock) SetIsInput(isInput bool) *DesaturateBlock {
+	p := ba.ctx.Get("DesaturateBlock").New(isInput)
+	return DesaturateBlockFromJSObject(p, ba.ctx)
+}
+
+// IsUnique returns the IsUnique property of class DesaturateBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#isunique
+func (d *DesaturateBlock) IsUnique(isUnique bool) *DesaturateBlock {
+	p := ba.ctx.Get("DesaturateBlock").New(isUnique)
+	return DesaturateBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsUnique sets the IsUnique property of class DesaturateBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#isunique
+func (d *DesaturateBlock) SetIsUnique(isUnique bool) *DesaturateBlock {
+	p := ba.ctx.Get("DesaturateBlock").New(isUnique)
+	return DesaturateBlockFromJSObject(p, ba.ctx)
+}
+
+// Level returns the Level property of class DesaturateBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#level
+func (d *DesaturateBlock) Level(level *NodeMaterialConnectionPoint) *DesaturateBlock {
+	p := ba.ctx.Get("DesaturateBlock").New(level.JSObject())
+	return DesaturateBlockFromJSObject(p, ba.ctx)
+}
+
+// SetLevel sets the Level property of class DesaturateBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#level
+func (d *DesaturateBlock) SetLevel(level *NodeMaterialConnectionPoint) *DesaturateBlock {
+	p := ba.ctx.Get("DesaturateBlock").New(level.JSObject())
+	return DesaturateBlockFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class DesaturateBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#name
+func (d *DesaturateBlock) Name(name string) *DesaturateBlock {
 	p := ba.ctx.Get("DesaturateBlock").New(name)
 	return DesaturateBlockFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetName sets the Name property of class DesaturateBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#name
+func (d *DesaturateBlock) SetName(name string) *DesaturateBlock {
+	p := ba.ctx.Get("DesaturateBlock").New(name)
+	return DesaturateBlockFromJSObject(p, ba.ctx)
+}
+
+// Output returns the Output property of class DesaturateBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#output
+func (d *DesaturateBlock) Output(output *NodeMaterialConnectionPoint) *DesaturateBlock {
+	p := ba.ctx.Get("DesaturateBlock").New(output.JSObject())
+	return DesaturateBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOutput sets the Output property of class DesaturateBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#output
+func (d *DesaturateBlock) SetOutput(output *NodeMaterialConnectionPoint) *DesaturateBlock {
+	p := ba.ctx.Get("DesaturateBlock").New(output.JSObject())
+	return DesaturateBlockFromJSObject(p, ba.ctx)
+}
+
+// Outputs returns the Outputs property of class DesaturateBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#outputs
+func (d *DesaturateBlock) Outputs(outputs *NodeMaterialConnectionPoint) *DesaturateBlock {
+	p := ba.ctx.Get("DesaturateBlock").New(outputs.JSObject())
+	return DesaturateBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOutputs sets the Outputs property of class DesaturateBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#outputs
+func (d *DesaturateBlock) SetOutputs(outputs *NodeMaterialConnectionPoint) *DesaturateBlock {
+	p := ba.ctx.Get("DesaturateBlock").New(outputs.JSObject())
+	return DesaturateBlockFromJSObject(p, ba.ctx)
+}
+
+// Target returns the Target property of class DesaturateBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#target
+func (d *DesaturateBlock) Target(target js.Value) *DesaturateBlock {
+	p := ba.ctx.Get("DesaturateBlock").New(target)
+	return DesaturateBlockFromJSObject(p, ba.ctx)
+}
+
+// SetTarget sets the Target property of class DesaturateBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#target
+func (d *DesaturateBlock) SetTarget(target js.Value) *DesaturateBlock {
+	p := ba.ctx.Get("DesaturateBlock").New(target)
+	return DesaturateBlockFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class DesaturateBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#uniqueid
+func (d *DesaturateBlock) UniqueId(uniqueId float64) *DesaturateBlock {
+	p := ba.ctx.Get("DesaturateBlock").New(uniqueId)
+	return DesaturateBlockFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class DesaturateBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.desaturateblock#uniqueid
+func (d *DesaturateBlock) SetUniqueId(uniqueId float64) *DesaturateBlock {
+	p := ba.ctx.Get("DesaturateBlock").New(uniqueId)
+	return DesaturateBlockFromJSObject(p, ba.ctx)
+}
+
+*/

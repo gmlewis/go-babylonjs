@@ -41,8 +41,4689 @@ func (ba *Babylon) NewNullEngine(opts *NewNullEngineOpts) *NullEngine {
 		opts = &NewNullEngineOpts{}
 	}
 
-	p := ba.ctx.Get("NullEngine").New(opts.Options.JSObject())
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options.JSObject())
+	}
+
+	p := ba.ctx.Get("NullEngine").New(args...)
 	return NullEngineFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AreAllEffectsReady calls the AreAllEffectsReady method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#arealleffectsready
+func (n *NullEngine) AreAllEffectsReady() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("areAllEffectsReady", args...)
+	return retVal.Bool()
+}
+
+// BeginFrame calls the BeginFrame method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#beginframe
+func (n *NullEngine) BeginFrame() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	n.p.Call("beginFrame", args...)
+}
+
+// BeginOcclusionQuery calls the BeginOcclusionQuery method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#beginocclusionquery
+func (n *NullEngine) BeginOcclusionQuery(algorithmType float64, query *WebGLQuery) *Engine {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, algorithmType)
+	args = append(args, query.JSObject())
+
+	retVal := n.p.Call("beginOcclusionQuery", args...)
+	return EngineFromJSObject(retVal, n.ctx)
+}
+
+// BeginTransformFeedback calls the BeginTransformFeedback method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#begintransformfeedback
+func (n *NullEngine) BeginTransformFeedback(usePoints bool) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, usePoints)
+
+	n.p.Call("beginTransformFeedback", args...)
+}
+
+// BindBuffers calls the BindBuffers method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#bindbuffers
+func (n *NullEngine) BindBuffers(vertexBuffers js.Value, indexBuffer *DataBuffer, effect *Effect) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, vertexBuffers)
+	args = append(args, indexBuffer.JSObject())
+	args = append(args, effect.JSObject())
+
+	n.p.Call("bindBuffers", args...)
+}
+
+// NullEngineBindFramebufferOpts contains optional parameters for NullEngine.BindFramebuffer.
+type NullEngineBindFramebufferOpts struct {
+	FaceIndex               *float64
+	RequiredWidth           *float64
+	RequiredHeight          *float64
+	ForceFullscreenViewport *bool
+}
+
+// BindFramebuffer calls the BindFramebuffer method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#bindframebuffer
+func (n *NullEngine) BindFramebuffer(texture *InternalTexture, opts *NullEngineBindFramebufferOpts) {
+	if opts == nil {
+		opts = &NullEngineBindFramebufferOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+4)
+
+	args = append(args, texture.JSObject())
+
+	if opts.FaceIndex == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FaceIndex)
+	}
+	if opts.RequiredWidth == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RequiredWidth)
+	}
+	if opts.RequiredHeight == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RequiredHeight)
+	}
+	if opts.ForceFullscreenViewport == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceFullscreenViewport)
+	}
+
+	n.p.Call("bindFramebuffer", args...)
+}
+
+// BindMultiviewFramebuffer calls the BindMultiviewFramebuffer method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#bindmultiviewframebuffer
+func (n *NullEngine) BindMultiviewFramebuffer(multiviewTexture *InternalTexture) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, multiviewTexture.JSObject())
+
+	n.p.Call("bindMultiviewFramebuffer", args...)
+}
+
+// BindSamplers calls the BindSamplers method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#bindsamplers
+func (n *NullEngine) BindSamplers(effect *Effect) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, effect.JSObject())
+
+	n.p.Call("bindSamplers", args...)
+}
+
+// BindTransformFeedback calls the BindTransformFeedback method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#bindtransformfeedback
+func (n *NullEngine) BindTransformFeedback(value *WebGLTransformFeedback) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, value.JSObject())
+
+	n.p.Call("bindTransformFeedback", args...)
+}
+
+// BindTransformFeedbackBuffer calls the BindTransformFeedbackBuffer method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#bindtransformfeedbackbuffer
+func (n *NullEngine) BindTransformFeedbackBuffer(value *DataBuffer) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, value.JSObject())
+
+	n.p.Call("bindTransformFeedbackBuffer", args...)
+}
+
+// BindUniformBlock calls the BindUniformBlock method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#binduniformblock
+func (n *NullEngine) BindUniformBlock(pipelineContext *IPipelineContext, blockName string, index float64) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, pipelineContext.JSObject())
+	args = append(args, blockName)
+	args = append(args, index)
+
+	n.p.Call("bindUniformBlock", args...)
+}
+
+// BindUniformBuffer calls the BindUniformBuffer method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#binduniformbuffer
+func (n *NullEngine) BindUniformBuffer(buffer *DataBuffer) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, buffer.JSObject())
+
+	n.p.Call("bindUniformBuffer", args...)
+}
+
+// BindUniformBufferBase calls the BindUniformBufferBase method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#binduniformbufferbase
+func (n *NullEngine) BindUniformBufferBase(buffer *DataBuffer, location float64) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, buffer.JSObject())
+	args = append(args, location)
+
+	n.p.Call("bindUniformBufferBase", args...)
+}
+
+// CacheStencilState calls the CacheStencilState method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#cachestencilstate
+func (n *NullEngine) CacheStencilState() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	n.p.Call("cacheStencilState", args...)
+}
+
+// NullEngineClearOpts contains optional parameters for NullEngine.Clear.
+type NullEngineClearOpts struct {
+	Stencil *bool
+}
+
+// Clear calls the Clear method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#clear
+func (n *NullEngine) Clear(color *IColor4Like, backBuffer bool, depth bool, opts *NullEngineClearOpts) {
+	if opts == nil {
+		opts = &NullEngineClearOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, color.JSObject())
+	args = append(args, backBuffer)
+	args = append(args, depth)
+
+	if opts.Stencil == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Stencil)
+	}
+
+	n.p.Call("clear", args...)
+}
+
+// CreateDynamicUniformBuffer calls the CreateDynamicUniformBuffer method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#createdynamicuniformbuffer
+func (n *NullEngine) CreateDynamicUniformBuffer(elements js.Value) *DataBuffer {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, elements)
+
+	retVal := n.p.Call("createDynamicUniformBuffer", args...)
+	return DataBufferFromJSObject(retVal, n.ctx)
+}
+
+// CreateDynamicVertexBuffer calls the CreateDynamicVertexBuffer method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#createdynamicvertexbuffer
+func (n *NullEngine) CreateDynamicVertexBuffer(vertices js.Value) *DataBuffer {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, vertices)
+
+	retVal := n.p.Call("createDynamicVertexBuffer", args...)
+	return DataBufferFromJSObject(retVal, n.ctx)
+}
+
+// NullEngineCreateEffectForParticlesOpts contains optional parameters for NullEngine.CreateEffectForParticles.
+type NullEngineCreateEffectForParticlesOpts struct {
+	Fallbacks  *EffectFallbacks
+	OnCompiled *func()
+	OnError    *func()
+}
+
+// CreateEffectForParticles calls the CreateEffectForParticles method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#createeffectforparticles
+func (n *NullEngine) CreateEffectForParticles(fragmentName string, uniformsNames string, samplers string, defines string, opts *NullEngineCreateEffectForParticlesOpts) *Effect {
+	if opts == nil {
+		opts = &NullEngineCreateEffectForParticlesOpts{}
+	}
+
+	args := make([]interface{}, 0, 4+3)
+
+	args = append(args, fragmentName)
+	args = append(args, uniformsNames)
+	args = append(args, samplers)
+	args = append(args, defines)
+
+	if opts.Fallbacks == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Fallbacks.JSObject())
+	}
+	if opts.OnCompiled == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnCompiled)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+
+	retVal := n.p.Call("createEffectForParticles", args...)
+	return EffectFromJSObject(retVal, n.ctx)
+}
+
+// CreateIndexBuffer calls the CreateIndexBuffer method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#createindexbuffer
+func (n *NullEngine) CreateIndexBuffer(indices js.Value) *DataBuffer {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, indices)
+
+	retVal := n.p.Call("createIndexBuffer", args...)
+	return DataBufferFromJSObject(retVal, n.ctx)
+}
+
+// CreateInstancesBuffer calls the CreateInstancesBuffer method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#createinstancesbuffer
+func (n *NullEngine) CreateInstancesBuffer(capacity float64) *DataBuffer {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, capacity)
+
+	retVal := n.p.Call("createInstancesBuffer", args...)
+	return DataBufferFromJSObject(retVal, n.ctx)
+}
+
+// CreateMultiviewRenderTargetTexture calls the CreateMultiviewRenderTargetTexture method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#createmultiviewrendertargettexture
+func (n *NullEngine) CreateMultiviewRenderTargetTexture(width float64, height float64) *InternalTexture {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, width)
+	args = append(args, height)
+
+	retVal := n.p.Call("createMultiviewRenderTargetTexture", args...)
+	return InternalTextureFromJSObject(retVal, n.ctx)
+}
+
+// CreateQuery calls the CreateQuery method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#createquery
+func (n *NullEngine) CreateQuery() *WebGLQuery {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("createQuery", args...)
+	return WebGLQueryFromJSObject(retVal, n.ctx)
+}
+
+// CreateRawCubeTexture calls the CreateRawCubeTexture method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#createrawcubetexture
+func (n *NullEngine) CreateRawCubeTexture(data js.Value, size float64, format float64, jsType float64, generateMipMaps bool, invertY bool, samplingMode float64, compression string) *InternalTexture {
+
+	args := make([]interface{}, 0, 8+0)
+
+	args = append(args, data)
+	args = append(args, size)
+	args = append(args, format)
+	args = append(args, jsType)
+	args = append(args, generateMipMaps)
+	args = append(args, invertY)
+	args = append(args, samplingMode)
+	args = append(args, compression)
+
+	retVal := n.p.Call("createRawCubeTexture", args...)
+	return InternalTextureFromJSObject(retVal, n.ctx)
+}
+
+// CreateRawCubeTextureFromUrl calls the CreateRawCubeTextureFromUrl method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#createrawcubetexturefromurl
+func (n *NullEngine) CreateRawCubeTextureFromUrl(url string, scene *Scene, size float64, format float64, jsType float64, noMipmap bool, callback func(), mipmapGenerator func(), onLoad func(), onError func(), samplingMode float64, invertY bool) *InternalTexture {
+
+	args := make([]interface{}, 0, 12+0)
+
+	args = append(args, url)
+	args = append(args, scene.JSObject())
+	args = append(args, size)
+	args = append(args, format)
+	args = append(args, jsType)
+	args = append(args, noMipmap)
+	args = append(args, callback)
+	args = append(args, mipmapGenerator)
+	args = append(args, onLoad)
+	args = append(args, onError)
+	args = append(args, samplingMode)
+	args = append(args, invertY)
+
+	retVal := n.p.Call("createRawCubeTextureFromUrl", args...)
+	return InternalTextureFromJSObject(retVal, n.ctx)
+}
+
+// CreateRawTexture calls the CreateRawTexture method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#createrawtexture
+func (n *NullEngine) CreateRawTexture(data js.Value, width float64, height float64, format float64, generateMipMaps bool, invertY bool, samplingMode float64, compression string, jsType float64) *InternalTexture {
+
+	args := make([]interface{}, 0, 9+0)
+
+	args = append(args, data)
+	args = append(args, width)
+	args = append(args, height)
+	args = append(args, format)
+	args = append(args, generateMipMaps)
+	args = append(args, invertY)
+	args = append(args, samplingMode)
+	args = append(args, compression)
+	args = append(args, jsType)
+
+	retVal := n.p.Call("createRawTexture", args...)
+	return InternalTextureFromJSObject(retVal, n.ctx)
+}
+
+// CreateRawTexture2DArray calls the CreateRawTexture2DArray method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#createrawtexture2darray
+func (n *NullEngine) CreateRawTexture2DArray(data js.Value, width float64, height float64, depth float64, format float64, generateMipMaps bool, invertY bool, samplingMode float64, compression string, textureType float64) *InternalTexture {
+
+	args := make([]interface{}, 0, 10+0)
+
+	args = append(args, data)
+	args = append(args, width)
+	args = append(args, height)
+	args = append(args, depth)
+	args = append(args, format)
+	args = append(args, generateMipMaps)
+	args = append(args, invertY)
+	args = append(args, samplingMode)
+	args = append(args, compression)
+	args = append(args, textureType)
+
+	retVal := n.p.Call("createRawTexture2DArray", args...)
+	return InternalTextureFromJSObject(retVal, n.ctx)
+}
+
+// CreateRawTexture3D calls the CreateRawTexture3D method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#createrawtexture3d
+func (n *NullEngine) CreateRawTexture3D(data js.Value, width float64, height float64, depth float64, format float64, generateMipMaps bool, invertY bool, samplingMode float64, compression string, textureType float64) *InternalTexture {
+
+	args := make([]interface{}, 0, 10+0)
+
+	args = append(args, data)
+	args = append(args, width)
+	args = append(args, height)
+	args = append(args, depth)
+	args = append(args, format)
+	args = append(args, generateMipMaps)
+	args = append(args, invertY)
+	args = append(args, samplingMode)
+	args = append(args, compression)
+	args = append(args, textureType)
+
+	retVal := n.p.Call("createRawTexture3D", args...)
+	return InternalTextureFromJSObject(retVal, n.ctx)
+}
+
+// CreateRenderTargetTexture calls the CreateRenderTargetTexture method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#createrendertargettexture
+func (n *NullEngine) CreateRenderTargetTexture(size interface{}, options bool) *InternalTexture {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, size)
+	args = append(args, options)
+
+	retVal := n.p.Call("createRenderTargetTexture", args...)
+	return InternalTextureFromJSObject(retVal, n.ctx)
+}
+
+// NullEngineCreateShaderProgramOpts contains optional parameters for NullEngine.CreateShaderProgram.
+type NullEngineCreateShaderProgramOpts struct {
+	Context js.Value
+}
+
+// CreateShaderProgram calls the CreateShaderProgram method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#createshaderprogram
+func (n *NullEngine) CreateShaderProgram(pipelineContext *IPipelineContext, vertexCode string, fragmentCode string, defines string, opts *NullEngineCreateShaderProgramOpts) *WebGLProgram {
+	if opts == nil {
+		opts = &NullEngineCreateShaderProgramOpts{}
+	}
+
+	args := make([]interface{}, 0, 4+1)
+
+	args = append(args, pipelineContext.JSObject())
+	args = append(args, vertexCode)
+	args = append(args, fragmentCode)
+	args = append(args, defines)
+
+	if opts.Context == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Context)
+	}
+
+	retVal := n.p.Call("createShaderProgram", args...)
+	return WebGLProgramFromJSObject(retVal, n.ctx)
+}
+
+// NullEngineCreateTextureOpts contains optional parameters for NullEngine.CreateTexture.
+type NullEngineCreateTextureOpts struct {
+	SamplingMode *float64
+	OnLoad       *func()
+	OnError      *func()
+	Buffer       js.Value
+	FallBack     *InternalTexture
+	Format       *float64
+}
+
+// CreateTexture calls the CreateTexture method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#createtexture
+func (n *NullEngine) CreateTexture(urlArg string, noMipmap bool, invertY bool, scene *Scene, opts *NullEngineCreateTextureOpts) *InternalTexture {
+	if opts == nil {
+		opts = &NullEngineCreateTextureOpts{}
+	}
+
+	args := make([]interface{}, 0, 4+6)
+
+	args = append(args, urlArg)
+	args = append(args, noMipmap)
+	args = append(args, invertY)
+	args = append(args, scene.JSObject())
+
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+	if opts.OnLoad == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnLoad)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+	if opts.Buffer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Buffer)
+	}
+	if opts.FallBack == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.FallBack.JSObject())
+	}
+	if opts.Format == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Format)
+	}
+
+	retVal := n.p.Call("createTexture", args...)
+	return InternalTextureFromJSObject(retVal, n.ctx)
+}
+
+// CreateTransformFeedback calls the CreateTransformFeedback method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#createtransformfeedback
+func (n *NullEngine) CreateTransformFeedback() *WebGLTransformFeedback {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("createTransformFeedback", args...)
+	return WebGLTransformFeedbackFromJSObject(retVal, n.ctx)
+}
+
+// CreateUniformBuffer calls the CreateUniformBuffer method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#createuniformbuffer
+func (n *NullEngine) CreateUniformBuffer(elements js.Value) *DataBuffer {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, elements)
+
+	retVal := n.p.Call("createUniformBuffer", args...)
+	return DataBufferFromJSObject(retVal, n.ctx)
+}
+
+// CreateVertexBuffer calls the CreateVertexBuffer method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#createvertexbuffer
+func (n *NullEngine) CreateVertexBuffer(vertices js.Value) *DataBuffer {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, vertices)
+
+	retVal := n.p.Call("createVertexBuffer", args...)
+	return DataBufferFromJSObject(retVal, n.ctx)
+}
+
+// DefaultLoadingScreenFactory calls the DefaultLoadingScreenFactory method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#defaultloadingscreenfactory
+func (n *NullEngine) DefaultLoadingScreenFactory(canvas js.Value) *ILoadingScreen {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, canvas)
+
+	retVal := n.p.Call("DefaultLoadingScreenFactory", args...)
+	return ILoadingScreenFromJSObject(retVal, n.ctx)
+}
+
+// DeleteInstancesBuffer calls the DeleteInstancesBuffer method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#deleteinstancesbuffer
+func (n *NullEngine) DeleteInstancesBuffer(buffer *WebGLBuffer) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, buffer.JSObject())
+
+	n.p.Call("deleteInstancesBuffer", args...)
+}
+
+// DeleteQuery calls the DeleteQuery method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#deletequery
+func (n *NullEngine) DeleteQuery(query *WebGLQuery) *Engine {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, query.JSObject())
+
+	retVal := n.p.Call("deleteQuery", args...)
+	return EngineFromJSObject(retVal, n.ctx)
+}
+
+// DeleteTransformFeedback calls the DeleteTransformFeedback method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#deletetransformfeedback
+func (n *NullEngine) DeleteTransformFeedback(value *WebGLTransformFeedback) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, value.JSObject())
+
+	n.p.Call("deleteTransformFeedback", args...)
+}
+
+// DisableScissor calls the DisableScissor method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#disablescissor
+func (n *NullEngine) DisableScissor() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	n.p.Call("disableScissor", args...)
+}
+
+// DisableVR calls the DisableVR method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#disablevr
+func (n *NullEngine) DisableVR() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	n.p.Call("disableVR", args...)
+}
+
+// DisplayLoadingUI calls the DisplayLoadingUI method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#displayloadingui
+func (n *NullEngine) DisplayLoadingUI() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	n.p.Call("displayLoadingUI", args...)
+}
+
+// Dispose calls the Dispose method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#dispose
+func (n *NullEngine) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	n.p.Call("dispose", args...)
+}
+
+// NullEngineDrawOpts contains optional parameters for NullEngine.Draw.
+type NullEngineDrawOpts struct {
+	InstancesCount *float64
+}
+
+// Draw calls the Draw method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#draw
+func (n *NullEngine) Draw(useTriangles bool, indexStart float64, indexCount float64, opts *NullEngineDrawOpts) {
+	if opts == nil {
+		opts = &NullEngineDrawOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, useTriangles)
+	args = append(args, indexStart)
+	args = append(args, indexCount)
+
+	if opts.InstancesCount == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.InstancesCount)
+	}
+
+	n.p.Call("draw", args...)
+}
+
+// NullEngineDrawArraysTypeOpts contains optional parameters for NullEngine.DrawArraysType.
+type NullEngineDrawArraysTypeOpts struct {
+	InstancesCount *float64
+}
+
+// DrawArraysType calls the DrawArraysType method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#drawarraystype
+func (n *NullEngine) DrawArraysType(fillMode float64, verticesStart float64, verticesCount float64, opts *NullEngineDrawArraysTypeOpts) {
+	if opts == nil {
+		opts = &NullEngineDrawArraysTypeOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, fillMode)
+	args = append(args, verticesStart)
+	args = append(args, verticesCount)
+
+	if opts.InstancesCount == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.InstancesCount)
+	}
+
+	n.p.Call("drawArraysType", args...)
+}
+
+// NullEngineDrawElementsTypeOpts contains optional parameters for NullEngine.DrawElementsType.
+type NullEngineDrawElementsTypeOpts struct {
+	InstancesCount *float64
+}
+
+// DrawElementsType calls the DrawElementsType method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#drawelementstype
+func (n *NullEngine) DrawElementsType(fillMode float64, indexStart float64, indexCount float64, opts *NullEngineDrawElementsTypeOpts) {
+	if opts == nil {
+		opts = &NullEngineDrawElementsTypeOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, fillMode)
+	args = append(args, indexStart)
+	args = append(args, indexCount)
+
+	if opts.InstancesCount == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.InstancesCount)
+	}
+
+	n.p.Call("drawElementsType", args...)
+}
+
+// EnableEffect calls the EnableEffect method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#enableeffect
+func (n *NullEngine) EnableEffect(effect *Effect) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, effect.JSObject())
+
+	n.p.Call("enableEffect", args...)
+}
+
+// EnableScissor calls the EnableScissor method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#enablescissor
+func (n *NullEngine) EnableScissor(x float64, y float64, width float64, height float64) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, x)
+	args = append(args, y)
+	args = append(args, width)
+	args = append(args, height)
+
+	n.p.Call("enableScissor", args...)
+}
+
+// EnableVR calls the EnableVR method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#enablevr
+func (n *NullEngine) EnableVR(options *WebVROptions) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, options.JSObject())
+
+	n.p.Call("enableVR", args...)
+}
+
+// EndFrame calls the EndFrame method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#endframe
+func (n *NullEngine) EndFrame() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	n.p.Call("endFrame", args...)
+}
+
+// EndOcclusionQuery calls the EndOcclusionQuery method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#endocclusionquery
+func (n *NullEngine) EndOcclusionQuery(algorithmType float64) *Engine {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, algorithmType)
+
+	retVal := n.p.Call("endOcclusionQuery", args...)
+	return EngineFromJSObject(retVal, n.ctx)
+}
+
+// EndTimeQuery calls the EndTimeQuery method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#endtimequery
+func (n *NullEngine) EndTimeQuery(token *_TimeToken) *int {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, token.JSObject())
+
+	retVal := n.p.Call("endTimeQuery", args...)
+	return intFromJSObject(retVal, n.ctx)
+}
+
+// EndTransformFeedback calls the EndTransformFeedback method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#endtransformfeedback
+func (n *NullEngine) EndTransformFeedback() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	n.p.Call("endTransformFeedback", args...)
+}
+
+// EnterFullscreen calls the EnterFullscreen method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#enterfullscreen
+func (n *NullEngine) EnterFullscreen(requestPointerLock bool) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, requestPointerLock)
+
+	n.p.Call("enterFullscreen", args...)
+}
+
+// EnterPointerlock calls the EnterPointerlock method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#enterpointerlock
+func (n *NullEngine) EnterPointerlock() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	n.p.Call("enterPointerlock", args...)
+}
+
+// ExitFullscreen calls the ExitFullscreen method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#exitfullscreen
+func (n *NullEngine) ExitFullscreen() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	n.p.Call("exitFullscreen", args...)
+}
+
+// ExitPointerlock calls the ExitPointerlock method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#exitpointerlock
+func (n *NullEngine) ExitPointerlock() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	n.p.Call("exitPointerlock", args...)
+}
+
+// GenerateMipMapsForCubemap calls the GenerateMipMapsForCubemap method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#generatemipmapsforcubemap
+func (n *NullEngine) GenerateMipMapsForCubemap(texture *InternalTexture) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, texture.JSObject())
+
+	n.p.Call("generateMipMapsForCubemap", args...)
+}
+
+// GetAlphaEquation calls the GetAlphaEquation method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#getalphaequation
+func (n *NullEngine) GetAlphaEquation() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getAlphaEquation", args...)
+	return retVal.Float()
+}
+
+// GetAlphaMode calls the GetAlphaMode method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#getalphamode
+func (n *NullEngine) GetAlphaMode() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getAlphaMode", args...)
+	return retVal.Float()
+}
+
+// NullEngineGetAspectRatioOpts contains optional parameters for NullEngine.GetAspectRatio.
+type NullEngineGetAspectRatioOpts struct {
+	UseScreen *bool
+}
+
+// GetAspectRatio calls the GetAspectRatio method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#getaspectratio
+func (n *NullEngine) GetAspectRatio(viewportOwner *IViewportOwnerLike, opts *NullEngineGetAspectRatioOpts) float64 {
+	if opts == nil {
+		opts = &NullEngineGetAspectRatioOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, viewportOwner.JSObject())
+
+	if opts.UseScreen == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseScreen)
+	}
+
+	retVal := n.p.Call("getAspectRatio", args...)
+	return retVal.Float()
+}
+
+// GetAttributes calls the GetAttributes method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#getattributes
+func (n *NullEngine) GetAttributes(pipelineContext *IPipelineContext, attributesNames string) float64 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, pipelineContext.JSObject())
+	args = append(args, attributesNames)
+
+	retVal := n.p.Call("getAttributes", args...)
+	return retVal.Float()
+}
+
+// GetColorWrite calls the GetColorWrite method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#getcolorwrite
+func (n *NullEngine) GetColorWrite() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getColorWrite", args...)
+	return retVal.Bool()
+}
+
+// GetDeltaTime calls the GetDeltaTime method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#getdeltatime
+func (n *NullEngine) GetDeltaTime() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getDeltaTime", args...)
+	return retVal.Float()
+}
+
+// GetDepthFunction calls the GetDepthFunction method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#getdepthfunction
+func (n *NullEngine) GetDepthFunction() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getDepthFunction", args...)
+	return retVal.Float()
+}
+
+// GetDepthWrite calls the GetDepthWrite method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#getdepthwrite
+func (n *NullEngine) GetDepthWrite() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getDepthWrite", args...)
+	return retVal.Bool()
+}
+
+// GetFps calls the GetFps method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#getfps
+func (n *NullEngine) GetFps() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getFps", args...)
+	return retVal.Float()
+}
+
+// GetFragmentShaderSource calls the GetFragmentShaderSource method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#getfragmentshadersource
+func (n *NullEngine) GetFragmentShaderSource(program *WebGLProgram) string {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, program.JSObject())
+
+	retVal := n.p.Call("getFragmentShaderSource", args...)
+	return retVal.String()
+}
+
+// GetHardwareScalingLevel calls the GetHardwareScalingLevel method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#gethardwarescalinglevel
+func (n *NullEngine) GetHardwareScalingLevel() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getHardwareScalingLevel", args...)
+	return retVal.Float()
+}
+
+// GetInputElement calls the GetInputElement method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#getinputelement
+func (n *NullEngine) GetInputElement() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getInputElement", args...)
+	return retVal
+}
+
+// GetInputElementClientRect calls the GetInputElementClientRect method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#getinputelementclientrect
+func (n *NullEngine) GetInputElementClientRect() *ClientRect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getInputElementClientRect", args...)
+	return ClientRectFromJSObject(retVal, n.ctx)
+}
+
+// GetLockstepMaxSteps calls the GetLockstepMaxSteps method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#getlockstepmaxsteps
+func (n *NullEngine) GetLockstepMaxSteps() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getLockstepMaxSteps", args...)
+	return retVal.Float()
+}
+
+// GetQueryResult calls the GetQueryResult method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#getqueryresult
+func (n *NullEngine) GetQueryResult(query *WebGLQuery) float64 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, query.JSObject())
+
+	retVal := n.p.Call("getQueryResult", args...)
+	return retVal.Float()
+}
+
+// NullEngineGetRenderHeightOpts contains optional parameters for NullEngine.GetRenderHeight.
+type NullEngineGetRenderHeightOpts struct {
+	UseScreen *bool
+}
+
+// GetRenderHeight calls the GetRenderHeight method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#getrenderheight
+func (n *NullEngine) GetRenderHeight(opts *NullEngineGetRenderHeightOpts) float64 {
+	if opts == nil {
+		opts = &NullEngineGetRenderHeightOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.UseScreen == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseScreen)
+	}
+
+	retVal := n.p.Call("getRenderHeight", args...)
+	return retVal.Float()
+}
+
+// NullEngineGetRenderWidthOpts contains optional parameters for NullEngine.GetRenderWidth.
+type NullEngineGetRenderWidthOpts struct {
+	UseScreen *bool
+}
+
+// GetRenderWidth calls the GetRenderWidth method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#getrenderwidth
+func (n *NullEngine) GetRenderWidth(opts *NullEngineGetRenderWidthOpts) float64 {
+	if opts == nil {
+		opts = &NullEngineGetRenderWidthOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.UseScreen == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseScreen)
+	}
+
+	retVal := n.p.Call("getRenderWidth", args...)
+	return retVal.Float()
+}
+
+// GetRenderingCanvasClientRect calls the GetRenderingCanvasClientRect method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#getrenderingcanvasclientrect
+func (n *NullEngine) GetRenderingCanvasClientRect() *ClientRect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getRenderingCanvasClientRect", args...)
+	return ClientRectFromJSObject(retVal, n.ctx)
+}
+
+// GetScreenAspectRatio calls the GetScreenAspectRatio method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#getscreenaspectratio
+func (n *NullEngine) GetScreenAspectRatio() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getScreenAspectRatio", args...)
+	return retVal.Float()
+}
+
+// GetStencilBuffer calls the GetStencilBuffer method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#getstencilbuffer
+func (n *NullEngine) GetStencilBuffer() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getStencilBuffer", args...)
+	return retVal.Bool()
+}
+
+// GetStencilFunction calls the GetStencilFunction method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#getstencilfunction
+func (n *NullEngine) GetStencilFunction() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getStencilFunction", args...)
+	return retVal.Float()
+}
+
+// GetStencilFunctionMask calls the GetStencilFunctionMask method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#getstencilfunctionmask
+func (n *NullEngine) GetStencilFunctionMask() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getStencilFunctionMask", args...)
+	return retVal.Float()
+}
+
+// GetStencilFunctionReference calls the GetStencilFunctionReference method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#getstencilfunctionreference
+func (n *NullEngine) GetStencilFunctionReference() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getStencilFunctionReference", args...)
+	return retVal.Float()
+}
+
+// GetStencilMask calls the GetStencilMask method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#getstencilmask
+func (n *NullEngine) GetStencilMask() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getStencilMask", args...)
+	return retVal.Float()
+}
+
+// GetStencilOperationDepthFail calls the GetStencilOperationDepthFail method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#getstenciloperationdepthfail
+func (n *NullEngine) GetStencilOperationDepthFail() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getStencilOperationDepthFail", args...)
+	return retVal.Float()
+}
+
+// GetStencilOperationFail calls the GetStencilOperationFail method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#getstenciloperationfail
+func (n *NullEngine) GetStencilOperationFail() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getStencilOperationFail", args...)
+	return retVal.Float()
+}
+
+// GetStencilOperationPass calls the GetStencilOperationPass method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#getstenciloperationpass
+func (n *NullEngine) GetStencilOperationPass() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getStencilOperationPass", args...)
+	return retVal.Float()
+}
+
+// GetTimeStep calls the GetTimeStep method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#gettimestep
+func (n *NullEngine) GetTimeStep() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getTimeStep", args...)
+	return retVal.Float()
+}
+
+// GetUniforms calls the GetUniforms method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#getuniforms
+func (n *NullEngine) GetUniforms(pipelineContext *IPipelineContext, uniformsNames string) *WebGLUniformLocation {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, pipelineContext.JSObject())
+	args = append(args, uniformsNames)
+
+	retVal := n.p.Call("getUniforms", args...)
+	return WebGLUniformLocationFromJSObject(retVal, n.ctx)
+}
+
+// GetVRDevice calls the GetVRDevice method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#getvrdevice
+func (n *NullEngine) GetVRDevice() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getVRDevice", args...)
+	return retVal
+}
+
+// GetVertexShaderSource calls the GetVertexShaderSource method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#getvertexshadersource
+func (n *NullEngine) GetVertexShaderSource(program *WebGLProgram) string {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, program.JSObject())
+
+	retVal := n.p.Call("getVertexShaderSource", args...)
+	return retVal.String()
+}
+
+// GetZOffset calls the GetZOffset method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#getzoffset
+func (n *NullEngine) GetZOffset() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getZOffset", args...)
+	return retVal.Float()
+}
+
+// HideLoadingUI calls the HideLoadingUI method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#hideloadingui
+func (n *NullEngine) HideLoadingUI() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	n.p.Call("hideLoadingUI", args...)
+}
+
+// InitWebVR calls the InitWebVR method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#initwebvr
+func (n *NullEngine) InitWebVR() *IDisplayChangedEventArgs {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("initWebVR", args...)
+	return IDisplayChangedEventArgsFromJSObject(retVal, n.ctx)
+}
+
+// InitWebVRAsync calls the InitWebVRAsync method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#initwebvrasync
+func (n *NullEngine) InitWebVRAsync() *IDisplayChangedEventArgs {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("initWebVRAsync", args...)
+	return IDisplayChangedEventArgsFromJSObject(retVal, n.ctx)
+}
+
+// IsDeterministicLockStep calls the IsDeterministicLockStep method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#isdeterministiclockstep
+func (n *NullEngine) IsDeterministicLockStep() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("isDeterministicLockStep", args...)
+	return retVal.Bool()
+}
+
+// IsQueryResultAvailable calls the IsQueryResultAvailable method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#isqueryresultavailable
+func (n *NullEngine) IsQueryResultAvailable(query *WebGLQuery) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, query.JSObject())
+
+	retVal := n.p.Call("isQueryResultAvailable", args...)
+	return retVal.Bool()
+}
+
+// IsVRDevicePresent calls the IsVRDevicePresent method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#isvrdevicepresent
+func (n *NullEngine) IsVRDevicePresent() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("isVRDevicePresent", args...)
+	return retVal.Bool()
+}
+
+// IsVRPresenting calls the IsVRPresenting method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#isvrpresenting
+func (n *NullEngine) IsVRPresenting() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("isVRPresenting", args...)
+	return retVal.Bool()
+}
+
+// NullEngineMarkAllMaterialsAsDirtyOpts contains optional parameters for NullEngine.MarkAllMaterialsAsDirty.
+type NullEngineMarkAllMaterialsAsDirtyOpts struct {
+	Predicate *func()
+}
+
+// MarkAllMaterialsAsDirty calls the MarkAllMaterialsAsDirty method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#markallmaterialsasdirty
+func (n *NullEngine) MarkAllMaterialsAsDirty(flag float64, opts *NullEngineMarkAllMaterialsAsDirtyOpts) {
+	if opts == nil {
+		opts = &NullEngineMarkAllMaterialsAsDirtyOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, flag)
+
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	n.p.Call("MarkAllMaterialsAsDirty", args...)
+}
+
+// ReadPixels calls the ReadPixels method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#readpixels
+func (n *NullEngine) ReadPixels(x float64, y float64, width float64, height float64) js.Value {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, x)
+	args = append(args, y)
+	args = append(args, width)
+	args = append(args, height)
+
+	retVal := n.p.Call("readPixels", args...)
+	return retVal
+}
+
+// NullEngineRegisterViewOpts contains optional parameters for NullEngine.RegisterView.
+type NullEngineRegisterViewOpts struct {
+	Camera *Camera
+}
+
+// RegisterView calls the RegisterView method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#registerview
+func (n *NullEngine) RegisterView(canvas js.Value, opts *NullEngineRegisterViewOpts) *EngineView {
+	if opts == nil {
+		opts = &NullEngineRegisterViewOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, canvas)
+
+	if opts.Camera == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Camera.JSObject())
+	}
+
+	retVal := n.p.Call("registerView", args...)
+	return EngineViewFromJSObject(retVal, n.ctx)
+}
+
+// ReleaseEffects calls the ReleaseEffects method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#releaseeffects
+func (n *NullEngine) ReleaseEffects() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	n.p.Call("releaseEffects", args...)
+}
+
+// Resize calls the Resize method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#resize
+func (n *NullEngine) Resize() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	n.p.Call("resize", args...)
+}
+
+// RestoreStencilState calls the RestoreStencilState method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#restorestencilstate
+func (n *NullEngine) RestoreStencilState() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	n.p.Call("restoreStencilState", args...)
+}
+
+// ScissorClear calls the ScissorClear method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#scissorclear
+func (n *NullEngine) ScissorClear(x float64, y float64, width float64, height float64, clearColor *IColor4Like) {
+
+	args := make([]interface{}, 0, 5+0)
+
+	args = append(args, x)
+	args = append(args, y)
+	args = append(args, width)
+	args = append(args, height)
+	args = append(args, clearColor.JSObject())
+
+	n.p.Call("scissorClear", args...)
+}
+
+// SetAlphaConstants calls the SetAlphaConstants method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setalphaconstants
+func (n *NullEngine) SetAlphaConstants(r float64, g float64, b float64, a float64) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, r)
+	args = append(args, g)
+	args = append(args, b)
+	args = append(args, a)
+
+	n.p.Call("setAlphaConstants", args...)
+}
+
+// SetAlphaEquation calls the SetAlphaEquation method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setalphaequation
+func (n *NullEngine) SetAlphaEquation(equation float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, equation)
+
+	n.p.Call("setAlphaEquation", args...)
+}
+
+// NullEngineSetAlphaModeOpts contains optional parameters for NullEngine.SetAlphaMode.
+type NullEngineSetAlphaModeOpts struct {
+	NoDepthWriteChange *bool
+}
+
+// SetAlphaMode calls the SetAlphaMode method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setalphamode
+func (n *NullEngine) SetAlphaMode(mode float64, opts *NullEngineSetAlphaModeOpts) {
+	if opts == nil {
+		opts = &NullEngineSetAlphaModeOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, mode)
+
+	if opts.NoDepthWriteChange == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoDepthWriteChange)
+	}
+
+	n.p.Call("setAlphaMode", args...)
+}
+
+// SetArray calls the SetArray method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setarray
+func (n *NullEngine) SetArray(uniform *WebGLUniformLocation, array float64) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniform.JSObject())
+	args = append(args, array)
+
+	n.p.Call("setArray", args...)
+}
+
+// SetArray2 calls the SetArray2 method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setarray2
+func (n *NullEngine) SetArray2(uniform *WebGLUniformLocation, array float64) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniform.JSObject())
+	args = append(args, array)
+
+	n.p.Call("setArray2", args...)
+}
+
+// SetArray3 calls the SetArray3 method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setarray3
+func (n *NullEngine) SetArray3(uniform *WebGLUniformLocation, array float64) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniform.JSObject())
+	args = append(args, array)
+
+	n.p.Call("setArray3", args...)
+}
+
+// SetArray4 calls the SetArray4 method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setarray4
+func (n *NullEngine) SetArray4(uniform *WebGLUniformLocation, array float64) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniform.JSObject())
+	args = append(args, array)
+
+	n.p.Call("setArray4", args...)
+}
+
+// SetBool calls the SetBool method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setbool
+func (n *NullEngine) SetBool(uniform *WebGLUniformLocation, bool float64) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniform.JSObject())
+	args = append(args, bool)
+
+	n.p.Call("setBool", args...)
+}
+
+// SetColorWrite calls the SetColorWrite method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setcolorwrite
+func (n *NullEngine) SetColorWrite(enable bool) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, enable)
+
+	n.p.Call("setColorWrite", args...)
+}
+
+// SetDepthBuffer calls the SetDepthBuffer method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setdepthbuffer
+func (n *NullEngine) SetDepthBuffer(enable bool) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, enable)
+
+	n.p.Call("setDepthBuffer", args...)
+}
+
+// SetDepthFunction calls the SetDepthFunction method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setdepthfunction
+func (n *NullEngine) SetDepthFunction(depthFunc float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, depthFunc)
+
+	n.p.Call("setDepthFunction", args...)
+}
+
+// SetDepthFunctionToGreater calls the SetDepthFunctionToGreater method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setdepthfunctiontogreater
+func (n *NullEngine) SetDepthFunctionToGreater() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	n.p.Call("setDepthFunctionToGreater", args...)
+}
+
+// SetDepthFunctionToGreaterOrEqual calls the SetDepthFunctionToGreaterOrEqual method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setdepthfunctiontogreaterorequal
+func (n *NullEngine) SetDepthFunctionToGreaterOrEqual() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	n.p.Call("setDepthFunctionToGreaterOrEqual", args...)
+}
+
+// SetDepthFunctionToLess calls the SetDepthFunctionToLess method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setdepthfunctiontoless
+func (n *NullEngine) SetDepthFunctionToLess() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	n.p.Call("setDepthFunctionToLess", args...)
+}
+
+// SetDepthFunctionToLessOrEqual calls the SetDepthFunctionToLessOrEqual method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setdepthfunctiontolessorequal
+func (n *NullEngine) SetDepthFunctionToLessOrEqual() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	n.p.Call("setDepthFunctionToLessOrEqual", args...)
+}
+
+// SetDepthStencilTexture calls the SetDepthStencilTexture method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setdepthstenciltexture
+func (n *NullEngine) SetDepthStencilTexture(channel float64, uniform *WebGLUniformLocation, texture *RenderTargetTexture) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, channel)
+	args = append(args, uniform.JSObject())
+	args = append(args, texture.JSObject())
+
+	n.p.Call("setDepthStencilTexture", args...)
+}
+
+// SetDepthWrite calls the SetDepthWrite method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setdepthwrite
+func (n *NullEngine) SetDepthWrite(enable bool) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, enable)
+
+	n.p.Call("setDepthWrite", args...)
+}
+
+// SetDirectViewport calls the SetDirectViewport method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setdirectviewport
+func (n *NullEngine) SetDirectViewport(x float64, y float64, width float64, height float64) *IViewportLike {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, x)
+	args = append(args, y)
+	args = append(args, width)
+	args = append(args, height)
+
+	retVal := n.p.Call("setDirectViewport", args...)
+	return IViewportLikeFromJSObject(retVal, n.ctx)
+}
+
+// SetDitheringState calls the SetDitheringState method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setditheringstate
+func (n *NullEngine) SetDitheringState(value bool) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, value)
+
+	n.p.Call("setDitheringState", args...)
+}
+
+// SetFloat calls the SetFloat method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setfloat
+func (n *NullEngine) SetFloat(uniform *WebGLUniformLocation, value float64) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniform.JSObject())
+	args = append(args, value)
+
+	n.p.Call("setFloat", args...)
+}
+
+// SetFloat2 calls the SetFloat2 method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setfloat2
+func (n *NullEngine) SetFloat2(uniform *WebGLUniformLocation, x float64, y float64) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, uniform.JSObject())
+	args = append(args, x)
+	args = append(args, y)
+
+	n.p.Call("setFloat2", args...)
+}
+
+// SetFloat3 calls the SetFloat3 method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setfloat3
+func (n *NullEngine) SetFloat3(uniform *WebGLUniformLocation, x float64, y float64, z float64) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, uniform.JSObject())
+	args = append(args, x)
+	args = append(args, y)
+	args = append(args, z)
+
+	n.p.Call("setFloat3", args...)
+}
+
+// SetFloat4 calls the SetFloat4 method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setfloat4
+func (n *NullEngine) SetFloat4(uniform *WebGLUniformLocation, x float64, y float64, z float64, w float64) {
+
+	args := make([]interface{}, 0, 5+0)
+
+	args = append(args, uniform.JSObject())
+	args = append(args, x)
+	args = append(args, y)
+	args = append(args, z)
+	args = append(args, w)
+
+	n.p.Call("setFloat4", args...)
+}
+
+// SetFloatArray calls the SetFloatArray method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setfloatarray
+func (n *NullEngine) SetFloatArray(uniform *WebGLUniformLocation, array js.Value) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniform.JSObject())
+	args = append(args, array)
+
+	n.p.Call("setFloatArray", args...)
+}
+
+// SetFloatArray2 calls the SetFloatArray2 method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setfloatarray2
+func (n *NullEngine) SetFloatArray2(uniform *WebGLUniformLocation, array js.Value) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniform.JSObject())
+	args = append(args, array)
+
+	n.p.Call("setFloatArray2", args...)
+}
+
+// SetFloatArray3 calls the SetFloatArray3 method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setfloatarray3
+func (n *NullEngine) SetFloatArray3(uniform *WebGLUniformLocation, array js.Value) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniform.JSObject())
+	args = append(args, array)
+
+	n.p.Call("setFloatArray3", args...)
+}
+
+// SetFloatArray4 calls the SetFloatArray4 method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setfloatarray4
+func (n *NullEngine) SetFloatArray4(uniform *WebGLUniformLocation, array js.Value) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniform.JSObject())
+	args = append(args, array)
+
+	n.p.Call("setFloatArray4", args...)
+}
+
+// SetFrameBufferDepthStencilTexture calls the SetFrameBufferDepthStencilTexture method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setframebufferdepthstenciltexture
+func (n *NullEngine) SetFrameBufferDepthStencilTexture(renderTarget *RenderTargetTexture) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, renderTarget.JSObject())
+
+	n.p.Call("setFrameBufferDepthStencilTexture", args...)
+}
+
+// SetIntArray calls the SetIntArray method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setintarray
+func (n *NullEngine) SetIntArray(uniform *WebGLUniformLocation, array *Int32Array) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniform.JSObject())
+	args = append(args, array.JSObject())
+
+	n.p.Call("setIntArray", args...)
+}
+
+// SetIntArray2 calls the SetIntArray2 method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setintarray2
+func (n *NullEngine) SetIntArray2(uniform *WebGLUniformLocation, array *Int32Array) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniform.JSObject())
+	args = append(args, array.JSObject())
+
+	n.p.Call("setIntArray2", args...)
+}
+
+// SetIntArray3 calls the SetIntArray3 method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setintarray3
+func (n *NullEngine) SetIntArray3(uniform *WebGLUniformLocation, array *Int32Array) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniform.JSObject())
+	args = append(args, array.JSObject())
+
+	n.p.Call("setIntArray3", args...)
+}
+
+// SetIntArray4 calls the SetIntArray4 method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setintarray4
+func (n *NullEngine) SetIntArray4(uniform *WebGLUniformLocation, array *Int32Array) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniform.JSObject())
+	args = append(args, array.JSObject())
+
+	n.p.Call("setIntArray4", args...)
+}
+
+// SetMatrices calls the SetMatrices method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setmatrices
+func (n *NullEngine) SetMatrices(uniform *WebGLUniformLocation, matrices js.Value) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniform.JSObject())
+	args = append(args, matrices)
+
+	n.p.Call("setMatrices", args...)
+}
+
+// SetMatrix2x2 calls the SetMatrix2x2 method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setmatrix2x2
+func (n *NullEngine) SetMatrix2x2(uniform *WebGLUniformLocation, matrix js.Value) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniform.JSObject())
+	args = append(args, matrix)
+
+	n.p.Call("setMatrix2x2", args...)
+}
+
+// SetMatrix3x3 calls the SetMatrix3x3 method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setmatrix3x3
+func (n *NullEngine) SetMatrix3x3(uniform *WebGLUniformLocation, matrix js.Value) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniform.JSObject())
+	args = append(args, matrix)
+
+	n.p.Call("setMatrix3x3", args...)
+}
+
+// SetRasterizerState calls the SetRasterizerState method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setrasterizerstate
+func (n *NullEngine) SetRasterizerState(value bool) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, value)
+
+	n.p.Call("setRasterizerState", args...)
+}
+
+// SetSize calls the SetSize method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setsize
+func (n *NullEngine) SetSize(width float64, height float64) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, width)
+	args = append(args, height)
+
+	n.p.Call("setSize", args...)
+}
+
+// NullEngineSetStateOpts contains optional parameters for NullEngine.SetState.
+type NullEngineSetStateOpts struct {
+	ZOffset     *float64
+	Force       *bool
+	ReverseSide *bool
+}
+
+// SetState calls the SetState method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setstate
+func (n *NullEngine) SetState(culling bool, opts *NullEngineSetStateOpts) {
+	if opts == nil {
+		opts = &NullEngineSetStateOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, culling)
+
+	if opts.ZOffset == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ZOffset)
+	}
+	if opts.Force == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Force)
+	}
+	if opts.ReverseSide == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ReverseSide)
+	}
+
+	n.p.Call("setState", args...)
+}
+
+// SetStencilBuffer calls the SetStencilBuffer method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setstencilbuffer
+func (n *NullEngine) SetStencilBuffer(enable bool) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, enable)
+
+	n.p.Call("setStencilBuffer", args...)
+}
+
+// SetStencilFunction calls the SetStencilFunction method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setstencilfunction
+func (n *NullEngine) SetStencilFunction(stencilFunc float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, stencilFunc)
+
+	n.p.Call("setStencilFunction", args...)
+}
+
+// SetStencilFunctionMask calls the SetStencilFunctionMask method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setstencilfunctionmask
+func (n *NullEngine) SetStencilFunctionMask(mask float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mask)
+
+	n.p.Call("setStencilFunctionMask", args...)
+}
+
+// SetStencilFunctionReference calls the SetStencilFunctionReference method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setstencilfunctionreference
+func (n *NullEngine) SetStencilFunctionReference(reference float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, reference)
+
+	n.p.Call("setStencilFunctionReference", args...)
+}
+
+// SetStencilMask calls the SetStencilMask method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setstencilmask
+func (n *NullEngine) SetStencilMask(mask float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mask)
+
+	n.p.Call("setStencilMask", args...)
+}
+
+// SetStencilOperationDepthFail calls the SetStencilOperationDepthFail method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setstenciloperationdepthfail
+func (n *NullEngine) SetStencilOperationDepthFail(operation float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, operation)
+
+	n.p.Call("setStencilOperationDepthFail", args...)
+}
+
+// SetStencilOperationFail calls the SetStencilOperationFail method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setstenciloperationfail
+func (n *NullEngine) SetStencilOperationFail(operation float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, operation)
+
+	n.p.Call("setStencilOperationFail", args...)
+}
+
+// SetStencilOperationPass calls the SetStencilOperationPass method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setstenciloperationpass
+func (n *NullEngine) SetStencilOperationPass(operation float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, operation)
+
+	n.p.Call("setStencilOperationPass", args...)
+}
+
+// SetTextureFormatToUse calls the SetTextureFormatToUse method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#settextureformattouse
+func (n *NullEngine) SetTextureFormatToUse(formatsAvailable []string) string {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, formatsAvailable)
+
+	retVal := n.p.Call("setTextureFormatToUse", args...)
+	return retVal.String()
+}
+
+// SetTextureFromPostProcess calls the SetTextureFromPostProcess method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#settexturefrompostprocess
+func (n *NullEngine) SetTextureFromPostProcess(channel float64, postProcess *PostProcess) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, channel)
+	args = append(args, postProcess.JSObject())
+
+	n.p.Call("setTextureFromPostProcess", args...)
+}
+
+// SetTextureFromPostProcessOutput calls the SetTextureFromPostProcessOutput method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#settexturefrompostprocessoutput
+func (n *NullEngine) SetTextureFromPostProcessOutput(channel float64, postProcess *PostProcess) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, channel)
+	args = append(args, postProcess.JSObject())
+
+	n.p.Call("setTextureFromPostProcessOutput", args...)
+}
+
+// SetTranformFeedbackVaryings calls the SetTranformFeedbackVaryings method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#settranformfeedbackvaryings
+func (n *NullEngine) SetTranformFeedbackVaryings(program *WebGLProgram, value string) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, program.JSObject())
+	args = append(args, value)
+
+	n.p.Call("setTranformFeedbackVaryings", args...)
+}
+
+// NullEngineSetViewportOpts contains optional parameters for NullEngine.SetViewport.
+type NullEngineSetViewportOpts struct {
+	RequiredWidth  *float64
+	RequiredHeight *float64
+}
+
+// SetViewport calls the SetViewport method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setviewport
+func (n *NullEngine) SetViewport(viewport *IViewportLike, opts *NullEngineSetViewportOpts) {
+	if opts == nil {
+		opts = &NullEngineSetViewportOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, viewport.JSObject())
+
+	if opts.RequiredWidth == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RequiredWidth)
+	}
+	if opts.RequiredHeight == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RequiredHeight)
+	}
+
+	n.p.Call("setViewport", args...)
+}
+
+// SetZOffset calls the SetZOffset method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#setzoffset
+func (n *NullEngine) SetZOffset(value float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, value)
+
+	n.p.Call("setZOffset", args...)
+}
+
+// StartTimeQuery calls the StartTimeQuery method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#starttimequery
+func (n *NullEngine) StartTimeQuery() *_TimeToken {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("startTimeQuery", args...)
+	return _TimeTokenFromJSObject(retVal, n.ctx)
+}
+
+// SwitchFullscreen calls the SwitchFullscreen method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#switchfullscreen
+func (n *NullEngine) SwitchFullscreen(requestPointerLock bool) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, requestPointerLock)
+
+	n.p.Call("switchFullscreen", args...)
+}
+
+// NullEngineUnBindFramebufferOpts contains optional parameters for NullEngine.UnBindFramebuffer.
+type NullEngineUnBindFramebufferOpts struct {
+	DisableGenerateMipMaps *bool
+	OnBeforeUnbind         *func()
+}
+
+// UnBindFramebuffer calls the UnBindFramebuffer method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#unbindframebuffer
+func (n *NullEngine) UnBindFramebuffer(texture *InternalTexture, opts *NullEngineUnBindFramebufferOpts) {
+	if opts == nil {
+		opts = &NullEngineUnBindFramebufferOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, texture.JSObject())
+
+	if opts.DisableGenerateMipMaps == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DisableGenerateMipMaps)
+	}
+	if opts.OnBeforeUnbind == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnBeforeUnbind)
+	}
+
+	n.p.Call("unBindFramebuffer", args...)
+}
+
+// UnRegisterView calls the UnRegisterView method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#unregisterview
+func (n *NullEngine) UnRegisterView(canvas js.Value) *Engine {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, canvas)
+
+	retVal := n.p.Call("unRegisterView", args...)
+	return EngineFromJSObject(retVal, n.ctx)
+}
+
+// NullEngineUpdateDynamicIndexBufferOpts contains optional parameters for NullEngine.UpdateDynamicIndexBuffer.
+type NullEngineUpdateDynamicIndexBufferOpts struct {
+	Offset *float64
+}
+
+// UpdateDynamicIndexBuffer calls the UpdateDynamicIndexBuffer method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#updatedynamicindexbuffer
+func (n *NullEngine) UpdateDynamicIndexBuffer(indexBuffer *WebGLBuffer, indices js.Value, opts *NullEngineUpdateDynamicIndexBufferOpts) {
+	if opts == nil {
+		opts = &NullEngineUpdateDynamicIndexBufferOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, indexBuffer.JSObject())
+	args = append(args, indices)
+
+	if opts.Offset == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Offset)
+	}
+
+	n.p.Call("updateDynamicIndexBuffer", args...)
+}
+
+// NullEngineUpdateDynamicTextureOpts contains optional parameters for NullEngine.UpdateDynamicTexture.
+type NullEngineUpdateDynamicTextureOpts struct {
+	PremulAlpha *bool
+	Format      *float64
+}
+
+// UpdateDynamicTexture calls the UpdateDynamicTexture method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#updatedynamictexture
+func (n *NullEngine) UpdateDynamicTexture(texture *InternalTexture, canvas js.Value, invertY bool, opts *NullEngineUpdateDynamicTextureOpts) {
+	if opts == nil {
+		opts = &NullEngineUpdateDynamicTextureOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+2)
+
+	args = append(args, texture.JSObject())
+	args = append(args, canvas)
+	args = append(args, invertY)
+
+	if opts.PremulAlpha == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.PremulAlpha)
+	}
+	if opts.Format == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Format)
+	}
+
+	n.p.Call("updateDynamicTexture", args...)
+}
+
+// NullEngineUpdateDynamicVertexBufferOpts contains optional parameters for NullEngine.UpdateDynamicVertexBuffer.
+type NullEngineUpdateDynamicVertexBufferOpts struct {
+	ByteOffset *float64
+	ByteLength *float64
+}
+
+// UpdateDynamicVertexBuffer calls the UpdateDynamicVertexBuffer method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#updatedynamicvertexbuffer
+func (n *NullEngine) UpdateDynamicVertexBuffer(vertexBuffer *WebGLBuffer, vertices js.Value, opts *NullEngineUpdateDynamicVertexBufferOpts) {
+	if opts == nil {
+		opts = &NullEngineUpdateDynamicVertexBufferOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+2)
+
+	args = append(args, vertexBuffer.JSObject())
+	args = append(args, vertices)
+
+	if opts.ByteOffset == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ByteOffset)
+	}
+	if opts.ByteLength == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ByteLength)
+	}
+
+	n.p.Call("updateDynamicVertexBuffer", args...)
+}
+
+// UpdateRawCubeTexture calls the UpdateRawCubeTexture method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#updaterawcubetexture
+func (n *NullEngine) UpdateRawCubeTexture(texture *InternalTexture, data js.Value, format float64, jsType float64, invertY bool, compression string, level float64) {
+
+	args := make([]interface{}, 0, 7+0)
+
+	args = append(args, texture.JSObject())
+	args = append(args, data)
+	args = append(args, format)
+	args = append(args, jsType)
+	args = append(args, invertY)
+	args = append(args, compression)
+	args = append(args, level)
+
+	n.p.Call("updateRawCubeTexture", args...)
+}
+
+// UpdateRawTexture calls the UpdateRawTexture method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#updaterawtexture
+func (n *NullEngine) UpdateRawTexture(texture *InternalTexture, data js.Value, format float64, invertY bool, compression string, jsType float64) {
+
+	args := make([]interface{}, 0, 6+0)
+
+	args = append(args, texture.JSObject())
+	args = append(args, data)
+	args = append(args, format)
+	args = append(args, invertY)
+	args = append(args, compression)
+	args = append(args, jsType)
+
+	n.p.Call("updateRawTexture", args...)
+}
+
+// UpdateRawTexture2DArray calls the UpdateRawTexture2DArray method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#updaterawtexture2darray
+func (n *NullEngine) UpdateRawTexture2DArray(texture *InternalTexture, data js.Value, format float64, invertY bool, compression string, textureType float64) {
+
+	args := make([]interface{}, 0, 6+0)
+
+	args = append(args, texture.JSObject())
+	args = append(args, data)
+	args = append(args, format)
+	args = append(args, invertY)
+	args = append(args, compression)
+	args = append(args, textureType)
+
+	n.p.Call("updateRawTexture2DArray", args...)
+}
+
+// UpdateRawTexture3D calls the UpdateRawTexture3D method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#updaterawtexture3d
+func (n *NullEngine) UpdateRawTexture3D(texture *InternalTexture, data js.Value, format float64, invertY bool, compression string, textureType float64) {
+
+	args := make([]interface{}, 0, 6+0)
+
+	args = append(args, texture.JSObject())
+	args = append(args, data)
+	args = append(args, format)
+	args = append(args, invertY)
+	args = append(args, compression)
+	args = append(args, textureType)
+
+	n.p.Call("updateRawTexture3D", args...)
+}
+
+// UpdateRenderTargetTextureSampleCount calls the UpdateRenderTargetTextureSampleCount method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#updaterendertargettexturesamplecount
+func (n *NullEngine) UpdateRenderTargetTextureSampleCount(texture *InternalTexture, samples float64) float64 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, texture.JSObject())
+	args = append(args, samples)
+
+	retVal := n.p.Call("updateRenderTargetTextureSampleCount", args...)
+	return retVal.Float()
+}
+
+// UpdateTextureComparisonFunction calls the UpdateTextureComparisonFunction method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#updatetexturecomparisonfunction
+func (n *NullEngine) UpdateTextureComparisonFunction(texture *InternalTexture, comparisonFunction float64) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, texture.JSObject())
+	args = append(args, comparisonFunction)
+
+	n.p.Call("updateTextureComparisonFunction", args...)
+}
+
+// UpdateTextureSamplingMode calls the UpdateTextureSamplingMode method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#updatetexturesamplingmode
+func (n *NullEngine) UpdateTextureSamplingMode(samplingMode float64, texture *InternalTexture) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, samplingMode)
+	args = append(args, texture.JSObject())
+
+	n.p.Call("updateTextureSamplingMode", args...)
+}
+
+// NullEngineUpdateUniformBufferOpts contains optional parameters for NullEngine.UpdateUniformBuffer.
+type NullEngineUpdateUniformBufferOpts struct {
+	Offset *float64
+	Count  *float64
+}
+
+// UpdateUniformBuffer calls the UpdateUniformBuffer method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#updateuniformbuffer
+func (n *NullEngine) UpdateUniformBuffer(uniformBuffer *DataBuffer, elements js.Value, opts *NullEngineUpdateUniformBufferOpts) {
+	if opts == nil {
+		opts = &NullEngineUpdateUniformBufferOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+2)
+
+	args = append(args, uniformBuffer.JSObject())
+	args = append(args, elements)
+
+	if opts.Offset == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Offset)
+	}
+	if opts.Count == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Count)
+	}
+
+	n.p.Call("updateUniformBuffer", args...)
+}
+
+// NullEngineWipeCachesOpts contains optional parameters for NullEngine.WipeCaches.
+type NullEngineWipeCachesOpts struct {
+	BruteForce *bool
+}
+
+// WipeCaches calls the WipeCaches method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#wipecaches
+func (n *NullEngine) WipeCaches(opts *NullEngineWipeCachesOpts) {
+	if opts == nil {
+		opts = &NullEngineWipeCachesOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.BruteForce == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.BruteForce)
+	}
+
+	n.p.Call("wipeCaches", args...)
+}
+
+// _ExitFullscreen calls the _ExitFullscreen method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#_exitfullscreen
+func (n *NullEngine) _ExitFullscreen() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	n.p.Call("_ExitFullscreen", args...)
+}
+
+// _ExitPointerlock calls the _ExitPointerlock method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#_exitpointerlock
+func (n *NullEngine) _ExitPointerlock() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	n.p.Call("_ExitPointerlock", args...)
+}
+
+// _RequestFullscreen calls the _RequestFullscreen method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#_requestfullscreen
+func (n *NullEngine) _RequestFullscreen(element js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, element)
+
+	n.p.Call("_RequestFullscreen", args...)
+}
+
+// _RequestPointerlock calls the _RequestPointerlock method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#_requestpointerlock
+func (n *NullEngine) _RequestPointerlock(element js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, element)
+
+	n.p.Call("_RequestPointerlock", args...)
+}
+
+// _deletePipelineContext calls the _deletePipelineContext method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#_deletepipelinecontext
+func (n *NullEngine) _deletePipelineContext(pipelineContext *IPipelineContext) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, pipelineContext.JSObject())
+
+	n.p.Call("_deletePipelineContext", args...)
+}
+
+// _renderLoop calls the _renderLoop method on the NullEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#_renderloop
+func (n *NullEngine) _renderLoop() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	n.p.Call("_renderLoop", args...)
+}
+
+/*
+
+// ALPHA_ADD returns the ALPHA_ADD property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#alpha_add
+func (n *NullEngine) ALPHA_ADD(ALPHA_ADD float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(ALPHA_ADD)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetALPHA_ADD sets the ALPHA_ADD property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#alpha_add
+func (n *NullEngine) SetALPHA_ADD(ALPHA_ADD float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(ALPHA_ADD)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// ALPHA_COMBINE returns the ALPHA_COMBINE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#alpha_combine
+func (n *NullEngine) ALPHA_COMBINE(ALPHA_COMBINE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(ALPHA_COMBINE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetALPHA_COMBINE sets the ALPHA_COMBINE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#alpha_combine
+func (n *NullEngine) SetALPHA_COMBINE(ALPHA_COMBINE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(ALPHA_COMBINE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// ALPHA_DISABLE returns the ALPHA_DISABLE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#alpha_disable
+func (n *NullEngine) ALPHA_DISABLE(ALPHA_DISABLE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(ALPHA_DISABLE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetALPHA_DISABLE sets the ALPHA_DISABLE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#alpha_disable
+func (n *NullEngine) SetALPHA_DISABLE(ALPHA_DISABLE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(ALPHA_DISABLE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// ALPHA_INTERPOLATE returns the ALPHA_INTERPOLATE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#alpha_interpolate
+func (n *NullEngine) ALPHA_INTERPOLATE(ALPHA_INTERPOLATE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(ALPHA_INTERPOLATE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetALPHA_INTERPOLATE sets the ALPHA_INTERPOLATE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#alpha_interpolate
+func (n *NullEngine) SetALPHA_INTERPOLATE(ALPHA_INTERPOLATE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(ALPHA_INTERPOLATE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// ALPHA_MAXIMIZED returns the ALPHA_MAXIMIZED property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#alpha_maximized
+func (n *NullEngine) ALPHA_MAXIMIZED(ALPHA_MAXIMIZED float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(ALPHA_MAXIMIZED)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetALPHA_MAXIMIZED sets the ALPHA_MAXIMIZED property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#alpha_maximized
+func (n *NullEngine) SetALPHA_MAXIMIZED(ALPHA_MAXIMIZED float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(ALPHA_MAXIMIZED)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// ALPHA_MULTIPLY returns the ALPHA_MULTIPLY property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#alpha_multiply
+func (n *NullEngine) ALPHA_MULTIPLY(ALPHA_MULTIPLY float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(ALPHA_MULTIPLY)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetALPHA_MULTIPLY sets the ALPHA_MULTIPLY property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#alpha_multiply
+func (n *NullEngine) SetALPHA_MULTIPLY(ALPHA_MULTIPLY float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(ALPHA_MULTIPLY)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// ALPHA_ONEONE returns the ALPHA_ONEONE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#alpha_oneone
+func (n *NullEngine) ALPHA_ONEONE(ALPHA_ONEONE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(ALPHA_ONEONE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetALPHA_ONEONE sets the ALPHA_ONEONE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#alpha_oneone
+func (n *NullEngine) SetALPHA_ONEONE(ALPHA_ONEONE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(ALPHA_ONEONE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// ALPHA_PREMULTIPLIED returns the ALPHA_PREMULTIPLIED property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#alpha_premultiplied
+func (n *NullEngine) ALPHA_PREMULTIPLIED(ALPHA_PREMULTIPLIED float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(ALPHA_PREMULTIPLIED)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetALPHA_PREMULTIPLIED sets the ALPHA_PREMULTIPLIED property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#alpha_premultiplied
+func (n *NullEngine) SetALPHA_PREMULTIPLIED(ALPHA_PREMULTIPLIED float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(ALPHA_PREMULTIPLIED)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// ALPHA_PREMULTIPLIED_PORTERDUFF returns the ALPHA_PREMULTIPLIED_PORTERDUFF property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#alpha_premultiplied_porterduff
+func (n *NullEngine) ALPHA_PREMULTIPLIED_PORTERDUFF(ALPHA_PREMULTIPLIED_PORTERDUFF float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(ALPHA_PREMULTIPLIED_PORTERDUFF)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetALPHA_PREMULTIPLIED_PORTERDUFF sets the ALPHA_PREMULTIPLIED_PORTERDUFF property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#alpha_premultiplied_porterduff
+func (n *NullEngine) SetALPHA_PREMULTIPLIED_PORTERDUFF(ALPHA_PREMULTIPLIED_PORTERDUFF float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(ALPHA_PREMULTIPLIED_PORTERDUFF)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// ALPHA_SCREENMODE returns the ALPHA_SCREENMODE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#alpha_screenmode
+func (n *NullEngine) ALPHA_SCREENMODE(ALPHA_SCREENMODE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(ALPHA_SCREENMODE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetALPHA_SCREENMODE sets the ALPHA_SCREENMODE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#alpha_screenmode
+func (n *NullEngine) SetALPHA_SCREENMODE(ALPHA_SCREENMODE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(ALPHA_SCREENMODE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// ALPHA_SUBTRACT returns the ALPHA_SUBTRACT property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#alpha_subtract
+func (n *NullEngine) ALPHA_SUBTRACT(ALPHA_SUBTRACT float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(ALPHA_SUBTRACT)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetALPHA_SUBTRACT sets the ALPHA_SUBTRACT property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#alpha_subtract
+func (n *NullEngine) SetALPHA_SUBTRACT(ALPHA_SUBTRACT float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(ALPHA_SUBTRACT)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// ALWAYS returns the ALWAYS property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#always
+func (n *NullEngine) ALWAYS(ALWAYS float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(ALWAYS)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetALWAYS sets the ALWAYS property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#always
+func (n *NullEngine) SetALWAYS(ALWAYS float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(ALWAYS)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// ActiveView returns the ActiveView property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#activeview
+func (n *NullEngine) ActiveView(activeView *EngineView) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(activeView.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetActiveView sets the ActiveView property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#activeview
+func (n *NullEngine) SetActiveView(activeView *EngineView) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(activeView.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// AudioEngine returns the AudioEngine property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#audioengine
+func (n *NullEngine) AudioEngine(audioEngine *IAudioEngine) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(audioEngine.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetAudioEngine sets the AudioEngine property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#audioengine
+func (n *NullEngine) SetAudioEngine(audioEngine *IAudioEngine) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(audioEngine.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// AudioEngineFactory returns the AudioEngineFactory property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#audioenginefactory
+func (n *NullEngine) AudioEngineFactory(AudioEngineFactory func()) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(AudioEngineFactory)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetAudioEngineFactory sets the AudioEngineFactory property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#audioenginefactory
+func (n *NullEngine) SetAudioEngineFactory(AudioEngineFactory func()) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(AudioEngineFactory)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// CustomAnimationFrameRequester returns the CustomAnimationFrameRequester property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#customanimationframerequester
+func (n *NullEngine) CustomAnimationFrameRequester(customAnimationFrameRequester *ICustomAnimationFrameRequester) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(customAnimationFrameRequester.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetCustomAnimationFrameRequester sets the CustomAnimationFrameRequester property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#customanimationframerequester
+func (n *NullEngine) SetCustomAnimationFrameRequester(customAnimationFrameRequester *ICustomAnimationFrameRequester) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(customAnimationFrameRequester.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// DECR returns the DECR property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#decr
+func (n *NullEngine) DECR(DECR float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(DECR)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetDECR sets the DECR property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#decr
+func (n *NullEngine) SetDECR(DECR float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(DECR)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// DECR_WRAP returns the DECR_WRAP property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#decr_wrap
+func (n *NullEngine) DECR_WRAP(DECR_WRAP float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(DECR_WRAP)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetDECR_WRAP sets the DECR_WRAP property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#decr_wrap
+func (n *NullEngine) SetDECR_WRAP(DECR_WRAP float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(DECR_WRAP)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// DELAYLOADSTATE_LOADED returns the DELAYLOADSTATE_LOADED property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#delayloadstate_loaded
+func (n *NullEngine) DELAYLOADSTATE_LOADED(DELAYLOADSTATE_LOADED float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(DELAYLOADSTATE_LOADED)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetDELAYLOADSTATE_LOADED sets the DELAYLOADSTATE_LOADED property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#delayloadstate_loaded
+func (n *NullEngine) SetDELAYLOADSTATE_LOADED(DELAYLOADSTATE_LOADED float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(DELAYLOADSTATE_LOADED)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// DELAYLOADSTATE_LOADING returns the DELAYLOADSTATE_LOADING property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#delayloadstate_loading
+func (n *NullEngine) DELAYLOADSTATE_LOADING(DELAYLOADSTATE_LOADING float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(DELAYLOADSTATE_LOADING)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetDELAYLOADSTATE_LOADING sets the DELAYLOADSTATE_LOADING property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#delayloadstate_loading
+func (n *NullEngine) SetDELAYLOADSTATE_LOADING(DELAYLOADSTATE_LOADING float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(DELAYLOADSTATE_LOADING)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// DELAYLOADSTATE_NONE returns the DELAYLOADSTATE_NONE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#delayloadstate_none
+func (n *NullEngine) DELAYLOADSTATE_NONE(DELAYLOADSTATE_NONE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(DELAYLOADSTATE_NONE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetDELAYLOADSTATE_NONE sets the DELAYLOADSTATE_NONE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#delayloadstate_none
+func (n *NullEngine) SetDELAYLOADSTATE_NONE(DELAYLOADSTATE_NONE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(DELAYLOADSTATE_NONE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// DELAYLOADSTATE_NOTLOADED returns the DELAYLOADSTATE_NOTLOADED property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#delayloadstate_notloaded
+func (n *NullEngine) DELAYLOADSTATE_NOTLOADED(DELAYLOADSTATE_NOTLOADED float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(DELAYLOADSTATE_NOTLOADED)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetDELAYLOADSTATE_NOTLOADED sets the DELAYLOADSTATE_NOTLOADED property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#delayloadstate_notloaded
+func (n *NullEngine) SetDELAYLOADSTATE_NOTLOADED(DELAYLOADSTATE_NOTLOADED float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(DELAYLOADSTATE_NOTLOADED)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// DisableManifestCheck returns the DisableManifestCheck property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#disablemanifestcheck
+func (n *NullEngine) DisableManifestCheck(disableManifestCheck bool) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(disableManifestCheck)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetDisableManifestCheck sets the DisableManifestCheck property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#disablemanifestcheck
+func (n *NullEngine) SetDisableManifestCheck(disableManifestCheck bool) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(disableManifestCheck)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// DisablePerformanceMonitorInBackground returns the DisablePerformanceMonitorInBackground property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#disableperformancemonitorinbackground
+func (n *NullEngine) DisablePerformanceMonitorInBackground(disablePerformanceMonitorInBackground bool) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(disablePerformanceMonitorInBackground)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetDisablePerformanceMonitorInBackground sets the DisablePerformanceMonitorInBackground property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#disableperformancemonitorinbackground
+func (n *NullEngine) SetDisablePerformanceMonitorInBackground(disablePerformanceMonitorInBackground bool) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(disablePerformanceMonitorInBackground)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// EQUAL returns the EQUAL property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#equal
+func (n *NullEngine) EQUAL(EQUAL float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(EQUAL)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetEQUAL sets the EQUAL property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#equal
+func (n *NullEngine) SetEQUAL(EQUAL float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(EQUAL)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// EnableOfflineSupport returns the EnableOfflineSupport property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#enableofflinesupport
+func (n *NullEngine) EnableOfflineSupport(enableOfflineSupport bool) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(enableOfflineSupport)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetEnableOfflineSupport sets the EnableOfflineSupport property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#enableofflinesupport
+func (n *NullEngine) SetEnableOfflineSupport(enableOfflineSupport bool) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(enableOfflineSupport)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// GEQUAL returns the GEQUAL property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#gequal
+func (n *NullEngine) GEQUAL(GEQUAL float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(GEQUAL)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetGEQUAL sets the GEQUAL property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#gequal
+func (n *NullEngine) SetGEQUAL(GEQUAL float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(GEQUAL)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// GREATER returns the GREATER property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#greater
+func (n *NullEngine) GREATER(GREATER float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(GREATER)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetGREATER sets the GREATER property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#greater
+func (n *NullEngine) SetGREATER(GREATER float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(GREATER)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// INCR returns the INCR property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#incr
+func (n *NullEngine) INCR(INCR float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(INCR)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetINCR sets the INCR property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#incr
+func (n *NullEngine) SetINCR(INCR float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(INCR)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// INCR_WRAP returns the INCR_WRAP property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#incr_wrap
+func (n *NullEngine) INCR_WRAP(INCR_WRAP float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(INCR_WRAP)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetINCR_WRAP sets the INCR_WRAP property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#incr_wrap
+func (n *NullEngine) SetINCR_WRAP(INCR_WRAP float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(INCR_WRAP)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// INVERT returns the INVERT property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#invert
+func (n *NullEngine) INVERT(INVERT float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(INVERT)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetINVERT sets the INVERT property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#invert
+func (n *NullEngine) SetINVERT(INVERT float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(INVERT)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// InputElement returns the InputElement property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#inputelement
+func (n *NullEngine) InputElement(inputElement js.Value) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(inputElement)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetInputElement sets the InputElement property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#inputelement
+func (n *NullEngine) SetInputElement(inputElement js.Value) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(inputElement)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// Instances returns the Instances property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#instances
+func (n *NullEngine) Instances(Instances *Engine) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(Instances.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetInstances sets the Instances property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#instances
+func (n *NullEngine) SetInstances(Instances *Engine) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(Instances.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// IsInVRExclusivePointerMode returns the IsInVRExclusivePointerMode property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#isinvrexclusivepointermode
+func (n *NullEngine) IsInVRExclusivePointerMode(isInVRExclusivePointerMode bool) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(isInVRExclusivePointerMode)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetIsInVRExclusivePointerMode sets the IsInVRExclusivePointerMode property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#isinvrexclusivepointermode
+func (n *NullEngine) SetIsInVRExclusivePointerMode(isInVRExclusivePointerMode bool) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(isInVRExclusivePointerMode)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// IsPointerLock returns the IsPointerLock property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#ispointerlock
+func (n *NullEngine) IsPointerLock(isPointerLock bool) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(isPointerLock)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetIsPointerLock sets the IsPointerLock property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#ispointerlock
+func (n *NullEngine) SetIsPointerLock(isPointerLock bool) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(isPointerLock)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// KEEP returns the KEEP property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#keep
+func (n *NullEngine) KEEP(KEEP float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(KEEP)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetKEEP sets the KEEP property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#keep
+func (n *NullEngine) SetKEEP(KEEP float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(KEEP)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// LEQUAL returns the LEQUAL property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#lequal
+func (n *NullEngine) LEQUAL(LEQUAL float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(LEQUAL)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetLEQUAL sets the LEQUAL property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#lequal
+func (n *NullEngine) SetLEQUAL(LEQUAL float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(LEQUAL)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// LESS returns the LESS property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#less
+func (n *NullEngine) LESS(LESS float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(LESS)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetLESS sets the LESS property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#less
+func (n *NullEngine) SetLESS(LESS float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(LESS)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// LastCreatedEngine returns the LastCreatedEngine property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#lastcreatedengine
+func (n *NullEngine) LastCreatedEngine(LastCreatedEngine *Engine) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(LastCreatedEngine.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetLastCreatedEngine sets the LastCreatedEngine property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#lastcreatedengine
+func (n *NullEngine) SetLastCreatedEngine(LastCreatedEngine *Engine) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(LastCreatedEngine.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// LastCreatedScene returns the LastCreatedScene property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#lastcreatedscene
+func (n *NullEngine) LastCreatedScene(LastCreatedScene *Scene) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(LastCreatedScene.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetLastCreatedScene sets the LastCreatedScene property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#lastcreatedscene
+func (n *NullEngine) SetLastCreatedScene(LastCreatedScene *Scene) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(LastCreatedScene.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// LoadingScreen returns the LoadingScreen property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#loadingscreen
+func (n *NullEngine) LoadingScreen(loadingScreen *ILoadingScreen) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(loadingScreen.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetLoadingScreen sets the LoadingScreen property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#loadingscreen
+func (n *NullEngine) SetLoadingScreen(loadingScreen *ILoadingScreen) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(loadingScreen.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// LoadingUIBackgroundColor returns the LoadingUIBackgroundColor property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#loadinguibackgroundcolor
+func (n *NullEngine) LoadingUIBackgroundColor(loadingUIBackgroundColor string) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(loadingUIBackgroundColor)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetLoadingUIBackgroundColor sets the LoadingUIBackgroundColor property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#loadinguibackgroundcolor
+func (n *NullEngine) SetLoadingUIBackgroundColor(loadingUIBackgroundColor string) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(loadingUIBackgroundColor)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// LoadingUIText returns the LoadingUIText property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#loadinguitext
+func (n *NullEngine) LoadingUIText(loadingUIText string) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(loadingUIText)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetLoadingUIText sets the LoadingUIText property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#loadinguitext
+func (n *NullEngine) SetLoadingUIText(loadingUIText string) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(loadingUIText)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// NEVER returns the NEVER property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#never
+func (n *NullEngine) NEVER(NEVER float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(NEVER)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetNEVER sets the NEVER property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#never
+func (n *NullEngine) SetNEVER(NEVER float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(NEVER)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// NOTEQUAL returns the NOTEQUAL property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#notequal
+func (n *NullEngine) NOTEQUAL(NOTEQUAL float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(NOTEQUAL)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetNOTEQUAL sets the NOTEQUAL property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#notequal
+func (n *NullEngine) SetNOTEQUAL(NOTEQUAL float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(NOTEQUAL)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// NpmPackage returns the NpmPackage property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#npmpackage
+func (n *NullEngine) NpmPackage(NpmPackage string) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(NpmPackage)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetNpmPackage sets the NpmPackage property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#npmpackage
+func (n *NullEngine) SetNpmPackage(NpmPackage string) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(NpmPackage)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// OfflineProviderFactory returns the OfflineProviderFactory property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#offlineproviderfactory
+func (n *NullEngine) OfflineProviderFactory(OfflineProviderFactory func()) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(OfflineProviderFactory)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetOfflineProviderFactory sets the OfflineProviderFactory property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#offlineproviderfactory
+func (n *NullEngine) SetOfflineProviderFactory(OfflineProviderFactory func()) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(OfflineProviderFactory)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// OnAfterShaderCompilationObservable returns the OnAfterShaderCompilationObservable property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#onaftershadercompilationobservable
+func (n *NullEngine) OnAfterShaderCompilationObservable(onAfterShaderCompilationObservable *Observable) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(onAfterShaderCompilationObservable.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterShaderCompilationObservable sets the OnAfterShaderCompilationObservable property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#onaftershadercompilationobservable
+func (n *NullEngine) SetOnAfterShaderCompilationObservable(onAfterShaderCompilationObservable *Observable) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(onAfterShaderCompilationObservable.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeShaderCompilationObservable returns the OnBeforeShaderCompilationObservable property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#onbeforeshadercompilationobservable
+func (n *NullEngine) OnBeforeShaderCompilationObservable(onBeforeShaderCompilationObservable *Observable) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(onBeforeShaderCompilationObservable.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeShaderCompilationObservable sets the OnBeforeShaderCompilationObservable property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#onbeforeshadercompilationobservable
+func (n *NullEngine) SetOnBeforeShaderCompilationObservable(onBeforeShaderCompilationObservable *Observable) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(onBeforeShaderCompilationObservable.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// OnBeginFrameObservable returns the OnBeginFrameObservable property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#onbeginframeobservable
+func (n *NullEngine) OnBeginFrameObservable(onBeginFrameObservable *Observable) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(onBeginFrameObservable.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeginFrameObservable sets the OnBeginFrameObservable property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#onbeginframeobservable
+func (n *NullEngine) SetOnBeginFrameObservable(onBeginFrameObservable *Observable) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(onBeginFrameObservable.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// OnCanvasBlurObservable returns the OnCanvasBlurObservable property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#oncanvasblurobservable
+func (n *NullEngine) OnCanvasBlurObservable(onCanvasBlurObservable *Observable) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(onCanvasBlurObservable.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetOnCanvasBlurObservable sets the OnCanvasBlurObservable property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#oncanvasblurobservable
+func (n *NullEngine) SetOnCanvasBlurObservable(onCanvasBlurObservable *Observable) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(onCanvasBlurObservable.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// OnCanvasFocusObservable returns the OnCanvasFocusObservable property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#oncanvasfocusobservable
+func (n *NullEngine) OnCanvasFocusObservable(onCanvasFocusObservable *Observable) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(onCanvasFocusObservable.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetOnCanvasFocusObservable sets the OnCanvasFocusObservable property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#oncanvasfocusobservable
+func (n *NullEngine) SetOnCanvasFocusObservable(onCanvasFocusObservable *Observable) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(onCanvasFocusObservable.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// OnCanvasPointerOutObservable returns the OnCanvasPointerOutObservable property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#oncanvaspointeroutobservable
+func (n *NullEngine) OnCanvasPointerOutObservable(onCanvasPointerOutObservable *Observable) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(onCanvasPointerOutObservable.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetOnCanvasPointerOutObservable sets the OnCanvasPointerOutObservable property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#oncanvaspointeroutobservable
+func (n *NullEngine) SetOnCanvasPointerOutObservable(onCanvasPointerOutObservable *Observable) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(onCanvasPointerOutObservable.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// OnEndFrameObservable returns the OnEndFrameObservable property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#onendframeobservable
+func (n *NullEngine) OnEndFrameObservable(onEndFrameObservable *Observable) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(onEndFrameObservable.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetOnEndFrameObservable sets the OnEndFrameObservable property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#onendframeobservable
+func (n *NullEngine) SetOnEndFrameObservable(onEndFrameObservable *Observable) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(onEndFrameObservable.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// OnNewSceneAddedObservable returns the OnNewSceneAddedObservable property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#onnewsceneaddedobservable
+func (n *NullEngine) OnNewSceneAddedObservable(onNewSceneAddedObservable *Observable) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(onNewSceneAddedObservable.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetOnNewSceneAddedObservable sets the OnNewSceneAddedObservable property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#onnewsceneaddedobservable
+func (n *NullEngine) SetOnNewSceneAddedObservable(onNewSceneAddedObservable *Observable) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(onNewSceneAddedObservable.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// OnResizeObservable returns the OnResizeObservable property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#onresizeobservable
+func (n *NullEngine) OnResizeObservable(onResizeObservable *Observable) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(onResizeObservable.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetOnResizeObservable sets the OnResizeObservable property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#onresizeobservable
+func (n *NullEngine) SetOnResizeObservable(onResizeObservable *Observable) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(onResizeObservable.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// OnVRDisplayChangedObservable returns the OnVRDisplayChangedObservable property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#onvrdisplaychangedobservable
+func (n *NullEngine) OnVRDisplayChangedObservable(onVRDisplayChangedObservable *Observable) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(onVRDisplayChangedObservable.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetOnVRDisplayChangedObservable sets the OnVRDisplayChangedObservable property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#onvrdisplaychangedobservable
+func (n *NullEngine) SetOnVRDisplayChangedObservable(onVRDisplayChangedObservable *Observable) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(onVRDisplayChangedObservable.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// OnVRRequestPresentComplete returns the OnVRRequestPresentComplete property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#onvrrequestpresentcomplete
+func (n *NullEngine) OnVRRequestPresentComplete(onVRRequestPresentComplete *Observable) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(onVRRequestPresentComplete.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetOnVRRequestPresentComplete sets the OnVRRequestPresentComplete property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#onvrrequestpresentcomplete
+func (n *NullEngine) SetOnVRRequestPresentComplete(onVRRequestPresentComplete *Observable) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(onVRRequestPresentComplete.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// OnVRRequestPresentStart returns the OnVRRequestPresentStart property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#onvrrequestpresentstart
+func (n *NullEngine) OnVRRequestPresentStart(onVRRequestPresentStart *Observable) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(onVRRequestPresentStart.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetOnVRRequestPresentStart sets the OnVRRequestPresentStart property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#onvrrequestpresentstart
+func (n *NullEngine) SetOnVRRequestPresentStart(onVRRequestPresentStart *Observable) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(onVRRequestPresentStart.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// PerformanceMonitor returns the PerformanceMonitor property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#performancemonitor
+func (n *NullEngine) PerformanceMonitor(performanceMonitor *PerformanceMonitor) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(performanceMonitor.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetPerformanceMonitor sets the PerformanceMonitor property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#performancemonitor
+func (n *NullEngine) SetPerformanceMonitor(performanceMonitor *PerformanceMonitor) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(performanceMonitor.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// PostProcesses returns the PostProcesses property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#postprocesses
+func (n *NullEngine) PostProcesses(postProcesses *PostProcess) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(postProcesses.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetPostProcesses sets the PostProcesses property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#postprocesses
+func (n *NullEngine) SetPostProcesses(postProcesses *PostProcess) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(postProcesses.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// REPLACE returns the REPLACE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#replace
+func (n *NullEngine) REPLACE(REPLACE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(REPLACE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetREPLACE sets the REPLACE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#replace
+func (n *NullEngine) SetREPLACE(REPLACE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(REPLACE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SCALEMODE_CEILING returns the SCALEMODE_CEILING property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#scalemode_ceiling
+func (n *NullEngine) SCALEMODE_CEILING(SCALEMODE_CEILING float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(SCALEMODE_CEILING)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetSCALEMODE_CEILING sets the SCALEMODE_CEILING property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#scalemode_ceiling
+func (n *NullEngine) SetSCALEMODE_CEILING(SCALEMODE_CEILING float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(SCALEMODE_CEILING)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SCALEMODE_FLOOR returns the SCALEMODE_FLOOR property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#scalemode_floor
+func (n *NullEngine) SCALEMODE_FLOOR(SCALEMODE_FLOOR float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(SCALEMODE_FLOOR)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetSCALEMODE_FLOOR sets the SCALEMODE_FLOOR property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#scalemode_floor
+func (n *NullEngine) SetSCALEMODE_FLOOR(SCALEMODE_FLOOR float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(SCALEMODE_FLOOR)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SCALEMODE_NEAREST returns the SCALEMODE_NEAREST property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#scalemode_nearest
+func (n *NullEngine) SCALEMODE_NEAREST(SCALEMODE_NEAREST float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(SCALEMODE_NEAREST)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetSCALEMODE_NEAREST sets the SCALEMODE_NEAREST property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#scalemode_nearest
+func (n *NullEngine) SetSCALEMODE_NEAREST(SCALEMODE_NEAREST float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(SCALEMODE_NEAREST)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// Scenes returns the Scenes property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#scenes
+func (n *NullEngine) Scenes(scenes *Scene) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(scenes.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetScenes sets the Scenes property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#scenes
+func (n *NullEngine) SetScenes(scenes *Scene) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(scenes.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTUREFORMAT_ALPHA returns the TEXTUREFORMAT_ALPHA property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#textureformat_alpha
+func (n *NullEngine) TEXTUREFORMAT_ALPHA(TEXTUREFORMAT_ALPHA float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTUREFORMAT_ALPHA)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTUREFORMAT_ALPHA sets the TEXTUREFORMAT_ALPHA property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#textureformat_alpha
+func (n *NullEngine) SetTEXTUREFORMAT_ALPHA(TEXTUREFORMAT_ALPHA float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTUREFORMAT_ALPHA)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTUREFORMAT_LUMINANCE returns the TEXTUREFORMAT_LUMINANCE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#textureformat_luminance
+func (n *NullEngine) TEXTUREFORMAT_LUMINANCE(TEXTUREFORMAT_LUMINANCE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTUREFORMAT_LUMINANCE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTUREFORMAT_LUMINANCE sets the TEXTUREFORMAT_LUMINANCE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#textureformat_luminance
+func (n *NullEngine) SetTEXTUREFORMAT_LUMINANCE(TEXTUREFORMAT_LUMINANCE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTUREFORMAT_LUMINANCE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTUREFORMAT_LUMINANCE_ALPHA returns the TEXTUREFORMAT_LUMINANCE_ALPHA property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#textureformat_luminance_alpha
+func (n *NullEngine) TEXTUREFORMAT_LUMINANCE_ALPHA(TEXTUREFORMAT_LUMINANCE_ALPHA float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTUREFORMAT_LUMINANCE_ALPHA)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTUREFORMAT_LUMINANCE_ALPHA sets the TEXTUREFORMAT_LUMINANCE_ALPHA property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#textureformat_luminance_alpha
+func (n *NullEngine) SetTEXTUREFORMAT_LUMINANCE_ALPHA(TEXTUREFORMAT_LUMINANCE_ALPHA float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTUREFORMAT_LUMINANCE_ALPHA)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTUREFORMAT_R returns the TEXTUREFORMAT_R property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#textureformat_r
+func (n *NullEngine) TEXTUREFORMAT_R(TEXTUREFORMAT_R float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTUREFORMAT_R)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTUREFORMAT_R sets the TEXTUREFORMAT_R property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#textureformat_r
+func (n *NullEngine) SetTEXTUREFORMAT_R(TEXTUREFORMAT_R float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTUREFORMAT_R)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTUREFORMAT_RED returns the TEXTUREFORMAT_RED property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#textureformat_red
+func (n *NullEngine) TEXTUREFORMAT_RED(TEXTUREFORMAT_RED float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTUREFORMAT_RED)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTUREFORMAT_RED sets the TEXTUREFORMAT_RED property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#textureformat_red
+func (n *NullEngine) SetTEXTUREFORMAT_RED(TEXTUREFORMAT_RED float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTUREFORMAT_RED)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTUREFORMAT_RED_INTEGER returns the TEXTUREFORMAT_RED_INTEGER property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#textureformat_red_integer
+func (n *NullEngine) TEXTUREFORMAT_RED_INTEGER(TEXTUREFORMAT_RED_INTEGER float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTUREFORMAT_RED_INTEGER)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTUREFORMAT_RED_INTEGER sets the TEXTUREFORMAT_RED_INTEGER property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#textureformat_red_integer
+func (n *NullEngine) SetTEXTUREFORMAT_RED_INTEGER(TEXTUREFORMAT_RED_INTEGER float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTUREFORMAT_RED_INTEGER)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTUREFORMAT_RG returns the TEXTUREFORMAT_RG property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#textureformat_rg
+func (n *NullEngine) TEXTUREFORMAT_RG(TEXTUREFORMAT_RG float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTUREFORMAT_RG)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTUREFORMAT_RG sets the TEXTUREFORMAT_RG property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#textureformat_rg
+func (n *NullEngine) SetTEXTUREFORMAT_RG(TEXTUREFORMAT_RG float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTUREFORMAT_RG)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTUREFORMAT_RGB returns the TEXTUREFORMAT_RGB property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#textureformat_rgb
+func (n *NullEngine) TEXTUREFORMAT_RGB(TEXTUREFORMAT_RGB float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTUREFORMAT_RGB)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTUREFORMAT_RGB sets the TEXTUREFORMAT_RGB property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#textureformat_rgb
+func (n *NullEngine) SetTEXTUREFORMAT_RGB(TEXTUREFORMAT_RGB float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTUREFORMAT_RGB)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTUREFORMAT_RGBA returns the TEXTUREFORMAT_RGBA property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#textureformat_rgba
+func (n *NullEngine) TEXTUREFORMAT_RGBA(TEXTUREFORMAT_RGBA float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTUREFORMAT_RGBA)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTUREFORMAT_RGBA sets the TEXTUREFORMAT_RGBA property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#textureformat_rgba
+func (n *NullEngine) SetTEXTUREFORMAT_RGBA(TEXTUREFORMAT_RGBA float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTUREFORMAT_RGBA)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTUREFORMAT_RGBA_INTEGER returns the TEXTUREFORMAT_RGBA_INTEGER property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#textureformat_rgba_integer
+func (n *NullEngine) TEXTUREFORMAT_RGBA_INTEGER(TEXTUREFORMAT_RGBA_INTEGER float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTUREFORMAT_RGBA_INTEGER)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTUREFORMAT_RGBA_INTEGER sets the TEXTUREFORMAT_RGBA_INTEGER property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#textureformat_rgba_integer
+func (n *NullEngine) SetTEXTUREFORMAT_RGBA_INTEGER(TEXTUREFORMAT_RGBA_INTEGER float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTUREFORMAT_RGBA_INTEGER)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTUREFORMAT_RGB_INTEGER returns the TEXTUREFORMAT_RGB_INTEGER property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#textureformat_rgb_integer
+func (n *NullEngine) TEXTUREFORMAT_RGB_INTEGER(TEXTUREFORMAT_RGB_INTEGER float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTUREFORMAT_RGB_INTEGER)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTUREFORMAT_RGB_INTEGER sets the TEXTUREFORMAT_RGB_INTEGER property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#textureformat_rgb_integer
+func (n *NullEngine) SetTEXTUREFORMAT_RGB_INTEGER(TEXTUREFORMAT_RGB_INTEGER float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTUREFORMAT_RGB_INTEGER)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTUREFORMAT_RG_INTEGER returns the TEXTUREFORMAT_RG_INTEGER property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#textureformat_rg_integer
+func (n *NullEngine) TEXTUREFORMAT_RG_INTEGER(TEXTUREFORMAT_RG_INTEGER float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTUREFORMAT_RG_INTEGER)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTUREFORMAT_RG_INTEGER sets the TEXTUREFORMAT_RG_INTEGER property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#textureformat_rg_integer
+func (n *NullEngine) SetTEXTUREFORMAT_RG_INTEGER(TEXTUREFORMAT_RG_INTEGER float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTUREFORMAT_RG_INTEGER)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTUREFORMAT_R_INTEGER returns the TEXTUREFORMAT_R_INTEGER property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#textureformat_r_integer
+func (n *NullEngine) TEXTUREFORMAT_R_INTEGER(TEXTUREFORMAT_R_INTEGER float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTUREFORMAT_R_INTEGER)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTUREFORMAT_R_INTEGER sets the TEXTUREFORMAT_R_INTEGER property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#textureformat_r_integer
+func (n *NullEngine) SetTEXTUREFORMAT_R_INTEGER(TEXTUREFORMAT_R_INTEGER float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTUREFORMAT_R_INTEGER)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURETYPE_BYTE returns the TEXTURETYPE_BYTE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texturetype_byte
+func (n *NullEngine) TEXTURETYPE_BYTE(TEXTURETYPE_BYTE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURETYPE_BYTE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURETYPE_BYTE sets the TEXTURETYPE_BYTE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texturetype_byte
+func (n *NullEngine) SetTEXTURETYPE_BYTE(TEXTURETYPE_BYTE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURETYPE_BYTE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURETYPE_FLOAT returns the TEXTURETYPE_FLOAT property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texturetype_float
+func (n *NullEngine) TEXTURETYPE_FLOAT(TEXTURETYPE_FLOAT float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURETYPE_FLOAT)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURETYPE_FLOAT sets the TEXTURETYPE_FLOAT property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texturetype_float
+func (n *NullEngine) SetTEXTURETYPE_FLOAT(TEXTURETYPE_FLOAT float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURETYPE_FLOAT)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURETYPE_FLOAT_32_UNSIGNED_INT_24_8_REV returns the TEXTURETYPE_FLOAT_32_UNSIGNED_INT_24_8_REV property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texturetype_float_32_unsigned_int_24_8_rev
+func (n *NullEngine) TEXTURETYPE_FLOAT_32_UNSIGNED_INT_24_8_REV(TEXTURETYPE_FLOAT_32_UNSIGNED_INT_24_8_REV float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURETYPE_FLOAT_32_UNSIGNED_INT_24_8_REV)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURETYPE_FLOAT_32_UNSIGNED_INT_24_8_REV sets the TEXTURETYPE_FLOAT_32_UNSIGNED_INT_24_8_REV property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texturetype_float_32_unsigned_int_24_8_rev
+func (n *NullEngine) SetTEXTURETYPE_FLOAT_32_UNSIGNED_INT_24_8_REV(TEXTURETYPE_FLOAT_32_UNSIGNED_INT_24_8_REV float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURETYPE_FLOAT_32_UNSIGNED_INT_24_8_REV)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURETYPE_HALF_FLOAT returns the TEXTURETYPE_HALF_FLOAT property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texturetype_half_float
+func (n *NullEngine) TEXTURETYPE_HALF_FLOAT(TEXTURETYPE_HALF_FLOAT float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURETYPE_HALF_FLOAT)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURETYPE_HALF_FLOAT sets the TEXTURETYPE_HALF_FLOAT property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texturetype_half_float
+func (n *NullEngine) SetTEXTURETYPE_HALF_FLOAT(TEXTURETYPE_HALF_FLOAT float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURETYPE_HALF_FLOAT)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURETYPE_INT returns the TEXTURETYPE_INT property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texturetype_int
+func (n *NullEngine) TEXTURETYPE_INT(TEXTURETYPE_INT float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURETYPE_INT)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURETYPE_INT sets the TEXTURETYPE_INT property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texturetype_int
+func (n *NullEngine) SetTEXTURETYPE_INT(TEXTURETYPE_INT float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURETYPE_INT)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURETYPE_SHORT returns the TEXTURETYPE_SHORT property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texturetype_short
+func (n *NullEngine) TEXTURETYPE_SHORT(TEXTURETYPE_SHORT float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURETYPE_SHORT)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURETYPE_SHORT sets the TEXTURETYPE_SHORT property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texturetype_short
+func (n *NullEngine) SetTEXTURETYPE_SHORT(TEXTURETYPE_SHORT float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURETYPE_SHORT)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURETYPE_UNSIGNED_BYTE returns the TEXTURETYPE_UNSIGNED_BYTE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texturetype_unsigned_byte
+func (n *NullEngine) TEXTURETYPE_UNSIGNED_BYTE(TEXTURETYPE_UNSIGNED_BYTE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURETYPE_UNSIGNED_BYTE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURETYPE_UNSIGNED_BYTE sets the TEXTURETYPE_UNSIGNED_BYTE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texturetype_unsigned_byte
+func (n *NullEngine) SetTEXTURETYPE_UNSIGNED_BYTE(TEXTURETYPE_UNSIGNED_BYTE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURETYPE_UNSIGNED_BYTE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURETYPE_UNSIGNED_INT returns the TEXTURETYPE_UNSIGNED_INT property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texturetype_unsigned_int
+func (n *NullEngine) TEXTURETYPE_UNSIGNED_INT(TEXTURETYPE_UNSIGNED_INT float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURETYPE_UNSIGNED_INT)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURETYPE_UNSIGNED_INT sets the TEXTURETYPE_UNSIGNED_INT property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texturetype_unsigned_int
+func (n *NullEngine) SetTEXTURETYPE_UNSIGNED_INT(TEXTURETYPE_UNSIGNED_INT float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURETYPE_UNSIGNED_INT)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURETYPE_UNSIGNED_INTEGER returns the TEXTURETYPE_UNSIGNED_INTEGER property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texturetype_unsigned_integer
+func (n *NullEngine) TEXTURETYPE_UNSIGNED_INTEGER(TEXTURETYPE_UNSIGNED_INTEGER float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURETYPE_UNSIGNED_INTEGER)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURETYPE_UNSIGNED_INTEGER sets the TEXTURETYPE_UNSIGNED_INTEGER property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texturetype_unsigned_integer
+func (n *NullEngine) SetTEXTURETYPE_UNSIGNED_INTEGER(TEXTURETYPE_UNSIGNED_INTEGER float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURETYPE_UNSIGNED_INTEGER)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURETYPE_UNSIGNED_INT_10F_11F_11F_REV returns the TEXTURETYPE_UNSIGNED_INT_10F_11F_11F_REV property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texturetype_unsigned_int_10f_11f_11f_rev
+func (n *NullEngine) TEXTURETYPE_UNSIGNED_INT_10F_11F_11F_REV(TEXTURETYPE_UNSIGNED_INT_10F_11F_11F_REV float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURETYPE_UNSIGNED_INT_10F_11F_11F_REV)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURETYPE_UNSIGNED_INT_10F_11F_11F_REV sets the TEXTURETYPE_UNSIGNED_INT_10F_11F_11F_REV property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texturetype_unsigned_int_10f_11f_11f_rev
+func (n *NullEngine) SetTEXTURETYPE_UNSIGNED_INT_10F_11F_11F_REV(TEXTURETYPE_UNSIGNED_INT_10F_11F_11F_REV float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURETYPE_UNSIGNED_INT_10F_11F_11F_REV)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURETYPE_UNSIGNED_INT_24_8 returns the TEXTURETYPE_UNSIGNED_INT_24_8 property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texturetype_unsigned_int_24_8
+func (n *NullEngine) TEXTURETYPE_UNSIGNED_INT_24_8(TEXTURETYPE_UNSIGNED_INT_24_8 float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURETYPE_UNSIGNED_INT_24_8)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURETYPE_UNSIGNED_INT_24_8 sets the TEXTURETYPE_UNSIGNED_INT_24_8 property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texturetype_unsigned_int_24_8
+func (n *NullEngine) SetTEXTURETYPE_UNSIGNED_INT_24_8(TEXTURETYPE_UNSIGNED_INT_24_8 float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURETYPE_UNSIGNED_INT_24_8)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURETYPE_UNSIGNED_INT_2_10_10_10_REV returns the TEXTURETYPE_UNSIGNED_INT_2_10_10_10_REV property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texturetype_unsigned_int_2_10_10_10_rev
+func (n *NullEngine) TEXTURETYPE_UNSIGNED_INT_2_10_10_10_REV(TEXTURETYPE_UNSIGNED_INT_2_10_10_10_REV float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURETYPE_UNSIGNED_INT_2_10_10_10_REV)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURETYPE_UNSIGNED_INT_2_10_10_10_REV sets the TEXTURETYPE_UNSIGNED_INT_2_10_10_10_REV property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texturetype_unsigned_int_2_10_10_10_rev
+func (n *NullEngine) SetTEXTURETYPE_UNSIGNED_INT_2_10_10_10_REV(TEXTURETYPE_UNSIGNED_INT_2_10_10_10_REV float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURETYPE_UNSIGNED_INT_2_10_10_10_REV)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURETYPE_UNSIGNED_INT_5_9_9_9_REV returns the TEXTURETYPE_UNSIGNED_INT_5_9_9_9_REV property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texturetype_unsigned_int_5_9_9_9_rev
+func (n *NullEngine) TEXTURETYPE_UNSIGNED_INT_5_9_9_9_REV(TEXTURETYPE_UNSIGNED_INT_5_9_9_9_REV float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURETYPE_UNSIGNED_INT_5_9_9_9_REV)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURETYPE_UNSIGNED_INT_5_9_9_9_REV sets the TEXTURETYPE_UNSIGNED_INT_5_9_9_9_REV property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texturetype_unsigned_int_5_9_9_9_rev
+func (n *NullEngine) SetTEXTURETYPE_UNSIGNED_INT_5_9_9_9_REV(TEXTURETYPE_UNSIGNED_INT_5_9_9_9_REV float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURETYPE_UNSIGNED_INT_5_9_9_9_REV)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURETYPE_UNSIGNED_SHORT returns the TEXTURETYPE_UNSIGNED_SHORT property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texturetype_unsigned_short
+func (n *NullEngine) TEXTURETYPE_UNSIGNED_SHORT(TEXTURETYPE_UNSIGNED_SHORT float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURETYPE_UNSIGNED_SHORT)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURETYPE_UNSIGNED_SHORT sets the TEXTURETYPE_UNSIGNED_SHORT property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texturetype_unsigned_short
+func (n *NullEngine) SetTEXTURETYPE_UNSIGNED_SHORT(TEXTURETYPE_UNSIGNED_SHORT float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURETYPE_UNSIGNED_SHORT)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURETYPE_UNSIGNED_SHORT_4_4_4_4 returns the TEXTURETYPE_UNSIGNED_SHORT_4_4_4_4 property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texturetype_unsigned_short_4_4_4_4
+func (n *NullEngine) TEXTURETYPE_UNSIGNED_SHORT_4_4_4_4(TEXTURETYPE_UNSIGNED_SHORT_4_4_4_4 float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURETYPE_UNSIGNED_SHORT_4_4_4_4)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURETYPE_UNSIGNED_SHORT_4_4_4_4 sets the TEXTURETYPE_UNSIGNED_SHORT_4_4_4_4 property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texturetype_unsigned_short_4_4_4_4
+func (n *NullEngine) SetTEXTURETYPE_UNSIGNED_SHORT_4_4_4_4(TEXTURETYPE_UNSIGNED_SHORT_4_4_4_4 float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURETYPE_UNSIGNED_SHORT_4_4_4_4)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURETYPE_UNSIGNED_SHORT_5_5_5_1 returns the TEXTURETYPE_UNSIGNED_SHORT_5_5_5_1 property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texturetype_unsigned_short_5_5_5_1
+func (n *NullEngine) TEXTURETYPE_UNSIGNED_SHORT_5_5_5_1(TEXTURETYPE_UNSIGNED_SHORT_5_5_5_1 float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURETYPE_UNSIGNED_SHORT_5_5_5_1)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURETYPE_UNSIGNED_SHORT_5_5_5_1 sets the TEXTURETYPE_UNSIGNED_SHORT_5_5_5_1 property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texturetype_unsigned_short_5_5_5_1
+func (n *NullEngine) SetTEXTURETYPE_UNSIGNED_SHORT_5_5_5_1(TEXTURETYPE_UNSIGNED_SHORT_5_5_5_1 float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURETYPE_UNSIGNED_SHORT_5_5_5_1)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURETYPE_UNSIGNED_SHORT_5_6_5 returns the TEXTURETYPE_UNSIGNED_SHORT_5_6_5 property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texturetype_unsigned_short_5_6_5
+func (n *NullEngine) TEXTURETYPE_UNSIGNED_SHORT_5_6_5(TEXTURETYPE_UNSIGNED_SHORT_5_6_5 float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURETYPE_UNSIGNED_SHORT_5_6_5)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURETYPE_UNSIGNED_SHORT_5_6_5 sets the TEXTURETYPE_UNSIGNED_SHORT_5_6_5 property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texturetype_unsigned_short_5_6_5
+func (n *NullEngine) SetTEXTURETYPE_UNSIGNED_SHORT_5_6_5(TEXTURETYPE_UNSIGNED_SHORT_5_6_5 float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURETYPE_UNSIGNED_SHORT_5_6_5)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_BILINEAR_SAMPLINGMODE returns the TEXTURE_BILINEAR_SAMPLINGMODE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_bilinear_samplingmode
+func (n *NullEngine) TEXTURE_BILINEAR_SAMPLINGMODE(TEXTURE_BILINEAR_SAMPLINGMODE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_BILINEAR_SAMPLINGMODE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_BILINEAR_SAMPLINGMODE sets the TEXTURE_BILINEAR_SAMPLINGMODE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_bilinear_samplingmode
+func (n *NullEngine) SetTEXTURE_BILINEAR_SAMPLINGMODE(TEXTURE_BILINEAR_SAMPLINGMODE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_BILINEAR_SAMPLINGMODE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_CLAMP_ADDRESSMODE returns the TEXTURE_CLAMP_ADDRESSMODE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_clamp_addressmode
+func (n *NullEngine) TEXTURE_CLAMP_ADDRESSMODE(TEXTURE_CLAMP_ADDRESSMODE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_CLAMP_ADDRESSMODE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_CLAMP_ADDRESSMODE sets the TEXTURE_CLAMP_ADDRESSMODE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_clamp_addressmode
+func (n *NullEngine) SetTEXTURE_CLAMP_ADDRESSMODE(TEXTURE_CLAMP_ADDRESSMODE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_CLAMP_ADDRESSMODE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_CUBIC_MODE returns the TEXTURE_CUBIC_MODE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_cubic_mode
+func (n *NullEngine) TEXTURE_CUBIC_MODE(TEXTURE_CUBIC_MODE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_CUBIC_MODE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_CUBIC_MODE sets the TEXTURE_CUBIC_MODE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_cubic_mode
+func (n *NullEngine) SetTEXTURE_CUBIC_MODE(TEXTURE_CUBIC_MODE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_CUBIC_MODE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_EQUIRECTANGULAR_MODE returns the TEXTURE_EQUIRECTANGULAR_MODE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_equirectangular_mode
+func (n *NullEngine) TEXTURE_EQUIRECTANGULAR_MODE(TEXTURE_EQUIRECTANGULAR_MODE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_EQUIRECTANGULAR_MODE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_EQUIRECTANGULAR_MODE sets the TEXTURE_EQUIRECTANGULAR_MODE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_equirectangular_mode
+func (n *NullEngine) SetTEXTURE_EQUIRECTANGULAR_MODE(TEXTURE_EQUIRECTANGULAR_MODE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_EQUIRECTANGULAR_MODE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_EXPLICIT_MODE returns the TEXTURE_EXPLICIT_MODE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_explicit_mode
+func (n *NullEngine) TEXTURE_EXPLICIT_MODE(TEXTURE_EXPLICIT_MODE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_EXPLICIT_MODE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_EXPLICIT_MODE sets the TEXTURE_EXPLICIT_MODE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_explicit_mode
+func (n *NullEngine) SetTEXTURE_EXPLICIT_MODE(TEXTURE_EXPLICIT_MODE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_EXPLICIT_MODE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_FIXED_EQUIRECTANGULAR_MIRRORED_MODE returns the TEXTURE_FIXED_EQUIRECTANGULAR_MIRRORED_MODE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_fixed_equirectangular_mirrored_mode
+func (n *NullEngine) TEXTURE_FIXED_EQUIRECTANGULAR_MIRRORED_MODE(TEXTURE_FIXED_EQUIRECTANGULAR_MIRRORED_MODE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_FIXED_EQUIRECTANGULAR_MIRRORED_MODE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_FIXED_EQUIRECTANGULAR_MIRRORED_MODE sets the TEXTURE_FIXED_EQUIRECTANGULAR_MIRRORED_MODE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_fixed_equirectangular_mirrored_mode
+func (n *NullEngine) SetTEXTURE_FIXED_EQUIRECTANGULAR_MIRRORED_MODE(TEXTURE_FIXED_EQUIRECTANGULAR_MIRRORED_MODE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_FIXED_EQUIRECTANGULAR_MIRRORED_MODE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_FIXED_EQUIRECTANGULAR_MODE returns the TEXTURE_FIXED_EQUIRECTANGULAR_MODE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_fixed_equirectangular_mode
+func (n *NullEngine) TEXTURE_FIXED_EQUIRECTANGULAR_MODE(TEXTURE_FIXED_EQUIRECTANGULAR_MODE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_FIXED_EQUIRECTANGULAR_MODE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_FIXED_EQUIRECTANGULAR_MODE sets the TEXTURE_FIXED_EQUIRECTANGULAR_MODE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_fixed_equirectangular_mode
+func (n *NullEngine) SetTEXTURE_FIXED_EQUIRECTANGULAR_MODE(TEXTURE_FIXED_EQUIRECTANGULAR_MODE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_FIXED_EQUIRECTANGULAR_MODE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_INVCUBIC_MODE returns the TEXTURE_INVCUBIC_MODE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_invcubic_mode
+func (n *NullEngine) TEXTURE_INVCUBIC_MODE(TEXTURE_INVCUBIC_MODE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_INVCUBIC_MODE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_INVCUBIC_MODE sets the TEXTURE_INVCUBIC_MODE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_invcubic_mode
+func (n *NullEngine) SetTEXTURE_INVCUBIC_MODE(TEXTURE_INVCUBIC_MODE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_INVCUBIC_MODE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_LINEAR_LINEAR returns the TEXTURE_LINEAR_LINEAR property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_linear_linear
+func (n *NullEngine) TEXTURE_LINEAR_LINEAR(TEXTURE_LINEAR_LINEAR float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_LINEAR_LINEAR)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_LINEAR_LINEAR sets the TEXTURE_LINEAR_LINEAR property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_linear_linear
+func (n *NullEngine) SetTEXTURE_LINEAR_LINEAR(TEXTURE_LINEAR_LINEAR float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_LINEAR_LINEAR)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_LINEAR_LINEAR_MIPLINEAR returns the TEXTURE_LINEAR_LINEAR_MIPLINEAR property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_linear_linear_miplinear
+func (n *NullEngine) TEXTURE_LINEAR_LINEAR_MIPLINEAR(TEXTURE_LINEAR_LINEAR_MIPLINEAR float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_LINEAR_LINEAR_MIPLINEAR)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_LINEAR_LINEAR_MIPLINEAR sets the TEXTURE_LINEAR_LINEAR_MIPLINEAR property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_linear_linear_miplinear
+func (n *NullEngine) SetTEXTURE_LINEAR_LINEAR_MIPLINEAR(TEXTURE_LINEAR_LINEAR_MIPLINEAR float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_LINEAR_LINEAR_MIPLINEAR)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_LINEAR_LINEAR_MIPNEAREST returns the TEXTURE_LINEAR_LINEAR_MIPNEAREST property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_linear_linear_mipnearest
+func (n *NullEngine) TEXTURE_LINEAR_LINEAR_MIPNEAREST(TEXTURE_LINEAR_LINEAR_MIPNEAREST float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_LINEAR_LINEAR_MIPNEAREST)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_LINEAR_LINEAR_MIPNEAREST sets the TEXTURE_LINEAR_LINEAR_MIPNEAREST property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_linear_linear_mipnearest
+func (n *NullEngine) SetTEXTURE_LINEAR_LINEAR_MIPNEAREST(TEXTURE_LINEAR_LINEAR_MIPNEAREST float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_LINEAR_LINEAR_MIPNEAREST)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_LINEAR_NEAREST returns the TEXTURE_LINEAR_NEAREST property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_linear_nearest
+func (n *NullEngine) TEXTURE_LINEAR_NEAREST(TEXTURE_LINEAR_NEAREST float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_LINEAR_NEAREST)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_LINEAR_NEAREST sets the TEXTURE_LINEAR_NEAREST property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_linear_nearest
+func (n *NullEngine) SetTEXTURE_LINEAR_NEAREST(TEXTURE_LINEAR_NEAREST float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_LINEAR_NEAREST)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_LINEAR_NEAREST_MIPLINEAR returns the TEXTURE_LINEAR_NEAREST_MIPLINEAR property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_linear_nearest_miplinear
+func (n *NullEngine) TEXTURE_LINEAR_NEAREST_MIPLINEAR(TEXTURE_LINEAR_NEAREST_MIPLINEAR float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_LINEAR_NEAREST_MIPLINEAR)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_LINEAR_NEAREST_MIPLINEAR sets the TEXTURE_LINEAR_NEAREST_MIPLINEAR property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_linear_nearest_miplinear
+func (n *NullEngine) SetTEXTURE_LINEAR_NEAREST_MIPLINEAR(TEXTURE_LINEAR_NEAREST_MIPLINEAR float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_LINEAR_NEAREST_MIPLINEAR)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_LINEAR_NEAREST_MIPNEAREST returns the TEXTURE_LINEAR_NEAREST_MIPNEAREST property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_linear_nearest_mipnearest
+func (n *NullEngine) TEXTURE_LINEAR_NEAREST_MIPNEAREST(TEXTURE_LINEAR_NEAREST_MIPNEAREST float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_LINEAR_NEAREST_MIPNEAREST)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_LINEAR_NEAREST_MIPNEAREST sets the TEXTURE_LINEAR_NEAREST_MIPNEAREST property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_linear_nearest_mipnearest
+func (n *NullEngine) SetTEXTURE_LINEAR_NEAREST_MIPNEAREST(TEXTURE_LINEAR_NEAREST_MIPNEAREST float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_LINEAR_NEAREST_MIPNEAREST)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_MIRROR_ADDRESSMODE returns the TEXTURE_MIRROR_ADDRESSMODE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_mirror_addressmode
+func (n *NullEngine) TEXTURE_MIRROR_ADDRESSMODE(TEXTURE_MIRROR_ADDRESSMODE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_MIRROR_ADDRESSMODE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_MIRROR_ADDRESSMODE sets the TEXTURE_MIRROR_ADDRESSMODE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_mirror_addressmode
+func (n *NullEngine) SetTEXTURE_MIRROR_ADDRESSMODE(TEXTURE_MIRROR_ADDRESSMODE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_MIRROR_ADDRESSMODE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_NEAREST_LINEAR returns the TEXTURE_NEAREST_LINEAR property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_nearest_linear
+func (n *NullEngine) TEXTURE_NEAREST_LINEAR(TEXTURE_NEAREST_LINEAR float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_NEAREST_LINEAR)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_NEAREST_LINEAR sets the TEXTURE_NEAREST_LINEAR property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_nearest_linear
+func (n *NullEngine) SetTEXTURE_NEAREST_LINEAR(TEXTURE_NEAREST_LINEAR float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_NEAREST_LINEAR)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_NEAREST_LINEAR_MIPLINEAR returns the TEXTURE_NEAREST_LINEAR_MIPLINEAR property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_nearest_linear_miplinear
+func (n *NullEngine) TEXTURE_NEAREST_LINEAR_MIPLINEAR(TEXTURE_NEAREST_LINEAR_MIPLINEAR float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_NEAREST_LINEAR_MIPLINEAR)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_NEAREST_LINEAR_MIPLINEAR sets the TEXTURE_NEAREST_LINEAR_MIPLINEAR property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_nearest_linear_miplinear
+func (n *NullEngine) SetTEXTURE_NEAREST_LINEAR_MIPLINEAR(TEXTURE_NEAREST_LINEAR_MIPLINEAR float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_NEAREST_LINEAR_MIPLINEAR)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_NEAREST_LINEAR_MIPNEAREST returns the TEXTURE_NEAREST_LINEAR_MIPNEAREST property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_nearest_linear_mipnearest
+func (n *NullEngine) TEXTURE_NEAREST_LINEAR_MIPNEAREST(TEXTURE_NEAREST_LINEAR_MIPNEAREST float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_NEAREST_LINEAR_MIPNEAREST)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_NEAREST_LINEAR_MIPNEAREST sets the TEXTURE_NEAREST_LINEAR_MIPNEAREST property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_nearest_linear_mipnearest
+func (n *NullEngine) SetTEXTURE_NEAREST_LINEAR_MIPNEAREST(TEXTURE_NEAREST_LINEAR_MIPNEAREST float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_NEAREST_LINEAR_MIPNEAREST)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_NEAREST_NEAREST returns the TEXTURE_NEAREST_NEAREST property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_nearest_nearest
+func (n *NullEngine) TEXTURE_NEAREST_NEAREST(TEXTURE_NEAREST_NEAREST float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_NEAREST_NEAREST)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_NEAREST_NEAREST sets the TEXTURE_NEAREST_NEAREST property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_nearest_nearest
+func (n *NullEngine) SetTEXTURE_NEAREST_NEAREST(TEXTURE_NEAREST_NEAREST float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_NEAREST_NEAREST)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_NEAREST_NEAREST_MIPLINEAR returns the TEXTURE_NEAREST_NEAREST_MIPLINEAR property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_nearest_nearest_miplinear
+func (n *NullEngine) TEXTURE_NEAREST_NEAREST_MIPLINEAR(TEXTURE_NEAREST_NEAREST_MIPLINEAR float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_NEAREST_NEAREST_MIPLINEAR)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_NEAREST_NEAREST_MIPLINEAR sets the TEXTURE_NEAREST_NEAREST_MIPLINEAR property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_nearest_nearest_miplinear
+func (n *NullEngine) SetTEXTURE_NEAREST_NEAREST_MIPLINEAR(TEXTURE_NEAREST_NEAREST_MIPLINEAR float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_NEAREST_NEAREST_MIPLINEAR)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_NEAREST_NEAREST_MIPNEAREST returns the TEXTURE_NEAREST_NEAREST_MIPNEAREST property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_nearest_nearest_mipnearest
+func (n *NullEngine) TEXTURE_NEAREST_NEAREST_MIPNEAREST(TEXTURE_NEAREST_NEAREST_MIPNEAREST float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_NEAREST_NEAREST_MIPNEAREST)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_NEAREST_NEAREST_MIPNEAREST sets the TEXTURE_NEAREST_NEAREST_MIPNEAREST property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_nearest_nearest_mipnearest
+func (n *NullEngine) SetTEXTURE_NEAREST_NEAREST_MIPNEAREST(TEXTURE_NEAREST_NEAREST_MIPNEAREST float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_NEAREST_NEAREST_MIPNEAREST)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_NEAREST_SAMPLINGMODE returns the TEXTURE_NEAREST_SAMPLINGMODE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_nearest_samplingmode
+func (n *NullEngine) TEXTURE_NEAREST_SAMPLINGMODE(TEXTURE_NEAREST_SAMPLINGMODE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_NEAREST_SAMPLINGMODE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_NEAREST_SAMPLINGMODE sets the TEXTURE_NEAREST_SAMPLINGMODE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_nearest_samplingmode
+func (n *NullEngine) SetTEXTURE_NEAREST_SAMPLINGMODE(TEXTURE_NEAREST_SAMPLINGMODE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_NEAREST_SAMPLINGMODE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_PLANAR_MODE returns the TEXTURE_PLANAR_MODE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_planar_mode
+func (n *NullEngine) TEXTURE_PLANAR_MODE(TEXTURE_PLANAR_MODE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_PLANAR_MODE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_PLANAR_MODE sets the TEXTURE_PLANAR_MODE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_planar_mode
+func (n *NullEngine) SetTEXTURE_PLANAR_MODE(TEXTURE_PLANAR_MODE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_PLANAR_MODE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_PROJECTION_MODE returns the TEXTURE_PROJECTION_MODE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_projection_mode
+func (n *NullEngine) TEXTURE_PROJECTION_MODE(TEXTURE_PROJECTION_MODE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_PROJECTION_MODE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_PROJECTION_MODE sets the TEXTURE_PROJECTION_MODE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_projection_mode
+func (n *NullEngine) SetTEXTURE_PROJECTION_MODE(TEXTURE_PROJECTION_MODE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_PROJECTION_MODE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_SKYBOX_MODE returns the TEXTURE_SKYBOX_MODE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_skybox_mode
+func (n *NullEngine) TEXTURE_SKYBOX_MODE(TEXTURE_SKYBOX_MODE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_SKYBOX_MODE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_SKYBOX_MODE sets the TEXTURE_SKYBOX_MODE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_skybox_mode
+func (n *NullEngine) SetTEXTURE_SKYBOX_MODE(TEXTURE_SKYBOX_MODE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_SKYBOX_MODE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_SPHERICAL_MODE returns the TEXTURE_SPHERICAL_MODE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_spherical_mode
+func (n *NullEngine) TEXTURE_SPHERICAL_MODE(TEXTURE_SPHERICAL_MODE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_SPHERICAL_MODE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_SPHERICAL_MODE sets the TEXTURE_SPHERICAL_MODE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_spherical_mode
+func (n *NullEngine) SetTEXTURE_SPHERICAL_MODE(TEXTURE_SPHERICAL_MODE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_SPHERICAL_MODE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_TRILINEAR_SAMPLINGMODE returns the TEXTURE_TRILINEAR_SAMPLINGMODE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_trilinear_samplingmode
+func (n *NullEngine) TEXTURE_TRILINEAR_SAMPLINGMODE(TEXTURE_TRILINEAR_SAMPLINGMODE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_TRILINEAR_SAMPLINGMODE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_TRILINEAR_SAMPLINGMODE sets the TEXTURE_TRILINEAR_SAMPLINGMODE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_trilinear_samplingmode
+func (n *NullEngine) SetTEXTURE_TRILINEAR_SAMPLINGMODE(TEXTURE_TRILINEAR_SAMPLINGMODE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_TRILINEAR_SAMPLINGMODE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// TEXTURE_WRAP_ADDRESSMODE returns the TEXTURE_WRAP_ADDRESSMODE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_wrap_addressmode
+func (n *NullEngine) TEXTURE_WRAP_ADDRESSMODE(TEXTURE_WRAP_ADDRESSMODE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_WRAP_ADDRESSMODE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTEXTURE_WRAP_ADDRESSMODE sets the TEXTURE_WRAP_ADDRESSMODE property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#texture_wrap_addressmode
+func (n *NullEngine) SetTEXTURE_WRAP_ADDRESSMODE(TEXTURE_WRAP_ADDRESSMODE float64) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(TEXTURE_WRAP_ADDRESSMODE)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// Version returns the Version property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#version
+func (n *NullEngine) Version(Version string) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(Version)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetVersion sets the Version property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#version
+func (n *NullEngine) SetVersion(Version string) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(Version)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// Views returns the Views property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#views
+func (n *NullEngine) Views(views *EngineView) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(views.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetViews sets the Views property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#views
+func (n *NullEngine) SetViews(views *EngineView) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(views.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// VrPresentationAttributes returns the VrPresentationAttributes property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#vrpresentationattributes
+func (n *NullEngine) VrPresentationAttributes(vrPresentationAttributes *IVRPresentationAttributes) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(vrPresentationAttributes.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// SetVrPresentationAttributes sets the VrPresentationAttributes property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#vrpresentationattributes
+func (n *NullEngine) SetVrPresentationAttributes(vrPresentationAttributes *IVRPresentationAttributes) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(vrPresentationAttributes.JSObject())
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// _RescalePostProcessFactory returns the _RescalePostProcessFactory property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#_rescalepostprocessfactory
+func (n *NullEngine) _RescalePostProcessFactory(_RescalePostProcessFactory func()) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(_RescalePostProcessFactory)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+// Set_RescalePostProcessFactory sets the _RescalePostProcessFactory property of class NullEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nullengine#_rescalepostprocessfactory
+func (n *NullEngine) Set_RescalePostProcessFactory(_RescalePostProcessFactory func()) *NullEngine {
+	p := ba.ctx.Get("NullEngine").New(_RescalePostProcessFactory)
+	return NullEngineFromJSObject(p, ba.ctx)
+}
+
+*/

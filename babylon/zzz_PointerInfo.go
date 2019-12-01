@@ -32,8 +32,65 @@ func PointerInfoFromJSObject(p js.Value, ctx js.Value) *PointerInfo {
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointerinfo
 func (ba *Babylon) NewPointerInfo(jsType float64, event js.Value, pickInfo *PickingInfo) *PointerInfo {
-	p := ba.ctx.Get("PointerInfo").New(jsType, event, pickInfo.JSObject())
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, jsType)
+	args = append(args, event)
+	args = append(args, pickInfo.JSObject())
+
+	p := ba.ctx.Get("PointerInfo").New(args...)
 	return PointerInfoFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+/*
+
+// Event returns the Event property of class PointerInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerinfo#event
+func (p *PointerInfo) Event(event js.Value) *PointerInfo {
+	p := ba.ctx.Get("PointerInfo").New(event)
+	return PointerInfoFromJSObject(p, ba.ctx)
+}
+
+// SetEvent sets the Event property of class PointerInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerinfo#event
+func (p *PointerInfo) SetEvent(event js.Value) *PointerInfo {
+	p := ba.ctx.Get("PointerInfo").New(event)
+	return PointerInfoFromJSObject(p, ba.ctx)
+}
+
+// PickInfo returns the PickInfo property of class PointerInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerinfo#pickinfo
+func (p *PointerInfo) PickInfo(pickInfo *PickingInfo) *PointerInfo {
+	p := ba.ctx.Get("PointerInfo").New(pickInfo.JSObject())
+	return PointerInfoFromJSObject(p, ba.ctx)
+}
+
+// SetPickInfo sets the PickInfo property of class PointerInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerinfo#pickinfo
+func (p *PointerInfo) SetPickInfo(pickInfo *PickingInfo) *PointerInfo {
+	p := ba.ctx.Get("PointerInfo").New(pickInfo.JSObject())
+	return PointerInfoFromJSObject(p, ba.ctx)
+}
+
+// Type returns the Type property of class PointerInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerinfo#type
+func (p *PointerInfo) Type(jsType float64) *PointerInfo {
+	p := ba.ctx.Get("PointerInfo").New(jsType)
+	return PointerInfoFromJSObject(p, ba.ctx)
+}
+
+// SetType sets the Type property of class PointerInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerinfo#type
+func (p *PointerInfo) SetType(jsType float64) *PointerInfo {
+	p := ba.ctx.Get("PointerInfo").New(jsType)
+	return PointerInfoFromJSObject(p, ba.ctx)
+}
+
+*/

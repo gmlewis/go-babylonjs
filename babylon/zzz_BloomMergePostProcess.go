@@ -29,15 +29,11 @@ func BloomMergePostProcessFromJSObject(p js.Value, ctx js.Value) *BloomMergePost
 
 // NewBloomMergePostProcessOpts contains optional parameters for NewBloomMergePostProcess.
 type NewBloomMergePostProcessOpts struct {
-	SamplingMode *JSFloat64
-
-	Engine *Engine
-
-	Reusable *JSBool
-
-	TextureType *JSFloat64
-
-	BlockCompilation *JSBool
+	SamplingMode     *float64
+	Engine           *Engine
+	Reusable         *bool
+	TextureType      *float64
+	BlockCompilation *bool
 }
 
 // NewBloomMergePostProcess returns a new BloomMergePostProcess object.
@@ -48,8 +44,789 @@ func (ba *Babylon) NewBloomMergePostProcess(name string, originalFromInput *Post
 		opts = &NewBloomMergePostProcessOpts{}
 	}
 
-	p := ba.ctx.Get("BloomMergePostProcess").New(name, originalFromInput.JSObject(), blurred.JSObject(), weight, options, camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType.JSObject(), opts.BlockCompilation.JSObject())
+	args := make([]interface{}, 0, 6+5)
+
+	args = append(args, name)
+	args = append(args, originalFromInput.JSObject())
+	args = append(args, blurred.JSObject())
+	args = append(args, weight)
+	args = append(args, options)
+	args = append(args, camera.JSObject())
+
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+	if opts.Engine == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Engine.JSObject())
+	}
+	if opts.Reusable == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Reusable)
+	}
+	if opts.TextureType == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.TextureType)
+	}
+	if opts.BlockCompilation == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.BlockCompilation)
+	}
+
+	p := ba.ctx.Get("BloomMergePostProcess").New(args...)
 	return BloomMergePostProcessFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// BloomMergePostProcessActivateOpts contains optional parameters for BloomMergePostProcess.Activate.
+type BloomMergePostProcessActivateOpts struct {
+	SourceTexture     *InternalTexture
+	ForceDepthStencil *bool
+}
+
+// Activate calls the Activate method on the BloomMergePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#activate
+func (b *BloomMergePostProcess) Activate(camera *Camera, opts *BloomMergePostProcessActivateOpts) *InternalTexture {
+	if opts == nil {
+		opts = &BloomMergePostProcessActivateOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, camera.JSObject())
+
+	if opts.SourceTexture == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.SourceTexture.JSObject())
+	}
+	if opts.ForceDepthStencil == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceDepthStencil)
+	}
+
+	retVal := b.p.Call("activate", args...)
+	return InternalTextureFromJSObject(retVal, b.ctx)
+}
+
+// Apply calls the Apply method on the BloomMergePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#apply
+func (b *BloomMergePostProcess) Apply() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := b.p.Call("apply", args...)
+	return EffectFromJSObject(retVal, b.ctx)
+}
+
+// BloomMergePostProcessDisposeOpts contains optional parameters for BloomMergePostProcess.Dispose.
+type BloomMergePostProcessDisposeOpts struct {
+	Camera *Camera
+}
+
+// Dispose calls the Dispose method on the BloomMergePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#dispose
+func (b *BloomMergePostProcess) Dispose(opts *BloomMergePostProcessDisposeOpts) {
+	if opts == nil {
+		opts = &BloomMergePostProcessDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Camera == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Camera.JSObject())
+	}
+
+	b.p.Call("dispose", args...)
+}
+
+// GetCamera calls the GetCamera method on the BloomMergePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#getcamera
+func (b *BloomMergePostProcess) GetCamera() *Camera {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := b.p.Call("getCamera", args...)
+	return CameraFromJSObject(retVal, b.ctx)
+}
+
+// GetClassName calls the GetClassName method on the BloomMergePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#getclassname
+func (b *BloomMergePostProcess) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := b.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetEffect calls the GetEffect method on the BloomMergePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#geteffect
+func (b *BloomMergePostProcess) GetEffect() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := b.p.Call("getEffect", args...)
+	return EffectFromJSObject(retVal, b.ctx)
+}
+
+// GetEffectName calls the GetEffectName method on the BloomMergePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#geteffectname
+func (b *BloomMergePostProcess) GetEffectName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := b.p.Call("getEffectName", args...)
+	return retVal.String()
+}
+
+// GetEngine calls the GetEngine method on the BloomMergePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#getengine
+func (b *BloomMergePostProcess) GetEngine() *Engine {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := b.p.Call("getEngine", args...)
+	return EngineFromJSObject(retVal, b.ctx)
+}
+
+// IsReady calls the IsReady method on the BloomMergePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#isready
+func (b *BloomMergePostProcess) IsReady() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := b.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// IsReusable calls the IsReusable method on the BloomMergePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#isreusable
+func (b *BloomMergePostProcess) IsReusable() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := b.p.Call("isReusable", args...)
+	return retVal.Bool()
+}
+
+// MarkTextureDirty calls the MarkTextureDirty method on the BloomMergePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#marktexturedirty
+func (b *BloomMergePostProcess) MarkTextureDirty() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	b.p.Call("markTextureDirty", args...)
+}
+
+// ShareOutputWith calls the ShareOutputWith method on the BloomMergePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#shareoutputwith
+func (b *BloomMergePostProcess) ShareOutputWith(postProcess *PostProcess) *PostProcess {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, postProcess.JSObject())
+
+	retVal := b.p.Call("shareOutputWith", args...)
+	return PostProcessFromJSObject(retVal, b.ctx)
+}
+
+// BloomMergePostProcessUpdateEffectOpts contains optional parameters for BloomMergePostProcess.UpdateEffect.
+type BloomMergePostProcessUpdateEffectOpts struct {
+	Defines         *string
+	Uniforms        *string
+	Samplers        *string
+	IndexParameters *interface{}
+	OnCompiled      *func()
+	OnError         *func()
+}
+
+// UpdateEffect calls the UpdateEffect method on the BloomMergePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#updateeffect
+func (b *BloomMergePostProcess) UpdateEffect(opts *BloomMergePostProcessUpdateEffectOpts) {
+	if opts == nil {
+		opts = &BloomMergePostProcessUpdateEffectOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+6)
+
+	if opts.Defines == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Defines)
+	}
+	if opts.Uniforms == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Uniforms)
+	}
+	if opts.Samplers == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Samplers)
+	}
+	if opts.IndexParameters == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.IndexParameters)
+	}
+	if opts.OnCompiled == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnCompiled)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+
+	b.p.Call("updateEffect", args...)
+}
+
+// UseOwnOutput calls the UseOwnOutput method on the BloomMergePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#useownoutput
+func (b *BloomMergePostProcess) UseOwnOutput() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	b.p.Call("useOwnOutput", args...)
+}
+
+/*
+
+// AdaptScaleToCurrentViewport returns the AdaptScaleToCurrentViewport property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#adaptscaletocurrentviewport
+func (b *BloomMergePostProcess) AdaptScaleToCurrentViewport(adaptScaleToCurrentViewport bool) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(adaptScaleToCurrentViewport)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAdaptScaleToCurrentViewport sets the AdaptScaleToCurrentViewport property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#adaptscaletocurrentviewport
+func (b *BloomMergePostProcess) SetAdaptScaleToCurrentViewport(adaptScaleToCurrentViewport bool) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(adaptScaleToCurrentViewport)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// AlphaConstants returns the AlphaConstants property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#alphaconstants
+func (b *BloomMergePostProcess) AlphaConstants(alphaConstants *Color4) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(alphaConstants.JSObject())
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaConstants sets the AlphaConstants property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#alphaconstants
+func (b *BloomMergePostProcess) SetAlphaConstants(alphaConstants *Color4) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(alphaConstants.JSObject())
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// AlphaMode returns the AlphaMode property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#alphamode
+func (b *BloomMergePostProcess) AlphaMode(alphaMode float64) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(alphaMode)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaMode sets the AlphaMode property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#alphamode
+func (b *BloomMergePostProcess) SetAlphaMode(alphaMode float64) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(alphaMode)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// AlwaysForcePOT returns the AlwaysForcePOT property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#alwaysforcepot
+func (b *BloomMergePostProcess) AlwaysForcePOT(alwaysForcePOT bool) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(alwaysForcePOT)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAlwaysForcePOT sets the AlwaysForcePOT property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#alwaysforcepot
+func (b *BloomMergePostProcess) SetAlwaysForcePOT(alwaysForcePOT bool) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(alwaysForcePOT)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// Animations returns the Animations property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#animations
+func (b *BloomMergePostProcess) Animations(animations *Animation) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(animations.JSObject())
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#animations
+func (b *BloomMergePostProcess) SetAnimations(animations *Animation) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(animations.JSObject())
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// AspectRatio returns the AspectRatio property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#aspectratio
+func (b *BloomMergePostProcess) AspectRatio(aspectRatio float64) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(aspectRatio)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAspectRatio sets the AspectRatio property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#aspectratio
+func (b *BloomMergePostProcess) SetAspectRatio(aspectRatio float64) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(aspectRatio)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// AutoClear returns the AutoClear property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#autoclear
+func (b *BloomMergePostProcess) AutoClear(autoClear bool) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(autoClear)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAutoClear sets the AutoClear property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#autoclear
+func (b *BloomMergePostProcess) SetAutoClear(autoClear bool) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(autoClear)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// ClearColor returns the ClearColor property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#clearcolor
+func (b *BloomMergePostProcess) ClearColor(clearColor *Color4) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(clearColor.JSObject())
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetClearColor sets the ClearColor property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#clearcolor
+func (b *BloomMergePostProcess) SetClearColor(clearColor *Color4) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(clearColor.JSObject())
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// EnablePixelPerfectMode returns the EnablePixelPerfectMode property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#enablepixelperfectmode
+func (b *BloomMergePostProcess) EnablePixelPerfectMode(enablePixelPerfectMode bool) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(enablePixelPerfectMode)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetEnablePixelPerfectMode sets the EnablePixelPerfectMode property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#enablepixelperfectmode
+func (b *BloomMergePostProcess) SetEnablePixelPerfectMode(enablePixelPerfectMode bool) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(enablePixelPerfectMode)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// ForceFullscreenViewport returns the ForceFullscreenViewport property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#forcefullscreenviewport
+func (b *BloomMergePostProcess) ForceFullscreenViewport(forceFullscreenViewport bool) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(forceFullscreenViewport)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetForceFullscreenViewport sets the ForceFullscreenViewport property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#forcefullscreenviewport
+func (b *BloomMergePostProcess) SetForceFullscreenViewport(forceFullscreenViewport bool) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(forceFullscreenViewport)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// Height returns the Height property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#height
+func (b *BloomMergePostProcess) Height(height float64) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(height)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetHeight sets the Height property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#height
+func (b *BloomMergePostProcess) SetHeight(height float64) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(height)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// InputTexture returns the InputTexture property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#inputtexture
+func (b *BloomMergePostProcess) InputTexture(inputTexture *InternalTexture) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(inputTexture.JSObject())
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetInputTexture sets the InputTexture property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#inputtexture
+func (b *BloomMergePostProcess) SetInputTexture(inputTexture *InternalTexture) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(inputTexture.JSObject())
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#inspectablecustomproperties
+func (b *BloomMergePostProcess) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(inspectableCustomProperties.JSObject())
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#inspectablecustomproperties
+func (b *BloomMergePostProcess) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(inspectableCustomProperties.JSObject())
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// IsSupported returns the IsSupported property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#issupported
+func (b *BloomMergePostProcess) IsSupported(isSupported bool) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(isSupported)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetIsSupported sets the IsSupported property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#issupported
+func (b *BloomMergePostProcess) SetIsSupported(isSupported bool) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(isSupported)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#name
+func (b *BloomMergePostProcess) Name(name string) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(name)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#name
+func (b *BloomMergePostProcess) SetName(name string) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(name)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnActivate returns the OnActivate property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#onactivate
+func (b *BloomMergePostProcess) OnActivate(onActivate func()) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(onActivate)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnActivate sets the OnActivate property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#onactivate
+func (b *BloomMergePostProcess) SetOnActivate(onActivate func()) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(onActivate)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnActivateObservable returns the OnActivateObservable property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#onactivateobservable
+func (b *BloomMergePostProcess) OnActivateObservable(onActivateObservable *Observable) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(onActivateObservable.JSObject())
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnActivateObservable sets the OnActivateObservable property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#onactivateobservable
+func (b *BloomMergePostProcess) SetOnActivateObservable(onActivateObservable *Observable) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(onActivateObservable.JSObject())
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnAfterRender returns the OnAfterRender property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#onafterrender
+func (b *BloomMergePostProcess) OnAfterRender(onAfterRender func()) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(onAfterRender)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterRender sets the OnAfterRender property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#onafterrender
+func (b *BloomMergePostProcess) SetOnAfterRender(onAfterRender func()) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(onAfterRender)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnAfterRenderObservable returns the OnAfterRenderObservable property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#onafterrenderobservable
+func (b *BloomMergePostProcess) OnAfterRenderObservable(onAfterRenderObservable *Observable) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(onAfterRenderObservable.JSObject())
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterRenderObservable sets the OnAfterRenderObservable property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#onafterrenderobservable
+func (b *BloomMergePostProcess) SetOnAfterRenderObservable(onAfterRenderObservable *Observable) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(onAfterRenderObservable.JSObject())
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnApply returns the OnApply property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#onapply
+func (b *BloomMergePostProcess) OnApply(onApply func()) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(onApply)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnApply sets the OnApply property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#onapply
+func (b *BloomMergePostProcess) SetOnApply(onApply func()) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(onApply)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnApplyObservable returns the OnApplyObservable property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#onapplyobservable
+func (b *BloomMergePostProcess) OnApplyObservable(onApplyObservable *Observable) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(onApplyObservable.JSObject())
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnApplyObservable sets the OnApplyObservable property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#onapplyobservable
+func (b *BloomMergePostProcess) SetOnApplyObservable(onApplyObservable *Observable) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(onApplyObservable.JSObject())
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeRender returns the OnBeforeRender property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#onbeforerender
+func (b *BloomMergePostProcess) OnBeforeRender(onBeforeRender func()) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(onBeforeRender)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeRender sets the OnBeforeRender property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#onbeforerender
+func (b *BloomMergePostProcess) SetOnBeforeRender(onBeforeRender func()) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(onBeforeRender)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeRenderObservable returns the OnBeforeRenderObservable property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#onbeforerenderobservable
+func (b *BloomMergePostProcess) OnBeforeRenderObservable(onBeforeRenderObservable *Observable) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(onBeforeRenderObservable.JSObject())
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeRenderObservable sets the OnBeforeRenderObservable property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#onbeforerenderobservable
+func (b *BloomMergePostProcess) SetOnBeforeRenderObservable(onBeforeRenderObservable *Observable) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(onBeforeRenderObservable.JSObject())
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnSizeChanged returns the OnSizeChanged property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#onsizechanged
+func (b *BloomMergePostProcess) OnSizeChanged(onSizeChanged func()) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(onSizeChanged)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnSizeChanged sets the OnSizeChanged property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#onsizechanged
+func (b *BloomMergePostProcess) SetOnSizeChanged(onSizeChanged func()) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(onSizeChanged)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnSizeChangedObservable returns the OnSizeChangedObservable property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#onsizechangedobservable
+func (b *BloomMergePostProcess) OnSizeChangedObservable(onSizeChangedObservable *Observable) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(onSizeChangedObservable.JSObject())
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnSizeChangedObservable sets the OnSizeChangedObservable property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#onsizechangedobservable
+func (b *BloomMergePostProcess) SetOnSizeChangedObservable(onSizeChangedObservable *Observable) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(onSizeChangedObservable.JSObject())
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// RenderTargetSamplingMode returns the RenderTargetSamplingMode property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#rendertargetsamplingmode
+func (b *BloomMergePostProcess) RenderTargetSamplingMode(renderTargetSamplingMode float64) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(renderTargetSamplingMode)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetRenderTargetSamplingMode sets the RenderTargetSamplingMode property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#rendertargetsamplingmode
+func (b *BloomMergePostProcess) SetRenderTargetSamplingMode(renderTargetSamplingMode float64) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(renderTargetSamplingMode)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// Samples returns the Samples property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#samples
+func (b *BloomMergePostProcess) Samples(samples float64) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(samples)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetSamples sets the Samples property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#samples
+func (b *BloomMergePostProcess) SetSamples(samples float64) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(samples)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// ScaleMode returns the ScaleMode property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#scalemode
+func (b *BloomMergePostProcess) ScaleMode(scaleMode float64) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(scaleMode)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetScaleMode sets the ScaleMode property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#scalemode
+func (b *BloomMergePostProcess) SetScaleMode(scaleMode float64) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(scaleMode)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// TexelSize returns the TexelSize property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#texelsize
+func (b *BloomMergePostProcess) TexelSize(texelSize *Vector2) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(texelSize.JSObject())
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetTexelSize sets the TexelSize property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#texelsize
+func (b *BloomMergePostProcess) SetTexelSize(texelSize *Vector2) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(texelSize.JSObject())
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#uniqueid
+func (b *BloomMergePostProcess) UniqueId(uniqueId float64) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(uniqueId)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#uniqueid
+func (b *BloomMergePostProcess) SetUniqueId(uniqueId float64) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(uniqueId)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// Weight returns the Weight property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#weight
+func (b *BloomMergePostProcess) Weight(weight float64) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(weight)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetWeight sets the Weight property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#weight
+func (b *BloomMergePostProcess) SetWeight(weight float64) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(weight)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// Width returns the Width property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#width
+func (b *BloomMergePostProcess) Width(width float64) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(width)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetWidth sets the Width property of class BloomMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bloommergepostprocess#width
+func (b *BloomMergePostProcess) SetWidth(width float64) *BloomMergePostProcess {
+	p := ba.ctx.Get("BloomMergePostProcess").New(width)
+	return BloomMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+*/

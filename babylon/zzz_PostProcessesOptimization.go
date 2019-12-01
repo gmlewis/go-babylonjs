@@ -31,7 +31,7 @@ func PostProcessesOptimizationFromJSObject(p js.Value, ctx js.Value) *PostProces
 
 // NewPostProcessesOptimizationOpts contains optional parameters for NewPostProcessesOptimization.
 type NewPostProcessesOptimizationOpts struct {
-	Priority *JSFloat64
+	Priority *float64
 }
 
 // NewPostProcessesOptimization returns a new PostProcessesOptimization object.
@@ -42,8 +42,59 @@ func (ba *Babylon) NewPostProcessesOptimization(opts *NewPostProcessesOptimizati
 		opts = &NewPostProcessesOptimizationOpts{}
 	}
 
-	p := ba.ctx.Get("PostProcessesOptimization").New(opts.Priority.JSObject())
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Priority == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Priority)
+	}
+
+	p := ba.ctx.Get("PostProcessesOptimization").New(args...)
 	return PostProcessesOptimizationFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Apply calls the Apply method on the PostProcessesOptimization object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.postprocessesoptimization#apply
+func (p *PostProcessesOptimization) Apply(scene *Scene, optimizer *SceneOptimizer) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, scene.JSObject())
+	args = append(args, optimizer.JSObject())
+
+	retVal := p.p.Call("apply", args...)
+	return retVal.Bool()
+}
+
+// GetDescription calls the GetDescription method on the PostProcessesOptimization object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.postprocessesoptimization#getdescription
+func (p *PostProcessesOptimization) GetDescription() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("getDescription", args...)
+	return retVal.String()
+}
+
+/*
+
+// Priority returns the Priority property of class PostProcessesOptimization.
+//
+// https://doc.babylonjs.com/api/classes/babylon.postprocessesoptimization#priority
+func (p *PostProcessesOptimization) Priority(priority float64) *PostProcessesOptimization {
+	p := ba.ctx.Get("PostProcessesOptimization").New(priority)
+	return PostProcessesOptimizationFromJSObject(p, ba.ctx)
+}
+
+// SetPriority sets the Priority property of class PostProcessesOptimization.
+//
+// https://doc.babylonjs.com/api/classes/babylon.postprocessesoptimization#priority
+func (p *PostProcessesOptimization) SetPriority(priority float64) *PostProcessesOptimization {
+	p := ba.ctx.Get("PostProcessesOptimization").New(priority)
+	return PostProcessesOptimizationFromJSObject(p, ba.ctx)
+}
+
+*/

@@ -29,15 +29,11 @@ func DepthOfFieldMergePostProcessFromJSObject(p js.Value, ctx js.Value) *DepthOf
 
 // NewDepthOfFieldMergePostProcessOpts contains optional parameters for NewDepthOfFieldMergePostProcess.
 type NewDepthOfFieldMergePostProcessOpts struct {
-	SamplingMode *JSFloat64
-
-	Engine *Engine
-
-	Reusable *JSBool
-
-	TextureType *JSFloat64
-
-	BlockCompilation *JSBool
+	SamplingMode     *float64
+	Engine           *Engine
+	Reusable         *bool
+	TextureType      *float64
+	BlockCompilation *bool
 }
 
 // NewDepthOfFieldMergePostProcess returns a new DepthOfFieldMergePostProcess object.
@@ -48,8 +44,773 @@ func (ba *Babylon) NewDepthOfFieldMergePostProcess(name string, originalFromInpu
 		opts = &NewDepthOfFieldMergePostProcessOpts{}
 	}
 
-	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(name, originalFromInput.JSObject(), circleOfConfusion.JSObject(), blurSteps, options, camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType.JSObject(), opts.BlockCompilation.JSObject())
+	args := make([]interface{}, 0, 6+5)
+
+	args = append(args, name)
+	args = append(args, originalFromInput.JSObject())
+	args = append(args, circleOfConfusion.JSObject())
+	args = append(args, blurSteps)
+	args = append(args, options)
+	args = append(args, camera.JSObject())
+
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+	if opts.Engine == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Engine.JSObject())
+	}
+	if opts.Reusable == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Reusable)
+	}
+	if opts.TextureType == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.TextureType)
+	}
+	if opts.BlockCompilation == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.BlockCompilation)
+	}
+
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(args...)
 	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// DepthOfFieldMergePostProcessActivateOpts contains optional parameters for DepthOfFieldMergePostProcess.Activate.
+type DepthOfFieldMergePostProcessActivateOpts struct {
+	SourceTexture     *InternalTexture
+	ForceDepthStencil *bool
+}
+
+// Activate calls the Activate method on the DepthOfFieldMergePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#activate
+func (d *DepthOfFieldMergePostProcess) Activate(camera *Camera, opts *DepthOfFieldMergePostProcessActivateOpts) *InternalTexture {
+	if opts == nil {
+		opts = &DepthOfFieldMergePostProcessActivateOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, camera.JSObject())
+
+	if opts.SourceTexture == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.SourceTexture.JSObject())
+	}
+	if opts.ForceDepthStencil == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceDepthStencil)
+	}
+
+	retVal := d.p.Call("activate", args...)
+	return InternalTextureFromJSObject(retVal, d.ctx)
+}
+
+// Apply calls the Apply method on the DepthOfFieldMergePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#apply
+func (d *DepthOfFieldMergePostProcess) Apply() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := d.p.Call("apply", args...)
+	return EffectFromJSObject(retVal, d.ctx)
+}
+
+// DepthOfFieldMergePostProcessDisposeOpts contains optional parameters for DepthOfFieldMergePostProcess.Dispose.
+type DepthOfFieldMergePostProcessDisposeOpts struct {
+	Camera *Camera
+}
+
+// Dispose calls the Dispose method on the DepthOfFieldMergePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#dispose
+func (d *DepthOfFieldMergePostProcess) Dispose(opts *DepthOfFieldMergePostProcessDisposeOpts) {
+	if opts == nil {
+		opts = &DepthOfFieldMergePostProcessDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Camera == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Camera.JSObject())
+	}
+
+	d.p.Call("dispose", args...)
+}
+
+// GetCamera calls the GetCamera method on the DepthOfFieldMergePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#getcamera
+func (d *DepthOfFieldMergePostProcess) GetCamera() *Camera {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := d.p.Call("getCamera", args...)
+	return CameraFromJSObject(retVal, d.ctx)
+}
+
+// GetClassName calls the GetClassName method on the DepthOfFieldMergePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#getclassname
+func (d *DepthOfFieldMergePostProcess) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := d.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetEffect calls the GetEffect method on the DepthOfFieldMergePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#geteffect
+func (d *DepthOfFieldMergePostProcess) GetEffect() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := d.p.Call("getEffect", args...)
+	return EffectFromJSObject(retVal, d.ctx)
+}
+
+// GetEffectName calls the GetEffectName method on the DepthOfFieldMergePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#geteffectname
+func (d *DepthOfFieldMergePostProcess) GetEffectName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := d.p.Call("getEffectName", args...)
+	return retVal.String()
+}
+
+// GetEngine calls the GetEngine method on the DepthOfFieldMergePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#getengine
+func (d *DepthOfFieldMergePostProcess) GetEngine() *Engine {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := d.p.Call("getEngine", args...)
+	return EngineFromJSObject(retVal, d.ctx)
+}
+
+// IsReady calls the IsReady method on the DepthOfFieldMergePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#isready
+func (d *DepthOfFieldMergePostProcess) IsReady() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := d.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// IsReusable calls the IsReusable method on the DepthOfFieldMergePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#isreusable
+func (d *DepthOfFieldMergePostProcess) IsReusable() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := d.p.Call("isReusable", args...)
+	return retVal.Bool()
+}
+
+// MarkTextureDirty calls the MarkTextureDirty method on the DepthOfFieldMergePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#marktexturedirty
+func (d *DepthOfFieldMergePostProcess) MarkTextureDirty() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	d.p.Call("markTextureDirty", args...)
+}
+
+// ShareOutputWith calls the ShareOutputWith method on the DepthOfFieldMergePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#shareoutputwith
+func (d *DepthOfFieldMergePostProcess) ShareOutputWith(postProcess *PostProcess) *PostProcess {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, postProcess.JSObject())
+
+	retVal := d.p.Call("shareOutputWith", args...)
+	return PostProcessFromJSObject(retVal, d.ctx)
+}
+
+// DepthOfFieldMergePostProcessUpdateEffectOpts contains optional parameters for DepthOfFieldMergePostProcess.UpdateEffect.
+type DepthOfFieldMergePostProcessUpdateEffectOpts struct {
+	Defines         *string
+	Uniforms        *string
+	Samplers        *string
+	IndexParameters *interface{}
+	OnCompiled      *func()
+	OnError         *func()
+}
+
+// UpdateEffect calls the UpdateEffect method on the DepthOfFieldMergePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#updateeffect
+func (d *DepthOfFieldMergePostProcess) UpdateEffect(opts *DepthOfFieldMergePostProcessUpdateEffectOpts) {
+	if opts == nil {
+		opts = &DepthOfFieldMergePostProcessUpdateEffectOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+6)
+
+	if opts.Defines == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Defines)
+	}
+	if opts.Uniforms == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Uniforms)
+	}
+	if opts.Samplers == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Samplers)
+	}
+	if opts.IndexParameters == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.IndexParameters)
+	}
+	if opts.OnCompiled == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnCompiled)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+
+	d.p.Call("updateEffect", args...)
+}
+
+// UseOwnOutput calls the UseOwnOutput method on the DepthOfFieldMergePostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#useownoutput
+func (d *DepthOfFieldMergePostProcess) UseOwnOutput() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	d.p.Call("useOwnOutput", args...)
+}
+
+/*
+
+// AdaptScaleToCurrentViewport returns the AdaptScaleToCurrentViewport property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#adaptscaletocurrentviewport
+func (d *DepthOfFieldMergePostProcess) AdaptScaleToCurrentViewport(adaptScaleToCurrentViewport bool) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(adaptScaleToCurrentViewport)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAdaptScaleToCurrentViewport sets the AdaptScaleToCurrentViewport property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#adaptscaletocurrentviewport
+func (d *DepthOfFieldMergePostProcess) SetAdaptScaleToCurrentViewport(adaptScaleToCurrentViewport bool) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(adaptScaleToCurrentViewport)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// AlphaConstants returns the AlphaConstants property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#alphaconstants
+func (d *DepthOfFieldMergePostProcess) AlphaConstants(alphaConstants *Color4) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(alphaConstants.JSObject())
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaConstants sets the AlphaConstants property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#alphaconstants
+func (d *DepthOfFieldMergePostProcess) SetAlphaConstants(alphaConstants *Color4) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(alphaConstants.JSObject())
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// AlphaMode returns the AlphaMode property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#alphamode
+func (d *DepthOfFieldMergePostProcess) AlphaMode(alphaMode float64) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(alphaMode)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaMode sets the AlphaMode property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#alphamode
+func (d *DepthOfFieldMergePostProcess) SetAlphaMode(alphaMode float64) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(alphaMode)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// AlwaysForcePOT returns the AlwaysForcePOT property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#alwaysforcepot
+func (d *DepthOfFieldMergePostProcess) AlwaysForcePOT(alwaysForcePOT bool) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(alwaysForcePOT)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAlwaysForcePOT sets the AlwaysForcePOT property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#alwaysforcepot
+func (d *DepthOfFieldMergePostProcess) SetAlwaysForcePOT(alwaysForcePOT bool) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(alwaysForcePOT)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// Animations returns the Animations property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#animations
+func (d *DepthOfFieldMergePostProcess) Animations(animations *Animation) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(animations.JSObject())
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#animations
+func (d *DepthOfFieldMergePostProcess) SetAnimations(animations *Animation) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(animations.JSObject())
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// AspectRatio returns the AspectRatio property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#aspectratio
+func (d *DepthOfFieldMergePostProcess) AspectRatio(aspectRatio float64) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(aspectRatio)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAspectRatio sets the AspectRatio property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#aspectratio
+func (d *DepthOfFieldMergePostProcess) SetAspectRatio(aspectRatio float64) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(aspectRatio)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// AutoClear returns the AutoClear property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#autoclear
+func (d *DepthOfFieldMergePostProcess) AutoClear(autoClear bool) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(autoClear)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAutoClear sets the AutoClear property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#autoclear
+func (d *DepthOfFieldMergePostProcess) SetAutoClear(autoClear bool) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(autoClear)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// ClearColor returns the ClearColor property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#clearcolor
+func (d *DepthOfFieldMergePostProcess) ClearColor(clearColor *Color4) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(clearColor.JSObject())
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetClearColor sets the ClearColor property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#clearcolor
+func (d *DepthOfFieldMergePostProcess) SetClearColor(clearColor *Color4) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(clearColor.JSObject())
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// EnablePixelPerfectMode returns the EnablePixelPerfectMode property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#enablepixelperfectmode
+func (d *DepthOfFieldMergePostProcess) EnablePixelPerfectMode(enablePixelPerfectMode bool) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(enablePixelPerfectMode)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetEnablePixelPerfectMode sets the EnablePixelPerfectMode property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#enablepixelperfectmode
+func (d *DepthOfFieldMergePostProcess) SetEnablePixelPerfectMode(enablePixelPerfectMode bool) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(enablePixelPerfectMode)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// ForceFullscreenViewport returns the ForceFullscreenViewport property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#forcefullscreenviewport
+func (d *DepthOfFieldMergePostProcess) ForceFullscreenViewport(forceFullscreenViewport bool) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(forceFullscreenViewport)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetForceFullscreenViewport sets the ForceFullscreenViewport property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#forcefullscreenviewport
+func (d *DepthOfFieldMergePostProcess) SetForceFullscreenViewport(forceFullscreenViewport bool) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(forceFullscreenViewport)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// Height returns the Height property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#height
+func (d *DepthOfFieldMergePostProcess) Height(height float64) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(height)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetHeight sets the Height property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#height
+func (d *DepthOfFieldMergePostProcess) SetHeight(height float64) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(height)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// InputTexture returns the InputTexture property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#inputtexture
+func (d *DepthOfFieldMergePostProcess) InputTexture(inputTexture *InternalTexture) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(inputTexture.JSObject())
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetInputTexture sets the InputTexture property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#inputtexture
+func (d *DepthOfFieldMergePostProcess) SetInputTexture(inputTexture *InternalTexture) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(inputTexture.JSObject())
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#inspectablecustomproperties
+func (d *DepthOfFieldMergePostProcess) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(inspectableCustomProperties.JSObject())
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#inspectablecustomproperties
+func (d *DepthOfFieldMergePostProcess) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(inspectableCustomProperties.JSObject())
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// IsSupported returns the IsSupported property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#issupported
+func (d *DepthOfFieldMergePostProcess) IsSupported(isSupported bool) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(isSupported)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetIsSupported sets the IsSupported property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#issupported
+func (d *DepthOfFieldMergePostProcess) SetIsSupported(isSupported bool) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(isSupported)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#name
+func (d *DepthOfFieldMergePostProcess) Name(name string) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(name)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#name
+func (d *DepthOfFieldMergePostProcess) SetName(name string) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(name)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnActivate returns the OnActivate property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#onactivate
+func (d *DepthOfFieldMergePostProcess) OnActivate(onActivate func()) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(onActivate)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnActivate sets the OnActivate property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#onactivate
+func (d *DepthOfFieldMergePostProcess) SetOnActivate(onActivate func()) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(onActivate)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnActivateObservable returns the OnActivateObservable property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#onactivateobservable
+func (d *DepthOfFieldMergePostProcess) OnActivateObservable(onActivateObservable *Observable) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(onActivateObservable.JSObject())
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnActivateObservable sets the OnActivateObservable property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#onactivateobservable
+func (d *DepthOfFieldMergePostProcess) SetOnActivateObservable(onActivateObservable *Observable) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(onActivateObservable.JSObject())
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnAfterRender returns the OnAfterRender property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#onafterrender
+func (d *DepthOfFieldMergePostProcess) OnAfterRender(onAfterRender func()) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(onAfterRender)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterRender sets the OnAfterRender property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#onafterrender
+func (d *DepthOfFieldMergePostProcess) SetOnAfterRender(onAfterRender func()) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(onAfterRender)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnAfterRenderObservable returns the OnAfterRenderObservable property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#onafterrenderobservable
+func (d *DepthOfFieldMergePostProcess) OnAfterRenderObservable(onAfterRenderObservable *Observable) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(onAfterRenderObservable.JSObject())
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterRenderObservable sets the OnAfterRenderObservable property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#onafterrenderobservable
+func (d *DepthOfFieldMergePostProcess) SetOnAfterRenderObservable(onAfterRenderObservable *Observable) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(onAfterRenderObservable.JSObject())
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnApply returns the OnApply property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#onapply
+func (d *DepthOfFieldMergePostProcess) OnApply(onApply func()) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(onApply)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnApply sets the OnApply property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#onapply
+func (d *DepthOfFieldMergePostProcess) SetOnApply(onApply func()) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(onApply)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnApplyObservable returns the OnApplyObservable property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#onapplyobservable
+func (d *DepthOfFieldMergePostProcess) OnApplyObservable(onApplyObservable *Observable) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(onApplyObservable.JSObject())
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnApplyObservable sets the OnApplyObservable property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#onapplyobservable
+func (d *DepthOfFieldMergePostProcess) SetOnApplyObservable(onApplyObservable *Observable) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(onApplyObservable.JSObject())
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeRender returns the OnBeforeRender property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#onbeforerender
+func (d *DepthOfFieldMergePostProcess) OnBeforeRender(onBeforeRender func()) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(onBeforeRender)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeRender sets the OnBeforeRender property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#onbeforerender
+func (d *DepthOfFieldMergePostProcess) SetOnBeforeRender(onBeforeRender func()) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(onBeforeRender)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeRenderObservable returns the OnBeforeRenderObservable property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#onbeforerenderobservable
+func (d *DepthOfFieldMergePostProcess) OnBeforeRenderObservable(onBeforeRenderObservable *Observable) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(onBeforeRenderObservable.JSObject())
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeRenderObservable sets the OnBeforeRenderObservable property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#onbeforerenderobservable
+func (d *DepthOfFieldMergePostProcess) SetOnBeforeRenderObservable(onBeforeRenderObservable *Observable) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(onBeforeRenderObservable.JSObject())
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnSizeChanged returns the OnSizeChanged property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#onsizechanged
+func (d *DepthOfFieldMergePostProcess) OnSizeChanged(onSizeChanged func()) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(onSizeChanged)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnSizeChanged sets the OnSizeChanged property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#onsizechanged
+func (d *DepthOfFieldMergePostProcess) SetOnSizeChanged(onSizeChanged func()) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(onSizeChanged)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnSizeChangedObservable returns the OnSizeChangedObservable property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#onsizechangedobservable
+func (d *DepthOfFieldMergePostProcess) OnSizeChangedObservable(onSizeChangedObservable *Observable) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(onSizeChangedObservable.JSObject())
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnSizeChangedObservable sets the OnSizeChangedObservable property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#onsizechangedobservable
+func (d *DepthOfFieldMergePostProcess) SetOnSizeChangedObservable(onSizeChangedObservable *Observable) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(onSizeChangedObservable.JSObject())
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// RenderTargetSamplingMode returns the RenderTargetSamplingMode property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#rendertargetsamplingmode
+func (d *DepthOfFieldMergePostProcess) RenderTargetSamplingMode(renderTargetSamplingMode float64) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(renderTargetSamplingMode)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetRenderTargetSamplingMode sets the RenderTargetSamplingMode property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#rendertargetsamplingmode
+func (d *DepthOfFieldMergePostProcess) SetRenderTargetSamplingMode(renderTargetSamplingMode float64) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(renderTargetSamplingMode)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// Samples returns the Samples property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#samples
+func (d *DepthOfFieldMergePostProcess) Samples(samples float64) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(samples)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetSamples sets the Samples property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#samples
+func (d *DepthOfFieldMergePostProcess) SetSamples(samples float64) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(samples)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// ScaleMode returns the ScaleMode property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#scalemode
+func (d *DepthOfFieldMergePostProcess) ScaleMode(scaleMode float64) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(scaleMode)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetScaleMode sets the ScaleMode property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#scalemode
+func (d *DepthOfFieldMergePostProcess) SetScaleMode(scaleMode float64) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(scaleMode)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// TexelSize returns the TexelSize property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#texelsize
+func (d *DepthOfFieldMergePostProcess) TexelSize(texelSize *Vector2) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(texelSize.JSObject())
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetTexelSize sets the TexelSize property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#texelsize
+func (d *DepthOfFieldMergePostProcess) SetTexelSize(texelSize *Vector2) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(texelSize.JSObject())
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#uniqueid
+func (d *DepthOfFieldMergePostProcess) UniqueId(uniqueId float64) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(uniqueId)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#uniqueid
+func (d *DepthOfFieldMergePostProcess) SetUniqueId(uniqueId float64) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(uniqueId)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// Width returns the Width property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#width
+func (d *DepthOfFieldMergePostProcess) Width(width float64) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(width)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetWidth sets the Width property of class DepthOfFieldMergePostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthoffieldmergepostprocess#width
+func (d *DepthOfFieldMergePostProcess) SetWidth(width float64) *DepthOfFieldMergePostProcess {
+	p := ba.ctx.Get("DepthOfFieldMergePostProcess").New(width)
+	return DepthOfFieldMergePostProcessFromJSObject(p, ba.ctx)
+}
+
+*/

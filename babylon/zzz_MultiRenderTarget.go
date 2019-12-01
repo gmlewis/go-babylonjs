@@ -32,7 +32,7 @@ func MultiRenderTargetFromJSObject(p js.Value, ctx js.Value) *MultiRenderTarget 
 
 // NewMultiRenderTargetOpts contains optional parameters for NewMultiRenderTarget.
 type NewMultiRenderTargetOpts struct {
-	Options *JSValue
+	Options *IMultiRenderTargetOptions
 }
 
 // NewMultiRenderTarget returns a new MultiRenderTarget object.
@@ -43,8 +43,2471 @@ func (ba *Babylon) NewMultiRenderTarget(name string, size interface{}, count flo
 		opts = &NewMultiRenderTargetOpts{}
 	}
 
-	p := ba.ctx.Get("MultiRenderTarget").New(name, size, count, scene.JSObject(), opts.Options.JSObject())
+	args := make([]interface{}, 0, 4+1)
+
+	args = append(args, name)
+	args = append(args, size)
+	args = append(args, count)
+	args = append(args, scene.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options.JSObject())
+	}
+
+	p := ba.ctx.Get("MultiRenderTarget").New(args...)
 	return MultiRenderTargetFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AddPostProcess calls the AddPostProcess method on the MultiRenderTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#addpostprocess
+func (m *MultiRenderTarget) AddPostProcess(postProcess *PostProcess) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, postProcess.JSObject())
+
+	m.p.Call("addPostProcess", args...)
+}
+
+// MultiRenderTargetClearPostProcessesOpts contains optional parameters for MultiRenderTarget.ClearPostProcesses.
+type MultiRenderTargetClearPostProcessesOpts struct {
+	Dispose *bool
+}
+
+// ClearPostProcesses calls the ClearPostProcesses method on the MultiRenderTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#clearpostprocesses
+func (m *MultiRenderTarget) ClearPostProcesses(opts *MultiRenderTargetClearPostProcessesOpts) {
+	if opts == nil {
+		opts = &MultiRenderTargetClearPostProcessesOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Dispose == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Dispose)
+	}
+
+	m.p.Call("clearPostProcesses", args...)
+}
+
+// Clone calls the Clone method on the MultiRenderTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#clone
+func (m *MultiRenderTarget) Clone() *RenderTargetTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("clone", args...)
+	return RenderTargetTextureFromJSObject(retVal, m.ctx)
+}
+
+// MultiRenderTargetCreateDepthStencilTextureOpts contains optional parameters for MultiRenderTarget.CreateDepthStencilTexture.
+type MultiRenderTargetCreateDepthStencilTextureOpts struct {
+	ComparisonFunction *float64
+	BilinearFiltering  *bool
+	GenerateStencil    *bool
+}
+
+// CreateDepthStencilTexture calls the CreateDepthStencilTexture method on the MultiRenderTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#createdepthstenciltexture
+func (m *MultiRenderTarget) CreateDepthStencilTexture(opts *MultiRenderTargetCreateDepthStencilTextureOpts) {
+	if opts == nil {
+		opts = &MultiRenderTargetCreateDepthStencilTextureOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+3)
+
+	if opts.ComparisonFunction == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ComparisonFunction)
+	}
+	if opts.BilinearFiltering == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.BilinearFiltering)
+	}
+	if opts.GenerateStencil == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.GenerateStencil)
+	}
+
+	m.p.Call("createDepthStencilTexture", args...)
+}
+
+// MultiRenderTargetCreateFromBase64StringOpts contains optional parameters for MultiRenderTarget.CreateFromBase64String.
+type MultiRenderTargetCreateFromBase64StringOpts struct {
+	NoMipmap     *bool
+	InvertY      *bool
+	SamplingMode *float64
+	OnLoad       *func()
+	OnError      *func()
+	Format       *float64
+}
+
+// CreateFromBase64String calls the CreateFromBase64String method on the MultiRenderTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#createfrombase64string
+func (m *MultiRenderTarget) CreateFromBase64String(data string, name string, scene *Scene, opts *MultiRenderTargetCreateFromBase64StringOpts) *Texture {
+	if opts == nil {
+		opts = &MultiRenderTargetCreateFromBase64StringOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+6)
+
+	args = append(args, data)
+	args = append(args, name)
+	args = append(args, scene.JSObject())
+
+	if opts.NoMipmap == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoMipmap)
+	}
+	if opts.InvertY == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.InvertY)
+	}
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+	if opts.OnLoad == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnLoad)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+	if opts.Format == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Format)
+	}
+
+	retVal := m.p.Call("CreateFromBase64String", args...)
+	return TextureFromJSObject(retVal, m.ctx)
+}
+
+// Dispose calls the Dispose method on the MultiRenderTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#dispose
+func (m *MultiRenderTarget) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	m.p.Call("dispose", args...)
+}
+
+// DisposeFramebufferObjects calls the DisposeFramebufferObjects method on the MultiRenderTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#disposeframebufferobjects
+func (m *MultiRenderTarget) DisposeFramebufferObjects() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	m.p.Call("disposeFramebufferObjects", args...)
+}
+
+// FreeRenderingGroups calls the FreeRenderingGroups method on the MultiRenderTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#freerenderinggroups
+func (m *MultiRenderTarget) FreeRenderingGroups() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	m.p.Call("freeRenderingGroups", args...)
+}
+
+// GetBaseSize calls the GetBaseSize method on the MultiRenderTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#getbasesize
+func (m *MultiRenderTarget) GetBaseSize() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("getBaseSize", args...)
+	return retVal
+}
+
+// GetClassName calls the GetClassName method on the MultiRenderTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#getclassname
+func (m *MultiRenderTarget) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetInternalTexture calls the GetInternalTexture method on the MultiRenderTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#getinternaltexture
+func (m *MultiRenderTarget) GetInternalTexture() *InternalTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("getInternalTexture", args...)
+	return InternalTextureFromJSObject(retVal, m.ctx)
+}
+
+// GetReflectionTextureMatrix calls the GetReflectionTextureMatrix method on the MultiRenderTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#getreflectiontexturematrix
+func (m *MultiRenderTarget) GetReflectionTextureMatrix() *Matrix {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("getReflectionTextureMatrix", args...)
+	return MatrixFromJSObject(retVal, m.ctx)
+}
+
+// GetRenderHeight calls the GetRenderHeight method on the MultiRenderTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#getrenderheight
+func (m *MultiRenderTarget) GetRenderHeight() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("getRenderHeight", args...)
+	return retVal.Float()
+}
+
+// GetRenderSize calls the GetRenderSize method on the MultiRenderTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#getrendersize
+func (m *MultiRenderTarget) GetRenderSize() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("getRenderSize", args...)
+	return retVal.Float()
+}
+
+// GetRenderWidth calls the GetRenderWidth method on the MultiRenderTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#getrenderwidth
+func (m *MultiRenderTarget) GetRenderWidth() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("getRenderWidth", args...)
+	return retVal.Float()
+}
+
+// GetScene calls the GetScene method on the MultiRenderTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#getscene
+func (m *MultiRenderTarget) GetScene() *Scene {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("getScene", args...)
+	return SceneFromJSObject(retVal, m.ctx)
+}
+
+// GetSize calls the GetSize method on the MultiRenderTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#getsize
+func (m *MultiRenderTarget) GetSize() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("getSize", args...)
+	return retVal
+}
+
+// MultiRenderTargetGetTextureMatrixOpts contains optional parameters for MultiRenderTarget.GetTextureMatrix.
+type MultiRenderTargetGetTextureMatrixOpts struct {
+	UBase *float64
+}
+
+// GetTextureMatrix calls the GetTextureMatrix method on the MultiRenderTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#gettexturematrix
+func (m *MultiRenderTarget) GetTextureMatrix(opts *MultiRenderTargetGetTextureMatrixOpts) *Matrix {
+	if opts == nil {
+		opts = &MultiRenderTargetGetTextureMatrixOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.UBase == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UBase)
+	}
+
+	retVal := m.p.Call("getTextureMatrix", args...)
+	return MatrixFromJSObject(retVal, m.ctx)
+}
+
+// GetViewCount calls the GetViewCount method on the MultiRenderTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#getviewcount
+func (m *MultiRenderTarget) GetViewCount() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("getViewCount", args...)
+	return retVal.Float()
+}
+
+// IsReady calls the IsReady method on the MultiRenderTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#isready
+func (m *MultiRenderTarget) IsReady() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// IsReadyOrNotBlocking calls the IsReadyOrNotBlocking method on the MultiRenderTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#isreadyornotblocking
+func (m *MultiRenderTarget) IsReadyOrNotBlocking() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("isReadyOrNotBlocking", args...)
+	return retVal.Bool()
+}
+
+// MultiRenderTargetLoadFromDataStringOpts contains optional parameters for MultiRenderTarget.LoadFromDataString.
+type MultiRenderTargetLoadFromDataStringOpts struct {
+	DeleteBuffer *bool
+	NoMipmap     *bool
+	InvertY      *bool
+	SamplingMode *float64
+	OnLoad       *func()
+	OnError      *func()
+	Format       *float64
+}
+
+// LoadFromDataString calls the LoadFromDataString method on the MultiRenderTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#loadfromdatastring
+func (m *MultiRenderTarget) LoadFromDataString(name string, buffer interface{}, scene *Scene, opts *MultiRenderTargetLoadFromDataStringOpts) *Texture {
+	if opts == nil {
+		opts = &MultiRenderTargetLoadFromDataStringOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+7)
+
+	args = append(args, name)
+	args = append(args, buffer)
+	args = append(args, scene.JSObject())
+
+	if opts.DeleteBuffer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DeleteBuffer)
+	}
+	if opts.NoMipmap == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoMipmap)
+	}
+	if opts.InvertY == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.InvertY)
+	}
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+	if opts.OnLoad == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnLoad)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+	if opts.Format == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Format)
+	}
+
+	retVal := m.p.Call("LoadFromDataString", args...)
+	return TextureFromJSObject(retVal, m.ctx)
+}
+
+// Parse calls the Parse method on the MultiRenderTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#parse
+func (m *MultiRenderTarget) Parse(parsedTexture interface{}, scene *Scene, rootUrl string) *BaseTexture {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, parsedTexture)
+	args = append(args, scene.JSObject())
+	args = append(args, rootUrl)
+
+	retVal := m.p.Call("Parse", args...)
+	return BaseTextureFromJSObject(retVal, m.ctx)
+}
+
+// MultiRenderTargetReadPixelsOpts contains optional parameters for MultiRenderTarget.ReadPixels.
+type MultiRenderTargetReadPixelsOpts struct {
+	FaceIndex *float64
+	Level     *float64
+	Buffer    js.Value
+}
+
+// ReadPixels calls the ReadPixels method on the MultiRenderTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#readpixels
+func (m *MultiRenderTarget) ReadPixels(opts *MultiRenderTargetReadPixelsOpts) js.Value {
+	if opts == nil {
+		opts = &MultiRenderTargetReadPixelsOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+3)
+
+	if opts.FaceIndex == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FaceIndex)
+	}
+	if opts.Level == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Level)
+	}
+	if opts.Buffer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Buffer)
+	}
+
+	retVal := m.p.Call("readPixels", args...)
+	return retVal
+}
+
+// ReleaseInternalTexture calls the ReleaseInternalTexture method on the MultiRenderTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#releaseinternaltexture
+func (m *MultiRenderTarget) ReleaseInternalTexture() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	m.p.Call("releaseInternalTexture", args...)
+}
+
+// ReleaseInternalTextures calls the ReleaseInternalTextures method on the MultiRenderTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#releaseinternaltextures
+func (m *MultiRenderTarget) ReleaseInternalTextures() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	m.p.Call("releaseInternalTextures", args...)
+}
+
+// RemovePostProcess calls the RemovePostProcess method on the MultiRenderTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#removepostprocess
+func (m *MultiRenderTarget) RemovePostProcess(postProcess *PostProcess) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, postProcess.JSObject())
+
+	m.p.Call("removePostProcess", args...)
+}
+
+// MultiRenderTargetRenderOpts contains optional parameters for MultiRenderTarget.Render.
+type MultiRenderTargetRenderOpts struct {
+	UseCameraPostProcess *bool
+	DumpForDebug         *bool
+}
+
+// Render calls the Render method on the MultiRenderTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#render
+func (m *MultiRenderTarget) Render(opts *MultiRenderTargetRenderOpts) {
+	if opts == nil {
+		opts = &MultiRenderTargetRenderOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.UseCameraPostProcess == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseCameraPostProcess)
+	}
+	if opts.DumpForDebug == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DumpForDebug)
+	}
+
+	m.p.Call("render", args...)
+}
+
+// ResetRefreshCounter calls the ResetRefreshCounter method on the MultiRenderTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#resetrefreshcounter
+func (m *MultiRenderTarget) ResetRefreshCounter() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	m.p.Call("resetRefreshCounter", args...)
+}
+
+// Resize calls the Resize method on the MultiRenderTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#resize
+func (m *MultiRenderTarget) Resize(size interface{}) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, size)
+
+	m.p.Call("resize", args...)
+}
+
+// Scale calls the Scale method on the MultiRenderTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#scale
+func (m *MultiRenderTarget) Scale(ratio float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, ratio)
+
+	m.p.Call("scale", args...)
+}
+
+// Serialize calls the Serialize method on the MultiRenderTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#serialize
+func (m *MultiRenderTarget) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("serialize", args...)
+	return retVal
+}
+
+// SetRenderingAutoClearDepthStencil calls the SetRenderingAutoClearDepthStencil method on the MultiRenderTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#setrenderingautocleardepthstencil
+func (m *MultiRenderTarget) SetRenderingAutoClearDepthStencil(renderingGroupId float64, autoClearDepthStencil bool) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, renderingGroupId)
+	args = append(args, autoClearDepthStencil)
+
+	m.p.Call("setRenderingAutoClearDepthStencil", args...)
+}
+
+// MultiRenderTargetSetRenderingOrderOpts contains optional parameters for MultiRenderTarget.SetRenderingOrder.
+type MultiRenderTargetSetRenderingOrderOpts struct {
+	OpaqueSortCompareFn      *func()
+	AlphaTestSortCompareFn   *func()
+	TransparentSortCompareFn *func()
+}
+
+// SetRenderingOrder calls the SetRenderingOrder method on the MultiRenderTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#setrenderingorder
+func (m *MultiRenderTarget) SetRenderingOrder(renderingGroupId float64, opts *MultiRenderTargetSetRenderingOrderOpts) {
+	if opts == nil {
+		opts = &MultiRenderTargetSetRenderingOrderOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, renderingGroupId)
+
+	if opts.OpaqueSortCompareFn == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OpaqueSortCompareFn)
+	}
+	if opts.AlphaTestSortCompareFn == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.AlphaTestSortCompareFn)
+	}
+	if opts.TransparentSortCompareFn == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.TransparentSortCompareFn)
+	}
+
+	m.p.Call("setRenderingOrder", args...)
+}
+
+// ToString calls the ToString method on the MultiRenderTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#tostring
+func (m *MultiRenderTarget) ToString() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("toString", args...)
+	return retVal.String()
+}
+
+// UpdateSamplingMode calls the UpdateSamplingMode method on the MultiRenderTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#updatesamplingmode
+func (m *MultiRenderTarget) UpdateSamplingMode(samplingMode float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, samplingMode)
+
+	m.p.Call("updateSamplingMode", args...)
+}
+
+// MultiRenderTargetUpdateURLOpts contains optional parameters for MultiRenderTarget.UpdateURL.
+type MultiRenderTargetUpdateURLOpts struct {
+	Buffer *string
+	OnLoad *func()
+}
+
+// UpdateURL calls the UpdateURL method on the MultiRenderTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#updateurl
+func (m *MultiRenderTarget) UpdateURL(url string, opts *MultiRenderTargetUpdateURLOpts) {
+	if opts == nil {
+		opts = &MultiRenderTargetUpdateURLOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, url)
+
+	if opts.Buffer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Buffer)
+	}
+	if opts.OnLoad == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnLoad)
+	}
+
+	m.p.Call("updateURL", args...)
+}
+
+// WhenAllReady calls the WhenAllReady method on the MultiRenderTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#whenallready
+func (m *MultiRenderTarget) WhenAllReady(textures *BaseTexture, callback func()) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, textures.JSObject())
+	args = append(args, callback)
+
+	m.p.Call("WhenAllReady", args...)
+}
+
+/*
+
+// ActiveCamera returns the ActiveCamera property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#activecamera
+func (m *MultiRenderTarget) ActiveCamera(activeCamera *Camera) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(activeCamera.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetActiveCamera sets the ActiveCamera property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#activecamera
+func (m *MultiRenderTarget) SetActiveCamera(activeCamera *Camera) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(activeCamera.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// Animations returns the Animations property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#animations
+func (m *MultiRenderTarget) Animations(animations *Animation) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(animations.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#animations
+func (m *MultiRenderTarget) SetAnimations(animations *Animation) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(animations.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// AnisotropicFilteringLevel returns the AnisotropicFilteringLevel property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#anisotropicfilteringlevel
+func (m *MultiRenderTarget) AnisotropicFilteringLevel(anisotropicFilteringLevel float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(anisotropicFilteringLevel)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetAnisotropicFilteringLevel sets the AnisotropicFilteringLevel property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#anisotropicfilteringlevel
+func (m *MultiRenderTarget) SetAnisotropicFilteringLevel(anisotropicFilteringLevel float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(anisotropicFilteringLevel)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// BILINEAR_SAMPLINGMODE returns the BILINEAR_SAMPLINGMODE property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#bilinear_samplingmode
+func (m *MultiRenderTarget) BILINEAR_SAMPLINGMODE(BILINEAR_SAMPLINGMODE float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(BILINEAR_SAMPLINGMODE)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetBILINEAR_SAMPLINGMODE sets the BILINEAR_SAMPLINGMODE property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#bilinear_samplingmode
+func (m *MultiRenderTarget) SetBILINEAR_SAMPLINGMODE(BILINEAR_SAMPLINGMODE float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(BILINEAR_SAMPLINGMODE)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// BoundingBoxPosition returns the BoundingBoxPosition property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#boundingboxposition
+func (m *MultiRenderTarget) BoundingBoxPosition(boundingBoxPosition *Vector3) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(boundingBoxPosition.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetBoundingBoxPosition sets the BoundingBoxPosition property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#boundingboxposition
+func (m *MultiRenderTarget) SetBoundingBoxPosition(boundingBoxPosition *Vector3) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(boundingBoxPosition.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// BoundingBoxSize returns the BoundingBoxSize property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#boundingboxsize
+func (m *MultiRenderTarget) BoundingBoxSize(boundingBoxSize *Vector3) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(boundingBoxSize.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetBoundingBoxSize sets the BoundingBoxSize property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#boundingboxsize
+func (m *MultiRenderTarget) SetBoundingBoxSize(boundingBoxSize *Vector3) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(boundingBoxSize.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// CLAMP_ADDRESSMODE returns the CLAMP_ADDRESSMODE property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#clamp_addressmode
+func (m *MultiRenderTarget) CLAMP_ADDRESSMODE(CLAMP_ADDRESSMODE float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(CLAMP_ADDRESSMODE)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetCLAMP_ADDRESSMODE sets the CLAMP_ADDRESSMODE property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#clamp_addressmode
+func (m *MultiRenderTarget) SetCLAMP_ADDRESSMODE(CLAMP_ADDRESSMODE float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(CLAMP_ADDRESSMODE)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// CUBIC_MODE returns the CUBIC_MODE property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#cubic_mode
+func (m *MultiRenderTarget) CUBIC_MODE(CUBIC_MODE float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(CUBIC_MODE)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetCUBIC_MODE sets the CUBIC_MODE property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#cubic_mode
+func (m *MultiRenderTarget) SetCUBIC_MODE(CUBIC_MODE float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(CUBIC_MODE)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// CanRescale returns the CanRescale property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#canrescale
+func (m *MultiRenderTarget) CanRescale(canRescale bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(canRescale)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetCanRescale sets the CanRescale property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#canrescale
+func (m *MultiRenderTarget) SetCanRescale(canRescale bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(canRescale)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// ClearColor returns the ClearColor property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#clearcolor
+func (m *MultiRenderTarget) ClearColor(clearColor *Color4) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(clearColor.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetClearColor sets the ClearColor property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#clearcolor
+func (m *MultiRenderTarget) SetClearColor(clearColor *Color4) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(clearColor.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// CoordinatesIndex returns the CoordinatesIndex property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#coordinatesindex
+func (m *MultiRenderTarget) CoordinatesIndex(coordinatesIndex float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(coordinatesIndex)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetCoordinatesIndex sets the CoordinatesIndex property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#coordinatesindex
+func (m *MultiRenderTarget) SetCoordinatesIndex(coordinatesIndex float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(coordinatesIndex)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// CoordinatesMode returns the CoordinatesMode property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#coordinatesmode
+func (m *MultiRenderTarget) CoordinatesMode(coordinatesMode float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(coordinatesMode)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetCoordinatesMode sets the CoordinatesMode property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#coordinatesmode
+func (m *MultiRenderTarget) SetCoordinatesMode(coordinatesMode float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(coordinatesMode)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// CustomRenderFunction returns the CustomRenderFunction property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#customrenderfunction
+func (m *MultiRenderTarget) CustomRenderFunction(customRenderFunction func()) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(customRenderFunction)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetCustomRenderFunction sets the CustomRenderFunction property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#customrenderfunction
+func (m *MultiRenderTarget) SetCustomRenderFunction(customRenderFunction func()) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(customRenderFunction)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// DEFAULT_ANISOTROPIC_FILTERING_LEVEL returns the DEFAULT_ANISOTROPIC_FILTERING_LEVEL property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#default_anisotropic_filtering_level
+func (m *MultiRenderTarget) DEFAULT_ANISOTROPIC_FILTERING_LEVEL(DEFAULT_ANISOTROPIC_FILTERING_LEVEL float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(DEFAULT_ANISOTROPIC_FILTERING_LEVEL)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetDEFAULT_ANISOTROPIC_FILTERING_LEVEL sets the DEFAULT_ANISOTROPIC_FILTERING_LEVEL property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#default_anisotropic_filtering_level
+func (m *MultiRenderTarget) SetDEFAULT_ANISOTROPIC_FILTERING_LEVEL(DEFAULT_ANISOTROPIC_FILTERING_LEVEL float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(DEFAULT_ANISOTROPIC_FILTERING_LEVEL)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// DelayLoadState returns the DelayLoadState property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#delayloadstate
+func (m *MultiRenderTarget) DelayLoadState(delayLoadState float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(delayLoadState)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetDelayLoadState sets the DelayLoadState property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#delayloadstate
+func (m *MultiRenderTarget) SetDelayLoadState(delayLoadState float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(delayLoadState)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// DepthStencilTexture returns the DepthStencilTexture property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#depthstenciltexture
+func (m *MultiRenderTarget) DepthStencilTexture(depthStencilTexture *InternalTexture) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(depthStencilTexture.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetDepthStencilTexture sets the DepthStencilTexture property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#depthstenciltexture
+func (m *MultiRenderTarget) SetDepthStencilTexture(depthStencilTexture *InternalTexture) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(depthStencilTexture.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// DepthTexture returns the DepthTexture property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#depthtexture
+func (m *MultiRenderTarget) DepthTexture(depthTexture *Texture) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(depthTexture.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetDepthTexture sets the DepthTexture property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#depthtexture
+func (m *MultiRenderTarget) SetDepthTexture(depthTexture *Texture) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(depthTexture.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// EQUIRECTANGULAR_MODE returns the EQUIRECTANGULAR_MODE property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#equirectangular_mode
+func (m *MultiRenderTarget) EQUIRECTANGULAR_MODE(EQUIRECTANGULAR_MODE float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(EQUIRECTANGULAR_MODE)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetEQUIRECTANGULAR_MODE sets the EQUIRECTANGULAR_MODE property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#equirectangular_mode
+func (m *MultiRenderTarget) SetEQUIRECTANGULAR_MODE(EQUIRECTANGULAR_MODE float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(EQUIRECTANGULAR_MODE)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// EXPLICIT_MODE returns the EXPLICIT_MODE property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#explicit_mode
+func (m *MultiRenderTarget) EXPLICIT_MODE(EXPLICIT_MODE float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(EXPLICIT_MODE)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetEXPLICIT_MODE sets the EXPLICIT_MODE property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#explicit_mode
+func (m *MultiRenderTarget) SetEXPLICIT_MODE(EXPLICIT_MODE float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(EXPLICIT_MODE)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// FIXED_EQUIRECTANGULAR_MIRRORED_MODE returns the FIXED_EQUIRECTANGULAR_MIRRORED_MODE property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#fixed_equirectangular_mirrored_mode
+func (m *MultiRenderTarget) FIXED_EQUIRECTANGULAR_MIRRORED_MODE(FIXED_EQUIRECTANGULAR_MIRRORED_MODE float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(FIXED_EQUIRECTANGULAR_MIRRORED_MODE)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetFIXED_EQUIRECTANGULAR_MIRRORED_MODE sets the FIXED_EQUIRECTANGULAR_MIRRORED_MODE property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#fixed_equirectangular_mirrored_mode
+func (m *MultiRenderTarget) SetFIXED_EQUIRECTANGULAR_MIRRORED_MODE(FIXED_EQUIRECTANGULAR_MIRRORED_MODE float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(FIXED_EQUIRECTANGULAR_MIRRORED_MODE)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// FIXED_EQUIRECTANGULAR_MODE returns the FIXED_EQUIRECTANGULAR_MODE property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#fixed_equirectangular_mode
+func (m *MultiRenderTarget) FIXED_EQUIRECTANGULAR_MODE(FIXED_EQUIRECTANGULAR_MODE float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(FIXED_EQUIRECTANGULAR_MODE)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetFIXED_EQUIRECTANGULAR_MODE sets the FIXED_EQUIRECTANGULAR_MODE property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#fixed_equirectangular_mode
+func (m *MultiRenderTarget) SetFIXED_EQUIRECTANGULAR_MODE(FIXED_EQUIRECTANGULAR_MODE float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(FIXED_EQUIRECTANGULAR_MODE)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// GammaSpace returns the GammaSpace property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#gammaspace
+func (m *MultiRenderTarget) GammaSpace(gammaSpace bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(gammaSpace)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetGammaSpace sets the GammaSpace property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#gammaspace
+func (m *MultiRenderTarget) SetGammaSpace(gammaSpace bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(gammaSpace)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// GetAlphaFromRGB returns the GetAlphaFromRGB property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#getalphafromrgb
+func (m *MultiRenderTarget) GetAlphaFromRGB(getAlphaFromRGB bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(getAlphaFromRGB)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetGetAlphaFromRGB sets the GetAlphaFromRGB property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#getalphafromrgb
+func (m *MultiRenderTarget) SetGetAlphaFromRGB(getAlphaFromRGB bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(getAlphaFromRGB)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// HasAlpha returns the HasAlpha property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#hasalpha
+func (m *MultiRenderTarget) HasAlpha(hasAlpha bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(hasAlpha)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetHasAlpha sets the HasAlpha property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#hasalpha
+func (m *MultiRenderTarget) SetHasAlpha(hasAlpha bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(hasAlpha)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// INVCUBIC_MODE returns the INVCUBIC_MODE property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#invcubic_mode
+func (m *MultiRenderTarget) INVCUBIC_MODE(INVCUBIC_MODE float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(INVCUBIC_MODE)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetINVCUBIC_MODE sets the INVCUBIC_MODE property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#invcubic_mode
+func (m *MultiRenderTarget) SetINVCUBIC_MODE(INVCUBIC_MODE float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(INVCUBIC_MODE)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// IgnoreCameraViewport returns the IgnoreCameraViewport property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#ignorecameraviewport
+func (m *MultiRenderTarget) IgnoreCameraViewport(ignoreCameraViewport bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(ignoreCameraViewport)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetIgnoreCameraViewport sets the IgnoreCameraViewport property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#ignorecameraviewport
+func (m *MultiRenderTarget) SetIgnoreCameraViewport(ignoreCameraViewport bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(ignoreCameraViewport)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#inspectablecustomproperties
+func (m *MultiRenderTarget) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(inspectableCustomProperties.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#inspectablecustomproperties
+func (m *MultiRenderTarget) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(inspectableCustomProperties.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// InvertY returns the InvertY property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#inverty
+func (m *MultiRenderTarget) InvertY(invertY bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(invertY)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetInvertY sets the InvertY property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#inverty
+func (m *MultiRenderTarget) SetInvertY(invertY bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(invertY)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// InvertZ returns the InvertZ property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#invertz
+func (m *MultiRenderTarget) InvertZ(invertZ bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(invertZ)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetInvertZ sets the InvertZ property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#invertz
+func (m *MultiRenderTarget) SetInvertZ(invertZ bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(invertZ)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// IrradianceTexture returns the IrradianceTexture property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#irradiancetexture
+func (m *MultiRenderTarget) IrradianceTexture(irradianceTexture *BaseTexture) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(irradianceTexture.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetIrradianceTexture sets the IrradianceTexture property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#irradiancetexture
+func (m *MultiRenderTarget) SetIrradianceTexture(irradianceTexture *BaseTexture) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(irradianceTexture.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// Is2DArray returns the Is2DArray property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#is2darray
+func (m *MultiRenderTarget) Is2DArray(is2DArray bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(is2DArray)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetIs2DArray sets the Is2DArray property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#is2darray
+func (m *MultiRenderTarget) SetIs2DArray(is2DArray bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(is2DArray)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// Is3D returns the Is3D property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#is3d
+func (m *MultiRenderTarget) Is3D(is3D bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(is3D)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetIs3D sets the Is3D property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#is3d
+func (m *MultiRenderTarget) SetIs3D(is3D bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(is3D)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// IsBlocking returns the IsBlocking property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#isblocking
+func (m *MultiRenderTarget) IsBlocking(isBlocking bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(isBlocking)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetIsBlocking sets the IsBlocking property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#isblocking
+func (m *MultiRenderTarget) SetIsBlocking(isBlocking bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(isBlocking)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// IsCube returns the IsCube property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#iscube
+func (m *MultiRenderTarget) IsCube(isCube bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(isCube)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetIsCube sets the IsCube property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#iscube
+func (m *MultiRenderTarget) SetIsCube(isCube bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(isCube)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// IsRGBD returns the IsRGBD property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#isrgbd
+func (m *MultiRenderTarget) IsRGBD(isRGBD bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(isRGBD)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetIsRGBD sets the IsRGBD property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#isrgbd
+func (m *MultiRenderTarget) SetIsRGBD(isRGBD bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(isRGBD)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// IsRenderTarget returns the IsRenderTarget property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#isrendertarget
+func (m *MultiRenderTarget) IsRenderTarget(isRenderTarget bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(isRenderTarget)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetIsRenderTarget sets the IsRenderTarget property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#isrendertarget
+func (m *MultiRenderTarget) SetIsRenderTarget(isRenderTarget bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(isRenderTarget)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// IsSupported returns the IsSupported property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#issupported
+func (m *MultiRenderTarget) IsSupported(isSupported bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(isSupported)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetIsSupported sets the IsSupported property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#issupported
+func (m *MultiRenderTarget) SetIsSupported(isSupported bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(isSupported)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_LINEAR returns the LINEAR_LINEAR property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#linear_linear
+func (m *MultiRenderTarget) LINEAR_LINEAR(LINEAR_LINEAR float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(LINEAR_LINEAR)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_LINEAR sets the LINEAR_LINEAR property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#linear_linear
+func (m *MultiRenderTarget) SetLINEAR_LINEAR(LINEAR_LINEAR float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(LINEAR_LINEAR)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_LINEAR_MIPLINEAR returns the LINEAR_LINEAR_MIPLINEAR property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#linear_linear_miplinear
+func (m *MultiRenderTarget) LINEAR_LINEAR_MIPLINEAR(LINEAR_LINEAR_MIPLINEAR float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(LINEAR_LINEAR_MIPLINEAR)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_LINEAR_MIPLINEAR sets the LINEAR_LINEAR_MIPLINEAR property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#linear_linear_miplinear
+func (m *MultiRenderTarget) SetLINEAR_LINEAR_MIPLINEAR(LINEAR_LINEAR_MIPLINEAR float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(LINEAR_LINEAR_MIPLINEAR)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_LINEAR_MIPNEAREST returns the LINEAR_LINEAR_MIPNEAREST property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#linear_linear_mipnearest
+func (m *MultiRenderTarget) LINEAR_LINEAR_MIPNEAREST(LINEAR_LINEAR_MIPNEAREST float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(LINEAR_LINEAR_MIPNEAREST)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_LINEAR_MIPNEAREST sets the LINEAR_LINEAR_MIPNEAREST property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#linear_linear_mipnearest
+func (m *MultiRenderTarget) SetLINEAR_LINEAR_MIPNEAREST(LINEAR_LINEAR_MIPNEAREST float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(LINEAR_LINEAR_MIPNEAREST)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_NEAREST returns the LINEAR_NEAREST property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#linear_nearest
+func (m *MultiRenderTarget) LINEAR_NEAREST(LINEAR_NEAREST float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(LINEAR_NEAREST)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_NEAREST sets the LINEAR_NEAREST property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#linear_nearest
+func (m *MultiRenderTarget) SetLINEAR_NEAREST(LINEAR_NEAREST float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(LINEAR_NEAREST)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_NEAREST_MIPLINEAR returns the LINEAR_NEAREST_MIPLINEAR property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#linear_nearest_miplinear
+func (m *MultiRenderTarget) LINEAR_NEAREST_MIPLINEAR(LINEAR_NEAREST_MIPLINEAR float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(LINEAR_NEAREST_MIPLINEAR)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_NEAREST_MIPLINEAR sets the LINEAR_NEAREST_MIPLINEAR property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#linear_nearest_miplinear
+func (m *MultiRenderTarget) SetLINEAR_NEAREST_MIPLINEAR(LINEAR_NEAREST_MIPLINEAR float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(LINEAR_NEAREST_MIPLINEAR)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_NEAREST_MIPNEAREST returns the LINEAR_NEAREST_MIPNEAREST property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#linear_nearest_mipnearest
+func (m *MultiRenderTarget) LINEAR_NEAREST_MIPNEAREST(LINEAR_NEAREST_MIPNEAREST float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(LINEAR_NEAREST_MIPNEAREST)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_NEAREST_MIPNEAREST sets the LINEAR_NEAREST_MIPNEAREST property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#linear_nearest_mipnearest
+func (m *MultiRenderTarget) SetLINEAR_NEAREST_MIPNEAREST(LINEAR_NEAREST_MIPNEAREST float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(LINEAR_NEAREST_MIPNEAREST)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// Level returns the Level property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#level
+func (m *MultiRenderTarget) Level(level float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(level)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetLevel sets the Level property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#level
+func (m *MultiRenderTarget) SetLevel(level float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(level)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// LinearSpecularLOD returns the LinearSpecularLOD property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#linearspecularlod
+func (m *MultiRenderTarget) LinearSpecularLOD(linearSpecularLOD bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(linearSpecularLOD)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetLinearSpecularLOD sets the LinearSpecularLOD property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#linearspecularlod
+func (m *MultiRenderTarget) SetLinearSpecularLOD(linearSpecularLOD bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(linearSpecularLOD)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// LodGenerationOffset returns the LodGenerationOffset property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#lodgenerationoffset
+func (m *MultiRenderTarget) LodGenerationOffset(lodGenerationOffset float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(lodGenerationOffset)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetLodGenerationOffset sets the LodGenerationOffset property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#lodgenerationoffset
+func (m *MultiRenderTarget) SetLodGenerationOffset(lodGenerationOffset float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(lodGenerationOffset)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// LodGenerationScale returns the LodGenerationScale property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#lodgenerationscale
+func (m *MultiRenderTarget) LodGenerationScale(lodGenerationScale float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(lodGenerationScale)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetLodGenerationScale sets the LodGenerationScale property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#lodgenerationscale
+func (m *MultiRenderTarget) SetLodGenerationScale(lodGenerationScale float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(lodGenerationScale)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// MIRROR_ADDRESSMODE returns the MIRROR_ADDRESSMODE property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#mirror_addressmode
+func (m *MultiRenderTarget) MIRROR_ADDRESSMODE(MIRROR_ADDRESSMODE float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(MIRROR_ADDRESSMODE)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetMIRROR_ADDRESSMODE sets the MIRROR_ADDRESSMODE property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#mirror_addressmode
+func (m *MultiRenderTarget) SetMIRROR_ADDRESSMODE(MIRROR_ADDRESSMODE float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(MIRROR_ADDRESSMODE)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#metadata
+func (m *MultiRenderTarget) Metadata(metadata interface{}) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(metadata)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#metadata
+func (m *MultiRenderTarget) SetMetadata(metadata interface{}) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(metadata)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_LINEAR returns the NEAREST_LINEAR property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#nearest_linear
+func (m *MultiRenderTarget) NEAREST_LINEAR(NEAREST_LINEAR float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(NEAREST_LINEAR)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_LINEAR sets the NEAREST_LINEAR property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#nearest_linear
+func (m *MultiRenderTarget) SetNEAREST_LINEAR(NEAREST_LINEAR float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(NEAREST_LINEAR)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_LINEAR_MIPLINEAR returns the NEAREST_LINEAR_MIPLINEAR property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#nearest_linear_miplinear
+func (m *MultiRenderTarget) NEAREST_LINEAR_MIPLINEAR(NEAREST_LINEAR_MIPLINEAR float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(NEAREST_LINEAR_MIPLINEAR)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_LINEAR_MIPLINEAR sets the NEAREST_LINEAR_MIPLINEAR property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#nearest_linear_miplinear
+func (m *MultiRenderTarget) SetNEAREST_LINEAR_MIPLINEAR(NEAREST_LINEAR_MIPLINEAR float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(NEAREST_LINEAR_MIPLINEAR)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_LINEAR_MIPNEAREST returns the NEAREST_LINEAR_MIPNEAREST property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#nearest_linear_mipnearest
+func (m *MultiRenderTarget) NEAREST_LINEAR_MIPNEAREST(NEAREST_LINEAR_MIPNEAREST float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(NEAREST_LINEAR_MIPNEAREST)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_LINEAR_MIPNEAREST sets the NEAREST_LINEAR_MIPNEAREST property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#nearest_linear_mipnearest
+func (m *MultiRenderTarget) SetNEAREST_LINEAR_MIPNEAREST(NEAREST_LINEAR_MIPNEAREST float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(NEAREST_LINEAR_MIPNEAREST)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_NEAREST returns the NEAREST_NEAREST property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#nearest_nearest
+func (m *MultiRenderTarget) NEAREST_NEAREST(NEAREST_NEAREST float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(NEAREST_NEAREST)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_NEAREST sets the NEAREST_NEAREST property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#nearest_nearest
+func (m *MultiRenderTarget) SetNEAREST_NEAREST(NEAREST_NEAREST float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(NEAREST_NEAREST)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_NEAREST_MIPLINEAR returns the NEAREST_NEAREST_MIPLINEAR property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#nearest_nearest_miplinear
+func (m *MultiRenderTarget) NEAREST_NEAREST_MIPLINEAR(NEAREST_NEAREST_MIPLINEAR float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(NEAREST_NEAREST_MIPLINEAR)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_NEAREST_MIPLINEAR sets the NEAREST_NEAREST_MIPLINEAR property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#nearest_nearest_miplinear
+func (m *MultiRenderTarget) SetNEAREST_NEAREST_MIPLINEAR(NEAREST_NEAREST_MIPLINEAR float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(NEAREST_NEAREST_MIPLINEAR)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_NEAREST_MIPNEAREST returns the NEAREST_NEAREST_MIPNEAREST property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#nearest_nearest_mipnearest
+func (m *MultiRenderTarget) NEAREST_NEAREST_MIPNEAREST(NEAREST_NEAREST_MIPNEAREST float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(NEAREST_NEAREST_MIPNEAREST)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_NEAREST_MIPNEAREST sets the NEAREST_NEAREST_MIPNEAREST property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#nearest_nearest_mipnearest
+func (m *MultiRenderTarget) SetNEAREST_NEAREST_MIPNEAREST(NEAREST_NEAREST_MIPNEAREST float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(NEAREST_NEAREST_MIPNEAREST)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_SAMPLINGMODE returns the NEAREST_SAMPLINGMODE property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#nearest_samplingmode
+func (m *MultiRenderTarget) NEAREST_SAMPLINGMODE(NEAREST_SAMPLINGMODE float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(NEAREST_SAMPLINGMODE)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_SAMPLINGMODE sets the NEAREST_SAMPLINGMODE property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#nearest_samplingmode
+func (m *MultiRenderTarget) SetNEAREST_SAMPLINGMODE(NEAREST_SAMPLINGMODE float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(NEAREST_SAMPLINGMODE)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#name
+func (m *MultiRenderTarget) Name(name string) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(name)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#name
+func (m *MultiRenderTarget) SetName(name string) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(name)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// NoMipmap returns the NoMipmap property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#nomipmap
+func (m *MultiRenderTarget) NoMipmap(noMipmap bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(noMipmap)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetNoMipmap sets the NoMipmap property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#nomipmap
+func (m *MultiRenderTarget) SetNoMipmap(noMipmap bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(noMipmap)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// OnAfterRender returns the OnAfterRender property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#onafterrender
+func (m *MultiRenderTarget) OnAfterRender(onAfterRender func()) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(onAfterRender)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterRender sets the OnAfterRender property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#onafterrender
+func (m *MultiRenderTarget) SetOnAfterRender(onAfterRender func()) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(onAfterRender)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// OnAfterRenderObservable returns the OnAfterRenderObservable property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#onafterrenderobservable
+func (m *MultiRenderTarget) OnAfterRenderObservable(onAfterRenderObservable *Observable) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(onAfterRenderObservable.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterRenderObservable sets the OnAfterRenderObservable property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#onafterrenderobservable
+func (m *MultiRenderTarget) SetOnAfterRenderObservable(onAfterRenderObservable *Observable) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(onAfterRenderObservable.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// OnAfterUnbind returns the OnAfterUnbind property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#onafterunbind
+func (m *MultiRenderTarget) OnAfterUnbind(onAfterUnbind func()) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(onAfterUnbind)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterUnbind sets the OnAfterUnbind property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#onafterunbind
+func (m *MultiRenderTarget) SetOnAfterUnbind(onAfterUnbind func()) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(onAfterUnbind)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// OnAfterUnbindObservable returns the OnAfterUnbindObservable property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#onafterunbindobservable
+func (m *MultiRenderTarget) OnAfterUnbindObservable(onAfterUnbindObservable *Observable) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(onAfterUnbindObservable.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterUnbindObservable sets the OnAfterUnbindObservable property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#onafterunbindobservable
+func (m *MultiRenderTarget) SetOnAfterUnbindObservable(onAfterUnbindObservable *Observable) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(onAfterUnbindObservable.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeBindObservable returns the OnBeforeBindObservable property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#onbeforebindobservable
+func (m *MultiRenderTarget) OnBeforeBindObservable(onBeforeBindObservable *Observable) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(onBeforeBindObservable.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeBindObservable sets the OnBeforeBindObservable property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#onbeforebindobservable
+func (m *MultiRenderTarget) SetOnBeforeBindObservable(onBeforeBindObservable *Observable) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(onBeforeBindObservable.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeRender returns the OnBeforeRender property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#onbeforerender
+func (m *MultiRenderTarget) OnBeforeRender(onBeforeRender func()) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(onBeforeRender)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeRender sets the OnBeforeRender property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#onbeforerender
+func (m *MultiRenderTarget) SetOnBeforeRender(onBeforeRender func()) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(onBeforeRender)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeRenderObservable returns the OnBeforeRenderObservable property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#onbeforerenderobservable
+func (m *MultiRenderTarget) OnBeforeRenderObservable(onBeforeRenderObservable *Observable) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(onBeforeRenderObservable.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeRenderObservable sets the OnBeforeRenderObservable property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#onbeforerenderobservable
+func (m *MultiRenderTarget) SetOnBeforeRenderObservable(onBeforeRenderObservable *Observable) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(onBeforeRenderObservable.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// OnClear returns the OnClear property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#onclear
+func (m *MultiRenderTarget) OnClear(onClear func()) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(onClear)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetOnClear sets the OnClear property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#onclear
+func (m *MultiRenderTarget) SetOnClear(onClear func()) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(onClear)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// OnClearObservable returns the OnClearObservable property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#onclearobservable
+func (m *MultiRenderTarget) OnClearObservable(onClearObservable *Observable) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(onClearObservable.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetOnClearObservable sets the OnClearObservable property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#onclearobservable
+func (m *MultiRenderTarget) SetOnClearObservable(onClearObservable *Observable) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(onClearObservable.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// OnDispose returns the OnDispose property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#ondispose
+func (m *MultiRenderTarget) OnDispose(onDispose func()) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(onDispose)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetOnDispose sets the OnDispose property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#ondispose
+func (m *MultiRenderTarget) SetOnDispose(onDispose func()) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(onDispose)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// OnDisposeObservable returns the OnDisposeObservable property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#ondisposeobservable
+func (m *MultiRenderTarget) OnDisposeObservable(onDisposeObservable *Observable) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(onDisposeObservable.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetOnDisposeObservable sets the OnDisposeObservable property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#ondisposeobservable
+func (m *MultiRenderTarget) SetOnDisposeObservable(onDisposeObservable *Observable) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(onDisposeObservable.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// OnLoadObservable returns the OnLoadObservable property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#onloadobservable
+func (m *MultiRenderTarget) OnLoadObservable(onLoadObservable *Observable) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(onLoadObservable.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetOnLoadObservable sets the OnLoadObservable property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#onloadobservable
+func (m *MultiRenderTarget) SetOnLoadObservable(onLoadObservable *Observable) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(onLoadObservable.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// OnResizeObservable returns the OnResizeObservable property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#onresizeobservable
+func (m *MultiRenderTarget) OnResizeObservable(onResizeObservable *Observable) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(onResizeObservable.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetOnResizeObservable sets the OnResizeObservable property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#onresizeobservable
+func (m *MultiRenderTarget) SetOnResizeObservable(onResizeObservable *Observable) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(onResizeObservable.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// PLANAR_MODE returns the PLANAR_MODE property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#planar_mode
+func (m *MultiRenderTarget) PLANAR_MODE(PLANAR_MODE float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(PLANAR_MODE)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetPLANAR_MODE sets the PLANAR_MODE property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#planar_mode
+func (m *MultiRenderTarget) SetPLANAR_MODE(PLANAR_MODE float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(PLANAR_MODE)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// PROJECTION_MODE returns the PROJECTION_MODE property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#projection_mode
+func (m *MultiRenderTarget) PROJECTION_MODE(PROJECTION_MODE float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(PROJECTION_MODE)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetPROJECTION_MODE sets the PROJECTION_MODE property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#projection_mode
+func (m *MultiRenderTarget) SetPROJECTION_MODE(PROJECTION_MODE float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(PROJECTION_MODE)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// REFRESHRATE_RENDER_ONCE returns the REFRESHRATE_RENDER_ONCE property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#refreshrate_render_once
+func (m *MultiRenderTarget) REFRESHRATE_RENDER_ONCE(REFRESHRATE_RENDER_ONCE float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(REFRESHRATE_RENDER_ONCE)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetREFRESHRATE_RENDER_ONCE sets the REFRESHRATE_RENDER_ONCE property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#refreshrate_render_once
+func (m *MultiRenderTarget) SetREFRESHRATE_RENDER_ONCE(REFRESHRATE_RENDER_ONCE float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(REFRESHRATE_RENDER_ONCE)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// REFRESHRATE_RENDER_ONEVERYFRAME returns the REFRESHRATE_RENDER_ONEVERYFRAME property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#refreshrate_render_oneveryframe
+func (m *MultiRenderTarget) REFRESHRATE_RENDER_ONEVERYFRAME(REFRESHRATE_RENDER_ONEVERYFRAME float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(REFRESHRATE_RENDER_ONEVERYFRAME)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetREFRESHRATE_RENDER_ONEVERYFRAME sets the REFRESHRATE_RENDER_ONEVERYFRAME property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#refreshrate_render_oneveryframe
+func (m *MultiRenderTarget) SetREFRESHRATE_RENDER_ONEVERYFRAME(REFRESHRATE_RENDER_ONEVERYFRAME float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(REFRESHRATE_RENDER_ONEVERYFRAME)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// REFRESHRATE_RENDER_ONEVERYTWOFRAMES returns the REFRESHRATE_RENDER_ONEVERYTWOFRAMES property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#refreshrate_render_oneverytwoframes
+func (m *MultiRenderTarget) REFRESHRATE_RENDER_ONEVERYTWOFRAMES(REFRESHRATE_RENDER_ONEVERYTWOFRAMES float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(REFRESHRATE_RENDER_ONEVERYTWOFRAMES)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetREFRESHRATE_RENDER_ONEVERYTWOFRAMES sets the REFRESHRATE_RENDER_ONEVERYTWOFRAMES property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#refreshrate_render_oneverytwoframes
+func (m *MultiRenderTarget) SetREFRESHRATE_RENDER_ONEVERYTWOFRAMES(REFRESHRATE_RENDER_ONEVERYTWOFRAMES float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(REFRESHRATE_RENDER_ONEVERYTWOFRAMES)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// RefreshRate returns the RefreshRate property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#refreshrate
+func (m *MultiRenderTarget) RefreshRate(refreshRate float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(refreshRate)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetRefreshRate sets the RefreshRate property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#refreshrate
+func (m *MultiRenderTarget) SetRefreshRate(refreshRate float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(refreshRate)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// RenderList returns the RenderList property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#renderlist
+func (m *MultiRenderTarget) RenderList(renderList []AbstractMesh) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(renderList.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetRenderList sets the RenderList property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#renderlist
+func (m *MultiRenderTarget) SetRenderList(renderList []AbstractMesh) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(renderList.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// RenderListPredicate returns the RenderListPredicate property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#renderlistpredicate
+func (m *MultiRenderTarget) RenderListPredicate(renderListPredicate func()) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(renderListPredicate)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetRenderListPredicate sets the RenderListPredicate property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#renderlistpredicate
+func (m *MultiRenderTarget) SetRenderListPredicate(renderListPredicate func()) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(renderListPredicate)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// RenderParticles returns the RenderParticles property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#renderparticles
+func (m *MultiRenderTarget) RenderParticles(renderParticles bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(renderParticles)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetRenderParticles sets the RenderParticles property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#renderparticles
+func (m *MultiRenderTarget) SetRenderParticles(renderParticles bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(renderParticles)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// RenderSprites returns the RenderSprites property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#rendersprites
+func (m *MultiRenderTarget) RenderSprites(renderSprites bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(renderSprites)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetRenderSprites sets the RenderSprites property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#rendersprites
+func (m *MultiRenderTarget) SetRenderSprites(renderSprites bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(renderSprites)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// RenderTargetOptions returns the RenderTargetOptions property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#rendertargetoptions
+func (m *MultiRenderTarget) RenderTargetOptions(renderTargetOptions *RenderTargetCreationOptions) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(renderTargetOptions.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetRenderTargetOptions sets the RenderTargetOptions property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#rendertargetoptions
+func (m *MultiRenderTarget) SetRenderTargetOptions(renderTargetOptions *RenderTargetCreationOptions) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(renderTargetOptions.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// ReservedDataStore returns the ReservedDataStore property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#reserveddatastore
+func (m *MultiRenderTarget) ReservedDataStore(reservedDataStore interface{}) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(reservedDataStore)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetReservedDataStore sets the ReservedDataStore property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#reserveddatastore
+func (m *MultiRenderTarget) SetReservedDataStore(reservedDataStore interface{}) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(reservedDataStore)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SKYBOX_MODE returns the SKYBOX_MODE property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#skybox_mode
+func (m *MultiRenderTarget) SKYBOX_MODE(SKYBOX_MODE float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(SKYBOX_MODE)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetSKYBOX_MODE sets the SKYBOX_MODE property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#skybox_mode
+func (m *MultiRenderTarget) SetSKYBOX_MODE(SKYBOX_MODE float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(SKYBOX_MODE)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SPHERICAL_MODE returns the SPHERICAL_MODE property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#spherical_mode
+func (m *MultiRenderTarget) SPHERICAL_MODE(SPHERICAL_MODE float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(SPHERICAL_MODE)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetSPHERICAL_MODE sets the SPHERICAL_MODE property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#spherical_mode
+func (m *MultiRenderTarget) SetSPHERICAL_MODE(SPHERICAL_MODE float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(SPHERICAL_MODE)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// Samples returns the Samples property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#samples
+func (m *MultiRenderTarget) Samples(samples float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(samples)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetSamples sets the Samples property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#samples
+func (m *MultiRenderTarget) SetSamples(samples float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(samples)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SamplingMode returns the SamplingMode property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#samplingmode
+func (m *MultiRenderTarget) SamplingMode(samplingMode float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(samplingMode)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetSamplingMode sets the SamplingMode property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#samplingmode
+func (m *MultiRenderTarget) SetSamplingMode(samplingMode float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(samplingMode)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SerializeBuffers returns the SerializeBuffers property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#serializebuffers
+func (m *MultiRenderTarget) SerializeBuffers(SerializeBuffers bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(SerializeBuffers)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetSerializeBuffers sets the SerializeBuffers property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#serializebuffers
+func (m *MultiRenderTarget) SetSerializeBuffers(SerializeBuffers bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(SerializeBuffers)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// TRILINEAR_SAMPLINGMODE returns the TRILINEAR_SAMPLINGMODE property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#trilinear_samplingmode
+func (m *MultiRenderTarget) TRILINEAR_SAMPLINGMODE(TRILINEAR_SAMPLINGMODE float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(TRILINEAR_SAMPLINGMODE)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetTRILINEAR_SAMPLINGMODE sets the TRILINEAR_SAMPLINGMODE property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#trilinear_samplingmode
+func (m *MultiRenderTarget) SetTRILINEAR_SAMPLINGMODE(TRILINEAR_SAMPLINGMODE float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(TRILINEAR_SAMPLINGMODE)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// TextureFormat returns the TextureFormat property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#textureformat
+func (m *MultiRenderTarget) TextureFormat(textureFormat float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(textureFormat)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetTextureFormat sets the TextureFormat property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#textureformat
+func (m *MultiRenderTarget) SetTextureFormat(textureFormat float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(textureFormat)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// TextureType returns the TextureType property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#texturetype
+func (m *MultiRenderTarget) TextureType(textureType float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(textureType)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetTextureType sets the TextureType property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#texturetype
+func (m *MultiRenderTarget) SetTextureType(textureType float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(textureType)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// Textures returns the Textures property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#textures
+func (m *MultiRenderTarget) Textures(textures *Texture) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(textures.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetTextures sets the Textures property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#textures
+func (m *MultiRenderTarget) SetTextures(textures *Texture) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(textures.JSObject())
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// UAng returns the UAng property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#uang
+func (m *MultiRenderTarget) UAng(uAng float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(uAng)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetUAng sets the UAng property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#uang
+func (m *MultiRenderTarget) SetUAng(uAng float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(uAng)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// UOffset returns the UOffset property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#uoffset
+func (m *MultiRenderTarget) UOffset(uOffset float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(uOffset)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetUOffset sets the UOffset property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#uoffset
+func (m *MultiRenderTarget) SetUOffset(uOffset float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(uOffset)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// URotationCenter returns the URotationCenter property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#urotationcenter
+func (m *MultiRenderTarget) URotationCenter(uRotationCenter float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(uRotationCenter)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetURotationCenter sets the URotationCenter property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#urotationcenter
+func (m *MultiRenderTarget) SetURotationCenter(uRotationCenter float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(uRotationCenter)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// UScale returns the UScale property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#uscale
+func (m *MultiRenderTarget) UScale(uScale float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(uScale)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetUScale sets the UScale property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#uscale
+func (m *MultiRenderTarget) SetUScale(uScale float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(uScale)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// Uid returns the Uid property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#uid
+func (m *MultiRenderTarget) Uid(uid string) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(uid)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetUid sets the Uid property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#uid
+func (m *MultiRenderTarget) SetUid(uid string) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(uid)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#uniqueid
+func (m *MultiRenderTarget) UniqueId(uniqueId float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(uniqueId)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#uniqueid
+func (m *MultiRenderTarget) SetUniqueId(uniqueId float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(uniqueId)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// Url returns the Url property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#url
+func (m *MultiRenderTarget) Url(url string) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(url)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetUrl sets the Url property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#url
+func (m *MultiRenderTarget) SetUrl(url string) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(url)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// UseCameraPostProcesses returns the UseCameraPostProcesses property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#usecamerapostprocesses
+func (m *MultiRenderTarget) UseCameraPostProcesses(useCameraPostProcesses bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(useCameraPostProcesses)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetUseCameraPostProcesses sets the UseCameraPostProcesses property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#usecamerapostprocesses
+func (m *MultiRenderTarget) SetUseCameraPostProcesses(useCameraPostProcesses bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(useCameraPostProcesses)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// UseSerializedUrlIfAny returns the UseSerializedUrlIfAny property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#useserializedurlifany
+func (m *MultiRenderTarget) UseSerializedUrlIfAny(UseSerializedUrlIfAny bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(UseSerializedUrlIfAny)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetUseSerializedUrlIfAny sets the UseSerializedUrlIfAny property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#useserializedurlifany
+func (m *MultiRenderTarget) SetUseSerializedUrlIfAny(UseSerializedUrlIfAny bool) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(UseSerializedUrlIfAny)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// VAng returns the VAng property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#vang
+func (m *MultiRenderTarget) VAng(vAng float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(vAng)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetVAng sets the VAng property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#vang
+func (m *MultiRenderTarget) SetVAng(vAng float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(vAng)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// VOffset returns the VOffset property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#voffset
+func (m *MultiRenderTarget) VOffset(vOffset float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(vOffset)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetVOffset sets the VOffset property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#voffset
+func (m *MultiRenderTarget) SetVOffset(vOffset float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(vOffset)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// VRotationCenter returns the VRotationCenter property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#vrotationcenter
+func (m *MultiRenderTarget) VRotationCenter(vRotationCenter float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(vRotationCenter)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetVRotationCenter sets the VRotationCenter property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#vrotationcenter
+func (m *MultiRenderTarget) SetVRotationCenter(vRotationCenter float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(vRotationCenter)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// VScale returns the VScale property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#vscale
+func (m *MultiRenderTarget) VScale(vScale float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(vScale)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetVScale sets the VScale property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#vscale
+func (m *MultiRenderTarget) SetVScale(vScale float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(vScale)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// WAng returns the WAng property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#wang
+func (m *MultiRenderTarget) WAng(wAng float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(wAng)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetWAng sets the WAng property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#wang
+func (m *MultiRenderTarget) SetWAng(wAng float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(wAng)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// WRAP_ADDRESSMODE returns the WRAP_ADDRESSMODE property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#wrap_addressmode
+func (m *MultiRenderTarget) WRAP_ADDRESSMODE(WRAP_ADDRESSMODE float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(WRAP_ADDRESSMODE)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetWRAP_ADDRESSMODE sets the WRAP_ADDRESSMODE property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#wrap_addressmode
+func (m *MultiRenderTarget) SetWRAP_ADDRESSMODE(WRAP_ADDRESSMODE float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(WRAP_ADDRESSMODE)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// WRotationCenter returns the WRotationCenter property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#wrotationcenter
+func (m *MultiRenderTarget) WRotationCenter(wRotationCenter float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(wRotationCenter)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetWRotationCenter sets the WRotationCenter property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#wrotationcenter
+func (m *MultiRenderTarget) SetWRotationCenter(wRotationCenter float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(wRotationCenter)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// WrapR returns the WrapR property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#wrapr
+func (m *MultiRenderTarget) WrapR(wrapR float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(wrapR)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetWrapR sets the WrapR property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#wrapr
+func (m *MultiRenderTarget) SetWrapR(wrapR float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(wrapR)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// WrapU returns the WrapU property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#wrapu
+func (m *MultiRenderTarget) WrapU(wrapU float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(wrapU)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetWrapU sets the WrapU property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#wrapu
+func (m *MultiRenderTarget) SetWrapU(wrapU float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(wrapU)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// WrapV returns the WrapV property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#wrapv
+func (m *MultiRenderTarget) WrapV(wrapV float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(wrapV)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+// SetWrapV sets the WrapV property of class MultiRenderTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.multirendertarget#wrapv
+func (m *MultiRenderTarget) SetWrapV(wrapV float64) *MultiRenderTarget {
+	p := ba.ctx.Get("MultiRenderTarget").New(wrapV)
+	return MultiRenderTargetFromJSObject(p, ba.ctx)
+}
+
+*/

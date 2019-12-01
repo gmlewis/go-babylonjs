@@ -31,8 +31,637 @@ func LengthBlockFromJSObject(p js.Value, ctx js.Value) *LengthBlock {
 //
 // https://doc.babylonjs.com/api/classes/babylon.lengthblock
 func (ba *Babylon) NewLengthBlock(name string) *LengthBlock {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	p := ba.ctx.Get("LengthBlock").New(args...)
+	return LengthBlockFromJSObject(p, ba.ctx)
+}
+
+// AutoConfigure calls the AutoConfigure method on the LengthBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#autoconfigure
+func (l *LengthBlock) AutoConfigure(material *NodeMaterial) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, material.JSObject())
+
+	l.p.Call("autoConfigure", args...)
+}
+
+// LengthBlockBindOpts contains optional parameters for LengthBlock.Bind.
+type LengthBlockBindOpts struct {
+	Mesh *Mesh
+}
+
+// Bind calls the Bind method on the LengthBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#bind
+func (l *LengthBlock) Bind(effect *Effect, nodeMaterial *NodeMaterial, opts *LengthBlockBindOpts) {
+	if opts == nil {
+		opts = &LengthBlockBindOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, effect.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	l.p.Call("bind", args...)
+}
+
+// Build calls the Build method on the LengthBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#build
+func (l *LengthBlock) Build(state *NodeMaterialBuildState, activeBlocks *NodeMaterialBlock) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, state.JSObject())
+	args = append(args, activeBlocks.JSObject())
+
+	retVal := l.p.Call("build", args...)
+	return retVal.Bool()
+}
+
+// LengthBlockCloneOpts contains optional parameters for LengthBlock.Clone.
+type LengthBlockCloneOpts struct {
+	RootUrl *string
+}
+
+// Clone calls the Clone method on the LengthBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#clone
+func (l *LengthBlock) Clone(scene *Scene, opts *LengthBlockCloneOpts) *NodeMaterialBlock {
+	if opts == nil {
+		opts = &LengthBlockCloneOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, scene.JSObject())
+
+	if opts.RootUrl == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RootUrl)
+	}
+
+	retVal := l.p.Call("clone", args...)
+	return NodeMaterialBlockFromJSObject(retVal, l.ctx)
+}
+
+// LengthBlockConnectToOpts contains optional parameters for LengthBlock.ConnectTo.
+type LengthBlockConnectToOpts struct {
+	Options js.Value
+}
+
+// ConnectTo calls the ConnectTo method on the LengthBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#connectto
+func (l *LengthBlock) ConnectTo(other *NodeMaterialBlock, opts *LengthBlockConnectToOpts) *LengthBlock {
+	if opts == nil {
+		opts = &LengthBlockConnectToOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, other.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	retVal := l.p.Call("connectTo", args...)
+	return LengthBlockFromJSObject(retVal, l.ctx)
+}
+
+// Dispose calls the Dispose method on the LengthBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#dispose
+func (l *LengthBlock) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	l.p.Call("dispose", args...)
+}
+
+// GetClassName calls the GetClassName method on the LengthBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#getclassname
+func (l *LengthBlock) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := l.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// LengthBlockGetFirstAvailableInputOpts contains optional parameters for LengthBlock.GetFirstAvailableInput.
+type LengthBlockGetFirstAvailableInputOpts struct {
+	ForOutput *NodeMaterialConnectionPoint
+}
+
+// GetFirstAvailableInput calls the GetFirstAvailableInput method on the LengthBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#getfirstavailableinput
+func (l *LengthBlock) GetFirstAvailableInput(opts *LengthBlockGetFirstAvailableInputOpts) *NodeMaterialConnectionPoint {
+	if opts == nil {
+		opts = &LengthBlockGetFirstAvailableInputOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForOutput == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForOutput.JSObject())
+	}
+
+	retVal := l.p.Call("getFirstAvailableInput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, l.ctx)
+}
+
+// LengthBlockGetFirstAvailableOutputOpts contains optional parameters for LengthBlock.GetFirstAvailableOutput.
+type LengthBlockGetFirstAvailableOutputOpts struct {
+	ForBlock *NodeMaterialBlock
+}
+
+// GetFirstAvailableOutput calls the GetFirstAvailableOutput method on the LengthBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#getfirstavailableoutput
+func (l *LengthBlock) GetFirstAvailableOutput(opts *LengthBlockGetFirstAvailableOutputOpts) *NodeMaterialConnectionPoint {
+	if opts == nil {
+		opts = &LengthBlockGetFirstAvailableOutputOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForBlock == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForBlock.JSObject())
+	}
+
+	retVal := l.p.Call("getFirstAvailableOutput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, l.ctx)
+}
+
+// GetInputByName calls the GetInputByName method on the LengthBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#getinputbyname
+func (l *LengthBlock) GetInputByName(name string) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := l.p.Call("getInputByName", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, l.ctx)
+}
+
+// GetOutputByName calls the GetOutputByName method on the LengthBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#getoutputbyname
+func (l *LengthBlock) GetOutputByName(name string) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := l.p.Call("getOutputByName", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, l.ctx)
+}
+
+// GetSiblingOutput calls the GetSiblingOutput method on the LengthBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#getsiblingoutput
+func (l *LengthBlock) GetSiblingOutput(current *NodeMaterialConnectionPoint) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, current.JSObject())
+
+	retVal := l.p.Call("getSiblingOutput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, l.ctx)
+}
+
+// Initialize calls the Initialize method on the LengthBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#initialize
+func (l *LengthBlock) Initialize(state *NodeMaterialBuildState) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, state.JSObject())
+
+	l.p.Call("initialize", args...)
+}
+
+// LengthBlockInitializeDefinesOpts contains optional parameters for LengthBlock.InitializeDefines.
+type LengthBlockInitializeDefinesOpts struct {
+	UseInstances *bool
+}
+
+// InitializeDefines calls the InitializeDefines method on the LengthBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#initializedefines
+func (l *LengthBlock) InitializeDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *LengthBlockInitializeDefinesOpts) {
+	if opts == nil {
+		opts = &LengthBlockInitializeDefinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	l.p.Call("initializeDefines", args...)
+}
+
+// LengthBlockIsReadyOpts contains optional parameters for LengthBlock.IsReady.
+type LengthBlockIsReadyOpts struct {
+	UseInstances *bool
+}
+
+// IsReady calls the IsReady method on the LengthBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#isready
+func (l *LengthBlock) IsReady(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *LengthBlockIsReadyOpts) bool {
+	if opts == nil {
+		opts = &LengthBlockIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := l.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// LengthBlockPrepareDefinesOpts contains optional parameters for LengthBlock.PrepareDefines.
+type LengthBlockPrepareDefinesOpts struct {
+	UseInstances *bool
+}
+
+// PrepareDefines calls the PrepareDefines method on the LengthBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#preparedefines
+func (l *LengthBlock) PrepareDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *LengthBlockPrepareDefinesOpts) {
+	if opts == nil {
+		opts = &LengthBlockPrepareDefinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	l.p.Call("prepareDefines", args...)
+}
+
+// ProvideFallbacks calls the ProvideFallbacks method on the LengthBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#providefallbacks
+func (l *LengthBlock) ProvideFallbacks(mesh *AbstractMesh, fallbacks *EffectFallbacks) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, fallbacks.JSObject())
+
+	l.p.Call("provideFallbacks", args...)
+}
+
+// LengthBlockRegisterInputOpts contains optional parameters for LengthBlock.RegisterInput.
+type LengthBlockRegisterInputOpts struct {
+	IsOptional *bool
+	Target     js.Value
+}
+
+// RegisterInput calls the RegisterInput method on the LengthBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#registerinput
+func (l *LengthBlock) RegisterInput(name string, jsType js.Value, opts *LengthBlockRegisterInputOpts) *LengthBlock {
+	if opts == nil {
+		opts = &LengthBlockRegisterInputOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+2)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	if opts.IsOptional == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IsOptional)
+	}
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+
+	retVal := l.p.Call("registerInput", args...)
+	return LengthBlockFromJSObject(retVal, l.ctx)
+}
+
+// LengthBlockRegisterOutputOpts contains optional parameters for LengthBlock.RegisterOutput.
+type LengthBlockRegisterOutputOpts struct {
+	Target js.Value
+}
+
+// RegisterOutput calls the RegisterOutput method on the LengthBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#registeroutput
+func (l *LengthBlock) RegisterOutput(name string, jsType js.Value, opts *LengthBlockRegisterOutputOpts) *LengthBlock {
+	if opts == nil {
+		opts = &LengthBlockRegisterOutputOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+
+	retVal := l.p.Call("registerOutput", args...)
+	return LengthBlockFromJSObject(retVal, l.ctx)
+}
+
+// ReplaceRepeatableContent calls the ReplaceRepeatableContent method on the LengthBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#replacerepeatablecontent
+func (l *LengthBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterialBuildState, fragmentShaderState *NodeMaterialBuildState, mesh *AbstractMesh, defines js.Value) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, vertexShaderState.JSObject())
+	args = append(args, fragmentShaderState.JSObject())
+	args = append(args, mesh.JSObject())
+	args = append(args, defines)
+
+	l.p.Call("replaceRepeatableContent", args...)
+}
+
+// Serialize calls the Serialize method on the LengthBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#serialize
+func (l *LengthBlock) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := l.p.Call("serialize", args...)
+	return retVal
+}
+
+// UpdateUniformsAndSamples calls the UpdateUniformsAndSamples method on the LengthBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#updateuniformsandsamples
+func (l *LengthBlock) UpdateUniformsAndSamples(state *NodeMaterialBuildState, nodeMaterial *NodeMaterial, defines js.Value, uniformBuffers string) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, state.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+	args = append(args, uniformBuffers)
+
+	l.p.Call("updateUniformsAndSamples", args...)
+}
+
+/*
+
+// BuildId returns the BuildId property of class LengthBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#buildid
+func (l *LengthBlock) BuildId(buildId float64) *LengthBlock {
+	p := ba.ctx.Get("LengthBlock").New(buildId)
+	return LengthBlockFromJSObject(p, ba.ctx)
+}
+
+// SetBuildId sets the BuildId property of class LengthBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#buildid
+func (l *LengthBlock) SetBuildId(buildId float64) *LengthBlock {
+	p := ba.ctx.Get("LengthBlock").New(buildId)
+	return LengthBlockFromJSObject(p, ba.ctx)
+}
+
+// Comments returns the Comments property of class LengthBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#comments
+func (l *LengthBlock) Comments(comments string) *LengthBlock {
+	p := ba.ctx.Get("LengthBlock").New(comments)
+	return LengthBlockFromJSObject(p, ba.ctx)
+}
+
+// SetComments sets the Comments property of class LengthBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#comments
+func (l *LengthBlock) SetComments(comments string) *LengthBlock {
+	p := ba.ctx.Get("LengthBlock").New(comments)
+	return LengthBlockFromJSObject(p, ba.ctx)
+}
+
+// Inputs returns the Inputs property of class LengthBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#inputs
+func (l *LengthBlock) Inputs(inputs *NodeMaterialConnectionPoint) *LengthBlock {
+	p := ba.ctx.Get("LengthBlock").New(inputs.JSObject())
+	return LengthBlockFromJSObject(p, ba.ctx)
+}
+
+// SetInputs sets the Inputs property of class LengthBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#inputs
+func (l *LengthBlock) SetInputs(inputs *NodeMaterialConnectionPoint) *LengthBlock {
+	p := ba.ctx.Get("LengthBlock").New(inputs.JSObject())
+	return LengthBlockFromJSObject(p, ba.ctx)
+}
+
+// IsFinalMerger returns the IsFinalMerger property of class LengthBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#isfinalmerger
+func (l *LengthBlock) IsFinalMerger(isFinalMerger bool) *LengthBlock {
+	p := ba.ctx.Get("LengthBlock").New(isFinalMerger)
+	return LengthBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsFinalMerger sets the IsFinalMerger property of class LengthBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#isfinalmerger
+func (l *LengthBlock) SetIsFinalMerger(isFinalMerger bool) *LengthBlock {
+	p := ba.ctx.Get("LengthBlock").New(isFinalMerger)
+	return LengthBlockFromJSObject(p, ba.ctx)
+}
+
+// IsInput returns the IsInput property of class LengthBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#isinput
+func (l *LengthBlock) IsInput(isInput bool) *LengthBlock {
+	p := ba.ctx.Get("LengthBlock").New(isInput)
+	return LengthBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsInput sets the IsInput property of class LengthBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#isinput
+func (l *LengthBlock) SetIsInput(isInput bool) *LengthBlock {
+	p := ba.ctx.Get("LengthBlock").New(isInput)
+	return LengthBlockFromJSObject(p, ba.ctx)
+}
+
+// IsUnique returns the IsUnique property of class LengthBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#isunique
+func (l *LengthBlock) IsUnique(isUnique bool) *LengthBlock {
+	p := ba.ctx.Get("LengthBlock").New(isUnique)
+	return LengthBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsUnique sets the IsUnique property of class LengthBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#isunique
+func (l *LengthBlock) SetIsUnique(isUnique bool) *LengthBlock {
+	p := ba.ctx.Get("LengthBlock").New(isUnique)
+	return LengthBlockFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class LengthBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#name
+func (l *LengthBlock) Name(name string) *LengthBlock {
 	p := ba.ctx.Get("LengthBlock").New(name)
 	return LengthBlockFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetName sets the Name property of class LengthBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#name
+func (l *LengthBlock) SetName(name string) *LengthBlock {
+	p := ba.ctx.Get("LengthBlock").New(name)
+	return LengthBlockFromJSObject(p, ba.ctx)
+}
+
+// Output returns the Output property of class LengthBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#output
+func (l *LengthBlock) Output(output *NodeMaterialConnectionPoint) *LengthBlock {
+	p := ba.ctx.Get("LengthBlock").New(output.JSObject())
+	return LengthBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOutput sets the Output property of class LengthBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#output
+func (l *LengthBlock) SetOutput(output *NodeMaterialConnectionPoint) *LengthBlock {
+	p := ba.ctx.Get("LengthBlock").New(output.JSObject())
+	return LengthBlockFromJSObject(p, ba.ctx)
+}
+
+// Outputs returns the Outputs property of class LengthBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#outputs
+func (l *LengthBlock) Outputs(outputs *NodeMaterialConnectionPoint) *LengthBlock {
+	p := ba.ctx.Get("LengthBlock").New(outputs.JSObject())
+	return LengthBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOutputs sets the Outputs property of class LengthBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#outputs
+func (l *LengthBlock) SetOutputs(outputs *NodeMaterialConnectionPoint) *LengthBlock {
+	p := ba.ctx.Get("LengthBlock").New(outputs.JSObject())
+	return LengthBlockFromJSObject(p, ba.ctx)
+}
+
+// Target returns the Target property of class LengthBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#target
+func (l *LengthBlock) Target(target js.Value) *LengthBlock {
+	p := ba.ctx.Get("LengthBlock").New(target)
+	return LengthBlockFromJSObject(p, ba.ctx)
+}
+
+// SetTarget sets the Target property of class LengthBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#target
+func (l *LengthBlock) SetTarget(target js.Value) *LengthBlock {
+	p := ba.ctx.Get("LengthBlock").New(target)
+	return LengthBlockFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class LengthBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#uniqueid
+func (l *LengthBlock) UniqueId(uniqueId float64) *LengthBlock {
+	p := ba.ctx.Get("LengthBlock").New(uniqueId)
+	return LengthBlockFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class LengthBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#uniqueid
+func (l *LengthBlock) SetUniqueId(uniqueId float64) *LengthBlock {
+	p := ba.ctx.Get("LengthBlock").New(uniqueId)
+	return LengthBlockFromJSObject(p, ba.ctx)
+}
+
+// Value returns the Value property of class LengthBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#value
+func (l *LengthBlock) Value(value *NodeMaterialConnectionPoint) *LengthBlock {
+	p := ba.ctx.Get("LengthBlock").New(value.JSObject())
+	return LengthBlockFromJSObject(p, ba.ctx)
+}
+
+// SetValue sets the Value property of class LengthBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lengthblock#value
+func (l *LengthBlock) SetValue(value *NodeMaterialConnectionPoint) *LengthBlock {
+	p := ba.ctx.Get("LengthBlock").New(value.JSObject())
+	return LengthBlockFromJSObject(p, ba.ctx)
+}
+
+*/

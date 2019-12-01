@@ -30,15 +30,11 @@ func SharpenPostProcessFromJSObject(p js.Value, ctx js.Value) *SharpenPostProces
 
 // NewSharpenPostProcessOpts contains optional parameters for NewSharpenPostProcess.
 type NewSharpenPostProcessOpts struct {
-	SamplingMode *JSFloat64
-
-	Engine *Engine
-
-	Reusable *JSBool
-
-	TextureType *JSFloat64
-
-	BlockCompilation *JSBool
+	SamplingMode     *float64
+	Engine           *Engine
+	Reusable         *bool
+	TextureType      *float64
+	BlockCompilation *bool
 }
 
 // NewSharpenPostProcess returns a new SharpenPostProcess object.
@@ -49,8 +45,802 @@ func (ba *Babylon) NewSharpenPostProcess(name string, options float64, camera *C
 		opts = &NewSharpenPostProcessOpts{}
 	}
 
-	p := ba.ctx.Get("SharpenPostProcess").New(name, options, camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType.JSObject(), opts.BlockCompilation.JSObject())
+	args := make([]interface{}, 0, 3+5)
+
+	args = append(args, name)
+	args = append(args, options)
+	args = append(args, camera.JSObject())
+
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+	if opts.Engine == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Engine.JSObject())
+	}
+	if opts.Reusable == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Reusable)
+	}
+	if opts.TextureType == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.TextureType)
+	}
+	if opts.BlockCompilation == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.BlockCompilation)
+	}
+
+	p := ba.ctx.Get("SharpenPostProcess").New(args...)
 	return SharpenPostProcessFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SharpenPostProcessActivateOpts contains optional parameters for SharpenPostProcess.Activate.
+type SharpenPostProcessActivateOpts struct {
+	SourceTexture     *InternalTexture
+	ForceDepthStencil *bool
+}
+
+// Activate calls the Activate method on the SharpenPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#activate
+func (s *SharpenPostProcess) Activate(camera *Camera, opts *SharpenPostProcessActivateOpts) *InternalTexture {
+	if opts == nil {
+		opts = &SharpenPostProcessActivateOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, camera.JSObject())
+
+	if opts.SourceTexture == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.SourceTexture.JSObject())
+	}
+	if opts.ForceDepthStencil == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceDepthStencil)
+	}
+
+	retVal := s.p.Call("activate", args...)
+	return InternalTextureFromJSObject(retVal, s.ctx)
+}
+
+// Apply calls the Apply method on the SharpenPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#apply
+func (s *SharpenPostProcess) Apply() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("apply", args...)
+	return EffectFromJSObject(retVal, s.ctx)
+}
+
+// SharpenPostProcessDisposeOpts contains optional parameters for SharpenPostProcess.Dispose.
+type SharpenPostProcessDisposeOpts struct {
+	Camera *Camera
+}
+
+// Dispose calls the Dispose method on the SharpenPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#dispose
+func (s *SharpenPostProcess) Dispose(opts *SharpenPostProcessDisposeOpts) {
+	if opts == nil {
+		opts = &SharpenPostProcessDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Camera == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Camera.JSObject())
+	}
+
+	s.p.Call("dispose", args...)
+}
+
+// GetCamera calls the GetCamera method on the SharpenPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#getcamera
+func (s *SharpenPostProcess) GetCamera() *Camera {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getCamera", args...)
+	return CameraFromJSObject(retVal, s.ctx)
+}
+
+// GetClassName calls the GetClassName method on the SharpenPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#getclassname
+func (s *SharpenPostProcess) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetEffect calls the GetEffect method on the SharpenPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#geteffect
+func (s *SharpenPostProcess) GetEffect() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getEffect", args...)
+	return EffectFromJSObject(retVal, s.ctx)
+}
+
+// GetEffectName calls the GetEffectName method on the SharpenPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#geteffectname
+func (s *SharpenPostProcess) GetEffectName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getEffectName", args...)
+	return retVal.String()
+}
+
+// GetEngine calls the GetEngine method on the SharpenPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#getengine
+func (s *SharpenPostProcess) GetEngine() *Engine {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getEngine", args...)
+	return EngineFromJSObject(retVal, s.ctx)
+}
+
+// IsReady calls the IsReady method on the SharpenPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#isready
+func (s *SharpenPostProcess) IsReady() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// IsReusable calls the IsReusable method on the SharpenPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#isreusable
+func (s *SharpenPostProcess) IsReusable() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("isReusable", args...)
+	return retVal.Bool()
+}
+
+// MarkTextureDirty calls the MarkTextureDirty method on the SharpenPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#marktexturedirty
+func (s *SharpenPostProcess) MarkTextureDirty() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("markTextureDirty", args...)
+}
+
+// ShareOutputWith calls the ShareOutputWith method on the SharpenPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#shareoutputwith
+func (s *SharpenPostProcess) ShareOutputWith(postProcess *PostProcess) *PostProcess {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, postProcess.JSObject())
+
+	retVal := s.p.Call("shareOutputWith", args...)
+	return PostProcessFromJSObject(retVal, s.ctx)
+}
+
+// SharpenPostProcessUpdateEffectOpts contains optional parameters for SharpenPostProcess.UpdateEffect.
+type SharpenPostProcessUpdateEffectOpts struct {
+	Defines         *string
+	Uniforms        *string
+	Samplers        *string
+	IndexParameters *interface{}
+	OnCompiled      *func()
+	OnError         *func()
+}
+
+// UpdateEffect calls the UpdateEffect method on the SharpenPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#updateeffect
+func (s *SharpenPostProcess) UpdateEffect(opts *SharpenPostProcessUpdateEffectOpts) {
+	if opts == nil {
+		opts = &SharpenPostProcessUpdateEffectOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+6)
+
+	if opts.Defines == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Defines)
+	}
+	if opts.Uniforms == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Uniforms)
+	}
+	if opts.Samplers == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Samplers)
+	}
+	if opts.IndexParameters == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.IndexParameters)
+	}
+	if opts.OnCompiled == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnCompiled)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+
+	s.p.Call("updateEffect", args...)
+}
+
+// UseOwnOutput calls the UseOwnOutput method on the SharpenPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#useownoutput
+func (s *SharpenPostProcess) UseOwnOutput() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("useOwnOutput", args...)
+}
+
+/*
+
+// AdaptScaleToCurrentViewport returns the AdaptScaleToCurrentViewport property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#adaptscaletocurrentviewport
+func (s *SharpenPostProcess) AdaptScaleToCurrentViewport(adaptScaleToCurrentViewport bool) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(adaptScaleToCurrentViewport)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAdaptScaleToCurrentViewport sets the AdaptScaleToCurrentViewport property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#adaptscaletocurrentviewport
+func (s *SharpenPostProcess) SetAdaptScaleToCurrentViewport(adaptScaleToCurrentViewport bool) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(adaptScaleToCurrentViewport)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AlphaConstants returns the AlphaConstants property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#alphaconstants
+func (s *SharpenPostProcess) AlphaConstants(alphaConstants *Color4) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(alphaConstants.JSObject())
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaConstants sets the AlphaConstants property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#alphaconstants
+func (s *SharpenPostProcess) SetAlphaConstants(alphaConstants *Color4) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(alphaConstants.JSObject())
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AlphaMode returns the AlphaMode property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#alphamode
+func (s *SharpenPostProcess) AlphaMode(alphaMode float64) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(alphaMode)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaMode sets the AlphaMode property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#alphamode
+func (s *SharpenPostProcess) SetAlphaMode(alphaMode float64) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(alphaMode)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AlwaysForcePOT returns the AlwaysForcePOT property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#alwaysforcepot
+func (s *SharpenPostProcess) AlwaysForcePOT(alwaysForcePOT bool) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(alwaysForcePOT)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAlwaysForcePOT sets the AlwaysForcePOT property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#alwaysforcepot
+func (s *SharpenPostProcess) SetAlwaysForcePOT(alwaysForcePOT bool) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(alwaysForcePOT)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Animations returns the Animations property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#animations
+func (s *SharpenPostProcess) Animations(animations *Animation) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(animations.JSObject())
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#animations
+func (s *SharpenPostProcess) SetAnimations(animations *Animation) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(animations.JSObject())
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AspectRatio returns the AspectRatio property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#aspectratio
+func (s *SharpenPostProcess) AspectRatio(aspectRatio float64) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(aspectRatio)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAspectRatio sets the AspectRatio property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#aspectratio
+func (s *SharpenPostProcess) SetAspectRatio(aspectRatio float64) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(aspectRatio)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AutoClear returns the AutoClear property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#autoclear
+func (s *SharpenPostProcess) AutoClear(autoClear bool) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(autoClear)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAutoClear sets the AutoClear property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#autoclear
+func (s *SharpenPostProcess) SetAutoClear(autoClear bool) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(autoClear)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ClearColor returns the ClearColor property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#clearcolor
+func (s *SharpenPostProcess) ClearColor(clearColor *Color4) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(clearColor.JSObject())
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetClearColor sets the ClearColor property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#clearcolor
+func (s *SharpenPostProcess) SetClearColor(clearColor *Color4) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(clearColor.JSObject())
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ColorAmount returns the ColorAmount property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#coloramount
+func (s *SharpenPostProcess) ColorAmount(colorAmount float64) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(colorAmount)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetColorAmount sets the ColorAmount property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#coloramount
+func (s *SharpenPostProcess) SetColorAmount(colorAmount float64) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(colorAmount)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// EdgeAmount returns the EdgeAmount property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#edgeamount
+func (s *SharpenPostProcess) EdgeAmount(edgeAmount float64) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(edgeAmount)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetEdgeAmount sets the EdgeAmount property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#edgeamount
+func (s *SharpenPostProcess) SetEdgeAmount(edgeAmount float64) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(edgeAmount)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// EnablePixelPerfectMode returns the EnablePixelPerfectMode property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#enablepixelperfectmode
+func (s *SharpenPostProcess) EnablePixelPerfectMode(enablePixelPerfectMode bool) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(enablePixelPerfectMode)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetEnablePixelPerfectMode sets the EnablePixelPerfectMode property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#enablepixelperfectmode
+func (s *SharpenPostProcess) SetEnablePixelPerfectMode(enablePixelPerfectMode bool) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(enablePixelPerfectMode)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ForceFullscreenViewport returns the ForceFullscreenViewport property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#forcefullscreenviewport
+func (s *SharpenPostProcess) ForceFullscreenViewport(forceFullscreenViewport bool) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(forceFullscreenViewport)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetForceFullscreenViewport sets the ForceFullscreenViewport property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#forcefullscreenviewport
+func (s *SharpenPostProcess) SetForceFullscreenViewport(forceFullscreenViewport bool) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(forceFullscreenViewport)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Height returns the Height property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#height
+func (s *SharpenPostProcess) Height(height float64) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(height)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetHeight sets the Height property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#height
+func (s *SharpenPostProcess) SetHeight(height float64) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(height)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// InputTexture returns the InputTexture property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#inputtexture
+func (s *SharpenPostProcess) InputTexture(inputTexture *InternalTexture) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(inputTexture.JSObject())
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetInputTexture sets the InputTexture property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#inputtexture
+func (s *SharpenPostProcess) SetInputTexture(inputTexture *InternalTexture) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(inputTexture.JSObject())
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#inspectablecustomproperties
+func (s *SharpenPostProcess) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(inspectableCustomProperties.JSObject())
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#inspectablecustomproperties
+func (s *SharpenPostProcess) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(inspectableCustomProperties.JSObject())
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// IsSupported returns the IsSupported property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#issupported
+func (s *SharpenPostProcess) IsSupported(isSupported bool) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(isSupported)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetIsSupported sets the IsSupported property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#issupported
+func (s *SharpenPostProcess) SetIsSupported(isSupported bool) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(isSupported)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#name
+func (s *SharpenPostProcess) Name(name string) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(name)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#name
+func (s *SharpenPostProcess) SetName(name string) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(name)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnActivate returns the OnActivate property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#onactivate
+func (s *SharpenPostProcess) OnActivate(onActivate func()) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(onActivate)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnActivate sets the OnActivate property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#onactivate
+func (s *SharpenPostProcess) SetOnActivate(onActivate func()) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(onActivate)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnActivateObservable returns the OnActivateObservable property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#onactivateobservable
+func (s *SharpenPostProcess) OnActivateObservable(onActivateObservable *Observable) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(onActivateObservable.JSObject())
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnActivateObservable sets the OnActivateObservable property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#onactivateobservable
+func (s *SharpenPostProcess) SetOnActivateObservable(onActivateObservable *Observable) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(onActivateObservable.JSObject())
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnAfterRender returns the OnAfterRender property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#onafterrender
+func (s *SharpenPostProcess) OnAfterRender(onAfterRender func()) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(onAfterRender)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterRender sets the OnAfterRender property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#onafterrender
+func (s *SharpenPostProcess) SetOnAfterRender(onAfterRender func()) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(onAfterRender)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnAfterRenderObservable returns the OnAfterRenderObservable property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#onafterrenderobservable
+func (s *SharpenPostProcess) OnAfterRenderObservable(onAfterRenderObservable *Observable) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(onAfterRenderObservable.JSObject())
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterRenderObservable sets the OnAfterRenderObservable property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#onafterrenderobservable
+func (s *SharpenPostProcess) SetOnAfterRenderObservable(onAfterRenderObservable *Observable) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(onAfterRenderObservable.JSObject())
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnApply returns the OnApply property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#onapply
+func (s *SharpenPostProcess) OnApply(onApply func()) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(onApply)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnApply sets the OnApply property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#onapply
+func (s *SharpenPostProcess) SetOnApply(onApply func()) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(onApply)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnApplyObservable returns the OnApplyObservable property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#onapplyobservable
+func (s *SharpenPostProcess) OnApplyObservable(onApplyObservable *Observable) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(onApplyObservable.JSObject())
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnApplyObservable sets the OnApplyObservable property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#onapplyobservable
+func (s *SharpenPostProcess) SetOnApplyObservable(onApplyObservable *Observable) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(onApplyObservable.JSObject())
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeRender returns the OnBeforeRender property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#onbeforerender
+func (s *SharpenPostProcess) OnBeforeRender(onBeforeRender func()) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(onBeforeRender)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeRender sets the OnBeforeRender property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#onbeforerender
+func (s *SharpenPostProcess) SetOnBeforeRender(onBeforeRender func()) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(onBeforeRender)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeRenderObservable returns the OnBeforeRenderObservable property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#onbeforerenderobservable
+func (s *SharpenPostProcess) OnBeforeRenderObservable(onBeforeRenderObservable *Observable) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(onBeforeRenderObservable.JSObject())
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeRenderObservable sets the OnBeforeRenderObservable property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#onbeforerenderobservable
+func (s *SharpenPostProcess) SetOnBeforeRenderObservable(onBeforeRenderObservable *Observable) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(onBeforeRenderObservable.JSObject())
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnSizeChanged returns the OnSizeChanged property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#onsizechanged
+func (s *SharpenPostProcess) OnSizeChanged(onSizeChanged func()) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(onSizeChanged)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnSizeChanged sets the OnSizeChanged property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#onsizechanged
+func (s *SharpenPostProcess) SetOnSizeChanged(onSizeChanged func()) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(onSizeChanged)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnSizeChangedObservable returns the OnSizeChangedObservable property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#onsizechangedobservable
+func (s *SharpenPostProcess) OnSizeChangedObservable(onSizeChangedObservable *Observable) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(onSizeChangedObservable.JSObject())
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnSizeChangedObservable sets the OnSizeChangedObservable property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#onsizechangedobservable
+func (s *SharpenPostProcess) SetOnSizeChangedObservable(onSizeChangedObservable *Observable) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(onSizeChangedObservable.JSObject())
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// RenderTargetSamplingMode returns the RenderTargetSamplingMode property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#rendertargetsamplingmode
+func (s *SharpenPostProcess) RenderTargetSamplingMode(renderTargetSamplingMode float64) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(renderTargetSamplingMode)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetRenderTargetSamplingMode sets the RenderTargetSamplingMode property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#rendertargetsamplingmode
+func (s *SharpenPostProcess) SetRenderTargetSamplingMode(renderTargetSamplingMode float64) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(renderTargetSamplingMode)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Samples returns the Samples property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#samples
+func (s *SharpenPostProcess) Samples(samples float64) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(samples)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetSamples sets the Samples property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#samples
+func (s *SharpenPostProcess) SetSamples(samples float64) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(samples)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ScaleMode returns the ScaleMode property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#scalemode
+func (s *SharpenPostProcess) ScaleMode(scaleMode float64) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(scaleMode)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetScaleMode sets the ScaleMode property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#scalemode
+func (s *SharpenPostProcess) SetScaleMode(scaleMode float64) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(scaleMode)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// TexelSize returns the TexelSize property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#texelsize
+func (s *SharpenPostProcess) TexelSize(texelSize *Vector2) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(texelSize.JSObject())
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetTexelSize sets the TexelSize property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#texelsize
+func (s *SharpenPostProcess) SetTexelSize(texelSize *Vector2) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(texelSize.JSObject())
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#uniqueid
+func (s *SharpenPostProcess) UniqueId(uniqueId float64) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(uniqueId)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#uniqueid
+func (s *SharpenPostProcess) SetUniqueId(uniqueId float64) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(uniqueId)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Width returns the Width property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#width
+func (s *SharpenPostProcess) Width(width float64) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(width)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetWidth sets the Width property of class SharpenPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sharpenpostprocess#width
+func (s *SharpenPostProcess) SetWidth(width float64) *SharpenPostProcess {
+	p := ba.ctx.Get("SharpenPostProcess").New(width)
+	return SharpenPostProcessFromJSObject(p, ba.ctx)
+}
+
+*/

@@ -32,9 +32,336 @@ func Hinge2JointFromJSObject(p js.Value, ctx js.Value) *Hinge2Joint {
 // NewHinge2Joint returns a new Hinge2Joint object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.hinge2joint
-func (ba *Babylon) NewHinge2Joint(jointData js.Value) *Hinge2Joint {
-	p := ba.ctx.Get("Hinge2Joint").New(jointData)
+func (ba *Babylon) NewHinge2Joint(jointData *PhysicsJointData) *Hinge2Joint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, jointData.JSObject())
+
+	p := ba.ctx.Get("Hinge2Joint").New(args...)
 	return Hinge2JointFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// ExecuteNativeFunction calls the ExecuteNativeFunction method on the Hinge2Joint object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hinge2joint#executenativefunction
+func (h *Hinge2Joint) ExecuteNativeFunction(jsFunc func()) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, jsFunc)
+
+	h.p.Call("executeNativeFunction", args...)
+}
+
+// Hinge2JointSetLimitOpts contains optional parameters for Hinge2Joint.SetLimit.
+type Hinge2JointSetLimitOpts struct {
+	LowerLimit *float64
+	MotorIndex *float64
+}
+
+// SetLimit calls the SetLimit method on the Hinge2Joint object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hinge2joint#setlimit
+func (h *Hinge2Joint) SetLimit(upperLimit float64, opts *Hinge2JointSetLimitOpts) {
+	if opts == nil {
+		opts = &Hinge2JointSetLimitOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, upperLimit)
+
+	if opts.LowerLimit == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.LowerLimit)
+	}
+	if opts.MotorIndex == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.MotorIndex)
+	}
+
+	h.p.Call("setLimit", args...)
+}
+
+// Hinge2JointSetMotorOpts contains optional parameters for Hinge2Joint.SetMotor.
+type Hinge2JointSetMotorOpts struct {
+	TargetSpeed *float64
+	MaxForce    *float64
+	MotorIndex  *float64
+}
+
+// SetMotor calls the SetMotor method on the Hinge2Joint object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hinge2joint#setmotor
+func (h *Hinge2Joint) SetMotor(opts *Hinge2JointSetMotorOpts) {
+	if opts == nil {
+		opts = &Hinge2JointSetMotorOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+3)
+
+	if opts.TargetSpeed == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.TargetSpeed)
+	}
+	if opts.MaxForce == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.MaxForce)
+	}
+	if opts.MotorIndex == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.MotorIndex)
+	}
+
+	h.p.Call("setMotor", args...)
+}
+
+/*
+
+// BallAndSocketJoint returns the BallAndSocketJoint property of class Hinge2Joint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hinge2joint#ballandsocketjoint
+func (h *Hinge2Joint) BallAndSocketJoint(BallAndSocketJoint float64) *Hinge2Joint {
+	p := ba.ctx.Get("Hinge2Joint").New(BallAndSocketJoint)
+	return Hinge2JointFromJSObject(p, ba.ctx)
+}
+
+// SetBallAndSocketJoint sets the BallAndSocketJoint property of class Hinge2Joint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hinge2joint#ballandsocketjoint
+func (h *Hinge2Joint) SetBallAndSocketJoint(BallAndSocketJoint float64) *Hinge2Joint {
+	p := ba.ctx.Get("Hinge2Joint").New(BallAndSocketJoint)
+	return Hinge2JointFromJSObject(p, ba.ctx)
+}
+
+// DistanceJoint returns the DistanceJoint property of class Hinge2Joint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hinge2joint#distancejoint
+func (h *Hinge2Joint) DistanceJoint(DistanceJoint float64) *Hinge2Joint {
+	p := ba.ctx.Get("Hinge2Joint").New(DistanceJoint)
+	return Hinge2JointFromJSObject(p, ba.ctx)
+}
+
+// SetDistanceJoint sets the DistanceJoint property of class Hinge2Joint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hinge2joint#distancejoint
+func (h *Hinge2Joint) SetDistanceJoint(DistanceJoint float64) *Hinge2Joint {
+	p := ba.ctx.Get("Hinge2Joint").New(DistanceJoint)
+	return Hinge2JointFromJSObject(p, ba.ctx)
+}
+
+// Hinge2Joint returns the Hinge2Joint property of class Hinge2Joint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hinge2joint#hinge2joint
+func (h *Hinge2Joint) Hinge2Joint(Hinge2Joint float64) *Hinge2Joint {
+	p := ba.ctx.Get("Hinge2Joint").New(Hinge2Joint)
+	return Hinge2JointFromJSObject(p, ba.ctx)
+}
+
+// SetHinge2Joint sets the Hinge2Joint property of class Hinge2Joint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hinge2joint#hinge2joint
+func (h *Hinge2Joint) SetHinge2Joint(Hinge2Joint float64) *Hinge2Joint {
+	p := ba.ctx.Get("Hinge2Joint").New(Hinge2Joint)
+	return Hinge2JointFromJSObject(p, ba.ctx)
+}
+
+// HingeJoint returns the HingeJoint property of class Hinge2Joint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hinge2joint#hingejoint
+func (h *Hinge2Joint) HingeJoint(HingeJoint float64) *Hinge2Joint {
+	p := ba.ctx.Get("Hinge2Joint").New(HingeJoint)
+	return Hinge2JointFromJSObject(p, ba.ctx)
+}
+
+// SetHingeJoint sets the HingeJoint property of class Hinge2Joint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hinge2joint#hingejoint
+func (h *Hinge2Joint) SetHingeJoint(HingeJoint float64) *Hinge2Joint {
+	p := ba.ctx.Get("Hinge2Joint").New(HingeJoint)
+	return Hinge2JointFromJSObject(p, ba.ctx)
+}
+
+// JointData returns the JointData property of class Hinge2Joint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hinge2joint#jointdata
+func (h *Hinge2Joint) JointData(jointData *PhysicsJointData) *Hinge2Joint {
+	p := ba.ctx.Get("Hinge2Joint").New(jointData.JSObject())
+	return Hinge2JointFromJSObject(p, ba.ctx)
+}
+
+// SetJointData sets the JointData property of class Hinge2Joint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hinge2joint#jointdata
+func (h *Hinge2Joint) SetJointData(jointData *PhysicsJointData) *Hinge2Joint {
+	p := ba.ctx.Get("Hinge2Joint").New(jointData.JSObject())
+	return Hinge2JointFromJSObject(p, ba.ctx)
+}
+
+// LockJoint returns the LockJoint property of class Hinge2Joint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hinge2joint#lockjoint
+func (h *Hinge2Joint) LockJoint(LockJoint float64) *Hinge2Joint {
+	p := ba.ctx.Get("Hinge2Joint").New(LockJoint)
+	return Hinge2JointFromJSObject(p, ba.ctx)
+}
+
+// SetLockJoint sets the LockJoint property of class Hinge2Joint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hinge2joint#lockjoint
+func (h *Hinge2Joint) SetLockJoint(LockJoint float64) *Hinge2Joint {
+	p := ba.ctx.Get("Hinge2Joint").New(LockJoint)
+	return Hinge2JointFromJSObject(p, ba.ctx)
+}
+
+// PhysicsJoint returns the PhysicsJoint property of class Hinge2Joint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hinge2joint#physicsjoint
+func (h *Hinge2Joint) PhysicsJoint(physicsJoint interface{}) *Hinge2Joint {
+	p := ba.ctx.Get("Hinge2Joint").New(physicsJoint)
+	return Hinge2JointFromJSObject(p, ba.ctx)
+}
+
+// SetPhysicsJoint sets the PhysicsJoint property of class Hinge2Joint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hinge2joint#physicsjoint
+func (h *Hinge2Joint) SetPhysicsJoint(physicsJoint interface{}) *Hinge2Joint {
+	p := ba.ctx.Get("Hinge2Joint").New(physicsJoint)
+	return Hinge2JointFromJSObject(p, ba.ctx)
+}
+
+// PhysicsPlugin returns the PhysicsPlugin property of class Hinge2Joint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hinge2joint#physicsplugin
+func (h *Hinge2Joint) PhysicsPlugin(physicsPlugin js.Value) *Hinge2Joint {
+	p := ba.ctx.Get("Hinge2Joint").New(physicsPlugin)
+	return Hinge2JointFromJSObject(p, ba.ctx)
+}
+
+// SetPhysicsPlugin sets the PhysicsPlugin property of class Hinge2Joint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hinge2joint#physicsplugin
+func (h *Hinge2Joint) SetPhysicsPlugin(physicsPlugin js.Value) *Hinge2Joint {
+	p := ba.ctx.Get("Hinge2Joint").New(physicsPlugin)
+	return Hinge2JointFromJSObject(p, ba.ctx)
+}
+
+// PointToPointJoint returns the PointToPointJoint property of class Hinge2Joint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hinge2joint#pointtopointjoint
+func (h *Hinge2Joint) PointToPointJoint(PointToPointJoint float64) *Hinge2Joint {
+	p := ba.ctx.Get("Hinge2Joint").New(PointToPointJoint)
+	return Hinge2JointFromJSObject(p, ba.ctx)
+}
+
+// SetPointToPointJoint sets the PointToPointJoint property of class Hinge2Joint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hinge2joint#pointtopointjoint
+func (h *Hinge2Joint) SetPointToPointJoint(PointToPointJoint float64) *Hinge2Joint {
+	p := ba.ctx.Get("Hinge2Joint").New(PointToPointJoint)
+	return Hinge2JointFromJSObject(p, ba.ctx)
+}
+
+// PrismaticJoint returns the PrismaticJoint property of class Hinge2Joint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hinge2joint#prismaticjoint
+func (h *Hinge2Joint) PrismaticJoint(PrismaticJoint float64) *Hinge2Joint {
+	p := ba.ctx.Get("Hinge2Joint").New(PrismaticJoint)
+	return Hinge2JointFromJSObject(p, ba.ctx)
+}
+
+// SetPrismaticJoint sets the PrismaticJoint property of class Hinge2Joint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hinge2joint#prismaticjoint
+func (h *Hinge2Joint) SetPrismaticJoint(PrismaticJoint float64) *Hinge2Joint {
+	p := ba.ctx.Get("Hinge2Joint").New(PrismaticJoint)
+	return Hinge2JointFromJSObject(p, ba.ctx)
+}
+
+// SliderJoint returns the SliderJoint property of class Hinge2Joint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hinge2joint#sliderjoint
+func (h *Hinge2Joint) SliderJoint(SliderJoint float64) *Hinge2Joint {
+	p := ba.ctx.Get("Hinge2Joint").New(SliderJoint)
+	return Hinge2JointFromJSObject(p, ba.ctx)
+}
+
+// SetSliderJoint sets the SliderJoint property of class Hinge2Joint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hinge2joint#sliderjoint
+func (h *Hinge2Joint) SetSliderJoint(SliderJoint float64) *Hinge2Joint {
+	p := ba.ctx.Get("Hinge2Joint").New(SliderJoint)
+	return Hinge2JointFromJSObject(p, ba.ctx)
+}
+
+// SpringJoint returns the SpringJoint property of class Hinge2Joint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hinge2joint#springjoint
+func (h *Hinge2Joint) SpringJoint(SpringJoint float64) *Hinge2Joint {
+	p := ba.ctx.Get("Hinge2Joint").New(SpringJoint)
+	return Hinge2JointFromJSObject(p, ba.ctx)
+}
+
+// SetSpringJoint sets the SpringJoint property of class Hinge2Joint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hinge2joint#springjoint
+func (h *Hinge2Joint) SetSpringJoint(SpringJoint float64) *Hinge2Joint {
+	p := ba.ctx.Get("Hinge2Joint").New(SpringJoint)
+	return Hinge2JointFromJSObject(p, ba.ctx)
+}
+
+// Type returns the Type property of class Hinge2Joint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hinge2joint#type
+func (h *Hinge2Joint) Type(jsType float64) *Hinge2Joint {
+	p := ba.ctx.Get("Hinge2Joint").New(jsType)
+	return Hinge2JointFromJSObject(p, ba.ctx)
+}
+
+// SetType sets the Type property of class Hinge2Joint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hinge2joint#type
+func (h *Hinge2Joint) SetType(jsType float64) *Hinge2Joint {
+	p := ba.ctx.Get("Hinge2Joint").New(jsType)
+	return Hinge2JointFromJSObject(p, ba.ctx)
+}
+
+// UniversalJoint returns the UniversalJoint property of class Hinge2Joint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hinge2joint#universaljoint
+func (h *Hinge2Joint) UniversalJoint(UniversalJoint float64) *Hinge2Joint {
+	p := ba.ctx.Get("Hinge2Joint").New(UniversalJoint)
+	return Hinge2JointFromJSObject(p, ba.ctx)
+}
+
+// SetUniversalJoint sets the UniversalJoint property of class Hinge2Joint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hinge2joint#universaljoint
+func (h *Hinge2Joint) SetUniversalJoint(UniversalJoint float64) *Hinge2Joint {
+	p := ba.ctx.Get("Hinge2Joint").New(UniversalJoint)
+	return Hinge2JointFromJSObject(p, ba.ctx)
+}
+
+// WheelJoint returns the WheelJoint property of class Hinge2Joint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hinge2joint#wheeljoint
+func (h *Hinge2Joint) WheelJoint(WheelJoint float64) *Hinge2Joint {
+	p := ba.ctx.Get("Hinge2Joint").New(WheelJoint)
+	return Hinge2JointFromJSObject(p, ba.ctx)
+}
+
+// SetWheelJoint sets the WheelJoint property of class Hinge2Joint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hinge2joint#wheeljoint
+func (h *Hinge2Joint) SetWheelJoint(WheelJoint float64) *Hinge2Joint {
+	p := ba.ctx.Get("Hinge2Joint").New(WheelJoint)
+	return Hinge2JointFromJSObject(p, ba.ctx)
+}
+
+*/

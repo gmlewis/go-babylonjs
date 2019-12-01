@@ -30,11 +30,9 @@ func SphereParticleEmitterFromJSObject(p js.Value, ctx js.Value) *SphereParticle
 
 // NewSphereParticleEmitterOpts contains optional parameters for NewSphereParticleEmitter.
 type NewSphereParticleEmitterOpts struct {
-	Radius *JSFloat64
-
-	RadiusRange *JSFloat64
-
-	DirectionRandomizer *JSFloat64
+	Radius              *float64
+	RadiusRange         *float64
+	DirectionRandomizer *float64
 }
 
 // NewSphereParticleEmitter returns a new SphereParticleEmitter object.
@@ -45,8 +43,172 @@ func (ba *Babylon) NewSphereParticleEmitter(opts *NewSphereParticleEmitterOpts) 
 		opts = &NewSphereParticleEmitterOpts{}
 	}
 
-	p := ba.ctx.Get("SphereParticleEmitter").New(opts.Radius.JSObject(), opts.RadiusRange.JSObject(), opts.DirectionRandomizer.JSObject())
+	args := make([]interface{}, 0, 0+3)
+
+	if opts.Radius == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Radius)
+	}
+	if opts.RadiusRange == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RadiusRange)
+	}
+	if opts.DirectionRandomizer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectionRandomizer)
+	}
+
+	p := ba.ctx.Get("SphereParticleEmitter").New(args...)
 	return SphereParticleEmitterFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// ApplyToShader calls the ApplyToShader method on the SphereParticleEmitter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sphereparticleemitter#applytoshader
+func (s *SphereParticleEmitter) ApplyToShader(effect *Effect) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, effect.JSObject())
+
+	s.p.Call("applyToShader", args...)
+}
+
+// Clone calls the Clone method on the SphereParticleEmitter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sphereparticleemitter#clone
+func (s *SphereParticleEmitter) Clone() *SphereParticleEmitter {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("clone", args...)
+	return SphereParticleEmitterFromJSObject(retVal, s.ctx)
+}
+
+// GetClassName calls the GetClassName method on the SphereParticleEmitter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sphereparticleemitter#getclassname
+func (s *SphereParticleEmitter) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetEffectDefines calls the GetEffectDefines method on the SphereParticleEmitter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sphereparticleemitter#geteffectdefines
+func (s *SphereParticleEmitter) GetEffectDefines() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getEffectDefines", args...)
+	return retVal.String()
+}
+
+// Parse calls the Parse method on the SphereParticleEmitter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sphereparticleemitter#parse
+func (s *SphereParticleEmitter) Parse(serializationObject interface{}) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, serializationObject)
+
+	s.p.Call("parse", args...)
+}
+
+// Serialize calls the Serialize method on the SphereParticleEmitter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sphereparticleemitter#serialize
+func (s *SphereParticleEmitter) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("serialize", args...)
+	return retVal
+}
+
+// StartDirectionFunction calls the StartDirectionFunction method on the SphereParticleEmitter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sphereparticleemitter#startdirectionfunction
+func (s *SphereParticleEmitter) StartDirectionFunction(worldMatrix *Matrix, directionToUpdate *Vector3, particle *Particle) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, worldMatrix.JSObject())
+	args = append(args, directionToUpdate.JSObject())
+	args = append(args, particle.JSObject())
+
+	s.p.Call("startDirectionFunction", args...)
+}
+
+// StartPositionFunction calls the StartPositionFunction method on the SphereParticleEmitter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sphereparticleemitter#startpositionfunction
+func (s *SphereParticleEmitter) StartPositionFunction(worldMatrix *Matrix, positionToUpdate *Vector3, particle *Particle) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, worldMatrix.JSObject())
+	args = append(args, positionToUpdate.JSObject())
+	args = append(args, particle.JSObject())
+
+	s.p.Call("startPositionFunction", args...)
+}
+
+/*
+
+// DirectionRandomizer returns the DirectionRandomizer property of class SphereParticleEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sphereparticleemitter#directionrandomizer
+func (s *SphereParticleEmitter) DirectionRandomizer(directionRandomizer float64) *SphereParticleEmitter {
+	p := ba.ctx.Get("SphereParticleEmitter").New(directionRandomizer)
+	return SphereParticleEmitterFromJSObject(p, ba.ctx)
+}
+
+// SetDirectionRandomizer sets the DirectionRandomizer property of class SphereParticleEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sphereparticleemitter#directionrandomizer
+func (s *SphereParticleEmitter) SetDirectionRandomizer(directionRandomizer float64) *SphereParticleEmitter {
+	p := ba.ctx.Get("SphereParticleEmitter").New(directionRandomizer)
+	return SphereParticleEmitterFromJSObject(p, ba.ctx)
+}
+
+// Radius returns the Radius property of class SphereParticleEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sphereparticleemitter#radius
+func (s *SphereParticleEmitter) Radius(radius float64) *SphereParticleEmitter {
+	p := ba.ctx.Get("SphereParticleEmitter").New(radius)
+	return SphereParticleEmitterFromJSObject(p, ba.ctx)
+}
+
+// SetRadius sets the Radius property of class SphereParticleEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sphereparticleemitter#radius
+func (s *SphereParticleEmitter) SetRadius(radius float64) *SphereParticleEmitter {
+	p := ba.ctx.Get("SphereParticleEmitter").New(radius)
+	return SphereParticleEmitterFromJSObject(p, ba.ctx)
+}
+
+// RadiusRange returns the RadiusRange property of class SphereParticleEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sphereparticleemitter#radiusrange
+func (s *SphereParticleEmitter) RadiusRange(radiusRange float64) *SphereParticleEmitter {
+	p := ba.ctx.Get("SphereParticleEmitter").New(radiusRange)
+	return SphereParticleEmitterFromJSObject(p, ba.ctx)
+}
+
+// SetRadiusRange sets the RadiusRange property of class SphereParticleEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sphereparticleemitter#radiusrange
+func (s *SphereParticleEmitter) SetRadiusRange(radiusRange float64) *SphereParticleEmitter {
+	p := ba.ctx.Get("SphereParticleEmitter").New(radiusRange)
+	return SphereParticleEmitterFromJSObject(p, ba.ctx)
+}
+
+*/

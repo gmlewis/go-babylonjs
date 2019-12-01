@@ -32,9 +32,294 @@ func DistanceJointFromJSObject(p js.Value, ctx js.Value) *DistanceJoint {
 // NewDistanceJoint returns a new DistanceJoint object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.distancejoint
-func (ba *Babylon) NewDistanceJoint(jointData js.Value) *DistanceJoint {
-	p := ba.ctx.Get("DistanceJoint").New(jointData)
+func (ba *Babylon) NewDistanceJoint(jointData *DistanceJointData) *DistanceJoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, jointData.JSObject())
+
+	p := ba.ctx.Get("DistanceJoint").New(args...)
 	return DistanceJointFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// ExecuteNativeFunction calls the ExecuteNativeFunction method on the DistanceJoint object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.distancejoint#executenativefunction
+func (d *DistanceJoint) ExecuteNativeFunction(jsFunc func()) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, jsFunc)
+
+	d.p.Call("executeNativeFunction", args...)
+}
+
+// DistanceJointUpdateDistanceOpts contains optional parameters for DistanceJoint.UpdateDistance.
+type DistanceJointUpdateDistanceOpts struct {
+	MinDistance *float64
+}
+
+// UpdateDistance calls the UpdateDistance method on the DistanceJoint object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.distancejoint#updatedistance
+func (d *DistanceJoint) UpdateDistance(maxDistance float64, opts *DistanceJointUpdateDistanceOpts) {
+	if opts == nil {
+		opts = &DistanceJointUpdateDistanceOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, maxDistance)
+
+	if opts.MinDistance == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.MinDistance)
+	}
+
+	d.p.Call("updateDistance", args...)
+}
+
+/*
+
+// BallAndSocketJoint returns the BallAndSocketJoint property of class DistanceJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.distancejoint#ballandsocketjoint
+func (d *DistanceJoint) BallAndSocketJoint(BallAndSocketJoint float64) *DistanceJoint {
+	p := ba.ctx.Get("DistanceJoint").New(BallAndSocketJoint)
+	return DistanceJointFromJSObject(p, ba.ctx)
+}
+
+// SetBallAndSocketJoint sets the BallAndSocketJoint property of class DistanceJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.distancejoint#ballandsocketjoint
+func (d *DistanceJoint) SetBallAndSocketJoint(BallAndSocketJoint float64) *DistanceJoint {
+	p := ba.ctx.Get("DistanceJoint").New(BallAndSocketJoint)
+	return DistanceJointFromJSObject(p, ba.ctx)
+}
+
+// DistanceJoint returns the DistanceJoint property of class DistanceJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.distancejoint#distancejoint
+func (d *DistanceJoint) DistanceJoint(DistanceJoint float64) *DistanceJoint {
+	p := ba.ctx.Get("DistanceJoint").New(DistanceJoint)
+	return DistanceJointFromJSObject(p, ba.ctx)
+}
+
+// SetDistanceJoint sets the DistanceJoint property of class DistanceJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.distancejoint#distancejoint
+func (d *DistanceJoint) SetDistanceJoint(DistanceJoint float64) *DistanceJoint {
+	p := ba.ctx.Get("DistanceJoint").New(DistanceJoint)
+	return DistanceJointFromJSObject(p, ba.ctx)
+}
+
+// Hinge2Joint returns the Hinge2Joint property of class DistanceJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.distancejoint#hinge2joint
+func (d *DistanceJoint) Hinge2Joint(Hinge2Joint float64) *DistanceJoint {
+	p := ba.ctx.Get("DistanceJoint").New(Hinge2Joint)
+	return DistanceJointFromJSObject(p, ba.ctx)
+}
+
+// SetHinge2Joint sets the Hinge2Joint property of class DistanceJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.distancejoint#hinge2joint
+func (d *DistanceJoint) SetHinge2Joint(Hinge2Joint float64) *DistanceJoint {
+	p := ba.ctx.Get("DistanceJoint").New(Hinge2Joint)
+	return DistanceJointFromJSObject(p, ba.ctx)
+}
+
+// HingeJoint returns the HingeJoint property of class DistanceJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.distancejoint#hingejoint
+func (d *DistanceJoint) HingeJoint(HingeJoint float64) *DistanceJoint {
+	p := ba.ctx.Get("DistanceJoint").New(HingeJoint)
+	return DistanceJointFromJSObject(p, ba.ctx)
+}
+
+// SetHingeJoint sets the HingeJoint property of class DistanceJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.distancejoint#hingejoint
+func (d *DistanceJoint) SetHingeJoint(HingeJoint float64) *DistanceJoint {
+	p := ba.ctx.Get("DistanceJoint").New(HingeJoint)
+	return DistanceJointFromJSObject(p, ba.ctx)
+}
+
+// JointData returns the JointData property of class DistanceJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.distancejoint#jointdata
+func (d *DistanceJoint) JointData(jointData *PhysicsJointData) *DistanceJoint {
+	p := ba.ctx.Get("DistanceJoint").New(jointData.JSObject())
+	return DistanceJointFromJSObject(p, ba.ctx)
+}
+
+// SetJointData sets the JointData property of class DistanceJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.distancejoint#jointdata
+func (d *DistanceJoint) SetJointData(jointData *PhysicsJointData) *DistanceJoint {
+	p := ba.ctx.Get("DistanceJoint").New(jointData.JSObject())
+	return DistanceJointFromJSObject(p, ba.ctx)
+}
+
+// LockJoint returns the LockJoint property of class DistanceJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.distancejoint#lockjoint
+func (d *DistanceJoint) LockJoint(LockJoint float64) *DistanceJoint {
+	p := ba.ctx.Get("DistanceJoint").New(LockJoint)
+	return DistanceJointFromJSObject(p, ba.ctx)
+}
+
+// SetLockJoint sets the LockJoint property of class DistanceJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.distancejoint#lockjoint
+func (d *DistanceJoint) SetLockJoint(LockJoint float64) *DistanceJoint {
+	p := ba.ctx.Get("DistanceJoint").New(LockJoint)
+	return DistanceJointFromJSObject(p, ba.ctx)
+}
+
+// PhysicsJoint returns the PhysicsJoint property of class DistanceJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.distancejoint#physicsjoint
+func (d *DistanceJoint) PhysicsJoint(physicsJoint interface{}) *DistanceJoint {
+	p := ba.ctx.Get("DistanceJoint").New(physicsJoint)
+	return DistanceJointFromJSObject(p, ba.ctx)
+}
+
+// SetPhysicsJoint sets the PhysicsJoint property of class DistanceJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.distancejoint#physicsjoint
+func (d *DistanceJoint) SetPhysicsJoint(physicsJoint interface{}) *DistanceJoint {
+	p := ba.ctx.Get("DistanceJoint").New(physicsJoint)
+	return DistanceJointFromJSObject(p, ba.ctx)
+}
+
+// PhysicsPlugin returns the PhysicsPlugin property of class DistanceJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.distancejoint#physicsplugin
+func (d *DistanceJoint) PhysicsPlugin(physicsPlugin js.Value) *DistanceJoint {
+	p := ba.ctx.Get("DistanceJoint").New(physicsPlugin)
+	return DistanceJointFromJSObject(p, ba.ctx)
+}
+
+// SetPhysicsPlugin sets the PhysicsPlugin property of class DistanceJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.distancejoint#physicsplugin
+func (d *DistanceJoint) SetPhysicsPlugin(physicsPlugin js.Value) *DistanceJoint {
+	p := ba.ctx.Get("DistanceJoint").New(physicsPlugin)
+	return DistanceJointFromJSObject(p, ba.ctx)
+}
+
+// PointToPointJoint returns the PointToPointJoint property of class DistanceJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.distancejoint#pointtopointjoint
+func (d *DistanceJoint) PointToPointJoint(PointToPointJoint float64) *DistanceJoint {
+	p := ba.ctx.Get("DistanceJoint").New(PointToPointJoint)
+	return DistanceJointFromJSObject(p, ba.ctx)
+}
+
+// SetPointToPointJoint sets the PointToPointJoint property of class DistanceJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.distancejoint#pointtopointjoint
+func (d *DistanceJoint) SetPointToPointJoint(PointToPointJoint float64) *DistanceJoint {
+	p := ba.ctx.Get("DistanceJoint").New(PointToPointJoint)
+	return DistanceJointFromJSObject(p, ba.ctx)
+}
+
+// PrismaticJoint returns the PrismaticJoint property of class DistanceJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.distancejoint#prismaticjoint
+func (d *DistanceJoint) PrismaticJoint(PrismaticJoint float64) *DistanceJoint {
+	p := ba.ctx.Get("DistanceJoint").New(PrismaticJoint)
+	return DistanceJointFromJSObject(p, ba.ctx)
+}
+
+// SetPrismaticJoint sets the PrismaticJoint property of class DistanceJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.distancejoint#prismaticjoint
+func (d *DistanceJoint) SetPrismaticJoint(PrismaticJoint float64) *DistanceJoint {
+	p := ba.ctx.Get("DistanceJoint").New(PrismaticJoint)
+	return DistanceJointFromJSObject(p, ba.ctx)
+}
+
+// SliderJoint returns the SliderJoint property of class DistanceJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.distancejoint#sliderjoint
+func (d *DistanceJoint) SliderJoint(SliderJoint float64) *DistanceJoint {
+	p := ba.ctx.Get("DistanceJoint").New(SliderJoint)
+	return DistanceJointFromJSObject(p, ba.ctx)
+}
+
+// SetSliderJoint sets the SliderJoint property of class DistanceJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.distancejoint#sliderjoint
+func (d *DistanceJoint) SetSliderJoint(SliderJoint float64) *DistanceJoint {
+	p := ba.ctx.Get("DistanceJoint").New(SliderJoint)
+	return DistanceJointFromJSObject(p, ba.ctx)
+}
+
+// SpringJoint returns the SpringJoint property of class DistanceJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.distancejoint#springjoint
+func (d *DistanceJoint) SpringJoint(SpringJoint float64) *DistanceJoint {
+	p := ba.ctx.Get("DistanceJoint").New(SpringJoint)
+	return DistanceJointFromJSObject(p, ba.ctx)
+}
+
+// SetSpringJoint sets the SpringJoint property of class DistanceJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.distancejoint#springjoint
+func (d *DistanceJoint) SetSpringJoint(SpringJoint float64) *DistanceJoint {
+	p := ba.ctx.Get("DistanceJoint").New(SpringJoint)
+	return DistanceJointFromJSObject(p, ba.ctx)
+}
+
+// Type returns the Type property of class DistanceJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.distancejoint#type
+func (d *DistanceJoint) Type(jsType float64) *DistanceJoint {
+	p := ba.ctx.Get("DistanceJoint").New(jsType)
+	return DistanceJointFromJSObject(p, ba.ctx)
+}
+
+// SetType sets the Type property of class DistanceJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.distancejoint#type
+func (d *DistanceJoint) SetType(jsType float64) *DistanceJoint {
+	p := ba.ctx.Get("DistanceJoint").New(jsType)
+	return DistanceJointFromJSObject(p, ba.ctx)
+}
+
+// UniversalJoint returns the UniversalJoint property of class DistanceJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.distancejoint#universaljoint
+func (d *DistanceJoint) UniversalJoint(UniversalJoint float64) *DistanceJoint {
+	p := ba.ctx.Get("DistanceJoint").New(UniversalJoint)
+	return DistanceJointFromJSObject(p, ba.ctx)
+}
+
+// SetUniversalJoint sets the UniversalJoint property of class DistanceJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.distancejoint#universaljoint
+func (d *DistanceJoint) SetUniversalJoint(UniversalJoint float64) *DistanceJoint {
+	p := ba.ctx.Get("DistanceJoint").New(UniversalJoint)
+	return DistanceJointFromJSObject(p, ba.ctx)
+}
+
+// WheelJoint returns the WheelJoint property of class DistanceJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.distancejoint#wheeljoint
+func (d *DistanceJoint) WheelJoint(WheelJoint float64) *DistanceJoint {
+	p := ba.ctx.Get("DistanceJoint").New(WheelJoint)
+	return DistanceJointFromJSObject(p, ba.ctx)
+}
+
+// SetWheelJoint sets the WheelJoint property of class DistanceJoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.distancejoint#wheeljoint
+func (d *DistanceJoint) SetWheelJoint(WheelJoint float64) *DistanceJoint {
+	p := ba.ctx.Get("DistanceJoint").New(WheelJoint)
+	return DistanceJointFromJSObject(p, ba.ctx)
+}
+
+*/

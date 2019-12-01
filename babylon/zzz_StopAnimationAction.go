@@ -42,8 +42,126 @@ func (ba *Babylon) NewStopAnimationAction(triggerOptions interface{}, target int
 		opts = &NewStopAnimationActionOpts{}
 	}
 
-	p := ba.ctx.Get("StopAnimationAction").New(triggerOptions, target, opts.Condition.JSObject())
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, triggerOptions)
+	args = append(args, target)
+
+	if opts.Condition == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Condition.JSObject())
+	}
+
+	p := ba.ctx.Get("StopAnimationAction").New(args...)
 	return StopAnimationActionFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Execute calls the Execute method on the StopAnimationAction object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stopanimationaction#execute
+func (s *StopAnimationAction) Execute() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("execute", args...)
+}
+
+// GetTriggerParameter calls the GetTriggerParameter method on the StopAnimationAction object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stopanimationaction#gettriggerparameter
+func (s *StopAnimationAction) GetTriggerParameter() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getTriggerParameter", args...)
+	return retVal
+}
+
+// Serialize calls the Serialize method on the StopAnimationAction object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stopanimationaction#serialize
+func (s *StopAnimationAction) Serialize(parent interface{}) interface{} {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, parent)
+
+	retVal := s.p.Call("serialize", args...)
+	return retVal
+}
+
+// SkipToNextActiveAction calls the SkipToNextActiveAction method on the StopAnimationAction object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stopanimationaction#skiptonextactiveaction
+func (s *StopAnimationAction) SkipToNextActiveAction() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("skipToNextActiveAction", args...)
+}
+
+// Then calls the Then method on the StopAnimationAction object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stopanimationaction#then
+func (s *StopAnimationAction) Then(action *Action) *Action {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, action.JSObject())
+
+	retVal := s.p.Call("then", args...)
+	return ActionFromJSObject(retVal, s.ctx)
+}
+
+/*
+
+// OnBeforeExecuteObservable returns the OnBeforeExecuteObservable property of class StopAnimationAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stopanimationaction#onbeforeexecuteobservable
+func (s *StopAnimationAction) OnBeforeExecuteObservable(onBeforeExecuteObservable *Observable) *StopAnimationAction {
+	p := ba.ctx.Get("StopAnimationAction").New(onBeforeExecuteObservable.JSObject())
+	return StopAnimationActionFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeExecuteObservable sets the OnBeforeExecuteObservable property of class StopAnimationAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stopanimationaction#onbeforeexecuteobservable
+func (s *StopAnimationAction) SetOnBeforeExecuteObservable(onBeforeExecuteObservable *Observable) *StopAnimationAction {
+	p := ba.ctx.Get("StopAnimationAction").New(onBeforeExecuteObservable.JSObject())
+	return StopAnimationActionFromJSObject(p, ba.ctx)
+}
+
+// Trigger returns the Trigger property of class StopAnimationAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stopanimationaction#trigger
+func (s *StopAnimationAction) Trigger(trigger float64) *StopAnimationAction {
+	p := ba.ctx.Get("StopAnimationAction").New(trigger)
+	return StopAnimationActionFromJSObject(p, ba.ctx)
+}
+
+// SetTrigger sets the Trigger property of class StopAnimationAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stopanimationaction#trigger
+func (s *StopAnimationAction) SetTrigger(trigger float64) *StopAnimationAction {
+	p := ba.ctx.Get("StopAnimationAction").New(trigger)
+	return StopAnimationActionFromJSObject(p, ba.ctx)
+}
+
+// TriggerOptions returns the TriggerOptions property of class StopAnimationAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stopanimationaction#triggeroptions
+func (s *StopAnimationAction) TriggerOptions(triggerOptions interface{}) *StopAnimationAction {
+	p := ba.ctx.Get("StopAnimationAction").New(triggerOptions)
+	return StopAnimationActionFromJSObject(p, ba.ctx)
+}
+
+// SetTriggerOptions sets the TriggerOptions property of class StopAnimationAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stopanimationaction#triggeroptions
+func (s *StopAnimationAction) SetTriggerOptions(triggerOptions interface{}) *StopAnimationAction {
+	p := ba.ctx.Get("StopAnimationAction").New(triggerOptions)
+	return StopAnimationActionFromJSObject(p, ba.ctx)
+}
+
+*/

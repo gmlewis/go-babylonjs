@@ -27,4 +27,54 @@ func KHR_materials_pbrSpecularGlossinessFromJSObject(p js.Value, ctx js.Value) *
 	return &KHR_materials_pbrSpecularGlossiness{p: p, ctx: ctx}
 }
 
-// TODO: methods
+/*
+
+// Enabled returns the Enabled property of class KHR_materials_pbrSpecularGlossiness.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khr_materials_pbrspecularglossiness#enabled
+func (k *KHR_materials_pbrSpecularGlossiness) Enabled(enabled bool) *KHR_materials_pbrSpecularGlossiness {
+	p := ba.ctx.Get("KHR_materials_pbrSpecularGlossiness").New(enabled)
+	return KHR_materials_pbrSpecularGlossinessFromJSObject(p, ba.ctx)
+}
+
+// SetEnabled sets the Enabled property of class KHR_materials_pbrSpecularGlossiness.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khr_materials_pbrspecularglossiness#enabled
+func (k *KHR_materials_pbrSpecularGlossiness) SetEnabled(enabled bool) *KHR_materials_pbrSpecularGlossiness {
+	p := ba.ctx.Get("KHR_materials_pbrSpecularGlossiness").New(enabled)
+	return KHR_materials_pbrSpecularGlossinessFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class KHR_materials_pbrSpecularGlossiness.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khr_materials_pbrspecularglossiness#name
+func (k *KHR_materials_pbrSpecularGlossiness) Name(name string) *KHR_materials_pbrSpecularGlossiness {
+	p := ba.ctx.Get("KHR_materials_pbrSpecularGlossiness").New(name)
+	return KHR_materials_pbrSpecularGlossinessFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class KHR_materials_pbrSpecularGlossiness.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khr_materials_pbrspecularglossiness#name
+func (k *KHR_materials_pbrSpecularGlossiness) SetName(name string) *KHR_materials_pbrSpecularGlossiness {
+	p := ba.ctx.Get("KHR_materials_pbrSpecularGlossiness").New(name)
+	return KHR_materials_pbrSpecularGlossinessFromJSObject(p, ba.ctx)
+}
+
+// Order returns the Order property of class KHR_materials_pbrSpecularGlossiness.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khr_materials_pbrspecularglossiness#order
+func (k *KHR_materials_pbrSpecularGlossiness) Order(order float64) *KHR_materials_pbrSpecularGlossiness {
+	p := ba.ctx.Get("KHR_materials_pbrSpecularGlossiness").New(order)
+	return KHR_materials_pbrSpecularGlossinessFromJSObject(p, ba.ctx)
+}
+
+// SetOrder sets the Order property of class KHR_materials_pbrSpecularGlossiness.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khr_materials_pbrspecularglossiness#order
+func (k *KHR_materials_pbrSpecularGlossiness) SetOrder(order float64) *KHR_materials_pbrSpecularGlossiness {
+	p := ba.ctx.Get("KHR_materials_pbrSpecularGlossiness").New(order)
+	return KHR_materials_pbrSpecularGlossinessFromJSObject(p, ba.ctx)
+}
+
+*/

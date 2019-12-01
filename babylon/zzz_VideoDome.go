@@ -34,8 +34,2075 @@ func VideoDomeFromJSObject(p js.Value, ctx js.Value) *VideoDome {
 //
 // https://doc.babylonjs.com/api/classes/babylon.videodome
 func (ba *Babylon) NewVideoDome(name string, urlsOrVideo string, options js.Value, scene *Scene) *VideoDome {
-	p := ba.ctx.Get("VideoDome").New(name, urlsOrVideo, options, scene.JSObject())
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, name)
+	args = append(args, urlsOrVideo)
+	args = append(args, options)
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("VideoDome").New(args...)
 	return VideoDomeFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// VideoDomeAddBehaviorOpts contains optional parameters for VideoDome.AddBehavior.
+type VideoDomeAddBehaviorOpts struct {
+	AttachImmediately *Node
+}
+
+// AddBehavior calls the AddBehavior method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#addbehavior
+func (v *VideoDome) AddBehavior(behavior js.Value, opts *VideoDomeAddBehaviorOpts) *Node {
+	if opts == nil {
+		opts = &VideoDomeAddBehaviorOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, behavior)
+
+	if opts.AttachImmediately == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.AttachImmediately.JSObject())
+	}
+
+	retVal := v.p.Call("addBehavior", args...)
+	return NodeFromJSObject(retVal, v.ctx)
+}
+
+// AddNodeConstructor calls the AddNodeConstructor method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#addnodeconstructor
+func (v *VideoDome) AddNodeConstructor(jsType string, constructorFunc js.Value) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, jsType)
+	args = append(args, constructorFunc)
+
+	v.p.Call("AddNodeConstructor", args...)
+}
+
+// AddRotation calls the AddRotation method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#addrotation
+func (v *VideoDome) AddRotation(x float64, y float64, z float64) *TransformNode {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, x)
+	args = append(args, y)
+	args = append(args, z)
+
+	retVal := v.p.Call("addRotation", args...)
+	return TransformNodeFromJSObject(retVal, v.ctx)
+}
+
+// AttachToBone calls the AttachToBone method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#attachtobone
+func (v *VideoDome) AttachToBone(bone *Bone, affectedTransformNode *TransformNode) *TransformNode {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, bone.JSObject())
+	args = append(args, affectedTransformNode.JSObject())
+
+	retVal := v.p.Call("attachToBone", args...)
+	return TransformNodeFromJSObject(retVal, v.ctx)
+}
+
+// VideoDomeBeginAnimationOpts contains optional parameters for VideoDome.BeginAnimation.
+type VideoDomeBeginAnimationOpts struct {
+	Loop           *bool
+	SpeedRatio     *float64
+	OnAnimationEnd *func()
+}
+
+// BeginAnimation calls the BeginAnimation method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#beginanimation
+func (v *VideoDome) BeginAnimation(name string, opts *VideoDomeBeginAnimationOpts) *Animatable {
+	if opts == nil {
+		opts = &VideoDomeBeginAnimationOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, name)
+
+	if opts.Loop == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Loop)
+	}
+	if opts.SpeedRatio == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SpeedRatio)
+	}
+	if opts.OnAnimationEnd == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnAnimationEnd)
+	}
+
+	retVal := v.p.Call("beginAnimation", args...)
+	return AnimatableFromJSObject(retVal, v.ctx)
+}
+
+// VideoDomeCloneOpts contains optional parameters for VideoDome.Clone.
+type VideoDomeCloneOpts struct {
+	DoNotCloneChildren *bool
+}
+
+// Clone calls the Clone method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#clone
+func (v *VideoDome) Clone(name string, newParent *Node, opts *VideoDomeCloneOpts) *TransformNode {
+	if opts == nil {
+		opts = &VideoDomeCloneOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, name)
+	args = append(args, newParent.JSObject())
+
+	if opts.DoNotCloneChildren == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DoNotCloneChildren)
+	}
+
+	retVal := v.p.Call("clone", args...)
+	return TransformNodeFromJSObject(retVal, v.ctx)
+}
+
+// VideoDomeComputeWorldMatrixOpts contains optional parameters for VideoDome.ComputeWorldMatrix.
+type VideoDomeComputeWorldMatrixOpts struct {
+	Force *bool
+}
+
+// ComputeWorldMatrix calls the ComputeWorldMatrix method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#computeworldmatrix
+func (v *VideoDome) ComputeWorldMatrix(opts *VideoDomeComputeWorldMatrixOpts) *Matrix {
+	if opts == nil {
+		opts = &VideoDomeComputeWorldMatrixOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Force == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Force)
+	}
+
+	retVal := v.p.Call("computeWorldMatrix", args...)
+	return MatrixFromJSObject(retVal, v.ctx)
+}
+
+// VideoDomeConstructOpts contains optional parameters for VideoDome.Construct.
+type VideoDomeConstructOpts struct {
+	Options *interface{}
+}
+
+// Construct calls the Construct method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#construct
+func (v *VideoDome) Construct(jsType string, name string, scene *Scene, opts *VideoDomeConstructOpts) func() {
+	if opts == nil {
+		opts = &VideoDomeConstructOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, jsType)
+	args = append(args, name)
+	args = append(args, scene.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	retVal := v.p.Call("Construct", args...)
+	return retVal
+}
+
+// CreateAnimationRange calls the CreateAnimationRange method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#createanimationrange
+func (v *VideoDome) CreateAnimationRange(name string, from float64, to float64) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, name)
+	args = append(args, from)
+	args = append(args, to)
+
+	v.p.Call("createAnimationRange", args...)
+}
+
+// VideoDomeDeleteAnimationRangeOpts contains optional parameters for VideoDome.DeleteAnimationRange.
+type VideoDomeDeleteAnimationRangeOpts struct {
+	DeleteFrames *bool
+}
+
+// DeleteAnimationRange calls the DeleteAnimationRange method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#deleteanimationrange
+func (v *VideoDome) DeleteAnimationRange(name string, opts *VideoDomeDeleteAnimationRangeOpts) {
+	if opts == nil {
+		opts = &VideoDomeDeleteAnimationRangeOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, name)
+
+	if opts.DeleteFrames == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DeleteFrames)
+	}
+
+	v.p.Call("deleteAnimationRange", args...)
+}
+
+// DetachFromBone calls the DetachFromBone method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#detachfrombone
+func (v *VideoDome) DetachFromBone() *TransformNode {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("detachFromBone", args...)
+	return TransformNodeFromJSObject(retVal, v.ctx)
+}
+
+// VideoDomeDisposeOpts contains optional parameters for VideoDome.Dispose.
+type VideoDomeDisposeOpts struct {
+	DoNotRecurse               *bool
+	DisposeMaterialAndTextures *bool
+}
+
+// Dispose calls the Dispose method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#dispose
+func (v *VideoDome) Dispose(opts *VideoDomeDisposeOpts) {
+	if opts == nil {
+		opts = &VideoDomeDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.DoNotRecurse == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DoNotRecurse)
+	}
+	if opts.DisposeMaterialAndTextures == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DisposeMaterialAndTextures)
+	}
+
+	v.p.Call("dispose", args...)
+}
+
+// VideoDomeFreezeWorldMatrixOpts contains optional parameters for VideoDome.FreezeWorldMatrix.
+type VideoDomeFreezeWorldMatrixOpts struct {
+	NewWorldMatrix *Matrix
+}
+
+// FreezeWorldMatrix calls the FreezeWorldMatrix method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#freezeworldmatrix
+func (v *VideoDome) FreezeWorldMatrix(opts *VideoDomeFreezeWorldMatrixOpts) *TransformNode {
+	if opts == nil {
+		opts = &VideoDomeFreezeWorldMatrixOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.NewWorldMatrix == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.NewWorldMatrix.JSObject())
+	}
+
+	retVal := v.p.Call("freezeWorldMatrix", args...)
+	return TransformNodeFromJSObject(retVal, v.ctx)
+}
+
+// GetAbsolutePivotPoint calls the GetAbsolutePivotPoint method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#getabsolutepivotpoint
+func (v *VideoDome) GetAbsolutePivotPoint() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("getAbsolutePivotPoint", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// GetAbsolutePivotPointToRef calls the GetAbsolutePivotPointToRef method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#getabsolutepivotpointtoref
+func (v *VideoDome) GetAbsolutePivotPointToRef(result *Vector3) *TransformNode {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, result.JSObject())
+
+	retVal := v.p.Call("getAbsolutePivotPointToRef", args...)
+	return TransformNodeFromJSObject(retVal, v.ctx)
+}
+
+// GetAbsolutePosition calls the GetAbsolutePosition method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#getabsoluteposition
+func (v *VideoDome) GetAbsolutePosition() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("getAbsolutePosition", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// GetAnimationByName calls the GetAnimationByName method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#getanimationbyname
+func (v *VideoDome) GetAnimationByName(name string) *Animation {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := v.p.Call("getAnimationByName", args...)
+	return AnimationFromJSObject(retVal, v.ctx)
+}
+
+// GetAnimationRange calls the GetAnimationRange method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#getanimationrange
+func (v *VideoDome) GetAnimationRange(name string) *AnimationRange {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := v.p.Call("getAnimationRange", args...)
+	return AnimationRangeFromJSObject(retVal, v.ctx)
+}
+
+// GetAnimationRanges calls the GetAnimationRanges method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#getanimationranges
+func (v *VideoDome) GetAnimationRanges() *AnimationRange {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("getAnimationRanges", args...)
+	return AnimationRangeFromJSObject(retVal, v.ctx)
+}
+
+// GetBehaviorByName calls the GetBehaviorByName method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#getbehaviorbyname
+func (v *VideoDome) GetBehaviorByName(name string) *Node {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := v.p.Call("getBehaviorByName", args...)
+	return NodeFromJSObject(retVal, v.ctx)
+}
+
+// VideoDomeGetChildMeshesOpts contains optional parameters for VideoDome.GetChildMeshes.
+type VideoDomeGetChildMeshesOpts struct {
+	DirectDescendantsOnly *bool
+	Predicate             *func()
+}
+
+// GetChildMeshes calls the GetChildMeshes method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#getchildmeshes
+func (v *VideoDome) GetChildMeshes(opts *VideoDomeGetChildMeshesOpts) *AbstractMesh {
+	if opts == nil {
+		opts = &VideoDomeGetChildMeshesOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	retVal := v.p.Call("getChildMeshes", args...)
+	return AbstractMeshFromJSObject(retVal, v.ctx)
+}
+
+// VideoDomeGetChildTransformNodesOpts contains optional parameters for VideoDome.GetChildTransformNodes.
+type VideoDomeGetChildTransformNodesOpts struct {
+	DirectDescendantsOnly *bool
+	Predicate             *func()
+}
+
+// GetChildTransformNodes calls the GetChildTransformNodes method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#getchildtransformnodes
+func (v *VideoDome) GetChildTransformNodes(opts *VideoDomeGetChildTransformNodesOpts) *TransformNode {
+	if opts == nil {
+		opts = &VideoDomeGetChildTransformNodesOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	retVal := v.p.Call("getChildTransformNodes", args...)
+	return TransformNodeFromJSObject(retVal, v.ctx)
+}
+
+// VideoDomeGetChildrenOpts contains optional parameters for VideoDome.GetChildren.
+type VideoDomeGetChildrenOpts struct {
+	Predicate             *func()
+	DirectDescendantsOnly *bool
+}
+
+// GetChildren calls the GetChildren method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#getchildren
+func (v *VideoDome) GetChildren(opts *VideoDomeGetChildrenOpts) *Node {
+	if opts == nil {
+		opts = &VideoDomeGetChildrenOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+
+	retVal := v.p.Call("getChildren", args...)
+	return NodeFromJSObject(retVal, v.ctx)
+}
+
+// GetClassName calls the GetClassName method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#getclassname
+func (v *VideoDome) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// VideoDomeGetDescendantsOpts contains optional parameters for VideoDome.GetDescendants.
+type VideoDomeGetDescendantsOpts struct {
+	DirectDescendantsOnly *bool
+	Predicate             *func()
+}
+
+// GetDescendants calls the GetDescendants method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#getdescendants
+func (v *VideoDome) GetDescendants(opts *VideoDomeGetDescendantsOpts) *Node {
+	if opts == nil {
+		opts = &VideoDomeGetDescendantsOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	retVal := v.p.Call("getDescendants", args...)
+	return NodeFromJSObject(retVal, v.ctx)
+}
+
+// GetDirection calls the GetDirection method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#getdirection
+func (v *VideoDome) GetDirection(localAxis *Vector3) *Vector3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, localAxis.JSObject())
+
+	retVal := v.p.Call("getDirection", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// GetDirectionToRef calls the GetDirectionToRef method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#getdirectiontoref
+func (v *VideoDome) GetDirectionToRef(localAxis *Vector3, result *Vector3) *TransformNode {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, localAxis.JSObject())
+	args = append(args, result.JSObject())
+
+	retVal := v.p.Call("getDirectionToRef", args...)
+	return TransformNodeFromJSObject(retVal, v.ctx)
+}
+
+// VideoDomeGetDistanceToCameraOpts contains optional parameters for VideoDome.GetDistanceToCamera.
+type VideoDomeGetDistanceToCameraOpts struct {
+	Camera *Camera
+}
+
+// GetDistanceToCamera calls the GetDistanceToCamera method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#getdistancetocamera
+func (v *VideoDome) GetDistanceToCamera(opts *VideoDomeGetDistanceToCameraOpts) float64 {
+	if opts == nil {
+		opts = &VideoDomeGetDistanceToCameraOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Camera == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Camera.JSObject())
+	}
+
+	retVal := v.p.Call("getDistanceToCamera", args...)
+	return retVal.Float()
+}
+
+// GetEngine calls the GetEngine method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#getengine
+func (v *VideoDome) GetEngine() *Engine {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("getEngine", args...)
+	return EngineFromJSObject(retVal, v.ctx)
+}
+
+// VideoDomeGetHierarchyBoundingVectorsOpts contains optional parameters for VideoDome.GetHierarchyBoundingVectors.
+type VideoDomeGetHierarchyBoundingVectorsOpts struct {
+	IncludeDescendants *bool
+	Predicate          *func()
+}
+
+// GetHierarchyBoundingVectors calls the GetHierarchyBoundingVectors method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#gethierarchyboundingvectors
+func (v *VideoDome) GetHierarchyBoundingVectors(opts *VideoDomeGetHierarchyBoundingVectorsOpts) js.Value {
+	if opts == nil {
+		opts = &VideoDomeGetHierarchyBoundingVectorsOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.IncludeDescendants == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IncludeDescendants)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	retVal := v.p.Call("getHierarchyBoundingVectors", args...)
+	return retVal
+}
+
+// GetPivotMatrix calls the GetPivotMatrix method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#getpivotmatrix
+func (v *VideoDome) GetPivotMatrix() *Matrix {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("getPivotMatrix", args...)
+	return MatrixFromJSObject(retVal, v.ctx)
+}
+
+// GetPivotPoint calls the GetPivotPoint method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#getpivotpoint
+func (v *VideoDome) GetPivotPoint() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("getPivotPoint", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// GetPivotPointToRef calls the GetPivotPointToRef method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#getpivotpointtoref
+func (v *VideoDome) GetPivotPointToRef(result *Vector3) *TransformNode {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, result.JSObject())
+
+	retVal := v.p.Call("getPivotPointToRef", args...)
+	return TransformNodeFromJSObject(retVal, v.ctx)
+}
+
+// GetPoseMatrix calls the GetPoseMatrix method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#getposematrix
+func (v *VideoDome) GetPoseMatrix() *Matrix {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("getPoseMatrix", args...)
+	return MatrixFromJSObject(retVal, v.ctx)
+}
+
+// GetPositionExpressedInLocalSpace calls the GetPositionExpressedInLocalSpace method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#getpositionexpressedinlocalspace
+func (v *VideoDome) GetPositionExpressedInLocalSpace() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("getPositionExpressedInLocalSpace", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// VideoDomeGetPositionInCameraSpaceOpts contains optional parameters for VideoDome.GetPositionInCameraSpace.
+type VideoDomeGetPositionInCameraSpaceOpts struct {
+	Camera *Camera
+}
+
+// GetPositionInCameraSpace calls the GetPositionInCameraSpace method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#getpositionincameraspace
+func (v *VideoDome) GetPositionInCameraSpace(opts *VideoDomeGetPositionInCameraSpaceOpts) *Vector3 {
+	if opts == nil {
+		opts = &VideoDomeGetPositionInCameraSpaceOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Camera == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Camera.JSObject())
+	}
+
+	retVal := v.p.Call("getPositionInCameraSpace", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// GetScene calls the GetScene method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#getscene
+func (v *VideoDome) GetScene() *Scene {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("getScene", args...)
+	return SceneFromJSObject(retVal, v.ctx)
+}
+
+// GetWorldMatrix calls the GetWorldMatrix method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#getworldmatrix
+func (v *VideoDome) GetWorldMatrix() *Matrix {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("getWorldMatrix", args...)
+	return MatrixFromJSObject(retVal, v.ctx)
+}
+
+// VideoDomeInstantiateHierarchyOpts contains optional parameters for VideoDome.InstantiateHierarchy.
+type VideoDomeInstantiateHierarchyOpts struct {
+	NewParent        *TransformNode
+	Options          js.Value
+	OnNewNodeCreated *func()
+}
+
+// InstantiateHierarchy calls the InstantiateHierarchy method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#instantiatehierarchy
+func (v *VideoDome) InstantiateHierarchy(opts *VideoDomeInstantiateHierarchyOpts) *TransformNode {
+	if opts == nil {
+		opts = &VideoDomeInstantiateHierarchyOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+3)
+
+	if opts.NewParent == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.NewParent.JSObject())
+	}
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+	if opts.OnNewNodeCreated == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnNewNodeCreated)
+	}
+
+	retVal := v.p.Call("instantiateHierarchy", args...)
+	return TransformNodeFromJSObject(retVal, v.ctx)
+}
+
+// IsDescendantOf calls the IsDescendantOf method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#isdescendantof
+func (v *VideoDome) IsDescendantOf(ancestor *Node) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, ancestor.JSObject())
+
+	retVal := v.p.Call("isDescendantOf", args...)
+	return retVal.Bool()
+}
+
+// IsDisposed calls the IsDisposed method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#isdisposed
+func (v *VideoDome) IsDisposed() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("isDisposed", args...)
+	return retVal.Bool()
+}
+
+// VideoDomeIsEnabledOpts contains optional parameters for VideoDome.IsEnabled.
+type VideoDomeIsEnabledOpts struct {
+	CheckAncestors *bool
+}
+
+// IsEnabled calls the IsEnabled method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#isenabled
+func (v *VideoDome) IsEnabled(opts *VideoDomeIsEnabledOpts) bool {
+	if opts == nil {
+		opts = &VideoDomeIsEnabledOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.CheckAncestors == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.CheckAncestors)
+	}
+
+	retVal := v.p.Call("isEnabled", args...)
+	return retVal.Bool()
+}
+
+// VideoDomeIsReadyOpts contains optional parameters for VideoDome.IsReady.
+type VideoDomeIsReadyOpts struct {
+	CompleteCheck *bool
+}
+
+// IsReady calls the IsReady method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#isready
+func (v *VideoDome) IsReady(opts *VideoDomeIsReadyOpts) bool {
+	if opts == nil {
+		opts = &VideoDomeIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.CompleteCheck == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.CompleteCheck)
+	}
+
+	retVal := v.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// LocallyTranslate calls the LocallyTranslate method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#locallytranslate
+func (v *VideoDome) LocallyTranslate(vector3 *Vector3) *TransformNode {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, vector3.JSObject())
+
+	retVal := v.p.Call("locallyTranslate", args...)
+	return TransformNodeFromJSObject(retVal, v.ctx)
+}
+
+// VideoDomeLookAtOpts contains optional parameters for VideoDome.LookAt.
+type VideoDomeLookAtOpts struct {
+	YawCor   *float64
+	PitchCor *float64
+	RollCor  *float64
+	Space    js.Value
+}
+
+// LookAt calls the LookAt method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#lookat
+func (v *VideoDome) LookAt(targetPoint *Vector3, opts *VideoDomeLookAtOpts) *TransformNode {
+	if opts == nil {
+		opts = &VideoDomeLookAtOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+4)
+
+	args = append(args, targetPoint.JSObject())
+
+	if opts.YawCor == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.YawCor)
+	}
+	if opts.PitchCor == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.PitchCor)
+	}
+	if opts.RollCor == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RollCor)
+	}
+	if opts.Space == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Space)
+	}
+
+	retVal := v.p.Call("lookAt", args...)
+	return TransformNodeFromJSObject(retVal, v.ctx)
+}
+
+// MarkAsDirty calls the MarkAsDirty method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#markasdirty
+func (v *VideoDome) MarkAsDirty(property string) *TransformNode {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, property)
+
+	retVal := v.p.Call("markAsDirty", args...)
+	return TransformNodeFromJSObject(retVal, v.ctx)
+}
+
+// VideoDomeNormalizeToUnitCubeOpts contains optional parameters for VideoDome.NormalizeToUnitCube.
+type VideoDomeNormalizeToUnitCubeOpts struct {
+	IncludeDescendants *bool
+	IgnoreRotation     *bool
+	Predicate          *func()
+}
+
+// NormalizeToUnitCube calls the NormalizeToUnitCube method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#normalizetounitcube
+func (v *VideoDome) NormalizeToUnitCube(opts *VideoDomeNormalizeToUnitCubeOpts) *TransformNode {
+	if opts == nil {
+		opts = &VideoDomeNormalizeToUnitCubeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+3)
+
+	if opts.IncludeDescendants == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IncludeDescendants)
+	}
+	if opts.IgnoreRotation == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IgnoreRotation)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	retVal := v.p.Call("normalizeToUnitCube", args...)
+	return TransformNodeFromJSObject(retVal, v.ctx)
+}
+
+// Parse calls the Parse method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#parse
+func (v *VideoDome) Parse(parsedTransformNode interface{}, scene *Scene, rootUrl string) *TransformNode {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, parsedTransformNode)
+	args = append(args, scene.JSObject())
+	args = append(args, rootUrl)
+
+	retVal := v.p.Call("Parse", args...)
+	return TransformNodeFromJSObject(retVal, v.ctx)
+}
+
+// ParseAnimationRanges calls the ParseAnimationRanges method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#parseanimationranges
+func (v *VideoDome) ParseAnimationRanges(node *Node, parsedNode interface{}, scene *Scene) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, node.JSObject())
+	args = append(args, parsedNode)
+	args = append(args, scene.JSObject())
+
+	v.p.Call("ParseAnimationRanges", args...)
+}
+
+// RegisterAfterWorldMatrixUpdate calls the RegisterAfterWorldMatrixUpdate method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#registerafterworldmatrixupdate
+func (v *VideoDome) RegisterAfterWorldMatrixUpdate(jsFunc func()) *TransformNode {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, jsFunc)
+
+	retVal := v.p.Call("registerAfterWorldMatrixUpdate", args...)
+	return TransformNodeFromJSObject(retVal, v.ctx)
+}
+
+// RemoveBehavior calls the RemoveBehavior method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#removebehavior
+func (v *VideoDome) RemoveBehavior(behavior js.Value) *Node {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, behavior)
+
+	retVal := v.p.Call("removeBehavior", args...)
+	return NodeFromJSObject(retVal, v.ctx)
+}
+
+// VideoDomeRotateOpts contains optional parameters for VideoDome.Rotate.
+type VideoDomeRotateOpts struct {
+	Space js.Value
+}
+
+// Rotate calls the Rotate method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#rotate
+func (v *VideoDome) Rotate(axis *Vector3, amount float64, opts *VideoDomeRotateOpts) *TransformNode {
+	if opts == nil {
+		opts = &VideoDomeRotateOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, axis.JSObject())
+	args = append(args, amount)
+
+	if opts.Space == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Space)
+	}
+
+	retVal := v.p.Call("rotate", args...)
+	return TransformNodeFromJSObject(retVal, v.ctx)
+}
+
+// RotateAround calls the RotateAround method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#rotatearound
+func (v *VideoDome) RotateAround(point *Vector3, axis *Vector3, amount float64) *TransformNode {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, point.JSObject())
+	args = append(args, axis.JSObject())
+	args = append(args, amount)
+
+	retVal := v.p.Call("rotateAround", args...)
+	return TransformNodeFromJSObject(retVal, v.ctx)
+}
+
+// VideoDomeSerializeOpts contains optional parameters for VideoDome.Serialize.
+type VideoDomeSerializeOpts struct {
+	CurrentSerializationObject *interface{}
+}
+
+// Serialize calls the Serialize method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#serialize
+func (v *VideoDome) Serialize(opts *VideoDomeSerializeOpts) interface{} {
+	if opts == nil {
+		opts = &VideoDomeSerializeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.CurrentSerializationObject == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.CurrentSerializationObject)
+	}
+
+	retVal := v.p.Call("serialize", args...)
+	return retVal
+}
+
+// SerializeAnimationRanges calls the SerializeAnimationRanges method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#serializeanimationranges
+func (v *VideoDome) SerializeAnimationRanges() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("serializeAnimationRanges", args...)
+	return retVal
+}
+
+// SetAbsolutePosition calls the SetAbsolutePosition method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#setabsoluteposition
+func (v *VideoDome) SetAbsolutePosition(absolutePosition *Vector3) *TransformNode {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, absolutePosition.JSObject())
+
+	retVal := v.p.Call("setAbsolutePosition", args...)
+	return TransformNodeFromJSObject(retVal, v.ctx)
+}
+
+// VideoDomeSetDirectionOpts contains optional parameters for VideoDome.SetDirection.
+type VideoDomeSetDirectionOpts struct {
+	YawCor   *float64
+	PitchCor *float64
+	RollCor  *float64
+}
+
+// SetDirection calls the SetDirection method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#setdirection
+func (v *VideoDome) SetDirection(localAxis *Vector3, opts *VideoDomeSetDirectionOpts) *TransformNode {
+	if opts == nil {
+		opts = &VideoDomeSetDirectionOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, localAxis.JSObject())
+
+	if opts.YawCor == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.YawCor)
+	}
+	if opts.PitchCor == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.PitchCor)
+	}
+	if opts.RollCor == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RollCor)
+	}
+
+	retVal := v.p.Call("setDirection", args...)
+	return TransformNodeFromJSObject(retVal, v.ctx)
+}
+
+// SetEnabled calls the SetEnabled method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#setenabled
+func (v *VideoDome) SetEnabled(value bool) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, value)
+
+	v.p.Call("setEnabled", args...)
+}
+
+// SetParent calls the SetParent method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#setparent
+func (v *VideoDome) SetParent(node *Node) *TransformNode {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, node.JSObject())
+
+	retVal := v.p.Call("setParent", args...)
+	return TransformNodeFromJSObject(retVal, v.ctx)
+}
+
+// VideoDomeSetPivotMatrixOpts contains optional parameters for VideoDome.SetPivotMatrix.
+type VideoDomeSetPivotMatrixOpts struct {
+	PostMultiplyPivotMatrix *bool
+}
+
+// SetPivotMatrix calls the SetPivotMatrix method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#setpivotmatrix
+func (v *VideoDome) SetPivotMatrix(matrix *Matrix, opts *VideoDomeSetPivotMatrixOpts) *TransformNode {
+	if opts == nil {
+		opts = &VideoDomeSetPivotMatrixOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, matrix.JSObject())
+
+	if opts.PostMultiplyPivotMatrix == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.PostMultiplyPivotMatrix)
+	}
+
+	retVal := v.p.Call("setPivotMatrix", args...)
+	return TransformNodeFromJSObject(retVal, v.ctx)
+}
+
+// VideoDomeSetPivotPointOpts contains optional parameters for VideoDome.SetPivotPoint.
+type VideoDomeSetPivotPointOpts struct {
+	Space js.Value
+}
+
+// SetPivotPoint calls the SetPivotPoint method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#setpivotpoint
+func (v *VideoDome) SetPivotPoint(point *Vector3, opts *VideoDomeSetPivotPointOpts) *TransformNode {
+	if opts == nil {
+		opts = &VideoDomeSetPivotPointOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, point.JSObject())
+
+	if opts.Space == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Space)
+	}
+
+	retVal := v.p.Call("setPivotPoint", args...)
+	return TransformNodeFromJSObject(retVal, v.ctx)
+}
+
+// SetPositionWithLocalVector calls the SetPositionWithLocalVector method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#setpositionwithlocalvector
+func (v *VideoDome) SetPositionWithLocalVector(vector3 *Vector3) *TransformNode {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, vector3.JSObject())
+
+	retVal := v.p.Call("setPositionWithLocalVector", args...)
+	return TransformNodeFromJSObject(retVal, v.ctx)
+}
+
+// SetPreTransformMatrix calls the SetPreTransformMatrix method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#setpretransformmatrix
+func (v *VideoDome) SetPreTransformMatrix(matrix *Matrix) *TransformNode {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, matrix.JSObject())
+
+	retVal := v.p.Call("setPreTransformMatrix", args...)
+	return TransformNodeFromJSObject(retVal, v.ctx)
+}
+
+// VideoDomeTranslateOpts contains optional parameters for VideoDome.Translate.
+type VideoDomeTranslateOpts struct {
+	Space js.Value
+}
+
+// Translate calls the Translate method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#translate
+func (v *VideoDome) Translate(axis *Vector3, distance float64, opts *VideoDomeTranslateOpts) *TransformNode {
+	if opts == nil {
+		opts = &VideoDomeTranslateOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, axis.JSObject())
+	args = append(args, distance)
+
+	if opts.Space == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Space)
+	}
+
+	retVal := v.p.Call("translate", args...)
+	return TransformNodeFromJSObject(retVal, v.ctx)
+}
+
+// UnfreezeWorldMatrix calls the UnfreezeWorldMatrix method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#unfreezeworldmatrix
+func (v *VideoDome) UnfreezeWorldMatrix() *VideoDome {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("unfreezeWorldMatrix", args...)
+	return VideoDomeFromJSObject(retVal, v.ctx)
+}
+
+// UnregisterAfterWorldMatrixUpdate calls the UnregisterAfterWorldMatrixUpdate method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#unregisterafterworldmatrixupdate
+func (v *VideoDome) UnregisterAfterWorldMatrixUpdate(jsFunc func()) *TransformNode {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, jsFunc)
+
+	retVal := v.p.Call("unregisterAfterWorldMatrixUpdate", args...)
+	return TransformNodeFromJSObject(retVal, v.ctx)
+}
+
+// UpdatePoseMatrix calls the UpdatePoseMatrix method on the VideoDome object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#updateposematrix
+func (v *VideoDome) UpdatePoseMatrix(matrix *Matrix) *TransformNode {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, matrix.JSObject())
+
+	retVal := v.p.Call("updatePoseMatrix", args...)
+	return TransformNodeFromJSObject(retVal, v.ctx)
+}
+
+/*
+
+// AbsolutePosition returns the AbsolutePosition property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#absoluteposition
+func (v *VideoDome) AbsolutePosition(absolutePosition *Vector3) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(absolutePosition.JSObject())
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetAbsolutePosition sets the AbsolutePosition property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#absoluteposition
+func (v *VideoDome) SetAbsolutePosition(absolutePosition *Vector3) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(absolutePosition.JSObject())
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// AbsoluteRotationQuaternion returns the AbsoluteRotationQuaternion property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#absoluterotationquaternion
+func (v *VideoDome) AbsoluteRotationQuaternion(absoluteRotationQuaternion *Quaternion) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(absoluteRotationQuaternion.JSObject())
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetAbsoluteRotationQuaternion sets the AbsoluteRotationQuaternion property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#absoluterotationquaternion
+func (v *VideoDome) SetAbsoluteRotationQuaternion(absoluteRotationQuaternion *Quaternion) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(absoluteRotationQuaternion.JSObject())
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// AbsoluteScaling returns the AbsoluteScaling property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#absolutescaling
+func (v *VideoDome) AbsoluteScaling(absoluteScaling *Vector3) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(absoluteScaling.JSObject())
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetAbsoluteScaling sets the AbsoluteScaling property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#absolutescaling
+func (v *VideoDome) SetAbsoluteScaling(absoluteScaling *Vector3) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(absoluteScaling.JSObject())
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// AnimationPropertiesOverride returns the AnimationPropertiesOverride property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#animationpropertiesoverride
+func (v *VideoDome) AnimationPropertiesOverride(animationPropertiesOverride *AnimationPropertiesOverride) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(animationPropertiesOverride.JSObject())
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetAnimationPropertiesOverride sets the AnimationPropertiesOverride property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#animationpropertiesoverride
+func (v *VideoDome) SetAnimationPropertiesOverride(animationPropertiesOverride *AnimationPropertiesOverride) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(animationPropertiesOverride.JSObject())
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// Animations returns the Animations property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#animations
+func (v *VideoDome) Animations(animations *Animation) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(animations.JSObject())
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#animations
+func (v *VideoDome) SetAnimations(animations *Animation) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(animations.JSObject())
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// BILLBOARDMODE_ALL returns the BILLBOARDMODE_ALL property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#billboardmode_all
+func (v *VideoDome) BILLBOARDMODE_ALL(BILLBOARDMODE_ALL float64) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(BILLBOARDMODE_ALL)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetBILLBOARDMODE_ALL sets the BILLBOARDMODE_ALL property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#billboardmode_all
+func (v *VideoDome) SetBILLBOARDMODE_ALL(BILLBOARDMODE_ALL float64) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(BILLBOARDMODE_ALL)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// BILLBOARDMODE_NONE returns the BILLBOARDMODE_NONE property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#billboardmode_none
+func (v *VideoDome) BILLBOARDMODE_NONE(BILLBOARDMODE_NONE float64) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(BILLBOARDMODE_NONE)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetBILLBOARDMODE_NONE sets the BILLBOARDMODE_NONE property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#billboardmode_none
+func (v *VideoDome) SetBILLBOARDMODE_NONE(BILLBOARDMODE_NONE float64) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(BILLBOARDMODE_NONE)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// BILLBOARDMODE_USE_POSITION returns the BILLBOARDMODE_USE_POSITION property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#billboardmode_use_position
+func (v *VideoDome) BILLBOARDMODE_USE_POSITION(BILLBOARDMODE_USE_POSITION float64) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(BILLBOARDMODE_USE_POSITION)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetBILLBOARDMODE_USE_POSITION sets the BILLBOARDMODE_USE_POSITION property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#billboardmode_use_position
+func (v *VideoDome) SetBILLBOARDMODE_USE_POSITION(BILLBOARDMODE_USE_POSITION float64) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(BILLBOARDMODE_USE_POSITION)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// BILLBOARDMODE_X returns the BILLBOARDMODE_X property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#billboardmode_x
+func (v *VideoDome) BILLBOARDMODE_X(BILLBOARDMODE_X float64) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(BILLBOARDMODE_X)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetBILLBOARDMODE_X sets the BILLBOARDMODE_X property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#billboardmode_x
+func (v *VideoDome) SetBILLBOARDMODE_X(BILLBOARDMODE_X float64) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(BILLBOARDMODE_X)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// BILLBOARDMODE_Y returns the BILLBOARDMODE_Y property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#billboardmode_y
+func (v *VideoDome) BILLBOARDMODE_Y(BILLBOARDMODE_Y float64) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(BILLBOARDMODE_Y)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetBILLBOARDMODE_Y sets the BILLBOARDMODE_Y property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#billboardmode_y
+func (v *VideoDome) SetBILLBOARDMODE_Y(BILLBOARDMODE_Y float64) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(BILLBOARDMODE_Y)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// BILLBOARDMODE_Z returns the BILLBOARDMODE_Z property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#billboardmode_z
+func (v *VideoDome) BILLBOARDMODE_Z(BILLBOARDMODE_Z float64) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(BILLBOARDMODE_Z)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetBILLBOARDMODE_Z sets the BILLBOARDMODE_Z property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#billboardmode_z
+func (v *VideoDome) SetBILLBOARDMODE_Z(BILLBOARDMODE_Z float64) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(BILLBOARDMODE_Z)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// Behaviors returns the Behaviors property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#behaviors
+func (v *VideoDome) Behaviors(behaviors js.Value) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(behaviors)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetBehaviors sets the Behaviors property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#behaviors
+func (v *VideoDome) SetBehaviors(behaviors js.Value) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(behaviors)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// BillboardMode returns the BillboardMode property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#billboardmode
+func (v *VideoDome) BillboardMode(billboardMode float64) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(billboardMode)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetBillboardMode sets the BillboardMode property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#billboardmode
+func (v *VideoDome) SetBillboardMode(billboardMode float64) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(billboardMode)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// DoNotSerialize returns the DoNotSerialize property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#donotserialize
+func (v *VideoDome) DoNotSerialize(doNotSerialize bool) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(doNotSerialize)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetDoNotSerialize sets the DoNotSerialize property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#donotserialize
+func (v *VideoDome) SetDoNotSerialize(doNotSerialize bool) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(doNotSerialize)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// Forward returns the Forward property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#forward
+func (v *VideoDome) Forward(forward *Vector3) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(forward.JSObject())
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetForward sets the Forward property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#forward
+func (v *VideoDome) SetForward(forward *Vector3) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(forward.JSObject())
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// FovMultiplier returns the FovMultiplier property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#fovmultiplier
+func (v *VideoDome) FovMultiplier(fovMultiplier float64) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(fovMultiplier)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetFovMultiplier sets the FovMultiplier property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#fovmultiplier
+func (v *VideoDome) SetFovMultiplier(fovMultiplier float64) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(fovMultiplier)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// HalfDome returns the HalfDome property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#halfdome
+func (v *VideoDome) HalfDome(halfDome bool) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(halfDome)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetHalfDome sets the HalfDome property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#halfdome
+func (v *VideoDome) SetHalfDome(halfDome bool) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(halfDome)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// Id returns the Id property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#id
+func (v *VideoDome) Id(id string) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(id)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetId sets the Id property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#id
+func (v *VideoDome) SetId(id string) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(id)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// IgnoreNonUniformScaling returns the IgnoreNonUniformScaling property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#ignorenonuniformscaling
+func (v *VideoDome) IgnoreNonUniformScaling(ignoreNonUniformScaling bool) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(ignoreNonUniformScaling)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetIgnoreNonUniformScaling sets the IgnoreNonUniformScaling property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#ignorenonuniformscaling
+func (v *VideoDome) SetIgnoreNonUniformScaling(ignoreNonUniformScaling bool) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(ignoreNonUniformScaling)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// InfiniteDistance returns the InfiniteDistance property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#infinitedistance
+func (v *VideoDome) InfiniteDistance(infiniteDistance bool) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(infiniteDistance)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetInfiniteDistance sets the InfiniteDistance property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#infinitedistance
+func (v *VideoDome) SetInfiniteDistance(infiniteDistance bool) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(infiniteDistance)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#inspectablecustomproperties
+func (v *VideoDome) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(inspectableCustomProperties.JSObject())
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#inspectablecustomproperties
+func (v *VideoDome) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(inspectableCustomProperties.JSObject())
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// IsWorldMatrixFrozen returns the IsWorldMatrixFrozen property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#isworldmatrixfrozen
+func (v *VideoDome) IsWorldMatrixFrozen(isWorldMatrixFrozen bool) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(isWorldMatrixFrozen)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetIsWorldMatrixFrozen sets the IsWorldMatrixFrozen property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#isworldmatrixfrozen
+func (v *VideoDome) SetIsWorldMatrixFrozen(isWorldMatrixFrozen bool) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(isWorldMatrixFrozen)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// MODE_MONOSCOPIC returns the MODE_MONOSCOPIC property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#mode_monoscopic
+func (v *VideoDome) MODE_MONOSCOPIC(MODE_MONOSCOPIC float64) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(MODE_MONOSCOPIC)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetMODE_MONOSCOPIC sets the MODE_MONOSCOPIC property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#mode_monoscopic
+func (v *VideoDome) SetMODE_MONOSCOPIC(MODE_MONOSCOPIC float64) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(MODE_MONOSCOPIC)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// MODE_SIDEBYSIDE returns the MODE_SIDEBYSIDE property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#mode_sidebyside
+func (v *VideoDome) MODE_SIDEBYSIDE(MODE_SIDEBYSIDE float64) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(MODE_SIDEBYSIDE)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetMODE_SIDEBYSIDE sets the MODE_SIDEBYSIDE property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#mode_sidebyside
+func (v *VideoDome) SetMODE_SIDEBYSIDE(MODE_SIDEBYSIDE float64) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(MODE_SIDEBYSIDE)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// MODE_TOPBOTTOM returns the MODE_TOPBOTTOM property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#mode_topbottom
+func (v *VideoDome) MODE_TOPBOTTOM(MODE_TOPBOTTOM float64) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(MODE_TOPBOTTOM)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetMODE_TOPBOTTOM sets the MODE_TOPBOTTOM property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#mode_topbottom
+func (v *VideoDome) SetMODE_TOPBOTTOM(MODE_TOPBOTTOM float64) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(MODE_TOPBOTTOM)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#metadata
+func (v *VideoDome) Metadata(metadata interface{}) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(metadata)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#metadata
+func (v *VideoDome) SetMetadata(metadata interface{}) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(metadata)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#name
+func (v *VideoDome) Name(name string) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(name)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#name
+func (v *VideoDome) SetName(name string) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(name)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// NonUniformScaling returns the NonUniformScaling property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#nonuniformscaling
+func (v *VideoDome) NonUniformScaling(nonUniformScaling bool) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(nonUniformScaling)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetNonUniformScaling sets the NonUniformScaling property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#nonuniformscaling
+func (v *VideoDome) SetNonUniformScaling(nonUniformScaling bool) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(nonUniformScaling)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// OnAfterWorldMatrixUpdateObservable returns the OnAfterWorldMatrixUpdateObservable property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#onafterworldmatrixupdateobservable
+func (v *VideoDome) OnAfterWorldMatrixUpdateObservable(onAfterWorldMatrixUpdateObservable *Observable) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(onAfterWorldMatrixUpdateObservable.JSObject())
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterWorldMatrixUpdateObservable sets the OnAfterWorldMatrixUpdateObservable property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#onafterworldmatrixupdateobservable
+func (v *VideoDome) SetOnAfterWorldMatrixUpdateObservable(onAfterWorldMatrixUpdateObservable *Observable) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(onAfterWorldMatrixUpdateObservable.JSObject())
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// OnDispose returns the OnDispose property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#ondispose
+func (v *VideoDome) OnDispose(onDispose func()) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(onDispose)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetOnDispose sets the OnDispose property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#ondispose
+func (v *VideoDome) SetOnDispose(onDispose func()) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(onDispose)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// OnDisposeObservable returns the OnDisposeObservable property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#ondisposeobservable
+func (v *VideoDome) OnDisposeObservable(onDisposeObservable *Observable) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(onDisposeObservable.JSObject())
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetOnDisposeObservable sets the OnDisposeObservable property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#ondisposeobservable
+func (v *VideoDome) SetOnDisposeObservable(onDisposeObservable *Observable) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(onDisposeObservable.JSObject())
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// OnReady returns the OnReady property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#onready
+func (v *VideoDome) OnReady(onReady func()) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(onReady)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetOnReady sets the OnReady property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#onready
+func (v *VideoDome) SetOnReady(onReady func()) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(onReady)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// Parent returns the Parent property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#parent
+func (v *VideoDome) Parent(parent *Node) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(parent.JSObject())
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetParent sets the Parent property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#parent
+func (v *VideoDome) SetParent(parent *Node) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(parent.JSObject())
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// Position returns the Position property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#position
+func (v *VideoDome) Position(position *Vector3) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(position.JSObject())
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetPosition sets the Position property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#position
+func (v *VideoDome) SetPosition(position *Vector3) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(position.JSObject())
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// PreserveParentRotationForBillboard returns the PreserveParentRotationForBillboard property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#preserveparentrotationforbillboard
+func (v *VideoDome) PreserveParentRotationForBillboard(preserveParentRotationForBillboard bool) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(preserveParentRotationForBillboard)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetPreserveParentRotationForBillboard sets the PreserveParentRotationForBillboard property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#preserveparentrotationforbillboard
+func (v *VideoDome) SetPreserveParentRotationForBillboard(preserveParentRotationForBillboard bool) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(preserveParentRotationForBillboard)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// ReIntegrateRotationIntoRotationQuaternion returns the ReIntegrateRotationIntoRotationQuaternion property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#reintegraterotationintorotationquaternion
+func (v *VideoDome) ReIntegrateRotationIntoRotationQuaternion(reIntegrateRotationIntoRotationQuaternion bool) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(reIntegrateRotationIntoRotationQuaternion)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetReIntegrateRotationIntoRotationQuaternion sets the ReIntegrateRotationIntoRotationQuaternion property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#reintegraterotationintorotationquaternion
+func (v *VideoDome) SetReIntegrateRotationIntoRotationQuaternion(reIntegrateRotationIntoRotationQuaternion bool) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(reIntegrateRotationIntoRotationQuaternion)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// ReservedDataStore returns the ReservedDataStore property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#reserveddatastore
+func (v *VideoDome) ReservedDataStore(reservedDataStore interface{}) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(reservedDataStore)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetReservedDataStore sets the ReservedDataStore property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#reserveddatastore
+func (v *VideoDome) SetReservedDataStore(reservedDataStore interface{}) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(reservedDataStore)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// Right returns the Right property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#right
+func (v *VideoDome) Right(right *Vector3) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(right.JSObject())
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetRight sets the Right property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#right
+func (v *VideoDome) SetRight(right *Vector3) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(right.JSObject())
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// Rotation returns the Rotation property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#rotation
+func (v *VideoDome) Rotation(rotation *Vector3) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(rotation.JSObject())
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetRotation sets the Rotation property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#rotation
+func (v *VideoDome) SetRotation(rotation *Vector3) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(rotation.JSObject())
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// RotationQuaternion returns the RotationQuaternion property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#rotationquaternion
+func (v *VideoDome) RotationQuaternion(rotationQuaternion *Quaternion) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(rotationQuaternion.JSObject())
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetRotationQuaternion sets the RotationQuaternion property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#rotationquaternion
+func (v *VideoDome) SetRotationQuaternion(rotationQuaternion *Quaternion) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(rotationQuaternion.JSObject())
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// Scaling returns the Scaling property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#scaling
+func (v *VideoDome) Scaling(scaling *Vector3) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(scaling.JSObject())
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetScaling sets the Scaling property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#scaling
+func (v *VideoDome) SetScaling(scaling *Vector3) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(scaling.JSObject())
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// ScalingDeterminant returns the ScalingDeterminant property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#scalingdeterminant
+func (v *VideoDome) ScalingDeterminant(scalingDeterminant float64) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(scalingDeterminant)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetScalingDeterminant sets the ScalingDeterminant property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#scalingdeterminant
+func (v *VideoDome) SetScalingDeterminant(scalingDeterminant float64) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(scalingDeterminant)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// State returns the State property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#state
+func (v *VideoDome) State(state string) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(state)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetState sets the State property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#state
+func (v *VideoDome) SetState(state string) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(state)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#uniqueid
+func (v *VideoDome) UniqueId(uniqueId float64) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(uniqueId)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#uniqueid
+func (v *VideoDome) SetUniqueId(uniqueId float64) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(uniqueId)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// Up returns the Up property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#up
+func (v *VideoDome) Up(up *Vector3) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(up.JSObject())
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetUp sets the Up property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#up
+func (v *VideoDome) SetUp(up *Vector3) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(up.JSObject())
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// VideoMode returns the VideoMode property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#videomode
+func (v *VideoDome) VideoMode(videoMode float64) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(videoMode)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetVideoMode sets the VideoMode property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#videomode
+func (v *VideoDome) SetVideoMode(videoMode float64) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(videoMode)
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// VideoTexture returns the VideoTexture property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#videotexture
+func (v *VideoDome) VideoTexture(videoTexture *VideoTexture) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(videoTexture.JSObject())
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetVideoTexture sets the VideoTexture property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#videotexture
+func (v *VideoDome) SetVideoTexture(videoTexture *VideoTexture) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(videoTexture.JSObject())
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// WorldMatrixFromCache returns the WorldMatrixFromCache property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#worldmatrixfromcache
+func (v *VideoDome) WorldMatrixFromCache(worldMatrixFromCache *Matrix) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(worldMatrixFromCache.JSObject())
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+// SetWorldMatrixFromCache sets the WorldMatrixFromCache property of class VideoDome.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videodome#worldmatrixfromcache
+func (v *VideoDome) SetWorldMatrixFromCache(worldMatrixFromCache *Matrix) *VideoDome {
+	p := ba.ctx.Get("VideoDome").New(worldMatrixFromCache.JSObject())
+	return VideoDomeFromJSObject(p, ba.ctx)
+}
+
+*/

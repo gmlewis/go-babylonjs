@@ -29,4 +29,86 @@ func PhysicsRadialExplosionEventOptionsFromJSObject(p js.Value, ctx js.Value) *P
 	return &PhysicsRadialExplosionEventOptions{p: p, ctx: ctx}
 }
 
-// TODO: methods
+/*
+
+// AffectedImpostorsCallback returns the AffectedImpostorsCallback property of class PhysicsRadialExplosionEventOptions.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsradialexplosioneventoptions#affectedimpostorscallback
+func (p *PhysicsRadialExplosionEventOptions) AffectedImpostorsCallback(affectedImpostorsCallback func()) *PhysicsRadialExplosionEventOptions {
+	p := ba.ctx.Get("PhysicsRadialExplosionEventOptions").New(affectedImpostorsCallback)
+	return PhysicsRadialExplosionEventOptionsFromJSObject(p, ba.ctx)
+}
+
+// SetAffectedImpostorsCallback sets the AffectedImpostorsCallback property of class PhysicsRadialExplosionEventOptions.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsradialexplosioneventoptions#affectedimpostorscallback
+func (p *PhysicsRadialExplosionEventOptions) SetAffectedImpostorsCallback(affectedImpostorsCallback func()) *PhysicsRadialExplosionEventOptions {
+	p := ba.ctx.Get("PhysicsRadialExplosionEventOptions").New(affectedImpostorsCallback)
+	return PhysicsRadialExplosionEventOptionsFromJSObject(p, ba.ctx)
+}
+
+// Falloff returns the Falloff property of class PhysicsRadialExplosionEventOptions.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsradialexplosioneventoptions#falloff
+func (p *PhysicsRadialExplosionEventOptions) Falloff(falloff *PhysicsRadialImpulseFalloff) *PhysicsRadialExplosionEventOptions {
+	p := ba.ctx.Get("PhysicsRadialExplosionEventOptions").New(falloff.JSObject())
+	return PhysicsRadialExplosionEventOptionsFromJSObject(p, ba.ctx)
+}
+
+// SetFalloff sets the Falloff property of class PhysicsRadialExplosionEventOptions.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsradialexplosioneventoptions#falloff
+func (p *PhysicsRadialExplosionEventOptions) SetFalloff(falloff *PhysicsRadialImpulseFalloff) *PhysicsRadialExplosionEventOptions {
+	p := ba.ctx.Get("PhysicsRadialExplosionEventOptions").New(falloff.JSObject())
+	return PhysicsRadialExplosionEventOptionsFromJSObject(p, ba.ctx)
+}
+
+// Radius returns the Radius property of class PhysicsRadialExplosionEventOptions.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsradialexplosioneventoptions#radius
+func (p *PhysicsRadialExplosionEventOptions) Radius(radius float64) *PhysicsRadialExplosionEventOptions {
+	p := ba.ctx.Get("PhysicsRadialExplosionEventOptions").New(radius)
+	return PhysicsRadialExplosionEventOptionsFromJSObject(p, ba.ctx)
+}
+
+// SetRadius sets the Radius property of class PhysicsRadialExplosionEventOptions.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsradialexplosioneventoptions#radius
+func (p *PhysicsRadialExplosionEventOptions) SetRadius(radius float64) *PhysicsRadialExplosionEventOptions {
+	p := ba.ctx.Get("PhysicsRadialExplosionEventOptions").New(radius)
+	return PhysicsRadialExplosionEventOptionsFromJSObject(p, ba.ctx)
+}
+
+// Sphere returns the Sphere property of class PhysicsRadialExplosionEventOptions.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsradialexplosioneventoptions#sphere
+func (p *PhysicsRadialExplosionEventOptions) Sphere(sphere js.Value) *PhysicsRadialExplosionEventOptions {
+	p := ba.ctx.Get("PhysicsRadialExplosionEventOptions").New(sphere)
+	return PhysicsRadialExplosionEventOptionsFromJSObject(p, ba.ctx)
+}
+
+// SetSphere sets the Sphere property of class PhysicsRadialExplosionEventOptions.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsradialexplosioneventoptions#sphere
+func (p *PhysicsRadialExplosionEventOptions) SetSphere(sphere js.Value) *PhysicsRadialExplosionEventOptions {
+	p := ba.ctx.Get("PhysicsRadialExplosionEventOptions").New(sphere)
+	return PhysicsRadialExplosionEventOptionsFromJSObject(p, ba.ctx)
+}
+
+// Strength returns the Strength property of class PhysicsRadialExplosionEventOptions.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsradialexplosioneventoptions#strength
+func (p *PhysicsRadialExplosionEventOptions) Strength(strength float64) *PhysicsRadialExplosionEventOptions {
+	p := ba.ctx.Get("PhysicsRadialExplosionEventOptions").New(strength)
+	return PhysicsRadialExplosionEventOptionsFromJSObject(p, ba.ctx)
+}
+
+// SetStrength sets the Strength property of class PhysicsRadialExplosionEventOptions.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsradialexplosioneventoptions#strength
+func (p *PhysicsRadialExplosionEventOptions) SetStrength(strength float64) *PhysicsRadialExplosionEventOptions {
+	p := ba.ctx.Get("PhysicsRadialExplosionEventOptions").New(strength)
+	return PhysicsRadialExplosionEventOptionsFromJSObject(p, ba.ctx)
+}
+
+*/

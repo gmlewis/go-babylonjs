@@ -27,4 +27,39 @@ func DeepCopierFromJSObject(p js.Value, ctx js.Value) *DeepCopier {
 	return &DeepCopier{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// DeepCopierDeepCopyOpts contains optional parameters for DeepCopier.DeepCopy.
+type DeepCopierDeepCopyOpts struct {
+	DoNotCopyList *string
+	MustCopyList  *string
+}
+
+// DeepCopy calls the DeepCopy method on the DeepCopier object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.deepcopier#deepcopy
+func (d *DeepCopier) DeepCopy(source interface{}, destination interface{}, opts *DeepCopierDeepCopyOpts) {
+	if opts == nil {
+		opts = &DeepCopierDeepCopyOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+2)
+
+	args = append(args, source)
+	args = append(args, destination)
+
+	if opts.DoNotCopyList == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DoNotCopyList)
+	}
+	if opts.MustCopyList == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.MustCopyList)
+	}
+
+	d.p.Call("DeepCopy", args...)
+}
+
+/*
+
+ */

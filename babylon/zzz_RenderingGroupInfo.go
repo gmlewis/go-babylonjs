@@ -27,4 +27,54 @@ func RenderingGroupInfoFromJSObject(p js.Value, ctx js.Value) *RenderingGroupInf
 	return &RenderingGroupInfo{p: p, ctx: ctx}
 }
 
-// TODO: methods
+/*
+
+// Camera returns the Camera property of class RenderingGroupInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.renderinggroupinfo#camera
+func (r *RenderingGroupInfo) Camera(camera *Camera) *RenderingGroupInfo {
+	p := ba.ctx.Get("RenderingGroupInfo").New(camera.JSObject())
+	return RenderingGroupInfoFromJSObject(p, ba.ctx)
+}
+
+// SetCamera sets the Camera property of class RenderingGroupInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.renderinggroupinfo#camera
+func (r *RenderingGroupInfo) SetCamera(camera *Camera) *RenderingGroupInfo {
+	p := ba.ctx.Get("RenderingGroupInfo").New(camera.JSObject())
+	return RenderingGroupInfoFromJSObject(p, ba.ctx)
+}
+
+// RenderingGroupId returns the RenderingGroupId property of class RenderingGroupInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.renderinggroupinfo#renderinggroupid
+func (r *RenderingGroupInfo) RenderingGroupId(renderingGroupId float64) *RenderingGroupInfo {
+	p := ba.ctx.Get("RenderingGroupInfo").New(renderingGroupId)
+	return RenderingGroupInfoFromJSObject(p, ba.ctx)
+}
+
+// SetRenderingGroupId sets the RenderingGroupId property of class RenderingGroupInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.renderinggroupinfo#renderinggroupid
+func (r *RenderingGroupInfo) SetRenderingGroupId(renderingGroupId float64) *RenderingGroupInfo {
+	p := ba.ctx.Get("RenderingGroupInfo").New(renderingGroupId)
+	return RenderingGroupInfoFromJSObject(p, ba.ctx)
+}
+
+// Scene returns the Scene property of class RenderingGroupInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.renderinggroupinfo#scene
+func (r *RenderingGroupInfo) Scene(scene *Scene) *RenderingGroupInfo {
+	p := ba.ctx.Get("RenderingGroupInfo").New(scene.JSObject())
+	return RenderingGroupInfoFromJSObject(p, ba.ctx)
+}
+
+// SetScene sets the Scene property of class RenderingGroupInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.renderinggroupinfo#scene
+func (r *RenderingGroupInfo) SetScene(scene *Scene) *RenderingGroupInfo {
+	p := ba.ctx.Get("RenderingGroupInfo").New(scene.JSObject())
+	return RenderingGroupInfoFromJSObject(p, ba.ctx)
+}
+
+*/

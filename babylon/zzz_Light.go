@@ -33,8 +33,1536 @@ func LightFromJSObject(p js.Value, ctx js.Value) *Light {
 //
 // https://doc.babylonjs.com/api/classes/babylon.light
 func (ba *Babylon) NewLight(name string, scene *Scene) *Light {
-	p := ba.ctx.Get("Light").New(name, scene.JSObject())
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("Light").New(args...)
 	return LightFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// LightAddBehaviorOpts contains optional parameters for Light.AddBehavior.
+type LightAddBehaviorOpts struct {
+	AttachImmediately *Node
+}
+
+// AddBehavior calls the AddBehavior method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#addbehavior
+func (l *Light) AddBehavior(behavior js.Value, opts *LightAddBehaviorOpts) *Node {
+	if opts == nil {
+		opts = &LightAddBehaviorOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, behavior)
+
+	if opts.AttachImmediately == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.AttachImmediately.JSObject())
+	}
+
+	retVal := l.p.Call("addBehavior", args...)
+	return NodeFromJSObject(retVal, l.ctx)
+}
+
+// AddNodeConstructor calls the AddNodeConstructor method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#addnodeconstructor
+func (l *Light) AddNodeConstructor(jsType string, constructorFunc js.Value) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, jsType)
+	args = append(args, constructorFunc)
+
+	l.p.Call("AddNodeConstructor", args...)
+}
+
+// LightBeginAnimationOpts contains optional parameters for Light.BeginAnimation.
+type LightBeginAnimationOpts struct {
+	Loop           *bool
+	SpeedRatio     *float64
+	OnAnimationEnd *func()
+}
+
+// BeginAnimation calls the BeginAnimation method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#beginanimation
+func (l *Light) BeginAnimation(name string, opts *LightBeginAnimationOpts) *Animatable {
+	if opts == nil {
+		opts = &LightBeginAnimationOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, name)
+
+	if opts.Loop == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Loop)
+	}
+	if opts.SpeedRatio == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SpeedRatio)
+	}
+	if opts.OnAnimationEnd == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnAnimationEnd)
+	}
+
+	retVal := l.p.Call("beginAnimation", args...)
+	return AnimatableFromJSObject(retVal, l.ctx)
+}
+
+// LightBindLightOpts contains optional parameters for Light.BindLight.
+type LightBindLightOpts struct {
+	UsePhysicalLightFalloff *bool
+	RebuildInParallel       *bool
+}
+
+// BindLight calls the BindLight method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#bindlight
+func (l *Light) BindLight(lightIndex float64, scene *Scene, effect *Effect, useSpecular bool, opts *LightBindLightOpts) {
+	if opts == nil {
+		opts = &LightBindLightOpts{}
+	}
+
+	args := make([]interface{}, 0, 4+2)
+
+	args = append(args, lightIndex)
+	args = append(args, scene.JSObject())
+	args = append(args, effect.JSObject())
+	args = append(args, useSpecular)
+
+	if opts.UsePhysicalLightFalloff == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UsePhysicalLightFalloff)
+	}
+	if opts.RebuildInParallel == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RebuildInParallel)
+	}
+
+	l.p.Call("bindLight", args...)
+}
+
+// CanAffectMesh calls the CanAffectMesh method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#canaffectmesh
+func (l *Light) CanAffectMesh(mesh *AbstractMesh) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	retVal := l.p.Call("canAffectMesh", args...)
+	return retVal.Bool()
+}
+
+// Clone calls the Clone method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#clone
+func (l *Light) Clone(name string) *Light {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := l.p.Call("clone", args...)
+	return LightFromJSObject(retVal, l.ctx)
+}
+
+// CompareLightsPriority calls the CompareLightsPriority method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#comparelightspriority
+func (l *Light) CompareLightsPriority(a *Light, b *Light) float64 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, a.JSObject())
+	args = append(args, b.JSObject())
+
+	retVal := l.p.Call("CompareLightsPriority", args...)
+	return retVal.Float()
+}
+
+// LightComputeWorldMatrixOpts contains optional parameters for Light.ComputeWorldMatrix.
+type LightComputeWorldMatrixOpts struct {
+	Force *bool
+}
+
+// ComputeWorldMatrix calls the ComputeWorldMatrix method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#computeworldmatrix
+func (l *Light) ComputeWorldMatrix(opts *LightComputeWorldMatrixOpts) *Matrix {
+	if opts == nil {
+		opts = &LightComputeWorldMatrixOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Force == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Force)
+	}
+
+	retVal := l.p.Call("computeWorldMatrix", args...)
+	return MatrixFromJSObject(retVal, l.ctx)
+}
+
+// LightConstructOpts contains optional parameters for Light.Construct.
+type LightConstructOpts struct {
+	Options *interface{}
+}
+
+// Construct calls the Construct method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#construct
+func (l *Light) Construct(jsType string, name string, scene *Scene, opts *LightConstructOpts) func() {
+	if opts == nil {
+		opts = &LightConstructOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, jsType)
+	args = append(args, name)
+	args = append(args, scene.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	retVal := l.p.Call("Construct", args...)
+	return retVal
+}
+
+// CreateAnimationRange calls the CreateAnimationRange method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#createanimationrange
+func (l *Light) CreateAnimationRange(name string, from float64, to float64) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, name)
+	args = append(args, from)
+	args = append(args, to)
+
+	l.p.Call("createAnimationRange", args...)
+}
+
+// LightDeleteAnimationRangeOpts contains optional parameters for Light.DeleteAnimationRange.
+type LightDeleteAnimationRangeOpts struct {
+	DeleteFrames *bool
+}
+
+// DeleteAnimationRange calls the DeleteAnimationRange method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#deleteanimationrange
+func (l *Light) DeleteAnimationRange(name string, opts *LightDeleteAnimationRangeOpts) {
+	if opts == nil {
+		opts = &LightDeleteAnimationRangeOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, name)
+
+	if opts.DeleteFrames == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DeleteFrames)
+	}
+
+	l.p.Call("deleteAnimationRange", args...)
+}
+
+// LightDisposeOpts contains optional parameters for Light.Dispose.
+type LightDisposeOpts struct {
+	DoNotRecurse               *bool
+	DisposeMaterialAndTextures *bool
+}
+
+// Dispose calls the Dispose method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#dispose
+func (l *Light) Dispose(opts *LightDisposeOpts) {
+	if opts == nil {
+		opts = &LightDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.DoNotRecurse == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DoNotRecurse)
+	}
+	if opts.DisposeMaterialAndTextures == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DisposeMaterialAndTextures)
+	}
+
+	l.p.Call("dispose", args...)
+}
+
+// GetAbsolutePosition calls the GetAbsolutePosition method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#getabsoluteposition
+func (l *Light) GetAbsolutePosition() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := l.p.Call("getAbsolutePosition", args...)
+	return Vector3FromJSObject(retVal, l.ctx)
+}
+
+// GetAnimationByName calls the GetAnimationByName method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#getanimationbyname
+func (l *Light) GetAnimationByName(name string) *Animation {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := l.p.Call("getAnimationByName", args...)
+	return AnimationFromJSObject(retVal, l.ctx)
+}
+
+// GetAnimationRange calls the GetAnimationRange method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#getanimationrange
+func (l *Light) GetAnimationRange(name string) *AnimationRange {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := l.p.Call("getAnimationRange", args...)
+	return AnimationRangeFromJSObject(retVal, l.ctx)
+}
+
+// GetAnimationRanges calls the GetAnimationRanges method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#getanimationranges
+func (l *Light) GetAnimationRanges() *AnimationRange {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := l.p.Call("getAnimationRanges", args...)
+	return AnimationRangeFromJSObject(retVal, l.ctx)
+}
+
+// GetBehaviorByName calls the GetBehaviorByName method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#getbehaviorbyname
+func (l *Light) GetBehaviorByName(name string) *Node {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := l.p.Call("getBehaviorByName", args...)
+	return NodeFromJSObject(retVal, l.ctx)
+}
+
+// LightGetChildMeshesOpts contains optional parameters for Light.GetChildMeshes.
+type LightGetChildMeshesOpts struct {
+	DirectDescendantsOnly *bool
+	Predicate             *func()
+}
+
+// GetChildMeshes calls the GetChildMeshes method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#getchildmeshes
+func (l *Light) GetChildMeshes(opts *LightGetChildMeshesOpts) *AbstractMesh {
+	if opts == nil {
+		opts = &LightGetChildMeshesOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	retVal := l.p.Call("getChildMeshes", args...)
+	return AbstractMeshFromJSObject(retVal, l.ctx)
+}
+
+// LightGetChildrenOpts contains optional parameters for Light.GetChildren.
+type LightGetChildrenOpts struct {
+	Predicate             *func()
+	DirectDescendantsOnly *bool
+}
+
+// GetChildren calls the GetChildren method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#getchildren
+func (l *Light) GetChildren(opts *LightGetChildrenOpts) *Node {
+	if opts == nil {
+		opts = &LightGetChildrenOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+
+	retVal := l.p.Call("getChildren", args...)
+	return NodeFromJSObject(retVal, l.ctx)
+}
+
+// GetClassName calls the GetClassName method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#getclassname
+func (l *Light) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := l.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetConstructorFromName calls the GetConstructorFromName method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#getconstructorfromname
+func (l *Light) GetConstructorFromName(jsType float64, name string, scene *Scene) func() {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, jsType)
+	args = append(args, name)
+	args = append(args, scene.JSObject())
+
+	retVal := l.p.Call("GetConstructorFromName", args...)
+	return retVal
+}
+
+// LightGetDescendantsOpts contains optional parameters for Light.GetDescendants.
+type LightGetDescendantsOpts struct {
+	DirectDescendantsOnly *bool
+	Predicate             *func()
+}
+
+// GetDescendants calls the GetDescendants method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#getdescendants
+func (l *Light) GetDescendants(opts *LightGetDescendantsOpts) *Node {
+	if opts == nil {
+		opts = &LightGetDescendantsOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	retVal := l.p.Call("getDescendants", args...)
+	return NodeFromJSObject(retVal, l.ctx)
+}
+
+// GetEngine calls the GetEngine method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#getengine
+func (l *Light) GetEngine() *Engine {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := l.p.Call("getEngine", args...)
+	return EngineFromJSObject(retVal, l.ctx)
+}
+
+// LightGetHierarchyBoundingVectorsOpts contains optional parameters for Light.GetHierarchyBoundingVectors.
+type LightGetHierarchyBoundingVectorsOpts struct {
+	IncludeDescendants *bool
+	Predicate          *func()
+}
+
+// GetHierarchyBoundingVectors calls the GetHierarchyBoundingVectors method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#gethierarchyboundingvectors
+func (l *Light) GetHierarchyBoundingVectors(opts *LightGetHierarchyBoundingVectorsOpts) js.Value {
+	if opts == nil {
+		opts = &LightGetHierarchyBoundingVectorsOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.IncludeDescendants == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IncludeDescendants)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	retVal := l.p.Call("getHierarchyBoundingVectors", args...)
+	return retVal
+}
+
+// GetScaledIntensity calls the GetScaledIntensity method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#getscaledintensity
+func (l *Light) GetScaledIntensity() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := l.p.Call("getScaledIntensity", args...)
+	return retVal.Float()
+}
+
+// GetScene calls the GetScene method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#getscene
+func (l *Light) GetScene() *Scene {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := l.p.Call("getScene", args...)
+	return SceneFromJSObject(retVal, l.ctx)
+}
+
+// GetShadowGenerator calls the GetShadowGenerator method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#getshadowgenerator
+func (l *Light) GetShadowGenerator() *IShadowGenerator {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := l.p.Call("getShadowGenerator", args...)
+	return IShadowGeneratorFromJSObject(retVal, l.ctx)
+}
+
+// GetTypeID calls the GetTypeID method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#gettypeid
+func (l *Light) GetTypeID() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := l.p.Call("getTypeID", args...)
+	return retVal.Float()
+}
+
+// GetWorldMatrix calls the GetWorldMatrix method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#getworldmatrix
+func (l *Light) GetWorldMatrix() *Matrix {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := l.p.Call("getWorldMatrix", args...)
+	return MatrixFromJSObject(retVal, l.ctx)
+}
+
+// IsDescendantOf calls the IsDescendantOf method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#isdescendantof
+func (l *Light) IsDescendantOf(ancestor *Node) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, ancestor.JSObject())
+
+	retVal := l.p.Call("isDescendantOf", args...)
+	return retVal.Bool()
+}
+
+// IsDisposed calls the IsDisposed method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#isdisposed
+func (l *Light) IsDisposed() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := l.p.Call("isDisposed", args...)
+	return retVal.Bool()
+}
+
+// LightIsEnabledOpts contains optional parameters for Light.IsEnabled.
+type LightIsEnabledOpts struct {
+	CheckAncestors *bool
+}
+
+// IsEnabled calls the IsEnabled method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#isenabled
+func (l *Light) IsEnabled(opts *LightIsEnabledOpts) bool {
+	if opts == nil {
+		opts = &LightIsEnabledOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.CheckAncestors == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.CheckAncestors)
+	}
+
+	retVal := l.p.Call("isEnabled", args...)
+	return retVal.Bool()
+}
+
+// LightIsReadyOpts contains optional parameters for Light.IsReady.
+type LightIsReadyOpts struct {
+	CompleteCheck *bool
+}
+
+// IsReady calls the IsReady method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#isready
+func (l *Light) IsReady(opts *LightIsReadyOpts) bool {
+	if opts == nil {
+		opts = &LightIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.CompleteCheck == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.CompleteCheck)
+	}
+
+	retVal := l.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// Parse calls the Parse method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#parse
+func (l *Light) Parse(parsedLight interface{}, scene *Scene) *Light {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, parsedLight)
+	args = append(args, scene.JSObject())
+
+	retVal := l.p.Call("Parse", args...)
+	return LightFromJSObject(retVal, l.ctx)
+}
+
+// ParseAnimationRanges calls the ParseAnimationRanges method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#parseanimationranges
+func (l *Light) ParseAnimationRanges(node *Node, parsedNode interface{}, scene *Scene) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, node.JSObject())
+	args = append(args, parsedNode)
+	args = append(args, scene.JSObject())
+
+	l.p.Call("ParseAnimationRanges", args...)
+}
+
+// PrepareLightSpecificDefines calls the PrepareLightSpecificDefines method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#preparelightspecificdefines
+func (l *Light) PrepareLightSpecificDefines(defines interface{}, lightIndex float64) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, defines)
+	args = append(args, lightIndex)
+
+	l.p.Call("prepareLightSpecificDefines", args...)
+}
+
+// RemoveBehavior calls the RemoveBehavior method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#removebehavior
+func (l *Light) RemoveBehavior(behavior js.Value) *Node {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, behavior)
+
+	retVal := l.p.Call("removeBehavior", args...)
+	return NodeFromJSObject(retVal, l.ctx)
+}
+
+// Serialize calls the Serialize method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#serialize
+func (l *Light) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := l.p.Call("serialize", args...)
+	return retVal
+}
+
+// SerializeAnimationRanges calls the SerializeAnimationRanges method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#serializeanimationranges
+func (l *Light) SerializeAnimationRanges() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := l.p.Call("serializeAnimationRanges", args...)
+	return retVal
+}
+
+// SetEnabled calls the SetEnabled method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#setenabled
+func (l *Light) SetEnabled(value bool) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, value)
+
+	l.p.Call("setEnabled", args...)
+}
+
+// LightToStringOpts contains optional parameters for Light.ToString.
+type LightToStringOpts struct {
+	FullDetails *bool
+}
+
+// ToString calls the ToString method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#tostring
+func (l *Light) ToString(opts *LightToStringOpts) string {
+	if opts == nil {
+		opts = &LightToStringOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.FullDetails == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FullDetails)
+	}
+
+	retVal := l.p.Call("toString", args...)
+	return retVal.String()
+}
+
+// TransferTexturesToEffect calls the TransferTexturesToEffect method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#transfertexturestoeffect
+func (l *Light) TransferTexturesToEffect(effect *Effect, lightIndex string) *Light {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, effect.JSObject())
+	args = append(args, lightIndex)
+
+	retVal := l.p.Call("transferTexturesToEffect", args...)
+	return LightFromJSObject(retVal, l.ctx)
+}
+
+// TransferToEffect calls the TransferToEffect method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#transfertoeffect
+func (l *Light) TransferToEffect(effect *Effect, lightIndex string) *Light {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, effect.JSObject())
+	args = append(args, lightIndex)
+
+	retVal := l.p.Call("transferToEffect", args...)
+	return LightFromJSObject(retVal, l.ctx)
+}
+
+// TransferToNodeMaterialEffect calls the TransferToNodeMaterialEffect method on the Light object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#transfertonodematerialeffect
+func (l *Light) TransferToNodeMaterialEffect(effect *Effect, lightDataUniformName string) *Light {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, effect.JSObject())
+	args = append(args, lightDataUniformName)
+
+	retVal := l.p.Call("transferToNodeMaterialEffect", args...)
+	return LightFromJSObject(retVal, l.ctx)
+}
+
+/*
+
+// AnimationPropertiesOverride returns the AnimationPropertiesOverride property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#animationpropertiesoverride
+func (l *Light) AnimationPropertiesOverride(animationPropertiesOverride *AnimationPropertiesOverride) *Light {
+	p := ba.ctx.Get("Light").New(animationPropertiesOverride.JSObject())
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetAnimationPropertiesOverride sets the AnimationPropertiesOverride property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#animationpropertiesoverride
+func (l *Light) SetAnimationPropertiesOverride(animationPropertiesOverride *AnimationPropertiesOverride) *Light {
+	p := ba.ctx.Get("Light").New(animationPropertiesOverride.JSObject())
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// Animations returns the Animations property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#animations
+func (l *Light) Animations(animations *Animation) *Light {
+	p := ba.ctx.Get("Light").New(animations.JSObject())
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#animations
+func (l *Light) SetAnimations(animations *Animation) *Light {
+	p := ba.ctx.Get("Light").New(animations.JSObject())
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// Behaviors returns the Behaviors property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#behaviors
+func (l *Light) Behaviors(behaviors js.Value) *Light {
+	p := ba.ctx.Get("Light").New(behaviors)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetBehaviors sets the Behaviors property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#behaviors
+func (l *Light) SetBehaviors(behaviors js.Value) *Light {
+	p := ba.ctx.Get("Light").New(behaviors)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// Diffuse returns the Diffuse property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#diffuse
+func (l *Light) Diffuse(diffuse *Color3) *Light {
+	p := ba.ctx.Get("Light").New(diffuse.JSObject())
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetDiffuse sets the Diffuse property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#diffuse
+func (l *Light) SetDiffuse(diffuse *Color3) *Light {
+	p := ba.ctx.Get("Light").New(diffuse.JSObject())
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// DoNotSerialize returns the DoNotSerialize property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#donotserialize
+func (l *Light) DoNotSerialize(doNotSerialize bool) *Light {
+	p := ba.ctx.Get("Light").New(doNotSerialize)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetDoNotSerialize sets the DoNotSerialize property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#donotserialize
+func (l *Light) SetDoNotSerialize(doNotSerialize bool) *Light {
+	p := ba.ctx.Get("Light").New(doNotSerialize)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// ExcludeWithLayerMask returns the ExcludeWithLayerMask property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#excludewithlayermask
+func (l *Light) ExcludeWithLayerMask(excludeWithLayerMask float64) *Light {
+	p := ba.ctx.Get("Light").New(excludeWithLayerMask)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetExcludeWithLayerMask sets the ExcludeWithLayerMask property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#excludewithlayermask
+func (l *Light) SetExcludeWithLayerMask(excludeWithLayerMask float64) *Light {
+	p := ba.ctx.Get("Light").New(excludeWithLayerMask)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// ExcludedMeshes returns the ExcludedMeshes property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#excludedmeshes
+func (l *Light) ExcludedMeshes(excludedMeshes *AbstractMesh) *Light {
+	p := ba.ctx.Get("Light").New(excludedMeshes.JSObject())
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetExcludedMeshes sets the ExcludedMeshes property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#excludedmeshes
+func (l *Light) SetExcludedMeshes(excludedMeshes *AbstractMesh) *Light {
+	p := ba.ctx.Get("Light").New(excludedMeshes.JSObject())
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// FALLOFF_DEFAULT returns the FALLOFF_DEFAULT property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#falloff_default
+func (l *Light) FALLOFF_DEFAULT(FALLOFF_DEFAULT float64) *Light {
+	p := ba.ctx.Get("Light").New(FALLOFF_DEFAULT)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetFALLOFF_DEFAULT sets the FALLOFF_DEFAULT property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#falloff_default
+func (l *Light) SetFALLOFF_DEFAULT(FALLOFF_DEFAULT float64) *Light {
+	p := ba.ctx.Get("Light").New(FALLOFF_DEFAULT)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// FALLOFF_GLTF returns the FALLOFF_GLTF property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#falloff_gltf
+func (l *Light) FALLOFF_GLTF(FALLOFF_GLTF float64) *Light {
+	p := ba.ctx.Get("Light").New(FALLOFF_GLTF)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetFALLOFF_GLTF sets the FALLOFF_GLTF property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#falloff_gltf
+func (l *Light) SetFALLOFF_GLTF(FALLOFF_GLTF float64) *Light {
+	p := ba.ctx.Get("Light").New(FALLOFF_GLTF)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// FALLOFF_PHYSICAL returns the FALLOFF_PHYSICAL property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#falloff_physical
+func (l *Light) FALLOFF_PHYSICAL(FALLOFF_PHYSICAL float64) *Light {
+	p := ba.ctx.Get("Light").New(FALLOFF_PHYSICAL)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetFALLOFF_PHYSICAL sets the FALLOFF_PHYSICAL property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#falloff_physical
+func (l *Light) SetFALLOFF_PHYSICAL(FALLOFF_PHYSICAL float64) *Light {
+	p := ba.ctx.Get("Light").New(FALLOFF_PHYSICAL)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// FALLOFF_STANDARD returns the FALLOFF_STANDARD property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#falloff_standard
+func (l *Light) FALLOFF_STANDARD(FALLOFF_STANDARD float64) *Light {
+	p := ba.ctx.Get("Light").New(FALLOFF_STANDARD)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetFALLOFF_STANDARD sets the FALLOFF_STANDARD property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#falloff_standard
+func (l *Light) SetFALLOFF_STANDARD(FALLOFF_STANDARD float64) *Light {
+	p := ba.ctx.Get("Light").New(FALLOFF_STANDARD)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// FalloffType returns the FalloffType property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#fallofftype
+func (l *Light) FalloffType(falloffType float64) *Light {
+	p := ba.ctx.Get("Light").New(falloffType)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetFalloffType sets the FalloffType property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#fallofftype
+func (l *Light) SetFalloffType(falloffType float64) *Light {
+	p := ba.ctx.Get("Light").New(falloffType)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// INTENSITYMODE_AUTOMATIC returns the INTENSITYMODE_AUTOMATIC property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#intensitymode_automatic
+func (l *Light) INTENSITYMODE_AUTOMATIC(INTENSITYMODE_AUTOMATIC float64) *Light {
+	p := ba.ctx.Get("Light").New(INTENSITYMODE_AUTOMATIC)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetINTENSITYMODE_AUTOMATIC sets the INTENSITYMODE_AUTOMATIC property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#intensitymode_automatic
+func (l *Light) SetINTENSITYMODE_AUTOMATIC(INTENSITYMODE_AUTOMATIC float64) *Light {
+	p := ba.ctx.Get("Light").New(INTENSITYMODE_AUTOMATIC)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// INTENSITYMODE_ILLUMINANCE returns the INTENSITYMODE_ILLUMINANCE property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#intensitymode_illuminance
+func (l *Light) INTENSITYMODE_ILLUMINANCE(INTENSITYMODE_ILLUMINANCE float64) *Light {
+	p := ba.ctx.Get("Light").New(INTENSITYMODE_ILLUMINANCE)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetINTENSITYMODE_ILLUMINANCE sets the INTENSITYMODE_ILLUMINANCE property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#intensitymode_illuminance
+func (l *Light) SetINTENSITYMODE_ILLUMINANCE(INTENSITYMODE_ILLUMINANCE float64) *Light {
+	p := ba.ctx.Get("Light").New(INTENSITYMODE_ILLUMINANCE)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// INTENSITYMODE_LUMINANCE returns the INTENSITYMODE_LUMINANCE property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#intensitymode_luminance
+func (l *Light) INTENSITYMODE_LUMINANCE(INTENSITYMODE_LUMINANCE float64) *Light {
+	p := ba.ctx.Get("Light").New(INTENSITYMODE_LUMINANCE)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetINTENSITYMODE_LUMINANCE sets the INTENSITYMODE_LUMINANCE property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#intensitymode_luminance
+func (l *Light) SetINTENSITYMODE_LUMINANCE(INTENSITYMODE_LUMINANCE float64) *Light {
+	p := ba.ctx.Get("Light").New(INTENSITYMODE_LUMINANCE)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// INTENSITYMODE_LUMINOUSINTENSITY returns the INTENSITYMODE_LUMINOUSINTENSITY property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#intensitymode_luminousintensity
+func (l *Light) INTENSITYMODE_LUMINOUSINTENSITY(INTENSITYMODE_LUMINOUSINTENSITY float64) *Light {
+	p := ba.ctx.Get("Light").New(INTENSITYMODE_LUMINOUSINTENSITY)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetINTENSITYMODE_LUMINOUSINTENSITY sets the INTENSITYMODE_LUMINOUSINTENSITY property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#intensitymode_luminousintensity
+func (l *Light) SetINTENSITYMODE_LUMINOUSINTENSITY(INTENSITYMODE_LUMINOUSINTENSITY float64) *Light {
+	p := ba.ctx.Get("Light").New(INTENSITYMODE_LUMINOUSINTENSITY)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// INTENSITYMODE_LUMINOUSPOWER returns the INTENSITYMODE_LUMINOUSPOWER property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#intensitymode_luminouspower
+func (l *Light) INTENSITYMODE_LUMINOUSPOWER(INTENSITYMODE_LUMINOUSPOWER float64) *Light {
+	p := ba.ctx.Get("Light").New(INTENSITYMODE_LUMINOUSPOWER)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetINTENSITYMODE_LUMINOUSPOWER sets the INTENSITYMODE_LUMINOUSPOWER property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#intensitymode_luminouspower
+func (l *Light) SetINTENSITYMODE_LUMINOUSPOWER(INTENSITYMODE_LUMINOUSPOWER float64) *Light {
+	p := ba.ctx.Get("Light").New(INTENSITYMODE_LUMINOUSPOWER)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// Id returns the Id property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#id
+func (l *Light) Id(id string) *Light {
+	p := ba.ctx.Get("Light").New(id)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetId sets the Id property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#id
+func (l *Light) SetId(id string) *Light {
+	p := ba.ctx.Get("Light").New(id)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// IncludeOnlyWithLayerMask returns the IncludeOnlyWithLayerMask property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#includeonlywithlayermask
+func (l *Light) IncludeOnlyWithLayerMask(includeOnlyWithLayerMask float64) *Light {
+	p := ba.ctx.Get("Light").New(includeOnlyWithLayerMask)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetIncludeOnlyWithLayerMask sets the IncludeOnlyWithLayerMask property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#includeonlywithlayermask
+func (l *Light) SetIncludeOnlyWithLayerMask(includeOnlyWithLayerMask float64) *Light {
+	p := ba.ctx.Get("Light").New(includeOnlyWithLayerMask)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// IncludedOnlyMeshes returns the IncludedOnlyMeshes property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#includedonlymeshes
+func (l *Light) IncludedOnlyMeshes(includedOnlyMeshes *AbstractMesh) *Light {
+	p := ba.ctx.Get("Light").New(includedOnlyMeshes.JSObject())
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetIncludedOnlyMeshes sets the IncludedOnlyMeshes property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#includedonlymeshes
+func (l *Light) SetIncludedOnlyMeshes(includedOnlyMeshes *AbstractMesh) *Light {
+	p := ba.ctx.Get("Light").New(includedOnlyMeshes.JSObject())
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#inspectablecustomproperties
+func (l *Light) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *Light {
+	p := ba.ctx.Get("Light").New(inspectableCustomProperties.JSObject())
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#inspectablecustomproperties
+func (l *Light) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *Light {
+	p := ba.ctx.Get("Light").New(inspectableCustomProperties.JSObject())
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// Intensity returns the Intensity property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#intensity
+func (l *Light) Intensity(intensity float64) *Light {
+	p := ba.ctx.Get("Light").New(intensity)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetIntensity sets the Intensity property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#intensity
+func (l *Light) SetIntensity(intensity float64) *Light {
+	p := ba.ctx.Get("Light").New(intensity)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// IntensityMode returns the IntensityMode property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#intensitymode
+func (l *Light) IntensityMode(intensityMode float64) *Light {
+	p := ba.ctx.Get("Light").New(intensityMode)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetIntensityMode sets the IntensityMode property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#intensitymode
+func (l *Light) SetIntensityMode(intensityMode float64) *Light {
+	p := ba.ctx.Get("Light").New(intensityMode)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// LIGHTMAP_DEFAULT returns the LIGHTMAP_DEFAULT property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#lightmap_default
+func (l *Light) LIGHTMAP_DEFAULT(LIGHTMAP_DEFAULT float64) *Light {
+	p := ba.ctx.Get("Light").New(LIGHTMAP_DEFAULT)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetLIGHTMAP_DEFAULT sets the LIGHTMAP_DEFAULT property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#lightmap_default
+func (l *Light) SetLIGHTMAP_DEFAULT(LIGHTMAP_DEFAULT float64) *Light {
+	p := ba.ctx.Get("Light").New(LIGHTMAP_DEFAULT)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// LIGHTMAP_SHADOWSONLY returns the LIGHTMAP_SHADOWSONLY property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#lightmap_shadowsonly
+func (l *Light) LIGHTMAP_SHADOWSONLY(LIGHTMAP_SHADOWSONLY float64) *Light {
+	p := ba.ctx.Get("Light").New(LIGHTMAP_SHADOWSONLY)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetLIGHTMAP_SHADOWSONLY sets the LIGHTMAP_SHADOWSONLY property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#lightmap_shadowsonly
+func (l *Light) SetLIGHTMAP_SHADOWSONLY(LIGHTMAP_SHADOWSONLY float64) *Light {
+	p := ba.ctx.Get("Light").New(LIGHTMAP_SHADOWSONLY)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// LIGHTMAP_SPECULAR returns the LIGHTMAP_SPECULAR property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#lightmap_specular
+func (l *Light) LIGHTMAP_SPECULAR(LIGHTMAP_SPECULAR float64) *Light {
+	p := ba.ctx.Get("Light").New(LIGHTMAP_SPECULAR)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetLIGHTMAP_SPECULAR sets the LIGHTMAP_SPECULAR property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#lightmap_specular
+func (l *Light) SetLIGHTMAP_SPECULAR(LIGHTMAP_SPECULAR float64) *Light {
+	p := ba.ctx.Get("Light").New(LIGHTMAP_SPECULAR)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// LIGHTTYPEID_DIRECTIONALLIGHT returns the LIGHTTYPEID_DIRECTIONALLIGHT property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#lighttypeid_directionallight
+func (l *Light) LIGHTTYPEID_DIRECTIONALLIGHT(LIGHTTYPEID_DIRECTIONALLIGHT float64) *Light {
+	p := ba.ctx.Get("Light").New(LIGHTTYPEID_DIRECTIONALLIGHT)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetLIGHTTYPEID_DIRECTIONALLIGHT sets the LIGHTTYPEID_DIRECTIONALLIGHT property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#lighttypeid_directionallight
+func (l *Light) SetLIGHTTYPEID_DIRECTIONALLIGHT(LIGHTTYPEID_DIRECTIONALLIGHT float64) *Light {
+	p := ba.ctx.Get("Light").New(LIGHTTYPEID_DIRECTIONALLIGHT)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// LIGHTTYPEID_HEMISPHERICLIGHT returns the LIGHTTYPEID_HEMISPHERICLIGHT property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#lighttypeid_hemisphericlight
+func (l *Light) LIGHTTYPEID_HEMISPHERICLIGHT(LIGHTTYPEID_HEMISPHERICLIGHT float64) *Light {
+	p := ba.ctx.Get("Light").New(LIGHTTYPEID_HEMISPHERICLIGHT)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetLIGHTTYPEID_HEMISPHERICLIGHT sets the LIGHTTYPEID_HEMISPHERICLIGHT property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#lighttypeid_hemisphericlight
+func (l *Light) SetLIGHTTYPEID_HEMISPHERICLIGHT(LIGHTTYPEID_HEMISPHERICLIGHT float64) *Light {
+	p := ba.ctx.Get("Light").New(LIGHTTYPEID_HEMISPHERICLIGHT)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// LIGHTTYPEID_POINTLIGHT returns the LIGHTTYPEID_POINTLIGHT property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#lighttypeid_pointlight
+func (l *Light) LIGHTTYPEID_POINTLIGHT(LIGHTTYPEID_POINTLIGHT float64) *Light {
+	p := ba.ctx.Get("Light").New(LIGHTTYPEID_POINTLIGHT)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetLIGHTTYPEID_POINTLIGHT sets the LIGHTTYPEID_POINTLIGHT property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#lighttypeid_pointlight
+func (l *Light) SetLIGHTTYPEID_POINTLIGHT(LIGHTTYPEID_POINTLIGHT float64) *Light {
+	p := ba.ctx.Get("Light").New(LIGHTTYPEID_POINTLIGHT)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// LIGHTTYPEID_SPOTLIGHT returns the LIGHTTYPEID_SPOTLIGHT property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#lighttypeid_spotlight
+func (l *Light) LIGHTTYPEID_SPOTLIGHT(LIGHTTYPEID_SPOTLIGHT float64) *Light {
+	p := ba.ctx.Get("Light").New(LIGHTTYPEID_SPOTLIGHT)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetLIGHTTYPEID_SPOTLIGHT sets the LIGHTTYPEID_SPOTLIGHT property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#lighttypeid_spotlight
+func (l *Light) SetLIGHTTYPEID_SPOTLIGHT(LIGHTTYPEID_SPOTLIGHT float64) *Light {
+	p := ba.ctx.Get("Light").New(LIGHTTYPEID_SPOTLIGHT)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// LightmapMode returns the LightmapMode property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#lightmapmode
+func (l *Light) LightmapMode(lightmapMode float64) *Light {
+	p := ba.ctx.Get("Light").New(lightmapMode)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetLightmapMode sets the LightmapMode property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#lightmapmode
+func (l *Light) SetLightmapMode(lightmapMode float64) *Light {
+	p := ba.ctx.Get("Light").New(lightmapMode)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#metadata
+func (l *Light) Metadata(metadata interface{}) *Light {
+	p := ba.ctx.Get("Light").New(metadata)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#metadata
+func (l *Light) SetMetadata(metadata interface{}) *Light {
+	p := ba.ctx.Get("Light").New(metadata)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#name
+func (l *Light) Name(name string) *Light {
+	p := ba.ctx.Get("Light").New(name)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#name
+func (l *Light) SetName(name string) *Light {
+	p := ba.ctx.Get("Light").New(name)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// OnDispose returns the OnDispose property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#ondispose
+func (l *Light) OnDispose(onDispose func()) *Light {
+	p := ba.ctx.Get("Light").New(onDispose)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetOnDispose sets the OnDispose property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#ondispose
+func (l *Light) SetOnDispose(onDispose func()) *Light {
+	p := ba.ctx.Get("Light").New(onDispose)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// OnDisposeObservable returns the OnDisposeObservable property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#ondisposeobservable
+func (l *Light) OnDisposeObservable(onDisposeObservable *Observable) *Light {
+	p := ba.ctx.Get("Light").New(onDisposeObservable.JSObject())
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetOnDisposeObservable sets the OnDisposeObservable property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#ondisposeobservable
+func (l *Light) SetOnDisposeObservable(onDisposeObservable *Observable) *Light {
+	p := ba.ctx.Get("Light").New(onDisposeObservable.JSObject())
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// OnReady returns the OnReady property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#onready
+func (l *Light) OnReady(onReady func()) *Light {
+	p := ba.ctx.Get("Light").New(onReady)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetOnReady sets the OnReady property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#onready
+func (l *Light) SetOnReady(onReady func()) *Light {
+	p := ba.ctx.Get("Light").New(onReady)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// Parent returns the Parent property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#parent
+func (l *Light) Parent(parent *Node) *Light {
+	p := ba.ctx.Get("Light").New(parent.JSObject())
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetParent sets the Parent property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#parent
+func (l *Light) SetParent(parent *Node) *Light {
+	p := ba.ctx.Get("Light").New(parent.JSObject())
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// Radius returns the Radius property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#radius
+func (l *Light) Radius(radius float64) *Light {
+	p := ba.ctx.Get("Light").New(radius)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetRadius sets the Radius property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#radius
+func (l *Light) SetRadius(radius float64) *Light {
+	p := ba.ctx.Get("Light").New(radius)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// Range returns the Range property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#range
+func (l *Light) Range(range float64) *Light {
+	p := ba.ctx.Get("Light").New(range)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetRange sets the Range property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#range
+func (l *Light) SetRange(range float64) *Light {
+	p := ba.ctx.Get("Light").New(range)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// RenderPriority returns the RenderPriority property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#renderpriority
+func (l *Light) RenderPriority(renderPriority float64) *Light {
+	p := ba.ctx.Get("Light").New(renderPriority)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetRenderPriority sets the RenderPriority property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#renderpriority
+func (l *Light) SetRenderPriority(renderPriority float64) *Light {
+	p := ba.ctx.Get("Light").New(renderPriority)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// ReservedDataStore returns the ReservedDataStore property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#reserveddatastore
+func (l *Light) ReservedDataStore(reservedDataStore interface{}) *Light {
+	p := ba.ctx.Get("Light").New(reservedDataStore)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetReservedDataStore sets the ReservedDataStore property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#reserveddatastore
+func (l *Light) SetReservedDataStore(reservedDataStore interface{}) *Light {
+	p := ba.ctx.Get("Light").New(reservedDataStore)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// ShadowEnabled returns the ShadowEnabled property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#shadowenabled
+func (l *Light) ShadowEnabled(shadowEnabled bool) *Light {
+	p := ba.ctx.Get("Light").New(shadowEnabled)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetShadowEnabled sets the ShadowEnabled property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#shadowenabled
+func (l *Light) SetShadowEnabled(shadowEnabled bool) *Light {
+	p := ba.ctx.Get("Light").New(shadowEnabled)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// Specular returns the Specular property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#specular
+func (l *Light) Specular(specular *Color3) *Light {
+	p := ba.ctx.Get("Light").New(specular.JSObject())
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetSpecular sets the Specular property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#specular
+func (l *Light) SetSpecular(specular *Color3) *Light {
+	p := ba.ctx.Get("Light").New(specular.JSObject())
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// State returns the State property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#state
+func (l *Light) State(state string) *Light {
+	p := ba.ctx.Get("Light").New(state)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetState sets the State property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#state
+func (l *Light) SetState(state string) *Light {
+	p := ba.ctx.Get("Light").New(state)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#uniqueid
+func (l *Light) UniqueId(uniqueId float64) *Light {
+	p := ba.ctx.Get("Light").New(uniqueId)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#uniqueid
+func (l *Light) SetUniqueId(uniqueId float64) *Light {
+	p := ba.ctx.Get("Light").New(uniqueId)
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// WorldMatrixFromCache returns the WorldMatrixFromCache property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#worldmatrixfromcache
+func (l *Light) WorldMatrixFromCache(worldMatrixFromCache *Matrix) *Light {
+	p := ba.ctx.Get("Light").New(worldMatrixFromCache.JSObject())
+	return LightFromJSObject(p, ba.ctx)
+}
+
+// SetWorldMatrixFromCache sets the WorldMatrixFromCache property of class Light.
+//
+// https://doc.babylonjs.com/api/classes/babylon.light#worldmatrixfromcache
+func (l *Light) SetWorldMatrixFromCache(worldMatrixFromCache *Matrix) *Light {
+	p := ba.ctx.Get("Light").New(worldMatrixFromCache.JSObject())
+	return LightFromJSObject(p, ba.ctx)
+}
+
+*/

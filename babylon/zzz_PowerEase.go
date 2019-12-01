@@ -31,7 +31,7 @@ func PowerEaseFromJSObject(p js.Value, ctx js.Value) *PowerEase {
 
 // NewPowerEaseOpts contains optional parameters for NewPowerEase.
 type NewPowerEaseOpts struct {
-	Power *JSFloat64
+	Power *float64
 }
 
 // NewPowerEase returns a new PowerEase object.
@@ -42,8 +42,118 @@ func (ba *Babylon) NewPowerEase(opts *NewPowerEaseOpts) *PowerEase {
 		opts = &NewPowerEaseOpts{}
 	}
 
-	p := ba.ctx.Get("PowerEase").New(opts.Power.JSObject())
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Power == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Power)
+	}
+
+	p := ba.ctx.Get("PowerEase").New(args...)
 	return PowerEaseFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Ease calls the Ease method on the PowerEase object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.powerease#ease
+func (p *PowerEase) Ease(gradient float64) float64 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, gradient)
+
+	retVal := p.p.Call("ease", args...)
+	return retVal.Float()
+}
+
+// GetEasingMode calls the GetEasingMode method on the PowerEase object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.powerease#geteasingmode
+func (p *PowerEase) GetEasingMode() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("getEasingMode", args...)
+	return retVal.Float()
+}
+
+// SetEasingMode calls the SetEasingMode method on the PowerEase object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.powerease#seteasingmode
+func (p *PowerEase) SetEasingMode(easingMode float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, easingMode)
+
+	p.p.Call("setEasingMode", args...)
+}
+
+/*
+
+// EASINGMODE_EASEIN returns the EASINGMODE_EASEIN property of class PowerEase.
+//
+// https://doc.babylonjs.com/api/classes/babylon.powerease#easingmode_easein
+func (p *PowerEase) EASINGMODE_EASEIN(EASINGMODE_EASEIN float64) *PowerEase {
+	p := ba.ctx.Get("PowerEase").New(EASINGMODE_EASEIN)
+	return PowerEaseFromJSObject(p, ba.ctx)
+}
+
+// SetEASINGMODE_EASEIN sets the EASINGMODE_EASEIN property of class PowerEase.
+//
+// https://doc.babylonjs.com/api/classes/babylon.powerease#easingmode_easein
+func (p *PowerEase) SetEASINGMODE_EASEIN(EASINGMODE_EASEIN float64) *PowerEase {
+	p := ba.ctx.Get("PowerEase").New(EASINGMODE_EASEIN)
+	return PowerEaseFromJSObject(p, ba.ctx)
+}
+
+// EASINGMODE_EASEINOUT returns the EASINGMODE_EASEINOUT property of class PowerEase.
+//
+// https://doc.babylonjs.com/api/classes/babylon.powerease#easingmode_easeinout
+func (p *PowerEase) EASINGMODE_EASEINOUT(EASINGMODE_EASEINOUT float64) *PowerEase {
+	p := ba.ctx.Get("PowerEase").New(EASINGMODE_EASEINOUT)
+	return PowerEaseFromJSObject(p, ba.ctx)
+}
+
+// SetEASINGMODE_EASEINOUT sets the EASINGMODE_EASEINOUT property of class PowerEase.
+//
+// https://doc.babylonjs.com/api/classes/babylon.powerease#easingmode_easeinout
+func (p *PowerEase) SetEASINGMODE_EASEINOUT(EASINGMODE_EASEINOUT float64) *PowerEase {
+	p := ba.ctx.Get("PowerEase").New(EASINGMODE_EASEINOUT)
+	return PowerEaseFromJSObject(p, ba.ctx)
+}
+
+// EASINGMODE_EASEOUT returns the EASINGMODE_EASEOUT property of class PowerEase.
+//
+// https://doc.babylonjs.com/api/classes/babylon.powerease#easingmode_easeout
+func (p *PowerEase) EASINGMODE_EASEOUT(EASINGMODE_EASEOUT float64) *PowerEase {
+	p := ba.ctx.Get("PowerEase").New(EASINGMODE_EASEOUT)
+	return PowerEaseFromJSObject(p, ba.ctx)
+}
+
+// SetEASINGMODE_EASEOUT sets the EASINGMODE_EASEOUT property of class PowerEase.
+//
+// https://doc.babylonjs.com/api/classes/babylon.powerease#easingmode_easeout
+func (p *PowerEase) SetEASINGMODE_EASEOUT(EASINGMODE_EASEOUT float64) *PowerEase {
+	p := ba.ctx.Get("PowerEase").New(EASINGMODE_EASEOUT)
+	return PowerEaseFromJSObject(p, ba.ctx)
+}
+
+// Power returns the Power property of class PowerEase.
+//
+// https://doc.babylonjs.com/api/classes/babylon.powerease#power
+func (p *PowerEase) Power(power float64) *PowerEase {
+	p := ba.ctx.Get("PowerEase").New(power)
+	return PowerEaseFromJSObject(p, ba.ctx)
+}
+
+// SetPower sets the Power property of class PowerEase.
+//
+// https://doc.babylonjs.com/api/classes/babylon.powerease#power
+func (p *PowerEase) SetPower(power float64) *PowerEase {
+	p := ba.ctx.Get("PowerEase").New(power)
+	return PowerEaseFromJSObject(p, ba.ctx)
+}
+
+*/

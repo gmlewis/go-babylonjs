@@ -31,8 +31,637 @@ func ReciprocalBlockFromJSObject(p js.Value, ctx js.Value) *ReciprocalBlock {
 //
 // https://doc.babylonjs.com/api/classes/babylon.reciprocalblock
 func (ba *Babylon) NewReciprocalBlock(name string) *ReciprocalBlock {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	p := ba.ctx.Get("ReciprocalBlock").New(args...)
+	return ReciprocalBlockFromJSObject(p, ba.ctx)
+}
+
+// AutoConfigure calls the AutoConfigure method on the ReciprocalBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#autoconfigure
+func (r *ReciprocalBlock) AutoConfigure(material *NodeMaterial) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, material.JSObject())
+
+	r.p.Call("autoConfigure", args...)
+}
+
+// ReciprocalBlockBindOpts contains optional parameters for ReciprocalBlock.Bind.
+type ReciprocalBlockBindOpts struct {
+	Mesh *Mesh
+}
+
+// Bind calls the Bind method on the ReciprocalBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#bind
+func (r *ReciprocalBlock) Bind(effect *Effect, nodeMaterial *NodeMaterial, opts *ReciprocalBlockBindOpts) {
+	if opts == nil {
+		opts = &ReciprocalBlockBindOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, effect.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	r.p.Call("bind", args...)
+}
+
+// Build calls the Build method on the ReciprocalBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#build
+func (r *ReciprocalBlock) Build(state *NodeMaterialBuildState, activeBlocks *NodeMaterialBlock) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, state.JSObject())
+	args = append(args, activeBlocks.JSObject())
+
+	retVal := r.p.Call("build", args...)
+	return retVal.Bool()
+}
+
+// ReciprocalBlockCloneOpts contains optional parameters for ReciprocalBlock.Clone.
+type ReciprocalBlockCloneOpts struct {
+	RootUrl *string
+}
+
+// Clone calls the Clone method on the ReciprocalBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#clone
+func (r *ReciprocalBlock) Clone(scene *Scene, opts *ReciprocalBlockCloneOpts) *NodeMaterialBlock {
+	if opts == nil {
+		opts = &ReciprocalBlockCloneOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, scene.JSObject())
+
+	if opts.RootUrl == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RootUrl)
+	}
+
+	retVal := r.p.Call("clone", args...)
+	return NodeMaterialBlockFromJSObject(retVal, r.ctx)
+}
+
+// ReciprocalBlockConnectToOpts contains optional parameters for ReciprocalBlock.ConnectTo.
+type ReciprocalBlockConnectToOpts struct {
+	Options js.Value
+}
+
+// ConnectTo calls the ConnectTo method on the ReciprocalBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#connectto
+func (r *ReciprocalBlock) ConnectTo(other *NodeMaterialBlock, opts *ReciprocalBlockConnectToOpts) *ReciprocalBlock {
+	if opts == nil {
+		opts = &ReciprocalBlockConnectToOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, other.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	retVal := r.p.Call("connectTo", args...)
+	return ReciprocalBlockFromJSObject(retVal, r.ctx)
+}
+
+// Dispose calls the Dispose method on the ReciprocalBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#dispose
+func (r *ReciprocalBlock) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	r.p.Call("dispose", args...)
+}
+
+// GetClassName calls the GetClassName method on the ReciprocalBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#getclassname
+func (r *ReciprocalBlock) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// ReciprocalBlockGetFirstAvailableInputOpts contains optional parameters for ReciprocalBlock.GetFirstAvailableInput.
+type ReciprocalBlockGetFirstAvailableInputOpts struct {
+	ForOutput *NodeMaterialConnectionPoint
+}
+
+// GetFirstAvailableInput calls the GetFirstAvailableInput method on the ReciprocalBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#getfirstavailableinput
+func (r *ReciprocalBlock) GetFirstAvailableInput(opts *ReciprocalBlockGetFirstAvailableInputOpts) *NodeMaterialConnectionPoint {
+	if opts == nil {
+		opts = &ReciprocalBlockGetFirstAvailableInputOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForOutput == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForOutput.JSObject())
+	}
+
+	retVal := r.p.Call("getFirstAvailableInput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
+}
+
+// ReciprocalBlockGetFirstAvailableOutputOpts contains optional parameters for ReciprocalBlock.GetFirstAvailableOutput.
+type ReciprocalBlockGetFirstAvailableOutputOpts struct {
+	ForBlock *NodeMaterialBlock
+}
+
+// GetFirstAvailableOutput calls the GetFirstAvailableOutput method on the ReciprocalBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#getfirstavailableoutput
+func (r *ReciprocalBlock) GetFirstAvailableOutput(opts *ReciprocalBlockGetFirstAvailableOutputOpts) *NodeMaterialConnectionPoint {
+	if opts == nil {
+		opts = &ReciprocalBlockGetFirstAvailableOutputOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForBlock == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForBlock.JSObject())
+	}
+
+	retVal := r.p.Call("getFirstAvailableOutput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
+}
+
+// GetInputByName calls the GetInputByName method on the ReciprocalBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#getinputbyname
+func (r *ReciprocalBlock) GetInputByName(name string) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := r.p.Call("getInputByName", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
+}
+
+// GetOutputByName calls the GetOutputByName method on the ReciprocalBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#getoutputbyname
+func (r *ReciprocalBlock) GetOutputByName(name string) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := r.p.Call("getOutputByName", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
+}
+
+// GetSiblingOutput calls the GetSiblingOutput method on the ReciprocalBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#getsiblingoutput
+func (r *ReciprocalBlock) GetSiblingOutput(current *NodeMaterialConnectionPoint) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, current.JSObject())
+
+	retVal := r.p.Call("getSiblingOutput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
+}
+
+// Initialize calls the Initialize method on the ReciprocalBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#initialize
+func (r *ReciprocalBlock) Initialize(state *NodeMaterialBuildState) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, state.JSObject())
+
+	r.p.Call("initialize", args...)
+}
+
+// ReciprocalBlockInitializeDefinesOpts contains optional parameters for ReciprocalBlock.InitializeDefines.
+type ReciprocalBlockInitializeDefinesOpts struct {
+	UseInstances *bool
+}
+
+// InitializeDefines calls the InitializeDefines method on the ReciprocalBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#initializedefines
+func (r *ReciprocalBlock) InitializeDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *ReciprocalBlockInitializeDefinesOpts) {
+	if opts == nil {
+		opts = &ReciprocalBlockInitializeDefinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	r.p.Call("initializeDefines", args...)
+}
+
+// ReciprocalBlockIsReadyOpts contains optional parameters for ReciprocalBlock.IsReady.
+type ReciprocalBlockIsReadyOpts struct {
+	UseInstances *bool
+}
+
+// IsReady calls the IsReady method on the ReciprocalBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#isready
+func (r *ReciprocalBlock) IsReady(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *ReciprocalBlockIsReadyOpts) bool {
+	if opts == nil {
+		opts = &ReciprocalBlockIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := r.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// ReciprocalBlockPrepareDefinesOpts contains optional parameters for ReciprocalBlock.PrepareDefines.
+type ReciprocalBlockPrepareDefinesOpts struct {
+	UseInstances *bool
+}
+
+// PrepareDefines calls the PrepareDefines method on the ReciprocalBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#preparedefines
+func (r *ReciprocalBlock) PrepareDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *ReciprocalBlockPrepareDefinesOpts) {
+	if opts == nil {
+		opts = &ReciprocalBlockPrepareDefinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	r.p.Call("prepareDefines", args...)
+}
+
+// ProvideFallbacks calls the ProvideFallbacks method on the ReciprocalBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#providefallbacks
+func (r *ReciprocalBlock) ProvideFallbacks(mesh *AbstractMesh, fallbacks *EffectFallbacks) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, fallbacks.JSObject())
+
+	r.p.Call("provideFallbacks", args...)
+}
+
+// ReciprocalBlockRegisterInputOpts contains optional parameters for ReciprocalBlock.RegisterInput.
+type ReciprocalBlockRegisterInputOpts struct {
+	IsOptional *bool
+	Target     js.Value
+}
+
+// RegisterInput calls the RegisterInput method on the ReciprocalBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#registerinput
+func (r *ReciprocalBlock) RegisterInput(name string, jsType js.Value, opts *ReciprocalBlockRegisterInputOpts) *ReciprocalBlock {
+	if opts == nil {
+		opts = &ReciprocalBlockRegisterInputOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+2)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	if opts.IsOptional == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IsOptional)
+	}
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+
+	retVal := r.p.Call("registerInput", args...)
+	return ReciprocalBlockFromJSObject(retVal, r.ctx)
+}
+
+// ReciprocalBlockRegisterOutputOpts contains optional parameters for ReciprocalBlock.RegisterOutput.
+type ReciprocalBlockRegisterOutputOpts struct {
+	Target js.Value
+}
+
+// RegisterOutput calls the RegisterOutput method on the ReciprocalBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#registeroutput
+func (r *ReciprocalBlock) RegisterOutput(name string, jsType js.Value, opts *ReciprocalBlockRegisterOutputOpts) *ReciprocalBlock {
+	if opts == nil {
+		opts = &ReciprocalBlockRegisterOutputOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+
+	retVal := r.p.Call("registerOutput", args...)
+	return ReciprocalBlockFromJSObject(retVal, r.ctx)
+}
+
+// ReplaceRepeatableContent calls the ReplaceRepeatableContent method on the ReciprocalBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#replacerepeatablecontent
+func (r *ReciprocalBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterialBuildState, fragmentShaderState *NodeMaterialBuildState, mesh *AbstractMesh, defines js.Value) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, vertexShaderState.JSObject())
+	args = append(args, fragmentShaderState.JSObject())
+	args = append(args, mesh.JSObject())
+	args = append(args, defines)
+
+	r.p.Call("replaceRepeatableContent", args...)
+}
+
+// Serialize calls the Serialize method on the ReciprocalBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#serialize
+func (r *ReciprocalBlock) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("serialize", args...)
+	return retVal
+}
+
+// UpdateUniformsAndSamples calls the UpdateUniformsAndSamples method on the ReciprocalBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#updateuniformsandsamples
+func (r *ReciprocalBlock) UpdateUniformsAndSamples(state *NodeMaterialBuildState, nodeMaterial *NodeMaterial, defines js.Value, uniformBuffers string) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, state.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+	args = append(args, uniformBuffers)
+
+	r.p.Call("updateUniformsAndSamples", args...)
+}
+
+/*
+
+// BuildId returns the BuildId property of class ReciprocalBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#buildid
+func (r *ReciprocalBlock) BuildId(buildId float64) *ReciprocalBlock {
+	p := ba.ctx.Get("ReciprocalBlock").New(buildId)
+	return ReciprocalBlockFromJSObject(p, ba.ctx)
+}
+
+// SetBuildId sets the BuildId property of class ReciprocalBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#buildid
+func (r *ReciprocalBlock) SetBuildId(buildId float64) *ReciprocalBlock {
+	p := ba.ctx.Get("ReciprocalBlock").New(buildId)
+	return ReciprocalBlockFromJSObject(p, ba.ctx)
+}
+
+// Comments returns the Comments property of class ReciprocalBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#comments
+func (r *ReciprocalBlock) Comments(comments string) *ReciprocalBlock {
+	p := ba.ctx.Get("ReciprocalBlock").New(comments)
+	return ReciprocalBlockFromJSObject(p, ba.ctx)
+}
+
+// SetComments sets the Comments property of class ReciprocalBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#comments
+func (r *ReciprocalBlock) SetComments(comments string) *ReciprocalBlock {
+	p := ba.ctx.Get("ReciprocalBlock").New(comments)
+	return ReciprocalBlockFromJSObject(p, ba.ctx)
+}
+
+// Input returns the Input property of class ReciprocalBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#input
+func (r *ReciprocalBlock) Input(input *NodeMaterialConnectionPoint) *ReciprocalBlock {
+	p := ba.ctx.Get("ReciprocalBlock").New(input.JSObject())
+	return ReciprocalBlockFromJSObject(p, ba.ctx)
+}
+
+// SetInput sets the Input property of class ReciprocalBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#input
+func (r *ReciprocalBlock) SetInput(input *NodeMaterialConnectionPoint) *ReciprocalBlock {
+	p := ba.ctx.Get("ReciprocalBlock").New(input.JSObject())
+	return ReciprocalBlockFromJSObject(p, ba.ctx)
+}
+
+// Inputs returns the Inputs property of class ReciprocalBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#inputs
+func (r *ReciprocalBlock) Inputs(inputs *NodeMaterialConnectionPoint) *ReciprocalBlock {
+	p := ba.ctx.Get("ReciprocalBlock").New(inputs.JSObject())
+	return ReciprocalBlockFromJSObject(p, ba.ctx)
+}
+
+// SetInputs sets the Inputs property of class ReciprocalBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#inputs
+func (r *ReciprocalBlock) SetInputs(inputs *NodeMaterialConnectionPoint) *ReciprocalBlock {
+	p := ba.ctx.Get("ReciprocalBlock").New(inputs.JSObject())
+	return ReciprocalBlockFromJSObject(p, ba.ctx)
+}
+
+// IsFinalMerger returns the IsFinalMerger property of class ReciprocalBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#isfinalmerger
+func (r *ReciprocalBlock) IsFinalMerger(isFinalMerger bool) *ReciprocalBlock {
+	p := ba.ctx.Get("ReciprocalBlock").New(isFinalMerger)
+	return ReciprocalBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsFinalMerger sets the IsFinalMerger property of class ReciprocalBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#isfinalmerger
+func (r *ReciprocalBlock) SetIsFinalMerger(isFinalMerger bool) *ReciprocalBlock {
+	p := ba.ctx.Get("ReciprocalBlock").New(isFinalMerger)
+	return ReciprocalBlockFromJSObject(p, ba.ctx)
+}
+
+// IsInput returns the IsInput property of class ReciprocalBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#isinput
+func (r *ReciprocalBlock) IsInput(isInput bool) *ReciprocalBlock {
+	p := ba.ctx.Get("ReciprocalBlock").New(isInput)
+	return ReciprocalBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsInput sets the IsInput property of class ReciprocalBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#isinput
+func (r *ReciprocalBlock) SetIsInput(isInput bool) *ReciprocalBlock {
+	p := ba.ctx.Get("ReciprocalBlock").New(isInput)
+	return ReciprocalBlockFromJSObject(p, ba.ctx)
+}
+
+// IsUnique returns the IsUnique property of class ReciprocalBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#isunique
+func (r *ReciprocalBlock) IsUnique(isUnique bool) *ReciprocalBlock {
+	p := ba.ctx.Get("ReciprocalBlock").New(isUnique)
+	return ReciprocalBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsUnique sets the IsUnique property of class ReciprocalBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#isunique
+func (r *ReciprocalBlock) SetIsUnique(isUnique bool) *ReciprocalBlock {
+	p := ba.ctx.Get("ReciprocalBlock").New(isUnique)
+	return ReciprocalBlockFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class ReciprocalBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#name
+func (r *ReciprocalBlock) Name(name string) *ReciprocalBlock {
 	p := ba.ctx.Get("ReciprocalBlock").New(name)
 	return ReciprocalBlockFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetName sets the Name property of class ReciprocalBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#name
+func (r *ReciprocalBlock) SetName(name string) *ReciprocalBlock {
+	p := ba.ctx.Get("ReciprocalBlock").New(name)
+	return ReciprocalBlockFromJSObject(p, ba.ctx)
+}
+
+// Output returns the Output property of class ReciprocalBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#output
+func (r *ReciprocalBlock) Output(output *NodeMaterialConnectionPoint) *ReciprocalBlock {
+	p := ba.ctx.Get("ReciprocalBlock").New(output.JSObject())
+	return ReciprocalBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOutput sets the Output property of class ReciprocalBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#output
+func (r *ReciprocalBlock) SetOutput(output *NodeMaterialConnectionPoint) *ReciprocalBlock {
+	p := ba.ctx.Get("ReciprocalBlock").New(output.JSObject())
+	return ReciprocalBlockFromJSObject(p, ba.ctx)
+}
+
+// Outputs returns the Outputs property of class ReciprocalBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#outputs
+func (r *ReciprocalBlock) Outputs(outputs *NodeMaterialConnectionPoint) *ReciprocalBlock {
+	p := ba.ctx.Get("ReciprocalBlock").New(outputs.JSObject())
+	return ReciprocalBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOutputs sets the Outputs property of class ReciprocalBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#outputs
+func (r *ReciprocalBlock) SetOutputs(outputs *NodeMaterialConnectionPoint) *ReciprocalBlock {
+	p := ba.ctx.Get("ReciprocalBlock").New(outputs.JSObject())
+	return ReciprocalBlockFromJSObject(p, ba.ctx)
+}
+
+// Target returns the Target property of class ReciprocalBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#target
+func (r *ReciprocalBlock) Target(target js.Value) *ReciprocalBlock {
+	p := ba.ctx.Get("ReciprocalBlock").New(target)
+	return ReciprocalBlockFromJSObject(p, ba.ctx)
+}
+
+// SetTarget sets the Target property of class ReciprocalBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#target
+func (r *ReciprocalBlock) SetTarget(target js.Value) *ReciprocalBlock {
+	p := ba.ctx.Get("ReciprocalBlock").New(target)
+	return ReciprocalBlockFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class ReciprocalBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#uniqueid
+func (r *ReciprocalBlock) UniqueId(uniqueId float64) *ReciprocalBlock {
+	p := ba.ctx.Get("ReciprocalBlock").New(uniqueId)
+	return ReciprocalBlockFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class ReciprocalBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reciprocalblock#uniqueid
+func (r *ReciprocalBlock) SetUniqueId(uniqueId float64) *ReciprocalBlock {
+	p := ba.ctx.Get("ReciprocalBlock").New(uniqueId)
+	return ReciprocalBlockFromJSObject(p, ba.ctx)
+}
+
+*/

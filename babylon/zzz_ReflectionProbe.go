@@ -31,9 +31,8 @@ func ReflectionProbeFromJSObject(p js.Value, ctx js.Value) *ReflectionProbe {
 
 // NewReflectionProbeOpts contains optional parameters for NewReflectionProbe.
 type NewReflectionProbeOpts struct {
-	GenerateMipMaps *JSBool
-
-	UseFloat *JSBool
+	GenerateMipMaps *bool
+	UseFloat        *bool
 }
 
 // NewReflectionProbe returns a new ReflectionProbe object.
@@ -44,8 +43,231 @@ func (ba *Babylon) NewReflectionProbe(name string, size float64, scene *Scene, o
 		opts = &NewReflectionProbeOpts{}
 	}
 
-	p := ba.ctx.Get("ReflectionProbe").New(name, size, scene.JSObject(), opts.GenerateMipMaps.JSObject(), opts.UseFloat.JSObject())
+	args := make([]interface{}, 0, 3+2)
+
+	args = append(args, name)
+	args = append(args, size)
+	args = append(args, scene.JSObject())
+
+	if opts.GenerateMipMaps == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.GenerateMipMaps)
+	}
+	if opts.UseFloat == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseFloat)
+	}
+
+	p := ba.ctx.Get("ReflectionProbe").New(args...)
 	return ReflectionProbeFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AttachToMesh calls the AttachToMesh method on the ReflectionProbe object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectionprobe#attachtomesh
+func (r *ReflectionProbe) AttachToMesh(mesh *AbstractMesh) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	r.p.Call("attachToMesh", args...)
+}
+
+// Dispose calls the Dispose method on the ReflectionProbe object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectionprobe#dispose
+func (r *ReflectionProbe) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	r.p.Call("dispose", args...)
+}
+
+// GetClassName calls the GetClassName method on the ReflectionProbe object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectionprobe#getclassname
+func (r *ReflectionProbe) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetScene calls the GetScene method on the ReflectionProbe object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectionprobe#getscene
+func (r *ReflectionProbe) GetScene() *Scene {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("getScene", args...)
+	return SceneFromJSObject(retVal, r.ctx)
+}
+
+// Parse calls the Parse method on the ReflectionProbe object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectionprobe#parse
+func (r *ReflectionProbe) Parse(parsedReflectionProbe interface{}, scene *Scene, rootUrl string) *ReflectionProbe {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, parsedReflectionProbe)
+	args = append(args, scene.JSObject())
+	args = append(args, rootUrl)
+
+	retVal := r.p.Call("Parse", args...)
+	return ReflectionProbeFromJSObject(retVal, r.ctx)
+}
+
+// Serialize calls the Serialize method on the ReflectionProbe object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectionprobe#serialize
+func (r *ReflectionProbe) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("serialize", args...)
+	return retVal
+}
+
+// SetRenderingAutoClearDepthStencil calls the SetRenderingAutoClearDepthStencil method on the ReflectionProbe object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectionprobe#setrenderingautocleardepthstencil
+func (r *ReflectionProbe) SetRenderingAutoClearDepthStencil(renderingGroupId float64, autoClearDepthStencil bool) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, renderingGroupId)
+	args = append(args, autoClearDepthStencil)
+
+	r.p.Call("setRenderingAutoClearDepthStencil", args...)
+}
+
+// ReflectionProbeToStringOpts contains optional parameters for ReflectionProbe.ToString.
+type ReflectionProbeToStringOpts struct {
+	FullDetails *bool
+}
+
+// ToString calls the ToString method on the ReflectionProbe object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectionprobe#tostring
+func (r *ReflectionProbe) ToString(opts *ReflectionProbeToStringOpts) string {
+	if opts == nil {
+		opts = &ReflectionProbeToStringOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.FullDetails == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FullDetails)
+	}
+
+	retVal := r.p.Call("toString", args...)
+	return retVal.String()
+}
+
+/*
+
+// CubeTexture returns the CubeTexture property of class ReflectionProbe.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectionprobe#cubetexture
+func (r *ReflectionProbe) CubeTexture(cubeTexture *RenderTargetTexture) *ReflectionProbe {
+	p := ba.ctx.Get("ReflectionProbe").New(cubeTexture.JSObject())
+	return ReflectionProbeFromJSObject(p, ba.ctx)
+}
+
+// SetCubeTexture sets the CubeTexture property of class ReflectionProbe.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectionprobe#cubetexture
+func (r *ReflectionProbe) SetCubeTexture(cubeTexture *RenderTargetTexture) *ReflectionProbe {
+	p := ba.ctx.Get("ReflectionProbe").New(cubeTexture.JSObject())
+	return ReflectionProbeFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class ReflectionProbe.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectionprobe#name
+func (r *ReflectionProbe) Name(name string) *ReflectionProbe {
+	p := ba.ctx.Get("ReflectionProbe").New(name)
+	return ReflectionProbeFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class ReflectionProbe.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectionprobe#name
+func (r *ReflectionProbe) SetName(name string) *ReflectionProbe {
+	p := ba.ctx.Get("ReflectionProbe").New(name)
+	return ReflectionProbeFromJSObject(p, ba.ctx)
+}
+
+// Position returns the Position property of class ReflectionProbe.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectionprobe#position
+func (r *ReflectionProbe) Position(position *Vector3) *ReflectionProbe {
+	p := ba.ctx.Get("ReflectionProbe").New(position.JSObject())
+	return ReflectionProbeFromJSObject(p, ba.ctx)
+}
+
+// SetPosition sets the Position property of class ReflectionProbe.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectionprobe#position
+func (r *ReflectionProbe) SetPosition(position *Vector3) *ReflectionProbe {
+	p := ba.ctx.Get("ReflectionProbe").New(position.JSObject())
+	return ReflectionProbeFromJSObject(p, ba.ctx)
+}
+
+// RefreshRate returns the RefreshRate property of class ReflectionProbe.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectionprobe#refreshrate
+func (r *ReflectionProbe) RefreshRate(refreshRate float64) *ReflectionProbe {
+	p := ba.ctx.Get("ReflectionProbe").New(refreshRate)
+	return ReflectionProbeFromJSObject(p, ba.ctx)
+}
+
+// SetRefreshRate sets the RefreshRate property of class ReflectionProbe.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectionprobe#refreshrate
+func (r *ReflectionProbe) SetRefreshRate(refreshRate float64) *ReflectionProbe {
+	p := ba.ctx.Get("ReflectionProbe").New(refreshRate)
+	return ReflectionProbeFromJSObject(p, ba.ctx)
+}
+
+// RenderList returns the RenderList property of class ReflectionProbe.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectionprobe#renderlist
+func (r *ReflectionProbe) RenderList(renderList *AbstractMesh) *ReflectionProbe {
+	p := ba.ctx.Get("ReflectionProbe").New(renderList.JSObject())
+	return ReflectionProbeFromJSObject(p, ba.ctx)
+}
+
+// SetRenderList sets the RenderList property of class ReflectionProbe.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectionprobe#renderlist
+func (r *ReflectionProbe) SetRenderList(renderList *AbstractMesh) *ReflectionProbe {
+	p := ba.ctx.Get("ReflectionProbe").New(renderList.JSObject())
+	return ReflectionProbeFromJSObject(p, ba.ctx)
+}
+
+// Samples returns the Samples property of class ReflectionProbe.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectionprobe#samples
+func (r *ReflectionProbe) Samples(samples float64) *ReflectionProbe {
+	p := ba.ctx.Get("ReflectionProbe").New(samples)
+	return ReflectionProbeFromJSObject(p, ba.ctx)
+}
+
+// SetSamples sets the Samples property of class ReflectionProbe.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectionprobe#samples
+func (r *ReflectionProbe) SetSamples(samples float64) *ReflectionProbe {
+	p := ba.ctx.Get("ReflectionProbe").New(samples)
+	return ReflectionProbeFromJSObject(p, ba.ctx)
+}
+
+*/

@@ -40,8 +40,101 @@ func (ba *Babylon) NewGamepadManager(opts *NewGamepadManagerOpts) *GamepadManage
 		opts = &NewGamepadManagerOpts{}
 	}
 
-	p := ba.ctx.Get("GamepadManager").New(opts._scene.JSObject())
+	args := make([]interface{}, 0, 0+1)
+
+	if opts._scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts._scene.JSObject())
+	}
+
+	p := ba.ctx.Get("GamepadManager").New(args...)
 	return GamepadManagerFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Dispose calls the Dispose method on the GamepadManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gamepadmanager#dispose
+func (g *GamepadManager) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	g.p.Call("dispose", args...)
+}
+
+// GamepadManagerGetGamepadByTypeOpts contains optional parameters for GamepadManager.GetGamepadByType.
+type GamepadManagerGetGamepadByTypeOpts struct {
+	Type *float64
+}
+
+// GetGamepadByType calls the GetGamepadByType method on the GamepadManager object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gamepadmanager#getgamepadbytype
+func (g *GamepadManager) GetGamepadByType(opts *GamepadManagerGetGamepadByTypeOpts) *Gamepad {
+	if opts == nil {
+		opts = &GamepadManagerGetGamepadByTypeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Type == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Type)
+	}
+
+	retVal := g.p.Call("getGamepadByType", args...)
+	return GamepadFromJSObject(retVal, g.ctx)
+}
+
+/*
+
+// Gamepads returns the Gamepads property of class GamepadManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gamepadmanager#gamepads
+func (g *GamepadManager) Gamepads(gamepads *Gamepad) *GamepadManager {
+	p := ba.ctx.Get("GamepadManager").New(gamepads.JSObject())
+	return GamepadManagerFromJSObject(p, ba.ctx)
+}
+
+// SetGamepads sets the Gamepads property of class GamepadManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gamepadmanager#gamepads
+func (g *GamepadManager) SetGamepads(gamepads *Gamepad) *GamepadManager {
+	p := ba.ctx.Get("GamepadManager").New(gamepads.JSObject())
+	return GamepadManagerFromJSObject(p, ba.ctx)
+}
+
+// OnGamepadConnectedObservable returns the OnGamepadConnectedObservable property of class GamepadManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gamepadmanager#ongamepadconnectedobservable
+func (g *GamepadManager) OnGamepadConnectedObservable(onGamepadConnectedObservable *Observable) *GamepadManager {
+	p := ba.ctx.Get("GamepadManager").New(onGamepadConnectedObservable.JSObject())
+	return GamepadManagerFromJSObject(p, ba.ctx)
+}
+
+// SetOnGamepadConnectedObservable sets the OnGamepadConnectedObservable property of class GamepadManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gamepadmanager#ongamepadconnectedobservable
+func (g *GamepadManager) SetOnGamepadConnectedObservable(onGamepadConnectedObservable *Observable) *GamepadManager {
+	p := ba.ctx.Get("GamepadManager").New(onGamepadConnectedObservable.JSObject())
+	return GamepadManagerFromJSObject(p, ba.ctx)
+}
+
+// OnGamepadDisconnectedObservable returns the OnGamepadDisconnectedObservable property of class GamepadManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gamepadmanager#ongamepaddisconnectedobservable
+func (g *GamepadManager) OnGamepadDisconnectedObservable(onGamepadDisconnectedObservable *Observable) *GamepadManager {
+	p := ba.ctx.Get("GamepadManager").New(onGamepadDisconnectedObservable.JSObject())
+	return GamepadManagerFromJSObject(p, ba.ctx)
+}
+
+// SetOnGamepadDisconnectedObservable sets the OnGamepadDisconnectedObservable property of class GamepadManager.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gamepadmanager#ongamepaddisconnectedobservable
+func (g *GamepadManager) SetOnGamepadDisconnectedObservable(onGamepadDisconnectedObservable *Observable) *GamepadManager {
+	p := ba.ctx.Get("GamepadManager").New(onGamepadDisconnectedObservable.JSObject())
+	return GamepadManagerFromJSObject(p, ba.ctx)
+}
+
+*/

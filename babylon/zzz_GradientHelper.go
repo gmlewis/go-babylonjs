@@ -27,4 +27,20 @@ func GradientHelperFromJSObject(p js.Value, ctx js.Value) *GradientHelper {
 	return &GradientHelper{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// GetCurrentGradient calls the GetCurrentGradient method on the GradientHelper object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gradienthelper#getcurrentgradient
+func (g *GradientHelper) GetCurrentGradient(ratio float64, gradients *IValueGradient, updateFunc func()) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, ratio)
+	args = append(args, gradients.JSObject())
+	args = append(args, updateFunc)
+
+	g.p.Call("GetCurrentGradient", args...)
+}
+
+/*
+
+ */

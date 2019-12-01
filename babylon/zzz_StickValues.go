@@ -31,8 +31,48 @@ func StickValuesFromJSObject(p js.Value, ctx js.Value) *StickValues {
 //
 // https://doc.babylonjs.com/api/classes/babylon.stickvalues
 func (ba *Babylon) NewStickValues(x float64, y float64) *StickValues {
-	p := ba.ctx.Get("StickValues").New(x, y)
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, x)
+	args = append(args, y)
+
+	p := ba.ctx.Get("StickValues").New(args...)
 	return StickValuesFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+/*
+
+// X returns the X property of class StickValues.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stickvalues#x
+func (s *StickValues) X(x float64) *StickValues {
+	p := ba.ctx.Get("StickValues").New(x)
+	return StickValuesFromJSObject(p, ba.ctx)
+}
+
+// SetX sets the X property of class StickValues.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stickvalues#x
+func (s *StickValues) SetX(x float64) *StickValues {
+	p := ba.ctx.Get("StickValues").New(x)
+	return StickValuesFromJSObject(p, ba.ctx)
+}
+
+// Y returns the Y property of class StickValues.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stickvalues#y
+func (s *StickValues) Y(y float64) *StickValues {
+	p := ba.ctx.Get("StickValues").New(y)
+	return StickValuesFromJSObject(p, ba.ctx)
+}
+
+// SetY sets the Y property of class StickValues.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stickvalues#y
+func (s *StickValues) SetY(y float64) *StickValues {
+	p := ba.ctx.Get("StickValues").New(y)
+	return StickValuesFromJSObject(p, ba.ctx)
+}
+
+*/

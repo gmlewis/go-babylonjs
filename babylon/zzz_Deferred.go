@@ -31,8 +31,61 @@ func DeferredFromJSObject(p js.Value, ctx js.Value) *Deferred {
 //
 // https://doc.babylonjs.com/api/classes/babylon.deferred
 func (ba *Babylon) NewDeferred() *Deferred {
-	p := ba.ctx.Get("Deferred").New()
+
+	args := make([]interface{}, 0, 0+0)
+
+	p := ba.ctx.Get("Deferred").New(args...)
 	return DeferredFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+/*
+
+// Promise returns the Promise property of class Deferred.
+//
+// https://doc.babylonjs.com/api/classes/babylon.deferred#promise
+func (d *Deferred) Promise(promise *Promise) *Deferred {
+	p := ba.ctx.Get("Deferred").New(promise.JSObject())
+	return DeferredFromJSObject(p, ba.ctx)
+}
+
+// SetPromise sets the Promise property of class Deferred.
+//
+// https://doc.babylonjs.com/api/classes/babylon.deferred#promise
+func (d *Deferred) SetPromise(promise *Promise) *Deferred {
+	p := ba.ctx.Get("Deferred").New(promise.JSObject())
+	return DeferredFromJSObject(p, ba.ctx)
+}
+
+// Reject returns the Reject property of class Deferred.
+//
+// https://doc.babylonjs.com/api/classes/babylon.deferred#reject
+func (d *Deferred) Reject(reject func()) *Deferred {
+	p := ba.ctx.Get("Deferred").New(reject)
+	return DeferredFromJSObject(p, ba.ctx)
+}
+
+// SetReject sets the Reject property of class Deferred.
+//
+// https://doc.babylonjs.com/api/classes/babylon.deferred#reject
+func (d *Deferred) SetReject(reject func()) *Deferred {
+	p := ba.ctx.Get("Deferred").New(reject)
+	return DeferredFromJSObject(p, ba.ctx)
+}
+
+// Resolve returns the Resolve property of class Deferred.
+//
+// https://doc.babylonjs.com/api/classes/babylon.deferred#resolve
+func (d *Deferred) Resolve(resolve func()) *Deferred {
+	p := ba.ctx.Get("Deferred").New(resolve)
+	return DeferredFromJSObject(p, ba.ctx)
+}
+
+// SetResolve sets the Resolve property of class Deferred.
+//
+// https://doc.babylonjs.com/api/classes/babylon.deferred#resolve
+func (d *Deferred) SetResolve(resolve func()) *Deferred {
+	p := ba.ctx.Get("Deferred").New(resolve)
+	return DeferredFromJSObject(p, ba.ctx)
+}
+
+*/

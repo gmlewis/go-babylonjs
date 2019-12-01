@@ -33,8 +33,105 @@ func EngineInstrumentationFromJSObject(p js.Value, ctx js.Value) *EngineInstrume
 //
 // https://doc.babylonjs.com/api/classes/babylon.engineinstrumentation
 func (ba *Babylon) NewEngineInstrumentation(engine *Engine) *EngineInstrumentation {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, engine.JSObject())
+
+	p := ba.ctx.Get("EngineInstrumentation").New(args...)
+	return EngineInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// Dispose calls the Dispose method on the EngineInstrumentation object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.engineinstrumentation#dispose
+func (e *EngineInstrumentation) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	e.p.Call("dispose", args...)
+}
+
+/*
+
+// CaptureGPUFrameTime returns the CaptureGPUFrameTime property of class EngineInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.engineinstrumentation#capturegpuframetime
+func (e *EngineInstrumentation) CaptureGPUFrameTime(captureGPUFrameTime bool) *EngineInstrumentation {
+	p := ba.ctx.Get("EngineInstrumentation").New(captureGPUFrameTime)
+	return EngineInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// SetCaptureGPUFrameTime sets the CaptureGPUFrameTime property of class EngineInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.engineinstrumentation#capturegpuframetime
+func (e *EngineInstrumentation) SetCaptureGPUFrameTime(captureGPUFrameTime bool) *EngineInstrumentation {
+	p := ba.ctx.Get("EngineInstrumentation").New(captureGPUFrameTime)
+	return EngineInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// CaptureShaderCompilationTime returns the CaptureShaderCompilationTime property of class EngineInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.engineinstrumentation#captureshadercompilationtime
+func (e *EngineInstrumentation) CaptureShaderCompilationTime(captureShaderCompilationTime bool) *EngineInstrumentation {
+	p := ba.ctx.Get("EngineInstrumentation").New(captureShaderCompilationTime)
+	return EngineInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// SetCaptureShaderCompilationTime sets the CaptureShaderCompilationTime property of class EngineInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.engineinstrumentation#captureshadercompilationtime
+func (e *EngineInstrumentation) SetCaptureShaderCompilationTime(captureShaderCompilationTime bool) *EngineInstrumentation {
+	p := ba.ctx.Get("EngineInstrumentation").New(captureShaderCompilationTime)
+	return EngineInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// Engine returns the Engine property of class EngineInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.engineinstrumentation#engine
+func (e *EngineInstrumentation) Engine(engine *Engine) *EngineInstrumentation {
 	p := ba.ctx.Get("EngineInstrumentation").New(engine.JSObject())
 	return EngineInstrumentationFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetEngine sets the Engine property of class EngineInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.engineinstrumentation#engine
+func (e *EngineInstrumentation) SetEngine(engine *Engine) *EngineInstrumentation {
+	p := ba.ctx.Get("EngineInstrumentation").New(engine.JSObject())
+	return EngineInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// GpuFrameTimeCounter returns the GpuFrameTimeCounter property of class EngineInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.engineinstrumentation#gpuframetimecounter
+func (e *EngineInstrumentation) GpuFrameTimeCounter(gpuFrameTimeCounter *PerfCounter) *EngineInstrumentation {
+	p := ba.ctx.Get("EngineInstrumentation").New(gpuFrameTimeCounter.JSObject())
+	return EngineInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// SetGpuFrameTimeCounter sets the GpuFrameTimeCounter property of class EngineInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.engineinstrumentation#gpuframetimecounter
+func (e *EngineInstrumentation) SetGpuFrameTimeCounter(gpuFrameTimeCounter *PerfCounter) *EngineInstrumentation {
+	p := ba.ctx.Get("EngineInstrumentation").New(gpuFrameTimeCounter.JSObject())
+	return EngineInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// ShaderCompilationTimeCounter returns the ShaderCompilationTimeCounter property of class EngineInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.engineinstrumentation#shadercompilationtimecounter
+func (e *EngineInstrumentation) ShaderCompilationTimeCounter(shaderCompilationTimeCounter *PerfCounter) *EngineInstrumentation {
+	p := ba.ctx.Get("EngineInstrumentation").New(shaderCompilationTimeCounter.JSObject())
+	return EngineInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// SetShaderCompilationTimeCounter sets the ShaderCompilationTimeCounter property of class EngineInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.engineinstrumentation#shadercompilationtimecounter
+func (e *EngineInstrumentation) SetShaderCompilationTimeCounter(shaderCompilationTimeCounter *PerfCounter) *EngineInstrumentation {
+	p := ba.ctx.Get("EngineInstrumentation").New(shaderCompilationTimeCounter.JSObject())
+	return EngineInstrumentationFromJSObject(p, ba.ctx)
+}
+
+*/

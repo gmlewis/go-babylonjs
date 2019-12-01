@@ -27,4 +27,58 @@ func OBJExportFromJSObject(p js.Value, ctx js.Value) *OBJExport {
 	return &OBJExport{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// MTL calls the MTL method on the OBJExport object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.objexport#mtl
+func (o *OBJExport) MTL(mesh *Mesh) string {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	retVal := o.p.Call("MTL", args...)
+	return retVal.String()
+}
+
+// OBJExportOBJOpts contains optional parameters for OBJExport.OBJ.
+type OBJExportOBJOpts struct {
+	Materials      *bool
+	Matlibname     *string
+	Globalposition *bool
+}
+
+// OBJ calls the OBJ method on the OBJExport object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.objexport#obj
+func (o *OBJExport) OBJ(mesh *Mesh, opts *OBJExportOBJOpts) string {
+	if opts == nil {
+		opts = &OBJExportOBJOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, mesh.JSObject())
+
+	if opts.Materials == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Materials)
+	}
+	if opts.Matlibname == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Matlibname)
+	}
+	if opts.Globalposition == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Globalposition)
+	}
+
+	retVal := o.p.Call("OBJ", args...)
+	return retVal.String()
+}
+
+/*
+
+ */

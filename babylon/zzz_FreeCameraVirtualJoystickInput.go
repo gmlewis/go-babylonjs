@@ -29,4 +29,114 @@ func FreeCameraVirtualJoystickInputFromJSObject(p js.Value, ctx js.Value) *FreeC
 	return &FreeCameraVirtualJoystickInput{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// FreeCameraVirtualJoystickInputAttachControlOpts contains optional parameters for FreeCameraVirtualJoystickInput.AttachControl.
+type FreeCameraVirtualJoystickInputAttachControlOpts struct {
+	NoPreventDefault *bool
+}
+
+// AttachControl calls the AttachControl method on the FreeCameraVirtualJoystickInput object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.freecameravirtualjoystickinput#attachcontrol
+func (f *FreeCameraVirtualJoystickInput) AttachControl(element js.Value, opts *FreeCameraVirtualJoystickInputAttachControlOpts) {
+	if opts == nil {
+		opts = &FreeCameraVirtualJoystickInputAttachControlOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, element)
+
+	if opts.NoPreventDefault == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoPreventDefault)
+	}
+
+	f.p.Call("attachControl", args...)
+}
+
+// CheckInputs calls the CheckInputs method on the FreeCameraVirtualJoystickInput object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.freecameravirtualjoystickinput#checkinputs
+func (f *FreeCameraVirtualJoystickInput) CheckInputs() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	f.p.Call("checkInputs", args...)
+}
+
+// DetachControl calls the DetachControl method on the FreeCameraVirtualJoystickInput object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.freecameravirtualjoystickinput#detachcontrol
+func (f *FreeCameraVirtualJoystickInput) DetachControl(element js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, element)
+
+	f.p.Call("detachControl", args...)
+}
+
+// GetClassName calls the GetClassName method on the FreeCameraVirtualJoystickInput object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.freecameravirtualjoystickinput#getclassname
+func (f *FreeCameraVirtualJoystickInput) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetLeftJoystick calls the GetLeftJoystick method on the FreeCameraVirtualJoystickInput object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.freecameravirtualjoystickinput#getleftjoystick
+func (f *FreeCameraVirtualJoystickInput) GetLeftJoystick() *VirtualJoystick {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("getLeftJoystick", args...)
+	return VirtualJoystickFromJSObject(retVal, f.ctx)
+}
+
+// GetRightJoystick calls the GetRightJoystick method on the FreeCameraVirtualJoystickInput object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.freecameravirtualjoystickinput#getrightjoystick
+func (f *FreeCameraVirtualJoystickInput) GetRightJoystick() *VirtualJoystick {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("getRightJoystick", args...)
+	return VirtualJoystickFromJSObject(retVal, f.ctx)
+}
+
+// GetSimpleName calls the GetSimpleName method on the FreeCameraVirtualJoystickInput object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.freecameravirtualjoystickinput#getsimplename
+func (f *FreeCameraVirtualJoystickInput) GetSimpleName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("getSimpleName", args...)
+	return retVal.String()
+}
+
+/*
+
+// Camera returns the Camera property of class FreeCameraVirtualJoystickInput.
+//
+// https://doc.babylonjs.com/api/classes/babylon.freecameravirtualjoystickinput#camera
+func (f *FreeCameraVirtualJoystickInput) Camera(camera *FreeCamera) *FreeCameraVirtualJoystickInput {
+	p := ba.ctx.Get("FreeCameraVirtualJoystickInput").New(camera.JSObject())
+	return FreeCameraVirtualJoystickInputFromJSObject(p, ba.ctx)
+}
+
+// SetCamera sets the Camera property of class FreeCameraVirtualJoystickInput.
+//
+// https://doc.babylonjs.com/api/classes/babylon.freecameravirtualjoystickinput#camera
+func (f *FreeCameraVirtualJoystickInput) SetCamera(camera *FreeCamera) *FreeCameraVirtualJoystickInput {
+	p := ba.ctx.Get("FreeCameraVirtualJoystickInput").New(camera.JSObject())
+	return FreeCameraVirtualJoystickInputFromJSObject(p, ba.ctx)
+}
+
+*/

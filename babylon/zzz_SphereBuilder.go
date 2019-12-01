@@ -27,4 +27,34 @@ func SphereBuilderFromJSObject(p js.Value, ctx js.Value) *SphereBuilder {
 	return &SphereBuilder{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// SphereBuilderCreateSphereOpts contains optional parameters for SphereBuilder.CreateSphere.
+type SphereBuilderCreateSphereOpts struct {
+	Scene *Scene
+}
+
+// CreateSphere calls the CreateSphere method on the SphereBuilder object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.spherebuilder#createsphere
+func (s *SphereBuilder) CreateSphere(name string, options js.Value, opts *SphereBuilderCreateSphereOpts) *Mesh {
+	if opts == nil {
+		opts = &SphereBuilderCreateSphereOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, name)
+	args = append(args, options)
+
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+
+	retVal := s.p.Call("CreateSphere", args...)
+	return MeshFromJSObject(retVal, s.ctx)
+}
+
+/*
+
+ */

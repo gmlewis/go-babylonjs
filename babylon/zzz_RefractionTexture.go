@@ -32,7 +32,7 @@ func RefractionTextureFromJSObject(p js.Value, ctx js.Value) *RefractionTexture 
 
 // NewRefractionTextureOpts contains optional parameters for NewRefractionTexture.
 type NewRefractionTextureOpts struct {
-	GenerateMipMaps *JSBool
+	GenerateMipMaps *bool
 }
 
 // NewRefractionTexture returns a new RefractionTexture object.
@@ -43,8 +43,2444 @@ func (ba *Babylon) NewRefractionTexture(name string, size float64, scene *Scene,
 		opts = &NewRefractionTextureOpts{}
 	}
 
-	p := ba.ctx.Get("RefractionTexture").New(name, size, scene.JSObject(), opts.GenerateMipMaps.JSObject())
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, name)
+	args = append(args, size)
+	args = append(args, scene.JSObject())
+
+	if opts.GenerateMipMaps == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.GenerateMipMaps)
+	}
+
+	p := ba.ctx.Get("RefractionTexture").New(args...)
 	return RefractionTextureFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AddPostProcess calls the AddPostProcess method on the RefractionTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#addpostprocess
+func (r *RefractionTexture) AddPostProcess(postProcess *PostProcess) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, postProcess.JSObject())
+
+	r.p.Call("addPostProcess", args...)
+}
+
+// RefractionTextureClearPostProcessesOpts contains optional parameters for RefractionTexture.ClearPostProcesses.
+type RefractionTextureClearPostProcessesOpts struct {
+	Dispose *bool
+}
+
+// ClearPostProcesses calls the ClearPostProcesses method on the RefractionTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#clearpostprocesses
+func (r *RefractionTexture) ClearPostProcesses(opts *RefractionTextureClearPostProcessesOpts) {
+	if opts == nil {
+		opts = &RefractionTextureClearPostProcessesOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Dispose == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Dispose)
+	}
+
+	r.p.Call("clearPostProcesses", args...)
+}
+
+// Clone calls the Clone method on the RefractionTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#clone
+func (r *RefractionTexture) Clone() *RefractionTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("clone", args...)
+	return RefractionTextureFromJSObject(retVal, r.ctx)
+}
+
+// RefractionTextureCreateDepthStencilTextureOpts contains optional parameters for RefractionTexture.CreateDepthStencilTexture.
+type RefractionTextureCreateDepthStencilTextureOpts struct {
+	ComparisonFunction *float64
+	BilinearFiltering  *bool
+	GenerateStencil    *bool
+}
+
+// CreateDepthStencilTexture calls the CreateDepthStencilTexture method on the RefractionTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#createdepthstenciltexture
+func (r *RefractionTexture) CreateDepthStencilTexture(opts *RefractionTextureCreateDepthStencilTextureOpts) {
+	if opts == nil {
+		opts = &RefractionTextureCreateDepthStencilTextureOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+3)
+
+	if opts.ComparisonFunction == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ComparisonFunction)
+	}
+	if opts.BilinearFiltering == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.BilinearFiltering)
+	}
+	if opts.GenerateStencil == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.GenerateStencil)
+	}
+
+	r.p.Call("createDepthStencilTexture", args...)
+}
+
+// RefractionTextureCreateFromBase64StringOpts contains optional parameters for RefractionTexture.CreateFromBase64String.
+type RefractionTextureCreateFromBase64StringOpts struct {
+	NoMipmap     *bool
+	InvertY      *bool
+	SamplingMode *float64
+	OnLoad       *func()
+	OnError      *func()
+	Format       *float64
+}
+
+// CreateFromBase64String calls the CreateFromBase64String method on the RefractionTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#createfrombase64string
+func (r *RefractionTexture) CreateFromBase64String(data string, name string, scene *Scene, opts *RefractionTextureCreateFromBase64StringOpts) *Texture {
+	if opts == nil {
+		opts = &RefractionTextureCreateFromBase64StringOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+6)
+
+	args = append(args, data)
+	args = append(args, name)
+	args = append(args, scene.JSObject())
+
+	if opts.NoMipmap == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoMipmap)
+	}
+	if opts.InvertY == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.InvertY)
+	}
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+	if opts.OnLoad == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnLoad)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+	if opts.Format == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Format)
+	}
+
+	retVal := r.p.Call("CreateFromBase64String", args...)
+	return TextureFromJSObject(retVal, r.ctx)
+}
+
+// Dispose calls the Dispose method on the RefractionTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#dispose
+func (r *RefractionTexture) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	r.p.Call("dispose", args...)
+}
+
+// DisposeFramebufferObjects calls the DisposeFramebufferObjects method on the RefractionTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#disposeframebufferobjects
+func (r *RefractionTexture) DisposeFramebufferObjects() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	r.p.Call("disposeFramebufferObjects", args...)
+}
+
+// FreeRenderingGroups calls the FreeRenderingGroups method on the RefractionTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#freerenderinggroups
+func (r *RefractionTexture) FreeRenderingGroups() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	r.p.Call("freeRenderingGroups", args...)
+}
+
+// GetBaseSize calls the GetBaseSize method on the RefractionTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#getbasesize
+func (r *RefractionTexture) GetBaseSize() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("getBaseSize", args...)
+	return retVal
+}
+
+// GetClassName calls the GetClassName method on the RefractionTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#getclassname
+func (r *RefractionTexture) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetInternalTexture calls the GetInternalTexture method on the RefractionTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#getinternaltexture
+func (r *RefractionTexture) GetInternalTexture() *InternalTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("getInternalTexture", args...)
+	return InternalTextureFromJSObject(retVal, r.ctx)
+}
+
+// GetReflectionTextureMatrix calls the GetReflectionTextureMatrix method on the RefractionTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#getreflectiontexturematrix
+func (r *RefractionTexture) GetReflectionTextureMatrix() *Matrix {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("getReflectionTextureMatrix", args...)
+	return MatrixFromJSObject(retVal, r.ctx)
+}
+
+// GetRenderHeight calls the GetRenderHeight method on the RefractionTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#getrenderheight
+func (r *RefractionTexture) GetRenderHeight() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("getRenderHeight", args...)
+	return retVal.Float()
+}
+
+// GetRenderSize calls the GetRenderSize method on the RefractionTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#getrendersize
+func (r *RefractionTexture) GetRenderSize() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("getRenderSize", args...)
+	return retVal.Float()
+}
+
+// GetRenderWidth calls the GetRenderWidth method on the RefractionTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#getrenderwidth
+func (r *RefractionTexture) GetRenderWidth() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("getRenderWidth", args...)
+	return retVal.Float()
+}
+
+// GetScene calls the GetScene method on the RefractionTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#getscene
+func (r *RefractionTexture) GetScene() *Scene {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("getScene", args...)
+	return SceneFromJSObject(retVal, r.ctx)
+}
+
+// GetSize calls the GetSize method on the RefractionTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#getsize
+func (r *RefractionTexture) GetSize() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("getSize", args...)
+	return retVal
+}
+
+// RefractionTextureGetTextureMatrixOpts contains optional parameters for RefractionTexture.GetTextureMatrix.
+type RefractionTextureGetTextureMatrixOpts struct {
+	UBase *float64
+}
+
+// GetTextureMatrix calls the GetTextureMatrix method on the RefractionTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#gettexturematrix
+func (r *RefractionTexture) GetTextureMatrix(opts *RefractionTextureGetTextureMatrixOpts) *Matrix {
+	if opts == nil {
+		opts = &RefractionTextureGetTextureMatrixOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.UBase == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UBase)
+	}
+
+	retVal := r.p.Call("getTextureMatrix", args...)
+	return MatrixFromJSObject(retVal, r.ctx)
+}
+
+// GetViewCount calls the GetViewCount method on the RefractionTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#getviewcount
+func (r *RefractionTexture) GetViewCount() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("getViewCount", args...)
+	return retVal.Float()
+}
+
+// IsReady calls the IsReady method on the RefractionTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#isready
+func (r *RefractionTexture) IsReady() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// IsReadyOrNotBlocking calls the IsReadyOrNotBlocking method on the RefractionTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#isreadyornotblocking
+func (r *RefractionTexture) IsReadyOrNotBlocking() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("isReadyOrNotBlocking", args...)
+	return retVal.Bool()
+}
+
+// RefractionTextureLoadFromDataStringOpts contains optional parameters for RefractionTexture.LoadFromDataString.
+type RefractionTextureLoadFromDataStringOpts struct {
+	DeleteBuffer *bool
+	NoMipmap     *bool
+	InvertY      *bool
+	SamplingMode *float64
+	OnLoad       *func()
+	OnError      *func()
+	Format       *float64
+}
+
+// LoadFromDataString calls the LoadFromDataString method on the RefractionTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#loadfromdatastring
+func (r *RefractionTexture) LoadFromDataString(name string, buffer interface{}, scene *Scene, opts *RefractionTextureLoadFromDataStringOpts) *Texture {
+	if opts == nil {
+		opts = &RefractionTextureLoadFromDataStringOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+7)
+
+	args = append(args, name)
+	args = append(args, buffer)
+	args = append(args, scene.JSObject())
+
+	if opts.DeleteBuffer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DeleteBuffer)
+	}
+	if opts.NoMipmap == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoMipmap)
+	}
+	if opts.InvertY == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.InvertY)
+	}
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+	if opts.OnLoad == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnLoad)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+	if opts.Format == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Format)
+	}
+
+	retVal := r.p.Call("LoadFromDataString", args...)
+	return TextureFromJSObject(retVal, r.ctx)
+}
+
+// Parse calls the Parse method on the RefractionTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#parse
+func (r *RefractionTexture) Parse(parsedTexture interface{}, scene *Scene, rootUrl string) *BaseTexture {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, parsedTexture)
+	args = append(args, scene.JSObject())
+	args = append(args, rootUrl)
+
+	retVal := r.p.Call("Parse", args...)
+	return BaseTextureFromJSObject(retVal, r.ctx)
+}
+
+// RefractionTextureReadPixelsOpts contains optional parameters for RefractionTexture.ReadPixels.
+type RefractionTextureReadPixelsOpts struct {
+	FaceIndex *float64
+	Level     *float64
+	Buffer    js.Value
+}
+
+// ReadPixels calls the ReadPixels method on the RefractionTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#readpixels
+func (r *RefractionTexture) ReadPixels(opts *RefractionTextureReadPixelsOpts) js.Value {
+	if opts == nil {
+		opts = &RefractionTextureReadPixelsOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+3)
+
+	if opts.FaceIndex == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FaceIndex)
+	}
+	if opts.Level == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Level)
+	}
+	if opts.Buffer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Buffer)
+	}
+
+	retVal := r.p.Call("readPixels", args...)
+	return retVal
+}
+
+// ReleaseInternalTexture calls the ReleaseInternalTexture method on the RefractionTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#releaseinternaltexture
+func (r *RefractionTexture) ReleaseInternalTexture() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	r.p.Call("releaseInternalTexture", args...)
+}
+
+// RemovePostProcess calls the RemovePostProcess method on the RefractionTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#removepostprocess
+func (r *RefractionTexture) RemovePostProcess(postProcess *PostProcess) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, postProcess.JSObject())
+
+	r.p.Call("removePostProcess", args...)
+}
+
+// RefractionTextureRenderOpts contains optional parameters for RefractionTexture.Render.
+type RefractionTextureRenderOpts struct {
+	UseCameraPostProcess *bool
+	DumpForDebug         *bool
+}
+
+// Render calls the Render method on the RefractionTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#render
+func (r *RefractionTexture) Render(opts *RefractionTextureRenderOpts) {
+	if opts == nil {
+		opts = &RefractionTextureRenderOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.UseCameraPostProcess == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseCameraPostProcess)
+	}
+	if opts.DumpForDebug == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DumpForDebug)
+	}
+
+	r.p.Call("render", args...)
+}
+
+// ResetRefreshCounter calls the ResetRefreshCounter method on the RefractionTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#resetrefreshcounter
+func (r *RefractionTexture) ResetRefreshCounter() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	r.p.Call("resetRefreshCounter", args...)
+}
+
+// Resize calls the Resize method on the RefractionTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#resize
+func (r *RefractionTexture) Resize(size float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, size)
+
+	r.p.Call("resize", args...)
+}
+
+// Scale calls the Scale method on the RefractionTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#scale
+func (r *RefractionTexture) Scale(ratio float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, ratio)
+
+	r.p.Call("scale", args...)
+}
+
+// Serialize calls the Serialize method on the RefractionTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#serialize
+func (r *RefractionTexture) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("serialize", args...)
+	return retVal
+}
+
+// SetRenderingAutoClearDepthStencil calls the SetRenderingAutoClearDepthStencil method on the RefractionTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#setrenderingautocleardepthstencil
+func (r *RefractionTexture) SetRenderingAutoClearDepthStencil(renderingGroupId float64, autoClearDepthStencil bool) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, renderingGroupId)
+	args = append(args, autoClearDepthStencil)
+
+	r.p.Call("setRenderingAutoClearDepthStencil", args...)
+}
+
+// RefractionTextureSetRenderingOrderOpts contains optional parameters for RefractionTexture.SetRenderingOrder.
+type RefractionTextureSetRenderingOrderOpts struct {
+	OpaqueSortCompareFn      *func()
+	AlphaTestSortCompareFn   *func()
+	TransparentSortCompareFn *func()
+}
+
+// SetRenderingOrder calls the SetRenderingOrder method on the RefractionTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#setrenderingorder
+func (r *RefractionTexture) SetRenderingOrder(renderingGroupId float64, opts *RefractionTextureSetRenderingOrderOpts) {
+	if opts == nil {
+		opts = &RefractionTextureSetRenderingOrderOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, renderingGroupId)
+
+	if opts.OpaqueSortCompareFn == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OpaqueSortCompareFn)
+	}
+	if opts.AlphaTestSortCompareFn == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.AlphaTestSortCompareFn)
+	}
+	if opts.TransparentSortCompareFn == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.TransparentSortCompareFn)
+	}
+
+	r.p.Call("setRenderingOrder", args...)
+}
+
+// ToString calls the ToString method on the RefractionTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#tostring
+func (r *RefractionTexture) ToString() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("toString", args...)
+	return retVal.String()
+}
+
+// UpdateSamplingMode calls the UpdateSamplingMode method on the RefractionTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#updatesamplingmode
+func (r *RefractionTexture) UpdateSamplingMode(samplingMode float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, samplingMode)
+
+	r.p.Call("updateSamplingMode", args...)
+}
+
+// RefractionTextureUpdateURLOpts contains optional parameters for RefractionTexture.UpdateURL.
+type RefractionTextureUpdateURLOpts struct {
+	Buffer *string
+	OnLoad *func()
+}
+
+// UpdateURL calls the UpdateURL method on the RefractionTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#updateurl
+func (r *RefractionTexture) UpdateURL(url string, opts *RefractionTextureUpdateURLOpts) {
+	if opts == nil {
+		opts = &RefractionTextureUpdateURLOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, url)
+
+	if opts.Buffer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Buffer)
+	}
+	if opts.OnLoad == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnLoad)
+	}
+
+	r.p.Call("updateURL", args...)
+}
+
+// WhenAllReady calls the WhenAllReady method on the RefractionTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#whenallready
+func (r *RefractionTexture) WhenAllReady(textures *BaseTexture, callback func()) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, textures.JSObject())
+	args = append(args, callback)
+
+	r.p.Call("WhenAllReady", args...)
+}
+
+/*
+
+// ActiveCamera returns the ActiveCamera property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#activecamera
+func (r *RefractionTexture) ActiveCamera(activeCamera *Camera) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(activeCamera.JSObject())
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetActiveCamera sets the ActiveCamera property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#activecamera
+func (r *RefractionTexture) SetActiveCamera(activeCamera *Camera) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(activeCamera.JSObject())
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// Animations returns the Animations property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#animations
+func (r *RefractionTexture) Animations(animations *Animation) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(animations.JSObject())
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#animations
+func (r *RefractionTexture) SetAnimations(animations *Animation) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(animations.JSObject())
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// AnisotropicFilteringLevel returns the AnisotropicFilteringLevel property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#anisotropicfilteringlevel
+func (r *RefractionTexture) AnisotropicFilteringLevel(anisotropicFilteringLevel float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(anisotropicFilteringLevel)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetAnisotropicFilteringLevel sets the AnisotropicFilteringLevel property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#anisotropicfilteringlevel
+func (r *RefractionTexture) SetAnisotropicFilteringLevel(anisotropicFilteringLevel float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(anisotropicFilteringLevel)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// BILINEAR_SAMPLINGMODE returns the BILINEAR_SAMPLINGMODE property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#bilinear_samplingmode
+func (r *RefractionTexture) BILINEAR_SAMPLINGMODE(BILINEAR_SAMPLINGMODE float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(BILINEAR_SAMPLINGMODE)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetBILINEAR_SAMPLINGMODE sets the BILINEAR_SAMPLINGMODE property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#bilinear_samplingmode
+func (r *RefractionTexture) SetBILINEAR_SAMPLINGMODE(BILINEAR_SAMPLINGMODE float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(BILINEAR_SAMPLINGMODE)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// BoundingBoxPosition returns the BoundingBoxPosition property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#boundingboxposition
+func (r *RefractionTexture) BoundingBoxPosition(boundingBoxPosition *Vector3) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(boundingBoxPosition.JSObject())
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetBoundingBoxPosition sets the BoundingBoxPosition property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#boundingboxposition
+func (r *RefractionTexture) SetBoundingBoxPosition(boundingBoxPosition *Vector3) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(boundingBoxPosition.JSObject())
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// BoundingBoxSize returns the BoundingBoxSize property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#boundingboxsize
+func (r *RefractionTexture) BoundingBoxSize(boundingBoxSize *Vector3) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(boundingBoxSize.JSObject())
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetBoundingBoxSize sets the BoundingBoxSize property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#boundingboxsize
+func (r *RefractionTexture) SetBoundingBoxSize(boundingBoxSize *Vector3) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(boundingBoxSize.JSObject())
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// CLAMP_ADDRESSMODE returns the CLAMP_ADDRESSMODE property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#clamp_addressmode
+func (r *RefractionTexture) CLAMP_ADDRESSMODE(CLAMP_ADDRESSMODE float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(CLAMP_ADDRESSMODE)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCLAMP_ADDRESSMODE sets the CLAMP_ADDRESSMODE property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#clamp_addressmode
+func (r *RefractionTexture) SetCLAMP_ADDRESSMODE(CLAMP_ADDRESSMODE float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(CLAMP_ADDRESSMODE)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// CUBIC_MODE returns the CUBIC_MODE property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#cubic_mode
+func (r *RefractionTexture) CUBIC_MODE(CUBIC_MODE float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(CUBIC_MODE)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCUBIC_MODE sets the CUBIC_MODE property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#cubic_mode
+func (r *RefractionTexture) SetCUBIC_MODE(CUBIC_MODE float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(CUBIC_MODE)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// CanRescale returns the CanRescale property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#canrescale
+func (r *RefractionTexture) CanRescale(canRescale bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(canRescale)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCanRescale sets the CanRescale property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#canrescale
+func (r *RefractionTexture) SetCanRescale(canRescale bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(canRescale)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// ClearColor returns the ClearColor property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#clearcolor
+func (r *RefractionTexture) ClearColor(clearColor *Color4) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(clearColor.JSObject())
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetClearColor sets the ClearColor property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#clearcolor
+func (r *RefractionTexture) SetClearColor(clearColor *Color4) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(clearColor.JSObject())
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// CoordinatesIndex returns the CoordinatesIndex property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#coordinatesindex
+func (r *RefractionTexture) CoordinatesIndex(coordinatesIndex float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(coordinatesIndex)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCoordinatesIndex sets the CoordinatesIndex property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#coordinatesindex
+func (r *RefractionTexture) SetCoordinatesIndex(coordinatesIndex float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(coordinatesIndex)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// CoordinatesMode returns the CoordinatesMode property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#coordinatesmode
+func (r *RefractionTexture) CoordinatesMode(coordinatesMode float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(coordinatesMode)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCoordinatesMode sets the CoordinatesMode property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#coordinatesmode
+func (r *RefractionTexture) SetCoordinatesMode(coordinatesMode float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(coordinatesMode)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// CustomRenderFunction returns the CustomRenderFunction property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#customrenderfunction
+func (r *RefractionTexture) CustomRenderFunction(customRenderFunction func()) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(customRenderFunction)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCustomRenderFunction sets the CustomRenderFunction property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#customrenderfunction
+func (r *RefractionTexture) SetCustomRenderFunction(customRenderFunction func()) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(customRenderFunction)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// DEFAULT_ANISOTROPIC_FILTERING_LEVEL returns the DEFAULT_ANISOTROPIC_FILTERING_LEVEL property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#default_anisotropic_filtering_level
+func (r *RefractionTexture) DEFAULT_ANISOTROPIC_FILTERING_LEVEL(DEFAULT_ANISOTROPIC_FILTERING_LEVEL float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(DEFAULT_ANISOTROPIC_FILTERING_LEVEL)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetDEFAULT_ANISOTROPIC_FILTERING_LEVEL sets the DEFAULT_ANISOTROPIC_FILTERING_LEVEL property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#default_anisotropic_filtering_level
+func (r *RefractionTexture) SetDEFAULT_ANISOTROPIC_FILTERING_LEVEL(DEFAULT_ANISOTROPIC_FILTERING_LEVEL float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(DEFAULT_ANISOTROPIC_FILTERING_LEVEL)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// DelayLoadState returns the DelayLoadState property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#delayloadstate
+func (r *RefractionTexture) DelayLoadState(delayLoadState float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(delayLoadState)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetDelayLoadState sets the DelayLoadState property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#delayloadstate
+func (r *RefractionTexture) SetDelayLoadState(delayLoadState float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(delayLoadState)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// Depth returns the Depth property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#depth
+func (r *RefractionTexture) Depth(depth float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(depth)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetDepth sets the Depth property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#depth
+func (r *RefractionTexture) SetDepth(depth float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(depth)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// DepthStencilTexture returns the DepthStencilTexture property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#depthstenciltexture
+func (r *RefractionTexture) DepthStencilTexture(depthStencilTexture *InternalTexture) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(depthStencilTexture.JSObject())
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetDepthStencilTexture sets the DepthStencilTexture property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#depthstenciltexture
+func (r *RefractionTexture) SetDepthStencilTexture(depthStencilTexture *InternalTexture) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(depthStencilTexture.JSObject())
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// EQUIRECTANGULAR_MODE returns the EQUIRECTANGULAR_MODE property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#equirectangular_mode
+func (r *RefractionTexture) EQUIRECTANGULAR_MODE(EQUIRECTANGULAR_MODE float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(EQUIRECTANGULAR_MODE)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetEQUIRECTANGULAR_MODE sets the EQUIRECTANGULAR_MODE property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#equirectangular_mode
+func (r *RefractionTexture) SetEQUIRECTANGULAR_MODE(EQUIRECTANGULAR_MODE float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(EQUIRECTANGULAR_MODE)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// EXPLICIT_MODE returns the EXPLICIT_MODE property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#explicit_mode
+func (r *RefractionTexture) EXPLICIT_MODE(EXPLICIT_MODE float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(EXPLICIT_MODE)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetEXPLICIT_MODE sets the EXPLICIT_MODE property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#explicit_mode
+func (r *RefractionTexture) SetEXPLICIT_MODE(EXPLICIT_MODE float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(EXPLICIT_MODE)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// FIXED_EQUIRECTANGULAR_MIRRORED_MODE returns the FIXED_EQUIRECTANGULAR_MIRRORED_MODE property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#fixed_equirectangular_mirrored_mode
+func (r *RefractionTexture) FIXED_EQUIRECTANGULAR_MIRRORED_MODE(FIXED_EQUIRECTANGULAR_MIRRORED_MODE float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(FIXED_EQUIRECTANGULAR_MIRRORED_MODE)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetFIXED_EQUIRECTANGULAR_MIRRORED_MODE sets the FIXED_EQUIRECTANGULAR_MIRRORED_MODE property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#fixed_equirectangular_mirrored_mode
+func (r *RefractionTexture) SetFIXED_EQUIRECTANGULAR_MIRRORED_MODE(FIXED_EQUIRECTANGULAR_MIRRORED_MODE float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(FIXED_EQUIRECTANGULAR_MIRRORED_MODE)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// FIXED_EQUIRECTANGULAR_MODE returns the FIXED_EQUIRECTANGULAR_MODE property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#fixed_equirectangular_mode
+func (r *RefractionTexture) FIXED_EQUIRECTANGULAR_MODE(FIXED_EQUIRECTANGULAR_MODE float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(FIXED_EQUIRECTANGULAR_MODE)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetFIXED_EQUIRECTANGULAR_MODE sets the FIXED_EQUIRECTANGULAR_MODE property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#fixed_equirectangular_mode
+func (r *RefractionTexture) SetFIXED_EQUIRECTANGULAR_MODE(FIXED_EQUIRECTANGULAR_MODE float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(FIXED_EQUIRECTANGULAR_MODE)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// GammaSpace returns the GammaSpace property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#gammaspace
+func (r *RefractionTexture) GammaSpace(gammaSpace bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(gammaSpace)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetGammaSpace sets the GammaSpace property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#gammaspace
+func (r *RefractionTexture) SetGammaSpace(gammaSpace bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(gammaSpace)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// GetAlphaFromRGB returns the GetAlphaFromRGB property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#getalphafromrgb
+func (r *RefractionTexture) GetAlphaFromRGB(getAlphaFromRGB bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(getAlphaFromRGB)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetGetAlphaFromRGB sets the GetAlphaFromRGB property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#getalphafromrgb
+func (r *RefractionTexture) SetGetAlphaFromRGB(getAlphaFromRGB bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(getAlphaFromRGB)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// HasAlpha returns the HasAlpha property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#hasalpha
+func (r *RefractionTexture) HasAlpha(hasAlpha bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(hasAlpha)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetHasAlpha sets the HasAlpha property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#hasalpha
+func (r *RefractionTexture) SetHasAlpha(hasAlpha bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(hasAlpha)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// INVCUBIC_MODE returns the INVCUBIC_MODE property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#invcubic_mode
+func (r *RefractionTexture) INVCUBIC_MODE(INVCUBIC_MODE float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(INVCUBIC_MODE)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetINVCUBIC_MODE sets the INVCUBIC_MODE property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#invcubic_mode
+func (r *RefractionTexture) SetINVCUBIC_MODE(INVCUBIC_MODE float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(INVCUBIC_MODE)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// IgnoreCameraViewport returns the IgnoreCameraViewport property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#ignorecameraviewport
+func (r *RefractionTexture) IgnoreCameraViewport(ignoreCameraViewport bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(ignoreCameraViewport)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIgnoreCameraViewport sets the IgnoreCameraViewport property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#ignorecameraviewport
+func (r *RefractionTexture) SetIgnoreCameraViewport(ignoreCameraViewport bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(ignoreCameraViewport)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#inspectablecustomproperties
+func (r *RefractionTexture) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(inspectableCustomProperties.JSObject())
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#inspectablecustomproperties
+func (r *RefractionTexture) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(inspectableCustomProperties.JSObject())
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// InvertY returns the InvertY property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#inverty
+func (r *RefractionTexture) InvertY(invertY bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(invertY)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetInvertY sets the InvertY property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#inverty
+func (r *RefractionTexture) SetInvertY(invertY bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(invertY)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// InvertZ returns the InvertZ property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#invertz
+func (r *RefractionTexture) InvertZ(invertZ bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(invertZ)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetInvertZ sets the InvertZ property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#invertz
+func (r *RefractionTexture) SetInvertZ(invertZ bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(invertZ)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// IrradianceTexture returns the IrradianceTexture property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#irradiancetexture
+func (r *RefractionTexture) IrradianceTexture(irradianceTexture *BaseTexture) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(irradianceTexture.JSObject())
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIrradianceTexture sets the IrradianceTexture property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#irradiancetexture
+func (r *RefractionTexture) SetIrradianceTexture(irradianceTexture *BaseTexture) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(irradianceTexture.JSObject())
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// Is2DArray returns the Is2DArray property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#is2darray
+func (r *RefractionTexture) Is2DArray(is2DArray bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(is2DArray)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIs2DArray sets the Is2DArray property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#is2darray
+func (r *RefractionTexture) SetIs2DArray(is2DArray bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(is2DArray)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// Is3D returns the Is3D property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#is3d
+func (r *RefractionTexture) Is3D(is3D bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(is3D)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIs3D sets the Is3D property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#is3d
+func (r *RefractionTexture) SetIs3D(is3D bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(is3D)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// IsBlocking returns the IsBlocking property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#isblocking
+func (r *RefractionTexture) IsBlocking(isBlocking bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(isBlocking)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsBlocking sets the IsBlocking property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#isblocking
+func (r *RefractionTexture) SetIsBlocking(isBlocking bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(isBlocking)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// IsCube returns the IsCube property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#iscube
+func (r *RefractionTexture) IsCube(isCube bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(isCube)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsCube sets the IsCube property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#iscube
+func (r *RefractionTexture) SetIsCube(isCube bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(isCube)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// IsRGBD returns the IsRGBD property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#isrgbd
+func (r *RefractionTexture) IsRGBD(isRGBD bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(isRGBD)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsRGBD sets the IsRGBD property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#isrgbd
+func (r *RefractionTexture) SetIsRGBD(isRGBD bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(isRGBD)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// IsRenderTarget returns the IsRenderTarget property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#isrendertarget
+func (r *RefractionTexture) IsRenderTarget(isRenderTarget bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(isRenderTarget)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsRenderTarget sets the IsRenderTarget property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#isrendertarget
+func (r *RefractionTexture) SetIsRenderTarget(isRenderTarget bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(isRenderTarget)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_LINEAR returns the LINEAR_LINEAR property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#linear_linear
+func (r *RefractionTexture) LINEAR_LINEAR(LINEAR_LINEAR float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(LINEAR_LINEAR)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_LINEAR sets the LINEAR_LINEAR property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#linear_linear
+func (r *RefractionTexture) SetLINEAR_LINEAR(LINEAR_LINEAR float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(LINEAR_LINEAR)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_LINEAR_MIPLINEAR returns the LINEAR_LINEAR_MIPLINEAR property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#linear_linear_miplinear
+func (r *RefractionTexture) LINEAR_LINEAR_MIPLINEAR(LINEAR_LINEAR_MIPLINEAR float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(LINEAR_LINEAR_MIPLINEAR)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_LINEAR_MIPLINEAR sets the LINEAR_LINEAR_MIPLINEAR property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#linear_linear_miplinear
+func (r *RefractionTexture) SetLINEAR_LINEAR_MIPLINEAR(LINEAR_LINEAR_MIPLINEAR float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(LINEAR_LINEAR_MIPLINEAR)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_LINEAR_MIPNEAREST returns the LINEAR_LINEAR_MIPNEAREST property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#linear_linear_mipnearest
+func (r *RefractionTexture) LINEAR_LINEAR_MIPNEAREST(LINEAR_LINEAR_MIPNEAREST float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(LINEAR_LINEAR_MIPNEAREST)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_LINEAR_MIPNEAREST sets the LINEAR_LINEAR_MIPNEAREST property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#linear_linear_mipnearest
+func (r *RefractionTexture) SetLINEAR_LINEAR_MIPNEAREST(LINEAR_LINEAR_MIPNEAREST float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(LINEAR_LINEAR_MIPNEAREST)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_NEAREST returns the LINEAR_NEAREST property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#linear_nearest
+func (r *RefractionTexture) LINEAR_NEAREST(LINEAR_NEAREST float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(LINEAR_NEAREST)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_NEAREST sets the LINEAR_NEAREST property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#linear_nearest
+func (r *RefractionTexture) SetLINEAR_NEAREST(LINEAR_NEAREST float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(LINEAR_NEAREST)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_NEAREST_MIPLINEAR returns the LINEAR_NEAREST_MIPLINEAR property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#linear_nearest_miplinear
+func (r *RefractionTexture) LINEAR_NEAREST_MIPLINEAR(LINEAR_NEAREST_MIPLINEAR float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(LINEAR_NEAREST_MIPLINEAR)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_NEAREST_MIPLINEAR sets the LINEAR_NEAREST_MIPLINEAR property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#linear_nearest_miplinear
+func (r *RefractionTexture) SetLINEAR_NEAREST_MIPLINEAR(LINEAR_NEAREST_MIPLINEAR float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(LINEAR_NEAREST_MIPLINEAR)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_NEAREST_MIPNEAREST returns the LINEAR_NEAREST_MIPNEAREST property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#linear_nearest_mipnearest
+func (r *RefractionTexture) LINEAR_NEAREST_MIPNEAREST(LINEAR_NEAREST_MIPNEAREST float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(LINEAR_NEAREST_MIPNEAREST)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_NEAREST_MIPNEAREST sets the LINEAR_NEAREST_MIPNEAREST property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#linear_nearest_mipnearest
+func (r *RefractionTexture) SetLINEAR_NEAREST_MIPNEAREST(LINEAR_NEAREST_MIPNEAREST float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(LINEAR_NEAREST_MIPNEAREST)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// Level returns the Level property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#level
+func (r *RefractionTexture) Level(level float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(level)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLevel sets the Level property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#level
+func (r *RefractionTexture) SetLevel(level float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(level)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// LinearSpecularLOD returns the LinearSpecularLOD property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#linearspecularlod
+func (r *RefractionTexture) LinearSpecularLOD(linearSpecularLOD bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(linearSpecularLOD)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLinearSpecularLOD sets the LinearSpecularLOD property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#linearspecularlod
+func (r *RefractionTexture) SetLinearSpecularLOD(linearSpecularLOD bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(linearSpecularLOD)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// LodGenerationOffset returns the LodGenerationOffset property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#lodgenerationoffset
+func (r *RefractionTexture) LodGenerationOffset(lodGenerationOffset float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(lodGenerationOffset)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLodGenerationOffset sets the LodGenerationOffset property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#lodgenerationoffset
+func (r *RefractionTexture) SetLodGenerationOffset(lodGenerationOffset float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(lodGenerationOffset)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// LodGenerationScale returns the LodGenerationScale property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#lodgenerationscale
+func (r *RefractionTexture) LodGenerationScale(lodGenerationScale float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(lodGenerationScale)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLodGenerationScale sets the LodGenerationScale property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#lodgenerationscale
+func (r *RefractionTexture) SetLodGenerationScale(lodGenerationScale float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(lodGenerationScale)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// MIRROR_ADDRESSMODE returns the MIRROR_ADDRESSMODE property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#mirror_addressmode
+func (r *RefractionTexture) MIRROR_ADDRESSMODE(MIRROR_ADDRESSMODE float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(MIRROR_ADDRESSMODE)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetMIRROR_ADDRESSMODE sets the MIRROR_ADDRESSMODE property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#mirror_addressmode
+func (r *RefractionTexture) SetMIRROR_ADDRESSMODE(MIRROR_ADDRESSMODE float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(MIRROR_ADDRESSMODE)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#metadata
+func (r *RefractionTexture) Metadata(metadata interface{}) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(metadata)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#metadata
+func (r *RefractionTexture) SetMetadata(metadata interface{}) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(metadata)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_LINEAR returns the NEAREST_LINEAR property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#nearest_linear
+func (r *RefractionTexture) NEAREST_LINEAR(NEAREST_LINEAR float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(NEAREST_LINEAR)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_LINEAR sets the NEAREST_LINEAR property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#nearest_linear
+func (r *RefractionTexture) SetNEAREST_LINEAR(NEAREST_LINEAR float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(NEAREST_LINEAR)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_LINEAR_MIPLINEAR returns the NEAREST_LINEAR_MIPLINEAR property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#nearest_linear_miplinear
+func (r *RefractionTexture) NEAREST_LINEAR_MIPLINEAR(NEAREST_LINEAR_MIPLINEAR float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(NEAREST_LINEAR_MIPLINEAR)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_LINEAR_MIPLINEAR sets the NEAREST_LINEAR_MIPLINEAR property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#nearest_linear_miplinear
+func (r *RefractionTexture) SetNEAREST_LINEAR_MIPLINEAR(NEAREST_LINEAR_MIPLINEAR float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(NEAREST_LINEAR_MIPLINEAR)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_LINEAR_MIPNEAREST returns the NEAREST_LINEAR_MIPNEAREST property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#nearest_linear_mipnearest
+func (r *RefractionTexture) NEAREST_LINEAR_MIPNEAREST(NEAREST_LINEAR_MIPNEAREST float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(NEAREST_LINEAR_MIPNEAREST)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_LINEAR_MIPNEAREST sets the NEAREST_LINEAR_MIPNEAREST property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#nearest_linear_mipnearest
+func (r *RefractionTexture) SetNEAREST_LINEAR_MIPNEAREST(NEAREST_LINEAR_MIPNEAREST float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(NEAREST_LINEAR_MIPNEAREST)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_NEAREST returns the NEAREST_NEAREST property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#nearest_nearest
+func (r *RefractionTexture) NEAREST_NEAREST(NEAREST_NEAREST float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(NEAREST_NEAREST)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_NEAREST sets the NEAREST_NEAREST property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#nearest_nearest
+func (r *RefractionTexture) SetNEAREST_NEAREST(NEAREST_NEAREST float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(NEAREST_NEAREST)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_NEAREST_MIPLINEAR returns the NEAREST_NEAREST_MIPLINEAR property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#nearest_nearest_miplinear
+func (r *RefractionTexture) NEAREST_NEAREST_MIPLINEAR(NEAREST_NEAREST_MIPLINEAR float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(NEAREST_NEAREST_MIPLINEAR)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_NEAREST_MIPLINEAR sets the NEAREST_NEAREST_MIPLINEAR property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#nearest_nearest_miplinear
+func (r *RefractionTexture) SetNEAREST_NEAREST_MIPLINEAR(NEAREST_NEAREST_MIPLINEAR float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(NEAREST_NEAREST_MIPLINEAR)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_NEAREST_MIPNEAREST returns the NEAREST_NEAREST_MIPNEAREST property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#nearest_nearest_mipnearest
+func (r *RefractionTexture) NEAREST_NEAREST_MIPNEAREST(NEAREST_NEAREST_MIPNEAREST float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(NEAREST_NEAREST_MIPNEAREST)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_NEAREST_MIPNEAREST sets the NEAREST_NEAREST_MIPNEAREST property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#nearest_nearest_mipnearest
+func (r *RefractionTexture) SetNEAREST_NEAREST_MIPNEAREST(NEAREST_NEAREST_MIPNEAREST float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(NEAREST_NEAREST_MIPNEAREST)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_SAMPLINGMODE returns the NEAREST_SAMPLINGMODE property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#nearest_samplingmode
+func (r *RefractionTexture) NEAREST_SAMPLINGMODE(NEAREST_SAMPLINGMODE float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(NEAREST_SAMPLINGMODE)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_SAMPLINGMODE sets the NEAREST_SAMPLINGMODE property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#nearest_samplingmode
+func (r *RefractionTexture) SetNEAREST_SAMPLINGMODE(NEAREST_SAMPLINGMODE float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(NEAREST_SAMPLINGMODE)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#name
+func (r *RefractionTexture) Name(name string) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(name)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#name
+func (r *RefractionTexture) SetName(name string) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(name)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// NoMipmap returns the NoMipmap property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#nomipmap
+func (r *RefractionTexture) NoMipmap(noMipmap bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(noMipmap)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNoMipmap sets the NoMipmap property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#nomipmap
+func (r *RefractionTexture) SetNoMipmap(noMipmap bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(noMipmap)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// OnAfterRender returns the OnAfterRender property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#onafterrender
+func (r *RefractionTexture) OnAfterRender(onAfterRender func()) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(onAfterRender)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterRender sets the OnAfterRender property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#onafterrender
+func (r *RefractionTexture) SetOnAfterRender(onAfterRender func()) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(onAfterRender)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// OnAfterRenderObservable returns the OnAfterRenderObservable property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#onafterrenderobservable
+func (r *RefractionTexture) OnAfterRenderObservable(onAfterRenderObservable *Observable) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(onAfterRenderObservable.JSObject())
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterRenderObservable sets the OnAfterRenderObservable property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#onafterrenderobservable
+func (r *RefractionTexture) SetOnAfterRenderObservable(onAfterRenderObservable *Observable) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(onAfterRenderObservable.JSObject())
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// OnAfterUnbind returns the OnAfterUnbind property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#onafterunbind
+func (r *RefractionTexture) OnAfterUnbind(onAfterUnbind func()) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(onAfterUnbind)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterUnbind sets the OnAfterUnbind property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#onafterunbind
+func (r *RefractionTexture) SetOnAfterUnbind(onAfterUnbind func()) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(onAfterUnbind)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// OnAfterUnbindObservable returns the OnAfterUnbindObservable property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#onafterunbindobservable
+func (r *RefractionTexture) OnAfterUnbindObservable(onAfterUnbindObservable *Observable) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(onAfterUnbindObservable.JSObject())
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterUnbindObservable sets the OnAfterUnbindObservable property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#onafterunbindobservable
+func (r *RefractionTexture) SetOnAfterUnbindObservable(onAfterUnbindObservable *Observable) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(onAfterUnbindObservable.JSObject())
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeBindObservable returns the OnBeforeBindObservable property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#onbeforebindobservable
+func (r *RefractionTexture) OnBeforeBindObservable(onBeforeBindObservable *Observable) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(onBeforeBindObservable.JSObject())
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeBindObservable sets the OnBeforeBindObservable property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#onbeforebindobservable
+func (r *RefractionTexture) SetOnBeforeBindObservable(onBeforeBindObservable *Observable) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(onBeforeBindObservable.JSObject())
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeRender returns the OnBeforeRender property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#onbeforerender
+func (r *RefractionTexture) OnBeforeRender(onBeforeRender func()) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(onBeforeRender)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeRender sets the OnBeforeRender property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#onbeforerender
+func (r *RefractionTexture) SetOnBeforeRender(onBeforeRender func()) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(onBeforeRender)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeRenderObservable returns the OnBeforeRenderObservable property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#onbeforerenderobservable
+func (r *RefractionTexture) OnBeforeRenderObservable(onBeforeRenderObservable *Observable) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(onBeforeRenderObservable.JSObject())
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeRenderObservable sets the OnBeforeRenderObservable property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#onbeforerenderobservable
+func (r *RefractionTexture) SetOnBeforeRenderObservable(onBeforeRenderObservable *Observable) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(onBeforeRenderObservable.JSObject())
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// OnClear returns the OnClear property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#onclear
+func (r *RefractionTexture) OnClear(onClear func()) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(onClear)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnClear sets the OnClear property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#onclear
+func (r *RefractionTexture) SetOnClear(onClear func()) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(onClear)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// OnClearObservable returns the OnClearObservable property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#onclearobservable
+func (r *RefractionTexture) OnClearObservable(onClearObservable *Observable) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(onClearObservable.JSObject())
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnClearObservable sets the OnClearObservable property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#onclearobservable
+func (r *RefractionTexture) SetOnClearObservable(onClearObservable *Observable) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(onClearObservable.JSObject())
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// OnDispose returns the OnDispose property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#ondispose
+func (r *RefractionTexture) OnDispose(onDispose func()) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(onDispose)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnDispose sets the OnDispose property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#ondispose
+func (r *RefractionTexture) SetOnDispose(onDispose func()) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(onDispose)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// OnDisposeObservable returns the OnDisposeObservable property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#ondisposeobservable
+func (r *RefractionTexture) OnDisposeObservable(onDisposeObservable *Observable) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(onDisposeObservable.JSObject())
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnDisposeObservable sets the OnDisposeObservable property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#ondisposeobservable
+func (r *RefractionTexture) SetOnDisposeObservable(onDisposeObservable *Observable) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(onDisposeObservable.JSObject())
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// OnLoadObservable returns the OnLoadObservable property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#onloadobservable
+func (r *RefractionTexture) OnLoadObservable(onLoadObservable *Observable) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(onLoadObservable.JSObject())
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnLoadObservable sets the OnLoadObservable property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#onloadobservable
+func (r *RefractionTexture) SetOnLoadObservable(onLoadObservable *Observable) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(onLoadObservable.JSObject())
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// OnResizeObservable returns the OnResizeObservable property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#onresizeobservable
+func (r *RefractionTexture) OnResizeObservable(onResizeObservable *Observable) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(onResizeObservable.JSObject())
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnResizeObservable sets the OnResizeObservable property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#onresizeobservable
+func (r *RefractionTexture) SetOnResizeObservable(onResizeObservable *Observable) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(onResizeObservable.JSObject())
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// PLANAR_MODE returns the PLANAR_MODE property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#planar_mode
+func (r *RefractionTexture) PLANAR_MODE(PLANAR_MODE float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(PLANAR_MODE)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetPLANAR_MODE sets the PLANAR_MODE property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#planar_mode
+func (r *RefractionTexture) SetPLANAR_MODE(PLANAR_MODE float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(PLANAR_MODE)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// PROJECTION_MODE returns the PROJECTION_MODE property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#projection_mode
+func (r *RefractionTexture) PROJECTION_MODE(PROJECTION_MODE float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(PROJECTION_MODE)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetPROJECTION_MODE sets the PROJECTION_MODE property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#projection_mode
+func (r *RefractionTexture) SetPROJECTION_MODE(PROJECTION_MODE float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(PROJECTION_MODE)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// REFRESHRATE_RENDER_ONCE returns the REFRESHRATE_RENDER_ONCE property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#refreshrate_render_once
+func (r *RefractionTexture) REFRESHRATE_RENDER_ONCE(REFRESHRATE_RENDER_ONCE float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(REFRESHRATE_RENDER_ONCE)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetREFRESHRATE_RENDER_ONCE sets the REFRESHRATE_RENDER_ONCE property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#refreshrate_render_once
+func (r *RefractionTexture) SetREFRESHRATE_RENDER_ONCE(REFRESHRATE_RENDER_ONCE float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(REFRESHRATE_RENDER_ONCE)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// REFRESHRATE_RENDER_ONEVERYFRAME returns the REFRESHRATE_RENDER_ONEVERYFRAME property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#refreshrate_render_oneveryframe
+func (r *RefractionTexture) REFRESHRATE_RENDER_ONEVERYFRAME(REFRESHRATE_RENDER_ONEVERYFRAME float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(REFRESHRATE_RENDER_ONEVERYFRAME)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetREFRESHRATE_RENDER_ONEVERYFRAME sets the REFRESHRATE_RENDER_ONEVERYFRAME property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#refreshrate_render_oneveryframe
+func (r *RefractionTexture) SetREFRESHRATE_RENDER_ONEVERYFRAME(REFRESHRATE_RENDER_ONEVERYFRAME float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(REFRESHRATE_RENDER_ONEVERYFRAME)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// REFRESHRATE_RENDER_ONEVERYTWOFRAMES returns the REFRESHRATE_RENDER_ONEVERYTWOFRAMES property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#refreshrate_render_oneverytwoframes
+func (r *RefractionTexture) REFRESHRATE_RENDER_ONEVERYTWOFRAMES(REFRESHRATE_RENDER_ONEVERYTWOFRAMES float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(REFRESHRATE_RENDER_ONEVERYTWOFRAMES)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetREFRESHRATE_RENDER_ONEVERYTWOFRAMES sets the REFRESHRATE_RENDER_ONEVERYTWOFRAMES property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#refreshrate_render_oneverytwoframes
+func (r *RefractionTexture) SetREFRESHRATE_RENDER_ONEVERYTWOFRAMES(REFRESHRATE_RENDER_ONEVERYTWOFRAMES float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(REFRESHRATE_RENDER_ONEVERYTWOFRAMES)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// RefractionPlane returns the RefractionPlane property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#refractionplane
+func (r *RefractionTexture) RefractionPlane(refractionPlane *Plane) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(refractionPlane.JSObject())
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetRefractionPlane sets the RefractionPlane property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#refractionplane
+func (r *RefractionTexture) SetRefractionPlane(refractionPlane *Plane) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(refractionPlane.JSObject())
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// RefreshRate returns the RefreshRate property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#refreshrate
+func (r *RefractionTexture) RefreshRate(refreshRate float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(refreshRate)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetRefreshRate sets the RefreshRate property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#refreshrate
+func (r *RefractionTexture) SetRefreshRate(refreshRate float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(refreshRate)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// RenderList returns the RenderList property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#renderlist
+func (r *RefractionTexture) RenderList(renderList []AbstractMesh) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(renderList.JSObject())
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetRenderList sets the RenderList property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#renderlist
+func (r *RefractionTexture) SetRenderList(renderList []AbstractMesh) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(renderList.JSObject())
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// RenderListPredicate returns the RenderListPredicate property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#renderlistpredicate
+func (r *RefractionTexture) RenderListPredicate(renderListPredicate func()) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(renderListPredicate)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetRenderListPredicate sets the RenderListPredicate property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#renderlistpredicate
+func (r *RefractionTexture) SetRenderListPredicate(renderListPredicate func()) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(renderListPredicate)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// RenderParticles returns the RenderParticles property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#renderparticles
+func (r *RefractionTexture) RenderParticles(renderParticles bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(renderParticles)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetRenderParticles sets the RenderParticles property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#renderparticles
+func (r *RefractionTexture) SetRenderParticles(renderParticles bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(renderParticles)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// RenderSprites returns the RenderSprites property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#rendersprites
+func (r *RefractionTexture) RenderSprites(renderSprites bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(renderSprites)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetRenderSprites sets the RenderSprites property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#rendersprites
+func (r *RefractionTexture) SetRenderSprites(renderSprites bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(renderSprites)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// RenderTargetOptions returns the RenderTargetOptions property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#rendertargetoptions
+func (r *RefractionTexture) RenderTargetOptions(renderTargetOptions *RenderTargetCreationOptions) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(renderTargetOptions.JSObject())
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetRenderTargetOptions sets the RenderTargetOptions property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#rendertargetoptions
+func (r *RefractionTexture) SetRenderTargetOptions(renderTargetOptions *RenderTargetCreationOptions) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(renderTargetOptions.JSObject())
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// ReservedDataStore returns the ReservedDataStore property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#reserveddatastore
+func (r *RefractionTexture) ReservedDataStore(reservedDataStore interface{}) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(reservedDataStore)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetReservedDataStore sets the ReservedDataStore property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#reserveddatastore
+func (r *RefractionTexture) SetReservedDataStore(reservedDataStore interface{}) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(reservedDataStore)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SKYBOX_MODE returns the SKYBOX_MODE property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#skybox_mode
+func (r *RefractionTexture) SKYBOX_MODE(SKYBOX_MODE float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(SKYBOX_MODE)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetSKYBOX_MODE sets the SKYBOX_MODE property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#skybox_mode
+func (r *RefractionTexture) SetSKYBOX_MODE(SKYBOX_MODE float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(SKYBOX_MODE)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SPHERICAL_MODE returns the SPHERICAL_MODE property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#spherical_mode
+func (r *RefractionTexture) SPHERICAL_MODE(SPHERICAL_MODE float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(SPHERICAL_MODE)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetSPHERICAL_MODE sets the SPHERICAL_MODE property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#spherical_mode
+func (r *RefractionTexture) SetSPHERICAL_MODE(SPHERICAL_MODE float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(SPHERICAL_MODE)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// Samples returns the Samples property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#samples
+func (r *RefractionTexture) Samples(samples float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(samples)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetSamples sets the Samples property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#samples
+func (r *RefractionTexture) SetSamples(samples float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(samples)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SamplingMode returns the SamplingMode property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#samplingmode
+func (r *RefractionTexture) SamplingMode(samplingMode float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(samplingMode)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetSamplingMode sets the SamplingMode property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#samplingmode
+func (r *RefractionTexture) SetSamplingMode(samplingMode float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(samplingMode)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SerializeBuffers returns the SerializeBuffers property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#serializebuffers
+func (r *RefractionTexture) SerializeBuffers(SerializeBuffers bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(SerializeBuffers)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetSerializeBuffers sets the SerializeBuffers property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#serializebuffers
+func (r *RefractionTexture) SetSerializeBuffers(SerializeBuffers bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(SerializeBuffers)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// TRILINEAR_SAMPLINGMODE returns the TRILINEAR_SAMPLINGMODE property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#trilinear_samplingmode
+func (r *RefractionTexture) TRILINEAR_SAMPLINGMODE(TRILINEAR_SAMPLINGMODE float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(TRILINEAR_SAMPLINGMODE)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetTRILINEAR_SAMPLINGMODE sets the TRILINEAR_SAMPLINGMODE property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#trilinear_samplingmode
+func (r *RefractionTexture) SetTRILINEAR_SAMPLINGMODE(TRILINEAR_SAMPLINGMODE float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(TRILINEAR_SAMPLINGMODE)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// TextureFormat returns the TextureFormat property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#textureformat
+func (r *RefractionTexture) TextureFormat(textureFormat float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(textureFormat)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetTextureFormat sets the TextureFormat property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#textureformat
+func (r *RefractionTexture) SetTextureFormat(textureFormat float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(textureFormat)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// TextureType returns the TextureType property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#texturetype
+func (r *RefractionTexture) TextureType(textureType float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(textureType)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetTextureType sets the TextureType property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#texturetype
+func (r *RefractionTexture) SetTextureType(textureType float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(textureType)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// UAng returns the UAng property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#uang
+func (r *RefractionTexture) UAng(uAng float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(uAng)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUAng sets the UAng property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#uang
+func (r *RefractionTexture) SetUAng(uAng float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(uAng)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// UOffset returns the UOffset property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#uoffset
+func (r *RefractionTexture) UOffset(uOffset float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(uOffset)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUOffset sets the UOffset property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#uoffset
+func (r *RefractionTexture) SetUOffset(uOffset float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(uOffset)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// URotationCenter returns the URotationCenter property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#urotationcenter
+func (r *RefractionTexture) URotationCenter(uRotationCenter float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(uRotationCenter)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetURotationCenter sets the URotationCenter property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#urotationcenter
+func (r *RefractionTexture) SetURotationCenter(uRotationCenter float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(uRotationCenter)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// UScale returns the UScale property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#uscale
+func (r *RefractionTexture) UScale(uScale float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(uScale)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUScale sets the UScale property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#uscale
+func (r *RefractionTexture) SetUScale(uScale float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(uScale)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// Uid returns the Uid property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#uid
+func (r *RefractionTexture) Uid(uid string) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(uid)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUid sets the Uid property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#uid
+func (r *RefractionTexture) SetUid(uid string) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(uid)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#uniqueid
+func (r *RefractionTexture) UniqueId(uniqueId float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(uniqueId)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#uniqueid
+func (r *RefractionTexture) SetUniqueId(uniqueId float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(uniqueId)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// Url returns the Url property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#url
+func (r *RefractionTexture) Url(url string) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(url)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUrl sets the Url property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#url
+func (r *RefractionTexture) SetUrl(url string) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(url)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// UseCameraPostProcesses returns the UseCameraPostProcesses property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#usecamerapostprocesses
+func (r *RefractionTexture) UseCameraPostProcesses(useCameraPostProcesses bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(useCameraPostProcesses)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUseCameraPostProcesses sets the UseCameraPostProcesses property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#usecamerapostprocesses
+func (r *RefractionTexture) SetUseCameraPostProcesses(useCameraPostProcesses bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(useCameraPostProcesses)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// UseSerializedUrlIfAny returns the UseSerializedUrlIfAny property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#useserializedurlifany
+func (r *RefractionTexture) UseSerializedUrlIfAny(UseSerializedUrlIfAny bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(UseSerializedUrlIfAny)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUseSerializedUrlIfAny sets the UseSerializedUrlIfAny property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#useserializedurlifany
+func (r *RefractionTexture) SetUseSerializedUrlIfAny(UseSerializedUrlIfAny bool) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(UseSerializedUrlIfAny)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// VAng returns the VAng property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#vang
+func (r *RefractionTexture) VAng(vAng float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(vAng)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetVAng sets the VAng property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#vang
+func (r *RefractionTexture) SetVAng(vAng float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(vAng)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// VOffset returns the VOffset property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#voffset
+func (r *RefractionTexture) VOffset(vOffset float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(vOffset)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetVOffset sets the VOffset property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#voffset
+func (r *RefractionTexture) SetVOffset(vOffset float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(vOffset)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// VRotationCenter returns the VRotationCenter property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#vrotationcenter
+func (r *RefractionTexture) VRotationCenter(vRotationCenter float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(vRotationCenter)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetVRotationCenter sets the VRotationCenter property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#vrotationcenter
+func (r *RefractionTexture) SetVRotationCenter(vRotationCenter float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(vRotationCenter)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// VScale returns the VScale property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#vscale
+func (r *RefractionTexture) VScale(vScale float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(vScale)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetVScale sets the VScale property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#vscale
+func (r *RefractionTexture) SetVScale(vScale float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(vScale)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// WAng returns the WAng property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#wang
+func (r *RefractionTexture) WAng(wAng float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(wAng)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWAng sets the WAng property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#wang
+func (r *RefractionTexture) SetWAng(wAng float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(wAng)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// WRAP_ADDRESSMODE returns the WRAP_ADDRESSMODE property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#wrap_addressmode
+func (r *RefractionTexture) WRAP_ADDRESSMODE(WRAP_ADDRESSMODE float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(WRAP_ADDRESSMODE)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWRAP_ADDRESSMODE sets the WRAP_ADDRESSMODE property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#wrap_addressmode
+func (r *RefractionTexture) SetWRAP_ADDRESSMODE(WRAP_ADDRESSMODE float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(WRAP_ADDRESSMODE)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// WRotationCenter returns the WRotationCenter property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#wrotationcenter
+func (r *RefractionTexture) WRotationCenter(wRotationCenter float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(wRotationCenter)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWRotationCenter sets the WRotationCenter property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#wrotationcenter
+func (r *RefractionTexture) SetWRotationCenter(wRotationCenter float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(wRotationCenter)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// WrapR returns the WrapR property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#wrapr
+func (r *RefractionTexture) WrapR(wrapR float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(wrapR)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWrapR sets the WrapR property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#wrapr
+func (r *RefractionTexture) SetWrapR(wrapR float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(wrapR)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// WrapU returns the WrapU property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#wrapu
+func (r *RefractionTexture) WrapU(wrapU float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(wrapU)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWrapU sets the WrapU property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#wrapu
+func (r *RefractionTexture) SetWrapU(wrapU float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(wrapU)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// WrapV returns the WrapV property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#wrapv
+func (r *RefractionTexture) WrapV(wrapV float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(wrapV)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWrapV sets the WrapV property of class RefractionTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractiontexture#wrapv
+func (r *RefractionTexture) SetWrapV(wrapV float64) *RefractionTexture {
+	p := ba.ctx.Get("RefractionTexture").New(wrapV)
+	return RefractionTextureFromJSObject(p, ba.ctx)
+}
+
+*/

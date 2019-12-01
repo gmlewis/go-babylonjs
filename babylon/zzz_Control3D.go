@@ -29,7 +29,7 @@ func Control3DFromJSObject(p js.Value, ctx js.Value) *Control3D {
 
 // NewControl3DOpts contains optional parameters for NewControl3D.
 type NewControl3DOpts struct {
-	Name *JSString
+	Name *string
 }
 
 // NewControl3D returns a new Control3D object.
@@ -40,8 +40,395 @@ func (ba *Babylon) NewControl3D(opts *NewControl3DOpts) *Control3D {
 		opts = &NewControl3DOpts{}
 	}
 
-	p := ba.ctx.Get("Control3D").New(opts.Name.JSObject())
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Name == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Name)
+	}
+
+	p := ba.ctx.Get("Control3D").New(args...)
 	return Control3DFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AddBehavior calls the AddBehavior method on the Control3D object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#addbehavior
+func (c *Control3D) AddBehavior(behavior js.Value) *Control3D {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, behavior)
+
+	retVal := c.p.Call("addBehavior", args...)
+	return Control3DFromJSObject(retVal, c.ctx)
+}
+
+// Dispose calls the Dispose method on the Control3D object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#dispose
+func (c *Control3D) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	c.p.Call("dispose", args...)
+}
+
+// GetBehaviorByName calls the GetBehaviorByName method on the Control3D object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#getbehaviorbyname
+func (c *Control3D) GetBehaviorByName(name string) *Control3D {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := c.p.Call("getBehaviorByName", args...)
+	return Control3DFromJSObject(retVal, c.ctx)
+}
+
+// GetClassName calls the GetClassName method on the Control3D object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#getclassname
+func (c *Control3D) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// LinkToTransformNode calls the LinkToTransformNode method on the Control3D object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#linktotransformnode
+func (c *Control3D) LinkToTransformNode(node *TransformNode) *Control3D {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, node.JSObject())
+
+	retVal := c.p.Call("linkToTransformNode", args...)
+	return Control3DFromJSObject(retVal, c.ctx)
+}
+
+// RemoveBehavior calls the RemoveBehavior method on the Control3D object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#removebehavior
+func (c *Control3D) RemoveBehavior(behavior js.Value) *Control3D {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, behavior)
+
+	retVal := c.p.Call("removeBehavior", args...)
+	return Control3DFromJSObject(retVal, c.ctx)
+}
+
+/*
+
+// Behaviors returns the Behaviors property of class Control3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#behaviors
+func (c *Control3D) Behaviors(behaviors js.Value) *Control3D {
+	p := ba.ctx.Get("Control3D").New(behaviors)
+	return Control3DFromJSObject(p, ba.ctx)
+}
+
+// SetBehaviors sets the Behaviors property of class Control3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#behaviors
+func (c *Control3D) SetBehaviors(behaviors js.Value) *Control3D {
+	p := ba.ctx.Get("Control3D").New(behaviors)
+	return Control3DFromJSObject(p, ba.ctx)
+}
+
+// IsVisible returns the IsVisible property of class Control3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#isvisible
+func (c *Control3D) IsVisible(isVisible bool) *Control3D {
+	p := ba.ctx.Get("Control3D").New(isVisible)
+	return Control3DFromJSObject(p, ba.ctx)
+}
+
+// SetIsVisible sets the IsVisible property of class Control3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#isvisible
+func (c *Control3D) SetIsVisible(isVisible bool) *Control3D {
+	p := ba.ctx.Get("Control3D").New(isVisible)
+	return Control3DFromJSObject(p, ba.ctx)
+}
+
+// Mesh returns the Mesh property of class Control3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#mesh
+func (c *Control3D) Mesh(mesh *AbstractMesh) *Control3D {
+	p := ba.ctx.Get("Control3D").New(mesh.JSObject())
+	return Control3DFromJSObject(p, ba.ctx)
+}
+
+// SetMesh sets the Mesh property of class Control3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#mesh
+func (c *Control3D) SetMesh(mesh *AbstractMesh) *Control3D {
+	p := ba.ctx.Get("Control3D").New(mesh.JSObject())
+	return Control3DFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class Control3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#name
+func (c *Control3D) Name(name string) *Control3D {
+	p := ba.ctx.Get("Control3D").New(name)
+	return Control3DFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class Control3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#name
+func (c *Control3D) SetName(name string) *Control3D {
+	p := ba.ctx.Get("Control3D").New(name)
+	return Control3DFromJSObject(p, ba.ctx)
+}
+
+// Node returns the Node property of class Control3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#node
+func (c *Control3D) Node(node *TransformNode) *Control3D {
+	p := ba.ctx.Get("Control3D").New(node.JSObject())
+	return Control3DFromJSObject(p, ba.ctx)
+}
+
+// SetNode sets the Node property of class Control3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#node
+func (c *Control3D) SetNode(node *TransformNode) *Control3D {
+	p := ba.ctx.Get("Control3D").New(node.JSObject())
+	return Control3DFromJSObject(p, ba.ctx)
+}
+
+// OnPointerClickObservable returns the OnPointerClickObservable property of class Control3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#onpointerclickobservable
+func (c *Control3D) OnPointerClickObservable(onPointerClickObservable *Observable) *Control3D {
+	p := ba.ctx.Get("Control3D").New(onPointerClickObservable.JSObject())
+	return Control3DFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerClickObservable sets the OnPointerClickObservable property of class Control3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#onpointerclickobservable
+func (c *Control3D) SetOnPointerClickObservable(onPointerClickObservable *Observable) *Control3D {
+	p := ba.ctx.Get("Control3D").New(onPointerClickObservable.JSObject())
+	return Control3DFromJSObject(p, ba.ctx)
+}
+
+// OnPointerDownObservable returns the OnPointerDownObservable property of class Control3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#onpointerdownobservable
+func (c *Control3D) OnPointerDownObservable(onPointerDownObservable *Observable) *Control3D {
+	p := ba.ctx.Get("Control3D").New(onPointerDownObservable.JSObject())
+	return Control3DFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerDownObservable sets the OnPointerDownObservable property of class Control3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#onpointerdownobservable
+func (c *Control3D) SetOnPointerDownObservable(onPointerDownObservable *Observable) *Control3D {
+	p := ba.ctx.Get("Control3D").New(onPointerDownObservable.JSObject())
+	return Control3DFromJSObject(p, ba.ctx)
+}
+
+// OnPointerEnterObservable returns the OnPointerEnterObservable property of class Control3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#onpointerenterobservable
+func (c *Control3D) OnPointerEnterObservable(onPointerEnterObservable *Observable) *Control3D {
+	p := ba.ctx.Get("Control3D").New(onPointerEnterObservable.JSObject())
+	return Control3DFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerEnterObservable sets the OnPointerEnterObservable property of class Control3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#onpointerenterobservable
+func (c *Control3D) SetOnPointerEnterObservable(onPointerEnterObservable *Observable) *Control3D {
+	p := ba.ctx.Get("Control3D").New(onPointerEnterObservable.JSObject())
+	return Control3DFromJSObject(p, ba.ctx)
+}
+
+// OnPointerMoveObservable returns the OnPointerMoveObservable property of class Control3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#onpointermoveobservable
+func (c *Control3D) OnPointerMoveObservable(onPointerMoveObservable *Observable) *Control3D {
+	p := ba.ctx.Get("Control3D").New(onPointerMoveObservable.JSObject())
+	return Control3DFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerMoveObservable sets the OnPointerMoveObservable property of class Control3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#onpointermoveobservable
+func (c *Control3D) SetOnPointerMoveObservable(onPointerMoveObservable *Observable) *Control3D {
+	p := ba.ctx.Get("Control3D").New(onPointerMoveObservable.JSObject())
+	return Control3DFromJSObject(p, ba.ctx)
+}
+
+// OnPointerOutObservable returns the OnPointerOutObservable property of class Control3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#onpointeroutobservable
+func (c *Control3D) OnPointerOutObservable(onPointerOutObservable *Observable) *Control3D {
+	p := ba.ctx.Get("Control3D").New(onPointerOutObservable.JSObject())
+	return Control3DFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerOutObservable sets the OnPointerOutObservable property of class Control3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#onpointeroutobservable
+func (c *Control3D) SetOnPointerOutObservable(onPointerOutObservable *Observable) *Control3D {
+	p := ba.ctx.Get("Control3D").New(onPointerOutObservable.JSObject())
+	return Control3DFromJSObject(p, ba.ctx)
+}
+
+// OnPointerUpObservable returns the OnPointerUpObservable property of class Control3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#onpointerupobservable
+func (c *Control3D) OnPointerUpObservable(onPointerUpObservable *Observable) *Control3D {
+	p := ba.ctx.Get("Control3D").New(onPointerUpObservable.JSObject())
+	return Control3DFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerUpObservable sets the OnPointerUpObservable property of class Control3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#onpointerupobservable
+func (c *Control3D) SetOnPointerUpObservable(onPointerUpObservable *Observable) *Control3D {
+	p := ba.ctx.Get("Control3D").New(onPointerUpObservable.JSObject())
+	return Control3DFromJSObject(p, ba.ctx)
+}
+
+// Parent returns the Parent property of class Control3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#parent
+func (c *Control3D) Parent(parent *Container3D) *Control3D {
+	p := ba.ctx.Get("Control3D").New(parent.JSObject())
+	return Control3DFromJSObject(p, ba.ctx)
+}
+
+// SetParent sets the Parent property of class Control3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#parent
+func (c *Control3D) SetParent(parent *Container3D) *Control3D {
+	p := ba.ctx.Get("Control3D").New(parent.JSObject())
+	return Control3DFromJSObject(p, ba.ctx)
+}
+
+// PointerDownAnimation returns the PointerDownAnimation property of class Control3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#pointerdownanimation
+func (c *Control3D) PointerDownAnimation(pointerDownAnimation func()) *Control3D {
+	p := ba.ctx.Get("Control3D").New(pointerDownAnimation)
+	return Control3DFromJSObject(p, ba.ctx)
+}
+
+// SetPointerDownAnimation sets the PointerDownAnimation property of class Control3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#pointerdownanimation
+func (c *Control3D) SetPointerDownAnimation(pointerDownAnimation func()) *Control3D {
+	p := ba.ctx.Get("Control3D").New(pointerDownAnimation)
+	return Control3DFromJSObject(p, ba.ctx)
+}
+
+// PointerEnterAnimation returns the PointerEnterAnimation property of class Control3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#pointerenteranimation
+func (c *Control3D) PointerEnterAnimation(pointerEnterAnimation func()) *Control3D {
+	p := ba.ctx.Get("Control3D").New(pointerEnterAnimation)
+	return Control3DFromJSObject(p, ba.ctx)
+}
+
+// SetPointerEnterAnimation sets the PointerEnterAnimation property of class Control3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#pointerenteranimation
+func (c *Control3D) SetPointerEnterAnimation(pointerEnterAnimation func()) *Control3D {
+	p := ba.ctx.Get("Control3D").New(pointerEnterAnimation)
+	return Control3DFromJSObject(p, ba.ctx)
+}
+
+// PointerOutAnimation returns the PointerOutAnimation property of class Control3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#pointeroutanimation
+func (c *Control3D) PointerOutAnimation(pointerOutAnimation func()) *Control3D {
+	p := ba.ctx.Get("Control3D").New(pointerOutAnimation)
+	return Control3DFromJSObject(p, ba.ctx)
+}
+
+// SetPointerOutAnimation sets the PointerOutAnimation property of class Control3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#pointeroutanimation
+func (c *Control3D) SetPointerOutAnimation(pointerOutAnimation func()) *Control3D {
+	p := ba.ctx.Get("Control3D").New(pointerOutAnimation)
+	return Control3DFromJSObject(p, ba.ctx)
+}
+
+// PointerUpAnimation returns the PointerUpAnimation property of class Control3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#pointerupanimation
+func (c *Control3D) PointerUpAnimation(pointerUpAnimation func()) *Control3D {
+	p := ba.ctx.Get("Control3D").New(pointerUpAnimation)
+	return Control3DFromJSObject(p, ba.ctx)
+}
+
+// SetPointerUpAnimation sets the PointerUpAnimation property of class Control3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#pointerupanimation
+func (c *Control3D) SetPointerUpAnimation(pointerUpAnimation func()) *Control3D {
+	p := ba.ctx.Get("Control3D").New(pointerUpAnimation)
+	return Control3DFromJSObject(p, ba.ctx)
+}
+
+// Position returns the Position property of class Control3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#position
+func (c *Control3D) Position(position *Vector3) *Control3D {
+	p := ba.ctx.Get("Control3D").New(position.JSObject())
+	return Control3DFromJSObject(p, ba.ctx)
+}
+
+// SetPosition sets the Position property of class Control3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#position
+func (c *Control3D) SetPosition(position *Vector3) *Control3D {
+	p := ba.ctx.Get("Control3D").New(position.JSObject())
+	return Control3DFromJSObject(p, ba.ctx)
+}
+
+// Scaling returns the Scaling property of class Control3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#scaling
+func (c *Control3D) Scaling(scaling *Vector3) *Control3D {
+	p := ba.ctx.Get("Control3D").New(scaling.JSObject())
+	return Control3DFromJSObject(p, ba.ctx)
+}
+
+// SetScaling sets the Scaling property of class Control3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#scaling
+func (c *Control3D) SetScaling(scaling *Vector3) *Control3D {
+	p := ba.ctx.Get("Control3D").New(scaling.JSObject())
+	return Control3DFromJSObject(p, ba.ctx)
+}
+
+// TypeName returns the TypeName property of class Control3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#typename
+func (c *Control3D) TypeName(typeName string) *Control3D {
+	p := ba.ctx.Get("Control3D").New(typeName)
+	return Control3DFromJSObject(p, ba.ctx)
+}
+
+// SetTypeName sets the TypeName property of class Control3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.control3d#typename
+func (c *Control3D) SetTypeName(typeName string) *Control3D {
+	p := ba.ctx.Get("Control3D").New(typeName)
+	return Control3DFromJSObject(p, ba.ctx)
+}
+
+*/

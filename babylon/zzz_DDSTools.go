@@ -27,4 +27,35 @@ func DDSToolsFromJSObject(p js.Value, ctx js.Value) *DDSTools {
 	return &DDSTools{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// GetDDSInfo calls the GetDDSInfo method on the DDSTools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ddstools#getddsinfo
+func (d *DDSTools) GetDDSInfo(arrayBuffer interface{}) js.Value {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, arrayBuffer)
+
+	retVal := d.p.Call("GetDDSInfo", args...)
+	return retVal
+}
+
+/*
+
+// StoreLODInAlphaChannel returns the StoreLODInAlphaChannel property of class DDSTools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ddstools#storelodinalphachannel
+func (d *DDSTools) StoreLODInAlphaChannel(StoreLODInAlphaChannel bool) *DDSTools {
+	p := ba.ctx.Get("DDSTools").New(StoreLODInAlphaChannel)
+	return DDSToolsFromJSObject(p, ba.ctx)
+}
+
+// SetStoreLODInAlphaChannel sets the StoreLODInAlphaChannel property of class DDSTools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ddstools#storelodinalphachannel
+func (d *DDSTools) SetStoreLODInAlphaChannel(StoreLODInAlphaChannel bool) *DDSTools {
+	p := ba.ctx.Get("DDSTools").New(StoreLODInAlphaChannel)
+	return DDSToolsFromJSObject(p, ba.ctx)
+}
+
+*/

@@ -32,8 +32,127 @@ func LensFlareSystemSceneComponentFromJSObject(p js.Value, ctx js.Value) *LensFl
 //
 // https://doc.babylonjs.com/api/classes/babylon.lensflaresystemscenecomponent
 func (ba *Babylon) NewLensFlareSystemSceneComponent(scene *Scene) *LensFlareSystemSceneComponent {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("LensFlareSystemSceneComponent").New(args...)
+	return LensFlareSystemSceneComponentFromJSObject(p, ba.ctx)
+}
+
+// AddFromContainer calls the AddFromContainer method on the LensFlareSystemSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflaresystemscenecomponent#addfromcontainer
+func (l *LensFlareSystemSceneComponent) AddFromContainer(container *AbstractScene) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, container.JSObject())
+
+	l.p.Call("addFromContainer", args...)
+}
+
+// Dispose calls the Dispose method on the LensFlareSystemSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflaresystemscenecomponent#dispose
+func (l *LensFlareSystemSceneComponent) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	l.p.Call("dispose", args...)
+}
+
+// Rebuild calls the Rebuild method on the LensFlareSystemSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflaresystemscenecomponent#rebuild
+func (l *LensFlareSystemSceneComponent) Rebuild() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	l.p.Call("rebuild", args...)
+}
+
+// Register calls the Register method on the LensFlareSystemSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflaresystemscenecomponent#register
+func (l *LensFlareSystemSceneComponent) Register() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	l.p.Call("register", args...)
+}
+
+// LensFlareSystemSceneComponentRemoveFromContainerOpts contains optional parameters for LensFlareSystemSceneComponent.RemoveFromContainer.
+type LensFlareSystemSceneComponentRemoveFromContainerOpts struct {
+	Dispose *bool
+}
+
+// RemoveFromContainer calls the RemoveFromContainer method on the LensFlareSystemSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflaresystemscenecomponent#removefromcontainer
+func (l *LensFlareSystemSceneComponent) RemoveFromContainer(container *AbstractScene, opts *LensFlareSystemSceneComponentRemoveFromContainerOpts) {
+	if opts == nil {
+		opts = &LensFlareSystemSceneComponentRemoveFromContainerOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, container.JSObject())
+
+	if opts.Dispose == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Dispose)
+	}
+
+	l.p.Call("removeFromContainer", args...)
+}
+
+// Serialize calls the Serialize method on the LensFlareSystemSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflaresystemscenecomponent#serialize
+func (l *LensFlareSystemSceneComponent) Serialize(serializationObject interface{}) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, serializationObject)
+
+	l.p.Call("serialize", args...)
+}
+
+/*
+
+// Name returns the Name property of class LensFlareSystemSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflaresystemscenecomponent#name
+func (l *LensFlareSystemSceneComponent) Name(name string) *LensFlareSystemSceneComponent {
+	p := ba.ctx.Get("LensFlareSystemSceneComponent").New(name)
+	return LensFlareSystemSceneComponentFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class LensFlareSystemSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflaresystemscenecomponent#name
+func (l *LensFlareSystemSceneComponent) SetName(name string) *LensFlareSystemSceneComponent {
+	p := ba.ctx.Get("LensFlareSystemSceneComponent").New(name)
+	return LensFlareSystemSceneComponentFromJSObject(p, ba.ctx)
+}
+
+// Scene returns the Scene property of class LensFlareSystemSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflaresystemscenecomponent#scene
+func (l *LensFlareSystemSceneComponent) Scene(scene *Scene) *LensFlareSystemSceneComponent {
 	p := ba.ctx.Get("LensFlareSystemSceneComponent").New(scene.JSObject())
 	return LensFlareSystemSceneComponentFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetScene sets the Scene property of class LensFlareSystemSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflaresystemscenecomponent#scene
+func (l *LensFlareSystemSceneComponent) SetScene(scene *Scene) *LensFlareSystemSceneComponent {
+	p := ba.ctx.Get("LensFlareSystemSceneComponent").New(scene.JSObject())
+	return LensFlareSystemSceneComponentFromJSObject(p, ba.ctx)
+}
+
+*/

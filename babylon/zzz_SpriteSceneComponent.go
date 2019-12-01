@@ -32,8 +32,77 @@ func SpriteSceneComponentFromJSObject(p js.Value, ctx js.Value) *SpriteSceneComp
 //
 // https://doc.babylonjs.com/api/classes/babylon.spritescenecomponent
 func (ba *Babylon) NewSpriteSceneComponent(scene *Scene) *SpriteSceneComponent {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("SpriteSceneComponent").New(args...)
+	return SpriteSceneComponentFromJSObject(p, ba.ctx)
+}
+
+// Dispose calls the Dispose method on the SpriteSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.spritescenecomponent#dispose
+func (s *SpriteSceneComponent) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("dispose", args...)
+}
+
+// Rebuild calls the Rebuild method on the SpriteSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.spritescenecomponent#rebuild
+func (s *SpriteSceneComponent) Rebuild() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("rebuild", args...)
+}
+
+// Register calls the Register method on the SpriteSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.spritescenecomponent#register
+func (s *SpriteSceneComponent) Register() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("register", args...)
+}
+
+/*
+
+// Name returns the Name property of class SpriteSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.spritescenecomponent#name
+func (s *SpriteSceneComponent) Name(name string) *SpriteSceneComponent {
+	p := ba.ctx.Get("SpriteSceneComponent").New(name)
+	return SpriteSceneComponentFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class SpriteSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.spritescenecomponent#name
+func (s *SpriteSceneComponent) SetName(name string) *SpriteSceneComponent {
+	p := ba.ctx.Get("SpriteSceneComponent").New(name)
+	return SpriteSceneComponentFromJSObject(p, ba.ctx)
+}
+
+// Scene returns the Scene property of class SpriteSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.spritescenecomponent#scene
+func (s *SpriteSceneComponent) Scene(scene *Scene) *SpriteSceneComponent {
 	p := ba.ctx.Get("SpriteSceneComponent").New(scene.JSObject())
 	return SpriteSceneComponentFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetScene sets the Scene property of class SpriteSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.spritescenecomponent#scene
+func (s *SpriteSceneComponent) SetScene(scene *Scene) *SpriteSceneComponent {
+	p := ba.ctx.Get("SpriteSceneComponent").New(scene.JSObject())
+	return SpriteSceneComponentFromJSObject(p, ba.ctx)
+}
+
+*/

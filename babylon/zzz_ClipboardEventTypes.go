@@ -27,4 +27,54 @@ func ClipboardEventTypesFromJSObject(p js.Value, ctx js.Value) *ClipboardEventTy
 	return &ClipboardEventTypes{p: p, ctx: ctx}
 }
 
-// TODO: methods
+/*
+
+// COPY returns the COPY property of class ClipboardEventTypes.
+//
+// https://doc.babylonjs.com/api/classes/babylon.clipboardeventtypes#copy
+func (c *ClipboardEventTypes) COPY(COPY float64) *ClipboardEventTypes {
+	p := ba.ctx.Get("ClipboardEventTypes").New(COPY)
+	return ClipboardEventTypesFromJSObject(p, ba.ctx)
+}
+
+// SetCOPY sets the COPY property of class ClipboardEventTypes.
+//
+// https://doc.babylonjs.com/api/classes/babylon.clipboardeventtypes#copy
+func (c *ClipboardEventTypes) SetCOPY(COPY float64) *ClipboardEventTypes {
+	p := ba.ctx.Get("ClipboardEventTypes").New(COPY)
+	return ClipboardEventTypesFromJSObject(p, ba.ctx)
+}
+
+// CUT returns the CUT property of class ClipboardEventTypes.
+//
+// https://doc.babylonjs.com/api/classes/babylon.clipboardeventtypes#cut
+func (c *ClipboardEventTypes) CUT(CUT float64) *ClipboardEventTypes {
+	p := ba.ctx.Get("ClipboardEventTypes").New(CUT)
+	return ClipboardEventTypesFromJSObject(p, ba.ctx)
+}
+
+// SetCUT sets the CUT property of class ClipboardEventTypes.
+//
+// https://doc.babylonjs.com/api/classes/babylon.clipboardeventtypes#cut
+func (c *ClipboardEventTypes) SetCUT(CUT float64) *ClipboardEventTypes {
+	p := ba.ctx.Get("ClipboardEventTypes").New(CUT)
+	return ClipboardEventTypesFromJSObject(p, ba.ctx)
+}
+
+// PASTE returns the PASTE property of class ClipboardEventTypes.
+//
+// https://doc.babylonjs.com/api/classes/babylon.clipboardeventtypes#paste
+func (c *ClipboardEventTypes) PASTE(PASTE float64) *ClipboardEventTypes {
+	p := ba.ctx.Get("ClipboardEventTypes").New(PASTE)
+	return ClipboardEventTypesFromJSObject(p, ba.ctx)
+}
+
+// SetPASTE sets the PASTE property of class ClipboardEventTypes.
+//
+// https://doc.babylonjs.com/api/classes/babylon.clipboardeventtypes#paste
+func (c *ClipboardEventTypes) SetPASTE(PASTE float64) *ClipboardEventTypes {
+	p := ba.ctx.Get("ClipboardEventTypes").New(PASTE)
+	return ClipboardEventTypesFromJSObject(p, ba.ctx)
+}
+
+*/

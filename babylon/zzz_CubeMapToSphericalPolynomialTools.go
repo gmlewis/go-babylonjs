@@ -28,4 +28,32 @@ func CubeMapToSphericalPolynomialToolsFromJSObject(p js.Value, ctx js.Value) *Cu
 	return &CubeMapToSphericalPolynomialTools{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// ConvertCubeMapTextureToSphericalPolynomial calls the ConvertCubeMapTextureToSphericalPolynomial method on the CubeMapToSphericalPolynomialTools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubemaptosphericalpolynomialtools#convertcubemaptexturetosphericalpolynomial
+func (c *CubeMapToSphericalPolynomialTools) ConvertCubeMapTextureToSphericalPolynomial(texture *BaseTexture) *SphericalPolynomial {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, texture.JSObject())
+
+	retVal := c.p.Call("ConvertCubeMapTextureToSphericalPolynomial", args...)
+	return SphericalPolynomialFromJSObject(retVal, c.ctx)
+}
+
+// ConvertCubeMapToSphericalPolynomial calls the ConvertCubeMapToSphericalPolynomial method on the CubeMapToSphericalPolynomialTools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubemaptosphericalpolynomialtools#convertcubemaptosphericalpolynomial
+func (c *CubeMapToSphericalPolynomialTools) ConvertCubeMapToSphericalPolynomial(cubeInfo js.Value) *SphericalPolynomial {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, cubeInfo)
+
+	retVal := c.p.Call("ConvertCubeMapToSphericalPolynomial", args...)
+	return SphericalPolynomialFromJSObject(retVal, c.ctx)
+}
+
+/*
+
+ */

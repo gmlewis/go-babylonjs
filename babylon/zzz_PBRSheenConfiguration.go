@@ -31,8 +31,296 @@ func PBRSheenConfigurationFromJSObject(p js.Value, ctx js.Value) *PBRSheenConfig
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration
 func (ba *Babylon) NewPBRSheenConfiguration(markAllSubMeshesAsTexturesDirty func()) *PBRSheenConfiguration {
-	p := ba.ctx.Get("PBRSheenConfiguration").New(markAllSubMeshesAsTexturesDirty)
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, markAllSubMeshesAsTexturesDirty)
+
+	p := ba.ctx.Get("PBRSheenConfiguration").New(args...)
 	return PBRSheenConfigurationFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AddFallbacks calls the AddFallbacks method on the PBRSheenConfiguration object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#addfallbacks
+func (p *PBRSheenConfiguration) AddFallbacks(defines *IMaterialSheenDefines, fallbacks *EffectFallbacks, currentRank float64) float64 {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, defines.JSObject())
+	args = append(args, fallbacks.JSObject())
+	args = append(args, currentRank)
+
+	retVal := p.p.Call("AddFallbacks", args...)
+	return retVal.Float()
+}
+
+// AddSamplers calls the AddSamplers method on the PBRSheenConfiguration object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#addsamplers
+func (p *PBRSheenConfiguration) AddSamplers(samplers string) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, samplers)
+
+	p.p.Call("AddSamplers", args...)
+}
+
+// AddUniforms calls the AddUniforms method on the PBRSheenConfiguration object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#adduniforms
+func (p *PBRSheenConfiguration) AddUniforms(uniforms string) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, uniforms)
+
+	p.p.Call("AddUniforms", args...)
+}
+
+// BindForSubMesh calls the BindForSubMesh method on the PBRSheenConfiguration object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#bindforsubmesh
+func (p *PBRSheenConfiguration) BindForSubMesh(uniformBuffer *UniformBuffer, scene *Scene, isFrozen bool) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, uniformBuffer.JSObject())
+	args = append(args, scene.JSObject())
+	args = append(args, isFrozen)
+
+	p.p.Call("bindForSubMesh", args...)
+}
+
+// CopyTo calls the CopyTo method on the PBRSheenConfiguration object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#copyto
+func (p *PBRSheenConfiguration) CopyTo(sheenConfiguration *PBRSheenConfiguration) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, sheenConfiguration.JSObject())
+
+	p.p.Call("copyTo", args...)
+}
+
+// PBRSheenConfigurationDisposeOpts contains optional parameters for PBRSheenConfiguration.Dispose.
+type PBRSheenConfigurationDisposeOpts struct {
+	ForceDisposeTextures *bool
+}
+
+// Dispose calls the Dispose method on the PBRSheenConfiguration object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#dispose
+func (p *PBRSheenConfiguration) Dispose(opts *PBRSheenConfigurationDisposeOpts) {
+	if opts == nil {
+		opts = &PBRSheenConfigurationDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForceDisposeTextures == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceDisposeTextures)
+	}
+
+	p.p.Call("dispose", args...)
+}
+
+// GetActiveTextures calls the GetActiveTextures method on the PBRSheenConfiguration object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#getactivetextures
+func (p *PBRSheenConfiguration) GetActiveTextures(activeTextures *BaseTexture) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, activeTextures.JSObject())
+
+	p.p.Call("getActiveTextures", args...)
+}
+
+// GetAnimatables calls the GetAnimatables method on the PBRSheenConfiguration object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#getanimatables
+func (p *PBRSheenConfiguration) GetAnimatables(animatables js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, animatables)
+
+	p.p.Call("getAnimatables", args...)
+}
+
+// GetClassName calls the GetClassName method on the PBRSheenConfiguration object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#getclassname
+func (p *PBRSheenConfiguration) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// HasTexture calls the HasTexture method on the PBRSheenConfiguration object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#hastexture
+func (p *PBRSheenConfiguration) HasTexture(texture *BaseTexture) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, texture.JSObject())
+
+	retVal := p.p.Call("hasTexture", args...)
+	return retVal.Bool()
+}
+
+// IsReadyForSubMesh calls the IsReadyForSubMesh method on the PBRSheenConfiguration object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#isreadyforsubmesh
+func (p *PBRSheenConfiguration) IsReadyForSubMesh(defines *IMaterialSheenDefines, scene *Scene) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, defines.JSObject())
+	args = append(args, scene.JSObject())
+
+	retVal := p.p.Call("isReadyForSubMesh", args...)
+	return retVal.Bool()
+}
+
+// Parse calls the Parse method on the PBRSheenConfiguration object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#parse
+func (p *PBRSheenConfiguration) Parse(source interface{}, scene *Scene, rootUrl string) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, source)
+	args = append(args, scene.JSObject())
+	args = append(args, rootUrl)
+
+	p.p.Call("parse", args...)
+}
+
+// PrepareDefines calls the PrepareDefines method on the PBRSheenConfiguration object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#preparedefines
+func (p *PBRSheenConfiguration) PrepareDefines(defines *IMaterialSheenDefines, scene *Scene) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, defines.JSObject())
+	args = append(args, scene.JSObject())
+
+	p.p.Call("prepareDefines", args...)
+}
+
+// PrepareUniformBuffer calls the PrepareUniformBuffer method on the PBRSheenConfiguration object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#prepareuniformbuffer
+func (p *PBRSheenConfiguration) PrepareUniformBuffer(uniformBuffer *UniformBuffer) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, uniformBuffer.JSObject())
+
+	p.p.Call("PrepareUniformBuffer", args...)
+}
+
+// Serialize calls the Serialize method on the PBRSheenConfiguration object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#serialize
+func (p *PBRSheenConfiguration) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("serialize", args...)
+	return retVal
+}
+
+/*
+
+// Color returns the Color property of class PBRSheenConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#color
+func (p *PBRSheenConfiguration) Color(color *Color3) *PBRSheenConfiguration {
+	p := ba.ctx.Get("PBRSheenConfiguration").New(color.JSObject())
+	return PBRSheenConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetColor sets the Color property of class PBRSheenConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#color
+func (p *PBRSheenConfiguration) SetColor(color *Color3) *PBRSheenConfiguration {
+	p := ba.ctx.Get("PBRSheenConfiguration").New(color.JSObject())
+	return PBRSheenConfigurationFromJSObject(p, ba.ctx)
+}
+
+// Intensity returns the Intensity property of class PBRSheenConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#intensity
+func (p *PBRSheenConfiguration) Intensity(intensity float64) *PBRSheenConfiguration {
+	p := ba.ctx.Get("PBRSheenConfiguration").New(intensity)
+	return PBRSheenConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetIntensity sets the Intensity property of class PBRSheenConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#intensity
+func (p *PBRSheenConfiguration) SetIntensity(intensity float64) *PBRSheenConfiguration {
+	p := ba.ctx.Get("PBRSheenConfiguration").New(intensity)
+	return PBRSheenConfigurationFromJSObject(p, ba.ctx)
+}
+
+// IsEnabled returns the IsEnabled property of class PBRSheenConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#isenabled
+func (p *PBRSheenConfiguration) IsEnabled(isEnabled bool) *PBRSheenConfiguration {
+	p := ba.ctx.Get("PBRSheenConfiguration").New(isEnabled)
+	return PBRSheenConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetIsEnabled sets the IsEnabled property of class PBRSheenConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#isenabled
+func (p *PBRSheenConfiguration) SetIsEnabled(isEnabled bool) *PBRSheenConfiguration {
+	p := ba.ctx.Get("PBRSheenConfiguration").New(isEnabled)
+	return PBRSheenConfigurationFromJSObject(p, ba.ctx)
+}
+
+// LinkSheenWithAlbedo returns the LinkSheenWithAlbedo property of class PBRSheenConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#linksheenwithalbedo
+func (p *PBRSheenConfiguration) LinkSheenWithAlbedo(linkSheenWithAlbedo bool) *PBRSheenConfiguration {
+	p := ba.ctx.Get("PBRSheenConfiguration").New(linkSheenWithAlbedo)
+	return PBRSheenConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetLinkSheenWithAlbedo sets the LinkSheenWithAlbedo property of class PBRSheenConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#linksheenwithalbedo
+func (p *PBRSheenConfiguration) SetLinkSheenWithAlbedo(linkSheenWithAlbedo bool) *PBRSheenConfiguration {
+	p := ba.ctx.Get("PBRSheenConfiguration").New(linkSheenWithAlbedo)
+	return PBRSheenConfigurationFromJSObject(p, ba.ctx)
+}
+
+// Texture returns the Texture property of class PBRSheenConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#texture
+func (p *PBRSheenConfiguration) Texture(texture *BaseTexture) *PBRSheenConfiguration {
+	p := ba.ctx.Get("PBRSheenConfiguration").New(texture.JSObject())
+	return PBRSheenConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetTexture sets the Texture property of class PBRSheenConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrsheenconfiguration#texture
+func (p *PBRSheenConfiguration) SetTexture(texture *BaseTexture) *PBRSheenConfiguration {
+	p := ba.ctx.Get("PBRSheenConfiguration").New(texture.JSObject())
+	return PBRSheenConfigurationFromJSObject(p, ba.ctx)
+}
+
+*/

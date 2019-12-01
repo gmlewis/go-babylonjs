@@ -31,16 +31,11 @@ func ImageProcessingPostProcessFromJSObject(p js.Value, ctx js.Value) *ImageProc
 
 // NewImageProcessingPostProcessOpts contains optional parameters for NewImageProcessingPostProcess.
 type NewImageProcessingPostProcessOpts struct {
-	Camera *Camera
-
-	SamplingMode *JSFloat64
-
-	Engine *Engine
-
-	Reusable *JSBool
-
-	TextureType *JSFloat64
-
+	Camera                       *Camera
+	SamplingMode                 *float64
+	Engine                       *Engine
+	Reusable                     *bool
+	TextureType                  *float64
 	ImageProcessingConfiguration *ImageProcessingConfiguration
 }
 
@@ -52,8 +47,1062 @@ func (ba *Babylon) NewImageProcessingPostProcess(name string, options float64, o
 		opts = &NewImageProcessingPostProcessOpts{}
 	}
 
-	p := ba.ctx.Get("ImageProcessingPostProcess").New(name, options, opts.Camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType.JSObject(), opts.ImageProcessingConfiguration.JSObject())
+	args := make([]interface{}, 0, 2+6)
+
+	args = append(args, name)
+	args = append(args, options)
+
+	if opts.Camera == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Camera.JSObject())
+	}
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+	if opts.Engine == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Engine.JSObject())
+	}
+	if opts.Reusable == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Reusable)
+	}
+	if opts.TextureType == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.TextureType)
+	}
+	if opts.ImageProcessingConfiguration == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ImageProcessingConfiguration.JSObject())
+	}
+
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(args...)
 	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// ImageProcessingPostProcessActivateOpts contains optional parameters for ImageProcessingPostProcess.Activate.
+type ImageProcessingPostProcessActivateOpts struct {
+	SourceTexture     *InternalTexture
+	ForceDepthStencil *bool
+}
+
+// Activate calls the Activate method on the ImageProcessingPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#activate
+func (i *ImageProcessingPostProcess) Activate(camera *Camera, opts *ImageProcessingPostProcessActivateOpts) *InternalTexture {
+	if opts == nil {
+		opts = &ImageProcessingPostProcessActivateOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, camera.JSObject())
+
+	if opts.SourceTexture == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.SourceTexture.JSObject())
+	}
+	if opts.ForceDepthStencil == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceDepthStencil)
+	}
+
+	retVal := i.p.Call("activate", args...)
+	return InternalTextureFromJSObject(retVal, i.ctx)
+}
+
+// Apply calls the Apply method on the ImageProcessingPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#apply
+func (i *ImageProcessingPostProcess) Apply() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := i.p.Call("apply", args...)
+	return EffectFromJSObject(retVal, i.ctx)
+}
+
+// ImageProcessingPostProcessDisposeOpts contains optional parameters for ImageProcessingPostProcess.Dispose.
+type ImageProcessingPostProcessDisposeOpts struct {
+	Camera *Camera
+}
+
+// Dispose calls the Dispose method on the ImageProcessingPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#dispose
+func (i *ImageProcessingPostProcess) Dispose(opts *ImageProcessingPostProcessDisposeOpts) {
+	if opts == nil {
+		opts = &ImageProcessingPostProcessDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Camera == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Camera.JSObject())
+	}
+
+	i.p.Call("dispose", args...)
+}
+
+// GetCamera calls the GetCamera method on the ImageProcessingPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#getcamera
+func (i *ImageProcessingPostProcess) GetCamera() *Camera {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := i.p.Call("getCamera", args...)
+	return CameraFromJSObject(retVal, i.ctx)
+}
+
+// GetClassName calls the GetClassName method on the ImageProcessingPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#getclassname
+func (i *ImageProcessingPostProcess) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := i.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetEffect calls the GetEffect method on the ImageProcessingPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#geteffect
+func (i *ImageProcessingPostProcess) GetEffect() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := i.p.Call("getEffect", args...)
+	return EffectFromJSObject(retVal, i.ctx)
+}
+
+// GetEffectName calls the GetEffectName method on the ImageProcessingPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#geteffectname
+func (i *ImageProcessingPostProcess) GetEffectName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := i.p.Call("getEffectName", args...)
+	return retVal.String()
+}
+
+// GetEngine calls the GetEngine method on the ImageProcessingPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#getengine
+func (i *ImageProcessingPostProcess) GetEngine() *Engine {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := i.p.Call("getEngine", args...)
+	return EngineFromJSObject(retVal, i.ctx)
+}
+
+// IsReady calls the IsReady method on the ImageProcessingPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#isready
+func (i *ImageProcessingPostProcess) IsReady() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := i.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// IsReusable calls the IsReusable method on the ImageProcessingPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#isreusable
+func (i *ImageProcessingPostProcess) IsReusable() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := i.p.Call("isReusable", args...)
+	return retVal.Bool()
+}
+
+// MarkTextureDirty calls the MarkTextureDirty method on the ImageProcessingPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#marktexturedirty
+func (i *ImageProcessingPostProcess) MarkTextureDirty() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	i.p.Call("markTextureDirty", args...)
+}
+
+// ShareOutputWith calls the ShareOutputWith method on the ImageProcessingPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#shareoutputwith
+func (i *ImageProcessingPostProcess) ShareOutputWith(postProcess *PostProcess) *PostProcess {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, postProcess.JSObject())
+
+	retVal := i.p.Call("shareOutputWith", args...)
+	return PostProcessFromJSObject(retVal, i.ctx)
+}
+
+// ImageProcessingPostProcessUpdateEffectOpts contains optional parameters for ImageProcessingPostProcess.UpdateEffect.
+type ImageProcessingPostProcessUpdateEffectOpts struct {
+	Defines         *string
+	Uniforms        *string
+	Samplers        *string
+	IndexParameters *interface{}
+	OnCompiled      *func()
+	OnError         *func()
+}
+
+// UpdateEffect calls the UpdateEffect method on the ImageProcessingPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#updateeffect
+func (i *ImageProcessingPostProcess) UpdateEffect(opts *ImageProcessingPostProcessUpdateEffectOpts) {
+	if opts == nil {
+		opts = &ImageProcessingPostProcessUpdateEffectOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+6)
+
+	if opts.Defines == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Defines)
+	}
+	if opts.Uniforms == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Uniforms)
+	}
+	if opts.Samplers == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Samplers)
+	}
+	if opts.IndexParameters == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.IndexParameters)
+	}
+	if opts.OnCompiled == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnCompiled)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+
+	i.p.Call("updateEffect", args...)
+}
+
+// UseOwnOutput calls the UseOwnOutput method on the ImageProcessingPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#useownoutput
+func (i *ImageProcessingPostProcess) UseOwnOutput() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	i.p.Call("useOwnOutput", args...)
+}
+
+/*
+
+// AdaptScaleToCurrentViewport returns the AdaptScaleToCurrentViewport property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#adaptscaletocurrentviewport
+func (i *ImageProcessingPostProcess) AdaptScaleToCurrentViewport(adaptScaleToCurrentViewport bool) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(adaptScaleToCurrentViewport)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAdaptScaleToCurrentViewport sets the AdaptScaleToCurrentViewport property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#adaptscaletocurrentviewport
+func (i *ImageProcessingPostProcess) SetAdaptScaleToCurrentViewport(adaptScaleToCurrentViewport bool) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(adaptScaleToCurrentViewport)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AlphaConstants returns the AlphaConstants property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#alphaconstants
+func (i *ImageProcessingPostProcess) AlphaConstants(alphaConstants *Color4) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(alphaConstants.JSObject())
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaConstants sets the AlphaConstants property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#alphaconstants
+func (i *ImageProcessingPostProcess) SetAlphaConstants(alphaConstants *Color4) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(alphaConstants.JSObject())
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AlphaMode returns the AlphaMode property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#alphamode
+func (i *ImageProcessingPostProcess) AlphaMode(alphaMode float64) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(alphaMode)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaMode sets the AlphaMode property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#alphamode
+func (i *ImageProcessingPostProcess) SetAlphaMode(alphaMode float64) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(alphaMode)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AlwaysForcePOT returns the AlwaysForcePOT property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#alwaysforcepot
+func (i *ImageProcessingPostProcess) AlwaysForcePOT(alwaysForcePOT bool) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(alwaysForcePOT)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAlwaysForcePOT sets the AlwaysForcePOT property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#alwaysforcepot
+func (i *ImageProcessingPostProcess) SetAlwaysForcePOT(alwaysForcePOT bool) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(alwaysForcePOT)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Animations returns the Animations property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#animations
+func (i *ImageProcessingPostProcess) Animations(animations *Animation) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(animations.JSObject())
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#animations
+func (i *ImageProcessingPostProcess) SetAnimations(animations *Animation) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(animations.JSObject())
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AspectRatio returns the AspectRatio property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#aspectratio
+func (i *ImageProcessingPostProcess) AspectRatio(aspectRatio float64) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(aspectRatio)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAspectRatio sets the AspectRatio property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#aspectratio
+func (i *ImageProcessingPostProcess) SetAspectRatio(aspectRatio float64) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(aspectRatio)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AutoClear returns the AutoClear property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#autoclear
+func (i *ImageProcessingPostProcess) AutoClear(autoClear bool) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(autoClear)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAutoClear sets the AutoClear property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#autoclear
+func (i *ImageProcessingPostProcess) SetAutoClear(autoClear bool) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(autoClear)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ClearColor returns the ClearColor property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#clearcolor
+func (i *ImageProcessingPostProcess) ClearColor(clearColor *Color4) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(clearColor.JSObject())
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetClearColor sets the ClearColor property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#clearcolor
+func (i *ImageProcessingPostProcess) SetClearColor(clearColor *Color4) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(clearColor.JSObject())
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ColorCurves returns the ColorCurves property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#colorcurves
+func (i *ImageProcessingPostProcess) ColorCurves(colorCurves *ColorCurves) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(colorCurves.JSObject())
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetColorCurves sets the ColorCurves property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#colorcurves
+func (i *ImageProcessingPostProcess) SetColorCurves(colorCurves *ColorCurves) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(colorCurves.JSObject())
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ColorCurvesEnabled returns the ColorCurvesEnabled property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#colorcurvesenabled
+func (i *ImageProcessingPostProcess) ColorCurvesEnabled(colorCurvesEnabled bool) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(colorCurvesEnabled)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetColorCurvesEnabled sets the ColorCurvesEnabled property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#colorcurvesenabled
+func (i *ImageProcessingPostProcess) SetColorCurvesEnabled(colorCurvesEnabled bool) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(colorCurvesEnabled)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ColorGradingEnabled returns the ColorGradingEnabled property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#colorgradingenabled
+func (i *ImageProcessingPostProcess) ColorGradingEnabled(colorGradingEnabled bool) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(colorGradingEnabled)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetColorGradingEnabled sets the ColorGradingEnabled property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#colorgradingenabled
+func (i *ImageProcessingPostProcess) SetColorGradingEnabled(colorGradingEnabled bool) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(colorGradingEnabled)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ColorGradingTexture returns the ColorGradingTexture property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#colorgradingtexture
+func (i *ImageProcessingPostProcess) ColorGradingTexture(colorGradingTexture *BaseTexture) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(colorGradingTexture.JSObject())
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetColorGradingTexture sets the ColorGradingTexture property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#colorgradingtexture
+func (i *ImageProcessingPostProcess) SetColorGradingTexture(colorGradingTexture *BaseTexture) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(colorGradingTexture.JSObject())
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Contrast returns the Contrast property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#contrast
+func (i *ImageProcessingPostProcess) Contrast(contrast float64) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(contrast)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetContrast sets the Contrast property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#contrast
+func (i *ImageProcessingPostProcess) SetContrast(contrast float64) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(contrast)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// EnablePixelPerfectMode returns the EnablePixelPerfectMode property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#enablepixelperfectmode
+func (i *ImageProcessingPostProcess) EnablePixelPerfectMode(enablePixelPerfectMode bool) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(enablePixelPerfectMode)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetEnablePixelPerfectMode sets the EnablePixelPerfectMode property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#enablepixelperfectmode
+func (i *ImageProcessingPostProcess) SetEnablePixelPerfectMode(enablePixelPerfectMode bool) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(enablePixelPerfectMode)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Exposure returns the Exposure property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#exposure
+func (i *ImageProcessingPostProcess) Exposure(exposure float64) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(exposure)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetExposure sets the Exposure property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#exposure
+func (i *ImageProcessingPostProcess) SetExposure(exposure float64) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(exposure)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ForceFullscreenViewport returns the ForceFullscreenViewport property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#forcefullscreenviewport
+func (i *ImageProcessingPostProcess) ForceFullscreenViewport(forceFullscreenViewport bool) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(forceFullscreenViewport)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetForceFullscreenViewport sets the ForceFullscreenViewport property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#forcefullscreenviewport
+func (i *ImageProcessingPostProcess) SetForceFullscreenViewport(forceFullscreenViewport bool) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(forceFullscreenViewport)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// FromLinearSpace returns the FromLinearSpace property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#fromlinearspace
+func (i *ImageProcessingPostProcess) FromLinearSpace(fromLinearSpace bool) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(fromLinearSpace)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetFromLinearSpace sets the FromLinearSpace property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#fromlinearspace
+func (i *ImageProcessingPostProcess) SetFromLinearSpace(fromLinearSpace bool) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(fromLinearSpace)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Height returns the Height property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#height
+func (i *ImageProcessingPostProcess) Height(height float64) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(height)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetHeight sets the Height property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#height
+func (i *ImageProcessingPostProcess) SetHeight(height float64) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(height)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ImageProcessingConfiguration returns the ImageProcessingConfiguration property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#imageprocessingconfiguration
+func (i *ImageProcessingPostProcess) ImageProcessingConfiguration(imageProcessingConfiguration *ImageProcessingConfiguration) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(imageProcessingConfiguration.JSObject())
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetImageProcessingConfiguration sets the ImageProcessingConfiguration property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#imageprocessingconfiguration
+func (i *ImageProcessingPostProcess) SetImageProcessingConfiguration(imageProcessingConfiguration *ImageProcessingConfiguration) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(imageProcessingConfiguration.JSObject())
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// InputTexture returns the InputTexture property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#inputtexture
+func (i *ImageProcessingPostProcess) InputTexture(inputTexture *InternalTexture) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(inputTexture.JSObject())
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetInputTexture sets the InputTexture property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#inputtexture
+func (i *ImageProcessingPostProcess) SetInputTexture(inputTexture *InternalTexture) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(inputTexture.JSObject())
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#inspectablecustomproperties
+func (i *ImageProcessingPostProcess) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(inspectableCustomProperties.JSObject())
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#inspectablecustomproperties
+func (i *ImageProcessingPostProcess) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(inspectableCustomProperties.JSObject())
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// IsSupported returns the IsSupported property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#issupported
+func (i *ImageProcessingPostProcess) IsSupported(isSupported bool) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(isSupported)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetIsSupported sets the IsSupported property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#issupported
+func (i *ImageProcessingPostProcess) SetIsSupported(isSupported bool) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(isSupported)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#name
+func (i *ImageProcessingPostProcess) Name(name string) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(name)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#name
+func (i *ImageProcessingPostProcess) SetName(name string) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(name)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnActivate returns the OnActivate property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#onactivate
+func (i *ImageProcessingPostProcess) OnActivate(onActivate func()) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(onActivate)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnActivate sets the OnActivate property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#onactivate
+func (i *ImageProcessingPostProcess) SetOnActivate(onActivate func()) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(onActivate)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnActivateObservable returns the OnActivateObservable property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#onactivateobservable
+func (i *ImageProcessingPostProcess) OnActivateObservable(onActivateObservable *Observable) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(onActivateObservable.JSObject())
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnActivateObservable sets the OnActivateObservable property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#onactivateobservable
+func (i *ImageProcessingPostProcess) SetOnActivateObservable(onActivateObservable *Observable) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(onActivateObservable.JSObject())
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnAfterRender returns the OnAfterRender property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#onafterrender
+func (i *ImageProcessingPostProcess) OnAfterRender(onAfterRender func()) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(onAfterRender)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterRender sets the OnAfterRender property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#onafterrender
+func (i *ImageProcessingPostProcess) SetOnAfterRender(onAfterRender func()) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(onAfterRender)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnAfterRenderObservable returns the OnAfterRenderObservable property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#onafterrenderobservable
+func (i *ImageProcessingPostProcess) OnAfterRenderObservable(onAfterRenderObservable *Observable) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(onAfterRenderObservable.JSObject())
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterRenderObservable sets the OnAfterRenderObservable property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#onafterrenderobservable
+func (i *ImageProcessingPostProcess) SetOnAfterRenderObservable(onAfterRenderObservable *Observable) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(onAfterRenderObservable.JSObject())
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnApply returns the OnApply property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#onapply
+func (i *ImageProcessingPostProcess) OnApply(onApply func()) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(onApply)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnApply sets the OnApply property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#onapply
+func (i *ImageProcessingPostProcess) SetOnApply(onApply func()) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(onApply)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnApplyObservable returns the OnApplyObservable property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#onapplyobservable
+func (i *ImageProcessingPostProcess) OnApplyObservable(onApplyObservable *Observable) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(onApplyObservable.JSObject())
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnApplyObservable sets the OnApplyObservable property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#onapplyobservable
+func (i *ImageProcessingPostProcess) SetOnApplyObservable(onApplyObservable *Observable) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(onApplyObservable.JSObject())
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeRender returns the OnBeforeRender property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#onbeforerender
+func (i *ImageProcessingPostProcess) OnBeforeRender(onBeforeRender func()) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(onBeforeRender)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeRender sets the OnBeforeRender property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#onbeforerender
+func (i *ImageProcessingPostProcess) SetOnBeforeRender(onBeforeRender func()) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(onBeforeRender)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeRenderObservable returns the OnBeforeRenderObservable property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#onbeforerenderobservable
+func (i *ImageProcessingPostProcess) OnBeforeRenderObservable(onBeforeRenderObservable *Observable) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(onBeforeRenderObservable.JSObject())
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeRenderObservable sets the OnBeforeRenderObservable property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#onbeforerenderobservable
+func (i *ImageProcessingPostProcess) SetOnBeforeRenderObservable(onBeforeRenderObservable *Observable) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(onBeforeRenderObservable.JSObject())
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnSizeChanged returns the OnSizeChanged property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#onsizechanged
+func (i *ImageProcessingPostProcess) OnSizeChanged(onSizeChanged func()) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(onSizeChanged)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnSizeChanged sets the OnSizeChanged property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#onsizechanged
+func (i *ImageProcessingPostProcess) SetOnSizeChanged(onSizeChanged func()) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(onSizeChanged)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnSizeChangedObservable returns the OnSizeChangedObservable property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#onsizechangedobservable
+func (i *ImageProcessingPostProcess) OnSizeChangedObservable(onSizeChangedObservable *Observable) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(onSizeChangedObservable.JSObject())
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnSizeChangedObservable sets the OnSizeChangedObservable property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#onsizechangedobservable
+func (i *ImageProcessingPostProcess) SetOnSizeChangedObservable(onSizeChangedObservable *Observable) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(onSizeChangedObservable.JSObject())
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// RenderTargetSamplingMode returns the RenderTargetSamplingMode property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#rendertargetsamplingmode
+func (i *ImageProcessingPostProcess) RenderTargetSamplingMode(renderTargetSamplingMode float64) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(renderTargetSamplingMode)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetRenderTargetSamplingMode sets the RenderTargetSamplingMode property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#rendertargetsamplingmode
+func (i *ImageProcessingPostProcess) SetRenderTargetSamplingMode(renderTargetSamplingMode float64) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(renderTargetSamplingMode)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Samples returns the Samples property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#samples
+func (i *ImageProcessingPostProcess) Samples(samples float64) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(samples)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetSamples sets the Samples property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#samples
+func (i *ImageProcessingPostProcess) SetSamples(samples float64) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(samples)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ScaleMode returns the ScaleMode property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#scalemode
+func (i *ImageProcessingPostProcess) ScaleMode(scaleMode float64) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(scaleMode)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetScaleMode sets the ScaleMode property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#scalemode
+func (i *ImageProcessingPostProcess) SetScaleMode(scaleMode float64) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(scaleMode)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// TexelSize returns the TexelSize property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#texelsize
+func (i *ImageProcessingPostProcess) TexelSize(texelSize *Vector2) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(texelSize.JSObject())
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetTexelSize sets the TexelSize property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#texelsize
+func (i *ImageProcessingPostProcess) SetTexelSize(texelSize *Vector2) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(texelSize.JSObject())
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ToneMappingEnabled returns the ToneMappingEnabled property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#tonemappingenabled
+func (i *ImageProcessingPostProcess) ToneMappingEnabled(toneMappingEnabled bool) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(toneMappingEnabled)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetToneMappingEnabled sets the ToneMappingEnabled property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#tonemappingenabled
+func (i *ImageProcessingPostProcess) SetToneMappingEnabled(toneMappingEnabled bool) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(toneMappingEnabled)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ToneMappingType returns the ToneMappingType property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#tonemappingtype
+func (i *ImageProcessingPostProcess) ToneMappingType(toneMappingType float64) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(toneMappingType)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetToneMappingType sets the ToneMappingType property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#tonemappingtype
+func (i *ImageProcessingPostProcess) SetToneMappingType(toneMappingType float64) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(toneMappingType)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#uniqueid
+func (i *ImageProcessingPostProcess) UniqueId(uniqueId float64) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(uniqueId)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#uniqueid
+func (i *ImageProcessingPostProcess) SetUniqueId(uniqueId float64) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(uniqueId)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// VignetteBlendMode returns the VignetteBlendMode property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#vignetteblendmode
+func (i *ImageProcessingPostProcess) VignetteBlendMode(vignetteBlendMode float64) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(vignetteBlendMode)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetVignetteBlendMode sets the VignetteBlendMode property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#vignetteblendmode
+func (i *ImageProcessingPostProcess) SetVignetteBlendMode(vignetteBlendMode float64) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(vignetteBlendMode)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// VignetteCameraFov returns the VignetteCameraFov property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#vignettecamerafov
+func (i *ImageProcessingPostProcess) VignetteCameraFov(vignetteCameraFov float64) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(vignetteCameraFov)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetVignetteCameraFov sets the VignetteCameraFov property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#vignettecamerafov
+func (i *ImageProcessingPostProcess) SetVignetteCameraFov(vignetteCameraFov float64) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(vignetteCameraFov)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// VignetteCentreX returns the VignetteCentreX property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#vignettecentrex
+func (i *ImageProcessingPostProcess) VignetteCentreX(vignetteCentreX float64) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(vignetteCentreX)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetVignetteCentreX sets the VignetteCentreX property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#vignettecentrex
+func (i *ImageProcessingPostProcess) SetVignetteCentreX(vignetteCentreX float64) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(vignetteCentreX)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// VignetteCentreY returns the VignetteCentreY property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#vignettecentrey
+func (i *ImageProcessingPostProcess) VignetteCentreY(vignetteCentreY float64) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(vignetteCentreY)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetVignetteCentreY sets the VignetteCentreY property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#vignettecentrey
+func (i *ImageProcessingPostProcess) SetVignetteCentreY(vignetteCentreY float64) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(vignetteCentreY)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// VignetteColor returns the VignetteColor property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#vignettecolor
+func (i *ImageProcessingPostProcess) VignetteColor(vignetteColor *Color4) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(vignetteColor.JSObject())
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetVignetteColor sets the VignetteColor property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#vignettecolor
+func (i *ImageProcessingPostProcess) SetVignetteColor(vignetteColor *Color4) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(vignetteColor.JSObject())
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// VignetteEnabled returns the VignetteEnabled property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#vignetteenabled
+func (i *ImageProcessingPostProcess) VignetteEnabled(vignetteEnabled bool) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(vignetteEnabled)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetVignetteEnabled sets the VignetteEnabled property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#vignetteenabled
+func (i *ImageProcessingPostProcess) SetVignetteEnabled(vignetteEnabled bool) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(vignetteEnabled)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// VignetteStretch returns the VignetteStretch property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#vignettestretch
+func (i *ImageProcessingPostProcess) VignetteStretch(vignetteStretch float64) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(vignetteStretch)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetVignetteStretch sets the VignetteStretch property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#vignettestretch
+func (i *ImageProcessingPostProcess) SetVignetteStretch(vignetteStretch float64) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(vignetteStretch)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// VignetteWeight returns the VignetteWeight property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#vignetteweight
+func (i *ImageProcessingPostProcess) VignetteWeight(vignetteWeight float64) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(vignetteWeight)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetVignetteWeight sets the VignetteWeight property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#vignetteweight
+func (i *ImageProcessingPostProcess) SetVignetteWeight(vignetteWeight float64) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(vignetteWeight)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Width returns the Width property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#width
+func (i *ImageProcessingPostProcess) Width(width float64) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(width)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetWidth sets the Width property of class ImageProcessingPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageprocessingpostprocess#width
+func (i *ImageProcessingPostProcess) SetWidth(width float64) *ImageProcessingPostProcess {
+	p := ba.ctx.Get("ImageProcessingPostProcess").New(width)
+	return ImageProcessingPostProcessFromJSObject(p, ba.ctx)
+}
+
+*/

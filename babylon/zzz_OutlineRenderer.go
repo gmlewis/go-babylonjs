@@ -32,8 +32,134 @@ func OutlineRendererFromJSObject(p js.Value, ctx js.Value) *OutlineRenderer {
 //
 // https://doc.babylonjs.com/api/classes/babylon.outlinerenderer
 func (ba *Babylon) NewOutlineRenderer(scene *Scene) *OutlineRenderer {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("OutlineRenderer").New(args...)
+	return OutlineRendererFromJSObject(p, ba.ctx)
+}
+
+// Dispose calls the Dispose method on the OutlineRenderer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.outlinerenderer#dispose
+func (o *OutlineRenderer) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	o.p.Call("dispose", args...)
+}
+
+// IsReady calls the IsReady method on the OutlineRenderer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.outlinerenderer#isready
+func (o *OutlineRenderer) IsReady(subMesh *SubMesh, useInstances bool) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, subMesh.JSObject())
+	args = append(args, useInstances)
+
+	retVal := o.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// Rebuild calls the Rebuild method on the OutlineRenderer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.outlinerenderer#rebuild
+func (o *OutlineRenderer) Rebuild() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	o.p.Call("rebuild", args...)
+}
+
+// Register calls the Register method on the OutlineRenderer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.outlinerenderer#register
+func (o *OutlineRenderer) Register() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	o.p.Call("register", args...)
+}
+
+// OutlineRendererRenderOpts contains optional parameters for OutlineRenderer.Render.
+type OutlineRendererRenderOpts struct {
+	UseOverlay *bool
+}
+
+// Render calls the Render method on the OutlineRenderer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.outlinerenderer#render
+func (o *OutlineRenderer) Render(subMesh *SubMesh, batch *_InstancesBatch, opts *OutlineRendererRenderOpts) {
+	if opts == nil {
+		opts = &OutlineRendererRenderOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, subMesh.JSObject())
+	args = append(args, batch.JSObject())
+
+	if opts.UseOverlay == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseOverlay)
+	}
+
+	o.p.Call("render", args...)
+}
+
+/*
+
+// Name returns the Name property of class OutlineRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.outlinerenderer#name
+func (o *OutlineRenderer) Name(name string) *OutlineRenderer {
+	p := ba.ctx.Get("OutlineRenderer").New(name)
+	return OutlineRendererFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class OutlineRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.outlinerenderer#name
+func (o *OutlineRenderer) SetName(name string) *OutlineRenderer {
+	p := ba.ctx.Get("OutlineRenderer").New(name)
+	return OutlineRendererFromJSObject(p, ba.ctx)
+}
+
+// Scene returns the Scene property of class OutlineRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.outlinerenderer#scene
+func (o *OutlineRenderer) Scene(scene *Scene) *OutlineRenderer {
 	p := ba.ctx.Get("OutlineRenderer").New(scene.JSObject())
 	return OutlineRendererFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetScene sets the Scene property of class OutlineRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.outlinerenderer#scene
+func (o *OutlineRenderer) SetScene(scene *Scene) *OutlineRenderer {
+	p := ba.ctx.Get("OutlineRenderer").New(scene.JSObject())
+	return OutlineRendererFromJSObject(p, ba.ctx)
+}
+
+// ZOffset returns the ZOffset property of class OutlineRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.outlinerenderer#zoffset
+func (o *OutlineRenderer) ZOffset(zOffset float64) *OutlineRenderer {
+	p := ba.ctx.Get("OutlineRenderer").New(zOffset)
+	return OutlineRendererFromJSObject(p, ba.ctx)
+}
+
+// SetZOffset sets the ZOffset property of class OutlineRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.outlinerenderer#zoffset
+func (o *OutlineRenderer) SetZOffset(zOffset float64) *OutlineRenderer {
+	p := ba.ctx.Get("OutlineRenderer").New(zOffset)
+	return OutlineRendererFromJSObject(p, ba.ctx)
+}
+
+*/

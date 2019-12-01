@@ -40,8 +40,126 @@ func (ba *Babylon) NewStopSoundAction(triggerOptions interface{}, sound *Sound, 
 		opts = &NewStopSoundActionOpts{}
 	}
 
-	p := ba.ctx.Get("StopSoundAction").New(triggerOptions, sound.JSObject(), opts.Condition.JSObject())
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, triggerOptions)
+	args = append(args, sound.JSObject())
+
+	if opts.Condition == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Condition.JSObject())
+	}
+
+	p := ba.ctx.Get("StopSoundAction").New(args...)
 	return StopSoundActionFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Execute calls the Execute method on the StopSoundAction object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stopsoundaction#execute
+func (s *StopSoundAction) Execute() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("execute", args...)
+}
+
+// GetTriggerParameter calls the GetTriggerParameter method on the StopSoundAction object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stopsoundaction#gettriggerparameter
+func (s *StopSoundAction) GetTriggerParameter() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getTriggerParameter", args...)
+	return retVal
+}
+
+// Serialize calls the Serialize method on the StopSoundAction object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stopsoundaction#serialize
+func (s *StopSoundAction) Serialize(parent interface{}) interface{} {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, parent)
+
+	retVal := s.p.Call("serialize", args...)
+	return retVal
+}
+
+// SkipToNextActiveAction calls the SkipToNextActiveAction method on the StopSoundAction object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stopsoundaction#skiptonextactiveaction
+func (s *StopSoundAction) SkipToNextActiveAction() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("skipToNextActiveAction", args...)
+}
+
+// Then calls the Then method on the StopSoundAction object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stopsoundaction#then
+func (s *StopSoundAction) Then(action *Action) *Action {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, action.JSObject())
+
+	retVal := s.p.Call("then", args...)
+	return ActionFromJSObject(retVal, s.ctx)
+}
+
+/*
+
+// OnBeforeExecuteObservable returns the OnBeforeExecuteObservable property of class StopSoundAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stopsoundaction#onbeforeexecuteobservable
+func (s *StopSoundAction) OnBeforeExecuteObservable(onBeforeExecuteObservable *Observable) *StopSoundAction {
+	p := ba.ctx.Get("StopSoundAction").New(onBeforeExecuteObservable.JSObject())
+	return StopSoundActionFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeExecuteObservable sets the OnBeforeExecuteObservable property of class StopSoundAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stopsoundaction#onbeforeexecuteobservable
+func (s *StopSoundAction) SetOnBeforeExecuteObservable(onBeforeExecuteObservable *Observable) *StopSoundAction {
+	p := ba.ctx.Get("StopSoundAction").New(onBeforeExecuteObservable.JSObject())
+	return StopSoundActionFromJSObject(p, ba.ctx)
+}
+
+// Trigger returns the Trigger property of class StopSoundAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stopsoundaction#trigger
+func (s *StopSoundAction) Trigger(trigger float64) *StopSoundAction {
+	p := ba.ctx.Get("StopSoundAction").New(trigger)
+	return StopSoundActionFromJSObject(p, ba.ctx)
+}
+
+// SetTrigger sets the Trigger property of class StopSoundAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stopsoundaction#trigger
+func (s *StopSoundAction) SetTrigger(trigger float64) *StopSoundAction {
+	p := ba.ctx.Get("StopSoundAction").New(trigger)
+	return StopSoundActionFromJSObject(p, ba.ctx)
+}
+
+// TriggerOptions returns the TriggerOptions property of class StopSoundAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stopsoundaction#triggeroptions
+func (s *StopSoundAction) TriggerOptions(triggerOptions interface{}) *StopSoundAction {
+	p := ba.ctx.Get("StopSoundAction").New(triggerOptions)
+	return StopSoundActionFromJSObject(p, ba.ctx)
+}
+
+// SetTriggerOptions sets the TriggerOptions property of class StopSoundAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stopsoundaction#triggeroptions
+func (s *StopSoundAction) SetTriggerOptions(triggerOptions interface{}) *StopSoundAction {
+	p := ba.ctx.Get("StopSoundAction").New(triggerOptions)
+	return StopSoundActionFromJSObject(p, ba.ctx)
+}
+
+*/

@@ -29,11 +29,9 @@ func EventStateFromJSObject(p js.Value, ctx js.Value) *EventState {
 
 // NewEventStateOpts contains optional parameters for NewEventState.
 type NewEventStateOpts struct {
-	SkipNextObservers *JSBool
-
-	Target *interface{}
-
-	CurrentTarget *interface{}
+	SkipNextObservers *bool
+	Target            *interface{}
+	CurrentTarget     *interface{}
 }
 
 // NewEventState returns a new EventState object.
@@ -44,8 +42,149 @@ func (ba *Babylon) NewEventState(mask float64, opts *NewEventStateOpts) *EventSt
 		opts = &NewEventStateOpts{}
 	}
 
-	p := ba.ctx.Get("EventState").New(mask, opts.SkipNextObservers.JSObject(), opts.Target, opts.CurrentTarget)
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, mask)
+
+	if opts.SkipNextObservers == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SkipNextObservers)
+	}
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+	if opts.CurrentTarget == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.CurrentTarget)
+	}
+
+	p := ba.ctx.Get("EventState").New(args...)
 	return EventStateFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// EventStateInitalizeOpts contains optional parameters for EventState.Initalize.
+type EventStateInitalizeOpts struct {
+	SkipNextObservers *bool
+	Target            *interface{}
+	CurrentTarget     *interface{}
+}
+
+// Initalize calls the Initalize method on the EventState object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.eventstate#initalize
+func (e *EventState) Initalize(mask float64, opts *EventStateInitalizeOpts) *EventState {
+	if opts == nil {
+		opts = &EventStateInitalizeOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, mask)
+
+	if opts.SkipNextObservers == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SkipNextObservers)
+	}
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+	if opts.CurrentTarget == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.CurrentTarget)
+	}
+
+	retVal := e.p.Call("initalize", args...)
+	return EventStateFromJSObject(retVal, e.ctx)
+}
+
+/*
+
+// CurrentTarget returns the CurrentTarget property of class EventState.
+//
+// https://doc.babylonjs.com/api/classes/babylon.eventstate#currenttarget
+func (e *EventState) CurrentTarget(currentTarget interface{}) *EventState {
+	p := ba.ctx.Get("EventState").New(currentTarget)
+	return EventStateFromJSObject(p, ba.ctx)
+}
+
+// SetCurrentTarget sets the CurrentTarget property of class EventState.
+//
+// https://doc.babylonjs.com/api/classes/babylon.eventstate#currenttarget
+func (e *EventState) SetCurrentTarget(currentTarget interface{}) *EventState {
+	p := ba.ctx.Get("EventState").New(currentTarget)
+	return EventStateFromJSObject(p, ba.ctx)
+}
+
+// LastReturnValue returns the LastReturnValue property of class EventState.
+//
+// https://doc.babylonjs.com/api/classes/babylon.eventstate#lastreturnvalue
+func (e *EventState) LastReturnValue(lastReturnValue interface{}) *EventState {
+	p := ba.ctx.Get("EventState").New(lastReturnValue)
+	return EventStateFromJSObject(p, ba.ctx)
+}
+
+// SetLastReturnValue sets the LastReturnValue property of class EventState.
+//
+// https://doc.babylonjs.com/api/classes/babylon.eventstate#lastreturnvalue
+func (e *EventState) SetLastReturnValue(lastReturnValue interface{}) *EventState {
+	p := ba.ctx.Get("EventState").New(lastReturnValue)
+	return EventStateFromJSObject(p, ba.ctx)
+}
+
+// Mask returns the Mask property of class EventState.
+//
+// https://doc.babylonjs.com/api/classes/babylon.eventstate#mask
+func (e *EventState) Mask(mask float64) *EventState {
+	p := ba.ctx.Get("EventState").New(mask)
+	return EventStateFromJSObject(p, ba.ctx)
+}
+
+// SetMask sets the Mask property of class EventState.
+//
+// https://doc.babylonjs.com/api/classes/babylon.eventstate#mask
+func (e *EventState) SetMask(mask float64) *EventState {
+	p := ba.ctx.Get("EventState").New(mask)
+	return EventStateFromJSObject(p, ba.ctx)
+}
+
+// SkipNextObservers returns the SkipNextObservers property of class EventState.
+//
+// https://doc.babylonjs.com/api/classes/babylon.eventstate#skipnextobservers
+func (e *EventState) SkipNextObservers(skipNextObservers bool) *EventState {
+	p := ba.ctx.Get("EventState").New(skipNextObservers)
+	return EventStateFromJSObject(p, ba.ctx)
+}
+
+// SetSkipNextObservers sets the SkipNextObservers property of class EventState.
+//
+// https://doc.babylonjs.com/api/classes/babylon.eventstate#skipnextobservers
+func (e *EventState) SetSkipNextObservers(skipNextObservers bool) *EventState {
+	p := ba.ctx.Get("EventState").New(skipNextObservers)
+	return EventStateFromJSObject(p, ba.ctx)
+}
+
+// Target returns the Target property of class EventState.
+//
+// https://doc.babylonjs.com/api/classes/babylon.eventstate#target
+func (e *EventState) Target(target interface{}) *EventState {
+	p := ba.ctx.Get("EventState").New(target)
+	return EventStateFromJSObject(p, ba.ctx)
+}
+
+// SetTarget sets the Target property of class EventState.
+//
+// https://doc.babylonjs.com/api/classes/babylon.eventstate#target
+func (e *EventState) SetTarget(target interface{}) *EventState {
+	p := ba.ctx.Get("EventState").New(target)
+	return EventStateFromJSObject(p, ba.ctx)
+}
+
+*/

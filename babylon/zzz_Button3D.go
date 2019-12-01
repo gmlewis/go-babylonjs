@@ -29,7 +29,7 @@ func Button3DFromJSObject(p js.Value, ctx js.Value) *Button3D {
 
 // NewButton3DOpts contains optional parameters for NewButton3D.
 type NewButton3DOpts struct {
-	Name *JSString
+	Name *string
 }
 
 // NewButton3D returns a new Button3D object.
@@ -40,8 +40,443 @@ func (ba *Babylon) NewButton3D(opts *NewButton3DOpts) *Button3D {
 		opts = &NewButton3DOpts{}
 	}
 
-	p := ba.ctx.Get("Button3D").New(opts.Name.JSObject())
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Name == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Name)
+	}
+
+	p := ba.ctx.Get("Button3D").New(args...)
 	return Button3DFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AddBehavior calls the AddBehavior method on the Button3D object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#addbehavior
+func (b *Button3D) AddBehavior(behavior js.Value) *Control3D {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, behavior)
+
+	retVal := b.p.Call("addBehavior", args...)
+	return Control3DFromJSObject(retVal, b.ctx)
+}
+
+// Dispose calls the Dispose method on the Button3D object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#dispose
+func (b *Button3D) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	b.p.Call("dispose", args...)
+}
+
+// GetBehaviorByName calls the GetBehaviorByName method on the Button3D object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#getbehaviorbyname
+func (b *Button3D) GetBehaviorByName(name string) *Control3D {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := b.p.Call("getBehaviorByName", args...)
+	return Control3DFromJSObject(retVal, b.ctx)
+}
+
+// GetClassName calls the GetClassName method on the Button3D object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#getclassname
+func (b *Button3D) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := b.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// LinkToTransformNode calls the LinkToTransformNode method on the Button3D object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#linktotransformnode
+func (b *Button3D) LinkToTransformNode(node *TransformNode) *Control3D {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, node.JSObject())
+
+	retVal := b.p.Call("linkToTransformNode", args...)
+	return Control3DFromJSObject(retVal, b.ctx)
+}
+
+// RemoveBehavior calls the RemoveBehavior method on the Button3D object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#removebehavior
+func (b *Button3D) RemoveBehavior(behavior js.Value) *Control3D {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, behavior)
+
+	retVal := b.p.Call("removeBehavior", args...)
+	return Control3DFromJSObject(retVal, b.ctx)
+}
+
+/*
+
+// Behaviors returns the Behaviors property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#behaviors
+func (b *Button3D) Behaviors(behaviors js.Value) *Button3D {
+	p := ba.ctx.Get("Button3D").New(behaviors)
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// SetBehaviors sets the Behaviors property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#behaviors
+func (b *Button3D) SetBehaviors(behaviors js.Value) *Button3D {
+	p := ba.ctx.Get("Button3D").New(behaviors)
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// Content returns the Content property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#content
+func (b *Button3D) Content(content *Control) *Button3D {
+	p := ba.ctx.Get("Button3D").New(content.JSObject())
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// SetContent sets the Content property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#content
+func (b *Button3D) SetContent(content *Control) *Button3D {
+	p := ba.ctx.Get("Button3D").New(content.JSObject())
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// ContentResolution returns the ContentResolution property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#contentresolution
+func (b *Button3D) ContentResolution(contentResolution *int) *Button3D {
+	p := ba.ctx.Get("Button3D").New(contentResolution.JSObject())
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// SetContentResolution sets the ContentResolution property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#contentresolution
+func (b *Button3D) SetContentResolution(contentResolution *int) *Button3D {
+	p := ba.ctx.Get("Button3D").New(contentResolution.JSObject())
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// ContentScaleRatio returns the ContentScaleRatio property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#contentscaleratio
+func (b *Button3D) ContentScaleRatio(contentScaleRatio float64) *Button3D {
+	p := ba.ctx.Get("Button3D").New(contentScaleRatio)
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// SetContentScaleRatio sets the ContentScaleRatio property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#contentscaleratio
+func (b *Button3D) SetContentScaleRatio(contentScaleRatio float64) *Button3D {
+	p := ba.ctx.Get("Button3D").New(contentScaleRatio)
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// IsVisible returns the IsVisible property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#isvisible
+func (b *Button3D) IsVisible(isVisible bool) *Button3D {
+	p := ba.ctx.Get("Button3D").New(isVisible)
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// SetIsVisible sets the IsVisible property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#isvisible
+func (b *Button3D) SetIsVisible(isVisible bool) *Button3D {
+	p := ba.ctx.Get("Button3D").New(isVisible)
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// Mesh returns the Mesh property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#mesh
+func (b *Button3D) Mesh(mesh *AbstractMesh) *Button3D {
+	p := ba.ctx.Get("Button3D").New(mesh.JSObject())
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// SetMesh sets the Mesh property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#mesh
+func (b *Button3D) SetMesh(mesh *AbstractMesh) *Button3D {
+	p := ba.ctx.Get("Button3D").New(mesh.JSObject())
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#name
+func (b *Button3D) Name(name string) *Button3D {
+	p := ba.ctx.Get("Button3D").New(name)
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#name
+func (b *Button3D) SetName(name string) *Button3D {
+	p := ba.ctx.Get("Button3D").New(name)
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// Node returns the Node property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#node
+func (b *Button3D) Node(node *TransformNode) *Button3D {
+	p := ba.ctx.Get("Button3D").New(node.JSObject())
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// SetNode sets the Node property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#node
+func (b *Button3D) SetNode(node *TransformNode) *Button3D {
+	p := ba.ctx.Get("Button3D").New(node.JSObject())
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// OnPointerClickObservable returns the OnPointerClickObservable property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#onpointerclickobservable
+func (b *Button3D) OnPointerClickObservable(onPointerClickObservable *Observable) *Button3D {
+	p := ba.ctx.Get("Button3D").New(onPointerClickObservable.JSObject())
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerClickObservable sets the OnPointerClickObservable property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#onpointerclickobservable
+func (b *Button3D) SetOnPointerClickObservable(onPointerClickObservable *Observable) *Button3D {
+	p := ba.ctx.Get("Button3D").New(onPointerClickObservable.JSObject())
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// OnPointerDownObservable returns the OnPointerDownObservable property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#onpointerdownobservable
+func (b *Button3D) OnPointerDownObservable(onPointerDownObservable *Observable) *Button3D {
+	p := ba.ctx.Get("Button3D").New(onPointerDownObservable.JSObject())
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerDownObservable sets the OnPointerDownObservable property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#onpointerdownobservable
+func (b *Button3D) SetOnPointerDownObservable(onPointerDownObservable *Observable) *Button3D {
+	p := ba.ctx.Get("Button3D").New(onPointerDownObservable.JSObject())
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// OnPointerEnterObservable returns the OnPointerEnterObservable property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#onpointerenterobservable
+func (b *Button3D) OnPointerEnterObservable(onPointerEnterObservable *Observable) *Button3D {
+	p := ba.ctx.Get("Button3D").New(onPointerEnterObservable.JSObject())
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerEnterObservable sets the OnPointerEnterObservable property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#onpointerenterobservable
+func (b *Button3D) SetOnPointerEnterObservable(onPointerEnterObservable *Observable) *Button3D {
+	p := ba.ctx.Get("Button3D").New(onPointerEnterObservable.JSObject())
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// OnPointerMoveObservable returns the OnPointerMoveObservable property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#onpointermoveobservable
+func (b *Button3D) OnPointerMoveObservable(onPointerMoveObservable *Observable) *Button3D {
+	p := ba.ctx.Get("Button3D").New(onPointerMoveObservable.JSObject())
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerMoveObservable sets the OnPointerMoveObservable property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#onpointermoveobservable
+func (b *Button3D) SetOnPointerMoveObservable(onPointerMoveObservable *Observable) *Button3D {
+	p := ba.ctx.Get("Button3D").New(onPointerMoveObservable.JSObject())
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// OnPointerOutObservable returns the OnPointerOutObservable property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#onpointeroutobservable
+func (b *Button3D) OnPointerOutObservable(onPointerOutObservable *Observable) *Button3D {
+	p := ba.ctx.Get("Button3D").New(onPointerOutObservable.JSObject())
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerOutObservable sets the OnPointerOutObservable property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#onpointeroutobservable
+func (b *Button3D) SetOnPointerOutObservable(onPointerOutObservable *Observable) *Button3D {
+	p := ba.ctx.Get("Button3D").New(onPointerOutObservable.JSObject())
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// OnPointerUpObservable returns the OnPointerUpObservable property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#onpointerupobservable
+func (b *Button3D) OnPointerUpObservable(onPointerUpObservable *Observable) *Button3D {
+	p := ba.ctx.Get("Button3D").New(onPointerUpObservable.JSObject())
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerUpObservable sets the OnPointerUpObservable property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#onpointerupobservable
+func (b *Button3D) SetOnPointerUpObservable(onPointerUpObservable *Observable) *Button3D {
+	p := ba.ctx.Get("Button3D").New(onPointerUpObservable.JSObject())
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// Parent returns the Parent property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#parent
+func (b *Button3D) Parent(parent *Container3D) *Button3D {
+	p := ba.ctx.Get("Button3D").New(parent.JSObject())
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// SetParent sets the Parent property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#parent
+func (b *Button3D) SetParent(parent *Container3D) *Button3D {
+	p := ba.ctx.Get("Button3D").New(parent.JSObject())
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// PointerDownAnimation returns the PointerDownAnimation property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#pointerdownanimation
+func (b *Button3D) PointerDownAnimation(pointerDownAnimation func()) *Button3D {
+	p := ba.ctx.Get("Button3D").New(pointerDownAnimation)
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// SetPointerDownAnimation sets the PointerDownAnimation property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#pointerdownanimation
+func (b *Button3D) SetPointerDownAnimation(pointerDownAnimation func()) *Button3D {
+	p := ba.ctx.Get("Button3D").New(pointerDownAnimation)
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// PointerEnterAnimation returns the PointerEnterAnimation property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#pointerenteranimation
+func (b *Button3D) PointerEnterAnimation(pointerEnterAnimation func()) *Button3D {
+	p := ba.ctx.Get("Button3D").New(pointerEnterAnimation)
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// SetPointerEnterAnimation sets the PointerEnterAnimation property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#pointerenteranimation
+func (b *Button3D) SetPointerEnterAnimation(pointerEnterAnimation func()) *Button3D {
+	p := ba.ctx.Get("Button3D").New(pointerEnterAnimation)
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// PointerOutAnimation returns the PointerOutAnimation property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#pointeroutanimation
+func (b *Button3D) PointerOutAnimation(pointerOutAnimation func()) *Button3D {
+	p := ba.ctx.Get("Button3D").New(pointerOutAnimation)
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// SetPointerOutAnimation sets the PointerOutAnimation property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#pointeroutanimation
+func (b *Button3D) SetPointerOutAnimation(pointerOutAnimation func()) *Button3D {
+	p := ba.ctx.Get("Button3D").New(pointerOutAnimation)
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// PointerUpAnimation returns the PointerUpAnimation property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#pointerupanimation
+func (b *Button3D) PointerUpAnimation(pointerUpAnimation func()) *Button3D {
+	p := ba.ctx.Get("Button3D").New(pointerUpAnimation)
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// SetPointerUpAnimation sets the PointerUpAnimation property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#pointerupanimation
+func (b *Button3D) SetPointerUpAnimation(pointerUpAnimation func()) *Button3D {
+	p := ba.ctx.Get("Button3D").New(pointerUpAnimation)
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// Position returns the Position property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#position
+func (b *Button3D) Position(position *Vector3) *Button3D {
+	p := ba.ctx.Get("Button3D").New(position.JSObject())
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// SetPosition sets the Position property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#position
+func (b *Button3D) SetPosition(position *Vector3) *Button3D {
+	p := ba.ctx.Get("Button3D").New(position.JSObject())
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// Scaling returns the Scaling property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#scaling
+func (b *Button3D) Scaling(scaling *Vector3) *Button3D {
+	p := ba.ctx.Get("Button3D").New(scaling.JSObject())
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// SetScaling sets the Scaling property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#scaling
+func (b *Button3D) SetScaling(scaling *Vector3) *Button3D {
+	p := ba.ctx.Get("Button3D").New(scaling.JSObject())
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// TypeName returns the TypeName property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#typename
+func (b *Button3D) TypeName(typeName string) *Button3D {
+	p := ba.ctx.Get("Button3D").New(typeName)
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+// SetTypeName sets the TypeName property of class Button3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button3d#typename
+func (b *Button3D) SetTypeName(typeName string) *Button3D {
+	p := ba.ctx.Get("Button3D").New(typeName)
+	return Button3DFromJSObject(p, ba.ctx)
+}
+
+*/

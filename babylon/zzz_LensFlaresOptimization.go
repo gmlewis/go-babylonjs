@@ -31,7 +31,7 @@ func LensFlaresOptimizationFromJSObject(p js.Value, ctx js.Value) *LensFlaresOpt
 
 // NewLensFlaresOptimizationOpts contains optional parameters for NewLensFlaresOptimization.
 type NewLensFlaresOptimizationOpts struct {
-	Priority *JSFloat64
+	Priority *float64
 }
 
 // NewLensFlaresOptimization returns a new LensFlaresOptimization object.
@@ -42,8 +42,59 @@ func (ba *Babylon) NewLensFlaresOptimization(opts *NewLensFlaresOptimizationOpts
 		opts = &NewLensFlaresOptimizationOpts{}
 	}
 
-	p := ba.ctx.Get("LensFlaresOptimization").New(opts.Priority.JSObject())
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Priority == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Priority)
+	}
+
+	p := ba.ctx.Get("LensFlaresOptimization").New(args...)
 	return LensFlaresOptimizationFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Apply calls the Apply method on the LensFlaresOptimization object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflaresoptimization#apply
+func (l *LensFlaresOptimization) Apply(scene *Scene, optimizer *SceneOptimizer) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, scene.JSObject())
+	args = append(args, optimizer.JSObject())
+
+	retVal := l.p.Call("apply", args...)
+	return retVal.Bool()
+}
+
+// GetDescription calls the GetDescription method on the LensFlaresOptimization object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflaresoptimization#getdescription
+func (l *LensFlaresOptimization) GetDescription() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := l.p.Call("getDescription", args...)
+	return retVal.String()
+}
+
+/*
+
+// Priority returns the Priority property of class LensFlaresOptimization.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflaresoptimization#priority
+func (l *LensFlaresOptimization) Priority(priority float64) *LensFlaresOptimization {
+	p := ba.ctx.Get("LensFlaresOptimization").New(priority)
+	return LensFlaresOptimizationFromJSObject(p, ba.ctx)
+}
+
+// SetPriority sets the Priority property of class LensFlaresOptimization.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lensflaresoptimization#priority
+func (l *LensFlaresOptimization) SetPriority(priority float64) *LensFlaresOptimization {
+	p := ba.ctx.Get("LensFlaresOptimization").New(priority)
+	return LensFlaresOptimizationFromJSObject(p, ba.ctx)
+}
+
+*/

@@ -27,4 +27,22 @@ func PrecisionDateFromJSObject(p js.Value, ctx js.Value) *PrecisionDate {
 	return &PrecisionDate{p: p, ctx: ctx}
 }
 
-// TODO: methods
+/*
+
+// Now returns the Now property of class PrecisionDate.
+//
+// https://doc.babylonjs.com/api/classes/babylon.precisiondate#now
+func (p *PrecisionDate) Now(Now float64) *PrecisionDate {
+	p := ba.ctx.Get("PrecisionDate").New(Now)
+	return PrecisionDateFromJSObject(p, ba.ctx)
+}
+
+// SetNow sets the Now property of class PrecisionDate.
+//
+// https://doc.babylonjs.com/api/classes/babylon.precisiondate#now
+func (p *PrecisionDate) SetNow(Now float64) *PrecisionDate {
+	p := ba.ctx.Get("PrecisionDate").New(Now)
+	return PrecisionDateFromJSObject(p, ba.ctx)
+}
+
+*/

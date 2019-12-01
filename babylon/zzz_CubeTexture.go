@@ -29,27 +29,17 @@ func CubeTextureFromJSObject(p js.Value, ctx js.Value) *CubeTexture {
 
 // NewCubeTextureOpts contains optional parameters for NewCubeTexture.
 type NewCubeTextureOpts struct {
-	Extensions *JSString
-
-	NoMipmap *JSBool
-
-	Files *JSString
-
-	OnLoad *func()
-
-	OnError *func()
-
-	Format *JSFloat64
-
-	Prefiltered *JSBool
-
-	ForcedExtension *interface{}
-
-	CreatePolynomials *JSBool
-
-	LodScale *JSFloat64
-
-	LodOffset *JSFloat64
+	Extensions        *string
+	NoMipmap          *bool
+	Files             *string
+	OnLoad            *func()
+	OnError           *func()
+	Format            *float64
+	Prefiltered       *bool
+	ForcedExtension   *interface{}
+	CreatePolynomials *bool
+	LodScale          *float64
+	LodOffset         *float64
 }
 
 // NewCubeTexture returns a new CubeTexture object.
@@ -60,8 +50,1098 @@ func (ba *Babylon) NewCubeTexture(rootUrl string, scene *Scene, opts *NewCubeTex
 		opts = &NewCubeTextureOpts{}
 	}
 
-	p := ba.ctx.Get("CubeTexture").New(rootUrl, scene.JSObject(), opts.Extensions.JSObject(), opts.NoMipmap.JSObject(), opts.Files.JSObject(), opts.OnLoad, opts.OnError, opts.Format.JSObject(), opts.Prefiltered.JSObject(), opts.ForcedExtension, opts.CreatePolynomials.JSObject(), opts.LodScale.JSObject(), opts.LodOffset.JSObject())
+	args := make([]interface{}, 0, 2+11)
+
+	args = append(args, rootUrl)
+	args = append(args, scene.JSObject())
+
+	if opts.Extensions == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Extensions)
+	}
+	if opts.NoMipmap == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoMipmap)
+	}
+	if opts.Files == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Files)
+	}
+	if opts.OnLoad == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnLoad)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+	if opts.Format == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Format)
+	}
+	if opts.Prefiltered == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Prefiltered)
+	}
+	if opts.ForcedExtension == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForcedExtension)
+	}
+	if opts.CreatePolynomials == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.CreatePolynomials)
+	}
+	if opts.LodScale == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.LodScale)
+	}
+	if opts.LodOffset == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.LodOffset)
+	}
+
+	p := ba.ctx.Get("CubeTexture").New(args...)
 	return CubeTextureFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Clone calls the Clone method on the CubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#clone
+func (c *CubeTexture) Clone() *CubeTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("clone", args...)
+	return CubeTextureFromJSObject(retVal, c.ctx)
+}
+
+// CubeTextureCreateFromImagesOpts contains optional parameters for CubeTexture.CreateFromImages.
+type CubeTextureCreateFromImagesOpts struct {
+	NoMipmap *bool
+}
+
+// CreateFromImages calls the CreateFromImages method on the CubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#createfromimages
+func (c *CubeTexture) CreateFromImages(files string, scene *Scene, opts *CubeTextureCreateFromImagesOpts) *CubeTexture {
+	if opts == nil {
+		opts = &CubeTextureCreateFromImagesOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, files)
+	args = append(args, scene.JSObject())
+
+	if opts.NoMipmap == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoMipmap)
+	}
+
+	retVal := c.p.Call("CreateFromImages", args...)
+	return CubeTextureFromJSObject(retVal, c.ctx)
+}
+
+// CubeTextureCreateFromPrefilteredDataOpts contains optional parameters for CubeTexture.CreateFromPrefilteredData.
+type CubeTextureCreateFromPrefilteredDataOpts struct {
+	ForcedExtension   *interface{}
+	CreatePolynomials *bool
+}
+
+// CreateFromPrefilteredData calls the CreateFromPrefilteredData method on the CubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#createfromprefiltereddata
+func (c *CubeTexture) CreateFromPrefilteredData(url string, scene *Scene, opts *CubeTextureCreateFromPrefilteredDataOpts) *CubeTexture {
+	if opts == nil {
+		opts = &CubeTextureCreateFromPrefilteredDataOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+2)
+
+	args = append(args, url)
+	args = append(args, scene.JSObject())
+
+	if opts.ForcedExtension == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForcedExtension)
+	}
+	if opts.CreatePolynomials == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.CreatePolynomials)
+	}
+
+	retVal := c.p.Call("CreateFromPrefilteredData", args...)
+	return CubeTextureFromJSObject(retVal, c.ctx)
+}
+
+// CubeTextureDelayLoadOpts contains optional parameters for CubeTexture.DelayLoad.
+type CubeTextureDelayLoadOpts struct {
+	ForcedExtension *string
+}
+
+// DelayLoad calls the DelayLoad method on the CubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#delayload
+func (c *CubeTexture) DelayLoad(opts *CubeTextureDelayLoadOpts) {
+	if opts == nil {
+		opts = &CubeTextureDelayLoadOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForcedExtension == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForcedExtension)
+	}
+
+	c.p.Call("delayLoad", args...)
+}
+
+// Dispose calls the Dispose method on the CubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#dispose
+func (c *CubeTexture) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	c.p.Call("dispose", args...)
+}
+
+// GetBaseSize calls the GetBaseSize method on the CubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#getbasesize
+func (c *CubeTexture) GetBaseSize() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getBaseSize", args...)
+	return retVal
+}
+
+// GetClassName calls the GetClassName method on the CubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#getclassname
+func (c *CubeTexture) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetInternalTexture calls the GetInternalTexture method on the CubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#getinternaltexture
+func (c *CubeTexture) GetInternalTexture() *InternalTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getInternalTexture", args...)
+	return InternalTextureFromJSObject(retVal, c.ctx)
+}
+
+// GetReflectionTextureMatrix calls the GetReflectionTextureMatrix method on the CubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#getreflectiontexturematrix
+func (c *CubeTexture) GetReflectionTextureMatrix() *Matrix {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getReflectionTextureMatrix", args...)
+	return MatrixFromJSObject(retVal, c.ctx)
+}
+
+// GetScene calls the GetScene method on the CubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#getscene
+func (c *CubeTexture) GetScene() *Scene {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getScene", args...)
+	return SceneFromJSObject(retVal, c.ctx)
+}
+
+// GetSize calls the GetSize method on the CubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#getsize
+func (c *CubeTexture) GetSize() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getSize", args...)
+	return retVal
+}
+
+// GetTextureMatrix calls the GetTextureMatrix method on the CubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#gettexturematrix
+func (c *CubeTexture) GetTextureMatrix() *Matrix {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getTextureMatrix", args...)
+	return MatrixFromJSObject(retVal, c.ctx)
+}
+
+// IsReady calls the IsReady method on the CubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#isready
+func (c *CubeTexture) IsReady() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// IsReadyOrNotBlocking calls the IsReadyOrNotBlocking method on the CubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#isreadyornotblocking
+func (c *CubeTexture) IsReadyOrNotBlocking() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("isReadyOrNotBlocking", args...)
+	return retVal.Bool()
+}
+
+// Parse calls the Parse method on the CubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#parse
+func (c *CubeTexture) Parse(parsedTexture interface{}, scene *Scene, rootUrl string) *CubeTexture {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, parsedTexture)
+	args = append(args, scene.JSObject())
+	args = append(args, rootUrl)
+
+	retVal := c.p.Call("Parse", args...)
+	return CubeTextureFromJSObject(retVal, c.ctx)
+}
+
+// CubeTextureReadPixelsOpts contains optional parameters for CubeTexture.ReadPixels.
+type CubeTextureReadPixelsOpts struct {
+	FaceIndex *float64
+	Level     *float64
+	Buffer    js.Value
+}
+
+// ReadPixels calls the ReadPixels method on the CubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#readpixels
+func (c *CubeTexture) ReadPixels(opts *CubeTextureReadPixelsOpts) js.Value {
+	if opts == nil {
+		opts = &CubeTextureReadPixelsOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+3)
+
+	if opts.FaceIndex == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FaceIndex)
+	}
+	if opts.Level == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Level)
+	}
+	if opts.Buffer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Buffer)
+	}
+
+	retVal := c.p.Call("readPixels", args...)
+	return retVal
+}
+
+// ReleaseInternalTexture calls the ReleaseInternalTexture method on the CubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#releaseinternaltexture
+func (c *CubeTexture) ReleaseInternalTexture() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	c.p.Call("releaseInternalTexture", args...)
+}
+
+// Scale calls the Scale method on the CubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#scale
+func (c *CubeTexture) Scale(ratio float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, ratio)
+
+	c.p.Call("scale", args...)
+}
+
+// Serialize calls the Serialize method on the CubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#serialize
+func (c *CubeTexture) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("serialize", args...)
+	return retVal
+}
+
+// SetReflectionTextureMatrix calls the SetReflectionTextureMatrix method on the CubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#setreflectiontexturematrix
+func (c *CubeTexture) SetReflectionTextureMatrix(value *Matrix) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, value.JSObject())
+
+	c.p.Call("setReflectionTextureMatrix", args...)
+}
+
+// ToString calls the ToString method on the CubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#tostring
+func (c *CubeTexture) ToString() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("toString", args...)
+	return retVal.String()
+}
+
+// UpdateSamplingMode calls the UpdateSamplingMode method on the CubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#updatesamplingmode
+func (c *CubeTexture) UpdateSamplingMode(samplingMode float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, samplingMode)
+
+	c.p.Call("updateSamplingMode", args...)
+}
+
+// CubeTextureUpdateURLOpts contains optional parameters for CubeTexture.UpdateURL.
+type CubeTextureUpdateURLOpts struct {
+	ForcedExtension *string
+	OnLoad          *func()
+}
+
+// UpdateURL calls the UpdateURL method on the CubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#updateurl
+func (c *CubeTexture) UpdateURL(url string, opts *CubeTextureUpdateURLOpts) {
+	if opts == nil {
+		opts = &CubeTextureUpdateURLOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, url)
+
+	if opts.ForcedExtension == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForcedExtension)
+	}
+	if opts.OnLoad == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnLoad)
+	}
+
+	c.p.Call("updateURL", args...)
+}
+
+// WhenAllReady calls the WhenAllReady method on the CubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#whenallready
+func (c *CubeTexture) WhenAllReady(textures *BaseTexture, callback func()) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, textures.JSObject())
+	args = append(args, callback)
+
+	c.p.Call("WhenAllReady", args...)
+}
+
+/*
+
+// Animations returns the Animations property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#animations
+func (c *CubeTexture) Animations(animations *Animation) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(animations.JSObject())
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#animations
+func (c *CubeTexture) SetAnimations(animations *Animation) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(animations.JSObject())
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// AnisotropicFilteringLevel returns the AnisotropicFilteringLevel property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#anisotropicfilteringlevel
+func (c *CubeTexture) AnisotropicFilteringLevel(anisotropicFilteringLevel float64) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(anisotropicFilteringLevel)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetAnisotropicFilteringLevel sets the AnisotropicFilteringLevel property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#anisotropicfilteringlevel
+func (c *CubeTexture) SetAnisotropicFilteringLevel(anisotropicFilteringLevel float64) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(anisotropicFilteringLevel)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// BoundingBoxPosition returns the BoundingBoxPosition property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#boundingboxposition
+func (c *CubeTexture) BoundingBoxPosition(boundingBoxPosition *Vector3) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(boundingBoxPosition.JSObject())
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetBoundingBoxPosition sets the BoundingBoxPosition property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#boundingboxposition
+func (c *CubeTexture) SetBoundingBoxPosition(boundingBoxPosition *Vector3) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(boundingBoxPosition.JSObject())
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// BoundingBoxSize returns the BoundingBoxSize property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#boundingboxsize
+func (c *CubeTexture) BoundingBoxSize(boundingBoxSize *Vector3) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(boundingBoxSize.JSObject())
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetBoundingBoxSize sets the BoundingBoxSize property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#boundingboxsize
+func (c *CubeTexture) SetBoundingBoxSize(boundingBoxSize *Vector3) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(boundingBoxSize.JSObject())
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// CanRescale returns the CanRescale property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#canrescale
+func (c *CubeTexture) CanRescale(canRescale bool) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(canRescale)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCanRescale sets the CanRescale property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#canrescale
+func (c *CubeTexture) SetCanRescale(canRescale bool) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(canRescale)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// CoordinatesIndex returns the CoordinatesIndex property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#coordinatesindex
+func (c *CubeTexture) CoordinatesIndex(coordinatesIndex float64) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(coordinatesIndex)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCoordinatesIndex sets the CoordinatesIndex property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#coordinatesindex
+func (c *CubeTexture) SetCoordinatesIndex(coordinatesIndex float64) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(coordinatesIndex)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// CoordinatesMode returns the CoordinatesMode property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#coordinatesmode
+func (c *CubeTexture) CoordinatesMode(coordinatesMode float64) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(coordinatesMode)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCoordinatesMode sets the CoordinatesMode property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#coordinatesmode
+func (c *CubeTexture) SetCoordinatesMode(coordinatesMode float64) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(coordinatesMode)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// DEFAULT_ANISOTROPIC_FILTERING_LEVEL returns the DEFAULT_ANISOTROPIC_FILTERING_LEVEL property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#default_anisotropic_filtering_level
+func (c *CubeTexture) DEFAULT_ANISOTROPIC_FILTERING_LEVEL(DEFAULT_ANISOTROPIC_FILTERING_LEVEL float64) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(DEFAULT_ANISOTROPIC_FILTERING_LEVEL)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetDEFAULT_ANISOTROPIC_FILTERING_LEVEL sets the DEFAULT_ANISOTROPIC_FILTERING_LEVEL property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#default_anisotropic_filtering_level
+func (c *CubeTexture) SetDEFAULT_ANISOTROPIC_FILTERING_LEVEL(DEFAULT_ANISOTROPIC_FILTERING_LEVEL float64) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(DEFAULT_ANISOTROPIC_FILTERING_LEVEL)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// DelayLoadState returns the DelayLoadState property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#delayloadstate
+func (c *CubeTexture) DelayLoadState(delayLoadState float64) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(delayLoadState)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetDelayLoadState sets the DelayLoadState property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#delayloadstate
+func (c *CubeTexture) SetDelayLoadState(delayLoadState float64) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(delayLoadState)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// GammaSpace returns the GammaSpace property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#gammaspace
+func (c *CubeTexture) GammaSpace(gammaSpace bool) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(gammaSpace)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetGammaSpace sets the GammaSpace property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#gammaspace
+func (c *CubeTexture) SetGammaSpace(gammaSpace bool) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(gammaSpace)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// GetAlphaFromRGB returns the GetAlphaFromRGB property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#getalphafromrgb
+func (c *CubeTexture) GetAlphaFromRGB(getAlphaFromRGB bool) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(getAlphaFromRGB)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetGetAlphaFromRGB sets the GetAlphaFromRGB property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#getalphafromrgb
+func (c *CubeTexture) SetGetAlphaFromRGB(getAlphaFromRGB bool) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(getAlphaFromRGB)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// HasAlpha returns the HasAlpha property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#hasalpha
+func (c *CubeTexture) HasAlpha(hasAlpha bool) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(hasAlpha)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetHasAlpha sets the HasAlpha property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#hasalpha
+func (c *CubeTexture) SetHasAlpha(hasAlpha bool) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(hasAlpha)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// InvertZ returns the InvertZ property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#invertz
+func (c *CubeTexture) InvertZ(invertZ bool) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(invertZ)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetInvertZ sets the InvertZ property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#invertz
+func (c *CubeTexture) SetInvertZ(invertZ bool) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(invertZ)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// IrradianceTexture returns the IrradianceTexture property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#irradiancetexture
+func (c *CubeTexture) IrradianceTexture(irradianceTexture *BaseTexture) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(irradianceTexture.JSObject())
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIrradianceTexture sets the IrradianceTexture property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#irradiancetexture
+func (c *CubeTexture) SetIrradianceTexture(irradianceTexture *BaseTexture) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(irradianceTexture.JSObject())
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// Is2DArray returns the Is2DArray property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#is2darray
+func (c *CubeTexture) Is2DArray(is2DArray bool) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(is2DArray)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIs2DArray sets the Is2DArray property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#is2darray
+func (c *CubeTexture) SetIs2DArray(is2DArray bool) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(is2DArray)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// Is3D returns the Is3D property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#is3d
+func (c *CubeTexture) Is3D(is3D bool) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(is3D)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIs3D sets the Is3D property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#is3d
+func (c *CubeTexture) SetIs3D(is3D bool) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(is3D)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// IsBlocking returns the IsBlocking property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#isblocking
+func (c *CubeTexture) IsBlocking(isBlocking bool) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(isBlocking)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsBlocking sets the IsBlocking property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#isblocking
+func (c *CubeTexture) SetIsBlocking(isBlocking bool) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(isBlocking)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// IsCube returns the IsCube property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#iscube
+func (c *CubeTexture) IsCube(isCube bool) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(isCube)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsCube sets the IsCube property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#iscube
+func (c *CubeTexture) SetIsCube(isCube bool) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(isCube)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// IsPrefiltered returns the IsPrefiltered property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#isprefiltered
+func (c *CubeTexture) IsPrefiltered(isPrefiltered bool) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(isPrefiltered)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsPrefiltered sets the IsPrefiltered property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#isprefiltered
+func (c *CubeTexture) SetIsPrefiltered(isPrefiltered bool) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(isPrefiltered)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// IsRGBD returns the IsRGBD property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#isrgbd
+func (c *CubeTexture) IsRGBD(isRGBD bool) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(isRGBD)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsRGBD sets the IsRGBD property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#isrgbd
+func (c *CubeTexture) SetIsRGBD(isRGBD bool) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(isRGBD)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// IsRenderTarget returns the IsRenderTarget property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#isrendertarget
+func (c *CubeTexture) IsRenderTarget(isRenderTarget bool) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(isRenderTarget)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsRenderTarget sets the IsRenderTarget property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#isrendertarget
+func (c *CubeTexture) SetIsRenderTarget(isRenderTarget bool) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(isRenderTarget)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// Level returns the Level property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#level
+func (c *CubeTexture) Level(level float64) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(level)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLevel sets the Level property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#level
+func (c *CubeTexture) SetLevel(level float64) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(level)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// LinearSpecularLOD returns the LinearSpecularLOD property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#linearspecularlod
+func (c *CubeTexture) LinearSpecularLOD(linearSpecularLOD bool) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(linearSpecularLOD)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLinearSpecularLOD sets the LinearSpecularLOD property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#linearspecularlod
+func (c *CubeTexture) SetLinearSpecularLOD(linearSpecularLOD bool) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(linearSpecularLOD)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// LodGenerationOffset returns the LodGenerationOffset property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#lodgenerationoffset
+func (c *CubeTexture) LodGenerationOffset(lodGenerationOffset float64) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(lodGenerationOffset)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLodGenerationOffset sets the LodGenerationOffset property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#lodgenerationoffset
+func (c *CubeTexture) SetLodGenerationOffset(lodGenerationOffset float64) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(lodGenerationOffset)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// LodGenerationScale returns the LodGenerationScale property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#lodgenerationscale
+func (c *CubeTexture) LodGenerationScale(lodGenerationScale float64) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(lodGenerationScale)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLodGenerationScale sets the LodGenerationScale property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#lodgenerationscale
+func (c *CubeTexture) SetLodGenerationScale(lodGenerationScale float64) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(lodGenerationScale)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#metadata
+func (c *CubeTexture) Metadata(metadata interface{}) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(metadata)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#metadata
+func (c *CubeTexture) SetMetadata(metadata interface{}) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(metadata)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#name
+func (c *CubeTexture) Name(name string) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(name)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#name
+func (c *CubeTexture) SetName(name string) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(name)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// NoMipmap returns the NoMipmap property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#nomipmap
+func (c *CubeTexture) NoMipmap(noMipmap bool) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(noMipmap)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNoMipmap sets the NoMipmap property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#nomipmap
+func (c *CubeTexture) SetNoMipmap(noMipmap bool) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(noMipmap)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// OnDispose returns the OnDispose property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#ondispose
+func (c *CubeTexture) OnDispose(onDispose func()) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(onDispose)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnDispose sets the OnDispose property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#ondispose
+func (c *CubeTexture) SetOnDispose(onDispose func()) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(onDispose)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// OnDisposeObservable returns the OnDisposeObservable property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#ondisposeobservable
+func (c *CubeTexture) OnDisposeObservable(onDisposeObservable *Observable) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(onDisposeObservable.JSObject())
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnDisposeObservable sets the OnDisposeObservable property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#ondisposeobservable
+func (c *CubeTexture) SetOnDisposeObservable(onDisposeObservable *Observable) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(onDisposeObservable.JSObject())
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// ReservedDataStore returns the ReservedDataStore property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#reserveddatastore
+func (c *CubeTexture) ReservedDataStore(reservedDataStore interface{}) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(reservedDataStore)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetReservedDataStore sets the ReservedDataStore property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#reserveddatastore
+func (c *CubeTexture) SetReservedDataStore(reservedDataStore interface{}) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(reservedDataStore)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// RotationY returns the RotationY property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#rotationy
+func (c *CubeTexture) RotationY(rotationY float64) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(rotationY)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetRotationY sets the RotationY property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#rotationy
+func (c *CubeTexture) SetRotationY(rotationY float64) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(rotationY)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SphericalPolynomial returns the SphericalPolynomial property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#sphericalpolynomial
+func (c *CubeTexture) SphericalPolynomial(sphericalPolynomial *SphericalPolynomial) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(sphericalPolynomial.JSObject())
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetSphericalPolynomial sets the SphericalPolynomial property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#sphericalpolynomial
+func (c *CubeTexture) SetSphericalPolynomial(sphericalPolynomial *SphericalPolynomial) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(sphericalPolynomial.JSObject())
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// TextureFormat returns the TextureFormat property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#textureformat
+func (c *CubeTexture) TextureFormat(textureFormat float64) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(textureFormat)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetTextureFormat sets the TextureFormat property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#textureformat
+func (c *CubeTexture) SetTextureFormat(textureFormat float64) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(textureFormat)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// TextureType returns the TextureType property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#texturetype
+func (c *CubeTexture) TextureType(textureType float64) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(textureType)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetTextureType sets the TextureType property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#texturetype
+func (c *CubeTexture) SetTextureType(textureType float64) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(textureType)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// Uid returns the Uid property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#uid
+func (c *CubeTexture) Uid(uid string) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(uid)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUid sets the Uid property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#uid
+func (c *CubeTexture) SetUid(uid string) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(uid)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#uniqueid
+func (c *CubeTexture) UniqueId(uniqueId float64) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(uniqueId)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#uniqueid
+func (c *CubeTexture) SetUniqueId(uniqueId float64) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(uniqueId)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// Url returns the Url property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#url
+func (c *CubeTexture) Url(url string) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(url)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUrl sets the Url property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#url
+func (c *CubeTexture) SetUrl(url string) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(url)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// WrapR returns the WrapR property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#wrapr
+func (c *CubeTexture) WrapR(wrapR float64) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(wrapR)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWrapR sets the WrapR property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#wrapr
+func (c *CubeTexture) SetWrapR(wrapR float64) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(wrapR)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// WrapU returns the WrapU property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#wrapu
+func (c *CubeTexture) WrapU(wrapU float64) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(wrapU)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWrapU sets the WrapU property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#wrapu
+func (c *CubeTexture) SetWrapU(wrapU float64) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(wrapU)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// WrapV returns the WrapV property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#wrapv
+func (c *CubeTexture) WrapV(wrapV float64) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(wrapV)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWrapV sets the WrapV property of class CubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cubetexture#wrapv
+func (c *CubeTexture) SetWrapV(wrapV float64) *CubeTexture {
+	p := ba.ctx.Get("CubeTexture").New(wrapV)
+	return CubeTextureFromJSObject(p, ba.ctx)
+}
+
+*/

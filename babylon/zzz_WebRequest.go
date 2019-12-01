@@ -27,4 +27,239 @@ func WebRequestFromJSObject(p js.Value, ctx js.Value) *WebRequest {
 	return &WebRequest{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// Abort calls the Abort method on the WebRequest object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webrequest#abort
+func (w *WebRequest) Abort() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	w.p.Call("abort", args...)
+}
+
+// GetResponseHeader calls the GetResponseHeader method on the WebRequest object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webrequest#getresponseheader
+func (w *WebRequest) GetResponseHeader(name string) string {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := w.p.Call("getResponseHeader", args...)
+	return retVal.String()
+}
+
+// Open calls the Open method on the WebRequest object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webrequest#open
+func (w *WebRequest) Open(method string, url string) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, method)
+	args = append(args, url)
+
+	w.p.Call("open", args...)
+}
+
+// WebRequestSendOpts contains optional parameters for WebRequest.Send.
+type WebRequestSendOpts struct {
+	Body *Document
+}
+
+// Send calls the Send method on the WebRequest object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webrequest#send
+func (w *WebRequest) Send(opts *WebRequestSendOpts) {
+	if opts == nil {
+		opts = &WebRequestSendOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Body == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Body.JSObject())
+	}
+
+	w.p.Call("send", args...)
+}
+
+// SetRequestHeader calls the SetRequestHeader method on the WebRequest object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webrequest#setrequestheader
+func (w *WebRequest) SetRequestHeader(name string, value string) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value)
+
+	w.p.Call("setRequestHeader", args...)
+}
+
+/*
+
+// CustomRequestHeaders returns the CustomRequestHeaders property of class WebRequest.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webrequest#customrequestheaders
+func (w *WebRequest) CustomRequestHeaders(CustomRequestHeaders js.Value) *WebRequest {
+	p := ba.ctx.Get("WebRequest").New(CustomRequestHeaders)
+	return WebRequestFromJSObject(p, ba.ctx)
+}
+
+// SetCustomRequestHeaders sets the CustomRequestHeaders property of class WebRequest.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webrequest#customrequestheaders
+func (w *WebRequest) SetCustomRequestHeaders(CustomRequestHeaders js.Value) *WebRequest {
+	p := ba.ctx.Get("WebRequest").New(CustomRequestHeaders)
+	return WebRequestFromJSObject(p, ba.ctx)
+}
+
+// CustomRequestModifiers returns the CustomRequestModifiers property of class WebRequest.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webrequest#customrequestmodifiers
+func (w *WebRequest) CustomRequestModifiers(CustomRequestModifiers func()) *WebRequest {
+	p := ba.ctx.Get("WebRequest").New(CustomRequestModifiers)
+	return WebRequestFromJSObject(p, ba.ctx)
+}
+
+// SetCustomRequestModifiers sets the CustomRequestModifiers property of class WebRequest.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webrequest#customrequestmodifiers
+func (w *WebRequest) SetCustomRequestModifiers(CustomRequestModifiers func()) *WebRequest {
+	p := ba.ctx.Get("WebRequest").New(CustomRequestModifiers)
+	return WebRequestFromJSObject(p, ba.ctx)
+}
+
+// Onprogress returns the Onprogress property of class WebRequest.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webrequest#onprogress
+func (w *WebRequest) Onprogress(onprogress func()) *WebRequest {
+	p := ba.ctx.Get("WebRequest").New(onprogress)
+	return WebRequestFromJSObject(p, ba.ctx)
+}
+
+// SetOnprogress sets the Onprogress property of class WebRequest.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webrequest#onprogress
+func (w *WebRequest) SetOnprogress(onprogress func()) *WebRequest {
+	p := ba.ctx.Get("WebRequest").New(onprogress)
+	return WebRequestFromJSObject(p, ba.ctx)
+}
+
+// ReadyState returns the ReadyState property of class WebRequest.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webrequest#readystate
+func (w *WebRequest) ReadyState(readyState float64) *WebRequest {
+	p := ba.ctx.Get("WebRequest").New(readyState)
+	return WebRequestFromJSObject(p, ba.ctx)
+}
+
+// SetReadyState sets the ReadyState property of class WebRequest.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webrequest#readystate
+func (w *WebRequest) SetReadyState(readyState float64) *WebRequest {
+	p := ba.ctx.Get("WebRequest").New(readyState)
+	return WebRequestFromJSObject(p, ba.ctx)
+}
+
+// Response returns the Response property of class WebRequest.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webrequest#response
+func (w *WebRequest) Response(response interface{}) *WebRequest {
+	p := ba.ctx.Get("WebRequest").New(response)
+	return WebRequestFromJSObject(p, ba.ctx)
+}
+
+// SetResponse sets the Response property of class WebRequest.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webrequest#response
+func (w *WebRequest) SetResponse(response interface{}) *WebRequest {
+	p := ba.ctx.Get("WebRequest").New(response)
+	return WebRequestFromJSObject(p, ba.ctx)
+}
+
+// ResponseText returns the ResponseText property of class WebRequest.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webrequest#responsetext
+func (w *WebRequest) ResponseText(responseText string) *WebRequest {
+	p := ba.ctx.Get("WebRequest").New(responseText)
+	return WebRequestFromJSObject(p, ba.ctx)
+}
+
+// SetResponseText sets the ResponseText property of class WebRequest.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webrequest#responsetext
+func (w *WebRequest) SetResponseText(responseText string) *WebRequest {
+	p := ba.ctx.Get("WebRequest").New(responseText)
+	return WebRequestFromJSObject(p, ba.ctx)
+}
+
+// ResponseType returns the ResponseType property of class WebRequest.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webrequest#responsetype
+func (w *WebRequest) ResponseType(responseType *XMLHttpRequestResponseType) *WebRequest {
+	p := ba.ctx.Get("WebRequest").New(responseType.JSObject())
+	return WebRequestFromJSObject(p, ba.ctx)
+}
+
+// SetResponseType sets the ResponseType property of class WebRequest.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webrequest#responsetype
+func (w *WebRequest) SetResponseType(responseType *XMLHttpRequestResponseType) *WebRequest {
+	p := ba.ctx.Get("WebRequest").New(responseType.JSObject())
+	return WebRequestFromJSObject(p, ba.ctx)
+}
+
+// ResponseURL returns the ResponseURL property of class WebRequest.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webrequest#responseurl
+func (w *WebRequest) ResponseURL(responseURL string) *WebRequest {
+	p := ba.ctx.Get("WebRequest").New(responseURL)
+	return WebRequestFromJSObject(p, ba.ctx)
+}
+
+// SetResponseURL sets the ResponseURL property of class WebRequest.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webrequest#responseurl
+func (w *WebRequest) SetResponseURL(responseURL string) *WebRequest {
+	p := ba.ctx.Get("WebRequest").New(responseURL)
+	return WebRequestFromJSObject(p, ba.ctx)
+}
+
+// Status returns the Status property of class WebRequest.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webrequest#status
+func (w *WebRequest) Status(status float64) *WebRequest {
+	p := ba.ctx.Get("WebRequest").New(status)
+	return WebRequestFromJSObject(p, ba.ctx)
+}
+
+// SetStatus sets the Status property of class WebRequest.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webrequest#status
+func (w *WebRequest) SetStatus(status float64) *WebRequest {
+	p := ba.ctx.Get("WebRequest").New(status)
+	return WebRequestFromJSObject(p, ba.ctx)
+}
+
+// StatusText returns the StatusText property of class WebRequest.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webrequest#statustext
+func (w *WebRequest) StatusText(statusText string) *WebRequest {
+	p := ba.ctx.Get("WebRequest").New(statusText)
+	return WebRequestFromJSObject(p, ba.ctx)
+}
+
+// SetStatusText sets the StatusText property of class WebRequest.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webrequest#statustext
+func (w *WebRequest) SetStatusText(statusText string) *WebRequest {
+	p := ba.ctx.Get("WebRequest").New(statusText)
+	return WebRequestFromJSObject(p, ba.ctx)
+}
+
+*/

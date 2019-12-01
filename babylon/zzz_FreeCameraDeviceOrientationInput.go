@@ -34,8 +34,124 @@ func FreeCameraDeviceOrientationInputFromJSObject(p js.Value, ctx js.Value) *Fre
 //
 // https://doc.babylonjs.com/api/classes/babylon.freecameradeviceorientationinput
 func (ba *Babylon) NewFreeCameraDeviceOrientationInput() *FreeCameraDeviceOrientationInput {
-	p := ba.ctx.Get("FreeCameraDeviceOrientationInput").New()
+
+	args := make([]interface{}, 0, 0+0)
+
+	p := ba.ctx.Get("FreeCameraDeviceOrientationInput").New(args...)
 	return FreeCameraDeviceOrientationInputFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// FreeCameraDeviceOrientationInputAttachControlOpts contains optional parameters for FreeCameraDeviceOrientationInput.AttachControl.
+type FreeCameraDeviceOrientationInputAttachControlOpts struct {
+	NoPreventDefault *bool
+}
+
+// AttachControl calls the AttachControl method on the FreeCameraDeviceOrientationInput object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.freecameradeviceorientationinput#attachcontrol
+func (f *FreeCameraDeviceOrientationInput) AttachControl(element js.Value, opts *FreeCameraDeviceOrientationInputAttachControlOpts) {
+	if opts == nil {
+		opts = &FreeCameraDeviceOrientationInputAttachControlOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, element)
+
+	if opts.NoPreventDefault == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoPreventDefault)
+	}
+
+	f.p.Call("attachControl", args...)
+}
+
+// CheckInputs calls the CheckInputs method on the FreeCameraDeviceOrientationInput object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.freecameradeviceorientationinput#checkinputs
+func (f *FreeCameraDeviceOrientationInput) CheckInputs() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	f.p.Call("checkInputs", args...)
+}
+
+// DetachControl calls the DetachControl method on the FreeCameraDeviceOrientationInput object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.freecameradeviceorientationinput#detachcontrol
+func (f *FreeCameraDeviceOrientationInput) DetachControl(element js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, element)
+
+	f.p.Call("detachControl", args...)
+}
+
+// GetClassName calls the GetClassName method on the FreeCameraDeviceOrientationInput object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.freecameradeviceorientationinput#getclassname
+func (f *FreeCameraDeviceOrientationInput) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetSimpleName calls the GetSimpleName method on the FreeCameraDeviceOrientationInput object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.freecameradeviceorientationinput#getsimplename
+func (f *FreeCameraDeviceOrientationInput) GetSimpleName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("getSimpleName", args...)
+	return retVal.String()
+}
+
+// FreeCameraDeviceOrientationInputWaitForOrientationChangeAsyncOpts contains optional parameters for FreeCameraDeviceOrientationInput.WaitForOrientationChangeAsync.
+type FreeCameraDeviceOrientationInputWaitForOrientationChangeAsyncOpts struct {
+	Timeout *float64
+}
+
+// WaitForOrientationChangeAsync calls the WaitForOrientationChangeAsync method on the FreeCameraDeviceOrientationInput object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.freecameradeviceorientationinput#waitfororientationchangeasync
+func (f *FreeCameraDeviceOrientationInput) WaitForOrientationChangeAsync(opts *FreeCameraDeviceOrientationInputWaitForOrientationChangeAsyncOpts) *unknown {
+	if opts == nil {
+		opts = &FreeCameraDeviceOrientationInputWaitForOrientationChangeAsyncOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Timeout == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Timeout)
+	}
+
+	retVal := f.p.Call("WaitForOrientationChangeAsync", args...)
+	return unknownFromJSObject(retVal, f.ctx)
+}
+
+/*
+
+// Camera returns the Camera property of class FreeCameraDeviceOrientationInput.
+//
+// https://doc.babylonjs.com/api/classes/babylon.freecameradeviceorientationinput#camera
+func (f *FreeCameraDeviceOrientationInput) Camera(camera *FreeCamera) *FreeCameraDeviceOrientationInput {
+	p := ba.ctx.Get("FreeCameraDeviceOrientationInput").New(camera.JSObject())
+	return FreeCameraDeviceOrientationInputFromJSObject(p, ba.ctx)
+}
+
+// SetCamera sets the Camera property of class FreeCameraDeviceOrientationInput.
+//
+// https://doc.babylonjs.com/api/classes/babylon.freecameradeviceorientationinput#camera
+func (f *FreeCameraDeviceOrientationInput) SetCamera(camera *FreeCamera) *FreeCameraDeviceOrientationInput {
+	p := ba.ctx.Get("FreeCameraDeviceOrientationInput").New(camera.JSObject())
+	return FreeCameraDeviceOrientationInputFromJSObject(p, ba.ctx)
+}
+
+*/

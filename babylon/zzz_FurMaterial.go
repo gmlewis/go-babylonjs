@@ -31,8 +31,1695 @@ func FurMaterialFromJSObject(p js.Value, ctx js.Value) *FurMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.furmaterial
 func (ba *Babylon) NewFurMaterial(name string, scene *Scene) *FurMaterial {
-	p := ba.ctx.Get("FurMaterial").New(name, scene.JSObject())
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("FurMaterial").New(args...)
 	return FurMaterialFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// FurMaterialBindOpts contains optional parameters for FurMaterial.Bind.
+type FurMaterialBindOpts struct {
+	Mesh *Mesh
+}
+
+// Bind calls the Bind method on the FurMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#bind
+func (f *FurMaterial) Bind(world *Matrix, opts *FurMaterialBindOpts) {
+	if opts == nil {
+		opts = &FurMaterialBindOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, world.JSObject())
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	f.p.Call("bind", args...)
+}
+
+// BindForSubMesh calls the BindForSubMesh method on the FurMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#bindforsubmesh
+func (f *FurMaterial) BindForSubMesh(world *Matrix, mesh *Mesh, subMesh *SubMesh) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, world.JSObject())
+	args = append(args, mesh.JSObject())
+	args = append(args, subMesh.JSObject())
+
+	f.p.Call("bindForSubMesh", args...)
+}
+
+// BindOnlyNormalMatrix calls the BindOnlyNormalMatrix method on the FurMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#bindonlynormalmatrix
+func (f *FurMaterial) BindOnlyNormalMatrix(normalMatrix *Matrix) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, normalMatrix.JSObject())
+
+	f.p.Call("bindOnlyNormalMatrix", args...)
+}
+
+// BindOnlyWorldMatrix calls the BindOnlyWorldMatrix method on the FurMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#bindonlyworldmatrix
+func (f *FurMaterial) BindOnlyWorldMatrix(world *Matrix) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, world.JSObject())
+
+	f.p.Call("bindOnlyWorldMatrix", args...)
+}
+
+// BindSceneUniformBuffer calls the BindSceneUniformBuffer method on the FurMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#bindsceneuniformbuffer
+func (f *FurMaterial) BindSceneUniformBuffer(effect *Effect, sceneUbo *UniformBuffer) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, effect.JSObject())
+	args = append(args, sceneUbo.JSObject())
+
+	f.p.Call("bindSceneUniformBuffer", args...)
+}
+
+// BindView calls the BindView method on the FurMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#bindview
+func (f *FurMaterial) BindView(effect *Effect) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, effect.JSObject())
+
+	f.p.Call("bindView", args...)
+}
+
+// BindViewProjection calls the BindViewProjection method on the FurMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#bindviewprojection
+func (f *FurMaterial) BindViewProjection(effect *Effect) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, effect.JSObject())
+
+	f.p.Call("bindViewProjection", args...)
+}
+
+// Clone calls the Clone method on the FurMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#clone
+func (f *FurMaterial) Clone(name string) *FurMaterial {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := f.p.Call("clone", args...)
+	return FurMaterialFromJSObject(retVal, f.ctx)
+}
+
+// FurMaterialDisposeOpts contains optional parameters for FurMaterial.Dispose.
+type FurMaterialDisposeOpts struct {
+	ForceDisposeEffect *bool
+}
+
+// Dispose calls the Dispose method on the FurMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#dispose
+func (f *FurMaterial) Dispose(opts *FurMaterialDisposeOpts) {
+	if opts == nil {
+		opts = &FurMaterialDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForceDisposeEffect == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceDisposeEffect)
+	}
+
+	f.p.Call("dispose", args...)
+}
+
+// FurMaterialForceCompilationOpts contains optional parameters for FurMaterial.ForceCompilation.
+type FurMaterialForceCompilationOpts struct {
+	OnCompiled *func()
+	Options    js.Value
+	OnError    *func()
+}
+
+// ForceCompilation calls the ForceCompilation method on the FurMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#forcecompilation
+func (f *FurMaterial) ForceCompilation(mesh *AbstractMesh, opts *FurMaterialForceCompilationOpts) {
+	if opts == nil {
+		opts = &FurMaterialForceCompilationOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, mesh.JSObject())
+
+	if opts.OnCompiled == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnCompiled)
+	}
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+
+	f.p.Call("forceCompilation", args...)
+}
+
+// FurMaterialForceCompilationAsyncOpts contains optional parameters for FurMaterial.ForceCompilationAsync.
+type FurMaterialForceCompilationAsyncOpts struct {
+	Options js.Value
+}
+
+// ForceCompilationAsync calls the ForceCompilationAsync method on the FurMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#forcecompilationasync
+func (f *FurMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *FurMaterialForceCompilationAsyncOpts) {
+	if opts == nil {
+		opts = &FurMaterialForceCompilationAsyncOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, mesh.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	f.p.Call("forceCompilationAsync", args...)
+}
+
+// Freeze calls the Freeze method on the FurMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#freeze
+func (f *FurMaterial) Freeze() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	f.p.Call("freeze", args...)
+}
+
+// FurifyMesh calls the FurifyMesh method on the FurMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#furifymesh
+func (f *FurMaterial) FurifyMesh(sourceMesh *Mesh, quality float64) *Mesh {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, sourceMesh.JSObject())
+	args = append(args, quality)
+
+	retVal := f.p.Call("FurifyMesh", args...)
+	return MeshFromJSObject(retVal, f.ctx)
+}
+
+// GenerateTexture calls the GenerateTexture method on the FurMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#generatetexture
+func (f *FurMaterial) GenerateTexture(name string, scene *Scene) *DynamicTexture {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, scene.JSObject())
+
+	retVal := f.p.Call("GenerateTexture", args...)
+	return DynamicTextureFromJSObject(retVal, f.ctx)
+}
+
+// GetActiveTextures calls the GetActiveTextures method on the FurMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#getactivetextures
+func (f *FurMaterial) GetActiveTextures() *BaseTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("getActiveTextures", args...)
+	return BaseTextureFromJSObject(retVal, f.ctx)
+}
+
+// GetAlphaTestTexture calls the GetAlphaTestTexture method on the FurMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#getalphatesttexture
+func (f *FurMaterial) GetAlphaTestTexture() *BaseTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("getAlphaTestTexture", args...)
+	return BaseTextureFromJSObject(retVal, f.ctx)
+}
+
+// GetAnimatables calls the GetAnimatables method on the FurMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#getanimatables
+func (f *FurMaterial) GetAnimatables() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("getAnimatables", args...)
+	return retVal
+}
+
+// GetBindedMeshes calls the GetBindedMeshes method on the FurMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#getbindedmeshes
+func (f *FurMaterial) GetBindedMeshes() *AbstractMesh {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("getBindedMeshes", args...)
+	return AbstractMeshFromJSObject(retVal, f.ctx)
+}
+
+// GetClassName calls the GetClassName method on the FurMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#getclassname
+func (f *FurMaterial) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetEffect calls the GetEffect method on the FurMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#geteffect
+func (f *FurMaterial) GetEffect() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("getEffect", args...)
+	return EffectFromJSObject(retVal, f.ctx)
+}
+
+// GetScene calls the GetScene method on the FurMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#getscene
+func (f *FurMaterial) GetScene() *Scene {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("getScene", args...)
+	return SceneFromJSObject(retVal, f.ctx)
+}
+
+// HasTexture calls the HasTexture method on the FurMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#hastexture
+func (f *FurMaterial) HasTexture(texture *BaseTexture) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, texture.JSObject())
+
+	retVal := f.p.Call("hasTexture", args...)
+	return retVal.Bool()
+}
+
+// FurMaterialIsReadyOpts contains optional parameters for FurMaterial.IsReady.
+type FurMaterialIsReadyOpts struct {
+	Mesh         *AbstractMesh
+	UseInstances *bool
+}
+
+// IsReady calls the IsReady method on the FurMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#isready
+func (f *FurMaterial) IsReady(opts *FurMaterialIsReadyOpts) bool {
+	if opts == nil {
+		opts = &FurMaterialIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := f.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// FurMaterialIsReadyForSubMeshOpts contains optional parameters for FurMaterial.IsReadyForSubMesh.
+type FurMaterialIsReadyForSubMeshOpts struct {
+	UseInstances *bool
+}
+
+// IsReadyForSubMesh calls the IsReadyForSubMesh method on the FurMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#isreadyforsubmesh
+func (f *FurMaterial) IsReadyForSubMesh(mesh *AbstractMesh, subMesh *SubMesh, opts *FurMaterialIsReadyForSubMeshOpts) bool {
+	if opts == nil {
+		opts = &FurMaterialIsReadyForSubMeshOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, subMesh.JSObject())
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := f.p.Call("isReadyForSubMesh", args...)
+	return retVal.Bool()
+}
+
+// MarkAsDirty calls the MarkAsDirty method on the FurMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#markasdirty
+func (f *FurMaterial) MarkAsDirty(flag float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, flag)
+
+	f.p.Call("markAsDirty", args...)
+}
+
+// MarkDirty calls the MarkDirty method on the FurMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#markdirty
+func (f *FurMaterial) MarkDirty() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	f.p.Call("markDirty", args...)
+}
+
+// NeedAlphaBlending calls the NeedAlphaBlending method on the FurMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#needalphablending
+func (f *FurMaterial) NeedAlphaBlending() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("needAlphaBlending", args...)
+	return retVal.Bool()
+}
+
+// NeedAlphaBlendingForMesh calls the NeedAlphaBlendingForMesh method on the FurMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#needalphablendingformesh
+func (f *FurMaterial) NeedAlphaBlendingForMesh(mesh *AbstractMesh) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	retVal := f.p.Call("needAlphaBlendingForMesh", args...)
+	return retVal.Bool()
+}
+
+// NeedAlphaTesting calls the NeedAlphaTesting method on the FurMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#needalphatesting
+func (f *FurMaterial) NeedAlphaTesting() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("needAlphaTesting", args...)
+	return retVal.Bool()
+}
+
+// Parse calls the Parse method on the FurMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#parse
+func (f *FurMaterial) Parse(source interface{}, scene *Scene, rootUrl string) *FurMaterial {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, source)
+	args = append(args, scene.JSObject())
+	args = append(args, rootUrl)
+
+	retVal := f.p.Call("Parse", args...)
+	return FurMaterialFromJSObject(retVal, f.ctx)
+}
+
+// Serialize calls the Serialize method on the FurMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#serialize
+func (f *FurMaterial) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("serialize", args...)
+	return retVal
+}
+
+// FurMaterialToStringOpts contains optional parameters for FurMaterial.ToString.
+type FurMaterialToStringOpts struct {
+	FullDetails *bool
+}
+
+// ToString calls the ToString method on the FurMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#tostring
+func (f *FurMaterial) ToString(opts *FurMaterialToStringOpts) string {
+	if opts == nil {
+		opts = &FurMaterialToStringOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.FullDetails == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FullDetails)
+	}
+
+	retVal := f.p.Call("toString", args...)
+	return retVal.String()
+}
+
+// Unbind calls the Unbind method on the FurMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#unbind
+func (f *FurMaterial) Unbind() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	f.p.Call("unbind", args...)
+}
+
+// Unfreeze calls the Unfreeze method on the FurMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#unfreeze
+func (f *FurMaterial) Unfreeze() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	f.p.Call("unfreeze", args...)
+}
+
+// UpdateFur calls the UpdateFur method on the FurMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#updatefur
+func (f *FurMaterial) UpdateFur() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	f.p.Call("updateFur", args...)
+}
+
+/*
+
+// AllDirtyFlag returns the AllDirtyFlag property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#alldirtyflag
+func (f *FurMaterial) AllDirtyFlag(AllDirtyFlag float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(AllDirtyFlag)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAllDirtyFlag sets the AllDirtyFlag property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#alldirtyflag
+func (f *FurMaterial) SetAllDirtyFlag(AllDirtyFlag float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(AllDirtyFlag)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// AllowShaderHotSwapping returns the AllowShaderHotSwapping property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#allowshaderhotswapping
+func (f *FurMaterial) AllowShaderHotSwapping(allowShaderHotSwapping bool) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(allowShaderHotSwapping)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAllowShaderHotSwapping sets the AllowShaderHotSwapping property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#allowshaderhotswapping
+func (f *FurMaterial) SetAllowShaderHotSwapping(allowShaderHotSwapping bool) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(allowShaderHotSwapping)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// Alpha returns the Alpha property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#alpha
+func (f *FurMaterial) Alpha(alpha float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(alpha)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAlpha sets the Alpha property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#alpha
+func (f *FurMaterial) SetAlpha(alpha float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(alpha)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// AlphaMode returns the AlphaMode property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#alphamode
+func (f *FurMaterial) AlphaMode(alphaMode float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(alphaMode)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaMode sets the AlphaMode property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#alphamode
+func (f *FurMaterial) SetAlphaMode(alphaMode float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(alphaMode)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// Animations returns the Animations property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#animations
+func (f *FurMaterial) Animations(animations []Animation) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(animations.JSObject())
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#animations
+func (f *FurMaterial) SetAnimations(animations []Animation) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(animations.JSObject())
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// AttributesDirtyFlag returns the AttributesDirtyFlag property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#attributesdirtyflag
+func (f *FurMaterial) AttributesDirtyFlag(AttributesDirtyFlag float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(AttributesDirtyFlag)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAttributesDirtyFlag sets the AttributesDirtyFlag property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#attributesdirtyflag
+func (f *FurMaterial) SetAttributesDirtyFlag(AttributesDirtyFlag float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(AttributesDirtyFlag)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// BackFaceCulling returns the BackFaceCulling property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#backfaceculling
+func (f *FurMaterial) BackFaceCulling(backFaceCulling bool) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(backFaceCulling)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetBackFaceCulling sets the BackFaceCulling property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#backfaceculling
+func (f *FurMaterial) SetBackFaceCulling(backFaceCulling bool) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(backFaceCulling)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// CheckReadyOnEveryCall returns the CheckReadyOnEveryCall property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#checkreadyoneverycall
+func (f *FurMaterial) CheckReadyOnEveryCall(checkReadyOnEveryCall bool) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(checkReadyOnEveryCall)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCheckReadyOnEveryCall sets the CheckReadyOnEveryCall property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#checkreadyoneverycall
+func (f *FurMaterial) SetCheckReadyOnEveryCall(checkReadyOnEveryCall bool) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(checkReadyOnEveryCall)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// CheckReadyOnlyOnce returns the CheckReadyOnlyOnce property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#checkreadyonlyonce
+func (f *FurMaterial) CheckReadyOnlyOnce(checkReadyOnlyOnce bool) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(checkReadyOnlyOnce)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCheckReadyOnlyOnce sets the CheckReadyOnlyOnce property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#checkreadyonlyonce
+func (f *FurMaterial) SetCheckReadyOnlyOnce(checkReadyOnlyOnce bool) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(checkReadyOnlyOnce)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// ClockWiseSideOrientation returns the ClockWiseSideOrientation property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#clockwisesideorientation
+func (f *FurMaterial) ClockWiseSideOrientation(ClockWiseSideOrientation float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(ClockWiseSideOrientation)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetClockWiseSideOrientation sets the ClockWiseSideOrientation property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#clockwisesideorientation
+func (f *FurMaterial) SetClockWiseSideOrientation(ClockWiseSideOrientation float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(ClockWiseSideOrientation)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// CounterClockWiseSideOrientation returns the CounterClockWiseSideOrientation property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#counterclockwisesideorientation
+func (f *FurMaterial) CounterClockWiseSideOrientation(CounterClockWiseSideOrientation float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(CounterClockWiseSideOrientation)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCounterClockWiseSideOrientation sets the CounterClockWiseSideOrientation property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#counterclockwisesideorientation
+func (f *FurMaterial) SetCounterClockWiseSideOrientation(CounterClockWiseSideOrientation float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(CounterClockWiseSideOrientation)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// DepthFunction returns the DepthFunction property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#depthfunction
+func (f *FurMaterial) DepthFunction(depthFunction float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(depthFunction)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDepthFunction sets the DepthFunction property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#depthfunction
+func (f *FurMaterial) SetDepthFunction(depthFunction float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(depthFunction)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// DiffuseColor returns the DiffuseColor property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#diffusecolor
+func (f *FurMaterial) DiffuseColor(diffuseColor *Color3) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(diffuseColor.JSObject())
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDiffuseColor sets the DiffuseColor property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#diffusecolor
+func (f *FurMaterial) SetDiffuseColor(diffuseColor *Color3) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(diffuseColor.JSObject())
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// DiffuseTexture returns the DiffuseTexture property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#diffusetexture
+func (f *FurMaterial) DiffuseTexture(diffuseTexture *BaseTexture) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(diffuseTexture.JSObject())
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDiffuseTexture sets the DiffuseTexture property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#diffusetexture
+func (f *FurMaterial) SetDiffuseTexture(diffuseTexture *BaseTexture) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(diffuseTexture.JSObject())
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// DisableDepthWrite returns the DisableDepthWrite property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#disabledepthwrite
+func (f *FurMaterial) DisableDepthWrite(disableDepthWrite bool) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(disableDepthWrite)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDisableDepthWrite sets the DisableDepthWrite property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#disabledepthwrite
+func (f *FurMaterial) SetDisableDepthWrite(disableDepthWrite bool) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(disableDepthWrite)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// DisableLighting returns the DisableLighting property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#disablelighting
+func (f *FurMaterial) DisableLighting(disableLighting bool) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(disableLighting)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDisableLighting sets the DisableLighting property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#disablelighting
+func (f *FurMaterial) SetDisableLighting(disableLighting bool) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(disableLighting)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// DoNotSerialize returns the DoNotSerialize property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#donotserialize
+func (f *FurMaterial) DoNotSerialize(doNotSerialize bool) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(doNotSerialize)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDoNotSerialize sets the DoNotSerialize property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#donotserialize
+func (f *FurMaterial) SetDoNotSerialize(doNotSerialize bool) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(doNotSerialize)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// FillMode returns the FillMode property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#fillmode
+func (f *FurMaterial) FillMode(fillMode float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(fillMode)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFillMode sets the FillMode property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#fillmode
+func (f *FurMaterial) SetFillMode(fillMode float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(fillMode)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// FogEnabled returns the FogEnabled property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#fogenabled
+func (f *FurMaterial) FogEnabled(fogEnabled bool) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(fogEnabled)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFogEnabled sets the FogEnabled property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#fogenabled
+func (f *FurMaterial) SetFogEnabled(fogEnabled bool) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(fogEnabled)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// ForceDepthWrite returns the ForceDepthWrite property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#forcedepthwrite
+func (f *FurMaterial) ForceDepthWrite(forceDepthWrite bool) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(forceDepthWrite)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetForceDepthWrite sets the ForceDepthWrite property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#forcedepthwrite
+func (f *FurMaterial) SetForceDepthWrite(forceDepthWrite bool) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(forceDepthWrite)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// FresnelDirtyFlag returns the FresnelDirtyFlag property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#fresneldirtyflag
+func (f *FurMaterial) FresnelDirtyFlag(FresnelDirtyFlag float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(FresnelDirtyFlag)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFresnelDirtyFlag sets the FresnelDirtyFlag property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#fresneldirtyflag
+func (f *FurMaterial) SetFresnelDirtyFlag(FresnelDirtyFlag float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(FresnelDirtyFlag)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// FurAngle returns the FurAngle property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#furangle
+func (f *FurMaterial) FurAngle(furAngle float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(furAngle)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFurAngle sets the FurAngle property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#furangle
+func (f *FurMaterial) SetFurAngle(furAngle float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(furAngle)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// FurColor returns the FurColor property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#furcolor
+func (f *FurMaterial) FurColor(furColor *Color3) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(furColor.JSObject())
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFurColor sets the FurColor property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#furcolor
+func (f *FurMaterial) SetFurColor(furColor *Color3) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(furColor.JSObject())
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// FurDensity returns the FurDensity property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#furdensity
+func (f *FurMaterial) FurDensity(furDensity float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(furDensity)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFurDensity sets the FurDensity property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#furdensity
+func (f *FurMaterial) SetFurDensity(furDensity float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(furDensity)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// FurGravity returns the FurGravity property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#furgravity
+func (f *FurMaterial) FurGravity(furGravity *Vector3) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(furGravity.JSObject())
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFurGravity sets the FurGravity property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#furgravity
+func (f *FurMaterial) SetFurGravity(furGravity *Vector3) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(furGravity.JSObject())
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// FurLength returns the FurLength property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#furlength
+func (f *FurMaterial) FurLength(furLength float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(furLength)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFurLength sets the FurLength property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#furlength
+func (f *FurMaterial) SetFurLength(furLength float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(furLength)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// FurOcclusion returns the FurOcclusion property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#furocclusion
+func (f *FurMaterial) FurOcclusion(furOcclusion float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(furOcclusion)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFurOcclusion sets the FurOcclusion property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#furocclusion
+func (f *FurMaterial) SetFurOcclusion(furOcclusion float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(furOcclusion)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// FurOffset returns the FurOffset property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#furoffset
+func (f *FurMaterial) FurOffset(furOffset float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(furOffset)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFurOffset sets the FurOffset property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#furoffset
+func (f *FurMaterial) SetFurOffset(furOffset float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(furOffset)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// FurSpacing returns the FurSpacing property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#furspacing
+func (f *FurMaterial) FurSpacing(furSpacing float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(furSpacing)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFurSpacing sets the FurSpacing property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#furspacing
+func (f *FurMaterial) SetFurSpacing(furSpacing float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(furSpacing)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// FurSpeed returns the FurSpeed property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#furspeed
+func (f *FurMaterial) FurSpeed(furSpeed float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(furSpeed)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFurSpeed sets the FurSpeed property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#furspeed
+func (f *FurMaterial) SetFurSpeed(furSpeed float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(furSpeed)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// FurTexture returns the FurTexture property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#furtexture
+func (f *FurMaterial) FurTexture(furTexture *DynamicTexture) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(furTexture.JSObject())
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFurTexture sets the FurTexture property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#furtexture
+func (f *FurMaterial) SetFurTexture(furTexture *DynamicTexture) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(furTexture.JSObject())
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// FurTime returns the FurTime property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#furtime
+func (f *FurMaterial) FurTime(furTime float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(furTime)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFurTime sets the FurTime property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#furtime
+func (f *FurMaterial) SetFurTime(furTime float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(furTime)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// GetRenderTargetTextures returns the GetRenderTargetTextures property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#getrendertargettextures
+func (f *FurMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(getRenderTargetTextures)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetGetRenderTargetTextures sets the GetRenderTargetTextures property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#getrendertargettextures
+func (f *FurMaterial) SetGetRenderTargetTextures(getRenderTargetTextures func()) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(getRenderTargetTextures)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// HasRenderTargetTextures returns the HasRenderTargetTextures property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#hasrendertargettextures
+func (f *FurMaterial) HasRenderTargetTextures(hasRenderTargetTextures bool) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(hasRenderTargetTextures)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetHasRenderTargetTextures sets the HasRenderTargetTextures property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#hasrendertargettextures
+func (f *FurMaterial) SetHasRenderTargetTextures(hasRenderTargetTextures bool) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(hasRenderTargetTextures)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// HeightTexture returns the HeightTexture property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#heighttexture
+func (f *FurMaterial) HeightTexture(heightTexture *BaseTexture) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(heightTexture.JSObject())
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetHeightTexture sets the HeightTexture property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#heighttexture
+func (f *FurMaterial) SetHeightTexture(heightTexture *BaseTexture) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(heightTexture.JSObject())
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// HighLevelFur returns the HighLevelFur property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#highlevelfur
+func (f *FurMaterial) HighLevelFur(highLevelFur bool) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(highLevelFur)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetHighLevelFur sets the HighLevelFur property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#highlevelfur
+func (f *FurMaterial) SetHighLevelFur(highLevelFur bool) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(highLevelFur)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// Id returns the Id property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#id
+func (f *FurMaterial) Id(id string) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(id)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetId sets the Id property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#id
+func (f *FurMaterial) SetId(id string) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(id)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#inspectablecustomproperties
+func (f *FurMaterial) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(inspectableCustomProperties.JSObject())
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#inspectablecustomproperties
+func (f *FurMaterial) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(inspectableCustomProperties.JSObject())
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// IsFrozen returns the IsFrozen property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#isfrozen
+func (f *FurMaterial) IsFrozen(isFrozen bool) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(isFrozen)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetIsFrozen sets the IsFrozen property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#isfrozen
+func (f *FurMaterial) SetIsFrozen(isFrozen bool) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(isFrozen)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// LightDirtyFlag returns the LightDirtyFlag property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#lightdirtyflag
+func (f *FurMaterial) LightDirtyFlag(LightDirtyFlag float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(LightDirtyFlag)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLightDirtyFlag sets the LightDirtyFlag property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#lightdirtyflag
+func (f *FurMaterial) SetLightDirtyFlag(LightDirtyFlag float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(LightDirtyFlag)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineListDrawMode returns the LineListDrawMode property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#linelistdrawmode
+func (f *FurMaterial) LineListDrawMode(LineListDrawMode float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(LineListDrawMode)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineListDrawMode sets the LineListDrawMode property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#linelistdrawmode
+func (f *FurMaterial) SetLineListDrawMode(LineListDrawMode float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(LineListDrawMode)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineLoopDrawMode returns the LineLoopDrawMode property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#lineloopdrawmode
+func (f *FurMaterial) LineLoopDrawMode(LineLoopDrawMode float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(LineLoopDrawMode)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineLoopDrawMode sets the LineLoopDrawMode property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#lineloopdrawmode
+func (f *FurMaterial) SetLineLoopDrawMode(LineLoopDrawMode float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(LineLoopDrawMode)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineStripDrawMode returns the LineStripDrawMode property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#linestripdrawmode
+func (f *FurMaterial) LineStripDrawMode(LineStripDrawMode float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(LineStripDrawMode)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineStripDrawMode sets the LineStripDrawMode property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#linestripdrawmode
+func (f *FurMaterial) SetLineStripDrawMode(LineStripDrawMode float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(LineStripDrawMode)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// MaxSimultaneousLights returns the MaxSimultaneousLights property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#maxsimultaneouslights
+func (f *FurMaterial) MaxSimultaneousLights(maxSimultaneousLights float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(maxSimultaneousLights)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMaxSimultaneousLights sets the MaxSimultaneousLights property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#maxsimultaneouslights
+func (f *FurMaterial) SetMaxSimultaneousLights(maxSimultaneousLights float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(maxSimultaneousLights)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#metadata
+func (f *FurMaterial) Metadata(metadata interface{}) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(metadata)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#metadata
+func (f *FurMaterial) SetMetadata(metadata interface{}) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(metadata)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// MiscDirtyFlag returns the MiscDirtyFlag property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#miscdirtyflag
+func (f *FurMaterial) MiscDirtyFlag(MiscDirtyFlag float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(MiscDirtyFlag)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMiscDirtyFlag sets the MiscDirtyFlag property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#miscdirtyflag
+func (f *FurMaterial) SetMiscDirtyFlag(MiscDirtyFlag float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(MiscDirtyFlag)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#name
+func (f *FurMaterial) Name(name string) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(name)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#name
+func (f *FurMaterial) SetName(name string) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(name)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// NeedDepthPrePass returns the NeedDepthPrePass property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#needdepthprepass
+func (f *FurMaterial) NeedDepthPrePass(needDepthPrePass bool) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(needDepthPrePass)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetNeedDepthPrePass sets the NeedDepthPrePass property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#needdepthprepass
+func (f *FurMaterial) SetNeedDepthPrePass(needDepthPrePass bool) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(needDepthPrePass)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnBind returns the OnBind property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#onbind
+func (f *FurMaterial) OnBind(onBind func()) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(onBind)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnBind sets the OnBind property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#onbind
+func (f *FurMaterial) SetOnBind(onBind func()) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(onBind)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnBindObservable returns the OnBindObservable property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#onbindobservable
+func (f *FurMaterial) OnBindObservable(onBindObservable *Observable) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(onBindObservable.JSObject())
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnBindObservable sets the OnBindObservable property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#onbindobservable
+func (f *FurMaterial) SetOnBindObservable(onBindObservable *Observable) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(onBindObservable.JSObject())
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnCompiled returns the OnCompiled property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#oncompiled
+func (f *FurMaterial) OnCompiled(onCompiled func()) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(onCompiled)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnCompiled sets the OnCompiled property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#oncompiled
+func (f *FurMaterial) SetOnCompiled(onCompiled func()) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(onCompiled)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnDispose returns the OnDispose property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#ondispose
+func (f *FurMaterial) OnDispose(onDispose func()) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(onDispose)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnDispose sets the OnDispose property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#ondispose
+func (f *FurMaterial) SetOnDispose(onDispose func()) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(onDispose)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnDisposeObservable returns the OnDisposeObservable property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#ondisposeobservable
+func (f *FurMaterial) OnDisposeObservable(onDisposeObservable *Observable) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(onDisposeObservable.JSObject())
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnDisposeObservable sets the OnDisposeObservable property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#ondisposeobservable
+func (f *FurMaterial) SetOnDisposeObservable(onDisposeObservable *Observable) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(onDisposeObservable.JSObject())
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnError returns the OnError property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#onerror
+func (f *FurMaterial) OnError(onError func()) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(onError)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnError sets the OnError property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#onerror
+func (f *FurMaterial) SetOnError(onError func()) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(onError)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnUnBindObservable returns the OnUnBindObservable property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#onunbindobservable
+func (f *FurMaterial) OnUnBindObservable(onUnBindObservable *Observable) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(onUnBindObservable.JSObject())
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnUnBindObservable sets the OnUnBindObservable property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#onunbindobservable
+func (f *FurMaterial) SetOnUnBindObservable(onUnBindObservable *Observable) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(onUnBindObservable.JSObject())
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointFillMode returns the PointFillMode property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#pointfillmode
+func (f *FurMaterial) PointFillMode(PointFillMode float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(PointFillMode)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointFillMode sets the PointFillMode property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#pointfillmode
+func (f *FurMaterial) SetPointFillMode(PointFillMode float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(PointFillMode)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointListDrawMode returns the PointListDrawMode property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#pointlistdrawmode
+func (f *FurMaterial) PointListDrawMode(PointListDrawMode float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(PointListDrawMode)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointListDrawMode sets the PointListDrawMode property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#pointlistdrawmode
+func (f *FurMaterial) SetPointListDrawMode(PointListDrawMode float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(PointListDrawMode)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointSize returns the PointSize property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#pointsize
+func (f *FurMaterial) PointSize(pointSize float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(pointSize)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointSize sets the PointSize property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#pointsize
+func (f *FurMaterial) SetPointSize(pointSize float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(pointSize)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointsCloud returns the PointsCloud property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#pointscloud
+func (f *FurMaterial) PointsCloud(pointsCloud bool) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(pointsCloud)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointsCloud sets the PointsCloud property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#pointscloud
+func (f *FurMaterial) SetPointsCloud(pointsCloud bool) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(pointsCloud)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// ReservedDataStore returns the ReservedDataStore property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#reserveddatastore
+func (f *FurMaterial) ReservedDataStore(reservedDataStore interface{}) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(reservedDataStore)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetReservedDataStore sets the ReservedDataStore property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#reserveddatastore
+func (f *FurMaterial) SetReservedDataStore(reservedDataStore interface{}) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(reservedDataStore)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SeparateCullingPass returns the SeparateCullingPass property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#separatecullingpass
+func (f *FurMaterial) SeparateCullingPass(separateCullingPass bool) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(separateCullingPass)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSeparateCullingPass sets the SeparateCullingPass property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#separatecullingpass
+func (f *FurMaterial) SetSeparateCullingPass(separateCullingPass bool) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(separateCullingPass)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SideOrientation returns the SideOrientation property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#sideorientation
+func (f *FurMaterial) SideOrientation(sideOrientation float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(sideOrientation)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSideOrientation sets the SideOrientation property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#sideorientation
+func (f *FurMaterial) SetSideOrientation(sideOrientation float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(sideOrientation)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// State returns the State property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#state
+func (f *FurMaterial) State(state string) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(state)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetState sets the State property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#state
+func (f *FurMaterial) SetState(state string) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(state)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// TextureDirtyFlag returns the TextureDirtyFlag property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#texturedirtyflag
+func (f *FurMaterial) TextureDirtyFlag(TextureDirtyFlag float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(TextureDirtyFlag)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTextureDirtyFlag sets the TextureDirtyFlag property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#texturedirtyflag
+func (f *FurMaterial) SetTextureDirtyFlag(TextureDirtyFlag float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(TextureDirtyFlag)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// TriangleFanDrawMode returns the TriangleFanDrawMode property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#trianglefandrawmode
+func (f *FurMaterial) TriangleFanDrawMode(TriangleFanDrawMode float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(TriangleFanDrawMode)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTriangleFanDrawMode sets the TriangleFanDrawMode property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#trianglefandrawmode
+func (f *FurMaterial) SetTriangleFanDrawMode(TriangleFanDrawMode float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(TriangleFanDrawMode)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// TriangleFillMode returns the TriangleFillMode property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#trianglefillmode
+func (f *FurMaterial) TriangleFillMode(TriangleFillMode float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(TriangleFillMode)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTriangleFillMode sets the TriangleFillMode property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#trianglefillmode
+func (f *FurMaterial) SetTriangleFillMode(TriangleFillMode float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(TriangleFillMode)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// TriangleStripDrawMode returns the TriangleStripDrawMode property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#trianglestripdrawmode
+func (f *FurMaterial) TriangleStripDrawMode(TriangleStripDrawMode float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(TriangleStripDrawMode)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTriangleStripDrawMode sets the TriangleStripDrawMode property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#trianglestripdrawmode
+func (f *FurMaterial) SetTriangleStripDrawMode(TriangleStripDrawMode float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(TriangleStripDrawMode)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#uniqueid
+func (f *FurMaterial) UniqueId(uniqueId float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(uniqueId)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#uniqueid
+func (f *FurMaterial) SetUniqueId(uniqueId float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(uniqueId)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// WireFrameFillMode returns the WireFrameFillMode property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#wireframefillmode
+func (f *FurMaterial) WireFrameFillMode(WireFrameFillMode float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(WireFrameFillMode)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetWireFrameFillMode sets the WireFrameFillMode property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#wireframefillmode
+func (f *FurMaterial) SetWireFrameFillMode(WireFrameFillMode float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(WireFrameFillMode)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// Wireframe returns the Wireframe property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#wireframe
+func (f *FurMaterial) Wireframe(wireframe bool) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(wireframe)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetWireframe sets the Wireframe property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#wireframe
+func (f *FurMaterial) SetWireframe(wireframe bool) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(wireframe)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// ZOffset returns the ZOffset property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#zoffset
+func (f *FurMaterial) ZOffset(zOffset float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(zOffset)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetZOffset sets the ZOffset property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#zoffset
+func (f *FurMaterial) SetZOffset(zOffset float64) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(zOffset)
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// _meshes returns the _meshes property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#_meshes
+func (f *FurMaterial) _meshes(_meshes *AbstractMesh) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(_meshes.JSObject())
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+// Set_meshes sets the _meshes property of class FurMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.furmaterial#_meshes
+func (f *FurMaterial) Set_meshes(_meshes *AbstractMesh) *FurMaterial {
+	p := ba.ctx.Get("FurMaterial").New(_meshes.JSObject())
+	return FurMaterialFromJSObject(p, ba.ctx)
+}
+
+*/

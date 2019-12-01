@@ -27,4 +27,60 @@ func StringToolsFromJSObject(p js.Value, ctx js.Value) *StringTools {
 	return &StringTools{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// Decode calls the Decode method on the StringTools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stringtools#decode
+func (s *StringTools) Decode(buffer js.Value) string {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, buffer)
+
+	retVal := s.p.Call("Decode", args...)
+	return retVal.String()
+}
+
+// EncodeArrayBufferToBase64 calls the EncodeArrayBufferToBase64 method on the StringTools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stringtools#encodearraybuffertobase64
+func (s *StringTools) EncodeArrayBufferToBase64(buffer js.Value) string {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, buffer)
+
+	retVal := s.p.Call("EncodeArrayBufferToBase64", args...)
+	return retVal.String()
+}
+
+// EndsWith calls the EndsWith method on the StringTools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stringtools#endswith
+func (s *StringTools) EndsWith(str string, suffix string) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, str)
+	args = append(args, suffix)
+
+	retVal := s.p.Call("EndsWith", args...)
+	return retVal.Bool()
+}
+
+// StartsWith calls the StartsWith method on the StringTools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stringtools#startswith
+func (s *StringTools) StartsWith(str string, suffix string) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, str)
+	args = append(args, suffix)
+
+	retVal := s.p.Call("StartsWith", args...)
+	return retVal.Bool()
+}
+
+/*
+
+ */

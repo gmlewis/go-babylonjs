@@ -29,7 +29,7 @@ func PointerDragBehaviorFromJSObject(p js.Value, ctx js.Value) *PointerDragBehav
 
 // NewPointerDragBehaviorOpts contains optional parameters for NewPointerDragBehavior.
 type NewPointerDragBehaviorOpts struct {
-	Options *JSValue
+	Options js.Value
 }
 
 // NewPointerDragBehavior returns a new PointerDragBehavior object.
@@ -40,8 +40,398 @@ func (ba *Babylon) NewPointerDragBehavior(opts *NewPointerDragBehaviorOpts) *Poi
 		opts = &NewPointerDragBehaviorOpts{}
 	}
 
-	p := ba.ctx.Get("PointerDragBehavior").New(opts.Options.JSObject())
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	p := ba.ctx.Get("PointerDragBehavior").New(args...)
 	return PointerDragBehaviorFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// PointerDragBehaviorAttachOpts contains optional parameters for PointerDragBehavior.Attach.
+type PointerDragBehaviorAttachOpts struct {
+	Predicate *func()
+}
+
+// Attach calls the Attach method on the PointerDragBehavior object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#attach
+func (p *PointerDragBehavior) Attach(ownerNode *AbstractMesh, opts *PointerDragBehaviorAttachOpts) {
+	if opts == nil {
+		opts = &PointerDragBehaviorAttachOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, ownerNode.JSObject())
+
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	p.p.Call("attach", args...)
+}
+
+// Detach calls the Detach method on the PointerDragBehavior object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#detach
+func (p *PointerDragBehavior) Detach() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("detach", args...)
+}
+
+// Init calls the Init method on the PointerDragBehavior object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#init
+func (p *PointerDragBehavior) Init() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("init", args...)
+}
+
+// ReleaseDrag calls the ReleaseDrag method on the PointerDragBehavior object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#releasedrag
+func (p *PointerDragBehavior) ReleaseDrag() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("releaseDrag", args...)
+}
+
+// PointerDragBehaviorStartDragOpts contains optional parameters for PointerDragBehavior.StartDrag.
+type PointerDragBehaviorStartDragOpts struct {
+	PointerId        *float64
+	FromRay          *Ray
+	StartPickedPoint *Vector3
+}
+
+// StartDrag calls the StartDrag method on the PointerDragBehavior object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#startdrag
+func (p *PointerDragBehavior) StartDrag(opts *PointerDragBehaviorStartDragOpts) {
+	if opts == nil {
+		opts = &PointerDragBehaviorStartDragOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+3)
+
+	if opts.PointerId == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.PointerId)
+	}
+	if opts.FromRay == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.FromRay.JSObject())
+	}
+	if opts.StartPickedPoint == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.StartPickedPoint.JSObject())
+	}
+
+	p.p.Call("startDrag", args...)
+}
+
+/*
+
+// AttachedNode returns the AttachedNode property of class PointerDragBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#attachednode
+func (p *PointerDragBehavior) AttachedNode(attachedNode *AbstractMesh) *PointerDragBehavior {
+	p := ba.ctx.Get("PointerDragBehavior").New(attachedNode.JSObject())
+	return PointerDragBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetAttachedNode sets the AttachedNode property of class PointerDragBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#attachednode
+func (p *PointerDragBehavior) SetAttachedNode(attachedNode *AbstractMesh) *PointerDragBehavior {
+	p := ba.ctx.Get("PointerDragBehavior").New(attachedNode.JSObject())
+	return PointerDragBehaviorFromJSObject(p, ba.ctx)
+}
+
+// CurrentDraggingPointerID returns the CurrentDraggingPointerID property of class PointerDragBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#currentdraggingpointerid
+func (p *PointerDragBehavior) CurrentDraggingPointerID(currentDraggingPointerID float64) *PointerDragBehavior {
+	p := ba.ctx.Get("PointerDragBehavior").New(currentDraggingPointerID)
+	return PointerDragBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetCurrentDraggingPointerID sets the CurrentDraggingPointerID property of class PointerDragBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#currentdraggingpointerid
+func (p *PointerDragBehavior) SetCurrentDraggingPointerID(currentDraggingPointerID float64) *PointerDragBehavior {
+	p := ba.ctx.Get("PointerDragBehavior").New(currentDraggingPointerID)
+	return PointerDragBehaviorFromJSObject(p, ba.ctx)
+}
+
+// DetachCameraControls returns the DetachCameraControls property of class PointerDragBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#detachcameracontrols
+func (p *PointerDragBehavior) DetachCameraControls(detachCameraControls bool) *PointerDragBehavior {
+	p := ba.ctx.Get("PointerDragBehavior").New(detachCameraControls)
+	return PointerDragBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetDetachCameraControls sets the DetachCameraControls property of class PointerDragBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#detachcameracontrols
+func (p *PointerDragBehavior) SetDetachCameraControls(detachCameraControls bool) *PointerDragBehavior {
+	p := ba.ctx.Get("PointerDragBehavior").New(detachCameraControls)
+	return PointerDragBehaviorFromJSObject(p, ba.ctx)
+}
+
+// DragDeltaRatio returns the DragDeltaRatio property of class PointerDragBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#dragdeltaratio
+func (p *PointerDragBehavior) DragDeltaRatio(dragDeltaRatio float64) *PointerDragBehavior {
+	p := ba.ctx.Get("PointerDragBehavior").New(dragDeltaRatio)
+	return PointerDragBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetDragDeltaRatio sets the DragDeltaRatio property of class PointerDragBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#dragdeltaratio
+func (p *PointerDragBehavior) SetDragDeltaRatio(dragDeltaRatio float64) *PointerDragBehavior {
+	p := ba.ctx.Get("PointerDragBehavior").New(dragDeltaRatio)
+	return PointerDragBehaviorFromJSObject(p, ba.ctx)
+}
+
+// Dragging returns the Dragging property of class PointerDragBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#dragging
+func (p *PointerDragBehavior) Dragging(dragging bool) *PointerDragBehavior {
+	p := ba.ctx.Get("PointerDragBehavior").New(dragging)
+	return PointerDragBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetDragging sets the Dragging property of class PointerDragBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#dragging
+func (p *PointerDragBehavior) SetDragging(dragging bool) *PointerDragBehavior {
+	p := ba.ctx.Get("PointerDragBehavior").New(dragging)
+	return PointerDragBehaviorFromJSObject(p, ba.ctx)
+}
+
+// Enabled returns the Enabled property of class PointerDragBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#enabled
+func (p *PointerDragBehavior) Enabled(enabled bool) *PointerDragBehavior {
+	p := ba.ctx.Get("PointerDragBehavior").New(enabled)
+	return PointerDragBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetEnabled sets the Enabled property of class PointerDragBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#enabled
+func (p *PointerDragBehavior) SetEnabled(enabled bool) *PointerDragBehavior {
+	p := ba.ctx.Get("PointerDragBehavior").New(enabled)
+	return PointerDragBehaviorFromJSObject(p, ba.ctx)
+}
+
+// LastDragPosition returns the LastDragPosition property of class PointerDragBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#lastdragposition
+func (p *PointerDragBehavior) LastDragPosition(lastDragPosition *Vector3) *PointerDragBehavior {
+	p := ba.ctx.Get("PointerDragBehavior").New(lastDragPosition.JSObject())
+	return PointerDragBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetLastDragPosition sets the LastDragPosition property of class PointerDragBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#lastdragposition
+func (p *PointerDragBehavior) SetLastDragPosition(lastDragPosition *Vector3) *PointerDragBehavior {
+	p := ba.ctx.Get("PointerDragBehavior").New(lastDragPosition.JSObject())
+	return PointerDragBehaviorFromJSObject(p, ba.ctx)
+}
+
+// MaxDragAngle returns the MaxDragAngle property of class PointerDragBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#maxdragangle
+func (p *PointerDragBehavior) MaxDragAngle(maxDragAngle float64) *PointerDragBehavior {
+	p := ba.ctx.Get("PointerDragBehavior").New(maxDragAngle)
+	return PointerDragBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetMaxDragAngle sets the MaxDragAngle property of class PointerDragBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#maxdragangle
+func (p *PointerDragBehavior) SetMaxDragAngle(maxDragAngle float64) *PointerDragBehavior {
+	p := ba.ctx.Get("PointerDragBehavior").New(maxDragAngle)
+	return PointerDragBehaviorFromJSObject(p, ba.ctx)
+}
+
+// MoveAttached returns the MoveAttached property of class PointerDragBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#moveattached
+func (p *PointerDragBehavior) MoveAttached(moveAttached bool) *PointerDragBehavior {
+	p := ba.ctx.Get("PointerDragBehavior").New(moveAttached)
+	return PointerDragBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetMoveAttached sets the MoveAttached property of class PointerDragBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#moveattached
+func (p *PointerDragBehavior) SetMoveAttached(moveAttached bool) *PointerDragBehavior {
+	p := ba.ctx.Get("PointerDragBehavior").New(moveAttached)
+	return PointerDragBehaviorFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class PointerDragBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#name
+func (p *PointerDragBehavior) Name(name string) *PointerDragBehavior {
+	p := ba.ctx.Get("PointerDragBehavior").New(name)
+	return PointerDragBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class PointerDragBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#name
+func (p *PointerDragBehavior) SetName(name string) *PointerDragBehavior {
+	p := ba.ctx.Get("PointerDragBehavior").New(name)
+	return PointerDragBehaviorFromJSObject(p, ba.ctx)
+}
+
+// OnDragEndObservable returns the OnDragEndObservable property of class PointerDragBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#ondragendobservable
+func (p *PointerDragBehavior) OnDragEndObservable(onDragEndObservable *Observable) *PointerDragBehavior {
+	p := ba.ctx.Get("PointerDragBehavior").New(onDragEndObservable.JSObject())
+	return PointerDragBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetOnDragEndObservable sets the OnDragEndObservable property of class PointerDragBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#ondragendobservable
+func (p *PointerDragBehavior) SetOnDragEndObservable(onDragEndObservable *Observable) *PointerDragBehavior {
+	p := ba.ctx.Get("PointerDragBehavior").New(onDragEndObservable.JSObject())
+	return PointerDragBehaviorFromJSObject(p, ba.ctx)
+}
+
+// OnDragObservable returns the OnDragObservable property of class PointerDragBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#ondragobservable
+func (p *PointerDragBehavior) OnDragObservable(onDragObservable *Observable) *PointerDragBehavior {
+	p := ba.ctx.Get("PointerDragBehavior").New(onDragObservable.JSObject())
+	return PointerDragBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetOnDragObservable sets the OnDragObservable property of class PointerDragBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#ondragobservable
+func (p *PointerDragBehavior) SetOnDragObservable(onDragObservable *Observable) *PointerDragBehavior {
+	p := ba.ctx.Get("PointerDragBehavior").New(onDragObservable.JSObject())
+	return PointerDragBehaviorFromJSObject(p, ba.ctx)
+}
+
+// OnDragStartObservable returns the OnDragStartObservable property of class PointerDragBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#ondragstartobservable
+func (p *PointerDragBehavior) OnDragStartObservable(onDragStartObservable *Observable) *PointerDragBehavior {
+	p := ba.ctx.Get("PointerDragBehavior").New(onDragStartObservable.JSObject())
+	return PointerDragBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetOnDragStartObservable sets the OnDragStartObservable property of class PointerDragBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#ondragstartobservable
+func (p *PointerDragBehavior) SetOnDragStartObservable(onDragStartObservable *Observable) *PointerDragBehavior {
+	p := ba.ctx.Get("PointerDragBehavior").New(onDragStartObservable.JSObject())
+	return PointerDragBehaviorFromJSObject(p, ba.ctx)
+}
+
+// Options returns the Options property of class PointerDragBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#options
+func (p *PointerDragBehavior) Options(options js.Value) *PointerDragBehavior {
+	p := ba.ctx.Get("PointerDragBehavior").New(options)
+	return PointerDragBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetOptions sets the Options property of class PointerDragBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#options
+func (p *PointerDragBehavior) SetOptions(options js.Value) *PointerDragBehavior {
+	p := ba.ctx.Get("PointerDragBehavior").New(options)
+	return PointerDragBehaviorFromJSObject(p, ba.ctx)
+}
+
+// StartAndReleaseDragOnPointerEvents returns the StartAndReleaseDragOnPointerEvents property of class PointerDragBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#startandreleasedragonpointerevents
+func (p *PointerDragBehavior) StartAndReleaseDragOnPointerEvents(startAndReleaseDragOnPointerEvents bool) *PointerDragBehavior {
+	p := ba.ctx.Get("PointerDragBehavior").New(startAndReleaseDragOnPointerEvents)
+	return PointerDragBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetStartAndReleaseDragOnPointerEvents sets the StartAndReleaseDragOnPointerEvents property of class PointerDragBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#startandreleasedragonpointerevents
+func (p *PointerDragBehavior) SetStartAndReleaseDragOnPointerEvents(startAndReleaseDragOnPointerEvents bool) *PointerDragBehavior {
+	p := ba.ctx.Get("PointerDragBehavior").New(startAndReleaseDragOnPointerEvents)
+	return PointerDragBehaviorFromJSObject(p, ba.ctx)
+}
+
+// UpdateDragPlane returns the UpdateDragPlane property of class PointerDragBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#updatedragplane
+func (p *PointerDragBehavior) UpdateDragPlane(updateDragPlane bool) *PointerDragBehavior {
+	p := ba.ctx.Get("PointerDragBehavior").New(updateDragPlane)
+	return PointerDragBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateDragPlane sets the UpdateDragPlane property of class PointerDragBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#updatedragplane
+func (p *PointerDragBehavior) SetUpdateDragPlane(updateDragPlane bool) *PointerDragBehavior {
+	p := ba.ctx.Get("PointerDragBehavior").New(updateDragPlane)
+	return PointerDragBehaviorFromJSObject(p, ba.ctx)
+}
+
+// UseObjectOrienationForDragging returns the UseObjectOrienationForDragging property of class PointerDragBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#useobjectorienationfordragging
+func (p *PointerDragBehavior) UseObjectOrienationForDragging(useObjectOrienationForDragging bool) *PointerDragBehavior {
+	p := ba.ctx.Get("PointerDragBehavior").New(useObjectOrienationForDragging)
+	return PointerDragBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetUseObjectOrienationForDragging sets the UseObjectOrienationForDragging property of class PointerDragBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#useobjectorienationfordragging
+func (p *PointerDragBehavior) SetUseObjectOrienationForDragging(useObjectOrienationForDragging bool) *PointerDragBehavior {
+	p := ba.ctx.Get("PointerDragBehavior").New(useObjectOrienationForDragging)
+	return PointerDragBehaviorFromJSObject(p, ba.ctx)
+}
+
+// ValidateDrag returns the ValidateDrag property of class PointerDragBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#validatedrag
+func (p *PointerDragBehavior) ValidateDrag(validateDrag func()) *PointerDragBehavior {
+	p := ba.ctx.Get("PointerDragBehavior").New(validateDrag)
+	return PointerDragBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetValidateDrag sets the ValidateDrag property of class PointerDragBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerdragbehavior#validatedrag
+func (p *PointerDragBehavior) SetValidateDrag(validateDrag func()) *PointerDragBehavior {
+	p := ba.ctx.Get("PointerDragBehavior").New(validateDrag)
+	return PointerDragBehaviorFromJSObject(p, ba.ctx)
+}
+
+*/

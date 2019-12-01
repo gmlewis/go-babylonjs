@@ -32,9 +32,8 @@ func LayerFromJSObject(p js.Value, ctx js.Value) *Layer {
 
 // NewLayerOpts contains optional parameters for NewLayer.
 type NewLayerOpts struct {
-	IsBackground *JSBool
-
-	Color *Color4
+	IsBackground *bool
+	Color        *Color4
 }
 
 // NewLayer returns a new Layer object.
@@ -45,8 +44,319 @@ func (ba *Babylon) NewLayer(name string, imgUrl string, scene *Scene, opts *NewL
 		opts = &NewLayerOpts{}
 	}
 
-	p := ba.ctx.Get("Layer").New(name, imgUrl, scene.JSObject(), opts.IsBackground.JSObject(), opts.Color.JSObject())
+	args := make([]interface{}, 0, 3+2)
+
+	args = append(args, name)
+	args = append(args, imgUrl)
+	args = append(args, scene.JSObject())
+
+	if opts.IsBackground == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IsBackground)
+	}
+	if opts.Color == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Color.JSObject())
+	}
+
+	p := ba.ctx.Get("Layer").New(args...)
 	return LayerFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Dispose calls the Dispose method on the Layer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layer#dispose
+func (l *Layer) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	l.p.Call("dispose", args...)
+}
+
+// Render calls the Render method on the Layer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layer#render
+func (l *Layer) Render() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	l.p.Call("render", args...)
+}
+
+/*
+
+// AlphaBlendingMode returns the AlphaBlendingMode property of class Layer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layer#alphablendingmode
+func (l *Layer) AlphaBlendingMode(alphaBlendingMode float64) *Layer {
+	p := ba.ctx.Get("Layer").New(alphaBlendingMode)
+	return LayerFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaBlendingMode sets the AlphaBlendingMode property of class Layer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layer#alphablendingmode
+func (l *Layer) SetAlphaBlendingMode(alphaBlendingMode float64) *Layer {
+	p := ba.ctx.Get("Layer").New(alphaBlendingMode)
+	return LayerFromJSObject(p, ba.ctx)
+}
+
+// AlphaTest returns the AlphaTest property of class Layer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layer#alphatest
+func (l *Layer) AlphaTest(alphaTest bool) *Layer {
+	p := ba.ctx.Get("Layer").New(alphaTest)
+	return LayerFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaTest sets the AlphaTest property of class Layer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layer#alphatest
+func (l *Layer) SetAlphaTest(alphaTest bool) *Layer {
+	p := ba.ctx.Get("Layer").New(alphaTest)
+	return LayerFromJSObject(p, ba.ctx)
+}
+
+// Color returns the Color property of class Layer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layer#color
+func (l *Layer) Color(color *Color4) *Layer {
+	p := ba.ctx.Get("Layer").New(color.JSObject())
+	return LayerFromJSObject(p, ba.ctx)
+}
+
+// SetColor sets the Color property of class Layer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layer#color
+func (l *Layer) SetColor(color *Color4) *Layer {
+	p := ba.ctx.Get("Layer").New(color.JSObject())
+	return LayerFromJSObject(p, ba.ctx)
+}
+
+// IsBackground returns the IsBackground property of class Layer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layer#isbackground
+func (l *Layer) IsBackground(isBackground bool) *Layer {
+	p := ba.ctx.Get("Layer").New(isBackground)
+	return LayerFromJSObject(p, ba.ctx)
+}
+
+// SetIsBackground sets the IsBackground property of class Layer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layer#isbackground
+func (l *Layer) SetIsBackground(isBackground bool) *Layer {
+	p := ba.ctx.Get("Layer").New(isBackground)
+	return LayerFromJSObject(p, ba.ctx)
+}
+
+// LayerMask returns the LayerMask property of class Layer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layer#layermask
+func (l *Layer) LayerMask(layerMask float64) *Layer {
+	p := ba.ctx.Get("Layer").New(layerMask)
+	return LayerFromJSObject(p, ba.ctx)
+}
+
+// SetLayerMask sets the LayerMask property of class Layer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layer#layermask
+func (l *Layer) SetLayerMask(layerMask float64) *Layer {
+	p := ba.ctx.Get("Layer").New(layerMask)
+	return LayerFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class Layer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layer#name
+func (l *Layer) Name(name string) *Layer {
+	p := ba.ctx.Get("Layer").New(name)
+	return LayerFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class Layer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layer#name
+func (l *Layer) SetName(name string) *Layer {
+	p := ba.ctx.Get("Layer").New(name)
+	return LayerFromJSObject(p, ba.ctx)
+}
+
+// Offset returns the Offset property of class Layer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layer#offset
+func (l *Layer) Offset(offset *Vector2) *Layer {
+	p := ba.ctx.Get("Layer").New(offset.JSObject())
+	return LayerFromJSObject(p, ba.ctx)
+}
+
+// SetOffset sets the Offset property of class Layer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layer#offset
+func (l *Layer) SetOffset(offset *Vector2) *Layer {
+	p := ba.ctx.Get("Layer").New(offset.JSObject())
+	return LayerFromJSObject(p, ba.ctx)
+}
+
+// OnAfterRender returns the OnAfterRender property of class Layer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layer#onafterrender
+func (l *Layer) OnAfterRender(onAfterRender func()) *Layer {
+	p := ba.ctx.Get("Layer").New(onAfterRender)
+	return LayerFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterRender sets the OnAfterRender property of class Layer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layer#onafterrender
+func (l *Layer) SetOnAfterRender(onAfterRender func()) *Layer {
+	p := ba.ctx.Get("Layer").New(onAfterRender)
+	return LayerFromJSObject(p, ba.ctx)
+}
+
+// OnAfterRenderObservable returns the OnAfterRenderObservable property of class Layer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layer#onafterrenderobservable
+func (l *Layer) OnAfterRenderObservable(onAfterRenderObservable *Observable) *Layer {
+	p := ba.ctx.Get("Layer").New(onAfterRenderObservable.JSObject())
+	return LayerFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterRenderObservable sets the OnAfterRenderObservable property of class Layer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layer#onafterrenderobservable
+func (l *Layer) SetOnAfterRenderObservable(onAfterRenderObservable *Observable) *Layer {
+	p := ba.ctx.Get("Layer").New(onAfterRenderObservable.JSObject())
+	return LayerFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeRender returns the OnBeforeRender property of class Layer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layer#onbeforerender
+func (l *Layer) OnBeforeRender(onBeforeRender func()) *Layer {
+	p := ba.ctx.Get("Layer").New(onBeforeRender)
+	return LayerFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeRender sets the OnBeforeRender property of class Layer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layer#onbeforerender
+func (l *Layer) SetOnBeforeRender(onBeforeRender func()) *Layer {
+	p := ba.ctx.Get("Layer").New(onBeforeRender)
+	return LayerFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeRenderObservable returns the OnBeforeRenderObservable property of class Layer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layer#onbeforerenderobservable
+func (l *Layer) OnBeforeRenderObservable(onBeforeRenderObservable *Observable) *Layer {
+	p := ba.ctx.Get("Layer").New(onBeforeRenderObservable.JSObject())
+	return LayerFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeRenderObservable sets the OnBeforeRenderObservable property of class Layer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layer#onbeforerenderobservable
+func (l *Layer) SetOnBeforeRenderObservable(onBeforeRenderObservable *Observable) *Layer {
+	p := ba.ctx.Get("Layer").New(onBeforeRenderObservable.JSObject())
+	return LayerFromJSObject(p, ba.ctx)
+}
+
+// OnDispose returns the OnDispose property of class Layer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layer#ondispose
+func (l *Layer) OnDispose(onDispose func()) *Layer {
+	p := ba.ctx.Get("Layer").New(onDispose)
+	return LayerFromJSObject(p, ba.ctx)
+}
+
+// SetOnDispose sets the OnDispose property of class Layer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layer#ondispose
+func (l *Layer) SetOnDispose(onDispose func()) *Layer {
+	p := ba.ctx.Get("Layer").New(onDispose)
+	return LayerFromJSObject(p, ba.ctx)
+}
+
+// OnDisposeObservable returns the OnDisposeObservable property of class Layer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layer#ondisposeobservable
+func (l *Layer) OnDisposeObservable(onDisposeObservable *Observable) *Layer {
+	p := ba.ctx.Get("Layer").New(onDisposeObservable.JSObject())
+	return LayerFromJSObject(p, ba.ctx)
+}
+
+// SetOnDisposeObservable sets the OnDisposeObservable property of class Layer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layer#ondisposeobservable
+func (l *Layer) SetOnDisposeObservable(onDisposeObservable *Observable) *Layer {
+	p := ba.ctx.Get("Layer").New(onDisposeObservable.JSObject())
+	return LayerFromJSObject(p, ba.ctx)
+}
+
+// RenderOnlyInRenderTargetTextures returns the RenderOnlyInRenderTargetTextures property of class Layer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layer#renderonlyinrendertargettextures
+func (l *Layer) RenderOnlyInRenderTargetTextures(renderOnlyInRenderTargetTextures bool) *Layer {
+	p := ba.ctx.Get("Layer").New(renderOnlyInRenderTargetTextures)
+	return LayerFromJSObject(p, ba.ctx)
+}
+
+// SetRenderOnlyInRenderTargetTextures sets the RenderOnlyInRenderTargetTextures property of class Layer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layer#renderonlyinrendertargettextures
+func (l *Layer) SetRenderOnlyInRenderTargetTextures(renderOnlyInRenderTargetTextures bool) *Layer {
+	p := ba.ctx.Get("Layer").New(renderOnlyInRenderTargetTextures)
+	return LayerFromJSObject(p, ba.ctx)
+}
+
+// RenderTargetTextures returns the RenderTargetTextures property of class Layer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layer#rendertargettextures
+func (l *Layer) RenderTargetTextures(renderTargetTextures *RenderTargetTexture) *Layer {
+	p := ba.ctx.Get("Layer").New(renderTargetTextures.JSObject())
+	return LayerFromJSObject(p, ba.ctx)
+}
+
+// SetRenderTargetTextures sets the RenderTargetTextures property of class Layer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layer#rendertargettextures
+func (l *Layer) SetRenderTargetTextures(renderTargetTextures *RenderTargetTexture) *Layer {
+	p := ba.ctx.Get("Layer").New(renderTargetTextures.JSObject())
+	return LayerFromJSObject(p, ba.ctx)
+}
+
+// Scale returns the Scale property of class Layer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layer#scale
+func (l *Layer) Scale(scale *Vector2) *Layer {
+	p := ba.ctx.Get("Layer").New(scale.JSObject())
+	return LayerFromJSObject(p, ba.ctx)
+}
+
+// SetScale sets the Scale property of class Layer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layer#scale
+func (l *Layer) SetScale(scale *Vector2) *Layer {
+	p := ba.ctx.Get("Layer").New(scale.JSObject())
+	return LayerFromJSObject(p, ba.ctx)
+}
+
+// Texture returns the Texture property of class Layer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layer#texture
+func (l *Layer) Texture(texture *Texture) *Layer {
+	p := ba.ctx.Get("Layer").New(texture.JSObject())
+	return LayerFromJSObject(p, ba.ctx)
+}
+
+// SetTexture sets the Texture property of class Layer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layer#texture
+func (l *Layer) SetTexture(texture *Texture) *Layer {
+	p := ba.ctx.Get("Layer").New(texture.JSObject())
+	return LayerFromJSObject(p, ba.ctx)
+}
+
+*/

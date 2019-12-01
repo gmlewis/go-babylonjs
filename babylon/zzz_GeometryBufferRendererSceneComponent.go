@@ -32,8 +32,77 @@ func GeometryBufferRendererSceneComponentFromJSObject(p js.Value, ctx js.Value) 
 //
 // https://doc.babylonjs.com/api/classes/babylon.geometrybufferrendererscenecomponent
 func (ba *Babylon) NewGeometryBufferRendererSceneComponent(scene *Scene) *GeometryBufferRendererSceneComponent {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("GeometryBufferRendererSceneComponent").New(args...)
+	return GeometryBufferRendererSceneComponentFromJSObject(p, ba.ctx)
+}
+
+// Dispose calls the Dispose method on the GeometryBufferRendererSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.geometrybufferrendererscenecomponent#dispose
+func (g *GeometryBufferRendererSceneComponent) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	g.p.Call("dispose", args...)
+}
+
+// Rebuild calls the Rebuild method on the GeometryBufferRendererSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.geometrybufferrendererscenecomponent#rebuild
+func (g *GeometryBufferRendererSceneComponent) Rebuild() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	g.p.Call("rebuild", args...)
+}
+
+// Register calls the Register method on the GeometryBufferRendererSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.geometrybufferrendererscenecomponent#register
+func (g *GeometryBufferRendererSceneComponent) Register() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	g.p.Call("register", args...)
+}
+
+/*
+
+// Name returns the Name property of class GeometryBufferRendererSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.geometrybufferrendererscenecomponent#name
+func (g *GeometryBufferRendererSceneComponent) Name(name string) *GeometryBufferRendererSceneComponent {
+	p := ba.ctx.Get("GeometryBufferRendererSceneComponent").New(name)
+	return GeometryBufferRendererSceneComponentFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class GeometryBufferRendererSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.geometrybufferrendererscenecomponent#name
+func (g *GeometryBufferRendererSceneComponent) SetName(name string) *GeometryBufferRendererSceneComponent {
+	p := ba.ctx.Get("GeometryBufferRendererSceneComponent").New(name)
+	return GeometryBufferRendererSceneComponentFromJSObject(p, ba.ctx)
+}
+
+// Scene returns the Scene property of class GeometryBufferRendererSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.geometrybufferrendererscenecomponent#scene
+func (g *GeometryBufferRendererSceneComponent) Scene(scene *Scene) *GeometryBufferRendererSceneComponent {
 	p := ba.ctx.Get("GeometryBufferRendererSceneComponent").New(scene.JSObject())
 	return GeometryBufferRendererSceneComponentFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetScene sets the Scene property of class GeometryBufferRendererSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.geometrybufferrendererscenecomponent#scene
+func (g *GeometryBufferRendererSceneComponent) SetScene(scene *Scene) *GeometryBufferRendererSceneComponent {
+	p := ba.ctx.Get("GeometryBufferRendererSceneComponent").New(scene.JSObject())
+	return GeometryBufferRendererSceneComponentFromJSObject(p, ba.ctx)
+}
+
+*/

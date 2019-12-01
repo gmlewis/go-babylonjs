@@ -31,7 +31,7 @@ func SceneOptimizationFromJSObject(p js.Value, ctx js.Value) *SceneOptimization 
 
 // NewSceneOptimizationOpts contains optional parameters for NewSceneOptimization.
 type NewSceneOptimizationOpts struct {
-	Priority *JSFloat64
+	Priority *float64
 }
 
 // NewSceneOptimization returns a new SceneOptimization object.
@@ -42,8 +42,59 @@ func (ba *Babylon) NewSceneOptimization(opts *NewSceneOptimizationOpts) *SceneOp
 		opts = &NewSceneOptimizationOpts{}
 	}
 
-	p := ba.ctx.Get("SceneOptimization").New(opts.Priority.JSObject())
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Priority == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Priority)
+	}
+
+	p := ba.ctx.Get("SceneOptimization").New(args...)
 	return SceneOptimizationFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Apply calls the Apply method on the SceneOptimization object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneoptimization#apply
+func (s *SceneOptimization) Apply(scene *Scene, optimizer *SceneOptimizer) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, scene.JSObject())
+	args = append(args, optimizer.JSObject())
+
+	retVal := s.p.Call("apply", args...)
+	return retVal.Bool()
+}
+
+// GetDescription calls the GetDescription method on the SceneOptimization object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneoptimization#getdescription
+func (s *SceneOptimization) GetDescription() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getDescription", args...)
+	return retVal.String()
+}
+
+/*
+
+// Priority returns the Priority property of class SceneOptimization.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneoptimization#priority
+func (s *SceneOptimization) Priority(priority float64) *SceneOptimization {
+	p := ba.ctx.Get("SceneOptimization").New(priority)
+	return SceneOptimizationFromJSObject(p, ba.ctx)
+}
+
+// SetPriority sets the Priority property of class SceneOptimization.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneoptimization#priority
+func (s *SceneOptimization) SetPriority(priority float64) *SceneOptimization {
+	p := ba.ctx.Get("SceneOptimization").New(priority)
+	return SceneOptimizationFromJSObject(p, ba.ctx)
+}
+
+*/

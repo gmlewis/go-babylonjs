@@ -31,8 +31,48 @@ func KeyboardInfoFromJSObject(p js.Value, ctx js.Value) *KeyboardInfo {
 //
 // https://doc.babylonjs.com/api/classes/babylon.keyboardinfo
 func (ba *Babylon) NewKeyboardInfo(jsType float64, event js.Value) *KeyboardInfo {
-	p := ba.ctx.Get("KeyboardInfo").New(jsType, event)
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, jsType)
+	args = append(args, event)
+
+	p := ba.ctx.Get("KeyboardInfo").New(args...)
 	return KeyboardInfoFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+/*
+
+// Event returns the Event property of class KeyboardInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.keyboardinfo#event
+func (k *KeyboardInfo) Event(event js.Value) *KeyboardInfo {
+	p := ba.ctx.Get("KeyboardInfo").New(event)
+	return KeyboardInfoFromJSObject(p, ba.ctx)
+}
+
+// SetEvent sets the Event property of class KeyboardInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.keyboardinfo#event
+func (k *KeyboardInfo) SetEvent(event js.Value) *KeyboardInfo {
+	p := ba.ctx.Get("KeyboardInfo").New(event)
+	return KeyboardInfoFromJSObject(p, ba.ctx)
+}
+
+// Type returns the Type property of class KeyboardInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.keyboardinfo#type
+func (k *KeyboardInfo) Type(jsType float64) *KeyboardInfo {
+	p := ba.ctx.Get("KeyboardInfo").New(jsType)
+	return KeyboardInfoFromJSObject(p, ba.ctx)
+}
+
+// SetType sets the Type property of class KeyboardInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.keyboardinfo#type
+func (k *KeyboardInfo) SetType(jsType float64) *KeyboardInfo {
+	p := ba.ctx.Get("KeyboardInfo").New(jsType)
+	return KeyboardInfoFromJSObject(p, ba.ctx)
+}
+
+*/

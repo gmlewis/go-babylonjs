@@ -27,4 +27,65 @@ func FactorGradientFromJSObject(p js.Value, ctx js.Value) *FactorGradient {
 	return &FactorGradient{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// GetFactor calls the GetFactor method on the FactorGradient object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.factorgradient#getfactor
+func (f *FactorGradient) GetFactor() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("getFactor", args...)
+	return retVal.Float()
+}
+
+/*
+
+// Factor1 returns the Factor1 property of class FactorGradient.
+//
+// https://doc.babylonjs.com/api/classes/babylon.factorgradient#factor1
+func (f *FactorGradient) Factor1(factor1 float64) *FactorGradient {
+	p := ba.ctx.Get("FactorGradient").New(factor1)
+	return FactorGradientFromJSObject(p, ba.ctx)
+}
+
+// SetFactor1 sets the Factor1 property of class FactorGradient.
+//
+// https://doc.babylonjs.com/api/classes/babylon.factorgradient#factor1
+func (f *FactorGradient) SetFactor1(factor1 float64) *FactorGradient {
+	p := ba.ctx.Get("FactorGradient").New(factor1)
+	return FactorGradientFromJSObject(p, ba.ctx)
+}
+
+// Factor2 returns the Factor2 property of class FactorGradient.
+//
+// https://doc.babylonjs.com/api/classes/babylon.factorgradient#factor2
+func (f *FactorGradient) Factor2(factor2 float64) *FactorGradient {
+	p := ba.ctx.Get("FactorGradient").New(factor2)
+	return FactorGradientFromJSObject(p, ba.ctx)
+}
+
+// SetFactor2 sets the Factor2 property of class FactorGradient.
+//
+// https://doc.babylonjs.com/api/classes/babylon.factorgradient#factor2
+func (f *FactorGradient) SetFactor2(factor2 float64) *FactorGradient {
+	p := ba.ctx.Get("FactorGradient").New(factor2)
+	return FactorGradientFromJSObject(p, ba.ctx)
+}
+
+// Gradient returns the Gradient property of class FactorGradient.
+//
+// https://doc.babylonjs.com/api/classes/babylon.factorgradient#gradient
+func (f *FactorGradient) Gradient(gradient float64) *FactorGradient {
+	p := ba.ctx.Get("FactorGradient").New(gradient)
+	return FactorGradientFromJSObject(p, ba.ctx)
+}
+
+// SetGradient sets the Gradient property of class FactorGradient.
+//
+// https://doc.babylonjs.com/api/classes/babylon.factorgradient#gradient
+func (f *FactorGradient) SetGradient(gradient float64) *FactorGradient {
+	p := ba.ctx.Get("FactorGradient").New(gradient)
+	return FactorGradientFromJSObject(p, ba.ctx)
+}
+
+*/

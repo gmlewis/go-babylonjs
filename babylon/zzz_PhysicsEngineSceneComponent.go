@@ -31,8 +31,77 @@ func PhysicsEngineSceneComponentFromJSObject(p js.Value, ctx js.Value) *PhysicsE
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsenginescenecomponent
 func (ba *Babylon) NewPhysicsEngineSceneComponent(scene *Scene) *PhysicsEngineSceneComponent {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("PhysicsEngineSceneComponent").New(args...)
+	return PhysicsEngineSceneComponentFromJSObject(p, ba.ctx)
+}
+
+// Dispose calls the Dispose method on the PhysicsEngineSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsenginescenecomponent#dispose
+func (p *PhysicsEngineSceneComponent) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("dispose", args...)
+}
+
+// Rebuild calls the Rebuild method on the PhysicsEngineSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsenginescenecomponent#rebuild
+func (p *PhysicsEngineSceneComponent) Rebuild() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("rebuild", args...)
+}
+
+// Register calls the Register method on the PhysicsEngineSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsenginescenecomponent#register
+func (p *PhysicsEngineSceneComponent) Register() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("register", args...)
+}
+
+/*
+
+// Name returns the Name property of class PhysicsEngineSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsenginescenecomponent#name
+func (p *PhysicsEngineSceneComponent) Name(name string) *PhysicsEngineSceneComponent {
+	p := ba.ctx.Get("PhysicsEngineSceneComponent").New(name)
+	return PhysicsEngineSceneComponentFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class PhysicsEngineSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsenginescenecomponent#name
+func (p *PhysicsEngineSceneComponent) SetName(name string) *PhysicsEngineSceneComponent {
+	p := ba.ctx.Get("PhysicsEngineSceneComponent").New(name)
+	return PhysicsEngineSceneComponentFromJSObject(p, ba.ctx)
+}
+
+// Scene returns the Scene property of class PhysicsEngineSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsenginescenecomponent#scene
+func (p *PhysicsEngineSceneComponent) Scene(scene *Scene) *PhysicsEngineSceneComponent {
 	p := ba.ctx.Get("PhysicsEngineSceneComponent").New(scene.JSObject())
 	return PhysicsEngineSceneComponentFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetScene sets the Scene property of class PhysicsEngineSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsenginescenecomponent#scene
+func (p *PhysicsEngineSceneComponent) SetScene(scene *Scene) *PhysicsEngineSceneComponent {
+	p := ba.ctx.Get("PhysicsEngineSceneComponent").New(scene.JSObject())
+	return PhysicsEngineSceneComponentFromJSObject(p, ba.ctx)
+}
+
+*/

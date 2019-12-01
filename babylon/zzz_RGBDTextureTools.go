@@ -27,4 +27,18 @@ func RGBDTextureToolsFromJSObject(p js.Value, ctx js.Value) *RGBDTextureTools {
 	return &RGBDTextureTools{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// ExpandRGBDTexture calls the ExpandRGBDTexture method on the RGBDTextureTools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rgbdtexturetools#expandrgbdtexture
+func (r *RGBDTextureTools) ExpandRGBDTexture(texture *Texture) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, texture.JSObject())
+
+	r.p.Call("ExpandRGBDTexture", args...)
+}
+
+/*
+
+ */

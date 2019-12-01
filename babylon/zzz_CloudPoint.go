@@ -31,8 +31,273 @@ func CloudPointFromJSObject(p js.Value, ctx js.Value) *CloudPoint {
 //
 // https://doc.babylonjs.com/api/classes/babylon.cloudpoint
 func (ba *Babylon) NewCloudPoint(particleIndex float64, group *PointsGroup, groupId float64, idxInGroup float64, pcs *PointsCloudSystem) *CloudPoint {
-	p := ba.ctx.Get("CloudPoint").New(particleIndex, group.JSObject(), groupId, idxInGroup, pcs.JSObject())
+
+	args := make([]interface{}, 0, 5+0)
+
+	args = append(args, particleIndex)
+	args = append(args, group.JSObject())
+	args = append(args, groupId)
+	args = append(args, idxInGroup)
+	args = append(args, pcs.JSObject())
+
+	p := ba.ctx.Get("CloudPoint").New(args...)
 	return CloudPointFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// IntersectsMesh calls the IntersectsMesh method on the CloudPoint object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cloudpoint#intersectsmesh
+func (c *CloudPoint) IntersectsMesh(target *Mesh, isSphere bool) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, target.JSObject())
+	args = append(args, isSphere)
+
+	retVal := c.p.Call("intersectsMesh", args...)
+	return retVal.Bool()
+}
+
+/*
+
+// Color returns the Color property of class CloudPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cloudpoint#color
+func (c *CloudPoint) Color(color *Color4) *CloudPoint {
+	p := ba.ctx.Get("CloudPoint").New(color.JSObject())
+	return CloudPointFromJSObject(p, ba.ctx)
+}
+
+// SetColor sets the Color property of class CloudPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cloudpoint#color
+func (c *CloudPoint) SetColor(color *Color4) *CloudPoint {
+	p := ba.ctx.Get("CloudPoint").New(color.JSObject())
+	return CloudPointFromJSObject(p, ba.ctx)
+}
+
+// GroupId returns the GroupId property of class CloudPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cloudpoint#groupid
+func (c *CloudPoint) GroupId(groupId float64) *CloudPoint {
+	p := ba.ctx.Get("CloudPoint").New(groupId)
+	return CloudPointFromJSObject(p, ba.ctx)
+}
+
+// SetGroupId sets the GroupId property of class CloudPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cloudpoint#groupid
+func (c *CloudPoint) SetGroupId(groupId float64) *CloudPoint {
+	p := ba.ctx.Get("CloudPoint").New(groupId)
+	return CloudPointFromJSObject(p, ba.ctx)
+}
+
+// Idx returns the Idx property of class CloudPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cloudpoint#idx
+func (c *CloudPoint) Idx(idx float64) *CloudPoint {
+	p := ba.ctx.Get("CloudPoint").New(idx)
+	return CloudPointFromJSObject(p, ba.ctx)
+}
+
+// SetIdx sets the Idx property of class CloudPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cloudpoint#idx
+func (c *CloudPoint) SetIdx(idx float64) *CloudPoint {
+	p := ba.ctx.Get("CloudPoint").New(idx)
+	return CloudPointFromJSObject(p, ba.ctx)
+}
+
+// IdxInGroup returns the IdxInGroup property of class CloudPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cloudpoint#idxingroup
+func (c *CloudPoint) IdxInGroup(idxInGroup float64) *CloudPoint {
+	p := ba.ctx.Get("CloudPoint").New(idxInGroup)
+	return CloudPointFromJSObject(p, ba.ctx)
+}
+
+// SetIdxInGroup sets the IdxInGroup property of class CloudPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cloudpoint#idxingroup
+func (c *CloudPoint) SetIdxInGroup(idxInGroup float64) *CloudPoint {
+	p := ba.ctx.Get("CloudPoint").New(idxInGroup)
+	return CloudPointFromJSObject(p, ba.ctx)
+}
+
+// ParentId returns the ParentId property of class CloudPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cloudpoint#parentid
+func (c *CloudPoint) ParentId(parentId float64) *CloudPoint {
+	p := ba.ctx.Get("CloudPoint").New(parentId)
+	return CloudPointFromJSObject(p, ba.ctx)
+}
+
+// SetParentId sets the ParentId property of class CloudPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cloudpoint#parentid
+func (c *CloudPoint) SetParentId(parentId float64) *CloudPoint {
+	p := ba.ctx.Get("CloudPoint").New(parentId)
+	return CloudPointFromJSObject(p, ba.ctx)
+}
+
+// Pivot returns the Pivot property of class CloudPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cloudpoint#pivot
+func (c *CloudPoint) Pivot(pivot *Vector3) *CloudPoint {
+	p := ba.ctx.Get("CloudPoint").New(pivot.JSObject())
+	return CloudPointFromJSObject(p, ba.ctx)
+}
+
+// SetPivot sets the Pivot property of class CloudPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cloudpoint#pivot
+func (c *CloudPoint) SetPivot(pivot *Vector3) *CloudPoint {
+	p := ba.ctx.Get("CloudPoint").New(pivot.JSObject())
+	return CloudPointFromJSObject(p, ba.ctx)
+}
+
+// Position returns the Position property of class CloudPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cloudpoint#position
+func (c *CloudPoint) Position(position *Vector3) *CloudPoint {
+	p := ba.ctx.Get("CloudPoint").New(position.JSObject())
+	return CloudPointFromJSObject(p, ba.ctx)
+}
+
+// SetPosition sets the Position property of class CloudPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cloudpoint#position
+func (c *CloudPoint) SetPosition(position *Vector3) *CloudPoint {
+	p := ba.ctx.Get("CloudPoint").New(position.JSObject())
+	return CloudPointFromJSObject(p, ba.ctx)
+}
+
+// Quaternion returns the Quaternion property of class CloudPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cloudpoint#quaternion
+func (c *CloudPoint) Quaternion(quaternion *Quaternion) *CloudPoint {
+	p := ba.ctx.Get("CloudPoint").New(quaternion.JSObject())
+	return CloudPointFromJSObject(p, ba.ctx)
+}
+
+// SetQuaternion sets the Quaternion property of class CloudPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cloudpoint#quaternion
+func (c *CloudPoint) SetQuaternion(quaternion *Quaternion) *CloudPoint {
+	p := ba.ctx.Get("CloudPoint").New(quaternion.JSObject())
+	return CloudPointFromJSObject(p, ba.ctx)
+}
+
+// Rotation returns the Rotation property of class CloudPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cloudpoint#rotation
+func (c *CloudPoint) Rotation(rotation *Vector3) *CloudPoint {
+	p := ba.ctx.Get("CloudPoint").New(rotation.JSObject())
+	return CloudPointFromJSObject(p, ba.ctx)
+}
+
+// SetRotation sets the Rotation property of class CloudPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cloudpoint#rotation
+func (c *CloudPoint) SetRotation(rotation *Vector3) *CloudPoint {
+	p := ba.ctx.Get("CloudPoint").New(rotation.JSObject())
+	return CloudPointFromJSObject(p, ba.ctx)
+}
+
+// RotationQuaternion returns the RotationQuaternion property of class CloudPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cloudpoint#rotationquaternion
+func (c *CloudPoint) RotationQuaternion(rotationQuaternion *Quaternion) *CloudPoint {
+	p := ba.ctx.Get("CloudPoint").New(rotationQuaternion.JSObject())
+	return CloudPointFromJSObject(p, ba.ctx)
+}
+
+// SetRotationQuaternion sets the RotationQuaternion property of class CloudPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cloudpoint#rotationquaternion
+func (c *CloudPoint) SetRotationQuaternion(rotationQuaternion *Quaternion) *CloudPoint {
+	p := ba.ctx.Get("CloudPoint").New(rotationQuaternion.JSObject())
+	return CloudPointFromJSObject(p, ba.ctx)
+}
+
+// Size returns the Size property of class CloudPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cloudpoint#size
+func (c *CloudPoint) Size(size *Vector3) *CloudPoint {
+	p := ba.ctx.Get("CloudPoint").New(size.JSObject())
+	return CloudPointFromJSObject(p, ba.ctx)
+}
+
+// SetSize sets the Size property of class CloudPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cloudpoint#size
+func (c *CloudPoint) SetSize(size *Vector3) *CloudPoint {
+	p := ba.ctx.Get("CloudPoint").New(size.JSObject())
+	return CloudPointFromJSObject(p, ba.ctx)
+}
+
+// TranslateFromPivot returns the TranslateFromPivot property of class CloudPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cloudpoint#translatefrompivot
+func (c *CloudPoint) TranslateFromPivot(translateFromPivot bool) *CloudPoint {
+	p := ba.ctx.Get("CloudPoint").New(translateFromPivot)
+	return CloudPointFromJSObject(p, ba.ctx)
+}
+
+// SetTranslateFromPivot sets the TranslateFromPivot property of class CloudPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cloudpoint#translatefrompivot
+func (c *CloudPoint) SetTranslateFromPivot(translateFromPivot bool) *CloudPoint {
+	p := ba.ctx.Get("CloudPoint").New(translateFromPivot)
+	return CloudPointFromJSObject(p, ba.ctx)
+}
+
+// Uv returns the Uv property of class CloudPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cloudpoint#uv
+func (c *CloudPoint) Uv(uv *Vector2) *CloudPoint {
+	p := ba.ctx.Get("CloudPoint").New(uv.JSObject())
+	return CloudPointFromJSObject(p, ba.ctx)
+}
+
+// SetUv sets the Uv property of class CloudPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cloudpoint#uv
+func (c *CloudPoint) SetUv(uv *Vector2) *CloudPoint {
+	p := ba.ctx.Get("CloudPoint").New(uv.JSObject())
+	return CloudPointFromJSObject(p, ba.ctx)
+}
+
+// Velocity returns the Velocity property of class CloudPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cloudpoint#velocity
+func (c *CloudPoint) Velocity(velocity *Vector3) *CloudPoint {
+	p := ba.ctx.Get("CloudPoint").New(velocity.JSObject())
+	return CloudPointFromJSObject(p, ba.ctx)
+}
+
+// SetVelocity sets the Velocity property of class CloudPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cloudpoint#velocity
+func (c *CloudPoint) SetVelocity(velocity *Vector3) *CloudPoint {
+	p := ba.ctx.Get("CloudPoint").New(velocity.JSObject())
+	return CloudPointFromJSObject(p, ba.ctx)
+}
+
+// _group returns the _group property of class CloudPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cloudpoint#_group
+func (c *CloudPoint) _group(_group *PointsGroup) *CloudPoint {
+	p := ba.ctx.Get("CloudPoint").New(_group.JSObject())
+	return CloudPointFromJSObject(p, ba.ctx)
+}
+
+// Set_group sets the _group property of class CloudPoint.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cloudpoint#_group
+func (c *CloudPoint) Set_group(_group *PointsGroup) *CloudPoint {
+	p := ba.ctx.Get("CloudPoint").New(_group.JSObject())
+	return CloudPointFromJSObject(p, ba.ctx)
+}
+
+*/

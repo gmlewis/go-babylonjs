@@ -27,4 +27,64 @@ func BaseSubMeshFromJSObject(p js.Value, ctx js.Value) *BaseSubMesh {
 	return &BaseSubMesh{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// BaseSubMeshSetEffectOpts contains optional parameters for BaseSubMesh.SetEffect.
+type BaseSubMeshSetEffectOpts struct {
+	Defines *MaterialDefines
+}
+
+// SetEffect calls the SetEffect method on the BaseSubMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.basesubmesh#seteffect
+func (b *BaseSubMesh) SetEffect(effect *Effect, opts *BaseSubMeshSetEffectOpts) {
+	if opts == nil {
+		opts = &BaseSubMeshSetEffectOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, effect.JSObject())
+
+	if opts.Defines == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Defines.JSObject())
+	}
+
+	b.p.Call("setEffect", args...)
+}
+
+/*
+
+// Effect returns the Effect property of class BaseSubMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.basesubmesh#effect
+func (b *BaseSubMesh) Effect(effect *Effect) *BaseSubMesh {
+	p := ba.ctx.Get("BaseSubMesh").New(effect.JSObject())
+	return BaseSubMeshFromJSObject(p, ba.ctx)
+}
+
+// SetEffect sets the Effect property of class BaseSubMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.basesubmesh#effect
+func (b *BaseSubMesh) SetEffect(effect *Effect) *BaseSubMesh {
+	p := ba.ctx.Get("BaseSubMesh").New(effect.JSObject())
+	return BaseSubMeshFromJSObject(p, ba.ctx)
+}
+
+// MaterialDefines returns the MaterialDefines property of class BaseSubMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.basesubmesh#materialdefines
+func (b *BaseSubMesh) MaterialDefines(materialDefines *MaterialDefines) *BaseSubMesh {
+	p := ba.ctx.Get("BaseSubMesh").New(materialDefines.JSObject())
+	return BaseSubMeshFromJSObject(p, ba.ctx)
+}
+
+// SetMaterialDefines sets the MaterialDefines property of class BaseSubMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.basesubmesh#materialdefines
+func (b *BaseSubMesh) SetMaterialDefines(materialDefines *MaterialDefines) *BaseSubMesh {
+	p := ba.ctx.Get("BaseSubMesh").New(materialDefines.JSObject())
+	return BaseSubMeshFromJSObject(p, ba.ctx)
+}
+
+*/

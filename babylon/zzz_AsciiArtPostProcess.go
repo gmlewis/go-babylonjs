@@ -32,7 +32,7 @@ func AsciiArtPostProcessFromJSObject(p js.Value, ctx js.Value) *AsciiArtPostProc
 
 // NewAsciiArtPostProcessOpts contains optional parameters for NewAsciiArtPostProcess.
 type NewAsciiArtPostProcessOpts struct {
-	Options *JSString
+	Options *string
 }
 
 // NewAsciiArtPostProcess returns a new AsciiArtPostProcess object.
@@ -43,8 +43,781 @@ func (ba *Babylon) NewAsciiArtPostProcess(name string, camera *Camera, opts *New
 		opts = &NewAsciiArtPostProcessOpts{}
 	}
 
-	p := ba.ctx.Get("AsciiArtPostProcess").New(name, camera.JSObject(), opts.Options.JSObject())
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, name)
+	args = append(args, camera.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Options)
+	}
+
+	p := ba.ctx.Get("AsciiArtPostProcess").New(args...)
 	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AsciiArtPostProcessActivateOpts contains optional parameters for AsciiArtPostProcess.Activate.
+type AsciiArtPostProcessActivateOpts struct {
+	SourceTexture     *InternalTexture
+	ForceDepthStencil *bool
+}
+
+// Activate calls the Activate method on the AsciiArtPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#activate
+func (a *AsciiArtPostProcess) Activate(camera *Camera, opts *AsciiArtPostProcessActivateOpts) *InternalTexture {
+	if opts == nil {
+		opts = &AsciiArtPostProcessActivateOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, camera.JSObject())
+
+	if opts.SourceTexture == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.SourceTexture.JSObject())
+	}
+	if opts.ForceDepthStencil == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceDepthStencil)
+	}
+
+	retVal := a.p.Call("activate", args...)
+	return InternalTextureFromJSObject(retVal, a.ctx)
+}
+
+// Apply calls the Apply method on the AsciiArtPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#apply
+func (a *AsciiArtPostProcess) Apply() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("apply", args...)
+	return EffectFromJSObject(retVal, a.ctx)
+}
+
+// AsciiArtPostProcessDisposeOpts contains optional parameters for AsciiArtPostProcess.Dispose.
+type AsciiArtPostProcessDisposeOpts struct {
+	Camera *Camera
+}
+
+// Dispose calls the Dispose method on the AsciiArtPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#dispose
+func (a *AsciiArtPostProcess) Dispose(opts *AsciiArtPostProcessDisposeOpts) {
+	if opts == nil {
+		opts = &AsciiArtPostProcessDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Camera == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Camera.JSObject())
+	}
+
+	a.p.Call("dispose", args...)
+}
+
+// GetCamera calls the GetCamera method on the AsciiArtPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#getcamera
+func (a *AsciiArtPostProcess) GetCamera() *Camera {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("getCamera", args...)
+	return CameraFromJSObject(retVal, a.ctx)
+}
+
+// GetClassName calls the GetClassName method on the AsciiArtPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#getclassname
+func (a *AsciiArtPostProcess) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetEffect calls the GetEffect method on the AsciiArtPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#geteffect
+func (a *AsciiArtPostProcess) GetEffect() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("getEffect", args...)
+	return EffectFromJSObject(retVal, a.ctx)
+}
+
+// GetEffectName calls the GetEffectName method on the AsciiArtPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#geteffectname
+func (a *AsciiArtPostProcess) GetEffectName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("getEffectName", args...)
+	return retVal.String()
+}
+
+// GetEngine calls the GetEngine method on the AsciiArtPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#getengine
+func (a *AsciiArtPostProcess) GetEngine() *Engine {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("getEngine", args...)
+	return EngineFromJSObject(retVal, a.ctx)
+}
+
+// IsReady calls the IsReady method on the AsciiArtPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#isready
+func (a *AsciiArtPostProcess) IsReady() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// IsReusable calls the IsReusable method on the AsciiArtPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#isreusable
+func (a *AsciiArtPostProcess) IsReusable() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("isReusable", args...)
+	return retVal.Bool()
+}
+
+// MarkTextureDirty calls the MarkTextureDirty method on the AsciiArtPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#marktexturedirty
+func (a *AsciiArtPostProcess) MarkTextureDirty() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	a.p.Call("markTextureDirty", args...)
+}
+
+// ShareOutputWith calls the ShareOutputWith method on the AsciiArtPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#shareoutputwith
+func (a *AsciiArtPostProcess) ShareOutputWith(postProcess *PostProcess) *PostProcess {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, postProcess.JSObject())
+
+	retVal := a.p.Call("shareOutputWith", args...)
+	return PostProcessFromJSObject(retVal, a.ctx)
+}
+
+// AsciiArtPostProcessUpdateEffectOpts contains optional parameters for AsciiArtPostProcess.UpdateEffect.
+type AsciiArtPostProcessUpdateEffectOpts struct {
+	Defines         *string
+	Uniforms        *string
+	Samplers        *string
+	IndexParameters *interface{}
+	OnCompiled      *func()
+	OnError         *func()
+}
+
+// UpdateEffect calls the UpdateEffect method on the AsciiArtPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#updateeffect
+func (a *AsciiArtPostProcess) UpdateEffect(opts *AsciiArtPostProcessUpdateEffectOpts) {
+	if opts == nil {
+		opts = &AsciiArtPostProcessUpdateEffectOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+6)
+
+	if opts.Defines == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Defines)
+	}
+	if opts.Uniforms == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Uniforms)
+	}
+	if opts.Samplers == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Samplers)
+	}
+	if opts.IndexParameters == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.IndexParameters)
+	}
+	if opts.OnCompiled == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnCompiled)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+
+	a.p.Call("updateEffect", args...)
+}
+
+// UseOwnOutput calls the UseOwnOutput method on the AsciiArtPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#useownoutput
+func (a *AsciiArtPostProcess) UseOwnOutput() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	a.p.Call("useOwnOutput", args...)
+}
+
+/*
+
+// AdaptScaleToCurrentViewport returns the AdaptScaleToCurrentViewport property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#adaptscaletocurrentviewport
+func (a *AsciiArtPostProcess) AdaptScaleToCurrentViewport(adaptScaleToCurrentViewport bool) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(adaptScaleToCurrentViewport)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAdaptScaleToCurrentViewport sets the AdaptScaleToCurrentViewport property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#adaptscaletocurrentviewport
+func (a *AsciiArtPostProcess) SetAdaptScaleToCurrentViewport(adaptScaleToCurrentViewport bool) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(adaptScaleToCurrentViewport)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AlphaConstants returns the AlphaConstants property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#alphaconstants
+func (a *AsciiArtPostProcess) AlphaConstants(alphaConstants *Color4) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(alphaConstants.JSObject())
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaConstants sets the AlphaConstants property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#alphaconstants
+func (a *AsciiArtPostProcess) SetAlphaConstants(alphaConstants *Color4) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(alphaConstants.JSObject())
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AlphaMode returns the AlphaMode property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#alphamode
+func (a *AsciiArtPostProcess) AlphaMode(alphaMode float64) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(alphaMode)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaMode sets the AlphaMode property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#alphamode
+func (a *AsciiArtPostProcess) SetAlphaMode(alphaMode float64) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(alphaMode)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AlwaysForcePOT returns the AlwaysForcePOT property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#alwaysforcepot
+func (a *AsciiArtPostProcess) AlwaysForcePOT(alwaysForcePOT bool) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(alwaysForcePOT)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAlwaysForcePOT sets the AlwaysForcePOT property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#alwaysforcepot
+func (a *AsciiArtPostProcess) SetAlwaysForcePOT(alwaysForcePOT bool) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(alwaysForcePOT)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Animations returns the Animations property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#animations
+func (a *AsciiArtPostProcess) Animations(animations *Animation) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(animations.JSObject())
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#animations
+func (a *AsciiArtPostProcess) SetAnimations(animations *Animation) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(animations.JSObject())
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AspectRatio returns the AspectRatio property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#aspectratio
+func (a *AsciiArtPostProcess) AspectRatio(aspectRatio float64) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(aspectRatio)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAspectRatio sets the AspectRatio property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#aspectratio
+func (a *AsciiArtPostProcess) SetAspectRatio(aspectRatio float64) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(aspectRatio)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AutoClear returns the AutoClear property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#autoclear
+func (a *AsciiArtPostProcess) AutoClear(autoClear bool) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(autoClear)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAutoClear sets the AutoClear property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#autoclear
+func (a *AsciiArtPostProcess) SetAutoClear(autoClear bool) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(autoClear)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ClearColor returns the ClearColor property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#clearcolor
+func (a *AsciiArtPostProcess) ClearColor(clearColor *Color4) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(clearColor.JSObject())
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetClearColor sets the ClearColor property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#clearcolor
+func (a *AsciiArtPostProcess) SetClearColor(clearColor *Color4) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(clearColor.JSObject())
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// EnablePixelPerfectMode returns the EnablePixelPerfectMode property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#enablepixelperfectmode
+func (a *AsciiArtPostProcess) EnablePixelPerfectMode(enablePixelPerfectMode bool) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(enablePixelPerfectMode)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetEnablePixelPerfectMode sets the EnablePixelPerfectMode property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#enablepixelperfectmode
+func (a *AsciiArtPostProcess) SetEnablePixelPerfectMode(enablePixelPerfectMode bool) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(enablePixelPerfectMode)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ForceFullscreenViewport returns the ForceFullscreenViewport property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#forcefullscreenviewport
+func (a *AsciiArtPostProcess) ForceFullscreenViewport(forceFullscreenViewport bool) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(forceFullscreenViewport)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetForceFullscreenViewport sets the ForceFullscreenViewport property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#forcefullscreenviewport
+func (a *AsciiArtPostProcess) SetForceFullscreenViewport(forceFullscreenViewport bool) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(forceFullscreenViewport)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Height returns the Height property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#height
+func (a *AsciiArtPostProcess) Height(height float64) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(height)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetHeight sets the Height property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#height
+func (a *AsciiArtPostProcess) SetHeight(height float64) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(height)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// InputTexture returns the InputTexture property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#inputtexture
+func (a *AsciiArtPostProcess) InputTexture(inputTexture *InternalTexture) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(inputTexture.JSObject())
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetInputTexture sets the InputTexture property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#inputtexture
+func (a *AsciiArtPostProcess) SetInputTexture(inputTexture *InternalTexture) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(inputTexture.JSObject())
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#inspectablecustomproperties
+func (a *AsciiArtPostProcess) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(inspectableCustomProperties.JSObject())
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#inspectablecustomproperties
+func (a *AsciiArtPostProcess) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(inspectableCustomProperties.JSObject())
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// IsSupported returns the IsSupported property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#issupported
+func (a *AsciiArtPostProcess) IsSupported(isSupported bool) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(isSupported)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetIsSupported sets the IsSupported property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#issupported
+func (a *AsciiArtPostProcess) SetIsSupported(isSupported bool) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(isSupported)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// MixToNormal returns the MixToNormal property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#mixtonormal
+func (a *AsciiArtPostProcess) MixToNormal(mixToNormal float64) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(mixToNormal)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetMixToNormal sets the MixToNormal property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#mixtonormal
+func (a *AsciiArtPostProcess) SetMixToNormal(mixToNormal float64) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(mixToNormal)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// MixToTile returns the MixToTile property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#mixtotile
+func (a *AsciiArtPostProcess) MixToTile(mixToTile float64) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(mixToTile)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetMixToTile sets the MixToTile property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#mixtotile
+func (a *AsciiArtPostProcess) SetMixToTile(mixToTile float64) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(mixToTile)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#name
+func (a *AsciiArtPostProcess) Name(name string) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(name)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#name
+func (a *AsciiArtPostProcess) SetName(name string) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(name)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnActivate returns the OnActivate property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#onactivate
+func (a *AsciiArtPostProcess) OnActivate(onActivate func()) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(onActivate)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnActivate sets the OnActivate property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#onactivate
+func (a *AsciiArtPostProcess) SetOnActivate(onActivate func()) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(onActivate)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnActivateObservable returns the OnActivateObservable property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#onactivateobservable
+func (a *AsciiArtPostProcess) OnActivateObservable(onActivateObservable *Observable) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(onActivateObservable.JSObject())
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnActivateObservable sets the OnActivateObservable property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#onactivateobservable
+func (a *AsciiArtPostProcess) SetOnActivateObservable(onActivateObservable *Observable) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(onActivateObservable.JSObject())
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnAfterRender returns the OnAfterRender property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#onafterrender
+func (a *AsciiArtPostProcess) OnAfterRender(onAfterRender func()) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(onAfterRender)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterRender sets the OnAfterRender property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#onafterrender
+func (a *AsciiArtPostProcess) SetOnAfterRender(onAfterRender func()) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(onAfterRender)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnAfterRenderObservable returns the OnAfterRenderObservable property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#onafterrenderobservable
+func (a *AsciiArtPostProcess) OnAfterRenderObservable(onAfterRenderObservable *Observable) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(onAfterRenderObservable.JSObject())
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterRenderObservable sets the OnAfterRenderObservable property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#onafterrenderobservable
+func (a *AsciiArtPostProcess) SetOnAfterRenderObservable(onAfterRenderObservable *Observable) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(onAfterRenderObservable.JSObject())
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnApply returns the OnApply property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#onapply
+func (a *AsciiArtPostProcess) OnApply(onApply func()) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(onApply)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnApply sets the OnApply property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#onapply
+func (a *AsciiArtPostProcess) SetOnApply(onApply func()) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(onApply)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnApplyObservable returns the OnApplyObservable property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#onapplyobservable
+func (a *AsciiArtPostProcess) OnApplyObservable(onApplyObservable *Observable) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(onApplyObservable.JSObject())
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnApplyObservable sets the OnApplyObservable property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#onapplyobservable
+func (a *AsciiArtPostProcess) SetOnApplyObservable(onApplyObservable *Observable) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(onApplyObservable.JSObject())
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeRender returns the OnBeforeRender property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#onbeforerender
+func (a *AsciiArtPostProcess) OnBeforeRender(onBeforeRender func()) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(onBeforeRender)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeRender sets the OnBeforeRender property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#onbeforerender
+func (a *AsciiArtPostProcess) SetOnBeforeRender(onBeforeRender func()) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(onBeforeRender)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeRenderObservable returns the OnBeforeRenderObservable property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#onbeforerenderobservable
+func (a *AsciiArtPostProcess) OnBeforeRenderObservable(onBeforeRenderObservable *Observable) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(onBeforeRenderObservable.JSObject())
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeRenderObservable sets the OnBeforeRenderObservable property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#onbeforerenderobservable
+func (a *AsciiArtPostProcess) SetOnBeforeRenderObservable(onBeforeRenderObservable *Observable) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(onBeforeRenderObservable.JSObject())
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnSizeChanged returns the OnSizeChanged property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#onsizechanged
+func (a *AsciiArtPostProcess) OnSizeChanged(onSizeChanged func()) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(onSizeChanged)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnSizeChanged sets the OnSizeChanged property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#onsizechanged
+func (a *AsciiArtPostProcess) SetOnSizeChanged(onSizeChanged func()) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(onSizeChanged)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnSizeChangedObservable returns the OnSizeChangedObservable property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#onsizechangedobservable
+func (a *AsciiArtPostProcess) OnSizeChangedObservable(onSizeChangedObservable *Observable) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(onSizeChangedObservable.JSObject())
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnSizeChangedObservable sets the OnSizeChangedObservable property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#onsizechangedobservable
+func (a *AsciiArtPostProcess) SetOnSizeChangedObservable(onSizeChangedObservable *Observable) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(onSizeChangedObservable.JSObject())
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// RenderTargetSamplingMode returns the RenderTargetSamplingMode property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#rendertargetsamplingmode
+func (a *AsciiArtPostProcess) RenderTargetSamplingMode(renderTargetSamplingMode float64) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(renderTargetSamplingMode)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetRenderTargetSamplingMode sets the RenderTargetSamplingMode property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#rendertargetsamplingmode
+func (a *AsciiArtPostProcess) SetRenderTargetSamplingMode(renderTargetSamplingMode float64) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(renderTargetSamplingMode)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Samples returns the Samples property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#samples
+func (a *AsciiArtPostProcess) Samples(samples float64) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(samples)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetSamples sets the Samples property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#samples
+func (a *AsciiArtPostProcess) SetSamples(samples float64) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(samples)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ScaleMode returns the ScaleMode property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#scalemode
+func (a *AsciiArtPostProcess) ScaleMode(scaleMode float64) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(scaleMode)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetScaleMode sets the ScaleMode property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#scalemode
+func (a *AsciiArtPostProcess) SetScaleMode(scaleMode float64) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(scaleMode)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// TexelSize returns the TexelSize property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#texelsize
+func (a *AsciiArtPostProcess) TexelSize(texelSize *Vector2) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(texelSize.JSObject())
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetTexelSize sets the TexelSize property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#texelsize
+func (a *AsciiArtPostProcess) SetTexelSize(texelSize *Vector2) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(texelSize.JSObject())
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#uniqueid
+func (a *AsciiArtPostProcess) UniqueId(uniqueId float64) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(uniqueId)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#uniqueid
+func (a *AsciiArtPostProcess) SetUniqueId(uniqueId float64) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(uniqueId)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Width returns the Width property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#width
+func (a *AsciiArtPostProcess) Width(width float64) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(width)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetWidth sets the Width property of class AsciiArtPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asciiartpostprocess#width
+func (a *AsciiArtPostProcess) SetWidth(width float64) *AsciiArtPostProcess {
+	p := ba.ctx.Get("AsciiArtPostProcess").New(width)
+	return AsciiArtPostProcessFromJSObject(p, ba.ctx)
+}
+
+*/

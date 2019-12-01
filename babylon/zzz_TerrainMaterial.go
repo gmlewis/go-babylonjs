@@ -31,8 +31,1561 @@ func TerrainMaterialFromJSObject(p js.Value, ctx js.Value) *TerrainMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.terrainmaterial
 func (ba *Babylon) NewTerrainMaterial(name string, scene *Scene) *TerrainMaterial {
-	p := ba.ctx.Get("TerrainMaterial").New(name, scene.JSObject())
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("TerrainMaterial").New(args...)
 	return TerrainMaterialFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// TerrainMaterialBindOpts contains optional parameters for TerrainMaterial.Bind.
+type TerrainMaterialBindOpts struct {
+	Mesh *Mesh
+}
+
+// Bind calls the Bind method on the TerrainMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#bind
+func (t *TerrainMaterial) Bind(world *Matrix, opts *TerrainMaterialBindOpts) {
+	if opts == nil {
+		opts = &TerrainMaterialBindOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, world.JSObject())
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	t.p.Call("bind", args...)
+}
+
+// BindForSubMesh calls the BindForSubMesh method on the TerrainMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#bindforsubmesh
+func (t *TerrainMaterial) BindForSubMesh(world *Matrix, mesh *Mesh, subMesh *SubMesh) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, world.JSObject())
+	args = append(args, mesh.JSObject())
+	args = append(args, subMesh.JSObject())
+
+	t.p.Call("bindForSubMesh", args...)
+}
+
+// BindOnlyNormalMatrix calls the BindOnlyNormalMatrix method on the TerrainMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#bindonlynormalmatrix
+func (t *TerrainMaterial) BindOnlyNormalMatrix(normalMatrix *Matrix) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, normalMatrix.JSObject())
+
+	t.p.Call("bindOnlyNormalMatrix", args...)
+}
+
+// BindOnlyWorldMatrix calls the BindOnlyWorldMatrix method on the TerrainMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#bindonlyworldmatrix
+func (t *TerrainMaterial) BindOnlyWorldMatrix(world *Matrix) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, world.JSObject())
+
+	t.p.Call("bindOnlyWorldMatrix", args...)
+}
+
+// BindSceneUniformBuffer calls the BindSceneUniformBuffer method on the TerrainMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#bindsceneuniformbuffer
+func (t *TerrainMaterial) BindSceneUniformBuffer(effect *Effect, sceneUbo *UniformBuffer) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, effect.JSObject())
+	args = append(args, sceneUbo.JSObject())
+
+	t.p.Call("bindSceneUniformBuffer", args...)
+}
+
+// BindView calls the BindView method on the TerrainMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#bindview
+func (t *TerrainMaterial) BindView(effect *Effect) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, effect.JSObject())
+
+	t.p.Call("bindView", args...)
+}
+
+// BindViewProjection calls the BindViewProjection method on the TerrainMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#bindviewprojection
+func (t *TerrainMaterial) BindViewProjection(effect *Effect) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, effect.JSObject())
+
+	t.p.Call("bindViewProjection", args...)
+}
+
+// Clone calls the Clone method on the TerrainMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#clone
+func (t *TerrainMaterial) Clone(name string) *TerrainMaterial {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := t.p.Call("clone", args...)
+	return TerrainMaterialFromJSObject(retVal, t.ctx)
+}
+
+// TerrainMaterialDisposeOpts contains optional parameters for TerrainMaterial.Dispose.
+type TerrainMaterialDisposeOpts struct {
+	ForceDisposeEffect *bool
+}
+
+// Dispose calls the Dispose method on the TerrainMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#dispose
+func (t *TerrainMaterial) Dispose(opts *TerrainMaterialDisposeOpts) {
+	if opts == nil {
+		opts = &TerrainMaterialDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForceDisposeEffect == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceDisposeEffect)
+	}
+
+	t.p.Call("dispose", args...)
+}
+
+// TerrainMaterialForceCompilationOpts contains optional parameters for TerrainMaterial.ForceCompilation.
+type TerrainMaterialForceCompilationOpts struct {
+	OnCompiled *func()
+	Options    js.Value
+	OnError    *func()
+}
+
+// ForceCompilation calls the ForceCompilation method on the TerrainMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#forcecompilation
+func (t *TerrainMaterial) ForceCompilation(mesh *AbstractMesh, opts *TerrainMaterialForceCompilationOpts) {
+	if opts == nil {
+		opts = &TerrainMaterialForceCompilationOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, mesh.JSObject())
+
+	if opts.OnCompiled == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnCompiled)
+	}
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+
+	t.p.Call("forceCompilation", args...)
+}
+
+// TerrainMaterialForceCompilationAsyncOpts contains optional parameters for TerrainMaterial.ForceCompilationAsync.
+type TerrainMaterialForceCompilationAsyncOpts struct {
+	Options js.Value
+}
+
+// ForceCompilationAsync calls the ForceCompilationAsync method on the TerrainMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#forcecompilationasync
+func (t *TerrainMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *TerrainMaterialForceCompilationAsyncOpts) {
+	if opts == nil {
+		opts = &TerrainMaterialForceCompilationAsyncOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, mesh.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	t.p.Call("forceCompilationAsync", args...)
+}
+
+// Freeze calls the Freeze method on the TerrainMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#freeze
+func (t *TerrainMaterial) Freeze() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	t.p.Call("freeze", args...)
+}
+
+// GetActiveTextures calls the GetActiveTextures method on the TerrainMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#getactivetextures
+func (t *TerrainMaterial) GetActiveTextures() *BaseTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getActiveTextures", args...)
+	return BaseTextureFromJSObject(retVal, t.ctx)
+}
+
+// GetAlphaTestTexture calls the GetAlphaTestTexture method on the TerrainMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#getalphatesttexture
+func (t *TerrainMaterial) GetAlphaTestTexture() *BaseTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getAlphaTestTexture", args...)
+	return BaseTextureFromJSObject(retVal, t.ctx)
+}
+
+// GetAnimatables calls the GetAnimatables method on the TerrainMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#getanimatables
+func (t *TerrainMaterial) GetAnimatables() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getAnimatables", args...)
+	return retVal
+}
+
+// GetBindedMeshes calls the GetBindedMeshes method on the TerrainMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#getbindedmeshes
+func (t *TerrainMaterial) GetBindedMeshes() *AbstractMesh {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getBindedMeshes", args...)
+	return AbstractMeshFromJSObject(retVal, t.ctx)
+}
+
+// GetClassName calls the GetClassName method on the TerrainMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#getclassname
+func (t *TerrainMaterial) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetEffect calls the GetEffect method on the TerrainMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#geteffect
+func (t *TerrainMaterial) GetEffect() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getEffect", args...)
+	return EffectFromJSObject(retVal, t.ctx)
+}
+
+// GetScene calls the GetScene method on the TerrainMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#getscene
+func (t *TerrainMaterial) GetScene() *Scene {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getScene", args...)
+	return SceneFromJSObject(retVal, t.ctx)
+}
+
+// HasTexture calls the HasTexture method on the TerrainMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#hastexture
+func (t *TerrainMaterial) HasTexture(texture *BaseTexture) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, texture.JSObject())
+
+	retVal := t.p.Call("hasTexture", args...)
+	return retVal.Bool()
+}
+
+// TerrainMaterialIsReadyOpts contains optional parameters for TerrainMaterial.IsReady.
+type TerrainMaterialIsReadyOpts struct {
+	Mesh         *AbstractMesh
+	UseInstances *bool
+}
+
+// IsReady calls the IsReady method on the TerrainMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#isready
+func (t *TerrainMaterial) IsReady(opts *TerrainMaterialIsReadyOpts) bool {
+	if opts == nil {
+		opts = &TerrainMaterialIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := t.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// TerrainMaterialIsReadyForSubMeshOpts contains optional parameters for TerrainMaterial.IsReadyForSubMesh.
+type TerrainMaterialIsReadyForSubMeshOpts struct {
+	UseInstances *bool
+}
+
+// IsReadyForSubMesh calls the IsReadyForSubMesh method on the TerrainMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#isreadyforsubmesh
+func (t *TerrainMaterial) IsReadyForSubMesh(mesh *AbstractMesh, subMesh *SubMesh, opts *TerrainMaterialIsReadyForSubMeshOpts) bool {
+	if opts == nil {
+		opts = &TerrainMaterialIsReadyForSubMeshOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, subMesh.JSObject())
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := t.p.Call("isReadyForSubMesh", args...)
+	return retVal.Bool()
+}
+
+// MarkAsDirty calls the MarkAsDirty method on the TerrainMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#markasdirty
+func (t *TerrainMaterial) MarkAsDirty(flag float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, flag)
+
+	t.p.Call("markAsDirty", args...)
+}
+
+// MarkDirty calls the MarkDirty method on the TerrainMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#markdirty
+func (t *TerrainMaterial) MarkDirty() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	t.p.Call("markDirty", args...)
+}
+
+// NeedAlphaBlending calls the NeedAlphaBlending method on the TerrainMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#needalphablending
+func (t *TerrainMaterial) NeedAlphaBlending() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("needAlphaBlending", args...)
+	return retVal.Bool()
+}
+
+// NeedAlphaBlendingForMesh calls the NeedAlphaBlendingForMesh method on the TerrainMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#needalphablendingformesh
+func (t *TerrainMaterial) NeedAlphaBlendingForMesh(mesh *AbstractMesh) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	retVal := t.p.Call("needAlphaBlendingForMesh", args...)
+	return retVal.Bool()
+}
+
+// NeedAlphaTesting calls the NeedAlphaTesting method on the TerrainMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#needalphatesting
+func (t *TerrainMaterial) NeedAlphaTesting() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("needAlphaTesting", args...)
+	return retVal.Bool()
+}
+
+// Parse calls the Parse method on the TerrainMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#parse
+func (t *TerrainMaterial) Parse(source interface{}, scene *Scene, rootUrl string) *TerrainMaterial {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, source)
+	args = append(args, scene.JSObject())
+	args = append(args, rootUrl)
+
+	retVal := t.p.Call("Parse", args...)
+	return TerrainMaterialFromJSObject(retVal, t.ctx)
+}
+
+// Serialize calls the Serialize method on the TerrainMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#serialize
+func (t *TerrainMaterial) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("serialize", args...)
+	return retVal
+}
+
+// TerrainMaterialToStringOpts contains optional parameters for TerrainMaterial.ToString.
+type TerrainMaterialToStringOpts struct {
+	FullDetails *bool
+}
+
+// ToString calls the ToString method on the TerrainMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#tostring
+func (t *TerrainMaterial) ToString(opts *TerrainMaterialToStringOpts) string {
+	if opts == nil {
+		opts = &TerrainMaterialToStringOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.FullDetails == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FullDetails)
+	}
+
+	retVal := t.p.Call("toString", args...)
+	return retVal.String()
+}
+
+// Unbind calls the Unbind method on the TerrainMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#unbind
+func (t *TerrainMaterial) Unbind() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	t.p.Call("unbind", args...)
+}
+
+// Unfreeze calls the Unfreeze method on the TerrainMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#unfreeze
+func (t *TerrainMaterial) Unfreeze() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	t.p.Call("unfreeze", args...)
+}
+
+/*
+
+// AllDirtyFlag returns the AllDirtyFlag property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#alldirtyflag
+func (t *TerrainMaterial) AllDirtyFlag(AllDirtyFlag float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(AllDirtyFlag)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAllDirtyFlag sets the AllDirtyFlag property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#alldirtyflag
+func (t *TerrainMaterial) SetAllDirtyFlag(AllDirtyFlag float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(AllDirtyFlag)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// AllowShaderHotSwapping returns the AllowShaderHotSwapping property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#allowshaderhotswapping
+func (t *TerrainMaterial) AllowShaderHotSwapping(allowShaderHotSwapping bool) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(allowShaderHotSwapping)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAllowShaderHotSwapping sets the AllowShaderHotSwapping property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#allowshaderhotswapping
+func (t *TerrainMaterial) SetAllowShaderHotSwapping(allowShaderHotSwapping bool) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(allowShaderHotSwapping)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// Alpha returns the Alpha property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#alpha
+func (t *TerrainMaterial) Alpha(alpha float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(alpha)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAlpha sets the Alpha property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#alpha
+func (t *TerrainMaterial) SetAlpha(alpha float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(alpha)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// AlphaMode returns the AlphaMode property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#alphamode
+func (t *TerrainMaterial) AlphaMode(alphaMode float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(alphaMode)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaMode sets the AlphaMode property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#alphamode
+func (t *TerrainMaterial) SetAlphaMode(alphaMode float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(alphaMode)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// Animations returns the Animations property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#animations
+func (t *TerrainMaterial) Animations(animations []Animation) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(animations.JSObject())
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#animations
+func (t *TerrainMaterial) SetAnimations(animations []Animation) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(animations.JSObject())
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// AttributesDirtyFlag returns the AttributesDirtyFlag property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#attributesdirtyflag
+func (t *TerrainMaterial) AttributesDirtyFlag(AttributesDirtyFlag float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(AttributesDirtyFlag)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAttributesDirtyFlag sets the AttributesDirtyFlag property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#attributesdirtyflag
+func (t *TerrainMaterial) SetAttributesDirtyFlag(AttributesDirtyFlag float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(AttributesDirtyFlag)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// BackFaceCulling returns the BackFaceCulling property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#backfaceculling
+func (t *TerrainMaterial) BackFaceCulling(backFaceCulling bool) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(backFaceCulling)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetBackFaceCulling sets the BackFaceCulling property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#backfaceculling
+func (t *TerrainMaterial) SetBackFaceCulling(backFaceCulling bool) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(backFaceCulling)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// BumpTexture1 returns the BumpTexture1 property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#bumptexture1
+func (t *TerrainMaterial) BumpTexture1(bumpTexture1 *Texture) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(bumpTexture1.JSObject())
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetBumpTexture1 sets the BumpTexture1 property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#bumptexture1
+func (t *TerrainMaterial) SetBumpTexture1(bumpTexture1 *Texture) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(bumpTexture1.JSObject())
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// BumpTexture2 returns the BumpTexture2 property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#bumptexture2
+func (t *TerrainMaterial) BumpTexture2(bumpTexture2 *Texture) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(bumpTexture2.JSObject())
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetBumpTexture2 sets the BumpTexture2 property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#bumptexture2
+func (t *TerrainMaterial) SetBumpTexture2(bumpTexture2 *Texture) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(bumpTexture2.JSObject())
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// BumpTexture3 returns the BumpTexture3 property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#bumptexture3
+func (t *TerrainMaterial) BumpTexture3(bumpTexture3 *Texture) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(bumpTexture3.JSObject())
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetBumpTexture3 sets the BumpTexture3 property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#bumptexture3
+func (t *TerrainMaterial) SetBumpTexture3(bumpTexture3 *Texture) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(bumpTexture3.JSObject())
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// CheckReadyOnEveryCall returns the CheckReadyOnEveryCall property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#checkreadyoneverycall
+func (t *TerrainMaterial) CheckReadyOnEveryCall(checkReadyOnEveryCall bool) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(checkReadyOnEveryCall)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCheckReadyOnEveryCall sets the CheckReadyOnEveryCall property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#checkreadyoneverycall
+func (t *TerrainMaterial) SetCheckReadyOnEveryCall(checkReadyOnEveryCall bool) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(checkReadyOnEveryCall)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// CheckReadyOnlyOnce returns the CheckReadyOnlyOnce property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#checkreadyonlyonce
+func (t *TerrainMaterial) CheckReadyOnlyOnce(checkReadyOnlyOnce bool) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(checkReadyOnlyOnce)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCheckReadyOnlyOnce sets the CheckReadyOnlyOnce property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#checkreadyonlyonce
+func (t *TerrainMaterial) SetCheckReadyOnlyOnce(checkReadyOnlyOnce bool) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(checkReadyOnlyOnce)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// ClockWiseSideOrientation returns the ClockWiseSideOrientation property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#clockwisesideorientation
+func (t *TerrainMaterial) ClockWiseSideOrientation(ClockWiseSideOrientation float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(ClockWiseSideOrientation)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetClockWiseSideOrientation sets the ClockWiseSideOrientation property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#clockwisesideorientation
+func (t *TerrainMaterial) SetClockWiseSideOrientation(ClockWiseSideOrientation float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(ClockWiseSideOrientation)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// CounterClockWiseSideOrientation returns the CounterClockWiseSideOrientation property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#counterclockwisesideorientation
+func (t *TerrainMaterial) CounterClockWiseSideOrientation(CounterClockWiseSideOrientation float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(CounterClockWiseSideOrientation)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCounterClockWiseSideOrientation sets the CounterClockWiseSideOrientation property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#counterclockwisesideorientation
+func (t *TerrainMaterial) SetCounterClockWiseSideOrientation(CounterClockWiseSideOrientation float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(CounterClockWiseSideOrientation)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// DepthFunction returns the DepthFunction property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#depthfunction
+func (t *TerrainMaterial) DepthFunction(depthFunction float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(depthFunction)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDepthFunction sets the DepthFunction property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#depthfunction
+func (t *TerrainMaterial) SetDepthFunction(depthFunction float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(depthFunction)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// DiffuseColor returns the DiffuseColor property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#diffusecolor
+func (t *TerrainMaterial) DiffuseColor(diffuseColor *Color3) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(diffuseColor.JSObject())
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDiffuseColor sets the DiffuseColor property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#diffusecolor
+func (t *TerrainMaterial) SetDiffuseColor(diffuseColor *Color3) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(diffuseColor.JSObject())
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// DiffuseTexture1 returns the DiffuseTexture1 property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#diffusetexture1
+func (t *TerrainMaterial) DiffuseTexture1(diffuseTexture1 *Texture) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(diffuseTexture1.JSObject())
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDiffuseTexture1 sets the DiffuseTexture1 property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#diffusetexture1
+func (t *TerrainMaterial) SetDiffuseTexture1(diffuseTexture1 *Texture) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(diffuseTexture1.JSObject())
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// DiffuseTexture2 returns the DiffuseTexture2 property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#diffusetexture2
+func (t *TerrainMaterial) DiffuseTexture2(diffuseTexture2 *Texture) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(diffuseTexture2.JSObject())
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDiffuseTexture2 sets the DiffuseTexture2 property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#diffusetexture2
+func (t *TerrainMaterial) SetDiffuseTexture2(diffuseTexture2 *Texture) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(diffuseTexture2.JSObject())
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// DiffuseTexture3 returns the DiffuseTexture3 property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#diffusetexture3
+func (t *TerrainMaterial) DiffuseTexture3(diffuseTexture3 *Texture) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(diffuseTexture3.JSObject())
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDiffuseTexture3 sets the DiffuseTexture3 property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#diffusetexture3
+func (t *TerrainMaterial) SetDiffuseTexture3(diffuseTexture3 *Texture) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(diffuseTexture3.JSObject())
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// DisableDepthWrite returns the DisableDepthWrite property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#disabledepthwrite
+func (t *TerrainMaterial) DisableDepthWrite(disableDepthWrite bool) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(disableDepthWrite)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDisableDepthWrite sets the DisableDepthWrite property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#disabledepthwrite
+func (t *TerrainMaterial) SetDisableDepthWrite(disableDepthWrite bool) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(disableDepthWrite)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// DisableLighting returns the DisableLighting property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#disablelighting
+func (t *TerrainMaterial) DisableLighting(disableLighting bool) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(disableLighting)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDisableLighting sets the DisableLighting property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#disablelighting
+func (t *TerrainMaterial) SetDisableLighting(disableLighting bool) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(disableLighting)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// DoNotSerialize returns the DoNotSerialize property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#donotserialize
+func (t *TerrainMaterial) DoNotSerialize(doNotSerialize bool) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(doNotSerialize)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDoNotSerialize sets the DoNotSerialize property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#donotserialize
+func (t *TerrainMaterial) SetDoNotSerialize(doNotSerialize bool) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(doNotSerialize)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// FillMode returns the FillMode property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#fillmode
+func (t *TerrainMaterial) FillMode(fillMode float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(fillMode)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFillMode sets the FillMode property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#fillmode
+func (t *TerrainMaterial) SetFillMode(fillMode float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(fillMode)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// FogEnabled returns the FogEnabled property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#fogenabled
+func (t *TerrainMaterial) FogEnabled(fogEnabled bool) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(fogEnabled)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFogEnabled sets the FogEnabled property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#fogenabled
+func (t *TerrainMaterial) SetFogEnabled(fogEnabled bool) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(fogEnabled)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// ForceDepthWrite returns the ForceDepthWrite property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#forcedepthwrite
+func (t *TerrainMaterial) ForceDepthWrite(forceDepthWrite bool) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(forceDepthWrite)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetForceDepthWrite sets the ForceDepthWrite property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#forcedepthwrite
+func (t *TerrainMaterial) SetForceDepthWrite(forceDepthWrite bool) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(forceDepthWrite)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// FresnelDirtyFlag returns the FresnelDirtyFlag property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#fresneldirtyflag
+func (t *TerrainMaterial) FresnelDirtyFlag(FresnelDirtyFlag float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(FresnelDirtyFlag)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFresnelDirtyFlag sets the FresnelDirtyFlag property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#fresneldirtyflag
+func (t *TerrainMaterial) SetFresnelDirtyFlag(FresnelDirtyFlag float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(FresnelDirtyFlag)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// GetRenderTargetTextures returns the GetRenderTargetTextures property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#getrendertargettextures
+func (t *TerrainMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(getRenderTargetTextures)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetGetRenderTargetTextures sets the GetRenderTargetTextures property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#getrendertargettextures
+func (t *TerrainMaterial) SetGetRenderTargetTextures(getRenderTargetTextures func()) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(getRenderTargetTextures)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// HasRenderTargetTextures returns the HasRenderTargetTextures property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#hasrendertargettextures
+func (t *TerrainMaterial) HasRenderTargetTextures(hasRenderTargetTextures bool) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(hasRenderTargetTextures)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetHasRenderTargetTextures sets the HasRenderTargetTextures property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#hasrendertargettextures
+func (t *TerrainMaterial) SetHasRenderTargetTextures(hasRenderTargetTextures bool) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(hasRenderTargetTextures)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// Id returns the Id property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#id
+func (t *TerrainMaterial) Id(id string) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(id)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetId sets the Id property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#id
+func (t *TerrainMaterial) SetId(id string) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(id)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#inspectablecustomproperties
+func (t *TerrainMaterial) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(inspectableCustomProperties.JSObject())
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#inspectablecustomproperties
+func (t *TerrainMaterial) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(inspectableCustomProperties.JSObject())
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// IsFrozen returns the IsFrozen property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#isfrozen
+func (t *TerrainMaterial) IsFrozen(isFrozen bool) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(isFrozen)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetIsFrozen sets the IsFrozen property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#isfrozen
+func (t *TerrainMaterial) SetIsFrozen(isFrozen bool) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(isFrozen)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// LightDirtyFlag returns the LightDirtyFlag property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#lightdirtyflag
+func (t *TerrainMaterial) LightDirtyFlag(LightDirtyFlag float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(LightDirtyFlag)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLightDirtyFlag sets the LightDirtyFlag property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#lightdirtyflag
+func (t *TerrainMaterial) SetLightDirtyFlag(LightDirtyFlag float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(LightDirtyFlag)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineListDrawMode returns the LineListDrawMode property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#linelistdrawmode
+func (t *TerrainMaterial) LineListDrawMode(LineListDrawMode float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(LineListDrawMode)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineListDrawMode sets the LineListDrawMode property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#linelistdrawmode
+func (t *TerrainMaterial) SetLineListDrawMode(LineListDrawMode float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(LineListDrawMode)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineLoopDrawMode returns the LineLoopDrawMode property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#lineloopdrawmode
+func (t *TerrainMaterial) LineLoopDrawMode(LineLoopDrawMode float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(LineLoopDrawMode)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineLoopDrawMode sets the LineLoopDrawMode property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#lineloopdrawmode
+func (t *TerrainMaterial) SetLineLoopDrawMode(LineLoopDrawMode float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(LineLoopDrawMode)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineStripDrawMode returns the LineStripDrawMode property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#linestripdrawmode
+func (t *TerrainMaterial) LineStripDrawMode(LineStripDrawMode float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(LineStripDrawMode)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineStripDrawMode sets the LineStripDrawMode property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#linestripdrawmode
+func (t *TerrainMaterial) SetLineStripDrawMode(LineStripDrawMode float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(LineStripDrawMode)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// MaxSimultaneousLights returns the MaxSimultaneousLights property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#maxsimultaneouslights
+func (t *TerrainMaterial) MaxSimultaneousLights(maxSimultaneousLights float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(maxSimultaneousLights)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMaxSimultaneousLights sets the MaxSimultaneousLights property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#maxsimultaneouslights
+func (t *TerrainMaterial) SetMaxSimultaneousLights(maxSimultaneousLights float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(maxSimultaneousLights)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#metadata
+func (t *TerrainMaterial) Metadata(metadata interface{}) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(metadata)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#metadata
+func (t *TerrainMaterial) SetMetadata(metadata interface{}) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(metadata)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// MiscDirtyFlag returns the MiscDirtyFlag property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#miscdirtyflag
+func (t *TerrainMaterial) MiscDirtyFlag(MiscDirtyFlag float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(MiscDirtyFlag)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMiscDirtyFlag sets the MiscDirtyFlag property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#miscdirtyflag
+func (t *TerrainMaterial) SetMiscDirtyFlag(MiscDirtyFlag float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(MiscDirtyFlag)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// MixTexture returns the MixTexture property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#mixtexture
+func (t *TerrainMaterial) MixTexture(mixTexture *BaseTexture) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(mixTexture.JSObject())
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMixTexture sets the MixTexture property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#mixtexture
+func (t *TerrainMaterial) SetMixTexture(mixTexture *BaseTexture) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(mixTexture.JSObject())
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#name
+func (t *TerrainMaterial) Name(name string) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(name)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#name
+func (t *TerrainMaterial) SetName(name string) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(name)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// NeedDepthPrePass returns the NeedDepthPrePass property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#needdepthprepass
+func (t *TerrainMaterial) NeedDepthPrePass(needDepthPrePass bool) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(needDepthPrePass)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetNeedDepthPrePass sets the NeedDepthPrePass property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#needdepthprepass
+func (t *TerrainMaterial) SetNeedDepthPrePass(needDepthPrePass bool) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(needDepthPrePass)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnBind returns the OnBind property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#onbind
+func (t *TerrainMaterial) OnBind(onBind func()) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(onBind)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnBind sets the OnBind property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#onbind
+func (t *TerrainMaterial) SetOnBind(onBind func()) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(onBind)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnBindObservable returns the OnBindObservable property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#onbindobservable
+func (t *TerrainMaterial) OnBindObservable(onBindObservable *Observable) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(onBindObservable.JSObject())
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnBindObservable sets the OnBindObservable property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#onbindobservable
+func (t *TerrainMaterial) SetOnBindObservable(onBindObservable *Observable) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(onBindObservable.JSObject())
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnCompiled returns the OnCompiled property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#oncompiled
+func (t *TerrainMaterial) OnCompiled(onCompiled func()) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(onCompiled)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnCompiled sets the OnCompiled property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#oncompiled
+func (t *TerrainMaterial) SetOnCompiled(onCompiled func()) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(onCompiled)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnDispose returns the OnDispose property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#ondispose
+func (t *TerrainMaterial) OnDispose(onDispose func()) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(onDispose)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnDispose sets the OnDispose property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#ondispose
+func (t *TerrainMaterial) SetOnDispose(onDispose func()) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(onDispose)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnDisposeObservable returns the OnDisposeObservable property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#ondisposeobservable
+func (t *TerrainMaterial) OnDisposeObservable(onDisposeObservable *Observable) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(onDisposeObservable.JSObject())
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnDisposeObservable sets the OnDisposeObservable property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#ondisposeobservable
+func (t *TerrainMaterial) SetOnDisposeObservable(onDisposeObservable *Observable) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(onDisposeObservable.JSObject())
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnError returns the OnError property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#onerror
+func (t *TerrainMaterial) OnError(onError func()) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(onError)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnError sets the OnError property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#onerror
+func (t *TerrainMaterial) SetOnError(onError func()) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(onError)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnUnBindObservable returns the OnUnBindObservable property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#onunbindobservable
+func (t *TerrainMaterial) OnUnBindObservable(onUnBindObservable *Observable) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(onUnBindObservable.JSObject())
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnUnBindObservable sets the OnUnBindObservable property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#onunbindobservable
+func (t *TerrainMaterial) SetOnUnBindObservable(onUnBindObservable *Observable) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(onUnBindObservable.JSObject())
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointFillMode returns the PointFillMode property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#pointfillmode
+func (t *TerrainMaterial) PointFillMode(PointFillMode float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(PointFillMode)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointFillMode sets the PointFillMode property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#pointfillmode
+func (t *TerrainMaterial) SetPointFillMode(PointFillMode float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(PointFillMode)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointListDrawMode returns the PointListDrawMode property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#pointlistdrawmode
+func (t *TerrainMaterial) PointListDrawMode(PointListDrawMode float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(PointListDrawMode)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointListDrawMode sets the PointListDrawMode property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#pointlistdrawmode
+func (t *TerrainMaterial) SetPointListDrawMode(PointListDrawMode float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(PointListDrawMode)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointSize returns the PointSize property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#pointsize
+func (t *TerrainMaterial) PointSize(pointSize float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(pointSize)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointSize sets the PointSize property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#pointsize
+func (t *TerrainMaterial) SetPointSize(pointSize float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(pointSize)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointsCloud returns the PointsCloud property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#pointscloud
+func (t *TerrainMaterial) PointsCloud(pointsCloud bool) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(pointsCloud)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointsCloud sets the PointsCloud property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#pointscloud
+func (t *TerrainMaterial) SetPointsCloud(pointsCloud bool) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(pointsCloud)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// ReservedDataStore returns the ReservedDataStore property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#reserveddatastore
+func (t *TerrainMaterial) ReservedDataStore(reservedDataStore interface{}) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(reservedDataStore)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetReservedDataStore sets the ReservedDataStore property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#reserveddatastore
+func (t *TerrainMaterial) SetReservedDataStore(reservedDataStore interface{}) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(reservedDataStore)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SeparateCullingPass returns the SeparateCullingPass property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#separatecullingpass
+func (t *TerrainMaterial) SeparateCullingPass(separateCullingPass bool) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(separateCullingPass)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSeparateCullingPass sets the SeparateCullingPass property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#separatecullingpass
+func (t *TerrainMaterial) SetSeparateCullingPass(separateCullingPass bool) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(separateCullingPass)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SideOrientation returns the SideOrientation property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#sideorientation
+func (t *TerrainMaterial) SideOrientation(sideOrientation float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(sideOrientation)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSideOrientation sets the SideOrientation property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#sideorientation
+func (t *TerrainMaterial) SetSideOrientation(sideOrientation float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(sideOrientation)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SpecularColor returns the SpecularColor property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#specularcolor
+func (t *TerrainMaterial) SpecularColor(specularColor *Color3) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(specularColor.JSObject())
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSpecularColor sets the SpecularColor property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#specularcolor
+func (t *TerrainMaterial) SetSpecularColor(specularColor *Color3) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(specularColor.JSObject())
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SpecularPower returns the SpecularPower property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#specularpower
+func (t *TerrainMaterial) SpecularPower(specularPower float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(specularPower)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSpecularPower sets the SpecularPower property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#specularpower
+func (t *TerrainMaterial) SetSpecularPower(specularPower float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(specularPower)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// State returns the State property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#state
+func (t *TerrainMaterial) State(state string) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(state)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetState sets the State property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#state
+func (t *TerrainMaterial) SetState(state string) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(state)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// TextureDirtyFlag returns the TextureDirtyFlag property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#texturedirtyflag
+func (t *TerrainMaterial) TextureDirtyFlag(TextureDirtyFlag float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(TextureDirtyFlag)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTextureDirtyFlag sets the TextureDirtyFlag property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#texturedirtyflag
+func (t *TerrainMaterial) SetTextureDirtyFlag(TextureDirtyFlag float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(TextureDirtyFlag)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// TriangleFanDrawMode returns the TriangleFanDrawMode property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#trianglefandrawmode
+func (t *TerrainMaterial) TriangleFanDrawMode(TriangleFanDrawMode float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(TriangleFanDrawMode)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTriangleFanDrawMode sets the TriangleFanDrawMode property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#trianglefandrawmode
+func (t *TerrainMaterial) SetTriangleFanDrawMode(TriangleFanDrawMode float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(TriangleFanDrawMode)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// TriangleFillMode returns the TriangleFillMode property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#trianglefillmode
+func (t *TerrainMaterial) TriangleFillMode(TriangleFillMode float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(TriangleFillMode)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTriangleFillMode sets the TriangleFillMode property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#trianglefillmode
+func (t *TerrainMaterial) SetTriangleFillMode(TriangleFillMode float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(TriangleFillMode)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// TriangleStripDrawMode returns the TriangleStripDrawMode property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#trianglestripdrawmode
+func (t *TerrainMaterial) TriangleStripDrawMode(TriangleStripDrawMode float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(TriangleStripDrawMode)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTriangleStripDrawMode sets the TriangleStripDrawMode property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#trianglestripdrawmode
+func (t *TerrainMaterial) SetTriangleStripDrawMode(TriangleStripDrawMode float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(TriangleStripDrawMode)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#uniqueid
+func (t *TerrainMaterial) UniqueId(uniqueId float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(uniqueId)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#uniqueid
+func (t *TerrainMaterial) SetUniqueId(uniqueId float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(uniqueId)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// WireFrameFillMode returns the WireFrameFillMode property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#wireframefillmode
+func (t *TerrainMaterial) WireFrameFillMode(WireFrameFillMode float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(WireFrameFillMode)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetWireFrameFillMode sets the WireFrameFillMode property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#wireframefillmode
+func (t *TerrainMaterial) SetWireFrameFillMode(WireFrameFillMode float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(WireFrameFillMode)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// Wireframe returns the Wireframe property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#wireframe
+func (t *TerrainMaterial) Wireframe(wireframe bool) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(wireframe)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetWireframe sets the Wireframe property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#wireframe
+func (t *TerrainMaterial) SetWireframe(wireframe bool) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(wireframe)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// ZOffset returns the ZOffset property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#zoffset
+func (t *TerrainMaterial) ZOffset(zOffset float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(zOffset)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetZOffset sets the ZOffset property of class TerrainMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.terrainmaterial#zoffset
+func (t *TerrainMaterial) SetZOffset(zOffset float64) *TerrainMaterial {
+	p := ba.ctx.Get("TerrainMaterial").New(zOffset)
+	return TerrainMaterialFromJSObject(p, ba.ctx)
+}
+
+*/

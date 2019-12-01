@@ -29,7 +29,7 @@ func VirtualJoystickFromJSObject(p js.Value, ctx js.Value) *VirtualJoystick {
 
 // NewVirtualJoystickOpts contains optional parameters for NewVirtualJoystick.
 type NewVirtualJoystickOpts struct {
-	LeftJoystick *JSBool
+	LeftJoystick *bool
 }
 
 // NewVirtualJoystick returns a new VirtualJoystick object.
@@ -40,8 +40,168 @@ func (ba *Babylon) NewVirtualJoystick(opts *NewVirtualJoystickOpts) *VirtualJoys
 		opts = &NewVirtualJoystickOpts{}
 	}
 
-	p := ba.ctx.Get("VirtualJoystick").New(opts.LeftJoystick.JSObject())
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.LeftJoystick == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.LeftJoystick)
+	}
+
+	p := ba.ctx.Get("VirtualJoystick").New(args...)
 	return VirtualJoystickFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// ReleaseCanvas calls the ReleaseCanvas method on the VirtualJoystick object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualjoystick#releasecanvas
+func (v *VirtualJoystick) ReleaseCanvas() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	v.p.Call("releaseCanvas", args...)
+}
+
+// SetActionOnTouch calls the SetActionOnTouch method on the VirtualJoystick object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualjoystick#setactionontouch
+func (v *VirtualJoystick) SetActionOnTouch(action func()) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, action)
+
+	v.p.Call("setActionOnTouch", args...)
+}
+
+// SetAxisForLeftRight calls the SetAxisForLeftRight method on the VirtualJoystick object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualjoystick#setaxisforleftright
+func (v *VirtualJoystick) SetAxisForLeftRight(axis *JoystickAxis) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, axis.JSObject())
+
+	v.p.Call("setAxisForLeftRight", args...)
+}
+
+// SetAxisForUpDown calls the SetAxisForUpDown method on the VirtualJoystick object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualjoystick#setaxisforupdown
+func (v *VirtualJoystick) SetAxisForUpDown(axis *JoystickAxis) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, axis.JSObject())
+
+	v.p.Call("setAxisForUpDown", args...)
+}
+
+// SetJoystickColor calls the SetJoystickColor method on the VirtualJoystick object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualjoystick#setjoystickcolor
+func (v *VirtualJoystick) SetJoystickColor(newColor string) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, newColor)
+
+	v.p.Call("setJoystickColor", args...)
+}
+
+// SetJoystickSensibility calls the SetJoystickSensibility method on the VirtualJoystick object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualjoystick#setjoysticksensibility
+func (v *VirtualJoystick) SetJoystickSensibility(newJoystickSensibility float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, newJoystickSensibility)
+
+	v.p.Call("setJoystickSensibility", args...)
+}
+
+/*
+
+// Canvas returns the Canvas property of class VirtualJoystick.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualjoystick#canvas
+func (v *VirtualJoystick) Canvas(Canvas js.Value) *VirtualJoystick {
+	p := ba.ctx.Get("VirtualJoystick").New(Canvas)
+	return VirtualJoystickFromJSObject(p, ba.ctx)
+}
+
+// SetCanvas sets the Canvas property of class VirtualJoystick.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualjoystick#canvas
+func (v *VirtualJoystick) SetCanvas(Canvas js.Value) *VirtualJoystick {
+	p := ba.ctx.Get("VirtualJoystick").New(Canvas)
+	return VirtualJoystickFromJSObject(p, ba.ctx)
+}
+
+// DeltaPosition returns the DeltaPosition property of class VirtualJoystick.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualjoystick#deltaposition
+func (v *VirtualJoystick) DeltaPosition(deltaPosition *Vector3) *VirtualJoystick {
+	p := ba.ctx.Get("VirtualJoystick").New(deltaPosition.JSObject())
+	return VirtualJoystickFromJSObject(p, ba.ctx)
+}
+
+// SetDeltaPosition sets the DeltaPosition property of class VirtualJoystick.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualjoystick#deltaposition
+func (v *VirtualJoystick) SetDeltaPosition(deltaPosition *Vector3) *VirtualJoystick {
+	p := ba.ctx.Get("VirtualJoystick").New(deltaPosition.JSObject())
+	return VirtualJoystickFromJSObject(p, ba.ctx)
+}
+
+// Pressed returns the Pressed property of class VirtualJoystick.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualjoystick#pressed
+func (v *VirtualJoystick) Pressed(pressed bool) *VirtualJoystick {
+	p := ba.ctx.Get("VirtualJoystick").New(pressed)
+	return VirtualJoystickFromJSObject(p, ba.ctx)
+}
+
+// SetPressed sets the Pressed property of class VirtualJoystick.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualjoystick#pressed
+func (v *VirtualJoystick) SetPressed(pressed bool) *VirtualJoystick {
+	p := ba.ctx.Get("VirtualJoystick").New(pressed)
+	return VirtualJoystickFromJSObject(p, ba.ctx)
+}
+
+// ReverseLeftRight returns the ReverseLeftRight property of class VirtualJoystick.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualjoystick#reverseleftright
+func (v *VirtualJoystick) ReverseLeftRight(reverseLeftRight bool) *VirtualJoystick {
+	p := ba.ctx.Get("VirtualJoystick").New(reverseLeftRight)
+	return VirtualJoystickFromJSObject(p, ba.ctx)
+}
+
+// SetReverseLeftRight sets the ReverseLeftRight property of class VirtualJoystick.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualjoystick#reverseleftright
+func (v *VirtualJoystick) SetReverseLeftRight(reverseLeftRight bool) *VirtualJoystick {
+	p := ba.ctx.Get("VirtualJoystick").New(reverseLeftRight)
+	return VirtualJoystickFromJSObject(p, ba.ctx)
+}
+
+// ReverseUpDown returns the ReverseUpDown property of class VirtualJoystick.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualjoystick#reverseupdown
+func (v *VirtualJoystick) ReverseUpDown(reverseUpDown bool) *VirtualJoystick {
+	p := ba.ctx.Get("VirtualJoystick").New(reverseUpDown)
+	return VirtualJoystickFromJSObject(p, ba.ctx)
+}
+
+// SetReverseUpDown sets the ReverseUpDown property of class VirtualJoystick.
+//
+// https://doc.babylonjs.com/api/classes/babylon.virtualjoystick#reverseupdown
+func (v *VirtualJoystick) SetReverseUpDown(reverseUpDown bool) *VirtualJoystick {
+	p := ba.ctx.Get("VirtualJoystick").New(reverseUpDown)
+	return VirtualJoystickFromJSObject(p, ba.ctx)
+}
+
+*/

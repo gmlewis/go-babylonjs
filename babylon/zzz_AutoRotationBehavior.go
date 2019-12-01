@@ -29,4 +29,134 @@ func AutoRotationBehaviorFromJSObject(p js.Value, ctx js.Value) *AutoRotationBeh
 	return &AutoRotationBehavior{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// Attach calls the Attach method on the AutoRotationBehavior object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.autorotationbehavior#attach
+func (a *AutoRotationBehavior) Attach(camera *ArcRotateCamera) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, camera.JSObject())
+
+	a.p.Call("attach", args...)
+}
+
+// Detach calls the Detach method on the AutoRotationBehavior object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.autorotationbehavior#detach
+func (a *AutoRotationBehavior) Detach() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	a.p.Call("detach", args...)
+}
+
+// Init calls the Init method on the AutoRotationBehavior object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.autorotationbehavior#init
+func (a *AutoRotationBehavior) Init() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	a.p.Call("init", args...)
+}
+
+/*
+
+// IdleRotationSpeed returns the IdleRotationSpeed property of class AutoRotationBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.autorotationbehavior#idlerotationspeed
+func (a *AutoRotationBehavior) IdleRotationSpeed(idleRotationSpeed float64) *AutoRotationBehavior {
+	p := ba.ctx.Get("AutoRotationBehavior").New(idleRotationSpeed)
+	return AutoRotationBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetIdleRotationSpeed sets the IdleRotationSpeed property of class AutoRotationBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.autorotationbehavior#idlerotationspeed
+func (a *AutoRotationBehavior) SetIdleRotationSpeed(idleRotationSpeed float64) *AutoRotationBehavior {
+	p := ba.ctx.Get("AutoRotationBehavior").New(idleRotationSpeed)
+	return AutoRotationBehaviorFromJSObject(p, ba.ctx)
+}
+
+// IdleRotationSpinupTime returns the IdleRotationSpinupTime property of class AutoRotationBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.autorotationbehavior#idlerotationspinuptime
+func (a *AutoRotationBehavior) IdleRotationSpinupTime(idleRotationSpinupTime float64) *AutoRotationBehavior {
+	p := ba.ctx.Get("AutoRotationBehavior").New(idleRotationSpinupTime)
+	return AutoRotationBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetIdleRotationSpinupTime sets the IdleRotationSpinupTime property of class AutoRotationBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.autorotationbehavior#idlerotationspinuptime
+func (a *AutoRotationBehavior) SetIdleRotationSpinupTime(idleRotationSpinupTime float64) *AutoRotationBehavior {
+	p := ba.ctx.Get("AutoRotationBehavior").New(idleRotationSpinupTime)
+	return AutoRotationBehaviorFromJSObject(p, ba.ctx)
+}
+
+// IdleRotationWaitTime returns the IdleRotationWaitTime property of class AutoRotationBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.autorotationbehavior#idlerotationwaittime
+func (a *AutoRotationBehavior) IdleRotationWaitTime(idleRotationWaitTime float64) *AutoRotationBehavior {
+	p := ba.ctx.Get("AutoRotationBehavior").New(idleRotationWaitTime)
+	return AutoRotationBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetIdleRotationWaitTime sets the IdleRotationWaitTime property of class AutoRotationBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.autorotationbehavior#idlerotationwaittime
+func (a *AutoRotationBehavior) SetIdleRotationWaitTime(idleRotationWaitTime float64) *AutoRotationBehavior {
+	p := ba.ctx.Get("AutoRotationBehavior").New(idleRotationWaitTime)
+	return AutoRotationBehaviorFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class AutoRotationBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.autorotationbehavior#name
+func (a *AutoRotationBehavior) Name(name string) *AutoRotationBehavior {
+	p := ba.ctx.Get("AutoRotationBehavior").New(name)
+	return AutoRotationBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class AutoRotationBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.autorotationbehavior#name
+func (a *AutoRotationBehavior) SetName(name string) *AutoRotationBehavior {
+	p := ba.ctx.Get("AutoRotationBehavior").New(name)
+	return AutoRotationBehaviorFromJSObject(p, ba.ctx)
+}
+
+// RotationInProgress returns the RotationInProgress property of class AutoRotationBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.autorotationbehavior#rotationinprogress
+func (a *AutoRotationBehavior) RotationInProgress(rotationInProgress bool) *AutoRotationBehavior {
+	p := ba.ctx.Get("AutoRotationBehavior").New(rotationInProgress)
+	return AutoRotationBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetRotationInProgress sets the RotationInProgress property of class AutoRotationBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.autorotationbehavior#rotationinprogress
+func (a *AutoRotationBehavior) SetRotationInProgress(rotationInProgress bool) *AutoRotationBehavior {
+	p := ba.ctx.Get("AutoRotationBehavior").New(rotationInProgress)
+	return AutoRotationBehaviorFromJSObject(p, ba.ctx)
+}
+
+// ZoomStopsAnimation returns the ZoomStopsAnimation property of class AutoRotationBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.autorotationbehavior#zoomstopsanimation
+func (a *AutoRotationBehavior) ZoomStopsAnimation(zoomStopsAnimation bool) *AutoRotationBehavior {
+	p := ba.ctx.Get("AutoRotationBehavior").New(zoomStopsAnimation)
+	return AutoRotationBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetZoomStopsAnimation sets the ZoomStopsAnimation property of class AutoRotationBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.autorotationbehavior#zoomstopsanimation
+func (a *AutoRotationBehavior) SetZoomStopsAnimation(zoomStopsAnimation bool) *AutoRotationBehavior {
+	p := ba.ctx.Get("AutoRotationBehavior").New(zoomStopsAnimation)
+	return AutoRotationBehaviorFromJSObject(p, ba.ctx)
+}
+
+*/

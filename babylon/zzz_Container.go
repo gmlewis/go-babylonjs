@@ -31,7 +31,7 @@ func ContainerFromJSObject(p js.Value, ctx js.Value) *Container {
 
 // NewContainerOpts contains optional parameters for NewContainer.
 type NewContainerOpts struct {
-	Name *JSString
+	Name *string
 }
 
 // NewContainer returns a new Container object.
@@ -42,8 +42,1654 @@ func (ba *Babylon) NewContainer(opts *NewContainerOpts) *Container {
 		opts = &NewContainerOpts{}
 	}
 
-	p := ba.ctx.Get("Container").New(opts.Name.JSObject())
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Name == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Name)
+	}
+
+	p := ba.ctx.Get("Container").New(args...)
 	return ContainerFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AddControl calls the AddControl method on the Container object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#addcontrol
+func (c *Container) AddControl(control *Control) *Container {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, control.JSObject())
+
+	retVal := c.p.Call("addControl", args...)
+	return ContainerFromJSObject(retVal, c.ctx)
+}
+
+// ClearControls calls the ClearControls method on the Container object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#clearcontrols
+func (c *Container) ClearControls() *Container {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("clearControls", args...)
+	return ContainerFromJSObject(retVal, c.ctx)
+}
+
+// Contains calls the Contains method on the Container object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#contains
+func (c *Container) Contains(x float64, y float64) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, x)
+	args = append(args, y)
+
+	retVal := c.p.Call("contains", args...)
+	return retVal.Bool()
+}
+
+// ContainsControl calls the ContainsControl method on the Container object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#containscontrol
+func (c *Container) ContainsControl(control *Control) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, control.JSObject())
+
+	retVal := c.p.Call("containsControl", args...)
+	return retVal.Bool()
+}
+
+// Dispose calls the Dispose method on the Container object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#dispose
+func (c *Container) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	c.p.Call("dispose", args...)
+}
+
+// GetAscendantOfClass calls the GetAscendantOfClass method on the Container object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#getascendantofclass
+func (c *Container) GetAscendantOfClass(className string) *Control {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, className)
+
+	retVal := c.p.Call("getAscendantOfClass", args...)
+	return ControlFromJSObject(retVal, c.ctx)
+}
+
+// GetChildByName calls the GetChildByName method on the Container object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#getchildbyname
+func (c *Container) GetChildByName(name string) *Control {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := c.p.Call("getChildByName", args...)
+	return ControlFromJSObject(retVal, c.ctx)
+}
+
+// GetChildByType calls the GetChildByType method on the Container object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#getchildbytype
+func (c *Container) GetChildByType(name string, jsType string) *Control {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	retVal := c.p.Call("getChildByType", args...)
+	return ControlFromJSObject(retVal, c.ctx)
+}
+
+// GetClassName calls the GetClassName method on the Container object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#getclassname
+func (c *Container) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// ContainerGetDescendantsOpts contains optional parameters for Container.GetDescendants.
+type ContainerGetDescendantsOpts struct {
+	DirectDescendantsOnly *bool
+	Predicate             *func()
+}
+
+// GetDescendants calls the GetDescendants method on the Container object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#getdescendants
+func (c *Container) GetDescendants(opts *ContainerGetDescendantsOpts) *Control {
+	if opts == nil {
+		opts = &ContainerGetDescendantsOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	retVal := c.p.Call("getDescendants", args...)
+	return ControlFromJSObject(retVal, c.ctx)
+}
+
+// ContainerGetDescendantsToRefOpts contains optional parameters for Container.GetDescendantsToRef.
+type ContainerGetDescendantsToRefOpts struct {
+	DirectDescendantsOnly *bool
+	Predicate             *func()
+}
+
+// GetDescendantsToRef calls the GetDescendantsToRef method on the Container object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#getdescendantstoref
+func (c *Container) GetDescendantsToRef(results *Control, opts *ContainerGetDescendantsToRefOpts) {
+	if opts == nil {
+		opts = &ContainerGetDescendantsToRefOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, results.JSObject())
+
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	c.p.Call("getDescendantsToRef", args...)
+}
+
+// GetLocalCoordinates calls the GetLocalCoordinates method on the Container object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#getlocalcoordinates
+func (c *Container) GetLocalCoordinates(globalCoordinates *Vector2) *Vector2 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, globalCoordinates.JSObject())
+
+	retVal := c.p.Call("getLocalCoordinates", args...)
+	return Vector2FromJSObject(retVal, c.ctx)
+}
+
+// GetLocalCoordinatesToRef calls the GetLocalCoordinatesToRef method on the Container object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#getlocalcoordinatestoref
+func (c *Container) GetLocalCoordinatesToRef(globalCoordinates *Vector2, result *Vector2) *Control {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, globalCoordinates.JSObject())
+	args = append(args, result.JSObject())
+
+	retVal := c.p.Call("getLocalCoordinatesToRef", args...)
+	return ControlFromJSObject(retVal, c.ctx)
+}
+
+// GetParentLocalCoordinates calls the GetParentLocalCoordinates method on the Container object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#getparentlocalcoordinates
+func (c *Container) GetParentLocalCoordinates(globalCoordinates *Vector2) *Vector2 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, globalCoordinates.JSObject())
+
+	retVal := c.p.Call("getParentLocalCoordinates", args...)
+	return Vector2FromJSObject(retVal, c.ctx)
+}
+
+// IsAscendant calls the IsAscendant method on the Container object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#isascendant
+func (c *Container) IsAscendant(container *Control) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, container.JSObject())
+
+	retVal := c.p.Call("isAscendant", args...)
+	return retVal.Bool()
+}
+
+// LinkWithMesh calls the LinkWithMesh method on the Container object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#linkwithmesh
+func (c *Container) LinkWithMesh(mesh *AbstractMesh) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	c.p.Call("linkWithMesh", args...)
+}
+
+// MoveToVector3 calls the MoveToVector3 method on the Container object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#movetovector3
+func (c *Container) MoveToVector3(position *Vector3, scene *Scene) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, position.JSObject())
+	args = append(args, scene.JSObject())
+
+	c.p.Call("moveToVector3", args...)
+}
+
+// RemoveControl calls the RemoveControl method on the Container object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#removecontrol
+func (c *Container) RemoveControl(control *Control) *Container {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, control.JSObject())
+
+	retVal := c.p.Call("removeControl", args...)
+	return ContainerFromJSObject(retVal, c.ctx)
+}
+
+// _flagDescendantsAsMatrixDirty calls the _flagDescendantsAsMatrixDirty method on the Container object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#_flagdescendantsasmatrixdirty
+func (c *Container) _flagDescendantsAsMatrixDirty() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	c.p.Call("_flagDescendantsAsMatrixDirty", args...)
+}
+
+/*
+
+// AdaptHeightToChildren returns the AdaptHeightToChildren property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#adaptheighttochildren
+func (c *Container) AdaptHeightToChildren(adaptHeightToChildren bool) *Container {
+	p := ba.ctx.Get("Container").New(adaptHeightToChildren)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetAdaptHeightToChildren sets the AdaptHeightToChildren property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#adaptheighttochildren
+func (c *Container) SetAdaptHeightToChildren(adaptHeightToChildren bool) *Container {
+	p := ba.ctx.Get("Container").New(adaptHeightToChildren)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// AdaptWidthToChildren returns the AdaptWidthToChildren property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#adaptwidthtochildren
+func (c *Container) AdaptWidthToChildren(adaptWidthToChildren bool) *Container {
+	p := ba.ctx.Get("Container").New(adaptWidthToChildren)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetAdaptWidthToChildren sets the AdaptWidthToChildren property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#adaptwidthtochildren
+func (c *Container) SetAdaptWidthToChildren(adaptWidthToChildren bool) *Container {
+	p := ba.ctx.Get("Container").New(adaptWidthToChildren)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// AllowAlphaInheritance returns the AllowAlphaInheritance property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#allowalphainheritance
+func (c *Container) AllowAlphaInheritance(AllowAlphaInheritance bool) *Container {
+	p := ba.ctx.Get("Container").New(AllowAlphaInheritance)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetAllowAlphaInheritance sets the AllowAlphaInheritance property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#allowalphainheritance
+func (c *Container) SetAllowAlphaInheritance(AllowAlphaInheritance bool) *Container {
+	p := ba.ctx.Get("Container").New(AllowAlphaInheritance)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// Alpha returns the Alpha property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#alpha
+func (c *Container) Alpha(alpha float64) *Container {
+	p := ba.ctx.Get("Container").New(alpha)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetAlpha sets the Alpha property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#alpha
+func (c *Container) SetAlpha(alpha float64) *Container {
+	p := ba.ctx.Get("Container").New(alpha)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// Background returns the Background property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#background
+func (c *Container) Background(background string) *Container {
+	p := ba.ctx.Get("Container").New(background)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetBackground sets the Background property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#background
+func (c *Container) SetBackground(background string) *Container {
+	p := ba.ctx.Get("Container").New(background)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// CenterX returns the CenterX property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#centerx
+func (c *Container) CenterX(centerX float64) *Container {
+	p := ba.ctx.Get("Container").New(centerX)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetCenterX sets the CenterX property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#centerx
+func (c *Container) SetCenterX(centerX float64) *Container {
+	p := ba.ctx.Get("Container").New(centerX)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// CenterY returns the CenterY property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#centery
+func (c *Container) CenterY(centerY float64) *Container {
+	p := ba.ctx.Get("Container").New(centerY)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetCenterY sets the CenterY property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#centery
+func (c *Container) SetCenterY(centerY float64) *Container {
+	p := ba.ctx.Get("Container").New(centerY)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// Children returns the Children property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#children
+func (c *Container) Children(children *Control) *Container {
+	p := ba.ctx.Get("Container").New(children.JSObject())
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetChildren sets the Children property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#children
+func (c *Container) SetChildren(children *Control) *Container {
+	p := ba.ctx.Get("Container").New(children.JSObject())
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// ClipChildren returns the ClipChildren property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#clipchildren
+func (c *Container) ClipChildren(clipChildren bool) *Container {
+	p := ba.ctx.Get("Container").New(clipChildren)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetClipChildren sets the ClipChildren property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#clipchildren
+func (c *Container) SetClipChildren(clipChildren bool) *Container {
+	p := ba.ctx.Get("Container").New(clipChildren)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// ClipContent returns the ClipContent property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#clipcontent
+func (c *Container) ClipContent(clipContent bool) *Container {
+	p := ba.ctx.Get("Container").New(clipContent)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetClipContent sets the ClipContent property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#clipcontent
+func (c *Container) SetClipContent(clipContent bool) *Container {
+	p := ba.ctx.Get("Container").New(clipContent)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// Color returns the Color property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#color
+func (c *Container) Color(color string) *Container {
+	p := ba.ctx.Get("Container").New(color)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetColor sets the Color property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#color
+func (c *Container) SetColor(color string) *Container {
+	p := ba.ctx.Get("Container").New(color)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// DisabledColor returns the DisabledColor property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#disabledcolor
+func (c *Container) DisabledColor(disabledColor string) *Container {
+	p := ba.ctx.Get("Container").New(disabledColor)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetDisabledColor sets the DisabledColor property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#disabledcolor
+func (c *Container) SetDisabledColor(disabledColor string) *Container {
+	p := ba.ctx.Get("Container").New(disabledColor)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// FontFamily returns the FontFamily property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#fontfamily
+func (c *Container) FontFamily(fontFamily string) *Container {
+	p := ba.ctx.Get("Container").New(fontFamily)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetFontFamily sets the FontFamily property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#fontfamily
+func (c *Container) SetFontFamily(fontFamily string) *Container {
+	p := ba.ctx.Get("Container").New(fontFamily)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// FontOffset returns the FontOffset property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#fontoffset
+func (c *Container) FontOffset(fontOffset js.Value) *Container {
+	p := ba.ctx.Get("Container").New(fontOffset)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetFontOffset sets the FontOffset property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#fontoffset
+func (c *Container) SetFontOffset(fontOffset js.Value) *Container {
+	p := ba.ctx.Get("Container").New(fontOffset)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// FontSize returns the FontSize property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#fontsize
+func (c *Container) FontSize(fontSize string) *Container {
+	p := ba.ctx.Get("Container").New(fontSize)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetFontSize sets the FontSize property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#fontsize
+func (c *Container) SetFontSize(fontSize string) *Container {
+	p := ba.ctx.Get("Container").New(fontSize)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// FontSizeInPixels returns the FontSizeInPixels property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#fontsizeinpixels
+func (c *Container) FontSizeInPixels(fontSizeInPixels float64) *Container {
+	p := ba.ctx.Get("Container").New(fontSizeInPixels)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetFontSizeInPixels sets the FontSizeInPixels property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#fontsizeinpixels
+func (c *Container) SetFontSizeInPixels(fontSizeInPixels float64) *Container {
+	p := ba.ctx.Get("Container").New(fontSizeInPixels)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// FontStyle returns the FontStyle property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#fontstyle
+func (c *Container) FontStyle(fontStyle string) *Container {
+	p := ba.ctx.Get("Container").New(fontStyle)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetFontStyle sets the FontStyle property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#fontstyle
+func (c *Container) SetFontStyle(fontStyle string) *Container {
+	p := ba.ctx.Get("Container").New(fontStyle)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// FontWeight returns the FontWeight property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#fontweight
+func (c *Container) FontWeight(fontWeight string) *Container {
+	p := ba.ctx.Get("Container").New(fontWeight)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetFontWeight sets the FontWeight property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#fontweight
+func (c *Container) SetFontWeight(fontWeight string) *Container {
+	p := ba.ctx.Get("Container").New(fontWeight)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// HORIZONTAL_ALIGNMENT_CENTER returns the HORIZONTAL_ALIGNMENT_CENTER property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#horizontal_alignment_center
+func (c *Container) HORIZONTAL_ALIGNMENT_CENTER(HORIZONTAL_ALIGNMENT_CENTER float64) *Container {
+	p := ba.ctx.Get("Container").New(HORIZONTAL_ALIGNMENT_CENTER)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetHORIZONTAL_ALIGNMENT_CENTER sets the HORIZONTAL_ALIGNMENT_CENTER property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#horizontal_alignment_center
+func (c *Container) SetHORIZONTAL_ALIGNMENT_CENTER(HORIZONTAL_ALIGNMENT_CENTER float64) *Container {
+	p := ba.ctx.Get("Container").New(HORIZONTAL_ALIGNMENT_CENTER)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// HORIZONTAL_ALIGNMENT_LEFT returns the HORIZONTAL_ALIGNMENT_LEFT property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#horizontal_alignment_left
+func (c *Container) HORIZONTAL_ALIGNMENT_LEFT(HORIZONTAL_ALIGNMENT_LEFT float64) *Container {
+	p := ba.ctx.Get("Container").New(HORIZONTAL_ALIGNMENT_LEFT)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetHORIZONTAL_ALIGNMENT_LEFT sets the HORIZONTAL_ALIGNMENT_LEFT property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#horizontal_alignment_left
+func (c *Container) SetHORIZONTAL_ALIGNMENT_LEFT(HORIZONTAL_ALIGNMENT_LEFT float64) *Container {
+	p := ba.ctx.Get("Container").New(HORIZONTAL_ALIGNMENT_LEFT)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// HORIZONTAL_ALIGNMENT_RIGHT returns the HORIZONTAL_ALIGNMENT_RIGHT property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#horizontal_alignment_right
+func (c *Container) HORIZONTAL_ALIGNMENT_RIGHT(HORIZONTAL_ALIGNMENT_RIGHT float64) *Container {
+	p := ba.ctx.Get("Container").New(HORIZONTAL_ALIGNMENT_RIGHT)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetHORIZONTAL_ALIGNMENT_RIGHT sets the HORIZONTAL_ALIGNMENT_RIGHT property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#horizontal_alignment_right
+func (c *Container) SetHORIZONTAL_ALIGNMENT_RIGHT(HORIZONTAL_ALIGNMENT_RIGHT float64) *Container {
+	p := ba.ctx.Get("Container").New(HORIZONTAL_ALIGNMENT_RIGHT)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// Height returns the Height property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#height
+func (c *Container) Height(height string) *Container {
+	p := ba.ctx.Get("Container").New(height)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetHeight sets the Height property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#height
+func (c *Container) SetHeight(height string) *Container {
+	p := ba.ctx.Get("Container").New(height)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// HeightInPixels returns the HeightInPixels property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#heightinpixels
+func (c *Container) HeightInPixels(heightInPixels float64) *Container {
+	p := ba.ctx.Get("Container").New(heightInPixels)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetHeightInPixels sets the HeightInPixels property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#heightinpixels
+func (c *Container) SetHeightInPixels(heightInPixels float64) *Container {
+	p := ba.ctx.Get("Container").New(heightInPixels)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// HorizontalAlignment returns the HorizontalAlignment property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#horizontalalignment
+func (c *Container) HorizontalAlignment(horizontalAlignment float64) *Container {
+	p := ba.ctx.Get("Container").New(horizontalAlignment)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetHorizontalAlignment sets the HorizontalAlignment property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#horizontalalignment
+func (c *Container) SetHorizontalAlignment(horizontalAlignment float64) *Container {
+	p := ba.ctx.Get("Container").New(horizontalAlignment)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// Host returns the Host property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#host
+func (c *Container) Host(host *AdvancedDynamicTexture) *Container {
+	p := ba.ctx.Get("Container").New(host.JSObject())
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetHost sets the Host property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#host
+func (c *Container) SetHost(host *AdvancedDynamicTexture) *Container {
+	p := ba.ctx.Get("Container").New(host.JSObject())
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// HoverCursor returns the HoverCursor property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#hovercursor
+func (c *Container) HoverCursor(hoverCursor string) *Container {
+	p := ba.ctx.Get("Container").New(hoverCursor)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetHoverCursor sets the HoverCursor property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#hovercursor
+func (c *Container) SetHoverCursor(hoverCursor string) *Container {
+	p := ba.ctx.Get("Container").New(hoverCursor)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// IsDirty returns the IsDirty property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#isdirty
+func (c *Container) IsDirty(isDirty bool) *Container {
+	p := ba.ctx.Get("Container").New(isDirty)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetIsDirty sets the IsDirty property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#isdirty
+func (c *Container) SetIsDirty(isDirty bool) *Container {
+	p := ba.ctx.Get("Container").New(isDirty)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// IsEnabled returns the IsEnabled property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#isenabled
+func (c *Container) IsEnabled(isEnabled bool) *Container {
+	p := ba.ctx.Get("Container").New(isEnabled)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetIsEnabled sets the IsEnabled property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#isenabled
+func (c *Container) SetIsEnabled(isEnabled bool) *Container {
+	p := ba.ctx.Get("Container").New(isEnabled)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// IsFocusInvisible returns the IsFocusInvisible property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#isfocusinvisible
+func (c *Container) IsFocusInvisible(isFocusInvisible bool) *Container {
+	p := ba.ctx.Get("Container").New(isFocusInvisible)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetIsFocusInvisible sets the IsFocusInvisible property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#isfocusinvisible
+func (c *Container) SetIsFocusInvisible(isFocusInvisible bool) *Container {
+	p := ba.ctx.Get("Container").New(isFocusInvisible)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// IsHighlighted returns the IsHighlighted property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#ishighlighted
+func (c *Container) IsHighlighted(isHighlighted bool) *Container {
+	p := ba.ctx.Get("Container").New(isHighlighted)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetIsHighlighted sets the IsHighlighted property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#ishighlighted
+func (c *Container) SetIsHighlighted(isHighlighted bool) *Container {
+	p := ba.ctx.Get("Container").New(isHighlighted)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// IsHitTestVisible returns the IsHitTestVisible property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#ishittestvisible
+func (c *Container) IsHitTestVisible(isHitTestVisible bool) *Container {
+	p := ba.ctx.Get("Container").New(isHitTestVisible)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetIsHitTestVisible sets the IsHitTestVisible property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#ishittestvisible
+func (c *Container) SetIsHitTestVisible(isHitTestVisible bool) *Container {
+	p := ba.ctx.Get("Container").New(isHitTestVisible)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// IsPointerBlocker returns the IsPointerBlocker property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#ispointerblocker
+func (c *Container) IsPointerBlocker(isPointerBlocker bool) *Container {
+	p := ba.ctx.Get("Container").New(isPointerBlocker)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetIsPointerBlocker sets the IsPointerBlocker property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#ispointerblocker
+func (c *Container) SetIsPointerBlocker(isPointerBlocker bool) *Container {
+	p := ba.ctx.Get("Container").New(isPointerBlocker)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// IsVisible returns the IsVisible property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#isvisible
+func (c *Container) IsVisible(isVisible bool) *Container {
+	p := ba.ctx.Get("Container").New(isVisible)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetIsVisible sets the IsVisible property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#isvisible
+func (c *Container) SetIsVisible(isVisible bool) *Container {
+	p := ba.ctx.Get("Container").New(isVisible)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// Left returns the Left property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#left
+func (c *Container) Left(left string) *Container {
+	p := ba.ctx.Get("Container").New(left)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetLeft sets the Left property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#left
+func (c *Container) SetLeft(left string) *Container {
+	p := ba.ctx.Get("Container").New(left)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// LeftInPixels returns the LeftInPixels property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#leftinpixels
+func (c *Container) LeftInPixels(leftInPixels float64) *Container {
+	p := ba.ctx.Get("Container").New(leftInPixels)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetLeftInPixels sets the LeftInPixels property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#leftinpixels
+func (c *Container) SetLeftInPixels(leftInPixels float64) *Container {
+	p := ba.ctx.Get("Container").New(leftInPixels)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetX returns the LinkOffsetX property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#linkoffsetx
+func (c *Container) LinkOffsetX(linkOffsetX string) *Container {
+	p := ba.ctx.Get("Container").New(linkOffsetX)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetX sets the LinkOffsetX property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#linkoffsetx
+func (c *Container) SetLinkOffsetX(linkOffsetX string) *Container {
+	p := ba.ctx.Get("Container").New(linkOffsetX)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetXInPixels returns the LinkOffsetXInPixels property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#linkoffsetxinpixels
+func (c *Container) LinkOffsetXInPixels(linkOffsetXInPixels float64) *Container {
+	p := ba.ctx.Get("Container").New(linkOffsetXInPixels)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetXInPixels sets the LinkOffsetXInPixels property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#linkoffsetxinpixels
+func (c *Container) SetLinkOffsetXInPixels(linkOffsetXInPixels float64) *Container {
+	p := ba.ctx.Get("Container").New(linkOffsetXInPixels)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetY returns the LinkOffsetY property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#linkoffsety
+func (c *Container) LinkOffsetY(linkOffsetY string) *Container {
+	p := ba.ctx.Get("Container").New(linkOffsetY)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetY sets the LinkOffsetY property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#linkoffsety
+func (c *Container) SetLinkOffsetY(linkOffsetY string) *Container {
+	p := ba.ctx.Get("Container").New(linkOffsetY)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetYInPixels returns the LinkOffsetYInPixels property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#linkoffsetyinpixels
+func (c *Container) LinkOffsetYInPixels(linkOffsetYInPixels float64) *Container {
+	p := ba.ctx.Get("Container").New(linkOffsetYInPixels)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetYInPixels sets the LinkOffsetYInPixels property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#linkoffsetyinpixels
+func (c *Container) SetLinkOffsetYInPixels(linkOffsetYInPixels float64) *Container {
+	p := ba.ctx.Get("Container").New(linkOffsetYInPixels)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// LinkedMesh returns the LinkedMesh property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#linkedmesh
+func (c *Container) LinkedMesh(linkedMesh *AbstractMesh) *Container {
+	p := ba.ctx.Get("Container").New(linkedMesh.JSObject())
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetLinkedMesh sets the LinkedMesh property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#linkedmesh
+func (c *Container) SetLinkedMesh(linkedMesh *AbstractMesh) *Container {
+	p := ba.ctx.Get("Container").New(linkedMesh.JSObject())
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// LogLayoutCycleErrors returns the LogLayoutCycleErrors property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#loglayoutcycleerrors
+func (c *Container) LogLayoutCycleErrors(logLayoutCycleErrors bool) *Container {
+	p := ba.ctx.Get("Container").New(logLayoutCycleErrors)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetLogLayoutCycleErrors sets the LogLayoutCycleErrors property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#loglayoutcycleerrors
+func (c *Container) SetLogLayoutCycleErrors(logLayoutCycleErrors bool) *Container {
+	p := ba.ctx.Get("Container").New(logLayoutCycleErrors)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// MaxLayoutCycle returns the MaxLayoutCycle property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#maxlayoutcycle
+func (c *Container) MaxLayoutCycle(maxLayoutCycle float64) *Container {
+	p := ba.ctx.Get("Container").New(maxLayoutCycle)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetMaxLayoutCycle sets the MaxLayoutCycle property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#maxlayoutcycle
+func (c *Container) SetMaxLayoutCycle(maxLayoutCycle float64) *Container {
+	p := ba.ctx.Get("Container").New(maxLayoutCycle)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#metadata
+func (c *Container) Metadata(metadata interface{}) *Container {
+	p := ba.ctx.Get("Container").New(metadata)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#metadata
+func (c *Container) SetMetadata(metadata interface{}) *Container {
+	p := ba.ctx.Get("Container").New(metadata)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#name
+func (c *Container) Name(name string) *Container {
+	p := ba.ctx.Get("Container").New(name)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#name
+func (c *Container) SetName(name string) *Container {
+	p := ba.ctx.Get("Container").New(name)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// NotRenderable returns the NotRenderable property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#notrenderable
+func (c *Container) NotRenderable(notRenderable bool) *Container {
+	p := ba.ctx.Get("Container").New(notRenderable)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetNotRenderable sets the NotRenderable property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#notrenderable
+func (c *Container) SetNotRenderable(notRenderable bool) *Container {
+	p := ba.ctx.Get("Container").New(notRenderable)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// OnAfterDrawObservable returns the OnAfterDrawObservable property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#onafterdrawobservable
+func (c *Container) OnAfterDrawObservable(onAfterDrawObservable *Observable) *Container {
+	p := ba.ctx.Get("Container").New(onAfterDrawObservable.JSObject())
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterDrawObservable sets the OnAfterDrawObservable property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#onafterdrawobservable
+func (c *Container) SetOnAfterDrawObservable(onAfterDrawObservable *Observable) *Container {
+	p := ba.ctx.Get("Container").New(onAfterDrawObservable.JSObject())
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeDrawObservable returns the OnBeforeDrawObservable property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#onbeforedrawobservable
+func (c *Container) OnBeforeDrawObservable(onBeforeDrawObservable *Observable) *Container {
+	p := ba.ctx.Get("Container").New(onBeforeDrawObservable.JSObject())
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeDrawObservable sets the OnBeforeDrawObservable property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#onbeforedrawobservable
+func (c *Container) SetOnBeforeDrawObservable(onBeforeDrawObservable *Observable) *Container {
+	p := ba.ctx.Get("Container").New(onBeforeDrawObservable.JSObject())
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// OnDirtyObservable returns the OnDirtyObservable property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#ondirtyobservable
+func (c *Container) OnDirtyObservable(onDirtyObservable *Observable) *Container {
+	p := ba.ctx.Get("Container").New(onDirtyObservable.JSObject())
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetOnDirtyObservable sets the OnDirtyObservable property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#ondirtyobservable
+func (c *Container) SetOnDirtyObservable(onDirtyObservable *Observable) *Container {
+	p := ba.ctx.Get("Container").New(onDirtyObservable.JSObject())
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// OnPointerClickObservable returns the OnPointerClickObservable property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#onpointerclickobservable
+func (c *Container) OnPointerClickObservable(onPointerClickObservable *Observable) *Container {
+	p := ba.ctx.Get("Container").New(onPointerClickObservable.JSObject())
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerClickObservable sets the OnPointerClickObservable property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#onpointerclickobservable
+func (c *Container) SetOnPointerClickObservable(onPointerClickObservable *Observable) *Container {
+	p := ba.ctx.Get("Container").New(onPointerClickObservable.JSObject())
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// OnPointerDownObservable returns the OnPointerDownObservable property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#onpointerdownobservable
+func (c *Container) OnPointerDownObservable(onPointerDownObservable *Observable) *Container {
+	p := ba.ctx.Get("Container").New(onPointerDownObservable.JSObject())
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerDownObservable sets the OnPointerDownObservable property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#onpointerdownobservable
+func (c *Container) SetOnPointerDownObservable(onPointerDownObservable *Observable) *Container {
+	p := ba.ctx.Get("Container").New(onPointerDownObservable.JSObject())
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// OnPointerEnterObservable returns the OnPointerEnterObservable property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#onpointerenterobservable
+func (c *Container) OnPointerEnterObservable(onPointerEnterObservable *Observable) *Container {
+	p := ba.ctx.Get("Container").New(onPointerEnterObservable.JSObject())
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerEnterObservable sets the OnPointerEnterObservable property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#onpointerenterobservable
+func (c *Container) SetOnPointerEnterObservable(onPointerEnterObservable *Observable) *Container {
+	p := ba.ctx.Get("Container").New(onPointerEnterObservable.JSObject())
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// OnPointerMoveObservable returns the OnPointerMoveObservable property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#onpointermoveobservable
+func (c *Container) OnPointerMoveObservable(onPointerMoveObservable *Observable) *Container {
+	p := ba.ctx.Get("Container").New(onPointerMoveObservable.JSObject())
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerMoveObservable sets the OnPointerMoveObservable property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#onpointermoveobservable
+func (c *Container) SetOnPointerMoveObservable(onPointerMoveObservable *Observable) *Container {
+	p := ba.ctx.Get("Container").New(onPointerMoveObservable.JSObject())
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// OnPointerOutObservable returns the OnPointerOutObservable property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#onpointeroutobservable
+func (c *Container) OnPointerOutObservable(onPointerOutObservable *Observable) *Container {
+	p := ba.ctx.Get("Container").New(onPointerOutObservable.JSObject())
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerOutObservable sets the OnPointerOutObservable property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#onpointeroutobservable
+func (c *Container) SetOnPointerOutObservable(onPointerOutObservable *Observable) *Container {
+	p := ba.ctx.Get("Container").New(onPointerOutObservable.JSObject())
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// OnPointerUpObservable returns the OnPointerUpObservable property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#onpointerupobservable
+func (c *Container) OnPointerUpObservable(onPointerUpObservable *Observable) *Container {
+	p := ba.ctx.Get("Container").New(onPointerUpObservable.JSObject())
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerUpObservable sets the OnPointerUpObservable property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#onpointerupobservable
+func (c *Container) SetOnPointerUpObservable(onPointerUpObservable *Observable) *Container {
+	p := ba.ctx.Get("Container").New(onPointerUpObservable.JSObject())
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// PaddingBottom returns the PaddingBottom property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#paddingbottom
+func (c *Container) PaddingBottom(paddingBottom string) *Container {
+	p := ba.ctx.Get("Container").New(paddingBottom)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingBottom sets the PaddingBottom property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#paddingbottom
+func (c *Container) SetPaddingBottom(paddingBottom string) *Container {
+	p := ba.ctx.Get("Container").New(paddingBottom)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// PaddingBottomInPixels returns the PaddingBottomInPixels property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#paddingbottominpixels
+func (c *Container) PaddingBottomInPixels(paddingBottomInPixels float64) *Container {
+	p := ba.ctx.Get("Container").New(paddingBottomInPixels)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingBottomInPixels sets the PaddingBottomInPixels property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#paddingbottominpixels
+func (c *Container) SetPaddingBottomInPixels(paddingBottomInPixels float64) *Container {
+	p := ba.ctx.Get("Container").New(paddingBottomInPixels)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// PaddingLeft returns the PaddingLeft property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#paddingleft
+func (c *Container) PaddingLeft(paddingLeft string) *Container {
+	p := ba.ctx.Get("Container").New(paddingLeft)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingLeft sets the PaddingLeft property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#paddingleft
+func (c *Container) SetPaddingLeft(paddingLeft string) *Container {
+	p := ba.ctx.Get("Container").New(paddingLeft)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// PaddingLeftInPixels returns the PaddingLeftInPixels property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#paddingleftinpixels
+func (c *Container) PaddingLeftInPixels(paddingLeftInPixels float64) *Container {
+	p := ba.ctx.Get("Container").New(paddingLeftInPixels)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingLeftInPixels sets the PaddingLeftInPixels property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#paddingleftinpixels
+func (c *Container) SetPaddingLeftInPixels(paddingLeftInPixels float64) *Container {
+	p := ba.ctx.Get("Container").New(paddingLeftInPixels)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// PaddingRight returns the PaddingRight property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#paddingright
+func (c *Container) PaddingRight(paddingRight string) *Container {
+	p := ba.ctx.Get("Container").New(paddingRight)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingRight sets the PaddingRight property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#paddingright
+func (c *Container) SetPaddingRight(paddingRight string) *Container {
+	p := ba.ctx.Get("Container").New(paddingRight)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// PaddingRightInPixels returns the PaddingRightInPixels property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#paddingrightinpixels
+func (c *Container) PaddingRightInPixels(paddingRightInPixels float64) *Container {
+	p := ba.ctx.Get("Container").New(paddingRightInPixels)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingRightInPixels sets the PaddingRightInPixels property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#paddingrightinpixels
+func (c *Container) SetPaddingRightInPixels(paddingRightInPixels float64) *Container {
+	p := ba.ctx.Get("Container").New(paddingRightInPixels)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// PaddingTop returns the PaddingTop property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#paddingtop
+func (c *Container) PaddingTop(paddingTop string) *Container {
+	p := ba.ctx.Get("Container").New(paddingTop)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingTop sets the PaddingTop property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#paddingtop
+func (c *Container) SetPaddingTop(paddingTop string) *Container {
+	p := ba.ctx.Get("Container").New(paddingTop)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// PaddingTopInPixels returns the PaddingTopInPixels property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#paddingtopinpixels
+func (c *Container) PaddingTopInPixels(paddingTopInPixels float64) *Container {
+	p := ba.ctx.Get("Container").New(paddingTopInPixels)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingTopInPixels sets the PaddingTopInPixels property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#paddingtopinpixels
+func (c *Container) SetPaddingTopInPixels(paddingTopInPixels float64) *Container {
+	p := ba.ctx.Get("Container").New(paddingTopInPixels)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// Parent returns the Parent property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#parent
+func (c *Container) Parent(parent *Container) *Container {
+	p := ba.ctx.Get("Container").New(parent.JSObject())
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetParent sets the Parent property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#parent
+func (c *Container) SetParent(parent *Container) *Container {
+	p := ba.ctx.Get("Container").New(parent.JSObject())
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// Rotation returns the Rotation property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#rotation
+func (c *Container) Rotation(rotation float64) *Container {
+	p := ba.ctx.Get("Container").New(rotation)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetRotation sets the Rotation property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#rotation
+func (c *Container) SetRotation(rotation float64) *Container {
+	p := ba.ctx.Get("Container").New(rotation)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// ScaleX returns the ScaleX property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#scalex
+func (c *Container) ScaleX(scaleX float64) *Container {
+	p := ba.ctx.Get("Container").New(scaleX)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetScaleX sets the ScaleX property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#scalex
+func (c *Container) SetScaleX(scaleX float64) *Container {
+	p := ba.ctx.Get("Container").New(scaleX)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// ScaleY returns the ScaleY property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#scaley
+func (c *Container) ScaleY(scaleY float64) *Container {
+	p := ba.ctx.Get("Container").New(scaleY)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetScaleY sets the ScaleY property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#scaley
+func (c *Container) SetScaleY(scaleY float64) *Container {
+	p := ba.ctx.Get("Container").New(scaleY)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// ShadowBlur returns the ShadowBlur property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#shadowblur
+func (c *Container) ShadowBlur(shadowBlur float64) *Container {
+	p := ba.ctx.Get("Container").New(shadowBlur)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetShadowBlur sets the ShadowBlur property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#shadowblur
+func (c *Container) SetShadowBlur(shadowBlur float64) *Container {
+	p := ba.ctx.Get("Container").New(shadowBlur)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// ShadowColor returns the ShadowColor property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#shadowcolor
+func (c *Container) ShadowColor(shadowColor string) *Container {
+	p := ba.ctx.Get("Container").New(shadowColor)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetShadowColor sets the ShadowColor property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#shadowcolor
+func (c *Container) SetShadowColor(shadowColor string) *Container {
+	p := ba.ctx.Get("Container").New(shadowColor)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// ShadowOffsetX returns the ShadowOffsetX property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#shadowoffsetx
+func (c *Container) ShadowOffsetX(shadowOffsetX float64) *Container {
+	p := ba.ctx.Get("Container").New(shadowOffsetX)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetShadowOffsetX sets the ShadowOffsetX property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#shadowoffsetx
+func (c *Container) SetShadowOffsetX(shadowOffsetX float64) *Container {
+	p := ba.ctx.Get("Container").New(shadowOffsetX)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// ShadowOffsetY returns the ShadowOffsetY property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#shadowoffsety
+func (c *Container) ShadowOffsetY(shadowOffsetY float64) *Container {
+	p := ba.ctx.Get("Container").New(shadowOffsetY)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetShadowOffsetY sets the ShadowOffsetY property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#shadowoffsety
+func (c *Container) SetShadowOffsetY(shadowOffsetY float64) *Container {
+	p := ba.ctx.Get("Container").New(shadowOffsetY)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// Style returns the Style property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#style
+func (c *Container) Style(style *Style) *Container {
+	p := ba.ctx.Get("Container").New(style.JSObject())
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetStyle sets the Style property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#style
+func (c *Container) SetStyle(style *Style) *Container {
+	p := ba.ctx.Get("Container").New(style.JSObject())
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// Top returns the Top property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#top
+func (c *Container) Top(top string) *Container {
+	p := ba.ctx.Get("Container").New(top)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetTop sets the Top property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#top
+func (c *Container) SetTop(top string) *Container {
+	p := ba.ctx.Get("Container").New(top)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// TopInPixels returns the TopInPixels property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#topinpixels
+func (c *Container) TopInPixels(topInPixels float64) *Container {
+	p := ba.ctx.Get("Container").New(topInPixels)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetTopInPixels sets the TopInPixels property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#topinpixels
+func (c *Container) SetTopInPixels(topInPixels float64) *Container {
+	p := ba.ctx.Get("Container").New(topInPixels)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// TransformCenterX returns the TransformCenterX property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#transformcenterx
+func (c *Container) TransformCenterX(transformCenterX float64) *Container {
+	p := ba.ctx.Get("Container").New(transformCenterX)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetTransformCenterX sets the TransformCenterX property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#transformcenterx
+func (c *Container) SetTransformCenterX(transformCenterX float64) *Container {
+	p := ba.ctx.Get("Container").New(transformCenterX)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// TransformCenterY returns the TransformCenterY property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#transformcentery
+func (c *Container) TransformCenterY(transformCenterY float64) *Container {
+	p := ba.ctx.Get("Container").New(transformCenterY)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetTransformCenterY sets the TransformCenterY property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#transformcentery
+func (c *Container) SetTransformCenterY(transformCenterY float64) *Container {
+	p := ba.ctx.Get("Container").New(transformCenterY)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// TypeName returns the TypeName property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#typename
+func (c *Container) TypeName(typeName string) *Container {
+	p := ba.ctx.Get("Container").New(typeName)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetTypeName sets the TypeName property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#typename
+func (c *Container) SetTypeName(typeName string) *Container {
+	p := ba.ctx.Get("Container").New(typeName)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#uniqueid
+func (c *Container) UniqueId(uniqueId float64) *Container {
+	p := ba.ctx.Get("Container").New(uniqueId)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#uniqueid
+func (c *Container) SetUniqueId(uniqueId float64) *Container {
+	p := ba.ctx.Get("Container").New(uniqueId)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// UseBitmapCache returns the UseBitmapCache property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#usebitmapcache
+func (c *Container) UseBitmapCache(useBitmapCache bool) *Container {
+	p := ba.ctx.Get("Container").New(useBitmapCache)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetUseBitmapCache sets the UseBitmapCache property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#usebitmapcache
+func (c *Container) SetUseBitmapCache(useBitmapCache bool) *Container {
+	p := ba.ctx.Get("Container").New(useBitmapCache)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// VERTICAL_ALIGNMENT_BOTTOM returns the VERTICAL_ALIGNMENT_BOTTOM property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#vertical_alignment_bottom
+func (c *Container) VERTICAL_ALIGNMENT_BOTTOM(VERTICAL_ALIGNMENT_BOTTOM float64) *Container {
+	p := ba.ctx.Get("Container").New(VERTICAL_ALIGNMENT_BOTTOM)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetVERTICAL_ALIGNMENT_BOTTOM sets the VERTICAL_ALIGNMENT_BOTTOM property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#vertical_alignment_bottom
+func (c *Container) SetVERTICAL_ALIGNMENT_BOTTOM(VERTICAL_ALIGNMENT_BOTTOM float64) *Container {
+	p := ba.ctx.Get("Container").New(VERTICAL_ALIGNMENT_BOTTOM)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// VERTICAL_ALIGNMENT_CENTER returns the VERTICAL_ALIGNMENT_CENTER property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#vertical_alignment_center
+func (c *Container) VERTICAL_ALIGNMENT_CENTER(VERTICAL_ALIGNMENT_CENTER float64) *Container {
+	p := ba.ctx.Get("Container").New(VERTICAL_ALIGNMENT_CENTER)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetVERTICAL_ALIGNMENT_CENTER sets the VERTICAL_ALIGNMENT_CENTER property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#vertical_alignment_center
+func (c *Container) SetVERTICAL_ALIGNMENT_CENTER(VERTICAL_ALIGNMENT_CENTER float64) *Container {
+	p := ba.ctx.Get("Container").New(VERTICAL_ALIGNMENT_CENTER)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// VERTICAL_ALIGNMENT_TOP returns the VERTICAL_ALIGNMENT_TOP property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#vertical_alignment_top
+func (c *Container) VERTICAL_ALIGNMENT_TOP(VERTICAL_ALIGNMENT_TOP float64) *Container {
+	p := ba.ctx.Get("Container").New(VERTICAL_ALIGNMENT_TOP)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetVERTICAL_ALIGNMENT_TOP sets the VERTICAL_ALIGNMENT_TOP property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#vertical_alignment_top
+func (c *Container) SetVERTICAL_ALIGNMENT_TOP(VERTICAL_ALIGNMENT_TOP float64) *Container {
+	p := ba.ctx.Get("Container").New(VERTICAL_ALIGNMENT_TOP)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// VerticalAlignment returns the VerticalAlignment property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#verticalalignment
+func (c *Container) VerticalAlignment(verticalAlignment float64) *Container {
+	p := ba.ctx.Get("Container").New(verticalAlignment)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetVerticalAlignment sets the VerticalAlignment property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#verticalalignment
+func (c *Container) SetVerticalAlignment(verticalAlignment float64) *Container {
+	p := ba.ctx.Get("Container").New(verticalAlignment)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// Width returns the Width property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#width
+func (c *Container) Width(width string) *Container {
+	p := ba.ctx.Get("Container").New(width)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetWidth sets the Width property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#width
+func (c *Container) SetWidth(width string) *Container {
+	p := ba.ctx.Get("Container").New(width)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// WidthInPixels returns the WidthInPixels property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#widthinpixels
+func (c *Container) WidthInPixels(widthInPixels float64) *Container {
+	p := ba.ctx.Get("Container").New(widthInPixels)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetWidthInPixels sets the WidthInPixels property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#widthinpixels
+func (c *Container) SetWidthInPixels(widthInPixels float64) *Container {
+	p := ba.ctx.Get("Container").New(widthInPixels)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// ZIndex returns the ZIndex property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#zindex
+func (c *Container) ZIndex(zIndex float64) *Container {
+	p := ba.ctx.Get("Container").New(zIndex)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+// SetZIndex sets the ZIndex property of class Container.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container#zindex
+func (c *Container) SetZIndex(zIndex float64) *Container {
+	p := ba.ctx.Get("Container").New(zIndex)
+	return ContainerFromJSObject(p, ba.ctx)
+}
+
+*/

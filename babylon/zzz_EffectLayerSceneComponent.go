@@ -32,8 +32,127 @@ func EffectLayerSceneComponentFromJSObject(p js.Value, ctx js.Value) *EffectLaye
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectlayerscenecomponent
 func (ba *Babylon) NewEffectLayerSceneComponent(scene *Scene) *EffectLayerSceneComponent {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("EffectLayerSceneComponent").New(args...)
+	return EffectLayerSceneComponentFromJSObject(p, ba.ctx)
+}
+
+// AddFromContainer calls the AddFromContainer method on the EffectLayerSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effectlayerscenecomponent#addfromcontainer
+func (e *EffectLayerSceneComponent) AddFromContainer(container *AbstractScene) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, container.JSObject())
+
+	e.p.Call("addFromContainer", args...)
+}
+
+// Dispose calls the Dispose method on the EffectLayerSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effectlayerscenecomponent#dispose
+func (e *EffectLayerSceneComponent) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	e.p.Call("dispose", args...)
+}
+
+// Rebuild calls the Rebuild method on the EffectLayerSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effectlayerscenecomponent#rebuild
+func (e *EffectLayerSceneComponent) Rebuild() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	e.p.Call("rebuild", args...)
+}
+
+// Register calls the Register method on the EffectLayerSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effectlayerscenecomponent#register
+func (e *EffectLayerSceneComponent) Register() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	e.p.Call("register", args...)
+}
+
+// EffectLayerSceneComponentRemoveFromContainerOpts contains optional parameters for EffectLayerSceneComponent.RemoveFromContainer.
+type EffectLayerSceneComponentRemoveFromContainerOpts struct {
+	Dispose *bool
+}
+
+// RemoveFromContainer calls the RemoveFromContainer method on the EffectLayerSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effectlayerscenecomponent#removefromcontainer
+func (e *EffectLayerSceneComponent) RemoveFromContainer(container *AbstractScene, opts *EffectLayerSceneComponentRemoveFromContainerOpts) {
+	if opts == nil {
+		opts = &EffectLayerSceneComponentRemoveFromContainerOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, container.JSObject())
+
+	if opts.Dispose == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Dispose)
+	}
+
+	e.p.Call("removeFromContainer", args...)
+}
+
+// Serialize calls the Serialize method on the EffectLayerSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effectlayerscenecomponent#serialize
+func (e *EffectLayerSceneComponent) Serialize(serializationObject interface{}) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, serializationObject)
+
+	e.p.Call("serialize", args...)
+}
+
+/*
+
+// Name returns the Name property of class EffectLayerSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effectlayerscenecomponent#name
+func (e *EffectLayerSceneComponent) Name(name string) *EffectLayerSceneComponent {
+	p := ba.ctx.Get("EffectLayerSceneComponent").New(name)
+	return EffectLayerSceneComponentFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class EffectLayerSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effectlayerscenecomponent#name
+func (e *EffectLayerSceneComponent) SetName(name string) *EffectLayerSceneComponent {
+	p := ba.ctx.Get("EffectLayerSceneComponent").New(name)
+	return EffectLayerSceneComponentFromJSObject(p, ba.ctx)
+}
+
+// Scene returns the Scene property of class EffectLayerSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effectlayerscenecomponent#scene
+func (e *EffectLayerSceneComponent) Scene(scene *Scene) *EffectLayerSceneComponent {
 	p := ba.ctx.Get("EffectLayerSceneComponent").New(scene.JSObject())
 	return EffectLayerSceneComponentFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetScene sets the Scene property of class EffectLayerSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effectlayerscenecomponent#scene
+func (e *EffectLayerSceneComponent) SetScene(scene *Scene) *EffectLayerSceneComponent {
+	p := ba.ctx.Get("EffectLayerSceneComponent").New(scene.JSObject())
+	return EffectLayerSceneComponentFromJSObject(p, ba.ctx)
+}
+
+*/

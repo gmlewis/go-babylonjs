@@ -32,8 +32,145 @@ func OctreeSceneComponentFromJSObject(p js.Value, ctx js.Value) *OctreeSceneComp
 //
 // https://doc.babylonjs.com/api/classes/babylon.octreescenecomponent
 func (ba *Babylon) NewOctreeSceneComponent(scene *Scene) *OctreeSceneComponent {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("OctreeSceneComponent").New(args...)
+	return OctreeSceneComponentFromJSObject(p, ba.ctx)
+}
+
+// Dispose calls the Dispose method on the OctreeSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.octreescenecomponent#dispose
+func (o *OctreeSceneComponent) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	o.p.Call("dispose", args...)
+}
+
+// GetActiveMeshCandidates calls the GetActiveMeshCandidates method on the OctreeSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.octreescenecomponent#getactivemeshcandidates
+func (o *OctreeSceneComponent) GetActiveMeshCandidates() *AbstractMesh {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := o.p.Call("getActiveMeshCandidates", args...)
+	return AbstractMeshFromJSObject(retVal, o.ctx)
+}
+
+// GetActiveSubMeshCandidates calls the GetActiveSubMeshCandidates method on the OctreeSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.octreescenecomponent#getactivesubmeshcandidates
+func (o *OctreeSceneComponent) GetActiveSubMeshCandidates(mesh *AbstractMesh) *SubMesh {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	retVal := o.p.Call("getActiveSubMeshCandidates", args...)
+	return SubMeshFromJSObject(retVal, o.ctx)
+}
+
+// GetCollidingSubMeshCandidates calls the GetCollidingSubMeshCandidates method on the OctreeSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.octreescenecomponent#getcollidingsubmeshcandidates
+func (o *OctreeSceneComponent) GetCollidingSubMeshCandidates(mesh *AbstractMesh, collider *Collider) *SubMesh {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, collider.JSObject())
+
+	retVal := o.p.Call("getCollidingSubMeshCandidates", args...)
+	return SubMeshFromJSObject(retVal, o.ctx)
+}
+
+// GetIntersectingSubMeshCandidates calls the GetIntersectingSubMeshCandidates method on the OctreeSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.octreescenecomponent#getintersectingsubmeshcandidates
+func (o *OctreeSceneComponent) GetIntersectingSubMeshCandidates(mesh *AbstractMesh, localRay *Ray) *SubMesh {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, localRay.JSObject())
+
+	retVal := o.p.Call("getIntersectingSubMeshCandidates", args...)
+	return SubMeshFromJSObject(retVal, o.ctx)
+}
+
+// Rebuild calls the Rebuild method on the OctreeSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.octreescenecomponent#rebuild
+func (o *OctreeSceneComponent) Rebuild() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	o.p.Call("rebuild", args...)
+}
+
+// Register calls the Register method on the OctreeSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.octreescenecomponent#register
+func (o *OctreeSceneComponent) Register() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	o.p.Call("register", args...)
+}
+
+/*
+
+// ChecksIsEnabled returns the ChecksIsEnabled property of class OctreeSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.octreescenecomponent#checksisenabled
+func (o *OctreeSceneComponent) ChecksIsEnabled(checksIsEnabled bool) *OctreeSceneComponent {
+	p := ba.ctx.Get("OctreeSceneComponent").New(checksIsEnabled)
+	return OctreeSceneComponentFromJSObject(p, ba.ctx)
+}
+
+// SetChecksIsEnabled sets the ChecksIsEnabled property of class OctreeSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.octreescenecomponent#checksisenabled
+func (o *OctreeSceneComponent) SetChecksIsEnabled(checksIsEnabled bool) *OctreeSceneComponent {
+	p := ba.ctx.Get("OctreeSceneComponent").New(checksIsEnabled)
+	return OctreeSceneComponentFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class OctreeSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.octreescenecomponent#name
+func (o *OctreeSceneComponent) Name(name string) *OctreeSceneComponent {
+	p := ba.ctx.Get("OctreeSceneComponent").New(name)
+	return OctreeSceneComponentFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class OctreeSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.octreescenecomponent#name
+func (o *OctreeSceneComponent) SetName(name string) *OctreeSceneComponent {
+	p := ba.ctx.Get("OctreeSceneComponent").New(name)
+	return OctreeSceneComponentFromJSObject(p, ba.ctx)
+}
+
+// Scene returns the Scene property of class OctreeSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.octreescenecomponent#scene
+func (o *OctreeSceneComponent) Scene(scene *Scene) *OctreeSceneComponent {
 	p := ba.ctx.Get("OctreeSceneComponent").New(scene.JSObject())
 	return OctreeSceneComponentFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetScene sets the Scene property of class OctreeSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.octreescenecomponent#scene
+func (o *OctreeSceneComponent) SetScene(scene *Scene) *OctreeSceneComponent {
+	p := ba.ctx.Get("OctreeSceneComponent").New(scene.JSObject())
+	return OctreeSceneComponentFromJSObject(p, ba.ctx)
+}
+
+*/

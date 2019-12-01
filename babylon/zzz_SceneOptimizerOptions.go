@@ -31,9 +31,8 @@ func SceneOptimizerOptionsFromJSObject(p js.Value, ctx js.Value) *SceneOptimizer
 
 // NewSceneOptimizerOptionsOpts contains optional parameters for NewSceneOptimizerOptions.
 type NewSceneOptimizerOptionsOpts struct {
-	TargetFrameRate *JSFloat64
-
-	TrackerDuration *JSFloat64
+	TargetFrameRate *float64
+	TrackerDuration *float64
 }
 
 // NewSceneOptimizerOptions returns a new SceneOptimizerOptions object.
@@ -44,8 +43,187 @@ func (ba *Babylon) NewSceneOptimizerOptions(opts *NewSceneOptimizerOptionsOpts) 
 		opts = &NewSceneOptimizerOptionsOpts{}
 	}
 
-	p := ba.ctx.Get("SceneOptimizerOptions").New(opts.TargetFrameRate.JSObject(), opts.TrackerDuration.JSObject())
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.TargetFrameRate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.TargetFrameRate)
+	}
+	if opts.TrackerDuration == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.TrackerDuration)
+	}
+
+	p := ba.ctx.Get("SceneOptimizerOptions").New(args...)
 	return SceneOptimizerOptionsFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SceneOptimizerOptionsAddCustomOptimizationOpts contains optional parameters for SceneOptimizerOptions.AddCustomOptimization.
+type SceneOptimizerOptionsAddCustomOptimizationOpts struct {
+	Priority *float64
+}
+
+// AddCustomOptimization calls the AddCustomOptimization method on the SceneOptimizerOptions object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneoptimizeroptions#addcustomoptimization
+func (s *SceneOptimizerOptions) AddCustomOptimization(onApply func(), onGetDescription func(), opts *SceneOptimizerOptionsAddCustomOptimizationOpts) *SceneOptimizerOptions {
+	if opts == nil {
+		opts = &SceneOptimizerOptionsAddCustomOptimizationOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, onApply)
+	args = append(args, onGetDescription)
+
+	if opts.Priority == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Priority)
+	}
+
+	retVal := s.p.Call("addCustomOptimization", args...)
+	return SceneOptimizerOptionsFromJSObject(retVal, s.ctx)
+}
+
+// AddOptimization calls the AddOptimization method on the SceneOptimizerOptions object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneoptimizeroptions#addoptimization
+func (s *SceneOptimizerOptions) AddOptimization(optimization *SceneOptimization) *SceneOptimizerOptions {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, optimization.JSObject())
+
+	retVal := s.p.Call("addOptimization", args...)
+	return SceneOptimizerOptionsFromJSObject(retVal, s.ctx)
+}
+
+// SceneOptimizerOptionsHighDegradationAllowedOpts contains optional parameters for SceneOptimizerOptions.HighDegradationAllowed.
+type SceneOptimizerOptionsHighDegradationAllowedOpts struct {
+	TargetFrameRate *float64
+}
+
+// HighDegradationAllowed calls the HighDegradationAllowed method on the SceneOptimizerOptions object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneoptimizeroptions#highdegradationallowed
+func (s *SceneOptimizerOptions) HighDegradationAllowed(opts *SceneOptimizerOptionsHighDegradationAllowedOpts) *SceneOptimizerOptions {
+	if opts == nil {
+		opts = &SceneOptimizerOptionsHighDegradationAllowedOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.TargetFrameRate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.TargetFrameRate)
+	}
+
+	retVal := s.p.Call("HighDegradationAllowed", args...)
+	return SceneOptimizerOptionsFromJSObject(retVal, s.ctx)
+}
+
+// SceneOptimizerOptionsLowDegradationAllowedOpts contains optional parameters for SceneOptimizerOptions.LowDegradationAllowed.
+type SceneOptimizerOptionsLowDegradationAllowedOpts struct {
+	TargetFrameRate *float64
+}
+
+// LowDegradationAllowed calls the LowDegradationAllowed method on the SceneOptimizerOptions object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneoptimizeroptions#lowdegradationallowed
+func (s *SceneOptimizerOptions) LowDegradationAllowed(opts *SceneOptimizerOptionsLowDegradationAllowedOpts) *SceneOptimizerOptions {
+	if opts == nil {
+		opts = &SceneOptimizerOptionsLowDegradationAllowedOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.TargetFrameRate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.TargetFrameRate)
+	}
+
+	retVal := s.p.Call("LowDegradationAllowed", args...)
+	return SceneOptimizerOptionsFromJSObject(retVal, s.ctx)
+}
+
+// SceneOptimizerOptionsModerateDegradationAllowedOpts contains optional parameters for SceneOptimizerOptions.ModerateDegradationAllowed.
+type SceneOptimizerOptionsModerateDegradationAllowedOpts struct {
+	TargetFrameRate *float64
+}
+
+// ModerateDegradationAllowed calls the ModerateDegradationAllowed method on the SceneOptimizerOptions object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneoptimizeroptions#moderatedegradationallowed
+func (s *SceneOptimizerOptions) ModerateDegradationAllowed(opts *SceneOptimizerOptionsModerateDegradationAllowedOpts) *SceneOptimizerOptions {
+	if opts == nil {
+		opts = &SceneOptimizerOptionsModerateDegradationAllowedOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.TargetFrameRate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.TargetFrameRate)
+	}
+
+	retVal := s.p.Call("ModerateDegradationAllowed", args...)
+	return SceneOptimizerOptionsFromJSObject(retVal, s.ctx)
+}
+
+/*
+
+// Optimizations returns the Optimizations property of class SceneOptimizerOptions.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneoptimizeroptions#optimizations
+func (s *SceneOptimizerOptions) Optimizations(optimizations *SceneOptimization) *SceneOptimizerOptions {
+	p := ba.ctx.Get("SceneOptimizerOptions").New(optimizations.JSObject())
+	return SceneOptimizerOptionsFromJSObject(p, ba.ctx)
+}
+
+// SetOptimizations sets the Optimizations property of class SceneOptimizerOptions.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneoptimizeroptions#optimizations
+func (s *SceneOptimizerOptions) SetOptimizations(optimizations *SceneOptimization) *SceneOptimizerOptions {
+	p := ba.ctx.Get("SceneOptimizerOptions").New(optimizations.JSObject())
+	return SceneOptimizerOptionsFromJSObject(p, ba.ctx)
+}
+
+// TargetFrameRate returns the TargetFrameRate property of class SceneOptimizerOptions.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneoptimizeroptions#targetframerate
+func (s *SceneOptimizerOptions) TargetFrameRate(targetFrameRate float64) *SceneOptimizerOptions {
+	p := ba.ctx.Get("SceneOptimizerOptions").New(targetFrameRate)
+	return SceneOptimizerOptionsFromJSObject(p, ba.ctx)
+}
+
+// SetTargetFrameRate sets the TargetFrameRate property of class SceneOptimizerOptions.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneoptimizeroptions#targetframerate
+func (s *SceneOptimizerOptions) SetTargetFrameRate(targetFrameRate float64) *SceneOptimizerOptions {
+	p := ba.ctx.Get("SceneOptimizerOptions").New(targetFrameRate)
+	return SceneOptimizerOptionsFromJSObject(p, ba.ctx)
+}
+
+// TrackerDuration returns the TrackerDuration property of class SceneOptimizerOptions.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneoptimizeroptions#trackerduration
+func (s *SceneOptimizerOptions) TrackerDuration(trackerDuration float64) *SceneOptimizerOptions {
+	p := ba.ctx.Get("SceneOptimizerOptions").New(trackerDuration)
+	return SceneOptimizerOptionsFromJSObject(p, ba.ctx)
+}
+
+// SetTrackerDuration sets the TrackerDuration property of class SceneOptimizerOptions.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneoptimizeroptions#trackerduration
+func (s *SceneOptimizerOptions) SetTrackerDuration(trackerDuration float64) *SceneOptimizerOptions {
+	p := ba.ctx.Get("SceneOptimizerOptions").New(trackerDuration)
+	return SceneOptimizerOptionsFromJSObject(p, ba.ctx)
+}
+
+*/

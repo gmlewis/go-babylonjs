@@ -31,9 +31,8 @@ func MorphTargetFromJSObject(p js.Value, ctx js.Value) *MorphTarget {
 
 // NewMorphTargetOpts contains optional parameters for NewMorphTarget.
 type NewMorphTargetOpts struct {
-	Influence *JSFloat64
-
-	Scene *Scene
+	Influence *float64
+	Scene     *Scene
 }
 
 // NewMorphTarget returns a new MorphTarget object.
@@ -44,8 +43,372 @@ func (ba *Babylon) NewMorphTarget(name string, opts *NewMorphTargetOpts) *MorphT
 		opts = &NewMorphTargetOpts{}
 	}
 
-	p := ba.ctx.Get("MorphTarget").New(name, opts.Influence.JSObject(), opts.Scene.JSObject())
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, name)
+
+	if opts.Influence == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Influence)
+	}
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+
+	p := ba.ctx.Get("MorphTarget").New(args...)
 	return MorphTargetFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Clone calls the Clone method on the MorphTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtarget#clone
+func (m *MorphTarget) Clone() *MorphTarget {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("clone", args...)
+	return MorphTargetFromJSObject(retVal, m.ctx)
+}
+
+// MorphTargetFromMeshOpts contains optional parameters for MorphTarget.FromMesh.
+type MorphTargetFromMeshOpts struct {
+	Name      *string
+	Influence *float64
+}
+
+// FromMesh calls the FromMesh method on the MorphTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtarget#frommesh
+func (m *MorphTarget) FromMesh(mesh *AbstractMesh, opts *MorphTargetFromMeshOpts) *MorphTarget {
+	if opts == nil {
+		opts = &MorphTargetFromMeshOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, mesh.JSObject())
+
+	if opts.Name == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Name)
+	}
+	if opts.Influence == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Influence)
+	}
+
+	retVal := m.p.Call("FromMesh", args...)
+	return MorphTargetFromJSObject(retVal, m.ctx)
+}
+
+// GetClassName calls the GetClassName method on the MorphTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtarget#getclassname
+func (m *MorphTarget) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetNormals calls the GetNormals method on the MorphTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtarget#getnormals
+func (m *MorphTarget) GetNormals() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("getNormals", args...)
+	return retVal
+}
+
+// GetPositions calls the GetPositions method on the MorphTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtarget#getpositions
+func (m *MorphTarget) GetPositions() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("getPositions", args...)
+	return retVal
+}
+
+// GetTangents calls the GetTangents method on the MorphTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtarget#gettangents
+func (m *MorphTarget) GetTangents() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("getTangents", args...)
+	return retVal
+}
+
+// GetUVs calls the GetUVs method on the MorphTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtarget#getuvs
+func (m *MorphTarget) GetUVs() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("getUVs", args...)
+	return retVal
+}
+
+// Parse calls the Parse method on the MorphTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtarget#parse
+func (m *MorphTarget) Parse(serializationObject interface{}) *MorphTarget {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, serializationObject)
+
+	retVal := m.p.Call("Parse", args...)
+	return MorphTargetFromJSObject(retVal, m.ctx)
+}
+
+// Serialize calls the Serialize method on the MorphTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtarget#serialize
+func (m *MorphTarget) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("serialize", args...)
+	return retVal
+}
+
+// SetNormals calls the SetNormals method on the MorphTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtarget#setnormals
+func (m *MorphTarget) SetNormals(data js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, data)
+
+	m.p.Call("setNormals", args...)
+}
+
+// SetPositions calls the SetPositions method on the MorphTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtarget#setpositions
+func (m *MorphTarget) SetPositions(data js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, data)
+
+	m.p.Call("setPositions", args...)
+}
+
+// SetTangents calls the SetTangents method on the MorphTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtarget#settangents
+func (m *MorphTarget) SetTangents(data js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, data)
+
+	m.p.Call("setTangents", args...)
+}
+
+// SetUVs calls the SetUVs method on the MorphTarget object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtarget#setuvs
+func (m *MorphTarget) SetUVs(data js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, data)
+
+	m.p.Call("setUVs", args...)
+}
+
+/*
+
+// AnimationPropertiesOverride returns the AnimationPropertiesOverride property of class MorphTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtarget#animationpropertiesoverride
+func (m *MorphTarget) AnimationPropertiesOverride(animationPropertiesOverride *AnimationPropertiesOverride) *MorphTarget {
+	p := ba.ctx.Get("MorphTarget").New(animationPropertiesOverride.JSObject())
+	return MorphTargetFromJSObject(p, ba.ctx)
+}
+
+// SetAnimationPropertiesOverride sets the AnimationPropertiesOverride property of class MorphTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtarget#animationpropertiesoverride
+func (m *MorphTarget) SetAnimationPropertiesOverride(animationPropertiesOverride *AnimationPropertiesOverride) *MorphTarget {
+	p := ba.ctx.Get("MorphTarget").New(animationPropertiesOverride.JSObject())
+	return MorphTargetFromJSObject(p, ba.ctx)
+}
+
+// Animations returns the Animations property of class MorphTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtarget#animations
+func (m *MorphTarget) Animations(animations *Animation) *MorphTarget {
+	p := ba.ctx.Get("MorphTarget").New(animations.JSObject())
+	return MorphTargetFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class MorphTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtarget#animations
+func (m *MorphTarget) SetAnimations(animations *Animation) *MorphTarget {
+	p := ba.ctx.Get("MorphTarget").New(animations.JSObject())
+	return MorphTargetFromJSObject(p, ba.ctx)
+}
+
+// HasNormals returns the HasNormals property of class MorphTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtarget#hasnormals
+func (m *MorphTarget) HasNormals(hasNormals bool) *MorphTarget {
+	p := ba.ctx.Get("MorphTarget").New(hasNormals)
+	return MorphTargetFromJSObject(p, ba.ctx)
+}
+
+// SetHasNormals sets the HasNormals property of class MorphTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtarget#hasnormals
+func (m *MorphTarget) SetHasNormals(hasNormals bool) *MorphTarget {
+	p := ba.ctx.Get("MorphTarget").New(hasNormals)
+	return MorphTargetFromJSObject(p, ba.ctx)
+}
+
+// HasPositions returns the HasPositions property of class MorphTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtarget#haspositions
+func (m *MorphTarget) HasPositions(hasPositions bool) *MorphTarget {
+	p := ba.ctx.Get("MorphTarget").New(hasPositions)
+	return MorphTargetFromJSObject(p, ba.ctx)
+}
+
+// SetHasPositions sets the HasPositions property of class MorphTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtarget#haspositions
+func (m *MorphTarget) SetHasPositions(hasPositions bool) *MorphTarget {
+	p := ba.ctx.Get("MorphTarget").New(hasPositions)
+	return MorphTargetFromJSObject(p, ba.ctx)
+}
+
+// HasTangents returns the HasTangents property of class MorphTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtarget#hastangents
+func (m *MorphTarget) HasTangents(hasTangents bool) *MorphTarget {
+	p := ba.ctx.Get("MorphTarget").New(hasTangents)
+	return MorphTargetFromJSObject(p, ba.ctx)
+}
+
+// SetHasTangents sets the HasTangents property of class MorphTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtarget#hastangents
+func (m *MorphTarget) SetHasTangents(hasTangents bool) *MorphTarget {
+	p := ba.ctx.Get("MorphTarget").New(hasTangents)
+	return MorphTargetFromJSObject(p, ba.ctx)
+}
+
+// HasUVs returns the HasUVs property of class MorphTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtarget#hasuvs
+func (m *MorphTarget) HasUVs(hasUVs bool) *MorphTarget {
+	p := ba.ctx.Get("MorphTarget").New(hasUVs)
+	return MorphTargetFromJSObject(p, ba.ctx)
+}
+
+// SetHasUVs sets the HasUVs property of class MorphTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtarget#hasuvs
+func (m *MorphTarget) SetHasUVs(hasUVs bool) *MorphTarget {
+	p := ba.ctx.Get("MorphTarget").New(hasUVs)
+	return MorphTargetFromJSObject(p, ba.ctx)
+}
+
+// Id returns the Id property of class MorphTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtarget#id
+func (m *MorphTarget) Id(id string) *MorphTarget {
+	p := ba.ctx.Get("MorphTarget").New(id)
+	return MorphTargetFromJSObject(p, ba.ctx)
+}
+
+// SetId sets the Id property of class MorphTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtarget#id
+func (m *MorphTarget) SetId(id string) *MorphTarget {
+	p := ba.ctx.Get("MorphTarget").New(id)
+	return MorphTargetFromJSObject(p, ba.ctx)
+}
+
+// Influence returns the Influence property of class MorphTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtarget#influence
+func (m *MorphTarget) Influence(influence float64) *MorphTarget {
+	p := ba.ctx.Get("MorphTarget").New(influence)
+	return MorphTargetFromJSObject(p, ba.ctx)
+}
+
+// SetInfluence sets the Influence property of class MorphTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtarget#influence
+func (m *MorphTarget) SetInfluence(influence float64) *MorphTarget {
+	p := ba.ctx.Get("MorphTarget").New(influence)
+	return MorphTargetFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class MorphTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtarget#name
+func (m *MorphTarget) Name(name string) *MorphTarget {
+	p := ba.ctx.Get("MorphTarget").New(name)
+	return MorphTargetFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class MorphTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtarget#name
+func (m *MorphTarget) SetName(name string) *MorphTarget {
+	p := ba.ctx.Get("MorphTarget").New(name)
+	return MorphTargetFromJSObject(p, ba.ctx)
+}
+
+// OnInfluenceChanged returns the OnInfluenceChanged property of class MorphTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtarget#oninfluencechanged
+func (m *MorphTarget) OnInfluenceChanged(onInfluenceChanged *Observable) *MorphTarget {
+	p := ba.ctx.Get("MorphTarget").New(onInfluenceChanged.JSObject())
+	return MorphTargetFromJSObject(p, ba.ctx)
+}
+
+// SetOnInfluenceChanged sets the OnInfluenceChanged property of class MorphTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtarget#oninfluencechanged
+func (m *MorphTarget) SetOnInfluenceChanged(onInfluenceChanged *Observable) *MorphTarget {
+	p := ba.ctx.Get("MorphTarget").New(onInfluenceChanged.JSObject())
+	return MorphTargetFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class MorphTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtarget#uniqueid
+func (m *MorphTarget) UniqueId(uniqueId float64) *MorphTarget {
+	p := ba.ctx.Get("MorphTarget").New(uniqueId)
+	return MorphTargetFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class MorphTarget.
+//
+// https://doc.babylonjs.com/api/classes/babylon.morphtarget#uniqueid
+func (m *MorphTarget) SetUniqueId(uniqueId float64) *MorphTarget {
+	p := ba.ctx.Get("MorphTarget").New(uniqueId)
+	return MorphTargetFromJSObject(p, ba.ctx)
+}
+
+*/

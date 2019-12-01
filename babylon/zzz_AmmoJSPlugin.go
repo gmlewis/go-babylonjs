@@ -31,11 +31,9 @@ func AmmoJSPluginFromJSObject(p js.Value, ctx js.Value) *AmmoJSPlugin {
 
 // NewAmmoJSPluginOpts contains optional parameters for NewAmmoJSPlugin.
 type NewAmmoJSPluginOpts struct {
-	_useDeltaForWorldStep *JSBool
-
-	AmmoInjection *interface{}
-
-	OverlappingPairCache *interface{}
+	_useDeltaForWorldStep *bool
+	AmmoInjection         *interface{}
+	OverlappingPairCache  *interface{}
 }
 
 // NewAmmoJSPlugin returns a new AmmoJSPlugin object.
@@ -46,8 +44,759 @@ func (ba *Babylon) NewAmmoJSPlugin(opts *NewAmmoJSPluginOpts) *AmmoJSPlugin {
 		opts = &NewAmmoJSPluginOpts{}
 	}
 
-	p := ba.ctx.Get("AmmoJSPlugin").New(opts._useDeltaForWorldStep.JSObject(), opts.AmmoInjection, opts.OverlappingPairCache)
+	args := make([]interface{}, 0, 0+3)
+
+	if opts._useDeltaForWorldStep == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts._useDeltaForWorldStep)
+	}
+	if opts.AmmoInjection == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.AmmoInjection)
+	}
+	if opts.OverlappingPairCache == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OverlappingPairCache)
+	}
+
+	p := ba.ctx.Get("AmmoJSPlugin").New(args...)
 	return AmmoJSPluginFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AmmoJSPluginAppendAnchorOpts contains optional parameters for AmmoJSPlugin.AppendAnchor.
+type AmmoJSPluginAppendAnchorOpts struct {
+	Influence                      *float64
+	NoCollisionBetweenLinkedBodies *bool
+}
+
+// AppendAnchor calls the AppendAnchor method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#appendanchor
+func (a *AmmoJSPlugin) AppendAnchor(impostor *PhysicsImpostor, otherImpostor *PhysicsImpostor, width float64, height float64, opts *AmmoJSPluginAppendAnchorOpts) {
+	if opts == nil {
+		opts = &AmmoJSPluginAppendAnchorOpts{}
+	}
+
+	args := make([]interface{}, 0, 4+2)
+
+	args = append(args, impostor.JSObject())
+	args = append(args, otherImpostor.JSObject())
+	args = append(args, width)
+	args = append(args, height)
+
+	if opts.Influence == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Influence)
+	}
+	if opts.NoCollisionBetweenLinkedBodies == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoCollisionBetweenLinkedBodies)
+	}
+
+	a.p.Call("appendAnchor", args...)
+}
+
+// AmmoJSPluginAppendHookOpts contains optional parameters for AmmoJSPlugin.AppendHook.
+type AmmoJSPluginAppendHookOpts struct {
+	Influence                      *float64
+	NoCollisionBetweenLinkedBodies *bool
+}
+
+// AppendHook calls the AppendHook method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#appendhook
+func (a *AmmoJSPlugin) AppendHook(impostor *PhysicsImpostor, otherImpostor *PhysicsImpostor, length float64, opts *AmmoJSPluginAppendHookOpts) {
+	if opts == nil {
+		opts = &AmmoJSPluginAppendHookOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+2)
+
+	args = append(args, impostor.JSObject())
+	args = append(args, otherImpostor.JSObject())
+	args = append(args, length)
+
+	if opts.Influence == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Influence)
+	}
+	if opts.NoCollisionBetweenLinkedBodies == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoCollisionBetweenLinkedBodies)
+	}
+
+	a.p.Call("appendHook", args...)
+}
+
+// ApplyForce calls the ApplyForce method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#applyforce
+func (a *AmmoJSPlugin) ApplyForce(impostor *PhysicsImpostor, force *Vector3, contactPoint *Vector3) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, impostor.JSObject())
+	args = append(args, force.JSObject())
+	args = append(args, contactPoint.JSObject())
+
+	a.p.Call("applyForce", args...)
+}
+
+// ApplyImpulse calls the ApplyImpulse method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#applyimpulse
+func (a *AmmoJSPlugin) ApplyImpulse(impostor *PhysicsImpostor, force *Vector3, contactPoint *Vector3) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, impostor.JSObject())
+	args = append(args, force.JSObject())
+	args = append(args, contactPoint.JSObject())
+
+	a.p.Call("applyImpulse", args...)
+}
+
+// Dispose calls the Dispose method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#dispose
+func (a *AmmoJSPlugin) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	a.p.Call("dispose", args...)
+}
+
+// ExecuteStep calls the ExecuteStep method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#executestep
+func (a *AmmoJSPlugin) ExecuteStep(delta float64, impostors []PhysicsImpostor) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, delta)
+	args = append(args, impostors.JSObject())
+
+	a.p.Call("executeStep", args...)
+}
+
+// GenerateJoint calls the GenerateJoint method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#generatejoint
+func (a *AmmoJSPlugin) GenerateJoint(impostorJoint js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, impostorJoint)
+
+	a.p.Call("generateJoint", args...)
+}
+
+// GeneratePhysicsBody calls the GeneratePhysicsBody method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#generatephysicsbody
+func (a *AmmoJSPlugin) GeneratePhysicsBody(impostor *PhysicsImpostor) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, impostor.JSObject())
+
+	a.p.Call("generatePhysicsBody", args...)
+}
+
+// GetAngularVelocity calls the GetAngularVelocity method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#getangularvelocity
+func (a *AmmoJSPlugin) GetAngularVelocity(impostor *PhysicsImpostor) *Vector3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, impostor.JSObject())
+
+	retVal := a.p.Call("getAngularVelocity", args...)
+	return Vector3FromJSObject(retVal, a.ctx)
+}
+
+// GetBodyFriction calls the GetBodyFriction method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#getbodyfriction
+func (a *AmmoJSPlugin) GetBodyFriction(impostor *PhysicsImpostor) float64 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, impostor.JSObject())
+
+	retVal := a.p.Call("getBodyFriction", args...)
+	return retVal.Float()
+}
+
+// GetBodyMass calls the GetBodyMass method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#getbodymass
+func (a *AmmoJSPlugin) GetBodyMass(impostor *PhysicsImpostor) float64 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, impostor.JSObject())
+
+	retVal := a.p.Call("getBodyMass", args...)
+	return retVal.Float()
+}
+
+// GetBodyPositionIterations calls the GetBodyPositionIterations method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#getbodypositioniterations
+func (a *AmmoJSPlugin) GetBodyPositionIterations(impostor *PhysicsImpostor) float64 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, impostor.JSObject())
+
+	retVal := a.p.Call("getBodyPositionIterations", args...)
+	return retVal.Float()
+}
+
+// GetBodyPressure calls the GetBodyPressure method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#getbodypressure
+func (a *AmmoJSPlugin) GetBodyPressure(impostor *PhysicsImpostor) float64 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, impostor.JSObject())
+
+	retVal := a.p.Call("getBodyPressure", args...)
+	return retVal.Float()
+}
+
+// GetBodyRestitution calls the GetBodyRestitution method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#getbodyrestitution
+func (a *AmmoJSPlugin) GetBodyRestitution(impostor *PhysicsImpostor) float64 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, impostor.JSObject())
+
+	retVal := a.p.Call("getBodyRestitution", args...)
+	return retVal.Float()
+}
+
+// GetBodyStiffness calls the GetBodyStiffness method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#getbodystiffness
+func (a *AmmoJSPlugin) GetBodyStiffness(impostor *PhysicsImpostor) float64 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, impostor.JSObject())
+
+	retVal := a.p.Call("getBodyStiffness", args...)
+	return retVal.Float()
+}
+
+// GetBodyVelocityIterations calls the GetBodyVelocityIterations method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#getbodyvelocityiterations
+func (a *AmmoJSPlugin) GetBodyVelocityIterations(impostor *PhysicsImpostor) float64 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, impostor.JSObject())
+
+	retVal := a.p.Call("getBodyVelocityIterations", args...)
+	return retVal.Float()
+}
+
+// GetBoxSizeToRef calls the GetBoxSizeToRef method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#getboxsizetoref
+func (a *AmmoJSPlugin) GetBoxSizeToRef(impostor *PhysicsImpostor, result *Vector3) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, impostor.JSObject())
+	args = append(args, result.JSObject())
+
+	a.p.Call("getBoxSizeToRef", args...)
+}
+
+// GetLinearVelocity calls the GetLinearVelocity method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#getlinearvelocity
+func (a *AmmoJSPlugin) GetLinearVelocity(impostor *PhysicsImpostor) *Vector3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, impostor.JSObject())
+
+	retVal := a.p.Call("getLinearVelocity", args...)
+	return Vector3FromJSObject(retVal, a.ctx)
+}
+
+// GetRadius calls the GetRadius method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#getradius
+func (a *AmmoJSPlugin) GetRadius(impostor *PhysicsImpostor) float64 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, impostor.JSObject())
+
+	retVal := a.p.Call("getRadius", args...)
+	return retVal.Float()
+}
+
+// GetTimeStep calls the GetTimeStep method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#gettimestep
+func (a *AmmoJSPlugin) GetTimeStep() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("getTimeStep", args...)
+	return retVal.Float()
+}
+
+// IsSupported calls the IsSupported method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#issupported
+func (a *AmmoJSPlugin) IsSupported() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("isSupported", args...)
+	return retVal.Bool()
+}
+
+// Raycast calls the Raycast method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#raycast
+func (a *AmmoJSPlugin) Raycast(from *Vector3, to *Vector3) *PhysicsRaycastResult {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, from.JSObject())
+	args = append(args, to.JSObject())
+
+	retVal := a.p.Call("raycast", args...)
+	return PhysicsRaycastResultFromJSObject(retVal, a.ctx)
+}
+
+// RemoveJoint calls the RemoveJoint method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#removejoint
+func (a *AmmoJSPlugin) RemoveJoint(impostorJoint js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, impostorJoint)
+
+	a.p.Call("removeJoint", args...)
+}
+
+// RemovePhysicsBody calls the RemovePhysicsBody method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#removephysicsbody
+func (a *AmmoJSPlugin) RemovePhysicsBody(impostor *PhysicsImpostor) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, impostor.JSObject())
+
+	a.p.Call("removePhysicsBody", args...)
+}
+
+// SetAngularVelocity calls the SetAngularVelocity method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#setangularvelocity
+func (a *AmmoJSPlugin) SetAngularVelocity(impostor *PhysicsImpostor, velocity *Vector3) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, impostor.JSObject())
+	args = append(args, velocity.JSObject())
+
+	a.p.Call("setAngularVelocity", args...)
+}
+
+// SetBodyFriction calls the SetBodyFriction method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#setbodyfriction
+func (a *AmmoJSPlugin) SetBodyFriction(impostor *PhysicsImpostor, friction float64) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, impostor.JSObject())
+	args = append(args, friction)
+
+	a.p.Call("setBodyFriction", args...)
+}
+
+// SetBodyMass calls the SetBodyMass method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#setbodymass
+func (a *AmmoJSPlugin) SetBodyMass(impostor *PhysicsImpostor, mass float64) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, impostor.JSObject())
+	args = append(args, mass)
+
+	a.p.Call("setBodyMass", args...)
+}
+
+// SetBodyPositionIterations calls the SetBodyPositionIterations method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#setbodypositioniterations
+func (a *AmmoJSPlugin) SetBodyPositionIterations(impostor *PhysicsImpostor, positionIterations float64) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, impostor.JSObject())
+	args = append(args, positionIterations)
+
+	a.p.Call("setBodyPositionIterations", args...)
+}
+
+// SetBodyPressure calls the SetBodyPressure method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#setbodypressure
+func (a *AmmoJSPlugin) SetBodyPressure(impostor *PhysicsImpostor, pressure float64) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, impostor.JSObject())
+	args = append(args, pressure)
+
+	a.p.Call("setBodyPressure", args...)
+}
+
+// SetBodyRestitution calls the SetBodyRestitution method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#setbodyrestitution
+func (a *AmmoJSPlugin) SetBodyRestitution(impostor *PhysicsImpostor, restitution float64) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, impostor.JSObject())
+	args = append(args, restitution)
+
+	a.p.Call("setBodyRestitution", args...)
+}
+
+// SetBodyStiffness calls the SetBodyStiffness method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#setbodystiffness
+func (a *AmmoJSPlugin) SetBodyStiffness(impostor *PhysicsImpostor, stiffness float64) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, impostor.JSObject())
+	args = append(args, stiffness)
+
+	a.p.Call("setBodyStiffness", args...)
+}
+
+// SetBodyVelocityIterations calls the SetBodyVelocityIterations method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#setbodyvelocityiterations
+func (a *AmmoJSPlugin) SetBodyVelocityIterations(impostor *PhysicsImpostor, velocityIterations float64) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, impostor.JSObject())
+	args = append(args, velocityIterations)
+
+	a.p.Call("setBodyVelocityIterations", args...)
+}
+
+// SetFixedTimeStep calls the SetFixedTimeStep method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#setfixedtimestep
+func (a *AmmoJSPlugin) SetFixedTimeStep(fixedTimeStep float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, fixedTimeStep)
+
+	a.p.Call("setFixedTimeStep", args...)
+}
+
+// SetGravity calls the SetGravity method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#setgravity
+func (a *AmmoJSPlugin) SetGravity(gravity *Vector3) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, gravity.JSObject())
+
+	a.p.Call("setGravity", args...)
+}
+
+// AmmoJSPluginSetLimitOpts contains optional parameters for AmmoJSPlugin.SetLimit.
+type AmmoJSPluginSetLimitOpts struct {
+	LowerLimit *float64
+}
+
+// SetLimit calls the SetLimit method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#setlimit
+func (a *AmmoJSPlugin) SetLimit(joint js.Value, upperLimit float64, opts *AmmoJSPluginSetLimitOpts) {
+	if opts == nil {
+		opts = &AmmoJSPluginSetLimitOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, joint)
+	args = append(args, upperLimit)
+
+	if opts.LowerLimit == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.LowerLimit)
+	}
+
+	a.p.Call("setLimit", args...)
+}
+
+// SetLinearVelocity calls the SetLinearVelocity method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#setlinearvelocity
+func (a *AmmoJSPlugin) SetLinearVelocity(impostor *PhysicsImpostor, velocity *Vector3) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, impostor.JSObject())
+	args = append(args, velocity.JSObject())
+
+	a.p.Call("setLinearVelocity", args...)
+}
+
+// SetMaxSteps calls the SetMaxSteps method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#setmaxsteps
+func (a *AmmoJSPlugin) SetMaxSteps(maxSteps float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, maxSteps)
+
+	a.p.Call("setMaxSteps", args...)
+}
+
+// AmmoJSPluginSetMotorOpts contains optional parameters for AmmoJSPlugin.SetMotor.
+type AmmoJSPluginSetMotorOpts struct {
+	Speed      *float64
+	MaxForce   *float64
+	MotorIndex *float64
+}
+
+// SetMotor calls the SetMotor method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#setmotor
+func (a *AmmoJSPlugin) SetMotor(joint js.Value, opts *AmmoJSPluginSetMotorOpts) {
+	if opts == nil {
+		opts = &AmmoJSPluginSetMotorOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, joint)
+
+	if opts.Speed == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Speed)
+	}
+	if opts.MaxForce == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.MaxForce)
+	}
+	if opts.MotorIndex == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.MotorIndex)
+	}
+
+	a.p.Call("setMotor", args...)
+}
+
+// SetPhysicsBodyTransformation calls the SetPhysicsBodyTransformation method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#setphysicsbodytransformation
+func (a *AmmoJSPlugin) SetPhysicsBodyTransformation(impostor *PhysicsImpostor, newPosition *Vector3, newRotation *Quaternion) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, impostor.JSObject())
+	args = append(args, newPosition.JSObject())
+	args = append(args, newRotation.JSObject())
+
+	a.p.Call("setPhysicsBodyTransformation", args...)
+}
+
+// SetTimeStep calls the SetTimeStep method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#settimestep
+func (a *AmmoJSPlugin) SetTimeStep(timeStep float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, timeStep)
+
+	a.p.Call("setTimeStep", args...)
+}
+
+// SetTransformationFromPhysicsBody calls the SetTransformationFromPhysicsBody method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#settransformationfromphysicsbody
+func (a *AmmoJSPlugin) SetTransformationFromPhysicsBody(impostor *PhysicsImpostor) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, impostor.JSObject())
+
+	a.p.Call("setTransformationFromPhysicsBody", args...)
+}
+
+// SleepBody calls the SleepBody method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#sleepbody
+func (a *AmmoJSPlugin) SleepBody(impostor *PhysicsImpostor) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, impostor.JSObject())
+
+	a.p.Call("sleepBody", args...)
+}
+
+// SyncMeshWithImpostor calls the SyncMeshWithImpostor method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#syncmeshwithimpostor
+func (a *AmmoJSPlugin) SyncMeshWithImpostor(mesh *AbstractMesh, impostor *PhysicsImpostor) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, impostor.JSObject())
+
+	a.p.Call("syncMeshWithImpostor", args...)
+}
+
+// AmmoJSPluginUpdateDistanceJointOpts contains optional parameters for AmmoJSPlugin.UpdateDistanceJoint.
+type AmmoJSPluginUpdateDistanceJointOpts struct {
+	MinDistance *float64
+}
+
+// UpdateDistanceJoint calls the UpdateDistanceJoint method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#updatedistancejoint
+func (a *AmmoJSPlugin) UpdateDistanceJoint(joint *PhysicsJoint, maxDistance float64, opts *AmmoJSPluginUpdateDistanceJointOpts) {
+	if opts == nil {
+		opts = &AmmoJSPluginUpdateDistanceJointOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, joint.JSObject())
+	args = append(args, maxDistance)
+
+	if opts.MinDistance == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.MinDistance)
+	}
+
+	a.p.Call("updateDistanceJoint", args...)
+}
+
+// WakeUpBody calls the WakeUpBody method on the AmmoJSPlugin object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#wakeupbody
+func (a *AmmoJSPlugin) WakeUpBody(impostor *PhysicsImpostor) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, impostor.JSObject())
+
+	a.p.Call("wakeUpBody", args...)
+}
+
+/*
+
+// BjsAMMO returns the BjsAMMO property of class AmmoJSPlugin.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#bjsammo
+func (a *AmmoJSPlugin) BjsAMMO(bjsAMMO interface{}) *AmmoJSPlugin {
+	p := ba.ctx.Get("AmmoJSPlugin").New(bjsAMMO)
+	return AmmoJSPluginFromJSObject(p, ba.ctx)
+}
+
+// SetBjsAMMO sets the BjsAMMO property of class AmmoJSPlugin.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#bjsammo
+func (a *AmmoJSPlugin) SetBjsAMMO(bjsAMMO interface{}) *AmmoJSPlugin {
+	p := ba.ctx.Get("AmmoJSPlugin").New(bjsAMMO)
+	return AmmoJSPluginFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class AmmoJSPlugin.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#name
+func (a *AmmoJSPlugin) Name(name string) *AmmoJSPlugin {
+	p := ba.ctx.Get("AmmoJSPlugin").New(name)
+	return AmmoJSPluginFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class AmmoJSPlugin.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#name
+func (a *AmmoJSPlugin) SetName(name string) *AmmoJSPlugin {
+	p := ba.ctx.Get("AmmoJSPlugin").New(name)
+	return AmmoJSPluginFromJSObject(p, ba.ctx)
+}
+
+// OnCreateCustomShape returns the OnCreateCustomShape property of class AmmoJSPlugin.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#oncreatecustomshape
+func (a *AmmoJSPlugin) OnCreateCustomShape(onCreateCustomShape func()) *AmmoJSPlugin {
+	p := ba.ctx.Get("AmmoJSPlugin").New(onCreateCustomShape)
+	return AmmoJSPluginFromJSObject(p, ba.ctx)
+}
+
+// SetOnCreateCustomShape sets the OnCreateCustomShape property of class AmmoJSPlugin.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#oncreatecustomshape
+func (a *AmmoJSPlugin) SetOnCreateCustomShape(onCreateCustomShape func()) *AmmoJSPlugin {
+	p := ba.ctx.Get("AmmoJSPlugin").New(onCreateCustomShape)
+	return AmmoJSPluginFromJSObject(p, ba.ctx)
+}
+
+// World returns the World property of class AmmoJSPlugin.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#world
+func (a *AmmoJSPlugin) World(world interface{}) *AmmoJSPlugin {
+	p := ba.ctx.Get("AmmoJSPlugin").New(world)
+	return AmmoJSPluginFromJSObject(p, ba.ctx)
+}
+
+// SetWorld sets the World property of class AmmoJSPlugin.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ammojsplugin#world
+func (a *AmmoJSPlugin) SetWorld(world interface{}) *AmmoJSPlugin {
+	p := ba.ctx.Get("AmmoJSPlugin").New(world)
+	return AmmoJSPluginFromJSObject(p, ba.ctx)
+}
+
+*/

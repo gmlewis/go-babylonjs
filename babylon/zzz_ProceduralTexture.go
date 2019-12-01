@@ -33,10 +33,8 @@ func ProceduralTextureFromJSObject(p js.Value, ctx js.Value) *ProceduralTexture 
 // NewProceduralTextureOpts contains optional parameters for NewProceduralTexture.
 type NewProceduralTextureOpts struct {
 	FallbackTexture *Texture
-
-	GenerateMipMaps *JSBool
-
-	IsCube *JSBool
+	GenerateMipMaps *bool
+	IsCube          *bool
 }
 
 // NewProceduralTexture returns a new ProceduralTexture object.
@@ -47,8 +45,2032 @@ func (ba *Babylon) NewProceduralTexture(name string, size interface{}, fragment 
 		opts = &NewProceduralTextureOpts{}
 	}
 
-	p := ba.ctx.Get("ProceduralTexture").New(name, size, fragment, scene.JSObject(), opts.FallbackTexture.JSObject(), opts.GenerateMipMaps.JSObject(), opts.IsCube.JSObject())
+	args := make([]interface{}, 0, 4+3)
+
+	args = append(args, name)
+	args = append(args, size)
+	args = append(args, fragment)
+	args = append(args, scene.JSObject())
+
+	if opts.FallbackTexture == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.FallbackTexture.JSObject())
+	}
+	if opts.GenerateMipMaps == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.GenerateMipMaps)
+	}
+	if opts.IsCube == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IsCube)
+	}
+
+	p := ba.ctx.Get("ProceduralTexture").New(args...)
 	return ProceduralTextureFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Clone calls the Clone method on the ProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#clone
+func (p *ProceduralTexture) Clone() *ProceduralTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("clone", args...)
+	return ProceduralTextureFromJSObject(retVal, p.ctx)
+}
+
+// ProceduralTextureCreateFromBase64StringOpts contains optional parameters for ProceduralTexture.CreateFromBase64String.
+type ProceduralTextureCreateFromBase64StringOpts struct {
+	NoMipmap     *bool
+	InvertY      *bool
+	SamplingMode *float64
+	OnLoad       *func()
+	OnError      *func()
+	Format       *float64
+}
+
+// CreateFromBase64String calls the CreateFromBase64String method on the ProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#createfrombase64string
+func (p *ProceduralTexture) CreateFromBase64String(data string, name string, scene *Scene, opts *ProceduralTextureCreateFromBase64StringOpts) *Texture {
+	if opts == nil {
+		opts = &ProceduralTextureCreateFromBase64StringOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+6)
+
+	args = append(args, data)
+	args = append(args, name)
+	args = append(args, scene.JSObject())
+
+	if opts.NoMipmap == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoMipmap)
+	}
+	if opts.InvertY == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.InvertY)
+	}
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+	if opts.OnLoad == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnLoad)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+	if opts.Format == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Format)
+	}
+
+	retVal := p.p.Call("CreateFromBase64String", args...)
+	return TextureFromJSObject(retVal, p.ctx)
+}
+
+// Dispose calls the Dispose method on the ProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#dispose
+func (p *ProceduralTexture) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("dispose", args...)
+}
+
+// GetBaseSize calls the GetBaseSize method on the ProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#getbasesize
+func (p *ProceduralTexture) GetBaseSize() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("getBaseSize", args...)
+	return retVal
+}
+
+// GetClassName calls the GetClassName method on the ProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#getclassname
+func (p *ProceduralTexture) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetContent calls the GetContent method on the ProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#getcontent
+func (p *ProceduralTexture) GetContent() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("getContent", args...)
+	return retVal
+}
+
+// GetEffect calls the GetEffect method on the ProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#geteffect
+func (p *ProceduralTexture) GetEffect() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("getEffect", args...)
+	return EffectFromJSObject(retVal, p.ctx)
+}
+
+// GetInternalTexture calls the GetInternalTexture method on the ProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#getinternaltexture
+func (p *ProceduralTexture) GetInternalTexture() *InternalTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("getInternalTexture", args...)
+	return InternalTextureFromJSObject(retVal, p.ctx)
+}
+
+// GetReflectionTextureMatrix calls the GetReflectionTextureMatrix method on the ProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#getreflectiontexturematrix
+func (p *ProceduralTexture) GetReflectionTextureMatrix() *Matrix {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("getReflectionTextureMatrix", args...)
+	return MatrixFromJSObject(retVal, p.ctx)
+}
+
+// GetRenderSize calls the GetRenderSize method on the ProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#getrendersize
+func (p *ProceduralTexture) GetRenderSize() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("getRenderSize", args...)
+	return retVal.Float()
+}
+
+// GetScene calls the GetScene method on the ProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#getscene
+func (p *ProceduralTexture) GetScene() *Scene {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("getScene", args...)
+	return SceneFromJSObject(retVal, p.ctx)
+}
+
+// GetSize calls the GetSize method on the ProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#getsize
+func (p *ProceduralTexture) GetSize() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("getSize", args...)
+	return retVal
+}
+
+// ProceduralTextureGetTextureMatrixOpts contains optional parameters for ProceduralTexture.GetTextureMatrix.
+type ProceduralTextureGetTextureMatrixOpts struct {
+	UBase *float64
+}
+
+// GetTextureMatrix calls the GetTextureMatrix method on the ProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#gettexturematrix
+func (p *ProceduralTexture) GetTextureMatrix(opts *ProceduralTextureGetTextureMatrixOpts) *Matrix {
+	if opts == nil {
+		opts = &ProceduralTextureGetTextureMatrixOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.UBase == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UBase)
+	}
+
+	retVal := p.p.Call("getTextureMatrix", args...)
+	return MatrixFromJSObject(retVal, p.ctx)
+}
+
+// IsReady calls the IsReady method on the ProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#isready
+func (p *ProceduralTexture) IsReady() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// IsReadyOrNotBlocking calls the IsReadyOrNotBlocking method on the ProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#isreadyornotblocking
+func (p *ProceduralTexture) IsReadyOrNotBlocking() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("isReadyOrNotBlocking", args...)
+	return retVal.Bool()
+}
+
+// ProceduralTextureLoadFromDataStringOpts contains optional parameters for ProceduralTexture.LoadFromDataString.
+type ProceduralTextureLoadFromDataStringOpts struct {
+	DeleteBuffer *bool
+	NoMipmap     *bool
+	InvertY      *bool
+	SamplingMode *float64
+	OnLoad       *func()
+	OnError      *func()
+	Format       *float64
+}
+
+// LoadFromDataString calls the LoadFromDataString method on the ProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#loadfromdatastring
+func (p *ProceduralTexture) LoadFromDataString(name string, buffer interface{}, scene *Scene, opts *ProceduralTextureLoadFromDataStringOpts) *Texture {
+	if opts == nil {
+		opts = &ProceduralTextureLoadFromDataStringOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+7)
+
+	args = append(args, name)
+	args = append(args, buffer)
+	args = append(args, scene.JSObject())
+
+	if opts.DeleteBuffer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DeleteBuffer)
+	}
+	if opts.NoMipmap == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoMipmap)
+	}
+	if opts.InvertY == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.InvertY)
+	}
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+	if opts.OnLoad == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnLoad)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+	if opts.Format == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Format)
+	}
+
+	retVal := p.p.Call("LoadFromDataString", args...)
+	return TextureFromJSObject(retVal, p.ctx)
+}
+
+// Parse calls the Parse method on the ProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#parse
+func (p *ProceduralTexture) Parse(parsedTexture interface{}, scene *Scene, rootUrl string) *BaseTexture {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, parsedTexture)
+	args = append(args, scene.JSObject())
+	args = append(args, rootUrl)
+
+	retVal := p.p.Call("Parse", args...)
+	return BaseTextureFromJSObject(retVal, p.ctx)
+}
+
+// ProceduralTextureReadPixelsOpts contains optional parameters for ProceduralTexture.ReadPixels.
+type ProceduralTextureReadPixelsOpts struct {
+	FaceIndex *float64
+	Level     *float64
+	Buffer    js.Value
+}
+
+// ReadPixels calls the ReadPixels method on the ProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#readpixels
+func (p *ProceduralTexture) ReadPixels(opts *ProceduralTextureReadPixelsOpts) js.Value {
+	if opts == nil {
+		opts = &ProceduralTextureReadPixelsOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+3)
+
+	if opts.FaceIndex == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FaceIndex)
+	}
+	if opts.Level == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Level)
+	}
+	if opts.Buffer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Buffer)
+	}
+
+	retVal := p.p.Call("readPixels", args...)
+	return retVal
+}
+
+// ReleaseInternalTexture calls the ReleaseInternalTexture method on the ProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#releaseinternaltexture
+func (p *ProceduralTexture) ReleaseInternalTexture() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("releaseInternalTexture", args...)
+}
+
+// ProceduralTextureRenderOpts contains optional parameters for ProceduralTexture.Render.
+type ProceduralTextureRenderOpts struct {
+	UseCameraPostProcess *bool
+}
+
+// Render calls the Render method on the ProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#render
+func (p *ProceduralTexture) Render(opts *ProceduralTextureRenderOpts) {
+	if opts == nil {
+		opts = &ProceduralTextureRenderOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.UseCameraPostProcess == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseCameraPostProcess)
+	}
+
+	p.p.Call("render", args...)
+}
+
+// Reset calls the Reset method on the ProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#reset
+func (p *ProceduralTexture) Reset() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("reset", args...)
+}
+
+// ResetRefreshCounter calls the ResetRefreshCounter method on the ProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#resetrefreshcounter
+func (p *ProceduralTexture) ResetRefreshCounter() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("resetRefreshCounter", args...)
+}
+
+// Resize calls the Resize method on the ProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#resize
+func (p *ProceduralTexture) Resize(size float64, generateMipMaps bool) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, size)
+	args = append(args, generateMipMaps)
+
+	p.p.Call("resize", args...)
+}
+
+// Scale calls the Scale method on the ProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#scale
+func (p *ProceduralTexture) Scale(ratio float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, ratio)
+
+	p.p.Call("scale", args...)
+}
+
+// Serialize calls the Serialize method on the ProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#serialize
+func (p *ProceduralTexture) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("serialize", args...)
+	return retVal
+}
+
+// SetColor3 calls the SetColor3 method on the ProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#setcolor3
+func (p *ProceduralTexture) SetColor3(name string, value *Color3) *ProceduralTexture {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value.JSObject())
+
+	retVal := p.p.Call("setColor3", args...)
+	return ProceduralTextureFromJSObject(retVal, p.ctx)
+}
+
+// SetColor4 calls the SetColor4 method on the ProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#setcolor4
+func (p *ProceduralTexture) SetColor4(name string, value *Color4) *ProceduralTexture {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value.JSObject())
+
+	retVal := p.p.Call("setColor4", args...)
+	return ProceduralTextureFromJSObject(retVal, p.ctx)
+}
+
+// SetFloat calls the SetFloat method on the ProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#setfloat
+func (p *ProceduralTexture) SetFloat(name string, value float64) *ProceduralTexture {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value)
+
+	retVal := p.p.Call("setFloat", args...)
+	return ProceduralTextureFromJSObject(retVal, p.ctx)
+}
+
+// SetFloats calls the SetFloats method on the ProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#setfloats
+func (p *ProceduralTexture) SetFloats(name string, value float64) *ProceduralTexture {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value)
+
+	retVal := p.p.Call("setFloats", args...)
+	return ProceduralTextureFromJSObject(retVal, p.ctx)
+}
+
+// SetFragment calls the SetFragment method on the ProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#setfragment
+func (p *ProceduralTexture) SetFragment(fragment interface{}) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, fragment)
+
+	p.p.Call("setFragment", args...)
+}
+
+// SetInt calls the SetInt method on the ProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#setint
+func (p *ProceduralTexture) SetInt(name string, value float64) *ProceduralTexture {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value)
+
+	retVal := p.p.Call("setInt", args...)
+	return ProceduralTextureFromJSObject(retVal, p.ctx)
+}
+
+// SetMatrix calls the SetMatrix method on the ProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#setmatrix
+func (p *ProceduralTexture) SetMatrix(name string, value *Matrix) *ProceduralTexture {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value.JSObject())
+
+	retVal := p.p.Call("setMatrix", args...)
+	return ProceduralTextureFromJSObject(retVal, p.ctx)
+}
+
+// SetTexture calls the SetTexture method on the ProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#settexture
+func (p *ProceduralTexture) SetTexture(name string, texture *Texture) *ProceduralTexture {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, texture.JSObject())
+
+	retVal := p.p.Call("setTexture", args...)
+	return ProceduralTextureFromJSObject(retVal, p.ctx)
+}
+
+// SetVector2 calls the SetVector2 method on the ProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#setvector2
+func (p *ProceduralTexture) SetVector2(name string, value *Vector2) *ProceduralTexture {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value.JSObject())
+
+	retVal := p.p.Call("setVector2", args...)
+	return ProceduralTextureFromJSObject(retVal, p.ctx)
+}
+
+// SetVector3 calls the SetVector3 method on the ProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#setvector3
+func (p *ProceduralTexture) SetVector3(name string, value *Vector3) *ProceduralTexture {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value.JSObject())
+
+	retVal := p.p.Call("setVector3", args...)
+	return ProceduralTextureFromJSObject(retVal, p.ctx)
+}
+
+// ToString calls the ToString method on the ProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#tostring
+func (p *ProceduralTexture) ToString() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("toString", args...)
+	return retVal.String()
+}
+
+// UpdateSamplingMode calls the UpdateSamplingMode method on the ProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#updatesamplingmode
+func (p *ProceduralTexture) UpdateSamplingMode(samplingMode float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, samplingMode)
+
+	p.p.Call("updateSamplingMode", args...)
+}
+
+// ProceduralTextureUpdateURLOpts contains optional parameters for ProceduralTexture.UpdateURL.
+type ProceduralTextureUpdateURLOpts struct {
+	Buffer *string
+	OnLoad *func()
+}
+
+// UpdateURL calls the UpdateURL method on the ProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#updateurl
+func (p *ProceduralTexture) UpdateURL(url string, opts *ProceduralTextureUpdateURLOpts) {
+	if opts == nil {
+		opts = &ProceduralTextureUpdateURLOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, url)
+
+	if opts.Buffer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Buffer)
+	}
+	if opts.OnLoad == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnLoad)
+	}
+
+	p.p.Call("updateURL", args...)
+}
+
+// WhenAllReady calls the WhenAllReady method on the ProceduralTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#whenallready
+func (p *ProceduralTexture) WhenAllReady(textures *BaseTexture, callback func()) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, textures.JSObject())
+	args = append(args, callback)
+
+	p.p.Call("WhenAllReady", args...)
+}
+
+/*
+
+// Animations returns the Animations property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#animations
+func (p *ProceduralTexture) Animations(animations *Animation) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(animations.JSObject())
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#animations
+func (p *ProceduralTexture) SetAnimations(animations *Animation) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(animations.JSObject())
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// AnisotropicFilteringLevel returns the AnisotropicFilteringLevel property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#anisotropicfilteringlevel
+func (p *ProceduralTexture) AnisotropicFilteringLevel(anisotropicFilteringLevel float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(anisotropicFilteringLevel)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetAnisotropicFilteringLevel sets the AnisotropicFilteringLevel property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#anisotropicfilteringlevel
+func (p *ProceduralTexture) SetAnisotropicFilteringLevel(anisotropicFilteringLevel float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(anisotropicFilteringLevel)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// AutoClear returns the AutoClear property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#autoclear
+func (p *ProceduralTexture) AutoClear(autoClear bool) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(autoClear)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetAutoClear sets the AutoClear property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#autoclear
+func (p *ProceduralTexture) SetAutoClear(autoClear bool) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(autoClear)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// BILINEAR_SAMPLINGMODE returns the BILINEAR_SAMPLINGMODE property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#bilinear_samplingmode
+func (p *ProceduralTexture) BILINEAR_SAMPLINGMODE(BILINEAR_SAMPLINGMODE float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(BILINEAR_SAMPLINGMODE)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetBILINEAR_SAMPLINGMODE sets the BILINEAR_SAMPLINGMODE property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#bilinear_samplingmode
+func (p *ProceduralTexture) SetBILINEAR_SAMPLINGMODE(BILINEAR_SAMPLINGMODE float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(BILINEAR_SAMPLINGMODE)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// CLAMP_ADDRESSMODE returns the CLAMP_ADDRESSMODE property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#clamp_addressmode
+func (p *ProceduralTexture) CLAMP_ADDRESSMODE(CLAMP_ADDRESSMODE float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(CLAMP_ADDRESSMODE)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCLAMP_ADDRESSMODE sets the CLAMP_ADDRESSMODE property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#clamp_addressmode
+func (p *ProceduralTexture) SetCLAMP_ADDRESSMODE(CLAMP_ADDRESSMODE float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(CLAMP_ADDRESSMODE)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// CUBIC_MODE returns the CUBIC_MODE property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#cubic_mode
+func (p *ProceduralTexture) CUBIC_MODE(CUBIC_MODE float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(CUBIC_MODE)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCUBIC_MODE sets the CUBIC_MODE property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#cubic_mode
+func (p *ProceduralTexture) SetCUBIC_MODE(CUBIC_MODE float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(CUBIC_MODE)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// CanRescale returns the CanRescale property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#canrescale
+func (p *ProceduralTexture) CanRescale(canRescale bool) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(canRescale)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCanRescale sets the CanRescale property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#canrescale
+func (p *ProceduralTexture) SetCanRescale(canRescale bool) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(canRescale)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// CoordinatesIndex returns the CoordinatesIndex property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#coordinatesindex
+func (p *ProceduralTexture) CoordinatesIndex(coordinatesIndex float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(coordinatesIndex)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCoordinatesIndex sets the CoordinatesIndex property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#coordinatesindex
+func (p *ProceduralTexture) SetCoordinatesIndex(coordinatesIndex float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(coordinatesIndex)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// CoordinatesMode returns the CoordinatesMode property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#coordinatesmode
+func (p *ProceduralTexture) CoordinatesMode(coordinatesMode float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(coordinatesMode)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCoordinatesMode sets the CoordinatesMode property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#coordinatesmode
+func (p *ProceduralTexture) SetCoordinatesMode(coordinatesMode float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(coordinatesMode)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// DEFAULT_ANISOTROPIC_FILTERING_LEVEL returns the DEFAULT_ANISOTROPIC_FILTERING_LEVEL property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#default_anisotropic_filtering_level
+func (p *ProceduralTexture) DEFAULT_ANISOTROPIC_FILTERING_LEVEL(DEFAULT_ANISOTROPIC_FILTERING_LEVEL float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(DEFAULT_ANISOTROPIC_FILTERING_LEVEL)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetDEFAULT_ANISOTROPIC_FILTERING_LEVEL sets the DEFAULT_ANISOTROPIC_FILTERING_LEVEL property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#default_anisotropic_filtering_level
+func (p *ProceduralTexture) SetDEFAULT_ANISOTROPIC_FILTERING_LEVEL(DEFAULT_ANISOTROPIC_FILTERING_LEVEL float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(DEFAULT_ANISOTROPIC_FILTERING_LEVEL)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// DelayLoadState returns the DelayLoadState property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#delayloadstate
+func (p *ProceduralTexture) DelayLoadState(delayLoadState float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(delayLoadState)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetDelayLoadState sets the DelayLoadState property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#delayloadstate
+func (p *ProceduralTexture) SetDelayLoadState(delayLoadState float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(delayLoadState)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// EQUIRECTANGULAR_MODE returns the EQUIRECTANGULAR_MODE property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#equirectangular_mode
+func (p *ProceduralTexture) EQUIRECTANGULAR_MODE(EQUIRECTANGULAR_MODE float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(EQUIRECTANGULAR_MODE)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetEQUIRECTANGULAR_MODE sets the EQUIRECTANGULAR_MODE property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#equirectangular_mode
+func (p *ProceduralTexture) SetEQUIRECTANGULAR_MODE(EQUIRECTANGULAR_MODE float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(EQUIRECTANGULAR_MODE)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// EXPLICIT_MODE returns the EXPLICIT_MODE property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#explicit_mode
+func (p *ProceduralTexture) EXPLICIT_MODE(EXPLICIT_MODE float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(EXPLICIT_MODE)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetEXPLICIT_MODE sets the EXPLICIT_MODE property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#explicit_mode
+func (p *ProceduralTexture) SetEXPLICIT_MODE(EXPLICIT_MODE float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(EXPLICIT_MODE)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// FIXED_EQUIRECTANGULAR_MIRRORED_MODE returns the FIXED_EQUIRECTANGULAR_MIRRORED_MODE property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#fixed_equirectangular_mirrored_mode
+func (p *ProceduralTexture) FIXED_EQUIRECTANGULAR_MIRRORED_MODE(FIXED_EQUIRECTANGULAR_MIRRORED_MODE float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(FIXED_EQUIRECTANGULAR_MIRRORED_MODE)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetFIXED_EQUIRECTANGULAR_MIRRORED_MODE sets the FIXED_EQUIRECTANGULAR_MIRRORED_MODE property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#fixed_equirectangular_mirrored_mode
+func (p *ProceduralTexture) SetFIXED_EQUIRECTANGULAR_MIRRORED_MODE(FIXED_EQUIRECTANGULAR_MIRRORED_MODE float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(FIXED_EQUIRECTANGULAR_MIRRORED_MODE)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// FIXED_EQUIRECTANGULAR_MODE returns the FIXED_EQUIRECTANGULAR_MODE property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#fixed_equirectangular_mode
+func (p *ProceduralTexture) FIXED_EQUIRECTANGULAR_MODE(FIXED_EQUIRECTANGULAR_MODE float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(FIXED_EQUIRECTANGULAR_MODE)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetFIXED_EQUIRECTANGULAR_MODE sets the FIXED_EQUIRECTANGULAR_MODE property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#fixed_equirectangular_mode
+func (p *ProceduralTexture) SetFIXED_EQUIRECTANGULAR_MODE(FIXED_EQUIRECTANGULAR_MODE float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(FIXED_EQUIRECTANGULAR_MODE)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// GammaSpace returns the GammaSpace property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#gammaspace
+func (p *ProceduralTexture) GammaSpace(gammaSpace bool) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(gammaSpace)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetGammaSpace sets the GammaSpace property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#gammaspace
+func (p *ProceduralTexture) SetGammaSpace(gammaSpace bool) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(gammaSpace)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// GetAlphaFromRGB returns the GetAlphaFromRGB property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#getalphafromrgb
+func (p *ProceduralTexture) GetAlphaFromRGB(getAlphaFromRGB bool) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(getAlphaFromRGB)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetGetAlphaFromRGB sets the GetAlphaFromRGB property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#getalphafromrgb
+func (p *ProceduralTexture) SetGetAlphaFromRGB(getAlphaFromRGB bool) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(getAlphaFromRGB)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// HasAlpha returns the HasAlpha property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#hasalpha
+func (p *ProceduralTexture) HasAlpha(hasAlpha bool) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(hasAlpha)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetHasAlpha sets the HasAlpha property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#hasalpha
+func (p *ProceduralTexture) SetHasAlpha(hasAlpha bool) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(hasAlpha)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// INVCUBIC_MODE returns the INVCUBIC_MODE property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#invcubic_mode
+func (p *ProceduralTexture) INVCUBIC_MODE(INVCUBIC_MODE float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(INVCUBIC_MODE)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetINVCUBIC_MODE sets the INVCUBIC_MODE property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#invcubic_mode
+func (p *ProceduralTexture) SetINVCUBIC_MODE(INVCUBIC_MODE float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(INVCUBIC_MODE)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#inspectablecustomproperties
+func (p *ProceduralTexture) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(inspectableCustomProperties.JSObject())
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#inspectablecustomproperties
+func (p *ProceduralTexture) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(inspectableCustomProperties.JSObject())
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// InvertY returns the InvertY property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#inverty
+func (p *ProceduralTexture) InvertY(invertY bool) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(invertY)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetInvertY sets the InvertY property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#inverty
+func (p *ProceduralTexture) SetInvertY(invertY bool) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(invertY)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// InvertZ returns the InvertZ property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#invertz
+func (p *ProceduralTexture) InvertZ(invertZ bool) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(invertZ)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetInvertZ sets the InvertZ property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#invertz
+func (p *ProceduralTexture) SetInvertZ(invertZ bool) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(invertZ)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// IrradianceTexture returns the IrradianceTexture property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#irradiancetexture
+func (p *ProceduralTexture) IrradianceTexture(irradianceTexture *BaseTexture) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(irradianceTexture.JSObject())
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIrradianceTexture sets the IrradianceTexture property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#irradiancetexture
+func (p *ProceduralTexture) SetIrradianceTexture(irradianceTexture *BaseTexture) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(irradianceTexture.JSObject())
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// Is2DArray returns the Is2DArray property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#is2darray
+func (p *ProceduralTexture) Is2DArray(is2DArray bool) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(is2DArray)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIs2DArray sets the Is2DArray property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#is2darray
+func (p *ProceduralTexture) SetIs2DArray(is2DArray bool) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(is2DArray)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// Is3D returns the Is3D property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#is3d
+func (p *ProceduralTexture) Is3D(is3D bool) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(is3D)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIs3D sets the Is3D property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#is3d
+func (p *ProceduralTexture) SetIs3D(is3D bool) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(is3D)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// IsBlocking returns the IsBlocking property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#isblocking
+func (p *ProceduralTexture) IsBlocking(isBlocking bool) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(isBlocking)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsBlocking sets the IsBlocking property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#isblocking
+func (p *ProceduralTexture) SetIsBlocking(isBlocking bool) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(isBlocking)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// IsCube returns the IsCube property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#iscube
+func (p *ProceduralTexture) IsCube(isCube bool) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(isCube)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsCube sets the IsCube property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#iscube
+func (p *ProceduralTexture) SetIsCube(isCube bool) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(isCube)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// IsEnabled returns the IsEnabled property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#isenabled
+func (p *ProceduralTexture) IsEnabled(isEnabled bool) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(isEnabled)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsEnabled sets the IsEnabled property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#isenabled
+func (p *ProceduralTexture) SetIsEnabled(isEnabled bool) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(isEnabled)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// IsRGBD returns the IsRGBD property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#isrgbd
+func (p *ProceduralTexture) IsRGBD(isRGBD bool) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(isRGBD)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsRGBD sets the IsRGBD property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#isrgbd
+func (p *ProceduralTexture) SetIsRGBD(isRGBD bool) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(isRGBD)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// IsRenderTarget returns the IsRenderTarget property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#isrendertarget
+func (p *ProceduralTexture) IsRenderTarget(isRenderTarget bool) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(isRenderTarget)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsRenderTarget sets the IsRenderTarget property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#isrendertarget
+func (p *ProceduralTexture) SetIsRenderTarget(isRenderTarget bool) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(isRenderTarget)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_LINEAR returns the LINEAR_LINEAR property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#linear_linear
+func (p *ProceduralTexture) LINEAR_LINEAR(LINEAR_LINEAR float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(LINEAR_LINEAR)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_LINEAR sets the LINEAR_LINEAR property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#linear_linear
+func (p *ProceduralTexture) SetLINEAR_LINEAR(LINEAR_LINEAR float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(LINEAR_LINEAR)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_LINEAR_MIPLINEAR returns the LINEAR_LINEAR_MIPLINEAR property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#linear_linear_miplinear
+func (p *ProceduralTexture) LINEAR_LINEAR_MIPLINEAR(LINEAR_LINEAR_MIPLINEAR float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(LINEAR_LINEAR_MIPLINEAR)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_LINEAR_MIPLINEAR sets the LINEAR_LINEAR_MIPLINEAR property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#linear_linear_miplinear
+func (p *ProceduralTexture) SetLINEAR_LINEAR_MIPLINEAR(LINEAR_LINEAR_MIPLINEAR float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(LINEAR_LINEAR_MIPLINEAR)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_LINEAR_MIPNEAREST returns the LINEAR_LINEAR_MIPNEAREST property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#linear_linear_mipnearest
+func (p *ProceduralTexture) LINEAR_LINEAR_MIPNEAREST(LINEAR_LINEAR_MIPNEAREST float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(LINEAR_LINEAR_MIPNEAREST)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_LINEAR_MIPNEAREST sets the LINEAR_LINEAR_MIPNEAREST property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#linear_linear_mipnearest
+func (p *ProceduralTexture) SetLINEAR_LINEAR_MIPNEAREST(LINEAR_LINEAR_MIPNEAREST float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(LINEAR_LINEAR_MIPNEAREST)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_NEAREST returns the LINEAR_NEAREST property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#linear_nearest
+func (p *ProceduralTexture) LINEAR_NEAREST(LINEAR_NEAREST float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(LINEAR_NEAREST)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_NEAREST sets the LINEAR_NEAREST property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#linear_nearest
+func (p *ProceduralTexture) SetLINEAR_NEAREST(LINEAR_NEAREST float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(LINEAR_NEAREST)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_NEAREST_MIPLINEAR returns the LINEAR_NEAREST_MIPLINEAR property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#linear_nearest_miplinear
+func (p *ProceduralTexture) LINEAR_NEAREST_MIPLINEAR(LINEAR_NEAREST_MIPLINEAR float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(LINEAR_NEAREST_MIPLINEAR)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_NEAREST_MIPLINEAR sets the LINEAR_NEAREST_MIPLINEAR property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#linear_nearest_miplinear
+func (p *ProceduralTexture) SetLINEAR_NEAREST_MIPLINEAR(LINEAR_NEAREST_MIPLINEAR float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(LINEAR_NEAREST_MIPLINEAR)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_NEAREST_MIPNEAREST returns the LINEAR_NEAREST_MIPNEAREST property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#linear_nearest_mipnearest
+func (p *ProceduralTexture) LINEAR_NEAREST_MIPNEAREST(LINEAR_NEAREST_MIPNEAREST float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(LINEAR_NEAREST_MIPNEAREST)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_NEAREST_MIPNEAREST sets the LINEAR_NEAREST_MIPNEAREST property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#linear_nearest_mipnearest
+func (p *ProceduralTexture) SetLINEAR_NEAREST_MIPNEAREST(LINEAR_NEAREST_MIPNEAREST float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(LINEAR_NEAREST_MIPNEAREST)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// Level returns the Level property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#level
+func (p *ProceduralTexture) Level(level float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(level)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLevel sets the Level property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#level
+func (p *ProceduralTexture) SetLevel(level float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(level)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// LinearSpecularLOD returns the LinearSpecularLOD property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#linearspecularlod
+func (p *ProceduralTexture) LinearSpecularLOD(linearSpecularLOD bool) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(linearSpecularLOD)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLinearSpecularLOD sets the LinearSpecularLOD property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#linearspecularlod
+func (p *ProceduralTexture) SetLinearSpecularLOD(linearSpecularLOD bool) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(linearSpecularLOD)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// LodGenerationOffset returns the LodGenerationOffset property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#lodgenerationoffset
+func (p *ProceduralTexture) LodGenerationOffset(lodGenerationOffset float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(lodGenerationOffset)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLodGenerationOffset sets the LodGenerationOffset property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#lodgenerationoffset
+func (p *ProceduralTexture) SetLodGenerationOffset(lodGenerationOffset float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(lodGenerationOffset)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// LodGenerationScale returns the LodGenerationScale property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#lodgenerationscale
+func (p *ProceduralTexture) LodGenerationScale(lodGenerationScale float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(lodGenerationScale)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLodGenerationScale sets the LodGenerationScale property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#lodgenerationscale
+func (p *ProceduralTexture) SetLodGenerationScale(lodGenerationScale float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(lodGenerationScale)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// MIRROR_ADDRESSMODE returns the MIRROR_ADDRESSMODE property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#mirror_addressmode
+func (p *ProceduralTexture) MIRROR_ADDRESSMODE(MIRROR_ADDRESSMODE float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(MIRROR_ADDRESSMODE)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetMIRROR_ADDRESSMODE sets the MIRROR_ADDRESSMODE property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#mirror_addressmode
+func (p *ProceduralTexture) SetMIRROR_ADDRESSMODE(MIRROR_ADDRESSMODE float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(MIRROR_ADDRESSMODE)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#metadata
+func (p *ProceduralTexture) Metadata(metadata interface{}) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(metadata)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#metadata
+func (p *ProceduralTexture) SetMetadata(metadata interface{}) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(metadata)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_LINEAR returns the NEAREST_LINEAR property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#nearest_linear
+func (p *ProceduralTexture) NEAREST_LINEAR(NEAREST_LINEAR float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(NEAREST_LINEAR)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_LINEAR sets the NEAREST_LINEAR property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#nearest_linear
+func (p *ProceduralTexture) SetNEAREST_LINEAR(NEAREST_LINEAR float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(NEAREST_LINEAR)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_LINEAR_MIPLINEAR returns the NEAREST_LINEAR_MIPLINEAR property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#nearest_linear_miplinear
+func (p *ProceduralTexture) NEAREST_LINEAR_MIPLINEAR(NEAREST_LINEAR_MIPLINEAR float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(NEAREST_LINEAR_MIPLINEAR)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_LINEAR_MIPLINEAR sets the NEAREST_LINEAR_MIPLINEAR property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#nearest_linear_miplinear
+func (p *ProceduralTexture) SetNEAREST_LINEAR_MIPLINEAR(NEAREST_LINEAR_MIPLINEAR float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(NEAREST_LINEAR_MIPLINEAR)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_LINEAR_MIPNEAREST returns the NEAREST_LINEAR_MIPNEAREST property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#nearest_linear_mipnearest
+func (p *ProceduralTexture) NEAREST_LINEAR_MIPNEAREST(NEAREST_LINEAR_MIPNEAREST float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(NEAREST_LINEAR_MIPNEAREST)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_LINEAR_MIPNEAREST sets the NEAREST_LINEAR_MIPNEAREST property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#nearest_linear_mipnearest
+func (p *ProceduralTexture) SetNEAREST_LINEAR_MIPNEAREST(NEAREST_LINEAR_MIPNEAREST float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(NEAREST_LINEAR_MIPNEAREST)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_NEAREST returns the NEAREST_NEAREST property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#nearest_nearest
+func (p *ProceduralTexture) NEAREST_NEAREST(NEAREST_NEAREST float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(NEAREST_NEAREST)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_NEAREST sets the NEAREST_NEAREST property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#nearest_nearest
+func (p *ProceduralTexture) SetNEAREST_NEAREST(NEAREST_NEAREST float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(NEAREST_NEAREST)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_NEAREST_MIPLINEAR returns the NEAREST_NEAREST_MIPLINEAR property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#nearest_nearest_miplinear
+func (p *ProceduralTexture) NEAREST_NEAREST_MIPLINEAR(NEAREST_NEAREST_MIPLINEAR float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(NEAREST_NEAREST_MIPLINEAR)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_NEAREST_MIPLINEAR sets the NEAREST_NEAREST_MIPLINEAR property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#nearest_nearest_miplinear
+func (p *ProceduralTexture) SetNEAREST_NEAREST_MIPLINEAR(NEAREST_NEAREST_MIPLINEAR float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(NEAREST_NEAREST_MIPLINEAR)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_NEAREST_MIPNEAREST returns the NEAREST_NEAREST_MIPNEAREST property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#nearest_nearest_mipnearest
+func (p *ProceduralTexture) NEAREST_NEAREST_MIPNEAREST(NEAREST_NEAREST_MIPNEAREST float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(NEAREST_NEAREST_MIPNEAREST)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_NEAREST_MIPNEAREST sets the NEAREST_NEAREST_MIPNEAREST property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#nearest_nearest_mipnearest
+func (p *ProceduralTexture) SetNEAREST_NEAREST_MIPNEAREST(NEAREST_NEAREST_MIPNEAREST float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(NEAREST_NEAREST_MIPNEAREST)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_SAMPLINGMODE returns the NEAREST_SAMPLINGMODE property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#nearest_samplingmode
+func (p *ProceduralTexture) NEAREST_SAMPLINGMODE(NEAREST_SAMPLINGMODE float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(NEAREST_SAMPLINGMODE)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_SAMPLINGMODE sets the NEAREST_SAMPLINGMODE property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#nearest_samplingmode
+func (p *ProceduralTexture) SetNEAREST_SAMPLINGMODE(NEAREST_SAMPLINGMODE float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(NEAREST_SAMPLINGMODE)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#name
+func (p *ProceduralTexture) Name(name string) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(name)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#name
+func (p *ProceduralTexture) SetName(name string) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(name)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// NoMipmap returns the NoMipmap property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#nomipmap
+func (p *ProceduralTexture) NoMipmap(noMipmap bool) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(noMipmap)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNoMipmap sets the NoMipmap property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#nomipmap
+func (p *ProceduralTexture) SetNoMipmap(noMipmap bool) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(noMipmap)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// OnDispose returns the OnDispose property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#ondispose
+func (p *ProceduralTexture) OnDispose(onDispose func()) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(onDispose)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnDispose sets the OnDispose property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#ondispose
+func (p *ProceduralTexture) SetOnDispose(onDispose func()) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(onDispose)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// OnDisposeObservable returns the OnDisposeObservable property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#ondisposeobservable
+func (p *ProceduralTexture) OnDisposeObservable(onDisposeObservable *Observable) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(onDisposeObservable.JSObject())
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnDisposeObservable sets the OnDisposeObservable property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#ondisposeobservable
+func (p *ProceduralTexture) SetOnDisposeObservable(onDisposeObservable *Observable) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(onDisposeObservable.JSObject())
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// OnGenerated returns the OnGenerated property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#ongenerated
+func (p *ProceduralTexture) OnGenerated(onGenerated func()) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(onGenerated)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnGenerated sets the OnGenerated property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#ongenerated
+func (p *ProceduralTexture) SetOnGenerated(onGenerated func()) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(onGenerated)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// OnGeneratedObservable returns the OnGeneratedObservable property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#ongeneratedobservable
+func (p *ProceduralTexture) OnGeneratedObservable(onGeneratedObservable *Observable) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(onGeneratedObservable.JSObject())
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnGeneratedObservable sets the OnGeneratedObservable property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#ongeneratedobservable
+func (p *ProceduralTexture) SetOnGeneratedObservable(onGeneratedObservable *Observable) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(onGeneratedObservable.JSObject())
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// OnLoadObservable returns the OnLoadObservable property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#onloadobservable
+func (p *ProceduralTexture) OnLoadObservable(onLoadObservable *Observable) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(onLoadObservable.JSObject())
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnLoadObservable sets the OnLoadObservable property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#onloadobservable
+func (p *ProceduralTexture) SetOnLoadObservable(onLoadObservable *Observable) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(onLoadObservable.JSObject())
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// PLANAR_MODE returns the PLANAR_MODE property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#planar_mode
+func (p *ProceduralTexture) PLANAR_MODE(PLANAR_MODE float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(PLANAR_MODE)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetPLANAR_MODE sets the PLANAR_MODE property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#planar_mode
+func (p *ProceduralTexture) SetPLANAR_MODE(PLANAR_MODE float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(PLANAR_MODE)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// PROJECTION_MODE returns the PROJECTION_MODE property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#projection_mode
+func (p *ProceduralTexture) PROJECTION_MODE(PROJECTION_MODE float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(PROJECTION_MODE)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetPROJECTION_MODE sets the PROJECTION_MODE property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#projection_mode
+func (p *ProceduralTexture) SetPROJECTION_MODE(PROJECTION_MODE float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(PROJECTION_MODE)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// RefreshRate returns the RefreshRate property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#refreshrate
+func (p *ProceduralTexture) RefreshRate(refreshRate float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(refreshRate)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetRefreshRate sets the RefreshRate property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#refreshrate
+func (p *ProceduralTexture) SetRefreshRate(refreshRate float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(refreshRate)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// ReservedDataStore returns the ReservedDataStore property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#reserveddatastore
+func (p *ProceduralTexture) ReservedDataStore(reservedDataStore interface{}) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(reservedDataStore)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetReservedDataStore sets the ReservedDataStore property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#reserveddatastore
+func (p *ProceduralTexture) SetReservedDataStore(reservedDataStore interface{}) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(reservedDataStore)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SKYBOX_MODE returns the SKYBOX_MODE property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#skybox_mode
+func (p *ProceduralTexture) SKYBOX_MODE(SKYBOX_MODE float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(SKYBOX_MODE)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetSKYBOX_MODE sets the SKYBOX_MODE property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#skybox_mode
+func (p *ProceduralTexture) SetSKYBOX_MODE(SKYBOX_MODE float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(SKYBOX_MODE)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SPHERICAL_MODE returns the SPHERICAL_MODE property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#spherical_mode
+func (p *ProceduralTexture) SPHERICAL_MODE(SPHERICAL_MODE float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(SPHERICAL_MODE)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetSPHERICAL_MODE sets the SPHERICAL_MODE property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#spherical_mode
+func (p *ProceduralTexture) SetSPHERICAL_MODE(SPHERICAL_MODE float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(SPHERICAL_MODE)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SamplingMode returns the SamplingMode property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#samplingmode
+func (p *ProceduralTexture) SamplingMode(samplingMode float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(samplingMode)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetSamplingMode sets the SamplingMode property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#samplingmode
+func (p *ProceduralTexture) SetSamplingMode(samplingMode float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(samplingMode)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SerializeBuffers returns the SerializeBuffers property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#serializebuffers
+func (p *ProceduralTexture) SerializeBuffers(SerializeBuffers bool) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(SerializeBuffers)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetSerializeBuffers sets the SerializeBuffers property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#serializebuffers
+func (p *ProceduralTexture) SetSerializeBuffers(SerializeBuffers bool) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(SerializeBuffers)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// TRILINEAR_SAMPLINGMODE returns the TRILINEAR_SAMPLINGMODE property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#trilinear_samplingmode
+func (p *ProceduralTexture) TRILINEAR_SAMPLINGMODE(TRILINEAR_SAMPLINGMODE float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(TRILINEAR_SAMPLINGMODE)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetTRILINEAR_SAMPLINGMODE sets the TRILINEAR_SAMPLINGMODE property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#trilinear_samplingmode
+func (p *ProceduralTexture) SetTRILINEAR_SAMPLINGMODE(TRILINEAR_SAMPLINGMODE float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(TRILINEAR_SAMPLINGMODE)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// TextureFormat returns the TextureFormat property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#textureformat
+func (p *ProceduralTexture) TextureFormat(textureFormat float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(textureFormat)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetTextureFormat sets the TextureFormat property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#textureformat
+func (p *ProceduralTexture) SetTextureFormat(textureFormat float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(textureFormat)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// TextureType returns the TextureType property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#texturetype
+func (p *ProceduralTexture) TextureType(textureType float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(textureType)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetTextureType sets the TextureType property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#texturetype
+func (p *ProceduralTexture) SetTextureType(textureType float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(textureType)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// UAng returns the UAng property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#uang
+func (p *ProceduralTexture) UAng(uAng float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(uAng)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUAng sets the UAng property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#uang
+func (p *ProceduralTexture) SetUAng(uAng float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(uAng)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// UOffset returns the UOffset property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#uoffset
+func (p *ProceduralTexture) UOffset(uOffset float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(uOffset)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUOffset sets the UOffset property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#uoffset
+func (p *ProceduralTexture) SetUOffset(uOffset float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(uOffset)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// URotationCenter returns the URotationCenter property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#urotationcenter
+func (p *ProceduralTexture) URotationCenter(uRotationCenter float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(uRotationCenter)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetURotationCenter sets the URotationCenter property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#urotationcenter
+func (p *ProceduralTexture) SetURotationCenter(uRotationCenter float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(uRotationCenter)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// UScale returns the UScale property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#uscale
+func (p *ProceduralTexture) UScale(uScale float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(uScale)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUScale sets the UScale property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#uscale
+func (p *ProceduralTexture) SetUScale(uScale float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(uScale)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// Uid returns the Uid property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#uid
+func (p *ProceduralTexture) Uid(uid string) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(uid)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUid sets the Uid property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#uid
+func (p *ProceduralTexture) SetUid(uid string) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(uid)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#uniqueid
+func (p *ProceduralTexture) UniqueId(uniqueId float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(uniqueId)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#uniqueid
+func (p *ProceduralTexture) SetUniqueId(uniqueId float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(uniqueId)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// Url returns the Url property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#url
+func (p *ProceduralTexture) Url(url string) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(url)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUrl sets the Url property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#url
+func (p *ProceduralTexture) SetUrl(url string) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(url)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// UseSerializedUrlIfAny returns the UseSerializedUrlIfAny property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#useserializedurlifany
+func (p *ProceduralTexture) UseSerializedUrlIfAny(UseSerializedUrlIfAny bool) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(UseSerializedUrlIfAny)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUseSerializedUrlIfAny sets the UseSerializedUrlIfAny property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#useserializedurlifany
+func (p *ProceduralTexture) SetUseSerializedUrlIfAny(UseSerializedUrlIfAny bool) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(UseSerializedUrlIfAny)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// VAng returns the VAng property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#vang
+func (p *ProceduralTexture) VAng(vAng float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(vAng)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetVAng sets the VAng property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#vang
+func (p *ProceduralTexture) SetVAng(vAng float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(vAng)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// VOffset returns the VOffset property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#voffset
+func (p *ProceduralTexture) VOffset(vOffset float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(vOffset)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetVOffset sets the VOffset property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#voffset
+func (p *ProceduralTexture) SetVOffset(vOffset float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(vOffset)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// VRotationCenter returns the VRotationCenter property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#vrotationcenter
+func (p *ProceduralTexture) VRotationCenter(vRotationCenter float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(vRotationCenter)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetVRotationCenter sets the VRotationCenter property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#vrotationcenter
+func (p *ProceduralTexture) SetVRotationCenter(vRotationCenter float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(vRotationCenter)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// VScale returns the VScale property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#vscale
+func (p *ProceduralTexture) VScale(vScale float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(vScale)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetVScale sets the VScale property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#vscale
+func (p *ProceduralTexture) SetVScale(vScale float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(vScale)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// WAng returns the WAng property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#wang
+func (p *ProceduralTexture) WAng(wAng float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(wAng)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWAng sets the WAng property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#wang
+func (p *ProceduralTexture) SetWAng(wAng float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(wAng)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// WRAP_ADDRESSMODE returns the WRAP_ADDRESSMODE property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#wrap_addressmode
+func (p *ProceduralTexture) WRAP_ADDRESSMODE(WRAP_ADDRESSMODE float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(WRAP_ADDRESSMODE)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWRAP_ADDRESSMODE sets the WRAP_ADDRESSMODE property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#wrap_addressmode
+func (p *ProceduralTexture) SetWRAP_ADDRESSMODE(WRAP_ADDRESSMODE float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(WRAP_ADDRESSMODE)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// WRotationCenter returns the WRotationCenter property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#wrotationcenter
+func (p *ProceduralTexture) WRotationCenter(wRotationCenter float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(wRotationCenter)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWRotationCenter sets the WRotationCenter property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#wrotationcenter
+func (p *ProceduralTexture) SetWRotationCenter(wRotationCenter float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(wRotationCenter)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// WrapR returns the WrapR property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#wrapr
+func (p *ProceduralTexture) WrapR(wrapR float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(wrapR)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWrapR sets the WrapR property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#wrapr
+func (p *ProceduralTexture) SetWrapR(wrapR float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(wrapR)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// WrapU returns the WrapU property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#wrapu
+func (p *ProceduralTexture) WrapU(wrapU float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(wrapU)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWrapU sets the WrapU property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#wrapu
+func (p *ProceduralTexture) SetWrapU(wrapU float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(wrapU)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// WrapV returns the WrapV property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#wrapv
+func (p *ProceduralTexture) WrapV(wrapV float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(wrapV)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWrapV sets the WrapV property of class ProceduralTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.proceduraltexture#wrapv
+func (p *ProceduralTexture) SetWrapV(wrapV float64) *ProceduralTexture {
+	p := ba.ctx.Get("ProceduralTexture").New(wrapV)
+	return ProceduralTextureFromJSObject(p, ba.ctx)
+}
+
+*/

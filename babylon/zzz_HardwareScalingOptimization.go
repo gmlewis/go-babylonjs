@@ -31,11 +31,9 @@ func HardwareScalingOptimizationFromJSObject(p js.Value, ctx js.Value) *Hardware
 
 // NewHardwareScalingOptimizationOpts contains optional parameters for NewHardwareScalingOptimization.
 type NewHardwareScalingOptimizationOpts struct {
-	Priority *JSFloat64
-
-	MaximumScale *JSFloat64
-
-	Step *JSFloat64
+	Priority     *float64
+	MaximumScale *float64
+	Step         *float64
 }
 
 // NewHardwareScalingOptimization returns a new HardwareScalingOptimization object.
@@ -46,8 +44,101 @@ func (ba *Babylon) NewHardwareScalingOptimization(opts *NewHardwareScalingOptimi
 		opts = &NewHardwareScalingOptimizationOpts{}
 	}
 
-	p := ba.ctx.Get("HardwareScalingOptimization").New(opts.Priority.JSObject(), opts.MaximumScale.JSObject(), opts.Step.JSObject())
+	args := make([]interface{}, 0, 0+3)
+
+	if opts.Priority == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Priority)
+	}
+	if opts.MaximumScale == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.MaximumScale)
+	}
+	if opts.Step == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Step)
+	}
+
+	p := ba.ctx.Get("HardwareScalingOptimization").New(args...)
 	return HardwareScalingOptimizationFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Apply calls the Apply method on the HardwareScalingOptimization object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hardwarescalingoptimization#apply
+func (h *HardwareScalingOptimization) Apply(scene *Scene, optimizer *SceneOptimizer) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, scene.JSObject())
+	args = append(args, optimizer.JSObject())
+
+	retVal := h.p.Call("apply", args...)
+	return retVal.Bool()
+}
+
+// GetDescription calls the GetDescription method on the HardwareScalingOptimization object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hardwarescalingoptimization#getdescription
+func (h *HardwareScalingOptimization) GetDescription() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := h.p.Call("getDescription", args...)
+	return retVal.String()
+}
+
+/*
+
+// MaximumScale returns the MaximumScale property of class HardwareScalingOptimization.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hardwarescalingoptimization#maximumscale
+func (h *HardwareScalingOptimization) MaximumScale(maximumScale float64) *HardwareScalingOptimization {
+	p := ba.ctx.Get("HardwareScalingOptimization").New(maximumScale)
+	return HardwareScalingOptimizationFromJSObject(p, ba.ctx)
+}
+
+// SetMaximumScale sets the MaximumScale property of class HardwareScalingOptimization.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hardwarescalingoptimization#maximumscale
+func (h *HardwareScalingOptimization) SetMaximumScale(maximumScale float64) *HardwareScalingOptimization {
+	p := ba.ctx.Get("HardwareScalingOptimization").New(maximumScale)
+	return HardwareScalingOptimizationFromJSObject(p, ba.ctx)
+}
+
+// Priority returns the Priority property of class HardwareScalingOptimization.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hardwarescalingoptimization#priority
+func (h *HardwareScalingOptimization) Priority(priority float64) *HardwareScalingOptimization {
+	p := ba.ctx.Get("HardwareScalingOptimization").New(priority)
+	return HardwareScalingOptimizationFromJSObject(p, ba.ctx)
+}
+
+// SetPriority sets the Priority property of class HardwareScalingOptimization.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hardwarescalingoptimization#priority
+func (h *HardwareScalingOptimization) SetPriority(priority float64) *HardwareScalingOptimization {
+	p := ba.ctx.Get("HardwareScalingOptimization").New(priority)
+	return HardwareScalingOptimizationFromJSObject(p, ba.ctx)
+}
+
+// Step returns the Step property of class HardwareScalingOptimization.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hardwarescalingoptimization#step
+func (h *HardwareScalingOptimization) Step(step float64) *HardwareScalingOptimization {
+	p := ba.ctx.Get("HardwareScalingOptimization").New(step)
+	return HardwareScalingOptimizationFromJSObject(p, ba.ctx)
+}
+
+// SetStep sets the Step property of class HardwareScalingOptimization.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hardwarescalingoptimization#step
+func (h *HardwareScalingOptimization) SetStep(step float64) *HardwareScalingOptimization {
+	p := ba.ctx.Get("HardwareScalingOptimization").New(step)
+	return HardwareScalingOptimizationFromJSObject(p, ba.ctx)
+}
+
+*/

@@ -30,4 +30,359 @@ func ColorCurvesFromJSObject(p js.Value, ctx js.Value) *ColorCurves {
 	return &ColorCurves{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// ColorCurvesBindOpts contains optional parameters for ColorCurves.Bind.
+type ColorCurvesBindOpts struct {
+	PositiveUniform *string
+	NeutralUniform  *string
+	NegativeUniform *string
+}
+
+// Bind calls the Bind method on the ColorCurves object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcurves#bind
+func (c *ColorCurves) Bind(colorCurves *ColorCurves, effect *Effect, opts *ColorCurvesBindOpts) {
+	if opts == nil {
+		opts = &ColorCurvesBindOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+3)
+
+	args = append(args, colorCurves.JSObject())
+	args = append(args, effect.JSObject())
+
+	if opts.PositiveUniform == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.PositiveUniform)
+	}
+	if opts.NeutralUniform == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NeutralUniform)
+	}
+	if opts.NegativeUniform == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NegativeUniform)
+	}
+
+	c.p.Call("Bind", args...)
+}
+
+// Clone calls the Clone method on the ColorCurves object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcurves#clone
+func (c *ColorCurves) Clone() *ColorCurves {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("clone", args...)
+	return ColorCurvesFromJSObject(retVal, c.ctx)
+}
+
+// GetClassName calls the GetClassName method on the ColorCurves object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcurves#getclassname
+func (c *ColorCurves) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// Parse calls the Parse method on the ColorCurves object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcurves#parse
+func (c *ColorCurves) Parse(source interface{}) *ColorCurves {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, source)
+
+	retVal := c.p.Call("Parse", args...)
+	return ColorCurvesFromJSObject(retVal, c.ctx)
+}
+
+// PrepareUniforms calls the PrepareUniforms method on the ColorCurves object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcurves#prepareuniforms
+func (c *ColorCurves) PrepareUniforms(uniformsList string) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, uniformsList)
+
+	c.p.Call("PrepareUniforms", args...)
+}
+
+// Serialize calls the Serialize method on the ColorCurves object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcurves#serialize
+func (c *ColorCurves) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("serialize", args...)
+	return retVal
+}
+
+/*
+
+// GlobalDensity returns the GlobalDensity property of class ColorCurves.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcurves#globaldensity
+func (c *ColorCurves) GlobalDensity(globalDensity float64) *ColorCurves {
+	p := ba.ctx.Get("ColorCurves").New(globalDensity)
+	return ColorCurvesFromJSObject(p, ba.ctx)
+}
+
+// SetGlobalDensity sets the GlobalDensity property of class ColorCurves.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcurves#globaldensity
+func (c *ColorCurves) SetGlobalDensity(globalDensity float64) *ColorCurves {
+	p := ba.ctx.Get("ColorCurves").New(globalDensity)
+	return ColorCurvesFromJSObject(p, ba.ctx)
+}
+
+// GlobalExposure returns the GlobalExposure property of class ColorCurves.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcurves#globalexposure
+func (c *ColorCurves) GlobalExposure(globalExposure float64) *ColorCurves {
+	p := ba.ctx.Get("ColorCurves").New(globalExposure)
+	return ColorCurvesFromJSObject(p, ba.ctx)
+}
+
+// SetGlobalExposure sets the GlobalExposure property of class ColorCurves.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcurves#globalexposure
+func (c *ColorCurves) SetGlobalExposure(globalExposure float64) *ColorCurves {
+	p := ba.ctx.Get("ColorCurves").New(globalExposure)
+	return ColorCurvesFromJSObject(p, ba.ctx)
+}
+
+// GlobalHue returns the GlobalHue property of class ColorCurves.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcurves#globalhue
+func (c *ColorCurves) GlobalHue(globalHue float64) *ColorCurves {
+	p := ba.ctx.Get("ColorCurves").New(globalHue)
+	return ColorCurvesFromJSObject(p, ba.ctx)
+}
+
+// SetGlobalHue sets the GlobalHue property of class ColorCurves.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcurves#globalhue
+func (c *ColorCurves) SetGlobalHue(globalHue float64) *ColorCurves {
+	p := ba.ctx.Get("ColorCurves").New(globalHue)
+	return ColorCurvesFromJSObject(p, ba.ctx)
+}
+
+// GlobalSaturation returns the GlobalSaturation property of class ColorCurves.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcurves#globalsaturation
+func (c *ColorCurves) GlobalSaturation(globalSaturation float64) *ColorCurves {
+	p := ba.ctx.Get("ColorCurves").New(globalSaturation)
+	return ColorCurvesFromJSObject(p, ba.ctx)
+}
+
+// SetGlobalSaturation sets the GlobalSaturation property of class ColorCurves.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcurves#globalsaturation
+func (c *ColorCurves) SetGlobalSaturation(globalSaturation float64) *ColorCurves {
+	p := ba.ctx.Get("ColorCurves").New(globalSaturation)
+	return ColorCurvesFromJSObject(p, ba.ctx)
+}
+
+// HighlightsDensity returns the HighlightsDensity property of class ColorCurves.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcurves#highlightsdensity
+func (c *ColorCurves) HighlightsDensity(highlightsDensity float64) *ColorCurves {
+	p := ba.ctx.Get("ColorCurves").New(highlightsDensity)
+	return ColorCurvesFromJSObject(p, ba.ctx)
+}
+
+// SetHighlightsDensity sets the HighlightsDensity property of class ColorCurves.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcurves#highlightsdensity
+func (c *ColorCurves) SetHighlightsDensity(highlightsDensity float64) *ColorCurves {
+	p := ba.ctx.Get("ColorCurves").New(highlightsDensity)
+	return ColorCurvesFromJSObject(p, ba.ctx)
+}
+
+// HighlightsExposure returns the HighlightsExposure property of class ColorCurves.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcurves#highlightsexposure
+func (c *ColorCurves) HighlightsExposure(highlightsExposure float64) *ColorCurves {
+	p := ba.ctx.Get("ColorCurves").New(highlightsExposure)
+	return ColorCurvesFromJSObject(p, ba.ctx)
+}
+
+// SetHighlightsExposure sets the HighlightsExposure property of class ColorCurves.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcurves#highlightsexposure
+func (c *ColorCurves) SetHighlightsExposure(highlightsExposure float64) *ColorCurves {
+	p := ba.ctx.Get("ColorCurves").New(highlightsExposure)
+	return ColorCurvesFromJSObject(p, ba.ctx)
+}
+
+// HighlightsHue returns the HighlightsHue property of class ColorCurves.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcurves#highlightshue
+func (c *ColorCurves) HighlightsHue(highlightsHue float64) *ColorCurves {
+	p := ba.ctx.Get("ColorCurves").New(highlightsHue)
+	return ColorCurvesFromJSObject(p, ba.ctx)
+}
+
+// SetHighlightsHue sets the HighlightsHue property of class ColorCurves.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcurves#highlightshue
+func (c *ColorCurves) SetHighlightsHue(highlightsHue float64) *ColorCurves {
+	p := ba.ctx.Get("ColorCurves").New(highlightsHue)
+	return ColorCurvesFromJSObject(p, ba.ctx)
+}
+
+// HighlightsSaturation returns the HighlightsSaturation property of class ColorCurves.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcurves#highlightssaturation
+func (c *ColorCurves) HighlightsSaturation(highlightsSaturation float64) *ColorCurves {
+	p := ba.ctx.Get("ColorCurves").New(highlightsSaturation)
+	return ColorCurvesFromJSObject(p, ba.ctx)
+}
+
+// SetHighlightsSaturation sets the HighlightsSaturation property of class ColorCurves.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcurves#highlightssaturation
+func (c *ColorCurves) SetHighlightsSaturation(highlightsSaturation float64) *ColorCurves {
+	p := ba.ctx.Get("ColorCurves").New(highlightsSaturation)
+	return ColorCurvesFromJSObject(p, ba.ctx)
+}
+
+// MidtonesDensity returns the MidtonesDensity property of class ColorCurves.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcurves#midtonesdensity
+func (c *ColorCurves) MidtonesDensity(midtonesDensity float64) *ColorCurves {
+	p := ba.ctx.Get("ColorCurves").New(midtonesDensity)
+	return ColorCurvesFromJSObject(p, ba.ctx)
+}
+
+// SetMidtonesDensity sets the MidtonesDensity property of class ColorCurves.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcurves#midtonesdensity
+func (c *ColorCurves) SetMidtonesDensity(midtonesDensity float64) *ColorCurves {
+	p := ba.ctx.Get("ColorCurves").New(midtonesDensity)
+	return ColorCurvesFromJSObject(p, ba.ctx)
+}
+
+// MidtonesExposure returns the MidtonesExposure property of class ColorCurves.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcurves#midtonesexposure
+func (c *ColorCurves) MidtonesExposure(midtonesExposure float64) *ColorCurves {
+	p := ba.ctx.Get("ColorCurves").New(midtonesExposure)
+	return ColorCurvesFromJSObject(p, ba.ctx)
+}
+
+// SetMidtonesExposure sets the MidtonesExposure property of class ColorCurves.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcurves#midtonesexposure
+func (c *ColorCurves) SetMidtonesExposure(midtonesExposure float64) *ColorCurves {
+	p := ba.ctx.Get("ColorCurves").New(midtonesExposure)
+	return ColorCurvesFromJSObject(p, ba.ctx)
+}
+
+// MidtonesHue returns the MidtonesHue property of class ColorCurves.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcurves#midtoneshue
+func (c *ColorCurves) MidtonesHue(midtonesHue float64) *ColorCurves {
+	p := ba.ctx.Get("ColorCurves").New(midtonesHue)
+	return ColorCurvesFromJSObject(p, ba.ctx)
+}
+
+// SetMidtonesHue sets the MidtonesHue property of class ColorCurves.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcurves#midtoneshue
+func (c *ColorCurves) SetMidtonesHue(midtonesHue float64) *ColorCurves {
+	p := ba.ctx.Get("ColorCurves").New(midtonesHue)
+	return ColorCurvesFromJSObject(p, ba.ctx)
+}
+
+// MidtonesSaturation returns the MidtonesSaturation property of class ColorCurves.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcurves#midtonessaturation
+func (c *ColorCurves) MidtonesSaturation(midtonesSaturation float64) *ColorCurves {
+	p := ba.ctx.Get("ColorCurves").New(midtonesSaturation)
+	return ColorCurvesFromJSObject(p, ba.ctx)
+}
+
+// SetMidtonesSaturation sets the MidtonesSaturation property of class ColorCurves.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcurves#midtonessaturation
+func (c *ColorCurves) SetMidtonesSaturation(midtonesSaturation float64) *ColorCurves {
+	p := ba.ctx.Get("ColorCurves").New(midtonesSaturation)
+	return ColorCurvesFromJSObject(p, ba.ctx)
+}
+
+// ShadowsDensity returns the ShadowsDensity property of class ColorCurves.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcurves#shadowsdensity
+func (c *ColorCurves) ShadowsDensity(shadowsDensity float64) *ColorCurves {
+	p := ba.ctx.Get("ColorCurves").New(shadowsDensity)
+	return ColorCurvesFromJSObject(p, ba.ctx)
+}
+
+// SetShadowsDensity sets the ShadowsDensity property of class ColorCurves.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcurves#shadowsdensity
+func (c *ColorCurves) SetShadowsDensity(shadowsDensity float64) *ColorCurves {
+	p := ba.ctx.Get("ColorCurves").New(shadowsDensity)
+	return ColorCurvesFromJSObject(p, ba.ctx)
+}
+
+// ShadowsExposure returns the ShadowsExposure property of class ColorCurves.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcurves#shadowsexposure
+func (c *ColorCurves) ShadowsExposure(shadowsExposure float64) *ColorCurves {
+	p := ba.ctx.Get("ColorCurves").New(shadowsExposure)
+	return ColorCurvesFromJSObject(p, ba.ctx)
+}
+
+// SetShadowsExposure sets the ShadowsExposure property of class ColorCurves.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcurves#shadowsexposure
+func (c *ColorCurves) SetShadowsExposure(shadowsExposure float64) *ColorCurves {
+	p := ba.ctx.Get("ColorCurves").New(shadowsExposure)
+	return ColorCurvesFromJSObject(p, ba.ctx)
+}
+
+// ShadowsHue returns the ShadowsHue property of class ColorCurves.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcurves#shadowshue
+func (c *ColorCurves) ShadowsHue(shadowsHue float64) *ColorCurves {
+	p := ba.ctx.Get("ColorCurves").New(shadowsHue)
+	return ColorCurvesFromJSObject(p, ba.ctx)
+}
+
+// SetShadowsHue sets the ShadowsHue property of class ColorCurves.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcurves#shadowshue
+func (c *ColorCurves) SetShadowsHue(shadowsHue float64) *ColorCurves {
+	p := ba.ctx.Get("ColorCurves").New(shadowsHue)
+	return ColorCurvesFromJSObject(p, ba.ctx)
+}
+
+// ShadowsSaturation returns the ShadowsSaturation property of class ColorCurves.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcurves#shadowssaturation
+func (c *ColorCurves) ShadowsSaturation(shadowsSaturation float64) *ColorCurves {
+	p := ba.ctx.Get("ColorCurves").New(shadowsSaturation)
+	return ColorCurvesFromJSObject(p, ba.ctx)
+}
+
+// SetShadowsSaturation sets the ShadowsSaturation property of class ColorCurves.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colorcurves#shadowssaturation
+func (c *ColorCurves) SetShadowsSaturation(shadowsSaturation float64) *ColorCurves {
+	p := ba.ctx.Get("ColorCurves").New(shadowsSaturation)
+	return ColorCurvesFromJSObject(p, ba.ctx)
+}
+
+*/

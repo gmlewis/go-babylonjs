@@ -29,7 +29,7 @@ func Vector3WithInfoFromJSObject(p js.Value, ctx js.Value) *Vector3WithInfo {
 
 // NewVector3WithInfoOpts contains optional parameters for NewVector3WithInfo.
 type NewVector3WithInfoOpts struct {
-	ButtonIndex *JSFloat64
+	ButtonIndex *float64
 }
 
 // NewVector3WithInfo returns a new Vector3WithInfo object.
@@ -40,8 +40,1470 @@ func (ba *Babylon) NewVector3WithInfo(source *Vector3, opts *NewVector3WithInfoO
 		opts = &NewVector3WithInfoOpts{}
 	}
 
-	p := ba.ctx.Get("Vector3WithInfo").New(source.JSObject(), opts.ButtonIndex.JSObject())
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, source.JSObject())
+
+	if opts.ButtonIndex == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ButtonIndex)
+	}
+
+	p := ba.ctx.Get("Vector3WithInfo").New(args...)
 	return Vector3WithInfoFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Add calls the Add method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#add
+func (v *Vector3WithInfo) Add(otherVector *Vector3) *Vector3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, otherVector.JSObject())
+
+	retVal := v.p.Call("add", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// AddInPlace calls the AddInPlace method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#addinplace
+func (v *Vector3WithInfo) AddInPlace(otherVector *Vector3) *Vector3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, otherVector.JSObject())
+
+	retVal := v.p.Call("addInPlace", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// AddInPlaceFromFloats calls the AddInPlaceFromFloats method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#addinplacefromfloats
+func (v *Vector3WithInfo) AddInPlaceFromFloats(x float64, y float64, z float64) *Vector3 {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, x)
+	args = append(args, y)
+	args = append(args, z)
+
+	retVal := v.p.Call("addInPlaceFromFloats", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// AddToRef calls the AddToRef method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#addtoref
+func (v *Vector3WithInfo) AddToRef(otherVector *Vector3, result *Vector3) *Vector3 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, otherVector.JSObject())
+	args = append(args, result.JSObject())
+
+	retVal := v.p.Call("addToRef", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// AsArray calls the AsArray method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#asarray
+func (v *Vector3WithInfo) AsArray() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("asArray", args...)
+	return retVal.Float()
+}
+
+// Backward calls the Backward method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#backward
+func (v *Vector3WithInfo) Backward() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("Backward", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// CatmullRom calls the CatmullRom method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#catmullrom
+func (v *Vector3WithInfo) CatmullRom(value1 *Vector3, value2 *Vector3, value3 *Vector3, value4 *Vector3, amount float64) *Vector3 {
+
+	args := make([]interface{}, 0, 5+0)
+
+	args = append(args, value1.JSObject())
+	args = append(args, value2.JSObject())
+	args = append(args, value3.JSObject())
+	args = append(args, value4.JSObject())
+	args = append(args, amount)
+
+	retVal := v.p.Call("CatmullRom", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// Center calls the Center method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#center
+func (v *Vector3WithInfo) Center(value1 *Vector3, value2 *Vector3) *Vector3 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, value1.JSObject())
+	args = append(args, value2.JSObject())
+
+	retVal := v.p.Call("Center", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// CheckExtends calls the CheckExtends method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#checkextends
+func (v *Vector3WithInfo) CheckExtends(v *Vector3, min *Vector3, max *Vector3) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, v.JSObject())
+	args = append(args, min.JSObject())
+	args = append(args, max.JSObject())
+
+	v.p.Call("CheckExtends", args...)
+}
+
+// Clamp calls the Clamp method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#clamp
+func (v *Vector3WithInfo) Clamp(value *Vector3, min *Vector3, max *Vector3) *Vector3 {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, value.JSObject())
+	args = append(args, min.JSObject())
+	args = append(args, max.JSObject())
+
+	retVal := v.p.Call("Clamp", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// ClampToRef calls the ClampToRef method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#clamptoref
+func (v *Vector3WithInfo) ClampToRef(value *Vector3, min *Vector3, max *Vector3, result *Vector3) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, value.JSObject())
+	args = append(args, min.JSObject())
+	args = append(args, max.JSObject())
+	args = append(args, result.JSObject())
+
+	v.p.Call("ClampToRef", args...)
+}
+
+// Clone calls the Clone method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#clone
+func (v *Vector3WithInfo) Clone() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("clone", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// CopyFrom calls the CopyFrom method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#copyfrom
+func (v *Vector3WithInfo) CopyFrom(source *Vector3) *Vector3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, source.JSObject())
+
+	retVal := v.p.Call("copyFrom", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// CopyFromFloats calls the CopyFromFloats method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#copyfromfloats
+func (v *Vector3WithInfo) CopyFromFloats(x float64, y float64, z float64) *Vector3 {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, x)
+	args = append(args, y)
+	args = append(args, z)
+
+	retVal := v.p.Call("copyFromFloats", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// Cross calls the Cross method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#cross
+func (v *Vector3WithInfo) Cross(left *Vector3, right *Vector3) *Vector3 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, left.JSObject())
+	args = append(args, right.JSObject())
+
+	retVal := v.p.Call("Cross", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// CrossToRef calls the CrossToRef method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#crosstoref
+func (v *Vector3WithInfo) CrossToRef(left *Vector3, right *Vector3, result *Vector3) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, left.JSObject())
+	args = append(args, right.JSObject())
+	args = append(args, result.JSObject())
+
+	v.p.Call("CrossToRef", args...)
+}
+
+// Distance calls the Distance method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#distance
+func (v *Vector3WithInfo) Distance(value1 *Vector3, value2 *Vector3) float64 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, value1.JSObject())
+	args = append(args, value2.JSObject())
+
+	retVal := v.p.Call("Distance", args...)
+	return retVal.Float()
+}
+
+// DistanceSquared calls the DistanceSquared method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#distancesquared
+func (v *Vector3WithInfo) DistanceSquared(value1 *Vector3, value2 *Vector3) float64 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, value1.JSObject())
+	args = append(args, value2.JSObject())
+
+	retVal := v.p.Call("DistanceSquared", args...)
+	return retVal.Float()
+}
+
+// Divide calls the Divide method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#divide
+func (v *Vector3WithInfo) Divide(otherVector *Vector3) *Vector3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, otherVector.JSObject())
+
+	retVal := v.p.Call("divide", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// DivideInPlace calls the DivideInPlace method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#divideinplace
+func (v *Vector3WithInfo) DivideInPlace(otherVector *Vector3) *Vector3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, otherVector.JSObject())
+
+	retVal := v.p.Call("divideInPlace", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// DivideToRef calls the DivideToRef method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#dividetoref
+func (v *Vector3WithInfo) DivideToRef(otherVector *Vector3, result *Vector3) *Vector3 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, otherVector.JSObject())
+	args = append(args, result.JSObject())
+
+	retVal := v.p.Call("divideToRef", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// Dot calls the Dot method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#dot
+func (v *Vector3WithInfo) Dot(left *Vector3, right *Vector3) float64 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, left.JSObject())
+	args = append(args, right.JSObject())
+
+	retVal := v.p.Call("Dot", args...)
+	return retVal.Float()
+}
+
+// Down calls the Down method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#down
+func (v *Vector3WithInfo) Down() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("Down", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// Equals calls the Equals method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#equals
+func (v *Vector3WithInfo) Equals(otherVector *Vector3) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, otherVector.JSObject())
+
+	retVal := v.p.Call("equals", args...)
+	return retVal.Bool()
+}
+
+// EqualsToFloats calls the EqualsToFloats method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#equalstofloats
+func (v *Vector3WithInfo) EqualsToFloats(x float64, y float64, z float64) bool {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, x)
+	args = append(args, y)
+	args = append(args, z)
+
+	retVal := v.p.Call("equalsToFloats", args...)
+	return retVal.Bool()
+}
+
+// Vector3WithInfoEqualsWithEpsilonOpts contains optional parameters for Vector3WithInfo.EqualsWithEpsilon.
+type Vector3WithInfoEqualsWithEpsilonOpts struct {
+	Epsilon *float64
+}
+
+// EqualsWithEpsilon calls the EqualsWithEpsilon method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#equalswithepsilon
+func (v *Vector3WithInfo) EqualsWithEpsilon(otherVector *Vector3, opts *Vector3WithInfoEqualsWithEpsilonOpts) bool {
+	if opts == nil {
+		opts = &Vector3WithInfoEqualsWithEpsilonOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, otherVector.JSObject())
+
+	if opts.Epsilon == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Epsilon)
+	}
+
+	retVal := v.p.Call("equalsWithEpsilon", args...)
+	return retVal.Bool()
+}
+
+// Floor calls the Floor method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#floor
+func (v *Vector3WithInfo) Floor() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("floor", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// Forward calls the Forward method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#forward
+func (v *Vector3WithInfo) Forward() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("Forward", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// Fract calls the Fract method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#fract
+func (v *Vector3WithInfo) Fract() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("fract", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// Vector3WithInfoFromArrayOpts contains optional parameters for Vector3WithInfo.FromArray.
+type Vector3WithInfoFromArrayOpts struct {
+	Offset *float64
+}
+
+// FromArray calls the FromArray method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#fromarray
+func (v *Vector3WithInfo) FromArray(array js.Value, opts *Vector3WithInfoFromArrayOpts) *Vector3 {
+	if opts == nil {
+		opts = &Vector3WithInfoFromArrayOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, array)
+
+	if opts.Offset == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Offset)
+	}
+
+	retVal := v.p.Call("FromArray", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// FromArrayToRef calls the FromArrayToRef method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#fromarraytoref
+func (v *Vector3WithInfo) FromArrayToRef(array js.Value, offset float64, result float64) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, array)
+	args = append(args, offset)
+	args = append(args, result)
+
+	v.p.Call("FromArrayToRef", args...)
+}
+
+// Vector3WithInfoFromFloatArrayOpts contains optional parameters for Vector3WithInfo.FromFloatArray.
+type Vector3WithInfoFromFloatArrayOpts struct {
+	Offset *float64
+}
+
+// FromFloatArray calls the FromFloatArray method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#fromfloatarray
+func (v *Vector3WithInfo) FromFloatArray(array js.Value, opts *Vector3WithInfoFromFloatArrayOpts) *Vector3 {
+	if opts == nil {
+		opts = &Vector3WithInfoFromFloatArrayOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, array)
+
+	if opts.Offset == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Offset)
+	}
+
+	retVal := v.p.Call("FromFloatArray", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// FromFloatArrayToRef calls the FromFloatArrayToRef method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#fromfloatarraytoref
+func (v *Vector3WithInfo) FromFloatArrayToRef(array js.Value, offset float64, result *Vector3) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, array)
+	args = append(args, offset)
+	args = append(args, result.JSObject())
+
+	v.p.Call("FromFloatArrayToRef", args...)
+}
+
+// FromFloatsToRef calls the FromFloatsToRef method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#fromfloatstoref
+func (v *Vector3WithInfo) FromFloatsToRef(x float64, y float64, z float64, result *Vector3) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, x)
+	args = append(args, y)
+	args = append(args, z)
+	args = append(args, result.JSObject())
+
+	v.p.Call("FromFloatsToRef", args...)
+}
+
+// GetAngleBetweenVectors calls the GetAngleBetweenVectors method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#getanglebetweenvectors
+func (v *Vector3WithInfo) GetAngleBetweenVectors(vector0 *Vector3, vector1 *Vector3, normal *Vector3) float64 {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, vector0.JSObject())
+	args = append(args, vector1.JSObject())
+	args = append(args, normal.JSObject())
+
+	retVal := v.p.Call("GetAngleBetweenVectors", args...)
+	return retVal.Float()
+}
+
+// GetClassName calls the GetClassName method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#getclassname
+func (v *Vector3WithInfo) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetClipFactor calls the GetClipFactor method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#getclipfactor
+func (v *Vector3WithInfo) GetClipFactor(vector0 *Vector3, vector1 *Vector3, axis *Vector3, size float64) float64 {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, vector0.JSObject())
+	args = append(args, vector1.JSObject())
+	args = append(args, axis.JSObject())
+	args = append(args, size)
+
+	retVal := v.p.Call("GetClipFactor", args...)
+	return retVal.Float()
+}
+
+// GetHashCode calls the GetHashCode method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#gethashcode
+func (v *Vector3WithInfo) GetHashCode() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("getHashCode", args...)
+	return retVal.Float()
+}
+
+// Hermite calls the Hermite method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#hermite
+func (v *Vector3WithInfo) Hermite(value1 *Vector3, tangent1 *Vector3, value2 *Vector3, tangent2 *Vector3, amount float64) *Vector3 {
+
+	args := make([]interface{}, 0, 5+0)
+
+	args = append(args, value1.JSObject())
+	args = append(args, tangent1.JSObject())
+	args = append(args, value2.JSObject())
+	args = append(args, tangent2.JSObject())
+	args = append(args, amount)
+
+	retVal := v.p.Call("Hermite", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// IsNonUniformWithinEpsilon calls the IsNonUniformWithinEpsilon method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#isnonuniformwithinepsilon
+func (v *Vector3WithInfo) IsNonUniformWithinEpsilon(epsilon float64) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, epsilon)
+
+	retVal := v.p.Call("isNonUniformWithinEpsilon", args...)
+	return retVal.Bool()
+}
+
+// Left calls the Left method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#left
+func (v *Vector3WithInfo) Left() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("Left", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// Length calls the Length method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#length
+func (v *Vector3WithInfo) Length() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("length", args...)
+	return retVal.Float()
+}
+
+// LengthSquared calls the LengthSquared method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#lengthsquared
+func (v *Vector3WithInfo) LengthSquared() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("lengthSquared", args...)
+	return retVal.Float()
+}
+
+// Lerp calls the Lerp method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#lerp
+func (v *Vector3WithInfo) Lerp(start *Vector3, end *Vector3, amount float64) *Vector3 {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, start.JSObject())
+	args = append(args, end.JSObject())
+	args = append(args, amount)
+
+	retVal := v.p.Call("Lerp", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// LerpToRef calls the LerpToRef method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#lerptoref
+func (v *Vector3WithInfo) LerpToRef(start *Vector3, end *Vector3, amount float64, result *Vector3) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, start.JSObject())
+	args = append(args, end.JSObject())
+	args = append(args, amount)
+	args = append(args, result.JSObject())
+
+	v.p.Call("LerpToRef", args...)
+}
+
+// Maximize calls the Maximize method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#maximize
+func (v *Vector3WithInfo) Maximize(left *Vector3, right *Vector3) *Vector3 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, left.JSObject())
+	args = append(args, right.JSObject())
+
+	retVal := v.p.Call("Maximize", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// MaximizeInPlace calls the MaximizeInPlace method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#maximizeinplace
+func (v *Vector3WithInfo) MaximizeInPlace(other *Vector3) *Vector3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, other.JSObject())
+
+	retVal := v.p.Call("maximizeInPlace", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// MaximizeInPlaceFromFloats calls the MaximizeInPlaceFromFloats method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#maximizeinplacefromfloats
+func (v *Vector3WithInfo) MaximizeInPlaceFromFloats(x float64, y float64, z float64) *Vector3 {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, x)
+	args = append(args, y)
+	args = append(args, z)
+
+	retVal := v.p.Call("maximizeInPlaceFromFloats", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// Minimize calls the Minimize method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#minimize
+func (v *Vector3WithInfo) Minimize(left *Vector3, right *Vector3) *Vector3 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, left.JSObject())
+	args = append(args, right.JSObject())
+
+	retVal := v.p.Call("Minimize", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// MinimizeInPlace calls the MinimizeInPlace method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#minimizeinplace
+func (v *Vector3WithInfo) MinimizeInPlace(other *Vector3) *Vector3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, other.JSObject())
+
+	retVal := v.p.Call("minimizeInPlace", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// MinimizeInPlaceFromFloats calls the MinimizeInPlaceFromFloats method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#minimizeinplacefromfloats
+func (v *Vector3WithInfo) MinimizeInPlaceFromFloats(x float64, y float64, z float64) *Vector3 {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, x)
+	args = append(args, y)
+	args = append(args, z)
+
+	retVal := v.p.Call("minimizeInPlaceFromFloats", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// Multiply calls the Multiply method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#multiply
+func (v *Vector3WithInfo) Multiply(otherVector *Vector3) *Vector3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, otherVector.JSObject())
+
+	retVal := v.p.Call("multiply", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// MultiplyByFloats calls the MultiplyByFloats method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#multiplybyfloats
+func (v *Vector3WithInfo) MultiplyByFloats(x float64, y float64, z float64) *Vector3 {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, x)
+	args = append(args, y)
+	args = append(args, z)
+
+	retVal := v.p.Call("multiplyByFloats", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// MultiplyInPlace calls the MultiplyInPlace method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#multiplyinplace
+func (v *Vector3WithInfo) MultiplyInPlace(otherVector *Vector3) *Vector3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, otherVector.JSObject())
+
+	retVal := v.p.Call("multiplyInPlace", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// MultiplyToRef calls the MultiplyToRef method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#multiplytoref
+func (v *Vector3WithInfo) MultiplyToRef(otherVector *Vector3, result *Vector3) *Vector3 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, otherVector.JSObject())
+	args = append(args, result.JSObject())
+
+	retVal := v.p.Call("multiplyToRef", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// Negate calls the Negate method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#negate
+func (v *Vector3WithInfo) Negate() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("negate", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// Normalize calls the Normalize method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#normalize
+func (v *Vector3WithInfo) Normalize(vector *Vector3) *Vector3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, vector.JSObject())
+
+	retVal := v.p.Call("Normalize", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// NormalizeFromLength calls the NormalizeFromLength method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#normalizefromlength
+func (v *Vector3WithInfo) NormalizeFromLength(len float64) *Vector3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, len)
+
+	retVal := v.p.Call("normalizeFromLength", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// NormalizeToNew calls the NormalizeToNew method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#normalizetonew
+func (v *Vector3WithInfo) NormalizeToNew() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("normalizeToNew", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// NormalizeToRef calls the NormalizeToRef method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#normalizetoref
+func (v *Vector3WithInfo) NormalizeToRef(vector *Vector3, result *Vector3) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, vector.JSObject())
+	args = append(args, result.JSObject())
+
+	v.p.Call("NormalizeToRef", args...)
+}
+
+// One calls the One method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#one
+func (v *Vector3WithInfo) One() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("One", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// Project calls the Project method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#project
+func (v *Vector3WithInfo) Project(vector *Vector3, world *Matrix, transform *Matrix, viewport *Viewport) *Vector3 {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, vector.JSObject())
+	args = append(args, world.JSObject())
+	args = append(args, transform.JSObject())
+	args = append(args, viewport.JSObject())
+
+	retVal := v.p.Call("Project", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// ReorderInPlace calls the ReorderInPlace method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#reorderinplace
+func (v *Vector3WithInfo) ReorderInPlace(order string) *Vector3WithInfo {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, order)
+
+	retVal := v.p.Call("reorderInPlace", args...)
+	return Vector3WithInfoFromJSObject(retVal, v.ctx)
+}
+
+// Right calls the Right method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#right
+func (v *Vector3WithInfo) Right() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("Right", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// RotateByQuaternionAroundPointToRef calls the RotateByQuaternionAroundPointToRef method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#rotatebyquaternionaroundpointtoref
+func (v *Vector3WithInfo) RotateByQuaternionAroundPointToRef(quaternion *Quaternion, point *Vector3, result *Vector3) *Vector3 {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, quaternion.JSObject())
+	args = append(args, point.JSObject())
+	args = append(args, result.JSObject())
+
+	retVal := v.p.Call("rotateByQuaternionAroundPointToRef", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// RotateByQuaternionToRef calls the RotateByQuaternionToRef method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#rotatebyquaterniontoref
+func (v *Vector3WithInfo) RotateByQuaternionToRef(quaternion *Quaternion, result *Vector3) *Vector3 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, quaternion.JSObject())
+	args = append(args, result.JSObject())
+
+	retVal := v.p.Call("rotateByQuaternionToRef", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// RotationFromAxis calls the RotationFromAxis method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#rotationfromaxis
+func (v *Vector3WithInfo) RotationFromAxis(axis1 *Vector3, axis2 *Vector3, axis3 *Vector3) *Vector3 {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, axis1.JSObject())
+	args = append(args, axis2.JSObject())
+	args = append(args, axis3.JSObject())
+
+	retVal := v.p.Call("RotationFromAxis", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// RotationFromAxisToRef calls the RotationFromAxisToRef method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#rotationfromaxistoref
+func (v *Vector3WithInfo) RotationFromAxisToRef(axis1 *Vector3, axis2 *Vector3, axis3 *Vector3, ref *Vector3) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, axis1.JSObject())
+	args = append(args, axis2.JSObject())
+	args = append(args, axis3.JSObject())
+	args = append(args, ref.JSObject())
+
+	v.p.Call("RotationFromAxisToRef", args...)
+}
+
+// Scale calls the Scale method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#scale
+func (v *Vector3WithInfo) Scale(scale float64) *Vector3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, scale)
+
+	retVal := v.p.Call("scale", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// ScaleAndAddToRef calls the ScaleAndAddToRef method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#scaleandaddtoref
+func (v *Vector3WithInfo) ScaleAndAddToRef(scale float64, result *Vector3) *Vector3 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, scale)
+	args = append(args, result.JSObject())
+
+	retVal := v.p.Call("scaleAndAddToRef", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// ScaleInPlace calls the ScaleInPlace method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#scaleinplace
+func (v *Vector3WithInfo) ScaleInPlace(scale float64) *Vector3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, scale)
+
+	retVal := v.p.Call("scaleInPlace", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// ScaleToRef calls the ScaleToRef method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#scaletoref
+func (v *Vector3WithInfo) ScaleToRef(scale float64, result *Vector3) *Vector3 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, scale)
+	args = append(args, result.JSObject())
+
+	retVal := v.p.Call("scaleToRef", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// Set calls the Set method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#set
+func (v *Vector3WithInfo) Set(x float64, y float64, z float64) *Vector3 {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, x)
+	args = append(args, y)
+	args = append(args, z)
+
+	retVal := v.p.Call("set", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// SetAll calls the SetAll method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#setall
+func (v *Vector3WithInfo) SetAll(v float64) *Vector3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, v)
+
+	retVal := v.p.Call("setAll", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// Subtract calls the Subtract method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#subtract
+func (v *Vector3WithInfo) Subtract(otherVector *Vector3) *Vector3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, otherVector.JSObject())
+
+	retVal := v.p.Call("subtract", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// SubtractFromFloats calls the SubtractFromFloats method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#subtractfromfloats
+func (v *Vector3WithInfo) SubtractFromFloats(x float64, y float64, z float64) *Vector3 {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, x)
+	args = append(args, y)
+	args = append(args, z)
+
+	retVal := v.p.Call("subtractFromFloats", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// SubtractFromFloatsToRef calls the SubtractFromFloatsToRef method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#subtractfromfloatstoref
+func (v *Vector3WithInfo) SubtractFromFloatsToRef(x float64, y float64, z float64, result *Vector3) *Vector3 {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, x)
+	args = append(args, y)
+	args = append(args, z)
+	args = append(args, result.JSObject())
+
+	retVal := v.p.Call("subtractFromFloatsToRef", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// SubtractInPlace calls the SubtractInPlace method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#subtractinplace
+func (v *Vector3WithInfo) SubtractInPlace(otherVector *Vector3) *Vector3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, otherVector.JSObject())
+
+	retVal := v.p.Call("subtractInPlace", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// SubtractToRef calls the SubtractToRef method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#subtracttoref
+func (v *Vector3WithInfo) SubtractToRef(otherVector *Vector3, result *Vector3) *Vector3 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, otherVector.JSObject())
+	args = append(args, result.JSObject())
+
+	retVal := v.p.Call("subtractToRef", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// Vector3WithInfoToArrayOpts contains optional parameters for Vector3WithInfo.ToArray.
+type Vector3WithInfoToArrayOpts struct {
+	Index *float64
+}
+
+// ToArray calls the ToArray method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#toarray
+func (v *Vector3WithInfo) ToArray(array js.Value, opts *Vector3WithInfoToArrayOpts) *Vector3 {
+	if opts == nil {
+		opts = &Vector3WithInfoToArrayOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, array)
+
+	if opts.Index == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Index)
+	}
+
+	retVal := v.p.Call("toArray", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// ToQuaternion calls the ToQuaternion method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#toquaternion
+func (v *Vector3WithInfo) ToQuaternion() *Quaternion {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("toQuaternion", args...)
+	return QuaternionFromJSObject(retVal, v.ctx)
+}
+
+// ToString calls the ToString method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#tostring
+func (v *Vector3WithInfo) ToString() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("toString", args...)
+	return retVal.String()
+}
+
+// TransformCoordinates calls the TransformCoordinates method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#transformcoordinates
+func (v *Vector3WithInfo) TransformCoordinates(vector *Vector3, transformation *Matrix) *Vector3 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, vector.JSObject())
+	args = append(args, transformation.JSObject())
+
+	retVal := v.p.Call("TransformCoordinates", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// TransformCoordinatesFromFloatsToRef calls the TransformCoordinatesFromFloatsToRef method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#transformcoordinatesfromfloatstoref
+func (v *Vector3WithInfo) TransformCoordinatesFromFloatsToRef(x float64, y float64, z float64, transformation *Matrix, result *Vector3) {
+
+	args := make([]interface{}, 0, 5+0)
+
+	args = append(args, x)
+	args = append(args, y)
+	args = append(args, z)
+	args = append(args, transformation.JSObject())
+	args = append(args, result.JSObject())
+
+	v.p.Call("TransformCoordinatesFromFloatsToRef", args...)
+}
+
+// TransformCoordinatesToRef calls the TransformCoordinatesToRef method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#transformcoordinatestoref
+func (v *Vector3WithInfo) TransformCoordinatesToRef(vector *Vector3, transformation *Matrix, result *Vector3) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, vector.JSObject())
+	args = append(args, transformation.JSObject())
+	args = append(args, result.JSObject())
+
+	v.p.Call("TransformCoordinatesToRef", args...)
+}
+
+// TransformNormal calls the TransformNormal method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#transformnormal
+func (v *Vector3WithInfo) TransformNormal(vector *Vector3, transformation *Matrix) *Vector3 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, vector.JSObject())
+	args = append(args, transformation.JSObject())
+
+	retVal := v.p.Call("TransformNormal", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// TransformNormalFromFloatsToRef calls the TransformNormalFromFloatsToRef method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#transformnormalfromfloatstoref
+func (v *Vector3WithInfo) TransformNormalFromFloatsToRef(x float64, y float64, z float64, transformation *Matrix, result *Vector3) {
+
+	args := make([]interface{}, 0, 5+0)
+
+	args = append(args, x)
+	args = append(args, y)
+	args = append(args, z)
+	args = append(args, transformation.JSObject())
+	args = append(args, result.JSObject())
+
+	v.p.Call("TransformNormalFromFloatsToRef", args...)
+}
+
+// TransformNormalToRef calls the TransformNormalToRef method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#transformnormaltoref
+func (v *Vector3WithInfo) TransformNormalToRef(vector *Vector3, transformation *Matrix, result *Vector3) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, vector.JSObject())
+	args = append(args, transformation.JSObject())
+	args = append(args, result.JSObject())
+
+	v.p.Call("TransformNormalToRef", args...)
+}
+
+// Unproject calls the Unproject method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#unproject
+func (v *Vector3WithInfo) Unproject(source *Vector3, viewportWidth float64, viewportHeight float64, world *Matrix, view *Matrix, projection *Matrix) *Vector3 {
+
+	args := make([]interface{}, 0, 6+0)
+
+	args = append(args, source.JSObject())
+	args = append(args, viewportWidth)
+	args = append(args, viewportHeight)
+	args = append(args, world.JSObject())
+	args = append(args, view.JSObject())
+	args = append(args, projection.JSObject())
+
+	retVal := v.p.Call("Unproject", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// UnprojectFloatsToRef calls the UnprojectFloatsToRef method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#unprojectfloatstoref
+func (v *Vector3WithInfo) UnprojectFloatsToRef(sourceX *float, sourceY *float, sourceZ *float, viewportWidth float64, viewportHeight float64, world *Matrix, view *Matrix, projection *Matrix, result *Vector3) {
+
+	args := make([]interface{}, 0, 9+0)
+
+	args = append(args, sourceX.JSObject())
+	args = append(args, sourceY.JSObject())
+	args = append(args, sourceZ.JSObject())
+	args = append(args, viewportWidth)
+	args = append(args, viewportHeight)
+	args = append(args, world.JSObject())
+	args = append(args, view.JSObject())
+	args = append(args, projection.JSObject())
+	args = append(args, result.JSObject())
+
+	v.p.Call("UnprojectFloatsToRef", args...)
+}
+
+// UnprojectFromTransform calls the UnprojectFromTransform method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#unprojectfromtransform
+func (v *Vector3WithInfo) UnprojectFromTransform(source *Vector3, viewportWidth float64, viewportHeight float64, world *Matrix, transform *Matrix) *Vector3 {
+
+	args := make([]interface{}, 0, 5+0)
+
+	args = append(args, source.JSObject())
+	args = append(args, viewportWidth)
+	args = append(args, viewportHeight)
+	args = append(args, world.JSObject())
+	args = append(args, transform.JSObject())
+
+	retVal := v.p.Call("UnprojectFromTransform", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// UnprojectToRef calls the UnprojectToRef method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#unprojecttoref
+func (v *Vector3WithInfo) UnprojectToRef(source *Vector3, viewportWidth float64, viewportHeight float64, world *Matrix, view *Matrix, projection *Matrix, result *Vector3) {
+
+	args := make([]interface{}, 0, 7+0)
+
+	args = append(args, source.JSObject())
+	args = append(args, viewportWidth)
+	args = append(args, viewportHeight)
+	args = append(args, world.JSObject())
+	args = append(args, view.JSObject())
+	args = append(args, projection.JSObject())
+	args = append(args, result.JSObject())
+
+	v.p.Call("UnprojectToRef", args...)
+}
+
+// Up calls the Up method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#up
+func (v *Vector3WithInfo) Up() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("Up", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+// Zero calls the Zero method on the Vector3WithInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#zero
+func (v *Vector3WithInfo) Zero() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := v.p.Call("Zero", args...)
+	return Vector3FromJSObject(retVal, v.ctx)
+}
+
+/*
+
+// ButtonIndex returns the ButtonIndex property of class Vector3WithInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#buttonindex
+func (v *Vector3WithInfo) ButtonIndex(buttonIndex float64) *Vector3WithInfo {
+	p := ba.ctx.Get("Vector3WithInfo").New(buttonIndex)
+	return Vector3WithInfoFromJSObject(p, ba.ctx)
+}
+
+// SetButtonIndex sets the ButtonIndex property of class Vector3WithInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#buttonindex
+func (v *Vector3WithInfo) SetButtonIndex(buttonIndex float64) *Vector3WithInfo {
+	p := ba.ctx.Get("Vector3WithInfo").New(buttonIndex)
+	return Vector3WithInfoFromJSObject(p, ba.ctx)
+}
+
+// IsNonUniform returns the IsNonUniform property of class Vector3WithInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#isnonuniform
+func (v *Vector3WithInfo) IsNonUniform(isNonUniform bool) *Vector3WithInfo {
+	p := ba.ctx.Get("Vector3WithInfo").New(isNonUniform)
+	return Vector3WithInfoFromJSObject(p, ba.ctx)
+}
+
+// SetIsNonUniform sets the IsNonUniform property of class Vector3WithInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#isnonuniform
+func (v *Vector3WithInfo) SetIsNonUniform(isNonUniform bool) *Vector3WithInfo {
+	p := ba.ctx.Get("Vector3WithInfo").New(isNonUniform)
+	return Vector3WithInfoFromJSObject(p, ba.ctx)
+}
+
+// UpReadOnly returns the UpReadOnly property of class Vector3WithInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#upreadonly
+func (v *Vector3WithInfo) UpReadOnly(UpReadOnly *Vector3) *Vector3WithInfo {
+	p := ba.ctx.Get("Vector3WithInfo").New(UpReadOnly.JSObject())
+	return Vector3WithInfoFromJSObject(p, ba.ctx)
+}
+
+// SetUpReadOnly sets the UpReadOnly property of class Vector3WithInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#upreadonly
+func (v *Vector3WithInfo) SetUpReadOnly(UpReadOnly *Vector3) *Vector3WithInfo {
+	p := ba.ctx.Get("Vector3WithInfo").New(UpReadOnly.JSObject())
+	return Vector3WithInfoFromJSObject(p, ba.ctx)
+}
+
+// X returns the X property of class Vector3WithInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#x
+func (v *Vector3WithInfo) X(x float64) *Vector3WithInfo {
+	p := ba.ctx.Get("Vector3WithInfo").New(x)
+	return Vector3WithInfoFromJSObject(p, ba.ctx)
+}
+
+// SetX sets the X property of class Vector3WithInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#x
+func (v *Vector3WithInfo) SetX(x float64) *Vector3WithInfo {
+	p := ba.ctx.Get("Vector3WithInfo").New(x)
+	return Vector3WithInfoFromJSObject(p, ba.ctx)
+}
+
+// Y returns the Y property of class Vector3WithInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#y
+func (v *Vector3WithInfo) Y(y float64) *Vector3WithInfo {
+	p := ba.ctx.Get("Vector3WithInfo").New(y)
+	return Vector3WithInfoFromJSObject(p, ba.ctx)
+}
+
+// SetY sets the Y property of class Vector3WithInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#y
+func (v *Vector3WithInfo) SetY(y float64) *Vector3WithInfo {
+	p := ba.ctx.Get("Vector3WithInfo").New(y)
+	return Vector3WithInfoFromJSObject(p, ba.ctx)
+}
+
+// Z returns the Z property of class Vector3WithInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#z
+func (v *Vector3WithInfo) Z(z float64) *Vector3WithInfo {
+	p := ba.ctx.Get("Vector3WithInfo").New(z)
+	return Vector3WithInfoFromJSObject(p, ba.ctx)
+}
+
+// SetZ sets the Z property of class Vector3WithInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#z
+func (v *Vector3WithInfo) SetZ(z float64) *Vector3WithInfo {
+	p := ba.ctx.Get("Vector3WithInfo").New(z)
+	return Vector3WithInfoFromJSObject(p, ba.ctx)
+}
+
+// ZeroReadOnly returns the ZeroReadOnly property of class Vector3WithInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#zeroreadonly
+func (v *Vector3WithInfo) ZeroReadOnly(ZeroReadOnly *Vector3) *Vector3WithInfo {
+	p := ba.ctx.Get("Vector3WithInfo").New(ZeroReadOnly.JSObject())
+	return Vector3WithInfoFromJSObject(p, ba.ctx)
+}
+
+// SetZeroReadOnly sets the ZeroReadOnly property of class Vector3WithInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.vector3withinfo#zeroreadonly
+func (v *Vector3WithInfo) SetZeroReadOnly(ZeroReadOnly *Vector3) *Vector3WithInfo {
+	p := ba.ctx.Get("Vector3WithInfo").New(ZeroReadOnly.JSObject())
+	return Vector3WithInfoFromJSObject(p, ba.ctx)
+}
+
+*/

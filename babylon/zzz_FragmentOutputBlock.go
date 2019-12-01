@@ -31,8 +31,653 @@ func FragmentOutputBlockFromJSObject(p js.Value, ctx js.Value) *FragmentOutputBl
 //
 // https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock
 func (ba *Babylon) NewFragmentOutputBlock(name string) *FragmentOutputBlock {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	p := ba.ctx.Get("FragmentOutputBlock").New(args...)
+	return FragmentOutputBlockFromJSObject(p, ba.ctx)
+}
+
+// AutoConfigure calls the AutoConfigure method on the FragmentOutputBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#autoconfigure
+func (f *FragmentOutputBlock) AutoConfigure(material *NodeMaterial) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, material.JSObject())
+
+	f.p.Call("autoConfigure", args...)
+}
+
+// FragmentOutputBlockBindOpts contains optional parameters for FragmentOutputBlock.Bind.
+type FragmentOutputBlockBindOpts struct {
+	Mesh *Mesh
+}
+
+// Bind calls the Bind method on the FragmentOutputBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#bind
+func (f *FragmentOutputBlock) Bind(effect *Effect, nodeMaterial *NodeMaterial, opts *FragmentOutputBlockBindOpts) {
+	if opts == nil {
+		opts = &FragmentOutputBlockBindOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, effect.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	f.p.Call("bind", args...)
+}
+
+// Build calls the Build method on the FragmentOutputBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#build
+func (f *FragmentOutputBlock) Build(state *NodeMaterialBuildState, activeBlocks *NodeMaterialBlock) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, state.JSObject())
+	args = append(args, activeBlocks.JSObject())
+
+	retVal := f.p.Call("build", args...)
+	return retVal.Bool()
+}
+
+// FragmentOutputBlockCloneOpts contains optional parameters for FragmentOutputBlock.Clone.
+type FragmentOutputBlockCloneOpts struct {
+	RootUrl *string
+}
+
+// Clone calls the Clone method on the FragmentOutputBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#clone
+func (f *FragmentOutputBlock) Clone(scene *Scene, opts *FragmentOutputBlockCloneOpts) *NodeMaterialBlock {
+	if opts == nil {
+		opts = &FragmentOutputBlockCloneOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, scene.JSObject())
+
+	if opts.RootUrl == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RootUrl)
+	}
+
+	retVal := f.p.Call("clone", args...)
+	return NodeMaterialBlockFromJSObject(retVal, f.ctx)
+}
+
+// FragmentOutputBlockConnectToOpts contains optional parameters for FragmentOutputBlock.ConnectTo.
+type FragmentOutputBlockConnectToOpts struct {
+	Options js.Value
+}
+
+// ConnectTo calls the ConnectTo method on the FragmentOutputBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#connectto
+func (f *FragmentOutputBlock) ConnectTo(other *NodeMaterialBlock, opts *FragmentOutputBlockConnectToOpts) *FragmentOutputBlock {
+	if opts == nil {
+		opts = &FragmentOutputBlockConnectToOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, other.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	retVal := f.p.Call("connectTo", args...)
+	return FragmentOutputBlockFromJSObject(retVal, f.ctx)
+}
+
+// Dispose calls the Dispose method on the FragmentOutputBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#dispose
+func (f *FragmentOutputBlock) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	f.p.Call("dispose", args...)
+}
+
+// GetClassName calls the GetClassName method on the FragmentOutputBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#getclassname
+func (f *FragmentOutputBlock) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// FragmentOutputBlockGetFirstAvailableInputOpts contains optional parameters for FragmentOutputBlock.GetFirstAvailableInput.
+type FragmentOutputBlockGetFirstAvailableInputOpts struct {
+	ForOutput *NodeMaterialConnectionPoint
+}
+
+// GetFirstAvailableInput calls the GetFirstAvailableInput method on the FragmentOutputBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#getfirstavailableinput
+func (f *FragmentOutputBlock) GetFirstAvailableInput(opts *FragmentOutputBlockGetFirstAvailableInputOpts) *NodeMaterialConnectionPoint {
+	if opts == nil {
+		opts = &FragmentOutputBlockGetFirstAvailableInputOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForOutput == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForOutput.JSObject())
+	}
+
+	retVal := f.p.Call("getFirstAvailableInput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, f.ctx)
+}
+
+// FragmentOutputBlockGetFirstAvailableOutputOpts contains optional parameters for FragmentOutputBlock.GetFirstAvailableOutput.
+type FragmentOutputBlockGetFirstAvailableOutputOpts struct {
+	ForBlock *NodeMaterialBlock
+}
+
+// GetFirstAvailableOutput calls the GetFirstAvailableOutput method on the FragmentOutputBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#getfirstavailableoutput
+func (f *FragmentOutputBlock) GetFirstAvailableOutput(opts *FragmentOutputBlockGetFirstAvailableOutputOpts) *NodeMaterialConnectionPoint {
+	if opts == nil {
+		opts = &FragmentOutputBlockGetFirstAvailableOutputOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForBlock == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForBlock.JSObject())
+	}
+
+	retVal := f.p.Call("getFirstAvailableOutput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, f.ctx)
+}
+
+// GetInputByName calls the GetInputByName method on the FragmentOutputBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#getinputbyname
+func (f *FragmentOutputBlock) GetInputByName(name string) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := f.p.Call("getInputByName", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, f.ctx)
+}
+
+// GetOutputByName calls the GetOutputByName method on the FragmentOutputBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#getoutputbyname
+func (f *FragmentOutputBlock) GetOutputByName(name string) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := f.p.Call("getOutputByName", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, f.ctx)
+}
+
+// GetSiblingOutput calls the GetSiblingOutput method on the FragmentOutputBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#getsiblingoutput
+func (f *FragmentOutputBlock) GetSiblingOutput(current *NodeMaterialConnectionPoint) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, current.JSObject())
+
+	retVal := f.p.Call("getSiblingOutput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, f.ctx)
+}
+
+// Initialize calls the Initialize method on the FragmentOutputBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#initialize
+func (f *FragmentOutputBlock) Initialize(state *NodeMaterialBuildState) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, state.JSObject())
+
+	f.p.Call("initialize", args...)
+}
+
+// FragmentOutputBlockInitializeDefinesOpts contains optional parameters for FragmentOutputBlock.InitializeDefines.
+type FragmentOutputBlockInitializeDefinesOpts struct {
+	UseInstances *bool
+}
+
+// InitializeDefines calls the InitializeDefines method on the FragmentOutputBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#initializedefines
+func (f *FragmentOutputBlock) InitializeDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *FragmentOutputBlockInitializeDefinesOpts) {
+	if opts == nil {
+		opts = &FragmentOutputBlockInitializeDefinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	f.p.Call("initializeDefines", args...)
+}
+
+// FragmentOutputBlockIsReadyOpts contains optional parameters for FragmentOutputBlock.IsReady.
+type FragmentOutputBlockIsReadyOpts struct {
+	UseInstances *bool
+}
+
+// IsReady calls the IsReady method on the FragmentOutputBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#isready
+func (f *FragmentOutputBlock) IsReady(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *FragmentOutputBlockIsReadyOpts) bool {
+	if opts == nil {
+		opts = &FragmentOutputBlockIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := f.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// FragmentOutputBlockPrepareDefinesOpts contains optional parameters for FragmentOutputBlock.PrepareDefines.
+type FragmentOutputBlockPrepareDefinesOpts struct {
+	UseInstances *bool
+}
+
+// PrepareDefines calls the PrepareDefines method on the FragmentOutputBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#preparedefines
+func (f *FragmentOutputBlock) PrepareDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *FragmentOutputBlockPrepareDefinesOpts) {
+	if opts == nil {
+		opts = &FragmentOutputBlockPrepareDefinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	f.p.Call("prepareDefines", args...)
+}
+
+// ProvideFallbacks calls the ProvideFallbacks method on the FragmentOutputBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#providefallbacks
+func (f *FragmentOutputBlock) ProvideFallbacks(mesh *AbstractMesh, fallbacks *EffectFallbacks) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, fallbacks.JSObject())
+
+	f.p.Call("provideFallbacks", args...)
+}
+
+// FragmentOutputBlockRegisterInputOpts contains optional parameters for FragmentOutputBlock.RegisterInput.
+type FragmentOutputBlockRegisterInputOpts struct {
+	IsOptional *bool
+	Target     js.Value
+}
+
+// RegisterInput calls the RegisterInput method on the FragmentOutputBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#registerinput
+func (f *FragmentOutputBlock) RegisterInput(name string, jsType js.Value, opts *FragmentOutputBlockRegisterInputOpts) *FragmentOutputBlock {
+	if opts == nil {
+		opts = &FragmentOutputBlockRegisterInputOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+2)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	if opts.IsOptional == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IsOptional)
+	}
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+
+	retVal := f.p.Call("registerInput", args...)
+	return FragmentOutputBlockFromJSObject(retVal, f.ctx)
+}
+
+// FragmentOutputBlockRegisterOutputOpts contains optional parameters for FragmentOutputBlock.RegisterOutput.
+type FragmentOutputBlockRegisterOutputOpts struct {
+	Target js.Value
+}
+
+// RegisterOutput calls the RegisterOutput method on the FragmentOutputBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#registeroutput
+func (f *FragmentOutputBlock) RegisterOutput(name string, jsType js.Value, opts *FragmentOutputBlockRegisterOutputOpts) *FragmentOutputBlock {
+	if opts == nil {
+		opts = &FragmentOutputBlockRegisterOutputOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+
+	retVal := f.p.Call("registerOutput", args...)
+	return FragmentOutputBlockFromJSObject(retVal, f.ctx)
+}
+
+// ReplaceRepeatableContent calls the ReplaceRepeatableContent method on the FragmentOutputBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#replacerepeatablecontent
+func (f *FragmentOutputBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterialBuildState, fragmentShaderState *NodeMaterialBuildState, mesh *AbstractMesh, defines js.Value) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, vertexShaderState.JSObject())
+	args = append(args, fragmentShaderState.JSObject())
+	args = append(args, mesh.JSObject())
+	args = append(args, defines)
+
+	f.p.Call("replaceRepeatableContent", args...)
+}
+
+// Serialize calls the Serialize method on the FragmentOutputBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#serialize
+func (f *FragmentOutputBlock) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("serialize", args...)
+	return retVal
+}
+
+// UpdateUniformsAndSamples calls the UpdateUniformsAndSamples method on the FragmentOutputBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#updateuniformsandsamples
+func (f *FragmentOutputBlock) UpdateUniformsAndSamples(state *NodeMaterialBuildState, nodeMaterial *NodeMaterial, defines js.Value, uniformBuffers string) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, state.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+	args = append(args, uniformBuffers)
+
+	f.p.Call("updateUniformsAndSamples", args...)
+}
+
+/*
+
+// A returns the A property of class FragmentOutputBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#a
+func (f *FragmentOutputBlock) A(a *NodeMaterialConnectionPoint) *FragmentOutputBlock {
+	p := ba.ctx.Get("FragmentOutputBlock").New(a.JSObject())
+	return FragmentOutputBlockFromJSObject(p, ba.ctx)
+}
+
+// SetA sets the A property of class FragmentOutputBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#a
+func (f *FragmentOutputBlock) SetA(a *NodeMaterialConnectionPoint) *FragmentOutputBlock {
+	p := ba.ctx.Get("FragmentOutputBlock").New(a.JSObject())
+	return FragmentOutputBlockFromJSObject(p, ba.ctx)
+}
+
+// BuildId returns the BuildId property of class FragmentOutputBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#buildid
+func (f *FragmentOutputBlock) BuildId(buildId float64) *FragmentOutputBlock {
+	p := ba.ctx.Get("FragmentOutputBlock").New(buildId)
+	return FragmentOutputBlockFromJSObject(p, ba.ctx)
+}
+
+// SetBuildId sets the BuildId property of class FragmentOutputBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#buildid
+func (f *FragmentOutputBlock) SetBuildId(buildId float64) *FragmentOutputBlock {
+	p := ba.ctx.Get("FragmentOutputBlock").New(buildId)
+	return FragmentOutputBlockFromJSObject(p, ba.ctx)
+}
+
+// Comments returns the Comments property of class FragmentOutputBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#comments
+func (f *FragmentOutputBlock) Comments(comments string) *FragmentOutputBlock {
+	p := ba.ctx.Get("FragmentOutputBlock").New(comments)
+	return FragmentOutputBlockFromJSObject(p, ba.ctx)
+}
+
+// SetComments sets the Comments property of class FragmentOutputBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#comments
+func (f *FragmentOutputBlock) SetComments(comments string) *FragmentOutputBlock {
+	p := ba.ctx.Get("FragmentOutputBlock").New(comments)
+	return FragmentOutputBlockFromJSObject(p, ba.ctx)
+}
+
+// Inputs returns the Inputs property of class FragmentOutputBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#inputs
+func (f *FragmentOutputBlock) Inputs(inputs *NodeMaterialConnectionPoint) *FragmentOutputBlock {
+	p := ba.ctx.Get("FragmentOutputBlock").New(inputs.JSObject())
+	return FragmentOutputBlockFromJSObject(p, ba.ctx)
+}
+
+// SetInputs sets the Inputs property of class FragmentOutputBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#inputs
+func (f *FragmentOutputBlock) SetInputs(inputs *NodeMaterialConnectionPoint) *FragmentOutputBlock {
+	p := ba.ctx.Get("FragmentOutputBlock").New(inputs.JSObject())
+	return FragmentOutputBlockFromJSObject(p, ba.ctx)
+}
+
+// IsFinalMerger returns the IsFinalMerger property of class FragmentOutputBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#isfinalmerger
+func (f *FragmentOutputBlock) IsFinalMerger(isFinalMerger bool) *FragmentOutputBlock {
+	p := ba.ctx.Get("FragmentOutputBlock").New(isFinalMerger)
+	return FragmentOutputBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsFinalMerger sets the IsFinalMerger property of class FragmentOutputBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#isfinalmerger
+func (f *FragmentOutputBlock) SetIsFinalMerger(isFinalMerger bool) *FragmentOutputBlock {
+	p := ba.ctx.Get("FragmentOutputBlock").New(isFinalMerger)
+	return FragmentOutputBlockFromJSObject(p, ba.ctx)
+}
+
+// IsInput returns the IsInput property of class FragmentOutputBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#isinput
+func (f *FragmentOutputBlock) IsInput(isInput bool) *FragmentOutputBlock {
+	p := ba.ctx.Get("FragmentOutputBlock").New(isInput)
+	return FragmentOutputBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsInput sets the IsInput property of class FragmentOutputBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#isinput
+func (f *FragmentOutputBlock) SetIsInput(isInput bool) *FragmentOutputBlock {
+	p := ba.ctx.Get("FragmentOutputBlock").New(isInput)
+	return FragmentOutputBlockFromJSObject(p, ba.ctx)
+}
+
+// IsUnique returns the IsUnique property of class FragmentOutputBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#isunique
+func (f *FragmentOutputBlock) IsUnique(isUnique bool) *FragmentOutputBlock {
+	p := ba.ctx.Get("FragmentOutputBlock").New(isUnique)
+	return FragmentOutputBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsUnique sets the IsUnique property of class FragmentOutputBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#isunique
+func (f *FragmentOutputBlock) SetIsUnique(isUnique bool) *FragmentOutputBlock {
+	p := ba.ctx.Get("FragmentOutputBlock").New(isUnique)
+	return FragmentOutputBlockFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class FragmentOutputBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#name
+func (f *FragmentOutputBlock) Name(name string) *FragmentOutputBlock {
 	p := ba.ctx.Get("FragmentOutputBlock").New(name)
 	return FragmentOutputBlockFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetName sets the Name property of class FragmentOutputBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#name
+func (f *FragmentOutputBlock) SetName(name string) *FragmentOutputBlock {
+	p := ba.ctx.Get("FragmentOutputBlock").New(name)
+	return FragmentOutputBlockFromJSObject(p, ba.ctx)
+}
+
+// Outputs returns the Outputs property of class FragmentOutputBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#outputs
+func (f *FragmentOutputBlock) Outputs(outputs *NodeMaterialConnectionPoint) *FragmentOutputBlock {
+	p := ba.ctx.Get("FragmentOutputBlock").New(outputs.JSObject())
+	return FragmentOutputBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOutputs sets the Outputs property of class FragmentOutputBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#outputs
+func (f *FragmentOutputBlock) SetOutputs(outputs *NodeMaterialConnectionPoint) *FragmentOutputBlock {
+	p := ba.ctx.Get("FragmentOutputBlock").New(outputs.JSObject())
+	return FragmentOutputBlockFromJSObject(p, ba.ctx)
+}
+
+// Rgb returns the Rgb property of class FragmentOutputBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#rgb
+func (f *FragmentOutputBlock) Rgb(rgb *NodeMaterialConnectionPoint) *FragmentOutputBlock {
+	p := ba.ctx.Get("FragmentOutputBlock").New(rgb.JSObject())
+	return FragmentOutputBlockFromJSObject(p, ba.ctx)
+}
+
+// SetRgb sets the Rgb property of class FragmentOutputBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#rgb
+func (f *FragmentOutputBlock) SetRgb(rgb *NodeMaterialConnectionPoint) *FragmentOutputBlock {
+	p := ba.ctx.Get("FragmentOutputBlock").New(rgb.JSObject())
+	return FragmentOutputBlockFromJSObject(p, ba.ctx)
+}
+
+// Rgba returns the Rgba property of class FragmentOutputBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#rgba
+func (f *FragmentOutputBlock) Rgba(rgba *NodeMaterialConnectionPoint) *FragmentOutputBlock {
+	p := ba.ctx.Get("FragmentOutputBlock").New(rgba.JSObject())
+	return FragmentOutputBlockFromJSObject(p, ba.ctx)
+}
+
+// SetRgba sets the Rgba property of class FragmentOutputBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#rgba
+func (f *FragmentOutputBlock) SetRgba(rgba *NodeMaterialConnectionPoint) *FragmentOutputBlock {
+	p := ba.ctx.Get("FragmentOutputBlock").New(rgba.JSObject())
+	return FragmentOutputBlockFromJSObject(p, ba.ctx)
+}
+
+// Target returns the Target property of class FragmentOutputBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#target
+func (f *FragmentOutputBlock) Target(target js.Value) *FragmentOutputBlock {
+	p := ba.ctx.Get("FragmentOutputBlock").New(target)
+	return FragmentOutputBlockFromJSObject(p, ba.ctx)
+}
+
+// SetTarget sets the Target property of class FragmentOutputBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#target
+func (f *FragmentOutputBlock) SetTarget(target js.Value) *FragmentOutputBlock {
+	p := ba.ctx.Get("FragmentOutputBlock").New(target)
+	return FragmentOutputBlockFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class FragmentOutputBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#uniqueid
+func (f *FragmentOutputBlock) UniqueId(uniqueId float64) *FragmentOutputBlock {
+	p := ba.ctx.Get("FragmentOutputBlock").New(uniqueId)
+	return FragmentOutputBlockFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class FragmentOutputBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fragmentoutputblock#uniqueid
+func (f *FragmentOutputBlock) SetUniqueId(uniqueId float64) *FragmentOutputBlock {
+	p := ba.ctx.Get("FragmentOutputBlock").New(uniqueId)
+	return FragmentOutputBlockFromJSObject(p, ba.ctx)
+}
+
+*/

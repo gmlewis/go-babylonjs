@@ -27,4 +27,35 @@ func TextureToolsFromJSObject(p js.Value, ctx js.Value) *TextureTools {
 	return &TextureTools{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// TextureToolsCreateResizedCopyOpts contains optional parameters for TextureTools.CreateResizedCopy.
+type TextureToolsCreateResizedCopyOpts struct {
+	UseBilinearMode *bool
+}
+
+// CreateResizedCopy calls the CreateResizedCopy method on the TextureTools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.texturetools#createresizedcopy
+func (t *TextureTools) CreateResizedCopy(texture *Texture, width float64, height float64, opts *TextureToolsCreateResizedCopyOpts) *Texture {
+	if opts == nil {
+		opts = &TextureToolsCreateResizedCopyOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, texture.JSObject())
+	args = append(args, width)
+	args = append(args, height)
+
+	if opts.UseBilinearMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseBilinearMode)
+	}
+
+	retVal := t.p.Call("CreateResizedCopy", args...)
+	return TextureFromJSObject(retVal, t.ctx)
+}
+
+/*
+
+ */

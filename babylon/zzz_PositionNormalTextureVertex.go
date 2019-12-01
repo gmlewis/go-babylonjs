@@ -30,10 +30,8 @@ func PositionNormalTextureVertexFromJSObject(p js.Value, ctx js.Value) *Position
 // NewPositionNormalTextureVertexOpts contains optional parameters for NewPositionNormalTextureVertex.
 type NewPositionNormalTextureVertexOpts struct {
 	Position *Vector3
-
-	Normal *Vector3
-
-	Uv *Vector2
+	Normal   *Vector3
+	Uv       *Vector2
 }
 
 // NewPositionNormalTextureVertex returns a new PositionNormalTextureVertex object.
@@ -44,8 +42,87 @@ func (ba *Babylon) NewPositionNormalTextureVertex(opts *NewPositionNormalTexture
 		opts = &NewPositionNormalTextureVertexOpts{}
 	}
 
-	p := ba.ctx.Get("PositionNormalTextureVertex").New(opts.Position.JSObject(), opts.Normal.JSObject(), opts.Uv.JSObject())
+	args := make([]interface{}, 0, 0+3)
+
+	if opts.Position == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Position.JSObject())
+	}
+	if opts.Normal == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Normal.JSObject())
+	}
+	if opts.Uv == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Uv.JSObject())
+	}
+
+	p := ba.ctx.Get("PositionNormalTextureVertex").New(args...)
 	return PositionNormalTextureVertexFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Clone calls the Clone method on the PositionNormalTextureVertex object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.positionnormaltexturevertex#clone
+func (p *PositionNormalTextureVertex) Clone() *PositionNormalTextureVertex {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("clone", args...)
+	return PositionNormalTextureVertexFromJSObject(retVal, p.ctx)
+}
+
+/*
+
+// Normal returns the Normal property of class PositionNormalTextureVertex.
+//
+// https://doc.babylonjs.com/api/classes/babylon.positionnormaltexturevertex#normal
+func (p *PositionNormalTextureVertex) Normal(normal *Vector3) *PositionNormalTextureVertex {
+	p := ba.ctx.Get("PositionNormalTextureVertex").New(normal.JSObject())
+	return PositionNormalTextureVertexFromJSObject(p, ba.ctx)
+}
+
+// SetNormal sets the Normal property of class PositionNormalTextureVertex.
+//
+// https://doc.babylonjs.com/api/classes/babylon.positionnormaltexturevertex#normal
+func (p *PositionNormalTextureVertex) SetNormal(normal *Vector3) *PositionNormalTextureVertex {
+	p := ba.ctx.Get("PositionNormalTextureVertex").New(normal.JSObject())
+	return PositionNormalTextureVertexFromJSObject(p, ba.ctx)
+}
+
+// Position returns the Position property of class PositionNormalTextureVertex.
+//
+// https://doc.babylonjs.com/api/classes/babylon.positionnormaltexturevertex#position
+func (p *PositionNormalTextureVertex) Position(position *Vector3) *PositionNormalTextureVertex {
+	p := ba.ctx.Get("PositionNormalTextureVertex").New(position.JSObject())
+	return PositionNormalTextureVertexFromJSObject(p, ba.ctx)
+}
+
+// SetPosition sets the Position property of class PositionNormalTextureVertex.
+//
+// https://doc.babylonjs.com/api/classes/babylon.positionnormaltexturevertex#position
+func (p *PositionNormalTextureVertex) SetPosition(position *Vector3) *PositionNormalTextureVertex {
+	p := ba.ctx.Get("PositionNormalTextureVertex").New(position.JSObject())
+	return PositionNormalTextureVertexFromJSObject(p, ba.ctx)
+}
+
+// Uv returns the Uv property of class PositionNormalTextureVertex.
+//
+// https://doc.babylonjs.com/api/classes/babylon.positionnormaltexturevertex#uv
+func (p *PositionNormalTextureVertex) Uv(uv *Vector2) *PositionNormalTextureVertex {
+	p := ba.ctx.Get("PositionNormalTextureVertex").New(uv.JSObject())
+	return PositionNormalTextureVertexFromJSObject(p, ba.ctx)
+}
+
+// SetUv sets the Uv property of class PositionNormalTextureVertex.
+//
+// https://doc.babylonjs.com/api/classes/babylon.positionnormaltexturevertex#uv
+func (p *PositionNormalTextureVertex) SetUv(uv *Vector2) *PositionNormalTextureVertex {
+	p := ba.ctx.Get("PositionNormalTextureVertex").New(uv.JSObject())
+	return PositionNormalTextureVertexFromJSObject(p, ba.ctx)
+}
+
+*/

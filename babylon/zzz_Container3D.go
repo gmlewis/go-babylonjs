@@ -29,7 +29,7 @@ func Container3DFromJSObject(p js.Value, ctx js.Value) *Container3D {
 
 // NewContainer3DOpts contains optional parameters for NewContainer3D.
 type NewContainer3DOpts struct {
-	Name *JSString
+	Name *string
 }
 
 // NewContainer3D returns a new Container3D object.
@@ -40,8 +40,557 @@ func (ba *Babylon) NewContainer3D(opts *NewContainer3DOpts) *Container3D {
 		opts = &NewContainer3DOpts{}
 	}
 
-	p := ba.ctx.Get("Container3D").New(opts.Name.JSObject())
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Name == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Name)
+	}
+
+	p := ba.ctx.Get("Container3D").New(args...)
 	return Container3DFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AddBehavior calls the AddBehavior method on the Container3D object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#addbehavior
+func (c *Container3D) AddBehavior(behavior js.Value) *Control3D {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, behavior)
+
+	retVal := c.p.Call("addBehavior", args...)
+	return Control3DFromJSObject(retVal, c.ctx)
+}
+
+// AddControl calls the AddControl method on the Container3D object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#addcontrol
+func (c *Container3D) AddControl(control *Control3D) *Container3D {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, control.JSObject())
+
+	retVal := c.p.Call("addControl", args...)
+	return Container3DFromJSObject(retVal, c.ctx)
+}
+
+// ContainsControl calls the ContainsControl method on the Container3D object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#containscontrol
+func (c *Container3D) ContainsControl(control *Control3D) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, control.JSObject())
+
+	retVal := c.p.Call("containsControl", args...)
+	return retVal.Bool()
+}
+
+// Dispose calls the Dispose method on the Container3D object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#dispose
+func (c *Container3D) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	c.p.Call("dispose", args...)
+}
+
+// GetBehaviorByName calls the GetBehaviorByName method on the Container3D object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#getbehaviorbyname
+func (c *Container3D) GetBehaviorByName(name string) *Control3D {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := c.p.Call("getBehaviorByName", args...)
+	return Control3DFromJSObject(retVal, c.ctx)
+}
+
+// GetClassName calls the GetClassName method on the Container3D object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#getclassname
+func (c *Container3D) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// LinkToTransformNode calls the LinkToTransformNode method on the Container3D object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#linktotransformnode
+func (c *Container3D) LinkToTransformNode(node *TransformNode) *Control3D {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, node.JSObject())
+
+	retVal := c.p.Call("linkToTransformNode", args...)
+	return Control3DFromJSObject(retVal, c.ctx)
+}
+
+// RemoveBehavior calls the RemoveBehavior method on the Container3D object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#removebehavior
+func (c *Container3D) RemoveBehavior(behavior js.Value) *Control3D {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, behavior)
+
+	retVal := c.p.Call("removeBehavior", args...)
+	return Control3DFromJSObject(retVal, c.ctx)
+}
+
+// RemoveControl calls the RemoveControl method on the Container3D object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#removecontrol
+func (c *Container3D) RemoveControl(control *Control3D) *Container3D {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, control.JSObject())
+
+	retVal := c.p.Call("removeControl", args...)
+	return Container3DFromJSObject(retVal, c.ctx)
+}
+
+// UpdateLayout calls the UpdateLayout method on the Container3D object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#updatelayout
+func (c *Container3D) UpdateLayout() *Container3D {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("updateLayout", args...)
+	return Container3DFromJSObject(retVal, c.ctx)
+}
+
+/*
+
+// Behaviors returns the Behaviors property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#behaviors
+func (c *Container3D) Behaviors(behaviors js.Value) *Container3D {
+	p := ba.ctx.Get("Container3D").New(behaviors)
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// SetBehaviors sets the Behaviors property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#behaviors
+func (c *Container3D) SetBehaviors(behaviors js.Value) *Container3D {
+	p := ba.ctx.Get("Container3D").New(behaviors)
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// BlockLayout returns the BlockLayout property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#blocklayout
+func (c *Container3D) BlockLayout(blockLayout bool) *Container3D {
+	p := ba.ctx.Get("Container3D").New(blockLayout)
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// SetBlockLayout sets the BlockLayout property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#blocklayout
+func (c *Container3D) SetBlockLayout(blockLayout bool) *Container3D {
+	p := ba.ctx.Get("Container3D").New(blockLayout)
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// Children returns the Children property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#children
+func (c *Container3D) Children(children []Control3D) *Container3D {
+	p := ba.ctx.Get("Container3D").New(children.JSObject())
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// SetChildren sets the Children property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#children
+func (c *Container3D) SetChildren(children []Control3D) *Container3D {
+	p := ba.ctx.Get("Container3D").New(children.JSObject())
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// FACEFORWARDREVERSED_ORIENTATION returns the FACEFORWARDREVERSED_ORIENTATION property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#faceforwardreversed_orientation
+func (c *Container3D) FACEFORWARDREVERSED_ORIENTATION(FACEFORWARDREVERSED_ORIENTATION float64) *Container3D {
+	p := ba.ctx.Get("Container3D").New(FACEFORWARDREVERSED_ORIENTATION)
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// SetFACEFORWARDREVERSED_ORIENTATION sets the FACEFORWARDREVERSED_ORIENTATION property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#faceforwardreversed_orientation
+func (c *Container3D) SetFACEFORWARDREVERSED_ORIENTATION(FACEFORWARDREVERSED_ORIENTATION float64) *Container3D {
+	p := ba.ctx.Get("Container3D").New(FACEFORWARDREVERSED_ORIENTATION)
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// FACEFORWARD_ORIENTATION returns the FACEFORWARD_ORIENTATION property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#faceforward_orientation
+func (c *Container3D) FACEFORWARD_ORIENTATION(FACEFORWARD_ORIENTATION float64) *Container3D {
+	p := ba.ctx.Get("Container3D").New(FACEFORWARD_ORIENTATION)
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// SetFACEFORWARD_ORIENTATION sets the FACEFORWARD_ORIENTATION property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#faceforward_orientation
+func (c *Container3D) SetFACEFORWARD_ORIENTATION(FACEFORWARD_ORIENTATION float64) *Container3D {
+	p := ba.ctx.Get("Container3D").New(FACEFORWARD_ORIENTATION)
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// FACEORIGINREVERSED_ORIENTATION returns the FACEORIGINREVERSED_ORIENTATION property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#faceoriginreversed_orientation
+func (c *Container3D) FACEORIGINREVERSED_ORIENTATION(FACEORIGINREVERSED_ORIENTATION float64) *Container3D {
+	p := ba.ctx.Get("Container3D").New(FACEORIGINREVERSED_ORIENTATION)
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// SetFACEORIGINREVERSED_ORIENTATION sets the FACEORIGINREVERSED_ORIENTATION property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#faceoriginreversed_orientation
+func (c *Container3D) SetFACEORIGINREVERSED_ORIENTATION(FACEORIGINREVERSED_ORIENTATION float64) *Container3D {
+	p := ba.ctx.Get("Container3D").New(FACEORIGINREVERSED_ORIENTATION)
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// FACEORIGIN_ORIENTATION returns the FACEORIGIN_ORIENTATION property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#faceorigin_orientation
+func (c *Container3D) FACEORIGIN_ORIENTATION(FACEORIGIN_ORIENTATION float64) *Container3D {
+	p := ba.ctx.Get("Container3D").New(FACEORIGIN_ORIENTATION)
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// SetFACEORIGIN_ORIENTATION sets the FACEORIGIN_ORIENTATION property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#faceorigin_orientation
+func (c *Container3D) SetFACEORIGIN_ORIENTATION(FACEORIGIN_ORIENTATION float64) *Container3D {
+	p := ba.ctx.Get("Container3D").New(FACEORIGIN_ORIENTATION)
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// IsVisible returns the IsVisible property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#isvisible
+func (c *Container3D) IsVisible(isVisible bool) *Container3D {
+	p := ba.ctx.Get("Container3D").New(isVisible)
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// SetIsVisible sets the IsVisible property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#isvisible
+func (c *Container3D) SetIsVisible(isVisible bool) *Container3D {
+	p := ba.ctx.Get("Container3D").New(isVisible)
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// Mesh returns the Mesh property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#mesh
+func (c *Container3D) Mesh(mesh *AbstractMesh) *Container3D {
+	p := ba.ctx.Get("Container3D").New(mesh.JSObject())
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// SetMesh sets the Mesh property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#mesh
+func (c *Container3D) SetMesh(mesh *AbstractMesh) *Container3D {
+	p := ba.ctx.Get("Container3D").New(mesh.JSObject())
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#name
+func (c *Container3D) Name(name string) *Container3D {
+	p := ba.ctx.Get("Container3D").New(name)
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#name
+func (c *Container3D) SetName(name string) *Container3D {
+	p := ba.ctx.Get("Container3D").New(name)
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// Node returns the Node property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#node
+func (c *Container3D) Node(node *TransformNode) *Container3D {
+	p := ba.ctx.Get("Container3D").New(node.JSObject())
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// SetNode sets the Node property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#node
+func (c *Container3D) SetNode(node *TransformNode) *Container3D {
+	p := ba.ctx.Get("Container3D").New(node.JSObject())
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// OnPointerClickObservable returns the OnPointerClickObservable property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#onpointerclickobservable
+func (c *Container3D) OnPointerClickObservable(onPointerClickObservable *Observable) *Container3D {
+	p := ba.ctx.Get("Container3D").New(onPointerClickObservable.JSObject())
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerClickObservable sets the OnPointerClickObservable property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#onpointerclickobservable
+func (c *Container3D) SetOnPointerClickObservable(onPointerClickObservable *Observable) *Container3D {
+	p := ba.ctx.Get("Container3D").New(onPointerClickObservable.JSObject())
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// OnPointerDownObservable returns the OnPointerDownObservable property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#onpointerdownobservable
+func (c *Container3D) OnPointerDownObservable(onPointerDownObservable *Observable) *Container3D {
+	p := ba.ctx.Get("Container3D").New(onPointerDownObservable.JSObject())
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerDownObservable sets the OnPointerDownObservable property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#onpointerdownobservable
+func (c *Container3D) SetOnPointerDownObservable(onPointerDownObservable *Observable) *Container3D {
+	p := ba.ctx.Get("Container3D").New(onPointerDownObservable.JSObject())
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// OnPointerEnterObservable returns the OnPointerEnterObservable property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#onpointerenterobservable
+func (c *Container3D) OnPointerEnterObservable(onPointerEnterObservable *Observable) *Container3D {
+	p := ba.ctx.Get("Container3D").New(onPointerEnterObservable.JSObject())
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerEnterObservable sets the OnPointerEnterObservable property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#onpointerenterobservable
+func (c *Container3D) SetOnPointerEnterObservable(onPointerEnterObservable *Observable) *Container3D {
+	p := ba.ctx.Get("Container3D").New(onPointerEnterObservable.JSObject())
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// OnPointerMoveObservable returns the OnPointerMoveObservable property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#onpointermoveobservable
+func (c *Container3D) OnPointerMoveObservable(onPointerMoveObservable *Observable) *Container3D {
+	p := ba.ctx.Get("Container3D").New(onPointerMoveObservable.JSObject())
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerMoveObservable sets the OnPointerMoveObservable property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#onpointermoveobservable
+func (c *Container3D) SetOnPointerMoveObservable(onPointerMoveObservable *Observable) *Container3D {
+	p := ba.ctx.Get("Container3D").New(onPointerMoveObservable.JSObject())
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// OnPointerOutObservable returns the OnPointerOutObservable property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#onpointeroutobservable
+func (c *Container3D) OnPointerOutObservable(onPointerOutObservable *Observable) *Container3D {
+	p := ba.ctx.Get("Container3D").New(onPointerOutObservable.JSObject())
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerOutObservable sets the OnPointerOutObservable property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#onpointeroutobservable
+func (c *Container3D) SetOnPointerOutObservable(onPointerOutObservable *Observable) *Container3D {
+	p := ba.ctx.Get("Container3D").New(onPointerOutObservable.JSObject())
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// OnPointerUpObservable returns the OnPointerUpObservable property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#onpointerupobservable
+func (c *Container3D) OnPointerUpObservable(onPointerUpObservable *Observable) *Container3D {
+	p := ba.ctx.Get("Container3D").New(onPointerUpObservable.JSObject())
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerUpObservable sets the OnPointerUpObservable property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#onpointerupobservable
+func (c *Container3D) SetOnPointerUpObservable(onPointerUpObservable *Observable) *Container3D {
+	p := ba.ctx.Get("Container3D").New(onPointerUpObservable.JSObject())
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// Parent returns the Parent property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#parent
+func (c *Container3D) Parent(parent *Container3D) *Container3D {
+	p := ba.ctx.Get("Container3D").New(parent.JSObject())
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// SetParent sets the Parent property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#parent
+func (c *Container3D) SetParent(parent *Container3D) *Container3D {
+	p := ba.ctx.Get("Container3D").New(parent.JSObject())
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// PointerDownAnimation returns the PointerDownAnimation property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#pointerdownanimation
+func (c *Container3D) PointerDownAnimation(pointerDownAnimation func()) *Container3D {
+	p := ba.ctx.Get("Container3D").New(pointerDownAnimation)
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// SetPointerDownAnimation sets the PointerDownAnimation property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#pointerdownanimation
+func (c *Container3D) SetPointerDownAnimation(pointerDownAnimation func()) *Container3D {
+	p := ba.ctx.Get("Container3D").New(pointerDownAnimation)
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// PointerEnterAnimation returns the PointerEnterAnimation property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#pointerenteranimation
+func (c *Container3D) PointerEnterAnimation(pointerEnterAnimation func()) *Container3D {
+	p := ba.ctx.Get("Container3D").New(pointerEnterAnimation)
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// SetPointerEnterAnimation sets the PointerEnterAnimation property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#pointerenteranimation
+func (c *Container3D) SetPointerEnterAnimation(pointerEnterAnimation func()) *Container3D {
+	p := ba.ctx.Get("Container3D").New(pointerEnterAnimation)
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// PointerOutAnimation returns the PointerOutAnimation property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#pointeroutanimation
+func (c *Container3D) PointerOutAnimation(pointerOutAnimation func()) *Container3D {
+	p := ba.ctx.Get("Container3D").New(pointerOutAnimation)
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// SetPointerOutAnimation sets the PointerOutAnimation property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#pointeroutanimation
+func (c *Container3D) SetPointerOutAnimation(pointerOutAnimation func()) *Container3D {
+	p := ba.ctx.Get("Container3D").New(pointerOutAnimation)
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// PointerUpAnimation returns the PointerUpAnimation property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#pointerupanimation
+func (c *Container3D) PointerUpAnimation(pointerUpAnimation func()) *Container3D {
+	p := ba.ctx.Get("Container3D").New(pointerUpAnimation)
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// SetPointerUpAnimation sets the PointerUpAnimation property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#pointerupanimation
+func (c *Container3D) SetPointerUpAnimation(pointerUpAnimation func()) *Container3D {
+	p := ba.ctx.Get("Container3D").New(pointerUpAnimation)
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// Position returns the Position property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#position
+func (c *Container3D) Position(position *Vector3) *Container3D {
+	p := ba.ctx.Get("Container3D").New(position.JSObject())
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// SetPosition sets the Position property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#position
+func (c *Container3D) SetPosition(position *Vector3) *Container3D {
+	p := ba.ctx.Get("Container3D").New(position.JSObject())
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// Scaling returns the Scaling property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#scaling
+func (c *Container3D) Scaling(scaling *Vector3) *Container3D {
+	p := ba.ctx.Get("Container3D").New(scaling.JSObject())
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// SetScaling sets the Scaling property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#scaling
+func (c *Container3D) SetScaling(scaling *Vector3) *Container3D {
+	p := ba.ctx.Get("Container3D").New(scaling.JSObject())
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// TypeName returns the TypeName property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#typename
+func (c *Container3D) TypeName(typeName string) *Container3D {
+	p := ba.ctx.Get("Container3D").New(typeName)
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// SetTypeName sets the TypeName property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#typename
+func (c *Container3D) SetTypeName(typeName string) *Container3D {
+	p := ba.ctx.Get("Container3D").New(typeName)
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// UNSET_ORIENTATION returns the UNSET_ORIENTATION property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#unset_orientation
+func (c *Container3D) UNSET_ORIENTATION(UNSET_ORIENTATION float64) *Container3D {
+	p := ba.ctx.Get("Container3D").New(UNSET_ORIENTATION)
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+// SetUNSET_ORIENTATION sets the UNSET_ORIENTATION property of class Container3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.container3d#unset_orientation
+func (c *Container3D) SetUNSET_ORIENTATION(UNSET_ORIENTATION float64) *Container3D {
+	p := ba.ctx.Get("Container3D").New(UNSET_ORIENTATION)
+	return Container3DFromJSObject(p, ba.ctx)
+}
+
+*/

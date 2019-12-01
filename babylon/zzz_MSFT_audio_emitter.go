@@ -27,4 +27,38 @@ func MSFT_audio_emitterFromJSObject(p js.Value, ctx js.Value) *MSFT_audio_emitte
 	return &MSFT_audio_emitter{p: p, ctx: ctx}
 }
 
-// TODO: methods
+/*
+
+// Enabled returns the Enabled property of class MSFT_audio_emitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.msft_audio_emitter#enabled
+func (m *MSFT_audio_emitter) Enabled(enabled bool) *MSFT_audio_emitter {
+	p := ba.ctx.Get("MSFT_audio_emitter").New(enabled)
+	return MSFT_audio_emitterFromJSObject(p, ba.ctx)
+}
+
+// SetEnabled sets the Enabled property of class MSFT_audio_emitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.msft_audio_emitter#enabled
+func (m *MSFT_audio_emitter) SetEnabled(enabled bool) *MSFT_audio_emitter {
+	p := ba.ctx.Get("MSFT_audio_emitter").New(enabled)
+	return MSFT_audio_emitterFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class MSFT_audio_emitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.msft_audio_emitter#name
+func (m *MSFT_audio_emitter) Name(name string) *MSFT_audio_emitter {
+	p := ba.ctx.Get("MSFT_audio_emitter").New(name)
+	return MSFT_audio_emitterFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class MSFT_audio_emitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.msft_audio_emitter#name
+func (m *MSFT_audio_emitter) SetName(name string) *MSFT_audio_emitter {
+	p := ba.ctx.Get("MSFT_audio_emitter").New(name)
+	return MSFT_audio_emitterFromJSObject(p, ba.ctx)
+}
+
+*/

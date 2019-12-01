@@ -29,7 +29,7 @@ func EllipseFromJSObject(p js.Value, ctx js.Value) *Ellipse {
 
 // NewEllipseOpts contains optional parameters for NewEllipse.
 type NewEllipseOpts struct {
-	Name *JSString
+	Name *string
 }
 
 // NewEllipse returns a new Ellipse object.
@@ -40,8 +40,1670 @@ func (ba *Babylon) NewEllipse(opts *NewEllipseOpts) *Ellipse {
 		opts = &NewEllipseOpts{}
 	}
 
-	p := ba.ctx.Get("Ellipse").New(opts.Name.JSObject())
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Name == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Name)
+	}
+
+	p := ba.ctx.Get("Ellipse").New(args...)
 	return EllipseFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AddControl calls the AddControl method on the Ellipse object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#addcontrol
+func (e *Ellipse) AddControl(control *Control) *Container {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, control.JSObject())
+
+	retVal := e.p.Call("addControl", args...)
+	return ContainerFromJSObject(retVal, e.ctx)
+}
+
+// ClearControls calls the ClearControls method on the Ellipse object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#clearcontrols
+func (e *Ellipse) ClearControls() *Container {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := e.p.Call("clearControls", args...)
+	return ContainerFromJSObject(retVal, e.ctx)
+}
+
+// Contains calls the Contains method on the Ellipse object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#contains
+func (e *Ellipse) Contains(x float64, y float64) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, x)
+	args = append(args, y)
+
+	retVal := e.p.Call("contains", args...)
+	return retVal.Bool()
+}
+
+// ContainsControl calls the ContainsControl method on the Ellipse object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#containscontrol
+func (e *Ellipse) ContainsControl(control *Control) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, control.JSObject())
+
+	retVal := e.p.Call("containsControl", args...)
+	return retVal.Bool()
+}
+
+// Dispose calls the Dispose method on the Ellipse object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#dispose
+func (e *Ellipse) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	e.p.Call("dispose", args...)
+}
+
+// GetAscendantOfClass calls the GetAscendantOfClass method on the Ellipse object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#getascendantofclass
+func (e *Ellipse) GetAscendantOfClass(className string) *Control {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, className)
+
+	retVal := e.p.Call("getAscendantOfClass", args...)
+	return ControlFromJSObject(retVal, e.ctx)
+}
+
+// GetChildByName calls the GetChildByName method on the Ellipse object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#getchildbyname
+func (e *Ellipse) GetChildByName(name string) *Control {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := e.p.Call("getChildByName", args...)
+	return ControlFromJSObject(retVal, e.ctx)
+}
+
+// GetChildByType calls the GetChildByType method on the Ellipse object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#getchildbytype
+func (e *Ellipse) GetChildByType(name string, jsType string) *Control {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	retVal := e.p.Call("getChildByType", args...)
+	return ControlFromJSObject(retVal, e.ctx)
+}
+
+// GetClassName calls the GetClassName method on the Ellipse object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#getclassname
+func (e *Ellipse) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := e.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// EllipseGetDescendantsOpts contains optional parameters for Ellipse.GetDescendants.
+type EllipseGetDescendantsOpts struct {
+	DirectDescendantsOnly *bool
+	Predicate             *func()
+}
+
+// GetDescendants calls the GetDescendants method on the Ellipse object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#getdescendants
+func (e *Ellipse) GetDescendants(opts *EllipseGetDescendantsOpts) *Control {
+	if opts == nil {
+		opts = &EllipseGetDescendantsOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	retVal := e.p.Call("getDescendants", args...)
+	return ControlFromJSObject(retVal, e.ctx)
+}
+
+// EllipseGetDescendantsToRefOpts contains optional parameters for Ellipse.GetDescendantsToRef.
+type EllipseGetDescendantsToRefOpts struct {
+	DirectDescendantsOnly *bool
+	Predicate             *func()
+}
+
+// GetDescendantsToRef calls the GetDescendantsToRef method on the Ellipse object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#getdescendantstoref
+func (e *Ellipse) GetDescendantsToRef(results *Control, opts *EllipseGetDescendantsToRefOpts) {
+	if opts == nil {
+		opts = &EllipseGetDescendantsToRefOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, results.JSObject())
+
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	e.p.Call("getDescendantsToRef", args...)
+}
+
+// GetLocalCoordinates calls the GetLocalCoordinates method on the Ellipse object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#getlocalcoordinates
+func (e *Ellipse) GetLocalCoordinates(globalCoordinates *Vector2) *Vector2 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, globalCoordinates.JSObject())
+
+	retVal := e.p.Call("getLocalCoordinates", args...)
+	return Vector2FromJSObject(retVal, e.ctx)
+}
+
+// GetLocalCoordinatesToRef calls the GetLocalCoordinatesToRef method on the Ellipse object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#getlocalcoordinatestoref
+func (e *Ellipse) GetLocalCoordinatesToRef(globalCoordinates *Vector2, result *Vector2) *Control {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, globalCoordinates.JSObject())
+	args = append(args, result.JSObject())
+
+	retVal := e.p.Call("getLocalCoordinatesToRef", args...)
+	return ControlFromJSObject(retVal, e.ctx)
+}
+
+// GetParentLocalCoordinates calls the GetParentLocalCoordinates method on the Ellipse object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#getparentlocalcoordinates
+func (e *Ellipse) GetParentLocalCoordinates(globalCoordinates *Vector2) *Vector2 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, globalCoordinates.JSObject())
+
+	retVal := e.p.Call("getParentLocalCoordinates", args...)
+	return Vector2FromJSObject(retVal, e.ctx)
+}
+
+// IsAscendant calls the IsAscendant method on the Ellipse object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#isascendant
+func (e *Ellipse) IsAscendant(container *Control) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, container.JSObject())
+
+	retVal := e.p.Call("isAscendant", args...)
+	return retVal.Bool()
+}
+
+// LinkWithMesh calls the LinkWithMesh method on the Ellipse object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#linkwithmesh
+func (e *Ellipse) LinkWithMesh(mesh *AbstractMesh) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	e.p.Call("linkWithMesh", args...)
+}
+
+// MoveToVector3 calls the MoveToVector3 method on the Ellipse object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#movetovector3
+func (e *Ellipse) MoveToVector3(position *Vector3, scene *Scene) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, position.JSObject())
+	args = append(args, scene.JSObject())
+
+	e.p.Call("moveToVector3", args...)
+}
+
+// RemoveControl calls the RemoveControl method on the Ellipse object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#removecontrol
+func (e *Ellipse) RemoveControl(control *Control) *Container {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, control.JSObject())
+
+	retVal := e.p.Call("removeControl", args...)
+	return ContainerFromJSObject(retVal, e.ctx)
+}
+
+// _flagDescendantsAsMatrixDirty calls the _flagDescendantsAsMatrixDirty method on the Ellipse object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#_flagdescendantsasmatrixdirty
+func (e *Ellipse) _flagDescendantsAsMatrixDirty() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	e.p.Call("_flagDescendantsAsMatrixDirty", args...)
+}
+
+/*
+
+// AdaptHeightToChildren returns the AdaptHeightToChildren property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#adaptheighttochildren
+func (e *Ellipse) AdaptHeightToChildren(adaptHeightToChildren bool) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(adaptHeightToChildren)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetAdaptHeightToChildren sets the AdaptHeightToChildren property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#adaptheighttochildren
+func (e *Ellipse) SetAdaptHeightToChildren(adaptHeightToChildren bool) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(adaptHeightToChildren)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// AdaptWidthToChildren returns the AdaptWidthToChildren property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#adaptwidthtochildren
+func (e *Ellipse) AdaptWidthToChildren(adaptWidthToChildren bool) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(adaptWidthToChildren)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetAdaptWidthToChildren sets the AdaptWidthToChildren property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#adaptwidthtochildren
+func (e *Ellipse) SetAdaptWidthToChildren(adaptWidthToChildren bool) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(adaptWidthToChildren)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// AllowAlphaInheritance returns the AllowAlphaInheritance property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#allowalphainheritance
+func (e *Ellipse) AllowAlphaInheritance(AllowAlphaInheritance bool) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(AllowAlphaInheritance)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetAllowAlphaInheritance sets the AllowAlphaInheritance property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#allowalphainheritance
+func (e *Ellipse) SetAllowAlphaInheritance(AllowAlphaInheritance bool) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(AllowAlphaInheritance)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// Alpha returns the Alpha property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#alpha
+func (e *Ellipse) Alpha(alpha float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(alpha)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetAlpha sets the Alpha property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#alpha
+func (e *Ellipse) SetAlpha(alpha float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(alpha)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// Background returns the Background property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#background
+func (e *Ellipse) Background(background string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(background)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetBackground sets the Background property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#background
+func (e *Ellipse) SetBackground(background string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(background)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// CenterX returns the CenterX property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#centerx
+func (e *Ellipse) CenterX(centerX float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(centerX)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetCenterX sets the CenterX property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#centerx
+func (e *Ellipse) SetCenterX(centerX float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(centerX)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// CenterY returns the CenterY property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#centery
+func (e *Ellipse) CenterY(centerY float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(centerY)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetCenterY sets the CenterY property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#centery
+func (e *Ellipse) SetCenterY(centerY float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(centerY)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// Children returns the Children property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#children
+func (e *Ellipse) Children(children *Control) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(children.JSObject())
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetChildren sets the Children property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#children
+func (e *Ellipse) SetChildren(children *Control) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(children.JSObject())
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// ClipChildren returns the ClipChildren property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#clipchildren
+func (e *Ellipse) ClipChildren(clipChildren bool) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(clipChildren)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetClipChildren sets the ClipChildren property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#clipchildren
+func (e *Ellipse) SetClipChildren(clipChildren bool) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(clipChildren)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// ClipContent returns the ClipContent property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#clipcontent
+func (e *Ellipse) ClipContent(clipContent bool) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(clipContent)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetClipContent sets the ClipContent property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#clipcontent
+func (e *Ellipse) SetClipContent(clipContent bool) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(clipContent)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// Color returns the Color property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#color
+func (e *Ellipse) Color(color string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(color)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetColor sets the Color property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#color
+func (e *Ellipse) SetColor(color string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(color)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// DisabledColor returns the DisabledColor property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#disabledcolor
+func (e *Ellipse) DisabledColor(disabledColor string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(disabledColor)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetDisabledColor sets the DisabledColor property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#disabledcolor
+func (e *Ellipse) SetDisabledColor(disabledColor string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(disabledColor)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// FontFamily returns the FontFamily property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#fontfamily
+func (e *Ellipse) FontFamily(fontFamily string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(fontFamily)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetFontFamily sets the FontFamily property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#fontfamily
+func (e *Ellipse) SetFontFamily(fontFamily string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(fontFamily)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// FontOffset returns the FontOffset property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#fontoffset
+func (e *Ellipse) FontOffset(fontOffset js.Value) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(fontOffset)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetFontOffset sets the FontOffset property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#fontoffset
+func (e *Ellipse) SetFontOffset(fontOffset js.Value) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(fontOffset)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// FontSize returns the FontSize property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#fontsize
+func (e *Ellipse) FontSize(fontSize string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(fontSize)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetFontSize sets the FontSize property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#fontsize
+func (e *Ellipse) SetFontSize(fontSize string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(fontSize)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// FontSizeInPixels returns the FontSizeInPixels property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#fontsizeinpixels
+func (e *Ellipse) FontSizeInPixels(fontSizeInPixels float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(fontSizeInPixels)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetFontSizeInPixels sets the FontSizeInPixels property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#fontsizeinpixels
+func (e *Ellipse) SetFontSizeInPixels(fontSizeInPixels float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(fontSizeInPixels)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// FontStyle returns the FontStyle property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#fontstyle
+func (e *Ellipse) FontStyle(fontStyle string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(fontStyle)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetFontStyle sets the FontStyle property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#fontstyle
+func (e *Ellipse) SetFontStyle(fontStyle string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(fontStyle)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// FontWeight returns the FontWeight property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#fontweight
+func (e *Ellipse) FontWeight(fontWeight string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(fontWeight)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetFontWeight sets the FontWeight property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#fontweight
+func (e *Ellipse) SetFontWeight(fontWeight string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(fontWeight)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// HORIZONTAL_ALIGNMENT_CENTER returns the HORIZONTAL_ALIGNMENT_CENTER property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#horizontal_alignment_center
+func (e *Ellipse) HORIZONTAL_ALIGNMENT_CENTER(HORIZONTAL_ALIGNMENT_CENTER float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(HORIZONTAL_ALIGNMENT_CENTER)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetHORIZONTAL_ALIGNMENT_CENTER sets the HORIZONTAL_ALIGNMENT_CENTER property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#horizontal_alignment_center
+func (e *Ellipse) SetHORIZONTAL_ALIGNMENT_CENTER(HORIZONTAL_ALIGNMENT_CENTER float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(HORIZONTAL_ALIGNMENT_CENTER)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// HORIZONTAL_ALIGNMENT_LEFT returns the HORIZONTAL_ALIGNMENT_LEFT property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#horizontal_alignment_left
+func (e *Ellipse) HORIZONTAL_ALIGNMENT_LEFT(HORIZONTAL_ALIGNMENT_LEFT float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(HORIZONTAL_ALIGNMENT_LEFT)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetHORIZONTAL_ALIGNMENT_LEFT sets the HORIZONTAL_ALIGNMENT_LEFT property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#horizontal_alignment_left
+func (e *Ellipse) SetHORIZONTAL_ALIGNMENT_LEFT(HORIZONTAL_ALIGNMENT_LEFT float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(HORIZONTAL_ALIGNMENT_LEFT)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// HORIZONTAL_ALIGNMENT_RIGHT returns the HORIZONTAL_ALIGNMENT_RIGHT property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#horizontal_alignment_right
+func (e *Ellipse) HORIZONTAL_ALIGNMENT_RIGHT(HORIZONTAL_ALIGNMENT_RIGHT float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(HORIZONTAL_ALIGNMENT_RIGHT)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetHORIZONTAL_ALIGNMENT_RIGHT sets the HORIZONTAL_ALIGNMENT_RIGHT property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#horizontal_alignment_right
+func (e *Ellipse) SetHORIZONTAL_ALIGNMENT_RIGHT(HORIZONTAL_ALIGNMENT_RIGHT float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(HORIZONTAL_ALIGNMENT_RIGHT)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// Height returns the Height property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#height
+func (e *Ellipse) Height(height string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(height)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetHeight sets the Height property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#height
+func (e *Ellipse) SetHeight(height string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(height)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// HeightInPixels returns the HeightInPixels property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#heightinpixels
+func (e *Ellipse) HeightInPixels(heightInPixels float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(heightInPixels)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetHeightInPixels sets the HeightInPixels property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#heightinpixels
+func (e *Ellipse) SetHeightInPixels(heightInPixels float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(heightInPixels)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// HorizontalAlignment returns the HorizontalAlignment property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#horizontalalignment
+func (e *Ellipse) HorizontalAlignment(horizontalAlignment float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(horizontalAlignment)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetHorizontalAlignment sets the HorizontalAlignment property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#horizontalalignment
+func (e *Ellipse) SetHorizontalAlignment(horizontalAlignment float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(horizontalAlignment)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// Host returns the Host property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#host
+func (e *Ellipse) Host(host *AdvancedDynamicTexture) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(host.JSObject())
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetHost sets the Host property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#host
+func (e *Ellipse) SetHost(host *AdvancedDynamicTexture) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(host.JSObject())
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// HoverCursor returns the HoverCursor property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#hovercursor
+func (e *Ellipse) HoverCursor(hoverCursor string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(hoverCursor)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetHoverCursor sets the HoverCursor property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#hovercursor
+func (e *Ellipse) SetHoverCursor(hoverCursor string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(hoverCursor)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// IsDirty returns the IsDirty property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#isdirty
+func (e *Ellipse) IsDirty(isDirty bool) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(isDirty)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetIsDirty sets the IsDirty property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#isdirty
+func (e *Ellipse) SetIsDirty(isDirty bool) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(isDirty)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// IsEnabled returns the IsEnabled property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#isenabled
+func (e *Ellipse) IsEnabled(isEnabled bool) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(isEnabled)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetIsEnabled sets the IsEnabled property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#isenabled
+func (e *Ellipse) SetIsEnabled(isEnabled bool) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(isEnabled)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// IsFocusInvisible returns the IsFocusInvisible property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#isfocusinvisible
+func (e *Ellipse) IsFocusInvisible(isFocusInvisible bool) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(isFocusInvisible)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetIsFocusInvisible sets the IsFocusInvisible property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#isfocusinvisible
+func (e *Ellipse) SetIsFocusInvisible(isFocusInvisible bool) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(isFocusInvisible)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// IsHighlighted returns the IsHighlighted property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#ishighlighted
+func (e *Ellipse) IsHighlighted(isHighlighted bool) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(isHighlighted)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetIsHighlighted sets the IsHighlighted property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#ishighlighted
+func (e *Ellipse) SetIsHighlighted(isHighlighted bool) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(isHighlighted)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// IsHitTestVisible returns the IsHitTestVisible property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#ishittestvisible
+func (e *Ellipse) IsHitTestVisible(isHitTestVisible bool) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(isHitTestVisible)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetIsHitTestVisible sets the IsHitTestVisible property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#ishittestvisible
+func (e *Ellipse) SetIsHitTestVisible(isHitTestVisible bool) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(isHitTestVisible)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// IsPointerBlocker returns the IsPointerBlocker property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#ispointerblocker
+func (e *Ellipse) IsPointerBlocker(isPointerBlocker bool) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(isPointerBlocker)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetIsPointerBlocker sets the IsPointerBlocker property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#ispointerblocker
+func (e *Ellipse) SetIsPointerBlocker(isPointerBlocker bool) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(isPointerBlocker)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// IsVisible returns the IsVisible property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#isvisible
+func (e *Ellipse) IsVisible(isVisible bool) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(isVisible)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetIsVisible sets the IsVisible property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#isvisible
+func (e *Ellipse) SetIsVisible(isVisible bool) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(isVisible)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// Left returns the Left property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#left
+func (e *Ellipse) Left(left string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(left)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetLeft sets the Left property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#left
+func (e *Ellipse) SetLeft(left string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(left)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// LeftInPixels returns the LeftInPixels property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#leftinpixels
+func (e *Ellipse) LeftInPixels(leftInPixels float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(leftInPixels)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetLeftInPixels sets the LeftInPixels property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#leftinpixels
+func (e *Ellipse) SetLeftInPixels(leftInPixels float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(leftInPixels)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetX returns the LinkOffsetX property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#linkoffsetx
+func (e *Ellipse) LinkOffsetX(linkOffsetX string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(linkOffsetX)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetX sets the LinkOffsetX property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#linkoffsetx
+func (e *Ellipse) SetLinkOffsetX(linkOffsetX string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(linkOffsetX)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetXInPixels returns the LinkOffsetXInPixels property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#linkoffsetxinpixels
+func (e *Ellipse) LinkOffsetXInPixels(linkOffsetXInPixels float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(linkOffsetXInPixels)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetXInPixels sets the LinkOffsetXInPixels property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#linkoffsetxinpixels
+func (e *Ellipse) SetLinkOffsetXInPixels(linkOffsetXInPixels float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(linkOffsetXInPixels)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetY returns the LinkOffsetY property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#linkoffsety
+func (e *Ellipse) LinkOffsetY(linkOffsetY string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(linkOffsetY)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetY sets the LinkOffsetY property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#linkoffsety
+func (e *Ellipse) SetLinkOffsetY(linkOffsetY string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(linkOffsetY)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetYInPixels returns the LinkOffsetYInPixels property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#linkoffsetyinpixels
+func (e *Ellipse) LinkOffsetYInPixels(linkOffsetYInPixels float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(linkOffsetYInPixels)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetYInPixels sets the LinkOffsetYInPixels property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#linkoffsetyinpixels
+func (e *Ellipse) SetLinkOffsetYInPixels(linkOffsetYInPixels float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(linkOffsetYInPixels)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// LinkedMesh returns the LinkedMesh property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#linkedmesh
+func (e *Ellipse) LinkedMesh(linkedMesh *AbstractMesh) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(linkedMesh.JSObject())
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetLinkedMesh sets the LinkedMesh property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#linkedmesh
+func (e *Ellipse) SetLinkedMesh(linkedMesh *AbstractMesh) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(linkedMesh.JSObject())
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// LogLayoutCycleErrors returns the LogLayoutCycleErrors property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#loglayoutcycleerrors
+func (e *Ellipse) LogLayoutCycleErrors(logLayoutCycleErrors bool) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(logLayoutCycleErrors)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetLogLayoutCycleErrors sets the LogLayoutCycleErrors property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#loglayoutcycleerrors
+func (e *Ellipse) SetLogLayoutCycleErrors(logLayoutCycleErrors bool) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(logLayoutCycleErrors)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// MaxLayoutCycle returns the MaxLayoutCycle property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#maxlayoutcycle
+func (e *Ellipse) MaxLayoutCycle(maxLayoutCycle float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(maxLayoutCycle)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetMaxLayoutCycle sets the MaxLayoutCycle property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#maxlayoutcycle
+func (e *Ellipse) SetMaxLayoutCycle(maxLayoutCycle float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(maxLayoutCycle)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#metadata
+func (e *Ellipse) Metadata(metadata interface{}) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(metadata)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#metadata
+func (e *Ellipse) SetMetadata(metadata interface{}) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(metadata)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#name
+func (e *Ellipse) Name(name string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(name)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#name
+func (e *Ellipse) SetName(name string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(name)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// NotRenderable returns the NotRenderable property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#notrenderable
+func (e *Ellipse) NotRenderable(notRenderable bool) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(notRenderable)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetNotRenderable sets the NotRenderable property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#notrenderable
+func (e *Ellipse) SetNotRenderable(notRenderable bool) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(notRenderable)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// OnAfterDrawObservable returns the OnAfterDrawObservable property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#onafterdrawobservable
+func (e *Ellipse) OnAfterDrawObservable(onAfterDrawObservable *Observable) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(onAfterDrawObservable.JSObject())
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterDrawObservable sets the OnAfterDrawObservable property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#onafterdrawobservable
+func (e *Ellipse) SetOnAfterDrawObservable(onAfterDrawObservable *Observable) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(onAfterDrawObservable.JSObject())
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeDrawObservable returns the OnBeforeDrawObservable property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#onbeforedrawobservable
+func (e *Ellipse) OnBeforeDrawObservable(onBeforeDrawObservable *Observable) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(onBeforeDrawObservable.JSObject())
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeDrawObservable sets the OnBeforeDrawObservable property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#onbeforedrawobservable
+func (e *Ellipse) SetOnBeforeDrawObservable(onBeforeDrawObservable *Observable) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(onBeforeDrawObservable.JSObject())
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// OnDirtyObservable returns the OnDirtyObservable property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#ondirtyobservable
+func (e *Ellipse) OnDirtyObservable(onDirtyObservable *Observable) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(onDirtyObservable.JSObject())
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetOnDirtyObservable sets the OnDirtyObservable property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#ondirtyobservable
+func (e *Ellipse) SetOnDirtyObservable(onDirtyObservable *Observable) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(onDirtyObservable.JSObject())
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// OnPointerClickObservable returns the OnPointerClickObservable property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#onpointerclickobservable
+func (e *Ellipse) OnPointerClickObservable(onPointerClickObservable *Observable) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(onPointerClickObservable.JSObject())
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerClickObservable sets the OnPointerClickObservable property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#onpointerclickobservable
+func (e *Ellipse) SetOnPointerClickObservable(onPointerClickObservable *Observable) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(onPointerClickObservable.JSObject())
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// OnPointerDownObservable returns the OnPointerDownObservable property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#onpointerdownobservable
+func (e *Ellipse) OnPointerDownObservable(onPointerDownObservable *Observable) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(onPointerDownObservable.JSObject())
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerDownObservable sets the OnPointerDownObservable property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#onpointerdownobservable
+func (e *Ellipse) SetOnPointerDownObservable(onPointerDownObservable *Observable) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(onPointerDownObservable.JSObject())
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// OnPointerEnterObservable returns the OnPointerEnterObservable property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#onpointerenterobservable
+func (e *Ellipse) OnPointerEnterObservable(onPointerEnterObservable *Observable) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(onPointerEnterObservable.JSObject())
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerEnterObservable sets the OnPointerEnterObservable property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#onpointerenterobservable
+func (e *Ellipse) SetOnPointerEnterObservable(onPointerEnterObservable *Observable) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(onPointerEnterObservable.JSObject())
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// OnPointerMoveObservable returns the OnPointerMoveObservable property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#onpointermoveobservable
+func (e *Ellipse) OnPointerMoveObservable(onPointerMoveObservable *Observable) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(onPointerMoveObservable.JSObject())
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerMoveObservable sets the OnPointerMoveObservable property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#onpointermoveobservable
+func (e *Ellipse) SetOnPointerMoveObservable(onPointerMoveObservable *Observable) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(onPointerMoveObservable.JSObject())
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// OnPointerOutObservable returns the OnPointerOutObservable property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#onpointeroutobservable
+func (e *Ellipse) OnPointerOutObservable(onPointerOutObservable *Observable) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(onPointerOutObservable.JSObject())
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerOutObservable sets the OnPointerOutObservable property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#onpointeroutobservable
+func (e *Ellipse) SetOnPointerOutObservable(onPointerOutObservable *Observable) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(onPointerOutObservable.JSObject())
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// OnPointerUpObservable returns the OnPointerUpObservable property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#onpointerupobservable
+func (e *Ellipse) OnPointerUpObservable(onPointerUpObservable *Observable) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(onPointerUpObservable.JSObject())
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerUpObservable sets the OnPointerUpObservable property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#onpointerupobservable
+func (e *Ellipse) SetOnPointerUpObservable(onPointerUpObservable *Observable) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(onPointerUpObservable.JSObject())
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// PaddingBottom returns the PaddingBottom property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#paddingbottom
+func (e *Ellipse) PaddingBottom(paddingBottom string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(paddingBottom)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingBottom sets the PaddingBottom property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#paddingbottom
+func (e *Ellipse) SetPaddingBottom(paddingBottom string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(paddingBottom)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// PaddingBottomInPixels returns the PaddingBottomInPixels property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#paddingbottominpixels
+func (e *Ellipse) PaddingBottomInPixels(paddingBottomInPixels float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(paddingBottomInPixels)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingBottomInPixels sets the PaddingBottomInPixels property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#paddingbottominpixels
+func (e *Ellipse) SetPaddingBottomInPixels(paddingBottomInPixels float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(paddingBottomInPixels)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// PaddingLeft returns the PaddingLeft property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#paddingleft
+func (e *Ellipse) PaddingLeft(paddingLeft string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(paddingLeft)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingLeft sets the PaddingLeft property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#paddingleft
+func (e *Ellipse) SetPaddingLeft(paddingLeft string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(paddingLeft)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// PaddingLeftInPixels returns the PaddingLeftInPixels property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#paddingleftinpixels
+func (e *Ellipse) PaddingLeftInPixels(paddingLeftInPixels float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(paddingLeftInPixels)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingLeftInPixels sets the PaddingLeftInPixels property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#paddingleftinpixels
+func (e *Ellipse) SetPaddingLeftInPixels(paddingLeftInPixels float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(paddingLeftInPixels)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// PaddingRight returns the PaddingRight property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#paddingright
+func (e *Ellipse) PaddingRight(paddingRight string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(paddingRight)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingRight sets the PaddingRight property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#paddingright
+func (e *Ellipse) SetPaddingRight(paddingRight string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(paddingRight)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// PaddingRightInPixels returns the PaddingRightInPixels property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#paddingrightinpixels
+func (e *Ellipse) PaddingRightInPixels(paddingRightInPixels float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(paddingRightInPixels)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingRightInPixels sets the PaddingRightInPixels property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#paddingrightinpixels
+func (e *Ellipse) SetPaddingRightInPixels(paddingRightInPixels float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(paddingRightInPixels)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// PaddingTop returns the PaddingTop property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#paddingtop
+func (e *Ellipse) PaddingTop(paddingTop string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(paddingTop)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingTop sets the PaddingTop property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#paddingtop
+func (e *Ellipse) SetPaddingTop(paddingTop string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(paddingTop)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// PaddingTopInPixels returns the PaddingTopInPixels property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#paddingtopinpixels
+func (e *Ellipse) PaddingTopInPixels(paddingTopInPixels float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(paddingTopInPixels)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingTopInPixels sets the PaddingTopInPixels property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#paddingtopinpixels
+func (e *Ellipse) SetPaddingTopInPixels(paddingTopInPixels float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(paddingTopInPixels)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// Parent returns the Parent property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#parent
+func (e *Ellipse) Parent(parent *Container) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(parent.JSObject())
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetParent sets the Parent property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#parent
+func (e *Ellipse) SetParent(parent *Container) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(parent.JSObject())
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// Rotation returns the Rotation property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#rotation
+func (e *Ellipse) Rotation(rotation float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(rotation)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetRotation sets the Rotation property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#rotation
+func (e *Ellipse) SetRotation(rotation float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(rotation)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// ScaleX returns the ScaleX property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#scalex
+func (e *Ellipse) ScaleX(scaleX float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(scaleX)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetScaleX sets the ScaleX property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#scalex
+func (e *Ellipse) SetScaleX(scaleX float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(scaleX)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// ScaleY returns the ScaleY property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#scaley
+func (e *Ellipse) ScaleY(scaleY float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(scaleY)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetScaleY sets the ScaleY property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#scaley
+func (e *Ellipse) SetScaleY(scaleY float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(scaleY)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// ShadowBlur returns the ShadowBlur property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#shadowblur
+func (e *Ellipse) ShadowBlur(shadowBlur float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(shadowBlur)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetShadowBlur sets the ShadowBlur property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#shadowblur
+func (e *Ellipse) SetShadowBlur(shadowBlur float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(shadowBlur)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// ShadowColor returns the ShadowColor property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#shadowcolor
+func (e *Ellipse) ShadowColor(shadowColor string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(shadowColor)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetShadowColor sets the ShadowColor property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#shadowcolor
+func (e *Ellipse) SetShadowColor(shadowColor string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(shadowColor)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// ShadowOffsetX returns the ShadowOffsetX property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#shadowoffsetx
+func (e *Ellipse) ShadowOffsetX(shadowOffsetX float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(shadowOffsetX)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetShadowOffsetX sets the ShadowOffsetX property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#shadowoffsetx
+func (e *Ellipse) SetShadowOffsetX(shadowOffsetX float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(shadowOffsetX)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// ShadowOffsetY returns the ShadowOffsetY property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#shadowoffsety
+func (e *Ellipse) ShadowOffsetY(shadowOffsetY float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(shadowOffsetY)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetShadowOffsetY sets the ShadowOffsetY property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#shadowoffsety
+func (e *Ellipse) SetShadowOffsetY(shadowOffsetY float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(shadowOffsetY)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// Style returns the Style property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#style
+func (e *Ellipse) Style(style *Style) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(style.JSObject())
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetStyle sets the Style property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#style
+func (e *Ellipse) SetStyle(style *Style) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(style.JSObject())
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// Thickness returns the Thickness property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#thickness
+func (e *Ellipse) Thickness(thickness float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(thickness)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetThickness sets the Thickness property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#thickness
+func (e *Ellipse) SetThickness(thickness float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(thickness)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// Top returns the Top property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#top
+func (e *Ellipse) Top(top string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(top)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetTop sets the Top property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#top
+func (e *Ellipse) SetTop(top string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(top)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// TopInPixels returns the TopInPixels property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#topinpixels
+func (e *Ellipse) TopInPixels(topInPixels float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(topInPixels)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetTopInPixels sets the TopInPixels property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#topinpixels
+func (e *Ellipse) SetTopInPixels(topInPixels float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(topInPixels)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// TransformCenterX returns the TransformCenterX property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#transformcenterx
+func (e *Ellipse) TransformCenterX(transformCenterX float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(transformCenterX)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetTransformCenterX sets the TransformCenterX property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#transformcenterx
+func (e *Ellipse) SetTransformCenterX(transformCenterX float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(transformCenterX)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// TransformCenterY returns the TransformCenterY property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#transformcentery
+func (e *Ellipse) TransformCenterY(transformCenterY float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(transformCenterY)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetTransformCenterY sets the TransformCenterY property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#transformcentery
+func (e *Ellipse) SetTransformCenterY(transformCenterY float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(transformCenterY)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// TypeName returns the TypeName property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#typename
+func (e *Ellipse) TypeName(typeName string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(typeName)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetTypeName sets the TypeName property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#typename
+func (e *Ellipse) SetTypeName(typeName string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(typeName)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#uniqueid
+func (e *Ellipse) UniqueId(uniqueId float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(uniqueId)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#uniqueid
+func (e *Ellipse) SetUniqueId(uniqueId float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(uniqueId)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// UseBitmapCache returns the UseBitmapCache property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#usebitmapcache
+func (e *Ellipse) UseBitmapCache(useBitmapCache bool) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(useBitmapCache)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetUseBitmapCache sets the UseBitmapCache property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#usebitmapcache
+func (e *Ellipse) SetUseBitmapCache(useBitmapCache bool) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(useBitmapCache)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// VERTICAL_ALIGNMENT_BOTTOM returns the VERTICAL_ALIGNMENT_BOTTOM property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#vertical_alignment_bottom
+func (e *Ellipse) VERTICAL_ALIGNMENT_BOTTOM(VERTICAL_ALIGNMENT_BOTTOM float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(VERTICAL_ALIGNMENT_BOTTOM)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetVERTICAL_ALIGNMENT_BOTTOM sets the VERTICAL_ALIGNMENT_BOTTOM property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#vertical_alignment_bottom
+func (e *Ellipse) SetVERTICAL_ALIGNMENT_BOTTOM(VERTICAL_ALIGNMENT_BOTTOM float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(VERTICAL_ALIGNMENT_BOTTOM)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// VERTICAL_ALIGNMENT_CENTER returns the VERTICAL_ALIGNMENT_CENTER property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#vertical_alignment_center
+func (e *Ellipse) VERTICAL_ALIGNMENT_CENTER(VERTICAL_ALIGNMENT_CENTER float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(VERTICAL_ALIGNMENT_CENTER)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetVERTICAL_ALIGNMENT_CENTER sets the VERTICAL_ALIGNMENT_CENTER property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#vertical_alignment_center
+func (e *Ellipse) SetVERTICAL_ALIGNMENT_CENTER(VERTICAL_ALIGNMENT_CENTER float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(VERTICAL_ALIGNMENT_CENTER)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// VERTICAL_ALIGNMENT_TOP returns the VERTICAL_ALIGNMENT_TOP property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#vertical_alignment_top
+func (e *Ellipse) VERTICAL_ALIGNMENT_TOP(VERTICAL_ALIGNMENT_TOP float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(VERTICAL_ALIGNMENT_TOP)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetVERTICAL_ALIGNMENT_TOP sets the VERTICAL_ALIGNMENT_TOP property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#vertical_alignment_top
+func (e *Ellipse) SetVERTICAL_ALIGNMENT_TOP(VERTICAL_ALIGNMENT_TOP float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(VERTICAL_ALIGNMENT_TOP)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// VerticalAlignment returns the VerticalAlignment property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#verticalalignment
+func (e *Ellipse) VerticalAlignment(verticalAlignment float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(verticalAlignment)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetVerticalAlignment sets the VerticalAlignment property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#verticalalignment
+func (e *Ellipse) SetVerticalAlignment(verticalAlignment float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(verticalAlignment)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// Width returns the Width property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#width
+func (e *Ellipse) Width(width string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(width)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetWidth sets the Width property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#width
+func (e *Ellipse) SetWidth(width string) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(width)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// WidthInPixels returns the WidthInPixels property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#widthinpixels
+func (e *Ellipse) WidthInPixels(widthInPixels float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(widthInPixels)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetWidthInPixels sets the WidthInPixels property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#widthinpixels
+func (e *Ellipse) SetWidthInPixels(widthInPixels float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(widthInPixels)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// ZIndex returns the ZIndex property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#zindex
+func (e *Ellipse) ZIndex(zIndex float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(zIndex)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+// SetZIndex sets the ZIndex property of class Ellipse.
+//
+// https://doc.babylonjs.com/api/classes/babylon.ellipse#zindex
+func (e *Ellipse) SetZIndex(zIndex float64) *Ellipse {
+	p := ba.ctx.Get("Ellipse").New(zIndex)
+	return EllipseFromJSObject(p, ba.ctx)
+}
+
+*/

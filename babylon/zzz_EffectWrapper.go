@@ -30,9 +30,58 @@ func EffectWrapperFromJSObject(p js.Value, ctx js.Value) *EffectWrapper {
 // NewEffectWrapper returns a new EffectWrapper object.
 //
 // https://doc.babylonjs.com/api/classes/babylon.effectwrapper
-func (ba *Babylon) NewEffectWrapper(creationOptions js.Value) *EffectWrapper {
-	p := ba.ctx.Get("EffectWrapper").New(creationOptions)
+func (ba *Babylon) NewEffectWrapper(creationOptions *EffectWrapperCreationOptions) *EffectWrapper {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, creationOptions.JSObject())
+
+	p := ba.ctx.Get("EffectWrapper").New(args...)
 	return EffectWrapperFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Dispose calls the Dispose method on the EffectWrapper object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effectwrapper#dispose
+func (e *EffectWrapper) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	e.p.Call("dispose", args...)
+}
+
+/*
+
+// Effect returns the Effect property of class EffectWrapper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effectwrapper#effect
+func (e *EffectWrapper) Effect(effect *Effect) *EffectWrapper {
+	p := ba.ctx.Get("EffectWrapper").New(effect.JSObject())
+	return EffectWrapperFromJSObject(p, ba.ctx)
+}
+
+// SetEffect sets the Effect property of class EffectWrapper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effectwrapper#effect
+func (e *EffectWrapper) SetEffect(effect *Effect) *EffectWrapper {
+	p := ba.ctx.Get("EffectWrapper").New(effect.JSObject())
+	return EffectWrapperFromJSObject(p, ba.ctx)
+}
+
+// OnApplyObservable returns the OnApplyObservable property of class EffectWrapper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effectwrapper#onapplyobservable
+func (e *EffectWrapper) OnApplyObservable(onApplyObservable *Observable) *EffectWrapper {
+	p := ba.ctx.Get("EffectWrapper").New(onApplyObservable.JSObject())
+	return EffectWrapperFromJSObject(p, ba.ctx)
+}
+
+// SetOnApplyObservable sets the OnApplyObservable property of class EffectWrapper.
+//
+// https://doc.babylonjs.com/api/classes/babylon.effectwrapper#onapplyobservable
+func (e *EffectWrapper) SetOnApplyObservable(onApplyObservable *Observable) *EffectWrapper {
+	p := ba.ctx.Get("EffectWrapper").New(onApplyObservable.JSObject())
+	return EffectWrapperFromJSObject(p, ba.ctx)
+}
+
+*/

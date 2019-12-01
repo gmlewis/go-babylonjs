@@ -27,4 +27,6 @@ func PointsGroupFromJSObject(p js.Value, ctx js.Value) *PointsGroup {
 	return &PointsGroup{p: p, ctx: ctx}
 }
 
-// TODO: methods
+/*
+
+ */

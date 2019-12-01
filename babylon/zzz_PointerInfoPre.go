@@ -32,8 +32,98 @@ func PointerInfoPreFromJSObject(p js.Value, ctx js.Value) *PointerInfoPre {
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointerinfopre
 func (ba *Babylon) NewPointerInfoPre(jsType float64, event js.Value, localX float64, localY float64) *PointerInfoPre {
-	p := ba.ctx.Get("PointerInfoPre").New(jsType, event, localX, localY)
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, jsType)
+	args = append(args, event)
+	args = append(args, localX)
+	args = append(args, localY)
+
+	p := ba.ctx.Get("PointerInfoPre").New(args...)
 	return PointerInfoPreFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+/*
+
+// Event returns the Event property of class PointerInfoPre.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerinfopre#event
+func (p *PointerInfoPre) Event(event js.Value) *PointerInfoPre {
+	p := ba.ctx.Get("PointerInfoPre").New(event)
+	return PointerInfoPreFromJSObject(p, ba.ctx)
+}
+
+// SetEvent sets the Event property of class PointerInfoPre.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerinfopre#event
+func (p *PointerInfoPre) SetEvent(event js.Value) *PointerInfoPre {
+	p := ba.ctx.Get("PointerInfoPre").New(event)
+	return PointerInfoPreFromJSObject(p, ba.ctx)
+}
+
+// LocalPosition returns the LocalPosition property of class PointerInfoPre.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerinfopre#localposition
+func (p *PointerInfoPre) LocalPosition(localPosition *Vector2) *PointerInfoPre {
+	p := ba.ctx.Get("PointerInfoPre").New(localPosition.JSObject())
+	return PointerInfoPreFromJSObject(p, ba.ctx)
+}
+
+// SetLocalPosition sets the LocalPosition property of class PointerInfoPre.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerinfopre#localposition
+func (p *PointerInfoPre) SetLocalPosition(localPosition *Vector2) *PointerInfoPre {
+	p := ba.ctx.Get("PointerInfoPre").New(localPosition.JSObject())
+	return PointerInfoPreFromJSObject(p, ba.ctx)
+}
+
+// Ray returns the Ray property of class PointerInfoPre.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerinfopre#ray
+func (p *PointerInfoPre) Ray(ray *Ray) *PointerInfoPre {
+	p := ba.ctx.Get("PointerInfoPre").New(ray.JSObject())
+	return PointerInfoPreFromJSObject(p, ba.ctx)
+}
+
+// SetRay sets the Ray property of class PointerInfoPre.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerinfopre#ray
+func (p *PointerInfoPre) SetRay(ray *Ray) *PointerInfoPre {
+	p := ba.ctx.Get("PointerInfoPre").New(ray.JSObject())
+	return PointerInfoPreFromJSObject(p, ba.ctx)
+}
+
+// SkipOnPointerObservable returns the SkipOnPointerObservable property of class PointerInfoPre.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerinfopre#skiponpointerobservable
+func (p *PointerInfoPre) SkipOnPointerObservable(skipOnPointerObservable bool) *PointerInfoPre {
+	p := ba.ctx.Get("PointerInfoPre").New(skipOnPointerObservable)
+	return PointerInfoPreFromJSObject(p, ba.ctx)
+}
+
+// SetSkipOnPointerObservable sets the SkipOnPointerObservable property of class PointerInfoPre.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerinfopre#skiponpointerobservable
+func (p *PointerInfoPre) SetSkipOnPointerObservable(skipOnPointerObservable bool) *PointerInfoPre {
+	p := ba.ctx.Get("PointerInfoPre").New(skipOnPointerObservable)
+	return PointerInfoPreFromJSObject(p, ba.ctx)
+}
+
+// Type returns the Type property of class PointerInfoPre.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerinfopre#type
+func (p *PointerInfoPre) Type(jsType float64) *PointerInfoPre {
+	p := ba.ctx.Get("PointerInfoPre").New(jsType)
+	return PointerInfoPreFromJSObject(p, ba.ctx)
+}
+
+// SetType sets the Type property of class PointerInfoPre.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerinfopre#type
+func (p *PointerInfoPre) SetType(jsType float64) *PointerInfoPre {
+	p := ba.ctx.Get("PointerInfoPre").New(jsType)
+	return PointerInfoPreFromJSObject(p, ba.ctx)
+}
+
+*/

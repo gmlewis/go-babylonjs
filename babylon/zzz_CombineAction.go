@@ -42,8 +42,144 @@ func (ba *Babylon) NewCombineAction(triggerOptions interface{}, children *Action
 		opts = &NewCombineActionOpts{}
 	}
 
-	p := ba.ctx.Get("CombineAction").New(triggerOptions, children.JSObject(), opts.Condition.JSObject())
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, triggerOptions)
+	args = append(args, children.JSObject())
+
+	if opts.Condition == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Condition.JSObject())
+	}
+
+	p := ba.ctx.Get("CombineAction").New(args...)
 	return CombineActionFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Execute calls the Execute method on the CombineAction object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.combineaction#execute
+func (c *CombineAction) Execute(evt *ActionEvent) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, evt.JSObject())
+
+	c.p.Call("execute", args...)
+}
+
+// GetTriggerParameter calls the GetTriggerParameter method on the CombineAction object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.combineaction#gettriggerparameter
+func (c *CombineAction) GetTriggerParameter() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getTriggerParameter", args...)
+	return retVal
+}
+
+// Serialize calls the Serialize method on the CombineAction object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.combineaction#serialize
+func (c *CombineAction) Serialize(parent interface{}) interface{} {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, parent)
+
+	retVal := c.p.Call("serialize", args...)
+	return retVal
+}
+
+// SkipToNextActiveAction calls the SkipToNextActiveAction method on the CombineAction object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.combineaction#skiptonextactiveaction
+func (c *CombineAction) SkipToNextActiveAction() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	c.p.Call("skipToNextActiveAction", args...)
+}
+
+// Then calls the Then method on the CombineAction object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.combineaction#then
+func (c *CombineAction) Then(action *Action) *Action {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, action.JSObject())
+
+	retVal := c.p.Call("then", args...)
+	return ActionFromJSObject(retVal, c.ctx)
+}
+
+/*
+
+// Children returns the Children property of class CombineAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.combineaction#children
+func (c *CombineAction) Children(children *Action) *CombineAction {
+	p := ba.ctx.Get("CombineAction").New(children.JSObject())
+	return CombineActionFromJSObject(p, ba.ctx)
+}
+
+// SetChildren sets the Children property of class CombineAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.combineaction#children
+func (c *CombineAction) SetChildren(children *Action) *CombineAction {
+	p := ba.ctx.Get("CombineAction").New(children.JSObject())
+	return CombineActionFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeExecuteObservable returns the OnBeforeExecuteObservable property of class CombineAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.combineaction#onbeforeexecuteobservable
+func (c *CombineAction) OnBeforeExecuteObservable(onBeforeExecuteObservable *Observable) *CombineAction {
+	p := ba.ctx.Get("CombineAction").New(onBeforeExecuteObservable.JSObject())
+	return CombineActionFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeExecuteObservable sets the OnBeforeExecuteObservable property of class CombineAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.combineaction#onbeforeexecuteobservable
+func (c *CombineAction) SetOnBeforeExecuteObservable(onBeforeExecuteObservable *Observable) *CombineAction {
+	p := ba.ctx.Get("CombineAction").New(onBeforeExecuteObservable.JSObject())
+	return CombineActionFromJSObject(p, ba.ctx)
+}
+
+// Trigger returns the Trigger property of class CombineAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.combineaction#trigger
+func (c *CombineAction) Trigger(trigger float64) *CombineAction {
+	p := ba.ctx.Get("CombineAction").New(trigger)
+	return CombineActionFromJSObject(p, ba.ctx)
+}
+
+// SetTrigger sets the Trigger property of class CombineAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.combineaction#trigger
+func (c *CombineAction) SetTrigger(trigger float64) *CombineAction {
+	p := ba.ctx.Get("CombineAction").New(trigger)
+	return CombineActionFromJSObject(p, ba.ctx)
+}
+
+// TriggerOptions returns the TriggerOptions property of class CombineAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.combineaction#triggeroptions
+func (c *CombineAction) TriggerOptions(triggerOptions interface{}) *CombineAction {
+	p := ba.ctx.Get("CombineAction").New(triggerOptions)
+	return CombineActionFromJSObject(p, ba.ctx)
+}
+
+// SetTriggerOptions sets the TriggerOptions property of class CombineAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.combineaction#triggeroptions
+func (c *CombineAction) SetTriggerOptions(triggerOptions interface{}) *CombineAction {
+	p := ba.ctx.Get("CombineAction").New(triggerOptions)
+	return CombineActionFromJSObject(p, ba.ctx)
+}
+
+*/

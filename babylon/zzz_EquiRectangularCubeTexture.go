@@ -29,13 +29,10 @@ func EquiRectangularCubeTextureFromJSObject(p js.Value, ctx js.Value) *EquiRecta
 
 // NewEquiRectangularCubeTextureOpts contains optional parameters for NewEquiRectangularCubeTexture.
 type NewEquiRectangularCubeTextureOpts struct {
-	NoMipmap *JSBool
-
-	GammaSpace *JSBool
-
-	OnLoad *func()
-
-	OnError *func()
+	NoMipmap   *bool
+	GammaSpace *bool
+	OnLoad     *func()
+	OnError    *func()
 }
 
 // NewEquiRectangularCubeTexture returns a new EquiRectangularCubeTexture object.
@@ -46,8 +43,865 @@ func (ba *Babylon) NewEquiRectangularCubeTexture(url string, scene *Scene, size 
 		opts = &NewEquiRectangularCubeTextureOpts{}
 	}
 
-	p := ba.ctx.Get("EquiRectangularCubeTexture").New(url, scene.JSObject(), size, opts.NoMipmap.JSObject(), opts.GammaSpace.JSObject(), opts.OnLoad, opts.OnError)
+	args := make([]interface{}, 0, 3+4)
+
+	args = append(args, url)
+	args = append(args, scene.JSObject())
+	args = append(args, size)
+
+	if opts.NoMipmap == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoMipmap)
+	}
+	if opts.GammaSpace == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.GammaSpace)
+	}
+	if opts.OnLoad == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnLoad)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(args...)
 	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Clone calls the Clone method on the EquiRectangularCubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#clone
+func (e *EquiRectangularCubeTexture) Clone() *EquiRectangularCubeTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := e.p.Call("clone", args...)
+	return EquiRectangularCubeTextureFromJSObject(retVal, e.ctx)
+}
+
+// DelayLoad calls the DelayLoad method on the EquiRectangularCubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#delayload
+func (e *EquiRectangularCubeTexture) DelayLoad() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	e.p.Call("delayLoad", args...)
+}
+
+// Dispose calls the Dispose method on the EquiRectangularCubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#dispose
+func (e *EquiRectangularCubeTexture) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	e.p.Call("dispose", args...)
+}
+
+// GetBaseSize calls the GetBaseSize method on the EquiRectangularCubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#getbasesize
+func (e *EquiRectangularCubeTexture) GetBaseSize() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := e.p.Call("getBaseSize", args...)
+	return retVal
+}
+
+// GetClassName calls the GetClassName method on the EquiRectangularCubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#getclassname
+func (e *EquiRectangularCubeTexture) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := e.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetInternalTexture calls the GetInternalTexture method on the EquiRectangularCubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#getinternaltexture
+func (e *EquiRectangularCubeTexture) GetInternalTexture() *InternalTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := e.p.Call("getInternalTexture", args...)
+	return InternalTextureFromJSObject(retVal, e.ctx)
+}
+
+// GetReflectionTextureMatrix calls the GetReflectionTextureMatrix method on the EquiRectangularCubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#getreflectiontexturematrix
+func (e *EquiRectangularCubeTexture) GetReflectionTextureMatrix() *Matrix {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := e.p.Call("getReflectionTextureMatrix", args...)
+	return MatrixFromJSObject(retVal, e.ctx)
+}
+
+// GetScene calls the GetScene method on the EquiRectangularCubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#getscene
+func (e *EquiRectangularCubeTexture) GetScene() *Scene {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := e.p.Call("getScene", args...)
+	return SceneFromJSObject(retVal, e.ctx)
+}
+
+// GetSize calls the GetSize method on the EquiRectangularCubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#getsize
+func (e *EquiRectangularCubeTexture) GetSize() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := e.p.Call("getSize", args...)
+	return retVal
+}
+
+// GetTextureMatrix calls the GetTextureMatrix method on the EquiRectangularCubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#gettexturematrix
+func (e *EquiRectangularCubeTexture) GetTextureMatrix() *Matrix {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := e.p.Call("getTextureMatrix", args...)
+	return MatrixFromJSObject(retVal, e.ctx)
+}
+
+// IsReady calls the IsReady method on the EquiRectangularCubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#isready
+func (e *EquiRectangularCubeTexture) IsReady() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := e.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// IsReadyOrNotBlocking calls the IsReadyOrNotBlocking method on the EquiRectangularCubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#isreadyornotblocking
+func (e *EquiRectangularCubeTexture) IsReadyOrNotBlocking() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := e.p.Call("isReadyOrNotBlocking", args...)
+	return retVal.Bool()
+}
+
+// EquiRectangularCubeTextureReadPixelsOpts contains optional parameters for EquiRectangularCubeTexture.ReadPixels.
+type EquiRectangularCubeTextureReadPixelsOpts struct {
+	FaceIndex *float64
+	Level     *float64
+	Buffer    js.Value
+}
+
+// ReadPixels calls the ReadPixels method on the EquiRectangularCubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#readpixels
+func (e *EquiRectangularCubeTexture) ReadPixels(opts *EquiRectangularCubeTextureReadPixelsOpts) js.Value {
+	if opts == nil {
+		opts = &EquiRectangularCubeTextureReadPixelsOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+3)
+
+	if opts.FaceIndex == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FaceIndex)
+	}
+	if opts.Level == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Level)
+	}
+	if opts.Buffer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Buffer)
+	}
+
+	retVal := e.p.Call("readPixels", args...)
+	return retVal
+}
+
+// ReleaseInternalTexture calls the ReleaseInternalTexture method on the EquiRectangularCubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#releaseinternaltexture
+func (e *EquiRectangularCubeTexture) ReleaseInternalTexture() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	e.p.Call("releaseInternalTexture", args...)
+}
+
+// Scale calls the Scale method on the EquiRectangularCubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#scale
+func (e *EquiRectangularCubeTexture) Scale(ratio float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, ratio)
+
+	e.p.Call("scale", args...)
+}
+
+// Serialize calls the Serialize method on the EquiRectangularCubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#serialize
+func (e *EquiRectangularCubeTexture) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := e.p.Call("serialize", args...)
+	return retVal
+}
+
+// ToString calls the ToString method on the EquiRectangularCubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#tostring
+func (e *EquiRectangularCubeTexture) ToString() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := e.p.Call("toString", args...)
+	return retVal.String()
+}
+
+// UpdateSamplingMode calls the UpdateSamplingMode method on the EquiRectangularCubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#updatesamplingmode
+func (e *EquiRectangularCubeTexture) UpdateSamplingMode(samplingMode float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, samplingMode)
+
+	e.p.Call("updateSamplingMode", args...)
+}
+
+// WhenAllReady calls the WhenAllReady method on the EquiRectangularCubeTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#whenallready
+func (e *EquiRectangularCubeTexture) WhenAllReady(textures *BaseTexture, callback func()) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, textures.JSObject())
+	args = append(args, callback)
+
+	e.p.Call("WhenAllReady", args...)
+}
+
+/*
+
+// Animations returns the Animations property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#animations
+func (e *EquiRectangularCubeTexture) Animations(animations *Animation) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(animations.JSObject())
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#animations
+func (e *EquiRectangularCubeTexture) SetAnimations(animations *Animation) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(animations.JSObject())
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// AnisotropicFilteringLevel returns the AnisotropicFilteringLevel property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#anisotropicfilteringlevel
+func (e *EquiRectangularCubeTexture) AnisotropicFilteringLevel(anisotropicFilteringLevel float64) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(anisotropicFilteringLevel)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetAnisotropicFilteringLevel sets the AnisotropicFilteringLevel property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#anisotropicfilteringlevel
+func (e *EquiRectangularCubeTexture) SetAnisotropicFilteringLevel(anisotropicFilteringLevel float64) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(anisotropicFilteringLevel)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// CanRescale returns the CanRescale property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#canrescale
+func (e *EquiRectangularCubeTexture) CanRescale(canRescale bool) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(canRescale)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCanRescale sets the CanRescale property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#canrescale
+func (e *EquiRectangularCubeTexture) SetCanRescale(canRescale bool) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(canRescale)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// CoordinatesIndex returns the CoordinatesIndex property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#coordinatesindex
+func (e *EquiRectangularCubeTexture) CoordinatesIndex(coordinatesIndex float64) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(coordinatesIndex)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCoordinatesIndex sets the CoordinatesIndex property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#coordinatesindex
+func (e *EquiRectangularCubeTexture) SetCoordinatesIndex(coordinatesIndex float64) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(coordinatesIndex)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// CoordinatesMode returns the CoordinatesMode property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#coordinatesmode
+func (e *EquiRectangularCubeTexture) CoordinatesMode(coordinatesMode float64) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(coordinatesMode)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCoordinatesMode sets the CoordinatesMode property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#coordinatesmode
+func (e *EquiRectangularCubeTexture) SetCoordinatesMode(coordinatesMode float64) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(coordinatesMode)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// DEFAULT_ANISOTROPIC_FILTERING_LEVEL returns the DEFAULT_ANISOTROPIC_FILTERING_LEVEL property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#default_anisotropic_filtering_level
+func (e *EquiRectangularCubeTexture) DEFAULT_ANISOTROPIC_FILTERING_LEVEL(DEFAULT_ANISOTROPIC_FILTERING_LEVEL float64) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(DEFAULT_ANISOTROPIC_FILTERING_LEVEL)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetDEFAULT_ANISOTROPIC_FILTERING_LEVEL sets the DEFAULT_ANISOTROPIC_FILTERING_LEVEL property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#default_anisotropic_filtering_level
+func (e *EquiRectangularCubeTexture) SetDEFAULT_ANISOTROPIC_FILTERING_LEVEL(DEFAULT_ANISOTROPIC_FILTERING_LEVEL float64) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(DEFAULT_ANISOTROPIC_FILTERING_LEVEL)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// DelayLoadState returns the DelayLoadState property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#delayloadstate
+func (e *EquiRectangularCubeTexture) DelayLoadState(delayLoadState float64) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(delayLoadState)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetDelayLoadState sets the DelayLoadState property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#delayloadstate
+func (e *EquiRectangularCubeTexture) SetDelayLoadState(delayLoadState float64) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(delayLoadState)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// GammaSpace returns the GammaSpace property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#gammaspace
+func (e *EquiRectangularCubeTexture) GammaSpace(gammaSpace bool) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(gammaSpace)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetGammaSpace sets the GammaSpace property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#gammaspace
+func (e *EquiRectangularCubeTexture) SetGammaSpace(gammaSpace bool) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(gammaSpace)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// GetAlphaFromRGB returns the GetAlphaFromRGB property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#getalphafromrgb
+func (e *EquiRectangularCubeTexture) GetAlphaFromRGB(getAlphaFromRGB bool) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(getAlphaFromRGB)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetGetAlphaFromRGB sets the GetAlphaFromRGB property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#getalphafromrgb
+func (e *EquiRectangularCubeTexture) SetGetAlphaFromRGB(getAlphaFromRGB bool) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(getAlphaFromRGB)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// HasAlpha returns the HasAlpha property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#hasalpha
+func (e *EquiRectangularCubeTexture) HasAlpha(hasAlpha bool) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(hasAlpha)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetHasAlpha sets the HasAlpha property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#hasalpha
+func (e *EquiRectangularCubeTexture) SetHasAlpha(hasAlpha bool) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(hasAlpha)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// InvertZ returns the InvertZ property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#invertz
+func (e *EquiRectangularCubeTexture) InvertZ(invertZ bool) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(invertZ)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetInvertZ sets the InvertZ property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#invertz
+func (e *EquiRectangularCubeTexture) SetInvertZ(invertZ bool) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(invertZ)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// IrradianceTexture returns the IrradianceTexture property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#irradiancetexture
+func (e *EquiRectangularCubeTexture) IrradianceTexture(irradianceTexture *BaseTexture) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(irradianceTexture.JSObject())
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIrradianceTexture sets the IrradianceTexture property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#irradiancetexture
+func (e *EquiRectangularCubeTexture) SetIrradianceTexture(irradianceTexture *BaseTexture) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(irradianceTexture.JSObject())
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// Is2DArray returns the Is2DArray property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#is2darray
+func (e *EquiRectangularCubeTexture) Is2DArray(is2DArray bool) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(is2DArray)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIs2DArray sets the Is2DArray property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#is2darray
+func (e *EquiRectangularCubeTexture) SetIs2DArray(is2DArray bool) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(is2DArray)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// Is3D returns the Is3D property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#is3d
+func (e *EquiRectangularCubeTexture) Is3D(is3D bool) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(is3D)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIs3D sets the Is3D property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#is3d
+func (e *EquiRectangularCubeTexture) SetIs3D(is3D bool) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(is3D)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// IsBlocking returns the IsBlocking property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#isblocking
+func (e *EquiRectangularCubeTexture) IsBlocking(isBlocking bool) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(isBlocking)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsBlocking sets the IsBlocking property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#isblocking
+func (e *EquiRectangularCubeTexture) SetIsBlocking(isBlocking bool) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(isBlocking)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// IsCube returns the IsCube property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#iscube
+func (e *EquiRectangularCubeTexture) IsCube(isCube bool) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(isCube)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsCube sets the IsCube property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#iscube
+func (e *EquiRectangularCubeTexture) SetIsCube(isCube bool) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(isCube)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// IsRGBD returns the IsRGBD property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#isrgbd
+func (e *EquiRectangularCubeTexture) IsRGBD(isRGBD bool) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(isRGBD)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsRGBD sets the IsRGBD property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#isrgbd
+func (e *EquiRectangularCubeTexture) SetIsRGBD(isRGBD bool) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(isRGBD)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// IsRenderTarget returns the IsRenderTarget property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#isrendertarget
+func (e *EquiRectangularCubeTexture) IsRenderTarget(isRenderTarget bool) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(isRenderTarget)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsRenderTarget sets the IsRenderTarget property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#isrendertarget
+func (e *EquiRectangularCubeTexture) SetIsRenderTarget(isRenderTarget bool) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(isRenderTarget)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// Level returns the Level property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#level
+func (e *EquiRectangularCubeTexture) Level(level float64) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(level)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLevel sets the Level property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#level
+func (e *EquiRectangularCubeTexture) SetLevel(level float64) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(level)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// LinearSpecularLOD returns the LinearSpecularLOD property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#linearspecularlod
+func (e *EquiRectangularCubeTexture) LinearSpecularLOD(linearSpecularLOD bool) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(linearSpecularLOD)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLinearSpecularLOD sets the LinearSpecularLOD property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#linearspecularlod
+func (e *EquiRectangularCubeTexture) SetLinearSpecularLOD(linearSpecularLOD bool) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(linearSpecularLOD)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// LodGenerationOffset returns the LodGenerationOffset property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#lodgenerationoffset
+func (e *EquiRectangularCubeTexture) LodGenerationOffset(lodGenerationOffset float64) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(lodGenerationOffset)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLodGenerationOffset sets the LodGenerationOffset property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#lodgenerationoffset
+func (e *EquiRectangularCubeTexture) SetLodGenerationOffset(lodGenerationOffset float64) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(lodGenerationOffset)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// LodGenerationScale returns the LodGenerationScale property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#lodgenerationscale
+func (e *EquiRectangularCubeTexture) LodGenerationScale(lodGenerationScale float64) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(lodGenerationScale)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLodGenerationScale sets the LodGenerationScale property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#lodgenerationscale
+func (e *EquiRectangularCubeTexture) SetLodGenerationScale(lodGenerationScale float64) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(lodGenerationScale)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#metadata
+func (e *EquiRectangularCubeTexture) Metadata(metadata interface{}) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(metadata)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#metadata
+func (e *EquiRectangularCubeTexture) SetMetadata(metadata interface{}) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(metadata)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#name
+func (e *EquiRectangularCubeTexture) Name(name string) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(name)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#name
+func (e *EquiRectangularCubeTexture) SetName(name string) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(name)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// NoMipmap returns the NoMipmap property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#nomipmap
+func (e *EquiRectangularCubeTexture) NoMipmap(noMipmap bool) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(noMipmap)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNoMipmap sets the NoMipmap property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#nomipmap
+func (e *EquiRectangularCubeTexture) SetNoMipmap(noMipmap bool) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(noMipmap)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// OnDispose returns the OnDispose property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#ondispose
+func (e *EquiRectangularCubeTexture) OnDispose(onDispose func()) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(onDispose)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnDispose sets the OnDispose property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#ondispose
+func (e *EquiRectangularCubeTexture) SetOnDispose(onDispose func()) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(onDispose)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// OnDisposeObservable returns the OnDisposeObservable property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#ondisposeobservable
+func (e *EquiRectangularCubeTexture) OnDisposeObservable(onDisposeObservable *Observable) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(onDisposeObservable.JSObject())
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnDisposeObservable sets the OnDisposeObservable property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#ondisposeobservable
+func (e *EquiRectangularCubeTexture) SetOnDisposeObservable(onDisposeObservable *Observable) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(onDisposeObservable.JSObject())
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// ReservedDataStore returns the ReservedDataStore property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#reserveddatastore
+func (e *EquiRectangularCubeTexture) ReservedDataStore(reservedDataStore interface{}) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(reservedDataStore)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetReservedDataStore sets the ReservedDataStore property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#reserveddatastore
+func (e *EquiRectangularCubeTexture) SetReservedDataStore(reservedDataStore interface{}) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(reservedDataStore)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SphericalPolynomial returns the SphericalPolynomial property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#sphericalpolynomial
+func (e *EquiRectangularCubeTexture) SphericalPolynomial(sphericalPolynomial *SphericalPolynomial) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(sphericalPolynomial.JSObject())
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetSphericalPolynomial sets the SphericalPolynomial property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#sphericalpolynomial
+func (e *EquiRectangularCubeTexture) SetSphericalPolynomial(sphericalPolynomial *SphericalPolynomial) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(sphericalPolynomial.JSObject())
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// TextureFormat returns the TextureFormat property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#textureformat
+func (e *EquiRectangularCubeTexture) TextureFormat(textureFormat float64) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(textureFormat)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetTextureFormat sets the TextureFormat property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#textureformat
+func (e *EquiRectangularCubeTexture) SetTextureFormat(textureFormat float64) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(textureFormat)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// TextureType returns the TextureType property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#texturetype
+func (e *EquiRectangularCubeTexture) TextureType(textureType float64) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(textureType)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetTextureType sets the TextureType property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#texturetype
+func (e *EquiRectangularCubeTexture) SetTextureType(textureType float64) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(textureType)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// Uid returns the Uid property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#uid
+func (e *EquiRectangularCubeTexture) Uid(uid string) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(uid)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUid sets the Uid property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#uid
+func (e *EquiRectangularCubeTexture) SetUid(uid string) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(uid)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#uniqueid
+func (e *EquiRectangularCubeTexture) UniqueId(uniqueId float64) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(uniqueId)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#uniqueid
+func (e *EquiRectangularCubeTexture) SetUniqueId(uniqueId float64) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(uniqueId)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// Url returns the Url property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#url
+func (e *EquiRectangularCubeTexture) Url(url string) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(url)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUrl sets the Url property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#url
+func (e *EquiRectangularCubeTexture) SetUrl(url string) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(url)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// WrapR returns the WrapR property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#wrapr
+func (e *EquiRectangularCubeTexture) WrapR(wrapR float64) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(wrapR)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWrapR sets the WrapR property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#wrapr
+func (e *EquiRectangularCubeTexture) SetWrapR(wrapR float64) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(wrapR)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// WrapU returns the WrapU property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#wrapu
+func (e *EquiRectangularCubeTexture) WrapU(wrapU float64) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(wrapU)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWrapU sets the WrapU property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#wrapu
+func (e *EquiRectangularCubeTexture) SetWrapU(wrapU float64) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(wrapU)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// WrapV returns the WrapV property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#wrapv
+func (e *EquiRectangularCubeTexture) WrapV(wrapV float64) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(wrapV)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWrapV sets the WrapV property of class EquiRectangularCubeTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetexture#wrapv
+func (e *EquiRectangularCubeTexture) SetWrapV(wrapV float64) *EquiRectangularCubeTexture {
+	p := ba.ctx.Get("EquiRectangularCubeTexture").New(wrapV)
+	return EquiRectangularCubeTextureFromJSObject(p, ba.ctx)
+}
+
+*/

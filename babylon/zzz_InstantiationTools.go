@@ -27,4 +27,35 @@ func InstantiationToolsFromJSObject(p js.Value, ctx js.Value) *InstantiationTool
 	return &InstantiationTools{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// Instantiate calls the Instantiate method on the InstantiationTools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instantiationtools#instantiate
+func (i *InstantiationTools) Instantiate(className string) interface{} {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, className)
+
+	retVal := i.p.Call("Instantiate", args...)
+	return retVal
+}
+
+/*
+
+// RegisteredExternalClasses returns the RegisteredExternalClasses property of class InstantiationTools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instantiationtools#registeredexternalclasses
+func (i *InstantiationTools) RegisteredExternalClasses(RegisteredExternalClasses js.Value) *InstantiationTools {
+	p := ba.ctx.Get("InstantiationTools").New(RegisteredExternalClasses)
+	return InstantiationToolsFromJSObject(p, ba.ctx)
+}
+
+// SetRegisteredExternalClasses sets the RegisteredExternalClasses property of class InstantiationTools.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instantiationtools#registeredexternalclasses
+func (i *InstantiationTools) SetRegisteredExternalClasses(RegisteredExternalClasses js.Value) *InstantiationTools {
+	p := ba.ctx.Get("InstantiationTools").New(RegisteredExternalClasses)
+	return InstantiationToolsFromJSObject(p, ba.ctx)
+}
+
+*/

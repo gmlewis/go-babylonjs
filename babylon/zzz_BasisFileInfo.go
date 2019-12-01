@@ -27,4 +27,38 @@ func BasisFileInfoFromJSObject(p js.Value, ctx js.Value) *BasisFileInfo {
 	return &BasisFileInfo{p: p, ctx: ctx}
 }
 
-// TODO: methods
+/*
+
+// HasAlpha returns the HasAlpha property of class BasisFileInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.basisfileinfo#hasalpha
+func (b *BasisFileInfo) HasAlpha(hasAlpha bool) *BasisFileInfo {
+	p := ba.ctx.Get("BasisFileInfo").New(hasAlpha)
+	return BasisFileInfoFromJSObject(p, ba.ctx)
+}
+
+// SetHasAlpha sets the HasAlpha property of class BasisFileInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.basisfileinfo#hasalpha
+func (b *BasisFileInfo) SetHasAlpha(hasAlpha bool) *BasisFileInfo {
+	p := ba.ctx.Get("BasisFileInfo").New(hasAlpha)
+	return BasisFileInfoFromJSObject(p, ba.ctx)
+}
+
+// Images returns the Images property of class BasisFileInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.basisfileinfo#images
+func (b *BasisFileInfo) Images(images []object) *BasisFileInfo {
+	p := ba.ctx.Get("BasisFileInfo").New(images.JSObject())
+	return BasisFileInfoFromJSObject(p, ba.ctx)
+}
+
+// SetImages sets the Images property of class BasisFileInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.basisfileinfo#images
+func (b *BasisFileInfo) SetImages(images []object) *BasisFileInfo {
+	p := ba.ctx.Get("BasisFileInfo").New(images.JSObject())
+	return BasisFileInfoFromJSObject(p, ba.ctx)
+}
+
+*/

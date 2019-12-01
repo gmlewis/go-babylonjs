@@ -34,7 +34,7 @@ func ArcRotateCameraFromJSObject(p js.Value, ctx js.Value) *ArcRotateCamera {
 
 // NewArcRotateCameraOpts contains optional parameters for NewArcRotateCamera.
 type NewArcRotateCameraOpts struct {
-	SetActiveOnSceneIfNoneActive *JSBool
+	SetActiveOnSceneIfNoneActive *bool
 }
 
 // NewArcRotateCamera returns a new ArcRotateCamera object.
@@ -45,8 +45,1161 @@ func (ba *Babylon) NewArcRotateCamera(name string, alpha float64, beta float64, 
 		opts = &NewArcRotateCameraOpts{}
 	}
 
-	p := ba.ctx.Get("ArcRotateCamera").New(name, alpha, beta, radius, target.JSObject(), scene.JSObject(), opts.SetActiveOnSceneIfNoneActive.JSObject())
+	args := make([]interface{}, 0, 6+1)
+
+	args = append(args, name)
+	args = append(args, alpha)
+	args = append(args, beta)
+	args = append(args, radius)
+	args = append(args, target.JSObject())
+	args = append(args, scene.JSObject())
+
+	if opts.SetActiveOnSceneIfNoneActive == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SetActiveOnSceneIfNoneActive)
+	}
+
+	p := ba.ctx.Get("ArcRotateCamera").New(args...)
 	return ArcRotateCameraFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// ArcRotateCameraAttachControlOpts contains optional parameters for ArcRotateCamera.AttachControl.
+type ArcRotateCameraAttachControlOpts struct {
+	NoPreventDefault   *bool
+	UseCtrlForPanning  *bool
+	PanningMouseButton *float64
+}
+
+// AttachControl calls the AttachControl method on the ArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#attachcontrol
+func (a *ArcRotateCamera) AttachControl(element js.Value, opts *ArcRotateCameraAttachControlOpts) {
+	if opts == nil {
+		opts = &ArcRotateCameraAttachControlOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, element)
+
+	if opts.NoPreventDefault == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoPreventDefault)
+	}
+	if opts.UseCtrlForPanning == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseCtrlForPanning)
+	}
+	if opts.PanningMouseButton == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.PanningMouseButton)
+	}
+
+	a.p.Call("attachControl", args...)
+}
+
+// CreateRigCamera calls the CreateRigCamera method on the ArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#createrigcamera
+func (a *ArcRotateCamera) CreateRigCamera(name string, cameraIndex float64) *Camera {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, cameraIndex)
+
+	retVal := a.p.Call("createRigCamera", args...)
+	return CameraFromJSObject(retVal, a.ctx)
+}
+
+// DetachControl calls the DetachControl method on the ArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#detachcontrol
+func (a *ArcRotateCamera) DetachControl(element js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, element)
+
+	a.p.Call("detachControl", args...)
+}
+
+// Dispose calls the Dispose method on the ArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#dispose
+func (a *ArcRotateCamera) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	a.p.Call("dispose", args...)
+}
+
+// ArcRotateCameraFocusOnOpts contains optional parameters for ArcRotateCamera.FocusOn.
+type ArcRotateCameraFocusOnOpts struct {
+	DoNotUpdateMaxZ *bool
+}
+
+// FocusOn calls the FocusOn method on the ArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#focuson
+func (a *ArcRotateCamera) FocusOn(meshesOrMinMaxVectorAndDistance *AbstractMesh, opts *ArcRotateCameraFocusOnOpts) {
+	if opts == nil {
+		opts = &ArcRotateCameraFocusOnOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, meshesOrMinMaxVectorAndDistance.JSObject())
+
+	if opts.DoNotUpdateMaxZ == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DoNotUpdateMaxZ)
+	}
+
+	a.p.Call("focusOn", args...)
+}
+
+// GetClassName calls the GetClassName method on the ArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#getclassname
+func (a *ArcRotateCamera) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetFrontPosition calls the GetFrontPosition method on the ArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#getfrontposition
+func (a *ArcRotateCamera) GetFrontPosition(distance float64) *Vector3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, distance)
+
+	retVal := a.p.Call("getFrontPosition", args...)
+	return Vector3FromJSObject(retVal, a.ctx)
+}
+
+// GetTarget calls the GetTarget method on the ArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#gettarget
+func (a *ArcRotateCamera) GetTarget() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("getTarget", args...)
+	return Vector3FromJSObject(retVal, a.ctx)
+}
+
+// RebuildAnglesAndRadius calls the RebuildAnglesAndRadius method on the ArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#rebuildanglesandradius
+func (a *ArcRotateCamera) RebuildAnglesAndRadius() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	a.p.Call("rebuildAnglesAndRadius", args...)
+}
+
+// SetMatUp calls the SetMatUp method on the ArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#setmatup
+func (a *ArcRotateCamera) SetMatUp() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	a.p.Call("setMatUp", args...)
+}
+
+// SetPosition calls the SetPosition method on the ArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#setposition
+func (a *ArcRotateCamera) SetPosition(position *Vector3) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, position.JSObject())
+
+	a.p.Call("setPosition", args...)
+}
+
+// ArcRotateCameraSetTargetOpts contains optional parameters for ArcRotateCamera.SetTarget.
+type ArcRotateCameraSetTargetOpts struct {
+	ToBoundingCenter  *bool
+	AllowSamePosition *bool
+}
+
+// SetTarget calls the SetTarget method on the ArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#settarget
+func (a *ArcRotateCamera) SetTarget(target *AbstractMesh, opts *ArcRotateCameraSetTargetOpts) {
+	if opts == nil {
+		opts = &ArcRotateCameraSetTargetOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, target.JSObject())
+
+	if opts.ToBoundingCenter == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ToBoundingCenter)
+	}
+	if opts.AllowSamePosition == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.AllowSamePosition)
+	}
+
+	a.p.Call("setTarget", args...)
+}
+
+// StoreState calls the StoreState method on the ArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#storestate
+func (a *ArcRotateCamera) StoreState() *Camera {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("storeState", args...)
+	return CameraFromJSObject(retVal, a.ctx)
+}
+
+// ArcRotateCameraZoomOnOpts contains optional parameters for ArcRotateCamera.ZoomOn.
+type ArcRotateCameraZoomOnOpts struct {
+	Meshes          *AbstractMesh
+	DoNotUpdateMaxZ *bool
+}
+
+// ZoomOn calls the ZoomOn method on the ArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#zoomon
+func (a *ArcRotateCamera) ZoomOn(opts *ArcRotateCameraZoomOnOpts) {
+	if opts == nil {
+		opts = &ArcRotateCameraZoomOnOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.Meshes == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Meshes.JSObject())
+	}
+	if opts.DoNotUpdateMaxZ == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DoNotUpdateMaxZ)
+	}
+
+	a.p.Call("zoomOn", args...)
+}
+
+/*
+
+// AllowUpsideDown returns the AllowUpsideDown property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#allowupsidedown
+func (a *ArcRotateCamera) AllowUpsideDown(allowUpsideDown bool) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(allowUpsideDown)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetAllowUpsideDown sets the AllowUpsideDown property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#allowupsidedown
+func (a *ArcRotateCamera) SetAllowUpsideDown(allowUpsideDown bool) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(allowUpsideDown)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// Alpha returns the Alpha property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#alpha
+func (a *ArcRotateCamera) Alpha(alpha float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(alpha)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetAlpha sets the Alpha property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#alpha
+func (a *ArcRotateCamera) SetAlpha(alpha float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(alpha)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// AngularSensibilityX returns the AngularSensibilityX property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#angularsensibilityx
+func (a *ArcRotateCamera) AngularSensibilityX(angularSensibilityX float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(angularSensibilityX)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetAngularSensibilityX sets the AngularSensibilityX property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#angularsensibilityx
+func (a *ArcRotateCamera) SetAngularSensibilityX(angularSensibilityX float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(angularSensibilityX)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// AngularSensibilityY returns the AngularSensibilityY property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#angularsensibilityy
+func (a *ArcRotateCamera) AngularSensibilityY(angularSensibilityY float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(angularSensibilityY)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetAngularSensibilityY sets the AngularSensibilityY property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#angularsensibilityy
+func (a *ArcRotateCamera) SetAngularSensibilityY(angularSensibilityY float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(angularSensibilityY)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// AutoRotationBehavior returns the AutoRotationBehavior property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#autorotationbehavior
+func (a *ArcRotateCamera) AutoRotationBehavior(autoRotationBehavior *AutoRotationBehavior) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(autoRotationBehavior.JSObject())
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetAutoRotationBehavior sets the AutoRotationBehavior property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#autorotationbehavior
+func (a *ArcRotateCamera) SetAutoRotationBehavior(autoRotationBehavior *AutoRotationBehavior) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(autoRotationBehavior.JSObject())
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// Beta returns the Beta property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#beta
+func (a *ArcRotateCamera) Beta(beta float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(beta)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetBeta sets the Beta property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#beta
+func (a *ArcRotateCamera) SetBeta(beta float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(beta)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// BouncingBehavior returns the BouncingBehavior property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#bouncingbehavior
+func (a *ArcRotateCamera) BouncingBehavior(bouncingBehavior *BouncingBehavior) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(bouncingBehavior.JSObject())
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetBouncingBehavior sets the BouncingBehavior property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#bouncingbehavior
+func (a *ArcRotateCamera) SetBouncingBehavior(bouncingBehavior *BouncingBehavior) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(bouncingBehavior.JSObject())
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// CameraDirection returns the CameraDirection property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#cameradirection
+func (a *ArcRotateCamera) CameraDirection(cameraDirection *Vector3) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(cameraDirection.JSObject())
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetCameraDirection sets the CameraDirection property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#cameradirection
+func (a *ArcRotateCamera) SetCameraDirection(cameraDirection *Vector3) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(cameraDirection.JSObject())
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// CameraRotation returns the CameraRotation property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#camerarotation
+func (a *ArcRotateCamera) CameraRotation(cameraRotation *Vector2) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(cameraRotation.JSObject())
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetCameraRotation sets the CameraRotation property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#camerarotation
+func (a *ArcRotateCamera) SetCameraRotation(cameraRotation *Vector2) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(cameraRotation.JSObject())
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// CheckCollisions returns the CheckCollisions property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#checkcollisions
+func (a *ArcRotateCamera) CheckCollisions(checkCollisions bool) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(checkCollisions)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetCheckCollisions sets the CheckCollisions property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#checkcollisions
+func (a *ArcRotateCamera) SetCheckCollisions(checkCollisions bool) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(checkCollisions)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// CollisionRadius returns the CollisionRadius property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#collisionradius
+func (a *ArcRotateCamera) CollisionRadius(collisionRadius *Vector3) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(collisionRadius.JSObject())
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetCollisionRadius sets the CollisionRadius property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#collisionradius
+func (a *ArcRotateCamera) SetCollisionRadius(collisionRadius *Vector3) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(collisionRadius.JSObject())
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// FramingBehavior returns the FramingBehavior property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#framingbehavior
+func (a *ArcRotateCamera) FramingBehavior(framingBehavior *FramingBehavior) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(framingBehavior.JSObject())
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetFramingBehavior sets the FramingBehavior property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#framingbehavior
+func (a *ArcRotateCamera) SetFramingBehavior(framingBehavior *FramingBehavior) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(framingBehavior.JSObject())
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// InertialAlphaOffset returns the InertialAlphaOffset property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#inertialalphaoffset
+func (a *ArcRotateCamera) InertialAlphaOffset(inertialAlphaOffset float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(inertialAlphaOffset)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetInertialAlphaOffset sets the InertialAlphaOffset property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#inertialalphaoffset
+func (a *ArcRotateCamera) SetInertialAlphaOffset(inertialAlphaOffset float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(inertialAlphaOffset)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// InertialBetaOffset returns the InertialBetaOffset property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#inertialbetaoffset
+func (a *ArcRotateCamera) InertialBetaOffset(inertialBetaOffset float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(inertialBetaOffset)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetInertialBetaOffset sets the InertialBetaOffset property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#inertialbetaoffset
+func (a *ArcRotateCamera) SetInertialBetaOffset(inertialBetaOffset float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(inertialBetaOffset)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// InertialPanningX returns the InertialPanningX property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#inertialpanningx
+func (a *ArcRotateCamera) InertialPanningX(inertialPanningX float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(inertialPanningX)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetInertialPanningX sets the InertialPanningX property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#inertialpanningx
+func (a *ArcRotateCamera) SetInertialPanningX(inertialPanningX float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(inertialPanningX)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// InertialPanningY returns the InertialPanningY property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#inertialpanningy
+func (a *ArcRotateCamera) InertialPanningY(inertialPanningY float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(inertialPanningY)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetInertialPanningY sets the InertialPanningY property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#inertialpanningy
+func (a *ArcRotateCamera) SetInertialPanningY(inertialPanningY float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(inertialPanningY)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// InertialRadiusOffset returns the InertialRadiusOffset property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#inertialradiusoffset
+func (a *ArcRotateCamera) InertialRadiusOffset(inertialRadiusOffset float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(inertialRadiusOffset)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetInertialRadiusOffset sets the InertialRadiusOffset property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#inertialradiusoffset
+func (a *ArcRotateCamera) SetInertialRadiusOffset(inertialRadiusOffset float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(inertialRadiusOffset)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// Inputs returns the Inputs property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#inputs
+func (a *ArcRotateCamera) Inputs(inputs *ArcRotateCameraInputsManager) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(inputs.JSObject())
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetInputs sets the Inputs property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#inputs
+func (a *ArcRotateCamera) SetInputs(inputs *ArcRotateCameraInputsManager) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(inputs.JSObject())
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// KeysDown returns the KeysDown property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#keysdown
+func (a *ArcRotateCamera) KeysDown(keysDown float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(keysDown)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetKeysDown sets the KeysDown property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#keysdown
+func (a *ArcRotateCamera) SetKeysDown(keysDown float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(keysDown)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// KeysLeft returns the KeysLeft property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#keysleft
+func (a *ArcRotateCamera) KeysLeft(keysLeft float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(keysLeft)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetKeysLeft sets the KeysLeft property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#keysleft
+func (a *ArcRotateCamera) SetKeysLeft(keysLeft float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(keysLeft)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// KeysRight returns the KeysRight property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#keysright
+func (a *ArcRotateCamera) KeysRight(keysRight float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(keysRight)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetKeysRight sets the KeysRight property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#keysright
+func (a *ArcRotateCamera) SetKeysRight(keysRight float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(keysRight)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// KeysUp returns the KeysUp property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#keysup
+func (a *ArcRotateCamera) KeysUp(keysUp float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(keysUp)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetKeysUp sets the KeysUp property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#keysup
+func (a *ArcRotateCamera) SetKeysUp(keysUp float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(keysUp)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// LockedTarget returns the LockedTarget property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#lockedtarget
+func (a *ArcRotateCamera) LockedTarget(lockedTarget interface{}) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(lockedTarget)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetLockedTarget sets the LockedTarget property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#lockedtarget
+func (a *ArcRotateCamera) SetLockedTarget(lockedTarget interface{}) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(lockedTarget)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// LowerAlphaLimit returns the LowerAlphaLimit property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#loweralphalimit
+func (a *ArcRotateCamera) LowerAlphaLimit(lowerAlphaLimit float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(lowerAlphaLimit)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetLowerAlphaLimit sets the LowerAlphaLimit property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#loweralphalimit
+func (a *ArcRotateCamera) SetLowerAlphaLimit(lowerAlphaLimit float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(lowerAlphaLimit)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// LowerBetaLimit returns the LowerBetaLimit property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#lowerbetalimit
+func (a *ArcRotateCamera) LowerBetaLimit(lowerBetaLimit float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(lowerBetaLimit)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetLowerBetaLimit sets the LowerBetaLimit property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#lowerbetalimit
+func (a *ArcRotateCamera) SetLowerBetaLimit(lowerBetaLimit float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(lowerBetaLimit)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// LowerRadiusLimit returns the LowerRadiusLimit property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#lowerradiuslimit
+func (a *ArcRotateCamera) LowerRadiusLimit(lowerRadiusLimit float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(lowerRadiusLimit)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetLowerRadiusLimit sets the LowerRadiusLimit property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#lowerradiuslimit
+func (a *ArcRotateCamera) SetLowerRadiusLimit(lowerRadiusLimit float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(lowerRadiusLimit)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// NoRotationConstraint returns the NoRotationConstraint property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#norotationconstraint
+func (a *ArcRotateCamera) NoRotationConstraint(noRotationConstraint bool) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(noRotationConstraint)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetNoRotationConstraint sets the NoRotationConstraint property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#norotationconstraint
+func (a *ArcRotateCamera) SetNoRotationConstraint(noRotationConstraint bool) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(noRotationConstraint)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// OnCollide returns the OnCollide property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#oncollide
+func (a *ArcRotateCamera) OnCollide(onCollide func()) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(onCollide)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetOnCollide sets the OnCollide property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#oncollide
+func (a *ArcRotateCamera) SetOnCollide(onCollide func()) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(onCollide)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// OnMeshTargetChangedObservable returns the OnMeshTargetChangedObservable property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#onmeshtargetchangedobservable
+func (a *ArcRotateCamera) OnMeshTargetChangedObservable(onMeshTargetChangedObservable *Observable) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(onMeshTargetChangedObservable.JSObject())
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetOnMeshTargetChangedObservable sets the OnMeshTargetChangedObservable property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#onmeshtargetchangedobservable
+func (a *ArcRotateCamera) SetOnMeshTargetChangedObservable(onMeshTargetChangedObservable *Observable) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(onMeshTargetChangedObservable.JSObject())
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// PanningAxis returns the PanningAxis property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#panningaxis
+func (a *ArcRotateCamera) PanningAxis(panningAxis *Vector3) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(panningAxis.JSObject())
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetPanningAxis sets the PanningAxis property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#panningaxis
+func (a *ArcRotateCamera) SetPanningAxis(panningAxis *Vector3) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(panningAxis.JSObject())
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// PanningDistanceLimit returns the PanningDistanceLimit property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#panningdistancelimit
+func (a *ArcRotateCamera) PanningDistanceLimit(panningDistanceLimit float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(panningDistanceLimit)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetPanningDistanceLimit sets the PanningDistanceLimit property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#panningdistancelimit
+func (a *ArcRotateCamera) SetPanningDistanceLimit(panningDistanceLimit float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(panningDistanceLimit)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// PanningInertia returns the PanningInertia property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#panninginertia
+func (a *ArcRotateCamera) PanningInertia(panningInertia float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(panningInertia)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetPanningInertia sets the PanningInertia property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#panninginertia
+func (a *ArcRotateCamera) SetPanningInertia(panningInertia float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(panningInertia)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// PanningOriginTarget returns the PanningOriginTarget property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#panningorigintarget
+func (a *ArcRotateCamera) PanningOriginTarget(panningOriginTarget *Vector3) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(panningOriginTarget.JSObject())
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetPanningOriginTarget sets the PanningOriginTarget property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#panningorigintarget
+func (a *ArcRotateCamera) SetPanningOriginTarget(panningOriginTarget *Vector3) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(panningOriginTarget.JSObject())
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// PanningSensibility returns the PanningSensibility property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#panningsensibility
+func (a *ArcRotateCamera) PanningSensibility(panningSensibility float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(panningSensibility)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetPanningSensibility sets the PanningSensibility property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#panningsensibility
+func (a *ArcRotateCamera) SetPanningSensibility(panningSensibility float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(panningSensibility)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// PinchDeltaPercentage returns the PinchDeltaPercentage property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#pinchdeltapercentage
+func (a *ArcRotateCamera) PinchDeltaPercentage(pinchDeltaPercentage float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(pinchDeltaPercentage)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetPinchDeltaPercentage sets the PinchDeltaPercentage property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#pinchdeltapercentage
+func (a *ArcRotateCamera) SetPinchDeltaPercentage(pinchDeltaPercentage float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(pinchDeltaPercentage)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// PinchPrecision returns the PinchPrecision property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#pinchprecision
+func (a *ArcRotateCamera) PinchPrecision(pinchPrecision float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(pinchPrecision)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetPinchPrecision sets the PinchPrecision property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#pinchprecision
+func (a *ArcRotateCamera) SetPinchPrecision(pinchPrecision float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(pinchPrecision)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// PinchToPanMaxDistance returns the PinchToPanMaxDistance property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#pinchtopanmaxdistance
+func (a *ArcRotateCamera) PinchToPanMaxDistance(pinchToPanMaxDistance float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(pinchToPanMaxDistance)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetPinchToPanMaxDistance sets the PinchToPanMaxDistance property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#pinchtopanmaxdistance
+func (a *ArcRotateCamera) SetPinchToPanMaxDistance(pinchToPanMaxDistance float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(pinchToPanMaxDistance)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// Position returns the Position property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#position
+func (a *ArcRotateCamera) Position(position *Vector3) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(position.JSObject())
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetPosition sets the Position property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#position
+func (a *ArcRotateCamera) SetPosition(position *Vector3) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(position.JSObject())
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// Radius returns the Radius property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#radius
+func (a *ArcRotateCamera) Radius(radius float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(radius)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetRadius sets the Radius property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#radius
+func (a *ArcRotateCamera) SetRadius(radius float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(radius)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// Rotation returns the Rotation property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#rotation
+func (a *ArcRotateCamera) Rotation(rotation *Vector3) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(rotation.JSObject())
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetRotation sets the Rotation property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#rotation
+func (a *ArcRotateCamera) SetRotation(rotation *Vector3) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(rotation.JSObject())
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// RotationQuaternion returns the RotationQuaternion property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#rotationquaternion
+func (a *ArcRotateCamera) RotationQuaternion(rotationQuaternion *Quaternion) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(rotationQuaternion.JSObject())
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetRotationQuaternion sets the RotationQuaternion property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#rotationquaternion
+func (a *ArcRotateCamera) SetRotationQuaternion(rotationQuaternion *Quaternion) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(rotationQuaternion.JSObject())
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// Speed returns the Speed property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#speed
+func (a *ArcRotateCamera) Speed(speed float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(speed)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetSpeed sets the Speed property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#speed
+func (a *ArcRotateCamera) SetSpeed(speed float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(speed)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// Target returns the Target property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#target
+func (a *ArcRotateCamera) Target(target *Vector3) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(target.JSObject())
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetTarget sets the Target property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#target
+func (a *ArcRotateCamera) SetTarget(target *Vector3) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(target.JSObject())
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// TargetScreenOffset returns the TargetScreenOffset property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#targetscreenoffset
+func (a *ArcRotateCamera) TargetScreenOffset(targetScreenOffset *Vector2) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(targetScreenOffset.JSObject())
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetTargetScreenOffset sets the TargetScreenOffset property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#targetscreenoffset
+func (a *ArcRotateCamera) SetTargetScreenOffset(targetScreenOffset *Vector2) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(targetScreenOffset.JSObject())
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// UpVector returns the UpVector property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#upvector
+func (a *ArcRotateCamera) UpVector(upVector *Vector3) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(upVector.JSObject())
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetUpVector sets the UpVector property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#upvector
+func (a *ArcRotateCamera) SetUpVector(upVector *Vector3) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(upVector.JSObject())
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// UpdateUpVectorFromRotation returns the UpdateUpVectorFromRotation property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#updateupvectorfromrotation
+func (a *ArcRotateCamera) UpdateUpVectorFromRotation(updateUpVectorFromRotation bool) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(updateUpVectorFromRotation)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateUpVectorFromRotation sets the UpdateUpVectorFromRotation property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#updateupvectorfromrotation
+func (a *ArcRotateCamera) SetUpdateUpVectorFromRotation(updateUpVectorFromRotation bool) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(updateUpVectorFromRotation)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// UpperAlphaLimit returns the UpperAlphaLimit property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#upperalphalimit
+func (a *ArcRotateCamera) UpperAlphaLimit(upperAlphaLimit float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(upperAlphaLimit)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetUpperAlphaLimit sets the UpperAlphaLimit property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#upperalphalimit
+func (a *ArcRotateCamera) SetUpperAlphaLimit(upperAlphaLimit float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(upperAlphaLimit)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// UpperBetaLimit returns the UpperBetaLimit property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#upperbetalimit
+func (a *ArcRotateCamera) UpperBetaLimit(upperBetaLimit float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(upperBetaLimit)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetUpperBetaLimit sets the UpperBetaLimit property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#upperbetalimit
+func (a *ArcRotateCamera) SetUpperBetaLimit(upperBetaLimit float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(upperBetaLimit)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// UpperRadiusLimit returns the UpperRadiusLimit property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#upperradiuslimit
+func (a *ArcRotateCamera) UpperRadiusLimit(upperRadiusLimit float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(upperRadiusLimit)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetUpperRadiusLimit sets the UpperRadiusLimit property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#upperradiuslimit
+func (a *ArcRotateCamera) SetUpperRadiusLimit(upperRadiusLimit float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(upperRadiusLimit)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// UseAutoRotationBehavior returns the UseAutoRotationBehavior property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#useautorotationbehavior
+func (a *ArcRotateCamera) UseAutoRotationBehavior(useAutoRotationBehavior bool) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(useAutoRotationBehavior)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetUseAutoRotationBehavior sets the UseAutoRotationBehavior property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#useautorotationbehavior
+func (a *ArcRotateCamera) SetUseAutoRotationBehavior(useAutoRotationBehavior bool) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(useAutoRotationBehavior)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// UseBouncingBehavior returns the UseBouncingBehavior property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#usebouncingbehavior
+func (a *ArcRotateCamera) UseBouncingBehavior(useBouncingBehavior bool) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(useBouncingBehavior)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetUseBouncingBehavior sets the UseBouncingBehavior property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#usebouncingbehavior
+func (a *ArcRotateCamera) SetUseBouncingBehavior(useBouncingBehavior bool) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(useBouncingBehavior)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// UseFramingBehavior returns the UseFramingBehavior property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#useframingbehavior
+func (a *ArcRotateCamera) UseFramingBehavior(useFramingBehavior bool) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(useFramingBehavior)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetUseFramingBehavior sets the UseFramingBehavior property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#useframingbehavior
+func (a *ArcRotateCamera) SetUseFramingBehavior(useFramingBehavior bool) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(useFramingBehavior)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// UseInputToRestoreState returns the UseInputToRestoreState property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#useinputtorestorestate
+func (a *ArcRotateCamera) UseInputToRestoreState(useInputToRestoreState bool) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(useInputToRestoreState)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetUseInputToRestoreState sets the UseInputToRestoreState property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#useinputtorestorestate
+func (a *ArcRotateCamera) SetUseInputToRestoreState(useInputToRestoreState bool) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(useInputToRestoreState)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// WheelDeltaPercentage returns the WheelDeltaPercentage property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#wheeldeltapercentage
+func (a *ArcRotateCamera) WheelDeltaPercentage(wheelDeltaPercentage float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(wheelDeltaPercentage)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetWheelDeltaPercentage sets the WheelDeltaPercentage property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#wheeldeltapercentage
+func (a *ArcRotateCamera) SetWheelDeltaPercentage(wheelDeltaPercentage float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(wheelDeltaPercentage)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// WheelPrecision returns the WheelPrecision property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#wheelprecision
+func (a *ArcRotateCamera) WheelPrecision(wheelPrecision float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(wheelPrecision)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetWheelPrecision sets the WheelPrecision property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#wheelprecision
+func (a *ArcRotateCamera) SetWheelPrecision(wheelPrecision float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(wheelPrecision)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// ZoomOnFactor returns the ZoomOnFactor property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#zoomonfactor
+func (a *ArcRotateCamera) ZoomOnFactor(zoomOnFactor float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(zoomOnFactor)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetZoomOnFactor sets the ZoomOnFactor property of class ArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.arcrotatecamera#zoomonfactor
+func (a *ArcRotateCamera) SetZoomOnFactor(zoomOnFactor float64) *ArcRotateCamera {
+	p := ba.ctx.Get("ArcRotateCamera").New(zoomOnFactor)
+	return ArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+*/

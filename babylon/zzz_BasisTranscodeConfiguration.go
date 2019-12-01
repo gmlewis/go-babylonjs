@@ -27,4 +27,54 @@ func BasisTranscodeConfigurationFromJSObject(p js.Value, ctx js.Value) *BasisTra
 	return &BasisTranscodeConfiguration{p: p, ctx: ctx}
 }
 
-// TODO: methods
+/*
+
+// LoadMipmapLevels returns the LoadMipmapLevels property of class BasisTranscodeConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.basistranscodeconfiguration#loadmipmaplevels
+func (b *BasisTranscodeConfiguration) LoadMipmapLevels(loadMipmapLevels bool) *BasisTranscodeConfiguration {
+	p := ba.ctx.Get("BasisTranscodeConfiguration").New(loadMipmapLevels)
+	return BasisTranscodeConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetLoadMipmapLevels sets the LoadMipmapLevels property of class BasisTranscodeConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.basistranscodeconfiguration#loadmipmaplevels
+func (b *BasisTranscodeConfiguration) SetLoadMipmapLevels(loadMipmapLevels bool) *BasisTranscodeConfiguration {
+	p := ba.ctx.Get("BasisTranscodeConfiguration").New(loadMipmapLevels)
+	return BasisTranscodeConfigurationFromJSObject(p, ba.ctx)
+}
+
+// LoadSingleImage returns the LoadSingleImage property of class BasisTranscodeConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.basistranscodeconfiguration#loadsingleimage
+func (b *BasisTranscodeConfiguration) LoadSingleImage(loadSingleImage float64) *BasisTranscodeConfiguration {
+	p := ba.ctx.Get("BasisTranscodeConfiguration").New(loadSingleImage)
+	return BasisTranscodeConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetLoadSingleImage sets the LoadSingleImage property of class BasisTranscodeConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.basistranscodeconfiguration#loadsingleimage
+func (b *BasisTranscodeConfiguration) SetLoadSingleImage(loadSingleImage float64) *BasisTranscodeConfiguration {
+	p := ba.ctx.Get("BasisTranscodeConfiguration").New(loadSingleImage)
+	return BasisTranscodeConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SupportedCompressionFormats returns the SupportedCompressionFormats property of class BasisTranscodeConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.basistranscodeconfiguration#supportedcompressionformats
+func (b *BasisTranscodeConfiguration) SupportedCompressionFormats(supportedCompressionFormats js.Value) *BasisTranscodeConfiguration {
+	p := ba.ctx.Get("BasisTranscodeConfiguration").New(supportedCompressionFormats)
+	return BasisTranscodeConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetSupportedCompressionFormats sets the SupportedCompressionFormats property of class BasisTranscodeConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.basistranscodeconfiguration#supportedcompressionformats
+func (b *BasisTranscodeConfiguration) SetSupportedCompressionFormats(supportedCompressionFormats js.Value) *BasisTranscodeConfiguration {
+	p := ba.ctx.Get("BasisTranscodeConfiguration").New(supportedCompressionFormats)
+	return BasisTranscodeConfigurationFromJSObject(p, ba.ctx)
+}
+
+*/

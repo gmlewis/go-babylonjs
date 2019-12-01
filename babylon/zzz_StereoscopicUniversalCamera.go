@@ -33,8 +33,509 @@ func StereoscopicUniversalCameraFromJSObject(p js.Value, ctx js.Value) *Stereosc
 //
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera
 func (ba *Babylon) NewStereoscopicUniversalCamera(name string, position *Vector3, interaxialDistance float64, isStereoscopicSideBySide bool, scene *Scene) *StereoscopicUniversalCamera {
-	p := ba.ctx.Get("StereoscopicUniversalCamera").New(name, position.JSObject(), interaxialDistance, isStereoscopicSideBySide, scene.JSObject())
+
+	args := make([]interface{}, 0, 5+0)
+
+	args = append(args, name)
+	args = append(args, position.JSObject())
+	args = append(args, interaxialDistance)
+	args = append(args, isStereoscopicSideBySide)
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(args...)
 	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// StereoscopicUniversalCameraAttachControlOpts contains optional parameters for StereoscopicUniversalCamera.AttachControl.
+type StereoscopicUniversalCameraAttachControlOpts struct {
+	NoPreventDefault *bool
+}
+
+// AttachControl calls the AttachControl method on the StereoscopicUniversalCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#attachcontrol
+func (s *StereoscopicUniversalCamera) AttachControl(element js.Value, opts *StereoscopicUniversalCameraAttachControlOpts) {
+	if opts == nil {
+		opts = &StereoscopicUniversalCameraAttachControlOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, element)
+
+	if opts.NoPreventDefault == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoPreventDefault)
+	}
+
+	s.p.Call("attachControl", args...)
+}
+
+// DetachControl calls the DetachControl method on the StereoscopicUniversalCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#detachcontrol
+func (s *StereoscopicUniversalCamera) DetachControl(element js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, element)
+
+	s.p.Call("detachControl", args...)
+}
+
+// Dispose calls the Dispose method on the StereoscopicUniversalCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#dispose
+func (s *StereoscopicUniversalCamera) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("dispose", args...)
+}
+
+// GetClassName calls the GetClassName method on the StereoscopicUniversalCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#getclassname
+func (s *StereoscopicUniversalCamera) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetFrontPosition calls the GetFrontPosition method on the StereoscopicUniversalCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#getfrontposition
+func (s *StereoscopicUniversalCamera) GetFrontPosition(distance float64) *Vector3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, distance)
+
+	retVal := s.p.Call("getFrontPosition", args...)
+	return Vector3FromJSObject(retVal, s.ctx)
+}
+
+// GetTarget calls the GetTarget method on the StereoscopicUniversalCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#gettarget
+func (s *StereoscopicUniversalCamera) GetTarget() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getTarget", args...)
+	return Vector3FromJSObject(retVal, s.ctx)
+}
+
+// SetTarget calls the SetTarget method on the StereoscopicUniversalCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#settarget
+func (s *StereoscopicUniversalCamera) SetTarget(target *Vector3) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, target.JSObject())
+
+	s.p.Call("setTarget", args...)
+}
+
+// StoreState calls the StoreState method on the StereoscopicUniversalCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#storestate
+func (s *StereoscopicUniversalCamera) StoreState() *Camera {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("storeState", args...)
+	return CameraFromJSObject(retVal, s.ctx)
+}
+
+/*
+
+// AngularSensibility returns the AngularSensibility property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#angularsensibility
+func (s *StereoscopicUniversalCamera) AngularSensibility(angularSensibility float64) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(angularSensibility)
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetAngularSensibility sets the AngularSensibility property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#angularsensibility
+func (s *StereoscopicUniversalCamera) SetAngularSensibility(angularSensibility float64) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(angularSensibility)
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// ApplyGravity returns the ApplyGravity property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#applygravity
+func (s *StereoscopicUniversalCamera) ApplyGravity(applyGravity bool) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(applyGravity)
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetApplyGravity sets the ApplyGravity property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#applygravity
+func (s *StereoscopicUniversalCamera) SetApplyGravity(applyGravity bool) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(applyGravity)
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// CameraDirection returns the CameraDirection property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#cameradirection
+func (s *StereoscopicUniversalCamera) CameraDirection(cameraDirection *Vector3) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(cameraDirection.JSObject())
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetCameraDirection sets the CameraDirection property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#cameradirection
+func (s *StereoscopicUniversalCamera) SetCameraDirection(cameraDirection *Vector3) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(cameraDirection.JSObject())
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// CameraRotation returns the CameraRotation property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#camerarotation
+func (s *StereoscopicUniversalCamera) CameraRotation(cameraRotation *Vector2) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(cameraRotation.JSObject())
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetCameraRotation sets the CameraRotation property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#camerarotation
+func (s *StereoscopicUniversalCamera) SetCameraRotation(cameraRotation *Vector2) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(cameraRotation.JSObject())
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// CheckCollisions returns the CheckCollisions property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#checkcollisions
+func (s *StereoscopicUniversalCamera) CheckCollisions(checkCollisions bool) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(checkCollisions)
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetCheckCollisions sets the CheckCollisions property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#checkcollisions
+func (s *StereoscopicUniversalCamera) SetCheckCollisions(checkCollisions bool) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(checkCollisions)
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// CollisionMask returns the CollisionMask property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#collisionmask
+func (s *StereoscopicUniversalCamera) CollisionMask(collisionMask float64) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(collisionMask)
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetCollisionMask sets the CollisionMask property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#collisionmask
+func (s *StereoscopicUniversalCamera) SetCollisionMask(collisionMask float64) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(collisionMask)
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// Ellipsoid returns the Ellipsoid property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#ellipsoid
+func (s *StereoscopicUniversalCamera) Ellipsoid(ellipsoid *Vector3) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(ellipsoid.JSObject())
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetEllipsoid sets the Ellipsoid property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#ellipsoid
+func (s *StereoscopicUniversalCamera) SetEllipsoid(ellipsoid *Vector3) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(ellipsoid.JSObject())
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// EllipsoidOffset returns the EllipsoidOffset property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#ellipsoidoffset
+func (s *StereoscopicUniversalCamera) EllipsoidOffset(ellipsoidOffset *Vector3) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(ellipsoidOffset.JSObject())
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetEllipsoidOffset sets the EllipsoidOffset property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#ellipsoidoffset
+func (s *StereoscopicUniversalCamera) SetEllipsoidOffset(ellipsoidOffset *Vector3) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(ellipsoidOffset.JSObject())
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// GamepadAngularSensibility returns the GamepadAngularSensibility property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#gamepadangularsensibility
+func (s *StereoscopicUniversalCamera) GamepadAngularSensibility(gamepadAngularSensibility float64) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(gamepadAngularSensibility)
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetGamepadAngularSensibility sets the GamepadAngularSensibility property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#gamepadangularsensibility
+func (s *StereoscopicUniversalCamera) SetGamepadAngularSensibility(gamepadAngularSensibility float64) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(gamepadAngularSensibility)
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// GamepadMoveSensibility returns the GamepadMoveSensibility property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#gamepadmovesensibility
+func (s *StereoscopicUniversalCamera) GamepadMoveSensibility(gamepadMoveSensibility float64) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(gamepadMoveSensibility)
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetGamepadMoveSensibility sets the GamepadMoveSensibility property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#gamepadmovesensibility
+func (s *StereoscopicUniversalCamera) SetGamepadMoveSensibility(gamepadMoveSensibility float64) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(gamepadMoveSensibility)
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// Inputs returns the Inputs property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#inputs
+func (s *StereoscopicUniversalCamera) Inputs(inputs *FreeCameraInputsManager) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(inputs.JSObject())
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetInputs sets the Inputs property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#inputs
+func (s *StereoscopicUniversalCamera) SetInputs(inputs *FreeCameraInputsManager) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(inputs.JSObject())
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// KeysDown returns the KeysDown property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#keysdown
+func (s *StereoscopicUniversalCamera) KeysDown(keysDown float64) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(keysDown)
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetKeysDown sets the KeysDown property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#keysdown
+func (s *StereoscopicUniversalCamera) SetKeysDown(keysDown float64) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(keysDown)
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// KeysLeft returns the KeysLeft property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#keysleft
+func (s *StereoscopicUniversalCamera) KeysLeft(keysLeft float64) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(keysLeft)
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetKeysLeft sets the KeysLeft property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#keysleft
+func (s *StereoscopicUniversalCamera) SetKeysLeft(keysLeft float64) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(keysLeft)
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// KeysRight returns the KeysRight property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#keysright
+func (s *StereoscopicUniversalCamera) KeysRight(keysRight float64) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(keysRight)
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetKeysRight sets the KeysRight property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#keysright
+func (s *StereoscopicUniversalCamera) SetKeysRight(keysRight float64) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(keysRight)
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// KeysUp returns the KeysUp property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#keysup
+func (s *StereoscopicUniversalCamera) KeysUp(keysUp float64) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(keysUp)
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetKeysUp sets the KeysUp property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#keysup
+func (s *StereoscopicUniversalCamera) SetKeysUp(keysUp float64) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(keysUp)
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// LockedTarget returns the LockedTarget property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#lockedtarget
+func (s *StereoscopicUniversalCamera) LockedTarget(lockedTarget interface{}) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(lockedTarget)
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetLockedTarget sets the LockedTarget property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#lockedtarget
+func (s *StereoscopicUniversalCamera) SetLockedTarget(lockedTarget interface{}) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(lockedTarget)
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// NoRotationConstraint returns the NoRotationConstraint property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#norotationconstraint
+func (s *StereoscopicUniversalCamera) NoRotationConstraint(noRotationConstraint bool) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(noRotationConstraint)
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetNoRotationConstraint sets the NoRotationConstraint property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#norotationconstraint
+func (s *StereoscopicUniversalCamera) SetNoRotationConstraint(noRotationConstraint bool) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(noRotationConstraint)
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// OnCollide returns the OnCollide property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#oncollide
+func (s *StereoscopicUniversalCamera) OnCollide(onCollide func()) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(onCollide)
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetOnCollide sets the OnCollide property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#oncollide
+func (s *StereoscopicUniversalCamera) SetOnCollide(onCollide func()) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(onCollide)
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// Rotation returns the Rotation property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#rotation
+func (s *StereoscopicUniversalCamera) Rotation(rotation *Vector3) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(rotation.JSObject())
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetRotation sets the Rotation property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#rotation
+func (s *StereoscopicUniversalCamera) SetRotation(rotation *Vector3) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(rotation.JSObject())
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// RotationQuaternion returns the RotationQuaternion property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#rotationquaternion
+func (s *StereoscopicUniversalCamera) RotationQuaternion(rotationQuaternion *Quaternion) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(rotationQuaternion.JSObject())
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetRotationQuaternion sets the RotationQuaternion property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#rotationquaternion
+func (s *StereoscopicUniversalCamera) SetRotationQuaternion(rotationQuaternion *Quaternion) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(rotationQuaternion.JSObject())
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// Speed returns the Speed property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#speed
+func (s *StereoscopicUniversalCamera) Speed(speed float64) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(speed)
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetSpeed sets the Speed property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#speed
+func (s *StereoscopicUniversalCamera) SetSpeed(speed float64) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(speed)
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// TouchAngularSensibility returns the TouchAngularSensibility property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#touchangularsensibility
+func (s *StereoscopicUniversalCamera) TouchAngularSensibility(touchAngularSensibility float64) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(touchAngularSensibility)
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetTouchAngularSensibility sets the TouchAngularSensibility property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#touchangularsensibility
+func (s *StereoscopicUniversalCamera) SetTouchAngularSensibility(touchAngularSensibility float64) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(touchAngularSensibility)
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// TouchMoveSensibility returns the TouchMoveSensibility property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#touchmovesensibility
+func (s *StereoscopicUniversalCamera) TouchMoveSensibility(touchMoveSensibility float64) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(touchMoveSensibility)
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetTouchMoveSensibility sets the TouchMoveSensibility property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#touchmovesensibility
+func (s *StereoscopicUniversalCamera) SetTouchMoveSensibility(touchMoveSensibility float64) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(touchMoveSensibility)
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// UpdateUpVectorFromRotation returns the UpdateUpVectorFromRotation property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#updateupvectorfromrotation
+func (s *StereoscopicUniversalCamera) UpdateUpVectorFromRotation(updateUpVectorFromRotation bool) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(updateUpVectorFromRotation)
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateUpVectorFromRotation sets the UpdateUpVectorFromRotation property of class StereoscopicUniversalCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicuniversalcamera#updateupvectorfromrotation
+func (s *StereoscopicUniversalCamera) SetUpdateUpVectorFromRotation(updateUpVectorFromRotation bool) *StereoscopicUniversalCamera {
+	p := ba.ctx.Get("StereoscopicUniversalCamera").New(updateUpVectorFromRotation)
+	return StereoscopicUniversalCameraFromJSObject(p, ba.ctx)
+}
+
+*/

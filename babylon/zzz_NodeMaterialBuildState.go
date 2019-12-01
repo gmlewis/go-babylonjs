@@ -27,4 +27,194 @@ func NodeMaterialBuildStateFromJSObject(p js.Value, ctx js.Value) *NodeMaterialB
 	return &NodeMaterialBuildState{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// Finalize calls the Finalize method on the NodeMaterialBuildState object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstate#finalize
+func (n *NodeMaterialBuildState) Finalize(state *NodeMaterialBuildState) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, state.JSObject())
+
+	n.p.Call("finalize", args...)
+}
+
+/*
+
+// Attributes returns the Attributes property of class NodeMaterialBuildState.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstate#attributes
+func (n *NodeMaterialBuildState) Attributes(attributes string) *NodeMaterialBuildState {
+	p := ba.ctx.Get("NodeMaterialBuildState").New(attributes)
+	return NodeMaterialBuildStateFromJSObject(p, ba.ctx)
+}
+
+// SetAttributes sets the Attributes property of class NodeMaterialBuildState.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstate#attributes
+func (n *NodeMaterialBuildState) SetAttributes(attributes string) *NodeMaterialBuildState {
+	p := ba.ctx.Get("NodeMaterialBuildState").New(attributes)
+	return NodeMaterialBuildStateFromJSObject(p, ba.ctx)
+}
+
+// CompilationString returns the CompilationString property of class NodeMaterialBuildState.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstate#compilationstring
+func (n *NodeMaterialBuildState) CompilationString(compilationString string) *NodeMaterialBuildState {
+	p := ba.ctx.Get("NodeMaterialBuildState").New(compilationString)
+	return NodeMaterialBuildStateFromJSObject(p, ba.ctx)
+}
+
+// SetCompilationString sets the CompilationString property of class NodeMaterialBuildState.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstate#compilationstring
+func (n *NodeMaterialBuildState) SetCompilationString(compilationString string) *NodeMaterialBuildState {
+	p := ba.ctx.Get("NodeMaterialBuildState").New(compilationString)
+	return NodeMaterialBuildStateFromJSObject(p, ba.ctx)
+}
+
+// Constants returns the Constants property of class NodeMaterialBuildState.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstate#constants
+func (n *NodeMaterialBuildState) Constants(constants string) *NodeMaterialBuildState {
+	p := ba.ctx.Get("NodeMaterialBuildState").New(constants)
+	return NodeMaterialBuildStateFromJSObject(p, ba.ctx)
+}
+
+// SetConstants sets the Constants property of class NodeMaterialBuildState.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstate#constants
+func (n *NodeMaterialBuildState) SetConstants(constants string) *NodeMaterialBuildState {
+	p := ba.ctx.Get("NodeMaterialBuildState").New(constants)
+	return NodeMaterialBuildStateFromJSObject(p, ba.ctx)
+}
+
+// Counters returns the Counters property of class NodeMaterialBuildState.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstate#counters
+func (n *NodeMaterialBuildState) Counters(counters js.Value) *NodeMaterialBuildState {
+	p := ba.ctx.Get("NodeMaterialBuildState").New(counters)
+	return NodeMaterialBuildStateFromJSObject(p, ba.ctx)
+}
+
+// SetCounters sets the Counters property of class NodeMaterialBuildState.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstate#counters
+func (n *NodeMaterialBuildState) SetCounters(counters js.Value) *NodeMaterialBuildState {
+	p := ba.ctx.Get("NodeMaterialBuildState").New(counters)
+	return NodeMaterialBuildStateFromJSObject(p, ba.ctx)
+}
+
+// Extensions returns the Extensions property of class NodeMaterialBuildState.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstate#extensions
+func (n *NodeMaterialBuildState) Extensions(extensions js.Value) *NodeMaterialBuildState {
+	p := ba.ctx.Get("NodeMaterialBuildState").New(extensions)
+	return NodeMaterialBuildStateFromJSObject(p, ba.ctx)
+}
+
+// SetExtensions sets the Extensions property of class NodeMaterialBuildState.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstate#extensions
+func (n *NodeMaterialBuildState) SetExtensions(extensions js.Value) *NodeMaterialBuildState {
+	p := ba.ctx.Get("NodeMaterialBuildState").New(extensions)
+	return NodeMaterialBuildStateFromJSObject(p, ba.ctx)
+}
+
+// Functions returns the Functions property of class NodeMaterialBuildState.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstate#functions
+func (n *NodeMaterialBuildState) Functions(functions js.Value) *NodeMaterialBuildState {
+	p := ba.ctx.Get("NodeMaterialBuildState").New(functions)
+	return NodeMaterialBuildStateFromJSObject(p, ba.ctx)
+}
+
+// SetFunctions sets the Functions property of class NodeMaterialBuildState.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstate#functions
+func (n *NodeMaterialBuildState) SetFunctions(functions js.Value) *NodeMaterialBuildState {
+	p := ba.ctx.Get("NodeMaterialBuildState").New(functions)
+	return NodeMaterialBuildStateFromJSObject(p, ba.ctx)
+}
+
+// Samplers returns the Samplers property of class NodeMaterialBuildState.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstate#samplers
+func (n *NodeMaterialBuildState) Samplers(samplers string) *NodeMaterialBuildState {
+	p := ba.ctx.Get("NodeMaterialBuildState").New(samplers)
+	return NodeMaterialBuildStateFromJSObject(p, ba.ctx)
+}
+
+// SetSamplers sets the Samplers property of class NodeMaterialBuildState.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstate#samplers
+func (n *NodeMaterialBuildState) SetSamplers(samplers string) *NodeMaterialBuildState {
+	p := ba.ctx.Get("NodeMaterialBuildState").New(samplers)
+	return NodeMaterialBuildStateFromJSObject(p, ba.ctx)
+}
+
+// SharedData returns the SharedData property of class NodeMaterialBuildState.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstate#shareddata
+func (n *NodeMaterialBuildState) SharedData(sharedData *NodeMaterialBuildStateSharedData) *NodeMaterialBuildState {
+	p := ba.ctx.Get("NodeMaterialBuildState").New(sharedData.JSObject())
+	return NodeMaterialBuildStateFromJSObject(p, ba.ctx)
+}
+
+// SetSharedData sets the SharedData property of class NodeMaterialBuildState.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstate#shareddata
+func (n *NodeMaterialBuildState) SetSharedData(sharedData *NodeMaterialBuildStateSharedData) *NodeMaterialBuildState {
+	p := ba.ctx.Get("NodeMaterialBuildState").New(sharedData.JSObject())
+	return NodeMaterialBuildStateFromJSObject(p, ba.ctx)
+}
+
+// SupportUniformBuffers returns the SupportUniformBuffers property of class NodeMaterialBuildState.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstate#supportuniformbuffers
+func (n *NodeMaterialBuildState) SupportUniformBuffers(supportUniformBuffers bool) *NodeMaterialBuildState {
+	p := ba.ctx.Get("NodeMaterialBuildState").New(supportUniformBuffers)
+	return NodeMaterialBuildStateFromJSObject(p, ba.ctx)
+}
+
+// SetSupportUniformBuffers sets the SupportUniformBuffers property of class NodeMaterialBuildState.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstate#supportuniformbuffers
+func (n *NodeMaterialBuildState) SetSupportUniformBuffers(supportUniformBuffers bool) *NodeMaterialBuildState {
+	p := ba.ctx.Get("NodeMaterialBuildState").New(supportUniformBuffers)
+	return NodeMaterialBuildStateFromJSObject(p, ba.ctx)
+}
+
+// Target returns the Target property of class NodeMaterialBuildState.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstate#target
+func (n *NodeMaterialBuildState) Target(target js.Value) *NodeMaterialBuildState {
+	p := ba.ctx.Get("NodeMaterialBuildState").New(target)
+	return NodeMaterialBuildStateFromJSObject(p, ba.ctx)
+}
+
+// SetTarget sets the Target property of class NodeMaterialBuildState.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstate#target
+func (n *NodeMaterialBuildState) SetTarget(target js.Value) *NodeMaterialBuildState {
+	p := ba.ctx.Get("NodeMaterialBuildState").New(target)
+	return NodeMaterialBuildStateFromJSObject(p, ba.ctx)
+}
+
+// Uniforms returns the Uniforms property of class NodeMaterialBuildState.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstate#uniforms
+func (n *NodeMaterialBuildState) Uniforms(uniforms string) *NodeMaterialBuildState {
+	p := ba.ctx.Get("NodeMaterialBuildState").New(uniforms)
+	return NodeMaterialBuildStateFromJSObject(p, ba.ctx)
+}
+
+// SetUniforms sets the Uniforms property of class NodeMaterialBuildState.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialbuildstate#uniforms
+func (n *NodeMaterialBuildState) SetUniforms(uniforms string) *NodeMaterialBuildState {
+	p := ba.ctx.Get("NodeMaterialBuildState").New(uniforms)
+	return NodeMaterialBuildStateFromJSObject(p, ba.ctx)
+}
+
+*/

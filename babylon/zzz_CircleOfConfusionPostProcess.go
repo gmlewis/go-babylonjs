@@ -29,15 +29,11 @@ func CircleOfConfusionPostProcessFromJSObject(p js.Value, ctx js.Value) *CircleO
 
 // NewCircleOfConfusionPostProcessOpts contains optional parameters for NewCircleOfConfusionPostProcess.
 type NewCircleOfConfusionPostProcessOpts struct {
-	SamplingMode *JSFloat64
-
-	Engine *Engine
-
-	Reusable *JSBool
-
-	TextureType *JSFloat64
-
-	BlockCompilation *JSBool
+	SamplingMode     *float64
+	Engine           *Engine
+	Reusable         *bool
+	TextureType      *float64
+	BlockCompilation *bool
 }
 
 // NewCircleOfConfusionPostProcess returns a new CircleOfConfusionPostProcess object.
@@ -48,8 +44,851 @@ func (ba *Babylon) NewCircleOfConfusionPostProcess(name string, depthTexture *Re
 		opts = &NewCircleOfConfusionPostProcessOpts{}
 	}
 
-	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(name, depthTexture.JSObject(), options, camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType.JSObject(), opts.BlockCompilation.JSObject())
+	args := make([]interface{}, 0, 4+5)
+
+	args = append(args, name)
+	args = append(args, depthTexture.JSObject())
+	args = append(args, options)
+	args = append(args, camera.JSObject())
+
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+	if opts.Engine == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Engine.JSObject())
+	}
+	if opts.Reusable == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Reusable)
+	}
+	if opts.TextureType == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.TextureType)
+	}
+	if opts.BlockCompilation == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.BlockCompilation)
+	}
+
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(args...)
 	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// CircleOfConfusionPostProcessActivateOpts contains optional parameters for CircleOfConfusionPostProcess.Activate.
+type CircleOfConfusionPostProcessActivateOpts struct {
+	SourceTexture     *InternalTexture
+	ForceDepthStencil *bool
+}
+
+// Activate calls the Activate method on the CircleOfConfusionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#activate
+func (c *CircleOfConfusionPostProcess) Activate(camera *Camera, opts *CircleOfConfusionPostProcessActivateOpts) *InternalTexture {
+	if opts == nil {
+		opts = &CircleOfConfusionPostProcessActivateOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, camera.JSObject())
+
+	if opts.SourceTexture == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.SourceTexture.JSObject())
+	}
+	if opts.ForceDepthStencil == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceDepthStencil)
+	}
+
+	retVal := c.p.Call("activate", args...)
+	return InternalTextureFromJSObject(retVal, c.ctx)
+}
+
+// Apply calls the Apply method on the CircleOfConfusionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#apply
+func (c *CircleOfConfusionPostProcess) Apply() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("apply", args...)
+	return EffectFromJSObject(retVal, c.ctx)
+}
+
+// CircleOfConfusionPostProcessDisposeOpts contains optional parameters for CircleOfConfusionPostProcess.Dispose.
+type CircleOfConfusionPostProcessDisposeOpts struct {
+	Camera *Camera
+}
+
+// Dispose calls the Dispose method on the CircleOfConfusionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#dispose
+func (c *CircleOfConfusionPostProcess) Dispose(opts *CircleOfConfusionPostProcessDisposeOpts) {
+	if opts == nil {
+		opts = &CircleOfConfusionPostProcessDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Camera == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Camera.JSObject())
+	}
+
+	c.p.Call("dispose", args...)
+}
+
+// GetCamera calls the GetCamera method on the CircleOfConfusionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#getcamera
+func (c *CircleOfConfusionPostProcess) GetCamera() *Camera {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getCamera", args...)
+	return CameraFromJSObject(retVal, c.ctx)
+}
+
+// GetClassName calls the GetClassName method on the CircleOfConfusionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#getclassname
+func (c *CircleOfConfusionPostProcess) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetEffect calls the GetEffect method on the CircleOfConfusionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#geteffect
+func (c *CircleOfConfusionPostProcess) GetEffect() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getEffect", args...)
+	return EffectFromJSObject(retVal, c.ctx)
+}
+
+// GetEffectName calls the GetEffectName method on the CircleOfConfusionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#geteffectname
+func (c *CircleOfConfusionPostProcess) GetEffectName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getEffectName", args...)
+	return retVal.String()
+}
+
+// GetEngine calls the GetEngine method on the CircleOfConfusionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#getengine
+func (c *CircleOfConfusionPostProcess) GetEngine() *Engine {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getEngine", args...)
+	return EngineFromJSObject(retVal, c.ctx)
+}
+
+// IsReady calls the IsReady method on the CircleOfConfusionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#isready
+func (c *CircleOfConfusionPostProcess) IsReady() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// IsReusable calls the IsReusable method on the CircleOfConfusionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#isreusable
+func (c *CircleOfConfusionPostProcess) IsReusable() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("isReusable", args...)
+	return retVal.Bool()
+}
+
+// MarkTextureDirty calls the MarkTextureDirty method on the CircleOfConfusionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#marktexturedirty
+func (c *CircleOfConfusionPostProcess) MarkTextureDirty() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	c.p.Call("markTextureDirty", args...)
+}
+
+// ShareOutputWith calls the ShareOutputWith method on the CircleOfConfusionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#shareoutputwith
+func (c *CircleOfConfusionPostProcess) ShareOutputWith(postProcess *PostProcess) *PostProcess {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, postProcess.JSObject())
+
+	retVal := c.p.Call("shareOutputWith", args...)
+	return PostProcessFromJSObject(retVal, c.ctx)
+}
+
+// CircleOfConfusionPostProcessUpdateEffectOpts contains optional parameters for CircleOfConfusionPostProcess.UpdateEffect.
+type CircleOfConfusionPostProcessUpdateEffectOpts struct {
+	Defines         *string
+	Uniforms        *string
+	Samplers        *string
+	IndexParameters *interface{}
+	OnCompiled      *func()
+	OnError         *func()
+}
+
+// UpdateEffect calls the UpdateEffect method on the CircleOfConfusionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#updateeffect
+func (c *CircleOfConfusionPostProcess) UpdateEffect(opts *CircleOfConfusionPostProcessUpdateEffectOpts) {
+	if opts == nil {
+		opts = &CircleOfConfusionPostProcessUpdateEffectOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+6)
+
+	if opts.Defines == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Defines)
+	}
+	if opts.Uniforms == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Uniforms)
+	}
+	if opts.Samplers == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Samplers)
+	}
+	if opts.IndexParameters == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.IndexParameters)
+	}
+	if opts.OnCompiled == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnCompiled)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+
+	c.p.Call("updateEffect", args...)
+}
+
+// UseOwnOutput calls the UseOwnOutput method on the CircleOfConfusionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#useownoutput
+func (c *CircleOfConfusionPostProcess) UseOwnOutput() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	c.p.Call("useOwnOutput", args...)
+}
+
+/*
+
+// AdaptScaleToCurrentViewport returns the AdaptScaleToCurrentViewport property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#adaptscaletocurrentviewport
+func (c *CircleOfConfusionPostProcess) AdaptScaleToCurrentViewport(adaptScaleToCurrentViewport bool) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(adaptScaleToCurrentViewport)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAdaptScaleToCurrentViewport sets the AdaptScaleToCurrentViewport property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#adaptscaletocurrentviewport
+func (c *CircleOfConfusionPostProcess) SetAdaptScaleToCurrentViewport(adaptScaleToCurrentViewport bool) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(adaptScaleToCurrentViewport)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AlphaConstants returns the AlphaConstants property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#alphaconstants
+func (c *CircleOfConfusionPostProcess) AlphaConstants(alphaConstants *Color4) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(alphaConstants.JSObject())
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaConstants sets the AlphaConstants property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#alphaconstants
+func (c *CircleOfConfusionPostProcess) SetAlphaConstants(alphaConstants *Color4) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(alphaConstants.JSObject())
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AlphaMode returns the AlphaMode property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#alphamode
+func (c *CircleOfConfusionPostProcess) AlphaMode(alphaMode float64) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(alphaMode)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaMode sets the AlphaMode property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#alphamode
+func (c *CircleOfConfusionPostProcess) SetAlphaMode(alphaMode float64) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(alphaMode)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AlwaysForcePOT returns the AlwaysForcePOT property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#alwaysforcepot
+func (c *CircleOfConfusionPostProcess) AlwaysForcePOT(alwaysForcePOT bool) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(alwaysForcePOT)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAlwaysForcePOT sets the AlwaysForcePOT property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#alwaysforcepot
+func (c *CircleOfConfusionPostProcess) SetAlwaysForcePOT(alwaysForcePOT bool) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(alwaysForcePOT)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Animations returns the Animations property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#animations
+func (c *CircleOfConfusionPostProcess) Animations(animations *Animation) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(animations.JSObject())
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#animations
+func (c *CircleOfConfusionPostProcess) SetAnimations(animations *Animation) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(animations.JSObject())
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AspectRatio returns the AspectRatio property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#aspectratio
+func (c *CircleOfConfusionPostProcess) AspectRatio(aspectRatio float64) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(aspectRatio)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAspectRatio sets the AspectRatio property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#aspectratio
+func (c *CircleOfConfusionPostProcess) SetAspectRatio(aspectRatio float64) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(aspectRatio)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AutoClear returns the AutoClear property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#autoclear
+func (c *CircleOfConfusionPostProcess) AutoClear(autoClear bool) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(autoClear)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAutoClear sets the AutoClear property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#autoclear
+func (c *CircleOfConfusionPostProcess) SetAutoClear(autoClear bool) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(autoClear)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ClearColor returns the ClearColor property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#clearcolor
+func (c *CircleOfConfusionPostProcess) ClearColor(clearColor *Color4) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(clearColor.JSObject())
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetClearColor sets the ClearColor property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#clearcolor
+func (c *CircleOfConfusionPostProcess) SetClearColor(clearColor *Color4) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(clearColor.JSObject())
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// DepthTexture returns the DepthTexture property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#depthtexture
+func (c *CircleOfConfusionPostProcess) DepthTexture(depthTexture *RenderTargetTexture) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(depthTexture.JSObject())
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetDepthTexture sets the DepthTexture property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#depthtexture
+func (c *CircleOfConfusionPostProcess) SetDepthTexture(depthTexture *RenderTargetTexture) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(depthTexture.JSObject())
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// EnablePixelPerfectMode returns the EnablePixelPerfectMode property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#enablepixelperfectmode
+func (c *CircleOfConfusionPostProcess) EnablePixelPerfectMode(enablePixelPerfectMode bool) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(enablePixelPerfectMode)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetEnablePixelPerfectMode sets the EnablePixelPerfectMode property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#enablepixelperfectmode
+func (c *CircleOfConfusionPostProcess) SetEnablePixelPerfectMode(enablePixelPerfectMode bool) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(enablePixelPerfectMode)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// FStop returns the FStop property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#fstop
+func (c *CircleOfConfusionPostProcess) FStop(fStop float64) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(fStop)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetFStop sets the FStop property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#fstop
+func (c *CircleOfConfusionPostProcess) SetFStop(fStop float64) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(fStop)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// FocalLength returns the FocalLength property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#focallength
+func (c *CircleOfConfusionPostProcess) FocalLength(focalLength float64) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(focalLength)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetFocalLength sets the FocalLength property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#focallength
+func (c *CircleOfConfusionPostProcess) SetFocalLength(focalLength float64) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(focalLength)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// FocusDistance returns the FocusDistance property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#focusdistance
+func (c *CircleOfConfusionPostProcess) FocusDistance(focusDistance float64) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(focusDistance)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetFocusDistance sets the FocusDistance property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#focusdistance
+func (c *CircleOfConfusionPostProcess) SetFocusDistance(focusDistance float64) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(focusDistance)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ForceFullscreenViewport returns the ForceFullscreenViewport property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#forcefullscreenviewport
+func (c *CircleOfConfusionPostProcess) ForceFullscreenViewport(forceFullscreenViewport bool) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(forceFullscreenViewport)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetForceFullscreenViewport sets the ForceFullscreenViewport property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#forcefullscreenviewport
+func (c *CircleOfConfusionPostProcess) SetForceFullscreenViewport(forceFullscreenViewport bool) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(forceFullscreenViewport)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Height returns the Height property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#height
+func (c *CircleOfConfusionPostProcess) Height(height float64) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(height)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetHeight sets the Height property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#height
+func (c *CircleOfConfusionPostProcess) SetHeight(height float64) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(height)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// InputTexture returns the InputTexture property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#inputtexture
+func (c *CircleOfConfusionPostProcess) InputTexture(inputTexture *InternalTexture) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(inputTexture.JSObject())
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetInputTexture sets the InputTexture property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#inputtexture
+func (c *CircleOfConfusionPostProcess) SetInputTexture(inputTexture *InternalTexture) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(inputTexture.JSObject())
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#inspectablecustomproperties
+func (c *CircleOfConfusionPostProcess) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(inspectableCustomProperties.JSObject())
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#inspectablecustomproperties
+func (c *CircleOfConfusionPostProcess) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(inspectableCustomProperties.JSObject())
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// IsSupported returns the IsSupported property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#issupported
+func (c *CircleOfConfusionPostProcess) IsSupported(isSupported bool) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(isSupported)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetIsSupported sets the IsSupported property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#issupported
+func (c *CircleOfConfusionPostProcess) SetIsSupported(isSupported bool) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(isSupported)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// LensSize returns the LensSize property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#lenssize
+func (c *CircleOfConfusionPostProcess) LensSize(lensSize float64) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(lensSize)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetLensSize sets the LensSize property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#lenssize
+func (c *CircleOfConfusionPostProcess) SetLensSize(lensSize float64) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(lensSize)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#name
+func (c *CircleOfConfusionPostProcess) Name(name string) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(name)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#name
+func (c *CircleOfConfusionPostProcess) SetName(name string) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(name)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnActivate returns the OnActivate property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#onactivate
+func (c *CircleOfConfusionPostProcess) OnActivate(onActivate func()) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(onActivate)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnActivate sets the OnActivate property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#onactivate
+func (c *CircleOfConfusionPostProcess) SetOnActivate(onActivate func()) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(onActivate)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnActivateObservable returns the OnActivateObservable property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#onactivateobservable
+func (c *CircleOfConfusionPostProcess) OnActivateObservable(onActivateObservable *Observable) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(onActivateObservable.JSObject())
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnActivateObservable sets the OnActivateObservable property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#onactivateobservable
+func (c *CircleOfConfusionPostProcess) SetOnActivateObservable(onActivateObservable *Observable) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(onActivateObservable.JSObject())
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnAfterRender returns the OnAfterRender property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#onafterrender
+func (c *CircleOfConfusionPostProcess) OnAfterRender(onAfterRender func()) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(onAfterRender)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterRender sets the OnAfterRender property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#onafterrender
+func (c *CircleOfConfusionPostProcess) SetOnAfterRender(onAfterRender func()) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(onAfterRender)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnAfterRenderObservable returns the OnAfterRenderObservable property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#onafterrenderobservable
+func (c *CircleOfConfusionPostProcess) OnAfterRenderObservable(onAfterRenderObservable *Observable) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(onAfterRenderObservable.JSObject())
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterRenderObservable sets the OnAfterRenderObservable property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#onafterrenderobservable
+func (c *CircleOfConfusionPostProcess) SetOnAfterRenderObservable(onAfterRenderObservable *Observable) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(onAfterRenderObservable.JSObject())
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnApply returns the OnApply property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#onapply
+func (c *CircleOfConfusionPostProcess) OnApply(onApply func()) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(onApply)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnApply sets the OnApply property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#onapply
+func (c *CircleOfConfusionPostProcess) SetOnApply(onApply func()) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(onApply)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnApplyObservable returns the OnApplyObservable property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#onapplyobservable
+func (c *CircleOfConfusionPostProcess) OnApplyObservable(onApplyObservable *Observable) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(onApplyObservable.JSObject())
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnApplyObservable sets the OnApplyObservable property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#onapplyobservable
+func (c *CircleOfConfusionPostProcess) SetOnApplyObservable(onApplyObservable *Observable) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(onApplyObservable.JSObject())
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeRender returns the OnBeforeRender property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#onbeforerender
+func (c *CircleOfConfusionPostProcess) OnBeforeRender(onBeforeRender func()) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(onBeforeRender)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeRender sets the OnBeforeRender property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#onbeforerender
+func (c *CircleOfConfusionPostProcess) SetOnBeforeRender(onBeforeRender func()) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(onBeforeRender)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeRenderObservable returns the OnBeforeRenderObservable property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#onbeforerenderobservable
+func (c *CircleOfConfusionPostProcess) OnBeforeRenderObservable(onBeforeRenderObservable *Observable) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(onBeforeRenderObservable.JSObject())
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeRenderObservable sets the OnBeforeRenderObservable property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#onbeforerenderobservable
+func (c *CircleOfConfusionPostProcess) SetOnBeforeRenderObservable(onBeforeRenderObservable *Observable) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(onBeforeRenderObservable.JSObject())
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnSizeChanged returns the OnSizeChanged property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#onsizechanged
+func (c *CircleOfConfusionPostProcess) OnSizeChanged(onSizeChanged func()) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(onSizeChanged)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnSizeChanged sets the OnSizeChanged property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#onsizechanged
+func (c *CircleOfConfusionPostProcess) SetOnSizeChanged(onSizeChanged func()) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(onSizeChanged)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnSizeChangedObservable returns the OnSizeChangedObservable property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#onsizechangedobservable
+func (c *CircleOfConfusionPostProcess) OnSizeChangedObservable(onSizeChangedObservable *Observable) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(onSizeChangedObservable.JSObject())
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnSizeChangedObservable sets the OnSizeChangedObservable property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#onsizechangedobservable
+func (c *CircleOfConfusionPostProcess) SetOnSizeChangedObservable(onSizeChangedObservable *Observable) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(onSizeChangedObservable.JSObject())
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// RenderTargetSamplingMode returns the RenderTargetSamplingMode property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#rendertargetsamplingmode
+func (c *CircleOfConfusionPostProcess) RenderTargetSamplingMode(renderTargetSamplingMode float64) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(renderTargetSamplingMode)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetRenderTargetSamplingMode sets the RenderTargetSamplingMode property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#rendertargetsamplingmode
+func (c *CircleOfConfusionPostProcess) SetRenderTargetSamplingMode(renderTargetSamplingMode float64) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(renderTargetSamplingMode)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Samples returns the Samples property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#samples
+func (c *CircleOfConfusionPostProcess) Samples(samples float64) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(samples)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetSamples sets the Samples property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#samples
+func (c *CircleOfConfusionPostProcess) SetSamples(samples float64) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(samples)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ScaleMode returns the ScaleMode property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#scalemode
+func (c *CircleOfConfusionPostProcess) ScaleMode(scaleMode float64) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(scaleMode)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetScaleMode sets the ScaleMode property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#scalemode
+func (c *CircleOfConfusionPostProcess) SetScaleMode(scaleMode float64) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(scaleMode)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// TexelSize returns the TexelSize property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#texelsize
+func (c *CircleOfConfusionPostProcess) TexelSize(texelSize *Vector2) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(texelSize.JSObject())
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetTexelSize sets the TexelSize property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#texelsize
+func (c *CircleOfConfusionPostProcess) SetTexelSize(texelSize *Vector2) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(texelSize.JSObject())
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#uniqueid
+func (c *CircleOfConfusionPostProcess) UniqueId(uniqueId float64) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(uniqueId)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#uniqueid
+func (c *CircleOfConfusionPostProcess) SetUniqueId(uniqueId float64) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(uniqueId)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Width returns the Width property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#width
+func (c *CircleOfConfusionPostProcess) Width(width float64) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(width)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetWidth sets the Width property of class CircleOfConfusionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleofconfusionpostprocess#width
+func (c *CircleOfConfusionPostProcess) SetWidth(width float64) *CircleOfConfusionPostProcess {
+	p := ba.ctx.Get("CircleOfConfusionPostProcess").New(width)
+	return CircleOfConfusionPostProcessFromJSObject(p, ba.ctx)
+}
+
+*/

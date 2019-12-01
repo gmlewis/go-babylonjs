@@ -31,8 +31,733 @@ func ColorMergerBlockFromJSObject(p js.Value, ctx js.Value) *ColorMergerBlock {
 //
 // https://doc.babylonjs.com/api/classes/babylon.colormergerblock
 func (ba *Babylon) NewColorMergerBlock(name string) *ColorMergerBlock {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	p := ba.ctx.Get("ColorMergerBlock").New(args...)
+	return ColorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// AutoConfigure calls the AutoConfigure method on the ColorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#autoconfigure
+func (c *ColorMergerBlock) AutoConfigure(material *NodeMaterial) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, material.JSObject())
+
+	c.p.Call("autoConfigure", args...)
+}
+
+// ColorMergerBlockBindOpts contains optional parameters for ColorMergerBlock.Bind.
+type ColorMergerBlockBindOpts struct {
+	Mesh *Mesh
+}
+
+// Bind calls the Bind method on the ColorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#bind
+func (c *ColorMergerBlock) Bind(effect *Effect, nodeMaterial *NodeMaterial, opts *ColorMergerBlockBindOpts) {
+	if opts == nil {
+		opts = &ColorMergerBlockBindOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, effect.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	c.p.Call("bind", args...)
+}
+
+// Build calls the Build method on the ColorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#build
+func (c *ColorMergerBlock) Build(state *NodeMaterialBuildState, activeBlocks *NodeMaterialBlock) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, state.JSObject())
+	args = append(args, activeBlocks.JSObject())
+
+	retVal := c.p.Call("build", args...)
+	return retVal.Bool()
+}
+
+// ColorMergerBlockCloneOpts contains optional parameters for ColorMergerBlock.Clone.
+type ColorMergerBlockCloneOpts struct {
+	RootUrl *string
+}
+
+// Clone calls the Clone method on the ColorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#clone
+func (c *ColorMergerBlock) Clone(scene *Scene, opts *ColorMergerBlockCloneOpts) *NodeMaterialBlock {
+	if opts == nil {
+		opts = &ColorMergerBlockCloneOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, scene.JSObject())
+
+	if opts.RootUrl == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RootUrl)
+	}
+
+	retVal := c.p.Call("clone", args...)
+	return NodeMaterialBlockFromJSObject(retVal, c.ctx)
+}
+
+// ColorMergerBlockConnectToOpts contains optional parameters for ColorMergerBlock.ConnectTo.
+type ColorMergerBlockConnectToOpts struct {
+	Options js.Value
+}
+
+// ConnectTo calls the ConnectTo method on the ColorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#connectto
+func (c *ColorMergerBlock) ConnectTo(other *NodeMaterialBlock, opts *ColorMergerBlockConnectToOpts) *ColorMergerBlock {
+	if opts == nil {
+		opts = &ColorMergerBlockConnectToOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, other.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	retVal := c.p.Call("connectTo", args...)
+	return ColorMergerBlockFromJSObject(retVal, c.ctx)
+}
+
+// Dispose calls the Dispose method on the ColorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#dispose
+func (c *ColorMergerBlock) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	c.p.Call("dispose", args...)
+}
+
+// GetClassName calls the GetClassName method on the ColorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#getclassname
+func (c *ColorMergerBlock) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// ColorMergerBlockGetFirstAvailableInputOpts contains optional parameters for ColorMergerBlock.GetFirstAvailableInput.
+type ColorMergerBlockGetFirstAvailableInputOpts struct {
+	ForOutput *NodeMaterialConnectionPoint
+}
+
+// GetFirstAvailableInput calls the GetFirstAvailableInput method on the ColorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#getfirstavailableinput
+func (c *ColorMergerBlock) GetFirstAvailableInput(opts *ColorMergerBlockGetFirstAvailableInputOpts) *NodeMaterialConnectionPoint {
+	if opts == nil {
+		opts = &ColorMergerBlockGetFirstAvailableInputOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForOutput == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForOutput.JSObject())
+	}
+
+	retVal := c.p.Call("getFirstAvailableInput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, c.ctx)
+}
+
+// ColorMergerBlockGetFirstAvailableOutputOpts contains optional parameters for ColorMergerBlock.GetFirstAvailableOutput.
+type ColorMergerBlockGetFirstAvailableOutputOpts struct {
+	ForBlock *NodeMaterialBlock
+}
+
+// GetFirstAvailableOutput calls the GetFirstAvailableOutput method on the ColorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#getfirstavailableoutput
+func (c *ColorMergerBlock) GetFirstAvailableOutput(opts *ColorMergerBlockGetFirstAvailableOutputOpts) *NodeMaterialConnectionPoint {
+	if opts == nil {
+		opts = &ColorMergerBlockGetFirstAvailableOutputOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForBlock == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForBlock.JSObject())
+	}
+
+	retVal := c.p.Call("getFirstAvailableOutput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, c.ctx)
+}
+
+// GetInputByName calls the GetInputByName method on the ColorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#getinputbyname
+func (c *ColorMergerBlock) GetInputByName(name string) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := c.p.Call("getInputByName", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, c.ctx)
+}
+
+// GetOutputByName calls the GetOutputByName method on the ColorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#getoutputbyname
+func (c *ColorMergerBlock) GetOutputByName(name string) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := c.p.Call("getOutputByName", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, c.ctx)
+}
+
+// GetSiblingOutput calls the GetSiblingOutput method on the ColorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#getsiblingoutput
+func (c *ColorMergerBlock) GetSiblingOutput(current *NodeMaterialConnectionPoint) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, current.JSObject())
+
+	retVal := c.p.Call("getSiblingOutput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, c.ctx)
+}
+
+// Initialize calls the Initialize method on the ColorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#initialize
+func (c *ColorMergerBlock) Initialize(state *NodeMaterialBuildState) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, state.JSObject())
+
+	c.p.Call("initialize", args...)
+}
+
+// ColorMergerBlockInitializeDefinesOpts contains optional parameters for ColorMergerBlock.InitializeDefines.
+type ColorMergerBlockInitializeDefinesOpts struct {
+	UseInstances *bool
+}
+
+// InitializeDefines calls the InitializeDefines method on the ColorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#initializedefines
+func (c *ColorMergerBlock) InitializeDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *ColorMergerBlockInitializeDefinesOpts) {
+	if opts == nil {
+		opts = &ColorMergerBlockInitializeDefinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	c.p.Call("initializeDefines", args...)
+}
+
+// ColorMergerBlockIsReadyOpts contains optional parameters for ColorMergerBlock.IsReady.
+type ColorMergerBlockIsReadyOpts struct {
+	UseInstances *bool
+}
+
+// IsReady calls the IsReady method on the ColorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#isready
+func (c *ColorMergerBlock) IsReady(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *ColorMergerBlockIsReadyOpts) bool {
+	if opts == nil {
+		opts = &ColorMergerBlockIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := c.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// ColorMergerBlockPrepareDefinesOpts contains optional parameters for ColorMergerBlock.PrepareDefines.
+type ColorMergerBlockPrepareDefinesOpts struct {
+	UseInstances *bool
+}
+
+// PrepareDefines calls the PrepareDefines method on the ColorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#preparedefines
+func (c *ColorMergerBlock) PrepareDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *ColorMergerBlockPrepareDefinesOpts) {
+	if opts == nil {
+		opts = &ColorMergerBlockPrepareDefinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	c.p.Call("prepareDefines", args...)
+}
+
+// ProvideFallbacks calls the ProvideFallbacks method on the ColorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#providefallbacks
+func (c *ColorMergerBlock) ProvideFallbacks(mesh *AbstractMesh, fallbacks *EffectFallbacks) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, fallbacks.JSObject())
+
+	c.p.Call("provideFallbacks", args...)
+}
+
+// ColorMergerBlockRegisterInputOpts contains optional parameters for ColorMergerBlock.RegisterInput.
+type ColorMergerBlockRegisterInputOpts struct {
+	IsOptional *bool
+	Target     js.Value
+}
+
+// RegisterInput calls the RegisterInput method on the ColorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#registerinput
+func (c *ColorMergerBlock) RegisterInput(name string, jsType js.Value, opts *ColorMergerBlockRegisterInputOpts) *ColorMergerBlock {
+	if opts == nil {
+		opts = &ColorMergerBlockRegisterInputOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+2)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	if opts.IsOptional == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IsOptional)
+	}
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+
+	retVal := c.p.Call("registerInput", args...)
+	return ColorMergerBlockFromJSObject(retVal, c.ctx)
+}
+
+// ColorMergerBlockRegisterOutputOpts contains optional parameters for ColorMergerBlock.RegisterOutput.
+type ColorMergerBlockRegisterOutputOpts struct {
+	Target js.Value
+}
+
+// RegisterOutput calls the RegisterOutput method on the ColorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#registeroutput
+func (c *ColorMergerBlock) RegisterOutput(name string, jsType js.Value, opts *ColorMergerBlockRegisterOutputOpts) *ColorMergerBlock {
+	if opts == nil {
+		opts = &ColorMergerBlockRegisterOutputOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+
+	retVal := c.p.Call("registerOutput", args...)
+	return ColorMergerBlockFromJSObject(retVal, c.ctx)
+}
+
+// ReplaceRepeatableContent calls the ReplaceRepeatableContent method on the ColorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#replacerepeatablecontent
+func (c *ColorMergerBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterialBuildState, fragmentShaderState *NodeMaterialBuildState, mesh *AbstractMesh, defines js.Value) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, vertexShaderState.JSObject())
+	args = append(args, fragmentShaderState.JSObject())
+	args = append(args, mesh.JSObject())
+	args = append(args, defines)
+
+	c.p.Call("replaceRepeatableContent", args...)
+}
+
+// Serialize calls the Serialize method on the ColorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#serialize
+func (c *ColorMergerBlock) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("serialize", args...)
+	return retVal
+}
+
+// UpdateUniformsAndSamples calls the UpdateUniformsAndSamples method on the ColorMergerBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#updateuniformsandsamples
+func (c *ColorMergerBlock) UpdateUniformsAndSamples(state *NodeMaterialBuildState, nodeMaterial *NodeMaterial, defines js.Value, uniformBuffers string) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, state.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+	args = append(args, uniformBuffers)
+
+	c.p.Call("updateUniformsAndSamples", args...)
+}
+
+/*
+
+// A returns the A property of class ColorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#a
+func (c *ColorMergerBlock) A(a *NodeMaterialConnectionPoint) *ColorMergerBlock {
+	p := ba.ctx.Get("ColorMergerBlock").New(a.JSObject())
+	return ColorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// SetA sets the A property of class ColorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#a
+func (c *ColorMergerBlock) SetA(a *NodeMaterialConnectionPoint) *ColorMergerBlock {
+	p := ba.ctx.Get("ColorMergerBlock").New(a.JSObject())
+	return ColorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// B returns the B property of class ColorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#b
+func (c *ColorMergerBlock) B(b *NodeMaterialConnectionPoint) *ColorMergerBlock {
+	p := ba.ctx.Get("ColorMergerBlock").New(b.JSObject())
+	return ColorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// SetB sets the B property of class ColorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#b
+func (c *ColorMergerBlock) SetB(b *NodeMaterialConnectionPoint) *ColorMergerBlock {
+	p := ba.ctx.Get("ColorMergerBlock").New(b.JSObject())
+	return ColorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// BuildId returns the BuildId property of class ColorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#buildid
+func (c *ColorMergerBlock) BuildId(buildId float64) *ColorMergerBlock {
+	p := ba.ctx.Get("ColorMergerBlock").New(buildId)
+	return ColorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// SetBuildId sets the BuildId property of class ColorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#buildid
+func (c *ColorMergerBlock) SetBuildId(buildId float64) *ColorMergerBlock {
+	p := ba.ctx.Get("ColorMergerBlock").New(buildId)
+	return ColorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// Comments returns the Comments property of class ColorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#comments
+func (c *ColorMergerBlock) Comments(comments string) *ColorMergerBlock {
+	p := ba.ctx.Get("ColorMergerBlock").New(comments)
+	return ColorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// SetComments sets the Comments property of class ColorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#comments
+func (c *ColorMergerBlock) SetComments(comments string) *ColorMergerBlock {
+	p := ba.ctx.Get("ColorMergerBlock").New(comments)
+	return ColorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// G returns the G property of class ColorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#g
+func (c *ColorMergerBlock) G(g *NodeMaterialConnectionPoint) *ColorMergerBlock {
+	p := ba.ctx.Get("ColorMergerBlock").New(g.JSObject())
+	return ColorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// SetG sets the G property of class ColorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#g
+func (c *ColorMergerBlock) SetG(g *NodeMaterialConnectionPoint) *ColorMergerBlock {
+	p := ba.ctx.Get("ColorMergerBlock").New(g.JSObject())
+	return ColorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// Inputs returns the Inputs property of class ColorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#inputs
+func (c *ColorMergerBlock) Inputs(inputs *NodeMaterialConnectionPoint) *ColorMergerBlock {
+	p := ba.ctx.Get("ColorMergerBlock").New(inputs.JSObject())
+	return ColorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// SetInputs sets the Inputs property of class ColorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#inputs
+func (c *ColorMergerBlock) SetInputs(inputs *NodeMaterialConnectionPoint) *ColorMergerBlock {
+	p := ba.ctx.Get("ColorMergerBlock").New(inputs.JSObject())
+	return ColorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// IsFinalMerger returns the IsFinalMerger property of class ColorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#isfinalmerger
+func (c *ColorMergerBlock) IsFinalMerger(isFinalMerger bool) *ColorMergerBlock {
+	p := ba.ctx.Get("ColorMergerBlock").New(isFinalMerger)
+	return ColorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsFinalMerger sets the IsFinalMerger property of class ColorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#isfinalmerger
+func (c *ColorMergerBlock) SetIsFinalMerger(isFinalMerger bool) *ColorMergerBlock {
+	p := ba.ctx.Get("ColorMergerBlock").New(isFinalMerger)
+	return ColorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// IsInput returns the IsInput property of class ColorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#isinput
+func (c *ColorMergerBlock) IsInput(isInput bool) *ColorMergerBlock {
+	p := ba.ctx.Get("ColorMergerBlock").New(isInput)
+	return ColorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsInput sets the IsInput property of class ColorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#isinput
+func (c *ColorMergerBlock) SetIsInput(isInput bool) *ColorMergerBlock {
+	p := ba.ctx.Get("ColorMergerBlock").New(isInput)
+	return ColorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// IsUnique returns the IsUnique property of class ColorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#isunique
+func (c *ColorMergerBlock) IsUnique(isUnique bool) *ColorMergerBlock {
+	p := ba.ctx.Get("ColorMergerBlock").New(isUnique)
+	return ColorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsUnique sets the IsUnique property of class ColorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#isunique
+func (c *ColorMergerBlock) SetIsUnique(isUnique bool) *ColorMergerBlock {
+	p := ba.ctx.Get("ColorMergerBlock").New(isUnique)
+	return ColorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class ColorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#name
+func (c *ColorMergerBlock) Name(name string) *ColorMergerBlock {
 	p := ba.ctx.Get("ColorMergerBlock").New(name)
 	return ColorMergerBlockFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetName sets the Name property of class ColorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#name
+func (c *ColorMergerBlock) SetName(name string) *ColorMergerBlock {
+	p := ba.ctx.Get("ColorMergerBlock").New(name)
+	return ColorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// Outputs returns the Outputs property of class ColorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#outputs
+func (c *ColorMergerBlock) Outputs(outputs *NodeMaterialConnectionPoint) *ColorMergerBlock {
+	p := ba.ctx.Get("ColorMergerBlock").New(outputs.JSObject())
+	return ColorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOutputs sets the Outputs property of class ColorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#outputs
+func (c *ColorMergerBlock) SetOutputs(outputs *NodeMaterialConnectionPoint) *ColorMergerBlock {
+	p := ba.ctx.Get("ColorMergerBlock").New(outputs.JSObject())
+	return ColorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// R returns the R property of class ColorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#r
+func (c *ColorMergerBlock) R(r *NodeMaterialConnectionPoint) *ColorMergerBlock {
+	p := ba.ctx.Get("ColorMergerBlock").New(r.JSObject())
+	return ColorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// SetR sets the R property of class ColorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#r
+func (c *ColorMergerBlock) SetR(r *NodeMaterialConnectionPoint) *ColorMergerBlock {
+	p := ba.ctx.Get("ColorMergerBlock").New(r.JSObject())
+	return ColorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// Rgb returns the Rgb property of class ColorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#rgb
+func (c *ColorMergerBlock) Rgb(rgb *NodeMaterialConnectionPoint) *ColorMergerBlock {
+	p := ba.ctx.Get("ColorMergerBlock").New(rgb.JSObject())
+	return ColorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// SetRgb sets the Rgb property of class ColorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#rgb
+func (c *ColorMergerBlock) SetRgb(rgb *NodeMaterialConnectionPoint) *ColorMergerBlock {
+	p := ba.ctx.Get("ColorMergerBlock").New(rgb.JSObject())
+	return ColorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// RgbIn returns the RgbIn property of class ColorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#rgbin
+func (c *ColorMergerBlock) RgbIn(rgbIn *NodeMaterialConnectionPoint) *ColorMergerBlock {
+	p := ba.ctx.Get("ColorMergerBlock").New(rgbIn.JSObject())
+	return ColorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// SetRgbIn sets the RgbIn property of class ColorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#rgbin
+func (c *ColorMergerBlock) SetRgbIn(rgbIn *NodeMaterialConnectionPoint) *ColorMergerBlock {
+	p := ba.ctx.Get("ColorMergerBlock").New(rgbIn.JSObject())
+	return ColorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// RgbOut returns the RgbOut property of class ColorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#rgbout
+func (c *ColorMergerBlock) RgbOut(rgbOut *NodeMaterialConnectionPoint) *ColorMergerBlock {
+	p := ba.ctx.Get("ColorMergerBlock").New(rgbOut.JSObject())
+	return ColorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// SetRgbOut sets the RgbOut property of class ColorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#rgbout
+func (c *ColorMergerBlock) SetRgbOut(rgbOut *NodeMaterialConnectionPoint) *ColorMergerBlock {
+	p := ba.ctx.Get("ColorMergerBlock").New(rgbOut.JSObject())
+	return ColorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// Rgba returns the Rgba property of class ColorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#rgba
+func (c *ColorMergerBlock) Rgba(rgba *NodeMaterialConnectionPoint) *ColorMergerBlock {
+	p := ba.ctx.Get("ColorMergerBlock").New(rgba.JSObject())
+	return ColorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// SetRgba sets the Rgba property of class ColorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#rgba
+func (c *ColorMergerBlock) SetRgba(rgba *NodeMaterialConnectionPoint) *ColorMergerBlock {
+	p := ba.ctx.Get("ColorMergerBlock").New(rgba.JSObject())
+	return ColorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// Target returns the Target property of class ColorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#target
+func (c *ColorMergerBlock) Target(target js.Value) *ColorMergerBlock {
+	p := ba.ctx.Get("ColorMergerBlock").New(target)
+	return ColorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// SetTarget sets the Target property of class ColorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#target
+func (c *ColorMergerBlock) SetTarget(target js.Value) *ColorMergerBlock {
+	p := ba.ctx.Get("ColorMergerBlock").New(target)
+	return ColorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class ColorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#uniqueid
+func (c *ColorMergerBlock) UniqueId(uniqueId float64) *ColorMergerBlock {
+	p := ba.ctx.Get("ColorMergerBlock").New(uniqueId)
+	return ColorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class ColorMergerBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.colormergerblock#uniqueid
+func (c *ColorMergerBlock) SetUniqueId(uniqueId float64) *ColorMergerBlock {
+	p := ba.ctx.Get("ColorMergerBlock").New(uniqueId)
+	return ColorMergerBlockFromJSObject(p, ba.ctx)
+}
+
+*/

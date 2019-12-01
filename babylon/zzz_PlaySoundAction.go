@@ -40,8 +40,126 @@ func (ba *Babylon) NewPlaySoundAction(triggerOptions interface{}, sound *Sound, 
 		opts = &NewPlaySoundActionOpts{}
 	}
 
-	p := ba.ctx.Get("PlaySoundAction").New(triggerOptions, sound.JSObject(), opts.Condition.JSObject())
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, triggerOptions)
+	args = append(args, sound.JSObject())
+
+	if opts.Condition == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Condition.JSObject())
+	}
+
+	p := ba.ctx.Get("PlaySoundAction").New(args...)
 	return PlaySoundActionFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Execute calls the Execute method on the PlaySoundAction object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.playsoundaction#execute
+func (p *PlaySoundAction) Execute() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("execute", args...)
+}
+
+// GetTriggerParameter calls the GetTriggerParameter method on the PlaySoundAction object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.playsoundaction#gettriggerparameter
+func (p *PlaySoundAction) GetTriggerParameter() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("getTriggerParameter", args...)
+	return retVal
+}
+
+// Serialize calls the Serialize method on the PlaySoundAction object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.playsoundaction#serialize
+func (p *PlaySoundAction) Serialize(parent interface{}) interface{} {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, parent)
+
+	retVal := p.p.Call("serialize", args...)
+	return retVal
+}
+
+// SkipToNextActiveAction calls the SkipToNextActiveAction method on the PlaySoundAction object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.playsoundaction#skiptonextactiveaction
+func (p *PlaySoundAction) SkipToNextActiveAction() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("skipToNextActiveAction", args...)
+}
+
+// Then calls the Then method on the PlaySoundAction object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.playsoundaction#then
+func (p *PlaySoundAction) Then(action *Action) *Action {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, action.JSObject())
+
+	retVal := p.p.Call("then", args...)
+	return ActionFromJSObject(retVal, p.ctx)
+}
+
+/*
+
+// OnBeforeExecuteObservable returns the OnBeforeExecuteObservable property of class PlaySoundAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.playsoundaction#onbeforeexecuteobservable
+func (p *PlaySoundAction) OnBeforeExecuteObservable(onBeforeExecuteObservable *Observable) *PlaySoundAction {
+	p := ba.ctx.Get("PlaySoundAction").New(onBeforeExecuteObservable.JSObject())
+	return PlaySoundActionFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeExecuteObservable sets the OnBeforeExecuteObservable property of class PlaySoundAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.playsoundaction#onbeforeexecuteobservable
+func (p *PlaySoundAction) SetOnBeforeExecuteObservable(onBeforeExecuteObservable *Observable) *PlaySoundAction {
+	p := ba.ctx.Get("PlaySoundAction").New(onBeforeExecuteObservable.JSObject())
+	return PlaySoundActionFromJSObject(p, ba.ctx)
+}
+
+// Trigger returns the Trigger property of class PlaySoundAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.playsoundaction#trigger
+func (p *PlaySoundAction) Trigger(trigger float64) *PlaySoundAction {
+	p := ba.ctx.Get("PlaySoundAction").New(trigger)
+	return PlaySoundActionFromJSObject(p, ba.ctx)
+}
+
+// SetTrigger sets the Trigger property of class PlaySoundAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.playsoundaction#trigger
+func (p *PlaySoundAction) SetTrigger(trigger float64) *PlaySoundAction {
+	p := ba.ctx.Get("PlaySoundAction").New(trigger)
+	return PlaySoundActionFromJSObject(p, ba.ctx)
+}
+
+// TriggerOptions returns the TriggerOptions property of class PlaySoundAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.playsoundaction#triggeroptions
+func (p *PlaySoundAction) TriggerOptions(triggerOptions interface{}) *PlaySoundAction {
+	p := ba.ctx.Get("PlaySoundAction").New(triggerOptions)
+	return PlaySoundActionFromJSObject(p, ba.ctx)
+}
+
+// SetTriggerOptions sets the TriggerOptions property of class PlaySoundAction.
+//
+// https://doc.babylonjs.com/api/classes/babylon.playsoundaction#triggeroptions
+func (p *PlaySoundAction) SetTriggerOptions(triggerOptions interface{}) *PlaySoundAction {
+	p := ba.ctx.Get("PlaySoundAction").New(triggerOptions)
+	return PlaySoundActionFromJSObject(p, ba.ctx)
+}
+
+*/

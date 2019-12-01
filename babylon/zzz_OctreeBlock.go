@@ -33,8 +33,214 @@ func OctreeBlockFromJSObject(p js.Value, ctx js.Value) *OctreeBlock {
 //
 // https://doc.babylonjs.com/api/classes/babylon.octreeblock
 func (ba *Babylon) NewOctreeBlock(minPoint *Vector3, maxPoint *Vector3, capacity float64, depth float64, maxDepth float64, creationFunc func()) *OctreeBlock {
-	p := ba.ctx.Get("OctreeBlock").New(minPoint.JSObject(), maxPoint.JSObject(), capacity, depth, maxDepth, creationFunc)
+
+	args := make([]interface{}, 0, 6+0)
+
+	args = append(args, minPoint.JSObject())
+	args = append(args, maxPoint.JSObject())
+	args = append(args, capacity)
+	args = append(args, depth)
+	args = append(args, maxDepth)
+	args = append(args, creationFunc)
+
+	p := ba.ctx.Get("OctreeBlock").New(args...)
 	return OctreeBlockFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AddEntries calls the AddEntries method on the OctreeBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.octreeblock#addentries
+func (o *OctreeBlock) AddEntries(entries *T) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, entries.JSObject())
+
+	o.p.Call("addEntries", args...)
+}
+
+// AddEntry calls the AddEntry method on the OctreeBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.octreeblock#addentry
+func (o *OctreeBlock) AddEntry(entry *T) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, entry.JSObject())
+
+	o.p.Call("addEntry", args...)
+}
+
+// CreateInnerBlocks calls the CreateInnerBlocks method on the OctreeBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.octreeblock#createinnerblocks
+func (o *OctreeBlock) CreateInnerBlocks() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	o.p.Call("createInnerBlocks", args...)
+}
+
+// OctreeBlockIntersectsOpts contains optional parameters for OctreeBlock.Intersects.
+type OctreeBlockIntersectsOpts struct {
+	AllowDuplicate *T
+}
+
+// Intersects calls the Intersects method on the OctreeBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.octreeblock#intersects
+func (o *OctreeBlock) Intersects(sphereCenter *Vector3, sphereRadius float64, selection *SmartArrayNoDuplicate, opts *OctreeBlockIntersectsOpts) {
+	if opts == nil {
+		opts = &OctreeBlockIntersectsOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, sphereCenter.JSObject())
+	args = append(args, sphereRadius)
+	args = append(args, selection.JSObject())
+
+	if opts.AllowDuplicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.AllowDuplicate.JSObject())
+	}
+
+	o.p.Call("intersects", args...)
+}
+
+// IntersectsRay calls the IntersectsRay method on the OctreeBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.octreeblock#intersectsray
+func (o *OctreeBlock) IntersectsRay(ray *Ray, selection *SmartArrayNoDuplicate) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, ray.JSObject())
+	args = append(args, selection.JSObject())
+
+	o.p.Call("intersectsRay", args...)
+}
+
+// RemoveEntry calls the RemoveEntry method on the OctreeBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.octreeblock#removeentry
+func (o *OctreeBlock) RemoveEntry(entry *T) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, entry.JSObject())
+
+	o.p.Call("removeEntry", args...)
+}
+
+// OctreeBlockSelectOpts contains optional parameters for OctreeBlock.Select.
+type OctreeBlockSelectOpts struct {
+	AllowDuplicate *T
+}
+
+// Select calls the Select method on the OctreeBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.octreeblock#select
+func (o *OctreeBlock) Select(frustumPlanes *Plane, selection *SmartArrayNoDuplicate, opts *OctreeBlockSelectOpts) {
+	if opts == nil {
+		opts = &OctreeBlockSelectOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, frustumPlanes.JSObject())
+	args = append(args, selection.JSObject())
+
+	if opts.AllowDuplicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.AllowDuplicate.JSObject())
+	}
+
+	o.p.Call("select", args...)
+}
+
+/*
+
+// Blocks returns the Blocks property of class OctreeBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.octreeblock#blocks
+func (o *OctreeBlock) Blocks(blocks []OctreeBlock) *OctreeBlock {
+	p := ba.ctx.Get("OctreeBlock").New(blocks.JSObject())
+	return OctreeBlockFromJSObject(p, ba.ctx)
+}
+
+// SetBlocks sets the Blocks property of class OctreeBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.octreeblock#blocks
+func (o *OctreeBlock) SetBlocks(blocks []OctreeBlock) *OctreeBlock {
+	p := ba.ctx.Get("OctreeBlock").New(blocks.JSObject())
+	return OctreeBlockFromJSObject(p, ba.ctx)
+}
+
+// Capacity returns the Capacity property of class OctreeBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.octreeblock#capacity
+func (o *OctreeBlock) Capacity(capacity float64) *OctreeBlock {
+	p := ba.ctx.Get("OctreeBlock").New(capacity)
+	return OctreeBlockFromJSObject(p, ba.ctx)
+}
+
+// SetCapacity sets the Capacity property of class OctreeBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.octreeblock#capacity
+func (o *OctreeBlock) SetCapacity(capacity float64) *OctreeBlock {
+	p := ba.ctx.Get("OctreeBlock").New(capacity)
+	return OctreeBlockFromJSObject(p, ba.ctx)
+}
+
+// Entries returns the Entries property of class OctreeBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.octreeblock#entries
+func (o *OctreeBlock) Entries(entries *T) *OctreeBlock {
+	p := ba.ctx.Get("OctreeBlock").New(entries.JSObject())
+	return OctreeBlockFromJSObject(p, ba.ctx)
+}
+
+// SetEntries sets the Entries property of class OctreeBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.octreeblock#entries
+func (o *OctreeBlock) SetEntries(entries *T) *OctreeBlock {
+	p := ba.ctx.Get("OctreeBlock").New(entries.JSObject())
+	return OctreeBlockFromJSObject(p, ba.ctx)
+}
+
+// MaxPoint returns the MaxPoint property of class OctreeBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.octreeblock#maxpoint
+func (o *OctreeBlock) MaxPoint(maxPoint *Vector3) *OctreeBlock {
+	p := ba.ctx.Get("OctreeBlock").New(maxPoint.JSObject())
+	return OctreeBlockFromJSObject(p, ba.ctx)
+}
+
+// SetMaxPoint sets the MaxPoint property of class OctreeBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.octreeblock#maxpoint
+func (o *OctreeBlock) SetMaxPoint(maxPoint *Vector3) *OctreeBlock {
+	p := ba.ctx.Get("OctreeBlock").New(maxPoint.JSObject())
+	return OctreeBlockFromJSObject(p, ba.ctx)
+}
+
+// MinPoint returns the MinPoint property of class OctreeBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.octreeblock#minpoint
+func (o *OctreeBlock) MinPoint(minPoint *Vector3) *OctreeBlock {
+	p := ba.ctx.Get("OctreeBlock").New(minPoint.JSObject())
+	return OctreeBlockFromJSObject(p, ba.ctx)
+}
+
+// SetMinPoint sets the MinPoint property of class OctreeBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.octreeblock#minpoint
+func (o *OctreeBlock) SetMinPoint(minPoint *Vector3) *OctreeBlock {
+	p := ba.ctx.Get("OctreeBlock").New(minPoint.JSObject())
+	return OctreeBlockFromJSObject(p, ba.ctx)
+}
+
+*/

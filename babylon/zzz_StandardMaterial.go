@@ -34,8 +34,2361 @@ func StandardMaterialFromJSObject(p js.Value, ctx js.Value) *StandardMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.standardmaterial
 func (ba *Babylon) NewStandardMaterial(name string, scene *Scene) *StandardMaterial {
-	p := ba.ctx.Get("StandardMaterial").New(name, scene.JSObject())
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("StandardMaterial").New(args...)
 	return StandardMaterialFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// StandardMaterialBindOpts contains optional parameters for StandardMaterial.Bind.
+type StandardMaterialBindOpts struct {
+	Mesh *Mesh
+}
+
+// Bind calls the Bind method on the StandardMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#bind
+func (s *StandardMaterial) Bind(world *Matrix, opts *StandardMaterialBindOpts) {
+	if opts == nil {
+		opts = &StandardMaterialBindOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, world.JSObject())
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	s.p.Call("bind", args...)
+}
+
+// BindForSubMesh calls the BindForSubMesh method on the StandardMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#bindforsubmesh
+func (s *StandardMaterial) BindForSubMesh(world *Matrix, mesh *Mesh, subMesh *SubMesh) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, world.JSObject())
+	args = append(args, mesh.JSObject())
+	args = append(args, subMesh.JSObject())
+
+	s.p.Call("bindForSubMesh", args...)
+}
+
+// BindOnlyNormalMatrix calls the BindOnlyNormalMatrix method on the StandardMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#bindonlynormalmatrix
+func (s *StandardMaterial) BindOnlyNormalMatrix(normalMatrix *Matrix) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, normalMatrix.JSObject())
+
+	s.p.Call("bindOnlyNormalMatrix", args...)
+}
+
+// BindOnlyWorldMatrix calls the BindOnlyWorldMatrix method on the StandardMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#bindonlyworldmatrix
+func (s *StandardMaterial) BindOnlyWorldMatrix(world *Matrix) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, world.JSObject())
+
+	s.p.Call("bindOnlyWorldMatrix", args...)
+}
+
+// BindSceneUniformBuffer calls the BindSceneUniformBuffer method on the StandardMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#bindsceneuniformbuffer
+func (s *StandardMaterial) BindSceneUniformBuffer(effect *Effect, sceneUbo *UniformBuffer) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, effect.JSObject())
+	args = append(args, sceneUbo.JSObject())
+
+	s.p.Call("bindSceneUniformBuffer", args...)
+}
+
+// BindView calls the BindView method on the StandardMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#bindview
+func (s *StandardMaterial) BindView(effect *Effect) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, effect.JSObject())
+
+	s.p.Call("bindView", args...)
+}
+
+// BindViewProjection calls the BindViewProjection method on the StandardMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#bindviewprojection
+func (s *StandardMaterial) BindViewProjection(effect *Effect) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, effect.JSObject())
+
+	s.p.Call("bindViewProjection", args...)
+}
+
+// BuildUniformLayout calls the BuildUniformLayout method on the StandardMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#builduniformlayout
+func (s *StandardMaterial) BuildUniformLayout() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("buildUniformLayout", args...)
+}
+
+// Clone calls the Clone method on the StandardMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#clone
+func (s *StandardMaterial) Clone(name string) *StandardMaterial {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := s.p.Call("clone", args...)
+	return StandardMaterialFromJSObject(retVal, s.ctx)
+}
+
+// StandardMaterialDisposeOpts contains optional parameters for StandardMaterial.Dispose.
+type StandardMaterialDisposeOpts struct {
+	ForceDisposeEffect   *bool
+	ForceDisposeTextures *bool
+}
+
+// Dispose calls the Dispose method on the StandardMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#dispose
+func (s *StandardMaterial) Dispose(opts *StandardMaterialDisposeOpts) {
+	if opts == nil {
+		opts = &StandardMaterialDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.ForceDisposeEffect == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceDisposeEffect)
+	}
+	if opts.ForceDisposeTextures == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceDisposeTextures)
+	}
+
+	s.p.Call("dispose", args...)
+}
+
+// StandardMaterialForceCompilationOpts contains optional parameters for StandardMaterial.ForceCompilation.
+type StandardMaterialForceCompilationOpts struct {
+	OnCompiled *func()
+	Options    js.Value
+	OnError    *func()
+}
+
+// ForceCompilation calls the ForceCompilation method on the StandardMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#forcecompilation
+func (s *StandardMaterial) ForceCompilation(mesh *AbstractMesh, opts *StandardMaterialForceCompilationOpts) {
+	if opts == nil {
+		opts = &StandardMaterialForceCompilationOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, mesh.JSObject())
+
+	if opts.OnCompiled == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnCompiled)
+	}
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+
+	s.p.Call("forceCompilation", args...)
+}
+
+// StandardMaterialForceCompilationAsyncOpts contains optional parameters for StandardMaterial.ForceCompilationAsync.
+type StandardMaterialForceCompilationAsyncOpts struct {
+	Options js.Value
+}
+
+// ForceCompilationAsync calls the ForceCompilationAsync method on the StandardMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#forcecompilationasync
+func (s *StandardMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *StandardMaterialForceCompilationAsyncOpts) {
+	if opts == nil {
+		opts = &StandardMaterialForceCompilationAsyncOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, mesh.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	s.p.Call("forceCompilationAsync", args...)
+}
+
+// Freeze calls the Freeze method on the StandardMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#freeze
+func (s *StandardMaterial) Freeze() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("freeze", args...)
+}
+
+// GetActiveTextures calls the GetActiveTextures method on the StandardMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#getactivetextures
+func (s *StandardMaterial) GetActiveTextures() *BaseTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getActiveTextures", args...)
+	return BaseTextureFromJSObject(retVal, s.ctx)
+}
+
+// GetAlphaTestTexture calls the GetAlphaTestTexture method on the StandardMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#getalphatesttexture
+func (s *StandardMaterial) GetAlphaTestTexture() *BaseTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getAlphaTestTexture", args...)
+	return BaseTextureFromJSObject(retVal, s.ctx)
+}
+
+// GetAnimatables calls the GetAnimatables method on the StandardMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#getanimatables
+func (s *StandardMaterial) GetAnimatables() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getAnimatables", args...)
+	return retVal
+}
+
+// GetBindedMeshes calls the GetBindedMeshes method on the StandardMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#getbindedmeshes
+func (s *StandardMaterial) GetBindedMeshes() *AbstractMesh {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getBindedMeshes", args...)
+	return AbstractMeshFromJSObject(retVal, s.ctx)
+}
+
+// GetClassName calls the GetClassName method on the StandardMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#getclassname
+func (s *StandardMaterial) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetEffect calls the GetEffect method on the StandardMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#geteffect
+func (s *StandardMaterial) GetEffect() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getEffect", args...)
+	return EffectFromJSObject(retVal, s.ctx)
+}
+
+// GetScene calls the GetScene method on the StandardMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#getscene
+func (s *StandardMaterial) GetScene() *Scene {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getScene", args...)
+	return SceneFromJSObject(retVal, s.ctx)
+}
+
+// HasTexture calls the HasTexture method on the StandardMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#hastexture
+func (s *StandardMaterial) HasTexture(texture *BaseTexture) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, texture.JSObject())
+
+	retVal := s.p.Call("hasTexture", args...)
+	return retVal.Bool()
+}
+
+// StandardMaterialIsReadyOpts contains optional parameters for StandardMaterial.IsReady.
+type StandardMaterialIsReadyOpts struct {
+	Mesh         *AbstractMesh
+	UseInstances *bool
+}
+
+// IsReady calls the IsReady method on the StandardMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#isready
+func (s *StandardMaterial) IsReady(opts *StandardMaterialIsReadyOpts) bool {
+	if opts == nil {
+		opts = &StandardMaterialIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := s.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// StandardMaterialIsReadyForSubMeshOpts contains optional parameters for StandardMaterial.IsReadyForSubMesh.
+type StandardMaterialIsReadyForSubMeshOpts struct {
+	UseInstances *bool
+}
+
+// IsReadyForSubMesh calls the IsReadyForSubMesh method on the StandardMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#isreadyforsubmesh
+func (s *StandardMaterial) IsReadyForSubMesh(mesh *AbstractMesh, subMesh *SubMesh, opts *StandardMaterialIsReadyForSubMeshOpts) bool {
+	if opts == nil {
+		opts = &StandardMaterialIsReadyForSubMeshOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, subMesh.JSObject())
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := s.p.Call("isReadyForSubMesh", args...)
+	return retVal.Bool()
+}
+
+// MarkAsDirty calls the MarkAsDirty method on the StandardMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#markasdirty
+func (s *StandardMaterial) MarkAsDirty(flag float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, flag)
+
+	s.p.Call("markAsDirty", args...)
+}
+
+// MarkDirty calls the MarkDirty method on the StandardMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#markdirty
+func (s *StandardMaterial) MarkDirty() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("markDirty", args...)
+}
+
+// NeedAlphaBlending calls the NeedAlphaBlending method on the StandardMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#needalphablending
+func (s *StandardMaterial) NeedAlphaBlending() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("needAlphaBlending", args...)
+	return retVal.Bool()
+}
+
+// NeedAlphaBlendingForMesh calls the NeedAlphaBlendingForMesh method on the StandardMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#needalphablendingformesh
+func (s *StandardMaterial) NeedAlphaBlendingForMesh(mesh *AbstractMesh) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	retVal := s.p.Call("needAlphaBlendingForMesh", args...)
+	return retVal.Bool()
+}
+
+// NeedAlphaTesting calls the NeedAlphaTesting method on the StandardMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#needalphatesting
+func (s *StandardMaterial) NeedAlphaTesting() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("needAlphaTesting", args...)
+	return retVal.Bool()
+}
+
+// Parse calls the Parse method on the StandardMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#parse
+func (s *StandardMaterial) Parse(source interface{}, scene *Scene, rootUrl string) *StandardMaterial {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, source)
+	args = append(args, scene.JSObject())
+	args = append(args, rootUrl)
+
+	retVal := s.p.Call("Parse", args...)
+	return StandardMaterialFromJSObject(retVal, s.ctx)
+}
+
+// Serialize calls the Serialize method on the StandardMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#serialize
+func (s *StandardMaterial) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("serialize", args...)
+	return retVal
+}
+
+// StandardMaterialToStringOpts contains optional parameters for StandardMaterial.ToString.
+type StandardMaterialToStringOpts struct {
+	FullDetails *bool
+}
+
+// ToString calls the ToString method on the StandardMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#tostring
+func (s *StandardMaterial) ToString(opts *StandardMaterialToStringOpts) string {
+	if opts == nil {
+		opts = &StandardMaterialToStringOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.FullDetails == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FullDetails)
+	}
+
+	retVal := s.p.Call("toString", args...)
+	return retVal.String()
+}
+
+// Unbind calls the Unbind method on the StandardMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#unbind
+func (s *StandardMaterial) Unbind() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("unbind", args...)
+}
+
+// Unfreeze calls the Unfreeze method on the StandardMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#unfreeze
+func (s *StandardMaterial) Unfreeze() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("unfreeze", args...)
+}
+
+/*
+
+// AllDirtyFlag returns the AllDirtyFlag property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#alldirtyflag
+func (s *StandardMaterial) AllDirtyFlag(AllDirtyFlag float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(AllDirtyFlag)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAllDirtyFlag sets the AllDirtyFlag property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#alldirtyflag
+func (s *StandardMaterial) SetAllDirtyFlag(AllDirtyFlag float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(AllDirtyFlag)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// AllowShaderHotSwapping returns the AllowShaderHotSwapping property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#allowshaderhotswapping
+func (s *StandardMaterial) AllowShaderHotSwapping(allowShaderHotSwapping bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(allowShaderHotSwapping)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAllowShaderHotSwapping sets the AllowShaderHotSwapping property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#allowshaderhotswapping
+func (s *StandardMaterial) SetAllowShaderHotSwapping(allowShaderHotSwapping bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(allowShaderHotSwapping)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// Alpha returns the Alpha property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#alpha
+func (s *StandardMaterial) Alpha(alpha float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(alpha)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAlpha sets the Alpha property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#alpha
+func (s *StandardMaterial) SetAlpha(alpha float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(alpha)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// AlphaCutOff returns the AlphaCutOff property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#alphacutoff
+func (s *StandardMaterial) AlphaCutOff(alphaCutOff float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(alphaCutOff)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaCutOff sets the AlphaCutOff property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#alphacutoff
+func (s *StandardMaterial) SetAlphaCutOff(alphaCutOff float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(alphaCutOff)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// AlphaMode returns the AlphaMode property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#alphamode
+func (s *StandardMaterial) AlphaMode(alphaMode float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(alphaMode)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaMode sets the AlphaMode property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#alphamode
+func (s *StandardMaterial) SetAlphaMode(alphaMode float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(alphaMode)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// AmbientColor returns the AmbientColor property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#ambientcolor
+func (s *StandardMaterial) AmbientColor(ambientColor *Color3) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(ambientColor.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAmbientColor sets the AmbientColor property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#ambientcolor
+func (s *StandardMaterial) SetAmbientColor(ambientColor *Color3) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(ambientColor.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// AmbientTexture returns the AmbientTexture property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#ambienttexture
+func (s *StandardMaterial) AmbientTexture(ambientTexture *BaseTexture) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(ambientTexture.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAmbientTexture sets the AmbientTexture property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#ambienttexture
+func (s *StandardMaterial) SetAmbientTexture(ambientTexture *BaseTexture) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(ambientTexture.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// AmbientTextureEnabled returns the AmbientTextureEnabled property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#ambienttextureenabled
+func (s *StandardMaterial) AmbientTextureEnabled(AmbientTextureEnabled bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(AmbientTextureEnabled)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAmbientTextureEnabled sets the AmbientTextureEnabled property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#ambienttextureenabled
+func (s *StandardMaterial) SetAmbientTextureEnabled(AmbientTextureEnabled bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(AmbientTextureEnabled)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// Animations returns the Animations property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#animations
+func (s *StandardMaterial) Animations(animations []Animation) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(animations.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#animations
+func (s *StandardMaterial) SetAnimations(animations []Animation) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(animations.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// AttributesDirtyFlag returns the AttributesDirtyFlag property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#attributesdirtyflag
+func (s *StandardMaterial) AttributesDirtyFlag(AttributesDirtyFlag float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(AttributesDirtyFlag)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAttributesDirtyFlag sets the AttributesDirtyFlag property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#attributesdirtyflag
+func (s *StandardMaterial) SetAttributesDirtyFlag(AttributesDirtyFlag float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(AttributesDirtyFlag)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// BackFaceCulling returns the BackFaceCulling property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#backfaceculling
+func (s *StandardMaterial) BackFaceCulling(backFaceCulling bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(backFaceCulling)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetBackFaceCulling sets the BackFaceCulling property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#backfaceculling
+func (s *StandardMaterial) SetBackFaceCulling(backFaceCulling bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(backFaceCulling)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// BumpTexture returns the BumpTexture property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#bumptexture
+func (s *StandardMaterial) BumpTexture(bumpTexture *BaseTexture) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(bumpTexture.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetBumpTexture sets the BumpTexture property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#bumptexture
+func (s *StandardMaterial) SetBumpTexture(bumpTexture *BaseTexture) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(bumpTexture.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// BumpTextureEnabled returns the BumpTextureEnabled property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#bumptextureenabled
+func (s *StandardMaterial) BumpTextureEnabled(BumpTextureEnabled bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(BumpTextureEnabled)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetBumpTextureEnabled sets the BumpTextureEnabled property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#bumptextureenabled
+func (s *StandardMaterial) SetBumpTextureEnabled(BumpTextureEnabled bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(BumpTextureEnabled)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// CameraColorCurves returns the CameraColorCurves property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#cameracolorcurves
+func (s *StandardMaterial) CameraColorCurves(cameraColorCurves *ColorCurves) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(cameraColorCurves.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCameraColorCurves sets the CameraColorCurves property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#cameracolorcurves
+func (s *StandardMaterial) SetCameraColorCurves(cameraColorCurves *ColorCurves) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(cameraColorCurves.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// CameraColorCurvesEnabled returns the CameraColorCurvesEnabled property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#cameracolorcurvesenabled
+func (s *StandardMaterial) CameraColorCurvesEnabled(cameraColorCurvesEnabled bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(cameraColorCurvesEnabled)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCameraColorCurvesEnabled sets the CameraColorCurvesEnabled property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#cameracolorcurvesenabled
+func (s *StandardMaterial) SetCameraColorCurvesEnabled(cameraColorCurvesEnabled bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(cameraColorCurvesEnabled)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// CameraColorGradingEnabled returns the CameraColorGradingEnabled property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#cameracolorgradingenabled
+func (s *StandardMaterial) CameraColorGradingEnabled(cameraColorGradingEnabled bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(cameraColorGradingEnabled)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCameraColorGradingEnabled sets the CameraColorGradingEnabled property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#cameracolorgradingenabled
+func (s *StandardMaterial) SetCameraColorGradingEnabled(cameraColorGradingEnabled bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(cameraColorGradingEnabled)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// CameraColorGradingTexture returns the CameraColorGradingTexture property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#cameracolorgradingtexture
+func (s *StandardMaterial) CameraColorGradingTexture(cameraColorGradingTexture *BaseTexture) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(cameraColorGradingTexture.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCameraColorGradingTexture sets the CameraColorGradingTexture property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#cameracolorgradingtexture
+func (s *StandardMaterial) SetCameraColorGradingTexture(cameraColorGradingTexture *BaseTexture) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(cameraColorGradingTexture.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// CameraContrast returns the CameraContrast property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#cameracontrast
+func (s *StandardMaterial) CameraContrast(cameraContrast float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(cameraContrast)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCameraContrast sets the CameraContrast property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#cameracontrast
+func (s *StandardMaterial) SetCameraContrast(cameraContrast float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(cameraContrast)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// CameraExposure returns the CameraExposure property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#cameraexposure
+func (s *StandardMaterial) CameraExposure(cameraExposure float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(cameraExposure)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCameraExposure sets the CameraExposure property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#cameraexposure
+func (s *StandardMaterial) SetCameraExposure(cameraExposure float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(cameraExposure)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// CameraToneMappingEnabled returns the CameraToneMappingEnabled property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#cameratonemappingenabled
+func (s *StandardMaterial) CameraToneMappingEnabled(cameraToneMappingEnabled bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(cameraToneMappingEnabled)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCameraToneMappingEnabled sets the CameraToneMappingEnabled property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#cameratonemappingenabled
+func (s *StandardMaterial) SetCameraToneMappingEnabled(cameraToneMappingEnabled bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(cameraToneMappingEnabled)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// CheckReadyOnEveryCall returns the CheckReadyOnEveryCall property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#checkreadyoneverycall
+func (s *StandardMaterial) CheckReadyOnEveryCall(checkReadyOnEveryCall bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(checkReadyOnEveryCall)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCheckReadyOnEveryCall sets the CheckReadyOnEveryCall property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#checkreadyoneverycall
+func (s *StandardMaterial) SetCheckReadyOnEveryCall(checkReadyOnEveryCall bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(checkReadyOnEveryCall)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// CheckReadyOnlyOnce returns the CheckReadyOnlyOnce property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#checkreadyonlyonce
+func (s *StandardMaterial) CheckReadyOnlyOnce(checkReadyOnlyOnce bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(checkReadyOnlyOnce)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCheckReadyOnlyOnce sets the CheckReadyOnlyOnce property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#checkreadyonlyonce
+func (s *StandardMaterial) SetCheckReadyOnlyOnce(checkReadyOnlyOnce bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(checkReadyOnlyOnce)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// ClockWiseSideOrientation returns the ClockWiseSideOrientation property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#clockwisesideorientation
+func (s *StandardMaterial) ClockWiseSideOrientation(ClockWiseSideOrientation float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(ClockWiseSideOrientation)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetClockWiseSideOrientation sets the ClockWiseSideOrientation property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#clockwisesideorientation
+func (s *StandardMaterial) SetClockWiseSideOrientation(ClockWiseSideOrientation float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(ClockWiseSideOrientation)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// ColorGradingTextureEnabled returns the ColorGradingTextureEnabled property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#colorgradingtextureenabled
+func (s *StandardMaterial) ColorGradingTextureEnabled(ColorGradingTextureEnabled bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(ColorGradingTextureEnabled)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetColorGradingTextureEnabled sets the ColorGradingTextureEnabled property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#colorgradingtextureenabled
+func (s *StandardMaterial) SetColorGradingTextureEnabled(ColorGradingTextureEnabled bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(ColorGradingTextureEnabled)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// CounterClockWiseSideOrientation returns the CounterClockWiseSideOrientation property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#counterclockwisesideorientation
+func (s *StandardMaterial) CounterClockWiseSideOrientation(CounterClockWiseSideOrientation float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(CounterClockWiseSideOrientation)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCounterClockWiseSideOrientation sets the CounterClockWiseSideOrientation property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#counterclockwisesideorientation
+func (s *StandardMaterial) SetCounterClockWiseSideOrientation(CounterClockWiseSideOrientation float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(CounterClockWiseSideOrientation)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// CustomShaderNameResolve returns the CustomShaderNameResolve property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#customshadernameresolve
+func (s *StandardMaterial) CustomShaderNameResolve(customShaderNameResolve func()) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(customShaderNameResolve)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCustomShaderNameResolve sets the CustomShaderNameResolve property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#customshadernameresolve
+func (s *StandardMaterial) SetCustomShaderNameResolve(customShaderNameResolve func()) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(customShaderNameResolve)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// DepthFunction returns the DepthFunction property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#depthfunction
+func (s *StandardMaterial) DepthFunction(depthFunction float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(depthFunction)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDepthFunction sets the DepthFunction property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#depthfunction
+func (s *StandardMaterial) SetDepthFunction(depthFunction float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(depthFunction)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// DiffuseColor returns the DiffuseColor property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#diffusecolor
+func (s *StandardMaterial) DiffuseColor(diffuseColor *Color3) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(diffuseColor.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDiffuseColor sets the DiffuseColor property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#diffusecolor
+func (s *StandardMaterial) SetDiffuseColor(diffuseColor *Color3) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(diffuseColor.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// DiffuseFresnelParameters returns the DiffuseFresnelParameters property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#diffusefresnelparameters
+func (s *StandardMaterial) DiffuseFresnelParameters(diffuseFresnelParameters *FresnelParameters) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(diffuseFresnelParameters.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDiffuseFresnelParameters sets the DiffuseFresnelParameters property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#diffusefresnelparameters
+func (s *StandardMaterial) SetDiffuseFresnelParameters(diffuseFresnelParameters *FresnelParameters) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(diffuseFresnelParameters.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// DiffuseTexture returns the DiffuseTexture property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#diffusetexture
+func (s *StandardMaterial) DiffuseTexture(diffuseTexture *BaseTexture) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(diffuseTexture.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDiffuseTexture sets the DiffuseTexture property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#diffusetexture
+func (s *StandardMaterial) SetDiffuseTexture(diffuseTexture *BaseTexture) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(diffuseTexture.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// DiffuseTextureEnabled returns the DiffuseTextureEnabled property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#diffusetextureenabled
+func (s *StandardMaterial) DiffuseTextureEnabled(DiffuseTextureEnabled bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(DiffuseTextureEnabled)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDiffuseTextureEnabled sets the DiffuseTextureEnabled property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#diffusetextureenabled
+func (s *StandardMaterial) SetDiffuseTextureEnabled(DiffuseTextureEnabled bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(DiffuseTextureEnabled)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// DisableDepthWrite returns the DisableDepthWrite property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#disabledepthwrite
+func (s *StandardMaterial) DisableDepthWrite(disableDepthWrite bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(disableDepthWrite)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDisableDepthWrite sets the DisableDepthWrite property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#disabledepthwrite
+func (s *StandardMaterial) SetDisableDepthWrite(disableDepthWrite bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(disableDepthWrite)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// DisableLighting returns the DisableLighting property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#disablelighting
+func (s *StandardMaterial) DisableLighting(disableLighting bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(disableLighting)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDisableLighting sets the DisableLighting property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#disablelighting
+func (s *StandardMaterial) SetDisableLighting(disableLighting bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(disableLighting)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// DoNotSerialize returns the DoNotSerialize property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#donotserialize
+func (s *StandardMaterial) DoNotSerialize(doNotSerialize bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(doNotSerialize)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDoNotSerialize sets the DoNotSerialize property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#donotserialize
+func (s *StandardMaterial) SetDoNotSerialize(doNotSerialize bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(doNotSerialize)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// EmissiveColor returns the EmissiveColor property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#emissivecolor
+func (s *StandardMaterial) EmissiveColor(emissiveColor *Color3) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(emissiveColor.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetEmissiveColor sets the EmissiveColor property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#emissivecolor
+func (s *StandardMaterial) SetEmissiveColor(emissiveColor *Color3) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(emissiveColor.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// EmissiveFresnelParameters returns the EmissiveFresnelParameters property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#emissivefresnelparameters
+func (s *StandardMaterial) EmissiveFresnelParameters(emissiveFresnelParameters *FresnelParameters) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(emissiveFresnelParameters.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetEmissiveFresnelParameters sets the EmissiveFresnelParameters property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#emissivefresnelparameters
+func (s *StandardMaterial) SetEmissiveFresnelParameters(emissiveFresnelParameters *FresnelParameters) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(emissiveFresnelParameters.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// EmissiveTexture returns the EmissiveTexture property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#emissivetexture
+func (s *StandardMaterial) EmissiveTexture(emissiveTexture *BaseTexture) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(emissiveTexture.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetEmissiveTexture sets the EmissiveTexture property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#emissivetexture
+func (s *StandardMaterial) SetEmissiveTexture(emissiveTexture *BaseTexture) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(emissiveTexture.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// EmissiveTextureEnabled returns the EmissiveTextureEnabled property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#emissivetextureenabled
+func (s *StandardMaterial) EmissiveTextureEnabled(EmissiveTextureEnabled bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(EmissiveTextureEnabled)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetEmissiveTextureEnabled sets the EmissiveTextureEnabled property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#emissivetextureenabled
+func (s *StandardMaterial) SetEmissiveTextureEnabled(EmissiveTextureEnabled bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(EmissiveTextureEnabled)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// FillMode returns the FillMode property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#fillmode
+func (s *StandardMaterial) FillMode(fillMode float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(fillMode)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFillMode sets the FillMode property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#fillmode
+func (s *StandardMaterial) SetFillMode(fillMode float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(fillMode)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// FogEnabled returns the FogEnabled property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#fogenabled
+func (s *StandardMaterial) FogEnabled(fogEnabled bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(fogEnabled)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFogEnabled sets the FogEnabled property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#fogenabled
+func (s *StandardMaterial) SetFogEnabled(fogEnabled bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(fogEnabled)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// ForceDepthWrite returns the ForceDepthWrite property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#forcedepthwrite
+func (s *StandardMaterial) ForceDepthWrite(forceDepthWrite bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(forceDepthWrite)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetForceDepthWrite sets the ForceDepthWrite property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#forcedepthwrite
+func (s *StandardMaterial) SetForceDepthWrite(forceDepthWrite bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(forceDepthWrite)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// FresnelDirtyFlag returns the FresnelDirtyFlag property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#fresneldirtyflag
+func (s *StandardMaterial) FresnelDirtyFlag(FresnelDirtyFlag float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(FresnelDirtyFlag)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFresnelDirtyFlag sets the FresnelDirtyFlag property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#fresneldirtyflag
+func (s *StandardMaterial) SetFresnelDirtyFlag(FresnelDirtyFlag float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(FresnelDirtyFlag)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// FresnelEnabled returns the FresnelEnabled property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#fresnelenabled
+func (s *StandardMaterial) FresnelEnabled(FresnelEnabled bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(FresnelEnabled)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFresnelEnabled sets the FresnelEnabled property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#fresnelenabled
+func (s *StandardMaterial) SetFresnelEnabled(FresnelEnabled bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(FresnelEnabled)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// GetRenderTargetTextures returns the GetRenderTargetTextures property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#getrendertargettextures
+func (s *StandardMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(getRenderTargetTextures)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetGetRenderTargetTextures sets the GetRenderTargetTextures property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#getrendertargettextures
+func (s *StandardMaterial) SetGetRenderTargetTextures(getRenderTargetTextures func()) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(getRenderTargetTextures)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// HasRenderTargetTextures returns the HasRenderTargetTextures property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#hasrendertargettextures
+func (s *StandardMaterial) HasRenderTargetTextures(hasRenderTargetTextures bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(hasRenderTargetTextures)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetHasRenderTargetTextures sets the HasRenderTargetTextures property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#hasrendertargettextures
+func (s *StandardMaterial) SetHasRenderTargetTextures(hasRenderTargetTextures bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(hasRenderTargetTextures)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// Id returns the Id property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#id
+func (s *StandardMaterial) Id(id string) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(id)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetId sets the Id property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#id
+func (s *StandardMaterial) SetId(id string) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(id)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// ImageProcessingConfiguration returns the ImageProcessingConfiguration property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#imageprocessingconfiguration
+func (s *StandardMaterial) ImageProcessingConfiguration(imageProcessingConfiguration *ImageProcessingConfiguration) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(imageProcessingConfiguration.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetImageProcessingConfiguration sets the ImageProcessingConfiguration property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#imageprocessingconfiguration
+func (s *StandardMaterial) SetImageProcessingConfiguration(imageProcessingConfiguration *ImageProcessingConfiguration) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(imageProcessingConfiguration.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// IndexOfRefraction returns the IndexOfRefraction property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#indexofrefraction
+func (s *StandardMaterial) IndexOfRefraction(indexOfRefraction float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(indexOfRefraction)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetIndexOfRefraction sets the IndexOfRefraction property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#indexofrefraction
+func (s *StandardMaterial) SetIndexOfRefraction(indexOfRefraction float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(indexOfRefraction)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#inspectablecustomproperties
+func (s *StandardMaterial) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(inspectableCustomProperties.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#inspectablecustomproperties
+func (s *StandardMaterial) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(inspectableCustomProperties.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// InvertNormalMapX returns the InvertNormalMapX property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#invertnormalmapx
+func (s *StandardMaterial) InvertNormalMapX(invertNormalMapX bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(invertNormalMapX)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetInvertNormalMapX sets the InvertNormalMapX property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#invertnormalmapx
+func (s *StandardMaterial) SetInvertNormalMapX(invertNormalMapX bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(invertNormalMapX)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// InvertNormalMapY returns the InvertNormalMapY property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#invertnormalmapy
+func (s *StandardMaterial) InvertNormalMapY(invertNormalMapY bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(invertNormalMapY)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetInvertNormalMapY sets the InvertNormalMapY property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#invertnormalmapy
+func (s *StandardMaterial) SetInvertNormalMapY(invertNormalMapY bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(invertNormalMapY)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// InvertRefractionY returns the InvertRefractionY property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#invertrefractiony
+func (s *StandardMaterial) InvertRefractionY(invertRefractionY bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(invertRefractionY)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetInvertRefractionY sets the InvertRefractionY property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#invertrefractiony
+func (s *StandardMaterial) SetInvertRefractionY(invertRefractionY bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(invertRefractionY)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// IsFrozen returns the IsFrozen property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#isfrozen
+func (s *StandardMaterial) IsFrozen(isFrozen bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(isFrozen)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetIsFrozen sets the IsFrozen property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#isfrozen
+func (s *StandardMaterial) SetIsFrozen(isFrozen bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(isFrozen)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// LightDirtyFlag returns the LightDirtyFlag property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#lightdirtyflag
+func (s *StandardMaterial) LightDirtyFlag(LightDirtyFlag float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(LightDirtyFlag)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLightDirtyFlag sets the LightDirtyFlag property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#lightdirtyflag
+func (s *StandardMaterial) SetLightDirtyFlag(LightDirtyFlag float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(LightDirtyFlag)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// LightmapTexture returns the LightmapTexture property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#lightmaptexture
+func (s *StandardMaterial) LightmapTexture(lightmapTexture *BaseTexture) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(lightmapTexture.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLightmapTexture sets the LightmapTexture property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#lightmaptexture
+func (s *StandardMaterial) SetLightmapTexture(lightmapTexture *BaseTexture) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(lightmapTexture.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// LightmapTextureEnabled returns the LightmapTextureEnabled property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#lightmaptextureenabled
+func (s *StandardMaterial) LightmapTextureEnabled(LightmapTextureEnabled bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(LightmapTextureEnabled)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLightmapTextureEnabled sets the LightmapTextureEnabled property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#lightmaptextureenabled
+func (s *StandardMaterial) SetLightmapTextureEnabled(LightmapTextureEnabled bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(LightmapTextureEnabled)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineListDrawMode returns the LineListDrawMode property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#linelistdrawmode
+func (s *StandardMaterial) LineListDrawMode(LineListDrawMode float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(LineListDrawMode)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineListDrawMode sets the LineListDrawMode property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#linelistdrawmode
+func (s *StandardMaterial) SetLineListDrawMode(LineListDrawMode float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(LineListDrawMode)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineLoopDrawMode returns the LineLoopDrawMode property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#lineloopdrawmode
+func (s *StandardMaterial) LineLoopDrawMode(LineLoopDrawMode float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(LineLoopDrawMode)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineLoopDrawMode sets the LineLoopDrawMode property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#lineloopdrawmode
+func (s *StandardMaterial) SetLineLoopDrawMode(LineLoopDrawMode float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(LineLoopDrawMode)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineStripDrawMode returns the LineStripDrawMode property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#linestripdrawmode
+func (s *StandardMaterial) LineStripDrawMode(LineStripDrawMode float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(LineStripDrawMode)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineStripDrawMode sets the LineStripDrawMode property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#linestripdrawmode
+func (s *StandardMaterial) SetLineStripDrawMode(LineStripDrawMode float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(LineStripDrawMode)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// LinkEmissiveWithDiffuse returns the LinkEmissiveWithDiffuse property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#linkemissivewithdiffuse
+func (s *StandardMaterial) LinkEmissiveWithDiffuse(linkEmissiveWithDiffuse bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(linkEmissiveWithDiffuse)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLinkEmissiveWithDiffuse sets the LinkEmissiveWithDiffuse property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#linkemissivewithdiffuse
+func (s *StandardMaterial) SetLinkEmissiveWithDiffuse(linkEmissiveWithDiffuse bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(linkEmissiveWithDiffuse)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// MaxSimultaneousLights returns the MaxSimultaneousLights property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#maxsimultaneouslights
+func (s *StandardMaterial) MaxSimultaneousLights(maxSimultaneousLights float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(maxSimultaneousLights)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMaxSimultaneousLights sets the MaxSimultaneousLights property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#maxsimultaneouslights
+func (s *StandardMaterial) SetMaxSimultaneousLights(maxSimultaneousLights float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(maxSimultaneousLights)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#metadata
+func (s *StandardMaterial) Metadata(metadata interface{}) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(metadata)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#metadata
+func (s *StandardMaterial) SetMetadata(metadata interface{}) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(metadata)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// MiscDirtyFlag returns the MiscDirtyFlag property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#miscdirtyflag
+func (s *StandardMaterial) MiscDirtyFlag(MiscDirtyFlag float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(MiscDirtyFlag)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMiscDirtyFlag sets the MiscDirtyFlag property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#miscdirtyflag
+func (s *StandardMaterial) SetMiscDirtyFlag(MiscDirtyFlag float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(MiscDirtyFlag)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#name
+func (s *StandardMaterial) Name(name string) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(name)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#name
+func (s *StandardMaterial) SetName(name string) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(name)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// NeedDepthPrePass returns the NeedDepthPrePass property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#needdepthprepass
+func (s *StandardMaterial) NeedDepthPrePass(needDepthPrePass bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(needDepthPrePass)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetNeedDepthPrePass sets the NeedDepthPrePass property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#needdepthprepass
+func (s *StandardMaterial) SetNeedDepthPrePass(needDepthPrePass bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(needDepthPrePass)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnBind returns the OnBind property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#onbind
+func (s *StandardMaterial) OnBind(onBind func()) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(onBind)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnBind sets the OnBind property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#onbind
+func (s *StandardMaterial) SetOnBind(onBind func()) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(onBind)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnBindObservable returns the OnBindObservable property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#onbindobservable
+func (s *StandardMaterial) OnBindObservable(onBindObservable *Observable) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(onBindObservable.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnBindObservable sets the OnBindObservable property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#onbindobservable
+func (s *StandardMaterial) SetOnBindObservable(onBindObservable *Observable) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(onBindObservable.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnCompiled returns the OnCompiled property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#oncompiled
+func (s *StandardMaterial) OnCompiled(onCompiled func()) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(onCompiled)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnCompiled sets the OnCompiled property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#oncompiled
+func (s *StandardMaterial) SetOnCompiled(onCompiled func()) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(onCompiled)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnDispose returns the OnDispose property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#ondispose
+func (s *StandardMaterial) OnDispose(onDispose func()) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(onDispose)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnDispose sets the OnDispose property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#ondispose
+func (s *StandardMaterial) SetOnDispose(onDispose func()) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(onDispose)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnDisposeObservable returns the OnDisposeObservable property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#ondisposeobservable
+func (s *StandardMaterial) OnDisposeObservable(onDisposeObservable *Observable) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(onDisposeObservable.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnDisposeObservable sets the OnDisposeObservable property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#ondisposeobservable
+func (s *StandardMaterial) SetOnDisposeObservable(onDisposeObservable *Observable) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(onDisposeObservable.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnError returns the OnError property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#onerror
+func (s *StandardMaterial) OnError(onError func()) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(onError)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnError sets the OnError property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#onerror
+func (s *StandardMaterial) SetOnError(onError func()) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(onError)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnUnBindObservable returns the OnUnBindObservable property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#onunbindobservable
+func (s *StandardMaterial) OnUnBindObservable(onUnBindObservable *Observable) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(onUnBindObservable.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnUnBindObservable sets the OnUnBindObservable property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#onunbindobservable
+func (s *StandardMaterial) SetOnUnBindObservable(onUnBindObservable *Observable) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(onUnBindObservable.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// OpacityFresnelParameters returns the OpacityFresnelParameters property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#opacityfresnelparameters
+func (s *StandardMaterial) OpacityFresnelParameters(opacityFresnelParameters *FresnelParameters) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(opacityFresnelParameters.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOpacityFresnelParameters sets the OpacityFresnelParameters property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#opacityfresnelparameters
+func (s *StandardMaterial) SetOpacityFresnelParameters(opacityFresnelParameters *FresnelParameters) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(opacityFresnelParameters.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// OpacityTexture returns the OpacityTexture property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#opacitytexture
+func (s *StandardMaterial) OpacityTexture(opacityTexture *BaseTexture) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(opacityTexture.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOpacityTexture sets the OpacityTexture property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#opacitytexture
+func (s *StandardMaterial) SetOpacityTexture(opacityTexture *BaseTexture) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(opacityTexture.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// OpacityTextureEnabled returns the OpacityTextureEnabled property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#opacitytextureenabled
+func (s *StandardMaterial) OpacityTextureEnabled(OpacityTextureEnabled bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(OpacityTextureEnabled)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOpacityTextureEnabled sets the OpacityTextureEnabled property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#opacitytextureenabled
+func (s *StandardMaterial) SetOpacityTextureEnabled(OpacityTextureEnabled bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(OpacityTextureEnabled)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// ParallaxScaleBias returns the ParallaxScaleBias property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#parallaxscalebias
+func (s *StandardMaterial) ParallaxScaleBias(parallaxScaleBias float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(parallaxScaleBias)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetParallaxScaleBias sets the ParallaxScaleBias property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#parallaxscalebias
+func (s *StandardMaterial) SetParallaxScaleBias(parallaxScaleBias float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(parallaxScaleBias)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointFillMode returns the PointFillMode property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#pointfillmode
+func (s *StandardMaterial) PointFillMode(PointFillMode float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(PointFillMode)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointFillMode sets the PointFillMode property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#pointfillmode
+func (s *StandardMaterial) SetPointFillMode(PointFillMode float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(PointFillMode)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointListDrawMode returns the PointListDrawMode property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#pointlistdrawmode
+func (s *StandardMaterial) PointListDrawMode(PointListDrawMode float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(PointListDrawMode)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointListDrawMode sets the PointListDrawMode property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#pointlistdrawmode
+func (s *StandardMaterial) SetPointListDrawMode(PointListDrawMode float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(PointListDrawMode)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointSize returns the PointSize property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#pointsize
+func (s *StandardMaterial) PointSize(pointSize float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(pointSize)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointSize sets the PointSize property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#pointsize
+func (s *StandardMaterial) SetPointSize(pointSize float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(pointSize)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointsCloud returns the PointsCloud property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#pointscloud
+func (s *StandardMaterial) PointsCloud(pointsCloud bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(pointsCloud)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointsCloud sets the PointsCloud property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#pointscloud
+func (s *StandardMaterial) SetPointsCloud(pointsCloud bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(pointsCloud)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// ReflectionFresnelParameters returns the ReflectionFresnelParameters property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#reflectionfresnelparameters
+func (s *StandardMaterial) ReflectionFresnelParameters(reflectionFresnelParameters *FresnelParameters) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(reflectionFresnelParameters.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetReflectionFresnelParameters sets the ReflectionFresnelParameters property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#reflectionfresnelparameters
+func (s *StandardMaterial) SetReflectionFresnelParameters(reflectionFresnelParameters *FresnelParameters) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(reflectionFresnelParameters.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// ReflectionTexture returns the ReflectionTexture property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#reflectiontexture
+func (s *StandardMaterial) ReflectionTexture(reflectionTexture *BaseTexture) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(reflectionTexture.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetReflectionTexture sets the ReflectionTexture property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#reflectiontexture
+func (s *StandardMaterial) SetReflectionTexture(reflectionTexture *BaseTexture) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(reflectionTexture.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// ReflectionTextureEnabled returns the ReflectionTextureEnabled property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#reflectiontextureenabled
+func (s *StandardMaterial) ReflectionTextureEnabled(ReflectionTextureEnabled bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(ReflectionTextureEnabled)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetReflectionTextureEnabled sets the ReflectionTextureEnabled property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#reflectiontextureenabled
+func (s *StandardMaterial) SetReflectionTextureEnabled(ReflectionTextureEnabled bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(ReflectionTextureEnabled)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// RefractionFresnelParameters returns the RefractionFresnelParameters property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#refractionfresnelparameters
+func (s *StandardMaterial) RefractionFresnelParameters(refractionFresnelParameters *FresnelParameters) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(refractionFresnelParameters.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetRefractionFresnelParameters sets the RefractionFresnelParameters property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#refractionfresnelparameters
+func (s *StandardMaterial) SetRefractionFresnelParameters(refractionFresnelParameters *FresnelParameters) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(refractionFresnelParameters.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// RefractionTexture returns the RefractionTexture property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#refractiontexture
+func (s *StandardMaterial) RefractionTexture(refractionTexture *BaseTexture) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(refractionTexture.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetRefractionTexture sets the RefractionTexture property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#refractiontexture
+func (s *StandardMaterial) SetRefractionTexture(refractionTexture *BaseTexture) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(refractionTexture.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// RefractionTextureEnabled returns the RefractionTextureEnabled property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#refractiontextureenabled
+func (s *StandardMaterial) RefractionTextureEnabled(RefractionTextureEnabled bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(RefractionTextureEnabled)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetRefractionTextureEnabled sets the RefractionTextureEnabled property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#refractiontextureenabled
+func (s *StandardMaterial) SetRefractionTextureEnabled(RefractionTextureEnabled bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(RefractionTextureEnabled)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// ReservedDataStore returns the ReservedDataStore property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#reserveddatastore
+func (s *StandardMaterial) ReservedDataStore(reservedDataStore interface{}) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(reservedDataStore)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetReservedDataStore sets the ReservedDataStore property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#reserveddatastore
+func (s *StandardMaterial) SetReservedDataStore(reservedDataStore interface{}) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(reservedDataStore)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// Roughness returns the Roughness property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#roughness
+func (s *StandardMaterial) Roughness(roughness float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(roughness)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetRoughness sets the Roughness property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#roughness
+func (s *StandardMaterial) SetRoughness(roughness float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(roughness)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SeparateCullingPass returns the SeparateCullingPass property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#separatecullingpass
+func (s *StandardMaterial) SeparateCullingPass(separateCullingPass bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(separateCullingPass)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSeparateCullingPass sets the SeparateCullingPass property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#separatecullingpass
+func (s *StandardMaterial) SetSeparateCullingPass(separateCullingPass bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(separateCullingPass)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SideOrientation returns the SideOrientation property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#sideorientation
+func (s *StandardMaterial) SideOrientation(sideOrientation float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(sideOrientation)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSideOrientation sets the SideOrientation property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#sideorientation
+func (s *StandardMaterial) SetSideOrientation(sideOrientation float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(sideOrientation)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SpecularColor returns the SpecularColor property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#specularcolor
+func (s *StandardMaterial) SpecularColor(specularColor *Color3) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(specularColor.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSpecularColor sets the SpecularColor property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#specularcolor
+func (s *StandardMaterial) SetSpecularColor(specularColor *Color3) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(specularColor.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SpecularPower returns the SpecularPower property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#specularpower
+func (s *StandardMaterial) SpecularPower(specularPower float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(specularPower)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSpecularPower sets the SpecularPower property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#specularpower
+func (s *StandardMaterial) SetSpecularPower(specularPower float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(specularPower)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SpecularTexture returns the SpecularTexture property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#speculartexture
+func (s *StandardMaterial) SpecularTexture(specularTexture *BaseTexture) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(specularTexture.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSpecularTexture sets the SpecularTexture property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#speculartexture
+func (s *StandardMaterial) SetSpecularTexture(specularTexture *BaseTexture) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(specularTexture.JSObject())
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SpecularTextureEnabled returns the SpecularTextureEnabled property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#speculartextureenabled
+func (s *StandardMaterial) SpecularTextureEnabled(SpecularTextureEnabled bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(SpecularTextureEnabled)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSpecularTextureEnabled sets the SpecularTextureEnabled property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#speculartextureenabled
+func (s *StandardMaterial) SetSpecularTextureEnabled(SpecularTextureEnabled bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(SpecularTextureEnabled)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// State returns the State property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#state
+func (s *StandardMaterial) State(state string) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(state)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetState sets the State property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#state
+func (s *StandardMaterial) SetState(state string) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(state)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// TextureDirtyFlag returns the TextureDirtyFlag property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#texturedirtyflag
+func (s *StandardMaterial) TextureDirtyFlag(TextureDirtyFlag float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(TextureDirtyFlag)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTextureDirtyFlag sets the TextureDirtyFlag property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#texturedirtyflag
+func (s *StandardMaterial) SetTextureDirtyFlag(TextureDirtyFlag float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(TextureDirtyFlag)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// TriangleFanDrawMode returns the TriangleFanDrawMode property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#trianglefandrawmode
+func (s *StandardMaterial) TriangleFanDrawMode(TriangleFanDrawMode float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(TriangleFanDrawMode)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTriangleFanDrawMode sets the TriangleFanDrawMode property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#trianglefandrawmode
+func (s *StandardMaterial) SetTriangleFanDrawMode(TriangleFanDrawMode float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(TriangleFanDrawMode)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// TriangleFillMode returns the TriangleFillMode property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#trianglefillmode
+func (s *StandardMaterial) TriangleFillMode(TriangleFillMode float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(TriangleFillMode)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTriangleFillMode sets the TriangleFillMode property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#trianglefillmode
+func (s *StandardMaterial) SetTriangleFillMode(TriangleFillMode float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(TriangleFillMode)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// TriangleStripDrawMode returns the TriangleStripDrawMode property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#trianglestripdrawmode
+func (s *StandardMaterial) TriangleStripDrawMode(TriangleStripDrawMode float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(TriangleStripDrawMode)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTriangleStripDrawMode sets the TriangleStripDrawMode property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#trianglestripdrawmode
+func (s *StandardMaterial) SetTriangleStripDrawMode(TriangleStripDrawMode float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(TriangleStripDrawMode)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// TwoSidedLighting returns the TwoSidedLighting property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#twosidedlighting
+func (s *StandardMaterial) TwoSidedLighting(twoSidedLighting bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(twoSidedLighting)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTwoSidedLighting sets the TwoSidedLighting property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#twosidedlighting
+func (s *StandardMaterial) SetTwoSidedLighting(twoSidedLighting bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(twoSidedLighting)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#uniqueid
+func (s *StandardMaterial) UniqueId(uniqueId float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(uniqueId)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#uniqueid
+func (s *StandardMaterial) SetUniqueId(uniqueId float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(uniqueId)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// UseAlphaFromDiffuseTexture returns the UseAlphaFromDiffuseTexture property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#usealphafromdiffusetexture
+func (s *StandardMaterial) UseAlphaFromDiffuseTexture(useAlphaFromDiffuseTexture bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(useAlphaFromDiffuseTexture)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetUseAlphaFromDiffuseTexture sets the UseAlphaFromDiffuseTexture property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#usealphafromdiffusetexture
+func (s *StandardMaterial) SetUseAlphaFromDiffuseTexture(useAlphaFromDiffuseTexture bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(useAlphaFromDiffuseTexture)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// UseEmissiveAsIllumination returns the UseEmissiveAsIllumination property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#useemissiveasillumination
+func (s *StandardMaterial) UseEmissiveAsIllumination(useEmissiveAsIllumination bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(useEmissiveAsIllumination)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetUseEmissiveAsIllumination sets the UseEmissiveAsIllumination property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#useemissiveasillumination
+func (s *StandardMaterial) SetUseEmissiveAsIllumination(useEmissiveAsIllumination bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(useEmissiveAsIllumination)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// UseGlossinessFromSpecularMapAlpha returns the UseGlossinessFromSpecularMapAlpha property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#useglossinessfromspecularmapalpha
+func (s *StandardMaterial) UseGlossinessFromSpecularMapAlpha(useGlossinessFromSpecularMapAlpha bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(useGlossinessFromSpecularMapAlpha)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetUseGlossinessFromSpecularMapAlpha sets the UseGlossinessFromSpecularMapAlpha property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#useglossinessfromspecularmapalpha
+func (s *StandardMaterial) SetUseGlossinessFromSpecularMapAlpha(useGlossinessFromSpecularMapAlpha bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(useGlossinessFromSpecularMapAlpha)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// UseLightmapAsShadowmap returns the UseLightmapAsShadowmap property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#uselightmapasshadowmap
+func (s *StandardMaterial) UseLightmapAsShadowmap(useLightmapAsShadowmap bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(useLightmapAsShadowmap)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetUseLightmapAsShadowmap sets the UseLightmapAsShadowmap property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#uselightmapasshadowmap
+func (s *StandardMaterial) SetUseLightmapAsShadowmap(useLightmapAsShadowmap bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(useLightmapAsShadowmap)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// UseLogarithmicDepth returns the UseLogarithmicDepth property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#uselogarithmicdepth
+func (s *StandardMaterial) UseLogarithmicDepth(useLogarithmicDepth bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(useLogarithmicDepth)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetUseLogarithmicDepth sets the UseLogarithmicDepth property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#uselogarithmicdepth
+func (s *StandardMaterial) SetUseLogarithmicDepth(useLogarithmicDepth bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(useLogarithmicDepth)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// UseObjectSpaceNormalMap returns the UseObjectSpaceNormalMap property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#useobjectspacenormalmap
+func (s *StandardMaterial) UseObjectSpaceNormalMap(useObjectSpaceNormalMap bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(useObjectSpaceNormalMap)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetUseObjectSpaceNormalMap sets the UseObjectSpaceNormalMap property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#useobjectspacenormalmap
+func (s *StandardMaterial) SetUseObjectSpaceNormalMap(useObjectSpaceNormalMap bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(useObjectSpaceNormalMap)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// UseParallax returns the UseParallax property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#useparallax
+func (s *StandardMaterial) UseParallax(useParallax bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(useParallax)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetUseParallax sets the UseParallax property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#useparallax
+func (s *StandardMaterial) SetUseParallax(useParallax bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(useParallax)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// UseParallaxOcclusion returns the UseParallaxOcclusion property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#useparallaxocclusion
+func (s *StandardMaterial) UseParallaxOcclusion(useParallaxOcclusion bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(useParallaxOcclusion)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetUseParallaxOcclusion sets the UseParallaxOcclusion property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#useparallaxocclusion
+func (s *StandardMaterial) SetUseParallaxOcclusion(useParallaxOcclusion bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(useParallaxOcclusion)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// UseReflectionFresnelFromSpecular returns the UseReflectionFresnelFromSpecular property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#usereflectionfresnelfromspecular
+func (s *StandardMaterial) UseReflectionFresnelFromSpecular(useReflectionFresnelFromSpecular bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(useReflectionFresnelFromSpecular)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetUseReflectionFresnelFromSpecular sets the UseReflectionFresnelFromSpecular property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#usereflectionfresnelfromspecular
+func (s *StandardMaterial) SetUseReflectionFresnelFromSpecular(useReflectionFresnelFromSpecular bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(useReflectionFresnelFromSpecular)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// UseReflectionOverAlpha returns the UseReflectionOverAlpha property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#usereflectionoveralpha
+func (s *StandardMaterial) UseReflectionOverAlpha(useReflectionOverAlpha bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(useReflectionOverAlpha)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetUseReflectionOverAlpha sets the UseReflectionOverAlpha property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#usereflectionoveralpha
+func (s *StandardMaterial) SetUseReflectionOverAlpha(useReflectionOverAlpha bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(useReflectionOverAlpha)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// UseSpecularOverAlpha returns the UseSpecularOverAlpha property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#usespecularoveralpha
+func (s *StandardMaterial) UseSpecularOverAlpha(useSpecularOverAlpha bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(useSpecularOverAlpha)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetUseSpecularOverAlpha sets the UseSpecularOverAlpha property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#usespecularoveralpha
+func (s *StandardMaterial) SetUseSpecularOverAlpha(useSpecularOverAlpha bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(useSpecularOverAlpha)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// WireFrameFillMode returns the WireFrameFillMode property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#wireframefillmode
+func (s *StandardMaterial) WireFrameFillMode(WireFrameFillMode float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(WireFrameFillMode)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetWireFrameFillMode sets the WireFrameFillMode property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#wireframefillmode
+func (s *StandardMaterial) SetWireFrameFillMode(WireFrameFillMode float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(WireFrameFillMode)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// Wireframe returns the Wireframe property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#wireframe
+func (s *StandardMaterial) Wireframe(wireframe bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(wireframe)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetWireframe sets the Wireframe property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#wireframe
+func (s *StandardMaterial) SetWireframe(wireframe bool) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(wireframe)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// ZOffset returns the ZOffset property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#zoffset
+func (s *StandardMaterial) ZOffset(zOffset float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(zOffset)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetZOffset sets the ZOffset property of class StandardMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.standardmaterial#zoffset
+func (s *StandardMaterial) SetZOffset(zOffset float64) *StandardMaterial {
+	p := ba.ctx.Get("StandardMaterial").New(zOffset)
+	return StandardMaterialFromJSObject(p, ba.ctx)
+}
+
+*/

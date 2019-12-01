@@ -27,4 +27,21 @@ func HemisphereBuilderFromJSObject(p js.Value, ctx js.Value) *HemisphereBuilder 
 	return &HemisphereBuilder{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// CreateHemisphere calls the CreateHemisphere method on the HemisphereBuilder object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.hemispherebuilder#createhemisphere
+func (h *HemisphereBuilder) CreateHemisphere(name string, options js.Value, scene interface{}) *Mesh {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, name)
+	args = append(args, options)
+	args = append(args, scene)
+
+	retVal := h.p.Call("CreateHemisphere", args...)
+	return MeshFromJSObject(retVal, h.ctx)
+}
+
+/*
+
+ */

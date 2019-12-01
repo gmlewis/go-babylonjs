@@ -31,8 +31,72 @@ func PhysicsVortexEventFromJSObject(p js.Value, ctx js.Value) *PhysicsVortexEven
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsvortexevent
 func (ba *Babylon) NewPhysicsVortexEvent(_scene *Scene, _origin *Vector3, _options *PhysicsVortexEventOptions) *PhysicsVortexEvent {
-	p := ba.ctx.Get("PhysicsVortexEvent").New(_scene.JSObject(), _origin.JSObject(), _options.JSObject())
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, _scene.JSObject())
+	args = append(args, _origin.JSObject())
+	args = append(args, _options.JSObject())
+
+	p := ba.ctx.Get("PhysicsVortexEvent").New(args...)
 	return PhysicsVortexEventFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Disable calls the Disable method on the PhysicsVortexEvent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsvortexevent#disable
+func (p *PhysicsVortexEvent) Disable() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("disable", args...)
+}
+
+// PhysicsVortexEventDisposeOpts contains optional parameters for PhysicsVortexEvent.Dispose.
+type PhysicsVortexEventDisposeOpts struct {
+	Force *bool
+}
+
+// Dispose calls the Dispose method on the PhysicsVortexEvent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsvortexevent#dispose
+func (p *PhysicsVortexEvent) Dispose(opts *PhysicsVortexEventDisposeOpts) {
+	if opts == nil {
+		opts = &PhysicsVortexEventDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Force == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Force)
+	}
+
+	p.p.Call("dispose", args...)
+}
+
+// Enable calls the Enable method on the PhysicsVortexEvent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsvortexevent#enable
+func (p *PhysicsVortexEvent) Enable() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("enable", args...)
+}
+
+// GetData calls the GetData method on the PhysicsVortexEvent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsvortexevent#getdata
+func (p *PhysicsVortexEvent) GetData() *PhysicsVortexEventData {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("getData", args...)
+	return PhysicsVortexEventDataFromJSObject(retVal, p.ctx)
+}
+
+/*
+
+ */

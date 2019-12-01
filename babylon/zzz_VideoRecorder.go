@@ -32,7 +32,7 @@ func VideoRecorderFromJSObject(p js.Value, ctx js.Value) *VideoRecorder {
 
 // NewVideoRecorderOpts contains optional parameters for NewVideoRecorder.
 type NewVideoRecorderOpts struct {
-	Options *JSValue
+	Options *VideoRecorderOptions
 }
 
 // NewVideoRecorder returns a new VideoRecorder object.
@@ -43,8 +43,100 @@ func (ba *Babylon) NewVideoRecorder(engine *Engine, opts *NewVideoRecorderOpts) 
 		opts = &NewVideoRecorderOpts{}
 	}
 
-	p := ba.ctx.Get("VideoRecorder").New(engine.JSObject(), opts.Options.JSObject())
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, engine.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options.JSObject())
+	}
+
+	p := ba.ctx.Get("VideoRecorder").New(args...)
 	return VideoRecorderFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Dispose calls the Dispose method on the VideoRecorder object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videorecorder#dispose
+func (v *VideoRecorder) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	v.p.Call("dispose", args...)
+}
+
+// IsSupported calls the IsSupported method on the VideoRecorder object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videorecorder#issupported
+func (v *VideoRecorder) IsSupported(engine *Engine) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, engine.JSObject())
+
+	retVal := v.p.Call("IsSupported", args...)
+	return retVal.Bool()
+}
+
+// VideoRecorderStartRecordingOpts contains optional parameters for VideoRecorder.StartRecording.
+type VideoRecorderStartRecordingOpts struct {
+	FileName    *string
+	MaxDuration *float64
+}
+
+// StartRecording calls the StartRecording method on the VideoRecorder object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videorecorder#startrecording
+func (v *VideoRecorder) StartRecording(opts *VideoRecorderStartRecordingOpts) *Blob {
+	if opts == nil {
+		opts = &VideoRecorderStartRecordingOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.FileName == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FileName)
+	}
+	if opts.MaxDuration == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.MaxDuration)
+	}
+
+	retVal := v.p.Call("startRecording", args...)
+	return BlobFromJSObject(retVal, v.ctx)
+}
+
+// StopRecording calls the StopRecording method on the VideoRecorder object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videorecorder#stoprecording
+func (v *VideoRecorder) StopRecording() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	v.p.Call("stopRecording", args...)
+}
+
+/*
+
+// IsRecording returns the IsRecording property of class VideoRecorder.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videorecorder#isrecording
+func (v *VideoRecorder) IsRecording(isRecording bool) *VideoRecorder {
+	p := ba.ctx.Get("VideoRecorder").New(isRecording)
+	return VideoRecorderFromJSObject(p, ba.ctx)
+}
+
+// SetIsRecording sets the IsRecording property of class VideoRecorder.
+//
+// https://doc.babylonjs.com/api/classes/babylon.videorecorder#isrecording
+func (v *VideoRecorder) SetIsRecording(isRecording bool) *VideoRecorder {
+	p := ba.ctx.Get("VideoRecorder").New(isRecording)
+	return VideoRecorderFromJSObject(p, ba.ctx)
+}
+
+*/

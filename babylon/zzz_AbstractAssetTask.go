@@ -31,8 +31,149 @@ func AbstractAssetTaskFromJSObject(p js.Value, ctx js.Value) *AbstractAssetTask 
 //
 // https://doc.babylonjs.com/api/classes/babylon.abstractassettask
 func (ba *Babylon) NewAbstractAssetTask(name string) *AbstractAssetTask {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	p := ba.ctx.Get("AbstractAssetTask").New(args...)
+	return AbstractAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// Reset calls the Reset method on the AbstractAssetTask object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.abstractassettask#reset
+func (a *AbstractAssetTask) Reset() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	a.p.Call("reset", args...)
+}
+
+// Run calls the Run method on the AbstractAssetTask object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.abstractassettask#run
+func (a *AbstractAssetTask) Run(scene *Scene, onSuccess func(), onError func()) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, scene.JSObject())
+	args = append(args, onSuccess)
+	args = append(args, onError)
+
+	a.p.Call("run", args...)
+}
+
+// RunTask calls the RunTask method on the AbstractAssetTask object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.abstractassettask#runtask
+func (a *AbstractAssetTask) RunTask(scene *Scene, onSuccess func(), onError func()) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, scene.JSObject())
+	args = append(args, onSuccess)
+	args = append(args, onError)
+
+	a.p.Call("runTask", args...)
+}
+
+/*
+
+// ErrorObject returns the ErrorObject property of class AbstractAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.abstractassettask#errorobject
+func (a *AbstractAssetTask) ErrorObject(errorObject js.Value) *AbstractAssetTask {
+	p := ba.ctx.Get("AbstractAssetTask").New(errorObject)
+	return AbstractAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// SetErrorObject sets the ErrorObject property of class AbstractAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.abstractassettask#errorobject
+func (a *AbstractAssetTask) SetErrorObject(errorObject js.Value) *AbstractAssetTask {
+	p := ba.ctx.Get("AbstractAssetTask").New(errorObject)
+	return AbstractAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// IsCompleted returns the IsCompleted property of class AbstractAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.abstractassettask#iscompleted
+func (a *AbstractAssetTask) IsCompleted(isCompleted bool) *AbstractAssetTask {
+	p := ba.ctx.Get("AbstractAssetTask").New(isCompleted)
+	return AbstractAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// SetIsCompleted sets the IsCompleted property of class AbstractAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.abstractassettask#iscompleted
+func (a *AbstractAssetTask) SetIsCompleted(isCompleted bool) *AbstractAssetTask {
+	p := ba.ctx.Get("AbstractAssetTask").New(isCompleted)
+	return AbstractAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class AbstractAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.abstractassettask#name
+func (a *AbstractAssetTask) Name(name string) *AbstractAssetTask {
 	p := ba.ctx.Get("AbstractAssetTask").New(name)
 	return AbstractAssetTaskFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetName sets the Name property of class AbstractAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.abstractassettask#name
+func (a *AbstractAssetTask) SetName(name string) *AbstractAssetTask {
+	p := ba.ctx.Get("AbstractAssetTask").New(name)
+	return AbstractAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// OnError returns the OnError property of class AbstractAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.abstractassettask#onerror
+func (a *AbstractAssetTask) OnError(onError func()) *AbstractAssetTask {
+	p := ba.ctx.Get("AbstractAssetTask").New(onError)
+	return AbstractAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// SetOnError sets the OnError property of class AbstractAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.abstractassettask#onerror
+func (a *AbstractAssetTask) SetOnError(onError func()) *AbstractAssetTask {
+	p := ba.ctx.Get("AbstractAssetTask").New(onError)
+	return AbstractAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// OnSuccess returns the OnSuccess property of class AbstractAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.abstractassettask#onsuccess
+func (a *AbstractAssetTask) OnSuccess(onSuccess func()) *AbstractAssetTask {
+	p := ba.ctx.Get("AbstractAssetTask").New(onSuccess)
+	return AbstractAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// SetOnSuccess sets the OnSuccess property of class AbstractAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.abstractassettask#onsuccess
+func (a *AbstractAssetTask) SetOnSuccess(onSuccess func()) *AbstractAssetTask {
+	p := ba.ctx.Get("AbstractAssetTask").New(onSuccess)
+	return AbstractAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// TaskState returns the TaskState property of class AbstractAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.abstractassettask#taskstate
+func (a *AbstractAssetTask) TaskState(taskState *AssetTaskState) *AbstractAssetTask {
+	p := ba.ctx.Get("AbstractAssetTask").New(taskState.JSObject())
+	return AbstractAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// SetTaskState sets the TaskState property of class AbstractAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.abstractassettask#taskstate
+func (a *AbstractAssetTask) SetTaskState(taskState *AssetTaskState) *AbstractAssetTask {
+	p := ba.ctx.Get("AbstractAssetTask").New(taskState.JSObject())
+	return AbstractAssetTaskFromJSObject(p, ba.ctx)
+}
+
+*/

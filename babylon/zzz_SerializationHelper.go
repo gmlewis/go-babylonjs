@@ -27,4 +27,19 @@ func SerializationHelperFromJSObject(p js.Value, ctx js.Value) *SerializationHel
 	return &SerializationHelper{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// AppendSerializedAnimations calls the AppendSerializedAnimations method on the SerializationHelper object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.serializationhelper#appendserializedanimations
+func (s *SerializationHelper) AppendSerializedAnimations(source js.Value, destination interface{}) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, source)
+	args = append(args, destination)
+
+	s.p.Call("AppendSerializedAnimations", args...)
+}
+
+/*
+
+ */

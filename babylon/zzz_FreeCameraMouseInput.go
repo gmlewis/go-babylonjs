@@ -31,7 +31,7 @@ func FreeCameraMouseInputFromJSObject(p js.Value, ctx js.Value) *FreeCameraMouse
 
 // NewFreeCameraMouseInputOpts contains optional parameters for NewFreeCameraMouseInput.
 type NewFreeCameraMouseInputOpts struct {
-	TouchEnabled *JSBool
+	TouchEnabled *bool
 }
 
 // NewFreeCameraMouseInput returns a new FreeCameraMouseInput object.
@@ -42,8 +42,158 @@ func (ba *Babylon) NewFreeCameraMouseInput(opts *NewFreeCameraMouseInputOpts) *F
 		opts = &NewFreeCameraMouseInputOpts{}
 	}
 
-	p := ba.ctx.Get("FreeCameraMouseInput").New(opts.TouchEnabled.JSObject())
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.TouchEnabled == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.TouchEnabled)
+	}
+
+	p := ba.ctx.Get("FreeCameraMouseInput").New(args...)
 	return FreeCameraMouseInputFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// FreeCameraMouseInputAttachControlOpts contains optional parameters for FreeCameraMouseInput.AttachControl.
+type FreeCameraMouseInputAttachControlOpts struct {
+	NoPreventDefault *bool
+}
+
+// AttachControl calls the AttachControl method on the FreeCameraMouseInput object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.freecameramouseinput#attachcontrol
+func (f *FreeCameraMouseInput) AttachControl(element js.Value, opts *FreeCameraMouseInputAttachControlOpts) {
+	if opts == nil {
+		opts = &FreeCameraMouseInputAttachControlOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, element)
+
+	if opts.NoPreventDefault == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoPreventDefault)
+	}
+
+	f.p.Call("attachControl", args...)
+}
+
+// DetachControl calls the DetachControl method on the FreeCameraMouseInput object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.freecameramouseinput#detachcontrol
+func (f *FreeCameraMouseInput) DetachControl(element js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, element)
+
+	f.p.Call("detachControl", args...)
+}
+
+// GetClassName calls the GetClassName method on the FreeCameraMouseInput object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.freecameramouseinput#getclassname
+func (f *FreeCameraMouseInput) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetSimpleName calls the GetSimpleName method on the FreeCameraMouseInput object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.freecameramouseinput#getsimplename
+func (f *FreeCameraMouseInput) GetSimpleName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("getSimpleName", args...)
+	return retVal.String()
+}
+
+/*
+
+// AngularSensibility returns the AngularSensibility property of class FreeCameraMouseInput.
+//
+// https://doc.babylonjs.com/api/classes/babylon.freecameramouseinput#angularsensibility
+func (f *FreeCameraMouseInput) AngularSensibility(angularSensibility float64) *FreeCameraMouseInput {
+	p := ba.ctx.Get("FreeCameraMouseInput").New(angularSensibility)
+	return FreeCameraMouseInputFromJSObject(p, ba.ctx)
+}
+
+// SetAngularSensibility sets the AngularSensibility property of class FreeCameraMouseInput.
+//
+// https://doc.babylonjs.com/api/classes/babylon.freecameramouseinput#angularsensibility
+func (f *FreeCameraMouseInput) SetAngularSensibility(angularSensibility float64) *FreeCameraMouseInput {
+	p := ba.ctx.Get("FreeCameraMouseInput").New(angularSensibility)
+	return FreeCameraMouseInputFromJSObject(p, ba.ctx)
+}
+
+// Buttons returns the Buttons property of class FreeCameraMouseInput.
+//
+// https://doc.babylonjs.com/api/classes/babylon.freecameramouseinput#buttons
+func (f *FreeCameraMouseInput) Buttons(buttons float64) *FreeCameraMouseInput {
+	p := ba.ctx.Get("FreeCameraMouseInput").New(buttons)
+	return FreeCameraMouseInputFromJSObject(p, ba.ctx)
+}
+
+// SetButtons sets the Buttons property of class FreeCameraMouseInput.
+//
+// https://doc.babylonjs.com/api/classes/babylon.freecameramouseinput#buttons
+func (f *FreeCameraMouseInput) SetButtons(buttons float64) *FreeCameraMouseInput {
+	p := ba.ctx.Get("FreeCameraMouseInput").New(buttons)
+	return FreeCameraMouseInputFromJSObject(p, ba.ctx)
+}
+
+// Camera returns the Camera property of class FreeCameraMouseInput.
+//
+// https://doc.babylonjs.com/api/classes/babylon.freecameramouseinput#camera
+func (f *FreeCameraMouseInput) Camera(camera *FreeCamera) *FreeCameraMouseInput {
+	p := ba.ctx.Get("FreeCameraMouseInput").New(camera.JSObject())
+	return FreeCameraMouseInputFromJSObject(p, ba.ctx)
+}
+
+// SetCamera sets the Camera property of class FreeCameraMouseInput.
+//
+// https://doc.babylonjs.com/api/classes/babylon.freecameramouseinput#camera
+func (f *FreeCameraMouseInput) SetCamera(camera *FreeCamera) *FreeCameraMouseInput {
+	p := ba.ctx.Get("FreeCameraMouseInput").New(camera.JSObject())
+	return FreeCameraMouseInputFromJSObject(p, ba.ctx)
+}
+
+// OnPointerMovedObservable returns the OnPointerMovedObservable property of class FreeCameraMouseInput.
+//
+// https://doc.babylonjs.com/api/classes/babylon.freecameramouseinput#onpointermovedobservable
+func (f *FreeCameraMouseInput) OnPointerMovedObservable(onPointerMovedObservable *Observable) *FreeCameraMouseInput {
+	p := ba.ctx.Get("FreeCameraMouseInput").New(onPointerMovedObservable.JSObject())
+	return FreeCameraMouseInputFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerMovedObservable sets the OnPointerMovedObservable property of class FreeCameraMouseInput.
+//
+// https://doc.babylonjs.com/api/classes/babylon.freecameramouseinput#onpointermovedobservable
+func (f *FreeCameraMouseInput) SetOnPointerMovedObservable(onPointerMovedObservable *Observable) *FreeCameraMouseInput {
+	p := ba.ctx.Get("FreeCameraMouseInput").New(onPointerMovedObservable.JSObject())
+	return FreeCameraMouseInputFromJSObject(p, ba.ctx)
+}
+
+// TouchEnabled returns the TouchEnabled property of class FreeCameraMouseInput.
+//
+// https://doc.babylonjs.com/api/classes/babylon.freecameramouseinput#touchenabled
+func (f *FreeCameraMouseInput) TouchEnabled(touchEnabled bool) *FreeCameraMouseInput {
+	p := ba.ctx.Get("FreeCameraMouseInput").New(touchEnabled)
+	return FreeCameraMouseInputFromJSObject(p, ba.ctx)
+}
+
+// SetTouchEnabled sets the TouchEnabled property of class FreeCameraMouseInput.
+//
+// https://doc.babylonjs.com/api/classes/babylon.freecameramouseinput#touchenabled
+func (f *FreeCameraMouseInput) SetTouchEnabled(touchEnabled bool) *FreeCameraMouseInput {
+	p := ba.ctx.Get("FreeCameraMouseInput").New(touchEnabled)
+	return FreeCameraMouseInputFromJSObject(p, ba.ctx)
+}
+
+*/

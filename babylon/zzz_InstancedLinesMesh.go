@@ -31,8 +31,574 @@ func InstancedLinesMeshFromJSObject(p js.Value, ctx js.Value) *InstancedLinesMes
 //
 // https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh
 func (ba *Babylon) NewInstancedLinesMesh(name string, source *LinesMesh) *InstancedLinesMesh {
-	p := ba.ctx.Get("InstancedLinesMesh").New(name, source.JSObject())
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, source.JSObject())
+
+	p := ba.ctx.Get("InstancedLinesMesh").New(args...)
 	return InstancedLinesMeshFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// InstancedLinesMeshCloneOpts contains optional parameters for InstancedLinesMesh.Clone.
+type InstancedLinesMeshCloneOpts struct {
+	NewParent          *Node
+	DoNotCloneChildren *bool
+}
+
+// Clone calls the Clone method on the InstancedLinesMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#clone
+func (i *InstancedLinesMesh) Clone(name string, opts *InstancedLinesMeshCloneOpts) *AbstractMesh {
+	if opts == nil {
+		opts = &InstancedLinesMeshCloneOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, name)
+
+	if opts.NewParent == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.NewParent.JSObject())
+	}
+	if opts.DoNotCloneChildren == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DoNotCloneChildren)
+	}
+
+	retVal := i.p.Call("clone", args...)
+	return AbstractMeshFromJSObject(retVal, i.ctx)
+}
+
+// InstancedLinesMeshDisposeOpts contains optional parameters for InstancedLinesMesh.Dispose.
+type InstancedLinesMeshDisposeOpts struct {
+	DoNotRecurse               *bool
+	DisposeMaterialAndTextures *bool
+}
+
+// Dispose calls the Dispose method on the InstancedLinesMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#dispose
+func (i *InstancedLinesMesh) Dispose(opts *InstancedLinesMeshDisposeOpts) {
+	if opts == nil {
+		opts = &InstancedLinesMeshDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.DoNotRecurse == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DoNotRecurse)
+	}
+	if opts.DisposeMaterialAndTextures == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DisposeMaterialAndTextures)
+	}
+
+	i.p.Call("dispose", args...)
+}
+
+// InstancedLinesMeshEnableEdgesRenderingOpts contains optional parameters for InstancedLinesMesh.EnableEdgesRendering.
+type InstancedLinesMeshEnableEdgesRenderingOpts struct {
+	Epsilon                       *float64
+	CheckVerticesInsteadOfIndices *bool
+}
+
+// EnableEdgesRendering calls the EnableEdgesRendering method on the InstancedLinesMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#enableedgesrendering
+func (i *InstancedLinesMesh) EnableEdgesRendering(opts *InstancedLinesMeshEnableEdgesRenderingOpts) *InstancedLinesMesh {
+	if opts == nil {
+		opts = &InstancedLinesMeshEnableEdgesRenderingOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.Epsilon == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Epsilon)
+	}
+	if opts.CheckVerticesInsteadOfIndices == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.CheckVerticesInsteadOfIndices)
+	}
+
+	retVal := i.p.Call("enableEdgesRendering", args...)
+	return InstancedLinesMeshFromJSObject(retVal, i.ctx)
+}
+
+// GetClassName calls the GetClassName method on the InstancedLinesMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#getclassname
+func (i *InstancedLinesMesh) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := i.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetIndices calls the GetIndices method on the InstancedLinesMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#getindices
+func (i *InstancedLinesMesh) GetIndices() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := i.p.Call("getIndices", args...)
+	return retVal
+}
+
+// GetLOD calls the GetLOD method on the InstancedLinesMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#getlod
+func (i *InstancedLinesMesh) GetLOD(camera *Camera) *AbstractMesh {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, camera.JSObject())
+
+	retVal := i.p.Call("getLOD", args...)
+	return AbstractMeshFromJSObject(retVal, i.ctx)
+}
+
+// GetTotalIndices calls the GetTotalIndices method on the InstancedLinesMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#gettotalindices
+func (i *InstancedLinesMesh) GetTotalIndices() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := i.p.Call("getTotalIndices", args...)
+	return retVal.Float()
+}
+
+// GetTotalVertices calls the GetTotalVertices method on the InstancedLinesMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#gettotalvertices
+func (i *InstancedLinesMesh) GetTotalVertices() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := i.p.Call("getTotalVertices", args...)
+	return retVal.Float()
+}
+
+// InstancedLinesMeshGetVerticesDataOpts contains optional parameters for InstancedLinesMesh.GetVerticesData.
+type InstancedLinesMeshGetVerticesDataOpts struct {
+	CopyWhenShared *bool
+}
+
+// GetVerticesData calls the GetVerticesData method on the InstancedLinesMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#getverticesdata
+func (i *InstancedLinesMesh) GetVerticesData(kind string, opts *InstancedLinesMeshGetVerticesDataOpts) js.Value {
+	if opts == nil {
+		opts = &InstancedLinesMeshGetVerticesDataOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, kind)
+
+	if opts.CopyWhenShared == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.CopyWhenShared)
+	}
+
+	retVal := i.p.Call("getVerticesData", args...)
+	return retVal
+}
+
+// GetWorldMatrix calls the GetWorldMatrix method on the InstancedLinesMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#getworldmatrix
+func (i *InstancedLinesMesh) GetWorldMatrix() *Matrix {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := i.p.Call("getWorldMatrix", args...)
+	return MatrixFromJSObject(retVal, i.ctx)
+}
+
+// InstancedLinesMeshIsReadyOpts contains optional parameters for InstancedLinesMesh.IsReady.
+type InstancedLinesMeshIsReadyOpts struct {
+	CompleteCheck *bool
+}
+
+// IsReady calls the IsReady method on the InstancedLinesMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#isready
+func (i *InstancedLinesMesh) IsReady(opts *InstancedLinesMeshIsReadyOpts) bool {
+	if opts == nil {
+		opts = &InstancedLinesMeshIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.CompleteCheck == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.CompleteCheck)
+	}
+
+	retVal := i.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// IsVerticesDataPresent calls the IsVerticesDataPresent method on the InstancedLinesMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#isverticesdatapresent
+func (i *InstancedLinesMesh) IsVerticesDataPresent(kind string) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, kind)
+
+	retVal := i.p.Call("isVerticesDataPresent", args...)
+	return retVal.Bool()
+}
+
+// InstancedLinesMeshRefreshBoundingInfoOpts contains optional parameters for InstancedLinesMesh.RefreshBoundingInfo.
+type InstancedLinesMeshRefreshBoundingInfoOpts struct {
+	ApplySkeleton *bool
+}
+
+// RefreshBoundingInfo calls the RefreshBoundingInfo method on the InstancedLinesMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#refreshboundinginfo
+func (i *InstancedLinesMesh) RefreshBoundingInfo(opts *InstancedLinesMeshRefreshBoundingInfoOpts) *InstancedMesh {
+	if opts == nil {
+		opts = &InstancedLinesMeshRefreshBoundingInfoOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ApplySkeleton == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ApplySkeleton)
+	}
+
+	retVal := i.p.Call("refreshBoundingInfo", args...)
+	return InstancedMeshFromJSObject(retVal, i.ctx)
+}
+
+// InstancedLinesMeshSetIndicesOpts contains optional parameters for InstancedLinesMesh.SetIndices.
+type InstancedLinesMeshSetIndicesOpts struct {
+	TotalVertices *float64
+}
+
+// SetIndices calls the SetIndices method on the InstancedLinesMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#setindices
+func (i *InstancedLinesMesh) SetIndices(indices js.Value, opts *InstancedLinesMeshSetIndicesOpts) *Mesh {
+	if opts == nil {
+		opts = &InstancedLinesMeshSetIndicesOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, indices)
+
+	if opts.TotalVertices == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.TotalVertices)
+	}
+
+	retVal := i.p.Call("setIndices", args...)
+	return MeshFromJSObject(retVal, i.ctx)
+}
+
+// InstancedLinesMeshSetVerticesDataOpts contains optional parameters for InstancedLinesMesh.SetVerticesData.
+type InstancedLinesMeshSetVerticesDataOpts struct {
+	Updatable *bool
+	Stride    *float64
+}
+
+// SetVerticesData calls the SetVerticesData method on the InstancedLinesMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#setverticesdata
+func (i *InstancedLinesMesh) SetVerticesData(kind string, data js.Value, opts *InstancedLinesMeshSetVerticesDataOpts) *AbstractMesh {
+	if opts == nil {
+		opts = &InstancedLinesMeshSetVerticesDataOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+2)
+
+	args = append(args, kind)
+	args = append(args, data)
+
+	if opts.Updatable == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Updatable)
+	}
+	if opts.Stride == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Stride)
+	}
+
+	retVal := i.p.Call("setVerticesData", args...)
+	return AbstractMeshFromJSObject(retVal, i.ctx)
+}
+
+// InstancedLinesMeshUpdateVerticesDataOpts contains optional parameters for InstancedLinesMesh.UpdateVerticesData.
+type InstancedLinesMeshUpdateVerticesDataOpts struct {
+	UpdateExtends *bool
+	MakeItUnique  *bool
+}
+
+// UpdateVerticesData calls the UpdateVerticesData method on the InstancedLinesMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#updateverticesdata
+func (i *InstancedLinesMesh) UpdateVerticesData(kind string, data js.Value, opts *InstancedLinesMeshUpdateVerticesDataOpts) *Mesh {
+	if opts == nil {
+		opts = &InstancedLinesMeshUpdateVerticesDataOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+2)
+
+	args = append(args, kind)
+	args = append(args, data)
+
+	if opts.UpdateExtends == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UpdateExtends)
+	}
+	if opts.MakeItUnique == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.MakeItUnique)
+	}
+
+	retVal := i.p.Call("updateVerticesData", args...)
+	return MeshFromJSObject(retVal, i.ctx)
+}
+
+// _removeLightSource calls the _removeLightSource method on the InstancedLinesMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#_removelightsource
+func (i *InstancedLinesMesh) _removeLightSource(light *Light, dispose bool) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, light.JSObject())
+	args = append(args, dispose)
+
+	i.p.Call("_removeLightSource", args...)
+}
+
+// _resyncLightSource calls the _resyncLightSource method on the InstancedLinesMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#_resynclightsource
+func (i *InstancedLinesMesh) _resyncLightSource(light *Light) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, light.JSObject())
+
+	i.p.Call("_resyncLightSource", args...)
+}
+
+// _resyncLightSources calls the _resyncLightSources method on the InstancedLinesMesh object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#_resynclightsources
+func (i *InstancedLinesMesh) _resyncLightSources() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	i.p.Call("_resyncLightSources", args...)
+}
+
+/*
+
+// InstancedBuffers returns the InstancedBuffers property of class InstancedLinesMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#instancedbuffers
+func (i *InstancedLinesMesh) InstancedBuffers(instancedBuffers js.Value) *InstancedLinesMesh {
+	p := ba.ctx.Get("InstancedLinesMesh").New(instancedBuffers)
+	return InstancedLinesMeshFromJSObject(p, ba.ctx)
+}
+
+// SetInstancedBuffers sets the InstancedBuffers property of class InstancedLinesMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#instancedbuffers
+func (i *InstancedLinesMesh) SetInstancedBuffers(instancedBuffers js.Value) *InstancedLinesMesh {
+	p := ba.ctx.Get("InstancedLinesMesh").New(instancedBuffers)
+	return InstancedLinesMeshFromJSObject(p, ba.ctx)
+}
+
+// IntersectionThreshold returns the IntersectionThreshold property of class InstancedLinesMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#intersectionthreshold
+func (i *InstancedLinesMesh) IntersectionThreshold(intersectionThreshold float64) *InstancedLinesMesh {
+	p := ba.ctx.Get("InstancedLinesMesh").New(intersectionThreshold)
+	return InstancedLinesMeshFromJSObject(p, ba.ctx)
+}
+
+// SetIntersectionThreshold sets the IntersectionThreshold property of class InstancedLinesMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#intersectionthreshold
+func (i *InstancedLinesMesh) SetIntersectionThreshold(intersectionThreshold float64) *InstancedLinesMesh {
+	p := ba.ctx.Get("InstancedLinesMesh").New(intersectionThreshold)
+	return InstancedLinesMeshFromJSObject(p, ba.ctx)
+}
+
+// IsAnInstance returns the IsAnInstance property of class InstancedLinesMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#isaninstance
+func (i *InstancedLinesMesh) IsAnInstance(isAnInstance bool) *InstancedLinesMesh {
+	p := ba.ctx.Get("InstancedLinesMesh").New(isAnInstance)
+	return InstancedLinesMeshFromJSObject(p, ba.ctx)
+}
+
+// SetIsAnInstance sets the IsAnInstance property of class InstancedLinesMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#isaninstance
+func (i *InstancedLinesMesh) SetIsAnInstance(isAnInstance bool) *InstancedLinesMesh {
+	p := ba.ctx.Get("InstancedLinesMesh").New(isAnInstance)
+	return InstancedLinesMeshFromJSObject(p, ba.ctx)
+}
+
+// LightSources returns the LightSources property of class InstancedLinesMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#lightsources
+func (i *InstancedLinesMesh) LightSources(lightSources *Light) *InstancedLinesMesh {
+	p := ba.ctx.Get("InstancedLinesMesh").New(lightSources.JSObject())
+	return InstancedLinesMeshFromJSObject(p, ba.ctx)
+}
+
+// SetLightSources sets the LightSources property of class InstancedLinesMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#lightsources
+func (i *InstancedLinesMesh) SetLightSources(lightSources *Light) *InstancedLinesMesh {
+	p := ba.ctx.Get("InstancedLinesMesh").New(lightSources.JSObject())
+	return InstancedLinesMeshFromJSObject(p, ba.ctx)
+}
+
+// Material returns the Material property of class InstancedLinesMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#material
+func (i *InstancedLinesMesh) Material(material *Material) *InstancedLinesMesh {
+	p := ba.ctx.Get("InstancedLinesMesh").New(material.JSObject())
+	return InstancedLinesMeshFromJSObject(p, ba.ctx)
+}
+
+// SetMaterial sets the Material property of class InstancedLinesMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#material
+func (i *InstancedLinesMesh) SetMaterial(material *Material) *InstancedLinesMesh {
+	p := ba.ctx.Get("InstancedLinesMesh").New(material.JSObject())
+	return InstancedLinesMeshFromJSObject(p, ba.ctx)
+}
+
+// ReceiveShadows returns the ReceiveShadows property of class InstancedLinesMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#receiveshadows
+func (i *InstancedLinesMesh) ReceiveShadows(receiveShadows bool) *InstancedLinesMesh {
+	p := ba.ctx.Get("InstancedLinesMesh").New(receiveShadows)
+	return InstancedLinesMeshFromJSObject(p, ba.ctx)
+}
+
+// SetReceiveShadows sets the ReceiveShadows property of class InstancedLinesMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#receiveshadows
+func (i *InstancedLinesMesh) SetReceiveShadows(receiveShadows bool) *InstancedLinesMesh {
+	p := ba.ctx.Get("InstancedLinesMesh").New(receiveShadows)
+	return InstancedLinesMeshFromJSObject(p, ba.ctx)
+}
+
+// RenderingGroupId returns the RenderingGroupId property of class InstancedLinesMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#renderinggroupid
+func (i *InstancedLinesMesh) RenderingGroupId(renderingGroupId float64) *InstancedLinesMesh {
+	p := ba.ctx.Get("InstancedLinesMesh").New(renderingGroupId)
+	return InstancedLinesMeshFromJSObject(p, ba.ctx)
+}
+
+// SetRenderingGroupId sets the RenderingGroupId property of class InstancedLinesMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#renderinggroupid
+func (i *InstancedLinesMesh) SetRenderingGroupId(renderingGroupId float64) *InstancedLinesMesh {
+	p := ba.ctx.Get("InstancedLinesMesh").New(renderingGroupId)
+	return InstancedLinesMeshFromJSObject(p, ba.ctx)
+}
+
+// Skeleton returns the Skeleton property of class InstancedLinesMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#skeleton
+func (i *InstancedLinesMesh) Skeleton(skeleton *Skeleton) *InstancedLinesMesh {
+	p := ba.ctx.Get("InstancedLinesMesh").New(skeleton.JSObject())
+	return InstancedLinesMeshFromJSObject(p, ba.ctx)
+}
+
+// SetSkeleton sets the Skeleton property of class InstancedLinesMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#skeleton
+func (i *InstancedLinesMesh) SetSkeleton(skeleton *Skeleton) *InstancedLinesMesh {
+	p := ba.ctx.Get("InstancedLinesMesh").New(skeleton.JSObject())
+	return InstancedLinesMeshFromJSObject(p, ba.ctx)
+}
+
+// SourceMesh returns the SourceMesh property of class InstancedLinesMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#sourcemesh
+func (i *InstancedLinesMesh) SourceMesh(sourceMesh *Mesh) *InstancedLinesMesh {
+	p := ba.ctx.Get("InstancedLinesMesh").New(sourceMesh.JSObject())
+	return InstancedLinesMeshFromJSObject(p, ba.ctx)
+}
+
+// SetSourceMesh sets the SourceMesh property of class InstancedLinesMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#sourcemesh
+func (i *InstancedLinesMesh) SetSourceMesh(sourceMesh *Mesh) *InstancedLinesMesh {
+	p := ba.ctx.Get("InstancedLinesMesh").New(sourceMesh.JSObject())
+	return InstancedLinesMeshFromJSObject(p, ba.ctx)
+}
+
+// Visibility returns the Visibility property of class InstancedLinesMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#visibility
+func (i *InstancedLinesMesh) Visibility(visibility float64) *InstancedLinesMesh {
+	p := ba.ctx.Get("InstancedLinesMesh").New(visibility)
+	return InstancedLinesMeshFromJSObject(p, ba.ctx)
+}
+
+// SetVisibility sets the Visibility property of class InstancedLinesMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#visibility
+func (i *InstancedLinesMesh) SetVisibility(visibility float64) *InstancedLinesMesh {
+	p := ba.ctx.Get("InstancedLinesMesh").New(visibility)
+	return InstancedLinesMeshFromJSObject(p, ba.ctx)
+}
+
+// _positions returns the _positions property of class InstancedLinesMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#_positions
+func (i *InstancedLinesMesh) _positions(_positions *Vector3) *InstancedLinesMesh {
+	p := ba.ctx.Get("InstancedLinesMesh").New(_positions.JSObject())
+	return InstancedLinesMeshFromJSObject(p, ba.ctx)
+}
+
+// Set_positions sets the _positions property of class InstancedLinesMesh.
+//
+// https://doc.babylonjs.com/api/classes/babylon.instancedlinesmesh#_positions
+func (i *InstancedLinesMesh) Set_positions(_positions *Vector3) *InstancedLinesMesh {
+	p := ba.ctx.Get("InstancedLinesMesh").New(_positions.JSObject())
+	return InstancedLinesMeshFromJSObject(p, ba.ctx)
+}
+
+*/

@@ -29,7 +29,7 @@ func StackPanelFromJSObject(p js.Value, ctx js.Value) *StackPanel {
 
 // NewStackPanelOpts contains optional parameters for NewStackPanel.
 type NewStackPanelOpts struct {
-	Name *JSString
+	Name *string
 }
 
 // NewStackPanel returns a new StackPanel object.
@@ -40,8 +40,1686 @@ func (ba *Babylon) NewStackPanel(opts *NewStackPanelOpts) *StackPanel {
 		opts = &NewStackPanelOpts{}
 	}
 
-	p := ba.ctx.Get("StackPanel").New(opts.Name.JSObject())
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Name == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Name)
+	}
+
+	p := ba.ctx.Get("StackPanel").New(args...)
 	return StackPanelFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AddControl calls the AddControl method on the StackPanel object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#addcontrol
+func (s *StackPanel) AddControl(control *Control) *Container {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, control.JSObject())
+
+	retVal := s.p.Call("addControl", args...)
+	return ContainerFromJSObject(retVal, s.ctx)
+}
+
+// ClearControls calls the ClearControls method on the StackPanel object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#clearcontrols
+func (s *StackPanel) ClearControls() *Container {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("clearControls", args...)
+	return ContainerFromJSObject(retVal, s.ctx)
+}
+
+// Contains calls the Contains method on the StackPanel object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#contains
+func (s *StackPanel) Contains(x float64, y float64) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, x)
+	args = append(args, y)
+
+	retVal := s.p.Call("contains", args...)
+	return retVal.Bool()
+}
+
+// ContainsControl calls the ContainsControl method on the StackPanel object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#containscontrol
+func (s *StackPanel) ContainsControl(control *Control) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, control.JSObject())
+
+	retVal := s.p.Call("containsControl", args...)
+	return retVal.Bool()
+}
+
+// Dispose calls the Dispose method on the StackPanel object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#dispose
+func (s *StackPanel) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("dispose", args...)
+}
+
+// GetAscendantOfClass calls the GetAscendantOfClass method on the StackPanel object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#getascendantofclass
+func (s *StackPanel) GetAscendantOfClass(className string) *Control {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, className)
+
+	retVal := s.p.Call("getAscendantOfClass", args...)
+	return ControlFromJSObject(retVal, s.ctx)
+}
+
+// GetChildByName calls the GetChildByName method on the StackPanel object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#getchildbyname
+func (s *StackPanel) GetChildByName(name string) *Control {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := s.p.Call("getChildByName", args...)
+	return ControlFromJSObject(retVal, s.ctx)
+}
+
+// GetChildByType calls the GetChildByType method on the StackPanel object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#getchildbytype
+func (s *StackPanel) GetChildByType(name string, jsType string) *Control {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	retVal := s.p.Call("getChildByType", args...)
+	return ControlFromJSObject(retVal, s.ctx)
+}
+
+// GetClassName calls the GetClassName method on the StackPanel object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#getclassname
+func (s *StackPanel) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// StackPanelGetDescendantsOpts contains optional parameters for StackPanel.GetDescendants.
+type StackPanelGetDescendantsOpts struct {
+	DirectDescendantsOnly *bool
+	Predicate             *func()
+}
+
+// GetDescendants calls the GetDescendants method on the StackPanel object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#getdescendants
+func (s *StackPanel) GetDescendants(opts *StackPanelGetDescendantsOpts) *Control {
+	if opts == nil {
+		opts = &StackPanelGetDescendantsOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	retVal := s.p.Call("getDescendants", args...)
+	return ControlFromJSObject(retVal, s.ctx)
+}
+
+// StackPanelGetDescendantsToRefOpts contains optional parameters for StackPanel.GetDescendantsToRef.
+type StackPanelGetDescendantsToRefOpts struct {
+	DirectDescendantsOnly *bool
+	Predicate             *func()
+}
+
+// GetDescendantsToRef calls the GetDescendantsToRef method on the StackPanel object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#getdescendantstoref
+func (s *StackPanel) GetDescendantsToRef(results *Control, opts *StackPanelGetDescendantsToRefOpts) {
+	if opts == nil {
+		opts = &StackPanelGetDescendantsToRefOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, results.JSObject())
+
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	s.p.Call("getDescendantsToRef", args...)
+}
+
+// GetLocalCoordinates calls the GetLocalCoordinates method on the StackPanel object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#getlocalcoordinates
+func (s *StackPanel) GetLocalCoordinates(globalCoordinates *Vector2) *Vector2 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, globalCoordinates.JSObject())
+
+	retVal := s.p.Call("getLocalCoordinates", args...)
+	return Vector2FromJSObject(retVal, s.ctx)
+}
+
+// GetLocalCoordinatesToRef calls the GetLocalCoordinatesToRef method on the StackPanel object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#getlocalcoordinatestoref
+func (s *StackPanel) GetLocalCoordinatesToRef(globalCoordinates *Vector2, result *Vector2) *Control {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, globalCoordinates.JSObject())
+	args = append(args, result.JSObject())
+
+	retVal := s.p.Call("getLocalCoordinatesToRef", args...)
+	return ControlFromJSObject(retVal, s.ctx)
+}
+
+// GetParentLocalCoordinates calls the GetParentLocalCoordinates method on the StackPanel object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#getparentlocalcoordinates
+func (s *StackPanel) GetParentLocalCoordinates(globalCoordinates *Vector2) *Vector2 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, globalCoordinates.JSObject())
+
+	retVal := s.p.Call("getParentLocalCoordinates", args...)
+	return Vector2FromJSObject(retVal, s.ctx)
+}
+
+// IsAscendant calls the IsAscendant method on the StackPanel object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#isascendant
+func (s *StackPanel) IsAscendant(container *Control) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, container.JSObject())
+
+	retVal := s.p.Call("isAscendant", args...)
+	return retVal.Bool()
+}
+
+// LinkWithMesh calls the LinkWithMesh method on the StackPanel object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#linkwithmesh
+func (s *StackPanel) LinkWithMesh(mesh *AbstractMesh) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	s.p.Call("linkWithMesh", args...)
+}
+
+// MoveToVector3 calls the MoveToVector3 method on the StackPanel object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#movetovector3
+func (s *StackPanel) MoveToVector3(position *Vector3, scene *Scene) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, position.JSObject())
+	args = append(args, scene.JSObject())
+
+	s.p.Call("moveToVector3", args...)
+}
+
+// RemoveControl calls the RemoveControl method on the StackPanel object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#removecontrol
+func (s *StackPanel) RemoveControl(control *Control) *Container {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, control.JSObject())
+
+	retVal := s.p.Call("removeControl", args...)
+	return ContainerFromJSObject(retVal, s.ctx)
+}
+
+// _flagDescendantsAsMatrixDirty calls the _flagDescendantsAsMatrixDirty method on the StackPanel object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#_flagdescendantsasmatrixdirty
+func (s *StackPanel) _flagDescendantsAsMatrixDirty() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("_flagDescendantsAsMatrixDirty", args...)
+}
+
+/*
+
+// AdaptHeightToChildren returns the AdaptHeightToChildren property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#adaptheighttochildren
+func (s *StackPanel) AdaptHeightToChildren(adaptHeightToChildren bool) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(adaptHeightToChildren)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetAdaptHeightToChildren sets the AdaptHeightToChildren property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#adaptheighttochildren
+func (s *StackPanel) SetAdaptHeightToChildren(adaptHeightToChildren bool) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(adaptHeightToChildren)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// AdaptWidthToChildren returns the AdaptWidthToChildren property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#adaptwidthtochildren
+func (s *StackPanel) AdaptWidthToChildren(adaptWidthToChildren bool) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(adaptWidthToChildren)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetAdaptWidthToChildren sets the AdaptWidthToChildren property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#adaptwidthtochildren
+func (s *StackPanel) SetAdaptWidthToChildren(adaptWidthToChildren bool) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(adaptWidthToChildren)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// AllowAlphaInheritance returns the AllowAlphaInheritance property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#allowalphainheritance
+func (s *StackPanel) AllowAlphaInheritance(AllowAlphaInheritance bool) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(AllowAlphaInheritance)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetAllowAlphaInheritance sets the AllowAlphaInheritance property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#allowalphainheritance
+func (s *StackPanel) SetAllowAlphaInheritance(AllowAlphaInheritance bool) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(AllowAlphaInheritance)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// Alpha returns the Alpha property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#alpha
+func (s *StackPanel) Alpha(alpha float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(alpha)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetAlpha sets the Alpha property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#alpha
+func (s *StackPanel) SetAlpha(alpha float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(alpha)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// Background returns the Background property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#background
+func (s *StackPanel) Background(background string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(background)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetBackground sets the Background property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#background
+func (s *StackPanel) SetBackground(background string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(background)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// CenterX returns the CenterX property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#centerx
+func (s *StackPanel) CenterX(centerX float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(centerX)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetCenterX sets the CenterX property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#centerx
+func (s *StackPanel) SetCenterX(centerX float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(centerX)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// CenterY returns the CenterY property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#centery
+func (s *StackPanel) CenterY(centerY float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(centerY)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetCenterY sets the CenterY property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#centery
+func (s *StackPanel) SetCenterY(centerY float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(centerY)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// Children returns the Children property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#children
+func (s *StackPanel) Children(children *Control) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(children.JSObject())
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetChildren sets the Children property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#children
+func (s *StackPanel) SetChildren(children *Control) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(children.JSObject())
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// ClipChildren returns the ClipChildren property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#clipchildren
+func (s *StackPanel) ClipChildren(clipChildren bool) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(clipChildren)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetClipChildren sets the ClipChildren property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#clipchildren
+func (s *StackPanel) SetClipChildren(clipChildren bool) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(clipChildren)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// ClipContent returns the ClipContent property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#clipcontent
+func (s *StackPanel) ClipContent(clipContent bool) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(clipContent)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetClipContent sets the ClipContent property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#clipcontent
+func (s *StackPanel) SetClipContent(clipContent bool) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(clipContent)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// Color returns the Color property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#color
+func (s *StackPanel) Color(color string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(color)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetColor sets the Color property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#color
+func (s *StackPanel) SetColor(color string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(color)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// DisabledColor returns the DisabledColor property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#disabledcolor
+func (s *StackPanel) DisabledColor(disabledColor string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(disabledColor)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetDisabledColor sets the DisabledColor property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#disabledcolor
+func (s *StackPanel) SetDisabledColor(disabledColor string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(disabledColor)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// FontFamily returns the FontFamily property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#fontfamily
+func (s *StackPanel) FontFamily(fontFamily string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(fontFamily)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetFontFamily sets the FontFamily property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#fontfamily
+func (s *StackPanel) SetFontFamily(fontFamily string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(fontFamily)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// FontOffset returns the FontOffset property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#fontoffset
+func (s *StackPanel) FontOffset(fontOffset js.Value) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(fontOffset)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetFontOffset sets the FontOffset property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#fontoffset
+func (s *StackPanel) SetFontOffset(fontOffset js.Value) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(fontOffset)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// FontSize returns the FontSize property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#fontsize
+func (s *StackPanel) FontSize(fontSize string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(fontSize)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetFontSize sets the FontSize property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#fontsize
+func (s *StackPanel) SetFontSize(fontSize string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(fontSize)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// FontSizeInPixels returns the FontSizeInPixels property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#fontsizeinpixels
+func (s *StackPanel) FontSizeInPixels(fontSizeInPixels float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(fontSizeInPixels)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetFontSizeInPixels sets the FontSizeInPixels property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#fontsizeinpixels
+func (s *StackPanel) SetFontSizeInPixels(fontSizeInPixels float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(fontSizeInPixels)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// FontStyle returns the FontStyle property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#fontstyle
+func (s *StackPanel) FontStyle(fontStyle string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(fontStyle)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetFontStyle sets the FontStyle property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#fontstyle
+func (s *StackPanel) SetFontStyle(fontStyle string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(fontStyle)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// FontWeight returns the FontWeight property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#fontweight
+func (s *StackPanel) FontWeight(fontWeight string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(fontWeight)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetFontWeight sets the FontWeight property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#fontweight
+func (s *StackPanel) SetFontWeight(fontWeight string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(fontWeight)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// HORIZONTAL_ALIGNMENT_CENTER returns the HORIZONTAL_ALIGNMENT_CENTER property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#horizontal_alignment_center
+func (s *StackPanel) HORIZONTAL_ALIGNMENT_CENTER(HORIZONTAL_ALIGNMENT_CENTER float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(HORIZONTAL_ALIGNMENT_CENTER)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetHORIZONTAL_ALIGNMENT_CENTER sets the HORIZONTAL_ALIGNMENT_CENTER property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#horizontal_alignment_center
+func (s *StackPanel) SetHORIZONTAL_ALIGNMENT_CENTER(HORIZONTAL_ALIGNMENT_CENTER float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(HORIZONTAL_ALIGNMENT_CENTER)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// HORIZONTAL_ALIGNMENT_LEFT returns the HORIZONTAL_ALIGNMENT_LEFT property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#horizontal_alignment_left
+func (s *StackPanel) HORIZONTAL_ALIGNMENT_LEFT(HORIZONTAL_ALIGNMENT_LEFT float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(HORIZONTAL_ALIGNMENT_LEFT)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetHORIZONTAL_ALIGNMENT_LEFT sets the HORIZONTAL_ALIGNMENT_LEFT property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#horizontal_alignment_left
+func (s *StackPanel) SetHORIZONTAL_ALIGNMENT_LEFT(HORIZONTAL_ALIGNMENT_LEFT float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(HORIZONTAL_ALIGNMENT_LEFT)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// HORIZONTAL_ALIGNMENT_RIGHT returns the HORIZONTAL_ALIGNMENT_RIGHT property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#horizontal_alignment_right
+func (s *StackPanel) HORIZONTAL_ALIGNMENT_RIGHT(HORIZONTAL_ALIGNMENT_RIGHT float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(HORIZONTAL_ALIGNMENT_RIGHT)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetHORIZONTAL_ALIGNMENT_RIGHT sets the HORIZONTAL_ALIGNMENT_RIGHT property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#horizontal_alignment_right
+func (s *StackPanel) SetHORIZONTAL_ALIGNMENT_RIGHT(HORIZONTAL_ALIGNMENT_RIGHT float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(HORIZONTAL_ALIGNMENT_RIGHT)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// Height returns the Height property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#height
+func (s *StackPanel) Height(height string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(height)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetHeight sets the Height property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#height
+func (s *StackPanel) SetHeight(height string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(height)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// HeightInPixels returns the HeightInPixels property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#heightinpixels
+func (s *StackPanel) HeightInPixels(heightInPixels float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(heightInPixels)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetHeightInPixels sets the HeightInPixels property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#heightinpixels
+func (s *StackPanel) SetHeightInPixels(heightInPixels float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(heightInPixels)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// HorizontalAlignment returns the HorizontalAlignment property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#horizontalalignment
+func (s *StackPanel) HorizontalAlignment(horizontalAlignment float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(horizontalAlignment)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetHorizontalAlignment sets the HorizontalAlignment property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#horizontalalignment
+func (s *StackPanel) SetHorizontalAlignment(horizontalAlignment float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(horizontalAlignment)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// Host returns the Host property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#host
+func (s *StackPanel) Host(host *AdvancedDynamicTexture) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(host.JSObject())
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetHost sets the Host property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#host
+func (s *StackPanel) SetHost(host *AdvancedDynamicTexture) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(host.JSObject())
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// HoverCursor returns the HoverCursor property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#hovercursor
+func (s *StackPanel) HoverCursor(hoverCursor string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(hoverCursor)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetHoverCursor sets the HoverCursor property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#hovercursor
+func (s *StackPanel) SetHoverCursor(hoverCursor string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(hoverCursor)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// IgnoreLayoutWarnings returns the IgnoreLayoutWarnings property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#ignorelayoutwarnings
+func (s *StackPanel) IgnoreLayoutWarnings(ignoreLayoutWarnings bool) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(ignoreLayoutWarnings)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetIgnoreLayoutWarnings sets the IgnoreLayoutWarnings property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#ignorelayoutwarnings
+func (s *StackPanel) SetIgnoreLayoutWarnings(ignoreLayoutWarnings bool) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(ignoreLayoutWarnings)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// IsDirty returns the IsDirty property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#isdirty
+func (s *StackPanel) IsDirty(isDirty bool) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(isDirty)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetIsDirty sets the IsDirty property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#isdirty
+func (s *StackPanel) SetIsDirty(isDirty bool) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(isDirty)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// IsEnabled returns the IsEnabled property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#isenabled
+func (s *StackPanel) IsEnabled(isEnabled bool) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(isEnabled)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetIsEnabled sets the IsEnabled property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#isenabled
+func (s *StackPanel) SetIsEnabled(isEnabled bool) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(isEnabled)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// IsFocusInvisible returns the IsFocusInvisible property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#isfocusinvisible
+func (s *StackPanel) IsFocusInvisible(isFocusInvisible bool) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(isFocusInvisible)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetIsFocusInvisible sets the IsFocusInvisible property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#isfocusinvisible
+func (s *StackPanel) SetIsFocusInvisible(isFocusInvisible bool) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(isFocusInvisible)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// IsHighlighted returns the IsHighlighted property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#ishighlighted
+func (s *StackPanel) IsHighlighted(isHighlighted bool) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(isHighlighted)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetIsHighlighted sets the IsHighlighted property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#ishighlighted
+func (s *StackPanel) SetIsHighlighted(isHighlighted bool) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(isHighlighted)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// IsHitTestVisible returns the IsHitTestVisible property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#ishittestvisible
+func (s *StackPanel) IsHitTestVisible(isHitTestVisible bool) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(isHitTestVisible)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetIsHitTestVisible sets the IsHitTestVisible property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#ishittestvisible
+func (s *StackPanel) SetIsHitTestVisible(isHitTestVisible bool) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(isHitTestVisible)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// IsPointerBlocker returns the IsPointerBlocker property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#ispointerblocker
+func (s *StackPanel) IsPointerBlocker(isPointerBlocker bool) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(isPointerBlocker)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetIsPointerBlocker sets the IsPointerBlocker property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#ispointerblocker
+func (s *StackPanel) SetIsPointerBlocker(isPointerBlocker bool) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(isPointerBlocker)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// IsVertical returns the IsVertical property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#isvertical
+func (s *StackPanel) IsVertical(isVertical bool) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(isVertical)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetIsVertical sets the IsVertical property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#isvertical
+func (s *StackPanel) SetIsVertical(isVertical bool) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(isVertical)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// IsVisible returns the IsVisible property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#isvisible
+func (s *StackPanel) IsVisible(isVisible bool) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(isVisible)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetIsVisible sets the IsVisible property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#isvisible
+func (s *StackPanel) SetIsVisible(isVisible bool) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(isVisible)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// Left returns the Left property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#left
+func (s *StackPanel) Left(left string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(left)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetLeft sets the Left property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#left
+func (s *StackPanel) SetLeft(left string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(left)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// LeftInPixels returns the LeftInPixels property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#leftinpixels
+func (s *StackPanel) LeftInPixels(leftInPixels float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(leftInPixels)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetLeftInPixels sets the LeftInPixels property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#leftinpixels
+func (s *StackPanel) SetLeftInPixels(leftInPixels float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(leftInPixels)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetX returns the LinkOffsetX property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#linkoffsetx
+func (s *StackPanel) LinkOffsetX(linkOffsetX string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(linkOffsetX)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetX sets the LinkOffsetX property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#linkoffsetx
+func (s *StackPanel) SetLinkOffsetX(linkOffsetX string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(linkOffsetX)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetXInPixels returns the LinkOffsetXInPixels property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#linkoffsetxinpixels
+func (s *StackPanel) LinkOffsetXInPixels(linkOffsetXInPixels float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(linkOffsetXInPixels)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetXInPixels sets the LinkOffsetXInPixels property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#linkoffsetxinpixels
+func (s *StackPanel) SetLinkOffsetXInPixels(linkOffsetXInPixels float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(linkOffsetXInPixels)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetY returns the LinkOffsetY property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#linkoffsety
+func (s *StackPanel) LinkOffsetY(linkOffsetY string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(linkOffsetY)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetY sets the LinkOffsetY property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#linkoffsety
+func (s *StackPanel) SetLinkOffsetY(linkOffsetY string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(linkOffsetY)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetYInPixels returns the LinkOffsetYInPixels property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#linkoffsetyinpixels
+func (s *StackPanel) LinkOffsetYInPixels(linkOffsetYInPixels float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(linkOffsetYInPixels)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetYInPixels sets the LinkOffsetYInPixels property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#linkoffsetyinpixels
+func (s *StackPanel) SetLinkOffsetYInPixels(linkOffsetYInPixels float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(linkOffsetYInPixels)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// LinkedMesh returns the LinkedMesh property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#linkedmesh
+func (s *StackPanel) LinkedMesh(linkedMesh *AbstractMesh) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(linkedMesh.JSObject())
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetLinkedMesh sets the LinkedMesh property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#linkedmesh
+func (s *StackPanel) SetLinkedMesh(linkedMesh *AbstractMesh) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(linkedMesh.JSObject())
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// LogLayoutCycleErrors returns the LogLayoutCycleErrors property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#loglayoutcycleerrors
+func (s *StackPanel) LogLayoutCycleErrors(logLayoutCycleErrors bool) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(logLayoutCycleErrors)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetLogLayoutCycleErrors sets the LogLayoutCycleErrors property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#loglayoutcycleerrors
+func (s *StackPanel) SetLogLayoutCycleErrors(logLayoutCycleErrors bool) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(logLayoutCycleErrors)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// MaxLayoutCycle returns the MaxLayoutCycle property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#maxlayoutcycle
+func (s *StackPanel) MaxLayoutCycle(maxLayoutCycle float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(maxLayoutCycle)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetMaxLayoutCycle sets the MaxLayoutCycle property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#maxlayoutcycle
+func (s *StackPanel) SetMaxLayoutCycle(maxLayoutCycle float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(maxLayoutCycle)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#metadata
+func (s *StackPanel) Metadata(metadata interface{}) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(metadata)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#metadata
+func (s *StackPanel) SetMetadata(metadata interface{}) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(metadata)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#name
+func (s *StackPanel) Name(name string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(name)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#name
+func (s *StackPanel) SetName(name string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(name)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// NotRenderable returns the NotRenderable property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#notrenderable
+func (s *StackPanel) NotRenderable(notRenderable bool) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(notRenderable)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetNotRenderable sets the NotRenderable property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#notrenderable
+func (s *StackPanel) SetNotRenderable(notRenderable bool) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(notRenderable)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// OnAfterDrawObservable returns the OnAfterDrawObservable property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#onafterdrawobservable
+func (s *StackPanel) OnAfterDrawObservable(onAfterDrawObservable *Observable) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(onAfterDrawObservable.JSObject())
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterDrawObservable sets the OnAfterDrawObservable property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#onafterdrawobservable
+func (s *StackPanel) SetOnAfterDrawObservable(onAfterDrawObservable *Observable) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(onAfterDrawObservable.JSObject())
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeDrawObservable returns the OnBeforeDrawObservable property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#onbeforedrawobservable
+func (s *StackPanel) OnBeforeDrawObservable(onBeforeDrawObservable *Observable) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(onBeforeDrawObservable.JSObject())
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeDrawObservable sets the OnBeforeDrawObservable property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#onbeforedrawobservable
+func (s *StackPanel) SetOnBeforeDrawObservable(onBeforeDrawObservable *Observable) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(onBeforeDrawObservable.JSObject())
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// OnDirtyObservable returns the OnDirtyObservable property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#ondirtyobservable
+func (s *StackPanel) OnDirtyObservable(onDirtyObservable *Observable) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(onDirtyObservable.JSObject())
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetOnDirtyObservable sets the OnDirtyObservable property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#ondirtyobservable
+func (s *StackPanel) SetOnDirtyObservable(onDirtyObservable *Observable) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(onDirtyObservable.JSObject())
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// OnPointerClickObservable returns the OnPointerClickObservable property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#onpointerclickobservable
+func (s *StackPanel) OnPointerClickObservable(onPointerClickObservable *Observable) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(onPointerClickObservable.JSObject())
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerClickObservable sets the OnPointerClickObservable property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#onpointerclickobservable
+func (s *StackPanel) SetOnPointerClickObservable(onPointerClickObservable *Observable) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(onPointerClickObservable.JSObject())
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// OnPointerDownObservable returns the OnPointerDownObservable property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#onpointerdownobservable
+func (s *StackPanel) OnPointerDownObservable(onPointerDownObservable *Observable) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(onPointerDownObservable.JSObject())
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerDownObservable sets the OnPointerDownObservable property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#onpointerdownobservable
+func (s *StackPanel) SetOnPointerDownObservable(onPointerDownObservable *Observable) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(onPointerDownObservable.JSObject())
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// OnPointerEnterObservable returns the OnPointerEnterObservable property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#onpointerenterobservable
+func (s *StackPanel) OnPointerEnterObservable(onPointerEnterObservable *Observable) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(onPointerEnterObservable.JSObject())
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerEnterObservable sets the OnPointerEnterObservable property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#onpointerenterobservable
+func (s *StackPanel) SetOnPointerEnterObservable(onPointerEnterObservable *Observable) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(onPointerEnterObservable.JSObject())
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// OnPointerMoveObservable returns the OnPointerMoveObservable property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#onpointermoveobservable
+func (s *StackPanel) OnPointerMoveObservable(onPointerMoveObservable *Observable) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(onPointerMoveObservable.JSObject())
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerMoveObservable sets the OnPointerMoveObservable property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#onpointermoveobservable
+func (s *StackPanel) SetOnPointerMoveObservable(onPointerMoveObservable *Observable) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(onPointerMoveObservable.JSObject())
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// OnPointerOutObservable returns the OnPointerOutObservable property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#onpointeroutobservable
+func (s *StackPanel) OnPointerOutObservable(onPointerOutObservable *Observable) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(onPointerOutObservable.JSObject())
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerOutObservable sets the OnPointerOutObservable property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#onpointeroutobservable
+func (s *StackPanel) SetOnPointerOutObservable(onPointerOutObservable *Observable) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(onPointerOutObservable.JSObject())
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// OnPointerUpObservable returns the OnPointerUpObservable property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#onpointerupobservable
+func (s *StackPanel) OnPointerUpObservable(onPointerUpObservable *Observable) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(onPointerUpObservable.JSObject())
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerUpObservable sets the OnPointerUpObservable property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#onpointerupobservable
+func (s *StackPanel) SetOnPointerUpObservable(onPointerUpObservable *Observable) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(onPointerUpObservable.JSObject())
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// PaddingBottom returns the PaddingBottom property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#paddingbottom
+func (s *StackPanel) PaddingBottom(paddingBottom string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(paddingBottom)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingBottom sets the PaddingBottom property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#paddingbottom
+func (s *StackPanel) SetPaddingBottom(paddingBottom string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(paddingBottom)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// PaddingBottomInPixels returns the PaddingBottomInPixels property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#paddingbottominpixels
+func (s *StackPanel) PaddingBottomInPixels(paddingBottomInPixels float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(paddingBottomInPixels)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingBottomInPixels sets the PaddingBottomInPixels property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#paddingbottominpixels
+func (s *StackPanel) SetPaddingBottomInPixels(paddingBottomInPixels float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(paddingBottomInPixels)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// PaddingLeft returns the PaddingLeft property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#paddingleft
+func (s *StackPanel) PaddingLeft(paddingLeft string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(paddingLeft)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingLeft sets the PaddingLeft property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#paddingleft
+func (s *StackPanel) SetPaddingLeft(paddingLeft string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(paddingLeft)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// PaddingLeftInPixels returns the PaddingLeftInPixels property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#paddingleftinpixels
+func (s *StackPanel) PaddingLeftInPixels(paddingLeftInPixels float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(paddingLeftInPixels)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingLeftInPixels sets the PaddingLeftInPixels property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#paddingleftinpixels
+func (s *StackPanel) SetPaddingLeftInPixels(paddingLeftInPixels float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(paddingLeftInPixels)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// PaddingRight returns the PaddingRight property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#paddingright
+func (s *StackPanel) PaddingRight(paddingRight string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(paddingRight)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingRight sets the PaddingRight property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#paddingright
+func (s *StackPanel) SetPaddingRight(paddingRight string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(paddingRight)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// PaddingRightInPixels returns the PaddingRightInPixels property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#paddingrightinpixels
+func (s *StackPanel) PaddingRightInPixels(paddingRightInPixels float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(paddingRightInPixels)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingRightInPixels sets the PaddingRightInPixels property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#paddingrightinpixels
+func (s *StackPanel) SetPaddingRightInPixels(paddingRightInPixels float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(paddingRightInPixels)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// PaddingTop returns the PaddingTop property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#paddingtop
+func (s *StackPanel) PaddingTop(paddingTop string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(paddingTop)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingTop sets the PaddingTop property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#paddingtop
+func (s *StackPanel) SetPaddingTop(paddingTop string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(paddingTop)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// PaddingTopInPixels returns the PaddingTopInPixels property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#paddingtopinpixels
+func (s *StackPanel) PaddingTopInPixels(paddingTopInPixels float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(paddingTopInPixels)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingTopInPixels sets the PaddingTopInPixels property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#paddingtopinpixels
+func (s *StackPanel) SetPaddingTopInPixels(paddingTopInPixels float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(paddingTopInPixels)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// Parent returns the Parent property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#parent
+func (s *StackPanel) Parent(parent *Container) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(parent.JSObject())
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetParent sets the Parent property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#parent
+func (s *StackPanel) SetParent(parent *Container) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(parent.JSObject())
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// Rotation returns the Rotation property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#rotation
+func (s *StackPanel) Rotation(rotation float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(rotation)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetRotation sets the Rotation property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#rotation
+func (s *StackPanel) SetRotation(rotation float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(rotation)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// ScaleX returns the ScaleX property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#scalex
+func (s *StackPanel) ScaleX(scaleX float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(scaleX)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetScaleX sets the ScaleX property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#scalex
+func (s *StackPanel) SetScaleX(scaleX float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(scaleX)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// ScaleY returns the ScaleY property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#scaley
+func (s *StackPanel) ScaleY(scaleY float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(scaleY)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetScaleY sets the ScaleY property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#scaley
+func (s *StackPanel) SetScaleY(scaleY float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(scaleY)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// ShadowBlur returns the ShadowBlur property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#shadowblur
+func (s *StackPanel) ShadowBlur(shadowBlur float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(shadowBlur)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetShadowBlur sets the ShadowBlur property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#shadowblur
+func (s *StackPanel) SetShadowBlur(shadowBlur float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(shadowBlur)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// ShadowColor returns the ShadowColor property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#shadowcolor
+func (s *StackPanel) ShadowColor(shadowColor string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(shadowColor)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetShadowColor sets the ShadowColor property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#shadowcolor
+func (s *StackPanel) SetShadowColor(shadowColor string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(shadowColor)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// ShadowOffsetX returns the ShadowOffsetX property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#shadowoffsetx
+func (s *StackPanel) ShadowOffsetX(shadowOffsetX float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(shadowOffsetX)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetShadowOffsetX sets the ShadowOffsetX property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#shadowoffsetx
+func (s *StackPanel) SetShadowOffsetX(shadowOffsetX float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(shadowOffsetX)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// ShadowOffsetY returns the ShadowOffsetY property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#shadowoffsety
+func (s *StackPanel) ShadowOffsetY(shadowOffsetY float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(shadowOffsetY)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetShadowOffsetY sets the ShadowOffsetY property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#shadowoffsety
+func (s *StackPanel) SetShadowOffsetY(shadowOffsetY float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(shadowOffsetY)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// Style returns the Style property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#style
+func (s *StackPanel) Style(style *Style) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(style.JSObject())
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetStyle sets the Style property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#style
+func (s *StackPanel) SetStyle(style *Style) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(style.JSObject())
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// Top returns the Top property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#top
+func (s *StackPanel) Top(top string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(top)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetTop sets the Top property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#top
+func (s *StackPanel) SetTop(top string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(top)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// TopInPixels returns the TopInPixels property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#topinpixels
+func (s *StackPanel) TopInPixels(topInPixels float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(topInPixels)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetTopInPixels sets the TopInPixels property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#topinpixels
+func (s *StackPanel) SetTopInPixels(topInPixels float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(topInPixels)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// TransformCenterX returns the TransformCenterX property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#transformcenterx
+func (s *StackPanel) TransformCenterX(transformCenterX float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(transformCenterX)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetTransformCenterX sets the TransformCenterX property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#transformcenterx
+func (s *StackPanel) SetTransformCenterX(transformCenterX float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(transformCenterX)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// TransformCenterY returns the TransformCenterY property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#transformcentery
+func (s *StackPanel) TransformCenterY(transformCenterY float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(transformCenterY)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetTransformCenterY sets the TransformCenterY property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#transformcentery
+func (s *StackPanel) SetTransformCenterY(transformCenterY float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(transformCenterY)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// TypeName returns the TypeName property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#typename
+func (s *StackPanel) TypeName(typeName string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(typeName)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetTypeName sets the TypeName property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#typename
+func (s *StackPanel) SetTypeName(typeName string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(typeName)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#uniqueid
+func (s *StackPanel) UniqueId(uniqueId float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(uniqueId)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#uniqueid
+func (s *StackPanel) SetUniqueId(uniqueId float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(uniqueId)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// UseBitmapCache returns the UseBitmapCache property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#usebitmapcache
+func (s *StackPanel) UseBitmapCache(useBitmapCache bool) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(useBitmapCache)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetUseBitmapCache sets the UseBitmapCache property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#usebitmapcache
+func (s *StackPanel) SetUseBitmapCache(useBitmapCache bool) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(useBitmapCache)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// VERTICAL_ALIGNMENT_BOTTOM returns the VERTICAL_ALIGNMENT_BOTTOM property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#vertical_alignment_bottom
+func (s *StackPanel) VERTICAL_ALIGNMENT_BOTTOM(VERTICAL_ALIGNMENT_BOTTOM float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(VERTICAL_ALIGNMENT_BOTTOM)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetVERTICAL_ALIGNMENT_BOTTOM sets the VERTICAL_ALIGNMENT_BOTTOM property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#vertical_alignment_bottom
+func (s *StackPanel) SetVERTICAL_ALIGNMENT_BOTTOM(VERTICAL_ALIGNMENT_BOTTOM float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(VERTICAL_ALIGNMENT_BOTTOM)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// VERTICAL_ALIGNMENT_CENTER returns the VERTICAL_ALIGNMENT_CENTER property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#vertical_alignment_center
+func (s *StackPanel) VERTICAL_ALIGNMENT_CENTER(VERTICAL_ALIGNMENT_CENTER float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(VERTICAL_ALIGNMENT_CENTER)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetVERTICAL_ALIGNMENT_CENTER sets the VERTICAL_ALIGNMENT_CENTER property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#vertical_alignment_center
+func (s *StackPanel) SetVERTICAL_ALIGNMENT_CENTER(VERTICAL_ALIGNMENT_CENTER float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(VERTICAL_ALIGNMENT_CENTER)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// VERTICAL_ALIGNMENT_TOP returns the VERTICAL_ALIGNMENT_TOP property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#vertical_alignment_top
+func (s *StackPanel) VERTICAL_ALIGNMENT_TOP(VERTICAL_ALIGNMENT_TOP float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(VERTICAL_ALIGNMENT_TOP)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetVERTICAL_ALIGNMENT_TOP sets the VERTICAL_ALIGNMENT_TOP property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#vertical_alignment_top
+func (s *StackPanel) SetVERTICAL_ALIGNMENT_TOP(VERTICAL_ALIGNMENT_TOP float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(VERTICAL_ALIGNMENT_TOP)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// VerticalAlignment returns the VerticalAlignment property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#verticalalignment
+func (s *StackPanel) VerticalAlignment(verticalAlignment float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(verticalAlignment)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetVerticalAlignment sets the VerticalAlignment property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#verticalalignment
+func (s *StackPanel) SetVerticalAlignment(verticalAlignment float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(verticalAlignment)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// Width returns the Width property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#width
+func (s *StackPanel) Width(width string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(width)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetWidth sets the Width property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#width
+func (s *StackPanel) SetWidth(width string) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(width)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// WidthInPixels returns the WidthInPixels property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#widthinpixels
+func (s *StackPanel) WidthInPixels(widthInPixels float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(widthInPixels)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetWidthInPixels sets the WidthInPixels property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#widthinpixels
+func (s *StackPanel) SetWidthInPixels(widthInPixels float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(widthInPixels)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// ZIndex returns the ZIndex property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#zindex
+func (s *StackPanel) ZIndex(zIndex float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(zIndex)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+// SetZIndex sets the ZIndex property of class StackPanel.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel#zindex
+func (s *StackPanel) SetZIndex(zIndex float64) *StackPanel {
+	p := ba.ctx.Get("StackPanel").New(zIndex)
+	return StackPanelFromJSObject(p, ba.ctx)
+}
+
+*/

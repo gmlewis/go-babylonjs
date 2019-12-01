@@ -27,4 +27,34 @@ func LatheBuilderFromJSObject(p js.Value, ctx js.Value) *LatheBuilder {
 	return &LatheBuilder{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// LatheBuilderCreateLatheOpts contains optional parameters for LatheBuilder.CreateLathe.
+type LatheBuilderCreateLatheOpts struct {
+	Scene *Scene
+}
+
+// CreateLathe calls the CreateLathe method on the LatheBuilder object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.lathebuilder#createlathe
+func (l *LatheBuilder) CreateLathe(name string, options js.Value, opts *LatheBuilderCreateLatheOpts) *Mesh {
+	if opts == nil {
+		opts = &LatheBuilderCreateLatheOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, name)
+	args = append(args, options)
+
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+
+	retVal := l.p.Call("CreateLathe", args...)
+	return MeshFromJSObject(retVal, l.ctx)
+}
+
+/*
+
+ */

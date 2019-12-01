@@ -27,4 +27,34 @@ func TiledBoxBuilderFromJSObject(p js.Value, ctx js.Value) *TiledBoxBuilder {
 	return &TiledBoxBuilder{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// TiledBoxBuilderCreateTiledBoxOpts contains optional parameters for TiledBoxBuilder.CreateTiledBox.
+type TiledBoxBuilderCreateTiledBoxOpts struct {
+	Scene *Scene
+}
+
+// CreateTiledBox calls the CreateTiledBox method on the TiledBoxBuilder object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.tiledboxbuilder#createtiledbox
+func (t *TiledBoxBuilder) CreateTiledBox(name string, options js.Value, opts *TiledBoxBuilderCreateTiledBoxOpts) *Mesh {
+	if opts == nil {
+		opts = &TiledBoxBuilderCreateTiledBoxOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, name)
+	args = append(args, options)
+
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+
+	retVal := t.p.Call("CreateTiledBox", args...)
+	return MeshFromJSObject(retVal, t.ctx)
+}
+
+/*
+
+ */

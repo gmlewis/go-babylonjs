@@ -32,8 +32,77 @@ func SimplicationQueueSceneComponentFromJSObject(p js.Value, ctx js.Value) *Simp
 //
 // https://doc.babylonjs.com/api/classes/babylon.simplicationqueuescenecomponent
 func (ba *Babylon) NewSimplicationQueueSceneComponent(scene *Scene) *SimplicationQueueSceneComponent {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("SimplicationQueueSceneComponent").New(args...)
+	return SimplicationQueueSceneComponentFromJSObject(p, ba.ctx)
+}
+
+// Dispose calls the Dispose method on the SimplicationQueueSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.simplicationqueuescenecomponent#dispose
+func (s *SimplicationQueueSceneComponent) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("dispose", args...)
+}
+
+// Rebuild calls the Rebuild method on the SimplicationQueueSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.simplicationqueuescenecomponent#rebuild
+func (s *SimplicationQueueSceneComponent) Rebuild() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("rebuild", args...)
+}
+
+// Register calls the Register method on the SimplicationQueueSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.simplicationqueuescenecomponent#register
+func (s *SimplicationQueueSceneComponent) Register() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("register", args...)
+}
+
+/*
+
+// Name returns the Name property of class SimplicationQueueSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.simplicationqueuescenecomponent#name
+func (s *SimplicationQueueSceneComponent) Name(name string) *SimplicationQueueSceneComponent {
+	p := ba.ctx.Get("SimplicationQueueSceneComponent").New(name)
+	return SimplicationQueueSceneComponentFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class SimplicationQueueSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.simplicationqueuescenecomponent#name
+func (s *SimplicationQueueSceneComponent) SetName(name string) *SimplicationQueueSceneComponent {
+	p := ba.ctx.Get("SimplicationQueueSceneComponent").New(name)
+	return SimplicationQueueSceneComponentFromJSObject(p, ba.ctx)
+}
+
+// Scene returns the Scene property of class SimplicationQueueSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.simplicationqueuescenecomponent#scene
+func (s *SimplicationQueueSceneComponent) Scene(scene *Scene) *SimplicationQueueSceneComponent {
 	p := ba.ctx.Get("SimplicationQueueSceneComponent").New(scene.JSObject())
 	return SimplicationQueueSceneComponentFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetScene sets the Scene property of class SimplicationQueueSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.simplicationqueuescenecomponent#scene
+func (s *SimplicationQueueSceneComponent) SetScene(scene *Scene) *SimplicationQueueSceneComponent {
+	p := ba.ctx.Get("SimplicationQueueSceneComponent").New(scene.JSObject())
+	return SimplicationQueueSceneComponentFromJSObject(p, ba.ctx)
+}
+
+*/

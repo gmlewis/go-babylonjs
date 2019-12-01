@@ -31,8 +31,48 @@ func PointerInfoBaseFromJSObject(p js.Value, ctx js.Value) *PointerInfoBase {
 //
 // https://doc.babylonjs.com/api/classes/babylon.pointerinfobase
 func (ba *Babylon) NewPointerInfoBase(jsType float64, event js.Value) *PointerInfoBase {
-	p := ba.ctx.Get("PointerInfoBase").New(jsType, event)
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, jsType)
+	args = append(args, event)
+
+	p := ba.ctx.Get("PointerInfoBase").New(args...)
 	return PointerInfoBaseFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+/*
+
+// Event returns the Event property of class PointerInfoBase.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerinfobase#event
+func (p *PointerInfoBase) Event(event js.Value) *PointerInfoBase {
+	p := ba.ctx.Get("PointerInfoBase").New(event)
+	return PointerInfoBaseFromJSObject(p, ba.ctx)
+}
+
+// SetEvent sets the Event property of class PointerInfoBase.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerinfobase#event
+func (p *PointerInfoBase) SetEvent(event js.Value) *PointerInfoBase {
+	p := ba.ctx.Get("PointerInfoBase").New(event)
+	return PointerInfoBaseFromJSObject(p, ba.ctx)
+}
+
+// Type returns the Type property of class PointerInfoBase.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerinfobase#type
+func (p *PointerInfoBase) Type(jsType float64) *PointerInfoBase {
+	p := ba.ctx.Get("PointerInfoBase").New(jsType)
+	return PointerInfoBaseFromJSObject(p, ba.ctx)
+}
+
+// SetType sets the Type property of class PointerInfoBase.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pointerinfobase#type
+func (p *PointerInfoBase) SetType(jsType float64) *PointerInfoBase {
+	p := ba.ctx.Get("PointerInfoBase").New(jsType)
+	return PointerInfoBaseFromJSObject(p, ba.ctx)
+}
+
+*/

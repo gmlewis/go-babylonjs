@@ -27,4 +27,51 @@ func STLExportFromJSObject(p js.Value, ctx js.Value) *STLExport {
 	return &STLExport{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// STLExportCreateSTLOpts contains optional parameters for STLExport.CreateSTL.
+type STLExportCreateSTLOpts struct {
+	Download       *bool
+	FileName       *string
+	Binary         *bool
+	IsLittleEndian *bool
+}
+
+// CreateSTL calls the CreateSTL method on the STLExport object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stlexport#createstl
+func (s *STLExport) CreateSTL(meshes *Mesh, opts *STLExportCreateSTLOpts) interface{} {
+	if opts == nil {
+		opts = &STLExportCreateSTLOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+4)
+
+	args = append(args, meshes.JSObject())
+
+	if opts.Download == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Download)
+	}
+	if opts.FileName == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FileName)
+	}
+	if opts.Binary == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Binary)
+	}
+	if opts.IsLittleEndian == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IsLittleEndian)
+	}
+
+	retVal := s.p.Call("CreateSTL", args...)
+	return retVal
+}
+
+/*
+
+ */

@@ -29,9 +29,8 @@ func ValueAndUnitFromJSObject(p js.Value, ctx js.Value) *ValueAndUnit {
 
 // NewValueAndUnitOpts contains optional parameters for NewValueAndUnit.
 type NewValueAndUnitOpts struct {
-	Unit *JSFloat64
-
-	NegativeValueAllowed *JSBool
+	Unit                 *float64
+	NegativeValueAllowed *bool
 }
 
 // NewValueAndUnit returns a new ValueAndUnit object.
@@ -42,8 +41,247 @@ func (ba *Babylon) NewValueAndUnit(value float64, opts *NewValueAndUnitOpts) *Va
 		opts = &NewValueAndUnitOpts{}
 	}
 
-	p := ba.ctx.Get("ValueAndUnit").New(value, opts.Unit.JSObject(), opts.NegativeValueAllowed.JSObject())
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, value)
+
+	if opts.Unit == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Unit)
+	}
+	if opts.NegativeValueAllowed == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NegativeValueAllowed)
+	}
+
+	p := ba.ctx.Get("ValueAndUnit").New(args...)
 	return ValueAndUnitFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// FromString calls the FromString method on the ValueAndUnit object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.valueandunit#fromstring
+func (v *ValueAndUnit) FromString(source string) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, source)
+
+	retVal := v.p.Call("fromString", args...)
+	return retVal.Bool()
+}
+
+// GetValue calls the GetValue method on the ValueAndUnit object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.valueandunit#getvalue
+func (v *ValueAndUnit) GetValue(host *AdvancedDynamicTexture) float64 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, host.JSObject())
+
+	retVal := v.p.Call("getValue", args...)
+	return retVal.Float()
+}
+
+// GetValueInPixel calls the GetValueInPixel method on the ValueAndUnit object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.valueandunit#getvalueinpixel
+func (v *ValueAndUnit) GetValueInPixel(host *AdvancedDynamicTexture, refValue float64) float64 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, host.JSObject())
+	args = append(args, refValue)
+
+	retVal := v.p.Call("getValueInPixel", args...)
+	return retVal.Float()
+}
+
+// ValueAndUnitToStringOpts contains optional parameters for ValueAndUnit.ToString.
+type ValueAndUnitToStringOpts struct {
+	Decimals *float64
+}
+
+// ToString calls the ToString method on the ValueAndUnit object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.valueandunit#tostring
+func (v *ValueAndUnit) ToString(host *AdvancedDynamicTexture, opts *ValueAndUnitToStringOpts) string {
+	if opts == nil {
+		opts = &ValueAndUnitToStringOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, host.JSObject())
+
+	if opts.Decimals == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Decimals)
+	}
+
+	retVal := v.p.Call("toString", args...)
+	return retVal.String()
+}
+
+// ValueAndUnitUpdateInPlaceOpts contains optional parameters for ValueAndUnit.UpdateInPlace.
+type ValueAndUnitUpdateInPlaceOpts struct {
+	Unit *float64
+}
+
+// UpdateInPlace calls the UpdateInPlace method on the ValueAndUnit object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.valueandunit#updateinplace
+func (v *ValueAndUnit) UpdateInPlace(value float64, opts *ValueAndUnitUpdateInPlaceOpts) *ValueAndUnit {
+	if opts == nil {
+		opts = &ValueAndUnitUpdateInPlaceOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, value)
+
+	if opts.Unit == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Unit)
+	}
+
+	retVal := v.p.Call("updateInPlace", args...)
+	return ValueAndUnitFromJSObject(retVal, v.ctx)
+}
+
+/*
+
+// IgnoreAdaptiveScaling returns the IgnoreAdaptiveScaling property of class ValueAndUnit.
+//
+// https://doc.babylonjs.com/api/classes/babylon.valueandunit#ignoreadaptivescaling
+func (v *ValueAndUnit) IgnoreAdaptiveScaling(ignoreAdaptiveScaling bool) *ValueAndUnit {
+	p := ba.ctx.Get("ValueAndUnit").New(ignoreAdaptiveScaling)
+	return ValueAndUnitFromJSObject(p, ba.ctx)
+}
+
+// SetIgnoreAdaptiveScaling sets the IgnoreAdaptiveScaling property of class ValueAndUnit.
+//
+// https://doc.babylonjs.com/api/classes/babylon.valueandunit#ignoreadaptivescaling
+func (v *ValueAndUnit) SetIgnoreAdaptiveScaling(ignoreAdaptiveScaling bool) *ValueAndUnit {
+	p := ba.ctx.Get("ValueAndUnit").New(ignoreAdaptiveScaling)
+	return ValueAndUnitFromJSObject(p, ba.ctx)
+}
+
+// InternalValue returns the InternalValue property of class ValueAndUnit.
+//
+// https://doc.babylonjs.com/api/classes/babylon.valueandunit#internalvalue
+func (v *ValueAndUnit) InternalValue(internalValue float64) *ValueAndUnit {
+	p := ba.ctx.Get("ValueAndUnit").New(internalValue)
+	return ValueAndUnitFromJSObject(p, ba.ctx)
+}
+
+// SetInternalValue sets the InternalValue property of class ValueAndUnit.
+//
+// https://doc.babylonjs.com/api/classes/babylon.valueandunit#internalvalue
+func (v *ValueAndUnit) SetInternalValue(internalValue float64) *ValueAndUnit {
+	p := ba.ctx.Get("ValueAndUnit").New(internalValue)
+	return ValueAndUnitFromJSObject(p, ba.ctx)
+}
+
+// IsPercentage returns the IsPercentage property of class ValueAndUnit.
+//
+// https://doc.babylonjs.com/api/classes/babylon.valueandunit#ispercentage
+func (v *ValueAndUnit) IsPercentage(isPercentage bool) *ValueAndUnit {
+	p := ba.ctx.Get("ValueAndUnit").New(isPercentage)
+	return ValueAndUnitFromJSObject(p, ba.ctx)
+}
+
+// SetIsPercentage sets the IsPercentage property of class ValueAndUnit.
+//
+// https://doc.babylonjs.com/api/classes/babylon.valueandunit#ispercentage
+func (v *ValueAndUnit) SetIsPercentage(isPercentage bool) *ValueAndUnit {
+	p := ba.ctx.Get("ValueAndUnit").New(isPercentage)
+	return ValueAndUnitFromJSObject(p, ba.ctx)
+}
+
+// IsPixel returns the IsPixel property of class ValueAndUnit.
+//
+// https://doc.babylonjs.com/api/classes/babylon.valueandunit#ispixel
+func (v *ValueAndUnit) IsPixel(isPixel bool) *ValueAndUnit {
+	p := ba.ctx.Get("ValueAndUnit").New(isPixel)
+	return ValueAndUnitFromJSObject(p, ba.ctx)
+}
+
+// SetIsPixel sets the IsPixel property of class ValueAndUnit.
+//
+// https://doc.babylonjs.com/api/classes/babylon.valueandunit#ispixel
+func (v *ValueAndUnit) SetIsPixel(isPixel bool) *ValueAndUnit {
+	p := ba.ctx.Get("ValueAndUnit").New(isPixel)
+	return ValueAndUnitFromJSObject(p, ba.ctx)
+}
+
+// NegativeValueAllowed returns the NegativeValueAllowed property of class ValueAndUnit.
+//
+// https://doc.babylonjs.com/api/classes/babylon.valueandunit#negativevalueallowed
+func (v *ValueAndUnit) NegativeValueAllowed(negativeValueAllowed bool) *ValueAndUnit {
+	p := ba.ctx.Get("ValueAndUnit").New(negativeValueAllowed)
+	return ValueAndUnitFromJSObject(p, ba.ctx)
+}
+
+// SetNegativeValueAllowed sets the NegativeValueAllowed property of class ValueAndUnit.
+//
+// https://doc.babylonjs.com/api/classes/babylon.valueandunit#negativevalueallowed
+func (v *ValueAndUnit) SetNegativeValueAllowed(negativeValueAllowed bool) *ValueAndUnit {
+	p := ba.ctx.Get("ValueAndUnit").New(negativeValueAllowed)
+	return ValueAndUnitFromJSObject(p, ba.ctx)
+}
+
+// UNITMODE_PERCENTAGE returns the UNITMODE_PERCENTAGE property of class ValueAndUnit.
+//
+// https://doc.babylonjs.com/api/classes/babylon.valueandunit#unitmode_percentage
+func (v *ValueAndUnit) UNITMODE_PERCENTAGE(UNITMODE_PERCENTAGE float64) *ValueAndUnit {
+	p := ba.ctx.Get("ValueAndUnit").New(UNITMODE_PERCENTAGE)
+	return ValueAndUnitFromJSObject(p, ba.ctx)
+}
+
+// SetUNITMODE_PERCENTAGE sets the UNITMODE_PERCENTAGE property of class ValueAndUnit.
+//
+// https://doc.babylonjs.com/api/classes/babylon.valueandunit#unitmode_percentage
+func (v *ValueAndUnit) SetUNITMODE_PERCENTAGE(UNITMODE_PERCENTAGE float64) *ValueAndUnit {
+	p := ba.ctx.Get("ValueAndUnit").New(UNITMODE_PERCENTAGE)
+	return ValueAndUnitFromJSObject(p, ba.ctx)
+}
+
+// UNITMODE_PIXEL returns the UNITMODE_PIXEL property of class ValueAndUnit.
+//
+// https://doc.babylonjs.com/api/classes/babylon.valueandunit#unitmode_pixel
+func (v *ValueAndUnit) UNITMODE_PIXEL(UNITMODE_PIXEL float64) *ValueAndUnit {
+	p := ba.ctx.Get("ValueAndUnit").New(UNITMODE_PIXEL)
+	return ValueAndUnitFromJSObject(p, ba.ctx)
+}
+
+// SetUNITMODE_PIXEL sets the UNITMODE_PIXEL property of class ValueAndUnit.
+//
+// https://doc.babylonjs.com/api/classes/babylon.valueandunit#unitmode_pixel
+func (v *ValueAndUnit) SetUNITMODE_PIXEL(UNITMODE_PIXEL float64) *ValueAndUnit {
+	p := ba.ctx.Get("ValueAndUnit").New(UNITMODE_PIXEL)
+	return ValueAndUnitFromJSObject(p, ba.ctx)
+}
+
+// Unit returns the Unit property of class ValueAndUnit.
+//
+// https://doc.babylonjs.com/api/classes/babylon.valueandunit#unit
+func (v *ValueAndUnit) Unit(unit float64) *ValueAndUnit {
+	p := ba.ctx.Get("ValueAndUnit").New(unit)
+	return ValueAndUnitFromJSObject(p, ba.ctx)
+}
+
+// SetUnit sets the Unit property of class ValueAndUnit.
+//
+// https://doc.babylonjs.com/api/classes/babylon.valueandunit#unit
+func (v *ValueAndUnit) SetUnit(unit float64) *ValueAndUnit {
+	p := ba.ctx.Get("ValueAndUnit").New(unit)
+	return ValueAndUnitFromJSObject(p, ba.ctx)
+}
+
+*/

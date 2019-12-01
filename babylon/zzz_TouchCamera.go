@@ -34,8 +34,475 @@ func TouchCameraFromJSObject(p js.Value, ctx js.Value) *TouchCamera {
 //
 // https://doc.babylonjs.com/api/classes/babylon.touchcamera
 func (ba *Babylon) NewTouchCamera(name string, position *Vector3, scene *Scene) *TouchCamera {
-	p := ba.ctx.Get("TouchCamera").New(name, position.JSObject(), scene.JSObject())
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, name)
+	args = append(args, position.JSObject())
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("TouchCamera").New(args...)
 	return TouchCameraFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// TouchCameraAttachControlOpts contains optional parameters for TouchCamera.AttachControl.
+type TouchCameraAttachControlOpts struct {
+	NoPreventDefault *bool
+}
+
+// AttachControl calls the AttachControl method on the TouchCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#attachcontrol
+func (t *TouchCamera) AttachControl(element js.Value, opts *TouchCameraAttachControlOpts) {
+	if opts == nil {
+		opts = &TouchCameraAttachControlOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, element)
+
+	if opts.NoPreventDefault == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoPreventDefault)
+	}
+
+	t.p.Call("attachControl", args...)
+}
+
+// DetachControl calls the DetachControl method on the TouchCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#detachcontrol
+func (t *TouchCamera) DetachControl(element js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, element)
+
+	t.p.Call("detachControl", args...)
+}
+
+// Dispose calls the Dispose method on the TouchCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#dispose
+func (t *TouchCamera) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	t.p.Call("dispose", args...)
+}
+
+// GetClassName calls the GetClassName method on the TouchCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#getclassname
+func (t *TouchCamera) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetFrontPosition calls the GetFrontPosition method on the TouchCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#getfrontposition
+func (t *TouchCamera) GetFrontPosition(distance float64) *Vector3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, distance)
+
+	retVal := t.p.Call("getFrontPosition", args...)
+	return Vector3FromJSObject(retVal, t.ctx)
+}
+
+// GetTarget calls the GetTarget method on the TouchCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#gettarget
+func (t *TouchCamera) GetTarget() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getTarget", args...)
+	return Vector3FromJSObject(retVal, t.ctx)
+}
+
+// SetTarget calls the SetTarget method on the TouchCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#settarget
+func (t *TouchCamera) SetTarget(target *Vector3) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, target.JSObject())
+
+	t.p.Call("setTarget", args...)
+}
+
+// StoreState calls the StoreState method on the TouchCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#storestate
+func (t *TouchCamera) StoreState() *Camera {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("storeState", args...)
+	return CameraFromJSObject(retVal, t.ctx)
+}
+
+/*
+
+// AngularSensibility returns the AngularSensibility property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#angularsensibility
+func (t *TouchCamera) AngularSensibility(angularSensibility float64) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(angularSensibility)
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// SetAngularSensibility sets the AngularSensibility property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#angularsensibility
+func (t *TouchCamera) SetAngularSensibility(angularSensibility float64) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(angularSensibility)
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// ApplyGravity returns the ApplyGravity property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#applygravity
+func (t *TouchCamera) ApplyGravity(applyGravity bool) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(applyGravity)
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// SetApplyGravity sets the ApplyGravity property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#applygravity
+func (t *TouchCamera) SetApplyGravity(applyGravity bool) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(applyGravity)
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// CameraDirection returns the CameraDirection property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#cameradirection
+func (t *TouchCamera) CameraDirection(cameraDirection *Vector3) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(cameraDirection.JSObject())
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// SetCameraDirection sets the CameraDirection property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#cameradirection
+func (t *TouchCamera) SetCameraDirection(cameraDirection *Vector3) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(cameraDirection.JSObject())
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// CameraRotation returns the CameraRotation property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#camerarotation
+func (t *TouchCamera) CameraRotation(cameraRotation *Vector2) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(cameraRotation.JSObject())
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// SetCameraRotation sets the CameraRotation property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#camerarotation
+func (t *TouchCamera) SetCameraRotation(cameraRotation *Vector2) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(cameraRotation.JSObject())
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// CheckCollisions returns the CheckCollisions property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#checkcollisions
+func (t *TouchCamera) CheckCollisions(checkCollisions bool) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(checkCollisions)
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// SetCheckCollisions sets the CheckCollisions property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#checkcollisions
+func (t *TouchCamera) SetCheckCollisions(checkCollisions bool) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(checkCollisions)
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// CollisionMask returns the CollisionMask property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#collisionmask
+func (t *TouchCamera) CollisionMask(collisionMask float64) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(collisionMask)
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// SetCollisionMask sets the CollisionMask property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#collisionmask
+func (t *TouchCamera) SetCollisionMask(collisionMask float64) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(collisionMask)
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// Ellipsoid returns the Ellipsoid property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#ellipsoid
+func (t *TouchCamera) Ellipsoid(ellipsoid *Vector3) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(ellipsoid.JSObject())
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// SetEllipsoid sets the Ellipsoid property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#ellipsoid
+func (t *TouchCamera) SetEllipsoid(ellipsoid *Vector3) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(ellipsoid.JSObject())
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// EllipsoidOffset returns the EllipsoidOffset property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#ellipsoidoffset
+func (t *TouchCamera) EllipsoidOffset(ellipsoidOffset *Vector3) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(ellipsoidOffset.JSObject())
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// SetEllipsoidOffset sets the EllipsoidOffset property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#ellipsoidoffset
+func (t *TouchCamera) SetEllipsoidOffset(ellipsoidOffset *Vector3) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(ellipsoidOffset.JSObject())
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// Inputs returns the Inputs property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#inputs
+func (t *TouchCamera) Inputs(inputs *FreeCameraInputsManager) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(inputs.JSObject())
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// SetInputs sets the Inputs property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#inputs
+func (t *TouchCamera) SetInputs(inputs *FreeCameraInputsManager) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(inputs.JSObject())
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// KeysDown returns the KeysDown property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#keysdown
+func (t *TouchCamera) KeysDown(keysDown float64) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(keysDown)
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// SetKeysDown sets the KeysDown property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#keysdown
+func (t *TouchCamera) SetKeysDown(keysDown float64) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(keysDown)
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// KeysLeft returns the KeysLeft property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#keysleft
+func (t *TouchCamera) KeysLeft(keysLeft float64) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(keysLeft)
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// SetKeysLeft sets the KeysLeft property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#keysleft
+func (t *TouchCamera) SetKeysLeft(keysLeft float64) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(keysLeft)
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// KeysRight returns the KeysRight property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#keysright
+func (t *TouchCamera) KeysRight(keysRight float64) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(keysRight)
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// SetKeysRight sets the KeysRight property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#keysright
+func (t *TouchCamera) SetKeysRight(keysRight float64) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(keysRight)
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// KeysUp returns the KeysUp property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#keysup
+func (t *TouchCamera) KeysUp(keysUp float64) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(keysUp)
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// SetKeysUp sets the KeysUp property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#keysup
+func (t *TouchCamera) SetKeysUp(keysUp float64) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(keysUp)
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// LockedTarget returns the LockedTarget property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#lockedtarget
+func (t *TouchCamera) LockedTarget(lockedTarget interface{}) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(lockedTarget)
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// SetLockedTarget sets the LockedTarget property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#lockedtarget
+func (t *TouchCamera) SetLockedTarget(lockedTarget interface{}) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(lockedTarget)
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// NoRotationConstraint returns the NoRotationConstraint property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#norotationconstraint
+func (t *TouchCamera) NoRotationConstraint(noRotationConstraint bool) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(noRotationConstraint)
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// SetNoRotationConstraint sets the NoRotationConstraint property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#norotationconstraint
+func (t *TouchCamera) SetNoRotationConstraint(noRotationConstraint bool) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(noRotationConstraint)
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// OnCollide returns the OnCollide property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#oncollide
+func (t *TouchCamera) OnCollide(onCollide func()) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(onCollide)
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// SetOnCollide sets the OnCollide property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#oncollide
+func (t *TouchCamera) SetOnCollide(onCollide func()) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(onCollide)
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// Rotation returns the Rotation property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#rotation
+func (t *TouchCamera) Rotation(rotation *Vector3) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(rotation.JSObject())
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// SetRotation sets the Rotation property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#rotation
+func (t *TouchCamera) SetRotation(rotation *Vector3) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(rotation.JSObject())
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// RotationQuaternion returns the RotationQuaternion property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#rotationquaternion
+func (t *TouchCamera) RotationQuaternion(rotationQuaternion *Quaternion) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(rotationQuaternion.JSObject())
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// SetRotationQuaternion sets the RotationQuaternion property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#rotationquaternion
+func (t *TouchCamera) SetRotationQuaternion(rotationQuaternion *Quaternion) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(rotationQuaternion.JSObject())
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// Speed returns the Speed property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#speed
+func (t *TouchCamera) Speed(speed float64) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(speed)
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// SetSpeed sets the Speed property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#speed
+func (t *TouchCamera) SetSpeed(speed float64) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(speed)
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// TouchAngularSensibility returns the TouchAngularSensibility property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#touchangularsensibility
+func (t *TouchCamera) TouchAngularSensibility(touchAngularSensibility float64) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(touchAngularSensibility)
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// SetTouchAngularSensibility sets the TouchAngularSensibility property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#touchangularsensibility
+func (t *TouchCamera) SetTouchAngularSensibility(touchAngularSensibility float64) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(touchAngularSensibility)
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// TouchMoveSensibility returns the TouchMoveSensibility property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#touchmovesensibility
+func (t *TouchCamera) TouchMoveSensibility(touchMoveSensibility float64) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(touchMoveSensibility)
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// SetTouchMoveSensibility sets the TouchMoveSensibility property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#touchmovesensibility
+func (t *TouchCamera) SetTouchMoveSensibility(touchMoveSensibility float64) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(touchMoveSensibility)
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// UpdateUpVectorFromRotation returns the UpdateUpVectorFromRotation property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#updateupvectorfromrotation
+func (t *TouchCamera) UpdateUpVectorFromRotation(updateUpVectorFromRotation bool) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(updateUpVectorFromRotation)
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateUpVectorFromRotation sets the UpdateUpVectorFromRotation property of class TouchCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.touchcamera#updateupvectorfromrotation
+func (t *TouchCamera) SetUpdateUpVectorFromRotation(updateUpVectorFromRotation bool) *TouchCamera {
+	p := ba.ctx.Get("TouchCamera").New(updateUpVectorFromRotation)
+	return TouchCameraFromJSObject(p, ba.ctx)
+}
+
+*/

@@ -27,4 +27,22 @@ func BabylonFileLoaderConfigurationFromJSObject(p js.Value, ctx js.Value) *Babyl
 	return &BabylonFileLoaderConfiguration{p: p, ctx: ctx}
 }
 
-// TODO: methods
+/*
+
+// LoaderInjectedPhysicsEngine returns the LoaderInjectedPhysicsEngine property of class BabylonFileLoaderConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.babylonfileloaderconfiguration#loaderinjectedphysicsengine
+func (b *BabylonFileLoaderConfiguration) LoaderInjectedPhysicsEngine(LoaderInjectedPhysicsEngine interface{}) *BabylonFileLoaderConfiguration {
+	p := ba.ctx.Get("BabylonFileLoaderConfiguration").New(LoaderInjectedPhysicsEngine)
+	return BabylonFileLoaderConfigurationFromJSObject(p, ba.ctx)
+}
+
+// SetLoaderInjectedPhysicsEngine sets the LoaderInjectedPhysicsEngine property of class BabylonFileLoaderConfiguration.
+//
+// https://doc.babylonjs.com/api/classes/babylon.babylonfileloaderconfiguration#loaderinjectedphysicsengine
+func (b *BabylonFileLoaderConfiguration) SetLoaderInjectedPhysicsEngine(LoaderInjectedPhysicsEngine interface{}) *BabylonFileLoaderConfiguration {
+	p := ba.ctx.Get("BabylonFileLoaderConfiguration").New(LoaderInjectedPhysicsEngine)
+	return BabylonFileLoaderConfigurationFromJSObject(p, ba.ctx)
+}
+
+*/

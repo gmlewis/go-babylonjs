@@ -29,4 +29,90 @@ func CircleEaseFromJSObject(p js.Value, ctx js.Value) *CircleEase {
 	return &CircleEase{EasingFunction: EasingFunctionFromJSObject(p, ctx), ctx: ctx}
 }
 
-// TODO: methods
+// Ease calls the Ease method on the CircleEase object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleease#ease
+func (c *CircleEase) Ease(gradient float64) float64 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, gradient)
+
+	retVal := c.p.Call("ease", args...)
+	return retVal.Float()
+}
+
+// GetEasingMode calls the GetEasingMode method on the CircleEase object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleease#geteasingmode
+func (c *CircleEase) GetEasingMode() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getEasingMode", args...)
+	return retVal.Float()
+}
+
+// SetEasingMode calls the SetEasingMode method on the CircleEase object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleease#seteasingmode
+func (c *CircleEase) SetEasingMode(easingMode float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, easingMode)
+
+	c.p.Call("setEasingMode", args...)
+}
+
+/*
+
+// EASINGMODE_EASEIN returns the EASINGMODE_EASEIN property of class CircleEase.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleease#easingmode_easein
+func (c *CircleEase) EASINGMODE_EASEIN(EASINGMODE_EASEIN float64) *CircleEase {
+	p := ba.ctx.Get("CircleEase").New(EASINGMODE_EASEIN)
+	return CircleEaseFromJSObject(p, ba.ctx)
+}
+
+// SetEASINGMODE_EASEIN sets the EASINGMODE_EASEIN property of class CircleEase.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleease#easingmode_easein
+func (c *CircleEase) SetEASINGMODE_EASEIN(EASINGMODE_EASEIN float64) *CircleEase {
+	p := ba.ctx.Get("CircleEase").New(EASINGMODE_EASEIN)
+	return CircleEaseFromJSObject(p, ba.ctx)
+}
+
+// EASINGMODE_EASEINOUT returns the EASINGMODE_EASEINOUT property of class CircleEase.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleease#easingmode_easeinout
+func (c *CircleEase) EASINGMODE_EASEINOUT(EASINGMODE_EASEINOUT float64) *CircleEase {
+	p := ba.ctx.Get("CircleEase").New(EASINGMODE_EASEINOUT)
+	return CircleEaseFromJSObject(p, ba.ctx)
+}
+
+// SetEASINGMODE_EASEINOUT sets the EASINGMODE_EASEINOUT property of class CircleEase.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleease#easingmode_easeinout
+func (c *CircleEase) SetEASINGMODE_EASEINOUT(EASINGMODE_EASEINOUT float64) *CircleEase {
+	p := ba.ctx.Get("CircleEase").New(EASINGMODE_EASEINOUT)
+	return CircleEaseFromJSObject(p, ba.ctx)
+}
+
+// EASINGMODE_EASEOUT returns the EASINGMODE_EASEOUT property of class CircleEase.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleease#easingmode_easeout
+func (c *CircleEase) EASINGMODE_EASEOUT(EASINGMODE_EASEOUT float64) *CircleEase {
+	p := ba.ctx.Get("CircleEase").New(EASINGMODE_EASEOUT)
+	return CircleEaseFromJSObject(p, ba.ctx)
+}
+
+// SetEASINGMODE_EASEOUT sets the EASINGMODE_EASEOUT property of class CircleEase.
+//
+// https://doc.babylonjs.com/api/classes/babylon.circleease#easingmode_easeout
+func (c *CircleEase) SetEASINGMODE_EASEOUT(EASINGMODE_EASEOUT float64) *CircleEase {
+	p := ba.ctx.Get("CircleEase").New(EASINGMODE_EASEOUT)
+	return CircleEaseFromJSObject(p, ba.ctx)
+}
+
+*/

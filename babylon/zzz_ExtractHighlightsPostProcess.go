@@ -29,15 +29,11 @@ func ExtractHighlightsPostProcessFromJSObject(p js.Value, ctx js.Value) *Extract
 
 // NewExtractHighlightsPostProcessOpts contains optional parameters for NewExtractHighlightsPostProcess.
 type NewExtractHighlightsPostProcessOpts struct {
-	SamplingMode *JSFloat64
-
-	Engine *Engine
-
-	Reusable *JSBool
-
-	TextureType *JSFloat64
-
-	BlockCompilation *JSBool
+	SamplingMode     *float64
+	Engine           *Engine
+	Reusable         *bool
+	TextureType      *float64
+	BlockCompilation *bool
 }
 
 // NewExtractHighlightsPostProcess returns a new ExtractHighlightsPostProcess object.
@@ -48,8 +44,786 @@ func (ba *Babylon) NewExtractHighlightsPostProcess(name string, options float64,
 		opts = &NewExtractHighlightsPostProcessOpts{}
 	}
 
-	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(name, options, camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject(), opts.TextureType.JSObject(), opts.BlockCompilation.JSObject())
+	args := make([]interface{}, 0, 3+5)
+
+	args = append(args, name)
+	args = append(args, options)
+	args = append(args, camera.JSObject())
+
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+	if opts.Engine == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Engine.JSObject())
+	}
+	if opts.Reusable == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Reusable)
+	}
+	if opts.TextureType == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.TextureType)
+	}
+	if opts.BlockCompilation == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.BlockCompilation)
+	}
+
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(args...)
 	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// ExtractHighlightsPostProcessActivateOpts contains optional parameters for ExtractHighlightsPostProcess.Activate.
+type ExtractHighlightsPostProcessActivateOpts struct {
+	SourceTexture     *InternalTexture
+	ForceDepthStencil *bool
+}
+
+// Activate calls the Activate method on the ExtractHighlightsPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#activate
+func (e *ExtractHighlightsPostProcess) Activate(camera *Camera, opts *ExtractHighlightsPostProcessActivateOpts) *InternalTexture {
+	if opts == nil {
+		opts = &ExtractHighlightsPostProcessActivateOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, camera.JSObject())
+
+	if opts.SourceTexture == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.SourceTexture.JSObject())
+	}
+	if opts.ForceDepthStencil == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceDepthStencil)
+	}
+
+	retVal := e.p.Call("activate", args...)
+	return InternalTextureFromJSObject(retVal, e.ctx)
+}
+
+// Apply calls the Apply method on the ExtractHighlightsPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#apply
+func (e *ExtractHighlightsPostProcess) Apply() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := e.p.Call("apply", args...)
+	return EffectFromJSObject(retVal, e.ctx)
+}
+
+// ExtractHighlightsPostProcessDisposeOpts contains optional parameters for ExtractHighlightsPostProcess.Dispose.
+type ExtractHighlightsPostProcessDisposeOpts struct {
+	Camera *Camera
+}
+
+// Dispose calls the Dispose method on the ExtractHighlightsPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#dispose
+func (e *ExtractHighlightsPostProcess) Dispose(opts *ExtractHighlightsPostProcessDisposeOpts) {
+	if opts == nil {
+		opts = &ExtractHighlightsPostProcessDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Camera == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Camera.JSObject())
+	}
+
+	e.p.Call("dispose", args...)
+}
+
+// GetCamera calls the GetCamera method on the ExtractHighlightsPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#getcamera
+func (e *ExtractHighlightsPostProcess) GetCamera() *Camera {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := e.p.Call("getCamera", args...)
+	return CameraFromJSObject(retVal, e.ctx)
+}
+
+// GetClassName calls the GetClassName method on the ExtractHighlightsPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#getclassname
+func (e *ExtractHighlightsPostProcess) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := e.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetEffect calls the GetEffect method on the ExtractHighlightsPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#geteffect
+func (e *ExtractHighlightsPostProcess) GetEffect() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := e.p.Call("getEffect", args...)
+	return EffectFromJSObject(retVal, e.ctx)
+}
+
+// GetEffectName calls the GetEffectName method on the ExtractHighlightsPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#geteffectname
+func (e *ExtractHighlightsPostProcess) GetEffectName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := e.p.Call("getEffectName", args...)
+	return retVal.String()
+}
+
+// GetEngine calls the GetEngine method on the ExtractHighlightsPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#getengine
+func (e *ExtractHighlightsPostProcess) GetEngine() *Engine {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := e.p.Call("getEngine", args...)
+	return EngineFromJSObject(retVal, e.ctx)
+}
+
+// IsReady calls the IsReady method on the ExtractHighlightsPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#isready
+func (e *ExtractHighlightsPostProcess) IsReady() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := e.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// IsReusable calls the IsReusable method on the ExtractHighlightsPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#isreusable
+func (e *ExtractHighlightsPostProcess) IsReusable() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := e.p.Call("isReusable", args...)
+	return retVal.Bool()
+}
+
+// MarkTextureDirty calls the MarkTextureDirty method on the ExtractHighlightsPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#marktexturedirty
+func (e *ExtractHighlightsPostProcess) MarkTextureDirty() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	e.p.Call("markTextureDirty", args...)
+}
+
+// ShareOutputWith calls the ShareOutputWith method on the ExtractHighlightsPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#shareoutputwith
+func (e *ExtractHighlightsPostProcess) ShareOutputWith(postProcess *PostProcess) *PostProcess {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, postProcess.JSObject())
+
+	retVal := e.p.Call("shareOutputWith", args...)
+	return PostProcessFromJSObject(retVal, e.ctx)
+}
+
+// ExtractHighlightsPostProcessUpdateEffectOpts contains optional parameters for ExtractHighlightsPostProcess.UpdateEffect.
+type ExtractHighlightsPostProcessUpdateEffectOpts struct {
+	Defines         *string
+	Uniforms        *string
+	Samplers        *string
+	IndexParameters *interface{}
+	OnCompiled      *func()
+	OnError         *func()
+}
+
+// UpdateEffect calls the UpdateEffect method on the ExtractHighlightsPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#updateeffect
+func (e *ExtractHighlightsPostProcess) UpdateEffect(opts *ExtractHighlightsPostProcessUpdateEffectOpts) {
+	if opts == nil {
+		opts = &ExtractHighlightsPostProcessUpdateEffectOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+6)
+
+	if opts.Defines == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Defines)
+	}
+	if opts.Uniforms == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Uniforms)
+	}
+	if opts.Samplers == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Samplers)
+	}
+	if opts.IndexParameters == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.IndexParameters)
+	}
+	if opts.OnCompiled == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnCompiled)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+
+	e.p.Call("updateEffect", args...)
+}
+
+// UseOwnOutput calls the UseOwnOutput method on the ExtractHighlightsPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#useownoutput
+func (e *ExtractHighlightsPostProcess) UseOwnOutput() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	e.p.Call("useOwnOutput", args...)
+}
+
+/*
+
+// AdaptScaleToCurrentViewport returns the AdaptScaleToCurrentViewport property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#adaptscaletocurrentviewport
+func (e *ExtractHighlightsPostProcess) AdaptScaleToCurrentViewport(adaptScaleToCurrentViewport bool) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(adaptScaleToCurrentViewport)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAdaptScaleToCurrentViewport sets the AdaptScaleToCurrentViewport property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#adaptscaletocurrentviewport
+func (e *ExtractHighlightsPostProcess) SetAdaptScaleToCurrentViewport(adaptScaleToCurrentViewport bool) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(adaptScaleToCurrentViewport)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AlphaConstants returns the AlphaConstants property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#alphaconstants
+func (e *ExtractHighlightsPostProcess) AlphaConstants(alphaConstants *Color4) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(alphaConstants.JSObject())
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaConstants sets the AlphaConstants property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#alphaconstants
+func (e *ExtractHighlightsPostProcess) SetAlphaConstants(alphaConstants *Color4) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(alphaConstants.JSObject())
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AlphaMode returns the AlphaMode property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#alphamode
+func (e *ExtractHighlightsPostProcess) AlphaMode(alphaMode float64) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(alphaMode)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaMode sets the AlphaMode property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#alphamode
+func (e *ExtractHighlightsPostProcess) SetAlphaMode(alphaMode float64) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(alphaMode)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AlwaysForcePOT returns the AlwaysForcePOT property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#alwaysforcepot
+func (e *ExtractHighlightsPostProcess) AlwaysForcePOT(alwaysForcePOT bool) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(alwaysForcePOT)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAlwaysForcePOT sets the AlwaysForcePOT property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#alwaysforcepot
+func (e *ExtractHighlightsPostProcess) SetAlwaysForcePOT(alwaysForcePOT bool) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(alwaysForcePOT)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Animations returns the Animations property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#animations
+func (e *ExtractHighlightsPostProcess) Animations(animations *Animation) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(animations.JSObject())
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#animations
+func (e *ExtractHighlightsPostProcess) SetAnimations(animations *Animation) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(animations.JSObject())
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AspectRatio returns the AspectRatio property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#aspectratio
+func (e *ExtractHighlightsPostProcess) AspectRatio(aspectRatio float64) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(aspectRatio)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAspectRatio sets the AspectRatio property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#aspectratio
+func (e *ExtractHighlightsPostProcess) SetAspectRatio(aspectRatio float64) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(aspectRatio)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AutoClear returns the AutoClear property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#autoclear
+func (e *ExtractHighlightsPostProcess) AutoClear(autoClear bool) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(autoClear)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAutoClear sets the AutoClear property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#autoclear
+func (e *ExtractHighlightsPostProcess) SetAutoClear(autoClear bool) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(autoClear)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ClearColor returns the ClearColor property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#clearcolor
+func (e *ExtractHighlightsPostProcess) ClearColor(clearColor *Color4) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(clearColor.JSObject())
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetClearColor sets the ClearColor property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#clearcolor
+func (e *ExtractHighlightsPostProcess) SetClearColor(clearColor *Color4) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(clearColor.JSObject())
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// EnablePixelPerfectMode returns the EnablePixelPerfectMode property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#enablepixelperfectmode
+func (e *ExtractHighlightsPostProcess) EnablePixelPerfectMode(enablePixelPerfectMode bool) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(enablePixelPerfectMode)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetEnablePixelPerfectMode sets the EnablePixelPerfectMode property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#enablepixelperfectmode
+func (e *ExtractHighlightsPostProcess) SetEnablePixelPerfectMode(enablePixelPerfectMode bool) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(enablePixelPerfectMode)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ForceFullscreenViewport returns the ForceFullscreenViewport property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#forcefullscreenviewport
+func (e *ExtractHighlightsPostProcess) ForceFullscreenViewport(forceFullscreenViewport bool) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(forceFullscreenViewport)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetForceFullscreenViewport sets the ForceFullscreenViewport property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#forcefullscreenviewport
+func (e *ExtractHighlightsPostProcess) SetForceFullscreenViewport(forceFullscreenViewport bool) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(forceFullscreenViewport)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Height returns the Height property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#height
+func (e *ExtractHighlightsPostProcess) Height(height float64) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(height)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetHeight sets the Height property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#height
+func (e *ExtractHighlightsPostProcess) SetHeight(height float64) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(height)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// InputTexture returns the InputTexture property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#inputtexture
+func (e *ExtractHighlightsPostProcess) InputTexture(inputTexture *InternalTexture) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(inputTexture.JSObject())
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetInputTexture sets the InputTexture property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#inputtexture
+func (e *ExtractHighlightsPostProcess) SetInputTexture(inputTexture *InternalTexture) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(inputTexture.JSObject())
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#inspectablecustomproperties
+func (e *ExtractHighlightsPostProcess) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(inspectableCustomProperties.JSObject())
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#inspectablecustomproperties
+func (e *ExtractHighlightsPostProcess) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(inspectableCustomProperties.JSObject())
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// IsSupported returns the IsSupported property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#issupported
+func (e *ExtractHighlightsPostProcess) IsSupported(isSupported bool) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(isSupported)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetIsSupported sets the IsSupported property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#issupported
+func (e *ExtractHighlightsPostProcess) SetIsSupported(isSupported bool) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(isSupported)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#name
+func (e *ExtractHighlightsPostProcess) Name(name string) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(name)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#name
+func (e *ExtractHighlightsPostProcess) SetName(name string) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(name)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnActivate returns the OnActivate property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#onactivate
+func (e *ExtractHighlightsPostProcess) OnActivate(onActivate func()) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(onActivate)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnActivate sets the OnActivate property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#onactivate
+func (e *ExtractHighlightsPostProcess) SetOnActivate(onActivate func()) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(onActivate)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnActivateObservable returns the OnActivateObservable property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#onactivateobservable
+func (e *ExtractHighlightsPostProcess) OnActivateObservable(onActivateObservable *Observable) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(onActivateObservable.JSObject())
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnActivateObservable sets the OnActivateObservable property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#onactivateobservable
+func (e *ExtractHighlightsPostProcess) SetOnActivateObservable(onActivateObservable *Observable) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(onActivateObservable.JSObject())
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnAfterRender returns the OnAfterRender property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#onafterrender
+func (e *ExtractHighlightsPostProcess) OnAfterRender(onAfterRender func()) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(onAfterRender)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterRender sets the OnAfterRender property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#onafterrender
+func (e *ExtractHighlightsPostProcess) SetOnAfterRender(onAfterRender func()) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(onAfterRender)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnAfterRenderObservable returns the OnAfterRenderObservable property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#onafterrenderobservable
+func (e *ExtractHighlightsPostProcess) OnAfterRenderObservable(onAfterRenderObservable *Observable) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(onAfterRenderObservable.JSObject())
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterRenderObservable sets the OnAfterRenderObservable property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#onafterrenderobservable
+func (e *ExtractHighlightsPostProcess) SetOnAfterRenderObservable(onAfterRenderObservable *Observable) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(onAfterRenderObservable.JSObject())
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnApply returns the OnApply property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#onapply
+func (e *ExtractHighlightsPostProcess) OnApply(onApply func()) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(onApply)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnApply sets the OnApply property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#onapply
+func (e *ExtractHighlightsPostProcess) SetOnApply(onApply func()) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(onApply)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnApplyObservable returns the OnApplyObservable property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#onapplyobservable
+func (e *ExtractHighlightsPostProcess) OnApplyObservable(onApplyObservable *Observable) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(onApplyObservable.JSObject())
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnApplyObservable sets the OnApplyObservable property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#onapplyobservable
+func (e *ExtractHighlightsPostProcess) SetOnApplyObservable(onApplyObservable *Observable) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(onApplyObservable.JSObject())
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeRender returns the OnBeforeRender property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#onbeforerender
+func (e *ExtractHighlightsPostProcess) OnBeforeRender(onBeforeRender func()) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(onBeforeRender)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeRender sets the OnBeforeRender property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#onbeforerender
+func (e *ExtractHighlightsPostProcess) SetOnBeforeRender(onBeforeRender func()) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(onBeforeRender)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeRenderObservable returns the OnBeforeRenderObservable property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#onbeforerenderobservable
+func (e *ExtractHighlightsPostProcess) OnBeforeRenderObservable(onBeforeRenderObservable *Observable) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(onBeforeRenderObservable.JSObject())
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeRenderObservable sets the OnBeforeRenderObservable property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#onbeforerenderobservable
+func (e *ExtractHighlightsPostProcess) SetOnBeforeRenderObservable(onBeforeRenderObservable *Observable) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(onBeforeRenderObservable.JSObject())
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnSizeChanged returns the OnSizeChanged property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#onsizechanged
+func (e *ExtractHighlightsPostProcess) OnSizeChanged(onSizeChanged func()) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(onSizeChanged)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnSizeChanged sets the OnSizeChanged property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#onsizechanged
+func (e *ExtractHighlightsPostProcess) SetOnSizeChanged(onSizeChanged func()) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(onSizeChanged)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnSizeChangedObservable returns the OnSizeChangedObservable property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#onsizechangedobservable
+func (e *ExtractHighlightsPostProcess) OnSizeChangedObservable(onSizeChangedObservable *Observable) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(onSizeChangedObservable.JSObject())
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnSizeChangedObservable sets the OnSizeChangedObservable property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#onsizechangedobservable
+func (e *ExtractHighlightsPostProcess) SetOnSizeChangedObservable(onSizeChangedObservable *Observable) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(onSizeChangedObservable.JSObject())
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// RenderTargetSamplingMode returns the RenderTargetSamplingMode property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#rendertargetsamplingmode
+func (e *ExtractHighlightsPostProcess) RenderTargetSamplingMode(renderTargetSamplingMode float64) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(renderTargetSamplingMode)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetRenderTargetSamplingMode sets the RenderTargetSamplingMode property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#rendertargetsamplingmode
+func (e *ExtractHighlightsPostProcess) SetRenderTargetSamplingMode(renderTargetSamplingMode float64) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(renderTargetSamplingMode)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Samples returns the Samples property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#samples
+func (e *ExtractHighlightsPostProcess) Samples(samples float64) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(samples)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetSamples sets the Samples property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#samples
+func (e *ExtractHighlightsPostProcess) SetSamples(samples float64) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(samples)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ScaleMode returns the ScaleMode property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#scalemode
+func (e *ExtractHighlightsPostProcess) ScaleMode(scaleMode float64) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(scaleMode)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetScaleMode sets the ScaleMode property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#scalemode
+func (e *ExtractHighlightsPostProcess) SetScaleMode(scaleMode float64) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(scaleMode)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// TexelSize returns the TexelSize property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#texelsize
+func (e *ExtractHighlightsPostProcess) TexelSize(texelSize *Vector2) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(texelSize.JSObject())
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetTexelSize sets the TexelSize property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#texelsize
+func (e *ExtractHighlightsPostProcess) SetTexelSize(texelSize *Vector2) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(texelSize.JSObject())
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Threshold returns the Threshold property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#threshold
+func (e *ExtractHighlightsPostProcess) Threshold(threshold float64) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(threshold)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetThreshold sets the Threshold property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#threshold
+func (e *ExtractHighlightsPostProcess) SetThreshold(threshold float64) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(threshold)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#uniqueid
+func (e *ExtractHighlightsPostProcess) UniqueId(uniqueId float64) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(uniqueId)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#uniqueid
+func (e *ExtractHighlightsPostProcess) SetUniqueId(uniqueId float64) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(uniqueId)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Width returns the Width property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#width
+func (e *ExtractHighlightsPostProcess) Width(width float64) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(width)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetWidth sets the Width property of class ExtractHighlightsPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.extracthighlightspostprocess#width
+func (e *ExtractHighlightsPostProcess) SetWidth(width float64) *ExtractHighlightsPostProcess {
+	p := ba.ctx.Get("ExtractHighlightsPostProcess").New(width)
+	return ExtractHighlightsPostProcessFromJSObject(p, ba.ctx)
+}
+
+*/

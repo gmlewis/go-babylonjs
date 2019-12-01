@@ -31,8 +31,105 @@ func FadeInOutBehaviorFromJSObject(p js.Value, ctx js.Value) *FadeInOutBehavior 
 //
 // https://doc.babylonjs.com/api/classes/babylon.fadeinoutbehavior
 func (ba *Babylon) NewFadeInOutBehavior() *FadeInOutBehavior {
-	p := ba.ctx.Get("FadeInOutBehavior").New()
+
+	args := make([]interface{}, 0, 0+0)
+
+	p := ba.ctx.Get("FadeInOutBehavior").New(args...)
 	return FadeInOutBehaviorFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Attach calls the Attach method on the FadeInOutBehavior object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fadeinoutbehavior#attach
+func (f *FadeInOutBehavior) Attach(ownerNode *Mesh) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, ownerNode.JSObject())
+
+	f.p.Call("attach", args...)
+}
+
+// Detach calls the Detach method on the FadeInOutBehavior object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fadeinoutbehavior#detach
+func (f *FadeInOutBehavior) Detach() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	f.p.Call("detach", args...)
+}
+
+// FadeIn calls the FadeIn method on the FadeInOutBehavior object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fadeinoutbehavior#fadein
+func (f *FadeInOutBehavior) FadeIn(value bool) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, value)
+
+	f.p.Call("fadeIn", args...)
+}
+
+// Init calls the Init method on the FadeInOutBehavior object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fadeinoutbehavior#init
+func (f *FadeInOutBehavior) Init() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	f.p.Call("init", args...)
+}
+
+/*
+
+// Delay returns the Delay property of class FadeInOutBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fadeinoutbehavior#delay
+func (f *FadeInOutBehavior) Delay(delay float64) *FadeInOutBehavior {
+	p := ba.ctx.Get("FadeInOutBehavior").New(delay)
+	return FadeInOutBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetDelay sets the Delay property of class FadeInOutBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fadeinoutbehavior#delay
+func (f *FadeInOutBehavior) SetDelay(delay float64) *FadeInOutBehavior {
+	p := ba.ctx.Get("FadeInOutBehavior").New(delay)
+	return FadeInOutBehaviorFromJSObject(p, ba.ctx)
+}
+
+// FadeInTime returns the FadeInTime property of class FadeInOutBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fadeinoutbehavior#fadeintime
+func (f *FadeInOutBehavior) FadeInTime(fadeInTime float64) *FadeInOutBehavior {
+	p := ba.ctx.Get("FadeInOutBehavior").New(fadeInTime)
+	return FadeInOutBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetFadeInTime sets the FadeInTime property of class FadeInOutBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fadeinoutbehavior#fadeintime
+func (f *FadeInOutBehavior) SetFadeInTime(fadeInTime float64) *FadeInOutBehavior {
+	p := ba.ctx.Get("FadeInOutBehavior").New(fadeInTime)
+	return FadeInOutBehaviorFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class FadeInOutBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fadeinoutbehavior#name
+func (f *FadeInOutBehavior) Name(name string) *FadeInOutBehavior {
+	p := ba.ctx.Get("FadeInOutBehavior").New(name)
+	return FadeInOutBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class FadeInOutBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fadeinoutbehavior#name
+func (f *FadeInOutBehavior) SetName(name string) *FadeInOutBehavior {
+	p := ba.ctx.Get("FadeInOutBehavior").New(name)
+	return FadeInOutBehaviorFromJSObject(p, ba.ctx)
+}
+
+*/

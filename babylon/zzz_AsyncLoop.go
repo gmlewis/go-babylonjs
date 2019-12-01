@@ -29,7 +29,7 @@ func AsyncLoopFromJSObject(p js.Value, ctx js.Value) *AsyncLoop {
 
 // NewAsyncLoopOpts contains optional parameters for NewAsyncLoop.
 type NewAsyncLoopOpts struct {
-	Offset *JSFloat64
+	Offset *float64
 }
 
 // NewAsyncLoop returns a new AsyncLoop object.
@@ -40,8 +40,139 @@ func (ba *Babylon) NewAsyncLoop(iterations float64, jsFunc func(), successCallba
 		opts = &NewAsyncLoopOpts{}
 	}
 
-	p := ba.ctx.Get("AsyncLoop").New(iterations, jsFunc, successCallback, opts.Offset.JSObject())
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, iterations)
+	args = append(args, jsFunc)
+	args = append(args, successCallback)
+
+	if opts.Offset == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Offset)
+	}
+
+	p := ba.ctx.Get("AsyncLoop").New(args...)
 	return AsyncLoopFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// BreakLoop calls the BreakLoop method on the AsyncLoop object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asyncloop#breakloop
+func (a *AsyncLoop) BreakLoop() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	a.p.Call("breakLoop", args...)
+}
+
+// ExecuteNext calls the ExecuteNext method on the AsyncLoop object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asyncloop#executenext
+func (a *AsyncLoop) ExecuteNext() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	a.p.Call("executeNext", args...)
+}
+
+// AsyncLoopRunOpts contains optional parameters for AsyncLoop.Run.
+type AsyncLoopRunOpts struct {
+	Offset *float64
+}
+
+// Run calls the Run method on the AsyncLoop object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asyncloop#run
+func (a *AsyncLoop) Run(iterations float64, fn func(), successCallback func(), opts *AsyncLoopRunOpts) *AsyncLoop {
+	if opts == nil {
+		opts = &AsyncLoopRunOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, iterations)
+	args = append(args, fn)
+	args = append(args, successCallback)
+
+	if opts.Offset == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Offset)
+	}
+
+	retVal := a.p.Call("Run", args...)
+	return AsyncLoopFromJSObject(retVal, a.ctx)
+}
+
+// AsyncLoopSyncAsyncForLoopOpts contains optional parameters for AsyncLoop.SyncAsyncForLoop.
+type AsyncLoopSyncAsyncForLoopOpts struct {
+	BreakFunction *func()
+	Timeout       *float64
+}
+
+// SyncAsyncForLoop calls the SyncAsyncForLoop method on the AsyncLoop object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asyncloop#syncasyncforloop
+func (a *AsyncLoop) SyncAsyncForLoop(iterations float64, syncedIterations float64, fn func(), callback func(), opts *AsyncLoopSyncAsyncForLoopOpts) *AsyncLoop {
+	if opts == nil {
+		opts = &AsyncLoopSyncAsyncForLoopOpts{}
+	}
+
+	args := make([]interface{}, 0, 4+2)
+
+	args = append(args, iterations)
+	args = append(args, syncedIterations)
+	args = append(args, fn)
+	args = append(args, callback)
+
+	if opts.BreakFunction == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.BreakFunction)
+	}
+	if opts.Timeout == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Timeout)
+	}
+
+	retVal := a.p.Call("SyncAsyncForLoop", args...)
+	return AsyncLoopFromJSObject(retVal, a.ctx)
+}
+
+/*
+
+// Index returns the Index property of class AsyncLoop.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asyncloop#index
+func (a *AsyncLoop) Index(index float64) *AsyncLoop {
+	p := ba.ctx.Get("AsyncLoop").New(index)
+	return AsyncLoopFromJSObject(p, ba.ctx)
+}
+
+// SetIndex sets the Index property of class AsyncLoop.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asyncloop#index
+func (a *AsyncLoop) SetIndex(index float64) *AsyncLoop {
+	p := ba.ctx.Get("AsyncLoop").New(index)
+	return AsyncLoopFromJSObject(p, ba.ctx)
+}
+
+// Iterations returns the Iterations property of class AsyncLoop.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asyncloop#iterations
+func (a *AsyncLoop) Iterations(iterations float64) *AsyncLoop {
+	p := ba.ctx.Get("AsyncLoop").New(iterations)
+	return AsyncLoopFromJSObject(p, ba.ctx)
+}
+
+// SetIterations sets the Iterations property of class AsyncLoop.
+//
+// https://doc.babylonjs.com/api/classes/babylon.asyncloop#iterations
+func (a *AsyncLoop) SetIterations(iterations float64) *AsyncLoop {
+	p := ba.ctx.Get("AsyncLoop").New(iterations)
+	return AsyncLoopFromJSObject(p, ba.ctx)
+}
+
+*/

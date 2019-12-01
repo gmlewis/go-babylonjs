@@ -40,8 +40,821 @@ func (ba *Babylon) NewNode(name string, opts *NewNodeOpts) *Node {
 		opts = &NewNodeOpts{}
 	}
 
-	p := ba.ctx.Get("Node").New(name, opts.Scene.JSObject())
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, name)
+
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+
+	p := ba.ctx.Get("Node").New(args...)
 	return NodeFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// NodeAddBehaviorOpts contains optional parameters for Node.AddBehavior.
+type NodeAddBehaviorOpts struct {
+	AttachImmediately *Node
+}
+
+// AddBehavior calls the AddBehavior method on the Node object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#addbehavior
+func (n *Node) AddBehavior(behavior js.Value, opts *NodeAddBehaviorOpts) *Node {
+	if opts == nil {
+		opts = &NodeAddBehaviorOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, behavior)
+
+	if opts.AttachImmediately == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.AttachImmediately.JSObject())
+	}
+
+	retVal := n.p.Call("addBehavior", args...)
+	return NodeFromJSObject(retVal, n.ctx)
+}
+
+// AddNodeConstructor calls the AddNodeConstructor method on the Node object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#addnodeconstructor
+func (n *Node) AddNodeConstructor(jsType string, constructorFunc js.Value) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, jsType)
+	args = append(args, constructorFunc)
+
+	n.p.Call("AddNodeConstructor", args...)
+}
+
+// NodeBeginAnimationOpts contains optional parameters for Node.BeginAnimation.
+type NodeBeginAnimationOpts struct {
+	Loop           *bool
+	SpeedRatio     *float64
+	OnAnimationEnd *func()
+}
+
+// BeginAnimation calls the BeginAnimation method on the Node object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#beginanimation
+func (n *Node) BeginAnimation(name string, opts *NodeBeginAnimationOpts) *Animatable {
+	if opts == nil {
+		opts = &NodeBeginAnimationOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, name)
+
+	if opts.Loop == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Loop)
+	}
+	if opts.SpeedRatio == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SpeedRatio)
+	}
+	if opts.OnAnimationEnd == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnAnimationEnd)
+	}
+
+	retVal := n.p.Call("beginAnimation", args...)
+	return AnimatableFromJSObject(retVal, n.ctx)
+}
+
+// NodeComputeWorldMatrixOpts contains optional parameters for Node.ComputeWorldMatrix.
+type NodeComputeWorldMatrixOpts struct {
+	Force *bool
+}
+
+// ComputeWorldMatrix calls the ComputeWorldMatrix method on the Node object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#computeworldmatrix
+func (n *Node) ComputeWorldMatrix(opts *NodeComputeWorldMatrixOpts) *Matrix {
+	if opts == nil {
+		opts = &NodeComputeWorldMatrixOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Force == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Force)
+	}
+
+	retVal := n.p.Call("computeWorldMatrix", args...)
+	return MatrixFromJSObject(retVal, n.ctx)
+}
+
+// NodeConstructOpts contains optional parameters for Node.Construct.
+type NodeConstructOpts struct {
+	Options *interface{}
+}
+
+// Construct calls the Construct method on the Node object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#construct
+func (n *Node) Construct(jsType string, name string, scene *Scene, opts *NodeConstructOpts) func() {
+	if opts == nil {
+		opts = &NodeConstructOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, jsType)
+	args = append(args, name)
+	args = append(args, scene.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	retVal := n.p.Call("Construct", args...)
+	return retVal
+}
+
+// CreateAnimationRange calls the CreateAnimationRange method on the Node object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#createanimationrange
+func (n *Node) CreateAnimationRange(name string, from float64, to float64) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, name)
+	args = append(args, from)
+	args = append(args, to)
+
+	n.p.Call("createAnimationRange", args...)
+}
+
+// NodeDeleteAnimationRangeOpts contains optional parameters for Node.DeleteAnimationRange.
+type NodeDeleteAnimationRangeOpts struct {
+	DeleteFrames *bool
+}
+
+// DeleteAnimationRange calls the DeleteAnimationRange method on the Node object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#deleteanimationrange
+func (n *Node) DeleteAnimationRange(name string, opts *NodeDeleteAnimationRangeOpts) {
+	if opts == nil {
+		opts = &NodeDeleteAnimationRangeOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, name)
+
+	if opts.DeleteFrames == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DeleteFrames)
+	}
+
+	n.p.Call("deleteAnimationRange", args...)
+}
+
+// NodeDisposeOpts contains optional parameters for Node.Dispose.
+type NodeDisposeOpts struct {
+	DoNotRecurse               *bool
+	DisposeMaterialAndTextures *bool
+}
+
+// Dispose calls the Dispose method on the Node object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#dispose
+func (n *Node) Dispose(opts *NodeDisposeOpts) {
+	if opts == nil {
+		opts = &NodeDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.DoNotRecurse == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DoNotRecurse)
+	}
+	if opts.DisposeMaterialAndTextures == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DisposeMaterialAndTextures)
+	}
+
+	n.p.Call("dispose", args...)
+}
+
+// GetAnimationByName calls the GetAnimationByName method on the Node object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#getanimationbyname
+func (n *Node) GetAnimationByName(name string) *Animation {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := n.p.Call("getAnimationByName", args...)
+	return AnimationFromJSObject(retVal, n.ctx)
+}
+
+// GetAnimationRange calls the GetAnimationRange method on the Node object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#getanimationrange
+func (n *Node) GetAnimationRange(name string) *AnimationRange {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := n.p.Call("getAnimationRange", args...)
+	return AnimationRangeFromJSObject(retVal, n.ctx)
+}
+
+// GetAnimationRanges calls the GetAnimationRanges method on the Node object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#getanimationranges
+func (n *Node) GetAnimationRanges() *AnimationRange {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getAnimationRanges", args...)
+	return AnimationRangeFromJSObject(retVal, n.ctx)
+}
+
+// GetBehaviorByName calls the GetBehaviorByName method on the Node object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#getbehaviorbyname
+func (n *Node) GetBehaviorByName(name string) *Node {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := n.p.Call("getBehaviorByName", args...)
+	return NodeFromJSObject(retVal, n.ctx)
+}
+
+// NodeGetChildMeshesOpts contains optional parameters for Node.GetChildMeshes.
+type NodeGetChildMeshesOpts struct {
+	DirectDescendantsOnly *bool
+	Predicate             *func()
+}
+
+// GetChildMeshes calls the GetChildMeshes method on the Node object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#getchildmeshes
+func (n *Node) GetChildMeshes(opts *NodeGetChildMeshesOpts) *AbstractMesh {
+	if opts == nil {
+		opts = &NodeGetChildMeshesOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	retVal := n.p.Call("getChildMeshes", args...)
+	return AbstractMeshFromJSObject(retVal, n.ctx)
+}
+
+// NodeGetChildrenOpts contains optional parameters for Node.GetChildren.
+type NodeGetChildrenOpts struct {
+	Predicate             *func()
+	DirectDescendantsOnly *bool
+}
+
+// GetChildren calls the GetChildren method on the Node object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#getchildren
+func (n *Node) GetChildren(opts *NodeGetChildrenOpts) *Node {
+	if opts == nil {
+		opts = &NodeGetChildrenOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+
+	retVal := n.p.Call("getChildren", args...)
+	return NodeFromJSObject(retVal, n.ctx)
+}
+
+// GetClassName calls the GetClassName method on the Node object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#getclassname
+func (n *Node) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// NodeGetDescendantsOpts contains optional parameters for Node.GetDescendants.
+type NodeGetDescendantsOpts struct {
+	DirectDescendantsOnly *bool
+	Predicate             *func()
+}
+
+// GetDescendants calls the GetDescendants method on the Node object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#getdescendants
+func (n *Node) GetDescendants(opts *NodeGetDescendantsOpts) *Node {
+	if opts == nil {
+		opts = &NodeGetDescendantsOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	retVal := n.p.Call("getDescendants", args...)
+	return NodeFromJSObject(retVal, n.ctx)
+}
+
+// GetEngine calls the GetEngine method on the Node object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#getengine
+func (n *Node) GetEngine() *Engine {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getEngine", args...)
+	return EngineFromJSObject(retVal, n.ctx)
+}
+
+// NodeGetHierarchyBoundingVectorsOpts contains optional parameters for Node.GetHierarchyBoundingVectors.
+type NodeGetHierarchyBoundingVectorsOpts struct {
+	IncludeDescendants *bool
+	Predicate          *func()
+}
+
+// GetHierarchyBoundingVectors calls the GetHierarchyBoundingVectors method on the Node object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#gethierarchyboundingvectors
+func (n *Node) GetHierarchyBoundingVectors(opts *NodeGetHierarchyBoundingVectorsOpts) js.Value {
+	if opts == nil {
+		opts = &NodeGetHierarchyBoundingVectorsOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.IncludeDescendants == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IncludeDescendants)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	retVal := n.p.Call("getHierarchyBoundingVectors", args...)
+	return retVal
+}
+
+// GetScene calls the GetScene method on the Node object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#getscene
+func (n *Node) GetScene() *Scene {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getScene", args...)
+	return SceneFromJSObject(retVal, n.ctx)
+}
+
+// GetWorldMatrix calls the GetWorldMatrix method on the Node object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#getworldmatrix
+func (n *Node) GetWorldMatrix() *Matrix {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getWorldMatrix", args...)
+	return MatrixFromJSObject(retVal, n.ctx)
+}
+
+// IsDescendantOf calls the IsDescendantOf method on the Node object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#isdescendantof
+func (n *Node) IsDescendantOf(ancestor *Node) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, ancestor.JSObject())
+
+	retVal := n.p.Call("isDescendantOf", args...)
+	return retVal.Bool()
+}
+
+// IsDisposed calls the IsDisposed method on the Node object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#isdisposed
+func (n *Node) IsDisposed() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("isDisposed", args...)
+	return retVal.Bool()
+}
+
+// NodeIsEnabledOpts contains optional parameters for Node.IsEnabled.
+type NodeIsEnabledOpts struct {
+	CheckAncestors *bool
+}
+
+// IsEnabled calls the IsEnabled method on the Node object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#isenabled
+func (n *Node) IsEnabled(opts *NodeIsEnabledOpts) bool {
+	if opts == nil {
+		opts = &NodeIsEnabledOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.CheckAncestors == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.CheckAncestors)
+	}
+
+	retVal := n.p.Call("isEnabled", args...)
+	return retVal.Bool()
+}
+
+// NodeIsReadyOpts contains optional parameters for Node.IsReady.
+type NodeIsReadyOpts struct {
+	CompleteCheck *bool
+}
+
+// IsReady calls the IsReady method on the Node object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#isready
+func (n *Node) IsReady(opts *NodeIsReadyOpts) bool {
+	if opts == nil {
+		opts = &NodeIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.CompleteCheck == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.CompleteCheck)
+	}
+
+	retVal := n.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// ParseAnimationRanges calls the ParseAnimationRanges method on the Node object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#parseanimationranges
+func (n *Node) ParseAnimationRanges(node *Node, parsedNode interface{}, scene *Scene) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, node.JSObject())
+	args = append(args, parsedNode)
+	args = append(args, scene.JSObject())
+
+	n.p.Call("ParseAnimationRanges", args...)
+}
+
+// RemoveBehavior calls the RemoveBehavior method on the Node object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#removebehavior
+func (n *Node) RemoveBehavior(behavior js.Value) *Node {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, behavior)
+
+	retVal := n.p.Call("removeBehavior", args...)
+	return NodeFromJSObject(retVal, n.ctx)
+}
+
+// SerializeAnimationRanges calls the SerializeAnimationRanges method on the Node object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#serializeanimationranges
+func (n *Node) SerializeAnimationRanges() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("serializeAnimationRanges", args...)
+	return retVal
+}
+
+// SetEnabled calls the SetEnabled method on the Node object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#setenabled
+func (n *Node) SetEnabled(value bool) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, value)
+
+	n.p.Call("setEnabled", args...)
+}
+
+/*
+
+// AnimationPropertiesOverride returns the AnimationPropertiesOverride property of class Node.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#animationpropertiesoverride
+func (n *Node) AnimationPropertiesOverride(animationPropertiesOverride *AnimationPropertiesOverride) *Node {
+	p := ba.ctx.Get("Node").New(animationPropertiesOverride.JSObject())
+	return NodeFromJSObject(p, ba.ctx)
+}
+
+// SetAnimationPropertiesOverride sets the AnimationPropertiesOverride property of class Node.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#animationpropertiesoverride
+func (n *Node) SetAnimationPropertiesOverride(animationPropertiesOverride *AnimationPropertiesOverride) *Node {
+	p := ba.ctx.Get("Node").New(animationPropertiesOverride.JSObject())
+	return NodeFromJSObject(p, ba.ctx)
+}
+
+// Animations returns the Animations property of class Node.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#animations
+func (n *Node) Animations(animations *Animation) *Node {
+	p := ba.ctx.Get("Node").New(animations.JSObject())
+	return NodeFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class Node.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#animations
+func (n *Node) SetAnimations(animations *Animation) *Node {
+	p := ba.ctx.Get("Node").New(animations.JSObject())
+	return NodeFromJSObject(p, ba.ctx)
+}
+
+// Behaviors returns the Behaviors property of class Node.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#behaviors
+func (n *Node) Behaviors(behaviors js.Value) *Node {
+	p := ba.ctx.Get("Node").New(behaviors)
+	return NodeFromJSObject(p, ba.ctx)
+}
+
+// SetBehaviors sets the Behaviors property of class Node.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#behaviors
+func (n *Node) SetBehaviors(behaviors js.Value) *Node {
+	p := ba.ctx.Get("Node").New(behaviors)
+	return NodeFromJSObject(p, ba.ctx)
+}
+
+// DoNotSerialize returns the DoNotSerialize property of class Node.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#donotserialize
+func (n *Node) DoNotSerialize(doNotSerialize bool) *Node {
+	p := ba.ctx.Get("Node").New(doNotSerialize)
+	return NodeFromJSObject(p, ba.ctx)
+}
+
+// SetDoNotSerialize sets the DoNotSerialize property of class Node.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#donotserialize
+func (n *Node) SetDoNotSerialize(doNotSerialize bool) *Node {
+	p := ba.ctx.Get("Node").New(doNotSerialize)
+	return NodeFromJSObject(p, ba.ctx)
+}
+
+// Id returns the Id property of class Node.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#id
+func (n *Node) Id(id string) *Node {
+	p := ba.ctx.Get("Node").New(id)
+	return NodeFromJSObject(p, ba.ctx)
+}
+
+// SetId sets the Id property of class Node.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#id
+func (n *Node) SetId(id string) *Node {
+	p := ba.ctx.Get("Node").New(id)
+	return NodeFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class Node.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#inspectablecustomproperties
+func (n *Node) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *Node {
+	p := ba.ctx.Get("Node").New(inspectableCustomProperties.JSObject())
+	return NodeFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class Node.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#inspectablecustomproperties
+func (n *Node) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *Node {
+	p := ba.ctx.Get("Node").New(inspectableCustomProperties.JSObject())
+	return NodeFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class Node.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#metadata
+func (n *Node) Metadata(metadata interface{}) *Node {
+	p := ba.ctx.Get("Node").New(metadata)
+	return NodeFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class Node.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#metadata
+func (n *Node) SetMetadata(metadata interface{}) *Node {
+	p := ba.ctx.Get("Node").New(metadata)
+	return NodeFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class Node.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#name
+func (n *Node) Name(name string) *Node {
+	p := ba.ctx.Get("Node").New(name)
+	return NodeFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class Node.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#name
+func (n *Node) SetName(name string) *Node {
+	p := ba.ctx.Get("Node").New(name)
+	return NodeFromJSObject(p, ba.ctx)
+}
+
+// OnDispose returns the OnDispose property of class Node.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#ondispose
+func (n *Node) OnDispose(onDispose func()) *Node {
+	p := ba.ctx.Get("Node").New(onDispose)
+	return NodeFromJSObject(p, ba.ctx)
+}
+
+// SetOnDispose sets the OnDispose property of class Node.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#ondispose
+func (n *Node) SetOnDispose(onDispose func()) *Node {
+	p := ba.ctx.Get("Node").New(onDispose)
+	return NodeFromJSObject(p, ba.ctx)
+}
+
+// OnDisposeObservable returns the OnDisposeObservable property of class Node.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#ondisposeobservable
+func (n *Node) OnDisposeObservable(onDisposeObservable *Observable) *Node {
+	p := ba.ctx.Get("Node").New(onDisposeObservable.JSObject())
+	return NodeFromJSObject(p, ba.ctx)
+}
+
+// SetOnDisposeObservable sets the OnDisposeObservable property of class Node.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#ondisposeobservable
+func (n *Node) SetOnDisposeObservable(onDisposeObservable *Observable) *Node {
+	p := ba.ctx.Get("Node").New(onDisposeObservable.JSObject())
+	return NodeFromJSObject(p, ba.ctx)
+}
+
+// OnReady returns the OnReady property of class Node.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#onready
+func (n *Node) OnReady(onReady func()) *Node {
+	p := ba.ctx.Get("Node").New(onReady)
+	return NodeFromJSObject(p, ba.ctx)
+}
+
+// SetOnReady sets the OnReady property of class Node.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#onready
+func (n *Node) SetOnReady(onReady func()) *Node {
+	p := ba.ctx.Get("Node").New(onReady)
+	return NodeFromJSObject(p, ba.ctx)
+}
+
+// Parent returns the Parent property of class Node.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#parent
+func (n *Node) Parent(parent *Node) *Node {
+	p := ba.ctx.Get("Node").New(parent.JSObject())
+	return NodeFromJSObject(p, ba.ctx)
+}
+
+// SetParent sets the Parent property of class Node.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#parent
+func (n *Node) SetParent(parent *Node) *Node {
+	p := ba.ctx.Get("Node").New(parent.JSObject())
+	return NodeFromJSObject(p, ba.ctx)
+}
+
+// ReservedDataStore returns the ReservedDataStore property of class Node.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#reserveddatastore
+func (n *Node) ReservedDataStore(reservedDataStore interface{}) *Node {
+	p := ba.ctx.Get("Node").New(reservedDataStore)
+	return NodeFromJSObject(p, ba.ctx)
+}
+
+// SetReservedDataStore sets the ReservedDataStore property of class Node.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#reserveddatastore
+func (n *Node) SetReservedDataStore(reservedDataStore interface{}) *Node {
+	p := ba.ctx.Get("Node").New(reservedDataStore)
+	return NodeFromJSObject(p, ba.ctx)
+}
+
+// State returns the State property of class Node.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#state
+func (n *Node) State(state string) *Node {
+	p := ba.ctx.Get("Node").New(state)
+	return NodeFromJSObject(p, ba.ctx)
+}
+
+// SetState sets the State property of class Node.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#state
+func (n *Node) SetState(state string) *Node {
+	p := ba.ctx.Get("Node").New(state)
+	return NodeFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class Node.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#uniqueid
+func (n *Node) UniqueId(uniqueId float64) *Node {
+	p := ba.ctx.Get("Node").New(uniqueId)
+	return NodeFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class Node.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#uniqueid
+func (n *Node) SetUniqueId(uniqueId float64) *Node {
+	p := ba.ctx.Get("Node").New(uniqueId)
+	return NodeFromJSObject(p, ba.ctx)
+}
+
+// WorldMatrixFromCache returns the WorldMatrixFromCache property of class Node.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#worldmatrixfromcache
+func (n *Node) WorldMatrixFromCache(worldMatrixFromCache *Matrix) *Node {
+	p := ba.ctx.Get("Node").New(worldMatrixFromCache.JSObject())
+	return NodeFromJSObject(p, ba.ctx)
+}
+
+// SetWorldMatrixFromCache sets the WorldMatrixFromCache property of class Node.
+//
+// https://doc.babylonjs.com/api/classes/babylon.node#worldmatrixfromcache
+func (n *Node) SetWorldMatrixFromCache(worldMatrixFromCache *Matrix) *Node {
+	p := ba.ctx.Get("Node").New(worldMatrixFromCache.JSObject())
+	return NodeFromJSObject(p, ba.ctx)
+}
+
+*/

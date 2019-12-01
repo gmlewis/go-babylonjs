@@ -31,7 +31,7 @@ func PhysicsEngineFromJSObject(p js.Value, ctx js.Value) *PhysicsEngine {
 
 // NewPhysicsEngineOpts contains optional parameters for NewPhysicsEngine.
 type NewPhysicsEngineOpts struct {
-	_physicsPlugin *JSValue
+	_physicsPlugin js.Value
 }
 
 // NewPhysicsEngine returns a new PhysicsEngine object.
@@ -42,8 +42,292 @@ func (ba *Babylon) NewPhysicsEngine(gravity *Vector3, opts *NewPhysicsEngineOpts
 		opts = &NewPhysicsEngineOpts{}
 	}
 
-	p := ba.ctx.Get("PhysicsEngine").New(gravity.JSObject(), opts._physicsPlugin.JSObject())
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, gravity.JSObject())
+
+	if opts._physicsPlugin == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts._physicsPlugin)
+	}
+
+	p := ba.ctx.Get("PhysicsEngine").New(args...)
 	return PhysicsEngineFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AddImpostor calls the AddImpostor method on the PhysicsEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsengine#addimpostor
+func (p *PhysicsEngine) AddImpostor(impostor *PhysicsImpostor) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, impostor.JSObject())
+
+	p.p.Call("addImpostor", args...)
+}
+
+// AddJoint calls the AddJoint method on the PhysicsEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsengine#addjoint
+func (p *PhysicsEngine) AddJoint(mainImpostor *PhysicsImpostor, connectedImpostor *PhysicsImpostor, joint *PhysicsJoint) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, mainImpostor.JSObject())
+	args = append(args, connectedImpostor.JSObject())
+	args = append(args, joint.JSObject())
+
+	p.p.Call("addJoint", args...)
+}
+
+// DefaultPluginFactory calls the DefaultPluginFactory method on the PhysicsEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsengine#defaultpluginfactory
+func (p *PhysicsEngine) DefaultPluginFactory() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("DefaultPluginFactory", args...)
+	return retVal
+}
+
+// Dispose calls the Dispose method on the PhysicsEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsengine#dispose
+func (p *PhysicsEngine) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("dispose", args...)
+}
+
+// GetImpostorForPhysicsObject calls the GetImpostorForPhysicsObject method on the PhysicsEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsengine#getimpostorforphysicsobject
+func (p *PhysicsEngine) GetImpostorForPhysicsObject(object *IPhysicsEnabledObject) *PhysicsImpostor {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, object.JSObject())
+
+	retVal := p.p.Call("getImpostorForPhysicsObject", args...)
+	return PhysicsImpostorFromJSObject(retVal, p.ctx)
+}
+
+// GetImpostorWithPhysicsBody calls the GetImpostorWithPhysicsBody method on the PhysicsEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsengine#getimpostorwithphysicsbody
+func (p *PhysicsEngine) GetImpostorWithPhysicsBody(body interface{}) *PhysicsImpostor {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, body)
+
+	retVal := p.p.Call("getImpostorWithPhysicsBody", args...)
+	return PhysicsImpostorFromJSObject(retVal, p.ctx)
+}
+
+// GetImpostors calls the GetImpostors method on the PhysicsEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsengine#getimpostors
+func (p *PhysicsEngine) GetImpostors() *[]PhysicsImpostor {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("getImpostors", args...)
+	return []PhysicsImpostorFromJSObject(retVal, p.ctx)
+}
+
+// GetPhysicsPlugin calls the GetPhysicsPlugin method on the PhysicsEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsengine#getphysicsplugin
+func (p *PhysicsEngine) GetPhysicsPlugin() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("getPhysicsPlugin", args...)
+	return retVal
+}
+
+// GetPhysicsPluginName calls the GetPhysicsPluginName method on the PhysicsEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsengine#getphysicspluginname
+func (p *PhysicsEngine) GetPhysicsPluginName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("getPhysicsPluginName", args...)
+	return retVal.String()
+}
+
+// GetSubTimeStep calls the GetSubTimeStep method on the PhysicsEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsengine#getsubtimestep
+func (p *PhysicsEngine) GetSubTimeStep() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("getSubTimeStep", args...)
+	return retVal.Float()
+}
+
+// GetTimeStep calls the GetTimeStep method on the PhysicsEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsengine#gettimestep
+func (p *PhysicsEngine) GetTimeStep() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("getTimeStep", args...)
+	return retVal.Float()
+}
+
+// Raycast calls the Raycast method on the PhysicsEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsengine#raycast
+func (p *PhysicsEngine) Raycast(from *Vector3, to *Vector3) *PhysicsRaycastResult {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, from.JSObject())
+	args = append(args, to.JSObject())
+
+	retVal := p.p.Call("raycast", args...)
+	return PhysicsRaycastResultFromJSObject(retVal, p.ctx)
+}
+
+// RemoveImpostor calls the RemoveImpostor method on the PhysicsEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsengine#removeimpostor
+func (p *PhysicsEngine) RemoveImpostor(impostor *PhysicsImpostor) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, impostor.JSObject())
+
+	p.p.Call("removeImpostor", args...)
+}
+
+// RemoveJoint calls the RemoveJoint method on the PhysicsEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsengine#removejoint
+func (p *PhysicsEngine) RemoveJoint(mainImpostor *PhysicsImpostor, connectedImpostor *PhysicsImpostor, joint *PhysicsJoint) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, mainImpostor.JSObject())
+	args = append(args, connectedImpostor.JSObject())
+	args = append(args, joint.JSObject())
+
+	p.p.Call("removeJoint", args...)
+}
+
+// SetGravity calls the SetGravity method on the PhysicsEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsengine#setgravity
+func (p *PhysicsEngine) SetGravity(gravity *Vector3) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, gravity.JSObject())
+
+	p.p.Call("setGravity", args...)
+}
+
+// PhysicsEngineSetSubTimeStepOpts contains optional parameters for PhysicsEngine.SetSubTimeStep.
+type PhysicsEngineSetSubTimeStepOpts struct {
+	SubTimeStep *float64
+}
+
+// SetSubTimeStep calls the SetSubTimeStep method on the PhysicsEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsengine#setsubtimestep
+func (p *PhysicsEngine) SetSubTimeStep(opts *PhysicsEngineSetSubTimeStepOpts) {
+	if opts == nil {
+		opts = &PhysicsEngineSetSubTimeStepOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.SubTimeStep == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SubTimeStep)
+	}
+
+	p.p.Call("setSubTimeStep", args...)
+}
+
+// PhysicsEngineSetTimeStepOpts contains optional parameters for PhysicsEngine.SetTimeStep.
+type PhysicsEngineSetTimeStepOpts struct {
+	NewTimeStep *float64
+}
+
+// SetTimeStep calls the SetTimeStep method on the PhysicsEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsengine#settimestep
+func (p *PhysicsEngine) SetTimeStep(opts *PhysicsEngineSetTimeStepOpts) {
+	if opts == nil {
+		opts = &PhysicsEngineSetTimeStepOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.NewTimeStep == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NewTimeStep)
+	}
+
+	p.p.Call("setTimeStep", args...)
+}
+
+// _step calls the _step method on the PhysicsEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsengine#_step
+func (p *PhysicsEngine) _step(delta float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, delta)
+
+	p.p.Call("_step", args...)
+}
+
+/*
+
+// Epsilon returns the Epsilon property of class PhysicsEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsengine#epsilon
+func (p *PhysicsEngine) Epsilon(Epsilon float64) *PhysicsEngine {
+	p := ba.ctx.Get("PhysicsEngine").New(Epsilon)
+	return PhysicsEngineFromJSObject(p, ba.ctx)
+}
+
+// SetEpsilon sets the Epsilon property of class PhysicsEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsengine#epsilon
+func (p *PhysicsEngine) SetEpsilon(Epsilon float64) *PhysicsEngine {
+	p := ba.ctx.Get("PhysicsEngine").New(Epsilon)
+	return PhysicsEngineFromJSObject(p, ba.ctx)
+}
+
+// Gravity returns the Gravity property of class PhysicsEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsengine#gravity
+func (p *PhysicsEngine) Gravity(gravity *Vector3) *PhysicsEngine {
+	p := ba.ctx.Get("PhysicsEngine").New(gravity.JSObject())
+	return PhysicsEngineFromJSObject(p, ba.ctx)
+}
+
+// SetGravity sets the Gravity property of class PhysicsEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsengine#gravity
+func (p *PhysicsEngine) SetGravity(gravity *Vector3) *PhysicsEngine {
+	p := ba.ctx.Get("PhysicsEngine").New(gravity.JSObject())
+	return PhysicsEngineFromJSObject(p, ba.ctx)
+}
+
+*/

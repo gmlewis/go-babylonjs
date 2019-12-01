@@ -33,7 +33,7 @@ func ShaderMaterialFromJSObject(p js.Value, ctx js.Value) *ShaderMaterial {
 
 // NewShaderMaterialOpts contains optional parameters for NewShaderMaterial.
 type NewShaderMaterialOpts struct {
-	Options *JSValue
+	Options *IShaderMaterialOptions
 }
 
 // NewShaderMaterial returns a new ShaderMaterial object.
@@ -44,8 +44,1646 @@ func (ba *Babylon) NewShaderMaterial(name string, scene *Scene, shaderPath inter
 		opts = &NewShaderMaterialOpts{}
 	}
 
-	p := ba.ctx.Get("ShaderMaterial").New(name, scene.JSObject(), shaderPath, opts.Options.JSObject())
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, name)
+	args = append(args, scene.JSObject())
+	args = append(args, shaderPath)
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options.JSObject())
+	}
+
+	p := ba.ctx.Get("ShaderMaterial").New(args...)
 	return ShaderMaterialFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// ShaderMaterialBindOpts contains optional parameters for ShaderMaterial.Bind.
+type ShaderMaterialBindOpts struct {
+	Mesh *Mesh
+}
+
+// Bind calls the Bind method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#bind
+func (s *ShaderMaterial) Bind(world *Matrix, opts *ShaderMaterialBindOpts) {
+	if opts == nil {
+		opts = &ShaderMaterialBindOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, world.JSObject())
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	s.p.Call("bind", args...)
+}
+
+// BindForSubMesh calls the BindForSubMesh method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#bindforsubmesh
+func (s *ShaderMaterial) BindForSubMesh(world *Matrix, mesh *Mesh, subMesh *SubMesh) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, world.JSObject())
+	args = append(args, mesh.JSObject())
+	args = append(args, subMesh.JSObject())
+
+	s.p.Call("bindForSubMesh", args...)
+}
+
+// BindOnlyWorldMatrix calls the BindOnlyWorldMatrix method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#bindonlyworldmatrix
+func (s *ShaderMaterial) BindOnlyWorldMatrix(world *Matrix) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, world.JSObject())
+
+	s.p.Call("bindOnlyWorldMatrix", args...)
+}
+
+// BindSceneUniformBuffer calls the BindSceneUniformBuffer method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#bindsceneuniformbuffer
+func (s *ShaderMaterial) BindSceneUniformBuffer(effect *Effect, sceneUbo *UniformBuffer) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, effect.JSObject())
+	args = append(args, sceneUbo.JSObject())
+
+	s.p.Call("bindSceneUniformBuffer", args...)
+}
+
+// BindView calls the BindView method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#bindview
+func (s *ShaderMaterial) BindView(effect *Effect) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, effect.JSObject())
+
+	s.p.Call("bindView", args...)
+}
+
+// BindViewProjection calls the BindViewProjection method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#bindviewprojection
+func (s *ShaderMaterial) BindViewProjection(effect *Effect) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, effect.JSObject())
+
+	s.p.Call("bindViewProjection", args...)
+}
+
+// Clone calls the Clone method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#clone
+func (s *ShaderMaterial) Clone(name string) *ShaderMaterial {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := s.p.Call("clone", args...)
+	return ShaderMaterialFromJSObject(retVal, s.ctx)
+}
+
+// ShaderMaterialDisposeOpts contains optional parameters for ShaderMaterial.Dispose.
+type ShaderMaterialDisposeOpts struct {
+	ForceDisposeEffect   *bool
+	ForceDisposeTextures *bool
+	NotBoundToMesh       *bool
+}
+
+// Dispose calls the Dispose method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#dispose
+func (s *ShaderMaterial) Dispose(opts *ShaderMaterialDisposeOpts) {
+	if opts == nil {
+		opts = &ShaderMaterialDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+3)
+
+	if opts.ForceDisposeEffect == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceDisposeEffect)
+	}
+	if opts.ForceDisposeTextures == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceDisposeTextures)
+	}
+	if opts.NotBoundToMesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NotBoundToMesh)
+	}
+
+	s.p.Call("dispose", args...)
+}
+
+// ShaderMaterialForceCompilationOpts contains optional parameters for ShaderMaterial.ForceCompilation.
+type ShaderMaterialForceCompilationOpts struct {
+	OnCompiled *func()
+	Options    js.Value
+	OnError    *func()
+}
+
+// ForceCompilation calls the ForceCompilation method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#forcecompilation
+func (s *ShaderMaterial) ForceCompilation(mesh *AbstractMesh, opts *ShaderMaterialForceCompilationOpts) {
+	if opts == nil {
+		opts = &ShaderMaterialForceCompilationOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, mesh.JSObject())
+
+	if opts.OnCompiled == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnCompiled)
+	}
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+
+	s.p.Call("forceCompilation", args...)
+}
+
+// ShaderMaterialForceCompilationAsyncOpts contains optional parameters for ShaderMaterial.ForceCompilationAsync.
+type ShaderMaterialForceCompilationAsyncOpts struct {
+	Options js.Value
+}
+
+// ForceCompilationAsync calls the ForceCompilationAsync method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#forcecompilationasync
+func (s *ShaderMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *ShaderMaterialForceCompilationAsyncOpts) {
+	if opts == nil {
+		opts = &ShaderMaterialForceCompilationAsyncOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, mesh.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	s.p.Call("forceCompilationAsync", args...)
+}
+
+// Freeze calls the Freeze method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#freeze
+func (s *ShaderMaterial) Freeze() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("freeze", args...)
+}
+
+// GetActiveTextures calls the GetActiveTextures method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#getactivetextures
+func (s *ShaderMaterial) GetActiveTextures() *BaseTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getActiveTextures", args...)
+	return BaseTextureFromJSObject(retVal, s.ctx)
+}
+
+// GetAlphaTestTexture calls the GetAlphaTestTexture method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#getalphatesttexture
+func (s *ShaderMaterial) GetAlphaTestTexture() *BaseTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getAlphaTestTexture", args...)
+	return BaseTextureFromJSObject(retVal, s.ctx)
+}
+
+// GetBindedMeshes calls the GetBindedMeshes method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#getbindedmeshes
+func (s *ShaderMaterial) GetBindedMeshes() *AbstractMesh {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getBindedMeshes", args...)
+	return AbstractMeshFromJSObject(retVal, s.ctx)
+}
+
+// GetClassName calls the GetClassName method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#getclassname
+func (s *ShaderMaterial) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetEffect calls the GetEffect method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#geteffect
+func (s *ShaderMaterial) GetEffect() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getEffect", args...)
+	return EffectFromJSObject(retVal, s.ctx)
+}
+
+// GetScene calls the GetScene method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#getscene
+func (s *ShaderMaterial) GetScene() *Scene {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getScene", args...)
+	return SceneFromJSObject(retVal, s.ctx)
+}
+
+// HasTexture calls the HasTexture method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#hastexture
+func (s *ShaderMaterial) HasTexture(texture *BaseTexture) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, texture.JSObject())
+
+	retVal := s.p.Call("hasTexture", args...)
+	return retVal.Bool()
+}
+
+// ShaderMaterialIsReadyOpts contains optional parameters for ShaderMaterial.IsReady.
+type ShaderMaterialIsReadyOpts struct {
+	Mesh         *AbstractMesh
+	UseInstances *bool
+}
+
+// IsReady calls the IsReady method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#isready
+func (s *ShaderMaterial) IsReady(opts *ShaderMaterialIsReadyOpts) bool {
+	if opts == nil {
+		opts = &ShaderMaterialIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := s.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// ShaderMaterialIsReadyForSubMeshOpts contains optional parameters for ShaderMaterial.IsReadyForSubMesh.
+type ShaderMaterialIsReadyForSubMeshOpts struct {
+	UseInstances *bool
+}
+
+// IsReadyForSubMesh calls the IsReadyForSubMesh method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#isreadyforsubmesh
+func (s *ShaderMaterial) IsReadyForSubMesh(mesh *AbstractMesh, subMesh *BaseSubMesh, opts *ShaderMaterialIsReadyForSubMeshOpts) bool {
+	if opts == nil {
+		opts = &ShaderMaterialIsReadyForSubMeshOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, subMesh.JSObject())
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := s.p.Call("isReadyForSubMesh", args...)
+	return retVal.Bool()
+}
+
+// MarkAsDirty calls the MarkAsDirty method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#markasdirty
+func (s *ShaderMaterial) MarkAsDirty(flag float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, flag)
+
+	s.p.Call("markAsDirty", args...)
+}
+
+// MarkDirty calls the MarkDirty method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#markdirty
+func (s *ShaderMaterial) MarkDirty() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("markDirty", args...)
+}
+
+// NeedAlphaBlending calls the NeedAlphaBlending method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#needalphablending
+func (s *ShaderMaterial) NeedAlphaBlending() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("needAlphaBlending", args...)
+	return retVal.Bool()
+}
+
+// NeedAlphaBlendingForMesh calls the NeedAlphaBlendingForMesh method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#needalphablendingformesh
+func (s *ShaderMaterial) NeedAlphaBlendingForMesh(mesh *AbstractMesh) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	retVal := s.p.Call("needAlphaBlendingForMesh", args...)
+	return retVal.Bool()
+}
+
+// NeedAlphaTesting calls the NeedAlphaTesting method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#needalphatesting
+func (s *ShaderMaterial) NeedAlphaTesting() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("needAlphaTesting", args...)
+	return retVal.Bool()
+}
+
+// Parse calls the Parse method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#parse
+func (s *ShaderMaterial) Parse(source interface{}, scene *Scene, rootUrl string) *ShaderMaterial {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, source)
+	args = append(args, scene.JSObject())
+	args = append(args, rootUrl)
+
+	retVal := s.p.Call("Parse", args...)
+	return ShaderMaterialFromJSObject(retVal, s.ctx)
+}
+
+// Serialize calls the Serialize method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#serialize
+func (s *ShaderMaterial) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("serialize", args...)
+	return retVal
+}
+
+// SetArray2 calls the SetArray2 method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#setarray2
+func (s *ShaderMaterial) SetArray2(name string, value float64) *ShaderMaterial {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value)
+
+	retVal := s.p.Call("setArray2", args...)
+	return ShaderMaterialFromJSObject(retVal, s.ctx)
+}
+
+// SetArray3 calls the SetArray3 method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#setarray3
+func (s *ShaderMaterial) SetArray3(name string, value float64) *ShaderMaterial {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value)
+
+	retVal := s.p.Call("setArray3", args...)
+	return ShaderMaterialFromJSObject(retVal, s.ctx)
+}
+
+// SetArray4 calls the SetArray4 method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#setarray4
+func (s *ShaderMaterial) SetArray4(name string, value float64) *ShaderMaterial {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value)
+
+	retVal := s.p.Call("setArray4", args...)
+	return ShaderMaterialFromJSObject(retVal, s.ctx)
+}
+
+// SetColor3 calls the SetColor3 method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#setcolor3
+func (s *ShaderMaterial) SetColor3(name string, value *Color3) *ShaderMaterial {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value.JSObject())
+
+	retVal := s.p.Call("setColor3", args...)
+	return ShaderMaterialFromJSObject(retVal, s.ctx)
+}
+
+// SetColor3Array calls the SetColor3Array method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#setcolor3array
+func (s *ShaderMaterial) SetColor3Array(name string, value *Color3) *ShaderMaterial {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value.JSObject())
+
+	retVal := s.p.Call("setColor3Array", args...)
+	return ShaderMaterialFromJSObject(retVal, s.ctx)
+}
+
+// SetColor4 calls the SetColor4 method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#setcolor4
+func (s *ShaderMaterial) SetColor4(name string, value *Color4) *ShaderMaterial {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value.JSObject())
+
+	retVal := s.p.Call("setColor4", args...)
+	return ShaderMaterialFromJSObject(retVal, s.ctx)
+}
+
+// SetColor4Array calls the SetColor4Array method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#setcolor4array
+func (s *ShaderMaterial) SetColor4Array(name string, value *Color4) *ShaderMaterial {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value.JSObject())
+
+	retVal := s.p.Call("setColor4Array", args...)
+	return ShaderMaterialFromJSObject(retVal, s.ctx)
+}
+
+// SetFloat calls the SetFloat method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#setfloat
+func (s *ShaderMaterial) SetFloat(name string, value float64) *ShaderMaterial {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value)
+
+	retVal := s.p.Call("setFloat", args...)
+	return ShaderMaterialFromJSObject(retVal, s.ctx)
+}
+
+// SetFloats calls the SetFloats method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#setfloats
+func (s *ShaderMaterial) SetFloats(name string, value float64) *ShaderMaterial {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value)
+
+	retVal := s.p.Call("setFloats", args...)
+	return ShaderMaterialFromJSObject(retVal, s.ctx)
+}
+
+// SetInt calls the SetInt method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#setint
+func (s *ShaderMaterial) SetInt(name string, value float64) *ShaderMaterial {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value)
+
+	retVal := s.p.Call("setInt", args...)
+	return ShaderMaterialFromJSObject(retVal, s.ctx)
+}
+
+// SetMatrices calls the SetMatrices method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#setmatrices
+func (s *ShaderMaterial) SetMatrices(name string, value *Matrix) *ShaderMaterial {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value.JSObject())
+
+	retVal := s.p.Call("setMatrices", args...)
+	return ShaderMaterialFromJSObject(retVal, s.ctx)
+}
+
+// SetMatrix calls the SetMatrix method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#setmatrix
+func (s *ShaderMaterial) SetMatrix(name string, value *Matrix) *ShaderMaterial {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value.JSObject())
+
+	retVal := s.p.Call("setMatrix", args...)
+	return ShaderMaterialFromJSObject(retVal, s.ctx)
+}
+
+// SetMatrix2x2 calls the SetMatrix2x2 method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#setmatrix2x2
+func (s *ShaderMaterial) SetMatrix2x2(name string, value js.Value) *ShaderMaterial {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value)
+
+	retVal := s.p.Call("setMatrix2x2", args...)
+	return ShaderMaterialFromJSObject(retVal, s.ctx)
+}
+
+// SetMatrix3x3 calls the SetMatrix3x3 method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#setmatrix3x3
+func (s *ShaderMaterial) SetMatrix3x3(name string, value js.Value) *ShaderMaterial {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value)
+
+	retVal := s.p.Call("setMatrix3x3", args...)
+	return ShaderMaterialFromJSObject(retVal, s.ctx)
+}
+
+// SetTexture calls the SetTexture method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#settexture
+func (s *ShaderMaterial) SetTexture(name string, texture *Texture) *ShaderMaterial {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, texture.JSObject())
+
+	retVal := s.p.Call("setTexture", args...)
+	return ShaderMaterialFromJSObject(retVal, s.ctx)
+}
+
+// SetTextureArray calls the SetTextureArray method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#settexturearray
+func (s *ShaderMaterial) SetTextureArray(name string, textures *Texture) *ShaderMaterial {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, textures.JSObject())
+
+	retVal := s.p.Call("setTextureArray", args...)
+	return ShaderMaterialFromJSObject(retVal, s.ctx)
+}
+
+// SetVector2 calls the SetVector2 method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#setvector2
+func (s *ShaderMaterial) SetVector2(name string, value *Vector2) *ShaderMaterial {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value.JSObject())
+
+	retVal := s.p.Call("setVector2", args...)
+	return ShaderMaterialFromJSObject(retVal, s.ctx)
+}
+
+// SetVector3 calls the SetVector3 method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#setvector3
+func (s *ShaderMaterial) SetVector3(name string, value *Vector3) *ShaderMaterial {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value.JSObject())
+
+	retVal := s.p.Call("setVector3", args...)
+	return ShaderMaterialFromJSObject(retVal, s.ctx)
+}
+
+// SetVector4 calls the SetVector4 method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#setvector4
+func (s *ShaderMaterial) SetVector4(name string, value *Vector4) *ShaderMaterial {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, value.JSObject())
+
+	retVal := s.p.Call("setVector4", args...)
+	return ShaderMaterialFromJSObject(retVal, s.ctx)
+}
+
+// ShaderMaterialToStringOpts contains optional parameters for ShaderMaterial.ToString.
+type ShaderMaterialToStringOpts struct {
+	FullDetails *bool
+}
+
+// ToString calls the ToString method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#tostring
+func (s *ShaderMaterial) ToString(opts *ShaderMaterialToStringOpts) string {
+	if opts == nil {
+		opts = &ShaderMaterialToStringOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.FullDetails == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FullDetails)
+	}
+
+	retVal := s.p.Call("toString", args...)
+	return retVal.String()
+}
+
+// Unbind calls the Unbind method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#unbind
+func (s *ShaderMaterial) Unbind() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("unbind", args...)
+}
+
+// Unfreeze calls the Unfreeze method on the ShaderMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#unfreeze
+func (s *ShaderMaterial) Unfreeze() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("unfreeze", args...)
+}
+
+/*
+
+// AllDirtyFlag returns the AllDirtyFlag property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#alldirtyflag
+func (s *ShaderMaterial) AllDirtyFlag(AllDirtyFlag float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(AllDirtyFlag)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAllDirtyFlag sets the AllDirtyFlag property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#alldirtyflag
+func (s *ShaderMaterial) SetAllDirtyFlag(AllDirtyFlag float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(AllDirtyFlag)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// Alpha returns the Alpha property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#alpha
+func (s *ShaderMaterial) Alpha(alpha float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(alpha)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAlpha sets the Alpha property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#alpha
+func (s *ShaderMaterial) SetAlpha(alpha float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(alpha)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// AlphaMode returns the AlphaMode property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#alphamode
+func (s *ShaderMaterial) AlphaMode(alphaMode float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(alphaMode)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaMode sets the AlphaMode property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#alphamode
+func (s *ShaderMaterial) SetAlphaMode(alphaMode float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(alphaMode)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// Animations returns the Animations property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#animations
+func (s *ShaderMaterial) Animations(animations []Animation) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(animations.JSObject())
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#animations
+func (s *ShaderMaterial) SetAnimations(animations []Animation) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(animations.JSObject())
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// AttributesDirtyFlag returns the AttributesDirtyFlag property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#attributesdirtyflag
+func (s *ShaderMaterial) AttributesDirtyFlag(AttributesDirtyFlag float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(AttributesDirtyFlag)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAttributesDirtyFlag sets the AttributesDirtyFlag property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#attributesdirtyflag
+func (s *ShaderMaterial) SetAttributesDirtyFlag(AttributesDirtyFlag float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(AttributesDirtyFlag)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// BackFaceCulling returns the BackFaceCulling property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#backfaceculling
+func (s *ShaderMaterial) BackFaceCulling(backFaceCulling bool) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(backFaceCulling)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetBackFaceCulling sets the BackFaceCulling property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#backfaceculling
+func (s *ShaderMaterial) SetBackFaceCulling(backFaceCulling bool) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(backFaceCulling)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// CheckReadyOnEveryCall returns the CheckReadyOnEveryCall property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#checkreadyoneverycall
+func (s *ShaderMaterial) CheckReadyOnEveryCall(checkReadyOnEveryCall bool) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(checkReadyOnEveryCall)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCheckReadyOnEveryCall sets the CheckReadyOnEveryCall property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#checkreadyoneverycall
+func (s *ShaderMaterial) SetCheckReadyOnEveryCall(checkReadyOnEveryCall bool) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(checkReadyOnEveryCall)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// CheckReadyOnlyOnce returns the CheckReadyOnlyOnce property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#checkreadyonlyonce
+func (s *ShaderMaterial) CheckReadyOnlyOnce(checkReadyOnlyOnce bool) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(checkReadyOnlyOnce)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCheckReadyOnlyOnce sets the CheckReadyOnlyOnce property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#checkreadyonlyonce
+func (s *ShaderMaterial) SetCheckReadyOnlyOnce(checkReadyOnlyOnce bool) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(checkReadyOnlyOnce)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// ClockWiseSideOrientation returns the ClockWiseSideOrientation property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#clockwisesideorientation
+func (s *ShaderMaterial) ClockWiseSideOrientation(ClockWiseSideOrientation float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(ClockWiseSideOrientation)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetClockWiseSideOrientation sets the ClockWiseSideOrientation property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#clockwisesideorientation
+func (s *ShaderMaterial) SetClockWiseSideOrientation(ClockWiseSideOrientation float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(ClockWiseSideOrientation)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// CounterClockWiseSideOrientation returns the CounterClockWiseSideOrientation property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#counterclockwisesideorientation
+func (s *ShaderMaterial) CounterClockWiseSideOrientation(CounterClockWiseSideOrientation float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(CounterClockWiseSideOrientation)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCounterClockWiseSideOrientation sets the CounterClockWiseSideOrientation property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#counterclockwisesideorientation
+func (s *ShaderMaterial) SetCounterClockWiseSideOrientation(CounterClockWiseSideOrientation float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(CounterClockWiseSideOrientation)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// DepthFunction returns the DepthFunction property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#depthfunction
+func (s *ShaderMaterial) DepthFunction(depthFunction float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(depthFunction)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDepthFunction sets the DepthFunction property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#depthfunction
+func (s *ShaderMaterial) SetDepthFunction(depthFunction float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(depthFunction)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// DisableDepthWrite returns the DisableDepthWrite property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#disabledepthwrite
+func (s *ShaderMaterial) DisableDepthWrite(disableDepthWrite bool) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(disableDepthWrite)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDisableDepthWrite sets the DisableDepthWrite property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#disabledepthwrite
+func (s *ShaderMaterial) SetDisableDepthWrite(disableDepthWrite bool) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(disableDepthWrite)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// DoNotSerialize returns the DoNotSerialize property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#donotserialize
+func (s *ShaderMaterial) DoNotSerialize(doNotSerialize bool) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(doNotSerialize)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDoNotSerialize sets the DoNotSerialize property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#donotserialize
+func (s *ShaderMaterial) SetDoNotSerialize(doNotSerialize bool) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(doNotSerialize)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// FillMode returns the FillMode property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#fillmode
+func (s *ShaderMaterial) FillMode(fillMode float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(fillMode)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFillMode sets the FillMode property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#fillmode
+func (s *ShaderMaterial) SetFillMode(fillMode float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(fillMode)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// FogEnabled returns the FogEnabled property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#fogenabled
+func (s *ShaderMaterial) FogEnabled(fogEnabled bool) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(fogEnabled)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFogEnabled sets the FogEnabled property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#fogenabled
+func (s *ShaderMaterial) SetFogEnabled(fogEnabled bool) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(fogEnabled)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// ForceDepthWrite returns the ForceDepthWrite property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#forcedepthwrite
+func (s *ShaderMaterial) ForceDepthWrite(forceDepthWrite bool) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(forceDepthWrite)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetForceDepthWrite sets the ForceDepthWrite property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#forcedepthwrite
+func (s *ShaderMaterial) SetForceDepthWrite(forceDepthWrite bool) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(forceDepthWrite)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// FresnelDirtyFlag returns the FresnelDirtyFlag property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#fresneldirtyflag
+func (s *ShaderMaterial) FresnelDirtyFlag(FresnelDirtyFlag float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(FresnelDirtyFlag)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFresnelDirtyFlag sets the FresnelDirtyFlag property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#fresneldirtyflag
+func (s *ShaderMaterial) SetFresnelDirtyFlag(FresnelDirtyFlag float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(FresnelDirtyFlag)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// GetRenderTargetTextures returns the GetRenderTargetTextures property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#getrendertargettextures
+func (s *ShaderMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(getRenderTargetTextures)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetGetRenderTargetTextures sets the GetRenderTargetTextures property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#getrendertargettextures
+func (s *ShaderMaterial) SetGetRenderTargetTextures(getRenderTargetTextures func()) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(getRenderTargetTextures)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// HasRenderTargetTextures returns the HasRenderTargetTextures property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#hasrendertargettextures
+func (s *ShaderMaterial) HasRenderTargetTextures(hasRenderTargetTextures bool) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(hasRenderTargetTextures)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetHasRenderTargetTextures sets the HasRenderTargetTextures property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#hasrendertargettextures
+func (s *ShaderMaterial) SetHasRenderTargetTextures(hasRenderTargetTextures bool) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(hasRenderTargetTextures)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// Id returns the Id property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#id
+func (s *ShaderMaterial) Id(id string) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(id)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetId sets the Id property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#id
+func (s *ShaderMaterial) SetId(id string) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(id)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#inspectablecustomproperties
+func (s *ShaderMaterial) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(inspectableCustomProperties.JSObject())
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#inspectablecustomproperties
+func (s *ShaderMaterial) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(inspectableCustomProperties.JSObject())
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// IsFrozen returns the IsFrozen property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#isfrozen
+func (s *ShaderMaterial) IsFrozen(isFrozen bool) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(isFrozen)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetIsFrozen sets the IsFrozen property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#isfrozen
+func (s *ShaderMaterial) SetIsFrozen(isFrozen bool) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(isFrozen)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// LightDirtyFlag returns the LightDirtyFlag property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#lightdirtyflag
+func (s *ShaderMaterial) LightDirtyFlag(LightDirtyFlag float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(LightDirtyFlag)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLightDirtyFlag sets the LightDirtyFlag property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#lightdirtyflag
+func (s *ShaderMaterial) SetLightDirtyFlag(LightDirtyFlag float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(LightDirtyFlag)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineListDrawMode returns the LineListDrawMode property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#linelistdrawmode
+func (s *ShaderMaterial) LineListDrawMode(LineListDrawMode float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(LineListDrawMode)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineListDrawMode sets the LineListDrawMode property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#linelistdrawmode
+func (s *ShaderMaterial) SetLineListDrawMode(LineListDrawMode float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(LineListDrawMode)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineLoopDrawMode returns the LineLoopDrawMode property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#lineloopdrawmode
+func (s *ShaderMaterial) LineLoopDrawMode(LineLoopDrawMode float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(LineLoopDrawMode)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineLoopDrawMode sets the LineLoopDrawMode property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#lineloopdrawmode
+func (s *ShaderMaterial) SetLineLoopDrawMode(LineLoopDrawMode float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(LineLoopDrawMode)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineStripDrawMode returns the LineStripDrawMode property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#linestripdrawmode
+func (s *ShaderMaterial) LineStripDrawMode(LineStripDrawMode float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(LineStripDrawMode)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineStripDrawMode sets the LineStripDrawMode property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#linestripdrawmode
+func (s *ShaderMaterial) SetLineStripDrawMode(LineStripDrawMode float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(LineStripDrawMode)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#metadata
+func (s *ShaderMaterial) Metadata(metadata interface{}) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(metadata)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#metadata
+func (s *ShaderMaterial) SetMetadata(metadata interface{}) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(metadata)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// MiscDirtyFlag returns the MiscDirtyFlag property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#miscdirtyflag
+func (s *ShaderMaterial) MiscDirtyFlag(MiscDirtyFlag float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(MiscDirtyFlag)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMiscDirtyFlag sets the MiscDirtyFlag property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#miscdirtyflag
+func (s *ShaderMaterial) SetMiscDirtyFlag(MiscDirtyFlag float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(MiscDirtyFlag)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#name
+func (s *ShaderMaterial) Name(name string) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(name)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#name
+func (s *ShaderMaterial) SetName(name string) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(name)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// NeedDepthPrePass returns the NeedDepthPrePass property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#needdepthprepass
+func (s *ShaderMaterial) NeedDepthPrePass(needDepthPrePass bool) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(needDepthPrePass)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetNeedDepthPrePass sets the NeedDepthPrePass property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#needdepthprepass
+func (s *ShaderMaterial) SetNeedDepthPrePass(needDepthPrePass bool) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(needDepthPrePass)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnBind returns the OnBind property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#onbind
+func (s *ShaderMaterial) OnBind(onBind func()) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(onBind)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnBind sets the OnBind property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#onbind
+func (s *ShaderMaterial) SetOnBind(onBind func()) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(onBind)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnBindObservable returns the OnBindObservable property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#onbindobservable
+func (s *ShaderMaterial) OnBindObservable(onBindObservable *Observable) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(onBindObservable.JSObject())
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnBindObservable sets the OnBindObservable property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#onbindobservable
+func (s *ShaderMaterial) SetOnBindObservable(onBindObservable *Observable) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(onBindObservable.JSObject())
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnCompiled returns the OnCompiled property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#oncompiled
+func (s *ShaderMaterial) OnCompiled(onCompiled func()) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(onCompiled)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnCompiled sets the OnCompiled property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#oncompiled
+func (s *ShaderMaterial) SetOnCompiled(onCompiled func()) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(onCompiled)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnDispose returns the OnDispose property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#ondispose
+func (s *ShaderMaterial) OnDispose(onDispose func()) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(onDispose)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnDispose sets the OnDispose property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#ondispose
+func (s *ShaderMaterial) SetOnDispose(onDispose func()) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(onDispose)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnDisposeObservable returns the OnDisposeObservable property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#ondisposeobservable
+func (s *ShaderMaterial) OnDisposeObservable(onDisposeObservable *Observable) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(onDisposeObservable.JSObject())
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnDisposeObservable sets the OnDisposeObservable property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#ondisposeobservable
+func (s *ShaderMaterial) SetOnDisposeObservable(onDisposeObservable *Observable) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(onDisposeObservable.JSObject())
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnError returns the OnError property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#onerror
+func (s *ShaderMaterial) OnError(onError func()) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(onError)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnError sets the OnError property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#onerror
+func (s *ShaderMaterial) SetOnError(onError func()) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(onError)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnUnBindObservable returns the OnUnBindObservable property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#onunbindobservable
+func (s *ShaderMaterial) OnUnBindObservable(onUnBindObservable *Observable) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(onUnBindObservable.JSObject())
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnUnBindObservable sets the OnUnBindObservable property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#onunbindobservable
+func (s *ShaderMaterial) SetOnUnBindObservable(onUnBindObservable *Observable) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(onUnBindObservable.JSObject())
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// Options returns the Options property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#options
+func (s *ShaderMaterial) Options(options *IShaderMaterialOptions) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(options.JSObject())
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOptions sets the Options property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#options
+func (s *ShaderMaterial) SetOptions(options *IShaderMaterialOptions) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(options.JSObject())
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointFillMode returns the PointFillMode property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#pointfillmode
+func (s *ShaderMaterial) PointFillMode(PointFillMode float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(PointFillMode)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointFillMode sets the PointFillMode property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#pointfillmode
+func (s *ShaderMaterial) SetPointFillMode(PointFillMode float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(PointFillMode)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointListDrawMode returns the PointListDrawMode property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#pointlistdrawmode
+func (s *ShaderMaterial) PointListDrawMode(PointListDrawMode float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(PointListDrawMode)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointListDrawMode sets the PointListDrawMode property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#pointlistdrawmode
+func (s *ShaderMaterial) SetPointListDrawMode(PointListDrawMode float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(PointListDrawMode)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointSize returns the PointSize property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#pointsize
+func (s *ShaderMaterial) PointSize(pointSize float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(pointSize)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointSize sets the PointSize property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#pointsize
+func (s *ShaderMaterial) SetPointSize(pointSize float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(pointSize)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointsCloud returns the PointsCloud property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#pointscloud
+func (s *ShaderMaterial) PointsCloud(pointsCloud bool) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(pointsCloud)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointsCloud sets the PointsCloud property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#pointscloud
+func (s *ShaderMaterial) SetPointsCloud(pointsCloud bool) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(pointsCloud)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// ReservedDataStore returns the ReservedDataStore property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#reserveddatastore
+func (s *ShaderMaterial) ReservedDataStore(reservedDataStore interface{}) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(reservedDataStore)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetReservedDataStore sets the ReservedDataStore property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#reserveddatastore
+func (s *ShaderMaterial) SetReservedDataStore(reservedDataStore interface{}) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(reservedDataStore)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SeparateCullingPass returns the SeparateCullingPass property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#separatecullingpass
+func (s *ShaderMaterial) SeparateCullingPass(separateCullingPass bool) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(separateCullingPass)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSeparateCullingPass sets the SeparateCullingPass property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#separatecullingpass
+func (s *ShaderMaterial) SetSeparateCullingPass(separateCullingPass bool) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(separateCullingPass)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// ShaderPath returns the ShaderPath property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#shaderpath
+func (s *ShaderMaterial) ShaderPath(shaderPath interface{}) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(shaderPath)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetShaderPath sets the ShaderPath property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#shaderpath
+func (s *ShaderMaterial) SetShaderPath(shaderPath interface{}) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(shaderPath)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SideOrientation returns the SideOrientation property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#sideorientation
+func (s *ShaderMaterial) SideOrientation(sideOrientation float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(sideOrientation)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSideOrientation sets the SideOrientation property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#sideorientation
+func (s *ShaderMaterial) SetSideOrientation(sideOrientation float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(sideOrientation)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// State returns the State property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#state
+func (s *ShaderMaterial) State(state string) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(state)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetState sets the State property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#state
+func (s *ShaderMaterial) SetState(state string) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(state)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// TextureDirtyFlag returns the TextureDirtyFlag property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#texturedirtyflag
+func (s *ShaderMaterial) TextureDirtyFlag(TextureDirtyFlag float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(TextureDirtyFlag)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTextureDirtyFlag sets the TextureDirtyFlag property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#texturedirtyflag
+func (s *ShaderMaterial) SetTextureDirtyFlag(TextureDirtyFlag float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(TextureDirtyFlag)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// TriangleFanDrawMode returns the TriangleFanDrawMode property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#trianglefandrawmode
+func (s *ShaderMaterial) TriangleFanDrawMode(TriangleFanDrawMode float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(TriangleFanDrawMode)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTriangleFanDrawMode sets the TriangleFanDrawMode property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#trianglefandrawmode
+func (s *ShaderMaterial) SetTriangleFanDrawMode(TriangleFanDrawMode float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(TriangleFanDrawMode)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// TriangleFillMode returns the TriangleFillMode property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#trianglefillmode
+func (s *ShaderMaterial) TriangleFillMode(TriangleFillMode float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(TriangleFillMode)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTriangleFillMode sets the TriangleFillMode property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#trianglefillmode
+func (s *ShaderMaterial) SetTriangleFillMode(TriangleFillMode float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(TriangleFillMode)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// TriangleStripDrawMode returns the TriangleStripDrawMode property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#trianglestripdrawmode
+func (s *ShaderMaterial) TriangleStripDrawMode(TriangleStripDrawMode float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(TriangleStripDrawMode)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTriangleStripDrawMode sets the TriangleStripDrawMode property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#trianglestripdrawmode
+func (s *ShaderMaterial) SetTriangleStripDrawMode(TriangleStripDrawMode float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(TriangleStripDrawMode)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#uniqueid
+func (s *ShaderMaterial) UniqueId(uniqueId float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(uniqueId)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#uniqueid
+func (s *ShaderMaterial) SetUniqueId(uniqueId float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(uniqueId)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// WireFrameFillMode returns the WireFrameFillMode property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#wireframefillmode
+func (s *ShaderMaterial) WireFrameFillMode(WireFrameFillMode float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(WireFrameFillMode)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetWireFrameFillMode sets the WireFrameFillMode property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#wireframefillmode
+func (s *ShaderMaterial) SetWireFrameFillMode(WireFrameFillMode float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(WireFrameFillMode)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// Wireframe returns the Wireframe property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#wireframe
+func (s *ShaderMaterial) Wireframe(wireframe bool) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(wireframe)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetWireframe sets the Wireframe property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#wireframe
+func (s *ShaderMaterial) SetWireframe(wireframe bool) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(wireframe)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// ZOffset returns the ZOffset property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#zoffset
+func (s *ShaderMaterial) ZOffset(zOffset float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(zOffset)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetZOffset sets the ZOffset property of class ShaderMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadermaterial#zoffset
+func (s *ShaderMaterial) SetZOffset(zOffset float64) *ShaderMaterial {
+	p := ba.ctx.Get("ShaderMaterial").New(zOffset)
+	return ShaderMaterialFromJSObject(p, ba.ctx)
+}
+
+*/

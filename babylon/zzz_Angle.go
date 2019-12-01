@@ -31,8 +31,77 @@ func AngleFromJSObject(p js.Value, ctx js.Value) *Angle {
 //
 // https://doc.babylonjs.com/api/classes/babylon.angle
 func (ba *Babylon) NewAngle(radians float64) *Angle {
-	p := ba.ctx.Get("Angle").New(radians)
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, radians)
+
+	p := ba.ctx.Get("Angle").New(args...)
 	return AngleFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// BetweenTwoPoints calls the BetweenTwoPoints method on the Angle object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.angle#betweentwopoints
+func (a *Angle) BetweenTwoPoints(av *Vector2, b *Vector2) *Angle {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, av.JSObject())
+	args = append(args, b.JSObject())
+
+	retVal := a.p.Call("BetweenTwoPoints", args...)
+	return AngleFromJSObject(retVal, a.ctx)
+}
+
+// Degrees calls the Degrees method on the Angle object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.angle#degrees
+func (a *Angle) Degrees() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("degrees", args...)
+	return retVal.Float()
+}
+
+// FromDegrees calls the FromDegrees method on the Angle object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.angle#fromdegrees
+func (a *Angle) FromDegrees(degrees float64) *Angle {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, degrees)
+
+	retVal := a.p.Call("FromDegrees", args...)
+	return AngleFromJSObject(retVal, a.ctx)
+}
+
+// FromRadians calls the FromRadians method on the Angle object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.angle#fromradians
+func (a *Angle) FromRadians(radians float64) *Angle {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, radians)
+
+	retVal := a.p.Call("FromRadians", args...)
+	return AngleFromJSObject(retVal, a.ctx)
+}
+
+// Radians calls the Radians method on the Angle object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.angle#radians
+func (a *Angle) Radians() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("radians", args...)
+	return retVal.Float()
+}
+
+/*
+
+ */

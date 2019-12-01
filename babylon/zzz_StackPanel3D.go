@@ -29,7 +29,7 @@ func StackPanel3DFromJSObject(p js.Value, ctx js.Value) *StackPanel3D {
 
 // NewStackPanel3DOpts contains optional parameters for NewStackPanel3D.
 type NewStackPanel3DOpts struct {
-	IsVertical *JSBool
+	IsVertical *bool
 }
 
 // NewStackPanel3D returns a new StackPanel3D object.
@@ -40,8 +40,589 @@ func (ba *Babylon) NewStackPanel3D(opts *NewStackPanel3DOpts) *StackPanel3D {
 		opts = &NewStackPanel3DOpts{}
 	}
 
-	p := ba.ctx.Get("StackPanel3D").New(opts.IsVertical.JSObject())
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.IsVertical == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IsVertical)
+	}
+
+	p := ba.ctx.Get("StackPanel3D").New(args...)
 	return StackPanel3DFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AddBehavior calls the AddBehavior method on the StackPanel3D object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#addbehavior
+func (s *StackPanel3D) AddBehavior(behavior js.Value) *Control3D {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, behavior)
+
+	retVal := s.p.Call("addBehavior", args...)
+	return Control3DFromJSObject(retVal, s.ctx)
+}
+
+// AddControl calls the AddControl method on the StackPanel3D object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#addcontrol
+func (s *StackPanel3D) AddControl(control *Control3D) *Container3D {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, control.JSObject())
+
+	retVal := s.p.Call("addControl", args...)
+	return Container3DFromJSObject(retVal, s.ctx)
+}
+
+// ContainsControl calls the ContainsControl method on the StackPanel3D object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#containscontrol
+func (s *StackPanel3D) ContainsControl(control *Control3D) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, control.JSObject())
+
+	retVal := s.p.Call("containsControl", args...)
+	return retVal.Bool()
+}
+
+// Dispose calls the Dispose method on the StackPanel3D object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#dispose
+func (s *StackPanel3D) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("dispose", args...)
+}
+
+// GetBehaviorByName calls the GetBehaviorByName method on the StackPanel3D object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#getbehaviorbyname
+func (s *StackPanel3D) GetBehaviorByName(name string) *Control3D {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := s.p.Call("getBehaviorByName", args...)
+	return Control3DFromJSObject(retVal, s.ctx)
+}
+
+// GetClassName calls the GetClassName method on the StackPanel3D object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#getclassname
+func (s *StackPanel3D) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// LinkToTransformNode calls the LinkToTransformNode method on the StackPanel3D object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#linktotransformnode
+func (s *StackPanel3D) LinkToTransformNode(node *TransformNode) *Control3D {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, node.JSObject())
+
+	retVal := s.p.Call("linkToTransformNode", args...)
+	return Control3DFromJSObject(retVal, s.ctx)
+}
+
+// RemoveBehavior calls the RemoveBehavior method on the StackPanel3D object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#removebehavior
+func (s *StackPanel3D) RemoveBehavior(behavior js.Value) *Control3D {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, behavior)
+
+	retVal := s.p.Call("removeBehavior", args...)
+	return Control3DFromJSObject(retVal, s.ctx)
+}
+
+// RemoveControl calls the RemoveControl method on the StackPanel3D object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#removecontrol
+func (s *StackPanel3D) RemoveControl(control *Control3D) *Container3D {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, control.JSObject())
+
+	retVal := s.p.Call("removeControl", args...)
+	return Container3DFromJSObject(retVal, s.ctx)
+}
+
+// UpdateLayout calls the UpdateLayout method on the StackPanel3D object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#updatelayout
+func (s *StackPanel3D) UpdateLayout() *Container3D {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("updateLayout", args...)
+	return Container3DFromJSObject(retVal, s.ctx)
+}
+
+/*
+
+// Behaviors returns the Behaviors property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#behaviors
+func (s *StackPanel3D) Behaviors(behaviors js.Value) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(behaviors)
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// SetBehaviors sets the Behaviors property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#behaviors
+func (s *StackPanel3D) SetBehaviors(behaviors js.Value) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(behaviors)
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// BlockLayout returns the BlockLayout property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#blocklayout
+func (s *StackPanel3D) BlockLayout(blockLayout bool) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(blockLayout)
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// SetBlockLayout sets the BlockLayout property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#blocklayout
+func (s *StackPanel3D) SetBlockLayout(blockLayout bool) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(blockLayout)
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// Children returns the Children property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#children
+func (s *StackPanel3D) Children(children []Control3D) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(children.JSObject())
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// SetChildren sets the Children property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#children
+func (s *StackPanel3D) SetChildren(children []Control3D) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(children.JSObject())
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// FACEFORWARDREVERSED_ORIENTATION returns the FACEFORWARDREVERSED_ORIENTATION property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#faceforwardreversed_orientation
+func (s *StackPanel3D) FACEFORWARDREVERSED_ORIENTATION(FACEFORWARDREVERSED_ORIENTATION float64) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(FACEFORWARDREVERSED_ORIENTATION)
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// SetFACEFORWARDREVERSED_ORIENTATION sets the FACEFORWARDREVERSED_ORIENTATION property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#faceforwardreversed_orientation
+func (s *StackPanel3D) SetFACEFORWARDREVERSED_ORIENTATION(FACEFORWARDREVERSED_ORIENTATION float64) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(FACEFORWARDREVERSED_ORIENTATION)
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// FACEFORWARD_ORIENTATION returns the FACEFORWARD_ORIENTATION property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#faceforward_orientation
+func (s *StackPanel3D) FACEFORWARD_ORIENTATION(FACEFORWARD_ORIENTATION float64) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(FACEFORWARD_ORIENTATION)
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// SetFACEFORWARD_ORIENTATION sets the FACEFORWARD_ORIENTATION property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#faceforward_orientation
+func (s *StackPanel3D) SetFACEFORWARD_ORIENTATION(FACEFORWARD_ORIENTATION float64) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(FACEFORWARD_ORIENTATION)
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// FACEORIGINREVERSED_ORIENTATION returns the FACEORIGINREVERSED_ORIENTATION property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#faceoriginreversed_orientation
+func (s *StackPanel3D) FACEORIGINREVERSED_ORIENTATION(FACEORIGINREVERSED_ORIENTATION float64) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(FACEORIGINREVERSED_ORIENTATION)
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// SetFACEORIGINREVERSED_ORIENTATION sets the FACEORIGINREVERSED_ORIENTATION property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#faceoriginreversed_orientation
+func (s *StackPanel3D) SetFACEORIGINREVERSED_ORIENTATION(FACEORIGINREVERSED_ORIENTATION float64) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(FACEORIGINREVERSED_ORIENTATION)
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// FACEORIGIN_ORIENTATION returns the FACEORIGIN_ORIENTATION property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#faceorigin_orientation
+func (s *StackPanel3D) FACEORIGIN_ORIENTATION(FACEORIGIN_ORIENTATION float64) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(FACEORIGIN_ORIENTATION)
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// SetFACEORIGIN_ORIENTATION sets the FACEORIGIN_ORIENTATION property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#faceorigin_orientation
+func (s *StackPanel3D) SetFACEORIGIN_ORIENTATION(FACEORIGIN_ORIENTATION float64) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(FACEORIGIN_ORIENTATION)
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// IsVertical returns the IsVertical property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#isvertical
+func (s *StackPanel3D) IsVertical(isVertical bool) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(isVertical)
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// SetIsVertical sets the IsVertical property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#isvertical
+func (s *StackPanel3D) SetIsVertical(isVertical bool) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(isVertical)
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// IsVisible returns the IsVisible property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#isvisible
+func (s *StackPanel3D) IsVisible(isVisible bool) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(isVisible)
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// SetIsVisible sets the IsVisible property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#isvisible
+func (s *StackPanel3D) SetIsVisible(isVisible bool) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(isVisible)
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// Margin returns the Margin property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#margin
+func (s *StackPanel3D) Margin(margin float64) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(margin)
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// SetMargin sets the Margin property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#margin
+func (s *StackPanel3D) SetMargin(margin float64) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(margin)
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// Mesh returns the Mesh property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#mesh
+func (s *StackPanel3D) Mesh(mesh *AbstractMesh) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(mesh.JSObject())
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// SetMesh sets the Mesh property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#mesh
+func (s *StackPanel3D) SetMesh(mesh *AbstractMesh) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(mesh.JSObject())
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#name
+func (s *StackPanel3D) Name(name string) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(name)
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#name
+func (s *StackPanel3D) SetName(name string) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(name)
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// Node returns the Node property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#node
+func (s *StackPanel3D) Node(node *TransformNode) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(node.JSObject())
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// SetNode sets the Node property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#node
+func (s *StackPanel3D) SetNode(node *TransformNode) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(node.JSObject())
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// OnPointerClickObservable returns the OnPointerClickObservable property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#onpointerclickobservable
+func (s *StackPanel3D) OnPointerClickObservable(onPointerClickObservable *Observable) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(onPointerClickObservable.JSObject())
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerClickObservable sets the OnPointerClickObservable property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#onpointerclickobservable
+func (s *StackPanel3D) SetOnPointerClickObservable(onPointerClickObservable *Observable) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(onPointerClickObservable.JSObject())
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// OnPointerDownObservable returns the OnPointerDownObservable property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#onpointerdownobservable
+func (s *StackPanel3D) OnPointerDownObservable(onPointerDownObservable *Observable) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(onPointerDownObservable.JSObject())
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerDownObservable sets the OnPointerDownObservable property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#onpointerdownobservable
+func (s *StackPanel3D) SetOnPointerDownObservable(onPointerDownObservable *Observable) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(onPointerDownObservable.JSObject())
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// OnPointerEnterObservable returns the OnPointerEnterObservable property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#onpointerenterobservable
+func (s *StackPanel3D) OnPointerEnterObservable(onPointerEnterObservable *Observable) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(onPointerEnterObservable.JSObject())
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerEnterObservable sets the OnPointerEnterObservable property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#onpointerenterobservable
+func (s *StackPanel3D) SetOnPointerEnterObservable(onPointerEnterObservable *Observable) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(onPointerEnterObservable.JSObject())
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// OnPointerMoveObservable returns the OnPointerMoveObservable property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#onpointermoveobservable
+func (s *StackPanel3D) OnPointerMoveObservable(onPointerMoveObservable *Observable) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(onPointerMoveObservable.JSObject())
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerMoveObservable sets the OnPointerMoveObservable property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#onpointermoveobservable
+func (s *StackPanel3D) SetOnPointerMoveObservable(onPointerMoveObservable *Observable) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(onPointerMoveObservable.JSObject())
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// OnPointerOutObservable returns the OnPointerOutObservable property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#onpointeroutobservable
+func (s *StackPanel3D) OnPointerOutObservable(onPointerOutObservable *Observable) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(onPointerOutObservable.JSObject())
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerOutObservable sets the OnPointerOutObservable property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#onpointeroutobservable
+func (s *StackPanel3D) SetOnPointerOutObservable(onPointerOutObservable *Observable) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(onPointerOutObservable.JSObject())
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// OnPointerUpObservable returns the OnPointerUpObservable property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#onpointerupobservable
+func (s *StackPanel3D) OnPointerUpObservable(onPointerUpObservable *Observable) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(onPointerUpObservable.JSObject())
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerUpObservable sets the OnPointerUpObservable property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#onpointerupobservable
+func (s *StackPanel3D) SetOnPointerUpObservable(onPointerUpObservable *Observable) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(onPointerUpObservable.JSObject())
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// Parent returns the Parent property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#parent
+func (s *StackPanel3D) Parent(parent *Container3D) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(parent.JSObject())
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// SetParent sets the Parent property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#parent
+func (s *StackPanel3D) SetParent(parent *Container3D) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(parent.JSObject())
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// PointerDownAnimation returns the PointerDownAnimation property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#pointerdownanimation
+func (s *StackPanel3D) PointerDownAnimation(pointerDownAnimation func()) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(pointerDownAnimation)
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// SetPointerDownAnimation sets the PointerDownAnimation property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#pointerdownanimation
+func (s *StackPanel3D) SetPointerDownAnimation(pointerDownAnimation func()) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(pointerDownAnimation)
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// PointerEnterAnimation returns the PointerEnterAnimation property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#pointerenteranimation
+func (s *StackPanel3D) PointerEnterAnimation(pointerEnterAnimation func()) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(pointerEnterAnimation)
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// SetPointerEnterAnimation sets the PointerEnterAnimation property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#pointerenteranimation
+func (s *StackPanel3D) SetPointerEnterAnimation(pointerEnterAnimation func()) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(pointerEnterAnimation)
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// PointerOutAnimation returns the PointerOutAnimation property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#pointeroutanimation
+func (s *StackPanel3D) PointerOutAnimation(pointerOutAnimation func()) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(pointerOutAnimation)
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// SetPointerOutAnimation sets the PointerOutAnimation property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#pointeroutanimation
+func (s *StackPanel3D) SetPointerOutAnimation(pointerOutAnimation func()) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(pointerOutAnimation)
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// PointerUpAnimation returns the PointerUpAnimation property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#pointerupanimation
+func (s *StackPanel3D) PointerUpAnimation(pointerUpAnimation func()) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(pointerUpAnimation)
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// SetPointerUpAnimation sets the PointerUpAnimation property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#pointerupanimation
+func (s *StackPanel3D) SetPointerUpAnimation(pointerUpAnimation func()) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(pointerUpAnimation)
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// Position returns the Position property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#position
+func (s *StackPanel3D) Position(position *Vector3) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(position.JSObject())
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// SetPosition sets the Position property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#position
+func (s *StackPanel3D) SetPosition(position *Vector3) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(position.JSObject())
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// Scaling returns the Scaling property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#scaling
+func (s *StackPanel3D) Scaling(scaling *Vector3) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(scaling.JSObject())
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// SetScaling sets the Scaling property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#scaling
+func (s *StackPanel3D) SetScaling(scaling *Vector3) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(scaling.JSObject())
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// TypeName returns the TypeName property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#typename
+func (s *StackPanel3D) TypeName(typeName string) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(typeName)
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// SetTypeName sets the TypeName property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#typename
+func (s *StackPanel3D) SetTypeName(typeName string) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(typeName)
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// UNSET_ORIENTATION returns the UNSET_ORIENTATION property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#unset_orientation
+func (s *StackPanel3D) UNSET_ORIENTATION(UNSET_ORIENTATION float64) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(UNSET_ORIENTATION)
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+// SetUNSET_ORIENTATION sets the UNSET_ORIENTATION property of class StackPanel3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stackpanel3d#unset_orientation
+func (s *StackPanel3D) SetUNSET_ORIENTATION(UNSET_ORIENTATION float64) *StackPanel3D {
+	p := ba.ctx.Get("StackPanel3D").New(UNSET_ORIENTATION)
+	return StackPanel3DFromJSObject(p, ba.ctx)
+}
+
+*/

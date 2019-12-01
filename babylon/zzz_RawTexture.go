@@ -31,13 +31,10 @@ func RawTextureFromJSObject(p js.Value, ctx js.Value) *RawTexture {
 
 // NewRawTextureOpts contains optional parameters for NewRawTexture.
 type NewRawTextureOpts struct {
-	GenerateMipMaps *JSBool
-
-	InvertY *JSBool
-
-	SamplingMode *JSFloat64
-
-	Type *JSFloat64
+	GenerateMipMaps *bool
+	InvertY         *bool
+	SamplingMode    *float64
+	Type            *float64
 }
 
 // NewRawTexture returns a new RawTexture object.
@@ -48,8 +45,2028 @@ func (ba *Babylon) NewRawTexture(data js.Value, width float64, height float64, f
 		opts = &NewRawTextureOpts{}
 	}
 
-	p := ba.ctx.Get("RawTexture").New(data, width, height, format, scene.JSObject(), opts.GenerateMipMaps.JSObject(), opts.InvertY.JSObject(), opts.SamplingMode.JSObject(), opts.Type.JSObject())
+	args := make([]interface{}, 0, 5+4)
+
+	args = append(args, data)
+	args = append(args, width)
+	args = append(args, height)
+	args = append(args, format)
+	args = append(args, scene.JSObject())
+
+	if opts.GenerateMipMaps == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.GenerateMipMaps)
+	}
+	if opts.InvertY == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.InvertY)
+	}
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+	if opts.Type == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Type)
+	}
+
+	p := ba.ctx.Get("RawTexture").New(args...)
 	return RawTextureFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Clone calls the Clone method on the RawTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#clone
+func (r *RawTexture) Clone() *Texture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("clone", args...)
+	return TextureFromJSObject(retVal, r.ctx)
+}
+
+// RawTextureCreateAlphaTextureOpts contains optional parameters for RawTexture.CreateAlphaTexture.
+type RawTextureCreateAlphaTextureOpts struct {
+	GenerateMipMaps *bool
+	InvertY         *bool
+	SamplingMode    *float64
+}
+
+// CreateAlphaTexture calls the CreateAlphaTexture method on the RawTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#createalphatexture
+func (r *RawTexture) CreateAlphaTexture(data js.Value, width float64, height float64, scene *Scene, opts *RawTextureCreateAlphaTextureOpts) *RawTexture {
+	if opts == nil {
+		opts = &RawTextureCreateAlphaTextureOpts{}
+	}
+
+	args := make([]interface{}, 0, 4+3)
+
+	args = append(args, data)
+	args = append(args, width)
+	args = append(args, height)
+	args = append(args, scene.JSObject())
+
+	if opts.GenerateMipMaps == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.GenerateMipMaps)
+	}
+	if opts.InvertY == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.InvertY)
+	}
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+
+	retVal := r.p.Call("CreateAlphaTexture", args...)
+	return RawTextureFromJSObject(retVal, r.ctx)
+}
+
+// RawTextureCreateFromBase64StringOpts contains optional parameters for RawTexture.CreateFromBase64String.
+type RawTextureCreateFromBase64StringOpts struct {
+	NoMipmap     *bool
+	InvertY      *bool
+	SamplingMode *float64
+	OnLoad       *func()
+	OnError      *func()
+	Format       *float64
+}
+
+// CreateFromBase64String calls the CreateFromBase64String method on the RawTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#createfrombase64string
+func (r *RawTexture) CreateFromBase64String(data string, name string, scene *Scene, opts *RawTextureCreateFromBase64StringOpts) *Texture {
+	if opts == nil {
+		opts = &RawTextureCreateFromBase64StringOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+6)
+
+	args = append(args, data)
+	args = append(args, name)
+	args = append(args, scene.JSObject())
+
+	if opts.NoMipmap == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoMipmap)
+	}
+	if opts.InvertY == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.InvertY)
+	}
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+	if opts.OnLoad == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnLoad)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+	if opts.Format == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Format)
+	}
+
+	retVal := r.p.Call("CreateFromBase64String", args...)
+	return TextureFromJSObject(retVal, r.ctx)
+}
+
+// RawTextureCreateLuminanceAlphaTextureOpts contains optional parameters for RawTexture.CreateLuminanceAlphaTexture.
+type RawTextureCreateLuminanceAlphaTextureOpts struct {
+	GenerateMipMaps *bool
+	InvertY         *bool
+	SamplingMode    *float64
+}
+
+// CreateLuminanceAlphaTexture calls the CreateLuminanceAlphaTexture method on the RawTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#createluminancealphatexture
+func (r *RawTexture) CreateLuminanceAlphaTexture(data js.Value, width float64, height float64, scene *Scene, opts *RawTextureCreateLuminanceAlphaTextureOpts) *RawTexture {
+	if opts == nil {
+		opts = &RawTextureCreateLuminanceAlphaTextureOpts{}
+	}
+
+	args := make([]interface{}, 0, 4+3)
+
+	args = append(args, data)
+	args = append(args, width)
+	args = append(args, height)
+	args = append(args, scene.JSObject())
+
+	if opts.GenerateMipMaps == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.GenerateMipMaps)
+	}
+	if opts.InvertY == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.InvertY)
+	}
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+
+	retVal := r.p.Call("CreateLuminanceAlphaTexture", args...)
+	return RawTextureFromJSObject(retVal, r.ctx)
+}
+
+// RawTextureCreateLuminanceTextureOpts contains optional parameters for RawTexture.CreateLuminanceTexture.
+type RawTextureCreateLuminanceTextureOpts struct {
+	GenerateMipMaps *bool
+	InvertY         *bool
+	SamplingMode    *float64
+}
+
+// CreateLuminanceTexture calls the CreateLuminanceTexture method on the RawTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#createluminancetexture
+func (r *RawTexture) CreateLuminanceTexture(data js.Value, width float64, height float64, scene *Scene, opts *RawTextureCreateLuminanceTextureOpts) *RawTexture {
+	if opts == nil {
+		opts = &RawTextureCreateLuminanceTextureOpts{}
+	}
+
+	args := make([]interface{}, 0, 4+3)
+
+	args = append(args, data)
+	args = append(args, width)
+	args = append(args, height)
+	args = append(args, scene.JSObject())
+
+	if opts.GenerateMipMaps == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.GenerateMipMaps)
+	}
+	if opts.InvertY == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.InvertY)
+	}
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+
+	retVal := r.p.Call("CreateLuminanceTexture", args...)
+	return RawTextureFromJSObject(retVal, r.ctx)
+}
+
+// RawTextureCreateRGBATextureOpts contains optional parameters for RawTexture.CreateRGBATexture.
+type RawTextureCreateRGBATextureOpts struct {
+	GenerateMipMaps *bool
+	InvertY         *bool
+	SamplingMode    *float64
+	Type            *float64
+}
+
+// CreateRGBATexture calls the CreateRGBATexture method on the RawTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#creatergbatexture
+func (r *RawTexture) CreateRGBATexture(data js.Value, width float64, height float64, scene *Scene, opts *RawTextureCreateRGBATextureOpts) *RawTexture {
+	if opts == nil {
+		opts = &RawTextureCreateRGBATextureOpts{}
+	}
+
+	args := make([]interface{}, 0, 4+4)
+
+	args = append(args, data)
+	args = append(args, width)
+	args = append(args, height)
+	args = append(args, scene.JSObject())
+
+	if opts.GenerateMipMaps == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.GenerateMipMaps)
+	}
+	if opts.InvertY == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.InvertY)
+	}
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+	if opts.Type == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Type)
+	}
+
+	retVal := r.p.Call("CreateRGBATexture", args...)
+	return RawTextureFromJSObject(retVal, r.ctx)
+}
+
+// RawTextureCreateRGBTextureOpts contains optional parameters for RawTexture.CreateRGBTexture.
+type RawTextureCreateRGBTextureOpts struct {
+	GenerateMipMaps *bool
+	InvertY         *bool
+	SamplingMode    *float64
+	Type            *float64
+}
+
+// CreateRGBTexture calls the CreateRGBTexture method on the RawTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#creatergbtexture
+func (r *RawTexture) CreateRGBTexture(data js.Value, width float64, height float64, scene *Scene, opts *RawTextureCreateRGBTextureOpts) *RawTexture {
+	if opts == nil {
+		opts = &RawTextureCreateRGBTextureOpts{}
+	}
+
+	args := make([]interface{}, 0, 4+4)
+
+	args = append(args, data)
+	args = append(args, width)
+	args = append(args, height)
+	args = append(args, scene.JSObject())
+
+	if opts.GenerateMipMaps == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.GenerateMipMaps)
+	}
+	if opts.InvertY == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.InvertY)
+	}
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+	if opts.Type == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Type)
+	}
+
+	retVal := r.p.Call("CreateRGBTexture", args...)
+	return RawTextureFromJSObject(retVal, r.ctx)
+}
+
+// RawTextureCreateRTextureOpts contains optional parameters for RawTexture.CreateRTexture.
+type RawTextureCreateRTextureOpts struct {
+	GenerateMipMaps *bool
+	InvertY         *bool
+	SamplingMode    *float64
+	Type            *float64
+}
+
+// CreateRTexture calls the CreateRTexture method on the RawTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#creatertexture
+func (r *RawTexture) CreateRTexture(data js.Value, width float64, height float64, scene *Scene, opts *RawTextureCreateRTextureOpts) *RawTexture {
+	if opts == nil {
+		opts = &RawTextureCreateRTextureOpts{}
+	}
+
+	args := make([]interface{}, 0, 4+4)
+
+	args = append(args, data)
+	args = append(args, width)
+	args = append(args, height)
+	args = append(args, scene.JSObject())
+
+	if opts.GenerateMipMaps == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.GenerateMipMaps)
+	}
+	if opts.InvertY == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.InvertY)
+	}
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+	if opts.Type == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Type)
+	}
+
+	retVal := r.p.Call("CreateRTexture", args...)
+	return RawTextureFromJSObject(retVal, r.ctx)
+}
+
+// Dispose calls the Dispose method on the RawTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#dispose
+func (r *RawTexture) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	r.p.Call("dispose", args...)
+}
+
+// GetBaseSize calls the GetBaseSize method on the RawTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#getbasesize
+func (r *RawTexture) GetBaseSize() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("getBaseSize", args...)
+	return retVal
+}
+
+// GetClassName calls the GetClassName method on the RawTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#getclassname
+func (r *RawTexture) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetInternalTexture calls the GetInternalTexture method on the RawTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#getinternaltexture
+func (r *RawTexture) GetInternalTexture() *InternalTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("getInternalTexture", args...)
+	return InternalTextureFromJSObject(retVal, r.ctx)
+}
+
+// GetReflectionTextureMatrix calls the GetReflectionTextureMatrix method on the RawTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#getreflectiontexturematrix
+func (r *RawTexture) GetReflectionTextureMatrix() *Matrix {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("getReflectionTextureMatrix", args...)
+	return MatrixFromJSObject(retVal, r.ctx)
+}
+
+// GetScene calls the GetScene method on the RawTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#getscene
+func (r *RawTexture) GetScene() *Scene {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("getScene", args...)
+	return SceneFromJSObject(retVal, r.ctx)
+}
+
+// GetSize calls the GetSize method on the RawTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#getsize
+func (r *RawTexture) GetSize() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("getSize", args...)
+	return retVal
+}
+
+// RawTextureGetTextureMatrixOpts contains optional parameters for RawTexture.GetTextureMatrix.
+type RawTextureGetTextureMatrixOpts struct {
+	UBase *float64
+}
+
+// GetTextureMatrix calls the GetTextureMatrix method on the RawTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#gettexturematrix
+func (r *RawTexture) GetTextureMatrix(opts *RawTextureGetTextureMatrixOpts) *Matrix {
+	if opts == nil {
+		opts = &RawTextureGetTextureMatrixOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.UBase == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UBase)
+	}
+
+	retVal := r.p.Call("getTextureMatrix", args...)
+	return MatrixFromJSObject(retVal, r.ctx)
+}
+
+// IsReady calls the IsReady method on the RawTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#isready
+func (r *RawTexture) IsReady() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// IsReadyOrNotBlocking calls the IsReadyOrNotBlocking method on the RawTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#isreadyornotblocking
+func (r *RawTexture) IsReadyOrNotBlocking() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("isReadyOrNotBlocking", args...)
+	return retVal.Bool()
+}
+
+// RawTextureLoadFromDataStringOpts contains optional parameters for RawTexture.LoadFromDataString.
+type RawTextureLoadFromDataStringOpts struct {
+	DeleteBuffer *bool
+	NoMipmap     *bool
+	InvertY      *bool
+	SamplingMode *float64
+	OnLoad       *func()
+	OnError      *func()
+	Format       *float64
+}
+
+// LoadFromDataString calls the LoadFromDataString method on the RawTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#loadfromdatastring
+func (r *RawTexture) LoadFromDataString(name string, buffer interface{}, scene *Scene, opts *RawTextureLoadFromDataStringOpts) *Texture {
+	if opts == nil {
+		opts = &RawTextureLoadFromDataStringOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+7)
+
+	args = append(args, name)
+	args = append(args, buffer)
+	args = append(args, scene.JSObject())
+
+	if opts.DeleteBuffer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DeleteBuffer)
+	}
+	if opts.NoMipmap == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoMipmap)
+	}
+	if opts.InvertY == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.InvertY)
+	}
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+	if opts.OnLoad == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnLoad)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+	if opts.Format == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Format)
+	}
+
+	retVal := r.p.Call("LoadFromDataString", args...)
+	return TextureFromJSObject(retVal, r.ctx)
+}
+
+// Parse calls the Parse method on the RawTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#parse
+func (r *RawTexture) Parse(parsedTexture interface{}, scene *Scene, rootUrl string) *BaseTexture {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, parsedTexture)
+	args = append(args, scene.JSObject())
+	args = append(args, rootUrl)
+
+	retVal := r.p.Call("Parse", args...)
+	return BaseTextureFromJSObject(retVal, r.ctx)
+}
+
+// RawTextureReadPixelsOpts contains optional parameters for RawTexture.ReadPixels.
+type RawTextureReadPixelsOpts struct {
+	FaceIndex *float64
+	Level     *float64
+	Buffer    js.Value
+}
+
+// ReadPixels calls the ReadPixels method on the RawTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#readpixels
+func (r *RawTexture) ReadPixels(opts *RawTextureReadPixelsOpts) js.Value {
+	if opts == nil {
+		opts = &RawTextureReadPixelsOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+3)
+
+	if opts.FaceIndex == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FaceIndex)
+	}
+	if opts.Level == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Level)
+	}
+	if opts.Buffer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Buffer)
+	}
+
+	retVal := r.p.Call("readPixels", args...)
+	return retVal
+}
+
+// ReleaseInternalTexture calls the ReleaseInternalTexture method on the RawTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#releaseinternaltexture
+func (r *RawTexture) ReleaseInternalTexture() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	r.p.Call("releaseInternalTexture", args...)
+}
+
+// Scale calls the Scale method on the RawTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#scale
+func (r *RawTexture) Scale(ratio float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, ratio)
+
+	r.p.Call("scale", args...)
+}
+
+// Serialize calls the Serialize method on the RawTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#serialize
+func (r *RawTexture) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("serialize", args...)
+	return retVal
+}
+
+// ToString calls the ToString method on the RawTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#tostring
+func (r *RawTexture) ToString() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("toString", args...)
+	return retVal.String()
+}
+
+// Update calls the Update method on the RawTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#update
+func (r *RawTexture) Update(data js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, data)
+
+	r.p.Call("update", args...)
+}
+
+// UpdateSamplingMode calls the UpdateSamplingMode method on the RawTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#updatesamplingmode
+func (r *RawTexture) UpdateSamplingMode(samplingMode float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, samplingMode)
+
+	r.p.Call("updateSamplingMode", args...)
+}
+
+// RawTextureUpdateURLOpts contains optional parameters for RawTexture.UpdateURL.
+type RawTextureUpdateURLOpts struct {
+	Buffer *string
+	OnLoad *func()
+}
+
+// UpdateURL calls the UpdateURL method on the RawTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#updateurl
+func (r *RawTexture) UpdateURL(url string, opts *RawTextureUpdateURLOpts) {
+	if opts == nil {
+		opts = &RawTextureUpdateURLOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, url)
+
+	if opts.Buffer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Buffer)
+	}
+	if opts.OnLoad == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnLoad)
+	}
+
+	r.p.Call("updateURL", args...)
+}
+
+// WhenAllReady calls the WhenAllReady method on the RawTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#whenallready
+func (r *RawTexture) WhenAllReady(textures *BaseTexture, callback func()) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, textures.JSObject())
+	args = append(args, callback)
+
+	r.p.Call("WhenAllReady", args...)
+}
+
+/*
+
+// Animations returns the Animations property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#animations
+func (r *RawTexture) Animations(animations *Animation) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(animations.JSObject())
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#animations
+func (r *RawTexture) SetAnimations(animations *Animation) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(animations.JSObject())
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// AnisotropicFilteringLevel returns the AnisotropicFilteringLevel property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#anisotropicfilteringlevel
+func (r *RawTexture) AnisotropicFilteringLevel(anisotropicFilteringLevel float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(anisotropicFilteringLevel)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetAnisotropicFilteringLevel sets the AnisotropicFilteringLevel property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#anisotropicfilteringlevel
+func (r *RawTexture) SetAnisotropicFilteringLevel(anisotropicFilteringLevel float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(anisotropicFilteringLevel)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// BILINEAR_SAMPLINGMODE returns the BILINEAR_SAMPLINGMODE property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#bilinear_samplingmode
+func (r *RawTexture) BILINEAR_SAMPLINGMODE(BILINEAR_SAMPLINGMODE float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(BILINEAR_SAMPLINGMODE)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetBILINEAR_SAMPLINGMODE sets the BILINEAR_SAMPLINGMODE property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#bilinear_samplingmode
+func (r *RawTexture) SetBILINEAR_SAMPLINGMODE(BILINEAR_SAMPLINGMODE float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(BILINEAR_SAMPLINGMODE)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// CLAMP_ADDRESSMODE returns the CLAMP_ADDRESSMODE property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#clamp_addressmode
+func (r *RawTexture) CLAMP_ADDRESSMODE(CLAMP_ADDRESSMODE float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(CLAMP_ADDRESSMODE)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCLAMP_ADDRESSMODE sets the CLAMP_ADDRESSMODE property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#clamp_addressmode
+func (r *RawTexture) SetCLAMP_ADDRESSMODE(CLAMP_ADDRESSMODE float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(CLAMP_ADDRESSMODE)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// CUBIC_MODE returns the CUBIC_MODE property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#cubic_mode
+func (r *RawTexture) CUBIC_MODE(CUBIC_MODE float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(CUBIC_MODE)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCUBIC_MODE sets the CUBIC_MODE property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#cubic_mode
+func (r *RawTexture) SetCUBIC_MODE(CUBIC_MODE float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(CUBIC_MODE)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// CanRescale returns the CanRescale property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#canrescale
+func (r *RawTexture) CanRescale(canRescale bool) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(canRescale)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCanRescale sets the CanRescale property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#canrescale
+func (r *RawTexture) SetCanRescale(canRescale bool) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(canRescale)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// CoordinatesIndex returns the CoordinatesIndex property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#coordinatesindex
+func (r *RawTexture) CoordinatesIndex(coordinatesIndex float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(coordinatesIndex)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCoordinatesIndex sets the CoordinatesIndex property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#coordinatesindex
+func (r *RawTexture) SetCoordinatesIndex(coordinatesIndex float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(coordinatesIndex)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// CoordinatesMode returns the CoordinatesMode property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#coordinatesmode
+func (r *RawTexture) CoordinatesMode(coordinatesMode float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(coordinatesMode)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCoordinatesMode sets the CoordinatesMode property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#coordinatesmode
+func (r *RawTexture) SetCoordinatesMode(coordinatesMode float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(coordinatesMode)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// DEFAULT_ANISOTROPIC_FILTERING_LEVEL returns the DEFAULT_ANISOTROPIC_FILTERING_LEVEL property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#default_anisotropic_filtering_level
+func (r *RawTexture) DEFAULT_ANISOTROPIC_FILTERING_LEVEL(DEFAULT_ANISOTROPIC_FILTERING_LEVEL float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(DEFAULT_ANISOTROPIC_FILTERING_LEVEL)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetDEFAULT_ANISOTROPIC_FILTERING_LEVEL sets the DEFAULT_ANISOTROPIC_FILTERING_LEVEL property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#default_anisotropic_filtering_level
+func (r *RawTexture) SetDEFAULT_ANISOTROPIC_FILTERING_LEVEL(DEFAULT_ANISOTROPIC_FILTERING_LEVEL float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(DEFAULT_ANISOTROPIC_FILTERING_LEVEL)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// DelayLoadState returns the DelayLoadState property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#delayloadstate
+func (r *RawTexture) DelayLoadState(delayLoadState float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(delayLoadState)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetDelayLoadState sets the DelayLoadState property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#delayloadstate
+func (r *RawTexture) SetDelayLoadState(delayLoadState float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(delayLoadState)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// EQUIRECTANGULAR_MODE returns the EQUIRECTANGULAR_MODE property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#equirectangular_mode
+func (r *RawTexture) EQUIRECTANGULAR_MODE(EQUIRECTANGULAR_MODE float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(EQUIRECTANGULAR_MODE)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetEQUIRECTANGULAR_MODE sets the EQUIRECTANGULAR_MODE property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#equirectangular_mode
+func (r *RawTexture) SetEQUIRECTANGULAR_MODE(EQUIRECTANGULAR_MODE float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(EQUIRECTANGULAR_MODE)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// EXPLICIT_MODE returns the EXPLICIT_MODE property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#explicit_mode
+func (r *RawTexture) EXPLICIT_MODE(EXPLICIT_MODE float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(EXPLICIT_MODE)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetEXPLICIT_MODE sets the EXPLICIT_MODE property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#explicit_mode
+func (r *RawTexture) SetEXPLICIT_MODE(EXPLICIT_MODE float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(EXPLICIT_MODE)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// FIXED_EQUIRECTANGULAR_MIRRORED_MODE returns the FIXED_EQUIRECTANGULAR_MIRRORED_MODE property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#fixed_equirectangular_mirrored_mode
+func (r *RawTexture) FIXED_EQUIRECTANGULAR_MIRRORED_MODE(FIXED_EQUIRECTANGULAR_MIRRORED_MODE float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(FIXED_EQUIRECTANGULAR_MIRRORED_MODE)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetFIXED_EQUIRECTANGULAR_MIRRORED_MODE sets the FIXED_EQUIRECTANGULAR_MIRRORED_MODE property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#fixed_equirectangular_mirrored_mode
+func (r *RawTexture) SetFIXED_EQUIRECTANGULAR_MIRRORED_MODE(FIXED_EQUIRECTANGULAR_MIRRORED_MODE float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(FIXED_EQUIRECTANGULAR_MIRRORED_MODE)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// FIXED_EQUIRECTANGULAR_MODE returns the FIXED_EQUIRECTANGULAR_MODE property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#fixed_equirectangular_mode
+func (r *RawTexture) FIXED_EQUIRECTANGULAR_MODE(FIXED_EQUIRECTANGULAR_MODE float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(FIXED_EQUIRECTANGULAR_MODE)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetFIXED_EQUIRECTANGULAR_MODE sets the FIXED_EQUIRECTANGULAR_MODE property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#fixed_equirectangular_mode
+func (r *RawTexture) SetFIXED_EQUIRECTANGULAR_MODE(FIXED_EQUIRECTANGULAR_MODE float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(FIXED_EQUIRECTANGULAR_MODE)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// Format returns the Format property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#format
+func (r *RawTexture) Format(format float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(format)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetFormat sets the Format property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#format
+func (r *RawTexture) SetFormat(format float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(format)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// GammaSpace returns the GammaSpace property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#gammaspace
+func (r *RawTexture) GammaSpace(gammaSpace bool) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(gammaSpace)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetGammaSpace sets the GammaSpace property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#gammaspace
+func (r *RawTexture) SetGammaSpace(gammaSpace bool) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(gammaSpace)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// GetAlphaFromRGB returns the GetAlphaFromRGB property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#getalphafromrgb
+func (r *RawTexture) GetAlphaFromRGB(getAlphaFromRGB bool) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(getAlphaFromRGB)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetGetAlphaFromRGB sets the GetAlphaFromRGB property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#getalphafromrgb
+func (r *RawTexture) SetGetAlphaFromRGB(getAlphaFromRGB bool) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(getAlphaFromRGB)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// HasAlpha returns the HasAlpha property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#hasalpha
+func (r *RawTexture) HasAlpha(hasAlpha bool) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(hasAlpha)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetHasAlpha sets the HasAlpha property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#hasalpha
+func (r *RawTexture) SetHasAlpha(hasAlpha bool) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(hasAlpha)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// INVCUBIC_MODE returns the INVCUBIC_MODE property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#invcubic_mode
+func (r *RawTexture) INVCUBIC_MODE(INVCUBIC_MODE float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(INVCUBIC_MODE)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetINVCUBIC_MODE sets the INVCUBIC_MODE property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#invcubic_mode
+func (r *RawTexture) SetINVCUBIC_MODE(INVCUBIC_MODE float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(INVCUBIC_MODE)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#inspectablecustomproperties
+func (r *RawTexture) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(inspectableCustomProperties.JSObject())
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#inspectablecustomproperties
+func (r *RawTexture) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(inspectableCustomProperties.JSObject())
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// InvertY returns the InvertY property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#inverty
+func (r *RawTexture) InvertY(invertY bool) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(invertY)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetInvertY sets the InvertY property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#inverty
+func (r *RawTexture) SetInvertY(invertY bool) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(invertY)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// InvertZ returns the InvertZ property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#invertz
+func (r *RawTexture) InvertZ(invertZ bool) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(invertZ)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetInvertZ sets the InvertZ property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#invertz
+func (r *RawTexture) SetInvertZ(invertZ bool) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(invertZ)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// IrradianceTexture returns the IrradianceTexture property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#irradiancetexture
+func (r *RawTexture) IrradianceTexture(irradianceTexture *BaseTexture) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(irradianceTexture.JSObject())
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIrradianceTexture sets the IrradianceTexture property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#irradiancetexture
+func (r *RawTexture) SetIrradianceTexture(irradianceTexture *BaseTexture) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(irradianceTexture.JSObject())
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// Is2DArray returns the Is2DArray property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#is2darray
+func (r *RawTexture) Is2DArray(is2DArray bool) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(is2DArray)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIs2DArray sets the Is2DArray property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#is2darray
+func (r *RawTexture) SetIs2DArray(is2DArray bool) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(is2DArray)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// Is3D returns the Is3D property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#is3d
+func (r *RawTexture) Is3D(is3D bool) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(is3D)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIs3D sets the Is3D property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#is3d
+func (r *RawTexture) SetIs3D(is3D bool) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(is3D)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// IsBlocking returns the IsBlocking property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#isblocking
+func (r *RawTexture) IsBlocking(isBlocking bool) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(isBlocking)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsBlocking sets the IsBlocking property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#isblocking
+func (r *RawTexture) SetIsBlocking(isBlocking bool) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(isBlocking)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// IsCube returns the IsCube property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#iscube
+func (r *RawTexture) IsCube(isCube bool) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(isCube)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsCube sets the IsCube property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#iscube
+func (r *RawTexture) SetIsCube(isCube bool) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(isCube)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// IsRGBD returns the IsRGBD property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#isrgbd
+func (r *RawTexture) IsRGBD(isRGBD bool) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(isRGBD)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsRGBD sets the IsRGBD property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#isrgbd
+func (r *RawTexture) SetIsRGBD(isRGBD bool) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(isRGBD)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// IsRenderTarget returns the IsRenderTarget property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#isrendertarget
+func (r *RawTexture) IsRenderTarget(isRenderTarget bool) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(isRenderTarget)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsRenderTarget sets the IsRenderTarget property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#isrendertarget
+func (r *RawTexture) SetIsRenderTarget(isRenderTarget bool) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(isRenderTarget)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_LINEAR returns the LINEAR_LINEAR property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#linear_linear
+func (r *RawTexture) LINEAR_LINEAR(LINEAR_LINEAR float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(LINEAR_LINEAR)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_LINEAR sets the LINEAR_LINEAR property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#linear_linear
+func (r *RawTexture) SetLINEAR_LINEAR(LINEAR_LINEAR float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(LINEAR_LINEAR)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_LINEAR_MIPLINEAR returns the LINEAR_LINEAR_MIPLINEAR property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#linear_linear_miplinear
+func (r *RawTexture) LINEAR_LINEAR_MIPLINEAR(LINEAR_LINEAR_MIPLINEAR float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(LINEAR_LINEAR_MIPLINEAR)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_LINEAR_MIPLINEAR sets the LINEAR_LINEAR_MIPLINEAR property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#linear_linear_miplinear
+func (r *RawTexture) SetLINEAR_LINEAR_MIPLINEAR(LINEAR_LINEAR_MIPLINEAR float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(LINEAR_LINEAR_MIPLINEAR)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_LINEAR_MIPNEAREST returns the LINEAR_LINEAR_MIPNEAREST property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#linear_linear_mipnearest
+func (r *RawTexture) LINEAR_LINEAR_MIPNEAREST(LINEAR_LINEAR_MIPNEAREST float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(LINEAR_LINEAR_MIPNEAREST)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_LINEAR_MIPNEAREST sets the LINEAR_LINEAR_MIPNEAREST property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#linear_linear_mipnearest
+func (r *RawTexture) SetLINEAR_LINEAR_MIPNEAREST(LINEAR_LINEAR_MIPNEAREST float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(LINEAR_LINEAR_MIPNEAREST)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_NEAREST returns the LINEAR_NEAREST property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#linear_nearest
+func (r *RawTexture) LINEAR_NEAREST(LINEAR_NEAREST float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(LINEAR_NEAREST)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_NEAREST sets the LINEAR_NEAREST property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#linear_nearest
+func (r *RawTexture) SetLINEAR_NEAREST(LINEAR_NEAREST float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(LINEAR_NEAREST)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_NEAREST_MIPLINEAR returns the LINEAR_NEAREST_MIPLINEAR property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#linear_nearest_miplinear
+func (r *RawTexture) LINEAR_NEAREST_MIPLINEAR(LINEAR_NEAREST_MIPLINEAR float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(LINEAR_NEAREST_MIPLINEAR)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_NEAREST_MIPLINEAR sets the LINEAR_NEAREST_MIPLINEAR property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#linear_nearest_miplinear
+func (r *RawTexture) SetLINEAR_NEAREST_MIPLINEAR(LINEAR_NEAREST_MIPLINEAR float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(LINEAR_NEAREST_MIPLINEAR)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_NEAREST_MIPNEAREST returns the LINEAR_NEAREST_MIPNEAREST property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#linear_nearest_mipnearest
+func (r *RawTexture) LINEAR_NEAREST_MIPNEAREST(LINEAR_NEAREST_MIPNEAREST float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(LINEAR_NEAREST_MIPNEAREST)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_NEAREST_MIPNEAREST sets the LINEAR_NEAREST_MIPNEAREST property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#linear_nearest_mipnearest
+func (r *RawTexture) SetLINEAR_NEAREST_MIPNEAREST(LINEAR_NEAREST_MIPNEAREST float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(LINEAR_NEAREST_MIPNEAREST)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// Level returns the Level property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#level
+func (r *RawTexture) Level(level float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(level)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLevel sets the Level property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#level
+func (r *RawTexture) SetLevel(level float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(level)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// LinearSpecularLOD returns the LinearSpecularLOD property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#linearspecularlod
+func (r *RawTexture) LinearSpecularLOD(linearSpecularLOD bool) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(linearSpecularLOD)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLinearSpecularLOD sets the LinearSpecularLOD property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#linearspecularlod
+func (r *RawTexture) SetLinearSpecularLOD(linearSpecularLOD bool) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(linearSpecularLOD)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// LodGenerationOffset returns the LodGenerationOffset property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#lodgenerationoffset
+func (r *RawTexture) LodGenerationOffset(lodGenerationOffset float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(lodGenerationOffset)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLodGenerationOffset sets the LodGenerationOffset property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#lodgenerationoffset
+func (r *RawTexture) SetLodGenerationOffset(lodGenerationOffset float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(lodGenerationOffset)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// LodGenerationScale returns the LodGenerationScale property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#lodgenerationscale
+func (r *RawTexture) LodGenerationScale(lodGenerationScale float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(lodGenerationScale)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLodGenerationScale sets the LodGenerationScale property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#lodgenerationscale
+func (r *RawTexture) SetLodGenerationScale(lodGenerationScale float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(lodGenerationScale)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// MIRROR_ADDRESSMODE returns the MIRROR_ADDRESSMODE property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#mirror_addressmode
+func (r *RawTexture) MIRROR_ADDRESSMODE(MIRROR_ADDRESSMODE float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(MIRROR_ADDRESSMODE)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetMIRROR_ADDRESSMODE sets the MIRROR_ADDRESSMODE property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#mirror_addressmode
+func (r *RawTexture) SetMIRROR_ADDRESSMODE(MIRROR_ADDRESSMODE float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(MIRROR_ADDRESSMODE)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#metadata
+func (r *RawTexture) Metadata(metadata interface{}) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(metadata)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#metadata
+func (r *RawTexture) SetMetadata(metadata interface{}) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(metadata)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_LINEAR returns the NEAREST_LINEAR property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#nearest_linear
+func (r *RawTexture) NEAREST_LINEAR(NEAREST_LINEAR float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(NEAREST_LINEAR)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_LINEAR sets the NEAREST_LINEAR property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#nearest_linear
+func (r *RawTexture) SetNEAREST_LINEAR(NEAREST_LINEAR float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(NEAREST_LINEAR)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_LINEAR_MIPLINEAR returns the NEAREST_LINEAR_MIPLINEAR property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#nearest_linear_miplinear
+func (r *RawTexture) NEAREST_LINEAR_MIPLINEAR(NEAREST_LINEAR_MIPLINEAR float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(NEAREST_LINEAR_MIPLINEAR)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_LINEAR_MIPLINEAR sets the NEAREST_LINEAR_MIPLINEAR property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#nearest_linear_miplinear
+func (r *RawTexture) SetNEAREST_LINEAR_MIPLINEAR(NEAREST_LINEAR_MIPLINEAR float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(NEAREST_LINEAR_MIPLINEAR)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_LINEAR_MIPNEAREST returns the NEAREST_LINEAR_MIPNEAREST property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#nearest_linear_mipnearest
+func (r *RawTexture) NEAREST_LINEAR_MIPNEAREST(NEAREST_LINEAR_MIPNEAREST float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(NEAREST_LINEAR_MIPNEAREST)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_LINEAR_MIPNEAREST sets the NEAREST_LINEAR_MIPNEAREST property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#nearest_linear_mipnearest
+func (r *RawTexture) SetNEAREST_LINEAR_MIPNEAREST(NEAREST_LINEAR_MIPNEAREST float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(NEAREST_LINEAR_MIPNEAREST)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_NEAREST returns the NEAREST_NEAREST property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#nearest_nearest
+func (r *RawTexture) NEAREST_NEAREST(NEAREST_NEAREST float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(NEAREST_NEAREST)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_NEAREST sets the NEAREST_NEAREST property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#nearest_nearest
+func (r *RawTexture) SetNEAREST_NEAREST(NEAREST_NEAREST float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(NEAREST_NEAREST)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_NEAREST_MIPLINEAR returns the NEAREST_NEAREST_MIPLINEAR property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#nearest_nearest_miplinear
+func (r *RawTexture) NEAREST_NEAREST_MIPLINEAR(NEAREST_NEAREST_MIPLINEAR float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(NEAREST_NEAREST_MIPLINEAR)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_NEAREST_MIPLINEAR sets the NEAREST_NEAREST_MIPLINEAR property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#nearest_nearest_miplinear
+func (r *RawTexture) SetNEAREST_NEAREST_MIPLINEAR(NEAREST_NEAREST_MIPLINEAR float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(NEAREST_NEAREST_MIPLINEAR)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_NEAREST_MIPNEAREST returns the NEAREST_NEAREST_MIPNEAREST property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#nearest_nearest_mipnearest
+func (r *RawTexture) NEAREST_NEAREST_MIPNEAREST(NEAREST_NEAREST_MIPNEAREST float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(NEAREST_NEAREST_MIPNEAREST)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_NEAREST_MIPNEAREST sets the NEAREST_NEAREST_MIPNEAREST property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#nearest_nearest_mipnearest
+func (r *RawTexture) SetNEAREST_NEAREST_MIPNEAREST(NEAREST_NEAREST_MIPNEAREST float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(NEAREST_NEAREST_MIPNEAREST)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_SAMPLINGMODE returns the NEAREST_SAMPLINGMODE property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#nearest_samplingmode
+func (r *RawTexture) NEAREST_SAMPLINGMODE(NEAREST_SAMPLINGMODE float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(NEAREST_SAMPLINGMODE)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_SAMPLINGMODE sets the NEAREST_SAMPLINGMODE property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#nearest_samplingmode
+func (r *RawTexture) SetNEAREST_SAMPLINGMODE(NEAREST_SAMPLINGMODE float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(NEAREST_SAMPLINGMODE)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#name
+func (r *RawTexture) Name(name string) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(name)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#name
+func (r *RawTexture) SetName(name string) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(name)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// NoMipmap returns the NoMipmap property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#nomipmap
+func (r *RawTexture) NoMipmap(noMipmap bool) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(noMipmap)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNoMipmap sets the NoMipmap property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#nomipmap
+func (r *RawTexture) SetNoMipmap(noMipmap bool) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(noMipmap)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// OnDispose returns the OnDispose property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#ondispose
+func (r *RawTexture) OnDispose(onDispose func()) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(onDispose)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnDispose sets the OnDispose property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#ondispose
+func (r *RawTexture) SetOnDispose(onDispose func()) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(onDispose)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// OnDisposeObservable returns the OnDisposeObservable property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#ondisposeobservable
+func (r *RawTexture) OnDisposeObservable(onDisposeObservable *Observable) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(onDisposeObservable.JSObject())
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnDisposeObservable sets the OnDisposeObservable property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#ondisposeobservable
+func (r *RawTexture) SetOnDisposeObservable(onDisposeObservable *Observable) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(onDisposeObservable.JSObject())
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// OnLoadObservable returns the OnLoadObservable property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#onloadobservable
+func (r *RawTexture) OnLoadObservable(onLoadObservable *Observable) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(onLoadObservable.JSObject())
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnLoadObservable sets the OnLoadObservable property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#onloadobservable
+func (r *RawTexture) SetOnLoadObservable(onLoadObservable *Observable) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(onLoadObservable.JSObject())
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// PLANAR_MODE returns the PLANAR_MODE property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#planar_mode
+func (r *RawTexture) PLANAR_MODE(PLANAR_MODE float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(PLANAR_MODE)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetPLANAR_MODE sets the PLANAR_MODE property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#planar_mode
+func (r *RawTexture) SetPLANAR_MODE(PLANAR_MODE float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(PLANAR_MODE)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// PROJECTION_MODE returns the PROJECTION_MODE property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#projection_mode
+func (r *RawTexture) PROJECTION_MODE(PROJECTION_MODE float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(PROJECTION_MODE)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetPROJECTION_MODE sets the PROJECTION_MODE property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#projection_mode
+func (r *RawTexture) SetPROJECTION_MODE(PROJECTION_MODE float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(PROJECTION_MODE)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// ReservedDataStore returns the ReservedDataStore property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#reserveddatastore
+func (r *RawTexture) ReservedDataStore(reservedDataStore interface{}) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(reservedDataStore)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetReservedDataStore sets the ReservedDataStore property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#reserveddatastore
+func (r *RawTexture) SetReservedDataStore(reservedDataStore interface{}) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(reservedDataStore)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SKYBOX_MODE returns the SKYBOX_MODE property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#skybox_mode
+func (r *RawTexture) SKYBOX_MODE(SKYBOX_MODE float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(SKYBOX_MODE)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetSKYBOX_MODE sets the SKYBOX_MODE property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#skybox_mode
+func (r *RawTexture) SetSKYBOX_MODE(SKYBOX_MODE float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(SKYBOX_MODE)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SPHERICAL_MODE returns the SPHERICAL_MODE property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#spherical_mode
+func (r *RawTexture) SPHERICAL_MODE(SPHERICAL_MODE float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(SPHERICAL_MODE)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetSPHERICAL_MODE sets the SPHERICAL_MODE property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#spherical_mode
+func (r *RawTexture) SetSPHERICAL_MODE(SPHERICAL_MODE float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(SPHERICAL_MODE)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SamplingMode returns the SamplingMode property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#samplingmode
+func (r *RawTexture) SamplingMode(samplingMode float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(samplingMode)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetSamplingMode sets the SamplingMode property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#samplingmode
+func (r *RawTexture) SetSamplingMode(samplingMode float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(samplingMode)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SerializeBuffers returns the SerializeBuffers property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#serializebuffers
+func (r *RawTexture) SerializeBuffers(SerializeBuffers bool) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(SerializeBuffers)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetSerializeBuffers sets the SerializeBuffers property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#serializebuffers
+func (r *RawTexture) SetSerializeBuffers(SerializeBuffers bool) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(SerializeBuffers)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// TRILINEAR_SAMPLINGMODE returns the TRILINEAR_SAMPLINGMODE property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#trilinear_samplingmode
+func (r *RawTexture) TRILINEAR_SAMPLINGMODE(TRILINEAR_SAMPLINGMODE float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(TRILINEAR_SAMPLINGMODE)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetTRILINEAR_SAMPLINGMODE sets the TRILINEAR_SAMPLINGMODE property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#trilinear_samplingmode
+func (r *RawTexture) SetTRILINEAR_SAMPLINGMODE(TRILINEAR_SAMPLINGMODE float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(TRILINEAR_SAMPLINGMODE)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// TextureFormat returns the TextureFormat property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#textureformat
+func (r *RawTexture) TextureFormat(textureFormat float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(textureFormat)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetTextureFormat sets the TextureFormat property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#textureformat
+func (r *RawTexture) SetTextureFormat(textureFormat float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(textureFormat)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// TextureType returns the TextureType property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#texturetype
+func (r *RawTexture) TextureType(textureType float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(textureType)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetTextureType sets the TextureType property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#texturetype
+func (r *RawTexture) SetTextureType(textureType float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(textureType)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// UAng returns the UAng property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#uang
+func (r *RawTexture) UAng(uAng float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(uAng)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUAng sets the UAng property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#uang
+func (r *RawTexture) SetUAng(uAng float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(uAng)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// UOffset returns the UOffset property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#uoffset
+func (r *RawTexture) UOffset(uOffset float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(uOffset)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUOffset sets the UOffset property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#uoffset
+func (r *RawTexture) SetUOffset(uOffset float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(uOffset)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// URotationCenter returns the URotationCenter property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#urotationcenter
+func (r *RawTexture) URotationCenter(uRotationCenter float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(uRotationCenter)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetURotationCenter sets the URotationCenter property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#urotationcenter
+func (r *RawTexture) SetURotationCenter(uRotationCenter float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(uRotationCenter)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// UScale returns the UScale property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#uscale
+func (r *RawTexture) UScale(uScale float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(uScale)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUScale sets the UScale property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#uscale
+func (r *RawTexture) SetUScale(uScale float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(uScale)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// Uid returns the Uid property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#uid
+func (r *RawTexture) Uid(uid string) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(uid)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUid sets the Uid property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#uid
+func (r *RawTexture) SetUid(uid string) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(uid)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#uniqueid
+func (r *RawTexture) UniqueId(uniqueId float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(uniqueId)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#uniqueid
+func (r *RawTexture) SetUniqueId(uniqueId float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(uniqueId)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// Url returns the Url property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#url
+func (r *RawTexture) Url(url string) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(url)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUrl sets the Url property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#url
+func (r *RawTexture) SetUrl(url string) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(url)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// UseSerializedUrlIfAny returns the UseSerializedUrlIfAny property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#useserializedurlifany
+func (r *RawTexture) UseSerializedUrlIfAny(UseSerializedUrlIfAny bool) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(UseSerializedUrlIfAny)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUseSerializedUrlIfAny sets the UseSerializedUrlIfAny property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#useserializedurlifany
+func (r *RawTexture) SetUseSerializedUrlIfAny(UseSerializedUrlIfAny bool) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(UseSerializedUrlIfAny)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// VAng returns the VAng property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#vang
+func (r *RawTexture) VAng(vAng float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(vAng)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetVAng sets the VAng property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#vang
+func (r *RawTexture) SetVAng(vAng float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(vAng)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// VOffset returns the VOffset property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#voffset
+func (r *RawTexture) VOffset(vOffset float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(vOffset)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetVOffset sets the VOffset property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#voffset
+func (r *RawTexture) SetVOffset(vOffset float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(vOffset)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// VRotationCenter returns the VRotationCenter property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#vrotationcenter
+func (r *RawTexture) VRotationCenter(vRotationCenter float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(vRotationCenter)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetVRotationCenter sets the VRotationCenter property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#vrotationcenter
+func (r *RawTexture) SetVRotationCenter(vRotationCenter float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(vRotationCenter)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// VScale returns the VScale property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#vscale
+func (r *RawTexture) VScale(vScale float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(vScale)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetVScale sets the VScale property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#vscale
+func (r *RawTexture) SetVScale(vScale float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(vScale)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// WAng returns the WAng property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#wang
+func (r *RawTexture) WAng(wAng float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(wAng)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWAng sets the WAng property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#wang
+func (r *RawTexture) SetWAng(wAng float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(wAng)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// WRAP_ADDRESSMODE returns the WRAP_ADDRESSMODE property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#wrap_addressmode
+func (r *RawTexture) WRAP_ADDRESSMODE(WRAP_ADDRESSMODE float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(WRAP_ADDRESSMODE)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWRAP_ADDRESSMODE sets the WRAP_ADDRESSMODE property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#wrap_addressmode
+func (r *RawTexture) SetWRAP_ADDRESSMODE(WRAP_ADDRESSMODE float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(WRAP_ADDRESSMODE)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// WRotationCenter returns the WRotationCenter property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#wrotationcenter
+func (r *RawTexture) WRotationCenter(wRotationCenter float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(wRotationCenter)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWRotationCenter sets the WRotationCenter property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#wrotationcenter
+func (r *RawTexture) SetWRotationCenter(wRotationCenter float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(wRotationCenter)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// WrapR returns the WrapR property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#wrapr
+func (r *RawTexture) WrapR(wrapR float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(wrapR)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWrapR sets the WrapR property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#wrapr
+func (r *RawTexture) SetWrapR(wrapR float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(wrapR)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// WrapU returns the WrapU property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#wrapu
+func (r *RawTexture) WrapU(wrapU float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(wrapU)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWrapU sets the WrapU property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#wrapu
+func (r *RawTexture) SetWrapU(wrapU float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(wrapU)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// WrapV returns the WrapV property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#wrapv
+func (r *RawTexture) WrapV(wrapV float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(wrapV)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWrapV sets the WrapV property of class RawTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rawtexture#wrapv
+func (r *RawTexture) SetWrapV(wrapV float64) *RawTexture {
+	p := ba.ctx.Get("RawTexture").New(wrapV)
+	return RawTextureFromJSObject(p, ba.ctx)
+}
+
+*/

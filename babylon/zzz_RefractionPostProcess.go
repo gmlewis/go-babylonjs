@@ -31,11 +31,9 @@ func RefractionPostProcessFromJSObject(p js.Value, ctx js.Value) *RefractionPost
 
 // NewRefractionPostProcessOpts contains optional parameters for NewRefractionPostProcess.
 type NewRefractionPostProcessOpts struct {
-	SamplingMode *JSFloat64
-
-	Engine *Engine
-
-	Reusable *JSBool
+	SamplingMode *float64
+	Engine       *Engine
+	Reusable     *bool
 }
 
 // NewRefractionPostProcess returns a new RefractionPostProcess object.
@@ -46,8 +44,816 @@ func (ba *Babylon) NewRefractionPostProcess(name string, refractionTextureUrl st
 		opts = &NewRefractionPostProcessOpts{}
 	}
 
-	p := ba.ctx.Get("RefractionPostProcess").New(name, refractionTextureUrl, color.JSObject(), depth, colorLevel, options, camera.JSObject(), opts.SamplingMode.JSObject(), opts.Engine.JSObject(), opts.Reusable.JSObject())
+	args := make([]interface{}, 0, 7+3)
+
+	args = append(args, name)
+	args = append(args, refractionTextureUrl)
+	args = append(args, color.JSObject())
+	args = append(args, depth)
+	args = append(args, colorLevel)
+	args = append(args, options)
+	args = append(args, camera.JSObject())
+
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+	if opts.Engine == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Engine.JSObject())
+	}
+	if opts.Reusable == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Reusable)
+	}
+
+	p := ba.ctx.Get("RefractionPostProcess").New(args...)
 	return RefractionPostProcessFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// RefractionPostProcessActivateOpts contains optional parameters for RefractionPostProcess.Activate.
+type RefractionPostProcessActivateOpts struct {
+	SourceTexture     *InternalTexture
+	ForceDepthStencil *bool
+}
+
+// Activate calls the Activate method on the RefractionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#activate
+func (r *RefractionPostProcess) Activate(camera *Camera, opts *RefractionPostProcessActivateOpts) *InternalTexture {
+	if opts == nil {
+		opts = &RefractionPostProcessActivateOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, camera.JSObject())
+
+	if opts.SourceTexture == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.SourceTexture.JSObject())
+	}
+	if opts.ForceDepthStencil == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceDepthStencil)
+	}
+
+	retVal := r.p.Call("activate", args...)
+	return InternalTextureFromJSObject(retVal, r.ctx)
+}
+
+// Apply calls the Apply method on the RefractionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#apply
+func (r *RefractionPostProcess) Apply() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("apply", args...)
+	return EffectFromJSObject(retVal, r.ctx)
+}
+
+// Dispose calls the Dispose method on the RefractionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#dispose
+func (r *RefractionPostProcess) Dispose(camera *Camera) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, camera.JSObject())
+
+	r.p.Call("dispose", args...)
+}
+
+// GetCamera calls the GetCamera method on the RefractionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#getcamera
+func (r *RefractionPostProcess) GetCamera() *Camera {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("getCamera", args...)
+	return CameraFromJSObject(retVal, r.ctx)
+}
+
+// GetClassName calls the GetClassName method on the RefractionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#getclassname
+func (r *RefractionPostProcess) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetEffect calls the GetEffect method on the RefractionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#geteffect
+func (r *RefractionPostProcess) GetEffect() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("getEffect", args...)
+	return EffectFromJSObject(retVal, r.ctx)
+}
+
+// GetEffectName calls the GetEffectName method on the RefractionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#geteffectname
+func (r *RefractionPostProcess) GetEffectName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("getEffectName", args...)
+	return retVal.String()
+}
+
+// GetEngine calls the GetEngine method on the RefractionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#getengine
+func (r *RefractionPostProcess) GetEngine() *Engine {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("getEngine", args...)
+	return EngineFromJSObject(retVal, r.ctx)
+}
+
+// IsReady calls the IsReady method on the RefractionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#isready
+func (r *RefractionPostProcess) IsReady() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// IsReusable calls the IsReusable method on the RefractionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#isreusable
+func (r *RefractionPostProcess) IsReusable() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("isReusable", args...)
+	return retVal.Bool()
+}
+
+// MarkTextureDirty calls the MarkTextureDirty method on the RefractionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#marktexturedirty
+func (r *RefractionPostProcess) MarkTextureDirty() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	r.p.Call("markTextureDirty", args...)
+}
+
+// ShareOutputWith calls the ShareOutputWith method on the RefractionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#shareoutputwith
+func (r *RefractionPostProcess) ShareOutputWith(postProcess *PostProcess) *PostProcess {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, postProcess.JSObject())
+
+	retVal := r.p.Call("shareOutputWith", args...)
+	return PostProcessFromJSObject(retVal, r.ctx)
+}
+
+// RefractionPostProcessUpdateEffectOpts contains optional parameters for RefractionPostProcess.UpdateEffect.
+type RefractionPostProcessUpdateEffectOpts struct {
+	Defines         *string
+	Uniforms        *string
+	Samplers        *string
+	IndexParameters *interface{}
+	OnCompiled      *func()
+	OnError         *func()
+}
+
+// UpdateEffect calls the UpdateEffect method on the RefractionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#updateeffect
+func (r *RefractionPostProcess) UpdateEffect(opts *RefractionPostProcessUpdateEffectOpts) {
+	if opts == nil {
+		opts = &RefractionPostProcessUpdateEffectOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+6)
+
+	if opts.Defines == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Defines)
+	}
+	if opts.Uniforms == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Uniforms)
+	}
+	if opts.Samplers == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Samplers)
+	}
+	if opts.IndexParameters == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.IndexParameters)
+	}
+	if opts.OnCompiled == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnCompiled)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+
+	r.p.Call("updateEffect", args...)
+}
+
+// UseOwnOutput calls the UseOwnOutput method on the RefractionPostProcess object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#useownoutput
+func (r *RefractionPostProcess) UseOwnOutput() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	r.p.Call("useOwnOutput", args...)
+}
+
+/*
+
+// AdaptScaleToCurrentViewport returns the AdaptScaleToCurrentViewport property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#adaptscaletocurrentviewport
+func (r *RefractionPostProcess) AdaptScaleToCurrentViewport(adaptScaleToCurrentViewport bool) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(adaptScaleToCurrentViewport)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAdaptScaleToCurrentViewport sets the AdaptScaleToCurrentViewport property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#adaptscaletocurrentviewport
+func (r *RefractionPostProcess) SetAdaptScaleToCurrentViewport(adaptScaleToCurrentViewport bool) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(adaptScaleToCurrentViewport)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AlphaConstants returns the AlphaConstants property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#alphaconstants
+func (r *RefractionPostProcess) AlphaConstants(alphaConstants *Color4) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(alphaConstants.JSObject())
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaConstants sets the AlphaConstants property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#alphaconstants
+func (r *RefractionPostProcess) SetAlphaConstants(alphaConstants *Color4) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(alphaConstants.JSObject())
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AlphaMode returns the AlphaMode property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#alphamode
+func (r *RefractionPostProcess) AlphaMode(alphaMode float64) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(alphaMode)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaMode sets the AlphaMode property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#alphamode
+func (r *RefractionPostProcess) SetAlphaMode(alphaMode float64) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(alphaMode)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AlwaysForcePOT returns the AlwaysForcePOT property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#alwaysforcepot
+func (r *RefractionPostProcess) AlwaysForcePOT(alwaysForcePOT bool) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(alwaysForcePOT)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAlwaysForcePOT sets the AlwaysForcePOT property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#alwaysforcepot
+func (r *RefractionPostProcess) SetAlwaysForcePOT(alwaysForcePOT bool) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(alwaysForcePOT)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Animations returns the Animations property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#animations
+func (r *RefractionPostProcess) Animations(animations *Animation) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(animations.JSObject())
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#animations
+func (r *RefractionPostProcess) SetAnimations(animations *Animation) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(animations.JSObject())
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AspectRatio returns the AspectRatio property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#aspectratio
+func (r *RefractionPostProcess) AspectRatio(aspectRatio float64) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(aspectRatio)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAspectRatio sets the AspectRatio property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#aspectratio
+func (r *RefractionPostProcess) SetAspectRatio(aspectRatio float64) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(aspectRatio)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// AutoClear returns the AutoClear property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#autoclear
+func (r *RefractionPostProcess) AutoClear(autoClear bool) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(autoClear)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetAutoClear sets the AutoClear property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#autoclear
+func (r *RefractionPostProcess) SetAutoClear(autoClear bool) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(autoClear)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ClearColor returns the ClearColor property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#clearcolor
+func (r *RefractionPostProcess) ClearColor(clearColor *Color4) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(clearColor.JSObject())
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetClearColor sets the ClearColor property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#clearcolor
+func (r *RefractionPostProcess) SetClearColor(clearColor *Color4) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(clearColor.JSObject())
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Color returns the Color property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#color
+func (r *RefractionPostProcess) Color(color *Color3) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(color.JSObject())
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetColor sets the Color property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#color
+func (r *RefractionPostProcess) SetColor(color *Color3) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(color.JSObject())
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ColorLevel returns the ColorLevel property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#colorlevel
+func (r *RefractionPostProcess) ColorLevel(colorLevel float64) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(colorLevel)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetColorLevel sets the ColorLevel property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#colorlevel
+func (r *RefractionPostProcess) SetColorLevel(colorLevel float64) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(colorLevel)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Depth returns the Depth property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#depth
+func (r *RefractionPostProcess) Depth(depth float64) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(depth)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetDepth sets the Depth property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#depth
+func (r *RefractionPostProcess) SetDepth(depth float64) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(depth)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// EnablePixelPerfectMode returns the EnablePixelPerfectMode property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#enablepixelperfectmode
+func (r *RefractionPostProcess) EnablePixelPerfectMode(enablePixelPerfectMode bool) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(enablePixelPerfectMode)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetEnablePixelPerfectMode sets the EnablePixelPerfectMode property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#enablepixelperfectmode
+func (r *RefractionPostProcess) SetEnablePixelPerfectMode(enablePixelPerfectMode bool) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(enablePixelPerfectMode)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ForceFullscreenViewport returns the ForceFullscreenViewport property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#forcefullscreenviewport
+func (r *RefractionPostProcess) ForceFullscreenViewport(forceFullscreenViewport bool) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(forceFullscreenViewport)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetForceFullscreenViewport sets the ForceFullscreenViewport property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#forcefullscreenviewport
+func (r *RefractionPostProcess) SetForceFullscreenViewport(forceFullscreenViewport bool) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(forceFullscreenViewport)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Height returns the Height property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#height
+func (r *RefractionPostProcess) Height(height float64) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(height)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetHeight sets the Height property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#height
+func (r *RefractionPostProcess) SetHeight(height float64) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(height)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// InputTexture returns the InputTexture property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#inputtexture
+func (r *RefractionPostProcess) InputTexture(inputTexture *InternalTexture) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(inputTexture.JSObject())
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetInputTexture sets the InputTexture property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#inputtexture
+func (r *RefractionPostProcess) SetInputTexture(inputTexture *InternalTexture) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(inputTexture.JSObject())
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#inspectablecustomproperties
+func (r *RefractionPostProcess) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(inspectableCustomProperties.JSObject())
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#inspectablecustomproperties
+func (r *RefractionPostProcess) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(inspectableCustomProperties.JSObject())
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// IsSupported returns the IsSupported property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#issupported
+func (r *RefractionPostProcess) IsSupported(isSupported bool) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(isSupported)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetIsSupported sets the IsSupported property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#issupported
+func (r *RefractionPostProcess) SetIsSupported(isSupported bool) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(isSupported)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#name
+func (r *RefractionPostProcess) Name(name string) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(name)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#name
+func (r *RefractionPostProcess) SetName(name string) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(name)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnActivate returns the OnActivate property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#onactivate
+func (r *RefractionPostProcess) OnActivate(onActivate func()) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(onActivate)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnActivate sets the OnActivate property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#onactivate
+func (r *RefractionPostProcess) SetOnActivate(onActivate func()) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(onActivate)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnActivateObservable returns the OnActivateObservable property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#onactivateobservable
+func (r *RefractionPostProcess) OnActivateObservable(onActivateObservable *Observable) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(onActivateObservable.JSObject())
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnActivateObservable sets the OnActivateObservable property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#onactivateobservable
+func (r *RefractionPostProcess) SetOnActivateObservable(onActivateObservable *Observable) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(onActivateObservable.JSObject())
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnAfterRender returns the OnAfterRender property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#onafterrender
+func (r *RefractionPostProcess) OnAfterRender(onAfterRender func()) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(onAfterRender)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterRender sets the OnAfterRender property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#onafterrender
+func (r *RefractionPostProcess) SetOnAfterRender(onAfterRender func()) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(onAfterRender)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnAfterRenderObservable returns the OnAfterRenderObservable property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#onafterrenderobservable
+func (r *RefractionPostProcess) OnAfterRenderObservable(onAfterRenderObservable *Observable) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(onAfterRenderObservable.JSObject())
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterRenderObservable sets the OnAfterRenderObservable property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#onafterrenderobservable
+func (r *RefractionPostProcess) SetOnAfterRenderObservable(onAfterRenderObservable *Observable) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(onAfterRenderObservable.JSObject())
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnApply returns the OnApply property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#onapply
+func (r *RefractionPostProcess) OnApply(onApply func()) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(onApply)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnApply sets the OnApply property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#onapply
+func (r *RefractionPostProcess) SetOnApply(onApply func()) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(onApply)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnApplyObservable returns the OnApplyObservable property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#onapplyobservable
+func (r *RefractionPostProcess) OnApplyObservable(onApplyObservable *Observable) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(onApplyObservable.JSObject())
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnApplyObservable sets the OnApplyObservable property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#onapplyobservable
+func (r *RefractionPostProcess) SetOnApplyObservable(onApplyObservable *Observable) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(onApplyObservable.JSObject())
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeRender returns the OnBeforeRender property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#onbeforerender
+func (r *RefractionPostProcess) OnBeforeRender(onBeforeRender func()) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(onBeforeRender)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeRender sets the OnBeforeRender property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#onbeforerender
+func (r *RefractionPostProcess) SetOnBeforeRender(onBeforeRender func()) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(onBeforeRender)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeRenderObservable returns the OnBeforeRenderObservable property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#onbeforerenderobservable
+func (r *RefractionPostProcess) OnBeforeRenderObservable(onBeforeRenderObservable *Observable) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(onBeforeRenderObservable.JSObject())
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeRenderObservable sets the OnBeforeRenderObservable property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#onbeforerenderobservable
+func (r *RefractionPostProcess) SetOnBeforeRenderObservable(onBeforeRenderObservable *Observable) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(onBeforeRenderObservable.JSObject())
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnSizeChanged returns the OnSizeChanged property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#onsizechanged
+func (r *RefractionPostProcess) OnSizeChanged(onSizeChanged func()) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(onSizeChanged)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnSizeChanged sets the OnSizeChanged property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#onsizechanged
+func (r *RefractionPostProcess) SetOnSizeChanged(onSizeChanged func()) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(onSizeChanged)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// OnSizeChangedObservable returns the OnSizeChangedObservable property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#onsizechangedobservable
+func (r *RefractionPostProcess) OnSizeChangedObservable(onSizeChangedObservable *Observable) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(onSizeChangedObservable.JSObject())
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetOnSizeChangedObservable sets the OnSizeChangedObservable property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#onsizechangedobservable
+func (r *RefractionPostProcess) SetOnSizeChangedObservable(onSizeChangedObservable *Observable) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(onSizeChangedObservable.JSObject())
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// RefractionTexture returns the RefractionTexture property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#refractiontexture
+func (r *RefractionPostProcess) RefractionTexture(refractionTexture *Texture) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(refractionTexture.JSObject())
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetRefractionTexture sets the RefractionTexture property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#refractiontexture
+func (r *RefractionPostProcess) SetRefractionTexture(refractionTexture *Texture) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(refractionTexture.JSObject())
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// RenderTargetSamplingMode returns the RenderTargetSamplingMode property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#rendertargetsamplingmode
+func (r *RefractionPostProcess) RenderTargetSamplingMode(renderTargetSamplingMode float64) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(renderTargetSamplingMode)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetRenderTargetSamplingMode sets the RenderTargetSamplingMode property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#rendertargetsamplingmode
+func (r *RefractionPostProcess) SetRenderTargetSamplingMode(renderTargetSamplingMode float64) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(renderTargetSamplingMode)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Samples returns the Samples property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#samples
+func (r *RefractionPostProcess) Samples(samples float64) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(samples)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetSamples sets the Samples property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#samples
+func (r *RefractionPostProcess) SetSamples(samples float64) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(samples)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// ScaleMode returns the ScaleMode property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#scalemode
+func (r *RefractionPostProcess) ScaleMode(scaleMode float64) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(scaleMode)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetScaleMode sets the ScaleMode property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#scalemode
+func (r *RefractionPostProcess) SetScaleMode(scaleMode float64) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(scaleMode)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// TexelSize returns the TexelSize property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#texelsize
+func (r *RefractionPostProcess) TexelSize(texelSize *Vector2) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(texelSize.JSObject())
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetTexelSize sets the TexelSize property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#texelsize
+func (r *RefractionPostProcess) SetTexelSize(texelSize *Vector2) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(texelSize.JSObject())
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#uniqueid
+func (r *RefractionPostProcess) UniqueId(uniqueId float64) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(uniqueId)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#uniqueid
+func (r *RefractionPostProcess) SetUniqueId(uniqueId float64) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(uniqueId)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// Width returns the Width property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#width
+func (r *RefractionPostProcess) Width(width float64) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(width)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+// SetWidth sets the Width property of class RefractionPostProcess.
+//
+// https://doc.babylonjs.com/api/classes/babylon.refractionpostprocess#width
+func (r *RefractionPostProcess) SetWidth(width float64) *RefractionPostProcess {
+	p := ba.ctx.Get("RefractionPostProcess").New(width)
+	return RefractionPostProcessFromJSObject(p, ba.ctx)
+}
+
+*/

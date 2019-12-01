@@ -29,7 +29,7 @@ func MeshButton3DFromJSObject(p js.Value, ctx js.Value) *MeshButton3D {
 
 // NewMeshButton3DOpts contains optional parameters for NewMeshButton3D.
 type NewMeshButton3DOpts struct {
-	Name *JSString
+	Name *string
 }
 
 // NewMeshButton3D returns a new MeshButton3D object.
@@ -40,8 +40,445 @@ func (ba *Babylon) NewMeshButton3D(mesh *Mesh, opts *NewMeshButton3DOpts) *MeshB
 		opts = &NewMeshButton3DOpts{}
 	}
 
-	p := ba.ctx.Get("MeshButton3D").New(mesh.JSObject(), opts.Name.JSObject())
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, mesh.JSObject())
+
+	if opts.Name == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Name)
+	}
+
+	p := ba.ctx.Get("MeshButton3D").New(args...)
 	return MeshButton3DFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AddBehavior calls the AddBehavior method on the MeshButton3D object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#addbehavior
+func (m *MeshButton3D) AddBehavior(behavior js.Value) *Control3D {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, behavior)
+
+	retVal := m.p.Call("addBehavior", args...)
+	return Control3DFromJSObject(retVal, m.ctx)
+}
+
+// Dispose calls the Dispose method on the MeshButton3D object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#dispose
+func (m *MeshButton3D) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	m.p.Call("dispose", args...)
+}
+
+// GetBehaviorByName calls the GetBehaviorByName method on the MeshButton3D object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#getbehaviorbyname
+func (m *MeshButton3D) GetBehaviorByName(name string) *Control3D {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := m.p.Call("getBehaviorByName", args...)
+	return Control3DFromJSObject(retVal, m.ctx)
+}
+
+// GetClassName calls the GetClassName method on the MeshButton3D object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#getclassname
+func (m *MeshButton3D) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := m.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// LinkToTransformNode calls the LinkToTransformNode method on the MeshButton3D object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#linktotransformnode
+func (m *MeshButton3D) LinkToTransformNode(node *TransformNode) *Control3D {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, node.JSObject())
+
+	retVal := m.p.Call("linkToTransformNode", args...)
+	return Control3DFromJSObject(retVal, m.ctx)
+}
+
+// RemoveBehavior calls the RemoveBehavior method on the MeshButton3D object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#removebehavior
+func (m *MeshButton3D) RemoveBehavior(behavior js.Value) *Control3D {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, behavior)
+
+	retVal := m.p.Call("removeBehavior", args...)
+	return Control3DFromJSObject(retVal, m.ctx)
+}
+
+/*
+
+// Behaviors returns the Behaviors property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#behaviors
+func (m *MeshButton3D) Behaviors(behaviors js.Value) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(behaviors)
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// SetBehaviors sets the Behaviors property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#behaviors
+func (m *MeshButton3D) SetBehaviors(behaviors js.Value) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(behaviors)
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// Content returns the Content property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#content
+func (m *MeshButton3D) Content(content *Control) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(content.JSObject())
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// SetContent sets the Content property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#content
+func (m *MeshButton3D) SetContent(content *Control) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(content.JSObject())
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// ContentResolution returns the ContentResolution property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#contentresolution
+func (m *MeshButton3D) ContentResolution(contentResolution *int) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(contentResolution.JSObject())
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// SetContentResolution sets the ContentResolution property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#contentresolution
+func (m *MeshButton3D) SetContentResolution(contentResolution *int) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(contentResolution.JSObject())
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// ContentScaleRatio returns the ContentScaleRatio property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#contentscaleratio
+func (m *MeshButton3D) ContentScaleRatio(contentScaleRatio float64) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(contentScaleRatio)
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// SetContentScaleRatio sets the ContentScaleRatio property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#contentscaleratio
+func (m *MeshButton3D) SetContentScaleRatio(contentScaleRatio float64) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(contentScaleRatio)
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// IsVisible returns the IsVisible property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#isvisible
+func (m *MeshButton3D) IsVisible(isVisible bool) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(isVisible)
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// SetIsVisible sets the IsVisible property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#isvisible
+func (m *MeshButton3D) SetIsVisible(isVisible bool) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(isVisible)
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// Mesh returns the Mesh property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#mesh
+func (m *MeshButton3D) Mesh(mesh *AbstractMesh) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(mesh.JSObject())
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// SetMesh sets the Mesh property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#mesh
+func (m *MeshButton3D) SetMesh(mesh *AbstractMesh) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(mesh.JSObject())
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#name
+func (m *MeshButton3D) Name(name string) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(name)
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#name
+func (m *MeshButton3D) SetName(name string) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(name)
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// Node returns the Node property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#node
+func (m *MeshButton3D) Node(node *TransformNode) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(node.JSObject())
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// SetNode sets the Node property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#node
+func (m *MeshButton3D) SetNode(node *TransformNode) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(node.JSObject())
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// OnPointerClickObservable returns the OnPointerClickObservable property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#onpointerclickobservable
+func (m *MeshButton3D) OnPointerClickObservable(onPointerClickObservable *Observable) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(onPointerClickObservable.JSObject())
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerClickObservable sets the OnPointerClickObservable property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#onpointerclickobservable
+func (m *MeshButton3D) SetOnPointerClickObservable(onPointerClickObservable *Observable) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(onPointerClickObservable.JSObject())
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// OnPointerDownObservable returns the OnPointerDownObservable property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#onpointerdownobservable
+func (m *MeshButton3D) OnPointerDownObservable(onPointerDownObservable *Observable) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(onPointerDownObservable.JSObject())
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerDownObservable sets the OnPointerDownObservable property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#onpointerdownobservable
+func (m *MeshButton3D) SetOnPointerDownObservable(onPointerDownObservable *Observable) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(onPointerDownObservable.JSObject())
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// OnPointerEnterObservable returns the OnPointerEnterObservable property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#onpointerenterobservable
+func (m *MeshButton3D) OnPointerEnterObservable(onPointerEnterObservable *Observable) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(onPointerEnterObservable.JSObject())
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerEnterObservable sets the OnPointerEnterObservable property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#onpointerenterobservable
+func (m *MeshButton3D) SetOnPointerEnterObservable(onPointerEnterObservable *Observable) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(onPointerEnterObservable.JSObject())
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// OnPointerMoveObservable returns the OnPointerMoveObservable property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#onpointermoveobservable
+func (m *MeshButton3D) OnPointerMoveObservable(onPointerMoveObservable *Observable) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(onPointerMoveObservable.JSObject())
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerMoveObservable sets the OnPointerMoveObservable property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#onpointermoveobservable
+func (m *MeshButton3D) SetOnPointerMoveObservable(onPointerMoveObservable *Observable) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(onPointerMoveObservable.JSObject())
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// OnPointerOutObservable returns the OnPointerOutObservable property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#onpointeroutobservable
+func (m *MeshButton3D) OnPointerOutObservable(onPointerOutObservable *Observable) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(onPointerOutObservable.JSObject())
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerOutObservable sets the OnPointerOutObservable property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#onpointeroutobservable
+func (m *MeshButton3D) SetOnPointerOutObservable(onPointerOutObservable *Observable) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(onPointerOutObservable.JSObject())
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// OnPointerUpObservable returns the OnPointerUpObservable property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#onpointerupobservable
+func (m *MeshButton3D) OnPointerUpObservable(onPointerUpObservable *Observable) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(onPointerUpObservable.JSObject())
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerUpObservable sets the OnPointerUpObservable property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#onpointerupobservable
+func (m *MeshButton3D) SetOnPointerUpObservable(onPointerUpObservable *Observable) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(onPointerUpObservable.JSObject())
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// Parent returns the Parent property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#parent
+func (m *MeshButton3D) Parent(parent *Container3D) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(parent.JSObject())
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// SetParent sets the Parent property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#parent
+func (m *MeshButton3D) SetParent(parent *Container3D) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(parent.JSObject())
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// PointerDownAnimation returns the PointerDownAnimation property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#pointerdownanimation
+func (m *MeshButton3D) PointerDownAnimation(pointerDownAnimation func()) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(pointerDownAnimation)
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// SetPointerDownAnimation sets the PointerDownAnimation property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#pointerdownanimation
+func (m *MeshButton3D) SetPointerDownAnimation(pointerDownAnimation func()) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(pointerDownAnimation)
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// PointerEnterAnimation returns the PointerEnterAnimation property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#pointerenteranimation
+func (m *MeshButton3D) PointerEnterAnimation(pointerEnterAnimation func()) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(pointerEnterAnimation)
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// SetPointerEnterAnimation sets the PointerEnterAnimation property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#pointerenteranimation
+func (m *MeshButton3D) SetPointerEnterAnimation(pointerEnterAnimation func()) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(pointerEnterAnimation)
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// PointerOutAnimation returns the PointerOutAnimation property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#pointeroutanimation
+func (m *MeshButton3D) PointerOutAnimation(pointerOutAnimation func()) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(pointerOutAnimation)
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// SetPointerOutAnimation sets the PointerOutAnimation property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#pointeroutanimation
+func (m *MeshButton3D) SetPointerOutAnimation(pointerOutAnimation func()) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(pointerOutAnimation)
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// PointerUpAnimation returns the PointerUpAnimation property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#pointerupanimation
+func (m *MeshButton3D) PointerUpAnimation(pointerUpAnimation func()) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(pointerUpAnimation)
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// SetPointerUpAnimation sets the PointerUpAnimation property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#pointerupanimation
+func (m *MeshButton3D) SetPointerUpAnimation(pointerUpAnimation func()) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(pointerUpAnimation)
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// Position returns the Position property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#position
+func (m *MeshButton3D) Position(position *Vector3) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(position.JSObject())
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// SetPosition sets the Position property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#position
+func (m *MeshButton3D) SetPosition(position *Vector3) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(position.JSObject())
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// Scaling returns the Scaling property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#scaling
+func (m *MeshButton3D) Scaling(scaling *Vector3) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(scaling.JSObject())
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// SetScaling sets the Scaling property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#scaling
+func (m *MeshButton3D) SetScaling(scaling *Vector3) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(scaling.JSObject())
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// TypeName returns the TypeName property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#typename
+func (m *MeshButton3D) TypeName(typeName string) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(typeName)
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+// SetTypeName sets the TypeName property of class MeshButton3D.
+//
+// https://doc.babylonjs.com/api/classes/babylon.meshbutton3d#typename
+func (m *MeshButton3D) SetTypeName(typeName string) *MeshButton3D {
+	p := ba.ctx.Get("MeshButton3D").New(typeName)
+	return MeshButton3DFromJSObject(p, ba.ctx)
+}
+
+*/

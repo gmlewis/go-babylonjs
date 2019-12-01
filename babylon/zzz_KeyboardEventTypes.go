@@ -27,4 +27,38 @@ func KeyboardEventTypesFromJSObject(p js.Value, ctx js.Value) *KeyboardEventType
 	return &KeyboardEventTypes{p: p, ctx: ctx}
 }
 
-// TODO: methods
+/*
+
+// KEYDOWN returns the KEYDOWN property of class KeyboardEventTypes.
+//
+// https://doc.babylonjs.com/api/classes/babylon.keyboardeventtypes#keydown
+func (k *KeyboardEventTypes) KEYDOWN(KEYDOWN float64) *KeyboardEventTypes {
+	p := ba.ctx.Get("KeyboardEventTypes").New(KEYDOWN)
+	return KeyboardEventTypesFromJSObject(p, ba.ctx)
+}
+
+// SetKEYDOWN sets the KEYDOWN property of class KeyboardEventTypes.
+//
+// https://doc.babylonjs.com/api/classes/babylon.keyboardeventtypes#keydown
+func (k *KeyboardEventTypes) SetKEYDOWN(KEYDOWN float64) *KeyboardEventTypes {
+	p := ba.ctx.Get("KeyboardEventTypes").New(KEYDOWN)
+	return KeyboardEventTypesFromJSObject(p, ba.ctx)
+}
+
+// KEYUP returns the KEYUP property of class KeyboardEventTypes.
+//
+// https://doc.babylonjs.com/api/classes/babylon.keyboardeventtypes#keyup
+func (k *KeyboardEventTypes) KEYUP(KEYUP float64) *KeyboardEventTypes {
+	p := ba.ctx.Get("KeyboardEventTypes").New(KEYUP)
+	return KeyboardEventTypesFromJSObject(p, ba.ctx)
+}
+
+// SetKEYUP sets the KEYUP property of class KeyboardEventTypes.
+//
+// https://doc.babylonjs.com/api/classes/babylon.keyboardeventtypes#keyup
+func (k *KeyboardEventTypes) SetKEYUP(KEYUP float64) *KeyboardEventTypes {
+	p := ba.ctx.Get("KeyboardEventTypes").New(KEYUP)
+	return KeyboardEventTypesFromJSObject(p, ba.ctx)
+}
+
+*/

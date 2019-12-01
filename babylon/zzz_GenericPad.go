@@ -31,8 +31,309 @@ func GenericPadFromJSObject(p js.Value, ctx js.Value) *GenericPad {
 //
 // https://doc.babylonjs.com/api/classes/babylon.genericpad
 func (ba *Babylon) NewGenericPad(id string, index float64, browserGamepad interface{}) *GenericPad {
-	p := ba.ctx.Get("GenericPad").New(id, index, browserGamepad)
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, id)
+	args = append(args, index)
+	args = append(args, browserGamepad)
+
+	p := ba.ctx.Get("GenericPad").New(args...)
 	return GenericPadFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Dispose calls the Dispose method on the GenericPad object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.genericpad#dispose
+func (g *GenericPad) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	g.p.Call("dispose", args...)
+}
+
+// Onbuttondown calls the Onbuttondown method on the GenericPad object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.genericpad#onbuttondown
+func (g *GenericPad) Onbuttondown(callback func()) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, callback)
+
+	g.p.Call("onbuttondown", args...)
+}
+
+// Onbuttonup calls the Onbuttonup method on the GenericPad object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.genericpad#onbuttonup
+func (g *GenericPad) Onbuttonup(callback func()) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, callback)
+
+	g.p.Call("onbuttonup", args...)
+}
+
+// Onleftstickchanged calls the Onleftstickchanged method on the GenericPad object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.genericpad#onleftstickchanged
+func (g *GenericPad) Onleftstickchanged(callback func()) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, callback)
+
+	g.p.Call("onleftstickchanged", args...)
+}
+
+// Onrightstickchanged calls the Onrightstickchanged method on the GenericPad object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.genericpad#onrightstickchanged
+func (g *GenericPad) Onrightstickchanged(callback func()) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, callback)
+
+	g.p.Call("onrightstickchanged", args...)
+}
+
+// Update calls the Update method on the GenericPad object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.genericpad#update
+func (g *GenericPad) Update() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	g.p.Call("update", args...)
+}
+
+/*
+
+// BrowserGamepad returns the BrowserGamepad property of class GenericPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.genericpad#browsergamepad
+func (g *GenericPad) BrowserGamepad(browserGamepad interface{}) *GenericPad {
+	p := ba.ctx.Get("GenericPad").New(browserGamepad)
+	return GenericPadFromJSObject(p, ba.ctx)
+}
+
+// SetBrowserGamepad sets the BrowserGamepad property of class GenericPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.genericpad#browsergamepad
+func (g *GenericPad) SetBrowserGamepad(browserGamepad interface{}) *GenericPad {
+	p := ba.ctx.Get("GenericPad").New(browserGamepad)
+	return GenericPadFromJSObject(p, ba.ctx)
+}
+
+// DUALSHOCK returns the DUALSHOCK property of class GenericPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.genericpad#dualshock
+func (g *GenericPad) DUALSHOCK(DUALSHOCK float64) *GenericPad {
+	p := ba.ctx.Get("GenericPad").New(DUALSHOCK)
+	return GenericPadFromJSObject(p, ba.ctx)
+}
+
+// SetDUALSHOCK sets the DUALSHOCK property of class GenericPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.genericpad#dualshock
+func (g *GenericPad) SetDUALSHOCK(DUALSHOCK float64) *GenericPad {
+	p := ba.ctx.Get("GenericPad").New(DUALSHOCK)
+	return GenericPadFromJSObject(p, ba.ctx)
+}
+
+// GAMEPAD returns the GAMEPAD property of class GenericPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.genericpad#gamepad
+func (g *GenericPad) GAMEPAD(GAMEPAD float64) *GenericPad {
+	p := ba.ctx.Get("GenericPad").New(GAMEPAD)
+	return GenericPadFromJSObject(p, ba.ctx)
+}
+
+// SetGAMEPAD sets the GAMEPAD property of class GenericPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.genericpad#gamepad
+func (g *GenericPad) SetGAMEPAD(GAMEPAD float64) *GenericPad {
+	p := ba.ctx.Get("GenericPad").New(GAMEPAD)
+	return GenericPadFromJSObject(p, ba.ctx)
+}
+
+// GENERIC returns the GENERIC property of class GenericPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.genericpad#generic
+func (g *GenericPad) GENERIC(GENERIC float64) *GenericPad {
+	p := ba.ctx.Get("GenericPad").New(GENERIC)
+	return GenericPadFromJSObject(p, ba.ctx)
+}
+
+// SetGENERIC sets the GENERIC property of class GenericPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.genericpad#generic
+func (g *GenericPad) SetGENERIC(GENERIC float64) *GenericPad {
+	p := ba.ctx.Get("GenericPad").New(GENERIC)
+	return GenericPadFromJSObject(p, ba.ctx)
+}
+
+// Id returns the Id property of class GenericPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.genericpad#id
+func (g *GenericPad) Id(id string) *GenericPad {
+	p := ba.ctx.Get("GenericPad").New(id)
+	return GenericPadFromJSObject(p, ba.ctx)
+}
+
+// SetId sets the Id property of class GenericPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.genericpad#id
+func (g *GenericPad) SetId(id string) *GenericPad {
+	p := ba.ctx.Get("GenericPad").New(id)
+	return GenericPadFromJSObject(p, ba.ctx)
+}
+
+// Index returns the Index property of class GenericPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.genericpad#index
+func (g *GenericPad) Index(index float64) *GenericPad {
+	p := ba.ctx.Get("GenericPad").New(index)
+	return GenericPadFromJSObject(p, ba.ctx)
+}
+
+// SetIndex sets the Index property of class GenericPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.genericpad#index
+func (g *GenericPad) SetIndex(index float64) *GenericPad {
+	p := ba.ctx.Get("GenericPad").New(index)
+	return GenericPadFromJSObject(p, ba.ctx)
+}
+
+// IsConnected returns the IsConnected property of class GenericPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.genericpad#isconnected
+func (g *GenericPad) IsConnected(isConnected bool) *GenericPad {
+	p := ba.ctx.Get("GenericPad").New(isConnected)
+	return GenericPadFromJSObject(p, ba.ctx)
+}
+
+// SetIsConnected sets the IsConnected property of class GenericPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.genericpad#isconnected
+func (g *GenericPad) SetIsConnected(isConnected bool) *GenericPad {
+	p := ba.ctx.Get("GenericPad").New(isConnected)
+	return GenericPadFromJSObject(p, ba.ctx)
+}
+
+// LeftStick returns the LeftStick property of class GenericPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.genericpad#leftstick
+func (g *GenericPad) LeftStick(leftStick *StickValues) *GenericPad {
+	p := ba.ctx.Get("GenericPad").New(leftStick.JSObject())
+	return GenericPadFromJSObject(p, ba.ctx)
+}
+
+// SetLeftStick sets the LeftStick property of class GenericPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.genericpad#leftstick
+func (g *GenericPad) SetLeftStick(leftStick *StickValues) *GenericPad {
+	p := ba.ctx.Get("GenericPad").New(leftStick.JSObject())
+	return GenericPadFromJSObject(p, ba.ctx)
+}
+
+// OnButtonDownObservable returns the OnButtonDownObservable property of class GenericPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.genericpad#onbuttondownobservable
+func (g *GenericPad) OnButtonDownObservable(onButtonDownObservable *Observable) *GenericPad {
+	p := ba.ctx.Get("GenericPad").New(onButtonDownObservable.JSObject())
+	return GenericPadFromJSObject(p, ba.ctx)
+}
+
+// SetOnButtonDownObservable sets the OnButtonDownObservable property of class GenericPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.genericpad#onbuttondownobservable
+func (g *GenericPad) SetOnButtonDownObservable(onButtonDownObservable *Observable) *GenericPad {
+	p := ba.ctx.Get("GenericPad").New(onButtonDownObservable.JSObject())
+	return GenericPadFromJSObject(p, ba.ctx)
+}
+
+// OnButtonUpObservable returns the OnButtonUpObservable property of class GenericPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.genericpad#onbuttonupobservable
+func (g *GenericPad) OnButtonUpObservable(onButtonUpObservable *Observable) *GenericPad {
+	p := ba.ctx.Get("GenericPad").New(onButtonUpObservable.JSObject())
+	return GenericPadFromJSObject(p, ba.ctx)
+}
+
+// SetOnButtonUpObservable sets the OnButtonUpObservable property of class GenericPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.genericpad#onbuttonupobservable
+func (g *GenericPad) SetOnButtonUpObservable(onButtonUpObservable *Observable) *GenericPad {
+	p := ba.ctx.Get("GenericPad").New(onButtonUpObservable.JSObject())
+	return GenericPadFromJSObject(p, ba.ctx)
+}
+
+// POSE_ENABLED returns the POSE_ENABLED property of class GenericPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.genericpad#pose_enabled
+func (g *GenericPad) POSE_ENABLED(POSE_ENABLED float64) *GenericPad {
+	p := ba.ctx.Get("GenericPad").New(POSE_ENABLED)
+	return GenericPadFromJSObject(p, ba.ctx)
+}
+
+// SetPOSE_ENABLED sets the POSE_ENABLED property of class GenericPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.genericpad#pose_enabled
+func (g *GenericPad) SetPOSE_ENABLED(POSE_ENABLED float64) *GenericPad {
+	p := ba.ctx.Get("GenericPad").New(POSE_ENABLED)
+	return GenericPadFromJSObject(p, ba.ctx)
+}
+
+// RightStick returns the RightStick property of class GenericPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.genericpad#rightstick
+func (g *GenericPad) RightStick(rightStick *StickValues) *GenericPad {
+	p := ba.ctx.Get("GenericPad").New(rightStick.JSObject())
+	return GenericPadFromJSObject(p, ba.ctx)
+}
+
+// SetRightStick sets the RightStick property of class GenericPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.genericpad#rightstick
+func (g *GenericPad) SetRightStick(rightStick *StickValues) *GenericPad {
+	p := ba.ctx.Get("GenericPad").New(rightStick.JSObject())
+	return GenericPadFromJSObject(p, ba.ctx)
+}
+
+// Type returns the Type property of class GenericPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.genericpad#type
+func (g *GenericPad) Type(jsType float64) *GenericPad {
+	p := ba.ctx.Get("GenericPad").New(jsType)
+	return GenericPadFromJSObject(p, ba.ctx)
+}
+
+// SetType sets the Type property of class GenericPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.genericpad#type
+func (g *GenericPad) SetType(jsType float64) *GenericPad {
+	p := ba.ctx.Get("GenericPad").New(jsType)
+	return GenericPadFromJSObject(p, ba.ctx)
+}
+
+// XBOX returns the XBOX property of class GenericPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.genericpad#xbox
+func (g *GenericPad) XBOX(XBOX float64) *GenericPad {
+	p := ba.ctx.Get("GenericPad").New(XBOX)
+	return GenericPadFromJSObject(p, ba.ctx)
+}
+
+// SetXBOX sets the XBOX property of class GenericPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.genericpad#xbox
+func (g *GenericPad) SetXBOX(XBOX float64) *GenericPad {
+	p := ba.ctx.Get("GenericPad").New(XBOX)
+	return GenericPadFromJSObject(p, ba.ctx)
+}
+
+*/

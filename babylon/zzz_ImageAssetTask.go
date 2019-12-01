@@ -31,8 +31,182 @@ func ImageAssetTaskFromJSObject(p js.Value, ctx js.Value) *ImageAssetTask {
 //
 // https://doc.babylonjs.com/api/classes/babylon.imageassettask
 func (ba *Babylon) NewImageAssetTask(name string, url string) *ImageAssetTask {
-	p := ba.ctx.Get("ImageAssetTask").New(name, url)
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, url)
+
+	p := ba.ctx.Get("ImageAssetTask").New(args...)
 	return ImageAssetTaskFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Reset calls the Reset method on the ImageAssetTask object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageassettask#reset
+func (i *ImageAssetTask) Reset() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	i.p.Call("reset", args...)
+}
+
+// Run calls the Run method on the ImageAssetTask object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageassettask#run
+func (i *ImageAssetTask) Run(scene *Scene, onSuccess func(), onError func()) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, scene.JSObject())
+	args = append(args, onSuccess)
+	args = append(args, onError)
+
+	i.p.Call("run", args...)
+}
+
+// RunTask calls the RunTask method on the ImageAssetTask object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageassettask#runtask
+func (i *ImageAssetTask) RunTask(scene *Scene, onSuccess func(), onError func()) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, scene.JSObject())
+	args = append(args, onSuccess)
+	args = append(args, onError)
+
+	i.p.Call("runTask", args...)
+}
+
+/*
+
+// ErrorObject returns the ErrorObject property of class ImageAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageassettask#errorobject
+func (i *ImageAssetTask) ErrorObject(errorObject js.Value) *ImageAssetTask {
+	p := ba.ctx.Get("ImageAssetTask").New(errorObject)
+	return ImageAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// SetErrorObject sets the ErrorObject property of class ImageAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageassettask#errorobject
+func (i *ImageAssetTask) SetErrorObject(errorObject js.Value) *ImageAssetTask {
+	p := ba.ctx.Get("ImageAssetTask").New(errorObject)
+	return ImageAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// Image returns the Image property of class ImageAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageassettask#image
+func (i *ImageAssetTask) Image(image js.Value) *ImageAssetTask {
+	p := ba.ctx.Get("ImageAssetTask").New(image)
+	return ImageAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// SetImage sets the Image property of class ImageAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageassettask#image
+func (i *ImageAssetTask) SetImage(image js.Value) *ImageAssetTask {
+	p := ba.ctx.Get("ImageAssetTask").New(image)
+	return ImageAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// IsCompleted returns the IsCompleted property of class ImageAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageassettask#iscompleted
+func (i *ImageAssetTask) IsCompleted(isCompleted bool) *ImageAssetTask {
+	p := ba.ctx.Get("ImageAssetTask").New(isCompleted)
+	return ImageAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// SetIsCompleted sets the IsCompleted property of class ImageAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageassettask#iscompleted
+func (i *ImageAssetTask) SetIsCompleted(isCompleted bool) *ImageAssetTask {
+	p := ba.ctx.Get("ImageAssetTask").New(isCompleted)
+	return ImageAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class ImageAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageassettask#name
+func (i *ImageAssetTask) Name(name string) *ImageAssetTask {
+	p := ba.ctx.Get("ImageAssetTask").New(name)
+	return ImageAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class ImageAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageassettask#name
+func (i *ImageAssetTask) SetName(name string) *ImageAssetTask {
+	p := ba.ctx.Get("ImageAssetTask").New(name)
+	return ImageAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// OnError returns the OnError property of class ImageAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageassettask#onerror
+func (i *ImageAssetTask) OnError(onError func()) *ImageAssetTask {
+	p := ba.ctx.Get("ImageAssetTask").New(onError)
+	return ImageAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// SetOnError sets the OnError property of class ImageAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageassettask#onerror
+func (i *ImageAssetTask) SetOnError(onError func()) *ImageAssetTask {
+	p := ba.ctx.Get("ImageAssetTask").New(onError)
+	return ImageAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// OnSuccess returns the OnSuccess property of class ImageAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageassettask#onsuccess
+func (i *ImageAssetTask) OnSuccess(onSuccess func()) *ImageAssetTask {
+	p := ba.ctx.Get("ImageAssetTask").New(onSuccess)
+	return ImageAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// SetOnSuccess sets the OnSuccess property of class ImageAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageassettask#onsuccess
+func (i *ImageAssetTask) SetOnSuccess(onSuccess func()) *ImageAssetTask {
+	p := ba.ctx.Get("ImageAssetTask").New(onSuccess)
+	return ImageAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// TaskState returns the TaskState property of class ImageAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageassettask#taskstate
+func (i *ImageAssetTask) TaskState(taskState *AssetTaskState) *ImageAssetTask {
+	p := ba.ctx.Get("ImageAssetTask").New(taskState.JSObject())
+	return ImageAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// SetTaskState sets the TaskState property of class ImageAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageassettask#taskstate
+func (i *ImageAssetTask) SetTaskState(taskState *AssetTaskState) *ImageAssetTask {
+	p := ba.ctx.Get("ImageAssetTask").New(taskState.JSObject())
+	return ImageAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// Url returns the Url property of class ImageAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageassettask#url
+func (i *ImageAssetTask) Url(url string) *ImageAssetTask {
+	p := ba.ctx.Get("ImageAssetTask").New(url)
+	return ImageAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// SetUrl sets the Url property of class ImageAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imageassettask#url
+func (i *ImageAssetTask) SetUrl(url string) *ImageAssetTask {
+	p := ba.ctx.Get("ImageAssetTask").New(url)
+	return ImageAssetTaskFromJSObject(p, ba.ctx)
+}
+
+*/

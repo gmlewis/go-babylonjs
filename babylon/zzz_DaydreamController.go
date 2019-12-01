@@ -31,8 +31,686 @@ func DaydreamControllerFromJSObject(p js.Value, ctx js.Value) *DaydreamControlle
 //
 // https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller
 func (ba *Babylon) NewDaydreamController(vrGamepad interface{}) *DaydreamController {
-	p := ba.ctx.Get("DaydreamController").New(vrGamepad)
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, vrGamepad)
+
+	p := ba.ctx.Get("DaydreamController").New(args...)
 	return DaydreamControllerFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AttachToMesh calls the AttachToMesh method on the DaydreamController object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#attachtomesh
+func (d *DaydreamController) AttachToMesh(mesh *AbstractMesh) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	d.p.Call("attachToMesh", args...)
+}
+
+// AttachToPoseControlledCamera calls the AttachToPoseControlledCamera method on the DaydreamController object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#attachtoposecontrolledcamera
+func (d *DaydreamController) AttachToPoseControlledCamera(camera *TargetCamera) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, camera.JSObject())
+
+	d.p.Call("attachToPoseControlledCamera", args...)
+}
+
+// Dispose calls the Dispose method on the DaydreamController object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#dispose
+func (d *DaydreamController) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	d.p.Call("dispose", args...)
+}
+
+// DaydreamControllerGetForwardRayOpts contains optional parameters for DaydreamController.GetForwardRay.
+type DaydreamControllerGetForwardRayOpts struct {
+	Length *float64
+}
+
+// GetForwardRay calls the GetForwardRay method on the DaydreamController object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#getforwardray
+func (d *DaydreamController) GetForwardRay(opts *DaydreamControllerGetForwardRayOpts) *Ray {
+	if opts == nil {
+		opts = &DaydreamControllerGetForwardRayOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Length == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Length)
+	}
+
+	retVal := d.p.Call("getForwardRay", args...)
+	return RayFromJSObject(retVal, d.ctx)
+}
+
+// DaydreamControllerInitControllerMeshOpts contains optional parameters for DaydreamController.InitControllerMesh.
+type DaydreamControllerInitControllerMeshOpts struct {
+	MeshLoaded *func()
+}
+
+// InitControllerMesh calls the InitControllerMesh method on the DaydreamController object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#initcontrollermesh
+func (d *DaydreamController) InitControllerMesh(scene *Scene, opts *DaydreamControllerInitControllerMeshOpts) {
+	if opts == nil {
+		opts = &DaydreamControllerInitControllerMeshOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, scene.JSObject())
+
+	if opts.MeshLoaded == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.MeshLoaded)
+	}
+
+	d.p.Call("initControllerMesh", args...)
+}
+
+// OnButtonStateChange calls the OnButtonStateChange method on the DaydreamController object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#onbuttonstatechange
+func (d *DaydreamController) OnButtonStateChange(callback func()) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, callback)
+
+	d.p.Call("onButtonStateChange", args...)
+}
+
+// Onleftstickchanged calls the Onleftstickchanged method on the DaydreamController object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#onleftstickchanged
+func (d *DaydreamController) Onleftstickchanged(callback func()) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, callback)
+
+	d.p.Call("onleftstickchanged", args...)
+}
+
+// Onrightstickchanged calls the Onrightstickchanged method on the DaydreamController object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#onrightstickchanged
+func (d *DaydreamController) Onrightstickchanged(callback func()) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, callback)
+
+	d.p.Call("onrightstickchanged", args...)
+}
+
+// Update calls the Update method on the DaydreamController object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#update
+func (d *DaydreamController) Update() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	d.p.Call("update", args...)
+}
+
+// UpdateFromDevice calls the UpdateFromDevice method on the DaydreamController object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#updatefromdevice
+func (d *DaydreamController) UpdateFromDevice(poseData js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, poseData)
+
+	d.p.Call("updateFromDevice", args...)
+}
+
+/*
+
+// BrowserGamepad returns the BrowserGamepad property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#browsergamepad
+func (d *DaydreamController) BrowserGamepad(browserGamepad interface{}) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(browserGamepad)
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// SetBrowserGamepad sets the BrowserGamepad property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#browsergamepad
+func (d *DaydreamController) SetBrowserGamepad(browserGamepad interface{}) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(browserGamepad)
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// ControllerType returns the ControllerType property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#controllertype
+func (d *DaydreamController) ControllerType(controllerType *PoseEnabledControllerType) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(controllerType.JSObject())
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// SetControllerType sets the ControllerType property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#controllertype
+func (d *DaydreamController) SetControllerType(controllerType *PoseEnabledControllerType) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(controllerType.JSObject())
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// DUALSHOCK returns the DUALSHOCK property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#dualshock
+func (d *DaydreamController) DUALSHOCK(DUALSHOCK float64) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(DUALSHOCK)
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// SetDUALSHOCK sets the DUALSHOCK property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#dualshock
+func (d *DaydreamController) SetDUALSHOCK(DUALSHOCK float64) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(DUALSHOCK)
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// DefaultModel returns the DefaultModel property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#defaultmodel
+func (d *DaydreamController) DefaultModel(defaultModel *AbstractMesh) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(defaultModel.JSObject())
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// SetDefaultModel sets the DefaultModel property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#defaultmodel
+func (d *DaydreamController) SetDefaultModel(defaultModel *AbstractMesh) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(defaultModel.JSObject())
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// DevicePosition returns the DevicePosition property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#deviceposition
+func (d *DaydreamController) DevicePosition(devicePosition *Vector3) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(devicePosition.JSObject())
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// SetDevicePosition sets the DevicePosition property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#deviceposition
+func (d *DaydreamController) SetDevicePosition(devicePosition *Vector3) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(devicePosition.JSObject())
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// DeviceRotationQuaternion returns the DeviceRotationQuaternion property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#devicerotationquaternion
+func (d *DaydreamController) DeviceRotationQuaternion(deviceRotationQuaternion *Quaternion) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(deviceRotationQuaternion.JSObject())
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// SetDeviceRotationQuaternion sets the DeviceRotationQuaternion property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#devicerotationquaternion
+func (d *DaydreamController) SetDeviceRotationQuaternion(deviceRotationQuaternion *Quaternion) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(deviceRotationQuaternion.JSObject())
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// DeviceScaleFactor returns the DeviceScaleFactor property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#devicescalefactor
+func (d *DaydreamController) DeviceScaleFactor(deviceScaleFactor float64) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(deviceScaleFactor)
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// SetDeviceScaleFactor sets the DeviceScaleFactor property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#devicescalefactor
+func (d *DaydreamController) SetDeviceScaleFactor(deviceScaleFactor float64) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(deviceScaleFactor)
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// GAMEPAD returns the GAMEPAD property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#gamepad
+func (d *DaydreamController) GAMEPAD(GAMEPAD float64) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(GAMEPAD)
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// SetGAMEPAD sets the GAMEPAD property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#gamepad
+func (d *DaydreamController) SetGAMEPAD(GAMEPAD float64) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(GAMEPAD)
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// GAMEPAD_ID_PREFIX returns the GAMEPAD_ID_PREFIX property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#gamepad_id_prefix
+func (d *DaydreamController) GAMEPAD_ID_PREFIX(GAMEPAD_ID_PREFIX string) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(GAMEPAD_ID_PREFIX)
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// SetGAMEPAD_ID_PREFIX sets the GAMEPAD_ID_PREFIX property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#gamepad_id_prefix
+func (d *DaydreamController) SetGAMEPAD_ID_PREFIX(GAMEPAD_ID_PREFIX string) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(GAMEPAD_ID_PREFIX)
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// GENERIC returns the GENERIC property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#generic
+func (d *DaydreamController) GENERIC(GENERIC float64) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(GENERIC)
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// SetGENERIC sets the GENERIC property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#generic
+func (d *DaydreamController) SetGENERIC(GENERIC float64) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(GENERIC)
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// Hand returns the Hand property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#hand
+func (d *DaydreamController) Hand(hand string) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(hand)
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// SetHand sets the Hand property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#hand
+func (d *DaydreamController) SetHand(hand string) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(hand)
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// Id returns the Id property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#id
+func (d *DaydreamController) Id(id string) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(id)
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// SetId sets the Id property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#id
+func (d *DaydreamController) SetId(id string) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(id)
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// Index returns the Index property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#index
+func (d *DaydreamController) Index(index float64) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(index)
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// SetIndex sets the Index property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#index
+func (d *DaydreamController) SetIndex(index float64) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(index)
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// IsConnected returns the IsConnected property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#isconnected
+func (d *DaydreamController) IsConnected(isConnected bool) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(isConnected)
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// SetIsConnected sets the IsConnected property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#isconnected
+func (d *DaydreamController) SetIsConnected(isConnected bool) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(isConnected)
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// IsXR returns the IsXR property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#isxr
+func (d *DaydreamController) IsXR(isXR bool) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(isXR)
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// SetIsXR sets the IsXR property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#isxr
+func (d *DaydreamController) SetIsXR(isXR bool) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(isXR)
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// LeftStick returns the LeftStick property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#leftstick
+func (d *DaydreamController) LeftStick(leftStick *StickValues) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(leftStick.JSObject())
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// SetLeftStick sets the LeftStick property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#leftstick
+func (d *DaydreamController) SetLeftStick(leftStick *StickValues) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(leftStick.JSObject())
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// MODEL_BASE_URL returns the MODEL_BASE_URL property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#model_base_url
+func (d *DaydreamController) MODEL_BASE_URL(MODEL_BASE_URL string) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(MODEL_BASE_URL)
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// SetMODEL_BASE_URL sets the MODEL_BASE_URL property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#model_base_url
+func (d *DaydreamController) SetMODEL_BASE_URL(MODEL_BASE_URL string) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(MODEL_BASE_URL)
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// MODEL_FILENAME returns the MODEL_FILENAME property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#model_filename
+func (d *DaydreamController) MODEL_FILENAME(MODEL_FILENAME string) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(MODEL_FILENAME)
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// SetMODEL_FILENAME sets the MODEL_FILENAME property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#model_filename
+func (d *DaydreamController) SetMODEL_FILENAME(MODEL_FILENAME string) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(MODEL_FILENAME)
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// Mesh returns the Mesh property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#mesh
+func (d *DaydreamController) Mesh(mesh *AbstractMesh) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(mesh.JSObject())
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// SetMesh sets the Mesh property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#mesh
+func (d *DaydreamController) SetMesh(mesh *AbstractMesh) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(mesh.JSObject())
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// OnMainButtonStateChangedObservable returns the OnMainButtonStateChangedObservable property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#onmainbuttonstatechangedobservable
+func (d *DaydreamController) OnMainButtonStateChangedObservable(onMainButtonStateChangedObservable *Observable) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(onMainButtonStateChangedObservable.JSObject())
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// SetOnMainButtonStateChangedObservable sets the OnMainButtonStateChangedObservable property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#onmainbuttonstatechangedobservable
+func (d *DaydreamController) SetOnMainButtonStateChangedObservable(onMainButtonStateChangedObservable *Observable) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(onMainButtonStateChangedObservable.JSObject())
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// OnPadStateChangedObservable returns the OnPadStateChangedObservable property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#onpadstatechangedobservable
+func (d *DaydreamController) OnPadStateChangedObservable(onPadStateChangedObservable *Observable) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(onPadStateChangedObservable.JSObject())
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// SetOnPadStateChangedObservable sets the OnPadStateChangedObservable property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#onpadstatechangedobservable
+func (d *DaydreamController) SetOnPadStateChangedObservable(onPadStateChangedObservable *Observable) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(onPadStateChangedObservable.JSObject())
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// OnPadValuesChangedObservable returns the OnPadValuesChangedObservable property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#onpadvalueschangedobservable
+func (d *DaydreamController) OnPadValuesChangedObservable(onPadValuesChangedObservable *Observable) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(onPadValuesChangedObservable.JSObject())
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// SetOnPadValuesChangedObservable sets the OnPadValuesChangedObservable property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#onpadvalueschangedobservable
+func (d *DaydreamController) SetOnPadValuesChangedObservable(onPadValuesChangedObservable *Observable) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(onPadValuesChangedObservable.JSObject())
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// OnSecondaryButtonStateChangedObservable returns the OnSecondaryButtonStateChangedObservable property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#onsecondarybuttonstatechangedobservable
+func (d *DaydreamController) OnSecondaryButtonStateChangedObservable(onSecondaryButtonStateChangedObservable *Observable) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(onSecondaryButtonStateChangedObservable.JSObject())
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// SetOnSecondaryButtonStateChangedObservable sets the OnSecondaryButtonStateChangedObservable property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#onsecondarybuttonstatechangedobservable
+func (d *DaydreamController) SetOnSecondaryButtonStateChangedObservable(onSecondaryButtonStateChangedObservable *Observable) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(onSecondaryButtonStateChangedObservable.JSObject())
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// OnTriggerStateChangedObservable returns the OnTriggerStateChangedObservable property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#ontriggerstatechangedobservable
+func (d *DaydreamController) OnTriggerStateChangedObservable(onTriggerStateChangedObservable *Observable) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(onTriggerStateChangedObservable.JSObject())
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// SetOnTriggerStateChangedObservable sets the OnTriggerStateChangedObservable property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#ontriggerstatechangedobservable
+func (d *DaydreamController) SetOnTriggerStateChangedObservable(onTriggerStateChangedObservable *Observable) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(onTriggerStateChangedObservable.JSObject())
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// POINTING_POSE returns the POINTING_POSE property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#pointing_pose
+func (d *DaydreamController) POINTING_POSE(POINTING_POSE string) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(POINTING_POSE)
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// SetPOINTING_POSE sets the POINTING_POSE property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#pointing_pose
+func (d *DaydreamController) SetPOINTING_POSE(POINTING_POSE string) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(POINTING_POSE)
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// POSE_ENABLED returns the POSE_ENABLED property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#pose_enabled
+func (d *DaydreamController) POSE_ENABLED(POSE_ENABLED float64) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(POSE_ENABLED)
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// SetPOSE_ENABLED sets the POSE_ENABLED property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#pose_enabled
+func (d *DaydreamController) SetPOSE_ENABLED(POSE_ENABLED float64) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(POSE_ENABLED)
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// Pad returns the Pad property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#pad
+func (d *DaydreamController) Pad(pad *StickValues) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(pad.JSObject())
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// SetPad sets the Pad property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#pad
+func (d *DaydreamController) SetPad(pad *StickValues) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(pad.JSObject())
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// Position returns the Position property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#position
+func (d *DaydreamController) Position(position *Vector3) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(position.JSObject())
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// SetPosition sets the Position property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#position
+func (d *DaydreamController) SetPosition(position *Vector3) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(position.JSObject())
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// RawPose returns the RawPose property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#rawpose
+func (d *DaydreamController) RawPose(rawPose js.Value) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(rawPose)
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// SetRawPose sets the RawPose property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#rawpose
+func (d *DaydreamController) SetRawPose(rawPose js.Value) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(rawPose)
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// RightStick returns the RightStick property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#rightstick
+func (d *DaydreamController) RightStick(rightStick *StickValues) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(rightStick.JSObject())
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// SetRightStick sets the RightStick property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#rightstick
+func (d *DaydreamController) SetRightStick(rightStick *StickValues) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(rightStick.JSObject())
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// RotationQuaternion returns the RotationQuaternion property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#rotationquaternion
+func (d *DaydreamController) RotationQuaternion(rotationQuaternion *Quaternion) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(rotationQuaternion.JSObject())
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// SetRotationQuaternion sets the RotationQuaternion property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#rotationquaternion
+func (d *DaydreamController) SetRotationQuaternion(rotationQuaternion *Quaternion) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(rotationQuaternion.JSObject())
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// Type returns the Type property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#type
+func (d *DaydreamController) Type(jsType float64) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(jsType)
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// SetType sets the Type property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#type
+func (d *DaydreamController) SetType(jsType float64) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(jsType)
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// XBOX returns the XBOX property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#xbox
+func (d *DaydreamController) XBOX(XBOX float64) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(XBOX)
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+// SetXBOX sets the XBOX property of class DaydreamController.
+//
+// https://doc.babylonjs.com/api/classes/babylon.daydreamcontroller#xbox
+func (d *DaydreamController) SetXBOX(XBOX float64) *DaydreamController {
+	p := ba.ctx.Get("DaydreamController").New(XBOX)
+	return DaydreamControllerFromJSObject(p, ba.ctx)
+}
+
+*/

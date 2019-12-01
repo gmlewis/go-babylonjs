@@ -27,4 +27,21 @@ func TorusBuilderFromJSObject(p js.Value, ctx js.Value) *TorusBuilder {
 	return &TorusBuilder{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// CreateTorus calls the CreateTorus method on the TorusBuilder object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.torusbuilder#createtorus
+func (t *TorusBuilder) CreateTorus(name string, options js.Value, scene interface{}) *Mesh {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, name)
+	args = append(args, options)
+	args = append(args, scene)
+
+	retVal := t.p.Call("CreateTorus", args...)
+	return MeshFromJSObject(retVal, t.ctx)
+}
+
+/*
+
+ */

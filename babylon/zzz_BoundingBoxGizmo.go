@@ -29,8 +29,7 @@ func BoundingBoxGizmoFromJSObject(p js.Value, ctx js.Value) *BoundingBoxGizmo {
 
 // NewBoundingBoxGizmoOpts contains optional parameters for NewBoundingBoxGizmo.
 type NewBoundingBoxGizmoOpts struct {
-	Color *Color3
-
+	Color      *Color3
 	GizmoLayer *UtilityLayerRenderer
 }
 
@@ -42,8 +41,418 @@ func (ba *Babylon) NewBoundingBoxGizmo(opts *NewBoundingBoxGizmoOpts) *BoundingB
 		opts = &NewBoundingBoxGizmoOpts{}
 	}
 
-	p := ba.ctx.Get("BoundingBoxGizmo").New(opts.Color.JSObject(), opts.GizmoLayer.JSObject())
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.Color == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Color.JSObject())
+	}
+	if opts.GizmoLayer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.GizmoLayer.JSObject())
+	}
+
+	p := ba.ctx.Get("BoundingBoxGizmo").New(args...)
 	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Dispose calls the Dispose method on the BoundingBoxGizmo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#dispose
+func (b *BoundingBoxGizmo) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	b.p.Call("dispose", args...)
+}
+
+// EnableDragBehavior calls the EnableDragBehavior method on the BoundingBoxGizmo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#enabledragbehavior
+func (b *BoundingBoxGizmo) EnableDragBehavior() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	b.p.Call("enableDragBehavior", args...)
+}
+
+// MakeNotPickableAndWrapInBoundingBox calls the MakeNotPickableAndWrapInBoundingBox method on the BoundingBoxGizmo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#makenotpickableandwrapinboundingbox
+func (b *BoundingBoxGizmo) MakeNotPickableAndWrapInBoundingBox(mesh *Mesh) *Mesh {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	retVal := b.p.Call("MakeNotPickableAndWrapInBoundingBox", args...)
+	return MeshFromJSObject(retVal, b.ctx)
+}
+
+// SetColor calls the SetColor method on the BoundingBoxGizmo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#setcolor
+func (b *BoundingBoxGizmo) SetColor(color *Color3) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, color.JSObject())
+
+	b.p.Call("setColor", args...)
+}
+
+// SetCustomMesh calls the SetCustomMesh method on the BoundingBoxGizmo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#setcustommesh
+func (b *BoundingBoxGizmo) SetCustomMesh(mesh *Mesh) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	b.p.Call("setCustomMesh", args...)
+}
+
+// SetEnabledRotationAxis calls the SetEnabledRotationAxis method on the BoundingBoxGizmo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#setenabledrotationaxis
+func (b *BoundingBoxGizmo) SetEnabledRotationAxis(axis string) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, axis)
+
+	b.p.Call("setEnabledRotationAxis", args...)
+}
+
+// SetEnabledScaling calls the SetEnabledScaling method on the BoundingBoxGizmo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#setenabledscaling
+func (b *BoundingBoxGizmo) SetEnabledScaling(enable bool) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, enable)
+
+	b.p.Call("setEnabledScaling", args...)
+}
+
+// UpdateBoundingBox calls the UpdateBoundingBox method on the BoundingBoxGizmo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#updateboundingbox
+func (b *BoundingBoxGizmo) UpdateBoundingBox() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	b.p.Call("updateBoundingBox", args...)
+}
+
+/*
+
+// AttachedMesh returns the AttachedMesh property of class BoundingBoxGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#attachedmesh
+func (b *BoundingBoxGizmo) AttachedMesh(attachedMesh *AbstractMesh) *BoundingBoxGizmo {
+	p := ba.ctx.Get("BoundingBoxGizmo").New(attachedMesh.JSObject())
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetAttachedMesh sets the AttachedMesh property of class BoundingBoxGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#attachedmesh
+func (b *BoundingBoxGizmo) SetAttachedMesh(attachedMesh *AbstractMesh) *BoundingBoxGizmo {
+	p := ba.ctx.Get("BoundingBoxGizmo").New(attachedMesh.JSObject())
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
+}
+
+// FixedDragMeshScreenSize returns the FixedDragMeshScreenSize property of class BoundingBoxGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#fixeddragmeshscreensize
+func (b *BoundingBoxGizmo) FixedDragMeshScreenSize(fixedDragMeshScreenSize bool) *BoundingBoxGizmo {
+	p := ba.ctx.Get("BoundingBoxGizmo").New(fixedDragMeshScreenSize)
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetFixedDragMeshScreenSize sets the FixedDragMeshScreenSize property of class BoundingBoxGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#fixeddragmeshscreensize
+func (b *BoundingBoxGizmo) SetFixedDragMeshScreenSize(fixedDragMeshScreenSize bool) *BoundingBoxGizmo {
+	p := ba.ctx.Get("BoundingBoxGizmo").New(fixedDragMeshScreenSize)
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
+}
+
+// FixedDragMeshScreenSizeDistanceFactor returns the FixedDragMeshScreenSizeDistanceFactor property of class BoundingBoxGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#fixeddragmeshscreensizedistancefactor
+func (b *BoundingBoxGizmo) FixedDragMeshScreenSizeDistanceFactor(fixedDragMeshScreenSizeDistanceFactor float64) *BoundingBoxGizmo {
+	p := ba.ctx.Get("BoundingBoxGizmo").New(fixedDragMeshScreenSizeDistanceFactor)
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetFixedDragMeshScreenSizeDistanceFactor sets the FixedDragMeshScreenSizeDistanceFactor property of class BoundingBoxGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#fixeddragmeshscreensizedistancefactor
+func (b *BoundingBoxGizmo) SetFixedDragMeshScreenSizeDistanceFactor(fixedDragMeshScreenSizeDistanceFactor float64) *BoundingBoxGizmo {
+	p := ba.ctx.Get("BoundingBoxGizmo").New(fixedDragMeshScreenSizeDistanceFactor)
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
+}
+
+// GizmoLayer returns the GizmoLayer property of class BoundingBoxGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#gizmolayer
+func (b *BoundingBoxGizmo) GizmoLayer(gizmoLayer *UtilityLayerRenderer) *BoundingBoxGizmo {
+	p := ba.ctx.Get("BoundingBoxGizmo").New(gizmoLayer.JSObject())
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetGizmoLayer sets the GizmoLayer property of class BoundingBoxGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#gizmolayer
+func (b *BoundingBoxGizmo) SetGizmoLayer(gizmoLayer *UtilityLayerRenderer) *BoundingBoxGizmo {
+	p := ba.ctx.Get("BoundingBoxGizmo").New(gizmoLayer.JSObject())
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
+}
+
+// IgnoreChildren returns the IgnoreChildren property of class BoundingBoxGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#ignorechildren
+func (b *BoundingBoxGizmo) IgnoreChildren(ignoreChildren bool) *BoundingBoxGizmo {
+	p := ba.ctx.Get("BoundingBoxGizmo").New(ignoreChildren)
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetIgnoreChildren sets the IgnoreChildren property of class BoundingBoxGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#ignorechildren
+func (b *BoundingBoxGizmo) SetIgnoreChildren(ignoreChildren bool) *BoundingBoxGizmo {
+	p := ba.ctx.Get("BoundingBoxGizmo").New(ignoreChildren)
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
+}
+
+// IncludeChildPredicate returns the IncludeChildPredicate property of class BoundingBoxGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#includechildpredicate
+func (b *BoundingBoxGizmo) IncludeChildPredicate(includeChildPredicate func()) *BoundingBoxGizmo {
+	p := ba.ctx.Get("BoundingBoxGizmo").New(includeChildPredicate)
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetIncludeChildPredicate sets the IncludeChildPredicate property of class BoundingBoxGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#includechildpredicate
+func (b *BoundingBoxGizmo) SetIncludeChildPredicate(includeChildPredicate func()) *BoundingBoxGizmo {
+	p := ba.ctx.Get("BoundingBoxGizmo").New(includeChildPredicate)
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
+}
+
+// OnDragStartObservable returns the OnDragStartObservable property of class BoundingBoxGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#ondragstartobservable
+func (b *BoundingBoxGizmo) OnDragStartObservable(onDragStartObservable *Observable) *BoundingBoxGizmo {
+	p := ba.ctx.Get("BoundingBoxGizmo").New(onDragStartObservable.JSObject())
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetOnDragStartObservable sets the OnDragStartObservable property of class BoundingBoxGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#ondragstartobservable
+func (b *BoundingBoxGizmo) SetOnDragStartObservable(onDragStartObservable *Observable) *BoundingBoxGizmo {
+	p := ba.ctx.Get("BoundingBoxGizmo").New(onDragStartObservable.JSObject())
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
+}
+
+// OnRotationSphereDragEndObservable returns the OnRotationSphereDragEndObservable property of class BoundingBoxGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#onrotationspheredragendobservable
+func (b *BoundingBoxGizmo) OnRotationSphereDragEndObservable(onRotationSphereDragEndObservable *Observable) *BoundingBoxGizmo {
+	p := ba.ctx.Get("BoundingBoxGizmo").New(onRotationSphereDragEndObservable.JSObject())
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetOnRotationSphereDragEndObservable sets the OnRotationSphereDragEndObservable property of class BoundingBoxGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#onrotationspheredragendobservable
+func (b *BoundingBoxGizmo) SetOnRotationSphereDragEndObservable(onRotationSphereDragEndObservable *Observable) *BoundingBoxGizmo {
+	p := ba.ctx.Get("BoundingBoxGizmo").New(onRotationSphereDragEndObservable.JSObject())
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
+}
+
+// OnRotationSphereDragObservable returns the OnRotationSphereDragObservable property of class BoundingBoxGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#onrotationspheredragobservable
+func (b *BoundingBoxGizmo) OnRotationSphereDragObservable(onRotationSphereDragObservable *Observable) *BoundingBoxGizmo {
+	p := ba.ctx.Get("BoundingBoxGizmo").New(onRotationSphereDragObservable.JSObject())
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetOnRotationSphereDragObservable sets the OnRotationSphereDragObservable property of class BoundingBoxGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#onrotationspheredragobservable
+func (b *BoundingBoxGizmo) SetOnRotationSphereDragObservable(onRotationSphereDragObservable *Observable) *BoundingBoxGizmo {
+	p := ba.ctx.Get("BoundingBoxGizmo").New(onRotationSphereDragObservable.JSObject())
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
+}
+
+// OnScaleBoxDragEndObservable returns the OnScaleBoxDragEndObservable property of class BoundingBoxGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#onscaleboxdragendobservable
+func (b *BoundingBoxGizmo) OnScaleBoxDragEndObservable(onScaleBoxDragEndObservable *Observable) *BoundingBoxGizmo {
+	p := ba.ctx.Get("BoundingBoxGizmo").New(onScaleBoxDragEndObservable.JSObject())
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetOnScaleBoxDragEndObservable sets the OnScaleBoxDragEndObservable property of class BoundingBoxGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#onscaleboxdragendobservable
+func (b *BoundingBoxGizmo) SetOnScaleBoxDragEndObservable(onScaleBoxDragEndObservable *Observable) *BoundingBoxGizmo {
+	p := ba.ctx.Get("BoundingBoxGizmo").New(onScaleBoxDragEndObservable.JSObject())
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
+}
+
+// OnScaleBoxDragObservable returns the OnScaleBoxDragObservable property of class BoundingBoxGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#onscaleboxdragobservable
+func (b *BoundingBoxGizmo) OnScaleBoxDragObservable(onScaleBoxDragObservable *Observable) *BoundingBoxGizmo {
+	p := ba.ctx.Get("BoundingBoxGizmo").New(onScaleBoxDragObservable.JSObject())
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetOnScaleBoxDragObservable sets the OnScaleBoxDragObservable property of class BoundingBoxGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#onscaleboxdragobservable
+func (b *BoundingBoxGizmo) SetOnScaleBoxDragObservable(onScaleBoxDragObservable *Observable) *BoundingBoxGizmo {
+	p := ba.ctx.Get("BoundingBoxGizmo").New(onScaleBoxDragObservable.JSObject())
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
+}
+
+// RotationSphereSize returns the RotationSphereSize property of class BoundingBoxGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#rotationspheresize
+func (b *BoundingBoxGizmo) RotationSphereSize(rotationSphereSize float64) *BoundingBoxGizmo {
+	p := ba.ctx.Get("BoundingBoxGizmo").New(rotationSphereSize)
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetRotationSphereSize sets the RotationSphereSize property of class BoundingBoxGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#rotationspheresize
+func (b *BoundingBoxGizmo) SetRotationSphereSize(rotationSphereSize float64) *BoundingBoxGizmo {
+	p := ba.ctx.Get("BoundingBoxGizmo").New(rotationSphereSize)
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
+}
+
+// ScaleBoxSize returns the ScaleBoxSize property of class BoundingBoxGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#scaleboxsize
+func (b *BoundingBoxGizmo) ScaleBoxSize(scaleBoxSize float64) *BoundingBoxGizmo {
+	p := ba.ctx.Get("BoundingBoxGizmo").New(scaleBoxSize)
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetScaleBoxSize sets the ScaleBoxSize property of class BoundingBoxGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#scaleboxsize
+func (b *BoundingBoxGizmo) SetScaleBoxSize(scaleBoxSize float64) *BoundingBoxGizmo {
+	p := ba.ctx.Get("BoundingBoxGizmo").New(scaleBoxSize)
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
+}
+
+// ScalePivot returns the ScalePivot property of class BoundingBoxGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#scalepivot
+func (b *BoundingBoxGizmo) ScalePivot(scalePivot *Vector3) *BoundingBoxGizmo {
+	p := ba.ctx.Get("BoundingBoxGizmo").New(scalePivot.JSObject())
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetScalePivot sets the ScalePivot property of class BoundingBoxGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#scalepivot
+func (b *BoundingBoxGizmo) SetScalePivot(scalePivot *Vector3) *BoundingBoxGizmo {
+	p := ba.ctx.Get("BoundingBoxGizmo").New(scalePivot.JSObject())
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
+}
+
+// ScaleRatio returns the ScaleRatio property of class BoundingBoxGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#scaleratio
+func (b *BoundingBoxGizmo) ScaleRatio(scaleRatio float64) *BoundingBoxGizmo {
+	p := ba.ctx.Get("BoundingBoxGizmo").New(scaleRatio)
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetScaleRatio sets the ScaleRatio property of class BoundingBoxGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#scaleratio
+func (b *BoundingBoxGizmo) SetScaleRatio(scaleRatio float64) *BoundingBoxGizmo {
+	p := ba.ctx.Get("BoundingBoxGizmo").New(scaleRatio)
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
+}
+
+// UpdateGizmoPositionToMatchAttachedMesh returns the UpdateGizmoPositionToMatchAttachedMesh property of class BoundingBoxGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#updategizmopositiontomatchattachedmesh
+func (b *BoundingBoxGizmo) UpdateGizmoPositionToMatchAttachedMesh(updateGizmoPositionToMatchAttachedMesh bool) *BoundingBoxGizmo {
+	p := ba.ctx.Get("BoundingBoxGizmo").New(updateGizmoPositionToMatchAttachedMesh)
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateGizmoPositionToMatchAttachedMesh sets the UpdateGizmoPositionToMatchAttachedMesh property of class BoundingBoxGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#updategizmopositiontomatchattachedmesh
+func (b *BoundingBoxGizmo) SetUpdateGizmoPositionToMatchAttachedMesh(updateGizmoPositionToMatchAttachedMesh bool) *BoundingBoxGizmo {
+	p := ba.ctx.Get("BoundingBoxGizmo").New(updateGizmoPositionToMatchAttachedMesh)
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
+}
+
+// UpdateGizmoRotationToMatchAttachedMesh returns the UpdateGizmoRotationToMatchAttachedMesh property of class BoundingBoxGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#updategizmorotationtomatchattachedmesh
+func (b *BoundingBoxGizmo) UpdateGizmoRotationToMatchAttachedMesh(updateGizmoRotationToMatchAttachedMesh bool) *BoundingBoxGizmo {
+	p := ba.ctx.Get("BoundingBoxGizmo").New(updateGizmoRotationToMatchAttachedMesh)
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateGizmoRotationToMatchAttachedMesh sets the UpdateGizmoRotationToMatchAttachedMesh property of class BoundingBoxGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#updategizmorotationtomatchattachedmesh
+func (b *BoundingBoxGizmo) SetUpdateGizmoRotationToMatchAttachedMesh(updateGizmoRotationToMatchAttachedMesh bool) *BoundingBoxGizmo {
+	p := ba.ctx.Get("BoundingBoxGizmo").New(updateGizmoRotationToMatchAttachedMesh)
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
+}
+
+// UpdateScale returns the UpdateScale property of class BoundingBoxGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#updatescale
+func (b *BoundingBoxGizmo) UpdateScale(updateScale bool) *BoundingBoxGizmo {
+	p := ba.ctx.Get("BoundingBoxGizmo").New(updateScale)
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateScale sets the UpdateScale property of class BoundingBoxGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#updatescale
+func (b *BoundingBoxGizmo) SetUpdateScale(updateScale bool) *BoundingBoxGizmo {
+	p := ba.ctx.Get("BoundingBoxGizmo").New(updateScale)
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
+}
+
+// _rootMesh returns the _rootMesh property of class BoundingBoxGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#_rootmesh
+func (b *BoundingBoxGizmo) _rootMesh(_rootMesh *Mesh) *BoundingBoxGizmo {
+	p := ba.ctx.Get("BoundingBoxGizmo").New(_rootMesh.JSObject())
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
+}
+
+// Set_rootMesh sets the _rootMesh property of class BoundingBoxGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.boundingboxgizmo#_rootmesh
+func (b *BoundingBoxGizmo) Set_rootMesh(_rootMesh *Mesh) *BoundingBoxGizmo {
+	p := ba.ctx.Get("BoundingBoxGizmo").New(_rootMesh.JSObject())
+	return BoundingBoxGizmoFromJSObject(p, ba.ctx)
+}
+
+*/

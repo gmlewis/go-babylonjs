@@ -31,7 +31,7 @@ func ShadowsOptimizationFromJSObject(p js.Value, ctx js.Value) *ShadowsOptimizat
 
 // NewShadowsOptimizationOpts contains optional parameters for NewShadowsOptimization.
 type NewShadowsOptimizationOpts struct {
-	Priority *JSFloat64
+	Priority *float64
 }
 
 // NewShadowsOptimization returns a new ShadowsOptimization object.
@@ -42,8 +42,59 @@ func (ba *Babylon) NewShadowsOptimization(opts *NewShadowsOptimizationOpts) *Sha
 		opts = &NewShadowsOptimizationOpts{}
 	}
 
-	p := ba.ctx.Get("ShadowsOptimization").New(opts.Priority.JSObject())
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Priority == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Priority)
+	}
+
+	p := ba.ctx.Get("ShadowsOptimization").New(args...)
 	return ShadowsOptimizationFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Apply calls the Apply method on the ShadowsOptimization object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowsoptimization#apply
+func (s *ShadowsOptimization) Apply(scene *Scene, optimizer *SceneOptimizer) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, scene.JSObject())
+	args = append(args, optimizer.JSObject())
+
+	retVal := s.p.Call("apply", args...)
+	return retVal.Bool()
+}
+
+// GetDescription calls the GetDescription method on the ShadowsOptimization object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowsoptimization#getdescription
+func (s *ShadowsOptimization) GetDescription() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getDescription", args...)
+	return retVal.String()
+}
+
+/*
+
+// Priority returns the Priority property of class ShadowsOptimization.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowsoptimization#priority
+func (s *ShadowsOptimization) Priority(priority float64) *ShadowsOptimization {
+	p := ba.ctx.Get("ShadowsOptimization").New(priority)
+	return ShadowsOptimizationFromJSObject(p, ba.ctx)
+}
+
+// SetPriority sets the Priority property of class ShadowsOptimization.
+//
+// https://doc.babylonjs.com/api/classes/babylon.shadowsoptimization#priority
+func (s *ShadowsOptimization) SetPriority(priority float64) *ShadowsOptimization {
+	p := ba.ctx.Get("ShadowsOptimization").New(priority)
+	return ShadowsOptimizationFromJSObject(p, ba.ctx)
+}
+
+*/

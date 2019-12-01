@@ -33,8 +33,1158 @@ func StereoscopicArcRotateCameraFromJSObject(p js.Value, ctx js.Value) *Stereosc
 //
 // https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera
 func (ba *Babylon) NewStereoscopicArcRotateCamera(name string, alpha float64, beta float64, radius float64, target *Vector3, interaxialDistance float64, isStereoscopicSideBySide bool, scene *Scene) *StereoscopicArcRotateCamera {
-	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(name, alpha, beta, radius, target.JSObject(), interaxialDistance, isStereoscopicSideBySide, scene.JSObject())
+
+	args := make([]interface{}, 0, 8+0)
+
+	args = append(args, name)
+	args = append(args, alpha)
+	args = append(args, beta)
+	args = append(args, radius)
+	args = append(args, target.JSObject())
+	args = append(args, interaxialDistance)
+	args = append(args, isStereoscopicSideBySide)
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(args...)
 	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// StereoscopicArcRotateCameraAttachControlOpts contains optional parameters for StereoscopicArcRotateCamera.AttachControl.
+type StereoscopicArcRotateCameraAttachControlOpts struct {
+	NoPreventDefault   *bool
+	UseCtrlForPanning  *bool
+	PanningMouseButton *float64
+}
+
+// AttachControl calls the AttachControl method on the StereoscopicArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#attachcontrol
+func (s *StereoscopicArcRotateCamera) AttachControl(element js.Value, opts *StereoscopicArcRotateCameraAttachControlOpts) {
+	if opts == nil {
+		opts = &StereoscopicArcRotateCameraAttachControlOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, element)
+
+	if opts.NoPreventDefault == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoPreventDefault)
+	}
+	if opts.UseCtrlForPanning == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseCtrlForPanning)
+	}
+	if opts.PanningMouseButton == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.PanningMouseButton)
+	}
+
+	s.p.Call("attachControl", args...)
+}
+
+// CreateRigCamera calls the CreateRigCamera method on the StereoscopicArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#createrigcamera
+func (s *StereoscopicArcRotateCamera) CreateRigCamera(name string, cameraIndex float64) *Camera {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, cameraIndex)
+
+	retVal := s.p.Call("createRigCamera", args...)
+	return CameraFromJSObject(retVal, s.ctx)
+}
+
+// DetachControl calls the DetachControl method on the StereoscopicArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#detachcontrol
+func (s *StereoscopicArcRotateCamera) DetachControl(element js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, element)
+
+	s.p.Call("detachControl", args...)
+}
+
+// Dispose calls the Dispose method on the StereoscopicArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#dispose
+func (s *StereoscopicArcRotateCamera) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("dispose", args...)
+}
+
+// StereoscopicArcRotateCameraFocusOnOpts contains optional parameters for StereoscopicArcRotateCamera.FocusOn.
+type StereoscopicArcRotateCameraFocusOnOpts struct {
+	DoNotUpdateMaxZ *bool
+}
+
+// FocusOn calls the FocusOn method on the StereoscopicArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#focuson
+func (s *StereoscopicArcRotateCamera) FocusOn(meshesOrMinMaxVectorAndDistance *AbstractMesh, opts *StereoscopicArcRotateCameraFocusOnOpts) {
+	if opts == nil {
+		opts = &StereoscopicArcRotateCameraFocusOnOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, meshesOrMinMaxVectorAndDistance.JSObject())
+
+	if opts.DoNotUpdateMaxZ == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DoNotUpdateMaxZ)
+	}
+
+	s.p.Call("focusOn", args...)
+}
+
+// GetClassName calls the GetClassName method on the StereoscopicArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#getclassname
+func (s *StereoscopicArcRotateCamera) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetFrontPosition calls the GetFrontPosition method on the StereoscopicArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#getfrontposition
+func (s *StereoscopicArcRotateCamera) GetFrontPosition(distance float64) *Vector3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, distance)
+
+	retVal := s.p.Call("getFrontPosition", args...)
+	return Vector3FromJSObject(retVal, s.ctx)
+}
+
+// GetTarget calls the GetTarget method on the StereoscopicArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#gettarget
+func (s *StereoscopicArcRotateCamera) GetTarget() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getTarget", args...)
+	return Vector3FromJSObject(retVal, s.ctx)
+}
+
+// RebuildAnglesAndRadius calls the RebuildAnglesAndRadius method on the StereoscopicArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#rebuildanglesandradius
+func (s *StereoscopicArcRotateCamera) RebuildAnglesAndRadius() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("rebuildAnglesAndRadius", args...)
+}
+
+// SetMatUp calls the SetMatUp method on the StereoscopicArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#setmatup
+func (s *StereoscopicArcRotateCamera) SetMatUp() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("setMatUp", args...)
+}
+
+// SetPosition calls the SetPosition method on the StereoscopicArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#setposition
+func (s *StereoscopicArcRotateCamera) SetPosition(position *Vector3) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, position.JSObject())
+
+	s.p.Call("setPosition", args...)
+}
+
+// StereoscopicArcRotateCameraSetTargetOpts contains optional parameters for StereoscopicArcRotateCamera.SetTarget.
+type StereoscopicArcRotateCameraSetTargetOpts struct {
+	ToBoundingCenter  *bool
+	AllowSamePosition *bool
+}
+
+// SetTarget calls the SetTarget method on the StereoscopicArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#settarget
+func (s *StereoscopicArcRotateCamera) SetTarget(target *AbstractMesh, opts *StereoscopicArcRotateCameraSetTargetOpts) {
+	if opts == nil {
+		opts = &StereoscopicArcRotateCameraSetTargetOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, target.JSObject())
+
+	if opts.ToBoundingCenter == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ToBoundingCenter)
+	}
+	if opts.AllowSamePosition == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.AllowSamePosition)
+	}
+
+	s.p.Call("setTarget", args...)
+}
+
+// StoreState calls the StoreState method on the StereoscopicArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#storestate
+func (s *StereoscopicArcRotateCamera) StoreState() *Camera {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("storeState", args...)
+	return CameraFromJSObject(retVal, s.ctx)
+}
+
+// StereoscopicArcRotateCameraZoomOnOpts contains optional parameters for StereoscopicArcRotateCamera.ZoomOn.
+type StereoscopicArcRotateCameraZoomOnOpts struct {
+	Meshes          *AbstractMesh
+	DoNotUpdateMaxZ *bool
+}
+
+// ZoomOn calls the ZoomOn method on the StereoscopicArcRotateCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#zoomon
+func (s *StereoscopicArcRotateCamera) ZoomOn(opts *StereoscopicArcRotateCameraZoomOnOpts) {
+	if opts == nil {
+		opts = &StereoscopicArcRotateCameraZoomOnOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.Meshes == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Meshes.JSObject())
+	}
+	if opts.DoNotUpdateMaxZ == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DoNotUpdateMaxZ)
+	}
+
+	s.p.Call("zoomOn", args...)
+}
+
+/*
+
+// AllowUpsideDown returns the AllowUpsideDown property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#allowupsidedown
+func (s *StereoscopicArcRotateCamera) AllowUpsideDown(allowUpsideDown bool) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(allowUpsideDown)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetAllowUpsideDown sets the AllowUpsideDown property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#allowupsidedown
+func (s *StereoscopicArcRotateCamera) SetAllowUpsideDown(allowUpsideDown bool) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(allowUpsideDown)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// Alpha returns the Alpha property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#alpha
+func (s *StereoscopicArcRotateCamera) Alpha(alpha float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(alpha)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetAlpha sets the Alpha property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#alpha
+func (s *StereoscopicArcRotateCamera) SetAlpha(alpha float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(alpha)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// AngularSensibilityX returns the AngularSensibilityX property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#angularsensibilityx
+func (s *StereoscopicArcRotateCamera) AngularSensibilityX(angularSensibilityX float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(angularSensibilityX)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetAngularSensibilityX sets the AngularSensibilityX property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#angularsensibilityx
+func (s *StereoscopicArcRotateCamera) SetAngularSensibilityX(angularSensibilityX float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(angularSensibilityX)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// AngularSensibilityY returns the AngularSensibilityY property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#angularsensibilityy
+func (s *StereoscopicArcRotateCamera) AngularSensibilityY(angularSensibilityY float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(angularSensibilityY)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetAngularSensibilityY sets the AngularSensibilityY property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#angularsensibilityy
+func (s *StereoscopicArcRotateCamera) SetAngularSensibilityY(angularSensibilityY float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(angularSensibilityY)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// AutoRotationBehavior returns the AutoRotationBehavior property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#autorotationbehavior
+func (s *StereoscopicArcRotateCamera) AutoRotationBehavior(autoRotationBehavior *AutoRotationBehavior) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(autoRotationBehavior.JSObject())
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetAutoRotationBehavior sets the AutoRotationBehavior property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#autorotationbehavior
+func (s *StereoscopicArcRotateCamera) SetAutoRotationBehavior(autoRotationBehavior *AutoRotationBehavior) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(autoRotationBehavior.JSObject())
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// Beta returns the Beta property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#beta
+func (s *StereoscopicArcRotateCamera) Beta(beta float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(beta)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetBeta sets the Beta property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#beta
+func (s *StereoscopicArcRotateCamera) SetBeta(beta float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(beta)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// BouncingBehavior returns the BouncingBehavior property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#bouncingbehavior
+func (s *StereoscopicArcRotateCamera) BouncingBehavior(bouncingBehavior *BouncingBehavior) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(bouncingBehavior.JSObject())
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetBouncingBehavior sets the BouncingBehavior property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#bouncingbehavior
+func (s *StereoscopicArcRotateCamera) SetBouncingBehavior(bouncingBehavior *BouncingBehavior) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(bouncingBehavior.JSObject())
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// CameraDirection returns the CameraDirection property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#cameradirection
+func (s *StereoscopicArcRotateCamera) CameraDirection(cameraDirection *Vector3) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(cameraDirection.JSObject())
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetCameraDirection sets the CameraDirection property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#cameradirection
+func (s *StereoscopicArcRotateCamera) SetCameraDirection(cameraDirection *Vector3) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(cameraDirection.JSObject())
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// CameraRotation returns the CameraRotation property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#camerarotation
+func (s *StereoscopicArcRotateCamera) CameraRotation(cameraRotation *Vector2) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(cameraRotation.JSObject())
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetCameraRotation sets the CameraRotation property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#camerarotation
+func (s *StereoscopicArcRotateCamera) SetCameraRotation(cameraRotation *Vector2) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(cameraRotation.JSObject())
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// CheckCollisions returns the CheckCollisions property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#checkcollisions
+func (s *StereoscopicArcRotateCamera) CheckCollisions(checkCollisions bool) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(checkCollisions)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetCheckCollisions sets the CheckCollisions property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#checkcollisions
+func (s *StereoscopicArcRotateCamera) SetCheckCollisions(checkCollisions bool) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(checkCollisions)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// CollisionRadius returns the CollisionRadius property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#collisionradius
+func (s *StereoscopicArcRotateCamera) CollisionRadius(collisionRadius *Vector3) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(collisionRadius.JSObject())
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetCollisionRadius sets the CollisionRadius property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#collisionradius
+func (s *StereoscopicArcRotateCamera) SetCollisionRadius(collisionRadius *Vector3) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(collisionRadius.JSObject())
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// FramingBehavior returns the FramingBehavior property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#framingbehavior
+func (s *StereoscopicArcRotateCamera) FramingBehavior(framingBehavior *FramingBehavior) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(framingBehavior.JSObject())
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetFramingBehavior sets the FramingBehavior property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#framingbehavior
+func (s *StereoscopicArcRotateCamera) SetFramingBehavior(framingBehavior *FramingBehavior) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(framingBehavior.JSObject())
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// InertialAlphaOffset returns the InertialAlphaOffset property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#inertialalphaoffset
+func (s *StereoscopicArcRotateCamera) InertialAlphaOffset(inertialAlphaOffset float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(inertialAlphaOffset)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetInertialAlphaOffset sets the InertialAlphaOffset property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#inertialalphaoffset
+func (s *StereoscopicArcRotateCamera) SetInertialAlphaOffset(inertialAlphaOffset float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(inertialAlphaOffset)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// InertialBetaOffset returns the InertialBetaOffset property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#inertialbetaoffset
+func (s *StereoscopicArcRotateCamera) InertialBetaOffset(inertialBetaOffset float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(inertialBetaOffset)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetInertialBetaOffset sets the InertialBetaOffset property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#inertialbetaoffset
+func (s *StereoscopicArcRotateCamera) SetInertialBetaOffset(inertialBetaOffset float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(inertialBetaOffset)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// InertialPanningX returns the InertialPanningX property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#inertialpanningx
+func (s *StereoscopicArcRotateCamera) InertialPanningX(inertialPanningX float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(inertialPanningX)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetInertialPanningX sets the InertialPanningX property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#inertialpanningx
+func (s *StereoscopicArcRotateCamera) SetInertialPanningX(inertialPanningX float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(inertialPanningX)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// InertialPanningY returns the InertialPanningY property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#inertialpanningy
+func (s *StereoscopicArcRotateCamera) InertialPanningY(inertialPanningY float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(inertialPanningY)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetInertialPanningY sets the InertialPanningY property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#inertialpanningy
+func (s *StereoscopicArcRotateCamera) SetInertialPanningY(inertialPanningY float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(inertialPanningY)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// InertialRadiusOffset returns the InertialRadiusOffset property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#inertialradiusoffset
+func (s *StereoscopicArcRotateCamera) InertialRadiusOffset(inertialRadiusOffset float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(inertialRadiusOffset)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetInertialRadiusOffset sets the InertialRadiusOffset property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#inertialradiusoffset
+func (s *StereoscopicArcRotateCamera) SetInertialRadiusOffset(inertialRadiusOffset float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(inertialRadiusOffset)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// Inputs returns the Inputs property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#inputs
+func (s *StereoscopicArcRotateCamera) Inputs(inputs *ArcRotateCameraInputsManager) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(inputs.JSObject())
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetInputs sets the Inputs property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#inputs
+func (s *StereoscopicArcRotateCamera) SetInputs(inputs *ArcRotateCameraInputsManager) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(inputs.JSObject())
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// KeysDown returns the KeysDown property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#keysdown
+func (s *StereoscopicArcRotateCamera) KeysDown(keysDown float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(keysDown)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetKeysDown sets the KeysDown property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#keysdown
+func (s *StereoscopicArcRotateCamera) SetKeysDown(keysDown float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(keysDown)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// KeysLeft returns the KeysLeft property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#keysleft
+func (s *StereoscopicArcRotateCamera) KeysLeft(keysLeft float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(keysLeft)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetKeysLeft sets the KeysLeft property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#keysleft
+func (s *StereoscopicArcRotateCamera) SetKeysLeft(keysLeft float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(keysLeft)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// KeysRight returns the KeysRight property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#keysright
+func (s *StereoscopicArcRotateCamera) KeysRight(keysRight float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(keysRight)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetKeysRight sets the KeysRight property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#keysright
+func (s *StereoscopicArcRotateCamera) SetKeysRight(keysRight float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(keysRight)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// KeysUp returns the KeysUp property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#keysup
+func (s *StereoscopicArcRotateCamera) KeysUp(keysUp float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(keysUp)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetKeysUp sets the KeysUp property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#keysup
+func (s *StereoscopicArcRotateCamera) SetKeysUp(keysUp float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(keysUp)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// LockedTarget returns the LockedTarget property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#lockedtarget
+func (s *StereoscopicArcRotateCamera) LockedTarget(lockedTarget interface{}) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(lockedTarget)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetLockedTarget sets the LockedTarget property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#lockedtarget
+func (s *StereoscopicArcRotateCamera) SetLockedTarget(lockedTarget interface{}) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(lockedTarget)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// LowerAlphaLimit returns the LowerAlphaLimit property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#loweralphalimit
+func (s *StereoscopicArcRotateCamera) LowerAlphaLimit(lowerAlphaLimit float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(lowerAlphaLimit)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetLowerAlphaLimit sets the LowerAlphaLimit property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#loweralphalimit
+func (s *StereoscopicArcRotateCamera) SetLowerAlphaLimit(lowerAlphaLimit float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(lowerAlphaLimit)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// LowerBetaLimit returns the LowerBetaLimit property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#lowerbetalimit
+func (s *StereoscopicArcRotateCamera) LowerBetaLimit(lowerBetaLimit float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(lowerBetaLimit)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetLowerBetaLimit sets the LowerBetaLimit property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#lowerbetalimit
+func (s *StereoscopicArcRotateCamera) SetLowerBetaLimit(lowerBetaLimit float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(lowerBetaLimit)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// LowerRadiusLimit returns the LowerRadiusLimit property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#lowerradiuslimit
+func (s *StereoscopicArcRotateCamera) LowerRadiusLimit(lowerRadiusLimit float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(lowerRadiusLimit)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetLowerRadiusLimit sets the LowerRadiusLimit property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#lowerradiuslimit
+func (s *StereoscopicArcRotateCamera) SetLowerRadiusLimit(lowerRadiusLimit float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(lowerRadiusLimit)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// NoRotationConstraint returns the NoRotationConstraint property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#norotationconstraint
+func (s *StereoscopicArcRotateCamera) NoRotationConstraint(noRotationConstraint bool) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(noRotationConstraint)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetNoRotationConstraint sets the NoRotationConstraint property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#norotationconstraint
+func (s *StereoscopicArcRotateCamera) SetNoRotationConstraint(noRotationConstraint bool) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(noRotationConstraint)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// OnCollide returns the OnCollide property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#oncollide
+func (s *StereoscopicArcRotateCamera) OnCollide(onCollide func()) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(onCollide)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetOnCollide sets the OnCollide property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#oncollide
+func (s *StereoscopicArcRotateCamera) SetOnCollide(onCollide func()) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(onCollide)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// OnMeshTargetChangedObservable returns the OnMeshTargetChangedObservable property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#onmeshtargetchangedobservable
+func (s *StereoscopicArcRotateCamera) OnMeshTargetChangedObservable(onMeshTargetChangedObservable *Observable) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(onMeshTargetChangedObservable.JSObject())
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetOnMeshTargetChangedObservable sets the OnMeshTargetChangedObservable property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#onmeshtargetchangedobservable
+func (s *StereoscopicArcRotateCamera) SetOnMeshTargetChangedObservable(onMeshTargetChangedObservable *Observable) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(onMeshTargetChangedObservable.JSObject())
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// PanningAxis returns the PanningAxis property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#panningaxis
+func (s *StereoscopicArcRotateCamera) PanningAxis(panningAxis *Vector3) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(panningAxis.JSObject())
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetPanningAxis sets the PanningAxis property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#panningaxis
+func (s *StereoscopicArcRotateCamera) SetPanningAxis(panningAxis *Vector3) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(panningAxis.JSObject())
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// PanningDistanceLimit returns the PanningDistanceLimit property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#panningdistancelimit
+func (s *StereoscopicArcRotateCamera) PanningDistanceLimit(panningDistanceLimit float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(panningDistanceLimit)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetPanningDistanceLimit sets the PanningDistanceLimit property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#panningdistancelimit
+func (s *StereoscopicArcRotateCamera) SetPanningDistanceLimit(panningDistanceLimit float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(panningDistanceLimit)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// PanningInertia returns the PanningInertia property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#panninginertia
+func (s *StereoscopicArcRotateCamera) PanningInertia(panningInertia float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(panningInertia)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetPanningInertia sets the PanningInertia property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#panninginertia
+func (s *StereoscopicArcRotateCamera) SetPanningInertia(panningInertia float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(panningInertia)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// PanningOriginTarget returns the PanningOriginTarget property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#panningorigintarget
+func (s *StereoscopicArcRotateCamera) PanningOriginTarget(panningOriginTarget *Vector3) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(panningOriginTarget.JSObject())
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetPanningOriginTarget sets the PanningOriginTarget property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#panningorigintarget
+func (s *StereoscopicArcRotateCamera) SetPanningOriginTarget(panningOriginTarget *Vector3) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(panningOriginTarget.JSObject())
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// PanningSensibility returns the PanningSensibility property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#panningsensibility
+func (s *StereoscopicArcRotateCamera) PanningSensibility(panningSensibility float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(panningSensibility)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetPanningSensibility sets the PanningSensibility property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#panningsensibility
+func (s *StereoscopicArcRotateCamera) SetPanningSensibility(panningSensibility float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(panningSensibility)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// PinchDeltaPercentage returns the PinchDeltaPercentage property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#pinchdeltapercentage
+func (s *StereoscopicArcRotateCamera) PinchDeltaPercentage(pinchDeltaPercentage float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(pinchDeltaPercentage)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetPinchDeltaPercentage sets the PinchDeltaPercentage property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#pinchdeltapercentage
+func (s *StereoscopicArcRotateCamera) SetPinchDeltaPercentage(pinchDeltaPercentage float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(pinchDeltaPercentage)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// PinchPrecision returns the PinchPrecision property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#pinchprecision
+func (s *StereoscopicArcRotateCamera) PinchPrecision(pinchPrecision float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(pinchPrecision)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetPinchPrecision sets the PinchPrecision property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#pinchprecision
+func (s *StereoscopicArcRotateCamera) SetPinchPrecision(pinchPrecision float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(pinchPrecision)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// PinchToPanMaxDistance returns the PinchToPanMaxDistance property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#pinchtopanmaxdistance
+func (s *StereoscopicArcRotateCamera) PinchToPanMaxDistance(pinchToPanMaxDistance float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(pinchToPanMaxDistance)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetPinchToPanMaxDistance sets the PinchToPanMaxDistance property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#pinchtopanmaxdistance
+func (s *StereoscopicArcRotateCamera) SetPinchToPanMaxDistance(pinchToPanMaxDistance float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(pinchToPanMaxDistance)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// Position returns the Position property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#position
+func (s *StereoscopicArcRotateCamera) Position(position *Vector3) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(position.JSObject())
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetPosition sets the Position property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#position
+func (s *StereoscopicArcRotateCamera) SetPosition(position *Vector3) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(position.JSObject())
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// Radius returns the Radius property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#radius
+func (s *StereoscopicArcRotateCamera) Radius(radius float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(radius)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetRadius sets the Radius property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#radius
+func (s *StereoscopicArcRotateCamera) SetRadius(radius float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(radius)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// Rotation returns the Rotation property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#rotation
+func (s *StereoscopicArcRotateCamera) Rotation(rotation *Vector3) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(rotation.JSObject())
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetRotation sets the Rotation property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#rotation
+func (s *StereoscopicArcRotateCamera) SetRotation(rotation *Vector3) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(rotation.JSObject())
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// RotationQuaternion returns the RotationQuaternion property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#rotationquaternion
+func (s *StereoscopicArcRotateCamera) RotationQuaternion(rotationQuaternion *Quaternion) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(rotationQuaternion.JSObject())
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetRotationQuaternion sets the RotationQuaternion property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#rotationquaternion
+func (s *StereoscopicArcRotateCamera) SetRotationQuaternion(rotationQuaternion *Quaternion) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(rotationQuaternion.JSObject())
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// Speed returns the Speed property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#speed
+func (s *StereoscopicArcRotateCamera) Speed(speed float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(speed)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetSpeed sets the Speed property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#speed
+func (s *StereoscopicArcRotateCamera) SetSpeed(speed float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(speed)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// Target returns the Target property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#target
+func (s *StereoscopicArcRotateCamera) Target(target *Vector3) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(target.JSObject())
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetTarget sets the Target property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#target
+func (s *StereoscopicArcRotateCamera) SetTarget(target *Vector3) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(target.JSObject())
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// TargetScreenOffset returns the TargetScreenOffset property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#targetscreenoffset
+func (s *StereoscopicArcRotateCamera) TargetScreenOffset(targetScreenOffset *Vector2) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(targetScreenOffset.JSObject())
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetTargetScreenOffset sets the TargetScreenOffset property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#targetscreenoffset
+func (s *StereoscopicArcRotateCamera) SetTargetScreenOffset(targetScreenOffset *Vector2) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(targetScreenOffset.JSObject())
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// UpVector returns the UpVector property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#upvector
+func (s *StereoscopicArcRotateCamera) UpVector(upVector *Vector3) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(upVector.JSObject())
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetUpVector sets the UpVector property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#upvector
+func (s *StereoscopicArcRotateCamera) SetUpVector(upVector *Vector3) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(upVector.JSObject())
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// UpdateUpVectorFromRotation returns the UpdateUpVectorFromRotation property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#updateupvectorfromrotation
+func (s *StereoscopicArcRotateCamera) UpdateUpVectorFromRotation(updateUpVectorFromRotation bool) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(updateUpVectorFromRotation)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateUpVectorFromRotation sets the UpdateUpVectorFromRotation property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#updateupvectorfromrotation
+func (s *StereoscopicArcRotateCamera) SetUpdateUpVectorFromRotation(updateUpVectorFromRotation bool) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(updateUpVectorFromRotation)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// UpperAlphaLimit returns the UpperAlphaLimit property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#upperalphalimit
+func (s *StereoscopicArcRotateCamera) UpperAlphaLimit(upperAlphaLimit float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(upperAlphaLimit)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetUpperAlphaLimit sets the UpperAlphaLimit property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#upperalphalimit
+func (s *StereoscopicArcRotateCamera) SetUpperAlphaLimit(upperAlphaLimit float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(upperAlphaLimit)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// UpperBetaLimit returns the UpperBetaLimit property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#upperbetalimit
+func (s *StereoscopicArcRotateCamera) UpperBetaLimit(upperBetaLimit float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(upperBetaLimit)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetUpperBetaLimit sets the UpperBetaLimit property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#upperbetalimit
+func (s *StereoscopicArcRotateCamera) SetUpperBetaLimit(upperBetaLimit float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(upperBetaLimit)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// UpperRadiusLimit returns the UpperRadiusLimit property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#upperradiuslimit
+func (s *StereoscopicArcRotateCamera) UpperRadiusLimit(upperRadiusLimit float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(upperRadiusLimit)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetUpperRadiusLimit sets the UpperRadiusLimit property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#upperradiuslimit
+func (s *StereoscopicArcRotateCamera) SetUpperRadiusLimit(upperRadiusLimit float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(upperRadiusLimit)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// UseAutoRotationBehavior returns the UseAutoRotationBehavior property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#useautorotationbehavior
+func (s *StereoscopicArcRotateCamera) UseAutoRotationBehavior(useAutoRotationBehavior bool) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(useAutoRotationBehavior)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetUseAutoRotationBehavior sets the UseAutoRotationBehavior property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#useautorotationbehavior
+func (s *StereoscopicArcRotateCamera) SetUseAutoRotationBehavior(useAutoRotationBehavior bool) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(useAutoRotationBehavior)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// UseBouncingBehavior returns the UseBouncingBehavior property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#usebouncingbehavior
+func (s *StereoscopicArcRotateCamera) UseBouncingBehavior(useBouncingBehavior bool) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(useBouncingBehavior)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetUseBouncingBehavior sets the UseBouncingBehavior property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#usebouncingbehavior
+func (s *StereoscopicArcRotateCamera) SetUseBouncingBehavior(useBouncingBehavior bool) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(useBouncingBehavior)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// UseFramingBehavior returns the UseFramingBehavior property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#useframingbehavior
+func (s *StereoscopicArcRotateCamera) UseFramingBehavior(useFramingBehavior bool) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(useFramingBehavior)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetUseFramingBehavior sets the UseFramingBehavior property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#useframingbehavior
+func (s *StereoscopicArcRotateCamera) SetUseFramingBehavior(useFramingBehavior bool) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(useFramingBehavior)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// UseInputToRestoreState returns the UseInputToRestoreState property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#useinputtorestorestate
+func (s *StereoscopicArcRotateCamera) UseInputToRestoreState(useInputToRestoreState bool) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(useInputToRestoreState)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetUseInputToRestoreState sets the UseInputToRestoreState property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#useinputtorestorestate
+func (s *StereoscopicArcRotateCamera) SetUseInputToRestoreState(useInputToRestoreState bool) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(useInputToRestoreState)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// WheelDeltaPercentage returns the WheelDeltaPercentage property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#wheeldeltapercentage
+func (s *StereoscopicArcRotateCamera) WheelDeltaPercentage(wheelDeltaPercentage float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(wheelDeltaPercentage)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetWheelDeltaPercentage sets the WheelDeltaPercentage property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#wheeldeltapercentage
+func (s *StereoscopicArcRotateCamera) SetWheelDeltaPercentage(wheelDeltaPercentage float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(wheelDeltaPercentage)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// WheelPrecision returns the WheelPrecision property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#wheelprecision
+func (s *StereoscopicArcRotateCamera) WheelPrecision(wheelPrecision float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(wheelPrecision)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetWheelPrecision sets the WheelPrecision property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#wheelprecision
+func (s *StereoscopicArcRotateCamera) SetWheelPrecision(wheelPrecision float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(wheelPrecision)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// ZoomOnFactor returns the ZoomOnFactor property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#zoomonfactor
+func (s *StereoscopicArcRotateCamera) ZoomOnFactor(zoomOnFactor float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(zoomOnFactor)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+// SetZoomOnFactor sets the ZoomOnFactor property of class StereoscopicArcRotateCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.stereoscopicarcrotatecamera#zoomonfactor
+func (s *StereoscopicArcRotateCamera) SetZoomOnFactor(zoomOnFactor float64) *StereoscopicArcRotateCamera {
+	p := ba.ctx.Get("StereoscopicArcRotateCamera").New(zoomOnFactor)
+	return StereoscopicArcRotateCameraFromJSObject(p, ba.ctx)
+}
+
+*/

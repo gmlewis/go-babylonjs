@@ -32,8 +32,1502 @@ func GridMaterialFromJSObject(p js.Value, ctx js.Value) *GridMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.gridmaterial
 func (ba *Babylon) NewGridMaterial(name string, scene *Scene) *GridMaterial {
-	p := ba.ctx.Get("GridMaterial").New(name, scene.JSObject())
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("GridMaterial").New(args...)
 	return GridMaterialFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// GridMaterialBindOpts contains optional parameters for GridMaterial.Bind.
+type GridMaterialBindOpts struct {
+	Mesh *Mesh
+}
+
+// Bind calls the Bind method on the GridMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#bind
+func (g *GridMaterial) Bind(world *Matrix, opts *GridMaterialBindOpts) {
+	if opts == nil {
+		opts = &GridMaterialBindOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, world.JSObject())
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	g.p.Call("bind", args...)
+}
+
+// BindForSubMesh calls the BindForSubMesh method on the GridMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#bindforsubmesh
+func (g *GridMaterial) BindForSubMesh(world *Matrix, mesh *Mesh, subMesh *SubMesh) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, world.JSObject())
+	args = append(args, mesh.JSObject())
+	args = append(args, subMesh.JSObject())
+
+	g.p.Call("bindForSubMesh", args...)
+}
+
+// BindOnlyNormalMatrix calls the BindOnlyNormalMatrix method on the GridMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#bindonlynormalmatrix
+func (g *GridMaterial) BindOnlyNormalMatrix(normalMatrix *Matrix) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, normalMatrix.JSObject())
+
+	g.p.Call("bindOnlyNormalMatrix", args...)
+}
+
+// BindOnlyWorldMatrix calls the BindOnlyWorldMatrix method on the GridMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#bindonlyworldmatrix
+func (g *GridMaterial) BindOnlyWorldMatrix(world *Matrix) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, world.JSObject())
+
+	g.p.Call("bindOnlyWorldMatrix", args...)
+}
+
+// BindSceneUniformBuffer calls the BindSceneUniformBuffer method on the GridMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#bindsceneuniformbuffer
+func (g *GridMaterial) BindSceneUniformBuffer(effect *Effect, sceneUbo *UniformBuffer) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, effect.JSObject())
+	args = append(args, sceneUbo.JSObject())
+
+	g.p.Call("bindSceneUniformBuffer", args...)
+}
+
+// BindView calls the BindView method on the GridMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#bindview
+func (g *GridMaterial) BindView(effect *Effect) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, effect.JSObject())
+
+	g.p.Call("bindView", args...)
+}
+
+// BindViewProjection calls the BindViewProjection method on the GridMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#bindviewprojection
+func (g *GridMaterial) BindViewProjection(effect *Effect) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, effect.JSObject())
+
+	g.p.Call("bindViewProjection", args...)
+}
+
+// Clone calls the Clone method on the GridMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#clone
+func (g *GridMaterial) Clone(name string) *GridMaterial {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := g.p.Call("clone", args...)
+	return GridMaterialFromJSObject(retVal, g.ctx)
+}
+
+// GridMaterialDisposeOpts contains optional parameters for GridMaterial.Dispose.
+type GridMaterialDisposeOpts struct {
+	ForceDisposeEffect *bool
+}
+
+// Dispose calls the Dispose method on the GridMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#dispose
+func (g *GridMaterial) Dispose(opts *GridMaterialDisposeOpts) {
+	if opts == nil {
+		opts = &GridMaterialDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForceDisposeEffect == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceDisposeEffect)
+	}
+
+	g.p.Call("dispose", args...)
+}
+
+// GridMaterialForceCompilationOpts contains optional parameters for GridMaterial.ForceCompilation.
+type GridMaterialForceCompilationOpts struct {
+	OnCompiled *func()
+	Options    js.Value
+	OnError    *func()
+}
+
+// ForceCompilation calls the ForceCompilation method on the GridMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#forcecompilation
+func (g *GridMaterial) ForceCompilation(mesh *AbstractMesh, opts *GridMaterialForceCompilationOpts) {
+	if opts == nil {
+		opts = &GridMaterialForceCompilationOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, mesh.JSObject())
+
+	if opts.OnCompiled == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnCompiled)
+	}
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+
+	g.p.Call("forceCompilation", args...)
+}
+
+// GridMaterialForceCompilationAsyncOpts contains optional parameters for GridMaterial.ForceCompilationAsync.
+type GridMaterialForceCompilationAsyncOpts struct {
+	Options js.Value
+}
+
+// ForceCompilationAsync calls the ForceCompilationAsync method on the GridMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#forcecompilationasync
+func (g *GridMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *GridMaterialForceCompilationAsyncOpts) {
+	if opts == nil {
+		opts = &GridMaterialForceCompilationAsyncOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, mesh.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	g.p.Call("forceCompilationAsync", args...)
+}
+
+// Freeze calls the Freeze method on the GridMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#freeze
+func (g *GridMaterial) Freeze() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	g.p.Call("freeze", args...)
+}
+
+// GetActiveTextures calls the GetActiveTextures method on the GridMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#getactivetextures
+func (g *GridMaterial) GetActiveTextures() *BaseTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getActiveTextures", args...)
+	return BaseTextureFromJSObject(retVal, g.ctx)
+}
+
+// GetAlphaTestTexture calls the GetAlphaTestTexture method on the GridMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#getalphatesttexture
+func (g *GridMaterial) GetAlphaTestTexture() *BaseTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getAlphaTestTexture", args...)
+	return BaseTextureFromJSObject(retVal, g.ctx)
+}
+
+// GetBindedMeshes calls the GetBindedMeshes method on the GridMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#getbindedmeshes
+func (g *GridMaterial) GetBindedMeshes() *AbstractMesh {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getBindedMeshes", args...)
+	return AbstractMeshFromJSObject(retVal, g.ctx)
+}
+
+// GetClassName calls the GetClassName method on the GridMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#getclassname
+func (g *GridMaterial) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetEffect calls the GetEffect method on the GridMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#geteffect
+func (g *GridMaterial) GetEffect() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getEffect", args...)
+	return EffectFromJSObject(retVal, g.ctx)
+}
+
+// GetScene calls the GetScene method on the GridMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#getscene
+func (g *GridMaterial) GetScene() *Scene {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getScene", args...)
+	return SceneFromJSObject(retVal, g.ctx)
+}
+
+// HasTexture calls the HasTexture method on the GridMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#hastexture
+func (g *GridMaterial) HasTexture(texture *BaseTexture) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, texture.JSObject())
+
+	retVal := g.p.Call("hasTexture", args...)
+	return retVal.Bool()
+}
+
+// GridMaterialIsReadyOpts contains optional parameters for GridMaterial.IsReady.
+type GridMaterialIsReadyOpts struct {
+	Mesh         *AbstractMesh
+	UseInstances *bool
+}
+
+// IsReady calls the IsReady method on the GridMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#isready
+func (g *GridMaterial) IsReady(opts *GridMaterialIsReadyOpts) bool {
+	if opts == nil {
+		opts = &GridMaterialIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := g.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// GridMaterialIsReadyForSubMeshOpts contains optional parameters for GridMaterial.IsReadyForSubMesh.
+type GridMaterialIsReadyForSubMeshOpts struct {
+	UseInstances *bool
+}
+
+// IsReadyForSubMesh calls the IsReadyForSubMesh method on the GridMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#isreadyforsubmesh
+func (g *GridMaterial) IsReadyForSubMesh(mesh *AbstractMesh, subMesh *SubMesh, opts *GridMaterialIsReadyForSubMeshOpts) bool {
+	if opts == nil {
+		opts = &GridMaterialIsReadyForSubMeshOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, subMesh.JSObject())
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := g.p.Call("isReadyForSubMesh", args...)
+	return retVal.Bool()
+}
+
+// MarkAsDirty calls the MarkAsDirty method on the GridMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#markasdirty
+func (g *GridMaterial) MarkAsDirty(flag float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, flag)
+
+	g.p.Call("markAsDirty", args...)
+}
+
+// MarkDirty calls the MarkDirty method on the GridMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#markdirty
+func (g *GridMaterial) MarkDirty() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	g.p.Call("markDirty", args...)
+}
+
+// NeedAlphaBlending calls the NeedAlphaBlending method on the GridMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#needalphablending
+func (g *GridMaterial) NeedAlphaBlending() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("needAlphaBlending", args...)
+	return retVal.Bool()
+}
+
+// NeedAlphaBlendingForMesh calls the NeedAlphaBlendingForMesh method on the GridMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#needalphablendingformesh
+func (g *GridMaterial) NeedAlphaBlendingForMesh(mesh *AbstractMesh) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	retVal := g.p.Call("needAlphaBlendingForMesh", args...)
+	return retVal.Bool()
+}
+
+// NeedAlphaTesting calls the NeedAlphaTesting method on the GridMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#needalphatesting
+func (g *GridMaterial) NeedAlphaTesting() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("needAlphaTesting", args...)
+	return retVal.Bool()
+}
+
+// Parse calls the Parse method on the GridMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#parse
+func (g *GridMaterial) Parse(source interface{}, scene *Scene, rootUrl string) *GridMaterial {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, source)
+	args = append(args, scene.JSObject())
+	args = append(args, rootUrl)
+
+	retVal := g.p.Call("Parse", args...)
+	return GridMaterialFromJSObject(retVal, g.ctx)
+}
+
+// Serialize calls the Serialize method on the GridMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#serialize
+func (g *GridMaterial) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("serialize", args...)
+	return retVal
+}
+
+// GridMaterialToStringOpts contains optional parameters for GridMaterial.ToString.
+type GridMaterialToStringOpts struct {
+	FullDetails *bool
+}
+
+// ToString calls the ToString method on the GridMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#tostring
+func (g *GridMaterial) ToString(opts *GridMaterialToStringOpts) string {
+	if opts == nil {
+		opts = &GridMaterialToStringOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.FullDetails == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FullDetails)
+	}
+
+	retVal := g.p.Call("toString", args...)
+	return retVal.String()
+}
+
+// Unbind calls the Unbind method on the GridMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#unbind
+func (g *GridMaterial) Unbind() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	g.p.Call("unbind", args...)
+}
+
+// Unfreeze calls the Unfreeze method on the GridMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#unfreeze
+func (g *GridMaterial) Unfreeze() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	g.p.Call("unfreeze", args...)
+}
+
+/*
+
+// AllDirtyFlag returns the AllDirtyFlag property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#alldirtyflag
+func (g *GridMaterial) AllDirtyFlag(AllDirtyFlag float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(AllDirtyFlag)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAllDirtyFlag sets the AllDirtyFlag property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#alldirtyflag
+func (g *GridMaterial) SetAllDirtyFlag(AllDirtyFlag float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(AllDirtyFlag)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// AllowShaderHotSwapping returns the AllowShaderHotSwapping property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#allowshaderhotswapping
+func (g *GridMaterial) AllowShaderHotSwapping(allowShaderHotSwapping bool) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(allowShaderHotSwapping)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAllowShaderHotSwapping sets the AllowShaderHotSwapping property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#allowshaderhotswapping
+func (g *GridMaterial) SetAllowShaderHotSwapping(allowShaderHotSwapping bool) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(allowShaderHotSwapping)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// Alpha returns the Alpha property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#alpha
+func (g *GridMaterial) Alpha(alpha float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(alpha)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAlpha sets the Alpha property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#alpha
+func (g *GridMaterial) SetAlpha(alpha float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(alpha)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// AlphaMode returns the AlphaMode property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#alphamode
+func (g *GridMaterial) AlphaMode(alphaMode float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(alphaMode)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaMode sets the AlphaMode property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#alphamode
+func (g *GridMaterial) SetAlphaMode(alphaMode float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(alphaMode)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// Animations returns the Animations property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#animations
+func (g *GridMaterial) Animations(animations []Animation) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(animations.JSObject())
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#animations
+func (g *GridMaterial) SetAnimations(animations []Animation) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(animations.JSObject())
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// AttributesDirtyFlag returns the AttributesDirtyFlag property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#attributesdirtyflag
+func (g *GridMaterial) AttributesDirtyFlag(AttributesDirtyFlag float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(AttributesDirtyFlag)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAttributesDirtyFlag sets the AttributesDirtyFlag property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#attributesdirtyflag
+func (g *GridMaterial) SetAttributesDirtyFlag(AttributesDirtyFlag float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(AttributesDirtyFlag)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// BackFaceCulling returns the BackFaceCulling property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#backfaceculling
+func (g *GridMaterial) BackFaceCulling(backFaceCulling bool) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(backFaceCulling)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetBackFaceCulling sets the BackFaceCulling property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#backfaceculling
+func (g *GridMaterial) SetBackFaceCulling(backFaceCulling bool) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(backFaceCulling)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// CheckReadyOnEveryCall returns the CheckReadyOnEveryCall property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#checkreadyoneverycall
+func (g *GridMaterial) CheckReadyOnEveryCall(checkReadyOnEveryCall bool) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(checkReadyOnEveryCall)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCheckReadyOnEveryCall sets the CheckReadyOnEveryCall property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#checkreadyoneverycall
+func (g *GridMaterial) SetCheckReadyOnEveryCall(checkReadyOnEveryCall bool) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(checkReadyOnEveryCall)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// CheckReadyOnlyOnce returns the CheckReadyOnlyOnce property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#checkreadyonlyonce
+func (g *GridMaterial) CheckReadyOnlyOnce(checkReadyOnlyOnce bool) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(checkReadyOnlyOnce)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCheckReadyOnlyOnce sets the CheckReadyOnlyOnce property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#checkreadyonlyonce
+func (g *GridMaterial) SetCheckReadyOnlyOnce(checkReadyOnlyOnce bool) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(checkReadyOnlyOnce)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// ClockWiseSideOrientation returns the ClockWiseSideOrientation property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#clockwisesideorientation
+func (g *GridMaterial) ClockWiseSideOrientation(ClockWiseSideOrientation float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(ClockWiseSideOrientation)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetClockWiseSideOrientation sets the ClockWiseSideOrientation property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#clockwisesideorientation
+func (g *GridMaterial) SetClockWiseSideOrientation(ClockWiseSideOrientation float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(ClockWiseSideOrientation)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// CounterClockWiseSideOrientation returns the CounterClockWiseSideOrientation property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#counterclockwisesideorientation
+func (g *GridMaterial) CounterClockWiseSideOrientation(CounterClockWiseSideOrientation float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(CounterClockWiseSideOrientation)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCounterClockWiseSideOrientation sets the CounterClockWiseSideOrientation property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#counterclockwisesideorientation
+func (g *GridMaterial) SetCounterClockWiseSideOrientation(CounterClockWiseSideOrientation float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(CounterClockWiseSideOrientation)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// DepthFunction returns the DepthFunction property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#depthfunction
+func (g *GridMaterial) DepthFunction(depthFunction float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(depthFunction)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDepthFunction sets the DepthFunction property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#depthfunction
+func (g *GridMaterial) SetDepthFunction(depthFunction float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(depthFunction)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// DisableDepthWrite returns the DisableDepthWrite property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#disabledepthwrite
+func (g *GridMaterial) DisableDepthWrite(disableDepthWrite bool) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(disableDepthWrite)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDisableDepthWrite sets the DisableDepthWrite property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#disabledepthwrite
+func (g *GridMaterial) SetDisableDepthWrite(disableDepthWrite bool) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(disableDepthWrite)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// DoNotSerialize returns the DoNotSerialize property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#donotserialize
+func (g *GridMaterial) DoNotSerialize(doNotSerialize bool) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(doNotSerialize)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDoNotSerialize sets the DoNotSerialize property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#donotserialize
+func (g *GridMaterial) SetDoNotSerialize(doNotSerialize bool) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(doNotSerialize)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// FillMode returns the FillMode property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#fillmode
+func (g *GridMaterial) FillMode(fillMode float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(fillMode)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFillMode sets the FillMode property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#fillmode
+func (g *GridMaterial) SetFillMode(fillMode float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(fillMode)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// FogEnabled returns the FogEnabled property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#fogenabled
+func (g *GridMaterial) FogEnabled(fogEnabled bool) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(fogEnabled)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFogEnabled sets the FogEnabled property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#fogenabled
+func (g *GridMaterial) SetFogEnabled(fogEnabled bool) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(fogEnabled)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// ForceDepthWrite returns the ForceDepthWrite property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#forcedepthwrite
+func (g *GridMaterial) ForceDepthWrite(forceDepthWrite bool) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(forceDepthWrite)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetForceDepthWrite sets the ForceDepthWrite property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#forcedepthwrite
+func (g *GridMaterial) SetForceDepthWrite(forceDepthWrite bool) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(forceDepthWrite)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// FresnelDirtyFlag returns the FresnelDirtyFlag property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#fresneldirtyflag
+func (g *GridMaterial) FresnelDirtyFlag(FresnelDirtyFlag float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(FresnelDirtyFlag)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFresnelDirtyFlag sets the FresnelDirtyFlag property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#fresneldirtyflag
+func (g *GridMaterial) SetFresnelDirtyFlag(FresnelDirtyFlag float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(FresnelDirtyFlag)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// GetRenderTargetTextures returns the GetRenderTargetTextures property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#getrendertargettextures
+func (g *GridMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(getRenderTargetTextures)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetGetRenderTargetTextures sets the GetRenderTargetTextures property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#getrendertargettextures
+func (g *GridMaterial) SetGetRenderTargetTextures(getRenderTargetTextures func()) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(getRenderTargetTextures)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// GridOffset returns the GridOffset property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#gridoffset
+func (g *GridMaterial) GridOffset(gridOffset *Vector3) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(gridOffset.JSObject())
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetGridOffset sets the GridOffset property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#gridoffset
+func (g *GridMaterial) SetGridOffset(gridOffset *Vector3) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(gridOffset.JSObject())
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// GridRatio returns the GridRatio property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#gridratio
+func (g *GridMaterial) GridRatio(gridRatio float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(gridRatio)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetGridRatio sets the GridRatio property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#gridratio
+func (g *GridMaterial) SetGridRatio(gridRatio float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(gridRatio)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// HasRenderTargetTextures returns the HasRenderTargetTextures property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#hasrendertargettextures
+func (g *GridMaterial) HasRenderTargetTextures(hasRenderTargetTextures bool) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(hasRenderTargetTextures)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetHasRenderTargetTextures sets the HasRenderTargetTextures property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#hasrendertargettextures
+func (g *GridMaterial) SetHasRenderTargetTextures(hasRenderTargetTextures bool) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(hasRenderTargetTextures)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// Id returns the Id property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#id
+func (g *GridMaterial) Id(id string) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(id)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetId sets the Id property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#id
+func (g *GridMaterial) SetId(id string) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(id)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#inspectablecustomproperties
+func (g *GridMaterial) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(inspectableCustomProperties.JSObject())
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#inspectablecustomproperties
+func (g *GridMaterial) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(inspectableCustomProperties.JSObject())
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// IsFrozen returns the IsFrozen property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#isfrozen
+func (g *GridMaterial) IsFrozen(isFrozen bool) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(isFrozen)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetIsFrozen sets the IsFrozen property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#isfrozen
+func (g *GridMaterial) SetIsFrozen(isFrozen bool) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(isFrozen)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// LightDirtyFlag returns the LightDirtyFlag property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#lightdirtyflag
+func (g *GridMaterial) LightDirtyFlag(LightDirtyFlag float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(LightDirtyFlag)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLightDirtyFlag sets the LightDirtyFlag property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#lightdirtyflag
+func (g *GridMaterial) SetLightDirtyFlag(LightDirtyFlag float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(LightDirtyFlag)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineColor returns the LineColor property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#linecolor
+func (g *GridMaterial) LineColor(lineColor *Color3) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(lineColor.JSObject())
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineColor sets the LineColor property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#linecolor
+func (g *GridMaterial) SetLineColor(lineColor *Color3) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(lineColor.JSObject())
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineListDrawMode returns the LineListDrawMode property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#linelistdrawmode
+func (g *GridMaterial) LineListDrawMode(LineListDrawMode float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(LineListDrawMode)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineListDrawMode sets the LineListDrawMode property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#linelistdrawmode
+func (g *GridMaterial) SetLineListDrawMode(LineListDrawMode float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(LineListDrawMode)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineLoopDrawMode returns the LineLoopDrawMode property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#lineloopdrawmode
+func (g *GridMaterial) LineLoopDrawMode(LineLoopDrawMode float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(LineLoopDrawMode)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineLoopDrawMode sets the LineLoopDrawMode property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#lineloopdrawmode
+func (g *GridMaterial) SetLineLoopDrawMode(LineLoopDrawMode float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(LineLoopDrawMode)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineStripDrawMode returns the LineStripDrawMode property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#linestripdrawmode
+func (g *GridMaterial) LineStripDrawMode(LineStripDrawMode float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(LineStripDrawMode)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineStripDrawMode sets the LineStripDrawMode property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#linestripdrawmode
+func (g *GridMaterial) SetLineStripDrawMode(LineStripDrawMode float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(LineStripDrawMode)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// MainColor returns the MainColor property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#maincolor
+func (g *GridMaterial) MainColor(mainColor *Color3) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(mainColor.JSObject())
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMainColor sets the MainColor property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#maincolor
+func (g *GridMaterial) SetMainColor(mainColor *Color3) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(mainColor.JSObject())
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// MajorUnitFrequency returns the MajorUnitFrequency property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#majorunitfrequency
+func (g *GridMaterial) MajorUnitFrequency(majorUnitFrequency float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(majorUnitFrequency)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMajorUnitFrequency sets the MajorUnitFrequency property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#majorunitfrequency
+func (g *GridMaterial) SetMajorUnitFrequency(majorUnitFrequency float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(majorUnitFrequency)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#metadata
+func (g *GridMaterial) Metadata(metadata interface{}) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(metadata)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#metadata
+func (g *GridMaterial) SetMetadata(metadata interface{}) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(metadata)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// MinorUnitVisibility returns the MinorUnitVisibility property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#minorunitvisibility
+func (g *GridMaterial) MinorUnitVisibility(minorUnitVisibility float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(minorUnitVisibility)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMinorUnitVisibility sets the MinorUnitVisibility property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#minorunitvisibility
+func (g *GridMaterial) SetMinorUnitVisibility(minorUnitVisibility float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(minorUnitVisibility)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// MiscDirtyFlag returns the MiscDirtyFlag property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#miscdirtyflag
+func (g *GridMaterial) MiscDirtyFlag(MiscDirtyFlag float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(MiscDirtyFlag)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMiscDirtyFlag sets the MiscDirtyFlag property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#miscdirtyflag
+func (g *GridMaterial) SetMiscDirtyFlag(MiscDirtyFlag float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(MiscDirtyFlag)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#name
+func (g *GridMaterial) Name(name string) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(name)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#name
+func (g *GridMaterial) SetName(name string) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(name)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// NeedDepthPrePass returns the NeedDepthPrePass property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#needdepthprepass
+func (g *GridMaterial) NeedDepthPrePass(needDepthPrePass bool) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(needDepthPrePass)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetNeedDepthPrePass sets the NeedDepthPrePass property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#needdepthprepass
+func (g *GridMaterial) SetNeedDepthPrePass(needDepthPrePass bool) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(needDepthPrePass)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnBind returns the OnBind property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#onbind
+func (g *GridMaterial) OnBind(onBind func()) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(onBind)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnBind sets the OnBind property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#onbind
+func (g *GridMaterial) SetOnBind(onBind func()) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(onBind)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnBindObservable returns the OnBindObservable property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#onbindobservable
+func (g *GridMaterial) OnBindObservable(onBindObservable *Observable) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(onBindObservable.JSObject())
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnBindObservable sets the OnBindObservable property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#onbindobservable
+func (g *GridMaterial) SetOnBindObservable(onBindObservable *Observable) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(onBindObservable.JSObject())
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnCompiled returns the OnCompiled property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#oncompiled
+func (g *GridMaterial) OnCompiled(onCompiled func()) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(onCompiled)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnCompiled sets the OnCompiled property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#oncompiled
+func (g *GridMaterial) SetOnCompiled(onCompiled func()) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(onCompiled)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnDispose returns the OnDispose property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#ondispose
+func (g *GridMaterial) OnDispose(onDispose func()) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(onDispose)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnDispose sets the OnDispose property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#ondispose
+func (g *GridMaterial) SetOnDispose(onDispose func()) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(onDispose)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnDisposeObservable returns the OnDisposeObservable property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#ondisposeobservable
+func (g *GridMaterial) OnDisposeObservable(onDisposeObservable *Observable) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(onDisposeObservable.JSObject())
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnDisposeObservable sets the OnDisposeObservable property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#ondisposeobservable
+func (g *GridMaterial) SetOnDisposeObservable(onDisposeObservable *Observable) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(onDisposeObservable.JSObject())
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnError returns the OnError property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#onerror
+func (g *GridMaterial) OnError(onError func()) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(onError)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnError sets the OnError property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#onerror
+func (g *GridMaterial) SetOnError(onError func()) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(onError)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnUnBindObservable returns the OnUnBindObservable property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#onunbindobservable
+func (g *GridMaterial) OnUnBindObservable(onUnBindObservable *Observable) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(onUnBindObservable.JSObject())
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnUnBindObservable sets the OnUnBindObservable property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#onunbindobservable
+func (g *GridMaterial) SetOnUnBindObservable(onUnBindObservable *Observable) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(onUnBindObservable.JSObject())
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// Opacity returns the Opacity property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#opacity
+func (g *GridMaterial) Opacity(opacity float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(opacity)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOpacity sets the Opacity property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#opacity
+func (g *GridMaterial) SetOpacity(opacity float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(opacity)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// OpacityTexture returns the OpacityTexture property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#opacitytexture
+func (g *GridMaterial) OpacityTexture(opacityTexture *BaseTexture) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(opacityTexture.JSObject())
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOpacityTexture sets the OpacityTexture property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#opacitytexture
+func (g *GridMaterial) SetOpacityTexture(opacityTexture *BaseTexture) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(opacityTexture.JSObject())
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointFillMode returns the PointFillMode property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#pointfillmode
+func (g *GridMaterial) PointFillMode(PointFillMode float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(PointFillMode)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointFillMode sets the PointFillMode property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#pointfillmode
+func (g *GridMaterial) SetPointFillMode(PointFillMode float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(PointFillMode)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointListDrawMode returns the PointListDrawMode property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#pointlistdrawmode
+func (g *GridMaterial) PointListDrawMode(PointListDrawMode float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(PointListDrawMode)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointListDrawMode sets the PointListDrawMode property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#pointlistdrawmode
+func (g *GridMaterial) SetPointListDrawMode(PointListDrawMode float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(PointListDrawMode)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointSize returns the PointSize property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#pointsize
+func (g *GridMaterial) PointSize(pointSize float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(pointSize)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointSize sets the PointSize property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#pointsize
+func (g *GridMaterial) SetPointSize(pointSize float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(pointSize)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointsCloud returns the PointsCloud property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#pointscloud
+func (g *GridMaterial) PointsCloud(pointsCloud bool) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(pointsCloud)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointsCloud sets the PointsCloud property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#pointscloud
+func (g *GridMaterial) SetPointsCloud(pointsCloud bool) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(pointsCloud)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// PreMultiplyAlpha returns the PreMultiplyAlpha property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#premultiplyalpha
+func (g *GridMaterial) PreMultiplyAlpha(preMultiplyAlpha bool) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(preMultiplyAlpha)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPreMultiplyAlpha sets the PreMultiplyAlpha property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#premultiplyalpha
+func (g *GridMaterial) SetPreMultiplyAlpha(preMultiplyAlpha bool) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(preMultiplyAlpha)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// ReservedDataStore returns the ReservedDataStore property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#reserveddatastore
+func (g *GridMaterial) ReservedDataStore(reservedDataStore interface{}) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(reservedDataStore)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetReservedDataStore sets the ReservedDataStore property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#reserveddatastore
+func (g *GridMaterial) SetReservedDataStore(reservedDataStore interface{}) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(reservedDataStore)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SeparateCullingPass returns the SeparateCullingPass property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#separatecullingpass
+func (g *GridMaterial) SeparateCullingPass(separateCullingPass bool) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(separateCullingPass)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSeparateCullingPass sets the SeparateCullingPass property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#separatecullingpass
+func (g *GridMaterial) SetSeparateCullingPass(separateCullingPass bool) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(separateCullingPass)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SideOrientation returns the SideOrientation property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#sideorientation
+func (g *GridMaterial) SideOrientation(sideOrientation float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(sideOrientation)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSideOrientation sets the SideOrientation property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#sideorientation
+func (g *GridMaterial) SetSideOrientation(sideOrientation float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(sideOrientation)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// State returns the State property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#state
+func (g *GridMaterial) State(state string) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(state)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetState sets the State property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#state
+func (g *GridMaterial) SetState(state string) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(state)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// TextureDirtyFlag returns the TextureDirtyFlag property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#texturedirtyflag
+func (g *GridMaterial) TextureDirtyFlag(TextureDirtyFlag float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(TextureDirtyFlag)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTextureDirtyFlag sets the TextureDirtyFlag property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#texturedirtyflag
+func (g *GridMaterial) SetTextureDirtyFlag(TextureDirtyFlag float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(TextureDirtyFlag)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// TriangleFanDrawMode returns the TriangleFanDrawMode property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#trianglefandrawmode
+func (g *GridMaterial) TriangleFanDrawMode(TriangleFanDrawMode float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(TriangleFanDrawMode)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTriangleFanDrawMode sets the TriangleFanDrawMode property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#trianglefandrawmode
+func (g *GridMaterial) SetTriangleFanDrawMode(TriangleFanDrawMode float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(TriangleFanDrawMode)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// TriangleFillMode returns the TriangleFillMode property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#trianglefillmode
+func (g *GridMaterial) TriangleFillMode(TriangleFillMode float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(TriangleFillMode)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTriangleFillMode sets the TriangleFillMode property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#trianglefillmode
+func (g *GridMaterial) SetTriangleFillMode(TriangleFillMode float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(TriangleFillMode)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// TriangleStripDrawMode returns the TriangleStripDrawMode property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#trianglestripdrawmode
+func (g *GridMaterial) TriangleStripDrawMode(TriangleStripDrawMode float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(TriangleStripDrawMode)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTriangleStripDrawMode sets the TriangleStripDrawMode property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#trianglestripdrawmode
+func (g *GridMaterial) SetTriangleStripDrawMode(TriangleStripDrawMode float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(TriangleStripDrawMode)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#uniqueid
+func (g *GridMaterial) UniqueId(uniqueId float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(uniqueId)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#uniqueid
+func (g *GridMaterial) SetUniqueId(uniqueId float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(uniqueId)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// WireFrameFillMode returns the WireFrameFillMode property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#wireframefillmode
+func (g *GridMaterial) WireFrameFillMode(WireFrameFillMode float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(WireFrameFillMode)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetWireFrameFillMode sets the WireFrameFillMode property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#wireframefillmode
+func (g *GridMaterial) SetWireFrameFillMode(WireFrameFillMode float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(WireFrameFillMode)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// Wireframe returns the Wireframe property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#wireframe
+func (g *GridMaterial) Wireframe(wireframe bool) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(wireframe)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetWireframe sets the Wireframe property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#wireframe
+func (g *GridMaterial) SetWireframe(wireframe bool) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(wireframe)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// ZOffset returns the ZOffset property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#zoffset
+func (g *GridMaterial) ZOffset(zOffset float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(zOffset)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetZOffset sets the ZOffset property of class GridMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gridmaterial#zoffset
+func (g *GridMaterial) SetZOffset(zOffset float64) *GridMaterial {
+	p := ba.ctx.Get("GridMaterial").New(zOffset)
+	return GridMaterialFromJSObject(p, ba.ctx)
+}
+
+*/

@@ -31,8 +31,89 @@ func WebXRInputFromJSObject(p js.Value, ctx js.Value) *WebXRInput {
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrinput
 func (ba *Babylon) NewWebXRInput(baseExperience *WebXRExperienceHelper) *WebXRInput {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, baseExperience.JSObject())
+
+	p := ba.ctx.Get("WebXRInput").New(args...)
+	return WebXRInputFromJSObject(p, ba.ctx)
+}
+
+// Dispose calls the Dispose method on the WebXRInput object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrinput#dispose
+func (w *WebXRInput) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	w.p.Call("dispose", args...)
+}
+
+/*
+
+// BaseExperience returns the BaseExperience property of class WebXRInput.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrinput#baseexperience
+func (w *WebXRInput) BaseExperience(baseExperience *WebXRExperienceHelper) *WebXRInput {
 	p := ba.ctx.Get("WebXRInput").New(baseExperience.JSObject())
 	return WebXRInputFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetBaseExperience sets the BaseExperience property of class WebXRInput.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrinput#baseexperience
+func (w *WebXRInput) SetBaseExperience(baseExperience *WebXRExperienceHelper) *WebXRInput {
+	p := ba.ctx.Get("WebXRInput").New(baseExperience.JSObject())
+	return WebXRInputFromJSObject(p, ba.ctx)
+}
+
+// Controllers returns the Controllers property of class WebXRInput.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrinput#controllers
+func (w *WebXRInput) Controllers(controllers []WebXRController) *WebXRInput {
+	p := ba.ctx.Get("WebXRInput").New(controllers.JSObject())
+	return WebXRInputFromJSObject(p, ba.ctx)
+}
+
+// SetControllers sets the Controllers property of class WebXRInput.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrinput#controllers
+func (w *WebXRInput) SetControllers(controllers []WebXRController) *WebXRInput {
+	p := ba.ctx.Get("WebXRInput").New(controllers.JSObject())
+	return WebXRInputFromJSObject(p, ba.ctx)
+}
+
+// OnControllerAddedObservable returns the OnControllerAddedObservable property of class WebXRInput.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrinput#oncontrolleraddedobservable
+func (w *WebXRInput) OnControllerAddedObservable(onControllerAddedObservable *Observable) *WebXRInput {
+	p := ba.ctx.Get("WebXRInput").New(onControllerAddedObservable.JSObject())
+	return WebXRInputFromJSObject(p, ba.ctx)
+}
+
+// SetOnControllerAddedObservable sets the OnControllerAddedObservable property of class WebXRInput.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrinput#oncontrolleraddedobservable
+func (w *WebXRInput) SetOnControllerAddedObservable(onControllerAddedObservable *Observable) *WebXRInput {
+	p := ba.ctx.Get("WebXRInput").New(onControllerAddedObservable.JSObject())
+	return WebXRInputFromJSObject(p, ba.ctx)
+}
+
+// OnControllerRemovedObservable returns the OnControllerRemovedObservable property of class WebXRInput.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrinput#oncontrollerremovedobservable
+func (w *WebXRInput) OnControllerRemovedObservable(onControllerRemovedObservable *Observable) *WebXRInput {
+	p := ba.ctx.Get("WebXRInput").New(onControllerRemovedObservable.JSObject())
+	return WebXRInputFromJSObject(p, ba.ctx)
+}
+
+// SetOnControllerRemovedObservable sets the OnControllerRemovedObservable property of class WebXRInput.
+//
+// https://doc.babylonjs.com/api/classes/babylon.webxrinput#oncontrollerremovedobservable
+func (w *WebXRInput) SetOnControllerRemovedObservable(onControllerRemovedObservable *Observable) *WebXRInput {
+	p := ba.ctx.Get("WebXRInput").New(onControllerRemovedObservable.JSObject())
+	return WebXRInputFromJSObject(p, ba.ctx)
+}
+
+*/

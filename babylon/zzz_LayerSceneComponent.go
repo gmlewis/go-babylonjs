@@ -32,8 +32,115 @@ func LayerSceneComponentFromJSObject(p js.Value, ctx js.Value) *LayerSceneCompon
 //
 // https://doc.babylonjs.com/api/classes/babylon.layerscenecomponent
 func (ba *Babylon) NewLayerSceneComponent(scene *Scene) *LayerSceneComponent {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("LayerSceneComponent").New(args...)
+	return LayerSceneComponentFromJSObject(p, ba.ctx)
+}
+
+// AddFromContainer calls the AddFromContainer method on the LayerSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layerscenecomponent#addfromcontainer
+func (l *LayerSceneComponent) AddFromContainer(container *AbstractScene) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, container.JSObject())
+
+	l.p.Call("addFromContainer", args...)
+}
+
+// Dispose calls the Dispose method on the LayerSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layerscenecomponent#dispose
+func (l *LayerSceneComponent) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	l.p.Call("dispose", args...)
+}
+
+// Rebuild calls the Rebuild method on the LayerSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layerscenecomponent#rebuild
+func (l *LayerSceneComponent) Rebuild() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	l.p.Call("rebuild", args...)
+}
+
+// Register calls the Register method on the LayerSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layerscenecomponent#register
+func (l *LayerSceneComponent) Register() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	l.p.Call("register", args...)
+}
+
+// LayerSceneComponentRemoveFromContainerOpts contains optional parameters for LayerSceneComponent.RemoveFromContainer.
+type LayerSceneComponentRemoveFromContainerOpts struct {
+	Dispose *bool
+}
+
+// RemoveFromContainer calls the RemoveFromContainer method on the LayerSceneComponent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layerscenecomponent#removefromcontainer
+func (l *LayerSceneComponent) RemoveFromContainer(container *AbstractScene, opts *LayerSceneComponentRemoveFromContainerOpts) {
+	if opts == nil {
+		opts = &LayerSceneComponentRemoveFromContainerOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, container.JSObject())
+
+	if opts.Dispose == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Dispose)
+	}
+
+	l.p.Call("removeFromContainer", args...)
+}
+
+/*
+
+// Name returns the Name property of class LayerSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layerscenecomponent#name
+func (l *LayerSceneComponent) Name(name string) *LayerSceneComponent {
+	p := ba.ctx.Get("LayerSceneComponent").New(name)
+	return LayerSceneComponentFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class LayerSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layerscenecomponent#name
+func (l *LayerSceneComponent) SetName(name string) *LayerSceneComponent {
+	p := ba.ctx.Get("LayerSceneComponent").New(name)
+	return LayerSceneComponentFromJSObject(p, ba.ctx)
+}
+
+// Scene returns the Scene property of class LayerSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layerscenecomponent#scene
+func (l *LayerSceneComponent) Scene(scene *Scene) *LayerSceneComponent {
 	p := ba.ctx.Get("LayerSceneComponent").New(scene.JSObject())
 	return LayerSceneComponentFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetScene sets the Scene property of class LayerSceneComponent.
+//
+// https://doc.babylonjs.com/api/classes/babylon.layerscenecomponent#scene
+func (l *LayerSceneComponent) SetScene(scene *Scene) *LayerSceneComponent {
+	p := ba.ctx.Get("LayerSceneComponent").New(scene.JSObject())
+	return LayerSceneComponentFromJSObject(p, ba.ctx)
+}
+
+*/

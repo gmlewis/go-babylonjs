@@ -31,8 +31,15 @@ func WebXRControllerPointerSelectionFromJSObject(p js.Value, ctx js.Value) *WebX
 //
 // https://doc.babylonjs.com/api/classes/babylon.webxrcontrollerpointerselection
 func (ba *Babylon) NewWebXRControllerPointerSelection(input *WebXRInput) *WebXRControllerPointerSelection {
-	p := ba.ctx.Get("WebXRControllerPointerSelection").New(input.JSObject())
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, input.JSObject())
+
+	p := ba.ctx.Get("WebXRControllerPointerSelection").New(args...)
 	return WebXRControllerPointerSelectionFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+/*
+
+ */

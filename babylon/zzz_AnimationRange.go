@@ -31,8 +31,76 @@ func AnimationRangeFromJSObject(p js.Value, ctx js.Value) *AnimationRange {
 //
 // https://doc.babylonjs.com/api/classes/babylon.animationrange
 func (ba *Babylon) NewAnimationRange(name string, from float64, to float64) *AnimationRange {
-	p := ba.ctx.Get("AnimationRange").New(name, from, to)
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, name)
+	args = append(args, from)
+	args = append(args, to)
+
+	p := ba.ctx.Get("AnimationRange").New(args...)
 	return AnimationRangeFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Clone calls the Clone method on the AnimationRange object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animationrange#clone
+func (a *AnimationRange) Clone() *AnimationRange {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("clone", args...)
+	return AnimationRangeFromJSObject(retVal, a.ctx)
+}
+
+/*
+
+// From returns the From property of class AnimationRange.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animationrange#from
+func (a *AnimationRange) From(from float64) *AnimationRange {
+	p := ba.ctx.Get("AnimationRange").New(from)
+	return AnimationRangeFromJSObject(p, ba.ctx)
+}
+
+// SetFrom sets the From property of class AnimationRange.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animationrange#from
+func (a *AnimationRange) SetFrom(from float64) *AnimationRange {
+	p := ba.ctx.Get("AnimationRange").New(from)
+	return AnimationRangeFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class AnimationRange.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animationrange#name
+func (a *AnimationRange) Name(name string) *AnimationRange {
+	p := ba.ctx.Get("AnimationRange").New(name)
+	return AnimationRangeFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class AnimationRange.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animationrange#name
+func (a *AnimationRange) SetName(name string) *AnimationRange {
+	p := ba.ctx.Get("AnimationRange").New(name)
+	return AnimationRangeFromJSObject(p, ba.ctx)
+}
+
+// To returns the To property of class AnimationRange.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animationrange#to
+func (a *AnimationRange) To(to float64) *AnimationRange {
+	p := ba.ctx.Get("AnimationRange").New(to)
+	return AnimationRangeFromJSObject(p, ba.ctx)
+}
+
+// SetTo sets the To property of class AnimationRange.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animationrange#to
+func (a *AnimationRange) SetTo(to float64) *AnimationRange {
+	p := ba.ctx.Get("AnimationRange").New(to)
+	return AnimationRangeFromJSObject(p, ba.ctx)
+}
+
+*/

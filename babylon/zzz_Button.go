@@ -29,7 +29,7 @@ func ButtonFromJSObject(p js.Value, ctx js.Value) *Button {
 
 // NewButtonOpts contains optional parameters for NewButton.
 type NewButtonOpts struct {
-	Name *JSString
+	Name *string
 }
 
 // NewButton returns a new Button object.
@@ -40,8 +40,1856 @@ func (ba *Babylon) NewButton(opts *NewButtonOpts) *Button {
 		opts = &NewButtonOpts{}
 	}
 
-	p := ba.ctx.Get("Button").New(opts.Name.JSObject())
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Name == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Name)
+	}
+
+	p := ba.ctx.Get("Button").New(args...)
 	return ButtonFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AddControl calls the AddControl method on the Button object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#addcontrol
+func (b *Button) AddControl(control *Control) *Container {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, control.JSObject())
+
+	retVal := b.p.Call("addControl", args...)
+	return ContainerFromJSObject(retVal, b.ctx)
+}
+
+// ClearControls calls the ClearControls method on the Button object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#clearcontrols
+func (b *Button) ClearControls() *Container {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := b.p.Call("clearControls", args...)
+	return ContainerFromJSObject(retVal, b.ctx)
+}
+
+// Contains calls the Contains method on the Button object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#contains
+func (b *Button) Contains(x float64, y float64) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, x)
+	args = append(args, y)
+
+	retVal := b.p.Call("contains", args...)
+	return retVal.Bool()
+}
+
+// ContainsControl calls the ContainsControl method on the Button object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#containscontrol
+func (b *Button) ContainsControl(control *Control) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, control.JSObject())
+
+	retVal := b.p.Call("containsControl", args...)
+	return retVal.Bool()
+}
+
+// CreateImageButton calls the CreateImageButton method on the Button object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#createimagebutton
+func (b *Button) CreateImageButton(name string, text string, imageUrl string) *Button {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, name)
+	args = append(args, text)
+	args = append(args, imageUrl)
+
+	retVal := b.p.Call("CreateImageButton", args...)
+	return ButtonFromJSObject(retVal, b.ctx)
+}
+
+// CreateImageOnlyButton calls the CreateImageOnlyButton method on the Button object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#createimageonlybutton
+func (b *Button) CreateImageOnlyButton(name string, imageUrl string) *Button {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, imageUrl)
+
+	retVal := b.p.Call("CreateImageOnlyButton", args...)
+	return ButtonFromJSObject(retVal, b.ctx)
+}
+
+// CreateImageWithCenterTextButton calls the CreateImageWithCenterTextButton method on the Button object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#createimagewithcentertextbutton
+func (b *Button) CreateImageWithCenterTextButton(name string, text string, imageUrl string) *Button {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, name)
+	args = append(args, text)
+	args = append(args, imageUrl)
+
+	retVal := b.p.Call("CreateImageWithCenterTextButton", args...)
+	return ButtonFromJSObject(retVal, b.ctx)
+}
+
+// CreateSimpleButton calls the CreateSimpleButton method on the Button object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#createsimplebutton
+func (b *Button) CreateSimpleButton(name string, text string) *Button {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, text)
+
+	retVal := b.p.Call("CreateSimpleButton", args...)
+	return ButtonFromJSObject(retVal, b.ctx)
+}
+
+// Dispose calls the Dispose method on the Button object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#dispose
+func (b *Button) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	b.p.Call("dispose", args...)
+}
+
+// GetAscendantOfClass calls the GetAscendantOfClass method on the Button object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#getascendantofclass
+func (b *Button) GetAscendantOfClass(className string) *Control {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, className)
+
+	retVal := b.p.Call("getAscendantOfClass", args...)
+	return ControlFromJSObject(retVal, b.ctx)
+}
+
+// GetChildByName calls the GetChildByName method on the Button object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#getchildbyname
+func (b *Button) GetChildByName(name string) *Control {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := b.p.Call("getChildByName", args...)
+	return ControlFromJSObject(retVal, b.ctx)
+}
+
+// GetChildByType calls the GetChildByType method on the Button object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#getchildbytype
+func (b *Button) GetChildByType(name string, jsType string) *Control {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	retVal := b.p.Call("getChildByType", args...)
+	return ControlFromJSObject(retVal, b.ctx)
+}
+
+// GetClassName calls the GetClassName method on the Button object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#getclassname
+func (b *Button) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := b.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// ButtonGetDescendantsOpts contains optional parameters for Button.GetDescendants.
+type ButtonGetDescendantsOpts struct {
+	DirectDescendantsOnly *bool
+	Predicate             *func()
+}
+
+// GetDescendants calls the GetDescendants method on the Button object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#getdescendants
+func (b *Button) GetDescendants(opts *ButtonGetDescendantsOpts) *Control {
+	if opts == nil {
+		opts = &ButtonGetDescendantsOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	retVal := b.p.Call("getDescendants", args...)
+	return ControlFromJSObject(retVal, b.ctx)
+}
+
+// ButtonGetDescendantsToRefOpts contains optional parameters for Button.GetDescendantsToRef.
+type ButtonGetDescendantsToRefOpts struct {
+	DirectDescendantsOnly *bool
+	Predicate             *func()
+}
+
+// GetDescendantsToRef calls the GetDescendantsToRef method on the Button object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#getdescendantstoref
+func (b *Button) GetDescendantsToRef(results *Control, opts *ButtonGetDescendantsToRefOpts) {
+	if opts == nil {
+		opts = &ButtonGetDescendantsToRefOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, results.JSObject())
+
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	b.p.Call("getDescendantsToRef", args...)
+}
+
+// GetLocalCoordinates calls the GetLocalCoordinates method on the Button object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#getlocalcoordinates
+func (b *Button) GetLocalCoordinates(globalCoordinates *Vector2) *Vector2 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, globalCoordinates.JSObject())
+
+	retVal := b.p.Call("getLocalCoordinates", args...)
+	return Vector2FromJSObject(retVal, b.ctx)
+}
+
+// GetLocalCoordinatesToRef calls the GetLocalCoordinatesToRef method on the Button object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#getlocalcoordinatestoref
+func (b *Button) GetLocalCoordinatesToRef(globalCoordinates *Vector2, result *Vector2) *Control {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, globalCoordinates.JSObject())
+	args = append(args, result.JSObject())
+
+	retVal := b.p.Call("getLocalCoordinatesToRef", args...)
+	return ControlFromJSObject(retVal, b.ctx)
+}
+
+// GetParentLocalCoordinates calls the GetParentLocalCoordinates method on the Button object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#getparentlocalcoordinates
+func (b *Button) GetParentLocalCoordinates(globalCoordinates *Vector2) *Vector2 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, globalCoordinates.JSObject())
+
+	retVal := b.p.Call("getParentLocalCoordinates", args...)
+	return Vector2FromJSObject(retVal, b.ctx)
+}
+
+// IsAscendant calls the IsAscendant method on the Button object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#isascendant
+func (b *Button) IsAscendant(container *Control) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, container.JSObject())
+
+	retVal := b.p.Call("isAscendant", args...)
+	return retVal.Bool()
+}
+
+// LinkWithMesh calls the LinkWithMesh method on the Button object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#linkwithmesh
+func (b *Button) LinkWithMesh(mesh *AbstractMesh) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	b.p.Call("linkWithMesh", args...)
+}
+
+// MoveToVector3 calls the MoveToVector3 method on the Button object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#movetovector3
+func (b *Button) MoveToVector3(position *Vector3, scene *Scene) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, position.JSObject())
+	args = append(args, scene.JSObject())
+
+	b.p.Call("moveToVector3", args...)
+}
+
+// RemoveControl calls the RemoveControl method on the Button object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#removecontrol
+func (b *Button) RemoveControl(control *Control) *Container {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, control.JSObject())
+
+	retVal := b.p.Call("removeControl", args...)
+	return ContainerFromJSObject(retVal, b.ctx)
+}
+
+// _flagDescendantsAsMatrixDirty calls the _flagDescendantsAsMatrixDirty method on the Button object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#_flagdescendantsasmatrixdirty
+func (b *Button) _flagDescendantsAsMatrixDirty() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	b.p.Call("_flagDescendantsAsMatrixDirty", args...)
+}
+
+/*
+
+// AdaptHeightToChildren returns the AdaptHeightToChildren property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#adaptheighttochildren
+func (b *Button) AdaptHeightToChildren(adaptHeightToChildren bool) *Button {
+	p := ba.ctx.Get("Button").New(adaptHeightToChildren)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetAdaptHeightToChildren sets the AdaptHeightToChildren property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#adaptheighttochildren
+func (b *Button) SetAdaptHeightToChildren(adaptHeightToChildren bool) *Button {
+	p := ba.ctx.Get("Button").New(adaptHeightToChildren)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// AdaptWidthToChildren returns the AdaptWidthToChildren property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#adaptwidthtochildren
+func (b *Button) AdaptWidthToChildren(adaptWidthToChildren bool) *Button {
+	p := ba.ctx.Get("Button").New(adaptWidthToChildren)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetAdaptWidthToChildren sets the AdaptWidthToChildren property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#adaptwidthtochildren
+func (b *Button) SetAdaptWidthToChildren(adaptWidthToChildren bool) *Button {
+	p := ba.ctx.Get("Button").New(adaptWidthToChildren)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// AllowAlphaInheritance returns the AllowAlphaInheritance property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#allowalphainheritance
+func (b *Button) AllowAlphaInheritance(AllowAlphaInheritance bool) *Button {
+	p := ba.ctx.Get("Button").New(AllowAlphaInheritance)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetAllowAlphaInheritance sets the AllowAlphaInheritance property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#allowalphainheritance
+func (b *Button) SetAllowAlphaInheritance(AllowAlphaInheritance bool) *Button {
+	p := ba.ctx.Get("Button").New(AllowAlphaInheritance)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// Alpha returns the Alpha property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#alpha
+func (b *Button) Alpha(alpha float64) *Button {
+	p := ba.ctx.Get("Button").New(alpha)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetAlpha sets the Alpha property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#alpha
+func (b *Button) SetAlpha(alpha float64) *Button {
+	p := ba.ctx.Get("Button").New(alpha)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// Background returns the Background property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#background
+func (b *Button) Background(background string) *Button {
+	p := ba.ctx.Get("Button").New(background)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetBackground sets the Background property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#background
+func (b *Button) SetBackground(background string) *Button {
+	p := ba.ctx.Get("Button").New(background)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// CenterX returns the CenterX property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#centerx
+func (b *Button) CenterX(centerX float64) *Button {
+	p := ba.ctx.Get("Button").New(centerX)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetCenterX sets the CenterX property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#centerx
+func (b *Button) SetCenterX(centerX float64) *Button {
+	p := ba.ctx.Get("Button").New(centerX)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// CenterY returns the CenterY property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#centery
+func (b *Button) CenterY(centerY float64) *Button {
+	p := ba.ctx.Get("Button").New(centerY)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetCenterY sets the CenterY property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#centery
+func (b *Button) SetCenterY(centerY float64) *Button {
+	p := ba.ctx.Get("Button").New(centerY)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// Children returns the Children property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#children
+func (b *Button) Children(children *Control) *Button {
+	p := ba.ctx.Get("Button").New(children.JSObject())
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetChildren sets the Children property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#children
+func (b *Button) SetChildren(children *Control) *Button {
+	p := ba.ctx.Get("Button").New(children.JSObject())
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// ClipChildren returns the ClipChildren property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#clipchildren
+func (b *Button) ClipChildren(clipChildren bool) *Button {
+	p := ba.ctx.Get("Button").New(clipChildren)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetClipChildren sets the ClipChildren property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#clipchildren
+func (b *Button) SetClipChildren(clipChildren bool) *Button {
+	p := ba.ctx.Get("Button").New(clipChildren)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// ClipContent returns the ClipContent property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#clipcontent
+func (b *Button) ClipContent(clipContent bool) *Button {
+	p := ba.ctx.Get("Button").New(clipContent)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetClipContent sets the ClipContent property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#clipcontent
+func (b *Button) SetClipContent(clipContent bool) *Button {
+	p := ba.ctx.Get("Button").New(clipContent)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// Color returns the Color property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#color
+func (b *Button) Color(color string) *Button {
+	p := ba.ctx.Get("Button").New(color)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetColor sets the Color property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#color
+func (b *Button) SetColor(color string) *Button {
+	p := ba.ctx.Get("Button").New(color)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// CornerRadius returns the CornerRadius property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#cornerradius
+func (b *Button) CornerRadius(cornerRadius float64) *Button {
+	p := ba.ctx.Get("Button").New(cornerRadius)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetCornerRadius sets the CornerRadius property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#cornerradius
+func (b *Button) SetCornerRadius(cornerRadius float64) *Button {
+	p := ba.ctx.Get("Button").New(cornerRadius)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// DelegatePickingToChildren returns the DelegatePickingToChildren property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#delegatepickingtochildren
+func (b *Button) DelegatePickingToChildren(delegatePickingToChildren bool) *Button {
+	p := ba.ctx.Get("Button").New(delegatePickingToChildren)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetDelegatePickingToChildren sets the DelegatePickingToChildren property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#delegatepickingtochildren
+func (b *Button) SetDelegatePickingToChildren(delegatePickingToChildren bool) *Button {
+	p := ba.ctx.Get("Button").New(delegatePickingToChildren)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// DisabledColor returns the DisabledColor property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#disabledcolor
+func (b *Button) DisabledColor(disabledColor string) *Button {
+	p := ba.ctx.Get("Button").New(disabledColor)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetDisabledColor sets the DisabledColor property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#disabledcolor
+func (b *Button) SetDisabledColor(disabledColor string) *Button {
+	p := ba.ctx.Get("Button").New(disabledColor)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// FontFamily returns the FontFamily property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#fontfamily
+func (b *Button) FontFamily(fontFamily string) *Button {
+	p := ba.ctx.Get("Button").New(fontFamily)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetFontFamily sets the FontFamily property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#fontfamily
+func (b *Button) SetFontFamily(fontFamily string) *Button {
+	p := ba.ctx.Get("Button").New(fontFamily)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// FontOffset returns the FontOffset property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#fontoffset
+func (b *Button) FontOffset(fontOffset js.Value) *Button {
+	p := ba.ctx.Get("Button").New(fontOffset)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetFontOffset sets the FontOffset property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#fontoffset
+func (b *Button) SetFontOffset(fontOffset js.Value) *Button {
+	p := ba.ctx.Get("Button").New(fontOffset)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// FontSize returns the FontSize property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#fontsize
+func (b *Button) FontSize(fontSize string) *Button {
+	p := ba.ctx.Get("Button").New(fontSize)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetFontSize sets the FontSize property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#fontsize
+func (b *Button) SetFontSize(fontSize string) *Button {
+	p := ba.ctx.Get("Button").New(fontSize)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// FontSizeInPixels returns the FontSizeInPixels property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#fontsizeinpixels
+func (b *Button) FontSizeInPixels(fontSizeInPixels float64) *Button {
+	p := ba.ctx.Get("Button").New(fontSizeInPixels)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetFontSizeInPixels sets the FontSizeInPixels property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#fontsizeinpixels
+func (b *Button) SetFontSizeInPixels(fontSizeInPixels float64) *Button {
+	p := ba.ctx.Get("Button").New(fontSizeInPixels)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// FontStyle returns the FontStyle property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#fontstyle
+func (b *Button) FontStyle(fontStyle string) *Button {
+	p := ba.ctx.Get("Button").New(fontStyle)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetFontStyle sets the FontStyle property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#fontstyle
+func (b *Button) SetFontStyle(fontStyle string) *Button {
+	p := ba.ctx.Get("Button").New(fontStyle)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// FontWeight returns the FontWeight property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#fontweight
+func (b *Button) FontWeight(fontWeight string) *Button {
+	p := ba.ctx.Get("Button").New(fontWeight)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetFontWeight sets the FontWeight property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#fontweight
+func (b *Button) SetFontWeight(fontWeight string) *Button {
+	p := ba.ctx.Get("Button").New(fontWeight)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// HORIZONTAL_ALIGNMENT_CENTER returns the HORIZONTAL_ALIGNMENT_CENTER property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#horizontal_alignment_center
+func (b *Button) HORIZONTAL_ALIGNMENT_CENTER(HORIZONTAL_ALIGNMENT_CENTER float64) *Button {
+	p := ba.ctx.Get("Button").New(HORIZONTAL_ALIGNMENT_CENTER)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetHORIZONTAL_ALIGNMENT_CENTER sets the HORIZONTAL_ALIGNMENT_CENTER property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#horizontal_alignment_center
+func (b *Button) SetHORIZONTAL_ALIGNMENT_CENTER(HORIZONTAL_ALIGNMENT_CENTER float64) *Button {
+	p := ba.ctx.Get("Button").New(HORIZONTAL_ALIGNMENT_CENTER)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// HORIZONTAL_ALIGNMENT_LEFT returns the HORIZONTAL_ALIGNMENT_LEFT property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#horizontal_alignment_left
+func (b *Button) HORIZONTAL_ALIGNMENT_LEFT(HORIZONTAL_ALIGNMENT_LEFT float64) *Button {
+	p := ba.ctx.Get("Button").New(HORIZONTAL_ALIGNMENT_LEFT)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetHORIZONTAL_ALIGNMENT_LEFT sets the HORIZONTAL_ALIGNMENT_LEFT property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#horizontal_alignment_left
+func (b *Button) SetHORIZONTAL_ALIGNMENT_LEFT(HORIZONTAL_ALIGNMENT_LEFT float64) *Button {
+	p := ba.ctx.Get("Button").New(HORIZONTAL_ALIGNMENT_LEFT)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// HORIZONTAL_ALIGNMENT_RIGHT returns the HORIZONTAL_ALIGNMENT_RIGHT property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#horizontal_alignment_right
+func (b *Button) HORIZONTAL_ALIGNMENT_RIGHT(HORIZONTAL_ALIGNMENT_RIGHT float64) *Button {
+	p := ba.ctx.Get("Button").New(HORIZONTAL_ALIGNMENT_RIGHT)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetHORIZONTAL_ALIGNMENT_RIGHT sets the HORIZONTAL_ALIGNMENT_RIGHT property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#horizontal_alignment_right
+func (b *Button) SetHORIZONTAL_ALIGNMENT_RIGHT(HORIZONTAL_ALIGNMENT_RIGHT float64) *Button {
+	p := ba.ctx.Get("Button").New(HORIZONTAL_ALIGNMENT_RIGHT)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// Height returns the Height property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#height
+func (b *Button) Height(height string) *Button {
+	p := ba.ctx.Get("Button").New(height)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetHeight sets the Height property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#height
+func (b *Button) SetHeight(height string) *Button {
+	p := ba.ctx.Get("Button").New(height)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// HeightInPixels returns the HeightInPixels property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#heightinpixels
+func (b *Button) HeightInPixels(heightInPixels float64) *Button {
+	p := ba.ctx.Get("Button").New(heightInPixels)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetHeightInPixels sets the HeightInPixels property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#heightinpixels
+func (b *Button) SetHeightInPixels(heightInPixels float64) *Button {
+	p := ba.ctx.Get("Button").New(heightInPixels)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// HorizontalAlignment returns the HorizontalAlignment property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#horizontalalignment
+func (b *Button) HorizontalAlignment(horizontalAlignment float64) *Button {
+	p := ba.ctx.Get("Button").New(horizontalAlignment)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetHorizontalAlignment sets the HorizontalAlignment property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#horizontalalignment
+func (b *Button) SetHorizontalAlignment(horizontalAlignment float64) *Button {
+	p := ba.ctx.Get("Button").New(horizontalAlignment)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// Host returns the Host property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#host
+func (b *Button) Host(host *AdvancedDynamicTexture) *Button {
+	p := ba.ctx.Get("Button").New(host.JSObject())
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetHost sets the Host property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#host
+func (b *Button) SetHost(host *AdvancedDynamicTexture) *Button {
+	p := ba.ctx.Get("Button").New(host.JSObject())
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// HoverCursor returns the HoverCursor property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#hovercursor
+func (b *Button) HoverCursor(hoverCursor string) *Button {
+	p := ba.ctx.Get("Button").New(hoverCursor)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetHoverCursor sets the HoverCursor property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#hovercursor
+func (b *Button) SetHoverCursor(hoverCursor string) *Button {
+	p := ba.ctx.Get("Button").New(hoverCursor)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// Image returns the Image property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#image
+func (b *Button) Image(image *Image) *Button {
+	p := ba.ctx.Get("Button").New(image.JSObject())
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetImage sets the Image property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#image
+func (b *Button) SetImage(image *Image) *Button {
+	p := ba.ctx.Get("Button").New(image.JSObject())
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// IsDirty returns the IsDirty property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#isdirty
+func (b *Button) IsDirty(isDirty bool) *Button {
+	p := ba.ctx.Get("Button").New(isDirty)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetIsDirty sets the IsDirty property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#isdirty
+func (b *Button) SetIsDirty(isDirty bool) *Button {
+	p := ba.ctx.Get("Button").New(isDirty)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// IsEnabled returns the IsEnabled property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#isenabled
+func (b *Button) IsEnabled(isEnabled bool) *Button {
+	p := ba.ctx.Get("Button").New(isEnabled)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetIsEnabled sets the IsEnabled property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#isenabled
+func (b *Button) SetIsEnabled(isEnabled bool) *Button {
+	p := ba.ctx.Get("Button").New(isEnabled)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// IsFocusInvisible returns the IsFocusInvisible property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#isfocusinvisible
+func (b *Button) IsFocusInvisible(isFocusInvisible bool) *Button {
+	p := ba.ctx.Get("Button").New(isFocusInvisible)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetIsFocusInvisible sets the IsFocusInvisible property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#isfocusinvisible
+func (b *Button) SetIsFocusInvisible(isFocusInvisible bool) *Button {
+	p := ba.ctx.Get("Button").New(isFocusInvisible)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// IsHighlighted returns the IsHighlighted property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#ishighlighted
+func (b *Button) IsHighlighted(isHighlighted bool) *Button {
+	p := ba.ctx.Get("Button").New(isHighlighted)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetIsHighlighted sets the IsHighlighted property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#ishighlighted
+func (b *Button) SetIsHighlighted(isHighlighted bool) *Button {
+	p := ba.ctx.Get("Button").New(isHighlighted)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// IsHitTestVisible returns the IsHitTestVisible property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#ishittestvisible
+func (b *Button) IsHitTestVisible(isHitTestVisible bool) *Button {
+	p := ba.ctx.Get("Button").New(isHitTestVisible)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetIsHitTestVisible sets the IsHitTestVisible property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#ishittestvisible
+func (b *Button) SetIsHitTestVisible(isHitTestVisible bool) *Button {
+	p := ba.ctx.Get("Button").New(isHitTestVisible)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// IsPointerBlocker returns the IsPointerBlocker property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#ispointerblocker
+func (b *Button) IsPointerBlocker(isPointerBlocker bool) *Button {
+	p := ba.ctx.Get("Button").New(isPointerBlocker)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetIsPointerBlocker sets the IsPointerBlocker property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#ispointerblocker
+func (b *Button) SetIsPointerBlocker(isPointerBlocker bool) *Button {
+	p := ba.ctx.Get("Button").New(isPointerBlocker)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// IsVisible returns the IsVisible property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#isvisible
+func (b *Button) IsVisible(isVisible bool) *Button {
+	p := ba.ctx.Get("Button").New(isVisible)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetIsVisible sets the IsVisible property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#isvisible
+func (b *Button) SetIsVisible(isVisible bool) *Button {
+	p := ba.ctx.Get("Button").New(isVisible)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// Left returns the Left property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#left
+func (b *Button) Left(left string) *Button {
+	p := ba.ctx.Get("Button").New(left)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetLeft sets the Left property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#left
+func (b *Button) SetLeft(left string) *Button {
+	p := ba.ctx.Get("Button").New(left)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// LeftInPixels returns the LeftInPixels property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#leftinpixels
+func (b *Button) LeftInPixels(leftInPixels float64) *Button {
+	p := ba.ctx.Get("Button").New(leftInPixels)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetLeftInPixels sets the LeftInPixels property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#leftinpixels
+func (b *Button) SetLeftInPixels(leftInPixels float64) *Button {
+	p := ba.ctx.Get("Button").New(leftInPixels)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetX returns the LinkOffsetX property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#linkoffsetx
+func (b *Button) LinkOffsetX(linkOffsetX string) *Button {
+	p := ba.ctx.Get("Button").New(linkOffsetX)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetX sets the LinkOffsetX property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#linkoffsetx
+func (b *Button) SetLinkOffsetX(linkOffsetX string) *Button {
+	p := ba.ctx.Get("Button").New(linkOffsetX)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetXInPixels returns the LinkOffsetXInPixels property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#linkoffsetxinpixels
+func (b *Button) LinkOffsetXInPixels(linkOffsetXInPixels float64) *Button {
+	p := ba.ctx.Get("Button").New(linkOffsetXInPixels)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetXInPixels sets the LinkOffsetXInPixels property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#linkoffsetxinpixels
+func (b *Button) SetLinkOffsetXInPixels(linkOffsetXInPixels float64) *Button {
+	p := ba.ctx.Get("Button").New(linkOffsetXInPixels)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetY returns the LinkOffsetY property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#linkoffsety
+func (b *Button) LinkOffsetY(linkOffsetY string) *Button {
+	p := ba.ctx.Get("Button").New(linkOffsetY)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetY sets the LinkOffsetY property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#linkoffsety
+func (b *Button) SetLinkOffsetY(linkOffsetY string) *Button {
+	p := ba.ctx.Get("Button").New(linkOffsetY)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetYInPixels returns the LinkOffsetYInPixels property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#linkoffsetyinpixels
+func (b *Button) LinkOffsetYInPixels(linkOffsetYInPixels float64) *Button {
+	p := ba.ctx.Get("Button").New(linkOffsetYInPixels)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetYInPixels sets the LinkOffsetYInPixels property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#linkoffsetyinpixels
+func (b *Button) SetLinkOffsetYInPixels(linkOffsetYInPixels float64) *Button {
+	p := ba.ctx.Get("Button").New(linkOffsetYInPixels)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// LinkedMesh returns the LinkedMesh property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#linkedmesh
+func (b *Button) LinkedMesh(linkedMesh *AbstractMesh) *Button {
+	p := ba.ctx.Get("Button").New(linkedMesh.JSObject())
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetLinkedMesh sets the LinkedMesh property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#linkedmesh
+func (b *Button) SetLinkedMesh(linkedMesh *AbstractMesh) *Button {
+	p := ba.ctx.Get("Button").New(linkedMesh.JSObject())
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// LogLayoutCycleErrors returns the LogLayoutCycleErrors property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#loglayoutcycleerrors
+func (b *Button) LogLayoutCycleErrors(logLayoutCycleErrors bool) *Button {
+	p := ba.ctx.Get("Button").New(logLayoutCycleErrors)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetLogLayoutCycleErrors sets the LogLayoutCycleErrors property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#loglayoutcycleerrors
+func (b *Button) SetLogLayoutCycleErrors(logLayoutCycleErrors bool) *Button {
+	p := ba.ctx.Get("Button").New(logLayoutCycleErrors)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// MaxLayoutCycle returns the MaxLayoutCycle property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#maxlayoutcycle
+func (b *Button) MaxLayoutCycle(maxLayoutCycle float64) *Button {
+	p := ba.ctx.Get("Button").New(maxLayoutCycle)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetMaxLayoutCycle sets the MaxLayoutCycle property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#maxlayoutcycle
+func (b *Button) SetMaxLayoutCycle(maxLayoutCycle float64) *Button {
+	p := ba.ctx.Get("Button").New(maxLayoutCycle)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#metadata
+func (b *Button) Metadata(metadata interface{}) *Button {
+	p := ba.ctx.Get("Button").New(metadata)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#metadata
+func (b *Button) SetMetadata(metadata interface{}) *Button {
+	p := ba.ctx.Get("Button").New(metadata)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#name
+func (b *Button) Name(name string) *Button {
+	p := ba.ctx.Get("Button").New(name)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#name
+func (b *Button) SetName(name string) *Button {
+	p := ba.ctx.Get("Button").New(name)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// NotRenderable returns the NotRenderable property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#notrenderable
+func (b *Button) NotRenderable(notRenderable bool) *Button {
+	p := ba.ctx.Get("Button").New(notRenderable)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetNotRenderable sets the NotRenderable property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#notrenderable
+func (b *Button) SetNotRenderable(notRenderable bool) *Button {
+	p := ba.ctx.Get("Button").New(notRenderable)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// OnAfterDrawObservable returns the OnAfterDrawObservable property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#onafterdrawobservable
+func (b *Button) OnAfterDrawObservable(onAfterDrawObservable *Observable) *Button {
+	p := ba.ctx.Get("Button").New(onAfterDrawObservable.JSObject())
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterDrawObservable sets the OnAfterDrawObservable property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#onafterdrawobservable
+func (b *Button) SetOnAfterDrawObservable(onAfterDrawObservable *Observable) *Button {
+	p := ba.ctx.Get("Button").New(onAfterDrawObservable.JSObject())
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeDrawObservable returns the OnBeforeDrawObservable property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#onbeforedrawobservable
+func (b *Button) OnBeforeDrawObservable(onBeforeDrawObservable *Observable) *Button {
+	p := ba.ctx.Get("Button").New(onBeforeDrawObservable.JSObject())
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeDrawObservable sets the OnBeforeDrawObservable property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#onbeforedrawobservable
+func (b *Button) SetOnBeforeDrawObservable(onBeforeDrawObservable *Observable) *Button {
+	p := ba.ctx.Get("Button").New(onBeforeDrawObservable.JSObject())
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// OnDirtyObservable returns the OnDirtyObservable property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#ondirtyobservable
+func (b *Button) OnDirtyObservable(onDirtyObservable *Observable) *Button {
+	p := ba.ctx.Get("Button").New(onDirtyObservable.JSObject())
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetOnDirtyObservable sets the OnDirtyObservable property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#ondirtyobservable
+func (b *Button) SetOnDirtyObservable(onDirtyObservable *Observable) *Button {
+	p := ba.ctx.Get("Button").New(onDirtyObservable.JSObject())
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// OnPointerClickObservable returns the OnPointerClickObservable property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#onpointerclickobservable
+func (b *Button) OnPointerClickObservable(onPointerClickObservable *Observable) *Button {
+	p := ba.ctx.Get("Button").New(onPointerClickObservable.JSObject())
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerClickObservable sets the OnPointerClickObservable property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#onpointerclickobservable
+func (b *Button) SetOnPointerClickObservable(onPointerClickObservable *Observable) *Button {
+	p := ba.ctx.Get("Button").New(onPointerClickObservable.JSObject())
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// OnPointerDownObservable returns the OnPointerDownObservable property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#onpointerdownobservable
+func (b *Button) OnPointerDownObservable(onPointerDownObservable *Observable) *Button {
+	p := ba.ctx.Get("Button").New(onPointerDownObservable.JSObject())
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerDownObservable sets the OnPointerDownObservable property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#onpointerdownobservable
+func (b *Button) SetOnPointerDownObservable(onPointerDownObservable *Observable) *Button {
+	p := ba.ctx.Get("Button").New(onPointerDownObservable.JSObject())
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// OnPointerEnterObservable returns the OnPointerEnterObservable property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#onpointerenterobservable
+func (b *Button) OnPointerEnterObservable(onPointerEnterObservable *Observable) *Button {
+	p := ba.ctx.Get("Button").New(onPointerEnterObservable.JSObject())
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerEnterObservable sets the OnPointerEnterObservable property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#onpointerenterobservable
+func (b *Button) SetOnPointerEnterObservable(onPointerEnterObservable *Observable) *Button {
+	p := ba.ctx.Get("Button").New(onPointerEnterObservable.JSObject())
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// OnPointerMoveObservable returns the OnPointerMoveObservable property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#onpointermoveobservable
+func (b *Button) OnPointerMoveObservable(onPointerMoveObservable *Observable) *Button {
+	p := ba.ctx.Get("Button").New(onPointerMoveObservable.JSObject())
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerMoveObservable sets the OnPointerMoveObservable property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#onpointermoveobservable
+func (b *Button) SetOnPointerMoveObservable(onPointerMoveObservable *Observable) *Button {
+	p := ba.ctx.Get("Button").New(onPointerMoveObservable.JSObject())
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// OnPointerOutObservable returns the OnPointerOutObservable property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#onpointeroutobservable
+func (b *Button) OnPointerOutObservable(onPointerOutObservable *Observable) *Button {
+	p := ba.ctx.Get("Button").New(onPointerOutObservable.JSObject())
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerOutObservable sets the OnPointerOutObservable property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#onpointeroutobservable
+func (b *Button) SetOnPointerOutObservable(onPointerOutObservable *Observable) *Button {
+	p := ba.ctx.Get("Button").New(onPointerOutObservable.JSObject())
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// OnPointerUpObservable returns the OnPointerUpObservable property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#onpointerupobservable
+func (b *Button) OnPointerUpObservable(onPointerUpObservable *Observable) *Button {
+	p := ba.ctx.Get("Button").New(onPointerUpObservable.JSObject())
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerUpObservable sets the OnPointerUpObservable property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#onpointerupobservable
+func (b *Button) SetOnPointerUpObservable(onPointerUpObservable *Observable) *Button {
+	p := ba.ctx.Get("Button").New(onPointerUpObservable.JSObject())
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// PaddingBottom returns the PaddingBottom property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#paddingbottom
+func (b *Button) PaddingBottom(paddingBottom string) *Button {
+	p := ba.ctx.Get("Button").New(paddingBottom)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingBottom sets the PaddingBottom property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#paddingbottom
+func (b *Button) SetPaddingBottom(paddingBottom string) *Button {
+	p := ba.ctx.Get("Button").New(paddingBottom)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// PaddingBottomInPixels returns the PaddingBottomInPixels property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#paddingbottominpixels
+func (b *Button) PaddingBottomInPixels(paddingBottomInPixels float64) *Button {
+	p := ba.ctx.Get("Button").New(paddingBottomInPixels)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingBottomInPixels sets the PaddingBottomInPixels property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#paddingbottominpixels
+func (b *Button) SetPaddingBottomInPixels(paddingBottomInPixels float64) *Button {
+	p := ba.ctx.Get("Button").New(paddingBottomInPixels)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// PaddingLeft returns the PaddingLeft property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#paddingleft
+func (b *Button) PaddingLeft(paddingLeft string) *Button {
+	p := ba.ctx.Get("Button").New(paddingLeft)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingLeft sets the PaddingLeft property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#paddingleft
+func (b *Button) SetPaddingLeft(paddingLeft string) *Button {
+	p := ba.ctx.Get("Button").New(paddingLeft)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// PaddingLeftInPixels returns the PaddingLeftInPixels property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#paddingleftinpixels
+func (b *Button) PaddingLeftInPixels(paddingLeftInPixels float64) *Button {
+	p := ba.ctx.Get("Button").New(paddingLeftInPixels)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingLeftInPixels sets the PaddingLeftInPixels property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#paddingleftinpixels
+func (b *Button) SetPaddingLeftInPixels(paddingLeftInPixels float64) *Button {
+	p := ba.ctx.Get("Button").New(paddingLeftInPixels)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// PaddingRight returns the PaddingRight property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#paddingright
+func (b *Button) PaddingRight(paddingRight string) *Button {
+	p := ba.ctx.Get("Button").New(paddingRight)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingRight sets the PaddingRight property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#paddingright
+func (b *Button) SetPaddingRight(paddingRight string) *Button {
+	p := ba.ctx.Get("Button").New(paddingRight)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// PaddingRightInPixels returns the PaddingRightInPixels property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#paddingrightinpixels
+func (b *Button) PaddingRightInPixels(paddingRightInPixels float64) *Button {
+	p := ba.ctx.Get("Button").New(paddingRightInPixels)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingRightInPixels sets the PaddingRightInPixels property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#paddingrightinpixels
+func (b *Button) SetPaddingRightInPixels(paddingRightInPixels float64) *Button {
+	p := ba.ctx.Get("Button").New(paddingRightInPixels)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// PaddingTop returns the PaddingTop property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#paddingtop
+func (b *Button) PaddingTop(paddingTop string) *Button {
+	p := ba.ctx.Get("Button").New(paddingTop)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingTop sets the PaddingTop property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#paddingtop
+func (b *Button) SetPaddingTop(paddingTop string) *Button {
+	p := ba.ctx.Get("Button").New(paddingTop)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// PaddingTopInPixels returns the PaddingTopInPixels property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#paddingtopinpixels
+func (b *Button) PaddingTopInPixels(paddingTopInPixels float64) *Button {
+	p := ba.ctx.Get("Button").New(paddingTopInPixels)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingTopInPixels sets the PaddingTopInPixels property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#paddingtopinpixels
+func (b *Button) SetPaddingTopInPixels(paddingTopInPixels float64) *Button {
+	p := ba.ctx.Get("Button").New(paddingTopInPixels)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// Parent returns the Parent property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#parent
+func (b *Button) Parent(parent *Container) *Button {
+	p := ba.ctx.Get("Button").New(parent.JSObject())
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetParent sets the Parent property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#parent
+func (b *Button) SetParent(parent *Container) *Button {
+	p := ba.ctx.Get("Button").New(parent.JSObject())
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// PointerDownAnimation returns the PointerDownAnimation property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#pointerdownanimation
+func (b *Button) PointerDownAnimation(pointerDownAnimation func()) *Button {
+	p := ba.ctx.Get("Button").New(pointerDownAnimation)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetPointerDownAnimation sets the PointerDownAnimation property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#pointerdownanimation
+func (b *Button) SetPointerDownAnimation(pointerDownAnimation func()) *Button {
+	p := ba.ctx.Get("Button").New(pointerDownAnimation)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// PointerEnterAnimation returns the PointerEnterAnimation property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#pointerenteranimation
+func (b *Button) PointerEnterAnimation(pointerEnterAnimation func()) *Button {
+	p := ba.ctx.Get("Button").New(pointerEnterAnimation)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetPointerEnterAnimation sets the PointerEnterAnimation property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#pointerenteranimation
+func (b *Button) SetPointerEnterAnimation(pointerEnterAnimation func()) *Button {
+	p := ba.ctx.Get("Button").New(pointerEnterAnimation)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// PointerOutAnimation returns the PointerOutAnimation property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#pointeroutanimation
+func (b *Button) PointerOutAnimation(pointerOutAnimation func()) *Button {
+	p := ba.ctx.Get("Button").New(pointerOutAnimation)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetPointerOutAnimation sets the PointerOutAnimation property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#pointeroutanimation
+func (b *Button) SetPointerOutAnimation(pointerOutAnimation func()) *Button {
+	p := ba.ctx.Get("Button").New(pointerOutAnimation)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// PointerUpAnimation returns the PointerUpAnimation property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#pointerupanimation
+func (b *Button) PointerUpAnimation(pointerUpAnimation func()) *Button {
+	p := ba.ctx.Get("Button").New(pointerUpAnimation)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetPointerUpAnimation sets the PointerUpAnimation property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#pointerupanimation
+func (b *Button) SetPointerUpAnimation(pointerUpAnimation func()) *Button {
+	p := ba.ctx.Get("Button").New(pointerUpAnimation)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// Rotation returns the Rotation property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#rotation
+func (b *Button) Rotation(rotation float64) *Button {
+	p := ba.ctx.Get("Button").New(rotation)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetRotation sets the Rotation property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#rotation
+func (b *Button) SetRotation(rotation float64) *Button {
+	p := ba.ctx.Get("Button").New(rotation)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// ScaleX returns the ScaleX property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#scalex
+func (b *Button) ScaleX(scaleX float64) *Button {
+	p := ba.ctx.Get("Button").New(scaleX)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetScaleX sets the ScaleX property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#scalex
+func (b *Button) SetScaleX(scaleX float64) *Button {
+	p := ba.ctx.Get("Button").New(scaleX)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// ScaleY returns the ScaleY property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#scaley
+func (b *Button) ScaleY(scaleY float64) *Button {
+	p := ba.ctx.Get("Button").New(scaleY)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetScaleY sets the ScaleY property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#scaley
+func (b *Button) SetScaleY(scaleY float64) *Button {
+	p := ba.ctx.Get("Button").New(scaleY)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// ShadowBlur returns the ShadowBlur property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#shadowblur
+func (b *Button) ShadowBlur(shadowBlur float64) *Button {
+	p := ba.ctx.Get("Button").New(shadowBlur)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetShadowBlur sets the ShadowBlur property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#shadowblur
+func (b *Button) SetShadowBlur(shadowBlur float64) *Button {
+	p := ba.ctx.Get("Button").New(shadowBlur)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// ShadowColor returns the ShadowColor property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#shadowcolor
+func (b *Button) ShadowColor(shadowColor string) *Button {
+	p := ba.ctx.Get("Button").New(shadowColor)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetShadowColor sets the ShadowColor property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#shadowcolor
+func (b *Button) SetShadowColor(shadowColor string) *Button {
+	p := ba.ctx.Get("Button").New(shadowColor)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// ShadowOffsetX returns the ShadowOffsetX property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#shadowoffsetx
+func (b *Button) ShadowOffsetX(shadowOffsetX float64) *Button {
+	p := ba.ctx.Get("Button").New(shadowOffsetX)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetShadowOffsetX sets the ShadowOffsetX property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#shadowoffsetx
+func (b *Button) SetShadowOffsetX(shadowOffsetX float64) *Button {
+	p := ba.ctx.Get("Button").New(shadowOffsetX)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// ShadowOffsetY returns the ShadowOffsetY property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#shadowoffsety
+func (b *Button) ShadowOffsetY(shadowOffsetY float64) *Button {
+	p := ba.ctx.Get("Button").New(shadowOffsetY)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetShadowOffsetY sets the ShadowOffsetY property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#shadowoffsety
+func (b *Button) SetShadowOffsetY(shadowOffsetY float64) *Button {
+	p := ba.ctx.Get("Button").New(shadowOffsetY)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// Style returns the Style property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#style
+func (b *Button) Style(style *Style) *Button {
+	p := ba.ctx.Get("Button").New(style.JSObject())
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetStyle sets the Style property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#style
+func (b *Button) SetStyle(style *Style) *Button {
+	p := ba.ctx.Get("Button").New(style.JSObject())
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// TextBlock returns the TextBlock property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#textblock
+func (b *Button) TextBlock(textBlock *TextBlock) *Button {
+	p := ba.ctx.Get("Button").New(textBlock.JSObject())
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetTextBlock sets the TextBlock property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#textblock
+func (b *Button) SetTextBlock(textBlock *TextBlock) *Button {
+	p := ba.ctx.Get("Button").New(textBlock.JSObject())
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// Thickness returns the Thickness property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#thickness
+func (b *Button) Thickness(thickness float64) *Button {
+	p := ba.ctx.Get("Button").New(thickness)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetThickness sets the Thickness property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#thickness
+func (b *Button) SetThickness(thickness float64) *Button {
+	p := ba.ctx.Get("Button").New(thickness)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// Top returns the Top property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#top
+func (b *Button) Top(top string) *Button {
+	p := ba.ctx.Get("Button").New(top)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetTop sets the Top property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#top
+func (b *Button) SetTop(top string) *Button {
+	p := ba.ctx.Get("Button").New(top)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// TopInPixels returns the TopInPixels property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#topinpixels
+func (b *Button) TopInPixels(topInPixels float64) *Button {
+	p := ba.ctx.Get("Button").New(topInPixels)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetTopInPixels sets the TopInPixels property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#topinpixels
+func (b *Button) SetTopInPixels(topInPixels float64) *Button {
+	p := ba.ctx.Get("Button").New(topInPixels)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// TransformCenterX returns the TransformCenterX property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#transformcenterx
+func (b *Button) TransformCenterX(transformCenterX float64) *Button {
+	p := ba.ctx.Get("Button").New(transformCenterX)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetTransformCenterX sets the TransformCenterX property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#transformcenterx
+func (b *Button) SetTransformCenterX(transformCenterX float64) *Button {
+	p := ba.ctx.Get("Button").New(transformCenterX)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// TransformCenterY returns the TransformCenterY property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#transformcentery
+func (b *Button) TransformCenterY(transformCenterY float64) *Button {
+	p := ba.ctx.Get("Button").New(transformCenterY)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetTransformCenterY sets the TransformCenterY property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#transformcentery
+func (b *Button) SetTransformCenterY(transformCenterY float64) *Button {
+	p := ba.ctx.Get("Button").New(transformCenterY)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// TypeName returns the TypeName property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#typename
+func (b *Button) TypeName(typeName string) *Button {
+	p := ba.ctx.Get("Button").New(typeName)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetTypeName sets the TypeName property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#typename
+func (b *Button) SetTypeName(typeName string) *Button {
+	p := ba.ctx.Get("Button").New(typeName)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#uniqueid
+func (b *Button) UniqueId(uniqueId float64) *Button {
+	p := ba.ctx.Get("Button").New(uniqueId)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#uniqueid
+func (b *Button) SetUniqueId(uniqueId float64) *Button {
+	p := ba.ctx.Get("Button").New(uniqueId)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// UseBitmapCache returns the UseBitmapCache property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#usebitmapcache
+func (b *Button) UseBitmapCache(useBitmapCache bool) *Button {
+	p := ba.ctx.Get("Button").New(useBitmapCache)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetUseBitmapCache sets the UseBitmapCache property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#usebitmapcache
+func (b *Button) SetUseBitmapCache(useBitmapCache bool) *Button {
+	p := ba.ctx.Get("Button").New(useBitmapCache)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// VERTICAL_ALIGNMENT_BOTTOM returns the VERTICAL_ALIGNMENT_BOTTOM property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#vertical_alignment_bottom
+func (b *Button) VERTICAL_ALIGNMENT_BOTTOM(VERTICAL_ALIGNMENT_BOTTOM float64) *Button {
+	p := ba.ctx.Get("Button").New(VERTICAL_ALIGNMENT_BOTTOM)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetVERTICAL_ALIGNMENT_BOTTOM sets the VERTICAL_ALIGNMENT_BOTTOM property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#vertical_alignment_bottom
+func (b *Button) SetVERTICAL_ALIGNMENT_BOTTOM(VERTICAL_ALIGNMENT_BOTTOM float64) *Button {
+	p := ba.ctx.Get("Button").New(VERTICAL_ALIGNMENT_BOTTOM)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// VERTICAL_ALIGNMENT_CENTER returns the VERTICAL_ALIGNMENT_CENTER property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#vertical_alignment_center
+func (b *Button) VERTICAL_ALIGNMENT_CENTER(VERTICAL_ALIGNMENT_CENTER float64) *Button {
+	p := ba.ctx.Get("Button").New(VERTICAL_ALIGNMENT_CENTER)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetVERTICAL_ALIGNMENT_CENTER sets the VERTICAL_ALIGNMENT_CENTER property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#vertical_alignment_center
+func (b *Button) SetVERTICAL_ALIGNMENT_CENTER(VERTICAL_ALIGNMENT_CENTER float64) *Button {
+	p := ba.ctx.Get("Button").New(VERTICAL_ALIGNMENT_CENTER)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// VERTICAL_ALIGNMENT_TOP returns the VERTICAL_ALIGNMENT_TOP property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#vertical_alignment_top
+func (b *Button) VERTICAL_ALIGNMENT_TOP(VERTICAL_ALIGNMENT_TOP float64) *Button {
+	p := ba.ctx.Get("Button").New(VERTICAL_ALIGNMENT_TOP)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetVERTICAL_ALIGNMENT_TOP sets the VERTICAL_ALIGNMENT_TOP property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#vertical_alignment_top
+func (b *Button) SetVERTICAL_ALIGNMENT_TOP(VERTICAL_ALIGNMENT_TOP float64) *Button {
+	p := ba.ctx.Get("Button").New(VERTICAL_ALIGNMENT_TOP)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// VerticalAlignment returns the VerticalAlignment property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#verticalalignment
+func (b *Button) VerticalAlignment(verticalAlignment float64) *Button {
+	p := ba.ctx.Get("Button").New(verticalAlignment)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetVerticalAlignment sets the VerticalAlignment property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#verticalalignment
+func (b *Button) SetVerticalAlignment(verticalAlignment float64) *Button {
+	p := ba.ctx.Get("Button").New(verticalAlignment)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// Width returns the Width property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#width
+func (b *Button) Width(width string) *Button {
+	p := ba.ctx.Get("Button").New(width)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetWidth sets the Width property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#width
+func (b *Button) SetWidth(width string) *Button {
+	p := ba.ctx.Get("Button").New(width)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// WidthInPixels returns the WidthInPixels property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#widthinpixels
+func (b *Button) WidthInPixels(widthInPixels float64) *Button {
+	p := ba.ctx.Get("Button").New(widthInPixels)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetWidthInPixels sets the WidthInPixels property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#widthinpixels
+func (b *Button) SetWidthInPixels(widthInPixels float64) *Button {
+	p := ba.ctx.Get("Button").New(widthInPixels)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// ZIndex returns the ZIndex property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#zindex
+func (b *Button) ZIndex(zIndex float64) *Button {
+	p := ba.ctx.Get("Button").New(zIndex)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+// SetZIndex sets the ZIndex property of class Button.
+//
+// https://doc.babylonjs.com/api/classes/babylon.button#zindex
+func (b *Button) SetZIndex(zIndex float64) *Button {
+	p := ba.ctx.Get("Button").New(zIndex)
+	return ButtonFromJSObject(p, ba.ctx)
+}
+
+*/

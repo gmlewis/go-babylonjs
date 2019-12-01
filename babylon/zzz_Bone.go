@@ -31,15 +31,11 @@ func BoneFromJSObject(p js.Value, ctx js.Value) *Bone {
 
 // NewBoneOpts contains optional parameters for NewBone.
 type NewBoneOpts struct {
-	ParentBone *Bone
-
+	ParentBone  *Bone
 	LocalMatrix *Matrix
-
-	RestPose *Matrix
-
-	BaseMatrix *Matrix
-
-	Index *JSFloat64
+	RestPose    *Matrix
+	BaseMatrix  *Matrix
+	Index       *float64
 }
 
 // NewBone returns a new Bone object.
@@ -50,8 +46,1807 @@ func (ba *Babylon) NewBone(name string, skeleton *Skeleton, opts *NewBoneOpts) *
 		opts = &NewBoneOpts{}
 	}
 
-	p := ba.ctx.Get("Bone").New(name, skeleton.JSObject(), opts.ParentBone.JSObject(), opts.LocalMatrix.JSObject(), opts.RestPose.JSObject(), opts.BaseMatrix.JSObject(), opts.Index.JSObject())
+	args := make([]interface{}, 0, 2+5)
+
+	args = append(args, name)
+	args = append(args, skeleton.JSObject())
+
+	if opts.ParentBone == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ParentBone.JSObject())
+	}
+	if opts.LocalMatrix == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.LocalMatrix.JSObject())
+	}
+	if opts.RestPose == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.RestPose.JSObject())
+	}
+	if opts.BaseMatrix == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.BaseMatrix.JSObject())
+	}
+	if opts.Index == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Index)
+	}
+
+	p := ba.ctx.Get("Bone").New(args...)
 	return BoneFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// BoneAddBehaviorOpts contains optional parameters for Bone.AddBehavior.
+type BoneAddBehaviorOpts struct {
+	AttachImmediately *Node
+}
+
+// AddBehavior calls the AddBehavior method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#addbehavior
+func (b *Bone) AddBehavior(behavior js.Value, opts *BoneAddBehaviorOpts) *Node {
+	if opts == nil {
+		opts = &BoneAddBehaviorOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, behavior)
+
+	if opts.AttachImmediately == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.AttachImmediately.JSObject())
+	}
+
+	retVal := b.p.Call("addBehavior", args...)
+	return NodeFromJSObject(retVal, b.ctx)
+}
+
+// AddNodeConstructor calls the AddNodeConstructor method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#addnodeconstructor
+func (b *Bone) AddNodeConstructor(jsType string, constructorFunc js.Value) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, jsType)
+	args = append(args, constructorFunc)
+
+	b.p.Call("AddNodeConstructor", args...)
+}
+
+// BoneBeginAnimationOpts contains optional parameters for Bone.BeginAnimation.
+type BoneBeginAnimationOpts struct {
+	Loop           *bool
+	SpeedRatio     *float64
+	OnAnimationEnd *func()
+}
+
+// BeginAnimation calls the BeginAnimation method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#beginanimation
+func (b *Bone) BeginAnimation(name string, opts *BoneBeginAnimationOpts) *Animatable {
+	if opts == nil {
+		opts = &BoneBeginAnimationOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, name)
+
+	if opts.Loop == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Loop)
+	}
+	if opts.SpeedRatio == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SpeedRatio)
+	}
+	if opts.OnAnimationEnd == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnAnimationEnd)
+	}
+
+	retVal := b.p.Call("beginAnimation", args...)
+	return AnimatableFromJSObject(retVal, b.ctx)
+}
+
+// ComputeAbsoluteTransforms calls the ComputeAbsoluteTransforms method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#computeabsolutetransforms
+func (b *Bone) ComputeAbsoluteTransforms() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	b.p.Call("computeAbsoluteTransforms", args...)
+}
+
+// BoneComputeWorldMatrixOpts contains optional parameters for Bone.ComputeWorldMatrix.
+type BoneComputeWorldMatrixOpts struct {
+	Force *bool
+}
+
+// ComputeWorldMatrix calls the ComputeWorldMatrix method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#computeworldmatrix
+func (b *Bone) ComputeWorldMatrix(opts *BoneComputeWorldMatrixOpts) *Matrix {
+	if opts == nil {
+		opts = &BoneComputeWorldMatrixOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Force == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Force)
+	}
+
+	retVal := b.p.Call("computeWorldMatrix", args...)
+	return MatrixFromJSObject(retVal, b.ctx)
+}
+
+// BoneConstructOpts contains optional parameters for Bone.Construct.
+type BoneConstructOpts struct {
+	Options *interface{}
+}
+
+// Construct calls the Construct method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#construct
+func (b *Bone) Construct(jsType string, name string, scene *Scene, opts *BoneConstructOpts) func() {
+	if opts == nil {
+		opts = &BoneConstructOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, jsType)
+	args = append(args, name)
+	args = append(args, scene.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	retVal := b.p.Call("Construct", args...)
+	return retVal
+}
+
+// CopyAnimationRange calls the CopyAnimationRange method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#copyanimationrange
+func (b *Bone) CopyAnimationRange(source *Bone, rangeName string, frameOffset float64, rescaleAsRequired bool, skelDimensionsRatio *Vector3) bool {
+
+	args := make([]interface{}, 0, 5+0)
+
+	args = append(args, source.JSObject())
+	args = append(args, rangeName)
+	args = append(args, frameOffset)
+	args = append(args, rescaleAsRequired)
+	args = append(args, skelDimensionsRatio.JSObject())
+
+	retVal := b.p.Call("copyAnimationRange", args...)
+	return retVal.Bool()
+}
+
+// CreateAnimationRange calls the CreateAnimationRange method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#createanimationrange
+func (b *Bone) CreateAnimationRange(name string, from float64, to float64) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, name)
+	args = append(args, from)
+	args = append(args, to)
+
+	b.p.Call("createAnimationRange", args...)
+}
+
+// BoneDeleteAnimationRangeOpts contains optional parameters for Bone.DeleteAnimationRange.
+type BoneDeleteAnimationRangeOpts struct {
+	DeleteFrames *bool
+}
+
+// DeleteAnimationRange calls the DeleteAnimationRange method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#deleteanimationrange
+func (b *Bone) DeleteAnimationRange(name string, opts *BoneDeleteAnimationRangeOpts) {
+	if opts == nil {
+		opts = &BoneDeleteAnimationRangeOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, name)
+
+	if opts.DeleteFrames == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DeleteFrames)
+	}
+
+	b.p.Call("deleteAnimationRange", args...)
+}
+
+// BoneDisposeOpts contains optional parameters for Bone.Dispose.
+type BoneDisposeOpts struct {
+	DoNotRecurse               *bool
+	DisposeMaterialAndTextures *bool
+}
+
+// Dispose calls the Dispose method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#dispose
+func (b *Bone) Dispose(opts *BoneDisposeOpts) {
+	if opts == nil {
+		opts = &BoneDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.DoNotRecurse == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DoNotRecurse)
+	}
+	if opts.DisposeMaterialAndTextures == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DisposeMaterialAndTextures)
+	}
+
+	b.p.Call("dispose", args...)
+}
+
+// BoneGetAbsolutePositionOpts contains optional parameters for Bone.GetAbsolutePosition.
+type BoneGetAbsolutePositionOpts struct {
+	Mesh *AbstractMesh
+}
+
+// GetAbsolutePosition calls the GetAbsolutePosition method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#getabsoluteposition
+func (b *Bone) GetAbsolutePosition(opts *BoneGetAbsolutePositionOpts) *Vector3 {
+	if opts == nil {
+		opts = &BoneGetAbsolutePositionOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	retVal := b.p.Call("getAbsolutePosition", args...)
+	return Vector3FromJSObject(retVal, b.ctx)
+}
+
+// BoneGetAbsolutePositionFromLocalOpts contains optional parameters for Bone.GetAbsolutePositionFromLocal.
+type BoneGetAbsolutePositionFromLocalOpts struct {
+	Mesh *AbstractMesh
+}
+
+// GetAbsolutePositionFromLocal calls the GetAbsolutePositionFromLocal method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#getabsolutepositionfromlocal
+func (b *Bone) GetAbsolutePositionFromLocal(position *Vector3, opts *BoneGetAbsolutePositionFromLocalOpts) *Vector3 {
+	if opts == nil {
+		opts = &BoneGetAbsolutePositionFromLocalOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, position.JSObject())
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	retVal := b.p.Call("getAbsolutePositionFromLocal", args...)
+	return Vector3FromJSObject(retVal, b.ctx)
+}
+
+// GetAbsolutePositionFromLocalToRef calls the GetAbsolutePositionFromLocalToRef method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#getabsolutepositionfromlocaltoref
+func (b *Bone) GetAbsolutePositionFromLocalToRef(position *Vector3, mesh *AbstractMesh, result *Vector3) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, position.JSObject())
+	args = append(args, mesh.JSObject())
+	args = append(args, result.JSObject())
+
+	b.p.Call("getAbsolutePositionFromLocalToRef", args...)
+}
+
+// GetAbsolutePositionToRef calls the GetAbsolutePositionToRef method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#getabsolutepositiontoref
+func (b *Bone) GetAbsolutePositionToRef(mesh *AbstractMesh, result *Vector3) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, result.JSObject())
+
+	b.p.Call("getAbsolutePositionToRef", args...)
+}
+
+// GetAbsoluteTransform calls the GetAbsoluteTransform method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#getabsolutetransform
+func (b *Bone) GetAbsoluteTransform() *Matrix {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := b.p.Call("getAbsoluteTransform", args...)
+	return MatrixFromJSObject(retVal, b.ctx)
+}
+
+// GetAnimationByName calls the GetAnimationByName method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#getanimationbyname
+func (b *Bone) GetAnimationByName(name string) *Animation {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := b.p.Call("getAnimationByName", args...)
+	return AnimationFromJSObject(retVal, b.ctx)
+}
+
+// GetAnimationRange calls the GetAnimationRange method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#getanimationrange
+func (b *Bone) GetAnimationRange(name string) *AnimationRange {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := b.p.Call("getAnimationRange", args...)
+	return AnimationRangeFromJSObject(retVal, b.ctx)
+}
+
+// GetAnimationRanges calls the GetAnimationRanges method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#getanimationranges
+func (b *Bone) GetAnimationRanges() *AnimationRange {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := b.p.Call("getAnimationRanges", args...)
+	return AnimationRangeFromJSObject(retVal, b.ctx)
+}
+
+// GetBaseMatrix calls the GetBaseMatrix method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#getbasematrix
+func (b *Bone) GetBaseMatrix() *Matrix {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := b.p.Call("getBaseMatrix", args...)
+	return MatrixFromJSObject(retVal, b.ctx)
+}
+
+// GetBehaviorByName calls the GetBehaviorByName method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#getbehaviorbyname
+func (b *Bone) GetBehaviorByName(name string) *Node {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := b.p.Call("getBehaviorByName", args...)
+	return NodeFromJSObject(retVal, b.ctx)
+}
+
+// BoneGetChildMeshesOpts contains optional parameters for Bone.GetChildMeshes.
+type BoneGetChildMeshesOpts struct {
+	DirectDescendantsOnly *bool
+	Predicate             *func()
+}
+
+// GetChildMeshes calls the GetChildMeshes method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#getchildmeshes
+func (b *Bone) GetChildMeshes(opts *BoneGetChildMeshesOpts) *AbstractMesh {
+	if opts == nil {
+		opts = &BoneGetChildMeshesOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	retVal := b.p.Call("getChildMeshes", args...)
+	return AbstractMeshFromJSObject(retVal, b.ctx)
+}
+
+// GetChildren calls the GetChildren method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#getchildren
+func (b *Bone) GetChildren() *[]Bone {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := b.p.Call("getChildren", args...)
+	return []BoneFromJSObject(retVal, b.ctx)
+}
+
+// GetClassName calls the GetClassName method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#getclassname
+func (b *Bone) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := b.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// BoneGetDescendantsOpts contains optional parameters for Bone.GetDescendants.
+type BoneGetDescendantsOpts struct {
+	DirectDescendantsOnly *bool
+	Predicate             *func()
+}
+
+// GetDescendants calls the GetDescendants method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#getdescendants
+func (b *Bone) GetDescendants(opts *BoneGetDescendantsOpts) *Node {
+	if opts == nil {
+		opts = &BoneGetDescendantsOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	retVal := b.p.Call("getDescendants", args...)
+	return NodeFromJSObject(retVal, b.ctx)
+}
+
+// BoneGetDirectionOpts contains optional parameters for Bone.GetDirection.
+type BoneGetDirectionOpts struct {
+	Mesh *AbstractMesh
+}
+
+// GetDirection calls the GetDirection method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#getdirection
+func (b *Bone) GetDirection(localAxis *Vector3, opts *BoneGetDirectionOpts) *Vector3 {
+	if opts == nil {
+		opts = &BoneGetDirectionOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, localAxis.JSObject())
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	retVal := b.p.Call("getDirection", args...)
+	return Vector3FromJSObject(retVal, b.ctx)
+}
+
+// GetDirectionToRef calls the GetDirectionToRef method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#getdirectiontoref
+func (b *Bone) GetDirectionToRef(localAxis *Vector3, mesh *AbstractMesh, result *Vector3) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, localAxis.JSObject())
+	args = append(args, mesh.JSObject())
+	args = append(args, result.JSObject())
+
+	b.p.Call("getDirectionToRef", args...)
+}
+
+// GetEngine calls the GetEngine method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#getengine
+func (b *Bone) GetEngine() *Engine {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := b.p.Call("getEngine", args...)
+	return EngineFromJSObject(retVal, b.ctx)
+}
+
+// BoneGetHierarchyBoundingVectorsOpts contains optional parameters for Bone.GetHierarchyBoundingVectors.
+type BoneGetHierarchyBoundingVectorsOpts struct {
+	IncludeDescendants *bool
+	Predicate          *func()
+}
+
+// GetHierarchyBoundingVectors calls the GetHierarchyBoundingVectors method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#gethierarchyboundingvectors
+func (b *Bone) GetHierarchyBoundingVectors(opts *BoneGetHierarchyBoundingVectorsOpts) js.Value {
+	if opts == nil {
+		opts = &BoneGetHierarchyBoundingVectorsOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.IncludeDescendants == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IncludeDescendants)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	retVal := b.p.Call("getHierarchyBoundingVectors", args...)
+	return retVal
+}
+
+// GetIndex calls the GetIndex method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#getindex
+func (b *Bone) GetIndex() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := b.p.Call("getIndex", args...)
+	return retVal.Float()
+}
+
+// GetInvertedAbsoluteTransform calls the GetInvertedAbsoluteTransform method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#getinvertedabsolutetransform
+func (b *Bone) GetInvertedAbsoluteTransform() *Matrix {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := b.p.Call("getInvertedAbsoluteTransform", args...)
+	return MatrixFromJSObject(retVal, b.ctx)
+}
+
+// GetLocalMatrix calls the GetLocalMatrix method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#getlocalmatrix
+func (b *Bone) GetLocalMatrix() *Matrix {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := b.p.Call("getLocalMatrix", args...)
+	return MatrixFromJSObject(retVal, b.ctx)
+}
+
+// BoneGetLocalPositionFromAbsoluteOpts contains optional parameters for Bone.GetLocalPositionFromAbsolute.
+type BoneGetLocalPositionFromAbsoluteOpts struct {
+	Mesh *AbstractMesh
+}
+
+// GetLocalPositionFromAbsolute calls the GetLocalPositionFromAbsolute method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#getlocalpositionfromabsolute
+func (b *Bone) GetLocalPositionFromAbsolute(position *Vector3, opts *BoneGetLocalPositionFromAbsoluteOpts) *Vector3 {
+	if opts == nil {
+		opts = &BoneGetLocalPositionFromAbsoluteOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, position.JSObject())
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	retVal := b.p.Call("getLocalPositionFromAbsolute", args...)
+	return Vector3FromJSObject(retVal, b.ctx)
+}
+
+// GetLocalPositionFromAbsoluteToRef calls the GetLocalPositionFromAbsoluteToRef method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#getlocalpositionfromabsolutetoref
+func (b *Bone) GetLocalPositionFromAbsoluteToRef(position *Vector3, mesh *AbstractMesh, result *Vector3) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, position.JSObject())
+	args = append(args, mesh.JSObject())
+	args = append(args, result.JSObject())
+
+	b.p.Call("getLocalPositionFromAbsoluteToRef", args...)
+}
+
+// GetParent calls the GetParent method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#getparent
+func (b *Bone) GetParent() *Bone {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := b.p.Call("getParent", args...)
+	return BoneFromJSObject(retVal, b.ctx)
+}
+
+// BoneGetPositionOpts contains optional parameters for Bone.GetPosition.
+type BoneGetPositionOpts struct {
+	Space js.Value
+	Mesh  *AbstractMesh
+}
+
+// GetPosition calls the GetPosition method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#getposition
+func (b *Bone) GetPosition(opts *BoneGetPositionOpts) *Vector3 {
+	if opts == nil {
+		opts = &BoneGetPositionOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.Space == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Space)
+	}
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	retVal := b.p.Call("getPosition", args...)
+	return Vector3FromJSObject(retVal, b.ctx)
+}
+
+// GetPositionToRef calls the GetPositionToRef method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#getpositiontoref
+func (b *Bone) GetPositionToRef(space js.Value, mesh *AbstractMesh, result *Vector3) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, space)
+	args = append(args, mesh.JSObject())
+	args = append(args, result.JSObject())
+
+	b.p.Call("getPositionToRef", args...)
+}
+
+// GetRestPose calls the GetRestPose method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#getrestpose
+func (b *Bone) GetRestPose() *Matrix {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := b.p.Call("getRestPose", args...)
+	return MatrixFromJSObject(retVal, b.ctx)
+}
+
+// BoneGetRotationOpts contains optional parameters for Bone.GetRotation.
+type BoneGetRotationOpts struct {
+	Space js.Value
+	Mesh  *AbstractMesh
+}
+
+// GetRotation calls the GetRotation method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#getrotation
+func (b *Bone) GetRotation(opts *BoneGetRotationOpts) *Vector3 {
+	if opts == nil {
+		opts = &BoneGetRotationOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.Space == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Space)
+	}
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	retVal := b.p.Call("getRotation", args...)
+	return Vector3FromJSObject(retVal, b.ctx)
+}
+
+// GetRotationMatrix calls the GetRotationMatrix method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#getrotationmatrix
+func (b *Bone) GetRotationMatrix(space js.Value, mesh *AbstractMesh) *Matrix {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, space)
+	args = append(args, mesh.JSObject())
+
+	retVal := b.p.Call("getRotationMatrix", args...)
+	return MatrixFromJSObject(retVal, b.ctx)
+}
+
+// GetRotationMatrixToRef calls the GetRotationMatrixToRef method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#getrotationmatrixtoref
+func (b *Bone) GetRotationMatrixToRef(space js.Value, mesh *AbstractMesh, result *Matrix) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, space)
+	args = append(args, mesh.JSObject())
+	args = append(args, result.JSObject())
+
+	b.p.Call("getRotationMatrixToRef", args...)
+}
+
+// BoneGetRotationQuaternionOpts contains optional parameters for Bone.GetRotationQuaternion.
+type BoneGetRotationQuaternionOpts struct {
+	Space js.Value
+	Mesh  *AbstractMesh
+}
+
+// GetRotationQuaternion calls the GetRotationQuaternion method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#getrotationquaternion
+func (b *Bone) GetRotationQuaternion(opts *BoneGetRotationQuaternionOpts) *Quaternion {
+	if opts == nil {
+		opts = &BoneGetRotationQuaternionOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.Space == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Space)
+	}
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	retVal := b.p.Call("getRotationQuaternion", args...)
+	return QuaternionFromJSObject(retVal, b.ctx)
+}
+
+// GetRotationQuaternionToRef calls the GetRotationQuaternionToRef method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#getrotationquaterniontoref
+func (b *Bone) GetRotationQuaternionToRef(space js.Value, mesh *AbstractMesh, result *Quaternion) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, space)
+	args = append(args, mesh.JSObject())
+	args = append(args, result.JSObject())
+
+	b.p.Call("getRotationQuaternionToRef", args...)
+}
+
+// GetRotationToRef calls the GetRotationToRef method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#getrotationtoref
+func (b *Bone) GetRotationToRef(space js.Value, mesh *AbstractMesh, result *Vector3) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, space)
+	args = append(args, mesh.JSObject())
+	args = append(args, result.JSObject())
+
+	b.p.Call("getRotationToRef", args...)
+}
+
+// GetScale calls the GetScale method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#getscale
+func (b *Bone) GetScale() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := b.p.Call("getScale", args...)
+	return Vector3FromJSObject(retVal, b.ctx)
+}
+
+// GetScaleToRef calls the GetScaleToRef method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#getscaletoref
+func (b *Bone) GetScaleToRef(result *Vector3) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, result.JSObject())
+
+	b.p.Call("getScaleToRef", args...)
+}
+
+// GetScene calls the GetScene method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#getscene
+func (b *Bone) GetScene() *Scene {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := b.p.Call("getScene", args...)
+	return SceneFromJSObject(retVal, b.ctx)
+}
+
+// GetSkeleton calls the GetSkeleton method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#getskeleton
+func (b *Bone) GetSkeleton() *Skeleton {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := b.p.Call("getSkeleton", args...)
+	return SkeletonFromJSObject(retVal, b.ctx)
+}
+
+// GetTransformNode calls the GetTransformNode method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#gettransformnode
+func (b *Bone) GetTransformNode() *TransformNode {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := b.p.Call("getTransformNode", args...)
+	return TransformNodeFromJSObject(retVal, b.ctx)
+}
+
+// GetWorldMatrix calls the GetWorldMatrix method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#getworldmatrix
+func (b *Bone) GetWorldMatrix() *Matrix {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := b.p.Call("getWorldMatrix", args...)
+	return MatrixFromJSObject(retVal, b.ctx)
+}
+
+// IsDescendantOf calls the IsDescendantOf method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#isdescendantof
+func (b *Bone) IsDescendantOf(ancestor *Node) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, ancestor.JSObject())
+
+	retVal := b.p.Call("isDescendantOf", args...)
+	return retVal.Bool()
+}
+
+// IsDisposed calls the IsDisposed method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#isdisposed
+func (b *Bone) IsDisposed() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := b.p.Call("isDisposed", args...)
+	return retVal.Bool()
+}
+
+// BoneIsEnabledOpts contains optional parameters for Bone.IsEnabled.
+type BoneIsEnabledOpts struct {
+	CheckAncestors *bool
+}
+
+// IsEnabled calls the IsEnabled method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#isenabled
+func (b *Bone) IsEnabled(opts *BoneIsEnabledOpts) bool {
+	if opts == nil {
+		opts = &BoneIsEnabledOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.CheckAncestors == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.CheckAncestors)
+	}
+
+	retVal := b.p.Call("isEnabled", args...)
+	return retVal.Bool()
+}
+
+// BoneIsReadyOpts contains optional parameters for Bone.IsReady.
+type BoneIsReadyOpts struct {
+	CompleteCheck *bool
+}
+
+// IsReady calls the IsReady method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#isready
+func (b *Bone) IsReady(opts *BoneIsReadyOpts) bool {
+	if opts == nil {
+		opts = &BoneIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.CompleteCheck == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.CompleteCheck)
+	}
+
+	retVal := b.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// LinkTransformNode calls the LinkTransformNode method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#linktransformnode
+func (b *Bone) LinkTransformNode(transformNode *TransformNode) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, transformNode.JSObject())
+
+	b.p.Call("linkTransformNode", args...)
+}
+
+// MarkAsDirty calls the MarkAsDirty method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#markasdirty
+func (b *Bone) MarkAsDirty() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	b.p.Call("markAsDirty", args...)
+}
+
+// ParseAnimationRanges calls the ParseAnimationRanges method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#parseanimationranges
+func (b *Bone) ParseAnimationRanges(node *Node, parsedNode interface{}, scene *Scene) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, node.JSObject())
+	args = append(args, parsedNode)
+	args = append(args, scene.JSObject())
+
+	b.p.Call("ParseAnimationRanges", args...)
+}
+
+// RemoveBehavior calls the RemoveBehavior method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#removebehavior
+func (b *Bone) RemoveBehavior(behavior js.Value) *Node {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, behavior)
+
+	retVal := b.p.Call("removeBehavior", args...)
+	return NodeFromJSObject(retVal, b.ctx)
+}
+
+// ReturnToRest calls the ReturnToRest method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#returntorest
+func (b *Bone) ReturnToRest() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	b.p.Call("returnToRest", args...)
+}
+
+// BoneRotateOpts contains optional parameters for Bone.Rotate.
+type BoneRotateOpts struct {
+	Space js.Value
+	Mesh  *AbstractMesh
+}
+
+// Rotate calls the Rotate method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#rotate
+func (b *Bone) Rotate(axis *Vector3, amount float64, opts *BoneRotateOpts) {
+	if opts == nil {
+		opts = &BoneRotateOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+2)
+
+	args = append(args, axis.JSObject())
+	args = append(args, amount)
+
+	if opts.Space == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Space)
+	}
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	b.p.Call("rotate", args...)
+}
+
+// BoneScaleOpts contains optional parameters for Bone.Scale.
+type BoneScaleOpts struct {
+	ScaleChildren *bool
+}
+
+// Scale calls the Scale method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#scale
+func (b *Bone) Scale(x float64, y float64, z float64, opts *BoneScaleOpts) {
+	if opts == nil {
+		opts = &BoneScaleOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, x)
+	args = append(args, y)
+	args = append(args, z)
+
+	if opts.ScaleChildren == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ScaleChildren)
+	}
+
+	b.p.Call("scale", args...)
+}
+
+// SerializeAnimationRanges calls the SerializeAnimationRanges method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#serializeanimationranges
+func (b *Bone) SerializeAnimationRanges() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := b.p.Call("serializeAnimationRanges", args...)
+	return retVal
+}
+
+// BoneSetAbsolutePositionOpts contains optional parameters for Bone.SetAbsolutePosition.
+type BoneSetAbsolutePositionOpts struct {
+	Mesh *AbstractMesh
+}
+
+// SetAbsolutePosition calls the SetAbsolutePosition method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#setabsoluteposition
+func (b *Bone) SetAbsolutePosition(position *Vector3, opts *BoneSetAbsolutePositionOpts) {
+	if opts == nil {
+		opts = &BoneSetAbsolutePositionOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, position.JSObject())
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	b.p.Call("setAbsolutePosition", args...)
+}
+
+// BoneSetAxisAngleOpts contains optional parameters for Bone.SetAxisAngle.
+type BoneSetAxisAngleOpts struct {
+	Space js.Value
+	Mesh  *AbstractMesh
+}
+
+// SetAxisAngle calls the SetAxisAngle method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#setaxisangle
+func (b *Bone) SetAxisAngle(axis *Vector3, angle float64, opts *BoneSetAxisAngleOpts) {
+	if opts == nil {
+		opts = &BoneSetAxisAngleOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+2)
+
+	args = append(args, axis.JSObject())
+	args = append(args, angle)
+
+	if opts.Space == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Space)
+	}
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	b.p.Call("setAxisAngle", args...)
+}
+
+// SetEnabled calls the SetEnabled method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#setenabled
+func (b *Bone) SetEnabled(value bool) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, value)
+
+	b.p.Call("setEnabled", args...)
+}
+
+// BoneSetParentOpts contains optional parameters for Bone.SetParent.
+type BoneSetParentOpts struct {
+	UpdateDifferenceMatrix *bool
+}
+
+// SetParent calls the SetParent method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#setparent
+func (b *Bone) SetParent(parent *Bone, opts *BoneSetParentOpts) {
+	if opts == nil {
+		opts = &BoneSetParentOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, parent.JSObject())
+
+	if opts.UpdateDifferenceMatrix == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UpdateDifferenceMatrix)
+	}
+
+	b.p.Call("setParent", args...)
+}
+
+// BoneSetPositionOpts contains optional parameters for Bone.SetPosition.
+type BoneSetPositionOpts struct {
+	Space js.Value
+	Mesh  *AbstractMesh
+}
+
+// SetPosition calls the SetPosition method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#setposition
+func (b *Bone) SetPosition(position *Vector3, opts *BoneSetPositionOpts) {
+	if opts == nil {
+		opts = &BoneSetPositionOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, position.JSObject())
+
+	if opts.Space == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Space)
+	}
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	b.p.Call("setPosition", args...)
+}
+
+// BoneSetRotationOpts contains optional parameters for Bone.SetRotation.
+type BoneSetRotationOpts struct {
+	Space js.Value
+	Mesh  *AbstractMesh
+}
+
+// SetRotation calls the SetRotation method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#setrotation
+func (b *Bone) SetRotation(rotation *Vector3, opts *BoneSetRotationOpts) {
+	if opts == nil {
+		opts = &BoneSetRotationOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, rotation.JSObject())
+
+	if opts.Space == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Space)
+	}
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	b.p.Call("setRotation", args...)
+}
+
+// BoneSetRotationMatrixOpts contains optional parameters for Bone.SetRotationMatrix.
+type BoneSetRotationMatrixOpts struct {
+	Space js.Value
+	Mesh  *AbstractMesh
+}
+
+// SetRotationMatrix calls the SetRotationMatrix method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#setrotationmatrix
+func (b *Bone) SetRotationMatrix(rotMat *Matrix, opts *BoneSetRotationMatrixOpts) {
+	if opts == nil {
+		opts = &BoneSetRotationMatrixOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, rotMat.JSObject())
+
+	if opts.Space == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Space)
+	}
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	b.p.Call("setRotationMatrix", args...)
+}
+
+// BoneSetRotationQuaternionOpts contains optional parameters for Bone.SetRotationQuaternion.
+type BoneSetRotationQuaternionOpts struct {
+	Space js.Value
+	Mesh  *AbstractMesh
+}
+
+// SetRotationQuaternion calls the SetRotationQuaternion method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#setrotationquaternion
+func (b *Bone) SetRotationQuaternion(quat *Quaternion, opts *BoneSetRotationQuaternionOpts) {
+	if opts == nil {
+		opts = &BoneSetRotationQuaternionOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, quat.JSObject())
+
+	if opts.Space == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Space)
+	}
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	b.p.Call("setRotationQuaternion", args...)
+}
+
+// SetScale calls the SetScale method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#setscale
+func (b *Bone) SetScale(scale *Vector3) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, scale.JSObject())
+
+	b.p.Call("setScale", args...)
+}
+
+// BoneSetYawPitchRollOpts contains optional parameters for Bone.SetYawPitchRoll.
+type BoneSetYawPitchRollOpts struct {
+	Space js.Value
+	Mesh  *AbstractMesh
+}
+
+// SetYawPitchRoll calls the SetYawPitchRoll method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#setyawpitchroll
+func (b *Bone) SetYawPitchRoll(yaw float64, pitch float64, roll float64, opts *BoneSetYawPitchRollOpts) {
+	if opts == nil {
+		opts = &BoneSetYawPitchRollOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+2)
+
+	args = append(args, yaw)
+	args = append(args, pitch)
+	args = append(args, roll)
+
+	if opts.Space == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Space)
+	}
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	b.p.Call("setYawPitchRoll", args...)
+}
+
+// BoneTranslateOpts contains optional parameters for Bone.Translate.
+type BoneTranslateOpts struct {
+	Space js.Value
+	Mesh  *AbstractMesh
+}
+
+// Translate calls the Translate method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#translate
+func (b *Bone) Translate(vec *Vector3, opts *BoneTranslateOpts) {
+	if opts == nil {
+		opts = &BoneTranslateOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, vec.JSObject())
+
+	if opts.Space == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Space)
+	}
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	b.p.Call("translate", args...)
+}
+
+// BoneUpdateMatrixOpts contains optional parameters for Bone.UpdateMatrix.
+type BoneUpdateMatrixOpts struct {
+	UpdateDifferenceMatrix *bool
+	UpdateLocalMatrix      *bool
+}
+
+// UpdateMatrix calls the UpdateMatrix method on the Bone object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#updatematrix
+func (b *Bone) UpdateMatrix(matrix *Matrix, opts *BoneUpdateMatrixOpts) {
+	if opts == nil {
+		opts = &BoneUpdateMatrixOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, matrix.JSObject())
+
+	if opts.UpdateDifferenceMatrix == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UpdateDifferenceMatrix)
+	}
+	if opts.UpdateLocalMatrix == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UpdateLocalMatrix)
+	}
+
+	b.p.Call("updateMatrix", args...)
+}
+
+/*
+
+// AnimationPropertiesOverride returns the AnimationPropertiesOverride property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#animationpropertiesoverride
+func (b *Bone) AnimationPropertiesOverride(animationPropertiesOverride *AnimationPropertiesOverride) *Bone {
+	p := ba.ctx.Get("Bone").New(animationPropertiesOverride.JSObject())
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// SetAnimationPropertiesOverride sets the AnimationPropertiesOverride property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#animationpropertiesoverride
+func (b *Bone) SetAnimationPropertiesOverride(animationPropertiesOverride *AnimationPropertiesOverride) *Bone {
+	p := ba.ctx.Get("Bone").New(animationPropertiesOverride.JSObject())
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// Animations returns the Animations property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#animations
+func (b *Bone) Animations(animations *Animation) *Bone {
+	p := ba.ctx.Get("Bone").New(animations.JSObject())
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#animations
+func (b *Bone) SetAnimations(animations *Animation) *Bone {
+	p := ba.ctx.Get("Bone").New(animations.JSObject())
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// Behaviors returns the Behaviors property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#behaviors
+func (b *Bone) Behaviors(behaviors js.Value) *Bone {
+	p := ba.ctx.Get("Bone").New(behaviors)
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// SetBehaviors sets the Behaviors property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#behaviors
+func (b *Bone) SetBehaviors(behaviors js.Value) *Bone {
+	p := ba.ctx.Get("Bone").New(behaviors)
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// Children returns the Children property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#children
+func (b *Bone) Children(children *Bone) *Bone {
+	p := ba.ctx.Get("Bone").New(children.JSObject())
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// SetChildren sets the Children property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#children
+func (b *Bone) SetChildren(children *Bone) *Bone {
+	p := ba.ctx.Get("Bone").New(children.JSObject())
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// DoNotSerialize returns the DoNotSerialize property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#donotserialize
+func (b *Bone) DoNotSerialize(doNotSerialize bool) *Bone {
+	p := ba.ctx.Get("Bone").New(doNotSerialize)
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// SetDoNotSerialize sets the DoNotSerialize property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#donotserialize
+func (b *Bone) SetDoNotSerialize(doNotSerialize bool) *Bone {
+	p := ba.ctx.Get("Bone").New(doNotSerialize)
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// Id returns the Id property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#id
+func (b *Bone) Id(id string) *Bone {
+	p := ba.ctx.Get("Bone").New(id)
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// SetId sets the Id property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#id
+func (b *Bone) SetId(id string) *Bone {
+	p := ba.ctx.Get("Bone").New(id)
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#inspectablecustomproperties
+func (b *Bone) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *Bone {
+	p := ba.ctx.Get("Bone").New(inspectableCustomProperties.JSObject())
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#inspectablecustomproperties
+func (b *Bone) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *Bone {
+	p := ba.ctx.Get("Bone").New(inspectableCustomProperties.JSObject())
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// Length returns the Length property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#length
+func (b *Bone) Length(length float64) *Bone {
+	p := ba.ctx.Get("Bone").New(length)
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// SetLength sets the Length property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#length
+func (b *Bone) SetLength(length float64) *Bone {
+	p := ba.ctx.Get("Bone").New(length)
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#metadata
+func (b *Bone) Metadata(metadata interface{}) *Bone {
+	p := ba.ctx.Get("Bone").New(metadata)
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#metadata
+func (b *Bone) SetMetadata(metadata interface{}) *Bone {
+	p := ba.ctx.Get("Bone").New(metadata)
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#name
+func (b *Bone) Name(name string) *Bone {
+	p := ba.ctx.Get("Bone").New(name)
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#name
+func (b *Bone) SetName(name string) *Bone {
+	p := ba.ctx.Get("Bone").New(name)
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// OnDispose returns the OnDispose property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#ondispose
+func (b *Bone) OnDispose(onDispose func()) *Bone {
+	p := ba.ctx.Get("Bone").New(onDispose)
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// SetOnDispose sets the OnDispose property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#ondispose
+func (b *Bone) SetOnDispose(onDispose func()) *Bone {
+	p := ba.ctx.Get("Bone").New(onDispose)
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// OnDisposeObservable returns the OnDisposeObservable property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#ondisposeobservable
+func (b *Bone) OnDisposeObservable(onDisposeObservable *Observable) *Bone {
+	p := ba.ctx.Get("Bone").New(onDisposeObservable.JSObject())
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// SetOnDisposeObservable sets the OnDisposeObservable property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#ondisposeobservable
+func (b *Bone) SetOnDisposeObservable(onDisposeObservable *Observable) *Bone {
+	p := ba.ctx.Get("Bone").New(onDisposeObservable.JSObject())
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// OnReady returns the OnReady property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#onready
+func (b *Bone) OnReady(onReady func()) *Bone {
+	p := ba.ctx.Get("Bone").New(onReady)
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// SetOnReady sets the OnReady property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#onready
+func (b *Bone) SetOnReady(onReady func()) *Bone {
+	p := ba.ctx.Get("Bone").New(onReady)
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// Parent returns the Parent property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#parent
+func (b *Bone) Parent(parent *Node) *Bone {
+	p := ba.ctx.Get("Bone").New(parent.JSObject())
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// SetParent sets the Parent property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#parent
+func (b *Bone) SetParent(parent *Node) *Bone {
+	p := ba.ctx.Get("Bone").New(parent.JSObject())
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// Position returns the Position property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#position
+func (b *Bone) Position(position *Vector3) *Bone {
+	p := ba.ctx.Get("Bone").New(position.JSObject())
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// SetPosition sets the Position property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#position
+func (b *Bone) SetPosition(position *Vector3) *Bone {
+	p := ba.ctx.Get("Bone").New(position.JSObject())
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// ReservedDataStore returns the ReservedDataStore property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#reserveddatastore
+func (b *Bone) ReservedDataStore(reservedDataStore interface{}) *Bone {
+	p := ba.ctx.Get("Bone").New(reservedDataStore)
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// SetReservedDataStore sets the ReservedDataStore property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#reserveddatastore
+func (b *Bone) SetReservedDataStore(reservedDataStore interface{}) *Bone {
+	p := ba.ctx.Get("Bone").New(reservedDataStore)
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// Rotation returns the Rotation property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#rotation
+func (b *Bone) Rotation(rotation *Vector3) *Bone {
+	p := ba.ctx.Get("Bone").New(rotation.JSObject())
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// SetRotation sets the Rotation property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#rotation
+func (b *Bone) SetRotation(rotation *Vector3) *Bone {
+	p := ba.ctx.Get("Bone").New(rotation.JSObject())
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// RotationQuaternion returns the RotationQuaternion property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#rotationquaternion
+func (b *Bone) RotationQuaternion(rotationQuaternion *Quaternion) *Bone {
+	p := ba.ctx.Get("Bone").New(rotationQuaternion.JSObject())
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// SetRotationQuaternion sets the RotationQuaternion property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#rotationquaternion
+func (b *Bone) SetRotationQuaternion(rotationQuaternion *Quaternion) *Bone {
+	p := ba.ctx.Get("Bone").New(rotationQuaternion.JSObject())
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// Scaling returns the Scaling property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#scaling
+func (b *Bone) Scaling(scaling *Vector3) *Bone {
+	p := ba.ctx.Get("Bone").New(scaling.JSObject())
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// SetScaling sets the Scaling property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#scaling
+func (b *Bone) SetScaling(scaling *Vector3) *Bone {
+	p := ba.ctx.Get("Bone").New(scaling.JSObject())
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// State returns the State property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#state
+func (b *Bone) State(state string) *Bone {
+	p := ba.ctx.Get("Bone").New(state)
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// SetState sets the State property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#state
+func (b *Bone) SetState(state string) *Bone {
+	p := ba.ctx.Get("Bone").New(state)
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#uniqueid
+func (b *Bone) UniqueId(uniqueId float64) *Bone {
+	p := ba.ctx.Get("Bone").New(uniqueId)
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#uniqueid
+func (b *Bone) SetUniqueId(uniqueId float64) *Bone {
+	p := ba.ctx.Get("Bone").New(uniqueId)
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// WorldMatrixFromCache returns the WorldMatrixFromCache property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#worldmatrixfromcache
+func (b *Bone) WorldMatrixFromCache(worldMatrixFromCache *Matrix) *Bone {
+	p := ba.ctx.Get("Bone").New(worldMatrixFromCache.JSObject())
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+// SetWorldMatrixFromCache sets the WorldMatrixFromCache property of class Bone.
+//
+// https://doc.babylonjs.com/api/classes/babylon.bone#worldmatrixfromcache
+func (b *Bone) SetWorldMatrixFromCache(worldMatrixFromCache *Matrix) *Bone {
+	p := ba.ctx.Get("Bone").New(worldMatrixFromCache.JSObject())
+	return BoneFromJSObject(p, ba.ctx)
+}
+
+*/

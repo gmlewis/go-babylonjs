@@ -27,4 +27,34 @@ func PolyhedronBuilderFromJSObject(p js.Value, ctx js.Value) *PolyhedronBuilder 
 	return &PolyhedronBuilder{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// PolyhedronBuilderCreatePolyhedronOpts contains optional parameters for PolyhedronBuilder.CreatePolyhedron.
+type PolyhedronBuilderCreatePolyhedronOpts struct {
+	Scene *Scene
+}
+
+// CreatePolyhedron calls the CreatePolyhedron method on the PolyhedronBuilder object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.polyhedronbuilder#createpolyhedron
+func (p *PolyhedronBuilder) CreatePolyhedron(name string, options js.Value, opts *PolyhedronBuilderCreatePolyhedronOpts) *Mesh {
+	if opts == nil {
+		opts = &PolyhedronBuilderCreatePolyhedronOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, name)
+	args = append(args, options)
+
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+
+	retVal := p.p.Call("CreatePolyhedron", args...)
+	return MeshFromJSObject(retVal, p.ctx)
+}
+
+/*
+
+ */

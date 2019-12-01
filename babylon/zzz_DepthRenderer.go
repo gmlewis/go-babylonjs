@@ -30,11 +30,9 @@ func DepthRendererFromJSObject(p js.Value, ctx js.Value) *DepthRenderer {
 
 // NewDepthRendererOpts contains optional parameters for NewDepthRenderer.
 type NewDepthRendererOpts struct {
-	Type *JSFloat64
-
-	Camera *Camera
-
-	StoreNonLinearDepth *JSBool
+	Type                *float64
+	Camera              *Camera
+	StoreNonLinearDepth *bool
 }
 
 // NewDepthRenderer returns a new DepthRenderer object.
@@ -45,8 +43,97 @@ func (ba *Babylon) NewDepthRenderer(scene *Scene, opts *NewDepthRendererOpts) *D
 		opts = &NewDepthRendererOpts{}
 	}
 
-	p := ba.ctx.Get("DepthRenderer").New(scene.JSObject(), opts.Type.JSObject(), opts.Camera.JSObject(), opts.StoreNonLinearDepth.JSObject())
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, scene.JSObject())
+
+	if opts.Type == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Type)
+	}
+	if opts.Camera == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Camera.JSObject())
+	}
+	if opts.StoreNonLinearDepth == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.StoreNonLinearDepth)
+	}
+
+	p := ba.ctx.Get("DepthRenderer").New(args...)
 	return DepthRendererFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Dispose calls the Dispose method on the DepthRenderer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthrenderer#dispose
+func (d *DepthRenderer) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	d.p.Call("dispose", args...)
+}
+
+// GetDepthMap calls the GetDepthMap method on the DepthRenderer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthrenderer#getdepthmap
+func (d *DepthRenderer) GetDepthMap() *RenderTargetTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := d.p.Call("getDepthMap", args...)
+	return RenderTargetTextureFromJSObject(retVal, d.ctx)
+}
+
+// IsReady calls the IsReady method on the DepthRenderer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthrenderer#isready
+func (d *DepthRenderer) IsReady(subMesh *SubMesh, useInstances bool) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, subMesh.JSObject())
+	args = append(args, useInstances)
+
+	retVal := d.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+/*
+
+// IsPacked returns the IsPacked property of class DepthRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthrenderer#ispacked
+func (d *DepthRenderer) IsPacked(isPacked bool) *DepthRenderer {
+	p := ba.ctx.Get("DepthRenderer").New(isPacked)
+	return DepthRendererFromJSObject(p, ba.ctx)
+}
+
+// SetIsPacked sets the IsPacked property of class DepthRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthrenderer#ispacked
+func (d *DepthRenderer) SetIsPacked(isPacked bool) *DepthRenderer {
+	p := ba.ctx.Get("DepthRenderer").New(isPacked)
+	return DepthRendererFromJSObject(p, ba.ctx)
+}
+
+// UseOnlyInActiveCamera returns the UseOnlyInActiveCamera property of class DepthRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthrenderer#useonlyinactivecamera
+func (d *DepthRenderer) UseOnlyInActiveCamera(useOnlyInActiveCamera bool) *DepthRenderer {
+	p := ba.ctx.Get("DepthRenderer").New(useOnlyInActiveCamera)
+	return DepthRendererFromJSObject(p, ba.ctx)
+}
+
+// SetUseOnlyInActiveCamera sets the UseOnlyInActiveCamera property of class DepthRenderer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.depthrenderer#useonlyinactivecamera
+func (d *DepthRenderer) SetUseOnlyInActiveCamera(useOnlyInActiveCamera bool) *DepthRenderer {
+	p := ba.ctx.Get("DepthRenderer").New(useOnlyInActiveCamera)
+	return DepthRendererFromJSObject(p, ba.ctx)
+}
+
+*/

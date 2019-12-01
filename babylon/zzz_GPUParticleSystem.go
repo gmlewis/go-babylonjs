@@ -32,7 +32,7 @@ func GPUParticleSystemFromJSObject(p js.Value, ctx js.Value) *GPUParticleSystem 
 
 // NewGPUParticleSystemOpts contains optional parameters for NewGPUParticleSystem.
 type NewGPUParticleSystemOpts struct {
-	IsAnimationSheetEnabled *JSBool
+	IsAnimationSheetEnabled *bool
 }
 
 // NewGPUParticleSystem returns a new GPUParticleSystem object.
@@ -43,8 +43,2170 @@ func (ba *Babylon) NewGPUParticleSystem(name string, options js.Value, scene *Sc
 		opts = &NewGPUParticleSystemOpts{}
 	}
 
-	p := ba.ctx.Get("GPUParticleSystem").New(name, options, scene.JSObject(), opts.IsAnimationSheetEnabled.JSObject())
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, name)
+	args = append(args, options)
+	args = append(args, scene.JSObject())
+
+	if opts.IsAnimationSheetEnabled == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IsAnimationSheetEnabled)
+	}
+
+	p := ba.ctx.Get("GPUParticleSystem").New(args...)
 	return GPUParticleSystemFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AddAlphaRemapGradient calls the AddAlphaRemapGradient method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#addalpharemapgradient
+func (g *GPUParticleSystem) AddAlphaRemapGradient(gradient float64, min float64, max float64) *IParticleSystem {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, gradient)
+	args = append(args, min)
+	args = append(args, max)
+
+	retVal := g.p.Call("addAlphaRemapGradient", args...)
+	return IParticleSystemFromJSObject(retVal, g.ctx)
+}
+
+// AddAngularSpeedGradient calls the AddAngularSpeedGradient method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#addangularspeedgradient
+func (g *GPUParticleSystem) AddAngularSpeedGradient(gradient float64, factor float64) *GPUParticleSystem {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, gradient)
+	args = append(args, factor)
+
+	retVal := g.p.Call("addAngularSpeedGradient", args...)
+	return GPUParticleSystemFromJSObject(retVal, g.ctx)
+}
+
+// GPUParticleSystemAddColorGradientOpts contains optional parameters for GPUParticleSystem.AddColorGradient.
+type GPUParticleSystemAddColorGradientOpts struct {
+	Color2 *Color4
+}
+
+// AddColorGradient calls the AddColorGradient method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#addcolorgradient
+func (g *GPUParticleSystem) AddColorGradient(gradient float64, color1 *Color4, opts *GPUParticleSystemAddColorGradientOpts) *GPUParticleSystem {
+	if opts == nil {
+		opts = &GPUParticleSystemAddColorGradientOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, gradient)
+	args = append(args, color1.JSObject())
+
+	if opts.Color2 == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Color2.JSObject())
+	}
+
+	retVal := g.p.Call("addColorGradient", args...)
+	return GPUParticleSystemFromJSObject(retVal, g.ctx)
+}
+
+// AddColorRemapGradient calls the AddColorRemapGradient method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#addcolorremapgradient
+func (g *GPUParticleSystem) AddColorRemapGradient(gradient float64, min float64, max float64) *IParticleSystem {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, gradient)
+	args = append(args, min)
+	args = append(args, max)
+
+	retVal := g.p.Call("addColorRemapGradient", args...)
+	return IParticleSystemFromJSObject(retVal, g.ctx)
+}
+
+// AddDragGradient calls the AddDragGradient method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#adddraggradient
+func (g *GPUParticleSystem) AddDragGradient(gradient float64, factor float64) *GPUParticleSystem {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, gradient)
+	args = append(args, factor)
+
+	retVal := g.p.Call("addDragGradient", args...)
+	return GPUParticleSystemFromJSObject(retVal, g.ctx)
+}
+
+// GPUParticleSystemAddEmitRateGradientOpts contains optional parameters for GPUParticleSystem.AddEmitRateGradient.
+type GPUParticleSystemAddEmitRateGradientOpts struct {
+	Factor2 *float64
+}
+
+// AddEmitRateGradient calls the AddEmitRateGradient method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#addemitrategradient
+func (g *GPUParticleSystem) AddEmitRateGradient(gradient float64, factor float64, opts *GPUParticleSystemAddEmitRateGradientOpts) *IParticleSystem {
+	if opts == nil {
+		opts = &GPUParticleSystemAddEmitRateGradientOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, gradient)
+	args = append(args, factor)
+
+	if opts.Factor2 == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Factor2)
+	}
+
+	retVal := g.p.Call("addEmitRateGradient", args...)
+	return IParticleSystemFromJSObject(retVal, g.ctx)
+}
+
+// GPUParticleSystemAddLifeTimeGradientOpts contains optional parameters for GPUParticleSystem.AddLifeTimeGradient.
+type GPUParticleSystemAddLifeTimeGradientOpts struct {
+	Factor2 *float64
+}
+
+// AddLifeTimeGradient calls the AddLifeTimeGradient method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#addlifetimegradient
+func (g *GPUParticleSystem) AddLifeTimeGradient(gradient float64, factor float64, opts *GPUParticleSystemAddLifeTimeGradientOpts) *IParticleSystem {
+	if opts == nil {
+		opts = &GPUParticleSystemAddLifeTimeGradientOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, gradient)
+	args = append(args, factor)
+
+	if opts.Factor2 == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Factor2)
+	}
+
+	retVal := g.p.Call("addLifeTimeGradient", args...)
+	return IParticleSystemFromJSObject(retVal, g.ctx)
+}
+
+// AddLimitVelocityGradient calls the AddLimitVelocityGradient method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#addlimitvelocitygradient
+func (g *GPUParticleSystem) AddLimitVelocityGradient(gradient float64, factor float64) *GPUParticleSystem {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, gradient)
+	args = append(args, factor)
+
+	retVal := g.p.Call("addLimitVelocityGradient", args...)
+	return GPUParticleSystemFromJSObject(retVal, g.ctx)
+}
+
+// AddRampGradient calls the AddRampGradient method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#addrampgradient
+func (g *GPUParticleSystem) AddRampGradient(gradient float64, color *Color3) *IParticleSystem {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, gradient)
+	args = append(args, color.JSObject())
+
+	retVal := g.p.Call("addRampGradient", args...)
+	return IParticleSystemFromJSObject(retVal, g.ctx)
+}
+
+// AddSizeGradient calls the AddSizeGradient method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#addsizegradient
+func (g *GPUParticleSystem) AddSizeGradient(gradient float64, factor float64) *GPUParticleSystem {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, gradient)
+	args = append(args, factor)
+
+	retVal := g.p.Call("addSizeGradient", args...)
+	return GPUParticleSystemFromJSObject(retVal, g.ctx)
+}
+
+// GPUParticleSystemAddStartSizeGradientOpts contains optional parameters for GPUParticleSystem.AddStartSizeGradient.
+type GPUParticleSystemAddStartSizeGradientOpts struct {
+	Factor2 *float64
+}
+
+// AddStartSizeGradient calls the AddStartSizeGradient method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#addstartsizegradient
+func (g *GPUParticleSystem) AddStartSizeGradient(gradient float64, factor float64, opts *GPUParticleSystemAddStartSizeGradientOpts) *IParticleSystem {
+	if opts == nil {
+		opts = &GPUParticleSystemAddStartSizeGradientOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, gradient)
+	args = append(args, factor)
+
+	if opts.Factor2 == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Factor2)
+	}
+
+	retVal := g.p.Call("addStartSizeGradient", args...)
+	return IParticleSystemFromJSObject(retVal, g.ctx)
+}
+
+// AddVelocityGradient calls the AddVelocityGradient method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#addvelocitygradient
+func (g *GPUParticleSystem) AddVelocityGradient(gradient float64, factor float64) *GPUParticleSystem {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, gradient)
+	args = append(args, factor)
+
+	retVal := g.p.Call("addVelocityGradient", args...)
+	return GPUParticleSystemFromJSObject(retVal, g.ctx)
+}
+
+// GPUParticleSystemAnimateOpts contains optional parameters for GPUParticleSystem.Animate.
+type GPUParticleSystemAnimateOpts struct {
+	PreWarm *bool
+}
+
+// Animate calls the Animate method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#animate
+func (g *GPUParticleSystem) Animate(opts *GPUParticleSystemAnimateOpts) {
+	if opts == nil {
+		opts = &GPUParticleSystemAnimateOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.PreWarm == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.PreWarm)
+	}
+
+	g.p.Call("animate", args...)
+}
+
+// Clone calls the Clone method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#clone
+func (g *GPUParticleSystem) Clone(name string, newEmitter interface{}) *GPUParticleSystem {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, newEmitter)
+
+	retVal := g.p.Call("clone", args...)
+	return GPUParticleSystemFromJSObject(retVal, g.ctx)
+}
+
+// CreateBoxEmitter calls the CreateBoxEmitter method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#createboxemitter
+func (g *GPUParticleSystem) CreateBoxEmitter(direction1 *Vector3, direction2 *Vector3, minEmitBox *Vector3, maxEmitBox *Vector3) *BoxParticleEmitter {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, direction1.JSObject())
+	args = append(args, direction2.JSObject())
+	args = append(args, minEmitBox.JSObject())
+	args = append(args, maxEmitBox.JSObject())
+
+	retVal := g.p.Call("createBoxEmitter", args...)
+	return BoxParticleEmitterFromJSObject(retVal, g.ctx)
+}
+
+// GPUParticleSystemCreateConeEmitterOpts contains optional parameters for GPUParticleSystem.CreateConeEmitter.
+type GPUParticleSystemCreateConeEmitterOpts struct {
+	Radius *float64
+	Angle  *float64
+}
+
+// CreateConeEmitter calls the CreateConeEmitter method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#createconeemitter
+func (g *GPUParticleSystem) CreateConeEmitter(opts *GPUParticleSystemCreateConeEmitterOpts) *ConeParticleEmitter {
+	if opts == nil {
+		opts = &GPUParticleSystemCreateConeEmitterOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.Radius == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Radius)
+	}
+	if opts.Angle == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Angle)
+	}
+
+	retVal := g.p.Call("createConeEmitter", args...)
+	return ConeParticleEmitterFromJSObject(retVal, g.ctx)
+}
+
+// GPUParticleSystemCreateCylinderEmitterOpts contains optional parameters for GPUParticleSystem.CreateCylinderEmitter.
+type GPUParticleSystemCreateCylinderEmitterOpts struct {
+	Radius              *float64
+	Height              *float64
+	RadiusRange         *float64
+	DirectionRandomizer *float64
+}
+
+// CreateCylinderEmitter calls the CreateCylinderEmitter method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#createcylinderemitter
+func (g *GPUParticleSystem) CreateCylinderEmitter(opts *GPUParticleSystemCreateCylinderEmitterOpts) *CylinderParticleEmitter {
+	if opts == nil {
+		opts = &GPUParticleSystemCreateCylinderEmitterOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+4)
+
+	if opts.Radius == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Radius)
+	}
+	if opts.Height == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Height)
+	}
+	if opts.RadiusRange == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RadiusRange)
+	}
+	if opts.DirectionRandomizer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectionRandomizer)
+	}
+
+	retVal := g.p.Call("createCylinderEmitter", args...)
+	return CylinderParticleEmitterFromJSObject(retVal, g.ctx)
+}
+
+// GPUParticleSystemCreateDirectedCylinderEmitterOpts contains optional parameters for GPUParticleSystem.CreateDirectedCylinderEmitter.
+type GPUParticleSystemCreateDirectedCylinderEmitterOpts struct {
+	Radius      *float64
+	Height      *float64
+	RadiusRange *float64
+	Direction1  *Vector3
+	Direction2  *Vector3
+}
+
+// CreateDirectedCylinderEmitter calls the CreateDirectedCylinderEmitter method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#createdirectedcylinderemitter
+func (g *GPUParticleSystem) CreateDirectedCylinderEmitter(opts *GPUParticleSystemCreateDirectedCylinderEmitterOpts) *CylinderDirectedParticleEmitter {
+	if opts == nil {
+		opts = &GPUParticleSystemCreateDirectedCylinderEmitterOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+5)
+
+	if opts.Radius == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Radius)
+	}
+	if opts.Height == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Height)
+	}
+	if opts.RadiusRange == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RadiusRange)
+	}
+	if opts.Direction1 == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Direction1.JSObject())
+	}
+	if opts.Direction2 == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Direction2.JSObject())
+	}
+
+	retVal := g.p.Call("createDirectedCylinderEmitter", args...)
+	return CylinderDirectedParticleEmitterFromJSObject(retVal, g.ctx)
+}
+
+// GPUParticleSystemCreateDirectedSphereEmitterOpts contains optional parameters for GPUParticleSystem.CreateDirectedSphereEmitter.
+type GPUParticleSystemCreateDirectedSphereEmitterOpts struct {
+	Radius     *float64
+	Direction1 *Vector3
+	Direction2 *Vector3
+}
+
+// CreateDirectedSphereEmitter calls the CreateDirectedSphereEmitter method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#createdirectedsphereemitter
+func (g *GPUParticleSystem) CreateDirectedSphereEmitter(opts *GPUParticleSystemCreateDirectedSphereEmitterOpts) *SphereDirectedParticleEmitter {
+	if opts == nil {
+		opts = &GPUParticleSystemCreateDirectedSphereEmitterOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+3)
+
+	if opts.Radius == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Radius)
+	}
+	if opts.Direction1 == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Direction1.JSObject())
+	}
+	if opts.Direction2 == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Direction2.JSObject())
+	}
+
+	retVal := g.p.Call("createDirectedSphereEmitter", args...)
+	return SphereDirectedParticleEmitterFromJSObject(retVal, g.ctx)
+}
+
+// GPUParticleSystemCreateHemisphericEmitterOpts contains optional parameters for GPUParticleSystem.CreateHemisphericEmitter.
+type GPUParticleSystemCreateHemisphericEmitterOpts struct {
+	Radius      *float64
+	RadiusRange *float64
+}
+
+// CreateHemisphericEmitter calls the CreateHemisphericEmitter method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#createhemisphericemitter
+func (g *GPUParticleSystem) CreateHemisphericEmitter(opts *GPUParticleSystemCreateHemisphericEmitterOpts) *HemisphericParticleEmitter {
+	if opts == nil {
+		opts = &GPUParticleSystemCreateHemisphericEmitterOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.Radius == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Radius)
+	}
+	if opts.RadiusRange == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RadiusRange)
+	}
+
+	retVal := g.p.Call("createHemisphericEmitter", args...)
+	return HemisphericParticleEmitterFromJSObject(retVal, g.ctx)
+}
+
+// CreatePointEmitter calls the CreatePointEmitter method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#createpointemitter
+func (g *GPUParticleSystem) CreatePointEmitter(direction1 *Vector3, direction2 *Vector3) *PointParticleEmitter {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, direction1.JSObject())
+	args = append(args, direction2.JSObject())
+
+	retVal := g.p.Call("createPointEmitter", args...)
+	return PointParticleEmitterFromJSObject(retVal, g.ctx)
+}
+
+// GPUParticleSystemCreateSphereEmitterOpts contains optional parameters for GPUParticleSystem.CreateSphereEmitter.
+type GPUParticleSystemCreateSphereEmitterOpts struct {
+	Radius      *float64
+	RadiusRange *float64
+}
+
+// CreateSphereEmitter calls the CreateSphereEmitter method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#createsphereemitter
+func (g *GPUParticleSystem) CreateSphereEmitter(opts *GPUParticleSystemCreateSphereEmitterOpts) *SphereParticleEmitter {
+	if opts == nil {
+		opts = &GPUParticleSystemCreateSphereEmitterOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.Radius == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Radius)
+	}
+	if opts.RadiusRange == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RadiusRange)
+	}
+
+	retVal := g.p.Call("createSphereEmitter", args...)
+	return SphereParticleEmitterFromJSObject(retVal, g.ctx)
+}
+
+// GPUParticleSystemDisposeOpts contains optional parameters for GPUParticleSystem.Dispose.
+type GPUParticleSystemDisposeOpts struct {
+	DisposeTexture *bool
+}
+
+// Dispose calls the Dispose method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#dispose
+func (g *GPUParticleSystem) Dispose(opts *GPUParticleSystemDisposeOpts) {
+	if opts == nil {
+		opts = &GPUParticleSystemDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.DisposeTexture == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DisposeTexture)
+	}
+
+	g.p.Call("dispose", args...)
+}
+
+// GetAlphaRemapGradients calls the GetAlphaRemapGradients method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#getalpharemapgradients
+func (g *GPUParticleSystem) GetAlphaRemapGradients() *[]FactorGradient {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getAlphaRemapGradients", args...)
+	return []FactorGradientFromJSObject(retVal, g.ctx)
+}
+
+// GetAngularSpeedGradients calls the GetAngularSpeedGradients method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#getangularspeedgradients
+func (g *GPUParticleSystem) GetAngularSpeedGradients() *[]FactorGradient {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getAngularSpeedGradients", args...)
+	return []FactorGradientFromJSObject(retVal, g.ctx)
+}
+
+// GetCapacity calls the GetCapacity method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#getcapacity
+func (g *GPUParticleSystem) GetCapacity() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getCapacity", args...)
+	return retVal.Float()
+}
+
+// GetClassName calls the GetClassName method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#getclassname
+func (g *GPUParticleSystem) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetColorGradients calls the GetColorGradients method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#getcolorgradients
+func (g *GPUParticleSystem) GetColorGradients() *[]ColorGradient {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getColorGradients", args...)
+	return []ColorGradientFromJSObject(retVal, g.ctx)
+}
+
+// GetColorRemapGradients calls the GetColorRemapGradients method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#getcolorremapgradients
+func (g *GPUParticleSystem) GetColorRemapGradients() *[]FactorGradient {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getColorRemapGradients", args...)
+	return []FactorGradientFromJSObject(retVal, g.ctx)
+}
+
+// GetDragGradients calls the GetDragGradients method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#getdraggradients
+func (g *GPUParticleSystem) GetDragGradients() *[]FactorGradient {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getDragGradients", args...)
+	return []FactorGradientFromJSObject(retVal, g.ctx)
+}
+
+// GetEmitRateGradients calls the GetEmitRateGradients method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#getemitrategradients
+func (g *GPUParticleSystem) GetEmitRateGradients() *[]FactorGradient {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getEmitRateGradients", args...)
+	return []FactorGradientFromJSObject(retVal, g.ctx)
+}
+
+// GetLifeTimeGradients calls the GetLifeTimeGradients method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#getlifetimegradients
+func (g *GPUParticleSystem) GetLifeTimeGradients() *[]FactorGradient {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getLifeTimeGradients", args...)
+	return []FactorGradientFromJSObject(retVal, g.ctx)
+}
+
+// GetLimitVelocityGradients calls the GetLimitVelocityGradients method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#getlimitvelocitygradients
+func (g *GPUParticleSystem) GetLimitVelocityGradients() *[]FactorGradient {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getLimitVelocityGradients", args...)
+	return []FactorGradientFromJSObject(retVal, g.ctx)
+}
+
+// GetRampGradients calls the GetRampGradients method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#getrampgradients
+func (g *GPUParticleSystem) GetRampGradients() *[]Color3Gradient {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getRampGradients", args...)
+	return []Color3GradientFromJSObject(retVal, g.ctx)
+}
+
+// GetScene calls the GetScene method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#getscene
+func (g *GPUParticleSystem) GetScene() *Scene {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getScene", args...)
+	return SceneFromJSObject(retVal, g.ctx)
+}
+
+// GetSizeGradients calls the GetSizeGradients method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#getsizegradients
+func (g *GPUParticleSystem) GetSizeGradients() *[]FactorGradient {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getSizeGradients", args...)
+	return []FactorGradientFromJSObject(retVal, g.ctx)
+}
+
+// GetStartSizeGradients calls the GetStartSizeGradients method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#getstartsizegradients
+func (g *GPUParticleSystem) GetStartSizeGradients() *[]FactorGradient {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getStartSizeGradients", args...)
+	return []FactorGradientFromJSObject(retVal, g.ctx)
+}
+
+// GetVelocityGradients calls the GetVelocityGradients method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#getvelocitygradients
+func (g *GPUParticleSystem) GetVelocityGradients() *[]FactorGradient {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("getVelocityGradients", args...)
+	return []FactorGradientFromJSObject(retVal, g.ctx)
+}
+
+// IsReady calls the IsReady method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#isready
+func (g *GPUParticleSystem) IsReady() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// IsStarted calls the IsStarted method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#isstarted
+func (g *GPUParticleSystem) IsStarted() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("isStarted", args...)
+	return retVal.Bool()
+}
+
+// GPUParticleSystemParseOpts contains optional parameters for GPUParticleSystem.Parse.
+type GPUParticleSystemParseOpts struct {
+	DoNotStart *bool
+}
+
+// Parse calls the Parse method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#parse
+func (g *GPUParticleSystem) Parse(parsedParticleSystem interface{}, scene *Scene, rootUrl string, opts *GPUParticleSystemParseOpts) *GPUParticleSystem {
+	if opts == nil {
+		opts = &GPUParticleSystemParseOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, parsedParticleSystem)
+	args = append(args, scene.JSObject())
+	args = append(args, rootUrl)
+
+	if opts.DoNotStart == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DoNotStart)
+	}
+
+	retVal := g.p.Call("Parse", args...)
+	return GPUParticleSystemFromJSObject(retVal, g.ctx)
+}
+
+// Rebuild calls the Rebuild method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#rebuild
+func (g *GPUParticleSystem) Rebuild() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	g.p.Call("rebuild", args...)
+}
+
+// RemoveAlphaRemapGradient calls the RemoveAlphaRemapGradient method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#removealpharemapgradient
+func (g *GPUParticleSystem) RemoveAlphaRemapGradient() *IParticleSystem {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("removeAlphaRemapGradient", args...)
+	return IParticleSystemFromJSObject(retVal, g.ctx)
+}
+
+// RemoveAngularSpeedGradient calls the RemoveAngularSpeedGradient method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#removeangularspeedgradient
+func (g *GPUParticleSystem) RemoveAngularSpeedGradient(gradient float64) *GPUParticleSystem {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, gradient)
+
+	retVal := g.p.Call("removeAngularSpeedGradient", args...)
+	return GPUParticleSystemFromJSObject(retVal, g.ctx)
+}
+
+// RemoveColorGradient calls the RemoveColorGradient method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#removecolorgradient
+func (g *GPUParticleSystem) RemoveColorGradient(gradient float64) *GPUParticleSystem {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, gradient)
+
+	retVal := g.p.Call("removeColorGradient", args...)
+	return GPUParticleSystemFromJSObject(retVal, g.ctx)
+}
+
+// RemoveColorRemapGradient calls the RemoveColorRemapGradient method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#removecolorremapgradient
+func (g *GPUParticleSystem) RemoveColorRemapGradient() *IParticleSystem {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("removeColorRemapGradient", args...)
+	return IParticleSystemFromJSObject(retVal, g.ctx)
+}
+
+// RemoveDragGradient calls the RemoveDragGradient method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#removedraggradient
+func (g *GPUParticleSystem) RemoveDragGradient(gradient float64) *GPUParticleSystem {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, gradient)
+
+	retVal := g.p.Call("removeDragGradient", args...)
+	return GPUParticleSystemFromJSObject(retVal, g.ctx)
+}
+
+// RemoveEmitRateGradient calls the RemoveEmitRateGradient method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#removeemitrategradient
+func (g *GPUParticleSystem) RemoveEmitRateGradient(gradient float64) *IParticleSystem {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, gradient)
+
+	retVal := g.p.Call("removeEmitRateGradient", args...)
+	return IParticleSystemFromJSObject(retVal, g.ctx)
+}
+
+// RemoveLifeTimeGradient calls the RemoveLifeTimeGradient method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#removelifetimegradient
+func (g *GPUParticleSystem) RemoveLifeTimeGradient(gradient float64) *IParticleSystem {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, gradient)
+
+	retVal := g.p.Call("removeLifeTimeGradient", args...)
+	return IParticleSystemFromJSObject(retVal, g.ctx)
+}
+
+// RemoveLimitVelocityGradient calls the RemoveLimitVelocityGradient method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#removelimitvelocitygradient
+func (g *GPUParticleSystem) RemoveLimitVelocityGradient(gradient float64) *GPUParticleSystem {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, gradient)
+
+	retVal := g.p.Call("removeLimitVelocityGradient", args...)
+	return GPUParticleSystemFromJSObject(retVal, g.ctx)
+}
+
+// RemoveRampGradient calls the RemoveRampGradient method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#removerampgradient
+func (g *GPUParticleSystem) RemoveRampGradient() *IParticleSystem {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("removeRampGradient", args...)
+	return IParticleSystemFromJSObject(retVal, g.ctx)
+}
+
+// RemoveSizeGradient calls the RemoveSizeGradient method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#removesizegradient
+func (g *GPUParticleSystem) RemoveSizeGradient(gradient float64) *GPUParticleSystem {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, gradient)
+
+	retVal := g.p.Call("removeSizeGradient", args...)
+	return GPUParticleSystemFromJSObject(retVal, g.ctx)
+}
+
+// RemoveStartSizeGradient calls the RemoveStartSizeGradient method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#removestartsizegradient
+func (g *GPUParticleSystem) RemoveStartSizeGradient(gradient float64) *IParticleSystem {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, gradient)
+
+	retVal := g.p.Call("removeStartSizeGradient", args...)
+	return IParticleSystemFromJSObject(retVal, g.ctx)
+}
+
+// RemoveVelocityGradient calls the RemoveVelocityGradient method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#removevelocitygradient
+func (g *GPUParticleSystem) RemoveVelocityGradient(gradient float64) *GPUParticleSystem {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, gradient)
+
+	retVal := g.p.Call("removeVelocityGradient", args...)
+	return GPUParticleSystemFromJSObject(retVal, g.ctx)
+}
+
+// GPUParticleSystemRenderOpts contains optional parameters for GPUParticleSystem.Render.
+type GPUParticleSystemRenderOpts struct {
+	PreWarm *bool
+}
+
+// Render calls the Render method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#render
+func (g *GPUParticleSystem) Render(opts *GPUParticleSystemRenderOpts) float64 {
+	if opts == nil {
+		opts = &GPUParticleSystemRenderOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.PreWarm == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.PreWarm)
+	}
+
+	retVal := g.p.Call("render", args...)
+	return retVal.Float()
+}
+
+// Reset calls the Reset method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#reset
+func (g *GPUParticleSystem) Reset() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	g.p.Call("reset", args...)
+}
+
+// Serialize calls the Serialize method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#serialize
+func (g *GPUParticleSystem) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := g.p.Call("serialize", args...)
+	return retVal
+}
+
+// GPUParticleSystemStartOpts contains optional parameters for GPUParticleSystem.Start.
+type GPUParticleSystemStartOpts struct {
+	Delay *float64
+}
+
+// Start calls the Start method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#start
+func (g *GPUParticleSystem) Start(opts *GPUParticleSystemStartOpts) {
+	if opts == nil {
+		opts = &GPUParticleSystemStartOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Delay == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Delay)
+	}
+
+	g.p.Call("start", args...)
+}
+
+// Stop calls the Stop method on the GPUParticleSystem object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#stop
+func (g *GPUParticleSystem) Stop() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	g.p.Call("stop", args...)
+}
+
+/*
+
+// ActiveParticleCount returns the ActiveParticleCount property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#activeparticlecount
+func (g *GPUParticleSystem) ActiveParticleCount(activeParticleCount float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(activeParticleCount)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetActiveParticleCount sets the ActiveParticleCount property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#activeparticlecount
+func (g *GPUParticleSystem) SetActiveParticleCount(activeParticleCount float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(activeParticleCount)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// Animations returns the Animations property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#animations
+func (g *GPUParticleSystem) Animations(animations *Animation) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(animations.JSObject())
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#animations
+func (g *GPUParticleSystem) SetAnimations(animations *Animation) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(animations.JSObject())
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// BLENDMODE_ADD returns the BLENDMODE_ADD property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#blendmode_add
+func (g *GPUParticleSystem) BLENDMODE_ADD(BLENDMODE_ADD float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(BLENDMODE_ADD)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetBLENDMODE_ADD sets the BLENDMODE_ADD property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#blendmode_add
+func (g *GPUParticleSystem) SetBLENDMODE_ADD(BLENDMODE_ADD float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(BLENDMODE_ADD)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// BLENDMODE_MULTIPLY returns the BLENDMODE_MULTIPLY property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#blendmode_multiply
+func (g *GPUParticleSystem) BLENDMODE_MULTIPLY(BLENDMODE_MULTIPLY float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(BLENDMODE_MULTIPLY)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetBLENDMODE_MULTIPLY sets the BLENDMODE_MULTIPLY property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#blendmode_multiply
+func (g *GPUParticleSystem) SetBLENDMODE_MULTIPLY(BLENDMODE_MULTIPLY float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(BLENDMODE_MULTIPLY)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// BLENDMODE_MULTIPLYADD returns the BLENDMODE_MULTIPLYADD property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#blendmode_multiplyadd
+func (g *GPUParticleSystem) BLENDMODE_MULTIPLYADD(BLENDMODE_MULTIPLYADD float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(BLENDMODE_MULTIPLYADD)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetBLENDMODE_MULTIPLYADD sets the BLENDMODE_MULTIPLYADD property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#blendmode_multiplyadd
+func (g *GPUParticleSystem) SetBLENDMODE_MULTIPLYADD(BLENDMODE_MULTIPLYADD float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(BLENDMODE_MULTIPLYADD)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// BLENDMODE_ONEONE returns the BLENDMODE_ONEONE property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#blendmode_oneone
+func (g *GPUParticleSystem) BLENDMODE_ONEONE(BLENDMODE_ONEONE float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(BLENDMODE_ONEONE)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetBLENDMODE_ONEONE sets the BLENDMODE_ONEONE property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#blendmode_oneone
+func (g *GPUParticleSystem) SetBLENDMODE_ONEONE(BLENDMODE_ONEONE float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(BLENDMODE_ONEONE)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// BLENDMODE_STANDARD returns the BLENDMODE_STANDARD property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#blendmode_standard
+func (g *GPUParticleSystem) BLENDMODE_STANDARD(BLENDMODE_STANDARD float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(BLENDMODE_STANDARD)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetBLENDMODE_STANDARD sets the BLENDMODE_STANDARD property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#blendmode_standard
+func (g *GPUParticleSystem) SetBLENDMODE_STANDARD(BLENDMODE_STANDARD float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(BLENDMODE_STANDARD)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// BeginAnimationFrom returns the BeginAnimationFrom property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#beginanimationfrom
+func (g *GPUParticleSystem) BeginAnimationFrom(beginAnimationFrom float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(beginAnimationFrom)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetBeginAnimationFrom sets the BeginAnimationFrom property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#beginanimationfrom
+func (g *GPUParticleSystem) SetBeginAnimationFrom(beginAnimationFrom float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(beginAnimationFrom)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// BeginAnimationLoop returns the BeginAnimationLoop property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#beginanimationloop
+func (g *GPUParticleSystem) BeginAnimationLoop(beginAnimationLoop bool) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(beginAnimationLoop)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetBeginAnimationLoop sets the BeginAnimationLoop property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#beginanimationloop
+func (g *GPUParticleSystem) SetBeginAnimationLoop(beginAnimationLoop bool) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(beginAnimationLoop)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// BeginAnimationOnStart returns the BeginAnimationOnStart property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#beginanimationonstart
+func (g *GPUParticleSystem) BeginAnimationOnStart(beginAnimationOnStart bool) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(beginAnimationOnStart)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetBeginAnimationOnStart sets the BeginAnimationOnStart property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#beginanimationonstart
+func (g *GPUParticleSystem) SetBeginAnimationOnStart(beginAnimationOnStart bool) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(beginAnimationOnStart)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// BeginAnimationTo returns the BeginAnimationTo property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#beginanimationto
+func (g *GPUParticleSystem) BeginAnimationTo(beginAnimationTo float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(beginAnimationTo)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetBeginAnimationTo sets the BeginAnimationTo property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#beginanimationto
+func (g *GPUParticleSystem) SetBeginAnimationTo(beginAnimationTo float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(beginAnimationTo)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// BillboardMode returns the BillboardMode property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#billboardmode
+func (g *GPUParticleSystem) BillboardMode(billboardMode float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(billboardMode)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetBillboardMode sets the BillboardMode property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#billboardmode
+func (g *GPUParticleSystem) SetBillboardMode(billboardMode float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(billboardMode)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// BlendMode returns the BlendMode property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#blendmode
+func (g *GPUParticleSystem) BlendMode(blendMode float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(blendMode)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetBlendMode sets the BlendMode property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#blendmode
+func (g *GPUParticleSystem) SetBlendMode(blendMode float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(blendMode)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// Color1 returns the Color1 property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#color1
+func (g *GPUParticleSystem) Color1(color1 *Color4) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(color1.JSObject())
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetColor1 sets the Color1 property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#color1
+func (g *GPUParticleSystem) SetColor1(color1 *Color4) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(color1.JSObject())
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// Color2 returns the Color2 property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#color2
+func (g *GPUParticleSystem) Color2(color2 *Color4) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(color2.JSObject())
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetColor2 sets the Color2 property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#color2
+func (g *GPUParticleSystem) SetColor2(color2 *Color4) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(color2.JSObject())
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// ColorDead returns the ColorDead property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#colordead
+func (g *GPUParticleSystem) ColorDead(colorDead *Color4) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(colorDead.JSObject())
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetColorDead sets the ColorDead property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#colordead
+func (g *GPUParticleSystem) SetColorDead(colorDead *Color4) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(colorDead.JSObject())
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// CustomShader returns the CustomShader property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#customshader
+func (g *GPUParticleSystem) CustomShader(customShader interface{}) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(customShader)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetCustomShader sets the CustomShader property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#customshader
+func (g *GPUParticleSystem) SetCustomShader(customShader interface{}) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(customShader)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// Direction1 returns the Direction1 property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#direction1
+func (g *GPUParticleSystem) Direction1(direction1 *Vector3) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(direction1.JSObject())
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetDirection1 sets the Direction1 property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#direction1
+func (g *GPUParticleSystem) SetDirection1(direction1 *Vector3) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(direction1.JSObject())
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// Direction2 returns the Direction2 property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#direction2
+func (g *GPUParticleSystem) Direction2(direction2 *Vector3) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(direction2.JSObject())
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetDirection2 sets the Direction2 property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#direction2
+func (g *GPUParticleSystem) SetDirection2(direction2 *Vector3) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(direction2.JSObject())
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// DisposeOnStop returns the DisposeOnStop property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#disposeonstop
+func (g *GPUParticleSystem) DisposeOnStop(disposeOnStop bool) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(disposeOnStop)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetDisposeOnStop sets the DisposeOnStop property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#disposeonstop
+func (g *GPUParticleSystem) SetDisposeOnStop(disposeOnStop bool) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(disposeOnStop)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// EmitRate returns the EmitRate property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#emitrate
+func (g *GPUParticleSystem) EmitRate(emitRate float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(emitRate)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetEmitRate sets the EmitRate property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#emitrate
+func (g *GPUParticleSystem) SetEmitRate(emitRate float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(emitRate)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// Emitter returns the Emitter property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#emitter
+func (g *GPUParticleSystem) Emitter(emitter *AbstractMesh) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(emitter.JSObject())
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetEmitter sets the Emitter property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#emitter
+func (g *GPUParticleSystem) SetEmitter(emitter *AbstractMesh) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(emitter.JSObject())
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// EndSpriteCellID returns the EndSpriteCellID property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#endspritecellid
+func (g *GPUParticleSystem) EndSpriteCellID(endSpriteCellID float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(endSpriteCellID)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetEndSpriteCellID sets the EndSpriteCellID property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#endspritecellid
+func (g *GPUParticleSystem) SetEndSpriteCellID(endSpriteCellID float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(endSpriteCellID)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// ForceDepthWrite returns the ForceDepthWrite property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#forcedepthwrite
+func (g *GPUParticleSystem) ForceDepthWrite(forceDepthWrite bool) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(forceDepthWrite)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetForceDepthWrite sets the ForceDepthWrite property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#forcedepthwrite
+func (g *GPUParticleSystem) SetForceDepthWrite(forceDepthWrite bool) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(forceDepthWrite)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// Gravity returns the Gravity property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#gravity
+func (g *GPUParticleSystem) Gravity(gravity *Vector3) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(gravity.JSObject())
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetGravity sets the Gravity property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#gravity
+func (g *GPUParticleSystem) SetGravity(gravity *Vector3) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(gravity.JSObject())
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// Id returns the Id property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#id
+func (g *GPUParticleSystem) Id(id string) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(id)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetId sets the Id property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#id
+func (g *GPUParticleSystem) SetId(id string) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(id)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// ImageProcessingConfiguration returns the ImageProcessingConfiguration property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#imageprocessingconfiguration
+func (g *GPUParticleSystem) ImageProcessingConfiguration(imageProcessingConfiguration *ImageProcessingConfiguration) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(imageProcessingConfiguration.JSObject())
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetImageProcessingConfiguration sets the ImageProcessingConfiguration property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#imageprocessingconfiguration
+func (g *GPUParticleSystem) SetImageProcessingConfiguration(imageProcessingConfiguration *ImageProcessingConfiguration) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(imageProcessingConfiguration.JSObject())
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// IsAnimationSheetEnabled returns the IsAnimationSheetEnabled property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#isanimationsheetenabled
+func (g *GPUParticleSystem) IsAnimationSheetEnabled(isAnimationSheetEnabled bool) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(isAnimationSheetEnabled)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetIsAnimationSheetEnabled sets the IsAnimationSheetEnabled property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#isanimationsheetenabled
+func (g *GPUParticleSystem) SetIsAnimationSheetEnabled(isAnimationSheetEnabled bool) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(isAnimationSheetEnabled)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// IsBillboardBased returns the IsBillboardBased property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#isbillboardbased
+func (g *GPUParticleSystem) IsBillboardBased(isBillboardBased bool) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(isBillboardBased)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetIsBillboardBased sets the IsBillboardBased property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#isbillboardbased
+func (g *GPUParticleSystem) SetIsBillboardBased(isBillboardBased bool) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(isBillboardBased)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// IsSupported returns the IsSupported property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#issupported
+func (g *GPUParticleSystem) IsSupported(IsSupported bool) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(IsSupported)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetIsSupported sets the IsSupported property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#issupported
+func (g *GPUParticleSystem) SetIsSupported(IsSupported bool) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(IsSupported)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// LayerMask returns the LayerMask property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#layermask
+func (g *GPUParticleSystem) LayerMask(layerMask float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(layerMask)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetLayerMask sets the LayerMask property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#layermask
+func (g *GPUParticleSystem) SetLayerMask(layerMask float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(layerMask)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// LimitVelocityDamping returns the LimitVelocityDamping property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#limitvelocitydamping
+func (g *GPUParticleSystem) LimitVelocityDamping(limitVelocityDamping float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(limitVelocityDamping)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetLimitVelocityDamping sets the LimitVelocityDamping property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#limitvelocitydamping
+func (g *GPUParticleSystem) SetLimitVelocityDamping(limitVelocityDamping float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(limitVelocityDamping)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// ManualEmitCount returns the ManualEmitCount property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#manualemitcount
+func (g *GPUParticleSystem) ManualEmitCount(manualEmitCount float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(manualEmitCount)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetManualEmitCount sets the ManualEmitCount property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#manualemitcount
+func (g *GPUParticleSystem) SetManualEmitCount(manualEmitCount float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(manualEmitCount)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// MaxAngularSpeed returns the MaxAngularSpeed property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#maxangularspeed
+func (g *GPUParticleSystem) MaxAngularSpeed(maxAngularSpeed float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(maxAngularSpeed)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetMaxAngularSpeed sets the MaxAngularSpeed property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#maxangularspeed
+func (g *GPUParticleSystem) SetMaxAngularSpeed(maxAngularSpeed float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(maxAngularSpeed)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// MaxEmitBox returns the MaxEmitBox property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#maxemitbox
+func (g *GPUParticleSystem) MaxEmitBox(maxEmitBox *Vector3) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(maxEmitBox.JSObject())
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetMaxEmitBox sets the MaxEmitBox property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#maxemitbox
+func (g *GPUParticleSystem) SetMaxEmitBox(maxEmitBox *Vector3) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(maxEmitBox.JSObject())
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// MaxEmitPower returns the MaxEmitPower property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#maxemitpower
+func (g *GPUParticleSystem) MaxEmitPower(maxEmitPower float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(maxEmitPower)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetMaxEmitPower sets the MaxEmitPower property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#maxemitpower
+func (g *GPUParticleSystem) SetMaxEmitPower(maxEmitPower float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(maxEmitPower)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// MaxInitialRotation returns the MaxInitialRotation property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#maxinitialrotation
+func (g *GPUParticleSystem) MaxInitialRotation(maxInitialRotation float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(maxInitialRotation)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetMaxInitialRotation sets the MaxInitialRotation property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#maxinitialrotation
+func (g *GPUParticleSystem) SetMaxInitialRotation(maxInitialRotation float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(maxInitialRotation)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// MaxLifeTime returns the MaxLifeTime property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#maxlifetime
+func (g *GPUParticleSystem) MaxLifeTime(maxLifeTime float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(maxLifeTime)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetMaxLifeTime sets the MaxLifeTime property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#maxlifetime
+func (g *GPUParticleSystem) SetMaxLifeTime(maxLifeTime float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(maxLifeTime)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// MaxScaleX returns the MaxScaleX property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#maxscalex
+func (g *GPUParticleSystem) MaxScaleX(maxScaleX float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(maxScaleX)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetMaxScaleX sets the MaxScaleX property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#maxscalex
+func (g *GPUParticleSystem) SetMaxScaleX(maxScaleX float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(maxScaleX)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// MaxScaleY returns the MaxScaleY property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#maxscaley
+func (g *GPUParticleSystem) MaxScaleY(maxScaleY float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(maxScaleY)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetMaxScaleY sets the MaxScaleY property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#maxscaley
+func (g *GPUParticleSystem) SetMaxScaleY(maxScaleY float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(maxScaleY)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// MaxSize returns the MaxSize property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#maxsize
+func (g *GPUParticleSystem) MaxSize(maxSize float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(maxSize)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetMaxSize sets the MaxSize property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#maxsize
+func (g *GPUParticleSystem) SetMaxSize(maxSize float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(maxSize)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// MinAngularSpeed returns the MinAngularSpeed property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#minangularspeed
+func (g *GPUParticleSystem) MinAngularSpeed(minAngularSpeed float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(minAngularSpeed)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetMinAngularSpeed sets the MinAngularSpeed property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#minangularspeed
+func (g *GPUParticleSystem) SetMinAngularSpeed(minAngularSpeed float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(minAngularSpeed)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// MinEmitBox returns the MinEmitBox property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#minemitbox
+func (g *GPUParticleSystem) MinEmitBox(minEmitBox *Vector3) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(minEmitBox.JSObject())
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetMinEmitBox sets the MinEmitBox property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#minemitbox
+func (g *GPUParticleSystem) SetMinEmitBox(minEmitBox *Vector3) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(minEmitBox.JSObject())
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// MinEmitPower returns the MinEmitPower property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#minemitpower
+func (g *GPUParticleSystem) MinEmitPower(minEmitPower float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(minEmitPower)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetMinEmitPower sets the MinEmitPower property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#minemitpower
+func (g *GPUParticleSystem) SetMinEmitPower(minEmitPower float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(minEmitPower)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// MinInitialRotation returns the MinInitialRotation property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#mininitialrotation
+func (g *GPUParticleSystem) MinInitialRotation(minInitialRotation float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(minInitialRotation)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetMinInitialRotation sets the MinInitialRotation property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#mininitialrotation
+func (g *GPUParticleSystem) SetMinInitialRotation(minInitialRotation float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(minInitialRotation)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// MinLifeTime returns the MinLifeTime property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#minlifetime
+func (g *GPUParticleSystem) MinLifeTime(minLifeTime float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(minLifeTime)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetMinLifeTime sets the MinLifeTime property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#minlifetime
+func (g *GPUParticleSystem) SetMinLifeTime(minLifeTime float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(minLifeTime)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// MinScaleX returns the MinScaleX property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#minscalex
+func (g *GPUParticleSystem) MinScaleX(minScaleX float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(minScaleX)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetMinScaleX sets the MinScaleX property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#minscalex
+func (g *GPUParticleSystem) SetMinScaleX(minScaleX float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(minScaleX)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// MinScaleY returns the MinScaleY property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#minscaley
+func (g *GPUParticleSystem) MinScaleY(minScaleY float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(minScaleY)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetMinScaleY sets the MinScaleY property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#minscaley
+func (g *GPUParticleSystem) SetMinScaleY(minScaleY float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(minScaleY)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// MinSize returns the MinSize property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#minsize
+func (g *GPUParticleSystem) MinSize(minSize float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(minSize)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetMinSize sets the MinSize property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#minsize
+func (g *GPUParticleSystem) SetMinSize(minSize float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(minSize)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#name
+func (g *GPUParticleSystem) Name(name string) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(name)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#name
+func (g *GPUParticleSystem) SetName(name string) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(name)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// NoiseStrength returns the NoiseStrength property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#noisestrength
+func (g *GPUParticleSystem) NoiseStrength(noiseStrength *Vector3) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(noiseStrength.JSObject())
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetNoiseStrength sets the NoiseStrength property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#noisestrength
+func (g *GPUParticleSystem) SetNoiseStrength(noiseStrength *Vector3) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(noiseStrength.JSObject())
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// NoiseTexture returns the NoiseTexture property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#noisetexture
+func (g *GPUParticleSystem) NoiseTexture(noiseTexture *ProceduralTexture) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(noiseTexture.JSObject())
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetNoiseTexture sets the NoiseTexture property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#noisetexture
+func (g *GPUParticleSystem) SetNoiseTexture(noiseTexture *ProceduralTexture) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(noiseTexture.JSObject())
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// OnAnimationEnd returns the OnAnimationEnd property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#onanimationend
+func (g *GPUParticleSystem) OnAnimationEnd(onAnimationEnd func()) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(onAnimationEnd)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetOnAnimationEnd sets the OnAnimationEnd property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#onanimationend
+func (g *GPUParticleSystem) SetOnAnimationEnd(onAnimationEnd func()) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(onAnimationEnd)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// OnDisposeObservable returns the OnDisposeObservable property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#ondisposeobservable
+func (g *GPUParticleSystem) OnDisposeObservable(onDisposeObservable *Observable) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(onDisposeObservable.JSObject())
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetOnDisposeObservable sets the OnDisposeObservable property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#ondisposeobservable
+func (g *GPUParticleSystem) SetOnDisposeObservable(onDisposeObservable *Observable) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(onDisposeObservable.JSObject())
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// ParticleEmitterType returns the ParticleEmitterType property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#particleemittertype
+func (g *GPUParticleSystem) ParticleEmitterType(particleEmitterType *IParticleEmitterType) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(particleEmitterType.JSObject())
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetParticleEmitterType sets the ParticleEmitterType property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#particleemittertype
+func (g *GPUParticleSystem) SetParticleEmitterType(particleEmitterType *IParticleEmitterType) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(particleEmitterType.JSObject())
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// ParticleTexture returns the ParticleTexture property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#particletexture
+func (g *GPUParticleSystem) ParticleTexture(particleTexture *Texture) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(particleTexture.JSObject())
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetParticleTexture sets the ParticleTexture property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#particletexture
+func (g *GPUParticleSystem) SetParticleTexture(particleTexture *Texture) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(particleTexture.JSObject())
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// PreWarmCycles returns the PreWarmCycles property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#prewarmcycles
+func (g *GPUParticleSystem) PreWarmCycles(preWarmCycles float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(preWarmCycles)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetPreWarmCycles sets the PreWarmCycles property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#prewarmcycles
+func (g *GPUParticleSystem) SetPreWarmCycles(preWarmCycles float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(preWarmCycles)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// PreWarmStepOffset returns the PreWarmStepOffset property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#prewarmstepoffset
+func (g *GPUParticleSystem) PreWarmStepOffset(preWarmStepOffset float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(preWarmStepOffset)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetPreWarmStepOffset sets the PreWarmStepOffset property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#prewarmstepoffset
+func (g *GPUParticleSystem) SetPreWarmStepOffset(preWarmStepOffset float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(preWarmStepOffset)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// PreventAutoStart returns the PreventAutoStart property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#preventautostart
+func (g *GPUParticleSystem) PreventAutoStart(preventAutoStart bool) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(preventAutoStart)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetPreventAutoStart sets the PreventAutoStart property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#preventautostart
+func (g *GPUParticleSystem) SetPreventAutoStart(preventAutoStart bool) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(preventAutoStart)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// RenderingGroupId returns the RenderingGroupId property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#renderinggroupid
+func (g *GPUParticleSystem) RenderingGroupId(renderingGroupId float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(renderingGroupId)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetRenderingGroupId sets the RenderingGroupId property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#renderinggroupid
+func (g *GPUParticleSystem) SetRenderingGroupId(renderingGroupId float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(renderingGroupId)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SpriteCellChangeSpeed returns the SpriteCellChangeSpeed property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#spritecellchangespeed
+func (g *GPUParticleSystem) SpriteCellChangeSpeed(spriteCellChangeSpeed float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(spriteCellChangeSpeed)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetSpriteCellChangeSpeed sets the SpriteCellChangeSpeed property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#spritecellchangespeed
+func (g *GPUParticleSystem) SetSpriteCellChangeSpeed(spriteCellChangeSpeed float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(spriteCellChangeSpeed)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SpriteCellHeight returns the SpriteCellHeight property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#spritecellheight
+func (g *GPUParticleSystem) SpriteCellHeight(spriteCellHeight float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(spriteCellHeight)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetSpriteCellHeight sets the SpriteCellHeight property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#spritecellheight
+func (g *GPUParticleSystem) SetSpriteCellHeight(spriteCellHeight float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(spriteCellHeight)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SpriteCellWidth returns the SpriteCellWidth property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#spritecellwidth
+func (g *GPUParticleSystem) SpriteCellWidth(spriteCellWidth float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(spriteCellWidth)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetSpriteCellWidth sets the SpriteCellWidth property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#spritecellwidth
+func (g *GPUParticleSystem) SetSpriteCellWidth(spriteCellWidth float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(spriteCellWidth)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SpriteRandomStartCell returns the SpriteRandomStartCell property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#spriterandomstartcell
+func (g *GPUParticleSystem) SpriteRandomStartCell(spriteRandomStartCell bool) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(spriteRandomStartCell)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetSpriteRandomStartCell sets the SpriteRandomStartCell property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#spriterandomstartcell
+func (g *GPUParticleSystem) SetSpriteRandomStartCell(spriteRandomStartCell bool) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(spriteRandomStartCell)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// StartDelay returns the StartDelay property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#startdelay
+func (g *GPUParticleSystem) StartDelay(startDelay float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(startDelay)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetStartDelay sets the StartDelay property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#startdelay
+func (g *GPUParticleSystem) SetStartDelay(startDelay float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(startDelay)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// StartSpriteCellID returns the StartSpriteCellID property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#startspritecellid
+func (g *GPUParticleSystem) StartSpriteCellID(startSpriteCellID float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(startSpriteCellID)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetStartSpriteCellID sets the StartSpriteCellID property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#startspritecellid
+func (g *GPUParticleSystem) SetStartSpriteCellID(startSpriteCellID float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(startSpriteCellID)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// TargetStopDuration returns the TargetStopDuration property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#targetstopduration
+func (g *GPUParticleSystem) TargetStopDuration(targetStopDuration float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(targetStopDuration)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetTargetStopDuration sets the TargetStopDuration property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#targetstopduration
+func (g *GPUParticleSystem) SetTargetStopDuration(targetStopDuration float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(targetStopDuration)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// TextureMask returns the TextureMask property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#texturemask
+func (g *GPUParticleSystem) TextureMask(textureMask *Color4) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(textureMask.JSObject())
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetTextureMask sets the TextureMask property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#texturemask
+func (g *GPUParticleSystem) SetTextureMask(textureMask *Color4) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(textureMask.JSObject())
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// TranslationPivot returns the TranslationPivot property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#translationpivot
+func (g *GPUParticleSystem) TranslationPivot(translationPivot *Vector2) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(translationPivot.JSObject())
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetTranslationPivot sets the TranslationPivot property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#translationpivot
+func (g *GPUParticleSystem) SetTranslationPivot(translationPivot *Vector2) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(translationPivot.JSObject())
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// UpdateSpeed returns the UpdateSpeed property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#updatespeed
+func (g *GPUParticleSystem) UpdateSpeed(updateSpeed float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(updateSpeed)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateSpeed sets the UpdateSpeed property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#updatespeed
+func (g *GPUParticleSystem) SetUpdateSpeed(updateSpeed float64) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(updateSpeed)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// UseRampGradients returns the UseRampGradients property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#userampgradients
+func (g *GPUParticleSystem) UseRampGradients(useRampGradients bool) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(useRampGradients)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetUseRampGradients sets the UseRampGradients property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#userampgradients
+func (g *GPUParticleSystem) SetUseRampGradients(useRampGradients bool) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(useRampGradients)
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// WorldOffset returns the WorldOffset property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#worldoffset
+func (g *GPUParticleSystem) WorldOffset(worldOffset *Vector3) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(worldOffset.JSObject())
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+// SetWorldOffset sets the WorldOffset property of class GPUParticleSystem.
+//
+// https://doc.babylonjs.com/api/classes/babylon.gpuparticlesystem#worldoffset
+func (g *GPUParticleSystem) SetWorldOffset(worldOffset *Vector3) *GPUParticleSystem {
+	p := ba.ctx.Get("GPUParticleSystem").New(worldOffset.JSObject())
+	return GPUParticleSystemFromJSObject(p, ba.ctx)
+}
+
+*/

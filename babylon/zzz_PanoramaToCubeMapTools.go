@@ -27,4 +27,22 @@ func PanoramaToCubeMapToolsFromJSObject(p js.Value, ctx js.Value) *PanoramaToCub
 	return &PanoramaToCubeMapTools{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// ConvertPanoramaToCubemap calls the ConvertPanoramaToCubemap method on the PanoramaToCubeMapTools object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.panoramatocubemaptools#convertpanoramatocubemap
+func (p *PanoramaToCubeMapTools) ConvertPanoramaToCubemap(float32Array js.Value, inputWidth float64, inputHeight float64, size float64) js.Value {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, float32Array)
+	args = append(args, inputWidth)
+	args = append(args, inputHeight)
+	args = append(args, size)
+
+	retVal := p.p.Call("ConvertPanoramaToCubemap", args...)
+	return retVal
+}
+
+/*
+
+ */

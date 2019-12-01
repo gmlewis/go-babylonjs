@@ -32,7 +32,7 @@ func SoundTrackFromJSObject(p js.Value, ctx js.Value) *SoundTrack {
 
 // NewSoundTrackOpts contains optional parameters for NewSoundTrack.
 type NewSoundTrackOpts struct {
-	Options *JSValue
+	Options *ISoundTrackOptions
 }
 
 // NewSoundTrack returns a new SoundTrack object.
@@ -43,8 +43,130 @@ func (ba *Babylon) NewSoundTrack(scene *Scene, opts *NewSoundTrackOpts) *SoundTr
 		opts = &NewSoundTrackOpts{}
 	}
 
-	p := ba.ctx.Get("SoundTrack").New(scene.JSObject(), opts.Options.JSObject())
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, scene.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options.JSObject())
+	}
+
+	p := ba.ctx.Get("SoundTrack").New(args...)
 	return SoundTrackFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AddSound calls the AddSound method on the SoundTrack object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.soundtrack#addsound
+func (s *SoundTrack) AddSound(sound *Sound) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, sound.JSObject())
+
+	s.p.Call("AddSound", args...)
+}
+
+// ConnectToAnalyser calls the ConnectToAnalyser method on the SoundTrack object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.soundtrack#connecttoanalyser
+func (s *SoundTrack) ConnectToAnalyser(analyser *Analyser) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, analyser.JSObject())
+
+	s.p.Call("connectToAnalyser", args...)
+}
+
+// Dispose calls the Dispose method on the SoundTrack object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.soundtrack#dispose
+func (s *SoundTrack) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("dispose", args...)
+}
+
+// RemoveSound calls the RemoveSound method on the SoundTrack object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.soundtrack#removesound
+func (s *SoundTrack) RemoveSound(sound *Sound) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, sound.JSObject())
+
+	s.p.Call("RemoveSound", args...)
+}
+
+// SetVolume calls the SetVolume method on the SoundTrack object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.soundtrack#setvolume
+func (s *SoundTrack) SetVolume(newVolume float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, newVolume)
+
+	s.p.Call("setVolume", args...)
+}
+
+// SwitchPanningModelToEqualPower calls the SwitchPanningModelToEqualPower method on the SoundTrack object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.soundtrack#switchpanningmodeltoequalpower
+func (s *SoundTrack) SwitchPanningModelToEqualPower() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("switchPanningModelToEqualPower", args...)
+}
+
+// SwitchPanningModelToHRTF calls the SwitchPanningModelToHRTF method on the SoundTrack object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.soundtrack#switchpanningmodeltohrtf
+func (s *SoundTrack) SwitchPanningModelToHRTF() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("switchPanningModelToHRTF", args...)
+}
+
+/*
+
+// Id returns the Id property of class SoundTrack.
+//
+// https://doc.babylonjs.com/api/classes/babylon.soundtrack#id
+func (s *SoundTrack) Id(id float64) *SoundTrack {
+	p := ba.ctx.Get("SoundTrack").New(id)
+	return SoundTrackFromJSObject(p, ba.ctx)
+}
+
+// SetId sets the Id property of class SoundTrack.
+//
+// https://doc.babylonjs.com/api/classes/babylon.soundtrack#id
+func (s *SoundTrack) SetId(id float64) *SoundTrack {
+	p := ba.ctx.Get("SoundTrack").New(id)
+	return SoundTrackFromJSObject(p, ba.ctx)
+}
+
+// SoundCollection returns the SoundCollection property of class SoundTrack.
+//
+// https://doc.babylonjs.com/api/classes/babylon.soundtrack#soundcollection
+func (s *SoundTrack) SoundCollection(soundCollection []Sound) *SoundTrack {
+	p := ba.ctx.Get("SoundTrack").New(soundCollection.JSObject())
+	return SoundTrackFromJSObject(p, ba.ctx)
+}
+
+// SetSoundCollection sets the SoundCollection property of class SoundTrack.
+//
+// https://doc.babylonjs.com/api/classes/babylon.soundtrack#soundcollection
+func (s *SoundTrack) SetSoundCollection(soundCollection []Sound) *SoundTrack {
+	p := ba.ctx.Get("SoundTrack").New(soundCollection.JSObject())
+	return SoundTrackFromJSObject(p, ba.ctx)
+}
+
+*/

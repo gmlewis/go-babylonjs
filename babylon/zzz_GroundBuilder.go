@@ -27,4 +27,78 @@ func GroundBuilderFromJSObject(p js.Value, ctx js.Value) *GroundBuilder {
 	return &GroundBuilder{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// CreateGround calls the CreateGround method on the GroundBuilder object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundbuilder#createground
+func (g *GroundBuilder) CreateGround(name string, options js.Value, scene interface{}) *Mesh {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, name)
+	args = append(args, options)
+	args = append(args, scene)
+
+	retVal := g.p.Call("CreateGround", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+// GroundBuilderCreateGroundFromHeightMapOpts contains optional parameters for GroundBuilder.CreateGroundFromHeightMap.
+type GroundBuilderCreateGroundFromHeightMapOpts struct {
+	Scene *Scene
+}
+
+// CreateGroundFromHeightMap calls the CreateGroundFromHeightMap method on the GroundBuilder object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundbuilder#creategroundfromheightmap
+func (g *GroundBuilder) CreateGroundFromHeightMap(name string, url string, options js.Value, opts *GroundBuilderCreateGroundFromHeightMapOpts) *GroundMesh {
+	if opts == nil {
+		opts = &GroundBuilderCreateGroundFromHeightMapOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, name)
+	args = append(args, url)
+	args = append(args, options)
+
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+
+	retVal := g.p.Call("CreateGroundFromHeightMap", args...)
+	return GroundMeshFromJSObject(retVal, g.ctx)
+}
+
+// GroundBuilderCreateTiledGroundOpts contains optional parameters for GroundBuilder.CreateTiledGround.
+type GroundBuilderCreateTiledGroundOpts struct {
+	Scene *Scene
+}
+
+// CreateTiledGround calls the CreateTiledGround method on the GroundBuilder object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.groundbuilder#createtiledground
+func (g *GroundBuilder) CreateTiledGround(name string, options js.Value, opts *GroundBuilderCreateTiledGroundOpts) *Mesh {
+	if opts == nil {
+		opts = &GroundBuilderCreateTiledGroundOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, name)
+	args = append(args, options)
+
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+
+	retVal := g.p.Call("CreateTiledGround", args...)
+	return MeshFromJSObject(retVal, g.ctx)
+}
+
+/*
+
+ */

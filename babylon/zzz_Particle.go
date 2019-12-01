@@ -32,8 +32,261 @@ func ParticleFromJSObject(p js.Value, ctx js.Value) *Particle {
 //
 // https://doc.babylonjs.com/api/classes/babylon.particle
 func (ba *Babylon) NewParticle(particleSystem *ParticleSystem) *Particle {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, particleSystem.JSObject())
+
+	p := ba.ctx.Get("Particle").New(args...)
+	return ParticleFromJSObject(p, ba.ctx)
+}
+
+// CopyTo calls the CopyTo method on the Particle object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.particle#copyto
+func (p *Particle) CopyTo(other *Particle) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, other.JSObject())
+
+	p.p.Call("copyTo", args...)
+}
+
+// UpdateCellIndex calls the UpdateCellIndex method on the Particle object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.particle#updatecellindex
+func (p *Particle) UpdateCellIndex() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("updateCellIndex", args...)
+}
+
+/*
+
+// Age returns the Age property of class Particle.
+//
+// https://doc.babylonjs.com/api/classes/babylon.particle#age
+func (p *Particle) Age(age float64) *Particle {
+	p := ba.ctx.Get("Particle").New(age)
+	return ParticleFromJSObject(p, ba.ctx)
+}
+
+// SetAge sets the Age property of class Particle.
+//
+// https://doc.babylonjs.com/api/classes/babylon.particle#age
+func (p *Particle) SetAge(age float64) *Particle {
+	p := ba.ctx.Get("Particle").New(age)
+	return ParticleFromJSObject(p, ba.ctx)
+}
+
+// Angle returns the Angle property of class Particle.
+//
+// https://doc.babylonjs.com/api/classes/babylon.particle#angle
+func (p *Particle) Angle(angle float64) *Particle {
+	p := ba.ctx.Get("Particle").New(angle)
+	return ParticleFromJSObject(p, ba.ctx)
+}
+
+// SetAngle sets the Angle property of class Particle.
+//
+// https://doc.babylonjs.com/api/classes/babylon.particle#angle
+func (p *Particle) SetAngle(angle float64) *Particle {
+	p := ba.ctx.Get("Particle").New(angle)
+	return ParticleFromJSObject(p, ba.ctx)
+}
+
+// AngularSpeed returns the AngularSpeed property of class Particle.
+//
+// https://doc.babylonjs.com/api/classes/babylon.particle#angularspeed
+func (p *Particle) AngularSpeed(angularSpeed float64) *Particle {
+	p := ba.ctx.Get("Particle").New(angularSpeed)
+	return ParticleFromJSObject(p, ba.ctx)
+}
+
+// SetAngularSpeed sets the AngularSpeed property of class Particle.
+//
+// https://doc.babylonjs.com/api/classes/babylon.particle#angularspeed
+func (p *Particle) SetAngularSpeed(angularSpeed float64) *Particle {
+	p := ba.ctx.Get("Particle").New(angularSpeed)
+	return ParticleFromJSObject(p, ba.ctx)
+}
+
+// CellIndex returns the CellIndex property of class Particle.
+//
+// https://doc.babylonjs.com/api/classes/babylon.particle#cellindex
+func (p *Particle) CellIndex(cellIndex float64) *Particle {
+	p := ba.ctx.Get("Particle").New(cellIndex)
+	return ParticleFromJSObject(p, ba.ctx)
+}
+
+// SetCellIndex sets the CellIndex property of class Particle.
+//
+// https://doc.babylonjs.com/api/classes/babylon.particle#cellindex
+func (p *Particle) SetCellIndex(cellIndex float64) *Particle {
+	p := ba.ctx.Get("Particle").New(cellIndex)
+	return ParticleFromJSObject(p, ba.ctx)
+}
+
+// Color returns the Color property of class Particle.
+//
+// https://doc.babylonjs.com/api/classes/babylon.particle#color
+func (p *Particle) Color(color *Color4) *Particle {
+	p := ba.ctx.Get("Particle").New(color.JSObject())
+	return ParticleFromJSObject(p, ba.ctx)
+}
+
+// SetColor sets the Color property of class Particle.
+//
+// https://doc.babylonjs.com/api/classes/babylon.particle#color
+func (p *Particle) SetColor(color *Color4) *Particle {
+	p := ba.ctx.Get("Particle").New(color.JSObject())
+	return ParticleFromJSObject(p, ba.ctx)
+}
+
+// ColorStep returns the ColorStep property of class Particle.
+//
+// https://doc.babylonjs.com/api/classes/babylon.particle#colorstep
+func (p *Particle) ColorStep(colorStep *Color4) *Particle {
+	p := ba.ctx.Get("Particle").New(colorStep.JSObject())
+	return ParticleFromJSObject(p, ba.ctx)
+}
+
+// SetColorStep sets the ColorStep property of class Particle.
+//
+// https://doc.babylonjs.com/api/classes/babylon.particle#colorstep
+func (p *Particle) SetColorStep(colorStep *Color4) *Particle {
+	p := ba.ctx.Get("Particle").New(colorStep.JSObject())
+	return ParticleFromJSObject(p, ba.ctx)
+}
+
+// Direction returns the Direction property of class Particle.
+//
+// https://doc.babylonjs.com/api/classes/babylon.particle#direction
+func (p *Particle) Direction(direction *Vector3) *Particle {
+	p := ba.ctx.Get("Particle").New(direction.JSObject())
+	return ParticleFromJSObject(p, ba.ctx)
+}
+
+// SetDirection sets the Direction property of class Particle.
+//
+// https://doc.babylonjs.com/api/classes/babylon.particle#direction
+func (p *Particle) SetDirection(direction *Vector3) *Particle {
+	p := ba.ctx.Get("Particle").New(direction.JSObject())
+	return ParticleFromJSObject(p, ba.ctx)
+}
+
+// Id returns the Id property of class Particle.
+//
+// https://doc.babylonjs.com/api/classes/babylon.particle#id
+func (p *Particle) Id(id float64) *Particle {
+	p := ba.ctx.Get("Particle").New(id)
+	return ParticleFromJSObject(p, ba.ctx)
+}
+
+// SetId sets the Id property of class Particle.
+//
+// https://doc.babylonjs.com/api/classes/babylon.particle#id
+func (p *Particle) SetId(id float64) *Particle {
+	p := ba.ctx.Get("Particle").New(id)
+	return ParticleFromJSObject(p, ba.ctx)
+}
+
+// LifeTime returns the LifeTime property of class Particle.
+//
+// https://doc.babylonjs.com/api/classes/babylon.particle#lifetime
+func (p *Particle) LifeTime(lifeTime float64) *Particle {
+	p := ba.ctx.Get("Particle").New(lifeTime)
+	return ParticleFromJSObject(p, ba.ctx)
+}
+
+// SetLifeTime sets the LifeTime property of class Particle.
+//
+// https://doc.babylonjs.com/api/classes/babylon.particle#lifetime
+func (p *Particle) SetLifeTime(lifeTime float64) *Particle {
+	p := ba.ctx.Get("Particle").New(lifeTime)
+	return ParticleFromJSObject(p, ba.ctx)
+}
+
+// ParticleSystem returns the ParticleSystem property of class Particle.
+//
+// https://doc.babylonjs.com/api/classes/babylon.particle#particlesystem
+func (p *Particle) ParticleSystem(particleSystem *ParticleSystem) *Particle {
 	p := ba.ctx.Get("Particle").New(particleSystem.JSObject())
 	return ParticleFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetParticleSystem sets the ParticleSystem property of class Particle.
+//
+// https://doc.babylonjs.com/api/classes/babylon.particle#particlesystem
+func (p *Particle) SetParticleSystem(particleSystem *ParticleSystem) *Particle {
+	p := ba.ctx.Get("Particle").New(particleSystem.JSObject())
+	return ParticleFromJSObject(p, ba.ctx)
+}
+
+// Position returns the Position property of class Particle.
+//
+// https://doc.babylonjs.com/api/classes/babylon.particle#position
+func (p *Particle) Position(position *Vector3) *Particle {
+	p := ba.ctx.Get("Particle").New(position.JSObject())
+	return ParticleFromJSObject(p, ba.ctx)
+}
+
+// SetPosition sets the Position property of class Particle.
+//
+// https://doc.babylonjs.com/api/classes/babylon.particle#position
+func (p *Particle) SetPosition(position *Vector3) *Particle {
+	p := ba.ctx.Get("Particle").New(position.JSObject())
+	return ParticleFromJSObject(p, ba.ctx)
+}
+
+// RemapData returns the RemapData property of class Particle.
+//
+// https://doc.babylonjs.com/api/classes/babylon.particle#remapdata
+func (p *Particle) RemapData(remapData *Vector4) *Particle {
+	p := ba.ctx.Get("Particle").New(remapData.JSObject())
+	return ParticleFromJSObject(p, ba.ctx)
+}
+
+// SetRemapData sets the RemapData property of class Particle.
+//
+// https://doc.babylonjs.com/api/classes/babylon.particle#remapdata
+func (p *Particle) SetRemapData(remapData *Vector4) *Particle {
+	p := ba.ctx.Get("Particle").New(remapData.JSObject())
+	return ParticleFromJSObject(p, ba.ctx)
+}
+
+// Scale returns the Scale property of class Particle.
+//
+// https://doc.babylonjs.com/api/classes/babylon.particle#scale
+func (p *Particle) Scale(scale *Vector2) *Particle {
+	p := ba.ctx.Get("Particle").New(scale.JSObject())
+	return ParticleFromJSObject(p, ba.ctx)
+}
+
+// SetScale sets the Scale property of class Particle.
+//
+// https://doc.babylonjs.com/api/classes/babylon.particle#scale
+func (p *Particle) SetScale(scale *Vector2) *Particle {
+	p := ba.ctx.Get("Particle").New(scale.JSObject())
+	return ParticleFromJSObject(p, ba.ctx)
+}
+
+// Size returns the Size property of class Particle.
+//
+// https://doc.babylonjs.com/api/classes/babylon.particle#size
+func (p *Particle) Size(size float64) *Particle {
+	p := ba.ctx.Get("Particle").New(size)
+	return ParticleFromJSObject(p, ba.ctx)
+}
+
+// SetSize sets the Size property of class Particle.
+//
+// https://doc.babylonjs.com/api/classes/babylon.particle#size
+func (p *Particle) SetSize(size float64) *Particle {
+	p := ba.ctx.Get("Particle").New(size)
+	return ParticleFromJSObject(p, ba.ctx)
+}
+
+*/

@@ -29,4 +29,54 @@ func KHR_materials_clearcoatFromJSObject(p js.Value, ctx js.Value) *KHR_material
 	return &KHR_materials_clearcoat{p: p, ctx: ctx}
 }
 
-// TODO: methods
+/*
+
+// Enabled returns the Enabled property of class KHR_materials_clearcoat.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khr_materials_clearcoat#enabled
+func (k *KHR_materials_clearcoat) Enabled(enabled bool) *KHR_materials_clearcoat {
+	p := ba.ctx.Get("KHR_materials_clearcoat").New(enabled)
+	return KHR_materials_clearcoatFromJSObject(p, ba.ctx)
+}
+
+// SetEnabled sets the Enabled property of class KHR_materials_clearcoat.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khr_materials_clearcoat#enabled
+func (k *KHR_materials_clearcoat) SetEnabled(enabled bool) *KHR_materials_clearcoat {
+	p := ba.ctx.Get("KHR_materials_clearcoat").New(enabled)
+	return KHR_materials_clearcoatFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class KHR_materials_clearcoat.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khr_materials_clearcoat#name
+func (k *KHR_materials_clearcoat) Name(name string) *KHR_materials_clearcoat {
+	p := ba.ctx.Get("KHR_materials_clearcoat").New(name)
+	return KHR_materials_clearcoatFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class KHR_materials_clearcoat.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khr_materials_clearcoat#name
+func (k *KHR_materials_clearcoat) SetName(name string) *KHR_materials_clearcoat {
+	p := ba.ctx.Get("KHR_materials_clearcoat").New(name)
+	return KHR_materials_clearcoatFromJSObject(p, ba.ctx)
+}
+
+// Order returns the Order property of class KHR_materials_clearcoat.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khr_materials_clearcoat#order
+func (k *KHR_materials_clearcoat) Order(order float64) *KHR_materials_clearcoat {
+	p := ba.ctx.Get("KHR_materials_clearcoat").New(order)
+	return KHR_materials_clearcoatFromJSObject(p, ba.ctx)
+}
+
+// SetOrder sets the Order property of class KHR_materials_clearcoat.
+//
+// https://doc.babylonjs.com/api/classes/babylon.khr_materials_clearcoat#order
+func (k *KHR_materials_clearcoat) SetOrder(order float64) *KHR_materials_clearcoat {
+	p := ba.ctx.Get("KHR_materials_clearcoat").New(order)
+	return KHR_materials_clearcoatFromJSObject(p, ba.ctx)
+}
+
+*/

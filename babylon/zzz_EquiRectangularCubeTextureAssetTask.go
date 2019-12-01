@@ -29,9 +29,8 @@ func EquiRectangularCubeTextureAssetTaskFromJSObject(p js.Value, ctx js.Value) *
 
 // NewEquiRectangularCubeTextureAssetTaskOpts contains optional parameters for NewEquiRectangularCubeTextureAssetTask.
 type NewEquiRectangularCubeTextureAssetTaskOpts struct {
-	NoMipmap *JSBool
-
-	GammaSpace *JSBool
+	NoMipmap   *bool
+	GammaSpace *bool
 }
 
 // NewEquiRectangularCubeTextureAssetTask returns a new EquiRectangularCubeTextureAssetTask object.
@@ -42,8 +41,241 @@ func (ba *Babylon) NewEquiRectangularCubeTextureAssetTask(name string, url strin
 		opts = &NewEquiRectangularCubeTextureAssetTaskOpts{}
 	}
 
-	p := ba.ctx.Get("EquiRectangularCubeTextureAssetTask").New(name, url, size, opts.NoMipmap.JSObject(), opts.GammaSpace.JSObject())
+	args := make([]interface{}, 0, 3+2)
+
+	args = append(args, name)
+	args = append(args, url)
+	args = append(args, size)
+
+	if opts.NoMipmap == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoMipmap)
+	}
+	if opts.GammaSpace == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.GammaSpace)
+	}
+
+	p := ba.ctx.Get("EquiRectangularCubeTextureAssetTask").New(args...)
 	return EquiRectangularCubeTextureAssetTaskFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Reset calls the Reset method on the EquiRectangularCubeTextureAssetTask object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetextureassettask#reset
+func (e *EquiRectangularCubeTextureAssetTask) Reset() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	e.p.Call("reset", args...)
+}
+
+// Run calls the Run method on the EquiRectangularCubeTextureAssetTask object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetextureassettask#run
+func (e *EquiRectangularCubeTextureAssetTask) Run(scene *Scene, onSuccess func(), onError func()) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, scene.JSObject())
+	args = append(args, onSuccess)
+	args = append(args, onError)
+
+	e.p.Call("run", args...)
+}
+
+// RunTask calls the RunTask method on the EquiRectangularCubeTextureAssetTask object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetextureassettask#runtask
+func (e *EquiRectangularCubeTextureAssetTask) RunTask(scene *Scene, onSuccess func(), onError func()) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, scene.JSObject())
+	args = append(args, onSuccess)
+	args = append(args, onError)
+
+	e.p.Call("runTask", args...)
+}
+
+/*
+
+// ErrorObject returns the ErrorObject property of class EquiRectangularCubeTextureAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetextureassettask#errorobject
+func (e *EquiRectangularCubeTextureAssetTask) ErrorObject(errorObject js.Value) *EquiRectangularCubeTextureAssetTask {
+	p := ba.ctx.Get("EquiRectangularCubeTextureAssetTask").New(errorObject)
+	return EquiRectangularCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// SetErrorObject sets the ErrorObject property of class EquiRectangularCubeTextureAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetextureassettask#errorobject
+func (e *EquiRectangularCubeTextureAssetTask) SetErrorObject(errorObject js.Value) *EquiRectangularCubeTextureAssetTask {
+	p := ba.ctx.Get("EquiRectangularCubeTextureAssetTask").New(errorObject)
+	return EquiRectangularCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// GammaSpace returns the GammaSpace property of class EquiRectangularCubeTextureAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetextureassettask#gammaspace
+func (e *EquiRectangularCubeTextureAssetTask) GammaSpace(gammaSpace bool) *EquiRectangularCubeTextureAssetTask {
+	p := ba.ctx.Get("EquiRectangularCubeTextureAssetTask").New(gammaSpace)
+	return EquiRectangularCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// SetGammaSpace sets the GammaSpace property of class EquiRectangularCubeTextureAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetextureassettask#gammaspace
+func (e *EquiRectangularCubeTextureAssetTask) SetGammaSpace(gammaSpace bool) *EquiRectangularCubeTextureAssetTask {
+	p := ba.ctx.Get("EquiRectangularCubeTextureAssetTask").New(gammaSpace)
+	return EquiRectangularCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// IsCompleted returns the IsCompleted property of class EquiRectangularCubeTextureAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetextureassettask#iscompleted
+func (e *EquiRectangularCubeTextureAssetTask) IsCompleted(isCompleted bool) *EquiRectangularCubeTextureAssetTask {
+	p := ba.ctx.Get("EquiRectangularCubeTextureAssetTask").New(isCompleted)
+	return EquiRectangularCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// SetIsCompleted sets the IsCompleted property of class EquiRectangularCubeTextureAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetextureassettask#iscompleted
+func (e *EquiRectangularCubeTextureAssetTask) SetIsCompleted(isCompleted bool) *EquiRectangularCubeTextureAssetTask {
+	p := ba.ctx.Get("EquiRectangularCubeTextureAssetTask").New(isCompleted)
+	return EquiRectangularCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class EquiRectangularCubeTextureAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetextureassettask#name
+func (e *EquiRectangularCubeTextureAssetTask) Name(name string) *EquiRectangularCubeTextureAssetTask {
+	p := ba.ctx.Get("EquiRectangularCubeTextureAssetTask").New(name)
+	return EquiRectangularCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class EquiRectangularCubeTextureAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetextureassettask#name
+func (e *EquiRectangularCubeTextureAssetTask) SetName(name string) *EquiRectangularCubeTextureAssetTask {
+	p := ba.ctx.Get("EquiRectangularCubeTextureAssetTask").New(name)
+	return EquiRectangularCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// NoMipmap returns the NoMipmap property of class EquiRectangularCubeTextureAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetextureassettask#nomipmap
+func (e *EquiRectangularCubeTextureAssetTask) NoMipmap(noMipmap bool) *EquiRectangularCubeTextureAssetTask {
+	p := ba.ctx.Get("EquiRectangularCubeTextureAssetTask").New(noMipmap)
+	return EquiRectangularCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// SetNoMipmap sets the NoMipmap property of class EquiRectangularCubeTextureAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetextureassettask#nomipmap
+func (e *EquiRectangularCubeTextureAssetTask) SetNoMipmap(noMipmap bool) *EquiRectangularCubeTextureAssetTask {
+	p := ba.ctx.Get("EquiRectangularCubeTextureAssetTask").New(noMipmap)
+	return EquiRectangularCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// OnError returns the OnError property of class EquiRectangularCubeTextureAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetextureassettask#onerror
+func (e *EquiRectangularCubeTextureAssetTask) OnError(onError func()) *EquiRectangularCubeTextureAssetTask {
+	p := ba.ctx.Get("EquiRectangularCubeTextureAssetTask").New(onError)
+	return EquiRectangularCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// SetOnError sets the OnError property of class EquiRectangularCubeTextureAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetextureassettask#onerror
+func (e *EquiRectangularCubeTextureAssetTask) SetOnError(onError func()) *EquiRectangularCubeTextureAssetTask {
+	p := ba.ctx.Get("EquiRectangularCubeTextureAssetTask").New(onError)
+	return EquiRectangularCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// OnSuccess returns the OnSuccess property of class EquiRectangularCubeTextureAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetextureassettask#onsuccess
+func (e *EquiRectangularCubeTextureAssetTask) OnSuccess(onSuccess func()) *EquiRectangularCubeTextureAssetTask {
+	p := ba.ctx.Get("EquiRectangularCubeTextureAssetTask").New(onSuccess)
+	return EquiRectangularCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// SetOnSuccess sets the OnSuccess property of class EquiRectangularCubeTextureAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetextureassettask#onsuccess
+func (e *EquiRectangularCubeTextureAssetTask) SetOnSuccess(onSuccess func()) *EquiRectangularCubeTextureAssetTask {
+	p := ba.ctx.Get("EquiRectangularCubeTextureAssetTask").New(onSuccess)
+	return EquiRectangularCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// Size returns the Size property of class EquiRectangularCubeTextureAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetextureassettask#size
+func (e *EquiRectangularCubeTextureAssetTask) Size(size float64) *EquiRectangularCubeTextureAssetTask {
+	p := ba.ctx.Get("EquiRectangularCubeTextureAssetTask").New(size)
+	return EquiRectangularCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// SetSize sets the Size property of class EquiRectangularCubeTextureAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetextureassettask#size
+func (e *EquiRectangularCubeTextureAssetTask) SetSize(size float64) *EquiRectangularCubeTextureAssetTask {
+	p := ba.ctx.Get("EquiRectangularCubeTextureAssetTask").New(size)
+	return EquiRectangularCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// TaskState returns the TaskState property of class EquiRectangularCubeTextureAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetextureassettask#taskstate
+func (e *EquiRectangularCubeTextureAssetTask) TaskState(taskState *AssetTaskState) *EquiRectangularCubeTextureAssetTask {
+	p := ba.ctx.Get("EquiRectangularCubeTextureAssetTask").New(taskState.JSObject())
+	return EquiRectangularCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// SetTaskState sets the TaskState property of class EquiRectangularCubeTextureAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetextureassettask#taskstate
+func (e *EquiRectangularCubeTextureAssetTask) SetTaskState(taskState *AssetTaskState) *EquiRectangularCubeTextureAssetTask {
+	p := ba.ctx.Get("EquiRectangularCubeTextureAssetTask").New(taskState.JSObject())
+	return EquiRectangularCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// Texture returns the Texture property of class EquiRectangularCubeTextureAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetextureassettask#texture
+func (e *EquiRectangularCubeTextureAssetTask) Texture(texture *EquiRectangularCubeTexture) *EquiRectangularCubeTextureAssetTask {
+	p := ba.ctx.Get("EquiRectangularCubeTextureAssetTask").New(texture.JSObject())
+	return EquiRectangularCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// SetTexture sets the Texture property of class EquiRectangularCubeTextureAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetextureassettask#texture
+func (e *EquiRectangularCubeTextureAssetTask) SetTexture(texture *EquiRectangularCubeTexture) *EquiRectangularCubeTextureAssetTask {
+	p := ba.ctx.Get("EquiRectangularCubeTextureAssetTask").New(texture.JSObject())
+	return EquiRectangularCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// Url returns the Url property of class EquiRectangularCubeTextureAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetextureassettask#url
+func (e *EquiRectangularCubeTextureAssetTask) Url(url string) *EquiRectangularCubeTextureAssetTask {
+	p := ba.ctx.Get("EquiRectangularCubeTextureAssetTask").New(url)
+	return EquiRectangularCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+}
+
+// SetUrl sets the Url property of class EquiRectangularCubeTextureAssetTask.
+//
+// https://doc.babylonjs.com/api/classes/babylon.equirectangularcubetextureassettask#url
+func (e *EquiRectangularCubeTextureAssetTask) SetUrl(url string) *EquiRectangularCubeTextureAssetTask {
+	p := ba.ctx.Get("EquiRectangularCubeTextureAssetTask").New(url)
+	return EquiRectangularCubeTextureAssetTaskFromJSObject(p, ba.ctx)
+}
+
+*/

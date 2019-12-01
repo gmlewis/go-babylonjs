@@ -31,8 +31,61 @@ func ClipboardInfoFromJSObject(p js.Value, ctx js.Value) *ClipboardInfo {
 //
 // https://doc.babylonjs.com/api/classes/babylon.clipboardinfo
 func (ba *Babylon) NewClipboardInfo(jsType float64, event js.Value) *ClipboardInfo {
-	p := ba.ctx.Get("ClipboardInfo").New(jsType, event)
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, jsType)
+	args = append(args, event)
+
+	p := ba.ctx.Get("ClipboardInfo").New(args...)
 	return ClipboardInfoFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// GetTypeFromCharacter calls the GetTypeFromCharacter method on the ClipboardInfo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.clipboardinfo#gettypefromcharacter
+func (c *ClipboardInfo) GetTypeFromCharacter(keyCode float64) float64 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, keyCode)
+
+	retVal := c.p.Call("GetTypeFromCharacter", args...)
+	return retVal.Float()
+}
+
+/*
+
+// Event returns the Event property of class ClipboardInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.clipboardinfo#event
+func (c *ClipboardInfo) Event(event js.Value) *ClipboardInfo {
+	p := ba.ctx.Get("ClipboardInfo").New(event)
+	return ClipboardInfoFromJSObject(p, ba.ctx)
+}
+
+// SetEvent sets the Event property of class ClipboardInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.clipboardinfo#event
+func (c *ClipboardInfo) SetEvent(event js.Value) *ClipboardInfo {
+	p := ba.ctx.Get("ClipboardInfo").New(event)
+	return ClipboardInfoFromJSObject(p, ba.ctx)
+}
+
+// Type returns the Type property of class ClipboardInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.clipboardinfo#type
+func (c *ClipboardInfo) Type(jsType float64) *ClipboardInfo {
+	p := ba.ctx.Get("ClipboardInfo").New(jsType)
+	return ClipboardInfoFromJSObject(p, ba.ctx)
+}
+
+// SetType sets the Type property of class ClipboardInfo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.clipboardinfo#type
+func (c *ClipboardInfo) SetType(jsType float64) *ClipboardInfo {
+	p := ba.ctx.Get("ClipboardInfo").New(jsType)
+	return ClipboardInfoFromJSObject(p, ba.ctx)
+}
+
+*/

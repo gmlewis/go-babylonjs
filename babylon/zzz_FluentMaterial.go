@@ -31,8 +31,1550 @@ func FluentMaterialFromJSObject(p js.Value, ctx js.Value) *FluentMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.fluentmaterial
 func (ba *Babylon) NewFluentMaterial(name string, scene *Scene) *FluentMaterial {
-	p := ba.ctx.Get("FluentMaterial").New(name, scene.JSObject())
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("FluentMaterial").New(args...)
 	return FluentMaterialFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// FluentMaterialBindOpts contains optional parameters for FluentMaterial.Bind.
+type FluentMaterialBindOpts struct {
+	Mesh *Mesh
+}
+
+// Bind calls the Bind method on the FluentMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#bind
+func (f *FluentMaterial) Bind(world *Matrix, opts *FluentMaterialBindOpts) {
+	if opts == nil {
+		opts = &FluentMaterialBindOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, world.JSObject())
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	f.p.Call("bind", args...)
+}
+
+// BindForSubMesh calls the BindForSubMesh method on the FluentMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#bindforsubmesh
+func (f *FluentMaterial) BindForSubMesh(world *Matrix, mesh *Mesh, subMesh *SubMesh) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, world.JSObject())
+	args = append(args, mesh.JSObject())
+	args = append(args, subMesh.JSObject())
+
+	f.p.Call("bindForSubMesh", args...)
+}
+
+// BindOnlyNormalMatrix calls the BindOnlyNormalMatrix method on the FluentMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#bindonlynormalmatrix
+func (f *FluentMaterial) BindOnlyNormalMatrix(normalMatrix *Matrix) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, normalMatrix.JSObject())
+
+	f.p.Call("bindOnlyNormalMatrix", args...)
+}
+
+// BindOnlyWorldMatrix calls the BindOnlyWorldMatrix method on the FluentMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#bindonlyworldmatrix
+func (f *FluentMaterial) BindOnlyWorldMatrix(world *Matrix) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, world.JSObject())
+
+	f.p.Call("bindOnlyWorldMatrix", args...)
+}
+
+// BindSceneUniformBuffer calls the BindSceneUniformBuffer method on the FluentMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#bindsceneuniformbuffer
+func (f *FluentMaterial) BindSceneUniformBuffer(effect *Effect, sceneUbo *UniformBuffer) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, effect.JSObject())
+	args = append(args, sceneUbo.JSObject())
+
+	f.p.Call("bindSceneUniformBuffer", args...)
+}
+
+// BindView calls the BindView method on the FluentMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#bindview
+func (f *FluentMaterial) BindView(effect *Effect) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, effect.JSObject())
+
+	f.p.Call("bindView", args...)
+}
+
+// BindViewProjection calls the BindViewProjection method on the FluentMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#bindviewprojection
+func (f *FluentMaterial) BindViewProjection(effect *Effect) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, effect.JSObject())
+
+	f.p.Call("bindViewProjection", args...)
+}
+
+// Clone calls the Clone method on the FluentMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#clone
+func (f *FluentMaterial) Clone(name string) *FluentMaterial {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := f.p.Call("clone", args...)
+	return FluentMaterialFromJSObject(retVal, f.ctx)
+}
+
+// FluentMaterialDisposeOpts contains optional parameters for FluentMaterial.Dispose.
+type FluentMaterialDisposeOpts struct {
+	ForceDisposeEffect *bool
+}
+
+// Dispose calls the Dispose method on the FluentMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#dispose
+func (f *FluentMaterial) Dispose(opts *FluentMaterialDisposeOpts) {
+	if opts == nil {
+		opts = &FluentMaterialDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForceDisposeEffect == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceDisposeEffect)
+	}
+
+	f.p.Call("dispose", args...)
+}
+
+// FluentMaterialForceCompilationOpts contains optional parameters for FluentMaterial.ForceCompilation.
+type FluentMaterialForceCompilationOpts struct {
+	OnCompiled *func()
+	Options    js.Value
+	OnError    *func()
+}
+
+// ForceCompilation calls the ForceCompilation method on the FluentMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#forcecompilation
+func (f *FluentMaterial) ForceCompilation(mesh *AbstractMesh, opts *FluentMaterialForceCompilationOpts) {
+	if opts == nil {
+		opts = &FluentMaterialForceCompilationOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, mesh.JSObject())
+
+	if opts.OnCompiled == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnCompiled)
+	}
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+
+	f.p.Call("forceCompilation", args...)
+}
+
+// FluentMaterialForceCompilationAsyncOpts contains optional parameters for FluentMaterial.ForceCompilationAsync.
+type FluentMaterialForceCompilationAsyncOpts struct {
+	Options js.Value
+}
+
+// ForceCompilationAsync calls the ForceCompilationAsync method on the FluentMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#forcecompilationasync
+func (f *FluentMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *FluentMaterialForceCompilationAsyncOpts) {
+	if opts == nil {
+		opts = &FluentMaterialForceCompilationAsyncOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, mesh.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	f.p.Call("forceCompilationAsync", args...)
+}
+
+// Freeze calls the Freeze method on the FluentMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#freeze
+func (f *FluentMaterial) Freeze() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	f.p.Call("freeze", args...)
+}
+
+// GetActiveTextures calls the GetActiveTextures method on the FluentMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#getactivetextures
+func (f *FluentMaterial) GetActiveTextures() *BaseTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("getActiveTextures", args...)
+	return BaseTextureFromJSObject(retVal, f.ctx)
+}
+
+// GetAlphaTestTexture calls the GetAlphaTestTexture method on the FluentMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#getalphatesttexture
+func (f *FluentMaterial) GetAlphaTestTexture() *BaseTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("getAlphaTestTexture", args...)
+	return BaseTextureFromJSObject(retVal, f.ctx)
+}
+
+// GetBindedMeshes calls the GetBindedMeshes method on the FluentMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#getbindedmeshes
+func (f *FluentMaterial) GetBindedMeshes() *AbstractMesh {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("getBindedMeshes", args...)
+	return AbstractMeshFromJSObject(retVal, f.ctx)
+}
+
+// GetClassName calls the GetClassName method on the FluentMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#getclassname
+func (f *FluentMaterial) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetEffect calls the GetEffect method on the FluentMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#geteffect
+func (f *FluentMaterial) GetEffect() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("getEffect", args...)
+	return EffectFromJSObject(retVal, f.ctx)
+}
+
+// GetScene calls the GetScene method on the FluentMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#getscene
+func (f *FluentMaterial) GetScene() *Scene {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("getScene", args...)
+	return SceneFromJSObject(retVal, f.ctx)
+}
+
+// HasTexture calls the HasTexture method on the FluentMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#hastexture
+func (f *FluentMaterial) HasTexture(texture *BaseTexture) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, texture.JSObject())
+
+	retVal := f.p.Call("hasTexture", args...)
+	return retVal.Bool()
+}
+
+// FluentMaterialIsReadyOpts contains optional parameters for FluentMaterial.IsReady.
+type FluentMaterialIsReadyOpts struct {
+	Mesh         *AbstractMesh
+	UseInstances *bool
+}
+
+// IsReady calls the IsReady method on the FluentMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#isready
+func (f *FluentMaterial) IsReady(opts *FluentMaterialIsReadyOpts) bool {
+	if opts == nil {
+		opts = &FluentMaterialIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := f.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// FluentMaterialIsReadyForSubMeshOpts contains optional parameters for FluentMaterial.IsReadyForSubMesh.
+type FluentMaterialIsReadyForSubMeshOpts struct {
+	UseInstances *bool
+}
+
+// IsReadyForSubMesh calls the IsReadyForSubMesh method on the FluentMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#isreadyforsubmesh
+func (f *FluentMaterial) IsReadyForSubMesh(mesh *AbstractMesh, subMesh *SubMesh, opts *FluentMaterialIsReadyForSubMeshOpts) bool {
+	if opts == nil {
+		opts = &FluentMaterialIsReadyForSubMeshOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, subMesh.JSObject())
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := f.p.Call("isReadyForSubMesh", args...)
+	return retVal.Bool()
+}
+
+// MarkAsDirty calls the MarkAsDirty method on the FluentMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#markasdirty
+func (f *FluentMaterial) MarkAsDirty(flag float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, flag)
+
+	f.p.Call("markAsDirty", args...)
+}
+
+// MarkDirty calls the MarkDirty method on the FluentMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#markdirty
+func (f *FluentMaterial) MarkDirty() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	f.p.Call("markDirty", args...)
+}
+
+// NeedAlphaBlending calls the NeedAlphaBlending method on the FluentMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#needalphablending
+func (f *FluentMaterial) NeedAlphaBlending() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("needAlphaBlending", args...)
+	return retVal.Bool()
+}
+
+// NeedAlphaBlendingForMesh calls the NeedAlphaBlendingForMesh method on the FluentMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#needalphablendingformesh
+func (f *FluentMaterial) NeedAlphaBlendingForMesh(mesh *AbstractMesh) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	retVal := f.p.Call("needAlphaBlendingForMesh", args...)
+	return retVal.Bool()
+}
+
+// NeedAlphaTesting calls the NeedAlphaTesting method on the FluentMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#needalphatesting
+func (f *FluentMaterial) NeedAlphaTesting() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("needAlphaTesting", args...)
+	return retVal.Bool()
+}
+
+// Parse calls the Parse method on the FluentMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#parse
+func (f *FluentMaterial) Parse(source interface{}, scene *Scene, rootUrl string) *FluentMaterial {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, source)
+	args = append(args, scene.JSObject())
+	args = append(args, rootUrl)
+
+	retVal := f.p.Call("Parse", args...)
+	return FluentMaterialFromJSObject(retVal, f.ctx)
+}
+
+// Serialize calls the Serialize method on the FluentMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#serialize
+func (f *FluentMaterial) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("serialize", args...)
+	return retVal
+}
+
+// FluentMaterialToStringOpts contains optional parameters for FluentMaterial.ToString.
+type FluentMaterialToStringOpts struct {
+	FullDetails *bool
+}
+
+// ToString calls the ToString method on the FluentMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#tostring
+func (f *FluentMaterial) ToString(opts *FluentMaterialToStringOpts) string {
+	if opts == nil {
+		opts = &FluentMaterialToStringOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.FullDetails == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FullDetails)
+	}
+
+	retVal := f.p.Call("toString", args...)
+	return retVal.String()
+}
+
+// Unbind calls the Unbind method on the FluentMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#unbind
+func (f *FluentMaterial) Unbind() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	f.p.Call("unbind", args...)
+}
+
+// Unfreeze calls the Unfreeze method on the FluentMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#unfreeze
+func (f *FluentMaterial) Unfreeze() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	f.p.Call("unfreeze", args...)
+}
+
+/*
+
+// AlbedoColor returns the AlbedoColor property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#albedocolor
+func (f *FluentMaterial) AlbedoColor(albedoColor *Color3) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(albedoColor.JSObject())
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAlbedoColor sets the AlbedoColor property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#albedocolor
+func (f *FluentMaterial) SetAlbedoColor(albedoColor *Color3) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(albedoColor.JSObject())
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// AlbedoTexture returns the AlbedoTexture property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#albedotexture
+func (f *FluentMaterial) AlbedoTexture(albedoTexture *BaseTexture) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(albedoTexture.JSObject())
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAlbedoTexture sets the AlbedoTexture property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#albedotexture
+func (f *FluentMaterial) SetAlbedoTexture(albedoTexture *BaseTexture) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(albedoTexture.JSObject())
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// AllDirtyFlag returns the AllDirtyFlag property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#alldirtyflag
+func (f *FluentMaterial) AllDirtyFlag(AllDirtyFlag float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(AllDirtyFlag)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAllDirtyFlag sets the AllDirtyFlag property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#alldirtyflag
+func (f *FluentMaterial) SetAllDirtyFlag(AllDirtyFlag float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(AllDirtyFlag)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// AllowShaderHotSwapping returns the AllowShaderHotSwapping property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#allowshaderhotswapping
+func (f *FluentMaterial) AllowShaderHotSwapping(allowShaderHotSwapping bool) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(allowShaderHotSwapping)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAllowShaderHotSwapping sets the AllowShaderHotSwapping property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#allowshaderhotswapping
+func (f *FluentMaterial) SetAllowShaderHotSwapping(allowShaderHotSwapping bool) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(allowShaderHotSwapping)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// Alpha returns the Alpha property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#alpha
+func (f *FluentMaterial) Alpha(alpha float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(alpha)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAlpha sets the Alpha property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#alpha
+func (f *FluentMaterial) SetAlpha(alpha float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(alpha)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// AlphaMode returns the AlphaMode property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#alphamode
+func (f *FluentMaterial) AlphaMode(alphaMode float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(alphaMode)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaMode sets the AlphaMode property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#alphamode
+func (f *FluentMaterial) SetAlphaMode(alphaMode float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(alphaMode)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// Animations returns the Animations property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#animations
+func (f *FluentMaterial) Animations(animations []Animation) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(animations.JSObject())
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#animations
+func (f *FluentMaterial) SetAnimations(animations []Animation) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(animations.JSObject())
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// AttributesDirtyFlag returns the AttributesDirtyFlag property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#attributesdirtyflag
+func (f *FluentMaterial) AttributesDirtyFlag(AttributesDirtyFlag float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(AttributesDirtyFlag)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAttributesDirtyFlag sets the AttributesDirtyFlag property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#attributesdirtyflag
+func (f *FluentMaterial) SetAttributesDirtyFlag(AttributesDirtyFlag float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(AttributesDirtyFlag)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// BackFaceCulling returns the BackFaceCulling property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#backfaceculling
+func (f *FluentMaterial) BackFaceCulling(backFaceCulling bool) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(backFaceCulling)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetBackFaceCulling sets the BackFaceCulling property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#backfaceculling
+func (f *FluentMaterial) SetBackFaceCulling(backFaceCulling bool) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(backFaceCulling)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// BorderMinValue returns the BorderMinValue property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#borderminvalue
+func (f *FluentMaterial) BorderMinValue(borderMinValue float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(borderMinValue)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetBorderMinValue sets the BorderMinValue property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#borderminvalue
+func (f *FluentMaterial) SetBorderMinValue(borderMinValue float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(borderMinValue)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// BorderWidth returns the BorderWidth property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#borderwidth
+func (f *FluentMaterial) BorderWidth(borderWidth float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(borderWidth)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetBorderWidth sets the BorderWidth property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#borderwidth
+func (f *FluentMaterial) SetBorderWidth(borderWidth float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(borderWidth)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// CheckReadyOnEveryCall returns the CheckReadyOnEveryCall property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#checkreadyoneverycall
+func (f *FluentMaterial) CheckReadyOnEveryCall(checkReadyOnEveryCall bool) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(checkReadyOnEveryCall)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCheckReadyOnEveryCall sets the CheckReadyOnEveryCall property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#checkreadyoneverycall
+func (f *FluentMaterial) SetCheckReadyOnEveryCall(checkReadyOnEveryCall bool) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(checkReadyOnEveryCall)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// CheckReadyOnlyOnce returns the CheckReadyOnlyOnce property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#checkreadyonlyonce
+func (f *FluentMaterial) CheckReadyOnlyOnce(checkReadyOnlyOnce bool) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(checkReadyOnlyOnce)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCheckReadyOnlyOnce sets the CheckReadyOnlyOnce property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#checkreadyonlyonce
+func (f *FluentMaterial) SetCheckReadyOnlyOnce(checkReadyOnlyOnce bool) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(checkReadyOnlyOnce)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// ClockWiseSideOrientation returns the ClockWiseSideOrientation property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#clockwisesideorientation
+func (f *FluentMaterial) ClockWiseSideOrientation(ClockWiseSideOrientation float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(ClockWiseSideOrientation)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetClockWiseSideOrientation sets the ClockWiseSideOrientation property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#clockwisesideorientation
+func (f *FluentMaterial) SetClockWiseSideOrientation(ClockWiseSideOrientation float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(ClockWiseSideOrientation)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// CounterClockWiseSideOrientation returns the CounterClockWiseSideOrientation property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#counterclockwisesideorientation
+func (f *FluentMaterial) CounterClockWiseSideOrientation(CounterClockWiseSideOrientation float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(CounterClockWiseSideOrientation)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCounterClockWiseSideOrientation sets the CounterClockWiseSideOrientation property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#counterclockwisesideorientation
+func (f *FluentMaterial) SetCounterClockWiseSideOrientation(CounterClockWiseSideOrientation float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(CounterClockWiseSideOrientation)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// DepthFunction returns the DepthFunction property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#depthfunction
+func (f *FluentMaterial) DepthFunction(depthFunction float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(depthFunction)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDepthFunction sets the DepthFunction property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#depthfunction
+func (f *FluentMaterial) SetDepthFunction(depthFunction float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(depthFunction)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// DisableDepthWrite returns the DisableDepthWrite property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#disabledepthwrite
+func (f *FluentMaterial) DisableDepthWrite(disableDepthWrite bool) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(disableDepthWrite)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDisableDepthWrite sets the DisableDepthWrite property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#disabledepthwrite
+func (f *FluentMaterial) SetDisableDepthWrite(disableDepthWrite bool) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(disableDepthWrite)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// DoNotSerialize returns the DoNotSerialize property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#donotserialize
+func (f *FluentMaterial) DoNotSerialize(doNotSerialize bool) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(doNotSerialize)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDoNotSerialize sets the DoNotSerialize property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#donotserialize
+func (f *FluentMaterial) SetDoNotSerialize(doNotSerialize bool) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(doNotSerialize)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// EdgeSmoothingValue returns the EdgeSmoothingValue property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#edgesmoothingvalue
+func (f *FluentMaterial) EdgeSmoothingValue(edgeSmoothingValue float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(edgeSmoothingValue)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetEdgeSmoothingValue sets the EdgeSmoothingValue property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#edgesmoothingvalue
+func (f *FluentMaterial) SetEdgeSmoothingValue(edgeSmoothingValue float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(edgeSmoothingValue)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// FillMode returns the FillMode property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#fillmode
+func (f *FluentMaterial) FillMode(fillMode float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(fillMode)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFillMode sets the FillMode property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#fillmode
+func (f *FluentMaterial) SetFillMode(fillMode float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(fillMode)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// FogEnabled returns the FogEnabled property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#fogenabled
+func (f *FluentMaterial) FogEnabled(fogEnabled bool) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(fogEnabled)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFogEnabled sets the FogEnabled property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#fogenabled
+func (f *FluentMaterial) SetFogEnabled(fogEnabled bool) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(fogEnabled)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// ForceDepthWrite returns the ForceDepthWrite property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#forcedepthwrite
+func (f *FluentMaterial) ForceDepthWrite(forceDepthWrite bool) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(forceDepthWrite)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetForceDepthWrite sets the ForceDepthWrite property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#forcedepthwrite
+func (f *FluentMaterial) SetForceDepthWrite(forceDepthWrite bool) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(forceDepthWrite)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// FresnelDirtyFlag returns the FresnelDirtyFlag property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#fresneldirtyflag
+func (f *FluentMaterial) FresnelDirtyFlag(FresnelDirtyFlag float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(FresnelDirtyFlag)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFresnelDirtyFlag sets the FresnelDirtyFlag property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#fresneldirtyflag
+func (f *FluentMaterial) SetFresnelDirtyFlag(FresnelDirtyFlag float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(FresnelDirtyFlag)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// GetRenderTargetTextures returns the GetRenderTargetTextures property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#getrendertargettextures
+func (f *FluentMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(getRenderTargetTextures)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetGetRenderTargetTextures sets the GetRenderTargetTextures property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#getrendertargettextures
+func (f *FluentMaterial) SetGetRenderTargetTextures(getRenderTargetTextures func()) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(getRenderTargetTextures)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// HasRenderTargetTextures returns the HasRenderTargetTextures property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#hasrendertargettextures
+func (f *FluentMaterial) HasRenderTargetTextures(hasRenderTargetTextures bool) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(hasRenderTargetTextures)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetHasRenderTargetTextures sets the HasRenderTargetTextures property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#hasrendertargettextures
+func (f *FluentMaterial) SetHasRenderTargetTextures(hasRenderTargetTextures bool) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(hasRenderTargetTextures)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// HoverColor returns the HoverColor property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#hovercolor
+func (f *FluentMaterial) HoverColor(hoverColor *Color4) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(hoverColor.JSObject())
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetHoverColor sets the HoverColor property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#hovercolor
+func (f *FluentMaterial) SetHoverColor(hoverColor *Color4) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(hoverColor.JSObject())
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// HoverPosition returns the HoverPosition property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#hoverposition
+func (f *FluentMaterial) HoverPosition(hoverPosition *Vector3) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(hoverPosition.JSObject())
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetHoverPosition sets the HoverPosition property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#hoverposition
+func (f *FluentMaterial) SetHoverPosition(hoverPosition *Vector3) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(hoverPosition.JSObject())
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// HoverRadius returns the HoverRadius property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#hoverradius
+func (f *FluentMaterial) HoverRadius(hoverRadius float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(hoverRadius)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetHoverRadius sets the HoverRadius property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#hoverradius
+func (f *FluentMaterial) SetHoverRadius(hoverRadius float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(hoverRadius)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// Id returns the Id property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#id
+func (f *FluentMaterial) Id(id string) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(id)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetId sets the Id property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#id
+func (f *FluentMaterial) SetId(id string) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(id)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// InnerGlowColor returns the InnerGlowColor property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#innerglowcolor
+func (f *FluentMaterial) InnerGlowColor(innerGlowColor *Color3) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(innerGlowColor.JSObject())
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetInnerGlowColor sets the InnerGlowColor property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#innerglowcolor
+func (f *FluentMaterial) SetInnerGlowColor(innerGlowColor *Color3) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(innerGlowColor.JSObject())
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// InnerGlowColorIntensity returns the InnerGlowColorIntensity property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#innerglowcolorintensity
+func (f *FluentMaterial) InnerGlowColorIntensity(innerGlowColorIntensity float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(innerGlowColorIntensity)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetInnerGlowColorIntensity sets the InnerGlowColorIntensity property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#innerglowcolorintensity
+func (f *FluentMaterial) SetInnerGlowColorIntensity(innerGlowColorIntensity float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(innerGlowColorIntensity)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#inspectablecustomproperties
+func (f *FluentMaterial) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(inspectableCustomProperties.JSObject())
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#inspectablecustomproperties
+func (f *FluentMaterial) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(inspectableCustomProperties.JSObject())
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// IsFrozen returns the IsFrozen property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#isfrozen
+func (f *FluentMaterial) IsFrozen(isFrozen bool) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(isFrozen)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetIsFrozen sets the IsFrozen property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#isfrozen
+func (f *FluentMaterial) SetIsFrozen(isFrozen bool) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(isFrozen)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// LightDirtyFlag returns the LightDirtyFlag property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#lightdirtyflag
+func (f *FluentMaterial) LightDirtyFlag(LightDirtyFlag float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(LightDirtyFlag)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLightDirtyFlag sets the LightDirtyFlag property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#lightdirtyflag
+func (f *FluentMaterial) SetLightDirtyFlag(LightDirtyFlag float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(LightDirtyFlag)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineListDrawMode returns the LineListDrawMode property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#linelistdrawmode
+func (f *FluentMaterial) LineListDrawMode(LineListDrawMode float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(LineListDrawMode)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineListDrawMode sets the LineListDrawMode property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#linelistdrawmode
+func (f *FluentMaterial) SetLineListDrawMode(LineListDrawMode float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(LineListDrawMode)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineLoopDrawMode returns the LineLoopDrawMode property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#lineloopdrawmode
+func (f *FluentMaterial) LineLoopDrawMode(LineLoopDrawMode float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(LineLoopDrawMode)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineLoopDrawMode sets the LineLoopDrawMode property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#lineloopdrawmode
+func (f *FluentMaterial) SetLineLoopDrawMode(LineLoopDrawMode float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(LineLoopDrawMode)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineStripDrawMode returns the LineStripDrawMode property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#linestripdrawmode
+func (f *FluentMaterial) LineStripDrawMode(LineStripDrawMode float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(LineStripDrawMode)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineStripDrawMode sets the LineStripDrawMode property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#linestripdrawmode
+func (f *FluentMaterial) SetLineStripDrawMode(LineStripDrawMode float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(LineStripDrawMode)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#metadata
+func (f *FluentMaterial) Metadata(metadata interface{}) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(metadata)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#metadata
+func (f *FluentMaterial) SetMetadata(metadata interface{}) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(metadata)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// MiscDirtyFlag returns the MiscDirtyFlag property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#miscdirtyflag
+func (f *FluentMaterial) MiscDirtyFlag(MiscDirtyFlag float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(MiscDirtyFlag)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMiscDirtyFlag sets the MiscDirtyFlag property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#miscdirtyflag
+func (f *FluentMaterial) SetMiscDirtyFlag(MiscDirtyFlag float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(MiscDirtyFlag)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#name
+func (f *FluentMaterial) Name(name string) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(name)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#name
+func (f *FluentMaterial) SetName(name string) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(name)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// NeedDepthPrePass returns the NeedDepthPrePass property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#needdepthprepass
+func (f *FluentMaterial) NeedDepthPrePass(needDepthPrePass bool) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(needDepthPrePass)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetNeedDepthPrePass sets the NeedDepthPrePass property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#needdepthprepass
+func (f *FluentMaterial) SetNeedDepthPrePass(needDepthPrePass bool) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(needDepthPrePass)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnBind returns the OnBind property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#onbind
+func (f *FluentMaterial) OnBind(onBind func()) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(onBind)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnBind sets the OnBind property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#onbind
+func (f *FluentMaterial) SetOnBind(onBind func()) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(onBind)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnBindObservable returns the OnBindObservable property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#onbindobservable
+func (f *FluentMaterial) OnBindObservable(onBindObservable *Observable) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(onBindObservable.JSObject())
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnBindObservable sets the OnBindObservable property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#onbindobservable
+func (f *FluentMaterial) SetOnBindObservable(onBindObservable *Observable) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(onBindObservable.JSObject())
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnCompiled returns the OnCompiled property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#oncompiled
+func (f *FluentMaterial) OnCompiled(onCompiled func()) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(onCompiled)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnCompiled sets the OnCompiled property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#oncompiled
+func (f *FluentMaterial) SetOnCompiled(onCompiled func()) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(onCompiled)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnDispose returns the OnDispose property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#ondispose
+func (f *FluentMaterial) OnDispose(onDispose func()) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(onDispose)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnDispose sets the OnDispose property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#ondispose
+func (f *FluentMaterial) SetOnDispose(onDispose func()) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(onDispose)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnDisposeObservable returns the OnDisposeObservable property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#ondisposeobservable
+func (f *FluentMaterial) OnDisposeObservable(onDisposeObservable *Observable) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(onDisposeObservable.JSObject())
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnDisposeObservable sets the OnDisposeObservable property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#ondisposeobservable
+func (f *FluentMaterial) SetOnDisposeObservable(onDisposeObservable *Observable) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(onDisposeObservable.JSObject())
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnError returns the OnError property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#onerror
+func (f *FluentMaterial) OnError(onError func()) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(onError)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnError sets the OnError property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#onerror
+func (f *FluentMaterial) SetOnError(onError func()) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(onError)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnUnBindObservable returns the OnUnBindObservable property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#onunbindobservable
+func (f *FluentMaterial) OnUnBindObservable(onUnBindObservable *Observable) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(onUnBindObservable.JSObject())
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnUnBindObservable sets the OnUnBindObservable property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#onunbindobservable
+func (f *FluentMaterial) SetOnUnBindObservable(onUnBindObservable *Observable) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(onUnBindObservable.JSObject())
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointFillMode returns the PointFillMode property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#pointfillmode
+func (f *FluentMaterial) PointFillMode(PointFillMode float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(PointFillMode)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointFillMode sets the PointFillMode property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#pointfillmode
+func (f *FluentMaterial) SetPointFillMode(PointFillMode float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(PointFillMode)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointListDrawMode returns the PointListDrawMode property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#pointlistdrawmode
+func (f *FluentMaterial) PointListDrawMode(PointListDrawMode float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(PointListDrawMode)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointListDrawMode sets the PointListDrawMode property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#pointlistdrawmode
+func (f *FluentMaterial) SetPointListDrawMode(PointListDrawMode float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(PointListDrawMode)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointSize returns the PointSize property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#pointsize
+func (f *FluentMaterial) PointSize(pointSize float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(pointSize)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointSize sets the PointSize property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#pointsize
+func (f *FluentMaterial) SetPointSize(pointSize float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(pointSize)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointsCloud returns the PointsCloud property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#pointscloud
+func (f *FluentMaterial) PointsCloud(pointsCloud bool) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(pointsCloud)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointsCloud sets the PointsCloud property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#pointscloud
+func (f *FluentMaterial) SetPointsCloud(pointsCloud bool) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(pointsCloud)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// RenderBorders returns the RenderBorders property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#renderborders
+func (f *FluentMaterial) RenderBorders(renderBorders bool) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(renderBorders)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetRenderBorders sets the RenderBorders property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#renderborders
+func (f *FluentMaterial) SetRenderBorders(renderBorders bool) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(renderBorders)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// RenderHoverLight returns the RenderHoverLight property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#renderhoverlight
+func (f *FluentMaterial) RenderHoverLight(renderHoverLight bool) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(renderHoverLight)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetRenderHoverLight sets the RenderHoverLight property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#renderhoverlight
+func (f *FluentMaterial) SetRenderHoverLight(renderHoverLight bool) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(renderHoverLight)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// ReservedDataStore returns the ReservedDataStore property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#reserveddatastore
+func (f *FluentMaterial) ReservedDataStore(reservedDataStore interface{}) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(reservedDataStore)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetReservedDataStore sets the ReservedDataStore property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#reserveddatastore
+func (f *FluentMaterial) SetReservedDataStore(reservedDataStore interface{}) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(reservedDataStore)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SeparateCullingPass returns the SeparateCullingPass property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#separatecullingpass
+func (f *FluentMaterial) SeparateCullingPass(separateCullingPass bool) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(separateCullingPass)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSeparateCullingPass sets the SeparateCullingPass property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#separatecullingpass
+func (f *FluentMaterial) SetSeparateCullingPass(separateCullingPass bool) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(separateCullingPass)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SideOrientation returns the SideOrientation property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#sideorientation
+func (f *FluentMaterial) SideOrientation(sideOrientation float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(sideOrientation)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSideOrientation sets the SideOrientation property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#sideorientation
+func (f *FluentMaterial) SetSideOrientation(sideOrientation float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(sideOrientation)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// State returns the State property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#state
+func (f *FluentMaterial) State(state string) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(state)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetState sets the State property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#state
+func (f *FluentMaterial) SetState(state string) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(state)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// TextureDirtyFlag returns the TextureDirtyFlag property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#texturedirtyflag
+func (f *FluentMaterial) TextureDirtyFlag(TextureDirtyFlag float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(TextureDirtyFlag)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTextureDirtyFlag sets the TextureDirtyFlag property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#texturedirtyflag
+func (f *FluentMaterial) SetTextureDirtyFlag(TextureDirtyFlag float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(TextureDirtyFlag)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// TriangleFanDrawMode returns the TriangleFanDrawMode property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#trianglefandrawmode
+func (f *FluentMaterial) TriangleFanDrawMode(TriangleFanDrawMode float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(TriangleFanDrawMode)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTriangleFanDrawMode sets the TriangleFanDrawMode property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#trianglefandrawmode
+func (f *FluentMaterial) SetTriangleFanDrawMode(TriangleFanDrawMode float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(TriangleFanDrawMode)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// TriangleFillMode returns the TriangleFillMode property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#trianglefillmode
+func (f *FluentMaterial) TriangleFillMode(TriangleFillMode float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(TriangleFillMode)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTriangleFillMode sets the TriangleFillMode property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#trianglefillmode
+func (f *FluentMaterial) SetTriangleFillMode(TriangleFillMode float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(TriangleFillMode)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// TriangleStripDrawMode returns the TriangleStripDrawMode property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#trianglestripdrawmode
+func (f *FluentMaterial) TriangleStripDrawMode(TriangleStripDrawMode float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(TriangleStripDrawMode)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTriangleStripDrawMode sets the TriangleStripDrawMode property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#trianglestripdrawmode
+func (f *FluentMaterial) SetTriangleStripDrawMode(TriangleStripDrawMode float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(TriangleStripDrawMode)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#uniqueid
+func (f *FluentMaterial) UniqueId(uniqueId float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(uniqueId)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#uniqueid
+func (f *FluentMaterial) SetUniqueId(uniqueId float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(uniqueId)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// WireFrameFillMode returns the WireFrameFillMode property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#wireframefillmode
+func (f *FluentMaterial) WireFrameFillMode(WireFrameFillMode float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(WireFrameFillMode)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetWireFrameFillMode sets the WireFrameFillMode property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#wireframefillmode
+func (f *FluentMaterial) SetWireFrameFillMode(WireFrameFillMode float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(WireFrameFillMode)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// Wireframe returns the Wireframe property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#wireframe
+func (f *FluentMaterial) Wireframe(wireframe bool) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(wireframe)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetWireframe sets the Wireframe property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#wireframe
+func (f *FluentMaterial) SetWireframe(wireframe bool) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(wireframe)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// ZOffset returns the ZOffset property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#zoffset
+func (f *FluentMaterial) ZOffset(zOffset float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(zOffset)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetZOffset sets the ZOffset property of class FluentMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.fluentmaterial#zoffset
+func (f *FluentMaterial) SetZOffset(zOffset float64) *FluentMaterial {
+	p := ba.ctx.Get("FluentMaterial").New(zOffset)
+	return FluentMaterialFromJSObject(p, ba.ctx)
+}
+
+*/

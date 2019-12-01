@@ -33,8 +33,63 @@ func SimplificationQueueFromJSObject(p js.Value, ctx js.Value) *SimplificationQu
 //
 // https://doc.babylonjs.com/api/classes/babylon.simplificationqueue
 func (ba *Babylon) NewSimplificationQueue() *SimplificationQueue {
-	p := ba.ctx.Get("SimplificationQueue").New()
+
+	args := make([]interface{}, 0, 0+0)
+
+	p := ba.ctx.Get("SimplificationQueue").New(args...)
 	return SimplificationQueueFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AddTask calls the AddTask method on the SimplificationQueue object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.simplificationqueue#addtask
+func (s *SimplificationQueue) AddTask(task *ISimplificationTask) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, task.JSObject())
+
+	s.p.Call("addTask", args...)
+}
+
+// ExecuteNext calls the ExecuteNext method on the SimplificationQueue object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.simplificationqueue#executenext
+func (s *SimplificationQueue) ExecuteNext() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("executeNext", args...)
+}
+
+// RunSimplification calls the RunSimplification method on the SimplificationQueue object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.simplificationqueue#runsimplification
+func (s *SimplificationQueue) RunSimplification(task *ISimplificationTask) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, task.JSObject())
+
+	s.p.Call("runSimplification", args...)
+}
+
+/*
+
+// Running returns the Running property of class SimplificationQueue.
+//
+// https://doc.babylonjs.com/api/classes/babylon.simplificationqueue#running
+func (s *SimplificationQueue) Running(running bool) *SimplificationQueue {
+	p := ba.ctx.Get("SimplificationQueue").New(running)
+	return SimplificationQueueFromJSObject(p, ba.ctx)
+}
+
+// SetRunning sets the Running property of class SimplificationQueue.
+//
+// https://doc.babylonjs.com/api/classes/babylon.simplificationqueue#running
+func (s *SimplificationQueue) SetRunning(running bool) *SimplificationQueue {
+	p := ba.ctx.Get("SimplificationQueue").New(running)
+	return SimplificationQueueFromJSObject(p, ba.ctx)
+}
+
+*/

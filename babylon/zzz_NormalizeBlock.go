@@ -31,8 +31,637 @@ func NormalizeBlockFromJSObject(p js.Value, ctx js.Value) *NormalizeBlock {
 //
 // https://doc.babylonjs.com/api/classes/babylon.normalizeblock
 func (ba *Babylon) NewNormalizeBlock(name string) *NormalizeBlock {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	p := ba.ctx.Get("NormalizeBlock").New(args...)
+	return NormalizeBlockFromJSObject(p, ba.ctx)
+}
+
+// AutoConfigure calls the AutoConfigure method on the NormalizeBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#autoconfigure
+func (n *NormalizeBlock) AutoConfigure(material *NodeMaterial) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, material.JSObject())
+
+	n.p.Call("autoConfigure", args...)
+}
+
+// NormalizeBlockBindOpts contains optional parameters for NormalizeBlock.Bind.
+type NormalizeBlockBindOpts struct {
+	Mesh *Mesh
+}
+
+// Bind calls the Bind method on the NormalizeBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#bind
+func (n *NormalizeBlock) Bind(effect *Effect, nodeMaterial *NodeMaterial, opts *NormalizeBlockBindOpts) {
+	if opts == nil {
+		opts = &NormalizeBlockBindOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, effect.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	n.p.Call("bind", args...)
+}
+
+// Build calls the Build method on the NormalizeBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#build
+func (n *NormalizeBlock) Build(state *NodeMaterialBuildState, activeBlocks *NodeMaterialBlock) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, state.JSObject())
+	args = append(args, activeBlocks.JSObject())
+
+	retVal := n.p.Call("build", args...)
+	return retVal.Bool()
+}
+
+// NormalizeBlockCloneOpts contains optional parameters for NormalizeBlock.Clone.
+type NormalizeBlockCloneOpts struct {
+	RootUrl *string
+}
+
+// Clone calls the Clone method on the NormalizeBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#clone
+func (n *NormalizeBlock) Clone(scene *Scene, opts *NormalizeBlockCloneOpts) *NodeMaterialBlock {
+	if opts == nil {
+		opts = &NormalizeBlockCloneOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, scene.JSObject())
+
+	if opts.RootUrl == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RootUrl)
+	}
+
+	retVal := n.p.Call("clone", args...)
+	return NodeMaterialBlockFromJSObject(retVal, n.ctx)
+}
+
+// NormalizeBlockConnectToOpts contains optional parameters for NormalizeBlock.ConnectTo.
+type NormalizeBlockConnectToOpts struct {
+	Options js.Value
+}
+
+// ConnectTo calls the ConnectTo method on the NormalizeBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#connectto
+func (n *NormalizeBlock) ConnectTo(other *NodeMaterialBlock, opts *NormalizeBlockConnectToOpts) *NormalizeBlock {
+	if opts == nil {
+		opts = &NormalizeBlockConnectToOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, other.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	retVal := n.p.Call("connectTo", args...)
+	return NormalizeBlockFromJSObject(retVal, n.ctx)
+}
+
+// Dispose calls the Dispose method on the NormalizeBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#dispose
+func (n *NormalizeBlock) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	n.p.Call("dispose", args...)
+}
+
+// GetClassName calls the GetClassName method on the NormalizeBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#getclassname
+func (n *NormalizeBlock) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// NormalizeBlockGetFirstAvailableInputOpts contains optional parameters for NormalizeBlock.GetFirstAvailableInput.
+type NormalizeBlockGetFirstAvailableInputOpts struct {
+	ForOutput *NodeMaterialConnectionPoint
+}
+
+// GetFirstAvailableInput calls the GetFirstAvailableInput method on the NormalizeBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#getfirstavailableinput
+func (n *NormalizeBlock) GetFirstAvailableInput(opts *NormalizeBlockGetFirstAvailableInputOpts) *NodeMaterialConnectionPoint {
+	if opts == nil {
+		opts = &NormalizeBlockGetFirstAvailableInputOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForOutput == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForOutput.JSObject())
+	}
+
+	retVal := n.p.Call("getFirstAvailableInput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, n.ctx)
+}
+
+// NormalizeBlockGetFirstAvailableOutputOpts contains optional parameters for NormalizeBlock.GetFirstAvailableOutput.
+type NormalizeBlockGetFirstAvailableOutputOpts struct {
+	ForBlock *NodeMaterialBlock
+}
+
+// GetFirstAvailableOutput calls the GetFirstAvailableOutput method on the NormalizeBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#getfirstavailableoutput
+func (n *NormalizeBlock) GetFirstAvailableOutput(opts *NormalizeBlockGetFirstAvailableOutputOpts) *NodeMaterialConnectionPoint {
+	if opts == nil {
+		opts = &NormalizeBlockGetFirstAvailableOutputOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForBlock == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForBlock.JSObject())
+	}
+
+	retVal := n.p.Call("getFirstAvailableOutput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, n.ctx)
+}
+
+// GetInputByName calls the GetInputByName method on the NormalizeBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#getinputbyname
+func (n *NormalizeBlock) GetInputByName(name string) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := n.p.Call("getInputByName", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, n.ctx)
+}
+
+// GetOutputByName calls the GetOutputByName method on the NormalizeBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#getoutputbyname
+func (n *NormalizeBlock) GetOutputByName(name string) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := n.p.Call("getOutputByName", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, n.ctx)
+}
+
+// GetSiblingOutput calls the GetSiblingOutput method on the NormalizeBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#getsiblingoutput
+func (n *NormalizeBlock) GetSiblingOutput(current *NodeMaterialConnectionPoint) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, current.JSObject())
+
+	retVal := n.p.Call("getSiblingOutput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, n.ctx)
+}
+
+// Initialize calls the Initialize method on the NormalizeBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#initialize
+func (n *NormalizeBlock) Initialize(state *NodeMaterialBuildState) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, state.JSObject())
+
+	n.p.Call("initialize", args...)
+}
+
+// NormalizeBlockInitializeDefinesOpts contains optional parameters for NormalizeBlock.InitializeDefines.
+type NormalizeBlockInitializeDefinesOpts struct {
+	UseInstances *bool
+}
+
+// InitializeDefines calls the InitializeDefines method on the NormalizeBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#initializedefines
+func (n *NormalizeBlock) InitializeDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *NormalizeBlockInitializeDefinesOpts) {
+	if opts == nil {
+		opts = &NormalizeBlockInitializeDefinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	n.p.Call("initializeDefines", args...)
+}
+
+// NormalizeBlockIsReadyOpts contains optional parameters for NormalizeBlock.IsReady.
+type NormalizeBlockIsReadyOpts struct {
+	UseInstances *bool
+}
+
+// IsReady calls the IsReady method on the NormalizeBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#isready
+func (n *NormalizeBlock) IsReady(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *NormalizeBlockIsReadyOpts) bool {
+	if opts == nil {
+		opts = &NormalizeBlockIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := n.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// NormalizeBlockPrepareDefinesOpts contains optional parameters for NormalizeBlock.PrepareDefines.
+type NormalizeBlockPrepareDefinesOpts struct {
+	UseInstances *bool
+}
+
+// PrepareDefines calls the PrepareDefines method on the NormalizeBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#preparedefines
+func (n *NormalizeBlock) PrepareDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *NormalizeBlockPrepareDefinesOpts) {
+	if opts == nil {
+		opts = &NormalizeBlockPrepareDefinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	n.p.Call("prepareDefines", args...)
+}
+
+// ProvideFallbacks calls the ProvideFallbacks method on the NormalizeBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#providefallbacks
+func (n *NormalizeBlock) ProvideFallbacks(mesh *AbstractMesh, fallbacks *EffectFallbacks) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, fallbacks.JSObject())
+
+	n.p.Call("provideFallbacks", args...)
+}
+
+// NormalizeBlockRegisterInputOpts contains optional parameters for NormalizeBlock.RegisterInput.
+type NormalizeBlockRegisterInputOpts struct {
+	IsOptional *bool
+	Target     js.Value
+}
+
+// RegisterInput calls the RegisterInput method on the NormalizeBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#registerinput
+func (n *NormalizeBlock) RegisterInput(name string, jsType js.Value, opts *NormalizeBlockRegisterInputOpts) *NormalizeBlock {
+	if opts == nil {
+		opts = &NormalizeBlockRegisterInputOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+2)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	if opts.IsOptional == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IsOptional)
+	}
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+
+	retVal := n.p.Call("registerInput", args...)
+	return NormalizeBlockFromJSObject(retVal, n.ctx)
+}
+
+// NormalizeBlockRegisterOutputOpts contains optional parameters for NormalizeBlock.RegisterOutput.
+type NormalizeBlockRegisterOutputOpts struct {
+	Target js.Value
+}
+
+// RegisterOutput calls the RegisterOutput method on the NormalizeBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#registeroutput
+func (n *NormalizeBlock) RegisterOutput(name string, jsType js.Value, opts *NormalizeBlockRegisterOutputOpts) *NormalizeBlock {
+	if opts == nil {
+		opts = &NormalizeBlockRegisterOutputOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+
+	retVal := n.p.Call("registerOutput", args...)
+	return NormalizeBlockFromJSObject(retVal, n.ctx)
+}
+
+// ReplaceRepeatableContent calls the ReplaceRepeatableContent method on the NormalizeBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#replacerepeatablecontent
+func (n *NormalizeBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterialBuildState, fragmentShaderState *NodeMaterialBuildState, mesh *AbstractMesh, defines js.Value) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, vertexShaderState.JSObject())
+	args = append(args, fragmentShaderState.JSObject())
+	args = append(args, mesh.JSObject())
+	args = append(args, defines)
+
+	n.p.Call("replaceRepeatableContent", args...)
+}
+
+// Serialize calls the Serialize method on the NormalizeBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#serialize
+func (n *NormalizeBlock) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("serialize", args...)
+	return retVal
+}
+
+// UpdateUniformsAndSamples calls the UpdateUniformsAndSamples method on the NormalizeBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#updateuniformsandsamples
+func (n *NormalizeBlock) UpdateUniformsAndSamples(state *NodeMaterialBuildState, nodeMaterial *NodeMaterial, defines js.Value, uniformBuffers string) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, state.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+	args = append(args, uniformBuffers)
+
+	n.p.Call("updateUniformsAndSamples", args...)
+}
+
+/*
+
+// BuildId returns the BuildId property of class NormalizeBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#buildid
+func (n *NormalizeBlock) BuildId(buildId float64) *NormalizeBlock {
+	p := ba.ctx.Get("NormalizeBlock").New(buildId)
+	return NormalizeBlockFromJSObject(p, ba.ctx)
+}
+
+// SetBuildId sets the BuildId property of class NormalizeBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#buildid
+func (n *NormalizeBlock) SetBuildId(buildId float64) *NormalizeBlock {
+	p := ba.ctx.Get("NormalizeBlock").New(buildId)
+	return NormalizeBlockFromJSObject(p, ba.ctx)
+}
+
+// Comments returns the Comments property of class NormalizeBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#comments
+func (n *NormalizeBlock) Comments(comments string) *NormalizeBlock {
+	p := ba.ctx.Get("NormalizeBlock").New(comments)
+	return NormalizeBlockFromJSObject(p, ba.ctx)
+}
+
+// SetComments sets the Comments property of class NormalizeBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#comments
+func (n *NormalizeBlock) SetComments(comments string) *NormalizeBlock {
+	p := ba.ctx.Get("NormalizeBlock").New(comments)
+	return NormalizeBlockFromJSObject(p, ba.ctx)
+}
+
+// Input returns the Input property of class NormalizeBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#input
+func (n *NormalizeBlock) Input(input *NodeMaterialConnectionPoint) *NormalizeBlock {
+	p := ba.ctx.Get("NormalizeBlock").New(input.JSObject())
+	return NormalizeBlockFromJSObject(p, ba.ctx)
+}
+
+// SetInput sets the Input property of class NormalizeBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#input
+func (n *NormalizeBlock) SetInput(input *NodeMaterialConnectionPoint) *NormalizeBlock {
+	p := ba.ctx.Get("NormalizeBlock").New(input.JSObject())
+	return NormalizeBlockFromJSObject(p, ba.ctx)
+}
+
+// Inputs returns the Inputs property of class NormalizeBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#inputs
+func (n *NormalizeBlock) Inputs(inputs *NodeMaterialConnectionPoint) *NormalizeBlock {
+	p := ba.ctx.Get("NormalizeBlock").New(inputs.JSObject())
+	return NormalizeBlockFromJSObject(p, ba.ctx)
+}
+
+// SetInputs sets the Inputs property of class NormalizeBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#inputs
+func (n *NormalizeBlock) SetInputs(inputs *NodeMaterialConnectionPoint) *NormalizeBlock {
+	p := ba.ctx.Get("NormalizeBlock").New(inputs.JSObject())
+	return NormalizeBlockFromJSObject(p, ba.ctx)
+}
+
+// IsFinalMerger returns the IsFinalMerger property of class NormalizeBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#isfinalmerger
+func (n *NormalizeBlock) IsFinalMerger(isFinalMerger bool) *NormalizeBlock {
+	p := ba.ctx.Get("NormalizeBlock").New(isFinalMerger)
+	return NormalizeBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsFinalMerger sets the IsFinalMerger property of class NormalizeBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#isfinalmerger
+func (n *NormalizeBlock) SetIsFinalMerger(isFinalMerger bool) *NormalizeBlock {
+	p := ba.ctx.Get("NormalizeBlock").New(isFinalMerger)
+	return NormalizeBlockFromJSObject(p, ba.ctx)
+}
+
+// IsInput returns the IsInput property of class NormalizeBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#isinput
+func (n *NormalizeBlock) IsInput(isInput bool) *NormalizeBlock {
+	p := ba.ctx.Get("NormalizeBlock").New(isInput)
+	return NormalizeBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsInput sets the IsInput property of class NormalizeBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#isinput
+func (n *NormalizeBlock) SetIsInput(isInput bool) *NormalizeBlock {
+	p := ba.ctx.Get("NormalizeBlock").New(isInput)
+	return NormalizeBlockFromJSObject(p, ba.ctx)
+}
+
+// IsUnique returns the IsUnique property of class NormalizeBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#isunique
+func (n *NormalizeBlock) IsUnique(isUnique bool) *NormalizeBlock {
+	p := ba.ctx.Get("NormalizeBlock").New(isUnique)
+	return NormalizeBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsUnique sets the IsUnique property of class NormalizeBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#isunique
+func (n *NormalizeBlock) SetIsUnique(isUnique bool) *NormalizeBlock {
+	p := ba.ctx.Get("NormalizeBlock").New(isUnique)
+	return NormalizeBlockFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class NormalizeBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#name
+func (n *NormalizeBlock) Name(name string) *NormalizeBlock {
 	p := ba.ctx.Get("NormalizeBlock").New(name)
 	return NormalizeBlockFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetName sets the Name property of class NormalizeBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#name
+func (n *NormalizeBlock) SetName(name string) *NormalizeBlock {
+	p := ba.ctx.Get("NormalizeBlock").New(name)
+	return NormalizeBlockFromJSObject(p, ba.ctx)
+}
+
+// Output returns the Output property of class NormalizeBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#output
+func (n *NormalizeBlock) Output(output *NodeMaterialConnectionPoint) *NormalizeBlock {
+	p := ba.ctx.Get("NormalizeBlock").New(output.JSObject())
+	return NormalizeBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOutput sets the Output property of class NormalizeBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#output
+func (n *NormalizeBlock) SetOutput(output *NodeMaterialConnectionPoint) *NormalizeBlock {
+	p := ba.ctx.Get("NormalizeBlock").New(output.JSObject())
+	return NormalizeBlockFromJSObject(p, ba.ctx)
+}
+
+// Outputs returns the Outputs property of class NormalizeBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#outputs
+func (n *NormalizeBlock) Outputs(outputs *NodeMaterialConnectionPoint) *NormalizeBlock {
+	p := ba.ctx.Get("NormalizeBlock").New(outputs.JSObject())
+	return NormalizeBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOutputs sets the Outputs property of class NormalizeBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#outputs
+func (n *NormalizeBlock) SetOutputs(outputs *NodeMaterialConnectionPoint) *NormalizeBlock {
+	p := ba.ctx.Get("NormalizeBlock").New(outputs.JSObject())
+	return NormalizeBlockFromJSObject(p, ba.ctx)
+}
+
+// Target returns the Target property of class NormalizeBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#target
+func (n *NormalizeBlock) Target(target js.Value) *NormalizeBlock {
+	p := ba.ctx.Get("NormalizeBlock").New(target)
+	return NormalizeBlockFromJSObject(p, ba.ctx)
+}
+
+// SetTarget sets the Target property of class NormalizeBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#target
+func (n *NormalizeBlock) SetTarget(target js.Value) *NormalizeBlock {
+	p := ba.ctx.Get("NormalizeBlock").New(target)
+	return NormalizeBlockFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class NormalizeBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#uniqueid
+func (n *NormalizeBlock) UniqueId(uniqueId float64) *NormalizeBlock {
+	p := ba.ctx.Get("NormalizeBlock").New(uniqueId)
+	return NormalizeBlockFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class NormalizeBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.normalizeblock#uniqueid
+func (n *NormalizeBlock) SetUniqueId(uniqueId float64) *NormalizeBlock {
+	p := ba.ctx.Get("NormalizeBlock").New(uniqueId)
+	return NormalizeBlockFromJSObject(p, ba.ctx)
+}
+
+*/

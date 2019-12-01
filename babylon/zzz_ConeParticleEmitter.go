@@ -31,11 +31,9 @@ func ConeParticleEmitterFromJSObject(p js.Value, ctx js.Value) *ConeParticleEmit
 
 // NewConeParticleEmitterOpts contains optional parameters for NewConeParticleEmitter.
 type NewConeParticleEmitterOpts struct {
-	Radius *JSFloat64
-
-	Angle *JSFloat64
-
-	DirectionRandomizer *JSFloat64
+	Radius              *float64
+	Angle               *float64
+	DirectionRandomizer *float64
 }
 
 // NewConeParticleEmitter returns a new ConeParticleEmitter object.
@@ -46,8 +44,220 @@ func (ba *Babylon) NewConeParticleEmitter(opts *NewConeParticleEmitterOpts) *Con
 		opts = &NewConeParticleEmitterOpts{}
 	}
 
-	p := ba.ctx.Get("ConeParticleEmitter").New(opts.Radius.JSObject(), opts.Angle.JSObject(), opts.DirectionRandomizer.JSObject())
+	args := make([]interface{}, 0, 0+3)
+
+	if opts.Radius == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Radius)
+	}
+	if opts.Angle == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Angle)
+	}
+	if opts.DirectionRandomizer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectionRandomizer)
+	}
+
+	p := ba.ctx.Get("ConeParticleEmitter").New(args...)
 	return ConeParticleEmitterFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// ApplyToShader calls the ApplyToShader method on the ConeParticleEmitter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.coneparticleemitter#applytoshader
+func (c *ConeParticleEmitter) ApplyToShader(effect *Effect) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, effect.JSObject())
+
+	c.p.Call("applyToShader", args...)
+}
+
+// Clone calls the Clone method on the ConeParticleEmitter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.coneparticleemitter#clone
+func (c *ConeParticleEmitter) Clone() *ConeParticleEmitter {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("clone", args...)
+	return ConeParticleEmitterFromJSObject(retVal, c.ctx)
+}
+
+// GetClassName calls the GetClassName method on the ConeParticleEmitter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.coneparticleemitter#getclassname
+func (c *ConeParticleEmitter) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetEffectDefines calls the GetEffectDefines method on the ConeParticleEmitter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.coneparticleemitter#geteffectdefines
+func (c *ConeParticleEmitter) GetEffectDefines() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getEffectDefines", args...)
+	return retVal.String()
+}
+
+// Parse calls the Parse method on the ConeParticleEmitter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.coneparticleemitter#parse
+func (c *ConeParticleEmitter) Parse(serializationObject interface{}) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, serializationObject)
+
+	c.p.Call("parse", args...)
+}
+
+// Serialize calls the Serialize method on the ConeParticleEmitter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.coneparticleemitter#serialize
+func (c *ConeParticleEmitter) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("serialize", args...)
+	return retVal
+}
+
+// StartDirectionFunction calls the StartDirectionFunction method on the ConeParticleEmitter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.coneparticleemitter#startdirectionfunction
+func (c *ConeParticleEmitter) StartDirectionFunction(worldMatrix *Matrix, directionToUpdate *Vector3, particle *Particle) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, worldMatrix.JSObject())
+	args = append(args, directionToUpdate.JSObject())
+	args = append(args, particle.JSObject())
+
+	c.p.Call("startDirectionFunction", args...)
+}
+
+// StartPositionFunction calls the StartPositionFunction method on the ConeParticleEmitter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.coneparticleemitter#startpositionfunction
+func (c *ConeParticleEmitter) StartPositionFunction(worldMatrix *Matrix, positionToUpdate *Vector3, particle *Particle) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, worldMatrix.JSObject())
+	args = append(args, positionToUpdate.JSObject())
+	args = append(args, particle.JSObject())
+
+	c.p.Call("startPositionFunction", args...)
+}
+
+/*
+
+// Angle returns the Angle property of class ConeParticleEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.coneparticleemitter#angle
+func (c *ConeParticleEmitter) Angle(angle float64) *ConeParticleEmitter {
+	p := ba.ctx.Get("ConeParticleEmitter").New(angle)
+	return ConeParticleEmitterFromJSObject(p, ba.ctx)
+}
+
+// SetAngle sets the Angle property of class ConeParticleEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.coneparticleemitter#angle
+func (c *ConeParticleEmitter) SetAngle(angle float64) *ConeParticleEmitter {
+	p := ba.ctx.Get("ConeParticleEmitter").New(angle)
+	return ConeParticleEmitterFromJSObject(p, ba.ctx)
+}
+
+// DirectionRandomizer returns the DirectionRandomizer property of class ConeParticleEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.coneparticleemitter#directionrandomizer
+func (c *ConeParticleEmitter) DirectionRandomizer(directionRandomizer float64) *ConeParticleEmitter {
+	p := ba.ctx.Get("ConeParticleEmitter").New(directionRandomizer)
+	return ConeParticleEmitterFromJSObject(p, ba.ctx)
+}
+
+// SetDirectionRandomizer sets the DirectionRandomizer property of class ConeParticleEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.coneparticleemitter#directionrandomizer
+func (c *ConeParticleEmitter) SetDirectionRandomizer(directionRandomizer float64) *ConeParticleEmitter {
+	p := ba.ctx.Get("ConeParticleEmitter").New(directionRandomizer)
+	return ConeParticleEmitterFromJSObject(p, ba.ctx)
+}
+
+// EmitFromSpawnPointOnly returns the EmitFromSpawnPointOnly property of class ConeParticleEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.coneparticleemitter#emitfromspawnpointonly
+func (c *ConeParticleEmitter) EmitFromSpawnPointOnly(emitFromSpawnPointOnly bool) *ConeParticleEmitter {
+	p := ba.ctx.Get("ConeParticleEmitter").New(emitFromSpawnPointOnly)
+	return ConeParticleEmitterFromJSObject(p, ba.ctx)
+}
+
+// SetEmitFromSpawnPointOnly sets the EmitFromSpawnPointOnly property of class ConeParticleEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.coneparticleemitter#emitfromspawnpointonly
+func (c *ConeParticleEmitter) SetEmitFromSpawnPointOnly(emitFromSpawnPointOnly bool) *ConeParticleEmitter {
+	p := ba.ctx.Get("ConeParticleEmitter").New(emitFromSpawnPointOnly)
+	return ConeParticleEmitterFromJSObject(p, ba.ctx)
+}
+
+// HeightRange returns the HeightRange property of class ConeParticleEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.coneparticleemitter#heightrange
+func (c *ConeParticleEmitter) HeightRange(heightRange float64) *ConeParticleEmitter {
+	p := ba.ctx.Get("ConeParticleEmitter").New(heightRange)
+	return ConeParticleEmitterFromJSObject(p, ba.ctx)
+}
+
+// SetHeightRange sets the HeightRange property of class ConeParticleEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.coneparticleemitter#heightrange
+func (c *ConeParticleEmitter) SetHeightRange(heightRange float64) *ConeParticleEmitter {
+	p := ba.ctx.Get("ConeParticleEmitter").New(heightRange)
+	return ConeParticleEmitterFromJSObject(p, ba.ctx)
+}
+
+// Radius returns the Radius property of class ConeParticleEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.coneparticleemitter#radius
+func (c *ConeParticleEmitter) Radius(radius float64) *ConeParticleEmitter {
+	p := ba.ctx.Get("ConeParticleEmitter").New(radius)
+	return ConeParticleEmitterFromJSObject(p, ba.ctx)
+}
+
+// SetRadius sets the Radius property of class ConeParticleEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.coneparticleemitter#radius
+func (c *ConeParticleEmitter) SetRadius(radius float64) *ConeParticleEmitter {
+	p := ba.ctx.Get("ConeParticleEmitter").New(radius)
+	return ConeParticleEmitterFromJSObject(p, ba.ctx)
+}
+
+// RadiusRange returns the RadiusRange property of class ConeParticleEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.coneparticleemitter#radiusrange
+func (c *ConeParticleEmitter) RadiusRange(radiusRange float64) *ConeParticleEmitter {
+	p := ba.ctx.Get("ConeParticleEmitter").New(radiusRange)
+	return ConeParticleEmitterFromJSObject(p, ba.ctx)
+}
+
+// SetRadiusRange sets the RadiusRange property of class ConeParticleEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.coneparticleemitter#radiusrange
+func (c *ConeParticleEmitter) SetRadiusRange(radiusRange float64) *ConeParticleEmitter {
+	p := ba.ctx.Get("ConeParticleEmitter").New(radiusRange)
+	return ConeParticleEmitterFromJSObject(p, ba.ctx)
+}
+
+*/

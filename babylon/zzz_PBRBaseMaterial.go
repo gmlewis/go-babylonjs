@@ -35,8 +35,1646 @@ func PBRBaseMaterialFromJSObject(p js.Value, ctx js.Value) *PBRBaseMaterial {
 //
 // https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial
 func (ba *Babylon) NewPBRBaseMaterial(name string, scene *Scene) *PBRBaseMaterial {
-	p := ba.ctx.Get("PBRBaseMaterial").New(name, scene.JSObject())
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, name)
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("PBRBaseMaterial").New(args...)
 	return PBRBaseMaterialFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// PBRBaseMaterialBindOpts contains optional parameters for PBRBaseMaterial.Bind.
+type PBRBaseMaterialBindOpts struct {
+	Mesh *Mesh
+}
+
+// Bind calls the Bind method on the PBRBaseMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#bind
+func (p *PBRBaseMaterial) Bind(world *Matrix, opts *PBRBaseMaterialBindOpts) {
+	if opts == nil {
+		opts = &PBRBaseMaterialBindOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, world.JSObject())
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	p.p.Call("bind", args...)
+}
+
+// BindForSubMesh calls the BindForSubMesh method on the PBRBaseMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#bindforsubmesh
+func (p *PBRBaseMaterial) BindForSubMesh(world *Matrix, mesh *Mesh, subMesh *SubMesh) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, world.JSObject())
+	args = append(args, mesh.JSObject())
+	args = append(args, subMesh.JSObject())
+
+	p.p.Call("bindForSubMesh", args...)
+}
+
+// BindOnlyNormalMatrix calls the BindOnlyNormalMatrix method on the PBRBaseMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#bindonlynormalmatrix
+func (p *PBRBaseMaterial) BindOnlyNormalMatrix(normalMatrix *Matrix) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, normalMatrix.JSObject())
+
+	p.p.Call("bindOnlyNormalMatrix", args...)
+}
+
+// BindOnlyWorldMatrix calls the BindOnlyWorldMatrix method on the PBRBaseMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#bindonlyworldmatrix
+func (p *PBRBaseMaterial) BindOnlyWorldMatrix(world *Matrix) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, world.JSObject())
+
+	p.p.Call("bindOnlyWorldMatrix", args...)
+}
+
+// BindSceneUniformBuffer calls the BindSceneUniformBuffer method on the PBRBaseMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#bindsceneuniformbuffer
+func (p *PBRBaseMaterial) BindSceneUniformBuffer(effect *Effect, sceneUbo *UniformBuffer) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, effect.JSObject())
+	args = append(args, sceneUbo.JSObject())
+
+	p.p.Call("bindSceneUniformBuffer", args...)
+}
+
+// BindView calls the BindView method on the PBRBaseMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#bindview
+func (p *PBRBaseMaterial) BindView(effect *Effect) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, effect.JSObject())
+
+	p.p.Call("bindView", args...)
+}
+
+// BindViewProjection calls the BindViewProjection method on the PBRBaseMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#bindviewprojection
+func (p *PBRBaseMaterial) BindViewProjection(effect *Effect) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, effect.JSObject())
+
+	p.p.Call("bindViewProjection", args...)
+}
+
+// BuildUniformLayout calls the BuildUniformLayout method on the PBRBaseMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#builduniformlayout
+func (p *PBRBaseMaterial) BuildUniformLayout() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("buildUniformLayout", args...)
+}
+
+// Clone calls the Clone method on the PBRBaseMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#clone
+func (p *PBRBaseMaterial) Clone(name string) *Material {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := p.p.Call("clone", args...)
+	return MaterialFromJSObject(retVal, p.ctx)
+}
+
+// PBRBaseMaterialDisposeOpts contains optional parameters for PBRBaseMaterial.Dispose.
+type PBRBaseMaterialDisposeOpts struct {
+	ForceDisposeEffect   *bool
+	ForceDisposeTextures *bool
+}
+
+// Dispose calls the Dispose method on the PBRBaseMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#dispose
+func (p *PBRBaseMaterial) Dispose(opts *PBRBaseMaterialDisposeOpts) {
+	if opts == nil {
+		opts = &PBRBaseMaterialDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.ForceDisposeEffect == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceDisposeEffect)
+	}
+	if opts.ForceDisposeTextures == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceDisposeTextures)
+	}
+
+	p.p.Call("dispose", args...)
+}
+
+// PBRBaseMaterialForceCompilationOpts contains optional parameters for PBRBaseMaterial.ForceCompilation.
+type PBRBaseMaterialForceCompilationOpts struct {
+	OnCompiled *func()
+	Options    js.Value
+}
+
+// ForceCompilation calls the ForceCompilation method on the PBRBaseMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#forcecompilation
+func (p *PBRBaseMaterial) ForceCompilation(mesh *AbstractMesh, opts *PBRBaseMaterialForceCompilationOpts) {
+	if opts == nil {
+		opts = &PBRBaseMaterialForceCompilationOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, mesh.JSObject())
+
+	if opts.OnCompiled == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnCompiled)
+	}
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	p.p.Call("forceCompilation", args...)
+}
+
+// PBRBaseMaterialForceCompilationAsyncOpts contains optional parameters for PBRBaseMaterial.ForceCompilationAsync.
+type PBRBaseMaterialForceCompilationAsyncOpts struct {
+	Options js.Value
+}
+
+// ForceCompilationAsync calls the ForceCompilationAsync method on the PBRBaseMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#forcecompilationasync
+func (p *PBRBaseMaterial) ForceCompilationAsync(mesh *AbstractMesh, opts *PBRBaseMaterialForceCompilationAsyncOpts) {
+	if opts == nil {
+		opts = &PBRBaseMaterialForceCompilationAsyncOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, mesh.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	p.p.Call("forceCompilationAsync", args...)
+}
+
+// Freeze calls the Freeze method on the PBRBaseMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#freeze
+func (p *PBRBaseMaterial) Freeze() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("freeze", args...)
+}
+
+// GetActiveTextures calls the GetActiveTextures method on the PBRBaseMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#getactivetextures
+func (p *PBRBaseMaterial) GetActiveTextures() *BaseTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("getActiveTextures", args...)
+	return BaseTextureFromJSObject(retVal, p.ctx)
+}
+
+// GetAlphaTestTexture calls the GetAlphaTestTexture method on the PBRBaseMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#getalphatesttexture
+func (p *PBRBaseMaterial) GetAlphaTestTexture() *BaseTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("getAlphaTestTexture", args...)
+	return BaseTextureFromJSObject(retVal, p.ctx)
+}
+
+// GetAnimatables calls the GetAnimatables method on the PBRBaseMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#getanimatables
+func (p *PBRBaseMaterial) GetAnimatables() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("getAnimatables", args...)
+	return retVal
+}
+
+// GetBindedMeshes calls the GetBindedMeshes method on the PBRBaseMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#getbindedmeshes
+func (p *PBRBaseMaterial) GetBindedMeshes() *AbstractMesh {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("getBindedMeshes", args...)
+	return AbstractMeshFromJSObject(retVal, p.ctx)
+}
+
+// GetClassName calls the GetClassName method on the PBRBaseMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#getclassname
+func (p *PBRBaseMaterial) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetEffect calls the GetEffect method on the PBRBaseMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#geteffect
+func (p *PBRBaseMaterial) GetEffect() *Effect {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("getEffect", args...)
+	return EffectFromJSObject(retVal, p.ctx)
+}
+
+// GetScene calls the GetScene method on the PBRBaseMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#getscene
+func (p *PBRBaseMaterial) GetScene() *Scene {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("getScene", args...)
+	return SceneFromJSObject(retVal, p.ctx)
+}
+
+// HasTexture calls the HasTexture method on the PBRBaseMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#hastexture
+func (p *PBRBaseMaterial) HasTexture(texture *BaseTexture) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, texture.JSObject())
+
+	retVal := p.p.Call("hasTexture", args...)
+	return retVal.Bool()
+}
+
+// IsMetallicWorkflow calls the IsMetallicWorkflow method on the PBRBaseMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#ismetallicworkflow
+func (p *PBRBaseMaterial) IsMetallicWorkflow() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("isMetallicWorkflow", args...)
+	return retVal.Bool()
+}
+
+// PBRBaseMaterialIsReadyOpts contains optional parameters for PBRBaseMaterial.IsReady.
+type PBRBaseMaterialIsReadyOpts struct {
+	Mesh         *AbstractMesh
+	UseInstances *bool
+}
+
+// IsReady calls the IsReady method on the PBRBaseMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#isready
+func (p *PBRBaseMaterial) IsReady(opts *PBRBaseMaterialIsReadyOpts) bool {
+	if opts == nil {
+		opts = &PBRBaseMaterialIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := p.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// PBRBaseMaterialIsReadyForSubMeshOpts contains optional parameters for PBRBaseMaterial.IsReadyForSubMesh.
+type PBRBaseMaterialIsReadyForSubMeshOpts struct {
+	UseInstances *bool
+}
+
+// IsReadyForSubMesh calls the IsReadyForSubMesh method on the PBRBaseMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#isreadyforsubmesh
+func (p *PBRBaseMaterial) IsReadyForSubMesh(mesh *AbstractMesh, subMesh *SubMesh, opts *PBRBaseMaterialIsReadyForSubMeshOpts) bool {
+	if opts == nil {
+		opts = &PBRBaseMaterialIsReadyForSubMeshOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, subMesh.JSObject())
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := p.p.Call("isReadyForSubMesh", args...)
+	return retVal.Bool()
+}
+
+// MarkAsDirty calls the MarkAsDirty method on the PBRBaseMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#markasdirty
+func (p *PBRBaseMaterial) MarkAsDirty(flag float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, flag)
+
+	p.p.Call("markAsDirty", args...)
+}
+
+// MarkDirty calls the MarkDirty method on the PBRBaseMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#markdirty
+func (p *PBRBaseMaterial) MarkDirty() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("markDirty", args...)
+}
+
+// NeedAlphaBlending calls the NeedAlphaBlending method on the PBRBaseMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#needalphablending
+func (p *PBRBaseMaterial) NeedAlphaBlending() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("needAlphaBlending", args...)
+	return retVal.Bool()
+}
+
+// NeedAlphaBlendingForMesh calls the NeedAlphaBlendingForMesh method on the PBRBaseMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#needalphablendingformesh
+func (p *PBRBaseMaterial) NeedAlphaBlendingForMesh(mesh *AbstractMesh) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	retVal := p.p.Call("needAlphaBlendingForMesh", args...)
+	return retVal.Bool()
+}
+
+// NeedAlphaTesting calls the NeedAlphaTesting method on the PBRBaseMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#needalphatesting
+func (p *PBRBaseMaterial) NeedAlphaTesting() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("needAlphaTesting", args...)
+	return retVal.Bool()
+}
+
+// Parse calls the Parse method on the PBRBaseMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#parse
+func (p *PBRBaseMaterial) Parse(parsedMaterial interface{}, scene *Scene, rootUrl string) *Material {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, parsedMaterial)
+	args = append(args, scene.JSObject())
+	args = append(args, rootUrl)
+
+	retVal := p.p.Call("Parse", args...)
+	return MaterialFromJSObject(retVal, p.ctx)
+}
+
+// Serialize calls the Serialize method on the PBRBaseMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#serialize
+func (p *PBRBaseMaterial) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("serialize", args...)
+	return retVal
+}
+
+// PBRBaseMaterialToStringOpts contains optional parameters for PBRBaseMaterial.ToString.
+type PBRBaseMaterialToStringOpts struct {
+	FullDetails *bool
+}
+
+// ToString calls the ToString method on the PBRBaseMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#tostring
+func (p *PBRBaseMaterial) ToString(opts *PBRBaseMaterialToStringOpts) string {
+	if opts == nil {
+		opts = &PBRBaseMaterialToStringOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.FullDetails == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FullDetails)
+	}
+
+	retVal := p.p.Call("toString", args...)
+	return retVal.String()
+}
+
+// Unbind calls the Unbind method on the PBRBaseMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#unbind
+func (p *PBRBaseMaterial) Unbind() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("unbind", args...)
+}
+
+// Unfreeze calls the Unfreeze method on the PBRBaseMaterial object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#unfreeze
+func (p *PBRBaseMaterial) Unfreeze() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("unfreeze", args...)
+}
+
+/*
+
+// AllDirtyFlag returns the AllDirtyFlag property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#alldirtyflag
+func (p *PBRBaseMaterial) AllDirtyFlag(AllDirtyFlag float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(AllDirtyFlag)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAllDirtyFlag sets the AllDirtyFlag property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#alldirtyflag
+func (p *PBRBaseMaterial) SetAllDirtyFlag(AllDirtyFlag float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(AllDirtyFlag)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// AllowShaderHotSwapping returns the AllowShaderHotSwapping property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#allowshaderhotswapping
+func (p *PBRBaseMaterial) AllowShaderHotSwapping(allowShaderHotSwapping bool) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(allowShaderHotSwapping)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAllowShaderHotSwapping sets the AllowShaderHotSwapping property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#allowshaderhotswapping
+func (p *PBRBaseMaterial) SetAllowShaderHotSwapping(allowShaderHotSwapping bool) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(allowShaderHotSwapping)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// Alpha returns the Alpha property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#alpha
+func (p *PBRBaseMaterial) Alpha(alpha float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(alpha)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAlpha sets the Alpha property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#alpha
+func (p *PBRBaseMaterial) SetAlpha(alpha float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(alpha)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// AlphaMode returns the AlphaMode property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#alphamode
+func (p *PBRBaseMaterial) AlphaMode(alphaMode float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(alphaMode)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaMode sets the AlphaMode property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#alphamode
+func (p *PBRBaseMaterial) SetAlphaMode(alphaMode float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(alphaMode)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// Animations returns the Animations property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#animations
+func (p *PBRBaseMaterial) Animations(animations []Animation) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(animations.JSObject())
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#animations
+func (p *PBRBaseMaterial) SetAnimations(animations []Animation) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(animations.JSObject())
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// Anisotropy returns the Anisotropy property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#anisotropy
+func (p *PBRBaseMaterial) Anisotropy(anisotropy *PBRAnisotropicConfiguration) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(anisotropy.JSObject())
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAnisotropy sets the Anisotropy property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#anisotropy
+func (p *PBRBaseMaterial) SetAnisotropy(anisotropy *PBRAnisotropicConfiguration) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(anisotropy.JSObject())
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// AttributesDirtyFlag returns the AttributesDirtyFlag property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#attributesdirtyflag
+func (p *PBRBaseMaterial) AttributesDirtyFlag(AttributesDirtyFlag float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(AttributesDirtyFlag)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetAttributesDirtyFlag sets the AttributesDirtyFlag property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#attributesdirtyflag
+func (p *PBRBaseMaterial) SetAttributesDirtyFlag(AttributesDirtyFlag float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(AttributesDirtyFlag)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// BackFaceCulling returns the BackFaceCulling property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#backfaceculling
+func (p *PBRBaseMaterial) BackFaceCulling(backFaceCulling bool) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(backFaceCulling)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetBackFaceCulling sets the BackFaceCulling property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#backfaceculling
+func (p *PBRBaseMaterial) SetBackFaceCulling(backFaceCulling bool) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(backFaceCulling)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// Brdf returns the Brdf property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#brdf
+func (p *PBRBaseMaterial) Brdf(brdf *PBRBRDFConfiguration) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(brdf.JSObject())
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetBrdf sets the Brdf property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#brdf
+func (p *PBRBaseMaterial) SetBrdf(brdf *PBRBRDFConfiguration) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(brdf.JSObject())
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// CheckReadyOnEveryCall returns the CheckReadyOnEveryCall property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#checkreadyoneverycall
+func (p *PBRBaseMaterial) CheckReadyOnEveryCall(checkReadyOnEveryCall bool) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(checkReadyOnEveryCall)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCheckReadyOnEveryCall sets the CheckReadyOnEveryCall property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#checkreadyoneverycall
+func (p *PBRBaseMaterial) SetCheckReadyOnEveryCall(checkReadyOnEveryCall bool) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(checkReadyOnEveryCall)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// CheckReadyOnlyOnce returns the CheckReadyOnlyOnce property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#checkreadyonlyonce
+func (p *PBRBaseMaterial) CheckReadyOnlyOnce(checkReadyOnlyOnce bool) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(checkReadyOnlyOnce)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCheckReadyOnlyOnce sets the CheckReadyOnlyOnce property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#checkreadyonlyonce
+func (p *PBRBaseMaterial) SetCheckReadyOnlyOnce(checkReadyOnlyOnce bool) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(checkReadyOnlyOnce)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// ClearCoat returns the ClearCoat property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#clearcoat
+func (p *PBRBaseMaterial) ClearCoat(clearCoat *PBRClearCoatConfiguration) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(clearCoat.JSObject())
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetClearCoat sets the ClearCoat property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#clearcoat
+func (p *PBRBaseMaterial) SetClearCoat(clearCoat *PBRClearCoatConfiguration) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(clearCoat.JSObject())
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// ClockWiseSideOrientation returns the ClockWiseSideOrientation property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#clockwisesideorientation
+func (p *PBRBaseMaterial) ClockWiseSideOrientation(ClockWiseSideOrientation float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(ClockWiseSideOrientation)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetClockWiseSideOrientation sets the ClockWiseSideOrientation property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#clockwisesideorientation
+func (p *PBRBaseMaterial) SetClockWiseSideOrientation(ClockWiseSideOrientation float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(ClockWiseSideOrientation)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// CounterClockWiseSideOrientation returns the CounterClockWiseSideOrientation property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#counterclockwisesideorientation
+func (p *PBRBaseMaterial) CounterClockWiseSideOrientation(CounterClockWiseSideOrientation float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(CounterClockWiseSideOrientation)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCounterClockWiseSideOrientation sets the CounterClockWiseSideOrientation property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#counterclockwisesideorientation
+func (p *PBRBaseMaterial) SetCounterClockWiseSideOrientation(CounterClockWiseSideOrientation float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(CounterClockWiseSideOrientation)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// CustomShaderNameResolve returns the CustomShaderNameResolve property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#customshadernameresolve
+func (p *PBRBaseMaterial) CustomShaderNameResolve(customShaderNameResolve func()) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(customShaderNameResolve)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetCustomShaderNameResolve sets the CustomShaderNameResolve property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#customshadernameresolve
+func (p *PBRBaseMaterial) SetCustomShaderNameResolve(customShaderNameResolve func()) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(customShaderNameResolve)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// DEFAULT_AO_ON_ANALYTICAL_LIGHTS returns the DEFAULT_AO_ON_ANALYTICAL_LIGHTS property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#default_ao_on_analytical_lights
+func (p *PBRBaseMaterial) DEFAULT_AO_ON_ANALYTICAL_LIGHTS(DEFAULT_AO_ON_ANALYTICAL_LIGHTS float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(DEFAULT_AO_ON_ANALYTICAL_LIGHTS)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDEFAULT_AO_ON_ANALYTICAL_LIGHTS sets the DEFAULT_AO_ON_ANALYTICAL_LIGHTS property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#default_ao_on_analytical_lights
+func (p *PBRBaseMaterial) SetDEFAULT_AO_ON_ANALYTICAL_LIGHTS(DEFAULT_AO_ON_ANALYTICAL_LIGHTS float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(DEFAULT_AO_ON_ANALYTICAL_LIGHTS)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// DepthFunction returns the DepthFunction property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#depthfunction
+func (p *PBRBaseMaterial) DepthFunction(depthFunction float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(depthFunction)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDepthFunction sets the DepthFunction property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#depthfunction
+func (p *PBRBaseMaterial) SetDepthFunction(depthFunction float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(depthFunction)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// DisableDepthWrite returns the DisableDepthWrite property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#disabledepthwrite
+func (p *PBRBaseMaterial) DisableDepthWrite(disableDepthWrite bool) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(disableDepthWrite)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDisableDepthWrite sets the DisableDepthWrite property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#disabledepthwrite
+func (p *PBRBaseMaterial) SetDisableDepthWrite(disableDepthWrite bool) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(disableDepthWrite)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// DoNotSerialize returns the DoNotSerialize property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#donotserialize
+func (p *PBRBaseMaterial) DoNotSerialize(doNotSerialize bool) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(doNotSerialize)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetDoNotSerialize sets the DoNotSerialize property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#donotserialize
+func (p *PBRBaseMaterial) SetDoNotSerialize(doNotSerialize bool) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(doNotSerialize)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// FillMode returns the FillMode property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#fillmode
+func (p *PBRBaseMaterial) FillMode(fillMode float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(fillMode)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFillMode sets the FillMode property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#fillmode
+func (p *PBRBaseMaterial) SetFillMode(fillMode float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(fillMode)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// FogEnabled returns the FogEnabled property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#fogenabled
+func (p *PBRBaseMaterial) FogEnabled(fogEnabled bool) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(fogEnabled)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFogEnabled sets the FogEnabled property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#fogenabled
+func (p *PBRBaseMaterial) SetFogEnabled(fogEnabled bool) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(fogEnabled)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// ForceDepthWrite returns the ForceDepthWrite property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#forcedepthwrite
+func (p *PBRBaseMaterial) ForceDepthWrite(forceDepthWrite bool) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(forceDepthWrite)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetForceDepthWrite sets the ForceDepthWrite property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#forcedepthwrite
+func (p *PBRBaseMaterial) SetForceDepthWrite(forceDepthWrite bool) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(forceDepthWrite)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// FresnelDirtyFlag returns the FresnelDirtyFlag property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#fresneldirtyflag
+func (p *PBRBaseMaterial) FresnelDirtyFlag(FresnelDirtyFlag float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(FresnelDirtyFlag)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetFresnelDirtyFlag sets the FresnelDirtyFlag property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#fresneldirtyflag
+func (p *PBRBaseMaterial) SetFresnelDirtyFlag(FresnelDirtyFlag float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(FresnelDirtyFlag)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// GetRenderTargetTextures returns the GetRenderTargetTextures property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#getrendertargettextures
+func (p *PBRBaseMaterial) GetRenderTargetTextures(getRenderTargetTextures func()) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(getRenderTargetTextures)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetGetRenderTargetTextures sets the GetRenderTargetTextures property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#getrendertargettextures
+func (p *PBRBaseMaterial) SetGetRenderTargetTextures(getRenderTargetTextures func()) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(getRenderTargetTextures)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// HasRenderTargetTextures returns the HasRenderTargetTextures property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#hasrendertargettextures
+func (p *PBRBaseMaterial) HasRenderTargetTextures(hasRenderTargetTextures bool) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(hasRenderTargetTextures)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetHasRenderTargetTextures sets the HasRenderTargetTextures property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#hasrendertargettextures
+func (p *PBRBaseMaterial) SetHasRenderTargetTextures(hasRenderTargetTextures bool) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(hasRenderTargetTextures)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// Id returns the Id property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#id
+func (p *PBRBaseMaterial) Id(id string) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(id)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetId sets the Id property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#id
+func (p *PBRBaseMaterial) SetId(id string) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(id)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#inspectablecustomproperties
+func (p *PBRBaseMaterial) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(inspectableCustomProperties.JSObject())
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#inspectablecustomproperties
+func (p *PBRBaseMaterial) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(inspectableCustomProperties.JSObject())
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// IsFrozen returns the IsFrozen property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#isfrozen
+func (p *PBRBaseMaterial) IsFrozen(isFrozen bool) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(isFrozen)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetIsFrozen sets the IsFrozen property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#isfrozen
+func (p *PBRBaseMaterial) SetIsFrozen(isFrozen bool) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(isFrozen)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// LIGHTFALLOFF_GLTF returns the LIGHTFALLOFF_GLTF property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#lightfalloff_gltf
+func (p *PBRBaseMaterial) LIGHTFALLOFF_GLTF(LIGHTFALLOFF_GLTF float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(LIGHTFALLOFF_GLTF)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLIGHTFALLOFF_GLTF sets the LIGHTFALLOFF_GLTF property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#lightfalloff_gltf
+func (p *PBRBaseMaterial) SetLIGHTFALLOFF_GLTF(LIGHTFALLOFF_GLTF float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(LIGHTFALLOFF_GLTF)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// LIGHTFALLOFF_PHYSICAL returns the LIGHTFALLOFF_PHYSICAL property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#lightfalloff_physical
+func (p *PBRBaseMaterial) LIGHTFALLOFF_PHYSICAL(LIGHTFALLOFF_PHYSICAL float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(LIGHTFALLOFF_PHYSICAL)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLIGHTFALLOFF_PHYSICAL sets the LIGHTFALLOFF_PHYSICAL property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#lightfalloff_physical
+func (p *PBRBaseMaterial) SetLIGHTFALLOFF_PHYSICAL(LIGHTFALLOFF_PHYSICAL float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(LIGHTFALLOFF_PHYSICAL)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// LIGHTFALLOFF_STANDARD returns the LIGHTFALLOFF_STANDARD property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#lightfalloff_standard
+func (p *PBRBaseMaterial) LIGHTFALLOFF_STANDARD(LIGHTFALLOFF_STANDARD float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(LIGHTFALLOFF_STANDARD)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLIGHTFALLOFF_STANDARD sets the LIGHTFALLOFF_STANDARD property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#lightfalloff_standard
+func (p *PBRBaseMaterial) SetLIGHTFALLOFF_STANDARD(LIGHTFALLOFF_STANDARD float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(LIGHTFALLOFF_STANDARD)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// LightDirtyFlag returns the LightDirtyFlag property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#lightdirtyflag
+func (p *PBRBaseMaterial) LightDirtyFlag(LightDirtyFlag float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(LightDirtyFlag)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLightDirtyFlag sets the LightDirtyFlag property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#lightdirtyflag
+func (p *PBRBaseMaterial) SetLightDirtyFlag(LightDirtyFlag float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(LightDirtyFlag)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineListDrawMode returns the LineListDrawMode property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#linelistdrawmode
+func (p *PBRBaseMaterial) LineListDrawMode(LineListDrawMode float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(LineListDrawMode)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineListDrawMode sets the LineListDrawMode property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#linelistdrawmode
+func (p *PBRBaseMaterial) SetLineListDrawMode(LineListDrawMode float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(LineListDrawMode)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineLoopDrawMode returns the LineLoopDrawMode property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#lineloopdrawmode
+func (p *PBRBaseMaterial) LineLoopDrawMode(LineLoopDrawMode float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(LineLoopDrawMode)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineLoopDrawMode sets the LineLoopDrawMode property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#lineloopdrawmode
+func (p *PBRBaseMaterial) SetLineLoopDrawMode(LineLoopDrawMode float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(LineLoopDrawMode)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// LineStripDrawMode returns the LineStripDrawMode property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#linestripdrawmode
+func (p *PBRBaseMaterial) LineStripDrawMode(LineStripDrawMode float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(LineStripDrawMode)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetLineStripDrawMode sets the LineStripDrawMode property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#linestripdrawmode
+func (p *PBRBaseMaterial) SetLineStripDrawMode(LineStripDrawMode float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(LineStripDrawMode)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#metadata
+func (p *PBRBaseMaterial) Metadata(metadata interface{}) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(metadata)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#metadata
+func (p *PBRBaseMaterial) SetMetadata(metadata interface{}) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(metadata)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// MiscDirtyFlag returns the MiscDirtyFlag property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#miscdirtyflag
+func (p *PBRBaseMaterial) MiscDirtyFlag(MiscDirtyFlag float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(MiscDirtyFlag)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetMiscDirtyFlag sets the MiscDirtyFlag property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#miscdirtyflag
+func (p *PBRBaseMaterial) SetMiscDirtyFlag(MiscDirtyFlag float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(MiscDirtyFlag)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#name
+func (p *PBRBaseMaterial) Name(name string) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(name)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#name
+func (p *PBRBaseMaterial) SetName(name string) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(name)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// NeedDepthPrePass returns the NeedDepthPrePass property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#needdepthprepass
+func (p *PBRBaseMaterial) NeedDepthPrePass(needDepthPrePass bool) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(needDepthPrePass)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetNeedDepthPrePass sets the NeedDepthPrePass property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#needdepthprepass
+func (p *PBRBaseMaterial) SetNeedDepthPrePass(needDepthPrePass bool) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(needDepthPrePass)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnBind returns the OnBind property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#onbind
+func (p *PBRBaseMaterial) OnBind(onBind func()) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(onBind)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnBind sets the OnBind property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#onbind
+func (p *PBRBaseMaterial) SetOnBind(onBind func()) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(onBind)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnBindObservable returns the OnBindObservable property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#onbindobservable
+func (p *PBRBaseMaterial) OnBindObservable(onBindObservable *Observable) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(onBindObservable.JSObject())
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnBindObservable sets the OnBindObservable property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#onbindobservable
+func (p *PBRBaseMaterial) SetOnBindObservable(onBindObservable *Observable) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(onBindObservable.JSObject())
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnCompiled returns the OnCompiled property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#oncompiled
+func (p *PBRBaseMaterial) OnCompiled(onCompiled func()) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(onCompiled)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnCompiled sets the OnCompiled property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#oncompiled
+func (p *PBRBaseMaterial) SetOnCompiled(onCompiled func()) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(onCompiled)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnDispose returns the OnDispose property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#ondispose
+func (p *PBRBaseMaterial) OnDispose(onDispose func()) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(onDispose)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnDispose sets the OnDispose property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#ondispose
+func (p *PBRBaseMaterial) SetOnDispose(onDispose func()) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(onDispose)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnDisposeObservable returns the OnDisposeObservable property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#ondisposeobservable
+func (p *PBRBaseMaterial) OnDisposeObservable(onDisposeObservable *Observable) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(onDisposeObservable.JSObject())
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnDisposeObservable sets the OnDisposeObservable property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#ondisposeobservable
+func (p *PBRBaseMaterial) SetOnDisposeObservable(onDisposeObservable *Observable) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(onDisposeObservable.JSObject())
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnError returns the OnError property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#onerror
+func (p *PBRBaseMaterial) OnError(onError func()) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(onError)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnError sets the OnError property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#onerror
+func (p *PBRBaseMaterial) SetOnError(onError func()) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(onError)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// OnUnBindObservable returns the OnUnBindObservable property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#onunbindobservable
+func (p *PBRBaseMaterial) OnUnBindObservable(onUnBindObservable *Observable) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(onUnBindObservable.JSObject())
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetOnUnBindObservable sets the OnUnBindObservable property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#onunbindobservable
+func (p *PBRBaseMaterial) SetOnUnBindObservable(onUnBindObservable *Observable) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(onUnBindObservable.JSObject())
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// PBRMATERIAL_ALPHABLEND returns the PBRMATERIAL_ALPHABLEND property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#pbrmaterial_alphablend
+func (p *PBRBaseMaterial) PBRMATERIAL_ALPHABLEND(PBRMATERIAL_ALPHABLEND float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(PBRMATERIAL_ALPHABLEND)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPBRMATERIAL_ALPHABLEND sets the PBRMATERIAL_ALPHABLEND property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#pbrmaterial_alphablend
+func (p *PBRBaseMaterial) SetPBRMATERIAL_ALPHABLEND(PBRMATERIAL_ALPHABLEND float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(PBRMATERIAL_ALPHABLEND)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// PBRMATERIAL_ALPHATEST returns the PBRMATERIAL_ALPHATEST property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#pbrmaterial_alphatest
+func (p *PBRBaseMaterial) PBRMATERIAL_ALPHATEST(PBRMATERIAL_ALPHATEST float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(PBRMATERIAL_ALPHATEST)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPBRMATERIAL_ALPHATEST sets the PBRMATERIAL_ALPHATEST property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#pbrmaterial_alphatest
+func (p *PBRBaseMaterial) SetPBRMATERIAL_ALPHATEST(PBRMATERIAL_ALPHATEST float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(PBRMATERIAL_ALPHATEST)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// PBRMATERIAL_ALPHATESTANDBLEND returns the PBRMATERIAL_ALPHATESTANDBLEND property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#pbrmaterial_alphatestandblend
+func (p *PBRBaseMaterial) PBRMATERIAL_ALPHATESTANDBLEND(PBRMATERIAL_ALPHATESTANDBLEND float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(PBRMATERIAL_ALPHATESTANDBLEND)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPBRMATERIAL_ALPHATESTANDBLEND sets the PBRMATERIAL_ALPHATESTANDBLEND property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#pbrmaterial_alphatestandblend
+func (p *PBRBaseMaterial) SetPBRMATERIAL_ALPHATESTANDBLEND(PBRMATERIAL_ALPHATESTANDBLEND float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(PBRMATERIAL_ALPHATESTANDBLEND)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// PBRMATERIAL_OPAQUE returns the PBRMATERIAL_OPAQUE property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#pbrmaterial_opaque
+func (p *PBRBaseMaterial) PBRMATERIAL_OPAQUE(PBRMATERIAL_OPAQUE float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(PBRMATERIAL_OPAQUE)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPBRMATERIAL_OPAQUE sets the PBRMATERIAL_OPAQUE property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#pbrmaterial_opaque
+func (p *PBRBaseMaterial) SetPBRMATERIAL_OPAQUE(PBRMATERIAL_OPAQUE float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(PBRMATERIAL_OPAQUE)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointFillMode returns the PointFillMode property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#pointfillmode
+func (p *PBRBaseMaterial) PointFillMode(PointFillMode float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(PointFillMode)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointFillMode sets the PointFillMode property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#pointfillmode
+func (p *PBRBaseMaterial) SetPointFillMode(PointFillMode float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(PointFillMode)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointListDrawMode returns the PointListDrawMode property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#pointlistdrawmode
+func (p *PBRBaseMaterial) PointListDrawMode(PointListDrawMode float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(PointListDrawMode)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointListDrawMode sets the PointListDrawMode property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#pointlistdrawmode
+func (p *PBRBaseMaterial) SetPointListDrawMode(PointListDrawMode float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(PointListDrawMode)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointSize returns the PointSize property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#pointsize
+func (p *PBRBaseMaterial) PointSize(pointSize float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(pointSize)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointSize sets the PointSize property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#pointsize
+func (p *PBRBaseMaterial) SetPointSize(pointSize float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(pointSize)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// PointsCloud returns the PointsCloud property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#pointscloud
+func (p *PBRBaseMaterial) PointsCloud(pointsCloud bool) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(pointsCloud)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetPointsCloud sets the PointsCloud property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#pointscloud
+func (p *PBRBaseMaterial) SetPointsCloud(pointsCloud bool) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(pointsCloud)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// ReservedDataStore returns the ReservedDataStore property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#reserveddatastore
+func (p *PBRBaseMaterial) ReservedDataStore(reservedDataStore interface{}) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(reservedDataStore)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetReservedDataStore sets the ReservedDataStore property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#reserveddatastore
+func (p *PBRBaseMaterial) SetReservedDataStore(reservedDataStore interface{}) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(reservedDataStore)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SeparateCullingPass returns the SeparateCullingPass property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#separatecullingpass
+func (p *PBRBaseMaterial) SeparateCullingPass(separateCullingPass bool) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(separateCullingPass)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSeparateCullingPass sets the SeparateCullingPass property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#separatecullingpass
+func (p *PBRBaseMaterial) SetSeparateCullingPass(separateCullingPass bool) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(separateCullingPass)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// Sheen returns the Sheen property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#sheen
+func (p *PBRBaseMaterial) Sheen(sheen *PBRSheenConfiguration) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(sheen.JSObject())
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSheen sets the Sheen property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#sheen
+func (p *PBRBaseMaterial) SetSheen(sheen *PBRSheenConfiguration) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(sheen.JSObject())
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SideOrientation returns the SideOrientation property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#sideorientation
+func (p *PBRBaseMaterial) SideOrientation(sideOrientation float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(sideOrientation)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSideOrientation sets the SideOrientation property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#sideorientation
+func (p *PBRBaseMaterial) SetSideOrientation(sideOrientation float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(sideOrientation)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// State returns the State property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#state
+func (p *PBRBaseMaterial) State(state string) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(state)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetState sets the State property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#state
+func (p *PBRBaseMaterial) SetState(state string) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(state)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SubSurface returns the SubSurface property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#subsurface
+func (p *PBRBaseMaterial) SubSurface(subSurface *PBRSubSurfaceConfiguration) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(subSurface.JSObject())
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetSubSurface sets the SubSurface property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#subsurface
+func (p *PBRBaseMaterial) SetSubSurface(subSurface *PBRSubSurfaceConfiguration) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(subSurface.JSObject())
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// TextureDirtyFlag returns the TextureDirtyFlag property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#texturedirtyflag
+func (p *PBRBaseMaterial) TextureDirtyFlag(TextureDirtyFlag float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(TextureDirtyFlag)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTextureDirtyFlag sets the TextureDirtyFlag property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#texturedirtyflag
+func (p *PBRBaseMaterial) SetTextureDirtyFlag(TextureDirtyFlag float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(TextureDirtyFlag)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// TransparencyMode returns the TransparencyMode property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#transparencymode
+func (p *PBRBaseMaterial) TransparencyMode(transparencyMode float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(transparencyMode)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTransparencyMode sets the TransparencyMode property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#transparencymode
+func (p *PBRBaseMaterial) SetTransparencyMode(transparencyMode float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(transparencyMode)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// TriangleFanDrawMode returns the TriangleFanDrawMode property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#trianglefandrawmode
+func (p *PBRBaseMaterial) TriangleFanDrawMode(TriangleFanDrawMode float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(TriangleFanDrawMode)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTriangleFanDrawMode sets the TriangleFanDrawMode property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#trianglefandrawmode
+func (p *PBRBaseMaterial) SetTriangleFanDrawMode(TriangleFanDrawMode float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(TriangleFanDrawMode)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// TriangleFillMode returns the TriangleFillMode property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#trianglefillmode
+func (p *PBRBaseMaterial) TriangleFillMode(TriangleFillMode float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(TriangleFillMode)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTriangleFillMode sets the TriangleFillMode property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#trianglefillmode
+func (p *PBRBaseMaterial) SetTriangleFillMode(TriangleFillMode float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(TriangleFillMode)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// TriangleStripDrawMode returns the TriangleStripDrawMode property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#trianglestripdrawmode
+func (p *PBRBaseMaterial) TriangleStripDrawMode(TriangleStripDrawMode float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(TriangleStripDrawMode)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetTriangleStripDrawMode sets the TriangleStripDrawMode property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#trianglestripdrawmode
+func (p *PBRBaseMaterial) SetTriangleStripDrawMode(TriangleStripDrawMode float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(TriangleStripDrawMode)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#uniqueid
+func (p *PBRBaseMaterial) UniqueId(uniqueId float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(uniqueId)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#uniqueid
+func (p *PBRBaseMaterial) SetUniqueId(uniqueId float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(uniqueId)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// UseLogarithmicDepth returns the UseLogarithmicDepth property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#uselogarithmicdepth
+func (p *PBRBaseMaterial) UseLogarithmicDepth(useLogarithmicDepth bool) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(useLogarithmicDepth)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetUseLogarithmicDepth sets the UseLogarithmicDepth property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#uselogarithmicdepth
+func (p *PBRBaseMaterial) SetUseLogarithmicDepth(useLogarithmicDepth bool) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(useLogarithmicDepth)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// WireFrameFillMode returns the WireFrameFillMode property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#wireframefillmode
+func (p *PBRBaseMaterial) WireFrameFillMode(WireFrameFillMode float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(WireFrameFillMode)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetWireFrameFillMode sets the WireFrameFillMode property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#wireframefillmode
+func (p *PBRBaseMaterial) SetWireFrameFillMode(WireFrameFillMode float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(WireFrameFillMode)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// Wireframe returns the Wireframe property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#wireframe
+func (p *PBRBaseMaterial) Wireframe(wireframe bool) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(wireframe)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetWireframe sets the Wireframe property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#wireframe
+func (p *PBRBaseMaterial) SetWireframe(wireframe bool) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(wireframe)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// ZOffset returns the ZOffset property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#zoffset
+func (p *PBRBaseMaterial) ZOffset(zOffset float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(zOffset)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+// SetZOffset sets the ZOffset property of class PBRBaseMaterial.
+//
+// https://doc.babylonjs.com/api/classes/babylon.pbrbasematerial#zoffset
+func (p *PBRBaseMaterial) SetZOffset(zOffset float64) *PBRBaseMaterial {
+	p := ba.ctx.Get("PBRBaseMaterial").New(zOffset)
+	return PBRBaseMaterialFromJSObject(p, ba.ctx)
+}
+
+*/

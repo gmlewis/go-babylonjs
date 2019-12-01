@@ -27,4 +27,49 @@ func TargetedAnimationFromJSObject(p js.Value, ctx js.Value) *TargetedAnimation 
 	return &TargetedAnimation{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// Serialize calls the Serialize method on the TargetedAnimation object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetedanimation#serialize
+func (t *TargetedAnimation) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("serialize", args...)
+	return retVal
+}
+
+/*
+
+// Animation returns the Animation property of class TargetedAnimation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetedanimation#animation
+func (t *TargetedAnimation) Animation(animation *Animation) *TargetedAnimation {
+	p := ba.ctx.Get("TargetedAnimation").New(animation.JSObject())
+	return TargetedAnimationFromJSObject(p, ba.ctx)
+}
+
+// SetAnimation sets the Animation property of class TargetedAnimation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetedanimation#animation
+func (t *TargetedAnimation) SetAnimation(animation *Animation) *TargetedAnimation {
+	p := ba.ctx.Get("TargetedAnimation").New(animation.JSObject())
+	return TargetedAnimationFromJSObject(p, ba.ctx)
+}
+
+// Target returns the Target property of class TargetedAnimation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetedanimation#target
+func (t *TargetedAnimation) Target(target interface{}) *TargetedAnimation {
+	p := ba.ctx.Get("TargetedAnimation").New(target)
+	return TargetedAnimationFromJSObject(p, ba.ctx)
+}
+
+// SetTarget sets the Target property of class TargetedAnimation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.targetedanimation#target
+func (t *TargetedAnimation) SetTarget(target interface{}) *TargetedAnimation {
+	p := ba.ctx.Get("TargetedAnimation").New(target)
+	return TargetedAnimationFromJSObject(p, ba.ctx)
+}
+
+*/

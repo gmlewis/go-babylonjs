@@ -29,9 +29,8 @@ func InputPasswordFromJSObject(p js.Value, ctx js.Value) *InputPassword {
 
 // NewInputPasswordOpts contains optional parameters for NewInputPassword.
 type NewInputPasswordOpts struct {
-	Name *JSString
-
-	Text *JSString
+	Name *string
+	Text *string
 }
 
 // NewInputPassword returns a new InputPassword object.
@@ -42,8 +41,2051 @@ func (ba *Babylon) NewInputPassword(opts *NewInputPasswordOpts) *InputPassword {
 		opts = &NewInputPasswordOpts{}
 	}
 
-	p := ba.ctx.Get("InputPassword").New(opts.Name.JSObject(), opts.Text.JSObject())
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.Name == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Name)
+	}
+	if opts.Text == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Text)
+	}
+
+	p := ba.ctx.Get("InputPassword").New(args...)
 	return InputPasswordFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Contains calls the Contains method on the InputPassword object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#contains
+func (i *InputPassword) Contains(x float64, y float64) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, x)
+	args = append(args, y)
+
+	retVal := i.p.Call("contains", args...)
+	return retVal.Bool()
+}
+
+// Dispose calls the Dispose method on the InputPassword object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#dispose
+func (i *InputPassword) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	i.p.Call("dispose", args...)
+}
+
+// GetAscendantOfClass calls the GetAscendantOfClass method on the InputPassword object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#getascendantofclass
+func (i *InputPassword) GetAscendantOfClass(className string) *Control {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, className)
+
+	retVal := i.p.Call("getAscendantOfClass", args...)
+	return ControlFromJSObject(retVal, i.ctx)
+}
+
+// GetClassName calls the GetClassName method on the InputPassword object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#getclassname
+func (i *InputPassword) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := i.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// InputPasswordGetDescendantsOpts contains optional parameters for InputPassword.GetDescendants.
+type InputPasswordGetDescendantsOpts struct {
+	DirectDescendantsOnly *bool
+	Predicate             *func()
+}
+
+// GetDescendants calls the GetDescendants method on the InputPassword object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#getdescendants
+func (i *InputPassword) GetDescendants(opts *InputPasswordGetDescendantsOpts) *Control {
+	if opts == nil {
+		opts = &InputPasswordGetDescendantsOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	retVal := i.p.Call("getDescendants", args...)
+	return ControlFromJSObject(retVal, i.ctx)
+}
+
+// InputPasswordGetDescendantsToRefOpts contains optional parameters for InputPassword.GetDescendantsToRef.
+type InputPasswordGetDescendantsToRefOpts struct {
+	DirectDescendantsOnly *bool
+	Predicate             *func()
+}
+
+// GetDescendantsToRef calls the GetDescendantsToRef method on the InputPassword object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#getdescendantstoref
+func (i *InputPassword) GetDescendantsToRef(results *Control, opts *InputPasswordGetDescendantsToRefOpts) {
+	if opts == nil {
+		opts = &InputPasswordGetDescendantsToRefOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, results.JSObject())
+
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	i.p.Call("getDescendantsToRef", args...)
+}
+
+// GetLocalCoordinates calls the GetLocalCoordinates method on the InputPassword object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#getlocalcoordinates
+func (i *InputPassword) GetLocalCoordinates(globalCoordinates *Vector2) *Vector2 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, globalCoordinates.JSObject())
+
+	retVal := i.p.Call("getLocalCoordinates", args...)
+	return Vector2FromJSObject(retVal, i.ctx)
+}
+
+// GetLocalCoordinatesToRef calls the GetLocalCoordinatesToRef method on the InputPassword object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#getlocalcoordinatestoref
+func (i *InputPassword) GetLocalCoordinatesToRef(globalCoordinates *Vector2, result *Vector2) *Control {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, globalCoordinates.JSObject())
+	args = append(args, result.JSObject())
+
+	retVal := i.p.Call("getLocalCoordinatesToRef", args...)
+	return ControlFromJSObject(retVal, i.ctx)
+}
+
+// GetParentLocalCoordinates calls the GetParentLocalCoordinates method on the InputPassword object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#getparentlocalcoordinates
+func (i *InputPassword) GetParentLocalCoordinates(globalCoordinates *Vector2) *Vector2 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, globalCoordinates.JSObject())
+
+	retVal := i.p.Call("getParentLocalCoordinates", args...)
+	return Vector2FromJSObject(retVal, i.ctx)
+}
+
+// IsAscendant calls the IsAscendant method on the InputPassword object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#isascendant
+func (i *InputPassword) IsAscendant(container *Control) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, container.JSObject())
+
+	retVal := i.p.Call("isAscendant", args...)
+	return retVal.Bool()
+}
+
+// KeepsFocusWith calls the KeepsFocusWith method on the InputPassword object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#keepsfocuswith
+func (i *InputPassword) KeepsFocusWith() *Control {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := i.p.Call("keepsFocusWith", args...)
+	return ControlFromJSObject(retVal, i.ctx)
+}
+
+// LinkWithMesh calls the LinkWithMesh method on the InputPassword object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#linkwithmesh
+func (i *InputPassword) LinkWithMesh(mesh *AbstractMesh) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	i.p.Call("linkWithMesh", args...)
+}
+
+// MoveToVector3 calls the MoveToVector3 method on the InputPassword object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#movetovector3
+func (i *InputPassword) MoveToVector3(position *Vector3, scene *Scene) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, position.JSObject())
+	args = append(args, scene.JSObject())
+
+	i.p.Call("moveToVector3", args...)
+}
+
+// ProcessKeyboard calls the ProcessKeyboard method on the InputPassword object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#processkeyboard
+func (i *InputPassword) ProcessKeyboard(evt js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, evt)
+
+	i.p.Call("processKeyboard", args...)
+}
+
+// InputPassword_drawOpts contains optional parameters for InputPassword._draw.
+type InputPassword_drawOpts struct {
+	InvalidatedRectangle *Measure
+}
+
+// _draw calls the _draw method on the InputPassword object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#_draw
+func (i *InputPassword) _draw(context js.Value, opts *InputPassword_drawOpts) {
+	if opts == nil {
+		opts = &InputPassword_drawOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, context)
+
+	if opts.InvalidatedRectangle == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.InvalidatedRectangle.JSObject())
+	}
+
+	i.p.Call("_draw", args...)
+}
+
+// _onPointerDown calls the _onPointerDown method on the InputPassword object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#_onpointerdown
+func (i *InputPassword) _onPointerDown(target *Control, coordinates *Vector2, pointerId float64, buttonIndex float64) bool {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, target.JSObject())
+	args = append(args, coordinates.JSObject())
+	args = append(args, pointerId)
+	args = append(args, buttonIndex)
+
+	retVal := i.p.Call("_onPointerDown", args...)
+	return retVal.Bool()
+}
+
+// _onPointerMove calls the _onPointerMove method on the InputPassword object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#_onpointermove
+func (i *InputPassword) _onPointerMove(target *Control, coordinates *Vector2, pointerId float64) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, target.JSObject())
+	args = append(args, coordinates.JSObject())
+	args = append(args, pointerId)
+
+	i.p.Call("_onPointerMove", args...)
+}
+
+// _onPointerUp calls the _onPointerUp method on the InputPassword object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#_onpointerup
+func (i *InputPassword) _onPointerUp(target *Control, coordinates *Vector2, pointerId float64, buttonIndex float64, notifyClick bool) {
+
+	args := make([]interface{}, 0, 5+0)
+
+	args = append(args, target.JSObject())
+	args = append(args, coordinates.JSObject())
+	args = append(args, pointerId)
+	args = append(args, buttonIndex)
+	args = append(args, notifyClick)
+
+	i.p.Call("_onPointerUp", args...)
+}
+
+/*
+
+// AddKey returns the AddKey property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#addkey
+func (i *InputPassword) AddKey(addKey bool) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(addKey)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetAddKey sets the AddKey property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#addkey
+func (i *InputPassword) SetAddKey(addKey bool) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(addKey)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// AllowAlphaInheritance returns the AllowAlphaInheritance property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#allowalphainheritance
+func (i *InputPassword) AllowAlphaInheritance(AllowAlphaInheritance bool) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(AllowAlphaInheritance)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetAllowAlphaInheritance sets the AllowAlphaInheritance property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#allowalphainheritance
+func (i *InputPassword) SetAllowAlphaInheritance(AllowAlphaInheritance bool) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(AllowAlphaInheritance)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// Alpha returns the Alpha property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#alpha
+func (i *InputPassword) Alpha(alpha float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(alpha)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetAlpha sets the Alpha property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#alpha
+func (i *InputPassword) SetAlpha(alpha float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(alpha)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// AutoStretchWidth returns the AutoStretchWidth property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#autostretchwidth
+func (i *InputPassword) AutoStretchWidth(autoStretchWidth bool) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(autoStretchWidth)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetAutoStretchWidth sets the AutoStretchWidth property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#autostretchwidth
+func (i *InputPassword) SetAutoStretchWidth(autoStretchWidth bool) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(autoStretchWidth)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// Background returns the Background property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#background
+func (i *InputPassword) Background(background string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(background)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetBackground sets the Background property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#background
+func (i *InputPassword) SetBackground(background string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(background)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// CenterX returns the CenterX property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#centerx
+func (i *InputPassword) CenterX(centerX float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(centerX)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetCenterX sets the CenterX property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#centerx
+func (i *InputPassword) SetCenterX(centerX float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(centerX)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// CenterY returns the CenterY property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#centery
+func (i *InputPassword) CenterY(centerY float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(centerY)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetCenterY sets the CenterY property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#centery
+func (i *InputPassword) SetCenterY(centerY float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(centerY)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// ClipChildren returns the ClipChildren property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#clipchildren
+func (i *InputPassword) ClipChildren(clipChildren bool) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(clipChildren)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetClipChildren sets the ClipChildren property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#clipchildren
+func (i *InputPassword) SetClipChildren(clipChildren bool) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(clipChildren)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// ClipContent returns the ClipContent property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#clipcontent
+func (i *InputPassword) ClipContent(clipContent bool) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(clipContent)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetClipContent sets the ClipContent property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#clipcontent
+func (i *InputPassword) SetClipContent(clipContent bool) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(clipContent)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// Color returns the Color property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#color
+func (i *InputPassword) Color(color string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(color)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetColor sets the Color property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#color
+func (i *InputPassword) SetColor(color string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(color)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// CurrentKey returns the CurrentKey property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#currentkey
+func (i *InputPassword) CurrentKey(currentKey string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(currentKey)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetCurrentKey sets the CurrentKey property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#currentkey
+func (i *InputPassword) SetCurrentKey(currentKey string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(currentKey)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// DeadKey returns the DeadKey property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#deadkey
+func (i *InputPassword) DeadKey(deadKey bool) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(deadKey)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetDeadKey sets the DeadKey property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#deadkey
+func (i *InputPassword) SetDeadKey(deadKey bool) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(deadKey)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// DisableMobilePrompt returns the DisableMobilePrompt property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#disablemobileprompt
+func (i *InputPassword) DisableMobilePrompt(disableMobilePrompt bool) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(disableMobilePrompt)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetDisableMobilePrompt sets the DisableMobilePrompt property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#disablemobileprompt
+func (i *InputPassword) SetDisableMobilePrompt(disableMobilePrompt bool) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(disableMobilePrompt)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// DisabledColor returns the DisabledColor property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#disabledcolor
+func (i *InputPassword) DisabledColor(disabledColor string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(disabledColor)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetDisabledColor sets the DisabledColor property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#disabledcolor
+func (i *InputPassword) SetDisabledColor(disabledColor string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(disabledColor)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// FocusedBackground returns the FocusedBackground property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#focusedbackground
+func (i *InputPassword) FocusedBackground(focusedBackground string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(focusedBackground)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetFocusedBackground sets the FocusedBackground property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#focusedbackground
+func (i *InputPassword) SetFocusedBackground(focusedBackground string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(focusedBackground)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// FocusedColor returns the FocusedColor property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#focusedcolor
+func (i *InputPassword) FocusedColor(focusedColor string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(focusedColor)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetFocusedColor sets the FocusedColor property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#focusedcolor
+func (i *InputPassword) SetFocusedColor(focusedColor string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(focusedColor)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// FontFamily returns the FontFamily property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#fontfamily
+func (i *InputPassword) FontFamily(fontFamily string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(fontFamily)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetFontFamily sets the FontFamily property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#fontfamily
+func (i *InputPassword) SetFontFamily(fontFamily string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(fontFamily)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// FontOffset returns the FontOffset property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#fontoffset
+func (i *InputPassword) FontOffset(fontOffset js.Value) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(fontOffset)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetFontOffset sets the FontOffset property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#fontoffset
+func (i *InputPassword) SetFontOffset(fontOffset js.Value) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(fontOffset)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// FontSize returns the FontSize property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#fontsize
+func (i *InputPassword) FontSize(fontSize string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(fontSize)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetFontSize sets the FontSize property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#fontsize
+func (i *InputPassword) SetFontSize(fontSize string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(fontSize)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// FontSizeInPixels returns the FontSizeInPixels property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#fontsizeinpixels
+func (i *InputPassword) FontSizeInPixels(fontSizeInPixels float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(fontSizeInPixels)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetFontSizeInPixels sets the FontSizeInPixels property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#fontsizeinpixels
+func (i *InputPassword) SetFontSizeInPixels(fontSizeInPixels float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(fontSizeInPixels)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// FontStyle returns the FontStyle property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#fontstyle
+func (i *InputPassword) FontStyle(fontStyle string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(fontStyle)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetFontStyle sets the FontStyle property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#fontstyle
+func (i *InputPassword) SetFontStyle(fontStyle string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(fontStyle)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// FontWeight returns the FontWeight property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#fontweight
+func (i *InputPassword) FontWeight(fontWeight string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(fontWeight)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetFontWeight sets the FontWeight property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#fontweight
+func (i *InputPassword) SetFontWeight(fontWeight string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(fontWeight)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// HORIZONTAL_ALIGNMENT_CENTER returns the HORIZONTAL_ALIGNMENT_CENTER property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#horizontal_alignment_center
+func (i *InputPassword) HORIZONTAL_ALIGNMENT_CENTER(HORIZONTAL_ALIGNMENT_CENTER float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(HORIZONTAL_ALIGNMENT_CENTER)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetHORIZONTAL_ALIGNMENT_CENTER sets the HORIZONTAL_ALIGNMENT_CENTER property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#horizontal_alignment_center
+func (i *InputPassword) SetHORIZONTAL_ALIGNMENT_CENTER(HORIZONTAL_ALIGNMENT_CENTER float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(HORIZONTAL_ALIGNMENT_CENTER)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// HORIZONTAL_ALIGNMENT_LEFT returns the HORIZONTAL_ALIGNMENT_LEFT property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#horizontal_alignment_left
+func (i *InputPassword) HORIZONTAL_ALIGNMENT_LEFT(HORIZONTAL_ALIGNMENT_LEFT float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(HORIZONTAL_ALIGNMENT_LEFT)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetHORIZONTAL_ALIGNMENT_LEFT sets the HORIZONTAL_ALIGNMENT_LEFT property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#horizontal_alignment_left
+func (i *InputPassword) SetHORIZONTAL_ALIGNMENT_LEFT(HORIZONTAL_ALIGNMENT_LEFT float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(HORIZONTAL_ALIGNMENT_LEFT)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// HORIZONTAL_ALIGNMENT_RIGHT returns the HORIZONTAL_ALIGNMENT_RIGHT property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#horizontal_alignment_right
+func (i *InputPassword) HORIZONTAL_ALIGNMENT_RIGHT(HORIZONTAL_ALIGNMENT_RIGHT float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(HORIZONTAL_ALIGNMENT_RIGHT)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetHORIZONTAL_ALIGNMENT_RIGHT sets the HORIZONTAL_ALIGNMENT_RIGHT property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#horizontal_alignment_right
+func (i *InputPassword) SetHORIZONTAL_ALIGNMENT_RIGHT(HORIZONTAL_ALIGNMENT_RIGHT float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(HORIZONTAL_ALIGNMENT_RIGHT)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// Height returns the Height property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#height
+func (i *InputPassword) Height(height string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(height)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetHeight sets the Height property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#height
+func (i *InputPassword) SetHeight(height string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(height)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// HeightInPixels returns the HeightInPixels property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#heightinpixels
+func (i *InputPassword) HeightInPixels(heightInPixels float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(heightInPixels)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetHeightInPixels sets the HeightInPixels property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#heightinpixels
+func (i *InputPassword) SetHeightInPixels(heightInPixels float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(heightInPixels)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// HighligherOpacity returns the HighligherOpacity property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#highligheropacity
+func (i *InputPassword) HighligherOpacity(highligherOpacity float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(highligherOpacity)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetHighligherOpacity sets the HighligherOpacity property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#highligheropacity
+func (i *InputPassword) SetHighligherOpacity(highligherOpacity float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(highligherOpacity)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// HighlightedText returns the HighlightedText property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#highlightedtext
+func (i *InputPassword) HighlightedText(highlightedText string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(highlightedText)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetHighlightedText sets the HighlightedText property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#highlightedtext
+func (i *InputPassword) SetHighlightedText(highlightedText string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(highlightedText)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// HorizontalAlignment returns the HorizontalAlignment property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#horizontalalignment
+func (i *InputPassword) HorizontalAlignment(horizontalAlignment float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(horizontalAlignment)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetHorizontalAlignment sets the HorizontalAlignment property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#horizontalalignment
+func (i *InputPassword) SetHorizontalAlignment(horizontalAlignment float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(horizontalAlignment)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// Host returns the Host property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#host
+func (i *InputPassword) Host(host *AdvancedDynamicTexture) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(host.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetHost sets the Host property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#host
+func (i *InputPassword) SetHost(host *AdvancedDynamicTexture) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(host.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// HoverCursor returns the HoverCursor property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#hovercursor
+func (i *InputPassword) HoverCursor(hoverCursor string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(hoverCursor)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetHoverCursor sets the HoverCursor property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#hovercursor
+func (i *InputPassword) SetHoverCursor(hoverCursor string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(hoverCursor)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// IsDirty returns the IsDirty property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#isdirty
+func (i *InputPassword) IsDirty(isDirty bool) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(isDirty)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetIsDirty sets the IsDirty property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#isdirty
+func (i *InputPassword) SetIsDirty(isDirty bool) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(isDirty)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// IsEnabled returns the IsEnabled property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#isenabled
+func (i *InputPassword) IsEnabled(isEnabled bool) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(isEnabled)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetIsEnabled sets the IsEnabled property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#isenabled
+func (i *InputPassword) SetIsEnabled(isEnabled bool) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(isEnabled)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// IsFocusInvisible returns the IsFocusInvisible property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#isfocusinvisible
+func (i *InputPassword) IsFocusInvisible(isFocusInvisible bool) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(isFocusInvisible)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetIsFocusInvisible sets the IsFocusInvisible property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#isfocusinvisible
+func (i *InputPassword) SetIsFocusInvisible(isFocusInvisible bool) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(isFocusInvisible)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// IsHighlighted returns the IsHighlighted property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#ishighlighted
+func (i *InputPassword) IsHighlighted(isHighlighted bool) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(isHighlighted)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetIsHighlighted sets the IsHighlighted property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#ishighlighted
+func (i *InputPassword) SetIsHighlighted(isHighlighted bool) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(isHighlighted)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// IsHitTestVisible returns the IsHitTestVisible property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#ishittestvisible
+func (i *InputPassword) IsHitTestVisible(isHitTestVisible bool) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(isHitTestVisible)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetIsHitTestVisible sets the IsHitTestVisible property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#ishittestvisible
+func (i *InputPassword) SetIsHitTestVisible(isHitTestVisible bool) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(isHitTestVisible)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// IsPointerBlocker returns the IsPointerBlocker property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#ispointerblocker
+func (i *InputPassword) IsPointerBlocker(isPointerBlocker bool) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(isPointerBlocker)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetIsPointerBlocker sets the IsPointerBlocker property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#ispointerblocker
+func (i *InputPassword) SetIsPointerBlocker(isPointerBlocker bool) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(isPointerBlocker)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// IsVisible returns the IsVisible property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#isvisible
+func (i *InputPassword) IsVisible(isVisible bool) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(isVisible)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetIsVisible sets the IsVisible property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#isvisible
+func (i *InputPassword) SetIsVisible(isVisible bool) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(isVisible)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// Left returns the Left property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#left
+func (i *InputPassword) Left(left string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(left)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetLeft sets the Left property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#left
+func (i *InputPassword) SetLeft(left string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(left)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// LeftInPixels returns the LeftInPixels property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#leftinpixels
+func (i *InputPassword) LeftInPixels(leftInPixels float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(leftInPixels)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetLeftInPixels sets the LeftInPixels property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#leftinpixels
+func (i *InputPassword) SetLeftInPixels(leftInPixels float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(leftInPixels)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetX returns the LinkOffsetX property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#linkoffsetx
+func (i *InputPassword) LinkOffsetX(linkOffsetX string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(linkOffsetX)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetX sets the LinkOffsetX property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#linkoffsetx
+func (i *InputPassword) SetLinkOffsetX(linkOffsetX string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(linkOffsetX)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetXInPixels returns the LinkOffsetXInPixels property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#linkoffsetxinpixels
+func (i *InputPassword) LinkOffsetXInPixels(linkOffsetXInPixels float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(linkOffsetXInPixels)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetXInPixels sets the LinkOffsetXInPixels property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#linkoffsetxinpixels
+func (i *InputPassword) SetLinkOffsetXInPixels(linkOffsetXInPixels float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(linkOffsetXInPixels)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetY returns the LinkOffsetY property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#linkoffsety
+func (i *InputPassword) LinkOffsetY(linkOffsetY string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(linkOffsetY)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetY sets the LinkOffsetY property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#linkoffsety
+func (i *InputPassword) SetLinkOffsetY(linkOffsetY string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(linkOffsetY)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetYInPixels returns the LinkOffsetYInPixels property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#linkoffsetyinpixels
+func (i *InputPassword) LinkOffsetYInPixels(linkOffsetYInPixels float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(linkOffsetYInPixels)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetYInPixels sets the LinkOffsetYInPixels property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#linkoffsetyinpixels
+func (i *InputPassword) SetLinkOffsetYInPixels(linkOffsetYInPixels float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(linkOffsetYInPixels)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// LinkedMesh returns the LinkedMesh property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#linkedmesh
+func (i *InputPassword) LinkedMesh(linkedMesh *AbstractMesh) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(linkedMesh.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetLinkedMesh sets the LinkedMesh property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#linkedmesh
+func (i *InputPassword) SetLinkedMesh(linkedMesh *AbstractMesh) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(linkedMesh.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// Margin returns the Margin property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#margin
+func (i *InputPassword) Margin(margin string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(margin)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetMargin sets the Margin property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#margin
+func (i *InputPassword) SetMargin(margin string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(margin)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// MarginInPixels returns the MarginInPixels property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#margininpixels
+func (i *InputPassword) MarginInPixels(marginInPixels float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(marginInPixels)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetMarginInPixels sets the MarginInPixels property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#margininpixels
+func (i *InputPassword) SetMarginInPixels(marginInPixels float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(marginInPixels)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// MaxWidth returns the MaxWidth property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#maxwidth
+func (i *InputPassword) MaxWidth(maxWidth string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(maxWidth)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetMaxWidth sets the MaxWidth property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#maxwidth
+func (i *InputPassword) SetMaxWidth(maxWidth string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(maxWidth)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// MaxWidthInPixels returns the MaxWidthInPixels property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#maxwidthinpixels
+func (i *InputPassword) MaxWidthInPixels(maxWidthInPixels float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(maxWidthInPixels)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetMaxWidthInPixels sets the MaxWidthInPixels property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#maxwidthinpixels
+func (i *InputPassword) SetMaxWidthInPixels(maxWidthInPixels float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(maxWidthInPixels)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#metadata
+func (i *InputPassword) Metadata(metadata interface{}) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(metadata)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#metadata
+func (i *InputPassword) SetMetadata(metadata interface{}) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(metadata)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#name
+func (i *InputPassword) Name(name string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(name)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#name
+func (i *InputPassword) SetName(name string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(name)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// NotRenderable returns the NotRenderable property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#notrenderable
+func (i *InputPassword) NotRenderable(notRenderable bool) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(notRenderable)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetNotRenderable sets the NotRenderable property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#notrenderable
+func (i *InputPassword) SetNotRenderable(notRenderable bool) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(notRenderable)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// OnAfterDrawObservable returns the OnAfterDrawObservable property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#onafterdrawobservable
+func (i *InputPassword) OnAfterDrawObservable(onAfterDrawObservable *Observable) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(onAfterDrawObservable.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterDrawObservable sets the OnAfterDrawObservable property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#onafterdrawobservable
+func (i *InputPassword) SetOnAfterDrawObservable(onAfterDrawObservable *Observable) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(onAfterDrawObservable.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeDrawObservable returns the OnBeforeDrawObservable property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#onbeforedrawobservable
+func (i *InputPassword) OnBeforeDrawObservable(onBeforeDrawObservable *Observable) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(onBeforeDrawObservable.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeDrawObservable sets the OnBeforeDrawObservable property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#onbeforedrawobservable
+func (i *InputPassword) SetOnBeforeDrawObservable(onBeforeDrawObservable *Observable) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(onBeforeDrawObservable.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeKeyAddObservable returns the OnBeforeKeyAddObservable property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#onbeforekeyaddobservable
+func (i *InputPassword) OnBeforeKeyAddObservable(onBeforeKeyAddObservable *Observable) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(onBeforeKeyAddObservable.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeKeyAddObservable sets the OnBeforeKeyAddObservable property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#onbeforekeyaddobservable
+func (i *InputPassword) SetOnBeforeKeyAddObservable(onBeforeKeyAddObservable *Observable) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(onBeforeKeyAddObservable.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// OnBlurObservable returns the OnBlurObservable property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#onblurobservable
+func (i *InputPassword) OnBlurObservable(onBlurObservable *Observable) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(onBlurObservable.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetOnBlurObservable sets the OnBlurObservable property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#onblurobservable
+func (i *InputPassword) SetOnBlurObservable(onBlurObservable *Observable) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(onBlurObservable.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// OnDirtyObservable returns the OnDirtyObservable property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#ondirtyobservable
+func (i *InputPassword) OnDirtyObservable(onDirtyObservable *Observable) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(onDirtyObservable.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetOnDirtyObservable sets the OnDirtyObservable property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#ondirtyobservable
+func (i *InputPassword) SetOnDirtyObservable(onDirtyObservable *Observable) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(onDirtyObservable.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// OnFocusObservable returns the OnFocusObservable property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#onfocusobservable
+func (i *InputPassword) OnFocusObservable(onFocusObservable *Observable) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(onFocusObservable.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetOnFocusObservable sets the OnFocusObservable property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#onfocusobservable
+func (i *InputPassword) SetOnFocusObservable(onFocusObservable *Observable) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(onFocusObservable.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// OnFocusSelectAll returns the OnFocusSelectAll property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#onfocusselectall
+func (i *InputPassword) OnFocusSelectAll(onFocusSelectAll bool) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(onFocusSelectAll)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetOnFocusSelectAll sets the OnFocusSelectAll property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#onfocusselectall
+func (i *InputPassword) SetOnFocusSelectAll(onFocusSelectAll bool) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(onFocusSelectAll)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// OnKeyboardEventProcessedObservable returns the OnKeyboardEventProcessedObservable property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#onkeyboardeventprocessedobservable
+func (i *InputPassword) OnKeyboardEventProcessedObservable(onKeyboardEventProcessedObservable *Observable) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(onKeyboardEventProcessedObservable.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetOnKeyboardEventProcessedObservable sets the OnKeyboardEventProcessedObservable property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#onkeyboardeventprocessedobservable
+func (i *InputPassword) SetOnKeyboardEventProcessedObservable(onKeyboardEventProcessedObservable *Observable) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(onKeyboardEventProcessedObservable.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// OnPointerClickObservable returns the OnPointerClickObservable property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#onpointerclickobservable
+func (i *InputPassword) OnPointerClickObservable(onPointerClickObservable *Observable) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(onPointerClickObservable.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerClickObservable sets the OnPointerClickObservable property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#onpointerclickobservable
+func (i *InputPassword) SetOnPointerClickObservable(onPointerClickObservable *Observable) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(onPointerClickObservable.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// OnPointerDownObservable returns the OnPointerDownObservable property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#onpointerdownobservable
+func (i *InputPassword) OnPointerDownObservable(onPointerDownObservable *Observable) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(onPointerDownObservable.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerDownObservable sets the OnPointerDownObservable property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#onpointerdownobservable
+func (i *InputPassword) SetOnPointerDownObservable(onPointerDownObservable *Observable) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(onPointerDownObservable.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// OnPointerEnterObservable returns the OnPointerEnterObservable property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#onpointerenterobservable
+func (i *InputPassword) OnPointerEnterObservable(onPointerEnterObservable *Observable) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(onPointerEnterObservable.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerEnterObservable sets the OnPointerEnterObservable property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#onpointerenterobservable
+func (i *InputPassword) SetOnPointerEnterObservable(onPointerEnterObservable *Observable) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(onPointerEnterObservable.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// OnPointerMoveObservable returns the OnPointerMoveObservable property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#onpointermoveobservable
+func (i *InputPassword) OnPointerMoveObservable(onPointerMoveObservable *Observable) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(onPointerMoveObservable.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerMoveObservable sets the OnPointerMoveObservable property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#onpointermoveobservable
+func (i *InputPassword) SetOnPointerMoveObservable(onPointerMoveObservable *Observable) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(onPointerMoveObservable.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// OnPointerOutObservable returns the OnPointerOutObservable property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#onpointeroutobservable
+func (i *InputPassword) OnPointerOutObservable(onPointerOutObservable *Observable) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(onPointerOutObservable.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerOutObservable sets the OnPointerOutObservable property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#onpointeroutobservable
+func (i *InputPassword) SetOnPointerOutObservable(onPointerOutObservable *Observable) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(onPointerOutObservable.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// OnPointerUpObservable returns the OnPointerUpObservable property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#onpointerupobservable
+func (i *InputPassword) OnPointerUpObservable(onPointerUpObservable *Observable) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(onPointerUpObservable.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerUpObservable sets the OnPointerUpObservable property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#onpointerupobservable
+func (i *InputPassword) SetOnPointerUpObservable(onPointerUpObservable *Observable) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(onPointerUpObservable.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// OnTextChangedObservable returns the OnTextChangedObservable property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#ontextchangedobservable
+func (i *InputPassword) OnTextChangedObservable(onTextChangedObservable *Observable) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(onTextChangedObservable.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetOnTextChangedObservable sets the OnTextChangedObservable property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#ontextchangedobservable
+func (i *InputPassword) SetOnTextChangedObservable(onTextChangedObservable *Observable) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(onTextChangedObservable.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// OnTextCopyObservable returns the OnTextCopyObservable property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#ontextcopyobservable
+func (i *InputPassword) OnTextCopyObservable(onTextCopyObservable *Observable) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(onTextCopyObservable.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetOnTextCopyObservable sets the OnTextCopyObservable property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#ontextcopyobservable
+func (i *InputPassword) SetOnTextCopyObservable(onTextCopyObservable *Observable) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(onTextCopyObservable.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// OnTextCutObservable returns the OnTextCutObservable property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#ontextcutobservable
+func (i *InputPassword) OnTextCutObservable(onTextCutObservable *Observable) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(onTextCutObservable.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetOnTextCutObservable sets the OnTextCutObservable property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#ontextcutobservable
+func (i *InputPassword) SetOnTextCutObservable(onTextCutObservable *Observable) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(onTextCutObservable.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// OnTextHighlightObservable returns the OnTextHighlightObservable property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#ontexthighlightobservable
+func (i *InputPassword) OnTextHighlightObservable(onTextHighlightObservable *Observable) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(onTextHighlightObservable.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetOnTextHighlightObservable sets the OnTextHighlightObservable property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#ontexthighlightobservable
+func (i *InputPassword) SetOnTextHighlightObservable(onTextHighlightObservable *Observable) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(onTextHighlightObservable.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// OnTextPasteObservable returns the OnTextPasteObservable property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#ontextpasteobservable
+func (i *InputPassword) OnTextPasteObservable(onTextPasteObservable *Observable) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(onTextPasteObservable.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetOnTextPasteObservable sets the OnTextPasteObservable property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#ontextpasteobservable
+func (i *InputPassword) SetOnTextPasteObservable(onTextPasteObservable *Observable) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(onTextPasteObservable.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// PaddingBottom returns the PaddingBottom property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#paddingbottom
+func (i *InputPassword) PaddingBottom(paddingBottom string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(paddingBottom)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingBottom sets the PaddingBottom property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#paddingbottom
+func (i *InputPassword) SetPaddingBottom(paddingBottom string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(paddingBottom)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// PaddingBottomInPixels returns the PaddingBottomInPixels property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#paddingbottominpixels
+func (i *InputPassword) PaddingBottomInPixels(paddingBottomInPixels float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(paddingBottomInPixels)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingBottomInPixels sets the PaddingBottomInPixels property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#paddingbottominpixels
+func (i *InputPassword) SetPaddingBottomInPixels(paddingBottomInPixels float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(paddingBottomInPixels)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// PaddingLeft returns the PaddingLeft property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#paddingleft
+func (i *InputPassword) PaddingLeft(paddingLeft string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(paddingLeft)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingLeft sets the PaddingLeft property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#paddingleft
+func (i *InputPassword) SetPaddingLeft(paddingLeft string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(paddingLeft)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// PaddingLeftInPixels returns the PaddingLeftInPixels property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#paddingleftinpixels
+func (i *InputPassword) PaddingLeftInPixels(paddingLeftInPixels float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(paddingLeftInPixels)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingLeftInPixels sets the PaddingLeftInPixels property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#paddingleftinpixels
+func (i *InputPassword) SetPaddingLeftInPixels(paddingLeftInPixels float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(paddingLeftInPixels)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// PaddingRight returns the PaddingRight property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#paddingright
+func (i *InputPassword) PaddingRight(paddingRight string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(paddingRight)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingRight sets the PaddingRight property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#paddingright
+func (i *InputPassword) SetPaddingRight(paddingRight string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(paddingRight)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// PaddingRightInPixels returns the PaddingRightInPixels property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#paddingrightinpixels
+func (i *InputPassword) PaddingRightInPixels(paddingRightInPixels float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(paddingRightInPixels)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingRightInPixels sets the PaddingRightInPixels property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#paddingrightinpixels
+func (i *InputPassword) SetPaddingRightInPixels(paddingRightInPixels float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(paddingRightInPixels)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// PaddingTop returns the PaddingTop property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#paddingtop
+func (i *InputPassword) PaddingTop(paddingTop string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(paddingTop)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingTop sets the PaddingTop property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#paddingtop
+func (i *InputPassword) SetPaddingTop(paddingTop string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(paddingTop)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// PaddingTopInPixels returns the PaddingTopInPixels property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#paddingtopinpixels
+func (i *InputPassword) PaddingTopInPixels(paddingTopInPixels float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(paddingTopInPixels)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingTopInPixels sets the PaddingTopInPixels property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#paddingtopinpixels
+func (i *InputPassword) SetPaddingTopInPixels(paddingTopInPixels float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(paddingTopInPixels)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// Parent returns the Parent property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#parent
+func (i *InputPassword) Parent(parent *Container) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(parent.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetParent sets the Parent property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#parent
+func (i *InputPassword) SetParent(parent *Container) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(parent.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// PlaceholderColor returns the PlaceholderColor property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#placeholdercolor
+func (i *InputPassword) PlaceholderColor(placeholderColor string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(placeholderColor)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetPlaceholderColor sets the PlaceholderColor property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#placeholdercolor
+func (i *InputPassword) SetPlaceholderColor(placeholderColor string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(placeholderColor)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// PlaceholderText returns the PlaceholderText property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#placeholdertext
+func (i *InputPassword) PlaceholderText(placeholderText string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(placeholderText)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetPlaceholderText sets the PlaceholderText property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#placeholdertext
+func (i *InputPassword) SetPlaceholderText(placeholderText string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(placeholderText)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// PromptMessage returns the PromptMessage property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#promptmessage
+func (i *InputPassword) PromptMessage(promptMessage string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(promptMessage)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetPromptMessage sets the PromptMessage property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#promptmessage
+func (i *InputPassword) SetPromptMessage(promptMessage string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(promptMessage)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// Rotation returns the Rotation property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#rotation
+func (i *InputPassword) Rotation(rotation float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(rotation)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetRotation sets the Rotation property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#rotation
+func (i *InputPassword) SetRotation(rotation float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(rotation)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// ScaleX returns the ScaleX property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#scalex
+func (i *InputPassword) ScaleX(scaleX float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(scaleX)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetScaleX sets the ScaleX property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#scalex
+func (i *InputPassword) SetScaleX(scaleX float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(scaleX)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// ScaleY returns the ScaleY property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#scaley
+func (i *InputPassword) ScaleY(scaleY float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(scaleY)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetScaleY sets the ScaleY property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#scaley
+func (i *InputPassword) SetScaleY(scaleY float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(scaleY)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// ShadowBlur returns the ShadowBlur property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#shadowblur
+func (i *InputPassword) ShadowBlur(shadowBlur float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(shadowBlur)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetShadowBlur sets the ShadowBlur property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#shadowblur
+func (i *InputPassword) SetShadowBlur(shadowBlur float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(shadowBlur)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// ShadowColor returns the ShadowColor property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#shadowcolor
+func (i *InputPassword) ShadowColor(shadowColor string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(shadowColor)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetShadowColor sets the ShadowColor property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#shadowcolor
+func (i *InputPassword) SetShadowColor(shadowColor string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(shadowColor)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// ShadowOffsetX returns the ShadowOffsetX property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#shadowoffsetx
+func (i *InputPassword) ShadowOffsetX(shadowOffsetX float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(shadowOffsetX)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetShadowOffsetX sets the ShadowOffsetX property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#shadowoffsetx
+func (i *InputPassword) SetShadowOffsetX(shadowOffsetX float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(shadowOffsetX)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// ShadowOffsetY returns the ShadowOffsetY property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#shadowoffsety
+func (i *InputPassword) ShadowOffsetY(shadowOffsetY float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(shadowOffsetY)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetShadowOffsetY sets the ShadowOffsetY property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#shadowoffsety
+func (i *InputPassword) SetShadowOffsetY(shadowOffsetY float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(shadowOffsetY)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// Style returns the Style property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#style
+func (i *InputPassword) Style(style *Style) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(style.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetStyle sets the Style property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#style
+func (i *InputPassword) SetStyle(style *Style) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(style.JSObject())
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// Text returns the Text property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#text
+func (i *InputPassword) Text(text string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(text)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetText sets the Text property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#text
+func (i *InputPassword) SetText(text string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(text)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// TextHighlightColor returns the TextHighlightColor property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#texthighlightcolor
+func (i *InputPassword) TextHighlightColor(textHighlightColor string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(textHighlightColor)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetTextHighlightColor sets the TextHighlightColor property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#texthighlightcolor
+func (i *InputPassword) SetTextHighlightColor(textHighlightColor string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(textHighlightColor)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// Thickness returns the Thickness property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#thickness
+func (i *InputPassword) Thickness(thickness float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(thickness)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetThickness sets the Thickness property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#thickness
+func (i *InputPassword) SetThickness(thickness float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(thickness)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// Top returns the Top property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#top
+func (i *InputPassword) Top(top string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(top)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetTop sets the Top property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#top
+func (i *InputPassword) SetTop(top string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(top)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// TopInPixels returns the TopInPixels property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#topinpixels
+func (i *InputPassword) TopInPixels(topInPixels float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(topInPixels)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetTopInPixels sets the TopInPixels property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#topinpixels
+func (i *InputPassword) SetTopInPixels(topInPixels float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(topInPixels)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// TransformCenterX returns the TransformCenterX property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#transformcenterx
+func (i *InputPassword) TransformCenterX(transformCenterX float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(transformCenterX)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetTransformCenterX sets the TransformCenterX property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#transformcenterx
+func (i *InputPassword) SetTransformCenterX(transformCenterX float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(transformCenterX)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// TransformCenterY returns the TransformCenterY property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#transformcentery
+func (i *InputPassword) TransformCenterY(transformCenterY float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(transformCenterY)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetTransformCenterY sets the TransformCenterY property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#transformcentery
+func (i *InputPassword) SetTransformCenterY(transformCenterY float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(transformCenterY)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// TypeName returns the TypeName property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#typename
+func (i *InputPassword) TypeName(typeName string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(typeName)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetTypeName sets the TypeName property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#typename
+func (i *InputPassword) SetTypeName(typeName string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(typeName)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#uniqueid
+func (i *InputPassword) UniqueId(uniqueId float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(uniqueId)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#uniqueid
+func (i *InputPassword) SetUniqueId(uniqueId float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(uniqueId)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// UseBitmapCache returns the UseBitmapCache property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#usebitmapcache
+func (i *InputPassword) UseBitmapCache(useBitmapCache bool) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(useBitmapCache)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetUseBitmapCache sets the UseBitmapCache property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#usebitmapcache
+func (i *InputPassword) SetUseBitmapCache(useBitmapCache bool) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(useBitmapCache)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// VERTICAL_ALIGNMENT_BOTTOM returns the VERTICAL_ALIGNMENT_BOTTOM property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#vertical_alignment_bottom
+func (i *InputPassword) VERTICAL_ALIGNMENT_BOTTOM(VERTICAL_ALIGNMENT_BOTTOM float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(VERTICAL_ALIGNMENT_BOTTOM)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetVERTICAL_ALIGNMENT_BOTTOM sets the VERTICAL_ALIGNMENT_BOTTOM property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#vertical_alignment_bottom
+func (i *InputPassword) SetVERTICAL_ALIGNMENT_BOTTOM(VERTICAL_ALIGNMENT_BOTTOM float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(VERTICAL_ALIGNMENT_BOTTOM)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// VERTICAL_ALIGNMENT_CENTER returns the VERTICAL_ALIGNMENT_CENTER property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#vertical_alignment_center
+func (i *InputPassword) VERTICAL_ALIGNMENT_CENTER(VERTICAL_ALIGNMENT_CENTER float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(VERTICAL_ALIGNMENT_CENTER)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetVERTICAL_ALIGNMENT_CENTER sets the VERTICAL_ALIGNMENT_CENTER property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#vertical_alignment_center
+func (i *InputPassword) SetVERTICAL_ALIGNMENT_CENTER(VERTICAL_ALIGNMENT_CENTER float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(VERTICAL_ALIGNMENT_CENTER)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// VERTICAL_ALIGNMENT_TOP returns the VERTICAL_ALIGNMENT_TOP property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#vertical_alignment_top
+func (i *InputPassword) VERTICAL_ALIGNMENT_TOP(VERTICAL_ALIGNMENT_TOP float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(VERTICAL_ALIGNMENT_TOP)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetVERTICAL_ALIGNMENT_TOP sets the VERTICAL_ALIGNMENT_TOP property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#vertical_alignment_top
+func (i *InputPassword) SetVERTICAL_ALIGNMENT_TOP(VERTICAL_ALIGNMENT_TOP float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(VERTICAL_ALIGNMENT_TOP)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// VerticalAlignment returns the VerticalAlignment property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#verticalalignment
+func (i *InputPassword) VerticalAlignment(verticalAlignment float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(verticalAlignment)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetVerticalAlignment sets the VerticalAlignment property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#verticalalignment
+func (i *InputPassword) SetVerticalAlignment(verticalAlignment float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(verticalAlignment)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// Width returns the Width property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#width
+func (i *InputPassword) Width(width string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(width)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetWidth sets the Width property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#width
+func (i *InputPassword) SetWidth(width string) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(width)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// WidthInPixels returns the WidthInPixels property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#widthinpixels
+func (i *InputPassword) WidthInPixels(widthInPixels float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(widthInPixels)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetWidthInPixels sets the WidthInPixels property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#widthinpixels
+func (i *InputPassword) SetWidthInPixels(widthInPixels float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(widthInPixels)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// ZIndex returns the ZIndex property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#zindex
+func (i *InputPassword) ZIndex(zIndex float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(zIndex)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+// SetZIndex sets the ZIndex property of class InputPassword.
+//
+// https://doc.babylonjs.com/api/classes/babylon.inputpassword#zindex
+func (i *InputPassword) SetZIndex(zIndex float64) *InputPassword {
+	p := ba.ctx.Get("InputPassword").New(zIndex)
+	return InputPasswordFromJSObject(p, ba.ctx)
+}
+
+*/

@@ -31,8 +31,64 @@ func PhysicsViewerFromJSObject(p js.Value, ctx js.Value) *PhysicsViewer {
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsviewer
 func (ba *Babylon) NewPhysicsViewer(scene *Scene) *PhysicsViewer {
-	p := ba.ctx.Get("PhysicsViewer").New(scene.JSObject())
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("PhysicsViewer").New(args...)
 	return PhysicsViewerFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Dispose calls the Dispose method on the PhysicsViewer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsviewer#dispose
+func (p *PhysicsViewer) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("dispose", args...)
+}
+
+// HideImpostor calls the HideImpostor method on the PhysicsViewer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsviewer#hideimpostor
+func (p *PhysicsViewer) HideImpostor(impostor *PhysicsImpostor) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, impostor.JSObject())
+
+	p.p.Call("hideImpostor", args...)
+}
+
+// PhysicsViewerShowImpostorOpts contains optional parameters for PhysicsViewer.ShowImpostor.
+type PhysicsViewerShowImpostorOpts struct {
+	TargetMesh *Mesh
+}
+
+// ShowImpostor calls the ShowImpostor method on the PhysicsViewer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsviewer#showimpostor
+func (p *PhysicsViewer) ShowImpostor(impostor *PhysicsImpostor, opts *PhysicsViewerShowImpostorOpts) *AbstractMesh {
+	if opts == nil {
+		opts = &PhysicsViewerShowImpostorOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, impostor.JSObject())
+
+	if opts.TargetMesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.TargetMesh.JSObject())
+	}
+
+	retVal := p.p.Call("showImpostor", args...)
+	return AbstractMeshFromJSObject(retVal, p.ctx)
+}
+
+/*
+
+ */

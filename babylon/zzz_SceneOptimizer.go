@@ -31,11 +31,9 @@ func SceneOptimizerFromJSObject(p js.Value, ctx js.Value) *SceneOptimizer {
 
 // NewSceneOptimizerOpts contains optional parameters for NewSceneOptimizer.
 type NewSceneOptimizerOpts struct {
-	Options *SceneOptimizerOptions
-
-	AutoGeneratePriorities *JSBool
-
-	ImprovementMode *JSBool
+	Options                *SceneOptimizerOptions
+	AutoGeneratePriorities *bool
+	ImprovementMode        *bool
 }
 
 // NewSceneOptimizer returns a new SceneOptimizer object.
@@ -46,8 +44,253 @@ func (ba *Babylon) NewSceneOptimizer(scene *Scene, opts *NewSceneOptimizerOpts) 
 		opts = &NewSceneOptimizerOpts{}
 	}
 
-	p := ba.ctx.Get("SceneOptimizer").New(scene.JSObject(), opts.Options.JSObject(), opts.AutoGeneratePriorities.JSObject(), opts.ImprovementMode.JSObject())
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, scene.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options.JSObject())
+	}
+	if opts.AutoGeneratePriorities == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.AutoGeneratePriorities)
+	}
+	if opts.ImprovementMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ImprovementMode)
+	}
+
+	p := ba.ctx.Get("SceneOptimizer").New(args...)
 	return SceneOptimizerFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Dispose calls the Dispose method on the SceneOptimizer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneoptimizer#dispose
+func (s *SceneOptimizer) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("dispose", args...)
+}
+
+// SceneOptimizerOptimizeAsyncOpts contains optional parameters for SceneOptimizer.OptimizeAsync.
+type SceneOptimizerOptimizeAsyncOpts struct {
+	Options   *SceneOptimizerOptions
+	OnSuccess *func()
+	OnFailure *func()
+}
+
+// OptimizeAsync calls the OptimizeAsync method on the SceneOptimizer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneoptimizer#optimizeasync
+func (s *SceneOptimizer) OptimizeAsync(scene *Scene, opts *SceneOptimizerOptimizeAsyncOpts) *SceneOptimizer {
+	if opts == nil {
+		opts = &SceneOptimizerOptimizeAsyncOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, scene.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options.JSObject())
+	}
+	if opts.OnSuccess == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnSuccess)
+	}
+	if opts.OnFailure == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnFailure)
+	}
+
+	retVal := s.p.Call("OptimizeAsync", args...)
+	return SceneOptimizerFromJSObject(retVal, s.ctx)
+}
+
+// Reset calls the Reset method on the SceneOptimizer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneoptimizer#reset
+func (s *SceneOptimizer) Reset() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("reset", args...)
+}
+
+// Start calls the Start method on the SceneOptimizer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneoptimizer#start
+func (s *SceneOptimizer) Start() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("start", args...)
+}
+
+// Stop calls the Stop method on the SceneOptimizer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneoptimizer#stop
+func (s *SceneOptimizer) Stop() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("stop", args...)
+}
+
+/*
+
+// CurrentFrameRate returns the CurrentFrameRate property of class SceneOptimizer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneoptimizer#currentframerate
+func (s *SceneOptimizer) CurrentFrameRate(currentFrameRate float64) *SceneOptimizer {
+	p := ba.ctx.Get("SceneOptimizer").New(currentFrameRate)
+	return SceneOptimizerFromJSObject(p, ba.ctx)
+}
+
+// SetCurrentFrameRate sets the CurrentFrameRate property of class SceneOptimizer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneoptimizer#currentframerate
+func (s *SceneOptimizer) SetCurrentFrameRate(currentFrameRate float64) *SceneOptimizer {
+	p := ba.ctx.Get("SceneOptimizer").New(currentFrameRate)
+	return SceneOptimizerFromJSObject(p, ba.ctx)
+}
+
+// CurrentPriorityLevel returns the CurrentPriorityLevel property of class SceneOptimizer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneoptimizer#currentprioritylevel
+func (s *SceneOptimizer) CurrentPriorityLevel(currentPriorityLevel float64) *SceneOptimizer {
+	p := ba.ctx.Get("SceneOptimizer").New(currentPriorityLevel)
+	return SceneOptimizerFromJSObject(p, ba.ctx)
+}
+
+// SetCurrentPriorityLevel sets the CurrentPriorityLevel property of class SceneOptimizer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneoptimizer#currentprioritylevel
+func (s *SceneOptimizer) SetCurrentPriorityLevel(currentPriorityLevel float64) *SceneOptimizer {
+	p := ba.ctx.Get("SceneOptimizer").New(currentPriorityLevel)
+	return SceneOptimizerFromJSObject(p, ba.ctx)
+}
+
+// IsInImprovementMode returns the IsInImprovementMode property of class SceneOptimizer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneoptimizer#isinimprovementmode
+func (s *SceneOptimizer) IsInImprovementMode(isInImprovementMode bool) *SceneOptimizer {
+	p := ba.ctx.Get("SceneOptimizer").New(isInImprovementMode)
+	return SceneOptimizerFromJSObject(p, ba.ctx)
+}
+
+// SetIsInImprovementMode sets the IsInImprovementMode property of class SceneOptimizer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneoptimizer#isinimprovementmode
+func (s *SceneOptimizer) SetIsInImprovementMode(isInImprovementMode bool) *SceneOptimizer {
+	p := ba.ctx.Get("SceneOptimizer").New(isInImprovementMode)
+	return SceneOptimizerFromJSObject(p, ba.ctx)
+}
+
+// OnFailureObservable returns the OnFailureObservable property of class SceneOptimizer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneoptimizer#onfailureobservable
+func (s *SceneOptimizer) OnFailureObservable(onFailureObservable *Observable) *SceneOptimizer {
+	p := ba.ctx.Get("SceneOptimizer").New(onFailureObservable.JSObject())
+	return SceneOptimizerFromJSObject(p, ba.ctx)
+}
+
+// SetOnFailureObservable sets the OnFailureObservable property of class SceneOptimizer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneoptimizer#onfailureobservable
+func (s *SceneOptimizer) SetOnFailureObservable(onFailureObservable *Observable) *SceneOptimizer {
+	p := ba.ctx.Get("SceneOptimizer").New(onFailureObservable.JSObject())
+	return SceneOptimizerFromJSObject(p, ba.ctx)
+}
+
+// OnNewOptimizationAppliedObservable returns the OnNewOptimizationAppliedObservable property of class SceneOptimizer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneoptimizer#onnewoptimizationappliedobservable
+func (s *SceneOptimizer) OnNewOptimizationAppliedObservable(onNewOptimizationAppliedObservable *Observable) *SceneOptimizer {
+	p := ba.ctx.Get("SceneOptimizer").New(onNewOptimizationAppliedObservable.JSObject())
+	return SceneOptimizerFromJSObject(p, ba.ctx)
+}
+
+// SetOnNewOptimizationAppliedObservable sets the OnNewOptimizationAppliedObservable property of class SceneOptimizer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneoptimizer#onnewoptimizationappliedobservable
+func (s *SceneOptimizer) SetOnNewOptimizationAppliedObservable(onNewOptimizationAppliedObservable *Observable) *SceneOptimizer {
+	p := ba.ctx.Get("SceneOptimizer").New(onNewOptimizationAppliedObservable.JSObject())
+	return SceneOptimizerFromJSObject(p, ba.ctx)
+}
+
+// OnSuccessObservable returns the OnSuccessObservable property of class SceneOptimizer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneoptimizer#onsuccessobservable
+func (s *SceneOptimizer) OnSuccessObservable(onSuccessObservable *Observable) *SceneOptimizer {
+	p := ba.ctx.Get("SceneOptimizer").New(onSuccessObservable.JSObject())
+	return SceneOptimizerFromJSObject(p, ba.ctx)
+}
+
+// SetOnSuccessObservable sets the OnSuccessObservable property of class SceneOptimizer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneoptimizer#onsuccessobservable
+func (s *SceneOptimizer) SetOnSuccessObservable(onSuccessObservable *Observable) *SceneOptimizer {
+	p := ba.ctx.Get("SceneOptimizer").New(onSuccessObservable.JSObject())
+	return SceneOptimizerFromJSObject(p, ba.ctx)
+}
+
+// Optimizations returns the Optimizations property of class SceneOptimizer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneoptimizer#optimizations
+func (s *SceneOptimizer) Optimizations(optimizations *SceneOptimization) *SceneOptimizer {
+	p := ba.ctx.Get("SceneOptimizer").New(optimizations.JSObject())
+	return SceneOptimizerFromJSObject(p, ba.ctx)
+}
+
+// SetOptimizations sets the Optimizations property of class SceneOptimizer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneoptimizer#optimizations
+func (s *SceneOptimizer) SetOptimizations(optimizations *SceneOptimization) *SceneOptimizer {
+	p := ba.ctx.Get("SceneOptimizer").New(optimizations.JSObject())
+	return SceneOptimizerFromJSObject(p, ba.ctx)
+}
+
+// TargetFrameRate returns the TargetFrameRate property of class SceneOptimizer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneoptimizer#targetframerate
+func (s *SceneOptimizer) TargetFrameRate(targetFrameRate float64) *SceneOptimizer {
+	p := ba.ctx.Get("SceneOptimizer").New(targetFrameRate)
+	return SceneOptimizerFromJSObject(p, ba.ctx)
+}
+
+// SetTargetFrameRate sets the TargetFrameRate property of class SceneOptimizer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneoptimizer#targetframerate
+func (s *SceneOptimizer) SetTargetFrameRate(targetFrameRate float64) *SceneOptimizer {
+	p := ba.ctx.Get("SceneOptimizer").New(targetFrameRate)
+	return SceneOptimizerFromJSObject(p, ba.ctx)
+}
+
+// TrackerDuration returns the TrackerDuration property of class SceneOptimizer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneoptimizer#trackerduration
+func (s *SceneOptimizer) TrackerDuration(trackerDuration float64) *SceneOptimizer {
+	p := ba.ctx.Get("SceneOptimizer").New(trackerDuration)
+	return SceneOptimizerFromJSObject(p, ba.ctx)
+}
+
+// SetTrackerDuration sets the TrackerDuration property of class SceneOptimizer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneoptimizer#trackerduration
+func (s *SceneOptimizer) SetTrackerDuration(trackerDuration float64) *SceneOptimizer {
+	p := ba.ctx.Get("SceneOptimizer").New(trackerDuration)
+	return SceneOptimizerFromJSObject(p, ba.ctx)
+}
+
+*/

@@ -30,13 +30,10 @@ func CylinderParticleEmitterFromJSObject(p js.Value, ctx js.Value) *CylinderPart
 
 // NewCylinderParticleEmitterOpts contains optional parameters for NewCylinderParticleEmitter.
 type NewCylinderParticleEmitterOpts struct {
-	Radius *JSFloat64
-
-	Height *JSFloat64
-
-	RadiusRange *JSFloat64
-
-	DirectionRandomizer *JSFloat64
+	Radius              *float64
+	Height              *float64
+	RadiusRange         *float64
+	DirectionRandomizer *float64
 }
 
 // NewCylinderParticleEmitter returns a new CylinderParticleEmitter object.
@@ -47,8 +44,193 @@ func (ba *Babylon) NewCylinderParticleEmitter(opts *NewCylinderParticleEmitterOp
 		opts = &NewCylinderParticleEmitterOpts{}
 	}
 
-	p := ba.ctx.Get("CylinderParticleEmitter").New(opts.Radius.JSObject(), opts.Height.JSObject(), opts.RadiusRange.JSObject(), opts.DirectionRandomizer.JSObject())
+	args := make([]interface{}, 0, 0+4)
+
+	if opts.Radius == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Radius)
+	}
+	if opts.Height == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Height)
+	}
+	if opts.RadiusRange == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RadiusRange)
+	}
+	if opts.DirectionRandomizer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectionRandomizer)
+	}
+
+	p := ba.ctx.Get("CylinderParticleEmitter").New(args...)
 	return CylinderParticleEmitterFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// ApplyToShader calls the ApplyToShader method on the CylinderParticleEmitter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderparticleemitter#applytoshader
+func (c *CylinderParticleEmitter) ApplyToShader(effect *Effect) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, effect.JSObject())
+
+	c.p.Call("applyToShader", args...)
+}
+
+// Clone calls the Clone method on the CylinderParticleEmitter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderparticleemitter#clone
+func (c *CylinderParticleEmitter) Clone() *CylinderParticleEmitter {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("clone", args...)
+	return CylinderParticleEmitterFromJSObject(retVal, c.ctx)
+}
+
+// GetClassName calls the GetClassName method on the CylinderParticleEmitter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderparticleemitter#getclassname
+func (c *CylinderParticleEmitter) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetEffectDefines calls the GetEffectDefines method on the CylinderParticleEmitter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderparticleemitter#geteffectdefines
+func (c *CylinderParticleEmitter) GetEffectDefines() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("getEffectDefines", args...)
+	return retVal.String()
+}
+
+// Parse calls the Parse method on the CylinderParticleEmitter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderparticleemitter#parse
+func (c *CylinderParticleEmitter) Parse(serializationObject interface{}) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, serializationObject)
+
+	c.p.Call("parse", args...)
+}
+
+// Serialize calls the Serialize method on the CylinderParticleEmitter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderparticleemitter#serialize
+func (c *CylinderParticleEmitter) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := c.p.Call("serialize", args...)
+	return retVal
+}
+
+// StartDirectionFunction calls the StartDirectionFunction method on the CylinderParticleEmitter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderparticleemitter#startdirectionfunction
+func (c *CylinderParticleEmitter) StartDirectionFunction(worldMatrix *Matrix, directionToUpdate *Vector3, particle *Particle) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, worldMatrix.JSObject())
+	args = append(args, directionToUpdate.JSObject())
+	args = append(args, particle.JSObject())
+
+	c.p.Call("startDirectionFunction", args...)
+}
+
+// StartPositionFunction calls the StartPositionFunction method on the CylinderParticleEmitter object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderparticleemitter#startpositionfunction
+func (c *CylinderParticleEmitter) StartPositionFunction(worldMatrix *Matrix, positionToUpdate *Vector3, particle *Particle) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, worldMatrix.JSObject())
+	args = append(args, positionToUpdate.JSObject())
+	args = append(args, particle.JSObject())
+
+	c.p.Call("startPositionFunction", args...)
+}
+
+/*
+
+// DirectionRandomizer returns the DirectionRandomizer property of class CylinderParticleEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderparticleemitter#directionrandomizer
+func (c *CylinderParticleEmitter) DirectionRandomizer(directionRandomizer float64) *CylinderParticleEmitter {
+	p := ba.ctx.Get("CylinderParticleEmitter").New(directionRandomizer)
+	return CylinderParticleEmitterFromJSObject(p, ba.ctx)
+}
+
+// SetDirectionRandomizer sets the DirectionRandomizer property of class CylinderParticleEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderparticleemitter#directionrandomizer
+func (c *CylinderParticleEmitter) SetDirectionRandomizer(directionRandomizer float64) *CylinderParticleEmitter {
+	p := ba.ctx.Get("CylinderParticleEmitter").New(directionRandomizer)
+	return CylinderParticleEmitterFromJSObject(p, ba.ctx)
+}
+
+// Height returns the Height property of class CylinderParticleEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderparticleemitter#height
+func (c *CylinderParticleEmitter) Height(height float64) *CylinderParticleEmitter {
+	p := ba.ctx.Get("CylinderParticleEmitter").New(height)
+	return CylinderParticleEmitterFromJSObject(p, ba.ctx)
+}
+
+// SetHeight sets the Height property of class CylinderParticleEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderparticleemitter#height
+func (c *CylinderParticleEmitter) SetHeight(height float64) *CylinderParticleEmitter {
+	p := ba.ctx.Get("CylinderParticleEmitter").New(height)
+	return CylinderParticleEmitterFromJSObject(p, ba.ctx)
+}
+
+// Radius returns the Radius property of class CylinderParticleEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderparticleemitter#radius
+func (c *CylinderParticleEmitter) Radius(radius float64) *CylinderParticleEmitter {
+	p := ba.ctx.Get("CylinderParticleEmitter").New(radius)
+	return CylinderParticleEmitterFromJSObject(p, ba.ctx)
+}
+
+// SetRadius sets the Radius property of class CylinderParticleEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderparticleemitter#radius
+func (c *CylinderParticleEmitter) SetRadius(radius float64) *CylinderParticleEmitter {
+	p := ba.ctx.Get("CylinderParticleEmitter").New(radius)
+	return CylinderParticleEmitterFromJSObject(p, ba.ctx)
+}
+
+// RadiusRange returns the RadiusRange property of class CylinderParticleEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderparticleemitter#radiusrange
+func (c *CylinderParticleEmitter) RadiusRange(radiusRange float64) *CylinderParticleEmitter {
+	p := ba.ctx.Get("CylinderParticleEmitter").New(radiusRange)
+	return CylinderParticleEmitterFromJSObject(p, ba.ctx)
+}
+
+// SetRadiusRange sets the RadiusRange property of class CylinderParticleEmitter.
+//
+// https://doc.babylonjs.com/api/classes/babylon.cylinderparticleemitter#radiusrange
+func (c *CylinderParticleEmitter) SetRadiusRange(radiusRange float64) *CylinderParticleEmitter {
+	p := ba.ctx.Get("CylinderParticleEmitter").New(radiusRange)
+	return CylinderParticleEmitterFromJSObject(p, ba.ctx)
+}
+
+*/

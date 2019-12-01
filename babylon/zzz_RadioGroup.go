@@ -32,8 +32,123 @@ func RadioGroupFromJSObject(p js.Value, ctx js.Value) *RadioGroup {
 //
 // https://doc.babylonjs.com/api/classes/babylon.radiogroup
 func (ba *Babylon) NewRadioGroup(name string) *RadioGroup {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	p := ba.ctx.Get("RadioGroup").New(args...)
+	return RadioGroupFromJSObject(p, ba.ctx)
+}
+
+// RadioGroupAddRadioOpts contains optional parameters for RadioGroup.AddRadio.
+type RadioGroupAddRadioOpts struct {
+	Func    *func()
+	Checked *bool
+}
+
+// AddRadio calls the AddRadio method on the RadioGroup object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.radiogroup#addradio
+func (r *RadioGroup) AddRadio(label string, opts *RadioGroupAddRadioOpts) {
+	if opts == nil {
+		opts = &RadioGroupAddRadioOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, label)
+
+	if opts.Func == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Func)
+	}
+	if opts.Checked == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Checked)
+	}
+
+	r.p.Call("addRadio", args...)
+}
+
+// RemoveSelector calls the RemoveSelector method on the RadioGroup object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.radiogroup#removeselector
+func (r *RadioGroup) RemoveSelector(selectorNb float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, selectorNb)
+
+	r.p.Call("removeSelector", args...)
+}
+
+/*
+
+// GroupPanel returns the GroupPanel property of class RadioGroup.
+//
+// https://doc.babylonjs.com/api/classes/babylon.radiogroup#grouppanel
+func (r *RadioGroup) GroupPanel(groupPanel *StackPanel) *RadioGroup {
+	p := ba.ctx.Get("RadioGroup").New(groupPanel.JSObject())
+	return RadioGroupFromJSObject(p, ba.ctx)
+}
+
+// SetGroupPanel sets the GroupPanel property of class RadioGroup.
+//
+// https://doc.babylonjs.com/api/classes/babylon.radiogroup#grouppanel
+func (r *RadioGroup) SetGroupPanel(groupPanel *StackPanel) *RadioGroup {
+	p := ba.ctx.Get("RadioGroup").New(groupPanel.JSObject())
+	return RadioGroupFromJSObject(p, ba.ctx)
+}
+
+// Header returns the Header property of class RadioGroup.
+//
+// https://doc.babylonjs.com/api/classes/babylon.radiogroup#header
+func (r *RadioGroup) Header(header string) *RadioGroup {
+	p := ba.ctx.Get("RadioGroup").New(header)
+	return RadioGroupFromJSObject(p, ba.ctx)
+}
+
+// SetHeader sets the Header property of class RadioGroup.
+//
+// https://doc.babylonjs.com/api/classes/babylon.radiogroup#header
+func (r *RadioGroup) SetHeader(header string) *RadioGroup {
+	p := ba.ctx.Get("RadioGroup").New(header)
+	return RadioGroupFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class RadioGroup.
+//
+// https://doc.babylonjs.com/api/classes/babylon.radiogroup#name
+func (r *RadioGroup) Name(name string) *RadioGroup {
 	p := ba.ctx.Get("RadioGroup").New(name)
 	return RadioGroupFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetName sets the Name property of class RadioGroup.
+//
+// https://doc.babylonjs.com/api/classes/babylon.radiogroup#name
+func (r *RadioGroup) SetName(name string) *RadioGroup {
+	p := ba.ctx.Get("RadioGroup").New(name)
+	return RadioGroupFromJSObject(p, ba.ctx)
+}
+
+// Selectors returns the Selectors property of class RadioGroup.
+//
+// https://doc.babylonjs.com/api/classes/babylon.radiogroup#selectors
+func (r *RadioGroup) Selectors(selectors *StackPanel) *RadioGroup {
+	p := ba.ctx.Get("RadioGroup").New(selectors.JSObject())
+	return RadioGroupFromJSObject(p, ba.ctx)
+}
+
+// SetSelectors sets the Selectors property of class RadioGroup.
+//
+// https://doc.babylonjs.com/api/classes/babylon.radiogroup#selectors
+func (r *RadioGroup) SetSelectors(selectors *StackPanel) *RadioGroup {
+	p := ba.ctx.Get("RadioGroup").New(selectors.JSObject())
+	return RadioGroupFromJSObject(p, ba.ctx)
+}
+
+*/

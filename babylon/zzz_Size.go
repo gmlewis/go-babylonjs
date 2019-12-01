@@ -31,8 +31,227 @@ func SizeFromJSObject(p js.Value, ctx js.Value) *Size {
 //
 // https://doc.babylonjs.com/api/classes/babylon.size
 func (ba *Babylon) NewSize(width float64, height float64) *Size {
-	p := ba.ctx.Get("Size").New(width, height)
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, width)
+	args = append(args, height)
+
+	p := ba.ctx.Get("Size").New(args...)
 	return SizeFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Add calls the Add method on the Size object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.size#add
+func (s *Size) Add(otherSize *Size) *Size {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, otherSize.JSObject())
+
+	retVal := s.p.Call("add", args...)
+	return SizeFromJSObject(retVal, s.ctx)
+}
+
+// Clone calls the Clone method on the Size object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.size#clone
+func (s *Size) Clone() *Size {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("clone", args...)
+	return SizeFromJSObject(retVal, s.ctx)
+}
+
+// CopyFrom calls the CopyFrom method on the Size object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.size#copyfrom
+func (s *Size) CopyFrom(src *Size) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, src.JSObject())
+
+	s.p.Call("copyFrom", args...)
+}
+
+// CopyFromFloats calls the CopyFromFloats method on the Size object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.size#copyfromfloats
+func (s *Size) CopyFromFloats(width float64, height float64) *Size {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, width)
+	args = append(args, height)
+
+	retVal := s.p.Call("copyFromFloats", args...)
+	return SizeFromJSObject(retVal, s.ctx)
+}
+
+// Equals calls the Equals method on the Size object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.size#equals
+func (s *Size) Equals(other *Size) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, other.JSObject())
+
+	retVal := s.p.Call("equals", args...)
+	return retVal.Bool()
+}
+
+// GetClassName calls the GetClassName method on the Size object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.size#getclassname
+func (s *Size) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetHashCode calls the GetHashCode method on the Size object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.size#gethashcode
+func (s *Size) GetHashCode() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("getHashCode", args...)
+	return retVal.Float()
+}
+
+// Lerp calls the Lerp method on the Size object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.size#lerp
+func (s *Size) Lerp(start *Size, end *Size, amount float64) *Size {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, start.JSObject())
+	args = append(args, end.JSObject())
+	args = append(args, amount)
+
+	retVal := s.p.Call("Lerp", args...)
+	return SizeFromJSObject(retVal, s.ctx)
+}
+
+// MultiplyByFloats calls the MultiplyByFloats method on the Size object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.size#multiplybyfloats
+func (s *Size) MultiplyByFloats(w float64, h float64) *Size {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, w)
+	args = append(args, h)
+
+	retVal := s.p.Call("multiplyByFloats", args...)
+	return SizeFromJSObject(retVal, s.ctx)
+}
+
+// Set calls the Set method on the Size object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.size#set
+func (s *Size) Set(width float64, height float64) *Size {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, width)
+	args = append(args, height)
+
+	retVal := s.p.Call("set", args...)
+	return SizeFromJSObject(retVal, s.ctx)
+}
+
+// Subtract calls the Subtract method on the Size object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.size#subtract
+func (s *Size) Subtract(otherSize *Size) *Size {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, otherSize.JSObject())
+
+	retVal := s.p.Call("subtract", args...)
+	return SizeFromJSObject(retVal, s.ctx)
+}
+
+// ToString calls the ToString method on the Size object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.size#tostring
+func (s *Size) ToString() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("toString", args...)
+	return retVal.String()
+}
+
+// Zero calls the Zero method on the Size object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.size#zero
+func (s *Size) Zero() *Size {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := s.p.Call("Zero", args...)
+	return SizeFromJSObject(retVal, s.ctx)
+}
+
+/*
+
+// Height returns the Height property of class Size.
+//
+// https://doc.babylonjs.com/api/classes/babylon.size#height
+func (s *Size) Height(height float64) *Size {
+	p := ba.ctx.Get("Size").New(height)
+	return SizeFromJSObject(p, ba.ctx)
+}
+
+// SetHeight sets the Height property of class Size.
+//
+// https://doc.babylonjs.com/api/classes/babylon.size#height
+func (s *Size) SetHeight(height float64) *Size {
+	p := ba.ctx.Get("Size").New(height)
+	return SizeFromJSObject(p, ba.ctx)
+}
+
+// Surface returns the Surface property of class Size.
+//
+// https://doc.babylonjs.com/api/classes/babylon.size#surface
+func (s *Size) Surface(surface float64) *Size {
+	p := ba.ctx.Get("Size").New(surface)
+	return SizeFromJSObject(p, ba.ctx)
+}
+
+// SetSurface sets the Surface property of class Size.
+//
+// https://doc.babylonjs.com/api/classes/babylon.size#surface
+func (s *Size) SetSurface(surface float64) *Size {
+	p := ba.ctx.Get("Size").New(surface)
+	return SizeFromJSObject(p, ba.ctx)
+}
+
+// Width returns the Width property of class Size.
+//
+// https://doc.babylonjs.com/api/classes/babylon.size#width
+func (s *Size) Width(width float64) *Size {
+	p := ba.ctx.Get("Size").New(width)
+	return SizeFromJSObject(p, ba.ctx)
+}
+
+// SetWidth sets the Width property of class Size.
+//
+// https://doc.babylonjs.com/api/classes/babylon.size#width
+func (s *Size) SetWidth(width float64) *Size {
+	p := ba.ctx.Get("Size").New(width)
+	return SizeFromJSObject(p, ba.ctx)
+}
+
+*/

@@ -27,4 +27,62 @@ func SceneSerializerFromJSObject(p js.Value, ctx js.Value) *SceneSerializer {
 	return &SceneSerializer{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// ClearCache calls the ClearCache method on the SceneSerializer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneserializer#clearcache
+func (s *SceneSerializer) ClearCache() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("ClearCache", args...)
+}
+
+// Serialize calls the Serialize method on the SceneSerializer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneserializer#serialize
+func (s *SceneSerializer) Serialize(scene *Scene) interface{} {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, scene.JSObject())
+
+	retVal := s.p.Call("Serialize", args...)
+	return retVal
+}
+
+// SceneSerializerSerializeMeshOpts contains optional parameters for SceneSerializer.SerializeMesh.
+type SceneSerializerSerializeMeshOpts struct {
+	WithParents  *bool
+	WithChildren *bool
+}
+
+// SerializeMesh calls the SerializeMesh method on the SceneSerializer object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneserializer#serializemesh
+func (s *SceneSerializer) SerializeMesh(toSerialize interface{}, opts *SceneSerializerSerializeMeshOpts) interface{} {
+	if opts == nil {
+		opts = &SceneSerializerSerializeMeshOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, toSerialize)
+
+	if opts.WithParents == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.WithParents)
+	}
+	if opts.WithChildren == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.WithChildren)
+	}
+
+	retVal := s.p.Call("SerializeMesh", args...)
+	return retVal
+}
+
+/*
+
+ */

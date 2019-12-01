@@ -33,8 +33,377 @@ func SceneInstrumentationFromJSObject(p js.Value, ctx js.Value) *SceneInstrument
 //
 // https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation
 func (ba *Babylon) NewSceneInstrumentation(scene *Scene) *SceneInstrumentation {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("SceneInstrumentation").New(args...)
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// Dispose calls the Dispose method on the SceneInstrumentation object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#dispose
+func (s *SceneInstrumentation) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	s.p.Call("dispose", args...)
+}
+
+/*
+
+// ActiveMeshesEvaluationTimeCounter returns the ActiveMeshesEvaluationTimeCounter property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#activemeshesevaluationtimecounter
+func (s *SceneInstrumentation) ActiveMeshesEvaluationTimeCounter(activeMeshesEvaluationTimeCounter *PerfCounter) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(activeMeshesEvaluationTimeCounter.JSObject())
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// SetActiveMeshesEvaluationTimeCounter sets the ActiveMeshesEvaluationTimeCounter property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#activemeshesevaluationtimecounter
+func (s *SceneInstrumentation) SetActiveMeshesEvaluationTimeCounter(activeMeshesEvaluationTimeCounter *PerfCounter) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(activeMeshesEvaluationTimeCounter.JSObject())
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// AnimationsTimeCounter returns the AnimationsTimeCounter property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#animationstimecounter
+func (s *SceneInstrumentation) AnimationsTimeCounter(animationsTimeCounter *PerfCounter) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(animationsTimeCounter.JSObject())
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// SetAnimationsTimeCounter sets the AnimationsTimeCounter property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#animationstimecounter
+func (s *SceneInstrumentation) SetAnimationsTimeCounter(animationsTimeCounter *PerfCounter) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(animationsTimeCounter.JSObject())
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// CameraRenderTimeCounter returns the CameraRenderTimeCounter property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#camerarendertimecounter
+func (s *SceneInstrumentation) CameraRenderTimeCounter(cameraRenderTimeCounter *PerfCounter) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(cameraRenderTimeCounter.JSObject())
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// SetCameraRenderTimeCounter sets the CameraRenderTimeCounter property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#camerarendertimecounter
+func (s *SceneInstrumentation) SetCameraRenderTimeCounter(cameraRenderTimeCounter *PerfCounter) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(cameraRenderTimeCounter.JSObject())
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// CaptureActiveMeshesEvaluationTime returns the CaptureActiveMeshesEvaluationTime property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#captureactivemeshesevaluationtime
+func (s *SceneInstrumentation) CaptureActiveMeshesEvaluationTime(captureActiveMeshesEvaluationTime bool) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(captureActiveMeshesEvaluationTime)
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// SetCaptureActiveMeshesEvaluationTime sets the CaptureActiveMeshesEvaluationTime property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#captureactivemeshesevaluationtime
+func (s *SceneInstrumentation) SetCaptureActiveMeshesEvaluationTime(captureActiveMeshesEvaluationTime bool) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(captureActiveMeshesEvaluationTime)
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// CaptureAnimationsTime returns the CaptureAnimationsTime property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#captureanimationstime
+func (s *SceneInstrumentation) CaptureAnimationsTime(captureAnimationsTime bool) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(captureAnimationsTime)
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// SetCaptureAnimationsTime sets the CaptureAnimationsTime property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#captureanimationstime
+func (s *SceneInstrumentation) SetCaptureAnimationsTime(captureAnimationsTime bool) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(captureAnimationsTime)
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// CaptureCameraRenderTime returns the CaptureCameraRenderTime property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#capturecamerarendertime
+func (s *SceneInstrumentation) CaptureCameraRenderTime(captureCameraRenderTime bool) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(captureCameraRenderTime)
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// SetCaptureCameraRenderTime sets the CaptureCameraRenderTime property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#capturecamerarendertime
+func (s *SceneInstrumentation) SetCaptureCameraRenderTime(captureCameraRenderTime bool) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(captureCameraRenderTime)
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// CaptureFrameTime returns the CaptureFrameTime property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#captureframetime
+func (s *SceneInstrumentation) CaptureFrameTime(captureFrameTime bool) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(captureFrameTime)
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// SetCaptureFrameTime sets the CaptureFrameTime property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#captureframetime
+func (s *SceneInstrumentation) SetCaptureFrameTime(captureFrameTime bool) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(captureFrameTime)
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// CaptureInterFrameTime returns the CaptureInterFrameTime property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#captureinterframetime
+func (s *SceneInstrumentation) CaptureInterFrameTime(captureInterFrameTime bool) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(captureInterFrameTime)
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// SetCaptureInterFrameTime sets the CaptureInterFrameTime property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#captureinterframetime
+func (s *SceneInstrumentation) SetCaptureInterFrameTime(captureInterFrameTime bool) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(captureInterFrameTime)
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// CaptureParticlesRenderTime returns the CaptureParticlesRenderTime property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#captureparticlesrendertime
+func (s *SceneInstrumentation) CaptureParticlesRenderTime(captureParticlesRenderTime bool) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(captureParticlesRenderTime)
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// SetCaptureParticlesRenderTime sets the CaptureParticlesRenderTime property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#captureparticlesrendertime
+func (s *SceneInstrumentation) SetCaptureParticlesRenderTime(captureParticlesRenderTime bool) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(captureParticlesRenderTime)
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// CapturePhysicsTime returns the CapturePhysicsTime property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#capturephysicstime
+func (s *SceneInstrumentation) CapturePhysicsTime(capturePhysicsTime bool) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(capturePhysicsTime)
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// SetCapturePhysicsTime sets the CapturePhysicsTime property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#capturephysicstime
+func (s *SceneInstrumentation) SetCapturePhysicsTime(capturePhysicsTime bool) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(capturePhysicsTime)
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// CaptureRenderTargetsRenderTime returns the CaptureRenderTargetsRenderTime property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#capturerendertargetsrendertime
+func (s *SceneInstrumentation) CaptureRenderTargetsRenderTime(captureRenderTargetsRenderTime bool) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(captureRenderTargetsRenderTime)
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// SetCaptureRenderTargetsRenderTime sets the CaptureRenderTargetsRenderTime property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#capturerendertargetsrendertime
+func (s *SceneInstrumentation) SetCaptureRenderTargetsRenderTime(captureRenderTargetsRenderTime bool) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(captureRenderTargetsRenderTime)
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// CaptureRenderTime returns the CaptureRenderTime property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#capturerendertime
+func (s *SceneInstrumentation) CaptureRenderTime(captureRenderTime bool) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(captureRenderTime)
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// SetCaptureRenderTime sets the CaptureRenderTime property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#capturerendertime
+func (s *SceneInstrumentation) SetCaptureRenderTime(captureRenderTime bool) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(captureRenderTime)
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// CaptureSpritesRenderTime returns the CaptureSpritesRenderTime property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#capturespritesrendertime
+func (s *SceneInstrumentation) CaptureSpritesRenderTime(captureSpritesRenderTime bool) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(captureSpritesRenderTime)
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// SetCaptureSpritesRenderTime sets the CaptureSpritesRenderTime property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#capturespritesrendertime
+func (s *SceneInstrumentation) SetCaptureSpritesRenderTime(captureSpritesRenderTime bool) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(captureSpritesRenderTime)
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// DrawCallsCounter returns the DrawCallsCounter property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#drawcallscounter
+func (s *SceneInstrumentation) DrawCallsCounter(drawCallsCounter *PerfCounter) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(drawCallsCounter.JSObject())
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// SetDrawCallsCounter sets the DrawCallsCounter property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#drawcallscounter
+func (s *SceneInstrumentation) SetDrawCallsCounter(drawCallsCounter *PerfCounter) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(drawCallsCounter.JSObject())
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// FrameTimeCounter returns the FrameTimeCounter property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#frametimecounter
+func (s *SceneInstrumentation) FrameTimeCounter(frameTimeCounter *PerfCounter) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(frameTimeCounter.JSObject())
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// SetFrameTimeCounter sets the FrameTimeCounter property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#frametimecounter
+func (s *SceneInstrumentation) SetFrameTimeCounter(frameTimeCounter *PerfCounter) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(frameTimeCounter.JSObject())
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// InterFrameTimeCounter returns the InterFrameTimeCounter property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#interframetimecounter
+func (s *SceneInstrumentation) InterFrameTimeCounter(interFrameTimeCounter *PerfCounter) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(interFrameTimeCounter.JSObject())
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// SetInterFrameTimeCounter sets the InterFrameTimeCounter property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#interframetimecounter
+func (s *SceneInstrumentation) SetInterFrameTimeCounter(interFrameTimeCounter *PerfCounter) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(interFrameTimeCounter.JSObject())
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// ParticlesRenderTimeCounter returns the ParticlesRenderTimeCounter property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#particlesrendertimecounter
+func (s *SceneInstrumentation) ParticlesRenderTimeCounter(particlesRenderTimeCounter *PerfCounter) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(particlesRenderTimeCounter.JSObject())
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// SetParticlesRenderTimeCounter sets the ParticlesRenderTimeCounter property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#particlesrendertimecounter
+func (s *SceneInstrumentation) SetParticlesRenderTimeCounter(particlesRenderTimeCounter *PerfCounter) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(particlesRenderTimeCounter.JSObject())
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// PhysicsTimeCounter returns the PhysicsTimeCounter property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#physicstimecounter
+func (s *SceneInstrumentation) PhysicsTimeCounter(physicsTimeCounter *PerfCounter) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(physicsTimeCounter.JSObject())
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// SetPhysicsTimeCounter sets the PhysicsTimeCounter property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#physicstimecounter
+func (s *SceneInstrumentation) SetPhysicsTimeCounter(physicsTimeCounter *PerfCounter) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(physicsTimeCounter.JSObject())
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// RenderTargetsRenderTimeCounter returns the RenderTargetsRenderTimeCounter property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#rendertargetsrendertimecounter
+func (s *SceneInstrumentation) RenderTargetsRenderTimeCounter(renderTargetsRenderTimeCounter *PerfCounter) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(renderTargetsRenderTimeCounter.JSObject())
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// SetRenderTargetsRenderTimeCounter sets the RenderTargetsRenderTimeCounter property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#rendertargetsrendertimecounter
+func (s *SceneInstrumentation) SetRenderTargetsRenderTimeCounter(renderTargetsRenderTimeCounter *PerfCounter) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(renderTargetsRenderTimeCounter.JSObject())
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// RenderTimeCounter returns the RenderTimeCounter property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#rendertimecounter
+func (s *SceneInstrumentation) RenderTimeCounter(renderTimeCounter *PerfCounter) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(renderTimeCounter.JSObject())
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// SetRenderTimeCounter sets the RenderTimeCounter property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#rendertimecounter
+func (s *SceneInstrumentation) SetRenderTimeCounter(renderTimeCounter *PerfCounter) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(renderTimeCounter.JSObject())
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// Scene returns the Scene property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#scene
+func (s *SceneInstrumentation) Scene(scene *Scene) *SceneInstrumentation {
 	p := ba.ctx.Get("SceneInstrumentation").New(scene.JSObject())
 	return SceneInstrumentationFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetScene sets the Scene property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#scene
+func (s *SceneInstrumentation) SetScene(scene *Scene) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(scene.JSObject())
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// SpritesRenderTimeCounter returns the SpritesRenderTimeCounter property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#spritesrendertimecounter
+func (s *SceneInstrumentation) SpritesRenderTimeCounter(spritesRenderTimeCounter *PerfCounter) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(spritesRenderTimeCounter.JSObject())
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+// SetSpritesRenderTimeCounter sets the SpritesRenderTimeCounter property of class SceneInstrumentation.
+//
+// https://doc.babylonjs.com/api/classes/babylon.sceneinstrumentation#spritesrendertimecounter
+func (s *SceneInstrumentation) SetSpritesRenderTimeCounter(spritesRenderTimeCounter *PerfCounter) *SceneInstrumentation {
+	p := ba.ctx.Get("SceneInstrumentation").New(spritesRenderTimeCounter.JSObject())
+	return SceneInstrumentationFromJSObject(p, ba.ctx)
+}
+
+*/

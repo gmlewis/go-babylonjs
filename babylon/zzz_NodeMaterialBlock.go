@@ -29,11 +29,9 @@ func NodeMaterialBlockFromJSObject(p js.Value, ctx js.Value) *NodeMaterialBlock 
 
 // NewNodeMaterialBlockOpts contains optional parameters for NewNodeMaterialBlock.
 type NewNodeMaterialBlockOpts struct {
-	Target *JSValue
-
-	IsFinalMerger *JSBool
-
-	IsInput *JSBool
+	Target        js.Value
+	IsFinalMerger *bool
+	IsInput       *bool
 }
 
 // NewNodeMaterialBlock returns a new NodeMaterialBlock object.
@@ -44,8 +42,620 @@ func (ba *Babylon) NewNodeMaterialBlock(name string, opts *NewNodeMaterialBlockO
 		opts = &NewNodeMaterialBlockOpts{}
 	}
 
-	p := ba.ctx.Get("NodeMaterialBlock").New(name, opts.Target.JSObject(), opts.IsFinalMerger.JSObject(), opts.IsInput.JSObject())
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, name)
+
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+	if opts.IsFinalMerger == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IsFinalMerger)
+	}
+	if opts.IsInput == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IsInput)
+	}
+
+	p := ba.ctx.Get("NodeMaterialBlock").New(args...)
 	return NodeMaterialBlockFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AutoConfigure calls the AutoConfigure method on the NodeMaterialBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#autoconfigure
+func (n *NodeMaterialBlock) AutoConfigure(material *NodeMaterial) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, material.JSObject())
+
+	n.p.Call("autoConfigure", args...)
+}
+
+// NodeMaterialBlockBindOpts contains optional parameters for NodeMaterialBlock.Bind.
+type NodeMaterialBlockBindOpts struct {
+	Mesh *Mesh
+}
+
+// Bind calls the Bind method on the NodeMaterialBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#bind
+func (n *NodeMaterialBlock) Bind(effect *Effect, nodeMaterial *NodeMaterial, opts *NodeMaterialBlockBindOpts) {
+	if opts == nil {
+		opts = &NodeMaterialBlockBindOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, effect.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	n.p.Call("bind", args...)
+}
+
+// Build calls the Build method on the NodeMaterialBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#build
+func (n *NodeMaterialBlock) Build(state *NodeMaterialBuildState, activeBlocks *NodeMaterialBlock) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, state.JSObject())
+	args = append(args, activeBlocks.JSObject())
+
+	retVal := n.p.Call("build", args...)
+	return retVal.Bool()
+}
+
+// NodeMaterialBlockCloneOpts contains optional parameters for NodeMaterialBlock.Clone.
+type NodeMaterialBlockCloneOpts struct {
+	RootUrl *string
+}
+
+// Clone calls the Clone method on the NodeMaterialBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#clone
+func (n *NodeMaterialBlock) Clone(scene *Scene, opts *NodeMaterialBlockCloneOpts) *NodeMaterialBlock {
+	if opts == nil {
+		opts = &NodeMaterialBlockCloneOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, scene.JSObject())
+
+	if opts.RootUrl == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RootUrl)
+	}
+
+	retVal := n.p.Call("clone", args...)
+	return NodeMaterialBlockFromJSObject(retVal, n.ctx)
+}
+
+// NodeMaterialBlockConnectToOpts contains optional parameters for NodeMaterialBlock.ConnectTo.
+type NodeMaterialBlockConnectToOpts struct {
+	Options js.Value
+}
+
+// ConnectTo calls the ConnectTo method on the NodeMaterialBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#connectto
+func (n *NodeMaterialBlock) ConnectTo(other *NodeMaterialBlock, opts *NodeMaterialBlockConnectToOpts) *NodeMaterialBlock {
+	if opts == nil {
+		opts = &NodeMaterialBlockConnectToOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, other.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	retVal := n.p.Call("connectTo", args...)
+	return NodeMaterialBlockFromJSObject(retVal, n.ctx)
+}
+
+// Dispose calls the Dispose method on the NodeMaterialBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#dispose
+func (n *NodeMaterialBlock) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	n.p.Call("dispose", args...)
+}
+
+// GetClassName calls the GetClassName method on the NodeMaterialBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#getclassname
+func (n *NodeMaterialBlock) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// NodeMaterialBlockGetFirstAvailableInputOpts contains optional parameters for NodeMaterialBlock.GetFirstAvailableInput.
+type NodeMaterialBlockGetFirstAvailableInputOpts struct {
+	ForOutput *NodeMaterialConnectionPoint
+}
+
+// GetFirstAvailableInput calls the GetFirstAvailableInput method on the NodeMaterialBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#getfirstavailableinput
+func (n *NodeMaterialBlock) GetFirstAvailableInput(opts *NodeMaterialBlockGetFirstAvailableInputOpts) *NodeMaterialConnectionPoint {
+	if opts == nil {
+		opts = &NodeMaterialBlockGetFirstAvailableInputOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForOutput == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForOutput.JSObject())
+	}
+
+	retVal := n.p.Call("getFirstAvailableInput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, n.ctx)
+}
+
+// NodeMaterialBlockGetFirstAvailableOutputOpts contains optional parameters for NodeMaterialBlock.GetFirstAvailableOutput.
+type NodeMaterialBlockGetFirstAvailableOutputOpts struct {
+	ForBlock *NodeMaterialBlock
+}
+
+// GetFirstAvailableOutput calls the GetFirstAvailableOutput method on the NodeMaterialBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#getfirstavailableoutput
+func (n *NodeMaterialBlock) GetFirstAvailableOutput(opts *NodeMaterialBlockGetFirstAvailableOutputOpts) *NodeMaterialConnectionPoint {
+	if opts == nil {
+		opts = &NodeMaterialBlockGetFirstAvailableOutputOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForBlock == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForBlock.JSObject())
+	}
+
+	retVal := n.p.Call("getFirstAvailableOutput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, n.ctx)
+}
+
+// GetInputByName calls the GetInputByName method on the NodeMaterialBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#getinputbyname
+func (n *NodeMaterialBlock) GetInputByName(name string) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := n.p.Call("getInputByName", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, n.ctx)
+}
+
+// GetOutputByName calls the GetOutputByName method on the NodeMaterialBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#getoutputbyname
+func (n *NodeMaterialBlock) GetOutputByName(name string) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := n.p.Call("getOutputByName", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, n.ctx)
+}
+
+// GetSiblingOutput calls the GetSiblingOutput method on the NodeMaterialBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#getsiblingoutput
+func (n *NodeMaterialBlock) GetSiblingOutput(current *NodeMaterialConnectionPoint) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, current.JSObject())
+
+	retVal := n.p.Call("getSiblingOutput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, n.ctx)
+}
+
+// Initialize calls the Initialize method on the NodeMaterialBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#initialize
+func (n *NodeMaterialBlock) Initialize(state *NodeMaterialBuildState) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, state.JSObject())
+
+	n.p.Call("initialize", args...)
+}
+
+// NodeMaterialBlockInitializeDefinesOpts contains optional parameters for NodeMaterialBlock.InitializeDefines.
+type NodeMaterialBlockInitializeDefinesOpts struct {
+	UseInstances *bool
+}
+
+// InitializeDefines calls the InitializeDefines method on the NodeMaterialBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#initializedefines
+func (n *NodeMaterialBlock) InitializeDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *NodeMaterialBlockInitializeDefinesOpts) {
+	if opts == nil {
+		opts = &NodeMaterialBlockInitializeDefinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	n.p.Call("initializeDefines", args...)
+}
+
+// NodeMaterialBlockIsReadyOpts contains optional parameters for NodeMaterialBlock.IsReady.
+type NodeMaterialBlockIsReadyOpts struct {
+	UseInstances *bool
+}
+
+// IsReady calls the IsReady method on the NodeMaterialBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#isready
+func (n *NodeMaterialBlock) IsReady(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *NodeMaterialBlockIsReadyOpts) bool {
+	if opts == nil {
+		opts = &NodeMaterialBlockIsReadyOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	retVal := n.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// NodeMaterialBlockPrepareDefinesOpts contains optional parameters for NodeMaterialBlock.PrepareDefines.
+type NodeMaterialBlockPrepareDefinesOpts struct {
+	UseInstances *bool
+}
+
+// PrepareDefines calls the PrepareDefines method on the NodeMaterialBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#preparedefines
+func (n *NodeMaterialBlock) PrepareDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *NodeMaterialBlockPrepareDefinesOpts) {
+	if opts == nil {
+		opts = &NodeMaterialBlockPrepareDefinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	n.p.Call("prepareDefines", args...)
+}
+
+// ProvideFallbacks calls the ProvideFallbacks method on the NodeMaterialBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#providefallbacks
+func (n *NodeMaterialBlock) ProvideFallbacks(mesh *AbstractMesh, fallbacks *EffectFallbacks) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, fallbacks.JSObject())
+
+	n.p.Call("provideFallbacks", args...)
+}
+
+// NodeMaterialBlockRegisterInputOpts contains optional parameters for NodeMaterialBlock.RegisterInput.
+type NodeMaterialBlockRegisterInputOpts struct {
+	IsOptional *bool
+	Target     js.Value
+}
+
+// RegisterInput calls the RegisterInput method on the NodeMaterialBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#registerinput
+func (n *NodeMaterialBlock) RegisterInput(name string, jsType js.Value, opts *NodeMaterialBlockRegisterInputOpts) *NodeMaterialBlock {
+	if opts == nil {
+		opts = &NodeMaterialBlockRegisterInputOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+2)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	if opts.IsOptional == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IsOptional)
+	}
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+
+	retVal := n.p.Call("registerInput", args...)
+	return NodeMaterialBlockFromJSObject(retVal, n.ctx)
+}
+
+// NodeMaterialBlockRegisterOutputOpts contains optional parameters for NodeMaterialBlock.RegisterOutput.
+type NodeMaterialBlockRegisterOutputOpts struct {
+	Target js.Value
+}
+
+// RegisterOutput calls the RegisterOutput method on the NodeMaterialBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#registeroutput
+func (n *NodeMaterialBlock) RegisterOutput(name string, jsType js.Value, opts *NodeMaterialBlockRegisterOutputOpts) *NodeMaterialBlock {
+	if opts == nil {
+		opts = &NodeMaterialBlockRegisterOutputOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+
+	retVal := n.p.Call("registerOutput", args...)
+	return NodeMaterialBlockFromJSObject(retVal, n.ctx)
+}
+
+// ReplaceRepeatableContent calls the ReplaceRepeatableContent method on the NodeMaterialBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#replacerepeatablecontent
+func (n *NodeMaterialBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterialBuildState, fragmentShaderState *NodeMaterialBuildState, mesh *AbstractMesh, defines js.Value) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, vertexShaderState.JSObject())
+	args = append(args, fragmentShaderState.JSObject())
+	args = append(args, mesh.JSObject())
+	args = append(args, defines)
+
+	n.p.Call("replaceRepeatableContent", args...)
+}
+
+// Serialize calls the Serialize method on the NodeMaterialBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#serialize
+func (n *NodeMaterialBlock) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := n.p.Call("serialize", args...)
+	return retVal
+}
+
+// UpdateUniformsAndSamples calls the UpdateUniformsAndSamples method on the NodeMaterialBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#updateuniformsandsamples
+func (n *NodeMaterialBlock) UpdateUniformsAndSamples(state *NodeMaterialBuildState, nodeMaterial *NodeMaterial, defines js.Value, uniformBuffers string) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, state.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+	args = append(args, uniformBuffers)
+
+	n.p.Call("updateUniformsAndSamples", args...)
+}
+
+/*
+
+// BuildId returns the BuildId property of class NodeMaterialBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#buildid
+func (n *NodeMaterialBlock) BuildId(buildId float64) *NodeMaterialBlock {
+	p := ba.ctx.Get("NodeMaterialBlock").New(buildId)
+	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+}
+
+// SetBuildId sets the BuildId property of class NodeMaterialBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#buildid
+func (n *NodeMaterialBlock) SetBuildId(buildId float64) *NodeMaterialBlock {
+	p := ba.ctx.Get("NodeMaterialBlock").New(buildId)
+	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+}
+
+// Comments returns the Comments property of class NodeMaterialBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#comments
+func (n *NodeMaterialBlock) Comments(comments string) *NodeMaterialBlock {
+	p := ba.ctx.Get("NodeMaterialBlock").New(comments)
+	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+}
+
+// SetComments sets the Comments property of class NodeMaterialBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#comments
+func (n *NodeMaterialBlock) SetComments(comments string) *NodeMaterialBlock {
+	p := ba.ctx.Get("NodeMaterialBlock").New(comments)
+	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+}
+
+// Inputs returns the Inputs property of class NodeMaterialBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#inputs
+func (n *NodeMaterialBlock) Inputs(inputs *NodeMaterialConnectionPoint) *NodeMaterialBlock {
+	p := ba.ctx.Get("NodeMaterialBlock").New(inputs.JSObject())
+	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+}
+
+// SetInputs sets the Inputs property of class NodeMaterialBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#inputs
+func (n *NodeMaterialBlock) SetInputs(inputs *NodeMaterialConnectionPoint) *NodeMaterialBlock {
+	p := ba.ctx.Get("NodeMaterialBlock").New(inputs.JSObject())
+	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+}
+
+// IsFinalMerger returns the IsFinalMerger property of class NodeMaterialBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#isfinalmerger
+func (n *NodeMaterialBlock) IsFinalMerger(isFinalMerger bool) *NodeMaterialBlock {
+	p := ba.ctx.Get("NodeMaterialBlock").New(isFinalMerger)
+	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsFinalMerger sets the IsFinalMerger property of class NodeMaterialBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#isfinalmerger
+func (n *NodeMaterialBlock) SetIsFinalMerger(isFinalMerger bool) *NodeMaterialBlock {
+	p := ba.ctx.Get("NodeMaterialBlock").New(isFinalMerger)
+	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+}
+
+// IsInput returns the IsInput property of class NodeMaterialBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#isinput
+func (n *NodeMaterialBlock) IsInput(isInput bool) *NodeMaterialBlock {
+	p := ba.ctx.Get("NodeMaterialBlock").New(isInput)
+	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsInput sets the IsInput property of class NodeMaterialBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#isinput
+func (n *NodeMaterialBlock) SetIsInput(isInput bool) *NodeMaterialBlock {
+	p := ba.ctx.Get("NodeMaterialBlock").New(isInput)
+	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+}
+
+// IsUnique returns the IsUnique property of class NodeMaterialBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#isunique
+func (n *NodeMaterialBlock) IsUnique(isUnique bool) *NodeMaterialBlock {
+	p := ba.ctx.Get("NodeMaterialBlock").New(isUnique)
+	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsUnique sets the IsUnique property of class NodeMaterialBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#isunique
+func (n *NodeMaterialBlock) SetIsUnique(isUnique bool) *NodeMaterialBlock {
+	p := ba.ctx.Get("NodeMaterialBlock").New(isUnique)
+	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class NodeMaterialBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#name
+func (n *NodeMaterialBlock) Name(name string) *NodeMaterialBlock {
+	p := ba.ctx.Get("NodeMaterialBlock").New(name)
+	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class NodeMaterialBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#name
+func (n *NodeMaterialBlock) SetName(name string) *NodeMaterialBlock {
+	p := ba.ctx.Get("NodeMaterialBlock").New(name)
+	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+}
+
+// Outputs returns the Outputs property of class NodeMaterialBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#outputs
+func (n *NodeMaterialBlock) Outputs(outputs *NodeMaterialConnectionPoint) *NodeMaterialBlock {
+	p := ba.ctx.Get("NodeMaterialBlock").New(outputs.JSObject())
+	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOutputs sets the Outputs property of class NodeMaterialBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#outputs
+func (n *NodeMaterialBlock) SetOutputs(outputs *NodeMaterialConnectionPoint) *NodeMaterialBlock {
+	p := ba.ctx.Get("NodeMaterialBlock").New(outputs.JSObject())
+	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+}
+
+// Target returns the Target property of class NodeMaterialBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#target
+func (n *NodeMaterialBlock) Target(target js.Value) *NodeMaterialBlock {
+	p := ba.ctx.Get("NodeMaterialBlock").New(target)
+	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+}
+
+// SetTarget sets the Target property of class NodeMaterialBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#target
+func (n *NodeMaterialBlock) SetTarget(target js.Value) *NodeMaterialBlock {
+	p := ba.ctx.Get("NodeMaterialBlock").New(target)
+	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class NodeMaterialBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#uniqueid
+func (n *NodeMaterialBlock) UniqueId(uniqueId float64) *NodeMaterialBlock {
+	p := ba.ctx.Get("NodeMaterialBlock").New(uniqueId)
+	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class NodeMaterialBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.nodematerialblock#uniqueid
+func (n *NodeMaterialBlock) SetUniqueId(uniqueId float64) *NodeMaterialBlock {
+	p := ba.ctx.Get("NodeMaterialBlock").New(uniqueId)
+	return NodeMaterialBlockFromJSObject(p, ba.ctx)
+}
+
+*/

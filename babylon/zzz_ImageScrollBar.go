@@ -29,7 +29,7 @@ func ImageScrollBarFromJSObject(p js.Value, ctx js.Value) *ImageScrollBar {
 
 // NewImageScrollBarOpts contains optional parameters for NewImageScrollBar.
 type NewImageScrollBarOpts struct {
-	Name *JSString
+	Name *string
 }
 
 // NewImageScrollBar returns a new ImageScrollBar object.
@@ -40,8 +40,1801 @@ func (ba *Babylon) NewImageScrollBar(opts *NewImageScrollBarOpts) *ImageScrollBa
 		opts = &NewImageScrollBarOpts{}
 	}
 
-	p := ba.ctx.Get("ImageScrollBar").New(opts.Name.JSObject())
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Name == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Name)
+	}
+
+	p := ba.ctx.Get("ImageScrollBar").New(args...)
 	return ImageScrollBarFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Contains calls the Contains method on the ImageScrollBar object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#contains
+func (i *ImageScrollBar) Contains(x float64, y float64) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, x)
+	args = append(args, y)
+
+	retVal := i.p.Call("contains", args...)
+	return retVal.Bool()
+}
+
+// Dispose calls the Dispose method on the ImageScrollBar object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#dispose
+func (i *ImageScrollBar) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	i.p.Call("dispose", args...)
+}
+
+// GetAscendantOfClass calls the GetAscendantOfClass method on the ImageScrollBar object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#getascendantofclass
+func (i *ImageScrollBar) GetAscendantOfClass(className string) *Control {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, className)
+
+	retVal := i.p.Call("getAscendantOfClass", args...)
+	return ControlFromJSObject(retVal, i.ctx)
+}
+
+// GetClassName calls the GetClassName method on the ImageScrollBar object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#getclassname
+func (i *ImageScrollBar) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := i.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// ImageScrollBarGetDescendantsOpts contains optional parameters for ImageScrollBar.GetDescendants.
+type ImageScrollBarGetDescendantsOpts struct {
+	DirectDescendantsOnly *bool
+	Predicate             *func()
+}
+
+// GetDescendants calls the GetDescendants method on the ImageScrollBar object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#getdescendants
+func (i *ImageScrollBar) GetDescendants(opts *ImageScrollBarGetDescendantsOpts) *Control {
+	if opts == nil {
+		opts = &ImageScrollBarGetDescendantsOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	retVal := i.p.Call("getDescendants", args...)
+	return ControlFromJSObject(retVal, i.ctx)
+}
+
+// ImageScrollBarGetDescendantsToRefOpts contains optional parameters for ImageScrollBar.GetDescendantsToRef.
+type ImageScrollBarGetDescendantsToRefOpts struct {
+	DirectDescendantsOnly *bool
+	Predicate             *func()
+}
+
+// GetDescendantsToRef calls the GetDescendantsToRef method on the ImageScrollBar object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#getdescendantstoref
+func (i *ImageScrollBar) GetDescendantsToRef(results *Control, opts *ImageScrollBarGetDescendantsToRefOpts) {
+	if opts == nil {
+		opts = &ImageScrollBarGetDescendantsToRefOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, results.JSObject())
+
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	i.p.Call("getDescendantsToRef", args...)
+}
+
+// GetLocalCoordinates calls the GetLocalCoordinates method on the ImageScrollBar object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#getlocalcoordinates
+func (i *ImageScrollBar) GetLocalCoordinates(globalCoordinates *Vector2) *Vector2 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, globalCoordinates.JSObject())
+
+	retVal := i.p.Call("getLocalCoordinates", args...)
+	return Vector2FromJSObject(retVal, i.ctx)
+}
+
+// GetLocalCoordinatesToRef calls the GetLocalCoordinatesToRef method on the ImageScrollBar object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#getlocalcoordinatestoref
+func (i *ImageScrollBar) GetLocalCoordinatesToRef(globalCoordinates *Vector2, result *Vector2) *Control {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, globalCoordinates.JSObject())
+	args = append(args, result.JSObject())
+
+	retVal := i.p.Call("getLocalCoordinatesToRef", args...)
+	return ControlFromJSObject(retVal, i.ctx)
+}
+
+// GetParentLocalCoordinates calls the GetParentLocalCoordinates method on the ImageScrollBar object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#getparentlocalcoordinates
+func (i *ImageScrollBar) GetParentLocalCoordinates(globalCoordinates *Vector2) *Vector2 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, globalCoordinates.JSObject())
+
+	retVal := i.p.Call("getParentLocalCoordinates", args...)
+	return Vector2FromJSObject(retVal, i.ctx)
+}
+
+// IsAscendant calls the IsAscendant method on the ImageScrollBar object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#isascendant
+func (i *ImageScrollBar) IsAscendant(container *Control) bool {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, container.JSObject())
+
+	retVal := i.p.Call("isAscendant", args...)
+	return retVal.Bool()
+}
+
+// LinkWithMesh calls the LinkWithMesh method on the ImageScrollBar object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#linkwithmesh
+func (i *ImageScrollBar) LinkWithMesh(mesh *AbstractMesh) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	i.p.Call("linkWithMesh", args...)
+}
+
+// MoveToVector3 calls the MoveToVector3 method on the ImageScrollBar object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#movetovector3
+func (i *ImageScrollBar) MoveToVector3(position *Vector3, scene *Scene) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, position.JSObject())
+	args = append(args, scene.JSObject())
+
+	i.p.Call("moveToVector3", args...)
+}
+
+// _draw calls the _draw method on the ImageScrollBar object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#_draw
+func (i *ImageScrollBar) _draw(context js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, context)
+
+	i.p.Call("_draw", args...)
+}
+
+// _onPointerDown calls the _onPointerDown method on the ImageScrollBar object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#_onpointerdown
+func (i *ImageScrollBar) _onPointerDown(target *Control, coordinates *Vector2, pointerId float64, buttonIndex float64) bool {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, target.JSObject())
+	args = append(args, coordinates.JSObject())
+	args = append(args, pointerId)
+	args = append(args, buttonIndex)
+
+	retVal := i.p.Call("_onPointerDown", args...)
+	return retVal.Bool()
+}
+
+// _onPointerMove calls the _onPointerMove method on the ImageScrollBar object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#_onpointermove
+func (i *ImageScrollBar) _onPointerMove(target *Control, coordinates *Vector2, pointerId float64) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, target.JSObject())
+	args = append(args, coordinates.JSObject())
+	args = append(args, pointerId)
+
+	i.p.Call("_onPointerMove", args...)
+}
+
+// _onPointerUp calls the _onPointerUp method on the ImageScrollBar object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#_onpointerup
+func (i *ImageScrollBar) _onPointerUp(target *Control, coordinates *Vector2, pointerId float64, buttonIndex float64, notifyClick bool) {
+
+	args := make([]interface{}, 0, 5+0)
+
+	args = append(args, target.JSObject())
+	args = append(args, coordinates.JSObject())
+	args = append(args, pointerId)
+	args = append(args, buttonIndex)
+	args = append(args, notifyClick)
+
+	i.p.Call("_onPointerUp", args...)
+}
+
+/*
+
+// AllowAlphaInheritance returns the AllowAlphaInheritance property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#allowalphainheritance
+func (i *ImageScrollBar) AllowAlphaInheritance(AllowAlphaInheritance bool) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(AllowAlphaInheritance)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetAllowAlphaInheritance sets the AllowAlphaInheritance property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#allowalphainheritance
+func (i *ImageScrollBar) SetAllowAlphaInheritance(AllowAlphaInheritance bool) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(AllowAlphaInheritance)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// Alpha returns the Alpha property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#alpha
+func (i *ImageScrollBar) Alpha(alpha float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(alpha)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetAlpha sets the Alpha property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#alpha
+func (i *ImageScrollBar) SetAlpha(alpha float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(alpha)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// BackgroundImage returns the BackgroundImage property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#backgroundimage
+func (i *ImageScrollBar) BackgroundImage(backgroundImage *Image) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(backgroundImage.JSObject())
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetBackgroundImage sets the BackgroundImage property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#backgroundimage
+func (i *ImageScrollBar) SetBackgroundImage(backgroundImage *Image) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(backgroundImage.JSObject())
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// BarImageHeight returns the BarImageHeight property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#barimageheight
+func (i *ImageScrollBar) BarImageHeight(barImageHeight float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(barImageHeight)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetBarImageHeight sets the BarImageHeight property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#barimageheight
+func (i *ImageScrollBar) SetBarImageHeight(barImageHeight float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(barImageHeight)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// BarOffset returns the BarOffset property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#baroffset
+func (i *ImageScrollBar) BarOffset(barOffset string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(barOffset)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetBarOffset sets the BarOffset property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#baroffset
+func (i *ImageScrollBar) SetBarOffset(barOffset string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(barOffset)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// BarOffsetInPixels returns the BarOffsetInPixels property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#baroffsetinpixels
+func (i *ImageScrollBar) BarOffsetInPixels(barOffsetInPixels float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(barOffsetInPixels)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetBarOffsetInPixels sets the BarOffsetInPixels property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#baroffsetinpixels
+func (i *ImageScrollBar) SetBarOffsetInPixels(barOffsetInPixels float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(barOffsetInPixels)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// CenterX returns the CenterX property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#centerx
+func (i *ImageScrollBar) CenterX(centerX float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(centerX)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetCenterX sets the CenterX property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#centerx
+func (i *ImageScrollBar) SetCenterX(centerX float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(centerX)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// CenterY returns the CenterY property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#centery
+func (i *ImageScrollBar) CenterY(centerY float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(centerY)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetCenterY sets the CenterY property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#centery
+func (i *ImageScrollBar) SetCenterY(centerY float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(centerY)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// ClipChildren returns the ClipChildren property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#clipchildren
+func (i *ImageScrollBar) ClipChildren(clipChildren bool) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(clipChildren)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetClipChildren sets the ClipChildren property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#clipchildren
+func (i *ImageScrollBar) SetClipChildren(clipChildren bool) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(clipChildren)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// ClipContent returns the ClipContent property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#clipcontent
+func (i *ImageScrollBar) ClipContent(clipContent bool) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(clipContent)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetClipContent sets the ClipContent property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#clipcontent
+func (i *ImageScrollBar) SetClipContent(clipContent bool) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(clipContent)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// Color returns the Color property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#color
+func (i *ImageScrollBar) Color(color string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(color)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetColor sets the Color property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#color
+func (i *ImageScrollBar) SetColor(color string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(color)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// DisabledColor returns the DisabledColor property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#disabledcolor
+func (i *ImageScrollBar) DisabledColor(disabledColor string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(disabledColor)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetDisabledColor sets the DisabledColor property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#disabledcolor
+func (i *ImageScrollBar) SetDisabledColor(disabledColor string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(disabledColor)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// DisplayThumb returns the DisplayThumb property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#displaythumb
+func (i *ImageScrollBar) DisplayThumb(displayThumb bool) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(displayThumb)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetDisplayThumb sets the DisplayThumb property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#displaythumb
+func (i *ImageScrollBar) SetDisplayThumb(displayThumb bool) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(displayThumb)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// FontFamily returns the FontFamily property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#fontfamily
+func (i *ImageScrollBar) FontFamily(fontFamily string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(fontFamily)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetFontFamily sets the FontFamily property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#fontfamily
+func (i *ImageScrollBar) SetFontFamily(fontFamily string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(fontFamily)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// FontOffset returns the FontOffset property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#fontoffset
+func (i *ImageScrollBar) FontOffset(fontOffset js.Value) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(fontOffset)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetFontOffset sets the FontOffset property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#fontoffset
+func (i *ImageScrollBar) SetFontOffset(fontOffset js.Value) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(fontOffset)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// FontSize returns the FontSize property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#fontsize
+func (i *ImageScrollBar) FontSize(fontSize string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(fontSize)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetFontSize sets the FontSize property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#fontsize
+func (i *ImageScrollBar) SetFontSize(fontSize string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(fontSize)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// FontSizeInPixels returns the FontSizeInPixels property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#fontsizeinpixels
+func (i *ImageScrollBar) FontSizeInPixels(fontSizeInPixels float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(fontSizeInPixels)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetFontSizeInPixels sets the FontSizeInPixels property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#fontsizeinpixels
+func (i *ImageScrollBar) SetFontSizeInPixels(fontSizeInPixels float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(fontSizeInPixels)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// FontStyle returns the FontStyle property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#fontstyle
+func (i *ImageScrollBar) FontStyle(fontStyle string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(fontStyle)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetFontStyle sets the FontStyle property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#fontstyle
+func (i *ImageScrollBar) SetFontStyle(fontStyle string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(fontStyle)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// FontWeight returns the FontWeight property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#fontweight
+func (i *ImageScrollBar) FontWeight(fontWeight string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(fontWeight)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetFontWeight sets the FontWeight property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#fontweight
+func (i *ImageScrollBar) SetFontWeight(fontWeight string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(fontWeight)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// HORIZONTAL_ALIGNMENT_CENTER returns the HORIZONTAL_ALIGNMENT_CENTER property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#horizontal_alignment_center
+func (i *ImageScrollBar) HORIZONTAL_ALIGNMENT_CENTER(HORIZONTAL_ALIGNMENT_CENTER float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(HORIZONTAL_ALIGNMENT_CENTER)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetHORIZONTAL_ALIGNMENT_CENTER sets the HORIZONTAL_ALIGNMENT_CENTER property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#horizontal_alignment_center
+func (i *ImageScrollBar) SetHORIZONTAL_ALIGNMENT_CENTER(HORIZONTAL_ALIGNMENT_CENTER float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(HORIZONTAL_ALIGNMENT_CENTER)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// HORIZONTAL_ALIGNMENT_LEFT returns the HORIZONTAL_ALIGNMENT_LEFT property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#horizontal_alignment_left
+func (i *ImageScrollBar) HORIZONTAL_ALIGNMENT_LEFT(HORIZONTAL_ALIGNMENT_LEFT float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(HORIZONTAL_ALIGNMENT_LEFT)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetHORIZONTAL_ALIGNMENT_LEFT sets the HORIZONTAL_ALIGNMENT_LEFT property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#horizontal_alignment_left
+func (i *ImageScrollBar) SetHORIZONTAL_ALIGNMENT_LEFT(HORIZONTAL_ALIGNMENT_LEFT float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(HORIZONTAL_ALIGNMENT_LEFT)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// HORIZONTAL_ALIGNMENT_RIGHT returns the HORIZONTAL_ALIGNMENT_RIGHT property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#horizontal_alignment_right
+func (i *ImageScrollBar) HORIZONTAL_ALIGNMENT_RIGHT(HORIZONTAL_ALIGNMENT_RIGHT float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(HORIZONTAL_ALIGNMENT_RIGHT)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetHORIZONTAL_ALIGNMENT_RIGHT sets the HORIZONTAL_ALIGNMENT_RIGHT property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#horizontal_alignment_right
+func (i *ImageScrollBar) SetHORIZONTAL_ALIGNMENT_RIGHT(HORIZONTAL_ALIGNMENT_RIGHT float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(HORIZONTAL_ALIGNMENT_RIGHT)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// Height returns the Height property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#height
+func (i *ImageScrollBar) Height(height string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(height)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetHeight sets the Height property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#height
+func (i *ImageScrollBar) SetHeight(height string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(height)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// HeightInPixels returns the HeightInPixels property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#heightinpixels
+func (i *ImageScrollBar) HeightInPixels(heightInPixels float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(heightInPixels)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetHeightInPixels sets the HeightInPixels property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#heightinpixels
+func (i *ImageScrollBar) SetHeightInPixels(heightInPixels float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(heightInPixels)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// HorizontalAlignment returns the HorizontalAlignment property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#horizontalalignment
+func (i *ImageScrollBar) HorizontalAlignment(horizontalAlignment float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(horizontalAlignment)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetHorizontalAlignment sets the HorizontalAlignment property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#horizontalalignment
+func (i *ImageScrollBar) SetHorizontalAlignment(horizontalAlignment float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(horizontalAlignment)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// Host returns the Host property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#host
+func (i *ImageScrollBar) Host(host *AdvancedDynamicTexture) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(host.JSObject())
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetHost sets the Host property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#host
+func (i *ImageScrollBar) SetHost(host *AdvancedDynamicTexture) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(host.JSObject())
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// HoverCursor returns the HoverCursor property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#hovercursor
+func (i *ImageScrollBar) HoverCursor(hoverCursor string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(hoverCursor)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetHoverCursor sets the HoverCursor property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#hovercursor
+func (i *ImageScrollBar) SetHoverCursor(hoverCursor string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(hoverCursor)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// IsDirty returns the IsDirty property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#isdirty
+func (i *ImageScrollBar) IsDirty(isDirty bool) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(isDirty)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetIsDirty sets the IsDirty property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#isdirty
+func (i *ImageScrollBar) SetIsDirty(isDirty bool) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(isDirty)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// IsEnabled returns the IsEnabled property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#isenabled
+func (i *ImageScrollBar) IsEnabled(isEnabled bool) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(isEnabled)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetIsEnabled sets the IsEnabled property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#isenabled
+func (i *ImageScrollBar) SetIsEnabled(isEnabled bool) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(isEnabled)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// IsFocusInvisible returns the IsFocusInvisible property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#isfocusinvisible
+func (i *ImageScrollBar) IsFocusInvisible(isFocusInvisible bool) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(isFocusInvisible)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetIsFocusInvisible sets the IsFocusInvisible property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#isfocusinvisible
+func (i *ImageScrollBar) SetIsFocusInvisible(isFocusInvisible bool) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(isFocusInvisible)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// IsHighlighted returns the IsHighlighted property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#ishighlighted
+func (i *ImageScrollBar) IsHighlighted(isHighlighted bool) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(isHighlighted)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetIsHighlighted sets the IsHighlighted property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#ishighlighted
+func (i *ImageScrollBar) SetIsHighlighted(isHighlighted bool) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(isHighlighted)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// IsHitTestVisible returns the IsHitTestVisible property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#ishittestvisible
+func (i *ImageScrollBar) IsHitTestVisible(isHitTestVisible bool) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(isHitTestVisible)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetIsHitTestVisible sets the IsHitTestVisible property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#ishittestvisible
+func (i *ImageScrollBar) SetIsHitTestVisible(isHitTestVisible bool) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(isHitTestVisible)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// IsPointerBlocker returns the IsPointerBlocker property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#ispointerblocker
+func (i *ImageScrollBar) IsPointerBlocker(isPointerBlocker bool) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(isPointerBlocker)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetIsPointerBlocker sets the IsPointerBlocker property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#ispointerblocker
+func (i *ImageScrollBar) SetIsPointerBlocker(isPointerBlocker bool) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(isPointerBlocker)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// IsThumbClamped returns the IsThumbClamped property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#isthumbclamped
+func (i *ImageScrollBar) IsThumbClamped(isThumbClamped bool) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(isThumbClamped)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetIsThumbClamped sets the IsThumbClamped property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#isthumbclamped
+func (i *ImageScrollBar) SetIsThumbClamped(isThumbClamped bool) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(isThumbClamped)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// IsVertical returns the IsVertical property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#isvertical
+func (i *ImageScrollBar) IsVertical(isVertical bool) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(isVertical)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetIsVertical sets the IsVertical property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#isvertical
+func (i *ImageScrollBar) SetIsVertical(isVertical bool) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(isVertical)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// IsVisible returns the IsVisible property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#isvisible
+func (i *ImageScrollBar) IsVisible(isVisible bool) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(isVisible)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetIsVisible sets the IsVisible property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#isvisible
+func (i *ImageScrollBar) SetIsVisible(isVisible bool) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(isVisible)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// Left returns the Left property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#left
+func (i *ImageScrollBar) Left(left string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(left)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetLeft sets the Left property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#left
+func (i *ImageScrollBar) SetLeft(left string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(left)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// LeftInPixels returns the LeftInPixels property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#leftinpixels
+func (i *ImageScrollBar) LeftInPixels(leftInPixels float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(leftInPixels)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetLeftInPixels sets the LeftInPixels property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#leftinpixels
+func (i *ImageScrollBar) SetLeftInPixels(leftInPixels float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(leftInPixels)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetX returns the LinkOffsetX property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#linkoffsetx
+func (i *ImageScrollBar) LinkOffsetX(linkOffsetX string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(linkOffsetX)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetX sets the LinkOffsetX property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#linkoffsetx
+func (i *ImageScrollBar) SetLinkOffsetX(linkOffsetX string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(linkOffsetX)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetXInPixels returns the LinkOffsetXInPixels property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#linkoffsetxinpixels
+func (i *ImageScrollBar) LinkOffsetXInPixels(linkOffsetXInPixels float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(linkOffsetXInPixels)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetXInPixels sets the LinkOffsetXInPixels property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#linkoffsetxinpixels
+func (i *ImageScrollBar) SetLinkOffsetXInPixels(linkOffsetXInPixels float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(linkOffsetXInPixels)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetY returns the LinkOffsetY property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#linkoffsety
+func (i *ImageScrollBar) LinkOffsetY(linkOffsetY string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(linkOffsetY)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetY sets the LinkOffsetY property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#linkoffsety
+func (i *ImageScrollBar) SetLinkOffsetY(linkOffsetY string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(linkOffsetY)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// LinkOffsetYInPixels returns the LinkOffsetYInPixels property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#linkoffsetyinpixels
+func (i *ImageScrollBar) LinkOffsetYInPixels(linkOffsetYInPixels float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(linkOffsetYInPixels)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetLinkOffsetYInPixels sets the LinkOffsetYInPixels property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#linkoffsetyinpixels
+func (i *ImageScrollBar) SetLinkOffsetYInPixels(linkOffsetYInPixels float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(linkOffsetYInPixels)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// LinkedMesh returns the LinkedMesh property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#linkedmesh
+func (i *ImageScrollBar) LinkedMesh(linkedMesh *AbstractMesh) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(linkedMesh.JSObject())
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetLinkedMesh sets the LinkedMesh property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#linkedmesh
+func (i *ImageScrollBar) SetLinkedMesh(linkedMesh *AbstractMesh) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(linkedMesh.JSObject())
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// Maximum returns the Maximum property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#maximum
+func (i *ImageScrollBar) Maximum(maximum float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(maximum)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetMaximum sets the Maximum property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#maximum
+func (i *ImageScrollBar) SetMaximum(maximum float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(maximum)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#metadata
+func (i *ImageScrollBar) Metadata(metadata interface{}) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(metadata)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#metadata
+func (i *ImageScrollBar) SetMetadata(metadata interface{}) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(metadata)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// Minimum returns the Minimum property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#minimum
+func (i *ImageScrollBar) Minimum(minimum float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(minimum)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetMinimum sets the Minimum property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#minimum
+func (i *ImageScrollBar) SetMinimum(minimum float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(minimum)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#name
+func (i *ImageScrollBar) Name(name string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(name)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#name
+func (i *ImageScrollBar) SetName(name string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(name)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// NotRenderable returns the NotRenderable property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#notrenderable
+func (i *ImageScrollBar) NotRenderable(notRenderable bool) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(notRenderable)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetNotRenderable sets the NotRenderable property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#notrenderable
+func (i *ImageScrollBar) SetNotRenderable(notRenderable bool) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(notRenderable)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// OnAfterDrawObservable returns the OnAfterDrawObservable property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#onafterdrawobservable
+func (i *ImageScrollBar) OnAfterDrawObservable(onAfterDrawObservable *Observable) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(onAfterDrawObservable.JSObject())
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetOnAfterDrawObservable sets the OnAfterDrawObservable property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#onafterdrawobservable
+func (i *ImageScrollBar) SetOnAfterDrawObservable(onAfterDrawObservable *Observable) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(onAfterDrawObservable.JSObject())
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeDrawObservable returns the OnBeforeDrawObservable property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#onbeforedrawobservable
+func (i *ImageScrollBar) OnBeforeDrawObservable(onBeforeDrawObservable *Observable) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(onBeforeDrawObservable.JSObject())
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeDrawObservable sets the OnBeforeDrawObservable property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#onbeforedrawobservable
+func (i *ImageScrollBar) SetOnBeforeDrawObservable(onBeforeDrawObservable *Observable) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(onBeforeDrawObservable.JSObject())
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// OnDirtyObservable returns the OnDirtyObservable property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#ondirtyobservable
+func (i *ImageScrollBar) OnDirtyObservable(onDirtyObservable *Observable) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(onDirtyObservable.JSObject())
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetOnDirtyObservable sets the OnDirtyObservable property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#ondirtyobservable
+func (i *ImageScrollBar) SetOnDirtyObservable(onDirtyObservable *Observable) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(onDirtyObservable.JSObject())
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// OnPointerClickObservable returns the OnPointerClickObservable property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#onpointerclickobservable
+func (i *ImageScrollBar) OnPointerClickObservable(onPointerClickObservable *Observable) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(onPointerClickObservable.JSObject())
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerClickObservable sets the OnPointerClickObservable property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#onpointerclickobservable
+func (i *ImageScrollBar) SetOnPointerClickObservable(onPointerClickObservable *Observable) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(onPointerClickObservable.JSObject())
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// OnPointerDownObservable returns the OnPointerDownObservable property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#onpointerdownobservable
+func (i *ImageScrollBar) OnPointerDownObservable(onPointerDownObservable *Observable) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(onPointerDownObservable.JSObject())
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerDownObservable sets the OnPointerDownObservable property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#onpointerdownobservable
+func (i *ImageScrollBar) SetOnPointerDownObservable(onPointerDownObservable *Observable) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(onPointerDownObservable.JSObject())
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// OnPointerEnterObservable returns the OnPointerEnterObservable property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#onpointerenterobservable
+func (i *ImageScrollBar) OnPointerEnterObservable(onPointerEnterObservable *Observable) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(onPointerEnterObservable.JSObject())
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerEnterObservable sets the OnPointerEnterObservable property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#onpointerenterobservable
+func (i *ImageScrollBar) SetOnPointerEnterObservable(onPointerEnterObservable *Observable) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(onPointerEnterObservable.JSObject())
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// OnPointerMoveObservable returns the OnPointerMoveObservable property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#onpointermoveobservable
+func (i *ImageScrollBar) OnPointerMoveObservable(onPointerMoveObservable *Observable) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(onPointerMoveObservable.JSObject())
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerMoveObservable sets the OnPointerMoveObservable property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#onpointermoveobservable
+func (i *ImageScrollBar) SetOnPointerMoveObservable(onPointerMoveObservable *Observable) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(onPointerMoveObservable.JSObject())
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// OnPointerOutObservable returns the OnPointerOutObservable property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#onpointeroutobservable
+func (i *ImageScrollBar) OnPointerOutObservable(onPointerOutObservable *Observable) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(onPointerOutObservable.JSObject())
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerOutObservable sets the OnPointerOutObservable property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#onpointeroutobservable
+func (i *ImageScrollBar) SetOnPointerOutObservable(onPointerOutObservable *Observable) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(onPointerOutObservable.JSObject())
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// OnPointerUpObservable returns the OnPointerUpObservable property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#onpointerupobservable
+func (i *ImageScrollBar) OnPointerUpObservable(onPointerUpObservable *Observable) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(onPointerUpObservable.JSObject())
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetOnPointerUpObservable sets the OnPointerUpObservable property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#onpointerupobservable
+func (i *ImageScrollBar) SetOnPointerUpObservable(onPointerUpObservable *Observable) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(onPointerUpObservable.JSObject())
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// OnValueChangedObservable returns the OnValueChangedObservable property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#onvaluechangedobservable
+func (i *ImageScrollBar) OnValueChangedObservable(onValueChangedObservable *Observable) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(onValueChangedObservable.JSObject())
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetOnValueChangedObservable sets the OnValueChangedObservable property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#onvaluechangedobservable
+func (i *ImageScrollBar) SetOnValueChangedObservable(onValueChangedObservable *Observable) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(onValueChangedObservable.JSObject())
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// PaddingBottom returns the PaddingBottom property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#paddingbottom
+func (i *ImageScrollBar) PaddingBottom(paddingBottom string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(paddingBottom)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingBottom sets the PaddingBottom property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#paddingbottom
+func (i *ImageScrollBar) SetPaddingBottom(paddingBottom string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(paddingBottom)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// PaddingBottomInPixels returns the PaddingBottomInPixels property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#paddingbottominpixels
+func (i *ImageScrollBar) PaddingBottomInPixels(paddingBottomInPixels float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(paddingBottomInPixels)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingBottomInPixels sets the PaddingBottomInPixels property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#paddingbottominpixels
+func (i *ImageScrollBar) SetPaddingBottomInPixels(paddingBottomInPixels float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(paddingBottomInPixels)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// PaddingLeft returns the PaddingLeft property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#paddingleft
+func (i *ImageScrollBar) PaddingLeft(paddingLeft string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(paddingLeft)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingLeft sets the PaddingLeft property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#paddingleft
+func (i *ImageScrollBar) SetPaddingLeft(paddingLeft string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(paddingLeft)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// PaddingLeftInPixels returns the PaddingLeftInPixels property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#paddingleftinpixels
+func (i *ImageScrollBar) PaddingLeftInPixels(paddingLeftInPixels float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(paddingLeftInPixels)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingLeftInPixels sets the PaddingLeftInPixels property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#paddingleftinpixels
+func (i *ImageScrollBar) SetPaddingLeftInPixels(paddingLeftInPixels float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(paddingLeftInPixels)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// PaddingRight returns the PaddingRight property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#paddingright
+func (i *ImageScrollBar) PaddingRight(paddingRight string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(paddingRight)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingRight sets the PaddingRight property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#paddingright
+func (i *ImageScrollBar) SetPaddingRight(paddingRight string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(paddingRight)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// PaddingRightInPixels returns the PaddingRightInPixels property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#paddingrightinpixels
+func (i *ImageScrollBar) PaddingRightInPixels(paddingRightInPixels float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(paddingRightInPixels)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingRightInPixels sets the PaddingRightInPixels property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#paddingrightinpixels
+func (i *ImageScrollBar) SetPaddingRightInPixels(paddingRightInPixels float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(paddingRightInPixels)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// PaddingTop returns the PaddingTop property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#paddingtop
+func (i *ImageScrollBar) PaddingTop(paddingTop string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(paddingTop)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingTop sets the PaddingTop property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#paddingtop
+func (i *ImageScrollBar) SetPaddingTop(paddingTop string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(paddingTop)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// PaddingTopInPixels returns the PaddingTopInPixels property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#paddingtopinpixels
+func (i *ImageScrollBar) PaddingTopInPixels(paddingTopInPixels float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(paddingTopInPixels)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetPaddingTopInPixels sets the PaddingTopInPixels property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#paddingtopinpixels
+func (i *ImageScrollBar) SetPaddingTopInPixels(paddingTopInPixels float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(paddingTopInPixels)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// Parent returns the Parent property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#parent
+func (i *ImageScrollBar) Parent(parent *Container) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(parent.JSObject())
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetParent sets the Parent property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#parent
+func (i *ImageScrollBar) SetParent(parent *Container) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(parent.JSObject())
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// Rotation returns the Rotation property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#rotation
+func (i *ImageScrollBar) Rotation(rotation float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(rotation)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetRotation sets the Rotation property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#rotation
+func (i *ImageScrollBar) SetRotation(rotation float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(rotation)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// ScaleX returns the ScaleX property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#scalex
+func (i *ImageScrollBar) ScaleX(scaleX float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(scaleX)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetScaleX sets the ScaleX property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#scalex
+func (i *ImageScrollBar) SetScaleX(scaleX float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(scaleX)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// ScaleY returns the ScaleY property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#scaley
+func (i *ImageScrollBar) ScaleY(scaleY float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(scaleY)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetScaleY sets the ScaleY property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#scaley
+func (i *ImageScrollBar) SetScaleY(scaleY float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(scaleY)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// ShadowBlur returns the ShadowBlur property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#shadowblur
+func (i *ImageScrollBar) ShadowBlur(shadowBlur float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(shadowBlur)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetShadowBlur sets the ShadowBlur property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#shadowblur
+func (i *ImageScrollBar) SetShadowBlur(shadowBlur float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(shadowBlur)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// ShadowColor returns the ShadowColor property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#shadowcolor
+func (i *ImageScrollBar) ShadowColor(shadowColor string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(shadowColor)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetShadowColor sets the ShadowColor property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#shadowcolor
+func (i *ImageScrollBar) SetShadowColor(shadowColor string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(shadowColor)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// ShadowOffsetX returns the ShadowOffsetX property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#shadowoffsetx
+func (i *ImageScrollBar) ShadowOffsetX(shadowOffsetX float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(shadowOffsetX)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetShadowOffsetX sets the ShadowOffsetX property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#shadowoffsetx
+func (i *ImageScrollBar) SetShadowOffsetX(shadowOffsetX float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(shadowOffsetX)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// ShadowOffsetY returns the ShadowOffsetY property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#shadowoffsety
+func (i *ImageScrollBar) ShadowOffsetY(shadowOffsetY float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(shadowOffsetY)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetShadowOffsetY sets the ShadowOffsetY property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#shadowoffsety
+func (i *ImageScrollBar) SetShadowOffsetY(shadowOffsetY float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(shadowOffsetY)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// Step returns the Step property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#step
+func (i *ImageScrollBar) Step(step float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(step)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetStep sets the Step property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#step
+func (i *ImageScrollBar) SetStep(step float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(step)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// Style returns the Style property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#style
+func (i *ImageScrollBar) Style(style *Style) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(style.JSObject())
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetStyle sets the Style property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#style
+func (i *ImageScrollBar) SetStyle(style *Style) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(style.JSObject())
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// ThumbHeight returns the ThumbHeight property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#thumbheight
+func (i *ImageScrollBar) ThumbHeight(thumbHeight float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(thumbHeight)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetThumbHeight sets the ThumbHeight property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#thumbheight
+func (i *ImageScrollBar) SetThumbHeight(thumbHeight float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(thumbHeight)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// ThumbImage returns the ThumbImage property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#thumbimage
+func (i *ImageScrollBar) ThumbImage(thumbImage *Image) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(thumbImage.JSObject())
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetThumbImage sets the ThumbImage property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#thumbimage
+func (i *ImageScrollBar) SetThumbImage(thumbImage *Image) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(thumbImage.JSObject())
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// ThumbLength returns the ThumbLength property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#thumblength
+func (i *ImageScrollBar) ThumbLength(thumbLength float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(thumbLength)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetThumbLength sets the ThumbLength property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#thumblength
+func (i *ImageScrollBar) SetThumbLength(thumbLength float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(thumbLength)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// ThumbWidth returns the ThumbWidth property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#thumbwidth
+func (i *ImageScrollBar) ThumbWidth(thumbWidth string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(thumbWidth)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetThumbWidth sets the ThumbWidth property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#thumbwidth
+func (i *ImageScrollBar) SetThumbWidth(thumbWidth string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(thumbWidth)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// ThumbWidthInPixels returns the ThumbWidthInPixels property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#thumbwidthinpixels
+func (i *ImageScrollBar) ThumbWidthInPixels(thumbWidthInPixels float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(thumbWidthInPixels)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetThumbWidthInPixels sets the ThumbWidthInPixels property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#thumbwidthinpixels
+func (i *ImageScrollBar) SetThumbWidthInPixels(thumbWidthInPixels float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(thumbWidthInPixels)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// Top returns the Top property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#top
+func (i *ImageScrollBar) Top(top string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(top)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetTop sets the Top property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#top
+func (i *ImageScrollBar) SetTop(top string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(top)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// TopInPixels returns the TopInPixels property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#topinpixels
+func (i *ImageScrollBar) TopInPixels(topInPixels float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(topInPixels)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetTopInPixels sets the TopInPixels property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#topinpixels
+func (i *ImageScrollBar) SetTopInPixels(topInPixels float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(topInPixels)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// TransformCenterX returns the TransformCenterX property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#transformcenterx
+func (i *ImageScrollBar) TransformCenterX(transformCenterX float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(transformCenterX)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetTransformCenterX sets the TransformCenterX property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#transformcenterx
+func (i *ImageScrollBar) SetTransformCenterX(transformCenterX float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(transformCenterX)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// TransformCenterY returns the TransformCenterY property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#transformcentery
+func (i *ImageScrollBar) TransformCenterY(transformCenterY float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(transformCenterY)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetTransformCenterY sets the TransformCenterY property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#transformcentery
+func (i *ImageScrollBar) SetTransformCenterY(transformCenterY float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(transformCenterY)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// TypeName returns the TypeName property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#typename
+func (i *ImageScrollBar) TypeName(typeName string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(typeName)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetTypeName sets the TypeName property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#typename
+func (i *ImageScrollBar) SetTypeName(typeName string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(typeName)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#uniqueid
+func (i *ImageScrollBar) UniqueId(uniqueId float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(uniqueId)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#uniqueid
+func (i *ImageScrollBar) SetUniqueId(uniqueId float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(uniqueId)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// UseBitmapCache returns the UseBitmapCache property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#usebitmapcache
+func (i *ImageScrollBar) UseBitmapCache(useBitmapCache bool) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(useBitmapCache)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetUseBitmapCache sets the UseBitmapCache property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#usebitmapcache
+func (i *ImageScrollBar) SetUseBitmapCache(useBitmapCache bool) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(useBitmapCache)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// VERTICAL_ALIGNMENT_BOTTOM returns the VERTICAL_ALIGNMENT_BOTTOM property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#vertical_alignment_bottom
+func (i *ImageScrollBar) VERTICAL_ALIGNMENT_BOTTOM(VERTICAL_ALIGNMENT_BOTTOM float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(VERTICAL_ALIGNMENT_BOTTOM)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetVERTICAL_ALIGNMENT_BOTTOM sets the VERTICAL_ALIGNMENT_BOTTOM property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#vertical_alignment_bottom
+func (i *ImageScrollBar) SetVERTICAL_ALIGNMENT_BOTTOM(VERTICAL_ALIGNMENT_BOTTOM float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(VERTICAL_ALIGNMENT_BOTTOM)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// VERTICAL_ALIGNMENT_CENTER returns the VERTICAL_ALIGNMENT_CENTER property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#vertical_alignment_center
+func (i *ImageScrollBar) VERTICAL_ALIGNMENT_CENTER(VERTICAL_ALIGNMENT_CENTER float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(VERTICAL_ALIGNMENT_CENTER)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetVERTICAL_ALIGNMENT_CENTER sets the VERTICAL_ALIGNMENT_CENTER property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#vertical_alignment_center
+func (i *ImageScrollBar) SetVERTICAL_ALIGNMENT_CENTER(VERTICAL_ALIGNMENT_CENTER float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(VERTICAL_ALIGNMENT_CENTER)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// VERTICAL_ALIGNMENT_TOP returns the VERTICAL_ALIGNMENT_TOP property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#vertical_alignment_top
+func (i *ImageScrollBar) VERTICAL_ALIGNMENT_TOP(VERTICAL_ALIGNMENT_TOP float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(VERTICAL_ALIGNMENT_TOP)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetVERTICAL_ALIGNMENT_TOP sets the VERTICAL_ALIGNMENT_TOP property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#vertical_alignment_top
+func (i *ImageScrollBar) SetVERTICAL_ALIGNMENT_TOP(VERTICAL_ALIGNMENT_TOP float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(VERTICAL_ALIGNMENT_TOP)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// Value returns the Value property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#value
+func (i *ImageScrollBar) Value(value float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(value)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetValue sets the Value property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#value
+func (i *ImageScrollBar) SetValue(value float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(value)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// VerticalAlignment returns the VerticalAlignment property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#verticalalignment
+func (i *ImageScrollBar) VerticalAlignment(verticalAlignment float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(verticalAlignment)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetVerticalAlignment sets the VerticalAlignment property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#verticalalignment
+func (i *ImageScrollBar) SetVerticalAlignment(verticalAlignment float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(verticalAlignment)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// Width returns the Width property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#width
+func (i *ImageScrollBar) Width(width string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(width)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetWidth sets the Width property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#width
+func (i *ImageScrollBar) SetWidth(width string) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(width)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// WidthInPixels returns the WidthInPixels property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#widthinpixels
+func (i *ImageScrollBar) WidthInPixels(widthInPixels float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(widthInPixels)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetWidthInPixels sets the WidthInPixels property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#widthinpixels
+func (i *ImageScrollBar) SetWidthInPixels(widthInPixels float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(widthInPixels)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// ZIndex returns the ZIndex property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#zindex
+func (i *ImageScrollBar) ZIndex(zIndex float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(zIndex)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+// SetZIndex sets the ZIndex property of class ImageScrollBar.
+//
+// https://doc.babylonjs.com/api/classes/babylon.imagescrollbar#zindex
+func (i *ImageScrollBar) SetZIndex(zIndex float64) *ImageScrollBar {
+	p := ba.ctx.Get("ImageScrollBar").New(zIndex)
+	return ImageScrollBarFromJSObject(p, ba.ctx)
+}
+
+*/

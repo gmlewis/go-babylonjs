@@ -31,8 +31,763 @@ func ReflectionTextureBlockFromJSObject(p js.Value, ctx js.Value) *ReflectionTex
 //
 // https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock
 func (ba *Babylon) NewReflectionTextureBlock(name string) *ReflectionTextureBlock {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	p := ba.ctx.Get("ReflectionTextureBlock").New(args...)
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// AutoConfigure calls the AutoConfigure method on the ReflectionTextureBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#autoconfigure
+func (r *ReflectionTextureBlock) AutoConfigure(material *NodeMaterial) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, material.JSObject())
+
+	r.p.Call("autoConfigure", args...)
+}
+
+// ReflectionTextureBlockBindOpts contains optional parameters for ReflectionTextureBlock.Bind.
+type ReflectionTextureBlockBindOpts struct {
+	Mesh *Mesh
+}
+
+// Bind calls the Bind method on the ReflectionTextureBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#bind
+func (r *ReflectionTextureBlock) Bind(effect *Effect, nodeMaterial *NodeMaterial, opts *ReflectionTextureBlockBindOpts) {
+	if opts == nil {
+		opts = &ReflectionTextureBlockBindOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, effect.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+
+	if opts.Mesh == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Mesh.JSObject())
+	}
+
+	r.p.Call("bind", args...)
+}
+
+// Build calls the Build method on the ReflectionTextureBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#build
+func (r *ReflectionTextureBlock) Build(state *NodeMaterialBuildState, activeBlocks *NodeMaterialBlock) bool {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, state.JSObject())
+	args = append(args, activeBlocks.JSObject())
+
+	retVal := r.p.Call("build", args...)
+	return retVal.Bool()
+}
+
+// ReflectionTextureBlockCloneOpts contains optional parameters for ReflectionTextureBlock.Clone.
+type ReflectionTextureBlockCloneOpts struct {
+	RootUrl *string
+}
+
+// Clone calls the Clone method on the ReflectionTextureBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#clone
+func (r *ReflectionTextureBlock) Clone(scene *Scene, opts *ReflectionTextureBlockCloneOpts) *NodeMaterialBlock {
+	if opts == nil {
+		opts = &ReflectionTextureBlockCloneOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, scene.JSObject())
+
+	if opts.RootUrl == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RootUrl)
+	}
+
+	retVal := r.p.Call("clone", args...)
+	return NodeMaterialBlockFromJSObject(retVal, r.ctx)
+}
+
+// ReflectionTextureBlockConnectToOpts contains optional parameters for ReflectionTextureBlock.ConnectTo.
+type ReflectionTextureBlockConnectToOpts struct {
+	Options js.Value
+}
+
+// ConnectTo calls the ConnectTo method on the ReflectionTextureBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#connectto
+func (r *ReflectionTextureBlock) ConnectTo(other *NodeMaterialBlock, opts *ReflectionTextureBlockConnectToOpts) *ReflectionTextureBlock {
+	if opts == nil {
+		opts = &ReflectionTextureBlockConnectToOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, other.JSObject())
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options)
+	}
+
+	retVal := r.p.Call("connectTo", args...)
+	return ReflectionTextureBlockFromJSObject(retVal, r.ctx)
+}
+
+// Dispose calls the Dispose method on the ReflectionTextureBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#dispose
+func (r *ReflectionTextureBlock) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	r.p.Call("dispose", args...)
+}
+
+// GetClassName calls the GetClassName method on the ReflectionTextureBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#getclassname
+func (r *ReflectionTextureBlock) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// ReflectionTextureBlockGetFirstAvailableInputOpts contains optional parameters for ReflectionTextureBlock.GetFirstAvailableInput.
+type ReflectionTextureBlockGetFirstAvailableInputOpts struct {
+	ForOutput *NodeMaterialConnectionPoint
+}
+
+// GetFirstAvailableInput calls the GetFirstAvailableInput method on the ReflectionTextureBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#getfirstavailableinput
+func (r *ReflectionTextureBlock) GetFirstAvailableInput(opts *ReflectionTextureBlockGetFirstAvailableInputOpts) *NodeMaterialConnectionPoint {
+	if opts == nil {
+		opts = &ReflectionTextureBlockGetFirstAvailableInputOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForOutput == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForOutput.JSObject())
+	}
+
+	retVal := r.p.Call("getFirstAvailableInput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
+}
+
+// ReflectionTextureBlockGetFirstAvailableOutputOpts contains optional parameters for ReflectionTextureBlock.GetFirstAvailableOutput.
+type ReflectionTextureBlockGetFirstAvailableOutputOpts struct {
+	ForBlock *NodeMaterialBlock
+}
+
+// GetFirstAvailableOutput calls the GetFirstAvailableOutput method on the ReflectionTextureBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#getfirstavailableoutput
+func (r *ReflectionTextureBlock) GetFirstAvailableOutput(opts *ReflectionTextureBlockGetFirstAvailableOutputOpts) *NodeMaterialConnectionPoint {
+	if opts == nil {
+		opts = &ReflectionTextureBlockGetFirstAvailableOutputOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.ForBlock == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForBlock.JSObject())
+	}
+
+	retVal := r.p.Call("getFirstAvailableOutput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
+}
+
+// GetInputByName calls the GetInputByName method on the ReflectionTextureBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#getinputbyname
+func (r *ReflectionTextureBlock) GetInputByName(name string) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := r.p.Call("getInputByName", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
+}
+
+// GetOutputByName calls the GetOutputByName method on the ReflectionTextureBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#getoutputbyname
+func (r *ReflectionTextureBlock) GetOutputByName(name string) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, name)
+
+	retVal := r.p.Call("getOutputByName", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
+}
+
+// GetSiblingOutput calls the GetSiblingOutput method on the ReflectionTextureBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#getsiblingoutput
+func (r *ReflectionTextureBlock) GetSiblingOutput(current *NodeMaterialConnectionPoint) *NodeMaterialConnectionPoint {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, current.JSObject())
+
+	retVal := r.p.Call("getSiblingOutput", args...)
+	return NodeMaterialConnectionPointFromJSObject(retVal, r.ctx)
+}
+
+// Initialize calls the Initialize method on the ReflectionTextureBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#initialize
+func (r *ReflectionTextureBlock) Initialize(state *NodeMaterialBuildState) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, state.JSObject())
+
+	r.p.Call("initialize", args...)
+}
+
+// ReflectionTextureBlockInitializeDefinesOpts contains optional parameters for ReflectionTextureBlock.InitializeDefines.
+type ReflectionTextureBlockInitializeDefinesOpts struct {
+	UseInstances *bool
+}
+
+// InitializeDefines calls the InitializeDefines method on the ReflectionTextureBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#initializedefines
+func (r *ReflectionTextureBlock) InitializeDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value, opts *ReflectionTextureBlockInitializeDefinesOpts) {
+	if opts == nil {
+		opts = &ReflectionTextureBlockInitializeDefinesOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	if opts.UseInstances == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseInstances)
+	}
+
+	r.p.Call("initializeDefines", args...)
+}
+
+// IsReady calls the IsReady method on the ReflectionTextureBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#isready
+func (r *ReflectionTextureBlock) IsReady() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// PrepareDefines calls the PrepareDefines method on the ReflectionTextureBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#preparedefines
+func (r *ReflectionTextureBlock) PrepareDefines(mesh *AbstractMesh, nodeMaterial *NodeMaterial, defines js.Value) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+
+	r.p.Call("prepareDefines", args...)
+}
+
+// ProvideFallbacks calls the ProvideFallbacks method on the ReflectionTextureBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#providefallbacks
+func (r *ReflectionTextureBlock) ProvideFallbacks(mesh *AbstractMesh, fallbacks *EffectFallbacks) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, mesh.JSObject())
+	args = append(args, fallbacks.JSObject())
+
+	r.p.Call("provideFallbacks", args...)
+}
+
+// ReflectionTextureBlockRegisterInputOpts contains optional parameters for ReflectionTextureBlock.RegisterInput.
+type ReflectionTextureBlockRegisterInputOpts struct {
+	IsOptional *bool
+	Target     js.Value
+}
+
+// RegisterInput calls the RegisterInput method on the ReflectionTextureBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#registerinput
+func (r *ReflectionTextureBlock) RegisterInput(name string, jsType js.Value, opts *ReflectionTextureBlockRegisterInputOpts) *ReflectionTextureBlock {
+	if opts == nil {
+		opts = &ReflectionTextureBlockRegisterInputOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+2)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	if opts.IsOptional == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.IsOptional)
+	}
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+
+	retVal := r.p.Call("registerInput", args...)
+	return ReflectionTextureBlockFromJSObject(retVal, r.ctx)
+}
+
+// ReflectionTextureBlockRegisterOutputOpts contains optional parameters for ReflectionTextureBlock.RegisterOutput.
+type ReflectionTextureBlockRegisterOutputOpts struct {
+	Target js.Value
+}
+
+// RegisterOutput calls the RegisterOutput method on the ReflectionTextureBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#registeroutput
+func (r *ReflectionTextureBlock) RegisterOutput(name string, jsType js.Value, opts *ReflectionTextureBlockRegisterOutputOpts) *ReflectionTextureBlock {
+	if opts == nil {
+		opts = &ReflectionTextureBlockRegisterOutputOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, name)
+	args = append(args, jsType)
+
+	if opts.Target == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Target)
+	}
+
+	retVal := r.p.Call("registerOutput", args...)
+	return ReflectionTextureBlockFromJSObject(retVal, r.ctx)
+}
+
+// ReplaceRepeatableContent calls the ReplaceRepeatableContent method on the ReflectionTextureBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#replacerepeatablecontent
+func (r *ReflectionTextureBlock) ReplaceRepeatableContent(vertexShaderState *NodeMaterialBuildState, fragmentShaderState *NodeMaterialBuildState, mesh *AbstractMesh, defines js.Value) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, vertexShaderState.JSObject())
+	args = append(args, fragmentShaderState.JSObject())
+	args = append(args, mesh.JSObject())
+	args = append(args, defines)
+
+	r.p.Call("replaceRepeatableContent", args...)
+}
+
+// Serialize calls the Serialize method on the ReflectionTextureBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#serialize
+func (r *ReflectionTextureBlock) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := r.p.Call("serialize", args...)
+	return retVal
+}
+
+// UpdateUniformsAndSamples calls the UpdateUniformsAndSamples method on the ReflectionTextureBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#updateuniformsandsamples
+func (r *ReflectionTextureBlock) UpdateUniformsAndSamples(state *NodeMaterialBuildState, nodeMaterial *NodeMaterial, defines js.Value, uniformBuffers string) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, state.JSObject())
+	args = append(args, nodeMaterial.JSObject())
+	args = append(args, defines)
+	args = append(args, uniformBuffers)
+
+	r.p.Call("updateUniformsAndSamples", args...)
+}
+
+// _deserialize calls the _deserialize method on the ReflectionTextureBlock object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#_deserialize
+func (r *ReflectionTextureBlock) _deserialize(serializationObject interface{}, scene *Scene, rootUrl string) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, serializationObject)
+	args = append(args, scene.JSObject())
+	args = append(args, rootUrl)
+
+	r.p.Call("_deserialize", args...)
+}
+
+/*
+
+// B returns the B property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#b
+func (r *ReflectionTextureBlock) B(b *NodeMaterialConnectionPoint) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(b.JSObject())
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// SetB sets the B property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#b
+func (r *ReflectionTextureBlock) SetB(b *NodeMaterialConnectionPoint) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(b.JSObject())
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// BuildId returns the BuildId property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#buildid
+func (r *ReflectionTextureBlock) BuildId(buildId float64) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(buildId)
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// SetBuildId sets the BuildId property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#buildid
+func (r *ReflectionTextureBlock) SetBuildId(buildId float64) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(buildId)
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// CameraPosition returns the CameraPosition property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#cameraposition
+func (r *ReflectionTextureBlock) CameraPosition(cameraPosition *NodeMaterialConnectionPoint) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(cameraPosition.JSObject())
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// SetCameraPosition sets the CameraPosition property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#cameraposition
+func (r *ReflectionTextureBlock) SetCameraPosition(cameraPosition *NodeMaterialConnectionPoint) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(cameraPosition.JSObject())
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// Comments returns the Comments property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#comments
+func (r *ReflectionTextureBlock) Comments(comments string) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(comments)
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// SetComments sets the Comments property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#comments
+func (r *ReflectionTextureBlock) SetComments(comments string) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(comments)
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// G returns the G property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#g
+func (r *ReflectionTextureBlock) G(g *NodeMaterialConnectionPoint) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(g.JSObject())
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// SetG sets the G property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#g
+func (r *ReflectionTextureBlock) SetG(g *NodeMaterialConnectionPoint) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(g.JSObject())
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// Inputs returns the Inputs property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#inputs
+func (r *ReflectionTextureBlock) Inputs(inputs *NodeMaterialConnectionPoint) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(inputs.JSObject())
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// SetInputs sets the Inputs property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#inputs
+func (r *ReflectionTextureBlock) SetInputs(inputs *NodeMaterialConnectionPoint) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(inputs.JSObject())
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// IsFinalMerger returns the IsFinalMerger property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#isfinalmerger
+func (r *ReflectionTextureBlock) IsFinalMerger(isFinalMerger bool) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(isFinalMerger)
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsFinalMerger sets the IsFinalMerger property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#isfinalmerger
+func (r *ReflectionTextureBlock) SetIsFinalMerger(isFinalMerger bool) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(isFinalMerger)
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// IsInput returns the IsInput property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#isinput
+func (r *ReflectionTextureBlock) IsInput(isInput bool) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(isInput)
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsInput sets the IsInput property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#isinput
+func (r *ReflectionTextureBlock) SetIsInput(isInput bool) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(isInput)
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// IsUnique returns the IsUnique property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#isunique
+func (r *ReflectionTextureBlock) IsUnique(isUnique bool) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(isUnique)
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// SetIsUnique sets the IsUnique property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#isunique
+func (r *ReflectionTextureBlock) SetIsUnique(isUnique bool) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(isUnique)
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#name
+func (r *ReflectionTextureBlock) Name(name string) *ReflectionTextureBlock {
 	p := ba.ctx.Get("ReflectionTextureBlock").New(name)
 	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// SetName sets the Name property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#name
+func (r *ReflectionTextureBlock) SetName(name string) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(name)
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// Outputs returns the Outputs property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#outputs
+func (r *ReflectionTextureBlock) Outputs(outputs *NodeMaterialConnectionPoint) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(outputs.JSObject())
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// SetOutputs sets the Outputs property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#outputs
+func (r *ReflectionTextureBlock) SetOutputs(outputs *NodeMaterialConnectionPoint) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(outputs.JSObject())
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// Position returns the Position property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#position
+func (r *ReflectionTextureBlock) Position(position *NodeMaterialConnectionPoint) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(position.JSObject())
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// SetPosition sets the Position property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#position
+func (r *ReflectionTextureBlock) SetPosition(position *NodeMaterialConnectionPoint) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(position.JSObject())
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// R returns the R property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#r
+func (r *ReflectionTextureBlock) R(r *NodeMaterialConnectionPoint) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(r.JSObject())
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// SetR sets the R property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#r
+func (r *ReflectionTextureBlock) SetR(r *NodeMaterialConnectionPoint) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(r.JSObject())
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// Rgb returns the Rgb property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#rgb
+func (r *ReflectionTextureBlock) Rgb(rgb *NodeMaterialConnectionPoint) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(rgb.JSObject())
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// SetRgb sets the Rgb property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#rgb
+func (r *ReflectionTextureBlock) SetRgb(rgb *NodeMaterialConnectionPoint) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(rgb.JSObject())
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// Target returns the Target property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#target
+func (r *ReflectionTextureBlock) Target(target js.Value) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(target)
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// SetTarget sets the Target property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#target
+func (r *ReflectionTextureBlock) SetTarget(target js.Value) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(target)
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// Texture returns the Texture property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#texture
+func (r *ReflectionTextureBlock) Texture(texture *BaseTexture) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(texture.JSObject())
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// SetTexture sets the Texture property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#texture
+func (r *ReflectionTextureBlock) SetTexture(texture *BaseTexture) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(texture.JSObject())
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#uniqueid
+func (r *ReflectionTextureBlock) UniqueId(uniqueId float64) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(uniqueId)
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#uniqueid
+func (r *ReflectionTextureBlock) SetUniqueId(uniqueId float64) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(uniqueId)
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// View returns the View property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#view
+func (r *ReflectionTextureBlock) View(view *NodeMaterialConnectionPoint) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(view.JSObject())
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// SetView sets the View property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#view
+func (r *ReflectionTextureBlock) SetView(view *NodeMaterialConnectionPoint) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(view.JSObject())
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// World returns the World property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#world
+func (r *ReflectionTextureBlock) World(world *NodeMaterialConnectionPoint) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(world.JSObject())
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// SetWorld sets the World property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#world
+func (r *ReflectionTextureBlock) SetWorld(world *NodeMaterialConnectionPoint) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(world.JSObject())
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// WorldNormal returns the WorldNormal property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#worldnormal
+func (r *ReflectionTextureBlock) WorldNormal(worldNormal *NodeMaterialConnectionPoint) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(worldNormal.JSObject())
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// SetWorldNormal sets the WorldNormal property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#worldnormal
+func (r *ReflectionTextureBlock) SetWorldNormal(worldNormal *NodeMaterialConnectionPoint) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(worldNormal.JSObject())
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// WorldPosition returns the WorldPosition property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#worldposition
+func (r *ReflectionTextureBlock) WorldPosition(worldPosition *NodeMaterialConnectionPoint) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(worldPosition.JSObject())
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+// SetWorldPosition sets the WorldPosition property of class ReflectionTextureBlock.
+//
+// https://doc.babylonjs.com/api/classes/babylon.reflectiontextureblock#worldposition
+func (r *ReflectionTextureBlock) SetWorldPosition(worldPosition *NodeMaterialConnectionPoint) *ReflectionTextureBlock {
+	p := ba.ctx.Get("ReflectionTextureBlock").New(worldPosition.JSObject())
+	return ReflectionTextureBlockFromJSObject(p, ba.ctx)
+}
+
+*/

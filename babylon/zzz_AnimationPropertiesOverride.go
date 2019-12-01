@@ -27,4 +27,54 @@ func AnimationPropertiesOverrideFromJSObject(p js.Value, ctx js.Value) *Animatio
 	return &AnimationPropertiesOverride{p: p, ctx: ctx}
 }
 
-// TODO: methods
+/*
+
+// BlendingSpeed returns the BlendingSpeed property of class AnimationPropertiesOverride.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animationpropertiesoverride#blendingspeed
+func (a *AnimationPropertiesOverride) BlendingSpeed(blendingSpeed float64) *AnimationPropertiesOverride {
+	p := ba.ctx.Get("AnimationPropertiesOverride").New(blendingSpeed)
+	return AnimationPropertiesOverrideFromJSObject(p, ba.ctx)
+}
+
+// SetBlendingSpeed sets the BlendingSpeed property of class AnimationPropertiesOverride.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animationpropertiesoverride#blendingspeed
+func (a *AnimationPropertiesOverride) SetBlendingSpeed(blendingSpeed float64) *AnimationPropertiesOverride {
+	p := ba.ctx.Get("AnimationPropertiesOverride").New(blendingSpeed)
+	return AnimationPropertiesOverrideFromJSObject(p, ba.ctx)
+}
+
+// EnableBlending returns the EnableBlending property of class AnimationPropertiesOverride.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animationpropertiesoverride#enableblending
+func (a *AnimationPropertiesOverride) EnableBlending(enableBlending bool) *AnimationPropertiesOverride {
+	p := ba.ctx.Get("AnimationPropertiesOverride").New(enableBlending)
+	return AnimationPropertiesOverrideFromJSObject(p, ba.ctx)
+}
+
+// SetEnableBlending sets the EnableBlending property of class AnimationPropertiesOverride.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animationpropertiesoverride#enableblending
+func (a *AnimationPropertiesOverride) SetEnableBlending(enableBlending bool) *AnimationPropertiesOverride {
+	p := ba.ctx.Get("AnimationPropertiesOverride").New(enableBlending)
+	return AnimationPropertiesOverrideFromJSObject(p, ba.ctx)
+}
+
+// LoopMode returns the LoopMode property of class AnimationPropertiesOverride.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animationpropertiesoverride#loopmode
+func (a *AnimationPropertiesOverride) LoopMode(loopMode float64) *AnimationPropertiesOverride {
+	p := ba.ctx.Get("AnimationPropertiesOverride").New(loopMode)
+	return AnimationPropertiesOverrideFromJSObject(p, ba.ctx)
+}
+
+// SetLoopMode sets the LoopMode property of class AnimationPropertiesOverride.
+//
+// https://doc.babylonjs.com/api/classes/babylon.animationpropertiesoverride#loopmode
+func (a *AnimationPropertiesOverride) SetLoopMode(loopMode float64) *AnimationPropertiesOverride {
+	p := ba.ctx.Get("AnimationPropertiesOverride").New(loopMode)
+	return AnimationPropertiesOverrideFromJSObject(p, ba.ctx)
+}
+
+*/

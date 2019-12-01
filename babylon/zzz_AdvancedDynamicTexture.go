@@ -31,9 +31,8 @@ func AdvancedDynamicTextureFromJSObject(p js.Value, ctx js.Value) *AdvancedDynam
 
 // NewAdvancedDynamicTextureOpts contains optional parameters for NewAdvancedDynamicTexture.
 type NewAdvancedDynamicTextureOpts struct {
-	GenerateMipMaps *JSBool
-
-	SamplingMode *JSFloat64
+	GenerateMipMaps *bool
+	SamplingMode    *float64
 }
 
 // NewAdvancedDynamicTexture returns a new AdvancedDynamicTexture object.
@@ -44,8 +43,2420 @@ func (ba *Babylon) NewAdvancedDynamicTexture(name string, width float64, height 
 		opts = &NewAdvancedDynamicTextureOpts{}
 	}
 
-	p := ba.ctx.Get("AdvancedDynamicTexture").New(name, width, height, scene.JSObject(), opts.GenerateMipMaps.JSObject(), opts.SamplingMode.JSObject())
+	args := make([]interface{}, 0, 4+2)
+
+	args = append(args, name)
+	args = append(args, width)
+	args = append(args, height)
+	args = append(args, scene.JSObject())
+
+	if opts.GenerateMipMaps == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.GenerateMipMaps)
+	}
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(args...)
 	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// AddControl calls the AddControl method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#addcontrol
+func (a *AdvancedDynamicTexture) AddControl(control *Control) *AdvancedDynamicTexture {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, control.JSObject())
+
+	retVal := a.p.Call("addControl", args...)
+	return AdvancedDynamicTextureFromJSObject(retVal, a.ctx)
+}
+
+// Attach calls the Attach method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#attach
+func (a *AdvancedDynamicTexture) Attach() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	a.p.Call("attach", args...)
+}
+
+// AdvancedDynamicTextureAttachToMeshOpts contains optional parameters for AdvancedDynamicTexture.AttachToMesh.
+type AdvancedDynamicTextureAttachToMeshOpts struct {
+	SupportPointerMove *bool
+}
+
+// AttachToMesh calls the AttachToMesh method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#attachtomesh
+func (a *AdvancedDynamicTexture) AttachToMesh(mesh *AbstractMesh, opts *AdvancedDynamicTextureAttachToMeshOpts) {
+	if opts == nil {
+		opts = &AdvancedDynamicTextureAttachToMeshOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, mesh.JSObject())
+
+	if opts.SupportPointerMove == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SupportPointerMove)
+	}
+
+	a.p.Call("attachToMesh", args...)
+}
+
+// Clear calls the Clear method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#clear
+func (a *AdvancedDynamicTexture) Clear() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	a.p.Call("clear", args...)
+}
+
+// Clone calls the Clone method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#clone
+func (a *AdvancedDynamicTexture) Clone() *DynamicTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("clone", args...)
+	return DynamicTextureFromJSObject(retVal, a.ctx)
+}
+
+// AdvancedDynamicTextureCreateForMeshOpts contains optional parameters for AdvancedDynamicTexture.CreateForMesh.
+type AdvancedDynamicTextureCreateForMeshOpts struct {
+	Width              *float64
+	Height             *float64
+	SupportPointerMove *bool
+	OnlyAlphaTesting   *bool
+}
+
+// CreateForMesh calls the CreateForMesh method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#createformesh
+func (a *AdvancedDynamicTexture) CreateForMesh(mesh *AbstractMesh, opts *AdvancedDynamicTextureCreateForMeshOpts) *AdvancedDynamicTexture {
+	if opts == nil {
+		opts = &AdvancedDynamicTextureCreateForMeshOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+4)
+
+	args = append(args, mesh.JSObject())
+
+	if opts.Width == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Width)
+	}
+	if opts.Height == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Height)
+	}
+	if opts.SupportPointerMove == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SupportPointerMove)
+	}
+	if opts.OnlyAlphaTesting == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.OnlyAlphaTesting)
+	}
+
+	retVal := a.p.Call("CreateForMesh", args...)
+	return AdvancedDynamicTextureFromJSObject(retVal, a.ctx)
+}
+
+// AdvancedDynamicTextureCreateFromBase64StringOpts contains optional parameters for AdvancedDynamicTexture.CreateFromBase64String.
+type AdvancedDynamicTextureCreateFromBase64StringOpts struct {
+	NoMipmap     *bool
+	InvertY      *bool
+	SamplingMode *float64
+	OnLoad       *func()
+	OnError      *func()
+	Format       *float64
+}
+
+// CreateFromBase64String calls the CreateFromBase64String method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#createfrombase64string
+func (a *AdvancedDynamicTexture) CreateFromBase64String(data string, name string, scene *Scene, opts *AdvancedDynamicTextureCreateFromBase64StringOpts) *Texture {
+	if opts == nil {
+		opts = &AdvancedDynamicTextureCreateFromBase64StringOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+6)
+
+	args = append(args, data)
+	args = append(args, name)
+	args = append(args, scene.JSObject())
+
+	if opts.NoMipmap == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoMipmap)
+	}
+	if opts.InvertY == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.InvertY)
+	}
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+	if opts.OnLoad == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnLoad)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+	if opts.Format == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Format)
+	}
+
+	retVal := a.p.Call("CreateFromBase64String", args...)
+	return TextureFromJSObject(retVal, a.ctx)
+}
+
+// AdvancedDynamicTextureCreateFullscreenUIOpts contains optional parameters for AdvancedDynamicTexture.CreateFullscreenUI.
+type AdvancedDynamicTextureCreateFullscreenUIOpts struct {
+	Foreground *bool
+	Scene      *Scene
+	Sampling   *float64
+}
+
+// CreateFullscreenUI calls the CreateFullscreenUI method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#createfullscreenui
+func (a *AdvancedDynamicTexture) CreateFullscreenUI(name string, opts *AdvancedDynamicTextureCreateFullscreenUIOpts) *AdvancedDynamicTexture {
+	if opts == nil {
+		opts = &AdvancedDynamicTextureCreateFullscreenUIOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, name)
+
+	if opts.Foreground == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Foreground)
+	}
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+	if opts.Sampling == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Sampling)
+	}
+
+	retVal := a.p.Call("CreateFullscreenUI", args...)
+	return AdvancedDynamicTextureFromJSObject(retVal, a.ctx)
+}
+
+// CreateStyle calls the CreateStyle method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#createstyle
+func (a *AdvancedDynamicTexture) CreateStyle() *Style {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("createStyle", args...)
+	return StyleFromJSObject(retVal, a.ctx)
+}
+
+// Dispose calls the Dispose method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#dispose
+func (a *AdvancedDynamicTexture) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	a.p.Call("dispose", args...)
+}
+
+// AdvancedDynamicTextureDrawTextOpts contains optional parameters for AdvancedDynamicTexture.DrawText.
+type AdvancedDynamicTextureDrawTextOpts struct {
+	InvertY *bool
+	Update  *bool
+}
+
+// DrawText calls the DrawText method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#drawtext
+func (a *AdvancedDynamicTexture) DrawText(text string, x float64, y float64, font string, color string, clearColor string, opts *AdvancedDynamicTextureDrawTextOpts) {
+	if opts == nil {
+		opts = &AdvancedDynamicTextureDrawTextOpts{}
+	}
+
+	args := make([]interface{}, 0, 6+2)
+
+	args = append(args, text)
+	args = append(args, x)
+	args = append(args, y)
+	args = append(args, font)
+	args = append(args, color)
+	args = append(args, clearColor)
+
+	if opts.InvertY == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.InvertY)
+	}
+	if opts.Update == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Update)
+	}
+
+	a.p.Call("drawText", args...)
+}
+
+// AdvancedDynamicTextureExecuteOnAllControlsOpts contains optional parameters for AdvancedDynamicTexture.ExecuteOnAllControls.
+type AdvancedDynamicTextureExecuteOnAllControlsOpts struct {
+	Container *Container
+}
+
+// ExecuteOnAllControls calls the ExecuteOnAllControls method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#executeonallcontrols
+func (a *AdvancedDynamicTexture) ExecuteOnAllControls(jsFunc func(), opts *AdvancedDynamicTextureExecuteOnAllControlsOpts) {
+	if opts == nil {
+		opts = &AdvancedDynamicTextureExecuteOnAllControlsOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, jsFunc)
+
+	if opts.Container == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Container.JSObject())
+	}
+
+	a.p.Call("executeOnAllControls", args...)
+}
+
+// GetBaseSize calls the GetBaseSize method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#getbasesize
+func (a *AdvancedDynamicTexture) GetBaseSize() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("getBaseSize", args...)
+	return retVal
+}
+
+// GetChildren calls the GetChildren method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#getchildren
+func (a *AdvancedDynamicTexture) GetChildren() *[]Container {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("getChildren", args...)
+	return []ContainerFromJSObject(retVal, a.ctx)
+}
+
+// GetClassName calls the GetClassName method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#getclassname
+func (a *AdvancedDynamicTexture) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetContext calls the GetContext method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#getcontext
+func (a *AdvancedDynamicTexture) GetContext() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("getContext", args...)
+	return retVal
+}
+
+// AdvancedDynamicTextureGetDescendantsOpts contains optional parameters for AdvancedDynamicTexture.GetDescendants.
+type AdvancedDynamicTextureGetDescendantsOpts struct {
+	DirectDescendantsOnly *bool
+	Predicate             *func()
+}
+
+// GetDescendants calls the GetDescendants method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#getdescendants
+func (a *AdvancedDynamicTexture) GetDescendants(opts *AdvancedDynamicTextureGetDescendantsOpts) *Control {
+	if opts == nil {
+		opts = &AdvancedDynamicTextureGetDescendantsOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.DirectDescendantsOnly == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DirectDescendantsOnly)
+	}
+	if opts.Predicate == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Predicate)
+	}
+
+	retVal := a.p.Call("getDescendants", args...)
+	return ControlFromJSObject(retVal, a.ctx)
+}
+
+// GetInternalTexture calls the GetInternalTexture method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#getinternaltexture
+func (a *AdvancedDynamicTexture) GetInternalTexture() *InternalTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("getInternalTexture", args...)
+	return InternalTextureFromJSObject(retVal, a.ctx)
+}
+
+// GetProjectedPosition calls the GetProjectedPosition method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#getprojectedposition
+func (a *AdvancedDynamicTexture) GetProjectedPosition(position *Vector3, worldMatrix *Matrix) *Vector2 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, position.JSObject())
+	args = append(args, worldMatrix.JSObject())
+
+	retVal := a.p.Call("getProjectedPosition", args...)
+	return Vector2FromJSObject(retVal, a.ctx)
+}
+
+// GetReflectionTextureMatrix calls the GetReflectionTextureMatrix method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#getreflectiontexturematrix
+func (a *AdvancedDynamicTexture) GetReflectionTextureMatrix() *Matrix {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("getReflectionTextureMatrix", args...)
+	return MatrixFromJSObject(retVal, a.ctx)
+}
+
+// GetScene calls the GetScene method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#getscene
+func (a *AdvancedDynamicTexture) GetScene() *Scene {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("getScene", args...)
+	return SceneFromJSObject(retVal, a.ctx)
+}
+
+// GetSize calls the GetSize method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#getsize
+func (a *AdvancedDynamicTexture) GetSize() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("getSize", args...)
+	return retVal
+}
+
+// AdvancedDynamicTextureGetTextureMatrixOpts contains optional parameters for AdvancedDynamicTexture.GetTextureMatrix.
+type AdvancedDynamicTextureGetTextureMatrixOpts struct {
+	UBase *float64
+}
+
+// GetTextureMatrix calls the GetTextureMatrix method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#gettexturematrix
+func (a *AdvancedDynamicTexture) GetTextureMatrix(opts *AdvancedDynamicTextureGetTextureMatrixOpts) *Matrix {
+	if opts == nil {
+		opts = &AdvancedDynamicTextureGetTextureMatrixOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.UBase == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UBase)
+	}
+
+	retVal := a.p.Call("getTextureMatrix", args...)
+	return MatrixFromJSObject(retVal, a.ctx)
+}
+
+// InvalidateRect calls the InvalidateRect method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#invalidaterect
+func (a *AdvancedDynamicTexture) InvalidateRect(invalidMinX float64, invalidMinY float64, invalidMaxX float64, invalidMaxY float64) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, invalidMinX)
+	args = append(args, invalidMinY)
+	args = append(args, invalidMaxX)
+	args = append(args, invalidMaxY)
+
+	a.p.Call("invalidateRect", args...)
+}
+
+// IsReady calls the IsReady method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#isready
+func (a *AdvancedDynamicTexture) IsReady() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("isReady", args...)
+	return retVal.Bool()
+}
+
+// IsReadyOrNotBlocking calls the IsReadyOrNotBlocking method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#isreadyornotblocking
+func (a *AdvancedDynamicTexture) IsReadyOrNotBlocking() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("isReadyOrNotBlocking", args...)
+	return retVal.Bool()
+}
+
+// AdvancedDynamicTextureLoadFromDataStringOpts contains optional parameters for AdvancedDynamicTexture.LoadFromDataString.
+type AdvancedDynamicTextureLoadFromDataStringOpts struct {
+	DeleteBuffer *bool
+	NoMipmap     *bool
+	InvertY      *bool
+	SamplingMode *float64
+	OnLoad       *func()
+	OnError      *func()
+	Format       *float64
+}
+
+// LoadFromDataString calls the LoadFromDataString method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#loadfromdatastring
+func (a *AdvancedDynamicTexture) LoadFromDataString(name string, buffer interface{}, scene *Scene, opts *AdvancedDynamicTextureLoadFromDataStringOpts) *Texture {
+	if opts == nil {
+		opts = &AdvancedDynamicTextureLoadFromDataStringOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+7)
+
+	args = append(args, name)
+	args = append(args, buffer)
+	args = append(args, scene.JSObject())
+
+	if opts.DeleteBuffer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DeleteBuffer)
+	}
+	if opts.NoMipmap == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoMipmap)
+	}
+	if opts.InvertY == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.InvertY)
+	}
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+	if opts.OnLoad == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnLoad)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+	if opts.Format == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Format)
+	}
+
+	retVal := a.p.Call("LoadFromDataString", args...)
+	return TextureFromJSObject(retVal, a.ctx)
+}
+
+// MarkAsDirty calls the MarkAsDirty method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#markasdirty
+func (a *AdvancedDynamicTexture) MarkAsDirty() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	a.p.Call("markAsDirty", args...)
+}
+
+// MoveFocusToControl calls the MoveFocusToControl method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#movefocustocontrol
+func (a *AdvancedDynamicTexture) MoveFocusToControl(control js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, control)
+
+	a.p.Call("moveFocusToControl", args...)
+}
+
+// Parse calls the Parse method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#parse
+func (a *AdvancedDynamicTexture) Parse(parsedTexture interface{}, scene *Scene, rootUrl string) *BaseTexture {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, parsedTexture)
+	args = append(args, scene.JSObject())
+	args = append(args, rootUrl)
+
+	retVal := a.p.Call("Parse", args...)
+	return BaseTextureFromJSObject(retVal, a.ctx)
+}
+
+// AdvancedDynamicTextureReadPixelsOpts contains optional parameters for AdvancedDynamicTexture.ReadPixels.
+type AdvancedDynamicTextureReadPixelsOpts struct {
+	FaceIndex *float64
+	Level     *float64
+	Buffer    js.Value
+}
+
+// ReadPixels calls the ReadPixels method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#readpixels
+func (a *AdvancedDynamicTexture) ReadPixels(opts *AdvancedDynamicTextureReadPixelsOpts) js.Value {
+	if opts == nil {
+		opts = &AdvancedDynamicTextureReadPixelsOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+3)
+
+	if opts.FaceIndex == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FaceIndex)
+	}
+	if opts.Level == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Level)
+	}
+	if opts.Buffer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Buffer)
+	}
+
+	retVal := a.p.Call("readPixels", args...)
+	return retVal
+}
+
+// RegisterClipboardEvents calls the RegisterClipboardEvents method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#registerclipboardevents
+func (a *AdvancedDynamicTexture) RegisterClipboardEvents() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	a.p.Call("registerClipboardEvents", args...)
+}
+
+// ReleaseInternalTexture calls the ReleaseInternalTexture method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#releaseinternaltexture
+func (a *AdvancedDynamicTexture) ReleaseInternalTexture() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	a.p.Call("releaseInternalTexture", args...)
+}
+
+// RemoveControl calls the RemoveControl method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#removecontrol
+func (a *AdvancedDynamicTexture) RemoveControl(control *Control) *AdvancedDynamicTexture {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, control.JSObject())
+
+	retVal := a.p.Call("removeControl", args...)
+	return AdvancedDynamicTextureFromJSObject(retVal, a.ctx)
+}
+
+// Scale calls the Scale method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#scale
+func (a *AdvancedDynamicTexture) Scale(ratio float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, ratio)
+
+	a.p.Call("scale", args...)
+}
+
+// ScaleTo calls the ScaleTo method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#scaleto
+func (a *AdvancedDynamicTexture) ScaleTo(width float64, height float64) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, width)
+	args = append(args, height)
+
+	a.p.Call("scaleTo", args...)
+}
+
+// Serialize calls the Serialize method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#serialize
+func (a *AdvancedDynamicTexture) Serialize() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("serialize", args...)
+	return retVal
+}
+
+// ToString calls the ToString method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#tostring
+func (a *AdvancedDynamicTexture) ToString() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("toString", args...)
+	return retVal.String()
+}
+
+// UnRegisterClipboardEvents calls the UnRegisterClipboardEvents method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#unregisterclipboardevents
+func (a *AdvancedDynamicTexture) UnRegisterClipboardEvents() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	a.p.Call("unRegisterClipboardEvents", args...)
+}
+
+// AdvancedDynamicTextureUpdateOpts contains optional parameters for AdvancedDynamicTexture.Update.
+type AdvancedDynamicTextureUpdateOpts struct {
+	InvertY     *bool
+	PremulAlpha *bool
+}
+
+// Update calls the Update method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#update
+func (a *AdvancedDynamicTexture) Update(opts *AdvancedDynamicTextureUpdateOpts) {
+	if opts == nil {
+		opts = &AdvancedDynamicTextureUpdateOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+2)
+
+	if opts.InvertY == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.InvertY)
+	}
+	if opts.PremulAlpha == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.PremulAlpha)
+	}
+
+	a.p.Call("update", args...)
+}
+
+// UpdateSamplingMode calls the UpdateSamplingMode method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#updatesamplingmode
+func (a *AdvancedDynamicTexture) UpdateSamplingMode(samplingMode float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, samplingMode)
+
+	a.p.Call("updateSamplingMode", args...)
+}
+
+// AdvancedDynamicTextureUpdateURLOpts contains optional parameters for AdvancedDynamicTexture.UpdateURL.
+type AdvancedDynamicTextureUpdateURLOpts struct {
+	Buffer *string
+	OnLoad *func()
+}
+
+// UpdateURL calls the UpdateURL method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#updateurl
+func (a *AdvancedDynamicTexture) UpdateURL(url string, opts *AdvancedDynamicTextureUpdateURLOpts) {
+	if opts == nil {
+		opts = &AdvancedDynamicTextureUpdateURLOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, url)
+
+	if opts.Buffer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Buffer)
+	}
+	if opts.OnLoad == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnLoad)
+	}
+
+	a.p.Call("updateURL", args...)
+}
+
+// WhenAllReady calls the WhenAllReady method on the AdvancedDynamicTexture object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#whenallready
+func (a *AdvancedDynamicTexture) WhenAllReady(textures *BaseTexture, callback func()) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, textures.JSObject())
+	args = append(args, callback)
+
+	a.p.Call("WhenAllReady", args...)
+}
+
+/*
+
+// Animations returns the Animations property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#animations
+func (a *AdvancedDynamicTexture) Animations(animations *Animation) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(animations.JSObject())
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetAnimations sets the Animations property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#animations
+func (a *AdvancedDynamicTexture) SetAnimations(animations *Animation) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(animations.JSObject())
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// AnisotropicFilteringLevel returns the AnisotropicFilteringLevel property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#anisotropicfilteringlevel
+func (a *AdvancedDynamicTexture) AnisotropicFilteringLevel(anisotropicFilteringLevel float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(anisotropicFilteringLevel)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetAnisotropicFilteringLevel sets the AnisotropicFilteringLevel property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#anisotropicfilteringlevel
+func (a *AdvancedDynamicTexture) SetAnisotropicFilteringLevel(anisotropicFilteringLevel float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(anisotropicFilteringLevel)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// BILINEAR_SAMPLINGMODE returns the BILINEAR_SAMPLINGMODE property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#bilinear_samplingmode
+func (a *AdvancedDynamicTexture) BILINEAR_SAMPLINGMODE(BILINEAR_SAMPLINGMODE float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(BILINEAR_SAMPLINGMODE)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetBILINEAR_SAMPLINGMODE sets the BILINEAR_SAMPLINGMODE property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#bilinear_samplingmode
+func (a *AdvancedDynamicTexture) SetBILINEAR_SAMPLINGMODE(BILINEAR_SAMPLINGMODE float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(BILINEAR_SAMPLINGMODE)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// Background returns the Background property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#background
+func (a *AdvancedDynamicTexture) Background(background string) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(background)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetBackground sets the Background property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#background
+func (a *AdvancedDynamicTexture) SetBackground(background string) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(background)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// CLAMP_ADDRESSMODE returns the CLAMP_ADDRESSMODE property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#clamp_addressmode
+func (a *AdvancedDynamicTexture) CLAMP_ADDRESSMODE(CLAMP_ADDRESSMODE float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(CLAMP_ADDRESSMODE)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCLAMP_ADDRESSMODE sets the CLAMP_ADDRESSMODE property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#clamp_addressmode
+func (a *AdvancedDynamicTexture) SetCLAMP_ADDRESSMODE(CLAMP_ADDRESSMODE float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(CLAMP_ADDRESSMODE)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// CUBIC_MODE returns the CUBIC_MODE property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#cubic_mode
+func (a *AdvancedDynamicTexture) CUBIC_MODE(CUBIC_MODE float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(CUBIC_MODE)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCUBIC_MODE sets the CUBIC_MODE property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#cubic_mode
+func (a *AdvancedDynamicTexture) SetCUBIC_MODE(CUBIC_MODE float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(CUBIC_MODE)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// CanRescale returns the CanRescale property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#canrescale
+func (a *AdvancedDynamicTexture) CanRescale(canRescale bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(canRescale)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCanRescale sets the CanRescale property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#canrescale
+func (a *AdvancedDynamicTexture) SetCanRescale(canRescale bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(canRescale)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// ClipboardData returns the ClipboardData property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#clipboarddata
+func (a *AdvancedDynamicTexture) ClipboardData(clipboardData string) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(clipboardData)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetClipboardData sets the ClipboardData property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#clipboarddata
+func (a *AdvancedDynamicTexture) SetClipboardData(clipboardData string) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(clipboardData)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// CoordinatesIndex returns the CoordinatesIndex property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#coordinatesindex
+func (a *AdvancedDynamicTexture) CoordinatesIndex(coordinatesIndex float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(coordinatesIndex)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCoordinatesIndex sets the CoordinatesIndex property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#coordinatesindex
+func (a *AdvancedDynamicTexture) SetCoordinatesIndex(coordinatesIndex float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(coordinatesIndex)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// CoordinatesMode returns the CoordinatesMode property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#coordinatesmode
+func (a *AdvancedDynamicTexture) CoordinatesMode(coordinatesMode float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(coordinatesMode)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetCoordinatesMode sets the CoordinatesMode property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#coordinatesmode
+func (a *AdvancedDynamicTexture) SetCoordinatesMode(coordinatesMode float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(coordinatesMode)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// DEFAULT_ANISOTROPIC_FILTERING_LEVEL returns the DEFAULT_ANISOTROPIC_FILTERING_LEVEL property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#default_anisotropic_filtering_level
+func (a *AdvancedDynamicTexture) DEFAULT_ANISOTROPIC_FILTERING_LEVEL(DEFAULT_ANISOTROPIC_FILTERING_LEVEL float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(DEFAULT_ANISOTROPIC_FILTERING_LEVEL)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetDEFAULT_ANISOTROPIC_FILTERING_LEVEL sets the DEFAULT_ANISOTROPIC_FILTERING_LEVEL property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#default_anisotropic_filtering_level
+func (a *AdvancedDynamicTexture) SetDEFAULT_ANISOTROPIC_FILTERING_LEVEL(DEFAULT_ANISOTROPIC_FILTERING_LEVEL float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(DEFAULT_ANISOTROPIC_FILTERING_LEVEL)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// DelayLoadState returns the DelayLoadState property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#delayloadstate
+func (a *AdvancedDynamicTexture) DelayLoadState(delayLoadState float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(delayLoadState)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetDelayLoadState sets the DelayLoadState property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#delayloadstate
+func (a *AdvancedDynamicTexture) SetDelayLoadState(delayLoadState float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(delayLoadState)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// EQUIRECTANGULAR_MODE returns the EQUIRECTANGULAR_MODE property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#equirectangular_mode
+func (a *AdvancedDynamicTexture) EQUIRECTANGULAR_MODE(EQUIRECTANGULAR_MODE float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(EQUIRECTANGULAR_MODE)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetEQUIRECTANGULAR_MODE sets the EQUIRECTANGULAR_MODE property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#equirectangular_mode
+func (a *AdvancedDynamicTexture) SetEQUIRECTANGULAR_MODE(EQUIRECTANGULAR_MODE float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(EQUIRECTANGULAR_MODE)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// EXPLICIT_MODE returns the EXPLICIT_MODE property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#explicit_mode
+func (a *AdvancedDynamicTexture) EXPLICIT_MODE(EXPLICIT_MODE float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(EXPLICIT_MODE)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetEXPLICIT_MODE sets the EXPLICIT_MODE property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#explicit_mode
+func (a *AdvancedDynamicTexture) SetEXPLICIT_MODE(EXPLICIT_MODE float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(EXPLICIT_MODE)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// FIXED_EQUIRECTANGULAR_MIRRORED_MODE returns the FIXED_EQUIRECTANGULAR_MIRRORED_MODE property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#fixed_equirectangular_mirrored_mode
+func (a *AdvancedDynamicTexture) FIXED_EQUIRECTANGULAR_MIRRORED_MODE(FIXED_EQUIRECTANGULAR_MIRRORED_MODE float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(FIXED_EQUIRECTANGULAR_MIRRORED_MODE)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetFIXED_EQUIRECTANGULAR_MIRRORED_MODE sets the FIXED_EQUIRECTANGULAR_MIRRORED_MODE property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#fixed_equirectangular_mirrored_mode
+func (a *AdvancedDynamicTexture) SetFIXED_EQUIRECTANGULAR_MIRRORED_MODE(FIXED_EQUIRECTANGULAR_MIRRORED_MODE float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(FIXED_EQUIRECTANGULAR_MIRRORED_MODE)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// FIXED_EQUIRECTANGULAR_MODE returns the FIXED_EQUIRECTANGULAR_MODE property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#fixed_equirectangular_mode
+func (a *AdvancedDynamicTexture) FIXED_EQUIRECTANGULAR_MODE(FIXED_EQUIRECTANGULAR_MODE float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(FIXED_EQUIRECTANGULAR_MODE)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetFIXED_EQUIRECTANGULAR_MODE sets the FIXED_EQUIRECTANGULAR_MODE property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#fixed_equirectangular_mode
+func (a *AdvancedDynamicTexture) SetFIXED_EQUIRECTANGULAR_MODE(FIXED_EQUIRECTANGULAR_MODE float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(FIXED_EQUIRECTANGULAR_MODE)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// FocusedControl returns the FocusedControl property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#focusedcontrol
+func (a *AdvancedDynamicTexture) FocusedControl(focusedControl js.Value) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(focusedControl)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetFocusedControl sets the FocusedControl property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#focusedcontrol
+func (a *AdvancedDynamicTexture) SetFocusedControl(focusedControl js.Value) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(focusedControl)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// GammaSpace returns the GammaSpace property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#gammaspace
+func (a *AdvancedDynamicTexture) GammaSpace(gammaSpace bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(gammaSpace)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetGammaSpace sets the GammaSpace property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#gammaspace
+func (a *AdvancedDynamicTexture) SetGammaSpace(gammaSpace bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(gammaSpace)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// GetAlphaFromRGB returns the GetAlphaFromRGB property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#getalphafromrgb
+func (a *AdvancedDynamicTexture) GetAlphaFromRGB(getAlphaFromRGB bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(getAlphaFromRGB)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetGetAlphaFromRGB sets the GetAlphaFromRGB property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#getalphafromrgb
+func (a *AdvancedDynamicTexture) SetGetAlphaFromRGB(getAlphaFromRGB bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(getAlphaFromRGB)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// HasAlpha returns the HasAlpha property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#hasalpha
+func (a *AdvancedDynamicTexture) HasAlpha(hasAlpha bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(hasAlpha)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetHasAlpha sets the HasAlpha property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#hasalpha
+func (a *AdvancedDynamicTexture) SetHasAlpha(hasAlpha bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(hasAlpha)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// INVCUBIC_MODE returns the INVCUBIC_MODE property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#invcubic_mode
+func (a *AdvancedDynamicTexture) INVCUBIC_MODE(INVCUBIC_MODE float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(INVCUBIC_MODE)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetINVCUBIC_MODE sets the INVCUBIC_MODE property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#invcubic_mode
+func (a *AdvancedDynamicTexture) SetINVCUBIC_MODE(INVCUBIC_MODE float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(INVCUBIC_MODE)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// IdealHeight returns the IdealHeight property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#idealheight
+func (a *AdvancedDynamicTexture) IdealHeight(idealHeight float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(idealHeight)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIdealHeight sets the IdealHeight property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#idealheight
+func (a *AdvancedDynamicTexture) SetIdealHeight(idealHeight float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(idealHeight)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// IdealWidth returns the IdealWidth property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#idealwidth
+func (a *AdvancedDynamicTexture) IdealWidth(idealWidth float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(idealWidth)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIdealWidth sets the IdealWidth property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#idealwidth
+func (a *AdvancedDynamicTexture) SetIdealWidth(idealWidth float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(idealWidth)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// InspectableCustomProperties returns the InspectableCustomProperties property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#inspectablecustomproperties
+func (a *AdvancedDynamicTexture) InspectableCustomProperties(inspectableCustomProperties *IInspectable) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(inspectableCustomProperties.JSObject())
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetInspectableCustomProperties sets the InspectableCustomProperties property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#inspectablecustomproperties
+func (a *AdvancedDynamicTexture) SetInspectableCustomProperties(inspectableCustomProperties *IInspectable) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(inspectableCustomProperties.JSObject())
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// InvertY returns the InvertY property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#inverty
+func (a *AdvancedDynamicTexture) InvertY(invertY bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(invertY)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetInvertY sets the InvertY property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#inverty
+func (a *AdvancedDynamicTexture) SetInvertY(invertY bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(invertY)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// InvertZ returns the InvertZ property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#invertz
+func (a *AdvancedDynamicTexture) InvertZ(invertZ bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(invertZ)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetInvertZ sets the InvertZ property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#invertz
+func (a *AdvancedDynamicTexture) SetInvertZ(invertZ bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(invertZ)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// IrradianceTexture returns the IrradianceTexture property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#irradiancetexture
+func (a *AdvancedDynamicTexture) IrradianceTexture(irradianceTexture *BaseTexture) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(irradianceTexture.JSObject())
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIrradianceTexture sets the IrradianceTexture property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#irradiancetexture
+func (a *AdvancedDynamicTexture) SetIrradianceTexture(irradianceTexture *BaseTexture) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(irradianceTexture.JSObject())
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// Is2DArray returns the Is2DArray property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#is2darray
+func (a *AdvancedDynamicTexture) Is2DArray(is2DArray bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(is2DArray)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIs2DArray sets the Is2DArray property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#is2darray
+func (a *AdvancedDynamicTexture) SetIs2DArray(is2DArray bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(is2DArray)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// Is3D returns the Is3D property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#is3d
+func (a *AdvancedDynamicTexture) Is3D(is3D bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(is3D)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIs3D sets the Is3D property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#is3d
+func (a *AdvancedDynamicTexture) SetIs3D(is3D bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(is3D)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// IsBlocking returns the IsBlocking property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#isblocking
+func (a *AdvancedDynamicTexture) IsBlocking(isBlocking bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(isBlocking)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsBlocking sets the IsBlocking property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#isblocking
+func (a *AdvancedDynamicTexture) SetIsBlocking(isBlocking bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(isBlocking)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// IsCube returns the IsCube property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#iscube
+func (a *AdvancedDynamicTexture) IsCube(isCube bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(isCube)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsCube sets the IsCube property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#iscube
+func (a *AdvancedDynamicTexture) SetIsCube(isCube bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(isCube)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// IsForeground returns the IsForeground property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#isforeground
+func (a *AdvancedDynamicTexture) IsForeground(isForeground bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(isForeground)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsForeground sets the IsForeground property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#isforeground
+func (a *AdvancedDynamicTexture) SetIsForeground(isForeground bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(isForeground)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// IsRGBD returns the IsRGBD property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#isrgbd
+func (a *AdvancedDynamicTexture) IsRGBD(isRGBD bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(isRGBD)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsRGBD sets the IsRGBD property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#isrgbd
+func (a *AdvancedDynamicTexture) SetIsRGBD(isRGBD bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(isRGBD)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// IsRenderTarget returns the IsRenderTarget property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#isrendertarget
+func (a *AdvancedDynamicTexture) IsRenderTarget(isRenderTarget bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(isRenderTarget)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetIsRenderTarget sets the IsRenderTarget property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#isrendertarget
+func (a *AdvancedDynamicTexture) SetIsRenderTarget(isRenderTarget bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(isRenderTarget)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_LINEAR returns the LINEAR_LINEAR property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#linear_linear
+func (a *AdvancedDynamicTexture) LINEAR_LINEAR(LINEAR_LINEAR float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(LINEAR_LINEAR)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_LINEAR sets the LINEAR_LINEAR property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#linear_linear
+func (a *AdvancedDynamicTexture) SetLINEAR_LINEAR(LINEAR_LINEAR float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(LINEAR_LINEAR)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_LINEAR_MIPLINEAR returns the LINEAR_LINEAR_MIPLINEAR property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#linear_linear_miplinear
+func (a *AdvancedDynamicTexture) LINEAR_LINEAR_MIPLINEAR(LINEAR_LINEAR_MIPLINEAR float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(LINEAR_LINEAR_MIPLINEAR)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_LINEAR_MIPLINEAR sets the LINEAR_LINEAR_MIPLINEAR property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#linear_linear_miplinear
+func (a *AdvancedDynamicTexture) SetLINEAR_LINEAR_MIPLINEAR(LINEAR_LINEAR_MIPLINEAR float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(LINEAR_LINEAR_MIPLINEAR)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_LINEAR_MIPNEAREST returns the LINEAR_LINEAR_MIPNEAREST property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#linear_linear_mipnearest
+func (a *AdvancedDynamicTexture) LINEAR_LINEAR_MIPNEAREST(LINEAR_LINEAR_MIPNEAREST float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(LINEAR_LINEAR_MIPNEAREST)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_LINEAR_MIPNEAREST sets the LINEAR_LINEAR_MIPNEAREST property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#linear_linear_mipnearest
+func (a *AdvancedDynamicTexture) SetLINEAR_LINEAR_MIPNEAREST(LINEAR_LINEAR_MIPNEAREST float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(LINEAR_LINEAR_MIPNEAREST)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_NEAREST returns the LINEAR_NEAREST property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#linear_nearest
+func (a *AdvancedDynamicTexture) LINEAR_NEAREST(LINEAR_NEAREST float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(LINEAR_NEAREST)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_NEAREST sets the LINEAR_NEAREST property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#linear_nearest
+func (a *AdvancedDynamicTexture) SetLINEAR_NEAREST(LINEAR_NEAREST float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(LINEAR_NEAREST)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_NEAREST_MIPLINEAR returns the LINEAR_NEAREST_MIPLINEAR property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#linear_nearest_miplinear
+func (a *AdvancedDynamicTexture) LINEAR_NEAREST_MIPLINEAR(LINEAR_NEAREST_MIPLINEAR float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(LINEAR_NEAREST_MIPLINEAR)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_NEAREST_MIPLINEAR sets the LINEAR_NEAREST_MIPLINEAR property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#linear_nearest_miplinear
+func (a *AdvancedDynamicTexture) SetLINEAR_NEAREST_MIPLINEAR(LINEAR_NEAREST_MIPLINEAR float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(LINEAR_NEAREST_MIPLINEAR)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// LINEAR_NEAREST_MIPNEAREST returns the LINEAR_NEAREST_MIPNEAREST property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#linear_nearest_mipnearest
+func (a *AdvancedDynamicTexture) LINEAR_NEAREST_MIPNEAREST(LINEAR_NEAREST_MIPNEAREST float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(LINEAR_NEAREST_MIPNEAREST)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLINEAR_NEAREST_MIPNEAREST sets the LINEAR_NEAREST_MIPNEAREST property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#linear_nearest_mipnearest
+func (a *AdvancedDynamicTexture) SetLINEAR_NEAREST_MIPNEAREST(LINEAR_NEAREST_MIPNEAREST float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(LINEAR_NEAREST_MIPNEAREST)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// Layer returns the Layer property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#layer
+func (a *AdvancedDynamicTexture) Layer(layer *Layer) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(layer.JSObject())
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLayer sets the Layer property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#layer
+func (a *AdvancedDynamicTexture) SetLayer(layer *Layer) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(layer.JSObject())
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// Level returns the Level property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#level
+func (a *AdvancedDynamicTexture) Level(level float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(level)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLevel sets the Level property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#level
+func (a *AdvancedDynamicTexture) SetLevel(level float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(level)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// LinearSpecularLOD returns the LinearSpecularLOD property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#linearspecularlod
+func (a *AdvancedDynamicTexture) LinearSpecularLOD(linearSpecularLOD bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(linearSpecularLOD)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLinearSpecularLOD sets the LinearSpecularLOD property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#linearspecularlod
+func (a *AdvancedDynamicTexture) SetLinearSpecularLOD(linearSpecularLOD bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(linearSpecularLOD)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// LodGenerationOffset returns the LodGenerationOffset property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#lodgenerationoffset
+func (a *AdvancedDynamicTexture) LodGenerationOffset(lodGenerationOffset float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(lodGenerationOffset)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLodGenerationOffset sets the LodGenerationOffset property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#lodgenerationoffset
+func (a *AdvancedDynamicTexture) SetLodGenerationOffset(lodGenerationOffset float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(lodGenerationOffset)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// LodGenerationScale returns the LodGenerationScale property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#lodgenerationscale
+func (a *AdvancedDynamicTexture) LodGenerationScale(lodGenerationScale float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(lodGenerationScale)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetLodGenerationScale sets the LodGenerationScale property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#lodgenerationscale
+func (a *AdvancedDynamicTexture) SetLodGenerationScale(lodGenerationScale float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(lodGenerationScale)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// MIRROR_ADDRESSMODE returns the MIRROR_ADDRESSMODE property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#mirror_addressmode
+func (a *AdvancedDynamicTexture) MIRROR_ADDRESSMODE(MIRROR_ADDRESSMODE float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(MIRROR_ADDRESSMODE)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetMIRROR_ADDRESSMODE sets the MIRROR_ADDRESSMODE property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#mirror_addressmode
+func (a *AdvancedDynamicTexture) SetMIRROR_ADDRESSMODE(MIRROR_ADDRESSMODE float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(MIRROR_ADDRESSMODE)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// Metadata returns the Metadata property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#metadata
+func (a *AdvancedDynamicTexture) Metadata(metadata interface{}) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(metadata)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetMetadata sets the Metadata property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#metadata
+func (a *AdvancedDynamicTexture) SetMetadata(metadata interface{}) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(metadata)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_LINEAR returns the NEAREST_LINEAR property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#nearest_linear
+func (a *AdvancedDynamicTexture) NEAREST_LINEAR(NEAREST_LINEAR float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(NEAREST_LINEAR)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_LINEAR sets the NEAREST_LINEAR property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#nearest_linear
+func (a *AdvancedDynamicTexture) SetNEAREST_LINEAR(NEAREST_LINEAR float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(NEAREST_LINEAR)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_LINEAR_MIPLINEAR returns the NEAREST_LINEAR_MIPLINEAR property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#nearest_linear_miplinear
+func (a *AdvancedDynamicTexture) NEAREST_LINEAR_MIPLINEAR(NEAREST_LINEAR_MIPLINEAR float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(NEAREST_LINEAR_MIPLINEAR)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_LINEAR_MIPLINEAR sets the NEAREST_LINEAR_MIPLINEAR property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#nearest_linear_miplinear
+func (a *AdvancedDynamicTexture) SetNEAREST_LINEAR_MIPLINEAR(NEAREST_LINEAR_MIPLINEAR float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(NEAREST_LINEAR_MIPLINEAR)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_LINEAR_MIPNEAREST returns the NEAREST_LINEAR_MIPNEAREST property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#nearest_linear_mipnearest
+func (a *AdvancedDynamicTexture) NEAREST_LINEAR_MIPNEAREST(NEAREST_LINEAR_MIPNEAREST float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(NEAREST_LINEAR_MIPNEAREST)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_LINEAR_MIPNEAREST sets the NEAREST_LINEAR_MIPNEAREST property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#nearest_linear_mipnearest
+func (a *AdvancedDynamicTexture) SetNEAREST_LINEAR_MIPNEAREST(NEAREST_LINEAR_MIPNEAREST float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(NEAREST_LINEAR_MIPNEAREST)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_NEAREST returns the NEAREST_NEAREST property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#nearest_nearest
+func (a *AdvancedDynamicTexture) NEAREST_NEAREST(NEAREST_NEAREST float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(NEAREST_NEAREST)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_NEAREST sets the NEAREST_NEAREST property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#nearest_nearest
+func (a *AdvancedDynamicTexture) SetNEAREST_NEAREST(NEAREST_NEAREST float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(NEAREST_NEAREST)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_NEAREST_MIPLINEAR returns the NEAREST_NEAREST_MIPLINEAR property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#nearest_nearest_miplinear
+func (a *AdvancedDynamicTexture) NEAREST_NEAREST_MIPLINEAR(NEAREST_NEAREST_MIPLINEAR float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(NEAREST_NEAREST_MIPLINEAR)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_NEAREST_MIPLINEAR sets the NEAREST_NEAREST_MIPLINEAR property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#nearest_nearest_miplinear
+func (a *AdvancedDynamicTexture) SetNEAREST_NEAREST_MIPLINEAR(NEAREST_NEAREST_MIPLINEAR float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(NEAREST_NEAREST_MIPLINEAR)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_NEAREST_MIPNEAREST returns the NEAREST_NEAREST_MIPNEAREST property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#nearest_nearest_mipnearest
+func (a *AdvancedDynamicTexture) NEAREST_NEAREST_MIPNEAREST(NEAREST_NEAREST_MIPNEAREST float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(NEAREST_NEAREST_MIPNEAREST)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_NEAREST_MIPNEAREST sets the NEAREST_NEAREST_MIPNEAREST property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#nearest_nearest_mipnearest
+func (a *AdvancedDynamicTexture) SetNEAREST_NEAREST_MIPNEAREST(NEAREST_NEAREST_MIPNEAREST float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(NEAREST_NEAREST_MIPNEAREST)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// NEAREST_SAMPLINGMODE returns the NEAREST_SAMPLINGMODE property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#nearest_samplingmode
+func (a *AdvancedDynamicTexture) NEAREST_SAMPLINGMODE(NEAREST_SAMPLINGMODE float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(NEAREST_SAMPLINGMODE)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNEAREST_SAMPLINGMODE sets the NEAREST_SAMPLINGMODE property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#nearest_samplingmode
+func (a *AdvancedDynamicTexture) SetNEAREST_SAMPLINGMODE(NEAREST_SAMPLINGMODE float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(NEAREST_SAMPLINGMODE)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#name
+func (a *AdvancedDynamicTexture) Name(name string) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(name)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#name
+func (a *AdvancedDynamicTexture) SetName(name string) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(name)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// NoMipmap returns the NoMipmap property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#nomipmap
+func (a *AdvancedDynamicTexture) NoMipmap(noMipmap bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(noMipmap)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetNoMipmap sets the NoMipmap property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#nomipmap
+func (a *AdvancedDynamicTexture) SetNoMipmap(noMipmap bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(noMipmap)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// OnBeginLayoutObservable returns the OnBeginLayoutObservable property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#onbeginlayoutobservable
+func (a *AdvancedDynamicTexture) OnBeginLayoutObservable(onBeginLayoutObservable *Observable) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(onBeginLayoutObservable.JSObject())
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeginLayoutObservable sets the OnBeginLayoutObservable property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#onbeginlayoutobservable
+func (a *AdvancedDynamicTexture) SetOnBeginLayoutObservable(onBeginLayoutObservable *Observable) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(onBeginLayoutObservable.JSObject())
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// OnBeginRenderObservable returns the OnBeginRenderObservable property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#onbeginrenderobservable
+func (a *AdvancedDynamicTexture) OnBeginRenderObservable(onBeginRenderObservable *Observable) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(onBeginRenderObservable.JSObject())
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeginRenderObservable sets the OnBeginRenderObservable property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#onbeginrenderobservable
+func (a *AdvancedDynamicTexture) SetOnBeginRenderObservable(onBeginRenderObservable *Observable) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(onBeginRenderObservable.JSObject())
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// OnClipboardObservable returns the OnClipboardObservable property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#onclipboardobservable
+func (a *AdvancedDynamicTexture) OnClipboardObservable(onClipboardObservable *Observable) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(onClipboardObservable.JSObject())
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnClipboardObservable sets the OnClipboardObservable property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#onclipboardobservable
+func (a *AdvancedDynamicTexture) SetOnClipboardObservable(onClipboardObservable *Observable) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(onClipboardObservable.JSObject())
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// OnControlPickedObservable returns the OnControlPickedObservable property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#oncontrolpickedobservable
+func (a *AdvancedDynamicTexture) OnControlPickedObservable(onControlPickedObservable *Observable) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(onControlPickedObservable.JSObject())
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnControlPickedObservable sets the OnControlPickedObservable property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#oncontrolpickedobservable
+func (a *AdvancedDynamicTexture) SetOnControlPickedObservable(onControlPickedObservable *Observable) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(onControlPickedObservable.JSObject())
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// OnDispose returns the OnDispose property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#ondispose
+func (a *AdvancedDynamicTexture) OnDispose(onDispose func()) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(onDispose)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnDispose sets the OnDispose property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#ondispose
+func (a *AdvancedDynamicTexture) SetOnDispose(onDispose func()) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(onDispose)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// OnDisposeObservable returns the OnDisposeObservable property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#ondisposeobservable
+func (a *AdvancedDynamicTexture) OnDisposeObservable(onDisposeObservable *Observable) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(onDisposeObservable.JSObject())
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnDisposeObservable sets the OnDisposeObservable property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#ondisposeobservable
+func (a *AdvancedDynamicTexture) SetOnDisposeObservable(onDisposeObservable *Observable) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(onDisposeObservable.JSObject())
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// OnEndLayoutObservable returns the OnEndLayoutObservable property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#onendlayoutobservable
+func (a *AdvancedDynamicTexture) OnEndLayoutObservable(onEndLayoutObservable *Observable) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(onEndLayoutObservable.JSObject())
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnEndLayoutObservable sets the OnEndLayoutObservable property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#onendlayoutobservable
+func (a *AdvancedDynamicTexture) SetOnEndLayoutObservable(onEndLayoutObservable *Observable) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(onEndLayoutObservable.JSObject())
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// OnEndRenderObservable returns the OnEndRenderObservable property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#onendrenderobservable
+func (a *AdvancedDynamicTexture) OnEndRenderObservable(onEndRenderObservable *Observable) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(onEndRenderObservable.JSObject())
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnEndRenderObservable sets the OnEndRenderObservable property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#onendrenderobservable
+func (a *AdvancedDynamicTexture) SetOnEndRenderObservable(onEndRenderObservable *Observable) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(onEndRenderObservable.JSObject())
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// OnLoadObservable returns the OnLoadObservable property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#onloadobservable
+func (a *AdvancedDynamicTexture) OnLoadObservable(onLoadObservable *Observable) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(onLoadObservable.JSObject())
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetOnLoadObservable sets the OnLoadObservable property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#onloadobservable
+func (a *AdvancedDynamicTexture) SetOnLoadObservable(onLoadObservable *Observable) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(onLoadObservable.JSObject())
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// PLANAR_MODE returns the PLANAR_MODE property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#planar_mode
+func (a *AdvancedDynamicTexture) PLANAR_MODE(PLANAR_MODE float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(PLANAR_MODE)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetPLANAR_MODE sets the PLANAR_MODE property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#planar_mode
+func (a *AdvancedDynamicTexture) SetPLANAR_MODE(PLANAR_MODE float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(PLANAR_MODE)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// PROJECTION_MODE returns the PROJECTION_MODE property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#projection_mode
+func (a *AdvancedDynamicTexture) PROJECTION_MODE(PROJECTION_MODE float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(PROJECTION_MODE)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetPROJECTION_MODE sets the PROJECTION_MODE property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#projection_mode
+func (a *AdvancedDynamicTexture) SetPROJECTION_MODE(PROJECTION_MODE float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(PROJECTION_MODE)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// PremulAlpha returns the PremulAlpha property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#premulalpha
+func (a *AdvancedDynamicTexture) PremulAlpha(premulAlpha bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(premulAlpha)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetPremulAlpha sets the PremulAlpha property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#premulalpha
+func (a *AdvancedDynamicTexture) SetPremulAlpha(premulAlpha bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(premulAlpha)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// RenderAtIdealSize returns the RenderAtIdealSize property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#renderatidealsize
+func (a *AdvancedDynamicTexture) RenderAtIdealSize(renderAtIdealSize bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(renderAtIdealSize)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetRenderAtIdealSize sets the RenderAtIdealSize property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#renderatidealsize
+func (a *AdvancedDynamicTexture) SetRenderAtIdealSize(renderAtIdealSize bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(renderAtIdealSize)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// RenderScale returns the RenderScale property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#renderscale
+func (a *AdvancedDynamicTexture) RenderScale(renderScale float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(renderScale)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetRenderScale sets the RenderScale property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#renderscale
+func (a *AdvancedDynamicTexture) SetRenderScale(renderScale float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(renderScale)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// ReservedDataStore returns the ReservedDataStore property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#reserveddatastore
+func (a *AdvancedDynamicTexture) ReservedDataStore(reservedDataStore interface{}) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(reservedDataStore)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetReservedDataStore sets the ReservedDataStore property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#reserveddatastore
+func (a *AdvancedDynamicTexture) SetReservedDataStore(reservedDataStore interface{}) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(reservedDataStore)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// RootContainer returns the RootContainer property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#rootcontainer
+func (a *AdvancedDynamicTexture) RootContainer(rootContainer *Container) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(rootContainer.JSObject())
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetRootContainer sets the RootContainer property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#rootcontainer
+func (a *AdvancedDynamicTexture) SetRootContainer(rootContainer *Container) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(rootContainer.JSObject())
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SKYBOX_MODE returns the SKYBOX_MODE property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#skybox_mode
+func (a *AdvancedDynamicTexture) SKYBOX_MODE(SKYBOX_MODE float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(SKYBOX_MODE)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetSKYBOX_MODE sets the SKYBOX_MODE property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#skybox_mode
+func (a *AdvancedDynamicTexture) SetSKYBOX_MODE(SKYBOX_MODE float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(SKYBOX_MODE)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SPHERICAL_MODE returns the SPHERICAL_MODE property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#spherical_mode
+func (a *AdvancedDynamicTexture) SPHERICAL_MODE(SPHERICAL_MODE float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(SPHERICAL_MODE)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetSPHERICAL_MODE sets the SPHERICAL_MODE property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#spherical_mode
+func (a *AdvancedDynamicTexture) SetSPHERICAL_MODE(SPHERICAL_MODE float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(SPHERICAL_MODE)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SamplingMode returns the SamplingMode property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#samplingmode
+func (a *AdvancedDynamicTexture) SamplingMode(samplingMode float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(samplingMode)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetSamplingMode sets the SamplingMode property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#samplingmode
+func (a *AdvancedDynamicTexture) SetSamplingMode(samplingMode float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(samplingMode)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SerializeBuffers returns the SerializeBuffers property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#serializebuffers
+func (a *AdvancedDynamicTexture) SerializeBuffers(SerializeBuffers bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(SerializeBuffers)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetSerializeBuffers sets the SerializeBuffers property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#serializebuffers
+func (a *AdvancedDynamicTexture) SetSerializeBuffers(SerializeBuffers bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(SerializeBuffers)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// TRILINEAR_SAMPLINGMODE returns the TRILINEAR_SAMPLINGMODE property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#trilinear_samplingmode
+func (a *AdvancedDynamicTexture) TRILINEAR_SAMPLINGMODE(TRILINEAR_SAMPLINGMODE float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(TRILINEAR_SAMPLINGMODE)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetTRILINEAR_SAMPLINGMODE sets the TRILINEAR_SAMPLINGMODE property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#trilinear_samplingmode
+func (a *AdvancedDynamicTexture) SetTRILINEAR_SAMPLINGMODE(TRILINEAR_SAMPLINGMODE float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(TRILINEAR_SAMPLINGMODE)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// TextureFormat returns the TextureFormat property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#textureformat
+func (a *AdvancedDynamicTexture) TextureFormat(textureFormat float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(textureFormat)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetTextureFormat sets the TextureFormat property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#textureformat
+func (a *AdvancedDynamicTexture) SetTextureFormat(textureFormat float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(textureFormat)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// TextureType returns the TextureType property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#texturetype
+func (a *AdvancedDynamicTexture) TextureType(textureType float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(textureType)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetTextureType sets the TextureType property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#texturetype
+func (a *AdvancedDynamicTexture) SetTextureType(textureType float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(textureType)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// UAng returns the UAng property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#uang
+func (a *AdvancedDynamicTexture) UAng(uAng float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(uAng)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUAng sets the UAng property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#uang
+func (a *AdvancedDynamicTexture) SetUAng(uAng float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(uAng)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// UOffset returns the UOffset property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#uoffset
+func (a *AdvancedDynamicTexture) UOffset(uOffset float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(uOffset)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUOffset sets the UOffset property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#uoffset
+func (a *AdvancedDynamicTexture) SetUOffset(uOffset float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(uOffset)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// URotationCenter returns the URotationCenter property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#urotationcenter
+func (a *AdvancedDynamicTexture) URotationCenter(uRotationCenter float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(uRotationCenter)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetURotationCenter sets the URotationCenter property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#urotationcenter
+func (a *AdvancedDynamicTexture) SetURotationCenter(uRotationCenter float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(uRotationCenter)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// UScale returns the UScale property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#uscale
+func (a *AdvancedDynamicTexture) UScale(uScale float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(uScale)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUScale sets the UScale property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#uscale
+func (a *AdvancedDynamicTexture) SetUScale(uScale float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(uScale)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// Uid returns the Uid property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#uid
+func (a *AdvancedDynamicTexture) Uid(uid string) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(uid)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUid sets the Uid property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#uid
+func (a *AdvancedDynamicTexture) SetUid(uid string) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(uid)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// UniqueId returns the UniqueId property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#uniqueid
+func (a *AdvancedDynamicTexture) UniqueId(uniqueId float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(uniqueId)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUniqueId sets the UniqueId property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#uniqueid
+func (a *AdvancedDynamicTexture) SetUniqueId(uniqueId float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(uniqueId)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// Url returns the Url property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#url
+func (a *AdvancedDynamicTexture) Url(url string) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(url)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUrl sets the Url property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#url
+func (a *AdvancedDynamicTexture) SetUrl(url string) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(url)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// UseInvalidateRectOptimization returns the UseInvalidateRectOptimization property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#useinvalidaterectoptimization
+func (a *AdvancedDynamicTexture) UseInvalidateRectOptimization(useInvalidateRectOptimization bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(useInvalidateRectOptimization)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUseInvalidateRectOptimization sets the UseInvalidateRectOptimization property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#useinvalidaterectoptimization
+func (a *AdvancedDynamicTexture) SetUseInvalidateRectOptimization(useInvalidateRectOptimization bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(useInvalidateRectOptimization)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// UseSerializedUrlIfAny returns the UseSerializedUrlIfAny property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#useserializedurlifany
+func (a *AdvancedDynamicTexture) UseSerializedUrlIfAny(UseSerializedUrlIfAny bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(UseSerializedUrlIfAny)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUseSerializedUrlIfAny sets the UseSerializedUrlIfAny property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#useserializedurlifany
+func (a *AdvancedDynamicTexture) SetUseSerializedUrlIfAny(UseSerializedUrlIfAny bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(UseSerializedUrlIfAny)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// UseSmallestIdeal returns the UseSmallestIdeal property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#usesmallestideal
+func (a *AdvancedDynamicTexture) UseSmallestIdeal(useSmallestIdeal bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(useSmallestIdeal)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetUseSmallestIdeal sets the UseSmallestIdeal property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#usesmallestideal
+func (a *AdvancedDynamicTexture) SetUseSmallestIdeal(useSmallestIdeal bool) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(useSmallestIdeal)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// VAng returns the VAng property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#vang
+func (a *AdvancedDynamicTexture) VAng(vAng float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(vAng)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetVAng sets the VAng property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#vang
+func (a *AdvancedDynamicTexture) SetVAng(vAng float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(vAng)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// VOffset returns the VOffset property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#voffset
+func (a *AdvancedDynamicTexture) VOffset(vOffset float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(vOffset)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetVOffset sets the VOffset property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#voffset
+func (a *AdvancedDynamicTexture) SetVOffset(vOffset float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(vOffset)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// VRotationCenter returns the VRotationCenter property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#vrotationcenter
+func (a *AdvancedDynamicTexture) VRotationCenter(vRotationCenter float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(vRotationCenter)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetVRotationCenter sets the VRotationCenter property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#vrotationcenter
+func (a *AdvancedDynamicTexture) SetVRotationCenter(vRotationCenter float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(vRotationCenter)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// VScale returns the VScale property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#vscale
+func (a *AdvancedDynamicTexture) VScale(vScale float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(vScale)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetVScale sets the VScale property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#vscale
+func (a *AdvancedDynamicTexture) SetVScale(vScale float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(vScale)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// WAng returns the WAng property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#wang
+func (a *AdvancedDynamicTexture) WAng(wAng float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(wAng)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWAng sets the WAng property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#wang
+func (a *AdvancedDynamicTexture) SetWAng(wAng float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(wAng)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// WRAP_ADDRESSMODE returns the WRAP_ADDRESSMODE property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#wrap_addressmode
+func (a *AdvancedDynamicTexture) WRAP_ADDRESSMODE(WRAP_ADDRESSMODE float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(WRAP_ADDRESSMODE)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWRAP_ADDRESSMODE sets the WRAP_ADDRESSMODE property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#wrap_addressmode
+func (a *AdvancedDynamicTexture) SetWRAP_ADDRESSMODE(WRAP_ADDRESSMODE float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(WRAP_ADDRESSMODE)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// WRotationCenter returns the WRotationCenter property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#wrotationcenter
+func (a *AdvancedDynamicTexture) WRotationCenter(wRotationCenter float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(wRotationCenter)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWRotationCenter sets the WRotationCenter property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#wrotationcenter
+func (a *AdvancedDynamicTexture) SetWRotationCenter(wRotationCenter float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(wRotationCenter)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// WrapR returns the WrapR property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#wrapr
+func (a *AdvancedDynamicTexture) WrapR(wrapR float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(wrapR)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWrapR sets the WrapR property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#wrapr
+func (a *AdvancedDynamicTexture) SetWrapR(wrapR float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(wrapR)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// WrapU returns the WrapU property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#wrapu
+func (a *AdvancedDynamicTexture) WrapU(wrapU float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(wrapU)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWrapU sets the WrapU property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#wrapu
+func (a *AdvancedDynamicTexture) SetWrapU(wrapU float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(wrapU)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// WrapV returns the WrapV property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#wrapv
+func (a *AdvancedDynamicTexture) WrapV(wrapV float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(wrapV)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+// SetWrapV sets the WrapV property of class AdvancedDynamicTexture.
+//
+// https://doc.babylonjs.com/api/classes/babylon.advanceddynamictexture#wrapv
+func (a *AdvancedDynamicTexture) SetWrapV(wrapV float64) *AdvancedDynamicTexture {
+	p := ba.ctx.Get("AdvancedDynamicTexture").New(wrapV)
+	return AdvancedDynamicTextureFromJSObject(p, ba.ctx)
+}
+
+*/

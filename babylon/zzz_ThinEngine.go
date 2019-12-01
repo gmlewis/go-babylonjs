@@ -29,11 +29,9 @@ func ThinEngineFromJSObject(p js.Value, ctx js.Value) *ThinEngine {
 
 // NewThinEngineOpts contains optional parameters for NewThinEngine.
 type NewThinEngineOpts struct {
-	Antialias *JSBool
-
-	Options *JSValue
-
-	AdaptToDeviceRatio *JSBool
+	Antialias          *bool
+	Options            *EngineOptions
+	AdaptToDeviceRatio *bool
 }
 
 // NewThinEngine returns a new ThinEngine object.
@@ -44,8 +42,2589 @@ func (ba *Babylon) NewThinEngine(canvasOrContext js.Value, opts *NewThinEngineOp
 		opts = &NewThinEngineOpts{}
 	}
 
-	p := ba.ctx.Get("ThinEngine").New(canvasOrContext, opts.Antialias.JSObject(), opts.Options.JSObject(), opts.AdaptToDeviceRatio.JSObject())
+	args := make([]interface{}, 0, 1+3)
+
+	args = append(args, canvasOrContext)
+
+	if opts.Antialias == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Antialias)
+	}
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options.JSObject())
+	}
+	if opts.AdaptToDeviceRatio == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.AdaptToDeviceRatio)
+	}
+
+	p := ba.ctx.Get("ThinEngine").New(args...)
 	return ThinEngineFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// ApplyStates calls the ApplyStates method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#applystates
+func (t *ThinEngine) ApplyStates() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	t.p.Call("applyStates", args...)
+}
+
+// AreAllEffectsReady calls the AreAllEffectsReady method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#arealleffectsready
+func (t *ThinEngine) AreAllEffectsReady() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("areAllEffectsReady", args...)
+	return retVal.Bool()
+}
+
+// AttachContextLostEvent calls the AttachContextLostEvent method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#attachcontextlostevent
+func (t *ThinEngine) AttachContextLostEvent(callback func()) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, callback)
+
+	t.p.Call("attachContextLostEvent", args...)
+}
+
+// AttachContextRestoredEvent calls the AttachContextRestoredEvent method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#attachcontextrestoredevent
+func (t *ThinEngine) AttachContextRestoredEvent(callback func()) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, callback)
+
+	t.p.Call("attachContextRestoredEvent", args...)
+}
+
+// BeginFrame calls the BeginFrame method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#beginframe
+func (t *ThinEngine) BeginFrame() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	t.p.Call("beginFrame", args...)
+}
+
+// BindArrayBuffer calls the BindArrayBuffer method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#bindarraybuffer
+func (t *ThinEngine) BindArrayBuffer(buffer *DataBuffer) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, buffer.JSObject())
+
+	t.p.Call("bindArrayBuffer", args...)
+}
+
+// BindBuffers calls the BindBuffers method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#bindbuffers
+func (t *ThinEngine) BindBuffers(vertexBuffers js.Value, indexBuffer *DataBuffer, effect *Effect) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, vertexBuffers)
+	args = append(args, indexBuffer.JSObject())
+	args = append(args, effect.JSObject())
+
+	t.p.Call("bindBuffers", args...)
+}
+
+// BindBuffersDirectly calls the BindBuffersDirectly method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#bindbuffersdirectly
+func (t *ThinEngine) BindBuffersDirectly(vertexBuffer *DataBuffer, indexBuffer *DataBuffer, vertexDeclaration float64, vertexStrideSize float64, effect *Effect) {
+
+	args := make([]interface{}, 0, 5+0)
+
+	args = append(args, vertexBuffer.JSObject())
+	args = append(args, indexBuffer.JSObject())
+	args = append(args, vertexDeclaration)
+	args = append(args, vertexStrideSize)
+	args = append(args, effect.JSObject())
+
+	t.p.Call("bindBuffersDirectly", args...)
+}
+
+// ThinEngineBindFramebufferOpts contains optional parameters for ThinEngine.BindFramebuffer.
+type ThinEngineBindFramebufferOpts struct {
+	FaceIndex               *float64
+	RequiredWidth           *float64
+	RequiredHeight          *float64
+	ForceFullscreenViewport *bool
+	DepthStencilTexture     *InternalTexture
+	LodLevel                *float64
+}
+
+// BindFramebuffer calls the BindFramebuffer method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#bindframebuffer
+func (t *ThinEngine) BindFramebuffer(texture *InternalTexture, opts *ThinEngineBindFramebufferOpts) {
+	if opts == nil {
+		opts = &ThinEngineBindFramebufferOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+6)
+
+	args = append(args, texture.JSObject())
+
+	if opts.FaceIndex == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FaceIndex)
+	}
+	if opts.RequiredWidth == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RequiredWidth)
+	}
+	if opts.RequiredHeight == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RequiredHeight)
+	}
+	if opts.ForceFullscreenViewport == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceFullscreenViewport)
+	}
+	if opts.DepthStencilTexture == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.DepthStencilTexture.JSObject())
+	}
+	if opts.LodLevel == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.LodLevel)
+	}
+
+	t.p.Call("bindFramebuffer", args...)
+}
+
+// BindSamplers calls the BindSamplers method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#bindsamplers
+func (t *ThinEngine) BindSamplers(effect *Effect) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, effect.JSObject())
+
+	t.p.Call("bindSamplers", args...)
+}
+
+// BindUniformBlock calls the BindUniformBlock method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#binduniformblock
+func (t *ThinEngine) BindUniformBlock(pipelineContext *IPipelineContext, blockName string, index float64) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, pipelineContext.JSObject())
+	args = append(args, blockName)
+	args = append(args, index)
+
+	t.p.Call("bindUniformBlock", args...)
+}
+
+// BindUniformBuffer calls the BindUniformBuffer method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#binduniformbuffer
+func (t *ThinEngine) BindUniformBuffer(buffer *DataBuffer) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, buffer.JSObject())
+
+	t.p.Call("bindUniformBuffer", args...)
+}
+
+// BindUniformBufferBase calls the BindUniformBufferBase method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#binduniformbufferbase
+func (t *ThinEngine) BindUniformBufferBase(buffer *DataBuffer, location float64) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, buffer.JSObject())
+	args = append(args, location)
+
+	t.p.Call("bindUniformBufferBase", args...)
+}
+
+// BindVertexArrayObject calls the BindVertexArrayObject method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#bindvertexarrayobject
+func (t *ThinEngine) BindVertexArrayObject(vertexArrayObject *WebGLVertexArrayObject, indexBuffer *DataBuffer) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, vertexArrayObject.JSObject())
+	args = append(args, indexBuffer.JSObject())
+
+	t.p.Call("bindVertexArrayObject", args...)
+}
+
+// CeilingPOT calls the CeilingPOT method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#ceilingpot
+func (t *ThinEngine) CeilingPOT(x float64) float64 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, x)
+
+	retVal := t.p.Call("CeilingPOT", args...)
+	return retVal.Float()
+}
+
+// ThinEngineClearOpts contains optional parameters for ThinEngine.Clear.
+type ThinEngineClearOpts struct {
+	Stencil *bool
+}
+
+// Clear calls the Clear method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#clear
+func (t *ThinEngine) Clear(color *IColor4Like, backBuffer bool, depth bool, opts *ThinEngineClearOpts) {
+	if opts == nil {
+		opts = &ThinEngineClearOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, color.JSObject())
+	args = append(args, backBuffer)
+	args = append(args, depth)
+
+	if opts.Stencil == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Stencil)
+	}
+
+	t.p.Call("clear", args...)
+}
+
+// ClearInternalTexturesCache calls the ClearInternalTexturesCache method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#clearinternaltexturescache
+func (t *ThinEngine) ClearInternalTexturesCache() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	t.p.Call("clearInternalTexturesCache", args...)
+}
+
+// CreateCubeTexture calls the CreateCubeTexture method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#createcubetexture
+func (t *ThinEngine) CreateCubeTexture(rootUrl string, scene *Scene, files string, noMipmap bool, onLoad func(), onError func(), format float64, forcedExtension interface{}, createPolynomials bool, lodScale float64, lodOffset float64) *InternalTexture {
+
+	args := make([]interface{}, 0, 11+0)
+
+	args = append(args, rootUrl)
+	args = append(args, scene.JSObject())
+	args = append(args, files)
+	args = append(args, noMipmap)
+	args = append(args, onLoad)
+	args = append(args, onError)
+	args = append(args, format)
+	args = append(args, forcedExtension)
+	args = append(args, createPolynomials)
+	args = append(args, lodScale)
+	args = append(args, lodOffset)
+
+	retVal := t.p.Call("createCubeTexture", args...)
+	return InternalTextureFromJSObject(retVal, t.ctx)
+}
+
+// CreateDepthStencilTexture calls the CreateDepthStencilTexture method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#createdepthstenciltexture
+func (t *ThinEngine) CreateDepthStencilTexture(size float64, options *DepthTextureCreationOptions) *InternalTexture {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, size)
+	args = append(args, options.JSObject())
+
+	retVal := t.p.Call("createDepthStencilTexture", args...)
+	return InternalTextureFromJSObject(retVal, t.ctx)
+}
+
+// CreateDynamicTexture calls the CreateDynamicTexture method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#createdynamictexture
+func (t *ThinEngine) CreateDynamicTexture(width float64, height float64, generateMipMaps bool, samplingMode float64) *InternalTexture {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, width)
+	args = append(args, height)
+	args = append(args, generateMipMaps)
+	args = append(args, samplingMode)
+
+	retVal := t.p.Call("createDynamicTexture", args...)
+	return InternalTextureFromJSObject(retVal, t.ctx)
+}
+
+// CreateDynamicUniformBuffer calls the CreateDynamicUniformBuffer method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#createdynamicuniformbuffer
+func (t *ThinEngine) CreateDynamicUniformBuffer(elements js.Value) *DataBuffer {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, elements)
+
+	retVal := t.p.Call("createDynamicUniformBuffer", args...)
+	return DataBufferFromJSObject(retVal, t.ctx)
+}
+
+// CreateDynamicVertexBuffer calls the CreateDynamicVertexBuffer method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#createdynamicvertexbuffer
+func (t *ThinEngine) CreateDynamicVertexBuffer(data []float64) *DataBuffer {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, data)
+
+	retVal := t.p.Call("createDynamicVertexBuffer", args...)
+	return DataBufferFromJSObject(retVal, t.ctx)
+}
+
+// ThinEngineCreateEffectOpts contains optional parameters for ThinEngine.CreateEffect.
+type ThinEngineCreateEffectOpts struct {
+	Samplers        *string
+	Defines         *string
+	Fallbacks       *IEffectFallbacks
+	OnCompiled      *func()
+	OnError         *func()
+	IndexParameters *interface{}
+}
+
+// CreateEffect calls the CreateEffect method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#createeffect
+func (t *ThinEngine) CreateEffect(baseName interface{}, attributesNamesOrOptions string, uniformsNamesOrEngine string, opts *ThinEngineCreateEffectOpts) *Effect {
+	if opts == nil {
+		opts = &ThinEngineCreateEffectOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+6)
+
+	args = append(args, baseName)
+	args = append(args, attributesNamesOrOptions)
+	args = append(args, uniformsNamesOrEngine)
+
+	if opts.Samplers == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Samplers)
+	}
+	if opts.Defines == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Defines)
+	}
+	if opts.Fallbacks == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Fallbacks.JSObject())
+	}
+	if opts.OnCompiled == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnCompiled)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+	if opts.IndexParameters == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.IndexParameters)
+	}
+
+	retVal := t.p.Call("createEffect", args...)
+	return EffectFromJSObject(retVal, t.ctx)
+}
+
+// ThinEngineCreateIndexBufferOpts contains optional parameters for ThinEngine.CreateIndexBuffer.
+type ThinEngineCreateIndexBufferOpts struct {
+	Updatable *bool
+}
+
+// CreateIndexBuffer calls the CreateIndexBuffer method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#createindexbuffer
+func (t *ThinEngine) CreateIndexBuffer(indices js.Value, opts *ThinEngineCreateIndexBufferOpts) *DataBuffer {
+	if opts == nil {
+		opts = &ThinEngineCreateIndexBufferOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, indices)
+
+	if opts.Updatable == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Updatable)
+	}
+
+	retVal := t.p.Call("createIndexBuffer", args...)
+	return DataBufferFromJSObject(retVal, t.ctx)
+}
+
+// CreateMultipleRenderTarget calls the CreateMultipleRenderTarget method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#createmultiplerendertarget
+func (t *ThinEngine) CreateMultipleRenderTarget(size interface{}, options *IMultiRenderTargetOptions) *InternalTexture {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, size)
+	args = append(args, options.JSObject())
+
+	retVal := t.p.Call("createMultipleRenderTarget", args...)
+	return InternalTextureFromJSObject(retVal, t.ctx)
+}
+
+// CreatePipelineContext calls the CreatePipelineContext method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#createpipelinecontext
+func (t *ThinEngine) CreatePipelineContext() *IPipelineContext {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("createPipelineContext", args...)
+	return IPipelineContextFromJSObject(retVal, t.ctx)
+}
+
+// ThinEngineCreatePrefilteredCubeTextureOpts contains optional parameters for ThinEngine.CreatePrefilteredCubeTexture.
+type ThinEngineCreatePrefilteredCubeTextureOpts struct {
+	OnLoad            *func()
+	OnError           *func()
+	Format            *float64
+	ForcedExtension   *interface{}
+	CreatePolynomials *bool
+}
+
+// CreatePrefilteredCubeTexture calls the CreatePrefilteredCubeTexture method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#createprefilteredcubetexture
+func (t *ThinEngine) CreatePrefilteredCubeTexture(rootUrl string, scene *Scene, lodScale float64, lodOffset float64, opts *ThinEngineCreatePrefilteredCubeTextureOpts) *InternalTexture {
+	if opts == nil {
+		opts = &ThinEngineCreatePrefilteredCubeTextureOpts{}
+	}
+
+	args := make([]interface{}, 0, 4+5)
+
+	args = append(args, rootUrl)
+	args = append(args, scene.JSObject())
+	args = append(args, lodScale)
+	args = append(args, lodOffset)
+
+	if opts.OnLoad == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnLoad)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+	if opts.Format == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Format)
+	}
+	if opts.ForcedExtension == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ForcedExtension)
+	}
+	if opts.CreatePolynomials == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.CreatePolynomials)
+	}
+
+	retVal := t.p.Call("createPrefilteredCubeTexture", args...)
+	return InternalTextureFromJSObject(retVal, t.ctx)
+}
+
+// ThinEngineCreateRawCubeTextureOpts contains optional parameters for ThinEngine.CreateRawCubeTexture.
+type ThinEngineCreateRawCubeTextureOpts struct {
+	Compression *string
+}
+
+// CreateRawCubeTexture calls the CreateRawCubeTexture method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#createrawcubetexture
+func (t *ThinEngine) CreateRawCubeTexture(data js.Value, size float64, format float64, jsType float64, generateMipMaps bool, invertY bool, samplingMode float64, opts *ThinEngineCreateRawCubeTextureOpts) *InternalTexture {
+	if opts == nil {
+		opts = &ThinEngineCreateRawCubeTextureOpts{}
+	}
+
+	args := make([]interface{}, 0, 7+1)
+
+	args = append(args, data)
+	args = append(args, size)
+	args = append(args, format)
+	args = append(args, jsType)
+	args = append(args, generateMipMaps)
+	args = append(args, invertY)
+	args = append(args, samplingMode)
+
+	if opts.Compression == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Compression)
+	}
+
+	retVal := t.p.Call("createRawCubeTexture", args...)
+	return InternalTextureFromJSObject(retVal, t.ctx)
+}
+
+// ThinEngineCreateRawShaderProgramOpts contains optional parameters for ThinEngine.CreateRawShaderProgram.
+type ThinEngineCreateRawShaderProgramOpts struct {
+	Context                   js.Value
+	TransformFeedbackVaryings *string
+}
+
+// CreateRawShaderProgram calls the CreateRawShaderProgram method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#createrawshaderprogram
+func (t *ThinEngine) CreateRawShaderProgram(pipelineContext *IPipelineContext, vertexCode string, fragmentCode string, opts *ThinEngineCreateRawShaderProgramOpts) *WebGLProgram {
+	if opts == nil {
+		opts = &ThinEngineCreateRawShaderProgramOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+2)
+
+	args = append(args, pipelineContext.JSObject())
+	args = append(args, vertexCode)
+	args = append(args, fragmentCode)
+
+	if opts.Context == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Context)
+	}
+	if opts.TransformFeedbackVaryings == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.TransformFeedbackVaryings)
+	}
+
+	retVal := t.p.Call("createRawShaderProgram", args...)
+	return WebGLProgramFromJSObject(retVal, t.ctx)
+}
+
+// ThinEngineCreateRawTextureOpts contains optional parameters for ThinEngine.CreateRawTexture.
+type ThinEngineCreateRawTextureOpts struct {
+	Compression *string
+	Type        *float64
+}
+
+// CreateRawTexture calls the CreateRawTexture method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#createrawtexture
+func (t *ThinEngine) CreateRawTexture(data js.Value, width float64, height float64, format float64, generateMipMaps bool, invertY bool, samplingMode float64, opts *ThinEngineCreateRawTextureOpts) *InternalTexture {
+	if opts == nil {
+		opts = &ThinEngineCreateRawTextureOpts{}
+	}
+
+	args := make([]interface{}, 0, 7+2)
+
+	args = append(args, data)
+	args = append(args, width)
+	args = append(args, height)
+	args = append(args, format)
+	args = append(args, generateMipMaps)
+	args = append(args, invertY)
+	args = append(args, samplingMode)
+
+	if opts.Compression == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Compression)
+	}
+	if opts.Type == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Type)
+	}
+
+	retVal := t.p.Call("createRawTexture", args...)
+	return InternalTextureFromJSObject(retVal, t.ctx)
+}
+
+// ThinEngineCreateRawTexture2DArrayOpts contains optional parameters for ThinEngine.CreateRawTexture2DArray.
+type ThinEngineCreateRawTexture2DArrayOpts struct {
+	Compression *string
+	TextureType *float64
+}
+
+// CreateRawTexture2DArray calls the CreateRawTexture2DArray method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#createrawtexture2darray
+func (t *ThinEngine) CreateRawTexture2DArray(data js.Value, width float64, height float64, depth float64, format float64, generateMipMaps bool, invertY bool, samplingMode float64, opts *ThinEngineCreateRawTexture2DArrayOpts) *InternalTexture {
+	if opts == nil {
+		opts = &ThinEngineCreateRawTexture2DArrayOpts{}
+	}
+
+	args := make([]interface{}, 0, 8+2)
+
+	args = append(args, data)
+	args = append(args, width)
+	args = append(args, height)
+	args = append(args, depth)
+	args = append(args, format)
+	args = append(args, generateMipMaps)
+	args = append(args, invertY)
+	args = append(args, samplingMode)
+
+	if opts.Compression == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Compression)
+	}
+	if opts.TextureType == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.TextureType)
+	}
+
+	retVal := t.p.Call("createRawTexture2DArray", args...)
+	return InternalTextureFromJSObject(retVal, t.ctx)
+}
+
+// ThinEngineCreateRawTexture3DOpts contains optional parameters for ThinEngine.CreateRawTexture3D.
+type ThinEngineCreateRawTexture3DOpts struct {
+	Compression *string
+	TextureType *float64
+}
+
+// CreateRawTexture3D calls the CreateRawTexture3D method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#createrawtexture3d
+func (t *ThinEngine) CreateRawTexture3D(data js.Value, width float64, height float64, depth float64, format float64, generateMipMaps bool, invertY bool, samplingMode float64, opts *ThinEngineCreateRawTexture3DOpts) *InternalTexture {
+	if opts == nil {
+		opts = &ThinEngineCreateRawTexture3DOpts{}
+	}
+
+	args := make([]interface{}, 0, 8+2)
+
+	args = append(args, data)
+	args = append(args, width)
+	args = append(args, height)
+	args = append(args, depth)
+	args = append(args, format)
+	args = append(args, generateMipMaps)
+	args = append(args, invertY)
+	args = append(args, samplingMode)
+
+	if opts.Compression == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Compression)
+	}
+	if opts.TextureType == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.TextureType)
+	}
+
+	retVal := t.p.Call("createRawTexture3D", args...)
+	return InternalTextureFromJSObject(retVal, t.ctx)
+}
+
+// ThinEngineCreateRenderTargetCubeTextureOpts contains optional parameters for ThinEngine.CreateRenderTargetCubeTexture.
+type ThinEngineCreateRenderTargetCubeTextureOpts struct {
+	Options *RenderTargetCreationOptions
+}
+
+// CreateRenderTargetCubeTexture calls the CreateRenderTargetCubeTexture method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#createrendertargetcubetexture
+func (t *ThinEngine) CreateRenderTargetCubeTexture(size float64, opts *ThinEngineCreateRenderTargetCubeTextureOpts) *InternalTexture {
+	if opts == nil {
+		opts = &ThinEngineCreateRenderTargetCubeTextureOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, size)
+
+	if opts.Options == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Options.JSObject())
+	}
+
+	retVal := t.p.Call("createRenderTargetCubeTexture", args...)
+	return InternalTextureFromJSObject(retVal, t.ctx)
+}
+
+// CreateRenderTargetTexture calls the CreateRenderTargetTexture method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#createrendertargettexture
+func (t *ThinEngine) CreateRenderTargetTexture(size float64, options bool) *InternalTexture {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, size)
+	args = append(args, options)
+
+	retVal := t.p.Call("createRenderTargetTexture", args...)
+	return InternalTextureFromJSObject(retVal, t.ctx)
+}
+
+// ThinEngineCreateShaderProgramOpts contains optional parameters for ThinEngine.CreateShaderProgram.
+type ThinEngineCreateShaderProgramOpts struct {
+	Context                   js.Value
+	TransformFeedbackVaryings *string
+}
+
+// CreateShaderProgram calls the CreateShaderProgram method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#createshaderprogram
+func (t *ThinEngine) CreateShaderProgram(pipelineContext *IPipelineContext, vertexCode string, fragmentCode string, defines string, opts *ThinEngineCreateShaderProgramOpts) *WebGLProgram {
+	if opts == nil {
+		opts = &ThinEngineCreateShaderProgramOpts{}
+	}
+
+	args := make([]interface{}, 0, 4+2)
+
+	args = append(args, pipelineContext.JSObject())
+	args = append(args, vertexCode)
+	args = append(args, fragmentCode)
+	args = append(args, defines)
+
+	if opts.Context == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Context)
+	}
+	if opts.TransformFeedbackVaryings == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.TransformFeedbackVaryings)
+	}
+
+	retVal := t.p.Call("createShaderProgram", args...)
+	return WebGLProgramFromJSObject(retVal, t.ctx)
+}
+
+// ThinEngineCreateTextureOpts contains optional parameters for ThinEngine.CreateTexture.
+type ThinEngineCreateTextureOpts struct {
+	SamplingMode    *float64
+	OnLoad          *func()
+	OnError         *func()
+	Buffer          *string
+	Fallback        *InternalTexture
+	Format          *float64
+	ForcedExtension *string
+	ExcludeLoaders  []IInternalTextureLoader
+	MimeType        *string
+}
+
+// CreateTexture calls the CreateTexture method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#createtexture
+func (t *ThinEngine) CreateTexture(urlArg string, noMipmap bool, invertY bool, scene *ISceneLike, opts *ThinEngineCreateTextureOpts) *InternalTexture {
+	if opts == nil {
+		opts = &ThinEngineCreateTextureOpts{}
+	}
+
+	args := make([]interface{}, 0, 4+9)
+
+	args = append(args, urlArg)
+	args = append(args, noMipmap)
+	args = append(args, invertY)
+	args = append(args, scene.JSObject())
+
+	if opts.SamplingMode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SamplingMode)
+	}
+	if opts.OnLoad == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnLoad)
+	}
+	if opts.OnError == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnError)
+	}
+	if opts.Buffer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Buffer)
+	}
+	if opts.Fallback == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Fallback.JSObject())
+	}
+	if opts.Format == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Format)
+	}
+	if opts.ForcedExtension == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForcedExtension)
+	}
+	if opts.ExcludeLoaders == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.ExcludeLoaders.JSObject())
+	}
+	if opts.MimeType == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.MimeType)
+	}
+
+	retVal := t.p.Call("createTexture", args...)
+	return InternalTextureFromJSObject(retVal, t.ctx)
+}
+
+// CreateUniformBuffer calls the CreateUniformBuffer method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#createuniformbuffer
+func (t *ThinEngine) CreateUniformBuffer(elements js.Value) *DataBuffer {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, elements)
+
+	retVal := t.p.Call("createUniformBuffer", args...)
+	return DataBufferFromJSObject(retVal, t.ctx)
+}
+
+// CreateVertexBuffer calls the CreateVertexBuffer method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#createvertexbuffer
+func (t *ThinEngine) CreateVertexBuffer(data []float64) *DataBuffer {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, data)
+
+	retVal := t.p.Call("createVertexBuffer", args...)
+	return DataBufferFromJSObject(retVal, t.ctx)
+}
+
+// Dispose calls the Dispose method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#dispose
+func (t *ThinEngine) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	t.p.Call("dispose", args...)
+}
+
+// ThinEngineDrawOpts contains optional parameters for ThinEngine.Draw.
+type ThinEngineDrawOpts struct {
+	InstancesCount *float64
+}
+
+// Draw calls the Draw method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#draw
+func (t *ThinEngine) Draw(useTriangles bool, indexStart float64, indexCount float64, opts *ThinEngineDrawOpts) {
+	if opts == nil {
+		opts = &ThinEngineDrawOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, useTriangles)
+	args = append(args, indexStart)
+	args = append(args, indexCount)
+
+	if opts.InstancesCount == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.InstancesCount)
+	}
+
+	t.p.Call("draw", args...)
+}
+
+// ThinEngineDrawArraysTypeOpts contains optional parameters for ThinEngine.DrawArraysType.
+type ThinEngineDrawArraysTypeOpts struct {
+	InstancesCount *float64
+}
+
+// DrawArraysType calls the DrawArraysType method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#drawarraystype
+func (t *ThinEngine) DrawArraysType(fillMode float64, verticesStart float64, verticesCount float64, opts *ThinEngineDrawArraysTypeOpts) {
+	if opts == nil {
+		opts = &ThinEngineDrawArraysTypeOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, fillMode)
+	args = append(args, verticesStart)
+	args = append(args, verticesCount)
+
+	if opts.InstancesCount == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.InstancesCount)
+	}
+
+	t.p.Call("drawArraysType", args...)
+}
+
+// ThinEngineDrawElementsTypeOpts contains optional parameters for ThinEngine.DrawElementsType.
+type ThinEngineDrawElementsTypeOpts struct {
+	InstancesCount *float64
+}
+
+// DrawElementsType calls the DrawElementsType method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#drawelementstype
+func (t *ThinEngine) DrawElementsType(fillMode float64, indexStart float64, indexCount float64, opts *ThinEngineDrawElementsTypeOpts) {
+	if opts == nil {
+		opts = &ThinEngineDrawElementsTypeOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, fillMode)
+	args = append(args, indexStart)
+	args = append(args, indexCount)
+
+	if opts.InstancesCount == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.InstancesCount)
+	}
+
+	t.p.Call("drawElementsType", args...)
+}
+
+// ThinEngineDrawPointCloudsOpts contains optional parameters for ThinEngine.DrawPointClouds.
+type ThinEngineDrawPointCloudsOpts struct {
+	InstancesCount *float64
+}
+
+// DrawPointClouds calls the DrawPointClouds method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#drawpointclouds
+func (t *ThinEngine) DrawPointClouds(verticesStart float64, verticesCount float64, opts *ThinEngineDrawPointCloudsOpts) {
+	if opts == nil {
+		opts = &ThinEngineDrawPointCloudsOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, verticesStart)
+	args = append(args, verticesCount)
+
+	if opts.InstancesCount == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.InstancesCount)
+	}
+
+	t.p.Call("drawPointClouds", args...)
+}
+
+// ThinEngineDrawUnIndexedOpts contains optional parameters for ThinEngine.DrawUnIndexed.
+type ThinEngineDrawUnIndexedOpts struct {
+	InstancesCount *float64
+}
+
+// DrawUnIndexed calls the DrawUnIndexed method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#drawunindexed
+func (t *ThinEngine) DrawUnIndexed(useTriangles bool, verticesStart float64, verticesCount float64, opts *ThinEngineDrawUnIndexedOpts) {
+	if opts == nil {
+		opts = &ThinEngineDrawUnIndexedOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, useTriangles)
+	args = append(args, verticesStart)
+	args = append(args, verticesCount)
+
+	if opts.InstancesCount == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.InstancesCount)
+	}
+
+	t.p.Call("drawUnIndexed", args...)
+}
+
+// EnableEffect calls the EnableEffect method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#enableeffect
+func (t *ThinEngine) EnableEffect(effect *Effect) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, effect.JSObject())
+
+	t.p.Call("enableEffect", args...)
+}
+
+// EndFrame calls the EndFrame method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#endframe
+func (t *ThinEngine) EndFrame() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	t.p.Call("endFrame", args...)
+}
+
+// FloorPOT calls the FloorPOT method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#floorpot
+func (t *ThinEngine) FloorPOT(x float64) float64 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, x)
+
+	retVal := t.p.Call("FloorPOT", args...)
+	return retVal.Float()
+}
+
+// FlushFramebuffer calls the FlushFramebuffer method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#flushframebuffer
+func (t *ThinEngine) FlushFramebuffer() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	t.p.Call("flushFramebuffer", args...)
+}
+
+// GetAttributes calls the GetAttributes method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#getattributes
+func (t *ThinEngine) GetAttributes(pipelineContext *IPipelineContext, attributesNames string) float64 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, pipelineContext.JSObject())
+	args = append(args, attributesNames)
+
+	retVal := t.p.Call("getAttributes", args...)
+	return retVal.Float()
+}
+
+// GetCaps calls the GetCaps method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#getcaps
+func (t *ThinEngine) GetCaps() *EngineCapabilities {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getCaps", args...)
+	return EngineCapabilitiesFromJSObject(retVal, t.ctx)
+}
+
+// GetClassName calls the GetClassName method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#getclassname
+func (t *ThinEngine) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetError calls the GetError method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#geterror
+func (t *ThinEngine) GetError() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getError", args...)
+	return retVal.Float()
+}
+
+// ThinEngineGetExponentOfTwoOpts contains optional parameters for ThinEngine.GetExponentOfTwo.
+type ThinEngineGetExponentOfTwoOpts struct {
+	Mode *float64
+}
+
+// GetExponentOfTwo calls the GetExponentOfTwo method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#getexponentoftwo
+func (t *ThinEngine) GetExponentOfTwo(value float64, max float64, opts *ThinEngineGetExponentOfTwoOpts) float64 {
+	if opts == nil {
+		opts = &ThinEngineGetExponentOfTwoOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, value)
+	args = append(args, max)
+
+	if opts.Mode == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Mode)
+	}
+
+	retVal := t.p.Call("GetExponentOfTwo", args...)
+	return retVal.Float()
+}
+
+// GetGlInfo calls the GetGlInfo method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#getglinfo
+func (t *ThinEngine) GetGlInfo() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getGlInfo", args...)
+	return retVal
+}
+
+// GetHardwareScalingLevel calls the GetHardwareScalingLevel method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#gethardwarescalinglevel
+func (t *ThinEngine) GetHardwareScalingLevel() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getHardwareScalingLevel", args...)
+	return retVal.Float()
+}
+
+// GetHostDocument calls the GetHostDocument method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#gethostdocument
+func (t *ThinEngine) GetHostDocument() *Document {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getHostDocument", args...)
+	return DocumentFromJSObject(retVal, t.ctx)
+}
+
+// GetHostWindow calls the GetHostWindow method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#gethostwindow
+func (t *ThinEngine) GetHostWindow() *Window {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getHostWindow", args...)
+	return WindowFromJSObject(retVal, t.ctx)
+}
+
+// GetLoadedTexturesCache calls the GetLoadedTexturesCache method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#getloadedtexturescache
+func (t *ThinEngine) GetLoadedTexturesCache() *InternalTexture {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getLoadedTexturesCache", args...)
+	return InternalTextureFromJSObject(retVal, t.ctx)
+}
+
+// ThinEngineGetRenderHeightOpts contains optional parameters for ThinEngine.GetRenderHeight.
+type ThinEngineGetRenderHeightOpts struct {
+	UseScreen *bool
+}
+
+// GetRenderHeight calls the GetRenderHeight method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#getrenderheight
+func (t *ThinEngine) GetRenderHeight(opts *ThinEngineGetRenderHeightOpts) float64 {
+	if opts == nil {
+		opts = &ThinEngineGetRenderHeightOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.UseScreen == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseScreen)
+	}
+
+	retVal := t.p.Call("getRenderHeight", args...)
+	return retVal.Float()
+}
+
+// ThinEngineGetRenderWidthOpts contains optional parameters for ThinEngine.GetRenderWidth.
+type ThinEngineGetRenderWidthOpts struct {
+	UseScreen *bool
+}
+
+// GetRenderWidth calls the GetRenderWidth method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#getrenderwidth
+func (t *ThinEngine) GetRenderWidth(opts *ThinEngineGetRenderWidthOpts) float64 {
+	if opts == nil {
+		opts = &ThinEngineGetRenderWidthOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.UseScreen == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseScreen)
+	}
+
+	retVal := t.p.Call("getRenderWidth", args...)
+	return retVal.Float()
+}
+
+// GetRenderingCanvas calls the GetRenderingCanvas method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#getrenderingcanvas
+func (t *ThinEngine) GetRenderingCanvas() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("getRenderingCanvas", args...)
+	return retVal
+}
+
+// GetUniforms calls the GetUniforms method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#getuniforms
+func (t *ThinEngine) GetUniforms(pipelineContext *IPipelineContext, uniformsNames string) *WebGLUniformLocation {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, pipelineContext.JSObject())
+	args = append(args, uniformsNames)
+
+	retVal := t.p.Call("getUniforms", args...)
+	return WebGLUniformLocationFromJSObject(retVal, t.ctx)
+}
+
+// IsSupported calls the IsSupported method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#issupported
+func (t *ThinEngine) IsSupported() bool {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := t.p.Call("isSupported", args...)
+	return retVal.Bool()
+}
+
+// NearestPOT calls the NearestPOT method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#nearestpot
+func (t *ThinEngine) NearestPOT(x float64) float64 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, x)
+
+	retVal := t.p.Call("NearestPOT", args...)
+	return retVal.Float()
+}
+
+// ThinEngineQueueNewFrameOpts contains optional parameters for ThinEngine.QueueNewFrame.
+type ThinEngineQueueNewFrameOpts struct {
+	Requester *interface{}
+}
+
+// QueueNewFrame calls the QueueNewFrame method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#queuenewframe
+func (t *ThinEngine) QueueNewFrame(jsFunc func(), opts *ThinEngineQueueNewFrameOpts) float64 {
+	if opts == nil {
+		opts = &ThinEngineQueueNewFrameOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, jsFunc)
+
+	if opts.Requester == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Requester)
+	}
+
+	retVal := t.p.Call("QueueNewFrame", args...)
+	return retVal.Float()
+}
+
+// RecordVertexArrayObject calls the RecordVertexArrayObject method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#recordvertexarrayobject
+func (t *ThinEngine) RecordVertexArrayObject(vertexBuffers js.Value, indexBuffer *DataBuffer, effect *Effect) *WebGLVertexArrayObject {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, vertexBuffers)
+	args = append(args, indexBuffer.JSObject())
+	args = append(args, effect.JSObject())
+
+	retVal := t.p.Call("recordVertexArrayObject", args...)
+	return WebGLVertexArrayObjectFromJSObject(retVal, t.ctx)
+}
+
+// ReleaseEffects calls the ReleaseEffects method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#releaseeffects
+func (t *ThinEngine) ReleaseEffects() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	t.p.Call("releaseEffects", args...)
+}
+
+// ReleaseVertexArrayObject calls the ReleaseVertexArrayObject method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#releasevertexarrayobject
+func (t *ThinEngine) ReleaseVertexArrayObject(vao *WebGLVertexArrayObject) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, vao.JSObject())
+
+	t.p.Call("releaseVertexArrayObject", args...)
+}
+
+// ResetTextureCache calls the ResetTextureCache method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#resettexturecache
+func (t *ThinEngine) ResetTextureCache() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	t.p.Call("resetTextureCache", args...)
+}
+
+// Resize calls the Resize method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#resize
+func (t *ThinEngine) Resize() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	t.p.Call("resize", args...)
+}
+
+// RestoreDefaultFramebuffer calls the RestoreDefaultFramebuffer method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#restoredefaultframebuffer
+func (t *ThinEngine) RestoreDefaultFramebuffer() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	t.p.Call("restoreDefaultFramebuffer", args...)
+}
+
+// RunRenderLoop calls the RunRenderLoop method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#runrenderloop
+func (t *ThinEngine) RunRenderLoop(renderFunction func()) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, renderFunction)
+
+	t.p.Call("runRenderLoop", args...)
+}
+
+// SetArray calls the SetArray method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#setarray
+func (t *ThinEngine) SetArray(uniform *WebGLUniformLocation, array float64) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniform.JSObject())
+	args = append(args, array)
+
+	t.p.Call("setArray", args...)
+}
+
+// SetArray2 calls the SetArray2 method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#setarray2
+func (t *ThinEngine) SetArray2(uniform *WebGLUniformLocation, array float64) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniform.JSObject())
+	args = append(args, array)
+
+	t.p.Call("setArray2", args...)
+}
+
+// SetArray3 calls the SetArray3 method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#setarray3
+func (t *ThinEngine) SetArray3(uniform *WebGLUniformLocation, array float64) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniform.JSObject())
+	args = append(args, array)
+
+	t.p.Call("setArray3", args...)
+}
+
+// SetArray4 calls the SetArray4 method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#setarray4
+func (t *ThinEngine) SetArray4(uniform *WebGLUniformLocation, array float64) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniform.JSObject())
+	args = append(args, array)
+
+	t.p.Call("setArray4", args...)
+}
+
+// SetFloat calls the SetFloat method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#setfloat
+func (t *ThinEngine) SetFloat(uniform *WebGLUniformLocation, value float64) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniform.JSObject())
+	args = append(args, value)
+
+	t.p.Call("setFloat", args...)
+}
+
+// SetFloat2 calls the SetFloat2 method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#setfloat2
+func (t *ThinEngine) SetFloat2(uniform *WebGLUniformLocation, x float64, y float64) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, uniform.JSObject())
+	args = append(args, x)
+	args = append(args, y)
+
+	t.p.Call("setFloat2", args...)
+}
+
+// SetFloat3 calls the SetFloat3 method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#setfloat3
+func (t *ThinEngine) SetFloat3(uniform *WebGLUniformLocation, x float64, y float64, z float64) {
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, uniform.JSObject())
+	args = append(args, x)
+	args = append(args, y)
+	args = append(args, z)
+
+	t.p.Call("setFloat3", args...)
+}
+
+// SetFloat4 calls the SetFloat4 method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#setfloat4
+func (t *ThinEngine) SetFloat4(uniform *WebGLUniformLocation, x float64, y float64, z float64, w float64) {
+
+	args := make([]interface{}, 0, 5+0)
+
+	args = append(args, uniform.JSObject())
+	args = append(args, x)
+	args = append(args, y)
+	args = append(args, z)
+	args = append(args, w)
+
+	t.p.Call("setFloat4", args...)
+}
+
+// SetHardwareScalingLevel calls the SetHardwareScalingLevel method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#sethardwarescalinglevel
+func (t *ThinEngine) SetHardwareScalingLevel(level float64) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, level)
+
+	t.p.Call("setHardwareScalingLevel", args...)
+}
+
+// SetInt calls the SetInt method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#setint
+func (t *ThinEngine) SetInt(uniform *WebGLUniformLocation, value float64) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniform.JSObject())
+	args = append(args, value)
+
+	t.p.Call("setInt", args...)
+}
+
+// SetIntArray calls the SetIntArray method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#setintarray
+func (t *ThinEngine) SetIntArray(uniform *WebGLUniformLocation, array *Int32Array) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniform.JSObject())
+	args = append(args, array.JSObject())
+
+	t.p.Call("setIntArray", args...)
+}
+
+// SetIntArray2 calls the SetIntArray2 method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#setintarray2
+func (t *ThinEngine) SetIntArray2(uniform *WebGLUniformLocation, array *Int32Array) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniform.JSObject())
+	args = append(args, array.JSObject())
+
+	t.p.Call("setIntArray2", args...)
+}
+
+// SetIntArray3 calls the SetIntArray3 method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#setintarray3
+func (t *ThinEngine) SetIntArray3(uniform *WebGLUniformLocation, array *Int32Array) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniform.JSObject())
+	args = append(args, array.JSObject())
+
+	t.p.Call("setIntArray3", args...)
+}
+
+// SetIntArray4 calls the SetIntArray4 method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#setintarray4
+func (t *ThinEngine) SetIntArray4(uniform *WebGLUniformLocation, array *Int32Array) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniform.JSObject())
+	args = append(args, array.JSObject())
+
+	t.p.Call("setIntArray4", args...)
+}
+
+// SetMatrices calls the SetMatrices method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#setmatrices
+func (t *ThinEngine) SetMatrices(uniform *WebGLUniformLocation, matrices js.Value) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniform.JSObject())
+	args = append(args, matrices)
+
+	t.p.Call("setMatrices", args...)
+}
+
+// SetMatrix2x2 calls the SetMatrix2x2 method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#setmatrix2x2
+func (t *ThinEngine) SetMatrix2x2(uniform *WebGLUniformLocation, matrix js.Value) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniform.JSObject())
+	args = append(args, matrix)
+
+	t.p.Call("setMatrix2x2", args...)
+}
+
+// SetMatrix3x3 calls the SetMatrix3x3 method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#setmatrix3x3
+func (t *ThinEngine) SetMatrix3x3(uniform *WebGLUniformLocation, matrix js.Value) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, uniform.JSObject())
+	args = append(args, matrix)
+
+	t.p.Call("setMatrix3x3", args...)
+}
+
+// SetSize calls the SetSize method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#setsize
+func (t *ThinEngine) SetSize(width float64, height float64) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, width)
+	args = append(args, height)
+
+	t.p.Call("setSize", args...)
+}
+
+// SetTexture calls the SetTexture method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#settexture
+func (t *ThinEngine) SetTexture(channel float64, uniform *WebGLUniformLocation, texture *BaseTexture) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, channel)
+	args = append(args, uniform.JSObject())
+	args = append(args, texture.JSObject())
+
+	t.p.Call("setTexture", args...)
+}
+
+// SetTextureArray calls the SetTextureArray method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#settexturearray
+func (t *ThinEngine) SetTextureArray(channel float64, uniform *WebGLUniformLocation, textures *BaseTexture) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, channel)
+	args = append(args, uniform.JSObject())
+	args = append(args, textures.JSObject())
+
+	t.p.Call("setTextureArray", args...)
+}
+
+// ThinEngineSetViewportOpts contains optional parameters for ThinEngine.SetViewport.
+type ThinEngineSetViewportOpts struct {
+	RequiredWidth  *float64
+	RequiredHeight *float64
+}
+
+// SetViewport calls the SetViewport method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#setviewport
+func (t *ThinEngine) SetViewport(viewport *IViewportLike, opts *ThinEngineSetViewportOpts) {
+	if opts == nil {
+		opts = &ThinEngineSetViewportOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, viewport.JSObject())
+
+	if opts.RequiredWidth == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RequiredWidth)
+	}
+	if opts.RequiredHeight == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.RequiredHeight)
+	}
+
+	t.p.Call("setViewport", args...)
+}
+
+// ThinEngineStopRenderLoopOpts contains optional parameters for ThinEngine.StopRenderLoop.
+type ThinEngineStopRenderLoopOpts struct {
+	RenderFunction *func()
+}
+
+// StopRenderLoop calls the StopRenderLoop method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#stoprenderloop
+func (t *ThinEngine) StopRenderLoop(opts *ThinEngineStopRenderLoopOpts) {
+	if opts == nil {
+		opts = &ThinEngineStopRenderLoopOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.RenderFunction == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.RenderFunction)
+	}
+
+	t.p.Call("stopRenderLoop", args...)
+}
+
+// ThinEngineUnBindFramebufferOpts contains optional parameters for ThinEngine.UnBindFramebuffer.
+type ThinEngineUnBindFramebufferOpts struct {
+	DisableGenerateMipMaps *bool
+	OnBeforeUnbind         *func()
+}
+
+// UnBindFramebuffer calls the UnBindFramebuffer method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#unbindframebuffer
+func (t *ThinEngine) UnBindFramebuffer(texture *InternalTexture, opts *ThinEngineUnBindFramebufferOpts) {
+	if opts == nil {
+		opts = &ThinEngineUnBindFramebufferOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, texture.JSObject())
+
+	if opts.DisableGenerateMipMaps == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.DisableGenerateMipMaps)
+	}
+	if opts.OnBeforeUnbind == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnBeforeUnbind)
+	}
+
+	t.p.Call("unBindFramebuffer", args...)
+}
+
+// ThinEngineUnBindMultiColorAttachmentFramebufferOpts contains optional parameters for ThinEngine.UnBindMultiColorAttachmentFramebuffer.
+type ThinEngineUnBindMultiColorAttachmentFramebufferOpts struct {
+	OnBeforeUnbind *func()
+}
+
+// UnBindMultiColorAttachmentFramebuffer calls the UnBindMultiColorAttachmentFramebuffer method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#unbindmulticolorattachmentframebuffer
+func (t *ThinEngine) UnBindMultiColorAttachmentFramebuffer(textures *InternalTexture, disableGenerateMipMaps bool, opts *ThinEngineUnBindMultiColorAttachmentFramebufferOpts) {
+	if opts == nil {
+		opts = &ThinEngineUnBindMultiColorAttachmentFramebufferOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, textures.JSObject())
+	args = append(args, disableGenerateMipMaps)
+
+	if opts.OnBeforeUnbind == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnBeforeUnbind)
+	}
+
+	t.p.Call("unBindMultiColorAttachmentFramebuffer", args...)
+}
+
+// UnbindAllAttributes calls the UnbindAllAttributes method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#unbindallattributes
+func (t *ThinEngine) UnbindAllAttributes() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	t.p.Call("unbindAllAttributes", args...)
+}
+
+// UnbindAllTextures calls the UnbindAllTextures method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#unbindalltextures
+func (t *ThinEngine) UnbindAllTextures() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	t.p.Call("unbindAllTextures", args...)
+}
+
+// UnbindInstanceAttributes calls the UnbindInstanceAttributes method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#unbindinstanceattributes
+func (t *ThinEngine) UnbindInstanceAttributes() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	t.p.Call("unbindInstanceAttributes", args...)
+}
+
+// UpdateAndBindInstancesBuffer calls the UpdateAndBindInstancesBuffer method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#updateandbindinstancesbuffer
+func (t *ThinEngine) UpdateAndBindInstancesBuffer(instancesBuffer *DataBuffer, data js.Value, offsetLocations float64) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, instancesBuffer.JSObject())
+	args = append(args, data)
+	args = append(args, offsetLocations)
+
+	t.p.Call("updateAndBindInstancesBuffer", args...)
+}
+
+// UpdateArrayBuffer calls the UpdateArrayBuffer method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#updatearraybuffer
+func (t *ThinEngine) UpdateArrayBuffer(data js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, data)
+
+	t.p.Call("updateArrayBuffer", args...)
+}
+
+// ThinEngineUpdateDynamicTextureOpts contains optional parameters for ThinEngine.UpdateDynamicTexture.
+type ThinEngineUpdateDynamicTextureOpts struct {
+	PremulAlpha      *bool
+	Format           *float64
+	ForceBindTexture *bool
+}
+
+// UpdateDynamicTexture calls the UpdateDynamicTexture method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#updatedynamictexture
+func (t *ThinEngine) UpdateDynamicTexture(texture *InternalTexture, canvas js.Value, invertY bool, opts *ThinEngineUpdateDynamicTextureOpts) {
+	if opts == nil {
+		opts = &ThinEngineUpdateDynamicTextureOpts{}
+	}
+
+	args := make([]interface{}, 0, 3+3)
+
+	args = append(args, texture.JSObject())
+	args = append(args, canvas)
+	args = append(args, invertY)
+
+	if opts.PremulAlpha == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.PremulAlpha)
+	}
+	if opts.Format == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Format)
+	}
+	if opts.ForceBindTexture == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.ForceBindTexture)
+	}
+
+	t.p.Call("updateDynamicTexture", args...)
+}
+
+// UpdateMultipleRenderTargetTextureSampleCount calls the UpdateMultipleRenderTargetTextureSampleCount method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#updatemultiplerendertargettexturesamplecount
+func (t *ThinEngine) UpdateMultipleRenderTargetTextureSampleCount(textures *InternalTexture, samples float64) float64 {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, textures.JSObject())
+	args = append(args, samples)
+
+	retVal := t.p.Call("updateMultipleRenderTargetTextureSampleCount", args...)
+	return retVal.Float()
+}
+
+// UpdateTextureSamplingMode calls the UpdateTextureSamplingMode method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#updatetexturesamplingmode
+func (t *ThinEngine) UpdateTextureSamplingMode(samplingMode float64, texture *InternalTexture) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, samplingMode)
+	args = append(args, texture.JSObject())
+
+	t.p.Call("updateTextureSamplingMode", args...)
+}
+
+// ThinEngineUpdateUniformBufferOpts contains optional parameters for ThinEngine.UpdateUniformBuffer.
+type ThinEngineUpdateUniformBufferOpts struct {
+	Offset *float64
+	Count  *float64
+}
+
+// UpdateUniformBuffer calls the UpdateUniformBuffer method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#updateuniformbuffer
+func (t *ThinEngine) UpdateUniformBuffer(uniformBuffer *DataBuffer, elements js.Value, opts *ThinEngineUpdateUniformBufferOpts) {
+	if opts == nil {
+		opts = &ThinEngineUpdateUniformBufferOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+2)
+
+	args = append(args, uniformBuffer.JSObject())
+	args = append(args, elements)
+
+	if opts.Offset == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Offset)
+	}
+	if opts.Count == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Count)
+	}
+
+	t.p.Call("updateUniformBuffer", args...)
+}
+
+// UpdateVideoTexture calls the UpdateVideoTexture method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#updatevideotexture
+func (t *ThinEngine) UpdateVideoTexture(texture *InternalTexture, video js.Value, invertY bool) {
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, texture.JSObject())
+	args = append(args, video)
+	args = append(args, invertY)
+
+	t.p.Call("updateVideoTexture", args...)
+}
+
+// ThinEngineWipeCachesOpts contains optional parameters for ThinEngine.WipeCaches.
+type ThinEngineWipeCachesOpts struct {
+	BruteForce *bool
+}
+
+// WipeCaches calls the WipeCaches method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#wipecaches
+func (t *ThinEngine) WipeCaches(opts *ThinEngineWipeCachesOpts) {
+	if opts == nil {
+		opts = &ThinEngineWipeCachesOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.BruteForce == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.BruteForce)
+	}
+
+	t.p.Call("wipeCaches", args...)
+}
+
+// _createDepthStencilCubeTexture calls the _createDepthStencilCubeTexture method on the ThinEngine object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#_createdepthstencilcubetexture
+func (t *ThinEngine) _createDepthStencilCubeTexture(size float64, options *DepthTextureCreationOptions) *InternalTexture {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, size)
+	args = append(args, options.JSObject())
+
+	retVal := t.p.Call("_createDepthStencilCubeTexture", args...)
+	return InternalTextureFromJSObject(retVal, t.ctx)
+}
+
+/*
+
+// AlphaState returns the AlphaState property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#alphastate
+func (t *ThinEngine) AlphaState(alphaState *AlphaState) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(alphaState.JSObject())
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// SetAlphaState sets the AlphaState property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#alphastate
+func (t *ThinEngine) SetAlphaState(alphaState *AlphaState) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(alphaState.JSObject())
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// CollisionsEpsilon returns the CollisionsEpsilon property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#collisionsepsilon
+func (t *ThinEngine) CollisionsEpsilon(CollisionsEpsilon float64) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(CollisionsEpsilon)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// SetCollisionsEpsilon sets the CollisionsEpsilon property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#collisionsepsilon
+func (t *ThinEngine) SetCollisionsEpsilon(CollisionsEpsilon float64) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(CollisionsEpsilon)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// CullBackFaces returns the CullBackFaces property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#cullbackfaces
+func (t *ThinEngine) CullBackFaces(cullBackFaces bool) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(cullBackFaces)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// SetCullBackFaces sets the CullBackFaces property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#cullbackfaces
+func (t *ThinEngine) SetCullBackFaces(cullBackFaces bool) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(cullBackFaces)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// CurrentViewport returns the CurrentViewport property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#currentviewport
+func (t *ThinEngine) CurrentViewport(currentViewport *IViewportLike) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(currentViewport.JSObject())
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// SetCurrentViewport sets the CurrentViewport property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#currentviewport
+func (t *ThinEngine) SetCurrentViewport(currentViewport *IViewportLike) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(currentViewport.JSObject())
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// DepthCullingState returns the DepthCullingState property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#depthcullingstate
+func (t *ThinEngine) DepthCullingState(depthCullingState *DepthCullingState) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(depthCullingState.JSObject())
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// SetDepthCullingState sets the DepthCullingState property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#depthcullingstate
+func (t *ThinEngine) SetDepthCullingState(depthCullingState *DepthCullingState) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(depthCullingState.JSObject())
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// Description returns the Description property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#description
+func (t *ThinEngine) Description(description string) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(description)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// SetDescription sets the Description property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#description
+func (t *ThinEngine) SetDescription(description string) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(description)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// DisableUniformBuffers returns the DisableUniformBuffers property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#disableuniformbuffers
+func (t *ThinEngine) DisableUniformBuffers(disableUniformBuffers bool) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(disableUniformBuffers)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// SetDisableUniformBuffers sets the DisableUniformBuffers property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#disableuniformbuffers
+func (t *ThinEngine) SetDisableUniformBuffers(disableUniformBuffers bool) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(disableUniformBuffers)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// DisableVertexArrayObjects returns the DisableVertexArrayObjects property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#disablevertexarrayobjects
+func (t *ThinEngine) DisableVertexArrayObjects(disableVertexArrayObjects bool) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(disableVertexArrayObjects)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// SetDisableVertexArrayObjects sets the DisableVertexArrayObjects property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#disablevertexarrayobjects
+func (t *ThinEngine) SetDisableVertexArrayObjects(disableVertexArrayObjects bool) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(disableVertexArrayObjects)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// DoNotHandleContextLost returns the DoNotHandleContextLost property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#donothandlecontextlost
+func (t *ThinEngine) DoNotHandleContextLost(doNotHandleContextLost bool) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(doNotHandleContextLost)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// SetDoNotHandleContextLost sets the DoNotHandleContextLost property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#donothandlecontextlost
+func (t *ThinEngine) SetDoNotHandleContextLost(doNotHandleContextLost bool) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(doNotHandleContextLost)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// EmptyCubeTexture returns the EmptyCubeTexture property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#emptycubetexture
+func (t *ThinEngine) EmptyCubeTexture(emptyCubeTexture *InternalTexture) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(emptyCubeTexture.JSObject())
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// SetEmptyCubeTexture sets the EmptyCubeTexture property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#emptycubetexture
+func (t *ThinEngine) SetEmptyCubeTexture(emptyCubeTexture *InternalTexture) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(emptyCubeTexture.JSObject())
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// EmptyTexture returns the EmptyTexture property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#emptytexture
+func (t *ThinEngine) EmptyTexture(emptyTexture *InternalTexture) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(emptyTexture.JSObject())
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// SetEmptyTexture sets the EmptyTexture property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#emptytexture
+func (t *ThinEngine) SetEmptyTexture(emptyTexture *InternalTexture) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(emptyTexture.JSObject())
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// EmptyTexture2DArray returns the EmptyTexture2DArray property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#emptytexture2darray
+func (t *ThinEngine) EmptyTexture2DArray(emptyTexture2DArray *InternalTexture) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(emptyTexture2DArray.JSObject())
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// SetEmptyTexture2DArray sets the EmptyTexture2DArray property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#emptytexture2darray
+func (t *ThinEngine) SetEmptyTexture2DArray(emptyTexture2DArray *InternalTexture) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(emptyTexture2DArray.JSObject())
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// EmptyTexture3D returns the EmptyTexture3D property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#emptytexture3d
+func (t *ThinEngine) EmptyTexture3D(emptyTexture3D *InternalTexture) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(emptyTexture3D.JSObject())
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// SetEmptyTexture3D sets the EmptyTexture3D property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#emptytexture3d
+func (t *ThinEngine) SetEmptyTexture3D(emptyTexture3D *InternalTexture) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(emptyTexture3D.JSObject())
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// EnableUnpackFlipYCached returns the EnableUnpackFlipYCached property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#enableunpackflipycached
+func (t *ThinEngine) EnableUnpackFlipYCached(enableUnpackFlipYCached bool) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(enableUnpackFlipYCached)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// SetEnableUnpackFlipYCached sets the EnableUnpackFlipYCached property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#enableunpackflipycached
+func (t *ThinEngine) SetEnableUnpackFlipYCached(enableUnpackFlipYCached bool) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(enableUnpackFlipYCached)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// ExceptionList returns the ExceptionList property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#exceptionlist
+func (t *ThinEngine) ExceptionList(ExceptionList js.Value) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(ExceptionList)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// SetExceptionList sets the ExceptionList property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#exceptionlist
+func (t *ThinEngine) SetExceptionList(ExceptionList js.Value) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(ExceptionList)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// ForcePOTTextures returns the ForcePOTTextures property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#forcepottextures
+func (t *ThinEngine) ForcePOTTextures(forcePOTTextures bool) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(forcePOTTextures)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// SetForcePOTTextures sets the ForcePOTTextures property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#forcepottextures
+func (t *ThinEngine) SetForcePOTTextures(forcePOTTextures bool) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(forcePOTTextures)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// IsFullscreen returns the IsFullscreen property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#isfullscreen
+func (t *ThinEngine) IsFullscreen(isFullscreen bool) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(isFullscreen)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// SetIsFullscreen sets the IsFullscreen property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#isfullscreen
+func (t *ThinEngine) SetIsFullscreen(isFullscreen bool) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(isFullscreen)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// IsStencilEnable returns the IsStencilEnable property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#isstencilenable
+func (t *ThinEngine) IsStencilEnable(isStencilEnable bool) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(isStencilEnable)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// SetIsStencilEnable sets the IsStencilEnable property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#isstencilenable
+func (t *ThinEngine) SetIsStencilEnable(isStencilEnable bool) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(isStencilEnable)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// NeedPOTTextures returns the NeedPOTTextures property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#needpottextures
+func (t *ThinEngine) NeedPOTTextures(needPOTTextures bool) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(needPOTTextures)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// SetNeedPOTTextures sets the NeedPOTTextures property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#needpottextures
+func (t *ThinEngine) SetNeedPOTTextures(needPOTTextures bool) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(needPOTTextures)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// NpmPackage returns the NpmPackage property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#npmpackage
+func (t *ThinEngine) NpmPackage(NpmPackage string) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(NpmPackage)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// SetNpmPackage sets the NpmPackage property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#npmpackage
+func (t *ThinEngine) SetNpmPackage(NpmPackage string) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(NpmPackage)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// OnBeforeTextureInitObservable returns the OnBeforeTextureInitObservable property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#onbeforetextureinitobservable
+func (t *ThinEngine) OnBeforeTextureInitObservable(onBeforeTextureInitObservable *Observable) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(onBeforeTextureInitObservable.JSObject())
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeTextureInitObservable sets the OnBeforeTextureInitObservable property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#onbeforetextureinitobservable
+func (t *ThinEngine) SetOnBeforeTextureInitObservable(onBeforeTextureInitObservable *Observable) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(onBeforeTextureInitObservable.JSObject())
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// OnContextLostObservable returns the OnContextLostObservable property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#oncontextlostobservable
+func (t *ThinEngine) OnContextLostObservable(onContextLostObservable *Observable) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(onContextLostObservable.JSObject())
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// SetOnContextLostObservable sets the OnContextLostObservable property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#oncontextlostobservable
+func (t *ThinEngine) SetOnContextLostObservable(onContextLostObservable *Observable) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(onContextLostObservable.JSObject())
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// OnContextRestoredObservable returns the OnContextRestoredObservable property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#oncontextrestoredobservable
+func (t *ThinEngine) OnContextRestoredObservable(onContextRestoredObservable *Observable) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(onContextRestoredObservable.JSObject())
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// SetOnContextRestoredObservable sets the OnContextRestoredObservable property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#oncontextrestoredobservable
+func (t *ThinEngine) SetOnContextRestoredObservable(onContextRestoredObservable *Observable) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(onContextRestoredObservable.JSObject())
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// PremultipliedAlpha returns the PremultipliedAlpha property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#premultipliedalpha
+func (t *ThinEngine) PremultipliedAlpha(premultipliedAlpha bool) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(premultipliedAlpha)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// SetPremultipliedAlpha sets the PremultipliedAlpha property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#premultipliedalpha
+func (t *ThinEngine) SetPremultipliedAlpha(premultipliedAlpha bool) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(premultipliedAlpha)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// PreventCacheWipeBetweenFrames returns the PreventCacheWipeBetweenFrames property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#preventcachewipebetweenframes
+func (t *ThinEngine) PreventCacheWipeBetweenFrames(preventCacheWipeBetweenFrames bool) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(preventCacheWipeBetweenFrames)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// SetPreventCacheWipeBetweenFrames sets the PreventCacheWipeBetweenFrames property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#preventcachewipebetweenframes
+func (t *ThinEngine) SetPreventCacheWipeBetweenFrames(preventCacheWipeBetweenFrames bool) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(preventCacheWipeBetweenFrames)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// RenderEvenInBackground returns the RenderEvenInBackground property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#rendereveninbackground
+func (t *ThinEngine) RenderEvenInBackground(renderEvenInBackground bool) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(renderEvenInBackground)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// SetRenderEvenInBackground sets the RenderEvenInBackground property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#rendereveninbackground
+func (t *ThinEngine) SetRenderEvenInBackground(renderEvenInBackground bool) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(renderEvenInBackground)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// ShadersRepository returns the ShadersRepository property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#shadersrepository
+func (t *ThinEngine) ShadersRepository(ShadersRepository string) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(ShadersRepository)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// SetShadersRepository sets the ShadersRepository property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#shadersrepository
+func (t *ThinEngine) SetShadersRepository(ShadersRepository string) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(ShadersRepository)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// StencilState returns the StencilState property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#stencilstate
+func (t *ThinEngine) StencilState(stencilState *StencilState) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(stencilState.JSObject())
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// SetStencilState sets the StencilState property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#stencilstate
+func (t *ThinEngine) SetStencilState(stencilState *StencilState) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(stencilState.JSObject())
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// SupportsUniformBuffers returns the SupportsUniformBuffers property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#supportsuniformbuffers
+func (t *ThinEngine) SupportsUniformBuffers(supportsUniformBuffers bool) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(supportsUniformBuffers)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// SetSupportsUniformBuffers sets the SupportsUniformBuffers property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#supportsuniformbuffers
+func (t *ThinEngine) SetSupportsUniformBuffers(supportsUniformBuffers bool) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(supportsUniformBuffers)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// TextureFormatInUse returns the TextureFormatInUse property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#textureformatinuse
+func (t *ThinEngine) TextureFormatInUse(textureFormatInUse string) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(textureFormatInUse)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTextureFormatInUse sets the TextureFormatInUse property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#textureformatinuse
+func (t *ThinEngine) SetTextureFormatInUse(textureFormatInUse string) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(textureFormatInUse)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// TexturesSupported returns the TexturesSupported property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#texturessupported
+func (t *ThinEngine) TexturesSupported(texturesSupported []string) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(texturesSupported)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// SetTexturesSupported sets the TexturesSupported property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#texturessupported
+func (t *ThinEngine) SetTexturesSupported(texturesSupported []string) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(texturesSupported)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// UseReverseDepthBuffer returns the UseReverseDepthBuffer property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#usereversedepthbuffer
+func (t *ThinEngine) UseReverseDepthBuffer(useReverseDepthBuffer bool) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(useReverseDepthBuffer)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// SetUseReverseDepthBuffer sets the UseReverseDepthBuffer property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#usereversedepthbuffer
+func (t *ThinEngine) SetUseReverseDepthBuffer(useReverseDepthBuffer bool) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(useReverseDepthBuffer)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// ValidateShaderPrograms returns the ValidateShaderPrograms property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#validateshaderprograms
+func (t *ThinEngine) ValidateShaderPrograms(validateShaderPrograms bool) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(validateShaderPrograms)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// SetValidateShaderPrograms sets the ValidateShaderPrograms property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#validateshaderprograms
+func (t *ThinEngine) SetValidateShaderPrograms(validateShaderPrograms bool) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(validateShaderPrograms)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// Version returns the Version property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#version
+func (t *ThinEngine) Version(Version string) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(Version)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// SetVersion sets the Version property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#version
+func (t *ThinEngine) SetVersion(Version string) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(Version)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// WebGLVersion returns the WebGLVersion property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#webglversion
+func (t *ThinEngine) WebGLVersion(webGLVersion float64) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(webGLVersion)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+// SetWebGLVersion sets the WebGLVersion property of class ThinEngine.
+//
+// https://doc.babylonjs.com/api/classes/babylon.thinengine#webglversion
+func (t *ThinEngine) SetWebGLVersion(webGLVersion float64) *ThinEngine {
+	p := ba.ctx.Get("ThinEngine").New(webGLVersion)
+	return ThinEngineFromJSObject(p, ba.ctx)
+}
+
+*/

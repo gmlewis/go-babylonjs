@@ -31,8 +31,73 @@ func PhysicsGravitationalFieldEventFromJSObject(p js.Value, ctx js.Value) *Physi
 //
 // https://doc.babylonjs.com/api/classes/babylon.physicsgravitationalfieldevent
 func (ba *Babylon) NewPhysicsGravitationalFieldEvent(_physicsHelper *PhysicsHelper, _scene *Scene, _origin *Vector3, _options *PhysicsRadialExplosionEventOptions) *PhysicsGravitationalFieldEvent {
-	p := ba.ctx.Get("PhysicsGravitationalFieldEvent").New(_physicsHelper.JSObject(), _scene.JSObject(), _origin.JSObject(), _options.JSObject())
+
+	args := make([]interface{}, 0, 4+0)
+
+	args = append(args, _physicsHelper.JSObject())
+	args = append(args, _scene.JSObject())
+	args = append(args, _origin.JSObject())
+	args = append(args, _options.JSObject())
+
+	p := ba.ctx.Get("PhysicsGravitationalFieldEvent").New(args...)
 	return PhysicsGravitationalFieldEventFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Disable calls the Disable method on the PhysicsGravitationalFieldEvent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsgravitationalfieldevent#disable
+func (p *PhysicsGravitationalFieldEvent) Disable() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("disable", args...)
+}
+
+// PhysicsGravitationalFieldEventDisposeOpts contains optional parameters for PhysicsGravitationalFieldEvent.Dispose.
+type PhysicsGravitationalFieldEventDisposeOpts struct {
+	Force *bool
+}
+
+// Dispose calls the Dispose method on the PhysicsGravitationalFieldEvent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsgravitationalfieldevent#dispose
+func (p *PhysicsGravitationalFieldEvent) Dispose(opts *PhysicsGravitationalFieldEventDisposeOpts) {
+	if opts == nil {
+		opts = &PhysicsGravitationalFieldEventDisposeOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Force == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Force)
+	}
+
+	p.p.Call("dispose", args...)
+}
+
+// Enable calls the Enable method on the PhysicsGravitationalFieldEvent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsgravitationalfieldevent#enable
+func (p *PhysicsGravitationalFieldEvent) Enable() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	p.p.Call("enable", args...)
+}
+
+// GetData calls the GetData method on the PhysicsGravitationalFieldEvent object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.physicsgravitationalfieldevent#getdata
+func (p *PhysicsGravitationalFieldEvent) GetData() *PhysicsGravitationalFieldEventData {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := p.p.Call("getData", args...)
+	return PhysicsGravitationalFieldEventDataFromJSObject(retVal, p.ctx)
+}
+
+/*
+
+ */

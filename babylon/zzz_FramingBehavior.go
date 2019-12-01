@@ -29,4 +29,417 @@ func FramingBehaviorFromJSObject(p js.Value, ctx js.Value) *FramingBehavior {
 	return &FramingBehavior{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// Attach calls the Attach method on the FramingBehavior object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.framingbehavior#attach
+func (f *FramingBehavior) Attach(camera *ArcRotateCamera) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, camera.JSObject())
+
+	f.p.Call("attach", args...)
+}
+
+// Detach calls the Detach method on the FramingBehavior object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.framingbehavior#detach
+func (f *FramingBehavior) Detach() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	f.p.Call("detach", args...)
+}
+
+// Init calls the Init method on the FramingBehavior object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.framingbehavior#init
+func (f *FramingBehavior) Init() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	f.p.Call("init", args...)
+}
+
+// StopAllAnimations calls the StopAllAnimations method on the FramingBehavior object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.framingbehavior#stopallanimations
+func (f *FramingBehavior) StopAllAnimations() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	f.p.Call("stopAllAnimations", args...)
+}
+
+// FramingBehaviorZoomOnBoundingInfoOpts contains optional parameters for FramingBehavior.ZoomOnBoundingInfo.
+type FramingBehaviorZoomOnBoundingInfoOpts struct {
+	FocusOnOriginXZ *bool
+	OnAnimationEnd  *func()
+}
+
+// ZoomOnBoundingInfo calls the ZoomOnBoundingInfo method on the FramingBehavior object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.framingbehavior#zoomonboundinginfo
+func (f *FramingBehavior) ZoomOnBoundingInfo(minimumWorld *Vector3, maximumWorld *Vector3, opts *FramingBehaviorZoomOnBoundingInfoOpts) {
+	if opts == nil {
+		opts = &FramingBehaviorZoomOnBoundingInfoOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+2)
+
+	args = append(args, minimumWorld.JSObject())
+	args = append(args, maximumWorld.JSObject())
+
+	if opts.FocusOnOriginXZ == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FocusOnOriginXZ)
+	}
+	if opts.OnAnimationEnd == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnAnimationEnd)
+	}
+
+	f.p.Call("zoomOnBoundingInfo", args...)
+}
+
+// FramingBehaviorZoomOnMeshOpts contains optional parameters for FramingBehavior.ZoomOnMesh.
+type FramingBehaviorZoomOnMeshOpts struct {
+	FocusOnOriginXZ *bool
+	OnAnimationEnd  *func()
+}
+
+// ZoomOnMesh calls the ZoomOnMesh method on the FramingBehavior object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.framingbehavior#zoomonmesh
+func (f *FramingBehavior) ZoomOnMesh(mesh *AbstractMesh, opts *FramingBehaviorZoomOnMeshOpts) {
+	if opts == nil {
+		opts = &FramingBehaviorZoomOnMeshOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, mesh.JSObject())
+
+	if opts.FocusOnOriginXZ == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FocusOnOriginXZ)
+	}
+	if opts.OnAnimationEnd == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnAnimationEnd)
+	}
+
+	f.p.Call("zoomOnMesh", args...)
+}
+
+// FramingBehaviorZoomOnMeshHierarchyOpts contains optional parameters for FramingBehavior.ZoomOnMeshHierarchy.
+type FramingBehaviorZoomOnMeshHierarchyOpts struct {
+	FocusOnOriginXZ *bool
+	OnAnimationEnd  *func()
+}
+
+// ZoomOnMeshHierarchy calls the ZoomOnMeshHierarchy method on the FramingBehavior object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.framingbehavior#zoomonmeshhierarchy
+func (f *FramingBehavior) ZoomOnMeshHierarchy(mesh *AbstractMesh, opts *FramingBehaviorZoomOnMeshHierarchyOpts) {
+	if opts == nil {
+		opts = &FramingBehaviorZoomOnMeshHierarchyOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, mesh.JSObject())
+
+	if opts.FocusOnOriginXZ == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FocusOnOriginXZ)
+	}
+	if opts.OnAnimationEnd == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnAnimationEnd)
+	}
+
+	f.p.Call("zoomOnMeshHierarchy", args...)
+}
+
+// FramingBehaviorZoomOnMeshesHierarchyOpts contains optional parameters for FramingBehavior.ZoomOnMeshesHierarchy.
+type FramingBehaviorZoomOnMeshesHierarchyOpts struct {
+	FocusOnOriginXZ *bool
+	OnAnimationEnd  *func()
+}
+
+// ZoomOnMeshesHierarchy calls the ZoomOnMeshesHierarchy method on the FramingBehavior object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.framingbehavior#zoomonmesheshierarchy
+func (f *FramingBehavior) ZoomOnMeshesHierarchy(meshes *AbstractMesh, opts *FramingBehaviorZoomOnMeshesHierarchyOpts) {
+	if opts == nil {
+		opts = &FramingBehaviorZoomOnMeshesHierarchyOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+2)
+
+	args = append(args, meshes.JSObject())
+
+	if opts.FocusOnOriginXZ == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.FocusOnOriginXZ)
+	}
+	if opts.OnAnimationEnd == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.OnAnimationEnd)
+	}
+
+	f.p.Call("zoomOnMeshesHierarchy", args...)
+}
+
+/*
+
+// AutoCorrectCameraLimitsAndSensibility returns the AutoCorrectCameraLimitsAndSensibility property of class FramingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.framingbehavior#autocorrectcameralimitsandsensibility
+func (f *FramingBehavior) AutoCorrectCameraLimitsAndSensibility(autoCorrectCameraLimitsAndSensibility bool) *FramingBehavior {
+	p := ba.ctx.Get("FramingBehavior").New(autoCorrectCameraLimitsAndSensibility)
+	return FramingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetAutoCorrectCameraLimitsAndSensibility sets the AutoCorrectCameraLimitsAndSensibility property of class FramingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.framingbehavior#autocorrectcameralimitsandsensibility
+func (f *FramingBehavior) SetAutoCorrectCameraLimitsAndSensibility(autoCorrectCameraLimitsAndSensibility bool) *FramingBehavior {
+	p := ba.ctx.Get("FramingBehavior").New(autoCorrectCameraLimitsAndSensibility)
+	return FramingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// DefaultElevation returns the DefaultElevation property of class FramingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.framingbehavior#defaultelevation
+func (f *FramingBehavior) DefaultElevation(defaultElevation float64) *FramingBehavior {
+	p := ba.ctx.Get("FramingBehavior").New(defaultElevation)
+	return FramingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetDefaultElevation sets the DefaultElevation property of class FramingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.framingbehavior#defaultelevation
+func (f *FramingBehavior) SetDefaultElevation(defaultElevation float64) *FramingBehavior {
+	p := ba.ctx.Get("FramingBehavior").New(defaultElevation)
+	return FramingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// EasingFunction returns the EasingFunction property of class FramingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.framingbehavior#easingfunction
+func (f *FramingBehavior) EasingFunction(EasingFunction *ExponentialEase) *FramingBehavior {
+	p := ba.ctx.Get("FramingBehavior").New(EasingFunction.JSObject())
+	return FramingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetEasingFunction sets the EasingFunction property of class FramingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.framingbehavior#easingfunction
+func (f *FramingBehavior) SetEasingFunction(EasingFunction *ExponentialEase) *FramingBehavior {
+	p := ba.ctx.Get("FramingBehavior").New(EasingFunction.JSObject())
+	return FramingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// EasingMode returns the EasingMode property of class FramingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.framingbehavior#easingmode
+func (f *FramingBehavior) EasingMode(EasingMode float64) *FramingBehavior {
+	p := ba.ctx.Get("FramingBehavior").New(EasingMode)
+	return FramingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetEasingMode sets the EasingMode property of class FramingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.framingbehavior#easingmode
+func (f *FramingBehavior) SetEasingMode(EasingMode float64) *FramingBehavior {
+	p := ba.ctx.Get("FramingBehavior").New(EasingMode)
+	return FramingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// ElevationReturnTime returns the ElevationReturnTime property of class FramingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.framingbehavior#elevationreturntime
+func (f *FramingBehavior) ElevationReturnTime(elevationReturnTime float64) *FramingBehavior {
+	p := ba.ctx.Get("FramingBehavior").New(elevationReturnTime)
+	return FramingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetElevationReturnTime sets the ElevationReturnTime property of class FramingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.framingbehavior#elevationreturntime
+func (f *FramingBehavior) SetElevationReturnTime(elevationReturnTime float64) *FramingBehavior {
+	p := ba.ctx.Get("FramingBehavior").New(elevationReturnTime)
+	return FramingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// ElevationReturnWaitTime returns the ElevationReturnWaitTime property of class FramingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.framingbehavior#elevationreturnwaittime
+func (f *FramingBehavior) ElevationReturnWaitTime(elevationReturnWaitTime float64) *FramingBehavior {
+	p := ba.ctx.Get("FramingBehavior").New(elevationReturnWaitTime)
+	return FramingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetElevationReturnWaitTime sets the ElevationReturnWaitTime property of class FramingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.framingbehavior#elevationreturnwaittime
+func (f *FramingBehavior) SetElevationReturnWaitTime(elevationReturnWaitTime float64) *FramingBehavior {
+	p := ba.ctx.Get("FramingBehavior").New(elevationReturnWaitTime)
+	return FramingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// FitFrustumSidesMode returns the FitFrustumSidesMode property of class FramingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.framingbehavior#fitfrustumsidesmode
+func (f *FramingBehavior) FitFrustumSidesMode(FitFrustumSidesMode float64) *FramingBehavior {
+	p := ba.ctx.Get("FramingBehavior").New(FitFrustumSidesMode)
+	return FramingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetFitFrustumSidesMode sets the FitFrustumSidesMode property of class FramingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.framingbehavior#fitfrustumsidesmode
+func (f *FramingBehavior) SetFitFrustumSidesMode(FitFrustumSidesMode float64) *FramingBehavior {
+	p := ba.ctx.Get("FramingBehavior").New(FitFrustumSidesMode)
+	return FramingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// FramingTime returns the FramingTime property of class FramingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.framingbehavior#framingtime
+func (f *FramingBehavior) FramingTime(framingTime float64) *FramingBehavior {
+	p := ba.ctx.Get("FramingBehavior").New(framingTime)
+	return FramingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetFramingTime sets the FramingTime property of class FramingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.framingbehavior#framingtime
+func (f *FramingBehavior) SetFramingTime(framingTime float64) *FramingBehavior {
+	p := ba.ctx.Get("FramingBehavior").New(framingTime)
+	return FramingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// IgnoreBoundsSizeMode returns the IgnoreBoundsSizeMode property of class FramingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.framingbehavior#ignoreboundssizemode
+func (f *FramingBehavior) IgnoreBoundsSizeMode(IgnoreBoundsSizeMode float64) *FramingBehavior {
+	p := ba.ctx.Get("FramingBehavior").New(IgnoreBoundsSizeMode)
+	return FramingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetIgnoreBoundsSizeMode sets the IgnoreBoundsSizeMode property of class FramingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.framingbehavior#ignoreboundssizemode
+func (f *FramingBehavior) SetIgnoreBoundsSizeMode(IgnoreBoundsSizeMode float64) *FramingBehavior {
+	p := ba.ctx.Get("FramingBehavior").New(IgnoreBoundsSizeMode)
+	return FramingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// IsUserIsMoving returns the IsUserIsMoving property of class FramingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.framingbehavior#isuserismoving
+func (f *FramingBehavior) IsUserIsMoving(isUserIsMoving bool) *FramingBehavior {
+	p := ba.ctx.Get("FramingBehavior").New(isUserIsMoving)
+	return FramingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetIsUserIsMoving sets the IsUserIsMoving property of class FramingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.framingbehavior#isuserismoving
+func (f *FramingBehavior) SetIsUserIsMoving(isUserIsMoving bool) *FramingBehavior {
+	p := ba.ctx.Get("FramingBehavior").New(isUserIsMoving)
+	return FramingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// Mode returns the Mode property of class FramingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.framingbehavior#mode
+func (f *FramingBehavior) Mode(mode float64) *FramingBehavior {
+	p := ba.ctx.Get("FramingBehavior").New(mode)
+	return FramingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetMode sets the Mode property of class FramingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.framingbehavior#mode
+func (f *FramingBehavior) SetMode(mode float64) *FramingBehavior {
+	p := ba.ctx.Get("FramingBehavior").New(mode)
+	return FramingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// Name returns the Name property of class FramingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.framingbehavior#name
+func (f *FramingBehavior) Name(name string) *FramingBehavior {
+	p := ba.ctx.Get("FramingBehavior").New(name)
+	return FramingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetName sets the Name property of class FramingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.framingbehavior#name
+func (f *FramingBehavior) SetName(name string) *FramingBehavior {
+	p := ba.ctx.Get("FramingBehavior").New(name)
+	return FramingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// PositionScale returns the PositionScale property of class FramingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.framingbehavior#positionscale
+func (f *FramingBehavior) PositionScale(positionScale float64) *FramingBehavior {
+	p := ba.ctx.Get("FramingBehavior").New(positionScale)
+	return FramingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetPositionScale sets the PositionScale property of class FramingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.framingbehavior#positionscale
+func (f *FramingBehavior) SetPositionScale(positionScale float64) *FramingBehavior {
+	p := ba.ctx.Get("FramingBehavior").New(positionScale)
+	return FramingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// RadiusScale returns the RadiusScale property of class FramingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.framingbehavior#radiusscale
+func (f *FramingBehavior) RadiusScale(radiusScale float64) *FramingBehavior {
+	p := ba.ctx.Get("FramingBehavior").New(radiusScale)
+	return FramingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetRadiusScale sets the RadiusScale property of class FramingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.framingbehavior#radiusscale
+func (f *FramingBehavior) SetRadiusScale(radiusScale float64) *FramingBehavior {
+	p := ba.ctx.Get("FramingBehavior").New(radiusScale)
+	return FramingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// ZoomStopsAnimation returns the ZoomStopsAnimation property of class FramingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.framingbehavior#zoomstopsanimation
+func (f *FramingBehavior) ZoomStopsAnimation(zoomStopsAnimation bool) *FramingBehavior {
+	p := ba.ctx.Get("FramingBehavior").New(zoomStopsAnimation)
+	return FramingBehaviorFromJSObject(p, ba.ctx)
+}
+
+// SetZoomStopsAnimation sets the ZoomStopsAnimation property of class FramingBehavior.
+//
+// https://doc.babylonjs.com/api/classes/babylon.framingbehavior#zoomstopsanimation
+func (f *FramingBehavior) SetZoomStopsAnimation(zoomStopsAnimation bool) *FramingBehavior {
+	p := ba.ctx.Get("FramingBehavior").New(zoomStopsAnimation)
+	return FramingBehaviorFromJSObject(p, ba.ctx)
+}
+
+*/

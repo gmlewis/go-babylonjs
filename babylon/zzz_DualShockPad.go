@@ -31,8 +31,645 @@ func DualShockPadFromJSObject(p js.Value, ctx js.Value) *DualShockPad {
 //
 // https://doc.babylonjs.com/api/classes/babylon.dualshockpad
 func (ba *Babylon) NewDualShockPad(id string, index float64, gamepad interface{}) *DualShockPad {
-	p := ba.ctx.Get("DualShockPad").New(id, index, gamepad)
+
+	args := make([]interface{}, 0, 3+0)
+
+	args = append(args, id)
+	args = append(args, index)
+	args = append(args, gamepad)
+
+	p := ba.ctx.Get("DualShockPad").New(args...)
 	return DualShockPadFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Dispose calls the Dispose method on the DualShockPad object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#dispose
+func (d *DualShockPad) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	d.p.Call("dispose", args...)
+}
+
+// Onbuttondown calls the Onbuttondown method on the DualShockPad object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#onbuttondown
+func (d *DualShockPad) Onbuttondown(callback func()) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, callback)
+
+	d.p.Call("onbuttondown", args...)
+}
+
+// Onbuttonup calls the Onbuttonup method on the DualShockPad object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#onbuttonup
+func (d *DualShockPad) Onbuttonup(callback func()) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, callback)
+
+	d.p.Call("onbuttonup", args...)
+}
+
+// Ondpaddown calls the Ondpaddown method on the DualShockPad object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#ondpaddown
+func (d *DualShockPad) Ondpaddown(callback func()) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, callback)
+
+	d.p.Call("ondpaddown", args...)
+}
+
+// Ondpadup calls the Ondpadup method on the DualShockPad object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#ondpadup
+func (d *DualShockPad) Ondpadup(callback func()) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, callback)
+
+	d.p.Call("ondpadup", args...)
+}
+
+// Onleftstickchanged calls the Onleftstickchanged method on the DualShockPad object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#onleftstickchanged
+func (d *DualShockPad) Onleftstickchanged(callback func()) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, callback)
+
+	d.p.Call("onleftstickchanged", args...)
+}
+
+// Onlefttriggerchanged calls the Onlefttriggerchanged method on the DualShockPad object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#onlefttriggerchanged
+func (d *DualShockPad) Onlefttriggerchanged(callback func()) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, callback)
+
+	d.p.Call("onlefttriggerchanged", args...)
+}
+
+// Onrightstickchanged calls the Onrightstickchanged method on the DualShockPad object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#onrightstickchanged
+func (d *DualShockPad) Onrightstickchanged(callback func()) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, callback)
+
+	d.p.Call("onrightstickchanged", args...)
+}
+
+// Onrighttriggerchanged calls the Onrighttriggerchanged method on the DualShockPad object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#onrighttriggerchanged
+func (d *DualShockPad) Onrighttriggerchanged(callback func()) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, callback)
+
+	d.p.Call("onrighttriggerchanged", args...)
+}
+
+// Update calls the Update method on the DualShockPad object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#update
+func (d *DualShockPad) Update() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	d.p.Call("update", args...)
+}
+
+/*
+
+// BrowserGamepad returns the BrowserGamepad property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#browsergamepad
+func (d *DualShockPad) BrowserGamepad(browserGamepad interface{}) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(browserGamepad)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// SetBrowserGamepad sets the BrowserGamepad property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#browsergamepad
+func (d *DualShockPad) SetBrowserGamepad(browserGamepad interface{}) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(browserGamepad)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// ButtonCircle returns the ButtonCircle property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#buttoncircle
+func (d *DualShockPad) ButtonCircle(buttonCircle float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(buttonCircle)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// SetButtonCircle sets the ButtonCircle property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#buttoncircle
+func (d *DualShockPad) SetButtonCircle(buttonCircle float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(buttonCircle)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// ButtonCross returns the ButtonCross property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#buttoncross
+func (d *DualShockPad) ButtonCross(buttonCross float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(buttonCross)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// SetButtonCross sets the ButtonCross property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#buttoncross
+func (d *DualShockPad) SetButtonCross(buttonCross float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(buttonCross)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// ButtonL1 returns the ButtonL1 property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#buttonl1
+func (d *DualShockPad) ButtonL1(buttonL1 float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(buttonL1)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// SetButtonL1 sets the ButtonL1 property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#buttonl1
+func (d *DualShockPad) SetButtonL1(buttonL1 float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(buttonL1)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// ButtonLeftStick returns the ButtonLeftStick property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#buttonleftstick
+func (d *DualShockPad) ButtonLeftStick(buttonLeftStick float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(buttonLeftStick)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// SetButtonLeftStick sets the ButtonLeftStick property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#buttonleftstick
+func (d *DualShockPad) SetButtonLeftStick(buttonLeftStick float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(buttonLeftStick)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// ButtonOptions returns the ButtonOptions property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#buttonoptions
+func (d *DualShockPad) ButtonOptions(buttonOptions float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(buttonOptions)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// SetButtonOptions sets the ButtonOptions property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#buttonoptions
+func (d *DualShockPad) SetButtonOptions(buttonOptions float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(buttonOptions)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// ButtonR1 returns the ButtonR1 property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#buttonr1
+func (d *DualShockPad) ButtonR1(buttonR1 float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(buttonR1)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// SetButtonR1 sets the ButtonR1 property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#buttonr1
+func (d *DualShockPad) SetButtonR1(buttonR1 float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(buttonR1)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// ButtonRightStick returns the ButtonRightStick property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#buttonrightstick
+func (d *DualShockPad) ButtonRightStick(buttonRightStick float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(buttonRightStick)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// SetButtonRightStick sets the ButtonRightStick property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#buttonrightstick
+func (d *DualShockPad) SetButtonRightStick(buttonRightStick float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(buttonRightStick)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// ButtonShare returns the ButtonShare property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#buttonshare
+func (d *DualShockPad) ButtonShare(buttonShare float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(buttonShare)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// SetButtonShare sets the ButtonShare property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#buttonshare
+func (d *DualShockPad) SetButtonShare(buttonShare float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(buttonShare)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// ButtonSquare returns the ButtonSquare property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#buttonsquare
+func (d *DualShockPad) ButtonSquare(buttonSquare float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(buttonSquare)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// SetButtonSquare sets the ButtonSquare property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#buttonsquare
+func (d *DualShockPad) SetButtonSquare(buttonSquare float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(buttonSquare)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// ButtonTriangle returns the ButtonTriangle property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#buttontriangle
+func (d *DualShockPad) ButtonTriangle(buttonTriangle float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(buttonTriangle)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// SetButtonTriangle sets the ButtonTriangle property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#buttontriangle
+func (d *DualShockPad) SetButtonTriangle(buttonTriangle float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(buttonTriangle)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// DPadDown returns the DPadDown property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#dpaddown
+func (d *DualShockPad) DPadDown(dPadDown float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(dPadDown)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// SetDPadDown sets the DPadDown property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#dpaddown
+func (d *DualShockPad) SetDPadDown(dPadDown float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(dPadDown)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// DPadLeft returns the DPadLeft property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#dpadleft
+func (d *DualShockPad) DPadLeft(dPadLeft float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(dPadLeft)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// SetDPadLeft sets the DPadLeft property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#dpadleft
+func (d *DualShockPad) SetDPadLeft(dPadLeft float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(dPadLeft)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// DPadRight returns the DPadRight property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#dpadright
+func (d *DualShockPad) DPadRight(dPadRight float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(dPadRight)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// SetDPadRight sets the DPadRight property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#dpadright
+func (d *DualShockPad) SetDPadRight(dPadRight float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(dPadRight)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// DPadUp returns the DPadUp property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#dpadup
+func (d *DualShockPad) DPadUp(dPadUp float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(dPadUp)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// SetDPadUp sets the DPadUp property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#dpadup
+func (d *DualShockPad) SetDPadUp(dPadUp float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(dPadUp)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// DUALSHOCK returns the DUALSHOCK property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#dualshock
+func (d *DualShockPad) DUALSHOCK(DUALSHOCK float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(DUALSHOCK)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// SetDUALSHOCK sets the DUALSHOCK property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#dualshock
+func (d *DualShockPad) SetDUALSHOCK(DUALSHOCK float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(DUALSHOCK)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// GAMEPAD returns the GAMEPAD property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#gamepad
+func (d *DualShockPad) GAMEPAD(GAMEPAD float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(GAMEPAD)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// SetGAMEPAD sets the GAMEPAD property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#gamepad
+func (d *DualShockPad) SetGAMEPAD(GAMEPAD float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(GAMEPAD)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// GENERIC returns the GENERIC property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#generic
+func (d *DualShockPad) GENERIC(GENERIC float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(GENERIC)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// SetGENERIC sets the GENERIC property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#generic
+func (d *DualShockPad) SetGENERIC(GENERIC float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(GENERIC)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// Id returns the Id property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#id
+func (d *DualShockPad) Id(id string) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(id)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// SetId sets the Id property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#id
+func (d *DualShockPad) SetId(id string) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(id)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// Index returns the Index property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#index
+func (d *DualShockPad) Index(index float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(index)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// SetIndex sets the Index property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#index
+func (d *DualShockPad) SetIndex(index float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(index)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// IsConnected returns the IsConnected property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#isconnected
+func (d *DualShockPad) IsConnected(isConnected bool) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(isConnected)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// SetIsConnected sets the IsConnected property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#isconnected
+func (d *DualShockPad) SetIsConnected(isConnected bool) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(isConnected)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// LeftStick returns the LeftStick property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#leftstick
+func (d *DualShockPad) LeftStick(leftStick *StickValues) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(leftStick.JSObject())
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// SetLeftStick sets the LeftStick property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#leftstick
+func (d *DualShockPad) SetLeftStick(leftStick *StickValues) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(leftStick.JSObject())
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// LeftTrigger returns the LeftTrigger property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#lefttrigger
+func (d *DualShockPad) LeftTrigger(leftTrigger float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(leftTrigger)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// SetLeftTrigger sets the LeftTrigger property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#lefttrigger
+func (d *DualShockPad) SetLeftTrigger(leftTrigger float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(leftTrigger)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// OnButtonDownObservable returns the OnButtonDownObservable property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#onbuttondownobservable
+func (d *DualShockPad) OnButtonDownObservable(onButtonDownObservable *Observable) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(onButtonDownObservable.JSObject())
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// SetOnButtonDownObservable sets the OnButtonDownObservable property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#onbuttondownobservable
+func (d *DualShockPad) SetOnButtonDownObservable(onButtonDownObservable *Observable) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(onButtonDownObservable.JSObject())
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// OnButtonUpObservable returns the OnButtonUpObservable property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#onbuttonupobservable
+func (d *DualShockPad) OnButtonUpObservable(onButtonUpObservable *Observable) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(onButtonUpObservable.JSObject())
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// SetOnButtonUpObservable sets the OnButtonUpObservable property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#onbuttonupobservable
+func (d *DualShockPad) SetOnButtonUpObservable(onButtonUpObservable *Observable) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(onButtonUpObservable.JSObject())
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// OnPadDownObservable returns the OnPadDownObservable property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#onpaddownobservable
+func (d *DualShockPad) OnPadDownObservable(onPadDownObservable *Observable) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(onPadDownObservable.JSObject())
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// SetOnPadDownObservable sets the OnPadDownObservable property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#onpaddownobservable
+func (d *DualShockPad) SetOnPadDownObservable(onPadDownObservable *Observable) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(onPadDownObservable.JSObject())
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// OnPadUpObservable returns the OnPadUpObservable property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#onpadupobservable
+func (d *DualShockPad) OnPadUpObservable(onPadUpObservable *Observable) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(onPadUpObservable.JSObject())
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// SetOnPadUpObservable sets the OnPadUpObservable property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#onpadupobservable
+func (d *DualShockPad) SetOnPadUpObservable(onPadUpObservable *Observable) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(onPadUpObservable.JSObject())
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// POSE_ENABLED returns the POSE_ENABLED property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#pose_enabled
+func (d *DualShockPad) POSE_ENABLED(POSE_ENABLED float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(POSE_ENABLED)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// SetPOSE_ENABLED sets the POSE_ENABLED property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#pose_enabled
+func (d *DualShockPad) SetPOSE_ENABLED(POSE_ENABLED float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(POSE_ENABLED)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// RightStick returns the RightStick property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#rightstick
+func (d *DualShockPad) RightStick(rightStick *StickValues) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(rightStick.JSObject())
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// SetRightStick sets the RightStick property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#rightstick
+func (d *DualShockPad) SetRightStick(rightStick *StickValues) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(rightStick.JSObject())
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// RightTrigger returns the RightTrigger property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#righttrigger
+func (d *DualShockPad) RightTrigger(rightTrigger float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(rightTrigger)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// SetRightTrigger sets the RightTrigger property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#righttrigger
+func (d *DualShockPad) SetRightTrigger(rightTrigger float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(rightTrigger)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// Type returns the Type property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#type
+func (d *DualShockPad) Type(jsType float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(jsType)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// SetType sets the Type property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#type
+func (d *DualShockPad) SetType(jsType float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(jsType)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// XBOX returns the XBOX property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#xbox
+func (d *DualShockPad) XBOX(XBOX float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(XBOX)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+// SetXBOX sets the XBOX property of class DualShockPad.
+//
+// https://doc.babylonjs.com/api/classes/babylon.dualshockpad#xbox
+func (d *DualShockPad) SetXBOX(XBOX float64) *DualShockPad {
+	p := ba.ctx.Get("DualShockPad").New(XBOX)
+	return DualShockPadFromJSObject(p, ba.ctx)
+}
+
+*/

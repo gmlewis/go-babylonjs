@@ -30,7 +30,7 @@ func FlyCameraFromJSObject(p js.Value, ctx js.Value) *FlyCamera {
 
 // NewFlyCameraOpts contains optional parameters for NewFlyCamera.
 type NewFlyCameraOpts struct {
-	SetActiveOnSceneIfNoneActive *JSBool
+	SetActiveOnSceneIfNoneActive *bool
 }
 
 // NewFlyCamera returns a new FlyCamera object.
@@ -41,8 +41,560 @@ func (ba *Babylon) NewFlyCamera(name string, position *Vector3, scene *Scene, op
 		opts = &NewFlyCameraOpts{}
 	}
 
-	p := ba.ctx.Get("FlyCamera").New(name, position.JSObject(), scene.JSObject(), opts.SetActiveOnSceneIfNoneActive.JSObject())
+	args := make([]interface{}, 0, 3+1)
+
+	args = append(args, name)
+	args = append(args, position.JSObject())
+	args = append(args, scene.JSObject())
+
+	if opts.SetActiveOnSceneIfNoneActive == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.SetActiveOnSceneIfNoneActive)
+	}
+
+	p := ba.ctx.Get("FlyCamera").New(args...)
 	return FlyCameraFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// FlyCameraAttachControlOpts contains optional parameters for FlyCamera.AttachControl.
+type FlyCameraAttachControlOpts struct {
+	NoPreventDefault *bool
+}
+
+// AttachControl calls the AttachControl method on the FlyCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#attachcontrol
+func (f *FlyCamera) AttachControl(element js.Value, opts *FlyCameraAttachControlOpts) {
+	if opts == nil {
+		opts = &FlyCameraAttachControlOpts{}
+	}
+
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, element)
+
+	if opts.NoPreventDefault == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.NoPreventDefault)
+	}
+
+	f.p.Call("attachControl", args...)
+}
+
+// DetachControl calls the DetachControl method on the FlyCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#detachcontrol
+func (f *FlyCamera) DetachControl(element js.Value) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, element)
+
+	f.p.Call("detachControl", args...)
+}
+
+// Dispose calls the Dispose method on the FlyCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#dispose
+func (f *FlyCamera) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	f.p.Call("dispose", args...)
+}
+
+// GetClassName calls the GetClassName method on the FlyCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#getclassname
+func (f *FlyCamera) GetClassName() string {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("getClassName", args...)
+	return retVal.String()
+}
+
+// GetFrontPosition calls the GetFrontPosition method on the FlyCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#getfrontposition
+func (f *FlyCamera) GetFrontPosition(distance float64) *Vector3 {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, distance)
+
+	retVal := f.p.Call("getFrontPosition", args...)
+	return Vector3FromJSObject(retVal, f.ctx)
+}
+
+// GetTarget calls the GetTarget method on the FlyCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#gettarget
+func (f *FlyCamera) GetTarget() *Vector3 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("getTarget", args...)
+	return Vector3FromJSObject(retVal, f.ctx)
+}
+
+// SetTarget calls the SetTarget method on the FlyCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#settarget
+func (f *FlyCamera) SetTarget(target *Vector3) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, target.JSObject())
+
+	f.p.Call("setTarget", args...)
+}
+
+// StoreState calls the StoreState method on the FlyCamera object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#storestate
+func (f *FlyCamera) StoreState() *Camera {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := f.p.Call("storeState", args...)
+	return CameraFromJSObject(retVal, f.ctx)
+}
+
+/*
+
+// AngularSensibility returns the AngularSensibility property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#angularsensibility
+func (f *FlyCamera) AngularSensibility(angularSensibility float64) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(angularSensibility)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// SetAngularSensibility sets the AngularSensibility property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#angularsensibility
+func (f *FlyCamera) SetAngularSensibility(angularSensibility float64) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(angularSensibility)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// ApplyGravity returns the ApplyGravity property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#applygravity
+func (f *FlyCamera) ApplyGravity(applyGravity bool) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(applyGravity)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// SetApplyGravity sets the ApplyGravity property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#applygravity
+func (f *FlyCamera) SetApplyGravity(applyGravity bool) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(applyGravity)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// BankedTurn returns the BankedTurn property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#bankedturn
+func (f *FlyCamera) BankedTurn(bankedTurn bool) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(bankedTurn)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// SetBankedTurn sets the BankedTurn property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#bankedturn
+func (f *FlyCamera) SetBankedTurn(bankedTurn bool) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(bankedTurn)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// BankedTurnLimit returns the BankedTurnLimit property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#bankedturnlimit
+func (f *FlyCamera) BankedTurnLimit(bankedTurnLimit float64) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(bankedTurnLimit)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// SetBankedTurnLimit sets the BankedTurnLimit property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#bankedturnlimit
+func (f *FlyCamera) SetBankedTurnLimit(bankedTurnLimit float64) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(bankedTurnLimit)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// BankedTurnMultiplier returns the BankedTurnMultiplier property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#bankedturnmultiplier
+func (f *FlyCamera) BankedTurnMultiplier(bankedTurnMultiplier float64) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(bankedTurnMultiplier)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// SetBankedTurnMultiplier sets the BankedTurnMultiplier property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#bankedturnmultiplier
+func (f *FlyCamera) SetBankedTurnMultiplier(bankedTurnMultiplier float64) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(bankedTurnMultiplier)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// CameraDirection returns the CameraDirection property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#cameradirection
+func (f *FlyCamera) CameraDirection(cameraDirection *Vector3) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(cameraDirection.JSObject())
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// SetCameraDirection sets the CameraDirection property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#cameradirection
+func (f *FlyCamera) SetCameraDirection(cameraDirection *Vector3) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(cameraDirection.JSObject())
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// CameraRotation returns the CameraRotation property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#camerarotation
+func (f *FlyCamera) CameraRotation(cameraRotation *Vector2) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(cameraRotation.JSObject())
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// SetCameraRotation sets the CameraRotation property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#camerarotation
+func (f *FlyCamera) SetCameraRotation(cameraRotation *Vector2) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(cameraRotation.JSObject())
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// CheckCollisions returns the CheckCollisions property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#checkcollisions
+func (f *FlyCamera) CheckCollisions(checkCollisions bool) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(checkCollisions)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// SetCheckCollisions sets the CheckCollisions property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#checkcollisions
+func (f *FlyCamera) SetCheckCollisions(checkCollisions bool) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(checkCollisions)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// CollisionMask returns the CollisionMask property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#collisionmask
+func (f *FlyCamera) CollisionMask(collisionMask float64) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(collisionMask)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// SetCollisionMask sets the CollisionMask property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#collisionmask
+func (f *FlyCamera) SetCollisionMask(collisionMask float64) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(collisionMask)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// Ellipsoid returns the Ellipsoid property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#ellipsoid
+func (f *FlyCamera) Ellipsoid(ellipsoid *Vector3) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(ellipsoid.JSObject())
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// SetEllipsoid sets the Ellipsoid property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#ellipsoid
+func (f *FlyCamera) SetEllipsoid(ellipsoid *Vector3) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(ellipsoid.JSObject())
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// EllipsoidOffset returns the EllipsoidOffset property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#ellipsoidoffset
+func (f *FlyCamera) EllipsoidOffset(ellipsoidOffset *Vector3) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(ellipsoidOffset.JSObject())
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// SetEllipsoidOffset sets the EllipsoidOffset property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#ellipsoidoffset
+func (f *FlyCamera) SetEllipsoidOffset(ellipsoidOffset *Vector3) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(ellipsoidOffset.JSObject())
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// Inputs returns the Inputs property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#inputs
+func (f *FlyCamera) Inputs(inputs *FlyCameraInputsManager) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(inputs.JSObject())
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// SetInputs sets the Inputs property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#inputs
+func (f *FlyCamera) SetInputs(inputs *FlyCameraInputsManager) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(inputs.JSObject())
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// KeysBackward returns the KeysBackward property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#keysbackward
+func (f *FlyCamera) KeysBackward(keysBackward float64) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(keysBackward)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// SetKeysBackward sets the KeysBackward property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#keysbackward
+func (f *FlyCamera) SetKeysBackward(keysBackward float64) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(keysBackward)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// KeysDown returns the KeysDown property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#keysdown
+func (f *FlyCamera) KeysDown(keysDown float64) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(keysDown)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// SetKeysDown sets the KeysDown property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#keysdown
+func (f *FlyCamera) SetKeysDown(keysDown float64) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(keysDown)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// KeysForward returns the KeysForward property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#keysforward
+func (f *FlyCamera) KeysForward(keysForward float64) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(keysForward)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// SetKeysForward sets the KeysForward property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#keysforward
+func (f *FlyCamera) SetKeysForward(keysForward float64) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(keysForward)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// KeysLeft returns the KeysLeft property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#keysleft
+func (f *FlyCamera) KeysLeft(keysLeft float64) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(keysLeft)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// SetKeysLeft sets the KeysLeft property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#keysleft
+func (f *FlyCamera) SetKeysLeft(keysLeft float64) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(keysLeft)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// KeysRight returns the KeysRight property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#keysright
+func (f *FlyCamera) KeysRight(keysRight float64) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(keysRight)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// SetKeysRight sets the KeysRight property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#keysright
+func (f *FlyCamera) SetKeysRight(keysRight float64) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(keysRight)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// KeysUp returns the KeysUp property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#keysup
+func (f *FlyCamera) KeysUp(keysUp float64) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(keysUp)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// SetKeysUp sets the KeysUp property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#keysup
+func (f *FlyCamera) SetKeysUp(keysUp float64) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(keysUp)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// LockedTarget returns the LockedTarget property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#lockedtarget
+func (f *FlyCamera) LockedTarget(lockedTarget interface{}) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(lockedTarget)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// SetLockedTarget sets the LockedTarget property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#lockedtarget
+func (f *FlyCamera) SetLockedTarget(lockedTarget interface{}) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(lockedTarget)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// NoRotationConstraint returns the NoRotationConstraint property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#norotationconstraint
+func (f *FlyCamera) NoRotationConstraint(noRotationConstraint bool) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(noRotationConstraint)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// SetNoRotationConstraint sets the NoRotationConstraint property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#norotationconstraint
+func (f *FlyCamera) SetNoRotationConstraint(noRotationConstraint bool) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(noRotationConstraint)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// OnCollide returns the OnCollide property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#oncollide
+func (f *FlyCamera) OnCollide(onCollide func()) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(onCollide)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// SetOnCollide sets the OnCollide property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#oncollide
+func (f *FlyCamera) SetOnCollide(onCollide func()) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(onCollide)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// RollCorrect returns the RollCorrect property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#rollcorrect
+func (f *FlyCamera) RollCorrect(rollCorrect float64) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(rollCorrect)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// SetRollCorrect sets the RollCorrect property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#rollcorrect
+func (f *FlyCamera) SetRollCorrect(rollCorrect float64) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(rollCorrect)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// Rotation returns the Rotation property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#rotation
+func (f *FlyCamera) Rotation(rotation *Vector3) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(rotation.JSObject())
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// SetRotation sets the Rotation property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#rotation
+func (f *FlyCamera) SetRotation(rotation *Vector3) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(rotation.JSObject())
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// RotationQuaternion returns the RotationQuaternion property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#rotationquaternion
+func (f *FlyCamera) RotationQuaternion(rotationQuaternion *Quaternion) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(rotationQuaternion.JSObject())
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// SetRotationQuaternion sets the RotationQuaternion property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#rotationquaternion
+func (f *FlyCamera) SetRotationQuaternion(rotationQuaternion *Quaternion) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(rotationQuaternion.JSObject())
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// Speed returns the Speed property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#speed
+func (f *FlyCamera) Speed(speed float64) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(speed)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// SetSpeed sets the Speed property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#speed
+func (f *FlyCamera) SetSpeed(speed float64) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(speed)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// UpdateUpVectorFromRotation returns the UpdateUpVectorFromRotation property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#updateupvectorfromrotation
+func (f *FlyCamera) UpdateUpVectorFromRotation(updateUpVectorFromRotation bool) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(updateUpVectorFromRotation)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateUpVectorFromRotation sets the UpdateUpVectorFromRotation property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#updateupvectorfromrotation
+func (f *FlyCamera) SetUpdateUpVectorFromRotation(updateUpVectorFromRotation bool) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(updateUpVectorFromRotation)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// _trackRoll returns the _trackRoll property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#_trackroll
+func (f *FlyCamera) _trackRoll(_trackRoll float64) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(_trackRoll)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+// Set_trackRoll sets the _trackRoll property of class FlyCamera.
+//
+// https://doc.babylonjs.com/api/classes/babylon.flycamera#_trackroll
+func (f *FlyCamera) Set_trackRoll(_trackRoll float64) *FlyCamera {
+	p := ba.ctx.Get("FlyCamera").New(_trackRoll)
+	return FlyCameraFromJSObject(p, ba.ctx)
+}
+
+*/

@@ -29,11 +29,9 @@ func RotationGizmoFromJSObject(p js.Value, ctx js.Value) *RotationGizmo {
 
 // NewRotationGizmoOpts contains optional parameters for NewRotationGizmo.
 type NewRotationGizmoOpts struct {
-	GizmoLayer *UtilityLayerRenderer
-
-	Tessellation *JSFloat64
-
-	UseEulerRotation *JSBool
+	GizmoLayer       *UtilityLayerRenderer
+	Tessellation     *float64
+	UseEulerRotation *bool
 }
 
 // NewRotationGizmo returns a new RotationGizmo object.
@@ -44,8 +42,258 @@ func (ba *Babylon) NewRotationGizmo(opts *NewRotationGizmoOpts) *RotationGizmo {
 		opts = &NewRotationGizmoOpts{}
 	}
 
-	p := ba.ctx.Get("RotationGizmo").New(opts.GizmoLayer.JSObject(), opts.Tessellation.JSObject(), opts.UseEulerRotation.JSObject())
+	args := make([]interface{}, 0, 0+3)
+
+	if opts.GizmoLayer == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.GizmoLayer.JSObject())
+	}
+	if opts.Tessellation == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.Tessellation)
+	}
+	if opts.UseEulerRotation == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, *opts.UseEulerRotation)
+	}
+
+	p := ba.ctx.Get("RotationGizmo").New(args...)
 	return RotationGizmoFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// Dispose calls the Dispose method on the RotationGizmo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rotationgizmo#dispose
+func (r *RotationGizmo) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	r.p.Call("dispose", args...)
+}
+
+// SetCustomMesh calls the SetCustomMesh method on the RotationGizmo object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rotationgizmo#setcustommesh
+func (r *RotationGizmo) SetCustomMesh(mesh *Mesh) {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, mesh.JSObject())
+
+	r.p.Call("setCustomMesh", args...)
+}
+
+/*
+
+// AttachedMesh returns the AttachedMesh property of class RotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rotationgizmo#attachedmesh
+func (r *RotationGizmo) AttachedMesh(attachedMesh *AbstractMesh) *RotationGizmo {
+	p := ba.ctx.Get("RotationGizmo").New(attachedMesh.JSObject())
+	return RotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetAttachedMesh sets the AttachedMesh property of class RotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rotationgizmo#attachedmesh
+func (r *RotationGizmo) SetAttachedMesh(attachedMesh *AbstractMesh) *RotationGizmo {
+	p := ba.ctx.Get("RotationGizmo").New(attachedMesh.JSObject())
+	return RotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// GizmoLayer returns the GizmoLayer property of class RotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rotationgizmo#gizmolayer
+func (r *RotationGizmo) GizmoLayer(gizmoLayer *UtilityLayerRenderer) *RotationGizmo {
+	p := ba.ctx.Get("RotationGizmo").New(gizmoLayer.JSObject())
+	return RotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetGizmoLayer sets the GizmoLayer property of class RotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rotationgizmo#gizmolayer
+func (r *RotationGizmo) SetGizmoLayer(gizmoLayer *UtilityLayerRenderer) *RotationGizmo {
+	p := ba.ctx.Get("RotationGizmo").New(gizmoLayer.JSObject())
+	return RotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// OnDragEndObservable returns the OnDragEndObservable property of class RotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rotationgizmo#ondragendobservable
+func (r *RotationGizmo) OnDragEndObservable(onDragEndObservable *Observable) *RotationGizmo {
+	p := ba.ctx.Get("RotationGizmo").New(onDragEndObservable.JSObject())
+	return RotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetOnDragEndObservable sets the OnDragEndObservable property of class RotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rotationgizmo#ondragendobservable
+func (r *RotationGizmo) SetOnDragEndObservable(onDragEndObservable *Observable) *RotationGizmo {
+	p := ba.ctx.Get("RotationGizmo").New(onDragEndObservable.JSObject())
+	return RotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// OnDragStartObservable returns the OnDragStartObservable property of class RotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rotationgizmo#ondragstartobservable
+func (r *RotationGizmo) OnDragStartObservable(onDragStartObservable *Observable) *RotationGizmo {
+	p := ba.ctx.Get("RotationGizmo").New(onDragStartObservable.JSObject())
+	return RotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetOnDragStartObservable sets the OnDragStartObservable property of class RotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rotationgizmo#ondragstartobservable
+func (r *RotationGizmo) SetOnDragStartObservable(onDragStartObservable *Observable) *RotationGizmo {
+	p := ba.ctx.Get("RotationGizmo").New(onDragStartObservable.JSObject())
+	return RotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// ScaleRatio returns the ScaleRatio property of class RotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rotationgizmo#scaleratio
+func (r *RotationGizmo) ScaleRatio(scaleRatio float64) *RotationGizmo {
+	p := ba.ctx.Get("RotationGizmo").New(scaleRatio)
+	return RotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetScaleRatio sets the ScaleRatio property of class RotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rotationgizmo#scaleratio
+func (r *RotationGizmo) SetScaleRatio(scaleRatio float64) *RotationGizmo {
+	p := ba.ctx.Get("RotationGizmo").New(scaleRatio)
+	return RotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// SnapDistance returns the SnapDistance property of class RotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rotationgizmo#snapdistance
+func (r *RotationGizmo) SnapDistance(snapDistance float64) *RotationGizmo {
+	p := ba.ctx.Get("RotationGizmo").New(snapDistance)
+	return RotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetSnapDistance sets the SnapDistance property of class RotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rotationgizmo#snapdistance
+func (r *RotationGizmo) SetSnapDistance(snapDistance float64) *RotationGizmo {
+	p := ba.ctx.Get("RotationGizmo").New(snapDistance)
+	return RotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// UpdateGizmoPositionToMatchAttachedMesh returns the UpdateGizmoPositionToMatchAttachedMesh property of class RotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rotationgizmo#updategizmopositiontomatchattachedmesh
+func (r *RotationGizmo) UpdateGizmoPositionToMatchAttachedMesh(updateGizmoPositionToMatchAttachedMesh bool) *RotationGizmo {
+	p := ba.ctx.Get("RotationGizmo").New(updateGizmoPositionToMatchAttachedMesh)
+	return RotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateGizmoPositionToMatchAttachedMesh sets the UpdateGizmoPositionToMatchAttachedMesh property of class RotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rotationgizmo#updategizmopositiontomatchattachedmesh
+func (r *RotationGizmo) SetUpdateGizmoPositionToMatchAttachedMesh(updateGizmoPositionToMatchAttachedMesh bool) *RotationGizmo {
+	p := ba.ctx.Get("RotationGizmo").New(updateGizmoPositionToMatchAttachedMesh)
+	return RotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// UpdateGizmoRotationToMatchAttachedMesh returns the UpdateGizmoRotationToMatchAttachedMesh property of class RotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rotationgizmo#updategizmorotationtomatchattachedmesh
+func (r *RotationGizmo) UpdateGizmoRotationToMatchAttachedMesh(updateGizmoRotationToMatchAttachedMesh bool) *RotationGizmo {
+	p := ba.ctx.Get("RotationGizmo").New(updateGizmoRotationToMatchAttachedMesh)
+	return RotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateGizmoRotationToMatchAttachedMesh sets the UpdateGizmoRotationToMatchAttachedMesh property of class RotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rotationgizmo#updategizmorotationtomatchattachedmesh
+func (r *RotationGizmo) SetUpdateGizmoRotationToMatchAttachedMesh(updateGizmoRotationToMatchAttachedMesh bool) *RotationGizmo {
+	p := ba.ctx.Get("RotationGizmo").New(updateGizmoRotationToMatchAttachedMesh)
+	return RotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// UpdateScale returns the UpdateScale property of class RotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rotationgizmo#updatescale
+func (r *RotationGizmo) UpdateScale(updateScale bool) *RotationGizmo {
+	p := ba.ctx.Get("RotationGizmo").New(updateScale)
+	return RotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetUpdateScale sets the UpdateScale property of class RotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rotationgizmo#updatescale
+func (r *RotationGizmo) SetUpdateScale(updateScale bool) *RotationGizmo {
+	p := ba.ctx.Get("RotationGizmo").New(updateScale)
+	return RotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// XGizmo returns the XGizmo property of class RotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rotationgizmo#xgizmo
+func (r *RotationGizmo) XGizmo(xGizmo *PlaneRotationGizmo) *RotationGizmo {
+	p := ba.ctx.Get("RotationGizmo").New(xGizmo.JSObject())
+	return RotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetXGizmo sets the XGizmo property of class RotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rotationgizmo#xgizmo
+func (r *RotationGizmo) SetXGizmo(xGizmo *PlaneRotationGizmo) *RotationGizmo {
+	p := ba.ctx.Get("RotationGizmo").New(xGizmo.JSObject())
+	return RotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// YGizmo returns the YGizmo property of class RotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rotationgizmo#ygizmo
+func (r *RotationGizmo) YGizmo(yGizmo *PlaneRotationGizmo) *RotationGizmo {
+	p := ba.ctx.Get("RotationGizmo").New(yGizmo.JSObject())
+	return RotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetYGizmo sets the YGizmo property of class RotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rotationgizmo#ygizmo
+func (r *RotationGizmo) SetYGizmo(yGizmo *PlaneRotationGizmo) *RotationGizmo {
+	p := ba.ctx.Get("RotationGizmo").New(yGizmo.JSObject())
+	return RotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// ZGizmo returns the ZGizmo property of class RotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rotationgizmo#zgizmo
+func (r *RotationGizmo) ZGizmo(zGizmo *PlaneRotationGizmo) *RotationGizmo {
+	p := ba.ctx.Get("RotationGizmo").New(zGizmo.JSObject())
+	return RotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// SetZGizmo sets the ZGizmo property of class RotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rotationgizmo#zgizmo
+func (r *RotationGizmo) SetZGizmo(zGizmo *PlaneRotationGizmo) *RotationGizmo {
+	p := ba.ctx.Get("RotationGizmo").New(zGizmo.JSObject())
+	return RotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// _rootMesh returns the _rootMesh property of class RotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rotationgizmo#_rootmesh
+func (r *RotationGizmo) _rootMesh(_rootMesh *Mesh) *RotationGizmo {
+	p := ba.ctx.Get("RotationGizmo").New(_rootMesh.JSObject())
+	return RotationGizmoFromJSObject(p, ba.ctx)
+}
+
+// Set_rootMesh sets the _rootMesh property of class RotationGizmo.
+//
+// https://doc.babylonjs.com/api/classes/babylon.rotationgizmo#_rootmesh
+func (r *RotationGizmo) Set_rootMesh(_rootMesh *Mesh) *RotationGizmo {
+	p := ba.ctx.Get("RotationGizmo").New(_rootMesh.JSObject())
+	return RotationGizmoFromJSObject(p, ba.ctx)
+}
+
+*/

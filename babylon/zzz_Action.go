@@ -42,8 +42,139 @@ func (ba *Babylon) NewAction(triggerOptions interface{}, opts *NewActionOpts) *A
 		opts = &NewActionOpts{}
 	}
 
-	p := ba.ctx.Get("Action").New(triggerOptions, opts.Condition.JSObject())
+	args := make([]interface{}, 0, 1+1)
+
+	args = append(args, triggerOptions)
+
+	if opts.Condition == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Condition.JSObject())
+	}
+
+	p := ba.ctx.Get("Action").New(args...)
 	return ActionFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// ActionExecuteOpts contains optional parameters for Action.Execute.
+type ActionExecuteOpts struct {
+	Evt *ActionEvent
+}
+
+// Execute calls the Execute method on the Action object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.action#execute
+func (a *Action) Execute(opts *ActionExecuteOpts) {
+	if opts == nil {
+		opts = &ActionExecuteOpts{}
+	}
+
+	args := make([]interface{}, 0, 0+1)
+
+	if opts.Evt == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Evt.JSObject())
+	}
+
+	a.p.Call("execute", args...)
+}
+
+// GetTriggerParameter calls the GetTriggerParameter method on the Action object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.action#gettriggerparameter
+func (a *Action) GetTriggerParameter() interface{} {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("getTriggerParameter", args...)
+	return retVal
+}
+
+// Serialize calls the Serialize method on the Action object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.action#serialize
+func (a *Action) Serialize(parent interface{}) interface{} {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, parent)
+
+	retVal := a.p.Call("serialize", args...)
+	return retVal
+}
+
+// SkipToNextActiveAction calls the SkipToNextActiveAction method on the Action object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.action#skiptonextactiveaction
+func (a *Action) SkipToNextActiveAction() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	a.p.Call("skipToNextActiveAction", args...)
+}
+
+// Then calls the Then method on the Action object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.action#then
+func (a *Action) Then(action *Action) *Action {
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, action.JSObject())
+
+	retVal := a.p.Call("then", args...)
+	return ActionFromJSObject(retVal, a.ctx)
+}
+
+/*
+
+// OnBeforeExecuteObservable returns the OnBeforeExecuteObservable property of class Action.
+//
+// https://doc.babylonjs.com/api/classes/babylon.action#onbeforeexecuteobservable
+func (a *Action) OnBeforeExecuteObservable(onBeforeExecuteObservable *Observable) *Action {
+	p := ba.ctx.Get("Action").New(onBeforeExecuteObservable.JSObject())
+	return ActionFromJSObject(p, ba.ctx)
+}
+
+// SetOnBeforeExecuteObservable sets the OnBeforeExecuteObservable property of class Action.
+//
+// https://doc.babylonjs.com/api/classes/babylon.action#onbeforeexecuteobservable
+func (a *Action) SetOnBeforeExecuteObservable(onBeforeExecuteObservable *Observable) *Action {
+	p := ba.ctx.Get("Action").New(onBeforeExecuteObservable.JSObject())
+	return ActionFromJSObject(p, ba.ctx)
+}
+
+// Trigger returns the Trigger property of class Action.
+//
+// https://doc.babylonjs.com/api/classes/babylon.action#trigger
+func (a *Action) Trigger(trigger float64) *Action {
+	p := ba.ctx.Get("Action").New(trigger)
+	return ActionFromJSObject(p, ba.ctx)
+}
+
+// SetTrigger sets the Trigger property of class Action.
+//
+// https://doc.babylonjs.com/api/classes/babylon.action#trigger
+func (a *Action) SetTrigger(trigger float64) *Action {
+	p := ba.ctx.Get("Action").New(trigger)
+	return ActionFromJSObject(p, ba.ctx)
+}
+
+// TriggerOptions returns the TriggerOptions property of class Action.
+//
+// https://doc.babylonjs.com/api/classes/babylon.action#triggeroptions
+func (a *Action) TriggerOptions(triggerOptions interface{}) *Action {
+	p := ba.ctx.Get("Action").New(triggerOptions)
+	return ActionFromJSObject(p, ba.ctx)
+}
+
+// SetTriggerOptions sets the TriggerOptions property of class Action.
+//
+// https://doc.babylonjs.com/api/classes/babylon.action#triggeroptions
+func (a *Action) SetTriggerOptions(triggerOptions interface{}) *Action {
+	p := ba.ctx.Get("Action").New(triggerOptions)
+	return ActionFromJSObject(p, ba.ctx)
+}
+
+*/

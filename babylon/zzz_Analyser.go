@@ -33,8 +33,182 @@ func AnalyserFromJSObject(p js.Value, ctx js.Value) *Analyser {
 //
 // https://doc.babylonjs.com/api/classes/babylon.analyser
 func (ba *Babylon) NewAnalyser(scene *Scene) *Analyser {
-	p := ba.ctx.Get("Analyser").New(scene.JSObject())
+
+	args := make([]interface{}, 0, 1+0)
+
+	args = append(args, scene.JSObject())
+
+	p := ba.ctx.Get("Analyser").New(args...)
 	return AnalyserFromJSObject(p, ba.ctx)
 }
 
-// TODO: methods
+// ConnectAudioNodes calls the ConnectAudioNodes method on the Analyser object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.analyser#connectaudionodes
+func (a *Analyser) ConnectAudioNodes(inputAudioNode js.Value, outputAudioNode js.Value) {
+
+	args := make([]interface{}, 0, 2+0)
+
+	args = append(args, inputAudioNode)
+	args = append(args, outputAudioNode)
+
+	a.p.Call("connectAudioNodes", args...)
+}
+
+// Dispose calls the Dispose method on the Analyser object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.analyser#dispose
+func (a *Analyser) Dispose() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	a.p.Call("dispose", args...)
+}
+
+// DrawDebugCanvas calls the DrawDebugCanvas method on the Analyser object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.analyser#drawdebugcanvas
+func (a *Analyser) DrawDebugCanvas() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	a.p.Call("drawDebugCanvas", args...)
+}
+
+// GetByteFrequencyData calls the GetByteFrequencyData method on the Analyser object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.analyser#getbytefrequencydata
+func (a *Analyser) GetByteFrequencyData() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("getByteFrequencyData", args...)
+	return retVal
+}
+
+// GetByteTimeDomainData calls the GetByteTimeDomainData method on the Analyser object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.analyser#getbytetimedomaindata
+func (a *Analyser) GetByteTimeDomainData() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("getByteTimeDomainData", args...)
+	return retVal
+}
+
+// GetFloatFrequencyData calls the GetFloatFrequencyData method on the Analyser object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.analyser#getfloatfrequencydata
+func (a *Analyser) GetFloatFrequencyData() js.Value {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("getFloatFrequencyData", args...)
+	return retVal
+}
+
+// GetFrequencyBinCount calls the GetFrequencyBinCount method on the Analyser object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.analyser#getfrequencybincount
+func (a *Analyser) GetFrequencyBinCount() float64 {
+
+	args := make([]interface{}, 0, 0+0)
+
+	retVal := a.p.Call("getFrequencyBinCount", args...)
+	return retVal.Float()
+}
+
+// StopDebugCanvas calls the StopDebugCanvas method on the Analyser object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.analyser#stopdebugcanvas
+func (a *Analyser) StopDebugCanvas() {
+
+	args := make([]interface{}, 0, 0+0)
+
+	a.p.Call("stopDebugCanvas", args...)
+}
+
+/*
+
+// BARGRAPHAMPLITUDE returns the BARGRAPHAMPLITUDE property of class Analyser.
+//
+// https://doc.babylonjs.com/api/classes/babylon.analyser#bargraphamplitude
+func (a *Analyser) BARGRAPHAMPLITUDE(BARGRAPHAMPLITUDE float64) *Analyser {
+	p := ba.ctx.Get("Analyser").New(BARGRAPHAMPLITUDE)
+	return AnalyserFromJSObject(p, ba.ctx)
+}
+
+// SetBARGRAPHAMPLITUDE sets the BARGRAPHAMPLITUDE property of class Analyser.
+//
+// https://doc.babylonjs.com/api/classes/babylon.analyser#bargraphamplitude
+func (a *Analyser) SetBARGRAPHAMPLITUDE(BARGRAPHAMPLITUDE float64) *Analyser {
+	p := ba.ctx.Get("Analyser").New(BARGRAPHAMPLITUDE)
+	return AnalyserFromJSObject(p, ba.ctx)
+}
+
+// DEBUGCANVASPOS returns the DEBUGCANVASPOS property of class Analyser.
+//
+// https://doc.babylonjs.com/api/classes/babylon.analyser#debugcanvaspos
+func (a *Analyser) DEBUGCANVASPOS(DEBUGCANVASPOS js.Value) *Analyser {
+	p := ba.ctx.Get("Analyser").New(DEBUGCANVASPOS)
+	return AnalyserFromJSObject(p, ba.ctx)
+}
+
+// SetDEBUGCANVASPOS sets the DEBUGCANVASPOS property of class Analyser.
+//
+// https://doc.babylonjs.com/api/classes/babylon.analyser#debugcanvaspos
+func (a *Analyser) SetDEBUGCANVASPOS(DEBUGCANVASPOS js.Value) *Analyser {
+	p := ba.ctx.Get("Analyser").New(DEBUGCANVASPOS)
+	return AnalyserFromJSObject(p, ba.ctx)
+}
+
+// DEBUGCANVASSIZE returns the DEBUGCANVASSIZE property of class Analyser.
+//
+// https://doc.babylonjs.com/api/classes/babylon.analyser#debugcanvassize
+func (a *Analyser) DEBUGCANVASSIZE(DEBUGCANVASSIZE js.Value) *Analyser {
+	p := ba.ctx.Get("Analyser").New(DEBUGCANVASSIZE)
+	return AnalyserFromJSObject(p, ba.ctx)
+}
+
+// SetDEBUGCANVASSIZE sets the DEBUGCANVASSIZE property of class Analyser.
+//
+// https://doc.babylonjs.com/api/classes/babylon.analyser#debugcanvassize
+func (a *Analyser) SetDEBUGCANVASSIZE(DEBUGCANVASSIZE js.Value) *Analyser {
+	p := ba.ctx.Get("Analyser").New(DEBUGCANVASSIZE)
+	return AnalyserFromJSObject(p, ba.ctx)
+}
+
+// FFT_SIZE returns the FFT_SIZE property of class Analyser.
+//
+// https://doc.babylonjs.com/api/classes/babylon.analyser#fft_size
+func (a *Analyser) FFT_SIZE(FFT_SIZE float64) *Analyser {
+	p := ba.ctx.Get("Analyser").New(FFT_SIZE)
+	return AnalyserFromJSObject(p, ba.ctx)
+}
+
+// SetFFT_SIZE sets the FFT_SIZE property of class Analyser.
+//
+// https://doc.babylonjs.com/api/classes/babylon.analyser#fft_size
+func (a *Analyser) SetFFT_SIZE(FFT_SIZE float64) *Analyser {
+	p := ba.ctx.Get("Analyser").New(FFT_SIZE)
+	return AnalyserFromJSObject(p, ba.ctx)
+}
+
+// SMOOTHING returns the SMOOTHING property of class Analyser.
+//
+// https://doc.babylonjs.com/api/classes/babylon.analyser#smoothing
+func (a *Analyser) SMOOTHING(SMOOTHING float64) *Analyser {
+	p := ba.ctx.Get("Analyser").New(SMOOTHING)
+	return AnalyserFromJSObject(p, ba.ctx)
+}
+
+// SetSMOOTHING sets the SMOOTHING property of class Analyser.
+//
+// https://doc.babylonjs.com/api/classes/babylon.analyser#smoothing
+func (a *Analyser) SetSMOOTHING(SMOOTHING float64) *Analyser {
+	p := ba.ctx.Get("Analyser").New(SMOOTHING)
+	return AnalyserFromJSObject(p, ba.ctx)
+}
+
+*/

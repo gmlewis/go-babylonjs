@@ -27,4 +27,70 @@ func DataBufferFromJSObject(p js.Value, ctx js.Value) *DataBuffer {
 	return &DataBuffer{p: p, ctx: ctx}
 }
 
-// TODO: methods
+/*
+
+// Capacity returns the Capacity property of class DataBuffer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.databuffer#capacity
+func (d *DataBuffer) Capacity(capacity float64) *DataBuffer {
+	p := ba.ctx.Get("DataBuffer").New(capacity)
+	return DataBufferFromJSObject(p, ba.ctx)
+}
+
+// SetCapacity sets the Capacity property of class DataBuffer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.databuffer#capacity
+func (d *DataBuffer) SetCapacity(capacity float64) *DataBuffer {
+	p := ba.ctx.Get("DataBuffer").New(capacity)
+	return DataBufferFromJSObject(p, ba.ctx)
+}
+
+// Is32Bits returns the Is32Bits property of class DataBuffer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.databuffer#is32bits
+func (d *DataBuffer) Is32Bits(is32Bits bool) *DataBuffer {
+	p := ba.ctx.Get("DataBuffer").New(is32Bits)
+	return DataBufferFromJSObject(p, ba.ctx)
+}
+
+// SetIs32Bits sets the Is32Bits property of class DataBuffer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.databuffer#is32bits
+func (d *DataBuffer) SetIs32Bits(is32Bits bool) *DataBuffer {
+	p := ba.ctx.Get("DataBuffer").New(is32Bits)
+	return DataBufferFromJSObject(p, ba.ctx)
+}
+
+// References returns the References property of class DataBuffer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.databuffer#references
+func (d *DataBuffer) References(references float64) *DataBuffer {
+	p := ba.ctx.Get("DataBuffer").New(references)
+	return DataBufferFromJSObject(p, ba.ctx)
+}
+
+// SetReferences sets the References property of class DataBuffer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.databuffer#references
+func (d *DataBuffer) SetReferences(references float64) *DataBuffer {
+	p := ba.ctx.Get("DataBuffer").New(references)
+	return DataBufferFromJSObject(p, ba.ctx)
+}
+
+// UnderlyingResource returns the UnderlyingResource property of class DataBuffer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.databuffer#underlyingresource
+func (d *DataBuffer) UnderlyingResource(underlyingResource interface{}) *DataBuffer {
+	p := ba.ctx.Get("DataBuffer").New(underlyingResource)
+	return DataBufferFromJSObject(p, ba.ctx)
+}
+
+// SetUnderlyingResource sets the UnderlyingResource property of class DataBuffer.
+//
+// https://doc.babylonjs.com/api/classes/babylon.databuffer#underlyingresource
+func (d *DataBuffer) SetUnderlyingResource(underlyingResource interface{}) *DataBuffer {
+	p := ba.ctx.Get("DataBuffer").New(underlyingResource)
+	return DataBufferFromJSObject(p, ba.ctx)
+}
+
+*/

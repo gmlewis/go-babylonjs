@@ -27,4 +27,34 @@ func IcoSphereBuilderFromJSObject(p js.Value, ctx js.Value) *IcoSphereBuilder {
 	return &IcoSphereBuilder{p: p, ctx: ctx}
 }
 
-// TODO: methods
+// IcoSphereBuilderCreateIcoSphereOpts contains optional parameters for IcoSphereBuilder.CreateIcoSphere.
+type IcoSphereBuilderCreateIcoSphereOpts struct {
+	Scene *Scene
+}
+
+// CreateIcoSphere calls the CreateIcoSphere method on the IcoSphereBuilder object.
+//
+// https://doc.babylonjs.com/api/classes/babylon.icospherebuilder#createicosphere
+func (i *IcoSphereBuilder) CreateIcoSphere(name string, options js.Value, opts *IcoSphereBuilderCreateIcoSphereOpts) *Mesh {
+	if opts == nil {
+		opts = &IcoSphereBuilderCreateIcoSphereOpts{}
+	}
+
+	args := make([]interface{}, 0, 2+1)
+
+	args = append(args, name)
+	args = append(args, options)
+
+	if opts.Scene == nil {
+		args = append(args, js.Undefined())
+	} else {
+		args = append(args, opts.Scene.JSObject())
+	}
+
+	retVal := i.p.Call("CreateIcoSphere", args...)
+	return MeshFromJSObject(retVal, i.ctx)
+}
+
+/*
+
+ */
